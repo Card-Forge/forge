@@ -49,16 +49,18 @@ public class CardSetFilter extends CardFormatFilter {
         return true;
     }
 
-    public void edit() {
+    public void edit(final ItemManager<? super PaperCard> itemManager) {
         final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
+        final CardSetFilter itemFilter = this;
+        dialog.setWantReprintsCB(allowReprints);
+        
         dialog.setOkCallback(new Runnable() {
             @Override
             public void run() {
                 sets.clear();
                 sets.addAll(dialog.getSelectedSets());
                 allowReprints = dialog.getWantReprints();
-                formats.clear();
-                formats.add(new GameFormat(null, sets, null));
+                itemManager.addFilter(itemFilter); // this adds/updates the current filter
             }
         });
     }

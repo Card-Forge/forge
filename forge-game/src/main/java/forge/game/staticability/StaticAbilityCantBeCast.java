@@ -72,6 +72,12 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("cmcGT") && (activator != null)
+                && (card.getCMC() <= CardLists.getType(activator.getCardsIn(ZoneType.Battlefield),
+                        params.get("cmcGT")).size())) {
+            return false;
+        }
+
         if (params.containsKey("NumLimitEachTurn") && activator != null) {
             int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
             String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
