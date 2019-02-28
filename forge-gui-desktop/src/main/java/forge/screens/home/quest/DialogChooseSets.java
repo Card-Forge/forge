@@ -24,7 +24,7 @@ public class DialogChooseSets {
 	private Runnable okCallback;
 
 	private final List<FCheckBox> choices = new ArrayList<>();
-	private final FCheckBox cbWantReprints = new FCheckBox("Allow compatible reprints from other sets");
+	private final FCheckBox cbWantReprints = new FCheckBox("Display compatible reprints from more recent sets");
 
 	// lists are of set codes (e.g. "2ED")
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
@@ -128,6 +128,10 @@ public class DialogChooseSets {
 
 	public boolean getWantReprints() {
 		return wantReprints;
+	}
+	
+	public void setWantReprintsCB(boolean isSet) {
+	    cbWantReprints.setSelected(isSet);
 	}
 
 	private JPanel makeCheckBoxList(List<FCheckBox> sets, String title, boolean focused) {

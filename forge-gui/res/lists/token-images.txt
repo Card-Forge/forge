@@ -268,7 +268,6 @@ rg_1_1_goblin_warrior.jpg              https://downloads.cardforge.org/images/to
 rg_2_2_satyr.jpg                       https://downloads.cardforge.org/images/tokens/rg_2_2_satyr.jpg
 rg_3_4_stangg_twin.jpg                 https://downloads.cardforge.org/images/tokens/rg_3_4_stangg_twin.jpg
 rg_4_4_giant_warrior.jpg               https://downloads.cardforge.org/images/tokens/rg_4_4_giant_warrior.jpg
-rg_4_4_beast_trample_rna.jpg https://downloads.cardforge.org/images/tokens/rg_4_4_beast_trample.jpg
 rg_5_5_elemental.jpg                   https://downloads.cardforge.org/images/tokens/rg_5_5_elemental.jpg
 rw_1_1_goblin_soldier.jpg              https://downloads.cardforge.org/images/tokens/rw_1_1_goblin_soldier.jpg
 rw_1_1_goblin_soldier_eve.jpg          https://downloads.cardforge.org/images/tokens/rw_1_1_goblin_soldier_eve.jpg
@@ -376,7 +375,6 @@ w_x_x_reflection.jpg                   https://downloads.cardforge.org/images/to
 wb_1_1_cleric.jpg                      https://downloads.cardforge.org/images/tokens/wb_1_1_cleric.jpg
 wb_1_1_spirit.jpg                      https://downloads.cardforge.org/images/tokens/wb_1_1_spirit.jpg
 wb_1_1_spirit_gtc.jpg                  https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_gtc.jpg
-wb_1_1_spirit_rna.jpg                  https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_rna.jpg
 wrg_8_8_beast.jpg                      https://downloads.cardforge.org/images/tokens/wrg_8_8_beast.jpg
 wu_1_1_bird.jpg                        https://downloads.cardforge.org/images/tokens/wu_1_1_bird.jpg
 wu_4_4_sphinx_flying_vigilance_rna.jpg https://downloads.cardforge.org/images/tokens/wu_4_4_sphinx_flying_vigilance_rna.jpg
