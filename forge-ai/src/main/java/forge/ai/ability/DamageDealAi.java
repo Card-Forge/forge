@@ -648,10 +648,9 @@ public class DamageDealAi extends DamageAiBase {
                 if (c != null && !this.shouldTgtP(ai, sa, dmg, noPrevention, true)) {
                     tcs.add(c);
                     if (divided) {
-                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                        if (assignedDamage <= dmg) {
-                            tgt.addDividedAllocation(c, assignedDamage);
-                        }
+                        int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        assignedDamage = Math.min(dmg, assignedDamage);
+                        tgt.addDividedAllocation(c, assignedDamage);
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
