@@ -22,6 +22,7 @@ import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventShuffle;
@@ -76,6 +77,8 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventPlayerLivesChanged event) { return event.newLives < event.oldLives ? SoundEffectType.LifeLoss : SoundEffectType.LifeGain; }
     @Override
+	public SoundEffectType visit(final GameEventManaBurn event) { return SoundEffectType.ManaBurn; }
+	@Override
     public SoundEffectType visit(final GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     @Override
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }

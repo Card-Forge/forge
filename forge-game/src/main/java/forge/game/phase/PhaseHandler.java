@@ -435,11 +435,7 @@ public class PhaseHandler implements java.io.Serializable {
             
             boolean manaBurns = game.getRules().hasManaBurn();
             if (manaBurns) {
-                p.loseLife(burn);
-            }
-            // Play the Mana Burn sound
-            if (burn > 0) {
-                game.fireEvent(new GameEventManaBurn(burn, manaBurns));
+                p.loseLife(burn,true);
             }
         }
 
