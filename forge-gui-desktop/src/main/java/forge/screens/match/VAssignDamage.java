@@ -50,6 +50,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of assign damage dialog.
@@ -61,6 +62,7 @@ import forge.view.arcane.CardPanel;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VAssignDamage {
+    final Localizer localizer = Localizer.getInstance();
     private final CMatchUI matchUI;
 
     // Width and height of blocker dialog
@@ -78,12 +80,12 @@ public class VAssignDamage {
 
     private final GameEntityView defender;
 
-    private final JLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
-    private final JLabel lblAssignRemaining = new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").build();
+    private final JLabel lblTotalDamage = new FLabel.Builder().text(localizer.getMessage("lblTotalDamageText")).build();
+    private final JLabel lblAssignRemaining = new FLabel.Builder().text(localizer.getMessage("lblAssignRemainingText")).build();
     //  Label Buttons
-    private final FButton btnOK    = new FButton("OK");
-    private final FButton btnReset = new FButton("Reset");
-    private final FButton btnAuto  = new FButton("Auto");
+    private final FButton btnOK    = new FButton(localizer.getMessage("lblOk"));
+    private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
+    private final FButton btnAuto  = new FButton(localizer.getMessage("lblAuto"));
 
 
     private static class DamageTarget {
@@ -141,8 +143,8 @@ public class VAssignDamage {
 
     public VAssignDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
         this.matchUI = matchUI;
-
-        dlg.setTitle("Assign damage dealt by " + attacker);
+        String s  = localizer.getMessage("lbLAssignDamageDealtBy");
+        dlg.setTitle(s.replace("%s",attacker.toString()));
 
         // Set damage storage vars
         totalDamageToAssign = damage0;
@@ -165,8 +167,8 @@ public class VAssignDamage {
         final JPanel pnlInfo = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
         pnlInfo.setOpaque(false);
         pnlInfo.add(lblTotalDamage, "gap 0 0 20px 5px");
-        pnlInfo.add(new FLabel.Builder().text("Left click: Assign 1 damage. (Left Click + Control): Assign remaining damage up to lethal").build(), "gap 0 0 0 5px");
-        pnlInfo.add(new FLabel.Builder().text("Right click: Unassign 1 damage. (Right Click + Control): Unassign all damage.").build(), "gap 0 0 0 5px");
+        pnlInfo.add(new FLabel.Builder().text(localizer.getMessage("lblLClickDamageMessage")).build(), "gap 0 0 0 5px");
+        pnlInfo.add(new FLabel.Builder().text(localizer.getMessage("lblRClickDamageMessage")).build(), "gap 0 0 0 5px");
 
         // Defenders area
         final JPanel pnlDefenders = new JPanel();
@@ -401,7 +403,7 @@ public class VAssignDamage {
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
             if( overkill >= 0 ) { 
-                sb.append(" (Lethal");
+                sb.append(" (" +localizer.getMessage("lblLethal"));
                 if( overkill > 0 ) 
                     sb.append(" +").append(overkill);
                 sb.append(")");
