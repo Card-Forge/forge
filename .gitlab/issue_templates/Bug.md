@@ -8,6 +8,9 @@ Steps to reproduce
 (How one can reproduce the issue - this is very important. Specific cards and specific actions especially)
 
 
+Which version of Forge are you on (Release, Snapshot? Desktop, Android?)
+
+
 What is the current bug behavior?
 
 (What actually happens)
