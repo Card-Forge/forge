@@ -374,13 +374,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventPlayerLivesChanged event) {
         return processPlayer(event.player, livesUpdate);
     }
-    
-    @Override
-	public Void visit(GameEventManaBurn event) {
-        return processPlayer(event.player, livesUpdate);
-	}
 
-	@Override
+    @Override
+    public Void visit(GameEventManaBurn event) {
+        return processPlayer(event.player, livesUpdate);
+    }
+
+    @Override
     public Void visit(final GameEventPlayerPoisoned event) {
         return processPlayer(event.receiver, livesUpdate);
     }

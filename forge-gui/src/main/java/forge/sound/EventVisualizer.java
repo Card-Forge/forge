@@ -77,8 +77,8 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventPlayerLivesChanged event) { return event.newLives < event.oldLives ? SoundEffectType.LifeLoss : SoundEffectType.LifeGain; }
     @Override
-	public SoundEffectType visit(final GameEventManaBurn event) { return SoundEffectType.ManaBurn; }
-	@Override
+    public SoundEffectType visit(final GameEventManaBurn event) { return SoundEffectType.ManaBurn; }
+    @Override
     public SoundEffectType visit(final GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     @Override
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
