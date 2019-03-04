@@ -455,8 +455,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return true;
     }
-
+    
     public final int loseLife(final int toLose) {
+    	return loseLife(toLose,false);
+    }
+    
+    public final int loseLife(final int toLose, final boolean manaBurn) {
         int lifeLost = 0;
         if (!canLoseLife()) {
             return 0;
@@ -466,7 +470,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             life -= toLose;
             view.updateLife(this);
             lifeLost = toLose;
-            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
+            if(manaBurn) {
+                game.fireEvent(new GameEventManaBurn(this,lifeLost,true));            	            	
+            } else {
+                game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));            	
+            }
         }
         else if (toLose == 0) {
             // Rule 118.4
