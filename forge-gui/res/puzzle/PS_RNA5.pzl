@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/02/102.-RNA5.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:What the... you have no lands? Who did that? (You did that.) Start at the beginning of your first main phase as you choose targets for Fall of the Thran's second chapter ability. You just drew the final card in your library. Win this turn.
+[state]
+humanlife=17
+ailife=16
+turn=1
+activeplayer=human
+activephase=DRAW
+activephaseadvance=MAIN1
+humanhand=Enter the Unknown;Wildgrowth Walker;Depths of Desire;Merfolk Branchwalker;Song of Freyalise;Rallying Roar
+humangraveyard=Plains;Hallowed Fountain;Forest;Swamp;Island;Temple Garden
+humanbattlefield=Jace, Ingenious Mind-Mage|Counters:LOYALTY=3;Famished Paladin;Vona, Butcher of Magan;Tenth District Guard;Cacophodon;Path of Discovery;Fall of the Thran|Counters:LORE=1
+aibattlefield=Temple Altisaur;Everdawn Champion;Baird, Steward of Argive;Imperial Ceratops|Id:1;Dauntless Bodyguard|ChosenCards:1
