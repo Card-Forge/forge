@@ -2,10 +2,10 @@ package forge;
 
 import com.google.common.base.Predicate;
 import forge.card.CardDb;
+import forge.card.CardDb.CardRequest;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
-import forge.card.CardDb.CardRequest;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.PaperCard;
@@ -131,7 +131,7 @@ public class StaticData {
         return foil ? commonCards.getFoiled(card) : card;
     }
 
-    public void attemptToLoadCard(String encodedCardName, String setCode) {
+    public CardRules attemptToLoadCard(String encodedCardName, String setCode) {
         CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
         String cardName = r.cardName;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
@@ -142,6 +142,7 @@ public class StaticData {
                 commonCards.loadCard(cardName, rules);
             }
         }
+        return rules;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
