@@ -18,15 +18,18 @@
 package forge.card;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.*;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
-import forge.util.CollectionSuppliers;
-import forge.util.Lang;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -337,7 +340,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (request.artIndex <= 0) { // this stands for 'random art'
-            List<PaperCard> candidates;
+            Collection<PaperCard> candidates;
             if (reqEdition == null) {
                 candidates = new ArrayList<PaperCard>(cards);
             }
@@ -352,15 +355,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (candidates.isEmpty()) {
                 return null;
             }
-
-            Collections.shuffle(candidates);
+            result = Aggregates.random(candidates);
 
             //if card image doesn't exist for chosen candidate, try another one if possible
-            for(PaperCard candidate : candidates) {
-                result = candidate;
-                if (result.hasImage()) {
-                    break;
-                }
+            while (candidates.size() > 1 && !result.hasImage()) {
+                candidates.remove(result);
+                result = Aggregates.random(candidates);
             }
         }
         else {
