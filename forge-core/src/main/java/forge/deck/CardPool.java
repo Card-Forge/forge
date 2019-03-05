@@ -21,7 +21,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
-import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
@@ -74,12 +73,29 @@ public class CardPool extends ItemPool<PaperCard> {
 
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, final int artIndex, final int amount) {
-        PaperCard paperCard = determineRequestedPaperCard(cardName, setCode, artIndex);
 
-        int artCount = Math.max(StaticData.instance().getCommonCards().getArtCount(cardName, setCode), 1);
-        boolean artIndexExplicitlySet = artIndex > 0 ||
-                Character.isDigit(cardName.charAt(cardName.length() - 1)) &&
-                cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
+        PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
+        final boolean isCommonCard = paperCard != null;
+
+        if (!isCommonCard) {
+            paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+            if (paperCard == null) {
+                StaticData.instance().attemptToLoadCard(cardName, setCode);
+                paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+            }
+        }
+
+        int artCount = 1;
+        if (paperCard != null) {
+            setCode = paperCard.getEdition();
+            cardName = paperCard.getName();
+            artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
+        } else {
+            System.err.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
+            paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
+        }
+
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
 
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
@@ -98,43 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
         }
     }
 
-    private PaperCard determineRequestedPaperCard(String cardName, String setCode, final int artIndex) {
-        // Does Forge even know this card exists?
-        PaperCard uniqueCard = StaticData.instance().getCommonCards().getUniqueByName(cardName);
-        if (uniqueCard == null) {
-            uniqueCard = StaticData.instance().getVariantCards().getUniqueByName(cardName);
-        }
 
-        CardDb db = null;
-        boolean isCommonCard = true;
-        if (uniqueCard == null) {
-            // Both database lookups failed, made up card OR lazy loading?
-            CardRules rules = StaticData.instance().attemptToLoadCard(cardName, setCode);
-            if (rules == null) {
-                // Failed to find a common/variant/or unloaded version of that card
-                System.err.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
-                return StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
-            }
-            isCommonCard = !rules.isVariant();
-
-            db = isCommonCard ? StaticData.instance().getCommonCards() : StaticData.instance().getVariantCards();
-            uniqueCard = db.getUniqueByName(cardName);
-        } else {
-            isCommonCard = !uniqueCard.getRules().isVariant();
-            db = isCommonCard ? StaticData.instance().getCommonCards() : StaticData.instance().getVariantCards();
-        }
-
-        PaperCard paperCard = db.getCard(cardName, setCode, artIndex);
-        if (paperCard == null) {
-            paperCard = db.getCard(cardName, setCode);
-        }
-
-        if (paperCard == null) {
-            paperCard = uniqueCard;
-        }
-
-        return paperCard;
-    }
 
     /**
      * Add all from a List of CardPrinted.
