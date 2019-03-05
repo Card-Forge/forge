@@ -37,6 +37,8 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.ReflectionUtil;
+import forge.util.Localizer;
+
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
@@ -71,15 +73,16 @@ public class FNavigationBar extends FTitleBarBase {
     }
 
     public void updateBtnCloseTooltip() {
+        final Localizer localizer = Localizer.getInstance();
         switch (Singletons.getControl().getCloseAction()) {
         case NONE:
-            btnClose.setToolTipText("Close");
+            btnClose.setToolTipText(localizer.getMessage("lblClose"));
             break;
         case CLOSE_SCREEN:
             btnClose.setToolTipText(this.selectedTab.screen.getCloseButtonTooltip());
             break;
         case EXIT_FORGE:
-            btnClose.setToolTipText("Exit Forge");
+            btnClose.setToolTipText(localizer.getMessage("lblExitForge"));
             break;
         }
     }

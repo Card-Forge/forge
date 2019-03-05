@@ -128,7 +128,7 @@ public class PlayerPanel extends FPanel {
         this.add(avatarLabel, "spany 2, width 80px, height 80px");
 
         createNameEditor();
-        this.add(lobby.newLabel("Name:"), "w 40px, h 30px, gaptop 5px");
+        this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
         this.add(txtPlayerName, "h 30px, pushx, growx");
 
         nameRandomiser = createNameRandomizer();
@@ -138,7 +138,7 @@ public class PlayerPanel extends FPanel {
         this.add(radioHuman, "gapright 5px");
         this.add(radioAi, "wrap");
 
-        this.add(lobby.newLabel("Team:"), "w 40px, h 30px");
+        this.add(lobby.newLabel(localizer.getMessage("lblTeam") + ":"), "w 40px, h 30px");
         populateTeamsComboBoxes();
 
         // Set these before action listeners are added

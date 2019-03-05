@@ -1,2 +1,6 @@
+- Set Selection Randomizer -
+There's a new randomizer available when Forge asks you to choose sets. Given a few options, it will pick out a selection of random sets for use in either the deck editor or in quest mode.
+
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.

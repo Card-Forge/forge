@@ -22,6 +22,7 @@ import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
+import forge.util.Localizer;
 
 /**
  * Returns a JMenu containing options associated with current game.
@@ -38,7 +39,8 @@ public final class GameMenu {
     private static boolean showIcons;
 
     public JMenu getMenu() {
-        final JMenu menu = new JMenu("Game");
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblGame"));
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_Undo());
         menu.add(getMenuItem_Concede());
@@ -56,7 +58,8 @@ public final class GameMenu {
     }
 
     private static SkinnedCheckBoxMenuItem getMenuItem_GameSoundEffects() {
-        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("Sound Effects");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblSoundEffects"));
         menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
         menuItem.addActionListener(getSoundEffectsAction());
         return menuItem;
@@ -76,7 +79,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_Undo() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem("Undo");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblUndo"));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Z));
         menuItem.addActionListener(getUndoAction());
         return menuItem;
@@ -109,7 +113,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_AlphaStrike() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem("Alpha Strike");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAlphaStrike"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ALPHASTRIKE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_A));
         menuItem.addActionListener(getAlphaStrikeAction());
@@ -126,7 +131,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_EndTurn() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem("End Turn");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblEndTurn"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ENDTURN) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
         menuItem.addActionListener(getEndTurnAction());
@@ -143,7 +149,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenu getMenuItem_TargetingArcs() {
-        final SkinnedMenu menu = new SkinnedMenu("Targeting Arcs");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenu menu = new SkinnedMenu(localizer.getMessage("lblTargetingArcs"));
         final ButtonGroup group = new ButtonGroup();
 
         SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF);
@@ -155,15 +162,15 @@ public final class GameMenu {
         }
 
         SkinnedRadioButtonMenuItem menuItem;
-        menuItem = getTargetingArcRadioButton("Off", FSkinProp.ICO_ARCSOFF, ArcState.OFF);
+        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblOff"), FSkinProp.ICO_ARCSOFF, ArcState.OFF);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton("Card mouseover", FSkinProp.ICO_ARCSHOVER, ArcState.MOUSEOVER);
+        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSHOVER, ArcState.MOUSEOVER);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSHOVER); }
         group.add(menuItem);
         menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton("Always On", FSkinProp.ICO_ARCSON, ArcState.ON);
+        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblAlwaysOn"), FSkinProp.ICO_ARCSON, ArcState.ON);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSON); }
         group.add(menuItem);
 
@@ -200,7 +207,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_AutoYields() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem("Auto-Yields");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYields"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
         menuItem.addActionListener(getAutoYieldsAction());
         return menuItem;
@@ -217,7 +225,8 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_ViewDeckList() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem("Deck List");
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblDeckList"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_DECKLIST) : null));
         menuItem.addActionListener(getViewDeckListAction());
         return menuItem;
