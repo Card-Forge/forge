@@ -499,7 +499,7 @@ public class TokenEffect extends SpellAbilityEffect {
             // TODO update when doing Attach Update
             boolean canAttach = lki.isAttachment();
 
-            if (canAttach && ge.canBeAttached(lki)) {
+            if (canAttach && !ge.canBeAttached(lki)) {
                 canAttach = false;
             }
 
@@ -507,7 +507,7 @@ public class TokenEffect extends SpellAbilityEffect {
             game.getAction().checkStaticAbilities(false);
 
             if (!canAttach) {
-                // Token can't attach it
+                // Token can't attach to it
                 return false;
             }
 
