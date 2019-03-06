@@ -12,5 +12,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Skirk Prospector;Metamorphic Alteration;Luminous Bonds;Electrodominance
-humanbattlefield=Fresh-Faced Recruit;Juggernaut;Ledev Champion;Biomancer's Familiar;Gateway Plaza;Gateway Plaza;Gateway Plaza;Temple Garden;Temple Garden;Temple Garden;Temple Garden
+humanbattlefield=Fresh-Faced Recruit;Juggernaut;Ledev Champion;Biomancer's Familiar;Gateway Plaza;Gateway Plaza;Gateway Plaza;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs
 aibattlefield=Queen's Agent|Counters:P1P1=1;Azorius Knight-Arbiter;Queen's Agent|Counters:P1P1=1
