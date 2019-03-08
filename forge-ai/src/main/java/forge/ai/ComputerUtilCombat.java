@@ -1692,7 +1692,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && attacker.getCounters(CounterType.P1P1) > 0) {
                     continue;
                 }
 
