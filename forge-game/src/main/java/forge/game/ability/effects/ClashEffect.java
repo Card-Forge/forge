@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.GameAction;
+import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -59,9 +60,7 @@ public class ClashEffect extends SpellAbilityEffect {
      * <p>
      * clashWithOpponent.
      * </p>
-     * 
-     * @param source
-     *            a {@link forge.game.card.Card} object.
+     *
      * @return a boolean.
      */
     private static boolean clashWithOpponent(final SpellAbility sa) {
@@ -126,11 +125,14 @@ public class ClashEffect extends SpellAbilityEffect {
     private static void clashMoveToTopOrBottom(final Player p, final Card c, final SpellAbility sa) {
         final GameAction action = p.getGame().getAction();
         final boolean putOnTop = p.getController().willPutCardOnTop(c);
+        final String location = putOnTop ? "top" : "bottom";
+        final String clashOutcome = p.getName() + " clashed and put " + c.getName() + " to the " + location + " of library.";
+
         if (putOnTop) {
             action.moveToLibrary(c, sa);
         } else {
             action.moveToBottomOfLibrary(c, sa);
         }
-        // computer just puts the card back until such time it can make a smarter decision
+        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, clashOutcome);
     }
 }

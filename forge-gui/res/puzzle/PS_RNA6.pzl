@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/02/103.-RNA6.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your solution must satisfy all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Skirk Prospector;Metamorphic Alteration;Luminous Bonds;Electrodominance
+humanbattlefield=Fresh-Faced Recruit;Juggernaut;Ledev Champion;Biomancer's Familiar;Gateway Plaza;Gateway Plaza;Gateway Plaza;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs
+aibattlefield=Queen's Agent|Counters:P1P1=1;Azorius Knight-Arbiter;Queen's Agent|Counters:P1P1=1
