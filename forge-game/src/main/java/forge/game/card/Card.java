@@ -5561,18 +5561,47 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         abilities.removeAll(toRemove);
 
-        if (getState(CardStateName.Original).getType().isLand()) {
+        if (getState(CardStateName.Original).getType().isLand() && !getLastKnownZone().is(ZoneType.Battlefield)) {
             LandAbility la = new LandAbility(this, player, null);
             if (la.canPlay()) {
                 abilities.add(la);
             }
 
+            Card source = this;
+            boolean lkicheck = false;
+
+            // if Card is Facedown, need to check if MayPlay still applies
+            if (isFaceDown()) {
+                lkicheck = true;
+                source = CardUtil.getLKICopy(source);
+
+                // TODO need to be changed with CloneRewrite and FaceDownState?
+                source.turnFaceUp(false, false);
+                source.getCurrentState().copyFrom(getState(CardStateName.Original), true);
+            }
+
+            if (lkicheck) {
+                // double freeze tracker, so it doesn't update view
+                game.getTracker().freeze();
+                CardCollection preList = new CardCollection(source);
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
+            }
+
             // extra for MayPlay
-            for (CardPlayOption o : this.mayPlay(player)) {
+            for (CardPlayOption o : source.mayPlay(player)) {
                 la = new LandAbility(this, player, o.getAbility());
                 if (la.canPlay()) {
                     abilities.add(la);
                 }
+            }
+
+            // reset static abilities
+            if (lkicheck) {
+                game.getAction().checkStaticAbilities(false);
+                // clear delayed changes, this check should not have updated the view
+                game.getTracker().clearDelayed();
+                // need to unfreeze tracker
+                game.getTracker().unfreeze();
             }
         }
 

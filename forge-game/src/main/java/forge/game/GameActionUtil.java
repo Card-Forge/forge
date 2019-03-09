@@ -89,6 +89,8 @@ public final class GameActionUtil {
             }
 
             if (lkicheck) {
+                // double freeze tracker, so it doesn't update view
+                game.getTracker().freeze();
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
@@ -164,6 +166,10 @@ public final class GameActionUtil {
             // reset static abilities
             if (lkicheck) {
                 game.getAction().checkStaticAbilities(false);
+                // clear delayed changes, this check should not have updated the view
+                game.getTracker().clearDelayed();
+                // need to unfreeze tracker
+                game.getTracker().unfreeze();
             }
         }
 
