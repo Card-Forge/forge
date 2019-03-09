@@ -210,13 +210,23 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         int missingCount = 0;
         int notImplementedCount = 0;
-        int internalErrorCount = 0;
 
-        final StringBuffer sb = new StringBuffer();
+        final StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
+        final StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
+        
+        nifSB.append("\n\n-------------------\n");
+        nifSB.append("NO IMAGE FOUND LIST\n");
+        nifSB.append("-------------------\n\n");
+        
+        cniSB.append("\n\n-------------------\n");
+        cniSB.append("UNIMPLEMENTED CARD LIST\n");
+        cniSB.append("-------------------\n\n");
 
         for (CardEdition e : editions) {
-            sb.append("Edition: " + e.getName() + "\n");
+            nifSB.append("Edition: " + e.getName() + "\n");
+            cniSB.append("Edition: " + e.getName() + "\n");
 
+            // perform sorting on the cards for this edition...
             String lastName = null;
             int artIndex = 1;
             ArrayList<String> cis = new ArrayList<String>();
@@ -224,10 +234,15 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 cis.add(c.name);
             }
             Collections.sort(cis.subList(1, cis.size()));
+            
+            // loop through the cards in this edition, considering art variations...
             for (String c : cis) {
+                // if the same card name is set and this card has the same name as the previous...
                 if ((lastName != null) && (c.contentEquals(lastName))) {
+                    // must be a card with multiple art representations...
                     artIndex++;
                 } else {
+                    // else this is a unique card or first of a multiple art set...
                     artIndex = 1;
                 }
 
@@ -242,13 +257,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
-                            sb.append(" NIF: " + imagePath + "\n");
+                            nifSB.append(" " + imagePath + "\n");
                             missingCount++;
                         }
-                    } else {
-                        sb.append(" ERR: " + c + "\n");
-                        internalErrorCount++;
-                    }
+                    } 
 
                     //
                     // check the back face
@@ -258,16 +270,13 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                         if (imagePath != null) {
                             File file = ImageKeys.getImageFile(imagePath);
                             if (file == null) {
-                                sb.append(" NIF: " + imagePath + "\n");
+                                nifSB.append(" " + imagePath + "\n");
                                 missingCount++;
                             }
-                        } else {
-                            sb.append(" ERR: " + c + "\n");
-                            internalErrorCount++;
-                        }
+                        } 
                     }
                 } else {
-                    sb.append(" CNI: " + c + "\n");
+                    cniSB.append(" " + c + "\n");
                     notImplementedCount++;
                 }
                 lastName = c;
@@ -276,27 +285,29 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         // TODO: Audit token images here...
 
-        String totalStats = "NIF count: " + missingCount + "\nCNI count: " + notImplementedCount + "\nERR count: "
-                + internalErrorCount + "\n";
+        String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
+        cniSB.append("\n-----------\n");
+        cniSB.append(totalStats);
+        cniSB.append("-----------\n\n");
+        
+        nifSB.append(cniSB); // combine things together...
 
-        sb.append("\n-----------\n");
-        sb.append(totalStats);
-        sb.append("-----------\n\n");
-        sb.append(
-                "NIF = 'no image graphic found'\nCNI = 'card not implemented in Forge'\nERR = 'internal error detected'\n");
-
-        tar.setText(sb.toString());
+        tar.setText(nifSB.toString());
         tar.setCaretPosition(0); // this will move scroll view to the top...
-
+        
         final FButton btnClipboardCopy = new FButton(localizer.getMessage("btnCopyToClipboard"));
         btnClipboardCopy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(sb.toString()), null);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(cniSB.toString()), null);
                 SOverlayUtils.hideOverlay();
             }
         });
         scr.getParent().add(btnClipboardCopy, "w 200!, h pref+12!, center, gaptop 10");
+        
+        String labelText = "<html>Missing images: " + missingCount + "<br>Unimplemented cards: " + notImplementedCount + "<br>";
+        final FLabel statsLabel = new FLabel.Builder().text(labelText).fontSize(15).build();
+        scr.getParent().add(statsLabel);
 
         FOverlay.SINGLETON_INSTANCE.getPanel().validate();
         FOverlay.SINGLETON_INSTANCE.getPanel().repaint();
