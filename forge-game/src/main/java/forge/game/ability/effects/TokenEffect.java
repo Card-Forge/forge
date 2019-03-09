@@ -493,6 +493,8 @@ public class TokenEffect extends SpellAbilityEffect {
 
             lki.setLastKnownZone(tok.getController().getZone(ZoneType.Battlefield));
 
+            // double freeze tracker, so it doesn't update view
+            game.getTracker().freeze();
             CardCollection preList = new CardCollection(lki);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
 
@@ -505,6 +507,10 @@ public class TokenEffect extends SpellAbilityEffect {
 
             // reset static abilities
             game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            // need to unfreeze tracker
+            game.getTracker().unfreeze();
 
             if (!canAttach) {
                 // Token can't attach to it
