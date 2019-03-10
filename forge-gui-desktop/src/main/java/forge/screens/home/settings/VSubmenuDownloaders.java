@@ -299,7 +299,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         btnClipboardCopy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(cniSB.toString()), null);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(nifSB.toString()), null);
                 SOverlayUtils.hideOverlay();
             }
         });
