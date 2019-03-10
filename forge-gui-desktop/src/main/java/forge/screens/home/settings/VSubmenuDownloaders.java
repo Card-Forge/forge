@@ -223,8 +223,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("-------------------\n\n");
 
         for (CardEdition e : editions) {
-            nifSB.append("Edition: " + e.getName() + "\n");
-            cniSB.append("Edition: " + e.getName() + "\n");
+            nifSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
+            cniSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
 
             // perform sorting on the cards for this edition...
             String lastName = null;
@@ -317,17 +317,17 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void showCardandImageAuditData() {
         final FTextArea tar = new FTextArea("Auditing card and image data. Please wait...");
         tar.setOpaque(true);
-        tar.setLineWrap(true);
-        tar.setWrapStyleWord(true);
+        tar.setLineWrap(false);
+        tar.setWrapStyleWord(false);
         tar.setEditable(false);
         tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        tar.setFont(FSkin.getRelativeFixedFont(16));
+        tar.setFont(FSkin.getRelativeFixedFont(12));
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         final FScrollPane scr = new FScrollPane(tar, true, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         _showDialog(scr, new Runnable() {
             @Override
