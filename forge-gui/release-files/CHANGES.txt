@@ -1,3 +1,5 @@
+- Improved memory usage of image cache. 
+
 - Set Selection Randomizer -
 There's a new randomizer available when Forge asks you to choose sets. Given a few options, it will pick out a selection of random sets for use in either the deck editor or in quest mode.
 
