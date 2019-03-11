@@ -37,25 +37,11 @@ public class CloneAi extends SpellAbilityAi {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
+        if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+            return false;
+        }
+
         PhaseHandler phase = game.getPhaseHandler();
-        // don't use instant speed clone abilities outside computers
-        // Combat_Begin step
-        if (!phase.is(PhaseType.COMBAT_BEGIN)
-                && phase.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
-                && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
-            return false;
-        }
-
-        // don't use instant speed clone abilities outside humans
-        // Combat_Declare_Attackers_InstantAbility step
-        if (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || phase.isPlayerTurn(ai) || game.getCombat().getAttackers().isEmpty()) {
-            return false;
-        }
-
-        // don't activate during main2 unless this effect is permanent
-        if (phase.is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
-            return false;
-        }
 
         if (!sa.usesTargeting()) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -222,5 +208,31 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         return tgtCard;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player, forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler)
+     */
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        // don't use instant speed clone abilities outside computers
+        // Combat_Begin step
+        if (!ph.is(PhaseType.COMBAT_BEGIN)
+                && ph.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
+                && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
+            return false;
+        }
+
+        // don't use instant speed clone abilities outside humans
+        // Combat_Declare_Attackers_InstantAbility step
+        if (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.isPlayerTurn(ai) || ph.getCombat().getAttackers().isEmpty()) {
+            return false;
+        }
+
+        // don't activate during main2 unless this effect is permanent
+        if (ph.is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
+            return false;
+        }
+        return true;
     }
 }
