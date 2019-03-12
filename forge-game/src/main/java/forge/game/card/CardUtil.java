@@ -227,7 +227,10 @@ public final class CardUtil {
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
 
-        newCopy.getCurrentState().copyFrom(in.getState(in.getCurrentStateName()), true);
+        newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
+        if (in.isFaceDown()) {
+            newCopy.turnFaceDownNoUpdate();
+        }
 
         /*
         if (in.isCloned()) {

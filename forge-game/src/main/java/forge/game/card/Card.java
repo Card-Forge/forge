@@ -3134,14 +3134,20 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final void updateCloneState(final boolean updateView) {
         if (isFaceDown()) {
             setState(CardStateName.FaceDown, updateView, true);
-        } else if (isFlipped() && hasState(CardStateName.Flipped)) {
-            setState(CardStateName.Flipped, updateView, true);
-        } else if (backside && isDoubleFaced()) {
-            setState(CardStateName.Transformed, updateView, true);
-        } else if (backside && isMeldable()) {
-            setState(CardStateName.Meld, updateView, true);
         } else {
-            setState(CardStateName.Original, updateView, true);
+            setState(getFaceupCardStateName(), updateView, true);
+        }
+    }
+
+    public final CardStateName getFaceupCardStateName() {
+        if (isFlipped() && hasState(CardStateName.Flipped)) {
+            return CardStateName.Flipped;
+        } else if (backside && isDoubleFaced()) {
+            return CardStateName.Transformed;
+        } else if (backside && isMeldable()) {
+            return CardStateName.Meld;
+        } else {
+            return CardStateName.Original;
         }
     }
 
@@ -5776,10 +5782,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isFaceDown()) {
                 lkicheck = true;
                 source = CardUtil.getLKICopy(source);
-
-                // TODO need to be changed with CloneRewrite and FaceDownState?
                 source.turnFaceUp(false, false);
-                source.getCurrentState().copyFrom(getState(CardStateName.Original), true);
             }
 
             if (lkicheck) {
