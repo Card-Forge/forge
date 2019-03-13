@@ -1,7 +1,7 @@
 [metadata]
 Code=MPS_RNA
 Date=2019-01-24
-Name=Mythic Edition - Guilds of Ravnica
+Name=Mythic Edition - Ravnica Allegiance
 MciCode=mps
 Type=Other
 

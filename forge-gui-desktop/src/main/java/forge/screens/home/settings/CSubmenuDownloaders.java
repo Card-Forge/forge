@@ -53,6 +53,11 @@ public enum CSubmenuDownloaders implements ICDoc {
             VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay();
         }
     };
+    private final UiCommand cmdListImageData = new UiCommand() {
+        @Override public void run() {
+            VSubmenuDownloaders.SINGLETON_INSTANCE.showCardandImageAuditData();
+        }
+    };
     private final UiCommand cmdImportPictures = new UiCommand() {
         @Override public void run() {
             new ImportDialog(null, null).show();
@@ -78,6 +83,7 @@ public enum CSubmenuDownloaders implements ICDoc {
         view.setDownloadSetPicsCommand(cmdSetDownload);
         view.setDownloadQuestImagesCommand(cmdQuestImages);
         view.setDownloadAchievementImagesCommand(cmdAchievementImages);
+        view.setListImageDataCommand(cmdListImageData);
         view.setReportBugCommand(cmdReportBug);
         view.setImportPicturesCommand(cmdImportPictures);
         view.setHowToPlayCommand(cmdHowToPlay);
