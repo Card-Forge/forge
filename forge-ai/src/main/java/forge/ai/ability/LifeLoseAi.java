@@ -53,7 +53,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (sa.usesTargeting()) {
-            if (!doTgt(ai, sa, sa.isMandatory())) {
+            if (!doTgt(ai, sa, false)) {
                 return false;
             }
         }
