@@ -51,6 +51,13 @@ public class LifeLoseAi extends SpellAbilityAi {
         if (tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
             return false;
         }
+
+        if (sa.usesTargeting()) {
+            if (!doTgt(ai, sa, sa.isMandatory())) {
+                return false;
+            }
+        }
+
         return true;
     }
 
