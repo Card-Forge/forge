@@ -9,6 +9,7 @@ import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
@@ -238,6 +239,18 @@ public class TokenInfo {
 
         if (token != null) {
             final Card result = Card.fromPaperCard(token, null, game);
+
+            if (sa.hasParam("TokenPower")) {
+                String str = sa.getParam("TokenPower");
+                result.setBasePowerString(str);
+                result.setBasePower(AbilityUtils.calculateAmount(host, str, sa));
+            }
+
+            if (sa.hasParam("TokenToughness")) {
+                String str = sa.getParam("TokenToughness");
+                result.setBaseToughnessString(str);
+                result.setBaseToughness(AbilityUtils.calculateAmount(host, str, sa));
+            }
 
             // update Token with CardTextChanges
             Map<String, String> colorMap = sa.getChangedTextColors();
