@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -26,12 +24,21 @@ public class TapAi extends TapAiBase {
 
         if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
-        } else if (turn == ai && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            // Tap creatures down if in combat -- handled in tapPrefTargeting().
-        } else if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            // Cast it if it's a sorcery.
+        } else if (turn.equals(ai)) {
+            if (SpellAbilityAi.isSorcerySpeed(sa) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+                // Cast it if it's a sorcery.
+            } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                // Aggro Brains are willing to use TapEffects aggressively instead of defensively
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                if (!aic.getBooleanProperty(AiProps.PLAY_AGGRO)) {
+                    return false;
+                }
+            } else {
+                // Don't tap down after blockers
+                return false;
+            }
         } else if (!SpellAbilityAi.playReusable(ai, sa)){
-            // Generally don't want to tap things with an Instant during AI turn outside of combat
+            // Generally don't want to tap things with an Instant during Players turn outside of combat
             return false;
         }
 
