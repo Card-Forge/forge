@@ -94,3 +94,8 @@ Type=Duel_Decks
 84 L Forest
 84 L Forest
 84 L Forest
+
+[tokens]
+spawnwrithe
+u_2_2_illusion
+b_1_1_assassin_lose_con

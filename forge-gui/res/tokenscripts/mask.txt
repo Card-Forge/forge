@@ -1,0 +1,8 @@
+Name:Mask
+Types:Enchantment Aura
+Colors:white
+ManaCost:no cost
+K:Enchant permanent
+K:Totem armor
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Permanent | AILogic$ Pump
+Oracle:Enchant permanent\nTotem armor

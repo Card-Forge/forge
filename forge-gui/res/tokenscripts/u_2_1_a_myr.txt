@@ -1,0 +1,6 @@
+Name:Myr
+ManaCost:no cost
+Types:Artifact Creature Myr
+Colors:blue
+PT:2/1
+Oracle:

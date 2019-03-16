@@ -1,0 +1,6 @@
+Name:Kor Ally
+ManaCost:no cost
+Types:Creature Kor Ally
+Colors:white
+PT:1/1
+Oracle:

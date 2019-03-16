@@ -1,0 +1,7 @@
+Name:Sphinx
+ManaCost:no cost
+Types:Creature Sphinx
+Colors:blue
+PT:4/4
+K:Flying
+Oracle:Flying

@@ -1,0 +1,6 @@
+Name:Saproling
+ManaCost:no cost
+Types:Creature Saproling
+Colors:green
+PT:*/*
+Oracle:This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.

@@ -1,0 +1,5 @@
+Name:Pincher
+ManaCost:no cost
+PT:2/2
+Types:Creature Pincher
+Oracle:

@@ -1,0 +1,7 @@
+Name:Elemental
+ManaCost:no cost
+Types:Creature Elemental
+Colors:green,white
+PT:8/8
+K:Vigilance
+Oracle:Vigilance

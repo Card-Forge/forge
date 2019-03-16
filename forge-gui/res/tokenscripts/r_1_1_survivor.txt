@@ -1,0 +1,6 @@
+Name:Survivor
+ManaCost:no cost
+Types:Creature Survivor
+Colors:red
+PT:1/1
+Oracle:

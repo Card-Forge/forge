@@ -253,3 +253,13 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 189 U Woolly Spider
 190 U Yavimaya Ancients
 76 C Zuran Spellcaster
+
+[tokens]
+kelp
+w_0_1_caribou
+w_0_1_deserter
+w_1_1_knight_banding
+w_1_1_soldier
+b_x_x_spirit
+g_1_1_saproling
+br_3_1_graveborn_haste

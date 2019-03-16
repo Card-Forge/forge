@@ -1,0 +1,7 @@
+Name:Monk
+ManaCost:no cost
+Types:Creature Monk
+Colors:white
+PT:1/1
+K:Prowess
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

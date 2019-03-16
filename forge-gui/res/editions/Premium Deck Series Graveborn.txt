@@ -36,3 +36,8 @@ Type=Premium_Deck_Series
 4 C Twisted Abomination
 8 R Verdant Force
 19 U Zombie Infestation
+
+[tokens]
+b_2_2_zombie
+g_3_3_elephant
+g_1_1_saproling

@@ -1,0 +1,7 @@
+Name:Dragon Spirit
+ManaCost:no cost
+Types:Creature Dragon Spirit
+Colors:blue
+PT:5/5
+K:Flying
+Oracle:Flying

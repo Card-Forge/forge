@@ -85,3 +85,7 @@ Type=Duel_Decks
 49 C Trinket Mage
 65 U Trip Noose
 57 R Triskelion
+
+[tokens]
+w_1_1_soldier
+c_1_1_a_pentavite_flying

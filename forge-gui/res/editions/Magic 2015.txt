@@ -293,3 +293,18 @@ Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sam
 282 C Centaur Courser
 283 U Garruk's Packleader
 284 R Terra Stomper
+
+[tokens]
+land_mine
+c_1_1_sliver
+w_1_1_soldier
+w_1_1_spirit_flying
+u_1_1_squid_islandwalk
+u_1_1_squid_islandwalk
+b_3_3_beast_deathtouch
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+r_1_1_goblin_haste
+g_3_3_beast
+g_1_1_insect_flying_deathtouch
+g_x_x_treefolk_warrior_total_forests

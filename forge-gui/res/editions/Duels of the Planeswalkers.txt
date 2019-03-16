@@ -119,3 +119,8 @@ Type=Other
 111 L Forest
 112 L Forest
 113 L Forest
+
+[tokens]
+g_1_1_elf_warrior
+g_1_1_saproling
+g_2_2_wolf

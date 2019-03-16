@@ -205,3 +205,14 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 192 U Tezzeret's Simulacrum
 193 C Pendulum of Patterns
 194 C Submerged Boneyard
+
+[tokens]
+etherium_cell
+ragavan
+r_2_2_gremlin
+c_1_1_a_servo
+c_1_1_a_servo
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying

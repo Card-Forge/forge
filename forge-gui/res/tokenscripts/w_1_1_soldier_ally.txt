@@ -1,0 +1,6 @@
+Name:Soldier Ally
+ManaCost:no cost
+Types:Creature Soldier Ally
+Colors:white
+PT:1/1
+Oracle:

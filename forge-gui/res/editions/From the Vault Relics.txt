@@ -22,3 +22,6 @@ Alias=V10
 13 M Sundering Titan
 14 M Sword of Body and Mind
 15 M Zuran Orb
+
+[tokens]
+g_2_2_wolf

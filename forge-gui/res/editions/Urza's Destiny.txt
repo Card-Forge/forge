@@ -154,3 +154,6 @@ FoilAlwaysInCommonSlot=False
 125 U Yavimaya Enchantress
 143 R Yavimaya Hollow
 75 R Yawgmoth's Bargain
+
+[tokens]
+r_1_1_goblin

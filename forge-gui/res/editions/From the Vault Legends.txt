@@ -22,3 +22,6 @@ Alias=V11
 13 M Teferi, Mage of Zhalfir
 14 M Ulamog, the Infinite Gyre
 15 M Visara the Dreadful
+
+[tokens]
+ub_1_1_faerie_rogue_flying

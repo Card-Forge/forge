@@ -175,3 +175,8 @@ FoilAlwaysInCommonSlot=False
 29 C Waxmane Baku
 30 R Yomiji, Who Bars the Way
 90 R Yukora, the Prisoner
+
+[tokens]
+c_1_1_spirit
+w_3_3_spirit_flying
+g_1_1_snake

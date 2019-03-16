@@ -278,3 +278,16 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 39 R World Queller
 155 C Zektar Shrine Expedition
 194 C Zendikar Farguide
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_bird_flying
+w_1_1_kor_soldier
+u_2_2_illusion
+u_1_1_merfolk
+b_x_x_vampire
+b_5_5_zombie_giant
+r_7_1_elemental_trample_haste
+g_4_4_beast
+g_1_1_snake
+g_2_2_wolf

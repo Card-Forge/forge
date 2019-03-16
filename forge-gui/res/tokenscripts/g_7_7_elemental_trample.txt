@@ -1,0 +1,7 @@
+Name:Elemental
+Colors:green
+ManaCost:no cost
+PT:7/7
+Types:Creature Elemental
+K:Trample
+Oracle:Trample

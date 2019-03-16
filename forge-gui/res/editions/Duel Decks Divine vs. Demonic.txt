@@ -72,3 +72,8 @@ C Thrull
 11 R Twilight Shepherd
 47 C Unholy Strength
 5 C Venerable Monk
+
+[tokens]
+w_1_1_spirit_flying
+b_x_x_demon_flying
+b_0_1_thrull

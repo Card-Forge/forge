@@ -278,3 +278,17 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
 258 L Swamp
 258 L Swamp
 258 L Swamp
+
+[tokens]
+w_3_4_bird_flying
+w_1_1_spirit_flying
+w_1_1_warrior
+w_1_1_warrior
+w_1_1_warrior
+b_2_2_vampire_flying
+b_2_2_zombie
+r_1_1_goblin
+r_1_1_goblin_haste
+g_4_4_bear
+g_1_1_snake
+bg_x_x_spirit_warrior

@@ -1,0 +1,6 @@
+Name:Sheep
+ManaCost:no cost
+PT:0/1
+Colors:green
+Types:Creature Sheep
+Oracle:

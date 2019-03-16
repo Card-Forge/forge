@@ -82,3 +82,9 @@ Type=Duel_Decks
 74 L Island
 75 L Mountain
 76 L Mountain
+
+[tokens]
+g_1_1_elf_warrior
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying

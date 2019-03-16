@@ -72,3 +72,9 @@ C Elephant
 5 C Wild Mongrel
 25 U Windstorm
 6 C Wirewood Savage
+
+[tokens]
+b_1_1_bat_flying
+g_3_3_beast
+g_4_4_beast
+g_3_3_elephant

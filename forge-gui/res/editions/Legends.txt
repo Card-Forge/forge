@@ -320,3 +320,12 @@ C Wolverine Pack
 R Wood Elemental
 R Xira Arien
 C Zephyr Falcon
+
+[tokens]
+wasp
+wolves_of_the_hunt
+minor_demon
+stangg_twin
+c_1_1_a_snake_poison
+c_5_5_a_djinn_flying
+rgw_1_1_sand_warrior

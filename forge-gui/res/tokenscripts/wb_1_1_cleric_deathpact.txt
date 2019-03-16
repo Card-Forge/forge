@@ -1,0 +1,7 @@
+Name:Cleric
+ManaCost:no cost
+Types:Creature Cleric
+Colors:white,black
+PT:1/1
+A:AB$ ChangeZone | Cost$ 3 W B B T Sac<1/CARDNAME> | ChangeType$ Card.namedDeathpact Angel+YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | SpellDescription$ Return a card named Deathpact Angel from your graveyard to the battlefield.
+Oracle:{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield.

@@ -1,7 +1,7 @@
 Name:Angelic Favor
 ManaCost:3 W
 Types:Instant
-A:SP$ Token | Cost$ 3 W | TokenScript$ w_4_4_angel_flying | AtEOT$ Exile | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Cast CARDNAME only during combat. Create a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step.
+A:SP$ Token | Cost$ 3 W | TokenScript$ w_4_4_angel_flying | LegacyImage$ w 4 4 angel flying nms | AtEOT$ Exile | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Cast CARDNAME only during combat. Create a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step.
 SVar:AltCost:Cost$ tapXType<1/Creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay CARDNAME's mana cost.
 DeckHas:Ability$Token
 AI:RemoveDeck:All
