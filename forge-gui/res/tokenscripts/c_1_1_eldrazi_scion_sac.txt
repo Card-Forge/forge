@@ -1,6 +1,6 @@
 Name:Eldrazi Scion
 ManaCost:no cost
 PT:1/1
-Types:Eldrazi Scion
+Types:Creature Eldrazi Scion
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 Oracle:Sacrifice this creature: Add {C}.
