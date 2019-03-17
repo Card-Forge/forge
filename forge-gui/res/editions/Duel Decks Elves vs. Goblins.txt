@@ -2,7 +2,6 @@
 Code=DD1
 Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
-Code2=EVG
 MciCode=dd1
 Type=Duel_Decks
 
