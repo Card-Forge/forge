@@ -1,0 +1,7 @@
+Name:Antelope
+ManaCost:no cost
+Types:Creature Antelope
+Colors:green
+PT:2/3
+K:Forestwalk
+Oracle:Forestwalk
