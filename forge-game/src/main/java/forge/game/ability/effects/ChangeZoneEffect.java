@@ -377,8 +377,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeKnownOriginResolve(final SpellAbility sa) {
-        final boolean onlySpells = sa.hasParam("OnlySpells");
-        Iterable<Card> tgtCards = !onlySpells ? getTargetCards(sa) : new CardCollection();
+        Iterable<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
@@ -400,7 +399,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 altDest = true;
             }
         }
-        
+
+        final CardZoneTable triggerList = new CardZoneTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
@@ -412,7 +412,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game);
+            removeFromStack(tgtSA, sa, si, game, triggerList);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -429,7 +429,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
-        final CardZoneTable triggerList = new CardZoneTable();
         
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
@@ -1183,36 +1182,39 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game 
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
+        final Card tgtHost = tgtSA.getHostCard();
+        final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
         
         Map<String,Object> params = Maps.newHashMap();
         params.put("StackSa", tgtSA);
         params.put("StackSi", si);
 
+        Card movedCard = null;
         if (srcSA.hasParam("Destination")) {
             final boolean remember = srcSA.hasParam("RememberChanged");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
-                game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
                 Card host = srcSA.getOriginalHost();
                 if (host == null) {
                     host = srcSA.getHostCard();
                 }
-                tgtSA.getHostCard().setExiledWith(host);
-                game.getAction().exile(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().exile(tgtHost, srcSA, params);
+                movedCard.setExiledWith(host);
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
-                game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Hand")) {
-                game.getAction().moveToHand(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToHand(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Library")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
-                    tgtSA.getHostCard().getOwner().shuffle(srcSA);
+                    tgtHost.getOwner().shuffle(srcSA);
                 }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
@@ -1220,11 +1222,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (remember) {
-                srcSA.getHostCard().addRemembered(tgtSA.getHostCard());
+                srcSA.getHostCard().addRemembered(tgtHost);
+                // TODO or remember moved?
             }
 
             if (!tgtSA.isAbility()) {
                 System.out.println("Moving spell to " + srcSA.getParam("Destination"));
+            }
+            if (originZone != null && movedCard != null) {
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }
         }
     }
