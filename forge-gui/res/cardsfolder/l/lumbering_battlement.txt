@@ -17,5 +17,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigForgetAll:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidExile Card.IsRemembered+ExiledWithSource/Times.2
 SVar:MaxTgts:Count$Valid Creature.nonToken+Other+YouCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 Oracle:Vigilance\nWhen Lumbering Battlement enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.\nLumbering Battlement gets +2/+2 for each card exiled with it.
