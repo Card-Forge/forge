@@ -1,0 +1,7 @@
+Name:Wolf
+ManaCost:no cost
+Types:Creature Wolf
+Colors:black
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch
