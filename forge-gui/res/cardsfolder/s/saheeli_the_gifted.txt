@@ -8,7 +8,7 @@ SVar:HBReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCa
 SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Valid Artifact.YouCtrl
-SVar:RemRandomDeck
+AI:RemoveDeck:Random
 A:AB$ RepeatEach | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatSubAbility$ DBClone | RepeatCards$ Artifact.YouCtrl | SpellDescription$ For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Keywords$ Haste | AtEOT$ Exile
 K:CARDNAME can be your commander.
