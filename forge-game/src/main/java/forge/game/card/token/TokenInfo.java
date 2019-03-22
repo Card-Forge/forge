@@ -18,11 +18,10 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class TokenInfo {
     final String name;
@@ -129,8 +128,6 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        // TODO - most tokens mana cost is 0, this needs to be fixed
-        // c.setManaCost(manaCost);
         c.setColor(color.isEmpty() ? manaCost : color);
         c.setToken(true);
 

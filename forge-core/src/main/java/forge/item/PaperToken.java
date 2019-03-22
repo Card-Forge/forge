@@ -5,6 +5,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ import java.util.Locale;
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;
     private CardEdition edition;
-    private String imageFileName;
+    private ArrayList<String> imageFileName = new ArrayList<>();
     private CardRules card;
+    private int artIndex = 0;
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
     public static String makeTokenFileName(String in) {
@@ -108,12 +110,23 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         this.name = c.getName();
         this.edition = edition0;
 
+        if (edition.getTokens().containsKey(imageFileName)) {
+            this.artIndex = edition.getTokens().get(imageFileName);
+        }
+
         if (imageFileName == null) {
             // This shouldn't really happen. We can just use the normalized name again for the base image name
-            this.imageFileName = makeTokenFileName(c, edition0);
+            this.imageFileName.add(makeTokenFileName(c, edition0));
         } else {
             String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
-            this.imageFileName = String.format("%s%s", imageFileName, formatEdition);
+            int arts = Math.max(this.artIndex, 1);
+            for(int idx = 0; idx < arts; idx++) {
+                if (idx == 0) {
+                    this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
+                } else {
+                    this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
+                }
+            }
         }
     }
     
@@ -121,14 +134,14 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public String toString() { return name; }
     @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
-    @Override public int getArtIndex() { return 0; } // This might change however
+    @Override public int getArtIndex() { return artIndex; }
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }
 
     @Override public CardRarity getRarity() { return CardRarity.None; }
 
     // Unfortunately this is a property of token, cannot move it outside of class
-    public String getImageFilename() { return imageFileName; }
+    public String getImageFilename() { return imageFileName.get(0); }
 
     @Override public String getItemType() { return "Token"; }
 
@@ -136,6 +149,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public String getImageKey(boolean altState) {
-        return ImageKeys.TOKEN_PREFIX + imageFileName.replace(" ", "_");
+        int idx = MyRandom.getRandom().nextInt() % artIndex;
+        return ImageKeys.TOKEN_PREFIX + imageFileName.get(idx).replace(" ", "_");
     }
 }
