@@ -21,7 +21,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
@@ -31,7 +30,6 @@ import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -123,7 +121,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private boolean smallSetOverride = false;
     private String boosterMustContain = "";
     private final CardInSet[] cards;
-    private final String[] tokenNormalized;
+    private final Map<String, Integer> tokenNormalized;
 
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
@@ -133,7 +131,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         tokenNormalized = null;
     }
 
-    private CardEdition(CardInSet[] cards, String[] tokens) {
+    private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {
         this.cards = cards;
         this.tokenNormalized = tokens;
     }
@@ -190,6 +188,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public boolean getSmallSetOverride() { return smallSetOverride; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public CardInSet[] getCards() { return cards; }
+
+    public Map<String, Integer> getTokens() { return tokenNormalized; };
 
     public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
         @Override
@@ -261,7 +261,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
 
-            List<String> tokenNormalized = new ArrayList<>();
+            Map<String, Integer> tokenNormalized = new HashMap<>();
             List<CardEdition.CardInSet> processedCards = new ArrayList<>();
             if (contents.containsKey("cards")) {
                 for(String line : contents.get("cards")) {
@@ -290,13 +290,17 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     if (StringUtils.isBlank(line))
                         continue;
 
-                    tokenNormalized.add(line);
+                    if (!tokenNormalized.containsKey(line)) {
+                        tokenNormalized.put(line, 1);
+                    } else {
+                        tokenNormalized.put(line, tokenNormalized.get(line) + 1);
+                    }
                 }
             }
 
             CardEdition res = new CardEdition(
                 processedCards.toArray(new CardInSet[processedCards.size()]),
-                tokenNormalized.toArray(new String[tokenNormalized.size()])
+                tokenNormalized
             );
 
             FileSection section = FileSection.parse(contents.get("metadata"), "=");
