@@ -16,7 +16,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private CardEdition edition;
     private ArrayList<String> imageFileName = new ArrayList<>();
     private CardRules card;
-    private int artIndex = 0;
+    private int artIndex = 1;
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
     public static String makeTokenFileName(String in) {
@@ -119,13 +119,10 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             this.imageFileName.add(makeTokenFileName(c, edition0));
         } else {
             String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
-            int arts = Math.max(this.artIndex, 1);
-            for(int idx = 0; idx < arts; idx++) {
-                if (idx == 0) {
-                    this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
-                } else {
-                    this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
-                }
+
+            this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
+            for(int idx = 1; idx < this.artIndex; idx++) {
+                this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
             }
         }
     }
@@ -149,7 +146,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public String getImageKey(boolean altState) {
-        int idx = MyRandom.getRandom().nextInt() % artIndex;
+        int idx = MyRandom.getRandom().nextInt(artIndex);
         return ImageKeys.TOKEN_PREFIX + imageFileName.get(idx).replace(" ", "_");
     }
 }
