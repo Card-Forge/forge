@@ -99,6 +99,8 @@ public abstract class GameState {
 
     private int turn = 1;
 
+    private boolean removeSummoningSickness = false;
+
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
     private final int TARGET_HUMAN = -2;
@@ -448,6 +450,10 @@ public abstract class GameState {
             turn = Integer.parseInt(categoryValue);
         }
 
+        else if (categoryName.equals("removesummoningsickness")) {
+            removeSummoningSickness = categoryValue.equalsIgnoreCase("true");
+        }
+
         else if (categoryName.endsWith("life")) {
             if (isHuman)
                 humanLife = Integer.parseInt(categoryValue);
@@ -620,6 +626,12 @@ public abstract class GameState {
         // Advance to a certain phase, activating all triggered abilities
         if (advPhase != null) {
             game.getPhaseHandler().devAdvanceToPhase(advPhase);
+        }
+
+        if (removeSummoningSickness) {
+            for (Card card : game.getCardsInGame()) {
+                card.setSickness(false);
+            }
         }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
@@ -1070,7 +1082,6 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
-
     }
 
     /**
