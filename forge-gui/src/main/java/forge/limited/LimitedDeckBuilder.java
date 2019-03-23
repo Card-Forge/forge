@@ -92,6 +92,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         final Iterable<PaperCard> conspiracies = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.coreType(true, "Conspiracy"), PaperCard.FN_GET_RULES));
         this.draftedConspiracies = Lists.newArrayList(conspiracies);
+        aiPlayables.removeAll(draftedConspiracies);
 
         findBasicLandSets();
     }
