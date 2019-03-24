@@ -1311,8 +1311,8 @@ wb_1_1_spirit_flying_c15.jpg https://downloads.cardforge.org/images/tokens/wb_1_
 wb_1_1_spirit_flying_dgm.jpg https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_dgm.jpg
 wb_1_1_spirit_flying_eve.jpg https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_eve.jpg
 wb_1_1_spirit_flying_gtc.jpg https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_gtc.jpg
-wb_1_1_spirit_flying_rna.jpg                  https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_rna.jpg
-wb_1_1_spirit_flying_uma.jpg                  https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_uma.jpg
+wb_1_1_spirit_flying_rna.jpg https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_rna.jpg
+wb_1_1_spirit_flying_uma.jpg https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_uma.jpg
 wb_x_x_e_spirit_experience_c15.jpg https://downloads.cardforge.org/images/tokens/wb_x_x_e_spirit_experience_c15.jpg
 wb_x_x_e_spirit_experience_pz1.jpg https://downloads.cardforge.org/images/tokens/wb_x_x_e_spirit_experience_pz1.jpg
 wirefly_dst.jpg https://downloads.cardforge.org/images/tokens/wirefly_dst.jpg
