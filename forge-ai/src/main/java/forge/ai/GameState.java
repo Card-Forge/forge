@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import forge.StaticData;
 import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
@@ -19,8 +20,10 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -52,6 +55,14 @@ public abstract class GameState {
     private int computerLife = -1;
     private String humanCounters = "";
     private String computerCounters = "";
+    private String humanManaPool = "";
+    private String computerManaPool = "";
+    private String humanPersistentMana = "";
+    private String computerPersistentMana = "";
+    private int humanLandsPlayed = 0;
+    private int computerLandsPlayed = 0;
+    private int humanLandsPlayedLastTurn = 0;
+    private int computerLandsPlayedLastTurn = 0;
 
     private boolean puzzleCreatorState = false;
 
@@ -60,8 +71,10 @@ public abstract class GameState {
 
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
+    private final Map<Card, Integer> cardToEnchantPlayerId = new HashMap<>();
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
+    private final Map<Card, CardCollection> cardToChosenCards = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
@@ -79,10 +92,14 @@ public abstract class GameState {
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
 
+    private String tAdvancePhase = "NONE";
+
     private String precastHuman = null;
     private String precastAI = null;
 
     private int turn = 1;
+
+    private boolean removeSummoningSickness = false;
 
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
@@ -112,6 +129,10 @@ public abstract class GameState {
 
         sb.append(TextUtil.concatNoSpace("humanlife=", String.valueOf(humanLife), "\n"));
         sb.append(TextUtil.concatNoSpace("ailife=", String.valueOf(computerLife), "\n"));
+        sb.append(TextUtil.concatNoSpace("humanlandsplayed=", String.valueOf(humanLandsPlayed), "\n"));
+        sb.append(TextUtil.concatNoSpace("ailandsplayed=", String.valueOf(computerLandsPlayed), "\n"));
+        sb.append(TextUtil.concatNoSpace("humanlandsplayedlastturn=", String.valueOf(humanLandsPlayedLastTurn), "\n"));
+        sb.append(TextUtil.concatNoSpace("ailandsplayedlastturn=", String.valueOf(computerLandsPlayedLastTurn), "\n"));
         sb.append(TextUtil.concatNoSpace("turn=", String.valueOf(turn), "\n"));
 
         if (!humanCounters.isEmpty()) {
@@ -119,6 +140,13 @@ public abstract class GameState {
         }
         if (!computerCounters.isEmpty()) {
             sb.append(TextUtil.concatNoSpace("aicounters=", computerCounters, "\n"));
+        }
+
+        if (!humanManaPool.isEmpty()) {
+            sb.append(TextUtil.concatNoSpace("humanmanapool=", humanManaPool, "\n"));
+        }
+        if (!computerManaPool.isEmpty()) {
+            sb.append(TextUtil.concatNoSpace("aimanapool=", humanManaPool, "\n"));
         }
 
         sb.append(TextUtil.concatNoSpace("activeplayer=", tChangePlayer, "\n"));
@@ -147,8 +175,14 @@ public abstract class GameState {
         }
         humanLife = human.getLife();
         computerLife = ai.getLife();
+        humanLandsPlayed = human.getLandsPlayedThisTurn();
+        computerLandsPlayed = ai.getLandsPlayedThisTurn();
+        humanLandsPlayedLastTurn = human.getLandsPlayedLastTurn();
+        computerLandsPlayedLastTurn = ai.getLandsPlayedLastTurn();
         humanCounters = countersToString(human.getCounters());
         computerCounters = countersToString(ai.getCounters());
+        humanManaPool = processManaPool(human.getManaPool());
+        computerManaPool = processManaPool(ai.getManaPool());
 
         tChangePlayer = game.getPhaseHandler().getPlayerTurn() == ai ? "ai" : "human";
         tChangePhase = game.getPhaseHandler().getPhase().toString();
@@ -165,9 +199,7 @@ public abstract class GameState {
                     cardsReferencedByID.add(card.getExiledWith());
                 }
                 if (zone == ZoneType.Battlefield) {
-                    if (!card.getEnchantedBy(false).isEmpty()
-                            || !card.getEquippedBy(false).isEmpty()
-                            || !card.getFortifiedBy(false).isEmpty()) {
+                    if (!card.getAttachedCards().isEmpty()) {
                         // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
@@ -180,6 +212,10 @@ public abstract class GameState {
                 }
                 for (Card i : card.getImprintedCards()) {
                     // Remember the IDs of imprinted cards
+                    cardsReferencedByID.add(i);
+                }
+                for (Card i : card.getChosenCards()) {
+                    // Remember the IDs of chosen cards
                     cardsReferencedByID.add(i);
                 }
                 if (game.getCombat() != null && game.getCombat().isAttacking(card)) {
@@ -241,8 +277,7 @@ public abstract class GameState {
                 newText.append("|Renowned");
             }
             if (c.isMonstrous()) {
-                newText.append("|Monstrous:");
-                newText.append(c.getMonstrosityNum());
+                newText.append("|Monstrous");
             }
             if (c.isPhasedOut()) {
                 newText.append("|PhasedOut");
@@ -260,12 +295,14 @@ public abstract class GameState {
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
             }
-            if (c.getEquipping() != null) {
-                newText.append("|Attaching:").append(c.getEquipping().getId());
-            } else if (c.getFortifying() != null) {
-                newText.append("|Attaching:").append(c.getFortifying().getId());
-            } else if (c.getEnchantingCard() != null) {
-                newText.append("|Attaching:").append(c.getEnchantingCard().getId());
+            if (c.isAttachedToEntity()) {
+                newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
+            }
+            if (c.getPlayerAttachedTo() != null) {
+                // TODO: improve this for game states with more than two players
+                newText.append("|EnchantingPlayer:");
+                Player p = c.getPlayerAttachedTo();
+                newText.append(p.getController().isAI() ? "AI" : "HUMAN");
             }
 
             if (c.getDamage() > 0) {
@@ -280,6 +317,17 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
+            }
+
+            List<String> chosenCardIds = Lists.newArrayList();
+            for (Object obj : c.getChosenCards()) {
+                if (obj instanceof Card) {
+                    int id = ((Card)obj).getId();
+                    chosenCardIds.add(String.valueOf(id));
+                }
+            }
+            if (!chosenCardIds.isEmpty()) {
+                newText.append("|ChosenCards:").append(TextUtil.join(chosenCardIds, ","));
             }
 
             List<String> rememberedCardIds = Lists.newArrayList();
@@ -389,8 +437,10 @@ public abstract class GameState {
         if (categoryName.startsWith("active")) {
             if (categoryName.endsWith("player"))
                 tChangePlayer = categoryValue.trim().toLowerCase();
-            if (categoryName.endsWith("phase"))
+            else if (categoryName.endsWith("phase"))
                 tChangePhase = categoryValue.trim().toUpperCase();
+            else if (categoryName.endsWith("phaseadvance"))
+                tAdvancePhase = categoryValue.trim().toUpperCase();
             return;
         }
 
@@ -398,6 +448,10 @@ public abstract class GameState {
 
         if (categoryName.equals("turn")) {
             turn = Integer.parseInt(categoryValue);
+        }
+
+        else if (categoryName.equals("removesummoningsickness")) {
+            removeSummoningSickness = categoryValue.equalsIgnoreCase("true");
         }
 
         else if (categoryName.endsWith("life")) {
@@ -412,6 +466,20 @@ public abstract class GameState {
                 humanCounters = categoryValue;
             else
                 computerCounters = categoryValue;
+        }
+
+        else if (categoryName.endsWith("landsplayed")) {
+            if (isHuman)
+                humanLandsPlayed = Integer.parseInt(categoryValue);
+            else
+                computerLandsPlayed = Integer.parseInt(categoryValue);
+        }
+
+        else if (categoryName.endsWith("landsplayedlastturn")) {
+            if (isHuman)
+                humanLandsPlayedLastTurn = Integer.parseInt(categoryValue);
+            else
+                computerLandsPlayedLastTurn = Integer.parseInt(categoryValue);
         }
 
         else if (categoryName.endsWith("play") || categoryName.endsWith("battlefield")) {
@@ -466,6 +534,21 @@ public abstract class GameState {
             else
                 precastAI = categoryValue;
         }
+
+        else if (categoryName.endsWith("manapool")) {
+            if (isHuman)
+                humanManaPool = categoryValue;
+            else
+                computerManaPool = categoryValue;
+        }
+
+        else if (categoryName.endsWith("persistentmana")) {
+            if (isHuman)
+                humanPersistentMana = categoryValue;
+            else
+                computerPersistentMana = categoryValue;
+        }
+
         else {
             System.out.println("Unknown key: " + categoryName);
         }
@@ -486,19 +569,27 @@ public abstract class GameState {
 
         idToCard.clear();
         cardToAttachId.clear();
+        cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
+        cardToChosenCards.clear();
         cardToChosenType.clear();
         cardToScript.clear();
         cardAttackMap.clear();
 
-        Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
-        PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
+        Player newPlayerTurn = tChangePlayer.equalsIgnoreCase("human") ? human : tChangePlayer.equalsIgnoreCase("ai") ? ai : null;
+        PhaseType newPhase = tChangePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
+        PhaseType advPhase = tAdvancePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tAdvancePhase);
 
         // Set stack to resolving so things won't trigger/effects be checked right away
         game.getStack().setResolving(true);
+
+        updateManaPool(human, humanManaPool, true, false);
+        updateManaPool(ai, computerManaPool, true, false);
+        updateManaPool(human, humanPersistentMana, false, true);
+        updateManaPool(ai, computerPersistentMana, false, true);
 
         if (!humanCounters.isEmpty()) {
             applyCountersToGameEntity(human, humanCounters);
@@ -511,8 +602,8 @@ public abstract class GameState {
 
         game.getTriggerHandler().setSuppressAllTriggers(true);
 
-        setupPlayerState(humanLife, humanCardTexts, human);
-        setupPlayerState(computerLife, aiCardTexts, ai);
+        setupPlayerState(humanLife, humanCardTexts, human, humanLandsPlayed, humanLandsPlayedLastTurn);
+        setupPlayerState(computerLife, aiCardTexts, ai, computerLandsPlayed, computerLandsPlayedLastTurn);
 
         handleCardAttachments();
         handleChosenEntities();
@@ -532,7 +623,54 @@ public abstract class GameState {
 
         game.getStack().setResolving(false);
 
+        // Advance to a certain phase, activating all triggered abilities
+        if (advPhase != null) {
+            game.getPhaseHandler().devAdvanceToPhase(advPhase);
+        }
+
+        if (removeSummoningSickness) {
+            for (Card card : game.getCardsInGame()) {
+                card.setSickness(false);
+            }
+        }
+
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private String processManaPool(ManaPool manaPool) {
+        String mana = "";
+        for (final byte c : MagicColor.WUBRGC) {
+            int amount = manaPool.getAmountOfColor(c);
+            for (int i = 0; i < amount; i++) {
+                mana += MagicColor.toShortString(c) + " ";
+            }
+        }
+
+        return mana.trim();
+    }
+
+    private void updateManaPool(Player p, String manaDef, boolean clearPool, boolean persistent) {
+        Game game = p.getGame();
+        if (clearPool) {
+            p.getManaPool().clearPool(false);
+        }
+
+        if (!manaDef.isEmpty()) {
+            final Card dummy = new Card(-777777, game);
+            dummy.setOwner(p);
+            final Map<String, String> produced = Maps.newHashMap();
+            produced.put("Produced", manaDef);
+            if (persistent) {
+                produced.put("PersistentMana", "True");
+            }
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    abMana.produceMana(null);
+                }
+            });
+        }
     }
 
     private void handleCombat(final Game game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
@@ -838,32 +976,38 @@ public abstract class GameState {
             Card c = entry.getKey();
             c.setNamedCard(entry.getValue());
         }
+
+        // Chosen cards
+        for (Entry<Card, CardCollection> entry : cardToChosenCards.entrySet()) {
+            Card c = entry.getKey();
+            c.setChosenCards(entry.getValue());
+        }
     }
 
     private void handleCardAttachments() {
         // Unattach all permanents first
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
-
-            attachedTo.unEnchantAllCards();
-            attachedTo.unEquipAllCards();
-            for (Card c : attachedTo.getFortifiedBy(true)) {
-                attachedTo.unFortifyCard(c);
-            }
+            attachedTo.unAttachAllCards();
         }
 
         // Attach permanents by ID
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
-
-            if (attacher.isEquipment()) {
-                attacher.equipCard(attachedTo);
-            } else if (attacher.isAura()) {
-                attacher.enchantEntity(attachedTo);
-            } else if (attacher.isFortified()) {
-                attacher.fortifyCard(attachedTo);
+            if (attacher.isAttachment()) {
+                attacher.attachToEntity(attachedTo);
             }
+        }
+
+        // Enchant players by ID
+        for(Entry<Card, Integer> entry : cardToEnchantPlayerId.entrySet()) {
+            // TODO: improve this for game states with more than two players
+            Card attacher = entry.getKey();
+            Game game = attacher.getGame();
+            Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
+
+            attacher.attachToEntity(attachedTo);
         }
     }
 
@@ -876,8 +1020,14 @@ public abstract class GameState {
         }
     }
 
-    private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
+    private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p, final int landsPlayed, final int landsPlayedLastTurn) {
         // Lock check static as we setup player state
+
+        // Clear all zones first, this ensures that any lingering cards and effects (e.g. in command zone) get cleared up
+        // before setting up a new state
+        for (ZoneType zt : ZONES.keySet()) {
+            p.getZone(zt).removeAllCards(true);
+        }
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
@@ -886,6 +1036,9 @@ public abstract class GameState {
         }
 
         if (life >= 0) p.setLife(life, null);
+        p.setLandsPlayedThisTurn(landsPlayed);
+        p.setLandsPlayedLastTurn(landsPlayedLastTurn);
+
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             PlayerZone zone = p.getZone(kv.getKey());
             if (kv.getKey() == ZoneType.Battlefield) {
@@ -909,7 +1062,9 @@ public abstract class GameState {
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
-                        c.setEnchanting(c);
+
+                        //FIXME it shouldn't be able to attach itself
+                        c.setEntityAttachedTo(c);
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {
@@ -927,7 +1082,6 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
-
     }
 
     /**
@@ -979,9 +1133,8 @@ public abstract class GameState {
                     c.tap();
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
-                } else if (info.startsWith("Monstrous:")) {
+                } else if (info.startsWith("Monstrous")) {
                     c.setMonstrous(true);
-                    c.setMonstrosityNum(Integer.parseInt(info.substring((info.indexOf(':') + 1))));
                 } else if (info.startsWith("PhasedOut")) {
                     c.setPhasedOut(true);
                 } else if (info.startsWith("Counters:")) {
@@ -1007,9 +1160,13 @@ public abstract class GameState {
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
-                } else if (info.startsWith("Attaching:")) {
+                } else if (info.startsWith("Attaching:") /*deprecated*/ || info.startsWith("AttachedTo:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     cardToAttachId.put(c, id);
+                } else if (info.startsWith("EnchantingPlayer:")) {
+                    // TODO: improve this for game states with more than two players
+                    String tgt = info.substring(info.indexOf(':') + 1);
+                    cardToEnchantPlayerId.put(c, tgt.equalsIgnoreCase("AI") ? TARGET_AI : TARGET_HUMAN);
                 } else if (info.startsWith("Ability:")) {
                     String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
@@ -1020,6 +1177,13 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("ChosenCards:")) {
+                    CardCollection chosen = new CardCollection();
+                    String[] idlist = info.substring(info.indexOf(':') + 1).split(",");
+                    for (String id : idlist) {
+                        chosen.add(idToCard.get(Integer.parseInt(id)));
+                    }
+                    cardToChosenCards.put(c, chosen);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {

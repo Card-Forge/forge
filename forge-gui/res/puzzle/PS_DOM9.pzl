@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Dominaria #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/06/068.-DOM9.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has access to 4 colorless mana, and you start with the City's Blessing.
+[state]
+humanlife=20
+ailife=2
+aipersistentmana=C C C C
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Demystify;Ixalan's Binding;Nissa, Vital Force;Dive Down
+humanbattlefield=Thrashing Brontodon|Id:999;Deep Freeze|AttachedTo:3;Slippery Scoundrel;Rhonas's Stalwart;Plains|Set:DOM;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Glacial Fortress;Glacial Fortress;Glacial Fortress
+aibattlefield=Evra, Halcyon Witness;Ninth Bridge Patrol|Counters:P1P1=1;Lyra Dawnbringer|Id:3;Cast Out|ExecuteScript:TrigExile->999

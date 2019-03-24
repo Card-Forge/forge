@@ -87,3 +87,6 @@ Type=Duel_Decks
 75 L Island
 75 L Island
 75 L Island
+
+[tokens]
+r_1_1_goblin

@@ -1,0 +1,7 @@
+Name:Clan Guildmage
+ManaCost:R G
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+A:AB$ Animate | Cost$ 2 G T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land.
+Oracle:{1}{R}, {T}: Target creature can't block this turn.\n{2}{G}, {T}: Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land.

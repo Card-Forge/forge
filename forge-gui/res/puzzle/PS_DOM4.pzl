@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Dominaria #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/05/063.DOM4_.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has a Crafty Cutpurse in hand and has enough open mana to cast it.
+[state]
+humanlife=20
+ailife=5
+turn=2
+aipersistentmana=U U U U
+activeplayer=human
+activephase=MAIN1
+humanhand=Voracious Vampire;Arcane Adaptation;Naban, Dean of Iteration;Deeproot Elite
+humanbattlefield=Grand Warlord Radha;Forerunner of the Coalition;Forerunner of the Empire;Slimefoot, the Stowaway;Trespasser's Curse|EnchantingPlayer:AI;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Blooming Marsh;Blooming Marsh;Blooming Marsh
+aihand=Crafty Cutpurse
+aibattlefield=Naban, Dean of Iteration;Academy Journeymage;Cold-Water Snapper

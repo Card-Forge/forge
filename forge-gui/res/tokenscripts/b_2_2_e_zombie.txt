@@ -1,0 +1,6 @@
+Name:Zombie
+ManaCost:no cost
+Types:Enchantment Creature Zombie
+Colors:black
+PT:2/2
+Oracle:

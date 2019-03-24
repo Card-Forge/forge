@@ -6,6 +6,6 @@ SVar:TrigDamage:Mode$ DamageDoneOnce | ValidSource$ Creature.IsRemembered | Exec
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | References$ X | Defined$ You
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritualize.jpg
 Oracle:Until end of turn, whenever target creature deals damage, you gain that much life.\nDraw a card.

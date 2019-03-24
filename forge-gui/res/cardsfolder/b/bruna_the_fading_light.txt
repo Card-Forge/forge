@@ -10,4 +10,4 @@ DeckHints:Name$Gisela the Broken Blade & Type$Human & Type$Angel
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bruna_the_fading_light.jpg
 MeldPair:Gisela, the Broken Blade
 AlternateMode:Meld
-Oracle:When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.\nFlying, vigilance\n(Melds with Gisela, the Broken Blade.)
+Oracle:When you cast this spell, you may return target Angel or Human creature card from your graveyard to the battlefield.\nFlying, vigilance\n(Melds with Gisela, the Broken Blade.)

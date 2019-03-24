@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/03/104.-RNA7.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards you could draw are irrelevant to the puzzle.
+[state]
+humanlife=20
+ailife=18
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Rescue;Sky Tether;Ghostform;Deep Freeze
+humanlibrary=Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies;Font of Agonies
+humanbattlefield=Deep Freeze|AttachedTo:3;Goblin Locksmith;Arcades, the Strategist;Suspicious Bookcase;Suspicious Bookcase;Erratic Cyclops;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs
+aibattlefield=Gyre Engineer;Gyre Engineer;Gyre Engineer|Id:3;Lyra Dawnbringer

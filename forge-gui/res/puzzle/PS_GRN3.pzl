@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/10/085.-GRN3-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Justice Strike;Dual Shot;Ashes of the Abhorrent;Silverclad Ferocidons;Hunted Witness
+humanbattlefield=Roc Charger|Id:1;Glaive of the Guildpact|AttachedTo:1;Desecrated Tomb;Pitiless Plunderer;Undercity Necrolisk;Oathsworn Vampire;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs
+aibattlefield=Rekindling Phoenix;Rekindling Phoenix;Aurelia, Exemplar of Justice

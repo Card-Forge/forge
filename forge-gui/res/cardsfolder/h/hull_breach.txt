@@ -6,6 +6,6 @@ SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target art
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBDestroy3:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact and target enchantment. | SubAbility$ DestroyEnch
 SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hull_breach.jpg
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment.

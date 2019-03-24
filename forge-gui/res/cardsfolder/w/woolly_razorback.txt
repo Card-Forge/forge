@@ -5,7 +5,7 @@ PT:7/7
 K:etbCounter:ICE:3
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_ICE | AddKeyword$ Prevent all combat damage that would be dealt by CARDNAME. & Defender | Description$ As long as CARDNAME has an ice counter on it, prevent all combat damage it would deal and it has defender.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks, remove an ice counter from it.
-SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ ICE | CounterNum$ 1 | Defined$ TriggeredBlocker
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ ICE | CounterNum$ 1 | Defined$ TriggeredBlockerLKICopy
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_razorback.jpg
 Oracle:Woolly Razorback enters the battlefield with three ice counters on it.\nAs long as Woolly Razorback has an ice counter on it, prevent all combat damage it would deal and it has defender.\nWhenever Woolly Razorback blocks, remove an ice counter from it.

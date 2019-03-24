@@ -1,0 +1,7 @@
+Name:Cat
+ManaCost:no cost
+Types:Creature Cat
+Colors:green
+PT:3/2
+K:Shroud
+Oracle:Shroud

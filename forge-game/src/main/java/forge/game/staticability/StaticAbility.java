@@ -126,7 +126,9 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (hasParam("AddType") || hasParam("RemoveType")
                 || hasParam("RemoveCardTypes") || hasParam("RemoveSubTypes")
-                || hasParam("RemoveSuperTypes") || hasParam("RemoveCreatureTypes")) {
+                || hasParam("RemoveSuperTypes") || hasParam("RemoveLandTypes")
+                || hasParam("RemoveCreatureTypes") || hasParam("RemoveArtifactTypes")
+                || hasParam("RemoveEnchantmentTypes")) {
             layers.add(StaticAbilityLayer.TYPE);
         }
 
@@ -256,6 +258,10 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.layers = this.generateLayer();
         this.hostCard = host;
         this.intrinsic = stAb.intrinsic;
+
+        // Copy old sVars
+        this.sVars.putAll(stAb.sVars);
+        // but if they are References use this ones
         buildCommonAttributes(host);
     }
 
@@ -456,6 +462,8 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
         } else if (mode.equals("CantBlockBy") && target instanceof Card) {
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
+        } else if (mode.equals("CantAttach")) {
+            return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         }
 
         return false;
@@ -529,6 +537,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             if (condition.equals("Hellbent") && !controller.hasHellbent()) return false;
             if (condition.equals("Metalcraft") && !controller.hasMetalcraft()) return false;
             if (condition.equals("Delirium") && !controller.hasDelirium()) return false;
+            if (condition.equals("Ferocious") && !controller.hasFerocious()) return false;
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
 

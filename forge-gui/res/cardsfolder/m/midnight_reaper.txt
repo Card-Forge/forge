@@ -1,0 +1,8 @@
+Name:Midnight Reaper
+ManaCost:2 B
+Types:Creature Zombie Knight
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a nontoken creature you control dies, CARDNAME deals 1 damage to you and you draw a card.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever a nontoken creature you control dies, Midnight Reaper deals 1 damage to you and you draw a card.

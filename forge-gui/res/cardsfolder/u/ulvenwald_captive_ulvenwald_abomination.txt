@@ -8,7 +8,7 @@ PT:1/2
 
 K:Defender
 
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 
 A:AB$SetState | Cost$ 5 G G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 
@@ -16,7 +16,7 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_captiv
 
 AlternateMode:DoubleFaced
 
-Oracle:Defender\n{T}: Add {G} to your mana pool.\n{5}{G}{G}: Transform Ulvenwald Captive.
+Oracle:Defender\n{T}: Add {G}.\n{5}{G}{G}: Transform Ulvenwald Captive.
 
 
 
@@ -32,9 +32,9 @@ Types:Creature Eldrazi Werewolf
 
 PT:4/6
 
-A:AB$ Mana | Cost$ T | Produced$ C C | SpellDescription$ Add {C}{C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C C | SpellDescription$ Add {C}{C}.
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_abomination.jpg
 
-Oracle:{T}: Add {C}{C} to your mana pool.
+Oracle:{T}: Add {C}{C}.
 

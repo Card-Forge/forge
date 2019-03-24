@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -104,7 +105,13 @@ public class LoadQuestScreen extends LaunchScreen {
                 File[] arrFiles = dirQuests.listFiles(takeDatFiles);
                 Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
                 for (File f : arrFiles) {
-                    arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+                    try {
+                        arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+                    } catch (IOException e) {
+                        System.err.println(String.format("Failed to load quest '%s'", f.getName()));
+                        // Failed to load last quest, don't continue with quest loading stuff
+                        return;
+                    }
                 }
 
                 // Populate list with available quest data.

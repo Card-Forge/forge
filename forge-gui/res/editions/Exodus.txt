@@ -153,3 +153,8 @@ Foil=NotSupported
 130 C Wood Elves
 142 R Workhorse
 26 U Zealots en-Dal
+
+[tokens]
+c_1_1_a_thopter_flying
+w_1_1_pegasus_flying
+g_2_2_beast

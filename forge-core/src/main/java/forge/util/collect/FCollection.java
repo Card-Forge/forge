@@ -530,6 +530,18 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         return Iterables.unmodifiableIterable(new LinkedList<T>(list));
     }
 
+    @Override
+    public T get(final T obj) {
+        if (obj == null) {
+            return null;
+        }
+        for(T x : this) {
+            if (x.equals(obj)) {
+                return x;
+            }
+        }
+        return obj;
+    }
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve

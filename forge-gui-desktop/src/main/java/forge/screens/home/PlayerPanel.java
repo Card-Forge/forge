@@ -35,7 +35,6 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.controllers.CEditorCommander;
 import forge.screens.deckeditor.controllers.CEditorVariant;
 import forge.screens.home.sanctioned.AvatarSelector;
 import forge.toolbox.FCheckBox;
@@ -52,9 +51,11 @@ import forge.toolbox.FTextField;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends FPanel {
+    final Localizer localizer = Localizer.getInstance();
     private final static ForgePreferences prefs = FModel.getPreferences();
     private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
@@ -78,24 +79,23 @@ public class PlayerPanel extends FPanel {
     private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
 
     private final FLabel closeBtn;
-    private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
+    private final FLabel deckBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaDeck")).build();
     private final FLabel deckLabel;
 
     private final String variantBtnConstraints = "height 30px, hidemode 3";
 
-    private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
-    private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text("Scheme Deck Editor").build();
+    private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaSchemeDeck")).build();
+    private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSchemeDeckEditor")).build();
     private final FLabel scmLabel;
 
-    private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a Commander deck").build();
-    private final FLabel cmdDeckEditor = new FLabel.ButtonBuilder().text("Commander Deck Editor").build();
+    private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaCommanderDeck")).build();
     private final FLabel cmdLabel;
 
-    private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
-    private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
+    private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaPlanarDeck")).build();
+    private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text(localizer.getMessage("lblPlanarDeckEditor")).build();
     private final FLabel pchLabel;
 
-    private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
+    private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaVanguardAvatar")).build();
     private final FLabel vgdLabel;
 
     private FCheckBox chkDevMode;
@@ -112,11 +112,11 @@ public class PlayerPanel extends FPanel {
         this.mayControl = mayControl;
         this.allowNetworking = allowNetworking;
 
-        this.deckLabel = lobby.newLabel("Deck:");
-        this.scmLabel = lobby.newLabel("Scheme deck:");
-        this.cmdLabel = lobby.newLabel("Commander deck:");
-        this.pchLabel = lobby.newLabel("Planar deck:");
-        this.vgdLabel = lobby.newLabel("Vanguard:");
+        this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
+        this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
+        this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
+        this.pchLabel =  lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
+        this.vgdLabel =  lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 
@@ -128,7 +128,7 @@ public class PlayerPanel extends FPanel {
         this.add(avatarLabel, "spany 2, width 80px, height 80px");
 
         createNameEditor();
-        this.add(lobby.newLabel("Name:"), "w 40px, h 30px, gaptop 5px");
+        this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
         this.add(txtPlayerName, "h 30px, pushx, growx");
 
         nameRandomiser = createNameRandomizer();
@@ -138,7 +138,7 @@ public class PlayerPanel extends FPanel {
         this.add(radioHuman, "gapright 5px");
         this.add(radioAi, "wrap");
 
-        this.add(lobby.newLabel("Team:"), "w 40px, h 30px");
+        this.add(lobby.newLabel(localizer.getMessage("lblTeam") + ":"), "w 40px, h 30px");
         populateTeamsComboBoxes();
 
         // Set these before action listeners are added
@@ -161,9 +161,8 @@ public class PlayerPanel extends FPanel {
 
         addHandlersDeckSelector();
 
-        this.add(cmdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
-        this.add(cmdDeckSelectorBtn, variantBtnConstraints + ", cell 2 3, growx, pushx");
-        this.add(cmdDeckEditor, variantBtnConstraints + ", cell 3 3, sx 3, growx, wrap");
+        this.add(cmdLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
+        this.add(cmdDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
         this.add(scmLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
         this.add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
@@ -347,9 +346,7 @@ public class PlayerPanel extends FPanel {
 
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
-        cmdDeckSelectorBtn.setVisible(isCommanderApplied);            
-        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : isBrawl ? "Brawl Editor" : "Commander Deck Editor");
-        cmdDeckEditor.setVisible(isCommanderApplied);
+        cmdDeckSelectorBtn.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
         scmDeckSelectorBtn.setVisible(archenemyVisiblity);
@@ -454,8 +451,8 @@ public class PlayerPanel extends FPanel {
     }
 
     private void populateTeamsComboBoxes() {
-        aeTeamComboBox.addItem("Archenemy");
-        aeTeamComboBox.addItem("Heroes");
+        aeTeamComboBox.addItem(localizer.getMessage("lblArchenemy"));
+        aeTeamComboBox.addItem(localizer.getMessage("lblHeroes"));
 
         for (int i = 1; i <= VLobby.MAX_PLAYERS; i++) {
             teamComboBox.addItem(i);
@@ -516,25 +513,6 @@ public class PlayerPanel extends FPanel {
             }
         });
 
-        cmdDeckEditor.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                if (lobby.hasVariant(GameType.TinyLeaders)) {
-                    lobby.setCurrentGameMode(GameType.TinyLeaders);
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_TINY_LEADERS);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true, false));
-                } else if (lobby.hasVariant(GameType.Brawl)) {
-                    lobby.setCurrentGameMode(GameType.Brawl);
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_BRAWL);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, true));
-                } else {
-                    lobby.setCurrentGameMode(GameType.Commander);
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, false));
-                }
-            }
-        });
-
         // Planechase buttons
         pchDeckSelectorBtn.setCommand(new Runnable() {
             @Override
@@ -577,12 +555,12 @@ public class PlayerPanel extends FPanel {
      * @param index
      */
     private void createPlayerTypeOptions() {
-        radioHuman = new FRadioButton("Human");
-        radioAi = new FRadioButton("AI");
-        radioOpen = new FRadioButton("Open");
+        radioHuman = new FRadioButton(localizer.getMessage("lblHuman"));
+        radioAi = new FRadioButton(localizer.getMessage("lblAI"));
+        radioOpen = new FRadioButton(localizer.getMessage("lblOpen"));
 
         final JPopupMenu menu = new  JPopupMenu();
-        radioAiUseSimulation = new JCheckBoxMenuItem("Use Simulation");
+        radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
         menu.add(radioAiUseSimulation);
         radioAiUseSimulation.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
@@ -601,7 +579,7 @@ public class PlayerPanel extends FPanel {
     }
 
     private void createReadyButton() {
-        chkReady = new FCheckBox("Ready");
+        chkReady = new FCheckBox(localizer.getMessage("lblReady"));
         chkReady.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
                 lobby.setReady(index, chkReady.isSelected());
@@ -610,7 +588,7 @@ public class PlayerPanel extends FPanel {
     }
 
     private void createDevModeButton() {
-        chkDevMode = new FCheckBox("Dev Mode");
+        chkDevMode = new FCheckBox(localizer.getMessage("cbDevMode"));
 
         chkDevMode.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
@@ -645,7 +623,7 @@ public class PlayerPanel extends FPanel {
      * @return
      */
     private FLabel createNameRandomizer() {
-        final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
+        final FLabel newNameBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblGetaNewRandomName")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_EDIT)).hoverable(true).opaque(false)
                 .unhoveredAlpha(0.9f).build();
         newNameBtn.setCommand(new UiCommand() {
@@ -678,7 +656,7 @@ public class PlayerPanel extends FPanel {
         if (index == 0) {
             name = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
             if (name.isEmpty()) {
-                name = "Human";
+                name = localizer.getMessage("lblHuman");
             }
         }
         else {
@@ -687,17 +665,17 @@ public class PlayerPanel extends FPanel {
 
         txtPlayerName.setText(name);
         txtPlayerName.setFocusable(true);
-        txtPlayerName.setFont(FSkin.getFont(14));
+        txtPlayerName.setFont(FSkin.getRelativeFont(14));
         txtPlayerName.addActionListener(lobby.nameListener);
         txtPlayerName.addFocusListener(nameFocusListener);
     }
 
     private FLabel createCloseButton() {
-        final FLabel closeBtn = new FLabel.Builder().tooltip("Remove").iconInBackground(false)
+        final FLabel closeBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblRemove")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_CLOSE)).hoverable(true).build();
         closeBtn.setCommand(new Runnable() {
             @Override public final void run() {
-                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format("Really kick %s?", playerName), "Kick", false)) {
+                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format(localizer.getMessage("lblReallyKick"), playerName), localizer.getMessage("lblKick"), false)) {
                     return;
                 }
                 lobby.removePlayer(index);
@@ -715,7 +693,7 @@ public class PlayerPanel extends FPanel {
             setRandomAvatar(false);
         }
 
-        avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
+        avatarLabel.setToolTipText(localizer.getMessage("ttlblAvatar"));
         avatarLabel.addFocusListener(avatarFocusListener);
         avatarLabel.addMouseListener(avatarMouseListener);
     }

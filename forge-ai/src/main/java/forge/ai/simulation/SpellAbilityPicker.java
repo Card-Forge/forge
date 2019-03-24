@@ -140,13 +140,13 @@ public class SpellAbilityPicker {
         }
     }
 
-    private static boolean isSorcerySpeed(SpellAbility sa) {
+    private static boolean isSorcerySpeed(SpellAbility sa, Player player) {
         // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
         if (sa instanceof PlayLandAbility) {
             return false;
         }
         if (sa.isSpell()) {
-            return !sa.getHostCard().isInstant() && !sa.getHostCard().hasKeyword("Flash");
+            return !sa.getHostCard().isInstant() && !sa.getHostCard().withFlash(player);
         }
         if (sa.getRestrictions().isPwAbility()) {
             return !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.");
@@ -167,7 +167,7 @@ public class SpellAbilityPicker {
         if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             List<SpellAbility> candidateSAs2 = new ArrayList<SpellAbility>();
             for (SpellAbility sa : candidateSAs) {
-                if (!isSorcerySpeed(sa)) {
+                if (!isSorcerySpeed(sa, player)) {
                     System.err.println("Not sorcery: " + sa);
                     candidateSAs2.add(sa);
                 }

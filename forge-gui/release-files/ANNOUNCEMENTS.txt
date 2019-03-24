@@ -1,5 +1,5 @@
 #Add one announcement per line
-Dominaria is here! Can't make it to Pre-release? Don't have enough money to play all weekend? Supplement with Forge!
+A significant improvement was made to how we cache images which should improve memory usage
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
 We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
 Online Multiplayer is once again functional!

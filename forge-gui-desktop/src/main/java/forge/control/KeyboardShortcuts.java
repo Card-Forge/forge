@@ -26,6 +26,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.util.Localizer;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location
@@ -35,7 +36,6 @@ import forge.screens.match.CMatchUI;
  * and you're done.
  */
 public class KeyboardShortcuts {
-
     public static List<Shortcut> getKeyboardShortcuts() {
         return attachKeyboardShortcuts(null);
     }
@@ -200,20 +200,21 @@ public class KeyboardShortcuts {
             }
         };
 
+        final Localizer localizer = Localizer.getInstance();
         //========== Instantiate shortcut objects and add to list.
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWCONSOLE, "Match: show console panel", actShowConsole, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, "Match: show dev panel", actShowDev, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, "Match: concede game", actConcede, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, "Match: pass priority until EOT or next stack event", actEndTurn, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, "Match: Alpha Strike (attack with all available)", actAllAttack, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, "Match: toggle targeting visual overlay", actTgtOverlay, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, "Match: auto-yield ability on stack (Always Yes)", actAutoYieldAndYes, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, "Match: auto-yield ability on stack (Always No)", actAutoYieldAndNo, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, "Match: record a macro sequence of actions", actMacroRecord, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, "Match: execute next action in a recorded macro", actMacroNextAction, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, "Match: zoom the currently selected card", actZoomCard, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, localizer.getMessage("lblSHORTCUT_SHOWSTACK"), actShowStack, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, localizer.getMessage("lblSHORTCUT_SHOWCOMBAT"), actShowCombat, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWCONSOLE, localizer.getMessage("lblSHORTCUT_SHOWCONSOLE"), actShowConsole, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, localizer.getMessage("lblSHORTCUT_SHOWDEV"), actShowDev, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, localizer.getMessage("lblSHORTCUT_ALPHASTRIKE"), actAllAttack, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_NO"), actAutoYieldAndNo, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));
         return list;
     } // End initMatchShortcuts()
 

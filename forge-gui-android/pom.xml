@@ -4,9 +4,9 @@
     <properties>
         <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
         <packaging.type>jar</packaging.type>
-        <build.min.memory>-Xms128m</build.min.memory>
-        <build.max.memory>-Xmx1024m</build.max.memory>
-        <alpha-version>1.6.9.005</alpha-version>
+        <build.min.memory>-Xms1024m</build.min.memory>
+        <build.max.memory>-Xmx1536m</build.max.memory>
+        <alpha-version>1.6.22.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.10-SNAPSHOT</version>
+        <version>1.6.23-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -37,12 +37,12 @@
                 </configuration>
             </plugin>
         </plugins>
-	    <resources>
-	        <resource>
-	            <directory>filters</directory>
-	            <filtering>true</filtering>
-	        </resource>
-	    </resources>
+        <resources>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <finalName>forge-android-${alpha-version}</finalName>
     </build>
 
@@ -81,7 +81,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>16.0.1</version>
+            <version>24.1-android</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -283,6 +283,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-mobile-dev/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />

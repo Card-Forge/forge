@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Kaladesh
+Type:Historic
+Subtype:Standard
+Effective:2016-09-30
+Sets:BFZ, OGW, W16, SOI, EMN, KLD

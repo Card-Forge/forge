@@ -25,7 +25,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -36,12 +39,16 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Visitor;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
@@ -61,24 +68,27 @@ public class TriggerHandler {
     public final void cleanUpTemporaryTriggers() {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 boolean changed = false;
-                for (int i = 0; i < c.getTriggers().size(); i++) {
-                    Trigger trigger = c.getTriggers().get(i);
-                    if (trigger.isTemporary()) {
-                        c.removeTrigger(trigger);
-                        changed = true;
-                        i--;
+                List<Trigger> toRemove = Lists.newArrayList();
+                for (Trigger t : c.getTriggers()) {
+                    if (t.isTemporary()) {
+                        toRemove.add(t);
                     }
+                }
+                for (Trigger t : toRemove) {
+                    changed = true;
+                    c.removeTrigger(t);
                 }
                 if (changed) {
                     c.updateStateForView();
                 }
+                return true;
             }
         });
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 boolean changed = false;
                 for (int i = 0; i < c.getTriggers().size(); i++) {
                     if (c.getTriggers().get(i).isSuppressed()) {
@@ -89,6 +99,7 @@ public class TriggerHandler {
                 if (changed) {
                     c.updateStateForView();
                 }
+                return true;
             }
         });
     }
@@ -152,31 +163,51 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
-        final HashMap<String, String> mapParams = TriggerHandler.parseParams(trigParse);
-        return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+        try {
+            final Map<String, String> mapParams = TriggerHandler.parseParams(trigParse);
+            return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+        } catch (Exception e) {
+            String msg = "TriggerHandler:parseTrigger failed to parse";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Trigger", trigParse).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
+        }
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-        ret = type.createTrigger(mapParams, host, intrinsic);
+        try {
+            final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
+            ret = type.createTrigger(mapParams, host, intrinsic);
 
-        String triggerZones = mapParams.get("TriggerZones");
-        if (null != triggerZones) {
-            ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
-        }
+            String triggerZones = mapParams.get("TriggerZones");
+            if (null != triggerZones) {
+                ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+            }
 
-        String triggerPhases = mapParams.get("Phase");
-        if (null != triggerPhases) {
-            ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
+            String triggerPhases = mapParams.get("Phase");
+            if (null != triggerPhases) {
+                ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
+            }
+        } catch (Exception e) {
+            String msg = "TriggerHandler:parseTrigger failed to parse";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Params", mapParams.toString()).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
 
         return ret;
     }
 
-    private static HashMap<String, String> parseParams(final String trigParse) {
-        final HashMap<String, String> mapParams = new HashMap<String, String>();
+    private static Map<String, String> parseParams(final String trigParse) {
+        final Map<String, String> mapParams = Maps.newHashMap();
 
         if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");
@@ -226,12 +257,13 @@ public class TriggerHandler {
         activeTriggers.clear();
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 for (final Trigger t : c.getTriggers()) {
                     if (isTriggerActive(t)) {
                         activeTriggers.add(t);
                     }
                 }
+                return true;
             }
         });
     }
@@ -348,11 +380,7 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                int x = 1 + handlePanharmonicon(t, runParams);
-
-                for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, runParams);
-                }
+                runSingleTrigger(t, runParams);
 
                 checkStatics = true;
             }
@@ -420,7 +448,7 @@ public class TriggerHandler {
                     }
                 }
 
-                int x = 1 + handlePanharmonicon(t, runParams);;
+                int x = 1 + handlePanharmonicon(t, runParams, player);
 
                 for (int i = 0; i < x; ++i) {
                     runSingleTrigger(t, runParams);
@@ -601,14 +629,17 @@ public class TriggerHandler {
             host.addRemembered(sa.getActivatingPlayer());
         }
 
-        if (regtrig.isIntrinsic()) {
+        if (regtrig.isIntrinsic() && regtrig.getOverridingAbility() == null) {
             sa.setIntrinsic(true);
             sa.changeText();
         }
 
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                // 603.3c If no mode is chosen, the ability is removed from the stack.
+                return;
+            }
         }
 
         Player decider = null;
@@ -664,13 +695,19 @@ public class TriggerHandler {
         }
     }
 
-    private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams) {
-        final Card host = t.getHostCard();
-        final Player p = host.getController();
+    private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams, final Player p) {
+        Card host = t.getHostCard();
 
-        // not a changesZone trigger
-        if (t.getMode() != TriggerType.ChangesZone) {
+        // not a changesZone trigger or changesZoneAll
+        if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
             return 0;
+        }
+
+        // leave battlefield trigger, might be dying
+        // only real changeszone look back for this
+        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
+            // Need to get the last info from the trigger host
+            host = game.getChangeZoneLKIInfo(host);
         }
 
         // not a Permanent you control
@@ -679,14 +716,59 @@ public class TriggerHandler {
         }
 
         int n = 0;
-        for (final String kw : p.getKeywords()) {
-            if (kw.startsWith("Panharmonicon")) {
-                if (runParams.get("Destination") instanceof String) {
-                    final String dest = (String) runParams.get("Destination");
-                    if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
-                        final Card card = (Card) runParams.get("Card");
+        if (t.getMode() == TriggerType.ChangesZone) {
+            // iterate over all cards
+            final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
+            for (final Card ck : lastCards) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // Enter the Battlefield Trigger
+                        if (runParams.get("Destination") instanceof String) {
+                            final String dest = (String) runParams.get("Destination");
+                            if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
+                                final Card card = (Card) runParams.get("Card");
+                                final String valid = kw.split(":")[1];
+                                if (card.isValid(valid.split(","), p, ck, null)) {
+                                    n++;
+                                }
+                            }
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
+                        if (runParams.get("Origin") instanceof String) {
+                            final String origin = (String) runParams.get("Origin");
+                            if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
+                                final String dest = (String) runParams.get("Destination");
+                                if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
+                                    final Card card = (Card) runParams.get("Card");
+                                    final String valid = kw.split(":")[1];
+                                    if (card.isValid(valid.split(","), p, ck, null)) {
+                                        n++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (t.getMode() == TriggerType.ChangesZoneAll) {
+            final CardZoneTable table = (CardZoneTable) runParams.get("Cards");
+            // iterate over all cards
+            for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // currently there is no ChangesZoneAll that would trigger on etb
                         final String valid = kw.split(":")[1];
-                        if (card.isValid(valid.split(","), p, host, null)) {
+                        if (!table.filterCards(null, ZoneType.Battlefield, valid, ck, null).isEmpty()) {
+                            n++;
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
+                        final String valid = kw.split(":")[1];
+                        if (!table.filterCards(ImmutableList.of(ZoneType.Battlefield), ZoneType.Graveyard,
+                                valid, ck, null).isEmpty()) {
                             n++;
                         }
                     }

@@ -1,0 +1,17 @@
+Name:Ral, Izzet Viceroy
+ManaCost:3 U R
+Types:Legendary Planeswalker Ral
+Loyalty:5
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+DeckHas:Ability$Graveyard
+A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
+SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ral | Image$ emblem_ral | Triggers$ TrigSpellCast | SVars$ EffSpellCast,EffDraw | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards.
+SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ EffDraw
+SVar:EffDraw:DB$ Draw | Defined$ You | NumCards$ 2
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:[+1]: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\n[-3]: Ral, Izzet Viceroy deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\n[-8]: You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."

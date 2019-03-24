@@ -25,7 +25,7 @@ public class LblHeader extends SkinnedLabel {
     public LblHeader(final String txt0) {
         super(txt0);
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setFont(FSkin.getFont(18));
+        this.setFont(FSkin.getRelativeFont(18));
         this.setBorder(new EmptyBorder(5, 30, 0, 0));
     }
 

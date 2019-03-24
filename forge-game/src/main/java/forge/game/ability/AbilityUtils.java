@@ -18,6 +18,7 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -28,6 +29,9 @@ import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -221,10 +225,6 @@ public class AbilityUtils {
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        } else if (defined.equals("Clones")) {
-            for (final Card clone : hostCard.getClones()) {
-                cards.add(game.getCardState(clone));
-            }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
@@ -381,7 +381,7 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
+            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent) && !amount.equals("ChosenX")) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
@@ -439,6 +439,10 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.equals("YourTeam")) {
+                players.addAll(player.getYourTeam());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.equals("Opponents")) {
                 players.addAll(player.getOpponents());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
@@ -464,10 +468,18 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.startsWith("PropertyYou") && !(ability instanceof SpellAbility)) {
+                // Related to the controller of the card with ability when the ability is static (or otherwise not a SpellAbility)
+                // TODO: This doesn't work in situations when the controller of the card is different from the spell caster
+                // (e.g. opponent's Hollow One exiled by Hostage Taker - cost reduction will not work in this scenario, requires
+                // a more significant rework).
+                players.add(card.getController());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility)ability)) {
+                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility) ability)) {
                         players.add(p);
                     }
                 }
@@ -537,7 +549,7 @@ public class AbilityUtils {
             // Add whole Enchanted list to handlePaid
             final CardCollection list = new CardCollection();
             if (card.isEnchanting()) {
-                Object o = card.getEnchanting();
+                Object o = card.getEntityAttachedTo();
                 if (o instanceof Card) {
                     list.add(game.getCardState((Card) o));
                 }
@@ -891,7 +903,11 @@ public class AbilityUtils {
 
         final Player player = sa == null ? card.getController() : sa.getActivatingPlayer();
 
-        if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
+        if (defined.equals("TargetedOrController")) {
+            players.addAll(getDefinedPlayers(card, "Targeted", sa));
+            players.addAll(getDefinedPlayers(card, "TargetedController", sa));
+        }
+        else if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
                 players.addAll(saTargeting.getTargets().getTargetPlayers());
@@ -1102,7 +1118,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("EnchantedPlayer")) {
-            final Object o = sa.getHostCard().getEnchanting();
+            final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
                 if (!players.contains(o)) {
                     players.add((Player) o);
@@ -1336,6 +1352,15 @@ public class AbilityUtils {
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
+        final Card card = sa.getHostCard();
+
+        String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Api", sa.getApi().toString())
+                .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+        );
+
         // check conditions
         if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
@@ -1634,7 +1659,7 @@ public class AbilityUtils {
         return CardFactoryUtil.xCount(c, s2);
     }
 
-    public static final void applyManaColorConversion(final Player p, final Map<String, String> params) {
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
         String conversionType = params.get("ManaColorConversion");
 
         // Choices are Additives(OR) or Restrictive(AND)
@@ -1647,14 +1672,15 @@ public class AbilityUtils {
                 String convertTo = params.get(key);
                 byte convertByte = 0;
                 if ("All".equals(convertTo)) {
-                    convertByte = ColorSet.ALL_COLORS.getColor();
+                    // IMPORTANT! We need to use Mana Color here not Card Color.
+                    convertByte = ManaAtom.ALL_MANA_TYPES;
                 } else {
                     for (final String convertColor : convertTo.split(",")) {
                         convertByte |= ManaAtom.fromName(convertColor);
                     }
                 }
                 // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                p.getManaPool().adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+                matrix.adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
             }
         }
     }
@@ -1672,7 +1698,10 @@ public class AbilityUtils {
             res.setZone(null);
             newSA.setRestrictions(res);
             // timing restrictions still apply
-            if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
+            if (res.checkTimingRestrictions(tgtCard, newSA)
+                    // still need to check the other restrictions like Aftermath
+                    && res.checkOtherRestrictions(tgtCard, newSA, controller)
+                    && newSA.checkOtherRestrictions()) {
                 sas.add(newSA);
             }
         }
@@ -1713,12 +1742,18 @@ public class AbilityUtils {
     }
 
     private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+        return applyTextChangeEffects(def, isDescriptive,
+                card.getChangedTextColorWords(), card.getChangedTextTypeWords());
+    }
+
+    public static final String applyTextChangeEffects(final String def, final boolean isDescriptive,
+            Map<String,String> colorMap, Map<String,String> typeMap) {
         if (StringUtils.isEmpty(def)) {
             return def;
         }
 
         String replaced = def;
-        for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
+        for (final Entry<String, String> e : colorMap.entrySet()) {
             final String key = e.getKey();
             String value;
             if (key.equals("Any")) {
@@ -1739,7 +1774,7 @@ public class AbilityUtils {
                 replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
-        for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
+        for (final Entry<String, String> e : typeMap.entrySet()) {
             final String key = e.getKey();
             final String pkey = CardType.getPluralType(key);
             final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);

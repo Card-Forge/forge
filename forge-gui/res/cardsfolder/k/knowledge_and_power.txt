@@ -1,7 +1,7 @@
 Name:Knowledge and Power
 ManaCost:4 R
 Types:Enchantment
-T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you scry, you may pay {2}. If you do, CARDNAME deals 2 damage to target creature or player.
-SVar:TrigDmg:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you scry, you may pay {2}. If you do, CARDNAME deals 2 damage to any target.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_and_power.jpg
-Oracle:Whenever you scry, you may pay {2}. If you do, Knowledge and Power deals 2 damage to target creature or player.
+Oracle:Whenever you scry, you may pay {2}. If you do, Knowledge and Power deals 2 damage to any target.

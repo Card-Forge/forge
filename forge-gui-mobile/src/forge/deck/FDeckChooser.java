@@ -147,7 +147,8 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
-                        && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
+                        && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.LEGACY_CARDGEN_DECK
+                        && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
                         selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
                         && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
                     FDeckViewer.show(getDeck());
@@ -170,6 +171,12 @@ public class FDeckChooser extends FScreen {
                     DeckgenUtil.randomSelect(lstDecks);
                 }
                 else if (selectedDeckType == DeckType.MODERN_CARDGEN_DECK){
+                    DeckgenUtil.randomSelect(lstDecks);
+                }
+                else if (selectedDeckType == DeckType.LEGACY_CARDGEN_DECK){
+                    DeckgenUtil.randomSelect(lstDecks);
+                }
+                else if (selectedDeckType == DeckType.VINTAGE_CARDGEN_DECK){
                     DeckgenUtil.randomSelect(lstDecks);
                 }
                 else {
@@ -280,6 +287,8 @@ public class FDeckChooser extends FScreen {
         case RANDOM_CARDGEN_COMMANDER_DECK:
         case RANDOM_COMMANDER_DECK:
         case MODERN_CARDGEN_DECK:
+        case LEGACY_CARDGEN_DECK:
+        case VINTAGE_CARDGEN_DECK:
         case MODERN_COLOR_DECK:
         case THEME_DECK:
         case RANDOM_DECK:
@@ -459,6 +468,8 @@ public class FDeckChooser extends FScreen {
                 if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.LEGACY_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.VINTAGE_CARDGEN_DECK);
                 }
                 cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
@@ -654,7 +665,7 @@ public class FDeckChooser extends FScreen {
             maxSelections = 1;
             pool= new ArrayList<>();
             if(FModel.isdeckGenMatrixLoaded()) {
-                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
             }
             config = ItemManagerConfig.STRING_ONLY;
             break;
@@ -662,10 +673,27 @@ public class FDeckChooser extends FScreen {
             maxSelections = 1;
             pool= new ArrayList<>();
             if(FModel.isdeckGenMatrixLoaded()) {
-                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
             }
             config = ItemManagerConfig.STRING_ONLY;
             break;
+        case LEGACY_CARDGEN_DECK:
+                maxSelections = 1;
+                pool= new ArrayList<>();
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Legacy"), isAi);
+                }
+                config = ItemManagerConfig.STRING_ONLY;
+                break;
+        case VINTAGE_CARDGEN_DECK:
+                maxSelections = 1;
+                pool= new ArrayList<>();
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Vintage"), isAi);
+                }
+                config = ItemManagerConfig.STRING_ONLY;
+                break;
+
         case MODERN_COLOR_DECK:
             maxSelections = 3;
             pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getModern().getFilterPrinted(), isAi);
@@ -1013,12 +1041,16 @@ public class FDeckChooser extends FScreen {
                         DeckType.STANDARD_CARDGEN_DECK,
                         DeckType.MODERN_COLOR_DECK,
                         DeckType.MODERN_CARDGEN_DECK,
+                        DeckType.LEGACY_CARDGEN_DECK,
+                        DeckType.VINTAGE_CARDGEN_DECK,
                         DeckType.THEME_DECK,
                         DeckType.NET_DECK
                 );
                 if (!FModel.isdeckGenMatrixLoaded()) {
                     deckTypes.remove(DeckType.STANDARD_CARDGEN_DECK);
                     deckTypes.remove(DeckType.MODERN_CARDGEN_DECK);
+                    deckTypes.remove(DeckType.LEGACY_CARDGEN_DECK);
+                    deckTypes.remove(DeckType.VINTAGE_CARDGEN_DECK);
                 }
 
                 ListChooser<DeckType> chooser = new ListChooser<DeckType>(

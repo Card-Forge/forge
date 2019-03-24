@@ -30,6 +30,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -38,11 +39,11 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -59,9 +60,6 @@ public class AiAttackController {
     // possible attackers and blockers
     private final List<Card> attackers;
     private final List<Card> blockers;
-
-    private final static Random random = new Random();
-    private final static int randomInt = random.nextInt();
 
     private List<Card> oppList; // holds human player creatures
     private List<Card> myList; // holds computer creatures
@@ -105,7 +103,7 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
-        List<Card> defenders = Lists.newArrayList();
+        List<Card> defenders = new ArrayList<Card>();
         defenders.addAll(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
@@ -204,8 +202,11 @@ public class AiAttackController {
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
-        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted") 
-        		&& ComputerUtilCombat.predictDamageTo(opp, 1, attacker, true) > 0) {
+
+        // TODO check if that makes sense
+        int exalted = ai.countExaltedBonus();
+        if (this.attackers.size() == 1 && exalted > 0
+                && ComputerUtilCombat.predictDamageTo(opp, exalted, attacker, true) > 0) {
             return true;
         }
 
@@ -267,6 +268,40 @@ public class AiAttackController {
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
+        // no need to block (already holding mana to cast fog next turn)
+        if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+            // Don't send the card that'll do the fog effect to attack, it's unsafe!
+
+            List<Card> toRemove = Lists.newArrayList();
+            for(Card c : attackers) {
+                if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+                    toRemove.add(c);
+                }
+            }
+            attackers.removeAll(toRemove);
+
+            return attackers;
+        }
+
+        // no need to block if an effect is in play which untaps all creatures (pseudo-Vigilance akin to
+        // Awakening or Prophet of Kruphix)
+        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
+            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
+
+            if (untapsEachTurn || untapsEachOtherTurn) {
+                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
+                        : card.getSVar("UntapsEachOtherPlayerTurn");
+
+                for (String aff : TextUtil.split(affected, ',')) {
+                    if (aff.equals("Creature")
+                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                        return attackers;
+                    }
+                }
+            }
+        }
+
         List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
@@ -285,7 +320,7 @@ public class AiAttackController {
                 }
                 continue;
             }
-            if (c.hasKeyword("Vigilance")) {
+            if (c.hasKeyword(Keyword.VIGILANCE)) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
                 if (canBlockAnAttacker(c, opponentsAttackers, false)) {
@@ -327,7 +362,7 @@ public class AiAttackController {
         // In addition, if the computer guesses it needs no blockers, make sure
         // that
         // it won't be surprised by Exalted
-        final int humanExaltedBonus = countExaltedBonus(opp);
+        final int humanExaltedBonus = opp.countExaltedBonus();
 
         if (humanExaltedBonus > 0) {
             final boolean finestHour = opp.isCardInPlay("Finest Hour");
@@ -512,7 +547,7 @@ public class AiAttackController {
         
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
-            if (attacker.hasKeyword("Trample")) {
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int damage = ComputerUtilCombat.getAttack(attacker);
                 for (Card blocker : this.blockers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
@@ -586,13 +621,6 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final void declareAttackers(final Combat combat) {
-        // if this method is called multiple times during a turn,
-        // it will always return the same value
-        // randomInt is used so that the computer doesn't always
-        // do the same thing on turn 3 if he had the same creatures in play
-        // I know this is a little confusing
-        
-        random.setSeed(ai.getGame().getPhaseHandler().getTurn() + AiAttackController.randomInt);
 
         if (this.attackers.isEmpty()) {
             return;
@@ -705,20 +733,15 @@ public class AiAttackController {
         
         // Exalted
         if (combat.getAttackers().isEmpty()) {
-            boolean exalted = false;
-            int exaltedCount = 0;
-            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-                if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
-                    exalted = true;
-                    break;
-                }
-                if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
-                    exalted = true;
-                    break;
-                }
-                if (c.hasKeyword("Exalted")) {
-                    exaltedCount++;
-                    if (exaltedCount > 2) {
+            boolean exalted = ai.countExaltedBonus() > 2;
+
+            if (!exalted) {
+                for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                    if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
+                        exalted = true;
+                        break;
+                    }
+                    if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
                         exalted = true;
                         break;
                     }
@@ -1027,24 +1050,6 @@ public class AiAttackController {
 
     /**
      * <p>
-     * countExaltedBonus.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a int.
-     */
-    public final static int countExaltedBonus(final Player player) {
-        int bonus = 0;
-        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-            bonus += c.getAmountOfKeyword("Exalted");
-        }
-
-        return bonus;
-    }
-
-    /**
-     * <p>
      * getAttack.
      * </p>
      * 
@@ -1055,7 +1060,7 @@ public class AiAttackController {
     public final static int getAttack(final Card c) {
         int n = c.getNetCombatDamage();
 
-        if (c.hasKeyword("Double Strike")) {
+        if (c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
             n *= 2;
         }
 
@@ -1086,7 +1091,7 @@ public class AiAttackController {
 
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if ((attacker.hasSVar("NonCombatPriority"))
-                && (!attacker.hasKeyword("Vigilance"))) {
+                && (!attacker.hasKeyword(Keyword.VIGILANCE))) {
             // For each level of priority, enemy has to have life as much as the creature's power
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
@@ -1138,7 +1143,7 @@ public class AiAttackController {
                     && CombatUtil.canBlock(attacker, defender)) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
-                        && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
+                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
@@ -1154,14 +1159,11 @@ public class AiAttackController {
                     if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
-                        for (KeywordInterface inst : defender.getKeywords()) {
-                            String keyword = inst.getOriginal();
-                            if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
-                                canKillAllDangerous = false;
-                                break;
-                                // there is a creature that can survive an attack from this creature
-                                // and combat will have negative effects
-                            }
+                        if (defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT)
+                                || defender.hasKeyword(Keyword.LIFELINK)) {
+                            canKillAllDangerous = false;
+                            // there is a creature that can survive an attack from this creature
+                            // and combat will have negative effects
                         }
 
                         // Check if maybe we are too reckless in adding this attacker
@@ -1185,7 +1187,7 @@ public class AiAttackController {
             }
         }
         
-        if (!attacker.hasKeyword("Vigilance") && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
+        if (!attacker.hasKeyword(Keyword.VIGILANCE) && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
             canBeKilledByOne = true;
@@ -1271,7 +1273,7 @@ public class AiAttackController {
                 // creature would leave the battlefield
                 // no pain in exerting it
                 shouldExert = true;
-            } else if (c.hasKeyword("Vigilance")) {
+            } else if (c.hasKeyword(Keyword.VIGILANCE)) {
                 // Free exert - why not?
                 shouldExert = true;
             }
@@ -1334,7 +1336,7 @@ public class AiAttackController {
                 }
             }
 
-            if (!shouldExert && random.nextBoolean()) {
+            if (!shouldExert && MyRandom.getRandom().nextBoolean()) {
                 // TODO Improve when the AI wants to use Exert powers
                 shouldExert = true;
             }

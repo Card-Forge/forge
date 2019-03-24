@@ -5,5 +5,5 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.Red,Planeswalker.Red | TgtPromp
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Chandra | Optional$ True
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-True SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_defeat.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_defeat.jpg
 Oracle:Chandra's Defeat deals 5 damage to target red creature or red planeswalker. If that permanent is a Chandra planeswalker, you may discard a card. If you do, draw a card.

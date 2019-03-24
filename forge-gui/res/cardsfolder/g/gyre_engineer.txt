@@ -1,0 +1,6 @@
+Name:Gyre Engineer
+ManaCost:1 G U
+Types:Creature Vedalken Wizard
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G U | SpellDescription$ Add {G}{U}.
+Oracle:{T}: Add {G}{U}.

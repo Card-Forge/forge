@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -18,7 +19,7 @@ public class DestroyAllAi extends SpellAbilityAi {
     private static final Predicate<Card> predicate = new Predicate<Card>() {
         @Override
         public boolean apply(final Card c) {
-            return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            return !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getSVar("SacMe").length() > 0);
         }
     };
 
@@ -64,9 +65,14 @@ public class DestroyAllAi extends SpellAbilityAi {
 
     public boolean doMassRemovalLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         Player opponent = ComputerUtil.getOpponentFor(ai); // TODO: how should this AI logic work for multiplayer and getOpponents()?
 
         final int CREATURE_EVAL_THRESHOLD = 200;
+
+        if (logic.equals("Always")) {
+            return true; // e.g. Tetzimoc, Primal Death, where we want to cast the permanent even if the removal trigger does nothing
+        }
 
         String valid = "";
         if (sa.hasParam("ValidCards")) {

@@ -13,4 +13,4 @@ AILife=52
 humanhand=Twin Bolt;Hydroblast;Borrowed Hostility;Gush
 humanbattlefield=Mountain;Mountain;Island;Island;Insectile Aberration|Transformed;Kiln Fiend;Nivix Cyclops
 humanlibrary=Brainstorm;Apostle's Blessing;Mutagenic Growth;Temur Battle Rage;Echoing Truth;Swiftwater Cliffs
-aibattlefield=Gurmag Angler|Id:18|Counters:P1P0=1|Attacking;Dragon Scales|Attaching:18;Goblin Bushwhacker|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking
+aibattlefield=Gurmag Angler|Id:18|Counters:P1P0=1|Attacking;Dragon Scales|AttachedTo:18;Goblin Bushwhacker|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking

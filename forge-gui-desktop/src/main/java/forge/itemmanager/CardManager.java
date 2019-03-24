@@ -7,6 +7,7 @@ import forge.itemmanager.filters.*;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
+import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 
@@ -82,7 +83,7 @@ public class CardManager extends ItemManager<PaperCard> {
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {
@@ -92,12 +93,32 @@ public class CardManager extends ItemManager<PaperCard> {
         }
         menu.add(fmt);
 
+        GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
+            @Override public void run() {
+                final CardFormatFilter existingFilter = itemManager.getFilter(CardFormatFilter.class);
+                if (existingFilter != null) {
+                    existingFilter.edit(itemManager);
+                } else {
+                    final DialogChooseFormats dialog = new DialogChooseFormats();
+                    dialog.setWantReprintsCB(true); // assume user wants things permissive...
+                    dialog.setOkCallback(new Runnable() {
+                        @Override public void run() {
+                            final List<GameFormat> formats = dialog.getSelectedFormats();
+                            if (!formats.isEmpty()) {
+                                itemManager.addFilter(new CardFormatFilter(itemManager,formats,dialog.getWantReprints()));
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override
             public void run() {
                 CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
                 if (existingFilter != null) {
-                    existingFilter.edit();
+                    existingFilter.edit(itemManager);
                 }
                 else {
                     final DialogChooseSets dialog = new DialogChooseSets(null, null, true);

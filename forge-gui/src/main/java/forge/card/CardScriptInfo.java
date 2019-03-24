@@ -72,7 +72,7 @@ public final class CardScriptInfo {
             String[] folders = { String.valueOf(filename.charAt(0)), "upcoming"};
             
             for(String folder : folders){
-               final File file = new File(ForgeConstants.CARD_DATA_DIR + filename.charAt(0) + File.separator + filename);
+               final File file = new File(ForgeConstants.CARD_DATA_DIR + folder + File.separator + filename);
                if (file.exists()) {
                    script = new CardScriptInfo(FileUtil.readFileToString(file), file);
                    allScripts.put(name, script);

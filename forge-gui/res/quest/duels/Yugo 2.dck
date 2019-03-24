@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Yugo 2
+Title=Yugo
+Difficulty=medium
+Description=Mono Blue Tempo deck with permission, card draw, and Tempest Djinn.
+Deck Type=constructed
+Icon=Yugo.jpg
+[main]
+2 Chart a Course|XLN
+4 Curious Obsession|RIX
+4 Dive Down|XLN
+1 Essence Scatter|M19
+20 Island
+4 Merfolk Trickster|DOM
+4 Mist-Cloaked Herald|M19
+4 Opt|DOM
+4 Siren Stormtamer|XLN
+1 Sleep|M19
+2 Spell Pierce|XLN
+4 Tempest Djinn|DOM
+2 Warkite Marauder|RIX
+4 Wizard's Retort|DOM

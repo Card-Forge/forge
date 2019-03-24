@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature,Land | Defined$ TriggeredCardController
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_aether.jpg
 Oracle:Whenever a creature enters the battlefield, its controller sacrifices a creature or land.

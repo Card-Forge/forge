@@ -1,0 +1,6 @@
+Name:Worm
+ManaCost:no cost
+Types:Creature Worm
+Colors:black,green
+PT:1/1
+Oracle:

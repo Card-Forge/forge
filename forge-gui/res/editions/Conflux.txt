@@ -155,3 +155,11 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 56 C Wretched Banquet
 57 C Yoke of the Damned
 133 C Zombie Outlander
+
+[tokens]
+mirror-sigil_sergeant
+w_4_4_angel_flying
+w_1_1_soldier
+b_2_2_zombie
+r_3_1_elemental_haste
+g_1_1_saproling

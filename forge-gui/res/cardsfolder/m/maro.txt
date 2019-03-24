@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maro.jpg
 Oracle:Maro's power and toughness are each equal to the number of cards in your hand.

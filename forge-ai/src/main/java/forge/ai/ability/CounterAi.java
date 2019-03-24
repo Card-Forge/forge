@@ -105,7 +105,7 @@ public class CounterAi extends SpellAbilityAi {
             boolean setPayX = false;
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
-                toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                toPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), usableManaSources + 1);
             } else {
                 toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
             }

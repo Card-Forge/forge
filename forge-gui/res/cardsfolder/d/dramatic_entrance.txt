@@ -2,6 +2,6 @@ Name:Dramatic Entrance
 ManaCost:3 G G
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | SpellDescription$ You may put a green creature card from your hand onto the battlefield.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dramatic_entrance.jpg
 Oracle:You may put a green creature card from your hand onto the battlefield.

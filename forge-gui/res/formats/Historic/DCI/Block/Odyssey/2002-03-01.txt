@@ -1,0 +1,6 @@
+[format]
+Name:Odyssey Block, Torment
+Type:Historic
+Subtype:Block
+Effective:2002-03-01
+Sets:ODY, TOR

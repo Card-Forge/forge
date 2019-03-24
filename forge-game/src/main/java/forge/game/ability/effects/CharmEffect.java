@@ -67,6 +67,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
+        } else if (min == 0) {
+            sb.append("up to ").append(Lang.getNumeral(num));
         } else {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
@@ -101,6 +103,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
+        } else if (min == 0) {
+            sb.append("up to ").append(Lang.getNumeral(num));
         } else {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
@@ -146,19 +150,19 @@ public class CharmEffect extends SpellAbilityEffect {
         return "";
     }
 
-    public static void makeChoices(SpellAbility sa) {
+    public static boolean makeChoices(SpellAbility sa) {
         //this resets all previous choices
         sa.setSubAbility(null);
 
         // Entwine does use all Choices
         if (sa.isEntwine()) {
             chainAbilities(sa, makePossibleOptions(sa));
-            return;
+            return true;
         }
 
         final int num = sa.hasParam("CharmNumOnResolve") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa)
-                : Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+                : Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
 
         Card source = sa.getHostCard();
@@ -177,6 +181,7 @@ public class CharmEffect extends SpellAbilityEffect {
         
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam("CanRepeatModes"));
         chainAbilities(sa, chosen);
+        return chosen != null && !chosen.isEmpty();
     }
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {

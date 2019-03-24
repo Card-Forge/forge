@@ -24,8 +24,10 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -123,6 +125,11 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return false;
             }
         }
+        if (hasParam("ValidSA")) {
+            if (!matchesValid(spellAbility, getParam("ValidSA").split(","), getHostCard())) {
+                return false;
+            }
+        }
 
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
@@ -150,6 +157,31 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
             if (!validTgtFound) {
                  return false;
+            }
+        }
+
+        if (hasParam("CanTargetOtherCondition")) {
+            final CardCollection candidates = new CardCollection();
+            SpellAbility targetedSA = spellAbility;
+            while (targetedSA != null) {
+                if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                    break;
+                }
+                targetedSA = targetedSA.getSubAbility();
+            }
+            if (targetedSA == null) {
+                return false;
+            }
+            final List<GameEntity> candidateTargets = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+            for (GameEntity card : candidateTargets) {
+                if (card instanceof Card) {
+                    candidates.add((Card) card);
+                }
+            }
+            candidates.removeAll(targetedSA.getTargets().getTargetCards());
+            String valid = this.mapParams.get("CanTargetOtherCondition");
+            if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard()).isEmpty()) {
+                return false;
             }
         }
 
@@ -204,24 +236,6 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (hasParam("SpellSpeed")) {
-            if (getParam("SpellSpeed").equals("NotSorcerySpeed")) {
-                if (getHostCard().getController().couldCastSorcery(spellAbility)) {
-                    return false;
-                }
-                if (getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
-                        + "sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning"
-                        + " of the next cleanup step.")) {
-                    // for these cards the trigger must only fire if using their own ability to cast at instant speed
-                    if (getHostCard().hasKeyword("Flash")
-                            || getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        }
-
         if (hasParam("SharesNameWithActivatorsZone")) {
             String zones = getParam("SharesNameWithActivatorsZone");
             if (si == null) {
@@ -254,6 +268,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         sa.setTriggeringObject("Player", getRunParams().get("Player"));
         sa.setTriggeringObject("Activator", getRunParams().get("Activator"));
         sa.setTriggeringObject("CurrentStormCount", getRunParams().get("CurrentStormCount"));
+        sa.setTriggeringObject("CurrentCastSpells", getRunParams().get("CurrentCastSpells"));
         sa.setTriggeringObject("CastSACMC", getRunParams().get("CastSACMC"));
     }
 

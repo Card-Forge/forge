@@ -6,6 +6,6 @@ SVar:TrigLimDulSac:DB$ Repeat | MaxRepeat$ X | RepeatSubAbility$ DBSac | Referen
 SVar:DBSac:DB$ Sacrifice | SacValid$ Permanent.Other | Amount$ 1 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You
 A:AB$ Draw | Cost$ B B | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:TriggerCount$LifeAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_lim_dul.jpg
 Oracle:Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dul unless you discard a card. (Damage dealt to you causes you to lose life.)\n{B}{B}: Draw a card.

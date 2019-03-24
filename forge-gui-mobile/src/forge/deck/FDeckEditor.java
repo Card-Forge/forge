@@ -730,7 +730,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (deck == null || card == null) {
                     max = Integer.MAX_VALUE;
                 }
-                else if (limit == CardLimit.None || card.getRules().getType().isBasic() || DeckFormat.getLimitExceptions().contains(card.getName())) {
+                else if (limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
                     max = Integer.MAX_VALUE;
                     if (parentScreen.isLimitedEditor() && !isAddSource) {
                         //prevent adding more than is in other pool when editing limited decks
@@ -1490,15 +1490,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             modelPath = "";
         }
 
-        public Deck getDeck() {
-            if (model == null) { return null; }
-
-            if (model instanceof Deck) {
-                return (Deck) model;
-            }
-            return ((DeckGroup) model).getHumanDeck();
-        }
-
         public T getModel() {
             return model;
         }
@@ -1537,7 +1528,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 modelPath = "";
                 setSaved(true);
             }
-            editor.setDeck(getDeck());
+            if (model != null) {
+            	editor.setDeck(model.getHumanDeck());
+            }
+            else {
+            	editor.setDeck(null);
+            }
+            	
         }
 
         private boolean isModelInSyncWithFolder() {
@@ -1661,7 +1658,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             default:
                 break;
             }
-            editor.setDeck(getDeck());
+            editor.setDeck(model.getHumanDeck());
             if (editor.saveHandler != null) {
                 editor.saveHandler.handleEvent(new FEvent(editor, FEventType.SAVE));
             }

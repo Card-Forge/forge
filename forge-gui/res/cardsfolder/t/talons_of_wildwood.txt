@@ -1,0 +1,9 @@
+Name:Talons of Wildwood
+ManaCost:1 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Enchanted creature gets +1/+1 and has trample.
+A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+SVar:DiscardMe:1
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)\n{2}{G}: Return Talons of Wildwood from your graveyard to your hand.

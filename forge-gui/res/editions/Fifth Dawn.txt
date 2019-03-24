@@ -175,3 +175,9 @@ FoilAlwaysInCommonSlot=False
 100 C Viridian Scout
 80 C Vulshok Sorcerer
 165 C Wayfarer's Bauble
+
+[tokens]
+kaldra
+c_2_2_pincher
+g_3_3_beast
+g_1_1_insect

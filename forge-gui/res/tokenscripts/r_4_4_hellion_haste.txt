@@ -1,0 +1,7 @@
+Name:Hellion
+ManaCost:no cost
+Types:Creature Hellion
+Colors:red
+PT:4/4
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

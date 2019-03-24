@@ -1,0 +1,6 @@
+Name:Goblin Rogue
+ManaCost:no cost
+Types:Creature Goblin Rogue
+Colors:black
+PT:1/1
+Oracle:

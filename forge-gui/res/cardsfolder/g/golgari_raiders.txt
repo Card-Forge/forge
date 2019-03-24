@@ -1,0 +1,10 @@
+Name:Golgari Raiders
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:0/0
+K:Haste
+K:etbCounter:P1P1:X:no Condition:Undergrowth - CARDNAME enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
+SVar:X:Count$LastStateGraveyard Creature.YouCtrl
+SVar:NeedsToPlayVar:X GE3
+DeckHas:Ability$Counters
+Oracle:Haste\nUndergrowth — Golgari Raiders enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.

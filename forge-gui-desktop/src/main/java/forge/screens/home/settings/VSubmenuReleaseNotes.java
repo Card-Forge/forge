@@ -28,7 +28,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import net.miginfocom.swing.MigLayout;
-
+import forge.util.Localizer;
 import javax.swing.*;
 
 /**
@@ -40,10 +40,11 @@ import javax.swing.*;
 public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
 
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Release Notes");
+    private final DragTab tab = new DragTab(localizer.getMessage("ReleaseNotes"));
 
     private final JPanel pnlMain = new JPanel();
     private SkinnedTextArea tar;
@@ -60,7 +61,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setEditable(false);
         tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        tar.setFont(FSkin.getFixedFont(16));
+        tar.setFont(FSkin.getRelativeFixedFont(16));
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -93,7 +94,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
      */
     @Override
     public String getMenuTitle() {
-        return "Release Notes";
+        return localizer.getMessage("ReleaseNotes");
     }
 
     /* (non-Javadoc)

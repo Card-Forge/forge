@@ -38,7 +38,7 @@ public class LblGroup extends SkinnedLabel implements ILocalRepaint {
     public LblGroup(final EMenuGroup e0) {
         super("  " + e0.getTitle());
 
-        this.setFont(FSkin.getBoldFont(14));
+        this.setFont(FSkin.getRelativeBoldFont(14));
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {

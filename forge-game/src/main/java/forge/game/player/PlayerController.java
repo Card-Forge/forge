@@ -20,6 +20,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.trigger.WrappedAbility;
@@ -80,6 +81,9 @@ public abstract class PlayerController {
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
+    public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended
+    public void endTempShowCards() { }
+
     public final SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities) { return getAbilityToPlay(hostCard, abilities, null); }
     public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
@@ -107,9 +111,11 @@ public abstract class PlayerController {
     public final <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, SpellAbility sa, String title) { return chooseSingleEntityForEffect(optionList, null, sa, title, false, null); }
     public final <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleEntityForEffect(optionList, null, sa, title, isOptional, null); } 
     public abstract <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
-    public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
+    public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            Map<String, Object> params);
 
-    public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
+    public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
+    public abstract <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
@@ -139,6 +145,8 @@ public abstract class PlayerController {
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN);
+    public abstract ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN);
+
     public abstract boolean willPutCardOnTop(Card c);
     public final CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone) {
         return orderMoveToZoneList(cards, destinationZone, null);
@@ -217,9 +225,13 @@ public abstract class PlayerController {
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility) {
-        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, isActivatedAbility);
+        return payManaCost(costPartMana, sa, prompt, null, isActivatedAbility);
     }
-    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility);
+
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility) {
+        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, isActivatedAbility);
+    }
+    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility);
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise);
 
@@ -231,7 +243,7 @@ public abstract class PlayerController {
     // better to have this odd method than those if playerType comparison in ChangeZone  
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
 
-    public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, Player decider);
+    public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
 
     public abstract void autoPassCancel();
 
@@ -248,8 +260,10 @@ public abstract class PlayerController {
     }
 
     public AnteResult getAnteResult() {
-        return game.getOutcome().anteResult.get(player);
+        return game.getOutcome().anteResult.get(player.getRegisteredPlayer());
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
+
+    public abstract boolean confirmMulliganScry(final Player p);
 }

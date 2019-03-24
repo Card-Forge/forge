@@ -62,6 +62,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FRadioButton radHard = new FRadioButton("Hard");
     private final FRadioButton radExpert = new FRadioButton("Expert");
     private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+    private final FCheckBox boxCommander = new FCheckBox("Commander Subformat");
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
@@ -82,6 +83,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
+    private final FLabel btnSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Select format").build();
+
 
     private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
     private final FCheckBox boxAllowDuplicates = new FCheckBox("Allow duplicate cards");
@@ -90,6 +93,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text("Choose Distribution").build();
 
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
+
+    private final FLabel btnPrizeSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Select format").build();
 
     private final FLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
     private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<>();
@@ -116,10 +121,11 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
             cbxPreconDeck.setVisible(newVal == StartingPoolType.Precon);
 
-            lblFormat.setVisible(newVal == StartingPoolType.Rotating);
-            cbxFormat.setVisible(newVal == StartingPoolType.Rotating);
+            lblFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+            cbxFormat.setVisible(newVal == StartingPoolType.Sanctioned);
 
             btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+            btnSelectFormat.setVisible(newVal == StartingPoolType.Casual);
 
 
             final boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
@@ -152,9 +158,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
             cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
 
-            lblPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
-            cbxPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
+            lblPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+            cbxPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
             btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+            btnPrizeSelectFormat.setVisible(newVal == StartingPoolType.Casual);
             lblPrizeSameAsStarting.setVisible(newVal == null);
         }
     };
@@ -200,7 +207,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         boxAllowDuplicates.setToolTipText("When your starting pool is generated, duplicates of cards may be included.");
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
-        cbxStartingPool.addItem(StartingPoolType.Rotating);
+        cbxStartingPool.addItem(StartingPoolType.Sanctioned);
+        cbxStartingPool.addItem(StartingPoolType.Casual);
         cbxStartingPool.addItem(StartingPoolType.CustomFormat);
         cbxStartingPool.addItem(StartingPoolType.Precon);
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
@@ -214,11 +222,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         cbxPrizedCards.addItem("Same as starting pool");
         cbxPrizedCards.addItem(StartingPoolType.Complete);
-        cbxPrizedCards.addItem(StartingPoolType.Rotating);
+        cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
+        cbxPrizedCards.addItem(StartingPoolType.Casual);
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.addActionListener(alPrizesPool);
 
-        for (final GameFormat gf : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat gf : FModel.getFormats().getSanctionedList()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
@@ -266,9 +275,25 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             }
         });
 
-        // Fantasy box enabled by Default
+        // Fantasy box selected by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
+
+        // Commander box unselected by Default
+        boxCommander.setSelected(false);
+        boxCommander.setEnabled(true);
+
+        boxCommander.addActionListener(
+                new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        if(!isCommander()) return; //do nothing if unselecting Commander Subformat
+                        //Otherwise, set the starting world to Random Commander
+                        cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
+                    }
+        }
+
+        );
+
         boxCompleteSet.setEnabled(true);
         boxAllowDuplicates.setEnabled(true);
 
@@ -278,6 +303,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
         pnlDifficultyMode.add(boxFantasy, "h 25px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(boxCommander, "h 25px!, gapbottom 15, gapright 4%");
         pnlDifficultyMode.add(lblStartingWorld, "h 25px!, hidemode 3");
         cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, gapbottom 7");
         pnlDifficultyMode.setOpaque(false);
@@ -311,6 +337,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxFormat.addTo(pnlRestrictions, constraints + cboWidthStart + " cell 1 1");
 
         pnlRestrictions.add(btnDefineCustomFormat, btnStartingCustomFormatWidth + constraints + hidemode + " cell 1 1");
+        pnlRestrictions.add(btnSelectFormat, btnStartingCustomFormatWidth + constraints + hidemode + " cell 1 1");
 
         pnlRestrictions.add(boxAllowDuplicates, "h 15px!, cell 1 2");
         pnlRestrictions.add(boxCompleteSet, "h 15px!, cell 1 3");
@@ -325,6 +352,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizeFormat, constraints + hidemode + "cell 0 6");
         cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart + "cell 1 6"); // , skip 1
         pnlRestrictions.add(btnPrizeDefineCustomFormat, btnStartingCustomFormatWidth + constraints + hidemode + "cell 1 6");
+        pnlRestrictions.add(btnPrizeSelectFormat, btnStartingCustomFormatWidth + constraints + hidemode + "cell 1 6");
         pnlRestrictions.add(lblPrizeSameAsStarting, constraints + hidemode + "cell 1 6");
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "cell 1 6");
 
@@ -477,6 +505,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         return boxFantasy.isSelected();
     }
 
+    /**
+     * Auth. Imakuni
+     * @return True if the "Commander Subformat" check box is selected.
+     */
+    public boolean isCommander() {
+        return boxCommander.isSelected();
+    }
+
     public boolean startWithCompleteSet() {
         return boxCompleteSet.isSelected();
     }
@@ -498,8 +534,22 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         return cbxPrizeFormat.getSelectedItem();
     }
 
+    public GameFormat getCasualFormat() {
+        return cbxFormat.getSelectedItem();
+    }
+
+    public GameFormat getPrizedCasualFormat() {
+        return cbxPrizeFormat.getSelectedItem();
+    }
+
     public FLabel getBtnCustomFormat() {
         return btnDefineCustomFormat;
+    }
+    public FLabel getBtnSelectFormat() {
+        return btnSelectFormat;
+    }
+    public FLabel getBtnPrizeSelectFormat() {
+        return btnPrizeSelectFormat;
     }
     public FLabel getBtnPrizeCustomFormat() {
         return btnPrizeDefineCustomFormat;

@@ -65,9 +65,17 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     protected final <T> void set(final TrackableProperty key, final T value) {
-        if (tracker != null && tracker.isFrozen() && key.respectFreeze()) { //if trackable objects currently frozen, queue up delayed prop change
-            tracker.addDelayedPropChange(this, key, value);
-            return;
+        if (tracker != null && tracker.isFrozen()) { //if trackable objects currently frozen, queue up delayed prop change
+            boolean respectsFreeze = false;
+            if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
+                respectsFreeze = true;
+            } else if (key.getFreezeMode() == TrackableProperty.FreezeMode.IgnoresFreezeIfUnset) {
+                respectsFreeze = (props.get(key) != null);
+            }
+            if (respectsFreeze) {
+                tracker.addDelayedPropChange(this, key, value);
+                return;
+            }
         }
         if (value == null || value.equals(key.getDefaultValue())) {
             if (props.remove(key) != null) {

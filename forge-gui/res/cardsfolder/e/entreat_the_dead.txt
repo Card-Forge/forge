@@ -1,0 +1,8 @@
+Name:Entreat the Dead
+ManaCost:X X B B B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ X X B B B | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield | References$ X,MaxTgts | SpellDescription$ Return X target creature cards from your graveyard to the battlefield.
+K:Miracle:X B B
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$TypeInYourYard.Creature
+Oracle:Return X target creature cards from your graveyard to the battlefield.\nMiracle {X}{B}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

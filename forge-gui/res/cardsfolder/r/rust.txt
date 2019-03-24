@@ -2,7 +2,7 @@ Name:Rust
 ManaCost:G
 Types:Instant
 A:SP$ Counter | Cost$ G | TargetType$ Activated | TgtPrompt$ Select target ability | ValidTgts$ Artifact | SpellDescription$ Counter target activated ability from an artifact source.
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust.jpg
 Oracle:Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)

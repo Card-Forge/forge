@@ -87,5 +87,5 @@ decksDir=
 decksConstructedDir=
 
 # Forge server port. Values under 1024 won't work on Mac OSX or on the various
-*nixes.
+# *nixes.
 serverPort=

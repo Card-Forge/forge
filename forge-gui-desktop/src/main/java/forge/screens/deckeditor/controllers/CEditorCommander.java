@@ -35,8 +35,11 @@ import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -51,7 +54,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorCommander.java 18430 2012-11-27 22:42:36Z Hellfish $
  */
-public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
+public final class CEditorCommander extends CDeckEditor<Deck> {
     private final DeckController<Deck> controller;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
@@ -76,7 +79,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if(brawl){
             Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
             commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
-                    FModel.getFormats().getStandard().getFilterPrinted(),Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))),PaperCard.class);
+                    FModel.getFormats().get("Brawl").getFilterPrinted(),Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))),PaperCard.class);
         }else{
             Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER ;
             commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
@@ -84,7 +87,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
 
 
         if(brawl){
-            normalPool = ItemPool.createFrom(FModel.getFormats().getStandard().getAllCards(), PaperCard.class);
+            normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
         }else {
             normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         }
@@ -164,6 +167,11 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Main));
     }
 
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return allSections.contains(section);
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -186,15 +194,20 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
 
         this.getBtnRemove4().setVisible(false);
         this.getBtnAdd4().setVisible(false);
-        this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new UiCommand() {
-            private static final long serialVersionUID = -9082606944024479599L;
 
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                cycleEditorMode();
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
+        this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
@@ -227,11 +240,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void cycleEditorMode() {
-        int curindex = allSections.indexOf(sectionMode);
-        curindex = (curindex + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         switch(sectionMode) {
             case Main:
                 this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
@@ -252,6 +261,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
                 break;
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 }

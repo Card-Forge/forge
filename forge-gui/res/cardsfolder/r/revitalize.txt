@@ -1,0 +1,6 @@
+Name:Revitalize
+ManaCost:1 W
+Types:Instant
+A:SP$ GainLife | Cost$ 1 W | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life.\nDraw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+Oracle:You gain 3 life.\nDraw a card.

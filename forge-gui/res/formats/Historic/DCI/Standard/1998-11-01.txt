@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Urza's Saga
+Type:Historic
+Subtype:Standard
+Effective:1998-11-01
+Sets:5ED, TMP, STH, EXO, USG

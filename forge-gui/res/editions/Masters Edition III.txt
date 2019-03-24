@@ -238,3 +238,9 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 84 C Young Wei Recruits
 28 U Zhang Fei, Fierce Warrior
 112 R Zodiac Dragon
+
+[tokens]
+minor_demon
+stangg_twin
+u_0_1_starfish
+rgw_1_1_sand_warrior

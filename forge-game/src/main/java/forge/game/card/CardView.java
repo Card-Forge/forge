@@ -8,6 +8,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.GameEntityView;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -437,54 +438,30 @@ public class CardView extends GameEntityView {
         return false;
     }
 
-    public CardView getEquipping() {
-        return get(TrackableProperty.Equipping);
-    }
-
-    public FCollectionView<CardView> getEquippedBy() {
-        return get(TrackableProperty.EquippedBy);
-    }
-
-    public boolean isEquipped() {
-        return getEquippedBy() != null; //isEmpty check not needed since we won't keep an empty collection around
-    }
-
     public FCollectionView<CardView> getEncodedCards() {
         return get(TrackableProperty.EncodedCards);
     }
 
-    public GameEntityView getEnchanting() {
-        return get(TrackableProperty.Enchanting);
+    public GameEntityView getEntityAttachedTo() {
+        return get(TrackableProperty.EntityAttachedTo);
     }
-    void updateEnchanting(Card c) {
-        set(TrackableProperty.Enchanting, GameEntityView.get(c.getEnchanting()));
+    void updateAttachedTo(Card c) {
+        set(TrackableProperty.EntityAttachedTo, GameEntityView.get(c.getEntityAttachedTo()));
     }
 
-    public CardView getEnchantingCard() {
-        GameEntityView enchanting = getEnchanting();
+    public CardView getAttachedTo() {
+        GameEntityView enchanting = getEntityAttachedTo();
         if (enchanting instanceof CardView) {
             return (CardView) enchanting;
         }
         return null;
     }
-    public PlayerView getEnchantingPlayer() {
-        GameEntityView enchanting = getEnchanting();
+    public PlayerView getEnchantedPlayer() {
+        GameEntityView enchanting = getEntityAttachedTo();
         if (enchanting instanceof PlayerView) {
             return (PlayerView) enchanting;
         }
         return null;
-    }
-
-    public CardView getFortifying() {
-        return get(TrackableProperty.Fortifying);
-    }
-
-    public FCollectionView<CardView> getFortifiedBy() {
-        return get(TrackableProperty.FortifiedBy);
-    }
-
-    public boolean isFortified() {
-        return getFortifiedBy() != null;
     }
 
     public FCollectionView<CardView> getGainControlTargets() {
@@ -904,13 +881,21 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
+            updateLoyalty(c.getCurrentLoyalty());
+        }
+        void updateLoyalty(int loyalty) {
+            set(TrackableProperty.Loyalty, loyalty);
         }
         void updateLoyalty(CardState c) {
             if (CardView.this.getCurrentState() == this) {
                 Card card = c.getCard();
                 if (card != null) {
-                    updateLoyalty(card); //TODO: find a better way to do this
+                    if (card.isInZone(ZoneType.Battlefield)) {
+                        updateLoyalty(card);
+                    } else {
+                        updateLoyalty(c.getBaseLoyalty());
+                    }
+
                     return;
                 }
             }
@@ -978,11 +963,11 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
-            set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch", state));
-            set(TrackableProperty.HasHaste, c.hasKeyword("Haste", state));
-            set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
-            set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
-            set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
+            set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasHaste, c.hasKeyword(Keyword.HASTE, state));
+            set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
+            set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
+            set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
             set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }

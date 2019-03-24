@@ -9,7 +9,7 @@ SVar:TrigReturnOwner:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBR
 SVar:DBReturnChoose:DB$ ChooseCard | Choices$ Creature.sharesCreatureTypeWith Remembered+CanBeEnchantedBy | ChoiceTitle$ Choose a creature shares a creature type with the former enchanted creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reins_of_the_vinesteed.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.

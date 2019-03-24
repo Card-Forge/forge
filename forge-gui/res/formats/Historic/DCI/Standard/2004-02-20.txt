@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Darksteel
+Type:Historic
+Subtype:Standard
+Effective:2004-02-20
+Sets:ONS, LGN, SCG, 8ED, MRD, DST

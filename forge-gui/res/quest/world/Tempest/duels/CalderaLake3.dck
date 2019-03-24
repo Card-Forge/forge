@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=Caldera Lake
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Blue - Red Aggro-control.
+Deck Type=constructed
+Name=CalderaLake3
+[Main]
+4 Caldera Lake|TMP
+2 Capsize|TMP
+4 Cloud Spirit|STH
+4 Counterspell|TMP
+3 Curiosity|EXO
+2 Fanning the Flames|STH
+3 Fireslinger|TMP
+4 Island|TMP|2
+1 Island|TMP|3
+5 Island|TMP|4
+4 Kindle|TMP
+4 Legacy's Allure|TMP
+4 Lightning Blast|TMP
+4 Mana Leak|STH
+3 Mountain|TMP|1
+4 Mountain|TMP|2
+1 Mountain|TMP|3
+2 Mountain|TMP|4
+4 Propaganda|TMP
+2 Wayward Soul|EXO

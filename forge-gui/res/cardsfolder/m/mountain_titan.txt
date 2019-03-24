@@ -6,6 +6,6 @@ A:AB$ Effect | Cost$ 1 R R | Name$ Mountain Titan Effect | Triggers$ TrigSpellCa
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on Mountain Titan.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Black
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_titan.jpg
 Oracle:{1}{R}{R}: Until end of turn, whenever you cast a black spell, put a +1/+1 counter on Mountain Titan.

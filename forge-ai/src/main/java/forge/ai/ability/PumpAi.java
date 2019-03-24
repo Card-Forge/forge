@@ -14,6 +14,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.cost.CostTapType;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -35,12 +36,7 @@ public class PumpAi extends PumpAiBase {
         if (cost == null) {
             return true;
         }
-        for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostTapType) {
-                return true;
-            }
-        }
-        return false;
+        return cost.hasSpecificCostType(CostTapType.class);
     }
     
     @Override
@@ -190,7 +186,7 @@ public class PumpAi extends PumpAiBase {
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                             if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                                if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword("Undying")
+                                if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                         || card.isToken()) {
                                     return true;
                                 }
@@ -243,7 +239,7 @@ public class PumpAi extends PumpAiBase {
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                                 if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                                    if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword("Undying")
+                                    if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                             || card.isToken()) {
                                         return true;
                                     }
@@ -320,6 +316,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
+            if (numDefense.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                defense--; // the card will be spent casting the spell, so actual toughness is 1 less
+            }
         }
 
         int attack;
@@ -336,6 +335,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
+            if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                attack--; // the card will be spent casting the spell, so actual power is 1 less
+            }
         }
 
         if ("ContinuousBonus".equals(aiLogic)) {
@@ -485,6 +487,10 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
+                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
+                // the best for opponents
+                return SacrificeAi.doSacOneEachLogic(ai, sa);
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
@@ -775,7 +781,7 @@ public class PumpAi extends PumpAiBase {
 
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (source.isCreature()) {
-                if (!source.hasKeyword("Indestructible") && source.getNetToughness() + defense <= source.getDamage()) {
+                if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
                     return false;
                 }
                 if (source.getNetToughness() + defense <= 0) {
@@ -864,7 +870,7 @@ public class PumpAi extends PumpAiBase {
                 final Player defPlayer = combat.getDefendingPlayerRelatedTo(source);
                 final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
 
-                final boolean isInfect = source.hasKeyword("Infect"); // Flesh-Eater Imp
+                final boolean isInfect = source.hasKeyword(Keyword.INFECT); // Flesh-Eater Imp
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
                 if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
@@ -970,7 +976,7 @@ public class PumpAi extends PumpAiBase {
                 final Player defPlayer = combat.getDefendingPlayerRelatedTo(source);
                 final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
 
-                final boolean isInfect = source.hasKeyword("Infect");
+                final boolean isInfect = source.hasKeyword(Keyword.INFECT);
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
                 if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {

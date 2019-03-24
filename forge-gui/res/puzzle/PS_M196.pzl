@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #06
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/076.-M196.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must work for all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=9
+activeplayer=human
+activephase=MAIN1
+humanhand=Vizier of Many Faces;Thallid Omnivore;Lena, Selfless Champion;Sea Legs
+humanbattlefield=Angel of Condemnation;Riddlemaster Sphinx;Majestic Myriarch;Poison-Tip Archer;Fetid Pools;Fetid Pools;Fetid Pools;Concealed Courtyard;Concealed Courtyard;Concealed Courtyard;Hinterland Harbor;Hinterland Harbor
+aibattlefield=Tiana, Ship's Caretaker;Drake Haven;t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh;t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh;t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh; 

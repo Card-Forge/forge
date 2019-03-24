@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import forge.GuiBase;
 import forge.game.GameActionUtil;
 import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
@@ -71,20 +72,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (otherCardsToSelect != null) {
-            for (Card c : otherCardsToSelect) {
-                for (SpellAbility sa : c.getManaAbilities()) {
-                    if (sa.canPlay()) {
-                        delaySelectCards.add(c);
-                        break;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            // Mobile Forge allows to tap cards underneath the current card even if the current one is tapped
+            if (otherCardsToSelect != null) {
+                for (Card c : otherCardsToSelect) {
+                    for (SpellAbility sa : c.getManaAbilities()) {
+                        if (sa.canPlay()) {
+                            delaySelectCards.add(c);
+                            break;
+                        }
                     }
                 }
             }
-        }
-        if (!card.getManaAbilities().isEmpty() && activateManaAbility(card, manaCost)) {
+            if (!card.getManaAbilities().isEmpty() && activateManaAbility(card)) {
+                return true;
+            }
+            return activateDelayedCard();
+        } else {
+            // Desktop Forge floating menu functionality
+            if (card.getManaAbilities().size() == 1) {
+                activateManaAbility(card, card.getManaAbilities().get(0));
+            } else {
+                SpellAbilityView spellAbilityView;
+                HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
+                for (SpellAbility sa : card.getManaAbilities()) {
+                    spellAbilityViewMap.put(sa.getView(), sa);
+                }
+                List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
+                spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
+                if (spellAbilityView != null) {
+                    activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
+                }
+            }
             return true;
         }
-        return activateDelayedCard();
     }
 
     @Override
@@ -105,7 +126,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             delaySelectCards.clear(); //clear delayed cards if mana cost already paid
             return false;
         }
-        if (activateManaAbility(delaySelectCards.poll(), manaCost)) {
+        if (activateManaAbility(delaySelectCards.poll())) {
             return true;
         }
         return activateDelayedCard();
@@ -114,7 +135,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     public boolean selectAbility(final SpellAbility ab) {
         if (ab != null && ab.isManaAbility()) {
-            return activateManaAbility(ab.getHostCard(), manaCost, ab);
+            return activateManaAbility(ab.getHostCard(), ab);
         }
         return false;
     }
@@ -165,10 +186,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
     }
 
-    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
-        return activateManaAbility(card, manaCost, null);
+    protected boolean activateManaAbility(final Card card) {
+        return activateManaAbility(card, null);
     }
-    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost, SpellAbility chosenAbility) {
+    protected boolean activateManaAbility(final Card card, SpellAbility chosenAbility) {
         if (locked) {
             System.err.print("Should wait till previous call to playAbility finishes.");
             return false;
@@ -231,7 +252,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsKey(chosenAbility))) {
+        if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsKey(chosenAbility.getView()))) {
             return false;
         }
 

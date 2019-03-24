@@ -78,7 +78,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating  = new HashMap<>();
     private final HashMap<RegisteredPlayer, String> playerNames = new HashMap<>();
 
-    public final Map<RegisteredPlayer, AnteResult> anteResult = new TreeMap<>();
+    public final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> players) {
@@ -92,8 +92,8 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
             this.playerRating.put(p.getRegisteredPlayer(), p.getStats());
             this.playerNames.put(p.getRegisteredPlayer(), p.getName());
 
-            if (p.getOutcome().hasWon() &&
-                    (winCondition == GameEndReason.AllOpponentsLost || winCondition == GameEndReason.AllOpposingTeamsLost)) {
+            if (p.getOutcome().hasWon() && winCondition == GameEndReason.AllOpposingTeamsLost) {
+                // Only mark the WinningTeam when "Team mode" is on.
                 winningTeam = p.getTeam();
             }
         }

@@ -1,0 +1,6 @@
+[format]
+Name:Tempest/Stronghold Block, Stronghold
+Type:Historic
+Subtype:Block
+Effective:1998-04-01
+Sets:TMP, STH

@@ -2,7 +2,7 @@ Name:Takeno, Samurai General
 ManaCost:5 W
 Types:Legendary Creature Human Samurai
 PT:3/3
-K:Bushido 2
+K:Bushido:2
 S:Mode$ Continuous | Affected$ Creature.Samurai+Other+YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
 SVar:AffectedX:Count$BushidoPoint
 SVar:PlayMain1:TRUE

@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Goblin Artificer
 PT:2/2
 A:AB$ Destroy | Cost$ R Sac<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_engineers.jpg
 Oracle:{R}, Sacrifice two artifacts: Destroy target artifact.

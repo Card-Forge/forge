@@ -5,6 +5,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -41,6 +42,7 @@ public class BalanceEffect extends SpellAbilityEffect {
             min = Math.min(min, validCards.get(i).size());
         }
         
+        CardZoneTable table = new CardZoneTable();
         for(int i = 0; i < players.size(); i++) {
             Player p = players.get(i);
             int numToBalance = validCards.get(i).size() - min;
@@ -50,15 +52,16 @@ public class BalanceEffect extends SpellAbilityEffect {
             if (zone.equals(ZoneType.Hand)) {
                 for (Card card : p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance)) {
                     if ( null == card ) continue;
-                    p.discard(card, sa);
+                    p.discard(card, sa, table);
                 }
             } else { // Battlefield
                 // TODO: "can'e be sacrificed"
                 for(Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
-                    game.getAction().sacrifice(card, sa);
+                    game.getAction().sacrifice(card, sa, table);
                 }
             }
         }
+        table.triggerChangesZoneAll(game);
     }
 }

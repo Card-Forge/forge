@@ -1,7 +1,7 @@
 Name:Outpost Siege
 ManaCost:3 R
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons. Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card. Dragons — Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to target creature or player.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons. Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card. Dragons — Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to any target.
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ PseudoDraw | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
@@ -10,7 +10,7 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Pl
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Permanent$ True | SpellDescription$ Dragons
-SVar:DragonsTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ SmallBurnination | TriggerDescription$ Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to target creature or player.
-SVar:SmallBurnination:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
+SVar:DragonsTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ SmallBurnination | TriggerDescription$ Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to any target.
+SVar:SmallBurnination:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outpost_siege.jpg
-Oracle:As Outpost Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to target creature or player.
+Oracle:As Outpost Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to any target.

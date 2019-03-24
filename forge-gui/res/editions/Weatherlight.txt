@@ -177,3 +177,6 @@ R Well of Knowledge
 R Winding Canyons
 R Xanthic Statue
 C Zombie Scavengers
+
+[token]
+g_1_1_squirrel

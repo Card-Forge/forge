@@ -27,6 +27,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.util.Aggregates;
 
 
@@ -59,7 +60,7 @@ public abstract class CountersAi {
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
             // but try not to target a Undying Creature
-            final List<Card> killable = CardLists.getNotKeyword(CardLists.filterToughness(list, amount), "Undying");
+            final List<Card> killable = CardLists.getNotKeyword(CardLists.filterToughness(list, amount), Keyword.UNDYING);
             if (killable.size() > 0) {
                 choice = ComputerUtilCard.getBestCreatureAI(killable);
             } else {

@@ -14,7 +14,7 @@ SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ E
 SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | Static$ True
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land.Snow+YouCtrl
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winters_chill.jpg
 Oracle:Cast Winter's Chill only during combat before blockers are declared.\nX can't be greater than the number of snow lands you control.\nChoose X target attacking creatures. For each of those creatures, its controller may pay {1} or {2}. If that player doesn't, destroy that creature at end of combat. If that player pays only {1}, prevent all combat damage that would be dealt to and dealt by that creature this combat.

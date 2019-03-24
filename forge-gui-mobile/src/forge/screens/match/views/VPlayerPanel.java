@@ -187,11 +187,12 @@ public class VPlayerPanel extends FContainer {
                 zoneTab.update();
             }
 
-            //update flashback zone when graveyard, library, or exile zones updated
+            //update flashback zone when graveyard, library, exile, or stack zones updated
             switch (zoneType) {
             case Graveyard:
             case Library:
             case Exile:
+            case Stack:
                 zoneTabs.get(ZoneType.Flashback).update();
                 break;
             default:

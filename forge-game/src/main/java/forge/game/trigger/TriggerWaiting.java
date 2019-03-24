@@ -13,7 +13,7 @@ public class TriggerWaiting {
     private Map<String, Object> params;
     private List<Trigger> triggers = null;
 
-    public TriggerWaiting(TriggerType m,  Map<String, Object> p) {
+    public TriggerWaiting(TriggerType m, Map<String, Object> p) {
         mode = m;
         params = p;
     }
@@ -25,7 +25,6 @@ public class TriggerWaiting {
     public Map<String, Object> getParams() {
         return params;
     }
-    
 
     public List<Trigger> getTriggers() {
         return triggers;
@@ -35,7 +34,7 @@ public class TriggerWaiting {
         this.triggers = triggers;
     }
 
-	@Override
+    @Override
     public String toString() {
         return TextUtil.concatWithSpace("Waiting trigger:", mode.toString(),"with", params.toString());
     }

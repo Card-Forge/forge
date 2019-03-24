@@ -6,7 +6,7 @@ SVar:LoseTime:DB$ RemoveCounterAll | ValidCards$ Permanent | CounterType$ TIME |
 SVar:QuickenTime:DB$ RemoveCounterAll | ValidCards$ Card.suspended | CounterType$ TIME | CounterNum$ 2 | ValidZone$ Exile
 SVar:GainTime:DB$ PutCounterAll | ValidCards$ Permanent.counters_GE1_TIME | CounterType$ TIME | CounterNum$ 2 | SubAbility$ SlowTime | SpellDescription$ Put two time counters on each permanent with a time counter on it and each suspended card.
 SVar:SlowTime:DB$ PutCounterAll | ValidCards$ Card.suspended | CounterType$ TIME | CounterNum$ 2 | ValidZone$ Exile
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_of_moments.jpg
 Oracle:Choose one —\n• Remove two time counters from each permanent and each suspended card.\n• Put two time counters on each permanent with a time counter on it and each suspended card.

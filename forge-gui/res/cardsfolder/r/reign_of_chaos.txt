@@ -6,6 +6,6 @@ SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Plains | TgtPrompt$ Select target Plain
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Island | TgtPrompt$ Select target Island | SubAbility$ DBDestroyBlue | SpellDescription$ Destroy target Island and target blue creature.
 SVar:DBDestroyWhite:DB$ Destroy | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature
 SVar:DBDestroyBlue:DB$ Destroy | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_chaos.jpg
 Oracle:Choose one —\n• Destroy target Plains and target white creature.\n• Destroy target Island and target blue creature.

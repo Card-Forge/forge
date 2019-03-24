@@ -14,7 +14,7 @@ humanhand=Noxious Revival; Pit Fight; Briarhorn
 humangraveyard=
 humanlibrary=Wayfarer's Bauble 
 humanbattlefield=Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Forest|Set:ORI; Forest|Set:ORI|Tapped; Raging Ravine; Yavimaya Hollow; Sunflare Shaman; Generator Servant; Grinning Ignus; Flame-Kin War Scout; Flame Elemental; Cytoplast Root-Kin|Counters:P1P1=4; Hollowhenge Scavenger
-aibattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Wall of Glare; Wall of Denial; Moat; Indentured Djinn|Tapped; Holy Mantle|Attaching:420; Angel of Finality|Tapped|Id:420
+aibattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Wall of Glare; Wall of Denial; Moat; Indentured Djinn|Tapped; Holy Mantle|AttachedTo:420; Angel of Finality|Tapped|Id:420
 aihand=
 aigraveyard=
 ailibrary=

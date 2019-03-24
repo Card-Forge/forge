@@ -586,6 +586,7 @@ public class ManaCostBeingPaid {
         // Boolean addX used to add Xs into the returned value
         final StringBuilder sb = new StringBuilder();
 
+        // TODO Prepend a line about paying with any type/color if available
         if (addX) {
             for (int i = 0; i < this.getXcounter(); i++) {
                 sb.append("{X}");
@@ -595,10 +596,11 @@ public class ManaCostBeingPaid {
         int nGeneric = getGenericManaAmount();
         List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
 
-        if (pool != null) { //replace shards with generic mana if they can be paid with any color mana
+        // TODO Fix this. Should we really be changing Shards here?
+        if (false && pool != null) { //replace shards with generic mana if they can be paid with any color mana
             for (int i = 0; i < shards.size(); i++) {
                 ManaCostShard shard = shards.get(i);
-                if (shard != ManaCostShard.GENERIC && pool.getPossibleColorUses(shard.getColorMask()) == MagicColor.ALL_COLORS) {
+                if (shard != ManaCostShard.GENERIC && pool.getPossibleColorUses(shard.getColorMask()) == ManaAtom.ALL_MANA_TYPES) {
                     nGeneric += unpaidShards.get(shard).totalCount;
                     shards.remove(i);
                     i--;

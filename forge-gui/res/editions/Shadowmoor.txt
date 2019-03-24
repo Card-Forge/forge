@@ -310,3 +310,18 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 223 R Wort, the Raidmother
 81 R Wound Reflection
 157 C Zealous Guardian
+
+[tokens]
+spawnwrithe
+w_1_1_kithkin_soldier
+w_1_1_spirit_flying
+b_1_1_rat
+r_1_1_elemental_haste
+g_1_1_elf_warrior
+g_1_2_spider_reach
+g_2_2_wolf
+br_5_5_elemental
+gw_1_1_elf_warrior
+ub_1_1_faerie_rogue_flying
+rg_4_4_giant_warrior_haste
+rg_1_1_goblin_warrior

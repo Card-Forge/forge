@@ -189,3 +189,18 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 141 C Wrap in Vigor
 93 U Yixlid Jailer
 180 U Zoetic Cavern
+
+[tokens]
+goldmeadow_harrier
+imperial_mask
+cloud_sprite
+festering_goblin
+spark_elemental
+llanowar_elves
+nacatl_war-pride
+metallic_sliver
+w_1_1_soldier
+b_2_2_zombie
+r_4_4_giant
+g_1_1_saproling
+g_x_x_wurm

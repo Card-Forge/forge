@@ -1,0 +1,6 @@
+Name:Rat
+ManaCost:no cost
+Types:Creature Rat
+Colors:black
+PT:1/1
+Oracle:

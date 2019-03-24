@@ -1,0 +1,6 @@
+Name:Ogre
+ManaCost:no cost
+Types:Creature Ogre
+Colors:red
+PT:3/3
+Oracle:

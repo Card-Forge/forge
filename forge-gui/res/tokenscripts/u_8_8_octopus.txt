@@ -1,0 +1,6 @@
+Name:Octopus
+ManaCost:no cost
+Types:Creature Octopus
+Colors:blue
+PT:8/8
+Oracle:

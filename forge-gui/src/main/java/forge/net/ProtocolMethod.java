@@ -1,7 +1,9 @@
 package forge.net;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ import forge.match.NextGameDecision;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
+import org.apache.commons.lang3.SerializationUtils;
 
 /**
  * The methods that can be sent through this protocol.
@@ -46,6 +49,8 @@ public enum ProtocolMethod {
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     updateStack         (Mode.SERVER),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
+    tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
+    hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
@@ -62,7 +67,8 @@ public enum ProtocolMethod {
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
-    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class),
+    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
+    manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
@@ -85,7 +91,7 @@ public enum ProtocolMethod {
     passPriorityUntilEndOfTurn(Mode.CLIENT),
     passPriority              (Mode.CLIENT),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
-    getActivateDescription    (Mode.CLIENT, Void.TYPE, String.class, CardView.class),
+    getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT),
     alphaStrike               (Mode.CLIENT),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
@@ -154,6 +160,20 @@ public enum ProtocolMethod {
             final Class<?> type = this.args[iArg];
             if (!ReflectionUtil.isInstance(arg, type)) {
                 throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+            }
+            if (arg != null) {
+                // attempt to Serialize each argument, this will throw an exception if it can't.
+                try {
+                    byte[] serialized = SerializationUtils.serialize((Serializable) arg);
+                    SerializationUtils.deserialize(serialized);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    // not sure why this one would be thrown, but it is
+                    // it also doesn't prevent things from working, so, log for now, pending full network rewrite
+                    ex.printStackTrace();
+                } catch(ConcurrentModificationException ex) {
+                    // can't seem to avoid this from periodically happening
+                    ex.printStackTrace();
+                }
             }
         }
     }

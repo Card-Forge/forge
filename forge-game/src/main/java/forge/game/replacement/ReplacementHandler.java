@@ -86,7 +86,7 @@ public class ReplacementHandler {
         // Round up Static replacement effects
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card crd) {
+            public boolean visit(Card crd) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
 
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
@@ -111,6 +111,7 @@ public class ReplacementHandler {
                         possibleReplacers.add(replacementEffect);
                     }
                 }
+                return true;
             }
             
         });
@@ -180,7 +181,7 @@ public class ReplacementHandler {
             final String effectAbString = host.getSVar(effectSVar);
             // TODO: the source of replacement effect should be the source of the original effect 
             effectSA = AbilityFactory.getAbility(effectAbString, host);
-            effectSA.setTrigger(true);
+            //effectSA.setTrigger(true);
 
             SpellAbility tailend = effectSA;
             do {
@@ -208,8 +209,9 @@ public class ReplacementHandler {
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
-                effectSA.setReplacementAbility(true);
             }
+            effectSA.setReplacementAbility(true);
+            effectSA.setReplacementEffect(replacementEffect);
         }
 
         // Decider gets to choose whether or not to apply the replacement.
@@ -307,22 +309,26 @@ public class ReplacementHandler {
     public void cleanUpTemporaryReplacements() {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                    ReplacementEffect rep = c.getReplacementEffects().get(i);
+            public boolean visit(Card c) {
+                List<ReplacementEffect> toRemove = Lists.newArrayList();
+                for (ReplacementEffect rep : c.getReplacementEffects()) {
                     if (rep.isTemporary()) {
-                        c.removeReplacementEffect(rep);
-                        i--;
+                        toRemove.add(rep);
                     }
                 }
+                for (ReplacementEffect rep : toRemove) {
+                    c.removeReplacementEffect(rep);
+                }
+                return true;
             }
         });
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 for (int i = 0; i < c.getReplacementEffects().size(); i++) {
                     c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
                 }
+                return true;
             }
         });
     }

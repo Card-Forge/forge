@@ -1,7 +1,7 @@
 Name:Seismic Spike
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBMana | SpellDescription$ Destroy target land. Add {R}{R} to your mana pool.
+A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBMana | SpellDescription$ Destroy target land. Add {R}{R}.
 SVar:DBMana:DB$Mana | Produced$ R | Amount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_spike.jpg
-Oracle:Destroy target land. Add {R}{R} to your mana pool.
+Oracle:Destroy target land. Add {R}{R}.

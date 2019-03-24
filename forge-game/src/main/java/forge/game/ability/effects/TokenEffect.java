@@ -20,21 +20,24 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.StaticData;
 import forge.card.MagicColor;
 import forge.game.card.token.TokenInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
@@ -42,6 +45,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.zone.ZoneType;
 import forge.item.PaperToken;
 import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
@@ -194,23 +198,20 @@ public class TokenEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    private Card loadTokenPrototype(SpellAbility sa) {
-        String script = sa.getParamOrDefault("TokenScript", null);
-
-        PaperToken token = null;
-        try {
-            String edition = sa.getHostCard().getPaperCard().getEdition();
-            token = StaticData.instance().getAllTokens().getToken(script, edition);
-        } catch(NullPointerException e) {
-            // A non-PaperCard creates a new token. We probably want to delegate to the original creator
-            System.out.println("Token created by: " + sa.getHostCard() + " has no PaperCard associated to it.");
-        }
-        if (token != null) {
-            tokenName = token.getName();
-            return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
+    public Card loadTokenPrototype(SpellAbility sa) {
+        if (!sa.hasParam("TokenScript")) {
+            return null;
         }
 
-        return null;
+        final Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+
+        if (result != null) {
+            tokenName = result.getName();
+        } else {
+            throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
+        }
+
+        return result;
     }
 
     @Override
@@ -270,7 +271,10 @@ public class TokenEffect extends SpellAbilityEffect {
             tokenInfo = new TokenInfo(substitutedName, imageName,
                     cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
         } else {
-            tokenInfo = new TokenInfo(prototype);
+            // TODO: Substitute type name for Chosen tokens
+            // TODO: If host has has it's color/type altered make sure that's appropriately applied
+            // TODO: Lock down final power and toughness if it's actually X values
+            tokenInfo = new TokenInfo(prototype, host);
         }
 
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
@@ -291,6 +295,11 @@ public class TokenEffect extends SpellAbilityEffect {
                 if (this.tokenTapped) {
                     tok.setTapped(true);
                 }
+
+                if (sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa)) {
+                    continue;
+                }
+
                 // Should this be catching the Card that's returned?
                 Card c = game.getAction().moveToPlay(tok, sa);
 
@@ -299,7 +308,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 }
 
                 if (inCombat) {
-                    combatChanged = addTokenToCombat(game, c, controller, sa, host) || combatChanged;
+                    combatChanged = addTokenToCombat(game, c, tok.getController(), sa, host) || combatChanged;
                 }
 
                 c.updateStateForView();
@@ -468,5 +477,51 @@ public class TokenEffect extends SpellAbilityEffect {
             }
         }
         return combatChanged;
+    }
+
+    private boolean attachTokenTo(Card tok, SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
+        GameObject aTo = Iterables.getFirst(
+                AbilityUtils.getDefinedObjects(host, sa.getParam("AttachedTo"), sa), null);
+
+        if (aTo instanceof GameEntity) {
+            GameEntity ge = (GameEntity)aTo;
+            // check what the token would be on the battlefield
+            Card lki = CardUtil.getLKICopy(tok);
+
+            lki.setLastKnownZone(tok.getController().getZone(ZoneType.Battlefield));
+
+            // double freeze tracker, so it doesn't update view
+            game.getTracker().freeze();
+            CardCollection preList = new CardCollection(lki);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
+
+            // TODO update when doing Attach Update
+            boolean canAttach = lki.isAttachment();
+
+            if (canAttach && !ge.canBeAttached(lki)) {
+                canAttach = false;
+            }
+
+            // reset static abilities
+            game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            // need to unfreeze tracker
+            game.getTracker().unfreeze();
+
+            if (!canAttach) {
+                // Token can't attach to it
+                return false;
+            }
+
+            tok.attachToEntity(ge);
+            return true;
+        } else {
+            // not a GameEntity, cant be attach
+            return false;
+        }
     }
 }

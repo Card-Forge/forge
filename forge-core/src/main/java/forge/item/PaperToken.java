@@ -5,6 +5,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ import java.util.Locale;
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;
     private CardEdition edition;
-    private String imageFileName;
+    private ArrayList<String> imageFileName = new ArrayList<>();
     private CardRules card;
+    private int artIndex = 1;
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
     public static String makeTokenFileName(String in) {
@@ -96,40 +98,47 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             build.add(keyword);
         }
 
-        build.add(edition.getCode());
+        if (edition != null) {
+            build.add(edition.getCode());
+        }
 
-        // Should future image file names be all lower case? Instead of Up case sets?
-        return StringUtils.join(build, "_").toLowerCase();
+        return StringUtils.join(build, "_").replace('*', 'x').toLowerCase();
     }
 
-    public PaperToken(final CardRules c) { this(c, null, null); }
-    public PaperToken(final CardRules c, final String fileName) { this(c, null, fileName); }
-    public PaperToken(final CardRules c, CardEdition edition) { this(c, edition, null); }
     public PaperToken(final CardRules c, CardEdition edition0, String imageFileName) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
 
+        if (edition != null && edition.getTokens().containsKey(imageFileName)) {
+            this.artIndex = edition.getTokens().get(imageFileName);
+        }
+
         if (imageFileName == null) {
-            this.imageFileName = makeTokenFileName(c, edition0);
+            // This shouldn't really happen. We can just use the normalized name again for the base image name
+            this.imageFileName.add(makeTokenFileName(c, edition0));
         } else {
-            String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode();
-            this.imageFileName = String.format("%s%s", formatEdition, imageFileName);
+            String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
+
+            this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
+            for(int idx = 2; idx <= this.artIndex; idx++) {
+                this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
+            }
         }
     }
     
     @Override public String getName() { return name; }
 
     @Override public String toString() { return name; }
-    @Override public String getEdition() { return edition.getCode(); }
-    @Override public int getArtIndex() { return 0; } // This might change however
+    @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
+    @Override public int getArtIndex() { return artIndex; }
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }
 
     @Override public CardRarity getRarity() { return CardRarity.None; }
 
     // Unfortunately this is a property of token, cannot move it outside of class
-    public String getImageFilename() { return imageFileName; }
+    public String getImageFilename() { return imageFileName.get(0); }
 
     @Override public String getItemType() { return "Token"; }
 
@@ -137,6 +146,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public String getImageKey(boolean altState) {
-        return ImageKeys.TOKEN_PREFIX + imageFileName;
+        int idx = MyRandom.getRandom().nextInt(artIndex);
+        return ImageKeys.TOKEN_PREFIX + imageFileName.get(idx).replace(" ", "_");
     }
 }

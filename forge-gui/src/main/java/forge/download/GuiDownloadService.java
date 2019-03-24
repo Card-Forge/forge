@@ -17,7 +17,28 @@
  */
 package forge.download;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.esotericsoftware.minlog.Log;
+
 import forge.FThreads;
 import forge.GuiBase;
 import forge.UiCommand;
@@ -28,13 +49,6 @@ import forge.interfaces.ITextField;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.*;
-import java.net.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
@@ -260,6 +274,19 @@ public abstract class GuiDownloadService implements Runnable {
                     // don't allow redirections here -- they indicate 'file not found' on the server
                     conn.setInstanceFollowRedirects(false);
                     conn.connect();
+                    
+                    // if file is not found and this is a JPG, give PNG a shot...
+                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg")))
+                    {
+                        conn.disconnect();
+                        System.out.println("  File not found: " + url);
+                        url = url.substring(0,url.length() - 4) + ".png";
+                        imageUrl = new URL(url);
+                        conn = (HttpURLConnection) imageUrl.openConnection(p);
+                        conn.setInstanceFollowRedirects(false);
+                        conn.connect();
+                    }
+                    
                     switch (conn.getResponseCode()) {
                     case HttpURLConnection.HTTP_OK:
                         fos = new FileOutputStream(fileDest);
@@ -353,15 +380,16 @@ public abstract class GuiDownloadService implements Runnable {
         if (response == null)  return null;
 
         String[] strings = response.split("<a href=\"");
-
+        
+        // Use regex to find all directory paths and capture things using groups...
+        Pattern pattern = Pattern.compile(">([A-Z0-9_]+)/<");
+        Matcher matcher;
+        
         for (String s : strings) {
-            int idx = s.indexOf('/');
-            if (!Character.isLetterOrDigit(s.charAt(0)) || idx > 4 || idx == -1) {
-                continue;
+            matcher = pattern.matcher(s);
+            if (matcher.find()) {
+                existingSets.add(matcher.group(1));
             }
-
-            String set = s.substring(0, idx);
-            existingSets.add(set);
         }
 
         return existingSets;

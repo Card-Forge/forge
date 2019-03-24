@@ -3,6 +3,6 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ Skred deals damage to target creature equal to the number of snow permanents you control.
 SVar:X:Count$TypeYouCtrl.Snow
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
 Oracle:Skred deals damage to target creature equal to the number of snow permanents you control.

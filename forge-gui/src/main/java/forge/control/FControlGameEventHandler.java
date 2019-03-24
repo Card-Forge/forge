@@ -332,8 +332,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
-        updateZone(event.from);
-        return updateZone(event.to);
+        //pfps the change to the zones have already been performed with add and remove calls
+	// this is only for playing a sound
+	//        updateZone(event.from);
+        //return updateZone(event.to);
+	return processEvent();
+
     }
 
     @Override
@@ -355,7 +359,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventShuffle event) {
-        return updateZone(event.player.getZone(ZoneType.Library));
+        //pfps the change to the library has already been performed by a setCards call
+	// this is only for playing a sound
+	// return updateZone(event.player.getZone(ZoneType.Library));
+	return processEvent();
     }
 
     @Override
@@ -365,6 +372,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerLivesChanged event) {
+        return processPlayer(event.player, livesUpdate);
+    }
+
+    @Override
+    public Void visit(GameEventManaBurn event) {
         return processPlayer(event.player, livesUpdate);
     }
 

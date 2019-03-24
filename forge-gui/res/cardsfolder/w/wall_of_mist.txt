@@ -1,0 +1,6 @@
+Name:Wall of Mist
+ManaCost:1 U
+Types:Creature Wall
+K:Defender
+Oracle:Defender (This creature can't attack.)
+PT:0/5

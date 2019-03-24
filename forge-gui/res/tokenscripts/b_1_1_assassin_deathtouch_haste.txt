@@ -1,0 +1,8 @@
+Name:Assassin
+ManaCost:no cost
+Types:Creature Assassin
+Colors:black
+PT:1/1
+K:Deathtouch
+K:Haste
+Oracle:Deathtouch, haste

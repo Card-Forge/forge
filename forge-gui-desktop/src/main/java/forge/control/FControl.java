@@ -28,6 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -230,7 +231,12 @@ public enum FControl implements KeyEventDispatcher {
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {
-            FModel.getQuest().load(QuestDataIO.loadData(data));
+            try {
+                FModel.getQuest().load(QuestDataIO.loadData(data));
+            } catch(IOException ex) {
+                ex.printStackTrace();
+                System.out.println(String.format("Error loading quest data (%s).. skipping for now..", questname));
+            }
         }
 
         // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout

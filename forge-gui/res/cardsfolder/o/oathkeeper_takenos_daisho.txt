@@ -1,7 +1,7 @@
 Name:Oathkeeper, Takeno's Daisho
 ManaCost:3
 Types:Legendary Artifact Equipment
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | Description$ Equipped creature gets +3/+1.
 T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigRemember | Static$ True
 SVar:TrigRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberNew
@@ -10,7 +10,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Samurai | ConditionCompare$ GE1
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Samurai
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathkeeper_takenos_daisho.jpg
 Oracle:Equipped creature gets +3/+1.\nWhenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.\nWhen Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.\nEquip {2}

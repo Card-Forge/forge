@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import forge.deck.CardPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.IDeckGenPool;
 import forge.properties.ForgeConstants;

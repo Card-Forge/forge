@@ -4,8 +4,8 @@ Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two charge counters on it.
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 2 
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
-A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_crag.jpg
-Oracle:Vivid Crag enters the battlefield tapped with two charge counters on it.\n{T}: Add {R} to your mana pool.\n{T}, Remove a charge counter from Vivid Crag: Add one mana of any color to your mana pool.
+Oracle:Vivid Crag enters the battlefield tapped with two charge counters on it.\n{T}: Add {R}.\n{T}, Remove a charge counter from Vivid Crag: Add one mana of any color.

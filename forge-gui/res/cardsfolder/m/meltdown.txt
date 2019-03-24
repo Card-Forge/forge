@@ -3,6 +3,6 @@ ManaCost:X R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ X R | ValidCards$ Artifact.cmcLEX | References$ X | SpellDescription$ Destroy each artifact with converted mana cost X or less.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meltdown.jpg
 Oracle:Destroy each artifact with converted mana cost X or less.

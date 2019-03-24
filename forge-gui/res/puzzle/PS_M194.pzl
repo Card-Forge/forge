@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/074.-M194.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start with no cards in either graveyard. Assume both libraries have many cards, and any drawn are not relevant.
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Sheltering Light;Titanic Growth;Journey to Eternity;Naturalize;Commit // Memory
+humanlibrary=Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map
+humanbattlefield=Panharmonicon;Desecrated Tomb;Ajani's Welcome;Torrential Gearhulk;Epicure of Blood;Spire of Industry;Spire of Industry;Spire of Industry;Spire of Industry;Swamp|Set:M19;Swamp|Set:M19;Swamp|Set:M19;Swamp|Set:M19;Swamp|Set:M19
+ailibrary=Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map;Treasure Map
+aibattlefield=Open the Graves;Child of Night;Death Baron;Skeleton Archer

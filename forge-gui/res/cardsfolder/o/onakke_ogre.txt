@@ -1,0 +1,5 @@
+Name:Onakke Ogre
+ManaCost:2 R
+Types:Creature Ogre Warrior
+PT:4/2
+Oracle:

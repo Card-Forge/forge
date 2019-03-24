@@ -1,0 +1,6 @@
+Name:Treefolk Shaman
+ManaCost:no cost
+PT:2/5
+Colors:green
+Types:Creature Treefolk Shaman
+Oracle:

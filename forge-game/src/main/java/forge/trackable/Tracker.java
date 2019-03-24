@@ -52,6 +52,10 @@ public class Tracker {
         delayedPropChanges.add(new DelayedPropChange(object, prop, value));
     }
 
+    public void clearDelayed() {
+        delayedPropChanges.clear();
+    }
+
     private class DelayedPropChange {
         private final TrackableObject object;
         private final TrackableProperty prop;

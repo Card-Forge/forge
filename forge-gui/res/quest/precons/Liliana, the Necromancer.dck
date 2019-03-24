@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Liliana, the Necromancer
+Description=Liliana has mastered death and bends it to her will, defying the laws of nature in pursuit of power. Use her skills to raise an army of undead and drain the lfie from your opponent.
+Deck Type=constructed
+Set=M19
+Image=liliana_the_necromancer.jpg
+[Main]
+2 Abnormal Endurance|M19
+3 Arisen Gorgon|M19
+2 Blood Divination|M19
+1 Demon of Catastrophes|M19
+2 Diregraf Ghoul|M19
+1 Gravedigger|M19
+1 Gravewaker|M19
+2 Lich's Caress|M19
+2 Liliana's Spoils|M19
+1 Liliana, the Necromancer+|M19
+1 Meteor Golem|M19
+2 Murder|M19
+1 Reassembling Skeleton|M19
+1 Skeleton Archer|M19
+2 Skymarch Bloodletter|M19
+1 Sovereign's Bite|M19
+1 Strangling Spores|M19
+7 Swamp|M19|1
+7 Swamp|M19|2
+6 Swamp|M19|3
+6 Swamp|M19|4
+4 Tattered Mummy|M19
+2 Vampire Sovereign|M19
+2 Walking Corpse|M19

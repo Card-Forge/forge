@@ -7,6 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | Trigger
 SVar:TrigBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.Black+YouCtrl
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Black+YouCtrl+inZoneBattlefield
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_collector.jpg
 Oracle:At the beginning of your upkeep, return a black creature you control to its owner's hand.\n{1}{B}: Regenerate Skull Collector.

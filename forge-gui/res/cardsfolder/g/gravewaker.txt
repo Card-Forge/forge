@@ -1,0 +1,7 @@
+Name:Gravewaker
+ManaCost:4 B B
+Types:Creature Bird Spirit
+PT:5/5
+K:Flying
+A:AB$ ChangeZone | Cost$ 5 B B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | Tapped$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield tapped.
+Oracle:Flying\n{5}{B}{B}: Return target creature card from your graveyard to the battlefield tapped.

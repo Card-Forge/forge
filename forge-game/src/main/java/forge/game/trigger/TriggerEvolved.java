@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -26,7 +28,6 @@ import forge.game.spellability.SpellAbility;
  * </p>
  * 
  * @author Forge
- * @version $Id: TriggerEvolved.java 17802 2012-10-31 08:05:14Z Max mtg $
  */
 public class TriggerEvolved extends Trigger {
 
@@ -42,17 +43,17 @@ public class TriggerEvolved extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerEvolved(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerEvolved(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+        if (hasParam("ValidCard")) {
+            if (!sac.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -62,7 +63,7 @@ public class TriggerEvolved extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Card", getRunParams().get("Card"));
     }
 
     @Override

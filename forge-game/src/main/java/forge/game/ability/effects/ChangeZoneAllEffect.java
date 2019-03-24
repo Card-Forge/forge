@@ -141,7 +141,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
         // movedCards should have same timestamp
         long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+        final CardZoneTable triggerList = new CardZoneTable();
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -156,7 +156,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = c.getFirstAttachSpell();
-                    if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                    if (saAura != null && !saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }
@@ -209,21 +209,13 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
             
             if (!movedCard.getZone().equals(originZone)) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }
         }
 
         game.getTriggerHandler().resetActiveTriggers(false);
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
+        triggerList.triggerChangesZoneAll(game);
 
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library

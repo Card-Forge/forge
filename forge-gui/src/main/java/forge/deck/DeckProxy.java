@@ -53,6 +53,7 @@ public class DeckProxy implements InventoryItem {
     protected ColorSet color;
     protected ColorSet colorIdentity;
     protected Set<GameFormat> formats;
+    protected Set<GameFormat> exhaustiveFormats;
     private Integer mainSize = null;
     private Integer sbSize = null;
     private Integer avgCMC = null;
@@ -145,6 +146,7 @@ public class DeckProxy implements InventoryItem {
         colorIdentity = null;
         highestRarity = null;
         formats = null;
+        exhaustiveFormats = null;
         edition = null;
         mainSize = null;
         sbSize = null;
@@ -263,6 +265,13 @@ public class DeckProxy implements InventoryItem {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
         }
         return formats;
+    }
+
+    public Set<GameFormat> getExhaustiveFormats() {
+        if (exhaustiveFormats == null) {
+            exhaustiveFormats = FModel.getFormats().getAllFormatsOfDeck(getDeck(), true);
+        }
+        return exhaustiveFormats;
     }
 
     public String getFormatsString() {

@@ -4,10 +4,13 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -82,7 +85,7 @@ public class SacrificeAi extends SpellAbilityAi {
             if (!destroy) {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
             } else {
-                if (!CardLists.getKeyword(list, "Indestructible").isEmpty()) {
+                if (!CardLists.getKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
                     // human can choose to destroy indestructibles
                     return false;
                 }
@@ -132,7 +135,7 @@ public class SacrificeAi extends SpellAbilityAi {
             List<Card> humanList =
                     CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            // Since all of the cards have remAIDeck:True, I enabled 1 for 1
+            // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             if (humanList.size() < amount) {
                 return false;
@@ -153,6 +156,43 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return true;
+    }
+
+    public static boolean doSacOneEachLogic(Player ai, SpellAbility sa) {
+        Game game = ai.getGame();
+
+        sa.resetTargets();
+        for (Player p : game.getPlayers()) {
+            CardCollection targetable = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
+            if (!targetable.isEmpty()) {
+                CardCollection priorityTgts = new CardCollection();
+                if (p.isOpponentOf(ai)) {
+                    priorityTgts.addAll(CardLists.filter(targetable, CardPredicates.canBeSacrificedBy(sa)));
+                    if (!priorityTgts.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getBestAI(priorityTgts));
+                    } else {
+                        sa.getTargets().add(ComputerUtilCard.getBestAI(targetable));
+                    }
+                } else {
+                    for (Card c : targetable) {
+                        if (c.canBeSacrificedBy(sa) && (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) && !c.equals(sa.getHostCard())) {
+                            priorityTgts.add(c);
+                        }
+                    }
+                    if (!priorityTgts.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(priorityTgts, false, false, false, false));
+                    } else {
+                        targetable.remove(sa.getHostCard());
+                        if (!targetable.isEmpty()) {
+                            sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false));
+                        } else {
+                            sa.getTargets().add(sa.getHostCard()); // sac self only as a last resort
+                        }
+                    }
+                }
+            }
+        }
         return true;
     }
 

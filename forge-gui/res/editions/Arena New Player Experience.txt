@@ -1,0 +1,46 @@
+[metadata]
+Code=ANA
+Date=2018-07-12
+Name=Arena New Player Experience
+Type=Other
+
+[cards]
+C Altar's Reap
+U Ambition's Cost
+U Angelic Reward
+U Blinding Radiance
+R Chaos Maw
+U Confront the Assault
+C Cruel Cut
+C Divination
+U Doublecast
+C Feral Roar
+U Goblin Bruiser
+U Goblin Gang Leader
+U Goblin Grenade
+R Inspiring Commander
+C Knight's Pledge
+C Loxodon Line Breaker
+C Miasmic Mummy
+C Nimble Pilferer
+R Ogre Painbringer
+M Overflowing Insight
+C Raging Goblin
+C Renegade Demon
+U Rise from the Grave
+C River's Favor
+C Rumbling Baloth
+C Sanctuary Cat
+U Seismic Rupture
+U Serra Angel
+C Shorecomber Crab
+C Shrine Keeper
+R Soulhunter Rakshasa
+C Spiritual Guardian
+C Tactical Advantage
+C Take Vengeance
+U Titanic Pelagosaur
+C Treetop Warden
+U Volcanic Dragon
+C Waterknot
+C Zephyr Gull

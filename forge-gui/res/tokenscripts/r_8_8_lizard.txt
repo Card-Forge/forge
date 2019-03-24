@@ -1,0 +1,6 @@
+Name:Lizard
+ManaCost:no cost
+Types:Creature Lizard
+Colors:red
+PT:8/8
+Oracle:

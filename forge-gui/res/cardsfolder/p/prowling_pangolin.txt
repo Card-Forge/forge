@@ -1,6 +1,6 @@
 Name:Prowling Pangolin
 ManaCost:3 B B
-Types:Creature Beast
+Types:Creature Pangolin Beast
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, any player may sacrifice two creatures. If a player does, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Creature> | UnlessPayer$ Player | UnlessSwitched$ True

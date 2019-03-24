@@ -1,7 +1,5 @@
 package forge.game.cost;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -10,6 +8,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -18,13 +17,14 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 public class CostAdjustment {
 
@@ -210,10 +210,10 @@ public class CostAdjustment {
         }
 
         if (sa.isSpell()) {
-            if (sa.getHostCard().hasKeyword("Delve")) {
+            if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
                 sa.getHostCard().clearDelved();
 
-                final CardCollection delved = new CardCollection();
+                final CardZoneTable table = new CardZoneTable();
                 final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
@@ -223,22 +223,16 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        delved.add(game.getAction().exile(c, null, null));
+                        final Card d = game.getAction().exile(c, null, null);
+                        table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
-                if (!delved.isEmpty()) {
-                    final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-                    triggerList.put(ZoneType.Graveyard, delved);
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Cards", triggerList);
-                    runParams.put("Destination", ZoneType.Exile);
-                    game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-                }
+                table.triggerChangesZoneAll(game);
             }
-            if (sa.getHostCard().hasKeyword("Convoke")) {
+            if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
             }
-            if (sa.getHostCard().hasKeyword("Improvise")) {
+            if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, true, test);
             }
         } // isSpell
@@ -260,8 +254,8 @@ public class CostAdjustment {
 
         Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
         
-        // Convoked creats are tapped here with triggers suppressed,
-        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+        // Convoked creats are tapped here, setting up their taps triggers,
+        // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
         // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
@@ -269,6 +263,9 @@ public class CostAdjustment {
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
                 conv.getKey().tap();
+                if (!improvise) {
+                    sa.getHostCard().addConvoked(conv.getKey());
+                }
             }
         }
     }
@@ -369,10 +366,9 @@ public class CostAdjustment {
         if (manaCost.toString().equals("{0}")) {
             return 0;
         }
-        final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Card card = sa.getHostCard();
-        final String amount = params.get("Amount");
+        final String amount = staticAbility.getParam("Amount");
 
         if (!checkRequirement(sa, staticAbility)) {
             return 0;
@@ -383,16 +379,16 @@ public class CostAdjustment {
             value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
         } else if ("Undaunted".equals(amount)) {
             value = card.getController().getOpponents().size();
-        } else if ("X".equals(amount)){
-            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
-        } else {
+        } else if (staticAbility.hasParam("Relative")) {
             value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+        } else {
+            value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
 
-        if (!params.containsKey("Cost") && ! params.containsKey("Color")) {
+        if (!staticAbility.hasParam("Cost") && ! staticAbility.hasParam("Color")) {
             int minMana = 0;
-            if (params.containsKey("MinMana")) {
-                minMana = Integer.valueOf(params.get("MinMana"));
+            if (staticAbility.hasParam("MinMana")) {
+                minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
             }
 
             final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
@@ -400,7 +396,7 @@ public class CostAdjustment {
                 return Math.min(value, maxReduction);
             }
         } else {
-            final String color = params.containsKey("Cost") ? params.get("Cost") : params.get("Color");
+            final String color = staticAbility.getParamOrDefault("Cost",  staticAbility.getParam("Color"));
             int sumGeneric = 0;
             // might be problematic for wierd hybrid combinations
             for (final String cost : color.split(" ")) {
@@ -437,6 +433,10 @@ public class CostAdjustment {
         }
         if (params.containsKey("Activator") && ((activator == null)
                 || !activator.isValid(params.get("Activator"), controller, hostCard, sa))) {
+            return false;
+        }
+        if (params.containsKey("NonActivatorTurn") && ((activator == null)
+                || hostCard.getGame().getPhaseHandler().isPlayerTurn(activator))) {
             return false;
         }
 
@@ -492,15 +492,6 @@ public class CostAdjustment {
                 }
             } else if (type.equals("MorphDown")) {
                 if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("SelfMonstrosity")) {
-                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Monstrosity") || sa.isTemporary()) {
-                    // Nemesis of Mortals
-                    return false;
-                }
-            } else if (type.equals("SelfIntrinsicAbility")) {
-                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility() || sa.isTemporary()) {
                     return false;
                 }
             }

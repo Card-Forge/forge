@@ -1,0 +1,7 @@
+Name:Pirate
+ManaCost:no cost
+Types:Creature Pirate
+Colors:black
+PT:2/2
+K:Menace
+Oracle:Menace

@@ -12,6 +12,7 @@ import forge.util.Lang;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -49,7 +50,8 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
                     if (possibleAb.isEmpty()) {
                         continue;
                     }
-                    SpellAbility manaAb = p.getController().chooseSingleSpellForEffect(possibleAb, sa, "Choose a mana ability:");
+                    SpellAbility manaAb = p.getController().chooseSingleSpellForEffect(
+                            possibleAb, sa, "Choose a mana ability:", ImmutableMap.<String, Object>of());
                     p.getController().playChosenSpellAbility(manaAb);
                 }
             }

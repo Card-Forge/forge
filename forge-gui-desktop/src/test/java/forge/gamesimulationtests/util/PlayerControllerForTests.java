@@ -30,6 +30,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
@@ -167,12 +168,19 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title) {
+    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            Map<String, Object> params) {
         return chooseItem(spells);
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+        // this isn't used
+        return null;
+    }
+
+    @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
         // this isn't used
         return null;
     }
@@ -242,6 +250,11 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN) {
+        return ImmutablePair.of(topN, null);
+    }
+
+    @Override
+    public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN) {
         return ImmutablePair.of(topN, null);
     }
 
@@ -585,7 +598,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, boolean isActivatedSa ) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean isActivatedSa) {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = new ManaCostBeingPaid(toPay);
         return ComputerUtilMana.payManaCost(cost, sa, player);
@@ -617,7 +630,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
+    public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;
     }
@@ -669,6 +682,12 @@ public class PlayerControllerForTests extends PlayerController {
             List<OptionalCostValue> optionalCostValues) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

@@ -1,0 +1,6 @@
+Name:Plant
+ManaCost:no cost
+Types:Creature Plant
+Colors:green
+PT:1/1
+Oracle:

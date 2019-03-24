@@ -1,7 +1,7 @@
 Name:Seize the Day
 ManaCost:3 R
 Types:Sorcery
-K:Flashback 2 R
+K:Flashback:2 R
 A:SP$ Untap | Cost$ 3 R | ValidTgts$ Creature | SubAbility$ DBAddCombat | SpellDescription$ Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase | ConditionPhases$ Main1,Main2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_day.jpg

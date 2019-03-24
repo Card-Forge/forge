@@ -15,6 +15,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 import forge.view.FDialog;
 
 @SuppressWarnings("serial")
@@ -23,7 +24,9 @@ public class AvatarSelector extends FDialog {
     private final Map<Integer, SkinImage> avatarMap = FSkin.getAvatars();
 
     public AvatarSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {
-        this.setTitle("Select avatar for " + playerName);
+        final Localizer localizer = Localizer.getInstance();
+        String s  = localizer.getMessage("lblSelectAvatarFor");
+        this.setTitle(s.replace("%s",playerName));
 
         final JPanel pnlAvatarPics = new JPanel(new WrapLayout());
 

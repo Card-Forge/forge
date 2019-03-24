@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -7,6 +8,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -83,8 +85,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
                 String prompt = "Select " + Lang.getOrdinal(multi + 1) + " spell to copy to stack";
-                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
-                SpellAbility copiedSpell = CardFactory.copySpellAbilityAndSrcCard(card, chosen.getHostCard(), chosen, true);
+                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt,
+                        ImmutableMap.of());
+                SpellAbility copiedSpell = CardFactory.copySpellAbilityAndPossiblyHost(card, chosen.getHostCard(), chosen, true);
                 copiedSpell.getHostCard().setController(card.getController(), card.getGame().getNextTimestamp());
                 copiedSpell.setActivatingPlayer(controller);
                 copies.add(copiedSpell);
@@ -92,7 +95,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
         }
         else if (sa.hasParam("CopyForEachCanTarget")) {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             // Find subability or rootability that has targets
             SpellAbility targetedSA = chosenSA;
@@ -114,13 +118,13 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 
                 mayChooseNewTargets = false;
                 for (GameEntity o : candidates) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, o, targetedSA);
                     copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
                 final String type = sa.getParam("CopyForEachCanTarget");
-                List<Card> valid = Lists.newArrayList();
+                CardCollection valid = new CardCollection();
                 List<Player> players = Lists.newArrayList();
                 Player originalTargetPlayer = Iterables.getFirst(getTargetPlayers(chosenSA), null);
                 for (final GameEntity o : candidates) {
@@ -139,23 +143,44 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                 valid.remove(originalTarget);
                 mayChooseNewTargets = false;
-                for (final Card c : valid) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
-                    resetFirstTargetOnCopy(copy, c, targetedSA);
+                if (sa.hasParam("ChooseOnlyOne")) {
+                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, "Choose one");
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
+                    resetFirstTargetOnCopy(copy, choice, targetedSA);
                     copies.add(copy);
+                } else {
+                   for (final Card c : valid) {
+                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
+                        resetFirstTargetOnCopy(copy, c, targetedSA);
+                        copies.add(copy);
+                   }
                 }
                 for (final Player p : players) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, p, targetedSA);
                     copies.add(copy);
                 }
             }
         }
         else {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true));
+                SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(
+                        card, chosenSA.getHostCard(), chosenSA, true);
+
+                // extra case for Epic to remove the keyword and the last part of the SpellAbility
+                if (sa.hasParam("Epic")) {
+                    copy.getHostCard().removeIntrinsicKeyword("Epic");
+                    SpellAbility sub = copy;
+                    while (sub.getSubAbility() != null) {
+                        sub = sub.getSubAbility();
+                    }
+                    sub.getParent().setSubAbility(null);
+                }
+
+                copies.add(copy);
             }
         }
         

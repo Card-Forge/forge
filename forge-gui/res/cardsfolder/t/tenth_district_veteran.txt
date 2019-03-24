@@ -1,0 +1,8 @@
+Name:Tenth District Veteran
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap another target creature you control.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control.
+Oracle:Vigilance\nWhenever Tenth District Veteran attacks, untap another target creature you control.

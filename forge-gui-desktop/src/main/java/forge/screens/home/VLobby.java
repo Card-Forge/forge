@@ -1,39 +1,11 @@
 package forge.screens.home;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.UiCommand;
 import forge.ai.AIOption;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
-import forge.deck.RandomDeckGenerator;
+import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
@@ -48,20 +20,24 @@ import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FPanel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FScrollPanel;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Lobby view. View of a number of players at the deck selection stage.
@@ -96,9 +72,9 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntTinyLeaders, vntBrawl, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntTinyLeaders, vntBrawl /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -250,6 +226,8 @@ public class VLobby implements ILobbyView {
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
+            case LEGACY_CARDGEN_DECK:
+            case VINTAGE_CARDGEN_DECK:
             case COLOR_DECK:
             case STANDARD_COLOR_DECK:
             case MODERN_COLOR_DECK:
@@ -1007,17 +985,17 @@ public class VLobby implements ILobbyView {
         return vgdAllAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemAIDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:All. */
     public List<PaperCard> getAllAiAvatars() {
         return vgdAllAiAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemRandomDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:Random. */
     public List<PaperCard> getNonRandomHumanAvatars() {
         return nonRandomHumanAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemAIDeck or RemRandomDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:All or RemoveDeck:Random. */
     public List<PaperCard> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
     }

@@ -100,7 +100,8 @@ import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
-import forge.view.arcane.FloatingCardArea;
+import forge.view.arcane.FloatingZone;
+import forge.match.input.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -143,7 +144,12 @@ public final class CMatchUI
         this.myDocs = new EnumMap<EDocID, IVDoc<? extends ICDoc>>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
-        this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
+        // only create an ante doc if playing for ante
+        if (isPreferenceEnabled(FPref.UI_ANTE)) {
+            this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
+        } else {
+            this.myDocs.put(EDocID.CARD_ANTES, null);
+        }
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
@@ -156,6 +162,10 @@ public final class CMatchUI
         for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc : myDocs.entrySet()) {
             doc.getKey().setDoc(doc.getValue());
         }
+    }
+
+    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     FScreen getScreen() {
@@ -200,7 +210,7 @@ public final class CMatchUI
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
-        // Update toggle buttons in dev mdoe panel
+        // Update toggle buttons in dev mode panel
         getCDev().update();
     }
 
@@ -386,10 +396,12 @@ public final class CMatchUI
                     break;
                 case Hand:
                     updateHand = true;
-                    //$FALL-THROUGH$
+                    updateZones = true;
+                    FloatingZone.refresh(owner, zone);
+                    break;
                 default:
                     updateZones = true;
-                    FloatingCardArea.refresh(owner, zone);
+                    FloatingZone.refresh(owner, zone);
                     break;
                 }
             }
@@ -403,6 +415,8 @@ public final class CMatchUI
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
+                // update Cards in Hand
+                vField.updateDetails();
             }
             if (updateAnte) {
                 cAntes.update();
@@ -411,6 +425,59 @@ public final class CMatchUI
                 vField.updateZones();
             }
         }
+    }
+
+    @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView player = update.getPlayer();
+            for (final ZoneType zone : update.getZones()) {
+		switch (zone) {
+		case Battlefield: // always shown
+		    break;
+		case Hand:  // controller hand always shown
+		    if (controller != player) {
+			FloatingZone.show(this,player,zone);
+		    }
+		    break;
+		case Library:
+		case Graveyard:
+		case Exile:
+		case Flashback:
+		case Command:
+		    FloatingZone.show(this,player,zone);
+		    break;
+		default:
+		    break;
+		}
+	    }
+	}
+	return zonesToUpdate; //pfps should return only the newly shown zones
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+	if ( zonesToUpdate != null ) {
+	    for (final PlayerZoneUpdate update : zonesToUpdate) {
+		final PlayerView player = update.getPlayer();
+		for (final ZoneType zone : update.getZones()) {
+		    switch (zone) {
+		    case Battlefield: // always shown
+			break;
+		    case Hand: // the controller's hand should never be temporarily shown, but ...
+		    case Library:
+		    case Graveyard:
+		    case Exile:
+		    case Flashback:
+		    case Command:
+			FloatingZone.hide(this,player,zone);
+			break;
+		    default:
+			break;
+		    }
+		}
+	    }
+	}
     }
 
     // Player's mana pool changes
@@ -454,10 +521,50 @@ public final class CMatchUI
                 }
                 break;
             default:
+		FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }
     }
+
+    @Override
+    public void setSelectables(final Iterable<CardView> cards) {
+	super.setSelectables(cards);
+	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+		    for (final PlayerView p : getGameView().getPlayers()) {
+			if ( p.getCards(ZoneType.Battlefield) != null ) {
+			    updateCards(p.getCards(ZoneType.Battlefield));
+			}
+			if ( p.getCards(ZoneType.Hand) != null ) {
+			    updateCards(p.getCards(ZoneType.Hand));
+			}
+		    }
+		    FloatingZone.refreshAll();
+		}
+	    });
+    }
+
+    @Override
+    public void clearSelectables() {
+	super.clearSelectables();
+	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+		    for (final PlayerView p : getGameView().getPlayers()) {
+			if ( p.getCards(ZoneType.Battlefield) != null ) {
+			    updateCards(p.getCards(ZoneType.Battlefield));
+			}
+			if ( p.getCards(ZoneType.Hand) != null ) {
+			    updateCards(p.getCards(ZoneType.Hand));
+			}
+		    }
+		    FloatingZone.refreshAll();
+		}
+	    });
+    }
+
 
     @Override
     public List<JMenu> getMenus() {
@@ -486,11 +593,14 @@ public final class CMatchUI
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
+            if (view == null) {
+                continue;
+            }
             final ICDoc layoutControl = view.getLayoutControl();
             layoutControl.initialize();
             layoutControl.update();
         }
-        FloatingCardArea.closeAll();
+        FloatingZone.closeAll();
     }
 
     @Override
@@ -548,7 +658,7 @@ public final class CMatchUI
         case Exile:
         case Graveyard:
         case Library:
-            return FloatingCardArea.getCardPanel(this, card);
+            return FloatingZone.getCardPanel(this, card);
         default:
             break;
         }
@@ -659,7 +769,7 @@ public final class CMatchUI
 
     @Override
     public void finishGame() {
-        FloatingCardArea.closeAll(); //ensure floating card areas cleared and closed after the game
+        FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
@@ -773,7 +883,7 @@ public final class CMatchUI
             } else {
                 final ZoneType zone = hostCard.getZone();
                 if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library).contains(zone)) {
-                    FloatingCardArea.show(this, hostCard.getController(), zone);
+                    FloatingZone.show(this, hostCard.getController(), zone);
                 }
                 menuParent = panel.getParent();
                 x = triggerEvent.getX();
@@ -928,11 +1038,16 @@ public final class CMatchUI
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        return (List<GameEntityView>) order(title,"Selected", 0, optionList.size(), optionList, null, null, false);
+        return (List<GameEntityView>) order(title,"Selected", min, max, optionList, null, null, false);
+    }
+
+    @Override
+    public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	return GuiChoose.manipulateCardList(this, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
     @Override

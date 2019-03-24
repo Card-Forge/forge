@@ -6,6 +6,6 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | Trigg
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ AddTurn | Cost$ SubCounter<All/P1P1> | Defined$ You | NumTurns$ X | References$ X | SpellDescription$ For each five counters removed this way, take an extra turn after this one.
 SVar:X:SVar$CostCountersRemoved/DivideEvenlyDown.5
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_hours.jpg
 Oracle:Heroic — Whenever you cast a spell that targets Sage of Hours, put a +1/+1 counter on it.\nRemove all +1/+1 counters from Sage of Hours: For each five counters removed this way, take an extra turn after this one.

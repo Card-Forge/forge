@@ -1,7 +1,7 @@
 Name:The Great Aurora
 ManaCost:6 G G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBStoreAmount | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from his or her hand and all permanents he or she owns into his or her library, then draws that many cards. Each player may put any number of land cards from his or her hand onto the battlefield. Exile The Great Aurora.
+A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBStoreAmount | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.
 # ChangeType is fine being "Card" because if it's on the battlefield, it has to be a permanent
 SVar:DBStoreAmount:DB$ StoreSVar | SVar$ AuroraY | Type$ Count | Expression$ Valid Card.RememberedPlayerOwn | SubAbility$ DBStoreAmount2
 SVar:DBStoreAmount2:DB$ StoreSVar | SVar$ AuroraZ | Type$ Count | Expression$ ValidHand Card.RememberedPlayerOwn | SubAbility$ DBShuffle
@@ -16,4 +16,4 @@ SVar:HandSize:Count$ValidHand Land.RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ ExileAurora
 SVar:ExileAurora:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_great_aurora.jpg
-Oracle:Each player shuffles all cards from his or her hand and all permanents he or she owns into his or her library, then draws that many cards. Each player may put any number of land cards from his or her hand onto the battlefield. Exile The Great Aurora.
+Oracle:Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.

@@ -1,0 +1,7 @@
+Name:Goblin
+ManaCost:no cost
+Types:Creature Goblin
+Colors:red
+PT:2/1
+K:Haste
+Oracle:Haste

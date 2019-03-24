@@ -1,8 +1,8 @@
 Name:Saproling Symbiosis
 ManaCost:3 G
 Types:Sorcery
-K:You may cast CARDNAME as though it had flash if you pay {2} more to cast it.
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 green Saproling creature token for each creature you control.
+K:MayFlashCost:2
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | References$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling inv | SpellDescription$ Create a 1/1 green Saproling creature token for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_symbiosis.jpg

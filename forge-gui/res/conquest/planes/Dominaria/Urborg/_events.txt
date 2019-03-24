@@ -1,0 +1,9 @@
+Name:Urgoros, the Empty One|Deck:Urgoros, the Empty One.dck|Variant:Commander|Avatar:Urgoros, the Empty One|Desc:
+Name:Josu Vess, Lich Knight|Deck:Josu Vess, Lich Knight.dck|Variant:Commander|Avatar:Josu Vess, Lich Knight|Desc:
+Name:Kazarov, Sengir Pureblood|Deck:Kazarov, Sengir Pureblood.dck|Variant:Commander|Avatar:Kazarov, Sengir Pureblood|Desc:
+Name:Arvad the Cursed|Deck:Arvad the Cursed.dck|Variant:Commander|Avatar:Arvad the Cursed|Desc:
+Name:Liliana, the Necromancer|Deck:Liliana, the Necromancer.dck|Variant:Planeswalker|Avatar:Liliana, the Necromancer|Desc:
+Name:Demonlord Belzenlok|Deck:Demonlord Belzenlok.dck|Variant:Planechase|Avatar:Demonlord Belzenlok|TemporaryUnlock:Time_Vault|Desc:
+Name:Yargle, Glutton of Urborg|Deck:Yargle, Glutton of Urborg.dck|Variant:Commander|Avatar:Yargle, Glutton of Urborg|Desc:
+Name:Isareth the Awakener|Deck:Isareth the Awakener.dck|Variant:Commander|Avatar:Isareth the Awakener|Desc:
+Name:Necropotence|Deck:Necropotence.dck|Variant:Vanguard|Avatar:Necropotence|Desc:

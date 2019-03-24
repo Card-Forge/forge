@@ -26,10 +26,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -134,6 +131,8 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("AlwaysAtOppEOT")) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        } else if (logic.equals("RespondToOwnActivation")) {
+            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         }
 
         // Don't use draw abilities before main 2 if possible
@@ -252,19 +251,34 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (num != null && num.equals("ChosenX")) {
-            // Necrologia, Pay X Life : Draw X Cards
             if (sa.getSVar("X").equals("XChoice")) {
                 // Draw up to max hand size but leave at least 3 in library
                 numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
-                // But no more than what's "safe" and doesn't risk a near death experience
-                // Maybe would be better to check for "serious danger" and take more risk?
-                while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
-                    numCards--;
+
+                if (sa.getPayCosts() != null) {
+                    if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
+                        // [Necrologia, Pay X Life : Draw X Cards]
+                        // Don't draw more than what's "safe" and don't risk a near death experience
+                        // Maybe would be better to check for "serious danger" and take more risk?
+                        while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                            numCards--;
+                        }
+                    } else if (sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                        // [e.g. Krav, the Unredeemed and other cases which say "Sacrifice X creatures: draw X cards]
+                        // TODO: Add special logic to limit/otherwise modify the ChosenX value here
+
+                        // Skip this ability if nothing is to be chosen for sacrifice
+                        if (numCards <= 0) {
+                            return false;
+                        }
+                    }
                 }
+
                 sa.setSVar("ChosenX", Integer.toString(numCards));
                 source.setSVar("ChosenX", Integer.toString(numCards));
             }
         }
+
         // Logic for cards that require special handling
         if ("YawgmothsBargain".equals(logic)) {
             return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
@@ -351,6 +365,10 @@ public class DrawAi extends SpellAbilityAi {
                 if (numCards >= computerLibrarySize) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
+                        if (numCards <= 0 && !mandatory) {
+                            // not drawing anything, so don't do it
+                            return false;
+                        }
                     } else if (!ai.isCardInPlay("Laboratory Maniac")) {
                         aiTarget = false;
                     }
@@ -384,6 +402,9 @@ public class DrawAi extends SpellAbilityAi {
                 if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
+                        if (sa.getHostCard().getZone().is(ZoneType.Hand)) {
+                            numCards++; // the card will be spent
+                        }
                         source.setSVar("PayX", Integer.toString(numCards));
                     } else {
                         // Don't draw too many cards and then risk discarding

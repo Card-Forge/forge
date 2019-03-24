@@ -13,7 +13,7 @@ Name=Sam Black's No Search Cube
 1 Ancestral Recall|VMA
 1 Ancestral Vision|IMA
 1 Ancient Grudge|MM3
-1 Ancient Tomb|VMA
+1 Ancient Tomb|UMA
 1 Angel of Serenity|RTR
 1 Anger of the Gods|IMA
 1 Animate Dead|EMA
@@ -21,7 +21,7 @@ Name=Sam Black's No Search Cube
 1 Arcane Sanctum|MM3
 1 Archangel Avacyn|SOI
 1 Armageddon|A25
-1 Artisan of Kozilek|MM2
+1 Artisan of Kozilek|UMA
 1 Ashiok, Nightmare Weaver|THS
 1 Atarka's Command|DTK
 1 Avenger of Zendikar|WWK
@@ -39,11 +39,11 @@ Name=Sam Black's No Search Cube
 1 Bayou|VMA
 1 Bazaar of Baghdad|VMA
 1 Beast Within|NPH
-1 Become Immense|KTK
+1 Become Immense|UMA
 1 Bedlam Reveler|EMN
 1 Benevolent Bodyguard|EMA
 1 Birds of Paradise|M12
-1 Bitterblossom|MM2
+1 Bitterblossom|UMA
 1 Black Lotus|VMA
 1 Black Sun's Zenith|MBS
 1 Blackcleave Cliffs|SOM
@@ -67,7 +67,7 @@ Name=Sam Black's No Search Cube
 1 Carrion Feeder|EMA
 1 Cartel Aristocrat|GTC
 1 Catastrophe|USG
-1 Celestial Colonnade|WWK
+1 Celestial Colonnade|UMA
 1 Chain Lightning|EMA
 1 Champion of the Parish|ISD
 1 Chandra's Phoenix|M14
@@ -93,7 +93,7 @@ Name=Sam Black's No Search Cube
 1 Courser of Kruphix|A25
 1 Crackling Doom|KTK
 1 Craterhoof Behemoth|MM3
-1 Creeping Tar Pit|WWK
+1 Creeping Tar Pit|UMA
 1 Crumbling Necropolis|MM3
 1 Cryptbreaker|EMN
 1 Cryptic Command|IMA
@@ -109,8 +109,8 @@ Name=Sam Black's No Search Cube
 1 Delver of Secrets|ISD
 1 Den Protector|DTK
 1 Desecration Demon|MM3
-1 Desolate Lighthouse|AVR
-1 Dig Through Time|KTK
+1 Desolate Lighthouse|UMA
+1 Dig Through Time|UMA
 1 Dimir Aqueduct|IMA
 1 Disciple of Bolas|M13
 1 Disenchant|A25
@@ -138,28 +138,28 @@ Name=Sam Black's No Search Cube
 1 Elixir of Immortality|M14
 1 Elspeth, Sun's Champion|THS
 1 Elvish Visionary|ORI
-1 Emrakul, the Aeons Torn|MM2
+1 Emrakul, the Aeons Torn|UMA
 1 Emrakul, the Promised End|EMN
 1 Enclave Cryptologist|ROE
-1 Engineered Explosives|MMA
+1 Engineered Explosives|UMA
 1 Ensnaring Bridge|A25
 1 Entomber Exarch|MM3
-1 Eternal Witness|MMA
+1 Eternal Witness|UMA
 1 Everflowing Chalice|MM2
 1 Evolutionary Leap|ORI
 1 Exhume|USG
 1 Explore|MM3
 1 Fact or Fiction|EMA
-1 Faith's Fetters|EMA
-1 Faithless Looting|EMA
+1 Faith's Fetters|UMA
+1 Faithless Looting|UMA
 1 Falkenrath Aristocrat|MM3
 1 Fastbond|VMA
 1 Feldon of the Third Path
 1 Fellwar Stone|9ED
-1 Fiend Hunter|A25
+1 Fiend Hunter|UMA
 1 Fiery Justice|MM3
 1 Figure of Destiny|MMA
-1 Fire // Ice|APC
+1 Fire // Ice|UMA
 1 Fireblast|VMA
 1 Firebolt|EMA
 1 Firedrinker Satyr|THS
@@ -171,7 +171,7 @@ Name=Sam Black's No Search Cube
 1 Flooded Grove|A25
 1 Force of Will|EMA
 1 Forked Bolt|ROE
-1 Frantic Search|VMA
+1 Frantic Search|UMA
 1 Frontier Bivouac|KTK
 1 Frost Titan|M12
 1 Gaea's Cradle|USG
@@ -184,9 +184,9 @@ Name=Sam Black's No Search Cube
 1 Ghor-Clan Rampager|MM3
 1 Gideon Jura|M12
 1 Gideon, Ally of Zendikar|BFZ
-1 Gilded Lotus|M13
+1 Gilded Lotus|DOM
 1 Gitaxian Probe|NPH
-1 Glen Elendra Archmage|MMA
+1 Glen Elendra Archmage|UMA
 1 Glint-Nest Crane|KLD
 1 Go for the Throat|MBS
 1 Goblin Bombardment|TPR
@@ -216,7 +216,7 @@ Name=Sam Black's No Search Cube
 1 Hero's Downfall|THS
 1 Hissing Quagmire|OGW
 1 Honor of the Pure|M12
-1 Hooting Mandrills|KTK
+1 Hooting Mandrills|UMA
 1 Hordeling Outburst|A25
 1 Hornet Queen|M15
 1 Huntmaster of the Fells|DKA
@@ -236,9 +236,9 @@ Name=Sam Black's No Search Cube
 1 Journey to Nowhere|ZEN
 1 Jungle Shrine|MM3
 1 Kalitas, Traitor of Ghet|OGW
-1 Karakas|EMA
+1 Karakas|UMA
 1 Kargan Dragonlord|ROE
-1 Karn Liberated|MM2
+1 Karn Liberated|UMA
 1 Keranos, God of Storms|JOU
 1 Kessig Wolf Run|ISD
 1 Key to the City|KLD
@@ -247,37 +247,37 @@ Name=Sam Black's No Search Cube
 1 Kiora's Follower|BNG
 1 Kiora, the Crashing Wave|BNG
 1 Kira, Great Glass-Spinner|MMA
-1 Kitchen Finks|MMA
+1 Kitchen Finks|UMA
 1 Knight of Glory|M13
 1 Kokusho, the Evening Star|MMA
 1 Kolaghan's Command|DTK
 1 Kozilek's Return|OGW
-1 Kozilek, Butcher of Truth|MM2
+1 Kozilek, Butcher of Truth|UMA
 1 Krosan Grip|MMA
 1 Kytheon, Hero of Akros|ORI
-1 Lavaclaw Reaches|WWK
+1 Lavaclaw Reaches|UMA
 1 Legacy's Allure|TMP
 1 Legion Loyalist|GTC
-1 Leovold, Emissary of Trest
+1 Leovold, Emissary of Trest|UMA
 1 Library of Alexandria|VMA
 1 Lifebane Zombie|M14
 1 Lightning Berserker|DTK
 1 Lightning Bolt|A25
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
-1 Liliana of the Veil|MM3
+1 Liliana of the Veil|UMA
 1 Liliana, Heretical Healer|ORI
 1 Liliana, the Last Hope|EMN
 1 Lingering Souls|MM3
 1 Linvala, the Preserver|OGW
 1 Living Death|A25
-1 Llanowar Elves|EMA
+1 Llanowar Elves|DOM
 1 Lodestone Golem|MM2
 1 Looter il-Kor|TSP
 1 Lotleth Troll|RTR
 1 Lotus Bloom|MMA
 1 Lumbering Falls|BFZ
-1 Maelstrom Pulse|MMA
+1 Maelstrom Pulse|UMA
 1 Maelstrom Wanderer|EMA
 1 Magma Jet|MM3
 1 Malicious Affliction|EMA
@@ -286,7 +286,7 @@ Name=Sam Black's No Search Cube
 1 Mana Drain|IMA
 1 Mana Leak|IMA
 1 Mana Tithe|PLC
-1 Mana Vault|VMA
+1 Mana Vault|UMA
 1 Managorger Hydra|ORI
 1 Mantis Rider|KTK
 1 Marsh Flitter|MMA
@@ -320,7 +320,7 @@ Name=Sam Black's No Search Cube
 1 Mox Ruby|VMA
 1 Mox Sapphire|VMA
 1 Mulldrifter|MM2
-1 Murderous Redcap|MMA
+1 Murderous Redcap|UMA
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
 1 Mystic Monastery|KTK
@@ -336,7 +336,7 @@ Name=Sam Black's No Search Cube
 1 Nightveil Specter|GTC
 1 Nissa, Vital Force|KLD
 1 Nissa, Voice of Zendikar|OGW
-1 Noble Hierarch|MM2
+1 Noble Hierarch|UMA
 1 Nomad Outpost|KTK
 1 Noose Constrictor|EMN
 1 Noxious Gearhulk|KLD
@@ -360,14 +360,14 @@ Name=Sam Black's No Search Cube
 1 Painful Truths|BFZ
 1 Palinchron|VMA
 1 Palladium Myr|IMA
-1 Pelakka Wurm|MM2
+1 Pelakka Wurm|M19
 1 Pentavus|M12
 1 Pernicious Deed|A25
 1 Pestermite|MMA
 1 Phantasmal Image|MM3
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Revoker|M15
-1 Phyrexian Tower|USG
+1 Phyrexian Tower|UMA
 1 Pia Nalaar|KLD
 1 Pia and Kiran Nalaar|ORI
 1 Plateau|VMA
@@ -383,29 +383,29 @@ Name=Sam Black's No Search Cube
 1 Puppeteer Clique|MM2
 1 Quarantine Field|BFZ
 1 Radiant Flames|BFZ
-1 Raging Ravine|WWK
+1 Raging Ravine|UMA
 1 Rakdos Carnarium|IMA
 1 Rakdos's Return|RTR
 1 Rancor|A25
 1 Ratchet Bomb|M14
 1 Reality Smasher|OGW
-1 Reanimate|TPR
-1 Reassembling Skeleton|MM2
-1 Reclamation Sage|M15
+1 Reanimate|UMA
+1 Reassembling Skeleton|M19
+1 Reclamation Sage|M19
 1 Recurring Nightmare|TPR
 1 Reflector Mage|OGW
 1 Regrowth|A25
 1 Relic of Progenitus|EMA
 1 Remand|MM2
 1 Restoration Angel|IMA
-1 Reveillark|MMA
+1 Reveillark|UMA
 1 Ribbons of Night|RAV
 1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
 1 Rishadan Port|A25
 1 Rofellos, Llanowar Emissary|VMA
 1 Sandsteppe Citadel|KTK
-1 Satyr Wayfinder|M15
+1 Satyr Wayfinder|UMA
 1 Savage Lands|MM3
 1 Savannah|VMA
 1 Scavenging Ooze|MM3
@@ -427,10 +427,10 @@ Name=Sam Black's No Search Cube
 1 Shardless Agent|EMA
 1 Shelldock Isle|LRW
 1 Show and Tell|USG
-1 Shriekmaw|LRW
+1 Shriekmaw|UMA
 1 Shrine of Burning Rage|NPH
 1 Siege Rhino|KTK
-1 Siege-Gang Commander|EMA
+1 Siege-Gang Commander|DOM
 1 Simic Growth Chamber|IMA
 1 Sinkhole|EMA
 1 Skirsdag High Priest|ISD
@@ -441,7 +441,7 @@ Name=Sam Black's No Search Cube
 1 Smash to Smithereens|ORI
 1 Smokestack|VMA
 1 Smuggler's Copter|KLD
-1 Snapcaster Mage|MM3
+1 Snapcaster Mage|UMA
 1 Sneak Attack|EMA
 1 Sol Ring|VMA
 1 Soldier of the Pantheon|THS
@@ -458,13 +458,13 @@ Name=Sam Black's No Search Cube
 1 Sphinx of the Steel Wind|EMA
 1 Sphinx's Revelation|MM3
 1 Splinter Twin|MM2
-1 Stirring Wildwood|WWK
+1 Stirring Wildwood|UMA
 1 Stoke the Flames|M15
 1 Stormbreath Dragon|THS
 1 Stratus Dancer|DTK
 1 Strip Mine|VMA
 1 Student of Warfare|ROE
-1 Sublime Archangel|M13
+1 Sublime Archangel|UMA
 1 Sulfuric Vortex|EMA
 1 Sun Titan|M12
 1 Sundering Titan|A25
@@ -477,7 +477,7 @@ Name=Sam Black's No Search Cube
 1 Taiga|VMA
 1 Tamiyo, Field Researcher|EMN
 1 Tamiyo, the Moon Sage|AVR
-1 Tarmogoyf|MM3
+1 Tarmogoyf|UMA
 1 Tasigur, the Golden Fang|FRF
 1 Temple of Abandon|THS
 1 Temple of Deceit|THS
@@ -516,13 +516,13 @@ Name=Sam Black's No Search Cube
 1 Tin Street Hooligan|GPT
 1 Tireless Tracker|SOI
 1 Tolarian Academy|VMA
-1 Tormenting Voice|IMA
+1 Tormenting Voice|M19
 1 Torrential Gearhulk|KLD
 1 Toxic Deluge|EMA
 1 Tradewind Rider|TPR
 1 Trading Post|M14
 1 Treachery|UDS
-1 Treasure Cruise|KTK
+1 Treasure Cruise|UMA
 1 Treetop Village|10E
 1 Triskelion|M11
 1 Tropical Island|VMA
@@ -532,7 +532,7 @@ Name=Sam Black's No Search Cube
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Umezawa's Jitte|BOK
-1 Unburial Rites|MM3
+1 Unburial Rites|UMA
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
 1 Unlicensed Disintegration|KLD
@@ -565,7 +565,7 @@ Name=Sam Black's No Search Cube
 1 Whip of Erebos|THS
 1 Whirler Rogue|ORI
 1 Whisperwood Elemental|FRF
-1 Wickerbough Elder|EVE
+1 Wickerbough Elder|UMA
 1 Wild Growth|7ED
 1 Wildest Dreams|KLD
 1 Wildfire|MM2
@@ -580,7 +580,7 @@ Name=Sam Black's No Search Cube
 1 Xathrid Necromancer|M14
 1 Yawgmoth's Bargain|UDS
 1 Yawgmoth's Will|USG
-1 Young Pyromancer|EMA
+1 Young Pyromancer|UMA
 1 Zealous Conscripts|MM3
 1 Zulaport Cutthroat|A25
 1 Zurgo Bellstriker|DTK

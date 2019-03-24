@@ -1,7 +1,7 @@
 Name:Adventuring Gear
 ManaCost:1
 Types:Artifact Equipment
-K:Equip 1
+K:Equip:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
 SVar:TrigPump:DB$Pump | Defined$ Equipped | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Land

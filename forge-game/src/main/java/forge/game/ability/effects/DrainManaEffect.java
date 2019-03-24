@@ -19,7 +19,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         sb.append(StringUtils.join(tgtPlayers, ", "));
-        sb.append(" empties his or her mana pool.");
+        sb.append(" loses all unspent mana.");
 
         return sb.toString();
     }

@@ -56,6 +56,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxStandardColorDecks = new FCheckBox(DeckType.STANDARD_COLOR_DECK.toString());
     private final JCheckBox boxStandardCardgenDecks = new FCheckBox(DeckType.STANDARD_CARDGEN_DECK.toString());
     private final JCheckBox boxModernCardgenDecks = new FCheckBox(DeckType.MODERN_CARDGEN_DECK.toString());
+    private final JCheckBox boxLegacyCardgenDecks = new FCheckBox(DeckType.LEGACY_CARDGEN_DECK.toString());
+    private final JCheckBox boxVintageCardgenDecks = new FCheckBox(DeckType.VINTAGE_CARDGEN_DECK.toString());
     private final JCheckBox boxModernColorDecks = new FCheckBox(DeckType.MODERN_COLOR_DECK.toString());
     private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
 
@@ -88,9 +90,13 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         if(FModel.isdeckGenMatrixLoaded()) {
             boxStandardCardgenDecks.setSelected(true);
             boxModernCardgenDecks.setSelected(true);
+            boxLegacyCardgenDecks.setSelected(true);
+            boxVintageCardgenDecks.setSelected(true);
         }else{
             boxStandardCardgenDecks.setSelected(false);
             boxModernCardgenDecks.setSelected(false);
+            boxLegacyCardgenDecks.setSelected(false);
+            boxVintageCardgenDecks.setSelected(false);
         }
         boxModernColorDecks.setSelected(true);
 
@@ -101,7 +107,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setSnapToTicks(true);
         sliOpponents.setOpaque(false);
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sliOpponents.setFont(FSkin.getFont(12));
+        sliOpponents.setFont(FSkin.getFont());
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
@@ -117,6 +123,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         if(FModel.isdeckGenMatrixLoaded()) {
             pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
             pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+            pnlOptions.add(boxLegacyCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+            pnlOptions.add(boxVintageCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         }
         pnlOptions.add(boxStandardColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxModernColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
@@ -213,6 +221,12 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getBoxModernGenDecks() {
         return boxModernCardgenDecks;
+    }
+    public JCheckBox getBoxLegacyGenDecks() {
+        return boxLegacyCardgenDecks;
+    }
+    public JCheckBox getBoxVintageGenDecks() {
+        return boxVintageCardgenDecks;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

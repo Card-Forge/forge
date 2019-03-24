@@ -5,7 +5,7 @@ PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | ManaSpent$ R | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, if {R} was spent to cast CARDNAME, it gains haste until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Haste
 SVar:ManaNeededToAvoidNegativeEffect:red
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:PlayMain1:ALWAYS
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_scrapper.jpg

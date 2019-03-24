@@ -1,0 +1,6 @@
+Name:Soldier
+ManaCost:no cost
+Types:Enchantment Creature Soldier
+Colors:white
+PT:1/1
+Oracle:

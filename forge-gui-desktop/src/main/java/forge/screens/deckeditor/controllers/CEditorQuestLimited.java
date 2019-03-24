@@ -58,7 +58,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorQuest.java 24868 2014-02-17 05:08:05Z drdev $
  */
-public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup> {
+public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
     private final QuestController questData;
     private final DeckController<DeckGroup> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
@@ -198,10 +198,6 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
         cmb.addMoveItems("Move", "to sideboard");
     }
 
-    private Deck getSelectedDeck(final DeckGroup model) {
-        return model.getHumanDeck();
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -209,9 +205,13 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
      */
     @Override
     public void resetTables() {
-        final Deck toEdit = this.getSelectedDeck(this.controller.getModel());
-        this.getCatalogManager().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
-        this.getDeckManager().setPool(toEdit.getMain());
+        this.getCatalogManager().setPool(getHumanDeck().getOrCreate(DeckSection.Sideboard));
+        this.getDeckManager().setPool(getHumanDeck().getMain());
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return section != DeckSection.Sideboard && allSections.contains(section);
     }
 
     //=========== Overridden from ACEditorBase
@@ -246,11 +246,7 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
         resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
-
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

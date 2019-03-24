@@ -1,0 +1,8 @@
+Name:Ghor-Clan Wrecker
+ManaCost:3 R
+Types:Creature Human Warrior
+PT:2/2
+K:Riot
+K:Menace
+DeckHas:Ability$Counters
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/1+ counter or haste.)\nMenace (This creature can't be blocked except by two or more creatures.)

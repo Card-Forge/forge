@@ -1,8 +1,8 @@
 Name:Carrion
 ManaCost:1 B B
 Types:Instant
-A:SP$ Token | Cost$ 1 B B Sac<1/Creature> | TokenName$ Insect | TokenColors$ Black | TokenTypes$ Creature,Insect | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ X | References$ X | SpellDescription$ Create X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.
+A:SP$ Token | Cost$ 1 B B Sac<1/Creature> | TokenScript$ b_0_1_insect | TokenOwner$ You | LegacyImage$ b 0 1 insect mir | TokenAmount$ X | References$ X | SpellDescription$ Create X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion.jpg
-Oracle:As an additional cost to cast Carrion, sacrifice a creature.\nCreate X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nCreate X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.

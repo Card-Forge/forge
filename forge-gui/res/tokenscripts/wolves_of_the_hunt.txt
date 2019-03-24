@@ -1,0 +1,7 @@
+Name:Wolves of the Hunt
+ManaCost:no cost
+Colors:green
+Types:Creature Wolf
+PT:1/1
+K:Bands with Other Creatures named Wolves of the Hunt
+Oracle:Bands with other creatures named Wolves of the Hunt.

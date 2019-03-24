@@ -82,7 +82,7 @@ public class FComboBoxPanel<E> extends JPanel {
         if (comboBoxCaption != null && !comboBoxCaption.isEmpty()) {
             final SkinnedLabel comboLabel = new SkinnedLabel(comboBoxCaption);
             comboLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            comboLabel.setFont(FSkin.getBoldFont(12));
+            comboLabel.setFont(FSkin.getBoldFont());
             add(comboLabel);
         }
     }
@@ -91,7 +91,7 @@ public class FComboBoxPanel<E> extends JPanel {
         if (comboBox != null) {
             comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
             comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            comboBox.setFont(FSkin.getFont(12));
+            comboBox.setFont(FSkin.getFont());
             comboBox.setEditable(false);
             comboBox.setFocusable(true);
             comboBox.setOpaque(true);

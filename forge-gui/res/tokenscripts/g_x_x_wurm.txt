@@ -1,0 +1,6 @@
+Name:Wurm
+Colors:green
+ManaCost:no cost
+PT:*/*
+Types:Creature Wurm
+Oracle:

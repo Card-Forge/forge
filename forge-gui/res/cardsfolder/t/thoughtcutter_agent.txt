@@ -2,7 +2,7 @@ Name:Thoughtcutter Agent
 ManaCost:U B
 Types:Artifact Creature Human Rogue
 PT:1/1
-A:AB$ LoseLife | Cost$ U B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBReveal | SpellDescription$ Target player loses 1 life and reveals his or her hand.
+A:AB$ LoseLife | Cost$ U B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBReveal | SpellDescription$ Target player loses 1 life and reveals their hand.
 SVar:DBReveal:DB$RevealHand | Defined$ Targeted
 SVar:Picture:http://magic.tcgplayer.com/db/cards/16857.jpg
-Oracle:{U}{B}, {T}: Target player loses 1 life and reveals his or her hand.
+Oracle:{U}{B}, {T}: Target player loses 1 life and reveals their hand.

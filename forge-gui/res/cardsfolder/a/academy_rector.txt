@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
 SVar:SacMe:4
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_rector.jpg
 Oracle:When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.

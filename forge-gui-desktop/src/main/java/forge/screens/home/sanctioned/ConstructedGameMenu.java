@@ -4,6 +4,7 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -21,7 +22,8 @@ public final class ConstructedGameMenu {
     private static ForgePreferences prefs = FModel.getPreferences();
 
     public static JMenu getMenu() {
-        JMenu menu = new JMenu("Game");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu menu = new JMenu(localizer.getMessage("lblGame"));
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_SingletonMode());
         menu.add(getMenuItem_ArtifactsMode());
@@ -30,8 +32,9 @@ public final class ConstructedGameMenu {
     }
 
     private static JMenuItem getMenuItem_SmallCreaturesMode() {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem("Remove Small Creatures");
-        MenuUtil.setMenuHint(menu, "Remove 1/1 and 0/X creatures in generated decks.");
+        final Localizer localizer = Localizer.getInstance();
+        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbRemoveSmall"));
+        MenuUtil.setMenuHint(menu, localizer.getMessage("lblRemoveSmallCreatures"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
         menu.addActionListener(new ActionListener() {
             @Override
@@ -51,8 +54,9 @@ public final class ConstructedGameMenu {
     }
 
     private static JMenuItem getMenuItem_ArtifactsMode() {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem("Remove Artifacts");
-        MenuUtil.setMenuHint(menu, "Remove artifact cards in generated decks.");
+        final Localizer localizer = Localizer.getInstance();
+        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbRemoveArtifacts"));
+        MenuUtil.setMenuHint(menu, localizer.getMessage("lblRemoveArtifacts"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         menu.addActionListener(new ActionListener() {
             @Override
@@ -73,8 +77,9 @@ public final class ConstructedGameMenu {
     }
 
     private static JMenuItem getMenuItem_SingletonMode() {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem("Singleton Mode");
-        MenuUtil.setMenuHint(menu, "Prevent non-land duplicates in generated decks.");
+        final Localizer localizer = Localizer.getInstance();
+        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbSingletons"));
+        MenuUtil.setMenuHint(menu, localizer.getMessage("PreventNonLandDuplicates"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         menu.addActionListener(new ActionListener() {
             @Override

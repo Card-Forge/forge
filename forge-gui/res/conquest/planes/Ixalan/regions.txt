@@ -1,0 +1,5 @@
+Name:Vault of Catlacan|Art:Vault of Catlacan|Colors:UWR
+Name:Itlimoc, Cradle of the Sun|Art:Itlimoc, Cradle of the Sun|Colors:GWR
+Name:Azcanta, the Sunken Ruin|Art:Azcanta, the Sunken Ruin|Colors:UG
+Name:Adanto, the First Fort|Art:Adanto, the First Fort|Colors:WB
+Name:Orazca|Art:Winged Temple of Orazca|Colors:WUBRG

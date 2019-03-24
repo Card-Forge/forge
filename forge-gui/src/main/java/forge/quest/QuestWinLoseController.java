@@ -226,9 +226,14 @@ public class QuestWinLoseController {
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
-        int multiplayer = Math.min(qData.getAchievements().getWin(), FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_WINS_MULTIPLIER_MAX));
+        if(qEvent.getIsRandomMatch()){
+            sb.append("Random Opponent Bonus: " + credBase + " credit" + (credBase > 1 ? "s." : ".") + "\n");
+            credBase += credBase;
+        }
+
+        final int winMultiplier = Math.min(qData.getAchievements().getWin(), FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_WINS_MULTIPLIER_MAX));
         final int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
-                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * multiplier));
+                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * winMultiplier));
 
         credBase += creditsForPreviousWins;
 
@@ -501,7 +506,7 @@ public class QuestWinLoseController {
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+            for (final GameFormat f : FModel.getFormats().getSanctionedList()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;

@@ -8,6 +8,6 @@ SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination
 SVar:TrigAttack:Mode$ AttackerUnblocked | ValidCard$ Creature | Execute$ TrigUntap | TriggerZones$ Command | TriggerDescription$ Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.
 SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttacker | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melee.jpg
 Oracle:Cast Melee only during your turn and only during combat before blockers are declared.\nYou choose which creatures block this combat and how those creatures block.\nWhenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
@@ -131,6 +133,8 @@ public class CardZoom extends FOverlay {
                 return CardView.getCardForUi(((CardThemedDeckGenerator)item).getPaperCard());
             }else if (item instanceof CommanderDeckGenerator){
                 return CardView.getCardForUi(((CommanderDeckGenerator)item).getPaperCard());
+            }else if (item instanceof ArchetypeDeckGenerator){
+                return CardView.getCardForUi(((ArchetypeDeckGenerator)item).getPaperCard());
             }else{
                 DeckProxy deck = ((DeckProxy)item);
                 return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));
@@ -217,11 +221,24 @@ public class CardZoom extends FOverlay {
         float maxCardHeight = h - 2 * messageHeight;
 
         float cardWidth, cardHeight, y;
+        
         if (oneCardView && !Forge.isLandscapeMode()) {
+
             cardWidth = w;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+            
+            boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
+            if (currentCard.isSplitCard() && rotateSplit) {
+                // card will be rotated.  Make sure that the height does not exceed the width of the view
+                if (cardHeight > Gdx.graphics.getWidth())
+                {
+                    cardHeight = Gdx.graphics.getWidth();
+                    cardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
+                }
+            }
         }
         else {
+            
             cardWidth = w * 0.5f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
 
@@ -237,7 +254,7 @@ public class CardZoom extends FOverlay {
             if (nextCard != null) {
                 CardImageRenderer.drawZoom(g, nextCard, gameView, false, w - cardWidth, y, cardWidth, cardHeight, getWidth(), getHeight(), false);
             }
-            
+
             cardWidth = w * 0.7f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }

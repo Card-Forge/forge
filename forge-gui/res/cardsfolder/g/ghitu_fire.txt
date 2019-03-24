@@ -1,8 +1,8 @@
 Name:Ghitu Fire
 ManaCost:X R
 Types:Sorcery
-K:You may cast CARDNAME as though it had flash if you pay {2} more to cast it.
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+K:MayFlashCost:2
+A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_fire.jpg
-Oracle:You may cast Ghitu Fire as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)\nGhitu Fire deals X damage to target creature or player.
+Oracle:You may cast Ghitu Fire as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)\nGhitu Fire deals X damage to any target.

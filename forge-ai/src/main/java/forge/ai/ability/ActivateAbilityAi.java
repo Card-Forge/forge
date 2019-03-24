@@ -12,6 +12,7 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
+import java.util.Map;
 
 public class ActivateAbilityAi extends SpellAbilityAi {
 
@@ -93,7 +94,8 @@ public class ActivateAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
+            Map<String, Object> params) {
         return spells.get(0);
     }
 }

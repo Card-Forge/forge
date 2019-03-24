@@ -1,0 +1,7 @@
+Name:Beast
+ManaCost:no cost
+Types:Creature Beast
+Colors:red,green
+PT:4/4
+K:Trample
+Oracle:Trample

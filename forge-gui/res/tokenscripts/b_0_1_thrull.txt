@@ -1,0 +1,6 @@
+Name:Thrull
+ManaCost:no cost
+Types:Creature Thrull
+Colors:black
+PT:0/1
+Oracle:

@@ -1,0 +1,6 @@
+Name:Horse
+ManaCost:no cost
+PT:5/5
+Colors:white
+Types:Creature Horse
+Oracle:

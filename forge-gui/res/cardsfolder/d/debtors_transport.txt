@@ -1,0 +1,7 @@
+Name:Debtors' Transport
+ManaCost:5 B
+Types:Creature Thrull
+PT:5/3
+K:Afterlife:2
+DeckHas:Ability$Token
+Oracle:Afterlife 2 (When this creature dies, create two 1/1 white and black Spirit creature tokens with flying.)

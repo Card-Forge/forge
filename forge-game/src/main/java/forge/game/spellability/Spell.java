@@ -20,10 +20,10 @@ package forge.game.spellability;
 import com.google.common.collect.Sets;
 
 import forge.card.CardStateName;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -44,6 +44,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     /** Constant <code>serialVersionUID=-7930920571482203460L</code>. */
     private static final long serialVersionUID = -7930920571482203460L;
+
+    private static boolean performanceMode = false;
+
+    public static void setPerformanceMode(boolean performanceMode){
+        Spell.performanceMode=performanceMode;
+    }
 
     private boolean castFaceDown = false;
 
@@ -68,7 +74,14 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final Card card = this.getHostCard();
+        Card card = this.getHostCard();
+
+        // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
+        ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
+        boolean wasFaceDownInstant = card.isFaceDown()
+                && !card.getLastKnownZone().is(ZoneType.Battlefield)
+                && card.getState(CardStateName.Original).getType().isInstant();
+
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -89,45 +102,68 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             isInstant = card.getState(name).getType().isInstant();
         }
 
-        boolean flash = card.hasKeyword("Flash");
+        boolean lkicheck = false;
+        boolean flash = false;
 
-        if (this.hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
+        // do performanceMode only for cases where the activator is different than controller
+        if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)
+                && !card.isInZone(ZoneType.Battlefield)) {
+            // always make a lki copy in this case?
+            card = CardUtil.getLKICopy(card);
+            card.setController(activator, 0);
+            lkicheck = true;
+        }
+
+        if (hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
-            
-            Card lki = card.isLKI() ? card : CardUtil.getLKICopy(card);
-            
-            lki.animateBestow(false);
-
-            CardCollection preList = new CardCollection(lki);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
-            
-            flash = lki.hasKeyword("Flash");
-            
-            // need to check again to reset the Keywords and other effects
-            if (card.isLKI()) {
-                lki.unanimateBestow(false);
-                game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
+            if (!card.isLKI()) {
+                card = CardUtil.getLKICopy(card);
             }
+            card.animateBestow(false);
+            lkicheck = true;
+        } else if (isCastFaceDown()) {
+            // need a copy of the card to turn facedown without trigger anything
+            if (!card.isLKI()) {
+                card = CardUtil.getLKICopy(card);
+            }
+            card.turnFaceDownNoUpdate();
+            lkicheck = true;
         }
 
 
-        if (!(isInstant || activator.canCastSorcery() || flash
-               || this.getRestrictions().isInstantSpeed()
-               || activator.hasKeyword("You may cast nonland cards as though they had flash.")
-               || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
-               || this.hasSVar("IsCastFromPlayEffect")
-               || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
+        if (lkicheck) {
+            game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
+        }
+
+        flash = card.withFlash(activator);
+
+        // reset static abilities
+        if (lkicheck) {
+            game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            game.getTracker().unfreeze();
+        }
+
+        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
+               || hasSVar("IsCastFromPlayEffect")
+               || wasFaceDownInstant)) {
             return false;
         }
 
-        if (!this.getRestrictions().canPlay(card, this)) {
+        if (!this.getRestrictions().canPlay(getHostCard(), this)) {
             return false;
         }
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
-        if (!isCastFaceDown() && isBasicSpell() && card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost().isNoCost()) {
+        // but ignore if it comes from PlayEffect
+        if (!isCastFaceDown()
+                && !hasSVar("IsCastFromPlayEffect")
+                && isBasicSpell()
+                && origCost.isNoCost()) {
             return false;
         }
 
@@ -136,11 +172,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 return false;
             }
         }
-        // legendary sorcery
-        if (card.isSorcery() && card.getType().isLegendary() &&
-                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", card.getController(), card).isEmpty()) {
-            return false;
-        }
+
         return checkOtherRestrictions();
     } // canPlay()
     
@@ -181,6 +213,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /**
      * @return the castFaceDown
      */
+    @Override
     public boolean isCastFaceDown() {
         return castFaceDown;
     }

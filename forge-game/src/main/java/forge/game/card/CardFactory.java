@@ -25,8 +25,6 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
@@ -92,14 +90,9 @@ public class CardFactory {
         out.setState(in.getCurrentStateName(), true);
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
-        out.setEquipping(in.getEquipping());
-        out.setEquippedBy(in.getEquippedBy(false));
-        out.setFortifying(in.getFortifying());
-        out.setFortifiedBy(in.getFortifiedBy(false));
-        out.setEnchantedBy(in.getEnchantedBy(false));
-        out.setEnchanting(in.getEnchanting());
+        out.setAttachedCards(in.getAttachedCards());
+        out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        out.setClones(in.getClones());
         out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
@@ -147,20 +140,14 @@ public class CardFactory {
 
     /**
      * <p>
-     * copySpellontoStack.
+     * copySpellHost.
+     * Helper function for copySpellAbilityAndPossiblyHost.
+     * creates a copy of the card hosting the ability we want to copy.
+     * Updates various attributes of the card that the copy needs,
+     * which wouldn't ordinarily get set during a simple Card.copy() call.
      * </p>
-     * 
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @param original
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param bCopyDetails
-     *            a boolean.
-     */
-    public final static SpellAbility copySpellAbilityAndSrcCard(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
-        //Player originalController = original.getController();
+     * */
+    private final static Card copySpellHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails){
         Player controller = sa.getActivatingPlayer();
         final Card c = copyCard(original, true);
 
@@ -178,12 +165,59 @@ public class CardFactory {
 
             c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp());
         }
-        
+
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
-        // set counters (e.g. Yisan, the Wanderer Bard)
-        c.setCounters(original.getCounters());
+
+        if (bCopyDetails) {
+            c.setXManaCostPaid(original.getXManaCostPaid());
+            c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
+            c.setKickerMagnitude(original.getKickerMagnitude());
+
+            // Rule 706.10 : Madness is copied
+            if (original.isInZone(ZoneType.Stack)) {
+                c.setMadness(original.isMadness());
+
+                final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
+                if (si != null) {
+                    c.setXManaCostPaid(si.getXManaPaid());
+                }
+            }
+
+            for (OptionalCost cost : original.getOptionalCostsPaid()) {
+                c.addOptionalCostPaid(cost);
+            }
+        }
+        return c;
+    }
+    /**
+     * <p>
+     * copySpellAbilityAndPossiblyHost.
+     * creates a copy of the Spell/ability `sa`, and puts it on the stack.
+     * if sa is a spell, that spell's host is also copied.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.game.card.Card} object. The card doing the copying.
+     * @param original
+     *            a {@link forge.game.card.Card} object. The host of the spell or ability being copied.
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object. The spell or ability being copied.
+     * @param bCopyDetails
+     *            a boolean.
+     */
+    public final static SpellAbility copySpellAbilityAndPossiblyHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
+        Player controller = sa.getActivatingPlayer();
+
+        //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
+        final Card c;
+        if (sa.isSpell()){
+            c = copySpellHost(source, original, sa, bCopyDetails);
+        }
+        else {
+            c = original;
+        }
 
         final SpellAbility copySA;
         if (sa.isTrigger()) {
@@ -191,7 +225,16 @@ public class CardFactory {
         } else {
             copySA = sa.copy(c, false);
         }
-        c.getCurrentState().setNonManaAbilities(copySA);
+
+        if (sa.isSpell()){
+            //only update c's abilities if c is a copy.
+            //(it would be nice to move this into `copySpellHost`,
+            // so all the c-mutating code is together in one place.
+            // but copySA doesn't exist until after `copySpellHost` finishes executing,
+            // so it's hard to resolve that dependency.)
+            c.getCurrentState().setNonManaAbilities(copySA);
+        }
+
         copySA.setCopied(true);
         //remove all costs
         if (!copySA.isTrigger()) {
@@ -204,23 +247,6 @@ public class CardFactory {
         copySA.setActivatingPlayer(controller);
 
         if (bCopyDetails) {
-            c.setXManaCostPaid(original.getXManaCostPaid());
-            c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-            c.setKickerMagnitude(original.getKickerMagnitude());
-
-            // Rule 706.10 : Madness is copied
-            if (original.isInZone(ZoneType.Stack)) {
-                c.setMadness(original.isMadness());
-
-                final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
-                if (si != null) {            	
-                    c.setXManaCostPaid(si.getXManaPaid());
-                }
-            }
-
-            for (OptionalCost cost : original.getOptionalCostsPaid()) {
-                c.addOptionalCostPaid(cost);
-            }
             copySA.setPaidHash(sa.getPaidHash());
         }
         return copySA;
@@ -346,24 +372,13 @@ public class CardFactory {
     private static void buildPlaneswalkerAbilities(Card card) {
         CardState state = card.getCurrentState();
     	// etbCounter only for Original Card
-        if (card.getBaseLoyalty() > 0 && card.getCurrentStateName() == CardStateName.Original) {
-            final String loyalty = Integer.toString(card.getBaseLoyalty());
+        if (state.getBaseLoyalty() > 0) {
+            final String loyalty = Integer.toString(state.getBaseLoyalty());
             // keyword need to be added to state directly, so init can be disabled
             if (state.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc", false) != null) {
                 card.updateKeywords();
             }
         }
-
-        //Planeswalker damage redirection
-        String replacement = "Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.OppCtrl,Emblem.OppCtrl"
-                + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ ChooseDmgPW | Secondary$ True"
-                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString();
-        state.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
-        state.setSVar("ChooseDmgPW", "AB$ ChooseCard | Cost$ 0 | Defined$ ReplacedSourceController | References$ DamagePWAI | Choices$ Planeswalker.YouCtrl" +
-        		" | ChoiceZone$ Battlefield | Mandatory$ True | SubAbility$ DamagePW | ChoiceTitle$ Choose a planeswalker to redirect damage");
-        state.setSVar("DamagePW", "DB$ ReplaceEffect | VarName$ Affected | VarValue$ ChosenCard | VarType$ Card");
-        state.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
-        state.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
@@ -413,6 +428,9 @@ public class CardFactory {
 
     private static void readCardFace(Card c, ICardFace face) {
 
+        // Name first so Senty has the Card name
+        c.setName(face.getName());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
@@ -422,10 +440,10 @@ public class CardFactory {
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
 
-        c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
-        if (face.getInitialLoyalty() > 0) c.setBaseLoyalty(face.getInitialLoyalty());
+
+        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
 
         c.setOracleText(face.getOracleText());
 
@@ -563,7 +581,6 @@ public class CardFactory {
     public static void copyState(final Card from, final CardStateName fromState, final Card to,
             final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
-        to.setBaseLoyalty(from.getBaseLoyalty());
         to.setBasePowerString(from.getBasePowerString());
         to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());
@@ -576,7 +593,7 @@ public class CardFactory {
         toCharacteristics.copyFrom(fromCharacteristics, false);
     }
 
-    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final boolean lki) {
+    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
 
         if (from.getTargetRestrictions() != null) {
             to.setTargetRestrictions(from.getTargetRestrictions());
@@ -585,35 +602,38 @@ public class CardFactory {
         to.setStackDescription(from.getOriginalStackDescription());
     
         if (from.getSubAbility() != null) {
-            to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, lki));
+            to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, p, lki));
         }
         for (Map.Entry<String, AbilitySub> e : from.getAdditionalAbilities().entrySet()) {
-            to.setAdditionalAbility(e.getKey(), (AbilitySub) e.getValue().copy(host, lki));
+            to.setAdditionalAbility(e.getKey(), (AbilitySub) e.getValue().copy(host, p, lki));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
             to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
                 @Override
                 public AbilitySub apply(AbilitySub input) {
-                    return (AbilitySub) input.copy(host, lki);
+                    return (AbilitySub) input.copy(host, p, lki);
                 }
             }));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
+            if (!lki) {
+                to.getRestrictions().resetTurnActivations();
+            }
         }
         if (from.getConditions() != null) {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
         }
 
         // do this after other abilties are copied
-        if (from.getActivatingPlayer() != null) {
-            to.setActivatingPlayer(from.getActivatingPlayer(), lki);
+        if (p != null) {
+            to.setActivatingPlayer(p, lki);
         }
 
         for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }
-        to.changeText();
+        //to.changeText();
     }
 
     /**
@@ -658,9 +678,6 @@ public class CardFactory {
         }
 
         trig.setStackDescription(trig.toString());
-        if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
-            CharmEffect.makeChoices(trig);
-        }
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);

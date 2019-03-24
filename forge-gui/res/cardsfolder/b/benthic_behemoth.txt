@@ -4,4 +4,4 @@ Types:Creature Serpent
 PT:7/6
 K:Islandwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13030.jpg
-Oracle:Islandwalk
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

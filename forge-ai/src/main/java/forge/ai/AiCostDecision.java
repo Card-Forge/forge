@@ -459,6 +459,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
         String type = cost.getType();
         boolean isVehicle = type.contains("+withTotalPowerGE");
+
+        CardCollection exclude = new CardCollection();
+        exclude.addAll(tapped);
+
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
@@ -467,6 +471,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
                                 ability.getActivatingPlayer(), ability.getHostCard(), ability);
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
+                // account for the fact that the activated card may be tapped in the process
+                if (ability.getPayCosts().hasTapCost() && typeList.contains(ability.getHostCard())) {
+                    c--;
+                }
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {
                 if (!isVehicle) {
@@ -478,18 +486,36 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        if ("DontPayTapCostWithManaSources".equals(source.getSVar("AIPaymentPreference"))) {
+            CardCollectionView toExclude =
+                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
+                            ability.getActivatingPlayer(), ability.getHostCard(), ability);
+            toExclude = CardLists.filter(toExclude, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    for (final SpellAbility sa : card.getSpellAbilities()) {
+                        if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            exclude.addAll(toExclude);
+        }
+
         String totalP = "";
         CardCollectionView totap;
         if (isVehicle) {
             totalP = type.split("withTotalPowerGE")[1];
             type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
-            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), tapped);
+            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), exclude);
         } else {
-            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);
+            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude);
         }
 
         if (totap == null) {
-//            System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
+            //System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
             return null;
         }
         tapped.addAll(totap);
@@ -510,19 +536,26 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
         if (c == null) {
             if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
-                if ("SacToReduceCost".equals(ability.getParam("AILogic"))) {
+                String logic = ability.getParamOrDefault("AILogic", "");
+                if ("SacToReduceCost".equals(logic)) {
                     // e.g. Torgaar, Famine Incarnate
                     // TODO: currently returns an empty list, so the AI doesn't sacrifice anything. Trying to make
                     // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
                     // AI pays the full mana cost anyway (despite sacrificing creatures).
                     return PaymentDecision.card(new CardCollection());
+                } else if (!logic.isEmpty() && !logic.equals("Never")) {
+                    // If at least some other AI logic is specified, assume that the AI for that API knows how
+                    // to define ChosenX and thus honor that value.
+                    // Cards which have no special logic for this yet but which do work in a simple/suboptimal way
+                    // are currently conventionally flagged with AILogic$ DoSacrifice.
+                    c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
+                } else {
+                    // Other cards are assumed to be flagged AI:RemoveDeck:All for now
+                    return null;
                 }
-
-                // Other cards are assumed to be flagged RemAIDeck for now
-                return null;
+            } else {
+                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
             }
-
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
@@ -776,8 +809,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
+                source.setSVar("ChosenX", "Number$" + String.valueOf(c));
             } else if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
+            } else if (sVar.equals("Targeted$CardManaCost")) {
+                c = 0;
+                if (ability.getTargets().getNumTargeted() > 0) {
+                    for (Card tgt : ability.getTargets().getTargetCards()) {
+                        if (tgt.getManaCost() != null) {
+                            c += tgt.getManaCost().getCMC();
+                        }
+                    }
+                }
+            } else if (sVar.equals("Count$xPaid")) {
+                c = AbilityUtils.calculateAmount(source, "PayX", null);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

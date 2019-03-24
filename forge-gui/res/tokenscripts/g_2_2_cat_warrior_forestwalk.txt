@@ -1,0 +1,7 @@
+Name:Cat Warrior
+ManaCost:no cost
+Types:Creature Cat Warrior
+Colors:green
+PT:2/2
+K:Forestwalk
+Oracle:Forestwalk

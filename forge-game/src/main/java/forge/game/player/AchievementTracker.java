@@ -5,6 +5,7 @@ import java.util.Set;
 
 import forge.card.ColorSet;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 
 //class for storing information during a game that is used at the end of the game to determine achievements
@@ -28,7 +29,7 @@ public class AchievementTracker {
 
     public void onSpellResolve(final SpellAbility spell) {
         final Card card = spell.getHostCard();
-        if (card.hasKeyword("Epic")) {
+        if (card.hasKeyword(Keyword.EPIC)) {
             challengesCompleted.add("Epic");
         }
     }

@@ -83,7 +83,7 @@ public class CostUnattach extends CostPartWithList {
                 return true;
             }
         } else {
-            if (CardLists.getValidCards(source.getEquippedBy(false), type, payer, source).size() > 0) {
+            if (CardLists.getValidCards(source.getEquippedBy(), type, payer, source).size() > 0) {
                 return true;
             }
         }
@@ -102,7 +102,7 @@ public class CostUnattach extends CostPartWithList {
                 return originalEquipment;
             }
         } else {
-            List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(false), this.getType(), activator, source);
+            List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(), this.getType(), activator, source);
             if (attachees.size() > 0) {
                 // Just pick the first one, although maybe give a dialog
                 return attachees.get(0);
@@ -116,7 +116,7 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.unEquipCard(targetCard.getEquipping());
+        targetCard.unattachFromEntity(targetCard.getEntityAttachedTo());
         return targetCard;
     }
 

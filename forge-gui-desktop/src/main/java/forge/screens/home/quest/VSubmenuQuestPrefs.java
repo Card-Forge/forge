@@ -509,7 +509,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
 
             this.setOpaque(false);
             this.setBorder((Border)null);
-            this.setFont(FSkin.getFont(13));
+            this.setFont(FSkin.getRelativeFont(13));
             this.setForeground(clrText);
             this.setCaretColor(clrText);
             this.setBackground(clrHover);

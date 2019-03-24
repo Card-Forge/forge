@@ -1,0 +1,10 @@
+Name:Coveted Jewel
+ManaCost:6
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
+T:Mode$ AttackerUnblockedOnce | ValidAttackingPlayer$ Player.Opponent | ValidDefenders$ You | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of CARDNAME. Untap it.
+SVar:TrigDraw2:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 3 | SubAbility$ DBGainGontrol
+SVar:DBGainGontrol:DB$ GainControl | NewController$ TriggeredAttackingPlayer | Untap$ True
+Oracle:When Coveted Jewel enters the battlefield, draw three cards.\n{T}: Add three mana of any one color.\nWhenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of Coveted Jewel. Untap it.

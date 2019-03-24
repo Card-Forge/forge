@@ -155,3 +155,9 @@ FoilAlwaysInCommonSlot=False
 50 C Wandering Eye
 124 U Wild Mammoth
 125 U Woodripper
+
+[tokens]
+w_4_4_angel_flying
+r_1_1_goblin
+g_1_1_saproling
+g_x_x_saproling_burst

@@ -1,0 +1,7 @@
+Name:Bird
+ManaCost:no cost
+Types:Creature Bird
+Colors:white
+PT:3/3
+K:Flying
+Oracle:Flying

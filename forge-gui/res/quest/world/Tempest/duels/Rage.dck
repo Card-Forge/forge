@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Rage of the Mountains
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Red creature based aggro deck
+Deck Type=constructed
+Name=Rage
+[Main]
+4 Blood Frenzy|TMP
+4 Canyon Wildcat|TMP
+4 Fireslinger|TMP
+4 Giant Strength|TMP
+4 Jackal Pup|TMP
+4 Maniacal Rage|EXO
+4 Mogg Fanatic|TMP
+4 Mogg Maniac|STH
+5 Mountain|TMP|1
+5 Mountain|TMP|2
+6 Mountain|TMP|4
+4 Raging Goblin|EXO
+4 Rathi Dragon|TMP
+4 Wasteland|TMP

@@ -1,0 +1,52 @@
+[metadata]
+Code=GS1
+Date=2018-06-22
+Name=Global Series Jiang Yanggu & Mu Yanling
+MciCode=gs1
+Type=Other
+
+[cards]
+1 M Mu Yanling
+2 C Colorful Feiyi Sparrow
+3 C Purple-Crystal Crab
+4 C Vivid Flying Fish
+5 C Welkin Tern
+6 C Heavenly Qilin
+7 C Armored Whirl Turtle
+8 C Nine-Tail White Fox
+9 C Earth-Origin Yak
+10 U Moon-Eating Dog
+11 U Stormcloud Spirit
+12 R Ancestor Dragon
+13 C Cloak of Mists
+14 C Qilin's Blessing
+15 C Drown in Shapelessness
+16 C Dragon's Presence
+17 U Brilliant Plan
+18 R Rhythmic Water Vortex
+19 C Meandering River
+20 L Plains
+21 L Island
+22 M Jiang Yanggu
+23 C Leopard-Spotted Jiao
+24 C Feiyi Snake
+25 U Sacred White Deer
+26 C Reckless Pangolin
+27 C Giant Spider
+28 C Ferocious Zheng
+29 U Fire-Omen Crane
+30 R Screeching Phoenix
+31 C Earthshaking Si
+32 C Hardened-Scale Armor
+33 C Breath of Fire
+34 C Aggressive Instinct
+35 C Confidence from Strength
+36 M Journey for the Elixir
+37 C Cleansing Screech
+38 C Timber Gorge
+39 L Mountain
+40 L Forest
+
+[tokens]
+mowu
+mowu

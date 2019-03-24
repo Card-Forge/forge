@@ -265,7 +265,7 @@ public enum FView {
 			textPane.setOpaque(false);
 			textPane.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
 			textPane.setBorder(null);
-			textPane.setFont(FSkin.getFont(14).getBaseFont());
+			textPane.setFont(FSkin.getRelativeFont(14).getBaseFont());
 
 			final FLabel btnRemindMeLater = new FLabel.Builder().text("Remind Me Later").hoverable().opaque().build();
 			final FLabel btnDoNotRemindMe = new FLabel.Builder().text("Don't Remind Me Again").hoverable().opaque().build();

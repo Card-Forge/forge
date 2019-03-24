@@ -64,11 +64,15 @@ public class CloneEffect extends SpellAbilityEffect {
         Card cardToCopy = null;
         
         if (sa.hasParam("Choices")) {
-            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            }
+            CardCollectionView choices = game.getCardsIn(choiceZone);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, true);
+            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
         } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
@@ -109,9 +113,10 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         final boolean keepName = sa.hasParam("KeepName");
+        final String newName = sa.getParamOrDefault("NewName", null);
         final String originalName = tgtCard.getName();
         final boolean copyingSelf = (tgtCard == cardToCopy);
-        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld;
+        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld || cardToCopy.getCurrentStateName() == CardStateName.Flipped;
         final CardStateName origState = isTransformed || cardToCopy.isFaceDown() ? CardStateName.Original : cardToCopy.getCurrentStateName();
 
         if (!copyingSelf) {
@@ -153,8 +158,12 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // restore name if it should be unchanged
+        // this should only be used for Sakashima the Impostor Avatar
         if (keepName) {
         	tgtCard.setName(originalName);
+        }
+        if (newName != null) {
+            tgtCard.setName(newName);
         }
 
         // If target is a flip card, also set characteristics of the flipped
@@ -163,6 +172,9 @@ public class CloneEffect extends SpellAbilityEffect {
         	final CardState flippedState = tgtCard.getState(CardStateName.Flipped);
             if (keepName) {
                 flippedState.setName(originalName);
+            }
+            if (newName != null) {
+                tgtCard.setName(newName);
             }
             //keep the Clone card image for the cloned card
             flippedState.setImageKey(imageFileName);
@@ -176,7 +188,12 @@ public class CloneEffect extends SpellAbilityEffect {
         //game.getTriggerHandler().registerActiveTrigger(tgtCard, false);
 
         //keep the Clone card image for the cloned card
-        tgtCard.setImageKey(imageFileName);
+        if (cardToCopy.isFlipCard() && tgtCard.getCurrentStateName() != CardStateName.Flipped) {
+            //for a flip card that isn't flipped, load the original image
+            tgtCard.setImageKey(cardToCopy.getImageKey(CardStateName.Original));
+        } else {
+            tgtCard.setImageKey(imageFileName);
+        }
 
         tgtCard.updateStateForView();
 
@@ -212,6 +229,9 @@ public class CloneEffect extends SpellAbilityEffect {
             }
             else if (duration.equals("UntilYourNextTurn")) {
                 game.getCleanup().addUntil(host.getController(), unclone);
+            }
+            else if (duration.equals("UntilUnattached")) {
+                sa.getHostCard().addUnattachCommand(unclone);
             }
         }
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
@@ -342,6 +362,18 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard.setManaCost(ManaCost.NO_COST);
             tgtCard.setBasePower(4);
             tgtCard.setBaseToughness(4);
+        }
+
+        if (sa.hasParam("GainThisAbility")) {
+            SpellAbility root = sa.getRootAbility();
+
+            if (root.isTrigger() && root.getTrigger() != null) {
+                tgtCard.addTrigger(root.getTrigger().copy(tgtCard, false));
+            } else if (root.isReplacementAbility()) {
+                tgtCard.addReplacementEffect(root.getReplacementEffect().copy(tgtCard, false));
+            } else {
+                tgtCard.addSpellAbility(root.copy(tgtCard, false));
+            }
         }
     }
 

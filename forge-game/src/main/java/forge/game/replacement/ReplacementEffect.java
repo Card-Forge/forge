@@ -39,7 +39,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** The ID. */
     private int id;
 
-    private ReplacementLayer layer = ReplacementLayer.None;
+    private ReplacementLayer layer = ReplacementLayer.Other;
 
     /** The has run. */
     private boolean hasRun = false;

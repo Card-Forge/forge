@@ -36,7 +36,7 @@ public class MustAttackEffect extends SpellAbilityEffect {
 
         for (final Player player : tgtPlayers) {
             sb.append("Creatures ").append(player).append(" controls attack ");
-            sb.append(defender).append(" during his or her next turn.");
+            sb.append(defender).append(" during their next turn.");
         }
         for (final Card c : getTargetCards(sa)) {
             sb.append(c).append(" must attack ");

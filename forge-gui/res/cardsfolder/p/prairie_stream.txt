@@ -6,4 +6,4 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBChe
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:ETBCheckSVar:Count$LastStateBattlefield Land.Basic+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prairie_stream.jpg
-Oracle:({T}: Add {W} or {U} to your mana pool.)\nPrairie Stream enters the battlefield tapped unless you control two or more basic lands.
+Oracle:({T}: Add {W} or {U}.)\nPrairie Stream enters the battlefield tapped unless you control two or more basic lands.

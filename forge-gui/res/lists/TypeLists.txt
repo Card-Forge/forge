@@ -28,6 +28,7 @@ Assembly-Worker:Assembly-Workers
 Atog:Atogs
 Aurochs:Aurochs
 Avatar:Avatars
+Azra:Azra
 Badger:Badgers
 Barbarian:Barbarians
 Basilisk:Basilisks
@@ -71,6 +72,7 @@ Druid:Druids
 Dryad:Dryads
 Dwarf:Dwarves
 Efreet:Efreets
+Egg:Eggs
 Elder:Elders
 Eldrazi:Eldrazi
 Elemental:Elementals
@@ -270,6 +272,7 @@ Treasure
 Vehicle
 [WalkerTypes]
 Ajani
+Aminatou
 Angrath
 Arlinn
 Ashiok
@@ -279,6 +282,7 @@ Dack
 Daretti
 Domri
 Dovin
+Estrid
 Elspeth
 Freyalise
 Garruk
@@ -296,6 +300,7 @@ Narset
 Nissa
 Nixilis
 Ral
+Rowan
 Saheeli
 Samut
 Sarkhan
@@ -307,4 +312,8 @@ Tibalt
 Ugin
 Venser
 Vraska
+Will
+Windgrace
 Xenagos
+Yanggu
+Yanling

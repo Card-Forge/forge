@@ -23,6 +23,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -76,6 +77,15 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> hasKeyword(final String keyword) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.hasKeyword(keyword);
+            }
+        };
+    }
+
+    public static final Predicate<Card> hasKeyword(final Keyword keyword) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -206,20 +216,11 @@ public final class CardPredicates {
         };
     };
 
-    public static final Predicate<Card> canBeEnchantedBy(final Card aura) {
+    public static final Predicate<Card> canBeAttached(final Card aura) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.canBeEnchantedBy(aura);
-            }
-        };
-    };
-
-    public static final Predicate<Card> canBeEquippedBy(final Card eq) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeEquippedBy(eq);
+                return c.canBeAttached(aura);
             }
         };
     };
@@ -403,6 +404,16 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> isRemAIDeck() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c)
+            {
+                return c.getRules() != null && c.getRules().getAiHints().getRemAIDecks();
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
@@ -451,6 +462,15 @@ public final class CardPredicates {
             }
         };
         /**
+         * a Predicate<Card> to get all aura.
+         */
+        public static final Predicate<Card> AURA = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isAura();
+            }
+        };
+        /**
          * a Predicate<Card> to get all equipment.
          */
         public static final Predicate<Card> EQUIPMENT = new Predicate<Card>() {
@@ -462,12 +482,23 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all fortification.
          */
-        public static final Predicate<Card> Fortification = new Predicate<Card>() {
+        public static final Predicate<Card> FORTIFICATION = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return c.isFortification();
             }
         };
+
+        /**
+         * a Predicate<Card> to get all curse.
+         */
+        public static final Predicate<Card> CURSE = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isCurse();
+            }
+        };
+
         /**
          * a Predicate<Card> to get all unenchanted cards in a list.
          */

@@ -198,8 +198,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             }
 
             // Set Cost specific things here
-            ability.resetPaidHash();
-            ability.setPaidHash(new HashMap<String, CardCollection>(paidHash));
+            ability.setPaidHash(paidHash);
             ability.setSplicedCards(splicedCards);
             ability.getHostCard().setXManaCostPaid(xManaPaid);
 

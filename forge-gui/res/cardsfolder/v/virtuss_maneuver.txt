@@ -1,0 +1,15 @@
+Name:Virtus's Maneuver
+ManaCost:2 B
+Types:Sorcery
+A:SP$ AssignGroup | Cost$ 2 B | Defined$ Player | Choices$ FriendRepeat,DBSacrifice | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.
+SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$ PlayChoose | ClearRememberedBeforeLoop$ True | SubAbility$ ReturnAll | StackDescription$ SpellDescription | SpellDescription$ Each friend returns a creature card from their graveyard to their hand.
+SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | ChoiceZone$ Graveyard | ChoiceTitle$ Choose a creature in your graveyard | RememberChosen$ True
+SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:DBSacrifice:DB$Sacrifice | Defined$ Remembered | SacValid$ Creature | SacMessage$ creature | StackDescription$ SpellDescription | SpellDescription$ Each foe sacrifices a creature they control.
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:SVar$Z1/Plus.Z2
+SVar:Z1:Count$ValidGraveyard Creature.YourTeamCtrl
+SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield
+SVar:Picture:http://www.wizards.com/global/images/magic/general/virtuss_maneuver.jpg
+Oracle:For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.

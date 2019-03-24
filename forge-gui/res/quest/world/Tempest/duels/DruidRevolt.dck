@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Druid Revolt!
+Icon=Dungeon Crawling Green.jpg
+Difficulty=easy
+Description=Nature's Revolt deck
+Deck Type=constructed
+Name=DruidRevolt
+[Main]
+3 Avenging Druid|EXO
+3 Burgeoning|STH
+2 Dirtcowl Wurm|TMP
+4 Evincar's Justice|TMP
+4 Forest|TMP|1
+5 Forest|TMP|2
+3 Forest|TMP|3
+2 Forest|TMP|4
+4 Hermit Druid|STH
+4 Horn of Greed|STH
+4 Nature's Revolt|TMP
+1 Overrun|TMP
+3 Rampant Growth|TMP
+3 Spidersilk Armor|MMQ
+2 Reflecting Pool|TMP
+3 Swamp|TMP|2
+5 Swamp|TMP|3
+2 Swamp|TMP|4
+3 Wall of Blossoms|STH

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -61,7 +65,7 @@ public final class CardUtil {
             "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
-            "Scavenge", "Bestow", "Outlast", "Dash", "Renown", "Surge", "Emerge", "Hexproof:").build();
+            "Scavenge", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
     public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(
             "walk", "cycling", "offering").build();
@@ -89,8 +93,8 @@ public final class CardUtil {
         if (kw.startsWith("HIDDEN")) {
             kw = kw.substring(7);
         }
-        
-        return !kw.startsWith("Protection") && !kw.startsWith("CantBeBlockedBy") 
+
+        return !kw.startsWith("Protection") && !kw.startsWith("CantBeBlockedBy")
                 && !NON_STACKING_LIST.contains(kw);
     }
 
@@ -104,7 +108,7 @@ public final class CardUtil {
 
     /**
      * getThisTurnEntered.
-     * 
+     *
      * @param to    zone going to
      * @param from  zone coming from
      * @param valid a isValid expression
@@ -117,7 +121,7 @@ public final class CardUtil {
 
     /**
      * getThisTurnEntered.
-     * 
+     *
      * @param to    zone going to
      * @param from  zone coming from
      * @param valid a isValid expression
@@ -142,7 +146,7 @@ public final class CardUtil {
 
     /**
      * getLastTurnEntered.
-     * 
+     *
      * @param to    zone going to
      * @param from  zone coming from
      * @param valid a isValid expression
@@ -155,7 +159,7 @@ public final class CardUtil {
 
     /**
      * getLastTurnEntered.
-     * 
+     *
      * @param to    zone going to
      * @param from  zone coming from
      * @param valid a isValid expression
@@ -202,14 +206,24 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
+        String msg = "CardUtil:getLKICopy copy object";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Card", in.getName())
+                .withData("CardState", in.getCurrentStateName().toString())
+                .withData("Player", in.getController().getName())
+                .build()
+        );
+
         final Card newCopy = new Card(in.getId(), in.getPaperCard(), false, in.getGame());
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
+        newCopy.setCommander(in.isCommander());
 
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
-        newCopy.setLKICMC(in.getCMC()); 
+        newCopy.setLKICMC(in.getCMC());
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
 
@@ -249,14 +263,12 @@ public final class CardUtil {
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
+        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
-        newCopy.setEnchanting(in.getEnchanting());
-        newCopy.setEnchantedBy(in.getEnchantedBy(false));
-        newCopy.setEquipping(in.getEquipping());
-        newCopy.setEquippedBy(in.getEquippedBy(false));
-        newCopy.setFortifying(in.getFortifying());
-        newCopy.setFortifiedBy(in.getFortifiedBy(false));
-        newCopy.setClones(in.getClones());
+
+        newCopy.setAttachedCards(in.getAttachedCards());
+        newCopy.setEntityAttachedTo(in.getEntityAttachedTo());
+
         newCopy.setHaunting(in.getHaunting());
         newCopy.setCopiedPermanent(in.getCopiedPermanent());
         for (final Card haunter : in.getHauntedBy()) {
@@ -269,13 +281,21 @@ public final class CardUtil {
             newCopy.addImprintedCard(o);
         }
 
+        for(Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
+            newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
+        }
+
         newCopy.setUnearthed(in.isUnearthed());
 
         newCopy.setChangedCardColors(in.getChangedCardColors());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
 
+        newCopy.copyChangedTextFrom(in);
+
         newCopy.setMeldedWith(in.getMeldedWith());
+
+        newCopy.setTimestamp(in.getTimestamp());
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
@@ -291,9 +311,9 @@ public final class CardUtil {
         final Game game = source.getGame();
         ColorSet cs = CardUtil.getColors(origin);
         for (byte color : MagicColor.WUBRG) {
-            if(!cs.hasAnyColor(color)) 
+            if(!cs.hasAnyColor(color))
                 continue;
-            
+
             for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
                 if (!res.contains(c) && c.isValid(valid, source.getController(), source, null) && !c.equals(origin)) {
                     res.add(c);
@@ -322,7 +342,7 @@ public final class CardUtil {
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
         return getReflectableManaColors(sa, sa, Sets.<String>newHashSet(), new CardCollection());
     }
-    
+
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             Set<String> colors, final CardCollection parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
@@ -330,7 +350,7 @@ public final class CardUtil {
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
         final Card card = abMana.getHostCard();
-        
+
         if (abMana.getApi() != ApiType.ManaReflected) {
             return colors;
         }
@@ -339,7 +359,7 @@ public final class CardUtil {
             parents.add(card);
         }
 
-        final String colorOrType = sa.getParam("ColorOrType"); 
+        final String colorOrType = sa.getParam("ColorOrType");
         // currently Color or Type, Type is colors + colorless
         final String validCard = sa.getParam("Valid");
         final String reflectProperty = sa.getParam("ReflectProperty");
@@ -437,7 +457,7 @@ public final class CardUtil {
         }
         return colors;
     }
-    
+
     public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final Set<String> colors) {
         if (ab == null) {
@@ -490,7 +510,7 @@ public final class CardUtil {
         if (ability.hasParam("MaxTotalTargetCMC")) {
             int totalCMCTargeted = 0;
             for (final Card c : targeted) {
-                totalCMCTargeted += c.getCMC(); 
+                totalCMCTargeted += c.getCMC();
             }
 
             final List<Card> choicesCopy = Lists.newArrayList(choices);

@@ -175,3 +175,13 @@ FoilAlwaysInCommonSlot=False
 160 C Whispersilk Cloak
 161 U Wirefly Hive
 162 U Wurm's Tooth
+
+[tokens]
+twin
+wirefly
+u_2_2_elemental_flying
+r_3_3_elemental
+g_3_3_beast
+g_1_1_insect
+c_1_1_a_myr
+c_2_2_a_spawn

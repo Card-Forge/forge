@@ -21,7 +21,7 @@ Name=MTGO Vintage Cube December 2017
 1 Abbot of Keral Keep|ORI
 1 Falkenrath Gorger|SOI
 1 Hellrider|MM3
-1 Siege-Gang Commander|EMA
+1 Siege-Gang Commander|DOM
 1 Delver of Secrets|ISD
 1 Strip Mine|VMA
 1 Wasteland|EMA
@@ -51,7 +51,7 @@ Name=MTGO Vintage Cube December 2017
 1 Thalia, Guardian of Thraben|A25
 1 Linvala, Keeper of Silence|MM3
 1 Knight of the White Orchid|ORI
-1 Fiend Hunter|A25
+1 Fiend Hunter|UMA
 1 Emeria Angel|IMA
 1 Mother of Runes|EMA
 1 Brimaz, King of Oreskos|BNG
@@ -79,21 +79,21 @@ Name=MTGO Vintage Cube December 2017
 1 Council's Judgment|CNS
 1 Sun Titan|M12
 1 Elspeth, Knight-Errant|MMA
-1 Faith's Fetters|EMA
+1 Faith's Fetters|UMA
 1 Honor of the Pure|M12
-1 Bitterblossom|MM2
+1 Bitterblossom|UMA
 1 Wrath of God|EMA
 1 Swords to Plowshares|A25
 1 Spear of Heliod|THS
 1 Day of Judgment|M12
 1 Leyline of Sanctity|MM2
-1 Karakas|EMA
+1 Karakas|UMA
 1 Jace, Vryn's Prodigy|ORI
 1 Mox Pearl|VMA
 1 Oblivion Ring|MM2
 1 Path to Exile|MM3
 1 Zealous Conscripts|MM3
-1 Reveillark|MMA
+1 Reveillark|UMA
 1 Unexpectedly Absent|EMA
 1 Armageddon|A25
 1 Mana Tithe|PLC
@@ -138,9 +138,9 @@ Name=MTGO Vintage Cube December 2017
 1 Pestermite|MMA
 1 Mana Leak|IMA
 1 Vendilion Clique|A25
-1 Glen Elendra Archmage|MMA
+1 Glen Elendra Archmage|UMA
 1 Daze|EMA
-1 Snapcaster Mage|MM3
+1 Snapcaster Mage|UMA
 1 Deceiver Exarch|NPH
 1 Mystic Confluence
 1 True-Name Nemesis
@@ -150,7 +150,7 @@ Name=MTGO Vintage Cube December 2017
 1 Empty the Warrens|MMA
 1 Compulsive Research|MM3
 1 Time Walk|VMA
-1 Frantic Search|VMA
+1 Frantic Search|UMA
 1 Cryptic Command|IMA
 1 Gush|VMA
 1 Tinker|ULG
@@ -178,15 +178,15 @@ Name=MTGO Vintage Cube December 2017
 1 Trinket Mage|SOM
 1 Shelldock Isle|LRW
 1 Brain Freeze|VMA
-1 Treasure Cruise|KTK
+1 Treasure Cruise|UMA
 1 Turnabout|VMA
-1 Dig Through Time|KTK
+1 Dig Through Time|UMA
 1 Thoughtseize|IMA
 1 Braids, Cabal Minion|EMA
 1 Desecration Demon|MM3
 1 Hero's Downfall|THS
 1 Damnation|MM3
-1 Shriekmaw|LRW
+1 Shriekmaw|UMA
 1 Liliana, Death's Majesty|AKH
 1 Kalitas, Traitor of Ghet|OGW
 1 Painful Truths|BFZ
@@ -195,12 +195,12 @@ Name=MTGO Vintage Cube December 2017
 1 Toxic Deluge|EMA
 1 Ophiomancer
 1 Nekrataal|EMA
-1 Gurmag Angler|FRF
+1 Gurmag Angler|UMA
 1 Dark Petition|ORI
 1 Cabal Ritual|VMA
 1 Phyrexian Arena|9ED
 1 Go for the Throat|MBS
-1 Duress|IMA
+1 Duress|M19
 1 Grim Tutor|S99
 1 The Abyss|LEG
 1 Vampire Nighthawk|MM3
@@ -221,11 +221,11 @@ Name=MTGO Vintage Cube December 2017
 1 Tendrils of Agony|VMA
 1 Rishadan Port|A25
 1 Grave Titan|M12
-1 Entomb|EMA
+1 Entomb|UMA
 1 Bazaar of Baghdad|VMA
 1 Yawgmoth's Will|USG
 1 Yawgmoth's Bargain|UDS
-1 Demonic Tutor|VMA
+1 Demonic Tutor|UMA
 1 Mox Jet|VMA
 1 Necropotence|IMA
 1 Looter il-Kor|TSP
@@ -238,16 +238,16 @@ Name=MTGO Vintage Cube December 2017
 1 Recurring Nightmare|TPR
 1 Animate Dead|EMA
 1 Search for Azcanta|XLN
-1 Buried Alive|ODY
+1 Buried Alive|UMA
 1 Iona, Shield of Emeria|MM2
-1 Faithless Looting|EMA
+1 Faithless Looting|UMA
 1 Necromancy|VIS
-1 Liliana of the Veil|MM3
-1 Reanimate|TPR
+1 Liliana of the Veil|UMA
+1 Reanimate|UMA
 1 Griselbrand|MM3
 1 Putrid Imp|VMA
 1 Massacre Wurm|MBS
-1 Unburial Rites|MM3
+1 Unburial Rites|UMA
 1 Pack Rat|RTR
 1 Mind Twist|4ED
 1 Oona's Prowler|LRW
@@ -257,7 +257,7 @@ Name=MTGO Vintage Cube December 2017
 1 Dualcaster Mage|EMA
 1 Harsh Mentor|AKH
 1 Splinter Twin|MM2
-1 Young Pyromancer|EMA
+1 Young Pyromancer|UMA
 1 Char|RAV
 1 Daretti, Scrap Savant
 1 Pyretic Ritual|M11
@@ -268,8 +268,8 @@ Name=MTGO Vintage Cube December 2017
 1 Firebolt|EMA
 1 Ancient Grudge|MM3
 1 Kiki-Jiki, Mirror Breaker|IMA
-1 Desperate Ritual|MMA
-1 Through the Breach|CHK
+1 Desperate Ritual|UMA
+1 Through the Breach|UMA
 1 Searing Spear|M13
 1 Lightning Bolt|A25
 1 Fireblast|VMA
@@ -282,14 +282,14 @@ Name=MTGO Vintage Cube December 2017
 1 Abrade|HOU
 1 Chain Lightning|EMA
 1 Goblin Welder|ULG
-1 Guttersnipe|IMA
+1 Guttersnipe|M19
 1 Rift Bolt|IMA
 1 Chandra, Flamecaller|OGW
 1 Chandra, Torch of Defiance|KLD
 1 Imperial Recruiter|A25
 1 Bonfire of the Damned|MM3
 1 Shrine of Burning Rage|NPH
-1 Lightning Strike|XLN
+1 Lightning Strike|M19
 1 Magma Jet|MM3
 1 Search for Tomorrow|IMA
 1 Fyndhorn Elves|VMA
@@ -309,13 +309,13 @@ Name=MTGO Vintage Cube December 2017
 1 Channel|IMA
 1 Sakura-Tribe Elder|CNS
 1 Survival of the Fittest|TPR
-1 Noble Hierarch|MM2
+1 Noble Hierarch|UMA
 1 Dissenter's Deliverance|AKH
 1 Regrowth|A25
 1 Natural Order|EMA
 1 Oath of Druids|TPR
 1 Sylvan Caryatid|THS
-1 Llanowar Elves|EMA
+1 Llanowar Elves|DOM
 1 Wall of Roots|IMA
 1 Green Sun's Zenith|EMA
 1 Arbor Elf|A25
@@ -328,7 +328,7 @@ Name=MTGO Vintage Cube December 2017
 1 Tooth and Nail|MMA
 1 Rishkar, Peema Renegade|AER
 1 Rofellos, Llanowar Emissary|VMA
-1 Leovold, Emissary of Trest
+1 Leovold, Emissary of Trest|UMA
 1 Opposition|7ED
 1 Archangel of Thune|IMA
 1 Beast Within|NPH
@@ -343,21 +343,21 @@ Name=MTGO Vintage Cube December 2017
 1 Nature's Claim|IMA
 1 Thrun, the Last Troll|MBS
 1 Gaea's Cradle|USG
-1 Reclamation Sage|M15
+1 Reclamation Sage|M19
 1 Oath of Nissa|OGW
 1 Thragtusk|MM3
 1 Sweltering Suns|AKH
 1 Verdurous Gearhulk|KLD
 1 Freyalise, Llanowar's Fury
 1 Garruk, Primal Hunter|M13
-1 Woodfall Primus|MMA
+1 Woodfall Primus|UMA
 1 Den Protector|DTK
 1 Mox Emerald|VMA
-1 Tarmogoyf|MM3
+1 Tarmogoyf|UMA
 1 Craterhoof Behemoth|MM3
-1 Eternal Witness|MMA
+1 Eternal Witness|UMA
 1 Razaketh, the Foulblooded|HOU
-1 Fauna Shaman|M11
+1 Fauna Shaman|UMA
 1 Scavenging Ooze|MM3
 1 Polukranos, World Eater|THS
 1 Deranged Hermit|VMA
@@ -365,7 +365,7 @@ Name=MTGO Vintage Cube December 2017
 1 Mana Crypt|EMA
 1 Flooded Strand|KTK
 1 Hallowed Fountain|RTR
-1 Ancient Tomb|VMA
+1 Ancient Tomb|UMA
 1 Hedron Archive|BFZ
 1 Maze of Ith|EMA
 1 Mox Diamond|TPR
@@ -380,13 +380,13 @@ Name=MTGO Vintage Cube December 2017
 1 Seachrome Coast|SOM
 1 Mana Confluence|JOU
 1 Chrome Mox|EMA
-1 Lavaclaw Reaches|WWK
+1 Lavaclaw Reaches|UMA
 1 Shardless Agent|EMA
 1 Olivia Voldaren|MM3
-1 Creeping Tar Pit|WWK
+1 Creeping Tar Pit|UMA
 1 Bloodstained Mire|KTK
 1 Supreme Verdict|IMA
-1 Mana Vault|VMA
+1 Mana Vault|UMA
 1 Copperline Gorge|SOM
 1 Mishra's Workshop|ATQ
 1 Library of Alexandria|VMA
@@ -402,23 +402,23 @@ Name=MTGO Vintage Cube December 2017
 1 Smokestack|VMA
 1 Reflector Mage|OGW
 1 Tropical Island|VMA
-1 Ulamog, the Infinite Gyre|MM2
+1 Ulamog, the Infinite Gyre|UMA
 1 Figure of Destiny|MMA
 1 Progenitus|MMA
 1 Inspiring Vantage|KLD
-1 Kozilek, Butcher of Truth|MM2
+1 Kozilek, Butcher of Truth|UMA
 1 Edric, Spymaster of Trest|VMA
-1 Celestial Colonnade|WWK
+1 Celestial Colonnade|UMA
 1 Trygon Predator|EMA
 1 Boros Signet|MM3
 1 Mishra's Factory|A25
-1 Karn Liberated|MM2
+1 Karn Liberated|UMA
 1 Boros Charm|A25
-1 Crucible of Worlds|10E
+1 Crucible of Worlds|M19
 1 Winter Orb|EMA
 1 Anguished Unmaking|SOI
 1 Lightning Helix|IMA
-1 Emrakul, the Aeons Torn|MM2
+1 Emrakul, the Aeons Torn|UMA
 1 Simic Signet|MM3
 1 Bring to Light|BFZ
 1 Lumbering Falls|BFZ
@@ -430,7 +430,7 @@ Name=MTGO Vintage Cube December 2017
 1 Mutavault|M14
 1 Misty Rainforest|MM3
 1 Ajani Vengeant|ALA
-1 Sacred Foundry|GTC
+1 Sacred Foundry|GRN
 1 Mystic Snake|A25
 1 Breeding Pool|GTC
 1 Arid Mesa|MM3
@@ -453,7 +453,7 @@ Name=MTGO Vintage Cube December 2017
 1 Sword of War and Peace|NPH
 1 Needle Spires|OGW
 1 Xenagos, the Reveler|THS
-1 Raging Ravine|WWK
+1 Raging Ravine|UMA
 1 Gruul Signet|MM3
 1 Dragonlord Atarka|DTK
 1 Taiga|VMA
@@ -468,7 +468,7 @@ Name=MTGO Vintage Cube December 2017
 1 Wurmcoil Engine|SOM
 1 Nykthos, Shrine to Nyx|THS
 1 Underground Sea|VMA
-1 Watery Grave|GTC
+1 Watery Grave|GRN
 1 Solemn Simulacrum|M12
 1 Nicol Bolas, Planeswalker|M13
 1 Hostage Taker|XLN
@@ -480,13 +480,13 @@ Name=MTGO Vintage Cube December 2017
 1 Windswept Heath|KTK
 1 Walking Ballista|AER
 1 Memory Jar|VMA
-1 Temple Garden|RTR
+1 Temple Garden|GRN
 1 Mindslaver|SOM
 1 Baleful Strix|EMA
 1 Hangarback Walker|ORI
 1 Coercive Portal|VMA
 1 Emrakul, the Promised End|EMN
-1 Stirring Wildwood|WWK
+1 Stirring Wildwood|UMA
 1 Selesnya Signet|MM3
 1 Sensei's Divining Top|EMA
 1 Darkslick Shores|SOM
@@ -501,7 +501,7 @@ Name=MTGO Vintage Cube December 2017
 1 Razorverge Thicket|SOM
 1 Ashiok, Nightmare Weaver|THS
 1 The Scarab God|HOU
-1 Kitchen Finks|MMA
+1 Kitchen Finks|UMA
 1 Dragonlord Dromoka|DTK
 1 Phyrexian Revoker|M15
 1 Spirebluff Canal|KLD
@@ -512,21 +512,21 @@ Name=MTGO Vintage Cube December 2017
 1 Deathrite Shaman|EMA
 1 Verdant Catacombs|MM3
 1 Scalding Tarn|MM3
-1 Maelstrom Pulse|MMA
+1 Maelstrom Pulse|UMA
 1 Bayou|VMA
 1 Blooming Marsh|KLD
-1 Gilded Lotus|M13
+1 Gilded Lotus|DOM
 1 Worn Powerstone|EMA
 1 Pernicious Deed|A25
 1 Volcanic Island|VMA
 1 Smuggler's Copter|KLD
 1 God-Pharaoh's Gift|HOU
-1 Overgrown Tomb|RTR
+1 Overgrown Tomb|GRN
 1 Myr Battlesphere|SOM
 1 Grim Monolith|ULG
 1 Dack Fayden|EMA
 1 Ral Zarek|DGM
-1 Steam Vents|RTR
+1 Steam Vents|GRN
 1 Wandering Fumarole|OGW
 1 Westvale Abbey|SOI
 1 Pentad Prism|5DN
@@ -539,5 +539,5 @@ Name=MTGO Vintage Cube December 2017
 1 Blightsteel Colossus|MBS
 1 Sphinx of the Steel Wind|EMA
 1 Basalt Monolith|3ED
-1 Fire // Ice|APC
+1 Fire // Ice|UMA
 1 Thran Dynamo|IMA

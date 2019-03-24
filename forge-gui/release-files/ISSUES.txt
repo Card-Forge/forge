@@ -1,8 +1,3 @@
-
- Images for the latest sets will be available soon.
-
-Online multiplayer functionality has been restored, but is still a Work in Progress. We do have a dedicated developer actively working on the online multiplayer feature.
-
-Other known issues are here: https://git.cardforge.org/core-developers/forge/issues
+Known issues are here: https://git.cardforge.org/core-developers/forge/issues
 
 Feel free to report your own there if you have any.

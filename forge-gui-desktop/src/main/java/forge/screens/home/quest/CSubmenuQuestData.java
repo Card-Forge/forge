@@ -10,6 +10,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.*;
 import forge.quest.StartingPoolPreferences.PoolType;
+import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
@@ -20,6 +21,7 @@ import forge.toolbox.FOptionPane;
 import javax.swing.*;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -90,6 +92,24 @@ public enum CSubmenuQuestData implements ICDoc {
             }
         });
 
+        view.getBtnSelectFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customFormatCodes.clear();
+                        Set<String> sets = new HashSet<String>();
+                        for(GameFormat format:dialog.getSelectedFormats()){
+                            sets.addAll(format.getAllowedSetCodes());
+                        }
+                        customFormatCodes.addAll(sets);
+                    }
+                });
+            }
+        });
+
         view.getBtnPrizeCustomFormat().setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -99,6 +119,24 @@ public enum CSubmenuQuestData implements ICDoc {
                     public void run() {
                         customPrizeFormatCodes.clear();
                         customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });
+            }
+        });
+
+        view.getBtnPrizeSelectFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customPrizeFormatCodes.clear();
+                        Set<String> sets = new HashSet<String>();
+                        for(GameFormat format:dialog.getSelectedFormats()){
+                            sets.addAll(format.getAllowedSetCodes());
+                        }
+                        customPrizeFormatCodes.addAll(sets);
                     }
                 });
             }
@@ -131,6 +169,7 @@ public enum CSubmenuQuestData implements ICDoc {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final QuestController qc = FModel.getQuest();
+        ArrayList<String> restorableQuests = new ArrayList<>();
 
         // Iterate over files and load quest data for each.
         final FilenameFilter takeDatFiles = new FilenameFilter() {
@@ -142,7 +181,14 @@ public enum CSubmenuQuestData implements ICDoc {
         final File[] arrFiles = dirQuests.listFiles(takeDatFiles);
         arrQuests.clear();
         for (final File f : arrFiles) {
-            arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+            try {
+                System.out.println(String.format("About to load quest (%s)... ", f.getName()));
+                arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+            } catch(IOException ex) {
+                ex.printStackTrace();
+                System.out.println(String.format("Error loading quest data (%s).. skipping for now..", f.getName()));
+                restorableQuests.add(f.getName());
+            }
         }
 
         // Populate list with available quest data.
@@ -197,10 +243,11 @@ public enum CSubmenuQuestData implements ICDoc {
 
         if (worldFormat == null) {
             switch(view.getStartingPoolType()) {
-            case Rotating:
+            case Sanctioned:
                 fmtStartPool = view.getRotatingFormat();
                 break;
 
+            case Casual:
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
                     if (!FOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
@@ -257,6 +304,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Complete:
                 fmtPrizes = null;
                 break;
+            case Casual:
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
                     if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prizes.\n\nContinue?")) {
@@ -265,7 +313,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 }
                 fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
                 break;
-            case Rotating:
+            case Sanctioned:
                 fmtPrizes = view.getPrizedRotatingFormat();
                 break;
             default:
@@ -293,9 +341,16 @@ public enum CSubmenuQuestData implements ICDoc {
             break;
         }
 
+        //Apply the appropriate deck construction rules for this quest
+        DeckConstructionRules dcr = DeckConstructionRules.Default;
+
+        if(VSubmenuQuestData.SINGLETON_INSTANCE.isCommander()){
+            dcr = DeckConstructionRules.Commander;
+        }
+
         final QuestController qc = FModel.getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs);
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr);
         FModel.getQuest().save();
 
         // Save in preferences.

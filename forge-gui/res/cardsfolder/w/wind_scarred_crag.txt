@@ -1,10 +1,10 @@
 Name:Wind-Scarred Crag
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:DB$GainLife | LifeAmount$ 1
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_scarred_crag.jpg
-Oracle:Wind-Scarred Crag enters the battlefield tapped.\nWhen Wind-Scarred Crag enters the battlefield, you gain 1 life.\n{T}: Add {R} or {W} to your mana pool.
+Oracle:Wind-Scarred Crag enters the battlefield tapped.\nWhen Wind-Scarred Crag enters the battlefield, you gain 1 life.\n{T}: Add {R} or {W}.

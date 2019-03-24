@@ -1,0 +1,8 @@
+Name:Azra Bladeseeker
+ManaCost:2 R
+Types:Creature Azra Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExploration | TriggerDescription$ When CARDNAME enters the battlefield, each player on your team may discard a card, then each player who discarded a card this way draws a card.
+SVar:TrigExploration:DB$ RepeatEach | RepeatPlayers$ Player.YourTeam | RepeatSubAbility$ DBDiscardToDraw
+SVar:DBDiscardToDraw:DB$ Draw | Defined$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
+Oracle:When Azra Bladeseeker enters the battlefield, each player on your team may discard a card, then each player who discarded a card this way draws a card.
