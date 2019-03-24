@@ -7,7 +7,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -17,25 +16,8 @@ import java.util.List;
 
 public class UnattachAllEffect extends SpellAbilityEffect {
     private static void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
-        if (o instanceof Card) {
-            final Card c = (Card) o;
-            if (cardToUnattach.isAura()) {
-                //final boolean gainControl = "GainControl".equals(af.parseParams().get("AILogic"));
-                //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
-            } else if (cardToUnattach.isEquipment()) {
-                if (cardToUnattach.isEquipping() && c.isEquippedBy(cardToUnattach)) {
-                    cardToUnattach.unEquipCard(cardToUnattach.getEquipping());
-                }
-            } else if (cardToUnattach.isFortification()) {
-                if (cardToUnattach.isFortifying() && c.isFortifiedBy(cardToUnattach)) {
-                    cardToUnattach.unFortifyCard(cardToUnattach.getFortifying());
-                }
-            }
-        } else if (o instanceof Player) {
-            final Player p = (Player) o;
-            if (cardToUnattach.isAura() && p.isEnchantedBy(cardToUnattach)) {
-                //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, p, false);
-            }
+        if (cardToUnattach.isAttachment() && o.hasCardAttachment(cardToUnattach)) {
+            cardToUnattach.unattachFromEntity(cardToUnattach.getEntityAttachedTo());
         }
     }
 

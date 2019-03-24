@@ -2,6 +2,6 @@ Name:Riven Turnbull
 ManaCost:5 U B
 Types:Legendary Creature Human Advisor
 PT:5/7
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1680.jpg
-Oracle:{T}: Add {B} to your mana pool.
+Oracle:{T}: Add {B}.

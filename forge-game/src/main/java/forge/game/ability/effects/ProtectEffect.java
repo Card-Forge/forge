@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.MagicColor;
@@ -153,7 +152,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
+            tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
@@ -181,7 +180,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            unTgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
+            unTgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT

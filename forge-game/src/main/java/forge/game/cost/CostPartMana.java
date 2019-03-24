@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -36,6 +37,9 @@ public class CostPartMana extends CostPart {
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
     private final String restriction;
+
+    private ManaConversionMatrix cardMatrix = null;
+    public void setCardMatrix(ManaConversionMatrix mtrx) { cardMatrix = mtrx; }
 
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
@@ -148,7 +152,7 @@ public class CostPartMana extends CostPart {
         sa.clearManaPaid();
 
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, true); 
+        return payer.getController().payManaCost(this, sa, null, cardMatrix, true);
     }
 
 }

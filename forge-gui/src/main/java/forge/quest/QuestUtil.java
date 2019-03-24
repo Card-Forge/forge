@@ -41,6 +41,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
+import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.util.gui.SGuiChoose;
@@ -51,6 +52,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * <p>
@@ -531,7 +533,17 @@ public class QuestUtil {
         Integer lifeHuman = null;
         boolean useBazaar = true;
         Boolean forceAnte = null;
-        int lifeAI = 20;
+
+        //Generate a life modifier based on this quest's variant as held in the Quest Controller's DeckConstructionRules
+        int variantLifeModifier = 0;
+
+        switch(FModel.getQuest().getDeckConstructionRules()){
+            case Default: break;
+            case Commander: variantLifeModifier = 20; break;
+        }
+
+        int lifeAI = 20 + variantLifeModifier;
+
         if (event instanceof QuestEventChallenge) {
             final QuestEventChallenge qc = ((QuestEventChallenge) event);
             lifeAI = qc.getAILife();
@@ -545,8 +557,9 @@ public class QuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        final RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
-        final RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
+        final RegisteredPlayer humanStart = getRegisteredPlayerByVariant(getDeckForNewGame());
+
+        final RegisteredPlayer aiStart = getRegisteredPlayerByVariant(event.getEventDeck());
 
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);
@@ -581,15 +594,37 @@ public class QuestUtil {
         rules.setGamesPerMatch(qData.getMatchLength());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+
+        final TreeSet<GameType> variant = new TreeSet<>();
+        if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){
+            variant.add(GameType.Commander);
+        }
+
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         gui.setPlayerAvatar(aiPlayer, event);
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                hostedMatch.startMatch(rules, null, starter, ImmutableMap.of(humanStart, gui));
+                hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui));
             }
         });
+    }
+
+    /**
+     * Uses the appropriate RegisteredPlayer command for generating a RegisteredPlayer based on this quest's variant as
+     * held by the QuestController's DeckConstructionRules.
+     * @param deck The deck to generate the RegisteredPlayer with
+     * @return A newly made RegisteredPlayer specific to the quest's variant
+     */
+    private static RegisteredPlayer getRegisteredPlayerByVariant(Deck deck){
+        switch (FModel.getQuest().getDeckConstructionRules()) {
+            case Default:
+                return new RegisteredPlayer(deck);
+            case Commander:
+                return RegisteredPlayer.forCommander(deck);
+        }
+        return null;
     }
 
     private static Deck getDeckForNewGame() {
@@ -623,7 +658,7 @@ public class QuestUtil {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
+            final String errorMessage = getDeckConformanceProblems(deck);
             if (null != errorMessage) {
                 SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
                 return false;
@@ -631,6 +666,21 @@ public class QuestUtil {
         }
 
         return true;
+    }
+
+    public static String getDeckConformanceProblems(Deck deck){
+        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);;
+
+        if(errorMessage != null) return errorMessage; //return immediately if the deck does not conform to quest requirements
+
+        //Check for all applicable deck construction rules per this quests's saved DeckConstructionRules enum
+        switch(FModel.getQuest().getDeckConstructionRules()){
+            case Commander:
+                errorMessage = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
+                break;
+        }
+
+        return errorMessage;
     }
 
     /** Duplicate in DeckEditorQuestMenu and

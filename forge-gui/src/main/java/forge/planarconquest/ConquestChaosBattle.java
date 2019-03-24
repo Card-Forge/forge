@@ -53,7 +53,8 @@ public class ConquestChaosBattle extends ConquestBattle {
         //loop until we find a duel
         do {
             world0 = Aggregates.random(FModel.getWorlds());
-            String path = world0 == null || world0.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world0.getDuelsDir();
+            String worldDir = world0 != null && world0.isCustom() ? ForgeConstants.USER_QUEST_WORLD_DIR : ForgeConstants.QUEST_WORLD_DIR;
+            String path = world0 == null || world0.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : worldDir + world0.getDuelsDir();
             QuestEventDuelManager duelManager = new QuestEventDuelManager(new File(path));
             QuestEventDifficulty difficulty = prefferedDifficulty;
             duel0 = Aggregates.random(duelManager.getDuels(difficulty));

@@ -14,6 +14,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.Lang;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
@@ -92,10 +94,35 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             abilities.clear();
             staticAbilities.clear();
         }
-        CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
-        CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
-        CardFactoryUtil.addSpellAbility(this, host, intrinsic);
-        CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+
+        try {
+            String msg = "KeywordInstance:createTraits: make Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
+            );
+
+            // add Extra for debugging
+            Sentry.getContext().addExtra("Card", host);
+            Sentry.getContext().addExtra("Keyword", this.original);
+
+            CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
+            CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
+            CardFactoryUtil.addSpellAbility(this, host, intrinsic);
+            CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+        } catch (Exception e) {
+            String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + this.original + " for card " + host.getName(), e);
+        } finally {
+            // remove added extra
+            Sentry.getContext().removeExtra("Card");
+            Sentry.getContext().removeExtra("Keyword");
+        }
     }
 
     /*
@@ -175,7 +202,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public Collection<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#copy()
@@ -206,7 +233,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             
             return result;
         } catch (final Exception ex) {
-            throw new RuntimeException("KeywordInstance : clone() error, " + ex);
+            throw new RuntimeException("KeywordInstance : clone() error", ex);
         }
     }
 
@@ -224,5 +251,27 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     @Override
     public boolean redundant(Collection<KeywordInterface> list) {
         return !list.isEmpty() && keyword.isMultipleRedundant;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#setHostCard(forge.game.card.Card)
+     */
+    @Override
+    public void setHostCard(Card host) {
+        for (SpellAbility sa : this.abilities) {
+            sa.setHostCard(host);
+        }
+
+        for (Trigger tr : this.triggers) {
+            tr.setHostCard(host);
+        }
+
+        for (ReplacementEffect re : this.replacements) {
+            re.setHostCard(host);
+        }
+
+        for (StaticAbility sa : this.staticAbilities) {
+            sa.setHostCard(host);
+        }
     }
 }

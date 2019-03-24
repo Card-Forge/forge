@@ -3,6 +3,6 @@ ManaCost:5 R R
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ 5 R R | Defined$ Player | SacValid$ Land | Amount$ 5 | SpellDescription$ Each player sacrifices five lands. CARDNAME deals 5 damage to each creature. | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 5 | ValidCards$ Creature
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_force.jpg
 Oracle:Each player sacrifices five lands. Destructive Force deals 5 damage to each creature.

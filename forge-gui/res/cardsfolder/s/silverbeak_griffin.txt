@@ -1,0 +1,6 @@
+Name:Silverbeak Griffin
+ManaCost:W W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

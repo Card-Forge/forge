@@ -21,3 +21,6 @@ Type=From_the_Vault
 13 R Shivan Dragon
 14 R Thunder Dragon
 15 R Two-Headed Dragon
+
+[tokens]
+g_1_1_saproling

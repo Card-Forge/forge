@@ -1,0 +1,8 @@
+Name:Imperious Oligarch
+ManaCost:W B
+Types:Creature Human Cleric
+PT:2/1
+K:Vigilance
+K:Afterlife:1
+DeckHas:Ability$Token
+Oracle:Vigilance\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)

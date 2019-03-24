@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -10,11 +8,16 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import forge.util.Lang;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +32,12 @@ public class DiscardEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (!tgtPlayers.isEmpty()) {
-
-            for (final Player p : tgtPlayers) {
-                sb.append(p.toString()).append(" ");
-            }
+            sb.append(Lang.joinHomogenous(tgtPlayers)).append(" ");
 
             if (mode.equals("RevealYouChoose")) {
-                sb.append("reveals his or her hand.").append("  You choose (");
+                sb.append("reveals their hand.").append("  You choose (");
             } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("reveals his or her hand. Discard (");
+                sb.append("reveals their hand. Discard (");
             } else {
                 sb.append("discards (");
             }
@@ -48,7 +48,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             }
 
             if (mode.equals("Hand")) {
-                sb.append("his or her hand");
+                sb.append("their hand");
             } else if (mode.equals("RevealDiscardAll")) {
                 sb.append("All");
             } else if (sa.hasParam("AnyNumber")) {
@@ -105,8 +105,6 @@ public class DiscardEffect extends SpellAbilityEffect {
         final String mode = sa.getParam("Mode");
         //final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         final List<Card> discarded = new ArrayList<Card>();
         final List<Player> targets = getTargetPlayers(sa),
                 discarders;
@@ -115,7 +113,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             // In this case the target need not be the discarding player
             discarders = getDefinedPlayersOrTargeted(sa);
             firstTarget = Iterables.getFirst(targets, null);
-            if (tgt != null && !firstTarget.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && !firstTarget.canBeTargetedBy(sa)) {
             	firstTarget = null;
             }
         } else {
@@ -123,8 +121,9 @@ public class DiscardEffect extends SpellAbilityEffect {
         }
 
 
+        final CardZoneTable table = new CardZoneTable();
         for (final Player p : discarders) {
-            if ((mode.equals("RevealTgtChoose") && firstTarget != null) || tgt == null || p.canBeTargetedBy(sa)) {
+            if ((mode.equals("RevealTgtChoose") && firstTarget != null) || !sa.usesTargeting() || p.canBeTargetedBy(sa)) {
             	if (sa.hasParam("RememberDiscarder")) {
             		source.addRemembered(p);
             	}
@@ -140,7 +139,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         for (final Card c : toDiscard) {
-                            boolean hasDiscarded = p.discard(c, sa) != null;
+                            boolean hasDiscarded = p.discard(c, sa, table) != null;
                             if (hasDiscarded) {
                                 discarded.add(c);
                             }
@@ -164,7 +163,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
 
                     for(Card c : toDiscard) { // without copying will get concurrent modification exception
-                        boolean hasDiscarded = p.discard(c, sa) != null;
+                        boolean hasDiscarded = p.discard(c, sa, table) != null;
                         if( hasDiscarded && shouldRemember )
                             source.addRemembered(c);
                     }
@@ -178,7 +177,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
 
                     for (final Card c : dPHand) {
-                        p.discard(c, sa);
+                        p.discard(c, sa, table);
                         discarded.add(c);
                     }
                 }
@@ -216,7 +215,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         for (Card c : toDiscardView) {
-                            if (p.discard(c, sa) != null) {
+                            if (p.discard(c, sa, table) != null) {
                                 discarded.add(c);
                             }
                         }
@@ -233,7 +232,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         for (Card c : toDiscard) {
-                            c.getController().discard(c, sa);
+                            c.getController().discard(c, sa, table);
                         }
                     }
                 }
@@ -260,7 +259,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
-                        p.discard(c, sa);
+                        p.discard(c, sa, table);
                         discarded.add(c);
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
@@ -304,7 +303,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
                         for (Card card : toBeDiscarded) {
                             if (card == null) { continue; }
-                            p.discard(card, sa);
+                            p.discard(card, sa, table);
                             discarded.add(card);
                         }
                     }
@@ -317,5 +316,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                 source.addRemembered(c);
             }
         }
+
+        // run trigger if something got milled
+        table.triggerChangesZoneAll(source.getGame());
     } // discardResolve()
 }

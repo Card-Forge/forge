@@ -1,0 +1,6 @@
+Name:Giant
+ManaCost:no cost
+Types:Creature Giant
+Colors:red
+PT:4/4
+Oracle:

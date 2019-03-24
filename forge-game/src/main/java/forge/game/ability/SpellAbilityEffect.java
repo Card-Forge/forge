@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
+import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -172,8 +173,7 @@ public abstract class SpellAbilityEffect {
     protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa, final String definedParam) { return getCards(true,  definedParam, sa); }
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
-        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
-                && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards()) 
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
@@ -229,8 +229,17 @@ public abstract class SpellAbilityEffect {
         
         if (desc.isEmpty()) {
             StringBuilder sb = new StringBuilder();
-            sb.append(location).append(" ");
+            if (location.equals("Hand")) {
+                sb.append("Return ");
+            } else if (location.equals("SacrificeCtrl")) {
+                sb.append("Its controller sacrifices ");
+            } else {
+                sb.append(location).append(" ");
+            }
             sb.append(Lang.joinHomogenous(crds));
+            if (location.equals("Hand")) {
+                sb.append("to your hand").append(" ");
+            }
             sb.append(" at the ");
             if (combat) {
                 sb.append("end of combat.");
@@ -254,9 +263,18 @@ public abstract class SpellAbilityEffect {
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
+
+            // Svar for AI
+            if (!c.hasSVar("EndOfTurnLeavePlay")) {
+                c.setSVar("EndOfTurnLeavePlay", "AtEOT");
+            }
         }
         String trigSA = "";
-        if (location.equals("Sacrifice")) {
+        if (location.equals("Hand")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand";
+        } else if (location.equals("SacrificeCtrl")) {
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
+        } else if (location.equals("Sacrifice")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
@@ -288,6 +306,11 @@ public abstract class SpellAbilityEffect {
         }
         trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, card));
         card.addTrigger(trig);
+
+        // Svar for AI
+        if (!card.hasSVar("EndOfTurnLeavePlay")) {
+            card.setSVar("EndOfTurnLeavePlay", "AtEOT");
+        }
     }
     
     protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
@@ -384,5 +407,84 @@ public abstract class SpellAbilityEffect {
         eff.setEffectSource(hostCard);
 
         return eff;
+    }
+
+    protected static void replaceDying(final SpellAbility sa) {
+        if (sa.hasParam("ReplaceDyingDefined") || sa.hasParam("ReplaceDyingValid")) {
+
+            if (sa.hasParam("ReplaceDyingCondition")) {
+                // currently there is only one with Kicker
+                final String condition = sa.getParam("ReplaceDyingCondition");
+                if ("Kicked".equals(condition)) {
+                    if (!sa.isKicked()) {
+                        return;
+                    }
+                }
+            }
+
+            final Card host = sa.getHostCard();
+            final Player controller = sa.getActivatingPlayer();
+            final Game game = host.getGame();
+            String zone = sa.getParamOrDefault("ReplaceDyingZone", "Exile");
+
+            CardCollection cards = null;
+
+            if (sa.hasParam("ReplaceDyingDefined")) {
+                cards = AbilityUtils.getDefinedCards(host, sa.getParam("ReplaceDyingDefined"), sa);
+                // no cards, no need for Effect
+                if (cards.isEmpty()) {
+                    return;
+                }
+            }
+
+            // build an Effect with that infomation
+            String name = host.getName() + "'s Effect";
+
+            final Card eff = createEffect(host, controller, name, host.getImageKey());
+            if (cards != null) {
+                eff.addRemembered(cards);
+            }
+
+            String valid = sa.getParamOrDefault("ReplaceDyingValid", "Card.IsRemembered");
+
+            String repeffstr = "Event$ Moved | ValidCard$ " + valid +
+                    "| Origin$ Battlefield | Destination$ Graveyard " +
+                    "| Description$ If the creature would die this turn, exile it instead.";
+            String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+            eff.addReplacementEffect(re);
+
+            if (cards != null) {
+                // Add forgot trigger
+                addForgetOnMovedTrigger(eff, "Battlefield");
+            }
+
+            // Copy text changes
+            if (sa.isIntrinsic()) {
+                eff.copyChangedTextFrom(host);
+            }
+
+            final GameCommand endEffect = new GameCommand() {
+                private static final long serialVersionUID = -5861759814760561373L;
+
+                @Override
+                public void run() {
+                    game.getAction().exile(eff, null);
+                }
+            };
+
+            game.getEndOfTurn().addUntil(endEffect);
+
+            eff.updateStateForView();
+
+            // TODO: Add targeting to the effect so it knows who it's dealing with
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        }
     }
 }

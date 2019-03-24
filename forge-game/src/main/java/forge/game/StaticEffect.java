@@ -23,7 +23,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -58,9 +57,6 @@ public class StaticEffect {
 
     private String chosenType;
     private Map<String, String> mapParams = Maps.newTreeMap();
-
-    // for P/T
-    private final Map<Card, String> originalPT = Maps.newTreeMap();
 
     // for types
     private boolean overwriteTypes = false;
@@ -102,7 +98,6 @@ public class StaticEffect {
         copy.xValueMap = this.xValueMap;
         copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
-        map.fillKeyedMap(copy.originalPT, this.originalPT);
         copy.overwriteTypes = this.overwriteTypes;
         copy.keepSupertype = this.keepSupertype;
         copy.removeSubTypes = this.removeSubTypes;
@@ -346,68 +341,6 @@ public class StaticEffect {
         this.originalKeywords.clear();
     }
 
-    // original power/toughness
-    /**
-     * <p>
-     * addOriginalPT.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param power
-     *            a int.
-     * @param toughness
-     *            a int.
-     */
-    public final void addOriginalPT(final Card c, final int power, final int toughness) {
-        final String pt = power + "/" + toughness;
-        if (!this.originalPT.containsKey(c)) {
-            this.originalPT.put(c, pt);
-        }
-    }
-
-    /**
-     * <p>
-     * getOriginalPower.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public final int getOriginalPower(final Card c) {
-        int power = -1;
-        if (this.originalPT.containsKey(c)) {
-            power = Integer.parseInt(this.originalPT.get(c).split("/")[0]);
-        }
-        return power;
-    }
-
-    /**
-     * <p>
-     * getOriginalToughness.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public final int getOriginalToughness(final Card c) {
-        int tough = -1;
-        if (this.originalPT.containsKey(c)) {
-            tough = Integer.parseInt(this.originalPT.get(c).split("/")[1]);
-        }
-        return tough;
-    }
-
-    /**
-     * <p>
-     * clearAllOriginalPTs.
-     * </p>
-     */
-    public final void clearAllOriginalPTs() {
-        this.originalPT.clear();
-    }
 
     // should we overwrite types?
     /**
@@ -889,6 +822,7 @@ public class StaticEffect {
         String[] addHiddenKeywords = null;
         String addColors = null;
         boolean removeMayPlay = false;
+        boolean removeWithFlash = false;
 
         List<Player> mayLookAt = null;
 
@@ -963,6 +897,9 @@ public class StaticEffect {
         if (params.containsKey("MayPlay")) {
             removeMayPlay = true;
         }
+        if (params.containsKey("WithFlash")) {
+            removeWithFlash = true;
+        }
 
         if (params.containsKey("IgnoreEffectCost")) {
             for (final SpellAbility s : getSource().getSpellAbilities()) {
@@ -992,7 +929,7 @@ public class StaticEffect {
             }
 
             // remove set P/T
-            if (!params.containsKey("CharacteristicDefining") && setPT) {
+            if (setPT) {
                 affectedCard.removeNewPT(getTimestamp());
             }
 
@@ -1019,7 +956,7 @@ public class StaticEffect {
             if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
                 for (final SpellAbility s : affectedCard.getSpellAbilities().threadSafeIterable()) {
                     if (s.isTemporary()) {
-                        affectedCard.removeSpellAbility(s);
+                        affectedCard.removeSpellAbility(s, false);
                     }
                 }
             }
@@ -1033,16 +970,8 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (params.containsKey("RemoveAllAbilities")) {
-                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                    ab.setTemporarilySuppressed(false);
-                }
-                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
-                    stA.setTemporarilySuppressed(false);
-                }
-                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
-                    rE.setTemporarilySuppressed(false);
-                }
+            if (params.containsKey("RemoveAllAbilities") || params.containsKey("RemoveIntrinsicAbilities")) {
+                affectedCard.unSuppressCardTraits();
             }
 
             // remove Types
@@ -1064,6 +993,9 @@ public class StaticEffect {
             }
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
+            }
+            if (removeWithFlash) {
+                affectedCard.removeWithFlash(getTimestamp());
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

@@ -12,3 +12,40 @@ Type=Other
 214 L Swamp
 215 L Mountain
 216 L Forest
+
+[tokens]
+storm_crow
+c_2_2_homunculus
+w_2_2_cat
+w_0_1_goat
+w_1_1_spirit_flying
+w_1_1_spirit_flying
+w_1_1_soldier
+u_1_1_faerie_spy_flying_haste_draw
+u_8_8_octopus
+u_1_1_a_thopter_flying
+u_1_1_a_thopter_flying
+b_1_1_assassin_lose_con
+b_3_3_beast_deathtouch
+b_5_5_demon_flying
+b_2_2_rogue_menace
+b_2_2_vampire_flying
+b_2_2_vampire_flying
+b_2_2_zombie
+b_2_2_zombie
+r_1_1_brainiac
+r_3_1_elemental_haste
+r_3_1_elemental_haste
+r_1_1_goblin
+g_3_3_beast
+g_3_3_beast
+g_1_1_saproling
+g_1_1_saproling
+g_1_1_squirrel
+g_6_6_wurm
+gw_x_x_vigilance_total_creatures
+gw_x_x_vigilance_total_creatures
+c_a_clue_draw
+c_a_clue_draw
+c_x_x_a_construct
+c_1_1_a_gnome

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=Sting 1
+Title=Sting
+Difficulty=easy
+Description=Lots of things that go "ping!" at you.
+Icon=Sting.jpg
+Deck Type=constructed
+[main]
+4 Prodigal Sorcerer
+4 Prodigal Pyromancer
+4 Suq'Ata Firewalker
+4 Zuran Spellcaster
+4 Jeska, Warrior Adept
+4 Kamahl, Pit Fighter
+4 Giant Strength
+4 Counterspell
+4 Rod of Ruin
+12 Mountain
+12 Island
+[sideboard]

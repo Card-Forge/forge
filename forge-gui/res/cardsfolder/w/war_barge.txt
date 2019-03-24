@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Card.IsRemembered | NoRegen$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigClearRemembered | Static$ True | Secondary$ True | TriggerDescription$ Clear Remembered at the end of any turn.
 SVar:TrigClearRemembered:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_barge.jpg
 Oracle:{3}: Target creature gains islandwalk until end of turn. When War Barge leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.

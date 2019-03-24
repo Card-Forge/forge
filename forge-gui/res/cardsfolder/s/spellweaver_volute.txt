@@ -10,7 +10,7 @@ SVar:DBChooseCard:DB$ ChooseCard | Choices$ Instant | ChoiceZone$ Graveyard | Am
 SVar:DBAttach:DB$ Attach | Defined$ ChosenCard | Object$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellweaver_volute.jpg
 Oracle:Enchant instant card in a graveyard\nWhenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost. If you do, exile the enchanted card and attach Spellweaver Volute to another instant card in a graveyard.

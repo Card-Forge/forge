@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=The Dark Druids
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Green-Black aggro Oath of Ghouls deck
+Deck Type=constructed
+Name=DarkDruids
+[Main]
+4 Avenging Druid|EXO
+2 Carrionette|TMP
+4 Dauthi Horror|TMP
+4 Dauthi Slayer|TMP
+3 Elvish Berserker|EXO
+3 Forest|TMP|1
+2 Forest|TMP|2
+2 Forest|TMP|3
+5 Forest|TMP|4
+4 Hermit Druid|STH
+4 Muscle Sliver|TMP
+4 Oath of Ghouls|EXO
+2 Overrun|TMP
+2 Pit Spawn|EXO
+1 Plaguebearer|EXO
+2 Skyshroud War Beast|EXO
+3 Swamp|TMP|1
+2 Swamp|TMP|2
+3 Swamp|TMP|3
+2 Trained Armodon|TMP
+2 Verdant Force|TMP

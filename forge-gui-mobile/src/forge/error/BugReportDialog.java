@@ -29,11 +29,11 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         Forge.openScreen(new BugReportDialog(title, text, showExitAppBtn));
     }
 
-    private final FTextArea lblHeader = add(new FTextArea(false, BugReporter.HELP_TEXT));
+    private final FTextArea lblHeader = add(new FTextArea(false, "Report Bug"));
     private final TemplateView tvDetails;
     private final FButton btnReport = add(new FButton(BugReporter.REPORT));
     private final FButton btnSave = add(new FButton(BugReporter.SAVE));
-    private final FButton btnContinue = add(new FButton(BugReporter.CONTINUE));
+    private final FButton btnDiscard = add(new FButton(BugReporter.DISCARD));
     private final FButton btnExit = add(new FButton(BugReporter.EXIT));
 
     private BugReportDialog(String title, String text0, boolean showExitAppBtn) {
@@ -43,7 +43,8 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         btnReport.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                BugReporter.copyAndGoToForums(tvDetails.text);
+                BugReporter.sendSentry();
+                Forge.back();
             }
         });
         btnSave.setCommand(new FEventHandler() {
@@ -52,7 +53,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
                 BugReporter.saveToFile(tvDetails.text);
             }
         });
-        btnContinue.setCommand(new FEventHandler() {
+        btnDiscard.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.back();
@@ -115,11 +116,11 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
             y += buttonHeight + PADDING;
         }
         if (btnExit.isVisible()) {
-            btnContinue.setBounds(x, y, buttonWidth, buttonHeight);
+            btnDiscard.setBounds(x, y, buttonWidth, buttonHeight);
             btnExit.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         }
         else {
-            btnContinue.setBounds(x, y, 2 * buttonWidth + PADDING, buttonHeight);
+            btnDiscard.setBounds(x, y, 2 * buttonWidth + PADDING, buttonHeight);
         }
     }
 

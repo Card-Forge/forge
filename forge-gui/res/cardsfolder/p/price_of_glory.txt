@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigDestroy | TriggerZones$ Battlefield | Activator$ Player.NonActive | TriggerDescription$ Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCard
 SVar:AICurseEffect:NonActive
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_glory.jpg
 Oracle:Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.

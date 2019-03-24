@@ -19,6 +19,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 Oracle:Enchant creature\nYou control enchanted creature.

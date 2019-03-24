@@ -344,11 +344,24 @@ public class QuestSpellShop {
         List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<>();
         for (Entry<InventoryItem, Integer> item : inventoryManager.getPool()) {
             PaperCard card = (PaperCard)item.getKey();
-            int numToKeep = card.getRules().getType().isBasic() ?
-                    FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_BASIC_LAND_SIZE) : FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_SIZE);
-            if (DeckFormat.getLimitExceptions().contains(card.getName())) {
+            //Number of a particular card to keep
+            int numToKeep = 4;
+
+            if(card.getRules().getType().isBasic()){
+                numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_BASIC_LAND_SIZE);
+            } else{
+                //Choose card limit restrictions based on deck construction rules, e.g.: Commander allows only singletons
+                switch(FModel.getQuest().getDeckConstructionRules()){
+                    case Default: numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_SIZE); break;
+                    case Commander: numToKeep = 1;
+                }
+            }
+
+            //If this card has an exception to the card limit, e.g.: Relentless Rats, get the quest preference
+            if (DeckFormat.canHaveAnyNumberOf(card)) {
                 numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_ANY_NUMBER_SIZE);
             }
+
             if (numToKeep < item.getValue()) {
                 cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - numToKeep));
             }

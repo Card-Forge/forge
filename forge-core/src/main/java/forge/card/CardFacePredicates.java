@@ -76,6 +76,51 @@ public final class CardFacePredicates {
         };
     }
 
+    static class ValidPredicate implements Predicate<ICardFace> {
+        private String valid;
+
+        public ValidPredicate(final String valid) {
+            this.valid = valid;
+        }
+
+        @Override
+        public boolean apply(ICardFace input) {
+            String k[] = valid.split("\\.", 2);
+
+            if ("Card".equals(k[0])) {
+                // okay
+            } else if ("Permanent".equals(k[0])) {
+                if (input.getType().isInstant() || input.getType().isSorcery()) {
+                    return false;
+                }
+            } else if (!input.getType().hasStringType(k[0])) {
+                return false;
+            }
+            if (k.length > 1) {
+                for (final String m : k[1].split("\\+")) {
+                    if (!hasProperty(input, m)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        static protected boolean hasProperty(ICardFace input, final String v) {
+            if (v.startsWith("non")) {
+                return !hasProperty(input, v.substring(3));
+            } else if (!input.getType().hasStringType(v)) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public static Predicate<ICardFace> valid(final String val) {
+        return new ValidPredicate(val);
+    }
+
     public static class Presets {
         /** The Constant isBasicLand. */
         public static final Predicate<ICardFace> IS_BASIC_LAND = new Predicate<ICardFace>() {

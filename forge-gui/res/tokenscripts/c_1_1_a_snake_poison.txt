@@ -1,0 +1,7 @@
+Name:Snake
+ManaCost:no cost
+Types:Artifact Creature Snake
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals damage to a player, that player gets a poison counter.
+SVar:TrigPoison:AB$ Poison | Cost$ 0 | Defined$ TriggeredTarget | Num$ 1
+Oracle:Whenever this creature deals damage to a player, that player gets a poison counter.

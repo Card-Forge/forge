@@ -1,0 +1,6 @@
+[format]
+Name:Ravnica Block, Dissension
+Type:Historic
+Subtype:Block
+Effective:2006-05-20
+Sets:RAV, GPT, DIS

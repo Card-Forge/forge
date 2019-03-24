@@ -1,0 +1,11 @@
+Name:Ral's Staticaster
+ManaCost:2 U R
+Types:Creature Viashino Wizard
+PT:3/3
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Planeswalker.Ral+YouCtrl | TriggerDescription$ Whenever CARDNAME attacks, if you control a Ral planeswalker, CARDNAME gets +1/+0 for each card in your hand until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ X | References$ X
+SVar:X:Count$InYourHand
+SVar:BuffedBy:Ral
+DeckNeeds:Type$Ral
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever Ral's Staticaster attacks, if you control a Ral planeswalker, Ral's Staticaster gets +1/+0 for each card in your hand until end of turn.

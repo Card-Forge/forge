@@ -1,0 +1,8 @@
+Name:Ajani's Welcome
+ManaCost:W
+Types:Enchantment
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:PlayMain1:TRUE
+SVar:AIPriorityModifier:9
+Oracle:Whenever a creature enters the battlefield under your control, you gain 1 life.

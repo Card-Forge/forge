@@ -37,6 +37,7 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.util.TextUtil;
 
 /**
@@ -169,11 +170,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (!desc.contains("ABILITY")) {
             return desc;
         }
-        SpellAbility sa = getOverridingAbility();
-        if (sa == null && this.mapParams.containsKey("Execute")) {
-            sa = AbilityFactory.getAbility(state, this.mapParams.get("Execute"));
-            setOverridingAbility(sa);
-        }
+        SpellAbility sa = ensureAbility();
 
         return replaceAbilityText(desc, sa);
         
@@ -209,12 +206,20 @@ public abstract class Trigger extends TriggerReplacementBase {
             } else {
                 saDesc = sa.getDescription();
             }
+            // string might have leading whitespace
+            saDesc = saDesc.trim();
             if (!saDesc.isEmpty()) {
-                // string might have leading whitespace
-                saDesc = saDesc.trim();
-                saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
-                result = TextUtil.fastReplace(result, "ABILITY", saDesc);
+                // in case sa starts with CARDNAME, dont lowercase it
+                if (!saDesc.startsWith(sa.getHostCard().getName())) {
+                    saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
+                }
+                if (saDesc.contains("ORIGINALHOST") && sa.getOriginalHost() != null) {
+                    saDesc = TextUtil.fastReplace(saDesc, "ORIGINALHOST", sa.getOriginalHost().getName());
+                }
+            } else {
+                saDesc = "<take no action>"; // printed in case nothing is chosen for the ability (e.g. Charm with Up to X)
             }
+            result = TextUtil.fastReplace(result, "ABILITY", saDesc);
         }
 
         return result;
@@ -335,7 +340,22 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         }
-        
+
+        if (this.mapParams.containsKey("TriggerRememberedInZone")) {
+            // check delayed trigger remembered objects (Mnemonic Betrayal)
+            // make this check more general if possible
+            boolean bFlag = true;
+            for (Object o : getTriggerRemembered()) {
+                if (o instanceof Card && ((Card) o).isInZone(ZoneType.smartValueOf(this.mapParams.get("TriggerRememberedInZone")))) {
+                    bFlag = false;
+                    break;
+                }
+            }
+            if (bFlag) {
+                return false;
+            }
+        }
+
         if ( !meetsCommonRequirements(this.mapParams))
             return false;
 
@@ -579,5 +599,49 @@ public abstract class Trigger extends TriggerReplacementBase {
         } catch (final Exception ex) {
             throw new RuntimeException("Trigger : clone() error, " + ex);
         }
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeText()
+     */
+    @Override
+    public void changeText() {
+        if (!isIntrinsic()) {
+            return;
+        }
+        super.changeText();
+
+        ensureAbility();
+
+        if (getOverridingAbility() != null) {
+            getOverridingAbility().changeText();
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
+     */
+    @Override
+    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
+        if (!isIntrinsic()) {
+            return;
+        }
+        super.changeTextIntrinsic(colorMap, typeMap);
+
+        ensureAbility();
+
+        if (getOverridingAbility() != null) {
+            getOverridingAbility().changeTextIntrinsic(colorMap, typeMap);
+        }
+    }
+
+    private SpellAbility ensureAbility() {
+        SpellAbility sa = getOverridingAbility();
+        if (sa == null && hasParam("Execute")) {
+            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"));
+            setOverridingAbility(sa);
+        }
+        return sa;
     }
 }

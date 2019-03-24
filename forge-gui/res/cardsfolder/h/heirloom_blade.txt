@@ -9,6 +9,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDigUntil:DB$DigUntil | Valid$ Creature.sharesCreatureTypeWith Remembered | ValidDescription$ creature that shares a creature type | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-K:Equip 1
+K:Equip:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heirloom_blade.jpg
 Oracle:Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}

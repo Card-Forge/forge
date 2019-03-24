@@ -7,7 +7,7 @@ SVar:STCanLookAtMayPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | Effe
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ MoveToYard | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard. | SubAbility$ DBCleanup
 SVar:MoveToYard:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/three_wishes.jpg
 Oracle:Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.

@@ -51,6 +51,6 @@ SVar:SacL3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBClea
 SVar:DBChooseA3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA3 | SubAbility$ SacA3
 SVar:SacA3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_ruin.jpg
 Oracle:Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.

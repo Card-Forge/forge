@@ -1,0 +1,13 @@
+Name:Xantcha, Sleeper Agent
+ManaCost:1 B R
+Types:Legendary Creature Minion
+PT:5/5
+K:CARDNAME attacks each combat if able.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, an opponent gains control of it.
+SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
+SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.CardOwner,Planeswalker.ControlledBy Player.CardOwner | Description$ CARDNAME can't attack its owner or planeswalkers its owner controls.
+A:AB$ Draw | Cost$ 3 | NumCards$ 1 | AnyPlayer$ True | SubAbility$ DBLoseLife | SpellDescription$ Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ CardController
+Oracle:As Xantcha, Sleeper Agent enters the battlefield, an opponent of your choice gains control of it.\nXantcha attacks each combat if able and can't attack its owner or planeswalkers its owner controls.\n{3}: Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.

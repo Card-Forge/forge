@@ -20,6 +20,8 @@ package forge.deck;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -47,7 +49,7 @@ public enum DeckFormat {
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
+        private final Set<String> bannedCards = ImmutableSet.of(
                "Adriana's Valor", "Advantageous Proclamation", "Amulet of Quoz", "Ancestral Recall", "Assemble the Rank and Vile",
                "Backup Plan", "Balance", "Biorhythm", "Black Lotus", "Brago's Favor", "Braids, Cabal Minion", "Bronze Tablet",
                "Channel", "Chaos Orb", "Coalition Victory", "Contract from Below", "Darkpact", "Demonic Attorney", "Double Stroke",
@@ -59,7 +61,7 @@ public enum DeckFormat {
                "Rebirth", "Recurring Nightmare", "Rofellos, Llanowar Emissary", "Secret Summoning", "Secrets of Paradise",
                "Sentinel Dispatch", "Shahrazad", "Sovereign's Realm", "Summoner's Bond", "Sundering Titan", "Sway of the Stars",
                "Sylvan Primordial", "Tempest Efreet", "Time Vault", "Time Walk", "Timmerian Fiends", "Tinker", "Tolarian Academy",
-               "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain"));
+               "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain");
         @Override
         public boolean apply(CardRules rules) {
             if (bannedCards.contains(rules.getName())) {
@@ -69,13 +71,31 @@ public enum DeckFormat {
         }
     }),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
-    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, StaticData.instance() == null ? null : StaticData.instance().getStandardPredicate()),
+    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, new Predicate<PaperCard>() {
+        private final Set<String> bannedCards = ImmutableSet.of(
+                "Baral, Chief of Compliance","Smuggler's Copter","Sorcerous Spyglass");
+        @Override
+        public boolean apply(PaperCard card) {
+            //why do we need to hard code the bannings here - they are defined in the GameFormat predicate used below
+            if (bannedCards.contains(card.getName())) {
+                return false;
+            }
+            return StaticData.instance() == null ? false : StaticData.instance().getBrawlPredicate().apply(card);
+        }
+    }) {
+        private final Set<String> bannedCommanders = ImmutableSet.of("Baral, Chief of Compliance");
+
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
+        }
+        },
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
+        private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
                 "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
-                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will"));
+                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
 
         @Override
         public boolean apply(CardRules rules) {
@@ -94,7 +114,7 @@ public enum DeckFormat {
             return true;
         }
     }) {
-        private final ImmutableSet<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
+        private final Set<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
 
         @Override
         public boolean isLegalCommander(CardRules rules) {
@@ -122,13 +142,6 @@ public enum DeckFormat {
     private final Predicate<PaperCard> paperCardPoolFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     private final static String SOVREALM = "Sovereign's Realm";
-
-    private static final List<String> limitExceptions = Arrays.asList(
-            new String[]{"Relentless Rats", "Shadowborn Apostle", "Rat Colony"});
-
-    public static List<String> getLimitExceptions(){
-        return limitExceptions;
-    }
 
     private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
@@ -230,44 +243,44 @@ public enum DeckFormat {
                 return "too many commanders";
             }
 
-            // Bring values up to 100
-            min++;
-            max++;
-
             byte cmdCI = 0;
-            Boolean hasPartner = null;
             for (PaperCard pc : commanders) {
-                // For each commander decrement size by 1 (99 for 1, 98 for 2)
-                min--;
-                max--;
-
                 if (!isLegalCommander(pc.getRules())) {
                     return "has an illegal commander";
                 }
-
-                if (hasPartner != null && !hasPartner) {
-                    return "has an illegal commander partnership";
-                }
-
-                boolean isPartner = false;
-                for(String s : pc.getRules().getMainPart().getKeywords()) {
-                    if (s.equals("Partner")) {
-                        isPartner = true;
-                        break;
-                    }
-                }
-                if (hasPartner == null) {
-                    hasPartner = isPartner;
-                } else if (!isPartner) {
-                    return "has an illegal commander partnership";
-                }
-
                 cmdCI |= pc.getRules().getColorIdentity().getColor();
+            }
+
+            // special check for Partner
+            if (commanders.size() == 2) {
+                // two commander = 98 cards
+                min--;
+                max--;
+
+                PaperCard a = commanders.get(0);
+                PaperCard b = commanders.get(1);
+
+                if (a.getRules().hasKeyword("Partner") && b.getRules().hasKeyword("Partner")) {
+                    // normal partner commander
+                } else if (a.getName().equals(b.getRules().getParterWith())
+                        && b.getName().equals(a.getRules().getParterWith())) {
+                    // paired partner commander
+                } else {
+                    return "has an illegal commander partnership";
+                }
             }
 
             final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
+            Set<String> basicLandNames = new HashSet<>();
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+                //If colourless commander allow one type of basic land
+                if (cmdCI == 0 && cp.getKey().getRules().getType().isBasicLand()){
+                    basicLandNames.add(cp.getKey().getName());
+                    if(basicLandNames.size() < 2){
+                        continue;
+                    }
+                }
                 if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
                     erroneousCI.add(cp.getKey());
                 }
@@ -324,7 +337,6 @@ public enum DeckFormat {
             //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
 
             final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
-            final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle", "Rat Colony");
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
@@ -333,8 +345,7 @@ public enum DeckFormat {
                     return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
                 }
 
-                final boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
-                if (!canHaveMultiple && cp.getValue() > maxCopies) {
+                if (!canHaveAnyNumberOf(simpleCard) && cp.getValue() > maxCopies) {
                     return TextUtil.concatWithSpace("must not contain more than", String.valueOf(maxCopies), "copies of the card", cp.getKey());
                 }
             }
@@ -350,6 +361,12 @@ public enum DeckFormat {
         }
 
         return null;
+    }
+
+    public static boolean canHaveAnyNumberOf(final IPaperCard icard) {
+        return icard.getRules().getType().isBasicLand()
+            || Iterables.contains(icard.getRules().getMainPart().getKeywords(),
+                "A deck can have any number of cards named CARDNAME.");
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {
@@ -455,6 +472,10 @@ public enum DeckFormat {
                 if (paperCardPoolFilter != null) {
                     for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                         if (!paperCardPoolFilter.apply(cp.getKey())) {
+                            System.err.println(
+                                    "Excluding deck: '" + deck.toString() +
+                                    "' Reason: '" + cp.getKey() + "' is not legal."
+                            );
                             return false;
                         }
                     }
@@ -495,6 +516,8 @@ public enum DeckFormat {
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
-        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI), CardRulesPredicates.hasKeyword("Partner")), PaperCard.FN_GET_RULES);
+        // TODO : check commander what kind of Partner it needs
+        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI),
+                CardRulesPredicates.Presets.CAN_BE_PARTNER_COMMANDER), PaperCard.FN_GET_RULES);
     }
 }

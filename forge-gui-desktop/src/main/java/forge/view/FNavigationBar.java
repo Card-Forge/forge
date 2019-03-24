@@ -37,6 +37,8 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.ReflectionUtil;
+import forge.util.Localizer;
+
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
@@ -71,15 +73,16 @@ public class FNavigationBar extends FTitleBarBase {
     }
 
     public void updateBtnCloseTooltip() {
+        final Localizer localizer = Localizer.getInstance();
         switch (Singletons.getControl().getCloseAction()) {
         case NONE:
-            btnClose.setToolTipText("Close");
+            btnClose.setToolTipText(localizer.getMessage("lblClose"));
             break;
         case CLOSE_SCREEN:
             btnClose.setToolTipText(this.selectedTab.screen.getCloseButtonTooltip());
             break;
         case EXIT_FORGE:
-            btnClose.setToolTipText("Exit Forge");
+            btnClose.setToolTipText(localizer.getMessage("lblExitForge"));
             break;
         }
     }
@@ -382,7 +385,7 @@ public class FNavigationBar extends FTitleBarBase {
             setOpaque(false);
             this.setIcon(screen0.getTabIcon());
             this.setForeground(foreColor.alphaColor(unhoveredAlpha));
-            this.setFont(FSkin.getFont(fontSize));
+            this.setFont(FSkin.getRelativeFont(fontSize));
 
             int closeButtonOffset;
             if (screen.allowTabClose()) {
@@ -434,7 +437,7 @@ public class FNavigationBar extends FTitleBarBase {
         private void setSelected(final boolean selected0) {
             if (this.selected == selected0) { return; }
             this.selected = selected0;
-            this.setFont(selected0 ? FSkin.getBoldFont(fontSize) : FSkin.getFont(fontSize));
+            this.setFont(selected0 ? FSkin.getRelativeBoldFont(fontSize) : FSkin.getRelativeFont(fontSize));
             repaintSelf();
         }
 

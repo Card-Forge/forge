@@ -220,6 +220,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return highlightedCards.contains(card);
     }
 
+    private final Set<CardView> selectableCards = Sets.newHashSet();
+    public void setSelectables(final Iterable<CardView> cards) {
+	for ( CardView cv : cards ) { selectableCards.add(cv); }
+    }
+    public void clearSelectables() {
+	selectableCards.clear();
+    }
+    public boolean isSelectable(final CardView card) {
+	return selectableCards.contains(card);
+    }
+    public boolean isSelecting() {
+	return !selectableCards.isEmpty();
+    }
+
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
         if (gameView.isGameOver()) {

@@ -76,6 +76,13 @@ public abstract class SpellAbilityAi {
                 return false;
             }
         }
+
+        if (sa.hasParam("AITgtBeforeCostEval")) {
+            // Cost payment requires a valid target to be specified, e.g. Quillmane Baku, so run the API logic first
+            // to set the target, then decide on paying costs (slower, so only use for cards where it matters)
+            return checkApiLogic(ai, sa) && (cost == null || willPayCosts(ai, sa, cost, source));
+        }
+
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return false;
         }
@@ -169,7 +176,7 @@ public abstract class SpellAbilityAi {
 
     public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory)
     {
-        if (!doTriggerAINoCost(aiPlayer, sa, mandatory)) {
+        if (!doTriggerAINoCost(aiPlayer, sa, mandatory) && !"Always".equals(sa.getParam("AILogic"))) {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
@@ -238,8 +245,8 @@ public abstract class SpellAbilityAi {
      * @return a boolean.
      */
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
-        return (sa.isSpell() && sa.getHostCard().isSorcery())
-            || (sa.isAbility() && sa.getRestrictions().isSorcerySpeed())
+        return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
+            || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
             || (sa.getRestrictions().isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 
@@ -324,7 +331,7 @@ public abstract class SpellAbilityAi {
         return null;
     }
 
-    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleSpellAbility is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return spells.get(0);
     }

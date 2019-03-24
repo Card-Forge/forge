@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,9 +34,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.ListLabelFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -62,7 +60,7 @@ import java.util.List;
  * <li>If the dialog was canceled, the selection will be empty.</li>
  * <li>
  * </ul>
- * 
+ *
  * @param <T>
  *            the generic type
  * @author Forge
@@ -228,7 +226,7 @@ public class ListChooser<T> extends FContainer {
 
     /**
      * Shows the dialog and returns after the dialog was closed.
-     * 
+     *
      * @param index0 index to select when shown
      * @return a boolean.
      */

@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -30,31 +29,8 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         // Prevent transform into legendary creature if copy already exists
-        // Check first if Legend Rule does still apply
-        if (!aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            if (!source.hasAlternateState()) {
-                System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
-                return false;
-            }
-
-            // check if the other side is legendary and if such Card already is in Play
-            final CardState other = source.getAlternateState();
-
-            if (other != null && other.getType().isLegendary() && aiPlayer.isCardInPlay(other.getName())) {
-                if (!other.getType().isCreature()) {
-                    return false;
-                }
-
-                final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
-
-                // for legendary KI counter creatures
-                if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
-                    // if the other legendary is useless try to replace it
-                    if (!ComputerUtilCard.isUselessCreature(aiPlayer, othercard)) {
-                        return false;
-                    }
-                }
-            }
+        if (!isSafeToTransformIntoLegendary(aiPlayer, source)) {
+            return false;
         }
 
         if("Transform".equals(mode) || "Flip".equals(mode)) {
@@ -65,8 +41,6 @@ public class SetStateAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player aiPlayer, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
         return super.checkAiLogic(aiPlayer, sa, aiLogic);
     }
 
@@ -87,7 +61,7 @@ public class SetStateAi extends SpellAbilityAi {
         if("Transform".equals(mode)) {
             if (!sa.usesTargeting()) {
                 // no Transform with Defined which is not Self
-                if (source.hasKeyword("CARDNAME can't transform")) {
+                if (!source.canTransform()) {
                     return false;
                 }
                 return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
@@ -96,15 +70,13 @@ public class SetStateAi extends SpellAbilityAi {
                 sa.resetTargets();
 
                 CardCollection list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
-                // select only cards with Transform as SplitType
+                // select only the ones that can transform
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card c) {
-                        return c.hasAlternateState() && c.getRules().getSplitType() == CardSplitType.Transform;
+                        return c.canTransform();
                     }
                 });
-                // select only the ones that can transform
-                list = CardLists.getNotKeyword(list, "CARDNAME can't transform");
                 list = CardLists.getTargetableCards(list, sa);
 
                 if (list.isEmpty()) {
@@ -260,8 +232,44 @@ public class SetStateAi extends SpellAbilityAi {
         return valueCard <= valueTransformed;
     }
 
+    private boolean isSafeToTransformIntoLegendary(Player aiPlayer, Card source) {
+        // Prevent transform into legendary creature if copy already exists
+        // Check first if Legend Rule does still apply
+        if (!aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+            if (!source.hasAlternateState()) {
+                System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
+                return false;
+            }
+
+            // check if the other side is legendary and if such Card already is in Play
+            final CardState other = source.getAlternateState();
+
+            if (other != null && other.getType().isLegendary() && aiPlayer.isCardInPlay(other.getName())) {
+                if (!other.getType().isCreature()) {
+                    return false;
+                }
+
+                final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
+
+                // for legendary KI counter creatures
+                if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
+                    // if the other legendary is useless try to replace it
+                    if (!ComputerUtilCard.isUselessCreature(aiPlayer, othercard)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // TODO: improve the AI for when it may want to transform something that's optional to transform
+        if (!isSafeToTransformIntoLegendary(player, sa.getHostCard())) {
+            return false;
+        }
+
         return true;
     }
 }

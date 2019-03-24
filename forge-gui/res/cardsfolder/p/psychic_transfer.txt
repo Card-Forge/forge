@@ -5,6 +5,6 @@ A:SP$ ExchangeLife | Cost$ 4 U | ValidTgts$ Player | ConditionCheckSVar$ X | Con
 SVar:X:SVar$Y/Abs
 SVar:Y:Count$YourLifeTotal/Minus.Z
 SVar:Z:Count$TargetedLifeTotal
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_transfer.jpg
 Oracle:If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.

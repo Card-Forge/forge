@@ -1,0 +1,21 @@
+[quest]
+id=TempestQuest8
+OpponentName=Crovax
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=2 black rares
+Credit Reward=300
+AIExtras=Swamp|Swamp|Swamp
+HumanExtras=City of Traitors|City of Traitors
+[metadata]
+Title=Traitors!
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=There have been some traitors among your enemies, but the Grollubs are after them. You decide to help them out!
+Deck Type=constructed
+Name=Traitors
+[Main]
+38 Grollub|EXO
+20 Swamp
+2 Crovax the Cursed|STH

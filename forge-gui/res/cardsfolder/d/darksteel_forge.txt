@@ -3,6 +3,6 @@ ManaCost:9
 Types:Artifact
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Indestructible | Description$ Artifacts you control have indestructible.
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 Oracle:Artifacts you control have indestructible. (Effects that say "destroy" don't destroy them. Artifact creatures with indestructible can't be destroyed by damage.)

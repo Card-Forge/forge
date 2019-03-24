@@ -1,0 +1,9 @@
+Name:Mist-Cloaked Herald|Deck:Mist-Cloaked Herald_0.dck|Variant:None|Avatar:Mist-Cloaked Herald|Desc:
+Name:Deeproot Elite|Deck:Deeproot Elite_1.dck|Variant:None|Avatar:Deeproot Elite|Desc:
+Name:Kumena, Tyrant of Orazca|Deck:Kumena, Tyrant of Orazca_2.dck|Variant:Commander|Avatar:Kumena, Tyrant of Orazca|Desc:
+Name:Nezahal, Primal Tide|Deck:Nezahal, Primal Tide_14.dck|Variant:Commander|Avatar:Nezahal, Primal Tide|Desc:
+Name:Jace, Cunning Castaway|Deck:Jace Planeswalker.dck|Variant:Planeswalker|Avatar:Jace, Cunning Castaway|Desc:
+Name:Crashing Tide|Deck:Crashing Tide_5.dck|Variant:None|Avatar:Crashing Tide|Desc:
+Name:Kumenas Speaker|Deck:Kumenas Speaker_6.dck|Variant:None|Avatar:Kumena's Speaker|Desc:
+Name:Kumena, Tyrant of Orazca|Deck:Kumena, Tyrant of Orazca_7.dck|Variant:None|Avatar:Kumena, Tyrant of Orazca|Desc:
+Name:Silvergill Adept|Deck:Silvergill Adept_8.dck|Variant:None|Avatar:Silvergill Adept|Desc:

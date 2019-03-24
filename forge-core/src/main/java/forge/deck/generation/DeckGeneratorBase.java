@@ -405,10 +405,10 @@ public abstract class DeckGeneratorBase {
         Predicate<PaperCard> dualLandFilter = Predicates.compose(CardRulesPredicates.coreType(true, CardType.CoreType.Land), PaperCard.FN_GET_RULES);
         Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
         Iterable<PaperCard> landCards = pool.getAllCards(Predicates.and(dualLandFilter,exceptBasicLand));
-        Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\} to your mana pool",
-                "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\} to your mana pool",
-                "Add \\{([WUBRG])\\}\\{([WUBRG])\\} to your mana pool",
-                "Add \\{[WUBRG]\\}\\{[WUBRG]\\}, \\{([WUBRG])\\}\\{([WUBRG])\\}, or \\{[WUBRG]\\}\\{[WUBRG]\\} to your mana pool");
+        Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",
+                "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\}",
+                "Add \\{([WUBRG])\\}\\{([WUBRG])\\}",
+                "Add \\{[WUBRG]\\}\\{[WUBRG]\\}, \\{([WUBRG])\\}\\{([WUBRG])\\}, or \\{[WUBRG]\\}\\{[WUBRG]\\}");
         for (String pattern:dualLandPatterns){
             regexLandSearch(pattern, landCards);
         }

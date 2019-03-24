@@ -5,6 +5,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -23,7 +24,7 @@ public class UntapAllAi extends SpellAbilityAi {
         		return false;
         	}
             String valid = "";
-            CardCollectionView list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
             if (sa.hasParam("ValidCards")) {
                 valid = sa.getParam("ValidCards");
             }
@@ -35,6 +36,15 @@ public class UntapAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        Card source = sa.getHostCard();
+
+        if (sa.hasParam("ValidCards")) {
+            String valid = sa.getParam("ValidCards");
+            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+            list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
+            return mandatory || !list.isEmpty();
+        }
+
         return mandatory;
     }
 }

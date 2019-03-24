@@ -1,0 +1,8 @@
+Name:Tezzeret's Strider
+ManaCost:3
+Types:Artifact Creature Golem
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Planeswalker.Tezzeret+YouCtrl | Description$ As long as you control a Tezzeret planeswalker, CARDNAME has menace.
+SVar:BuffedBy:Tezzeret
+DeckNeeds:Type$Tezzeret
+Oracle:As long as you control a Tezzeret planeswalker, Tezzeret's Strider has menace. (It can't be blocked except by two or more creatures.)

@@ -9,6 +9,6 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Creature.withFlying+blockedBySource | TgtPrompt
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_vine.jpg
 Oracle:Defender, reach (This creature can block creatures with flying.)\nYou may choose not to untap Whip Vine during your untap step.\n{T}: Tap target creature with flying blocked by Whip Vine. That creature doesn't untap during its controller's untap step for as long as Whip Vine remains tapped.

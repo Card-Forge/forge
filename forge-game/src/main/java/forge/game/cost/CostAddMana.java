@@ -56,7 +56,7 @@ public class CostAddMana extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Add ").append(StringUtils.repeat("{" + this.getType() + "}", i)).append(" to your mana pool");
+        sb.append("Add ").append(StringUtils.repeat("{" + this.getType() + "}", i));
         return sb.toString();
     }
 

@@ -40,41 +40,53 @@ import java.util.Set;
  */
 public class AiCardMemory {
 
-    private final Set<Card> memMandatoryAttackers;
-    private final Set<Card> memTrickAttackers;
-    private final Set<Card> memHeldManaSources;
-    private final Set<Card> memHeldManaSourcesForCombat;
-    private final Set<Card> memAttachedThisTurn;
-    private final Set<Card> memAnimatedThisTurn;
-    private final Set<Card> memBouncedThisTurn;
-    private final Set<Card> memActivatedThisTurn;
-
-    public AiCardMemory() {
-        this.memMandatoryAttackers = new HashSet<>();
-        this.memHeldManaSources = new HashSet<>();
-        this.memHeldManaSourcesForCombat = new HashSet<>();
-        this.memAttachedThisTurn = new HashSet<>();
-        this.memAnimatedThisTurn = new HashSet<>();
-        this.memBouncedThisTurn = new HashSet<>();
-        this.memActivatedThisTurn = new HashSet<>();
-        this.memTrickAttackers = new HashSet<>();
-    }
-
     /**
      * Defines the memory set in which the card is remembered
      * (which, in its turn, defines how the AI utilizes the information
      * about remembered cards).
      */
     public enum MemorySet {
-        MANDATORY_ATTACKERS,
-        TRICK_ATTACKERS,
-        HELD_MANA_SOURCES_FOR_MAIN2,
-        HELD_MANA_SOURCES_FOR_DECLBLK,
-        ATTACHED_THIS_TURN,
-        ANIMATED_THIS_TURN,
-        BOUNCED_THIS_TURN,
-        ACTIVATED_THIS_TURN,
+        MANDATORY_ATTACKERS, // These creatures must attack this turn
+        TRICK_ATTACKERS, // These creatures will attack to try to provoke the opponent to block them into a combat trick
+        HELD_MANA_SOURCES_FOR_MAIN2, // These mana sources will not be used before Main 2
+        HELD_MANA_SOURCES_FOR_DECLBLK, // These mana sources will not be used before Combat - Declare Blockers
+        HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK, // These mana sources will not be used before the opponent's Combat - Declare Blockers
+        HELD_MANA_SOURCES_FOR_NEXT_SPELL, // These mana sources will not be used until the next time the AI chooses a spell to cast
+        ATTACHED_THIS_TURN, // These equipments were attached to something already this turn
+        ANIMATED_THIS_TURN, // These cards had their AF Animate effect activated this turn
+        BOUNCED_THIS_TURN, // These cards were bounced this turn
+        ACTIVATED_THIS_TURN, // These cards had their ability activated this turn
+        CHOSEN_FOG_EFFECT, // These cards are marked as the Fog-like effect the AI is planning to cast this turn
+        MARKED_TO_AVOID_REENTRY // These cards may cause a stack smash when processed recursively, and are thus marked to avoid a crash
         //REVEALED_CARDS // stub, not linked to AI code yet
+    }
+
+    private final Set<Card> memMandatoryAttackers;
+    private final Set<Card> memTrickAttackers;
+    private final Set<Card> memHeldManaSources;
+    private final Set<Card> memHeldManaSourcesForCombat;
+    private final Set<Card> memHeldManaSourcesForEnemyCombat;
+    private final Set<Card> memHeldManaSourcesForNextSpell;
+    private final Set<Card> memAttachedThisTurn;
+    private final Set<Card> memAnimatedThisTurn;
+    private final Set<Card> memBouncedThisTurn;
+    private final Set<Card> memActivatedThisTurn;
+    private final Set<Card> memChosenFogEffect;
+    private final Set<Card> memMarkedToAvoidReentry;
+
+    public AiCardMemory() {
+        this.memMandatoryAttackers = new HashSet<>();
+        this.memHeldManaSources = new HashSet<>();
+        this.memHeldManaSourcesForCombat = new HashSet<>();
+        this.memHeldManaSourcesForEnemyCombat = new HashSet<>();
+        this.memAttachedThisTurn = new HashSet<>();
+        this.memAnimatedThisTurn = new HashSet<>();
+        this.memBouncedThisTurn = new HashSet<>();
+        this.memActivatedThisTurn = new HashSet<>();
+        this.memTrickAttackers = new HashSet<>();
+        this.memChosenFogEffect = new HashSet<>();
+        this.memMarkedToAvoidReentry = new HashSet<>();
+        this.memHeldManaSourcesForNextSpell = new HashSet<>();
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
@@ -87,6 +99,10 @@ public class AiCardMemory {
                 return memHeldManaSources;
             case HELD_MANA_SOURCES_FOR_DECLBLK:
                 return memHeldManaSourcesForCombat;
+            case HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK:
+                return memHeldManaSourcesForEnemyCombat;
+            case HELD_MANA_SOURCES_FOR_NEXT_SPELL:
+                return memHeldManaSourcesForNextSpell;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
             case ANIMATED_THIS_TURN:
@@ -95,6 +111,10 @@ public class AiCardMemory {
                 return memBouncedThisTurn;
             case ACTIVATED_THIS_TURN:
                 return memActivatedThisTurn;
+            case CHOSEN_FOG_EFFECT:
+                return memChosenFogEffect;
+            case MARKED_TO_AVOID_REENTRY:
+                return memMarkedToAvoidReentry;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -263,33 +283,66 @@ public class AiCardMemory {
      * Clears all memory sets stored in this card memory for the given player.
      */
     public void clearAllRemembered() {
-        clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
-        clearMemorySet(MemorySet.TRICK_ATTACKERS);
-        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
-        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
-        clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
-        clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
-        clearMemorySet(MemorySet.BOUNCED_THIS_TURN);
-        clearMemorySet(MemorySet.ACTIVATED_THIS_TURN);
+        for (MemorySet memSet : MemorySet.values()) {
+            clearMemorySet(memSet);
+        }
     }
 
     // Static functions to simplify access to AI card memory of a given AI player.
     public static void rememberCard(Player ai, Card c, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return;
+        }
         ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().rememberCard(c, set);
     }
+    public static void rememberCard(AiController aic, Card c, MemorySet set) {
+        aic.getCardMemory().rememberCard(c, set);
+    }
     public static void forgetCard(Player ai, Card c, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return;
+        }
         ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().forgetCard(c, set);
     }
+    public static void forgetCard(AiController aic, Card c, MemorySet set) {
+        aic.getCardMemory().forgetCard(c, set);
+    }
     public static boolean isRememberedCard(Player ai, Card c, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return false;
+        }
         return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(c, set);
     }
+    public static boolean isRememberedCard(AiController aic, Card c, MemorySet set) {
+        return aic.getCardMemory().isRememberedCard(c, set);
+    }
     public static boolean isRememberedCardByName(Player ai, String name, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return false;
+        }
         return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCardByName(name, set);
     }
+    public static boolean isRememberedCardByName(AiController aic, String name, MemorySet set) {
+        return aic.getCardMemory().isRememberedCardByName(name, set);
+    }
     public static void clearMemorySet(Player ai, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return;
+        }
         ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearMemorySet(set);
     }
+    public static void clearMemorySet(AiController aic, MemorySet set) {
+        if (!isMemorySetEmpty(aic, set)) {
+            aic.getCardMemory().clearMemorySet(set);
+        }
+    }
     public static boolean isMemorySetEmpty(Player ai, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return false;
+        }
         return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isMemorySetEmpty(set);
+    }
+    public static boolean isMemorySetEmpty(AiController aic, MemorySet set) {
+        return aic.getCardMemory().isMemorySetEmpty(set);
     }
 }

@@ -1,0 +1,7 @@
+Name:Vampire Knight
+ManaCost:no cost
+Types:Creature Vampire Knight
+Colors:black
+PT:1/1
+K:Lifelink
+Oracle:Lifelink

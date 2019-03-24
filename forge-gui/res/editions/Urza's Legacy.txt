@@ -154,3 +154,6 @@ FoilAlwaysInCommonSlot=False
 118 C Yavimaya Granger
 119 C Yavimaya Scion
 120 C Yavimaya Wurm
+
+[tokens]
+g_1_1_squirrel

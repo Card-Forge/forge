@@ -4,6 +4,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -22,12 +23,12 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.DeckImport;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.toolbox.FOptionPane;
 
 /**
  * Controls the "current deck" panel in the deck editor UI.
  *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- *
  */
 public enum CCurrentDeck implements ICDoc {
     SINGLETON_INSTANCE;
@@ -142,7 +143,7 @@ public enum CCurrentDeck implements ICDoc {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).newModel();
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
                     VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
                 }
             });
@@ -161,9 +162,9 @@ public enum CCurrentDeck implements ICDoc {
 
         if (file != null) {
             try {
-                ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE
-                        .getCurrentEditorController().getDeckController())
-                        .setModel(DeckSerializer.fromFile(file));
+                CDeckEditorUI.SINGLETON_INSTANCE
+                    .getCurrentEditorController().getDeckController()
+                    .loadDeck(DeckSerializer.fromFile(file));
 
             } catch (final Exception ex) {
                 //BugReporter.reportException(ex);
@@ -193,8 +194,8 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void exportDeck() {
-        final DeckController<Deck> controller = (DeckController<Deck>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
+        final DeckController<? extends DeckBase> controller =
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
 
         final File filename = this.getExportFilename();
         if (filename == null) {
@@ -204,11 +205,13 @@ public enum CCurrentDeck implements ICDoc {
         //create copy of deck to save under new name
         String name = filename.getName();
         name = name.substring(0, name.lastIndexOf(".")); //remove extension
-        final Deck deck = (Deck)controller.getModel().copyTo(name);
+        Deck deck = (Deck) controller.getModel().getHumanDeck().copyTo(name);
 
         try {
             DeckSerializer.writeDeck(deck, filename);
-            controller.setModel(DeckSerializer.fromFile(filename)); //reload deck from file so everything is in sync
+            final Deck deserialized = DeckSerializer.fromFile(filename);
+            //reload deck from file so everything is in sync
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(deserialized);
         } catch (final Exception ex) {
             //BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
@@ -243,8 +246,17 @@ public enum CCurrentDeck implements ICDoc {
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = fileChooser.getSelectedFile();
             final String check = file.getAbsolutePath();
-
             previousDirectory = file.getParentFile();
+            
+            if (!previousDirectory.exists()) {
+                FOptionPane.showErrorDialog("Cannot save deck to " + check);
+                return null;
+            }
+            
+            if(isFileNameInvalid(file)) {
+                FOptionPane.showErrorDialog("Cannot save deck to " + check + "\nDeck name may not include any of the characters / \\ : * ? \" < > |");
+                return null;
+            }
 
             return check.endsWith(".dck") ? file : new File(check + ".dck");
         }
@@ -260,14 +272,29 @@ public enum CCurrentDeck implements ICDoc {
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = save.getSelectedFile();
             final String check = file.getAbsolutePath();
-
             previousDirectory = file.getParentFile();
+            
+            if (!previousDirectory.exists()) {
+                FOptionPane.showErrorDialog("Cannot save proxies to " + check);
+                return null;
+            }
+            
+            if(isFileNameInvalid(file)) {
+                FOptionPane.showErrorDialog("Cannot save proxies to " + check + "\nFile name may not include any of the characters / \\ : * ? \" < > |");
+                return null;
+            }
 
             return check.endsWith(".html") ? file : new File(check + ".html");
         }
         return null;
     }
 
+    /** Checks if the file name includes any of the invalid characters / \ : * ? " < > :  */
+    private static boolean isFileNameInvalid(File file) {
+    	final Pattern pattern = Pattern.compile("[/\\\\:*?\\\"<>|]");
+    	return pattern.matcher(file.getName()).find();
+    }
+    
     /** The Constant HTML_FILTER. */
     public static final FileFilter HTML_FILTER = new FileFilter() {
         @Override
@@ -280,4 +307,5 @@ public enum CCurrentDeck implements ICDoc {
             return "Proxy File .html";
         }
     };
+    
 }

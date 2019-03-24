@@ -33,6 +33,8 @@ public class DialogChoosePoolDistribution {
 	private final FRadioButton radSurpriseMe = new FRadioButton("Surprise Me");
 	private final FRadioButton radBoosters   = new FRadioButton("Boosters");
 
+	private final ButtonGroup poolTypeButtonGroup = new ButtonGroup();
+
 	private final FTextField numberOfBoostersField = new FTextField.Builder().text("0").maxLength(10).build();
 
 	private final FButton btnOk = new FButton("OK");
@@ -41,6 +43,13 @@ public class DialogChoosePoolDistribution {
 
 	@SuppressWarnings("serial")
 	public DialogChoosePoolDistribution(final List<Byte> preferredColors, final PoolType poolType, final boolean includeArtifacts) {
+
+		if (poolTypeButtonGroup.getButtonCount() == 0) {
+			poolTypeButtonGroup.add(radBalanced);
+			poolTypeButtonGroup.add(radRandom);
+			poolTypeButtonGroup.add(radSurpriseMe);
+			poolTypeButtonGroup.add(radBoosters);
+		}
 
 		for (Byte color : preferredColors) {
 			switch (color) {
@@ -70,26 +79,14 @@ public class DialogChoosePoolDistribution {
 		switch (poolType) {
 			case BALANCED:
 				radBalanced.setSelected(true);
-				radRandom.setSelected(false);
-				radSurpriseMe.setSelected(false);
-				radBoosters.setSelected(false);
 				break;
 			case RANDOM:
-				radBalanced.setSelected(false);
 				radRandom.setSelected(true);
-				radSurpriseMe.setSelected(false);
-				radBoosters.setSelected(false);
 				break;
 			case RANDOM_BALANCED:
-				radBalanced.setSelected(false);
-				radRandom.setSelected(false);
 				radSurpriseMe.setSelected(true);
-				radBoosters.setSelected(false);
 				break;
 			case BOOSTERS:
-				radBalanced.setSelected(false);
-				radRandom.setSelected(false);
-				radSurpriseMe.setSelected(false);
 				radBoosters.setSelected(true);
 				break;
 		}

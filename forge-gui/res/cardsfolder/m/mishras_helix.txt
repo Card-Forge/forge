@@ -5,6 +5,6 @@ A:AB$ Tap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgt
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_helix.jpg
 Oracle:{X}, {T}: Tap X target lands.

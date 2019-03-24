@@ -159,3 +159,14 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 84 R Weirding Shaman
 139 C Winnower Patrol
 140 U Wolf-Skull Shaman
+
+[tokens]
+w_5_5_giant_warrior
+w_1_1_kithkin_soldier
+u_1_1_merfolk_wizard
+b_1_1_faerie_rogue_flying
+b_1_1_goblin_rogue
+g_4_4_elemental
+g_1_1_elf_warrior
+g_2_5_treefolk_shaman
+g_2_2_wolf

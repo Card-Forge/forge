@@ -3,9 +3,9 @@ ManaCost:2 BR BR
 Types:Creature Goblin Assassin
 PT:2/2
 K:Persist
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to target creature or player.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to any target.
+SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X
 SVar:X:Count$CardPower
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg
-Oracle:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+Oracle:When Murderous Redcap enters the battlefield, it deals damage equal to its power to any target.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

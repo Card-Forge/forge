@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Red:Protection from red:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from red. This effect doesn't remove CARDNAME.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_ward.jpg
 Oracle:Enchant creature\nEnchanted creature has protection from red. This effect doesn't remove Red Ward.

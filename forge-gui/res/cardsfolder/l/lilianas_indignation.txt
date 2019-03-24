@@ -6,7 +6,7 @@ SVar:DBLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | L
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Creature.IsRemembered/Times.2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_indignation.jpg

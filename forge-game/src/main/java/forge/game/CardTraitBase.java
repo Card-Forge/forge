@@ -44,7 +44,12 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
 
-    private Map<String, String> sVars = Maps.newHashMap();
+    protected Map<String, String> sVars = Maps.newHashMap();
+
+    protected Map<String, String> intrinsicChangedTextColors = Maps.newHashMap();
+    protected Map<String, String> intrinsicChangedTextTypes = Maps.newHashMap();
+    protected Map<String, String> changedTextColors = Maps.newHashMap();
+    protected Map<String, String> changedTextTypes = Maps.newHashMap();
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
@@ -53,6 +58,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     private static final ImmutableList<String> mutableKeys = ImmutableList.<String>builder()
             .add("AddAbility").build();
 
+    /**
+     * Keys that should not changed
+     */
+    private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
+            .add("TokenScript", "LegacyImage", "TokenImage", "NewName").build();
     /**
      * Sets the temporary.
      *
@@ -314,7 +324,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-    
+            if (presentPlayer.equals("Any")) {
+                for (final Player p : this.getHostCard().getController().getAllies()) {
+                    list.addAll(p.getCardsIn(presentZone));
+                }
+            }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
             int right = 1;
@@ -445,9 +459,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     }
 
     public void changeText() {
+        // copy changed text words into card trait there
+        this.changedTextColors = getHostCard().getChangedTextColorWords();
+        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
+
         for (final String key : this.mapParams.keySet()) {
             final String value = this.originalMapParams.get(key), newValue;
-            if (descriptiveKeys.contains(key)) {
+            if (noChangeKeys.contains(key)) {
+                continue;
+            } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
                 newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
             } else if (mutableKeys.contains(key)) {
@@ -510,5 +530,54 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
     public Set<String> getSVars() {
         return sVars.keySet();
+    }
+
+    public Map<String, String> getChangedTextColors() {
+        return _combineChangedMap(intrinsicChangedTextColors, changedTextColors);
+    }
+    public Map<String, String> getChangedTextTypes() {
+        return _combineChangedMap(intrinsicChangedTextTypes, changedTextTypes);
+    }
+
+    private Map<String, String> _combineChangedMap(Map<String, String> input, Map<String, String> output) {
+        // no need to do something, just return hash
+        if (input.isEmpty()) {
+            return output;
+        }
+        if (output.isEmpty()) {
+            return input;
+        }
+        // magic combine them
+        Map<String, String> result = Maps.newHashMap(output);
+        for (Map.Entry<String, String> e : input.entrySet()) {
+            String value = e.getValue();
+            result.put(e.getKey(), output.containsKey(value) ? output.get(value) : value);
+        }
+        return result;
+    }
+
+    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
+        intrinsicChangedTextColors = colorMap;
+        intrinsicChangedTextTypes = typeMap;
+        for (final String key : this.mapParams.keySet()) {
+            final String value = this.originalMapParams.get(key), newValue;
+            if (noChangeKeys.contains(key)) {
+                continue;
+            } else if (descriptiveKeys.contains(key)) {
+                // change descriptions differently
+                newValue = AbilityUtils.applyTextChangeEffects(value, true, colorMap, typeMap);
+            }else if (this.getHostCard().hasSVar(value)) {
+                // don't change literal SVar names!
+                continue;
+            } else {
+                newValue = AbilityUtils.applyTextChangeEffects(value, false, colorMap, typeMap);
+            }
+
+            if (newValue != null) {
+                this.mapParams.put(key, newValue);
+            }
+        }
+        // this does overwrite the original MapParams
+        this.originalMapParams = Maps.newHashMap(this.mapParams);
     }
 }

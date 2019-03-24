@@ -7,8 +7,6 @@ import java.util.SortedMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-import forge.card.CardType;
-
 public final class CardChangedWords {
 
     private final SortedMap<Long, CardChangedWord> map = Maps.newTreeMap();
@@ -68,14 +66,9 @@ public final class CardChangedWords {
 
                 // the actual change (b->c)
                 resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
-
-                // possible plural form
-                final String singular = CardType.getPluralType(ccw.getOriginalWord());
-                if (!singular.equals(ccw.getOriginalWord())) {
-                    resultCache.put(singular, ccw.getNewWord());
-                }
             }
 
+            // TODO should that be removed?
             for (final String key : ImmutableList.copyOf(resultCache.keySet())) {
                 if (!key.equals("Any")) {
                     resultCache.put(key.toLowerCase(), resultCache.get(key).toLowerCase());

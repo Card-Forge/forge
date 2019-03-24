@@ -182,6 +182,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         });
     }
 
+    protected boolean cardPanelDraggable(final CardPanel panel) {
+	return true;
+    }
+
     private MouseMotionListener setupMotionMouseListener() {
         final MouseMotionListener mml = new MouseMotionListener() {
             @Override
@@ -207,20 +211,23 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 if (panel != mouseDownPanel) {
                     return;
                 }
-                if (intialMouseDragX == -1) {
-                    intialMouseDragX = x;
-                    intialMouseDragY = y;
-                    return;
-                }
-                if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
+
+		if (cardPanelDraggable(panel)) { // allow for non-draggable cards
+		    if (intialMouseDragX == -1) {
+			intialMouseDragX = x;
+			intialMouseDragY = y;
+			return;
+		    }
+		    if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
                         && (Math.abs(y - intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
-                    return;
-                }
-                mouseDownPanel = null;
-                setMouseDragPanel(panel);
-                mouseDragOffsetX = panel.getX() - intialMouseDragX;
-                mouseDragOffsetY = panel.getY() - intialMouseDragY;
-                mouseDragStart(getMouseDragPanel(), evt);
+			return;
+		    }
+		    mouseDownPanel = null;
+		    setMouseDragPanel(panel);
+		    mouseDragOffsetX = panel.getX() - intialMouseDragX;
+		    mouseDragOffsetY = panel.getY() - intialMouseDragY;
+		    mouseDragStart(getMouseDragPanel(), evt);
+		}
             }
 
             @Override
@@ -284,6 +291,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public final void removeCardPanel(final CardPanel fromPanel) {
+	removeCardPanel(fromPanel,true);
+    }
+
+    public final void removeCardPanel(final CardPanel fromPanel, final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
         if (getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
@@ -296,9 +307,11 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
-        invalidate();
-        repaint();
-        doingLayout();
+	if ( repaint ) {
+	    invalidate();
+	    repaint();
+	    doingLayout();
+	}
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
@@ -318,23 +331,28 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         for (final CardPanel cardPanel : cardPanels) {
             this.add(cardPanel);
         }
-        this.doLayout();
+	//pfps the validate just below will do the layout, so don't do it here        this.doLayout();
         this.invalidate();
         this.getParent().validate();
         this.repaint();
     }
 
     public final void clear() {
+	clear(true);
+    }
+    public final void clear(final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
         for (final CardPanel p : getCardPanels()) {
             p.dispose();
         }
         getCardPanels().clear();
         removeAll();
-        setPreferredSize(new Dimension(0, 0));
-        invalidate();
-        getParent().validate();
-        repaint();
+	if ( repaint ) {
+	    setPreferredSize(new Dimension(0, 0));
+	    invalidate();
+	    getParent().validate();
+	    repaint();
+	}
     }
 
     public final FScrollPane getScrollPane() {

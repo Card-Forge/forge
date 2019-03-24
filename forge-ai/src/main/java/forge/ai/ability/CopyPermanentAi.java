@@ -83,7 +83,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
             CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa));
 
-            list = CardLists.filter(list, Predicates.not(CardPredicates.hasSVar("RemAIDeck")));
+            list = CardLists.filter(list, Predicates.not(CardPredicates.isRemAIDeck()));
             //Nothing to target
             if (list.isEmpty()) {
             	return false;

@@ -3,6 +3,6 @@ ManaCost:G
 Types:Enchantment
 S:Mode$ ETBTapped | ValidCard$ Artifact,Land | Description$ Artifacts and lands enter the battlefield tapped.
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_maze.jpg
 Oracle:Artifacts and lands enter the battlefield tapped.

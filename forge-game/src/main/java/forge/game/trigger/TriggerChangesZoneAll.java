@@ -15,44 +15,10 @@ public class TriggerChangesZoneAll extends Trigger {
 
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        @SuppressWarnings("unchecked")
-        final Map<ZoneType, CardCollection> moved = (Map<ZoneType, CardCollection>) runParams2.get("Cards");
+        final CardZoneTable table = (CardZoneTable) runParams2.get("Cards");
 
-        if (this.mapParams.containsKey("Destination")) {
-            if (!this.mapParams.get("Destination").equals("Any")) {
-                if (!runParams2.get("Destination").equals(ZoneType.valueOf(this.mapParams.get("Destination")))) {
-                    return false;
-                }
-            }
-        }
-
-        final CardCollection allCards = new CardCollection();
-
-        if (this.mapParams.containsKey("Origin")) {
-            if (!this.mapParams.get("Origin").equals("Any")) {
-                if (this.mapParams.get("Origin") == null) {
-                    return false;
-                }
-                final List<ZoneType> origin = ZoneType.listValueOf((String)this.mapParams.get("Origin"));
-                for (ZoneType z : origin) {
-                    if (moved.containsKey(z)) {
-                        allCards.addAll(moved.get(z));
-                    }
-                }
-            }
-        } else {
-            for (CardCollection c : moved.values()) {
-                allCards.addAll(c);
-            }
-        }
-
-        if (this.mapParams.containsKey("ValidCards")) {
-            
-            int count = CardLists.getValidCardCount(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
-                    this.getHostCard());
-            if (count == 0) {
-                return false;
-            }
+        if (filterCards(table).isEmpty()) {
+            return false;
         }
 
         return true;
@@ -60,30 +26,9 @@ public class TriggerChangesZoneAll extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        @SuppressWarnings("unchecked")
-        final Map<ZoneType, CardCollection> moved = (Map<ZoneType, CardCollection>) getRunParams().get("Cards");
+        final CardZoneTable table = (CardZoneTable) getRunParams().get("Cards");
 
-        CardCollection allCards = new CardCollection();
-
-        if (this.mapParams.containsKey("Origin")) {
-            if (!this.mapParams.get("Origin").equals("Any") && this.mapParams.get("Origin") != null) {
-                final List<ZoneType> origin = ZoneType.listValueOf((String)this.mapParams.get("Origin"));
-                for (ZoneType z : origin) {
-                    if (moved.containsKey(z)) {
-                        allCards.addAll(moved.get(z));
-                    }
-                }
-            }
-        } else {
-            for (CardCollection c : moved.values()) {
-                allCards.addAll(c);
-            }
-        }
-
-        if (this.mapParams.containsKey("ValidCards")) {
-            allCards = CardLists.getValidCards(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
-                    this.getHostCard(), sa);
-        }
+        CardCollection allCards = this.filterCards(table);
 
         sa.setTriggeringObject("Cards", allCards);
         sa.setTriggeringObject("Amount", allCards.size());
@@ -94,5 +39,22 @@ public class TriggerChangesZoneAll extends Trigger {
         StringBuilder sb = new StringBuilder();
         sb.append("Amount: ").append(sa.getTriggeringObject("Amount"));
         return sb.toString();
+    }
+
+    private CardCollection filterCards(CardZoneTable table) {
+        ZoneType destination = null;
+        List<ZoneType> origin = null;
+
+        if (hasParam("Destination") && !getParam("Destination").equals("Any")) {
+            destination = ZoneType.valueOf(getParam("Destination"));
+        }
+
+        if (hasParam("Origin") && !getParam("Origin").equals("Any")) {
+            origin = ZoneType.listValueOf(getParam("Origin"));
+        }
+
+        final String valid = this.getParamOrDefault("ValidCards", null);
+
+        return table.filterCards(origin, destination, valid, getHostCard(), null);
     }
 }

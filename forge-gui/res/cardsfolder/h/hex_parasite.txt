@@ -7,6 +7,6 @@ SVar:DBPump:DB$Pump | NumAtt$ +Y | Defined$ Self | SubAbility$ DBCleanup | Refer
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$RememberedSize
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hex_parasite.jpg
 Oracle:{X}{P/B}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn. ({P/B} can be paid with either {B} or 2 life.)

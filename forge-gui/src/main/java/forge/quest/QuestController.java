@@ -62,7 +62,7 @@ public class QuestController {
     /** The decks. */
     private transient IStorage<Deck> decks;
 
-    private QuestEventDuelManager duelManager = null;
+    private QuestEventDuelManagerInterface duelManager = null;
     private IStorage<QuestEventChallenge> allChallenges = null;
 
     private QuestBazaarManager bazaar = null;
@@ -149,7 +149,7 @@ public class QuestController {
             model.Ratings.add(r);
         }
     }
-    
+
     /**
      * Gets the my decks.
      *
@@ -276,9 +276,10 @@ public class QuestController {
     public void newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool,
-            final String startingWorld, final StartingPoolPreferences userPrefs) {
+            final String startingWorld, final StartingPoolPreferences userPrefs,
+            DeckConstructionRules dcr) {
 
-        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld)); // pass awards and unlocks here
+        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld, dcr)); // pass awards and unlocks here
 
         if (startingCards != null) {
             this.myCards.addDeck(startingCards);
@@ -288,6 +289,8 @@ public class QuestController {
 
         this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
 
+        // Reset starting cards here.
+        this.myCards.resetNewList();
     }
 
     /**
@@ -405,7 +408,7 @@ public class QuestController {
      *
      * @return the event manager
      */
-    public QuestEventDuelManager getDuelsManager() {
+    public QuestEventDuelManagerInterface getDuelsManager() {
         if (this.duelManager == null) {
             resetDuelsManager();
         }
@@ -429,12 +432,28 @@ public class QuestController {
      * Reset the duels manager.
      */
     public void resetDuelsManager() {
+
         QuestWorld world = getWorld();
-        String path;
-        if (world == null || !world.isCustom()){
-            path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
-        }else{
-            path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getDuelsDir();
+        String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
+
+        //Use a variant specialized duel manager if this is a variant quest
+        if (FModel.getQuest() != null && FModel.getQuest().getDeckConstructionRules() != null) {
+            switch(FModel.getQuest().getDeckConstructionRules()){
+                case Default: break;
+                case Commander: this.duelManager = new QuestEventCommanderDuelManager(); return;
+            }
+        }
+
+        if (world != null) {
+            if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
+                this.duelManager = new QuestEventLDADuelManager();
+                return;
+            } else if (world.isCustom()) {
+                path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getDuelsDir();
+            } else {
+                path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
+            }
+
         }
 
         this.duelManager = new QuestEventDuelManager(new File(path));
@@ -449,15 +468,25 @@ public class QuestController {
      * Reset the challenges manager.
      */
     public void resetChallengesManager() {
+
         QuestWorld world = getWorld();
-        String path;
-        if (world == null || !world.isCustom()){
-            path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
-        }else{
-            path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();
+        String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
+
+        if (world != null) {
+
+            if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
+                allChallenges = QuestChallengeGenerator.generateChallenges();
+                return;
+            } else if (world.isCustom()) {
+                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();
+            } else {
+                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
+            }
 
         }
-        this.allChallenges = new StorageBase<QuestEventChallenge>("Quest Challenges", new QuestChallengeReader(new File(path)));
+
+        this.allChallenges = new StorageBase<>("Quest Challenges", new QuestChallengeReader(new File(path)));
+
     }
 
     /**
@@ -584,5 +613,12 @@ public class QuestController {
 
     public void setCurrentDeck(String s) {
         model.currentDeck = s;
+    }
+
+    public DeckConstructionRules getDeckConstructionRules(){
+        if (model == null) {
+            return null;
+        }
+        return model.deckConstructionRules;
     }
 }

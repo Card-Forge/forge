@@ -1,0 +1,7 @@
+Name:Giant Warrior
+ManaCost:no cost
+Types:Creature Giant Warrior
+Colors:red,green
+PT:4/4
+K:Haste
+Oracle:Haste

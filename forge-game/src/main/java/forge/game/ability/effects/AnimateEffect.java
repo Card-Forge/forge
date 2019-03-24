@@ -18,7 +18,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-import forge.util.collect.FCollectionView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -162,19 +161,18 @@ public class AnimateEffect extends AnimateEffectBase {
             boolean clearAbilities = sa.hasParam("OverwriteAbilities");
             boolean clearSpells = sa.hasParam("OverwriteSpells");
             boolean removeAll = sa.hasParam("RemoveAllAbilities");
+            boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
 
             if (clearAbilities || clearSpells || removeAll) {
                 for (final SpellAbility ab : c.getSpellAbilities()) {
-                    if (removeAll || (ab.isAbility() && clearAbilities)
+                    if (removeAll
+                            || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())
+                            || (ab.isAbility() && clearAbilities)
                             || (ab.isSpell() && clearSpells)) {
+                        ab.setTemporarilySuppressed(true);
                         removedAbilities.add(ab);
                     }
                 }
-            }
-
-            // Can't rmeove SAs in foreach loop that finds them
-            for (final SpellAbility ab : removedAbilities) {
-                    c.removeSpellAbility(ab);
             }
 
             if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
@@ -215,20 +213,23 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress triggers from the animated card
             final List<Trigger> removedTriggers = Lists.newArrayList();
-            if (sa.hasParam("OverwriteTriggers") || removeAll) {
-                final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
-                for (final Trigger trigger : triggersToRemove) {
-                    trigger.setSuppressed(true);
+            if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
+                for (final Trigger trigger : c.getTriggers()) {
+                    if (removeIntrinsic && !trigger.isIntrinsic()) {
+                        continue;
+                    }
+                    trigger.setSuppressed(true);  // why this not TemporarilySuppressed?
                     removedTriggers.add(trigger);
                 }
             }
 
             // give static abilities (should only be used by cards to give
             // itself a static ability)
+            final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
             if (stAbs.size() > 0) {
                 for (final String s : stAbs) {
                     final String actualAbility = source.getSVar(s);
-                    c.addStaticAbility(actualAbility);
+                    addedStaticAbilities.add(c.addStaticAbility(actualAbility));
                 }
             }
 
@@ -248,9 +249,11 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress static abilities from the animated card
             final List<StaticAbility> removedStatics = Lists.newArrayList();
-            if (sa.hasParam("OverwriteStatics") || removeAll) {
-                final FCollectionView<StaticAbility> staticsToRemove = c.getStaticAbilities();
-                for (final StaticAbility stAb : staticsToRemove) {
+            if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
+                for (final StaticAbility stAb : c.getStaticAbilities()) {
+                    if (removeIntrinsic && !stAb.isIntrinsic()) {
+                        continue;
+                    }
                     stAb.setTemporarilySuppressed(true);
                     removedStatics.add(stAb);
                 }
@@ -258,8 +261,11 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress static abilities from the animated card
             final List<ReplacementEffect> removedReplacements = Lists.newArrayList();
-            if (sa.hasParam("OverwriteReplacements") || removeAll) {
+            if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
                 for (final ReplacementEffect re : c.getReplacementEffects()) {
+                    if (removeIntrinsic && !re.isIntrinsic()) {
+                        continue;
+                    }
                     re.setTemporarilySuppressed(true);
                     removedReplacements.add(re);
                 }
@@ -272,8 +278,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 }
             }
 
-            final boolean givesStAbs = (stAbs.size() > 0);
-
             final GameCommand unanimate = new GameCommand() {
                 private static final long serialVersionUID = -5861759814760561373L;
 
@@ -281,9 +285,13 @@ public class AnimateEffect extends AnimateEffectBase {
                 public void run() {
                     doUnanimate(c, sa, finalDesc, hiddenKeywords,
                             addedAbilities, addedTriggers, addedReplacements,
-                            givesStAbs, removedAbilities, timestamp);
+                            addedStaticAbilities, timestamp);
 
                     game.fireEvent(new GameEventCardStatsChanged(c));
+
+                    for (final SpellAbility sa : removedAbilities) {
+                        sa.setTemporarilySuppressed(false);
+                    }
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
                         t.setSuppressed(false);
@@ -458,6 +466,8 @@ public class AnimateEffect extends AnimateEffectBase {
                 sb.append(" until ").append(host).append(" leaves the battlefield.");
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 sb.append(" until your next upkeep.");
+            } else if (sa.hasParam("UntilYourNextTurn")) {
+                sb.append(" until your next turn.");
             } else if (sa.hasParam("UntilControllerNextUntap")) {
                 sb.append(" until its controller's next untap step.");
             } else {

@@ -13,6 +13,6 @@ SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
 SVar:Y:Count$HighestCMC_Creature.TargetedPlayerCtrl+inZoneBattlefield
 SVar:Z:Count$HighestCMC_Artifact.YouCtrl+inZoneBattlefield
 SVar:W:Count$HighestCMC_Artifact.TargetedPlayerCtrl+inZoneBattlefield
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juxtapose.jpg
 Oracle:You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.

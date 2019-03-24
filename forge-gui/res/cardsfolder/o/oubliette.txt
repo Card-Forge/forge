@@ -11,6 +11,6 @@ SVar:RestoreCounters:DB$ NoteCounters | Mode$ Load | Defined$ Imprinted | SubAbi
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ TrigAuraReturn
 SVar:TrigAuraReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | AttachedTo$ Valid Creature.IsImprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
 Oracle:When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.\nWhen Oubliette leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.

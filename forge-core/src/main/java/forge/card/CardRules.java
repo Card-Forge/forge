@@ -41,6 +41,7 @@ public final class CardRules implements ICardCharacteristics {
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private String meldWith;
+    private String partnerWith;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -48,6 +49,7 @@ public final class CardRules implements ICardCharacteristics {
         otherPart = faces[1];
         aiHints = cah;
         meldWith = "";
+        partnerWith = "";
 
         //calculate color identity
         byte colMask = calculateColorIdentity(mainPart);
@@ -68,6 +70,7 @@ public final class CardRules implements ICardCharacteristics {
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
+        partnerWith = newRules.partnerWith;
     }
 
     private static byte calculateColorIdentity(final ICardFace face) {
@@ -204,7 +207,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBePartnerCommander() {
-        return canBeCommander() && Iterables.contains(mainPart.getKeywords(), "Partner");
+        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty());
     }
 
     public boolean canBeBrawlCommander() {
@@ -214,6 +217,10 @@ public final class CardRules implements ICardCharacteristics {
 
     public String getMeldWith() {
         return meldWith;
+    }
+
+    public String getParterWith() {
+        return partnerWith;
     }
 
     // vanguard card fields, they don't use sides.
@@ -262,6 +269,7 @@ public final class CardRules implements ICardCharacteristics {
         private int curFace = 0;
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
+        private String partnerWith = "";
         private String handLife = null;
         private String normalizedName = "";
 
@@ -291,6 +299,7 @@ public final class CardRules implements ICardCharacteristics {
             this.hints = null;
             this.has = null;
             this.meldWith = "";
+            this.partnerWith = "";
             this.normalizedName = "";
         }
 
@@ -307,6 +316,7 @@ public final class CardRules implements ICardCharacteristics {
 
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
+            result.partnerWith = this.partnerWith;
             result.setDlUrls(pictureUrl);
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
@@ -342,9 +352,18 @@ public final class CardRules implements ICardCharacteristics {
 
             switch(key.charAt(0)) {
                 case 'A':
-                    if ("A".equals(key))
+                    if ("A".equals(key)) {
                         this.faces[curFace].addAbility(value);
-                    else if ("AlternateMode".equals(key)) {
+                    } else if ("AI".equals(key)) {
+                        colonPos = value.indexOf(':');
+                        String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
+                        value = colonPos > 0 ? value.substring(1+colonPos) : null;
+
+                        if ( "RemoveDeck".equals(variable) ) {
+                            this.removedFromAIDecks = "All".equalsIgnoreCase(value);
+                            this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
+                        }
+                    } else if ("AlternateMode".equals(key)) {
                         //System.out.println(faces[curFace].getName());
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
@@ -382,6 +401,9 @@ public final class CardRules implements ICardCharacteristics {
                 case 'K':
                     if ("K".equals(key)) {
                         this.faces[this.curFace].addKeyword(value);
+                        if (value.startsWith("Partner:")) {
+                            this.partnerWith = value.split(":")[1];
+                        }
                     }
                     break;
 
@@ -434,14 +456,8 @@ public final class CardRules implements ICardCharacteristics {
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ( "RemAIDeck".equals(variable) ) {
-                            this.removedFromAIDecks = "True".equalsIgnoreCase(value);
-                        } else if ( "RemRandomDeck".equals(variable) ) {
-                            this.removedFromRandomDecks = "True".equalsIgnoreCase(value);
-                        } else if ( "Picture".equals(variable) ) {
+                        if ( "Picture".equals(variable) ) {
                             this.pictureUrl[this.curFace] = value;
-                        } else if ( "Rarity".equals(variable) ) {
-                            // discard that, they should supply it in SetInfo
                         } else
                             this.faces[curFace].addSVar(variable, value);
                     } else if ("SetInfo".equals(key)) {
@@ -532,5 +548,9 @@ public final class CardRules implements ICardCharacteristics {
         final CardRules result = new CardRules(faces, CardSplitType.None, cah);
 
         return result;
+    }
+
+    public boolean hasKeyword(final String k) {
+        return Iterables.contains(mainPart.getKeywords(), k);
     }
 }

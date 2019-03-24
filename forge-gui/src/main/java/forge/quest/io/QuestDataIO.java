@@ -17,6 +17,9 @@
  */
 package forge.quest.io;
 
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.quest.data.QuestPreferences.QPref;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
@@ -78,6 +81,23 @@ public class QuestDataIO {
      */
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
+        // clear out existing permissions and set our own
+        xStream.addPermission(NoTypePermission.NONE);
+        // allow some basics
+        xStream.addPermission(NullPermission.NULL);
+        xStream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+        xStream.allowTypeHierarchy(String.class);
+        xStream.allowTypeHierarchy(QuestData.class);
+        xStream.allowTypeHierarchy(HashMap.class);
+        xStream.allowTypeHierarchy(Deck.class);
+        xStream.allowTypeHierarchy(DeckGroup.class);
+        xStream.allowTypeHierarchy(EnumMap.class);
+        xStream.allowTypeHierarchy(QuestItemType.class);
+        // allow any type from the same package
+        xStream.allowTypesByWildcard(new String[] {
+                QuestDataIO.class.getPackage().getName()+".*",
+                "forge.quest.data.*"
+        });
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckToXml());
         xStream.registerConverter(new DraftTournamentToXml());
@@ -98,43 +118,41 @@ public class QuestDataIO {
      *            &emsp; {@link java.io.File}
      * @return {@link forge.quest.data.QuestData}
      */
-    public static QuestData loadData(final File xmlSaveFile) {
+    public static QuestData loadData(final File xmlSaveFile) throws IOException {
+        QuestData data;
+
+        final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        final StringBuilder xml = new StringBuilder();
+        final char[] buf = new char[1024];
+        final InputStreamReader reader = new InputStreamReader(zin);
+        while (reader.ready()) {
+            final int len = reader.read(buf);
+            if (len == -1) {
+                break;
+            } // when end of stream was reached
+            xml.append(buf, 0, len);
+        }
+
+        zin.close();
+
+        String bigXML = xml.toString();
         try {
-            QuestData data;
-
-            final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
-            final StringBuilder xml = new StringBuilder();
-            final char[] buf = new char[1024];
-            final InputStreamReader reader = new InputStreamReader(zin);
-            while (reader.ready()) {
-                final int len = reader.read(buf);
-                if (len == -1) {
-                    break;
-                } // when end of stream was reached
-                xml.append(buf, 0, len);
-            }
-
-            zin.close();
-
-            String bigXML = xml.toString();
             data = (QuestData) QuestDataIO.getSerializer(true).fromXML(bigXML);
+        } catch(Exception ex) {
+            // Attempt to auto restore?
+            throw new IOException(ex);
+        }
 
-            if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
-                try {
-                    QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
-                }
-                catch (final Exception e) {
-                    //BugReporter.reportException(e);
-                    throw new RuntimeException(e);
-                }
+        if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
+            try {
+                QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
             }
+            catch (final Exception e) {
+                throw new IOException(e);
+            }
+        }
 
-            return data;
-        }
-        catch (final Exception ex) {
-            //BugReporter.reportException(ex, "Error loading Quest Data");
-            throw new RuntimeException(ex);
-        }
+        return data;
     }
 
     private static <T> void setFinalField(final Class<T> clasz, final String fieldName, final T instance,
@@ -205,9 +223,15 @@ public class QuestDataIO {
             // Current Deck moved from preferences to quest data - it should not be global for all quests!!!
             QuestDataIO.setFinalField(QuestData.class, "currentDeck", newData, FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK));
         }
-        if (saveVersion < 13) {
+        if(saveVersion < 13){
+            //Update for quest DeckConstructionRules
+            //Add a DeckConstructionRules set to Default.
+            QuestDataIO.setFinalField(QuestData.class, "deckConstructionRules", newData, DeckConstructionRules.Default);
+        }
+        if (saveVersion < 14) {
             // Migrate DraftTournaments to use new Tournament class
         }
+
 
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();

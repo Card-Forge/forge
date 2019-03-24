@@ -205,6 +205,7 @@ public class ForgeProfileProperties {
     private static void save() {
         final Pair<String, String> defaults = getDefaultDirs();
         final String defaultUserDir = defaults.getLeft() + File.separator;
+        final String defaultDecksDir = defaultUserDir + "decks" + File.separator;
         final String defaultCacheDir = defaults.getRight() + File.separator;
         final String defaultCardPicsDir = defaultCacheDir + "pics" + File.separator + "cards" + File.separator;
 
@@ -212,6 +213,9 @@ public class ForgeProfileProperties {
         final StringBuilder sb = new StringBuilder();
         if (!userDir.equals(defaultUserDir)) { //ensure backslashes are escaped
             sb.append(USER_DIR_KEY + "=" + userDir.replace("\\", "\\\\") + "\n");
+        }
+        if (!decksDir.equals(defaultDecksDir)) {
+            sb.append(DECKS_DIR_KEY + "=" + decksDir.replace("\\", "\\\\") + "\n");
         }
         if (!cacheDir.equals(defaultCacheDir)) {
             sb.append(CACHE_DIR_KEY + "=" + cacheDir.replace("\\", "\\\\") + "\n");

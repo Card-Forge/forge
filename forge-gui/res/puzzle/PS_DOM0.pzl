@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Dominaria #00 (Card Preview Puzzle)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/04/058.-DOM001-April-11.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:This is the Gaea's Protector card preview puzzle. Win this turn. Both graveyards start empty. Your opponent has no cards in hand and no mana available.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Giant Spectacle;Plummet;Overcome;Gift of Strength
+humanbattlefield=Gaea's Protector|Id:4;Cartouche of Knowledge|AttachedTo:4;Ghalta, Primal Hunger;Frontline Devastator;Island|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;Forest|Set:XLN;Forest|Set:XLN
+aibattlefield=Ancient Brontodon;Rekindling Phoenix;Renegade Wheelsmith
+

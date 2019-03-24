@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -22,6 +23,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
@@ -126,8 +128,8 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
             CardCollection oppCreatures = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
-            aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
-            oppCreatures = CardLists.getNotKeyword(oppCreatures, "Indestructible");
+            aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
+            oppCreatures = CardLists.getNotKeyword(oppCreatures, Keyword.INDESTRUCTIBLE);
 
             // Use it as a wrath, when the human creatures threat the ai's life
             if (aiCreatures.isEmpty() && ComputerUtilCombat.sumDamageIfUnblocked(oppCreatures, ai) >= ai.getLife()) {
@@ -261,7 +263,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
         } else if (logic.equals("Duneblast")) {
             CardCollectionView aiCreatures = ai.getCreaturesInPlay();
-            aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
+            aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
 
             if (aiCreatures.isEmpty()) {
                 return null;
@@ -273,6 +275,22 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (ai.equals(sa.getActivatingPlayer())) {
                 choice = ComputerUtilCard.getBestAI(options);
             } // TODO: improve ai
+        } else if (logic.equals("Phylactery")) {
+            CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+            CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
+            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Predicates.not(Presets.CREATURES));
+            CardCollection creatures = CardLists.filter(aiArtifacts, Presets.CREATURES);
+            if (!indestructibles.isEmpty()) {
+                // Choose the worst (smallest) indestructible artifact so that the opponent would have to waste
+                // removal on something unpreferred
+                choice = ComputerUtilCard.getWorstAI(indestructibles);
+            } else if (!nonCreatures.isEmpty()) {
+                // The same as above, but for non-indestructible non-creature artifacts (they can't die in combat)
+                choice = ComputerUtilCard.getWorstAI(nonCreatures);
+            } else if (!creatures.isEmpty()) {
+                // Choose the best (hopefully the fattest, whatever) creature so that hopefully it won't die too easily
+                choice = ComputerUtilCard.getBestAI(creatures);
+            }
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }

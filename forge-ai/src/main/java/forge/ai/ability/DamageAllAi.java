@@ -8,6 +8,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -268,7 +269,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             }
         };
 
-        list = CardLists.getNotKeyword(list, "Indestructible");
+        list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
         list = CardLists.filter(list, filterKillable);
 
         return list;

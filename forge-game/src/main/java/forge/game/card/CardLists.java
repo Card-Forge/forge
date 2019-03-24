@@ -26,6 +26,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollectionView;
@@ -192,10 +193,6 @@ public class CardLists {
     }
 
     public static void shuffle(List<Card> list) {
-        // reseed Random each time we want to Shuffle
-        // MyRandom.random = MyRandom.random;
-        Collections.shuffle(list, MyRandom.getRandom());
-        Collections.shuffle(list, MyRandom.getRandom());
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
@@ -239,7 +236,11 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static CardCollection getKeyword(Iterable<Card> cardList, String keyword) {
+    public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
+    }
+
+    public static CardCollection getKeyword(Iterable<Card> cardList, final Keyword keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
@@ -247,7 +248,18 @@ public class CardLists {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
+    public static CardCollection getNotKeyword(Iterable<Card> cardList, final Keyword keyword) {
+        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+    }
+
     public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
+        int nKeyword = 0;
+        for (final Card c : cardList) {
+            nKeyword += c.getAmountOfKeyword(keyword);
+        }
+        return nKeyword;
+    }
+    public static int getAmountOfKeyword(final Iterable<Card> cardList, final Keyword keyword) {
         int nKeyword = 0;
         for (final Card c : cardList) {
             nKeyword += c.getAmountOfKeyword(keyword);

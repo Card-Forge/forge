@@ -174,3 +174,12 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 22 C Whitemane Lion
 144 R Wild Pair
 53 C Wistful Thinking
+
+[tokens]
+chronozoa
+w_1_1_soldier
+b_2_2_knight_flanking_pro_white_haste
+g_3_3_ape
+g_2_2_cat_warrior_forestwalk
+g_6_1_insect_shroud
+g_1_1_saproling

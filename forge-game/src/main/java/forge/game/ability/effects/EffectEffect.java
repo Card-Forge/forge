@@ -264,6 +264,13 @@ public class EffectEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(endEffect);
             }
+            else if (duration.equals("UntilTheEndOfYourNextTurn")) {
+                if (game.getPhaseHandler().isPlayerTurn(controller)) {
+                    game.getEndOfTurn().registerUntilEnd(controller, endEffect);
+                } else {
+                    game.getEndOfTurn().addUntilEnd(controller, endEffect);
+                }
+            }
             else if (duration.equals("ThisTurnAndNextTurn")) {
                 game.getUntap().addAt(new GameCommand() {
                     private static final long serialVersionUID = -5054153666503075717L;

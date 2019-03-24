@@ -9,7 +9,7 @@ SVar:DBDmg:DB$ RepeatEach | RepeatSubAbility$ PolukranosFight | UseImprinted$ Tr
 SVar:PolukranosFight:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ Y | References$ Y | Defined$ Self | StackDescription$ None
 SVar:X:Count$xPaid
 SVar:Y:Imprinted$CardPower
-SVar:MonstrosityX:Count$MonstrosityMagnitude
+SVar:MonstrosityX:TriggerCount$MonstrosityAmount
 SVar:MaxTgts:Count$Valid Creature.OppCtrl
 SVar:MonstrosityAILogic:Polukranos
 DeckHas:Ability$Counters

@@ -3,6 +3,6 @@ ManaCost:5 R R
 Types:Creature Dragon
 PT:5/5
 K:Flying
-A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_hellkite.jpg
-Oracle:Flying\n{1}{R}: Shivan Hellkite deals 1 damage to target creature or player.
+Oracle:Flying\n{1}{R}: Shivan Hellkite deals 1 damage to any target.

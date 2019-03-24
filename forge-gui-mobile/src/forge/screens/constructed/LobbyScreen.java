@@ -193,6 +193,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(hasControl);
         lblVariants.setEnabled(hasControl);
         cbVariants.setEnabled(hasControl);
+        lblPlayers.setEnabled(hasControl);
+        cbPlayerCount.setEnabled(hasControl);
         while (lobby.getNumberOfSlots() < getNumPlayers()){
             lobby.addSlot();
         }
@@ -432,6 +434,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
+            case LEGACY_CARDGEN_DECK:
+            case VINTAGE_CARDGEN_DECK:
             case COLOR_DECK:
             case STANDARD_COLOR_DECK:
             case MODERN_COLOR_DECK:
@@ -502,12 +506,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     isNewPanel = true;
                 }
 
+                if (i == 0) {
+                    slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+                }
+
                 final LobbySlotType type = slot.getType();
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
+                panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
                 panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
                 panel.setMayEdit(lobby.mayEdit(i));
@@ -541,18 +550,30 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         Deck deck;
         if (hasVariant(GameType.Commander)) {
             deck = playerPanel.getCommanderDeck();
-            playerPanel.getCommanderDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getCommanderDeckChooser().saveState();
+            }
         }
         else if (hasVariant(GameType.TinyLeaders)) {
             deck = playerPanel.getTinyLeadersDeck();
-            playerPanel.getTinyLeadersDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getTinyLeadersDeckChooser().saveState();
+            }
         }
         else if (hasVariant(GameType.Brawl)) {
             deck = playerPanel.getBrawlDeck();
-            playerPanel.getBrawlDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getBrawlDeckChooser().saveState();
+            }
         }else {
             deck = playerPanel.getDeck();
-            playerPanel.getDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getDeckChooser().saveState();
+            }
+        }
+
+        if (deck == null) {
+            return;
         }
 
         Deck playerDeck = deck;
@@ -595,6 +616,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         firePlayerChangeListener(index);
     }
+    void setDevMode(final int index) {
+        int playerCount = lobby.getNumberOfSlots();
+        // clear ready for everyone
+        for (int i = 0; i < playerCount; i++) {
+            final PlayerPanel panel = playerPanels.get(i);
+            panel.setIsReady(false);
+            firePlayerChangeListener(i);
+        }
+    }
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, getSlot(index));
@@ -610,7 +640,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     public List<PlayerPanel> getPlayerPanels() {

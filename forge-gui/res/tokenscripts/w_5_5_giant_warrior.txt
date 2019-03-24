@@ -1,0 +1,6 @@
+Name:Reflection
+ManaCost:no cost
+PT:2/2
+Colors:white
+Types:Creature Reflection
+Oracle:

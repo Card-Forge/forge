@@ -1,7 +1,7 @@
 Name:Mox Pearl
 ManaCost:0
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card631.jpg
-Oracle:{T}: Add {W} to your mana pool.
+Oracle:{T}: Add {W}.

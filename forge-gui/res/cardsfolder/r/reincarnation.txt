@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 1 G G | ValidTgts$ Creature | TgtPrompt$ Choose target crea
 SVar:TargetDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ Reincarnate | TriggerController$ You | TriggerDescription$ When the target of Reincarnate dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
 SVar:Reincarnate:DB$ ChangeZone | ChangeType$ Creature.sharesOwnerWith Remembered | Origin$ Graveyard | Destination$ Battlefield | Mandatory$ True | ChangeNum$ 1 | Hidden$ True | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reincarnation.jpg
 Oracle:Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.

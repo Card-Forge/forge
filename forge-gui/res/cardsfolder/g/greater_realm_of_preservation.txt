@@ -6,6 +6,6 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SVars$ R
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+BlackSource,Card.ChosenCard+RedSource | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen black or red source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_realm_of_preservation.jpg
 Oracle:{1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.

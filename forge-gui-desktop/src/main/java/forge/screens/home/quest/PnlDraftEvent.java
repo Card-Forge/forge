@@ -27,17 +27,17 @@ public class PnlDraftEvent extends JPanel {
 		super();
 
 		radButton = new FRadioButton(event.getTitle());
-		radButton.setFont(FSkin.getBoldFont(20));
+		radButton.setFont(FSkin.getRelativeBoldFont(20));
 		radButton.setIconTextGap(10);
 
 		final FTextArea eventBoosters = new FTextArea();
 		final FTextArea eventFee = new FTextArea();
 
 		eventBoosters.setText(event.getBoosterList());
-		eventBoosters.setFont(FSkin.getFont(12));
+		eventBoosters.setFont(FSkin.getFont());
 
 		eventFee.setText(QuestUtil.formatCredits(event.getEntryFee()) + " Credit Entry Fee");
-		eventFee.setFont(FSkin.getFont(12));
+		eventFee.setFont(FSkin.getFont());
 
 		radButton.addChangeListener(new ChangeListener() {
 			@Override

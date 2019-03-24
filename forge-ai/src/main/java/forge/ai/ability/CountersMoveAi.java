@@ -8,6 +8,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -191,7 +192,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 }
 
                 // check for some specific AI preferences
-                if (src.hasStartOfKeyword("Graft") && "DontMoveCounterIfLethal".equals(src.getSVar("AIGraftPreference"))) {
+                if ("DontMoveCounterIfLethal".equals(sa.getParam("AILogic"))) {
                     if (cType == CounterType.P1P1 && src.getNetToughness() - src.getTempToughnessBoost() - 1 <= 0) {
                         return false;
                     }
@@ -286,7 +287,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                         // do not steal a P1P1 from Undying if it would die
                         // this way
                         if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                            if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword("Undying") || card.isToken()) {
+                            if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken()) {
                                 return true;
                             }
                             return false;
@@ -332,11 +333,12 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                         // try to remove P1P1 from undying or evolve
                         if (CounterType.P1P1.equals(cType)) {
-                            if (card.hasKeyword("Undying") || card.hasKeyword("Evolve")) {
+                            if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
+                                    || card.hasKeyword(Keyword.ADAPT)) {
                                 return true;
                             }
                         }
-                        if (CounterType.M1M1.equals(cType) && card.hasKeyword("Persist")) {
+                        if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
                             return true;
                         }
 
@@ -391,10 +393,10 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         if (cType != null) {
-                            if (CounterType.P1P1.equals(cType) && card.hasKeyword("Undying")) {
+                            if (CounterType.P1P1.equals(cType) && card.hasKeyword(Keyword.UNDYING)) {
                                 return false;
                             }
-                            if (CounterType.M1M1.equals(cType) && card.hasKeyword("Persist")) {
+                            if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
                                 return false;
                             }
 

@@ -5,6 +5,6 @@ A:SP$ Sacrifice | Cost$ 2 R | Amount$ 1 | SacValid$ Creature | RememberSacrifice
 SVar:RuptureDmg:DB$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture.jpg
 Oracle:Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player.

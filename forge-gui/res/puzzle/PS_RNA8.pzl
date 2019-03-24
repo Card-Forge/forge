@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/03/105.-RNA8.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards drawn from your library are irrelevant. You have not played a land this turn. Zhur-Taa Goblin has Haste from Riot. Volley Veteran is equipped with your opponent's Helm of the Host.
+[state]
+humanlife=20
+ailife=12
+humanlandsplayed=0
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanlibrary=Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace
+humanhand=Academy Journeymage;Prosperous Pirates;Island;Arcane Adaptation
+humanbattlefield=Karn, Scion of Urza|Counters:LOYALTY=2;Merfolk Mistbinder;Eyes Everywhere;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Island;Island;Island;Island
+humanexile=Glacial Fortress|Counters:SILVER=1;Deputy of Detention|Counters:SILVER=1
+aibattlefield=Volley Veteran|Id:1;Zhur-Taa Goblin|Id:2;Karn, Scion of Urza|Counters:LOYALTY=2;Helm of the Host|AttachedTo:1|ExecuteScript:TrigCopy
+humanprecast=Karn, Scion of Urza:3;Karn, Scion of Urza:3;Karn, Scion of Urza:3
+aiprecast=Need For Speed:1->2
+removesummoningsickness=true

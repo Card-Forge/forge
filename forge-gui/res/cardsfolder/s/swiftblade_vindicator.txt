@@ -1,0 +1,8 @@
+Name:Swiftblade Vindicator
+ManaCost:R W
+Types:Creature Human Soldier
+PT:1/1
+K:Double Strike
+K:Vigilance
+K:Trample
+Oracle:Double strike, vigilance, trample

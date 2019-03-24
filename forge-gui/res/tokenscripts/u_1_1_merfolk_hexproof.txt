@@ -1,0 +1,7 @@
+Name:Merfolk
+ManaCost:no cost
+Types:Creature Merfolk
+Colors:blue
+PT:1/1
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

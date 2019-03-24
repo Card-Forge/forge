@@ -7,6 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_raider.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever Academy Raider deals combat damage to a player, you may discard a card. If you do, draw a card.

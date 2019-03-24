@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #09
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/09/079.-M199-fixed.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Each player has 39 cards left in their library. Assume any cards you could draw are irrelevant to the puzzle. Your opponent starts with two cards in hand, and can make 2 mana with Oasis Ritualist. Nezahal is enchanted with your opponent's Desert's Hold.
+[state]
+humanlife=1
+ailife=50
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Psychic Corrosion;Fateful Showdown;Metamorphic Alteration;Foundry Inspector;Paradoxical Outcome;Mox Amber;Aetherflux Reservoir;Abrade
+humanlibrary=One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing
+humanbattlefield=Sai, Master Thopterist;Cunning Survivor;Captain Lannery Storm;Mox Amber;Powerstone Shard;Powerstone Shard;Cultivator's Caravan;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal
+aihand=Wastes;Wastes
+ailibrary=One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing;One with Nothing
+aibattlefield=Perpetual Timepiece;Nezahal, Primal Tide|Id:2;Desert's Hold|AttachedTo:2;Ripjaw Raptor;Oasis Ritualist;Anointer Priest

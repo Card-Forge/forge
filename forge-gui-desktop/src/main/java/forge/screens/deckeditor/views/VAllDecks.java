@@ -1,5 +1,6 @@
 package forge.screens.deckeditor.views;
 
+import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -24,7 +25,7 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("All Decks");
+    private final DragTab tab = new DragTab("Constructed");
 
     private DeckManager lstDecks;
 
@@ -80,6 +81,8 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
+        String preferredDeck = DeckPreferences.getCurrentDeck();
+        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
     }
 
     //========== Retrieval methods
@@ -90,6 +93,6 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
-        this.lstDecks.setCaption("Decks");
+        this.lstDecks.setCaption("Constructed Decks");
     }
 }

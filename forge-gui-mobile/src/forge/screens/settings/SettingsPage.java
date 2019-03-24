@@ -78,6 +78,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Minimize on Screen Lock",
                 "Minimize Forge when screen is locked (enable if you experience graphic glitches after locking your screen)."),
                 0);
+        lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
+                "Automatic Bug Reports",
+                "Automatically send bug reports to the developers, without prompting."),
+                0);
 
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
@@ -112,6 +116,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.ENFORCE_DECK_LEGALITY,
                 "Deck Conformance",
                 "Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.PERFORMANCE_MODE,
+                        "Performance Mode",
+                        "Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
+                        "Filtered Hands",
+                        "Generates two starting hands and keeps the one with the closest to average land count for the deck. (Requires restart)"),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
                 "Clones Use Original Card Art",
@@ -187,8 +199,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
                 "Load Card Scripts Lazily",
                 "If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), 3);
+        lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
+                "Load Historic Formats",
+                "If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), 3);
 
         //Graphic Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
+                "Download missing card art",
+                "Automatically download missing card art"),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
                 "Display Foil Overlay",
                 "Displays foil cards with the visual foil overlay effect."),

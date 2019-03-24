@@ -5,7 +5,7 @@ A:SP$ ChooseType | Cost$ 3 U | Defined$ You | Type$ Creature | SubAbility$ Apply
 SVar:ApplyPressure:DB$ GainControl | AllValid$ Creature.ChosenType | NewController$ You | ConditionCheckSVar$ YourPeerGroup | ConditionSVarCompare$ GTY | References$ YourPeerGroup,Y
 SVar:YourPeerGroup:Count$Valid Creature.ChosenType+YouCtrl
 SVar:Y:PlayerCountOther$HighestValid Creature.ChosenType+YouCtrl
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peer_pressure.jpg
 Oracle:Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type. (This effect lasts indefinitely.)

@@ -7,7 +7,7 @@ import BeautifulSoup
 BESTIAIRE = False
 SMDS = True
 
-def bestiaireRanking(code='EMN', name='Magic Origins'):
+def bestiaireRanking(code='EMN', name='Eldritch Moon'):
 	# POST http://draft.bestiaire.org/ranking.php
 	# Params:
 	# edition: ORI
@@ -16,7 +16,7 @@ def bestiaireRanking(code='EMN', name='Magic Origins'):
 	pass
 	# Output to file
 
-def smdsRankings(edition='EldritchMoom', name='Eldritch Moon'):
+def smdsRankings(edition='EldritchMoon', name='Eldritch Moon'):
 	# get http://syunakira.com/smd/pointranking/index.php?packname=MAGICORIGINS&language=English
 	r = requests.get("http://syunakira.com/smd/pointranking/index.php?packname=%s&language=English" % edition)
 	bs = BeautifulSoup.BeautifulSoup(r.text)
@@ -52,7 +52,7 @@ def draftsimRankings(edition='SOI', name='Shadows over Innistrad'):
 	end = tx.rfind(']')
 
 	# Deal with illegal JSON :(
-	replaceList = ['name', 'castingcost1', 'castingcost2', 'type', 'rarity', 'myrating', 'image', 'cmc', 'colors', 'creaturesort', 'colorsort']
+	replaceList = ['name', 'castingcost1', 'castingcost2', 'type', 'rarity', 'myrating', 'image', 'cmc', 'colors', 'creaturesort', 'colorsort', 'chase_card']
 	# Has an extra comma that json loader doesn't like
 	txt = tx[start:end-1]+']'
 	for rpl in replaceList:

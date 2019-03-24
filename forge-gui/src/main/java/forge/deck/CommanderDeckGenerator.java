@@ -54,7 +54,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         if(isCardGen){
             uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
             //TODO: upate to actual Brawl model from real Brawl decks
-            Iterable<String> legendNames=CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).keySet();
+            Iterable<String> legendNames=CardArchetypeLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).keySet();
             for(String legendName:legendNames) {
                 uniqueCards.add(FModel.getMagicDb().getCommonCards().getUniqueByName(legendName));
             }

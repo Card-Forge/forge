@@ -203,3 +203,12 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 140 U Yavimaya Ants
 112 R Ydwen Efreet
 174 U Zuran Orb
+
+[tokens]
+w_1_1_citizen
+u_1_1_camarid
+b_0_1_thrull
+b_2_2_zombie
+r_1_1_survivor
+g_1_1_hippo
+c_1_1_a_snake_poison

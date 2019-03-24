@@ -7,7 +7,7 @@ S:Mode$ CantBeCast | ValidCard$ Card.Self | Origin$ Exile,Hand,Library,Command |
 S:Mode$ Continuous | Affected$ Knight.YouCtrl | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ As long as CARDNAME is on the battlefield, you may play Knight cards from your graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you lose 2 life.
 SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ 2
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:DiscardMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haakon_stromgald_scourge.jpg
 Oracle:You may cast Haakon, Stromgald Scourge from your graveyard, but not from anywhere else.\nAs long as Haakon is on the battlefield, you may play Knight cards from your graveyard.\nWhen Haakon dies, you lose 2 life.

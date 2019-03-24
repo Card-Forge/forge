@@ -31,6 +31,15 @@ public final class PlayerPredicates {
         };
     }
     
+    public static final Predicate<Player> sameTeam(final Player player) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return player.sameTeam(p);
+            }
+        };
+    }
+
     public static final Predicate<Player> isCardInPlay(final String cardName) {
         return new Predicate<Player>() {
             @Override

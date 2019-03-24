@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -62,6 +63,8 @@ public class PlayerZone extends Zone {
                 return true;
             }
 
+            boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
+                    c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START);
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
 
@@ -75,7 +78,7 @@ public class PlayerZone extends Zone {
                 }
 
                 if (sa.isSpell()
-                        && (c.hasStartOfKeyword("Flashback") && PlayerZone.this.is(ZoneType.Graveyard))
+                        && (graveyardCastable && PlayerZone.this.is(ZoneType.Graveyard))
                         && restrictZone.equals(ZoneType.Hand)) {
                     return true;
                 }

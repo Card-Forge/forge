@@ -2,7 +2,7 @@ Name:Ronin Cliffrider
 ManaCost:3 R R
 Types:Creature Human Samurai
 PT:2/2
-K:Bushido 1
+K:Bushido:1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You| TriggerDescription$ Whenever CARDNAME attacks, you may have it deal 1 damage to each creature defending player controls.
 SVar:TrigDamage:DB$DamageAll | ValidCards$ Creature.DefenderCtrl | NumDmg$ 1| ValidDescription$ each creature defending player controls.
 SVar:HasAttackEffect:TRUE

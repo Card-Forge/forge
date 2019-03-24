@@ -58,6 +58,7 @@ public enum AiProps { /** */
     THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER ("135"), /** */
     THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER ("110"), /** */
     CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL ("true"), /** */
+    TRY_TO_PRESERVE_BUYBACK_SPELLS ("true"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"), /** */
     CHANCE_TO_COUNTER_CMC_1 ("50"), /** */
     CHANCE_TO_COUNTER_CMC_2 ("75"), /** */
@@ -69,11 +70,18 @@ public enum AiProps { /** */
     ALWAYS_COUNTER_PUMP_SPELLS ("true"), /** */
     ALWAYS_COUNTER_AURAS ("true"), /** */
     ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS (""), /** */
+    CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK ("30"), /** */
+    ALWAYS_COPY_SPELL_IF_CMC_DIFF ("2"), /** */
     ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("true"), /** */
     ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE ("false"), /** */
     DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD ("2"), /** */
     DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR ("true"), /** */
     DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR ("5"), /** */
+    AVOID_TARGETING_CREATS_THAT_WILL_DIE ("true"), /** */
+    DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION ("true"), /** */
+    CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS("50"), /** */
+    HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE("100"),
+    HOLD_X_DAMAGE_SPELLS_THRESHOLD("5"), /** */
     PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
     USE_BERSERK_AGGRESSIVELY ("false"), /** */
     MIN_COUNT_FOR_STORM_SPELLS ("0"), /** */
@@ -93,6 +101,8 @@ public enum AiProps { /** */
     SCRY_EVALTHR_CMC_THRESHOLD ("3"), /** */
     SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM ("false"), /** */
     SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF ("1"), /** */
+    SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL ("10"), /** */
+    SURVEIL_LIFEPERC_AFTER_PAYING_LIFE ("75"), /** */
     COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION ("true"), /** */
     COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION ("true"), /** */
     CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT ("true"), /** */
@@ -104,13 +114,24 @@ public enum AiProps { /** */
     INTUITION_ALTERNATIVE_LOGIC ("false"), /** */
     EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD ("2"),
     EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE("2"), /** */
+    MOMIR_BASIC_LAND_STRATEGY("default"), /** */
     MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA("5"), /** */
     MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR ("50"), /** */
     MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT ("20"), /** */
-    // Experimental features, must be removed after extensive testing and, ideally, defaulting
+    AI_IN_DANGER_THRESHOLD("4"), /** */
+    AI_IN_DANGER_MAX_THRESHOLD("4"), /** */
+    FLASH_ENABLE_ADVANCED_LOGIC("true"), /** */
+    FLASH_CHANCE_TO_OBEY_AMBUSHAI("100"), /** */
+    FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS("100"), /** */
+    FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1("10"), /** */
+    FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB("0"), /** */
+    FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER("100"),
+    FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
+    FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("1"),
+    FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("5"),
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"); /** */
+    // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
-    AI_IN_DANGER_THRESHOLD("4"),
-    AI_IN_DANGER_MAX_THRESHOLD("4");
 
 
     private final String strDefaultVal;

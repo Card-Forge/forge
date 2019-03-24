@@ -25,16 +25,18 @@ public class ConquestEvent {
     private final String deckPath;
     private final Set<GameType> variants;
     private final String avatar;
+    private final String tempUnlock;
     private PaperCard avatarCard;
     private Deck deck;
 
-    public ConquestEvent(ConquestRegion region0, String name0, String description0, String deckPath0, Set<GameType> variants0, String avatar0) {
+    public ConquestEvent(ConquestRegion region0, String name0, String description0, String deckPath0, Set<GameType> variants0, String avatar0, String tempUnlock0) {
         region = region0;
         name = name0;
         description = description0;
         deckPath = deckPath0;
         variants = variants0;
         avatar = avatar0;
+        tempUnlock = tempUnlock0;
     }
 
     public String getName() {
@@ -72,6 +74,8 @@ public class ConquestEvent {
     public String getAvatar() {
         return avatar;
     }
+
+    public String getTemporaryUnlock() { return tempUnlock; }
 
     public PaperCard getAvatarCard() {
         if (avatarCard == null && avatar != null) {
@@ -120,6 +124,7 @@ public class ConquestEvent {
             Set<GameType> variants = EnumSet.noneOf(GameType.class);
             String avatar = null;
             String description = null;
+            String tempUnlock = null;
 
             String key, value;
             String[] pieces = line.split("\\|");
@@ -159,6 +164,9 @@ public class ConquestEvent {
                 case "desc":
                     description = value;
                     break;
+                case "temporaryunlock":
+                    tempUnlock = value;
+                    break;
                 default:
                     alertInvalidLine(line, "Invalid event definition.");
                     break;
@@ -168,7 +176,7 @@ public class ConquestEvent {
                 deck = name + ".dck"; //assume deck file has same name if not specified
             }
             deck = file.getParent() + ForgeConstants.PATH_SEPARATOR + deck;
-            return new ConquestEvent(region, name, description, deck, variants, avatar);
+            return new ConquestEvent(region, name, description, deck, variants, avatar, tempUnlock);
         }
     }
 

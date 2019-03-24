@@ -1,0 +1,11 @@
+Name:Lightning Rager
+ManaCost:no cost
+Types:Creature Elemental
+Colors:red
+PT:5/1
+K:Trample
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+Oracle:Trample, Haste\nAt the beginning of the end step, sacrifice this creature.

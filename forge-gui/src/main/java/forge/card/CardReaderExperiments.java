@@ -1,7 +1,6 @@
 package forge.card;
 
 import forge.CardStorageReader;
-import forge.card.CardRules;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
@@ -152,7 +151,7 @@ public class CardReaderExperiments {
 
         //check for other key phrases that might be missing "{G}" formatting
         String[] phrases = new String[] {
-                "Add * to your mana pool",
+                "Add * to your mana pool", // TODO: "Add *" instead of "Add * to your mana pool"? Is that too lax?
                 "CostDesc\\$ * \\|"
         };
         for (String phrase : phrases) {

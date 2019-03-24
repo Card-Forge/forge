@@ -1,0 +1,341 @@
+[metadata]
+Code=M19
+Date=2018-07-13
+Name=Core Set 2019
+Code2=M19
+MciCode=m19
+Type=Core
+BoosterCovers=5
+Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")
+
+[cards]
+1 U Aegis of the Heavens
+2 U Aethershield Artificer
+3 M Ajani, Adversary of Tyrants
+4 R Ajani's Last Stand
+5 U Ajani's Pridemate
+6 U Ajani's Welcome
+7 C Angel of the Dawn
+8 C Cavalry Drillmaster
+9 R Cleansing Nova
+10 C Daybreak Chaplain
+11 C Dwarven Priest
+12 C Gallant Cavalry
+13 U Herald of Faith
+14 U Hieromancer's Cage
+15 C Inspired Charge
+16 C Invoke the Divine
+17 R Isolate
+18 C Knight of the Tusk
+19 C Knight's Pledge
+20 U Knightly Valor
+21 R Lena, Selfless Champion
+22 U Leonin Vanguard
+23 R Leonin Warleader
+24 C Loxodon Line Breaker
+25 C Luminous Bonds
+26 U Make a Stand
+27 R Mentor of the Meek
+28 C Mighty Leap
+29 U Militia Bugler
+30 U Novice Knight
+31 C Oreskos Swiftclaw
+32 C Pegasus Courser
+33 R Remorseful Cleric
+34 M Resplendent Angel
+35 C Revitalize
+36 C Rustwing Falcon
+37 U Shield Mare
+38 C Star-Crowned Stag
+39 R Suncleanser
+40 C Take Vengeance
+41 C Trusty Packbeast
+42 R Valiant Knight
+43 U Aether Tunnel
+44 C Anticipate
+45 C Aven Wind Mage
+46 C Aviation Pioneer
+47 U Bone to Ash
+48 C Cancel
+49 U Departed Deckhand
+50 C Disperse
+51 C Divination
+52 R Djinn of Wishes
+53 C Dwindle
+54 C Essence Scatter
+55 U Exclusion Mage
+56 C Frilled Sea Serpent
+57 C Gearsmith Prodigy
+58 C Ghostform
+59 U Horizon Scholar
+60 R Metamorphic Alteration
+61 U Mirror Image
+62 R Mistcaller
+63 R Mystic Archaeologist
+64 C Omenspeaker
+65 M Omniscience
+66 R One with the Machine
+67 R Patient Rebuilding
+68 U Psychic Corrosion
+69 R Sai, Master Thopterist
+70 C Salvager of Secrets
+71 C Scholar of Stars
+72 U Sift
+73 U Skilled Animator
+74 U Sleep
+75 C Snapping Drake
+76 R Supreme Phantom
+77 U Surge Mare
+78 U Switcheroo
+79 M Tezzeret, Artifice Master
+80 C Tolarian Scholar
+81 C Totally Lost
+82 C Uncomfortable Chill
+83 C Wall of Mist
+84 R Windreader Sphinx
+85 C Abnormal Endurance
+86 U Blood Divination
+87 C Bogstomper
+88 M Bone Dragon
+89 C Child of Night
+90 R Death Baron
+91 R Demon of Catastrophes
+92 U Diregraf Ghoul
+93 C Doomed Dissenter
+94 C Duress
+95 C Epicure of Blood
+96 U Fell Specter
+97 R Fraying Omnipotence
+98 U Gravedigger
+99 R Graveyard Marshal
+100 C Hired Blade
+101 C Infectious Horror
+102 R Infernal Reckoning
+103 C Infernal Scarring
+104 R Isareth the Awakener
+105 C Lich's Caress
+106 M Liliana, Untouched by Death
+107 R Liliana's Contract
+108 C Macabre Waltz
+109 C Mind Rot
+110 U Murder
+111 U Nightmare's Thirst
+112 R Open the Graves
+113 R Phylactery Lich
+114 U Plague Mare
+115 U Ravenous Harpy
+116 U Reassembling Skeleton
+117 U Rise from the Grave
+118 C Skeleton Archer
+119 C Skymarch Bloodletter
+120 C Sovereign's Bite
+121 U Stitcher's Supplier
+122 C Strangling Spores
+123 C Two-Headed Zombie
+124 C Vampire Neonate
+125 U Vampire Sovereign
+126 C Walking Corpse
+127 C Act of Treason
+128 R Alpine Moon
+129 M Apex of Power
+130 R Banefire
+131 C Boggart Brute
+132 C Catalyst Elemental
+133 C Crash Through
+134 R Dark-Dweller Oracle
+135 R Demanding Dragon
+136 R Dismissive Pyromancer
+137 U Doublecast
+138 U Dragon Egg
+139 C Electrify
+140 U Fiery Finish
+141 C Fire Elemental
+142 C Goblin Instigator
+143 C Goblin Motivator
+144 R Goblin Trashmaster
+145 U Guttersnipe
+146 C Havoc Devils
+147 C Hostile Minotaur
+148 U Inferno Hellion
+149 R Lathliss, Dragon Queen
+150 C Lava Axe
+151 U Lightning Mare
+152 U Lightning Strike
+153 C Onakke Ogre
+154 M Sarkhan, Fireblood
+155 R Sarkhan's Unsealing
+156 C Shock
+157 U Siegebreaker Giant
+158 C Smelt
+159 C Sparktongue Dragon
+160 R Spit Flame
+161 C Sure Strike
+162 U Tectonic Rift
+163 U Thud
+164 C Tormenting Voice
+165 C Trumpet Blast
+166 C Viashino Pyromancer
+167 U Volcanic Dragon
+168 U Volley Veteran
+169 U Blanchwood Armor
+170 C Bristling Boar
+171 C Centaur Courser
+172 C Colossal Dreadmaw
+173 U Colossal Majesty
+174 C Daggerback Basilisk
+175 U Declare Dominance
+176 U Druid of Horns
+177 C Druid of the Cowl
+178 U Dryad Greenseeker
+179 R Elvish Clancaller
+180 C Elvish Rejuvenator
+181 U Ghastbark Twins
+182 U Ghirapur Guide
+183 C Giant Spider
+184 U Gift of Paradise
+185 R Gigantosaurus
+186 R Goreclaw, Terror of Qal Sisma
+187 C Greenwood Sentinel
+188 C Highland Game
+189 R Hungering Hydra
+190 C Naturalize
+191 C Oakenform
+192 R Pelakka Wurm
+193 C Plummet
+194 R Prodigious Growth
+195 C Rabid Bite
+196 U Reclamation Sage
+197 U Recollect
+198 C Rhox Oracle
+199 C Root Snare
+200 R Runic Armasaur
+201 M Scapeshift
+202 C Talons of Wildwood
+203 R Thorn Lieutenant
+204 C Thornhide Wolves
+205 C Titanic Growth
+206 U Vigilant Baloth
+207 U Vine Mare
+208 M Vivien Reid
+209 R Vivien's Invocation
+210 C Wall of Vines
+211 U Aerial Engineer
+212 M Arcades, the Strategist
+213 U Brawl-Bash Ogre
+214 M Chromium, the Mutable
+215 U Draconic Disciple
+216 U Enigma Drake
+217 U Heroic Reinforcements
+218 M Nicol Bolas, the Ravager
+219 M Palladia-Mors, the Ruiner
+220 U Poison-Tip Archer
+221 U Psychic Symbiont
+222 U Regal Bloodlord
+223 U Satyr Enchanter
+224 U Skyrider Patrol
+225 M Vaevictis Asmadi, the Dire
+226 R Amulet of Safekeeping
+227 U Arcane Encyclopedia
+228 R Chaos Wand
+229 M Crucible of Worlds
+230 R Desecrated Tomb
+231 U Diamond Mare
+232 R Dragon's Hoard
+233 C Explosive Apparatus
+234 C Field Creeper
+235 U Fountain of Renewal
+236 U Gargoyle Sentinel
+237 C Gearsmith Guardian
+238 R Magistrate's Scepter
+239 C Manalith
+240 C Marauder's Axe
+241 U Meteor Golem
+242 U Millstone
+243 U Rogue's Gloves
+244 R Sigiled Sword of Valeron
+245 C Skyscanner
+246 U Suspicious Bookcase
+247 R Transmogrifying Wand
+248 C Cinder Barrens
+249 R Detection Tower
+250 C Forsaken Sanctuary
+251 C Foul Orchard
+252 C Highland Lake
+253 C Meandering River
+254 U Reliquary Tower
+255 U Rupture Spire
+256 C Stone Quarry
+257 C Submerged Boneyard
+258 C Timber Gorge
+259 C Tranquil Expanse
+260 C Woodland Stream
+261 L Plains
+262 L Plains
+263 L Plains
+264 L Plains
+265 L Island
+266 L Island
+267 L Island
+268 L Island
+269 L Swamp
+270 L Swamp
+271 L Swamp
+272 L Swamp
+273 L Mountain
+274 L Mountain
+275 L Mountain
+276 L Mountain
+277 L Forest
+278 L Forest
+279 L Forest
+280 L Forest
+281 M Ajani, Wise Counselor
+282 R Ajani's Influence
+283 U Court Cleric
+284 R Serra's Guardian
+285 C Silverbeak Griffin
+286 M Tezzeret, Cruel Machinist
+287 R Riddlemaster Sphinx
+288 C Pendulum of Patterns
+289 R Tezzeret's Gatebreaker
+290 U Tezzeret's Strider
+291 M Liliana, the Necromancer
+292 U Arisen Gorgon
+293 R Gravewaker
+294 R Liliana's Spoils
+295 C Tattered Mummy
+296 M Sarkhan, Dragonsoul
+297 C Kargan Dragonrider
+298 R Sarkhan's Dragonfire
+299 U Sarkhan's Whelp
+300 R Shivan Dragon
+301 M Vivien of the Arkbow
+302 R Aggressive Mammoth
+303 R Skalla Wolf
+304 C Ursine Champion
+305 U Vivien's Jaguar
+306 M Nexus of Fate
+307 C Sun Sentinel
+308 U Air Elemental
+309 C Befuddle
+310 C Mist-Cloaked Herald
+311 C Waterknot
+312 C Grasping Scoundrel
+313 C Radiating Lightning
+314 C Llanowar Elves
+
+[tokens]
+w_4_4_angel_flying_vigilance
+w_4_4_avatar_flying
+w_1_1_cat_lifelink
+w_2_2_knight_vigilance
+w_2_4_ox
+w_1_1_soldier
+b_1_1_bat_flying
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+r_5_5_dragon_flying
+r_1_1_goblin
+g_3_3_beast
+g_1_1_elf_warrior
+c_1_1_a_thopter_flying

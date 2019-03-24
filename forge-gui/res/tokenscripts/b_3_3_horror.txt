@@ -1,0 +1,6 @@
+Name:Horror
+ManaCost:no cost
+Types:Creature Horror
+Colors:black
+PT:3/3
+Oracle:

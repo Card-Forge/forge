@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever a creature dies, you may have CARDNAME deal damage to target player equal to the number of cards in that player's hand.
 SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player | NumDmg$ X
 SVar:X:TargetedPlayer$CardsInHand
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_shadows.jpg
 Oracle:Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.

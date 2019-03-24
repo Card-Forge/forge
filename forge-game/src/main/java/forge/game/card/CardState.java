@@ -19,7 +19,6 @@ package forge.game.card;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -28,6 +27,7 @@ import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -43,6 +43,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 public class CardState extends GameObject {
     private String name = "";
     private CardType type = new CardType();
@@ -50,6 +53,7 @@ public class CardState extends GameObject {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
+    private int baseLoyalty = 0;
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
@@ -60,13 +64,17 @@ public class CardState extends GameObject {
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
 
-    private List<KeywordInterface> cachedKeywords = Lists.newArrayList();
+    private KeywordCollection cachedKeywords = new KeywordCollection();
     
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
 
     private final CardStateView view;
     private final Card card;
+
+    public CardState(Card card, CardStateName name) {
+        this(card.getView().createAlternateState(name), card);
+    }
 
     public CardState(CardStateView view0, Card card0) {
         view = view0;
@@ -166,13 +174,28 @@ public class CardState extends GameObject {
         view.updateToughness(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords;
+    public int getBaseLoyalty() {
+        return baseLoyalty;
+    }
+    public final void setBaseLoyalty(final int loyalty) {
+        baseLoyalty = loyalty;
+        view.updateLoyalty(this);
     }
 
-    public final void setCachedKeywords(final Collection<KeywordInterface> col) {
-        cachedKeywords.clear();
-        cachedKeywords.addAll(col);
+    public final Collection<KeywordInterface> getCachedKeywords() {
+        return cachedKeywords.getValues();
+    }
+
+    public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
+        return cachedKeywords.getValues(keyword);
+    }
+
+    public final void setCachedKeywords(final KeywordCollection col) {
+        cachedKeywords = col;
+    }
+
+    public final boolean hasKeyword(Keyword key) {
+        return cachedKeywords.contains(key);
     }
 
     public final Collection<KeywordInterface> getIntrinsicKeywords() {
@@ -193,7 +216,19 @@ public class CardState extends GameObject {
         if (s.trim().length() == 0) {
             return null;
         }
-        KeywordInterface inst = intrinsicKeywords.add(s); 
+        KeywordInterface inst = null;
+        try {
+            inst = intrinsicKeywords.add(s);
+        } catch (Exception e) {
+            String msg = "CardState:addIntrinsicKeyword: failed to parse Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", card.getName()).withData("Keyword", s).build()
+            );
+
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
+        }
         if (inst != null && initTraits) {
             inst.createTraits(card, true);
         }
@@ -213,6 +248,9 @@ public class CardState extends GameObject {
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {
+        return intrinsicKeywords.remove(s);
+    }
+    public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
         return intrinsicKeywords.remove(s);
     }
 
@@ -444,6 +482,7 @@ public class CardState extends GameObject {
         setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBaseLoyalty(source.getBaseLoyalty());
         setSVars(source.getSVars());
 
         manaAbilities.clear();
@@ -522,7 +561,7 @@ public class CardState extends GameObject {
             intrinsicKeywords.insert(inst);
         }
     }
-    
+
     public void updateChangedText() {
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
             .addAll(manaAbilities)
@@ -534,6 +573,21 @@ public class CardState extends GameObject {
         for (final CardTraitBase ctb : allAbs) {
             if (ctb.isIntrinsic()) {
                 ctb.changeText();
+            }
+        }
+    }
+
+    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(manaAbilities)
+            .addAll(nonManaAbilities)
+            .addAll(triggers)
+            .addAll(replacementEffects)
+            .addAll(staticAbilities)
+            .build();
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.changeTextIntrinsic(colorMap, typeMap);
             }
         }
     }

@@ -63,6 +63,7 @@ public class PlayerPanel extends FContainer {
 
     private final FTextField txtPlayerName = new FTextField("Player name");
     private final FToggleSwitch humanAiSwitch;
+    private final FToggleSwitch devModeSwitch;
 
     private FComboBox<Object> cbTeam = new FComboBox<Object>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
@@ -95,6 +96,11 @@ public class PlayerPanel extends FContainer {
         setType(slot.getType());
         setPlayerName(slot.getName());
         setAvatarIndex(slot.getAvatarIndex());
+
+        devModeSwitch = new FToggleSwitch("Normal", "Dev Mode");
+        devModeSwitch.setVisible(isNetworkHost());
+
+        cbTeam.setEnabled(true);
 
         btnDeck.setEnabled(false); //disable deck button until done loading decks
 
@@ -186,6 +192,10 @@ public class PlayerPanel extends FContainer {
         add(cbTeam);
         add(cbArchenemyTeam);
 
+        if (isNetworkHost()) {
+            devModeSwitch.setChangedHandler(devModeSwitched);
+            add(devModeSwitch);
+        }
         add(btnDeck);
         btnDeck.setCommand(new FEventHandler() {
             @Override
@@ -250,9 +260,6 @@ public class PlayerPanel extends FContainer {
             setMayEdit(false);
         }
         setMayControl(mayControl0);
-
-        //disable team combo boxes for now
-        cbTeam.setEnabled(true);
     }
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
@@ -290,6 +297,12 @@ public class PlayerPanel extends FContainer {
         }
         else {
             cbTeam.setBounds(x, y, w, fieldHeight);
+        }
+
+        if (devModeSwitch.isVisible()) {
+            y += dy;
+            devModeSwitch.setSize(devModeSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
+            devModeSwitch.setPosition(0, y);
         }
 
         y += dy;
@@ -341,6 +354,9 @@ public class PlayerPanel extends FContainer {
         if (btnVanguardAvatar.isVisible()) {
             rows++;
         }
+        if (devModeSwitch.isVisible()) {
+            rows++;
+        }
         return rows * (txtPlayerName.getHeight() + PADDING) + PADDING;
     }
 
@@ -371,6 +387,20 @@ public class PlayerPanel extends FContainer {
                 setAvatarIndex(slot.getAvatarIndex());
                 setPlayerName(slot.getName());
             }
+        }
+    };
+
+    private final FEventHandler devModeSwitched = new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            boolean toggled = devModeSwitch.isToggled();
+            prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggled));
+            ForgePreferences.DEV_MODE = toggled;
+
+            // ensure that preferences panel reflects the change
+            prefs.save();
+
+            screen.setDevMode(index);
         }
     };
 
@@ -489,6 +519,10 @@ public class PlayerPanel extends FContainer {
         btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
     }
 
+    public boolean isNetworkHost() {
+        return allowNetworking && index == 0;
+    }
+
     public boolean isAi() {
         return type == LobbySlotType.AI;
     }
@@ -507,7 +541,7 @@ public class PlayerPanel extends FContainer {
         for (int i = 1; i <= LobbyScreen.MAX_PLAYERS; i++) {
             cbTeam.addItem("Team " + i);
         }
-        cbTeam.setEnabled(true);
+        cbTeam.setEnabled(mayEdit);
     }
 
     private FEventHandler teamChangedHandler = new FEventHandler() {
@@ -696,6 +730,10 @@ public class PlayerPanel extends FContainer {
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
         humanAiSwitch.setEnabled(mayEdit);
+        cbTeam.setEnabled(mayEdit);
+        if (devModeSwitch != null) {
+            devModeSwitch.setEnabled(mayEdit);
+        }
         updateVariantControlsVisibility();
 
         //if panel has height already, ensure height updated to account for button visibility changes
@@ -808,5 +846,14 @@ public class PlayerPanel extends FContainer {
                 }
             }
         });
+    }
+
+    public boolean isDevMode() {
+        return devModeSwitch.isVisible() && devModeSwitch.isToggled();
+    }
+    public void setIsDevMode(final boolean isDevMode) {
+        if (devModeSwitch.isVisible()) {
+            devModeSwitch.setToggled(isDevMode);
+        }
     }
 }

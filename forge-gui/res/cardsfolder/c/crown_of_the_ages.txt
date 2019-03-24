@@ -5,6 +5,6 @@ A:AB$ Pump | Cost$ 4 T | Amount$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtPr
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ CrownAttach | RememberChosen$ True | AILogic$ AtLeast1
 SVar:CrownAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_the_ages.jpg
 Oracle:{4}, {T}: Attach target Aura attached to a creature to another creature.

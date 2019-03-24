@@ -12,12 +12,20 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
     
+    public CardDamageMap(Table<Card, GameEntity, Integer> damageMap) {
+        this.putAll(damageMap);
+    }
+
+    public CardDamageMap() {
+    }
+
     public void triggerPreventDamage(boolean isCombat) {
         for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
             int sum = 0;
@@ -53,7 +61,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 
                 sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
                 
-                if (sourceLKI.hasKeyword("Lifelink")) {
+                if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                     sourceLKI.getController().gainLife(sum, sourceLKI, sa);
                 }
             }

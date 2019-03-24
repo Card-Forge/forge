@@ -1,0 +1,6 @@
+Name:Glass of the Guildpact
+ManaCost:2
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Multicolored creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:Multicolored creatures you control get +1/+1.

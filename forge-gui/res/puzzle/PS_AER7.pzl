@@ -13,4 +13,4 @@ AILife=16
 humanlibrary=Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;
 humanhand=Uncaged Fury;Wrangle;Savage Alliance;Incendiary Flow
 humanbattlefield=Spirebluff Canal;Spirebluff Canal;Mountain;Mountain;Mountain;Mountain;Mountain;Bearer of Overwhelming Truths|Transformed;Ravenous Intruder;Trail of Evidence
-aibattlefield=Nissa, Voice of Zendikar|Counters:LOYALTY=6;t:Plant,P:0,T:1,Cost:no cost,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;t:Plant,P:0,T:1,Cost:no cost,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;t:Plant,P:0,T:1,Cost:no cost,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;
+aibattlefield=Nissa, Voice of Zendikar|Counters:LOYALTY=6;t:Plant,P:0,T:1,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;t:Plant,P:0,T:1,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;t:Plant,P:0,T:1,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:,Image:g_0_1_plant_ogw|Counters:P1P1=1;

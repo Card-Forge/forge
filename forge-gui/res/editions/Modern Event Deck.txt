@@ -33,3 +33,8 @@ Type=other
 24 R Kataki, War's Wage
 25 U Dismember
 26 U Ghost Quarter
+
+[tokens]
+w_1_1_soldier
+w_1_1_spirit_flying
+c_1_1_a_myr

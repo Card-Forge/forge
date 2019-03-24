@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block, Future Sight
+Type:Historic
+Subtype:Block
+Effective:2007-05-20
+Sets:TSP, TSB, PLC, FUT

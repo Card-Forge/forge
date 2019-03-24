@@ -29,6 +29,7 @@ import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -42,7 +43,6 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.MapToAmount;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
@@ -218,7 +218,7 @@ public class CombatUtil {
                 }
                 break;
             case "CARDNAME can't attack during extra turns.":
-                if (game.getPhaseHandler().getPlayerTurn().isPlayingExtraTurn()) {
+                if (game.getPhaseHandler().getPlayerTurn().isExtraTurn()) {
                     return false;
                 }
                 break;
@@ -319,6 +319,10 @@ public class CombatUtil {
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
+
+        if (combat.getDefenderByAttacker(c) != null && combat.getDefenderByAttacker(c) instanceof Player) {
+            c.getController().addAttackedOpponentThisTurn(combat.getDefenderPlayerByAttacker(c));
+        }
     } // checkDeclareAttackers
 
     /**
@@ -520,7 +524,7 @@ public class CombatUtil {
             IGNORE_LANDWALK_KEYWORDS[i] = "May be blocked as though it doesn't have " + landwalk + ".";
         }
     }
- 
+
     public static boolean isUnblockableFromLandwalk(final Card attacker, final Player defendingPlayer) {
         //May be blocked as though it doesn't have landwalk. (Staff of the Ages)
         if (attacker.hasKeyword("May be blocked as though it doesn't have landwalk.")) {
@@ -529,6 +533,7 @@ public class CombatUtil {
 
         List<String> walkTypes = Lists.newArrayList();
 
+        // handle basic landwalk and snow basic landwalk
         for (int i = 0; i < LANDWALK_KEYWORDS.length; i++) {
             final String basic = MagicColor.Constant.BASIC_LANDS.get(i);
             final String landwalk = LANDWALK_KEYWORDS[i];
@@ -548,19 +553,24 @@ public class CombatUtil {
             String keyword = inst.getOriginal();
             if (keyword.equals("Legendary landwalk")) {
                 walkTypes.add("Land.Legendary");
-            } else if (keyword.equals("Desertwalk")) {
-                walkTypes.add("Desert");
             } else if (keyword.equals("Nonbasic landwalk")) {
                 walkTypes.add("Land.nonBasic");
             } else if (keyword.equals("Snow landwalk")) {
                 walkTypes.add("Land.Snow");
             } else if (keyword.endsWith("walk")) {
-                final String landtype = TextUtil.fastReplace(keyword, "walk", "");
+                String landtype = TextUtil.fastReplace(keyword, "walk", "");
+                String valid = landtype;
+
+                // substract Snow type
                 if (landtype.startsWith("Snow ")) {
-                    walkTypes.add(landtype.substring(5) + ".Snow");
-                } else if (CardType.isALandType(landtype)) {
+                    landtype = landtype.substring(5);
+                    valid = landtype + ".Snow";
+                }
+
+                // basic land types are handled before
+                if (CardType.isALandType(landtype) && !CardType.isABasicLandType(landtype)) {
                     if (!walkTypes.contains(landtype)) {
-                        walkTypes.add(landtype);
+                        walkTypes.add(valid);
                     }
                 }
             }
@@ -570,10 +580,10 @@ public class CombatUtil {
             return false;
         }
 
-        final String valid = StringUtils.join(walkTypes, ",");
+        final String[] valid = walkTypes.toArray(new String[0]);
         final CardCollectionView defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (final Card c : defendingLands) {
-            if (c.isValid(valid.split(","), defendingPlayer, attacker, null)) {
+            if (c.isValid(valid, defendingPlayer, attacker, null)) {
                 return true;
             }
         }
@@ -658,7 +668,7 @@ public class CombatUtil {
             return 0;
         }
         // TODO: remove CantBeBlockedByAmount LT2
-        if (attacker.hasKeyword("CantBeBlockedByAmount LT2") || attacker.hasKeyword("Menace")) {
+        if (attacker.hasKeyword("CantBeBlockedByAmount LT2") || attacker.hasKeyword(Keyword.MENACE)) {
             return 2;
         } else if (attacker.hasKeyword("CantBeBlockedByAmount LT3")) {
             return 3;
@@ -702,7 +712,7 @@ public class CombatUtil {
                 for (final Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
-                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                             final List<Card> possibleBlockers = Lists.newArrayList(defendersArmy);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers, combat)) {
@@ -806,7 +816,7 @@ public class CombatUtil {
         for (final Card attacker : attackersWithLure) {
             if (CombatUtil.canBeBlocked(attacker, combat, defender) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
-                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                     final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
@@ -824,7 +834,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat, defender) && CombatUtil.canBlock(attacker, blocker)
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
-                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                         final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
@@ -985,17 +995,17 @@ public class CombatUtil {
         }
 
         // rare case:
-        if (blocker.hasKeyword("Shadow")
+        if (blocker.hasKeyword(Keyword.SHADOW)
                 && blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
             return false;
         }
 
-        if (attacker.hasKeyword("Shadow") && !blocker.hasKeyword("Shadow")
+        if (attacker.hasKeyword(Keyword.SHADOW) && !blocker.hasKeyword(Keyword.SHADOW)
                 && !blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
             return false;
         }
 
-        if (!attacker.hasKeyword("Shadow") && blocker.hasKeyword("Shadow")) {
+        if (!attacker.hasKeyword(Keyword.SHADOW) && blocker.hasKeyword(Keyword.SHADOW)) {
             return false;
         }
 
@@ -1003,7 +1013,7 @@ public class CombatUtil {
             return false;
         }
 
-        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword("Skulk"))
+        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword(Keyword.SKULK))
             && attacker.getNetPower() < blocker.getNetPower()) {
             return false;
         }
@@ -1034,11 +1044,11 @@ public class CombatUtil {
             }
         }
 
-        if (blocker.hasKeyword("CARDNAME can block only creatures with flying.") && !attacker.hasKeyword("Flying")) {
+        if (blocker.hasKeyword("CARDNAME can block only creatures with flying.") && !attacker.hasKeyword(Keyword.FLYING)) {
             return false;
         }
 
-        if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
+        if (attacker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.REACH)) {
             boolean stillblock = false;
             for (KeywordInterface inst : blocker.getKeywords()) {
                 String k = inst.getOriginal();
@@ -1055,15 +1065,16 @@ public class CombatUtil {
             }
         }
 
-        if (attacker.hasKeyword("Horsemanship") && !blocker.hasKeyword("Horsemanship")) {
+        if (attacker.hasKeyword(Keyword.HORSEMANSHIP) && !blocker.hasKeyword(Keyword.HORSEMANSHIP)) {
             return false;
         }
 
-        if (attacker.hasKeyword("Fear") && !blocker.isArtifact() && !blocker.isBlack()) {
+        // color is hardcoded there
+        if (attacker.hasKeyword(Keyword.FEAR) && !blocker.isArtifact() && !blocker.isBlack()) {
             return false;
         }
 
-        if (attacker.hasKeyword("Intimidate") && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
+        if (attacker.hasKeyword(Keyword.INTIMIDATE) && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
             return false;
         }
 

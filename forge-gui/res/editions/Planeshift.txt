@@ -157,3 +157,8 @@ FoilAlwaysInCommonSlot=False
 56 C Volcano Imp
 57 U Warped Devotion
 38 R Waterspout Elemental
+
+[tokens]
+w_1_1_spirit_flying
+g_1_1_hippo
+g_1_1_saproling

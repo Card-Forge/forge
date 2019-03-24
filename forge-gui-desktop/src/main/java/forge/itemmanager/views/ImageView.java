@@ -63,7 +63,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PILE_SPACING_Y = 0.1f;
     private static final SkinColor GROUP_HEADER_FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
-    private static final SkinFont GROUP_HEADER_FONT = FSkin.getFont(12);
+    private static final SkinFont GROUP_HEADER_FONT = FSkin.getFont();
     private static final int GROUP_HEADER_HEIGHT = 19;
     private static final int GROUP_HEADER_GLYPH_WIDTH = 6;
     private static final int MIN_COLUMN_COUNT = 1;

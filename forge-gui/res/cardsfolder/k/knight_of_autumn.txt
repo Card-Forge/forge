@@ -1,0 +1,11 @@
+Name:Knight of Autumn
+ManaCost:1 G W
+Types:Creature Dryad Knight
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBDestroy,DBGainLife
+SVar:DBPump:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+DeckHas:Ability$Counters
+Oracle:When Knight of Autumn enters the battlefield, choose one —\n• Put two +1/+1 counters on Knight of Autumn.\n• Destroy target artifact or enchantment.\n• You gain 4 life.

@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME and counter that spell.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hesitation.jpg
 Oracle:When a player casts a spell, sacrifice Hesitation and counter that spell.

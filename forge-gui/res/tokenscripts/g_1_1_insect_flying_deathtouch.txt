@@ -1,0 +1,8 @@
+Name:Insect
+ManaCost:no cost
+PT:1/1
+Colors:green
+Types:Creature Insect
+K:Flying
+K:Deathtouch
+Oracle:Flying, deathtouch

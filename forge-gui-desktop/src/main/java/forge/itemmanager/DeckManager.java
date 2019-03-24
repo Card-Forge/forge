@@ -4,18 +4,17 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.TreeSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.SortedSet;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.deck.Deck;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
+import forge.screens.home.quest.DialogChooseFormats;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -148,27 +147,72 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         return new DeckSearchFilter(this);
     }
 
+    private Map<String, HashMap> buildHierarchy(String path) {
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        Map hierarchy = new HashMap();
+        String[] components = path.split("/", 2);
+        Map value = new HashMap();
+        if (components.length > 1) {
+            value = buildHierarchy(components[1]);
+        }
+        hierarchy.put("/" + components[0], value);
+        return hierarchy;
+    }
+
+    // borrowed from: https://stackoverflow.com/a/46052477
+    private void merge(Map<String, HashMap> mapLeft, Map<String, HashMap> mapRight) {
+        // go over all the keys of the right map
+        for (String key : mapRight.keySet()) {
+            // if the left map already has this key, merge the maps that are behind that key
+            if (mapLeft.containsKey(key)) {
+                merge(mapLeft.get(key), mapRight.get(key));
+            } else {
+                // otherwise just add the map under that key
+                mapLeft.put(key, mapRight.get(key));
+            }
+        }
+    }
+
+    private void buildNestedMenu(Map tree, JMenu menu, String parentPath) {
+        if (tree.size() > 0) {
+            for (final Object key : tree.keySet()) {
+                String fullPath = key.toString();
+                if (parentPath != null) {
+                    fullPath = parentPath + key.toString();
+                }
+                String finalFullPath = fullPath;
+                GuiUtils.addMenuItem(menu, key.toString(), null, new Runnable() {
+                    @Override
+                    public void run() {
+                        addFilter(new DeckFolderFilter(DeckManager.this, finalFullPath));
+                    }
+                }, true);
+                Map value = (Map) tree.get(key);
+                if (value.size() > 0) {
+                    final JMenu submenu = GuiUtils.createMenu(key.toString());
+                    buildNestedMenu(value, submenu, finalFullPath);
+                    menu.add(submenu);
+                }
+            }
+        }
+    }
+
     @Override
     protected void buildAddFilterMenu(final JMenu menu) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
-        final SortedSet<String> folders = new TreeSet<String>();
+        Map hierarchy = new HashMap();
         for (final Entry<DeckProxy, Integer> deckEntry : getPool()) {
             final String path = deckEntry.getKey().getPath();
             if (StringUtils.isNotEmpty(path)) { //don't include root folder as option
-                folders.add(path);
+                merge(hierarchy, buildHierarchy(path));
             }
         }
         final JMenu folder = GuiUtils.createMenu("Folder");
-        if (folders.size() > 0) {
-            for (final String f : folders) {
-                GuiUtils.addMenuItem(folder, f, null, new Runnable() {
-                    @Override
-                    public void run() {
-                        addFilter(new DeckFolderFilter(DeckManager.this, f));
-                    }
-                }, true);
-            }
+        if (hierarchy.size() > 0) {
+            buildNestedMenu(hierarchy, folder, null);
         }
         else {
             folder.setEnabled(false);
@@ -176,7 +220,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         menu.add(folder);
 
         final JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {
@@ -185,6 +229,29 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
         }
         menu.add(fmt);
+
+
+        GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
+            @Override public void run() {
+                final DeckFormatFilter existingFilter = getFilter(DeckFormatFilter.class);
+                if (existingFilter != null) {
+                    existingFilter.edit();
+                } else {
+                    final DialogChooseFormats dialog = new DialogChooseFormats();
+                    dialog.setOkCallback(new Runnable() {
+                        @Override public void run() {
+                            final List<GameFormat> formats = dialog.getSelectedFormats();
+                            if (!formats.isEmpty()) {
+                                for(GameFormat format: formats) {
+                                    addFilter(new DeckFormatFilter(DeckManager.this, format));
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
 
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override public void run() {
@@ -247,48 +314,69 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
     }
 
-    private void editDeck(final DeckProxy deck) {
-        if (deck == null) { return; }
-
+    public void editDeck(final DeckProxy deck) {
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
         switch (this.gameType) {
-        case Quest:
-            screen = FScreen.DECK_EDITOR_QUEST;
-            editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
-            break;
-        case Constructed:
-            screen = FScreen.DECK_EDITOR_CONSTRUCTED;
-            DeckPreferences.setCurrentDeck(deck.toString());
-            //re-use constructed controller
-            break;
-        case Sealed:
-            screen = FScreen.DECK_EDITOR_SEALED;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
-            break;
-        case Draft:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
-            break;
-        case Winston:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
-            break;
+            case Quest:
+                screen = FScreen.DECK_EDITOR_QUEST;
+                editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
+                break;
+            case Constructed:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setCurrentDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Commander:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Brawl:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setBrawlDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case TinyLeaders:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setTinyLeadersDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Sealed:
+                screen = FScreen.DECK_EDITOR_SEALED;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
+                break;
+            case Draft:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
+                break;
+            case Winston:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
+                break;
 
-        default:
-            return;
+            default:
+                return;
         }
 
-        if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
+        if (!Singletons.getControl().ensureScreenActive(screen)) {
+            return;
+        }
 
         if (editorCtrl != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
         }
 
-        if (!SEditorIO.confirmSaveChanges(screen, true)) { return; } //ensure previous deck on screen is saved if needed
+        if (!SEditorIO.confirmSaveChanges(screen, true)) {
+            return;
+        } //ensure previous deck on screen is saved if needed
 
-        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        if (deck != null) {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        } else {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+        }
     }
 
     public boolean deleteDeck(final DeckProxy deck) {
@@ -302,17 +390,20 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         // consider using deck proxy's method to delete deck
         switch(this.gameType) {
-        case Constructed:
-        case Draft:
-        case Sealed:
-            deck.deleteFromStorage();
-            break;
-        case Quest:
-            deck.deleteFromStorage();
-            FModel.getQuest().save();
-            break;
-        default:
-            throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
+            case Brawl:
+            case Commander:
+            case TinyLeaders:
+            case Constructed:
+            case Draft:
+            case Sealed:
+                deck.deleteFromStorage();
+                break;
+            case Quest:
+                deck.deleteFromStorage();
+                FModel.getQuest().save();
+                break;
+            default:
+                throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);

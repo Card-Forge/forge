@@ -1,0 +1,6 @@
+Name:Colossal Majesty
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerGE4 | PresentCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a creature with power 4 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:At the beginning of your upkeep, if you control a creature with power 4 or greater, draw a card.

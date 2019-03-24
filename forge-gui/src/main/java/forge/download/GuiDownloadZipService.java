@@ -69,6 +69,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
     public void downloadAndUnzip() {
         filesExtracted = 0;
+
         String zipFilename = download("temp.zip");
         if (zipFilename == null) { return; }
 
@@ -109,7 +110,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 try {
                     final ZipEntry entry = entries.nextElement();
 
-                    final String path = destFolder + entry.getName();
+                    final String path = destFolder + File.separator + entry.getName();
                     if (entry.isDirectory()) {
                         new File(path).mkdir();
                         progressBar.setValue(++count);
@@ -198,6 +199,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 new File(destFile).delete();
                 return null;
             }
+
             return destFile;
         }
         catch (final Exception ex) {

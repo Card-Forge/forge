@@ -27,6 +27,7 @@ import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -41,6 +42,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -50,6 +52,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
@@ -118,7 +121,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final boolean isSplitSecondOnStack() {
         for(SpellAbilityStackInstance si : stack) {
-            if (si.isSpell() && si.getSourceCard().hasKeyword("Split second")) {
+            if (si.isSpell() && si.getSourceCard().hasKeyword(Keyword.SPLIT_SECOND)) {
                 return true;
             }
         }
@@ -360,11 +363,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("CastSA", si.getSpellAbility(true));
             runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put("CurrentStormCount", thisTurnCast.size());
+            runParams.put("CurrentCastSpells", new CardCollection(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                if (source.isCommander()) {
+                if (source.isCommander() && (ZoneType.Command == source.getCastFrom())
+                        && source.getOwner().equals(activator)) {
                     activator.incCommanderCast(source);
                 }
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
@@ -564,13 +569,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getHostCard();
         if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
-        if (tmp.getClones().size() > 0) {
-            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.equals(tmp)) {
-                    c.setClones(tmp.getClones());
-                }
-            }
-        }
         // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
         // sa.getHostCard().setXManaCostPaid(0);
     }
@@ -633,7 +631,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     if (o instanceof Card) {
                         final Card card = (Card) o;
                         Card current = game.getCardState(card);
-                        invalidTarget = current.getTimestamp() != card.getTimestamp();
+                        if (current != null) {
+                            invalidTarget = current.getTimestamp() != card.getTimestamp();
+                        }
                         invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
                     } else {
                         invalidTarget = !o.canBeTargetedBy(sa);
@@ -691,10 +691,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(true);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
-        if (sa.isLastSaga()) {
-            // if SA is last saga ability, sacrifice the host
-            game.getAction().sacrifice(si.getSourceCard(), null);
-        }
     }
 
     public final void remove(final Card c) {
@@ -877,6 +873,24 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
         return c.equals(curResolvingCard);
+    }
+
+    public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {
+        if (source == null) {
+            return false;
+        }
+        for (SpellAbilityStackInstance si : stack) {
+            if (si.isTrigger() && si.getSourceCard().equals(source)) {
+                if (pred == null) {
+                    return true;
+                }
+                SpellAbility sa = si.getSpellAbility(false);
+                if (pred.apply(sa)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

@@ -11,7 +11,7 @@ public enum TrackableProperty {
     //Shared
     Text(TrackableTypes.StringType),
     PreventNextDamage(TrackableTypes.IntegerType),
-    EnchantedBy(TrackableTypes.CardViewCollectionType),
+    AttachedCards(TrackableTypes.CardViewCollectionType),
     Counters(TrackableTypes.CounterMapType),
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
@@ -41,13 +41,9 @@ public enum TrackableProperty {
     ChosenMode(TrackableTypes.StringType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
-    PlayerMayLook(TrackableTypes.PlayerViewCollectionType, false),
-    PlayerMayLookTemp(TrackableTypes.PlayerViewCollectionType, false),
-    Equipping(TrackableTypes.CardViewType),
-    EquippedBy(TrackableTypes.CardViewCollectionType),
-    Enchanting(TrackableTypes.GameEntityViewType),
-    Fortifying(TrackableTypes.CardViewType),
-    FortifiedBy(TrackableTypes.CardViewCollectionType),
+    PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
+    PlayerMayLookTemp(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
+    EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
@@ -57,7 +53,7 @@ public enum TrackableProperty {
     Haunting(TrackableTypes.CardViewType),
     MustBlockCards(TrackableTypes.CardViewCollectionType),
     PairedWith(TrackableTypes.CardViewType),
-    CurrentState(TrackableTypes.CardStateViewType, false), //can't respect freeze, otherwise card constructor can crash
+    CurrentState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreezeIfUnset),
     AlternateState(TrackableTypes.CardStateViewType),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
@@ -100,19 +96,21 @@ public enum TrackableProperty {
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     NumDrawnThisTurn(TrackableTypes.IntegerType),
-    Keywords(TrackableTypes.KeywordCollectionViewType, false),
-    Commander(TrackableTypes.CardViewCollectionType, false),
+    Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
+    Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
-    Ante(TrackableTypes.CardViewCollectionType, false),
-    Battlefield(TrackableTypes.CardViewCollectionType, false), //zones can't respect freeze, otherwise cards that die from state based effects won't have that reflected in the UI
-    Command(TrackableTypes.CardViewCollectionType, false),
-    Exile(TrackableTypes.CardViewCollectionType, false),
-    Flashback(TrackableTypes.CardViewCollectionType, false),
-    Graveyard(TrackableTypes.CardViewCollectionType, false),
-    Hand(TrackableTypes.CardViewCollectionType, false),
-    Library(TrackableTypes.CardViewCollectionType, false),
-    Mana(TrackableTypes.ManaMapType, false),
+    Ante(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Battlefield(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze), //zones can't respect freeze, otherwise cards that die from state based effects won't have that reflected in the UI
+    Command(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Exile(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Flashback(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Graveyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Hand(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Library(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
+    IsExtraTurn(TrackableTypes.BooleanType),
+    ExtraTurnCount(TrackableTypes.IntegerType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -132,12 +130,12 @@ public enum TrackableProperty {
     OptionalTrigger(TrackableTypes.BooleanType),
 
     //Combat
-    AttackersWithDefenders(TrackableTypes.GenericMapType, false),
-    AttackersWithBlockers(TrackableTypes.GenericMapType, false),
-    BandsWithDefenders(TrackableTypes.GenericMapType, false),
-    BandsWithBlockers(TrackableTypes.GenericMapType, false),
-    AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, false),
-    BandsWithPlannedBlockers(TrackableTypes.GenericMapType, false),
+    AttackersWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    AttackersWithBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    BandsWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    BandsWithBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    BandsWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
 
     //Game
     Players(TrackableTypes.PlayerViewCollectionType),
@@ -157,19 +155,25 @@ public enum TrackableProperty {
     PlayerTurn(TrackableTypes.PlayerViewType),
     Phase(TrackableTypes.EnumType(PhaseType.class));
 
+    public enum FreezeMode {
+        IgnoresFreeze,
+        RespectsFreeze,
+        IgnoresFreezeIfUnset
+    }
+
     private final TrackableType<?> type;
-    private final boolean respectFreeze;
+    private final FreezeMode freezeMode;
 
     private TrackableProperty(TrackableType<?> type0) {
-        this(type0, true);
+        this(type0, FreezeMode.RespectsFreeze);
     }
-    private TrackableProperty(TrackableType<?> type0, boolean respectFreeze0) {
+    private TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
         type = type0;
-        respectFreeze = respectFreeze0;
+        freezeMode = freezeMode0;
     }
 
-    public boolean respectFreeze() {
-        return respectFreeze;
+    public FreezeMode getFreezeMode() {
+        return freezeMode;
     }
 
     @SuppressWarnings("unchecked")

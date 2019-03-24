@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -188,7 +189,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
                 CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.M1M1));
 
-                CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, "Persist");
+                CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, Keyword.PERSIST);
                 if (!aiPersistList.isEmpty()) {
                     aiM1M1List = aiPersistList;
                 }
@@ -200,7 +201,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
                 // do as P1P1 part
                 CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.P1P1));
-                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, "Undying");
+                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, Keyword.UNDYING);
 
                 if (!aiUndyingList.isEmpty()) {
                     aiP1P1List = aiUndyingList;
@@ -230,7 +231,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             CardCollection aiList = CardLists.filterControlledBy(list, ai);
             aiList = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.M1M1, amount));
 
-            CardCollection aiPersist = CardLists.getKeyword(aiList, "Persist");
+            CardCollection aiPersist = CardLists.getKeyword(aiList, Keyword.PERSIST);
             if (!aiPersist.isEmpty()) {
                 aiList = aiPersist;
             }
@@ -253,7 +254,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // targeting ai creatures too
             CardCollection aiList = CardLists.filterControlledBy(list, ai);
             if (!aiList.isEmpty()) {
-                CardCollection aiListUndying = CardLists.getKeyword(aiList, "Undying");
+                CardCollection aiListUndying = CardLists.getKeyword(aiList, Keyword.UNDYING);
                 if (!aiListUndying.isEmpty()) {
                     aiList = aiListUndying;
                 }
@@ -266,7 +267,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // need to target opponent creatures
             CardCollection oppList = CardLists.filterControlledBy(list, ai.getOpponents());
             if (!oppList.isEmpty()) {
-                CardCollection oppListNotUndying = CardLists.getNotKeyword(oppList, "Undying");
+                CardCollection oppListNotUndying = CardLists.getNotKeyword(oppList, Keyword.UNDYING);
                 if (!oppListNotUndying.isEmpty()) {
                     oppList = oppListNotUndying;
                 }
@@ -307,6 +308,30 @@ public class CountersRemoveAi extends SpellAbilityAi {
             }
         }
         if (mandatory) {
+            if (type.equals("P1P1")) {
+                // Try to target creatures with Adapt or similar
+                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                if (!adaptCreats.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
+                    return true;
+                }
+
+                // Outlast nice target
+                CardCollection outlastCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.OUTLAST));
+                if (!outlastCreats.isEmpty()) {
+                    // outlast cards often benefit from having +1/+1 counters, try not to remove last one
+                    CardCollection betterTargets = CardLists.filter(outlastCreats, CardPredicates.hasCounter(CounterType.P1P1, 2));
+
+                    if (!betterTargets.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getWorstAI(betterTargets));
+                        return true;
+                    }
+
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(outlastCreats));
+                    return true;
+                }
+            }
+
             sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
             return true;
         }
@@ -358,9 +383,9 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 }
             }
         } else {
-            if (options.contains(CounterType.M1M1) && target.hasKeyword("Persist")) {
+            if (options.contains(CounterType.M1M1) && target.hasKeyword(Keyword.PERSIST)) {
                 return CounterType.M1M1;
-            } else if (options.contains(CounterType.P1P1) && target.hasKeyword("Undying")) {
+            } else if (options.contains(CounterType.P1P1) && target.hasKeyword(Keyword.UNDYING)) {
                 return CounterType.M1M1;
             }
             for (CounterType type : options) {

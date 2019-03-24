@@ -4,6 +4,6 @@ Types:Legendary Creature Human Warrior
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.
 SVar:X:Count$Valid Artifact.untapped+YouCtrl,Creature.untapped+YouCtrl,Land.untapped+YouCtrl
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maraxus_of_keld.jpg
 Oracle:Maraxus of Keld's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.

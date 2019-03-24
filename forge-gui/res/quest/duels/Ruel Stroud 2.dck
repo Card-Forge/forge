@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ruel Stroud 2
+Title=Ruel Stroud
+Difficulty=medium
+Description=Janky UBG Treasure deck with Karn, Scion of Urza; Vraska, Golgari Queen, and Vraska, Relic Seeker.
+Deck Type=constructed
+Icon=Ruel Stroud.jpg
+[main]
+2 Assassin's Trophy|GRN
+3 Depths of Desire|XLN
+4 Drowned Catacomb|XLN
+2 Duress|M19
+2 Evolving Wilds|RIX
+1 Forest
+3 Hinterland Harbor|DOM
+3 Hornswoggle|RIX
+4 Island
+4 Karn, Scion of Urza|DOM
+2 Overgrown Tomb|GRN
+2 Ritual of Soot|GRN
+3 Spell Swindle|XLN
+7 Swamp
+3 Syncopate|DOM
+3 Treasure Map|XLN
+4 Twilight Prophet|RIX
+4 Vraska, Golgari Queen|GRN
+2 Vraska, Relic Seeker|XLN
+2 Watery Grave|GRN
+[sideboard]

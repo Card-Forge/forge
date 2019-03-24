@@ -11,6 +11,6 @@ SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 DeckNeeds:Color$Red
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bomat_courier.jpg
 Oracle:Haste\nWhenever Bomat Courier attacks, exile the top card of your library face down. (You can't look at it.)\n{R}, Discard your hand, Sacrifice Bomat Courier: Put all cards exiled with Bomat Courier into their owners' hands.

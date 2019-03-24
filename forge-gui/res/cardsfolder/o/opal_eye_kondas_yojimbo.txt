@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Legendary Creature Fox Samurai
 PT:1/4
 K:Defender
-K:Bushido 1
+K:Bushido:1
 A:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage this turn, that damage is dealt to CARDNAME instead.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,OutOfSight | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | Duration$ HostLeavesOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to EFFECTSOURCE instead.
@@ -12,6 +12,6 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Def
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 A:AB$ PreventDamage | Cost$ 1 W | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_eye_kondas_yojimbo.jpg
 Oracle:Defender (This creature can't attack.)\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{T}: The next time a source of your choice would deal damage this turn, that damage is dealt to Opal-Eye, Konda's Yojimbo instead.\n{1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.

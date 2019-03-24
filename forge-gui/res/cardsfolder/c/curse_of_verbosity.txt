@@ -7,4 +7,4 @@ T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.Enchant
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ Player.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_verbosity.jpg
-Oracle:Enchant player\nWhenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
+Oracle:Enchant player\nWhenever enchanted player is attacked, you draw a card. Each opponent attacking that player does the same.

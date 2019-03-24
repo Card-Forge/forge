@@ -1,11 +1,11 @@
 Name:Rolling Thunder
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,Min,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players.
-SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
-SVar:NumCreatures:Count$Valid Creature
+A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select one or more targets to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,Min,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets.
+SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreaturesAndPlaneswalkers
+SVar:NumCreaturesAndPlaneswalkers:Count$Valid Creature,Planeswalker
 SVar:Min:SVar$X/LimitMax.1
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_thunder.jpg
-Oracle:Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
+Oracle:Rolling Thunder deals X damage divided as you choose among any number of targets.

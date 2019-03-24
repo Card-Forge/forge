@@ -7,6 +7,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.cost.CostPayEnergy;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
@@ -53,10 +54,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
     
         // Evasion keywords
-        if (c.hasKeyword("Flying")) {
+        if (c.hasKeyword(Keyword.FLYING)) {
             value += addValue(power * 10, "flying");
         }
-        if (c.hasKeyword("Horsemanship")) {
+        if (c.hasKeyword(Keyword.HORSEMANSHIP)) {
             value += addValue(power * 10, "horses");
         }
         if (c.hasKeyword("Unblockable")) {
@@ -65,13 +66,13 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 value += addValue(power * 6, "thorns");
             }
-            if (c.hasKeyword("Fear")) {
+            if (c.hasKeyword(Keyword.FEAR)) {
                 value += addValue(power * 6, "fear");
             }
-            if (c.hasKeyword("Intimidate")) {
+            if (c.hasKeyword(Keyword.INTIMIDATE)) {
                 value += addValue(power * 6, "intimidate");
             }
-            if (c.hasStartOfKeyword("Menace")) {
+            if (c.hasKeyword(Keyword.MENACE)) {
                 value += addValue(power * 4, "menace");
             }
             if (c.hasStartOfKeyword("CantBeBlockedBy")) {
@@ -81,49 +82,49 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     
         // Other good keywords
         if (power > 0) {
-            if (c.hasKeyword("Double Strike")) {
+            if (c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 value += addValue(10 + (power * 15), "ds");
-            } else if (c.hasKeyword("First Strike")) {
+            } else if (c.hasKeyword(Keyword.FIRST_STRIKE)) {
                 value += addValue(10 + (power * 5), "fs");
             }
-            if (c.hasKeyword("Deathtouch")) {
+            if (c.hasKeyword(Keyword.DEATHTOUCH)) {
                 value += addValue(25, "dt");
             }
-            if (c.hasKeyword("Lifelink")) {
+            if (c.hasKeyword(Keyword.LIFELINK)) {
                 value += addValue(power * 10, "lifelink");
             }
-            if (power > 1 && c.hasKeyword("Trample")) {
+            if (power > 1 && c.hasKeyword(Keyword.TRAMPLE)) {
                 value += addValue((power - 1) * 5, "trample");
             }
-            if (c.hasKeyword("Vigilance")) {
+            if (c.hasKeyword(Keyword.VIGILANCE)) {
                 value += addValue((power * 5) + (toughness * 5), "vigilance");
             }
-            if (c.hasKeyword("Wither")) {
+            if (c.hasKeyword(Keyword.WITHER)) {
                 value += addValue(power * 10, "Wither");
             }
-            if (c.hasKeyword("Infect")) {
+            if (c.hasKeyword(Keyword.INFECT)) {
                 value += addValue(power * 15, "infect");
             }
-            value += addValue(c.getKeywordMagnitude("Rampage"), "rampage");
-            value += addValue(c.getKeywordMagnitude("Afflict") * 5, "afflict");
+            value += addValue(c.getKeywordMagnitude(Keyword.RAMPAGE), "rampage");
+            value += addValue(c.getKeywordMagnitude(Keyword.AFFLICT) * 5, "afflict");
         }
     
-        value += addValue(c.getKeywordMagnitude("Bushido") * 16, "bushido");
-        value += addValue(c.getAmountOfKeyword("Flanking") * 15, "flanking");
-        value += addValue(c.getAmountOfKeyword("Exalted") * 15, "exalted");
-        value += addValue(c.getKeywordMagnitude("Annihilator") * 50, "eldrazi");
-        value += addValue(c.getKeywordMagnitude("Absorb") * 11, "absorb");
+        value += addValue(c.getKeywordMagnitude(Keyword.BUSHIDO) * 16, "bushido");
+        value += addValue(c.getAmountOfKeyword(Keyword.FLANKING) * 15, "flanking");
+        value += addValue(c.getAmountOfKeyword(Keyword.EXALTED) * 15, "exalted");
+        value += addValue(c.getKeywordMagnitude(Keyword.ANNIHILATOR) * 50, "eldrazi");
+        value += addValue(c.getKeywordMagnitude(Keyword.ABSORB) * 11, "absorb");
 
         // Keywords that may produce temporary or permanent buffs over time
-        if (c.hasKeyword("Prowess")) {
+        if (c.hasKeyword(Keyword.PROWESS)) {
             value += addValue(5, "prowess");
         }
-        if (c.hasKeyword("Outlast")) {
+        if (c.hasKeyword(Keyword.OUTLAST)) {
             value += addValue(10, "outlast");
         }
 
         // Defensive Keywords
-        if (c.hasKeyword("Reach") && !c.hasKeyword("Flying")) {
+        if (c.hasKeyword(Keyword.REACH) && !c.hasKeyword(Keyword.FLYING)) {
             value += addValue(5, "reach");
         }
         if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
@@ -131,7 +132,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
     
         // Protection
-        if (c.hasKeyword("Indestructible")) {
+        if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
             value += addValue(70, "darksteel");
         }
         if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
@@ -139,20 +140,17 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
             value += addValue(50, "fogbank");
         }
-        if (c.hasKeyword("Hexproof")) {
+        if (c.hasKeyword(Keyword.HEXPROOF)) {
             value += addValue(35, "hexproof");
-        } else if (c.hasKeyword("Shroud")) {
+        } else if (c.hasKeyword(Keyword.SHROUD)) {
             value += addValue(30, "shroud");
         }
-        if (c.hasStartOfKeyword("Protection")) {
+        if (c.hasKeyword(Keyword.PROTECTION)) {
             value += addValue(20, "protection");
-        }
-        if (c.hasStartOfKeyword("PreventAllDamageBy")) {
-            value += addValue(10, "prevent-dmg");
         }
 
         // Bad keywords
-        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
+        if (c.hasKeyword(Keyword.DEFENDER) || c.hasKeyword("CARDNAME can't attack.")) {
             value -= subValue((power * 9) + 40, "defender");
         } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
             value -= subValue(40, "sac-end");
@@ -188,17 +186,17 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(30, "cupkeep");
         } else if (c.hasStartOfKeyword("UpkeepCost")) {
             value -= subValue(20, "sac-unless");
-        } else if (c.hasStartOfKeyword("Echo") && c.cameUnderControlSinceLastUpkeep()) {
+        } else if (c.hasKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
             value -= subValue(10, "echo-unpaid");
         }
     
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= subValue(20, "upkeep-dmg");
         } 
-        if (c.hasStartOfKeyword("Fading")) {
+        if (c.hasKeyword(Keyword.FADING)) {
             value -= subValue(20, "fading");
         }
-        if (c.hasStartOfKeyword("Vanishing")) {
+        if (c.hasKeyword(Keyword.VANISHING)) {
             value -= subValue(20, "vanishing");
         }
         if (c.getSVar("Targeting").equals("Dies")) {

@@ -1,0 +1,7 @@
+Name:Impervious Greatwurm
+ManaCost:7 G G G
+Types:Creature Wurm
+PT:16/16
+K:Convoke
+K:Indestructible
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nIndestructible

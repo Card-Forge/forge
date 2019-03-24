@@ -3,6 +3,6 @@ ManaCost:X B B G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ X B B G | ValidCards$ Permanent.nonLand+cmcLEX | References$ X | SpellDescription$ Destroy each nonland permanent with converted mana cost X or less.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_granite.jpg
 Oracle:Destroy each nonland permanent with converted mana cost X or less.

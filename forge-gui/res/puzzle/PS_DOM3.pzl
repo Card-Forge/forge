@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Dominaria #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/05/062.DOM3_.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Start in your first Main Phase and you must win this turn. Your opponent has no cards in hand and no mana available.
+[state]
+humanlife=20
+ailife=17
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Captain's Hook;Shatter;Sorcerer's Wand;Reckless Rage;Saheeli Rai
+humanbattlefield=Tiana, Ship's Caretaker|Id:4;Forebear's Blade|AttachedTo:4;Forebear's Blade|AttachedTo:4;Traxos, Scourge of Kroog|Tapped;Storm Fleet Pyromancer;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Clifftop Retreat|Set:DOM;Clifftop Retreat|Set:DOM;Mountain|Set:DOM
+aibattlefield=Serra Disciple;Teshar, Ancestor's Apostle;Pardic Wanderer

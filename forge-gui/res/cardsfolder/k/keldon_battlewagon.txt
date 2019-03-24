@@ -10,6 +10,6 @@ SVar:TrigSacrifice:DB$Sacrifice | Defined$ Self
 SVar:SacrificeEndCombat:True
 A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
 SVar:X:Tapped$CardPower
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_battlewagon.jpg
 Oracle:Trample\nKeldon Battlewagon can't block.\nWhen Keldon Battlewagon attacks, sacrifice it at end of combat.\nTap an untapped creature you control: Keldon Battlewagon gets +X/+0 until end of turn, where X is the power of the creature tapped this way.

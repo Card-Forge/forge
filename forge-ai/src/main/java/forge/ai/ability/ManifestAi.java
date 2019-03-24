@@ -113,7 +113,7 @@ public class ManifestAi extends SpellAbilityAi {
         repParams.put("Origin", ZoneType.Library);
         repParams.put("Destination", ZoneType.Battlefield);
         repParams.put("Source", sa.getHostCard());
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.None);
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.Other);
         if (!list.isEmpty()) {
             return false;
         }

@@ -80,3 +80,8 @@ C Saproling
 23 U Whispersilk Cloak
 24 U Worn Powerstone
 44 C Yavimaya Elder
+
+[tokens]
+hornet
+b_x_x_minion
+g_1_1_saproling

@@ -4,6 +4,6 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Wall | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ Wall creatures can attack as though they didn't have defender.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 Oracle:Wall creatures can attack as though they didn't have defender.

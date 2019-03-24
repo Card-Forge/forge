@@ -152,7 +152,15 @@ public class ForgeScript {
 
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
             Card source, SpellAbility spellAbility) {
-        if (property.equals("Buyback")) {
+        if (property.equals("ManaAbility")) {
+            if (!sa.isManaAbility()) {
+                return false;
+            }
+        } else if (property.equals("nonManaAbility")) {
+            if (sa.isManaAbility()) {
+                return false;
+            }
+        } else if (property.equals("Buyback")) {
             if (!sa.isBuyBackAbility()) {
                 return false;
             }
@@ -166,6 +174,10 @@ public class ForgeScript {
             }
         } else if (property.equals("Flashback")) {
             if (!sa.isFlashBackAbility()) {
+                return false;
+            }
+        } else if (property.equals("Jumpstart")) {
+            if (!sa.isJumpstart()) {
                 return false;
             }
         } else if (property.equals("Kicked")) {
@@ -202,6 +214,12 @@ public class ForgeScript {
                 }
             }
             if (!found) {
+                return false;
+            }
+        } else if (property.equals("YouCtrl")) {
+            return sa.getActivatingPlayer().equals(sourceController);
+        } else if (sa.getHostCard() != null) {
+            if (!sa.getHostCard().hasProperty(property, sourceController, source, spellAbility)) {
                 return false;
             }
         }

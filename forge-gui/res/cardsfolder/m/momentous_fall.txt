@@ -5,6 +5,6 @@ A:SP$ Draw | Cost$ 2 G G Sac<1/Creature> | NumCards$ XPower | References$ XPower
 SVar:DBGainLife:DB$GainLife | LifeAmount$ XToughness | References$ XToughness
 SVar:XPower:Sacrificed$CardPower
 SVar:XToughness:Sacrificed$CardToughness
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
 Oracle:As an additional cost to cast Momentous Fall, sacrifice a creature.\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.

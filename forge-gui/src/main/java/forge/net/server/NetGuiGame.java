@@ -148,6 +148,18 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        send(ProtocolMethod.hideZones, controller, zonesToUpdate);
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         updateGameView();
         send(ProtocolMethod.updateCards, cards);
@@ -232,8 +244,13 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
-        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, delayedReveal);
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
+        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
+    }
+
+    @Override
+    public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	return sendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
     @Override

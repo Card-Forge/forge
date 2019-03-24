@@ -1,0 +1,19 @@
+Name:Regna's Sanction
+ManaCost:3 W
+Types:Sorcery
+A:SP$ AssignGroup | Cost$ 3 W | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest.
+SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$ DBPutCounter | ClearRememberedBeforeLoop$ True | StackDescription$ Each friend puts a +1/+1 counter on each creature they control. | SpellDescription$ Friend puts a +1/+1 counter on each creature they control.
+SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.RememberedPlayerCtrl | CounterType$ P1P1 | CounterNum$ 1 | Placer$ Remembered
+SVar:FoeRepeat:DB$ RepeatEach | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBChoose | SubAbility$ DBTapAll | StackDescription$ Each foe chooses one untapped creature they control, then taps the rest. | SpellDescription$ Foe chooses one untapped creature they control, then taps the rest.
+SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.untapped+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ DBImprint
+#Need to imprint all non remembered cards
+SVar:DBImprint:DB$ Pump | ImprintCards$ Valid Creature.IsNotRemembered+RememberedPlayerCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.IsImprinted | SubAbility$ DBCleanupAll
+SVar:DBCleanupAll:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
+SVar:NeedsToPlayVar:Z GE3
+SVar:Z:SVar$Z1/Plus.Z2
+SVar:Z1:Count$Valid Creature.YourTeamCtrl+inZoneBattlefield
+SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield+untapped
+SVar:Picture:http://www.wizards.com/global/images/magic/general/regna_sanction.jpg
+Oracle:For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest.

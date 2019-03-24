@@ -38,30 +38,37 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
         final String type = sa.getParam("CounterType");
         final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = activator.getGame();
 
         if (counterAmount <= 0) {
             return;
         }
         
         CardCollectionView cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
+        cards = CardLists.getValidCards(cards, valid, host.getController(), sa.getHostCard());
 
         if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();
             cards = CardLists.filterControlledBy(cards, pl);
         }
 
+        Player placer = activator;
+        if (sa.hasParam("Placer")) {
+            final String pstr = sa.getParam("Placer");
+            placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
+        }
+
         for (final Card tgtCard : cards) {
             if (game.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, host, true);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, true);
             } else {
                 // adding counters to something like re-suspend cards
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, host, false);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, false);
             }
             game.updateLastStateForCard(tgtCard);
         }

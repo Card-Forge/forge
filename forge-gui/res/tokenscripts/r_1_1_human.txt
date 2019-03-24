@@ -1,0 +1,6 @@
+Name:Human
+ManaCost:no cost
+Types:Creature Human
+Colors:red
+PT:1/1
+Oracle:

@@ -1,0 +1,274 @@
+[metadata]
+Code=BBD
+Date=2018-06-08
+Name=Battlebond
+MciCode=bbd
+Type=Other
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
+
+[cards]
+1 M Will Kenrith
+2 M Rowan Kenrith
+3 R Regna, the Redeemer
+4 R Krav, the Unredeemed
+5 R Zndrsplt, Eye of Wisdom
+6 R Okaun, Eye of Chaos
+7 R Virtus the Veiled
+8 R Gorm the Great
+9 R Khorvath Brightflame
+10 R Sylvia Brightspear
+11 R Pir, Imaginative Rascal
+12 R Toothy, Imaginary Friend
+13 U Blaring Recruiter
+14 U Blaring Captain
+15 U Chakram Retriever
+16 U Chakram Slinger
+17 U Soulblade Corrupter
+18 U Soulblade Renewer
+19 U Impetuous Protege
+20 U Proud Mentor
+21 U Ley Weaver
+22 U Lore Weaver
+23 M Arena Rector
+24 C Aurora Champion
+25 M Brightling
+26 U Bring Down
+27 C Dwarven Lightsmith
+28 U Jubilant Mascot
+29 R Play of the Game
+30 R Regna's Sanction
+31 C Skystreamer
+32 R Together Forever
+33 M Arcane Artisan
+34 U Fumble
+35 R Game Plan
+36 C Huddle Up
+37 U Nimbus Champion
+38 U Out of Bounds
+39 C Saltwater Stalwart
+40 C Soaring Show-Off
+41 R Spellseeker
+42 C Spellweaver Duo
+43 R Zndrsplt's Judgment
+44 M Archfiend of Despair
+45 C Bloodborn Scoundrels
+46 C Fan Favorite
+47 U Gang Up
+48 U Inner Demon
+49 R Mindblade Render
+50 C Sickle Dancer
+51 M Stunning Reversal
+52 U Thrasher Brute
+53 R Thrilling Encore
+54 R Virtus's Maneuver
+55 C Azra Bladeseeker
+56 R Bonus Round
+57 C Bull-Rush Bruiser
+58 U Cheering Fanatic
+59 R Khorvath's Fury
+60 U Lava-Field Overlord
+61 C Magma Hellion
+62 M Najeela, the Blade-Blossom
+63 C Stadium Vendors
+64 R Stolen Strategy
+65 M Bramble Sovereign
+66 C Charging Binox
+67 C Combo Attack
+68 U The Crowd Goes Wild
+69 U Decorated Champion
+70 R Generous Patron
+71 M Grothama, All-Devouring
+72 C Jungle Wayfinder
+73 R Pir's Whim
+74 R Archon of Valor's Reach
+75 U Azra Oddsmaker
+76 R Last One Standing
+77 U Rushblade Commander
+78 U Vampire Charmseeker
+79 R Sentinel Tower
+80 R Victory Chimes
+81 R Bountiful Promenade
+82 R Luxury Suite
+83 R Morphic Pool
+84 R Sea of Clouds
+85 R Spire Garden
+86 U Angel of Retribution
+87 R Angelic Chorus
+88 C Angelic Gift
+89 U Battle Mastery
+90 C Champion of Arashin
+91 C Doomed Traveler
+92 C Expedition Raptor
+93 R Kor Spiritdancer
+94 M Land Tax
+95 C Lightwalker
+96 U Long Road Home
+97 U Loyal Pegasus
+98 R Mangara of Corondor
+99 C Midnight Guard
+100 U Oreskos Explorer
+101 C Pacifism
+102 C Raptor Companion
+103 C Rebuke
+104 C Royal Trooper
+105 C Shoulder to Shoulder
+106 C Silverchase Fox
+107 U Solemn Offering
+108 C Sparring Mummy
+109 U Steppe Glider
+110 U Swords to Plowshares
+111 U Take Up Arms
+112 C Tandem Tactics
+113 C Benthic Giant
+114 C Call to Heel
+115 C Claustrophobia
+116 C Coralhelm Guide
+117 U Fog Bank
+118 C Frost Lynx
+119 C Impulse
+120 C Kitesail Corsair
+121 C Kraken Hatchling
+122 R Mystic Confluence
+123 C Negate
+124 C Nimbus of the Isles
+125 C Omenspeaker
+126 U Opportunity
+127 U Oracle's Insight
+128 C Peregrine Drake
+129 U Phantom Warrior
+130 U Reckless Scholar
+131 R Sower of Temptation
+132 U Spell Snare
+133 U Switcheroo
+134 R Tidespout Tyrant
+135 C Totally Lost
+136 M True-Name Nemesis
+137 C Watercourser
+138 U Assassin's Strike
+139 C Assassinate
+140 C Daggerdrome Imp
+141 R Diabolic Intent
+142 C Doomed Dissenter
+143 C Eyeblight Assassin
+144 C Fill with Fright
+145 C Grotesque Mutation
+146 C Hand of Silumgar
+147 C Last Gasp
+148 C Liturgy of Blood
+149 U Morbid Curiosity
+150 M Nirkana Revenant
+151 R Noosegraf Mob
+152 U Noxious Dragon
+153 R Nyxathid
+154 C Painful Lesson
+155 C Prakhata Club Security
+156 U Quest for the Gravelord
+157 C Rotfeaster Maggot
+158 C Screeching Buzzard
+159 C Shambling Ghoul
+160 U Slum Reaper
+161 U Swarm of Bloodflies
+162 U Tavern Swindler
+163 U Tenacious Dead
+164 C Bathe in Dragonfire
+165 C Battle Rampart
+166 U Battle-Rattle Shaman
+167 U Blaze
+168 U Blood Feud
+169 U Boldwyr Intimidator
+170 C Borderland Marauder
+171 U Chain Lightning
+172 U Dragon Breath
+173 C Dragon Hatchling
+174 C Earth Elemental
+175 C Ember Beast
+176 U Enthralling Victor
+177 C Expedite
+178 U Flamewave Invoker
+179 R Goblin Razerunners
+180 C Lightning Talons
+181 R Magmatic Force
+182 C Pathmaker Initiate
+183 C Reckless Reveler
+184 C Shock
+185 C Thunder Strike
+186 U Trumpet Blast
+187 R War's Toll
+188 C Wrap in Flames
+189 U Aim High
+190 U Beast Within
+191 C Canopy Spider
+192 C Charging Rhino
+193 C Cowl Prowler
+194 C Daggerback Basilisk
+195 M Doubling Season
+196 U Elvish Visionary
+197 U Feral Hydra
+198 C Fertile Ground
+199 U Fertilid
+200 C Giant Growth
+201 R Greater Good
+202 U Hunted Wumpus
+203 U Karametra's Favor
+204 C Kraul Warrior
+205 C Lead by Example
+206 R Magus of the Candelabra
+207 U Plated Crusher
+208 C Primal Huntbeast
+209 U Pulse of Murasa
+210 C Return to the Earth
+211 C Saddleback Lagac
+212 R Seedborn Muse
+213 C Skyshroud Claim
+214 U Veteran Explorer
+215 R Vigor
+216 C Wandering Wolf
+217 R Apocalypse Hydra
+218 C Auger Spree
+219 C Centaur Healer
+220 U Dinrova Horror
+221 U Enduring Scalelord
+222 R Evil Twin
+223 R Gwafa Hazid, Profiteer
+224 U Jelenn Sphinx
+225 U Kiss of the Amesha
+226 U Relentless Hunter
+227 C Rhox Brute
+228 C Riptide Crab
+229 U Savage Ventmaw
+230 U Unflinching Courage
+231 C Urborg Drake
+232 C Consulate Skygate
+233 U Culling Dais
+234 C Eager Construct
+235 U Genesis Chamber
+236 U Gold-Forged Sentinel
+237 C Hexplate Golem
+238 U Juggernaut
+239 C Millennial Gargoyle
+240 R Mind's Eye
+241 M Mycosynth Lattice
+242 C Night Market Guard
+243 C Peace Strider
+244 C Pierce Strider
+245 C Seer's Lantern
+246 U Spectral Searchlight
+247 C Stone Golem
+248 C Tyrant's Machine
+249 C Yotian Soldier
+250 L Plains
+251 L Island
+252 L Swamp
+253 L Mountain
+254 L Forest
+255 M Will Kenrith
+256 M Rowan Kenrith
+
+[tokens]
+w_1_1_spirit_flying
+w_1_1_warrior
+b_2_2_zombie
+b_5_5_zombie_giant
+g_3_3_beast
+c_1_1_a_myr

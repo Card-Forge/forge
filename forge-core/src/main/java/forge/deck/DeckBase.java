@@ -6,21 +6,19 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.deck;
 
 import forge.item.InventoryItem;
-
 import java.io.Serializable;
-
 
 public abstract class DeckBase implements Serializable, Comparable<DeckBase>, InventoryItem {
     private static final long serialVersionUID = -7538150536939660052L;
@@ -59,7 +57,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -74,6 +72,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public String getDirectory() {
         return directory;
     }
+
     public void setDirectory(String directory0) {
         directory = directory0;
     }
@@ -101,7 +100,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * <p>
      * getComment.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
@@ -149,5 +148,5 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
 
     public abstract boolean isEmpty();
 
-    public abstract void importDeck(Deck deck);
+    public abstract Deck getHumanDeck();
 }

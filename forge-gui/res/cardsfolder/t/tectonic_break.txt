@@ -3,6 +3,6 @@ ManaCost:X R R
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ X R R | Amount$ X | References$ X | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices X lands.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_break.jpg
 Oracle:Each player sacrifices X lands.

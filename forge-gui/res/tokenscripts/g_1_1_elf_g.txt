@@ -1,0 +1,7 @@
+Name:Elf
+ManaCost:no cost
+Types:Creature Elf
+Colors:green
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

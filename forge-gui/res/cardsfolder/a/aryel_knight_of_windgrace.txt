@@ -3,10 +3,10 @@ ManaCost:2 W B
 Types:Legendary Creature Human Knight
 PT:4/4
 K:Vigilance
-A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance | TokenImage$ w 2 2 knight dom | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
+A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance dom | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 A:AB$ Destroy | Cost$ B T tapXType<X/Knight> | Announce$ X | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | References$ X | SpellDescription$ Destroy target creature with power X or less.
 SVar:X:XChoice
 DeckHas:Ability$Token
 DeckHints:Type$Knight
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aryel_knight_of_windgrace.jpg
-Oracle:Vigilance\n{2}{W}, T: Create a 2/2 white Knight creature token with vigilance.\n{B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less.
+Oracle:Vigilance\n{2}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.\n{B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less.

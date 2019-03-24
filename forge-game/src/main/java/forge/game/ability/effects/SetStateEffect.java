@@ -1,9 +1,11 @@
 package forge.game.ability.effects;
 
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -66,6 +68,25 @@ public class SetStateEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // facedown cards that are not Permanent, can't turn faceup there
+            if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
+                && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
+                // need to cache manifest status
+                boolean manifested = tgt.isManifested();
+                // FIXME setState has to many other Consequences, use LKI?
+                tgt.setState(CardStateName.Original, true);
+                game.getAction().reveal(new CardCollection(tgt), tgt.getOwner(), true, "Face-down card can't turn face up");
+                tgt.setState(CardStateName.FaceDown, true);
+                tgt.setManifested(manifested);
+
+                continue;
+            }
+
+            // for reasons it can't transform, skip
+            if ("Transform".equals(mode) && !tgt.canTransform()) {
+                continue;
+            }
+
             if ("Transform".equals(mode) && tgt.equals(host) && sa.hasSVar("StoredTransform")) {
                 // If want to Transform, and host is trying to transform self, skip if not in alignment
                 boolean skip = tgt.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
@@ -104,7 +125,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, host, true);
+                    tgt.addCounter(CounterType.P1P1, 1, p, true);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);

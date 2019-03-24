@@ -20,8 +20,6 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -92,14 +90,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
-            }
-            if (value.startsWith("Prowl")) {
-                final List<String> prowlTypes = Lists.newArrayList();
-                prowlTypes.add("Rogue");
-                if (value.split("Prowl").length > 1) {
-                    prowlTypes.add(value.split("Prowl")[1]);
-                }
-                this.setProwlTypes(prowlTypes);
             }
         }
 
@@ -212,22 +202,25 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
 
         final Player activator = sa.getActivatingPlayer();
-        final Zone cardZone = activator.getGame().getZoneOf(c);
+        final Zone cardZone = c.getLastKnownZone();
         Card cp = c;
 
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.hasParam("Bestow")) {
             // already bestowed or in battlefield, no need to check for spell
-            if (c.isBestowed() || c.isInZone(ZoneType.Battlefield)) {
+            if (c.isInZone(ZoneType.Battlefield)) {
                 return false;
             }
 
-            if (!c.isLKI()) {
-                cp = CardUtil.getLKICopy(c);
-            }
+            // if card is lki and bestowed, then do nothing there, it got already animated
+            if (!(c.isLKI() && c.isBestowed())) {
+                if (!c.isLKI()) {
+                    cp = CardUtil.getLKICopy(c);
+                }
 
-            if (!cp.isBestowed()) {
-                cp.animateBestow();
+                if (!cp.isBestowed()) {
+                    cp.animateBestow(!cp.isLKI());
+                }
             }
         }
 
@@ -378,33 +371,45 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
 
-        if (this.getCardsInHand() != -1) {
-            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
+        // legendary sorcery
+        if (c.isSorcery() && c.getType().isLegendary() && CardLists.getValidCardCount(
+                activator.getCardsIn(ZoneType.Battlefield),
+                "Creature.Legendary,Planeswalker.Legendary", c.getController(), c) <= 0) {
+            return false;
+        }
+
+        // Explicit Aftermath check there
+        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+            return false;
+        }
+
+        if (getCardsInHand() != -1) {
+            if (activator.getCardsIn(ZoneType.Hand).size() != getCardsInHand()) {
                 return false;
             }
         }
 
-        if (this.getColorToCheck() != null) {
-            if (!sa.getHostCard().hasChosenColor(this.getColorToCheck())) {
+        if (getColorToCheck() != null) {
+            if (!sa.getHostCard().hasChosenColor(getColorToCheck())) {
                 return false;
             }
         }
-        if (this.isHellbent()) {
+        if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
             }
         }
-        if (this.isThreshold()) {
+        if (isThreshold()) {
             if (!activator.hasThreshold()) {
                 return false;
             }
         }
-        if (this.isMetalcraft()) {
+        if (isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
                 return false;
             }
         }
-        if (this.isDelirium()) {
+        if (isDelirium()) {
             if (!activator.hasDelirium()) {
                 return false;
             }
@@ -414,21 +419,24 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.isDesert()) {
+        if (sa.isSpectacle()) {
+            if (activator.getOpponentLostLifeThisTurn() <= 0) {
+                return false;
+            }
+        }
+        if (isDesert()) {
             if (!activator.hasDesert()) {
                 return false;
             }
         }
-        if (this.isBlessing()) {
+        if (isBlessing()) {
             if (!activator.hasBlessing()) {
                 return false;
             }
         }
-        if (this.getProwlTypes() != null && !this.getProwlTypes().isEmpty()) {
-            // only true if the activating player has damaged the opponent with
-            // one of the specified types
+        if (sa.isProwl()) {
             boolean prowlFlag = false;
-            for (final String type : this.getProwlTypes()) {
+            for (final String type : c.getType().getCreatureTypes()) {
                 if (activator.hasProwl(type)) {
                     prowlFlag = true;
                 }

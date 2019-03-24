@@ -2,7 +2,7 @@ Name:Beast Within
 ManaCost:2 G
 Types:Instant
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AITgts$ Card.cmcGE4 | SubAbility$ DBToken | SpellDescription$ Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ TargetedController | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 beast NPH
-SVar:RemAIDeck:True
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ TargetedController | LegacyImage$ g 3 3 beast nph
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_within.jpg
 Oracle:Destroy target permanent. Its controller creates a 3/3 green Beast creature token.

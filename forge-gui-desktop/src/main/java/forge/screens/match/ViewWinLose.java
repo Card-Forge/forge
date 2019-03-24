@@ -110,24 +110,24 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(FSkin.getBoldFont(30));
+        lblTitle.setFont(FSkin.getRelativeBoldFont(30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(FSkin.getFont(26));
+        lblStats.setFont(FSkin.getRelativeFont(26));
 
         btnContinue.setText("Next Game");
-        btnContinue.setFont(FSkin.getFont(22));
+        btnContinue.setFont(FSkin.getRelativeFont(22));
         btnRestart.setText("Start New Match");
-        btnRestart.setFont(FSkin.getFont(22));
+        btnRestart.setFont(FSkin.getRelativeFont(22));
         btnQuit.setText("Quit Match");
-        btnQuit.setFont(FSkin.getFont(22));
+        btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
         txtLog.setText(StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]"));
-        txtLog.setFont(FSkin.getFont(14));
+        txtLog.setFont(FSkin.getRelativeFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
         final FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
@@ -292,7 +292,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             message = "<html>" + message.replace("\n", "<br>") + "</html>";
         }
         final SkinnedLabel lblMessage = new SkinnedLabel(message);
-        lblMessage.setFont(FSkin.getFont(14));
+        lblMessage.setFont(FSkin.getRelativeFont(14));
         lblMessage.setForeground(FORE_COLOR);
         lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
         lblMessage.setIconTextGap(50);
@@ -309,7 +309,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private class TitleLabel extends SkinnedLabel {
         TitleLabel(final String msg) {
             super(msg);
-            setFont(FSkin.getFont(16));
+            setFont(FSkin.getRelativeFont(16));
             setPreferredSize(new Dimension(200, 40));
             setHorizontalAlignment(SwingConstants.CENTER);
             setForeground(FORE_COLOR);

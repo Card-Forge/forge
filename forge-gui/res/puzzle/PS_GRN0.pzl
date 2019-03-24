@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #00 (Card Preview)
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/09/f739hjf02q.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no mana available and no cards in hand. Assume all cards in libraries are lands. Your Arcane Adaptation is naming "Pirate".
+[state]
+humanlife=20
+ailife=17
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Storm Fleet Sprinter;Spell Swindle;Strangling Spores;Totally Lost;Sleep;Act of Treason
+humanlibrary=Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN
+humanbattlefield=Electrostatic Field;Admiral Beckett Brass;Arcane Adaptation|ChosenType:Pirate;Island|Set:GRN;Island|Set:GRN;Island|Set:GRN;Swamp|Set:GRN;Swamp|Set:GRN;Mountain|Set:GRN;Mountain|Set:GRN
+ailibrary=Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN;Plains|Set:GRN
+aibattlefield=Omniscience;Chromium, the Mutable;Nicol Bolas, the Ravager;Vaevictis Asmadi, the Dire;Palladia-Mors, the Ruiner;Arcades, the Strategist

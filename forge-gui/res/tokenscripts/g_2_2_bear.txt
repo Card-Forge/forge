@@ -1,0 +1,6 @@
+Name:Bear
+ManaCost:no cost
+PT:2/2
+Colors:green
+Types:Creature Bear
+Oracle:

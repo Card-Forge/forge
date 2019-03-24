@@ -6,6 +6,6 @@ K:First Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ OdricTest | SVarCompare$ GE3 | NoResolvingCheck$ True | Execute$ TrigOdricEffect | TriggerDescription$ Whenever CARDNAME and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
 SVar:TrigOdricEffect:DB$ DeclareCombatants | DeclareBlockers$ True
 SVar:OdricTest:Count$Valid Creature.attacking+Other
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odric_master_tactician.jpg
 Oracle:First strike\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.

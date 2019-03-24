@@ -7,7 +7,7 @@ SVar:DBLoseGame1:DB$ LosesGame | Defined$ Player.LifeEquals_13 | SubAbility$ DBG
 SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 1
 SVar:DBLoseGame2:DB$ LosesGame | Defined$ Player.LifeEquals_13 | SubAbility$ DBLoseLife | SpellDescription$ Each player with exactly 13 life loses the game, then each player loses 1 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskaidekaphobia.jpg
 Oracle:At the beginning of your upkeep, choose one —\n• Each player with exactly 13 life loses the game, then each player gains 1 life.\n• Each player with exactly 13 life loses the game, then each player loses 1 life.

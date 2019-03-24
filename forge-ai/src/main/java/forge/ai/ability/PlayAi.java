@@ -7,14 +7,14 @@ import forge.card.CardTypeView;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -70,11 +70,28 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
 
-        if ("ReplaySpell".equals(logic)) {
-            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
+        // Ensure that if a ValidZone is specified, there's at least something to choose from in that zone.
+        CardCollectionView validOpts = new CardCollection();
+        if (sa.hasParam("ValidZone")) {
+            validOpts = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.valueOf(sa.getParam("ValidZone"))),
+                    sa.getParam("Valid"), sa);
+            if (validOpts.isEmpty()) {
+                return false;
+            }
         }
 
-        if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {
+        if ("ReplaySpell".equals(logic)) {
+            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
+        } else if (logic.startsWith("NeedsChosenCard")) {
+            int minCMC = 0;
+            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null) {
+                minCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
+            }
+            validOpts = CardLists.filter(validOpts, CardPredicates.greaterCMC(minCMC));
+            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null) != null;
+        }
+
+        if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
             // AI is not very good at playing non-permanent spells this way, at least yet
             // (might be possible to enable it for Sorceries in Main1/Main2 if target is available,
             // but definitely not for most Instants)
@@ -137,6 +154,15 @@ public class PlayAi extends SpellAbilityAi {
                     if (!s.getRestrictions().checkTimingRestrictions(c, s))
                         continue;
                     if (sa.hasParam("WithoutManaCost")) {
+                        // Try to avoid casting instants and sorceries with X in their cost, since X will be assumed to be 0.
+                        if (!(spell instanceof SpellPermanent)) {
+                            if (spell.getPayCosts() != null
+                                    && spell.getPayCosts().getCostMana() != null
+                                    && spell.getPayCosts().getCostMana().getMana().countX() > 0) {
+                                continue;
+                            }
+                        }
+
                         spell = (Spell) spell.copyWithNoManaCost();
                     } else if (sa.hasParam("PlayCost")) {
                         Cost abCost;
@@ -149,6 +175,13 @@ public class PlayAi extends SpellAbilityAi {
                         spell = (Spell) spell.copyWithDefinedCost(abCost);
                     }
                     if( AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !isOptional, true)) {
+                        // Before accepting, see if the spell has a valid number of targets (it should at this point).
+                        // Proceeding past this point if the spell is not correctly targeted will result
+                        // in "Failed to add to stack" error and the card disappearing from the game completely.
+                        if (!spell.isTargetNumberValid()) {
+                            return false;
+                        }
+
                         return true;
                     }
                 }

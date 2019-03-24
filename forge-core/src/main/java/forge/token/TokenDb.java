@@ -2,7 +2,9 @@ package forge.token;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.CardRules;
 import forge.item.PaperToken;
 
 import java.util.*;
@@ -39,13 +41,19 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
-        try {
-            PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition));
-            // TODO Cache the token after it's referenced
-            return pt;
-        } catch(Exception e) {
-            return null;
+        String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
+
+        if (!tokensByName.containsKey(fullName)) {
+            try {
+                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition), tokenName);
+                tokensByName.put(fullName, pt);
+                return pt;
+            } catch(Exception e) {
+                throw e;
+            }
         }
+
+        return tokensByName.get(fullName);
     }
 
     @Override

@@ -441,48 +441,28 @@ public class CardDetailUtil {
             area.append(")");
         }
 
-        // equipping
-        if (card.getEquipping() != null) {
+        // a card has something attached to it
+        if (card.hasCardAttachments()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Equipping ");
-            area.append(card.getEquipping());
+            area.append("=Attached: ");
+            area.append(StringUtils.join(card.getAttachedCards(), ", "));
             area.append("=");
         }
 
-        // equipped by
-        if (card.isEquipped()) {
+        // a card is attached to something
+        if (card.getAttachedTo() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Equipped by ");
-            area.append(StringUtils.join(card.getEquippedBy(), ", "));
-            area.append("=");
+            area.append("*Attached to ").append(card.getAttachedTo()).append("*");
         }
-
-        // enchanting
-        if (card.getEnchantingCard() != null) {
+        if (card.getEnchantedPlayer() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Enchanting ").append(card.getEnchantingCard()).append("*");
-        }
-        if (card.getEnchantingPlayer() != null) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("*Enchanting ").append(card.getEnchantingPlayer()).append("*");
-        }
-
-        // enchanted by
-        if (card.isEnchanted()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("*Enchanted by ");
-            area.append(StringUtils.join(card.getEnchantedBy(), ", "));
-            area.append("*");
+            area.append("*Enchanting ").append(card.getEnchantedPlayer()).append("*");
         }
 
         // controlling

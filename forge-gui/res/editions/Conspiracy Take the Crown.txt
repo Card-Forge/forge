@@ -230,3 +230,17 @@ Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Dr
 219 R Exotic Orchard
 220 U Rogue's Passage
 221 U Shimmering Grotto
+
+[tokens]
+spitting_slime
+w_1_1_soldier
+w_1_2_soldier_defender
+w_1_1_spirit_flying
+b_1_1_assassin_deathtouch_haste
+b_2_2_zombie
+r_5_5_dragon_flying
+r_1_1_goblin_noblock
+r_8_8_lizard
+g_3_3_beast
+g_1_1_insect
+c_1_1_a_construct_defender

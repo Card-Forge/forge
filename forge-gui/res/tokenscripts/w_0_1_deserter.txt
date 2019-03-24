@@ -1,0 +1,6 @@
+Name:Deserter
+ManaCost:no cost
+Types:Creature Deserter
+Colors:white
+PT:0/1
+Oracle:

@@ -1,0 +1,6 @@
+[format]
+Name:Shadows over Innistrad Block, Shadows over Innistrad
+Type:Historic
+Subtype:Block
+Effective:2016-04-08
+Sets:SOI

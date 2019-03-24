@@ -1,0 +1,7 @@
+[format]
+Name:Brawl
+Order:101
+Type:Casual
+Subtype:Commander
+Sets:XLN, RIX, DOM, M19, G18, GRN, RNA
+Banned:Sorcerous Spyglass

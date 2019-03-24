@@ -9,7 +9,7 @@ import java.awt.*;
 
 @SuppressWarnings("serial")
 public class FTitleBar extends FTitleBarBase {
-    private static final FSkin.SkinFont skinFont = FSkin.getFont(12);
+    private static final FSkin.SkinFont skinFont = FSkin.getFont();
 
     private final SkinnedLabel lblTitle = new SkinnedLabel();
 

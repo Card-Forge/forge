@@ -86,3 +86,7 @@ Type=Duel_Decks
 47 C Vithian Stinger
 4 U Wall of Omens
 23 U Zealous Persecution
+
+[tokens]
+w_1_1_spirit_flying
+b_1_1_vampire_lifelink

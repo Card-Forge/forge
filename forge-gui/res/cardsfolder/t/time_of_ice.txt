@@ -6,4 +6,5 @@ SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target crea
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilLoseControlOfHost$ True
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.tapped | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all tapped creatures to their owners' hands.
 SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Tap target creature an opponent controls. It doesn't untap during its controller's untap step for as long as you control Time of Ice.\nIII — Return all tapped creatures to their owners' hands.

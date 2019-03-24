@@ -317,3 +317,7 @@ R Winter Orb
 U Wooden Sphere
 R Wrath of God
 R Zombie Master
+
+[tokens]
+wasp
+c_5_5_a_djinn_flying

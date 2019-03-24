@@ -1,0 +1,9 @@
+Name:Lena, Selfless Champion|Deck:Lena, Selfless Champion.dck|Variant:Commander|Avatar:Lena, Selfless Champion|Desc:
+Name:Baird, Steward of Argive|Deck:Baird, Steward of Argive.dck|Variant:Commander|Avatar:Baird, Steward of Argive|Desc:
+Name:Lyra Dawnbringer|Deck:Lyra Dawnbringer.dck|Variant:Commander|Avatar:Lyra Dawnbringer|Desc:
+Name:Kwende, Pride of Femeref|Deck:Kwende, Pride of Femeref.dck|Variant:Commander|Avatar:Kwende, Pride of Femeref|Desc:
+Name:Ajani, Wise Counselor|Deck:Ajani, Wise Counselor.dck|Variant:Planeswalker|Avatar:Ajani, Wise Counselor|Desc:
+Name:Danitha Capashen, Paragon|Deck:Danitha Capashen, Paragon.dck|Variant:Commander|Avatar:Danitha Capashen, Paragon|Desc:
+Name:Evra, Halcyon Witness|Deck:Evra, Halcyon Witness.dck|Variant:Commander|Avatar:Evra, Halcyon Witness|Desc:
+Name:Mishra|Deck:Mishra.dck|Variant:Vanguard|Avatar:Mishra|Desc:
+Name:Random New Benalia|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

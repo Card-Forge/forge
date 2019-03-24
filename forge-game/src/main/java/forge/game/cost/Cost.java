@@ -98,6 +98,8 @@ public class Cost implements Serializable {
         return true;
     }
 
+
+    @SuppressWarnings("unchecked")
     public <T extends CostPart> T getCostPartByType(Class<T> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
@@ -933,6 +935,22 @@ public class Cost implements Serializable {
         }
 
         return true;
+    }
+
+    public boolean hasXInAnyCostPart() {
+        boolean xCost = false;
+        for (CostPart p : this.getCostParts()) {
+            if (p instanceof CostPartMana) {
+                if (((CostPartMana) p).getAmountOfX() > 0) {
+                    xCost = true;
+                    break;
+                }
+            } else if (p.getAmount().equals("X")) {
+                xCost = true;
+                break;
+            }
+        }
+        return xCost;
     }
 
     public static final Cost Zero = new Cost(0);

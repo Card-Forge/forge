@@ -2,7 +2,8 @@ package forge.quest;
 
 public enum StartingPoolType {
     Complete("Unrestricted"),
-    Rotating("Sanctioned format"),
+    Sanctioned("Sanctioned format"),
+    Casual("Casual/Historic format"),
     CustomFormat("Custom format"),
     Precon("Event or starter deck"),
     SealedDeck("My sealed deck"),

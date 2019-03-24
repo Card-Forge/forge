@@ -7,7 +7,7 @@ Wins=40
 Card Reward=33% duplicate card;3 rares;33% 1 black rare;33% 1 green rare; 33% Grave Pact|10E
 Credit Reward=500
 HumanExtras=
-AIExtras=Grave Pact|10E
+AIExtras=Grave Pact
 
 [metadata]
 Name=quest5004

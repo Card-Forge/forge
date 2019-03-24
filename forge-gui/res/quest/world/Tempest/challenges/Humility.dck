@@ -1,0 +1,23 @@
+[quest]
+id=TempestQuest10
+OpponentName=God of Thunder
+AILife=60
+HumanLife=10
+Repeat=true
+Wins=40
+Card Reward=3 red rares;booster pack STH
+Credit Reward=700
+Ticket Reward=true
+AIExtras=Humility
+HumanExtras=
+[metadata]
+Title=God of Thunder
+Icon=Dungeon Crawling Red.jpg
+Difficulty=hard
+Description=You are in front of the God of Thunder, show some respect!
+Deck Type=constructed
+Name=Humility
+[Main]
+25 Mountain
+30 Lightning Blast
+5 Lightning Elemental

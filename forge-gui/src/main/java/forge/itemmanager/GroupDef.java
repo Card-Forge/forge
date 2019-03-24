@@ -103,8 +103,9 @@ public enum GroupDef {
                     return -1;
                 }
             }),
+
     CARD_TYPE("Type",
-            new String[] { "Creatures", "Artifacts", "Enchantments", "Planeswalkers", "Instants", "Sorceries", "Lands" },
+            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -119,27 +120,60 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isCreature()) { //make Artifact and Land Creatures appear in Creatures group
+                        if (type.isPlaneswalker()) {
                             return 0;
                         }
-                        if (type.isLand()) { //make Artifact Lands appear in Lands group
-                            return 6;
-                        }
-                        if (type.isArtifact()) {
+                        if (type.isCreature()) {
                             return 1;
                         }
-                        if (type.isEnchantment()) {
-                            return 2;
-                        }
-                        if (type.isPlaneswalker()) {
-                            return 3;
+                        if (type.isTribal() && type.isInstant()) {
+                            return 7;
                         }
                         if (type.isInstant()) {
-                            return 4;
+                            return 3;
                         }
                         if (type.isSorcery()) {
+                            return 2;
+                        }
+                        if (type.isArtifact()) {
+                            return 4;
+                        }
+                        if (type.isEnchantment()) {
                             return 5;
                         }
+                        if (type.isLand()) {
+                            return 6;
+                        }
+                    }
+                    return -1;
+                }
+            }),
+    PW_DECK_SORT("Planeswalker Deck Sort",
+            new String[] { "Planeswalker", "Rares", "Creature", "Land", "Other Spells" },
+            new Function<Integer, ColumnDef>() {
+                @Override
+                public ColumnDef apply(final Integer groupIndex) {
+                    return null;
+                }
+            },
+            new Function<InventoryItem, Integer>() {
+                @Override
+                public Integer apply(final InventoryItem item) {
+                    if (item instanceof PaperCard) {
+                        CardType type = ((PaperCard) item).getRules().getType();
+                        if (type.isPlaneswalker()){
+                            return 0;
+                        }
+                        if (((PaperCard) item).getRarity().toString() == "R"){
+                            return 1;
+                        }
+                        if (type.isCreature()){
+                            return 2;
+                        }
+                        if (type.isLand()){
+                            return 3;
+                        }
+                        return 4;
                     }
                     return -1;
                 }

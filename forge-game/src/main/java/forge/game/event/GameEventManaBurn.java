@@ -1,8 +1,11 @@
 package forge.game.event;
 
+import forge.game.player.Player;
+
 // This special event denotes loss of mana due to phase end
 public class GameEventManaBurn extends GameEvent {
     
+    public final Player player;
     public final boolean causedLifeLoss;
     public final int amount;
     
@@ -11,8 +14,9 @@ public class GameEventManaBurn extends GameEvent {
      * @param dealDamage 
      * @param burn 
      */
-    public GameEventManaBurn(int burn, boolean dealDamage) {
-        amount = burn;
+    public GameEventManaBurn(Player who, int burn, boolean dealDamage) {
+        player = who;
+    	amount = burn;
         causedLifeLoss = dealDamage;
     }
     

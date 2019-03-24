@@ -1,9 +1,6 @@
 package forge.game;
 
-import java.util.List;
-
 import com.google.common.collect.Iterables;
-
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;
@@ -21,6 +18,8 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
+
+import java.util.List;
 
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
@@ -127,7 +126,9 @@ public class GameView extends TrackableObject {
     void updateGameOver(final Game game) {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
-        set(TrackableProperty.WinningPlayerName, game.getOutcome().getWinningLobbyPlayer().getName());
+        if (game.getOutcome() != null && game.getOutcome().getWinningLobbyPlayer() != null) {
+            set(TrackableProperty.WinningPlayerName, game.getOutcome().getWinningLobbyPlayer().getName());
+        }
         set(TrackableProperty.WinningTeam, game.getOutcome() == null ? -1 : game.getOutcome().getWinningTeam());
     }
 
@@ -206,6 +207,6 @@ public class GameView extends TrackableObject {
     }
 
     public AnteResult getAnteResult(PlayerView player) {
-        return game.getOutcome().anteResult.get(game.getPlayer(player));
+        return game.getOutcome().anteResult.get(game.getPlayer(player).getRegisteredPlayer());
     }
 }

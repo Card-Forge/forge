@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ X | References$ X | SpellDescription$Counter target instant or sorcery spell unless its controller pays {X}, where X is Mausoleum Wanderer's power.
 SVar:X:Count$CardPower
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:BuffedBy:Spirit
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_wanderer.jpg

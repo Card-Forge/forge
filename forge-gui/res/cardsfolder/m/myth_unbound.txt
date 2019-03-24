@@ -1,0 +1,9 @@
+Name:Myth Unbound
+ManaCost:2 G
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Card.IsCommander+YouOwn | Type$ Spell | Amount$ AffectedX | Description$ Your commander costs {1} less to cast for each time it's been cast from the command zone this game.
+T:Mode$ ChangesZone | ValidCard$ Card.IsCommander+YouOwn | Origin$ Any | Destination$ Command | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever your commander is put into the command zone from anywhere, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:AffectedX:Count$CommanderCastFromCommandZone
+AI:RemoveDeck:Random
+Oracle:Your commander costs {1} less to cast for each time it's been cast from the command zone this game.\nWhenever your commander is put into the command zone from anywhere, draw a card.

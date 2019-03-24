@@ -21,6 +21,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -585,7 +586,7 @@ public class ComputerUtilCard {
     
             // Add all cost of all auras with the same controller
             if (card.isEnchanted()) {
-                final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(false), card.getController());
+                final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
                 curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
             }
     
@@ -833,7 +834,7 @@ public class ComputerUtilCard {
             int score = tmp.isTapped() ? 2 : 0;
             score += tmp.isBasicLand() ? 1 : 0;
             score -= tmp.isCreature() ? 4 : 0;
-            for (Card aura : tmp.getEnchantedBy(false)) {
+            for (Card aura : tmp.getEnchantedBy()) {
             	if (aura.getController().isOpponentOf(tmp.getController())) {
             		score += 5;
             	} else {
@@ -857,7 +858,7 @@ public class ComputerUtilCard {
             int score = tmp.isTapped() ? 0 : 2;
             score += tmp.isBasicLand() ? 2 : 0;
             score -= tmp.isCreature() ? 4 : 0;
-            score -= 5 * tmp.getEnchantedBy(false).size();
+            score -= 5 * tmp.getEnchantedBy().size();
 
             if (score >= maxScore) {
                 land = tmp;
@@ -1033,7 +1034,7 @@ public class ComputerUtilCard {
         // interrupt 3:  two for one = good
         if (c.isEnchanted()) {
             boolean myEnchants = false;
-            for (Card enc : c.getEnchantedBy(false)) {
+            for (Card enc : c.getEnchantedBy()) {
                 if (enc.getOwner().equals(ai)) {
                     myEnchants = true;
                     break;
@@ -1081,7 +1082,7 @@ public class ComputerUtilCard {
             valueTempo *= 2;    //deal with annoying things
         }
         if (!destination.equals(ZoneType.Graveyard) &&  //TODO:boat-load of "when blah dies" triggers
-                c.hasKeyword("Persist") || c.hasKeyword("Undying") || c.hasKeyword("Modular")) {
+                c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING) || c.hasKeyword(Keyword.MODULAR)) {
             valueTempo *= 2;
         }
         if (destination.equals(ZoneType.Hand) && !c.isToken()) {
@@ -1311,10 +1312,22 @@ public class ComputerUtilCard {
             
             //2. grant haste
             if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
-                chance += 0.5f;
-                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
+                double nonCombatChance = 0.0f;
+                double combatChance = 0.0f;
+                // non-combat Haste: has an activated ability with tap cost
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    Cost abCost = ab.getPayCosts();
+                    if (abCost != null && abCost.hasTapCost()
+                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0))) {
+                        nonCombatChance += 0.5f;
+                        break;
+                    }
                 }
+                // combat Haste: only grant it if the creature will attack
+                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    combatChance += 0.5f + (0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife());
+                }
+                chance += nonCombatChance + combatChance;
             }
             
             //3. grant evasive
@@ -1358,8 +1371,9 @@ public class ComputerUtilCard {
             
             //1. save combatant
             if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie 
-                    && !c.hasKeyword("Indestructible")) {   // hack because attackerWouldBeDestroyed() does not
-                                                            // check for Indestructible when computing lethal damage
+                    && !c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                // hack because attackerWouldBeDestroyed()
+                // does not check for Indestructible when computing lethal damage
                 return true;
             }
             
@@ -1396,17 +1410,17 @@ public class ComputerUtilCard {
                 int poisonPumped = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
 
                 // predict Infect
-                if (pumpedDmg == 0 && c.hasKeyword("Infect")) {
+                if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
                     if (poisonPumped > poisonOrig) {
                         pumpedDmg = poisonPumped;
                     }
                 }
 
                 if (combat.isBlocked(c)) {
-                    if (!c.hasKeyword("Trample")) {
+                    if (!c.hasKeyword(Keyword.TRAMPLE)) {
                         dmg = 0;
                     }
-                    if (c.hasKeyword("Trample") || keywords.contains("Trample")) {
+                    if (c.hasKeyword(Keyword.TRAMPLE) || keywords.contains("Trample")) {
                        for (Card b : combat.getBlockers(c)) {
                            pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
                        }
@@ -1415,8 +1429,8 @@ public class ComputerUtilCard {
                     }
                 }
                 if (pumpedDmg > dmg) {
-                    if ((!c.hasKeyword("Infect") && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword("Infect") && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())) {
+                    if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())) {
                         return true;
                     }
                 }
@@ -1425,7 +1439,7 @@ public class ComputerUtilCard {
                 if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && pumpedDmg > dmg) {
                     int totalPowerUnblocked = 0;
                     for (Card atk : combat.getAttackers()) {
-                        if (combat.isBlocked(atk) && !atk.hasKeyword("Trample")) {
+                        if (combat.isBlocked(atk) && !atk.hasKeyword(Keyword.TRAMPLE)) {
                             continue;
                         }
                         if (atk == c) {
@@ -1458,7 +1472,7 @@ public class ComputerUtilCard {
             }
             
             //4. lifelink
-            if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
+            if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword(Keyword.LIFELINK) && keywords.contains("Lifelink")
                     && (combat.isAttacking(c) || combat.isBlocking(c))) {
                 int dmg = pumped.getNetCombatDamage();
                 //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
@@ -1471,14 +1485,22 @@ public class ComputerUtilCard {
                 List<Card> blockedBy = combat.getAttackersBlockedBy(c);
                 boolean attackerHasTrample = false;
                 for (Card b : blockedBy) {
-                    attackerHasTrample |= b.hasKeyword("Trample");
+                    attackerHasTrample |= b.hasKeyword(Keyword.TRAMPLE);
                 }
                 if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat))) {
                     return true;
                 }
             }
         }
-        
+
+        if ("UntapCombatTrick".equals(sa.getParam("AILogic")) && c.isTapped()) {
+            if (phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.getPlayerTurn().isOpponentOf(ai)) {
+                chance += 0.5f; // this creature will untap to become a potential blocker
+            } else if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)) {
+                chance += 1.0f; // untap after tapping for attack
+            }
+        }
+
         if (isBerserk) {
             // if we got here, Berserk will result in the pumped creature dying at EOT and the opponent will not lose
             // (other similar cards with AILogic$ Berserk that do not die only when attacking are excluded from consideration)
@@ -1491,7 +1513,7 @@ public class ComputerUtilCard {
             }
         }
 
-        boolean wantToHoldTrick = holdCombatTricks;
+        boolean wantToHoldTrick = holdCombatTricks && !ai.getCardsIn(ZoneType.Hand).isEmpty();
         if (chanceToHoldCombatTricks >= 0) {
             // Obey the chance specified in the AI profile for holding combat tricks
             wantToHoldTrick &= MyRandom.percentTrue(chanceToHoldCombatTricks);
@@ -1507,14 +1529,18 @@ public class ComputerUtilCard {
                // Attempt to hold combat tricks until blockers are declared, and try to lure the opponent into blocking
                // (The AI will only do it for one attacker at the moment, otherwise it risks running his attackers into
                // an army of opposing blockers with only one combat trick in hand)
-               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
-               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                // Reserve the mana until Declare Blockers such that the AI doesn't tap out before having a chance to use
                // the combat trick
+               boolean reserved = false;
                if (ai.getController().isAI()) {
-                   ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
+                   reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
+                   // Only proceed with this if we could actually reserve mana
+                   if (reserved) {
+                       AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+                       AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
+                       return false;
+                   }
                }
-               return false;
            } else {
                // Don't try to mix "lure" and "precast" paradigms for combat tricks, since that creates issues with
                // the AI overextending the attack
@@ -1572,10 +1598,10 @@ public class ComputerUtilCard {
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
-        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), c, true);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
@@ -1595,7 +1621,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, Lists.<KeywordInterface>newArrayList(), false, timestamp2, true);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, true);
         ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
@@ -1615,6 +1641,7 @@ public class ComputerUtilCard {
         if (exclude != null) {
             list.removeAll(exclude);
         }
+        list.add(vCard); // account for the static abilities that may be present on the card itself
         for (final Card c : list) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -1622,6 +1649,9 @@ public class ComputerUtilCard {
                     continue;
                 }
                 if (!params.containsKey("Affected")) {
+                    continue;
+                }
+                if (!params.containsKey("AddPower") && !params.containsKey("AddToughness")) {
                     continue;
                 }
                 final String valid = params.get("Affected");
@@ -1713,10 +1743,10 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
-        if (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) {
+        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) {
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
             return true;
         }
         return false;
@@ -1781,15 +1811,20 @@ public class ComputerUtilCard {
 
         CardCollection priorityCards = new CardCollection();
         for (Card atk : oppCards) {
+            boolean canBeBlocked = false;
             if (isUselessCreature(atk.getController(), atk)) {
                 continue;
             }
             for (Card blk : aiCreats) {
-                if (!CombatUtil.canBlock(atk, blk, true)) {
-                    boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
-                    if (!priorityRemovalOnlyInDanger || threat) {
-                        priorityCards.add(atk);
-                    }
+                if (CombatUtil.canBlock(atk, blk, true)) {
+                    canBeBlocked = true;
+                    break;
+                }
+            }
+            if (!canBeBlocked) {
+                boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
+                if (!priorityRemovalOnlyInDanger || threat) {
+                    priorityCards.add(atk);
                 }
             }
         }
@@ -1839,5 +1874,14 @@ public class ComputerUtilCard {
         }
 
         return AiPlayDecision.WillPlay;
+    }
+
+    // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.
+    // Includes a NPE guard on getRules() which might otherwise be tripped on some cards (e.g. tokens).
+    public static boolean isCardRemAIDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemAIDecks();
+    }
+    public static boolean isCardRemRandomDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemRandomDecks();
     }
 }

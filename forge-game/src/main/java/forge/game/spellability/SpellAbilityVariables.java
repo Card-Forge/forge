@@ -76,7 +76,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
         this.shareAllColors = sav.getShareAllColors();
-        this.prowlTypes = Lists.newArrayList(sav.getProwlTypes());
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
         this.presentDefined = sav.getPresentDefined();
@@ -157,9 +156,6 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean blessing = false;
 
     private boolean allTargetsLegal = false;
-
-    /** The prowl. */
-    private List<String> prowlTypes = Lists.newArrayList();
 
     /** The s is present. */
     private String isPresent = null;
@@ -497,19 +493,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.allTargetsLegal = allTargets;
     }
 
-
-    /**
-     * <p>
-     * Setter for the field <code>prowl</code>.
-     * </p>
-     * 
-     * @param types
-     *            the new prowl
-     */
-    public final void setProwlTypes(final List<String> types) {
-        this.prowlTypes = types;
-    }
-
     // IsPresent for Valid battlefield stuff
 
     /**
@@ -717,15 +700,6 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final boolean isPlayerTurn() {
         return this.playerTurn;
-    }
-
-    /**
-     * Gets the prowl.
-     * 
-     * @return the prowl
-     */
-    public final List<String> getProwlTypes() {
-        return this.prowlTypes;
     }
 
     /**

@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ Draw | Cost$ 2 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each Human you control.
 SVar:X:Count$TypeYouCtrl.Human
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_appeal.jpg
 Oracle:Draw a card for each Human you control.

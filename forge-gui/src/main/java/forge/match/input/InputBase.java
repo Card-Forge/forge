@@ -144,7 +144,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SHOW_STORM_COUNT_IN_PROMPT)) {
             int stormCount = game.getView().getStormCount();
             if (stormCount > 0) {
-                sb.append("\n").append("Storm Count: ").append(stormCount).append("\n");
+                sb.append("\n").append("Storm Count: ").append(stormCount);
             }
         }
         return sb.toString();

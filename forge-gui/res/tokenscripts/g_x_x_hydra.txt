@@ -1,0 +1,6 @@
+Name:Hydra
+Colors:green
+ManaCost:no cost
+PT:*/*
+Types:Creature Hydra
+Oracle:

@@ -8,6 +8,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -109,7 +110,7 @@ public class DestroyAi extends SpellAbilityAi {
                     return false;
                 }
                 for (Card c : list) {
-                    if (c.hasKeyword("Indestructible")) {
+                    if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                         sa.getTargets().add(c);
                         return true;
                     }
@@ -133,7 +134,7 @@ public class DestroyAi extends SpellAbilityAi {
             // Filter AI-specific targets if provided
             list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
 
-            list = CardLists.getNotKeyword(list, "Indestructible");
+            list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
@@ -160,7 +161,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return false;
                         }
                         //Check for undying
-                        return (!c.hasKeyword("Undying") || c.getCounters(CounterType.P1P1) > 0);
+                        return (!c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterType.P1P1) > 0);
                     }
                 });
             }
@@ -177,6 +178,8 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
+            // Try to avoid targeting creatures that are dead on board
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
             if (list.isEmpty()) {
                 return false;
             }
@@ -270,7 +273,7 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     // Don't destroy stolen permanents when the stealing aura can be destroyed
                     if (choice.getOwner() == ai) {
-                        for (Card aura : choice.getEnchantedBy(false)) {
+                        for (Card aura : choice.getEnchantedBy()) {
                             SpellAbility sp = aura.getFirstSpellAbility();
                             if (sp != null && "GainControl".equals(sp.getParam("AILogic"))
                                 && aura.getController() != ai && sa.canTarget(aura)) {
@@ -294,7 +297,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             if (list.isEmpty()
                 || !CardLists.filterControlledBy(list, ai).isEmpty()
-                || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
+                || CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
                 return false;
             }
         }
@@ -312,11 +315,14 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 
+            // Try to avoid targeting creatures that are dead on board
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
+
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;
             }
 
-            CardCollection preferred = CardLists.getNotKeyword(list, "Indestructible");
+            CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
             if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
                 preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred, false);

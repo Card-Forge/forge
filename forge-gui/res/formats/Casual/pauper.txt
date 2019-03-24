@@ -1,0 +1,6 @@
+[format]
+Name:Pauper
+Order:108
+Subtype:Custom
+Type:Casual
+Rarities:L, C

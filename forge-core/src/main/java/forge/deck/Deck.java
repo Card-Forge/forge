@@ -292,16 +292,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     @Override
-    public void importDeck(Deck deck) {
-        deck.loadDeferredSections();
-
-        for (DeckSection section: deck.parts.keySet()) {
-            this.putSection(section, deck.get(section));
-        }
+    public String getImageKey(boolean altState) {
+        return null;
     }
 
     @Override
-    public String getImageKey(boolean altState) {
-        return null;
+    public Deck getHumanDeck() {
+        return this;
     }
 }

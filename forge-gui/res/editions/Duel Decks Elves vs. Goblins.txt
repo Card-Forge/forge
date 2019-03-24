@@ -1,9 +1,8 @@
 [metadata]
-Code=EVG
+Code=DD1
 Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
-Code2=EVG
-MciCode=evg
+MciCode=dd1
 Type=Duel_Decks
 
 [cards]
@@ -72,3 +71,8 @@ C Goblin
 17 U Wirewood Symbiote
 18 C Wood Elves
 19 U Wren's Run Vanquisher
+
+[tokens]
+r_1_1_goblin
+g_7_7_elemental_trample
+g_1_1_elf_warrior

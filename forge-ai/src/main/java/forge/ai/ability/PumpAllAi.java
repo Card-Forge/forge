@@ -14,6 +14,8 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -36,6 +38,15 @@ public class PumpAllAi extends PumpAiBase {
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final Cost abCost = sa.getPayCosts();
+        final String logic = sa.getParamOrDefault("AILogic", "");
+
+        if (logic.equals("UntapCombatTrick")) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            if (!(ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)
+                    || (!ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)))) {
+                return false;
+            }
+        }
 
         final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
@@ -85,7 +96,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
                     }
                 }); // leaves all creatures that will be destroyed
                 human = CardLists.filter(human, new Predicate<Card>() {
@@ -94,7 +105,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
                     }
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end

@@ -1,0 +1,6 @@
+Name:Kavu
+ManaCost:no cost
+Types:Creature Kavu
+Colors:black
+PT:3/3
+Oracle:

@@ -1,10 +1,10 @@
 [duel]
 [metadata]
 Name=ARN 2 Gimmick: No Life
-Title=No Life
+Title=Quicksilver Ali
 Difficulty=medium
-Description="How do you kill that which has no life?" -South Park s10e08: Make Love, Not Warcraft
-Icon=Dungeon Crawling Gold.jpg
+Description=There lived once at Cairo a sharper named Ali, for whom the Master of Police used to set snares and think that he had fallen therein; but, when they sought for him, they found that he had fled like quicksilver.
+Icon=No Life.jpg
 Deck Type=constructed
 [Main]
 4 Ali from Cairo|ARN

@@ -25,7 +25,7 @@ humanlibrary=
 
 humangraveyard=
 
-humanbattlefield=Llanowar Druid|Set:WTH; Gustrider Exuberant|Set:ALA; Herd Gnarr|Set:TSP; Waker of the Wilds|Set:XLN; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH|Id:141; Wild Growth|Set:7ED|Attaching:141; Forest|Set:AKH; Forest|Set:AKH; Forest|Set:AKH
+humanbattlefield=Llanowar Druid|Set:WTH; Gustrider Exuberant|Set:ALA; Herd Gnarr|Set:TSP; Waker of the Wilds|Set:XLN; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH|Id:141; Wild Growth|Set:7ED|AttachedTo:141; Forest|Set:AKH; Forest|Set:AKH; Forest|Set:AKH
 
 humanexile=
 

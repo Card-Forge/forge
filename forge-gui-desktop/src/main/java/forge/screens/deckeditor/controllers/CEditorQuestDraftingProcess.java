@@ -29,8 +29,11 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
@@ -57,7 +60,10 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = "Add card";
-    private DragCell allDecksParent = null;
+    private DragCell constructedDecksParent = null;
+    private DragCell commanderDecksParent = null;
+    private DragCell brawlDecksParent = null;
+    private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
 
@@ -270,15 +276,21 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         getBtnRemove().setVisible(false);
         getBtnRemove4().setVisible(false);
 
-        getBtnCycleSection().setVisible(false);
+        getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
+        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
+        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
         getCatalogManager().setAllowMultipleSelections(false);
+
+        // this appears to be needed to actually show the available draft choices
+        getCatalogManager().refresh();
     }
 
     /* (non-Javadoc)
@@ -316,8 +328,17 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
         }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        if (constructedDecksParent != null) {
+            constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+        if (commanderDecksParent != null) {
+            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
+        }
+        if (brawlDecksParent!= null) {
+            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
+        }
+        if (tinyLeadersDecksParent != null) {
+            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
 
         // set catalog table back to free-selection mode

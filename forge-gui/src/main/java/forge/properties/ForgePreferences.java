@@ -70,6 +70,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_CARD_MANA_COST ("true"),
         UI_OVERLAY_CARD_ID ("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("false"),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
@@ -124,7 +125,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
-
+        UI_DEFAULT_FONT_SIZE("12"),
+    	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
@@ -135,6 +137,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         /** This is used to disable the future version compatibility warning dialog for Java 8. */
         //TODO This should be removed after the update that requires Java 8.
         DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
+
+        USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
@@ -153,12 +157,15 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_UTILITIES ("false"),
 
         ENFORCE_DECK_LEGALITY ("true"),
+        PERFORMANCE_MODE ("false"),
+        FILTERED_HANDS ("false"),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
+        LOAD_HISTORIC_FORMATS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),
