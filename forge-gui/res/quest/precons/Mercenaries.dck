@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mercenaries
-Description=With "Mercenaries" you enlist an infantry of vile fiends to do your bidding. Where there is one, there are many as you use these creatures' recruiting ability to spawn other monstrosities until the victory is secured.
+Description=With "Mercenaries," you enlist an infantry of vile fiends to do your bidding. Where there is one, there are many as you use these creatures' recruiting ability to spawn other monstrosities until the victory is secured.
 Deck Type=constructed
 Set=NMS
 Image=mercenaries.jpg
