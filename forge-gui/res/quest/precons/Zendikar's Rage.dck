@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Zendikar's Rage
-Description=Battle for Zendikar Red/Green Intro Deck
+Description=Zendikar's inhabitants are ready to meet the Eldrazi head-on, and they'll have help from the plane itself. Your cards with landfill abilities provide bonuses every time a land enters the battlefield under your control!
 Deck Type=constructed
 Set=BFZ
 Image=zendikars_rage.jpg
@@ -23,7 +23,7 @@ Image=zendikars_rage.jpg
 1 Murasa Ranger|BFZ
 1 Grove Rumbler|BFZ
 2 Territorial Baloth|BFZ
-1 Oran-Rief Hydra|BFZ
+1 Oran-Rief Hydra+|BFZ
 2 Seek the Wilds|BFZ
 2 Sylvan Scrying|BFZ
 1 Reclaiming Vines|BFZ
