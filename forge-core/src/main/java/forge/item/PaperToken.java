@@ -110,7 +110,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         this.name = c.getName();
         this.edition = edition0;
 
-        if (edition.getTokens().containsKey(imageFileName)) {
+        if (edition != null && edition.getTokens().containsKey(imageFileName)) {
             this.artIndex = edition.getTokens().get(imageFileName);
         }
 
@@ -121,7 +121,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
 
             this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
-            for(int idx = 1; idx < this.artIndex; idx++) {
+            for(int idx = 2; idx <= this.artIndex; idx++) {
                 this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
             }
         }
