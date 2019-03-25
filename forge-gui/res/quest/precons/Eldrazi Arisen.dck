@@ -6,7 +6,7 @@ MaxDifficulty=5
 
 [metadata]
 Name=Eldrazi Arisen
-Description=The "Eldrazi Arisen" deck puts you in command of the Eldrazi, an ancient race of behemoths that has awoken and begun to terrorize the inhabitants of Zendikar. The stars of your deck are Ulamog's Crusher, Hand of Emrakul, and Pathrazer of Ulamog. Each of these Eldrazi creatures is 7/7 or larger, and all have the annihilator ability that forces an opponent to sacrifice a number of permanents every time you attack with them. Your goal is to cast them as quickly as possible and then ride them to victory.
+Description=Use Eldrazi Spawn tokens to summon enormous Eldrazi, those world-eating titans that are the scourge of Zendikar. Then use Conquering Manticore to steal your opponent's creature and leave the way open for your assault.
 Deck Type=constructed
 Set=ROE
 Image=eldrazi_arisen.jpg
@@ -16,7 +16,7 @@ Image=eldrazi_arisen.jpg
 8  Mountain|ZEN
 
 1  Akoum Boulderfoot|ROE
-1  Conquering Manticore|ROE
+1  Conquering Manticore+|ROE
 1  Daggerback Basilisk|ROE
 1  Goblin Piker|M10
 1  Hand of Emrakul|ROE
