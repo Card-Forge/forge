@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Battle Blitz
-Description=At first, the "Battle Blitz" deck looks like a classic red-white deck. It's got some low-cost attackers, it's got some creatures with first strike (or, in the case of Hearthfire Hobgoblin, double strike), and it's got some burn spells. But then it starts getting tricky!
+Description=You'll start with a classic rush strategy: flood the board with ferocious fighters as fast as you can. Then the big guns kick in. A barrage of burn clears the way for your army, and then a rapid-fire blitz of tricky tap-untap combinations clinches the victory.
 Deck Type=constructed
 Set=EVE
 Image=battle_blitz.jpg
