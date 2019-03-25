@@ -8,9 +8,9 @@ Deck Type=constructed
 Set=THS
 Image=anthousas_army.jpg
 Name=Anthousa's Army
-Description=With the "Anthousa's Army" deck, use potent spells to help your heroes find their inner strength and defeat the enemy.
+Description=Come quickly, hero, and gather an army. Cast an arsenal of powerful Auras and spells to pave a path to victory for your numerous warriors!
 [Main]
-1 Anthousa, Setessan Hero|THS
+1 Anthousa, Setessan Hero+|THS
 1 Artisan's Sorrow|THS
 2 Battlewise Valor|THS
 1 Bow of Nylea|THS

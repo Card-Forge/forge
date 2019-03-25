@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Counter Surge
-Description=BG Constrictor Challenger Deck
+Description=Power up your creatures with bonus +1/+1 counters from Winding Constrictor and fill the board with resilient creatures that keep growing bigger. Leverage the counters for both utility and strength, then crush your opponent with your superior resources.
 Deck Type=constructed
 Set=RIX
 Image=counter_surge.jpg

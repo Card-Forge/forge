@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Angelic Might
-Description=The "Angelic Might" deck features, as you'd expect, gigantic flying creatures with awesome abilities. You just need to make sure the game lasts long enough for them to come out!
+Description=Dawn arrives on white wings! The flights of angels under Avacyn's command are your weapons, carrying divine retribution to your enemies. The "Angelic Might" deck unites celestial shepherds and their earthly flock.
 Deck Type=constructed
 Set=AVR
 Image=angelic_might.jpg
@@ -23,7 +23,7 @@ Image=angelic_might.jpg
 2 Emancipation Angel|AVR
 2 Gideon's Lawkeeper|M12
 1 Goldnight Redeemer|AVR
-1 Herald of War|AVR
+1 Herald of War+|AVR
 2 Seraph of Dawn|AVR
 2 Serra Angel|M12
 1 Timberland Guide|AVR

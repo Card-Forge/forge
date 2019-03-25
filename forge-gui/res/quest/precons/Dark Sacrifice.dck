@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dark Sacrifice
-Description=The "Dark Sacrifice" deck rewards you for cleverly and mercilessly sacrificing your own Human creatures to advance your evil agenda. It's got three main parts: cards that like to sacrifice Humans, cards that reward you for sacrificing Humans, and Humans that like to be sacrificed.
+Description=The dark powers require a sacrifice, and now you can satisfy their diabolical demands. Your reward? Power to vanquish even the strongest foes.
 Deck Type=constructed
 Set=DKA
 Image=dark_sacrifice.jpg
@@ -19,7 +19,7 @@ Image=dark_sacrifice.jpg
 2 Elder Cathar|ISD
 2 Elgaud Inquisitor|DKA
 3 Falkenrath Torturer|DKA
-1 Fiend of the Shadows|DKA
+1 Fiend of the Shadows+|DKA
 2 Galvanic Juggernaut|ISD
 1 Mausoleum Guard|ISD
 1 Selfless Cathar|ISD

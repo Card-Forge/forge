@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Cunning Plan
-Description=Cunning Plan Intro Deck
+Description=Patience followed by swift action will be your strategy with this deck. Prepare your forces-- including creatures with the prowess ability-- and then wait for the perfect opportunity to strike. With careful planning, you can win the battle before it's begun.
 Deck Type=constructed
 Set=FRF
 Image=cunning_plan.jpg
@@ -33,7 +33,7 @@ Image=cunning_plan.jpg
 1 Quiet Contemplation|KTK
 1 Refocus|FRF
 1 Riverwheel Aerialists|KTK
-1 Sage-Eye Avengers|FRF
+1 Sage-Eye Avengers+|FRF
 3 Swiftwater Cliffs|FRF
 1 Void Snare|M15
 1 Weave Fate|KTK

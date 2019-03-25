@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Carnival of Blood
-Description=You're the leader of a clan of Vampires. These aren't the brooding, romantic ones that keep popping up in movies, but the real deal: vicious and ready to go on the hunt. 
+Description=Blood is thicker than water-- and far more satisfying! The more blood your vampiric hordes can drink, the more powerful they become. Send waves of vampires to devour your opponent's defenses as you prepare for the lethal bite.
 Deck Type=constructed
 Set=ISD
 Image=carnival_of_blood.jpg
@@ -19,7 +19,7 @@ Image=carnival_of_blood.jpg
 3 Bloodcrazed Neonate|ISD
 1 Child of Night|M12
 2 Crossway Vampire|ISD
-1 Falkenrath Marauders|ISD
+1 Falkenrath Marauders+|ISD
 2 Falkenrath Noble|ISD
 2 Markov Patrician|ISD
 1 Night Revelers|ISD
