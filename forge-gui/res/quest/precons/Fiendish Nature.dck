@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Fiendish Nature
-Description=Uses fast mana sources to power a horde of green uglies with attitude, while a touch of black regrowth keeps the hits coming. 
+Description=Use fast mana sources to power up a horde of big, green uglies with attitude. A touch of black regrowth keeps the hits coming. "Fiendish Nature" will give your game a mean streak.
 Deck Type=constructed
 Set=ULG
 Image=fiendish_nature.jpg

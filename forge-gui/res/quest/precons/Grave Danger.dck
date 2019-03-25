@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Grave Danger
-Description=The "Grave Danger" deck dumps lots of cards into your graveyard. And though you'd expect an Odyssey-block graveyard deck to focus on threshold cards, this one doesn't. Instead it features powerful grave-eating monsters like Psychatog and Organ Grinder. Even if you reach threshold, you won't be there for long.
+Description=Turn your graveyard into a resource. The "Grave Danger" deck makes your opponents pay dearly for each card in your graveyard, leaving their creatures bruised and confused.
 Deck Type=constructed
 Set=TOR
 Image=grave_danger.jpg

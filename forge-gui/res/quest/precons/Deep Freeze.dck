@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Deep Freeze
-Description=The "Deep Freeze" deck is a white/blue control deck with a flying creatures theme.
+Description=On the shadow plane of Rath, the flying ship Weatherlight encounters chilling new forces of magic. "Deep Freeze" uses new Tempest cards to set up your opponent's permanents, then lock them down. When you want to be cold and calculating, bring out the "Deep Freeze."
 Deck Type=constructed
 Set=TMP
 Image=deep_freeze.jpg

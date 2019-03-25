@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Charge of the Boros
-Description=The Charge of the Boros deck shows off what the Boros Legion does well: fight. This fanatical guild merges red's passion and fury with white's battlefield precision to make a sleek fighting force that steamrolls its opposition.
+Description=The Boros guild, the most militant force in Ravnica, is always ready for battle. The radiance mechanic lets them level swaths of the unworthy all at once. And if there isn't a fight to join, they're likely to just start one themselves.
 Deck Type=constructed
 Set=RAV
 Image=charge_of_the_boros.jpg

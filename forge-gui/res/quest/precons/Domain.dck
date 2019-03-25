@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Domain
-Description=A five-color deck without any one land that can produce multiple colors? A deck that's over half lands and land-fetching effects? Can a deck like that work? It can, and the "Domain" deck is a blast to play!
+Description=The "Domain" deck lets you bring out all five basic land types in your first few turns, placing your rivals in dangerous territory. And the more lands you get into play, the nastier your spells become.
 Deck Type=constructed
 Set=PLS
 Image=domain.jpg
