@@ -2,7 +2,7 @@
 Code=MPS_AKH
 Date=2017-04-28
 Name=Masterpiece Series - Amonkhet
-MciCode=mps
+MciCode=mp2
 Type=Other
 
 [cards]
