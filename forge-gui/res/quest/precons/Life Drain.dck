@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Life Drain
-Description=Got a lust for life? Then the "Life Drain" deck is right up your alley! This deck is stuffed with cards that boost your life total, like Recumbent Bliss and Apothecary Initiate. Even better, some of its cards increase your life at your opponent's expense! For example, you'll gain life from the lifelink ability of Voracious Hatchling whenever it deals damage, and Syphon Life lowers your opponent's life as it raises yours.
+Description=He who lives the longest gets the last laugh. Drain your enemy's life total down to nothing while you keep your own comfortably high. Meanwhile you'll lay down the law, punishing any creatures your opponent makes the mistake of putting in your way.
 Deck Type=constructed
 Set=EVE
 Image=life_drain.jpg

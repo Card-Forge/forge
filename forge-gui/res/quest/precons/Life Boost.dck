@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Life Boost
-Description=The "Life Boost" deck lets you build your own army of Soldiers, with Angels to lead them. To win with this deck, play your small creatures as quickly as you can to deal some early damage. If your opponent manages to hold off your attackers, build a strong defense. Then you can start cautiously attacking again to get in those final points of damage.
+Description=Live it up with the "Life Boost" deck. Lay down cards to increase your life total, or use your creatures to hold opposing creatures at bay while you take your opponents apart.
 Deck Type=constructed
 Set=8ED
 Image=life_boost.jpg
