@@ -92,6 +92,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         final Iterable<PaperCard> conspiracies = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.coreType(true, "Conspiracy"), PaperCard.FN_GET_RULES));
         this.draftedConspiracies = Lists.newArrayList(conspiracies);
+        this.aiPlayables.removeAll(draftedConspiracies);
 
         findBasicLandSets();
     }
@@ -176,6 +177,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             if (card != null) {
                 deckList.add(card);
                 aiPlayables.remove(card);
+                rankedColorList.remove(card);
                 landsNeeded--;
                 if (logToConsole) {
                     System.out.println("Low CMC: " + card.getName());
@@ -290,6 +292,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 final PaperCard c = aiPlayables.get(MyRandom.getRandom().nextInt(aiPlayables.size() - 1));
                 deckList.add(c);
                 aiPlayables.remove(c);
+                rankedColorList.remove(c);
                 if (logToConsole) {
                     System.out.println(" - Added " + c.getName() + " randomly.");
                 }
@@ -297,6 +300,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 final PaperCard c = aiPlayables.get(0);
                 deckList.add(c);
                 aiPlayables.remove(c);
+                rankedColorList.remove(c);
                 if (logToConsole) {
                     System.out.println(" - Added " + c.getName() + " randomly.");
                 }
@@ -521,6 +525,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             }
             deckList.addAll(toAdd);
             aiPlayables.removeAll(toAdd);
+            rankedColorList.removeAll(toAdd);
         }
     }
 
