@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Custom Creatures
-Description=The "Custom Creatures" deck lets you build giant monsters by combining creature cards with awesome enchantments. Your Elves and Wurms will gain all kinds of special abilities as you turn them into unstoppable attackers!
+Description=Take what's good and make it better! The wide array of enchantments in this deck enhances your Elves and Wurms, turning them into unstoppable monstrosities. If they who have the biggest creatures win, your games will be no contest.
 Deck Type=constructed
 Set=9ED
 Image=custom_creatures.jpg
