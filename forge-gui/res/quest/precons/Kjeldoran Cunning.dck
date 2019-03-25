@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Kjeldoran Cunning
-Description=Kjeldoran Cunning is a white/blue theme deck with a Soldier tribal theme. The noble Kjeldoran Soldiers have teamed up with the crafty Zuran Wizards to build an army that can outfight and outthink any foes. With the Kjeldoran Cunning deck, you're the general of that army. You'll need all your wits about you to win the fight.
+Description=The formidable Kjeldoran army reached the height of its power during the ice age. Enlist to learn the secrets of their battle tactics, including the crafty ripple mechanic that can magnify your spells two-, three-, or even fourfold.
 Deck Type=constructed
 Set=CSP
 Image=kjeldoran_cunning.jpg
