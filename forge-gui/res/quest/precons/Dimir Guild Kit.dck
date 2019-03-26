@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dimir Guild Kit
-Description=Guilds of Ravnica: Dimir Guild Kit
+Description=Welcome to the House Dimir. This box contains everything you need to harvest knowledge, sabotage enemies, and covertly communicate with fellow agents. Report back soon!
 Set=GK1
 Image=dimir_guild_kit.jpg
 [main]

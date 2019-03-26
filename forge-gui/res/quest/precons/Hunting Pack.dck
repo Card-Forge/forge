@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Hunting Pack
-Description=Magic Origins intro deck.
+Description=Elves share a common bond-- a desire to protect their lands and destroy any that would threaten them. Join the elves in battle as their leader, commanding them to take victory from those undeserving of it.
 Deck Type=constructed
 Set=ORI
 Image=hunting_pack.jpg
@@ -13,7 +13,7 @@ Image=hunting_pack.jpg
 1 Consecrated by Blood|ORI
 2 Deadbridge Shaman|ORI
 2 Dwynen's Elite|ORI
-1 Dwynen, Gilt-Leaf Daen|ORI
+1 Dwynen, Gilt-Leaf Daen+|ORI
 2 Elvish Visionary|ORI
 1 Evolving Wilds|ORI
 2 Eyeblight Assassin|ORI

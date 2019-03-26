@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Fates Foreseen
-Description=Scry is a useful ability that gives you control over your future draw steps. The "Fates Foreseen" deck is based around casting spells that give you additional benefits for scrying and setting up ways to scry repeatedly. Link together a chain of these spells and thwart your opponent's best laid plans. 
+Description=The strands of fate stretch out before you. Weave them together to portend doom for your foes. With scry spells, you will be able to shape your own destiny for ultimate victory.
 Deck Type=constructed
 Set=JOU
 Image=fates_foreseen.jpg
@@ -19,7 +19,7 @@ Image=fates_foreseen.jpg
 2 Pensive Minotaur|JOU
 1 Prescient Chimera|THS
 1 Prognostic Sphinx|THS
-1 Scourge of Fleets|JOU
+1 Scourge of Fleets+|JOU
 2 Sigiled Skink|JOU
 2 Sigiled Starfish|JOU
 2 Stormcaller of Keranos|BNG

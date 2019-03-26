@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Gleeful Flames
-Description=The "Gleeful Flames" deck has a single-minded focus: deal 20 damage to your opponents before they deal 20 to you. You have twelve spells that each deal 5 damage, and it only takes four of them to win the game.
+Description=Mock life and cheat death! This green and black deck is packed with hard-to-kill creatures, including those with the new undying ability, and many more ways to turn your smaller threats into larger ones.
 Deck Type=constructed
 Set=DKA
 Image=gleeful_flames.jpg
