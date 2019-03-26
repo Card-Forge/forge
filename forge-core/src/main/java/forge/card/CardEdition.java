@@ -128,7 +128,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     private CardEdition(CardInSet[] cards) {
         this.cards = cards;
-        tokenNormalized = null;
+        tokenNormalized = new HashMap<>();
     }
 
     private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {

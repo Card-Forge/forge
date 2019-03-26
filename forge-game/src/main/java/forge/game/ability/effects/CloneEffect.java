@@ -202,7 +202,7 @@ public class CloneEffect extends SpellAbilityEffect {
         tgtCard.clearImprintedCards();
 
         // check if clone is now an Aura that needs to be attached
-        if (tgtCard.isAura()) {
+        if (tgtCard.isAura() && !tgtCard.getZone().is(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
         }
 

@@ -2,7 +2,7 @@
 Code=MPS_GRN
 Date=2018-10-03
 Name=Mythic Edition - Guilds of Ravnica
-MciCode=mps
+MciCode=med
 Type=Other
 
 [cards]
