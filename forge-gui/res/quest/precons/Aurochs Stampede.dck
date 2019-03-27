@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Aurochs Stampede
-Description=Aurochs Stampede is an aggro red/green theme deck with an Aurochs tribal theme. The Ice Age card Aurochs is a creature with trample that, when it attacks, gets a bonus for each other attacking Aurochs.
+Description=Aurochs like two things: frenzied stampedes and more Aurochs. Neither is in short supply during their winter migration-- and during an ice age, winter never ends. Rumble along with the herd that puts the "wild" back in wildlife.
 Deck Type=constructed
 Set=CSP
 Image=aurochs_stampede.jpg

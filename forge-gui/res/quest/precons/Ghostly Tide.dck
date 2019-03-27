@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Ghostly Tide
-Description=Ghostly Tide - Shadows over Innistrad W/U intro pack.
+Description=As fog rolls in to blanket the coast, the spirits of the dead swoop into battle. Relentless as the tide, your ghostly creatures are full of surprises. They'll appear out of nowhere, washing over your opponent in an inexorable advance.
 Deck Type=constructed
 Set=SOI
 Image=ghostly_tide.jpg
@@ -21,7 +21,7 @@ Image=ghostly_tide.jpg
 1 Silent Observer|SOI
 2 Emissary of the Sleepless|SOI
 2 Stormrider Spirit|SOI
-1 Drogskol Cavalry|SOI
+1 Drogskol Cavalry+|SOI
 1 Chaplain's Blessing|SOI
 2 Not Forgotten|SOI
 1 Pore Over the Pages|SOI

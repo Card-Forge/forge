@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Abzan Siege
-Description=Outlast your opponents with the Abzan Siege deck! Like the scales of the dragon, individuals within the Abzan clan come together to create a force more powerful than the sum of its parts.
+Description=The Abzan rely on endurance and fortitude to outlast the other clans. Build a resilient army, survive your enemy's rash attacks, and then march to an eventual victory.
 Deck Type=constructed
 Set=KTK
 Image=abzan_siege.jpg
@@ -19,7 +19,7 @@ Image=abzan_siege.jpg
 1 Blossoming Sands|KTK
 1 Mer-ek Nightblade|KTK
 1 Carnivorous Moss-beast|M15
-1 Ivorytusk Fortress|KTK
+1 Ivorytusk Fortress+|KTK
 1 Armament Corps|KTK
 2 Longshot Squad|KTK
 2 Disowned Ancestor|KTK

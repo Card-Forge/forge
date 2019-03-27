@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dangerous Knowledge
-Description=Eldritch Moon U/R Intro Pack
+Description=Knowledge can be dangerous, yielding arcane secrets that overwhelm the mind-- but knowledge can also be a powerful weapon. You have explored the lore that others shy away from, and you have found within it the spells that will break your foes.
 Deck Type=constructed
 Set=EMN
 Image=dangerous_knowledge.jpg
@@ -23,7 +23,7 @@ Image=dangerous_knowledge.jpg
 2 Mercurial Geists|EMN
 12 Mountain|SOI
 1 Niblis of Dusk|SOI
-1 Niblis of Frost|EMN
+1 Niblis of Frost+|EMN
 1 Pieces of the Puzzle|SOI
 1 Pore Over the Pages|SOI
 1 Pyre Hound|SOI

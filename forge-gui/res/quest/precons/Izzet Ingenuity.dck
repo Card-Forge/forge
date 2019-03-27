@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Izzet Ingenuity
-Description=The mad geniuses of the Izzet League are known for their brilliant innovation - and catastrophic experimentation. The "Izzet Ingenuity" deck takes advantage of both. When you win, you win big. Harness the genius of the Izzet League, and immolate your opponents with a flurry of arcane power.
+Description=The mages of the Izzet League run hot and cold-- and sometimes both at once. The "Izzet Ingenuity" deck uses that tendency to your advantage. Bide your time, then unleash a blazing flurry of spells to take opponents off guard.
 Deck Type=constructed
 Set=RTR
 Image=izzet_ingenuity.jpg
@@ -19,7 +19,7 @@ Image=izzet_ingenuity.jpg
 1 Blustersquall|RTR
 1 Mizzium Mortars|RTR
 1 Tenement Crasher|RTR
-1 Hypersonic Dragon|RTR
+1 Hypersonic Dragon+|RTR
 1 Wild Guess|M13
 2 Krenko's Command|M13
 3 Cobblebrute|RTR

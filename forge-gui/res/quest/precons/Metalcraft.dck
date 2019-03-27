@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Metalcraft
-Description=With the "Metalcraft" deck, you'll be taking advantage of a powerful new ability from the Scars of Mirrodin set. When you accumulate three artifacts on the battlefield, your creatures and spells with metalcraft will become even more powerful.
+Description=This blue and red Mirran deck features a heavy dose of powerful artifacts. With so many artifacts and Argent Sphinx at your command, you'll be able to take advantage of the metalcraft mechanic to make you unstoppable.
 Deck Type=constructed
 Set=SOM
 Image=metalcraft.jpg
@@ -31,6 +31,6 @@ Image=metalcraft.jpg
 3 Chrome Steed|SOM
 12 Mountain|SOM
 12 Island|SOM
-1 Argent Sphinx|SOM
+1 Argent Sphinx+|SOM
 1 Etched Champion|SOM
 [sideboard]

@@ -5,14 +5,14 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mortals of Myth
-Description=Assemble a mighty army of heroic Soldiers and Warriors, and power them up with spells that unlock their potential. Your opponent will be put to the test in combat by creatures that could become gigantic at a moment's notice.
+Description=When enemies gather at your gates, your heroes will send them fleeing. Bolstered by strive spells, lead your heroes to deeds that are worthy of truly epic tales.
 Deck Type=constructed
 Set=JOU
 Image=mortals_of_myth.jpg
 [Main]
 2 Akroan Mastiff|JOU
 1 Akroan Skyguard|BNG
-1 Dawnbringer Charioteers|JOU
+1 Dawnbringer Charioteers+|JOU
 1 Elite Skirmisher|BNG
 2 Golden Hind|JOU
 2 Lagonna-Band Trailblazer|JOU

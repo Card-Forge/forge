@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Jeskai Monks
-Description=The followers of the Jeskai Way hold up the eye of the dragon as their symbol, looking inward to find the path to enlightenment. These powerful martial artists are trained to master the physical world and overpower their opponents' brute force with clever skill.
+Description=The Jeskai use their cunning and their knowledge of mystical arts to defeat their foes. Your monks will blast the other clans with a flurry of combat moves they will never see coming.
 Deck Type=constructed
 Set=KTK
 Image=jeskai_monks.jpg
@@ -30,7 +30,7 @@ Image=jeskai_monks.jpg
 1 Whirlwind Adept|KTK
 1 Tireless Missionaries|M15
 1 Serra Angel|M15
-1 Sage Of The Inward Eye|KTK
+1 Sage Of The Inward Eye+|KTK
 1 Warden Of The Eye|KTK
 1 Riverwheel Aerialists|KTK
 1 Void Snare|M15

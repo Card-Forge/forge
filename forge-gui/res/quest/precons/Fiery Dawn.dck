@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Fiery Dawn
-Description=The "Fiery Dawn" deck focuses on the power of Humans working together. Since this is an aggressive deck, your primary focus will be to cast creatures and start attacking with them as early as possible.
+Description=The light breaks through Innistrad's clouded sky. Humanity seizes the moment and races to drive back the darkness. Reclaim what's yours with the "Fiery Dawn" deck, an aggressive deck that channels your zeal.
 Deck Type=constructed
 Set=AVR
 Image=fiery_dawn.jpg
@@ -24,7 +24,7 @@ Image=fiery_dawn.jpg
 3 Riot Ringleader|AVR
 1 Somberwald Vigilante|AVR
 2 Thraben Valiant|AVR
-1 Zealous Conscripts|AVR
+1 Zealous Conscripts+|AVR
 1 Cathars' Crusade|AVR
 1 Commander's Authority|AVR
 1 Pacifism|M12

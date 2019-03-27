@@ -6,7 +6,7 @@ MaxDifficulty=5
 
 [metadata]
 Name=Brute Force
-Description=The "Brute Force" deck gives you the reins of Zendikar's largest monsters. Use them to stomp the competition into the ground!
+Description=Wreak havoc with a ground assault that features powerful multikicker spells, which deliver bigger effects the more mana you spend on them. Watch your opponent's despair when Wolfbriar Elemental joins the fray and brings along its own army.
 Deck Type=constructed
 Set=WWK
 Image=brute_force.jpg
@@ -26,7 +26,7 @@ Image=brute_force.jpg
 1  Leatherback Baloth|WWK
 1  Skitter of Lizards|WWK
 1  Terastodon|WWK
-1  Wolfbriar Elemental|WWK
+1  Wolfbriar Elemental+|WWK
 
 1  Act of Treason|M10
 1  Canopy Cover|WWK

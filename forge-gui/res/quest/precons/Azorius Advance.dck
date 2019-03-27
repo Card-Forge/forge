@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Azorius Advance
-Description=The Azorius aren't the usual tedious, droning bureaucrats. They take a more "activist" approach. Start the game off with a few threats like Concordia Pegasus, Soulsworn Spirit, or Stealer of Secrets, then capitalize on the detain mechanic to ensure that your opponent's threats never get in the way of your attack.
+Description=Some believe the Azorius Senate only prevents things from happening. Prove them wrong with the "Azorius Advance" deck. While the detain ability locks up their defenses, your flying creatures will lay down the law.
 Deck Type=constructed
 Set=RTR
 Image=azorius_advance.jpg
@@ -17,7 +17,7 @@ Image=azorius_advance.jpg
 2 Concordia Pegasus|RTR
 2 Arrest|RTR
 2 Bazaar Krovod|RTR
-1 Archon of the Triumvirate|RTR
+1 Archon of the Triumvirate+|RTR
 2 Trained Caracal|RTR
 1 Angel's Mercy|M13
 2 Battleflight Eagle|M13

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Demonic Deals
-Description=Magic Origins intro deck.
+Description=Other sorcerers dare not cross your path. With the spell mastery mechanic, your spells become more powerful as the duel continues, giving you the edge against your foes.
 Deck Type=constructed
 Set=ORI
 Image=demonic_deals.jpg
@@ -20,7 +20,7 @@ Image=demonic_deals.jpg
 1 Evolving Wilds|ORI
 2 Fiery Impulse|ORI
 1 Fleshbag Marauder|ORI
-1 Kothophed, Soul Hoarder|ORI
+1 Kothophed, Soul Hoarder+|ORI
 2 Malakir Cullblade|ORI
 3 Mountain|ORI|1
 3 Mountain|ORI|2

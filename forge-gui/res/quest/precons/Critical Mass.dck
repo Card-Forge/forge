@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Critical Mass
-Description=When playing with the Saviors of Kamigawa set, having more cards in hand than your opponent is more important than ever. Some decks try to get ahead with little tricks to draw a card here or there. The "Critical Mass" deck takes a more direct approach: Just smash your opponent's hand to pieces.
+Description=Sometimes not playing your cards can be more powerful than playing them. Creatures and spells that reward you for a full hand are coupled with devastating sweep cards that rebuild your resources while demolishing your opponent's.
 Deck Type=constructed
 Set=SOK
 Image=critical_mass.jpg

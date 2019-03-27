@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dimir Dementia
-Description=House Dimir values secrecy above all, entrusting only its own agents with valuable codes and information. Whenever you cast a card with cipher, you can exile it, encoding it on a creature you control. Then, whenever the creature slides through and damages a player, you'll get to cast that card again!
+Description=The secretive mind-mages of House Dimir spill the secrets of their enemies-- and exploit them for their own advantage. Use the "Dimir Dementia" deck to gain access to the guarded depths of your opponent's library and reap the rewards.
 Deck Type=constructed
 Set=GTC
 Image=dimir_dementia.jpg
@@ -14,7 +14,7 @@ Image=dimir_dementia.jpg
 12  Island|RTR
 13  Swamp|RTR
 2  Balustrade Spy|GTC
-1  Consuming Aberration|GTC
+1  Consuming Aberration+|GTC
 2  Deathcult Rogue|GTC
 2  Dinrova Horror|GTC
 1  Duskmantle Guildmage|GTC

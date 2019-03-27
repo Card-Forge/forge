@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Grab for Power
-Description=The ultimate goal of the deck is to have three specific artifacts - Crown of Empires, Scepter of Empires, and Throne of Empires - on the battlefield at the same time.
+Description=The power of emperors lies within your grasp! Use your magical tutors and arcane insights to search the realm for fabled artifacts of authority and might, and then assert your right to rule over all.
 Deck Type=constructed
 Set=M12
 Image=grab_for_power.jpg
@@ -28,7 +28,7 @@ Image=grab_for_power.jpg
 2 Merfolk Looter|M12
 1 Ponder|M12
 2 Reassembling Skeleton|M12
-1 Rune-Scarred Demon|M12
+1 Rune-Scarred Demon+|M12
 2 Scepter of Empires|M12
 1 Sorin's Thirst|M12
 14 Swamp|M12

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Decay
-Description=The two things black cards do best are destroy creatures and make your opponents discard cards. The "Decay" deck does both. Your plan is to use your discard efforts to cripple your opponents - they can't play what they can't hold on to! If your opponent does manage to play a creature or two, you've got the spells to send those creatures straight to the graveyard. 
+Description=Live dangerously with "Decay," a deck that features the best qualities of black: death and disease. Hand destruction, creature destruction, and deadly spells make this one nasty deck.
 Deck Type=constructed
 Set=7ED
 Image=decay.jpg

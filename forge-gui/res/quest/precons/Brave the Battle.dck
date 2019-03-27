@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Brave the Battle
-Description=Magic Origins intro deck.
+Description=Boost your troops as you charge into battle! Your creatures with the renown ability will quickly grow in power, readily dominating the battlefield.
 Deck Type=constructed
 Set=ORI
 Image=brave_the_battle.jpg
@@ -21,7 +21,7 @@ Image=brave_the_battle.jpg
 2 Forest|ORI|4
 2 Grasp of the Hieromancer|ORI
 1 Heavy Infantry|ORI
-1 Hixus, Prison Warden|ORI
+1 Hixus, Prison Warden+|ORI
 2 Knight of the Pilgrim's Road|ORI
 2 Knightly Valor|ORI
 2 Mighty Leap|ORI

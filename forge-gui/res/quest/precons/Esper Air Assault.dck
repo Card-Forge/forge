@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Esper Air Assault
-Description=As the worlds crash into each other, your artifact-themed deck takes to the air with an enormous swarm of flying creatures from the plane of Esper. You’ll also pull off tricky artifact-based combos using the power of creatures forged from etherium, a metal infused with magic.
+Description=As the worlds crash into each other, your artifact-themed deck takes to the air with an enormous swarm of flying creatures from the plane of Esper. You'll also pull off tricky artifact-based combos using the power of creatures forged from etherium, a metal infused with magic. If your enemies get any funny ideas about defending themselves, you have a counterspell up your sleeve. Who said the sky had to be the limit?
 Deck Type=constructed
 Set=CFX
 Image=esper_air_assault.jpg
@@ -21,7 +21,7 @@ Image=esper_air_assault.jpg
 1 Inkwell Leviathan|CFX
 4 Island|ALA|2
 3 Island|ALA|3
-1 Magister Sphinx|CFX
+1 Magister Sphinx+|CFX
 2 Parasitic Strix|CFX
 3 Plains|ALA|4
 1 Remove Soul|10E

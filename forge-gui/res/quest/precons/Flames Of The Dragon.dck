@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Flames Of The Dragon
-Description=Flames of the Dragon is the blue & red M15 intro deck. It focuses on hard-hitting creatures and powerful artifacts to pound your opponents into submission.
+Description=Nothing pleases a dragon more than terrifying the local populace and curling up on an enormous pile of loot. Flaunt your own hoard of artifacts as a warning to those who would challenge you.
 Deck Type=constructed
 Set=M15
 Image=flames_of_the_dragon.jpg
@@ -26,7 +26,7 @@ Image=flames_of_the_dragon.jpg
 2 Krenko's Enforcer|M15
 3 Scrapyard Mongrel|M15
 2 Glacial Crasher|M15
-1 Siege Dragon|M15
+1 Siege Dragon+|M15
 1 Rogue's Gloves|M15
 1 Sacred Armory|M15
 1 Tyrant's Machine|M15

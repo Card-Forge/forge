@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Kithkin Militia
-Description=Protect the meadow! The key to the "Kithkin Militia" deck is that Kithkin are quick, furious fighters. Play out as many as you can as early as you can and put your opponent on the defensive. 
+Description=Beware the pastoral folk when they take up arms. The empathic kithkin were content to dance the meadows of Lorwyn until the other tribes threatened their borders. Now their communal thoughts weave an interlocking attack strategy.
 Deck Type=constructed
 Set=LRW
 Image=kithkin_militia.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Invading Spawn
-Description=Get busy creating Eldrazi Spawn tokens, then either harvest them for mana or use them to torment your opponent in unexpected ways.
+Description=Get busy creating Eldrazi Spawn tokens, then either harvest them for mana or use them to torment your opponent in unexpected ways. If all else fails, summon Drana, Kalastria Bloodchief, a powerful Vampire, to finish off your opponents.
 Deck Type=constructed
 Set=ROE
 Image=invading_spawn.jpg
@@ -26,7 +26,7 @@ Image=invading_spawn.jpg
 1 Rapacious One|ROE
 2 Lightning Bolt|M10
 1 Vendetta|ROE
-1 Drana, Kalastria Bloodchief|ROE
+1 Drana, Kalastria Bloodchief+|ROE
 1 Act of Treason|M10
 1 Corpsehatch|ROE
 1 Essence Feed|ROE

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Merrow Riverways
-Description=Merfolk are slippery creatures, and you'll use that to your advantage in the "Merrow Riverways" deck. Plenty of Merfolk, like Streambed Aquitects and Silvergill Douser, have abilities that cause them to tap.
+Description=Lorwyn's waterways teem with merrow, a bemused and crafty race of merfolk. Their intentions are never reflected in their fishy eyes. Will they sneak around your defenses for a quick victory or combine their forces to overcome you with bewildering complexity?
 Deck Type=constructed
 Set=LRW
 Image=merrow_riverways.jpg

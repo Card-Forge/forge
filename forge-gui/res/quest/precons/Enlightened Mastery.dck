@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Enlightened Mastery
-Description=Enlightened Mastery - Dragons of Tarkir W/U intro pack.
+Description=This deck is full of tricks, embodying the draconic aspect of cunning. Your spells with the rebound mechanic bounce back to be cast a second time, allowing you to augment your creatures again and again. Make your enemies think twice before confronting you!
 Deck Type=constructed
 Set=DTK
 Image=enlightened_mastery.jpg
@@ -19,7 +19,7 @@ Image=enlightened_mastery.jpg
 1 Ancient Carp|DTK
 2 Strongarm Monk|DTK
 2 Cunning Breezedancer|DTK
-1 Pristine Skywise|DTK
+1 Pristine Skywise+|DTK
 1 Myth Realized|DTK
 2 Anticipate|DTK
 2 Artful Maneuver|DTK

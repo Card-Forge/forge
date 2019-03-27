@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Little Bashers
-Description=The "Little Bashers" deck may look like a typical white weenie deck, but the Mirrodin expansion's Equipment adds a new dimension to this classic deck type. "Little Bashers" gives you plenty of weapons to make your forces more deadly. To win with this deck, you play creatures, arm them to the teeth, and press the attack.
+Description=The right tools can make a big difference. "Little Bashers" has a mass of small creatures that when armed with Equipment, will mess your opponent up.
 Deck Type=constructed
 Set=MRD
 Image=little_bashers.jpg

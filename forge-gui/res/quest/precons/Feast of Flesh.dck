@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Feast of Flesh Precon
-Description=Phyrexians are among the most brutal, vicious monstrosities ever seen, and now that their victory is at hand, there's no stopping the carnage. 
+Description=Have your enemy over for dinner! Flesh on Mirrodin is at a premium, and your hordes of Phyrexian fiends are clamoring for more. Release them on your prey, using necromantic magic to remove their meager hopes for survival.
 Deck Type=constructed
 Set=NPH
 Image=feast_of_flesh.jpg
@@ -17,7 +17,7 @@ Image=feast_of_flesh.jpg
 2 Blistergrub
 2 Blisterstick Shaman
 2 Caustic Hound
-1 Chancellor of the Dross
+1 Chancellor of the Dross+
 2 Entomber Exarch
 2 Flameborn Viron
 2 Furnace Scamp

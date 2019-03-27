@@ -5,8 +5,8 @@ MinDifficulty=0
 MaxDifficulty=5
 
 [metadata]
-Name=Elementals Path
-Description=With the “Elementals' Path” deck, you can embrace your inner fire! This five-color deck is mostly red cards, but it has enough cards of the other colors that your opponents will never know what's coming! The deck's lands and artifacts give you access to any color of mana you need.
+Name=Elemental's Path
+Description=Lorwyn's great spirits of nature lurk just beyond understanding. The flamekin who revere them don't try to harness their power-- they unleash it! Evoke the essence of the greater elementals, or summon them in their full glory.
 Deck Type=constructed
 Set=LRW
 Image=elementals_path.jpg
