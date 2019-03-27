@@ -248,7 +248,7 @@ c_1_1_a_pentavite_flying_c14.jpg https://downloads.cardforge.org/images/tokens/c
 c_1_1_a_pentavite_flying_cm2.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_cm2.jpg
 c_1_1_a_pentavite_flying_ddf.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_ddf.jpg
 c_1_1_a_pentavite_flying_hop.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_hop.jpg
-c_1_1_a_pentavite_flying_m12jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_m12.jpg
+c_1_1_a_pentavite_flying_m12.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_m12.jpg
 c_1_1_a_pentavite_flying_mrd.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_pentavite_flying_mrd.jpg
 c_1_1_a_servo2_aer.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_servo2_aer.jpg
 c_1_1_a_servo2_kld.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_servo2_kld.jpg
