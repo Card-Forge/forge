@@ -1,5 +1,5 @@
 Name:Eldrazi
 ManaCost:no cost
 PT:10/10
-Types:Eldrazi
+Types:Creature Eldrazi
 Oracle:
