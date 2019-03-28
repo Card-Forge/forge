@@ -79,7 +79,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 newTargetBlock.remove(oldTarget);
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if updated choices would be correct.
-                GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
+                GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
                 if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
                     newTargetBlock.add(newTarget);
