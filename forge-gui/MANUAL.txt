@@ -391,11 +391,14 @@ AddCounter [*] - add_counter.wav - triggered when a counter is added to a perman
 Artifact[*] - artifact.wav - triggered when an artifact is played.
 ArtifactCreature [*] - artifact_creature.wav - triggered when an artifact creature is played.
 BlackLand [*] - black_land.wav - triggered when a land with the "B" mana ability is played.
+BlackRedGreenLand - black_red_green_land.wav - triggered when a land with the "B" and "R" and "G" mana ability is played.
 BlackRedLand - black_red_land.wav - triggered when a land with the "B" and "R" mana ability is played.
+BlackWhiteGreenLand - black_white_green_land.wav - triggered when a land with the "B" and "W" and "G" mana ability is played.
 BlackWhiteLand - black_white_land.wav - triggered when a land with the "B" and "W" mana ability is played.
 Block [*] - block.wav - triggered when a blocker is assigned.
 BlueLand [*] - blue_land.wav - triggered when a land with the "U" mana ability is played.
 BlueBlackLand - blue_black_land.wav - triggered when a land with the "U" and "B" mana ability is played.
+BlueBlackRedLand - blue_black_red_land.wav - triggered when a land with the "U" and "B" and "R" mana ability is played.
 Creature [*] - creature.wav - triggered when a creature is played.
 Damage - damage.wav - triggered when a creature is damaged.
 Destroy [*] - destroy.wav - triggered when a permanent is destroyed.
@@ -406,10 +409,13 @@ EndOfTurn [*] - end_of_turn.wav - triggered at the end of turn.
 Equip [*] - equip.wav - triggered when an equipment is equipped.
 Exile - exile.wav - triggered when a card is exiled.
 FlipCoin [*] - flip_coin.wav - triggered when a coin is flipped.
+GreenBlackBlueLand - green_black_blue_land.wav - triggered when a land with the "G" and "B" and "U" mana ability is played.
 GreenBlackLand - green_black_land.wav - triggered when a land with the "G" and "B" mana ability is played.
 GreenBlueLand - green_blue_land.wav - triggered when a land with the "G" and "U" mana ability is played.
+GreenBlueRedLand - green_blue_red_land.wav - triggered when a land with the "G" and "U" and "R" mana ability is played.
 GreenLand [*] - green_land.wav - triggered when a land with the "G" mana ability is played.
 GreenRedLand - green_red_land.wav - triggered when a land with the "G" and "R" mana ability is played.
+GreenRedWhiteLand - green_red_white_land.wav - triggered when a land with the "G" and "R" and "W" mana ability is played.
 Instant [*] - instant.wav - triggered when an instant is played.
 LifeGain - life_gain.wav - triggered when a player gains life.
 LifeLoss [*] - life_loss.wav - triggered when a player loses life.
@@ -419,6 +425,7 @@ OtherLand - other_land.wav - triggered when a land with non-color mana abilities
 Planeswalker [*] - planeswalker.wav - triggered when a planeswalker is played.
 Poison [*] - poison.wav - triggered when a player receives a poison counter.
 RedBlueLand - red_blue_land.wav - triggered when a land with the "R" and "U" mana ability is played.
+RedBlueWhiteLand - red_blue_white_land.wav - triggered when a land with the "R" and "U" and "W" mana ability is played.
 RedLand [*] - red_land.wav - triggered when a land with the "R" mana ability is played.
 Regen - regeneration.wav - triggered when a creature is regenerated.
 RemoveCounter - remove_counter.wav - triggered when a counter is removed from a permanent.
@@ -428,9 +435,12 @@ Shuffle [*] - shuffle.wav - triggered when a player shuffles his deck.
 Tap [*] - tap.wav - triggered when a permanent is tapped.
 Token [*] - token.wav - triggered when a token is created.
 Untap [*] - untap.wav - triggered when a permanent is untapped.
+WhiteBlueBlackLand - white_blue_black_land.wav - triggered when a land with the "W" and "U" and "B" mana ability is played.
 WhiteBlueLand - white_blue_land.wav - triggered when a land with the "W" and "U" mana ability is played.
+WhiteGreenBlueLand - white_green_blue_land.wav - triggered when a land with the "W" and "G" and "U" mana ability is played.
 WhiteGreenLand - white_green_land.wav - triggered when a land with the "W" and "G" mana ability is played.
 WhiteLand [*] - white_land.wav - triggered when a land with the "W" mana ability is played.
+WhiteRedBlackLand - white_red_black_land.wav - triggered when a land with the "W" and "R" and "B" mana ability is played.
 WhiteRedLand - white_red_land.wav - triggered when a land with the "W" and "R" mana ability is played.
 WinDuel [*] - win_duel.wav - triggered when a player wins the duel.
 

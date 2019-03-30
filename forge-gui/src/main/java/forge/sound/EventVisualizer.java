@@ -182,30 +182,64 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         ZoneType zoneTo = event.zoneType;
         EventValueChangeType zoneEventMode = event.mode;
         SoundEffectType resultSound = null;
-        if(zoneEventMode == EventValueChangeType.Added && zoneTo == ZoneType.Battlefield && card.isLand()) {
-            Card land = card;
-
-            // if there's a specific effect for this particular card, play it and
-            // we're done.
-            if (hasSpecificCardEffect(land)) {
-                return SoundEffectType.ScriptedEffect;
+        if(zoneEventMode == EventValueChangeType.Added && zoneTo == ZoneType.Battlefield) {
+            if(card.isLand()) {
+                resultSound = getLandSound(card);
             }
+        }
+        return resultSound;
+    }
 
-            // I want to get first two real colors this land can produce - no interest in colorless or devoid
+    private SoundEffectType getLandSound(Card land) {
+        SoundEffectType resultSound = null;
+
+        // if there's a specific effect for this particular card, play it and
+        // we're done.
+        if (hasSpecificCardEffect(land)) {
+            resultSound = SoundEffectType.ScriptedEffect;
+        } else {
+            // I want to get all real colors this land can produce - no interest in colorless or devoid
             String fullManaColors = "";
             for (final SpellAbility sa : land.getManaAbilities()) {
                 String currManaColor = sa.getManaPartRecursive().getOrigProduced();
                 if(!"C".equals(currManaColor)) {
-                    fullManaColors = fullManaColors + currManaColor;                
+                    fullManaColors = fullManaColors + currManaColor;
                 }
             }
             // No interest if "colors together" or "alternative colors" - only interested in colors themselves
             fullManaColors = fullManaColors.replaceAll("\\s", "");
 
-            // No interest in third color if present, at least for the moment
-
             int fullManaColorsLength = fullManaColors.length();
-            if(fullManaColorsLength >= 2) {
+
+            if(fullManaColorsLength >= 3) {
+                // three color land
+                fullManaColors = fullManaColors.substring(0,3);
+                if (fullManaColors.contains("W") && fullManaColors.contains("U") && fullManaColors.contains("B") && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueBlackLand)) {
+                    resultSound = SoundEffectType.WhiteBlueBlackLand;
+                } else if (fullManaColors.contains("W") && fullManaColors.contains("G") && fullManaColors.contains("U") && SoundSystem.instance.hasResource(SoundEffectType.WhiteGreenBlueLand)) {
+                    resultSound = SoundEffectType.WhiteGreenBlueLand;
+                } else if (fullManaColors.contains("W") && fullManaColors.contains("R") && fullManaColors.contains("B") && SoundSystem.instance.hasResource(SoundEffectType.WhiteRedBlackLand)) {
+                    resultSound = SoundEffectType.WhiteRedBlackLand;
+                } else if (fullManaColors.contains("B") && fullManaColors.contains("W") && fullManaColors.contains("G") && SoundSystem.instance.hasResource(SoundEffectType.BlackWhiteGreenLand)) {
+                    resultSound = SoundEffectType.BlackWhiteGreenLand;
+                } else if (fullManaColors.contains("B") && fullManaColors.contains("R") && fullManaColors.contains("G") && SoundSystem.instance.hasResource(SoundEffectType.BlackRedGreenLand)) {
+                    resultSound = SoundEffectType.BlackRedGreenLand;
+                } else if (fullManaColors.contains("U") && fullManaColors.contains("B") && fullManaColors.contains("R") && SoundSystem.instance.hasResource(SoundEffectType.BlueBlackRedLand)) {
+                    resultSound = SoundEffectType.BlueBlackRedLand;
+                } else if (fullManaColors.contains("G") && fullManaColors.contains("U") && fullManaColors.contains("R") && SoundSystem.instance.hasResource(SoundEffectType.GreenBlueRedLand)) {
+                    resultSound = SoundEffectType.GreenBlueRedLand;
+                } else if (fullManaColors.contains("G") && fullManaColors.contains("B") && fullManaColors.contains("U") && SoundSystem.instance.hasResource(SoundEffectType.GreenBlackBlueLand)) {
+                    resultSound = SoundEffectType.GreenBlackBlueLand;
+                } else if (fullManaColors.contains("G") && fullManaColors.contains("R") && fullManaColors.contains("W")  && SoundSystem.instance.hasResource(SoundEffectType.GreenRedWhiteLand)) {
+                    resultSound = SoundEffectType.GreenRedWhiteLand;
+                } else if (fullManaColors.contains("R") && fullManaColors.contains("U") && fullManaColors.contains("W")  && SoundSystem.instance.hasResource(SoundEffectType.RedBlueWhiteLand)) {
+                    resultSound = SoundEffectType.RedBlueWhiteLand;
+                }
+            }
+
+            if(resultSound == null && fullManaColorsLength >= 2) {
+                // three color land without sounds installed, or two color land
+                // lets try with two colored lands' sounds
                 fullManaColors = fullManaColors.substring(0,2);
                 if (fullManaColors.contains("W") && (fullManaColors.contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueLand)) {
                     resultSound = SoundEffectType.WhiteBlueLand;
@@ -227,7 +261,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
                     resultSound = SoundEffectType.GreenRedLand;
                 } else if (fullManaColors.contains("R") && (fullManaColors.contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.RedBlueLand)) {
                     resultSound = SoundEffectType.RedBlueLand;
-                } 
+                }
             }
 
             if(resultSound == null) {
@@ -248,11 +282,11 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
                     resultSound = SoundEffectType.WhiteLand;
                 } else {
                     resultSound = SoundEffectType.OtherLand;
-                }            
+                }
             }
         }
+
         return resultSound;
-        
     }
 
     /**
