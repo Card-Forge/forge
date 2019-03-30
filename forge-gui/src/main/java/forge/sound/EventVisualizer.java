@@ -239,7 +239,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
             if(resultSound == null && fullManaColorsLength >= 2) {
                 // three color land without sounds installed, or two color land
-                // lets try with two colored lands' sounds
+                // lets try
                 fullManaColors = fullManaColors.substring(0,2);
                 if (fullManaColors.contains("W") && (fullManaColors.contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueLand)) {
                     resultSound = SoundEffectType.WhiteBlueLand;
