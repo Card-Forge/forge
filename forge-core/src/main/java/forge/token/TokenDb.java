@@ -103,7 +103,7 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public List<PaperToken> getAllTokens() {
-        return null;
+        return new ArrayList<>(tokensByName.values());
     }
 
     @Override
@@ -123,6 +123,6 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public Iterator<PaperToken> iterator() {
-        return null;
+        return tokensByName.values().iterator();
     }
 }
