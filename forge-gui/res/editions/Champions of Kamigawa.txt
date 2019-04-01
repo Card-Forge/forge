@@ -322,6 +322,6 @@ FoilAlwaysInCommonSlot=False
 c_1_1_spirit
 u_5_5_dragon_spirit_flying
 u_1_1_illusion_flying
-b_x_x_rat
+b_1_1_rat
 g_x_x_elemental
 g_1_1_snake

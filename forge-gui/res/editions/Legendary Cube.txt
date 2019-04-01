@@ -158,14 +158,6 @@ Type=Other
 149 R Temple of the False God
 
 [tokens]
-banshee_of_the_dread_choir
-blade_of_selves
-broodbirth_viper
-caller_of_the_pack
-herald_of_the_host
-lightning_rager
-stoneforged_blade
-warchief_giant
 c_0_1_eldrazi_spawn_sac
 w_2_2_knight_vigilance
 w_1_1_kor_soldier

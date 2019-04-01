@@ -192,12 +192,10 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 
 [tokens]
 goldmeadow_harrier
-imperial_mask
 cloud_sprite
 festering_goblin
 spark_elemental
 llanowar_elves
-nacatl_war-pride
 metallic_sliver
 w_1_1_soldier
 b_2_2_zombie

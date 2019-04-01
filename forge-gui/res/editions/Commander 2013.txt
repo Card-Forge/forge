@@ -388,5 +388,5 @@ g_0_1_plant
 g_1_1_saproling
 gu_2_2_drake_flying
 br_3_1_graveborn_haste
-c_2_2_a_assembly-worker
+c_2_2_a_assembly_worker
 c_1_1_a_myr

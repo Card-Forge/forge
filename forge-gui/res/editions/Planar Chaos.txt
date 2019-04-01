@@ -176,7 +176,6 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 53 C Wistful Thinking
 
 [tokens]
-chronozoa
 w_1_1_soldier
 b_2_2_knight_flanking_pro_white_haste
 g_3_3_ape

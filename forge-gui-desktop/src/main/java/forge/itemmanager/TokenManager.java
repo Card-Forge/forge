@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import forge.item.PaperToken;
 import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.TokenSearchFilter;
 import forge.screens.match.controllers.CDetailPicture;
 
 import javax.swing.*;
@@ -18,7 +19,11 @@ public class TokenManager extends ItemManager<PaperToken> {
 
     @Override
     protected ItemFilter<PaperToken> createSearchFilter() {
-        return null;
+        return createSearchFilter(this);
+    }
+
+    public static ItemFilter<PaperToken> createSearchFilter(final ItemManager<? super PaperToken> itemManager) {
+        return new TokenSearchFilter(itemManager);
     }
 
     @Override

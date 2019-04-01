@@ -351,13 +351,8 @@ Type=Other
 340 L Forest
 
 [tokens]
-banshee_of_the_dread_choir
-blade_of_selves
-broodbirth_viper
-caller_of_the_pack
 gold
 lightning_rager
-warchief_giant
 c_1_1_shapeshifter_changeling
 w_4_4_angel_flying
 w_2_2_cat

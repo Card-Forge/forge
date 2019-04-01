@@ -20,7 +20,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
     private DragCell deckGenParent = null;
     private DragCell probsParent = null;
 
-    private final List<PaperToken> fullCatalogCards = FModel.getMagicDb().getAllTokens().getAllTokens();
+    private List<PaperToken> fullCatalogCards;
 
     // remember changed gui elements
     private String CCTabLabel = new String();
@@ -37,6 +37,9 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
      */
     public CEditorTokenViewer(final CDetailPicture cDetailPicture) {
         super(FScreen.TOKEN_VIEWER, cDetailPicture);
+
+        FModel.getMagicDb().getAllTokens().preloadTokens();
+        fullCatalogCards = FModel.getMagicDb().getAllTokens().getAllTokens();
 
         final TokenManager catalogManager = new TokenManager(getCDetailPicture(), false);
         final TokenManager deckManager = new TokenManager(cDetailPicture, false);
@@ -102,8 +105,8 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("All tokens");
 
         this.getBtnAdd().setVisible(false);
+        this.getBtnAdd4().setVisible(false);
         this.getBtnRemove().setVisible(false);
-
         this.getBtnAddBasicLands().setVisible(false);
 
         VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
