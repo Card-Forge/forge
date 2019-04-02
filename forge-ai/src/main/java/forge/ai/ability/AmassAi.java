@@ -9,9 +9,14 @@ import forge.game.spellability.SpellAbility;
 
 public class AmassAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
         // TODO: should return "false" if the AI won't be able to create a token for some reason or put any counters
         return true;
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return mandatory || checkApiLogic(ai, sa);
     }
 
     @Override
