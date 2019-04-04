@@ -13,5 +13,6 @@ activeplayer=human
 activephase=MAIN1
 humanhand=Macabre Mockery;Makeshift Munitions;Strider Harness;Captivating Crew
 humanbattlefield=Dead Weight|AttachedTo:1;Rowdy Crew|Counters:P1P1=2;Rowdy Crew|Counters:P1P1=2;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Mountain;Mountain;Mountain;Mountain
+humanlibrary=Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace
 aigraveyard=Majestic Heliopterus;Hostage Taker;Ravenous Chupacabra;Bishop of Binding
 aibattlefield=Baird, Steward of Argive|Id:1;Dire Fleet Poisoner;Dire Fleet Poisoner;Dire Fleet Poisoner;Dire Fleet Poisoner
