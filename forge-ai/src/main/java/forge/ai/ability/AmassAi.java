@@ -2,15 +2,33 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class AmassAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
-        // TODO: should return "false" if the AI won't be able to create a token for some reason or put any counters
+        CardCollection aiArmies = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"));
+
+        if (!aiArmies.isEmpty()) {
+            boolean canAcceptCounters = false;
+            for (Card army : aiArmies) {
+                if (army.canReceiveCounters(CounterType.P1P1)) {
+                    canAcceptCounters = true;
+                    break;
+                }
+            }
+
+            if (!canAcceptCounters) {
+                return false;
+            }
+        } else {
+            // TODO: treat this as a Token creation logic, check in the AI will actually get a living token
+        }
+
         return true;
     }
 
