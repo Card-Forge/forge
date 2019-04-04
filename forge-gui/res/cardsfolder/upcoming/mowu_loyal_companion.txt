@@ -4,7 +4,7 @@ Types:Legendary Creature Hound
 PT:3/3
 K:Trample
 K:Vigilance
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on CARDNAME, that many plus one +1/+1 counters are put on it instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on CARDNAME, that many plus one +1/+1 counters are put on it instead.
 SVar:AddOneMoreCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X | References$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1
 AI:RemoveDeck:Random
