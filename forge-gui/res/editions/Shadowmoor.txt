@@ -312,7 +312,6 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 157 C Zealous Guardian
 
 [tokens]
-spawnwrithe
 w_1_1_kithkin_soldier
 w_1_1_spirit_flying
 b_1_1_rat

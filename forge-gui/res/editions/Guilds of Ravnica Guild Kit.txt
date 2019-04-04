@@ -145,9 +145,8 @@ g_3_3_centaur
 g_1_1_saproling
 g_1_1_saproling
 g_5_5_wurm_trample
-wg_8_8_elemental_vigilance
-wg_2_2_elf_knight_vigilance
+gw_8_8_elemental_vigilance
+gw_2_2_elf_knight_vigilance
 ub_1_1_horror_flying
 bg_1_1_insect
-wr_1_1_soldier_haste
-copy
+rw_1_1_soldier_haste

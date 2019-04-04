@@ -346,7 +346,6 @@ Type=Other
 337 L Forest
 
 [tokens]
-herald_of_the_host
 stoneforged_blade
 tuktuk_the_returned
 w_4_4_angel_flying

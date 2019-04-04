@@ -1,7 +1,5 @@
 package forge.gui.framework;
 
-import java.io.File;
-
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.properties.FileLocation;
@@ -20,6 +18,8 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
+
+import java.io.File;
 
 /**
  * Definitions for Forge screens
@@ -115,6 +115,16 @@ public class FScreen {
             "Close Editor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
+    public static final FScreen TOKEN_VIEWER = new FScreen(
+            VDeckEditorUI.SINGLETON_INSTANCE,
+            CDeckEditorUI.SINGLETON_INSTANCE,
+            "Token Viewer",
+            FSkin.getImage(FSkinProp.IMG_PACK),
+            true,
+            "Close Viewer",
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+
     public static final FScreen DECK_EDITOR_QUEST = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,

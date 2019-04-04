@@ -328,7 +328,6 @@ Type=Other
 298 U Zoetic Cavern
 
 [tokens]
-spawnwrithe
 c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
 w_1_1_kithkin_soldier

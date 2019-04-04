@@ -56,6 +56,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnUserProfileUI")).build();
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
     private final FLabel btnResetJavaFutureCompatibilityWarnings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnResetJavaFutureCompatibilityWarnings")).build();
+    private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
+    private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
+
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox(localizer.getMessage("cbRemoveSmall"));
@@ -143,6 +146,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnDeleteWorkshopUI, twoButtonConstraints2);
         pnlPrefs.add(btnUserProfileUI, twoButtonConstraints1);
         pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
+        pnlPrefs.add(btnClearImageCache, twoButtonConstraints1);
+        pnlPrefs.add(btnTokenPreviewer, twoButtonConstraints2);
 
         // General Configuration
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
@@ -780,6 +785,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final FLabel getBtnContentDirectoryUI() { return btnContentDirectoryUI; }
 
     public final FLabel getBtnUserProfileUI() { return btnUserProfileUI; }
+
+    public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
+    public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
 
     public final FLabel getBtnResetJavaFutureCompatibilityWarnings() {
         return btnResetJavaFutureCompatibilityWarnings;

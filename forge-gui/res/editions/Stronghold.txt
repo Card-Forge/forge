@@ -160,4 +160,3 @@ c_1_1_sliver
 b_1_1_rat
 r_1_1_goblin
 g_1_1_spike
-volraths_laboratory

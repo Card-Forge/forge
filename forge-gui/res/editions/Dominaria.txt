@@ -293,7 +293,6 @@ BoosterMustContain=Legendary Creature
 
 [tokens]
 karox_bladewing
-mishra's_self-replicator
 w_2_2_knight_vigilance
 w_2_2_knight_vigilance
 w_1_1_soldier

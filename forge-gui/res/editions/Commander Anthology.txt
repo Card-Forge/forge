@@ -328,8 +328,6 @@ Type=Other
 320 L Forest
 
 [tokens]
-banshee_of_the_dread_choir
-caller_of_the_pack
 w_1_1_kithkin_soldier
 w_2_2_knight_vigilance
 w_1_1_spirit_flying

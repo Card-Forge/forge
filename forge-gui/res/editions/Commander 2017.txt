@@ -318,7 +318,6 @@ Type=Other
 309 L Forest
 
 [tokens]
-bloodforged_battle-axe
 gold
 c_0_1_eldrazi_spawn_sac
 w_2_2_cat

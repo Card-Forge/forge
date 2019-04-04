@@ -232,7 +232,6 @@ Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Dr
 221 U Shimmering Grotto
 
 [tokens]
-spitting_slime
 w_1_1_soldier
 w_1_2_soldier_defender
 w_1_1_spirit_flying

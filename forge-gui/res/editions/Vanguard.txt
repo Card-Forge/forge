@@ -126,7 +126,6 @@ S Volrath
 S Xantcha
 
 [tokens]
-arrest
 c_1_1_sliver
 w_1_1_spirit_flying
 r_5_5_dragon_flying

@@ -157,7 +157,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 133 C Zombie Outlander
 
 [tokens]
-mirror-sigil_sergeant
 w_4_4_angel_flying
 w_1_1_soldier
 b_2_2_zombie

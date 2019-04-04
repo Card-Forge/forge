@@ -319,10 +319,7 @@ Type=Other
 312 L Forest
 
 [tokens]
-herald_of_the_host
-lightning_rager
 tuktuk_the_returned
-warchief_giant
 c_1_1_shapeshifter_changeling
 w_1_1_bird_flying
 w_0_1_goat

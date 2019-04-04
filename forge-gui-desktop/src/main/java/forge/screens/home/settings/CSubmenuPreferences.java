@@ -1,5 +1,6 @@
 package forge.screens.home.settings;
 
+import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.ai.AiProfileUtil;
@@ -13,6 +14,8 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
@@ -190,6 +193,20 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getBtnClearImageCache().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.clearImageCache();
+            }
+        });
+
+        view.getBtnTokenPreviewer().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.openTokenPreviewer();
+            }
+        });
+
         view.getBtnResetJavaFutureCompatibilityWarnings().setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -290,6 +307,20 @@ public enum CSubmenuPreferences implements ICDoc {
         } catch(final Exception e) {
             System.out.println("Unable to open Directory: " + e.toString());
         }
+    }
+
+    private void clearImageCache() {
+        try {
+            GuiBase.getInterface().clearImageCache();
+        } catch(final Exception e) {
+            System.out.println("Unable to clear cache: " + e.toString());
+        }
+    }
+
+    private void openTokenPreviewer() {
+        Singletons.getControl().setCurrentScreen(FScreen.TOKEN_VIEWER);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                new CEditorTokenViewer(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
     }
 
     private void openContentDirectory() {

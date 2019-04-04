@@ -192,7 +192,6 @@ FoilAlwaysInCommonSlot=False
 180 C Simic Growth Chamber
 
 [tokens]
-sprouting_phytohydra
 r_3_1_elemental
 r_2_1_goblin_haste
 g_1_1_saproling
