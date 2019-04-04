@@ -1,0 +1,6 @@
+Name:Arlinn's Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:3/2
+K:CantBeBlockedBy Creature.powerLE2
+Oracle:Arlinn's Wolf can't be blocked by creatures with power 2 or less.
