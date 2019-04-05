@@ -209,8 +209,9 @@ public class VStack implements IVDoc<CStack> {
                 public void mouseEntered(final MouseEvent e) {
                 	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
                 		hoveredItem = StackInstanceTextArea.this;
-                		controller.getMatchUI().setCard(item.getSourceCard());
                 	}
+                	controller.getMatchUI().setCard(item.getSourceCard());
+
                 }
 
                 @Override
