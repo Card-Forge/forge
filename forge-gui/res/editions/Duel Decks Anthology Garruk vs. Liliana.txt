@@ -1,7 +1,7 @@
 [metadata]
 Code=GVL
 Date=2014-12-05
-Name=Duel Decks: Garruk vs. Liliana
+Name=Duel Decks Anthology: Garruk vs. Liliana
 MciCode=gvl
 Type=Duel_Decks
 
