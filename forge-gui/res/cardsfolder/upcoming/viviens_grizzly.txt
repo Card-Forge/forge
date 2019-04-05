@@ -1,0 +1,6 @@
+Name:Vivien's Grizzly
+ManaCost:2 G
+Types:Creature Bear Spirit
+PT:2/3
+A:AB$ Dig | Cost$ 3 G | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Creature,Planeswalker | Optional$ True | PromptToSkipOptionalAbility$ True | DestinationZone$ Hand | AILogic$ Never | SpellDescription$ Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.
+Oracle:{3}{G}: Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.
