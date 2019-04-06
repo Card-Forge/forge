@@ -167,6 +167,7 @@ Orgg:Orggs
 Ouphe:Ouphes
 Ox:Oxen
 Oyster:Oysters
+Pangolin:Pangolins
 Pegasus:Pegasi
 Pentavite:Pentavites
 Pest:Pests
@@ -280,10 +281,11 @@ Bolas
 Chandra
 Dack
 Daretti
+Davriel
 Domri
 Dovin
-Estrid
 Elspeth
+Estrid
 Freyalise
 Garruk
 Gideon
@@ -307,10 +309,12 @@ Sarkhan
 Sorin
 Tamiyo
 Teferi
+Teyo
 Tezzeret
 Tibalt
 Ugin
 Venser
+Vivien
 Vraska
 Will
 Windgrace
