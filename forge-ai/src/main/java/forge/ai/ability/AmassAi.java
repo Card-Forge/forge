@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -10,7 +13,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class AmassAi extends SpellAbilityAi {
@@ -18,43 +20,45 @@ public class AmassAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
         CardCollection aiArmies = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"));
         Card host = sa.getHostCard();
+        final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            boolean canAcceptCounters = false;
-            for (Card army : aiArmies) {
-                if (army.canReceiveCounters(CounterType.P1P1)) {
-                    canAcceptCounters = true;
-                    break;
-                }
-            }
-
-            if (!canAcceptCounters) {
+            if (CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterType.P1P1)) <= 0) {
                 return false;
             }
         } else {
             final String tokenScript = "b_0_0_zombie_army";
             final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-            Card result = TokenInfo.getProtoType(tokenScript, sa);
+            Card token = TokenInfo.getProtoType(tokenScript, sa);
 
-            if (result == null) {
+            if (token == null) {
                 return false;
             }
 
-            result.setController(ai, 0);
+            token.setController(ai, 0);
+            token.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
-            host.getGame().getTriggerHandler().suppressMode(TriggerType.CounterAdded);
-            host.getGame().getTriggerHandler().suppressMode(TriggerType.CounterAddedOnce);
-            result.addCounter(CounterType.P1P1, amount, ai, true);
-            host.getGame().getTriggerHandler().clearSuppression(TriggerType.CounterAdded);
-            host.getGame().getTriggerHandler().clearSuppression(TriggerType.CounterAddedOnce);
+            boolean result = true;
 
-            final Game game = ai.getGame();
-            ComputerUtilCard.applyStaticContPT(game, result, null);
-            if (result.isCreature() && result.getNetToughness() < 1) {
+            // need to check what the cards would be on the battlefield
+            // do not attach yet, that would cause Events
+            CardCollection preList = new CardCollection(token);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(token), preList);
+
+            if (token.canReceiveCounters(CounterType.P1P1)) {
+                token.setCounters(CounterType.P1P1, amount);
+            }
+
+            if (token.isCreature() && token.getNetToughness() < 1) {
+                result = false;
+            }
+
+            //reset static abilities
+            game.getAction().checkStaticAbilities(false);
+
+            if (!result) {
                 return false;
-            } else {
-                return true;
             }
         }
 
@@ -88,7 +92,11 @@ public class AmassAi extends SpellAbilityAi {
 
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
-        return ComputerUtilCard.getBestAI(options);
+        Iterable<Card> better = CardLists.filter(options, CardPredicates.canReceiveCounters(CounterType.P1P1));
+        if (Iterables.isEmpty(better)) {
+            better = options;
+        }
+        return ComputerUtilCard.getBestAI(better);
     }
 }
 
