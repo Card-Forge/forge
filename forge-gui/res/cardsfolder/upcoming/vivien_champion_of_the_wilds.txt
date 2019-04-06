@@ -1,0 +1,9 @@
+Name:Vivien, Champion of the Wilds
+ManaCost:2 G
+Types:Legendary Planeswalker Vivien
+Loyalty:4
+S:Mode$ Continuous | Affected$ Creature | WithFlash$ You | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ You may cast creature spells as though they had flash.
+SVar:NonStackingEffect:True
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | KW$ Vigilance & Reach | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | SpellDescription$ Until your next turn, up to one target creature gains vigilance and reach.
+A:AB$ Dig | Cost$ SubCounter<2/-2/-2/-2/-2/-2/Card> | DigNum$ 3 | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Library | DestinationZone2$ Library | LibraryPosition$ -2 | RestRandomOrder$ True | SpellDescription$ Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may look at that card and you may cast it if it's a creature card.
+Oracle:You may cast creature spells as though they had flash.\n[+1]: Until your next turn, up to one target creature gains vigilance and reach.\n[-2]: Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may look at that card and you may cast it if it's a creature card.
