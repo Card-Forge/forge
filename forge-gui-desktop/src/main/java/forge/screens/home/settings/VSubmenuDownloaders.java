@@ -206,6 +206,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void auditUpdate(FTextArea tar, FScrollPane scr) {
         // Get top-level Forge objects
         CardDb cardDb = StaticData.instance().getCommonCards();
+        CardDb variantDb = StaticData.instance().getVariantCards();
         CardEdition.Collection editions = StaticData.instance().getEditions();
 
         int missingCount = 0;
@@ -247,6 +248,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
+                if (cp == null) {
+                    cp = variantDb.getCard(c, e.getCode(), artIndex);
+                }
+
                 if (cp != null) {
                     String imagePath;
 
