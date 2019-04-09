@@ -1032,8 +1032,9 @@ public class CardFactoryUtil {
 
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
-            final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
-            return doXMath(topCard == null ? 0 : topCard.getCMC(), m, c);
+            int cmc = cc.getCardsIn(ZoneType.Library).isEmpty() ? 0 :
+                cc.getCardsIn(ZoneType.Library).getFirst().getCMC();
+            return doXMath(cmc, m, c);
         }
         
         // Count$EnchantedControllerCreatures

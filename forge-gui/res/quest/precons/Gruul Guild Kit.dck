@@ -1,0 +1,51 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gruul Guild Kit
+Description=Welcome to Gruul Clans. Box is full of things that break other things. Go break everything!
+Set=GK2
+Image=gruul_guild_kit.jpg
+[Avatar]
+
+[Main]
+1 Birds of Paradise|GK2
+1 Borborygmos|GK2
+1 Burning-Tree Emissary|GK2
+1 Burning-Tree Shaman|GK2
+1 Cindervines|RNA
+2 Clan Guildmage|RNA
+1 Collision // Colossus|RNA
+1 Flames of the Raze-Boar|RNA
+8 Forest|GK2|1
+1 Ghor-Clan Rampager|GK2
+1 Giant Solifuge|GK2
+1 Gruul Charm|GK2
+2 Gruul Guildgate|RNA|1
+2 Gruul Guildgate|RNA|2
+2 Gruul Signet|GK2
+4 Gruul Turf|GK2
+1 Immolation Shaman|RNA
+8 Mountain|GK2|2
+1 Pit Fight|GK2
+1 Protean Hulk|GK2
+1 Ravager Wurm|RNA
+1 Rhythm of the Wild|RNA
+1 Rubblebelt Raiders|GK2
+1 Rubblehulk|GK2
+1 Rumbling Slum|GK2
+1 Ruric Thar, the Unbowed|GK2
+1 Savage Twister|GK2
+1 Savageborn Hydra|GK2
+2 Scab-Clan Mauler|GK2
+1 Skarrgan Firebird|GK2
+1 Skarrgan Pit-Skulk|GK2
+1 Sunder Shaman|RNA
+1 Ulasht, the Hate Seed|GK2
+1 Wasteland Viper|GK2
+1 Wurmweaver Coil|GK2
+1 Zhur-Taa Druid|GK2
+1 Zhur-Taa Goblin|RNA
+1 Zhur-Taa Swine|GK2

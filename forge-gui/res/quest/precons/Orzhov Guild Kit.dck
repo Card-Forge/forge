@@ -1,0 +1,51 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Orzhov Guild Kit
+Description=Welcom to the Orzhov Syndicate. This box contains everything you need to attain lavish wealth and eternal life to enjoy it… so long as you pay your debts. Claim all that is owed to you.
+Set=GK2
+Image=orzhov_guild_kit.jpg
+[Avatar]
+
+[Main]
+1 Angel of Despair|GK2
+1 Basilica Bell-Haunt|RNA
+1 Belfry Spirit|GK2
+1 Consecrate // Consume|RNA
+1 Deathpact Angel|GK2
+1 Debtors' Knell|GK2
+1 Ethereal Absolution|RNA
+1 Final Payment|RNA
+1 Ghost Council of Orzhova|GK2
+2 Imperious Oligarch|RNA
+1 Keening Banshee|GK2
+1 Martyred Rusalka|GK2
+1 Ministrant of Obligation|RNA
+1 Mortify|RNA
+1 One Thousand Lashes|GK2
+4 Orzhov Basilica|GK2
+1 Orzhov Charm|GK2
+1 Orzhov Enforcer|RNA
+2 Orzhov Guildgate|RNA|1
+2 Orzhov Guildgate|RNA|2
+1 Orzhov Pontiff|GK2
+2 Orzhov Signet|GK2
+1 Pillory of the Sleepless|GK2
+1 Pitiless Pontiff|RNA
+1 Plagued Rusalka|GK2
+8 Plains|GK2|2
+1 Pontiff of Blight|GK2
+1 Sin Collector|GK2
+1 Skeletal Vampire|GK2
+1 Smothering Tithe|RNA
+1 Stab Wound|GK2
+8 Swamp|GK2|1
+1 Teysa Karlov|RNA
+1 Teysa, Orzhov Scion+|GK2
+1 Treasury Thrull|GK2
+1 Ultimate Price|GK2
+1 Vindictive Vampire|RNA
+2 Vizkopa Guildmage|GK2
