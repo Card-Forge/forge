@@ -396,6 +396,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        // Run SpellAbilityCopy triggers
+        if (sp.isCopied()) {
+            runParams.put("Activator", sp.getActivatingPlayer());
+            runParams.put("CopySA", si.getSpellAbility(true));
+            // Run SpellCopy triggers
+            if (sp.isSpell()) {
+                game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
+            }
+        }
+
         // Run BecomesTarget triggers
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();

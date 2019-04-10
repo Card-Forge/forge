@@ -80,6 +80,7 @@ public enum TriggerType {
     Shuffled(TriggerShuffled.class),
     SpellAbilityCast(TriggerSpellAbilityCast.class),
     SpellCast(TriggerSpellAbilityCast.class),
+    SpellCopy(TriggerSpellAbilityCopy.class),
     Surveil(TriggerSurveil.class),
     Taps(TriggerTaps.class),
     TapsForMana(TriggerTapsForMana.class),
