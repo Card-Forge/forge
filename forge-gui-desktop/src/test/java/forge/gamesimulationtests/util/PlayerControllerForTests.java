@@ -563,12 +563,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         // no longer possible to run AI's methods on SpellAbility
         // return currentAbility.doTrigger(true, player);

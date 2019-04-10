@@ -18,12 +18,10 @@
 package forge.ai;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ExploreAi;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -1782,75 +1780,6 @@ public class AiController {
 
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
-    }
-
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        final Map<GameEntity, CounterType> result = Maps.newHashMap();  
-        
-        final List<Player> allies = player.getAllies();
-        allies.add(player);
-        final List<Player> enemies = player.getOpponents();
-        final Function<Card, CounterType> predProliferate = new Function<Card, CounterType>() {
-            @Override
-            public CounterType apply(Card crd) {
-                //fast way out, no need to check other stuff
-                if (!crd.hasCounters()) {
-                    return null;
-                }
-
-                // cards controlled by ai or ally with Vanishing or Fading
-                // and exaclty one counter of the specifice type gets high priority to keep the card
-                if (allies.contains(crd.getController())) {
-                    // except if its a Chronozoa, because it WANTS to be removed to make more
-                    if (crd.hasKeyword(Keyword.VANISHING) && !"Chronozoa".equals(crd.getName())) {
-                        if (crd.getCounters(CounterType.TIME) == 1) {
-                            return CounterType.TIME;
-                        }
-                    } else if (crd.hasKeyword(Keyword.FADING)) {
-                        if (crd.getCounters(CounterType.FADE) == 1) {
-                            return CounterType.FADE;
-                        }
-                    }
-                }
-
-                for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
-                    // if card can not recive the given counter, try another one
-                    if (!crd.canReceiveCounters(c1.getKey())) {
-                        continue;
-                    }
-                    if (ComputerUtil.isNegativeCounter(c1.getKey(), crd) && enemies.contains(crd.getController())) {
-                        return c1.getKey();
-                    }
-                    if (!ComputerUtil.isNegativeCounter(c1.getKey(), crd) && allies.contains(crd.getController())) {
-                        return c1.getKey();
-                    }
-                }
-                return null;
-            }
-        };
-
-        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            CounterType ct = predProliferate.apply(c);
-            if (ct != null)
-                result.put(c, ct);
-        }
-        
-        for (Player e : enemies) {
-            // TODO In the future check of enemies can get poison counters and give them some other bad counter type
-            if (e.getCounters(CounterType.POISON) > 0) {
-                result.put(e, CounterType.POISON);
-            }
-        }
-
-        for (Player pl : allies) {
-            if (pl.getCounters(CounterType.EXPERIENCE) > 0) {
-                result.put(pl, CounterType.EXPERIENCE);
-            } else if (pl.getCounters(CounterType.ENERGY) > 0) {
-                result.put(pl, CounterType.ENERGY);
-            }
-        }
-
-        return result;
     }
 
     public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional) {
