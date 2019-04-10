@@ -954,11 +954,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa) {
-        return brains.chooseProliferation(sa);
-    }
-
-    @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         return brains.doTrigger(currentAbility, true);
     }

@@ -8,4 +8,4 @@ SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidTgts$ Player | TgtPrompt$ Select
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion_engine.jpg
-Oracle:When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
+Oracle:When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)

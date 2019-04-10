@@ -1725,17 +1725,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        final InputProliferate inp = new InputProliferate(this, sa);
-        inp.setCancelAllowed(true);
-        inp.showAndWait();
-        if (inp.hasCancelled()) {
-            return null;
-        }
-        return inp.getProliferationMap();
-    }
-
-    @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
         return select.chooseTargets(null);
