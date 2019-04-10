@@ -23,6 +23,7 @@ Ape:Apes
 Archer:Archers
 Archon:Archons
 Artificer:Artificers
+Army:Armies
 Assassin:Assassins
 Assembly-Worker:Assembly-Workers
 Atog:Atogs
