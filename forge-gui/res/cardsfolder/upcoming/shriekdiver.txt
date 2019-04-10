@@ -1,0 +1,7 @@
+Name:Shriekdiver
+ManaCost:2 B
+Types:Creature Zombie Bird Warrior
+PT:2/1
+K:Flying
+A:AB$ Pump | Cost$ 1 | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+Oracle:Flying\n{1}: Shriekdiver gains haste until end of turn.

@@ -1,0 +1,6 @@
+Name:Wizard
+ManaCost:no cost
+Types:Creature Wizard
+Colors:blue
+PT:2/2
+Oracle:
