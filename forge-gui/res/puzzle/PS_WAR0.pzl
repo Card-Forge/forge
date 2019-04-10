@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #00 (Card Preview Puzzle)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/04/108.-WAR001.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have not played a land yet. Your opponent has four cards in hand that they can't cast and has {5} available. Assume that any cards you draw from your library do not contribute to the solution, i.e. Boros Guildgate. Your solution must account for the opponent's decisions!
+[state]
+humanlife=20
+ailife=7
+humanlandsplayed=0
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Eternal Skylord;Clifftop Retreat;Maximize Velocity;Deputy of Detention;Act of Treason
+humanlibrary=Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate
+humanbattlefield=Eternal Skylord;t:Zombie Army,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Zombie-Army,Keywords:Flying,Image:b_0_0_zombie_army|Counters:P1P1=4;Benalish Marshal;Mentor of the Meek;Azorius Guildgate;Azorius Guildgate;Azorius Guildgate;Azorius Guildgate;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+ailibrary=Boros Guildgate;Boros Guildgate;Boros Guildgate;Boros Guildgate
+aigraveyard=Tishana, Voice of Thunder
+aibattlefield=Chamber Sentry|Counters:P1P1=5;Cold-Water Snapper;Cold-Water Snapper;Scuttlegator;Kumena's Speaker
+aipersistentmana=C C C C C
