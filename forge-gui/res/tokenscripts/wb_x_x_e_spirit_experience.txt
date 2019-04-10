@@ -1,6 +1,6 @@
 Name:Spirit
 ManaCost:no cost
-Types:Creature Spirit
+Types:Enchantment Creature Spirit
 Colors:white,black
 PT:*/*
 S:Mode$ Continuous | SetPower$ X | SetToughness$ X | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to the number of experience counters you have.
