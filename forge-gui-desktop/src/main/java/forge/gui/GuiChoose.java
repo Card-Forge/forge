@@ -250,7 +250,7 @@ public class GuiChoose {
 
         final Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
-            public List<T> call() throws Exception {
+            public List<T> call() {
                 final DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
                 dual.setSecondColumnLabelText(top);
 
@@ -290,7 +290,7 @@ public class GuiChoose {
 	gui.setSelectables(manipulable);
 	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
 		@Override 
-		public List<CardView> call() throws Exception {
+		public List<CardView> call() {
 		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
 		    //		tempArea.pack();
 		    tempArea.show();

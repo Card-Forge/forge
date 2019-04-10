@@ -155,12 +155,12 @@ public enum EDocID {
     // End enum declarations, start enum methods.
     private IVDoc<? extends ICDoc> vDoc;
 
-    private EDocID() {
+    EDocID() {
         this(null);
     }
 
     /** @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    private EDocID(final IVDoc<? extends ICDoc> doc0) {
+    EDocID(final IVDoc<? extends ICDoc> doc0) {
         this.vDoc = doc0;
     }
 

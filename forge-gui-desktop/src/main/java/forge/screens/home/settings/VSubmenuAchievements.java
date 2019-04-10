@@ -68,7 +68,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private final FScrollPane scroller = new FScrollPane(trophyCase, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private VSubmenuAchievements() {
+    VSubmenuAchievements() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         trophyCase.setMinimumSize(new Dimension(FSkinProp.IMG_TROPHY_SHELF.getWidth(), 0));

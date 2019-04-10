@@ -14,7 +14,7 @@ public enum CWorkshopCatalog implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private CWorkshopCatalog() {
+    CWorkshopCatalog() {
     }
 
     //========== Overridden methods

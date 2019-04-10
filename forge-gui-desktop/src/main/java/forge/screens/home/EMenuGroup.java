@@ -18,7 +18,7 @@ public enum EMenuGroup {
     private final String strTitle;
 
     /** @param {@link java.lang.String} */
-    private EMenuGroup(final String s0) { strTitle = s0; }
+    EMenuGroup(final String s0) { strTitle = s0; }
 
     /** @return {@link java.lang.String} */
     public String getTitle() {

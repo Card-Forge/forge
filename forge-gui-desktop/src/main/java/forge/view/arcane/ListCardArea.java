@@ -151,8 +151,7 @@ public class ListCardArea extends FloatingCardArea {
 	for(int i=index+1-(oldIndex>index?1:0); i<cardList.size(); i++) {
 	    if (!moveableCards.contains(cardList.get(i))) { bottomMove=false; break; }
 	}
-	if (toBottom && bottomMove) { return true; }
-	return false;
+        return toBottom && bottomMove;
     }
 
     @Override

@@ -34,7 +34,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblConstructedMode"));
     private final GameLobby lobby = new LocalLobby();
     private final VLobby vLobby = new VLobby(lobby);
-    private VSubmenuConstructed() {
+    VSubmenuConstructed() {
         lobby.setListener(vLobby);
 
         vLobby.setPlayerChangeListener(new IPlayerChangeListener() {

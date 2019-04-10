@@ -7,28 +7,30 @@ import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.player.RegisteredPlayer;
+import forge.util.Localizer;
 
 public enum GameType {
-    Sealed          (DeckFormat.Limited, true, true, true, "Sealed", ""),
-    Draft           (DeckFormat.Limited, true, true, true, "Draft", ""),
-    Winston         (DeckFormat.Limited, true, true, true, "Winston", ""),
-    Gauntlet        (DeckFormat.Constructed, false, true, true, "Gauntlet", ""),
-    Tournament      (DeckFormat.Constructed, false, true, true, "Tournament", ""),
-    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", ""),
-    QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", ""),
-    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", ""),
-    Puzzle          (DeckFormat.Puzzle, false, false, false, "Puzzle", "Solve a puzzle from the given game state"),
-    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", ""),
-    DeckManager     (DeckFormat.Constructed, false, true, true, "Deck Manager", ""),
-    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),
-    Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."),
-    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4."),
-    Brawl           (DeckFormat.Brawl, false, false, false, "Brawl", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Only cards legal in Standard may be used."),
-    Planeswalker    (DeckFormat.PlanarConquest, false, false, true, "Planeswalker", "Each player has a Planeswalker card which can be cast at any time."),
-    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. The Plane card changes when a player rolls \"Planeswalk\" on the planar die."),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and fights the other players by playing Scheme cards."),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play Scheme cards."),
-    MomirBasic      (DeckFormat.Constructed, false, false, false, "Momir Basic", "Each player has a deck containing 60 basic lands and the Momir Vig avatar.", new Function<RegisteredPlayer, Deck>() {
+
+    Sealed          (DeckFormat.Limited, true, true, true, "lblSealed", ""),
+    Draft           (DeckFormat.Limited, true, true, true, "lblDraft", ""),
+    Winston         (DeckFormat.Limited, true, true, true, "lblWinston", ""),
+    Gauntlet        (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
+    Tournament      (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
+    Quest           (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
+    QuestDraft      (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
+    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "lblPlanarConquest", ""),
+    Puzzle          (DeckFormat.Puzzle, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
+    Constructed     (DeckFormat.Constructed, false, true, true, "lblConstructed", ""),
+    DeckManager     (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
+    Vanguard        (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
+    Commander       (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
+    Brawl           (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
+    Planeswalker    (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
+    Planechase      (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
+    MomirBasic      (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
@@ -43,7 +45,7 @@ public enum GameType {
             return deck;
         }
     }),
-    MoJhoSto      (DeckFormat.Constructed, false, false, false, "MoJhoSto", "Each player has a deck containing 60 basic lands and the Momir Vig, Jhoira of the Ghitu, and Stonehewer Giant avatars.", new Function<RegisteredPlayer, Deck>() {
+    MoJhoSto      (DeckFormat.Constructed, false, false, false, "lblMoJhoSto", "lblMoJhoStoDesc", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
@@ -69,14 +71,19 @@ public enum GameType {
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
     private GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0) {
+
         this(deckFormat0, isCardPoolLimited0, canSideboard0, addWonCardsMidgame0, name0, description0, null);
     }
     private GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
+        final Localizer localizer = forge.util.Localizer.getInstance();
         deckFormat = deckFormat0;
         isCardPoolLimited = isCardPoolLimited0;
         canSideboard = canSideboard0;
         addWonCardsMidGame = addWonCardsMidgame0;
-        name = name0;
+        name = localizer.getMessage(name0);
+        if (description0.length()>0) {
+            description0 = localizer.getMessage(description0);
+        }
         description = description0;
         deckAutoGenerator = deckAutoGenerator0;
     }

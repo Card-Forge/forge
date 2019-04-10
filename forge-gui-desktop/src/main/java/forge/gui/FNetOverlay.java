@@ -105,7 +105,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
-    private FNetOverlay() {
+    FNetOverlay() {
         window.setTitle("Chat");
         window.setVisible(false);
         window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));

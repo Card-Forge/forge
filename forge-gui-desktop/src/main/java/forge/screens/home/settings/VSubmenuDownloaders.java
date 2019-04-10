@@ -67,6 +67,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      * Constructor.
      */
     VSubmenuDownloaders() {
+        final Localizer localizer = Localizer.getInstance();
 
         final String constraintsLBL = "w 90%!, h 20px!, center, gap 0 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, center";
@@ -106,7 +107,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
         }
-        
+
         pnlContent.add(btnListImageData, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblListImageData")), constraintsLBL);
 

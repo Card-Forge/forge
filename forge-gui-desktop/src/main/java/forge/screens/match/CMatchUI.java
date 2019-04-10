@@ -155,7 +155,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
-        this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());;
+        this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
     }
 
     private void registerDocs() {
@@ -703,7 +703,7 @@ public final class CMatchUI
             FThreads.invokeInEdtNowOrLater(focusRoutine);
         } else {
             FThreads.invokeInEdtAndWait(focusRoutine);
-        };
+        }
     }
 
     @Override

@@ -47,7 +47,7 @@ public enum FOverlay {
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
-    private FOverlay() {
+    FOverlay() {
         pnl.setOpaque(false);
         pnl.setVisible(false);
         pnl.setFocusCycleRoot(true);
