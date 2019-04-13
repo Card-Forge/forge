@@ -138,7 +138,8 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public CardRarity getRarity() { return CardRarity.None; }
 
     // Unfortunately this is a property of token, cannot move it outside of class
-    public String getImageFilename() { return imageFileName.get(0); }
+    public String getImageFilename() { return getImageFilename(1); }
+    public String getImageFilename(int idx) { return imageFileName.get(idx-1); }
 
     @Override public String getItemType() { return "Token"; }
 
@@ -147,6 +148,10 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override
     public String getImageKey(boolean altState) {
         int idx = MyRandom.getRandom().nextInt(artIndex);
-        return ImageKeys.TOKEN_PREFIX + imageFileName.get(idx).replace(" ", "_");
+        return getImageKey(idx);
+    }
+
+    public String getImageKey(int artIndex) {
+        return ImageKeys.TOKEN_PREFIX + imageFileName.get(artIndex).replace(" ", "_");
     }
 }
