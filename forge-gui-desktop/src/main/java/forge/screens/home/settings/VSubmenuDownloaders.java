@@ -12,10 +12,12 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.properties.ForgeConstants;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
+import forge.token.TokenDb;
 import forge.toolbox.*;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
@@ -30,7 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -208,6 +211,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         // Get top-level Forge objects
         CardDb cardDb = StaticData.instance().getCommonCards();
         CardDb variantDb = StaticData.instance().getVariantCards();
+        TokenDb tokenDb = StaticData.instance().getAllTokens();
         CardEdition.Collection editions = StaticData.instance().getEditions();
 
         int missingCount = 0;
@@ -228,38 +232,53 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             nifSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
             cniSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
 
-            // perform sorting on the cards for this edition...
-            String lastName = null;
+            String imagePath;
             int artIndex = 1;
             ArrayList<String> cis = new ArrayList<String>();
+
+            HashMap<String, Integer> cardCount = new HashMap<String, Integer>();
             for (CardInSet c : e.getCards()) {
-                cis.add(c.name);
+                if (cardCount.containsKey(c.name)) {
+                    cardCount.put(c.name, cardCount.get(c.name) + 1);
+                } else {
+                    cardCount.put(c.name, 1);
+                }
             }
-            Collections.sort(cis.subList(1, cis.size()));
             
             // loop through the cards in this edition, considering art variations...
-            for (String c : cis) {
-                // if the same card name is set and this card has the same name as the previous...
-                if ((lastName != null) && (c.contentEquals(lastName))) {
-                    // must be a card with multiple art representations...
-                    artIndex++;
-                } else {
-                    // else this is a unique card or first of a multiple art set...
-                    artIndex = 1;
-                }
+            for (Entry<String, Integer> entry : cardCount.entrySet()) {
+                String c = entry.getKey();
+                artIndex = entry.getValue();
 
                 PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
                 if (cp == null) {
                     cp = variantDb.getCard(c, e.getCode(), artIndex);
                 }
 
-                if (cp != null) {
-                    String imagePath;
+                if (cp == null) {
+                    cniSB.append(" " + c + "\n");
+                    notImplementedCount++;
+                    continue;
+                }
 
-                    //
-                    // check the front image
-                    //
-                    imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
+
+                //
+                // check the front image
+                //
+                imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
+                if (imagePath != null) {
+                    File file = ImageKeys.getImageFile(imagePath);
+                    if (file == null) {
+                        nifSB.append(" " + imagePath + "\n");
+                        missingCount++;
+                    }
+                } 
+
+                //
+                // check the back face
+                //
+                if (ImageUtil.hasBackFacePicture(cp)) {
+                    imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
@@ -267,29 +286,36 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                             missingCount++;
                         }
                     } 
-
-                    //
-                    // check the back face
-                    //
-                    if (ImageUtil.hasBackFacePicture(cp)) {
-                        imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
-                        if (imagePath != null) {
-                            File file = ImageKeys.getImageFile(imagePath);
-                            if (file == null) {
-                                nifSB.append(" " + imagePath + "\n");
-                                missingCount++;
-                            }
-                        } 
-                    }
-                } else {
-                    cniSB.append(" " + c + "\n");
-                    notImplementedCount++;
                 }
-                lastName = c;
             }
+
+            nifSB.append("\nTOKENS\n");
+
+            // TODO: Audit token images here...
+            for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+                String name = tokenEntry.getKey();
+                artIndex = tokenEntry.getValue();
+                try {
+                    PaperToken token = tokenDb.getToken(name, e.getCode());
+                    if (token == null) {
+                        continue;
+                    }
+
+                    for(int i = 0; i < artIndex; i++) {
+                        String imgKey = token.getImageKey(i);
+                        File file = ImageKeys.getImageFile(imgKey);
+                        if (file == null) {
+                            nifSB.append(" " + token.getImageFilename(i+1) + "\n");
+                            missingCount++;
+                        }
+                    }
+                } catch(Exception ex) {
+                    System.out.println("No Token found: " + name + " in " + e.getName());
+                }
+            }
+            nifSB.append("\n");
         }
 
-        // TODO: Audit token images here...
 
         String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
         cniSB.append("\n-----------\n");
@@ -317,7 +343,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         FOverlay.SINGLETON_INSTANCE.getPanel().validate();
         FOverlay.SINGLETON_INSTANCE.getPanel().repaint();
-
     }
 
     public void showCardandImageAuditData() {

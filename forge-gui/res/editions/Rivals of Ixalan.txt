@@ -223,7 +223,7 @@ r_1_1_elemental
 r_0_1_elemental_rekindling_phoenix
 g_3_3_dinosaur_trample
 g_1_1_saproling
-d_4_4_a_golem
+c_4_4_a_golem
 c_a_treasure_sac
 c_a_treasure_sac
 c_a_treasure_sac
