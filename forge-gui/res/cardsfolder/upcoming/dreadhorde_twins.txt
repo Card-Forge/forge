@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBAmass:DB$ Amass | Num$ 2
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Trample | Description$ Zombie tokens you control have trample.
 SVar:PlayMain1:TRUE
-DeckHints:Type$Zombie
+DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token
 Oracle:When Dreadhorde Twins enters the battlefield, amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have trample.
