@@ -48,7 +48,15 @@ public class StaticAbilityCantTarget {
         final Player activator = spellAbility.getActivatingPlayer();
 
         if (params.containsKey("AffectedZone")) {
-            if (!card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
+            boolean inZone = false;
+            for (final ZoneType zt : ZoneType.listValueOf(params.get("AffectedZone"))) {
+                if (card.isInZone(zt)) {
+                    inZone = true;
+                    break;
+                }
+            }
+
+            if (!inZone) {
                 return false;
             }
         } else { // default zone is battlefield
