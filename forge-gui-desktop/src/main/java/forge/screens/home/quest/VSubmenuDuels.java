@@ -8,7 +8,6 @@ import forge.interfaces.IButton;
 import forge.quest.IVQuestStats;
 import forge.screens.home.*;
 import forge.toolbox.*;
-import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
 import javax.swing.*;
