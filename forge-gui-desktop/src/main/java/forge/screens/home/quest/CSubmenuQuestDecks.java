@@ -14,6 +14,7 @@ import forge.quest.QuestUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuest;
+import forge.util.Localizer;
 
 /**
  * Controls the quest decks submenu in the home UI.
@@ -55,10 +56,12 @@ public enum CSubmenuQuestDecks implements ICDoc {
      */
     @Override
     public void initialize() {
+        final Localizer localizer = Localizer.getInstance();
+
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
-                if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
+                if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblCreateaDeck"))) {
                     return;
                 }
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);

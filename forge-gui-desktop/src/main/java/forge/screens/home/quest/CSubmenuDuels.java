@@ -8,6 +8,7 @@ import forge.quest.QuestEventDuel;
 import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -168,8 +169,8 @@ public enum CSubmenuDuels implements ICDoc {
 		final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
 		if (FModel.getQuest().getAchievements() != null) {
-
-			view.getLblTitle().setText("Duels: " + FModel.getQuest().getRank());
+			final Localizer localizer = Localizer.getInstance();
+			view.getLblTitle().setText(localizer.getMessage("lblDuels") + ": " + FModel.getQuest().getRank());
 
 			view.getPnlDuels().removeAll();
 			final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
@@ -196,7 +197,7 @@ public enum CSubmenuDuels implements ICDoc {
 			view.getPnlDuels().add(grpPanel, "w 100%!");
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("Match - Best of ").append(FModel.getQuest().getMatchLength());
+			sb.append(localizer.getMessage("lblMatchBestof") + " ").append(FModel.getQuest().getMatchLength());
 			view.getCbxMatchLength().setSelectedItem(sb.toString());
 		}
 	}

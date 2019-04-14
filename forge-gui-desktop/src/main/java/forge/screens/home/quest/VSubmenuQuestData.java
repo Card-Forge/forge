@@ -17,8 +17,8 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
-import forge.util.Localizer;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -50,7 +50,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FLabel lblTitleNew = new FLabel.Builder().text(localizer.getMessage("lblStartanewQuest")).opaque(true).fontSize(16).build();
 
     String str=new String( ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/'));
-    private final FLabel lblOldQuests = new FLabel.Builder().text(localizer.getMessage("lblOldQuestData").replace("%n",str)).fontAlign(SwingConstants.CENTER).fontSize(12).build();
+    private final FLabel lblOldQuests = new FLabel.Builder().text(localizer.getMessage("lblOldQuestData").replace("%s",str)).fontAlign(SwingConstants.CENTER).fontSize(12).build();
     private final QuestFileLister lstQuests = new QuestFileLister();
     private final FScrollPane scrQuests = new FScrollPane(lstQuests, false);
     private final JPanel pnlOptions = new JPanel();
@@ -72,10 +72,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     private final FLabel lblUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailable")).build();
 
-    private final FLabel lblPreconDeck = new FLabel.Builder().text(localizer.getMessage("lblStarterEventdeck")).build();
+    private final FLabel lblPreconDeck = new FLabel.Builder().text(localizer.getMessage("lblStarterEventdeck") +":").build();
     private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<>();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat")).build();
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat") + "").build();
     private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<>();
 
     private final FLabel lblCustomDeck = new FLabel.Builder().text(localizer.getMessage("lblCustomdeck")).build();

@@ -17,6 +17,7 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.bazaar.CBazaarUI;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.io.File;
@@ -230,6 +231,7 @@ public enum CSubmenuQuestData implements ICDoc {
      * The actuator for new quests.
      */
     private void newQuest() {
+        final Localizer localizer = Localizer.getInstance();
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         final int difficulty = view.getSelectedDifficulty();
 
@@ -250,7 +252,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Casual:
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
-                    if (!FOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
+                    if (!FOptionPane.showConfirmDialog(localizer.getMessage("lblNotFormatDefined"))) {
                         return;
                     }
                 }
@@ -262,7 +264,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Cube:
                 dckStartPool = view.getSelectedDeck();
                 if (null == dckStartPool) {
-                    FOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
+                    FOptionPane.showMessageDialog(localizer.getMessage("lbldckStartPool"), localizer.getMessage("lblCannotStartaQuest"), FOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
@@ -296,7 +298,7 @@ public enum CSubmenuQuestData implements ICDoc {
                         sets.add(c.getKey().getEdition());
                     }
                 }
-                fmtPrizes = new GameFormat("From deck", sets, null);
+                fmtPrizes = new GameFormat(localizer.getMessage("lblFromDeck"), sets, null);
             }
         }
         else {
@@ -307,7 +309,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Casual:
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
-                    if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prizes.\n\nContinue?")) {
+                    if (!FOptionPane.showConfirmDialog(localizer.getMessage("lblNotFormatDefined"))) {
                         return;
                     }
                 }
@@ -325,17 +327,17 @@ public enum CSubmenuQuestData implements ICDoc {
 
         String questName;
         while (true) {
-            questName = FOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
+            questName = FOptionPane.showInputDialog(localizer.getMessage("MsgQuestNewName") + ":",  localizer.getMessage("TitQuestNewName"));
             if (questName == null) { return; }
 
             questName = QuestUtil.cleanString(questName);
 
             if (questName.isEmpty()) {
-                FOptionPane.showMessageDialog("Please specify a quest name.");
+                FOptionPane.showMessageDialog(localizer.getMessage("lblQuestNameEmpty"));
                 continue;
             }
             if (getAllQuests().get(questName + ".dat") != null) {
-                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                FOptionPane.showMessageDialog(localizer.getMessage("lblQuestExists"));
                 continue;
             }
             break;

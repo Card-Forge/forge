@@ -7,6 +7,7 @@ import forge.gui.framework.EDocID;
 import forge.quest.IVQuestStats;
 import forge.screens.home.*;
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ import java.awt.*;
 public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuestStats {
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
