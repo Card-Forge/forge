@@ -476,7 +476,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
-            return null;
+            return Lists.newArrayList();
         }
 
         if (delayedReveal != null) {
