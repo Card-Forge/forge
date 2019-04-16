@@ -455,11 +455,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return true;
     }
-    
+
     public final int loseLife(final int toLose) {
     	return loseLife(toLose,false);
     }
-    
+
     public final int loseLife(final int toLose, final boolean manaBurn) {
         int lifeLost = 0;
         if (!canLoseLife()) {
@@ -1555,6 +1555,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table) {
+        if (!c.canBeDiscardedBy(sa)) {
+            return null;
+        }
+
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -2935,4 +2939,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.count(attachedCards, CardPredicates.Presets.CURSE) > 0;
     }
 
+    public boolean canDiscardBy(SpellAbility sa) {
+        if (sa == null) {
+            return true;
+        }
+
+        if (isOpponentOf(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities your opponents control can't cause you to discard cards.")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean canSacrificeBy(SpellAbility sa) {
+        if (sa == null) {
+            return true;
+        }
+
+        if (isOpponentOf(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+            return false;
+        }
+
+        return true;
+    }
 }

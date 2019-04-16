@@ -1988,7 +1988,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] k = keyword.split(":");
                     final String manacost = k[1];
                     final Cost cost = new Cost(manacost, false);
-    
+
                     StringBuilder sbCost = new StringBuilder(k[0]);
                     if (!cost.isOnlyManaCost()) {
                         sbCost.append("—");
@@ -2038,7 +2038,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
-    
+
                     StringBuilder sbCost = new StringBuilder(k[0]);
                     if (!cost.isOnlyManaCost()) {
                         sbCost.append("—");
@@ -2064,13 +2064,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbAfter.append(" (" + inst.getReminderText() + ")").append("\r\n");
                 } else if (keyword.equals("Storm")) {
                     sbAfter.append("Storm (");
-    
+
                     sbAfter.append("When you cast this spell, copy it for each spell cast before it this turn.");
-    
+
                     if (strSpell.contains("Target") || strSpell.contains("target")) {
                         sbAfter.append(" You may choose new targets for the copies.");
                     }
-    
+
                     sbAfter.append(")");
                     sbAfter.append("\r\n");
                 } else if (keyword.startsWith("Replicate")) {
@@ -5480,8 +5480,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        if (getController().isOpponentOf(source.getActivatingPlayer())
-                && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+        if (!getController().canSacrificeBy(source)) {
             return false;
         }
 
@@ -5920,5 +5919,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final ReplacementEffect rE : getReplacementEffects()) {
             rE.setTemporarilySuppressed(false);
         }
+    }
+
+    public boolean canBeDiscardedBy(SpellAbility sa) {
+        if (!isInZone(ZoneType.Hand)) {
+            return false;
+        }
+
+        if (!getOwner().canDiscardBy(sa)) {
+            return false;
+        }
+
+        return true;
     }
 }
