@@ -1231,13 +1231,15 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Run triggers
         int curCounters = oldValue == null ? 0 : oldValue;
+        final Map<String, Object> runParams = Maps.newTreeMap();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
         for (int i = 0; i < delta && curCounters != 0; i++) {
-            final Map<String, Object> runParams = Maps.newTreeMap();
-            runParams.put("Card", this);
-            runParams.put("CounterType", counterName);
             runParams.put("NewCounterAmount", --curCounters);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
+        runParams.put("CounterAmount", delta);
+        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
     }
 
     @Override
