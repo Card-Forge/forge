@@ -54,22 +54,22 @@ public class TriggerCounterRemoved extends Trigger {
         final CounterType addedType = (CounterType) runParams2.get("CounterType");
         final Integer addedNewCounterAmount = (Integer) runParams2.get("NewCounterAmount");
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+        if (hasParam("ValidCard")) {
+            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CounterType")) {
-            final String type = this.mapParams.get("CounterType");
+        if (hasParam("CounterType")) {
+            final String type = getParam("CounterType");
             if (!type.equals(addedType.toString())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("NewCounterAmount")) {
-            final String amtString = this.mapParams.get("NewCounterAmount");
+        if (hasParam("NewCounterAmount")) {
+            final String amtString = getParam("NewCounterAmount");
             int amt = Integer.parseInt(amtString);
             if(amt != addedNewCounterAmount.intValue()) {
                 return false;

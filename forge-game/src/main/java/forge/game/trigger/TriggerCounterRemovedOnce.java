@@ -50,18 +50,18 @@ public class TriggerCounterRemovedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card addedTo = (Card) runParams2.get("Card");
+        final Card removedFrom = (Card) runParams2.get("Card");
         final CounterType removedType = (CounterType) runParams2.get("CounterType");
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+        if (hasParam("ValidCard")) {
+            if (!removedFrom.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CounterType")) {
-            final String type = this.mapParams.get("CounterType");
+        if (hasParam("CounterType")) {
+            final String type = getParam("CounterType");
             if (!type.equals(removedType.toString())) {
                 return false;
             }
