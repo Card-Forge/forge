@@ -1,6 +1,7 @@
 Name:Parhelion II
 ManaCost:6 W W
 Types:Legendary Artifact Vehicle
+PT:5/5
 K:Flying
 K:First Strike
 K:Vigilance

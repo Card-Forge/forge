@@ -1,6 +1,7 @@
 Name:Silent Submersible
 ManaCost:U U
 Types:Artifact Vehicle
+PT:2/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 K:Crew:2
