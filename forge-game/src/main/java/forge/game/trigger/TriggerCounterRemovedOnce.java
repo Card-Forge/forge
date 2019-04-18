@@ -23,17 +23,17 @@ import forge.game.spellability.SpellAbility;
 
 /**
  * <p>
- * Trigger_CounterRemoved class.
+ * Trigger_CounterRemovedOnce class.
  * </p>
  * 
  * @author Forge
- * @version $Id: TriggerCounterAdded.java 12297 2011-11-28 19:56:47Z jendave $
+ * @version $Id: TriggerCounterRemovedOnce.java 12297 2011-11-28 19:56:47Z jendave $
  */
-public class TriggerCounterRemoved extends Trigger {
+public class TriggerCounterRemovedOnce extends Trigger {
 
     /**
      * <p>
-     * Constructor for Trigger_CounterRemoved.
+     * Constructor for Trigger_CounterRemovedOnce.
      * </p>
      * 
      * @param params
@@ -43,19 +43,18 @@ public class TriggerCounterRemoved extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCounterRemoved(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCounterRemovedOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card addedTo = (Card) runParams2.get("Card");
-        final CounterType addedType = (CounterType) runParams2.get("CounterType");
-        final Integer addedNewCounterAmount = (Integer) runParams2.get("NewCounterAmount");
+        final Card removedFrom = (Card) runParams2.get("Card");
+        final CounterType removedType = (CounterType) runParams2.get("CounterType");
 
         if (hasParam("ValidCard")) {
-            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
+            if (!removedFrom.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
@@ -63,15 +62,7 @@ public class TriggerCounterRemoved extends Trigger {
 
         if (hasParam("CounterType")) {
             final String type = getParam("CounterType");
-            if (!type.equals(addedType.toString())) {
-                return false;
-            }
-        }
-
-        if (hasParam("NewCounterAmount")) {
-            final String amtString = getParam("NewCounterAmount");
-            int amt = Integer.parseInt(amtString);
-            if(amt != addedNewCounterAmount.intValue()) {
+            if (!type.equals(removedType.toString())) {
                 return false;
             }
         }
@@ -83,12 +74,14 @@ public class TriggerCounterRemoved extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Amount", this.getRunParams().get("CounterAmount"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append("Removed from: ").append(sa.getTriggeringObject("Card"));
+        sb.append(" Amount: ").append(sa.getTriggeringObject("Amount"));
         return sb.toString();
     }
 }
