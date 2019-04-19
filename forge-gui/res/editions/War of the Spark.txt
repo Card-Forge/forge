@@ -6,7 +6,7 @@ Code2=WAR
 MciCode=war
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet
+Booster=10 Common, 3 Uncommon, 1 RareMythic
 
 [cards]
 1 R Karn, the Great Creator
