@@ -286,7 +286,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic
 275 M Tezzeret, Master of the Bridge
 
 [tokens]
-all_2_2_citizen
+wubrg_2_2_citizen
 b_0_0_zombie_army
 b_1_1_assassin_deathtouch
 b_2_2_zombie
