@@ -1,4 +1,4 @@
-Name:Huatli, Heart of the Sun
+Name:Huatli, the Sun's Heart
 ManaCost:2 G/W
 Types:Legendary Planeswalker Huatli
 Loyalty:7
