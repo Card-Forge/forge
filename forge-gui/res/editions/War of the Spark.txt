@@ -286,9 +286,21 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic
 275 M Tezzeret, Master of the Bridge
 
 [tokens]
+all_2_2_citizen
 b_0_0_zombie_army
-r_1_1_goblin
+b_1_1_assassin_deathtouch
 b_2_2_zombie
+b_4_4_zombie_warrior_vigilance
+c_1_1_a_servo
+c_2_2_spirit
+emblem_nissa_who_shakes_the_world.png
+g_2_2_wolf
+r_1_1_devil_burn
+r_1_1_goblin
+r_4_4_dragon_flying
 u_2_2_wizard
+voja
+w_0_3_wall_defender
+w_2_2_soldier_vigilance
 w_4_4_angel_flying_vigilance
 
