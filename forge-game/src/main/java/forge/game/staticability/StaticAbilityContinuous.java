@@ -377,6 +377,7 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("GainsAbilitiesOf")) {
             final String[] valids = params.get("GainsAbilitiesOf").split(",");
             List<ZoneType> validZones = new ArrayList<ZoneType>();
+            final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
             validZones.add(ZoneType.Battlefield);
             if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones.clear();
@@ -394,6 +395,9 @@ public final class StaticAbilityContinuous {
                 for (Card c : cardsIGainedAbilitiesFrom) {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
+                            if (loyaltyAB && !sa.getRestrictions().isPwAbility()) {
+                                continue;
+                            }
                             SpellAbility newSA = sa.copy(hostCard, false);
                             if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                 newSA.setRestrictions(sa.getRestrictions());
