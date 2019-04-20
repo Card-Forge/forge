@@ -1,0 +1,7 @@
+Name:Tyrant's Scorn
+ManaCost:U B
+Types:Instant
+A:SP$ Charm | Cost$ U B | Choices$ DBDestroy,DBBounce | SpellDescription$ Choose one —\n• Destroy target creature with converted mana cost 3 or less.\n• Return target creature to its owner's hand.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with converted mana cost 3 or less | SpellDescription$ Destroy target creature with converted mana cost 3 or less.
+SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature | SpellDescription$ Return target creature to its owner's hand.
+Oracle:Choose one —\n• Destroy target creature with converted mana cost 3 or less.\n• Return target creature to its owner's hand.
