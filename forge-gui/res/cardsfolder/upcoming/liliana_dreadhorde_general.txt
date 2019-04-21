@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie akh | Planeswalker$ True | SpellDescription$ Create a 2/2 black Zombie creature token.
 A:AB$ Sacrifice | Cost$ SubCounter<4/LOYALTY> | Amount$ 2 | SacValid$ Creature | Defined$ Player | Planeswalker$ True | SpellDescription$ Each player sacrifices two creatures.
-A:AB$ RepeatEach | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
+A:AB$ RepeatEach | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
 SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Artifact.RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True | Mandatory$ True
 SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True | Mandatory$ True
 SVar:ChooseEnch:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Enchantment.RememberedPlayerCtrl | ChoiceTitle$ Choose an enchantment to keep | SubAbility$ ChooseLand | RememberChosen$ True | Mandatory$ True
