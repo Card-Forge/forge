@@ -14,3 +14,8 @@ Type=Other
 6 M Teferi, Hero of Dominaria
 7 M Tezzeret, Agent of Bolas
 8 M Vraska, Golgari Queen
+
+[tokens]
+w_1_1_soldier
+b_2_2_zombie
+c_1_1_a_construct_defender
