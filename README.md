@@ -169,7 +169,7 @@ The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desk
 
 # IntelliJ
 
-Quick start guide for [setting up the Forge project within IntelliJ] (https://git.cardforge.org/core-developers/forge/wikis/intellij-setup).
+Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/wikis/intellij-setup).
 
 # Card Scripting
 
