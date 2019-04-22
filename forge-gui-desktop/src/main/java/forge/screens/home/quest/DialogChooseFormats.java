@@ -5,6 +5,7 @@ import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
 import forge.model.FModel;
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -19,7 +20,8 @@ public class DialogChooseFormats {
 	private Runnable okCallback;
 
 	private final List<FCheckBox> choices = new ArrayList<>();
-	private final FCheckBox cbWantReprints = new FCheckBox("Allow compatible reprints from other sets");
+	final Localizer localizer = Localizer.getInstance();
+	private final FCheckBox cbWantReprints = new FCheckBox(localizer.getMessage("cbWantReprints"));
 
 	public DialogChooseFormats(){
 		this(null);
@@ -56,12 +58,12 @@ public class DialogChooseFormats {
 		panel.setOpaque(false);
 		panel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
-		panel.add(new FLabel.Builder().text("Choose formats").fontSize(18).build(), "center, span, wrap, gaptop 10");
+		panel.add(new FLabel.Builder().text(localizer.getMessage("lblChooseFormats")).fontSize(18).build(), "center, span, wrap, gaptop 10");
 
 		String constraints = "aligny top";
-		panel.add(makeCheckBoxList(sanctioned, "Sanctioned", true), constraints);
-		panel.add(makeCheckBoxList(casual, "Other", false), constraints);
-		panel.add(makeCheckBoxList(historic, "Historic", false), constraints);
+		panel.add(makeCheckBoxList(sanctioned, localizer.getMessage("lblSanctioned"), true), constraints);
+		panel.add(makeCheckBoxList(casual, localizer.getMessage("lblOther"), false), constraints);
+		panel.add(makeCheckBoxList(historic, localizer.getMessage("lblHistoric"), false), constraints);
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
@@ -73,7 +75,7 @@ public class DialogChooseFormats {
 			}
 		};
 
-		FButton btnOk = new FButton("OK");
+		FButton btnOk = new FButton(localizer.getMessage("lblOk"));
 		btnOk.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -82,7 +84,7 @@ public class DialogChooseFormats {
 			}
 		});
 
-		FButton btnCancel = new FButton("Cancel");
+		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

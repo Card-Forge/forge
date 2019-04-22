@@ -8,6 +8,7 @@ import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.screens.home.quest.VSubmenuQuestPrefs.PrefInput;
+import forge.util.Localizer;
 
 /**
  * Controls the quest preferences submenu in the home UI.
@@ -52,8 +53,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
 
         final Integer val = Ints.tryParse(i0.getText());
         resetErrors();
-
-        final String validationError = val == null ? "Enter a number" : prefs.validatePreference(i0.getQPref(), val.intValue());
+        final Localizer localizer = Localizer.getInstance();
+        final String validationError = val == null ? localizer.getMessage("lblEnteraNumber") : prefs.validatePreference(i0.getQPref(), val.intValue());
         if (validationError != null) {
             showError(i0, validationError);
             return;
@@ -66,7 +67,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
 
     private static void showError(final PrefInput i0, final String s0) {
         final VSubmenuQuestPrefs view = VSubmenuQuestPrefs.SINGLETON_INSTANCE;
-        final String s = "Save failed: " + s0;
+        final Localizer localizer = Localizer.getInstance();
+        final String s = localizer.getMessage("lblSavefailed") +":" + s0;
         switch(i0.getErrType()) {
         case BOOSTER:
             view.getLblErrBooster().setVisible(true);
