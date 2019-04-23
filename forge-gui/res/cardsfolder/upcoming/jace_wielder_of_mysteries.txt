@@ -6,7 +6,7 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | IsPresent$ Card.Yo
 SVar:Win:DB$WinsGame | Defined$ You
 A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBDraw | SpellDescription$ Target player puts the top two cards of their library into their graveyard. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | NumCards$ 7 | SubAbility$ WinGame | SpellDescription$ Draw seven cards. Then if your library has no cards in it, you win the game.
+A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 7 | SubAbility$ WinGame | SpellDescription$ Draw seven cards. Then if your library has no cards in it, you win the game.
 SVar:Win:DB$WinGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
 SVar:X:Count$InYourLibrary
 AI:RemoveDeck:Random
