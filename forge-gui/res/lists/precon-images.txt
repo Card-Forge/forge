@@ -5,6 +5,7 @@ https://downloads.cardforge.org/images/products/precons/angelic_fury.jpg
 https://downloads.cardforge.org/images/products/precons/angelic_might.jpg
 https://downloads.cardforge.org/images/products/precons/angrath_minotaur_pirate.jpg
 https://downloads.cardforge.org/images/products/precons/anthousas_army.jpg
+https://downloads.cardforge.org/images/products/precons/arcane_tempo.jpg
 https://downloads.cardforge.org/images/products/precons/arcaniss_guile.jpg
 https://downloads.cardforge.org/images/products/precons/armada.jpg
 https://downloads.cardforge.org/images/products/precons/army_of_entropy.jpg
@@ -53,6 +54,7 @@ https://downloads.cardforge.org/images/products/precons/dark_devotion.jpg
 https://downloads.cardforge.org/images/products/precons/dark_sacrifice.jpg
 https://downloads.cardforge.org/images/products/precons/dead_again.jpg
 https://downloads.cardforge.org/images/products/precons/dead_ahead.jpg
+https://downloads.cardforge.org/images/products/precons/deadly_discovery.jpg
 https://downloads.cardforge.org/images/products/precons/deadspread.jpg
 https://downloads.cardforge.org/images/products/precons/death_march.jpg
 https://downloads.cardforge.org/images/products/precons/death_reaper.jpg
@@ -145,6 +147,7 @@ https://downloads.cardforge.org/images/products/precons/levelers_scorn.jpg
 https://downloads.cardforge.org/images/products/precons/life_boost.jpg
 https://downloads.cardforge.org/images/products/precons/life_drain.jpg
 https://downloads.cardforge.org/images/products/precons/lightforce.jpg
+https://downloads.cardforge.org/images/products/precons/lightning_aggro.jpg
 https://downloads.cardforge.org/images/products/precons/liliana_death_wielder.jpg
 https://downloads.cardforge.org/images/products/precons/little_bashers.jpg
 https://downloads.cardforge.org/images/products/precons/lofty_heights.jpg
@@ -260,6 +263,7 @@ https://downloads.cardforge.org/images/products/precons/twisted_reality.jpg
 https://downloads.cardforge.org/images/products/precons/ultimate_sacrifice.jpg
 https://downloads.cardforge.org/images/products/precons/unearthed_secrets.jpg
 https://downloads.cardforge.org/images/products/precons/unflinching_assault.jpg
+https://downloads.cardforge.org/images/products/precons/united_assault.jpg
 https://downloads.cardforge.org/images/products/precons/unlikely_alliances.jpg
 https://downloads.cardforge.org/images/products/precons/unnatural_schemes.jpg
 https://downloads.cardforge.org/images/products/precons/unstable_terrain.jpg
