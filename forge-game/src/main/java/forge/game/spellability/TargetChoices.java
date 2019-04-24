@@ -151,6 +151,11 @@ public class TargetChoices implements Cloneable {
         return sb.toString();
     }
 
+    @Override
+    public final String toString() {
+        return this.getTargetedString();
+    }
+
     public final boolean isTargetingAnyCard() {
         return !targetCards.isEmpty();
     }

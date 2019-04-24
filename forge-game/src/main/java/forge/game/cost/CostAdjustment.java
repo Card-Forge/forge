@@ -42,7 +42,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell() && ((Spell) sa).isCastFaceDown()) {
             // Turn face down to apply cost modifiers correctly
-            host.setState(CardStateName.FaceDown, false);
+            host.turnFaceDownNoUpdate();
             isStateChangeToFaceDown = true;
         } // isSpell
 
@@ -83,6 +83,7 @@ public class CostAdjustment {
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
             host.setState(CardStateName.Original, false);
+            host.setFaceDown(false);
         }
         return result;
     }

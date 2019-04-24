@@ -5,10 +5,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.GameCommand;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -29,12 +27,12 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.TextUtil;
-import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
+import forge.util.TextUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -542,7 +540,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.updateStateForView();
                     }
                     if (sa.hasParam("FaceDown")) {
-                        movedCard.setState(CardStateName.FaceDown, true);
+                        movedCard.turnFaceDown(true);
                     }
                     if (sa.hasParam("Attacking")) {
                         // What should they attack?
@@ -592,7 +590,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("ExileFaceDown")) {
-                        movedCard.setState(CardStateName.FaceDown, true);
+                        movedCard.turnFaceDown(true);
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {
@@ -1050,24 +1048,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                 if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
-                    c.setState(CardStateName.FaceDown, true);
+                    c.turnFaceDown(true);
 
                     // set New Pt doesn't work because this values need to be copyable for clone effects
-                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")) {
-                        if (sa.hasParam("FaceDownPower")) {
-                            c.setBasePower(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownPower"), sa));
-                        }
-                        if (sa.hasParam("FaceDownToughness")) {
-                            c.setBaseToughness(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownToughness"), sa));
-                        }
+                    if (sa.hasParam("FaceDownPower")) {
+                        c.setBasePower(AbilityUtils.calculateAmount(
+                                source, sa.getParam("FaceDownPower"), sa));
+                    }
+                    if (sa.hasParam("FaceDownToughness")) {
+                        c.setBaseToughness(AbilityUtils.calculateAmount(
+                                source, sa.getParam("FaceDownToughness"), sa));
                     }
 
                     if (sa.hasParam("FaceDownAddType")) {
-                        CardType t = new CardType(c.getCurrentState().getType());
-                        t.addAll(Arrays.asList(sa.getParam("FaceDownAddType").split(",")));
-                        c.getCurrentState().setType(t);
+                        for (String type : sa.getParam("FaceDownAddType").split(",")) {
+                            c.addType(type);
+                        }
                     }
 
                     if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
@@ -1091,7 +1087,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // need to do that again?
                 if (sa.hasParam("FaceDown") && !ZoneType.Battlefield.equals(destination)) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
                 movedCard.setTimestamp(ts);
             }
@@ -1105,7 +1101,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setExiledWith(host);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
             }
             else {

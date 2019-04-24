@@ -193,26 +193,9 @@ public class GameAction {
             }
 
             if (!c.isToken()) {
-                if (c.isCloned()) {
-                    c.switchStates(CardStateName.Original, CardStateName.Cloner, false);
-                    c.setState(CardStateName.Original, false);
-                    c.clearStates(CardStateName.Cloner, false);
-                    if (c.isFlipCard()) {
-                        c.clearStates(CardStateName.Flipped, false);
-                    }
-                    if (c.getStates().contains(CardStateName.OriginalText)) {
-                        c.clearStates(CardStateName.OriginalText, false);
-                        c.removeSVar("GainingTextFrom");
-                        c.removeSVar("GainingTextFromTimestamp");
-                    }
-                    c.updateStateForView();
-                } else if (c.getStates().contains(CardStateName.OriginalText)) {
-                    // Volrath's Shapeshifter
-                    CardFactory.copyState(c, CardStateName.OriginalText, c, CardStateName.Original, false);
-                    c.setState(CardStateName.Original, false);
-                    c.clearStates(CardStateName.OriginalText, false);
-                    c.removeSVar("GainingTextFrom");
-                    c.removeSVar("GainingTextFromTimestamp");
+                if (c.isCloned() || c.hasTextChangeState()) {
+                    c.removeCloneStates();
+                    c.removeTextChangeStates();
                     c.updateStateForView();
                 }
 
@@ -287,18 +270,10 @@ public class GameAction {
                 // not to battlefield anymore!
                 toBattlefield = false;
 
-                if (copied.isCloned()) {
-                    copied.switchStates(CardStateName.Original, CardStateName.Cloner, false);
-                    copied.setState(CardStateName.Original, false);
-                    copied.clearStates(CardStateName.Cloner, false);
-                    if (copied.isFlipCard()) {
-                        copied.clearStates(CardStateName.Flipped, false);
-                    }
-                    if (copied.getStates().contains(CardStateName.OriginalText)) {
-                        copied.clearStates(CardStateName.OriginalText, false);
-                        copied.removeSVar("GainingTextFrom");
-                        copied.removeSVar("GainingTextFromTimestamp");
-                    }
+                if (c.isCloned() || c.hasTextChangeState()) {
+                    c.removeCloneStates();
+                    c.removeTextChangeStates();
+                    c.updateStateForView();
                 }
 
                 if (copied.getCurrentStateName() != CardStateName.Original) {
@@ -858,6 +833,7 @@ public class GameAction {
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
+            List<StaticAbility> toAdd = Lists.newArrayList();
             for (final StaticAbility stAb : staticAbilities) {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
@@ -869,8 +845,18 @@ public class GameAction {
                 } else {
                     affectedHere = previouslyAffected;
                     stAb.applyContinuousAbility(layer, previouslyAffected);
-                } 
+                }
+                if (affectedHere != null) {
+                    for (final Card c : affectedHere) {
+                        for (final StaticAbility st2 : c.getStaticAbilities()) {
+                            if (!staticAbilities.contains(st2)) {
+                                toAdd.add(st2);
+                            }
+                        }
+                    }
+                }
             }
+            staticAbilities.addAll(toAdd);
         }
 
         for (final CardCollectionView affected : affectedPerAbility.values()) {

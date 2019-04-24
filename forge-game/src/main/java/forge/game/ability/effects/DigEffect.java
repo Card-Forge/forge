@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
@@ -318,7 +317,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         if (sa.hasParam("ExileFaceDown")) {
-                            c.setState(CardStateName.FaceDown, true);
+                            c.turnFaceDown(true);
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);

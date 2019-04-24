@@ -5,6 +5,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
@@ -173,7 +174,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card ripper = createCard("Ruthless Ripper", p);
-        ripper.setState(CardStateName.FaceDown, true);
+        ripper.turnFaceDownNoUpdate();
         p.getZone(ZoneType.Battlefield).add(ripper);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -1695,5 +1696,239 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // One cards drawn
         assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
+    }
+
+
+    public void testCloneTransform() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        final String outLawName = "Kruin Outlaw";
+        final String hillGiantName = "Elite Vanguard";
+        final String terrorName = "Terror of Kruin Pass";
+
+        Card outlaw = addCard(outLawName, p2);
+        Card giant = addCard(hillGiantName, p);
+
+        assertFalse(outlaw.isCloned());
+        assertTrue(outlaw.isDoubleFaced());
+        assertTrue(outlaw.hasState(CardStateName.Transformed));
+        assertTrue(outlaw.canTransform());
+        assertFalse(outlaw.isBackSide());
+
+        assertFalse(giant.isDoubleFaced());
+        assertFalse(giant.canTransform());
+
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Island", p);
+
+        Card cytoCard = addCardToZone("Cytoshape", p, ZoneType.Hand);
+        SpellAbility cytoSA = cytoCard.getFirstSpellAbility();
+
+        Card moonmist = addCardToZone("Moonmist", p, ZoneType.Hand);
+        SpellAbility moonmistSA = moonmist.getFirstSpellAbility();
+
+        cytoSA.getTargets().add(outlaw);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(cytoSA).value;
+
+        assertTrue(score > 0);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
+        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+
+        Card clonedOutLaw = (Card)sim.getGameCopier().find(outlaw);
+
+        assertTrue(clonedOutLaw.isCloned());
+        assertTrue(clonedOutLaw.isDoubleFaced());
+        assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(clonedOutLaw.canTransform());
+        assertFalse(clonedOutLaw.isBackSide());
+
+        assertTrue(clonedOutLaw.getName().equals(hillGiantName));
+
+        assertTrue(clonedOutLaw.isDoubleFaced());
+
+        score = sim.simulateSpellAbility(moonmistSA).value;
+        assertTrue(score > 0);
+
+        simGame = sim.getSimulatedGameState();
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
+        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+
+        Card transformOutLaw = (Card)sim.getGameCopier().find(outlaw);
+
+        assertTrue(transformOutLaw.isCloned());
+        assertTrue(transformOutLaw.isDoubleFaced());
+        assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.isBackSide());
+
+        assertTrue(transformOutLaw.getName().equals(hillGiantName));
+
+        // need to clean up the clone state
+        simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.CLEANUP);
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 1);
+        assertTrue(countCardsWithName(simGame, terrorName) == 1);
+
+        assertFalse(transformOutLaw.isCloned());
+        assertTrue(transformOutLaw.isDoubleFaced());
+        assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.isBackSide());
+
+        assertTrue(transformOutLaw.getName().equals(terrorName));
+    }
+
+    public void testVolrathsShapeshifter() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card volrath = addCard("Volrath's Shapeshifter", p);
+
+        // 1. Assert that Volrath has the Discard ability
+        SpellAbility discard = findSAWithPrefix(volrath, "{2}");
+        assertTrue(discard != null && discard.getApi() == ApiType.Discard);
+
+        // 2. Copy the text from a creature
+        addCardToZone("Abattoir Ghoul", p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(volrath.getName().equals("Abattoir Ghoul"));
+        assertTrue(volrath.getNetPower() == 3);
+        assertTrue(volrath.getNetToughness() == 2);
+        assertTrue(volrath.hasKeyword(Keyword.FIRST_STRIKE));
+
+        SpellAbility discardAfterCopy = findSAWithPrefix(volrath, "{2}");
+        assertTrue(discardAfterCopy != null && discardAfterCopy.getApi() == ApiType.Discard);
+
+        // 3. Revert back to not copying any text
+        addCardToZone("Plains", p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(volrath.getName().equals("Volrath's Shapeshifter"));
+        assertTrue(volrath.getNetPower() == 0);
+        assertTrue(volrath.getNetToughness() == 1);
+        assertTrue(volrath.getKeywords().isEmpty());
+
+        SpellAbility discardAfterRevert = findSAWithPrefix(volrath, "{2}");
+        assertTrue(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
+    }
+
+
+    @SuppressWarnings("unused")
+    public void broken_testCloneDimir() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        // add enough cards to hand to flip Jushi
+        for (int i = 0; i < 9; i++) {
+            addCardToZone("Plains", p, ZoneType.Hand);
+            addCardToZone("Plains", p, ZoneType.Library);
+            addCard("Swamp", p);
+            addCard("Island", p);
+        }
+
+        Card dimirdg = addCard("Dimir Doppelganger", p);
+        // so T can be paid
+        dimirdg.setSickness(false);
+        SpellAbility saDimirClone = findSAWithPrefix(dimirdg, "{1}{U}{B}");
+
+        assertTrue(saDimirClone != null && saDimirClone.getApi() == ApiType.ChangeZone);
+
+        Card jushi = addCardToZone("Jushi Apprentice", p, ZoneType.Graveyard);
+        Card bear = addCardToZone("Runeclaw Bear", p, ZoneType.Graveyard);
+        Card nezumi = addCardToZone("Nezumi Shortfang", p, ZoneType.Graveyard);
+
+        // Clone Jushi first
+        saDimirClone.getTargets().add(jushi);
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(saDimirClone).value;
+        assertTrue(score > 0);
+
+        Card dimirdgAfterCopy1 = (Card)sim.getGameCopier().find(dimirdg);
+        assertTrue(dimirdgAfterCopy1.getName().equals("Jushi Apprentice"));
+        assertTrue(dimirdgAfterCopy1.getNetPower() == 1);
+        assertTrue(dimirdgAfterCopy1.getNetToughness() == 2);
+        assertTrue(dimirdgAfterCopy1.isFlipCard());
+        assertFalse(dimirdgAfterCopy1.isFlipped());
+        assertFalse(dimirdgAfterCopy1.getType().isLegendary());
+
+        bear = (Card)sim.getGameCopier().find(bear);
+
+        // make new simulator so new SpellAbility is found
+        Game simGame = sim.getSimulatedGameState();
+        sim = createSimulator(simGame, p);
+
+        Player copiedPlayer = (Player)sim.getGameCopier().find(p);
+        int handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
+        assertTrue(handSize == 9);
+
+        SpellAbility draw = findSAWithPrefix(dimirdgAfterCopy1, "{2}{U}");
+        score = sim.simulateSpellAbility(draw).value;
+        assertTrue(score > 0);
+
+        copiedPlayer = (Player)sim.getGameCopier().find(p);
+        handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
+        assertTrue(handSize == 10);
+
+        simGame = sim.getSimulatedGameState();
+
+        bear = (Card)sim.getGameCopier().find(bear);
+
+        // make new simulator so new SpellAbility is found
+        simGame = sim.getSimulatedGameState();
+        sim = createSimulator(simGame, p);
+
+        //bear = (Card)sim.getGameCopier().find(bear);
+
+        simGame = sim.getSimulatedGameState();
+
+        Card dimirdgAfterFlip1 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
+
+        assertTrue(dimirdgAfterFlip1.getName().equals("Tomoya the Revealer"));
+        assertTrue(dimirdgAfterFlip1.getNetPower() == 2);
+        assertTrue(dimirdgAfterFlip1.getNetToughness() == 3);
+        assertTrue(dimirdgAfterFlip1.isFlipped());
+        assertTrue(dimirdgAfterFlip1.getType().isLegendary());
+
+        saDimirClone = findSAWithPrefix(dimirdgAfterCopy1, "{1}{U}{B}");
+        // Clone Bear first
+        saDimirClone.resetTargets();
+        saDimirClone.getTargets().add(bear);
+
+        score = sim.simulateSpellAbility(saDimirClone).value;
+        assertTrue(score > 0);
+
+        Card dimirdgAfterCopy2 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
+
+        //System.out.println(sim.getSimulatedGameState().getCardsIn(ZoneType.Battlefield));
+
+        System.out.println(dimirdgAfterCopy2.getName());
+        System.out.println(dimirdgAfterCopy2.getCloneStates());
+        System.out.println(dimirdgAfterCopy2.getOriginalState(CardStateName.Original).getName());
+        System.out.println(dimirdgAfterCopy2.isFlipCard());
+        System.out.println(dimirdgAfterCopy2.isFlipped());
+
+        assertTrue(dimirdgAfterCopy2.getName().equals("Runeclaw Bear"));
+        assertTrue(dimirdgAfterCopy2.getNetPower() == 2);
+        assertTrue(dimirdgAfterCopy2.getNetToughness() == 2);
+        assertTrue(dimirdgAfterCopy2.isFlipped());
+        assertFalse(dimirdgAfterCopy2.getType().isLegendary());
     }
 }

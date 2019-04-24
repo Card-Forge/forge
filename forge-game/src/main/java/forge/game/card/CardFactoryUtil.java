@@ -101,16 +101,18 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                Card c = hostCard.getGame().getAction().moveToPlay(hostCard, this);
-                c.setPreFaceDownState(CardStateName.Original);
+                hostCard.getGame().getAction().moveToPlay(hostCard, this);
+                //c.setPreFaceDownState(CardStateName.Original);
             }
 
             @Override
             public boolean canPlay() {
                 CardStateName stateBackup = hostCard.getCurrentStateName();
-                hostCard.setState(CardStateName.FaceDown, false);
+                boolean face = hostCard.isFaceDown();
+                hostCard.turnFaceDownNoUpdate();
                 boolean success = super.canPlay();
                 hostCard.setState(stateBackup, false);
+                hostCard.setFaceDown(face);
                 return success;
             }
         };

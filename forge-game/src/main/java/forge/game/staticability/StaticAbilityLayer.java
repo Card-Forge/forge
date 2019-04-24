@@ -3,6 +3,8 @@ package forge.game.staticability;
 import com.google.common.collect.ImmutableList;
 
 public enum StaticAbilityLayer {
+    /** Layer 1 for control-changing effects. */
+    COPY,
 
     /** Layer 2 for control-changing effects. */
     CONTROL,
@@ -35,5 +37,5 @@ public enum StaticAbilityLayer {
     RULES;
 
     public final static ImmutableList<StaticAbilityLayer> CONTINUOUS_LAYERS =
-            ImmutableList.of(CONTROL, TEXT, TYPE, COLOR, ABILITIES1, ABILITIES2, CHARACTERISTIC, SETPT, MODIFYPT, RULES);
+            ImmutableList.of(COPY, CONTROL, TEXT, TYPE, COLOR, ABILITIES1, ABILITIES2, CHARACTERISTIC, SETPT, MODIFYPT, RULES);
 }

@@ -19,10 +19,7 @@ import forge.game.GameObjectMap;
 import forge.game.GameRules;
 import forge.game.Match;
 import forge.game.StaticEffect;
-import forge.game.card.Card;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.keyword.KeywordInterface;
@@ -267,6 +264,7 @@ public class GameCopier {
                 System.err.println(sa.toString());
             }
         }
+
         return newCard;
     }
 
@@ -295,6 +293,7 @@ public class GameCopier {
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
+
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
                 newCard.addHiddenExtrinsicKeyword(kw);
@@ -305,7 +304,7 @@ public class GameCopier {
             if (c.isFaceDown()) {
                 boolean isCreature = newCard.isCreature();
                 boolean hasManaCost = !newCard.getManaCost().isNoCost();
-                newCard.setState(CardStateName.FaceDown, true);
+                newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...
@@ -333,6 +332,11 @@ public class GameCopier {
                         }
                     }
                 }
+            }
+
+            newCard.setFlipped(c.isFlipped());
+            for (Map.Entry<Long, CardCloneStates> e : c.getCloneStates().entrySet()) {
+                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
             }
 
             Map<CounterType, Integer> counters = c.getCounters();

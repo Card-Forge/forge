@@ -85,7 +85,7 @@ public class CardImageRenderer {
 
         //determine colors for borders
         final List<DetailColors> borderColors;
-        final boolean isFaceDown = card.getCurrentState().getState() == CardStateName.FaceDown;
+        final boolean isFaceDown = card.isFaceDown();
         if (isFaceDown) {
             borderColors = ImmutableList.of(DetailColors.FACE_DOWN);
         }
@@ -371,7 +371,7 @@ public class CardImageRenderer {
 
         //determine colors for borders
         final List<DetailColors> borderColors;
-        final boolean isFaceDown = card.getCurrentState().getState() == CardStateName.FaceDown;
+        final boolean isFaceDown = card.isFaceDown();
         if (isFaceDown) {
             borderColors = ImmutableList.of(DetailColors.FACE_DOWN);
         }

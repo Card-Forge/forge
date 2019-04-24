@@ -1142,7 +1142,7 @@ public abstract class GameState {
                 } else if (info.startsWith("SummonSick")) {
                     c.setSickness(true);
                 } else if (info.startsWith("FaceDown")) {
-                    c.setState(CardStateName.FaceDown, true);
+                    c.turnFaceDown(true);
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
                     }
