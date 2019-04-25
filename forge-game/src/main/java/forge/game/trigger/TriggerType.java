@@ -36,6 +36,7 @@ public enum TriggerType {
     Clashed(TriggerClashed.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterAddedOnce(TriggerCounterAddedOnce.class),
+    CounterAddedAll(TriggerCounterAddedAll.class),
     Countered(TriggerCountered.class),
     CounterRemoved(TriggerCounterRemoved.class),
     CounterRemovedOnce(TriggerCounterRemovedOnce.class),

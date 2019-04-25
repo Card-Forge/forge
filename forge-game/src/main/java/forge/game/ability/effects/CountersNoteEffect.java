@@ -2,9 +2,10 @@ package forge.game.ability.effects;
 
 import java.util.Map.Entry;
 
+import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -20,16 +21,19 @@ public class CountersNoteEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollection tgtCards = new CardCollection();
-        tgtCards.addAll(getDefinedCardsOrTargeted(sa));
+        final Game game = source.getGame();
+        Player p = sa.getActivatingPlayer();
         String mode = sa.getParamOrDefault("Mode", "Load");
-        for (Card c : tgtCards) {
+
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        for (Card c : getDefinedCardsOrTargeted(sa)) {
             if (mode.equals(MODE_STORE)) {
                 noteCounters(c, source);
             } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source, sa.getActivatingPlayer());
+                loadCounters(c, source, p, table);
             }
         }
+        table.triggerCountersPutAll(game);
     }
 
     private void noteCounters(Card notee, Card source) {
@@ -40,11 +44,13 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private void loadCounters(Card notee, Card source, final Player p) {
+    private void loadCounters(Card notee, Card source, final Player p, GameEntityCounterTable table) {
         for(Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
-                notee.addCounter(CounterType.getType(key.substring(NOTE_COUNTERS.length())), Integer.parseInt(svar.getValue()), p, false);
+                notee.addCounter(
+                        CounterType.getType(key.substring(NOTE_COUNTERS.length())),
+                        Integer.parseInt(svar.getValue()), p, false, table);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

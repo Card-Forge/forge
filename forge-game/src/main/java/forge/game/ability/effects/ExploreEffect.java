@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -47,9 +48,9 @@ public class ExploreEffect extends SpellAbilityEffect {
         final Player pl = sa.getActivatingPlayer();
         final PlayerController pc = pl.getController();
         final Game game = pl.getGame();
-        List<Card> tgt = getTargetCards(sa);
-        
-        for (final Card c : tgt) {
+
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        for (final Card c : getTargetCards(sa)) {
             // revealed land card
             boolean revealedLand = false;
             CardCollection top = pl.getTopXCardsFromLibrary(1);
@@ -76,8 +77,8 @@ public class ExploreEffect extends SpellAbilityEffect {
                 Card gamec = game.getCardState(c);
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
-                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.getTimestamp() == c.getTimestamp()) {
-                    c.addCounter(CounterType.P1P1, 1, pl, true);
+                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
+                    c.addCounter(CounterType.P1P1, 1, pl, true, table);
                 }
             }
 
@@ -86,6 +87,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             runParams.put("Card", c);
             game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
         }
+        table.triggerCountersPutAll(game);
     }
 
 }

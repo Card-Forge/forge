@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.*;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.GameObjectMap;
 import forge.game.card.Card;
@@ -783,18 +784,20 @@ public class Combat {
     }
 
     public void dealAssignedDamage() {
-    	playerWhoAttacks.getGame().copyLastState();
+        final Game game = playerWhoAttacks.getGame();
+        game.copyLastState();
 
-    	CardDamageMap preventMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         // This function handles both Regular and First Strike combat assignment
         for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
+                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
             }
             else if (defender instanceof Card) { // planeswalker
-                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
+                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
             }
         }
 
@@ -811,7 +814,7 @@ public class Combat {
                 continue;
             }
 
-            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap);
+            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap, counterTable);
             c.clearAssignedDamage();
         }
 
@@ -823,6 +826,9 @@ public class Combat {
         // LifeLink for Combat Damage at this place
         dealtDamageTo.triggerDamageDoneOnce(true, null);
         dealtDamageTo.clear();
+
+        counterTable.triggerCountersPutAll(game);
+        counterTable.clear();
     }
 
     public final boolean isUnblocked(final Card att) {

@@ -247,7 +247,7 @@ public class GameAction {
                 // fake etb counters thing, then if something changed,
                 // need to apply checkStaticAbilities again
                 if(!noLandLKI.isLand()) {
-                    if (noLandLKI.putEtbCounters()) {
+                    if (noLandLKI.putEtbCounters(null)) {
                         // counters are added need to check again
                         checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
                     }
@@ -380,10 +380,33 @@ public class GameAction {
             }
         }
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
+        // need to suspend cards own replacement effects
+        if (!suppress) {
+            if (toBattlefield && !copied.getEtbCounters().isEmpty()) {
+                for (final ReplacementEffect re : copied.getReplacementEffects()) {
+                    re.setSuppressed(true);
+                }
+            }
+        }
+
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied, position, c); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
         c.setZone(zoneTo);
+
+        // do ETB counters after zone add
+        if (!suppress) {
+            if (toBattlefield ) {
+                copied.putEtbCounters(table);
+                // enable replacement effects again
+                for (final ReplacementEffect re : copied.getReplacementEffects()) {
+                    re.setSuppressed(false);
+                }
+            }
+            copied.clearEtbCounters();
+        }
 
         if (fromBattlefield) {
             c.setDamage(0); //clear damage after a card leaves the battlefield
@@ -400,16 +423,7 @@ public class GameAction {
         game.getTriggerHandler().clearInstrinsicActiveTriggers(c, zoneFrom);
         game.getTriggerHandler().registerActiveTrigger(lastKnownInfo, false);
 
-        // do ETB counters after StaticAbilities check
-        if (!suppress) {
-            if (toBattlefield) {
-                if (copied.putEtbCounters()) {
-                    // if counter where put of card, call checkStaticAbilities again
-                    checkStaticAbilities();
-                }
-            }
-            copied.clearEtbCounters();
-        }
+        table.triggerCountersPutAll(game);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));

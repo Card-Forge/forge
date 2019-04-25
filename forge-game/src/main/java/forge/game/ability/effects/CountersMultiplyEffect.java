@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Map;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -43,6 +44,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
         final CounterType counterType = getCounterType(sa);
         final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1; 
         
+        GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : getTargetCards(sa)) {
             Card gameCard = game.getCardState(tgtCard, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -52,14 +54,15 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
                 continue;
             }
             if (counterType != null) {
-                gameCard.addCounter(counterType, gameCard.getCounters(counterType) * n, player, true);
+                gameCard.addCounter(counterType, gameCard.getCounters(counterType) * n, player, true, table);
             } else {
                 for (Map.Entry<CounterType, Integer> e : gameCard.getCounters().entrySet()) {
-                    gameCard.addCounter(e.getKey(), e.getValue() * n, player, true);
+                    gameCard.addCounter(e.getKey(), e.getValue() * n, player, true, table);
                 }
             }
             game.updateLastStateForCard(gameCard);
         }
+        table.triggerCountersPutAll(game);
     }
 
     

@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -49,7 +50,6 @@ public class SetStateEffect extends SpellAbilityEffect {
         final String mode = sa.getParam("Mode");
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final List<Card> tgtCards = getTargetCards(sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
         final boolean morphUp = sa.hasParam("MorphUp");
@@ -57,7 +57,9 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
 
-        for (final Card tgt : tgtCards) {
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
+        for (final Card tgt : getTargetCards(sa)) {
             if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
                 continue;
             }
@@ -125,12 +127,13 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, p, true);
+                    tgt.addCounter(CounterType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);
                 }
             }
         }
+        table.triggerCountersPutAll(game);
     }
 }

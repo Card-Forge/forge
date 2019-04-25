@@ -29,6 +29,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -386,6 +387,43 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         return false;
     }
 
+    public final boolean applyAbility(String mode, Card card, CounterType type) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantPutCounter")) {
+            return StaticAbilityCantPutCounter.applyCantPutCounter(this, card, type);
+
+        }
+
+        return false;
+    }
+
+    public final boolean applyAbility(String mode, Player player, CounterType type) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantPutCounter")) {
+            return StaticAbilityCantPutCounter.applyCantPutCounter(this, player, type);
+
+        }
+
+        return false;
+    }
 
     /**
      * Apply ability.

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -62,14 +63,16 @@ public class AmassEffect extends SpellAbilityEffect {
         CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
         tgtCards = pc.chooseCardsForEffect(tgtCards, sa, "Choose an army to put counters on", 1, 1, false);
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
         for(final Card tgtCard : tgtCards) {
-            tgtCard.addCounter(CounterType.P1P1, amount, activator, true);
+            tgtCard.addCounter(CounterType.P1P1, amount, activator, true, table);
             game.updateLastStateForCard(tgtCard);
 
             if (remember) {
                 card.addRemembered(tgtCard);
             }
         }
+        table.triggerCountersPutAll(game);
     }
 
 }

@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -43,14 +44,16 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         List<GameEntity> result = pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa,
                 "Choose any number of permanents and/or players for proliferate",  p);
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
         for (final GameEntity ge : result) {
             for (final CounterType ct : ge.getCounters().keySet()) {
-                ge.addCounter(ct, 1, p, true, true);
+                ge.addCounter(ct, 1, p, true, true, table);
             }
             if (ge instanceof Card) {
                 Card c = (Card) ge;
                 game.updateLastStateForCard(c);
             }
         }
+        table.triggerCountersPutAll(game);
     }
 }

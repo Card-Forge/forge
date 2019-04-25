@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -110,6 +111,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         CardZoneTable table = new CardZoneTable();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -378,7 +380,8 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                             } else if (destZone2 == ZoneType.Exile) {
                                 if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, true);
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
+                                            1, player, true, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                             }
@@ -389,6 +392,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
         //table trigger there
         table.triggerChangesZoneAll(game);
+        counterTable.triggerCountersPutAll(game);
     }
 
     // TODO This should be somewhere else, maybe like CardUtil or something like that

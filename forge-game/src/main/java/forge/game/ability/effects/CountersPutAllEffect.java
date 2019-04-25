@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -63,15 +64,13 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
         }
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
-            if (game.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, true);
-            } else {
-                // adding counters to something like re-suspend cards
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, false);
-            }
+            boolean inBattlefield = game.getZoneOf(tgtCard).is(ZoneType.Battlefield);
+            tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, inBattlefield, table);
             game.updateLastStateForCard(tgtCard);
         }
+        table.triggerCountersPutAll(game);
     }
 
 }

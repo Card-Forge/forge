@@ -53,7 +53,7 @@ public abstract class CostPartWithList extends CostPart {
     /**
      * Reset list.
      */
-    public final void resetLists() {
+    public void resetLists() {
         lkiList.clear();
         cardList.clear();
         table.clear();
@@ -121,7 +121,7 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     // always returns true, made this to inline with return
-    public final boolean executePayment(SpellAbility ability, CardCollectionView targetCards) {
+    public boolean executePayment(SpellAbility ability, CardCollectionView targetCards) {
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
             lkiList.addAll(targetCards);
             cardList.addAll(doListPayment(ability, targetCards));
