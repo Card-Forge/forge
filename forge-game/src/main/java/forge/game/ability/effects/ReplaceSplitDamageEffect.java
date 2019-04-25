@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -57,6 +58,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
 
             CardDamageMap damageMap = (CardDamageMap) originalParams.get("DamageMap");
             CardDamageMap preventMap = (CardDamageMap) originalParams.get("PreventMap");
+            GameEntityCounterTable counterTable = (GameEntityCounterTable) originalParams.get("CounterTable");
             SpellAbility cause = (SpellAbility) originalParams.get("Cause");
             
             boolean isCombat = (Boolean) originalParams.get("IsCombat");
@@ -64,7 +66,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             
             GameEntity obj = (GameEntity) list.get(0);
 
-            obj.addDamage(n, sourceLKI, isCombat, noPrevention, damageMap, preventMap, cause);
+            obj.addDamage(n, sourceLKI, isCombat, noPrevention, damageMap, preventMap, counterTable, cause);
         }
 
         // no damage for original target anymore
@@ -73,7 +75,6 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             return;
         }
         params.put("DamageAmount", dmg);
-
 
         //try to call replacementHandler with new Params
         ReplacementResult result = game.getReplacementHandler().run(params); 

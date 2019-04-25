@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Iterables;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -119,6 +120,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
@@ -159,7 +161,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap, sa);
+                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap, counterTable, sa);
                 }
 
                 if (!usedDamageMap) {
@@ -170,6 +172,8 @@ public class DamageDealEffect extends DamageBaseEffect {
                     preventMap.clear();
                     damageMap.clear();
                 }
+
+                counterTable.triggerCountersPutAll(game);
                 replaceDying(sa);
                 return;
             }
@@ -194,13 +198,13 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.clearAssignedDamage();
                         }
                         else {
-                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
+                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
                         }
                     }
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
+                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
                     }
                 }
             }
@@ -217,6 +221,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             preventMap.clear();
             damageMap.clear();
         }
+        counterTable.triggerCountersPutAll(game);
         replaceDying(sa);
     }
 }

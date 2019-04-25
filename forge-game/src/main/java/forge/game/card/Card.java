@@ -1131,16 +1131,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final boolean canReceiveCounters(final CounterType type) {
-        if (hasKeyword("CARDNAME can't have counters put on it.")) {
-            return false;
-        }
-        if (isCreature() && type == CounterType.M1M1) {
-            for (final Card c : getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
-                if (c.hasKeyword("Creatures you control can't have -1/-1 counters put on them.")) {
+
+        // CantPutCounter static abilities
+        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantPutCounter", this, type)) {
                     return false;
                 }
             }
-        } else if (type == CounterType.DREAM) {
+        }
+
+        if (type == CounterType.DREAM) {
+            // need to be done extra because it is also a state based action
             if (hasKeyword("CARDNAME can't have more than seven dream counters on it.") && getCounters(CounterType.DREAM) > 6) {
                 return false;
             }
@@ -1156,17 +1158,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         countersAdded = value;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        return addCounter(counterType, n, source, applyMultiplier, true);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, applyMultiplier, true, table);
     }
-    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        return addCounter(counterType, n, source, applyMultiplier, false);
+    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, applyMultiplier, false, table);
     }
 
     @Override
-    public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents) {
+    public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
-        if(addAmount < 0) {
+        if(addAmount <= 0) {
             addAmount = 0; // As per rule 107.1b
             return 0;
         }
@@ -1244,6 +1246,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             setCounters(counterType, newValue);
             getController().addCounterToPermThisTurn(counterType, addAmount);
             view.updateCounters(this);
+        }
+        if (table != null) {
+            table.put(this, counterType, addAmount);
         }
         return addAmount;
     }
@@ -4622,15 +4627,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
-    public final void addCombatDamage(final Map<Card, Integer> map, final CardDamageMap damageMap, final CardDamageMap preventMap) {
+    public final void addCombatDamage(final Map<Card, Integer> map, final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable) {
         for (final Entry<Card, Integer> entry : map.entrySet()) {
-            addCombatDamage(entry.getValue(), entry.getKey(), damageMap, preventMap);
+            addCombatDamage(entry.getValue(), entry.getKey(), damageMap, preventMap, counterTable);
         }
     }
 
-    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
+    /*
+     * (non-Javadoc)
+     * @see forge.game.GameEntity#addCombatDamageBase(int, forge.game.card.Card, forge.game.card.CardDamageMap, forge.game.GameEntityCounterTable)
+     */
+    @Override
+    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
         if (isInPlay()) {
-            return super.addCombatDamageBase(damage, source, damageMap);
+            return super.addCombatDamageBase(damage, source, damageMap, counterTable);
         }
         return 0;
     }
@@ -4857,10 +4867,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return restDamage;
     }
 
-    public final void addDamage(final Map<Card, Integer> sourcesMap, CardDamageMap damageMap) {
+    public final void addDamage(final Map<Card, Integer> sourcesMap, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
         for (final Entry<Card, Integer> entry : sourcesMap.entrySet()) {
             // damage prevention is already checked!
-            addDamageAfterPrevention(entry.getValue(), entry.getKey(), true, damageMap);
+            addDamageAfterPrevention(entry.getValue(), entry.getKey(), true, damageMap, counterTable);
         }
     }
 
@@ -4869,7 +4879,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * applied.
      */
     @Override
-    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, CardDamageMap damageMap) {
+    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
 
         if (damageIn == 0) {
             return 0; // Rule 119.8
@@ -4903,7 +4913,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (isInPlay()) {
                 if (wither) {
-                    addCounter(CounterType.M1M1, damageIn, source.getController(), true);
+                    addCounter(CounterType.M1M1, damageIn, source.getController(), true, counterTable);
                     damageType = DamageType.M1M1Counters;
                 }
                 else {
@@ -6052,7 +6062,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return etbCounters.cellSet();
     }
 
-    public final boolean putEtbCounters() {
+    public final boolean putEtbCounters(GameEntityCounterTable table) {
         boolean changed = false;
         for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
             CounterType ct = e.getColumnKey();
@@ -6062,7 +6072,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     changed = true;
                 }
             } else {
-                changed |= addCounter(ct, e.getValue(), e.getRowKey(), true) > 0;
+                changed |= addCounter(ct, e.getValue(), e.getRowKey(), true, table) > 0;
             }
         }
         return changed;

@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -354,7 +355,25 @@ public class CountersRemoveAi extends SpellAbilityAi {
      */
     @Override
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
-        // TODO Auto-generated method stub
+        GameEntity target = (GameEntity) params.get("Target");
+        CounterType type = (CounterType) params.get("CounterType");
+
+        if (target instanceof Card) {
+            Card targetCard = (Card) target;
+            if (targetCard.getController().isOpponentOf(player)) {
+                return !ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
+            } else {
+                return ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
+            }
+        } else if (target instanceof Player) {
+            Player targetPlayer = (Player) target;
+            if (targetPlayer.isOpponentOf(player)) {
+                return !type.equals(CounterType.POISON) ? max : min;
+            } else {
+                return type.equals(CounterType.POISON) ? max : min;
+            }
+        }
+
         return super.chooseNumber(player, sa, min, max, params);
     }
 
@@ -370,30 +389,49 @@ public class CountersRemoveAi extends SpellAbilityAi {
             return super.chooseCounterType(options, sa, params);
         }
         Player ai = sa.getActivatingPlayer();
-        Card target = (Card) params.get("Target");
+        GameEntity target = (GameEntity) params.get("Target");
 
-        if (target.getController().isOpponentOf(ai)) {
-            // if its a Planeswalker try to remove Loyality first
-            if (target.isPlaneswalker()) {
-                return CounterType.LOYALTY;
-            }
-            for (CounterType type : options) {
-                if (!ComputerUtil.isNegativeCounter(type, target)) {
-                    return type;
+        if (target instanceof Card) {
+            Card targetCard = (Card) target;
+            if (targetCard.getController().isOpponentOf(ai)) {
+                // if its a Planeswalker try to remove Loyality first
+                if (targetCard.isPlaneswalker()) {
+                    return CounterType.LOYALTY;
+                }
+                for (CounterType type : options) {
+                    if (!ComputerUtil.isNegativeCounter(type, targetCard)) {
+                        return type;
+                    }
+                }
+            } else {
+                if (options.contains(CounterType.M1M1) && targetCard.hasKeyword(Keyword.PERSIST)) {
+                    return CounterType.M1M1;
+                } else if (options.contains(CounterType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
+                    return CounterType.P1P1;
+                }
+                for (CounterType type : options) {
+                    if (ComputerUtil.isNegativeCounter(type, targetCard)) {
+                        return type;
+                    }
                 }
             }
-        } else {
-            if (options.contains(CounterType.M1M1) && target.hasKeyword(Keyword.PERSIST)) {
-                return CounterType.M1M1;
-            } else if (options.contains(CounterType.P1P1) && target.hasKeyword(Keyword.UNDYING)) {
-                return CounterType.M1M1;
-            }
-            for (CounterType type : options) {
-                if (ComputerUtil.isNegativeCounter(type, target)) {
-                    return type;
+        } else if (target instanceof Player) {
+            Player targetPlayer = (Player) target;
+            if (targetPlayer.isOpponentOf(ai)) {
+                for (CounterType type : options) {
+                    if (!type.equals(CounterType.POISON)) {
+                        return type;
+                    }
+                }
+            } else {
+                for (CounterType type : options) {
+                    if (type.equals(CounterType.POISON)) {
+                        return type;
+                    }
                 }
             }
         }
+
         return super.chooseCounterType(options, sa, params);
     }
 }

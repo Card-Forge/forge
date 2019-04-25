@@ -201,7 +201,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        if (player.canPayLife(c) && player.getController().confirmPayment(cost, "Pay " + c + " Life?", ability)) {
+        if (controller.confirmPayment(cost, "Do you want " + source + " to deal " + c + " damage to you?", ability)) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -738,7 +738,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPutCounter cost) {
-        final Integer c = cost.getNumberOfCounters(ability);
+        final Integer c = cost.convertAmount();
 
         if (cost.payCostFromSource()) {
             cost.setLastPaidAmount(c);

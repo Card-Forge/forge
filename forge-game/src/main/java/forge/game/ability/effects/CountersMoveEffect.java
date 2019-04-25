@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -78,6 +79,8 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
         }
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
         // uses for multi sources -> one defined/target
         // this needs given counter type
         if (sa.hasParam("ValidSource")) {
@@ -146,8 +149,9 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             if (csum > 0) {
-                dest.addCounter(cType, csum, player, true);
+                dest.addCounter(cType, csum, player, true, table);
                 game.updateLastStateForCard(dest);
+                table.triggerCountersPutAll(game);
             }
             return;
         } else if (sa.hasParam("ValidDefined")) {
@@ -202,7 +206,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                 if (cnum > 0) {
                     source.subtractCounter(cType, cnum);
-                    cur.addCounter(cType, cnum, player, true);
+                    cur.addCounter(cType, cnum, player, true, table);
                     game.updateLastStateForCard(cur);
                     updateSource = true;
                 }
@@ -210,6 +214,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (updateSource) {
                 // update source
                 game.updateLastStateForCard(source);
+                table.triggerCountersPutAll(game);
             }
             return;
         }
@@ -263,7 +268,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                     if (source.getCounters(cType) >= cntToMove) {
                         source.subtractCounter(cType, cntToMove);
-                        cur.addCounter(cType, cntToMove, player, true);
+                        cur.addCounter(cType, cntToMove, player, true, table);
                         game.updateLastStateForCard(cur);
                     }
                 } else {
@@ -297,7 +302,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             sa, sb.toString(), 0, Math.min(tgtCounters.get(chosenType), cntToMove), params);
 
                     if (chosenAmount > 0) {
-                        dest.addCounter(chosenType, chosenAmount, player, true);
+                        dest.addCounter(chosenType, chosenAmount, player, true, table);
                         source.subtractCounter(chosenType, chosenAmount);
                         game.updateLastStateForCard(dest);
                         cntToMove -= chosenAmount;
@@ -307,5 +312,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
         // update source
         game.updateLastStateForCard(source);
+        table.triggerCountersPutAll(game);
     } // moveCounterResolve
 }

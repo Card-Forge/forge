@@ -559,7 +559,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // This function handles damage after replacement and prevention effects are applied
     @Override
-    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, CardDamageMap damageMap) {
+    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
         if (amount <= 0) {
             return 0;
         }
@@ -570,7 +570,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
-            addPoisonCounters(amount, source);
+            addPoisonCounters(amount, source, counterTable);
         }
         else {
             // Worship does not reduce the damage dealt but changes the effect
@@ -882,23 +882,23 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
-        if (hasKeyword("PLAYER can't have counters put on him or her.")) {
-            return false;
-        }
-        if (type == CounterType.POISON) {
-            if (hasKeyword("You can't get poison counters")) {
-                return false;
+        // CantPutCounter static abilities
+        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantPutCounter", this, type)) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        return addCounter(counterType, n, source, applyMultiplier, true);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, applyMultiplier, true, table);
     }
 
     @Override
-    public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents) {
+    public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
         if (!canReceiveCounters(counterType)) {
             return 0;
         }
@@ -941,6 +941,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (addAmount > 0) {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
+        }
+        if (table != null) {
+            table.put(this, counterType, addAmount);
         }
         return addAmount;
     }
@@ -999,9 +1002,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         setCounters(CounterType.POISON, num, true);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
-    public final void addPoisonCounters(final int num, final Card source) {
+    public final void addPoisonCounters(final int num, final Card source, GameEntityCounterTable table) {
         int oldPoison = getCounters(CounterType.POISON);
-        addCounter(CounterType.POISON, num, source.getController(), false, true);
+        addCounter(CounterType.POISON, num, source.getController(), false, true, table);
 
         if (oldPoison != getCounters(CounterType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));

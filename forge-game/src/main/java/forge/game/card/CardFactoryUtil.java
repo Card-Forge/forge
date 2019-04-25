@@ -32,6 +32,7 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -4277,7 +4278,9 @@ public class CardFactoryUtil {
                     final Card c = game.getAction().exile(this.getHostCard(), this);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
-                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true, table);
+                    table.triggerCountersPutAll(game);
                     
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
