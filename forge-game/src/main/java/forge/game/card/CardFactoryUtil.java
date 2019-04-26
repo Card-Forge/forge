@@ -499,7 +499,11 @@ public class CardFactoryUtil {
         }
 
         if (players.size() > 0) {
-            return playerXProperty(players.get(0), s, source);
+            int totCount = 0;
+            for (Player p : players) {
+                totCount += playerXProperty(p, s, source);
+            }
+            return totCount;
         }
 
         return doXMath(n, m, source);
