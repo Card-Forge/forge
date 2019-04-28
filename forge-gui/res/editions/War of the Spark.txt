@@ -296,7 +296,6 @@ b_2_2_zombie
 b_4_4_zombie_warrior_vigilance
 c_1_1_a_servo
 c_2_2_spirit
-emblem_nissa_who_shakes_the_world
 g_2_2_wolf
 r_1_1_devil_burn
 r_1_1_goblin
