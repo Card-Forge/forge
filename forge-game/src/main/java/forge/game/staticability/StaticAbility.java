@@ -540,7 +540,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (hasParam("EffectZone")) {
             if (!getParam("EffectZone").equals("All")) {
-                Zone zone = getHostCard().getZone();
+                Zone zone = game.getZoneOf(getHostCard());
                 if (zone == null || !ZoneType.listValueOf(getParam("EffectZone")).contains(zone.getZoneType())) {
                     return false;
                 }

@@ -91,7 +91,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean trigger = false;
     private Trigger triggerObj = null;
     private boolean optionalTrigger = false;
-    private boolean replacementAbility = false;
     private ReplacementEffect replacementEffect = null;
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
@@ -952,13 +951,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isReplacementAbility() {
-        return replacementAbility;
-    }
-    public void setReplacementAbility(boolean replacement) {
-        replacementAbility = replacement;
+        return getParent() != null ? getParent().isReplacementAbility() : replacementEffect != null;
     }
 
     public ReplacementEffect getReplacementEffect() {
+        if (getParent() != null) {
+            return getParent().getReplacementEffect();
+        }
         return replacementEffect;
     }
 

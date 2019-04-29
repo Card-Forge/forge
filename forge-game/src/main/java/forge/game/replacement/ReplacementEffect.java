@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * TODO: Write javadoc for this type.
- * 
+ *
  */
 public abstract class ReplacementEffect extends TriggerReplacementBase {
     private static int maxId = 0;
@@ -43,6 +43,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /** The has run. */
     private boolean hasRun = false;
+
+    private List<ReplacementEffect> otherChoices = null;
 
     /**
      * Gets the id.
@@ -66,7 +68,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
     /**
      * Checks for run.
-     * 
+     *
      * @return the hasRun
      */
     public final boolean hasRun() {
@@ -75,7 +77,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Instantiates a new replacement effect.
-     * 
+     *
      * @param map
      *            the map
      * @param host
@@ -94,7 +96,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Sets the checks for run.
-     * 
+     *
      * @param hasRun
      *            the hasRun to set
      */
@@ -102,9 +104,16 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.hasRun = hasRun;
     }
 
+    public List<ReplacementEffect> getOtherChoices() {
+        return otherChoices;
+    }
+    public void setOtherChoices(List<ReplacementEffect> choices) {
+        this.otherChoices = choices;
+    }
+
     /**
      * Can replace.
-     * 
+     *
      * @param runParams
      *            the run params
      * @return true, if successful
@@ -115,14 +124,14 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * <p>
      * requirementsCheck.
      * </p>
-     * @param game 
-     * 
+     * @param game
+     *
      * @return a boolean.
      */
     public boolean requirementsCheck(Game game) {
         return this.requirementsCheck(game, this.getMapParams());
     }
-    
+
     public boolean requirementsCheck(Game game, Map<String,String> params) {
 
         if (this.isSuppressed()) {
@@ -154,7 +163,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Gets the copy.
-     * 
+     *
      * @return the copy
      */
     public final ReplacementEffect copy(final Card host, final boolean lki) {
@@ -174,8 +183,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         if (!lki) {
             res.setId(nextId());
             res.setHasRun(false);
+            res.setOtherChoices(null);
         }
-        
+
         res.setHostCard(host);
 
         res.setActiveZone(validHostZones);
@@ -186,7 +196,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Sets the replacing objects.
-     * 
+     *
      * @param runParams
      *            the run params
      * @param spellAbility

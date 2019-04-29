@@ -466,7 +466,7 @@ public class Game {
     }
 
     public Zone getZoneOf(final Card card) {
-        return card.getZone();
+        return card.getLastKnownZone();
     }
 
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {

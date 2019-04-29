@@ -1830,6 +1830,37 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
 
+    public void testSparkDoubleAndGideon() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Plains", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Island", p, ZoneType.Battlefield); }
+
+        Card gideon = addCardToZone("Gideon Blackblade", p, ZoneType.Hand);
+        Card sparkDouble = addCardToZone("Spark Double", p, ZoneType.Hand);
+
+        SpellAbility gideonSA = gideon.getFirstSpellAbility();
+        SpellAbility sparkDoubleSA = sparkDouble.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(gideonSA);
+        sim.simulateSpellAbility(sparkDoubleSA);
+
+        Game simGame = sim.getSimulatedGameState();
+        Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
+
+        assert(simSpark != null);
+        assert(simSpark.getZone().is(ZoneType.Battlefield));
+        assert(simSpark.getCounters(CounterType.P1P1) == 1);
+        assert(simSpark.getCounters(CounterType.LOYALTY) == 5);
+    }
+
+
     @SuppressWarnings("unused")
     public void broken_testCloneDimir() {
         Game game = initAndCreateGame();

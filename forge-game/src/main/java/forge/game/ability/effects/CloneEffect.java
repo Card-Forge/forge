@@ -10,7 +10,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method
@@ -48,6 +51,11 @@ public class CloneEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         Card tgtCard = host;
         final Game game = activator.getGame();
+        final List<String> pumpKeywords = Lists.newArrayList();
+
+        if (sa.hasParam("PumpKeywords")) {
+            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
+        }
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
@@ -113,6 +121,10 @@ public class CloneEffect extends SpellAbilityEffect {
         // set ETB tapped of clone
         if (sa.hasParam("IntoPlayTapped")) {
             tgtCard.setTapped(true);
+        }
+
+        if (!pumpKeywords.isEmpty()) {
+            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, ts);
         }
 
         tgtCard.updateStateForView();

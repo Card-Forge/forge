@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,6 +23,8 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
@@ -34,6 +36,7 @@ import forge.util.Visitor;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.util.*;
 
@@ -74,6 +77,34 @@ public class ReplacementHandler {
     }
 
     public List<ReplacementEffect> getReplacementList(final Map<String, Object> runParams, final ReplacementLayer layer) {
+
+        final CardCollection preList = new CardCollection();
+        boolean checkAgain = false;
+        Card affectedLKI = null;
+        Card affectedCard = null;
+
+        if ("Moved".equals(runParams.get("Event")) && ZoneType.Battlefield.equals(runParams.get("Destination"))) {
+            // if it was caused by an replacement effect, use the already calculated RE list
+            // otherwise the RIOT card would cause a StackError
+            SpellAbility cause = (SpellAbility) runParams.get("Cause");
+            if (cause != null && cause.isReplacementAbility()) {
+                final ReplacementEffect re = cause.getReplacementEffect();
+                // only return for same layer
+                if (layer.equals(re.getLayer())) {
+                    return re.getOtherChoices();
+                }
+            }
+
+            // Rule 614.12 Enter the Battlefield Replacement Effects look at what the card would be on the battlefield
+            affectedCard = (Card) runParams.get("Affected");
+            affectedLKI = CardUtil.getLKICopy(affectedCard);
+            affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
+            preList.add(affectedLKI);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
+            checkAgain = true;
+            runParams.put("Affected", affectedLKI);
+        }
+
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
@@ -87,17 +118,19 @@ public class ReplacementHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public boolean visit(Card crd) {
-                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+                final Card c = preList.get(crd);
+
+                for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
 
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
                     // getting hit by mass removal should still produce tokens).
-                    Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
+                    Zone cardZone = "True".equals(replacementEffect.getParam("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(c).getLastKnownZone() : game.getZoneOf(c);
 
                     // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
                     // effect should be inactive)
                     if (replacementEffect.hasParam("TiedToKeyword")) {
                         String kw = replacementEffect.getParam("TiedToKeyword");
-                        if (!crd.hasKeyword(kw)) {
+                        if (!c.hasKeyword(kw)) {
                             continue;
                         }
                     }
@@ -113,15 +146,28 @@ public class ReplacementHandler {
                 }
                 return true;
             }
-            
+
         });
+
+        if (checkAgain) {
+            if (affectedLKI != null && affectedCard != null) {
+                // need to set the Host Card there so it is not connected to LKI anymore?
+                // need to be done after canReplace check
+                for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
+                    re.setHostCard(affectedCard);
+                }
+                runParams.put("Affected", affectedCard);
+            }
+            game.getAction().checkStaticAbilities(false);
+        }
+
         return possibleReplacers;
     }
-    
+
     /**
-     * 
+     *
      * Runs any applicable replacement effects.
-     * 
+     *
      * @param runParams
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
@@ -138,15 +184,18 @@ public class ReplacementHandler {
         possibleReplacers.remove(chosenRE);
 
         chosenRE.setHasRun(true);
-        ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
+        chosenRE.setOtherChoices(possibleReplacers);
+        ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
                 res = run(runParams);
             }
             chosenRE.setHasRun(false);
+            chosenRE.setOtherChoices(null);
             return res;
         }
         chosenRE.setHasRun(false);
+        chosenRE.setOtherChoices(null);
         String message = chosenRE.toString();
         if ( !StringUtils.isEmpty(message))
         	if (chosenRE.getHostCard() != null) {
@@ -157,9 +206,9 @@ public class ReplacementHandler {
     }
 
     /**
-     * 
+     *
      * Runs a single replacement effect.
-     * 
+     *
      * @param replacementEffect
      *            the replacement effect to run
      */
@@ -179,7 +228,7 @@ public class ReplacementHandler {
         if (mapParams.containsKey("ReplaceWith")) {
             final String effectSVar = mapParams.get("ReplaceWith");
             final String effectAbString = host.getSVar(effectSVar);
-            // TODO: the source of replacement effect should be the source of the original effect 
+            // TODO: the source of replacement effect should be the source of the original effect
             effectSA = AbilityFactory.getAbility(effectAbString, host);
             //effectSA.setTrigger(true);
 
@@ -210,7 +259,6 @@ public class ReplacementHandler {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
             }
-            effectSA.setReplacementAbility(true);
             effectSA.setReplacementEffect(replacementEffect);
         }
 
@@ -267,10 +315,10 @@ public class ReplacementHandler {
     }
 
     /**
-     * 
+     *
      * Creates an instance of the proper replacement effect object based on raw
      * script.
-     * 
+     *
      * @param repParse
      *            A raw line of script
      * @param host
@@ -278,16 +326,18 @@ public class ReplacementHandler {
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic) {
-        
-        final Map<String, String> mapParams = FileSection.parseToMap(repParse, "$", "|");
-        return ReplacementHandler.parseReplacement(mapParams, host, intrinsic);
+        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic);
+    }
+
+    public static Map<String, String> parseParams(final String repParse) {
+        return FileSection.parseToMap(repParse, "$", "|");
     }
 
     /**
-     * 
+     *
      * Creates an instance of the proper replacement effect object based on a
      * parsed script.
-     * 
+     *
      * @param mapParams
      *            The parsed script
      * @param host
