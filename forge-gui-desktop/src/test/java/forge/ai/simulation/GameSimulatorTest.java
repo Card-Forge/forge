@@ -1851,7 +1851,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
-        Game simGame = sim.getSimulatedGameState();
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
         assert(simSpark != null);
