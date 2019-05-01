@@ -1843,7 +1843,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility gideonSA = gideon.getFirstSpellAbility();
         SpellAbility sparkDoubleSA = sparkDouble.getFirstSpellAbility();
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
         GameSimulator sim = createSimulator(game, p);
@@ -1879,7 +1878,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility cytoSA = cytoshape.getFirstSpellAbility();
         cytoSA.getTargets().add(tgtLand);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
         GameSimulator sim = createSimulator(game, p);
