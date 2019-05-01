@@ -1829,7 +1829,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
     }
 
-
     public void testSparkDoubleAndGideon() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
@@ -1859,6 +1858,41 @@ public class GameSimulatorTest extends SimulationTestCase {
         assert(simSpark.getCounters(CounterType.LOYALTY) == 5);
     }
 
+    public void testVituGhaziAndCytoshape() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Plains", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Island", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Forest", p, ZoneType.Battlefield); }
+
+        Card tgtLand = addCardToZone("Wastes", p, ZoneType.Battlefield);
+
+        Card vituGhazi = addCardToZone("Awakening of Vitu-Ghazi", p, ZoneType.Hand);
+        Card cytoshape = addCardToZone("Cytoshape", p, ZoneType.Hand);
+        Card goblin = addCardToZone("Raging Goblin", p, ZoneType.Battlefield);
+
+        SpellAbility vituSA = vituGhazi.getFirstSpellAbility();
+        vituSA.getTargets().add(tgtLand);
+
+        SpellAbility cytoSA = cytoshape.getFirstSpellAbility();
+        cytoSA.getTargets().add(tgtLand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(vituSA);
+        sim.simulateSpellAbility(cytoSA);
+
+        Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
+
+        assert(awakened != null);
+        assert(awakened.getName().equals("Vitu-Ghazi"));
+        assert(awakened.getCounters(CounterType.P1P1) == 9);
+        assert(awakened.hasKeyword(Keyword.HASTE));
+    }
 
     @SuppressWarnings("unused")
     public void broken_testCloneDimir() {
