@@ -1829,7 +1829,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
     }
 
-
     public void testSparkDoubleAndGideon() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
@@ -1844,21 +1843,51 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility gideonSA = gideon.getFirstSpellAbility();
         SpellAbility sparkDoubleSA = sparkDouble.getFirstSpellAbility();
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        game.getAction().checkStateEffects(true);
-
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
-        assert(simSpark != null);
-        assert(simSpark.getZone().is(ZoneType.Battlefield));
-        assert(simSpark.getCounters(CounterType.P1P1) == 1);
-        assert(simSpark.getCounters(CounterType.LOYALTY) == 5);
+        assertTrue(simSpark != null);
+        assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
+        assertTrue(simSpark.getCounters(CounterType.P1P1) == 1);
+        assertTrue(simSpark.getCounters(CounterType.LOYALTY) == 5);
     }
 
+    public void testVituGhaziAndCytoshape() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Plains", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Island", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Forest", p, ZoneType.Battlefield); }
+
+        Card tgtLand = addCardToZone("Wastes", p, ZoneType.Battlefield);
+
+        Card vituGhazi = addCardToZone("Awakening of Vitu-Ghazi", p, ZoneType.Hand);
+        Card cytoshape = addCardToZone("Cytoshape", p, ZoneType.Hand);
+        Card goblin = addCardToZone("Raging Goblin", p, ZoneType.Battlefield);
+
+        SpellAbility vituSA = vituGhazi.getFirstSpellAbility();
+        vituSA.getTargets().add(tgtLand);
+
+        SpellAbility cytoSA = cytoshape.getFirstSpellAbility();
+        cytoSA.getTargets().add(tgtLand);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(vituSA);
+        sim.simulateSpellAbility(cytoSA);
+
+        Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
+
+        assertTrue(awakened != null);
+        assertTrue(awakened.getName().equals("Vitu-Ghazi"));
+        assertTrue(awakened.getCounters(CounterType.P1P1) == 9);
+        assertTrue(awakened.hasKeyword(Keyword.HASTE));
+        assertTrue(awakened.getType().hasSubtype("Goblin"));
+    }
 
     @SuppressWarnings("unused")
     public void broken_testCloneDimir() {
