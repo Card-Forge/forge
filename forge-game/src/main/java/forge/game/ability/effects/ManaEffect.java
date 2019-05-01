@@ -58,120 +58,132 @@ public class ManaEffect extends SpellAbilityEffect {
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
-                if (tgt == null || p.canBeTargetedBy(sa)) {
-                    Player activator = sa.getActivatingPlayer();
-                    String express = abMana.getExpressChoice();
-                    String[] colorsProduced = abMana.getComboColors().split(" ");
-
-                    final StringBuilder choiceString = new StringBuilder();
-                    ColorSet colorOptions = null;
-                    String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
-                    if (!abMana.isAnyMana()) {
-                        colorOptions = ColorSet.fromNames(colorsProduced);
-                    } else {
-                        colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
-                    }
-                    final ColorSet fullOptions = colorOptions;
-                    for (int nMana = 1; nMana <= amount; nMana++) {
-                        String choice = "";
-                        if (colorsNeeded != null && colorsNeeded.length >= nMana) {	// select from express choices if possible
-                            colorOptions = ColorSet
-                                    .fromMask(fullOptions.getColor() & ManaAtom.fromName(colorsNeeded[nMana - 1]));
-                        }
-                        if (colorOptions.isColorless() && colorsProduced.length > 0) {
-                            // If we just need generic mana, no reason to ask the controller for a choice,
-                            // just use the first possible color.
-                            choice = colorsProduced[0];
-                        } else {
-                            byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
-                            if (chosenColor == 0)
-                                throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
-                            choice = MagicColor.toShortString(chosenColor);
-                        }
-                        
-                        if (nMana != 1) {
-                            choiceString.append(" ");
-                        }
-                        choiceString.append(choice);
-                    }
-
-                    if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
-                        // No mana could be produced here (non-EDH match?), so cut short
-                        return;
-                    }
-
-                    game.action.nofityOfValue(sa, card, activator + " picked " + choiceString, activator);
-                    abMana.setExpressChoice(choiceString.toString());
+                if (tgt != null && !p.canBeTargetedBy(sa)) {
+                    // Illegal target. Skip.
+                    continue;
                 }
+
+                Player activator = sa.getActivatingPlayer();
+                String express = abMana.getExpressChoice();
+                String[] colorsProduced = abMana.getComboColors().split(" ");
+
+                final StringBuilder choiceString = new StringBuilder();
+                ColorSet colorOptions = null;
+                String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
+                if (!abMana.isAnyMana()) {
+                    colorOptions = ColorSet.fromNames(colorsProduced);
+                } else {
+                    colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
+                }
+                boolean differentChoice = abMana.getOrigProduced().contains("Different");
+                ColorSet fullOptions = colorOptions;
+                for (int nMana = 0; nMana < amount; nMana++) {
+                    String choice = "";
+                    if (colorsNeeded != null && colorsNeeded.length > nMana) {	// select from express choices if possible
+                        colorOptions = ColorSet
+                                .fromMask(fullOptions.getColor() & ManaAtom.fromName(colorsNeeded[nMana]));
+                    }
+                    if (colorOptions.isColorless() && colorsProduced.length > 0) {
+                        // If we just need generic mana, no reason to ask the controller for a choice,
+                        // just use the first possible color.
+                        choice = colorsProduced[differentChoice ? nMana : 0];
+                    } else {
+                        byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
+                        if (chosenColor == 0)
+                            throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
+                        
+                        fullOptions = ColorSet.fromMask(fullOptions.getMyColor() - chosenColor);
+                        choice = MagicColor.toShortString(chosenColor);
+                    }
+                    
+                    if (nMana > 0) {
+                        choiceString.append(" ");
+                    }
+                    choiceString.append(choice);
+                }
+
+                if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
+                    // No mana could be produced here (non-EDH match?), so cut short
+                    return;
+                }
+
+                game.action.nofityOfValue(sa, card, activator + " picked " + choiceString, activator);
+                abMana.setExpressChoice(choiceString.toString());
             }
         }
         else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
-                if (tgt == null || p.canBeTargetedBy(sa)) {
-                    Player act = sa.getActivatingPlayer();
-                    // AI color choice is set in ComputerUtils so only human players need to make a choice
-    
-                    String colorsNeeded = abMana.getExpressChoice();
-                    String choice = "";
-
-                    ColorSet colorMenu = null;
-                    byte mask = 0;
-                    //loop through colors to make menu
-                    for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                        mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
-                    }
-                    colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
-                    byte val = p.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
-                    if (0 == val) {
-                        throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + act + " color mana choice is empty for " + card.getName());
-                    }
-                    choice = MagicColor.toShortString(val);
-
-                    game.action.nofityOfValue(sa, card, act + " picked " + choice, act);
-                    abMana.setExpressChoice(choice);
+                if (tgt != null && !p.canBeTargetedBy(sa)) {
+                    // Illegal target. Skip.
+                    continue;
                 }
+
+                Player act = sa.getActivatingPlayer();
+                // AI color choice is set in ComputerUtils so only human players need to make a choice
+
+                String colorsNeeded = abMana.getExpressChoice();
+                String choice = "";
+
+                ColorSet colorMenu = null;
+                byte mask = 0;
+                //loop through colors to make menu
+                for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
+                    mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
+                }
+                colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
+                byte val = p.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                if (0 == val) {
+                    throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + act + " color mana choice is empty for " + card.getName());
+                }
+                choice = MagicColor.toShortString(val);
+
+                game.action.nofityOfValue(sa, card, act + " picked " + choice, act);
+                abMana.setExpressChoice(choice);
             }
         }
         else if (abMana.isSpecialMana()) {
             for (Player p : tgtPlayers) {
-                if (tgt == null || p.canBeTargetedBy(sa)) {
-                    String type = abMana.getOrigProduced().split("Special ")[1];
+                if (tgt != null && !p.canBeTargetedBy(sa)) {
+                    // Illegal target. Skip.
+                    continue;
+                }
 
-                    if (type.equals("EnchantedManaCost")) {
-                        Card enchanted = card.getEnchantingCard();
-                        if (enchanted == null ) 
+                String type = abMana.getOrigProduced().split("Special ")[1];
+
+                if (type.equals("EnchantedManaCost")) {
+                    Card enchanted = card.getEnchantingCard();
+                    if (enchanted == null ) 
+                        continue;
+
+                    StringBuilder sb = new StringBuilder();
+                    int generic = enchanted.getManaCost().getGenericCost();
+                    if( generic > 0 )
+                        sb.append(generic);
+
+                    for (ManaCostShard s : enchanted.getManaCost()) {
+                        ColorSet cs = ColorSet.fromMask(s.getColorMask());
+                        if(cs.isColorless())
                             continue;
-
-                        StringBuilder sb = new StringBuilder();
-                        int generic = enchanted.getManaCost().getGenericCost();
-                        if( generic > 0 )
-                            sb.append(generic);
-
-                        for (ManaCostShard s : enchanted.getManaCost()) {
-                            ColorSet cs = ColorSet.fromMask(s.getColorMask());
-                            if(cs.isColorless())
-                                continue;
-                            sb.append(' ');
-                            if (cs.isMonoColor())
-                                sb.append(MagicColor.toShortString(s.getColorMask()));
-                            else /* (cs.isMulticolor()) */ {
-                                byte chosenColor = sa.getActivatingPlayer().getController().chooseColor("Choose a single color from " + s.toString(), sa, cs);
-                                sb.append(MagicColor.toShortString(chosenColor));
-                            }
+                        sb.append(' ');
+                        if (cs.isMonoColor())
+                            sb.append(MagicColor.toShortString(s.getColorMask()));
+                        else /* (cs.isMulticolor()) */ {
+                            byte chosenColor = sa.getActivatingPlayer().getController().chooseColor("Choose a single color from " + s.toString(), sa, cs);
+                            sb.append(MagicColor.toShortString(chosenColor));
                         }
-                        abMana.setExpressChoice(sb.toString().trim());
-                    } else if (type.equals("LastNotedType")) {
-                        Mana manaType = (Mana) Iterables.getFirst(card.getRemembered(), null);
-                        if (manaType == null) {
-                            return;
-                        }
-                        String  cs = manaType.toString();
-                        abMana.setExpressChoice(cs);
                     }
+                    abMana.setExpressChoice(sb.toString().trim());
+                } else if (type.equals("LastNotedType")) {
+                    Mana manaType = (Mana) Iterables.getFirst(card.getRemembered(), null);
+                    if (manaType == null) {
+                        return;
+                    }
+                    String  cs = manaType.toString();
+                    abMana.setExpressChoice(cs);
+                }
 
-                    if (abMana.getExpressChoice().isEmpty()) {
-                        System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getHostCard().getName());
-                    }
+                if (abMana.getExpressChoice().isEmpty()) {
+                    System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getHostCard().getName());
                 }
             }    
         }
