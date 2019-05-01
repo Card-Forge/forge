@@ -295,6 +295,7 @@ public final class CardUtil {
         newCopy.setChangedCardColors(in.getChangedCardColors());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
+        newCopy.setChangedCardNames(in.getChangedCardNames());
 
         newCopy.copyChangedTextFrom(in);
 

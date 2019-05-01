@@ -147,6 +147,7 @@ public class CardFactory {
         out.setChangedCardColors(in.getChangedCardColors());
         out.setChangedCardKeywords(in.getChangedCardKeywords());
         out.setChangedCardTypes(in.getChangedCardTypesMap());
+        out.setChangedCardNames(in.getChangedCardNames());
 
         return out;
     }
