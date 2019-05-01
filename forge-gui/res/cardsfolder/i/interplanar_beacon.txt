@@ -1,5 +1,5 @@
 Name:Interplanar Beacon
-ManaCost:
+ManaCost:no cost
 Types:Land
 T:Mode$ SpellCast | ValidCard$ Planeswalker | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a planeswalker spell, you gain 1 life.
 SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1

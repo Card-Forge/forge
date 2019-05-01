@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:4
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | Condition$ PlayerTurn | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature & Human & Soldier | AddKeyword$ Indestructible | Description$ As long as it's your turn, CARDNAME is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.
-R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | Condition$ PlayerTurn | Description$ Prevent all damage that would be dealt to CARDNAME during your turn.
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | PlayerTurn$ True | Description$ Prevent all damage that would be dealt to CARDNAME during your turn.
 A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select to one target creature you control | Choices$ DBVigilance,DBLifelink,DBIndestructible | Defined$ You | ConditionDefined$ Targeted | ConditionPresent$ Card | ConditionCompare$ GE1 | SpellDescription$ Up to one other target creature you control gains your choice of vigilance, lifelink, or indestructible until end of turn. | StackDescription$ SpellDescription
 SVar:DBVigilance:DB$ Pump | Defined$ Targeted | KW$ Vigilance | SpellDescription$ Targeted creature gains Vigilance until end of turn.
 SVar:DBLifelink:DB$ Pump | Defined$ Targeted | KW$ Lifelink | SpellDescription$ Targeted creature gains Lifelink until end of turn.
