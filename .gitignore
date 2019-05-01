@@ -234,3 +234,5 @@ forge-gui/tools/oracleScript.log
 .settings
 .classpath
 .project
+.vscode/settings.json
+.vscode/launch.json
