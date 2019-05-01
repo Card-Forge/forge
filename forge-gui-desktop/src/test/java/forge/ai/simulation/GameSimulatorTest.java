@@ -1849,10 +1849,10 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
-        assert(simSpark != null);
-        assert(simSpark.getZone().is(ZoneType.Battlefield));
-        assert(simSpark.getCounters(CounterType.P1P1) == 1);
-        assert(simSpark.getCounters(CounterType.LOYALTY) == 5);
+        assertTrue(simSpark != null);
+        assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
+        assertTrue(simSpark.getCounters(CounterType.P1P1) == 1);
+        assertTrue(simSpark.getCounters(CounterType.LOYALTY) == 5);
     }
 
     public void testVituGhaziAndCytoshape() {
@@ -1882,10 +1882,11 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
 
-        assert(awakened != null);
-        assert(awakened.getName().equals("Vitu-Ghazi"));
-        assert(awakened.getCounters(CounterType.P1P1) == 9);
-        assert(awakened.hasKeyword(Keyword.HASTE));
+        assertTrue(awakened != null);
+        assertTrue(awakened.getName().equals("Vitu-Ghazi"));
+        assertTrue(awakened.getCounters(CounterType.P1P1) == 9);
+        assertTrue(awakened.hasKeyword(Keyword.HASTE));
+        assertTrue(awakened.getType().hasSubtype("Goblin"));
     }
 
     @SuppressWarnings("unused")
