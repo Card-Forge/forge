@@ -116,10 +116,12 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
+    private final NavigableMap<Long, String> changedCardNames = Maps.newTreeMap();
     private final Map<Long, KeywordsChange> changedCardKeywords = Maps.newTreeMap();
     private final Map<Long, CardColor> changedCardColors = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
+
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -722,12 +724,45 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final String getName() {
-        return currentState.getName();
+        return getName(currentState);
+    }
+
+    public final String getName(CardState state) {
+        if (changedCardNames.isEmpty()) {
+            return state.getName();
+        }
+        return changedCardNames.lastEntry().getValue();
     }
 
     @Override
     public final void setName(final String name0) {
         currentState.setName(name0);
+    }
+
+    public void addChangedName(final String name0, Long timestamp) {
+        changedCardNames.put(timestamp, name0);
+        updateNameforView();
+    }
+
+    public void removeChangedName(Long timestamp) {
+        if (changedCardNames.remove(timestamp) != null) {
+            updateNameforView();
+        }
+    }
+
+    public void updateNameforView() {
+        currentState.getView().updateName(currentState);
+    }
+
+    public Map<Long, String> getChangedCardNames() {
+        return Collections.unmodifiableMap(changedCardNames);
+    }
+
+    public void setChangedCardNames(Map<Long, String> changedCardNames) {
+        this.changedCardNames.clear();
+        for (Entry<Long, String> entry : changedCardNames.entrySet()) {
+            this.changedCardNames.put(entry.getKey(), entry.getValue());
+        }
     }
 
     public final boolean isInAlternateState() {

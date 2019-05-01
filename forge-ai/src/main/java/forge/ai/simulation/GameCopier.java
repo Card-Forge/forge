@@ -293,6 +293,7 @@ public class GameCopier {
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
+            newCard.setChangedCardNames(c.getChangedCardNames());
 
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())

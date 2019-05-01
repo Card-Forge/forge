@@ -644,6 +644,7 @@ public class CardView extends GameEntityView {
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView) {
             set(TrackableProperty.CurrentState, currentStateView);
+            currentStateView.updateName(currentState);
             currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
             currentStateView.updateToughness(c);
             currentStateView.updateLoyalty(c);
@@ -669,6 +670,7 @@ public class CardView extends GameEntityView {
             CardStateView alternateStateView = alternateState.getView();
             if (getAlternateState() != alternateStateView) {
                 set(TrackableProperty.AlternateState, alternateStateView);
+                alternateStateView.updateName(alternateState);
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
                 alternateStateView.updateToughness(c);
                 alternateStateView.updateLoyalty(c);
@@ -751,10 +753,10 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Name);
         }
         void updateName(CardState c) {
-            setName(c.getName());
+            Card card = c.getCard();
+            setName(card.getName(c));
 
             if (CardView.this.getCurrentState() == this) {
-                Card card = c.getCard();
                 if (card != null) {
                     CardView.this.updateName(card);
                 }
