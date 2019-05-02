@@ -11,4 +11,3 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Artifact.IsRemembered | Ori
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:Creature and planeswalker spells you cast have affinity for artifacts.\n[+2]: Tezzeret, Master of the Bridge deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.\n[-3]: Return target artifact card from your graveyard to your hand.\n[-8]: Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.
-
