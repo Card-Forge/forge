@@ -12,8 +12,7 @@ SVar:DevourSacY:Count$Valid Planeswalker.YouCtrl
 SVar:Devour2X:SVar$DevourSize/Times.2
 SVar:DevourSize:Count$RememberedSize
 AI:RemoveDeck:All
-# TODO: Figure out a way to make AIPreference:SacCost work for this kind of ability, e.g.:
-# SVar:AIPreference:SacCost$Creature.cmcLE3,Planeswalker.counters_LE2_LOYALTY
+# TODO: Figure out a way to make an AIPreference that would work for this kind of ability, e.g.:
+# SVar:AIPreference:Sacrifice$Creature.cmcLE3,Planeswalker.counters_LE2_LOYALTY
 DeckHas:Ability$Counters
 Oracle:As Devouring Hellion enters the battlefield, you may sacrifice any number of creatures and/or planeswalkers. If you do, it enters with twice that many +1/+1 counters on it.
-
