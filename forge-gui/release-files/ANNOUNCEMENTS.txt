@@ -1,4 +1,5 @@
 #Add one announcement per line
+War for the Spark is here! We're still missing a few cards, but hopefully we'll get those added soon.
 A very drastic change has happened for tokens and token images. Check out the information here: https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=23317
 A significant improvement was made to how we cache images which should improve memory usage
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
