@@ -1,0 +1,11 @@
+Name:Deliver Unto Evil
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Pump | Cost$ 2 B | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | TargetMin$ 0 | TargetMax$ 4 | TgtZone$ Graveyard | RememberTargets$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to your hand. Otherwise, an opponent chooses two of them. Leave the chosen cards in your graveyard and put the rest into your hand. Exile CARDNAME.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | ConditionPresent$ Planeswalker.Bolas+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DBChooseOpp | StackDescription$ None
+SVar:DBChooseOpp:DB$ ChoosePlayer | Choices$ Player.Opponent | RememberChosen$ True | ConditionPresent$ Planeswalker.Bolas+YouCtrl | ConditionCompare$ EQ0 | SubAbility$ DBChoose | StackDescription$ None
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Amount$ 2 | Mandatory$ True | Defined$ Player.IsRemembered | ConditionPresent$ Planeswalker.Bolas+YouCtrl | ConditionCompare$ EQ0 | ForgetChosen$ True | SubAbility$ DBReturn | StackDescription$ None
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | ConditionPresent$ Planeswalker.Bolas+YouCtrl | ConditionCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | StackDescription$ None
+Oracle:Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to your hand. Otherwise, an opponent chooses two of them. Leave the chosen cards in your graveyard and put the rest into your hand.\nExile Deliver Unto Evil.
