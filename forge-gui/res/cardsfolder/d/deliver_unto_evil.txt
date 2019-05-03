@@ -5,8 +5,8 @@ A:SP$ Pump | Cost$ 2 B | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | References$ X | TrueSubAbility$ DBChangeZone | FalseSubAbility$ DBChooseOpp | SubAbility$ DBCleanup
 SVar:X:Count$Valid Planeswalker.Bolas+YouCtrl
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand
-SVar:DBChooseOpp:DB$ ChoosePlayer | Choices$ Player.Opponent | RememberChosen$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Amount$ 2 | Mandatory$ True | Defined$ Player.IsRemembered | ForgetChosen$ True | SubAbility$ DBReturn
+SVar:DBChooseOpp:DB$ ChoosePlayer | Choices$ Player.Opponent | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Amount$ 2 | Mandatory$ True | Defined$ ChosenPlayer | ForgetChosen$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | ClearChosenCard$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | StackDescription$ None
