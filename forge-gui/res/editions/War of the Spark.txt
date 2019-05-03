@@ -301,7 +301,7 @@ r_1_1_devil_burn
 r_1_1_goblin
 r_4_4_dragon_flying
 u_2_2_wizard
-voja
+voja_friend_to_elves
 w_0_3_wall_defender
 w_2_2_soldier_vigilance
 w_4_4_angel_flying_vigilance
