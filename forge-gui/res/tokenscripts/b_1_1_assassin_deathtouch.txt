@@ -4,6 +4,6 @@ Types:Creature Assassin
 Colors:black
 PT:1/1
 K:Deathtouch
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Planeswalker | TriggerZones$ Battlefield | Execute$ TrigDestroyPW | TriggerDescription$ Whenever a creature you control with deathtouch deals damage to a player or planeswalker, put a +1/+1 counter on that creature.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Planeswalker | TriggerZones$ Battlefield | Execute$ TrigDestroyPW | TriggerDescription$ Whenever this creature deals damage to a planeswalker, destroy that planeswalker.
 SVar:TrigDestroyPW:DB$ Destroy | Defined$ TriggeredTarget
 Oracle:Deathtouch\nWhenever this creature deals damage to a planeswalker, destroy that planeswalker.
