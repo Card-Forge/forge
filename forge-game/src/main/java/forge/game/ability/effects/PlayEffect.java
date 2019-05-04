@@ -234,6 +234,16 @@ public class PlayEffect extends SpellAbilityEffect {
 
                 tgtSA = tgtSA.copyWithDefinedCost(abCost);
             }
+
+            if (sa.hasParam("PlayReduceCost")) {
+                // for Kefnet only can reduce colorless cost
+                String reduce = sa.getParam("PlayReduceCost");
+                tgtSA.getMapParams().put("ReduceCost", reduce);
+                if (!StringUtils.isNumeric(reduce)) {
+                    tgtSA.setSVar(reduce, sa.getSVar(reduce));
+                }
+            }
+
             if (sa.hasParam("Madness")) {
                 tgtSA.getHostCard().setMadness(true);
             }

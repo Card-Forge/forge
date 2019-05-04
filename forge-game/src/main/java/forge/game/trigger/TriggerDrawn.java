@@ -22,6 +22,8 @@ import forge.game.GameStage;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Drawn class.
@@ -44,43 +46,42 @@ public class TriggerDrawn extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDrawn(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDrawn(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
+        final Game game = getHostCard().getGame();
         final Card draw = ((Card) runParams2.get("Card"));
         final int number = ((Integer) runParams2.get("Number"));
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!draw.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+        if (hasParam("ValidCard")) {
+            if (!draw.isValid(getParam("ValidCard").split(","), getHostCard().getController(), getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Number")) {
-            if (number != Integer.parseInt(this.mapParams.get("Number"))) {
+        if (hasParam("Number")) {
+            if (number != Integer.parseInt(getParam("Number"))) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Miracle")) {
-            final Game game = this.getHostCard().getGame();
-            if (number != 1 || game.getAge() == GameStage.Mulligan) {
-                return false;
-            }
+        // trigger should not happen while Mulligan
+        if (game.getAge() == GameStage.Mulligan) {
+            return false;
         }
+
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObject("Card", getRunParams().get("Card"));
+        sa.setTriggeringObject("Player", getRunParams().get("Player"));
     }
 
     @Override

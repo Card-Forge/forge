@@ -2711,47 +2711,28 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self | MiracleCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
+                    + " | MiracleCost$ " + manacost;
             final String abStrPlay = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
 
-            final String abStrEffect = "DB$ Effect | RememberObjects$ Self | Duration$ Permanent "
-                + " | StaticAbilities$ SMayLookAt | Triggers$ TrigCleanup";
+            String revealed = "DB$ ImmediateTrigger | TriggerDescription$ CARDNAME - Miracle";
 
-            final String abStrLook = "Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Hand "
-                + " | EffectZone$ Command | MayLookAt$ Player";
-
-            //SVar:TrigCleanup:
-            final String trigExile = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Hand " +
-                    " | Destination$ Any | TriggerZones$ Command | Static$ True | Execute$ MiracleSelfExile";
-
-            //SVar:DBExileSelf:
-            final String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"; 
-
-            final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True"
+            final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Number$ 1 | Secondary$ True"
                 + " | OptionalDecider$ You | Static$ True | TriggerDescription$ CARDNAME - Miracle";
-
-            final String trigStrRevealed = "Mode$ Revealed | ValidCard$ Card.Self | Miracle$ True"
-                + " | IsPresent$ Card.Self | PresentZone$ Hand | Secondary$ True"
-                + " | TriggerDescription$ CARDNAME - Miracle";
 
             final Trigger triggerDrawn = TriggerHandler.parseTrigger(trigStrDrawn, card, intrinsic);
 
             SpellAbility revealSA = AbilityFactory.getAbility(abStrReveal, card);
 
-            AbilitySub effectSA = (AbilitySub)AbilityFactory.getAbility(abStrEffect, card);
-            effectSA.setSVar("SMayLookAt", abStrLook);
-            effectSA.setSVar("TrigCleanup", trigExile);
-            effectSA.setSVar("MiracleSelfExile", abExile);
-            revealSA.setSubAbility(effectSA);
+            AbilitySub immediateTriggerSA = (AbilitySub)AbilityFactory.getAbility(revealed, card);
+
+            immediateTriggerSA.setAdditionalAbility("Execute", (AbilitySub)AbilityFactory.getAbility(abStrPlay, card));
+
+            revealSA.setSubAbility(immediateTriggerSA);
 
             triggerDrawn.setOverridingAbility(revealSA);
 
-            final Trigger triggerRevealed = TriggerHandler.parseTrigger(trigStrRevealed, card, intrinsic);
-
-            triggerRevealed.setOverridingAbility(AbilityFactory.getAbility(abStrPlay, card));
-
             inst.addTrigger(triggerDrawn);
-            inst.addTrigger(triggerRevealed);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";

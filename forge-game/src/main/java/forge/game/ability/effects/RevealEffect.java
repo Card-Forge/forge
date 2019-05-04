@@ -76,9 +76,11 @@ public class RevealEffect extends SpellAbilityEffect {
                 for (final Card c : revealed) {
                     Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Card", c);
+                    /*
                     if (sa.hasParam("MiracleCost")) {
                         runParams.put("Miracle", true);
                     }
+                    //*/
                     game.getTriggerHandler().runTrigger(TriggerType.Revealed, runParams, false);
                     if (sa.hasParam("RememberRevealed")) {
                         host.addRemembered(c);
