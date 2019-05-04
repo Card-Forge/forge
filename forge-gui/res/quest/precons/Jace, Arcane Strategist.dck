@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Jace, Arcane Strategist
+Description=UG War of the Spark planeswalker deck.
+Deck Type=constructed
+Set=WAR
+Image=jace_arcane_strategist.jpg
+[Main]
+2 Band Together|WAR
+1 Bioessence Hydra|WAR
+3 Bloom Hulk|WAR
+2 Courage in Crisis|WAR
+11 Forest|WAR
+4 Guildpact Informant|WAR
+10 Island|WAR
+3 Jace's Projection|WAR
+2 Jace's Ruse|WAR
+1 Jace's Triumph|WAR
+1 Jace, Arcane Strategist+|WAR
+2 Kiora's Dambreaker|WAR
+1 Kiora, Behemoth Beckoner|WAR
+2 Merfolk Skydiver|WAR
+2 New Horizons|WAR
+3 Pollenbright Druid|WAR
+1 Primordial Wurm|WAR
+4 Simic Guildgate|WAR
+1 Spark Double|WAR
+2 Stealth Mission|WAR
+2 Wardscale Crocodile|WAR
