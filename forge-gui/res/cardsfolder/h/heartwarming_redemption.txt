@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | References$ Y | SubAbility$ DBCle
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$InYourHand
 AI:RemoveDeck:All
+DeckHas:Ability$LifeGain
 Oracle:Discard all the cards in your hand, then draw that many cards plus one. You gain life equal to the number of cards in your hand.
