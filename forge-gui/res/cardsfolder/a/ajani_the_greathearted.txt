@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ true | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ true | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounterAll | SpellDescription$ Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl+Other | CounterType$ LOYALTY | CounterNum$ 1
+DeckHas:Ability$Counters & Ability$LifeGain
 Oracle:Creatures you control have vigilance.\n[+1]: You gain 3 life.\n[-2]: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
