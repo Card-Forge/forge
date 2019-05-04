@@ -239,6 +239,9 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
                         chooser.getController().endTempShowCards();
+                        if (!movedCards.isEmpty()) {
+                            game.getAction().reveal(movedCards, chooser, true, chooser + " picked ");
+                        }
                     }
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
