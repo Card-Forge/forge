@@ -26,7 +26,7 @@ public final class MagicColor {
     public static final byte[] WUBRG  = new byte[] { WHITE, BLUE, BLACK, RED, GREEN };
     public static final byte[] WUBRGC = new byte[] { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
     public static final byte[] COLORPAIR  = new byte[] { WHITE | BLUE, BLUE | BLACK, BLACK | RED, RED | GREEN, GREEN |WHITE,
-            WHITE | BLUE, BLUE | RED, BLACK | GREEN, RED | WHITE, GREEN | BLUE};
+            WHITE | BLACK, BLUE | RED, BLACK | GREEN, RED | WHITE, GREEN | BLUE};
 
     /**
      * Private constructor to prevent instantiation.
