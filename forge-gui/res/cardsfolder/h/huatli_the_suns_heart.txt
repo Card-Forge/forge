@@ -7,5 +7,5 @@ A:AB$ GainLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | LifeAmount$ 
 SVar:X:Count$GreatestToughness_Creature.YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:Random
-DeckNeeds:Ability$LifeGain
+DeckHas:Ability$LifeGain
 Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.\n[-3]: You gain life equal to the greatest toughness among creatures you control.

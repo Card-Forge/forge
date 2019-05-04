@@ -13,6 +13,6 @@ SVar:ChooseEnch:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Ench
 SVar:ChooseLand:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land to keep | SubAbility$ ChoosePW | RememberChosen$ True | Mandatory$ True
 SVar:ChoosePW:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Planeswalker.RememberedPlayerCtrl | ChoiceTitle$ Choose a planeswalker to keep | RememberChosen$ True | Mandatory$ True
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered+OppCtrl | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
-DeckHints:Type$Zombie
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Ability$Sacrifice
 Oracle:[+1]:Create a 2/2 black Zombie creature token.\n[-4]:Each player sacrifices two creatures.\n[-9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.

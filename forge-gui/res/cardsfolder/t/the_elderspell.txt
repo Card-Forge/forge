@@ -7,4 +7,5 @@ SVar:DBPutLoyalty:DB$ PutCounter | Defined$ ChosenCard | CounterType$ LOYALTY | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTargets:Count$Valid Planeswalker
 SVar:X:Count$RememberedSize/Twice
+DeckHas:Ability$Counters
 Oracle:Destroy any number of target planeswalkers. Choose a planeswalker you control. Put two loyalty counters on it for each planeswalker destroyed this way.

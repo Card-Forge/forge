@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
+DeckHas:Ability$Counters
 Oracle:Flying\nWhenever you cast you cast your second spell each turn, put a +1/+1 counter on Thunder Drake.
