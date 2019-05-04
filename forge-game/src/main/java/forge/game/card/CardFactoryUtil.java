@@ -152,9 +152,15 @@ public class CardFactoryUtil {
         if (mega) {
             sb.append(" | Mega$ True");
         }
+
         sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)");
 
         final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
+
+        // if Cost has X in cost, need to check source for an SVar for this
+        if (cost.hasXInAnyCostPart() && sourceCard.hasSVar("X")) {
+            morphUp.setSVar("X", sourceCard.getSVar("X"));
+        }
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
