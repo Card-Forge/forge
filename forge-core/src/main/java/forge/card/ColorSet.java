@@ -112,6 +112,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return (this.myColor & colormask) == colormask;
     }
 
+    /** this has exactly the colors defined by operand.  */
+    public boolean hasExactlyColor(final int colormask) {
+        return this.myColor == colormask;
+    }
+
     /** this has no other colors except defined by operand.  */
     public boolean hasNoColorsExcept(final ColorSet other) {
         return hasNoColorsExcept(other.getColor());

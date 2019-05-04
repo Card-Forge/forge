@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
@@ -9,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.player.DelayedReveal;
@@ -223,6 +225,20 @@ public class DigEffect extends SpellAbilityEffect {
                     else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
+                    }
+                    else if (sa.hasParam("ForEachColorPair")) {
+                        movedCards = new CardCollection();
+                        if (p == chooser) {
+                            chooser.getController().tempShowCards(top);
+                        }
+                        for (final byte pair : MagicColor.COLORPAIR) {
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
+                                    delayedReveal, sa, "Choose one", false, p);
+                            if (chosen != null) {
+                                movedCards.add(chosen);
+                            }
+                        }
+                        chooser.getController().endTempShowCards();
                     }
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
