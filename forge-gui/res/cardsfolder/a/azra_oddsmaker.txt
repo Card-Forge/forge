@@ -1,0 +1,10 @@
+Name:Azra Oddsmaker
+ManaCost:1 R B
+Types:Creature Azra Warrior
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ A | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may discard a card. If you do, choose a creature.  Whenever that creature deals combat damage to a player this turn, you draw two cards.
+SVar:A:AB$ Effect | Cost$ Discard<1/Card> | Name$ Azra Oddsmaker Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDamage | SVars$ TrigDraw | RememberObjects$ Targeted
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever that creature deals combat damage to a player this turn, you draw two cards.
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 2
+PT:3/3
+SVar:Picture:https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446043&type=card
+Oracle:At the beginning of combat on your turn, you may discard a card. If you do, choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards.
