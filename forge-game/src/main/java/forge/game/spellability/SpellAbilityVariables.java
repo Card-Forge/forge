@@ -90,7 +90,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.manaSpent = sav.getManaSpent();
         this.targetValidTargeting = sav.getTargetValidTargeting();
         this.targetsSingleTarget = sav.targetsSingleTarget();
-        this.pwAbility = sav.isPwAbility();
         this.presenceCondition = sav.getPresenceCondition();
     }
 
@@ -196,9 +195,6 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The mana spent. */
     private String manaSpent = "";
-
-    /** The pw ability. */
-    private boolean pwAbility = false;
 
     /** The chosen colors string. */
     private String chosenColors = null;
@@ -672,25 +668,6 @@ public class SpellAbilityVariables implements Cloneable {
 
     public void setShareAllColors(String shareAllColors) {
         this.shareAllColors = shareAllColors;
-    }
-
-    /**
-     * Checks if is pw ability.
-     * 
-     * @return the pwAbility
-     */
-    public final boolean isPwAbility() {
-        return this.pwAbility;
-    }
-
-    /**
-     * Sets the pw ability.
-     * 
-     * @param pwAbility0
-     *            the new pw ability
-     */
-    public final void setPwAbility(final boolean pwAbility0) {
-        this.pwAbility = pwAbility0;
     }
 
     /**

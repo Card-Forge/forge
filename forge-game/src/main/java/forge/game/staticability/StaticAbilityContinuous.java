@@ -394,7 +394,7 @@ public final class StaticAbilityContinuous {
                 for (Card c : cardsIGainedAbilitiesFrom) {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
-                            if (loyaltyAB && !sa.getRestrictions().isPwAbility()) {
+                            if (loyaltyAB && !sa.isPwAbility()) {
                                 continue;
                             }
                             SpellAbility newSA = sa.copy(hostCard, false);

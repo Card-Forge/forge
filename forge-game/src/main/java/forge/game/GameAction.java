@@ -72,9 +72,7 @@ public class GameAction {
     public final void resetActivationsPerTurn() {
         // Reset Activations per Turn
         for (final Card card : game.getCardsInGame()) {
-            for (final SpellAbility sa : card.getAllSpellAbilities()) {
-                sa.getRestrictions().resetTurnActivations();
-            }
+            card.resetActivationsPerTurn();
         }
     }
 

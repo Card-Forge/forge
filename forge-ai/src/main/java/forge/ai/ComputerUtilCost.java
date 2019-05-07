@@ -481,7 +481,7 @@ public class ComputerUtilCost {
         }
 
         // Try not to lose Planeswalker if not threatened
-        if (sa.getRestrictions().isPwAbility()) {
+        if (sa.isPwAbility()) {
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {

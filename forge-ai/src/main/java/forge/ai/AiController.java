@@ -1010,7 +1010,7 @@ public class AiController {
                 p += 9;
             }
             // sort planeswalker abilities with most costly first
-            if (sa.getRestrictions().isPwAbility()) {
+            if (sa.isPwAbility()) {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
                 if (cost instanceof CostRemoveCounter) {
                     p += cost.convertAmount() == null ? 1 : cost.convertAmount();
