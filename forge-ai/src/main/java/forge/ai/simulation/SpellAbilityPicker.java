@@ -148,7 +148,7 @@ public class SpellAbilityPicker {
         if (sa.isSpell()) {
             return !sa.getHostCard().isInstant() && !sa.getHostCard().withFlash(player);
         }
-        if (sa.getRestrictions().isPwAbility()) {
+        if (sa.isPwAbility()) {
             return !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.");
         }
         return sa.isAbility() && sa.getRestrictions().isSorcerySpeed();

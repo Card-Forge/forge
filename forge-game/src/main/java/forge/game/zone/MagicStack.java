@@ -133,16 +133,20 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void addAndUnfreeze(final SpellAbility ability) {
+        final Card source = ability.getHostCard();
+
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
             ability.getRestrictions().abilityActivated();
+            if (ability.isPwAbility()) {
+                source.addPlaneswalkerAbilityActivated();
+            }
             ability.checkActivationResloveSubs();
         }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
                 ability.setHostCard(game.getAction().moveToStack(source, ability, null));
             }
@@ -491,7 +495,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             thisTurnCast.add(sp.getHostCard());
             sp.getActivatingPlayer().addSpellCastThisTurn();
         }
-        if (sp.isAbility() && sp.getRestrictions().isPwAbility()) {
+        if (sp.isAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
