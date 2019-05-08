@@ -29,7 +29,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
 import net.miginfocom.swing.MigLayout;
-
+import forge.util.Localizer;
 import javax.swing.*;
 
 import java.awt.*;
@@ -46,10 +46,11 @@ import java.awt.geom.Rectangle2D;
  */
 public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestTournamentView {
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
-    private final DragTab tab = new DragTab("Tournaments");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblTournaments"));
 
-    private final LblHeader lblTitle = new LblHeader("Quest Mode: Draft Tournament");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblQuestModeDraftTournament"));
 
     private final FLabel lblCredits = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COINSTACK))
@@ -59,11 +60,11 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
     private final FScrollPanel pnlTournaments = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, ax center"), true,
         ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JLabel lblInfo = new FLabel.Builder().text("Select a tournament to join:")
+    private final JLabel lblInfo = new FLabel.Builder().text(localizer.getMessage("lblSelectaTournament")+ ":")
         .fontStyle(Font.BOLD).fontSize(16)
         .fontAlign(SwingConstants.LEFT).build();
 
-    private final JLabel lblNoDrafts = new FLabel.Builder().text("There are no tournaments available at this time.")
+    private final JLabel lblNoDrafts = new FLabel.Builder().text(localizer.getMessage("lblNoTournaments"))
         .fontStyle(Font.PLAIN).fontSize(16)
         .fontAlign(SwingConstants.LEFT).build();
 
@@ -84,10 +85,10 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
     private final StartButton btnStartTournament  = new StartButton();
     private final StartButton btnStartMatch  = new StartButton();
 
-    private final FLabel btnEditDeck = new FLabel.ButtonBuilder().text("Edit Deck").fontSize(24).build();
-    private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text("Leave Tournament").fontSize(12).build();
-    private final FLabel btnSpendToken = new FLabel.ButtonBuilder().text("Spend Token").fontSize(14).build();
-    private final FLabel btnStartMatchSmall = new FLabel.ButtonBuilder().text("Start Next Match").fontSize(12).build();
+    private final FLabel btnEditDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("btnEditDeck")).fontSize(24).build();
+    private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text(localizer.getMessage("btnLeaveTournament")).fontSize(12).build();
+    private final FLabel btnSpendToken = new FLabel.ButtonBuilder().text(localizer.getMessage("btnSpendToken")).fontSize(14).build();
+    private final FLabel btnStartMatchSmall = new FLabel.ButtonBuilder().text(localizer.getMessage("btnStartMatchSmall")).fontSize(12).build();
 
     private final PnlMatchup[] matchups = new PnlMatchup[8];
 
@@ -102,36 +103,36 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
         SkinImage avatar = FSkin.getAvatars().get(GuiBase.getInterface().getAvatarCount() - 1);
 
         matchups[0] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
-        matchups[0].setPlayerOne("Undetermined", avatar);
-        matchups[0].setPlayerTwo("Undetermined", avatar);
+        matchups[0].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[0].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[1] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
-        matchups[1].setPlayerOne("Undetermined", avatar);
-        matchups[1].setPlayerTwo("Undetermined", avatar);
+        matchups[1].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[1].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[2] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
-        matchups[2].setPlayerOne("Undetermined", avatar);
-        matchups[2].setPlayerTwo("Undetermined", avatar);
+        matchups[2].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[2].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[3] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
-        matchups[3].setPlayerOne("Undetermined", avatar);
-        matchups[3].setPlayerTwo("Undetermined", avatar);
+        matchups[3].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[3].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[4] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.MEDIUM);
-        matchups[4].setPlayerOne("Undetermined", avatar);
-        matchups[4].setPlayerTwo("Undetermined", avatar);
+        matchups[4].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[4].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[5] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.MEDIUM);
-        matchups[5].setPlayerOne("Undetermined", avatar);
-        matchups[5].setPlayerTwo("Undetermined", avatar);
+        matchups[5].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[5].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[6] = new PnlMatchup(PnlMatchup.LineDirection.STRAIGHT, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.LARGE);
-        matchups[6].setPlayerOne("Undetermined", avatar);
-        matchups[6].setPlayerTwo("Undetermined", avatar);
+        matchups[6].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[6].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         matchups[7] = new PnlMatchup(PnlMatchup.LineDirection.STRAIGHT, PnlMatchup.LineSide.LEFT, PnlMatchup.BoxSize.LARGE_SINGLE, true);
-        matchups[7].setPlayerOne("Undetermined", avatar);
-        matchups[7].setPlayerTwo("Undetermined", avatar);
+        matchups[7].setPlayerOne(localizer.getMessage("lblUndetermined"), avatar);
+        matchups[7].setPlayerTwo(localizer.getMessage("lblUndetermined"), avatar);
 
         pnlDeckImage = new ProportionalPanel(FSkin.getImage(FSkinProp.IMG_QUEST_DRAFT_DECK), 680, 475);
 
@@ -145,7 +146,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
         pnlStats.add(btnSpendToken, "w 150px!, h 40px!, ax center");
         pnlStats.setOpaque(false);
 
-        btnSpendToken.setToolTipText("Creates a new tournament that can be played immediately.");
+        btnSpendToken.setToolTipText(localizer.getMessage("btnSpendTokenTT"));
 
     }
 
@@ -249,7 +250,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
 
     @Override
     public String getMenuTitle() {
-        return "Tournaments";
+        return localizer.getMessage("lblTournaments");
     }
 
     @Override
@@ -299,7 +300,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
     }
 
     private void populatePrepareDeck() {
-        lblTitle.setText("Quest Mode: Draft Tournament - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+        lblTitle.setText(localizer.getMessage("lblQuestModeDraftTournament")+ " - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout(
                 "insets 0, gap 0, ax center, wrap",
                 "",
@@ -316,7 +317,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
     }
 
     private void populateTournamentActive() {
-        lblTitle.setText("Quest Mode: Draft Tournament - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+        lblTitle.setText(localizer.getMessage("lblQuestModeDraftTournament")+ " - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 1"));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 20% 0 15px 10px, ax right, span 2");
 

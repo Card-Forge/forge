@@ -14,6 +14,7 @@ import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -30,39 +31,41 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
     /** */
     SINGLETON_INSTANCE;
 
+    final Localizer localizer = Localizer.getInstance();
+
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Quest Decks");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuestDecks"));
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Quest Decks");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblQuestDecks"));
 
     private final DeckManager lstDecks = new DeckManager(GameType.Quest, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
-        .text("Build or select a deck").build();
+        .text(localizer.getMessage("lblBuildorselectadeck")).build();
 
     private final FLabel lblDir1 = new FLabel.Builder()
-        .text("In Quest mode, you build a deck from a limited inventory.")
+        .text(localizer.getMessage("lblQuestDesc1"))
         .fontSize(12).build();
 
     private final FLabel lblDir2 = new FLabel.Builder()
-        .text("Build and enhance decks from the cards in your quest inventory as it grows.")
+        .text(localizer.getMessage("lblQuestDesc2"))
         .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-        .text("Then, switch to the Duels or Challenges submenu to play against AI opponents and unlock more cards.")
+        .text(localizer.getMessage("lblQuestDesc3"))
         .fontSize(12).build();
 
-    private final FLabel btnNewDeck = new FLabel.ButtonBuilder().text("Build a New Deck").fontSize(16).build();
+    private final FLabel btnNewDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblBuildaNewDeck")).fontSize(16).build();
 
     /**
      * Constructor.
      */
     VSubmenuQuestDecks() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lstDecks.setCaption("Quest Decks");
+        lstDecks.setCaption(localizer.getMessage("lblQuestDecks"));
     }
 
     /* (non-Javadoc)
@@ -100,7 +103,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
      */
     @Override
     public String getMenuTitle() {
-        return "Quest Decks";
+        return localizer.getMessage("lblQuestDecks");
     }
 
     /* (non-Javadoc)
