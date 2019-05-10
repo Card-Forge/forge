@@ -5,5 +5,5 @@ A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$  DBRepe
 SVar:DBRepeatCreature:DB$ RepeatEach | RepeatCards$ Creature.RememberedPlayerCtrl | Zone$ Battlefield | TargetControls$ True | RepeatSubAbility$  DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Permanent | SacMessage$ permanent | UnlessCost$ 1 | UnlessPayer$ Player.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fade_away.jpg
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 Oracle:For each creature, its controller sacrifices a permanent unless they pay 1.
