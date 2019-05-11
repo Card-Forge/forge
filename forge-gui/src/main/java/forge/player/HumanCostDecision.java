@@ -1011,7 +1011,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
             else if (c == null && "XChoice".equals(sVarAmount)) {
                 cntRemoved = chooseXValue(maxCounters);
-            } else if (ability != null && !ability.getRestrictions().isPwAbility()) {
+            } else if (ability != null && !ability.isPwAbility()) {
                 // ignore Planeswalker abilities for this
                 if (maxCounters < cntRemoved) {
                     return null;

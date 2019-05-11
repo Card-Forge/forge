@@ -717,8 +717,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
 
                     if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.getRestrictions().isPwAbility()
-                                || source.hasSVar("EndOfTurnLeavePlay"))
+                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
                             freePing = true;
                     }
                 }

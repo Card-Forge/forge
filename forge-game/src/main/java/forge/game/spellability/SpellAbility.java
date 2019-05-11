@@ -264,7 +264,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         // without a target
         if (usesTargeting()) { return false; }
-        if (restrictions != null && restrictions.isPwAbility()) {
+        if (isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
         if (isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
@@ -436,6 +436,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isCurse() {
         return hasParam("IsCurse");
+    }
+
+    public final boolean isPwAbility() {
+        // TODO try to check the Cost itself
+        return hasParam("Planeswalker");
     }
 
     // begin - Input methods

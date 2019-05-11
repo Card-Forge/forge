@@ -2,6 +2,6 @@ Name:Band Together
 ManaCost:2 G
 Types:Instant
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | AILogic$ PowerDamage | SubAbility$ SoulsDamage | TargetMin$ 0 | TargetMax$ 2 | StackDescription$ None | SpellDescription$ Up to two target creatures you control each deal damage equal to their power to another target creature.
-SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt damage | NumDmg$ X | References$ X | TargetUnique$ True | DamageSource$ ParentTarget | AILogic$ PowerDamage
-SVar:X:ParentTargeted$CardPower/HalfUp
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt damage | NumDmg$ X | References$ X | TargetUnique$ True | AILogic$ PowerDamage
+SVar:X:ParentTargeted$CardPower
 Oracle:Up to two target creatures you control each deal damage equal to their power to another target creature.

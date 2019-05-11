@@ -247,7 +247,7 @@ public abstract class SpellAbilityAi {
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
             || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
-            || (sa.getRestrictions().isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
+            || (sa.isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class SpellAbilityAi {
             return true;
         }
     
-        if (sa.getRestrictions().isPwAbility() && phase.is(PhaseType.MAIN2)) {
+        if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
             return true;
         }
         if (sa.isSpell() && !sa.isBuyBackAbility()) {

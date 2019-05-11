@@ -126,11 +126,11 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("NonLoyalty") && (spellAbility.getRestrictions().isPwAbility())) {
+        if (params.containsKey("NonLoyalty") && spellAbility.isPwAbility()) {
             return false;
         }
 
-        if (params.containsKey("Loyalty") && !(spellAbility.getRestrictions().isPwAbility())) {
+        if (params.containsKey("Loyalty") && !spellAbility.isPwAbility()) {
             return false;
         }
 

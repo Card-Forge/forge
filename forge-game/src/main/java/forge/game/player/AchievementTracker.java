@@ -19,7 +19,7 @@ public class AchievementTracker {
 
     public void onSpellAbilityPlayed(final SpellAbility sa) {
         final Card card = sa.getHostCard();
-        if (sa.getRestrictions().isPwAbility() && sa.hasParam("Ultimate")) {
+        if (sa.isPwAbility() && sa.hasParam("Ultimate")) {
             activatedUltimates.add(card.getName());
         }
         if (card.determineColor().equals(ColorSet.ALL_COLORS)) {
