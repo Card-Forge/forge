@@ -137,10 +137,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
-            ability.getRestrictions().abilityActivated();
-            if (ability.isPwAbility()) {
-                source.addPlaneswalkerAbilityActivated();
-            }
+            source.addAbilityActivated(ability);
             ability.checkActivationResloveSubs();
         }
 

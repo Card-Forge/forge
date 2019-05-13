@@ -17,6 +17,7 @@
  */
 package forge.game.staticability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
@@ -375,14 +376,12 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("GainsAbilitiesOf")) {
             final String[] valids = params.get("GainsAbilitiesOf").split(",");
-            List<ZoneType> validZones = new ArrayList<ZoneType>();
+            List<ZoneType> validZones;
             final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
-            validZones.add(ZoneType.Battlefield);
             if (params.containsKey("GainsAbilitiesOfZones")) {
-                validZones.clear();
-                for (String s : params.get("GainsAbilitiesOfZones").split(",")) {
-                    validZones.add(ZoneType.smartValueOf(s));
-                }
+                validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+            } else {
+                validZones = ImmutableList.of(ZoneType.Battlefield);
             }
 
             CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
@@ -403,6 +402,8 @@ public final class StaticAbilityContinuous {
                                 newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                             }
                             newSA.setOriginalHost(c);
+                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
+                            newSA.setGrantorStatic(stAb);
                             newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
                             addFullAbs.add(newSA);

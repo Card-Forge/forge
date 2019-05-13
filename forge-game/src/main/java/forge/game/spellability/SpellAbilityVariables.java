@@ -66,8 +66,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.playerTurn = sav.isPlayerTurn();
         this.activationLimit = sav.getActivationLimit();
         this.gameActivationLimit = sav.getGameActivationLimit();
-        this.numberTurnActivations = sav.getNumberTurnActivations();
-        this.numberGameActivations = sav.getNumberGameActivations();
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
@@ -135,12 +133,6 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The gameLimitToCheck to check. */
     private String gameLimitToCheck = null;
-
-    /** The number turn activations. */
-    private int numberTurnActivations = 0;
-
-    /** The number game activations. */
-    private int numberGameActivations = 0;
 
     /** The n cards in hand. */
     private int cardsInHand = -1;
@@ -380,47 +372,6 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setGameActivationLimit(final int limit) {
         this.gameActivationLimit = limit;
-    }
-
-    /**
-     * <p>
-     * abilityActivated.
-     * </p>
-     */
-    public final void abilityActivated() {
-        this.numberTurnActivations++;
-        this.numberGameActivations++;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>numberTurnActivations</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getNumberTurnActivations() {
-        return this.numberTurnActivations;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>numberTurnActivations</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getNumberGameActivations() {
-        return this.numberGameActivations;
-    }
-
-    /**
-     * <p>
-     * resetTurnActivations.
-     * </p>
-     */
-    public final void resetTurnActivations() {
-        this.numberTurnActivations = 0;
     }
 
     /**
