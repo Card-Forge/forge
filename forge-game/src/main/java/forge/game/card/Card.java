@@ -269,6 +269,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private int planeswalkerAbilityActivated = 0;
 
+    private final Map<SpellAbility, Integer> numberTurnActivations = Maps.newHashMap();
+    private final Map<SpellAbility, Integer> numberGameActivations = Maps.newHashMap();
+
+    private final Table<SpellAbility, StaticAbility, Integer> numberTurnActivationsStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, Integer> numberGameActivationsStatic = HashBasedTable.create();
+
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -6186,6 +6193,62 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
+    public void addAbilityActivated(SpellAbility ability) {
+        SpellAbility original = ability.getOriginalAbility();
+        if (original == null) {
+            original = ability;
+        }
+
+        int turnActivated = getAbilityActivatedThisTurn(ability);
+        int gameActivated = getAbilityActivatedThisGame(ability);
+        if (ability.getGrantorStatic() != null) {
+            numberTurnActivationsStatic.put(original, ability.getGrantorStatic(), turnActivated + 1);
+            numberGameActivationsStatic.put(original, ability.getGrantorStatic(), gameActivated + 1);
+        } else {
+            numberTurnActivations.put(original, turnActivated + 1);
+            numberGameActivations.put(original, gameActivated + 1);
+        }
+
+        if (ability.isPwAbility()) {
+            addPlaneswalkerAbilityActivated();
+        }
+    }
+
+    public int getAbilityActivatedThisTurn(SpellAbility ability) {
+        SpellAbility original = ability.getOriginalAbility();
+        if (original == null) {
+            original = ability;
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            if (numberTurnActivationsStatic.contains(original, ability.getGrantorStatic())) {
+                return numberTurnActivationsStatic.get(original, ability.getGrantorStatic());
+            }
+            return 0;
+        }
+        return numberTurnActivations.containsKey(original) ? numberTurnActivations.get(original) : 0;
+    }
+
+    public int getAbilityActivatedThisGame(SpellAbility ability) {
+        SpellAbility original = ability.getOriginalAbility();
+        if (original == null) {
+            original = ability;
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            if (numberGameActivationsStatic.contains(original, ability.getGrantorStatic())) {
+                return numberGameActivationsStatic.get(original, ability.getGrantorStatic());
+            }
+            return 0;
+        }
+        return numberGameActivations.containsKey(original) ? numberGameActivations.get(original) : 0;
+    }
+
+    public void resetTurnActivations() {
+        numberTurnActivations.clear();
+        numberTurnActivationsStatic.clear();
+    }
+
     public int getPlaneswalkerAbilityActivated() {
         return planeswalkerAbilityActivated;
     }
@@ -6196,8 +6259,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
-        for (final SpellAbility sa : this.getAllSpellAbilities()) {
-            sa.getRestrictions().resetTurnActivations();
-        }
+        numberTurnActivations.clear();
+        numberTurnActivationsStatic.clear();
     }
 }

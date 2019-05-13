@@ -20,7 +20,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
@@ -288,9 +287,8 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("ActivationNumberSacrifice")) {
-            final SpellAbilityRestriction restrict = sa.getRestrictions();
             final int sacActivations = Integer.parseInt(sa.getParam("ActivationNumberSacrifice").substring(2));
-            final int activations = restrict.getNumberTurnActivations();
+            final int activations = sa.getActivationsThisTurn();
             // don't risk sacrificing a creature just to pump it
             if (activations >= sacActivations - 1) {
                 return false;

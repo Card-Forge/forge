@@ -631,9 +631,6 @@ public class CardFactory {
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
-            if (!lki) {
-                to.getRestrictions().resetTurnActivations();
-            }
         }
         if (from.getConditions() != null) {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
@@ -918,10 +915,6 @@ public class CardFactory {
             }
             if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
                 state.removeIntrinsicKeyword("Devoid");
-            }
-
-            for (SpellAbility ab : state.getSpellAbilities()) {
-                ab.getRestrictions().resetTurnActivations();
             }
         }
 

@@ -1255,7 +1255,7 @@ public class ComputerUtil {
 
     // returns true if the AI should stop using the ability
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
-        int activations = sa.getRestrictions().getNumberTurnActivations();
+        int activations = sa.getActivationsThisTurn();
 
         if (sa.isTemporary()) {
         	return MyRandom.getRandom().nextFloat() >= .95; // Abilities created by static abilities have no memory
