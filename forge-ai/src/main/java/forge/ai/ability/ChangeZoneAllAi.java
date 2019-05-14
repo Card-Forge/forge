@@ -59,7 +59,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         CardCollectionView computerType = ai.getCardsIn(origin);
 
         // remove cards that won't be seen in AI's own library if it can't be searched
-        if (ai.hasKeyword("CantSearchLibrary") || (ai.hasKeyword("Spells and abilities you control can't cause you to search your library.") && !ai.canSearchOwnLibraryWith(sa, ai))) {
+        if (!ai.canSearchLibraryWith(sa, ai)) {
             computerType = CardLists.filter(computerType, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
         }
 
