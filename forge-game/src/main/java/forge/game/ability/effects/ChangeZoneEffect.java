@@ -767,7 +767,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
                     }
                 }
-                if (decider.hasKeyword("CantSearchLibrary")) {
+                if (decider.hasKeyword("CantSearchLibrary") || !decider.canSearchOwnLibraryWith(sa, player)) {
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param. 
                     // "then shuffle" is mandatory

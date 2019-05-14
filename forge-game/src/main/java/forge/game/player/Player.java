@@ -2965,4 +2965,16 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         return true;
     }
+
+    public boolean canSearchOwnLibraryWith(SpellAbility sa, Player targetPlayer) {
+        if (sa == null) {
+            return true;
+        }
+
+        if (targetPlayer.equals(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities you control can't cause you to search your library.")) {
+            return false;
+        }
+
+        return true;
+    }
 }
