@@ -324,12 +324,12 @@ public class GameCopier {
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {
                     SpellAbilityRestriction restrict = sa.getRestrictions();
-                    if (sa.isPwAbility() && restrict.getNumberTurnActivations() > 0) {
+                    int active = sa.getActivationsThisTurn();
+                    if (sa.isPwAbility() && active > 0) {
                         SpellAbility newSa = findSAInCard(sa, newCard);
                         if (newSa != null) {
-                            for (int i = 0; i < restrict.getNumberTurnActivations(); i++) {
-                                newSa.getRestrictions().abilityActivated();
-                                newCard.addPlaneswalkerAbilityActivated();
+                            for (int i = 0; i < active; i++) {
+                                newCard.addAbilityActivated(newSa);
                             }
                         }
                     }

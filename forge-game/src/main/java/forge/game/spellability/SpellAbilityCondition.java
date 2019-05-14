@@ -299,11 +299,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
+        if ((this.getActivationLimit() != -1) && (sa.getActivationsThisTurn() >= this.getActivationLimit())) {
             return false;
         }
 
-        if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
+        if ((this.getGameActivationLimit() != -1) && (sa.getActivationsThisGame() >= this.getGameActivationLimit())) {
             return false;
         }
 

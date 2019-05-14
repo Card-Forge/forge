@@ -83,6 +83,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player targetingPlayer = null;
 
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
+    private SpellAbility grantorOriginal = null;
+    private StaticAbility grantorStatic = null;
+
     private SpellAbility mayPlayOriginal = null;
 
     private CardCollection splicedCards = null;
@@ -463,8 +466,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * Shortcut to see how many activations there were this turn.
      */
     public int getActivationsThisTurn() {
-        return restrictions.getNumberTurnActivations();
+        return getHostCard().getAbilityActivatedThisTurn(this);
     }
+    public int getActivationsThisGame() {
+        return getHostCard().getAbilityActivatedThisGame(this);
+    }
+
 
     public SpellAbilityCondition getConditions() {
         return conditions;
@@ -1701,7 +1708,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (hasParam("ActivationNumberSacrifice")) {
             String comp = getParam("ActivationNumberSacrifice");
             int right = Integer.parseInt(comp.substring(2));
-            int activationNum =  getRestrictions().getNumberTurnActivations();
+            int activationNum =  getActivationsThisTurn();
             if (Expressions.compare(activationNum, comp, right)) {
                 SpellAbility deltrig = AbilityFactory.getAbility(hostCard.getSVar(getParam("ActivationResolveSub")), hostCard);
                 deltrig.setActivatingPlayer(activatingPlayer);
@@ -1885,5 +1892,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPreventMap(final CardDamageMap map) {
         preventMap = map;
+    }
+
+    public SpellAbility getOriginalAbility() {
+        return grantorOriginal;
+    }
+
+    public void setOriginalAbility(final SpellAbility sa) {
+        grantorOriginal = sa;
+    }
+
+    public StaticAbility getGrantorStatic() {
+        return grantorStatic;
+    }
+
+    public void setGrantorStatic(final StaticAbility st) {
+        grantorStatic = st;
     }
 }
