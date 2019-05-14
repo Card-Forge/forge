@@ -48,6 +48,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             cards = new CardCollection();
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
+
+                if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
+                    cards.removeAll(p.getCardsIn(ZoneType.Library));
+                }
+
             }
             if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
                 // Search library using changezoneall effect need a param "Search"
@@ -58,14 +63,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                         cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
                     }
                 }
-                if (sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+                if (!sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
                     // all these cards have "then that player shuffles", mandatory shuffle
                     cards.removeAll(game.getCardsIn(ZoneType.Library));
                 }
             }
         }
 
-        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
             CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
             CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
