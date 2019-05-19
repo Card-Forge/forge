@@ -382,6 +382,7 @@ public class CardView extends GameEntityView {
             if (!isFaceDown()) {
                 return true;
             }
+            break;
         case Hand:
             if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
