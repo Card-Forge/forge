@@ -1,0 +1,24 @@
+[metadata]
+Code=MH1
+Date=2019-6-14
+Name=Modern Horizons
+Code2=MH1
+MciCode=mh1
+Type=Other
+
+[cards]
+
+26 M Serra the Benevolent
+
+80 R Cabal Therapist
+
+250 L Plains
+251 L Island
+252 L Swamp
+253 L Mountain
+254 L Forest
+255 R Flusterstorm
+
+
+[tokens]
+w_4_4_angel_flying_vigilance
