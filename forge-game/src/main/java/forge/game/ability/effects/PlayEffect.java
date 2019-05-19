@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -153,7 +152,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             final boolean wasFaceDown;
             if (tgtCard.isFaceDown()) {
-                tgtCard.setState(CardStateName.Original, false);
+                tgtCard.turnFaceUp(false, false);
                 wasFaceDown = true;
             } else {
                 wasFaceDown = false;
@@ -165,7 +164,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace("Do you want to play", TextUtil.addSuffix(tgtCard.toString(),"?")))) {
                 if (wasFaceDown) {
-                    tgtCard.setState(CardStateName.FaceDown, false);
+                    tgtCard.turnFaceDownNoUpdate();
                 }
                 saidNoTo.add(tgtCard);
                 continue;
