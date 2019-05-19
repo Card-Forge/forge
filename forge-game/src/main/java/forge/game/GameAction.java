@@ -100,7 +100,7 @@ public class GameAction {
         boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean toHand = zoneTo.is(ZoneType.Hand);
-        boolean wasFacedown = c.isFaceDown() || c.getCurrentStateName() == CardStateName.FaceDown; // FIXME: why isFaceDown() doesn't work for cards exiled face down?
+        boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
