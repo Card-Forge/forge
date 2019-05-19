@@ -1,9 +1,13 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -126,6 +130,25 @@ public class DigAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer) {
+        if ("DigForCreature".equals(sa.getParam("AILogic"))) {
+            Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
+            if (bestChoice == null) {
+                // no creatures, but maybe there's a morphable card that can be played as a creature?
+                CardCollection morphs = CardLists.filter(valid, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        return card.hasKeyword(Keyword.MORPH);
+                    }
+                });
+                if (!morphs.isEmpty()) {
+                    bestChoice = ComputerUtilCard.getBestAI(morphs);
+                }
+            }
+
+            // still nothing, so return the worst card since it'll be unplayable from exile (e.g. Vivien, Champion of the Wilds)
+            return bestChoice != null ? bestChoice : ComputerUtilCard.getWorstAI(valid);
+        }
+
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
             return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
         } else {

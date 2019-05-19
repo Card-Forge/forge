@@ -933,6 +933,18 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return copyWithDefinedCost(new Cost(abCost, isAbility()));
     }
 
+    public SpellAbility copyWithManaCostReplaced(Player active, Cost abCost) {
+
+        final SpellAbility newSA = copy(active);
+        if (newSA == null) {
+            return null; // the ability was not copyable, e.g. a Suspend SA may get here
+        }
+        final Cost newCost = newSA.getPayCosts().copyWithNoMana();
+        newCost.add(abCost);
+        newSA.setPayCosts(newCost);
+        return newSA;
+    }
+
     public boolean isTrigger() {
         return trigger;
     }

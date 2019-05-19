@@ -1,9 +1,8 @@
 package forge.game.card;
 
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import org.apache.commons.lang3.StringUtils;
 
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 
@@ -20,12 +19,12 @@ public final class CardPlayOption {
     private final PayManaCost payManaCost;
     private final boolean withFlash;
     private final boolean grantsZonePermissions;
-    private final String altManaCost;
+    private final Cost altManaCost;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final String altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
         this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, withFlash, grantZonePermissions);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final String altManaCost, final boolean withFlash,
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean withFlash,
                            final boolean grantZonePermissions) {
         this.player = player;
         this.sta = sta;
@@ -66,10 +65,10 @@ public final class CardPlayOption {
 
     public boolean grantsZonePermissions() { return grantsZonePermissions; }
 
-    public String getAltManaCost() { return altManaCost; }
+    public Cost getAltManaCost() { return altManaCost; }
 
     private String getFormattedAltManaCost() {
-        return new ManaCost(new ManaCostParser(altManaCost)).getSimpleString();
+        return altManaCost.toSimpleString();
     }
 
     @Override

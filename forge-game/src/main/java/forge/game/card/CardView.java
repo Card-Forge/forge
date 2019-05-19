@@ -371,13 +371,17 @@ public class CardView extends GameEntityView {
         switch (zone) {
         case Ante:
         case Command:
-        case Exile:
         case Battlefield:
         case Graveyard:
         case Flashback:
         case Stack:
             //cards in these zones are visible to all
             return true;
+        case Exile:
+            //in exile, only face up cards and face down cards you can look at should be shown (since "exile face down" is a thing)
+            if (!isFaceDown()) {
+                return true;
+            }
         case Hand:
             if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
@@ -628,6 +632,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
+        set(TrackableProperty.Facedown, c.isFaceDown());
 
         final Card cloner = c.getCloner();
 
