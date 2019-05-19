@@ -72,6 +72,17 @@ public final class GameActionUtil {
 
         if (sa.isSpell()) {
             boolean lkicheck = false;
+
+            // need to be done before so it works with Vivien and Zoetic Cavern
+            if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+
+                source.turnFaceUp(false, false);
+                lkicheck = true;
+            }
+
             if (sa.hasParam("Bestow") && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
@@ -106,23 +117,16 @@ public final class GameActionUtil {
                 }
                 final Card host = o.getHost();
 
-                final SpellAbility newSA = sa.copy(activator);
-                final SpellAbilityRestriction sar = newSA.getRestrictions();
-                if (o.isWithFlash()) {
-                    sar.setInstantSpeed(true);
-                }
-                sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
-                newSA.setMayPlayOriginal(sa);
+                SpellAbility newSA = null;
 
                 boolean changedManaCost = false;
                 if (o.getPayManaCost() == PayManaCost.NO) {
+                    newSA = sa.copyWithNoManaCost(activator);
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                     changedManaCost = true;
                 } else if (o.getAltManaCost() != null) {
+                    newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
                     changedManaCost = true;
                     if (host.hasSVar("AsForetoldSplitCMCHack")) {
                         // TODO: This is a temporary workaround for As Foretold interaction with split cards, better solution needed.
@@ -138,7 +142,17 @@ public final class GameActionUtil {
                             }
                         }
                     }
+                } else {
+                    newSA = sa.copy(activator);
                 }
+                final SpellAbilityRestriction sar = newSA.getRestrictions();
+                if (o.isWithFlash()) {
+                    sar.setInstantSpeed(true);
+                }
+                sar.setZone(null);
+                newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlayOriginal(sa);
+
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
                         sar.setLimitToCheck(null);
