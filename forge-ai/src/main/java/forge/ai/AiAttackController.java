@@ -190,7 +190,28 @@ public class AiAttackController {
         if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
         }
-        
+
+        // the attacker will die to a triggered ability (e.g. Sarkhan the Masterless)
+        for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (Trigger t : c.getTriggers()) {
+                if (t.getMode() == TriggerType.Attacks) {
+                    SpellAbility sa = t.getOverridingAbility();
+                    if (sa == null && t.hasParam("Execute")) {
+                        sa = AbilityFactory.getAbility(c, t.getParam("Execute"));
+                    }
+
+                    if (sa != null && sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("DefinedPlayers"))) {
+                        List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
+                        // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
+                        // how much damage is dealt by each of the creatures in the valid list.
+                        if (attacker.getNetToughness() <= valid.size() * this.attackers.size()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
         	return true;
         }
