@@ -204,7 +204,7 @@ public class AiAttackController {
                         List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
                         // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
                         // how much damage is dealt by each of the creatures in the valid list.
-                        if (attacker.getNetToughness() <= valid.size() * this.attackers.size()) {
+                        if (attacker.getNetToughness() <= valid.size()) {
                             return false;
                         }
                     }
