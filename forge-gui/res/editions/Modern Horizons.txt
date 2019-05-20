@@ -1,0 +1,38 @@
+[metadata]
+Code=MH1
+Date=2019-6-14
+Name=Modern Horizons
+Code2=MH1
+MciCode=mh1
+Type=Other
+
+[cards]
+14 C Impostor of the Sixth Pride
+19 C Martyr's Soul
+26 M Serra the Benevolent
+36 C Wall of One Thousand Cuts
+38 U Wing Shards
+44 C Choking Tethers
+52 R Force of Negation
+64 C Prohibit
+71 C Stream of Thought
+80 R Cabal Therapist
+95 C Headless Specter
+114 C Venomous Changling
+122 U Firebolt
+129 U Goblin Matron
+131 C Goblin War Party
+134 C Lava Dart
+161 R Deep Forest Hermit
+162 C Elvish Fury
+178 C Savage Swipe
+250 L Plains
+251 L Island
+252 L Swamp
+253 L Mountain
+254 L Forest
+255 R Flusterstorm
+
+
+[tokens]
+w_4_4_angel_flying_vigilance
