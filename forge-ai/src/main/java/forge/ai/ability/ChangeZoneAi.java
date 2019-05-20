@@ -676,7 +676,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 // only use blink or bounce effects
-                if (!(destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone))
+                if (!(destination.equals(ZoneType.Exile)
+                        && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone || "DelayedBounce".equals(sa.getParam("AILogic"))))
                         && !destination.equals(ZoneType.Hand)) {
                     return false;
                 }
@@ -936,7 +937,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
-                    || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
+                    || "DelayedBounce".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
             if ((destination.equals(ZoneType.Hand) || blink) && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
