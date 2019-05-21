@@ -26,6 +26,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -677,7 +678,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 // only use blink or bounce effects
                 if (!(destination.equals(ZoneType.Exile)
-                        && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone || "DelayedBounce".equals(sa.getParam("AILogic"))))
+                        && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone || "DelayedBlink".equals(sa.getParam("AILogic"))))
                         && !destination.equals(ZoneType.Hand)) {
                     return false;
                 }
@@ -937,7 +938,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
-                    || "DelayedBounce".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
+                    || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
             if ((destination.equals(ZoneType.Hand) || blink) && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
@@ -1231,6 +1232,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // filter out untargetables
         CardCollectionView aiPermanents = CardLists
                 .filterControlledBy(list, ai);
+        CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, Presets.PLANESWALKERS);
 
         // Felidar Guardian + Saheeli Rai combo support
         if (sa.getHostCard().getName().equals("Felidar Guardian")) {
@@ -1271,6 +1273,33 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c,
                                 combat) && c.getOwner() == ai && !c.isToken()) {
                     return c;
+                }
+            }
+        }
+        // Reload planeswalkers
+        else if (!aiPlaneswalkers.isEmpty() && (sa.getHostCard().isSorcery() || !game.getPhaseHandler().isPlayerTurn(ai))) {
+            int maxLoyaltyToConsider = 2;
+            int loyaltyDiff = 2;
+            int chance = 30;
+            if (ai.getController().isAI()) {
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                maxLoyaltyToConsider = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
+                loyaltyDiff = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
+                chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
+            }
+            if (MyRandom.percentTrue(chance)) {
+                Collections.sort(aiPlaneswalkers, new Comparator<Card>() {
+                    @Override
+                    public int compare(final Card a, final Card b) {
+                        return a.getCounters(CounterType.LOYALTY) - b.getCounters(CounterType.LOYALTY);
+                    }
+                });
+                for (Card pw : aiPlaneswalkers) {
+                    int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+                    int freshLoyalty = pw.getCurrentState().getBaseLoyalty();
+                    if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
+                        return pw;
+                    }
                 }
             }
         }
