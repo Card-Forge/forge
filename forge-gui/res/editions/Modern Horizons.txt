@@ -7,12 +7,14 @@ MciCode=mh1
 Type=Other
 
 [cards]
+1 M Morophon, the Boundless
 14 C Impostor of the Sixth Pride
 19 C Martyr's Soul
 26 M Serra the Benevolent
 36 C Wall of One Thousand Cuts
 38 U Wing Shards
 44 C Choking Tethers
+50 U Fact or Fiction
 52 R Force of Negation
 64 C Prohibit
 71 C Stream of Thought
@@ -23,16 +25,21 @@ Type=Other
 129 U Goblin Matron
 131 C Goblin War Party
 134 C Lava Dart
+145 M Seasoned Pyromancer
 161 R Deep Forest Hermit
 162 C Elvish Fury
+164 R Force of Vigor
 178 C Savage Swipe
-250 L Plains
-251 L Island
-252 L Swamp
-253 L Mountain
-254 L Forest
+203 R Ice-Fang Coatl
+244 R Prismatic Vista
+250 L Snow-Covered Plains
+251 L Snow-Covered Island
+252 L Snow-Covered Swamp
+253 L Snow-Covered Mountain
+254 L Snow-Covered Forest
 255 R Flusterstorm
 
 
 [tokens]
 w_4_4_angel_flying_vigilance
+g_1_1_squirrel
