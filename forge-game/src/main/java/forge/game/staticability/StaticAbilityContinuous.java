@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -639,7 +639,7 @@ public final class StaticAbilityContinuous {
                     affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
                 }
             }
-            
+
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
@@ -667,7 +667,7 @@ public final class StaticAbilityContinuous {
                         // set OriginalHost to get the owner of this static ability
                         sa.setOriginalHost(hostCard);
                         // set overriding ability to the trigger
-                        actualTrigger.setOverridingAbility(sa);    
+                        actualTrigger.setOverridingAbility(sa);
                     }
                     actualTrigger.setIntrinsic(false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
@@ -735,10 +735,19 @@ public final class StaticAbilityContinuous {
             if (withFlash != null) {
                 affectedCard.addWithFlash(se.getTimestamp(), withFlash);
             }
-            
+
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
+                String mayPlayAltCost = mayPlayAltManaCost;
+
+                if (mayPlayAltCost != null && mayPlayAltCost.contains("ConvertedManaCost")) {
+                    final String costcmc = Integer.toString(affectedCard.getCMC());
+                    mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                }
+
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
+                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
         }
 

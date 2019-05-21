@@ -2743,7 +2743,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final String altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
         this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
     }
     public final void removeMayPlay(final StaticAbility sta) {
@@ -5803,7 +5803,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
 
-        if (isFaceDown() && isInZone(ZoneType.Exile) && !mayPlay(player).isEmpty()) {
+        if (isFaceDown() && isInZone(ZoneType.Exile)) {
             for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }

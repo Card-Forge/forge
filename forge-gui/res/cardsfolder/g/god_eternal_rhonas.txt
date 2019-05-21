@@ -12,4 +12,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigFromGraveyard:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ TrigFromExile | OptionalDecider$ You | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
 SVar:TrigFromExile:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
+SVar:PlayMain1:TRUE
 Oracle:Deathtouch\nWhen God-Eternal Rhonas enters the battlefield, double the power of each other creature you control until end of turn. Those creatures gain vigilance until end of turn.\nWhen God-Eternal Rhonas dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

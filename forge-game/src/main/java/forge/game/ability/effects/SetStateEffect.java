@@ -7,6 +7,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -73,13 +74,9 @@ public class SetStateEffect extends SpellAbilityEffect {
             // facedown cards that are not Permanent, can't turn faceup there
             if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
-                // need to cache manifest status
-                boolean manifested = tgt.isManifested();
-                // FIXME setState has to many other Consequences, use LKI?
-                tgt.setState(CardStateName.Original, true);
-                game.getAction().reveal(new CardCollection(tgt), tgt.getOwner(), true, "Face-down card can't turn face up");
-                tgt.setState(CardStateName.FaceDown, true);
-                tgt.setManifested(manifested);
+                Card lki = CardUtil.getLKICopy(tgt);
+                lki.turnFaceUp(true, false);
+                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, "Face-down card can't turn face up");
 
                 continue;
             }
