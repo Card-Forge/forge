@@ -21,7 +21,7 @@ CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA=30
 # When enabled, the AI will run some additional checks in an attempt to avoid attacking into certain block situations
 # when it can't deal at least some permanent damage to the defending creature/planeswalker or to at least one defending
 # creature. Works in many but not all cases.
-TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK=true
+TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK=false
 # When enabled, the AI will use Berserk on offense to try to severely damage the opponent at the expense of the creature
 USE_BERSERK_AGGRESSIVELY=true
 # Try to hold combat tricks until blockers are declared in an attempt to trick the opponent into blocking a weak creature
