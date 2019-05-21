@@ -43,3 +43,4 @@ Type=Other
 [tokens]
 w_4_4_angel_flying_vigilance
 g_1_1_squirrel
+r_1_1_goblin
