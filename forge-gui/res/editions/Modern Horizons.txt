@@ -1,6 +1,6 @@
 [metadata]
 Code=MH1
-Date=2019-6-14
+Date=2019-06-14
 Name=Modern Horizons
 Code2=MH1
 MciCode=mh1
@@ -11,11 +11,14 @@ Type=Other
 3 R Astral Drift
 5 U Dismantling Blow
 10 R Force of Virtue
+11 U Generous Gift
 13 R Giver of Runes
 14 C Impostor of the Sixth Pride
 19 C Martyr's Soul
 21 M Ranger-Captain of Eos
 26 M Serra the Benevolent
+29 R Sisay, Weatherlight Captain
+31 U Splicer's Skill
 36 C Wall of One Thousand Cuts
 38 U Wing Shards
 43 C Chillerpillar
@@ -30,11 +33,13 @@ Type=Other
 71 C Stream of Thought
 75 M Urza, Lord High Artificer
 80 R Cabal Therapist
+82 C Changeling Outcast
 84 U Crypt Rats
 87 C Diabolic Edict
 88 U Dregscape Sliver
 92 R Force of Despair
 95 C Headless Specter
+111 C Umezawa's Charm
 112 U Undead Augur
 114 C Venomous Changeling
 118 R Blazing Chant
@@ -45,15 +50,20 @@ Type=Other
 131 C Goblin War Party
 134 C Lava Dart
 140 R Planebound Accomplice
+143 U Ravenous Giant
 145 M Seasoned Pyromancer
+155 R Ayula, Queen Among Bears
+156 R Ayula's Influence
 161 R Deep Forest Hermit
 162 C Elvish Fury
 164 R Force of Vigor
+167 U Glacial Revelation
 174 C Nimble Mongoose
 175 U Regrowth
 178 C Savage Swipe
 179 U Scale Up
 180 C Spore Frog
+182 U Squirrel Nest
 183 U Tempered Sliver
 194 U Abominable Treefolk
 196 R Collected Conjuring
@@ -65,8 +75,10 @@ Type=Other
 208 R Lightning Skelemental
 209 U Munitions Expert
 215 U Thundering Djinn
+218 R Altar of Dementia
 227 R Scrapyard Recombiner
 238 R Fiery Islet
+240 U Frostwalk Bastion
 243 R Nurturing Peatland
 244 R Prismatic Vista
 246 R Silent Clearing
