@@ -1,0 +1,10 @@
+Name:Tempered Sliver
+ManaCost:2 G
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ DamageDone | Description$ Sliver creatures you control have "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."
+SVar:DamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."
