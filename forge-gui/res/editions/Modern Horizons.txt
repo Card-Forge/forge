@@ -8,30 +8,70 @@ Type=Other
 
 [cards]
 1 M Morophon, the Boundless
+3 R Astral Drift
+5 U Dismantling Blow
+10 R Force of Virtue
+13 R Giver of Runes
 14 C Impostor of the Sixth Pride
 19 C Martyr's Soul
+21 M Ranger-Captain of Eos
 26 M Serra the Benevolent
 36 C Wall of One Thousand Cuts
 38 U Wing Shards
+43 C Chillerpillar
 44 C Choking Tethers
+48 U Exclude
 50 U Fact or Fiction
 52 R Force of Negation
+55 C Man-o'-War
+63 C Pondering Mage
 64 C Prohibit
+67 C Scour All Possibilities
 71 C Stream of Thought
+75 M Urza, Lord High Artificer
 80 R Cabal Therapist
+84 U Crypt Rats
+87 C Diabolic Edict
+88 U Dregscape Sliver
+92 R Force of Despair
 95 C Headless Specter
-114 C Venomous Changling
+112 U Undead Augur
+114 C Venomous Changeling
+118 R Blazing Chant
 122 U Firebolt
+123 C Fists of Flame
+128 R Goblin Engineer
 129 U Goblin Matron
 131 C Goblin War Party
 134 C Lava Dart
+140 R Planebound Accomplice
 145 M Seasoned Pyromancer
 161 R Deep Forest Hermit
 162 C Elvish Fury
 164 R Force of Vigor
+174 C Nimble Mongoose
+175 U Regrowth
 178 C Savage Swipe
+179 U Scale Up
+180 C Spore Frog
+183 U Tempered Sliver
+194 U Abominable Treefolk
+196 R Collected Conjuring
+198 U Etchings of the Chosen
+200 M The First Sliver
+201 U Good-Fortune Unicorn
 203 R Ice-Fang Coatl
+207 U Lavabelly Sliver
+208 R Lightning Skelemental
+209 U Munitions Expert
+215 U Thundering Djinn
+227 R Scrapyard Recombiner
+238 R Fiery Islet
+243 R Nurturing Peatland
 244 R Prismatic Vista
+246 R Silent Clearing
+247 R Sunbaked Canyon
+249 R Waterlogged Grove
 250 L Snow-Covered Plains
 251 L Snow-Covered Island
 252 L Snow-Covered Swamp
