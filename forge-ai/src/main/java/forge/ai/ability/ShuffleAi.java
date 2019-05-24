@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -12,6 +13,8 @@ public class ShuffleAi extends SpellAbilityAi {
         if (logic.equals("Always")) {
             // We may want to play this for the subability, e.g. Mind's Desire
             return true;
+        } else if (logic.equals("OwnMain2")) {
+            return aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2, aiPlayer);
         }
 
         // not really sure when the compy would use this; maybe only after a
