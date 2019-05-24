@@ -1,5 +1,5 @@
 Name:Nurturing Peatland
-ManaCost:
+ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add {G}.
