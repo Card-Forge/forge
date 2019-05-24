@@ -6,7 +6,7 @@ S:Mode$ ReduceCost | ValidCard$ Card.Colorless | Type$ Spell | Activator$ You | 
 A:AB$ PeekAndReveal | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | PeekAmount$ 1 | NoReveal$ True | SubAbility$ DBMill | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand. 
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | NoReveal$ True | SubAbility$ DBToken 
 SVar:DBToken:DB$ Token | TokenScript$ c_2_2_spirit | ImprintTokens$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ TrigLeavesBattlefield | SVars$ DBReturn,DBExile | RememberObjects$ Remembered | ImprintCards$ Imprinted | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | Triggers$ TrigLeavesBattlefield | SVars$ DBReturn,DBExile | RememberObjects$ Remembered | ImprintCards$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:TrigLeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBReturn | TriggerDescription$ When that token leaves the battlefield, put the exiled card into your hand. 
 SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered  | SubAbility$ DBExile

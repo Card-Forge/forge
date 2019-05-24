@@ -22,10 +22,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     /** */
     SINGLETON_INSTANCE;
     final Localizer localizer = Localizer.getInstance();
-
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Quest Challenges");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuestChallenges"));
 
     //========== INSTANTIATION
     private final JPanel pnlStats   = new JPanel();
@@ -36,11 +35,11 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
 
     private final StartButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
-    private final FCheckBox cbPlant = new FCheckBox("Summon Plant");
+    private final FCheckBox cbPlant = new FCheckBox(localizer.getMessage("cbSummonPlant"));
 
     private final FComboBoxWrapper<String> cbxMatchLength  = new FComboBoxWrapper<String>();
 
-    private final FLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
+    private final FLabel lblZep   = new FLabel.Builder().text(localizer.getMessage("htmlLaunchZeppelin"))
             .hoverable(true).icon(FSkin.getIcon(FSkinProp.ICO_QUEST_ZEP))
             .fontSize(16).build();
     private final FLabel lblWorld   = new FLabel.Builder()
@@ -61,24 +60,24 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     private final FLabel lblWinStreak = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_PLUSPLUS))
         .fontSize(15).build();
-    private final LblHeader lblTitle = new LblHeader("Quest Mode: Challenges");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblQuestModeChallenges"));
 
-    private final FLabel lblInfo = new FLabel.Builder().text("Which challenge will you attempt?")
+    private final FLabel lblInfo = new FLabel.Builder().text(localizer.getMessage("lblWhichChallenge"))
             .fontStyle(Font.BOLD).fontSize(16)
             .fontAlign(SwingConstants.LEFT).build();
 
     private final FLabel lblCurrentDeck = new FLabel.Builder()
-        .text("Current deck hasn't been set yet.")
+        .text(localizer.getMessage("lblNoDuelDeck"))
         .fontSize(12).build();
 
     private final FLabel lblNextChallengeInWins = new FLabel.Builder()
-        .text("Next challenge in wins hasn't been set yet.")
+        .text(localizer.getMessage("lblNextChallengeNotYet"))
         .fontSize(12).build();
 
-    private final FLabel btnUnlock = new FLabel.ButtonBuilder().text("Unlock Sets").fontSize(16).build();
-    private final FLabel btnTravel = new FLabel.ButtonBuilder().text("Travel").fontSize(16).build();
-    private final FLabel btnBazaar = new FLabel.ButtonBuilder().text("Bazaar").fontSize(16).build();
-    private final FLabel btnSpellShop = new FLabel.ButtonBuilder().text("Spell Shop").fontSize(16).build();
+    private final FLabel btnUnlock = new FLabel.ButtonBuilder().text(localizer.getMessage("btnUnlockSets")).fontSize(16).build();
+    private final FLabel btnTravel = new FLabel.ButtonBuilder().text(localizer.getMessage("btnTravel")).fontSize(16).build();
+    private final FLabel btnBazaar = new FLabel.ButtonBuilder().text(localizer.getMessage("btnBazaar")).fontSize(16).build();
+    private final FLabel btnSpellShop = new FLabel.ButtonBuilder().text(localizer.getMessage("btnSpellShop")).fontSize(16).build();
 
     /**
      * Constructor.
@@ -116,7 +115,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
      */
     @Override
     public String getMenuTitle() {
-        return "Challenges";
+        return localizer.getMessage("lblChallenges");
     }
 
     /* (non-Javadoc)
