@@ -1,5 +1,5 @@
 Name:Waterlogged Grove
-ManaCost:
+ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add {G}.

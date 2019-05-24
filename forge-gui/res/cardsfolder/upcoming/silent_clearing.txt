@@ -1,5 +1,5 @@
 Name:Silent Clearing
-ManaCost:
+ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | SpellDescription$ Add {B}.
