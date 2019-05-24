@@ -1,0 +1,6 @@
+Name:Force of Rage
+ManaCost:1 R R
+Types:Instant
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Red> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a red card from your hand rather than pay this spell's mana cost.
+A:SP$ Token | Cost$ 1 R R | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_trample_haste | TokenOwner$ You | LegacyImage$ r 3 1 elemental trample haste mh1 | AtEOT$ Sacrifice | SpellDescription$ Create two 3/1 red Elemental creature tokens with trample and haste. Sacrifice those tokens at the beginning of your next upkeep.
+Oracle:If it's not your turn, you may exile a red card from your hand rather than pay this spell's mana cost.\nCreate two 3/1 red Elemental creature tokens with trample and haste. Sacrifice those tokens at the beginning of your next upkeep.
