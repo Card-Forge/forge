@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/05/113.-WAR3.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume your opponent has no mana available.
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Entrancing Melody;Heroic Reinforcements;Wanderer's Strike;Integrity // Intervention
+humanbattlefield=Havoc Devils;Feather, the Redeemed;Ral, Storm Conduit|Counters:LOYALTY=2;The Wanderer|Counters:LOYALTY=1;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+aibattlefield=Saheeli, Sublime Artificer|Counters:LOYALTY=3;t:Servo,P:1,T:1,Cost:no cost,Color:C,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_a_servo_war;t:Servo,P:1,T:1,Cost:no cost,Color:C,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_a_servo_war;Kinjalli's Sunwing;Goblin Assault Team
