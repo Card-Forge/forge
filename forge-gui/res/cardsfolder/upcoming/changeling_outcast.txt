@@ -1,0 +1,8 @@
+Name:Changeling Outcast
+ManaCost:B
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+K:CARDNAME can't block.
+K:Unblockable
+Oracle:Changeling (This card is every creature type.)\nChangeling Outcast can't block and can't be blocked.
