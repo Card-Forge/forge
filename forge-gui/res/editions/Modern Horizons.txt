@@ -97,6 +97,8 @@ Type=Other
 222 U Farmstead Gleaner
 226 M Mox Tantalite
 227 R Scrapyard Recombiner
+228 M Sword of Sinew and Steel
+229 M Sword of Truth and Justice
 238 R Fiery Islet
 240 U Frostwalk Bastion
 243 R Nurturing Peatland
