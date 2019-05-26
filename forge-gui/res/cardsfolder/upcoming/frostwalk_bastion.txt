@@ -1,5 +1,5 @@
 Name:Frostwalk Bastion
-ManaCost:
+ManaCost:no cost
 Types:Snow Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Animate | Cost$ 1 S | Defined$ Self | Power$ 2 | Toughness$ 3 | Types$ Creature,Artifact,Construct | Permanent$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 2/3 Construct artifact creature. It's still a land. ({S} can be paid with one mana from a snow permanent.)
