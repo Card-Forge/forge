@@ -1,0 +1,10 @@
+Name:Sword of Sinew and Steel
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddSVar$ SwordOfSinewAndSteelCE | AddKeyword$ Protection from black & Protection from red | Description$ Equipped creature gets +2/+2 and has protection from black and from red.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroyPlaneswalker | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.
+SVar:TrigDestroyPlaneswalker:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DestroyArtifact | SpellDescription$ Destroy up to one target planeswalker.
+SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Destroy up to one target artifact.
+SVar:SwordOfSinewAndSteelCE:SVar:MustBeBlocked:AttackingPlayerConservative
+Oracle:Equipped creature gets +2/+2 and has protection from white and from blue.\nWhenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.\nEquip {2}
