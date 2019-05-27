@@ -1221,6 +1221,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public boolean mulliganKeepHand(final Player mulliganingPlayer, int cardsToReturn) {
+        // TODO we should be passing tuckCards into Confirmation Dialog
+        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
+        inp.showAndWait();
+        return inp.isKeepHand();
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        final InputLondonMulligan inp = new InputLondonMulligan(this, player, cardsToReturn);
+        inp.showAndWait();
+        return inp.getSelectedCards();
+    }
+
+    @Override
     public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
         // Partial Paris is gone, so it being commander doesn't really matter
         // anymore...

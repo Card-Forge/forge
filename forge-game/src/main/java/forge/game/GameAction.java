@@ -29,6 +29,7 @@ import forge.game.ability.effects.AttachEffect;
 import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -1584,7 +1585,7 @@ public class GameAction {
 
             // Choose starting hand for each player with multiple hands
             if (game.getRules().getGameType() != GameType.Puzzle) {
-                performMulligans(first, game.getRules().hasAppliedVariant(GameType.Commander));
+                new MulliganService(first).perform();
             }
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
@@ -1672,79 +1673,6 @@ public class GameAction {
         }
         goesFirst = goesFirst.getController().chooseStartingPlayer(isFirstGame);
         return goesFirst;
-    }
-
-    private void performMulligans(final Player firstPlayer, final boolean isCommander) {
-        List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
-        int offset = whoCanMulligan.indexOf(firstPlayer);
-
-        // Have to cycle-shift the list to get the first player on index 0
-        for (int i = 0; i < offset; i++) {
-            whoCanMulligan.add(whoCanMulligan.remove(0));
-        }
-
-        boolean[] hasKept = new boolean[whoCanMulligan.size()];
-        int[] handSize = new int[whoCanMulligan.size()];
-        for (int i = 0; i < whoCanMulligan.size(); i++) {
-            hasKept[i] = false;
-            handSize[i] = whoCanMulligan.get(i).getZone(ZoneType.Hand).size();
-        }
-
-        MapOfLists<Player, Card> exiledDuringMulligans = new HashMapOfLists<Player, Card>(CollectionSuppliers.<Card>arrayLists());
-
-        // rule 103.4b
-        boolean isMultiPlayer = game.getPlayers().size() > 2;
-        // https://magic.wizards.com/en/articles/archive/feature/checking-brawl-2018-07-09
-        int mulliganDelta = isMultiPlayer || game.getRules().hasAppliedVariant(GameType.Brawl) ? 0 : 1;
-
-        boolean allKept;
-        do {
-            allKept = true;
-            for (int i = 0; i < whoCanMulligan.size(); i++) {
-                if (hasKept[i]) continue;
-
-                Player p = whoCanMulligan.get(i);
-                CardCollectionView toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(firstPlayer) : null;
-
-                if (game.isGameOver()) { // conceded on mulligan prompt
-                    return;
-                }
-
-                if (toMulligan != null && !toMulligan.isEmpty()) {
-                    toMulligan = new CardCollection(p.getCardsIn(ZoneType.Hand));
-                    for (final Card c : toMulligan) {
-                        moveToLibrary(c, null, null);
-                    }
-                    try {
-                        Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    p.shuffle(null);
-                    p.drawCards(handSize[i] - mulliganDelta);
-                    p.onMulliganned();
-                    allKept = false;
-                } else {
-                    game.getGameLog().add(GameLogEntryType.MULLIGAN, p.getName() + " has kept a hand of " + p.getZone(ZoneType.Hand).size() + " cards");
-                    hasKept[i] = true;
-                }
-            }
-            mulliganDelta++;
-        } while (!allKept);
-
-        //Vancouver Mulligan as a scry with the decisions inside
-	List<Player> scryers = Lists.newArrayList();
-        for(Player p : whoCanMulligan) {
-            if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
-                scryers.add(p);
-            }
-        }
-
-        for(Player p : scryers) {
-            if (p.getController().confirmMulliganScry(p)) {
-                scry(ImmutableList.of(p), 1, null);
-            }
-        }
     }
 
     private void runPreOpeningHandActions(final Player first) {
