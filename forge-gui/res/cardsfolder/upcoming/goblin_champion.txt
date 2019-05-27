@@ -1,0 +1,7 @@
+Name:Goblin Champion
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:0/1
+K:Haste
+K:Exalted
+Oracle:Haste\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
