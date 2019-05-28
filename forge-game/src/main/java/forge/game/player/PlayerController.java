@@ -169,7 +169,10 @@ public abstract class PlayerController {
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
+
     public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
+    public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
+    public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
