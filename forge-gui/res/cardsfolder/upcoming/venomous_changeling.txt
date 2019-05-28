@@ -1,0 +1,7 @@
+Name:Venomous Changeling
+ManaCost:2 B
+Types:Creature Shapeshifter
+PT:1/3
+K:Changeling
+K:Deathtouch
+Oracle:Changeling (This card is every creature type.)\nDeathtouch

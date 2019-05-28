@@ -2996,14 +2996,23 @@ public class ComputerUtil {
 
         if (sa.hasParam("AITgts")) {
             CardCollection list;
-            if (sa.getParam("AITgts").equals("BetterThanSource")) {
-                int value = ComputerUtilCard.evaluateCreature(source);
-                if (source.isEnchanted()) {
-                    for (Card enc : source.getEnchantedBy()) {
-                        if (enc.getController().equals(ai)) {
-                            value += 100; // is 100 per AI's own aura enough?
+            String aiTgts = sa.getParam("AITgts");
+            if (aiTgts.startsWith("BetterThan")) {
+                int value = 0;
+                if (aiTgts.endsWith("Source")) {
+                    value = ComputerUtilCard.evaluateCreature(source);
+                    if (source.isEnchanted()) {
+                        for (Card enc : source.getEnchantedBy()) {
+                            if (enc.getController().equals(ai)) {
+                                value += 100; // is 100 per AI's own aura enough?
+                            }
                         }
                     }
+                } else if (aiTgts.contains("EvalRating.")) {
+                    value = AbilityUtils.calculateAmount(source, aiTgts.substring(aiTgts.indexOf(".") + 1), sa);
+                } else {
+                    System.err.println("Warning: Unspecified AI target evaluation rating for SA " + sa);
+                    value = ComputerUtilCard.evaluateCreature(source);
                 }
                 final int totalValue = value;
                 list = CardLists.filter(srcList, new Predicate<Card>() {

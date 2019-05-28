@@ -1,2 +1,5 @@
+- New Net Deck Category -
+The Genetic Algorithm AI Decks category has been added to net decks.  This contains decks generated using a genetic algorithm to try to find decks that the AI plays best in each format.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.

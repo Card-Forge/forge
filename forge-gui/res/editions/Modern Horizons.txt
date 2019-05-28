@@ -1,0 +1,124 @@
+[metadata]
+Code=MH1
+Date=2019-06-14
+Name=Modern Horizons
+Code2=MH1
+MciCode=mh1
+Type=Other
+
+[cards]
+1 M Morophon, the Boundless
+3 R Astral Drift
+4 U Battle Screech
+5 U Dismantling Blow
+10 R Force of Virtue
+11 U Generous Gift
+13 R Giver of Runes
+14 C Impostor of the Sixth Pride
+16 U King of the Pride
+19 C Martyr's Soul
+21 M Ranger-Captain of Eos
+26 M Serra the Benevolent
+29 R Sisay, Weatherlight Captain
+31 U Splicer's Skill
+36 C Wall of One Thousand Cuts
+37 R Winds of Abandon
+38 U Wing Shards
+39 U Zhalfirin Decoy
+40 R Archmage's Charm
+41 R Bazaar Trademage
+43 C Chillerpillar
+44 C Choking Tethers
+48 U Exclude
+50 U Fact or Fiction
+52 R Force of Negation
+55 C Man-o'-War
+63 C Pondering Mage
+64 C Prohibit
+67 C Scour All Possibilities
+71 C Stream of Thought
+75 M Urza, Lord High Artificer
+80 R Cabal Therapist
+82 C Changeling Outcast
+84 U Crypt Rats
+87 C Diabolic Edict
+88 U Dregscape Sliver
+90 U Feaster of Fools
+92 R Force of Despair
+95 C Headless Specter
+100 R Plague Engineer
+111 C Umezawa's Charm
+112 U Undead Augur
+114 C Venomous Changeling
+118 R Aria of Flame
+122 U Firebolt
+123 C Fists of Flame
+124 R Force of Rage
+126 C Goatnap
+128 R Goblin Engineer
+129 U Goblin Matron
+131 C Goblin War Party
+132 U Hollowhead Sliver
+134 C Lava Dart
+140 R Planebound Accomplice
+141 C Pyrophobia
+143 U Ravenous Giant
+145 M Seasoned Pyromancer
+155 R Ayula, Queen Among Bears
+156 R Ayula's Influence
+161 R Deep Forest Hermit
+162 C Elvish Fury
+164 R Force of Vigor
+166 R Genesis
+167 U Glacial Revelation
+168 M Hexdrinker
+171 C Mother Bear
+174 C Nimble Mongoose
+175 U Regrowth
+178 C Savage Swipe
+179 U Scale Up
+180 C Spore Frog
+182 U Squirrel Nest
+183 U Tempered Sliver
+189 M Unbound Flourishing
+194 U Abominable Treefolk
+195 R Cloudshredder Sliver
+196 R Collected Conjuring
+198 U Etchings of the Chosen
+200 M The First Sliver
+201 U Good-Fortune Unicorn
+203 R Ice-Fang Coatl
+207 U Lavabelly Sliver
+208 R Lightning Skelemental
+209 U Munitions Expert
+215 U Thundering Djinn
+217 M Wrenn and Six
+218 R Altar of Dementia
+222 U Farmstead Gleaner
+226 M Mox Tantalite
+227 R Scrapyard Recombiner
+228 M Sword of Sinew and Steel
+229 M Sword of Truth and Justice
+238 R Fiery Islet
+240 U Frostwalk Bastion
+243 R Nurturing Peatland
+244 R Prismatic Vista
+246 R Silent Clearing
+247 R Sunbaked Canyon
+249 R Waterlogged Grove
+250 L Snow-Covered Plains
+251 L Snow-Covered Island
+252 L Snow-Covered Swamp
+253 L Snow-Covered Mountain
+254 L Snow-Covered Forest
+255 R Flusterstorm
+
+
+[tokens]
+w_4_4_angel_flying_vigilance
+c_0_0_a_construct_total_artifacts
+g_1_1_squirrel
+r_1_1_goblin
+g_2_2_bear
+r_1_1_elemental
+g_3_3_elephant

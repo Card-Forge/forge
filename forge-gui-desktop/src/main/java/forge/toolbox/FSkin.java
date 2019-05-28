@@ -52,6 +52,8 @@ import java.net.MalformedURLException;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import forge.util.Localizer;
+
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
@@ -1155,7 +1157,8 @@ public class FSkin {
             if (preferredName.isEmpty()) { loadLight("default", true); }
         }
 
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 8);
+        final Localizer localizer = Localizer.getInstance();
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 8);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;

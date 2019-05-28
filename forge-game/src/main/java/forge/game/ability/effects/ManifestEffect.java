@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Sets;
 
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
@@ -43,7 +42,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                     //check if lki would be a land entering the battlefield
                     if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLandBattlefield)) {
                         Card lki = CardUtil.getLKICopy(c);
-                        lki.setState(CardStateName.FaceDown, false);
+                        lki.turnFaceDownNoUpdate();
                         lki.setManifested(true);
                         lki.setLastKnownZone(p.getZone(ZoneType.Battlefield));
                         CardCollection preList = new CardCollection(lki);

@@ -211,9 +211,11 @@ public class DrawAi extends SpellAbilityAi {
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final boolean drawback = sa.getParent() != null;
         final Game game = ai.getGame();
         final String logic = sa.getParamOrDefault("AILogic", "");
+        final boolean considerPrimary = logic.equals("ConsiderPrimary");
+        final boolean drawback = (sa.getParent() != null) && !considerPrimary;
+        boolean assumeSafeX = false; // if true, the AI will assume that the X value has been set to a value that is safe to draw
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
@@ -241,7 +243,12 @@ public class DrawAi extends SpellAbilityAi {
                     numCards = Integer.parseInt(source.getSVar("PayX"));
                 } else {
                     numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    // try not to overdraw
+                    int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
+                    if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
+                    numCards = Math.min(numCards, safeDraw);
                     source.setSVar("PayX", Integer.toString(numCards));
+                    assumeSafeX = true;
                 }
                 xPaid = true;
             }
@@ -492,7 +499,8 @@ public class DrawAi extends SpellAbilityAi {
 
             if ((computerHandSize + numCards > computerMaxHandSize)
                     && game.getPhaseHandler().isPlayerTurn(ai)
-                    && !sa.isTrigger()) {
+                    && !sa.isTrigger()
+                    && !assumeSafeX) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
                 if (!drawback) {

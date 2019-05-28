@@ -178,9 +178,15 @@ public class CloneAi extends SpellAbilityAi {
         final boolean isOpp = cloneTarget.getController().isOpponentOf(sa.getActivatingPlayer());
 
         final boolean isVesuva = "Vesuva".equals(host.getName());
+        final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
-        final String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
+        String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
                 : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
+
+        // TODO: rewrite this block so that this is done somehow more elegantly
+        if (canCloneLegendary) {
+            filter = filter.replace(".nonLegendary+", ".").replace(".nonLegendary", "");
+        }
 
         CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
         if (!newOptions.isEmpty()) {
