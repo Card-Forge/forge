@@ -37,7 +37,6 @@ Type=Other
 52 R Force of Negation
 53 R Future Sight
 55 C Man-o'-War
-58 R \I have HAD IT with these Samuel L. Jackson quotes\
 63 C Pondering Mage
 64 C Prohibit
 67 C Scour All Possibilities
@@ -82,7 +81,6 @@ Type=Other
 141 C Pyrophobia
 143 U Ravenous Giant
 145 M Seasoned Pyromancer
-148 R \Spitemare Sliver\
 150 U Throes of Chaos
 155 R Ayula, Queen Among Bears
 156 R Ayula's Influence
@@ -129,7 +127,6 @@ Type=Other
 218 R Altar of Dementia
 220 C Arcum's Astrolabe
 222 U Farmstead Gleaner
-224 U \Yeti, But Make It Badass\
 225 U Lesser Masticore
 226 M Mox Tantalite
 227 R Scrapyard Recombiner
