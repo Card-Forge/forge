@@ -1,9 +1,5 @@
 package forge.game.mulligan;
 
-import java.util.ArrayList;
-import java.util.*;
-
-import forge.game.GameLogEntryType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;

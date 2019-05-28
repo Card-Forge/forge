@@ -1,7 +1,5 @@
 package forge.game.mulligan;
 
-import java.util.ArrayList;
-
 import forge.game.GameLogEntryType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -42,6 +40,7 @@ public abstract class AbstractMulligan {
         player.shuffle(null);
         timesMulliganed++;
         mulliganDraw();
+        player.onMulliganned();
     }
 
     public void keep() {
