@@ -299,6 +299,11 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
+        if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
+            final int CMC = Integer.parseInt(source.getSVar("PayX"));
+            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC)).isEmpty();
+        }
+
         return true;
     }
 
