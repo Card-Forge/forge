@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ai.ability.AnimateAi;
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -1121,11 +1122,11 @@ public class ComputerUtilMana {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
                 final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar)) {
-                    if (xSvar.equals("PayX") && card.hasSVar(xSvar)) {
+                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar)) {
+                    if (xSvar.equals("PayX") && (card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar))) {
                          // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
-                        String xValue = card.getSVar(xSvar);
-                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
+                        String xValue = card.hasSVar(xSvar) ? card.getSVar(xSvar) : card.getState(CardStateName.Original).getSVar(xSvar);
+                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(xValue) * cost.getXcounter(); // X
                     } else {
                         manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
                     }
