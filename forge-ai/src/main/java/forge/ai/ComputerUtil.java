@@ -1930,12 +1930,19 @@ public class ComputerUtil {
     }
 
 
-    public static int scoreHand(CardCollectionView handList, Player ai) {
+    public static int scoreHand(CardCollectionView handList, Player ai, int cardsToReturn) {
+        // TODO Improve hand scoring in relation to cards to return.
+        // If final hand size is 5, score a hand based on what that 5 would be.
+        // Or if this is really really fast, determine what the 5 would be based on scoring 
+        // All of the possibilities
+
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int currentHandSize = handList.size();
+        int finalHandSize = currentHandSize - cardsToReturn;
 
         // don't mulligan when already too low
-        if (handList.size() < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
-            return handList.size();
+        if (finalHandSize < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
+            return finalHandSize;
         }
 
         CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
@@ -1943,7 +1950,7 @@ public class ComputerUtil {
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
-            return handList.size();
+            return finalHandSize;
         }
 
         final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
@@ -2011,9 +2018,9 @@ public class ComputerUtil {
     }
 
     // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-    public static boolean wantMulligan(Player ai) {
+    public static boolean wantMulligan(Player ai, int cardsToReturn) {
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
-        return scoreHand(handList, ai) <= 0;
+        return scoreHand(handList, ai, cardsToReturn) <= 0;
     }
     
     public static CardCollection getPartialParisCandidates(Player ai) {
