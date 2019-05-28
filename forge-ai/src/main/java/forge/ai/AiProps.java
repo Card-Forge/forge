@@ -129,7 +129,10 @@ public enum AiProps { /** */
     FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
     FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("1"),
     FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("5"),
-    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"); /** */
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"),
+    BLINK_RELOAD_PLANESWALKER_CHANCE("30"), /** */
+    BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY("2"), /** */
+    BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF("2"); /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

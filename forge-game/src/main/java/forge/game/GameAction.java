@@ -184,8 +184,7 @@ public class GameAction {
             // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
             // up on the wrong card state etc.).
             if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
-                c.setState(CardStateName.Original, true);
-                c.runFaceupCommands();
+                c.turnFaceUp();
             }
 
             if (!c.isToken()) {
@@ -305,8 +304,8 @@ public class GameAction {
                 }
 
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                	copied.getOwner().removeInboundToken(copied);
-                	return moveToGraveyard(c, cause, params);
+                    copied.getOwner().removeInboundToken(copied);
+                    return moveToGraveyard(c, cause, params);
                 }
                 copied.getOwner().removeInboundToken(copied);
                 return c;
@@ -444,13 +443,9 @@ public class GameAction {
 
         // rule 504.6: reveal a face-down card leaving the stack 
         if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
-            // FIXME: tracker freeze-unfreeze is needed here to avoid a bug with the card staying face down in the View for the reveal
-            boolean trackerFrozen = game.getTracker().isFrozen();
-            game.getTracker().unfreeze();
-            c.setState(CardStateName.Original, true);
-            reveal(new CardCollection(c), c.getOwner(), true, "Face-down card moves from the stack: ");
-            c.setState(CardStateName.FaceDown, true);
-            if (trackerFrozen) { game.getTracker().freeze(); }
+            Card revealLKI = CardUtil.getLKICopy(c);
+            revealLKI.turnFaceUp(true, false);
+            reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card moves from the stack: ");
         }
 
         if (fromBattlefield) {
@@ -479,14 +474,12 @@ public class GameAction {
             }
             // Reveal if face-down
             if (wasFacedown) {
-                // FIXME: tracker freeze-unfreeze is needed here to avoid a bug with the card staying face down in the View for the reveal
-                boolean trackerFrozen = game.getTracker().isFrozen();
-                game.getTracker().unfreeze();
-            	c.setState(CardStateName.Original, true);
-            	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield: ");
-            	c.setState(CardStateName.FaceDown, true);
-            	if (trackerFrozen) { game.getTracker().freeze(); }
-            	copied.setState(CardStateName.Original, true);
+                Card revealLKI = CardUtil.getLKICopy(c);
+                revealLKI.turnFaceUp(true, false);
+
+                reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card leaves the battlefield: ");
+
+                copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
             // Remove all changed keywords
@@ -505,9 +498,9 @@ public class GameAction {
                 game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDoneOnce);
             }
         } else if (zoneTo.is(ZoneType.Graveyard)
-        		|| zoneTo.is(ZoneType.Hand)
-        		|| zoneTo.is(ZoneType.Library)
-        		|| zoneTo.is(ZoneType.Exile)) {
+                || zoneTo.is(ZoneType.Hand)
+                || zoneTo.is(ZoneType.Library)
+                || zoneTo.is(ZoneType.Exile)) {
             copied.setTimestamp(game.getNextTimestamp());
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
@@ -1237,14 +1230,14 @@ public class GameAction {
         }
 
         if (reason == null) {
-        	List<Player> notLost = Lists.newArrayList();
-        	Set<Integer> teams = Sets.newHashSet();
-        	for (Player p : allPlayers) {
+            List<Player> notLost = Lists.newArrayList();
+            Set<Integer> teams = Sets.newHashSet();
+            for (Player p : allPlayers) {
                 if (p.getOutcome() == null || p.getOutcome().hasWon()) {
-                	notLost.add(p);
-                	teams.add(p.getTeam());
+                    notLost.add(p);
+                    teams.add(p.getTeam());
                 }
-        	}
+            }
             int cntNotLost = notLost.size();
             if (cntNotLost == 1) {
                 reason = GameEndReason.AllOpponentsLost;

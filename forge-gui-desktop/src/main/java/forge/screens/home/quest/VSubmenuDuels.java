@@ -110,7 +110,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
 	 */
 	@Override
 	public String getMenuTitle() {
-		return "Duels";
+		return localizer.getMessage("lblDuels");
 	}
 
 	/* (non-Javadoc)

@@ -316,8 +316,20 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         } else {
             chosen = chosenAbility;
         }
+
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
-        chosen.getManaPartRecursive().setExpressChoice(colors);
+
+        // Filter the colors for the express choice so that only actually producible colors can be chosen
+        int producedColorMask = 0;
+        for (final byte color : ManaAtom.MANATYPES) {
+            if (chosen.getManaPartRecursive().getOrigProduced().contains(MagicColor.toShortString(color))
+                    && colors.hasAnyColor(color)) {
+                producedColorMask |= color;
+            }
+        }
+        ColorSet producedAndNeededColors = ColorSet.fromMask(producedColorMask);
+
+        chosen.getManaPartRecursive().setExpressChoice(producedAndNeededColors);
 
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
 
