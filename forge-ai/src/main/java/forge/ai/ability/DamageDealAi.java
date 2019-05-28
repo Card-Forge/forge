@@ -75,7 +75,7 @@ public class DamageDealAi extends DamageAiBase {
 
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                sa.setSVar("PayX", Integer.toString(dmg));
+                source.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
@@ -115,7 +115,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
-                sa.setSVar("PayX", Integer.toString(dmg));
+                source.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).contains("InYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
@@ -283,7 +283,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
                     actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
-                sa.setSVar("PayX", Integer.toString(actualPay));
+                source.setSVar("PayX", Integer.toString(actualPay));
             }
         }
 
@@ -941,7 +941,7 @@ public class DamageDealAi extends DamageAiBase {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(dmg));
+            source.setSVar("PayX", Integer.toString(dmg));
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -971,7 +971,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                sa.setSVar("PayX", Integer.toString(actualPay));
+                source.setSVar("PayX", Integer.toString(actualPay));
             }
         }
 
@@ -1031,7 +1031,7 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        sa.setSVar("PayX", Integer.toString(dmg));
+        source.setSVar("PayX", Integer.toString(dmg));
         return true;
     }
 
