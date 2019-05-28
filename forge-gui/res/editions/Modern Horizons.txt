@@ -18,6 +18,7 @@ Type=Other
 16 U King of the Pride
 19 C Martyr's Soul
 21 M Ranger-Captain of Eos
+25 C Segovian Angel
 26 M Serra the Benevolent
 29 R Sisay, Weatherlight Captain
 31 U Splicer's Skill
@@ -36,7 +37,9 @@ Type=Other
 63 C Pondering Mage
 64 C Prohibit
 67 C Scour All Possibilities
+68 U Scuttling Sliver
 71 C Stream of Thought
+72 C String of Disappearances
 75 M Urza, Lord High Artificer
 80 R Cabal Therapist
 82 C Changeling Outcast
@@ -47,25 +50,31 @@ Type=Other
 92 R Force of Despair
 95 C Headless Specter
 100 R Plague Engineer
+108 U Sling-Gang Lieutenant
 111 C Umezawa's Charm
 112 U Undead Augur
 114 C Venomous Changeling
+116 M Yawgmoth, Thran Physician
 118 R Aria of Flame
 122 U Firebolt
 123 C Fists of Flame
 124 R Force of Rage
 126 C Goatnap
+127 C Goblin Champion
 128 R Goblin Engineer
 129 U Goblin Matron
 131 C Goblin War Party
 132 U Hollowhead Sliver
 134 C Lava Dart
+136 C Orcish Hellraiser
+139 U Pillage
 140 R Planebound Accomplice
 141 C Pyrophobia
 143 U Ravenous Giant
 145 M Seasoned Pyromancer
 155 R Ayula, Queen Among Bears
 156 R Ayula's Influence
+158 R Collector Ouphe
 161 R Deep Forest Hermit
 162 C Elvish Fury
 164 R Force of Vigor
@@ -78,23 +87,28 @@ Type=Other
 178 C Savage Swipe
 179 U Scale Up
 180 C Spore Frog
+181 C Springbloom Druid
 182 U Squirrel Nest
 183 U Tempered Sliver
 189 M Unbound Flourishing
+191 C \OUCh—Oh it's quite nice actually\
 194 U Abominable Treefolk
 195 R Cloudshredder Sliver
 196 R Collected Conjuring
 198 U Etchings of the Chosen
+199 R Fallen Shinobi
 200 M The First Sliver
 201 U Good-Fortune Unicorn
 203 R Ice-Fang Coatl
 207 U Lavabelly Sliver
 208 R Lightning Skelemental
 209 U Munitions Expert
+210 C Nature's Chant
 215 U Thundering Djinn
 217 M Wrenn and Six
 218 R Altar of Dementia
 222 U Farmstead Gleaner
+225 U Lesser Masticore
 226 M Mox Tantalite
 227 R Scrapyard Recombiner
 228 M Sword of Sinew and Steel
