@@ -304,6 +304,17 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        return hand;
+    }
+
+    @Override
+    public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn) {
+        return true;
+    }
+
+    @Override
     public CardCollectionView getCardsToMulligan(Player firstPlayer) {
         return null;
     }
