@@ -1042,9 +1042,10 @@ public class AiController {
     }
 
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa, final CardCollectionView exclude) {
+        boolean noFiltering = "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.removeAll(exclude);
-        if ((uTypes != null) && (sa != null)) {
+        if ((uTypes != null) && (sa != null) && !noFiltering) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa);
         }
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
@@ -1064,6 +1065,14 @@ public class AiController {
                 min = 1;
             } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
                 return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
+            } else if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
+                final int CMC = Integer.parseInt(sourceCard.getSVar("PayX"));
+                CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC));
+                if (discards.isEmpty()) {
+                    return null;
+                } else {
+                    return new CardCollection(ComputerUtilCard.getWorstAI(discards));
+                }
             }
 
             if (sa.hasParam("AnyNumber")) {
