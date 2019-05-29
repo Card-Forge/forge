@@ -1042,7 +1042,7 @@ public class AiController {
     }
 
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa, final CardCollectionView exclude) {
-        boolean noFiltering = "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
+        boolean noFiltering = (sa != null) && "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.removeAll(exclude);
         if ((uTypes != null) && (sa != null) && !noFiltering) {
