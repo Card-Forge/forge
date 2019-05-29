@@ -184,7 +184,7 @@ public class GameAction {
             // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
             // up on the wrong card state etc.).
             if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
-                c.turnFaceUp();
+                c.turnFaceUp(false, false);
             }
 
             if (!c.isToken()) {
