@@ -107,7 +107,7 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
             return false;
         }
 
