@@ -1199,7 +1199,7 @@ public class AiAttackController {
                             // - our creature will die for sure (chump attack)
                             // - our attack will not do anything special (no attack/combat effect to proc)
                             // - we can't deal damage to our opponent with sheer number of attackers and/or our attacker's power is 0 or less
-                            if (attackerWillDie || (avoidAttackingIntoBlock && (uselessAttack || noContributionToAttack))) {
+                            if (attackerWillDie || (avoidAttackingIntoBlock && uselessAttack && noContributionToAttack)) {
                                 canKillAllDangerous = false;
                             }
                         }
@@ -1248,8 +1248,9 @@ public class AiAttackController {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = all out attacking");
             return true;
-        case 4: // expecting to at least trade with something
-            if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
+        case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
+            if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked
+                    || (defPower == 0 && !ComputerUtilCombat.lifeInDanger(ai, combat))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;

@@ -272,7 +272,7 @@ public class DamageDealAi extends DamageAiBase {
                 sourceName.equals("Crater's Claws")){
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
-                int actualPay = 0;
+                int actualPay = dmg;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 for (final Card c : sa.getTargets().getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -297,6 +297,11 @@ public class DamageDealAi extends DamageAiBase {
                     break;
                 }
             }
+        }
+
+        if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
+            final int CMC = Integer.parseInt(source.getSVar("PayX"));
+            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC)).isEmpty();
         }
 
         return true;
