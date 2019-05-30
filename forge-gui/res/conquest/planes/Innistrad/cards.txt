@@ -1,28 +1,48 @@
-Profane Memento
-Strionic Resonator
-Guardian Seraph
-Seraph of the Sword
-Soul of Innistrad
-Ajani's Pridemate
-Jeleva, Nephalia's Scourge
+Aegis Angel
+Archangel of Tithes
+Blessed Spirits
+Blightcaster
 Blood Bairn
 Blood Host
+Blood-Cursed Knight
 Call of the Full Moon
 Captivating Vampire
 Child of Night
-Jeleva, Nephalia's Scourge
-Vampire Nocturnus
+Consecrated by Blood
 Crusader of Odric
-Odric, Master Tactician
 Curse of Chaos
 Curse of Inertia
 Curse of Predation
 Curse of Shallow Graves
 Curse of the Forsaken
+Dark Petition
 Deathreap Ritual
-Predator's Howl
+Demonic Pact
+Edgar Markov
+Entreat the Dead
+Flameshadow Conjuring
+Flesh to Dust
 Geist of the Moors
+Guardian Seraph
+Hallowed Moonlight
+Infernal Scarring
+Jeleva, Nephalia's Scourge
+Liliana's Contract
+Necromantic Summons
+Nightmare
+Odric, Master Tactician
 Possessed Skaab
 Predator's Howl
-Flameshadow Conjuring
-Edgar Markov
+Priest of the Blood Rite
+Profane Memento
+Rabid Bloodsucker
+Reave Soul
+Seraph of the Sword
+Shadows of the Past
+Somberwald Alpha
+Soul of Innistrad
+Strionic Resonator
+Timberpack Wolf
+Undead Servant
+Unholy Hunger
+Vampire Nocturnus
