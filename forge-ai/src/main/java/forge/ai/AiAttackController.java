@@ -1249,7 +1249,8 @@ public class AiAttackController {
                 System.out.println(attacker.getName() + " = all out attacking");
             return true;
         case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
-            if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked || defPower == 0) {
+            if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked
+                    || (defPower == 0 && !ComputerUtilCombat.lifeInDanger(ai, combat))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;
