@@ -1,0 +1,6 @@
+Name:Icehide Golem
+ManaCost:S
+Types:Snow Artifact Creature Golem
+PT:2/2
+Colors:green
+Oracle:({S} can be paid with one mana from a snow permanent.)

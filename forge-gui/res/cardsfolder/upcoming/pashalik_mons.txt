@@ -1,0 +1,12 @@
+Name:Pashalik Mons
+ManaCost:2 R
+Types:Legendary Creature Goblin Warrior
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, CARDNAME deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, CARDNAME deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+AI:RemoveDeck:Random
+SVar:SacMe:1
+A:AB$ Token | Cost$ 3 R Sac<1/Goblin> | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin mh1 | SpellDescription$ Create two 1/1 red Goblin creature tokens.
+DeckHas:Ability$Token
+Oracle:Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.\n{3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens.
