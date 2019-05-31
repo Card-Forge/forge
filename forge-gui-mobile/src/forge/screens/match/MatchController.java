@@ -481,11 +481,11 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
         return new WaitCallback<List<PaperCard>>() {
             @Override
             public void run() {
-                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
+                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this, message);
                 sideboardDialog.show();
             }
         }.invokeAndWait();

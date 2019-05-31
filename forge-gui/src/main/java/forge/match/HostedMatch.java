@@ -79,6 +79,7 @@ public class HostedMatch {
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        gameRules.setSideboardForAI(FModel.getPreferences().getPrefBoolean(FPref.MATCH_SIDEBOARD_FOR_AI));
         gameRules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
         return gameRules;
     }

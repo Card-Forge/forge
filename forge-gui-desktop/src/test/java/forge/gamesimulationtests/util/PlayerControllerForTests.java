@@ -112,7 +112,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         return null; // refused to side
     }
 

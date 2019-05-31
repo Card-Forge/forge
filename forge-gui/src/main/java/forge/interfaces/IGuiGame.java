@@ -144,7 +144,7 @@ public interface IGuiGame {
      */
     <T> List<T> insertInList(String title, T newItem, List<T> oldItems);
 
-    List<PaperCard> sideboard(CardPool sideboard, CardPool main);
+    List<PaperCard> sideboard(CardPool sideboard, CardPool main, String message);
     GameEntityView chooseSingleEntityForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional);
     List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
 
