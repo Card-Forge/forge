@@ -45,8 +45,11 @@ Type=Other
 52 R Force of Negation
 53 R Future Sight
 55 C Man-o'-War
+56 R Marit Lage's Slumber
 57 R Mirrodin Besieged
 58 R Mist-Syndicate Naga
+59 C Moonblade Shinobi
+62 C Phantom Ninja
 63 C Pondering Mage
 64 C Prohibit
 66 U Rebuild
@@ -58,9 +61,11 @@ Type=Other
 73 U Tribute Mage
 74 U Twisted Reflection
 75 M Urza, Lord High Artificer
+76 U Watcher for Tomorrow
 80 R Cabal Therapist
 81 U Carrion Feeder
 82 C Changeling Outcast
+83 R Cordial Vampire
 84 U Crypt Rats
 85 R Dead of Winter
 86 C Defile
@@ -70,14 +75,19 @@ Type=Other
 90 U Feaster of Fools
 92 R Force of Despair
 95 C Headless Specter
+96 C Mind Rake
 98 R Nether Spirit
+99 C Ninja of the New Moon
 100 R Plague Engineer
 108 U Sling-Gang Lieutenant
+109 U Smiting Helix
+110 U Throatseeker
 111 C Umezawa's Charm
 112 U Undead Augur
 113 C Unearth
 114 C Venomous Changeling
 116 M Yawgmoth, Thran Physician
+117 U Alpine Guide
 118 R Aria of Flame
 119 C Bladeback Sliver
 122 U Firebolt
@@ -106,6 +116,7 @@ Type=Other
 148 R Spiteful Sliver
 149 R Tectonic Reformation
 150 U Throes of Chaos
+151 U Urza's Rage
 155 R Ayula, Queen Among Bears
 156 R Ayula's Influence
 158 R Collector Ouphe
@@ -113,6 +124,7 @@ Type=Other
 161 R Deep Forest Hermit
 162 C Elvish Fury
 164 R Force of Vigor
+165 C Frostwalla
 166 R Genesis
 167 U Glacial Revelation
 168 M Hexdrinker
@@ -128,7 +140,9 @@ Type=Other
 181 C Springbloom Druid
 182 U Squirrel Nest
 183 U Tempered Sliver
+184 C Thornado
 189 M Unbound Flourishing
+190 U Wall of Blossoms
 191 C Weather the Storm
 192 U Webweaver Changeling
 194 U Abominable Treefolk
@@ -148,8 +162,10 @@ Type=Other
 208 R Lightning Skelemental
 209 U Munitions Expert
 210 C Nature's Chant
-211 R Reap The Past
+211 R Reap the Past
+212 U Rotwidow Pack
 213 U Ruination Rioter
+214 U Soulherder
 215 U Thundering Djinn
 216 R Unsettled Mariner
 217 M Wrenn and Six
@@ -198,3 +214,6 @@ g_2_2_bear
 r_1_1_elemental
 g_3_3_elephant
 g_4_4_rhino_trample
+u_1_1_illusion_flying
+g_1_2_spider_reach
+wb_1_1_spirit_flying
