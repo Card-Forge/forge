@@ -209,11 +209,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<PaperCard> sideboard(final Deck deck, final GameType gameType) {
+    public List<PaperCard> sideboard(final Deck deck, final GameType gameType, String message) {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         if (sideboard == null) {
-            // Use an empty cardpool instead of null for 75/0 sideboarding
-            // scenario.
+            // Use an empty cardpool instead of null for 75/0 sideboarding scenario.
             sideboard = new CardPool();
         }
 
@@ -253,7 +252,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Sideboard rules have changed for M14, just need to consider min
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
-            Object resp = getGui().sideboard(sideboard, main);
+            Object resp = getGui().sideboard(sideboard, main, message);
             if (resp instanceof List<?> &&
                     !((List) resp).isEmpty() &&
                     ((List) resp).get(0) instanceof PaperCard) {

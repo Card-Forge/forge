@@ -1022,8 +1022,8 @@ public final class CMatchUI
     }
 
     @Override
-    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
-        return GuiChoose.sideboard(this, sideboard.toFlatList(), main.toFlatList());
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
+        return GuiChoose.sideboard(this, sideboard.toFlatList(), main.toFlatList(), message);
     }
 
     @Override

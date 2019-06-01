@@ -4,12 +4,14 @@ import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
 import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
@@ -208,18 +210,39 @@ public class Match {
         Multimap<Player, PaperCard> rAICards = HashMultimap.create();
         Multimap<Player, PaperCard> removedAnteCards = ArrayListMultimap.create();
 
-        boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
-        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
-
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
+
+        boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
+        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
+        // Only allow this if feature flag is on AND for certain match types
+        boolean sideboardForAIs = rules.getSideboardForAI() &&
+            rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
+        PlayerController sideboardProxy = null;
+        if (canSideBoard && sideboardForAIs) {
+            for (int i = 0; i < playersConditions.size(); i++) {
+                final Player player = players.get(i);
+                final RegisteredPlayer psc = playersConditions.get(i);
+                if (!player.getController().isAI()) {
+                    sideboardProxy = player.getController();
+                    break;
+                }
+            }
+        }
+
         for (int i = 0; i < playersConditions.size(); i++) {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
 
             if (canSideBoard) {
+                PlayerController person = player.getController();
+                if (sideboardProxy != null && person.isAI()) {
+                    person = sideboardProxy;
+                }
+
+                String forPlayer = " for " + player.getName();
                 Deck toChange = psc.getDeck();
-                List<PaperCard> newMain = player.getController().sideboard(toChange, rules.getGameType());
+                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), forPlayer);
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));

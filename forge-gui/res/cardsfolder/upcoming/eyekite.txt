@@ -1,0 +1,9 @@
+Name:Eyekite
+ManaCost:1 U
+Types:Creature Drake
+PT:1/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME gets +2/+0 as long as you've drawn two or more cards this turn.
+SVar:X:Count$YouDrewThisTurn
+AI:RemoveDeck:All
+Oracle:Flying\nEyekite gets +2/+0 as long as you've drawn two or more cards this turn.

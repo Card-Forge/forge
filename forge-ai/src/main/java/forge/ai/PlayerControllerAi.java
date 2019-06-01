@@ -91,7 +91,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         // AI does not know how to sideboard
         return null;
     }

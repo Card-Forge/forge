@@ -1,0 +1,5 @@
+Name:Volatile Claws
+ManaCost:2 R
+Types:Instant
+A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | Types$ AllCreatureTypes | SpellDescription$ Until end of turn, creatures you control get +2/+0 and gain all creature types.
+Oracle:Until end of turn, creatures you control get +2/+0 and gain all creature types.
