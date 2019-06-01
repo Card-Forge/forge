@@ -1,0 +1,6 @@
+Name:Ninja of the New Moon
+ManaCost:3 B B
+Types:Creature Spirit Ninja
+PT:6/3
+K:Ninjutsu:3 B
+Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
