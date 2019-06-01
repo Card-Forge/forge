@@ -1,0 +1,10 @@
+Name:Igneous Elemental
+ManaCost:4 R R
+Types:Creature Elemental
+PT:4/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Land.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE1 | Description$ CARDNAME costs {2} less to cast if there is a land card in your graveyard.
+AI:RemoveDeck:Random
+SVar:SacMe:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it deal 2 damage to target creature.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
+Oracle:This spell costs {2} less to cast if there is a land card in your graveyard.\nWhen Igneous Elemental enters the battlefield, you may have it deal 2 damage to target creature.
