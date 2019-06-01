@@ -1842,6 +1842,15 @@ public class ComputerUtilCard {
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 
+        if (sa != null && sa.isEvoke()) {
+            if (card.hasSVar("NeedsToPlayEvoked")) {
+                needsToPlayName = "NeedsToPlayEvoked";
+            }
+            if (card.hasSVar("NeedsToPlayEvokedVar")) {
+                needsToPlayVarName = "NeedsToPlayEvokedVar";
+            }
+        }
+
         if (card.hasSVar(needsToPlayName)) {
             final String needsToPlay = card.getSVar(needsToPlayName);
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
