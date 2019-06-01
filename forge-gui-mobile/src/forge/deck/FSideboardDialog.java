@@ -23,8 +23,8 @@ public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;
     private final Callback<List<PaperCard>> callback;
 
-    public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0) {
-        super("Update main deck from sideboard", 1);
+    public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0, String message) {
+        super("Update main deck from sideboard" + message, 1);
 
         callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));

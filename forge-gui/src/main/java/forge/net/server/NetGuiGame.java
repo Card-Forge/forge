@@ -234,8 +234,8 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
-        return sendAndWait(ProtocolMethod.sideboard, sideboard, main);
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
+        return sendAndWait(ProtocolMethod.sideboard, sideboard, main, message);
     }
 
     @Override
