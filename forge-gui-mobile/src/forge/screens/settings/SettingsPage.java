@@ -121,6 +121,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         "Performance Mode",
                         "Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_SIDEBOARD_FOR_AI,
+                        "Human Sideboard for AI",
+                        "Allows users to sideboard with the AIs deck and sideboard in constructed game formats."),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                         "Filtered Hands",
                         "Generates two starting hands and keeps the one with the closest to average land count for the deck. (Requires restart)"),

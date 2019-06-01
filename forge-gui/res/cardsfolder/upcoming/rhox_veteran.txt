@@ -1,0 +1,8 @@
+Name:Rhox Veteran
+ManaCost:3 W
+Types:Creature Rhino Soldier
+PT:2/4
+K:Battle cry
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever Rhox Veteran attacks, tap target creature an opponent controls.
