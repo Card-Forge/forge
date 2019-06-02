@@ -10,6 +10,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.Game;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 
 import java.util.*;
 
@@ -24,14 +25,16 @@ public class BlockEffect extends SpellAbilityEffect {
         List<Card> attackers = new ArrayList<Card>();
         if (sa.hasParam("DefinedAttacker")) {
             for (final Card attacker : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa)) {
-                if (combat.isAttacking(attacker)) attackers.add(attacker);
+                if (combat.isAttacking(attacker))
+                    attackers.add(attacker);
             }
         }
 
         List<Card> blockers = new ArrayList<Card>();
         if (sa.hasParam("DefinedBlocker")) {
             for (final Card blocker : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedBlocker"), sa)) {
-                if (blocker.isCreature()) blockers.add(blocker);
+                if (blocker.isCreature() && blocker.isInZone(ZoneType.Battlefield))
+                    blockers.add(blocker);
             }
         }
 
@@ -41,6 +44,8 @@ public class BlockEffect extends SpellAbilityEffect {
             final boolean wasBlocked = combat.isBlocked(attacker);
 
             for (final Card blocker : blockers) {
+                if (combat.isBlocking(blocker, attacker)) continue;
+
                 // If the attacker was blocked, this covers adding the blocker to the damage assignment
                 combat.addBlocker(attacker, blocker);
                 combat.orderAttackersForDamageAssignment(blocker);
