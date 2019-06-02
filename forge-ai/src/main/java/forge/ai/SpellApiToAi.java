@@ -35,6 +35,7 @@ public enum SpellApiToAi {
             .put(ApiType.Branch, AlwaysPlayAi.class)
             .put(ApiType.ChangeCombatants, CannotPlayAi.class)
             .put(ApiType.ChangeTargets, ChangeTargetsAi.class)
+            .put(ApiType.ChangeX, AlwaysPlayAi.class)
             .put(ApiType.ChangeZone, ChangeZoneAi.class)
             .put(ApiType.ChangeZoneAll, ChangeZoneAllAi.class)
             .put(ApiType.Charm, CharmAi.class)
