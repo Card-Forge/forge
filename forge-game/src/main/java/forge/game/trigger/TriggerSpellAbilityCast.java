@@ -199,6 +199,16 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+        if (hasParam("HasXManaCost")) {
+            final Cost cost = (Cost) (runParams2.get("Cost"));
+            if (cost.hasNoManaCost()) {
+                return false;
+            }
+            if (cost.getCostMana().getAmountOfX() <= 0) {
+                return false;
+            }
+        }
+
         if (hasParam("Conspire")) {
             if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
                 return false;

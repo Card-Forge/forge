@@ -32,6 +32,7 @@ public enum ApiType {
     ChangeCombatants (ChangeCombatantsEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),
+    ChangeX (ChangeXEffect.class),
     ChangeZone (ChangeZoneEffect.class),
     ChangeZoneAll (ChangeZoneAllEffect.class),
     Charm (CharmEffect.class),
