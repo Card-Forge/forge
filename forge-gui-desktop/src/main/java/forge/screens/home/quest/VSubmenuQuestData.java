@@ -44,7 +44,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblQuestData"));
 
     private final FLabel lblTitle = new FLabel.Builder()
-    .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
+    .text(localizer.getMessage("lblLoadQuestData")).fontAlign(SwingConstants.CENTER)
     .opaque(true).fontSize(16).build();
 
     private final FLabel lblTitleNew = new FLabel.Builder().text(localizer.getMessage("lblStartanewQuest")).opaque(true).fontSize(16).build();
