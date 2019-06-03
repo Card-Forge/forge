@@ -307,6 +307,7 @@ Rowan
 Saheeli
 Samut
 Sarkhan
+Serra
 Sorin
 Tamiyo
 Teferi
@@ -319,6 +320,7 @@ Vivien
 Vraska
 Will
 Windgrace
+Wrenn
 Xenagos
 Yanggu
 Yanling

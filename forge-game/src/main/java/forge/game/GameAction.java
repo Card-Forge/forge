@@ -439,6 +439,7 @@ public class GameAction {
             copied.clearDevoured();
             copied.clearDelved();
             copied.clearConvoked();
+            copied.clearExploited();
         }
 
         // rule 504.6: reveal a face-down card leaving the stack 
