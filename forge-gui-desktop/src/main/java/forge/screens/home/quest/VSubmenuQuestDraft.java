@@ -70,7 +70,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
 
     private final JPanel pnlStats = new JPanel();
     private final FLabel lblPastResults = new FLabel.Builder()
-    .text("Past Results:")
+    .text(localizer.getMessage("lblPastResults") +":")
     .fontSize(19).build();
     private final FLabel lblFirst = new FLabel.Builder()
     .fontSize(15).build();
