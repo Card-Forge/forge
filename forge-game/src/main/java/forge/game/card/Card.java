@@ -99,7 +99,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, delvedCards, convokedCards, imprintedCards, encodedCards;
+    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
@@ -816,7 +816,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return Card.storableSVars;
     }
 
-    public final CardCollectionView getDevoured() {
+    public final CardCollectionView getDevouredCards() {
         return CardCollection.getView(devouredCards);
     }
     public final void addDevoured(final Card c) {
@@ -828,6 +828,19 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void clearDevoured() {
         devouredCards = null;
+    }
+
+    public final CardCollectionView getExploited() {
+        return CardCollection.getView(exploitedCards);
+    }
+    public final void addExploited(final Card c) {
+        if (exploitedCards == null) {
+            exploitedCards = new CardCollection();
+        }
+        exploitedCards.add(c);
+    }
+    public final void clearExploited() {
+        exploitedCards = null;
     }
 
     public final CardCollectionView getDelved() {
@@ -5150,10 +5163,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void setFoil(final int f) {
         currentState.setSVar("Foil", Integer.toString(f));
-    }
-
-    public final CardCollectionView getDevouredCards() {
-        return CardCollection.getView(devouredCards);
     }
 
     public final CardCollectionView getHauntedBy() {
