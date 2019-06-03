@@ -2,7 +2,7 @@ Name:Ephemerate
 ManaCost:W
 Types:Instant
 K:Rebound
-A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under your control.
+A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under it's owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Exile target creature you control, then return that card to the battlefield under your control. \nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may case this card from exile without paying its mana cost.)
+Oracle:Exile target creature you control, then return that card to the battlefield under it's owner's control \nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may case this card from exile without paying its mana cost.)
