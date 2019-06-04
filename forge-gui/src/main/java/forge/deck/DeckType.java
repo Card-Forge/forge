@@ -1,32 +1,33 @@
 package forge.deck;
 
 import forge.model.FModel;
+import forge.util.Localizer;
 
 public enum DeckType {
-    CUSTOM_DECK ("Custom User Decks"),
-    CONSTRUCTED_DECK ("Constructed Decks"),
-    COMMANDER_DECK ("Commander Decks"),
-    RANDOM_COMMANDER_DECK ("Random Commander Decks"),
-    RANDOM_CARDGEN_COMMANDER_DECK ("Random Commander Card-based Decks"),
-    TINY_LEADERS_DECKS ("Tiny Leaders Decks"),
-    BRAWL_DECKS ("Brawl Decks"),
-    SCHEME_DECKS ("Scheme Decks"),
-    PLANAR_DECKS ("Planar Decks"),
-    DRAFT_DECKS ("Draft Decks"),
-    SEALED_DECKS ("Sealed Decks"),
-    PRECONSTRUCTED_DECK("Preconstructed Decks"),
-    QUEST_OPPONENT_DECK ("Quest Opponent Decks"),
-    COLOR_DECK ("Random Color Decks"),
-    STANDARD_CARDGEN_DECK ("Random Standard Archetype Decks"),
-    MODERN_CARDGEN_DECK ("Random Modern Archetype Decks"),
-    LEGACY_CARDGEN_DECK ("Random Legacy Archetype Decks"),
-    VINTAGE_CARDGEN_DECK ("Random Vintage Archetype Decks"),
-    STANDARD_COLOR_DECK ("Random Standard Color Decks"),
-    MODERN_COLOR_DECK ("Random Modern Color Decks"),
-    THEME_DECK ("Random Theme Decks"),
-    RANDOM_DECK ("Random Decks"),
-    NET_DECK ("Net Decks"),
-    NET_COMMANDER_DECK ("Net Commander Decks");
+    CUSTOM_DECK("lblCustomUserDecks"),
+    CONSTRUCTED_DECK("lblConstructedDecks"),
+    COMMANDER_DECK("lblCommanderDecks"),
+    RANDOM_COMMANDER_DECK("lblRandomCommanderDecks"),
+    RANDOM_CARDGEN_COMMANDER_DECK("lblRandomCommanderCard-basedDecks"),
+    TINY_LEADERS_DECKS("lblTinyLeadersDecks"),
+    BRAWL_DECKS("lblBrawlDecks"),
+    SCHEME_DECKS("lblSchemeDecks"),
+    PLANAR_DECKS("lblPlanarDecks"),
+    DRAFT_DECKS("lblDraftDecks"),
+    SEALED_DECKS("lblSealedDecks"),
+    PRECONSTRUCTED_DECK("lblPreconstructedDecks"),
+    QUEST_OPPONENT_DECK("lblQuestOpponentDecks"),
+    COLOR_DECK("lblRandomColorDecks"),
+    STANDARD_CARDGEN_DECK("lblRandomStandardArchetypeDecks"),
+    MODERN_CARDGEN_DECK("lblRandomModernArchetypeDecks"),
+    LEGACY_CARDGEN_DECK("lblRandomLegacyArchetypeDecks"),
+    VINTAGE_CARDGEN_DECK("lblRandomVintageArchetypeDecks"),
+    STANDARD_COLOR_DECK("lblRandomStandardColorDecks"),
+    MODERN_COLOR_DECK("lblRandomModernColorDecks"),
+    THEME_DECK("lblRandomThemeDecks"),
+    RANDOM_DECK("lblRandomDecks"),
+    NET_DECK("lblNetDecks"),
+    NET_COMMANDER_DECK("lblNetCommanderDecks");
 
     public static DeckType[] ConstructedOptions;
     public static DeckType[] CommanderOptions;
@@ -84,7 +85,8 @@ public enum DeckType {
 
     private String value;
     private DeckType(final String value) {
-        this.value = value;
+        final Localizer localizer = Localizer.getInstance();
+        this.value = localizer.getMessage(value);
     }
 
     @Override
