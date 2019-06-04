@@ -1112,6 +1112,25 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
 
+        if (sq[0].contains("CreatureType")) {
+            String[] sqparts = sq[0].split(" ", 2);
+            final String[] rest = sqparts[1].split(",");
+
+            final CardCollectionView cardsInZones = sqparts[0].length() > 12
+                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
+                : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
+            final Set<String> creatTypes = Sets.newHashSet();
+
+            for (Card card : cards) {
+                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
+            }
+            int n = creatTypes.contains("AllCreatureTypes") ? CardType.getAllCreatureTypes().size() : creatTypes.size();
+            return doXMath(n, m, c);
+        }
+
+
         if (sq[0].contains("Hellbent")) {
             return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
         }
