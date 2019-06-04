@@ -1058,6 +1058,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         return c.getNetPower() <= parentTarget.getNetPower();
                     case "LECMC" :
                         return c.getCMC() <= parentTarget.getCMC();
+                    case "SharedCreatureType" :
+                        return c.sharesCreatureTypeWith(parentTarget);
                 }
             }
 
