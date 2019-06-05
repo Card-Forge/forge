@@ -501,6 +501,49 @@ public class SpecialCardAi {
         }
     }
 
+    // Gideon Blackblade
+    public static class GideonBlackblade {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollectionView otb = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
+            if (!otb.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestAI(otb));
+            }
+            return true;
+        }
+
+        public static SpellAbility chooseSpellAbility(final Player ai, final SpellAbility sa, final List<SpellAbility> spells) {
+            // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
+            List<SpellAbility> best = Lists.newArrayList();
+            List<SpellAbility> possible = Lists.newArrayList();
+            Card tgtCard = sa.getTargetCard();
+            if (tgtCard != null) {
+                for (SpellAbility sp : spells) {
+                    if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(ai, sp)) {
+                        best.add(sp); // these SAs are prioritized since the AI sees a reason to play them now
+                    }
+                    final List<String> keywords = sp.hasParam("KW") ? Arrays.asList(sp.getParam("KW").split(" & "))
+                            : Lists.<String>newArrayList();
+                    for (String kw : keywords) {
+                        if (!tgtCard.hasKeyword(kw)) {
+                            if ("Indestructible".equals(kw) && ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                                continue; // nothing to damage or kill the creature with
+                            }
+                            possible.add(sp); // these SAs at least don't duplicate a keyword on the card
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!best.isEmpty()) {
+                return Aggregates.random(best);
+            } else if (!possible.isEmpty()) {
+                return Aggregates.random(possible);
+            } else {
+                return Aggregates.random(spells); // if worst comes to worst, it's a PW +1 ability, so do at least something
+            }
+        }
+    }
+
     // Guilty Conscience
     public static class GuiltyConscience {
         public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
