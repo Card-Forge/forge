@@ -804,7 +804,7 @@ public class PumpAi extends PumpAiBase {
         return true;
     }
 
-    public boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
+    public static boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -875,7 +875,7 @@ public class PumpAi extends PumpAiBase {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
-                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / powerBonus;
+                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / (powerBonus != 0 ? powerBonus : 1);
 
                 if (defTappedOut || numCreatsToSac < numOtherCreats / 2) {
                     return source.getNetCombatDamage() < lethalDmg
@@ -923,7 +923,7 @@ public class PumpAi extends PumpAiBase {
         }
     }
 
-    public boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
+    public static boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: put X +1/+1 counters on CARDNAME" (e.g. Falkenrath Aristocrat)
         final Card source = sa.getHostCard();
         final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
@@ -944,9 +944,19 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Check if anything is to be gained from the PutCounter subability
+        SpellAbility countersSa = null;
         if (sa.getSubAbility() == null || sa.getSubAbility().getApi() != ApiType.PutCounter) {
+            if (sa.getApi() == ApiType.PutCounter) {
+                // called directly from CountersPutAi
+                countersSa = sa;
+            }
+        } else {
+            countersSa = sa.getSubAbility();
+        }
+
+        if (countersSa == null) {
             // Shouldn't get here if there is no PutCounter subability (wrong AI logic specified?)
-            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter subability!");
+            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter SA in chain!");
             return false;
         }
 
@@ -966,7 +976,7 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        int numCtrs = AbilityUtils.calculateAmount(source, sa.getSubAbility().getParam("CounterNum"), sa.getSubAbility());
+        int numCtrs = AbilityUtils.calculateAmount(source, countersSa.getParam("CounterNum"), countersSa);
 
         if (combat != null && combat.isAttacking(source) && isDeclareBlockers) {
             if (combat.getBlockers(source).isEmpty()) {
