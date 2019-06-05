@@ -5310,6 +5310,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!source.isColorless() && !colorlessDamage) {
                     return true;
                 }
+            } else if (kw.equals("Protection from colorless")) {
+                if (source.isColorless() || colorlessDamage) {
+                    return true;
+                }
             } else if (kw.equals("Protection from creatures")) {
                 if (source.isCreature()) {
                     return true;
