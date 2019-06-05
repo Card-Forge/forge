@@ -79,7 +79,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-        return mandatory || canPlayAI(ai, sa);
+        return canPlayAI(ai, sa) || mandatory;
     }
 
     /* (non-Javadoc)
