@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -8,21 +9,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.ai.ComputerUtilAbility;
+import forge.ai.*;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -50,6 +42,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                     return true;
                 }
             }
+        } else if ("GideonBlackblade".equals(aiLogic)) {
+            return SpecialCardAi.GideonBlackblade.consider(ai, sa);
         }
         return false;
     }
@@ -95,7 +89,9 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             return spells.get(0);
         } else if ("Random".equals(logic)) {
             return Aggregates.random(spells);
-        } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive 
+        } else if ("GideonBlackblade".equals(logic)) {
+            return SpecialCardAi.GideonBlackblade.chooseSpellAbility(player, sa, spells);
+        } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive
             List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, new Predicate<SpellAbility>() {
                 @Override
                 public boolean apply(final SpellAbility sp) {
