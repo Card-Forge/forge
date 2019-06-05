@@ -27,6 +27,7 @@ public enum ApiType {
     BecomeMonarch (BecomeMonarchEffect.class),
     BecomesBlocked (BecomesBlockedEffect.class),
     BidLife (BidLifeEffect.class),
+    Block (BlockEffect.class),
     Bond (BondEffect.class),
     Branch (BranchEffect.class),
     ChangeCombatants (ChangeCombatantsEffect.class),
