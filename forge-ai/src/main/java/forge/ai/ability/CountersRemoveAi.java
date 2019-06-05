@@ -201,14 +201,20 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 }
 
                 // do as P1P1 part
-                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.P1P1));
-                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, Keyword.UNDYING);
+                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasLessCounter(CounterType.P1P1, amount));
+                CardCollection aiUndyingList = CardLists.getKeyword(aiP1P1List, Keyword.UNDYING);
 
                 if (!aiUndyingList.isEmpty()) {
-                    aiP1P1List = aiUndyingList;
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiUndyingList));
+                    return true;
                 }
-                if (!aiP1P1List.isEmpty()) {
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiP1P1List));
+
+                // remove P1P1 counters from opposing creatures
+                CardCollection oppP1P1List = CardLists.filter(list,
+                        Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                        CardPredicates.hasCounter(CounterType.P1P1));
+                if (!oppP1P1List.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(oppP1P1List));
                     return true;
                 }
 
@@ -363,6 +369,11 @@ public class CountersRemoveAi extends SpellAbilityAi {
             if (targetCard.getController().isOpponentOf(player)) {
                 return !ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
             } else {
+                if (targetCard.hasKeyword(Keyword.UNDYING) && type == CounterType.P1P1
+                        && targetCard.getCounters(CounterType.P1P1) >= max) {
+                    return max;
+                }
+
                 return ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
             }
         } else if (target instanceof Player) {
