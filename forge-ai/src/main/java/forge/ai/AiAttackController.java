@@ -217,9 +217,22 @@ public class AiAttackController {
         }
 
         final Player opp = this.defendingOpponent;
-        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true) > 0) {
-            return true;
+
+        // Damage opponent if unblocked
+        final int dmgIfUnblocked = ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true);
+        if (dmgIfUnblocked > 0) {
+            boolean onlyIfExalted = false;
+            if (combat.getAttackers().isEmpty() && ai.countExaltedBonus() > 0
+                    && dmgIfUnblocked - ai.countExaltedBonus() == 0) {
+                // Make sure we're not counting on the Exalted bonus when the AI is planning to attack with more than one creature
+                onlyIfExalted = true;
+            }
+
+            if (!onlyIfExalted || this.attackers.size() == 1 || this.aiAggression == 6 /* 6 is Exalted attack */) {
+                return true;
+            }
         }
+        // Poison opponent if unblocked
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
@@ -234,7 +247,7 @@ public class AiAttackController {
         final CardCollectionView controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
-                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
+                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)) {
                     return true;
                 }
             }
