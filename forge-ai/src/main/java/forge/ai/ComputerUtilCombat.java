@@ -769,6 +769,10 @@ public class ComputerUtilCombat {
      */
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat) {
+        return combatTriggerWillTrigger(attacker, defender, trigger, combat, null);
+    }
+    public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
+            Combat combat, final List<Card> plannedAttackers) {
         final Game game = attacker.getGame();
         final Map<String, String> trigParams = trigger.getMapParams();
         boolean willTrigger = false;
@@ -814,6 +818,9 @@ public class ComputerUtilCombat {
             			}
             		}
             	}
+            }
+            if (trigParams.containsKey("Alone") && plannedAttackers != null && plannedAttackers.size() != 1) {
+                return false; // won't trigger since the AI is planning to attack with more than one creature
             }
         }
 
