@@ -3,8 +3,5 @@ ManaCost:1 B
 Types:Sorcery
 A:SP$ Charm | Cost$ 1 B | Choices$ DBChangeZone1,DBChangeZone2
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
-SVar:DBChangeZone2:DB$ Pump | RememberObjects$ Targeted | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select two target creature cards that share a creature type in your graveyard | SubAbility$ DBPump | SpellDescription$ Return two target creature cards that share a creature type from your graveyard to your hand.
-SVar:DBPump:DB$ Pump | RememberObjects$ Targeted | TargetsWithRelatedProperty$ SharedCreatureType | TargetUnique$ True | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select two target creature cards that share a creature type in your graveyard | SubAbility$ DBChangeZoneAll
-SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TargetsWithSameCreatureType$ True | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select two target creature cards that share a creature type in your graveyard | SpellDescription$ Return two target creature cards that share a creature type from your graveyard to your hand.
 Oracle:Choose one -\n• Return target creature card from your graveyard to your hand.\n• Return two target creature cards that share a creature type from your graveyard to your hand.

@@ -17,14 +17,8 @@
  */
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -40,6 +34,11 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -182,6 +181,12 @@ public class TargetSelection {
         for (final Card inZone : choices) {
             Zone zz = game.getZoneOf(inZone);
             CardView cardView = CardView.get(inZone);
+            if (this.ability.getTargetRestrictions() != null && this.ability.getTargetRestrictions().isWithSameCreatureType()) {
+                Card firstTgt = this.ability.getTargetCard();
+                if (firstTgt != null && !firstTgt.sharesCreatureTypeWith(inZone)) {
+                    continue;
+                }
+            }
             if (zz.is(ZoneType.Battlefield))    crdsBattle.add(cardView);
             else if (zz.is(ZoneType.Exile))     crdsExile.add(cardView);
             else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(cardView);

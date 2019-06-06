@@ -64,6 +64,7 @@ public class TargetRestrictions {
     private boolean differentControllers = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
+    private boolean withSameCreatureType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
 
@@ -106,6 +107,7 @@ public class TargetRestrictions {
         this.differentControllers = target.isDifferentControllers();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
+        this.withSameCreatureType = target.isWithSameCreatureType();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
     }
@@ -626,6 +628,20 @@ public class TargetRestrictions {
      */
     public void setWithoutSameCreatureType(boolean b) {
         this.withoutSameCreatureType = b;
+    }
+
+    /**
+     * @return the withoutSameCreatureType
+     */
+    public boolean isWithSameCreatureType() {
+        return withSameCreatureType;
+    }
+
+    /**
+     * @param b the withoutSameCreatureType to set
+     */
+    public void setWithSameCreatureType(boolean b) {
+        this.withSameCreatureType = b;
     }
 
     /**
