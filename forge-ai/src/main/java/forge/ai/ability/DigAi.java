@@ -66,7 +66,8 @@ public class DigAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("DigNum");
-        if (num != null && num.equals("X") && host.getSVar(num).equals("Count$xPaid")) {
+        final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
+        if (num != null && (num.equals("X") && host.getSVar(num).equals("Count$xPaid")) || payXLogic) {
             // By default, set PayX here to maximum value.
             if (!(sa instanceof AbilitySub) || host.getSVar("PayX").equals("")) {
                 int manaToSave = 0;
