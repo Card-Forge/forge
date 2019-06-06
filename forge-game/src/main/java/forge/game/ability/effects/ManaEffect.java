@@ -88,7 +88,8 @@ public class ManaEffect extends SpellAbilityEffect {
                         // just use the first possible color.
                         choice = colorsProduced[differentChoice ? nMana : 0];
                     } else {
-                        byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
+                        byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa,
+                                differentChoice ? fullOptions : colorOptions);
                         if (chosenColor == 0)
                             throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
                         
