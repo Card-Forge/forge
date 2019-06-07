@@ -10,6 +10,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -109,11 +110,11 @@ public class AnimateAi extends SpellAbilityAi {
         if (ph.is(PhaseType.MAIN2) && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
             return false;
         }
-        // Don't animate if the AI won't attack anyway
+        // Don't animate if the AI won't attack anyway or use as a potential blocker
         Player opponent = ai.getWeakestOpponent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
-                && !sa.hasParam("AILogic") && !sa.hasParam("Permanent")) {
+                && !sa.hasParam("AILogic") && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
             return false;
         }
         return true;
@@ -245,6 +246,10 @@ public class AnimateAi extends SpellAbilityAi {
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final boolean alwaysActivatePWAbility = sa.hasParam("Planeswalker")
+                && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
+                && sa.getTargetRestrictions() != null
+                && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
         
         final CardType types = new CardType();
         if (sa.hasParam("Types")) {
@@ -264,7 +269,7 @@ public class AnimateAi extends SpellAbilityAi {
             list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
 
             // list is empty, no possible targets
-            if (list.isEmpty()) {
+            if (list.isEmpty() && !alwaysActivatePWAbility) {
                 return false;
             }
 
@@ -317,7 +322,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
 
             // data is empty, no good targets
-            if (data.isEmpty()) {
+            if (data.isEmpty() && !alwaysActivatePWAbility) {
                 return false;
             }
 
@@ -366,10 +371,16 @@ public class AnimateAi extends SpellAbilityAi {
         Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
+            if (power == 0 && "PTByCMC".equals(sa.getParam("AILogic"))) {
+                power = card.getManaCost().getCMC();
+            }
         }
         Integer toughness = null;
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
+            if (toughness == 0 && "PTByCMC".equals(sa.getParam("AILogic"))) {
+                toughness = card.getManaCost().getCMC();
+            }
         }
 
         final CardType types = new CardType();
