@@ -1,6 +1,6 @@
-Name:Reflection
+Name:Giant Warrior
 ManaCost:no cost
-PT:2/2
+PT:5/5
 Colors:white
-Types:Creature Reflection
+Types:Creature Giant Warrior
 Oracle:
