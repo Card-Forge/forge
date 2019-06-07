@@ -71,6 +71,29 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if (aiLogic.equals("NoSameCreatureType")) {
+            final List<ZoneType> origin = Lists.newArrayList();
+            if (sa.hasParam("Origin")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+            } else if (sa.hasParam("TgtZone")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+            }
+            CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin),
+                    sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
+
+            final List<String> creatureTypes = Lists.newArrayList();
+            for (Card c : list) {
+                creatureTypes.addAll(c.getType().getCreatureTypes());
+            }
+
+            for (String type : creatureTypes) {
+                int freq = Collections.frequency(creatureTypes, type);
+                if (freq > 1) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -1189,6 +1212,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if max CMC exceeded, do not choose this card (but keep looking for other options)
             if (sa.hasParam("MaxTotalTargetCMC")) {
                 if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
+            // honor the Same Creature Type restriction
+            if (sa.hasParam("TargetsWithSameCreatureType")) {
+                Card firstTarget = sa.getTargetCard();
+                if (firstTarget != null && !choice.sharesCreatureTypeWith(firstTarget)) {
                     list.remove(choice);
                     continue;
                 }
