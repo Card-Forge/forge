@@ -11,6 +11,7 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -26,14 +27,15 @@ import java.awt.*;
 public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Gauntlet Builder");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblGauntletBuilder"));
 
     // Other fields
     private final FLabel lblTitle     = new FLabel.Builder()
-        .text("Gauntlet Builder").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("lblGauntletBuilder")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
     private final JPanel pnlFileHandling = new JPanel(new MigLayout("insets 0, gap 0, align center"));
@@ -49,42 +51,42 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
 
     private final FTextField txfFilename = new FTextField.Builder().ghostText(GauntletIO.TXF_PROMPT).showGhostTextWithFocus().build();
 
-    private final FLabel lblDesc1 = new FLabel.Builder().text("Left/right arrows add or remove decks.").fontSize(12).build();
+    private final FLabel lblDesc1 = new FLabel.Builder().text(localizer.getMessage("lblGauntletDesc1")).fontSize(12).build();
 
     private final FLabel lblDesc2 = new FLabel.Builder()
-        .text("Up/down arrows change opponent order.")
+        .text(localizer.getMessage("lblGauntletDesc2"))
         .fontSize(12).build();
 
     private final FLabel lblDecklist = new FLabel.Builder()
-        .text("Double click a non-random deck for its decklist.")
+        .text(localizer.getMessage("lblDecklist"))
         .fontSize(12).build();
 
-    private final JLabel lblSave = new FLabel.Builder().text("Changes not yet saved.")
+    private final JLabel lblSave = new FLabel.Builder().text(localizer.getMessage("lblSave"))
             .build();
 
     private final FLabel btnUp = new FLabel.Builder()
-        .tooltip("Move this deck up in the gauntlet").hoverable(true)
+        .tooltip(localizer.getMessage("btnUp")).hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
         .icon(FSkin.getImage(FSkinProp.IMG_CUR_T)).build();
 
     private final FLabel btnDown = new FLabel.Builder()
-        .tooltip("Move this deck down in the gauntlet").hoverable(true)
+        .tooltip(localizer.getMessage("btnDown")).hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
         .icon(FSkin.getImage(FSkinProp.IMG_CUR_B)).build();
 
     private final FLabel btnRight = new FLabel.Builder()
-        .tooltip("Add this deck to the gauntlet").hoverable(true)
+        .tooltip(localizer.getMessage("btnRight")).hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
         .icon(FSkin.getImage(FSkinProp.IMG_CUR_R)).build();
 
     private final FLabel btnLeft = new FLabel.Builder()
-        .tooltip("Remove this deck from the gauntlet").hoverable(true)
+        .tooltip(localizer.getMessage("btnLeft")).hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
         .icon(FSkin.getImage(FSkinProp.IMG_CUR_L)).build();
 
     private final FLabel btnSave = new FLabel.Builder()
         .fontSize(14)
-        .tooltip("Save this gauntlet")
+        .tooltip(localizer.getMessage("btnSaveGauntlet"))
         .iconInBackground(true)
         .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkinProp.ICO_SAVE))
@@ -92,7 +94,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
 
     private final FLabel btnNew = new FLabel.Builder()
         .fontSize(14)
-        .tooltip("Build a new gauntlet")
+        .tooltip(localizer.getMessage("btnNewGauntlet"))
         .iconInBackground(true)
         .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkinProp.ICO_NEW))
@@ -100,7 +102,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
 
     private final FLabel btnOpen = new FLabel.Builder()
         .fontSize(14)
-        .tooltip("Load a gauntlet")
+        .tooltip(localizer.getMessage("btnLoadaGauntlet"))
         .iconInBackground(true)
         .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkinProp.ICO_OPEN))
@@ -111,7 +113,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
 
         // File handling panel
         final FLabel lblFilename = new FLabel.Builder()
-            .text("Gauntlet Name:").fontSize(14).build();
+            .text( localizer.getMessage("lblGauntletName")+ ":").fontSize(14).build();
         pnlFileHandling.setOpaque(false);
         pnlFileHandling.add(lblFilename, "h 30px!, gap 0 5px 0");
         pnlFileHandling.add(txfFilename, "h 30px!, w 200px!, gap 0 5px 0 0");
@@ -163,7 +165,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
      */
     @Override
     public String getMenuTitle() {
-        return "Build A Gauntlet";
+        return localizer.getMessage("lblBuildAGauntlet");
     }
 
     /* (non-Javadoc)

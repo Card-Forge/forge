@@ -13,6 +13,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -28,14 +29,14 @@ import java.awt.*;
 public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContests> {
     /** */
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Gauntlet Contests");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblGauntletContests"));
 
     // Other fields
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Gauntlet Contests").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("lblGauntletContests")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
     private final StartButton btnStart  = new StartButton();
@@ -49,10 +50,10 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblLoad = new FLabel.Builder().fontSize(16)
-            .fontStyle(Font.BOLD).text("PICK A CONTEST").fontAlign(SwingConstants.CENTER).build();
+            .fontStyle(Font.BOLD).text(localizer.getMessage("lblPickaContest")).fontAlign(SwingConstants.CENTER).build();
 
     private final FLabel lblDesc1 = new FLabel.Builder()
-        .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
+        .text(localizer.getMessage("lblGauntletStartedDesc")).build();
 
     VSubmenuGauntletContests() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -78,7 +79,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
      */
     @Override
     public String getMenuTitle() {
-        return "Gauntlet Contests";
+        return localizer.getMessage("lblGauntletContests");
     }
 
     /* (non-Javadoc)
