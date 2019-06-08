@@ -9,4 +9,5 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Other | TgtPrompt$ Select a
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | RememberObjects$ Remembered | TriggerDescription$ Return exiled permanent to the battlefield. | SubAbility$ DBCleanup
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Snow
 Oracle:Flash\nFlying\nWhen Blizzard Strix enters the battlefield, if you control another snow permanent, exile target permanent other than Blizzard Strix. Return that card to the battlefield under its owner's control at the beginning of the next end step.

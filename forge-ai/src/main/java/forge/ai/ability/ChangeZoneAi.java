@@ -18,6 +18,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -1109,7 +1110,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         	}
         }
 
-        if (list.isEmpty()) {
+        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getTargetRestrictions() != null
+                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0 && sa.getPayCosts() != null
+                && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
+
+        if (list.isEmpty() && !doWithoutTarget) {
             return false;
         }
 
@@ -1191,7 +1196,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
-                    return false;
+                    if (!doWithoutTarget) {
+                        return false;
+                    } else {
+                        break;
+                    }
                 } else {
                     if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         boolean aiTgtsOK = false;
