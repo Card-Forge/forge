@@ -3,16 +3,14 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.List;
@@ -192,13 +190,36 @@ public class FightAi extends SpellAbilityAi {
                     toughness += bonus;
                 }
                 if ("PowerDmg".equals(sa.getParam("AILogic"))) {
-                    if (FightAi.canKill(aiCreature, humanCreature, power)) {
-                        sa.getTargets().add(aiCreature);
-                        if (!isChandrasIgnition) {
-                            tgtFight.resetTargets();
-                            tgtFight.getTargets().add(humanCreature);
+                    if ("2".equals(sa.getParam("TargetMax"))) {
+                        // Band Together, uses up to two targets to deal damage to a single target
+                        // TODO: Generalize this so that other TargetMax values can be properly accounted for
+                        CardCollection aiCreaturesByPower = new CardCollection(aiCreatures);
+                        CardLists.sortByPowerDesc(aiCreaturesByPower);
+                        Card maxPower = aiCreaturesByPower.getFirst();
+                        if (maxPower != null && maxPower != aiCreature) {
+                            power += maxPower.getNetPower(); // potential bonus from adding a second target
                         }
-                        return true;
+                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                            sa.getTargets().add(aiCreature);
+                            if (maxPower != null) {
+                                sa.getTargets().add(maxPower);
+                            }
+                            if (!isChandrasIgnition) {
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                            }
+                            return true;
+                        }
+                    } else {
+                        // Other cards that use AILogic PowerDmg and a single target
+                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                            sa.getTargets().add(aiCreature);
+                            if (!isChandrasIgnition) {
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                            }
+                            return true;
+                        }
                     }
                 } else {
                     if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
