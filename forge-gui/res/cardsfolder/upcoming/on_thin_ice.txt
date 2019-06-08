@@ -11,4 +11,5 @@ SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | C
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl
+DeckHints:Type$Snow
 Oracle:Enchant snow land you control\nWhen On Thin Ice enters the battlefield, exile target creature an opponent controls until On Thin Ice leaves the battlefield.
