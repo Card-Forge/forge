@@ -30,3 +30,4 @@ Players Championship 2012 | https://downloads.cardforge.org/decks/magicplayersch
 Brewing on a Budget | https://downloads.cardforge.org/decks/brewingonabudget.zip
 Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zip
 Genetic Algorithm AI Decks | https://downloads.cardforge.org/decks/geneticalgorithmdecks.zip
+Current Metagame | https://downloads.cardforge.org/decks/currentmetagame.zip
