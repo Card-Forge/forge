@@ -1110,7 +1110,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         	}
         }
 
-        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getPayCosts() != null
+        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getTargetRestrictions() != null
+                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0 && sa.getPayCosts() != null
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
 
         if (list.isEmpty() && !doWithoutTarget) {
