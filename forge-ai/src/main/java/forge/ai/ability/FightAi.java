@@ -3,14 +3,16 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class FightAi extends SpellAbilityAi {
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         sa.resetTargets();
         final Card source = sa.getHostCard();
-        
+
         // everything is defined or targeted above, can't do anything there?
         if (sa.hasParam("Defined") && !sa.usesTargeting()) {
             // TODO extend Logic for cards like Arena or Grothama
@@ -117,7 +119,7 @@ public class FightAi extends SpellAbilityAi {
         if (!mandatory) {
             return false;
         }
-        
+
         //try to make a good trade or no trade
         final Card source = sa.getHostCard();
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
@@ -246,7 +248,7 @@ public class FightAi extends SpellAbilityAi {
 		for (Trigger t : aiCreature.getTriggers()) {
 		    if (t.getMode() == TriggerType.SpellCast) {
 		        final Map<String, String> params = t.getMapParams();
-		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
+		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))
 		                && params.containsKey("Execute")) {
 		            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
 		            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
