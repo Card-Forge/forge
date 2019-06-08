@@ -32,7 +32,7 @@ public class FightAi extends SpellAbilityAi {
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         sa.resetTargets();
         final Card source = sa.getHostCard();
-        
+
         // everything is defined or targeted above, can't do anything there?
         if (sa.hasParam("Defined") && !sa.usesTargeting()) {
             // TODO extend Logic for cards like Arena or Grothama
@@ -119,7 +119,7 @@ public class FightAi extends SpellAbilityAi {
         if (!mandatory) {
             return false;
         }
-        
+
         //try to make a good trade or no trade
         final Card source = sa.getHostCard();
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
@@ -192,13 +192,36 @@ public class FightAi extends SpellAbilityAi {
                     toughness += bonus;
                 }
                 if ("PowerDmg".equals(sa.getParam("AILogic"))) {
-                    if (FightAi.canKill(aiCreature, humanCreature, power)) {
-                        sa.getTargets().add(aiCreature);
-                        if (!isChandrasIgnition) {
-                            tgtFight.resetTargets();
-                            tgtFight.getTargets().add(humanCreature);
+                    if ("2".equals(sa.getParam("TargetMax"))) {
+                        // Band Together, uses up to two targets to deal damage to a single target
+                        // TODO: Generalize this so that other TargetMax values can be properly accounted for
+                        CardCollection aiCreaturesByPower = new CardCollection(aiCreatures);
+                        CardLists.sortByPowerDesc(aiCreaturesByPower);
+                        Card maxPower = aiCreaturesByPower.getFirst();
+                        if (maxPower != null && maxPower != aiCreature) {
+                            power += maxPower.getNetPower(); // potential bonus from adding a second target
                         }
-                        return true;
+                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                            sa.getTargets().add(aiCreature);
+                            if (maxPower != null) {
+                                sa.getTargets().add(maxPower);
+                            }
+                            if (!isChandrasIgnition) {
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                            }
+                            return true;
+                        }
+                    } else {
+                        // Other cards that use AILogic PowerDmg and a single target
+                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                            sa.getTargets().add(aiCreature);
+                            if (!isChandrasIgnition) {
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                            }
+                            return true;
+                        }
                     }
                 } else {
                     if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
@@ -225,7 +248,7 @@ public class FightAi extends SpellAbilityAi {
 		for (Trigger t : aiCreature.getTriggers()) {
 		    if (t.getMode() == TriggerType.SpellCast) {
 		        final Map<String, String> params = t.getMapParams();
-		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
+		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))
 		                && params.containsKey("Execute")) {
 		            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
 		            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
