@@ -121,6 +121,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {
                 return SpecialCardAi.TheScarabGod.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("SorinVengefulBloodlord")) {
+                return SpecialCardAi.SorinVengefulBloodlord.consider(aiPlayer, sa);
             } else if (aiLogic.equals("Intuition")) {
                 // This logic only fills the multiple cards array, the decision to play is made
                 // separately in hiddenOriginCanPlayAI later.
