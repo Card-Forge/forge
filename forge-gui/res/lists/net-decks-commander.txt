@@ -10,3 +10,4 @@ Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
 Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
 Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
 Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip
+Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
