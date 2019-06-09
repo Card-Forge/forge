@@ -76,17 +76,15 @@ public class ComputerUtil {
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            if (source.getType().hasStringType("Arcane")) {
-                sa = AbilityUtils.addSpliceEffects(sa);
-                if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty() && ai.getController().isAI()) {
-                    // we need to reconsider and retarget the SA after additional SAs have been added onto it via splice,
-                    // otherwise the AI will fail to add the card to stack and that'll knock it out of the game
-                    sa.resetTargets();
-                    if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) != AiPlayDecision.WillPlay) {
-                        // for whatever reason the AI doesn't want to play the thing with the spliced subs anymore,
-                        // proceeding past this point may result in an illegal play
-                        return false;
-                    }
+            sa = AbilityUtils.addSpliceEffects(sa);
+            if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty() && ai.getController().isAI()) {
+                // we need to reconsider and retarget the SA after additional SAs have been added onto it via splice,
+                // otherwise the AI will fail to add the card to stack and that'll knock it out of the game
+                sa.resetTargets();
+                if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) != AiPlayDecision.WillPlay) {
+                    // for whatever reason the AI doesn't want to play the thing with the spliced subs anymore,
+                    // proceeding past this point may result in an illegal play
+                    return false;
                 }
             }
 
