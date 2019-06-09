@@ -1157,13 +1157,6 @@ public class SpecialCardAi {
             if (best != null) {
                 sa.resetTargets();
                 sa.getTargets().add(best);
-
-                // emulate Announce$ X
-                if (best.getManaCost() != null) {
-                    String announceX = String.valueOf(best.getManaCost().getCMC());
-                    sa.getHostCard().setSVar("X", announceX);
-                    sa.setSVar("X", announceX);
-                }
                 return true;
             }
 
