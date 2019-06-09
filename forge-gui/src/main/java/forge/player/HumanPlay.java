@@ -85,9 +85,7 @@ public class HumanPlay {
             CharmEffect.makeChoices(sa);
         }
 
-        if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-            sa = AbilityUtils.addSpliceEffects(sa);
-        }
+        sa = AbilityUtils.addSpliceEffects(sa);
 
         if (sa.hasParam("Bestow")) {
             source.animateBestow();
@@ -199,9 +197,7 @@ public class HumanPlay {
                 if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
                     CharmEffect.makeChoices(sa);
                 }
-                if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-                    sa = AbilityUtils.addSpliceEffects(sa);
-                }
+                sa = AbilityUtils.addSpliceEffects(sa);
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 

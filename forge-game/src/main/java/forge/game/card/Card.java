@@ -2198,7 +2198,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.startsWith("Splice")) {
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[2], false);
-                    sbAfter.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
+
+                    String desc;
+
+                    if (n.length > 3) {
+                        desc = n[3];
+                    } else {
+                        String k[] = n[1].split(",");
+                        for (int i = 0; i < k.length; i++) {
+                            if (CardType.isACardType(k[i])) {
+                                k[i] = k[i].toLowerCase();
+                            }
+                        }
+                        desc = StringUtils.join(k, " or ");
+                    }
+
+                    sbAfter.append("Splice onto ").append(desc).append(" ").append(cost.toSimpleString());
                     sbAfter.append(" (" + inst.getReminderText() + ")").append("\r\n");
                 } else if (keyword.equals("Storm")) {
                     sbAfter.append("Storm (");
@@ -4236,7 +4251,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getAmountOfKeyword(k, currentState);
     }
     public final int getAmountOfKeyword(final Keyword k, CardState state) {
-        return state.getCachedKeyword(k).size();
+        return getKeywords(k, state).size();
+    }
+
+    public final Collection<KeywordInterface> getKeywords(final Keyword k) {
+        return getKeywords(k, currentState);
+    }
+    public final Collection<KeywordInterface> getKeywords(final Keyword k, CardState state) {
+        return state.getCachedKeyword(k);
     }
 
     // This is for keywords with a number like Bushido, Annihilator and Rampage.
@@ -4254,7 +4276,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getKeywordMagnitude(final Keyword k, CardState state) {
         int count = 0;
-        for (final KeywordInterface inst : state.getCachedKeyword(k)) {
+        for (final KeywordInterface inst : getKeywords(k, state)) {
             String kw = inst.getOriginal();
             // this can't be used yet for everything because of X values in Bushido X
             // KeywordInterface#getAmount

@@ -4435,9 +4435,7 @@ public class CardFactoryUtil {
             sb.append(" | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append("| Origin$ Library | Destination$ Hand |");
             sb.append("ChangeType$ ").append(type);
-            // no Keyword.getReminderText, it does not work yet
-            sb.append(" | SpellDescription$ (Search your library for a ").append(desc).append(" card, reveal it,");
-            sb.append(" and put it into your hand. Then shuffle your library.)");
+            sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
