@@ -35,7 +35,8 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         }
 
         // Do it once per turn, generally (may be improved later)
-        if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+        if (!sa.isTrigger()
+                && AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
             return false;
         }
 
@@ -46,8 +47,8 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             sa.resetTargets();
 
             Player opp = ComputerUtil.getOpponentFor(aiPlayer);
-            final boolean canTgtAI = aiPlayer.canBeTargetedBy(sa);
-            final boolean canTgtHuman = opp.canBeTargetedBy(sa);
+            final boolean canTgtAI = sa.canTarget(aiPlayer);
+            final boolean canTgtHuman = sa.canTarget(opp);
 
             if (canTgtHuman && canTgtAI) {
                 // TODO: maybe some other consideration rather than random?

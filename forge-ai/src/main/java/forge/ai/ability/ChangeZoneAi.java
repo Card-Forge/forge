@@ -1227,7 +1227,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // honor the Same Creature Type restriction
-            if (sa.hasParam("TargetsWithSameCreatureType")) {
+            if (tgt.isWithSameCreatureType()) {
                 Card firstTarget = sa.getTargetCard();
                 if (firstTarget != null && !choice.sharesCreatureTypeWith(firstTarget)) {
                     list.remove(choice);
