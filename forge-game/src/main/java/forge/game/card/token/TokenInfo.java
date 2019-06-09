@@ -18,6 +18,8 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -231,7 +233,7 @@ public class TokenInfo {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        String edition = host.getSetCode();
+        String edition = ObjectUtils.firstNonNull(sa.getOriginalHost(), host).getSetCode();
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token != null) {

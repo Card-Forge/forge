@@ -325,6 +325,7 @@ c_2_2_pincher_5dn.jpg https://downloads.cardforge.org/images/tokens/c_2_2_pinche
 c_2_2_a_spawn_dst.jpg https://downloads.cardforge.org/images/tokens/c_2_2_a_spawn_dst.jpg
 c_2_2_a_spawn_td2.jpg https://downloads.cardforge.org/images/tokens/c_2_2_a_spawn_td2.jpg
 c_3_2_eldrazi_horror_emn.jpg https://downloads.cardforge.org/images/tokens/c_3_2_eldrazi_horror_emn.jpg
+c_3_3_a_golem_mh1.jpg https://downloads.cardforge.org/images/tokens/c_3_3_a_golem_mh1.jpg
 c_3_3_a_golem_mm2.jpg https://downloads.cardforge.org/images/tokens/c_3_3_a_golem_mm2.jpg
 c_3_3_a_golem_mm3.jpg https://downloads.cardforge.org/images/tokens/c_3_3_a_golem_mm3.jpg
 c_3_3_a_golem_nph.jpg https://downloads.cardforge.org/images/tokens/c_3_3_a_golem_nph.jpg
