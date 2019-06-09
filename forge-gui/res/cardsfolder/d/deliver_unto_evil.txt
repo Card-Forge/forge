@@ -9,7 +9,7 @@ SVar:DBChooseOpp:DB$ ChoosePlayer | Choices$ Player.Opponent | SubAbility$ DBCho
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Amount$ 2 | Mandatory$ True | Defined$ ChosenPlayer | ForgetChosen$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | ClearChosenCard$ True | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$ValidGraveyard Card.YouOwn
 Oracle:Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to your hand. Otherwise, an opponent chooses two of them. Leave the chosen cards in your graveyard and put the rest into your hand.\nExile Deliver Unto Evil.
