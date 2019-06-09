@@ -1126,6 +1126,44 @@ public class SpecialCardAi {
         }
     }
 
+    // Sorin, Vengeful Bloodlord
+    public static class SorinVengefulBloodlord {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int loyalty = sa.getHostCard().getCounters(CounterType.LOYALTY);
+            CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
+                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            final Card copy = CardUtil.getLKICopy(card);
+                            ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
+                            return copy.getNetToughness() > 0;
+                        }
+                    }));
+            CardLists.sortByCmcDesc(creaturesToGet);
+
+            if (creaturesToGet.isEmpty()) {
+                return false;
+            }
+
+            // pick the best creature that will stay on the battlefield
+            Card best = creaturesToGet.getFirst();
+            for (Card c : creaturesToGet) {
+                if (best != c && ComputerUtilCard.evaluateCreature(c, true, false) >
+                        ComputerUtilCard.evaluateCreature(best, true, false)) {
+                    best = c;
+                }
+            }
+
+            if (best != null) {
+                sa.resetTargets();
+                sa.getTargets().add(best);
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     // Survival of the Fittest
     public static class SurvivalOfTheFittest {
         public static Card considerDiscardTarget(final Player ai) {
