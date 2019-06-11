@@ -56,7 +56,7 @@ public class RevealAi extends RevealAiBase {
 
         if ("Kefnet".equals(sa.getParam("AILogic"))) {
             final Card c = Iterables.getFirst(
-                AbilityUtils.getDefinedCards(sa.getHostCard(), "RevealDefined", sa), null
+                AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RevealDefined"), sa), null
             );
 
             if (c == null || (!c.isInstant() && !c.isSorcery())) {
