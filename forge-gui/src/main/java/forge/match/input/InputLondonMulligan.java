@@ -60,7 +60,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), "", cardsLeft == 0, false, true);
 
-        sb.append(String.format(localizer.getMessage("lblReturnForLondon"), cardsLeft));
+        sb.append(String.format(localizer.getMessage("lblReturnForLondon"), selected.size(), toReturn));
 
         showMessage(sb.toString());
     }
@@ -90,6 +90,12 @@ public class InputLondonMulligan extends InputSyncronizedBase {
             return false;
         }
 
+        if (selected.contains(c0)) {
+            selected.remove(c0);
+        } else {
+            selected.add(c0);
+        }
+        showMessage();
         return true;
     }
     
