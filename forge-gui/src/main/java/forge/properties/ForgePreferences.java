@@ -160,6 +160,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
         FILTERED_HANDS ("false"),
+        MULLIGAN_RULE("Vancouver"),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),

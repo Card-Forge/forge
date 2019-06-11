@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -35,8 +37,25 @@ public class MulliganService {
         boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
 
         for (int i = 0; i < whoCanMulligan.size(); i++) {
-            // hook in the UI for different mulligans here
-            mulligans.add(new VancouverMulligan(whoCanMulligan.get(i), firstMullFree));
+            MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
+            switch (rule) {
+                case Original:
+                    mulligans.add(new OriginalMulligan(whoCanMulligan.get(i), firstMullFree));
+                    break;
+                case Paris:
+                    mulligans.add(new ParisMulligan(whoCanMulligan.get(i), firstMullFree));
+                    break;
+                case Vancouver:
+                    mulligans.add(new VancouverMulligan(whoCanMulligan.get(i), firstMullFree));
+                    break;
+                case London:
+                    mulligans.add(new LondonMulligan(whoCanMulligan.get(i), firstMullFree));
+                    break;
+                default:
+                    // Default to Vancouver mulligan for now. Should ideally never get here.
+                    mulligans.add(new VancouverMulligan(whoCanMulligan.get(i), firstMullFree));
+                    break;
+            }
         }
     }
 
