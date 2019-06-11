@@ -1405,24 +1405,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 revealed.add(c);
             }
 
-            if (numDrawnThisTurn == 0) {
-                boolean reveal = false;
-                final CardCollectionView cards = getCardsIn(ZoneType.Battlefield);
-                for (final Card card : cards) {
-                    if (card.hasKeyword("Reveal the first card you draw each turn")
-                            || (card.hasKeyword("Reveal the first card you draw on each of your turns") && game.getPhaseHandler().isPlayerTurn(this))) {
-                        reveal = true;
-                        break;
-                    }
-                }
-                if (reveal) {
-                    game.getAction().reveal(drawn, this, true, "Revealing the first card drawn from ");
-                    if (revealed.contains(c)) {
-                        revealed.remove(c);
-                    }
-                }
-            }
-
             setLastDrawnCard(c);
             c.setDrawnThisTurn(true);
             numDrawnThisTurn++;
