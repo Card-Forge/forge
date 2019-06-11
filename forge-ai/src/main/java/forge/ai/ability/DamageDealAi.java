@@ -276,7 +276,7 @@ public class DamageDealAi extends DamageAiBase {
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 for (final Card c : sa.getTargets().getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
+                    if (adjDamage < actualPay) {
                         actualPay = adjDamage;
                     }
                 }
@@ -291,7 +291,7 @@ public class DamageDealAi extends DamageAiBase {
             // Check to ensure that we have enough counters to remove per the defined PayX
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
-                    if (source.getCounters(((CostRemoveCounter) part).counter) < Integer.valueOf(sa.getSVar("PayX"))) {
+                    if (source.getCounters(((CostRemoveCounter) part).counter) < Integer.valueOf(source.getSVar("PayX"))) {
                         return false;
                     }
                     break;
