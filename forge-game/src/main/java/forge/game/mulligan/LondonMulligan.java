@@ -1,5 +1,6 @@
 package forge.game.mulligan;
 
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class LondonMulligan extends AbstractMulligan {
@@ -18,6 +19,16 @@ public class LondonMulligan extends AbstractMulligan {
     }
 
     @Override
+    public void mulliganDraw() {
+        player.drawCards(handSizeAfterNextMulligan());
+        int tuckingCards = tuckCardsAfterKeepHand();
+
+        for (final Card c : player.getController().londonMulliganReturnCards(player, tuckingCards)) {
+            player.getGame().getAction().moveToLibrary(c, -1, null);
+        }
+    }
+
+    @Override
     public int tuckCardsAfterKeepHand() {
         if (timesMulliganed == 0) {
             return 0;
@@ -25,12 +36,5 @@ public class LondonMulligan extends AbstractMulligan {
 
         int extraCard = firstMulliganFree ? 1 : 0;
         return timesMulliganed - extraCard;
-    }
-
-    @Override
-    public void afterMulligan() {
-        int tuckingCards = tuckCardsAfterKeepHand();
-        player.getController().londonMulliganReturnCards(player, tuckingCards);
-        super.afterMulligan();
     }
 }
