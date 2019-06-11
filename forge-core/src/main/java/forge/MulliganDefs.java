@@ -14,7 +14,7 @@ public class MulliganDefs {
         Vancouver,
         London
     }
-    private static MulliganRule defaultRule = MulliganRule.Vancouver;
+    private static MulliganRule defaultRule = MulliganRule.London;
 
     public static MulliganRule getDefaultRule() {
         return defaultRule;
