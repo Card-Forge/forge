@@ -1,8 +1,6 @@
 package forge.screens.home.settings;
 
-import forge.GuiBase;
-import forge.Singletons;
-import forge.UiCommand;
+import forge.*;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.game.GameLogEntryType;
@@ -227,6 +225,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
@@ -355,8 +354,7 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
     }
 
-        private void initializeDefaultLanguageComboBox() {
-
+    private void initializeDefaultLanguageComboBox() {
         final String [] choices = {"en-US", "es-ES", "de-DE"};
         final FPref userSetting = FPref.UI_LANGUAGE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
@@ -364,6 +362,21 @@ public enum CSubmenuPreferences implements ICDoc {
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }
+
+    private void initializeMulliganRuleComboBox() {
+        final String [] choices = MulliganDefs.getMulliganRuleNames();
+        final FPref userSetting = FPref.MULLIGAN_RULE;
+        final FComboBoxPanel<String> panel = this.view.getCbpMulliganRule();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        comboBox.addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(prefs.getPref(FPref.MULLIGAN_RULE)));
+            }
+        });
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
     private void initializeDefaultFontSizeComboBox() {
         final String [] choices = {"10", "11", "12", "13", "14", "15", "16", "17", "18"};
         final FPref userSetting = FPref.UI_DEFAULT_FONT_SIZE;
