@@ -47,6 +47,7 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -1514,6 +1515,9 @@ public class ComputerUtil {
             // iterate from top of stack to find SpellAbility, including sub-abilities,
             // that does not match "sa"
             SpellAbility spell = si.getSpellAbility(true), sub = spell.getSubAbility();
+            if (spell.isWrapper()) {
+                spell = ((WrappedAbility) spell).getWrappedAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
