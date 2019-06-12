@@ -108,7 +108,7 @@ public class FightAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
-        if ("NoRecheck".equals(sa.getParam("AILogic"))) {
+        if ("Always".equals(sa.getParam("AILogic"))) {
             return true; // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
 
