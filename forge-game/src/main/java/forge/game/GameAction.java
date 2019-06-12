@@ -700,8 +700,23 @@ public class GameAction {
         if (game.isCardExiled(c)) {
             return c;
         }
+
+        final Zone origin = c.getZone();
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-        return moveTo(removed, c, cause, params);
+        final Card copied = moveTo(removed, c, cause, params);
+
+        // Run triggers
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Card", c);
+        runParams.put("Cause", cause);
+        runParams.put("Origin", origin.getZoneType().name());
+        if (params != null) {
+            runParams.putAll(params);
+        }
+
+        game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
+
+        return copied;
     }
 
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
