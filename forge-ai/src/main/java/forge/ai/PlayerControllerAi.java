@@ -555,12 +555,15 @@ public class PlayerControllerAi extends PlayerController {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
-        CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
-        int numLandsInHand = landsInHand.size();
         int numLandsDesired = (mulliganingPlayer.getStartingHandSize() - cardsToReturn) / 2;
 
         CardCollection toReturn = new CardCollection();
         for (int i = 0; i < cardsToReturn; i++) {
+            hand.removeAll(toReturn);
+
+            CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
+            int numLandsInHand = landsInHand.size() - CardLists.filter(toReturn, Presets.LANDS).size();
+
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
                 CardCollection producingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA);
