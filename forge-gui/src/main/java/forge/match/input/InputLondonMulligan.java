@@ -60,7 +60,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), "", cardsLeft == 0, false, true);
 
-        sb.append(String.format(localizer.getMessage("lblReturnForLondon"), cardsLeft));
+        sb.append(String.format(localizer.getMessage("lblReturnForLondon"), selected.size(), toReturn));
 
         showMessage(sb.toString());
     }
@@ -78,6 +78,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     }
 
     private void done() {
+        resetCardHighlights();
         stop();
     }
 
@@ -90,9 +91,16 @@ public class InputLondonMulligan extends InputSyncronizedBase {
             return false;
         }
 
+        if (selected.contains(c0)) {
+            selected.remove(c0);
+        } else if (selected.size() < toReturn) {
+            selected.add(c0);
+        }
+        setCardHighlight(c0, selected.contains(c0));
+        showMessage();
         return true;
     }
-    
+
     public CardCollectionView getSelectedCards() {
         return selected;
     }
@@ -101,4 +109,15 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     public String getActivateAction(final Card card) {
         return null;
     }
+
+    private void setCardHighlight(final Card card, final boolean state) {
+        getController().getGui().setUsedToPay(card.getView(), state);
+    }
+
+    private void resetCardHighlights() {
+        for (final Card c : selected) {
+            getController().getGui().setUsedToPay(c.getView(), false);
+        }
+    }
 }
+

@@ -1,5 +1,7 @@
 #Add one announcement per line
-War for the Spark is all added. I'm sure we didn't get all of the bugs fully worked out, so please let us know if you see anything weird.
-A significant improvement was made to how we cache images which should improve memory usage
+Modern Horizons is here!
+London Mulligans are here! (And on by default)
+You can sideboard for the AI now, just turn on the preference.
+New net deck categories are available via genetic algorithms and metagame top decks.
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
 We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!

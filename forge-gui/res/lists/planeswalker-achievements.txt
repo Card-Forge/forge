@@ -112,6 +112,7 @@ Sarkhan, Dragonsoul|Sarkhan's Dragon Search|They can hide anywhere.
 Sarkhan, Fireblood|Sarkhan's Call for Friends|My minions, meet the meat.
 Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
+Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!
 Sorin, Lord of Innistrad|Sorin's Recruitment|My favorite game is Shogi!
@@ -138,6 +139,7 @@ Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. T
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
+Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
 Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.

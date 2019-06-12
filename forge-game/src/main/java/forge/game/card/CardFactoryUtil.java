@@ -1112,6 +1112,25 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
 
+        if (sq[0].contains("CreatureType")) {
+            String[] sqparts = sq[0].split(" ", 2);
+            final String[] rest = sqparts[1].split(",");
+
+            final CardCollectionView cardsInZones = sqparts[0].length() > 12
+                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
+                : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
+            final Set<String> creatTypes = Sets.newHashSet();
+
+            for (Card card : cards) {
+                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
+            }
+            int n = creatTypes.contains("AllCreatureTypes") ? CardType.getAllCreatureTypes().size() : creatTypes.size();
+            return doXMath(n, m, c);
+        }
+
+
         if (sq[0].contains("Hellbent")) {
             return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
         }
@@ -1151,7 +1170,7 @@ public class CardFactoryUtil {
 
         if (sq[0].startsWith("Devoured")) {
             final String validDevoured = l[0].split(" ")[1];
-            CardCollection cl = CardLists.getValidCards(c.getDevoured(), validDevoured.split(","), cc, c, null);
+            CardCollection cl = CardLists.getValidCards(c.getDevouredCards(), validDevoured.split(","), cc, c, null);
             return doXMath(cl.size(), m, c);
         }
 
@@ -4416,9 +4435,7 @@ public class CardFactoryUtil {
             sb.append(" | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append("| Origin$ Library | Destination$ Hand |");
             sb.append("ChangeType$ ").append(type);
-            // no Keyword.getReminderText, it does not work yet
-            sb.append(" | SpellDescription$ (Search your library for a ").append(desc).append(" card, reveal it,");
-            sb.append(" and put it into your hand. Then shuffle your library.)");
+            sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);

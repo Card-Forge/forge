@@ -18,6 +18,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -71,6 +72,29 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if (aiLogic.equals("NoSameCreatureType")) {
+            final List<ZoneType> origin = Lists.newArrayList();
+            if (sa.hasParam("Origin")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+            } else if (sa.hasParam("TgtZone")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+            }
+            CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin),
+                    sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
+
+            final List<String> creatureTypes = Lists.newArrayList();
+            for (Card c : list) {
+                creatureTypes.addAll(c.getType().getCreatureTypes());
+            }
+
+            for (String type : creatureTypes) {
+                int freq = Collections.frequency(creatureTypes, type);
+                if (freq > 1) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -97,6 +121,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {
                 return SpecialCardAi.TheScarabGod.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("SorinVengefulBloodlord")) {
+                return SpecialCardAi.SorinVengefulBloodlord.consider(aiPlayer, sa);
             } else if (aiLogic.equals("Intuition")) {
                 // This logic only fills the multiple cards array, the decision to play is made
                 // separately in hiddenOriginCanPlayAI later.
@@ -1086,7 +1112,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         	}
         }
 
-        if (list.isEmpty()) {
+        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getTargetRestrictions() != null
+                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0 && sa.getPayCosts() != null
+                && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
+
+        if (list.isEmpty() && !doWithoutTarget) {
             return false;
         }
 
@@ -1168,7 +1198,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
-                    return false;
+                    if (!doWithoutTarget) {
+                        return false;
+                    } else {
+                        break;
+                    }
                 } else {
                     if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         boolean aiTgtsOK = false;
@@ -1189,6 +1223,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if max CMC exceeded, do not choose this card (but keep looking for other options)
             if (sa.hasParam("MaxTotalTargetCMC")) {
                 if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
+            // honor the Same Creature Type restriction
+            if (tgt.isWithSameCreatureType()) {
+                Card firstTarget = sa.getTargetCard();
+                if (firstTarget != null && !choice.sharesCreatureTypeWith(firstTarget)) {
                     list.remove(choice);
                     continue;
                 }

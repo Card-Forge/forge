@@ -10,6 +10,7 @@ import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.screens.home.*;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public enum VSubmenuPuzzleSolve implements IVSubmenu<CSubmenuPuzzleSolve> {
     private final StartButton btnStart  = new StartButton();
 
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Puzzle Mode: Solve");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblPuzzleModeSolve"));
 
     private final GameLobby lobby = new LocalLobby();
     private final VLobby vLobby = new VLobby(lobby);
@@ -52,7 +54,8 @@ public enum VSubmenuPuzzleSolve implements IVSubmenu<CSubmenuPuzzleSolve> {
 
     @Override
     public String getMenuTitle() {
-        return "Solve";
+        final Localizer localizer = Localizer.getInstance();
+        return localizer.getMessage("lblSolve");
     }
 
     @Override
@@ -103,7 +106,8 @@ public enum VSubmenuPuzzleSolve implements IVSubmenu<CSubmenuPuzzleSolve> {
 
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
-        vLobby.getLblTitle().setText("Puzzle Mode: Solve");
+        final Localizer localizer = Localizer.getInstance();
+        vLobby.getLblTitle().setText(localizer.getMessage("lblPuzzleModeSolve"));
         container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
         puzzleList.setModel(model);
         container.add(puzzleListPane, "w 80%, h 80%, gap 0 0 0px 0px, span 2, al center");

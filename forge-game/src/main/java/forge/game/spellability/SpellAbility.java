@@ -1058,6 +1058,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         return c.getNetPower() <= parentTarget.getNetPower();
                     case "LECMC" :
                         return c.getCMC() <= parentTarget.getCMC();
+                    case "SharedCreatureType" :
+                        return c.sharesCreatureTypeWith(parentTarget);
                 }
             }
 
@@ -1082,6 +1084,26 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     for (final Card c : targetChosen.getTargetCards()) {
                         if (entity != c && c.getController().equals(newController))
                             return false;
+                    }
+                }
+            }
+
+            if (tr.isWithoutSameCreatureType()) {
+                if (entity instanceof Card) {
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && c.sharesCreatureTypeWith((Card) entity)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (tr.isWithSameCreatureType()) {
+                if (entity instanceof Card) {
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
+                            return false;
+                        }
                     }
                 }
             }

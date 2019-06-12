@@ -39,6 +39,8 @@ public class StaticData {
 
     private boolean filteredHandsEnabled = false;
 
+    private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
+
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -215,10 +217,6 @@ public class StaticData {
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
-    public boolean getFilteredHandsEnabled(){
-        return filteredHandsEnabled;
-    }
-
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
 
         PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, card.getArtIndex());
@@ -242,4 +240,17 @@ public class StaticData {
         // I give up!
         return card;
     }
+
+    public boolean getFilteredHandsEnabled(){
+        return filteredHandsEnabled;
+    }
+
+    public void setMulliganRule(MulliganDefs.MulliganRule rule) {
+        mulliganRule = rule;
+    }
+
+    public MulliganDefs.MulliganRule getMulliganRule() {
+        return mulliganRule;
+    }
+
 }

@@ -105,7 +105,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+        if ("Always".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+
+        return checkApiLogic(ai, sa);
     }
 
     /*

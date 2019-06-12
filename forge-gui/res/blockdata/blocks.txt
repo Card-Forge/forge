@@ -80,4 +80,4 @@ Guilds of Ravnica, 3/6/GRN, GRN
 Ultimate Masters, 3/6/M19, UMA
 Ravnica Allegiance, 3/6/RNA, RNA
 War of the Spark, 3/6/WAR, WAR
-Modern Horizons, 3/6/MH1, MH1
+Modern Horizons, 3/6/WAR, MH1

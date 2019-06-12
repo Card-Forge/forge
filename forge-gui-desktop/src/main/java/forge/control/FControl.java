@@ -62,6 +62,7 @@ import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import forge.util.RestartUtil;
 import forge.util.gui.SOptionPane;
 import forge.view.FFrame;
@@ -257,8 +258,8 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
         setGlobalKeyboardHandler();
-
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Opening main window...");
+        final Localizer localizer = Localizer.getInstance();
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

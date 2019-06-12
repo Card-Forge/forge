@@ -151,6 +151,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
+                        card.addExploited(lKICopy);
                         final Map<String, Object> runParams = Maps.newHashMap();
                         runParams.put("Exploited", lKICopy);
                         runParams.put("Card", card);

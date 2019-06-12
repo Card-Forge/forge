@@ -17,6 +17,7 @@
  */
 package forge.properties;
 
+import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
@@ -160,6 +161,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
         FILTERED_HANDS ("false"),
+        MULLIGAN_RULE(MulliganDefs.getDefaultRule().name()),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),

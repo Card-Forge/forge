@@ -1,0 +1,12 @@
+Name:Ayula, Queen Among Bears
+ManaCost:1 G
+Types:Legendary Creature Bear
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Bear.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever another Bear enters the battlefield under your control, choose one —\n• Put two +1/+1 counters on target Bear.\n• Target Bear you control fights target creature you don’t control.
+SVar:TrigChoose:DB$ Charm | Choices$ DBCounter,DBPump
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Bear | Tgtprompt$ Select target Bear | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target Bear.
+SVar:DBPump:DB$ Pump | ValidTgts$ Bear.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target Bear you control fights target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+DeckHas:Ability$Counters
+DeckHints:Type$Bear
+Oracle:Whenever another Bear enters the battlefield under your control, choose one —\n• Put two +1/+1 counters on target Bear.\n• Target Bear you control fights target creature you don’t control.

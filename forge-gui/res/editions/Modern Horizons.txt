@@ -5,6 +5,9 @@ Name=Modern Horizons
 Code2=MH1
 MciCode=mh1
 Type=Other
+BoosterCovers=5
+Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
+
 
 [cards]
 1 M Morophon, the Boundless

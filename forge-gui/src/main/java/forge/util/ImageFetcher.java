@@ -71,7 +71,7 @@ public abstract class ImageFetcher {
             final String filename = imageKey.substring(2) + ".jpg";
             String tokenUrl = tokenImages.get(filename);
             if (tokenUrl == null) {
-                System.err.println("No specified file.. Attempting to download from default Url");
+                System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);

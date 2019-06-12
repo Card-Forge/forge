@@ -99,7 +99,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, delvedCards, convokedCards, imprintedCards, encodedCards;
+    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
@@ -816,7 +816,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return Card.storableSVars;
     }
 
-    public final CardCollectionView getDevoured() {
+    public final CardCollectionView getDevouredCards() {
         return CardCollection.getView(devouredCards);
     }
     public final void addDevoured(final Card c) {
@@ -828,6 +828,19 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void clearDevoured() {
         devouredCards = null;
+    }
+
+    public final CardCollectionView getExploited() {
+        return CardCollection.getView(exploitedCards);
+    }
+    public final void addExploited(final Card c) {
+        if (exploitedCards == null) {
+            exploitedCards = new CardCollection();
+        }
+        exploitedCards.add(c);
+    }
+    public final void clearExploited() {
+        exploitedCards = null;
     }
 
     public final CardCollectionView getDelved() {
@@ -2185,7 +2198,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.startsWith("Splice")) {
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[2], false);
-                    sbAfter.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
+
+                    String desc;
+
+                    if (n.length > 3) {
+                        desc = n[3];
+                    } else {
+                        String k[] = n[1].split(",");
+                        for (int i = 0; i < k.length; i++) {
+                            if (CardType.isACardType(k[i])) {
+                                k[i] = k[i].toLowerCase();
+                            }
+                        }
+                        desc = StringUtils.join(k, " or ");
+                    }
+
+                    sbAfter.append("Splice onto ").append(desc).append(" ").append(cost.toSimpleString());
                     sbAfter.append(" (" + inst.getReminderText() + ")").append("\r\n");
                 } else if (keyword.equals("Storm")) {
                     sbAfter.append("Storm (");
@@ -4223,7 +4251,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getAmountOfKeyword(k, currentState);
     }
     public final int getAmountOfKeyword(final Keyword k, CardState state) {
-        return state.getCachedKeyword(k).size();
+        return getKeywords(k, state).size();
+    }
+
+    public final Collection<KeywordInterface> getKeywords(final Keyword k) {
+        return getKeywords(k, currentState);
+    }
+    public final Collection<KeywordInterface> getKeywords(final Keyword k, CardState state) {
+        return state.getCachedKeyword(k);
     }
 
     // This is for keywords with a number like Bushido, Annihilator and Rampage.
@@ -4241,7 +4276,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getKeywordMagnitude(final Keyword k, CardState state) {
         int count = 0;
-        for (final KeywordInterface inst : state.getCachedKeyword(k)) {
+        for (final KeywordInterface inst : getKeywords(k, state)) {
             String kw = inst.getOriginal();
             // this can't be used yet for everything because of X values in Bushido X
             // KeywordInterface#getAmount
@@ -5152,10 +5187,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.setSVar("Foil", Integer.toString(f));
     }
 
-    public final CardCollectionView getDevouredCards() {
-        return CardCollection.getView(devouredCards);
-    }
-
     public final CardCollectionView getHauntedBy() {
         return CardCollection.getView(hauntedBy);
     }
@@ -5299,6 +5330,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (kw.equals("Protection from all colors")) {
                 if (!source.isColorless() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from colorless")) {
+                if (source.isColorless() || colorlessDamage) {
                     return true;
                 }
             } else if (kw.equals("Protection from creatures")) {

@@ -1394,6 +1394,10 @@ public class CardProperty {
             if (!source.getConvoked().contains(card)) {
                 return false;
             }
+        } else if (property.startsWith("exploited")) {
+            if (!source.getExploited().contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("unequalPT")) {
             if (card.getNetPower() == card.getNetToughness()) {
                 return false;
