@@ -1,0 +1,14 @@
+[metadata]
+Code=M20
+Date=2019-07-12
+Name=Core Set 2019
+MciCode=m20
+Type=Core
+
+[cards]
+126 R Chandra, Acolyte of the Flame
+127 M Chandra, Awakened Inferno
+128 U Chandra, Novice Pyromancer
+
+[tokens]
+r_1_1_elemental
