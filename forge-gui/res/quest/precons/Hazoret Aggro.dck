@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Hazoret Aggro
-Description=Mono Red Challenger Deck
+Description=Play an aggressive game with hasty creatures and burn spells, turning your extra cards into more direct damage when the game goes long. Keep your opponent on the defensive and finish the game before they can even get started.
 Deck Type=constructed
 Set=RIX
 Image=hazoret_aggro.jpg

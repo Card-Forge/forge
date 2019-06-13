@@ -1,0 +1,14 @@
+Name:Roalesk, Apex Hybrid
+ManaCost:2 G G U
+Types:Legendary Creature Human Mutant
+PT:4/5
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two +1/+1 counters on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate, then proliferate again.
+SVar:TrigProliferate:DB$ Proliferate | SubAbility$ TrigProliferate2
+SVar:TrigProliferate2:DB$ Proliferate
+DeckHas:Ability$Proliferate & Ability$Counters
+DeckNeeds:Ability$Counters
+Oracle:Flying, trample\nWhen Roalesk, Apex Hybrid enters the battlefield, put two +1/+1 counters on another target creature you control.\nWhen Roalsk dies, proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)

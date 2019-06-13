@@ -86,7 +86,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final FScrollPane scroller = new FScrollPane(pnlStats, false);
 
     //========== Constructor
-    private VStatistics() {
+    VStatistics() {
         scroller.getViewport().setBorder(null);
 
         // Color stats

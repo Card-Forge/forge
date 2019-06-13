@@ -1,0 +1,7 @@
+Name:Avatar
+ManaCost:no cost
+Types:Creature Avatar
+Colors:white
+PT:4/4
+K:Flying
+Oracle:Flying

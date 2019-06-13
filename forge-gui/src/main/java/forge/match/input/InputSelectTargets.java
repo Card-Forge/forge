@@ -161,6 +161,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             showMessage(sa.getHostCard() + " - Cannot target this card (should not share a creature type)");
             return false;
         }
+        // If the cards share a creature type
+        if (tgt.isWithSameCreatureType() && lastTarget != null && !card.sharesCreatureTypeWith(lastTarget)) {
+            showMessage(sa.getHostCard() + " - Cannot target this card (should share a creature type)");
+            return false;
+        }
 
         // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {

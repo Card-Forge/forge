@@ -112,7 +112,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         return null; // refused to side
     }
 
@@ -300,6 +300,17 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
+        return true;
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        return hand;
+    }
+
+    @Override
+    public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn) {
         return true;
     }
 
@@ -562,12 +573,6 @@ public class PlayerControllerForTests extends PlayerController {
 
     }
 
-    @Override
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         // no longer possible to run AI's methods on SpellAbility

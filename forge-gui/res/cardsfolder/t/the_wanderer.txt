@@ -1,0 +1,9 @@
+Name:The Wanderer
+ManaCost:3 W
+Types:Legendary Planeswalker
+Loyalty:5
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You,Permanent.Other+YouCtrl | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt to you and other permanents you control.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 4 or greater.
+Oracle:Prevent all noncombat damage that would be dealt to you and other permanents you control.\n[-2]: Exile target creature with power 4 or greater.

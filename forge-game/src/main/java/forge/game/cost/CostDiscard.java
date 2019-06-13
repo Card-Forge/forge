@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -106,17 +107,20 @@ public class CostDiscard extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView handList = payer.getCardsIn(ZoneType.Hand);
+        CardCollectionView handList = payer.canDiscardBy(ability) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
         String type = this.getType();
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
-            if (!source.isInZone(ZoneType.Hand)) {
+            if (!source.canBeDiscardedBy(ability)) {
                 return false;
             }
         }
         else {
             if (type.equals("Hand")) {
+                if (!payer.canDiscardBy(ability)) {
+                    return false;
+                }
                 // this will always work
             }
             else if (type.equals("LastDrawn")) {

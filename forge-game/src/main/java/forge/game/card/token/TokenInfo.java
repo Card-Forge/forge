@@ -9,6 +9,7 @@ import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
@@ -18,10 +19,11 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class TokenInfo {
     final String name;
@@ -128,8 +130,6 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        // TODO - most tokens mana cost is 0, this needs to be fixed
-        // c.setManaCost(manaCost);
         c.setColor(color.isEmpty() ? manaCost : color);
         c.setToken(true);
 
@@ -233,11 +233,23 @@ public class TokenInfo {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        String edition = host.getSetCode();
+        String edition = ObjectUtils.firstNonNull(sa.getOriginalHost(), host).getSetCode();
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token != null) {
             final Card result = Card.fromPaperCard(token, null, game);
+
+            if (sa.hasParam("TokenPower")) {
+                String str = sa.getParam("TokenPower");
+                result.setBasePowerString(str);
+                result.setBasePower(AbilityUtils.calculateAmount(host, str, sa));
+            }
+
+            if (sa.hasParam("TokenToughness")) {
+                String str = sa.getParam("TokenToughness");
+                result.setBaseToughnessString(str);
+                result.setBaseToughness(AbilityUtils.calculateAmount(host, str, sa));
+            }
 
             // update Token with CardTextChanges
             Map<String, String> colorMap = sa.getChangedTextColors();

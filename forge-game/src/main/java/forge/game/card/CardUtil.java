@@ -227,12 +227,17 @@ public final class CardUtil {
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
 
-        newCopy.getCurrentState().copyFrom(in.getState(in.getCurrentStateName()), true);
+        newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
+        if (in.isFaceDown()) {
+            newCopy.turnFaceDownNoUpdate();
+        }
 
+        /*
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
             newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
         }
+        //*/
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
@@ -290,6 +295,7 @@ public final class CardUtil {
         newCopy.setChangedCardColors(in.getChangedCardColors());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
+        newCopy.setChangedCardNames(in.getChangedCardNames());
 
         newCopy.copyChangedTextFrom(in);
 
@@ -327,7 +333,7 @@ public final class CardUtil {
         final CardType type = new CardType();
         type.add("Creature");
 
-        final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown), c);
+        final CardState ret = new CardState(c, CardStateName.FaceDown);
         ret.setBasePower(2);
         ret.setBaseToughness(2);
 

@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
@@ -56,6 +57,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
         CardCollectionView oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
         CardCollectionView computerType = ai.getCardsIn(origin);
+
+        // remove cards that won't be seen in AI's own library if it can't be searched
+        if (!ai.canSearchLibraryWith(sa, ai)) {
+            computerType = CardLists.filter(computerType, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
+        }
 
         // Ugin check need to be done before filterListByType because of ChosenX
         // Ugin AI: always try to sweep before considering +1

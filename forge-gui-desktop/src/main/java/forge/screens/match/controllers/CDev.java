@@ -196,7 +196,7 @@ public final class CDev implements ICDoc {
         }
     };
     public void exileCardsFromHand() {
-        getController().cheat().exileCardsFromHand();;
+        getController().cheat().exileCardsFromHand();
     }
 
     private final MouseListener madAddCounter = new MouseAdapter() {

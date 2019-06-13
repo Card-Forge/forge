@@ -3,6 +3,8 @@ package forge.screens.settings;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge;
 import forge.Graphics;
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -84,6 +86,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 0);
 
         //Gameplay Options
+        lstSettings.addItem(new CustomSelectSetting(FPref.MULLIGAN_RULE, "Mulligan Rule",
+                "Choose the version of the Mulligan rule.",
+                 MulliganDefs.getMulliganRuleNames()) {
+                    @Override
+                    public void valueChanged(String newValue) {
+                        super.valueChanged(newValue);
+                        StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(FModel.getPreferences().getPref(FPref.MULLIGAN_RULE)));
+                    }
+        }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
                 "AI Personality",
                 "Choose your AI opponent.",
@@ -120,6 +131,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.PERFORMANCE_MODE,
                         "Performance Mode",
                         "Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_SIDEBOARD_FOR_AI,
+                        "Human Sideboard for AI",
+                        "Allows users to sideboard with the AIs deck and sideboard in constructed game formats."),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                         "Filtered Hands",

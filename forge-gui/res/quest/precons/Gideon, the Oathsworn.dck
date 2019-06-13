@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gideon, the Oathsworn
+Description=WB War of the Spark planeswalker deck.
+Deck Type=constructed
+Set=WAR
+Image=gideon_the_oathsworn.jpg
+[Main]
+3 Ajani's Pridemate|WAR
+1 Bond of Discipline|WAR
+4 Charmed Stray|WAR
+1 Command the Dreadhorde|WAR
+3 Cruel Celebrant|WAR
+4 Desperate Lunge|WAR
+2 Enforcer Griffin|WAR
+2 Gideon's Battle Cry|WAR
+3 Gideon's Company|WAR
+1 Gideon, the Oathsworn+|WAR
+1 Kaya, Bane of the Dead|WAR
+3 Makeshift Battalion|WAR
+1 Oath of Kaya|WAR
+3 Ob Nixilis's Cruelty|WAR
+4 Orzhov Guildgate|WAR
+12 Plains|WAR
+8 Swamp|WAR
+2 Trusted Pegasus|WAR
+1 Vampire Opportunist|WAR
+1 War Screecher|WAR

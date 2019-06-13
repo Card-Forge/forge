@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Infect and Defile
-Description=Your deck is packed with creatures with infect. Every damage dealt to opponents from these creatures takes the form of poison counters, and a player with ten poison counters loses the game.
+Description=What better way to spread the word of Phyrexia than to etch it into flesh? Watch your toxic minions grow stronger as you infect every last Mirran who dares to defy you, and laugh as they dance on your puppet-strings.
 Set=MBS
 Image=infect_and_defile.jpg
 [main]

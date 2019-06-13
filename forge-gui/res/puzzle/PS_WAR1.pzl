@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/05/111.-WAR1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=4
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Martyr for the Cause;Spark Harvest;Dreadhorde Twins;Resolute Watchdog
+humanbattlefield=Dreadhorde Twins;t:Zombie Army,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Zombie-Army,Image:b_0_0_zombie_army3_war,Keywords:|Id:7|Counters:P1P1=2;Dreadhorde Twins;Clifftop Retreat|NoETBTrigs;Plains;Swamp;Swamp;Forebear's Blade|AttachedTo:7
+aibattlefield=Domri, Anarch of Bolas|Counters:LOYALTY=2;Dire Fleet Daredevil;Dire Fleet Daredevil;Dire Fleet Daredevil;Evolution Sage

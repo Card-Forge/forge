@@ -17,6 +17,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -787,6 +788,9 @@ public class AbilityUtils {
             if (type.contains("Card")) {
                 o = sa.getTriggeringObject("Card");
             }
+            else if (type.contains("Object")) {
+                o = sa.getTriggeringObject("Object");
+            }
             else if (type.contains("Attacker")) {
                 o = sa.getTriggeringObject("Attacker");
             }
@@ -801,14 +805,17 @@ public class AbilityUtils {
                 return new CardCollection();
             }
 
-            if (type.equals("Triggered") || (type.equals("TriggeredCard")) || (type.equals("TriggeredAttacker"))
-                    || (type.equals("TriggeredBlocker"))) {
+            if (type.equals("Triggered") || type.equals("TriggeredCard") || type.equals("TriggeredObject")
+                || type.equals("TriggeredAttacker") || type.equals("TriggeredBlocker")) {
                 type = "Card.Self";
             }
 
             source = (Card) (o);
             if (type.contains("TriggeredCard")) {
                 type = TextUtil.fastReplace(type, "TriggeredCard", "Card");
+            }
+            else if (type.contains("TriggeredObject")) {
+                type = TextUtil.fastReplace(type, "TriggeredObject", "Card");
             }
             else if (type.contains("TriggeredAttacker")) {
                 type = TextUtil.fastReplace(type, "TriggeredAttacker", "Card");
@@ -1837,10 +1844,23 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         
-        final CardCollection splices = CardLists.filter(player.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
+        final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+
+        if (hand.isEmpty()) {
+            return sa;
+        }
+
+        final CardCollection splices = CardLists.filter(hand, new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
-                return input.hasStartOfKeyword("Splice");
+                for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
+                    String k = inst.getOriginal();
+                    final String n[] = k.split(":");
+                    if (source.isValid(n[1].split(","), player, input, sa)) {
+                        return true;
+                    }
+                }
+                return false;
             }
         });
 
@@ -1865,12 +1885,11 @@ public class AbilityUtils {
 
     public static void addSpliceEffect(final SpellAbility sa, final Card c) {
         Cost spliceCost = null;
-        for (final KeywordInterface inst : c.getKeywords()) {
+        // This Function thinks that Splice exist only once on the card
+        for (final KeywordInterface inst : c.getKeywords(Keyword.SPLICE)) {
             final String k = inst.getOriginal();
-            if (k.startsWith("Splice")) {
-                final String n[] = k.split(":");
-                spliceCost = new Cost(n[2], false);
-            }
+            final String n[] = k.split(":");
+            spliceCost = new Cost(n[2], false);
         }
 
         if (spliceCost == null)

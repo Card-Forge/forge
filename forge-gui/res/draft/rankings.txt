@@ -1,4 +1,508 @@
 //Rank|Name|Rarity|Set
+#1|Winds of Abandon|R|MH1
+#2|Serra the Benevolent|M|MH1
+#3|Sword of Truth and Justice|M|MH1
+#4|Pashalik Mons|R|MH1
+#5|Yawgmoth, Thran Physician|M|MH1
+#6|Hexdrinker|M|MH1
+#7|Endling|R|MH1
+#8|Sword of Sinew and Steel|M|MH1
+#9|Genesis|R|MH1
+#10|Ayula's Influence|R|MH1
+#11|Seasoned Pyromancer|M|MH1
+#12|On Thin Ice|R|MH1
+#13|Kess, Dissident Mage|M|MH1
+#14|Force of Virtue|R|MH1
+#15|Deep Forest Hermit|R|MH1
+#16|Cloudshredder Sliver|R|MH1
+#17|Unsettled Mariner|R|MH1
+#18|Future Sight|R|MH1
+#19|Wrenn and Six|M|MH1
+#20|Ayula, Queen Among Bears|R|MH1
+#21|Mob|C|MH1
+#22|Tectonic Reformation|R|MH1
+#23|Spiteful Sliver|R|MH1
+#24|Plague Engineer|R|MH1
+#25|Urza, Lord High Artificer|M|MH1
+#26|Astral Drift|R|MH1
+#27|Fallen Shinobi|R|MH1
+#28|Bazaar Trademage|R|MH1
+#29|Fact or Fiction|U|MH1
+#30|Twisted Reflection|U|MH1
+#31|Battle Screech|U|MH1
+#32|Thundering Djinn|U|MH1
+#33|Etchings of the Chosen|U|MH1
+#34|Giver of Runes|R|MH1
+#35|Firebolt|U|MH1
+#36|Ice-Fang Coatl|R|MH1
+#37|Graveshifter|U|MH1
+#38|Rotwidow Pack|U|MH1
+#39|Smiting Helix|U|MH1
+#40|Hogaak, Arisen Necropolis|R|MH1
+#41|Munitions Expert|U|MH1
+#42|Undead Augur|U|MH1
+#43|Magmatic Sinkhole|C|MH1
+#44|Crashing Footfalls|R|MH1
+#45|Talisman of Creativity|U|MH1
+#46|Talisman of Curiosity|U|MH1
+#47|Talisman of Hierarchy|U|MH1
+#48|Talisman of Resilience|U|MH1
+#49|Talisman of Conviction|U|MH1
+#50|Pyrophobia|C|MH1
+#51|Good-Fortune Unicorn|U|MH1
+#52|Oneirophage|U|MH1
+#53|Soulherder|U|MH1
+#54|Marit Lage's Slumber|R|MH1
+#55|Squirrel Nest|U|MH1
+#56|Regrowth|U|MH1
+#57|Morophon, the Boundless|M|MH1
+#58|Abominable Treefolk|U|MH1
+#59|Exclude|U|MH1
+#60|Urza's Rage|U|MH1
+#61|Mirrodin Besieged|R|MH1
+#62|Defile|C|MH1
+#63|Mist-Syndicate Naga|R|MH1
+#64|Kaya's Guile|R|MH1
+#65|Lesser Masticore|U|MH1
+#66|Sling-Gang Lieutenant|U|MH1
+#67|Feaster of Fools|U|MH1
+#68|Splicer's Skill|U|MH1
+#69|Scrapyard Recombiner|R|MH1
+#70|Dregscape Sliver|U|MH1
+#71|Man-o'-War|C|MH1
+#72|Wing Shards|U|MH1
+#73|Sadistic Obsession|U|MH1
+#74|Windcaller Aven|C|MH1
+#75|Irregular Cohort|C|MH1
+#76|Alpine Guide|U|MH1
+#77|Krosan Tusker|C|MH1
+#78|Forgotten Cave|U|MH1
+#79|Tranquil Thicket|U|MH1
+#80|Dead of Winter|R|MH1
+#81|Ore-Scale Guardian|U|MH1
+#82|Valiant Changeling|U|MH1
+#83|Nantuko Cultivator|U|MH1
+#84|Ranger-Captain of Eos|M|MH1
+#85|Crypt Rats|U|MH1
+#86|Scale Up|U|MH1
+#87|Force of Despair|R|MH1
+#88|Goblin Matron|U|MH1
+#89|Lightning Skelemental|R|MH1
+#90|Saddled Rimestag|U|MH1
+#91|Rime Tender|C|MH1
+#92|Vengeful Devil|U|MH1
+#93|Rhox Veteran|C|MH1
+#94|Wall of Blossoms|U|MH1
+#95|Watcher for Tomorrow|U|MH1
+#96|Reap the Past|R|MH1
+#97|Secluded Steppe|U|MH1
+#98|Lonely Sandbar|U|MH1
+#99|Barren Moor|U|MH1
+#100|Cordial Vampire|R|MH1
+#101|Carrion Feeder|U|MH1
+#102|Enduring Sliver|C|MH1
+#103|Webweaver Changeling|U|MH1
+#104|Ingenious Infiltrator|U|MH1
+#105|Hollowhead Sliver|U|MH1
+#106|Force of Rage|R|MH1
+#107|Mother Bear|C|MH1
+#108|Ravenous Giant|U|MH1
+#109|Lavabelly Sliver|U|MH1
+#110|Waterlogged Grove|R|MH1
+#111|Silent Clearing|R|MH1
+#112|Nurturing Peatland|R|MH1
+#113|Sunbaked Canyon|R|MH1
+#114|Fiery Islet|R|MH1
+#115|Pondering Mage|C|MH1
+#116|Snow-Covered Forest|L|MH1
+#117|Snow-Covered Island|L|MH1
+#118|Conifer Wurm|U|MH1
+#119|Quakefoot Cyclops|C|MH1
+#120|Cleaving Sliver|C|MH1
+#121|First-Sphere Gargantua|C|MH1
+#122|Settle Beyond Reality|C|MH1
+#123|First Sliver's Chosen|U|MH1
+#124|Throatseeker|U|MH1
+#125|Reckless Charge|C|MH1
+#126|Llanowar Tribe|U|MH1
+#127|Throes of Chaos|U|MH1
+#128|Ruination Rioter|U|MH1
+#129|Eladamri's Call|R|MH1
+#130|Archmage's Charm|R|MH1
+#131|King of the Pride|U|MH1
+#132|Mox Tantalite|M|MH1
+#133|Zhalfirin Decoy|U|MH1
+#134|Frostwalk Bastion|U|MH1
+#135|Venomous Changeling|C|MH1
+#136|Goblin War Party|C|MH1
+#137|Savage Swipe|C|MH1
+#138|Prismatic Vista|R|MH1
+#139|Cabal Therapist|R|MH1
+#140|Birthing Boughs|U|MH1
+#141|Twin-Silk Spider|C|MH1
+#142|Treefolk Umbra|C|MH1
+#143|Murasa Behemoth|C|MH1
+#144|Igneous Elemental|C|MH1
+#145|Silumgar Scavenger|C|MH1
+#146|Ransack the Lab|C|MH1
+#147|Putrid Goblin|C|MH1
+#148|Rain of Revelation|C|MH1
+#149|Blizzard Strix|U|MH1
+#150|Recruit the Worthy|C|MH1
+#151|Lancer Sliver|C|MH1
+#152|Moonblade Shinobi|C|MH1
+#153|Vesperlark|U|MH1
+#154|Answered Prayers|C|MH1
+#155|Unearth|C|MH1
+#156|Bladeback Sliver|C|MH1
+#157|Goblin Oriflamme|U|MH1
+#158|String of Disappearances|C|MH1
+#159|Orcish Hellraiser|C|MH1
+#160|Springbloom Druid|C|MH1
+#161|Farmstead Gleaner|U|MH1
+#162|Altar of Dementia|R|MH1
+#163|Tempered Sliver|U|MH1
+#164|Scour All Possibilities|C|MH1
+#165|Impostor of the Sixth Pride|C|MH1
+#166|Prohibit|C|MH1
+#167|Snow-Covered Mountain|L|MH1
+#168|Snow-Covered Swamp|L|MH1
+#169|Snow-Covered Plains|L|MH1
+#170|Cave of Temptation|C|MH1
+#171|Fountain of Ichor|C|MH1
+#172|Winding Way|C|MH1
+#173|Trumpeting Herd|C|MH1
+#174|Bellowing Elk|C|MH1
+#175|Warteye Witch|C|MH1
+#176|Return from Extinction|C|MH1
+#177|Gluttonous Slug|C|MH1
+#178|Winter's Rest|C|MH1
+#179|Phantasmal Form|C|MH1
+#180|Cunning Evasion|U|MH1
+#181|Reprobation|C|MH1
+#182|Phantom Ninja|C|MH1
+#183|Everdream|U|MH1
+#184|Goblin Champion|C|MH1
+#185|Scuttling Sliver|U|MH1
+#186|Pillage|U|MH1
+#187|Changeling Outcast|C|MH1
+#188|Chillerpillar|C|MH1
+#189|Elvish Fury|C|MH1
+#190|Martyr's Soul|C|MH1
+#191|Headless Specter|C|MH1
+#192|Choking Tethers|C|MH1
+#193|Force of Negation|R|MH1
+#194|Amorphous Axe|C|MH1
+#195|Treetop Ambusher|C|MH1
+#196|Glacial Revelation|U|MH1
+#197|Excavating Anurid|C|MH1
+#198|Volatile Claws|C|MH1
+#199|Spinehorn Minotaur|C|MH1
+#200|Bogardan Dragonheart|C|MH1
+#201|Rank Officer|C|MH1
+#202|Azra Smokeshaper|C|MH1
+#203|Smoke Shroud|C|MH1
+#204|Eyekite|C|MH1
+#205|Trustworthy Scout|C|MH1
+#206|Stirring Address|C|MH1
+#207|Shelter|C|MH1
+#208|Ninja of the New Moon|C|MH1
+#209|Universal Automaton|C|MH1
+#210|Faerie Seer|C|MH1
+#211|Tribute Mage|U|MH1
+#212|Spell Snuff|C|MH1
+#213|Umezawa's Charm|C|MH1
+#214|Lava Dart|C|MH1
+#215|Stream of Thought|C|MH1
+#216|Wall of One Thousand Cuts|C|MH1
+#217|Viashino Sandsprinter|C|MH1
+#218|Soul-Strike Technique|C|MH1
+#219|Knight of Old Benalia|C|MH1
+#220|Face of Divinity|U|MH1
+#221|Thornado|C|MH1
+#222|Frostwalla|C|MH1
+#223|Mind Rake|C|MH1
+#224|Ephemerate|C|MH1
+#225|Collector Ouphe|R|MH1
+#226|Goatnap|C|MH1
+#227|Generous Gift|U|MH1
+#228|Sisay, Weatherlight Captain|R|MH1
+#229|Diabolic Edict|C|MH1
+#230|Dismantling Blow|U|MH1
+#231|Nimble Mongoose|C|MH1
+#232|Iceberg Cancrix|C|MH1
+#233|Gilded Light|C|MH1
+#234|Echo of Eons|M|MH1
+#235|Arcum's Astrolabe|C|MH1
+#236|Icehide Golem|U|MH1
+#237|Hall of Heliod's Generosity|R|MH1
+#238|Unbound Flourishing|M|MH1
+#239|Aria of Flame|R|MH1
+#240|Force of Vigor|R|MH1
+#241|Fists of Flame|C|MH1
+#242|Rebuild|U|MH1
+#243|Segovian Angel|C|MH1
+#244|Weather the Storm|C|MH1
+#245|Nature's Chant|C|MH1
+#246|Collected Conjuring|R|MH1
+#247|Nether Spirit|R|MH1
+#248|Goblin Engineer|R|MH1
+#249|Shatter Assumptions|U|MH1
+#250|Geomancer's Gambit|C|MH1
+#251|Shenanigans|C|MH1
+#252|Planebound Accomplice|R|MH1
+#253|Spore Frog|C|MH1
+#254|The First Sliver|M|MH1
+//Rank|Name|Rarity|Set
+#1|Liliana, Dreadhorde General|M|WAR
+#2|God-Eternal Oketra|M|WAR
+#3|Roalesk, Apex Hybrid|M|WAR
+#4|God-Eternal Bontu|M|WAR
+#5|Tolsimir, Friend to Wolves|R|WAR
+#6|Enter the God-Eternals|R|WAR
+#7|Nicol Bolas, Dragon-God|M|WAR
+#8|Ilharg, the Raze-Boar|M|WAR
+#9|Storrev, Devkarin Lich|R|WAR
+#10|Finale of Eternity|M|WAR
+#11|Widespread Brutality|R|WAR
+#12|Finale of Glory|M|WAR
+#13|God-Eternal Rhonas|M|WAR
+#14|God-Eternal Kefnet|M|WAR
+#15|Awakening of Vitu-Ghazi|R|WAR
+#16|Sarkhan the Masterless|R|WAR
+#17|Ajani, the Greathearted|R|WAR
+#18|Chandra, Fire Artisan|R|WAR
+#19|Feather, the Redeemed|R|WAR
+#20|Ugin, the Ineffable|R|WAR
+#21|Jace, Wielder of Mysteries|R|WAR
+#22|Neheb, Dreadhorde Champion|R|WAR
+#23|Nissa, Who Shakes the World|R|WAR
+#24|Prison Realm|U|WAR
+#25|Casualties of War|R|WAR
+#26|Domri's Ambush|U|WAR
+#27|Time Wipe|R|WAR
+#28|Gideon Blackblade|M|WAR
+#29|Kaya, Bane of the Dead|U|WAR
+#30|Solar Blaze|R|WAR
+#31|Deathsprout|U|WAR
+#32|Vivien's Arkbow|R|WAR
+#33|Domri, Anarch of Bolas|R|WAR
+#34|Ral, Storm Conduit|R|WAR
+#35|Vivien, Champion of the Wilds|R|WAR
+#36|Living Twister|R|WAR
+#37|Ral's Outburst|U|WAR
+#38|Bleeding Edge|U|WAR
+#39|Despark|U|WAR
+#40|Tyrant's Scorn|U|WAR
+#41|Oath of Kaya|R|WAR
+#42|Jaya's Greeting|C|WAR
+#43|Massacre Girl|R|WAR
+#44|Sorin, Vengeful Bloodlord|R|WAR
+#45|Spark Harvest|C|WAR
+#46|Krenko, Tin Street Kingpin|R|WAR
+#47|Chandra's Triumph|U|WAR
+#48|Ob Nixilis's Cruelty|C|WAR
+#49|Eternal Skylord|U|WAR
+#50|Vraska, Swarm's Eminence|U|WAR
+#51|Bioessence Hydra|R|WAR
+#52|Soul Diviner|R|WAR
+#53|Commence the Endgame|R|WAR
+#54|Planewide Celebration|R|WAR
+#55|Dreadhorde Invasion|R|WAR
+#56|Nahiri, Storm of Stone|U|WAR
+#57|Angrath, Captain of Chaos|U|WAR
+#58|Arlinn, Voice of the Pack|U|WAR
+#59|Heartwarming Redemption|U|WAR
+#60|Elite Guardmage|U|WAR
+#61|Merfolk Skydiver|U|WAR
+#62|Leyline Prowler|U|WAR
+#63|Gleaming Overseer|U|WAR
+#64|Dreadhorde Butcher|R|WAR
+#65|Paradise Druid|U|WAR
+#66|Rescuer Sphinx|U|WAR
+#67|Kasmina, Enigmatic Mentor|U|WAR
+#68|Rubblebelt Rioters|U|WAR
+#69|The Elderspell|R|WAR
+#70|Huatli's Raptor|U|WAR
+#71|Tenth District Legionnaire|U|WAR
+#72|Eternal Taskmaster|U|WAR
+#73|Grateful Apparition|U|WAR
+#74|Dovin, Hand of Control|U|WAR
+#75|Finale of Revelation|M|WAR
+#76|Blast Zone|R|WAR
+#77|Spark Double|R|WAR
+#78|Mobilized District|R|WAR
+#79|Karn's Bastion|R|WAR
+#80|Mayhem Devil|U|WAR
+#81|Mowu, Loyal Companion|U|WAR
+#82|Sorin's Thirst|C|WAR
+#83|Bolas's Citadel|R|WAR
+#84|Law-Rune Enforcer|C|WAR
+#85|Samut, Tyrant Smasher|U|WAR
+#86|Jaya, Venerated Firemage|U|WAR
+#87|Finale of Devastation|M|WAR
+#88|Trusted Pegasus|C|WAR
+#89|Aven Eternal|C|WAR
+#90|Finale of Promise|M|WAR
+#91|Cruel Celebrant|U|WAR
+#92|Band Together|C|WAR
+#93|Tamiyo, Collector of Tales|R|WAR
+#94|Kiora, Behemoth Beckoner|U|WAR
+#95|Jiang Yanggu, Wildcrafter|U|WAR
+#96|Tibalt, Rakish Instigator|U|WAR
+#97|Davriel, Rogue Shadowmage|U|WAR
+#98|Divine Arrow|C|WAR
+#99|Deliver Unto Evil|R|WAR
+#100|Dreadhorde Twins|U|WAR
+#101|Angrath's Rampage|U|WAR
+#102|Challenger Troll|U|WAR
+#103|Mizzium Tank|R|WAR
+#104|Cyclops Electromancer|U|WAR
+#105|Vizier of the Scorpion|U|WAR
+#106|Ajani's Pridemate|U|WAR
+#107|Ashiok, Dream Render|U|WAR
+#108|Ob Nixilis, the Hate-Twisted|U|WAR
+#109|Command the Dreadhorde|R|WAR
+#110|Price of Betrayal|U|WAR
+#111|Callous Dismissal|C|WAR
+#112|Pledge of Unity|U|WAR
+#113|Silent Submersible|R|WAR
+#114|Role Reversal|R|WAR
+#115|Evolution Sage|U|WAR
+#116|Bloom Hulk|C|WAR
+#117|Tibalt's Rager|U|WAR
+#118|Chandra's Pyrohelix|C|WAR
+#119|Lazotep Reaver|C|WAR
+#120|Fblthp, the Lost|R|WAR
+#121|Wanderer's Strike|C|WAR
+#122|Tomik, Distinguished Advokist|R|WAR
+#123|Teferi, Time Raveler|R|WAR
+#124|Huatli, the Sun's Heart|U|WAR
+#125|Saheeli, Sublime Artificer|U|WAR
+#126|Teyo, the Shieldmage|U|WAR
+#127|Centaur Nurturer|C|WAR
+#128|Nissa's Triumph|U|WAR
+#129|Invade the City|U|WAR
+#130|Giant Growth|C|WAR
+#131|Turret Ogre|C|WAR
+#132|Vraska's Finisher|C|WAR
+#133|Herald of the Dreadhorde|C|WAR
+#134|Relentless Advance|C|WAR
+#135|Augur of Bolas|U|WAR
+#136|Sunblade Angel|U|WAR
+#137|Single Combat|R|WAR
+#138|Gideon's Triumph|U|WAR
+#139|Karn, the Great Creator|R|WAR
+#140|Sky Theater Strix|C|WAR
+#141|Liliana's Triumph|U|WAR
+#142|New Horizons|C|WAR
+#143|Snarespinner|C|WAR
+#144|Enforcer Griffin|C|WAR
+#145|Battlefield Promotion|C|WAR
+#146|Ugin's Conjurant|U|WAR
+#147|Dreadmalkin|U|WAR
+#148|Thunder Drake|C|WAR
+#149|Storm the Citadel|U|WAR
+#150|Bond of Passion|U|WAR
+#151|Bond of Revival|U|WAR
+#152|Bond of Discipline|U|WAR
+#153|Firemind Vessel|U|WAR
+#154|Jace's Triumph|U|WAR
+#155|Tamiyo's Epiphany|C|WAR
+#156|Chainwhip Cyclops|C|WAR
+#157|Thundering Ceratok|C|WAR
+#158|Martyr for the Cause|C|WAR
+#159|Wardscale Crocodile|C|WAR
+#160|Pollenbright Druid|C|WAR
+#161|Dreadhorde Arcanist|R|WAR
+#162|Devouring Hellion|U|WAR
+#163|Burning Prophet|C|WAR
+#164|Bolt Bend|U|WAR
+#165|Shriekdiver|C|WAR
+#166|Aid the Fallen|C|WAR
+#167|Totally Lost|C|WAR
+#168|Teferi's Time Twist|C|WAR
+#169|No Escape|C|WAR
+#170|Lazotep Plating|U|WAR
+#171|Flux Channeler|U|WAR
+#172|Erratic Visionary|C|WAR
+#173|Teyo's Lightshield|C|WAR
+#174|Pouncing Lynx|C|WAR
+#175|Parhelion II|R|WAR
+#176|Narset, Parter of Veils|U|WAR
+#177|The Wanderer|U|WAR
+#178|Gateway Plaza|C|WAR
+#179|Mana Geode|C|WAR
+#180|Kraul Stinger|C|WAR
+#181|Vampire Opportunist|C|WAR
+#182|Gideon's Sacrifice|C|WAR
+#183|Guild Globe|C|WAR
+#184|Ashiok's Skulker|C|WAR
+#185|Bond of Insight|U|WAR
+#186|Contentious Plan|C|WAR
+#187|Bond of Flourishing|U|WAR
+#188|Raging Kronch|C|WAR
+#189|Kronch Wrangler|C|WAR
+#190|Courage in Crisis|C|WAR
+#191|Arlinn's Wolf|C|WAR
+#192|Spellgorger Weird|C|WAR
+#193|Heartfire|C|WAR
+#194|Blindblast|C|WAR
+#195|Spellkeeper Weird|C|WAR
+#196|Kasmina's Transmutation|C|WAR
+#197|War Screecher|C|WAR
+#198|Rising Populace|C|WAR
+#199|Ravnica at War|R|WAR
+#200|Makeshift Battalion|C|WAR
+#201|Ignite the Beacon|R|WAR
+#202|Tithebearer Giant|C|WAR
+#203|Unlikely Aid|C|WAR
+#204|Sarkhan's Catharsis|C|WAR
+#205|Charity Extractor|C|WAR
+#206|Spark Reaper|C|WAR
+#207|Toll of the Invasion|C|WAR
+#208|Interplanar Beacon|U|WAR
+#209|Emergence Zone|U|WAR
+#210|God-Pharaoh's Statue|U|WAR
+#211|Primordial Wurm|C|WAR
+#212|Nahiri's Stoneblades|C|WAR
+#213|Invading Manticore|C|WAR
+#214|Honor the God-Pharaoh|C|WAR
+#215|Grim Initiate|C|WAR
+#216|Ahn-Crop Invader|C|WAR
+#217|Lazotep Behemoth|C|WAR
+#218|Stealth Mission|C|WAR
+#219|Kiora's Dambreaker|C|WAR
+#220|Defiant Strike|C|WAR
+#221|Duskmantle Operative|C|WAR
+#222|Saheeli's Silverwing|C|WAR
+#223|Iron Bully|C|WAR
+#224|Neoform|U|WAR
+#225|Vivien's Grizzly|C|WAR
+#226|Steady Aim|C|WAR
+#227|Goblin Assault Team|C|WAR
+#228|Goblin Assailant|C|WAR
+#229|Crush Dissent|C|WAR
+#230|Loxodon Sergeant|C|WAR
+#231|Ironclad Krovod|C|WAR
+#232|Prismite|C|WAR
+#233|Topple the Statue|C|WAR
+#234|Dovin's Veto|U|WAR
+#235|Forced Landing|C|WAR
+#236|Samut's Sprint|C|WAR
+#237|Davriel's Shadowfugue|C|WAR
+#238|Naga Eternal|C|WAR
+#239|Rally of Wings|U|WAR
+#240|Bulwark Giant|C|WAR
+#241|Return to Nature|C|WAR
+#242|Arboreal Grazer|C|WAR
+#243|Wall of Runes|C|WAR
+#244|Banehound|C|WAR
+#245|Charmed Stray|C|WAR
+#246|Niv-Mizzet Reborn|M|WAR
+#247|Kaya's Ghostform|C|WAR
+#248|Demolish|C|WAR
+//Rank|Name|Rarity|Set
 #1|Ravager Wurm|M|RNA
 #2|Skarrgan Hellkite|M|RNA
 #3|Ethereal Absolution|R|RNA

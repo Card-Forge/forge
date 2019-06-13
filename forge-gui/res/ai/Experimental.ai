@@ -253,6 +253,14 @@ BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF=400
 BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF=5
 BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=5
 
+# Use a blink spell to reload a planeswalker's loyalty (e.g. Teferi's Time Twist)
+# A chance (per check) to activate this ability
+BLINK_RELOAD_PLANESWALKER_CHANCE=70
+# Maximum loyalty at which the planeswalker needs to be in order to activate the blink-reload
+BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY=2
+# The difference between maximum loyalty and base loyalty of the planeswalker in order to consider blink-reloading it
+BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF=1
+
 # If enabled, the AI will try to pair up cards to present to the opponent so that a specific card may be picked,
 # it'll also try to grab Accumulated Knowledge and Take Inventory more actively, as well as interact with the Trix
 # combo deck more appropriately. In Reanimator decks, this logic will make the AI pick the fattest threats in the

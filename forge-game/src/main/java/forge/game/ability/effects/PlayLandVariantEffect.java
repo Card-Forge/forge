@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -49,8 +48,10 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         for (byte i = 0; i < MagicColor.WUBRG.length; i++) {
             if (color.hasAnyColor(MagicColor.WUBRG[i])) {
                 landNames.add(MagicColor.Constant.BASIC_LANDS.get(i));
+                landNames.add(MagicColor.Constant.SNOW_LANDS.get(i));
             }
         }
+
         final Predicate<PaperCard> cp = Predicates.compose(new Predicate<String>() {
             @Override
             public boolean apply(final String name) {
@@ -69,15 +70,9 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             random = CardFactory.getCard(ran, activator, game);
         }
 
-        final String imageFileName = game.getRules().canCloneUseTargetsImage() ? source.getImageKey() : random.getImageKey();
-        source.addAlternateState(CardStateName.Cloner, false);
-        source.switchStates(CardStateName.Original, CardStateName.Cloner, false);
-        source.setState(CardStateName.Original, false);
+        source.addCloneState(CardFactory.getCloneStates(random, source, sa), game.getNextTimestamp());
         source.updateStateForView();
-        final CardStateName stateToCopy = random.getCurrentStateName();
-        CardFactory.copyState(random, stateToCopy, source, source.getCurrentStateName());
-        source.setImageKey(imageFileName);
-        
+
         source.setController(activator, 0);
         game.getAction().moveTo(activator.getZone(ZoneType.Battlefield), source, sa);
 

@@ -164,3 +164,11 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 25 R Woolly Razorback
 75 C Zombie Musher
 135 R Zur the Enchanter
+
+[tokens]
+marit_lage
+w_1_1_bird_flying
+w_0_1_deserter
+w_1_1_soldier
+g_1_1_wolf_sound_the_call
+br_3_1_graveborn_haste

@@ -1,0 +1,6 @@
+Name:Vampire
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire
+PT:*/*
+Oracle:

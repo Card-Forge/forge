@@ -5,13 +5,13 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Inspiration-Struck
-Description=Creatures with the inspired mechanic have abilities that trigger when they become untapped, offering great rewards to anyone willing to find creative ways to tap and untap them.
+Description=The gods have given you divine inspiration. Now lay your enemies low! Dream up new strategies to outmaneuver your opponents.
 Deck Type=constructed
 Set=BNG
 Image=inspiration-struck.jpg
 [Main]
 2 Aerie Worshippers|BNG
-1 Arbiter of the Ideal|BNG
+1 Arbiter of the Ideal+|BNG
 2 Black Oak of Odunos|BNG
 1 Breaching Hippocamp|THS
 1 Curse of the Swine|THS

@@ -91,7 +91,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         // AI does not know how to sideboard
         return null;
     }
@@ -367,8 +367,7 @@ public class PlayerControllerAi extends PlayerController {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
-                    return card.getName().equals("Volrath's Shapeshifter")
-                            || card.getStates().contains(CardStateName.OriginalText) && card.getState(CardStateName.OriginalText).getName().equals("Volrath's Shapeshifter");
+                    return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
                 }
             }).isEmpty()) {
                 int bestValue = 0;
@@ -538,12 +537,63 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        return !ComputerUtil.wantMulligan(player, cardsToReturn);
+    }
+
+    @Override
     public CardCollectionView getCardsToMulligan(Player firstPlayer)  {
-        if (!ComputerUtil.wantMulligan(player)) {
+        if (!ComputerUtil.wantMulligan(player, 0)) {
             return null;
         }
 
         return player.getCardsIn(ZoneType.Hand);
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        // TODO This is better than it was before, but still suboptimal (but fast).
+        // Maybe score a bunch of hands based on projected hand size and return the "duds"
+        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        int numLandsDesired = (mulliganingPlayer.getStartingHandSize() - cardsToReturn) / 2;
+
+        CardCollection toReturn = new CardCollection();
+        for (int i = 0; i < cardsToReturn; i++) {
+            hand.removeAll(toReturn);
+
+            CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
+            int numLandsInHand = landsInHand.size() - CardLists.filter(toReturn, Presets.LANDS).size();
+
+            // If we're flooding with lands, get rid of the worst land we have
+            if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
+                CardCollection producingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA);
+                CardCollection nonProducingLands = CardLists.filter(landsInHand, Predicates.not(Presets.LANDS_PRODUCING_MANA));
+                Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
+                        : ComputerUtilCard.getWorstLand(nonProducingLands);
+                toReturn.add(worstLand);
+                continue;
+            }
+
+            // See if we'd scry something to the bottom in this situation. If we want to, probably get rid of it.
+            CardCollection scryBottom = new CardCollection();
+            for (Card c : hand) {
+                // Lands are evaluated separately above, factoring in the number of cards to be returned to the library
+                if (!c.isLand() && !toReturn.contains(c) && !willPutCardOnTop(c)) {
+                    scryBottom.add(c);
+                }
+            }
+            if (!scryBottom.isEmpty()) {
+                CardLists.sortByCmcDesc(scryBottom);
+                toReturn.add(scryBottom.getFirst()); // assume the max CMC one is worse since we're not guaranteed to have lands for it
+                continue;
+            }
+
+            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy
+            // the requirement
+            toReturn.add(ComputerUtilCard.getWorstAI(hand));
+        }
+
+        return CardCollection.getView(toReturn);
     }
 
     @Override
@@ -951,11 +1001,6 @@ public class PlayerControllerAi extends PlayerController {
                 return false; // didn't play spell
         }
         return true;
-    }
-
-    @Override
-    public Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa) {
-        return brains.chooseProliferation(sa);
     }
 
     @Override

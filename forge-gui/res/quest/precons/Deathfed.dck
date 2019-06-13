@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Deathfed
-Description=Winning with the "Deathfed" deck requires some patience. Your deck is designed with the late game in mind, and if you rush your strategy, your opponent may just overrun you. Don't worry if you appear to fall behind early.
+Description=The grave spawns many horrors on the plane of Innistrad, and the "Deathfed" deck puts the stranger ones in your hands. Fill your graveyard with... "raw materials," then lift towering abominations from the dark loam.
 Deck Type=constructed
 Set=ISD
 Image=deathfed.jpg

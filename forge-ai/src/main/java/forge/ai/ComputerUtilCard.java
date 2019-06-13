@@ -1601,7 +1601,7 @@ public class ComputerUtilCard {
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
@@ -1841,6 +1841,15 @@ public class ComputerUtilCard {
         boolean isRightSplit = sa != null && sa.isRightSplit();
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
+
+        if (sa != null && sa.isEvoke()) {
+            if (card.hasSVar("NeedsToPlayEvoked")) {
+                needsToPlayName = "NeedsToPlayEvoked";
+            }
+            if (card.hasSVar("NeedsToPlayEvokedVar")) {
+                needsToPlayVarName = "NeedsToPlayEvokedVar";
+            }
+        }
 
         if (card.hasSVar(needsToPlayName)) {
             final String needsToPlay = card.getSVar(needsToPlayName);

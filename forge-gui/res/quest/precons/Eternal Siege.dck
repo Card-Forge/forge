@@ -5,14 +5,14 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Eternal Siege
-Description=The best strategy against an overwhelming enemy is to stay on the offensive. You'll forge a new alliance between Bant and Naya against the forces of Nicol Bolas, charging into the fray with an array of efficient, battle-ready knights and behemoths.
+Description=The best strategy against an overwhelming enemy is to stay on the offensive. You'll forge a new alliance between Bant and Naya against the forces of Nicol Bolas, charging into the fray with an array of efficient, battle-ready knights and behemoths. As you cast trick after game-altering trick, victory will dawn over the trampled resolve of your foes.
 Deck Type=constructed
 Set=ARB
 Image=eternal_siege.jpg
 [main]
 1 Beacon Behemoth|CFX
 1 Captured Sunlight|ARB
-1 Dauntless Escort|ARB
+1 Dauntless Escort+|ARB
 1 Drumhunter|ALA
 1 Enlisted Wurm|ARB
 2 Excommunicate|ALA

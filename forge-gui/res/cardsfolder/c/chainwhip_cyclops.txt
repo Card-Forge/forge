@@ -1,0 +1,6 @@
+Name:Chainwhip Cyclops
+ManaCost:4 R
+Types:Creature Cyclops Warrior
+PT:4/4
+A:AB$ Pump | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+Oracle:{3}{R}: Target creature can't block this turn.

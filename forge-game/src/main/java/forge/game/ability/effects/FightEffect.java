@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
@@ -130,6 +131,7 @@ public class FightEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
@@ -142,12 +144,12 @@ public class FightEffect extends DamageBaseEffect {
 
         final int dmg1 = fightToughness ? fighterA.getNetToughness() : fighterA.getNetPower();
         if (fighterA.equals(fighterB)) {
-            fighterA.addDamage(dmg1 * 2, fighterA, damageMap, preventMap, sa);
+            fighterA.addDamage(dmg1 * 2, fighterA, damageMap, preventMap, counterTable, sa);
         } else {
             final int dmg2 = fightToughness ? fighterB.getNetToughness() : fighterB.getNetPower();
 
-            fighterB.addDamage(dmg1, fighterA, damageMap, preventMap, sa);
-            fighterA.addDamage(dmg2, fighterB, damageMap, preventMap, sa);
+            fighterB.addDamage(dmg1, fighterA, damageMap, preventMap, counterTable, sa);
+            fighterA.addDamage(dmg2, fighterB, damageMap, preventMap, counterTable, sa);
         }
 
         if (!usedDamageMap) {
@@ -157,6 +159,7 @@ public class FightEffect extends DamageBaseEffect {
             preventMap.clear();
             damageMap.clear();
         }
+        counterTable.triggerCountersPutAll(sa.getHostCard().getGame());
 
         replaceDying(sa);
     }

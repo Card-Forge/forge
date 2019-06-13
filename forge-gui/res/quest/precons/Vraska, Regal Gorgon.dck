@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vraska, Regal Gorgon
-Description=B/G Guilds of Ravnica planeswalker deck with Vraska, Regal Gorgon.
+Description=Vraska's life has been defined by violence, and she will stop at nothing to bring justice to those who have wronged her. Fill your graveyard with creature, then draw on the power of death to crush your foe.
 Deck Type=constructed
 Set=GRN
 Image=vraska_regal_gorgon.jpg

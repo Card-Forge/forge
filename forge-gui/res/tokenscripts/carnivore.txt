@@ -1,0 +1,6 @@
+Name:Carnivore
+ManaCost:no cost
+PT:3/1
+Colors:red
+Types:Creature Beast
+Oracle:

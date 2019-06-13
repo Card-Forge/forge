@@ -1,0 +1,11 @@
+Name:Vesperlark
+ManaCost:2 W
+Types:Creature Elemental
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return target creature card with power 1 or less from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+powerLE1 | TgtPrompt$ Select target creature card with power 1 or less in your graveyard
+K:Evoke:1 W
+SVar:NeedsToPlayEvokedVar:Z GE1
+SVar:Z:Count$ValidGraveyard Creature.YouCtrl+powerLE1
+Oracle:Flying\nWhen Vesperlark leaves the battlefield, return target creature card with power 1 or less from your graveyard to the battlefield.\nEvoke {1}{W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

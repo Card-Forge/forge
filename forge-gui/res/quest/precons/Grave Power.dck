@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Grave Power
-Description=Harness the power of lost souls to command gigantic entities and overwhelming advantages. The dead may be gone, but they're definitely not forgotten.
+Description=No need to fear death-- it just makes you stronger! Fill your graveyard with creatures and then reap the rewards on the battlefield.
 Deck Type=Constructed
 Set=DKA
 Image=grave_power.jpg
@@ -22,7 +22,7 @@ Image=grave_power.jpg
 2 Deranged Assistant|ISD
 1 Executioner's Hood|DKA
 14 Forest|ISD
-1 Ghoultree|DKA
+1 Ghoultree+|DKA
 1 Gnaw to the Bone|ISD
 2 Grim Flowering|DKA
 2 Hollowhenge Beast|DKA

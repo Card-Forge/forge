@@ -94,3 +94,13 @@ Type=Duel_Decks
 86 L Forest
 87 L Forest
 88 L Forest
+
+[tokens]
+w_2_2_cat
+b_0_0_germ
+g_5_5_beast
+g_1_1_insect
+g_1_1_ooze
+g_2_2_ooze_mitotic
+c_1_1_a_myr
+c_2_2_a_spawn

@@ -258,3 +258,16 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 208 C Windwright Mage
 209 U Woolly Thoctar
 31 C Yoked Plowbeast
+
+[tokens]
+w_1_1_soldier
+u_0_1_a_homunculus
+u_1_1_a_thopter_flying
+b_1_1_skeleton_regenerate
+b_2_2_zombie
+r_4_4_dragon_flying
+r_1_1_goblin
+r_1_1_goblin_haste
+g_x_x_ooze
+g_1_1_saproling
+rgw_8_8_beast

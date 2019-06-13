@@ -1,0 +1,10 @@
+Name:Davriel, Rogue Shadowmage
+ManaCost:2 B
+Types:Legendary Planeswalker Davriel
+Loyalty:3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ CardsInHand | SVarCompare$ LE1 | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, CARDNAME deals 2 damage to them.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
+A:AB$ Discard | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+DeckHas:Ability$Discard
+Oracle:At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.\n[-1]: Target player discards a card.

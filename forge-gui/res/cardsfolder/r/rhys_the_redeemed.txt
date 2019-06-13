@@ -2,7 +2,7 @@ Name:Rhys the Redeemed
 ManaCost:GW
 Types:Legendary Creature Elf Warrior
 PT:1/1
-A:AB$ Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green,White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 green and white Elf Warrior creature token.
+A:AB$ Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenScript$ gw_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ gw 1 1 elf warrior shm | SpellDescription$ Create a 1/1 green and white Elf Warrior creature token.
 A:AB$ RepeatEach | Cost$ 4 GW GW T | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token+YouCtrl | AILogic$ CloneMyTokens | SpellDescription$ For each creature token you control, create a token that's a copy of that creature.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_redeemed.jpg

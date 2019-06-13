@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dead Ahead
-Description=When the seething rage of Jund and the necromancy of Grixis come together, the result is a fearless, fiery assault. Hurl both fire and minions directly at your enemies' eyeballs as you cut down creatures and life totals with your death magic.
+Description=When the seething rage of Jund and the necromancy of Grixis come together, the result is a fearless, fiery assault. Hurl both fire and minions directly at your enemies' eyeballs as you cut down creatures and life totals with your death magic. Live for the moment! Who needs long-term plans when you've got a horde of burning zombies?
 Deck Type=constructed
 Set=ARB
 Image=dead_ahead.jpg
@@ -17,7 +17,7 @@ Image=dead_ahead.jpg
 1 Bog Wraith|10E
 1 Breath of Malfegor|ARB
 1 Cruel Edict|10E
-1 Deathbringer Thoctar|ARB
+1 Deathbringer Thoctar+|ARB
 1 Dreg Reaver|ALA
 2 Dregscape Zombie|ALA
 2 Igneous Pouncer|ARB

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Way Wild
-Description=You may think other decks have big creatures, but "Way Wild" will have their wimpy little creatures running for cover. You win by playing cards that let you get more mana faster so you can play big creatures long before you opponent can.
+Description=In a world where everything is either prey or predator, only the strong survive. That's why the "Way Wild" deck has big green creatures and lots of them. It also has ways of making your creatures even bigger, quicker, and easier to defend.
 Deck Type=constructed
 Set=7ED
 Image=way_wild.jpg

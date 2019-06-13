@@ -1,0 +1,6 @@
+Name:Cleric
+ManaCost:no cost
+Types:Enchantment Creature Cleric
+Colors:white
+PT:2/1
+Oracle:

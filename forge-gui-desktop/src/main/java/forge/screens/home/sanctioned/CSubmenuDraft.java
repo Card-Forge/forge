@@ -29,6 +29,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -114,11 +115,12 @@ public enum CSubmenuDraft implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
+        final Localizer localizer = Localizer.getInstance();
         final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected();
         final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
-            FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
+            FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
             return;
         }
 
@@ -179,8 +181,9 @@ public enum CSubmenuDraft implements ICDoc {
 
     /** */
     private void setupDraft() {
+        final Localizer localizer = Localizer.getInstance();
         // Determine what kind of booster draft to run
-        final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
+        final LimitedPoolType poolType = GuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
         if (poolType == null) { return; }
 
         final BoosterDraft draft = BoosterDraft.createDraft(poolType);

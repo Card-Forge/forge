@@ -34,7 +34,7 @@ public enum VCardDesigner implements IVDoc<CCardDesigner> {
     		.build();
 
     //========== Constructor
-    private VCardDesigner() {
+    VCardDesigner() {
     }
     
     public FLabel getBtnSaveCard() {

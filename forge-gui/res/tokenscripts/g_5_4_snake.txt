@@ -1,0 +1,6 @@
+Name:Snake
+ManaCost:no cost
+Types:Creature Snake
+Colors:green
+PT:5/4
+Oracle:

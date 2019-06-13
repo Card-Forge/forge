@@ -1,0 +1,6 @@
+Name:Hound
+ManaCost:no cost
+PT:1/1
+Colors:green
+Types:Creature Hound
+Oracle:

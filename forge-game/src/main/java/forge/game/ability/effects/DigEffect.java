@@ -1,14 +1,16 @@
 package forge.game.ability.effects;
 
-import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.player.DelayedReveal;
@@ -111,6 +113,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         CardZoneTable table = new CardZoneTable();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -223,6 +226,23 @@ public class DigEffect extends SpellAbilityEffect {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
                     }
+                    else if (sa.hasParam("ForEachColorPair")) {
+                        movedCards = new CardCollection();
+                        if (p == chooser) {
+                            chooser.getController().tempShowCards(top);
+                        }
+                        for (final byte pair : MagicColor.COLORPAIR) {
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
+                                    delayedReveal, sa, "Choose one", false, p);
+                            if (chosen != null) {
+                                movedCards.add(chosen);
+                            }
+                        }
+                        chooser.getController().endTempShowCards();
+                        if (!movedCards.isEmpty()) {
+                            game.getAction().reveal(movedCards, chooser, true, chooser + " picked ");
+                        }
+                    }
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
@@ -318,7 +338,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         if (sa.hasParam("ExileFaceDown")) {
-                            c.setState(CardStateName.FaceDown, true);
+                            c.turnFaceDown(true);
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);
@@ -379,7 +399,8 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                             } else if (destZone2 == ZoneType.Exile) {
                                 if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, true);
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
+                                            1, player, true, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                             }
@@ -390,6 +411,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
         //table trigger there
         table.triggerChangesZoneAll(game);
+        counterTable.triggerCountersPutAll(game);
     }
 
     // TODO This should be somewhere else, maybe like CardUtil or something like that

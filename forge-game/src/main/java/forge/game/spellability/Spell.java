@@ -143,6 +143,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         // reset static abilities
         if (lkicheck) {
             game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
             game.getTracker().unfreeze();
         }
 

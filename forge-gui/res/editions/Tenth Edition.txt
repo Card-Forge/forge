@@ -392,3 +392,11 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 363 R Yavimaya Coast
 310 U Yavimaya Enchantress
 62 C Youthful Knight
+
+[tokens]
+wasp
+w_1_1_soldier
+b_2_2_zombie
+r_5_5_dragon_flying
+r_1_1_goblin
+g_1_1_saproling

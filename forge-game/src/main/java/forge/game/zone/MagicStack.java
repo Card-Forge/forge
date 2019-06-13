@@ -133,16 +133,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void addAndUnfreeze(final SpellAbility ability) {
+        final Card source = ability.getHostCard();
+
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
-            ability.getRestrictions().abilityActivated();
+            source.addAbilityActivated(ability);
             ability.checkActivationResloveSubs();
         }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
                 ability.setHostCard(game.getAction().moveToStack(source, ability, null));
             }
@@ -232,7 +233,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (!hasLegalTargeting(sp, source)) {
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription());
+            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
+            System.err.println(str + sp.getAllTargetChoices());
+            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
             return;
         }
 
@@ -396,6 +399,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        // Run SpellAbilityCopy triggers
+        if (sp.isCopied()) {
+            runParams.put("Activator", sp.getActivatingPlayer());
+            runParams.put("CopySA", si.getSpellAbility(true));
+            // Run SpellCopy triggers
+            if (sp.isSpell()) {
+                game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
+            }
+        }
+
         // Run BecomesTarget triggers
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
@@ -479,7 +492,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             thisTurnCast.add(sp.getHostCard());
             sp.getActivatingPlayer().addSpellCastThisTurn();
         }
-        if (sp.isAbility() && sp.getRestrictions().isPwAbility()) {
+        if (sp.isAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();

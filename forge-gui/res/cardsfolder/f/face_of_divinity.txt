@@ -1,0 +1,9 @@
+Name:Face of Divinity
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy Aura.Other | AddKeyword$ First Strike & Lifelink | Description$ As long as another Aura is attached to enchanted creature, it has first strike and lifelink.
+SVar:EnchantMe:Multiple
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nAs long as another Aura is attached to enchanted creature, it has first strike and lifelink.

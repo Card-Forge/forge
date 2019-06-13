@@ -213,7 +213,7 @@ public class CardRenderer {
         return cardArt;
     }
 
-    public static FImageComplex getAftermathSecondCardArt(String imageKey) {
+    public static FImageComplex getAftermathSecondCardArt(final String imageKey) {
         FImageComplex cardArt = cardArtCache.get("Aftermath_second_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
@@ -439,7 +439,7 @@ public class CardRenderer {
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
         final CardStateView details = card.getCurrentState();
-        final boolean isFaceDown = details.getState() == CardStateName.FaceDown;
+        final boolean isFaceDown = card.isFaceDown();
         final DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(details, canShow); // canShow doesn't work here for face down Morphs
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);

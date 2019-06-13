@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
@@ -63,8 +62,8 @@ public class MillEffect extends SpellAbilityEffect {
                     }
                     for (final Card c : milled) {
                         c.setExiledWith(host);
-                    	if (facedown) {
-                            c.setState(CardStateName.FaceDown, true);
+                        if (facedown) {
+                            c.turnFaceDown(true);
                         }
                     }
                 }

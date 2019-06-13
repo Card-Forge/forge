@@ -272,11 +272,11 @@ public class DamageDealAi extends DamageAiBase {
                 sourceName.equals("Crater's Claws")){
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
-                int actualPay = 0;
+                int actualPay = dmg;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 for (final Card c : sa.getTargets().getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
+                    if (adjDamage < actualPay) {
                         actualPay = adjDamage;
                     }
                 }
@@ -297,6 +297,11 @@ public class DamageDealAi extends DamageAiBase {
                     break;
                 }
             }
+        }
+
+        if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
+            final int CMC = Integer.parseInt(source.getSVar("PayX"));
+            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC)).isEmpty();
         }
 
         return true;
@@ -648,10 +653,9 @@ public class DamageDealAi extends DamageAiBase {
                 if (c != null && !this.shouldTgtP(ai, sa, dmg, noPrevention, true)) {
                     tcs.add(c);
                     if (divided) {
-                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                        if (assignedDamage <= dmg) {
-                            tgt.addDividedAllocation(c, assignedDamage);
-                        }
+                        int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        assignedDamage = Math.min(dmg, assignedDamage);
+                        tgt.addDividedAllocation(c, assignedDamage);
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
@@ -718,8 +722,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
 
                     if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.getRestrictions().isPwAbility()
-                                || source.hasSVar("EndOfTurnLeavePlay"))
+                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
                             freePing = true;
                     }
                 }

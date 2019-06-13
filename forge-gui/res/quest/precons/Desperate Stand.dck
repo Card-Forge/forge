@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Desperate Stand
-Description=Oath of the Gatewatch W/B Intro Pack
+Description=Spurred by the threat of the monstrous Eldrazi, the inhabitants of Zendikar have come together like never before. You Ally creatures can team up to unleash devastating effects on the Eldrazi foe and reclaim Zendikar for its people.
 Deck Type=constructed
 Set=OGW
 Image=desperate_stand.jpg
@@ -26,7 +26,7 @@ Image=desperate_stand.jpg
 2 Kor Entanglers|BFZ
 2 Kor Scythemaster|OGW
 1 Malakir Soothsayer|OGW
-1 Munda's Vanguard|OGW
+1 Munda's Vanguard+|OGW
 2 Ondu War Cleric|OGW
 14 Plains|BFZ
 2 Serene Steward|BFZ

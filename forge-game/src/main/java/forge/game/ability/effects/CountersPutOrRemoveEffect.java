@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -57,6 +58,8 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             ctype = CounterType.valueOf(sa.getParam("CounterType"));
         }
         
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
         for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
             Card gameCard = game.getCardState(tgtCard, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -69,19 +72,20 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 if (gameCard.hasCounters()) {
                     if (sa.hasParam("EachExistingCounter")) {
                         for (CounterType listType : Lists.newArrayList(gameCard.getCounters().keySet())) {
-                            addOrRemoveCounter(sa, gameCard, listType, counterAmount);
+                            addOrRemoveCounter(sa, gameCard, listType, counterAmount, table);
                         }
                     } else {
-                        addOrRemoveCounter(sa, gameCard, ctype, counterAmount);
+                        addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table);
                     }
                     game.updateLastStateForCard(gameCard);
                 }
             }
         }
+        table.triggerCountersPutAll(game);
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
-            final int counterAmount) {
+            final int counterAmount, GameEntityCounterTable table) {
         final Player pl = sa.getActivatingPlayer();
         final PlayerController pc = pl.getController();
 
@@ -106,7 +110,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             
             boolean apply = zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack);
 
-            tgtCard.addCounter(chosenType, counterAmount, pl, apply);
+            tgtCard.addCounter(chosenType, counterAmount, pl, apply, table);
         } else {
             tgtCard.subtractCounter(chosenType, counterAmount);
         }

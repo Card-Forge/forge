@@ -1,0 +1,6 @@
+Name:Human Soldier
+ManaCost:no cost
+Types:Creature Human Soldier
+Colors:white
+PT:1/1
+Oracle:

@@ -93,3 +93,7 @@ Foil=NotSupported
 85 L Forest
 86 L Plains
 87 L Plains
+
+[tokens]
+w_1_1_pegasus_flying
+r_1_1_goblin

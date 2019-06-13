@@ -5,8 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Conquering Hordes
-Description=Do you Mardu? Khan you see yourself pillaging and plundering? Would you say you're a weekend and weekday warrior? Are you really, really into attacking? Well then, the Khans of Tarkir Event Deck is for you! This Warrior-based white-black deck attacks hard and fast, outfitting the warrior clans of Tarkir with some of the most punishing weapons of Theros.
-Deck Type=constructed
+Description=The clans battle for supremacy in war-torn Tarkir. Banners fly above the battlefield as warlords clash with their sworn enemies. Spur your hordes of warriors onward across the steppes as they spill blood in the fight for ultimate domination.
 Set=KTK
 Image=conquering_hordes.jpg
 [main]

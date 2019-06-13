@@ -1,0 +1,6 @@
+Name:Giant Warrior
+ManaCost:no cost
+PT:5/5
+Colors:white
+Types:Creature Giant Warrior
+Oracle:

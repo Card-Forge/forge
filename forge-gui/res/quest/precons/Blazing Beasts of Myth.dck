@@ -8,13 +8,13 @@ Deck Type=constructed
 Set=THS
 Image=blazing_beasts_of_myth.jpg
 Name=Blazing Beasts of Myth
-Description=Monstrous terrors encroach into the territories of Theros's proud civilizations, threatening to crush their great cities into dust. The "Blazing Beasts of Myth" deck puts them at your command. 
+Description=Burn the path for your enormous beasts to triumph. Flood your enemies in fire while growing your creatures to unmanageable sizes to take down any force in the way.
 [Main]
 1 Artisan's Sorrow|THS
 2 Borderland Minotaur|THS
 1 Destructive Revelry|THS
 1 Dragon Mantle|THS
-1 Ember Swallower|THS
+1 Ember Swallower+|THS
 11 Forest|THS
 1 Ill-Tempered Cyclops|THS
 2 Lightning Strike|THS

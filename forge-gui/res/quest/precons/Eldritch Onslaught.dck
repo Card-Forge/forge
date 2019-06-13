@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Eldritch Onslaught
-Description=With your bewildering array of magic, you'll soon have your opponent spinning in circles.
+Description=Knowledge is power! Use cards with flashback to repeateadly pummel your opponent until your supernatural forces can conjure up a suitably horrifying end.
 Deck Type=constructed
 Set=ISD
 Image=eldritch_onslaught.jpg
@@ -32,6 +32,6 @@ Image=eldritch_onslaught.jpg
 1 Rolling Temblor|ISD
 1 Scourge of Geier Reach|ISD
 2 Silent Departure|ISD
-1 Sturmgeist|ISD
+1 Sturmgeist+|ISD
 2 Think Twice|ISD
 [sideboard]

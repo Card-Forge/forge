@@ -1,0 +1,5 @@
+Name:Golem
+ManaCost:no cost
+PT:9/9
+Types:Artifact Creature Golem
+Oracle:

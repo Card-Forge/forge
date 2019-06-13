@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Entangling Webs
-Description=If you believe that bigger is better, the "Entangling Webs" deck is right up your alley! Loaded with giant predators and crafty spiders, this deck is perfect for an all-out rumble in the jungle.
+Description=Eight legs are better than two, at least for wrapping up your enemies into bite-sized treats! Pump up your green and red behemoths while holding off your foes with a skittering horde of hairy spiders and their web-weaving leader.
 Deck Type=constructed
 Set=M12
 Image=entangling_webs.jpg
@@ -13,7 +13,7 @@ Image=entangling_webs.jpg
 18 Forest|M12
 7 Mountain|M12
 2 Acidic Slime|M12
-1 Arachnus Spinner|M12
+1 Arachnus Spinner+|M12
 2 Crimson Mage|M12
 1 Garruk's Companion|M12
 1 Garruk's Horde|M12

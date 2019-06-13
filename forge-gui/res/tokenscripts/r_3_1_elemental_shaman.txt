@@ -1,0 +1,6 @@
+Name:Elemental Shaman
+ManaCost:no cost
+Types:Creature Elemental Shaman
+Colors:red
+PT:3/1
+Oracle:

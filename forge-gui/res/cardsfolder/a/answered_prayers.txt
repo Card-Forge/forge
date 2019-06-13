@@ -1,0 +1,8 @@
+Name:Answered Prayers
+ManaCost:1 W W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature enters the battlefield under your control, you gain 1 life. If CARDNAME isn't a creature, it becomes a 3/3 Angel creature with flying in addition to its other types until end of turn.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Angel | Keywords$ Flying | ConditionDefined$ Self | ConditionPresent$ Card.nonCreature
+SVar:BuffedBy:Creature
+Oracle:Whenever a creature enters the battlefield under your control, you gain 1 life. If Answered Prayers isn't a creature, it becomes a 3/3 Angel creature with flying in addition to its other types until end of turn.

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vampiric Thirst
-Description=Vampiric Thirst - Shadows over Innistrad B/R intro pack.
+Description=Madness sweeps across the land, and vampires drop their veneer of sophisticated nobility to indulge their brutal thirst for blood. Before your opponent can react, your vampires will dominate the battlefield, seizing victory as they feast.
 Deck Type=constructed
 Set=SOI
 Image=vampiric_thirst.jpg
@@ -20,7 +20,7 @@ Image=vampiric_thirst.jpg
 1 Mad Prophet|SOI
 2 Voldaren Duelist|SOI
 2 Twins of Maurer Estate|SOI
-1 Markov Dreadknight|SOI
+1 Markov Dreadknight+|SOI
 2 Incorrigible Youths|SOI
 1 Macabre Waltz|SOI
 1 Murderous Compulsion|SOI

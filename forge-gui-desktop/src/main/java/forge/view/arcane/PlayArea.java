@@ -722,7 +722,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return needLayoutRefresh;
     }
 
-    private static enum RowType {
+    private enum RowType {
         Land,
         Creature,
         CreatureNonToken,

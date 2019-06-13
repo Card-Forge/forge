@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Battle Cries
-Description=This deck hits fast and hard, swarming your opponents with an army of ragtag Mirran rebels. It's all about strength in numbers. 
+Description=Death to Phyrexia! Ignite the fury among your Mirran heroes with the battle cry ability, transforming them into a relentless attack force. Allies angelic and ardent will guide your forces to victory.
 Deck Type=constructed
 Set=MBS
 Image=battle_cries.jpg
@@ -29,7 +29,7 @@ Image=battle_cries.jpg
 1 Myrsmith
 1 Siege Mastodon
 1 Silvercoat Lion
-1 Victory's Herald
+1 Victory's Herald+
 2 Arrest
 2 Galvanic Blast
 3 Master's Call

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Gruul Goliaths
-Description=In the Gruul Clans, bigger is better, and with the "Gruul Goliaths" deck, you'll be king of the hill. Gruul creatures crave battle so much, sometimes they don't even wait until they're on the battlefield!
+Description=The brutish outsiders of the Gruul Clans are sick of being kicked around. It's time to taste sweet revenge. You'll build up a base of speedy mana, then knock the smirk off your opponent's face with the "Gruul Goliaths" deck's stream of hulking monsters.
 Deck Type=constructed
 Set=GTC
 Image=gruul_goliaths.jpg
@@ -23,7 +23,7 @@ Image=gruul_goliaths.jpg
 1  Gruul Ragebeast|GTC
 1  Primal Huntbeast|M13
 1  Ripscale Predator|GTC
-1  Rubblehulk|GTC
+1  Rubblehulk+|GTC
 2  Ruination Wurm|GTC
 1  Scab-Clan Charger|GTC
 1  Skarrg Guildmage|GTC

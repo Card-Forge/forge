@@ -13,7 +13,7 @@ public enum CCardDesigner implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private CCardDesigner() {
+    CCardDesigner() {
         VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setCommand(new Runnable() {
             @Override public final void run() {
                 CCardScript.SINGLETON_INSTANCE.saveChanges();

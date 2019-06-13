@@ -6,7 +6,6 @@ import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -86,9 +85,7 @@ public class HumanPlay {
             CharmEffect.makeChoices(sa);
         }
 
-        if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-            sa = AbilityUtils.addSpliceEffects(sa);
-        }
+        sa = AbilityUtils.addSpliceEffects(sa);
 
         if (sa.hasParam("Bestow")) {
             source.animateBestow();
@@ -200,9 +197,7 @@ public class HumanPlay {
                 if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
                     CharmEffect.makeChoices(sa);
                 }
-                if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-                    sa = AbilityUtils.addSpliceEffects(sa);
-                }
+                sa = AbilityUtils.addSpliceEffects(sa);
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
@@ -394,58 +389,21 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostDamage) {
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                if (!p.canPayLife(amount)) {
+                // not a pay life but damage!
+                PaymentDecision pd = part.accept(hcd);
+
+                if (pd == null)
                     return false;
-                }
-
-                if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?", sourceAbility)) {
-                    return false;
-                }
-                CardDamageMap damageMap = new CardDamageMap();
-                CardDamageMap preventMap = new CardDamageMap();
-
-                p.addDamage(amount, source, damageMap, preventMap, sourceAbility);
-
-                preventMap.triggerPreventDamage(false);
-                damageMap.triggerDamageDoneOnce(false, sourceAbility);
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostPutCounter) {
-                CounterType counterType = ((CostPutCounter) part).getCounter();
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                if (part.payCostFromSource()) {
-                    if (!source.canReceiveCounters(counterType)) {
-                        String message = TextUtil.concatNoSpace("Won't be able to pay upkeep for ", source.toString(), " but it can't have ", counterType.getName(), " counters put on it.");
-                        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, message);
-                        return false;
-                    }
+                PaymentDecision pd = part.accept(hcd);
 
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?", sourceAbility)) {
-                        return false;
-                    }
-
-                    source.addCounter(counterType, amount, p, false);
-                }
-                else {
-                    CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
-                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
-                    if (list.isEmpty()) { return false; }
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?", sourceAbility)) {
-                        return false;
-                    }
-                    while (amount > 0) {
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
-                        inp.setMessage("Select a card to add a counter to");
-                        inp.setCancelAllowed(true);
-                        inp.showAndWait();
-                        if (inp.hasCancelled()) {
-                            continue;
-                        }
-                        Card selected = inp.getFirstSelected();
-                        selected.addCounter(counterType, 1, p, false);
-                        amount--;
-                    }
-                }
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveCounter) {
                 CounterType counterType = ((CostRemoveCounter) part).counter;

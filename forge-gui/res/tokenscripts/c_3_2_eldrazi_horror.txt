@@ -1,0 +1,5 @@
+Name:Eldrazi Horror
+ManaCost:no cost
+PT:3/2
+Types:Creature Eldrazi Horror
+Oracle:

@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.*;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.GameObjectMap;
 import forge.game.card.Card;
@@ -448,7 +449,7 @@ public class Combat {
 
             for (Card attacker : band.getAttackers()) {
                 if (blockers.size() <= 1) {
-                    blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blockers));
+                    orderBlockersForDamageAssignment(attacker, new CardCollection(blockers));
                 }
                 else { // process it a bit later
                     blockersNeedManualOrdering.add(Pair.of(attacker, new CardCollection(blockers))); // we know there's a list
@@ -458,27 +459,37 @@ public class Combat {
         
         // brought this out of iteration on bands to avoid concurrency problems 
         for (Pair<Card, CardCollection> pair : blockersNeedManualOrdering) {
-            // Damage Ordering needs to take cards like Melee into account, is that happening?
-            CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlockers(pair.getLeft(), pair.getRight()); // we know there's a list
-            blockersOrderedForDamageAssignment.put(pair.getLeft(), orderedBlockers);
-
-            // Display the chosen order of blockers in the log
-            // TODO: this is best done via a combat panel update
-            StringBuilder sb = new StringBuilder();
-            sb.append(playerWhoAttacks.getName());
-            sb.append(" has ordered blockers for ");
-            sb.append(pair.getLeft());
-            sb.append(": ");
-            for (int i = 0; i < orderedBlockers.size(); i++) {
-                sb.append(orderedBlockers.get(i));
-                if (i != orderedBlockers.size() - 1) {
-                    sb.append(", ");
-                }
-            }
-            playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
+            orderBlockersForDamageAssignment(pair.getLeft(), pair.getRight());
         }
     }
     
+    /** If there are multiple blockers, the Attacker declares the Assignment Order */
+    public void orderBlockersForDamageAssignment(Card attacker, CardCollection blockers) { // this method performs controller's role 
+        if (blockers.size() <= 1) {
+            blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blockers));
+            return;
+        }
+
+        // Damage Ordering needs to take cards like Melee into account, is that happening?
+        CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlockers(attacker, blockers); // we know there's a list
+        blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
+
+        // Display the chosen order of blockers in the log
+        // TODO: this is best done via a combat panel update
+        StringBuilder sb = new StringBuilder();
+        sb.append(playerWhoAttacks.getName());
+        sb.append(" has ordered blockers for ");
+        sb.append(attacker);
+        sb.append(": ");
+        for (int i = 0; i < orderedBlockers.size(); i++) {
+            sb.append(orderedBlockers.get(i));
+            if (i != orderedBlockers.size() - 1) {
+                sb.append(", ");
+            }
+        }
+        playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
+    }
+
     /**
      * Add a blocker to the damage assignment order of an attacker. The
      * relative order of creatures already blocking the attacker may not be
@@ -783,18 +794,20 @@ public class Combat {
     }
 
     public void dealAssignedDamage() {
-    	playerWhoAttacks.getGame().copyLastState();
+        final Game game = playerWhoAttacks.getGame();
+        game.copyLastState();
 
-    	CardDamageMap preventMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         // This function handles both Regular and First Strike combat assignment
         for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
+                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
             }
             else if (defender instanceof Card) { // planeswalker
-                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
+                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
             }
         }
 
@@ -811,7 +824,7 @@ public class Combat {
                 continue;
             }
 
-            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap);
+            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap, counterTable);
             c.clearAssignedDamage();
         }
 
@@ -823,6 +836,9 @@ public class Combat {
         // LifeLink for Combat Damage at this place
         dealtDamageTo.triggerDamageDoneOnce(true, null);
         dealtDamageTo.clear();
+
+        counterTable.triggerCountersPutAll(game);
+        counterTable.clear();
     }
 
     public final boolean isUnblocked(final Card att) {

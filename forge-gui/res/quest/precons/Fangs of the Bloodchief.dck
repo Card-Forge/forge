@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Fangs of the Bloodchief
-Description=The "Fangs of the Bloodchief " deck puts you in control of Zendikar's most insidious predators - Vampires. With their assistance, you'll drain the life right out of your enemies.
+Description=Unleash a torrent of vampires! Use your destructive spells to clear a path for your most powerful vampires, the bloodchiefs. Once Butcher of Malakir enters the battlefield, the opposition will be bled dry.
 Deck Type=constructed
 Set=WWK
 Image=fangs_of_the_bloodchief.jpg
@@ -23,7 +23,7 @@ Image=fangs_of_the_bloodchief.jpg
 2 Mire's Toll|WWK
 2 Ruthless Cullblade|WWK
 1 Dead Reckoning|WWK
-1 Butcher of Malakir|WWK
+1 Butcher of Malakir+|WWK
 2 Pulse Tracker|WWK
 1 Urge to Feed|WWK
 1 Brink of Disaster|WWK

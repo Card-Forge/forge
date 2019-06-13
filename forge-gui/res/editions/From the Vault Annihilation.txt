@@ -21,3 +21,6 @@ Type=From_the_Vault
 13 M Upheaval
 14 M Virtue's Ruin
 15 M Wrath of God
+
+[tokens]
+w_1_1_soldier

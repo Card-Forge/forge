@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Death's Beginning
-Description=The "Death's Beginning" deck focuses on building up a massive graveyard and playing creatures that grow stronger based on the size of your graveyard. 
+Description=Even in death, your creatures serve you. You control life and death on the battlefield, and as your graveyard fills with creatures, your dark power swells. 
 Deck Type=constructed
 Set=BNG
 Image=deaths_beginning.jpg
@@ -14,7 +14,7 @@ Image=deaths_beginning.jpg
 2 Asphyxiate|BNG
 2 Commune with the Gods|THS
 1 Cutthroat Maneuver|THS
-1 Eater of Hope|BNG
+1 Eater of Hope+|BNG
 2 Felhide Brawler|BNG
 1 Felhide Minotaur|THS
 11 Forest|THS

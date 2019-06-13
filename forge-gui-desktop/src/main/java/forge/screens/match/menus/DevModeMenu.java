@@ -24,7 +24,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
     public DevModeMenu(final CDev controller) {
         this.controller = controller;
         controller.addListener(this);
-    };
+    }
 
     // Using an enum to avoid having to create multiple
     // ActionListeners each calling a single method.
@@ -49,7 +49,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
         DEV_CORNER("Developer's Corner");
 
         protected String caption;
-        private DevMenuItem(final String value) {
+        DevMenuItem(final String value) {
             this.caption = value;
         }
         protected static DevMenuItem getValue(final String s) {
@@ -60,7 +60,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
             }
             return null;
         }
-    };
+    }
 
     @Override
     public void update(final boolean playUnlimitedLands, final boolean mayViewAllCards) {

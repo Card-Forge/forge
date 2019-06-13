@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vehicle Rush
-Description=Mardu Vehicles Challenger Deck
+Description=Cast powerful Vehicles early and crew them with low-cost creatures to launch a speedy assault. Get extra momentum from your artifact synergies, and use targeted removal to keep your opponent's board clear as you crash through their defenses.
 Deck Type=constructed
 Set=RIX
 Image=vehicle_rush.jpg

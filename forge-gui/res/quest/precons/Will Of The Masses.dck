@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Will Of The Masses
-Description=If your main strategy is to overwhelm your opponent by having far more creatures than they can deal with, then Will of the Masses is for you. Will of the Masses is a green & white M15 intro deck which heavily utilizes the returning Convoke mechanic.
+Description=The masses have spoken, and that spells doom for your opponent. With the convoke mechanic, your creatures become a resource that enable you to bring out even bigger creatures faster.
 Deck Type=constructed
 Set=M15
 Image=will_of_the_masses.jpg
@@ -25,7 +25,7 @@ Image=will_of_the_masses.jpg
 2 Sunblade Elf|M15
 2 Living Totem|M15
 2 Will-Forged Golem|M15
-1 Phytotitan|M15
+1 Phytotitan+|M15
 2 Seraph of the Masses|M15
 1 Nissa's Expedition|M15
 1 Sanctified Charge|M15

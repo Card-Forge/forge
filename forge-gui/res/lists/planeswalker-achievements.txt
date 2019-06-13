@@ -15,6 +15,7 @@ Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank sl
 Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
 Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
+Chandra, Fire Artisan|Chandra's Fiery Rush|Combo time!
 Chandra, Flamecaller|Chandra's Sea of Flames|You didn't activate this for 0 just to get the achievement, did you?
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
@@ -40,16 +41,19 @@ Garruk Wildspeaker|Garruk's Overrun|I speak seven languages, including Wild!
 Garruk, Apex Predator|Garruk's Prey|Funny, it's usually a good thing to have an emblem...
 Garruk, Caller of Beasts|Garruk's Wild Pair|Can you beat two for the price of one?
 Garruk, Primal Hunter|Garruk's Garden|They came out after a rain...
+Gideon Blackblade|Gideon's Righteous Strike|Blackblade cleaving black heart!
 Gideon Jura|Gideon's Brawl|Are you man enough to mess with me?
 Gideon of the Trials|Gideon's Eternity|Justice will never die!
 Gideon, Ally of Zendikar|Gideon's Anthem|Giddy up! Let's all rally against the Eldrazi threat!
 Gideon, Battle-Forged|Gideon's First Steps|I still have a long road ahead of me...
 Gideon, Champion of Justice|Gideon's Aftermath|Gideon stands alone!
 Gideon, Martial Paragon|Gideon's Alpha Strike|Geronimo!
+Gideon, the Oathsworn|Gideon's Ultimate Sacrifice|Follow me to oblivion.
 Huatli, Dinosaur Knight|Huatli's Dino Thunder|Victory is ours forever more!
 Huatli, Radiant Champion|Huatli's Herd|Seize. Release. Feast.
 Huatli, Warrior Poet|Huatli's Poetry|Knock knock, open up the door, it's real!
 Jace Beleren|Jace's Grind|Nice memories... not!
+Jace, Arcane Strategist|Jace's Secret Passage|Don't worry. I know the way through these minds.
 Jace, Architect of Thought|Jace's Incantation|I like that one. I'll steal it!
 Jace, Cunning Castaway|Jace's Mirror Image|Who is real and who is fake?
 Jace, Ingenious Mind-Mage|Jace's Will|Let me change your minds...
@@ -58,6 +62,7 @@ Jace, Telepath Unbound|Jace's Erasure|First empty your mind and then... nope, th
 Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
 Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy named Erayo...
+Jace, Wielder of Mysteries|Jace's Neat Solution|Everything is solved. No loose ends.
 Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
 Karn Liberated|Karn's Reset|Let's do this again!
 Kaya, Ghost Assassin|Kaya's Syphon|You don't MIND, do you?
@@ -71,6 +76,7 @@ Liliana of the Veil|Liliana's Choice|Which one of your children do you love best
 Liliana, Death's Majesty|Liliana's Wrath|Everybody died... except for those who were already dead.
 Liliana, Death Wielder|Liliana's Mass Raise|Death is no excuse to stop working.
 Liliana, Defiant Necromancer|Liliana's Necromastery|Come join the Dark Side...
+Liliana, Dreadhorde General|Liliana's Utter Obliteration|The choice is yours.
 Liliana, the Last Hope|Liliana's Army|The dead will always outnumber the living...
 Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's environmentally friendly!
 Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
@@ -78,6 +84,7 @@ Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
 Narset Transcendent|Narset's One Rule|No spells for you!
+Nicol Bolas, Dragon-God|Bolas's Flawless Victory|Who's left to oppose me?
 Nicol Bolas, God-Pharaoh|Bolas's Cleansing|Let's just tear this down and start again. Or... maybe tearing it down will suffice.
 Nicol Bolas, Planeswalker|Bolas's Ultimatum|Whatever you do, don't call him "Nicol"!
 Nicol Bolas, the Arisen|Bolas's Mind Wipe|Anything Jace can do, I can do better.
@@ -89,6 +96,7 @@ Nissa, Sage Animist|Nissa's Wake-Up Call|Wake up! Time to work!
 Nissa, Steward of Elements|Nissa's Flying Rocks|You don't need to be without sin to throw rocks!
 Nissa, Vital Force|Nissa's Harvest|What a landfall!
 Nissa, Voice of Zendikar|Nissa's Bounty|It's harvest time!
+Nissa, Who Shakes the World|Nissa's Primeval Forest|No trees fall in MY forest, no matter who is around to hear.
 Nissa, Worldwaker|Nissa's Awakening|The whole country is here!
 Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifices sometimes.
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
@@ -104,6 +112,7 @@ Sarkhan, Dragonsoul|Sarkhan's Dragon Search|They can hide anywhere.
 Sarkhan, Fireblood|Sarkhan's Call for Friends|My minions, meet the meat.
 Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
+Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!
 Sorin, Lord of Innistrad|Sorin's Recruitment|My favorite game is Shogi!
@@ -119,6 +128,7 @@ Tezzeret, Agent of Bolas|Tezzeret's Drain|Technological superiority for the win!
 Tezzeret, Artifice Master|Tezzeret's Planar Bridge|What's behind the door number one?
 Tezzeret, Cruel Machinist|Tezzeret's Artificial Morph|Ixidor, Ugin... THIS is how you do it!
 Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grander design - mine.
+Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
@@ -129,6 +139,7 @@ Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. T
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
+Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
 Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.

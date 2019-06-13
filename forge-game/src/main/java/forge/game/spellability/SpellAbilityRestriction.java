@@ -153,10 +153,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setColorToCheck(params.get("ActivationChosenColor"));
         }
 
-        if (params.containsKey("Planeswalker")) {
-            this.setPwAbility(true);
-        }
-
         if (params.containsKey("IsPresent")) {
             this.setIsPresent(params.get("IsPresent"));
             if (params.containsKey("PresentCompare")) {
@@ -482,7 +478,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
-        if (this.isPwAbility()) {
+        if (sa.isPwAbility()) {
             if (!c.hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.")
                     && !activator.canCastSorcery()) {
                 return false;
@@ -491,15 +487,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
             final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
 
-            int numActivates = 0;
-            for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
-                // check all abilities on card that have their planeswalker
-                // restriction set to confirm they haven't been activated
-                final SpellAbilityRestriction restrict = pwAbs.getRestrictions();
-                if (restrict.isPwAbility()) {
-                    numActivates += restrict.getNumberTurnActivations();
-                }
-            }
+            int numActivates = c.getPlaneswalkerAbilityActivated();
             if (numActivates > limits) {
                 return false;
             }
@@ -584,7 +572,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
             this.setActivationLimit(activationLimit);
 
-            if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
+            if ((this.getActivationLimit() != -1) && (sa.getActivationsThisTurn() >= this.getActivationLimit())) {
                 return false;
             }
         }
@@ -594,7 +582,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
             this.setGameActivationLimit(gameActivationLimit);
 
-            if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
+            if ((this.getGameActivationLimit() != -1) && (sa.getActivationsThisGame() >= this.getGameActivationLimit())) {
                 return false;
             }
         }

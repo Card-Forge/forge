@@ -256,6 +256,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (sa.hasParam("AllValid")) {
             return AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
         }
-        return getTargetCards(sa);
+        return getDefinedCardsOrTargeted(sa);
     }
 }

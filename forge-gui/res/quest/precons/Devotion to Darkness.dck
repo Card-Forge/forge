@@ -8,9 +8,9 @@ Deck Type=constructed
 Set=THS
 Image=devotion_to_darkness.jpg
 Name=Devotion to Darkness
-Description=With the "Devotion to Darkness" deck, your primary goal is to assemble many black permanents to increase your devotion to black—the number of black mana symbols in the mana costs of permanents you control. 
+Description=True devotion leads to rewards. Rule the battlefield by devoting yourself to the gods, and control your opponents with unimaginable terror.
 [Main]
-1 Abhorrent Overlord|THS
+1 Abhorrent Overlord+|THS
 2 Blood-Toll Harpy|THS
 1 Boon of Erebos|THS
 2 Child of Night|M14

@@ -1,0 +1,7 @@
+Name:Squid
+ManaCost:no cost
+Types:Creature Squid
+Colors:blue
+PT:1/1
+K:Islandwalk
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

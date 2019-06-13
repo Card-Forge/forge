@@ -1,0 +1,7 @@
+Name:Demon
+ManaCost:no cost
+Types:Creature Demon
+Colors:black
+PT:5/5
+K:Flying
+Oracle:Flying

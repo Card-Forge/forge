@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=World Aflame
-Description=The "World Aflame" deck lets you take command by destroying your opponent's lands, damaging your opponent's creatures, and controlling the ground with creatures of your own. You'll be able to wreck enough stuff on the other side of the table that your opponent shouldn't be able to put up much of a fight!
+Description=Nothing your opponent plays-- creatures, artifacts, or even lands-- is safe from this deck's destructive spells. After the game, you can roast marshmallows over the smoldering crater on the other side of the table.
 Deck Type=constructed
 Set=9ED
 Image=world_aflame.jpg

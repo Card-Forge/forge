@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Landslide Charge
-Description=This Temur-flavored deck uses large creatures and red burn spells to relentlessly attack your opponent, touching on blue mana to play some powerful three-color cards as well as a few tricky blue spells to keep opponents off balance.
+Description=Call your savage clan mates to battle! On the harsh frontiers of war-torn Tarkir, only the strongest will prevail. Send forth packs of mighty hunters and fierce beasts to crush your enemies into the mountainside.
 Deck Type=constructed
 Set=DTK
 Image=landslide_charge.jpg

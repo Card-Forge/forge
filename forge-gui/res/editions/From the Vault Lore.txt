@@ -21,3 +21,7 @@ Type=From_the_Vault
 13 M Tolaria West
 14 M Umezawa's Jitte
 15 M Unmask
+
+[tokens]
+marit_lage
+b_x_x_minion

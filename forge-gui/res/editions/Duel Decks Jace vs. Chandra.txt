@@ -69,3 +69,6 @@ C Elemental Shaman
 5 U Wall of Deceit
 11 U Waterspout Djinn
 6 U Willbender
+
+[tokens]
+r_3_1_elemental_shaman_haste

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Gifts of the Gods
-Description=With the "Gifts of the Gods" deck, use your versatile enchantment creatures to either deploy a large force or power up one mighty creature to topple your opponents.
+Description=Channel the power of the gods! Supercharge your forces with creatures from Nyx, the realm of the gods. Your enemies will be humbled as you wield the gods' might.
 Deck Type=constructed
 Set=BNG
 Image=gifts_of_the_gods.jpg
@@ -31,7 +31,7 @@ Image=gifts_of_the_gods.jpg
 2 Ordeal of Heliod|THS
 1 Pillar of War|BNG
 16 Plains|THS
-1 Silent Sentinel|BNG
+1 Silent Sentinel+|BNG
 1 Sunbond|BNG
 1 Thassa's Emissary|THS
 2 Traveling Philosopher|THS

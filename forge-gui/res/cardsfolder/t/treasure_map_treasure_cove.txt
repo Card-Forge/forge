@@ -6,8 +6,7 @@ SVar:DBLandmark:DB$ PutCounter | Defined$ Self | CounterType$ LANDMARK | Counter
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ XMarksTheSpot | References$ XMarksTheSpot | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ All | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBTreasureTokens
-SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | References$ ABTreasureMana
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
 AlternateMode:DoubleFaced
 DeckHas:Ability$Token

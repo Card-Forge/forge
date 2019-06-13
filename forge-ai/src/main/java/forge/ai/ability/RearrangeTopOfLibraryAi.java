@@ -26,7 +26,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
 
-        if (source.isPermanent() && sa.getPayCosts() != null
+        if (source.isPermanent() && sa.getRestrictions().isInstantSpeed() && sa.getPayCosts() != null
                 && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
             // If it has an associated cost, try to only do this before own turn
             if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
@@ -35,7 +35,8 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         }
 
         // Do it once per turn, generally (may be improved later)
-        if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+        if (!sa.isTrigger()
+                && AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
             return false;
         }
 
@@ -46,9 +47,9 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             sa.resetTargets();
 
             Player opp = aiPlayer.getWeakestOpponent();
-            final boolean canTgtAI = aiPlayer.canBeTargetedBy(sa);
-            final boolean canTgtHuman = opp.canBeTargetedBy(sa);
-
+            final boolean canTgtAI = sa.canTarget(aiPlayer);
+            final boolean canTgtHuman = sa.canTarget(opp);
+            
             if (canTgtHuman && canTgtAI) {
                 // TODO: maybe some other consideration rather than random?
                 Player preferredTarget = MyRandom.percentTrue(50) ? aiPlayer : opp;
@@ -79,7 +80,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-        return mandatory || canPlayAI(ai, sa);
+        return canPlayAI(ai, sa) || mandatory;
     }
 
     /* (non-Javadoc)

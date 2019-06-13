@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Battle Surge
-Description=Uses blue stalling tactics to hold off opponents while a host of red creatures without summoning sickness mount a decisive attack. 
+Description=Use blue stalling tactics to hold off the opposition. Then lay down a host of red creatures without summoning sickness to mount a decisive attack. "Battle Surge" will turn the tide of war in your favor.
 Deck Type=constructed
 Set=ULG
 Image=battle_surge.jpg

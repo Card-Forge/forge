@@ -1,0 +1,7 @@
+Name:Drake
+Colors:green,blue
+ManaCost:no cost
+PT:2/2
+Types:Creature Drake
+K:Flying
+Oracle:Flying

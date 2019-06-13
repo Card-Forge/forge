@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Forged in Battle
-Description=Crash through your opponent's defenses with a combination of heroic creatures, powerful Auras, and instants that enhance your creatures in combat.
+Description=Raise your banners and take the field. Your enemies will crumble against the might of your heroes, who become more than mere mortals when empowered by your spells.
 Deck Type=constructed
 Set=BNG
 Image=forged_in_battle.jpg
@@ -21,7 +21,7 @@ Image=forged_in_battle.jpg
 1 Dauntless Onslaught|THS
 2 Elite Skirmisher|BNG
 2 Fall of the Hammer|BNG
-1 Forgestoker Dragon|BNG
+1 Forgestoker Dragon+|BNG
 2 Hold at Bay|BNG
 1 Labyrinth Champion|THS
 1 Loyal Pegasus|BNG

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Heavy Hitters
-Description=If the "Heavy Hitters" deck feels a little bulky when you pick it up, it's because the creatures inside it are really, really big. After all, what could be more fun than smacking your opponent around with humongous monsters?
+Description=Size up your opponents, and then cut them down with a heap of big, fat creatures. With lots of ways to get mana quickly, this deck makes it easy for you to start the beatdown ASAP.
 Deck Type=constructed
 Set=8ED
 Image=heavy_hitters.jpg

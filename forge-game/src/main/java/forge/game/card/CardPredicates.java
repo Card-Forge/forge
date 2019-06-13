@@ -234,6 +234,15 @@ public final class CardPredicates {
         };
     } // getColor()
 
+    public static final Predicate<Card> isExactlyColor(final byte color) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return CardUtil.getColors(c).hasExactlyColor(color);
+            }
+        };
+    }
+
     public static final Predicate<Card> isColorless() {
         return new Predicate<Card>() {
             @Override

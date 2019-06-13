@@ -1,0 +1,7 @@
+Name:Vraska's Finisher
+ManaCost:2 B
+Types:Creature Gorgon Assassin
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature or planeswalker an opponent controls that was dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+wasDealtDamageThisTurn,Planeswalker.OppCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature or planeswalker an opponent controls that was dealt damage this turn.
+Oracle:When Vraska's Finisher enters the battlefield, destroy target creature or planeswalker an opponent controls that was dealt damage this turn.

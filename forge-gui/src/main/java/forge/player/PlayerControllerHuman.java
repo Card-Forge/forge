@@ -209,11 +209,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<PaperCard> sideboard(final Deck deck, final GameType gameType) {
+    public List<PaperCard> sideboard(final Deck deck, final GameType gameType, String message) {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         if (sideboard == null) {
-            // Use an empty cardpool instead of null for 75/0 sideboarding
-            // scenario.
+            // Use an empty cardpool instead of null for 75/0 sideboarding scenario.
             sideboard = new CardPool();
         }
 
@@ -253,7 +252,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Sideboard rules have changed for M14, just need to consider min
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
-            Object resp = getGui().sideboard(sideboard, main);
+            Object resp = getGui().sideboard(sideboard, main, message);
             if (resp instanceof List<?> &&
                     !((List) resp).isEmpty() &&
                     ((List) resp).get(0) instanceof PaperCard) {
@@ -476,7 +475,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
-            return null;
+            return Lists.newArrayList();
         }
 
         if (delayedReveal != null) {
@@ -1221,6 +1220,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public boolean mulliganKeepHand(final Player mulliganingPlayer, int cardsToReturn) {
+        // TODO we should be passing tuckCards into Confirmation Dialog
+        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
+        inp.showAndWait();
+        return inp.isKeepHand();
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        final InputLondonMulligan inp = new InputLondonMulligan(this, player, cardsToReturn);
+        inp.showAndWait();
+        return inp.getSelectedCards();
+    }
+
+    @Override
     public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
         // Partial Paris is gone, so it being commander doesn't really matter
         // anymore...
@@ -1725,17 +1739,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        final InputProliferate inp = new InputProliferate(this, sa);
-        inp.setCancelAllowed(true);
-        inp.showAndWait();
-        if (inp.hasCancelled()) {
-            return null;
-        }
-        return inp.getProliferationMap();
-    }
-
-    @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
         return select.chooseTargets(null);
@@ -2201,7 +2204,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), false);
+                card.addCounter(counter, count, card.getController(), false, null);
             }
 
         }

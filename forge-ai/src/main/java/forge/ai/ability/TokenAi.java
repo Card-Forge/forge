@@ -78,7 +78,7 @@ public class TokenAi extends SpellAbilityAi {
         // Planeswalker-related flags
         boolean pwMinus = false;
         boolean pwPlus = false;
-        if (sa.getRestrictions().isPwAbility()) {
+        if (sa.isPwAbility()) {
             /*
              * Planeswalker token ability with loyalty costs should be played in
              * Main1 or it might never be used due to other positive abilities.
@@ -230,7 +230,7 @@ public class TokenAi extends SpellAbilityAi {
             alwaysOnOppAttack = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS);
         }
 
-        if (sa.getRestrictions() != null && sa.getRestrictions().isPwAbility() && alwaysFromPW) {
+        if (sa.isPwAbility() && alwaysFromPW) {
             return true;
         } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)

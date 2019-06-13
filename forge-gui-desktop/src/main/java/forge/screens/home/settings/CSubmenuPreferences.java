@@ -1,7 +1,6 @@
 package forge.screens.home.settings;
 
-import forge.Singletons;
-import forge.UiCommand;
+import forge.*;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.game.GameLogEntryType;
@@ -13,6 +12,8 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
@@ -104,6 +105,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRandomArtInPools(), FPref.UI_RANDOM_ART_IN_POOLS));
         lstControls.add(Pair.of(view.getCbEnforceDeckLegality(), FPref.ENFORCE_DECK_LEGALITY));
         lstControls.add(Pair.of(view.getCbPerformanceMode(), FPref.PERFORMANCE_MODE));
+        lstControls.add(Pair.of(view.getCbSideboardForAI(), FPref.MATCH_SIDEBOARD_FOR_AI));
         lstControls.add(Pair.of(view.getCbFilteredHands(), FPref.FILTERED_HANDS));
         lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
         lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
@@ -144,7 +146,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
-            kv.getKey().addItemListener(new ItemListener() {
+          kv.getKey().addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(final ItemEvent arg0) {
                     if (updating) { return; }
@@ -190,6 +192,20 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getBtnClearImageCache().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.clearImageCache();
+            }
+        });
+
+        view.getBtnTokenPreviewer().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.openTokenPreviewer();
+            }
+        });
+
         view.getBtnResetJavaFutureCompatibilityWarnings().setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -209,6 +225,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
@@ -216,6 +233,8 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
         initializePlayerNameButton();
+        initializeDefaultLanguageComboBox();
+
     }
 
     /* (non-Javadoc)
@@ -292,6 +311,20 @@ public enum CSubmenuPreferences implements ICDoc {
         }
     }
 
+    private void clearImageCache() {
+        try {
+            GuiBase.getInterface().clearImageCache();
+        } catch(final Exception e) {
+            System.out.println("Unable to clear cache: " + e.toString());
+        }
+    }
+
+    private void openTokenPreviewer() {
+        Singletons.getControl().setCurrentScreen(FScreen.TOKEN_VIEWER);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                new CEditorTokenViewer(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
+    }
+
     private void openContentDirectory() {
         try {
             if (Desktop.isDesktopSupported()) {
@@ -319,6 +352,29 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
         panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
+    }
+
+    private void initializeDefaultLanguageComboBox() {
+        final String [] choices = {"en-US", "es-ES", "de-DE"};
+        final FPref userSetting = FPref.UI_LANGUAGE;
+        final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeMulliganRuleComboBox() {
+        final String [] choices = MulliganDefs.getMulliganRuleNames();
+        final FPref userSetting = FPref.MULLIGAN_RULE;
+        final FComboBoxPanel<String> panel = this.view.getCbpMulliganRule();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        comboBox.addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(prefs.getPref(FPref.MULLIGAN_RULE)));
+            }
+        });
+        panel.setComboBox(comboBox, selectedItem);
     }
 
     private void initializeDefaultFontSizeComboBox() {
@@ -431,7 +487,7 @@ public enum CSubmenuPreferences implements ICDoc {
     private void setPlayerNameButtonText() {
         final FLabel btn = view.getBtnPlayerName();
         final String name = prefs.getPref(FPref.PLAYER_NAME);
-        btn.setText(StringUtils.isBlank(name) ? "Human" : name);
+        btn.setText(StringUtils.isBlank(name) ? localizer.getMessage("lblHuman") : name);
     }
 
     @SuppressWarnings("serial")

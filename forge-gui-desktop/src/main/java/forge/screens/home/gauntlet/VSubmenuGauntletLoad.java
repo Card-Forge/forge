@@ -10,6 +10,7 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -23,14 +24,14 @@ import javax.swing.*;
 public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
     /** */
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Quick Gauntlets");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuickGauntlets"));
 
     // Other fields
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Load a gauntlet").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("lblLoadaGauntlet")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
@@ -38,12 +39,12 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
     private final FScrollPane scrLoad = new FScrollPane(gauntletList, false);
 
     private final FLabel lblDesc = new FLabel.Builder().text(
-            "Load a previous gauntlet (uses the deck with which it was started).")
+            localizer.getMessage("lblLoadaPreviousGauntlet"))
             .build();
 
     private final StartButton btnStart  = new StartButton();
 
-    private VSubmenuGauntletLoad() {
+    VSubmenuGauntletLoad() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     }
 
@@ -60,7 +61,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
      */
     @Override
     public String getMenuTitle() {
-        return "Load Gauntlet";
+        return localizer.getMessage("lblLoadGauntlet");
     }
 
     /* (non-Javadoc)

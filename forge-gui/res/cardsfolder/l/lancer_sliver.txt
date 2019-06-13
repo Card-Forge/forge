@@ -1,0 +1,7 @@
+Name:Lancer Sliver
+ManaCost:2 W
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ First Strike | Description$ Sliver creatures you control have first strike.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have first strike.

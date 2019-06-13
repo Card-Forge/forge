@@ -285,9 +285,9 @@ AdditionalSetUnlockedInQuest=GK1
 273 M Impervious Greatwurm
 
 [tokens]
-w_1_1_soldier_lifelink
 w_4_4_angel_flying_vigilance
+w_1_1_soldier_lifelink
 u_1_1_bird_illusion_flying
 r_1_1_goblin
-wg_2_2_elf_knight_vigilance
+gw_2_2_elf_knight_vigilance
 bg_1_1_insect

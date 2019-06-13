@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance Sunset Puzzle
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/04/109.-RNA004.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You don't start with the City's Blessing. Assume your opponent has five cards in hand, but can't cast any this turn. Your Ravenous Chupacabra is exiled by your opponent's Hostage Taker.
+[state]
+humanlife=5
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Dauntless Bodyguard;Goblin Cratermaker;Gruesome Menagerie;Mind Rot
+humangraveyard=Electrostatic Field;Tin Street Dodger;Tocatli Honor Guard;Deadeye Tormentor;Plaguecrafter;Haazda Officer
+humanbattlefield=Mausoleum Harpy;Fire Shrine Keeper;Fell Specter;Dire Fleet Hoarder;Sacred Foundry|NoETBTrigs;Swamp;Swamp;Azor's Gateway|Transformed;Ravenous Chupacabra|Id:100
+aihand=Hostage Taker;Hostage Taker;Hostage Taker;Citywatch Sphinx;Citywatch Sphinx
+aibattlefield=Hostage Taker|ExecuteScript:TrigExile->100;Citywatch Sphinx;Amulet of Safekeeping;Amulet of Safekeeping

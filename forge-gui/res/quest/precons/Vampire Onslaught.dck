@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vampire Onslaught
-Description=Competitive Magic players often face the difficult choice between an aggressive deck that wins as fast as possible and a combo deck that uses powerful synergies to generate an insurmountable lead. With the "Vampire Onslaught" deck, you don't need to make that choice - you can have both!
+Description=Blood is in the air! Soon your graveyard will yield foul fruit as your vampire horde feeds on itself in a frenzy to gain greater power. Turn your opponent's dead warriors against them using Mimic Vat to ensure a grisly victory.
 Set=M12
 Image=vampire_onslaught.jpg
 [main]

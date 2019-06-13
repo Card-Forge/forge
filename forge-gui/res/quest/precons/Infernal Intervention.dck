@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Infernal Intervention
-Description=Infernal Intervention is the black & red M15 intro deck and it's all about hitting your opponent and their creatures directly. You will rely on fast burn spells like Lightning Strike and Heat Ray and devastating spells like Flesh to Dust and Stab Wound to wipe out your opponent's creatures and life total.
+Description=Toy with your enemy. With the torrent of removal spells at your disposal, existence on the battlefield is at your whim. All will live in fear of your dark power.
 Deck Type=constructed
 Set=M15
 Image=infernal_intervention.jpg
@@ -26,7 +26,7 @@ Image=infernal_intervention.jpg
 2 Heat Ray|M15
 2 Carrion Crow|M15
 2 Nightfire Giant|M15
-1 Indulgent Tormentor|M15
+1 Indulgent Tormentor+|M15
 2 Profane Memento|M15
 1 Festergloom|M15
 1 Burning Anger|M15

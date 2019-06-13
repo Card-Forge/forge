@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -43,7 +44,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 return;
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
-            card.addCounter(CounterType.AGE, 1, activator, true);
+            GameEntityCounterTable table = new GameEntityCounterTable();
+            card.addCounter(CounterType.AGE, 1, activator, true, table);
+
+            table.triggerCountersPutAll(game);
+
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = card.getCounters(CounterType.AGE);
@@ -146,6 +151,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
+                        card.addExploited(lKICopy);
                         final Map<String, Object> runParams = Maps.newHashMap();
                         runParams.put("Exploited", lKICopy);
                         runParams.put("Card", card);

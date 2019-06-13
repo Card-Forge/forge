@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Depths of Power
-Description=Led by Talrand, Sky Summoner, the "Depths of Power" deck specializes in casting instants and sorceries.
+Description=Seize the power of wind and waves with the help of legendary merfolk Talrand, Sky Summoner. While drakes assault your enemies from the skies, you manipulate the battlefield and burn immediate threats, steering the course to victory.
 Deck Type=constructed
 Set=M13
 Image=depths_of_power.jpg
@@ -15,7 +15,7 @@ Image=depths_of_power.jpg
 1 Smelt|M13
 2 Mindclaw Shaman|M13
 1 Ring of Evos Isle|M13
-1 Talrand, Sky Summoner|M13
+1 Talrand, Sky Summoner+|M13
 1 Switcheroo|M13
 1 Harbor Serpent|M13
 1 Negate|M13

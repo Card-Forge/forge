@@ -261,12 +261,14 @@ public class PhaseHandler implements java.io.Serializable {
                         if (playerTurn.isArchenemy()) {
                             playerTurn.setSchemeInMotion();
                         }
+                        GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                             if (c.getType().hasSubtype("Saga")) {
-                                c.addCounter(CounterType.LORE, 1, null, false);
+                                c.addCounter(CounterType.LORE, 1, null, false, table);
                             }
                         }
+                        table.triggerCountersPutAll(game);
                     }
                     break;
 
@@ -435,11 +437,7 @@ public class PhaseHandler implements java.io.Serializable {
             
             boolean manaBurns = game.getRules().hasManaBurn();
             if (manaBurns) {
-                p.loseLife(burn);
-            }
-            // Play the Mana Burn sound
-            if (burn > 0) {
-                game.fireEvent(new GameEventManaBurn(burn, manaBurns));
+                p.loseLife(burn,true);
             }
         }
 

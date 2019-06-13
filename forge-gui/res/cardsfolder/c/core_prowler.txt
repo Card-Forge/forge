@@ -8,4 +8,4 @@ SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/core_prowler.jpg
-Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Core Prowler dies, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Core Prowler dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

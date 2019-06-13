@@ -1,15 +1,12 @@
 package forge.game.replacement;
 
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardUtil;
+
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.Map;
-
-import com.google.common.collect.Sets;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -50,56 +47,23 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
 
-        boolean matchedZone = false;
         if (hasParam("Origin")) {
-            for(ZoneType z : ZoneType.listValueOf(getParam("Origin"))) {
-                if(z == (ZoneType) runParams.get("Origin"))
-                    matchedZone =  true;
-            }
-
-            if(!matchedZone)
-            {
+            ZoneType zt = (ZoneType) runParams.get("Origin");
+            if (!ZoneType.listValueOf(getParam("Origin")).contains(zt)) {
                 return false;
             }
         }        
 
         if (hasParam("Destination")) {
-            matchedZone = false;
             ZoneType zt = (ZoneType) runParams.get("Destination");
-            for(ZoneType z : ZoneType.listValueOf(getParam("Destination"))) {
-                if(z == zt)
-                    matchedZone =  true;
-            }
-
-            if(!matchedZone)
-            {
+            if (!ZoneType.listValueOf(getParam("Destination")).contains(zt)) {
                 return false;
-            }
-
-            if (zt.equals(ZoneType.Battlefield) && getHostCard().equals(affected) && !hasParam("BypassEtbCheck")) {
-                // would be an etb replacement effect that enters the battlefield
-                Card lki = CardUtil.getLKICopy(affected);
-                lki.setLastKnownZone(lki.getController().getZone(zt));
-
-                CardCollection preList = new CardCollection(lki);
-                getHostCard().getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
-
-                // check if when entering the battlefield would still has this RE or is suppressed
-                if (!lki.hasReplacementEffect(this) || lki.getReplacementEffect(getId()).isSuppressed()) {
-                    return false;
-                }
             }
         }
         
         if (hasParam("ExcludeDestination")) {
-            matchedZone = false;
-            for(ZoneType z : ZoneType.listValueOf(getParam("ExcludeDestination"))) {
-                if(z == (ZoneType) runParams.get("Destination"))
-                    matchedZone =  true;
-            }
-            
-            if(matchedZone)
-            {
+            ZoneType zt = (ZoneType) runParams.get("Destination");
+            if (ZoneType.listValueOf(getParam("ExcludeDestination")).contains(zt)) {
                 return false;
             }
         }

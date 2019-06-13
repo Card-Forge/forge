@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Dimir Intrigues
-Description=The Dimir Intrigues deck will twist your opponent's head around and around... and maybe even off! Your opponent starts the game with 60 cards and 20 life. By the time the game ends, one of those two totals will be down to zero - and you don't care which one it is.
+Description=The Dimir guild is quiet and unassuming... so it's clearly running everything from behind the scenes. The transmute mechanic is just one way they manipulate their own fates. How they pull their enemies' puppet strings is truly wicked.
 Deck Type=constructed
 Set=RAV
 Image=dimir_intrigues.jpg

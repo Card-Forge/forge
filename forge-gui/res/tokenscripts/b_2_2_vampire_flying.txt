@@ -1,0 +1,7 @@
+Name:Vampire
+ManaCost:no cost
+Types:Creature Vampire
+Colors:black
+PT:2/2
+K:Flying
+Oracle:Flying

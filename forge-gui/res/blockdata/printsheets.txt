@@ -1430,3 +1430,31 @@ Gruul Guildgate|RNA
 Orzhov Guildgate|RNA
 Rakdos Guildgate|RNA
 Simic Guildgate|RNA
+
+[WAR Secret Cards]
+Gideon, the Oathsworn
+Desperate Lunge
+Gideon's Battle Cry
+Gideon's Company
+Orzhov Guildgate|WAR
+Jace, Arcane Strategist
+Guildpact Informant
+Jace's Projection
+Jace's Ruse
+Simic Guildgate|WAR
+Tezzeret, Master of the Bridge
+
+[MH1 Lands]
+10 Snow-Covered Plains|MH1
+10 Snow-Covered Island|MH1
+10 Snow-Covered Swamp|MH1
+10 Snow-Covered Mountain|MH1
+10 Snow-Covered Forest|MH1
+
+[MH1 Secret Cards]
+Flusterstorm
+Snow-Covered Plains
+Snow-Covered Island
+Snow-Covered Swamp
+Snow-Covered Mountain
+Snow-Covered Forest

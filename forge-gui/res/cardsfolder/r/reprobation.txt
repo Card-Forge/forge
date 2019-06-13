@@ -1,0 +1,7 @@
+Name:Reprobation
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | RemoveAllAbilities$ True | AddType$ Coward | Description$ Enchanted creature loses all abilities and is a Coward creature with base power and toughness 0/1.
+Oracle:Enchant creature\nEnchanted creature loses all abilities and is a Coward creature with base power and toughness 0/1. (It keeps all supertypes but loses all other types and creature types.)

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vicious Cycle
-Description=Oath of the Gatewatch B/G/C Intro Pack
+Description=On Zendikar, even death is no obstacle. The Eldrazi and the plane's defenders fight, fall, and rise to fight again. Your opponents might think they're winning as your graveyard fills up. But you'll know that for your army of creatures, death is only the beginning.
 Deck Type=constructed
 Set=OGW
 Image=vicious_cycle.jpg
@@ -19,7 +19,7 @@ Image=vicious_cycle.jpg
 1 Broodhunter Wurm|BFZ
 2 Carrier Thrall|BFZ
 2 Corpse Churn|OGW
-1 Dread Defiler|OGW
+1 Dread Defiler+|OGW
 1 Essence Depleter|OGW
 1 Evolving Wilds|BFZ
 2 Fertile Thicket|BFZ

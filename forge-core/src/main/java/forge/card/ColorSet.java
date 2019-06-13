@@ -41,6 +41,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private static final long serialVersionUID = 794691267379929080L;
 
     private final byte myColor;
+    public byte getMyColor() { return myColor; }
     private final float orderWeight;
 
     private static final ColorSet[] cache = new ColorSet[32];
@@ -109,6 +110,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
      */
     public boolean hasAllColors(final int colormask) {
         return (this.myColor & colormask) == colormask;
+    }
+
+    /** this has exactly the colors defined by operand.  */
+    public boolean hasExactlyColor(final int colormask) {
+        return this.myColor == colormask;
     }
 
     /** this has no other colors except defined by operand.  */

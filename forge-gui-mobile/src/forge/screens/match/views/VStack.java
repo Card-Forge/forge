@@ -19,10 +19,8 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
@@ -242,8 +240,7 @@ public class VStack extends FDropDown {
             }
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
-            final CardStateView curState = card.getCurrentState();
-            final boolean isFaceDown = curState.getState() == CardStateName.FaceDown;
+            final boolean isFaceDown = card.isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(card.getCurrentState(), true); // otherwise doesn't work correctly for face down Morphs
             backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
             foreColor = FSkinColor.getHighContrastColor(backColor);

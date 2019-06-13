@@ -1,0 +1,7 @@
+Name:Goblin Scout
+ManaCost:no cost
+Types:Creature Goblin Scout
+Colors:red
+PT:1/1
+K:Mountainwalk
+Oracle:Mountainwalk

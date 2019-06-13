@@ -1,8 +1,11 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -49,6 +52,32 @@ public class RevealAi extends RevealAiBase {
                 }
             }
             return false;
+        }
+
+        if ("Kefnet".equals(sa.getParam("AILogic"))) {
+            final Card c = Iterables.getFirst(
+                AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RevealDefined"), sa), null
+            );
+
+            if (c == null || (!c.isInstant() && !c.isSorcery())) {
+                return false;
+            }
+            for (SpellAbility s : c.getBasicSpells()) {
+                Spell spell = (Spell) s.copy(ai);
+                // timing restrictions still apply
+                if (!s.getRestrictions().checkTimingRestrictions(c, s))
+                    continue;
+
+                // use hard coded reduce cost
+                spell.getMapParams().put("ReduceCost", "2");
+
+                if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
+                        .canPlayFromEffectAI(spell, false, false)) {
+                    return true;
+                }
+            }
+            return false;
+
         }
 
         if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {

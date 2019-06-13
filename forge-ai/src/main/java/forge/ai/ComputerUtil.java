@@ -47,6 +47,7 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -76,17 +77,15 @@ public class ComputerUtil {
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            if (source.getType().hasStringType("Arcane")) {
-                sa = AbilityUtils.addSpliceEffects(sa);
-                if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty() && ai.getController().isAI()) {
-                    // we need to reconsider and retarget the SA after additional SAs have been added onto it via splice,
-                    // otherwise the AI will fail to add the card to stack and that'll knock it out of the game
-                    sa.resetTargets();
-                    if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) != AiPlayDecision.WillPlay) {
-                        // for whatever reason the AI doesn't want to play the thing with the spliced subs anymore,
-                        // proceeding past this point may result in an illegal play
-                        return false;
-                    }
+            sa = AbilityUtils.addSpliceEffects(sa);
+            if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty() && ai.getController().isAI()) {
+                // we need to reconsider and retarget the SA after additional SAs have been added onto it via splice,
+                // otherwise the AI will fail to add the card to stack and that'll knock it out of the game
+                sa.resetTargets();
+                if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) != AiPlayDecision.WillPlay) {
+                    // for whatever reason the AI doesn't want to play the thing with the spliced subs anymore,
+                    // proceeding past this point may result in an illegal play
+                    return false;
                 }
             }
 
@@ -1255,7 +1254,7 @@ public class ComputerUtil {
 
     // returns true if the AI should stop using the ability
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
-        int activations = sa.getRestrictions().getNumberTurnActivations();
+        int activations = sa.getActivationsThisTurn();
 
         if (sa.isTemporary()) {
         	return MyRandom.getRandom().nextFloat() >= .95; // Abilities created by static abilities have no memory
@@ -1516,6 +1515,9 @@ public class ComputerUtil {
             // iterate from top of stack to find SpellAbility, including sub-abilities,
             // that does not match "sa"
             SpellAbility spell = si.getSpellAbility(true), sub = spell.getSubAbility();
+            if (spell.isWrapper()) {
+                spell = ((WrappedAbility) spell).getWrappedAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
@@ -1930,12 +1932,19 @@ public class ComputerUtil {
     }
 
 
-    public static int scoreHand(CardCollectionView handList, Player ai) {
+    public static int scoreHand(CardCollectionView handList, Player ai, int cardsToReturn) {
+        // TODO Improve hand scoring in relation to cards to return.
+        // If final hand size is 5, score a hand based on what that 5 would be.
+        // Or if this is really really fast, determine what the 5 would be based on scoring 
+        // All of the possibilities
+
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int currentHandSize = handList.size();
+        int finalHandSize = currentHandSize - cardsToReturn;
 
         // don't mulligan when already too low
-        if (handList.size() < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
-            return handList.size();
+        if (finalHandSize < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
+            return finalHandSize;
         }
 
         CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
@@ -1943,7 +1952,7 @@ public class ComputerUtil {
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
-            return handList.size();
+            return finalHandSize;
         }
 
         final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
@@ -2011,9 +2020,9 @@ public class ComputerUtil {
     }
 
     // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-    public static boolean wantMulligan(Player ai) {
+    public static boolean wantMulligan(Player ai, int cardsToReturn) {
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
-        return scoreHand(handList, ai) <= 0;
+        return scoreHand(handList, ai, cardsToReturn) <= 0;
     }
     
     public static CardCollection getPartialParisCandidates(Player ai) {
@@ -2989,14 +2998,23 @@ public class ComputerUtil {
 
         if (sa.hasParam("AITgts")) {
             CardCollection list;
-            if (sa.getParam("AITgts").equals("BetterThanSource")) {
-                int value = ComputerUtilCard.evaluateCreature(source);
-                if (source.isEnchanted()) {
-                    for (Card enc : source.getEnchantedBy()) {
-                        if (enc.getController().equals(ai)) {
-                            value += 100; // is 100 per AI's own aura enough?
+            String aiTgts = sa.getParam("AITgts");
+            if (aiTgts.startsWith("BetterThan")) {
+                int value = 0;
+                if (aiTgts.endsWith("Source")) {
+                    value = ComputerUtilCard.evaluateCreature(source);
+                    if (source.isEnchanted()) {
+                        for (Card enc : source.getEnchantedBy()) {
+                            if (enc.getController().equals(ai)) {
+                                value += 100; // is 100 per AI's own aura enough?
+                            }
                         }
                     }
+                } else if (aiTgts.contains("EvalRating.")) {
+                    value = AbilityUtils.calculateAmount(source, aiTgts.substring(aiTgts.indexOf(".") + 1), sa);
+                } else {
+                    System.err.println("Warning: Unspecified AI target evaluation rating for SA " + sa);
+                    value = ComputerUtilCard.evaluateCreature(source);
                 }
                 final int totalValue = value;
                 list = CardLists.filter(srcList, new Predicate<Card>() {

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Bomber
-Description=Fly the friendly skies? Your opponent will think twice about that after facing the "Bomber" deck. You'll take control of the game with tricky blue spells and Wizards, and then your big flying creatures will really deliver a beating. You won't always attack much in the beginning of the game, but by the end, you'll be on top of the world. 
+Description=For heads-up play, take off with the blue "Bomber" deck. Launch aerial assaults. Rain havoc on your opponents. When faced with your damaging flying creatures, opponents will be running for cover.
 Deck Type=constructed
 Set=7ED
 Image=bomber.jpg

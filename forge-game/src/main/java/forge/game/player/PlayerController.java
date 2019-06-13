@@ -91,7 +91,7 @@ public abstract class PlayerController {
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
 
-    public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType);
+    public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType, String message);
     public abstract List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses);
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
@@ -169,7 +169,10 @@ public abstract class PlayerController {
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
+
     public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
+    public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
+    public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
@@ -213,7 +216,6 @@ public abstract class PlayerController {
     public abstract void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
 
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
-    public abstract Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa);
     public abstract boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);

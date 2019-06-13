@@ -234,10 +234,10 @@ public class GuiChoose {
         return null;
     }
 
-    public static <T extends Comparable<? super T>> List<T> sideboard(final CMatchUI matchUI, final List<T> sideboard, final List<T> deck) {
+    public static <T extends Comparable<? super T>> List<T> sideboard(final CMatchUI matchUI, final List<T> sideboard, final List<T> deck, final String message) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true, matchUI);
+        return order("Sideboard" + message, "Main Deck", -1, -1, sideboard, deck, null, true, matchUI);
     }
 
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
@@ -250,7 +250,7 @@ public class GuiChoose {
 
         final Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
-            public List<T> call() throws Exception {
+            public List<T> call() {
                 final DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
                 dual.setSecondColumnLabelText(top);
 
@@ -290,7 +290,7 @@ public class GuiChoose {
 	gui.setSelectables(manipulable);
 	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
 		@Override 
-		public List<CardView> call() throws Exception {
+		public List<CardView> call() {
 		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
 		    //		tempArea.pack();
 		    tempArea.show();

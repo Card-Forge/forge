@@ -393,3 +393,6 @@ R Zur's Weirding
 C Zuran Enchanter
 U Zuran Orb
 C Zuran Spellcaster
+
+[tokens]
+w_0_1_caribou

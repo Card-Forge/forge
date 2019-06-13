@@ -110,6 +110,15 @@ public class ComputerUtilCost {
                         && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
+            } else if (part instanceof CostRemoveAnyCounter) {
+                if (sa != null) {
+                    final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
+
+                    PaymentDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa).visit(remCounter);
+                    return decision != null;
+                }
+
+                return false;
             }
         }
         return true;
@@ -481,7 +490,7 @@ public class ComputerUtilCost {
         }
 
         // Try not to lose Planeswalker if not threatened
-        if (sa.getRestrictions().isPwAbility()) {
+        if (sa.isPwAbility()) {
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {

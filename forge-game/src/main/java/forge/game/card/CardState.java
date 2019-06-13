@@ -526,7 +526,12 @@ public class CardState extends GameObject {
         }
     }
 
-    
+    public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        CardState result = new CardState(host, name);
+        result.copyFrom(this, lki);
+        return result;
+    }
+
     public CardRarity getRarity() {
         return rarity;
     }

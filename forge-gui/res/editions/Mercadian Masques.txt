@@ -361,3 +361,13 @@ FoilAlwaysInCommonSlot=False
 57 U Wishmonger
 228 U Word of Blasting
 315 R Worry Beads
+
+[tokens]
+butterfly
+w_1_1_soldier
+w_1_1_spirit_flying
+b_2_2_zombie
+g_1_1_insect
+g_2_2_monkey
+g_1_1_saproling
+g_1_1_snake

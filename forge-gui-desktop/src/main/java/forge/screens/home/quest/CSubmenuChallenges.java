@@ -26,6 +26,7 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.FLabel;
 import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
 
 /**
  * Controls the quest challenges submenu in the home UI.
@@ -73,7 +74,8 @@ public enum CSubmenuChallenges implements ICDoc {
                 new UiCommand() {
                     @Override
                     public void run() {
-                        if (!QuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
+                        final Localizer localizer = Localizer.getInstance();
+                        if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblLaunchaZeppelin"))) {
                             return;
                         }
                         FModel.getQuest().getAchievements().setCurrentChallenges(null);
@@ -86,7 +88,8 @@ public enum CSubmenuChallenges implements ICDoc {
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
+                final Localizer localizer = Localizer.getInstance();
+                quest.selectPet(0, view.getCbPlant().isSelected() ? localizer.getMessage("lblPlant") : null);
                 quest.save();
             }
         });
@@ -145,8 +148,8 @@ public enum CSubmenuChallenges implements ICDoc {
         if (qCtrl.getAchievements() == null) {
             return;
         }
-
-        view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
+        final Localizer localizer = Localizer.getInstance();
+        view.getLblTitle().setText(localizer.getMessage("lblChallenges") +": " + qCtrl.getRank());
 
         view.getPnlChallenges().removeAll();
         qCtrl.regenerateChallenges();
@@ -158,7 +161,7 @@ public enum CSubmenuChallenges implements ICDoc {
         final JXButtonPanel grpPanel = new JXButtonPanel();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Match - Best of ").append(FModel.getQuest().getMatchLength());
+        sb.append(localizer.getMessage("lblMatchBestof") + " ").append(FModel.getQuest().getMatchLength());
         view.getCbxMatchLength().setSelectedItem(sb.toString());
 
         boolean haveAnyChallenges = true;

@@ -1,0 +1,6 @@
+Name:Elemental
+ManaCost:no cost
+Types:Creature Elemental
+Colors:red
+PT:1/1
+Oracle:

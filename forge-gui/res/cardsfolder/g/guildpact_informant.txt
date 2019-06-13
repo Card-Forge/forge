@@ -1,0 +1,10 @@
+Name:Guildpact Informant
+ManaCost:2 U
+Types:Creature Faerie Rogue
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Flying\nWhenever Guildpact Informant deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -133,6 +134,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
             Card gameCard = null;
@@ -162,10 +165,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (eachExistingCounter) {
                     for(CounterType ct : choices) {
                         if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, placer, true);
+                            ((Player) obj).addCounter(ct, counterAmount, placer, true, table);
                         }
                         if (obj instanceof Card) {
-                            gameCard.addCounter(ct, counterAmount, placer, true);
+                            gameCard.addCounter(ct, counterAmount, placer, true, table);
                         }
                     }
                     continue;
@@ -249,7 +252,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             tgtCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, placer, true);
+                            tgtCard.addCounter(counterType, counterAmount, placer, true, table);
                         }
                         if (remember) {
                             final int value = tgtCard.getTotalCountersToAdd();
@@ -287,7 +290,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             tgtCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, placer, false);
+                            tgtCard.addCounter(counterType, counterAmount, placer, false, table);
                         }
                     }
                     game.updateLastStateForCard(tgtCard);
@@ -295,9 +298,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
             } else if (obj instanceof Player) {
                 // Add Counters to players!
                 Player pl = (Player) obj;
-                pl.addCounter(counterType, counterAmount, placer, true);
+                pl.addCounter(counterType, counterAmount, placer, true, table);
             }
         }
+        table.triggerCountersPutAll(game);
     }
 
 }

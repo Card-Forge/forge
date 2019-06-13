@@ -264,3 +264,21 @@ FoilChanceInBooster=100
 252 C Terramorphic Expanse
 253 R Thespian's Stage
 254 R Urborg, Tomb of Yawgmoth
+
+[tokens]
+marit_lage
+spark_elemental
+w_1_1_citizen
+w_1_1_spirit_flying
+u_2_2_drake_flying
+u_2_2_homunculus
+b_1_1_faerie_rogue_flying
+b_6_6_wurm_trample
+b_2_2_zombie
+r_1_1_elemental
+r_1_1_elemental
+r_1_1_soldier_haste
+g_4_4_elemental
+g_x_x_ooze
+g_1_2_spider_reach
+wb_1_1_spirit_flying

@@ -249,3 +249,24 @@ Type=Other
 154 L Forest
 155 L Forest
 156 L Forest
+
+[tokens]
+c_7_7_eldrazi_annihilator
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+w_4_4_angel_flying
+w_0_1_goat
+b_0_0_germ
+b_2_4_spider_reach
+b_2_2_zombie
+r_5_5_dragon_flying
+r_1_1_goblin
+r_4_4_hellion
+g_3_3_beast
+g_3_3_boar
+g_1_1_insect
+g_1_1_ooze
+g_2_2_ooze_mitotic
+g_0_1_plant
+g_1_1_saproling

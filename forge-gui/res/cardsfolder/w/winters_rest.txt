@@ -1,0 +1,11 @@
+Name:Winter's Rest
+ManaCost:1 U
+Types:Snow Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | IsPresent$ Permanent.Snow+Other+YouCtrl | Description$ As long as you control another snow permanent, enchanted creature doesn't untap during its controller's untap step.
+SVar:NeedsToPlay:Permanent.Snow+YouCtrl
+DeckNeeds:Type$Snow
+Oracle:Enchant creature\nWhen Winter's Rest enters the battlefield, tap enchanted creature.\nAs long as you control another snow permanent, enchanted creature doesn't untap during its controller's untap step.

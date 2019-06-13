@@ -12,6 +12,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.GameType;
@@ -38,40 +39,41 @@ import forge.toolbox.FSkin.SkinnedTextPane;
 public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Sealed Deck");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblSealedDeck"));
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderSealed"));
 
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart = new StartButton();
     private final DeckManager lstDecks = new DeckManager(GameType.Sealed, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
-    private final JRadioButton radSingle = new FRadioButton("Play an opponent");
-    private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
+    private final JRadioButton radSingle = new FRadioButton(localizer.getMessage("lblPlayAnOpponent"));
+    private final JRadioButton radAll = new FRadioButton(localizer.getMessage("lblPlayAll7opponents"));
 
     private final JComboBox<String> cbOpponent = new JComboBox<String>();
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
-        .text("Select a game, or build a new one").build();
+        .text(localizer.getMessage("lblSealedText1")).build();
 
     private final FLabel lblDir1 = new FLabel.Builder()
-        .text("In Sealed mode, you build a deck from booster packs (maximum 10).")
+        .text(localizer.getMessage("lblSealedText2"))
         .fontSize(12).build();
 
     private final FLabel lblDir2 = new FLabel.Builder()
-        .text("Build a deck from the cards you receive. A number of AI opponents will do the same.")
+        .text(localizer.getMessage("lblSealedText3"))
         .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-        .text("Then, you may play against each of the AI opponents, or one of the opponents.")
+        .text(localizer.getMessage("lblSealedText4"))
         .fontSize(12).build();
 
-    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("Build New Sealed Deck").fontSize(16).build();
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("btnBuildNewSealedDeck")).fontSize(16).build();
 
     private final FLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)
@@ -80,11 +82,11 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     /**
      * Constructor.
      */
-    private VSubmenuSealed() {
+    VSubmenuSealed() {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lstDecks.setCaption("Sealed Decks");
+        lstDecks.setCaption(localizer.getMessage("lblSealedDecks"));
     }
 
     /* (non-Javadoc)
@@ -135,7 +137,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
      */
     @Override
     public String getMenuTitle() {
-        return "Sealed Deck";
+        return localizer.getMessage("lblSealedDeck");
     }
 
     /* (non-Javadoc)

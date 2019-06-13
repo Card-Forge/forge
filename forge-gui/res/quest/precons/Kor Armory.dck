@@ -5,14 +5,14 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Kor Armory
-Description=The "Kor Armory" deck puts you in command of the Kor, a resourceful race of adventuring nomads who use Equipment to survive as they wander their dangerous world. Their ingenuity will be your opponents' downfall.
+Description=If you want to survive, side with the Kor-- white-aligned nomads who use a variety of Equipment and spells with deadly results. All of your Kor will fight more effectively when your heavily armed Armament Master joins the fray.
 Deck Type=constructed
 Set=ZEN
 Image=kor_armory.jpg
 [main]
 2 Kabira Crossroads|ZEN
 16 Plains|ZEN
-1 Armament Master|ZEN
+1 Armament Master+|ZEN
 2 Kor Aeronaut|ZEN
 2 Kor Cartographer|ZEN
 1 Kor Duelist|ZEN

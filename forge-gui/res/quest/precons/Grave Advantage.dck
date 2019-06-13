@@ -5,14 +5,14 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Grave Advantage
-Description=Grave Advantage Intro Deck
+Description=Harness the power of death to gain ultimate dominance! Cast spells that load up your graveyard, then empty the catacombs to cast truly awesome creatures with the delve mechanic. Your creatures with high toughness will let you reap impressive rewards.
 Deck Type=constructed
 Set=FRF
 Image=grave_advantage.jpg
 [main]
 1 Abzan Beastmaster|FRF
 2 Archers' Parapet|KTK
-1 Archfiend of Depravity|FRF
+1 Archfiend of Depravity+|FRF
 1 Become Immense|KTK
 1 Carrion Crow|M15
 1 Dark Deal|FRF

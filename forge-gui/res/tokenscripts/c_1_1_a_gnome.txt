@@ -1,0 +1,5 @@
+Name:Gnome
+ManaCost:no cost
+PT:1/1
+Types:Artifact Creature Gnome
+Oracle:

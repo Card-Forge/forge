@@ -1,0 +1,15 @@
+Name:Ilharg, the Raze-Boar
+ManaCost:3 R R
+Types:Legendary Creature Boar God
+PT:6/6
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may put a creature card from your hand onto the battlefield tapped and attacking. Return that creature to your hand at the beginning of the next end step.
+SVar:TrigChange:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Animate | AtEOT$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFromGraveyard | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
+SVar:TrigFromGraveyard:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ TrigFromExile | OptionalDecider$ You | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
+SVar:TrigFromExile:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
+Oracle:Trample\nWhenever Ilharg, the Raze-Boar attacks, you may put a creature card from your hand onto the battlefield tapped and attacking. Return that creature to your hand at the beginning of the next end step.\nWhen Ilharg, the Raze-Boar dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

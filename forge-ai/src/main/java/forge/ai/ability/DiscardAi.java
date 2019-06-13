@@ -150,14 +150,17 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        Player opp = ai.getWeakestOpponent();
-        if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
-            return false;
-        }
-        if (tgt != null) {
-            if (sa.canTarget(opp)) {
-                sa.getTargets().add(opp);
-                return true;
+        for (Player opp : ai.getOpponents()) {
+            if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
+                continue;
+            } else if (!opp.canDiscardBy(sa)) { // e.g. Tamiyo, Collector of Tales
+                continue;
+            }
+            if (tgt != null) {
+                if (sa.canTarget(opp)) {
+                    sa.getTargets().add(opp);
+                    return true;
+                }
             }
         }
         return false;

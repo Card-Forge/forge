@@ -1,0 +1,7 @@
+Name:Zombie Warrior
+ManaCost:no cost
+Types:Creature Zombie Warrior
+Colors:black
+PT:4/4
+K:Vigilance
+Oracle:Vigilance

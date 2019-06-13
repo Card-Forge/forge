@@ -35,7 +35,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private final Style error;
 
     //========== Constructor
-    private VCardScript() {
+    VCardScript() {
         txtScript.setEditable(true);
         txtScript.setFocusable(true);
         doc = new DefaultStyledDocument();

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Izzet Guild Kit
-Description=Guilds of Ravnica: Izzet Guild Kit
+Description=Welcome to the Izzet League! Our calculations suggest that you're bound for greatness. This box contains a variety of (highly classified) prototypes to assist with your experiments. Go try something new!
 Set=GK1
 Image=izzet_guild_kit.jpg
 [main]

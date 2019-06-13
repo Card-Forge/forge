@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Eldrazi Assault
-Description=Battle for Zendikar Colorless (Black/Red Devoid) Intro Deck
+Description=Hailing from the space between planes, the Eldrazi are relentless destroyers, and the smaller Eldrazi no longer wait for their superiors to arrive. Overwhelm your opponent with wave after wave of colorless creatures, and take the fight to the inhabitants of Zendikar.
 Deck Type=constructed
 Set=BFZ
 Image=eldrazi_assault.jpg
@@ -20,7 +20,7 @@ Image=eldrazi_assault.jpg
 3 Vestige of Emrakul|BFZ
 2 Mind Raker|BFZ
 1 Silent Skimmer|BFZ
-1 Barrage Tyrant|BFZ
+1 Barrage Tyrant+|BFZ
 2 Processor Assault|BFZ
 2 Transgress the Mind|BFZ
 2 Touch of the Void|BFZ

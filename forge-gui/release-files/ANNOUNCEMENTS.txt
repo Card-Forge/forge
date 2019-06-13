@@ -1,5 +1,7 @@
 #Add one announcement per line
-GRN is finished! Please let us know if you see any other bugs most especially for the newers cards.
+Modern Horizons is here!
+London Mulligans are here! (And on by default)
+You can sideboard for the AI now, just turn on the preference.
+New net deck categories are available via genetic algorithms and metagame top decks.
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
 We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
-Online Multiplayer is once again functional!

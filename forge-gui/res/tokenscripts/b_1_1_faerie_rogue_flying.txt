@@ -1,0 +1,7 @@
+Name:Faerie Rogue
+ManaCost:no cost
+Types:Creature Faerie Rogue
+Colors:black
+PT:1/1
+K:Flying
+Oracle:Flying

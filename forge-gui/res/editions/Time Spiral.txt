@@ -311,3 +311,17 @@ AdditionalSetUnlockedInQuest=TSB
 234 R Wurmcalling
 235 U Yavimaya Dryad
 47 C Zealot il-Vec
+
+[tokens]
+kobolds_of_kher_keep
+w_1_1_citizen
+w_2_2_griffin_flying
+u_1_1_camarid
+b_1_2_bat_flying_nosferatu
+b_2_4_spider_reach
+b_1_1_thrull
+r_1_1_goblin
+g_1_1_saproling
+g_x_x_wurm
+c_2_2_a_assembly_worker
+c_1_1_a_triskelavite_flying_ammo

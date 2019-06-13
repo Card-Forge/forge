@@ -1,0 +1,6 @@
+Name:Sand Warrior
+Types:Creature Sand Warrior
+Colors:red,green,white
+ManaCost:no cost
+PT:1/1
+Oracle:

@@ -2,10 +2,9 @@ Name:Ulvenwald Mysteries
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken1 | TriggerDescription$ Whenever a nontoken creature you control dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigToken1:DB$Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6
-SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:TrigToken1:DB$Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigToken2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, create a 1/1 white Human Soldier creature token.
-SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ Creature,Human,Soldier| TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier soi
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_mysteries.jpg

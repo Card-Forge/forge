@@ -152,10 +152,14 @@ public class AnimateEffect extends AnimateEffectBase {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
                     keywords, removeKeywords, hiddenKeywords, timestamp);
 
+            if (sa.hasParam("Name")) {
+                c.addChangedName(sa.getParam("Name"), timestamp);
+            }
+
             if (sa.hasParam("LeaveBattlefield")) {
                 addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
             }
-            
+
             // remove abilities
             final List<SpellAbility> removedAbilities = Lists.newArrayList();
             boolean clearAbilities = sa.hasParam("OverwriteAbilities");
@@ -287,6 +291,8 @@ public class AnimateEffect extends AnimateEffectBase {
                             addedAbilities, addedTriggers, addedReplacements,
                             addedStaticAbilities, timestamp);
 
+                    c.removeChangedName(timestamp);
+
                     game.fireEvent(new GameEventCardStatsChanged(c));
 
                     for (final SpellAbility sa : removedAbilities) {
@@ -355,7 +361,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             game.fireEvent(new GameEventCardStatsChanged(c));
         }
-        
+
         if (sa.hasParam("AtEOT") && !tgts.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgts);
         }

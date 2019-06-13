@@ -6,21 +6,21 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.staticability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
-import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -376,13 +376,12 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("GainsAbilitiesOf")) {
             final String[] valids = params.get("GainsAbilitiesOf").split(",");
-            List<ZoneType> validZones = new ArrayList<ZoneType>();
-            validZones.add(ZoneType.Battlefield);
+            List<ZoneType> validZones;
+            final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
             if (params.containsKey("GainsAbilitiesOfZones")) {
-                validZones.clear();
-                for (String s : params.get("GainsAbilitiesOfZones").split(",")) {
-                    validZones.add(ZoneType.smartValueOf(s));
-                }
+                validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+            } else {
+                validZones = ImmutableList.of(ZoneType.Battlefield);
             }
 
             CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
@@ -394,12 +393,17 @@ public final class StaticAbilityContinuous {
                 for (Card c : cardsIGainedAbilitiesFrom) {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
+                            if (loyaltyAB && !sa.isPwAbility()) {
+                                continue;
+                            }
                             SpellAbility newSA = sa.copy(hostCard, false);
                             if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                 newSA.setRestrictions(sa.getRestrictions());
                                 newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                             }
                             newSA.setOriginalHost(c);
+                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
+                            newSA.setGrantorStatic(stAb);
                             newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
                             addFullAbs.add(newSA);
@@ -498,67 +502,10 @@ public final class StaticAbilityContinuous {
 
             // Gain text from another card
             if (layer == StaticAbilityLayer.TEXT) {
-                // Make no changes in case the target for the ability is still the same as before
-                boolean noChange = false;
-                if (gainTextSource != null && affectedCard.hasSVar("GainingTextFrom") && affectedCard.hasSVar("GainingTextFromTimestamp")
-                        && gainTextSource.getName() == affectedCard.getSVar("GainingTextFrom")
-                        && gainTextSource.getTimestamp() == Long.parseLong(affectedCard.getSVar("GainingTextFromTimestamp"))) {
-                    noChange = true;
-                }
-
-                if (!noChange) {
-                    // Restore the original text in case it was remembered before
-                    if (affectedCard.getStates().contains(CardStateName.OriginalText)) {
-                        affectedCard.clearTriggersNew();
-                        List<SpellAbility> saToRemove = Lists.newArrayList();
-                        for (SpellAbility saTemp : affectedCard.getSpellAbilities()) {
-                            if (saTemp.isTemporary()) {
-                                saToRemove.add(saTemp);
-                            }
-                        }
-                        for (SpellAbility saRem : saToRemove) {
-                            affectedCard.removeSpellAbility(saRem);
-                        }
-                        CardFactory.copyState(affectedCard, CardStateName.OriginalText, affectedCard, CardStateName.Original, false);
-                    }
-
-                    // TODO: find a better way to ascertain that the card will essentially try to copy its exact duplicate
-                    // (e.g. Volrath's Shapeshifter copying the text of another pristine Volrath's Shapeshifter), since the
-                    // check by name may fail in case one of the cards is modified in some way while the other is not
-                    // (probably not very relevant for Volrath's Shapeshifter itself since it copies text on cards in GY).
-                    if (gainTextSource != null && !gainTextSource.getCurrentState().getName().equals(affectedCard.getCurrentState().getName())) {
-                        if (!affectedCard.getStates().contains(CardStateName.OriginalText)) {
-                            // Remember the original text first in case it hasn't been done yet
-                            CardFactory.copyState(affectedCard, CardStateName.Original, affectedCard, CardStateName.OriginalText, false);
-                        }
-
-                        CardFactory.copyState(gainTextSource, CardStateName.Original, affectedCard, CardStateName.Original, false);
-
-                        // Do not clone the set code and rarity from the target card
-                        affectedCard.getState(CardStateName.Original).setSetCode(affectedCard.getState(CardStateName.OriginalText).getSetCode());
-                        affectedCard.getState(CardStateName.Original).setRarity(affectedCard.getState(CardStateName.OriginalText).getRarity());
-
-                        // Enable this in case Volrath's original image is to be used
-                        affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
-
-                        // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
-                        if (params.containsKey("GainedTextHasThisStaticAbility")) {
-                            affectedCard.getCurrentState().addStaticAbility(stAb);
-                        }
-
-                        // Add the ability "{2}: Discard a card" for Volrath's Shapeshifter
-                        // TODO: Make this generic so that other SAs can be added onto custom cards if need be
-                        if (params.containsKey("GainVolrathsDiscardAbility")) {
-                            String abDiscard = "AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.";
-                            SpellAbility ab = AbilityFactory.getAbility(abDiscard, affectedCard);
-                            affectedCard.addSpellAbility(ab);
-                        }
-
-                        // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
-                        // the card too aggressively when unnecessary
-                        affectedCard.setSVar("GainingTextFrom", String.valueOf(gainTextSource.getName()));
-                        affectedCard.setSVar("GainingTextFromTimestamp", String.valueOf(gainTextSource.getTimestamp()));
-                    }
+                if (gainTextSource != null) {
+                    affectedCard.addTextChangeState(
+                        CardFactory.getCloneStates(gainTextSource, affectedCard, stAb), se.getTimestamp()
+                    );
                 }
             }
 
@@ -692,7 +639,7 @@ public final class StaticAbilityContinuous {
                     affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
                 }
             }
-            
+
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
@@ -720,7 +667,7 @@ public final class StaticAbilityContinuous {
                         // set OriginalHost to get the owner of this static ability
                         sa.setOriginalHost(hostCard);
                         // set overriding ability to the trigger
-                        actualTrigger.setOverridingAbility(sa);    
+                        actualTrigger.setOverridingAbility(sa);
                     }
                     actualTrigger.setIntrinsic(false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
@@ -788,10 +735,19 @@ public final class StaticAbilityContinuous {
             if (withFlash != null) {
                 affectedCard.addWithFlash(se.getTimestamp(), withFlash);
             }
-            
+
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
+                String mayPlayAltCost = mayPlayAltManaCost;
+
+                if (mayPlayAltCost != null && mayPlayAltCost.contains("ConvertedManaCost")) {
+                    final String costcmc = Integer.toString(affectedCard.getCMC());
+                    mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                }
+
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
+                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
         }
 

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Migraine
-Description=The "Migraine" deck features an array of fast creatures coupled with discard combinations to gain card advantage. This mono-black deck is geared toward the more experienced player, using a subtle design and potent theme.
+Description=In the second episode of the Rath Cycle, Gerrard and the heroes of the Weatherlight penetrate Volrath's stronghold on the plane of Rath. With discard spells and fast creatures, "Migraine" gives you control of one valuable resource. Your opponent's mind.
 Deck Type=constructed
 Set=STH
 Image=migraine.jpg

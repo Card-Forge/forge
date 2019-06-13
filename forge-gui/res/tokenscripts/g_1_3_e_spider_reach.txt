@@ -1,0 +1,7 @@
+Name:Spider
+ManaCost:no cost
+Types:Enchantment Creature Spider
+PT:1/3
+Colors:green
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

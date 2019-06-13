@@ -162,3 +162,9 @@ Type=Other
 154 L Forest
 155 L Forest
 156 L Forest
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_soldier
+b_2_1_cat
+g_1_1_hippo

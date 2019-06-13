@@ -194,6 +194,8 @@ public class GameSimulator {
                 System.out.println();
             }
             final SpellAbility playingSa = sa;
+
+            simGame.copyLastState();
             ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
                 @Override
                 public void run() {

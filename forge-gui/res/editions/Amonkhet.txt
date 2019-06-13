@@ -298,3 +298,14 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 285 C Timber Gorge
 286 C Tranquil Expanse
 287 C Woodland Stream
+
+[tokens]
+w_1_1_cat_lifelink
+w_1_1_warrior_vigilance
+u_2_2_drake_flying
+b_1_1_insect
+b_2_2_zombie
+g_4_2_beast
+g_3_3_hippo
+g_1_1_snake_deathtouch
+g_5_5_wurm

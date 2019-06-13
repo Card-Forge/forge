@@ -258,3 +258,17 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 246 L Forest
 246 L Forest
 246 L Forest
+
+[tokens]
+c_1_1_sliver
+c_1_1_sliver
+w_4_4_angel_flying
+w_2_2_cat
+w_0_1_goat
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+r_1_1_elemental
+r_1_1_elemental
+g_3_3_beast
+g_1_1_saproling
+g_2_2_wolf

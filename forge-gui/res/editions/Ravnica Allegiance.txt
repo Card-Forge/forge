@@ -282,3 +282,17 @@ Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Sec
 271 U Charging War Boar
 272 R Domri's Nodorog
 273 M The Haunt of Hightower
+
+[tokens]
+rg_4_4_beast
+g_3_3_centaur
+g_3_3_frog_lizard
+r_1_1_goblin
+w_1_1_human
+u_0_2_illusion_mesmerize
+g_2_2_ooze
+wu_4_4_sphinx_flying_vigilance
+wb_1_1_spirit_flying
+c_1_1_a_thopter_flying
+c_a_treasure
+b_2_2_zombie

@@ -36,11 +36,7 @@ public class PhaseLabel extends JLabel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                if (PhaseLabel.this.enabled) {
-                    PhaseLabel.this.enabled = false;
-                } else {
-                    PhaseLabel.this.enabled = true;
-                }
+                PhaseLabel.this.enabled = !PhaseLabel.this.enabled;
             }
 
             @Override

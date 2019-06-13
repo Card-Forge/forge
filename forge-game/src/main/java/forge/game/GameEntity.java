@@ -66,52 +66,52 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final int addDamage(final int damage, final Card source, boolean isCombat, boolean noPrevention,
-            final CardDamageMap damageMap, final CardDamageMap preventMap, final SpellAbility cause) {
+            final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
         if (noPrevention) {
-            return addDamageWithoutPrevention(damage, source, damageMap, preventMap, cause);
+            return addDamageWithoutPrevention(damage, source, damageMap, preventMap, counterTable, cause);
         } else if (isCombat) {
-            return addCombatDamage(damage, source, damageMap, preventMap);
+            return addCombatDamage(damage, source, damageMap, preventMap, counterTable);
         } else {
-            return addDamage(damage, source, damageMap, preventMap, cause);
+            return addDamage(damage, source, damageMap, preventMap, counterTable, cause);
         }
     }
 
     public int addDamage(final int damage, final Card source, final CardDamageMap damageMap,
-            final CardDamageMap preventMap, final SpellAbility cause) {
+            final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap, preventMap, cause);
+        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap, preventMap, counterTable, cause);
         damageToDo = preventDamage(damageToDo, source, false, preventMap, cause);
 
-        return addDamageAfterPrevention(damageToDo, source, false, damageMap);
+        return addDamageAfterPrevention(damageToDo, source, false, damageMap, counterTable);
     }
 
     public final int addCombatDamage(final int damage, final Card source, final CardDamageMap damageMap,
-            final CardDamageMap preventMap) {
+            final CardDamageMap preventMap, GameEntityCounterTable counterTable) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap, preventMap, null);
+        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap, preventMap, counterTable, null);
         damageToDo = preventDamage(damageToDo, source, true, preventMap, null);
 
         if (damageToDo > 0) {
             source.getDamageHistory().registerCombatDamage(this);
         }
         // damage prevention is already checked
-        return addCombatDamageBase(damageToDo, source, damageMap);
+        return addCombatDamageBase(damageToDo, source, damageMap, counterTable);
     }
 
-    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
-        return addDamageAfterPrevention(damage, source, true, damageMap);
+    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
+        return addDamageAfterPrevention(damage, source, true, damageMap, counterTable);
     }
 
     public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap,
-            final CardDamageMap preventMap, final SpellAbility cause) {
-        int damageToDo = replaceDamage(damage, source, false, false, damageMap, preventMap, cause);
-        return addDamageAfterPrevention(damageToDo, source, false, damageMap);
+            final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
+        int damageToDo = replaceDamage(damage, source, false, false, damageMap, preventMap, counterTable, cause);
+        return addDamageAfterPrevention(damageToDo, source, false, damageMap, counterTable);
     }
 
     public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention,
-            final CardDamageMap damageMap, final CardDamageMap preventMap, final SpellAbility cause) {
+            final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Replacement effects
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
@@ -122,6 +122,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("NoPreventDamage", !prevention);
         repParams.put("DamageMap", damageMap);
         repParams.put("PreventMap", preventMap);
+        repParams.put("CounterTable", counterTable);
         if (cause != null) {
             repParams.put("Cause", cause);
         }
@@ -139,7 +140,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                 if (prevention) {
                     newDamage = newTarget.preventDamage(newDamage, source, isCombat, preventMap, cause);
                 }
-                newTarget.addDamageAfterPrevention(newDamage, source, isCombat, damageMap);
+                newTarget.addDamageAfterPrevention(newDamage, source, isCombat, damageMap, counterTable);
             }
         default:
             return 0;
@@ -147,7 +148,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     // This function handles damage after replacement and prevention effects are applied
-    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat, CardDamageMap damageMap);
+    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable);
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
@@ -470,7 +471,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
 
     abstract public boolean canReceiveCounters(final CounterType type);
-    abstract public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents);
+    abstract public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table);
     abstract public void subtractCounter(final CounterType counterName, final int n);
     abstract public void clearCounters();
 

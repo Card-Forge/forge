@@ -47,7 +47,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         mapParams.put("Mode", TriggerType.Immediate.name());
 
-        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
+        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), sa.isIntrinsic());
 
         if (sa.hasParam("CopyTriggeringObjects")) {
             immediateTrig.setStoredTriggeredObjects(sa.getTriggeringObjects());

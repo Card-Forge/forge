@@ -7,7 +7,7 @@ SVar:DBMill1:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 
 SVar:DBMill2:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | SubAbility$ DBMill3
 SVar:DBMill3:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | Imprint$ True
 SVar:X:Count$ValidExile Land.IsImprinted
-SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ r_1_1_warrior | TokenOwner$ You | LegacyImage$ r 1 1 warrior sok | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Y:Count$ValidExile Card.IsRemembered+nonLand
 AI:RemoveDeck:Random

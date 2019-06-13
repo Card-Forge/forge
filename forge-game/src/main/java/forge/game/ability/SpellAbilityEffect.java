@@ -173,8 +173,7 @@ public abstract class SpellAbilityEffect {
     protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa, final String definedParam) { return getCards(true,  definedParam, sa); }
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
-        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
-                && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards()) 
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }

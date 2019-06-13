@@ -106,3 +106,4 @@ M19: 36 Boosters
 GRN: 36 Boosters
 UMA: 24 Boosters
 RNA: 36 Boosters
+WAR: 36 Boosters

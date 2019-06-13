@@ -39,6 +39,18 @@ public class TokenDb implements ITokenDatabase {
         return getToken(tokenName, CardEdition.UNKNOWN.getName());
     }
 
+    public void preloadTokens() {
+        for(CardEdition edition : this.editions) {
+            for (String name : edition.getTokens().keySet()) {
+                try {
+                    getToken(name, edition.getCode());
+                } catch(Exception e) {
+                    System.out.println(name + "_" + edition.getCode() + " defined in Edition file, but not defined as a token script.");
+                }
+            }
+        }
+    }
+
     @Override
     public PaperToken getToken(String tokenName, String edition) {
         String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
@@ -103,7 +115,7 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public List<PaperToken> getAllTokens() {
-        return null;
+        return new ArrayList<>(tokensByName.values());
     }
 
     @Override
@@ -123,6 +135,6 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public Iterator<PaperToken> iterator() {
-        return null;
+        return tokensByName.values().iterator();
     }
 }

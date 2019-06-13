@@ -165,11 +165,11 @@ SNAPSHOT builds can be built via the Maven integration in Eclipse.
    
 2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
 
-The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desktop-1.6.22-SNAPSHOT
+The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desktop-[version]-SNAPSHOT
 
 # IntelliJ
 
-TBD  
+Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/wikis/intellij-setup).
 
 # Card Scripting
 

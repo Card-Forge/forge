@@ -18,6 +18,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,6 +27,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -70,6 +72,29 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if (aiLogic.equals("NoSameCreatureType")) {
+            final List<ZoneType> origin = Lists.newArrayList();
+            if (sa.hasParam("Origin")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+            } else if (sa.hasParam("TgtZone")) {
+                origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+            }
+            CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin),
+                    sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
+
+            final List<String> creatureTypes = Lists.newArrayList();
+            for (Card c : list) {
+                creatureTypes.addAll(c.getType().getCreatureTypes());
+            }
+
+            for (String type : creatureTypes) {
+                int freq = Collections.frequency(creatureTypes, type);
+                if (freq > 1) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -96,6 +121,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {
                 return SpecialCardAi.TheScarabGod.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("SorinVengefulBloodlord")) {
+                return SpecialCardAi.SorinVengefulBloodlord.consider(aiPlayer, sa);
             } else if (aiLogic.equals("Intuition")) {
                 // This logic only fills the multiple cards array, the decision to play is made
                 // separately in hiddenOriginCanPlayAI later.
@@ -315,6 +342,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         for (final Player p : pDefined) {
             CardCollectionView list = p.getCardsIn(origin);
+
+            // remove cards that won't be seen if library can't be searched
+            if (!ai.canSearchLibraryWith(sa, p)) {
+                list = CardLists.filter(list, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
+            }
 
             if (type != null && p == ai) {
                 // AI only "knows" about his information
@@ -671,7 +703,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 // only use blink or bounce effects
-                if (!(destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone))
+                if (!(destination.equals(ZoneType.Exile)
+                        && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone || "DelayedBlink".equals(sa.getParam("AILogic"))))
                         && !destination.equals(ZoneType.Hand)) {
                     return false;
                 }
@@ -931,7 +964,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
-                    || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
+                    || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
             if ((destination.equals(ZoneType.Hand) || blink) && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
@@ -1079,7 +1112,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         	}
         }
 
-        if (list.isEmpty()) {
+        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getTargetRestrictions() != null
+                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0 && sa.getPayCosts() != null
+                && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
+
+        if (list.isEmpty() && !doWithoutTarget) {
             return false;
         }
 
@@ -1161,7 +1198,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
-                    return false;
+                    if (!doWithoutTarget) {
+                        return false;
+                    } else {
+                        break;
+                    }
                 } else {
                     if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         boolean aiTgtsOK = false;
@@ -1182,6 +1223,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if max CMC exceeded, do not choose this card (but keep looking for other options)
             if (sa.hasParam("MaxTotalTargetCMC")) {
                 if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
+            // honor the Same Creature Type restriction
+            if (tgt.isWithSameCreatureType()) {
+                Card firstTarget = sa.getTargetCard();
+                if (firstTarget != null && !choice.sharesCreatureTypeWith(firstTarget)) {
                     list.remove(choice);
                     continue;
                 }
@@ -1225,6 +1275,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // filter out untargetables
         CardCollectionView aiPermanents = CardLists
                 .filterControlledBy(list, ai);
+        CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, Presets.PLANESWALKERS);
 
         // Felidar Guardian + Saheeli Rai combo support
         if (sa.getHostCard().getName().equals("Felidar Guardian")) {
@@ -1265,6 +1316,33 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c,
                                 combat) && c.getOwner() == ai && !c.isToken()) {
                     return c;
+                }
+            }
+        }
+        // Reload planeswalkers
+        else if (!aiPlaneswalkers.isEmpty() && (sa.getHostCard().isSorcery() || !game.getPhaseHandler().isPlayerTurn(ai))) {
+            int maxLoyaltyToConsider = 2;
+            int loyaltyDiff = 2;
+            int chance = 30;
+            if (ai.getController().isAI()) {
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                maxLoyaltyToConsider = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
+                loyaltyDiff = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
+                chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
+            }
+            if (MyRandom.percentTrue(chance)) {
+                Collections.sort(aiPlaneswalkers, new Comparator<Card>() {
+                    @Override
+                    public int compare(final Card a, final Card b) {
+                        return a.getCounters(CounterType.LOYALTY) - b.getCounters(CounterType.LOYALTY);
+                    }
+                });
+                for (Card pw : aiPlaneswalkers) {
+                    int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+                    int freshLoyalty = pw.getCurrentState().getBaseLoyalty();
+                    if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
+                        return pw;
+                    }
                 }
             }
         }
@@ -1421,6 +1499,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             } else if ("WorstCard".equals(logic)) {
                 return ComputerUtilCard.getWorstAI(fetchList);
+            } else if ("BestCard".equals(logic)) {
+                return ComputerUtilCard.getBestAI(fetchList); // generally also means the most expensive one or close to it
             } else if ("Mairsil".equals(logic)) {
                 return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList);
             } else if ("SurvivalOfTheFittest".equals(logic)) {
