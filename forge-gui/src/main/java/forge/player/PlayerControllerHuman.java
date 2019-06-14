@@ -522,26 +522,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-	tempShow(optionList1);
-	tempShow(optionList2);
+    	tempShow(optionList1);
+    	tempShow(optionList2);
 
         if (useSelectCardsInput(optionList1) && useSelectCardsInput(optionList2)) {
             final InputSelectFromTwoLists<T> input = new InputSelectFromTwoLists<T>(this, optional, optionList1, optionList2, sa);
             input.setCancelAllowed(optional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
-	    endTempShowCards();
+    	    endTempShowCards();
             return (List<T>) input.getSelected();
-	}
+    	}
 
         final GameEntityView result1 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList1), null, optional);
         final GameEntityView result2 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList2), null, (result1==null)?optional:true);
         endTempShowCards();
-	List<T> results = new ArrayList<>();
-	GameEntity entity1 = convertToEntity(result1);
-	if (entity1!=null) { results.add((T) entity1); }
-	GameEntity entity2 = convertToEntity(result2);
-	if (entity2!=null) { results.add((T) entity2); }
+	    List<T> results = new ArrayList<>();
+    	GameEntity entity1 = convertToEntity(result1);
+    	if (entity1!=null) { results.add((T) entity1); }
+       	GameEntity entity2 = convertToEntity(result2);
+    	if (entity2!=null) { results.add((T) entity2); }
         return results;
     }
 

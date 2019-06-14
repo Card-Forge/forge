@@ -552,7 +552,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
         final String logic = sa.getParamOrDefault("AILogic", "");
 
-        Player enemy = ComputerUtil.getOpponentFor(ai);
+        Player enemy = ai.getWeakestOpponent();
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
@@ -876,7 +876,7 @@ public class DamageDealAi extends DamageAiBase {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             if (tgt.canTgtPlaneswalker()) {

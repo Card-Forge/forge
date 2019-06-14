@@ -521,7 +521,7 @@ public class ComputerUtilCard {
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
         Combat currentCombat = ai.getGame().getCombat();
@@ -884,7 +884,7 @@ public class ComputerUtilCard {
         List<String> chosen = new ArrayList<String>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
              
@@ -974,7 +974,7 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
@@ -1269,7 +1269,7 @@ public class ComputerUtilCard {
             }
         }
 
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
         float chance = 0;

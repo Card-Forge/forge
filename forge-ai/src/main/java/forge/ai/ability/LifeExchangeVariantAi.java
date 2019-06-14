@@ -149,7 +149,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
     final boolean mandatory) {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         if (tgt != null) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {

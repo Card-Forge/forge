@@ -79,7 +79,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
                         itemManager.focus();
                         break;
                     case KeyEvent.VK_ENTER:
-                        if (e.getModifiers() == 0) {
+                        if (e.getModifiersEx() == 0) {
                             if (changeTimer.isRunning()) {
                                 applyChange(); //apply change now if currently delayed
                             }
