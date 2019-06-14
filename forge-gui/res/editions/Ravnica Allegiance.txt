@@ -284,7 +284,7 @@ Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Sec
 273 M The Haunt of Hightower
 
 [tokens]
-rg_4_4_beast
+rg_4_4_beast_trample
 g_3_3_centaur
 g_3_3_frog_lizard
 r_1_1_goblin
