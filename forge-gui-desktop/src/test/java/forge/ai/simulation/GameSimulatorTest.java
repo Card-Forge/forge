@@ -1889,6 +1889,30 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(awakened.getType().hasSubtype("Goblin"));
     }
 
+    public void testNecroticOozeActivateOnce() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Swamp", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Forest", p, ZoneType.Battlefield); }
+
+        addCardToZone("Basking Rootwalla", p, ZoneType.Graveyard);
+        Card ooze = addCardToZone("Necrotic Ooze", p, ZoneType.Hand);
+
+        SpellAbility oozeSA = ooze.getFirstSpellAbility();
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(oozeSA);
+
+        Card oozeOTB = findCardWithName(sim.getSimulatedGameState(), "Necrotic Ooze");
+
+        assertTrue(oozeOTB != null);
+
+        SpellAbility copiedSA = findSAWithPrefix(oozeOTB, "{1}{G}:");
+        assertTrue(copiedSA != null);
+        assertTrue(copiedSA.getRestrictions().getLimitToCheck().equals("1"));
+    }
+
     @SuppressWarnings("unused")
     public void broken_testCloneDimir() {
         Game game = initAndCreateGame();
