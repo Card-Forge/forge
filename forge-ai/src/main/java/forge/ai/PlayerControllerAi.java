@@ -1227,6 +1227,18 @@ public class PlayerControllerAi extends PlayerController {
             // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
             Cost fullCost = opt.getCost().copy().add(costSoFar);
             SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+
+            // Playability check for Kicker
+            if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
+                SpellAbility kickedSaCopy = fullCostSa.copy();
+                kickedSaCopy.addOptionalCost(opt.getType());
+                Card copy = CardUtil.getLKICopy(chosen.getHostCard());
+                copy.addOptionalCostPaid(opt.getType());
+                if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
+                    continue; // don't choose kickers we don't want to play
+                }
+            }
+
             if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
                 chosenOptCosts.add(opt);
                 costSoFar.add(opt.getCost());
