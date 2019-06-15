@@ -42,6 +42,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
@@ -307,6 +308,15 @@ public final class CardUtil {
         for (CardStateName s : newCopy.getStates()) {
             newCopy.updateKeywordsCache(newCopy.getState(s));
         }
+
+        newCopy.setKickerMagnitude(in.getKickerMagnitude());
+
+        for (OptionalCost ocost : in.getOptionalCostsPaid()) {
+            newCopy.addOptionalCostPaid(ocost);
+        }
+
+        newCopy.setCastSA(in.getCastSA());
+        newCopy.setCastFrom(in.getCastFrom());
 
         return newCopy;
     }
