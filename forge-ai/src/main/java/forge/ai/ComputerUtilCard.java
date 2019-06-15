@@ -1842,17 +1842,45 @@ public class ComputerUtilCard {
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 
-        if (sa != null && sa.isEvoke()) {
-            if (card.hasSVar("NeedsToPlayEvoked")) {
-                needsToPlayName = "NeedsToPlayEvoked";
-            }
-            if (card.hasSVar("NeedsToPlayEvokedVar")) {
-                needsToPlayVarName = "NeedsToPlayEvokedVar";
+        // TODO: if there are ever split cards with Evoke or Kicker, factor in the right split option above
+        if (sa != null) {
+            if (sa.isEvoke()) {
+                // if the spell is evoked, will use NeedsToPlayEvoked if available (otherwise falls back to NeedsToPlay)
+                if (card.hasSVar("NeedsToPlayEvoked")) {
+                    needsToPlayName = "NeedsToPlayEvoked";
+                }
+                if (card.hasSVar("NeedsToPlayEvokedVar")) {
+                    needsToPlayVarName = "NeedsToPlayEvokedVar";
+                }
+            } else if (sa.isKicked()) {
+                // if the spell is kicked, uses NeedsToPlayKicked if able and locks out the regular NeedsToPlay check
+                // for unkicked spells, uses NeedsToPlay
+                if (card.hasSVar("NeedsToPlayKicked")) {
+                    needsToPlayName = "NeedsToPlayKicked";
+                } else {
+                    needsToPlayName = "UNUSED";
+                }
+                if (card.hasSVar("NeedsToPlayKickedVar")) {
+                    needsToPlayVarName = "NeedsToPlayKickedVar";
+                } else {
+                    needsToPlayVarName = "UNUSED";
+                }
             }
         }
 
         if (card.hasSVar(needsToPlayName)) {
             final String needsToPlay = card.getSVar(needsToPlayName);
+
+            // A special case which checks that this creature will attack if it's the AI's turn
+            if (needsToPlay.equalsIgnoreCase("WillAttack")) {
+                if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                    return ComputerUtilCard.doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
+                        AiPlayDecision.WillPlay : AiPlayDecision.BadEtbEffects;
+                } else {
+                    return AiPlayDecision.WillPlay; // not our turn, skip this check for the possible Flash use etc.
+                }
+            }
+
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
