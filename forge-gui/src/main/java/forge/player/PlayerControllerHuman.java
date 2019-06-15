@@ -1502,7 +1502,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getTracker().unfreeze();
         }
         final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
-        HashMap<SpellAbilityView, AbilitySub> spellViewCache = new HashMap<>();
+        LinkedHashMap<SpellAbilityView, AbilitySub> spellViewCache = new LinkedHashMap<>();
         for (AbilitySub spellAbility : possible) {
             spellViewCache.put(spellAbility.getView(), spellAbility);
         }
