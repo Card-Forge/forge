@@ -17,7 +17,7 @@ public class QuestChallengeGenerator {
         int id = 0;
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().getModern());
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(1000);
             qc.setWinsReqd(MyRandom.getRandom().nextInt(5));
             qc.setDifficulty(QuestEventDifficulty.MEDIUM);
@@ -27,7 +27,7 @@ public class QuestChallengeGenerator {
         }
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getAIHeadstartChallenge(1);
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(1000);
             qc.setCardReward("1 multicolor rare");
             qc.setWinsReqd(MyRandom.getRandom().nextInt(5));
@@ -37,7 +37,7 @@ public class QuestChallengeGenerator {
         }
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().get("Legacy"));
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(5000);
             qc.setCardReward("2 multicolor rares");
             qc.setWinsReqd(MyRandom.getRandom().nextInt(25));
@@ -47,7 +47,7 @@ public class QuestChallengeGenerator {
         }
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getAIHeadstartChallenge(2);
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(5000);
             qc.setCardReward("2 multicolor rares");
             qc.setWinsReqd(MyRandom.getRandom().nextInt(25));
@@ -57,7 +57,7 @@ public class QuestChallengeGenerator {
         }
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().get("Vintage"));
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(10000);
             qc.setCardReward("3 multicolor rares");
             qc.setWinsReqd(MyRandom.getRandom().nextInt(50));
@@ -67,7 +67,7 @@ public class QuestChallengeGenerator {
         }
         for (int i=0;i<5;++i) {
             QuestEventChallenge qc = getAIHeadstartChallenge(3);
-            qc.setId(new Integer(id).toString());
+            qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(10000);
             qc.setCardReward("3 multicolor rares");
             qc.setWinsReqd(MyRandom.getRandom().nextInt(50));

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -36,7 +35,7 @@ public class DigUntilAi extends SpellAbilityAi {
         final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         Player libraryOwner = ai;
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
 
         if ("DontMillSelf".equals(logic)) {
             // A card that digs for specific things and puts everything revealed before it into graveyard

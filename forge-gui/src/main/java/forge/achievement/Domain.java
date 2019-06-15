@@ -1,18 +1,34 @@
 package forge.achievement;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Domain extends ProgressiveAchievement {
     public Domain() {
         super("Domain", "Domain", "Win a game with one of each basic land on the battlefield", "It's nice being able to cast anything you want.");
     }
+
+    private HashMap<String, String> basicLandMap = new HashMap<String, String>() {
+        {
+            put("Plains", "Plains");
+            put("Snow-Covered Plains", "Plains");
+            put("Island", "Island");
+            put("Snow-Covered Island", "Island");
+            put("Forest", "Forest");
+            put("Snow-Covered Forest", "Forest");
+            put("Mountain", "Mountain");
+            put("Snow-Covered Mountain", "Mountain");
+            put("Swamp", "Swamp");
+            put("Snow-Covered Swamp", "Swamp");
+        }
+    };
 
     @Override
     protected boolean eval(Player player, Game game) {
@@ -23,8 +39,9 @@ public class Domain extends ProgressiveAchievement {
         if (player.getOutcome().hasWon()) {
             Set<String> basicLands = new HashSet<String>();
             for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-                if (c.isBasicLand()) {
-                    basicLands.add(c.getName());
+                String name = c.getName();
+                if (c.isBasicLand() && basicLandMap.containsKey(name)) {
+                    basicLands.add(basicLandMap.get(name));
                 }
             }
             return basicLands.size() == 5;
