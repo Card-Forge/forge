@@ -1849,7 +1849,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
-        assertTrue(simSpark != null);
+        assertNotNull(simSpark);
         assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
         assertTrue(simSpark.getCounters(CounterType.P1P1) == 1);
         assertTrue(simSpark.getCounters(CounterType.LOYALTY) == 5);
@@ -1882,7 +1882,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
 
-        assertTrue(awakened != null);
+        assertNotNull(awakened);
         assertTrue(awakened.getName().equals("Vitu-Ghazi"));
         assertTrue(awakened.getCounters(CounterType.P1P1) == 9);
         assertTrue(awakened.hasKeyword(Keyword.HASTE));
@@ -1906,11 +1906,33 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card oozeOTB = findCardWithName(sim.getSimulatedGameState(), "Necrotic Ooze");
 
-        assertTrue(oozeOTB != null);
+        assertNotNull(oozeOTB);
 
         SpellAbility copiedSA = findSAWithPrefix(oozeOTB, "{1}{G}:");
-        assertTrue(copiedSA != null);
+        assertNotNull(copiedSA);
         assertTrue(copiedSA.getRestrictions().getLimitToCheck().equals("1"));
+    }
+
+    public void testEpochrasite() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Swamp", p, ZoneType.Battlefield); }
+
+        Card epo = addCardToZone("Epochrasite", p, ZoneType.Graveyard);
+        Card animate = addCardToZone("Animate Dead", p, ZoneType.Hand);
+
+        SpellAbility saAnimate = animate.getFirstSpellAbility();
+        saAnimate.getTargets().add(epo);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(saAnimate);
+
+        Card epoOTB = findCardWithName(sim.getSimulatedGameState(), "Epochrasite");
+
+        assertNotNull(epoOTB);
+        assertTrue(epoOTB.getCounters(CounterType.P1P1) == 3);
     }
 
     @SuppressWarnings("unused")
