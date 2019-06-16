@@ -2,6 +2,6 @@ Name:Puppet Strings
 ManaCost:3
 Types:Artifact
 A:AB$ TapOrUntap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_strings.jpg
 Oracle:{2}, {T}: You may tap or untap target creature.

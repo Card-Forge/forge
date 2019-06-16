@@ -1,0 +1,10 @@
+Name:Cheering Fanatic
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigNameCard | TriggerDescription$ Whenever CARDNAME attacks, choose a card name. Spells with the chosen name cost {1} less to cast this turn.
+SVar:TrigNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CFReduceCost
+SVar:CFReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card.NamedCard | Type$ Spell | Amount$ 1 | Description$ Spells with the chosen name cost {1} less to cast this turn.
+AI:RemoveDeck:All
+Oracle:Whenever Cheering Fanatic attacks, choose a card name. Spells with the chosen name cost {1} less to cast this turn.

@@ -2,6 +2,6 @@ Name:Vitalize
 ManaCost:G
 Types:Instant
 A:SP$ UntapAll | Cost$ G | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalize.jpg
 Oracle:Untap all creatures you control.

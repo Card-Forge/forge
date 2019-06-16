@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Master Blaster
-Description=The point of the "Master Blaster" deck is to blow things up. Well, that's not the whole point. It's also about cards that are really tough to deal with. In other words, the "Master Blaster" deck tries to destroy as much as it can while making it as difficult as possible for opponents to slog through its powerful threats.
+Description=Wear your opponents down by picking off their cards one by one, while at the same time playing indestructible cards of your own.
 Deck Type=constructed
 Set=DST
 Image=master_blaster.jpg

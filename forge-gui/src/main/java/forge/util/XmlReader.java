@@ -181,7 +181,7 @@ public class XmlReader {
                 final T result;
                 if (collectionToLoad == null) {
                     try {
-                        result = collectionType.newInstance();
+                        result = collectionType.getDeclaredConstructor().newInstance();
                     }
                     catch (Exception e) {
                         e.printStackTrace();

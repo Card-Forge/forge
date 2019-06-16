@@ -1,4 +1,6 @@
 Name:Main world
+Name:Random Standard
+Name:Random Commander
 Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
@@ -23,3 +25,4 @@ Name:Theros|Dir:2014-05 Theros|Sets:THS, BNG, JOU
 Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
 Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
 Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC
+Name:Tempest|Dir:Tempest|Sets:TMP, STH, EXO

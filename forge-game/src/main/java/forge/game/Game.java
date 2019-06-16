@@ -326,7 +326,7 @@ public class Game {
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
      */
-    public final List<Player> getRegisteredPlayers() {
+    public final PlayerCollection getRegisteredPlayers() {
         return allPlayers;
     }
 
@@ -466,7 +466,7 @@ public class Game {
     }
 
     public Zone getZoneOf(final Card card) {
-        return card.getZone();
+        return card.getLastKnownZone();
     }
 
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
@@ -901,10 +901,8 @@ public class Game {
         for (Card c : p.getAllCards()) {
             if (c.hasSVar("NeedsOrderedGraveyard")) {
                 return true;
-            } else if (c.getStates().contains(CardStateName.OriginalText)) {
-                if (c.getState(CardStateName.OriginalText).hasSVar("NeedsOrderedGraveyard")) {
-                    return true;
-                }
+            } else if (c.getOriginalState(CardStateName.Original).hasSVar("NeedsOrderedGraveyard")) {
+                return true;
             }
         }
         for (Card c : p.getOpponents().getCardsIn(ZoneType.Battlefield)) {

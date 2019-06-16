@@ -1,0 +1,52 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Azorius Guild Kit
+Description=Welcome to the Azorius Senate. Your membership has been approved through all proper channels. This box contains your official law-enforcement kit and an insignia representing your new authority. Let justice be your guiding light.
+Set=GK2
+Image=azorius_guild_kit.jpg
+[Avatar]
+
+[Main]
+1 Archon of the Triumvirate|GK2
+4 Azorius Chancery|GK2
+1 Azorius Charm|GK2
+2 Azorius Guildgate|RNA|1
+2 Azorius Guildgate|RNA|2
+1 Azorius Guildmage|GK2
+1 Azorius Herald|GK2
+1 Azorius Justiciar|GK2
+1 Azorius Keyrune|GK2
+2 Azorius Signet|GK2
+1 Court Hussar|GK2
+1 Depose // Deploy|RNA
+1 Detention Sphere|GK2
+1 Dovescape|GK2
+1 Dramatic Rescue|GK2
+1 Hover Barrier|GK2
+8 Island|GK2|1
+1 Isperia the Inscrutable|GK2
+1 Isperia, Supreme Judge+|GK2
+2 Judge's Familiar|GK2
+1 Lavinia of the Tenth|GK2
+1 Lyev Skyknight|GK2
+8 Plains|GK2|1
+1 Pride of the Clouds|GK2
+1 Render Silent|GK2
+1 Sky Hussar|GK2
+1 Sky Tether|RNA
+1 Skymark Roc|GK2
+1 Sphinx of Foresight|RNA
+1 Sphinx of New Prahv|RNA
+1 Sphinx's Insight|RNA
+1 Sphinx's Revelation|GK2
+1 Spirit of the Spires|RNA
+1 Stoic Ephemera|GK2
+1 Summary Judgment|RNA
+1 Unbreakable Formation|RNA
+1 Warrant // Warden|RNA
+1 Windreaver|GK2
+1 Windstorm Drake|RNA

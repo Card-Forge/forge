@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -60,8 +62,9 @@ public class DamageEachEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final Game game = card.getGame();
 
-        FCollectionView<Card> sources = card.getGame().getCardsIn(ZoneType.Battlefield);
+        FCollectionView<Card> sources = game.getCardsIn(ZoneType.Battlefield);
         if (sa.hasParam("ValidCards")) {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }
@@ -73,6 +76,7 @@ public class DamageEachEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
@@ -83,21 +87,22 @@ public class DamageEachEffect extends DamageBaseEffect {
 
         for (final Object o : tgts) {
             for (final Card source : sources) {
-                final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
+                final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
+                // TODO shouldn't that be using Num or something first?
                 final int dmg = CardFactoryUtil.xCount(source, sa.getSVar("X"));
                 
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        c.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+                        c.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+                        p.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
                     }
                 }
             }
@@ -106,11 +111,11 @@ public class DamageEachEffect extends DamageBaseEffect {
         if (sa.hasParam("DefinedCards")) {
             if (sa.getParam("DefinedCards").equals("Self")) {
                 for (final Card source : sources) {
-                    final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
+                    final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    source.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+                    source.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
@@ -122,7 +127,7 @@ public class DamageEachEffect extends DamageBaseEffect {
                         if (o instanceof Card) {
                             Card rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            rememberedcard.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+                            rememberedcard.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
                         }
                     }
                 }
@@ -132,7 +137,12 @@ public class DamageEachEffect extends DamageBaseEffect {
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
             damageMap.triggerDamageDoneOnce(false, sa);
+
+            preventMap.clear();
+            damageMap.clear();
         }
+
+        counterTable.triggerCountersPutAll(game);
 
         replaceDying(sa);
     }

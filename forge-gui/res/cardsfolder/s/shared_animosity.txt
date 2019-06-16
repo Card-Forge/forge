@@ -6,6 +6,6 @@ SVar:AnimosityPump:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ A
 SVar:AnimosityPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.attacking+IsNotRemembered+sharesCreatureTypeWith Remembered
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_animosity.jpg
 Oracle:Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.

@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -200,14 +201,20 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 }
 
                 // do as P1P1 part
-                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.P1P1));
-                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, Keyword.UNDYING);
+                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasLessCounter(CounterType.P1P1, amount));
+                CardCollection aiUndyingList = CardLists.getKeyword(aiP1P1List, Keyword.UNDYING);
 
                 if (!aiUndyingList.isEmpty()) {
-                    aiP1P1List = aiUndyingList;
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiUndyingList));
+                    return true;
                 }
-                if (!aiP1P1List.isEmpty()) {
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiP1P1List));
+
+                // remove P1P1 counters from opposing creatures
+                CardCollection oppP1P1List = CardLists.filter(list,
+                        Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                        CardPredicates.hasCounter(CounterType.P1P1));
+                if (!oppP1P1List.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(oppP1P1List));
                     return true;
                 }
 
@@ -308,6 +315,30 @@ public class CountersRemoveAi extends SpellAbilityAi {
             }
         }
         if (mandatory) {
+            if (type.equals("P1P1")) {
+                // Try to target creatures with Adapt or similar
+                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                if (!adaptCreats.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
+                    return true;
+                }
+
+                // Outlast nice target
+                CardCollection outlastCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.OUTLAST));
+                if (!outlastCreats.isEmpty()) {
+                    // outlast cards often benefit from having +1/+1 counters, try not to remove last one
+                    CardCollection betterTargets = CardLists.filter(outlastCreats, CardPredicates.hasCounter(CounterType.P1P1, 2));
+
+                    if (!betterTargets.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getWorstAI(betterTargets));
+                        return true;
+                    }
+
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(outlastCreats));
+                    return true;
+                }
+            }
+
             sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
             return true;
         }
@@ -330,7 +361,30 @@ public class CountersRemoveAi extends SpellAbilityAi {
      */
     @Override
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
-        // TODO Auto-generated method stub
+        GameEntity target = (GameEntity) params.get("Target");
+        CounterType type = (CounterType) params.get("CounterType");
+
+        if (target instanceof Card) {
+            Card targetCard = (Card) target;
+            if (targetCard.getController().isOpponentOf(player)) {
+                return !ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
+            } else {
+                if (targetCard.hasKeyword(Keyword.UNDYING) && type == CounterType.P1P1
+                        && targetCard.getCounters(CounterType.P1P1) >= max) {
+                    return max;
+                }
+
+                return ComputerUtil.isNegativeCounter(type, targetCard) ? max : min;
+            }
+        } else if (target instanceof Player) {
+            Player targetPlayer = (Player) target;
+            if (targetPlayer.isOpponentOf(player)) {
+                return !type.equals(CounterType.POISON) ? max : min;
+            } else {
+                return type.equals(CounterType.POISON) ? max : min;
+            }
+        }
+
         return super.chooseNumber(player, sa, min, max, params);
     }
 
@@ -346,30 +400,49 @@ public class CountersRemoveAi extends SpellAbilityAi {
             return super.chooseCounterType(options, sa, params);
         }
         Player ai = sa.getActivatingPlayer();
-        Card target = (Card) params.get("Target");
+        GameEntity target = (GameEntity) params.get("Target");
 
-        if (target.getController().isOpponentOf(ai)) {
-            // if its a Planeswalker try to remove Loyality first
-            if (target.isPlaneswalker()) {
-                return CounterType.LOYALTY;
-            }
-            for (CounterType type : options) {
-                if (!ComputerUtil.isNegativeCounter(type, target)) {
-                    return type;
+        if (target instanceof Card) {
+            Card targetCard = (Card) target;
+            if (targetCard.getController().isOpponentOf(ai)) {
+                // if its a Planeswalker try to remove Loyality first
+                if (targetCard.isPlaneswalker()) {
+                    return CounterType.LOYALTY;
+                }
+                for (CounterType type : options) {
+                    if (!ComputerUtil.isNegativeCounter(type, targetCard)) {
+                        return type;
+                    }
+                }
+            } else {
+                if (options.contains(CounterType.M1M1) && targetCard.hasKeyword(Keyword.PERSIST)) {
+                    return CounterType.M1M1;
+                } else if (options.contains(CounterType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
+                    return CounterType.P1P1;
+                }
+                for (CounterType type : options) {
+                    if (ComputerUtil.isNegativeCounter(type, targetCard)) {
+                        return type;
+                    }
                 }
             }
-        } else {
-            if (options.contains(CounterType.M1M1) && target.hasKeyword(Keyword.PERSIST)) {
-                return CounterType.M1M1;
-            } else if (options.contains(CounterType.P1P1) && target.hasKeyword(Keyword.UNDYING)) {
-                return CounterType.M1M1;
-            }
-            for (CounterType type : options) {
-                if (ComputerUtil.isNegativeCounter(type, target)) {
-                    return type;
+        } else if (target instanceof Player) {
+            Player targetPlayer = (Player) target;
+            if (targetPlayer.isOpponentOf(ai)) {
+                for (CounterType type : options) {
+                    if (!type.equals(CounterType.POISON)) {
+                        return type;
+                    }
+                }
+            } else {
+                for (CounterType type : options) {
+                    if (type.equals(CounterType.POISON)) {
+                        return type;
+                    }
                 }
             }
         }
+
         return super.chooseCounterType(options, sa, params);
     }
 }

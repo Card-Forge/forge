@@ -3,6 +3,7 @@ package forge.net;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,8 @@ public enum ProtocolMethod {
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     updateStack         (Mode.SERVER),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
+    tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
+    hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
@@ -64,7 +67,8 @@ public enum ProtocolMethod {
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
-    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class),
+    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
+    manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
@@ -165,6 +169,9 @@ public enum ProtocolMethod {
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     // not sure why this one would be thrown, but it is
                     // it also doesn't prevent things from working, so, log for now, pending full network rewrite
+                    ex.printStackTrace();
+                } catch(ConcurrentModificationException ex) {
+                    // can't seem to avoid this from periodically happening
                     ex.printStackTrace();
                 }
             }

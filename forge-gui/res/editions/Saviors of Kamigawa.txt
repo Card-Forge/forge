@@ -175,3 +175,10 @@ FoilAlwaysInCommonSlot=False
 119 R Undying Flames
 161 R Wine of Blood and Iron
 120 U Yuki-Onna
+
+[tokens]
+urami
+c_1_1_spirit
+r_3_1_elemental_haste
+r_1_1_warrior
+g_1_1_snake

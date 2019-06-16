@@ -6,38 +6,44 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.card;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.TextUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -46,7 +52,7 @@ import java.util.Map.Entry;
  * <p>
  * AbstractCardFactory class.
  * </p>
- * 
+ *
  * TODO The map field contains Card instances that have not gone through
  * getCard2, and thus lack abilities. However, when a new Card is requested via
  * getCard, it is this map's values that serve as the templates for the values
@@ -56,7 +62,7 @@ import java.util.Map.Entry;
  * only one or the other.</b> We may experiment in the future with using
  * allCard-type values for the map instead of the less complete ones that exist
  * there today.
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -65,7 +71,7 @@ public class CardFactory {
      * <p>
      * copyCard.
      * </p>
-     * 
+     *
      * @param in
      *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.card.Card} object.
@@ -73,11 +79,15 @@ public class CardFactory {
     public final static Card copyCard(final Card in, boolean assignNewId) {
         Card out;
         if (!(in.isToken() || in.getCopiedPermanent() != null)) {
-            out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame()) 
+            out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame())
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
             out = CardFactory.copyStats(in, in.getController(), assignNewId);
             out.setToken(true);
+
+            // need to copy this values for the tokens
+            out.setEmbalmed(in.isEmbalmed());
+            out.setEternalized(in.isEternalized());
 
             // add abilities
             //for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
@@ -92,14 +102,9 @@ public class CardFactory {
         out.setState(in.getCurrentStateName(), true);
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
-        out.setEquipping(in.getEquipping());
-        out.setEquippedBy(in.getEquippedBy(false));
-        out.setFortifying(in.getFortifying());
-        out.setFortifiedBy(in.getFortifiedBy(false));
-        out.setEnchantedBy(in.getEnchantedBy(false));
-        out.setEnchanting(in.getEnchanting());
+        out.setAttachedCards(in.getAttachedCards());
+        out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        out.setClones(in.getClones());
         out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
@@ -108,6 +113,7 @@ public class CardFactory {
             out.addImprintedCard(o);
         }
         out.setCommander(in.isCommander());
+        //out.setFaceDown(in.isFaceDown());
 
         return out;
 
@@ -117,16 +123,16 @@ public class CardFactory {
      * <p>
      * copyCardWithChangedStats
      * </p>
-     * 
+     *
      * This method copies the card together with certain temporarily changed stats of the card
      * (namely, changed color, changed types, changed keywords).
-     * 
+     *
      * copyCardWithChangedStats must NOT be used for ordinary card copy operations because
      * according to MTG rules the changed text (including keywords, types) is not copied over
      * to cards cloned by another card. However, this method is useful, for example, for certain
      * triggers that demand the latest information about the changes to the card which is lost
      * when the card changes its zone after GameAction::changeZone is called.
-     * 
+     *
      * @param in
      *            a {@link forge.game.card.Card} object.
      * @param assignNewId
@@ -135,12 +141,13 @@ public class CardFactory {
      */
     public static final Card copyCardWithChangedStats(final Card in, boolean assignNewId) {
         Card out = copyCard(in, assignNewId);
-        
+
         // Copy changed color, type, keyword arrays (useful for some triggers that require
         // information about the latest state of the card as it left the battlefield)
         out.setChangedCardColors(in.getChangedCardColors());
         out.setChangedCardKeywords(in.getChangedCardKeywords());
         out.setChangedCardTypes(in.getChangedCardTypesMap());
+        out.setChangedCardNames(in.getChangedCardNames());
 
         return out;
     }
@@ -204,7 +211,7 @@ public class CardFactory {
      * creates a copy of the Spell/ability `sa`, and puts it on the stack.
      * if sa is a spell, that spell's host is also copied.
      * </p>
-     * 
+     *
      * @param source
      *            a {@link forge.game.card.Card} object. The card doing the copying.
      * @param original
@@ -304,7 +311,7 @@ public class CardFactory {
             c.setRarity(cp.getRarity());
             c.setState(CardStateName.Original, false);
         }
-        
+
         return c;
     }
 
@@ -364,7 +371,7 @@ public class CardFactory {
 
         StringBuilder saSB = new StringBuilder();
         saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
-        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");        
+        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
 
         card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
         Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
@@ -396,7 +403,7 @@ public class CardFactory {
         if (st == CardSplitType.Split) {
             card.addAlternateState(CardStateName.LeftSplit, false);
             card.setState(CardStateName.LeftSplit, false);
-        } 
+        }
 
         readCardFace(card, rules.getMainPart());
 
@@ -409,7 +416,7 @@ public class CardFactory {
                 readCardFace(card, StaticData.instance().getCommonCards().getRules(rules.getMeldWith()).getOtherPart());
             }
         }
-        
+
         if (card.isInAlternateState()) {
             card.setState(CardStateName.Original, false);
         }
@@ -435,16 +442,18 @@ public class CardFactory {
 
     private static void readCardFace(Card c, ICardFace face) {
 
+        // Name first so Senty has the Card name
+        c.setName(face.getName());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
-        
+
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
 
-        c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
@@ -468,7 +477,7 @@ public class CardFactory {
 
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original) {
-            // this is the "default" spell for permanents like creatures and artifacts 
+            // this is the "default" spell for permanents like creatures and artifacts
             if (c.isPermanent() && !c.isAura() && !c.isLand()) {
                 c.addSpellAbility(new SpellPermanent(c));
             }
@@ -489,7 +498,7 @@ public class CardFactory {
         final Card c = new Card(id, from.getPaperCard(), from.getGame());
         c.setOwner(newOwner);
         c.setSetCode(from.getSetCode());
-        
+
         copyCopiableCharacteristics(from, c);
         return c;
     }
@@ -497,7 +506,7 @@ public class CardFactory {
     /**
      * Copy the copiable characteristics of one card to another, taking the
      * states of both cards into account.
-     * 
+     *
      * @param from the {@link Card} to copy from.
      * @param to the {@link Card} to copy to.
      */
@@ -537,10 +546,10 @@ public class CardFactory {
      * This amounts to making a full copy of the card, including the current
      * state.
      * </p>
-     * 
+     *
      * @param in
      *            the {@link forge.game.card.Card} to be copied.
-     * @param newOwner 
+     * @param newOwner
      * 			  the {@link forge.game.player.Player} to be the owner of the newly
      * 			  created Card.
      * @return a new {@link forge.game.card.Card}.
@@ -551,24 +560,24 @@ public class CardFactory {
             id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         }
         final Card c = new Card(id, in.getPaperCard(), in.getGame());
-    
+
         c.setOwner(newOwner);
         c.setSetCode(in.getSetCode());
-    
+
         for (final CardStateName state : in.getStates()) {
             CardFactory.copyState(in, state, c, state);
         }
-    
+
         c.setState(in.getCurrentStateName(), false);
         c.setRules(in.getRules());
-    
+
         return c;
     } // copyStats()
 
     /**
      * Copy characteristics of a particular state of one card to those of a
      * (possibly different) state of another.
-     * 
+     *
      * @param from
      *            the {@link Card} to copy from.
      * @param fromState
@@ -605,7 +614,7 @@ public class CardFactory {
         }
         to.setDescription(from.getOriginalDescription());
         to.setStackDescription(from.getOriginalStackDescription());
-    
+
         if (from.getSubAbility() != null) {
             to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, p, lki));
         }
@@ -640,7 +649,7 @@ public class CardFactory {
 
     /**
      * Copy triggered ability
-     * 
+     *
      * return a wrapped ability
      */
     public static SpellAbility getCopiedTriggeredAbility(final SpellAbility sa) {
@@ -680,9 +689,6 @@ public class CardFactory {
         }
 
         trig.setStackDescription(trig.toString());
-        if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
-            CharmEffect.makeChoices(trig);
-        }
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);
@@ -692,5 +698,229 @@ public class CardFactory {
         return wrapperAbility;
     }
 
+    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
+        final Card host = sa.getHostCard();
+        final Map<String,String> origSVars = host.getSVars();
+        final List<String> types = Lists.newArrayList();
+        final List<String> keywords = Lists.newArrayList();
+        List<String> creatureTypes = null;
+        final CardCloneStates result = new CardCloneStates(in, sa);
+
+        final String newName = sa.getParamOrDefault("NewName", null);
+        String shortColors = "";
+
+        if (sa.hasParam("AddTypes")) {
+            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(",")));
+        }
+
+        if (sa.hasParam("AddKeywords")) {
+            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+        }
+
+        if (sa.hasParam("SetColor")) {
+            shortColors = CardUtil.getShortColorsString(Arrays.asList(sa.getParam("SetColor").split(",")));
+        }
+
+        if (sa.hasParam("SetCreatureTypes")) {
+            creatureTypes = ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" "));
+        }
+
+        // TODO handle Volrath's Shapeshifter
+
+        if (in.isFaceDown()) {
+            // if something is cloning a facedown card, it only clones the
+            // facedown state into original
+            final CardState ret = new CardState(out, CardStateName.Original);
+            ret.copyFrom(in.getState(CardStateName.FaceDown, true), false);
+            result.put(CardStateName.Original, ret);
+        } else if (in.isFlipCard()) {
+            // if something is cloning a flip card, copy both original and
+            // flipped state
+            final CardState ret1 = new CardState(out, CardStateName.Original);
+            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
+            result.put(CardStateName.Original, ret1);
+
+            final CardState ret2 = new CardState(out, CardStateName.Flipped);
+            ret2.copyFrom(in.getState(CardStateName.Flipped, true), false);
+            result.put(CardStateName.Flipped, ret2);
+        } else {
+            // in all other cases just copy the current state to original
+            final CardState ret = new CardState(out, CardStateName.Original);
+            ret.copyFrom(in.getState(in.getCurrentStateName(), true), false);
+            result.put(CardStateName.Original, ret);
+        }
+
+        // update all states, both for flip cards
+        for (Map.Entry<CardStateName, CardState> e : result.entrySet()) {
+            final CardState originalState = out.getState(e.getKey());
+            final CardState state = e.getValue();
+            // update the names for the states
+            if (sa.hasParam("KeepName")) {
+                state.setName(originalState.getName());
+            } else if (newName != null) {
+                state.setName(newName);
+            }
+
+            if (sa.hasParam("SetColor")) {
+                state.setColor(shortColors);
+            }
+
+            if (sa.hasParam("NonLegendary")) {
+                state.removeType(CardType.Supertype.Legendary);
+            }
+
+            for (final String type : types) {
+                state.addType(type);
+            }
+
+            if (creatureTypes != null) {
+                state.setCreatureTypes(creatureTypes);
+            }
+
+            state.addIntrinsicKeywords(keywords);
+
+            if (sa.hasParam("SetPower")) {
+                state.setBasePower(Integer.parseInt(sa.getParam("SetPower")));
+            }
+            if (sa.hasParam("SetToughness")) {
+                state.setBaseToughness(Integer.parseInt(sa.getParam("SetToughness")));
+            }
+
+
+            // triggers to add to clone
+            if (sa.hasParam("AddTriggers")) {
+                for (final String s : Arrays.asList(sa.getParam("AddTriggers").split(","))) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualTrigger = origSVars.get(s);
+                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
+                        state.addTrigger(parsedTrigger);
+                    }
+                }
+            }
+
+            // SVars to add to clone
+            if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
+                final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
+                for (final String s : Arrays.asList(str.split(","))) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualsVar = origSVars.get(s);
+                        state.setSVar(s, actualsVar);
+                    }
+                }
+            }
+
+            // abilities to add to clone
+            if (sa.hasParam("AddAbilities") || sa.hasParam("GainTextAbilities")) {
+                final String str = sa.getParamOrDefault("GainTextAbilities", sa.getParam("AddAbilities"));
+                for (final String s : Arrays.asList(str.split(","))) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualAbility = origSVars.get(s);
+                        final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);
+                        state.addSpellAbility(grantedAbility);
+                    }
+                }
+            }
+
+
+            if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
+                SpellAbility root = ((SpellAbility) sa).getRootAbility();
+
+                if (root.isTrigger() && root.getTrigger() != null) {
+                    state.addTrigger(root.getTrigger().copy(out, false));
+                } else if (root.isReplacementAbility()) {
+                    state.addReplacementEffect(root.getReplacementEffect().copy(out, false));
+                } else {
+                    state.addSpellAbility(root.copy(out, false));
+                }
+            }
+
+            // Special Rules for Embalm and Eternalize
+            if (sa.hasParam("Embalm")  && out.isEmbalmed()) {
+                state.addType("Zombie");
+                state.setColor(MagicColor.WHITE);
+                state.setManaCost(ManaCost.NO_COST);
+
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
+            }
+
+            if (sa.hasParam("Eternalize") && out.isEternalized()) {
+                state.addType("Zombie");
+                state.setColor(MagicColor.BLACK);
+                state.setManaCost(ManaCost.NO_COST);
+                state.setBasePower(4);
+                state.setBaseToughness(4);
+
+                String name = TextUtil.fastReplace(
+                    TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
+            }
+
+            // set the host card for copied replacement effects
+            // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
+            for (final ReplacementEffect rep : state.getReplacementEffects()) {
+                final SpellAbility newSa = rep.getOverridingAbility();
+                if (newSa != null && newSa.getOriginalHost() == null) {
+                    newSa.setOriginalHost(in);
+                }
+            }
+
+            // set the host card for copied spellabilities, if they are not set yet
+            for (final SpellAbility newSa : state.getSpellAbilities()) {
+                if (newSa.getOriginalHost() == null) {
+                    newSa.setOriginalHost(in);
+                }
+            }
+
+            if (sa.hasParam("GainTextOf")) {
+                state.setSetCode(originalState.getSetCode());
+                state.setRarity(originalState.getRarity());
+                state.setImageKey(originalState.getImageKey());
+            }
+
+            // remove some characteristic static abilties
+            for (StaticAbility sta : state.getStaticAbilities()) {
+                if (!sta.hasParam("CharacteristicDefining")) {
+                    continue;
+                }
+
+                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
+                    if (sta.hasParam("SetPower"))
+                        state.removeStaticAbility(sta);
+                }
+                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
+                    if (sta.hasParam("SetToughness"))
+                        state.removeStaticAbility(sta);
+                }
+                if (sa.hasParam("SetCreatureTypes")) {
+                    // currently only Changeling and similar should be affected by that
+                    // other cards using AddType$ ChosenType should not
+                    if (sta.hasParam("AddType") && "AllCreatureTypes".equals(sta.getParam("AddType"))) {
+                        state.removeStaticAbility(sta);
+                    }
+                }
+                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                    if (sta.hasParam("SetColor")) {
+                        state.removeStaticAbility(sta);
+                    }
+                }
+            }
+
+            // remove some keywords
+            if (sa.hasParam("SetCreatureTypes")) {
+                state.removeIntrinsicKeyword("Changeling");
+            }
+            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                state.removeIntrinsicKeyword("Devoid");
+            }
+        }
+
+        // Dont copy the facedown state, make new one
+        result.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(out));
+        return result;
+    }
 
 } // end class AbstractCardFactory

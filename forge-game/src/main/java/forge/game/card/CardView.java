@@ -113,7 +113,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFaceDown() {
-        return getCurrentState().getState() == CardStateName.FaceDown;
+        return get(TrackableProperty.Facedown);//  getCurrentState().getState() == CardStateName.FaceDown;
     }
 
     public boolean isFlipCard() {
@@ -121,16 +121,18 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return getCurrentState().getState() == CardStateName.Flipped;
+        return get(TrackableProperty.Flipped); // getCurrentState().getState() == CardStateName.Flipped;
     }
 
     public boolean isSplitCard() {
         return get(TrackableProperty.SplitCard);
     }
 
+    /*
     public boolean isTransformed() {
         return getCurrentState().getState() == CardStateName.Transformed;
     }
+    //*/
 
     public boolean isAttacking() {
         return get(TrackableProperty.Attacking);
@@ -369,13 +371,18 @@ public class CardView extends GameEntityView {
         switch (zone) {
         case Ante:
         case Command:
-        case Exile:
         case Battlefield:
         case Graveyard:
         case Flashback:
         case Stack:
             //cards in these zones are visible to all
             return true;
+        case Exile:
+            //in exile, only face up cards and face down cards you can look at should be shown (since "exile face down" is a thing)
+            if (!isFaceDown()) {
+                return true;
+            }
+            break;
         case Hand:
             if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
@@ -438,54 +445,30 @@ public class CardView extends GameEntityView {
         return false;
     }
 
-    public CardView getEquipping() {
-        return get(TrackableProperty.Equipping);
-    }
-
-    public FCollectionView<CardView> getEquippedBy() {
-        return get(TrackableProperty.EquippedBy);
-    }
-
-    public boolean isEquipped() {
-        return getEquippedBy() != null; //isEmpty check not needed since we won't keep an empty collection around
-    }
-
     public FCollectionView<CardView> getEncodedCards() {
         return get(TrackableProperty.EncodedCards);
     }
 
-    public GameEntityView getEnchanting() {
-        return get(TrackableProperty.Enchanting);
+    public GameEntityView getEntityAttachedTo() {
+        return get(TrackableProperty.EntityAttachedTo);
     }
-    void updateEnchanting(Card c) {
-        set(TrackableProperty.Enchanting, GameEntityView.get(c.getEnchanting()));
+    void updateAttachedTo(Card c) {
+        set(TrackableProperty.EntityAttachedTo, GameEntityView.get(c.getEntityAttachedTo()));
     }
 
-    public CardView getEnchantingCard() {
-        GameEntityView enchanting = getEnchanting();
+    public CardView getAttachedTo() {
+        GameEntityView enchanting = getEntityAttachedTo();
         if (enchanting instanceof CardView) {
             return (CardView) enchanting;
         }
         return null;
     }
-    public PlayerView getEnchantingPlayer() {
-        GameEntityView enchanting = getEnchanting();
+    public PlayerView getEnchantedPlayer() {
+        GameEntityView enchanting = getEntityAttachedTo();
         if (enchanting instanceof PlayerView) {
             return (PlayerView) enchanting;
         }
         return null;
-    }
-
-    public CardView getFortifying() {
-        return get(TrackableProperty.Fortifying);
-    }
-
-    public FCollectionView<CardView> getFortifiedBy() {
-        return get(TrackableProperty.FortifiedBy);
-    }
-
-    public boolean isFortified() {
-        return getFortifiedBy() != null;
     }
 
     public FCollectionView<CardView> getGainControlTargets() {
@@ -650,8 +633,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
+        set(TrackableProperty.Facedown, c.isFaceDown());
 
-        CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
+        final Card cloner = c.getCloner();
+
+        //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
         CardState currentState = c.getCurrentState();
@@ -664,6 +650,7 @@ public class CardView extends GameEntityView {
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView) {
             set(TrackableProperty.CurrentState, currentStateView);
+            currentStateView.updateName(currentState);
             currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
             currentStateView.updateToughness(c);
             currentStateView.updateLoyalty(c);
@@ -689,6 +676,7 @@ public class CardView extends GameEntityView {
             CardStateView alternateStateView = alternateState.getView();
             if (getAlternateState() != alternateStateView) {
                 set(TrackableProperty.AlternateState, alternateStateView);
+                alternateStateView.updateName(alternateState);
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
                 alternateStateView.updateToughness(c);
                 alternateStateView.updateLoyalty(c);
@@ -723,7 +711,7 @@ public class CardView extends GameEntityView {
         if (name.isEmpty()) {
             CardStateView alternate = getAlternateState();
             if (alternate != null) {
-                if (this.getCurrentState().getState() == CardStateName.FaceDown) {
+                if (isFaceDown()) {
                     return "Face-down card (H" + getHiddenId() + ")";
                 } else {
                     return getAlternateState().getName() + " (" + getId() + ")";
@@ -771,10 +759,10 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Name);
         }
         void updateName(CardState c) {
-            setName(c.getName());
+            Card card = c.getCard();
+            setName(card.getName(c));
 
             if (CardView.this.getCurrentState() == this) {
-                Card card = c.getCard();
                 if (card != null) {
                     CardView.this.updateName(card);
                 }
@@ -905,13 +893,21 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
+            updateLoyalty(c.getCurrentLoyalty());
+        }
+        void updateLoyalty(int loyalty) {
+            set(TrackableProperty.Loyalty, loyalty);
         }
         void updateLoyalty(CardState c) {
             if (CardView.this.getCurrentState() == this) {
                 Card card = c.getCard();
                 if (card != null) {
-                    updateLoyalty(card); //TODO: find a better way to do this
+                    if (card.isInZone(ZoneType.Battlefield)) {
+                        updateLoyalty(card);
+                    } else {
+                        updateLoyalty(c.getBaseLoyalty());
+                    }
+
                     return;
                 }
             }

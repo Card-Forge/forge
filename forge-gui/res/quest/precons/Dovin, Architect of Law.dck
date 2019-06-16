@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dovin, Architect of Law
+Description=Dovin Baan is a fastidious vedalken engineer with a peerless ability to instantly spot imperfections in any system. Optimize your spells by casting them at the perfect moments and clear the way for your superior flying creatures to pummel your opponent.
+Deck Type=constructed
+Set=RNA
+Image=dovin_architect_of_law.jpg
+[Main]
+3 Arrester's Zeal|RNA
+4 Azorius Guildgate|RNA
+1 Azorius Knight-Arbiter|RNA
+1 Chillbringer|RNA
+2 Code of Constraint|RNA
+3 Concordia Pegasus|RNA
+3 Dovin's Automaton|RNA
+2 Dovin's Dismissal|RNA
+1 Dovin, Architect of Law+|RNA
+4 Elite Arrester|RNA
+10 Island|RNA
+12 Plains|RNA
+2 Prowling Caracal|RNA
+2 Senate Courier|RNA
+1 Sphinx's Insight|RNA
+2 Spirit of the Spires|RNA
+2 Summary Judgment|RNA
+1 Tenth District Veteran|RNA
+1 Unbreakable Formation|RNA
+1 Verity Circle|RNA
+2 Windstorm Drake|RNA

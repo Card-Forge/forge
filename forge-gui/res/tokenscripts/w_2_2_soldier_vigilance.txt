@@ -1,0 +1,7 @@
+Name:Soldier
+ManaCost:no cost
+Types:Creature Soldier
+Colors:white
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

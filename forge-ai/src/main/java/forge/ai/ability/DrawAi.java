@@ -107,7 +107,7 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
             return false;
         }
 
@@ -131,6 +131,8 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("AlwaysAtOppEOT")) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        } else if (logic.equals("RespondToOwnActivation")) {
+            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         }
 
         // Don't use draw abilities before main 2 if possible
@@ -209,9 +211,11 @@ public class DrawAi extends SpellAbilityAi {
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final boolean drawback = sa.getParent() != null;
         final Game game = ai.getGame();
         final String logic = sa.getParamOrDefault("AILogic", "");
+        final boolean considerPrimary = logic.equals("ConsiderPrimary");
+        final boolean drawback = (sa.getParent() != null) && !considerPrimary;
+        boolean assumeSafeX = false; // if true, the AI will assume that the X value has been set to a value that is safe to draw
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
@@ -239,7 +243,12 @@ public class DrawAi extends SpellAbilityAi {
                     numCards = Integer.parseInt(source.getSVar("PayX"));
                 } else {
                     numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    // try not to overdraw
+                    int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
+                    if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
+                    numCards = Math.min(numCards, safeDraw);
                     source.setSVar("PayX", Integer.toString(numCards));
+                    assumeSafeX = true;
                 }
                 xPaid = true;
             }
@@ -363,6 +372,10 @@ public class DrawAi extends SpellAbilityAi {
                 if (numCards >= computerLibrarySize) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
+                        if (numCards <= 0 && !mandatory) {
+                            // not drawing anything, so don't do it
+                            return false;
+                        }
                     } else if (!ai.isCardInPlay("Laboratory Maniac")) {
                         aiTarget = false;
                     }
@@ -396,6 +409,9 @@ public class DrawAi extends SpellAbilityAi {
                 if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
+                        if (sa.getHostCard().getZone().is(ZoneType.Hand)) {
+                            numCards++; // the card will be spent
+                        }
                         source.setSVar("PayX", Integer.toString(numCards));
                     } else {
                         // Don't draw too many cards and then risk discarding
@@ -483,7 +499,8 @@ public class DrawAi extends SpellAbilityAi {
 
             if ((computerHandSize + numCards > computerMaxHandSize)
                     && game.getPhaseHandler().isPlayerTurn(ai)
-                    && !sa.isTrigger()) {
+                    && !sa.isTrigger()
+                    && !assumeSafeX) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
                 if (!drawback) {

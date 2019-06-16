@@ -10,8 +10,8 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Aether Adept|M12
 1 Ajani Goldmane|M11
 1 Ajani's Chosen|M14
-1 Ajani's Pridemate|IMA
-1 All Is Dust|MM2
+1 Ajani's Pridemate|M19
+1 All Is Dust|UMA
 1 Always Watching|SOI
 1 Ambassador Laquatus|10E
 1 Ancestor's Prophet|ONS
@@ -65,19 +65,19 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Call to the Grave|M12
 1 Carnophage|TPR
 1 Carrion Feeder|EMA
-1 Cavern of Souls|MM3
+1 Cavern of Souls|UMA
 1 Caves of Koilos|ORI
 1 Celestial Ancient|DIS
 1 Celestial Archon|THS
 1 Cemetery Reaper|M12
 1 Centaur Vinecrasher
-1 Chainer's Edict|TOR
+1 Chainer's Edict|UMA
 1 Champion of the Parish|ISD
 1 Chandra, Flamecaller|OGW
-1 Circular Logic|VMA
+1 Circular Logic|UMA
 1 City of Brass|MMA
 1 Cliffhaven Vampire|OGW
-1 Clifftop Retreat|ISD
+1 Clifftop Retreat|DOM
 1 Coiling Oracle|MM3
 1 Coldsteel Heart|CSP
 1 Collected Company|DTK
@@ -91,7 +91,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Courser of Kruphix|A25
 1 Cradle of Vitality|ALA
 1 Crippling Fatigue|TOR
-1 Crucible of Worlds|10E
+1 Crucible of Worlds|M19
 1 Cryptbreaker|EMN
 1 Curious Homunculus|EMN
 1 Curse of Predation|IMA
@@ -100,7 +100,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Dark Salvation|EMN
 1 Darksteel Mutation
 1 Daxos's Torment
-1 Dead Weight|SOI
+1 Dead Weight|GRN
 1 Deathrite Shaman|EMA
 1 Declaration in Stone|SOI
 1 Deep Analysis|EMA
@@ -112,7 +112,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Diabolic Servitude|USG
 1 Dictate of Erebos|JOU
 1 Diregraf Colossus|SOI
-1 Diregraf Ghoul|ISD
+1 Diregraf Ghoul|M19
 1 Dismember|MM2
 1 Distended Mindbender|EMN
 1 Docent of Perfection|EMN
@@ -126,7 +126,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Drogskol Reaver|DKA
 1 Dromoka's Command|DTK
 1 Duplicant|EMA
-1 Duress|IMA
+1 Duress|M19
 1 Dwynen, Gilt-Leaf Daen|ORI
 1 Edge of Autumn|FUT
 1 Edric, Spymaster of Trest|VMA
@@ -142,9 +142,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Emrakul, the Promised End|EMN
 1 Enchantress's Presence|ONS
 1 Enclave Cryptologist|ROE
-1 Engineered Explosives|MMA
+1 Engineered Explosives|UMA
 1 Enlightened Tutor|EMA
-1 Entomb|EMA
+1 Entomb|UMA
 1 Entomber Exarch|MM3
 1 Essence Warden|PLC
 1 Ethereal Armor|RTR
@@ -153,17 +153,17 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Exploration|CNS
 1 Extinguish All Hope|JOU
 1 Ezuri, Renegade Leader|SOM
-1 Faith's Fetters|EMA
-1 Faithless Looting|EMA
+1 Faith's Fetters|UMA
+1 Faithless Looting|UMA
 1 Falkenrath Aristocrat|MM3
 1 Fatestitcher|ALA
-1 Fauna Shaman|M11
+1 Fauna Shaman|UMA
 1 Feldon of the Third Path
 1 Felidar Umbra
 1 Fertile Ground|LRW
-1 Fiend Hunter|A25
+1 Fiend Hunter|UMA
 1 Fiery Confluence
-1 Fire // Ice|APC
+1 Fire // Ice|UMA
 1 Firebolt|EMA
 1 Flame Jab|EMA
 1 Flash of Insight|JUD
@@ -172,11 +172,11 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Flooded Strand|KTK
 1 Flux|WTH
 1 Foundry Street Denizen|M15
-1 Frantic Search|VMA
+1 Frantic Search|UMA
 1 Frenzied Goblin|A25
 1 Freyalise, Llanowar's Fury
 1 Fyndhorn Elves|VMA
-1 Gamble|EMA
+1 Gamble|UMA
 1 Garruk Wildspeaker|M11
 1 Gauntlet of Might|2ED
 1 Gavony Township|ISD
@@ -204,7 +204,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Goblin Wardriver|MBS
 1 Goblin Welder|ULG
 1 Godless Shrine|GTC
-1 Golgari Grave-Troll|RAV
+1 Golgari Grave-Troll|UMA
 1 Grafted Wargear|5DN
 1 Grand Architect|SOM
 1 Grand Coliseum|VMA
@@ -220,8 +220,8 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Grim Lavamancer|M12
 1 Grisly Salvage|RTR
 1 Grove of the Burnwillows|IMA
-1 Gurmag Angler|FRF
-1 Guttersnipe|IMA
+1 Gurmag Angler|UMA
+1 Guttersnipe|M19
 1 Hallowed Fountain|RTR
 1 Hammer of Purphoros|THS
 1 Hangarback Walker|ORI
@@ -230,12 +230,12 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Havengul Lich|DKA
 1 Healer of the Pride|M13
 1 Hedron Archive|BFZ
-1 Heliod's Pilgrim|M15
+1 Heliod's Pilgrim|UMA
 1 Heliod, God of the Sun|THS
 1 Herald of the Pantheon|ORI
 1 Hero's Downfall|THS
 1 High Market|MMQ
-1 Hinterland Harbor|ISD
+1 Hinterland Harbor|DOM
 1 Hopeful Eidolon|THS
 1 Hordeling Outburst|A25
 1 Idyllic Tutor|MOR
@@ -246,7 +246,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Inquisition of Kozilek|MM3
 1 Intuition|TPR
 1 Ishkanah, Grafwidow|EMN
-1 Isolated Chapel|ISD
+1 Isolated Chapel|DOM
 1 Izzet Charm|MM3
 1 Jace, Vryn's Prodigy|ORI
 1 Jeskai Ascendancy|KTK
@@ -260,15 +260,15 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Kor Sanctifiers|ZEN
 1 Kor Spiritdancer|ROE
 1 Kozilek's Return|OGW
-1 Kozilek, Butcher of Truth|MM2
+1 Kozilek, Butcher of Truth|UMA
 1 Krenko's Command|M13
 1 Krenko, Mob Boss|M13
 1 Kytheon, Hero of Akros|ORI
-1 Laboratory Maniac|ISD
+1 Laboratory Maniac|UMA
 1 Lava Dart|JUD
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|MBS
-1 Life from the Loam|MMA
+1 Life from the Loam|UMA
 1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
@@ -276,18 +276,18 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Lignify|LRW
 1 Liliana, Heretical Healer|ORI
 1 Liliana, the Last Hope|EMN
-1 Llanowar Elves|EMA
+1 Llanowar Elves|DOM
 1 Llanowar Wastes|ORI
 1 Lone Rider|EMN
 1 Maelstrom Nexus|ARB
-1 Maelstrom Pulse|MMA
+1 Maelstrom Pulse|UMA
 1 Magma Jet|MM3
 1 Magmatic Force
 1 Magmatic Insight|ORI
 1 Manic Vandal|M12
 1 Mardu Woe-Reaper|FRF
 1 Marsh Flats|MM3
-1 Martyr of Sands|CSP
+1 Martyr of Sands|UMA
 1 Master Apothecary|ODY
 1 Master of Waves|THS
 1 Maze of Ith|EMA
@@ -335,11 +335,11 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Oona's Grace|EMA
 1 Opalescence|UDS
 1 Open the Vaults|M10
-1 Opt|XLN
+1 Opt|DOM
 1 Oracle of Mul Daya|ZEN
 1 Oracle of Nectars|SHM
 1 Outpost Siege|FRF
-1 Overgrown Tomb|RTR
+1 Overgrown Tomb|GRN
 1 Palace Siege|FRF
 1 Parallax Wave|VMA
 1 Path of Bravery|IMA
@@ -358,7 +358,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Porphyry Nodes|PLC
 1 Portent|5ED
 1 Priest of Titania|USG
-1 Prismatic Lens|EMA
+1 Prismatic Lens|UMA
 1 Pristine Talisman|IMA
 1 Prized Amalgam|SOI
 1 Prophetic Bolt|VMA
@@ -371,26 +371,26 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Ranger of Eos|MM3
 1 Raven's Crime|MMA
 1 Read the Bones|ORI
-1 Reassembling Skeleton|MM2
-1 Reclamation Sage|M15
+1 Reassembling Skeleton|M19
+1 Reclamation Sage|M19
 1 Recoup|ODY
 1 Regal Force|EMA
 1 Relentless Dead|SOI
 1 Repeal|IMA
 1 Replenish|UDS
-1 Reveillark|MMA
+1 Reveillark|UMA
 1 Riptide Laboratory|ONS
-1 Rise from the Tides|SOI
+1 Rise from the Tides|UMA
 1 River Kelpie|SHM
 1 Rocky Tar Pit|VMA
 1 Rotlung Reanimator|ONS
 1 Runechanter's Pike|ISD
-1 Sacred Foundry|GTC
+1 Sacred Foundry|GRN
 1 Sage of Fables|MOR
 1 Sage's Dousing|MOR
 1 Sanguine Bond|IMA
 1 Sarcomancy|TPR
-1 Satyr Wayfinder|M15
+1 Satyr Wayfinder|UMA
 1 Savannah|VMA
 1 Scalding Tarn|MM3
 1 Scavenging Ooze|MM3
@@ -402,7 +402,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Seal of Primordium|MM3
 1 Searing Meditation|RAV
 1 Secrets of the Dead|DKA
-1 Seismic Assault|10E
+1 Seismic Assault|UMA
 1 Sensei's Divining Top|EMA
 1 Serene Steward|BFZ
 1 Serra Ascendant|IMA
@@ -414,8 +414,8 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Shaman of the Pack|EMA
 1 Shepherd of Rot|ONS
 1 Shivan Reef|ORI
-1 Shriekmaw|LRW
-1 Siege-Gang Commander|EMA
+1 Shriekmaw|UMA
+1 Siege-Gang Commander|DOM
 1 Sigil of the Empty Throne|ORI
 1 Silent Departure|EMA
 1 Silhana Ledgewalker|GPT
@@ -424,7 +424,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Skirsdag High Priest|ISD
 1 Skywise Teachings|IMA
 1 Smokestack|VMA
-1 Snapcaster Mage|MM3
+1 Snapcaster Mage|UMA
 1 Soldier of the Pantheon|THS
 1 Solemn Simulacrum|M12
 1 Song of the Dryads
@@ -443,14 +443,14 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Starfield of Nyx|ORI
 1 Starstorm|VMA
 1 Stasis Snare|BFZ
-1 Steam Vents|RTR
+1 Steam Vents|GRN
 1 Steel Hellkite|SOM
 1 Stitcher Geralf
 1 Stomping Ground|GTC
 1 Stormbind|TSB
 1 Stromkirk Noble|ISD
 1 Stronghold Assassin|TPR
-1 Sulfur Falls|ISD
+1 Sulfur Falls|DOM
 1 Sulfurous Springs|10E
 1 Sunlance|MM2
 1 Sword of Light and Shadow|MMA
@@ -460,17 +460,17 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Taiga|VMA
 1 Talrand, Sky Summoner|M13
 1 Tarfire|LRW
-1 Tarmogoyf|MM3
+1 Tarmogoyf|UMA
 1 Taurean Mauler|MOR
 1 Teferi, Temporal Archmage
-1 Temple Garden|RTR
+1 Temple Garden|GRN
 1 Temporal Isolation|TSP
 1 Terminate|MM3
 1 Tezzeret the Seeker|MM2
 1 Thalia's Lieutenant|SOI
-1 Thermo-Alchemist|EMN
+1 Thermo-Alchemist|UMA
 1 Thing in the Ice|SOI
-1 Think Twice|ISD
+1 Think Twice|UMA
 1 Thopter Spy Network|ORI
 1 Thought Courier|9ED
 1 Thought Scour|IMA
@@ -478,7 +478,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Tireless Tracker|SOI
 1 Titania, Protector of Argoth
 1 To the Slaughter|SOI
-1 Tormenting Voice|IMA
+1 Tormenting Voice|M19
 1 Tracker's Instincts|DKA
 1 Trade Routes|9ED
 1 Trading Post|M14
@@ -487,7 +487,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Tropical Island|VMA
 1 Tundra|VMA
 1 Twisted Abomination|A25
-1 Ulamog, the Infinite Gyre|MM2
+1 Ulamog, the Infinite Gyre|UMA
 1 Ulvenwald Hydra|SOI
 1 Undead Alchemist|ISD
 1 Undercity Informer|GTC
@@ -498,7 +498,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Utopia Sprawl|A25
 1 Vapor Snag|MM2
 1 Vendilion Clique|A25
-1 Vengevine|ROE
+1 Vengevine|UMA
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
 1 Vessel of Nascency|A25
@@ -512,7 +512,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 War Priest of Thune|EMA
 1 Warren Instigator|ZEN
 1 Wasteland|EMA
-1 Watery Grave|GTC
+1 Watery Grave|GRN
 1 Wayfarer's Bauble|MM2
 1 Weathered Wayfarer|9ED
 1 Weaver of Lightning|EMN
@@ -521,7 +521,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Werebear|EMA
 1 Westvale Abbey|SOI
 1 Whip of Erebos|THS
-1 Wickerbough Elder|EVE
+1 Wickerbough Elder|UMA
 1 Wild Research|APC
 1 Winds of Rath|TPR
 1 Windswept Heath|KTK
@@ -530,13 +530,13 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Wood Elves|9ED
 1 Wood Sage|TPR
 1 Wooded Foothills|KTK
-1 Woodland Cemetery|ISD
+1 Woodland Cemetery|DOM
 1 World Breaker|OGW
 1 Worm Harvest|MMA
 1 Worn Powerstone|EMA
 1 Wort, Boggart Auntie|LRW
 1 Yavimaya Coast|ORI
 1 Yavimaya Enchantress|EMA
-1 Young Pyromancer|EMA
+1 Young Pyromancer|UMA
 1 Zealous Conscripts|MM3
 1 Zur the Enchanter|MM3

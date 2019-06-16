@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import java.util.List;
 
+import forge.planarconquest.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -28,19 +29,9 @@ import forge.card.ColorSet;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestAwardPool;
-import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestBattle;
-import forge.planarconquest.ConquestChaosBattle;
-import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
-import forge.planarconquest.ConquestLocation;
-import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.planarconquest.ConquestPlaneData;
-import forge.planarconquest.ConquestReward;
-import forge.planarconquest.ConquestRegion;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FButton;
@@ -547,6 +538,10 @@ public class ConquestMultiverseScreen extends FScreen {
 
             @Override
             protected void onEnd(boolean endingAll) {
+                String secretArea = model.getCurrentLocation().getEvent().getTemporaryUnlock();
+                if (secretArea != null) {
+                    ConquestUtil.setPlaneTemporarilyAccessible(secretArea, false);
+                }
                 model.setCurrentLocation(path.get(path.size() - 1));
                 model.saveData(); //save new location
                 activeMoveAnimation = null;

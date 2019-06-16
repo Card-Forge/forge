@@ -30,6 +30,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
@@ -111,7 +112,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         return null; // refused to side
     }
 
@@ -173,7 +174,13 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+        // this isn't used
+        return null;
+    }
+
+    @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
         // this isn't used
         return null;
     }
@@ -293,6 +300,17 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
+        return true;
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        return hand;
+    }
+
+    @Override
+    public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn) {
         return true;
     }
 
@@ -556,12 +574,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         // no longer possible to run AI's methods on SpellAbility
         // return currentAbility.doTrigger(true, player);
@@ -591,7 +603,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, boolean isActivatedSa ) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean isActivatedSa) {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = new ManaCostBeingPaid(toPay);
         return ComputerUtilMana.payManaCost(cost, sa, player);
@@ -623,7 +635,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
+    public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;
     }
@@ -675,6 +687,12 @@ public class PlayerControllerForTests extends PlayerController {
             List<OptionalCostValue> optionalCostValues) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

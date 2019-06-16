@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mardu Raiders
-Description=The Mardu Horde spreads destruction across the face of Tarkir, conquering and pillaging territory before moving on. They charge into battle just as swiftly and relentlessly as their symbol, the wing of the dragon, would suggest.
+Description=The Mardu charge straight into their foes, relying on speed and numbers to conquer the battlefield. Claim the spoils you deserve when your horde rushes to victory!
 Deck Type=constructed
 Set=KTK
 Image=mardu_raiders.jpg
@@ -30,7 +30,7 @@ Image=mardu_raiders.jpg
 1 Necrogen Scudder|M15
 2 Mardu Warshrieker|KTK
 1 Timely Hordemate|KTK
-1 Ankle Shanker|KTK
+1 Ankle Shanker+|KTK
 1 Mardu Roughrider|KTK
 1 Crippling Blight|M15
 1 Lightning Strike|M15

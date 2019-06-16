@@ -55,7 +55,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
     private final JPanel pnlLibrary = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
     //========== Constructor
-    private VProbabilities() {
+    VProbabilities() {
         pnlContent.setOpaque(false);
         pnlHand.setOpaque(false);
         pnlLibrary.setOpaque(false);

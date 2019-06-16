@@ -317,3 +317,11 @@ FoilAlwaysInCommonSlot=False
 199 C Yamabushi's Storm
 50 R Yosei, the Morning Star
 200 R Zo-Zu the Punisher
+
+[tokens]
+c_1_1_spirit
+u_5_5_dragon_spirit_flying
+u_1_1_illusion_flying
+b_1_1_rat
+g_x_x_elemental
+g_1_1_snake

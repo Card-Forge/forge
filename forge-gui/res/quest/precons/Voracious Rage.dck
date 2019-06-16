@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Voracious Rage
-Description=The "Voracious Rage" deck boasts a horde of powerful and aggressive Minotaurs. Many of these creatures bolster your other Minotaurs and make them truly ferocious in combat. Build up a formidable force, and then smash your opponents down. 
+Description=The god of slaughter desires to unleash his rage. Under the shadow of dragon wings, set loose a horde of minotaurs against your enemies. Gring them under hooves and impale them upon horns.
 Deck Type=constructed
 Set=JOU
 Image=voracious_rage.jpg
@@ -22,7 +22,7 @@ Image=voracious_rage.jpg
 1 Pharika's Chosen|JOU
 1 Rageblood Shaman|THS
 2 Ragemonger|BNG
-1 Spawn of Thraxes|JOU
+1 Spawn of Thraxes+|JOU
 1 Warchanter of Mogis|BNG
 1 Cast into Darkness|JOU
 2 Flurry of Horns|JOU

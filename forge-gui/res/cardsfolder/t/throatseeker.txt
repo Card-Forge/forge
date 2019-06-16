@@ -1,0 +1,7 @@
+Name:Throatseeker
+ManaCost:2 B
+Types:Creature Vampire Ninja
+PT:3/2
+S:Mode$ Continuous | Affected$ Ninja.attacking+unblocked+YouCtrl | AddKeyword$ Lifelink | Description$ Unblocked attacking Ninjas you control have lifelink.
+SVar:PlayMain1:TRUE
+Oracle:Unblocked attacking Ninjas you control have lifelink.

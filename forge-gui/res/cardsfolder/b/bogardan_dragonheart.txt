@@ -1,0 +1,8 @@
+Name:Bogardan Dragonheart
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Animate | Cost$ Sac<1/Creature.Other/another creature> | Power$ 4 | Toughness$ 4 | Types$ Dragon | RemoveCreatureTypes$ True | Keywords$ Flying & Haste | SpellDescription$ Until end of turn, CARDNAME becomes a Dragon with base power and toughness 4/4, flying, and haste.
+SVar:AIPreference:SacCost$Creature.token
+AI:RemoveDeck:All
+Oracle:Sacrifice another creature: Until end of turn, Bogardan Dragonheart becomes a Dragon with base power and toughness 4/4, flying, and haste.

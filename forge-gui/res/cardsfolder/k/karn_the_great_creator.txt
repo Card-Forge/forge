@@ -1,0 +1,11 @@
+Name:Karn, the Great Creator
+ManaCost:4
+Types:Legendary Planeswalker Karn
+Loyalty:5
+S:Mode$ Continuous | Affected$ Artifact.OppCtrl | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts your opponents control can't be activated.
+SVar:NonStackingEffect:True
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | TargetMin$ 0 | TargetMax$ 1 | Planeswalker$ True | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | References$ X | UntilYourNextTurn$ True | AILogic$ PTByCMC | SpellDescription$ Until your next turn, up to one target noncreature artifact becomes an artifact creature with power and toughness equal to its converted mana cost.
+SVar:X:Targeted$CardManaCost
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Sideboard,Exile | Destination$ Hand | ChangeType$ Artifact.YouOwn | ChangeNum$ 1 | SpellDescription$ You may choose an artifact card you own from outside the game or in exile, reveal that card, and put it into your hand.
+AI:RemoveDeck:Random
+Oracle:Activated abilities of artifacts your opponents control can't be activated.\n[+1]: Until your next turn, up to one target noncreature artifact becomes an artifact creature with power and toughness equal to its converted mana cost.\n[-2]: You may choose an artifact card you own from outside the game or in exile, reveal that card, and put it into your hand.

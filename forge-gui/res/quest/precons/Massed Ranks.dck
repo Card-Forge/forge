@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Massed Ranks
-Description=Massed Ranks - Dragons of Tarkir W/G intro pack.
+Description=The whole is stronger than the sum of its parts. This deck embodies the draconic aspect of endurance through cooperation. Enhance your creatures using the bolster mechanic, and make them nearly invincible with mass battle tactics.
 Deck Type=constructed
 Set=DTK
 Image=massed_ranks.jpg
@@ -22,7 +22,7 @@ Image=massed_ranks.jpg
 2 Aven Tactician|DTK
 2 Sandsteppe Scavenger|DTK
 2 Enduring Scalelord|DTK
-1 Arashin Sovereign|DTK
+1 Arashin Sovereign+|DTK
 2 Pacifism|DTK
 1 Dromoka Monument|DTK
 2 Inspiring Call|DTK

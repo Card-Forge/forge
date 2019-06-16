@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Percedal of Sadlygrove 2
+Title=Percedal of Sadlygrove
+Difficulty=medium
+Description=Boros Mentor deck with token generators, Tajic, Legion's Edge, and Aurelia, Exemplar of Justice.
+Deck Type=constructed
+Icon=Percedal of Sadlygrove.jpg
+Profile=Reckless
+[main]
+2 Ajani, Adversary of Tyrants|M19
+3 Aurelia, Exemplar of Justice|GRN
+4 Clifftop Retreat|DOM
+3 Goblin Banneret|GRN
+2 Goblin Motivator|M19
+3 Heroic Reinforcements|M19
+3 Legion Warboss|GRN
+3 Legion's Landing|XLN
+3 Militia Bugler|M19
+7 Mountain
+7 Plains
+3 Risk Factor|GRN
+4 Sacred Foundry|GRN
+3 Shock|M19
+3 Sunhome Stalwart|GRN
+4 Swiftblade Vindicator|GRN
+3 Tajic, Legion's Edge|GRN
+[sideboard]

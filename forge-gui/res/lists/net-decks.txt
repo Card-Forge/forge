@@ -29,3 +29,6 @@ MagicTheGathering.Combos | https://downloads.cardforge.org/decks/combos.zip
 Players Championship 2012 | https://downloads.cardforge.org/decks/magicplayerschampionship.zip
 Brewing on a Budget | https://downloads.cardforge.org/decks/brewingonabudget.zip
 Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zip
+Genetic Algorithm AI Decks | https://downloads.cardforge.org/decks/geneticalgorithmdecks.zip
+Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
+Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip

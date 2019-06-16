@@ -7,7 +7,7 @@ SVar:DBGenericChoice:DB$ GenericChoice | Choices$ PaySac,PayDiscard | Defined$ T
 SVar:PaySac:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ Targeted | UnlessAI$ LifeLE2 | SpellDescription$ You lose 2 life unless you sacrifice a permanent
 SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | UnlessAI$ LifeLE2 | SpellDescription$ You lose 2 life unless you discard a card
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_ritual.jpg
 Oracle:Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless they sacrifice a permanent or discard a card. You may repeat this process any number of times.

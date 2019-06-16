@@ -82,7 +82,7 @@ public class QuestUtilUnlockSets {
             }
             int price = UNLOCK_COST;
             if (mapPrices.containsKey(TextUtil.concatNoSpace(ed.getName(), " Booster Pack"))) {
-                price = Math.max(new Double(30 * Math.pow(Math.sqrt(mapPrices.get(TextUtil.concatNoSpace(ed.getName(),
+                price = Math.max(Double.valueOf(30 * Math.pow(Math.sqrt(mapPrices.get(TextUtil.concatNoSpace(ed.getName(),
                      " Booster Pack"))), 1.70)).intValue(), UNLOCK_COST);
             }
             price = (int) ((double) price * multiplier);

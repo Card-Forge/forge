@@ -90,7 +90,7 @@ public final class SRearrangingUtil {
         // If only a single tab, select it, and add it to docsToMove.
         if (e.getSource() instanceof DragTab) {
             for (final IVDoc<? extends ICDoc> vDoc : cellSrc.getDocs()) {
-                if (vDoc.getTabLabel() == (DragTab) (e.getSource())) {
+                if (vDoc.getTabLabel() == e.getSource()) {
                     cellSrc.setSelected(vDoc);
                     docsToMove.add(vDoc);
                 }

@@ -6,6 +6,6 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterType$ THEFT | CounterNum$ Y | Refere
 A:AB$ ChangeZone | Cost$ 2 B B SubCounter<X/THEFT> | Origin$ Library | Destination$ Hand | ChangeType$ Card.nonLand+YouCtrl+cmcEQChosenX | ChangeNum$ 1 | Reveal$ True | Shuffle$ True | References$ X | SpellDescription$ Search your library for a nonland card with converted mana cost X, reveal it, put it into your hand, then shuffle your library.
 SVar:X:XChoice
 SVar:Y:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_dealings.jpg
 Oracle:Whenever a source you control deals damage to another player, put that many theft counters on Night Dealings.\n{2}{B}{B}, Remove X theft counters from Night Dealings: Search your library for a nonland card with converted mana cost X, reveal it, put it into your hand, then shuffle your library.

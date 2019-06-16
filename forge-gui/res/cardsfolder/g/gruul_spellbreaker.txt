@@ -1,0 +1,9 @@
+Name:Gruul Spellbreaker
+ManaCost:1 R G
+Types:Creature Ogre Warrior
+PT:3/3
+K:Riot
+K:Trample
+S:Mode$ Continuous | Affected$ You,Card.Self | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ As long as it's your turn, you and CARDNAME have hexproof.
+DeckHas:Ability$Counters
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nTrample\nAs long as it's your turn, you and Gruul Spellbreaker have hexproof.

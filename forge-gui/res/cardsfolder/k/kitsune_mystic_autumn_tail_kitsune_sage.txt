@@ -4,7 +4,7 @@ Types:Creature Fox Wizard
 PT:2/3
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Aura.Attached | PresentCompare$ GE2 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_mystic.jpg
@@ -21,6 +21,6 @@ A:AB$ Pump | Cost$ 1 | Amount$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtProm
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ KitsuneAttach | RememberChosen$ True | AILogic$ AtLeast1
 SVar:KitsuneAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autumn_tail_kitsune_sage.jpg
 Oracle:{1}: Attach target Aura attached to a creature to another creature.

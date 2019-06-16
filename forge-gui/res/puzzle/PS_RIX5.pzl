@@ -21,6 +21,6 @@ humancommand=
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Labyrinth Guardian;Ornithopter;Deadlock Trap;Captured by the Consulate|Attaching:4
+aibattlefield=Labyrinth Guardian;Ornithopter;Deadlock Trap;Captured by the Consulate|AttachedTo:4
 aiexile=
 aicommand=

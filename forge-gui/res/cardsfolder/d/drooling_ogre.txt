@@ -4,7 +4,7 @@ Types:Creature Ogre
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Artifact | Execute$ TrigControl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an artifact spell, that player gains control of CARDNAME. (This effect lasts indefinitely.)
 SVar:TrigControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredPlayer
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:AntiBuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_ogre.jpg
 Oracle:Whenever a player casts an artifact spell, that player gains control of Drooling Ogre. (This effect lasts indefinitely.)

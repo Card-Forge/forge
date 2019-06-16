@@ -29,22 +29,13 @@ import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
 import junit.framework.TestCase;
 
 public class SimulationTestCase extends TestCase {
     private static boolean initialized = false;
 
     protected Game initAndCreateGame() {
-        List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        Set<AIOption> options = new HashSet<>();
-        options.add(AIOption.USE_SIMULATION);
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
-        game.setAge(GameStage.Play);
 
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
@@ -57,6 +48,19 @@ public class SimulationTestCase extends TestCase {
             });
             initialized = true;
         }
+
+        // need to be done after FModel.initialize, or the Localizer isn't loaded yet
+        List<RegisteredPlayer> players = Lists.newArrayList();
+        Deck d1 = new Deck();
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
+        Set<AIOption> options = new HashSet<>();
+        options.add(AIOption.USE_SIMULATION);
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match match = new Match(rules, players, "Test");
+        Game game = new Game(players, rules, match);
+        game.setAge(GameStage.Play);
+
         return game;
     }
 
@@ -126,6 +130,8 @@ public class SimulationTestCase extends TestCase {
 
     protected Card addCardToZone(String name, Player p, ZoneType zone) {
         Card c = createCard(name, p);
+        // card need a new Timestamp otherwise Static Abilities might collide
+        c.setTimestamp(p.getGame().getNextTimestamp());
         p.getZone(zone).add(c);
         return c;
     }

@@ -81,6 +81,15 @@ public class SoundSystem {
         return clip;
     }
 
+    public boolean hasResource(final SoundEffectType type) {
+        boolean result = true;
+        IAudioClip clip = fetchResource(type);
+        if(clip.equals(emptySound)) {
+            result = false;
+        }
+        return result;
+    }
+    
     /**
      * Play the sound associated with the resource specified by the file name
      * ("synchronized" with other sounds of the same kind means: only one can play at a time).

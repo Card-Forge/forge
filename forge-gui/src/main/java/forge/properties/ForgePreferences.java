@@ -17,6 +17,7 @@
  */
 package forge.properties;
 
+import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
@@ -70,6 +71,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_CARD_MANA_COST ("true"),
         UI_OVERLAY_CARD_ID ("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("false"),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
@@ -124,7 +126,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
-
+        UI_DEFAULT_FONT_SIZE("12"),
+    	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
@@ -154,9 +157,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_SETTINGS ("false"),
         SUBMENU_UTILITIES ("false"),
 
+        MATCH_SIDEBOARD_FOR_AI("true"), // TODO What do when AI knows how to SIdeboard?
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
         FILTERED_HANDS ("false"),
+        MULLIGAN_RULE(MulliganDefs.getDefaultRule().name()),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),

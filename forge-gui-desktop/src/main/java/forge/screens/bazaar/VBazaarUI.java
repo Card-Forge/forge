@@ -33,7 +33,7 @@ public enum VBazaarUI implements IVTopLevelUI {
     /** Lays out containers and borders for resizeable layout and
      *  instantiates top-level controller for bazaar UI.
      * @param bazaar0 */
-    private VBazaarUI() {
+    VBazaarUI() {
     }
 
     /** */

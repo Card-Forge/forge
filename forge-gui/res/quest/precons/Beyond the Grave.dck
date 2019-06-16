@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Beyond the Grave
+Description=Everything is scarce during an ice age except snow and death, which makes it a great time to be a necromancer! Slay your own minions for fun and profit, because their deaths unleash your power-- and resurrect your recover cards.
+Deck Type=constructed
+Set=CSP
+Image=beyond_the_grave.jpg
+[main]
+1 Ashen Ghoul|ICE
+2 Balduvian Dead|ALL
+2 Barbed Sextant|ICE
+2 Casting of Bones|ALL|2
+1 Coldsteel Heart|CSP
+2 Dark Banishing|ICE
+1 Dark Ritual|ICE
+2 Death Spark|ALL
+1 Deepfire Elemental|CSP
+2 Disciple of Tevesh Szat|CSP
+1 Forest|ICE|1
+1 Forest|ICE|2
+1 Forest|ICE|3
+3 Grim Harvest|CSP
+2 Gristle Grinner|CSP
+3 Gutless Ghoul|CSP
+2 Insidious Bookworms|ALL|2
+1 Kjeldoran Dead|ICE
+2 Krovikan Rot|CSP
+3 Mountain|ICE|1
+3 Mountain|ICE|2
+3 Mountain|ICE|3
+2 Orcish Bloodpainter|CSP
+1 Orcish Healer|ICE
+1 Sek'Kuar, Deathkeeper|CSP
+1 Skull Catapult|ICE
+1 Soul Burn|ICE
+4 Swamp|ICE|1
+4 Swamp|ICE|2
+4 Swamp|ICE|3
+1 Void Maw|CSP
+[sideboard]

@@ -4,6 +4,6 @@ Types:Enchantment
 S:Mode$ CantBeCast | ValidCard$ Card | NonCasterTurn$ True | Description$ Players can cast spells and activate abilities only during their own turns.
 S:Mode$ CantBeActivated | ValidCard$ Card | NonActivatorTurn$ True
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://wizards.com/global/images/magic/general/city_of_solitude.jpg
 Oracle:Players can cast spells and activate abilities only during their own turns.

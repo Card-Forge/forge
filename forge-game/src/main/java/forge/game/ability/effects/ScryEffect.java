@@ -4,17 +4,17 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import java.util.List;
+
+import com.google.common.collect.Lists;
+
 
 public class ScryEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p.toString()).append(" ");
         }
 
@@ -36,19 +36,16 @@ public class ScryEffect extends SpellAbilityEffect {
 
         boolean isOptional = sa.hasParam("Optional");
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+	final List<Player> players = Lists.newArrayList(); // players really affected
 
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (isOptional && !p.getController().confirmAction(sa, null, "Do you want to scry?")) {
-                    continue;
-                }
-
-                p.scry(num, sa);
-            }
-        }
+	// Optional here for spells that have optional multi-player scrying
+        for (final Player p : getTargetPlayers(sa)) {
+	    if ( (!sa.usesTargeting() || p.canBeTargetedBy(sa)) &&
+		 (!isOptional || p.getController().confirmAction(sa, null, "Do you want to scry?")) ) {
+		players.add(p);
+	    }
+	}
+	sa.getActivatingPlayer().getGame().getAction().scry(players, num, sa);
     }
-
 
 }

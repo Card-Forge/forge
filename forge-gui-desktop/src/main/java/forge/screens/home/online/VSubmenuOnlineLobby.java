@@ -36,7 +36,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     private final JPanel pnlTitle = new JPanel(new MigLayout());
     private final StopButton btnStop  = new StopButton();
 
-    private VSubmenuOnlineLobby() {
+    VSubmenuOnlineLobby() {
     }
 
     public ILobbyView setLobby(final GameLobby lobby) {
@@ -64,7 +64,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
         if (lobby == null) {
             final FButton btnConnect = new FButton("Connect to Server");
-            btnConnect.setFont(FSkin.getFont(20));
+            btnConnect.setFont(FSkin.getRelativeFont(20));
             btnConnect.addActionListener(new ActionListener() {
                 @Override
                 public final void actionPerformed(final ActionEvent e) {

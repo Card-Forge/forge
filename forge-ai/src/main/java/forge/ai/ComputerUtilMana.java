@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ai.ability.AnimateAi;
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -16,11 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayEnergy;
-import forge.game.cost.CostPayment;
+import forge.game.cost.*;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -860,6 +857,11 @@ public class ComputerUtilMana {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
+        // Mana reserved for spell synchronization
+        if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
+            return true;
+        }
+
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
 
         // For combat tricks, always obey mana reservation
@@ -913,6 +915,10 @@ public class ComputerUtilMana {
         // Make mana needed to avoid negative effect a mandatory cost for the AI
         for (String manaPart : card.getSVar("ManaNeededToAvoidNegativeEffect").split(",")) {
             // convert long color strings to short color strings
+            if (manaPart.isEmpty()) {
+                continue;
+            }
+
             byte mask = ManaAtom.fromName(manaPart);
 
             // make mana mandatory for AI
@@ -1116,11 +1122,11 @@ public class ComputerUtilMana {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
                 final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar)) {
-                    if (xSvar.equals("PayX") && card.hasSVar(xSvar)) {
+                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar)) {
+                    if (xSvar.equals("PayX") && (card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar))) {
                          // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
-                        String xValue = card.getSVar(xSvar);
-                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
+                        String xValue = card.hasSVar(xSvar) ? card.getSVar(xSvar) : card.getState(CardStateName.Original).getSVar(xSvar);
+                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(xValue) * cost.getXcounter(); // X
                     } else {
                         manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
                     }
@@ -1509,7 +1515,7 @@ public class ComputerUtilMana {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getController().getGame().getAction().sacrifice(offering, sa);
+                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, null);
             }
             sa.resetSacrificedAsOffering();
         }
@@ -1517,7 +1523,7 @@ public class ComputerUtilMana {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getController().getGame().getAction().sacrifice(emerge, sa);
+                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, null);
             }
             sa.resetSacrificedAsEmerge();
         }

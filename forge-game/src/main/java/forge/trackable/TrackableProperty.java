@@ -11,18 +11,25 @@ public enum TrackableProperty {
     //Shared
     Text(TrackableTypes.StringType),
     PreventNextDamage(TrackableTypes.IntegerType),
-    EnchantedBy(TrackableTypes.CardViewCollectionType),
+    AttachedCards(TrackableTypes.CardViewCollectionType),
     Counters(TrackableTypes.CounterMapType),
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
 
-    //Card 
+    //Card
     Owner(TrackableTypes.PlayerViewType),
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
+
+    Flipped(TrackableTypes.BooleanType),
+    Facedown(TrackableTypes.BooleanType),
+
+    //TODO?
+    Cloner(TrackableTypes.StringType),
     Cloned(TrackableTypes.BooleanType),
     FlipCard(TrackableTypes.BooleanType),
     SplitCard(TrackableTypes.BooleanType),
+
     Attacking(TrackableTypes.BooleanType),
     Blocking(TrackableTypes.BooleanType),
     PhasedOut(TrackableTypes.BooleanType),
@@ -43,15 +50,11 @@ public enum TrackableProperty {
     NamedCard(TrackableTypes.StringType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
     PlayerMayLookTemp(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
-    Equipping(TrackableTypes.CardViewType),
-    EquippedBy(TrackableTypes.CardViewCollectionType),
-    Enchanting(TrackableTypes.GameEntityViewType),
-    Fortifying(TrackableTypes.CardViewType),
-    FortifiedBy(TrackableTypes.CardViewCollectionType),
+    EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
-    Cloner(TrackableTypes.StringType),
+
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
     Haunting(TrackableTypes.CardViewType),
@@ -113,6 +116,8 @@ public enum TrackableProperty {
     Hand(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Library(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
+    IsExtraTurn(TrackableTypes.BooleanType),
+    ExtraTurnCount(TrackableTypes.IntegerType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),

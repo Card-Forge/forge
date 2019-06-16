@@ -431,58 +431,22 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.lastManaProduced;
     }
 
-    /**
-     * <p>
-     * isSnow.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isSnow() {
         return this.getSourceCard().isSnow();
     }
 
-    /**
-     * <p>
-     * isAnyMana.
-     * </p>
-     *
-     * @return a boolean.
-     */
     public boolean isAnyMana() {
         return this.getOrigProduced().contains("Any");
     }
 
-    /**
-     * <p>
-     * isComboMana.
-     * </p>
-     *
-     * @return a boolean.
-     */
     public boolean isComboMana() {
         return this.getOrigProduced().contains("Combo");
     }
 
-    /**
-     * <p>
-     * isSpecialMana.
-     * </p>
-     *
-     * @return a boolean.
-     */
     public boolean isSpecialMana() {
         return this.getOrigProduced().contains("Special");
     }
-    /**
-     * <p>
-     * canProduce.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
+
     public final boolean canProduce(final String s) {
         return canProduce(s, null);
     }

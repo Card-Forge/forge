@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #00a (Pre-release Puzzle)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/097.-RNA002.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You have three other Growth-Chamber Guardians in your deck (in addition to the one in your hand).
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Grotesque Demise;Ancient Animus;Bedevil;Growth-Chamber Guardian
+humanlibrary=Growth-Chamber Guardian;Growth-Chamber Guardian;Growth-Chamber Guardian
+humanbattlefield=Rhythm of the Wild;Rhythm of the Wild;Piston-Fist Cyclops|NoETBTrigs;Mausoleum Harpy|NoETBTrigs;Dragon Egg|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs
+aibattlefield=Goring Ceratops;Goblin Chainwhirler;Goblin Chainwhirler

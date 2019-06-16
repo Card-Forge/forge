@@ -31,6 +31,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -48,25 +49,26 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private static final int TROPHIES_PER_SHELVE = 4;
     private static final int PADDING = 5;
     private static final int TROPHY_PADDING = 45;
-    private static final SkinFont NAME_FONT = FSkin.getBoldFont(14);
-    private static final SkinFont DESC_FONT = FSkin.getFont(12);
+    private static final SkinFont NAME_FONT = FSkin.getRelativeBoldFont(14);
+    private static final SkinFont DESC_FONT = FSkin.getFont();
     private static final SkinColor TEXT_COLOR = FSkin.getColor(Colors.CLR_TEXT);
     private static final SkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(128);
     private static final SkinColor TEXTURE_OVERLAY_COLOR = FSkin.getColor(Colors.CLR_THEME);
     private static final SkinColor BORDER_COLOR = FSkin.getColor(Colors.CLR_BORDERS);
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Achievements");
+    private final DragTab tab = new DragTab(localizer.getMessage("Achievements"));
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Achievements").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("Achievements")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
     private final FComboBox<AchievementCollection> cbCollections = new FComboBox<AchievementCollection>();
     private final TrophyCase trophyCase = new TrophyCase();
     private final FScrollPane scroller = new FScrollPane(trophyCase, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private VSubmenuAchievements() {
+    VSubmenuAchievements() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         trophyCase.setMinimumSize(new Dimension(FSkinProp.IMG_TROPHY_SHELF.getWidth(), 0));
@@ -121,7 +123,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
         AchievementCollection.buildComboBox(cbCollections);
 
-        cbCollections.setSkinFont(FSkin.getBoldFont(14));
+        cbCollections.setSkinFont(FSkin.getRelativeBoldFont(14));
         cbCollections.setTextAlignment(TextAlignment.CENTER);
         cbCollections.addActionListener(new ActionListener() {
             @Override
@@ -167,7 +169,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
      */
     @Override
     public String getMenuTitle() {
-        return "Achievements";
+        return localizer.getMessage("Achievements");
     }
 
     /* (non-Javadoc)
@@ -264,8 +266,8 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         private static final SkinImage imgTop = FSkin.getImage(FSkinProp.IMG_TROPHY_CASE_TOP);
         private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.IMG_TROPHY_SHELF);
         private static final SkinImage imgTrophyPlate = FSkin.getImage(FSkinProp.IMG_TROPHY_PLATE);
-        private static final Font font = FSkin.getFixedFont(14).deriveFont(Font.BOLD);
-        private static final Font subFont = FSkin.getFixedFont(12);
+        private static final Font font = FSkin.getRelativeFixedFont(14).deriveFont(Font.BOLD);
+        private static final Font subFont = FSkin.getFixedFont();
         private static final Color foreColor = new Color(239, 220, 144);
 
         private AchievementCollection achievements;

@@ -1,0 +1,10 @@
+Name:Plaza of Harmony
+ManaCost:no cost
+Types:Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Gate.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type a Gate you control could produce.
+DeckHints:Type$Gate
+DeckHas:Ability$LifeGain
+Oracle:When Plaza of Harmony enters the battlefield, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type a Gate you control could produce.

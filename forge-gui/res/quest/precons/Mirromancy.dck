@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mirromancy
-Description=Some Magic decks win the game with powerful creatures. Others, like the "Mirromancy" deck, win with powerful spells. Burn spells like Lava Axe and Red Sun's Zenith take fiery bites out of your opponent's life total, while cards like Quicksilver Geyser and Sleep give you the time you need to win.
+Description=Burn back the invaders! The nightmarish Phyrexians underestimate the power of your Mirran magic. Send them back to their dark hell with spells of eldritch Aether and blazing magefire.
 Deck Type=constructed
 Set=MBS
 Image=mirromancy.jpg
@@ -14,7 +14,7 @@ Image=mirromancy.jpg
 13 Mountain|MBS
 2 Blisterstick Shaman|MBS
 1 Fire Servant|M11
-1 Galvanoth|MBS
+1 Galvanoth+|MBS
 2 Iron Myr|SOM
 2 Koth's Courier|MBS
 2 Lumengrid Gargoyle|MBS

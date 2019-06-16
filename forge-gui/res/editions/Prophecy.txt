@@ -154,3 +154,8 @@ FoilAlwaysInCommonSlot=False
 143 R Wintermoon Mesa
 54 C Withdraw
 108 C Zerapa Minotaur
+
+[tokens]
+b_1_1_minion
+g_x_x_elephant_resurgence
+g_1_1_squirrel

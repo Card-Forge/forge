@@ -125,6 +125,8 @@ public enum CounterType {
 
     HEALING("HEAL", 255, 166, 236),
 
+    HIT("HIT", 255, 245, 195),
+
     HOOFPRINT("HOOF", 233, 189, 170),
 
     HOUR("HOUR", 198, 197, 210),
@@ -245,7 +247,7 @@ public enum CounterType {
 
     SLEEP("SLEEP", 178, 192, 255),
 
-    SLUMBER("SLUMBER", 178, 205, 255),
+    SLUMBER("SLMBR", 178, 205, 255),
 
     SLEIGHT("SLGHT", 185, 174, 255),
 

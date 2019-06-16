@@ -20,7 +20,6 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.StaticData;
 import forge.card.MagicColor;
 import forge.game.card.token.TokenInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -204,16 +203,15 @@ public class TokenEffect extends SpellAbilityEffect {
             return null;
         }
 
-        String script = sa.getParam("TokenScript");
-        String edition = sa.getHostCard().getSetCode();
-        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        final Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
 
-        if (token != null) {
-            tokenName = token.getName();
-            return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
+        if (result != null) {
+            tokenName = result.getName();
+        } else {
+            throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
         }
 
-        return null;
+        return result;
     }
 
     @Override
@@ -495,60 +493,31 @@ public class TokenEffect extends SpellAbilityEffect {
 
             lki.setLastKnownZone(tok.getController().getZone(ZoneType.Battlefield));
 
+            // double freeze tracker, so it doesn't update view
+            game.getTracker().freeze();
             CardCollection preList = new CardCollection(lki);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
 
             // TODO update when doing Attach Update
-            boolean canAttach = lki.isAura() || lki.isEquipment() || lki.isFortification();
+            boolean canAttach = lki.isAttachment();
 
-            if (lki.isAura()) {
-                if (!ge.canBeEnchantedBy(lki)) {
-                    canAttach = false;
-                }
-            }
-            if (lki.isEquipment()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    if (!gc.canBeEquippedBy(lki)) {
-                        canAttach = false;
-                    }
-                } else {
-                    canAttach = false;
-                }
-            }
-            if (lki.isFortification()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    if (!gc.isLand()) {
-                        canAttach = false;
-                    }
-                } else {
-                    canAttach = false;
-                }
+            if (canAttach && !ge.canBeAttached(lki)) {
+                canAttach = false;
             }
 
             // reset static abilities
             game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            // need to unfreeze tracker
+            game.getTracker().unfreeze();
 
             if (!canAttach) {
-                // Token can't attach it
+                // Token can't attach to it
                 return false;
             }
 
-            // TODO update when doing Attach Update
-            if (lki.isAura()) {
-                tok.enchantEntity(ge);
-            } else if (lki.isEquipment()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    tok.equipCard(gc);
-                }
-            } else if (lki.isFortification()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    tok.fortifyCard(gc);
-                }
-            }
+            tok.attachToEntity(ge);
             return true;
         } else {
             // not a GameEntity, cant be attach

@@ -10,7 +10,7 @@ public class TimeLimitedCodeBlock {
     public static void runWithTimeout(final Runnable runnable, long timeout, TimeUnit timeUnit) throws Exception {
         runWithTimeout(new Callable<Object>() {
             @Override
-            public Object call() throws Exception {
+            public Object call() {
                 runnable.run();
                 return null;
             }

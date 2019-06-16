@@ -8,7 +8,7 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Y:Remembered$Valid Card.NamedCard
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lammastide_weave.jpg
 Oracle:Choose a card name, then target player puts the top card of their library into their graveyard. If that card has the chosen name, you gain life equal to its converted mana cost.\nDraw a card.

@@ -32,6 +32,7 @@ import forge.limited.DraftRankCache;
 import forge.model.FModel;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map.Entry;
 
 public enum ColumnDef {
@@ -533,7 +534,7 @@ public enum ColumnDef {
             Double ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
             if (ranking != null) {
                 if (truncate) {
-                    return new BigDecimal(ranking).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    return new BigDecimal(ranking).setScale(4, RoundingMode.HALF_UP).doubleValue();
                 }
                 return ranking;
             }
@@ -567,16 +568,24 @@ public enum ColumnDef {
     private static String toLandsLast(final InventoryItem i) {
          //nonland?
          return !(((IPaperCard) i).getRules().getType().isLand()) ?
-            "0" + toColorlessArtifactsLast(i)
+            "0" + toArtifactsWithColorlessCostsLast(i)
          //land
          : "1";
     }
     
-    /**Returns 1 for colorless artifacts, otherwise 0 and continues sorting.
+    /**Returns 1 for artifacts without color shards in their mana cost, otherwise 0 and continues sorting.
+    As of 2019, colored artifacts appear here if there are no colored shards in their casting cost.
     @param i A paper card.
     @return Part of a sortable numeric string.*/
-    private static String toColorlessArtifactsLast(final InventoryItem i) {
-     return !(((IPaperCard) i).getRules().getType().isArtifact() && toColor(i).isColorless())
+    private static String toArtifactsWithColorlessCostsLast(final InventoryItem i) {
+      forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+      
+      return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
+            //If it isn't colorless, see if it can be paid with only white, only blue, only black.
+            //No need to check others since three-color hybrid shards don't exist.
+               manaCost.canBePaidWithAvaliable(MagicColor.WHITE) &&
+               manaCost.canBePaidWithAvaliable(MagicColor.BLUE) &&
+               manaCost.canBePaidWithAvaliable(MagicColor.BLACK)))
             ? "0" + toSplitLast(i): "1";
     }
     

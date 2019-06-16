@@ -7,6 +7,6 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 SVar:X:Count$ManaPool:All
 SVar:Y:Targeted$CardManaCost
 #AI won't specifically put mana in pool to activate the ability
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_sunseeker.jpg
 Oracle:First strike\n{T}: Destroy target artifact if its converted mana cost is equal to the amount of unspent mana you have.

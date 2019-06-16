@@ -77,14 +77,14 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         Card c = null;
         if (type != null && type.equals("Aura") && object1.getEnchantingCard() != null) {
             c = object1.getEnchantingCard();
-            if (!c.canBeEnchantedBy(object2)) {
+            if (!c.canBeAttached(object2)) {
                 return;
             }
         }
         // Enchant first
         if (c != null) {
-            object1.unEnchantEntity(c);
-            object2.enchantEntity(c);
+            object1.unattachFromEntity(c);
+            object2.attachToEntity(c);
         }
         // Exchange Zone
         game.getAction().moveTo(zone2, object1, sa);

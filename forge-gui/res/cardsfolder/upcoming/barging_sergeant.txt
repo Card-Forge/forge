@@ -1,7 +1,0 @@
-Name:Barging Sergeant
-ManaCost:4 R
-Types:Creature Minotaur Soldier
-PT:4/2
-K:Haste
-K:Mentor
-Oracle:Haste\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)

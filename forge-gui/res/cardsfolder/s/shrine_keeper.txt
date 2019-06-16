@@ -1,0 +1,5 @@
+Name:Shrine Keeper
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+Oracle:

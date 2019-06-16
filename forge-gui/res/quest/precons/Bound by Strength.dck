@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Bound by Strength
-Description=If you like teamwork (and overwhelming your opponent), you'll love the "Bound by Strength" deck. The soulbond ability lets pairs of creatures share their powers.
+Description=The allies of Avacyn reinforce each other's convictions. With the "Bound by Strength" deck, use the new soulbond mechanic to bind together creatures of divergent natures. They will lend each other power against your foes.
 Deck Type=constructed
 Set=AVR
 Image=bound_by_strength.jpg
@@ -29,7 +29,7 @@ Image=bound_by_strength.jpg
 2 Vorstclaw|AVR
 2 Wingcrafter|AVR
 1 Wolfir Avenger|AVR
-1 Wolfir Silverheart|AVR
+1 Wolfir Silverheart+|AVR
 1 Ice Cage|M12
 2 Joint Assault|AVR
 2 Lair Delve|AVR

@@ -1,0 +1,9 @@
+Name:Sunblade Angel
+ManaCost:5 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:First Strike
+K:Vigilance
+K:Lifelink
+Oracle:Flying, first strike, vigilance, lifelink

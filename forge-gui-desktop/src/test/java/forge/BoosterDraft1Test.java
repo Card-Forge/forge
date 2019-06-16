@@ -14,12 +14,10 @@ public class BoosterDraft1Test {
 
     /**
      * Booster draft_1 test1.
-     * 
-     * @throws Exception
-     *             the exception
+     *
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
-    public void boosterDraft1Test1() throws Exception {
+    public void boosterDraft1Test1() {
         final BoosterDraft draft = BoosterDraft.createDraft(LimitedPoolType.Full);
         if (draft == null) { return; }
 

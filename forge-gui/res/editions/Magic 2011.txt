@@ -258,3 +258,11 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 40 C Wild Griffin
 222 U Wurm's Tooth
 200 C Yavimaya Wurm
+
+[tokens]
+w_x_x_avatar_life_total
+w_3_3_bird_flying
+b_2_2_zombie
+g_3_3_beast
+g_1_1_ooze
+g_2_2_ooze_mitotic

@@ -8,14 +8,14 @@ Deck Type=constructed
 Set=THS
 Image=favors_from_nyx.jpg
 Name=Favors From Nyx
-Description=With the "Favors from Nyx" deck, bestow the gifts of the divine on your creatures, enhancing them with additional power and useful abilities.
+Description=Only the most worthy receive divine favors, and the best favors help to defeat your opponents! Discover the celestial power of enchantment creatures, bestowed upon you as a gift from the gods.
 [Main]
 1 Auramancer|M14
 1 Baleful Eidolon|THS
 1 Banisher Priest|M14
 1 Blightcaster|M14
 1 Cavern Lampad|THS
-1 Celestial Archon|THS
+1 Celestial Archon+|THS
 1 Doom Blade|M14
 1 Erebos's Emissary|THS
 1 Gift of Immortality|THS

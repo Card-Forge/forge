@@ -61,8 +61,23 @@ public class PermanentAi extends SpellAbilityAi {
         if (card.getType().isLegendary()
                 && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             if (ai.isCardInPlay(card.getName())) {
-                // AiPlayDecision.WouldDestroyLegend
-                return false;
+                if (!card.hasSVar("AILegendaryException")) {
+                    // AiPlayDecision.WouldDestroyLegend
+                    return false;
+                } else {
+                    String specialRule = card.getSVar("AILegendaryException");
+                    if ("TwoCopiesAllowed".equals(specialRule)) {
+                        // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
+                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size() > 1) {
+                            return false;
+                        }
+                    } else if ("AlwaysAllowed".equals(specialRule)) {
+                        // Nothing to do here, check for Legendary is disabled
+                    } else {
+                        // Unknown hint, assume two copies not allowed
+                        return false;
+                    }
+                }
             }
         }
 
@@ -192,10 +207,10 @@ public class PermanentAi extends SpellAbilityAi {
                         // be better to have a pristine copy of the card - might not always be a correct assumption, but sounds
                         // like a reasonable default for some cards).
                         for (Card c : ctrld) {
-                            if (c.getEnchantedBy(false).isEmpty()) {
+                            if (c.getEnchantedBy().isEmpty()) {
                                 numControlled++;
                             } else {
-                                for (Card att : c.getEnchantedBy(false)) {
+                                for (Card att : c.getEnchantedBy()) {
                                     if (!att.getController().isOpponentOf(ai)) {
                                         numControlled++;
                                     }

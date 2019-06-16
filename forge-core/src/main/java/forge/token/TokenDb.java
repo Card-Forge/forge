@@ -2,7 +2,9 @@ package forge.token;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.CardRules;
 import forge.item.PaperToken;
 
 import java.util.*;
@@ -37,17 +39,29 @@ public class TokenDb implements ITokenDatabase {
         return getToken(tokenName, CardEdition.UNKNOWN.getName());
     }
 
+    public void preloadTokens() {
+        for(CardEdition edition : this.editions) {
+            for (String name : edition.getTokens().keySet()) {
+                try {
+                    getToken(name, edition.getCode());
+                } catch(Exception e) {
+                    System.out.println(name + "_" + edition.getCode() + " defined in Edition file, but not defined as a token script.");
+                }
+            }
+        }
+    }
+
     @Override
     public PaperToken getToken(String tokenName, String edition) {
         String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
 
         if (!tokensByName.containsKey(fullName)) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition));
+                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition), tokenName);
                 tokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {
-                return null;
+                throw e;
             }
         }
 
@@ -101,7 +115,7 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public List<PaperToken> getAllTokens() {
-        return null;
+        return new ArrayList<>(tokensByName.values());
     }
 
     @Override
@@ -121,6 +135,6 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public Iterator<PaperToken> iterator() {
-        return null;
+        return tokensByName.values().iterator();
     }
 }

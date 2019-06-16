@@ -1,0 +1,308 @@
+[metadata]
+Code=WAR
+Date=2019-05-03
+Name=War of the Spark
+Code2=WAR
+MciCode=war
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
+BoosterMustContain=Planeswalker
+
+[cards]
+1 R Karn, the Great Creator
+2 R Ugin, the Ineffable
+3 U Ugin's Conjurant
+4 U Ajani's Pridemate
+5 C Battlefield Promotion
+6 U Bond of Discipline
+7 C Bulwark Giant
+8 C Charmed Stray
+9 C Defiant Strike
+10 C Divine Arrow
+11 C Enforcer Griffin
+12 M Finale of Glory
+13 M Gideon Blackblade
+14 C Gideon's Sacrifice
+15 U Gideon's Triumph
+16 M God-Eternal Oketra
+17 U Grateful Apparition
+18 R Ignite the Beacon
+19 C Ironclad Krovod
+20 C Law-Rune Enforcer
+21 C Loxodon Sergeant
+22 C Makeshift Battalion
+23 C Martyr for the Cause
+24 R Parhelion II
+25 C Pouncing Lynx
+26 U Prison Realm
+27 U Rally of Wings
+28 R Ravnica at War
+29 C Rising Populace
+30 R Single Combat
+31 U Sunblade Angel
+32 U Teyo, the Shieldmage
+33 C Teyo's Lightshield
+34 R Tomik, Distinguished Advokist
+35 C Topple the Statue
+36 C Trusted Pegasus
+37 U The Wanderer
+38 C Wanderer's Strike
+39 C War Screecher
+40 C Ashiok's Skulker
+41 U Augur of Bolas
+42 C Aven Eternal
+43 U Bond of Insight
+44 C Callous Dismissal
+45 R Commence the Endgame
+46 C Contentious Plan
+47 C Crush Dissent
+48 C Erratic Visionary
+49 U Eternal Skylord
+50 R Fblthp, the Lost
+51 M Finale of Revelation
+52 U Flux Channeler
+53 M God-Eternal Kefnet
+54 R Jace, Wielder of Mysteries
+55 U Jace's Triumph
+56 U Kasmina, Enigmatic Mentor
+57 C Kasmina's Transmutation
+58 C Kiora's Dambreaker
+59 U Lazotep Plating
+60 C Naga Eternal
+61 U Narset, Parter of Veils
+62 R Narset's Reversal
+63 C No Escape
+64 C Relentless Advance
+65 U Rescuer Sphinx
+66 R Silent Submersible
+67 C Sky Theater Strix
+68 R Spark Double
+69 C Spellkeeper Weird
+70 C Stealth Mission
+71 C Tamiyo's Epiphany
+72 C Teferi's Time Twist
+73 C Thunder Drake
+74 C Totally Lost
+75 C Wall of Runes
+76 C Aid the Fallen
+77 C Banehound
+78 U Bleeding Edge
+79 R Bolas's Citadel
+80 U Bond of Revival
+81 C Charity Extractor
+82 R Command the Dreadhorde
+83 U Davriel, Rogue Shadowmage
+84 C Davriel's Shadowfugue
+85 R Deliver Unto Evil
+86 R Dreadhorde Invasion
+87 U Dreadmalkin
+88 C Duskmantle Operative
+89 R The Elderspell
+90 U Eternal Taskmaster
+91 M Finale of Eternity
+92 M God-Eternal Bontu
+93 C Herald of the Dreadhorde
+94 C Kaya's Ghostform
+95 C Lazotep Behemoth
+96 C Lazotep Reaver
+97 M Liliana, Dreadhorde General
+98 U Liliana's Triumph
+99 R Massacre Girl
+100 U Ob Nixilis, the Hate-Twisted
+101 C Ob Nixilis's Cruelty
+102 U Price of Betrayal
+103 C Shriekdiver
+104 C Sorin's Thirst
+105 C Spark Harvest
+106 C Spark Reaper
+107 C Tithebearer Giant
+108 C Toll of the Invasion
+109 C Unlikely Aid
+110 C Vampire Opportunist
+111 U Vizier of the Scorpion
+112 C Vraska's Finisher
+113 C Ahn-Crop Invader
+114 C Blindblast
+115 U Bolt Bend
+116 U Bond of Passion
+117 C Burning Prophet
+118 C Chainwhip Cyclops
+119 R Chandra, Fire Artisan
+120 C Chandra's Pyrohelix
+121 U Chandra's Triumph
+122 U Cyclops Electromancer
+123 C Demolish
+124 U Devouring Hellion
+125 R Dreadhorde Arcanist
+126 U Dreadhorde Twins
+127 M Finale of Promise
+128 C Goblin Assailant
+129 C Goblin Assault Team
+130 C Grim Initiate
+131 C Heartfire
+132 C Honor the God-Pharaoh
+133 M Ilharg, the Raze-Boar
+134 C Invading Manticore
+135 U Jaya, Venerated Firemage
+136 C Jaya's Greeting
+137 R Krenko, Tin Street Kingpin
+138 R Mizzium Tank
+139 C Nahiri's Stoneblades
+140 R Neheb, Dreadhorde Champion
+141 C Raging Kronch
+142 C Samut's Sprint
+143 R Sarkhan the Masterless
+144 C Sarkhan's Catharsis
+145 C Spellgorger Weird
+146 U Tibalt, Rakish Instigator
+147 U Tibalt's Rager
+148 C Turret Ogre
+149 C Arboreal Grazer
+150 U Arlinn, Voice of the Pack
+151 C Arlinn's Wolf
+152 R Awakening of Vitu-Ghazi
+153 C Band Together
+154 C Bloom Hulk
+155 U Bond of Flourishing
+156 C Centaur Nurturer
+157 U Challenger Troll
+158 C Courage in Crisis
+159 U Evolution Sage
+160 M Finale of Devastation
+161 C Forced Landing
+162 C Giant Growth
+163 M God-Eternal Rhonas
+164 U Jiang Yanggu, Wildcrafter
+165 C Kraul Stinger
+166 C Kronch Wrangler
+167 U Mowu, Loyal Companion
+168 C New Horizons
+169 R Nissa, Who Shakes the World
+170 U Nissa's Triumph
+171 U Paradise Druid
+172 R Planewide Celebration
+173 C Pollenbright Druid
+174 C Primordial Wurm
+175 C Return to Nature
+176 C Snarespinner
+177 C Steady Aim
+178 U Storm the Citadel
+179 C Thundering Ceratok
+180 R Vivien, Champion of the Wilds
+181 R Vivien's Arkbow
+182 C Vivien's Grizzly
+183 C Wardscale Crocodile
+184 R Ajani, the Greathearted
+185 U Angrath's Rampage
+186 R Bioessence Hydra
+187 R Casualties of War
+188 U Cruel Celebrant
+189 U Deathsprout
+190 U Despark
+191 R Domri, Anarch of Bolas
+192 U Domri's Ambush
+193 U Dovin's Veto
+194 R Dreadhorde Butcher
+195 U Elite Guardmage
+196 R Enter the God-Eternals
+197 R Feather, the Redeemed
+198 U Gleaming Overseer
+199 U Heartwarming Redemption
+200 U Huatli's Raptor
+201 U Invade the City
+202 U Leyline Prowler
+203 R Living Twister
+204 U Mayhem Devil
+205 U Merfolk Skydiver
+206 U Neoform
+207 M Nicol Bolas, Dragon-God
+208 M Niv-Mizzet Reborn
+209 R Oath of Kaya
+210 U Pledge of Unity
+211 R Ral, Storm Conduit
+212 U Ral's Outburst
+213 M Roalesk, Apex Hybrid
+214 R Role Reversal
+215 U Rubblebelt Rioters
+216 R Solar Blaze
+217 R Sorin, Vengeful Bloodlord
+218 R Soul Diviner
+219 R Storrev, Devkarin Lich
+220 R Tamiyo, Collector of Tales
+221 R Teferi, Time Raveler
+222 U Tenth District Legionnaire
+223 R Time Wipe
+224 R Tolsimir, Friend to Wolves
+225 U Tyrant's Scorn
+226 R Widespread Brutality
+227 U Angrath, Captain of Chaos
+228 U Ashiok, Dream Render
+229 U Dovin, Hand of Control
+230 U Huatli, the Sun's Heart
+231 U Kaya, Bane of the Dead
+232 U Kiora, Behemoth Beckoner
+233 U Nahiri, Storm of Stone
+234 U Saheeli, Sublime Artificer
+235 U Samut, Tyrant Smasher
+236 U Vraska, Swarm's Eminence
+237 U Firemind Vessel
+238 U God-Pharaoh's Statue
+239 C Guild Globe
+240 C Iron Bully
+241 C Mana Geode
+242 C Prismite
+243 C Saheeli's Silverwing
+244 R Blast Zone
+245 U Emergence Zone
+246 C Gateway Plaza
+247 U Interplanar Beacon
+248 R Karn's Bastion
+249 R Mobilized District
+250 L Plains
+251 L Plains
+252 L Plains
+253 L Island
+254 L Island
+255 L Island
+256 L Swamp
+257 L Swamp
+258 L Swamp
+259 L Mountain
+260 L Mountain
+261 L Mountain
+262 L Forest
+263 L Forest
+264 L Forest
+265 M Gideon, the Oathsworn
+266 C Desperate Lunge
+267 R Gideon's Battle Cry
+268 U Gideon's Company
+269 C Orzhov Guildgate
+270 M Jace, Arcane Strategist
+271 C Guildpact Informant
+272 U Jace's Projection
+273 R Jace's Ruse
+274 C Simic Guildgate
+275 M Tezzeret, Master of the Bridge
+
+[tokens]
+wubrg_2_2_citizen
+b_0_0_zombie_army
+b_0_0_zombie_army
+b_0_0_zombie_army
+b_1_1_assassin_deathtouch
+b_2_2_zombie
+b_4_4_zombie_warrior_vigilance
+c_1_1_a_servo
+c_2_2_spirit
+g_2_2_wolf
+r_1_1_devil_burn
+r_1_1_goblin
+r_4_4_dragon_flying
+u_2_2_wizard
+voja_friend_to_elves
+w_0_3_wall_defender
+w_2_2_soldier_vigilance
+w_4_4_angel_flying_vigilance
+

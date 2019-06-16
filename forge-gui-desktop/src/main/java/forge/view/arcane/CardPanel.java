@@ -253,7 +253,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.rotate(getTappedAngle(), cardXOffset + edgeOffset, (cardYOffset + cardHeight)
                     - edgeOffset);
         }
-        super.paint(g2d);
+	super.paint(g2d);
     }
 
     @Override
@@ -268,12 +268,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
-        // Magenta outline for when card was chosen to pay
+	// Magenta outline for when card is chosen
         if (matchUI.isUsedToPay(getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
-        }
+	}
 
         // Green outline for hover
         if (isSelected) {
@@ -282,7 +282,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
 
-        // Black fill - (will become outline for white bordered cards)
+        // Black fill - (will become an outline for white bordered cards)
         g2d.setColor(Color.black);
         g2d.fillRoundRect(cardXOffset, cardYOffset  + offset, cardWidth, cardHeight, cornerSize, cornerSize);
 
@@ -305,6 +305,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins*2, cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
             }
         }
+
+	if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
+	    g2d.setColor(Color.WHITE);
+	    final int ins = 1;
+	    g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+	}
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
@@ -328,6 +334,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
         }
+
+	boolean nonselectable = matchUI.isSelecting() && !matchUI.isSelectable(getCard());
+	// if selecting, darken non-selectable cards
+	if ( nonselectable ) {
+	    boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+	    boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
+	    final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+	    final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
+	    g.setColor(new Color(0.0f,0.0f,0.0f,0.6f));
+	    g.fillRoundRect(cardXOffset, cardYOffset  + offset, cardWidth, cardHeight, cornerSize, cornerSize);
+	}
     }
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
@@ -779,6 +796,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
+    // don't show overlays on non-selectable cards when selecting
     private boolean isShowingOverlays() {
         return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && card != null;
     }

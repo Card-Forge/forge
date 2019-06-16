@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #08
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/11/090.-GRB8.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. There are nine cards in your graveyard. Your opponent's graveyard is empty. Assume your opponent has {4}{G}{G} available.
+[state]
+humanlife=20
+ailife=7
+turn=1
+aipersistentmana=C C C C G G
+activeplayer=human
+activephase=MAIN1
+humanhand=Find // Finality;Dead Weight;Gruesome Menagerie;March of the Drowned
+humangraveyard=Chamber Sentry;Crucible of Worlds;Detection Tower;Centaur Courser;Sailor of Means;Mox Amber;Talons of Wildwood;Diamond Mare;Vicious Conquistador
+humanbattlefield=Mistcaller;Muldrotha, the Gravetide;Epicure of Blood;Memorial to Folly;Memorial to Folly;Memorial to Folly;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs
+aibattlefield=Adeliz, the Cinder Wind;Rekindling Phoenix;Rekindling Phoenix;Shalai, Voice of Plenty;Hunted Witness

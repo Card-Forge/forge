@@ -1,0 +1,7 @@
+Name:Rime Tender
+ManaCost:1 G
+Types:Snow Creature Human Druid
+PT:2/2
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+Snow | TgtPrompt$ Select another target snow permanent | SpellDescription$ Untap another target snow permanent.
+DeckHints:Type$Snow
+Oracle:{T}: Untap another target snow permanent.

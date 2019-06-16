@@ -1,0 +1,10 @@
+Name:Hero of Precinct One
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | LegacyImage$ w 1 1 human rna
+AI:RemoveDeck:Random
+SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$Token
+Oracle:Whenever you cast a multicolored spell, create a 1/1 white Human creature token.

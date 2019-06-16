@@ -95,18 +95,17 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
             @Override public void run() {
-                final CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
+                final CardFormatFilter existingFilter = itemManager.getFilter(CardFormatFilter.class);
                 if (existingFilter != null) {
-                    existingFilter.edit();
+                    existingFilter.edit(itemManager);
                 } else {
                     final DialogChooseFormats dialog = new DialogChooseFormats();
+                    dialog.setWantReprintsCB(true); // assume user wants things permissive...
                     dialog.setOkCallback(new Runnable() {
                         @Override public void run() {
                             final List<GameFormat> formats = dialog.getSelectedFormats();
                             if (!formats.isEmpty()) {
-                                for(GameFormat format: formats) {
-                                    itemManager.addFilter(new CardFormatFilter(itemManager, format));
-                                }
+                                itemManager.addFilter(new CardFormatFilter(itemManager,formats,dialog.getWantReprints()));
                             }
                         }
                     });
@@ -119,7 +118,7 @@ public class CardManager extends ItemManager<PaperCard> {
             public void run() {
                 CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
                 if (existingFilter != null) {
-                    existingFilter.edit();
+                    existingFilter.edit(itemManager);
                 }
                 else {
                     final DialogChooseSets dialog = new DialogChooseSets(null, null, true);

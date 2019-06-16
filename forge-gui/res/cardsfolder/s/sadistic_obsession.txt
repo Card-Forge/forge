@@ -1,0 +1,10 @@
+Name:Sadistic Obsession
+ManaCost:3 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapCounter | Description$ Enchanted creature has "{B}, {T}: Put a -1/-1 counter on target creature."
+SVar:TapCounter:AB$ PutCounter | Cost$ B T | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
+SVar:NonStackingAttachEffect:True
+DeckHas:Ability$Counters
+Oracle:Enchant creature\nEnchanted creature has "{B}, {T}: Put a -1/-1 counter on target creature."

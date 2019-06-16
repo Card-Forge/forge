@@ -1,0 +1,6 @@
+Name:Zombie Wizard
+ManaCost:no cost
+Types:Creature Zombie Wizard
+Colors:blue,black
+PT:1/1
+Oracle:

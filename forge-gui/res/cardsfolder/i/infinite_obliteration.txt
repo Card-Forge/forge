@@ -8,6 +8,6 @@ SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPla
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:NumInYard:TargetedPlayer$CardsInGraveyard
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_obliteration.jpg
 Oracle:Choose a creature card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.

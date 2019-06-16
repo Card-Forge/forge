@@ -4,8 +4,5 @@ Types:Creature Dragon
 PT:5/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall Whenever a land enters the battlefield under your control, create a 0/2 red Dragon creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"
-SVar:TrigToken:DB$ Token | TokenImage$ r 0 2 dragon egg | TokenAmount$ 1 | TokenName$ Dragon Egg | TokenTypes$ Creature,Dragon,Egg | TokenOwner$ You | TokenColors$ Red | TokenPower$ 0 | TokenToughness$ 2 | TokenKeywords$ Defender | TokenTriggers$ TriggerDies | TokenSVars$ TrigToken2,DragonPump
-SVar:TriggerDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken2 | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, create a 2/2 red Dragon creature token with flying and "{R}: This creature gets +1/+0 until end of turn."
-SVar:TrigToken2:DB$Token | TokenImage$ r 2 2 dragon c18 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenAbilities$ DragonPump
-SVar:DragonPump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | LegacyImage$ r 0 2 dragon egg defender hatches dragon c18 | TokenScript$ r_0_2_dragon_egg_defender_hatches_dragon
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, create a 0/2 red Dragon Egg creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"

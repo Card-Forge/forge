@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Golgari Deathcreep
-Description=With the "Golgari Deathcreep" deck, death isn't where life ends - it's where it begins. Your graveyard will be your greatest resource while playing this deck. Why settle for what might be on top of your library when you can instead pick the best dredge card in your graveyard each turn?
+Description=The Golgari guild turns life into death, and vice versa. The dredge mechanic recycles treasures from the graveyard... while making that graveyard even fatter with loot. The rotting compost carcasses of zombie plants never smelled so sweet.
 Deck Type=constructed
 Set=RAV
 Image=golgari_deathcreep.jpg

@@ -9,6 +9,6 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ C
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ Truek
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knacksaw_clique.jpg
 Oracle:Flying\n{1}{U}, {Q}: Target opponent exiles the top card of their library. Until end of turn, you may play that card. ({Q} is the untap symbol.)

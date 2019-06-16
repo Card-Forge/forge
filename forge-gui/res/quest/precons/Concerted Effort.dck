@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Concerted Effort
-Description=Oath of the Gatewatch W/G Intro Deck
+Description=Faced with the threat of the world-devouring Eldrazi, the people of Zendikar band together like never before. Use the support mechanic to shore up multiple creatures with +1/+1 counters, and your army will become greater than the sum of its parts. Stand united and fight for Zendikar's survival!
 Deck Type=constructed
 Set=OGW
 Image=concerted_effort.jpg
@@ -17,7 +17,7 @@ Image=concerted_effort.jpg
 2 Expedition Envoy|BFZ
 2 Expedition Raptor|OGW
 7 Forest|BFZ
-1 Gladehart Cavalry|OGW
+1 Gladehart Cavalry+|OGW
 1 Immolating Glare|OGW
 1 Iona's Blessing|OGW
 2 Isolation Zone|OGW

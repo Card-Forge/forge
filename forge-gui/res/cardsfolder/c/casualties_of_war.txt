@@ -1,0 +1,10 @@
+Name:Casualties of War
+ManaCost:2 B B G G
+Types:Sorcery
+A:SP$ Charm | Cost$ 2 B B G G | MinCharmNum$ 1 | CharmNum$ 5 | Choices$ DestroyArtifact,DestroyCreature,DestroyEnchantment,DestroyLand,DestroyPlaneswalker
+SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact
+SVar:DestroyCreature:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target Enchantment | SpellDescription$ Destroy target Enchantment.
+SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+SVar:DestroyPlaneswalker:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | SpellDescription$ Destroy target planeswalker.
+Oracle:Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Destroy target enchantment.\n• Destroy target land.\n• Destroy target planeswalker.

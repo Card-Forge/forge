@@ -36,7 +36,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     private final CDetailPicture cDetailPicture = new CDetailPicture();
 
     //========== Constructor
-    private VWorkshopCatalog() {
+    VWorkshopCatalog() {
         this.cardManager = new CardManager(cDetailPicture, true, false);
         this.cardManager.setCaption("Catalog");
         final Iterable<PaperCard> allCards = Iterables.concat(FModel.getMagicDb().getCommonCards(), FModel.getMagicDb().getVariantCards());

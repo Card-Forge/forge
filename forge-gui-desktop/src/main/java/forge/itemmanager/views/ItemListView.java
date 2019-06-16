@@ -103,7 +103,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     static final SkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
     private static final SkinBorder HEADER_BORDER = new FSkin.CompoundSkinBorder(new FSkin.MatteSkinBorder(0, 0, 1, 1, GRID_COLOR), new EmptyBorder(0, 1, 0, 0));
-    private static final SkinFont ROW_FONT = FSkin.getFont(12);
+    private static final SkinFont ROW_FONT = FSkin.getFont();
     private static final int ROW_HEIGHT = 19;
 
     private final ItemTable table = new ItemTable();

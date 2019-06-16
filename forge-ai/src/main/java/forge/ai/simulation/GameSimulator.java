@@ -194,6 +194,8 @@ public class GameSimulator {
                 System.out.println();
             }
             final SpellAbility playingSa = sa;
+
+            simGame.copyLastState();
             ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
                 @Override
                 public void run() {
@@ -205,7 +207,7 @@ public class GameSimulator {
         }
 
         // TODO: Support multiple opponents.
-        Player opponent = ComputerUtil.getOpponentFor(aiPlayer);
+        Player opponent = aiPlayer.getWeakestOpponent();
         resolveStack(simGame, opponent);
 
         // TODO: If this is during combat, before blockers are declared,

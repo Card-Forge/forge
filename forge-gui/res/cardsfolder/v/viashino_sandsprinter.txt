@@ -1,0 +1,12 @@
+Name:Viashino Sandsprinter
+ManaCost:1 R R
+Types:Creature Viashino Warrior
+PT:4/1
+K:Haste
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+SVar:EndOfTurnLeavePlay:True
+K:Cycling:R
+Oracle:Trample, haste\nAt the beginning of the end step, return Viashino Sandsprinter to its owner's hand. (Return it only if it's on the battlefield.)\nCycling {R} ({R}, Discard this card: Draw a card.)

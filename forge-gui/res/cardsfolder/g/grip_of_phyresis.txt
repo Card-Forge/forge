@@ -2,7 +2,7 @@ Name:Grip of Phyresis
 ManaCost:2 U
 Types:Instant
 A:SP$ GainControl | Cost$ 2 U | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | SubAbility$ DBToken | SpellDescription$ Gain control of target Equipment, then create a 0/0 black Germ creature token and attach that Equipment to it.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | TokenOwner$ You | TokenPower$ 0 | TokenToughness$ 0 | TokenColors$ Black | TokenImage$ b 0 0 germ C16 | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_germ | TokenOwner$ You | LegacyImage$ b 0 0 germ c16 | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

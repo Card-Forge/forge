@@ -20,7 +20,7 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     private DeckType selectedDeckType = null;
 
     public DecksComboBox() {
-        setSkinFont(FSkin.getBoldFont(14));
+        setSkinFont(FSkin.getRelativeBoldFont(14));
         setTextAlignment(TextAlignment.CENTER);
         addActionListener(getDeckTypeComboListener());
     }

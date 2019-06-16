@@ -152,7 +152,15 @@ public class ForgeScript {
 
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
             Card source, SpellAbility spellAbility) {
-        if (property.equals("Buyback")) {
+        if (property.equals("ManaAbility")) {
+            if (!sa.isManaAbility()) {
+                return false;
+            }
+        } else if (property.equals("nonManaAbility")) {
+            if (sa.isManaAbility()) {
+                return false;
+            }
+        } else if (property.equals("Buyback")) {
             if (!sa.isBuyBackAbility()) {
                 return false;
             }

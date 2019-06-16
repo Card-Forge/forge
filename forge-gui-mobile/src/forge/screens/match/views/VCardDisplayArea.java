@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
@@ -279,8 +280,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
             attachedPanels.clear();
 
-            if (card.isEnchanted()) {
-                final Iterable<CardView> enchants = card.getEnchantedBy();
+            if (card.hasCardAttachments()) {
+                final Iterable<CardView> enchants = card.getAttachedCards();
                 for (final CardView e : enchants) {
                     final CardAreaPanel cardE = CardAreaPanel.get(e);
                     if (cardE != null) {
@@ -289,34 +290,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 }
             }
        
-            if (card.isEquipped()) {
-                final Iterable<CardView> enchants = card.getEquippedBy();
-                for (final CardView e : enchants) {
-                    final CardAreaPanel cardE = CardAreaPanel.get(e);
-                    if (cardE != null) {
-                        attachedPanels.add(cardE);
-                    }
-                }
-            }
-
-            if (card.isFortified()) {
-                final Iterable<CardView> fortifications = card.getFortifiedBy();
-                for (final CardView e : fortifications) {
-                    final CardAreaPanel cardE = CardAreaPanel.get(e);
-                    if (cardE != null) {
-                        attachedPanels.add(cardE);
-                    }
-                }
-            }
-
-            if (card.getEnchantingCard() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getEnchantingCard()));
-            }
-            else if (card.getEquipping() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getEquipping()));
-            }
-            else if (card.getFortifying() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getFortifying()));
+            if (card.getAttachedTo() != null) {
+                setAttachedToPanel(CardAreaPanel.get(card.getAttachedTo()));
             }
             else {
                 setAttachedToPanel(null);
@@ -375,15 +350,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         public boolean selectCard(boolean selectEntireStack) {
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
+                Gdx.graphics.requestRendering();
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack
             if (prevPanelInStack != null && prevPanelInStack.selectCard(selectEntireStack)) {
+                Gdx.graphics.requestRendering();
                 return true;
             }
             //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
                 if (panel.selectCard(selectEntireStack)) {
+                    Gdx.graphics.requestRendering();
                     return true;
                 }
             }

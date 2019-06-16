@@ -1,0 +1,6 @@
+Name:Starfish
+ManaCost:no cost
+Types:Creature Starfish
+Colors:blue
+PT:0/1
+Oracle:

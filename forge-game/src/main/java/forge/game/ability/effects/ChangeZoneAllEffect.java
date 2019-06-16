@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
@@ -49,6 +48,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             cards = new CardCollection();
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
+
+                if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
+                    cards.removeAll(p.getCardsIn(ZoneType.Library));
+                }
+
             }
             if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
                 // Search library using changezoneall effect need a param "Search"
@@ -59,14 +63,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                         cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
                     }
                 }
-                if (sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+                if (!sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
                     // all these cards have "then that player shuffles", mandatory shuffle
                     cards.removeAll(game.getCardsIn(ZoneType.Library));
                 }
             }
         }
 
-        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
             CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
             CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
@@ -141,7 +145,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
         // movedCards should have same timestamp
         long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+        final CardZoneTable triggerList = new CardZoneTable();
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -178,7 +182,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     movedCard.setExiledWith(host);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
@@ -209,21 +213,13 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
             
             if (!movedCard.getZone().equals(originZone)) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }
         }
 
         game.getTriggerHandler().resetActiveTriggers(false);
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
+        triggerList.triggerChangesZoneAll(game);
 
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library

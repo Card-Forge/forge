@@ -41,7 +41,7 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
-    private CWorkshopUI() {
+    CWorkshopUI() {
     }
 
     /* (non-Javadoc)

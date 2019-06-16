@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Cruel Plots
-Description=Cruel Plots - Dragons of Tarkir U/B intro pack.
+Description=Feed your power with the corpses of the weak. This deck features the exploit mechanic, which lets you reap benefits by sacrificing creatures. Effects that trigger when creatures die will serve to further your advantage. Only the most ruthless will survive.
 Deck Type=constructed
 Set=DTK
 Image=cruel_plots.jpg
@@ -25,7 +25,7 @@ Image=cruel_plots.jpg
 2 Youthful Scholar|DTK
 2 Rakshasa Gravecaller|DTK
 2 Silumgar Butcher|DTK
-1 Necromaster Dragon|DTK
+1 Necromaster Dragon+|DTK
 2 Ruthless Deathfang|DTK
 1 Coat with Venom|DTK
 1 Ultimate Price|DTK

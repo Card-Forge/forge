@@ -62,7 +62,7 @@ public final class CardOverlaysMenu {
         toggleShowOverlaySetting();
         repaintCardOverlays();
         // Enable/disable overlay menu items based on state of "Show" menu.
-        for (Component c : ((JPopupMenu)showMenu.getParent()).getComponents()) {
+        for (Component c : showMenu.getParent().getComponents()) {
             if (c instanceof JMenuItem) {
                 JMenuItem m = (JMenuItem)c;
                 if (m != showMenu) {

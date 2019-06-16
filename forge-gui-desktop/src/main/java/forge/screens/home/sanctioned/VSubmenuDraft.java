@@ -5,6 +5,7 @@ import java.awt.Font;
 import javax.swing.*;
 
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -28,50 +29,51 @@ import forge.screens.home.VHomeUI.PnlDisplay;
 public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     /** */
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Booster Draft");
+
+    private final DragTab tab = new DragTab(localizer.getMessage("lblBoosterDraft"));
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Booster Draft");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderBoosterDraft"));
 
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
     private final DeckManager lstDecks = new DeckManager(GameType.Draft, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
-    private final JRadioButton radSingle = new FRadioButton("Play an opponent");
-    private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
+    private final JRadioButton radSingle = new FRadioButton(localizer.getMessage("lblPlayAnOpponent"));
+    private final JRadioButton radAll = new FRadioButton(localizer.getMessage("lblPlayAll7opponents"));
 
     private final JComboBox<String> cbOpponent = new JComboBox<String>();
 
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
-        .text("Build or select a deck").build();
+        .text(localizer.getMessage("lblBuildorselectadeck")).build();
 
     private final FLabel lblDir1 = new FLabel.Builder()
-        .text("In Draft mode, three booster packs are rotated around eight players.")
+        .text(localizer.getMessage("lblDraftText1"))
         .fontSize(12).build();
 
     private final FLabel lblDir2 = new FLabel.Builder()
-        .text("Build a deck from the cards you choose. The AI will do the same.")
+        .text(localizer.getMessage("lblDraftText2"))
         .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-        .text("Then, play against one or all of the AI opponents.")
+        .text(localizer.getMessage("lblDraftText3"))
         .fontSize(12).build();
 
-    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Booster Draft Game").fontSize(16).build();
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblNewBoosterDraftGame")).fontSize(16).build();
 
     /**
      * Constructor.
      */
-    private VSubmenuDraft() {
+    VSubmenuDraft() {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lstDecks.setCaption("Draft Decks");
+        lstDecks.setCaption(localizer.getMessage("lblDraftDecks"));
 
         final JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radSingle, "w 200px!, h 30px!");
@@ -98,7 +100,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
      */
     @Override
     public String getMenuTitle() {
-        return "Booster Draft";
+        return localizer.getMessage("lblBoosterDraft");
     }
 
     /* (non-Javadoc)

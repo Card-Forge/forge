@@ -43,6 +43,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 public class CardState extends GameObject {
     private String name = "";
     private CardType type = new CardType();
@@ -68,6 +71,10 @@ public class CardState extends GameObject {
 
     private final CardStateView view;
     private final Card card;
+
+    public CardState(Card card, CardStateName name) {
+        this(card.getView().createAlternateState(name), card);
+    }
 
     public CardState(CardStateView view0, Card card0) {
         view = view0;
@@ -209,7 +216,19 @@ public class CardState extends GameObject {
         if (s.trim().length() == 0) {
             return null;
         }
-        KeywordInterface inst = intrinsicKeywords.add(s); 
+        KeywordInterface inst = null;
+        try {
+            inst = intrinsicKeywords.add(s);
+        } catch (Exception e) {
+            String msg = "CardState:addIntrinsicKeyword: failed to parse Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", card.getName()).withData("Keyword", s).build()
+            );
+
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
+        }
         if (inst != null && initTraits) {
             inst.createTraits(card, true);
         }
@@ -229,6 +248,9 @@ public class CardState extends GameObject {
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {
+        return intrinsicKeywords.remove(s);
+    }
+    public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
         return intrinsicKeywords.remove(s);
     }
 
@@ -504,7 +526,12 @@ public class CardState extends GameObject {
         }
     }
 
-    
+    public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        CardState result = new CardState(host, name);
+        result.copyFrom(this, lki);
+        return result;
+    }
+
     public CardRarity getRarity() {
         return rarity;
     }
@@ -539,7 +566,7 @@ public class CardState extends GameObject {
             intrinsicKeywords.insert(inst);
         }
     }
-    
+
     public void updateChangedText() {
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
             .addAll(manaAbilities)
@@ -551,6 +578,21 @@ public class CardState extends GameObject {
         for (final CardTraitBase ctb : allAbs) {
             if (ctb.isIntrinsic()) {
                 ctb.changeText();
+            }
+        }
+    }
+
+    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(manaAbilities)
+            .addAll(nonManaAbilities)
+            .addAll(triggers)
+            .addAll(replacementEffects)
+            .addAll(staticAbilities)
+            .build();
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.changeTextIntrinsic(colorMap, typeMap);
             }
         }
     }

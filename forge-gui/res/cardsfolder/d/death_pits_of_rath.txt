@@ -6,6 +6,6 @@ SVar:DeathDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature is dealt damage, destroy it. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTarget | NoRegen$ True
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pits_of_rath.jpg
 Oracle:Whenever a creature is dealt damage, destroy it. It can't be regenerated.

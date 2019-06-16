@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 1 W | Name$ Equal Treatment Effect | ReplacementEffects$ Eq
 SVar:EqualEvent:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwo | Description$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.
 SVar:DmgTwo:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 2
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/equal_treatment.jpg
 Oracle:If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.\nDraw a card.

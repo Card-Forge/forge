@@ -1,0 +1,9 @@
+Name:Territorial Boar
+ManaCost:1 G
+Types:Creature Boar
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, CARDNAME gets +1/+1 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance
+AI:RemoveDeck:Random
+SVar:BuffedBy:Creature.powerGE4
+Oracle:Whenever a creature with power 4 or greater enters the battlefield under your control, Territorial Boar gets +1/+1 and gains vigilance until end of turn.

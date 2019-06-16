@@ -20,6 +20,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.*;
 import forge.quest.StartingPoolPreferences.PoolType;
+import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
@@ -632,7 +633,11 @@ public class NewQuestScreen extends FScreen {
                         final StartingPoolPreferences userPrefs =
                                 new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), numberOfBoostersField.getValue());
                         QuestController qc = FModel.getQuest();
-                        qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
+
+                        //DeckConstructionRules are only used for the desktop's commander quest mode
+                        DeckConstructionRules dcr = DeckConstructionRules.Default;
+
+                        qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
                         qc.save();
 
                         // Save in preferences.

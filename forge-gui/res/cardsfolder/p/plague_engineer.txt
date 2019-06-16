@@ -1,0 +1,11 @@
+Name:Plague Engineer
+ManaCost:2 B
+Types:Creature Carrier
+PT:2/2
+K:Deathtouch
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | StackDescription$ SpellDescription
+AI:RemoveDeck:Random
+S:Mode$ Continuous | Affected$ Creature.ChosenType+OppCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures of the chosen type your opponents control get -1/-1.
+SVar:PlayMain1:TRUE
+Oracle:Deathtouch\nAs Plague Engineer enters the battlefield, choose a creature type.\nCreatures of the chosen type your opponents control get -1/-1.

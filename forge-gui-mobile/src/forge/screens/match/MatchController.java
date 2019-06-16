@@ -344,6 +344,16 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        return view.tempShowZones(controller, zonesToUpdate);
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+	view.hideZones(controller, zonesToUpdate);
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
@@ -471,11 +481,11 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
         return new WaitCallback<List<PaperCard>>() {
             @Override
             public void run() {
-                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
+                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this, message);
                 sideboardDialog.show();
             }
         }.invokeAndWait();
@@ -492,7 +502,8 @@ public class MatchController extends AbstractGuiGame {
 
         final Collection<CardView> revealList = delayedReveal.getCards();
         final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
-        final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
+        final InfoTab revealListTab = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone());
+        final FImage revealListImage = revealListTab != null ? revealListTab.getIcon() : null;
 
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
@@ -505,8 +516,16 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal) {
-        return SGuiChoose.order(title, "Selected", 0, -1, (List<GameEntityView>) optionList, null);
+    public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
+        final int m1 = max >= 0 ? optionList.size() - max : -1;
+        final int m2 = min >= 0 ? optionList.size() - min : -1;
+        return SGuiChoose.order(title, "Selected", m1, m2, (List<GameEntityView>) optionList, null);
+    }
+
+    @Override
+    public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	System.err.println("Not implemented yet - should never be called");
+	return null;
     }
 
     @Override

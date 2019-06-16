@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Remington Smisse 2
+Title=Remington Smisse
+Difficulty=medium
+Description=UB Surveil deck with Etrata, the Silencer.
+Icon=Remington Smisse.jpg
+Deck Type=constructed
+[main]
+3 Blink of an Eye|DOM
+2 Darkblade Agent|GRN
+4 Dimir Spybug|GRN
+2 Disinformation Campaign|GRN
+4 Drowned Catacomb|XLN
+3 Etrata, the Silencer|GRN
+8 Island|DOM
+2 Island|GRN
+2 Murder|M19
+3 Negate|RIX
+4 Nightveil Sprite|GRN
+4 Notion Rain|GRN
+3 Sinister Sabotage|GRN
+6 Swamp|DOM
+2 Swamp|GRN
+4 Thought Erasure|GRN
+4 Thoughtbound Phantasm|GRN
+[sideboard]

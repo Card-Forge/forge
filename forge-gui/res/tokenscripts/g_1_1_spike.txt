@@ -1,0 +1,6 @@
+Name:Spike
+ManaCost:no cost
+Types:Creature Spike
+Colors:green
+PT:1/1
+Oracle:

@@ -7,6 +7,7 @@ MciCode=grn
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
+AdditionalSetUnlockedInQuest=GK1
 
 [cards]
 1 C Blade Instructor
@@ -284,6 +285,9 @@ Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Sec
 273 M Impervious Greatwurm
 
 [tokens]
+w_4_4_angel_flying_vigilance
 w_1_1_soldier_lifelink
 u_1_1_bird_illusion_flying
 r_1_1_goblin
+gw_2_2_elf_knight_vigilance
+bg_1_1_insect

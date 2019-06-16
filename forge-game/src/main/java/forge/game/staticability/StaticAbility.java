@@ -19,7 +19,6 @@ package forge.game.staticability;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -30,6 +29,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -200,23 +200,6 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             String desc = getParam("Description");
             desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
 
-            if (desc.contains("ORIGINALTEXTONLY:")) {
-                // Only display the description if the text of the card is not changed via GainTextOf.
-                desc = TextUtil.fastReplace(desc, "ORIGINALTEXTONLY:", "");
-
-                boolean hasOrigText = this.hostCard.getStates().contains(CardStateName.OriginalText);
-                if (hasOrigText) {
-                    String origName = this.hostCard.getState(CardStateName.OriginalText).getName();
-                    String curName = this.hostCard.getName();
-
-                    if (origName.equals(curName)) {
-                        return desc;
-                    } else {
-                        return TextUtil.concatNoSpace("^ Text changed (", origName, ") ^");
-                    }
-                }
-            }
-
             return desc;
         } else {
             return "";
@@ -258,6 +241,10 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.layers = this.generateLayer();
         this.hostCard = host;
         this.intrinsic = stAb.intrinsic;
+
+        // Copy old sVars
+        this.sVars.putAll(stAb.sVars);
+        // but if they are References use this ones
         buildCommonAttributes(host);
     }
 
@@ -400,6 +387,43 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         return false;
     }
 
+    public final boolean applyAbility(String mode, Card card, CounterType type) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantPutCounter")) {
+            return StaticAbilityCantPutCounter.applyCantPutCounter(this, card, type);
+
+        }
+
+        return false;
+    }
+
+    public final boolean applyAbility(String mode, Player player, CounterType type) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantPutCounter")) {
+            return StaticAbilityCantPutCounter.applyCantPutCounter(this, player, type);
+
+        }
+
+        return false;
+    }
 
     /**
      * Apply ability.
@@ -458,6 +482,8 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
         } else if (mode.equals("CantBlockBy") && target instanceof Card) {
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
+        } else if (mode.equals("CantAttach")) {
+            return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         }
 
         return false;
@@ -514,7 +540,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (hasParam("EffectZone")) {
             if (!getParam("EffectZone").equals("All")) {
-                Zone zone = getHostCard().getZone();
+                Zone zone = game.getZoneOf(getHostCard());
                 if (zone == null || !ZoneType.listValueOf(getParam("EffectZone")).contains(zone.getZoneType())) {
                     return false;
                 }

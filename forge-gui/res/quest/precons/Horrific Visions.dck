@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Horrific Visions
-Description=Horrific Visions - Shadows over Innistrad B/G intro pack.
+Description=Delving into eldritch secrets can shatter the mind, but it can also bring great power. As you bring a wide variety of arcane magic to bear against your opponent, you'll grow closer and closer to the unearthly insight that will lead you to victory.
 Deck Type=constructed
 Set=SOI
 Image=horrific_visions.jpg
@@ -20,7 +20,7 @@ Image=horrific_visions.jpg
 1 Crow of Dark Tidings|SOI
 2 Tooth Collector|SOI
 2 Stallion of Ashmouth|SOI
-1 Soul Swallower|SOI
+1 Soul Swallower+|SOI
 1 Ghoulsteed|SOI
 1 Hound of the Farbogs|SOI
 1 Morkrut Necropod|SOI

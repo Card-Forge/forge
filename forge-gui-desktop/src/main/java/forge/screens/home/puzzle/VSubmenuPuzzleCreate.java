@@ -9,6 +9,7 @@ import forge.match.LocalLobby;
 import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.screens.home.*;
 import forge.toolbox.FLabel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -16,9 +17,9 @@ import java.awt.*;
 
 public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Puzzle Mode: Create");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblPuzzleModeCreate"));
 
     private final GameLobby lobby = new LocalLobby();
     private final VLobby vLobby = new VLobby(lobby);
@@ -68,7 +69,7 @@ public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
 
     @Override
     public String getMenuTitle() {
-        return "Create";
+        return localizer.getMessage(("lblCreate"));
     }
 
     @Override
@@ -111,7 +112,7 @@ public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
 
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
-        vLobby.getLblTitle().setText("Puzzle Mode: Create");
+        vLobby.getLblTitle().setText(localizer.getMessage("lblPuzzleModeCreate"));
         container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
         container.add(lblInfo, "h 30px!, gap 0 0 0 5px, al center");

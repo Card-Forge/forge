@@ -17,13 +17,14 @@
  */
 package forge.game.cost;
 
+import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
- * The Class CostPayLife.
+ * The Class CostDamage.
  */
 public class CostDamage extends CostPart {
 
@@ -47,7 +48,7 @@ public class CostDamage extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Pay ").append(this.getAmount()).append(" Life");
+        sb.append("Deal ").append(this.getAmount()).append(" damage to you");
         return sb.toString();
     }
 
@@ -68,12 +69,17 @@ public class CostDamage extends CostPart {
         final Card source = sa.getHostCard();
         CardDamageMap damageMap = new CardDamageMap();
         CardDamageMap preventMap = new CardDamageMap();
+        GameEntityCounterTable table = new GameEntityCounterTable();
 
-        payer.addDamage(decision.c, source, damageMap, preventMap, sa);
+        payer.addDamage(decision.c, source, damageMap, preventMap, table, sa);
 
         preventMap.triggerPreventDamage(false);
         damageMap.triggerDamageDoneOnce(false, sa);
+        table.triggerCountersPutAll(payer.getGame());
 
+        preventMap.clear();
+        damageMap.clear();
+        table.clear();
         return decision.c > 0;
     }
 

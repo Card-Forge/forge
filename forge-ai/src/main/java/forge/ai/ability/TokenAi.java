@@ -8,8 +8,10 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.TokenEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
@@ -58,20 +60,9 @@ public class TokenAi extends SpellAbilityAi {
     private void readParameters(final SpellAbility mapParams) {
         this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
 
-        TokenEffect effect = new TokenEffect();
-
-        this.actualToken = effect.loadTokenPrototype(mapParams);
+        this.actualToken = TokenInfo.getProtoType(mapParams.getParam("TokenScript"), mapParams);
 
         if (actualToken == null) {
-            String[] keywords;
-
-            if (mapParams.hasParam("TokenKeywords")) {
-                // TODO: Change this Split to a semicolon or something else
-                keywords = mapParams.getParam("TokenKeywords").split("<>");
-            } else {
-                keywords = new String[0];
-            }
-
             this.tokenPower = mapParams.getParam("TokenPower");
             this.tokenToughness = mapParams.getParam("TokenToughness");
         } else {
@@ -87,7 +78,7 @@ public class TokenAi extends SpellAbilityAi {
         // Planeswalker-related flags
         boolean pwMinus = false;
         boolean pwPlus = false;
-        if (sa.getRestrictions().isPwAbility()) {
+        if (sa.isPwAbility()) {
             /*
              * Planeswalker token ability with loyalty costs should be played in
              * Main1 or it might never be used due to other positive abilities.
@@ -176,7 +167,7 @@ public class TokenAi extends SpellAbilityAi {
          */
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevent infinite tokens?
@@ -239,7 +230,7 @@ public class TokenAi extends SpellAbilityAi {
             alwaysOnOppAttack = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS);
         }
 
-        if (sa.getRestrictions() != null && sa.getRestrictions().isPwAbility() && alwaysFromPW) {
+        if (sa.isPwAbility() && alwaysFromPW) {
             return true;
         } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
@@ -270,13 +261,13 @@ public class TokenAi extends SpellAbilityAi {
         num = (num == null) ? "1" : num;
         final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
         CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
-        		ComputerUtil.getOpponentFor(ai), topStack.getHostCard(), sa);
+        		ai.getWeakestOpponent(), topStack.getHostCard(), sa);
         list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
         // only care about saving single creature for now
         if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) {
             ComputerUtilCard.sortByEvaluateCreature(list);
             list.add(token);
-            list = CardLists.getValidCards(list, valid.split(","), ComputerUtil.getOpponentFor(ai), topStack.getHostCard(), sa);
+            list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(), sa);
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
             if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
                     && list.contains(token)) {
@@ -294,7 +285,7 @@ public class TokenAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+                sa.getTargets().add(ai.getWeakestOpponent());
             } else {
                 sa.getTargets().add(ai);
             }
@@ -340,6 +331,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // TODO: AILogic
+        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
@@ -359,6 +351,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
         // TODO: AILogic
+        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
@@ -389,6 +382,7 @@ public class TokenAi extends SpellAbilityAi {
      * @param sa Token SpellAbility
      * @return token creature created by ability
      */
+    @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa) {
         return spawnToken(ai, sa, false);
     }
@@ -401,8 +395,16 @@ public class TokenAi extends SpellAbilityAi {
      * @return token creature created by ability
      */
     // TODO Is this just completely copied from TokenEffect? Let's just call that thing
+    @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa, boolean notNull) {
         final Card host = sa.getHostCard();
+
+        Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+
+        if (result != null) {
+            result.setController(ai, 0);
+            return result;
+        }
 
         String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
         String tokenPower = sa.getParam("TokenPower");

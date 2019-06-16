@@ -2,9 +2,10 @@ Name:Bramblewood Paragon
 ManaCost:1 G
 Types:Creature Elf Warrior
 PT:2/2
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.Warrior+YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Warrior+YouCtrl+Other
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+DeckNeeds:Type$Warrior
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblewood_paragon.jpg
 Oracle:Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.\nEach creature you control with a +1/+1 counter on it has trample.

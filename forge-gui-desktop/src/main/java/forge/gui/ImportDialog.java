@@ -490,7 +490,7 @@ public class ImportDialog {
         }
 
         @Override
-        protected Void doInBackground() throws Exception {
+        protected Void doInBackground() {
             Timer timer = null;
 
             try {
@@ -867,7 +867,7 @@ public class ImportDialog {
         }
 
         @Override
-        protected Void doInBackground() throws Exception {
+        protected Void doInBackground() {
             try {
                 // working with textbox text is thread safe
                 _operationLog.setText("");

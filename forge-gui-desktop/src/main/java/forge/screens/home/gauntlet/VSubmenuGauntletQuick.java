@@ -16,6 +16,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedSlider;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -31,19 +32,19 @@ import java.awt.*;
 public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     /** */
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Quick Gauntlets");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuickGauntlets"));
 
     // Other fields
     private final FPanel pnlOptions = new FPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Quick Gauntlet Builder").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("lblQuickGauntletBuilder")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
     private final FLabel lblDecklist = new FLabel.Builder()
-        .text("Double click a non-random deck for its decklist.")
+        .text(localizer.getMessage("lblDecklist"))
         .fontSize(12).build();
 
     private final SkinnedSlider sliOpponents = new SkinnedSlider(SwingConstants.HORIZONTAL, 5, 50, 20);
@@ -64,21 +65,19 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final FDeckChooser lstDecks = new FDeckChooser(null, false, GameType.Constructed, false);
 
     private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
-            .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
+            .fontStyle(Font.BOLD).text(localizer.getMessage("lblOptions")).fontAlign(SwingConstants.CENTER).build();
 
     private final FLabel lblDesc1 = new FLabel.Builder()
-            .text("Matches per gauntlet").fontStyle(Font.ITALIC).build();
+            .text(localizer.getMessage("lblMatchesperGauntlet")).fontStyle(Font.ITALIC).build();
 
     private final FLabel lblDesc3 = new FLabel.Builder()
-            .text("Allowed deck types").fontStyle(Font.ITALIC).build();
+            .text(localizer.getMessage("lblAllowedDeckTypes")).fontStyle(Font.ITALIC).build();
 
-    private final FLabel lblDesc = new FLabel.Builder().text(
-            "A new quick gauntlet is auto-saved. They can be loaded in the \"Load Gauntlet\" screen.")
-            .fontSize(12).build();
+    private final FLabel lblDesc = new FLabel.Builder().text(localizer.getMessage("lblAutosaveInf")).fontSize(12).build();
 
     private final StartButton btnStart  = new StartButton();
 
-    private VSubmenuGauntletQuick() {
+    VSubmenuGauntletQuick() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxUserDecks.setSelected(true);
@@ -107,7 +106,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setSnapToTicks(true);
         sliOpponents.setOpaque(false);
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sliOpponents.setFont(FSkin.getFont(12));
+        sliOpponents.setFont(FSkin.getFont());
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
@@ -147,7 +146,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
      */
     @Override
     public String getMenuTitle() {
-        return "Quick Gauntlet";
+        return localizer.getMessage("lblQuickGauntlet");
     }
 
     /* (non-Javadoc)

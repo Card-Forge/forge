@@ -1,0 +1,6 @@
+Name:Spellkeeper Weird
+ManaCost:2 U
+Types:Creature Weird
+PT:1/4
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+Oracle:{2}, {T}, Sacrifice Spellkeeper Weird: Return target instant or sorcery card from your graveyard to your hand.

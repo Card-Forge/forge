@@ -121,7 +121,10 @@ public class EffectEffect extends SpellAbilityEffect {
         // Grant SVars first in order to give references to granted abilities
         if (effectSVars != null) {
             for (final String s : effectSVars) {
-                final String actualSVar = hostCard.getSVar(s);
+                Card host = sa.getOriginalHost() != null && sa.getHostCard().getSVar(s).isEmpty()
+                        && sa.getOriginalHost().hasSVar(s) ? sa.getOriginalHost() : sa.getHostCard();
+
+                final String actualSVar = host.getSVar(s);
                 eff.setSVar(s, actualSVar);
             }
         }
@@ -263,6 +266,13 @@ public class EffectEffect extends SpellAbilityEffect {
             }
             else if (duration.equals("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(endEffect);
+            }
+            else if (duration.equals("UntilTheEndOfYourNextTurn")) {
+                if (game.getPhaseHandler().isPlayerTurn(controller)) {
+                    game.getEndOfTurn().registerUntilEnd(controller, endEffect);
+                } else {
+                    game.getEndOfTurn().addUntilEnd(controller, endEffect);
+                }
             }
             else if (duration.equals("ThisTurnAndNextTurn")) {
                 game.getUntap().addAt(new GameCommand() {

@@ -15,6 +15,6 @@ SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Flying | Permanent$ True | Con
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cocoon.jpg
 Oracle:Enchant creature you control\nWhen Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon.\nEnchanted creature doesn't untap during your untap step if Cocoon has a pupa counter on it.\nAt the beginning of your upkeep, remove a pupa counter from Cocoon. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying.

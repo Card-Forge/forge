@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All c
 SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
 Oracle:All creatures have haste.

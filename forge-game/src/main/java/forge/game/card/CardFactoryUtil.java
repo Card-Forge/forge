@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import forge.GameCommand;
 import forge.card.*;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -33,6 +32,7 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -62,6 +62,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 
 /**
  * <p>
@@ -98,16 +102,18 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                Card c = hostCard.getGame().getAction().moveToPlay(hostCard, this);
-                c.setPreFaceDownState(CardStateName.Original);
+                hostCard.getGame().getAction().moveToPlay(hostCard, this);
+                //c.setPreFaceDownState(CardStateName.Original);
             }
 
             @Override
             public boolean canPlay() {
                 CardStateName stateBackup = hostCard.getCurrentStateName();
-                hostCard.setState(CardStateName.FaceDown, false);
+                boolean face = hostCard.isFaceDown();
+                hostCard.turnFaceDownNoUpdate();
                 boolean success = super.canPlay();
                 hostCard.setState(stateBackup, false);
+                hostCard.setFaceDown(face);
                 return success;
             }
         };
@@ -132,27 +138,33 @@ public class CardFactoryUtil {
     public static SpellAbility abilityMorphUp(final Card sourceCard, final String costStr, final boolean mega) {
         Cost cost = new Cost(costStr, true);
         String costDesc = cost.toString();
-        // get rid of the ": " at the end
-        costDesc = costDesc.substring(0, costDesc.length() - 2);
-
+        StringBuilder sbCost = new StringBuilder(mega ? "Megamorph" : "Morph");
+        sbCost.append(" ");
         if (!cost.isOnlyManaCost()) {
-            costDesc = "—" + costDesc;
+            sbCost.append("— ");
         }
+        // get rid of the ": " at the end
+        sbCost.append(costDesc.substring(0, costDesc.length() - 2));
 
-        String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph" + costDesc
-                + " | MorphUp$ True"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown"
-                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)";
+        StringBuilder sb = new StringBuilder();
+        sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
+        sb.append(" | MorphUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown");
         if (mega) {
-            ab += " | Mega$ True";
+            sb.append(" | Mega$ True");
         }
 
-        final SpellAbility morphUp = AbilityFactory.getAbility(ab, sourceCard);
+        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)");
+
+        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
+
+        // if Cost has X in cost, need to check source for an SVar for this
+        if (cost.hasXInAnyCostPart() && sourceCard.hasSVar("X")) {
+            morphUp.setSVar("X", sourceCard.getSVar("X"));
+        }
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         morphUp.setStackDescription(sbStack.toString());
-        morphUp.setIsMorphUp(true);
 
         return morphUp;
     }
@@ -162,18 +174,17 @@ public class CardFactoryUtil {
         String costDesc = manaCost.toString();
 
         // Cost need to be set later
-        String ab = "ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest " + costDesc
-                + " | ManifestUp$ True"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+manifested"
-                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)";
+        StringBuilder sb = new StringBuilder();
+        sb.append("ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest ").append(costDesc);
+        sb.append(" | ManifestUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown+manifested");
+        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)");
 
-        final SpellAbility manifestUp = AbilityFactory.getAbility(ab, sourceCard);
+        final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
         manifestUp.setPayCosts(new Cost(manaCost, true));
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         manifestUp.setStackDescription(sbStack.toString());
-        manifestUp.setIsManifestUp(true);
 
         return manifestUp;
     }
@@ -494,7 +505,11 @@ public class CardFactoryUtil {
         }
 
         if (players.size() > 0) {
-            return playerXProperty(players.get(0), s, source);
+            int totCount = 0;
+            for (Player p : players) {
+                totCount += playerXProperty(p, s, source);
+            }
+            return totCount;
         }
 
         return doXMath(n, m, source);
@@ -623,6 +638,10 @@ public class CardFactoryUtil {
                 oppDmg += opp.getAssignedDamage();
             }
             return doXMath(oppDmg, m, source);
+        }
+
+        if (value.equals("OpponentsAttackedThisTurn")) {
+            return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source);
         }
         
         return doXMath(0, m, source);
@@ -842,7 +861,11 @@ public class CardFactoryUtil {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(cc.getCommanderCast(c), m, c);
         }
-        
+
+        if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
+            return doXMath(cc.getTotalCommanderCast(), m, c);
+        }
+
         if (l[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
@@ -973,11 +996,7 @@ public class CardFactoryUtil {
             return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
         }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
-            int lost = 0;
-            for (Player opp : cc.getOpponents()) {
-                lost += opp.getLifeLostThisTurn();
-            }
-            return doXMath(lost, m, c);
+            return doXMath(cc.getOpponentLostLifeThisTurn(), m, c);
         }
         if (sq[0].equals("TotalDamageDoneByThisTurn")) {
             return doXMath(c.getTotalDamageDoneBy(), m, c);
@@ -1026,8 +1045,9 @@ public class CardFactoryUtil {
 
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
-            final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
-            return doXMath(topCard == null ? 0 : topCard.getCMC(), m, c);
+            int cmc = cc.getCardsIn(ZoneType.Library).isEmpty() ? 0 :
+                cc.getCardsIn(ZoneType.Library).getFirst().getCMC();
+            return doXMath(cmc, m, c);
         }
         
         // Count$EnchantedControllerCreatures
@@ -1092,6 +1112,25 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
 
+        if (sq[0].contains("CreatureType")) {
+            String[] sqparts = sq[0].split(" ", 2);
+            final String[] rest = sqparts[1].split(",");
+
+            final CardCollectionView cardsInZones = sqparts[0].length() > 12
+                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
+                : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
+            final Set<String> creatTypes = Sets.newHashSet();
+
+            for (Card card : cards) {
+                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
+            }
+            int n = creatTypes.contains("AllCreatureTypes") ? CardType.getAllCreatureTypes().size() : creatTypes.size();
+            return doXMath(n, m, c);
+        }
+
+
         if (sq[0].contains("Hellbent")) {
             return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
         }
@@ -1131,7 +1170,7 @@ public class CardFactoryUtil {
 
         if (sq[0].startsWith("Devoured")) {
             final String validDevoured = l[0].split(" ")[1];
-            CardCollection cl = CardLists.getValidCards(c.getDevoured(), validDevoured.split(","), cc, c, null);
+            CardCollection cl = CardLists.getValidCards(c.getDevouredCards(), validDevoured.split(","), cc, c, null);
             return doXMath(cl.size(), m, c);
         }
 
@@ -1230,10 +1269,10 @@ public class CardFactoryUtil {
             return doXMath(c.getPseudoKickerMagnitude(), m, c);
         }
 
-        // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfMainPhase")) {
+        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
+        if (sq[0].contains("IfCastInOwnMainPhase")) {
             final PhaseHandler cPhase = cc.getGame().getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc);
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), m, c);
         }
 
@@ -1371,7 +1410,7 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
         if (sq[0].startsWith("UniqueManaColorsProduced")) {
-            boolean untappedOnly = sq[0].contains("ByUntappedSources");
+            boolean untappedOnly = sq[1].contains("ByUntappedSources");
             int uniqueColors = 0;
             CardCollectionView otb = cc.getCardsIn(ZoneType.Battlefield);
             outer: for (byte color : MagicColor.WUBRG) {
@@ -1522,7 +1561,7 @@ public class CardFactoryUtil {
 
         //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InEnchantedHand")) {
-            GameEntity o = c.getEnchanting();
+            GameEntity o = c.getEntityAttachedTo();
             Player controller = null;
             if (o instanceof Card) {
                 controller = ((Card) o).getController();
@@ -1535,7 +1574,7 @@ public class CardFactoryUtil {
             }
         }
         if (sq[0].contains("InEnchantedYard")) {
-            GameEntity o = c.getEnchanting();
+            GameEntity o = c.getEntityAttachedTo();
             Player controller = null;
             if (o instanceof Card) {
                 controller = ((Card) o).getController();
@@ -1986,9 +2025,20 @@ public class CardFactoryUtil {
         // **************************************************
         // AbilityFactory cards
         for (String rawAbility : abilities) {
-            final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
-            card.addSpellAbility(intrinsicAbility);
-            intrinsicAbility.setIntrinsic(true);
+            try {
+                final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
+                card.addSpellAbility(intrinsicAbility);
+                intrinsicAbility.setIntrinsic(true);
+            } catch (Exception e) {
+                String msg = "CardFactoryUtil:addAbilityFactoryAbilities: crash in raw Ability";
+                Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", card.getName()).withData("Ability", rawAbility).build()
+                );
+
+                // rethrow the exception with card Name for the user
+                throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
+            }
         }
     }
 
@@ -2010,18 +2060,6 @@ public class CardFactoryUtil {
             inst.createTraits(card, true);
         }
 
-        // AddCost
-        if (card.hasSVar("FullCost")) {
-            String k[] = card.getSVar("FullCost").split(":");
-            final SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && sa1.isSpell()) {
-                sa1.setPayCosts(new Cost(k[0], sa1.isAbility()));
-                if (k.length > 1) {
-                    sa1.getMapParams().put("AILogic", k[1]);
-                }
-            }
-        }
-
         // AltCost
         String altCost = card.getSVar("AltCost");
         if (StringUtils.isNotBlank(altCost)) {
@@ -2030,13 +2068,18 @@ public class CardFactoryUtil {
                 card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
         }
-
     }
 
     private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
             final String effect, final boolean optional, final boolean secondary,
             final boolean intrinsic, final String valid, final String zone) {
         SpellAbility repAb = AbilityFactory.getAbility(effect, card);
+        return createETBReplacement(card, layer, repAb, optional, secondary, intrinsic, valid, zone);
+    }
+
+    private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
+            final SpellAbility repAb, final boolean optional, final boolean secondary,
+            final boolean intrinsic, final String valid, final String zone) {
         String desc = repAb.getDescription();
         setupETBReplacementAbility(repAb);
         if (!intrinsic) {
@@ -2088,7 +2131,7 @@ public class CardFactoryUtil {
         String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
                 + " | ETB$ True | CounterNum$ " + amount;
 
-        if (!StringUtils.isNumeric(amount)) {
+        if (!StringUtils.isNumeric(amount) && card.hasSVar(amount)) {
             abStr += " | References$ " + amount;
         }
 
@@ -2127,6 +2170,20 @@ public class CardFactoryUtil {
             afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
 
             inst.addTrigger(afflictTrigger);
+        } else if (keyword.startsWith("Afterlife")) {
+            final String k[] = keyword.split(":");
+            final String name = StringUtils.join(k, " ");
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self ");
+            sb.append("| Secondary$ True | TriggerDescription$ ").append(name);
+            sb.append(" (").append(inst.getReminderText()).append(")");
+            final String effect = "DB$ Token | TokenAmount$ " + k[1] +  " | TokenScript$ wb_1_1_spirit_flying";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Annihilator")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
@@ -2199,8 +2256,8 @@ public class CardFactoryUtil {
             inst.addTrigger(bushidoTrigger2);
         } else if (keyword.equals("Cascade")) {
             final StringBuilder trigScript = new StringBuilder(
-                    "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
-                    "True | TriggerDescription$ Cascade - CARDNAME");
+                    "Mode$ SpellCast | ValidCard$ Card.Self | Secondary$ True | " +
+                    "TriggerDescription$ Cascade - CARDNAME");
 
             final String abString = "DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ "
                     + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
@@ -2407,9 +2464,8 @@ public class CardFactoryUtil {
             final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n +
                     " | IsPresent$ Card.StrictlySelf | SpellDescription$ Put "
                     + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
-            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo"
-                    + " | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1"
-                    + " | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3 | SpellDescription$ Create "
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | TokenOwner$ You "
+                    + " | LegacyImage$ c 1 1 a servo aer | SpellDescription$ Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
@@ -2452,8 +2508,13 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Graft")) {
-            final String abStr = "DB$ MoveCounter | Source$ Self | "
-                    + "Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1";
+            final StringBuilder sb = new StringBuilder();
+            sb.append("DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy");
+            sb.append(" | CounterType$ P1P1 | CounterNum$ 1");
+
+            if (card.hasSVar("AIGraftPreference")) {
+                sb.append(" | AILogic$ ").append(card.getSVar("AIGraftPreference"));
+            }
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other"
                 + "| Origin$ Any | Destination$ Battlefield "
@@ -2464,7 +2525,7 @@ public class CardFactoryUtil {
                 + "may move a +1/+1 counter from this creature onto it.";
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+            trigger.setOverridingAbility(AbilityFactory.getAbility(sb.toString(), card));
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Haunt")) {
@@ -2602,8 +2663,7 @@ public class CardFactoryUtil {
             sbTrig.append("Living Weapon (" + inst.getReminderText() + ")");
 
             final StringBuilder sbGerm = new StringBuilder();
-            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
-            sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ");
+            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_germ |TokenOwner$ You | RememberTokens$ True");
 
             final SpellAbility saGerm = AbilityFactory.getAbility(sbGerm.toString(), card);
 
@@ -2676,47 +2736,28 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self | MiracleCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
+                    + " | MiracleCost$ " + manacost;
             final String abStrPlay = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
 
-            final String abStrEffect = "DB$ Effect | RememberObjects$ Self | Duration$ Permanent "
-                + " | StaticAbilities$ SMayLookAt | Triggers$ TrigCleanup";
+            String revealed = "DB$ ImmediateTrigger | TriggerDescription$ CARDNAME - Miracle";
 
-            final String abStrLook = "Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Hand "
-                + " | EffectZone$ Command | MayLookAt$ Player";
-
-            //SVar:TrigCleanup:
-            final String trigExile = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Hand " +
-                    " | Destination$ Any | TriggerZones$ Command | Static$ True | Execute$ MiracleSelfExile";
-
-            //SVar:DBExileSelf:
-            final String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"; 
-
-            final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True"
+            final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Number$ 1 | Secondary$ True"
                 + " | OptionalDecider$ You | Static$ True | TriggerDescription$ CARDNAME - Miracle";
-
-            final String trigStrRevealed = "Mode$ Revealed | ValidCard$ Card.Self | Miracle$ True"
-                + " | IsPresent$ Card.Self | PresentZone$ Hand | Secondary$ True"
-                + " | TriggerDescription$ CARDNAME - Miracle";
 
             final Trigger triggerDrawn = TriggerHandler.parseTrigger(trigStrDrawn, card, intrinsic);
 
             SpellAbility revealSA = AbilityFactory.getAbility(abStrReveal, card);
 
-            AbilitySub effectSA = (AbilitySub)AbilityFactory.getAbility(abStrEffect, card);
-            effectSA.setSVar("SMayLookAt", abStrLook);
-            effectSA.setSVar("TrigCleanup", trigExile);
-            effectSA.setSVar("MiracleSelfExile", abExile);
-            revealSA.setSubAbility(effectSA);
+            AbilitySub immediateTriggerSA = (AbilitySub)AbilityFactory.getAbility(revealed, card);
+
+            immediateTriggerSA.setAdditionalAbility("Execute", (AbilitySub)AbilityFactory.getAbility(abStrPlay, card));
+
+            revealSA.setSubAbility(immediateTriggerSA);
 
             triggerDrawn.setOverridingAbility(revealSA);
 
-            final Trigger triggerRevealed = TriggerHandler.parseTrigger(trigStrRevealed, card, intrinsic);
-
-            triggerRevealed.setOverridingAbility(AbilityFactory.getAbility(abStrPlay, card));
-
             inst.addTrigger(triggerDrawn);
-            inst.addTrigger(triggerRevealed);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
@@ -3422,12 +3463,10 @@ public class CardFactoryUtil {
             sb.append(m);
             sb.append(" (").append(inst.getReminderText()).append(")");
 
-            if ("Sunburst".equals(m)) {
-                card.setSVar(m, "Count$Converge");
-            }
-
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
-
+            if ("Sunburst".equals(m)) {
+                re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
+            }
             inst.addReplacement(re);
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
@@ -3461,9 +3500,39 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saExile);
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Riot")) {
+            final String choose = "DB$ GenericChoice | AILogic$ Riot | SpellDescription$ Riot";
+
+            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1" +
+                                " | SpellDescription$ Put a +1/+1 counter on it.";
+            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Permanent$ True | SpellDescription$ Haste";
+
+            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
+
+            List<AbilitySub> list = Lists.newArrayList();
+            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
+            list.add((AbilitySub)AbilityFactory.getAbility(haste, card));
+            saChoose.setAdditionalAbilityList("Choices", list);
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, saChoose, false, true, intrinsic, "Card.Self", "");
+
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Saga")) {
             String sb = "etbCounter:LORE:1:no Condition:no desc";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
+
+            inst.addReplacement(re);
+        }  else if (keyword.equals("Sunburst")) {
+            // Rule 702.43a If this object is entering the battlefield as a creature,
+            // ignoring any type-changing effects that would affect it
+            CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE;
+
+            StringBuilder sb = new StringBuilder("etbCounter:");
+            sb.append(t).append(":Sunburst:no Condition:");
+            sb.append("Sunburst (").append(inst.getReminderText()).append(")");
+
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+            re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
 
             inst.addReplacement(re);
         } else if (keyword.equals("Totem armor")) {
@@ -3502,7 +3571,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(cardre);
         } else if (keyword.equals("Unleash")) {
-            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
+            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
 
@@ -3576,7 +3645,15 @@ public class CardFactoryUtil {
         
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                 + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-            String repeffstr = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ";
+            
+            StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
+
+            // to show it on Nexus
+            if (card.isPermanent()) {
+                sb.append("| Secondary$ True");
+            }
+            sb.append("| Description$ ").append(keyword);
+
             String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
 
             SpellAbility sa = AbilityFactory.getAbility(ab, card);
@@ -3585,7 +3662,7 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(false);
             }
 
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            ReplacementEffect re = ReplacementHandler.parseReplacement(sb.toString(), card, intrinsic);
             re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(sa);
@@ -3644,6 +3721,35 @@ public class CardFactoryUtil {
                 inst.addSpellAbility(newSA);
                 
             }
+        } else if (keyword.startsWith("Adapt")) {
+            final String[] k = keyword.split(":");
+            final String magnitude = k[1];
+            final String manacost = k[2];
+            final String reduceCost = k.length > 3 ? k[3] : null;
+
+            Set<String> references = Sets.newHashSet();
+
+            String desc = "Adapt " + magnitude;
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | Adapt$ True | CounterNum$ " + magnitude
+                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
+
+            if (reduceCost != null) {
+                effect += "| ReduceCost$ " + reduceCost;
+                references.add(reduceCost);
+                desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
+            }
+            if (!references.isEmpty()) {
+                effect += "| References$ " + TextUtil.join(references, ",");
+            }
+
+            effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.equals("Aftermath") && card.getCurrentStateName().equals(CardStateName.RightSplit)) {
             // Aftermath does modify existing SA, and does not add new one
 
@@ -3652,6 +3758,19 @@ public class CardFactoryUtil {
             origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
             // The Exile part is done by the System itself
+        } else if (keyword.startsWith("Aura swap")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            final String effect = "AB$ ExchangeZone | Cost$ " + manacost + " | Zone2$ Hand | Type$ Aura "
+                    + " | PrecostDesc$ Aura swap | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
             final String counters = k[1];
@@ -3755,14 +3874,14 @@ public class CardFactoryUtil {
             // Epic does modify existing SA, and does not add new one
 
             // Add the Epic effect as a subAbility
-            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Unique$ True";
+            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent";
 
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
 
             card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
             card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                     + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
-            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
+            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource | Epic$ True");
 
             final SpellAbility origSA = card.getFirstSpellAbility();
 
@@ -3963,22 +4082,12 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));
-
-            CardState state = card.getState(CardStateName.FaceDown);
-            state.setSVars(card.getSVars());
-            KeywordInterface facedownKeyword = Keyword.getInstance("");
-            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], false));
-            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], false));
         } else if (keyword.startsWith("Megamorph")){
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));
-
-            CardState state = card.getState(CardStateName.FaceDown);
-            state.setSVars(card.getSVars());
-            KeywordInterface facedownKeyword = Keyword.getInstance("");
-            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], true));
-            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], true));
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();
@@ -4108,40 +4217,34 @@ public class CardFactoryUtil {
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
                     "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
-                    "| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
+                    "| CounterNum$ ScavengeX | SorcerySpeed$ True " +
                     "| PrecostDesc$ Scavenge | CostDesc$ " + ManaCostParser.parse(manacost) + 
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            card.setSVar("ScavengeX", "Count$CardPower");
-
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("ScavengeX", "Count$CardPower");
             sa.setIntrinsic(intrinsic);
 
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
-            
-        } else if (keyword.equals("Sunburst") && intrinsic) {
-            final GameCommand sunburstCIP = new GameCommand() {
-                private static final long serialVersionUID = 1489845860231758299L;
 
-                @Override
-                public void run() {
-                    CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE; 
-                    card.addCounter(t, card.getSunburstValue(), card.getController(), true);
-                }
-            };
+        } else if (keyword.startsWith("Spectacle")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
 
-            final GameCommand sunburstLP = new GameCommand() {
-                private static final long serialVersionUID = -7564420917490677427L;
+            newSA.setBasicSpell(false);
+            newSA.setSpectacle(true);
 
-                @Override
-                public void run() {
-                    card.setSunburstValue(0);
-                }
-            };
+            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
+                    + ")";
+            newSA.setDescription(desc);
 
-            card.addComesIntoPlayCommand(sunburstCIP);
-            card.addLeavesPlayCommand(sunburstLP);
+            newSA.setIntrinsic(intrinsic);
+
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
+
         } else if (keyword.startsWith("Surge")) {
             final String[] k = keyword.split(":");
             final Cost surgeCost = new Cost(k[1], false);
@@ -4185,7 +4288,9 @@ public class CardFactoryUtil {
                     final Card c = game.getAction().exile(this.getHostCard(), this);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
-                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true, table);
+                    table.triggerCountersPutAll(game);
                     
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
@@ -4208,17 +4313,33 @@ public class CardFactoryUtil {
 
             suspend.setTemporary(!intrinsic);
             inst.addSpellAbility(suspend);
+        } else if (keyword.startsWith("Transfigure")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Sac<1/CARDNAME>"
+                    + " | PrecostDesc$ Transfigure | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQTransfigureX"
+                    + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
+                    + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("TransfigureX", "Count$CardManaCost");
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Transmute")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
             final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
                     + " | PrecostDesc$ Transmute | CostDesc$ " + ManaCostParser.parse(manacost) + " | ActivationZone$ Hand"
-                    + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
+                    + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQTransmuteX"
                     + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
                     + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("TransmuteX", "Count$CardManaCost");
             sa.setIntrinsic(intrinsic);
 
             sa.setTemporary(!intrinsic);
@@ -4314,9 +4435,7 @@ public class CardFactoryUtil {
             sb.append(" | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append("| Origin$ Library | Destination$ Hand |");
             sb.append("ChangeType$ ").append(type);
-            // no Keyword.getReminderText, it does not work yet
-            sb.append(" | SpellDescription$ (Search your library for a ").append(desc).append(" card, reveal it,");
-            sb.append(" and put it into your hand. Then shuffle your library.)");
+            sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
@@ -4331,6 +4450,7 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {
         String keyword = inst.getOriginal();
         String effect = null;
+        Map<String, String> svars = Maps.newHashMap();
 
         if (keyword.startsWith("Absorb")) {
             final String[] k = keyword.split(":");
@@ -4341,6 +4461,18 @@ public class CardFactoryUtil {
             sb.append(n).append("| Secondary$ True | Description$ Absorb ").append(n);
             sb.append(" (").append(inst.getReminderText()).append(")");
             effect = sb.toString();
+        } else if (keyword.startsWith("Affinity")) {
+            final String[] k = keyword.split(":");
+            final String t = k[1];
+
+            String desc = "Artifact".equals(t) ? "artifacts" : CardType.getPluralType(t);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
+            sb.append("| Description$ Affinity for ").append(desc);
+            sb.append(" (").append(inst.getReminderText()).append(")");
+            effect = sb.toString();
+
+            svars.put("AffinityX", "Count$Valid " + t + ".YouCtrl");
         } else if (keyword.equals("Changeling")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
@@ -4426,6 +4558,9 @@ public class CardFactoryUtil {
         if (effect != null) {
             StaticAbility st = new StaticAbility(effect, card);
             st.setIntrinsic(intrinsic);
+            for (Map.Entry<String, String> e : svars.entrySet()) {
+                st.setSVar(e.getKey(), e.getValue());
+            }
             inst.addStaticAbility(st);
         }
     }

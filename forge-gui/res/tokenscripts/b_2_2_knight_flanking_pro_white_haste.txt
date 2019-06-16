@@ -1,0 +1,9 @@
+Name:Knight
+ManaCost:no cost
+Types:Creature Knight
+Colors:black
+PT:2/2
+K:Flanking
+K:Protection from white
+K:Haste
+Oracle:Flanking\nProtection from white\nHaste

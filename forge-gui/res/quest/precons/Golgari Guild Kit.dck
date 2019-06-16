@@ -1,0 +1,50 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Golgari Guild Kit
+Description=Welcome to the Golgari Swarm. This box contains everything you need to draw upon the cyclical powers of life and death to destroy your enemies. Let your foes fear the wrath of the underworld.
+Set=GK1
+Image=golgari_guild_kit.jpg
+[main]
+1 Abrupt Decay|GK1
+1 Charnel Troll|GRN
+2 Darkblast|GK1
+1 Deadbridge Chant|GK1
+1 Deadbridge Goliath|GK1
+1 Deathrite Shaman|GK1
+1 Drown in Filth|GK1
+2 Elves of Deep Shadow|GK1
+4 Forest|GK1|1
+4 Forest|GK1|2
+1 Gaze of Granite|GK1
+1 Glowspore Shaman|GRN
+1 Golgari Charm|GK1
+1 Golgari Findbroker|GRN
+2 Golgari Guildgate|GRN|1
+2 Golgari Guildgate|GRN|2
+4 Golgari Rot Farm|GK1
+2 Golgari Signet|GK1
+1 Grave-Shell Scarab|GK1
+1 Grisly Salvage|GK1
+1 Hatchery Spider|GRN
+1 Izoni, Thousand-Eyed+|GK1
+1 Jarad, Golgari Lich Lord|GK1
+2 Korozda Guildmage|GK1
+1 Lotleth Troll|GK1
+1 Necrotic Wound|GRN
+1 Plaguecrafter|GRN
+1 Putrefy|GK1
+1 Rhizome Lurcher|GRN
+1 Savra, Queen of the Golgari|GK1
+1 Shambling Shell|GK1
+1 Sisters of Stone Death|GK1
+1 Slum Reaper|GK1
+1 Status // Statue|GRN
+1 Stinkweed Imp|GK1
+4 Swamp|GK1|1
+4 Swamp|GK1|2
+1 Treasured Find|GK1
+1 Vigor Mortis|GK1

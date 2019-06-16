@@ -42,6 +42,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -132,16 +133,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void addAndUnfreeze(final SpellAbility ability) {
+        final Card source = ability.getHostCard();
+
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
-            ability.getRestrictions().abilityActivated();
+            source.addAbilityActivated(ability);
             ability.checkActivationResloveSubs();
         }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
                 ability.setHostCard(game.getAction().moveToStack(source, ability, null));
             }
@@ -231,7 +233,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (!hasLegalTargeting(sp, source)) {
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription());
+            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
+            System.err.println(str + sp.getAllTargetChoices());
+            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
             return;
         }
 
@@ -362,11 +366,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("CastSA", si.getSpellAbility(true));
             runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put("CurrentStormCount", thisTurnCast.size());
+            runParams.put("CurrentCastSpells", new CardCollection(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                if (source.isCommander()) {
+                if (source.isCommander() && (ZoneType.Command == source.getCastFrom())
+                        && source.getOwner().equals(activator)) {
                     activator.incCommanderCast(source);
                 }
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
@@ -390,6 +396,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 runParams.put("Vehicle", sp.getHostCard());
                 runParams.put("Crew", sp.getPaidList("TappedCards"));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
+            }
+        }
+
+        // Run SpellAbilityCopy triggers
+        if (sp.isCopied()) {
+            runParams.put("Activator", sp.getActivatingPlayer());
+            runParams.put("CopySA", si.getSpellAbility(true));
+            // Run SpellCopy triggers
+            if (sp.isSpell()) {
+                game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
             }
         }
 
@@ -476,7 +492,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             thisTurnCast.add(sp.getHostCard());
             sp.getActivatingPlayer().addSpellCastThisTurn();
         }
-        if (sp.isAbility() && sp.getRestrictions().isPwAbility()) {
+        if (sp.isAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
@@ -566,13 +582,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getHostCard();
         if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
-        if (tmp.getClones().size() > 0) {
-            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.equals(tmp)) {
-                    c.setClones(tmp.getClones());
-                }
-            }
-        }
         // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
         // sa.getHostCard().setXManaCostPaid(0);
     }

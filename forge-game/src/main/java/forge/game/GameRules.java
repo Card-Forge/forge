@@ -11,6 +11,7 @@ public class GameRules {
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
     private boolean matchAnteRarity = false;
+    private boolean sideboardForAI = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
 
     // it's a preference, not rule... but I could hardly find a better place for it
@@ -65,6 +66,14 @@ public class GameRules {
         matchAnteRarity = matchRarity;
     }
 
+    public boolean getSideboardForAI() {
+        return sideboardForAI;
+    }
+
+    public void setSideboardForAI(final boolean sideboard) {
+        sideboardForAI = sideboard;
+    }
+
     public int getGamesToWinMatch() {
         return gamesToWinMatch;
     }
@@ -78,7 +87,8 @@ public class GameRules {
     }
 
     public boolean hasCommander() {
-        return appliedVariants.contains(GameType.Commander) || appliedVariants.contains(GameType.TinyLeaders)
+        return appliedVariants.contains(GameType.Commander)
+                || appliedVariants.contains(GameType.TinyLeaders)
                 || appliedVariants.contains(GameType.Brawl);
     }
 

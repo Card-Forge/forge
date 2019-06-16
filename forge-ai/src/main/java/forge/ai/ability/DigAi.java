@@ -1,9 +1,13 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -20,7 +24,7 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
@@ -42,7 +46,9 @@ public class DigAi extends SpellAbilityAi {
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
         } else if ("AtOppEndOfTurn".equals(sa.getParam("AILogic"))) {
-            return game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN);
+            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
+                return false;
+            }
         }
 
         // don't deck yourself
@@ -60,7 +66,8 @@ public class DigAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("DigNum");
-        if (num != null && num.equals("X") && host.getSVar(num).equals("Count$xPaid")) {
+        final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
+        if (num != null && (num.equals("X") && host.getSVar(num).equals("Count$xPaid")) || payXLogic) {
             // By default, set PayX here to maximum value.
             if (!(sa instanceof AbilitySub) || host.getSVar("PayX").equals("")) {
                 int manaToSave = 0;
@@ -99,7 +106,7 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {
@@ -124,6 +131,25 @@ public class DigAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer) {
+        if ("DigForCreature".equals(sa.getParam("AILogic"))) {
+            Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
+            if (bestChoice == null) {
+                // no creatures, but maybe there's a morphable card that can be played as a creature?
+                CardCollection morphs = CardLists.filter(valid, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        return card.hasKeyword(Keyword.MORPH);
+                    }
+                });
+                if (!morphs.isEmpty()) {
+                    bestChoice = ComputerUtilCard.getBestAI(morphs);
+                }
+            }
+
+            // still nothing, so return the worst card since it'll be unplayable from exile (e.g. Vivien, Champion of the Wilds)
+            return bestChoice != null ? bestChoice : ComputerUtilCard.getWorstAI(valid);
+        }
+
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
             return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
         } else {

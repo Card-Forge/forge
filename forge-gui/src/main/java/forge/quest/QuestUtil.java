@@ -41,8 +41,10 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
+import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
+import forge.util.Localizer;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 
@@ -51,6 +53,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * <p>
@@ -180,7 +183,8 @@ public class QuestUtil {
     }
 
     public static void travelWorld() {
-        if (!checkActiveQuest("Travel between worlds.")) {
+        final Localizer localizer = Localizer.getInstance();
+        if (!checkActiveQuest(localizer.getMessage("lblTravelBetweenWorlds"))) {
             return;
         }
         final List<QuestWorld> worlds = new ArrayList<>();
@@ -197,7 +201,7 @@ public class QuestUtil {
             return;
         }
 
-        final String setPrompt = "Where do you wish to travel?";
+        final String setPrompt = localizer.getMessage("lblWhereDoYouWishToTravel");
         final QuestWorld newWorld = SGuiChoose.oneOrNone(setPrompt, worlds);
 
         if (worlds.indexOf(newWorld) < 0) {
@@ -210,10 +214,8 @@ public class QuestUtil {
                 needRemove = true;
 
                 if (!SOptionPane.showConfirmDialog(
-                        "You have uncompleted challenges in your current world. If you travel now, they will be LOST!"
-                        + "\nAre you sure you wish to travel anyway?\n"
-                        + "(Click \"No\" to go back  and complete your current challenges first.)",
-                        "WARNING: Uncompleted challenges")) {
+                        localizer.getMessage("lblUncompleteChallengesDesc"),
+                        localizer.getMessage("lblUncompleteChallengesWarning"))) {
                     return;
                 }
             }
@@ -283,6 +285,7 @@ public class QuestUtil {
     }
 
     private static void updatePlantAndPetForView(final IVQuestStats view, final QuestController qCtrl) {
+        final Localizer localizer = Localizer.getInstance();
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
             final List<QuestPetController> petList = qCtrl.getPetsStorage().getAvaliablePets(iSlot, qCtrl.getAssets());
             final String currentPetName = qCtrl.getSelectedPet(iSlot);
@@ -302,10 +305,10 @@ public class QuestUtil {
                 // Pet list visibility
                 if (!petList.isEmpty()) {
                     view.getCbxPet().setVisible(true);
-                    view.getCbxPet().addItem("Don't summon a pet");
+                    view.getCbxPet().addItem(localizer.getMessage("lblDontSummonAPet"));
 
                     for (final QuestPetController pet : petList) {
-                        final String name = "Summon " + pet.getName();
+                        final String name = localizer.getMessage("lblSummon").replace("%n","\"" + pet.getName() + "\"");
                         view.getCbxPet().addItem(name);
                         if (pet.getName().equals(currentPetName)) {
                             view.getCbxPet().setSelectedItem(name);
@@ -320,14 +323,14 @@ public class QuestUtil {
         view.getCbxMatchLength().removeAllItems();
         boolean activeCharms = false;
         StringBuilder matchLength = new StringBuilder();
-        matchLength.append("Match - Best of ").append(qCtrl.getMatchLength());
+        matchLength.append(localizer.getMessage("lblMatchBestof") + " ").append(qCtrl.getMatchLength());
         if (qCtrl.getAssets().hasItem(QuestItemType.CHARM_VIM)) {
-            view.getCbxMatchLength().addItem("Match - Best of 1");
+            view.getCbxMatchLength().addItem(localizer.getMessage("lblMatchBestOf1"));
             activeCharms = true;
         }
-        view.getCbxMatchLength().addItem("Match - Best of 3");
+        view.getCbxMatchLength().addItem(localizer.getMessage("lblMatchBestOf3"));
         if (qCtrl.getAssets().hasItem(QuestItemType.CHARM)) {
-            view.getCbxMatchLength().addItem("Match - Best of 5");
+            view.getCbxMatchLength().addItem(localizer.getMessage("lblMatchBestOf5"));
             activeCharms = true;
         }
         view.getCbxMatchLength().setSelectedItem(matchLength.toString());
@@ -371,12 +374,14 @@ public class QuestUtil {
         view0.getBtnBazaar().setVisible(true);
         view0.getLblLife().setVisible(true);
 
+        final Localizer localizer = Localizer.getInstance();
+
         // Stats panel
-        view0.getLblCredits().setText("Credits: " + QuestUtil.formatCredits(qS.getCredits()));
-        view0.getLblLife().setText("Life: " + qS.getLife(qCtrl.getMode()));
-        view0.getLblWins().setText("Wins: " + qA.getWin());
-        view0.getLblLosses().setText("Losses: " + qA.getLost());
-        view0.getLblWorld().setText("World: " + (qCtrl.getWorld() == null ? "(none)" : qCtrl.getWorld()));
+        view0.getLblCredits().setText(localizer.getMessage("lblCredits") + ": " + QuestUtil.formatCredits(qS.getCredits()));
+        view0.getLblLife().setText(localizer.getMessage("lblLife") + ": " + qS.getLife(qCtrl.getMode()));
+        view0.getLblWins().setText(localizer.getMessage("lblWins") + ": " + qA.getWin());
+        view0.getLblLosses().setText(localizer.getMessage("lblLosses") + ": " + qA.getLost());
+        view0.getLblWorld().setText(localizer.getMessage("lblWorld") +": "+ (qCtrl.getWorld() == null ? " (" + localizer.getMessage("lblNone") + ")" : qCtrl.getWorld()));
 
         // Show or hide the set unlocking button
 
@@ -386,38 +391,37 @@ public class QuestUtil {
         final int num = nextChallengeInWins();
         final String str;
         if (num == 0) {
-            str = "Your exploits have been noticed. An opponent has challenged you.";
+            str = localizer.getMessage("lblnextChallengeInWins0");
         }
         else if (num == 1) {
-            str = "A new challenge will be available after 1 more win.";
+            str = localizer.getMessage("lblnextChallengeInWins1");
         }
         else {
-            str = "A new challenge will be available in " + num + " wins.";
+            str =localizer.getMessage("lblnextChallengeInWins2").replace("%n","\"" + num + "\"");
         }
 
         view0.getLblNextChallengeInWins().setText(str);
 
         if (view0.allowHtml()) {
             view0.getLblWinStreak().setText(
-                    "<html>Win streak: " + qA.getWinStreakCurrent()
-                    + "<br>&nbsp; (Best: " + qA.getWinStreakBest() + ")</html>");
+                    "<html>" + localizer.getMessage("lblWinStreak") + ": " + qA.getWinStreakCurrent()
+                    + "<br>&nbsp; (" + localizer.getMessage("lblBest") + ": " + qA.getWinStreakBest() + ")</html>");
         }
         else {
             view0.getLblWinStreak().setText(
-                    "Win streak: " + qA.getWinStreakCurrent()
-                    + " (Best: " + qA.getWinStreakBest() + ")");
+                    localizer.getMessage("lblWinStreak") +": " + qA.getWinStreakCurrent()
+                    + " (" + localizer.getMessage("lblBest") + ": " + qA.getWinStreakBest() + ")");
         }
 
         // Current deck message
         final IButton lblCurrentDeck = view0.getLblCurrentDeck();
         if (getCurrentDeck() == null) {
             lblCurrentDeck.setTextColor(204, 0, 0);
-            lblCurrentDeck.setText("Build, then select a deck in the \"Quest Decks\" submenu.");
+            lblCurrentDeck.setText(localizer.getMessage("lblBuildAndSelectaDeck"));
         }
         else {
             lblCurrentDeck.setImage(FSkinProp.CLR_TEXT);
-            lblCurrentDeck.setText("Your current deck is \""
-                    + getCurrentDeck().getName() + "\".");
+            lblCurrentDeck.setText(localizer.getMessage("lblCurrentDeck").replace("%n","\"" + getCurrentDeck().getName() + "\"."));
         }
 
         // Start panel: pet, plant, zep.
@@ -464,10 +468,12 @@ public class QuestUtil {
     }
 
     public static boolean checkActiveQuest(final String location) {
+        final Localizer localizer = Localizer.getInstance();
+
         final QuestController qc = FModel.getQuest();
         if (qc == null || qc.getAssets() == null) {
-            final String msg = "Please create a Quest before attempting to " + location;
-            SOptionPane.showErrorDialog(msg, "No Quest");
+            final String msg = localizer.getMessage("PleaseCreateAQuestBefore").replace("%n",location);
+            SOptionPane.showErrorDialog(msg, localizer.getMessage("lblNoQuest"));
             System.out.println(msg);
             return false;
         }
@@ -476,7 +482,8 @@ public class QuestUtil {
 
     /** */
     public static void showSpellShop() {
-        if (!checkActiveQuest("Visit the Spell Shop.")) {
+        final Localizer localizer = Localizer.getInstance();
+        if (!checkActiveQuest(localizer.getMessage("lblVisitTheSpellShop"))) {
             return;
         }
         GuiBase.getInterface().showSpellShop();
@@ -484,7 +491,8 @@ public class QuestUtil {
 
     /** */
     public static void showBazaar() {
-        if (!checkActiveQuest("Visit the Bazaar.")) {
+        final Localizer localizer = Localizer.getInstance();
+        if (!checkActiveQuest(localizer.getMessage("lblVisitTheBazaar"))) {
             return;
         }
         GuiBase.getInterface().showBazaar();
@@ -492,7 +500,8 @@ public class QuestUtil {
 
     /** */
     public static void chooseAndUnlockEdition() {
-        if (!checkActiveQuest("Unlock Editions.")) {
+        final Localizer localizer = Localizer.getInstance();
+        if (!checkActiveQuest(localizer.getMessage("lblUnlockEditions"))) {
             return;
         }
         final QuestController qData = FModel.getQuest();
@@ -503,8 +512,8 @@ public class QuestUtil {
 
         final CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
-        SOptionPane.showMessageDialog("You have successfully unlocked " + unlocked.getName() + "!",
-                unlocked.getName() + " unlocked!", null);
+        SOptionPane.showMessageDialog(localizer.getMessage("lblUnlocked").replace("%n",unlocked.getName()),
+                localizer.getMessage("titleUnlocked").replace("%n",unlocked.getName()), null);
 
         QuestUtilUnlockSets.doUnlock(qData, unlocked);
     }
@@ -531,7 +540,17 @@ public class QuestUtil {
         Integer lifeHuman = null;
         boolean useBazaar = true;
         Boolean forceAnte = null;
-        int lifeAI = 20;
+
+        //Generate a life modifier based on this quest's variant as held in the Quest Controller's DeckConstructionRules
+        int variantLifeModifier = 0;
+
+        switch(FModel.getQuest().getDeckConstructionRules()){
+            case Default: break;
+            case Commander: variantLifeModifier = 20; break;
+        }
+
+        int lifeAI = 20 + variantLifeModifier;
+
         if (event instanceof QuestEventChallenge) {
             final QuestEventChallenge qc = ((QuestEventChallenge) event);
             lifeAI = qc.getAILife();
@@ -545,8 +564,9 @@ public class QuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        final RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
-        final RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
+        final RegisteredPlayer humanStart = getRegisteredPlayerByVariant(getDeckForNewGame());
+
+        final RegisteredPlayer aiStart = getRegisteredPlayerByVariant(event.getEventDeck());
 
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);
@@ -581,15 +601,37 @@ public class QuestUtil {
         rules.setGamesPerMatch(qData.getMatchLength());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+
+        final TreeSet<GameType> variant = new TreeSet<>();
+        if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){
+            variant.add(GameType.Commander);
+        }
+
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         gui.setPlayerAvatar(aiPlayer, event);
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                hostedMatch.startMatch(rules, null, starter, ImmutableMap.of(humanStart, gui));
+                hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui));
             }
         });
+    }
+
+    /**
+     * Uses the appropriate RegisteredPlayer command for generating a RegisteredPlayer based on this quest's variant as
+     * held by the QuestController's DeckConstructionRules.
+     * @param deck The deck to generate the RegisteredPlayer with
+     * @return A newly made RegisteredPlayer specific to the quest's variant
+     */
+    private static RegisteredPlayer getRegisteredPlayerByVariant(Deck deck){
+        switch (FModel.getQuest().getDeckConstructionRules()) {
+            case Default:
+                return new RegisteredPlayer(deck);
+            case Commander:
+                return RegisteredPlayer.forCommander(deck);
+        }
+        return null;
     }
 
     private static Deck getDeckForNewGame() {
@@ -610,27 +652,43 @@ public class QuestUtil {
      * @return True if a game can be started.
      */
     public static boolean canStartGame() {
-        if (!checkActiveQuest("Start a duel.") || null == event) {
+        final Localizer localizer = Localizer.getInstance();
+        if (!checkActiveQuest(localizer.getMessage("lblStartADuel")) || null == event) {
             return false;
         }
 
         final Deck deck = getDeckForNewGame();
         if (deck == null) {
-            final String msg = "Please select a Quest Deck.";
-            SOptionPane.showErrorDialog(msg, "No Deck");
+            final String msg = localizer.getMessage("lblSelectAQuestDeck");
+            SOptionPane.showErrorDialog(msg, localizer.getMessage("lblNoDeck"));
             System.out.println(msg);
             return false;
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
+            final String errorMessage = getDeckConformanceProblems(deck);
             if (null != errorMessage) {
-                SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
+                SOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n",errorMessage), "Invalid Deck");
                 return false;
             }
         }
 
         return true;
+    }
+
+    public static String getDeckConformanceProblems(Deck deck){
+        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);;
+
+        if(errorMessage != null) return errorMessage; //return immediately if the deck does not conform to quest requirements
+
+        //Check for all applicable deck construction rules per this quests's saved DeckConstructionRules enum
+        switch(FModel.getQuest().getDeckConstructionRules()){
+            case Commander:
+                errorMessage = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
+                break;
+        }
+
+        return errorMessage;
     }
 
     /** Duplicate in DeckEditorQuestMenu and

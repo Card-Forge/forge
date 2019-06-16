@@ -3,6 +3,6 @@ ManaCost:5 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 A:SP$ DestroyAll | Cost$ ExileFromHand<2/Card.White> | ValidCards$ Creature | CostDesc$ You may exile two white cards from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscour.jpg
 Oracle:You may exile two white cards from your hand rather than pay Sunscour's mana cost.\nDestroy all creatures.

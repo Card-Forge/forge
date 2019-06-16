@@ -1,0 +1,10 @@
+Name:Commence the Endgame
+ManaCost:4 U U
+Types:Instant
+K:CARDNAME can't be countered.
+A:SP$ Draw | Cost$ 4 U U | NumCards$ 2 | SpellDescription$ Draw two cards, then amass X, where X is the number of cards in your hand. | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Num$ X | References$ X
+DeckHints:Ability$Amass & Type$Zombie
+DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+SVar:X:Count$InYourHand
+Oracle:This spell can't be countered.\nDraw two cards, then amass X, where X is the number of cards in your hand.

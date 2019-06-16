@@ -143,24 +143,31 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (lose != null) {
+                final GameCommand loseControl = getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws);
                 if (lose.contains("LeavesPlay")) {
-                    sa.getHostCard().addLeavesPlayCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addLeavesPlayCommand(loseControl);
                 }
                 if (lose.contains("Untap")) {
-                    sa.getHostCard().addUntapCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addUntapCommand(loseControl);
                 }
                 if (lose.contains("LoseControl")) {
-                    sa.getHostCard().addChangeControllerCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addChangeControllerCommand(loseControl);
                 }
                 if (lose.contains("EOT")) {
-                    game.getEndOfTurn().addUntil(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    game.getEndOfTurn().addUntil(loseControl);
                     tgtC.setSVar("SacMe", "6");
                 }
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
-                    sa.getHostCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC,
-                            getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws)});
+                    sa.getHostCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC, loseControl});
+                }
+                if (lose.contains("UntilTheEndOfYourNextTurn")) {
+                    if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                        game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), loseControl);
+                    } else {
+                        game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), loseControl);
+                    }
                 }
             }
 
@@ -199,12 +206,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 final Ability ability = new Ability(hostCard, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-
-                        if (bNoRegen) {
-                            game.getAction().destroyNoRegeneration(c, null);
-                        } else {
-                            game.getAction().destroy(c, null);
-                        }
+                        game.getAction().destroy(c, null, !bNoRegen, null);
                     }
                 };
                 final StringBuilder sb = new StringBuilder();
@@ -254,6 +256,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (sa.hasParam("AllValid")) {
             return AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
         }
-        return getTargetCards(sa);
+        return getDefinedCardsOrTargeted(sa);
     }
 }

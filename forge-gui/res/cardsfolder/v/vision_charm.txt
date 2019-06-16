@@ -9,6 +9,6 @@ SVar:ChooseType2:DB$ ChooseType | Defined$ You | Type$ Basic Land | AILogic$ Mos
 SVar:AnimateFirst:DB$ AnimateAll | ValidCards$ Land.IsRemembered | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PhaseArtifact:DB$ Phases | ValidTgts$ Artifact | TgtPrompt$ Choose a artifact | SpellDescription$ Target artifact phases out.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_charm.jpg
 Oracle:Choose one —\n• Target player puts the top four cards of their library into their graveyard.\n• Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.\n• Target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)

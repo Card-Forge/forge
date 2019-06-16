@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Phyrexian Poison
-Description=This deck returns to an age-old victory path for defeating your opponents: poison! 
+Description=The infect mechanic in this green and black deck allows your creatures, like the mighty Putrefx, to spread the Phyrexian contagion. After you've inflicted ten poison counters, your opponent's only remedy will be to demand a rematch!
 Deck Type=constructed
 Set=SOM
 Image=phyrexian_poison.jpg
@@ -24,7 +24,7 @@ Image=phyrexian_poison.jpg
 1 Hand of the Praetors|SOM
 2 Ichor Rats|SOM
 3 Plague Stinger|SOM
-1 Putrefax|SOM
+1 Putrefax+|SOM
 2 Tangle Angler|SOM
 1 Relic Putrescence|SOM
 2 Carrion Call|SOM

@@ -65,7 +65,7 @@ public final class SOverflowUtil {
         public void mouseClicked(final MouseEvent e) {
             final JPanel pnl = FView.SINGLETON_INSTANCE.getPnlTabOverflow();
             if (pnl != null) {
-                pnl.setVisible(pnl.isVisible() ? false : true);
+                pnl.setVisible(!pnl.isVisible());
             }
         }
     };

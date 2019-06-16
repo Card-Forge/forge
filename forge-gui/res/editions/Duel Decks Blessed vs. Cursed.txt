@@ -83,3 +83,9 @@ Type=Duel_Decks
 74 L Swamp
 75 L Swamp
 76 L Swamp
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_human
+w_1_1_spirit_flying
+b_2_2_zombie

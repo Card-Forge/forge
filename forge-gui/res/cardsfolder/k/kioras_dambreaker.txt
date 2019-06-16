@@ -1,0 +1,9 @@
+Name:Kiora's Dambreaker
+ManaCost:5 U
+Types:Creature Leviathan
+PT:5/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters
+Oracle:When Kiora's Dambreaker enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each a counter of each kind already there.)

@@ -36,7 +36,7 @@ public class LblMenuItem extends SkinnedLabel implements ILocalRepaint {
     public LblMenuItem(final IVSubmenu<? extends ICDoc> doc0) {
         super("      " + doc0.getMenuTitle());
 
-        this.setFont(FSkin.getFont(14));
+        this.setFont(FSkin.getRelativeFont(14));
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {

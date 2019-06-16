@@ -1,0 +1,7 @@
+Name:Graveborn
+ManaCost:no cost
+Types:Creature Graveborn
+Colors:black,red
+K:Haste
+PT:3/1
+Oracle:Haste

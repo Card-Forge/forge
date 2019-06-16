@@ -17,20 +17,12 @@
  */
 package forge.game.phase;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -41,6 +33,12 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -272,18 +270,13 @@ public class Untap extends Phase {
             } else if (c.hasKeyword(Keyword.PHASING)) {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
-                if (c.isAura()) {
-                    final GameEntity ent = c.getEnchanting();
-
-                    if ((ent instanceof Card) && list.contains(ent)) {
+                if (c.isAura() || c.isFortification()) {
+                    final Card ent = c.getAttachedTo();
+                    if (ent != null && list.contains(ent)) {
                         continue;
                     }
                 } else if (c.isEquipment() && c.isEquipping()) {
                     if (list.contains(c.getEquipping())) {
-                        continue;
-                    }
-                } else if (c.isFortification() && c.isFortifying()) {
-                    if (list.contains(c.getFortifying())) {
                         continue;
                     }
                 }

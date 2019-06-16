@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mob Rule
-Description=Goblins have a simple philosophy: Why bother trying to outthink the opposition when you can just set them on fire instead?
+Description=Hordes of goblins are spoiling for a fight in this aggressive deck. Get ready to raze the city, as legendary goblin Krenko, Mob Boss recruits another goblin for every goblin you already have. As your mob grows, your opponent will have no place to hide.
 Deck Type=constructed
 Set=M13
 Image=mob_rule.jpg
@@ -15,7 +15,7 @@ Image=mob_rule.jpg
 1 Rummaging Goblin|M13
 2 Mogg Flunkies|M13
 2 Flinthoof Boar|M13
-1 Krenko, Mob Boss|M13
+1 Krenko, Mob Boss+|M13
 2 Reckless Brute|M13
 2 Dragon Hatchling|M13
 2 Fire Elemental|M13

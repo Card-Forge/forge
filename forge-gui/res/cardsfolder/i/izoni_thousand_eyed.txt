@@ -1,0 +1,11 @@
+Name:Izoni, Thousand-Eyed
+ManaCost:2 B B G G
+Types:Legendary Creature Elf Shaman
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Undergrowth - When CARDNAME enters the battlefield, create a 1/1 black and green Insect creature token for each creature card in your graveyard.
+SVar:TrigToken:DB$Token | TokenAmount$ X | TokenOwner$ You | LegacyImage$ bg 1 1 insect grn | References$ X | TokenScript$ bg_1_1_insect
+SVar:X:Count$TypeInYourYard.Creature
+A:AB$ GainLife | Cost$ B G Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:Undergrowth — When Izoni, Thousand-Eyed enters the battlefield, create a 1/1 black and green Insect creature token for each creature card in your graveyard.\n{B}{G}, Sacrifice another creature: You gain 1 life and draw a card.

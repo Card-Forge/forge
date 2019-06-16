@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Vraska, Regal Gorgon
+Description=Vraska's life has been defined by violence, and she will stop at nothing to bring justice to those who have wronged her. Fill your graveyard with creature, then draw on the power of death to crush your foe.
+Deck Type=constructed
+Set=GRN
+Image=vraska_regal_gorgon.jpg
+[Main]
+3 Attendant of Vraska|GRN
+2 Bartizan Bats|GRN
+1 Beast Whisperer|GRN
+1 Bounty of Might|GRN
+3 Dead Weight|GRN
+1 Devkarin Dissident|GRN
+1 Douser of Lights|GRN
+10 Forest|GRN
+2 Glowspore Shaman|GRN
+4 Golgari Guildgate|GRN
+2 Ironshell Beetle|GRN
+1 Kraul Foragers|GRN
+4 Kraul Raider|GRN
+1 Lotleth Giant|GRN
+2 Prey Upon|GRN
+2 Rhizome Lurcher|GRN
+3 Spinal Centipede|GRN
+12 Swamp|GRN
+1 Swarm Guildmage|GRN
+2 Vraska's Stoneglare|GRN
+1 Vraska, Regal Gorgon+|GRN
+1 Wild Ceratok|GRN

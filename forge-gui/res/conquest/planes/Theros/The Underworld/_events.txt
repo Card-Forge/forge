@@ -6,3 +6,4 @@ Name:Mind Drain|Deck:UBMilling.dck|Variant:None|Avatar:Phenax, God of Deception|
 Name:Athreos|Deck:Athreos.dck|Variant:Commander|Avatar:Athreos, God of Passage|Desc:
 Name:Daxos the Returned|Deck:DaxosReturned.dck|Variant:Commander|Avatar:Daxos the Returned|Desc:
 Name:Ashiok|Deck:AshiokPW.dck|Variant:Planeswalker|Avatar:Ashiok, Nightmare Weaver|Desc:
+Name:Random Underworld|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

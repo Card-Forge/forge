@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Primal Fury
+Description=Create additional mana to summon massive monsters to crush your enemies.
+Deck Type=constructed
+Set=ANA
+[Main]
+1 Banefire|M19
+1 Carnage Tyrant|XLN
+2 Charging Monstrosaur|XLN
+2 Charging Tuskodon|RIX
+2 Colossal Majesty|M19
+3 Draconic Disciple|M19
+2 Druid of the Cowl|M19
+3 Elvish Rejuvenator|M19
+1 Etali, Primal Storm|RIX
+10 Forest|GRN
+2 Frenzied Raptor|XLN
+1 Goreclaw, Terror of Qal Sisma|M19
+2 Knight of the Stampede|RIX
+3 Lightning Strike|M19
+3 Llanowar Elves|M19
+9 Mountain|GRN
+1 Needletooth Raptor|RIX
+1 Pelakka Wurm|M19
+2 Raptor Hatchling|XLN
+1 Rootbound Crag|XLN
+3 Shock|M19
+1 Silverclad Ferocidons|RIX
+4 Timber Gorge|M19
+
+

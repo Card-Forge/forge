@@ -1391,11 +1391,6 @@ Woodland Stream
 10 Selesnya Guildgate|GRN
 10 Dimir Guildgate|GRN
 10 Boros Guildgate|GRN
-5 Forest|GRN
-5 Island|GRN
-5 Mountain|GRN
-5 Plains|GRN
-5 Swamp|GRN
 
 [GRN Secret Cards]
 Ral, Caller of Storms
@@ -1405,4 +1400,61 @@ Vraska, Regal Gorgon
 Attendant of Vraska
 Vraska's Stoneglare
 Impervious Greatwurm
+Precision Bolt
+Kraul Raider
+Golgari Guildgate|GRN
+Izzet Guildgate|GRN
+Selesnya Guildgate|GRN
+Dimir Guildgate|GRN
+Boros Guildgate|GRN
 
+[RNA Lands]
+10 Azorius Guildgate|RNA
+10 Gruul Guildgate|RNA
+10 Orzhov Guildgate|RNA
+10 Rakdos Guildgate|RNA
+10 Simic Guildgate|RNA
+
+[RNA Secret Cards]
+Dovin, Architect of Law
+Elite Arrester
+Dovin's Dismissal
+Dovin's Automaton
+Domri, City Smasher
+Ragefire
+Charging War Boar
+Domri's Nodorog
+The Haunt of Hightower
+Azorius Guildgate|RNA
+Gruul Guildgate|RNA
+Orzhov Guildgate|RNA
+Rakdos Guildgate|RNA
+Simic Guildgate|RNA
+
+[WAR Secret Cards]
+Gideon, the Oathsworn
+Desperate Lunge
+Gideon's Battle Cry
+Gideon's Company
+Orzhov Guildgate|WAR
+Jace, Arcane Strategist
+Guildpact Informant
+Jace's Projection
+Jace's Ruse
+Simic Guildgate|WAR
+Tezzeret, Master of the Bridge
+
+[MH1 Lands]
+10 Snow-Covered Plains|MH1
+10 Snow-Covered Island|MH1
+10 Snow-Covered Swamp|MH1
+10 Snow-Covered Mountain|MH1
+10 Snow-Covered Forest|MH1
+
+[MH1 Secret Cards]
+Flusterstorm
+Snow-Covered Plains
+Snow-Covered Island
+Snow-Covered Swamp
+Snow-Covered Mountain
+Snow-Covered Forest

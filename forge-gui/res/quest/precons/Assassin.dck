@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Assassin
-Description=Send in a swarm of small, black creatures backed up with creature destruction and discard effects to put a hit on the opposition and keep them on the run.
+Description=Send in a swarm of small, black creatures backed up with creature destruction and discard effects. You'll put a hit on your opponent's offense and keep it on the run. "Assassin" will take your opponent down.
 Deck Type=constructed
 Set=UDS
 Image=assassin.jpg

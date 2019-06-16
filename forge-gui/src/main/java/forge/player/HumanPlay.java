@@ -1,54 +1,39 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.cost.*;
-import forge.game.spellability.LandAbility;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-
 import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.FlipCoinEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.cost.*;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
-import forge.util.collect.FCollectionView;
 import forge.util.Lang;
+import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class HumanPlay {
@@ -100,9 +85,7 @@ public class HumanPlay {
             CharmEffect.makeChoices(sa);
         }
 
-        if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-            sa = AbilityUtils.addSpliceEffects(sa);
-        }
+        sa = AbilityUtils.addSpliceEffects(sa);
 
         if (sa.hasParam("Bestow")) {
             source.animateBestow();
@@ -214,9 +197,7 @@ public class HumanPlay {
                 if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
                     CharmEffect.makeChoices(sa);
                 }
-                if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
-                    sa = AbilityUtils.addSpliceEffects(sa);
-                }
+                sa = AbilityUtils.addSpliceEffects(sa);
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
@@ -322,7 +303,7 @@ public class HumanPlay {
 
         final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source);
         boolean mandatory = cost.isMandatory();
-        
+
         //the following costs do not need inputs
         for (CostPart part : parts) {
             boolean mayRemovePart = true;
@@ -367,7 +348,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostGainLife) {
                 PaymentDecision pd = part.accept(hcd);
-                
+
                 if (pd == null)
                     return false;
                 else
@@ -381,7 +362,7 @@ public class HumanPlay {
                     return false;
                 }
                 PaymentDecision pd = part.accept(hcd);
-                
+
                 if (pd == null)
                     return false;
                 else
@@ -408,58 +389,21 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostDamage) {
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                if (!p.canPayLife(amount)) {
+                // not a pay life but damage!
+                PaymentDecision pd = part.accept(hcd);
+
+                if (pd == null)
                     return false;
-                }
-
-                if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?", sourceAbility)) {
-                    return false;
-                }
-                CardDamageMap damageMap = new CardDamageMap();
-                CardDamageMap preventMap = new CardDamageMap();
-
-                p.addDamage(amount, source, damageMap, preventMap, sourceAbility);
-
-                preventMap.triggerPreventDamage(false);
-                damageMap.triggerDamageDoneOnce(false, sourceAbility);
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostPutCounter) {
-                CounterType counterType = ((CostPutCounter) part).getCounter();
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                if (part.payCostFromSource()) {
-                    if (!source.canReceiveCounters(counterType)) {
-                        String message = TextUtil.concatNoSpace("Won't be able to pay upkeep for ", source.toString(), " but it can't have ", counterType.getName(), " counters put on it.");
-                        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, message);
-                        return false;
-                    }
+                PaymentDecision pd = part.accept(hcd);
 
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?", sourceAbility)) {
-                        return false;
-                    }
-
-                    source.addCounter(counterType, amount, p, false);
-                }
-                else {
-                    CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
-                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
-                    if (list.isEmpty()) { return false; }
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?", sourceAbility)) {
-                        return false;
-                    }
-                    while (amount > 0) {
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
-                        inp.setMessage("Select a card to add a counter to");
-                        inp.setCancelAllowed(true);
-                        inp.showAndWait();
-                        if (inp.hasCancelled()) {
-                            continue;
-                        }
-                        Card selected = inp.getFirstSelected();
-                        selected.addCounter(counterType, 1, p, false);
-                        amount--;
-                    }
-                }
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveCounter) {
                 CounterType counterType = ((CostRemoveCounter) part).counter;
@@ -532,22 +476,19 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostExile) {
-                final CardCollection exiledList = new CardCollection();
+                CostExile costExile = (CostExile) part;
+
                 ZoneType from = ZoneType.Graveyard;
                 if ("All".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?", sourceAbility)) {
                         return false;
                     }
 
-                    CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Graveyard));
-                    for (final Card card : cards) {
-                        exiledList.add(p.getGame().getAction().exile(card, null));
-                    }
+                    costExile.executePayment(sourceAbility, p.getCardsIn(ZoneType.Graveyard));
                 }
                 else {
-                    CostExile costExile = (CostExile) part;
                     from = costExile.getFrom();
-                    List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
+                    CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;
@@ -558,11 +499,10 @@ public class HumanPlay {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
-                        for (Card c : list) {
-                            exiledList.add(p.getGame().getAction().exile(c, null));
-                        }
+                        costExile.executePayment(sourceAbility, list);
                     } else {
                         // replace this with input
+                        CardCollection newList = new CardCollection();
                         for (int i = 0; i < nNeeded; i++) {
                             final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
                             if (c == null) {
@@ -570,18 +510,10 @@ public class HumanPlay {
                             }
 
                             list.remove(c);
-                            exiledList.add(p.getGame().getAction().exile(c, null));
+                            newList.add(c);
                         }
+                        costExile.executePayment(sourceAbility, newList);
                     }
-                }
-
-                if (!exiledList.isEmpty()) {
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                    final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-                    triggerList.put(from, exiledList);
-                    runParams.put("Cards", triggerList);
-                    runParams.put("Destination", ZoneType.Exile);
-                    p.getGame().getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
                 }
             }
             else if (part instanceof CostPutCardToLib) {
@@ -631,7 +563,7 @@ public class HumanPlay {
                         }
                     }
                 }
-                else if (from == ZoneType.Hand) { // Tainted Specter
+                else { // Tainted Specter, Gurzigost, etc.
                     boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
                     if (!hasPaid) {
                         return false;
@@ -663,10 +595,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Hand));
-                    for (final Card card : cards) {
-                        p.discard(card, sourceAbility);
-                    }
+                    ((CostDiscard)part).executePayment(sourceAbility, p.getCardsIn(ZoneType.Hand));
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
@@ -734,7 +663,7 @@ public class HumanPlay {
             String promptCurrent = current == null ? "" : "Current Card: " + current;
             prompt = source + "\n" + promptCurrent;
         }
-        
+
         sourceAbility.clearManaPaid();
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
         if (!paid) {
@@ -755,42 +684,33 @@ public class HumanPlay {
             return false;
         }
 
-        for (Card c : inp.getSelected()) {
-            cpl.executePayment(sourceAbility, c);
-        }
+        cpl.executePayment(sourceAbility, new CardCollection(inp.getSelected()));
+
         if (sourceAbility != null) {
             cpl.reportPaidCardsTo(sourceAbility);
         }
         return true;
     }
-    
+
 
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
+        Card hostCard = ability.getHostCard();
+        final Game game = hostCard.getGame();
+
+        final CardZoneTable table = new CardZoneTable();
         if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
-            Card hostCard = ability.getHostCard();
-            final Game game = hostCard.getGame();
-
-            final CardCollection delved = new CardCollection();
-            final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
-                delved.add(game.getAction().exile(c, null));
-            }
-
-            if (!delved.isEmpty()) {
-                triggerList.put(ZoneType.Graveyard, delved);
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Cards", triggerList);
-                runParams.put("Destination", ZoneType.Exile);
-                game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
+                final ZoneType o = c.getZone().getZoneType();
+                final Card d = game.getAction().exile(c, null);
+                table.put(o, d.getZone().getZoneType(), d);
             }
         }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                ability.getHostCard().getGame().getAction().sacrifice(offering, ability);
+                game.getAction().sacrifice(offering, ability, table);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -798,7 +718,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                ability.getHostCard().getGame().getAction().sacrifice(emerge, ability);
+                game.getAction().sacrifice(emerge, ability, table);
             }
             ability.resetSacrificedAsEmerge();
         }
@@ -811,10 +731,13 @@ public class HumanPlay {
             }
             ability.clearTappedForConvoke();
         }
+        if (!table.isEmpty() && !manaInputCancelled) {
+            table.triggerChangesZoneAll(game);
+        }
         return !manaInputCancelled;
     }
-    
-    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
+
+    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
@@ -879,7 +802,7 @@ public class HumanPlay {
         }
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
-            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator);
+            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
@@ -899,7 +822,7 @@ public class HumanPlay {
             if (ability.getSacrificedAsOffering() != null) {
                 System.out.println("Finishing up Offering");
                 offering.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(offering, ability);
+                activator.getGame().getAction().sacrifice(offering, ability, null);
                 ability.resetSacrificedAsOffering();
             }
         }
@@ -910,15 +833,17 @@ public class HumanPlay {
             if (ability.getSacrificedAsEmerge() != null) {
                 System.out.println("Finishing up Emerge");
                 emerge.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(emerge, ability);
+                activator.getGame().getAction().sacrifice(emerge, ability, null);
                 ability.resetSacrificedAsEmerge();
             }
         }
         if (ability.getTappedForConvoke() != null) {
+            activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 c.tap();
             }
+            activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             ability.clearTappedForConvoke();
         }
         return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);

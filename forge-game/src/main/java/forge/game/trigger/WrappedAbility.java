@@ -27,14 +27,13 @@ import com.google.common.collect.Lists;
 public class WrappedAbility extends Ability {
 
     private final SpellAbility sa;
-    private final Trigger regtrig;
     private final Player decider;
 
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
         super(regtrig0.getHostCard(), ManaCost.ZERO, sa0.getView());
-        regtrig = regtrig0;
+        setTrigger(regtrig0);
         sa = sa0;
         decider = decider0;
         sa.setDescription(this.getStackDescription());
@@ -47,10 +46,6 @@ public class WrappedAbility extends Ability {
     @Override
     public boolean isWrapper() {
         return true;
-    }
-
-    public Trigger getTrigger() {
-        return regtrig;
     }
 
     public Player getDecider() {
@@ -181,6 +176,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public SpellAbility getSATargetingCard() {
+        return sa.getSATargetingCard();
+    }
+
+    @Override
     public Card getHostCard() {
         return sa.getHostCard();
     }
@@ -218,6 +218,7 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String getStackDescription() {
+        final Trigger regtrig = getTrigger();
         final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         if (usesTargeting()) {
             sb.append(" (Targeting ");
@@ -445,6 +446,7 @@ public class WrappedAbility extends Ability {
     @Override
     public void resolve() {
         final Game game = sa.getActivatingPlayer().getGame();
+        final Trigger regtrig = getTrigger();
         Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (!(regtrig instanceof TriggerAlways) && !triggerParams.containsKey("NoResolvingCheck")) {
@@ -476,6 +478,9 @@ public class WrappedAbility extends Ability {
             return;
         }
 
+        // set Trigger
+        sa.setTrigger(regtrig);
+
         if (!triggerParams.containsKey("NoTimestampCheck")) {
             timestampCheck();
         }
@@ -505,6 +510,9 @@ public class WrappedAbility extends Ability {
                 || ApiType.RemoveCounter.equals(sa.getApi())
                 || ApiType.AddOrRemoveCounter.equals(sa.getApi())
                 || ApiType.MoveCounter.equals(sa.getApi())
+                || ApiType.Draw.equals(sa.getApi())
+                || ApiType.GainLife.equals(sa.getApi())
+                || ApiType.LoseLife.equals(sa.getApi())
 
                 // Token has no Defined it should not be timestamp problems
                 || ApiType.Token.equals(sa.getApi())

@@ -5,19 +5,25 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.item.PaperToken;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 public class TokenInfo {
     final String name;
@@ -124,8 +130,6 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        // TODO - most tokens mana cost is 0, this needs to be fixed
-        // c.setManaCost(manaCost);
         c.setColor(color.isEmpty() ? manaCost : color);
         c.setToken(true);
 
@@ -152,14 +156,19 @@ public class TokenInfo {
         return sb.toString();
     }
 
-    public static Pair<Player, Integer> calculateMultiplier(final Game game, final Player controller,
+    public static List<Card> makeToken(final Card prototype, final Player controller,
             final boolean applyMultiplier, final int num) {
+        final List<Card> list = Lists.newArrayList();
+
+        final Game game = controller.getGame();
         int multiplier = num;
         Player player = controller;
+        Card proto = prototype;
 
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "CreateToken");
         repParams.put("Affected", player);
+        repParams.put("Token", prototype);
         repParams.put("TokenNum", multiplier);
         repParams.put("EffectOnly", applyMultiplier);
 
@@ -169,43 +178,37 @@ public class TokenInfo {
             case Updated: {
                 multiplier = (int) repParams.get("TokenNum");
                 player = (Player) repParams.get("Affected");
+                proto = (Card) repParams.get("Token");
                 break;
             }
             default:
                 multiplier = 0;
                 break;
         }
-        return Pair.of(player, multiplier);
-    }
-
-    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
-        final List<Card> list = Lists.newArrayList();
-        final Game game = controller.getGame();
-
-        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
-
-        for (int i = 0; i < result.getRight(); i++) {
-            list.add(makeOneToken(result.getLeft()));
+        if (multiplier <= 0) {
+            return list;
         }
-        return list;
-    }
 
-    static public List<Card> makeTokensFromPrototype(Card prototype, final Player controller, int amount, final boolean applyMultiplier) {
-        final List<Card> list = Lists.newArrayList();
-        final Game game = controller.getGame();
-
-        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
         long timestamp = game.getNextTimestamp();
-        prototype.setController(result.getLeft(), timestamp);
-        for (int i = 0; i < result.getRight(); i++) {
-            Card copy = CardFactory.copyCard(prototype, true);
+
+        for (int i = 0; i < multiplier; i++) {
+            // need to set owner or copyCard will fail with assign new ID
+            proto.setOwner(player);
+            Card copy = CardFactory.copyCard(proto, true);
             copy.setTimestamp(timestamp);
-            copy.setOwner(result.getLeft());
             copy.setToken(true);
             list.add(copy);
         }
 
         return list;
+    }
+
+    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
+        return makeToken(makeOneToken(controller), controller, applyMultiplier, amount);
+    }
+
+    static public List<Card> makeTokensFromPrototype(Card prototype, final Player controller, int amount, final boolean applyMultiplier) {
+        return makeToken(prototype, controller, applyMultiplier, amount);
     }
 
     public Card makeOneToken(final Player controller) {
@@ -220,5 +223,148 @@ public class TokenInfo {
             c.addIntrinsicKeyword(kw);
         }
         return c;
+    }
+
+    static public Card getProtoType(final String script, final SpellAbility sa) {
+        // script might be null, or sa might be null
+        if (script == null || sa == null) {
+            return null;
+        }
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
+        String edition = ObjectUtils.firstNonNull(sa.getOriginalHost(), host).getSetCode();
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+
+        if (token != null) {
+            final Card result = Card.fromPaperCard(token, null, game);
+
+            if (sa.hasParam("TokenPower")) {
+                String str = sa.getParam("TokenPower");
+                result.setBasePowerString(str);
+                result.setBasePower(AbilityUtils.calculateAmount(host, str, sa));
+            }
+
+            if (sa.hasParam("TokenToughness")) {
+                String str = sa.getParam("TokenToughness");
+                result.setBaseToughnessString(str);
+                result.setBaseToughness(AbilityUtils.calculateAmount(host, str, sa));
+            }
+
+            // update Token with CardTextChanges
+            Map<String, String> colorMap = sa.getChangedTextColors();
+            Map<String, String> typeMap = sa.getChangedTextTypes();
+            if (!colorMap.isEmpty()) {
+                if (!result.isColorless()) {
+                    // change Token Colors
+                    byte color = CardUtil.getColors(result).getColor();
+
+                    for (final Map.Entry<String, String> e : colorMap.entrySet()) {
+                        byte v = MagicColor.fromName(e.getValue());
+                        // Any used by Swirl the Mists
+                        if ("Any".equals(e.getKey())) {
+                            for (final byte c : MagicColor.WUBRG) {
+                                // try to replace color flips
+                                if ((color & c) != 0) {
+                                    color &= ~c;
+                                    color |= v;
+                                }
+                            }
+                        } else {
+                            byte c = MagicColor.fromName(e.getKey());
+                            // try to replace color flips
+                            if ((color & c) != 0) {
+                                color &= ~c;
+                                color |= v;
+                            }
+                        }
+                    }
+
+                    result.setColor(color);
+                }
+            }
+            if (!typeMap.isEmpty()) {
+                String oldName = result.getName();
+
+                CardType type = new CardType(result.getType());
+                String joinedName = StringUtils.join(type.getSubtypes(), " ");
+                final boolean nameGenerated = oldName.equals(joinedName);
+                boolean typeChanged = false;
+
+                if (!Iterables.isEmpty(type.getSubtypes())) {
+                    for (final Map.Entry<String, String> e : typeMap.entrySet()) {
+                        if (type.hasSubtype(e.getKey())) {
+                            type.remove(e.getKey());
+                            type.add(e.getValue());
+                            typeChanged = true;
+                        }
+                    }
+                }
+
+                if (typeChanged) {
+                    result.setType(type);
+
+                    // update generated Name
+                    if (nameGenerated) {
+                        result.setName(StringUtils.join(type.getSubtypes(), " "));
+                    }
+                }
+            }
+
+            // replace Intrinsic Keyword
+            List<KeywordInterface> toRemove = Lists.newArrayList();
+            List<String> toAdd = Lists.newArrayList();
+            for (final KeywordInterface k : result.getCurrentState().getIntrinsicKeywords()) {
+                final String o = k.getOriginal();
+                // only Modifiable should go there
+                if (!CardUtil.isKeywordModifiable(o)) {
+                    continue;
+                }
+                String r = new String(o);
+                // replace types
+                for (final Map.Entry<String, String> e : typeMap.entrySet()) {
+                    final String key = e.getKey();
+                    final String pkey = CardType.getPluralType(key);
+                    final String value = e.getValue();
+                    final String pvalue = CardType.getPluralType(e.getValue());
+                    r = r.replaceAll(pkey, pvalue);
+                    r = r.replaceAll(key, value);
+                }
+                // replace color words
+                for (final Map.Entry<String, String> e : colorMap.entrySet()) {
+                    final String vName = e.getValue();
+                    final String vCaps = StringUtils.capitalize(vName);
+                    final String vLow = vName.toLowerCase();
+                    if ("Any".equals(e.getKey())) {
+                        for (final byte c : MagicColor.WUBRG) {
+                            final String cName = MagicColor.toLongString(c);
+                            final String cNameCaps = StringUtils.capitalize(cName);
+                            final String cNameLow = cName.toLowerCase();
+                            r = r.replaceAll(cNameCaps, vCaps);
+                            r = r.replaceAll(cNameLow, vLow);
+                        }
+                    } else {
+                        final String cName = e.getKey();
+                        final String cNameCaps = StringUtils.capitalize(cName);
+                        final String cNameLow = cName.toLowerCase();
+                        r = r.replaceAll(cNameCaps, vCaps);
+                        r = r.replaceAll(cNameLow, vLow);
+                    }
+                }
+                if (!r.equals(o)) {
+                    toRemove.add(k);
+                    toAdd.add(r);
+                }
+            }
+            for (final KeywordInterface k : toRemove) {
+                result.getCurrentState().removeIntrinsicKeyword(k);
+            }
+            result.addIntrinsicKeywords(toAdd);
+
+            result.getCurrentState().changeTextIntrinsic(colorMap, typeMap);
+            return result;
+        }
+
+        return null;
     }
 }

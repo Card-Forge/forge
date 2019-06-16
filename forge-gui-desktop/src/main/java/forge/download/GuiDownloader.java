@@ -90,7 +90,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         radProxyNone.setSelected(true);
 
         btnClose.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
-        btnStart.setFont(FSkin.getFont(18));
+        btnStart.setFont(FSkin.getRelativeFont(18));
         btnStart.setEnabled(false);
 
         progressBar.reset();

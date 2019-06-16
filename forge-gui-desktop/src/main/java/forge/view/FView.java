@@ -65,7 +65,7 @@ public enum FView {
 	// Tab overflow is for the +X display for extra tabs.
 	private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
-	private FView() {
+	FView() {
 		frmSplash = new SplashFrame();
 		frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 		JOptionPane.setRootFrame(frmDocument);
@@ -265,7 +265,7 @@ public enum FView {
 			textPane.setOpaque(false);
 			textPane.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
 			textPane.setBorder(null);
-			textPane.setFont(FSkin.getFont(14).getBaseFont());
+			textPane.setFont(FSkin.getRelativeFont(14).getBaseFont());
 
 			final FLabel btnRemindMeLater = new FLabel.Builder().text("Remind Me Later").hoverable().opaque().build();
 			final FLabel btnDoNotRemindMe = new FLabel.Builder().text("Don't Remind Me Again").hoverable().opaque().build();

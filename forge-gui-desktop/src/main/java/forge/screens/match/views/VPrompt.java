@@ -116,11 +116,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
         if (prefs.getPrefBoolean(FPref.UI_COMPACT_PROMPT)) { //hide header and use smaller font if compact prompt
-        	tarMessage.setFont(FSkin.getFont(12));
+            tarMessage.setFont(FSkin.getFont());
         }
         else {
         	container.add(lblGames, "span 2, w 10:100%, h 22px!");
-        	tarMessage.setFont(FSkin.getFont(14));
+            tarMessage.setFont(FSkin.getRelativeFont(14));
         }
         lblGames.setText("Game Setup");
 

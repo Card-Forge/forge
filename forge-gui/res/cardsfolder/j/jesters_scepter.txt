@@ -12,6 +12,6 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 A:AB$ Counter | Cost$ 2 T ExiledMoveToGrave<1/Card.IsRemembered+ExiledWithSource/card exiled with CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Counter target spell if it has the same name as that card.
 SVar:X:Targeted$Valid Card.sharesNameWith MovedToGrave
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jesters_scepter.jpg
 Oracle:When Jester's Scepter enters the battlefield, exile the top five cards of target player's library face down. You may look at those cards for as long as they remain exiled.\n{2}, {T}, Put a card exiled with Jester's Scepter into its owner's graveyard: Counter target spell if it has the same name as that card.

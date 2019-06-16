@@ -1,27 +1,14 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
-import forge.game.Game;
-import forge.game.GameObject;
-import forge.game.GameObjectMap;
-import forge.game.GameRules;
-import forge.game.Match;
-import forge.game.StaticEffect;
-import forge.game.card.Card;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
+import forge.game.*;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.keyword.KeywordInterface;
@@ -30,12 +17,15 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GameCopier {
     private static final ZoneType[] ZONES = new ZoneType[] {
@@ -204,19 +194,16 @@ public class GameCopier {
             }
         }
         gameObjectMap = new CopiedGameObjectMap(newGame);
+
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
             otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
-            if (card.isEnchanting()) {
-                otherCard.setEnchanting(gameObjectMap.map(card.getEnchanting()));
-            }
-            if (card.isEquipping()) {
-                otherCard.equipCard(cardMap.get(card.getEquipping()));
-            }
-            if (card.isFortifying()) {
-                otherCard.setFortifying(cardMap.get(card.getFortifying()));
+            if (card.isAttachedToEntity()) {
+                GameEntity ge = gameObjectMap.map(card.getEntityAttachedTo());
+                otherCard.setEntityAttachedTo(ge);
+                ge.addAttachedCard(otherCard);
             }
             if (card.getCloneOrigin() != null) {
                 otherCard.setCloneOrigin(cardMap.get(card.getCloneOrigin()));
@@ -269,6 +256,7 @@ public class GameCopier {
                 System.err.println(sa.toString());
             }
         }
+
         return newCard;
     }
 
@@ -297,6 +285,8 @@ public class GameCopier {
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
+            newCard.setChangedCardNames(c.getChangedCardNames());
+
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
                 newCard.addHiddenExtrinsicKeyword(kw);
@@ -307,12 +297,13 @@ public class GameCopier {
             if (c.isFaceDown()) {
                 boolean isCreature = newCard.isCreature();
                 boolean hasManaCost = !newCard.getManaCost().isNoCost();
-                newCard.setState(CardStateName.FaceDown, true);
+                newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...
                     if (isCreature &&  hasManaCost) {
-                        newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
+                        newCard.getState(CardStateName.Original).addSpellAbility(
+                                CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
                     }
                 }
             }
@@ -324,16 +315,21 @@ public class GameCopier {
             }
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {
-                    SpellAbilityRestriction restrict = sa.getRestrictions();
-                    if (restrict.isPwAbility() && restrict.getNumberTurnActivations() > 0) {
+                    int active = sa.getActivationsThisTurn();
+                    if (sa.isPwAbility() && active > 0) {
                         SpellAbility newSa = findSAInCard(sa, newCard);
                         if (newSa != null) {
-                            for (int i = 0; i < restrict.getNumberTurnActivations(); i++) {
-                                newSa.getRestrictions().abilityActivated();
+                            for (int i = 0; i < active; i++) {
+                                newCard.addAbilityActivated(newSa);
                             }
                         }
                     }
                 }
+            }
+
+            newCard.setFlipped(c.isFlipped());
+            for (Map.Entry<Long, CardCloneStates> e : c.getCloneStates().entrySet()) {
+                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
             }
 
             Map<CounterType, Integer> counters = c.getCounters();

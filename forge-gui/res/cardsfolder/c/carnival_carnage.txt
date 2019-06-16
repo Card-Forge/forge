@@ -1,0 +1,16 @@
+Name:Carnival
+ManaCost:BR
+AlternateMode: Split
+Types:Instant
+A:SP$ DealDamage | Cost$ BR | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature or planeswalker and 1 damage to that permanent's controller.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 1
+Oracle:Carnival deals 1 damage to target creature or planeswalker and 1 damage to that permanent’s controller.
+
+ALTERNATE
+
+Name:Carnage
+ManaCost:2 B R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 2 B R | ValidTgts$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 3 damage to target player. That player discards two cards.
+SVar:DBDiscard:DB$Discard | Defined$ TargetedPlayer | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Carnage deals 3 damage to target opponent. That player discards two cards.

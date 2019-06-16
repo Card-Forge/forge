@@ -1,0 +1,8 @@
+Name:Emergency Powers
+ManaCost:5 W U
+Types:Instant
+A:SP$ ChangeZoneAll | Cost$ 5 W U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ Timetwister | SpellDescription$ Each player shuffles their hand and hand into their library, then draws seven cards. Exile CARDNAME.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBAddendum
+SVar:DBAddendum:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.cmcLE7+YouCtrl | ChangeNum$ 1 | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SpellDescription$ Addendum - If you cast this spell during your main phase, you may put a permanent card with converted mana cost 7 or less from your hand onto the battlefield.
+Oracle:Each player shuffles their hand and graveyard into their library, then draws seven cards. Exile Emergency Powers.\nAddendum — If you cast this spell during your main phase, you may put a permanent card with converted mana cost 7 or less from your hand onto the battlefield.

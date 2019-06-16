@@ -1,0 +1,51 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dimir Guild Kit
+Description=Welcome to the House Dimir. This box contains everything you need to harvest knowledge, sabotage enemies, and covertly communicate with fellow agents. Report back soon!
+Set=GK1
+Image=dimir_guild_kit.jpg
+[main]
+1 Barrier of Bones|GRN
+1 Blood Operative|GRN
+1 Call of the Nightwing|GK1
+1 Circu, Dimir Lobotomist|GK1
+1 Consuming Aberration|GK1
+4 Dimir Aqueduct|GK1
+1 Dimir Charm|GK1
+1 Dimir Doppelganger|GK1
+2 Dimir Guildgate|GRN|1
+2 Dimir Guildgate|GRN|2
+2 Dimir Guildmage|GK1
+2 Dimir Signet|GK1
+1 Dinrova Horror|GK1
+1 Discovery // Dispersal|GRN
+1 Disdainful Stroke|GRN
+1 Etrata, the Silencer+|GK1
+1 Glimpse the Unthinkable|GK1
+4 Island|GK1|1
+4 Island|GK1|2
+1 Last Gasp|GK1
+1 Lazav, Dimir Mastermind|GK1
+1 Mephitic Vapors|GRN
+1 Mirko Vosk, Mind Drinker|GK1
+1 Mission Briefing|GRN
+1 Moroii|GK1
+1 Netherborn Phalanx|GK1
+1 Nightveil Predator|GRN
+1 Nightveil Specter|GK1
+1 Notion Rain|GRN
+1 Price of Fame|GRN
+2 Ribbons of Night|GK1
+1 Stolen Identity|GK1
+4 Swamp|GK1|1
+4 Swamp|GK1|2
+1 Syncopate|GK1
+1 Szadek, Lord of Secrets|GK1
+1 Telling Time|GK1
+1 Unexplained Disappearance|GRN
+1 Wall of Mist|GRN
+1 Warped Physique|GK1

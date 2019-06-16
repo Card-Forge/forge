@@ -19,7 +19,6 @@ import com.google.common.collect.Sets;
 
 import forge.FThreads;
 import forge.assets.FSkinProp;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -178,8 +177,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         switch (altState.getState()) {
             case Original:
-                final CardStateView currentState = cv.getCurrentState();
-                if (currentState.getState() == CardStateName.FaceDown) {
+                if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
                 return true; //original can always be shown if not a face down that can't be shown
@@ -218,6 +216,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     public boolean isUsedToPay(final CardView card) {
         return highlightedCards.contains(card);
+    }
+
+    private final Set<CardView> selectableCards = Sets.newHashSet();
+    public void setSelectables(final Iterable<CardView> cards) {
+	for ( CardView cv : cards ) { selectableCards.add(cv); }
+    }
+    public void clearSelectables() {
+	selectableCards.clear();
+    }
+    public boolean isSelectable(final CardView card) {
+	return selectableCards.contains(card);
+    }
+    public boolean isSelecting() {
+	return !selectableCards.isEmpty();
     }
 
     /** Concede game, bring up WinLose UI. */

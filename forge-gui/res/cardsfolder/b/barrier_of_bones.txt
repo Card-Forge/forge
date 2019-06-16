@@ -1,0 +1,9 @@
+Name:Barrier of Bones
+ManaCost:B
+Types:Creature Skeleton Wall
+PT:0/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil & Ability$Graveyard
+Oracle:Defender\nWhen Barrier of Bones enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

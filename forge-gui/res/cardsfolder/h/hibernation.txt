@@ -2,6 +2,6 @@ Name:Hibernation
 ManaCost:2 U
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 2 U | ChangeType$ Permanent.Green | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all green permanents to their owners' hands.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation.jpg
 Oracle:Return all green permanents to their owners' hands.

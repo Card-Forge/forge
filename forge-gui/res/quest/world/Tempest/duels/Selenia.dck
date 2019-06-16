@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=Selenia, Dark Angel
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Black-white deck with Death Pits of Rath
+Deck Type=constructed
+Name=Selenia
+[Main]
+4 Death Pits of Rath|TMP
+4 Disenchant|TMP
+4 Evincar's Justice|TMP
+4 Oath of Lieges|EXO
+2 Orim's Prayer|TMP
+4 Paladin en-Vec|EXO
+2 Pit Spawn|EXO
+5 Plains|TMP|1
+2 Plains|TMP|2
+1 Plains|TMP|3
+2 Plains|TMP|4
+2 Selenia, Dark Angel|TMP
+4 Soltari Monk|TMP
+2 Spirit Mirror|TMP
+4 Reflecting Pool|TMP
+2 Swamp|TMP|1
+2 Swamp|TMP|2
+3 Swamp|TMP|3
+3 Swamp|TMP|4
+4 Youthful Knight|STH

@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Lightning Aggro
+Description=Mono red aggro burn deck - power up your Runaway Steam-Kin with cheap red spells, then fire off huge combos with Experimental Frenzy.
+Deck Type=constructed
+Set=RNA
+Image=lightning_aggro.jpg
+
+[Main]
+1 Banefire|M19
+2 Experimental Frenzy|GRN
+4 Fanatical Firebrand|RIX
+4 Ghitu Lavarunner|DOM
+4 Goblin Chainwhirler|DOM
+2 Lava Coil|GRN
+4 Lightning Strike|M19
+6 Mountain|M19|1
+7 Mountain|M19|2
+5 Mountain|M19|3
+4 Mountain|M19|4
+1 Rekindling Phoenix|RIX
+4 Runaway Steam-Kin|GRN
+4 Shock|M19
+4 Viashino Pyromancer|M19
+4 Wizard's Lightning|DOM
+[Sideboard]
+4 Diamond Mare|M19
+3 Fiery Cannonade|XLN
+4 Fight with Fire|DOM
+4 Lightning Mare|M19

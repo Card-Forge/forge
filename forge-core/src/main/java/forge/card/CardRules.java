@@ -352,9 +352,18 @@ public final class CardRules implements ICardCharacteristics {
 
             switch(key.charAt(0)) {
                 case 'A':
-                    if ("A".equals(key))
+                    if ("A".equals(key)) {
                         this.faces[curFace].addAbility(value);
-                    else if ("AlternateMode".equals(key)) {
+                    } else if ("AI".equals(key)) {
+                        colonPos = value.indexOf(':');
+                        String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
+                        value = colonPos > 0 ? value.substring(1+colonPos) : null;
+
+                        if ( "RemoveDeck".equals(variable) ) {
+                            this.removedFromAIDecks = "All".equalsIgnoreCase(value);
+                            this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
+                        }
+                    } else if ("AlternateMode".equals(key)) {
                         //System.out.println(faces[curFace].getName());
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
@@ -447,14 +456,8 @@ public final class CardRules implements ICardCharacteristics {
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ( "RemAIDeck".equals(variable) ) {
-                            this.removedFromAIDecks = "True".equalsIgnoreCase(value);
-                        } else if ( "RemRandomDeck".equals(variable) ) {
-                            this.removedFromRandomDecks = "True".equalsIgnoreCase(value);
-                        } else if ( "Picture".equals(variable) ) {
+                        if ( "Picture".equals(variable) ) {
                             this.pictureUrl[this.curFace] = value;
-                        } else if ( "Rarity".equals(variable) ) {
-                            // discard that, they should supply it in SetInfo
                         } else
                             this.faces[curFace].addSVar(variable, value);
                     } else if ("SetInfo".equals(key)) {

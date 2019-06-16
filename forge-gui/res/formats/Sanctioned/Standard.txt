@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:KLD, AER, AKH, W17, HOU, XLN, RIX, DOM, M19
-Banned: Attune with Aether; Rogue Refiner; Rampaging Ferocidon; Ramunap Ruins; Smuggler's Copter; Aetherworks Marvel; Felidar Guardian
+Sets:XLN, RIX, DOM, M19, G18, GRN, RNA, WAR
+Banned: Rampaging Ferocidon

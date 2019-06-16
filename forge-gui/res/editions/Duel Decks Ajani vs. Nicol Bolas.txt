@@ -86,3 +86,7 @@ Type=Duel_Decks
 37 U Vitu-Ghazi, the City-Tree
 4 C Wild Nacatl
 13 U Woolly Thoctar
+
+[tokens]
+w_2_2_griffin_flying
+g_1_1_saproling

@@ -1,0 +1,289 @@
+[metadata]
+Code=MH1
+Date=2019-06-14
+Name=Modern Horizons
+Code2=MH1
+MciCode=mh1
+Type=Other
+BoosterCovers=5
+Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
+
+
+[cards]
+1 M Morophon, the Boundless
+2 C Answered Prayers
+3 R Astral Drift
+4 U Battle Screech
+5 U Dismantling Blow
+6 C Enduring Sliver
+7 C Ephemerate
+8 U Face of Divinity
+9 U First Sliver's Chosen
+10 R Force of Virtue
+11 U Generous Gift
+12 C Gilded Light
+13 R Giver of Runes
+14 C Impostor of the Sixth Pride
+15 C Irregular Cohort
+16 U King of the Pride
+17 C Knight of Old Benalia
+18 C Lancer Sliver
+19 C Martyr's Soul
+20 R On Thin Ice
+21 M Ranger-Captain of Eos
+22 C Recruit the Worthy
+23 C Reprobation
+24 C Rhox Veteran
+25 C Segovian Angel
+26 M Serra the Benevolent
+27 C Settle Beyond Reality
+28 C Shelter
+29 R Sisay, Weatherlight Captain
+30 C Soul-Strike Technique
+31 U Splicer's Skill
+32 C Stirring Address
+33 C Trustworthy Scout
+34 U Valiant Changeling
+35 U Vesperlark
+36 C Wall of One Thousand Cuts
+37 R Winds of Abandon
+38 U Wing Shards
+39 U Zhalfirin Decoy
+40 R Archmage's Charm
+41 R Bazaar Trademage
+42 U Blizzard Strix
+43 C Chillerpillar
+44 C Choking Tethers
+45 U Cunning Evasion
+46 M Echo of Eons
+47 U Everdream
+48 U Exclude
+49 C Eyekite
+50 U Fact or Fiction
+51 C Faerie Seer
+52 R Force of Negation
+53 R Future Sight
+54 C Iceberg Cancrix
+55 C Man-o'-War
+56 R Marit Lage's Slumber
+57 R Mirrodin Besieged
+58 R Mist-Syndicate Naga
+59 C Moonblade Shinobi
+60 U Oneirophage
+61 C Phantasmal Form
+62 C Phantom Ninja
+63 C Pondering Mage
+64 C Prohibit
+65 C Rain of Revelation
+66 U Rebuild
+67 C Scour All Possibilities
+68 U Scuttling Sliver
+69 C Smoke Shroud
+70 C Spell Snuff
+71 C Stream of Thought
+72 C String of Disappearances
+73 U Tribute Mage
+74 U Twisted Reflection
+75 M Urza, Lord High Artificer
+76 U Watcher for Tomorrow
+77 C Windcaller Aven
+78 C Winter's Rest
+79 C Azra Smokeshaper
+80 R Cabal Therapist
+81 U Carrion Feeder
+82 C Changeling Outcast
+83 R Cordial Vampire
+84 U Crypt Rats
+85 R Dead of Winter
+86 C Defile
+87 C Diabolic Edict
+88 U Dregscape Sliver
+89 R Endling
+90 U Feaster of Fools
+91 C First-Sphere Gargantua
+92 R Force of Despair
+93 C Gluttonous Slug
+94 U Graveshifter
+95 C Headless Specter
+96 C Mind Rake
+97 C Mob
+98 R Nether Spirit
+99 C Ninja of the New Moon
+100 R Plague Engineer
+101 C Putrid Goblin
+102 C Rank Officer
+103 C Ransack the Lab
+104 C Return from Extinction
+105 U Sadistic Obsession
+106 U Shatter Assumptions
+107 C Silumgar Scavenger
+108 U Sling-Gang Lieutenant
+109 U Smiting Helix
+110 U Throatseeker
+111 C Umezawa's Charm
+112 U Undead Augur
+113 C Unearth
+114 C Venomous Changeling
+115 C Warteye Witch
+116 M Yawgmoth, Thran Physician
+117 U Alpine Guide
+118 R Aria of Flame
+119 C Bladeback Sliver
+120 C Bogardan Dragonheart
+121 C Cleaving Sliver
+122 U Firebolt
+123 C Fists of Flame
+124 R Force of Rage
+125 C Geomancer's Gambit
+126 C Goatnap
+127 C Goblin Champion
+128 R Goblin Engineer
+129 U Goblin Matron
+130 U Goblin Oriflamme
+131 C Goblin War Party
+132 U Hollowhead Sliver
+133 C Igneous Elemental
+134 C Lava Dart
+135 C Magmatic Sinkhole
+136 C Orcish Hellraiser
+137 U Ore-Scale Guardian
+138 R Pashalik Mons
+139 U Pillage
+140 R Planebound Accomplice
+141 C Pyrophobia
+142 C Quakefoot Cyclops
+143 U Ravenous Giant
+144 C Reckless Charge
+145 M Seasoned Pyromancer
+146 C Shenanigans
+147 C Spinehorn Minotaur
+148 R Spiteful Sliver
+149 R Tectonic Reformation
+150 U Throes of Chaos
+151 U Urza's Rage
+152 U Vengeful Devil
+153 C Viashino Sandsprinter
+154 C Volatile Claws
+155 R Ayula, Queen Among Bears
+156 R Ayula's Influence
+157 C Bellowing Elk
+158 R Collector Ouphe
+159 U Conifer Wurm
+160 R Crashing Footfalls
+161 R Deep Forest Hermit
+162 C Elvish Fury
+163 C Excavating Anurid
+164 R Force of Vigor
+165 C Frostwalla
+166 R Genesis
+167 U Glacial Revelation
+168 M Hexdrinker
+169 C Krosan Tusker
+170 U Llanowar Tribe
+171 C Mother Bear
+172 C Murasa Behemoth
+173 U Nantuko Cultivator
+174 C Nimble Mongoose
+175 U Regrowth
+176 C Rime Tender
+177 U Saddled Rimestag
+178 C Savage Swipe
+179 U Scale Up
+180 C Spore Frog
+181 C Springbloom Druid
+182 U Squirrel Nest
+183 U Tempered Sliver
+184 C Thornado
+185 C Treefolk Umbra
+186 C Treetop Ambusher
+187 C Trumpeting Herd
+188 C Twin-Silk Spider
+189 M Unbound Flourishing
+190 U Wall of Blossoms
+191 C Weather the Storm
+192 U Webweaver Changeling
+193 C Winding Way
+194 U Abominable Treefolk
+195 R Cloudshredder Sliver
+196 R Collected Conjuring
+197 R Eladamri's Call
+198 U Etchings of the Chosen
+199 R Fallen Shinobi
+200 M The First Sliver
+201 U Good-Fortune Unicorn
+202 R Hogaak, Arisen Necropolis
+203 R Ice-Fang Coatl
+204 U Ingenious Infiltrator
+205 R Kaya's Guile
+206 M Kess, Dissident Mage
+207 U Lavabelly Sliver
+208 R Lightning Skelemental
+209 U Munitions Expert
+210 C Nature's Chant
+211 R Reap the Past
+212 U Rotwidow Pack
+213 U Ruination Rioter
+214 U Soulherder
+215 U Thundering Djinn
+216 R Unsettled Mariner
+217 M Wrenn and Six
+218 R Altar of Dementia
+219 C Amorphous Axe
+220 C Arcum's Astrolabe
+221 U Birthing Boughs
+222 U Farmstead Gleaner
+223 C Fountain of Ichor
+224 U Icehide Golem
+225 U Lesser Masticore
+226 M Mox Tantalite
+227 R Scrapyard Recombiner
+228 M Sword of Sinew and Steel
+229 M Sword of Truth and Justice
+230 U Talisman of Conviction
+231 U Talisman of Creativity
+232 U Talisman of Curiosity
+233 U Talisman of Hierarchy
+234 U Talisman of Resilience
+235 C Universal Automaton
+236 U Barren Moor
+237 C Cave of Temptation
+238 R Fiery Islet
+239 U Forgotten Cave
+240 U Frostwalk Bastion
+241 R Hall of Heliod's Generosity
+242 U Lonely Sandbar
+243 R Nurturing Peatland
+244 R Prismatic Vista
+245 U Secluded Steppe
+246 R Silent Clearing
+247 R Sunbaked Canyon
+248 U Tranquil Thicket
+249 R Waterlogged Grove
+250 L Snow-Covered Plains
+251 L Snow-Covered Island
+252 L Snow-Covered Swamp
+253 L Snow-Covered Mountain
+254 L Snow-Covered Forest
+255 R Flusterstorm
+
+
+[tokens]
+b_2_2_zombie
+c_0_0_a_construct_total_artifacts
+c_1_1_a_myr
+c_2_2_shapeshifter_changeling
+c_3_3_a_golem
+g_1_1_squirrel
+g_1_2_spider_reach
+g_2_2_bear
+g_3_3_elephant
+g_4_4_rhino_trample
+marit_lage
+r_1_1_elemental
+r_1_1_goblin
+r_3_1_elemental_trample_haste
+u_1_1_illusion_flying
+w_1_1_bird_flying
+w_1_1_soldier
+w_4_4_angel_flying_vigilance
+wb_1_1_spirit_flying

@@ -7,6 +7,6 @@ SVar:DBReplace:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:XFetch:Count$InYourHand
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_rack.jpg
 Oracle:{1}, {T}: Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.

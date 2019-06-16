@@ -21,14 +21,12 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.*;
@@ -74,6 +72,17 @@ public final class GameActionUtil {
 
         if (sa.isSpell()) {
             boolean lkicheck = false;
+
+            // need to be done before so it works with Vivien and Zoetic Cavern
+            if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+
+                source.turnFaceUp(false, false);
+                lkicheck = true;
+            }
+
             if (sa.hasParam("Bestow") && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
@@ -91,6 +100,8 @@ public final class GameActionUtil {
             }
 
             if (lkicheck) {
+                // double freeze tracker, so it doesn't update view
+                game.getTracker().freeze();
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
@@ -106,23 +117,16 @@ public final class GameActionUtil {
                 }
                 final Card host = o.getHost();
 
-                final SpellAbility newSA = sa.copy(activator);
-                final SpellAbilityRestriction sar = newSA.getRestrictions();
-                if (o.isWithFlash()) {
-                    sar.setInstantSpeed(true);
-                }
-                sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
-                newSA.setMayPlayOriginal(sa);
+                SpellAbility newSA = null;
 
                 boolean changedManaCost = false;
                 if (o.getPayManaCost() == PayManaCost.NO) {
+                    newSA = sa.copyWithNoManaCost(activator);
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                     changedManaCost = true;
                 } else if (o.getAltManaCost() != null) {
+                    newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
                     changedManaCost = true;
                     if (host.hasSVar("AsForetoldSplitCMCHack")) {
                         // TODO: This is a temporary workaround for As Foretold interaction with split cards, better solution needed.
@@ -138,7 +142,17 @@ public final class GameActionUtil {
                             }
                         }
                     }
+                } else {
+                    newSA = sa.copy(activator);
                 }
+                final SpellAbilityRestriction sar = newSA.getRestrictions();
+                if (o.isWithFlash()) {
+                    sar.setInstantSpeed(true);
+                }
+                sar.setZone(null);
+                newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlayOriginal(sa);
+
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
                         sar.setLimitToCheck(null);
@@ -166,6 +180,10 @@ public final class GameActionUtil {
             // reset static abilities
             if (lkicheck) {
                 game.getAction().checkStaticAbilities(false);
+                // clear delayed changes, this check should not have updated the view
+                game.getTracker().clearDelayed();
+                // need to unfreeze tracker
+                game.getTracker().unfreeze();
             }
         }
 
@@ -345,121 +363,6 @@ public final class GameActionUtil {
         return abilities;
     }
     
-    
-    /**
-     * get optional additional costs.
-     * 
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     * 
-     * @deprecated only used by AI, replace it with new functions in AI
-     */
-    @Deprecated public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
-        final List<SpellAbility> abilities = getAdditionalCostSpell(original);
-
-        final Card source = original.getHostCard();
-
-        if (!original.isSpell()) {
-            return abilities;
-        }
-
-        // Buyback, Kicker
-        for (KeywordInterface inst : source.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("Buyback")) {
-                for (int i = 0; i < abilities.size(); i++) {
-                    final SpellAbility newSA = abilities.get(i).copy();
-                    newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
-                    newSA.setDescription(newSA.getDescription() + " (with Buyback)");
-                    newSA.addOptionalCost(OptionalCost.Buyback);
-                    if (newSA.canPlay()) {
-                        abilities.add(i, newSA);
-                        i++;
-                    }
-                }
-            } else if (keyword.startsWith("MayFlashCost")) {
-                // this is there for the AI
-                if ( source.getGame().getPhaseHandler().isPlayerTurn(source.getController())) {
-                    continue; // don't cast it with additional flash cost during AI's own turn, commonly a waste of mana
-                }
-                final String[] k = keyword.split(":");
-                for (int i = 0; i < abilities.size(); i++) {
-                    final SpellAbility newSA = abilities.get(i).copy();
-                    newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(k[1], false).add(newSA.getPayCosts()));
-                    newSA.setDescription(newSA.getDescription() + " (as though it had flash)");
-                    newSA.getRestrictions().setInstantSpeed(true);
-                    if (newSA.canPlay()) {
-                        abilities.add(i, newSA);
-                        i++;
-                    }
-                }
-            } else if (keyword.startsWith("Kicker")) {
-                String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
-                // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
-                int numKickers = sCosts.length - (generic ? 1 : 0);
-                for (int i = 0; i < abilities.size(); i++) {
-                    int iUnKicked = i;
-                    for (int j = 0; j < numKickers; j++) {
-                        final SpellAbility newSA = abilities.get(iUnKicked).copy();
-                        newSA.setBasicSpell(false);
-                        final Cost cost = new Cost(sCosts[j], false);
-                        newSA.setPayCosts(cost.add(newSA.getPayCosts()));
-                        if (!generic) {
-                            newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
-                            newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
-                        } else {
-                            newSA.setDescription(newSA.getDescription() + " (Optional " + cost.toSimpleString() + ")");
-                            newSA.addOptionalCost(OptionalCost.Generic);
-                        }
-                        if (newSA.canPlay()) {
-                            abilities.add(i, newSA);
-                            i++;
-                            iUnKicked++;
-                        }
-                    }
-                    if (numKickers == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
-                        final SpellAbility newSA = abilities.get(iUnKicked).copy();
-                        newSA.setBasicSpell(false);
-                        final Cost cost1 = new Cost(sCosts[0], false);
-                        final Cost cost2 = new Cost(sCosts[1], false);
-                        newSA.setDescription(TextUtil.addSuffix(newSA.getDescription(), TextUtil.concatWithSpace(" (Both kickers:", cost1.toSimpleString(),"and",TextUtil.addSuffix(cost2.toSimpleString(),")"))));
-                        newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
-                        newSA.addOptionalCost(OptionalCost.Kicker1);
-                        newSA.addOptionalCost(OptionalCost.Kicker2);
-                        if (newSA.canPlay()) {
-                            abilities.add(i, newSA);
-                            i++;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (source.hasKeyword(Keyword.CONSPIRE)) {
-            int amount = source.getAmountOfKeyword(Keyword.CONSPIRE);
-            for (int kwInstance = 1; kwInstance <= amount; kwInstance++) {
-                for (int i = 0; i < abilities.size(); i++) {
-                    final SpellAbility newSA = abilities.get(i).copy();
-                    newSA.setBasicSpell(false);
-                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control that shares a color with " + source.getName() + ">";
-                    newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
-                    final String tag = kwInstance > 1 ? " (Conspire " + kwInstance + ")" : " (Conspire)";
-                    newSA.setDescription(newSA.getDescription() + tag);
-                    newSA.addOptionalCost(OptionalCost.Conspire);
-                    newSA.addConspireInstance();
-                    if (newSA.canPlay()) {
-                        abilities.add(++i, newSA);
-                    }
-                }
-            }
-        }
-        return abilities;
-    }
-
     private static boolean hasUrzaLands(final Player p) {
         final CardCollectionView landsControlled = p.getCardsIn(ZoneType.Battlefield);
         return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))

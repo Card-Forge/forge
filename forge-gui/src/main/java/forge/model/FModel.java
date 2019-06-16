@@ -17,11 +17,10 @@
  */
 package forge.model;
 
-import forge.CardStorageReader;
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
+import forge.*;
 import forge.CardStorageReader.ProgressObserver;
-import forge.FThreads;
-import forge.ImageKeys;
-import forge.StaticData;
 import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
@@ -57,9 +56,6 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Maps;
 
 /**
  * The default Model implementation for Forge.
@@ -174,6 +170,7 @@ public final class FModel {
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
 
         magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
+        magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();

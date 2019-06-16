@@ -1,0 +1,12 @@
+Name:Angel of Grace
+ManaCost:3 W W
+Types:Creature Angel
+PT:5/4
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:TrigEffect:DB$ Effect | Name$ Angel of Grace Effect | StaticAbilities$ SelflessDamage | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:SelflessDamage:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ DamageLifeThreshold:1 | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+A:AB$ SetLife | Cost$ 4 W W ExileFromGrave<1/CARDNAME> | Defined$ You | ActivationZone$ Graveyard | LifeAmount$ 10 | SpellDescription$ Your life total becomes 10.
+AI:RemoveDeck:Random
+Oracle:Flash\nFlying\nWhen Angel of Grace enters the battlefield, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.\n{4}{W}{W}, Exile Angel of Grace from your graveyard: Your life total becomes 10.

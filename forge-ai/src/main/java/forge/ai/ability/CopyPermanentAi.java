@@ -74,6 +74,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
+        final boolean canCopyLegendary = sa.hasParam("NonLegendary");
 
         
         // ////
@@ -83,7 +84,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
             CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa));
 
-            list = CardLists.filter(list, Predicates.not(CardPredicates.hasSVar("RemAIDeck")));
+            list = CardLists.filter(list, Predicates.not(CardPredicates.isRemAIDeck()));
             //Nothing to target
             if (list.isEmpty()) {
             	return false;
@@ -114,7 +115,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return !c.getType().isLegendary() || !c.getController().equals(aiPlayer);
+                        return (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer);
                     }
                 });
                 Card choice;
@@ -180,7 +181,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
     private CardCollection getBetterOptions(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional) {
         final Card host = sa.getHostCard();
         final Player ctrl = host.getController();
-        final String filter = "Permanent.YouDontCtrl,Permanent.nonLegendary";
+        final boolean canCopyLegendary = sa.hasParam("NonLegendary");
+        final String filter = canCopyLegendary ? "Permanent" : "Permanent.YouDontCtrl,Permanent.nonLegendary";
         // TODO add filter to not select Legendary from Other Player when ai already have a Legendary with that name
         return CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
     }

@@ -1,0 +1,13 @@
+Name:Lightning Skelemental
+ManaCost:B R R
+Types:Creature Elemental Skeleton
+PT:6/1
+K:Haste
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste\nWhenever Lightning Skelemental deals combat damage to a player, that player discards two cards.\nAt the beginning of the end step, sacrifice Lightning Skelemental.

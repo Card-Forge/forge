@@ -2,7 +2,7 @@ Name:Ezuri's Predation
 ManaCost:5 G G G
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ 5 G G G | RepeatCards$ Creature.OppCtrl | UseImprinted$ True | RepeatSubAbility$ DBToken | SpellDescription$ For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast| TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast | RememberTokens$ True | SubAbility$ DBFight
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | LegacyImage$ g 4 4 beast c15 | RememberTokens$ True | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ Imprinted | ExtraDefined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlay:Creature.OppCtrl+inZoneBattlefield+powerLE3

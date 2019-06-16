@@ -6,6 +6,6 @@ SVar:STBosiumStrip:Mode$ Continuous | Affected$ Card.TopGraveyard+Instant+YouCtr
 SVar:REBosiumStrip:Event$ Moved | ValidCard$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosium_strip.jpg
 Oracle:{3}, {T}: Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.

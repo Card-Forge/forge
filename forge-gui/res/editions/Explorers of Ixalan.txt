@@ -54,3 +54,6 @@ Type=Other
 45 U Crumbling Necropolis
 46 U Jungle Shrine
 47 U Tainted Field
+
+[tokens]
+g_1_1_saproling

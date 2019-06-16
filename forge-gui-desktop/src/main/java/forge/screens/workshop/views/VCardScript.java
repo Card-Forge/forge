@@ -35,14 +35,14 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private final Style error;
 
     //========== Constructor
-    private VCardScript() {
+    VCardScript() {
         txtScript.setEditable(true);
         txtScript.setFocusable(true);
         doc = new DefaultStyledDocument();
         txtScript.setDocument(doc);
         error = doc.addStyle("error", null);
         error.addAttribute(StyleConstants.Background, Color.red);
-        error.addAttribute(StyleConstants.Bold, new Boolean(true));
+        error.addAttribute(StyleConstants.Bold, Boolean.valueOf(true));
     }
 
     public JTextPane getTxtScript() {

@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -72,6 +71,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
         final Player controller = activator;
         CardCollection tgtCards;
+        CardCollection showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
             ZoneType zone = ZoneType.Hand;
@@ -81,6 +81,9 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtCards = new CardCollection(
                 AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
             );
+            if ( sa.hasParam("ShowCards") ) {
+                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("ShowCards"), sa));
+            }
         }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
@@ -140,14 +143,16 @@ public class PlayEffect extends SpellAbilityEffect {
 
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
+            activator.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
+            activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 return;
             }
 
             final boolean wasFaceDown;
             if (tgtCard.isFaceDown()) {
-                tgtCard.setState(CardStateName.Original, false);
+                tgtCard.turnFaceUp(false, false);
                 wasFaceDown = true;
             } else {
                 wasFaceDown = false;
@@ -159,7 +164,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace("Do you want to play", TextUtil.addSuffix(tgtCard.toString(),"?")))) {
                 if (wasFaceDown) {
-                    tgtCard.setState(CardStateName.FaceDown, false);
+                    tgtCard.turnFaceDownNoUpdate();
                 }
                 saidNoTo.add(tgtCard);
                 continue;
@@ -228,6 +233,16 @@ public class PlayEffect extends SpellAbilityEffect {
 
                 tgtSA = tgtSA.copyWithDefinedCost(abCost);
             }
+
+            if (sa.hasParam("PlayReduceCost")) {
+                // for Kefnet only can reduce colorless cost
+                String reduce = sa.getParam("PlayReduceCost");
+                tgtSA.getMapParams().put("ReduceCost", reduce);
+                if (!StringUtils.isNumeric(reduce)) {
+                    tgtSA.setSVar(reduce, sa.getSVar(reduce));
+                }
+            }
+
             if (sa.hasParam("Madness")) {
                 tgtSA.getHostCard().setMadness(true);
             }

@@ -258,3 +258,16 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 198 C Yeva's Forcemage
 197 R Yeva, Nature's Herald
 119 C Zombie Goliath
+
+[tokens]
+w_2_2_cat
+w_0_1_goat
+w_1_1_soldier
+u_2_2_drake_flying
+b_2_2_zombie
+r_1_1_goblin
+r_1_1_goblin
+r_4_4_hellion_haste
+g_3_3_beast
+g_1_1_saproling
+g_6_6_wurm

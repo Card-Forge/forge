@@ -12,7 +12,7 @@ public enum CCardCatalog implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private CCardCatalog() {
+    CCardCatalog() {
     }
 
     //========== Overridden methods

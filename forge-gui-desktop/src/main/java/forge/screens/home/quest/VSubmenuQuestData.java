@@ -18,6 +18,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -36,78 +37,77 @@ import java.util.Map;
  */
 public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Quest Data");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuestData"));
 
     private final FLabel lblTitle = new FLabel.Builder()
-    .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
+    .text(localizer.getMessage("lblLoadQuestData")).fontAlign(SwingConstants.CENTER)
     .opaque(true).fontSize(16).build();
 
-    private final FLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
-            .opaque(true).fontSize(16).build();
+    private final FLabel lblTitleNew = new FLabel.Builder().text(localizer.getMessage("lblStartanewQuest")).opaque(true).fontSize(16).build();
 
-    private final FLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into \""
-            + ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.")
-            .fontAlign(SwingConstants.CENTER).fontSize(12).build();
-
+    String str=new String( ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/'));
+    private final FLabel lblOldQuests = new FLabel.Builder().text(localizer.getMessage("lblOldQuestData").replace("%s",str)).fontAlign(SwingConstants.CENTER).fontSize(12).build();
     private final QuestFileLister lstQuests = new QuestFileLister();
     private final FScrollPane scrQuests = new FScrollPane(lstQuests, false);
     private final JPanel pnlOptions = new JPanel();
 
     /* First column */
-    private final FRadioButton radEasy = new FRadioButton("Easy");
-    private final FRadioButton radMedium = new FRadioButton("Medium");
-    private final FRadioButton radHard = new FRadioButton("Hard");
-    private final FRadioButton radExpert = new FRadioButton("Expert");
-    private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+    private final FRadioButton radEasy = new FRadioButton(localizer.getMessage("rbEasy"));
+    private final FRadioButton radMedium = new FRadioButton(localizer.getMessage("rbMedium"));
+    private final FRadioButton radHard = new FRadioButton(localizer.getMessage("rbHard"));
+    private final FRadioButton radExpert = new FRadioButton(localizer.getMessage("rbExpert"));
+    private final FCheckBox boxFantasy = new FCheckBox(localizer.getMessage("rbFantasyMode"));
+    private final FCheckBox boxCommander = new FCheckBox(localizer.getMessage("rbCommanderSubformat"));
 
-    private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
+    private final FLabel lblStartingWorld = new FLabel.Builder().text(localizer.getMessage("lblStartingWorld") + ":").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
 
     /* Second column */
-    private final FLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
+    private final FLabel lblStartingPool = new FLabel.Builder().text(localizer.getMessage("lblStartingPool") + ":").build();
     private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<>();
 
-    private final FLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
+    private final FLabel lblUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailable")).build();
 
-    private final FLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
+    private final FLabel lblPreconDeck = new FLabel.Builder().text(localizer.getMessage("lblStarterEventdeck") +":").build();
     private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<>();
 
-    private final FLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat") + "").build();
     private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<>();
 
-    private final FLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
+    private final FLabel lblCustomDeck = new FLabel.Builder().text(localizer.getMessage("lblCustomdeck")).build();
     private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<>();
 
-    private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
-    private final FLabel btnSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Select format").build();
+    private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblDefineCustomFormat")).build();
+    private final FLabel btnSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblSelectFormat")).build();
 
 
-    private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
-    private final FCheckBox boxAllowDuplicates = new FCheckBox("Allow duplicate cards");
+    private final FCheckBox boxCompleteSet = new FCheckBox(localizer.getMessage("lblStartWithAllCards"));
+    private final FCheckBox boxAllowDuplicates = new FCheckBox(localizer.getMessage("lblAllowDuplicateCards"));
 
-    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool distribution:").build();
-    private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text("Choose Distribution").build();
+    private final FLabel lblPreferredColor = new FLabel.Builder().text(localizer.getMessage("lblStartingPoolDistribution")).build();
+    private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblChooseDistribution")).build();
 
-    private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
+    private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblDefineCustomFormat")).build();
 
-    private final FLabel btnPrizeSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Select format").build();
+    private final FLabel btnPrizeSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblSelectFormat")).build();
 
-    private final FLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
+    private final FLabel lblPrizedCards = new FLabel.Builder().text(localizer.getMessage("lblPrizedCards")).build();
     private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<>();
 
-    private final FLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
+    private final FLabel lblPrizeFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat")).build();
     private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<>();
 
-    private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
-    private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets in starting pool will be available.").build();
+    private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailableWin")).build();
+    private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text(localizer.getMessage("lblOnlySetsInStarting")).build();
 
-    private final FCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of additional editions");
+    private final FCheckBox cboAllowUnlocks = new FCheckBox(localizer.getMessage("lblAllowUnlockAdEd"));
 
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
-            .fontSize(16).hoverable(true).text("Embark!").build();
+            .fontSize(16).hoverable(true).text(localizer.getMessage("lblEmbark")).build();
 
     /* Listeners */
     private final ActionListener alStartingPool = new ActionListener() {
@@ -202,8 +202,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         difficultyPanel.add(radExpert, difficulty_constraints);
         radEasy.setSelected(true);
 
-        boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
-        boxAllowDuplicates.setToolTipText("When your starting pool is generated, duplicates of cards may be included.");
+        boxCompleteSet.setToolTipText(localizer.getMessage("lblboxCompleteSet"));
+        boxAllowDuplicates.setToolTipText(localizer.getMessage("lblboxAllowDuplicates"));
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Sanctioned);
@@ -219,7 +219,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         alStartingPool.actionPerformed(null);
         alPrizesPool.actionPerformed(null);
 
-        cbxPrizedCards.addItem("Same as starting pool");
+        cbxPrizedCards.addItem(localizer.getMessage("lblSameAsStartingPool"));
         cbxPrizedCards.addItem(StartingPoolType.Complete);
         cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
         cbxPrizedCards.addItem(StartingPoolType.Casual);
@@ -274,9 +274,25 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             }
         });
 
-        // Fantasy box enabled by Default
+        // Fantasy box selected by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
+
+        // Commander box unselected by Default
+        boxCommander.setSelected(false);
+        boxCommander.setEnabled(true);
+
+        boxCommander.addActionListener(
+                new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        if(!isCommander()) return; //do nothing if unselecting Commander Subformat
+                        //Otherwise, set the starting world to Random Commander
+                        cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
+                    }
+        }
+
+        );
+
         boxCompleteSet.setEnabled(true);
         boxAllowDuplicates.setEnabled(true);
 
@@ -286,6 +302,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
         pnlDifficultyMode.add(boxFantasy, "h 25px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(boxCommander, "h 25px!, gapbottom 15, gapright 4%");
         pnlDifficultyMode.add(lblStartingWorld, "h 25px!, hidemode 3");
         cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, gapbottom 7");
         pnlDifficultyMode.setOpaque(false);
@@ -377,7 +394,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
      */
     @Override
     public String getMenuTitle() {
-        return "New / Load Quest";
+        return localizer.getMessage("lblNewLoadQuest");
     }
 
     /* (non-Javadoc)
@@ -485,6 +502,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public boolean isFantasy() {
         return boxFantasy.isSelected();
+    }
+
+    /**
+     * Auth. Imakuni
+     * @return True if the "Commander Subformat" check box is selected.
+     */
+    public boolean isCommander() {
+        return boxCommander.isSelected();
     }
 
     public boolean startWithCompleteSet() {

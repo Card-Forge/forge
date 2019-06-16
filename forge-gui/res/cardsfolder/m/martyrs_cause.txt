@@ -7,7 +7,7 @@ SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield 
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the any target, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cause.jpg
 Oracle:Sacrifice a creature: The next time a source of your choice would deal damage to any target this turn, prevent that damage.

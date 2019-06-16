@@ -62,6 +62,7 @@ import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import forge.util.RestartUtil;
 import forge.util.gui.SOptionPane;
 import forge.view.FFrame;
@@ -85,10 +86,10 @@ public enum FControl implements KeyEventDispatcher {
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
 
-    public static enum CloseAction {
+    public enum CloseAction {
         NONE,
         CLOSE_SCREEN,
-        EXIT_FORGE;
+        EXIT_FORGE
     }
 
     private boolean hasCurrentMatches() {
@@ -122,7 +123,7 @@ public enum FControl implements KeyEventDispatcher {
      * switches between various display screens in that JFrame. Controllers are
      * instantiated separately by each screen's top level view class.
      */
-    private FControl() {
+    FControl() {
         Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
@@ -187,10 +188,7 @@ public enum FControl implements KeyEventDispatcher {
         if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", !hasCurrentMatches)) { //default Yes if no game active
             return false;
         }
-        if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
-            return false;
-        }
-        return true;
+        return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true);
     }
 
     public boolean restartForge() {
@@ -260,8 +258,8 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
         setGlobalKeyboardHandler();
-
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Opening main window...");
+        final Localizer localizer = Localizer.getInstance();
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -388,16 +386,15 @@ public enum FControl implements KeyEventDispatcher {
                     return true;
                 }
             }
-            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiers() == InputEvent.ALT_MASK) {
+            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
                 altKeyLastDown = true;
             }
         }
         else {
             altKeyLastDown = false;
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                if (forgeMenu.handleKeyEvent(e)) { //give Forge menu the chance to handle the key event
-                    return true;
-                }
+                //give Forge menu the chance to handle the key event
+                return forgeMenu.handleKeyEvent(e);
             }
             else if (e.getID() == KeyEvent.KEY_RELEASED) {
                 if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {

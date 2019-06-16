@@ -20,6 +20,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.trigger.WrappedAbility;
@@ -80,6 +81,9 @@ public abstract class PlayerController {
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
+    public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended
+    public void endTempShowCards() { }
+
     public final SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities) { return getAbilityToPlay(hostCard, abilities, null); }
     public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
@@ -87,7 +91,7 @@ public abstract class PlayerController {
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
 
-    public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType);
+    public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType, String message);
     public abstract List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses);
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
@@ -110,7 +114,8 @@ public abstract class PlayerController {
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
             Map<String, Object> params);
 
-    public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
+    public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
+    public abstract <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
@@ -164,7 +169,10 @@ public abstract class PlayerController {
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
+
     public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
+    public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
+    public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
@@ -208,7 +216,6 @@ public abstract class PlayerController {
     public abstract void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
 
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
-    public abstract Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa);
     public abstract boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
@@ -220,9 +227,13 @@ public abstract class PlayerController {
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility) {
-        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, isActivatedAbility);
+        return payManaCost(costPartMana, sa, prompt, null, isActivatedAbility);
     }
-    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility);
+
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility) {
+        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, isActivatedAbility);
+    }
+    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility);
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise);
 
@@ -234,7 +245,7 @@ public abstract class PlayerController {
     // better to have this odd method than those if playerType comparison in ChangeZone  
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
 
-    public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, Player decider);
+    public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
 
     public abstract void autoPassCancel();
 
@@ -255,4 +266,6 @@ public abstract class PlayerController {
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
+
+    public abstract boolean confirmMulliganScry(final Player p);
 }

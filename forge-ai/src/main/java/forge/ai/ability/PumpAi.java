@@ -20,7 +20,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
@@ -288,9 +287,8 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("ActivationNumberSacrifice")) {
-            final SpellAbilityRestriction restrict = sa.getRestrictions();
             final int sacActivations = Integer.parseInt(sa.getParam("ActivationNumberSacrifice").substring(2));
-            final int activations = restrict.getNumberTurnActivations();
+            final int activations = sa.getActivationsThisTurn();
             // don't risk sacrificing a creature just to pump it
             if (activations >= sacActivations - 1) {
                 return false;
@@ -316,6 +314,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
+            if (numDefense.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                defense--; // the card will be spent casting the spell, so actual toughness is 1 less
+            }
         }
 
         int attack;
@@ -332,6 +333,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
+            if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                attack--; // the card will be spent casting the spell, so actual power is 1 less
+            }
         }
 
         if ("ContinuousBonus".equals(aiLogic)) {
@@ -481,6 +485,10 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
+                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
+                // the best for opponents
+                return SacrificeAi.doSacOneEachLogic(ai, sa);
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
@@ -796,7 +804,7 @@ public class PumpAi extends PumpAiBase {
         return true;
     }
 
-    public boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
+    public static boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -867,7 +875,7 @@ public class PumpAi extends PumpAiBase {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
-                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / powerBonus;
+                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / (powerBonus != 0 ? powerBonus : 1);
 
                 if (defTappedOut || numCreatsToSac < numOtherCreats / 2) {
                     return source.getNetCombatDamage() < lethalDmg
@@ -915,7 +923,7 @@ public class PumpAi extends PumpAiBase {
         }
     }
 
-    public boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
+    public static boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: put X +1/+1 counters on CARDNAME" (e.g. Falkenrath Aristocrat)
         final Card source = sa.getHostCard();
         final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
@@ -936,9 +944,19 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Check if anything is to be gained from the PutCounter subability
+        SpellAbility countersSa = null;
         if (sa.getSubAbility() == null || sa.getSubAbility().getApi() != ApiType.PutCounter) {
+            if (sa.getApi() == ApiType.PutCounter) {
+                // called directly from CountersPutAi
+                countersSa = sa;
+            }
+        } else {
+            countersSa = sa.getSubAbility();
+        }
+
+        if (countersSa == null) {
             // Shouldn't get here if there is no PutCounter subability (wrong AI logic specified?)
-            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter subability!");
+            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter SA in chain!");
             return false;
         }
 
@@ -958,7 +976,7 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        int numCtrs = AbilityUtils.calculateAmount(source, sa.getSubAbility().getParam("CounterNum"), sa.getSubAbility());
+        int numCtrs = AbilityUtils.calculateAmount(source, countersSa.getParam("CounterNum"), countersSa);
 
         if (combat != null && combat.isAttacking(source) && isDeclareBlockers) {
             if (combat.getBlockers(source).isEmpty()) {

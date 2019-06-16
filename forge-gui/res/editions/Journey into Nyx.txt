@@ -173,3 +173,18 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
 163 R Mana Confluence
 164 R Temple of Epiphany
 165 R Temple of Malady
+
+[tokens]
+gold
+w_1_1_soldier
+w_1_1_soldier
+w_1_1_soldier
+u_2_2_e_bird_flying
+u_4_4_sphinx_flying
+b_x_x_zombie
+r_2_3_minotaur_haste
+r_2_3_minotaur_haste
+g_x_x_hydra
+g_1_3_e_spider_reach
+rg_2_2_satyr_haste
+bg_1_1_e_snake_deathtouch

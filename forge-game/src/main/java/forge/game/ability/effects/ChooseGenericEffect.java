@@ -48,8 +48,11 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     // Sac a permanent in presence of Sigarda, Host of Herons
                     // TODO: generalize this by testing if the unless cost can be paid
                     if (unlessCost.startsWith("Sac<")) {
-                        if (saChoice.getActivatingPlayer().isOpponentOf(p)
-                            && p.hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+                        if (!p.canSacrificeBy(saChoice)) {
+                            saToRemove.add(saChoice);
+                        }
+                    } else if (unlessCost.startsWith("Discard<")) {
+                        if (!p.canDiscardBy(sa)) {
                             saToRemove.add(saChoice);
                         }
                     }

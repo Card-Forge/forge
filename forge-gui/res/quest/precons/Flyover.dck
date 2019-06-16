@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Flyover
-Description=The "Flyover" deck puts you in command of a squadron of flying creatures. Halt your opponents' ground assaults and let loose a reign of terror from the air!
+Description=Grind your opponents to a halt on the ground as Archon of Redemption leads your fliers in a reign of terror. Your multikicker spells deliver effects whose power is limited only by how much mana you spend on them.
 Deck Type=constructed
 Set=WWK
 Image=flyover.jpg
@@ -14,7 +14,7 @@ Image=flyover.jpg
 7 Island|ZEN
 9 Plains|ZEN
 2 Apex Hawks|WWK
-1 Archon of Redemption|WWK
+1 Archon of Redemption+|WWK
 1 Enclave Elite|WWK
 1 Gomazoa|ZEN
 2 Kor Cartographer|ZEN

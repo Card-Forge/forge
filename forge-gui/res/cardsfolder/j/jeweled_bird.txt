@@ -7,7 +7,7 @@ SVar:DBUnAnte:DB$ ChangeZoneAll | ConditionCheckSVar$ Y | ConditionSVarCompare$ 
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | Defined$ You | NumCards$ 1 | SubAbility$ DBCleanup | References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_bird.jpg
 Oracle:Remove Jeweled Bird from your deck before playing if you're not playing for ante.\n{T}: Ante Jeweled Bird. If you do, put all other cards you own from the ante into your graveyard, then draw a card.

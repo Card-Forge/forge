@@ -1,26 +1,19 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
-import forge.card.CardStateName;
-import forge.card.MagicColor;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
+import com.google.common.collect.Lists;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method
@@ -57,8 +50,12 @@ public class CloneEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         Card tgtCard = host;
-        final Map<String, String> origSVars = host.getSVars();
         final Game game = activator.getGame();
+        final List<String> pumpKeywords = Lists.newArrayList();
+
+        if (sa.hasParam("PumpKeywords")) {
+            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
+        }
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
@@ -68,9 +65,19 @@ public class CloneEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
-            CardCollectionView choices = game.getCardsIn(choiceZone);
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            // choices need to be filtered by LastState Battlefield or Graveyard
+            // if a Clone enters the field as other cards it could clone,
+            // the clone should not be able to clone them
+            if (choiceZone.equals(ZoneType.Battlefield)) {
+                choices.retainAll(sa.getLastStateBattlefield());
+            } else if (choiceZone.equals(ZoneType.Graveyard)) {
+                choices.retainAll(sa.getLastStateGraveyard());
+            }
+
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
-            
+
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
             cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
         } else if (sa.hasParam("Defined")) {
@@ -91,9 +98,14 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // find target of cloning i.e. card becoming a clone
-        final List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
-        if (!cloneTargets.isEmpty()) {
-            tgtCard = cloneTargets.get(0);
+        if (sa.hasParam("CloneTarget")) {
+            final List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+            if (!cloneTargets.isEmpty()) {
+                tgtCard = cloneTargets.get(0);
+                game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+            }
+        } else if (sa.hasParam("Choices") && sa.usesTargeting()) {
+            tgtCard = sa.getTargets().getFirstTargetedCard();
             game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
         }
 
@@ -103,84 +115,17 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
 
-        // determine the image to be used for the clone
-        String imageFileName = cardToCopy.getGame().getRules().canCloneUseTargetsImage() ? tgtCard.getImageKey() : cardToCopy.getImageKey();
-        if (sa.hasParam("ImageSource")) { // Allow the image to be stipulated by using a defined card source
-            List<Card> cloneImgSources = AbilityUtils.getDefinedCards(host, sa.getParam("ImageSource"), sa);
-            if (!cloneImgSources.isEmpty()) {
-                imageFileName = cloneImgSources.get(0).getImageKey();
-            }
+        final Long ts = game.getNextTimestamp();
+        tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
+
+        // set ETB tapped of clone
+        if (sa.hasParam("IntoPlayTapped")) {
+            tgtCard.setTapped(true);
         }
 
-        final boolean keepName = sa.hasParam("KeepName");
-        final String originalName = tgtCard.getName();
-        final boolean copyingSelf = (tgtCard == cardToCopy);
-        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld;
-        final CardStateName origState = isTransformed || cardToCopy.isFaceDown() ? CardStateName.Original : cardToCopy.getCurrentStateName();
-
-        if (!copyingSelf) {
-            if (tgtCard.isCloned()) { // cloning again
-                tgtCard.switchStates(CardStateName.Cloner, origState, false);
-                tgtCard.setState(origState, false);
-                tgtCard.clearStates(CardStateName.Cloner, false);
-            }
-            // add "Cloner" state to clone
-            tgtCard.addAlternateState(CardStateName.Cloner, false);
-            tgtCard.switchStates(origState, CardStateName.Cloner, false);
-            tgtCard.setState(origState, false);
-        } else {
-            //copy Original state to Cloned
-            tgtCard.addAlternateState(CardStateName.Cloned, false);
-            tgtCard.switchStates(origState, CardStateName.Cloned, false);
-            if (tgtCard.isFlipCard()) {
-                tgtCard.setState(CardStateName.Original, false);
-            }
+        if (!pumpKeywords.isEmpty()) {
+            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, ts);
         }
-
-        CardFactory.copyCopiableCharacteristics(cardToCopy, tgtCard);
-
-        // add extra abilities as granted by the copy effect
-        addExtraCharacteristics(tgtCard, sa, origSVars);
-
-        // set the host card for copied replacement effects
-        // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
-        for (final ReplacementEffect rep : tgtCard.getReplacementEffects()) {
-            final SpellAbility newSa = rep.getOverridingAbility();
-            if (newSa != null) {
-                newSa.setOriginalHost(cardToCopy);
-            }
-        }
-
-        // set the host card for copied spellabilities
-        for (final SpellAbility newSa : tgtCard.getSpellAbilities()) {
-            newSa.setOriginalHost(cardToCopy);
-        }
-
-        // restore name if it should be unchanged
-        if (keepName) {
-        	tgtCard.setName(originalName);
-        }
-
-        // If target is a flip card, also set characteristics of the flipped
-        // state.
-        if (cardToCopy.isFlipCard()) {
-        	final CardState flippedState = tgtCard.getState(CardStateName.Flipped);
-            if (keepName) {
-                flippedState.setName(originalName);
-            }
-            //keep the Clone card image for the cloned card
-            flippedState.setImageKey(imageFileName);
-        }
-
-        //Clean up copy of cloned state
-        if (copyingSelf) {
-            tgtCard.clearStates(CardStateName.Cloned, false);
-        }
-
-        //game.getTriggerHandler().registerActiveTrigger(tgtCard, false);
-
-        //keep the Clone card image for the cloned card
-        tgtCard.setImageKey(imageFileName);
 
         tgtCard.updateStateForView();
 
@@ -189,7 +134,7 @@ public class CloneEffect extends SpellAbilityEffect {
         tgtCard.clearImprintedCards();
 
         // check if clone is now an Aura that needs to be attached
-        if (tgtCard.isAura()) {
+        if (tgtCard.isAura() && !tgtCard.getZone().is(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
         }
 
@@ -200,10 +145,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    if (cloneCard.isCloned()) {
-                        cloneCard.setState(CardStateName.Cloner, false);
-                        cloneCard.switchStates(CardStateName.Cloner, origState, false);
-                        cloneCard.clearStates(CardStateName.Cloner, false);
+                    if (cloneCard.removeCloneState(ts)) {
                         cloneCard.updateStateForView();
                         game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                     }
@@ -220,136 +162,11 @@ public class CloneEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilUnattached")) {
                 sa.getHostCard().addUnattachCommand(unclone);
             }
+            else if (duration.equals("UntilFacedown")) {
+                sa.getHostCard().addFacedownCommand(unclone);
+            }
         }
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
-
-    private static void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {
-        // additional types to clone
-        if (sa.hasParam("AddTypes")) {
-            for (final String type : Arrays.asList(sa.getParam("AddTypes").split(","))) {
-                tgtCard.addType(type);
-            }
-        }
-
-        // triggers to add to clone
-        if (sa.hasParam("AddTriggers")) {
-            for (final String s : Arrays.asList(sa.getParam("AddTriggers").split(","))) {
-                if (origSVars.containsKey(s)) {
-                    final String actualTrigger = origSVars.get(s);
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, tgtCard, true);
-                    tgtCard.addTrigger(parsedTrigger);
-                }
-            }
-        }
-
-        // SVars to add to clone
-        if (sa.hasParam("AddSVars")) {
-            for (final String s : Arrays.asList(sa.getParam("AddSVars").split(","))) {
-                if (origSVars.containsKey(s)) {
-                    final String actualsVar = origSVars.get(s);
-                    tgtCard.setSVar(s, actualsVar);
-                }
-            }
-        }
-
-        // abilities to add to clone
-        if (sa.hasParam("AddAbilities")) {
-            for (final String s : Arrays.asList(sa.getParam("AddAbilities").split(","))) {
-                if (origSVars.containsKey(s)) {
-                    final String actualAbility = origSVars.get(s);
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, tgtCard);
-                    tgtCard.addSpellAbility(grantedAbility);
-                }
-            }
-        }
-
-        // keywords to add to clone
-        
-        if (sa.hasParam("AddKeywords")) {
-            final List<String> keywords = Arrays.asList(sa.getParam("AddKeywords").split(" & "));
-            // allow SVar substitution for keywords
-            for (int i = 0; i < keywords.size(); i++) {
-                String k = keywords.get(i);
-                if (origSVars.containsKey(k)) {
-                    keywords.add("\"" + k + "\"");
-                    keywords.remove(k);
-                }
-                k = keywords.get(i);
-                
-                tgtCard.addIntrinsicKeyword(k);
-            }
-        }
-
-        // set ETB tapped of clone
-        if (sa.hasParam("IntoPlayTapped")) {
-            tgtCard.setTapped(true);
-        }
-
-        // set power of clone
-        if (sa.hasParam("SetPower")) {
-            String rhs = sa.getParam("SetPower");
-            int power = Integer.MAX_VALUE;
-            try {
-                power = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                power = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
-            }
-            for (StaticAbility sta : tgtCard.getStaticAbilities()) {
-                Map<String, String> params = sta.getMapParams();
-                if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
-                    tgtCard.removeStaticAbility(sta);
-            }
-            tgtCard.setBasePower(power);
-        }
-
-        // set toughness of clone
-        if (sa.hasParam("SetToughness")) {
-            String rhs = sa.getParam("SetToughness");
-            int toughness = Integer.MAX_VALUE;
-            try {
-                toughness = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                toughness = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
-            }
-            for (StaticAbility sta : tgtCard.getStaticAbilities()) {
-                Map<String, String> params = sta.getMapParams();
-                if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
-                    tgtCard.removeStaticAbility(sta);
-            }
-            tgtCard.setBaseToughness(toughness);
-        }
-
-        // colors to be added or changed to
-        String shortColors = "";
-        if (sa.hasParam("Colors")) {
-            final String colors = sa.getParam("Colors");
-            if (colors.equals("ChosenColor")) {
-                shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColors());
-            } else {
-                shortColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
-            }
-        }
-        if (sa.hasParam("OverwriteColors")) {
-            tgtCard.setColor(shortColors);
-        } else {
-            // TODO: this actually doesn't work for some reason (and fiddling with timestamps doesn't seem to fix it).
-            // No cards currently use this, but if some ever do, this code will require tweaking.
-            tgtCard.addColor(shortColors, true, tgtCard.getTimestamp());
-        }
-
-        if (sa.hasParam("Embalm") && tgtCard.isEmbalmed()) {
-            tgtCard.addType("Zombie");
-            tgtCard.setColor(MagicColor.WHITE);
-            tgtCard.setManaCost(ManaCost.NO_COST);
-        }
-        if (sa.hasParam("Eternalize") && tgtCard.isEternalized()) {
-            tgtCard.addType("Zombie");
-            tgtCard.setColor(MagicColor.BLACK);
-            tgtCard.setManaCost(ManaCost.NO_COST);
-            tgtCard.setBasePower(4);
-            tgtCard.setBaseToughness(4);
-        }
-    }
 
 }

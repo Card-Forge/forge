@@ -66,7 +66,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final VBrawlDecks vBrawlDecks;
     private final VTinyLeadersDecks vTinyLeadersDecks;
 
-    private CDeckEditorUI() {
+    CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
         this.cDetailPicture = new CDetailPicture();
         this.vAllDecks = VAllDecks.SINGLETON_INSTANCE;
@@ -153,7 +153,7 @@ public enum CDeckEditorUI implements ICDoc {
     }
 
     private interface _MoveAction {
-        public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items);
+        <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items);
     }
 
     private <T extends InventoryItem> void moveSelectedItems(final ItemManager<T> itemManager, final _MoveAction moveAction, final int maxQty) {

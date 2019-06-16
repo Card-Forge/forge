@@ -1,0 +1,11 @@
+Name:Mizzium Tank
+ManaCost:1 R R
+Types:Artifact Vehicle
+K:Trample
+PT:3/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME becomes an artifact creature and gets +1/+1 until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Artifact | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
+SVar:BuffedBy:Card.nonCreature+nonLand
+K:Crew:1
+Oracle:Trample\nWhenever you cast a noncreature spell, Mizzium Tank becomes an artifact creature and gets +1/+1 until end of turn.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

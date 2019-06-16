@@ -5,7 +5,7 @@ A:SP$ PutCounter | Cost$ U | ValidTgts$ Land | TgtPrompt$ Select target land | R
 SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | staticAbilities$ AnimateIsland | Permanent$ True | SubAbility$ DBDraw
 SVar:AnimateIsland:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_FLOOD | AddType$ Island
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
-SVar:RemRandomDeck:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquitects_will.jpg
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.

@@ -4,6 +4,6 @@ Types:Instant
 SVar:AltCost:Cost$ ExileFromHand<1/Card.White> | Description$ You may exile a white card from your hand rather than pay CARDNAME's mana cost.
 A:SP$ ChooseColor | Cost$ 3 W | Defined$ You | SubAbility$ DBProtection | AILogic$ MostProminentHumanControls | StackDescription$ SpellDescription | SpellDescription$ Choose a color. All creatures gain protection from the chosen color until end of turn.
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature | Gains$ ChosenColor
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverent_mantra.jpg
 Oracle:You may exile a white card from your hand rather than pay Reverent Mantra's mana cost.\nChoose a color. All creatures gain protection from the chosen color until end of turn.

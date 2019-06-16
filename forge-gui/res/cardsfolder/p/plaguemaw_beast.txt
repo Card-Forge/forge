@@ -3,9 +3,9 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:4/3
 A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.cmcLE2
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plaguemaw_beast.jpg
-Oracle:{T}, Sacrifice a creature: Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+Oracle:{T}, Sacrifice a creature: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

@@ -14,6 +14,9 @@ public abstract class ManaAtom {
     public static final byte[] MANACOLORS = new byte[] { WHITE, BLUE, BLACK, RED, GREEN };
     public static final byte[] MANATYPES = new byte[] { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
 
+    public static final byte ALL_MANA_COLORS = WHITE | BLUE | BLACK | RED | GREEN;
+    public static final byte ALL_MANA_TYPES = ALL_MANA_COLORS | COLORLESS;
+
     public static final int GENERIC = 1 << 6;
 
     // Below here skip due to byte conversion shenanigans
@@ -62,6 +65,6 @@ public abstract class ManaAtom {
                 return i;
             }
         }
-        return -1; // colorless
+        return -1; // somehow the mana is not colored or colorless?
     }
 }

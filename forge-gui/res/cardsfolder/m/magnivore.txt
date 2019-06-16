@@ -6,6 +6,6 @@ K:Haste
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of sorcery cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Sorcery
 SVar:NeedsToPlayVar:X GE2
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnivore.jpg
 Oracle:Haste\nMagnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.

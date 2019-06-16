@@ -501,6 +501,49 @@ public class SpecialCardAi {
         }
     }
 
+    // Gideon Blackblade
+    public static class GideonBlackblade {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollectionView otb = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
+            if (!otb.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestAI(otb));
+            }
+            return true;
+        }
+
+        public static SpellAbility chooseSpellAbility(final Player ai, final SpellAbility sa, final List<SpellAbility> spells) {
+            // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
+            List<SpellAbility> best = Lists.newArrayList();
+            List<SpellAbility> possible = Lists.newArrayList();
+            Card tgtCard = sa.getTargetCard();
+            if (tgtCard != null) {
+                for (SpellAbility sp : spells) {
+                    if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(ai, sp)) {
+                        best.add(sp); // these SAs are prioritized since the AI sees a reason to play them now
+                    }
+                    final List<String> keywords = sp.hasParam("KW") ? Arrays.asList(sp.getParam("KW").split(" & "))
+                            : Lists.<String>newArrayList();
+                    for (String kw : keywords) {
+                        if (!tgtCard.hasKeyword(kw)) {
+                            if ("Indestructible".equals(kw) && ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                                continue; // nothing to damage or kill the creature with
+                            }
+                            possible.add(sp); // these SAs at least don't duplicate a keyword on the card
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!best.isEmpty()) {
+                return Aggregates.random(best);
+            } else if (!possible.isEmpty()) {
+                return Aggregates.random(possible);
+            } else {
+                return Aggregates.random(spells); // if worst comes to worst, it's a PW +1 ability, so do at least something
+            }
+        }
+    }
+
     // Guilty Conscience
     public static class GuiltyConscience {
         public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
@@ -677,6 +720,14 @@ public class SpecialCardAi {
     // Living Death (and other similar cards using AILogic LivingDeath or AILogic ReanimateAll)
     public static class LivingDeath {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            // if there's another reanimator card currently suspended, don't cast a new one until the previous
+            // one resolves, otherwise the reanimation attempt will be ruined (e.g. Living End)
+            for (Card ex : ai.getCardsIn(ZoneType.Exile)) {
+                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterType.TIME) > 0) {
+                    return false;
+                }
+            }
+
             int aiBattlefieldPower = 0, aiGraveyardPower = 0;
             int threshold = 320; // approximately a 4/4 Flying creature worth of extra value
 
@@ -820,6 +871,10 @@ public class SpecialCardAi {
             Game game = ai.getGame();
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();
+
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
 
             if (!CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).isEmpty()) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
@@ -1068,6 +1123,44 @@ public class SpecialCardAi {
             }
 
             return dragonPower >= minLife;
+        }
+    }
+
+    // Sorin, Vengeful Bloodlord
+    public static class SorinVengefulBloodlord {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int loyalty = sa.getHostCard().getCounters(CounterType.LOYALTY);
+            CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
+                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            final Card copy = CardUtil.getLKICopy(card);
+                            ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
+                            return copy.getNetToughness() > 0;
+                        }
+                    }));
+            CardLists.sortByCmcDesc(creaturesToGet);
+
+            if (creaturesToGet.isEmpty()) {
+                return false;
+            }
+
+            // pick the best creature that will stay on the battlefield
+            Card best = creaturesToGet.getFirst();
+            for (Card c : creaturesToGet) {
+                if (best != c && ComputerUtilCard.evaluateCreature(c, true, false) >
+                        ComputerUtilCard.evaluateCreature(best, true, false)) {
+                    best = c;
+                }
+            }
+
+            if (best != null) {
+                sa.resetTargets();
+                sa.getTargets().add(best);
+                return true;
+            }
+
+            return false;
         }
     }
 
@@ -1336,6 +1429,10 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Game game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
+
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
 
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();

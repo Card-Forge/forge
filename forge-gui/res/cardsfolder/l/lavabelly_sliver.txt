@@ -1,0 +1,10 @@
+Name:Lavabelly Sliver
+ManaCost:1 R W
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ ChangesZone | AddSVar$ LavabellyTrigDamage & LavabellyGainLife | Description$ Sliver creatures you control have "When this creature enters the battlefield, it deals 1 damage to target player or planeswalker and you gain 1 life."
+SVar:ChangesZone:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ LavabellyTrigDamage | TriggerDescription$ When this creature enters the battlefield, it deals 1 damage to target player or planeswalker and you gain 1 life.
+SVar:LavabellyTrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker to damage | NumDmg$ 1 | SubAbility$ LavabellyGainLife
+SVar:LavabellyGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
+DeckHas:Ability$LifeGain
+Oracle:Sliver creatures you control have "When this creature enters the battlefield, it deals 1 damage to target player or planeswalker and you gain 1 life."

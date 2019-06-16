@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Weapons and Wards
-Description=Eldritch Moon W/G Intro Deck
+Description=The angels have abandoned those they once protected, and villages are beset by monsters and angels like. As humanity is left to fend for itself, it falls to you to sound the alarm, open the armory, and call the militia!
 Deck Type=constructed
 Set=EMN
 Image=weapons_and_wards.jpg

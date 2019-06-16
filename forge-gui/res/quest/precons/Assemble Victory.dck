@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Assemble Victory
-Description=Magic Origins intro deck.
+Description=Not all artificers are confined to workshops. You are the architect of your own victory. Bringing your inventions to the battlefield, you use artifacts to empower your already potent magic.
 Deck Type=constructed
 Set=ORI
 Image=assemble_victory.jpg
@@ -33,7 +33,7 @@ Image=assemble_victory.jpg
 3 Mountain|ORI|2
 3 Mountain|ORI|3
 3 Mountain|ORI|4
-1 Pia and Kiran Nalaar|ORI
+1 Pia and Kiran Nalaar+|ORI
 1 Prism Ring|ORI
 1 Ramroller|ORI
 2 Reclusive Artificer|ORI

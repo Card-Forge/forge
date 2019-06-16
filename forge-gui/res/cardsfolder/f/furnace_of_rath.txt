@@ -5,6 +5,6 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_of_rath.jpg
 Oracle:If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.

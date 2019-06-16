@@ -23,3 +23,7 @@ Name=Commander's Arsenal
 17 R Sylvan Library
 12 M The Mimeoplasm
 18 M Vela the Night-Clad
+
+[tokens]
+c_1_1_sliver
+g_1_1_insect

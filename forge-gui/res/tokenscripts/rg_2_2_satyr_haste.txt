@@ -1,0 +1,7 @@
+Name:Satyr
+ManaCost:no cost
+Types:Creature Satyr
+Colors:red,green
+PT:2/2
+K:Haste
+Oracle:Haste

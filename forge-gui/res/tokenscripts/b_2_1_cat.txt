@@ -1,0 +1,6 @@
+Name:Cat
+ManaCost:no cost
+Types:Creature Cat
+Colors:black
+PT:2/1
+Oracle:

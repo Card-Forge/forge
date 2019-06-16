@@ -88,3 +88,7 @@ Type=Duel_Decks
 68 C Volt Charge
 31 R Winds of Rath
 48 C Zhur-Taa Druid
+
+[tokens]
+w_2_2_griffin_flying
+g_3_3_beast

@@ -1,0 +1,50 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Boros Guild Kit
+Description=Welcome to the Boros Legion! This box contains everything you need to uphold the law and demonstrate your true valor on and off the battlefield. Make us proud, soldier!
+Set=GK1
+Image=boros_guild_kit.jpg
+[main]
+1 Agrus Kos, Wojek Veteran|GK1
+1 Aurelia, the Warleader+|GK1
+1 Blade Instructor|GRN
+1 Bomber Corps|GK1
+1 Boros Charm|GK1
+1 Boros Elite|GK1
+4 Boros Garrison|GK1
+2 Boros Guildgate|GRN|1
+2 Boros Guildgate|GRN|2
+1 Boros Keyrune|GK1
+1 Boros Reckoner|GK1
+2 Boros Signet|GK1
+2 Boros Swiftblade|GK1
+1 Brightflame|GK1
+1 Daring Skyjek|GK1
+1 Firemane Angel|GK1
+1 Firemane Avenger|GK1
+1 Frenzied Goblin|GK1
+1 Gird for Battle|GRN
+1 Hammer Dropper|GRN
+1 Legion Loyalist|GK1
+1 Legion Warboss|GRN
+1 Light of the Legion|GRN
+1 Lightning Helix|GK1
+1 Martial Glory|GK1
+1 Master Warcraft|GK1
+4 Mountain|GK1|1
+4 Mountain|GK1|2
+4 Plains|GK1|1
+4 Plains|GK1|2
+1 Razia, Boros Archangel|GK1
+2 Skyknight Legionnaire|GRN
+1 Spark Trooper|GK1
+2 Sunhome Guildmage|GK1
+1 Sunhome Stalwart|GRN
+1 Sunhome, Fortress of the Legion|GK1
+1 Swiftblade Vindicator|GRN
+1 Sworn Companions|GRN
+1 Wojek Bodyguard|GRN

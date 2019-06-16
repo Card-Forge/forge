@@ -368,3 +368,6 @@ R Vizzerdrix
 290 U Yavimaya Enchantress
 174 U Zombify
 116 R Zur's Weirding
+
+[tokens]
+r_4_4_bird_flying

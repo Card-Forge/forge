@@ -190,15 +190,49 @@ public class AiAttackController {
         if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
         }
-        
+
+        // the attacker will die to a triggered ability (e.g. Sarkhan the Masterless)
+        for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (Trigger t : c.getTriggers()) {
+                if (t.getMode() == TriggerType.Attacks) {
+                    SpellAbility sa = t.getOverridingAbility();
+                    if (sa == null && t.hasParam("Execute")) {
+                        sa = AbilityFactory.getAbility(c, t.getParam("Execute"));
+                    }
+
+                    if (sa != null && sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("DefinedPlayers"))) {
+                        List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
+                        // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
+                        // how much damage is dealt by each of the creatures in the valid list.
+                        if (attacker.getNetToughness() <= valid.size()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
         	return true;
         }
 
         final Player opp = this.defendingOpponent;
-        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true) > 0) {
-            return true;
+
+        // Damage opponent if unblocked
+        final int dmgIfUnblocked = ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true);
+        if (dmgIfUnblocked > 0) {
+            boolean onlyIfExalted = false;
+            if (combat.getAttackers().isEmpty() && ai.countExaltedBonus() > 0
+                    && dmgIfUnblocked - ai.countExaltedBonus() == 0) {
+                // Make sure we're not counting on the Exalted bonus when the AI is planning to attack with more than one creature
+                onlyIfExalted = true;
+            }
+
+            if (!onlyIfExalted || this.attackers.size() == 1 || this.aiAggression == 6 /* 6 is Exalted attack */) {
+                return true;
+            }
         }
+        // Poison opponent if unblocked
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
@@ -213,7 +247,7 @@ public class AiAttackController {
         final CardCollectionView controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
-                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
+                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)) {
                     return true;
                 }
             }
@@ -1119,8 +1153,21 @@ public class AiAttackController {
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
+
+        // contains only the defender's blockers that can actually block the attacker
+        CardCollection validBlockers = CardLists.filter(defenders, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card defender) {
+                return CombatUtil.canBlock(attacker, defender);
+            }
+        });
+        // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
+        boolean dangerousBlockersPresent = !CardLists.filter(validBlockers, Predicates.or(
+                CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
+                CardPredicates.hasKeyword(Keyword.LIFELINK))).isEmpty();
+
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-        int defPower = CardLists.getTotalPower(defenders, true);
+        int defPower = CardLists.getTotalPower(validBlockers, true);
 
         if (!hasCombatEffect) {
             for (KeywordInterface inst : attacker.getKeywords()) {
@@ -1137,10 +1184,9 @@ public class AiAttackController {
         // number of factors about the attacking
         // context that will be relevant to the attackers decision according to
         // the selected strategy
-        for (final Card defender : defenders) {
+        for (final Card defender : validBlockers) {
             // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
-            if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2)
-                    && CombatUtil.canBlock(attacker, defender)) {
+            if (isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
                         && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterType.P1P1) == 0)) {
@@ -1178,7 +1224,7 @@ public class AiAttackController {
                             // - our creature will die for sure (chump attack)
                             // - our attack will not do anything special (no attack/combat effect to proc)
                             // - we can't deal damage to our opponent with sheer number of attackers and/or our attacker's power is 0 or less
-                            if (attackerWillDie || (avoidAttackingIntoBlock && (uselessAttack || noContributionToAttack))) {
+                            if (attackerWillDie || (avoidAttackingIntoBlock && uselessAttack && noContributionToAttack)) {
                                 canKillAllDangerous = false;
                             }
                         }
@@ -1227,8 +1273,9 @@ public class AiAttackController {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = all out attacking");
             return true;
-        case 4: // expecting to at least trade with something
-            if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
+        case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
+            if (canKillAll || (dangerousBlockersPresent && canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked
+                    || (defPower == 0 && !ComputerUtilCombat.lifeInDanger(ai, combat))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;
@@ -1236,7 +1283,7 @@ public class AiAttackController {
             break;
         case 3: // expecting to at least kill a creature of equal value or not be blocked
             if ((canKillAll && isWorthLessThanAllKillers)
-                    || ((canKillAllDangerous || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
+                    || (((dangerousBlockersPresent && canKillAllDangerous) || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
@@ -1245,7 +1292,7 @@ public class AiAttackController {
             break;
         case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
             if (!canBeBlocked || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
-                    (canKillAllDangerous || !canBeKilled))) {
+                    ((dangerousBlockersPresent && canKillAllDangerous) || !canBeKilled))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;

@@ -4,8 +4,7 @@ Types:Instant
 K:Devoid
 A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures.
 SVar:TrigPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBToken | SpellDescription$ Those creatures don't untap during their controller's next untap step.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adverse_conditions.jpg

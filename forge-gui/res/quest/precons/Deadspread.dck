@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Deadspread
-Description=With this deck, you'll reap a lot of rewards for a little bit of work. Your aim is to control your opponent's creatures by giving them -1/-1 counters. Then you'll proliferate. Oh yeah. 
+Description=This Phyrexian deck uses the proliferate mechanic to add harmful -1/-1 counters to your opponent's creatures while adding beneficial charge counters to your weapons of war. Throw in Carnifex Demon and you can count on one frustrated opponent.
 Deck Type=constructed
 Set=SOM
 Image=deadspread.jpg
@@ -33,6 +33,6 @@ Image=deadspread.jpg
 1 Harbor Serpent|M11
 1 Trigon of Thought|SOM
 1 Throne of Geth|SOM
-1 Carnifex Demon|SOM
+1 Carnifex Demon+|SOM
 2 Leaden Myr|SOM
 [sideboard]

@@ -19,7 +19,7 @@ public class FTextEditor extends SkinnedScrollPane {
 
     public FTextEditor() {
         tarEditor = new SkinnedTextArea();
-        tarEditor.setFont(FSkin.getFixedFont(16));
+        tarEditor.setFont(FSkin.getRelativeFixedFont(16));
         tarEditor.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarEditor.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         tarEditor.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));

@@ -1,0 +1,7 @@
+Name:Horror
+ManaCost:no cost
+Types:Creature Horror
+Colors:black
+PT:3/3
+K:CARDNAME attacks specific player each combat if able:Remembered
+Oracle:This creature attacks the designated player each combat if able.

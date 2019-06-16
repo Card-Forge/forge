@@ -1,0 +1,6 @@
+Name:Ooze
+ManaCost:no cost
+Types:Creature Ooze
+Colors:green
+PT:1/1
+Oracle:

@@ -1,39 +1,11 @@
 package forge.screens.home;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.UiCommand;
 import forge.ai.AIOption;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
-import forge.deck.RandomDeckGenerator;
+import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
@@ -48,20 +20,25 @@ import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FPanel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FScrollPanel;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Lobby view. View of a number of players at the deck selection stage.
@@ -71,12 +48,13 @@ import forge.util.gui.SOptionPane;
 public class VLobby implements ILobbyView {
 
     static final int MAX_PLAYERS = 8;
+    final Localizer localizer = Localizer.getInstance();
     private static final ForgePreferences prefs = FModel.getPreferences();
 
     // General variables
     private final GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderConstructedMode"));
     private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
 
@@ -105,13 +83,13 @@ public class VLobby implements ILobbyView {
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
 
-    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
+    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text(localizer.getMessage("lblAddAPlayer")).build();
 
     // Deck frame elements
     private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
     private final List<FDeckChooser> deckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
-    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
-    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
+    private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
+    private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants
@@ -170,7 +148,7 @@ public class VLobby implements ILobbyView {
         }
 
         variantsPanel.setOpaque(false);
-        variantsPanel.add(newLabel("Variants:"));
+        variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
         for (final VariantCheckBox vcb : vntBoxes) {
             variantsPanel.add(vcb);
         }
@@ -455,7 +433,7 @@ public class VLobby implements ILobbyView {
         deckChoosers.add(mainChooser);
 
         // Scheme deck list
-        buildDeckPanel("Scheme Deck", playerIndex, schemeDeckLists, schemeDeckPanels, new ListSelectionListener() {
+        buildDeckPanel(localizer.getMessage("lblSchemeDeck"), playerIndex, schemeDeckLists, schemeDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectSchemeDeck(playerIndex);
             }
@@ -503,14 +481,14 @@ public class VLobby implements ILobbyView {
         });*/
 
         // Planar deck list
-        buildDeckPanel("Planar Deck", playerIndex, planarDeckLists, planarDeckPanels, new ListSelectionListener() {
+        buildDeckPanel(localizer.getMessage("lblPlanarDeck"), playerIndex, planarDeckLists, planarDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectPlanarDeck(playerIndex);
             }
         });
-        
+
         // Vanguard avatar list
-        buildDeckPanel("Vanguard Avatar", playerIndex, vgdAvatarLists, vgdPanels, new ListSelectionListener() {
+        buildDeckPanel(localizer.getMessage("lblVanguardAvatar"), playerIndex, vgdAvatarLists, vgdPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectVanguardAvatar(playerIndex);
             }
@@ -896,8 +874,8 @@ public class VLobby implements ILobbyView {
     private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any"),
                                                typeOptions   = ImmutableList.of("Fantasy", "Generic", "Any");
     final String getNewName() {
-        final String title = "Get new random name";
-        final String message = "What type of name do you want to generate?";
+        final String title = localizer.getMessage("lblGetNewRandomName");
+        final String message = localizer.getMessage("lbltypeofName");
         final SkinImage icon = FOptionPane.QUESTION_ICON;
 
         final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
@@ -916,8 +894,8 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
-        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true));
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
+        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
 
         return newName;
     }
@@ -1009,17 +987,17 @@ public class VLobby implements ILobbyView {
         return vgdAllAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemAIDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:All. */
     public List<PaperCard> getAllAiAvatars() {
         return vgdAllAiAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemRandomDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:Random. */
     public List<PaperCard> getNonRandomHumanAvatars() {
         return nonRandomHumanAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemAIDeck or RemRandomDeck. */
+    /** Return the Vanguard avatars not flagged RemoveDeck:All or RemoveDeck:Random. */
     public List<PaperCard> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
     }

@@ -47,6 +47,8 @@ public interface IGuiGame {
     void showManaPool(PlayerView player);
     void hideManaPool(PlayerView player);
     void updateStack();
+    Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
+    void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);
@@ -142,15 +144,22 @@ public interface IGuiGame {
      */
     <T> List<T> insertInList(String title, T newItem, List<T> oldItems);
 
-    List<PaperCard> sideboard(CardPool sideboard, CardPool main);
+    List<PaperCard> sideboard(CardPool sideboard, CardPool main, String message);
     GameEntityView chooseSingleEntityForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional);
-    List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal);
+    List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
+
+    // show a list of cards and allow some of them to be moved around and return new list
+    List<CardView> manipulateCardList(String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
+
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
     void setHighlighted(PlayerView pv, boolean b);
     void setUsedToPay(CardView card, boolean value);
+    void setSelectables(final Iterable<CardView> cards);
+    void clearSelectables();
+    boolean isSelecting();
 
     void awaitNextInput();
     void cancelAwaitNextInput();

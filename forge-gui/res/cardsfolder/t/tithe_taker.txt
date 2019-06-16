@@ -1,0 +1,8 @@
+Name:Tithe Taker
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+K:Afterlife:1
+S:Mode$ RaiseCost | ValidCard$ Card | Activator$ Opponent | ValidSpell$ Spell,Activated.nonManaAbility | Amount$ 1 | Condition$ PlayerTurn | Description$ During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.
+DeckHas:Ability$Token
+Oracle:During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)

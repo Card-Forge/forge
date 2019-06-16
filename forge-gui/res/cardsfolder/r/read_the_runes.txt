@@ -6,6 +6,6 @@ SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemember
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/read_the_runes.jpg
 Oracle:Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.

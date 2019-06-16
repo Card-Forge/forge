@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
@@ -56,6 +57,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
         CardCollectionView oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
         CardCollectionView computerType = ai.getCardsIn(origin);
+
+        // remove cards that won't be seen in AI's own library if it can't be searched
+        if (!ai.canSearchLibraryWith(sa, ai)) {
+            computerType = CardLists.filter(computerType, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
+        }
 
         // Ugin check need to be done before filterListByType because of ChosenX
         // Ugin AI: always try to sweep before considering +1
@@ -114,7 +120,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
             if (!sa.usesTargeting()) {
-                // TODO: improve logic for non-targeted SAs of this type (most are currently RemAIDeck, e.g. Memory Jar)
+                // TODO: improve logic for non-targeted SAs of this type (most are currently AI:RemoveDeck:All, e.g. Memory Jar)
                 return true;
             } else {
                 // search targetable Opponents
@@ -220,6 +226,9 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 } else {
                     return false;
                 }
+            } else if (destination.equals(ZoneType.Library) && "Card.YouOwn".equals(sa.getParam("ChangeType"))) {
+                return (ai.getCardsIn(ZoneType.Graveyard).size() > ai.getCardsIn(ZoneType.Library).size())
+                        && !ComputerUtil.isPlayingReanimator(ai);
             }
         } else if (origin.equals(ZoneType.Exile)) {
             String logic = sa.getParam("AILogic");
@@ -344,8 +353,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Profaner of the Dead")) {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
-            // Profaner from exile without paying its mana cost. Otherwise the card is marked RemAIDeck and there is no
-            // specific AI to support playing it in a smarter way. Feel free to expand.
+            // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
+            // there is no specific AI to support playing it in a smarter way. Feel free to expand.
             return !CardLists.filter(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES).isEmpty();
         }
 

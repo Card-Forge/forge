@@ -12,5 +12,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Captain's Hook;Shatter;Sorcerer's Wand;Reckless Rage;Saheeli Rai
-humanbattlefield=Tiana, Ship's Caretaker|Id:4;Forebear's Blade|Attaching:4;Forebear's Blade|Attaching:4;Traxos, Scourge of Kroog|Tapped;Storm Fleet Pyromancer;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Clifftop Retreat|Set:DOM;Clifftop Retreat|Set:DOM;Mountain|Set:DOM
+humanbattlefield=Tiana, Ship's Caretaker|Id:4;Forebear's Blade|AttachedTo:4;Forebear's Blade|AttachedTo:4;Traxos, Scourge of Kroog|Tapped;Storm Fleet Pyromancer;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Clifftop Retreat|Set:DOM;Clifftop Retreat|Set:DOM;Mountain|Set:DOM
 aibattlefield=Serra Disciple;Teshar, Ancestor's Apostle;Pardic Wanderer

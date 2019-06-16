@@ -103,7 +103,7 @@ public class AddBasicLandsDialog {
         panel.add(pnlForest);
         panel.add(lblDeckInfo);
 
-        lblDeckInfo.setFont(FSkin.getFont(14));
+        lblDeckInfo.setFont(FSkin.getRelativeFont(14));
         lblDeckInfo.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftDoubleClick(MouseEvent e) {

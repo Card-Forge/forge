@@ -1,0 +1,9 @@
+Name:Glaive of the Guildpact
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddKeyword$ Vigilance & Menace | Description$ Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace.
+SVar:X:Count$Valid Gate.YouCtrl
+SVar:BuffedBy:Gate
+DeckHints:Type$Gate
+Oracle:Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace. (A creature with menace can't be blocked except by two or more creatures.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

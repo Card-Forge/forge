@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -65,7 +64,7 @@ public class UnattachAllAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<GameObject>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();

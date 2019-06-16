@@ -6,6 +6,7 @@ import forge.card.MagicColor;
 import forge.gui.SOverlayUtils;
 import forge.quest.StartingPoolPreferences.PoolType;
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -17,30 +18,39 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class DialogChoosePoolDistribution {
-
+	final Localizer localizer = Localizer.getInstance();
 	private final FPanel mainPanel = new FPanel(new MigLayout("insets 20, gap 25, center, wrap 2"));
 
-	private final FCheckBox cbxBlack     = new FCheckBox("Black");
-	private final FCheckBox cbxBlue      = new FCheckBox("Blue");
-	private final FCheckBox cbxGreen     = new FCheckBox("Green");
-	private final FCheckBox cbxRed       = new FCheckBox("Red");
-	private final FCheckBox cbxWhite     = new FCheckBox("White");
-	private final FCheckBox cbxColorless = new FCheckBox("Colorless");
-	private final FCheckBox cbxArtifacts = new FCheckBox("Include Artifacts");
+	private final FCheckBox cbxBlack     = new FCheckBox(localizer.getMessage("lblBlack"));
+	private final FCheckBox cbxBlue      = new FCheckBox(localizer.getMessage("lblBlue"));
+	private final FCheckBox cbxGreen     = new FCheckBox(localizer.getMessage("lblGreen"));
+	private final FCheckBox cbxRed       = new FCheckBox(localizer.getMessage("lblRed"));
+	private final FCheckBox cbxWhite     = new FCheckBox(localizer.getMessage("lblWhite"));
+	private final FCheckBox cbxColorless = new FCheckBox(localizer.getMessage("lblColorless"));
+	private final FCheckBox cbxArtifacts = new FCheckBox(localizer.getMessage("lblIncludeArtifacts"));
 
-	private final FRadioButton radBalanced   = new FRadioButton("Balanced");
-	private final FRadioButton radRandom     = new FRadioButton("True Random");
-	private final FRadioButton radSurpriseMe = new FRadioButton("Surprise Me");
-	private final FRadioButton radBoosters   = new FRadioButton("Boosters");
+	private final FRadioButton radBalanced   = new FRadioButton(localizer.getMessage("lblBalanced"));
+	private final FRadioButton radRandom     = new FRadioButton(localizer.getMessage("lblTrueRandom"));
+	private final FRadioButton radSurpriseMe = new FRadioButton(localizer.getMessage("lblSurpriseMe"));
+	private final FRadioButton radBoosters   = new FRadioButton(localizer.getMessage("lblBoosters"));
+
+	private final ButtonGroup poolTypeButtonGroup = new ButtonGroup();
 
 	private final FTextField numberOfBoostersField = new FTextField.Builder().text("0").maxLength(10).build();
 
-	private final FButton btnOk = new FButton("OK");
+	private final FButton btnOk = new FButton(localizer.getMessage("lblOk"));
 
 	private Runnable callback;
 
 	@SuppressWarnings("serial")
 	public DialogChoosePoolDistribution(final List<Byte> preferredColors, final PoolType poolType, final boolean includeArtifacts) {
+
+		if (poolTypeButtonGroup.getButtonCount() == 0) {
+			poolTypeButtonGroup.add(radBalanced);
+			poolTypeButtonGroup.add(radRandom);
+			poolTypeButtonGroup.add(radSurpriseMe);
+			poolTypeButtonGroup.add(radBoosters);
+		}
 
 		for (Byte color : preferredColors) {
 			switch (color) {
@@ -70,26 +80,14 @@ public class DialogChoosePoolDistribution {
 		switch (poolType) {
 			case BALANCED:
 				radBalanced.setSelected(true);
-				radRandom.setSelected(false);
-				radSurpriseMe.setSelected(false);
-				radBoosters.setSelected(false);
 				break;
 			case RANDOM:
-				radBalanced.setSelected(false);
 				radRandom.setSelected(true);
-				radSurpriseMe.setSelected(false);
-				radBoosters.setSelected(false);
 				break;
 			case RANDOM_BALANCED:
-				radBalanced.setSelected(false);
-				radRandom.setSelected(false);
 				radSurpriseMe.setSelected(true);
-				radBoosters.setSelected(false);
 				break;
 			case BOOSTERS:
-				radBalanced.setSelected(false);
-				radRandom.setSelected(false);
-				radSurpriseMe.setSelected(false);
 				radBoosters.setSelected(true);
 				break;
 		}
@@ -103,7 +101,7 @@ public class DialogChoosePoolDistribution {
 		final FPanel right = new FPanel(new MigLayout(contentPanelConstraints));
 		right.setOpaque(false);
 
-		final FLabel clearColors = new FLabel.Builder().text("Clear All").fontSize(12).opaque(true).hoverable(true).build();
+		final FLabel clearColors = new FLabel.Builder().text(localizer.getMessage("lblClearAll")).fontSize(12).opaque(true).hoverable(true).build();
 		clearColors.setCommand(new UiCommand() {
 			@Override
 			public void run() {
@@ -116,9 +114,9 @@ public class DialogChoosePoolDistribution {
 			}
 		});
 
-		final FLabel boosterPackLabel = new FLabel.Builder().text("Number of Boosters:").fontSize(14).build();
-		final FLabel colorsLabel = new FLabel.Builder().text("Colors").fontSize(18).build();
-		final FTextPane noSettingsText = new FTextPane("No settings are available for this selection.");
+		final FLabel boosterPackLabel = new FLabel.Builder().text(localizer.getMessage("lblNumberofBoosters") + ":").fontSize(14).build();
+		final FLabel colorsLabel = new FLabel.Builder().text(localizer.getMessage("lblColors")).fontSize(18).build();
+		final FTextPane noSettingsText = new FTextPane(localizer.getMessage("lblnoSettings"));
 
 		if (radBoosters.isSelected()) {
 			right.add(boosterPackLabel, "gaptop 10");
@@ -142,7 +140,7 @@ public class DialogChoosePoolDistribution {
 		//Left Side
 		final FPanel left = new FPanel(new MigLayout(contentPanelConstraints));
 		left.setOpaque(false);
-		left.add(new FLabel.Builder().text("Distribution").fontSize(18).build(), "gaptop 10");
+		left.add(new FLabel.Builder().text(localizer.getMessage("lblDistribution")).fontSize(18).build(), "gaptop 10");
 
 		final JXButtonPanel poolTypePanel    = new JXButtonPanel();
 		final String        radioConstraints = "h 25px!, gaptop 5";
@@ -152,7 +150,7 @@ public class DialogChoosePoolDistribution {
 		poolTypePanel.add(radBoosters, radioConstraints);
 
 		left.add(poolTypePanel, "gaptop 15");
-		left.add(new FTextPane("Hover over each item for a more detailed description."), "gaptop 20");
+		left.add(new FTextPane(localizer.getMessage("lblHoverforDescription")), "gaptop 20");
 
 		ActionListener radioButtonListener = new ActionListener() {
 			@Override
@@ -205,11 +203,11 @@ public class DialogChoosePoolDistribution {
 		cbxArtifacts.setVisible(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
 		numberOfBoostersField.setVisible(radBoosters.isSelected());
 
-		radBalanced.setToolTipText("A \"Balanced\" distribution will provide a roughly equal number of cards in each selected color.");
-		radRandom.setToolTipText("A \"True Random\" distribution will be almost entirely randomly selected. This ignores any color selections.");
-		radSurpriseMe.setToolTipText("This is the same as a \"Balanced\" distribution, except the colors picked will be random and you will not be told what they are.");
-		radBoosters.setToolTipText("This ignores all color settings and instead generates a card pool out of a specified number of booster packs.");
-		cbxArtifacts.setToolTipText("When selected, artifacts will be included in your pool regardless of color selections. This mimics the old card pool behavior.");
+		radBalanced.setToolTipText(localizer.getMessage("lblradBalanced"));
+		radRandom.setToolTipText(localizer.getMessage("lblradRandom"));
+		radSurpriseMe.setToolTipText(localizer.getMessage("lblradSurpriseMe"));
+		radBoosters.setToolTipText(localizer.getMessage("lblradBoosters"));
+		cbxArtifacts.setToolTipText(localizer.getMessage("lblcbxArtifacts"));
 
 		radBalanced.addActionListener(radioButtonListener);
 		radRandom.addActionListener(radioButtonListener);
@@ -228,7 +226,7 @@ public class DialogChoosePoolDistribution {
 			}
 		});
 
-		FButton btnCancel = new FButton("Cancel");
+		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
 		btnCancel.setCommand(new UiCommand() {
 			@Override
 			public void run() {

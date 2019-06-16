@@ -13,6 +13,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Y:Number$0
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazduhr_the_abbot.jpg
 Oracle:{X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.

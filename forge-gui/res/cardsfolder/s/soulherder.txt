@@ -1,0 +1,14 @@
+Name:Soulherder
+ManaCost:1 W U
+Types:Creature Spirit
+PT:1/1
+T:Mode$ Exiled | Origin$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature is exiled from the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ConjurerExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may exile another target creature you control, then return it to the battlefield under its owner's control.
+SVar:ConjurerExile:DB$ ChangeZone | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ ConjurerReturn
+SVar:ConjurerReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+AI:RemoveDeck:Random
+Oracle:Whenever a creature is exiled from the battlefield, put a +1/+1 counter on Soulherder.\nAt the beginning of your end step, you may exile another target creature you control, then return that card to the battlefield under its owner's control.

@@ -1,0 +1,6 @@
+Name:Enraged Ceratok
+ManaCost:2 G G
+Types:Creature Rhino
+PT:4/4
+K:CantBeBlockedBy Creature.powerLE2
+Oracle:Enraged Ceratok can't be blocked by creatures with power 2 or less.

@@ -1,0 +1,20 @@
+[metadata]
+Code=MPS_RNA
+Date=2019-01-24
+Name=Mythic Edition - Ravnica Allegiance
+MciCode=med
+Type=Other
+
+[cards]
+9 M Karn, Scion of Urza
+10 M Tamiyo, the Moon Sage
+11 M Sorin Markov
+12 M Jaya Ballard
+13 M Ajani, Mentor of Heroes
+14 M Dack Fayden
+15 M Domri, Chaos Bringer
+16 M Kaya, Orzhov Usurper
+
+[tokens]
+c_0_0_a_construct_total_artifacts
+rg_4_4_beast_trample

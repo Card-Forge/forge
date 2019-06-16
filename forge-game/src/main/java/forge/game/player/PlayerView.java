@@ -137,16 +137,22 @@ public class PlayerView extends GameEntityView {
 
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
         info.add(TextUtil.concatWithSpace("Commanders:", Lang.joinHomogenous(commanders)));
-        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
+
+        // own commanders
+        for (final CardView v : commanders) {
+            final int damage = getCommanderDamage(v);
+            if (damage > 0) {
+                final String text = TextUtil.concatWithSpace("Commander damage from own commander", TextUtil.addSuffix(v.toString(),":"));
+                info.add(TextUtil.concatWithSpace(text,TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
+            }
+        }
+
+        // opponents commanders
+        for (final PlayerView p : opponents) {
             for (final CardView v : p.getCommanders()) {
-                final int damage = this.getCommanderDamage(v);
+                final int damage = getCommanderDamage(v);
                 if (damage > 0) {
-                    final String text;
-                    if (p.equals(this)) {
-                        text = TextUtil.concatWithSpace("Commander damage from own commander", TextUtil.addSuffix(v.toString(),":"));
-                    } else {
-                        text = TextUtil.concatWithSpace("Commander damage from", TextUtil.addSuffix(p.toString(),"'s"), TextUtil.addSuffix(v.toString(),":"));
-                    }
+                    final String text = TextUtil.concatWithSpace("Commander damage from", TextUtil.addSuffix(p.toString(),"'s"), TextUtil.addSuffix(v.toString(),":"));
                     info.add(TextUtil.concatWithSpace(text,TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
                 }
             }
@@ -181,6 +187,22 @@ public class PlayerView extends GameEntityView {
     }
     void updateCounters(Player p) {
         set(TrackableProperty.Counters, p.getCounters());
+    }
+
+    public boolean getIsExtraTurn() {
+        return get(TrackableProperty.IsExtraTurn);
+    }
+
+    public void setIsExtraTurn(final boolean val) {
+        set(TrackableProperty.IsExtraTurn, val);
+    }
+
+    public int getExtraTurnCount() {
+        return get(TrackableProperty.ExtraTurnCount);
+    }
+
+    public void setExtraTurnCount(final int val) {
+        set(TrackableProperty.ExtraTurnCount, val);
     }
 
     public int getMaxHandSize() {
@@ -416,6 +438,11 @@ public class PlayerView extends GameEntityView {
         details.add(TextUtil.concatNoSpace("Cards in hand: ", TextUtil.addSuffix(String.valueOf(getHandSize()),"/"), getMaxHandString()));
         details.add(TextUtil.concatWithSpace("Cards drawn this turn:", String.valueOf(getNumDrawnThisTurn())));
         details.add(TextUtil.concatWithSpace("Damage prevention:", String.valueOf(getPreventNextDamage())));
+
+        if (getIsExtraTurn()) {
+            details.add("Extra Turn: Yes");
+        }
+        details.add(TextUtil.concatWithSpace("Extra Turn Count:", String.valueOf(getExtraTurnCount())));
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);

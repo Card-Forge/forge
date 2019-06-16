@@ -5,6 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ UR T | Produced$ U | Amount$ 2 | SpellDescription$ Add {U}{U}.
 A:AB$ Mana | Cost$ UR T | Produced$ U R | SpellDescription$ Add {U}{R}.
 A:AB$ Mana | Cost$ UR T | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cascade_bluffs.jpg
 Oracle:{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}.

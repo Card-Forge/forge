@@ -1,0 +1,6 @@
+Name:Gremlin
+ManaCost:no cost
+PT:2/2
+Colors:red
+Types:Creature Gremlin
+Oracle:

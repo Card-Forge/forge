@@ -1,0 +1,8 @@
+Name:Leyline Prowler
+ManaCost:1 B G
+Types:Creature Nightmare Beast
+PT:2/3
+K:Deathtouch
+K:Lifelink
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Deathtouch, lifelink\n{T}: Add one mana of any color.

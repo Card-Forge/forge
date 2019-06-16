@@ -5,10 +5,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.GameCommand;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -29,12 +27,12 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.TextUtil;
-import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
+import forge.util.TextUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -377,8 +375,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeKnownOriginResolve(final SpellAbility sa) {
-        final boolean onlySpells = sa.hasParam("OnlySpells");
-        Iterable<Card> tgtCards = !onlySpells ? getTargetCards(sa) : new CardCollection();
+        Iterable<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
@@ -400,7 +397,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 altDest = true;
             }
         }
-        
+
+        final CardZoneTable triggerList = new CardZoneTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
@@ -412,7 +410,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game);
+            removeFromStack(tgtSA, sa, si, game, triggerList);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -429,7 +427,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
         
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
@@ -504,29 +501,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
-                            if (tgtC.isAura()) {
-                                if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                    tgtC.removeEnchanting(oldEnchanted);
-                                }
-                                tgtC.enchantEntity(attachedTo);
-                            } else if (tgtC.isEquipment()) { //Equipment
-                                if (tgtC.isEquipping()) {
-                                    final Card oldEquiped = tgtC.getEquipping();
-                                    if ( null != oldEquiped )
-                                        tgtC.unEquipCard(oldEquiped);
-                                }
-                                tgtC.equipCard(attachedTo);
-                            } else { // fortification
-                                if (tgtC.isFortifying()) {
-                                    final Card oldFortified = tgtC.getFortifying();
-                                    if( oldFortified != null )
-                                        tgtC.unFortifyCard(oldFortified);
-                                }
-                                tgtC.fortifyCard(attachedTo);
-                            }
+                            tgtC.attachToEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
@@ -536,15 +511,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a player to attach to.");
-                            if (tgtC.isAura()) {
-                                if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                    tgtC.removeEnchanting(oldEnchanted);
-                                }
-                                tgtC.enchantEntity(attachedTo);
-                            }
+                            tgtC.attachToEntity(attachedTo);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
                             continue;
@@ -573,7 +540,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.updateStateForView();
                     }
                     if (sa.hasParam("FaceDown")) {
-                        movedCard.setState(CardStateName.FaceDown, true);
+                        movedCard.turnFaceDown(true);
                     }
                     if (sa.hasParam("Attacking")) {
                         // What should they attack?
@@ -623,7 +590,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("ExileFaceDown")) {
-                        movedCard.setState(CardStateName.FaceDown, true);
+                        movedCard.turnFaceDown(true);
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {
@@ -632,13 +599,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (!movedCard.getZone().equals(originZone)) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
 
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
+                    // addRememberedFromCardState ?
+                    if (tgtC.getMeldedWith() != null) {
+                        Card meld = game.getCardState(tgtC.getMeldedWith(), null);
+                        if (meld != null) {
+                            hostCard.addRemembered(meld);
+                        }
+                    }
                 }
                 if (forget != null) {
                     hostCard.removeRemembered(movedCard);
@@ -649,12 +620,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
+        triggerList.triggerChangesZoneAll(game);
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
@@ -801,7 +767,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
                     }
                 }
-                if (decider.hasKeyword("CantSearchLibrary")) {
+                if (!decider.canSearchLibraryWith(sa, player)) {
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param. 
                     // "then shuffle" is mandatory
@@ -890,11 +856,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             // ensure that selection is within maximum allowed changeNum
             do {
-                selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider);
+                selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
             } while (selectedCards != null && selectedCards.size() > changeNum);
-            for (Card card : selectedCards) {
-                chosenCards.add(card);
-            };
+            if (selectedCards != null) {
+                for (Card card : selectedCards) {
+                    chosenCards.add(card);
+                }
+            }
             // maybe prompt the user if they selected fewer than the maximum possible?
         } else {
             // one at a time
@@ -979,8 +947,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         CardCollection movedCards = new CardCollection();
         long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-        for (Card c : chosenCards) {
+        final CardZoneTable triggerList = new CardZoneTable();
+        for (final Card c : chosenCards) {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
@@ -1020,42 +988,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         else {
                             attachedTo = list.get(0);
                         }
-                        if (c.isAura()) {
-                            if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something, need
-                                // to unenchant it, then clear out the commands
-                                final GameEntity oldEnchanted = c.getEnchanting();
-                                c.removeEnchanting(oldEnchanted);
-                            }
-                            // TODO: this should ideally be handled with !attachedTo.canBeEnchantedBy(c), but the relevant function is not adapted
-                            // for corner cases tested here and modifying it to accomodate these situations (e.g. Boonweaver Giant + Animate Dead)
-                            // tends to break other things.
-                            if (!checkCanIndirectlyAttachTo(c, attachedTo)) {
-                                // if an aura can't enchant the source, it shouldn't move (303.4i, 303.4j)
-                                continue;
-                            }
-                            if ( ((c.hasKeyword("Enchant creature card in a graveyard") || c.hasKeyword("Enchant instant card in a graveyard")) && !attachedTo.getZone().is(ZoneType.Graveyard))
-                                    || !attachedTo.getZone().is(ZoneType.Battlefield)) {
-                                // if the source of the effect is no longer in the zone where it can be enchanted, aura does not move
-                                continue;
-                            }
-                            c.enchantEntity(attachedTo);
-                        }
-                        else if (c.isEquipment()) { //Equipment
-                            if (c.isEquipping()) {
-                                final Card oldEquiped = c.getEquipping();
-                                if ( null != oldEquiped )
-                                    c.unEquipCard(oldEquiped);
-                            }
-                            c.equipCard(attachedTo);
-                        }
-                        else {
-                            if (c.isFortifying()) {
-                                final Card oldFortified = c.getFortifying();
-                                if ( null != oldFortified )
-                                    c.unFortifyCard(oldFortified);
-                            }
-                            c.fortifyCard(attachedTo);
+
+                        if (c.isAttachment()) {
+                            c.attachToEntity(attachedTo);
                         }
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
@@ -1067,15 +1002,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
                         Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
-                        if (c.isAura()) {
-                            if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something, need
-                                // to unenchant it, then clear out the commands
-                                final GameEntity oldEnchanted = c.getEnchanting();
-                                c.removeEnchanting(oldEnchanted);
-                            }
-                            c.enchantEntity(attachedTo);
-                        }
+                        c.attachToEntity(attachedTo);
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;
@@ -1121,24 +1048,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                 if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
-                    c.setState(CardStateName.FaceDown, true);
+                    c.turnFaceDown(true);
 
                     // set New Pt doesn't work because this values need to be copyable for clone effects
-                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")) {
-                        if (sa.hasParam("FaceDownPower")) {
-                            c.setBasePower(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownPower"), sa));
-                        }
-                        if (sa.hasParam("FaceDownToughness")) {
-                            c.setBaseToughness(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownToughness"), sa));
-                        }
+                    if (sa.hasParam("FaceDownPower")) {
+                        c.setBasePower(AbilityUtils.calculateAmount(
+                                source, sa.getParam("FaceDownPower"), sa));
+                    }
+                    if (sa.hasParam("FaceDownToughness")) {
+                        c.setBaseToughness(AbilityUtils.calculateAmount(
+                                source, sa.getParam("FaceDownToughness"), sa));
                     }
 
                     if (sa.hasParam("FaceDownAddType")) {
-                        CardType t = new CardType(c.getCurrentState().getType());
-                        t.addAll(Arrays.asList(sa.getParam("FaceDownAddType").split(",")));
-                        c.getCurrentState().setType(t);
+                        for (String type : sa.getParam("FaceDownAddType").split(",")) {
+                            c.addType(type);
+                        }
                     }
 
                     if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
@@ -1162,7 +1087,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // need to do that again?
                 if (sa.hasParam("FaceDown") && !ZoneType.Battlefield.equals(destination)) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
                 movedCard.setTimestamp(ts);
             }
@@ -1176,7 +1101,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setExiledWith(host);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
             }
             else {
@@ -1186,10 +1111,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             movedCards.add(movedCard);
 
             if (originZone != null) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }
 
             if (champion) {
@@ -1201,6 +1123,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             
             if (remember) {
                 source.addRemembered(movedCard);
+                // addRememberedFromCardState ?
+                if (c.getMeldedWith() != null) {
+                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    if (meld != null) {
+                        source.addRemembered(meld);
+                    }
+                }
             }
             if (forget) {
                 source.removeRemembered(movedCard);
@@ -1221,13 +1150,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             player.shuffle(sa);
         }
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
-        
+        triggerList.triggerChangesZoneAll(game);
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
@@ -1255,36 +1178,39 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game 
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
+        final Card tgtHost = tgtSA.getHostCard();
+        final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
         
         Map<String,Object> params = Maps.newHashMap();
         params.put("StackSa", tgtSA);
         params.put("StackSi", si);
 
+        Card movedCard = null;
         if (srcSA.hasParam("Destination")) {
             final boolean remember = srcSA.hasParam("RememberChanged");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
-                game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
                 Card host = srcSA.getOriginalHost();
                 if (host == null) {
                     host = srcSA.getHostCard();
                 }
-                tgtSA.getHostCard().setExiledWith(host);
-                game.getAction().exile(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().exile(tgtHost, srcSA, params);
+                movedCard.setExiledWith(host);
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
-                game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Hand")) {
-                game.getAction().moveToHand(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToHand(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Library")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
-                    tgtSA.getHostCard().getOwner().shuffle(srcSA);
+                    tgtHost.getOwner().shuffle(srcSA);
                 }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
@@ -1292,32 +1218,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (remember) {
-                srcSA.getHostCard().addRemembered(tgtSA.getHostCard());
+                srcSA.getHostCard().addRemembered(tgtHost);
+                // TODO or remember moved?
             }
 
             if (!tgtSA.isAbility()) {
                 System.out.println("Moving spell to " + srcSA.getParam("Destination"));
             }
+            if (originZone != null && movedCard != null) {
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+            }
         }
-    }
-
-    private static boolean checkCanIndirectlyAttachTo(final Card source, final Card target) {
-        final SpellAbility attachEff = source.getFirstAttachSpell();
-
-        if (attachEff == null) {
-            return false;
-        }
-
-        final Game game = source.getGame();
-        final TargetRestrictions tgt = attachEff.getTargetRestrictions();
-
-        Player attachEffCtrl = attachEff.getActivatingPlayer();
-        if (attachEffCtrl == null && attachEff.getHostCard() != null) {
-            attachEffCtrl = attachEff.getHostCard().getController();
-        }
-
-        CardCollectionView list = game.getCardsIn(tgt.getZone());
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEffCtrl, source, attachEff);
-        return list.contains(target);
     }
 }

@@ -25,6 +25,8 @@ public final class MagicColor {
 
     public static final byte[] WUBRG  = new byte[] { WHITE, BLUE, BLACK, RED, GREEN };
     public static final byte[] WUBRGC = new byte[] { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
+    public static final byte[] COLORPAIR  = new byte[] { WHITE | BLUE, BLUE | BLACK, BLACK | RED, RED | GREEN, GREEN | WHITE,
+            WHITE | BLACK, BLUE | RED, BLACK | GREEN, RED | WHITE, GREEN | BLUE };
 
     /**
      * Private constructor to prevent instantiation.
@@ -101,15 +103,6 @@ public final class MagicColor {
             case GREEN: return Constant.GREEN ;
             default:    return Constant.COLORLESS;
         }
-    }
-
-    public static int getIndexOfFirstColor(final byte color){
-        for (int i = 0; i < NUMBER_OR_COLORS; i++) {
-            if ((color & WUBRG[i]) != 0) {
-                return i;
-            }
-        }
-        return -1; // colorless
     }
 
     /**

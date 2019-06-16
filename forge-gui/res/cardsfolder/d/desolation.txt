@@ -6,7 +6,7 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ Player.TappedLandForManaT
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Remembered | AdditionalRestriction$ Plains | UseImprinted$ True | RepeatSubAbility$ DBDamage | SubAbility$ DBCleanup
 SVar:DBDamage:DB$ DealDamage | Defined$ ImprintedController | NumDmg$ 2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation.jpg
 Oracle:At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.

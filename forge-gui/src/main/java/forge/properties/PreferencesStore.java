@@ -17,14 +17,14 @@
  */
 package forge.properties;
 
+import forge.util.FileUtil;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
-import forge.util.FileUtil;
 
 /**
  * Holds default preference values in an enum.
@@ -109,7 +109,11 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     }
 
     public final int getPrefInt(final T fp0) {
-        return Integer.parseInt(getPref(fp0));
+        try{
+            return Integer.parseInt(getPref(fp0));
+        } catch(NumberFormatException e) {
+            return Integer.parseInt(getPrefDefault(fp0));
+        }
     }
 
     public final boolean getPrefBoolean(final T fp0) {

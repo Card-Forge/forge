@@ -8,6 +8,8 @@ import java.util.Iterator;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 
+import forge.game.card.Card;
+
 public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
     
@@ -96,6 +98,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return result;
     }
 
+    public boolean remove(KeywordInterface keyword) {
+        return map.remove(keyword.getKeyword(), keyword);
+    }
+
     public boolean removeAll(Iterable<String> keywords) {
         boolean result = false;
         for (String k : keywords) {
@@ -145,6 +151,12 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     public Collection<KeywordInterface> getValues(final Keyword keyword) {
         return map.get(keyword);
+    }
+
+    public void setHostCard(final Card host) {
+        for (KeywordInterface k : map.values()) {
+            k.setHostCard(host);
+        }
     }
 
     @Override

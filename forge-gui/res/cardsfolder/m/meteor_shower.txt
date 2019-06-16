@@ -8,6 +8,6 @@ SVar:MaxTgts:SVar$NumPlayers/Plus.1
 SVar:DistroDmg:SVar$X/Plus.1
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_shower.jpg
 Oracle:Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.

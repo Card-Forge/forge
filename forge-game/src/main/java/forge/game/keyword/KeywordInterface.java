@@ -31,6 +31,7 @@ public interface KeywordInterface extends Cloneable {
     public void addSpellAbility(final SpellAbility s);
     public void addStaticAbility(final StaticAbility st);
     
+    public void setHostCard(final Card host);
 
     /**
      * @return the triggers

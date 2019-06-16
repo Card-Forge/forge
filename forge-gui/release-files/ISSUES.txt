@@ -1,7 +1,3 @@
-Online multiplayer functionality has been restored, but is still a Work in Progress. We do have a dedicated developer actively working on the online multiplayer feature.
-
-"When you pay a cost" trigger for M19 cards don't work 100% correctly yet. We're still working on it.
-
-Other known issues are here: https://git.cardforge.org/core-developers/forge/issues
+Known issues are here: https://git.cardforge.org/core-developers/forge/issues
 
 Feel free to report your own there if you have any.

@@ -1,23 +1,24 @@
 package forge.game.ability.effects;
 
-import forge.card.CardStateName;
+import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 
-import java.util.List;
+import forge.util.Lang;
+import forge.util.TextUtil;
 
 public class MillEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
         final boolean bottom = sa.hasParam("FromBottom");
         final boolean facedown = sa.hasParam("ExileFaceDown");
@@ -28,27 +29,27 @@ public class MillEffect extends SpellAbilityEffect {
             source.clearRemembered();
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         if (destination == null) {
             destination = ZoneType.Graveyard;
         }
 
+        final CardZoneTable table = new CardZoneTable();
+
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("Optional")) {
                     final String prompt = TextUtil.concatWithSpace("Do you want to put card(s) from library to", TextUtil.addSuffix(destination.toString(),"?"));
                     if (!p.getController().confirmAction(sa, null, prompt)) {
                         continue;
                     }
                 }
-                final CardCollectionView milled = p.mill(numCards, destination, bottom);
+                final CardCollectionView milled = p.mill(numCards, destination, bottom, sa, table);
                 // Reveal the milled cards, so players don't have to manually inspect the
                 // graveyard to figure out which ones were milled.
                 if (!facedown && reveal) { // do not reveal when exiling face down
                     if (showRevealDialog) {
-                        p.getGame().getAction().reveal(milled, p, false);
+                        game.getAction().reveal(milled, p, false);
                     }
                     StringBuilder sb = new StringBuilder();
                     sb.append(p).append(" milled ").append(milled).append(" to ").append(destination);
@@ -61,8 +62,8 @@ public class MillEffect extends SpellAbilityEffect {
                     }
                     for (final Card c : milled) {
                         c.setExiledWith(host);
-                    	if (facedown) {
-                            c.setState(CardStateName.FaceDown, true);
+                        if (facedown) {
+                            c.turnFaceDown(true);
                         }
                     }
                 }
@@ -78,6 +79,9 @@ public class MillEffect extends SpellAbilityEffect {
                 }
             }
         }
+
+        // run trigger if something got milled
+        table.triggerChangesZoneAll(game);
     }
 
     @Override
@@ -85,10 +89,7 @@ public class MillEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player p : tgtPlayers) {
-            sb.append(p.toString()).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
 
         final ZoneType dest = ZoneType.smartValueOf(sa.getParam("Destination"));
         if ((dest == null) || dest.equals(ZoneType.Graveyard)) {

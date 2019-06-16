@@ -45,8 +45,10 @@ public class FogAi extends SpellAbilityAi {
                 || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
                 && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
                 && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
-            ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
-            AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            boolean reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
+            if (reserved) {
+                AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            }
         }
 
         // AI should only activate this during Human's Declare Blockers phase
@@ -105,7 +107,7 @@ public class FogAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Game game = aiPlayer.getGame();
         boolean chance;
-        if (game.getPhaseHandler().isPlayerTurn(ComputerUtil.getOpponentFor(sa.getActivatingPlayer()))) {
+        if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getWeakestOpponent())) {
             chance = game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);

@@ -2,6 +2,6 @@ Name:Simplify
 ManaCost:G
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ G | SacValid$ Enchantment | Defined$ Player | SpellDescription$ Each player sacrifices an enchantment.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simplify.jpg
 Oracle:Each player sacrifices an enchantment.

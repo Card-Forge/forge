@@ -8,7 +8,7 @@ SVar:TrigElderSpawnSacrifice:DB$ Sacrifice | SacValid$ Island | Optional$ True |
 SVar:DBElderSpawnSacrificeMe:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Island | ConditionCompare$ EQ0 | SubAbility$ DBElderSpawnDamage
 SVar:DBElderSpawnDamage:DB$ DealDamage | Defined$ You | NumDmg$ 6 | ConditionDefined$ Remembered | ConditionPresent$ Island | ConditionCompare$ EQ0 | SubAbility$ DBElderSpawnCleanup
 SVar:DBElderSpawnCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Island.YouCtrl+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_spawn.jpg

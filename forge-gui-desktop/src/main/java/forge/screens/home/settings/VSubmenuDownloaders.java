@@ -1,24 +1,39 @@
 package forge.screens.home.settings;
 
+import forge.ImageKeys;
+import forge.StaticData;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.CardEdition.CardInSet;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.properties.ForgeConstants;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
+import forge.token.TokenDb;
 import forge.toolbox.*;
 import forge.util.FileUtil;
+import forge.util.ImageUtil;
+import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -29,6 +44,8 @@ import java.awt.event.ActionListener;
 public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
+
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -38,20 +55,22 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
-    private final FLabel btnDownloadSetPics           = _makeButton("Download LQ Set Pictures");
-    private final FLabel btnDownloadPics              = _makeButton("Download LQ Card Pictures");
-    private final FLabel btnDownloadQuestImages       = _makeButton("Download Quest Images");
-    private final FLabel btnDownloadAchievementImages = _makeButton("Download Achievement Images");
-    private final FLabel btnReportBug                 = _makeButton("Report a Bug");
-    private final FLabel btnImportPictures            = _makeButton("Import Data");
-    private final FLabel btnHowToPlay                 = _makeButton("How To Play");
-    private final FLabel btnDownloadPrices            = _makeButton("Download Card Prices");
-    private final FLabel btnLicensing                 = _makeButton("License Details");
+    private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
+    private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
+    private final FLabel btnDownloadQuestImages       = _makeButton(localizer.getMessage("btnDownloadQuestImages"));
+    private final FLabel btnDownloadAchievementImages = _makeButton(localizer.getMessage("btnDownloadAchievementImages"));
+    private final FLabel btnReportBug                 = _makeButton(localizer.getMessage("btnReportBug"));
+    private final FLabel btnListImageData             = _makeButton(localizer.getMessage("btnListImageData"));
+    private final FLabel btnImportPictures            = _makeButton(localizer.getMessage("btnImportPictures"));
+    private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
+    private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
+    private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
     /**
      * Constructor.
      */
     VSubmenuDownloaders() {
+        final Localizer localizer = Localizer.getInstance();
 
         final String constraintsLBL = "w 90%!, h 20px!, center, gap 0 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, center";
@@ -61,47 +80,51 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         if (javaRecentEnough()) {
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
-            pnlContent.add(_makeLabel("Download default card picture for each card."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
 
             pnlContent.add(btnDownloadSetPics, constraintsBTN);
-            pnlContent.add(_makeLabel("Download all pictures of each card (one for each set the card appeared in)"), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
 
             pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-            pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
 
             pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
-            pnlContent.add(_makeLabel("Download achievement images to really make your trophies stand out."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);
 
             pnlContent.add(btnDownloadPrices, constraintsBTN);
-            pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
 
         } else {
 
-            String text = "Your version of Java is too old to use the content downloaders.";
+            String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
             FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
 
-            text = "Please update to the latest version of Java 8 to use this feature.";
+            text  = localizer.getMessage("lblPleaseUpdateToTheLatestVersionOfJava");
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
-            text = "You're running " + System.getProperty("java.version") + ". You need at least version 1.8.0_101.";
+            text = localizer.getMessage("lblYoureRunning") + " " + System.getProperty("java.version");
+            text = text + " . " + localizer.getMessage("lblYouNeedAtLeastJavaVersion") ;
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
         }
 
+        pnlContent.add(btnListImageData, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblListImageData")), constraintsLBL);
+
         pnlContent.add(btnImportPictures, constraintsBTN);
-        pnlContent.add(_makeLabel("Import data from a local directory."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblImportPictures")), constraintsLBL);
 
         pnlContent.add(btnReportBug, constraintsBTN);
-        pnlContent.add(_makeLabel("Something broken?"), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblReportBug")), constraintsLBL);
 
         pnlContent.add(btnHowToPlay, constraintsBTN);
-        pnlContent.add(_makeLabel("Rules of the Game."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblHowToPlay")), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
-        pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblLicensing")), constraintsLBL);
 
     }
 
@@ -140,6 +163,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setDownloadQuestImagesCommand(UiCommand command)       { btnDownloadQuestImages.setCommand(command); }
     public void setDownloadAchievementImagesCommand(UiCommand command) { btnDownloadAchievementImages.setCommand(command); }
     public void setReportBugCommand(UiCommand command)                 { btnReportBug.setCommand(command);           }
+    public void setListImageDataCommand(UiCommand command)             { btnListImageData.setCommand(command);       }
     public void setImportPicturesCommand(UiCommand command)            { btnImportPictures.setCommand(command);      }
     public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
@@ -176,6 +200,175 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             }
         });
     }
+    
+    /**
+     * Loops through the editions and card databases, looking for missing images and unimplemented cards.
+     * 
+     * @param tar - Text area to report info
+     * @param scr
+     */
+    public void auditUpdate(FTextArea tar, FScrollPane scr) {
+        // Get top-level Forge objects
+        CardDb cardDb = StaticData.instance().getCommonCards();
+        CardDb variantDb = StaticData.instance().getVariantCards();
+        TokenDb tokenDb = StaticData.instance().getAllTokens();
+        CardEdition.Collection editions = StaticData.instance().getEditions();
+
+        int missingCount = 0;
+        int notImplementedCount = 0;
+
+        final StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
+        final StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
+        
+        nifSB.append("\n\n-------------------\n");
+        nifSB.append("NO IMAGE FOUND LIST\n");
+        nifSB.append("-------------------\n\n");
+        
+        cniSB.append("\n\n-------------------\n");
+        cniSB.append("UNIMPLEMENTED CARD LIST\n");
+        cniSB.append("-------------------\n\n");
+
+        for (CardEdition e : editions) {
+            nifSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
+            cniSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
+
+            String imagePath;
+            int artIndex = 1;
+            ArrayList<String> cis = new ArrayList<String>();
+
+            HashMap<String, Integer> cardCount = new HashMap<String, Integer>();
+            for (CardInSet c : e.getCards()) {
+                if (cardCount.containsKey(c.name)) {
+                    cardCount.put(c.name, cardCount.get(c.name) + 1);
+                } else {
+                    cardCount.put(c.name, 1);
+                }
+            }
+            
+            // loop through the cards in this edition, considering art variations...
+            for (Entry<String, Integer> entry : cardCount.entrySet()) {
+                String c = entry.getKey();
+                artIndex = entry.getValue();
+
+                PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
+                if (cp == null) {
+                    cp = variantDb.getCard(c, e.getCode(), artIndex);
+                }
+
+                if (cp == null) {
+                    cniSB.append(" " + c + "\n");
+                    notImplementedCount++;
+                    continue;
+                }
+
+
+                //
+                // check the front image
+                //
+                imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
+                if (imagePath != null) {
+                    File file = ImageKeys.getImageFile(imagePath);
+                    if (file == null) {
+                        nifSB.append(" " + imagePath + "\n");
+                        missingCount++;
+                    }
+                } 
+
+                //
+                // check the back face
+                //
+                if (ImageUtil.hasBackFacePicture(cp)) {
+                    imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
+                    if (imagePath != null) {
+                        File file = ImageKeys.getImageFile(imagePath);
+                        if (file == null) {
+                            nifSB.append(" " + imagePath + "\n");
+                            missingCount++;
+                        }
+                    } 
+                }
+            }
+
+            nifSB.append("\nTOKENS\n");
+
+            // TODO: Audit token images here...
+            for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+                String name = tokenEntry.getKey();
+                artIndex = tokenEntry.getValue();
+                try {
+                    PaperToken token = tokenDb.getToken(name, e.getCode());
+                    if (token == null) {
+                        continue;
+                    }
+
+                    for(int i = 0; i < artIndex; i++) {
+                        String imgKey = token.getImageKey(i);
+                        File file = ImageKeys.getImageFile(imgKey);
+                        if (file == null) {
+                            nifSB.append(" " + token.getImageFilename(i+1) + "\n");
+                            missingCount++;
+                        }
+                    }
+                } catch(Exception ex) {
+                    System.out.println("No Token found: " + name + " in " + e.getName());
+                }
+            }
+            nifSB.append("\n");
+        }
+
+
+        String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
+        cniSB.append("\n-----------\n");
+        cniSB.append(totalStats);
+        cniSB.append("-----------\n\n");
+        
+        nifSB.append(cniSB); // combine things together...
+
+        tar.setText(nifSB.toString());
+        tar.setCaretPosition(0); // this will move scroll view to the top...
+        
+        final FButton btnClipboardCopy = new FButton(localizer.getMessage("btnCopyToClipboard"));
+        btnClipboardCopy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(nifSB.toString()), null);
+                SOverlayUtils.hideOverlay();
+            }
+        });
+        scr.getParent().add(btnClipboardCopy, "w 200!, h pref+12!, center, gaptop 10");
+        
+        String labelText = "<html>Missing images: " + missingCount + "<br>Unimplemented cards: " + notImplementedCount + "<br>";
+        final FLabel statsLabel = new FLabel.Builder().text(labelText).fontSize(15).build();
+        scr.getParent().add(statsLabel);
+
+        FOverlay.SINGLETON_INSTANCE.getPanel().validate();
+        FOverlay.SINGLETON_INSTANCE.getPanel().repaint();
+    }
+
+    public void showCardandImageAuditData() {
+        final FTextArea tar = new FTextArea("Auditing card and image data. Please wait...");
+        tar.setOpaque(true);
+        tar.setLineWrap(false);
+        tar.setWrapStyleWord(false);
+        tar.setEditable(false);
+        tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        tar.setFont(FSkin.getRelativeFixedFont(12));
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        final FScrollPane scr = new FScrollPane(tar, true, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        _showDialog(scr, new Runnable() {
+            @Override
+            public void run() {
+                auditUpdate(tar, scr);
+                scr.getViewport().setViewPosition(new Point(0, 0));
+            }
+        });
+    }
+    
 
     public void showLicensing() {
         String license = "<html>Forge License Information<br><br>"
@@ -210,7 +403,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      */
     @Override
     public String getMenuTitle() {
-        return "Content Downloaders";
+        return localizer.getMessage("ContentDownloaders");
     }
 
     /* (non-Javadoc)

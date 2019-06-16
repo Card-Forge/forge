@@ -72,6 +72,12 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("cmcGT") && (activator != null)
+                && (card.getCMC() <= CardLists.getType(activator.getCardsIn(ZoneType.Battlefield),
+                        params.get("cmcGT")).size())) {
+            return false;
+        }
+
         if (params.containsKey("NumLimitEachTurn") && activator != null) {
             int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
             String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
@@ -120,11 +126,11 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("NonLoyalty") && (spellAbility.getRestrictions().isPwAbility())) {
+        if (params.containsKey("NonLoyalty") && spellAbility.isPwAbility()) {
             return false;
         }
 
-        if (params.containsKey("Loyalty") && !(spellAbility.getRestrictions().isPwAbility())) {
+        if (params.containsKey("Loyalty") && !spellAbility.isPwAbility()) {
             return false;
         }
 
@@ -158,6 +164,14 @@ public class StaticAbilityCantBeCast {
         if (params.containsKey("ValidCard")
                 && (card == null || !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null))) {
             return false;
+        }
+
+        if (params.containsKey("Origin")) {
+            List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
+
+            if (!src.contains(card.getZone().getZoneType())) {
+                return false;
+            }
         }
 
         if (params.containsKey("Player") && (player != null)

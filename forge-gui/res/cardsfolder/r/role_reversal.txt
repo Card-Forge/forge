@@ -1,0 +1,8 @@
+Name:Role Reversal
+ManaCost:U U R
+Types:Sorcery
+A:SP$ Pump | Cost$ U U R | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBExchange | StackDescription$ None | SpellDescription$ Exchange control of two target permanents that share a permanent type.
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent | TgtPrompt$ Select target permanent shares a card type with it | TargetsWithSharedTypes$ Creature,Artifact,Enchantment,Planeswalker,Land | TargetUnique$ True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Exchange control of two target permanents that share a permanent type.

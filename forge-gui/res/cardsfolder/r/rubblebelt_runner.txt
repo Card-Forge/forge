@@ -1,0 +1,6 @@
+Name:Rubblebelt Runner
+ManaCost:1 R G
+Types:Creature Viashino Warrior
+PT:3/3
+K:CantBeBlockedBy Creature.token
+Oracle:Rubblebelt Runner can't be blocked by creature tokens.

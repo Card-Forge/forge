@@ -13,6 +13,6 @@ ManaCost:3 B
 Types:Sorcery
 K:Aftermath
 A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Create a 2/2 black Zombie creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie AKH
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie akh
 DeckHas:Ability$Token
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nExile target card from a graveyard. Create a 2/2 black Zombie creature token.

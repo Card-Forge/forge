@@ -1,0 +1,6 @@
+Name:Zombie Army
+ManaCost:no cost
+Types:Creature Zombie Army
+Colors:black
+PT:0/0
+Oracle:

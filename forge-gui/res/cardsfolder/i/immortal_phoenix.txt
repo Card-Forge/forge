@@ -1,0 +1,8 @@
+Name:Immortal Phoenix
+ManaCost:4 R R
+Types:Creature Phoenix
+PT:5/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+Oracle:Flying\nWhen Immortal Phoenix dies, return it to its owner's hand.

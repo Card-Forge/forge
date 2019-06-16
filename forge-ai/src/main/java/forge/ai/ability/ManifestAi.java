@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -104,7 +103,7 @@ public class ManifestAi extends SpellAbilityAi {
         // check to ensure that there are no replacement effects that prevent creatures ETBing from library
         // (e.g. Grafdigger's Cage)
         Card topCopy = CardUtil.getLKICopy(library.getFirst());
-        topCopy.setState(CardStateName.FaceDown, false);
+        topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
         final Map<String, Object> repParams = Maps.newHashMap();
@@ -113,7 +112,7 @@ public class ManifestAi extends SpellAbilityAi {
         repParams.put("Origin", ZoneType.Library);
         repParams.put("Destination", ZoneType.Battlefield);
         repParams.put("Source", sa.getHostCard());
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.None);
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.Other);
         if (!list.isEmpty()) {
             return false;
         }

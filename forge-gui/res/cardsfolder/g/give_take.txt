@@ -17,5 +17,5 @@ A:SP$ RemoveCounter | Cost$ 2 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Selec
 SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 Oracle:Remove all +1/+1 counters from target creature you control. Draw that many cards.\nFuse (You may cast one or both halves of this card from your hand.)

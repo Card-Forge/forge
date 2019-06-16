@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Joris Jurgen 2
+Title=Joris Jurgen
+Difficulty=medium
+Description=UG Five Color Gates deck with Gatekeeper Gargoyle and Chamber Sentry.
+Deck Type=constructed
+Icon=Joris Jurgen.jpg
+[main]
+3 Arch of Orazca|RIX
+4 Chamber Sentry|GRN
+4 Circuitous Route|GRN
+4 Crucible of Worlds|M19
+3 Dimir Guildgate|GRN
+4 Dryad Greenseeker|M19
+2 Elvish Rejuvenator|M19
+3 Forest
+4 Gatekeeper Gargoyle|GRN
+4 Gateway Plaza|GRN
+4 Golgari Guildgate|GRN
+2 Guild Summit|GRN
+2 Island
+4 Selesnya Guildgate|GRN
+4 Tatyova, Benthic Druid|DOM
+4 The Mending of Dominaria|DOM
+4 Wayward Swordtooth|RIX
+1 World Shaper|RIX
+[sideboard]

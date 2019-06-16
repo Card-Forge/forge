@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -88,6 +89,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
@@ -97,13 +99,13 @@ public class DamageAllEffect extends DamageBaseEffect {
         }
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+            c.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
+                p.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
             }
         }
 
@@ -121,7 +123,12 @@ public class DamageAllEffect extends DamageBaseEffect {
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
             damageMap.triggerDamageDoneOnce(false, sa);
+
+            preventMap.clear();
+            damageMap.clear();
         }
+
+        counterTable.triggerCountersPutAll(game);
 
         replaceDying(sa);
     }

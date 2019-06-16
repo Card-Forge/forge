@@ -250,7 +250,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                 if (hideFilters) {
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
                 } else {
-                    final JMenu addMenu = GuiUtils.createMenu("Add Filter");
+                    final JMenu addMenu = GuiUtils.createMenu("Add/Edit Filter");
                     GuiUtils.addMenuItem(addMenu, "Current text search",
                             KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                             cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
@@ -1130,7 +1130,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @param unique - if true, the editor will be set to the "unique item names only" mode.
      */
     public void setWantUnique(final boolean unique) {
-        this.wantUnique = this.alwaysNonUnique ? false : unique;
+        this.wantUnique = !this.alwaysNonUnique && unique;
     }
 
     /**

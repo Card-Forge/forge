@@ -26,6 +26,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -90,7 +91,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
         // AI does not know how to sideboard
         return null;
     }
@@ -161,10 +162,36 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(
-            FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title,
+            FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
             Player targetedPlayer) {
-        // this isn't used
-        return null;
+        if (delayedReveal != null) {
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+	FCollection<T> remaining = new FCollection<T>(optionList);
+	List<T> selecteds = new ArrayList<T>();
+	T selected;
+	do {
+	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
+	    if ( selected != null ) {
+		remaining.remove(selected);
+		selecteds.add(selected);
+	    }
+	} while ( (selected != null ) && (selecteds.size() < max) );
+        return selecteds;
+    }
+
+    @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2,
+	       boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
+	if (delayedReveal != null) {
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+	T selected1 = chooseSingleEntityForEffect(optionList1, null, sa, title, optional, targetedPlayer);
+	T selected2 = chooseSingleEntityForEffect(optionList2, null, sa, title, optional || selected1!=null, targetedPlayer);
+	List<T> selecteds = new ArrayList<T>();
+	if ( selected1 != null ) { selecteds.add(selected1); }
+	if ( selected2 != null ) { selecteds.add(selected2); }
+	return selecteds;
     }
 
     @Override
@@ -302,7 +329,7 @@ public class PlayerControllerAi extends PlayerController {
 
         // TODO: Currently this logic uses the same routine as Scry. Possibly differentiate this and implement
         // a specific logic for Surveil (e.g. maybe to interact better with Reanimator strategies etc.).
-        if (getPlayer().getCardsIn(ZoneType.Hand).size() <= getAi().getIntProperty(AiProps.SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL)) {
+        if (getPlayer().getCardsIn(ZoneType.Library).size() <= getAi().getIntProperty(AiProps.SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL)) {
             toTop.addAll(topN);
         } else {
             for (Card c : topN) {
@@ -330,14 +357,17 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source) {
         //TODO Add more logic for AI ordering here
 
-        // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
+        if (cards.isEmpty()) {
+            return cards;
+        }
+
         if (destinationZone == ZoneType.Graveyard) {
+            // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
             if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
-                    return card.getName().equals("Volrath's Shapeshifter")
-                            || card.getStates().contains(CardStateName.OriginalText) && card.getState(CardStateName.OriginalText).getName().equals("Volrath's Shapeshifter");
+                    return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
                 }
             }).isEmpty()) {
                 int bestValue = 0;
@@ -361,6 +391,61 @@ public class PlayerControllerAi extends PlayerController {
                     return reordered;
                 }
             }
+        } else if (destinationZone == ZoneType.Library) {
+            // Ponder and similar cards
+            Player p = cards.getFirst().getController(); // whose library are we reordering?
+            CardCollection reordered = new CardCollection();
+
+            // Try to use the Scry logic to figure out what should be closer to the top and what should be closer to the bottom
+            CardCollection topLands = new CardCollection(), topNonLands = new CardCollection(), bottom = new CardCollection();
+            for (Card c : cards) {
+                if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(p, c)) {
+                    bottom.add(c);
+                } else {
+                    if (c.isLand()) {
+                        topLands.add(c);
+                    } else {
+                        topNonLands.add(c);
+                    }
+                }
+            }
+
+            int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+
+            if (!p.isOpponentOf(player)) {
+                if (landsOTB <= 2) {
+                    // too few lands, add all the lands from the "top" category first
+                    reordered.addAll(topLands);
+                    topLands.clear();
+                } else {
+                    // we would have scried a land to top, so add one land from the "top" category if it's available there, but not more
+                    if (!topLands.isEmpty()) {
+                        Card first = topLands.getFirst();
+                        reordered.add(first);
+                        topLands.remove(first);
+                    }
+                }
+                // add everything that was deemed playable
+                reordered.addAll(topNonLands);
+                // then all the land extras that may be there
+                reordered.addAll(topLands);
+                // and then everything else that was deemed unplayable and thus scriable to the bottom
+                reordered.addAll(bottom);
+            } else {
+                // try to screw the opponent up as much as possible by placing the uncastables first
+                reordered.addAll(bottom);
+                if (landsOTB <= 5) {
+                    reordered.addAll(topNonLands);
+                    reordered.addAll(topLands);
+                } else {
+                    reordered.addAll(topLands);
+                    reordered.addAll(topNonLands);
+                }
+            }
+
+            assert(reordered.size() == cards.size());
+
+            return reordered;
         }
 
         // Default: return with the same order as was passed into this method
@@ -452,12 +537,63 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        return !ComputerUtil.wantMulligan(player, cardsToReturn);
+    }
+
+    @Override
     public CardCollectionView getCardsToMulligan(Player firstPlayer)  {
-        if (!ComputerUtil.wantMulligan(player)) {
+        if (!ComputerUtil.wantMulligan(player, 0)) {
             return null;
         }
 
         return player.getCardsIn(ZoneType.Hand);
+    }
+
+    @Override
+    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+        // TODO This is better than it was before, but still suboptimal (but fast).
+        // Maybe score a bunch of hands based on projected hand size and return the "duds"
+        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        int numLandsDesired = (mulliganingPlayer.getStartingHandSize() - cardsToReturn) / 2;
+
+        CardCollection toReturn = new CardCollection();
+        for (int i = 0; i < cardsToReturn; i++) {
+            hand.removeAll(toReturn);
+
+            CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
+            int numLandsInHand = landsInHand.size() - CardLists.filter(toReturn, Presets.LANDS).size();
+
+            // If we're flooding with lands, get rid of the worst land we have
+            if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
+                CardCollection producingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA);
+                CardCollection nonProducingLands = CardLists.filter(landsInHand, Predicates.not(Presets.LANDS_PRODUCING_MANA));
+                Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
+                        : ComputerUtilCard.getWorstLand(nonProducingLands);
+                toReturn.add(worstLand);
+                continue;
+            }
+
+            // See if we'd scry something to the bottom in this situation. If we want to, probably get rid of it.
+            CardCollection scryBottom = new CardCollection();
+            for (Card c : hand) {
+                // Lands are evaluated separately above, factoring in the number of cards to be returned to the library
+                if (!c.isLand() && !toReturn.contains(c) && !willPutCardOnTop(c)) {
+                    scryBottom.add(c);
+                }
+            }
+            if (!scryBottom.isEmpty()) {
+                CardLists.sortByCmcDesc(scryBottom);
+                toReturn.add(scryBottom.getFirst()); // assume the max CMC one is worse since we're not guaranteed to have lands for it
+                continue;
+            }
+
+            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy
+            // the requirement
+            toReturn.add(ComputerUtilCard.getWorstAI(hand));
+        }
+
+        return CardCollection.getView(toReturn);
     }
 
     @Override
@@ -868,11 +1004,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa) {
-        return brains.chooseProliferation(sa);
-    }
-
-    @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         return brains.doTrigger(currentAbility, true);
     }
@@ -921,7 +1052,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, boolean isActivatedSa) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean isActivatedSa) {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = isActivatedSa ? ComputerUtilMana.calculateManaCost(sa, false, 0) : new ManaCostBeingPaid(toPay);
         return ComputerUtilMana.payManaCost(cost, sa, player);
@@ -974,7 +1105,7 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
         if (sa.hasParam("AILogic")) {
             CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
-            CardCollectionView oppLibrary = ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library);
+            CardCollectionView oppLibrary = player.getWeakestOpponent().getCardsIn(ZoneType.Library);
             final Card source = sa.getHostCard();
             final String logic = sa.getParam("AILogic");
 
@@ -1030,7 +1161,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsForZoneChange(
-            ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList,
+	    ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max,
             DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;
@@ -1087,9 +1218,39 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
-        // TODO Auto-generated method stub
-        return null;
+        List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
+        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
+
+        for (OptionalCostValue opt : optionalCostValues) {
+            // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
+            Cost fullCost = opt.getCost().copy().add(costSoFar);
+            SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+
+            // Playability check for Kicker
+            if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
+                SpellAbility kickedSaCopy = fullCostSa.copy();
+                kickedSaCopy.addOptionalCost(opt.getType());
+                Card copy = CardUtil.getLKICopy(chosen.getHostCard());
+                copy.addOptionalCostPaid(opt.getType());
+                if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
+                    continue; // don't choose kickers we don't want to play
+                }
+            }
+
+            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+                chosenOptCosts.add(opt);
+                costSoFar.add(opt.getCost());
+            }
+        }
+
+        return chosenOptCosts;
+    }
+
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        // Always true?
+        return true;
     }
 }

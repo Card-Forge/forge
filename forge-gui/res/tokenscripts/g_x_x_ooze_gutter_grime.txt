@@ -1,0 +1,8 @@
+Name:Ooze
+ManaCost:no cost
+Types:Creature Ooze
+Colors:green
+PT:*/*
+S:Mode$ Continuous | SetPower$ GutterGrimePT | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.
+SVar:GutterGrimePT:Remembered$CardCounters.SLIME
+Oracle:This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.

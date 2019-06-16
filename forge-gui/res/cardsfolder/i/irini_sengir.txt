@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Legendary Creature Vampire Dwarf
 PT:2/2
 S:Mode$ RaiseCost | ValidCard$ Enchantment.White,Enchantment.Green | Type$ Spell | Amount$ 2 | Description$ White enchantment spells and green enchantment spells cost 2 more to cast.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irini_sengir.jpg
 Oracle:Green enchantment spells and white enchantment spells cost {2} more to cast.

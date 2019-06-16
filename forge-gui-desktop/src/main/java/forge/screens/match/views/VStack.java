@@ -17,28 +17,9 @@
  */
 package forge.screens.match.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 import forge.CachedCardImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.spellability.StackItemView;
@@ -46,12 +27,23 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import forge.util.collect.FCollectionView;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * Assembles Swing components of stack report.
@@ -191,22 +183,49 @@ public class VStack implements IVDoc<CStack> {
             setFocusable(false);
             setEditable(false);
             setLineWrap(true);
-            setFont(FSkin.getFont(12));
+            setFont(FSkin.getFont());
             setWrapStyleWord(true);
             setMinimumSize(new Dimension(CARD_WIDTH + 2 * PADDING, CARD_HEIGHT + 2 * PADDING));
+            
+            // if the top of the stack is not assigned yet...
+            if (hoveredItem == null)
+            {
+            	// set things up to draw an arc from it...
+            	hoveredItem = StackInstanceTextArea.this;
+            	controller.getMatchUI().setCard(item.getSourceCard());
+            }
 
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    hoveredItem = StackInstanceTextArea.this;
-                    controller.getMatchUI().setCard(item.getSourceCard());
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                		hoveredItem = StackInstanceTextArea.this;
+                	}
+                	controller.getMatchUI().setCard(item.getSourceCard());
+
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    if (hoveredItem == StackInstanceTextArea.this) {
-                        hoveredItem = null;
-                    }
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                		if (hoveredItem == StackInstanceTextArea.this) {
+                			hoveredItem = null;
+                		}
+                	}
+                }
+                
+                @Override
+                public void mouseClicked(final MouseEvent e) {
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
+                		if (hoveredItem == StackInstanceTextArea.this) {
+                			hoveredItem = null;
+                		}
+                		else
+                		{
+                			hoveredItem = StackInstanceTextArea.this;
+                			controller.getMatchUI().setCard(item.getSourceCard());
+                		}
+                	}
                 }
             });
 
@@ -229,7 +248,7 @@ public class VStack implements IVDoc<CStack> {
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final CardStateView curState = item.getSourceCard().getCurrentState();
-            final boolean isFaceDown = curState.getState() == CardStateName.FaceDown;
+            final boolean isFaceDown = item.getSourceCard().isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(curState, true); // otherwise doesn't work correctly for face down Morphs
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Grugalorasalar 2
+Title=Grugalorasalar
+Difficulty=medium
+Description=Izzet Mirari Conjecture burn deck with many instants and sorceries and multiple ways to replay or copy them.
+Deck Type=constructed
+Icon=Grugalorasalar.jpg
+[main]
+4 Banefire|M19
+4 Chandra, Torch of Defiance|KLD
+2 Expansion // Explosion|GRN
+4 Fight with Fire|DOM
+1 Forest
+4 Frontier Bivouac|KTK
+4 Guttersnipe|M19
+2 Island
+2 Jaya Ballard|DOM
+2 Jaya's Immolating Inferno|DOM
+3 Lightning Strike|M19
+9 Mountain
+3 Nature's Spiral|DOM
+4 Shock|M19
+4 Sulfur Falls|DOM
+4 The Mirari Conjecture|DOM
+4 Vivid Crag|LRW
+[sideboard]

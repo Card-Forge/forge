@@ -2,10 +2,12 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -49,7 +51,6 @@ public class SetStateEffect extends SpellAbilityEffect {
         final String mode = sa.getParam("Mode");
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final List<Card> tgtCards = getTargetCards(sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
         final boolean morphUp = sa.hasParam("MorphUp");
@@ -57,7 +58,9 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
 
-        for (final Card tgt : tgtCards) {
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
+        for (final Card tgt : getTargetCards(sa)) {
             if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
                 continue;
             }
@@ -71,13 +74,9 @@ public class SetStateEffect extends SpellAbilityEffect {
             // facedown cards that are not Permanent, can't turn faceup there
             if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
-                // need to cache manifest status
-                boolean manifested = tgt.isManifested();
-                // FIXME setState has to many other Consequences, use LKI?
-                tgt.setState(CardStateName.Original, true);
-                game.getAction().reveal(new CardCollection(tgt), tgt.getOwner(), true, "Face-down card can't turn face up");
-                tgt.setState(CardStateName.FaceDown, true);
-                tgt.setManifested(manifested);
+                Card lki = CardUtil.getLKICopy(tgt);
+                lki.turnFaceUp(true, false);
+                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, "Face-down card can't turn face up");
 
                 continue;
             }
@@ -125,12 +124,13 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, p, true);
+                    tgt.addCounter(CounterType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);
                 }
             }
         }
+        table.triggerCountersPutAll(game);
     }
 }

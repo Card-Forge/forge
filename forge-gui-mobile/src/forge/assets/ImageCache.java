@@ -22,20 +22,17 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
-
 import forge.ImageKeys;
-import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
-import forge.screens.match.MatchController;
 import forge.util.ImageUtil;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -55,7 +52,10 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> missingIconKeys = new HashSet<String>();
-    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
+    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
+            .maximumSize(400)
+            .expireAfterAccess(15,TimeUnit.MINUTES)
+            .build(new ImageLoader());
     public static final Texture defaultImage;
 
     private static boolean imageLoaded, delayLoadRequested;
@@ -78,11 +78,6 @@ public class ImageCache {
     public static void clear() {
         cache.invalidateAll();
         missingIconKeys.clear();
-    }
-
-    public static Texture getImage(final CardView card) {
-        final String key = card.getCurrentState().getImageKey(MatchController.instance.getLocalPlayers());
-        return getImage(key, true);
     }
 
     public static Texture getImage(InventoryItem ii) {

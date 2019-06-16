@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Effect | Cost$ 2 U U | Name$ Psychic Trance Effect | StaticAbilities$ Static | SVars$ Counter | SpellDescription$ Until end of turn, Wizards you control gain "{T}: Counter target spell."
 SVar:Static:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.Wizard+YouCtrl | AddAbility$ Counter | Description$ All Wizards you control have Tap: Counter target spell.
 SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell
-SVar:RemRandomDeck:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_trance.jpg
 Oracle:Until end of turn, Wizards you control gain "{T}: Counter target spell."

@@ -50,6 +50,10 @@ public abstract class ConquestBattle {
             view.getBtnRestart().setVisible(false);
             view.getBtnQuit().setText("Great!");
             model.addWin(this);
+            if (location.getEvent().getTemporaryUnlock() != null) {
+                // secret area for this event, unlock it until the player moves
+                ConquestUtil.setPlaneTemporarilyAccessible(location.getEvent().getTemporaryUnlock(), true);
+            }
         }
         else {
             view.getBtnRestart().setVisible(true);

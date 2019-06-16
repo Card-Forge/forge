@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -43,7 +44,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 return;
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
-            card.addCounter(CounterType.AGE, 1, activator, true);
+            GameEntityCounterTable table = new GameEntityCounterTable();
+            card.addCounter(CounterType.AGE, 1, activator, true, table);
+
+            table.triggerCountersPutAll(game);
+
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = card.getCounters(CounterType.AGE);
@@ -91,14 +96,15 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         final String remSVar = sa.getParam("RememberSacrificedSVar");
         int countSacrificed = 0;
+        CardZoneTable table = new CardZoneTable();
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (game.getAction().sacrifice(card, sa) != null) {
-                	countSacrificed++;
-                	if (remSacrificed) {
-                		card.addRemembered(card);
-                	}
+                if (game.getAction().sacrifice(card, sa, table) != null) {
+                    countSacrificed++;
+                    if (remSacrificed) {
+                        card.addRemembered(card);
+                    }
                 }
             }
         }
@@ -135,8 +141,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 for (Card sac : choosenToSacrifice) {
                     final Card lKICopy = CardUtil.getLKICopy(sac);
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa) != null;
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, table) != null;
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table);
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);
@@ -145,6 +151,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
+                        card.addExploited(lKICopy);
                         final Map<String, Object> runParams = Maps.newHashMap();
                         runParams.put("Exploited", lKICopy);
                         runParams.put("Card", card);
@@ -168,6 +175,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
             	} while (root != null);
             }
         }
+
+        table.triggerChangesZoneAll(game);
     }
 
     @Override

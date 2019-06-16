@@ -107,6 +107,7 @@ public class SealedCardPoolGenerator {
             final boolean isZendikarSet = sd.getLandSetCode().equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
             final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
     
+            // TODO: Is this still needed? Just use Add Basic Land UI.
             for (final String element : MagicColor.Constant.BASIC_LANDS) {
                 int numArt = FModel.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
                 int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
@@ -128,10 +129,16 @@ public class SealedCardPoolGenerator {
         sealed.setHumanDeck(deck);
         for (int i = 0; i < rounds; i++) {
             // Generate other decks for next N opponents
-            final CardPool aiPool = sd.getCardPool(false);
-            if (aiPool == null) { return null; }
+            try {
+                final CardPool aiPool = sd.getCardPool(false);
+                if (aiPool == null) { return null; }
 
-            sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck(sd.getLandSetCode()));
+                sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck(sd.getLandSetCode()));
+            } catch (IllegalStateException e) {
+                // If somehow we run out cards to generate pools, stop generating pools
+                System.out.println(e.toString());
+                rounds = i;
+            }
         }
 
         // Rank the AI decks

@@ -258,3 +258,21 @@ FoilChanceInBooster=100
 247 U Rakdos Carnarium
 248 U Selesnya Sanctuary
 249 U Simic Growth Chamber
+
+[tokens]
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+w_1_1_soldier
+w_1_1_spirit_flying
+b_1_1_faerie_rogue_flying
+b_0_0_germ
+b_1_1_thrull
+g_3_3_elephant
+g_1_1_insect
+g_1_1_saproling
+g_1_1_snake
+g_2_2_wolf
+bg_1_1_worm
+c_3_3_a_golem
+c_1_1_a_myr

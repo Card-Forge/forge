@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Levelers' Scorn
-Description=The "Levelers' Scorn" deck puts you in control of the "levelers," creatures that become more powerful over time. Once suitably leveled up, Skywatcher Adept gains flying and Hada Spy Patrol becomes unblockable. Such evasive creatures are perfect for defeating a helpless opponent.
+Description=This deck contains may spells that can clear a path for your powerful levelers, creatures that grow to power over time. And just for fun, throw down Sphinx of Magosi, a 6/6 flier, designed to rain terror upon your hapless opponent. 
 Deck Type=constructed
 Set=ROE
 Image=levelers_scorn.jpg
@@ -26,7 +26,7 @@ Image=levelers_scorn.jpg
 1 See Beyond|ROE
 2 Skywatcher Adept|ROE
 1 Snapping Drake|M10
-1 Sphinx of Magosi|ROE
+1 Sphinx of Magosi+|ROE
 7 Swamp|ROE
 1 Telepathy|M10
 1 Unsummon|M10

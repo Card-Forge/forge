@@ -154,6 +154,24 @@ public class ConquestUtil {
         return pool;
     }
 
+    public static ConquestPlane getPlaneByName(String planeName) {
+        for (ConquestPlane plane : FModel.getPlanes()) {
+            if (plane.getName().equals(planeName)) {
+                return plane;
+            }
+        }
+        return null;
+    }
+
+    public static void setPlaneTemporarilyAccessible(String planeName, boolean accessible) {
+        ConquestPlane plane = getPlaneByName(planeName);
+        if (plane != null && accessible != !plane.isUnreachable()) {
+            plane.setTemporarilyReachable(accessible);
+        } else {
+            System.err.println("Could not find plane to set the accessibility flag: " + planeName);
+        }
+    }
+
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
@@ -189,6 +207,7 @@ public class ConquestUtil {
     }
 
     public static enum AEtherFilter implements IHasSkinProp {
+        C (null, new ColorFilter(MagicColor.COLORLESS), "Playable in {C}"),
         W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
         U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
         B (null, new ColorFilter(MagicColor.BLACK), "Playable in {B}"),
@@ -333,6 +352,7 @@ public class ConquestUtil {
     }
 
     public static final AEtherFilter[] COLOR_FILTERS = new AEtherFilter[] {
+        AEtherFilter.C,
         AEtherFilter.W,
         AEtherFilter.U,
         AEtherFilter.B,

@@ -1,0 +1,12 @@
+Name:Yawgmoth, Thran Physician
+ManaCost:2 B B
+Types:Legendary Creature Human Cleric
+PT:2/4
+K:Protection from Humans
+A:AB$ PutCounter | Cost$ PayLife<1> Sac<1/Creature.Other/another creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a -1/-1 counter on up to one target creature and draw a card.
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
+A:AB$ Proliferate | Cost$ B B Discard<1/Card> | SpellDescription$ Proliferate.
+SVar:AIPreference:DiscardCost$Card
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Protection from Humans. \nPay 1 life, Sacrifice another creature: Put a -1/-1 counter on up to one target creature and draw a card. \n{B}{B}, Discard a card: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

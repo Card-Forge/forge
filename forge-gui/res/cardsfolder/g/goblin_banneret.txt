@@ -1,0 +1,8 @@
+Name:Goblin Banneret
+ManaCost:R
+Types:Creature Goblin Soldier
+PT:1/1
+K:Mentor
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\n{1}{R}: Goblin Banneret gets +2/+0 until end of turn.

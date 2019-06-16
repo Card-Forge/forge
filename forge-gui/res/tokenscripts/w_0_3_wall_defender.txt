@@ -1,0 +1,7 @@
+Name:Wall
+ManaCost:no cost
+Types:Creature Wall
+Colors:white
+PT:0/3
+K:Defender
+Oracle:Defender

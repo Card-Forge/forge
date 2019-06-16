@@ -21,3 +21,6 @@ Type=From_the_Vault
 13 M Urborg, Tomb of Yawgmoth
 14 M Vesuva
 15 M Windbrisk Heights
+
+[tokens]
+c_1_1_spirit

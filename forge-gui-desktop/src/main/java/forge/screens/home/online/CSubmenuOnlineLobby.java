@@ -54,7 +54,6 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                         } else {
                             BugReporter.reportException(ex);
                         }
-                        ;
                     }
                 }
             }

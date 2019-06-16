@@ -1,0 +1,6 @@
+Name:Zombie
+ManaCost:no cost
+Types:Creature Zombie
+Colors:blue
+PT:*/*
+Oracle:

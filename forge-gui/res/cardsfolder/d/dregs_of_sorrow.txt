@@ -6,6 +6,6 @@ A:SP$ Destroy | Cost$ X 4 B | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Cre
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature.nonBlack
 SVar:DB:DB$Draw | Defined$ You | NumCards$ X | References$ X
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dregs_of_sorrow.jpg
 Oracle:Destroy X target nonblack creatures. Draw X cards.

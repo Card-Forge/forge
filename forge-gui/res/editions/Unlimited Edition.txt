@@ -313,3 +313,6 @@ U Wooden Sphere
 R Word of Command
 R Wrath of God
 R Zombie Master
+
+[tokens]
+wasp
