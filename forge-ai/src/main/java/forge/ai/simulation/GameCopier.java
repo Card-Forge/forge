@@ -1,24 +1,13 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameObjectMap;
-import forge.game.GameRules;
-import forge.game.Match;
-import forge.game.StaticEffect;
+import forge.game.*;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -28,12 +17,15 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GameCopier {
     private static final ZoneType[] ZONES = new ZoneType[] {
@@ -323,7 +315,6 @@ public class GameCopier {
             }
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {
-                    SpellAbilityRestriction restrict = sa.getRestrictions();
                     int active = sa.getActivationsThisTurn();
                     if (sa.isPwAbility() && active > 0) {
                         SpellAbility newSa = findSAInCard(sa, newCard);

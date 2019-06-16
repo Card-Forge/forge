@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -20,7 +19,7 @@ public class LifeSetAi extends SpellAbilityAi {
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final int myLife = ai.getLife();
-        final Player opponent = ComputerUtil.getOpponentFor(ai);
+        final Player opponent = ai.getWeakestOpponent();
         final int hlife = opponent.getLife();
         final String amountStr = sa.getParam("LifeAmount");
 
@@ -107,7 +106,7 @@ public class LifeSetAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
-        final Player opponent = ComputerUtil.getOpponentFor(ai);
+        final Player opponent = ai.getWeakestOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);

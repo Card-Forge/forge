@@ -8,7 +8,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 
 import forge.ai.ComputerUtilCard;
@@ -127,7 +126,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
-            CardCollection oppCreatures = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
+            CardCollection oppCreatures = ai.getWeakestOpponent().getCreaturesInPlay();
             aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
             oppCreatures = CardLists.getNotKeyword(oppCreatures, Keyword.INDESTRUCTIBLE);
 

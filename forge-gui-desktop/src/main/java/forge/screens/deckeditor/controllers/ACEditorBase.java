@@ -585,7 +585,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         public void addMoveItems(final String verb, final String dest) {
-            addItems(verb, dest, false, 0, InputEvent.SHIFT_DOWN_MASK, InputEvent.ALT_MASK);
+            addItems(verb, dest, false, 0, InputEvent.SHIFT_DOWN_MASK, InputEvent.ALT_DOWN_MASK);
         }
 
         public void addMoveAlternateItems(final String verb, final String dest) {
@@ -596,7 +596,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             addItems(verb, dest, true, InputEvent.CTRL_DOWN_MASK,
                     //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
                     InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
-                    InputEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+                    InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
 }

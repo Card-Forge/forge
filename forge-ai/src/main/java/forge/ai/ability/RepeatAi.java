@@ -15,7 +15,7 @@ public class RepeatAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
     	final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         if (tgt != null) {
             if (!opp.canBeTargetedBy(sa)) {
@@ -49,7 +49,7 @@ public class RepeatAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
     	
     	 if (sa.usesTargeting()) {
-         	final Player opp = ComputerUtil.getOpponentFor(ai);
+         	final Player opp = ai.getWeakestOpponent();
              if (sa.canTarget(opp)) {
                  sa.resetTargets();
                  sa.getTargets().add(opp);

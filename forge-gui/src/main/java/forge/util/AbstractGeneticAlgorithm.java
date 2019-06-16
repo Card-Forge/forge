@@ -18,13 +18,13 @@ public abstract class AbstractGeneticAlgorithm<T> {
     protected abstract T expandPool();
 
     public void pruneWeakest(){
-        population = population.subList(0, new Float(population.size()*pruneRatio).intValue());
+        population = population.subList(0, Float.valueOf(population.size()*pruneRatio).intValue());
     }
 
     protected void generateChildren(){
         int prunedSize = population.size();
         while(population.size()<targetPopulationSize){
-            int randomIndex = new Double(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
+            int randomIndex = Double.valueOf(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
             float rand = MyRandom.getRandom().nextFloat();
             if(rand>0.85f){
                 T child = mutateObject(population.get(randomIndex));
@@ -34,7 +34,7 @@ public abstract class AbstractGeneticAlgorithm<T> {
             }else if(rand>0.70f){
                 int secondIndex = randomIndex;
                 while(secondIndex != randomIndex){
-                    secondIndex = new Double(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
+                    secondIndex = Double.valueOf(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
                 }
                 T child = createChild(population.get(randomIndex)
                         , population.get(secondIndex));
