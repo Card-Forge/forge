@@ -1213,6 +1213,7 @@ public class ComputerUtilCard {
         final Game game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
+        final boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && phase.is(PhaseType.MAIN1, ai);
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
         final boolean loseCardAtEOT = "Sacrifice".equals(sa.getParam("AtEOT")) || "Exile".equals(sa.getParam("AtEOT"))
                 || "Destroy".equals(sa.getParam("AtEOT")) || "ExileCombat".equals(sa.getParam("AtEOT"));
@@ -1250,7 +1251,7 @@ public class ComputerUtilCard {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && SpellAbilityAi.isSorcerySpeed(sa)
+                && SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred
                 && power > 0
                 && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
             return true;
