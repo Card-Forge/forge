@@ -501,7 +501,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(depths.hasCounters());
 
         SpellAbility sa = findSAWithPrefix(thespian,
-                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+                "{2}, {T}: CARDNAME becomes a copy of target land, except it has this ability.");
         assertNotNull(sa);
         sa.getTargets().add(depths);
 
@@ -526,7 +526,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         SpellAbility sa = findSAWithPrefix(thespian,
-                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+                "{2}, {T}: CARDNAME becomes a copy of target land, except it has this ability.");
         assertNotNull(sa);
         sa.getTargets().add(thespian);
 
