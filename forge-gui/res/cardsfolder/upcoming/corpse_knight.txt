@@ -1,0 +1,5 @@
+Name:Corpse Knight
+ManaCost:W B
+Types:Creature Zombie Knight
+Oracle:Whenever another creature enters the battlefield under your control, each opponent loses 1 life.
+PT:2/2

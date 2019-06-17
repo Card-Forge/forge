@@ -1,0 +1,5 @@
+Name:Yarok's Fenlurker
+ManaCost:B B
+Types:Creature Horror
+Oracle:When Yarok's Fenlurker enters the battlefield, each opponent exiles a card from their hand.\n{2}{B}: Yarok's Fenlurker gets +1/+1 until end of turn.
+PT:1/1

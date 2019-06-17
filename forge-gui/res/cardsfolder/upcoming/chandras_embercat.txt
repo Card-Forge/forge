@@ -1,0 +1,5 @@
+Name:Chandra's Embercat
+ManaCost:1 R
+Types:Creature Elemental Cat
+Oracle:{T}: Add {R}. Spend this mana only to cast an Elemental spell or a Chandra planeswalker spell.
+PT:2/2

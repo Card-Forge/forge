@@ -1,0 +1,4 @@
+Name:Scheming Symmetry
+ManaCost:B
+Types:Sorcery
+Oracle:Choose two target players. Each of them searches their library for a card, then shuffles their library and puts that card on top of it.

@@ -1,14 +1,50 @@
 [metadata]
 Code=M20
 Date=2019-07-12
-Name=Core Set 2019
+Name=Core Set 2020
 MciCode=m20
 Type=Core
+BoosterCovers=5
+Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")
 
 [cards]
-126 R Chandra, Acolyte of the Flame
+4 U Angel of Vitality
+
+13 U Devout Decree
+
+46 R Atemsis, All-Seeing
+
+69 C Negate
+
+95 U Disfigure
+96 R Dread Presence
+
+113 R Scheming Symmetry
+
+123 U Yarok's Fenlurker
+
+125 M Cavalier of Flame
+126 R Chandra, Acolyte of Flame
 127 M Chandra, Awakened Inferno
 128 U Chandra, Novice Pyromancer
+129 C Chandra's Embercat
+
+131 R Chandra's Regulator
+132 U Chandra's Spitfire
+
+139 U Flame Sweep
+
+197 R Thrashing Brontodon
+
+202 R Wakeroot Elemental
+
+206 U Corpse Knight
+207 U Creeping Trailblazer
+
+244 U Cryptic Caves
+
+280 L Forest
+281 M Rienne, Angel of Rebirth
 
 [tokens]
 r_1_1_elemental

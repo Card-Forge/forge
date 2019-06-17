@@ -1,0 +1,6 @@
+Name:Atemsis, All-Seeing
+ManaCost:3 U U U
+Types:Legendary Creature Sphinx
+K:Flying
+Oracle:Flying\n{2}{U}, {T}: Draw two cards, then discard a card.\nWhenever Atemsis, All-Seeing deals damage to an opponent, you may reveal your hand. If cards with at least six different converted mana costs are revealed this way, that player loses the game.
+PT:4/5

@@ -1,0 +1,4 @@
+Name:Cryptic Caves
+ManaCost:no cost
+Types:Land
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Cryptic Caves: Draw a card. Activate this ability only if you control five or more lands.

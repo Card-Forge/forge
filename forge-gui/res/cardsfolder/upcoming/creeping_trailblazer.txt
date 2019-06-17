@@ -1,0 +1,5 @@
+Name:Creeping Trailblazer
+ManaCost:R G
+Types:Creature Elemental
+Oracle:Other Elementals you control get +1/+0.\n{2}{R}{G}: Creeping Trailblazer gets +1/+1 until end of turn for each Elemental you control.
+PT:2/2
