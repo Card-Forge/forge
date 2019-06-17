@@ -4,14 +4,23 @@ Date=2019-07-12
 Name=Core Set 2020
 MciCode=m20
 Type=Core
-BoosterCovers=1
+BoosterCovers=3
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
 
 [cards]
 2 M Ajani, Strength of the Pride
 4 U Angel of Vitality
 
+10 C Octoprophet
+
 13 U Devout Decree
+14 C Disenchant
+
+24 R Leyline of Sanctity
+
+27 R Loxodon Lifesinger
+
+42 U Aether Gust
 
 46 R Atemsis, All-Seeing
 
@@ -24,6 +33,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 113 R Scheming Symmetry
 
+117 U Thought Distortion
+
 123 U Yarok's Fenlurker
 
 125 M Cavalier of Flame
@@ -35,7 +46,11 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 131 R Chandra's Regulator
 132 U Chandra's Spitfire
 
+135 U Dragon Mage
+
 139 U Flame Sweep
+
+145 C Infuriate
 
 197 R Thrashing Brontodon
 
@@ -45,6 +60,10 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 207 U Creeping Trailblazer
 208 U Empyrean Eagle
 209 U Ironroot Warlord
+
+212 M Kykar, Wind's Fury
+
+217 U Risen Reef
 
 244 U Cryptic Caves
 
