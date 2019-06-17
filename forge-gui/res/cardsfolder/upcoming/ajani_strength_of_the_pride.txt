@@ -1,0 +1,5 @@
+Name:Ajani, Strength of the Pride
+ManaCost:2 W W
+Types:Legendary Planeswalker Ajani
+Oracle:[+1]: You gain life equal to the number of creatures you control plus the number of planeswalkers you control.\n[-2]: Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on Ajani's Pridemate."\n[0]: If you have at least 15 life or more than your starting life total, exile Ajani, Strength of the Pride and each artifact and creature your opponents control.
+Loyalty:5

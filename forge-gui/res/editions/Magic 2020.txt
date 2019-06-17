@@ -8,6 +8,7 @@ BoosterCovers=1
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
 
 [cards]
+2 M Ajani, Strength of the Pride
 4 U Angel of Vitality
 
 13 U Devout Decree
@@ -51,5 +52,6 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 281 M Rienne, Angel of Rebirth
 
 [tokens]
+ajanis_pridemate
 r_1_1_elemental
 w_1_1_soldier
