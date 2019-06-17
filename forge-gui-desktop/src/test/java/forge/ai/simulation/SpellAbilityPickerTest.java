@@ -235,7 +235,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertEquals("Urborg, Tomb of Yawgmoth", choices.get(1));
         // Next, expected to use Thespian's Stage to copy Dark Depths.
         Plan.Decision d2 = picker.getPlan().getDecisions().get(1);
-        String expected = "{2}, {T}: Thespian's Stage becomes a copy of target land and gains this ability.";
+        String expected = "{2}, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.";
         assertEquals(expected, d2.saRef.toString());
         assertTrue(d2.targets.toString().contains("Dark Depths"));
     }

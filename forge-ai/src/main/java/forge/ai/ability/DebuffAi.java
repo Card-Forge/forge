@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -177,7 +176,7 @@ public class DebuffAi extends SpellAbilityAi {
      * @return a CardCollection.
      */
     private CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final List<String> kws) {
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         CardCollection list = CardLists.getTargetableCards(opp.getCreaturesInPlay(), sa);
         if (!list.isEmpty()) {
             list = CardLists.filter(list, new Predicate<Card>() {
@@ -217,7 +216,7 @@ public class DebuffAi extends SpellAbilityAi {
             list.remove(c);
         }
 
-        final CardCollection pref = CardLists.filterControlledBy(list, ComputerUtil.getOpponentFor(ai));
+        final CardCollection pref = CardLists.filterControlledBy(list, ai.getWeakestOpponent());
         final CardCollection forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 

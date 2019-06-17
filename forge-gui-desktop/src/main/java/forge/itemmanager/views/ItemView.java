@@ -327,7 +327,7 @@ public abstract class ItemView<T extends InventoryItem> {
         private boolean popupShowing = false;
         private Popup popup;
         private Timer popupTimer;
-        private static final int okModifiers = InputEvent.SHIFT_MASK | InputEvent.ALT_GRAPH_MASK;
+        private static final int okModifiers = InputEvent.SHIFT_DOWN_MASK | InputEvent.ALT_GRAPH_DOWN_MASK;
 
         public IncrementalSearch() {
         }
@@ -481,7 +481,7 @@ public abstract class ItemView<T extends InventoryItem> {
                 //$FALL-THROUGH$
             default:
                 // shift and/or alt-graph down is ok.  anything else is a hotkey (e.g. ctrl-f)
-                if (okModifiers != (e.getModifiers() | okModifiers)
+                if (okModifiers != (e.getModifiersEx() | okModifiers)
                 || !CharUtils.isAsciiPrintable(e.getKeyChar())) { // escape sneaks in here on Windows
                     return;
                 }

@@ -212,7 +212,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         // Evaluate creatures getting killed
-        Player enemy = ComputerUtil.getOpponentFor(ai);
+        Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -294,7 +294,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         // Evaluate creatures getting killed
-        Player enemy = ComputerUtil.getOpponentFor(ai);
+        Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
         final TargetRestrictions tgt = sa.getTargetRestrictions();

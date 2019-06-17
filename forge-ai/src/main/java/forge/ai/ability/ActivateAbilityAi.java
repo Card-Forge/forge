@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -22,7 +21,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> list = CardLists.getType(opp.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"));
@@ -46,7 +45,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
@@ -87,7 +86,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             }
         } else {
             sa.resetTargets();
-            sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+            sa.getTargets().add(ai.getWeakestOpponent());
         }
 
         return randomReturn;
