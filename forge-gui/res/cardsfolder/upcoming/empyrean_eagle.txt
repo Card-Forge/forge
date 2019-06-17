@@ -1,0 +1,6 @@
+Name:Empyrean Eagle
+ManaCost:1 W U
+Types:Creature Bird Spirit
+K:Flying
+Oracle:Flying\nOther creatures you control with flying get +1/+1.
+PT:2/3

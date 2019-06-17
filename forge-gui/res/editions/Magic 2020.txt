@@ -43,7 +43,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 206 U Corpse Knight
 207 U Creeping Trailblazer
-
+208 U Empyrean Eagle
 209 U Ironroot Warlord
 
 244 U Cryptic Caves
