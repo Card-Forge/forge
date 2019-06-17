@@ -46,10 +46,10 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            Player opp = ComputerUtil.getOpponentFor(aiPlayer);
+            Player opp = aiPlayer.getWeakestOpponent();
             final boolean canTgtAI = sa.canTarget(aiPlayer);
             final boolean canTgtHuman = sa.canTarget(opp);
-
+            
             if (canTgtHuman && canTgtAI) {
                 // TODO: maybe some other consideration rather than random?
                 Player preferredTarget = MyRandom.percentTrue(50) ? aiPlayer : opp;

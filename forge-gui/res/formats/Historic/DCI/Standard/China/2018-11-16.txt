@@ -1,0 +1,7 @@
+[format]
+Name:China Standard, Gift Pack 2018
+Type:Historic
+Subtype:Standard
+Effective:2018-11-16
+Sets:XLN, RIX, DOM, GS1, M19, GRN, G18
+Banned:Rampaging Ferocidon

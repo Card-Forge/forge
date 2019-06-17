@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -17,7 +16,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            Player opp = ComputerUtil.getOpponentFor(aiPlayer);
+            Player opp = aiPlayer.getWeakestOpponent();
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {

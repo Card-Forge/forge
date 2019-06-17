@@ -24,7 +24,7 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
@@ -106,7 +106,7 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {

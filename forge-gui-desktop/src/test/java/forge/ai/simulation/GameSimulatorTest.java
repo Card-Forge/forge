@@ -501,7 +501,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(depths.hasCounters());
 
         SpellAbility sa = findSAWithPrefix(thespian,
-                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+                "{2}, {T}: CARDNAME becomes a copy of target land, except it has this ability.");
         assertNotNull(sa);
         sa.getTargets().add(depths);
 
@@ -526,7 +526,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         SpellAbility sa = findSAWithPrefix(thespian,
-                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+                "{2}, {T}: CARDNAME becomes a copy of target land, except it has this ability.");
         assertNotNull(sa);
         sa.getTargets().add(thespian);
 
@@ -1849,7 +1849,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
-        assertTrue(simSpark != null);
+        assertNotNull(simSpark);
         assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
         assertTrue(simSpark.getCounters(CounterType.P1P1) == 1);
         assertTrue(simSpark.getCounters(CounterType.LOYALTY) == 5);
@@ -1882,11 +1882,57 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
 
-        assertTrue(awakened != null);
+        assertNotNull(awakened);
         assertTrue(awakened.getName().equals("Vitu-Ghazi"));
         assertTrue(awakened.getCounters(CounterType.P1P1) == 9);
         assertTrue(awakened.hasKeyword(Keyword.HASTE));
         assertTrue(awakened.getType().hasSubtype("Goblin"));
+    }
+
+    public void testNecroticOozeActivateOnce() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Swamp", p, ZoneType.Battlefield); }
+        for (int i=0; i<7; i++) { addCardToZone("Forest", p, ZoneType.Battlefield); }
+
+        addCardToZone("Basking Rootwalla", p, ZoneType.Graveyard);
+        Card ooze = addCardToZone("Necrotic Ooze", p, ZoneType.Hand);
+
+        SpellAbility oozeSA = ooze.getFirstSpellAbility();
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(oozeSA);
+
+        Card oozeOTB = findCardWithName(sim.getSimulatedGameState(), "Necrotic Ooze");
+
+        assertNotNull(oozeOTB);
+
+        SpellAbility copiedSA = findSAWithPrefix(oozeOTB, "{1}{G}:");
+        assertNotNull(copiedSA);
+        assertTrue(copiedSA.getRestrictions().getLimitToCheck().equals("1"));
+    }
+
+    public void testEpochrasite() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        for (int i=0; i<7; i++) { addCardToZone("Swamp", p, ZoneType.Battlefield); }
+
+        Card epo = addCardToZone("Epochrasite", p, ZoneType.Graveyard);
+        Card animate = addCardToZone("Animate Dead", p, ZoneType.Hand);
+
+        SpellAbility saAnimate = animate.getFirstSpellAbility();
+        saAnimate.getTargets().add(epo);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(saAnimate);
+
+        Card epoOTB = findCardWithName(sim.getSimulatedGameState(), "Epochrasite");
+
+        assertNotNull(epoOTB);
+        assertTrue(epoOTB.getCounters(CounterType.P1P1) == 3);
     }
 
     @SuppressWarnings("unused")

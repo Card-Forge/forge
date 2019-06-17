@@ -32,6 +32,7 @@ import forge.limited.DraftRankCache;
 import forge.model.FModel;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map.Entry;
 
 public enum ColumnDef {
@@ -533,7 +534,7 @@ public enum ColumnDef {
             Double ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
             if (ranking != null) {
                 if (truncate) {
-                    return new BigDecimal(ranking).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    return new BigDecimal(ranking).setScale(4, RoundingMode.HALF_UP).doubleValue();
                 }
                 return ranking;
             }

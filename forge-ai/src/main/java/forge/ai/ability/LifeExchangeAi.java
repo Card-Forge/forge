@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -20,7 +19,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final int myLife = aiPlayer.getLife();
-        Player opponent = ComputerUtil.getOpponentFor(aiPlayer);
+        Player opponent = aiPlayer.getWeakestOpponent();
         final int hLife = opponent.getLife();
 
         if (!aiPlayer.canGainLife()) {
@@ -76,7 +75,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
     final boolean mandatory) {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         if (tgt != null) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {

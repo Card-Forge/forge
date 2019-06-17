@@ -95,7 +95,7 @@ public class MustBlockAi extends SpellAbilityAi {
         boolean chance = false;
 
         if (abTgt != null) {
-            final List<Card> list = determineGoodBlockers(definedAttacker, ai, ComputerUtil.getOpponentFor(ai), sa, true,true);
+            final List<Card> list = determineGoodBlockers(definedAttacker, ai, ai.getWeakestOpponent(), sa, true,true);
             if (list.isEmpty()) {
                 return false;
             }

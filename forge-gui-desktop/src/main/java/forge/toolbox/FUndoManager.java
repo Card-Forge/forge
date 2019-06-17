@@ -200,8 +200,8 @@ public class FUndoManager extends UndoManager implements DocumentListener {
         public UndoAction() {
             putValue(Action.NAME, "Undo");
             putValue(Action.SHORT_DESCRIPTION, getValue(Action.NAME));
-            putValue(Action.MNEMONIC_KEY, new Integer(KeyEvent.VK_U));
-            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+            putValue(Action.MNEMONIC_KEY, Integer.valueOf(KeyEvent.VK_U));
+            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
             setEnabled(false);
         }
 
@@ -229,8 +229,8 @@ public class FUndoManager extends UndoManager implements DocumentListener {
         public RedoAction() {
             putValue(Action.NAME, "Redo");
             putValue(Action.SHORT_DESCRIPTION, getValue(Action.NAME));
-            putValue(Action.MNEMONIC_KEY, new Integer(KeyEvent.VK_R));
-            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK));
+            putValue(Action.MNEMONIC_KEY, Integer.valueOf(KeyEvent.VK_R));
+            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
             setEnabled(false);
         }
 
