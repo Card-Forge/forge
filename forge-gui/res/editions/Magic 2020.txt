@@ -4,8 +4,8 @@ Date=2019-07-12
 Name=Core Set 2020
 MciCode=m20
 Type=Core
-BoosterCovers=5
-Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")
+BoosterCovers=1
+Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
 
 [cards]
 4 U Angel of Vitality
@@ -15,6 +15,8 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 46 R Atemsis, All-Seeing
 
 69 C Negate
+
+78 C Unsummon
 
 95 U Disfigure
 96 R Dread Presence
@@ -41,6 +43,8 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 206 U Corpse Knight
 207 U Creeping Trailblazer
 
+209 U Ironroot Warlord
+
 244 U Cryptic Caves
 
 280 L Forest
@@ -48,3 +52,4 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 
 [tokens]
 r_1_1_elemental
+w_1_1_soldier

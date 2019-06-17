@@ -1458,3 +1458,6 @@ Snow-Covered Island
 Snow-Covered Swamp
 Snow-Covered Mountain
 Snow-Covered Forest
+
+[M20 Secret Cards]
+Rienne, Angel of Rebirth
