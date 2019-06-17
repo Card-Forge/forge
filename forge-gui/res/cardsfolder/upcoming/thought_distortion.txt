@@ -1,0 +1,4 @@
+Name:Thought Distortion
+ManaCost:4 B B
+Types:Sorcery
+Oracle:This spell can't be countered.\nTarget opponent reveals their hand. Exile all noncreature, nonland cards from that player's hand and graveyard.
