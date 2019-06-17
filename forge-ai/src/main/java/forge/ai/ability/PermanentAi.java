@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
@@ -12,10 +13,6 @@ import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
@@ -198,7 +195,9 @@ public class PermanentAi extends SpellAbilityAi {
                     }
                 } else if (param.startsWith("MaxControlled")) {
                     // Only cast unless there are X or more cards like this on the battlefield under AI control already,
-                    CardCollection ctrld = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName()));
+                    CardCollectionView valid = param.contains("Globally") ? ai.getGame().getCardsIn(ZoneType.Battlefield)
+                            : ai.getCardsIn(ZoneType.Battlefield);
+                    CardCollection ctrld = CardLists.filter(valid, CardPredicates.nameEquals(card.getName()));
 
                     int numControlled = 0;
                     if (param.endsWith("WithoutOppAuras")) {
