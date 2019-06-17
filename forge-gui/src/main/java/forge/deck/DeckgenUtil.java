@@ -624,13 +624,13 @@ public class DeckgenUtil {
             }else {
                 List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
                 potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+                Collections.shuffle(potentialCards, MyRandom.getRandom());
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {
                         preSelectedCards.add(pair.getKey());
                     }
                 }
             }
-            //Collections.shuffle(potentialCards, r);
 
 
             //check for partner commanders
