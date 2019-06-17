@@ -41,7 +41,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             if (tgt != null) {
                 sa.resetTargets();
                 if (tgt.canOnlyTgtOpponent()) {
-                    sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+                    sa.getTargets().add(ai.getWeakestOpponent());
                 } else {
                     sa.getTargets().add(ai);
                 }

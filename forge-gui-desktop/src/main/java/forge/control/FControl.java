@@ -386,7 +386,7 @@ public enum FControl implements KeyEventDispatcher {
                     return true;
                 }
             }
-            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiers() == InputEvent.ALT_MASK) {
+            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
                 altKeyLastDown = true;
             }
         }

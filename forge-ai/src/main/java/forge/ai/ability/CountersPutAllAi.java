@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -39,7 +38,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        hList = CardLists.getValidCards(ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
         cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
         if (abCost != null) {
@@ -68,7 +67,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         }
 
         if (tgt != null) {
-            Player pl = curse ? ComputerUtil.getOpponentFor(ai) : ai;
+            Player pl = curse ? ai.getWeakestOpponent() : ai;
             sa.getTargets().add(pl);
 
             hList = CardLists.filterControlledBy(hList, pl);
@@ -149,7 +148,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return player.getCreaturesInPlay().size() >= ComputerUtil.getOpponentFor(player).getCreaturesInPlay().size();
+        return player.getCreaturesInPlay().size() >= player.getWeakestOpponent().getCreaturesInPlay().size();
     }
 
     @Override

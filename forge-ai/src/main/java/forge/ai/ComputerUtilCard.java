@@ -521,7 +521,7 @@ public class ComputerUtilCard {
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
         Combat currentCombat = ai.getGame().getCombat();
@@ -884,7 +884,7 @@ public class ComputerUtilCard {
         List<String> chosen = new ArrayList<String>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
              
@@ -974,7 +974,7 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
@@ -1213,6 +1213,7 @@ public class ComputerUtilCard {
         final Game game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
+        final boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && phase.is(PhaseType.MAIN1, ai);
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
         final boolean loseCardAtEOT = "Sacrifice".equals(sa.getParam("AtEOT")) || "Exile".equals(sa.getParam("AtEOT"))
                 || "Destroy".equals(sa.getParam("AtEOT")) || "ExileCombat".equals(sa.getParam("AtEOT"));
@@ -1250,7 +1251,7 @@ public class ComputerUtilCard {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && SpellAbilityAi.isSorcerySpeed(sa)
+                && SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred
                 && power > 0
                 && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
             return true;
@@ -1269,7 +1270,7 @@ public class ComputerUtilCard {
             }
         }
 
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
         float chance = 0;
@@ -1842,17 +1843,45 @@ public class ComputerUtilCard {
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 
-        if (sa != null && sa.isEvoke()) {
-            if (card.hasSVar("NeedsToPlayEvoked")) {
-                needsToPlayName = "NeedsToPlayEvoked";
-            }
-            if (card.hasSVar("NeedsToPlayEvokedVar")) {
-                needsToPlayVarName = "NeedsToPlayEvokedVar";
+        // TODO: if there are ever split cards with Evoke or Kicker, factor in the right split option above
+        if (sa != null) {
+            if (sa.isEvoke()) {
+                // if the spell is evoked, will use NeedsToPlayEvoked if available (otherwise falls back to NeedsToPlay)
+                if (card.hasSVar("NeedsToPlayEvoked")) {
+                    needsToPlayName = "NeedsToPlayEvoked";
+                }
+                if (card.hasSVar("NeedsToPlayEvokedVar")) {
+                    needsToPlayVarName = "NeedsToPlayEvokedVar";
+                }
+            } else if (sa.isKicked()) {
+                // if the spell is kicked, uses NeedsToPlayKicked if able and locks out the regular NeedsToPlay check
+                // for unkicked spells, uses NeedsToPlay
+                if (card.hasSVar("NeedsToPlayKicked")) {
+                    needsToPlayName = "NeedsToPlayKicked";
+                } else {
+                    needsToPlayName = "UNUSED";
+                }
+                if (card.hasSVar("NeedsToPlayKickedVar")) {
+                    needsToPlayVarName = "NeedsToPlayKickedVar";
+                } else {
+                    needsToPlayVarName = "UNUSED";
+                }
             }
         }
 
         if (card.hasSVar(needsToPlayName)) {
             final String needsToPlay = card.getSVar(needsToPlayName);
+
+            // A special case which checks that this creature will attack if it's the AI's turn
+            if (needsToPlay.equalsIgnoreCase("WillAttack")) {
+                if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                    return ComputerUtilCard.doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
+                        AiPlayDecision.WillPlay : AiPlayDecision.BadEtbEffects;
+                } else {
+                    return AiPlayDecision.WillPlay; // not our turn, skip this check for the possible Flash use etc.
+                }
+            }
+
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);

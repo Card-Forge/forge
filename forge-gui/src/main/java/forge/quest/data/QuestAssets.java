@@ -17,6 +17,8 @@
  */
 package forge.quest.data;
 
+import java.lang.reflect.InvocationTargetException;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -99,13 +101,17 @@ public class QuestAssets {
         QuestItemCondition current = this.inventoryItems.get(itemType);
         if (!current.getClass().equals(itemType.getModelClass())) {
             try {
-                QuestItemCondition modern = itemType.getModelClass().newInstance();
+                QuestItemCondition modern = itemType.getModelClass().getDeclaredConstructor().newInstance();
                 modern.takeDataFrom(current);
                 current = modern;
                 inventoryItems.put(itemType, modern);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
 
@@ -123,7 +129,7 @@ public class QuestAssets {
         QuestItemCondition cond = this.inventoryItems.get(itemType);
         if (null == cond) {
             try { // care to set appropriate state class here
-                cond = itemType.getModelClass().newInstance();
+                cond = itemType.getModelClass().getDeclaredConstructor().newInstance();
             } catch (final Exception e) {
                 e.printStackTrace();
                 cond = new QuestItemCondition();

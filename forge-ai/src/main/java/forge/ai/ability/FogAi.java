@@ -107,7 +107,7 @@ public class FogAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Game game = aiPlayer.getGame();
         boolean chance;
-        if (game.getPhaseHandler().isPlayerTurn(ComputerUtil.getOpponentFor(sa.getActivatingPlayer()))) {
+        if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getWeakestOpponent())) {
             chance = game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
