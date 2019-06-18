@@ -1,3 +1,6 @@
+# This is an example puzzle, currently disabled. It demonstrates how to set up a puzzle where a spell is put on stack
+# at the beginning of the puzzle. Unfortunately, this particular puzzle doesn't work well in Forge due to the fact that
+# the AI does not use its resources optimally, thus naturally failing to defeat the player in one turn and losing.
 [metadata]
 Name:Possibility Storm - Guilds of Ravnica Special (Survive the Turn)
 URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/094.-GRN004-3.jpg
