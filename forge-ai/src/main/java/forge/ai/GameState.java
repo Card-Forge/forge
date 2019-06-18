@@ -97,6 +97,9 @@ public abstract class GameState {
     private String precastHuman = null;
     private String precastAI = null;
 
+    private String putOnStackHuman = null;
+    private String putOnStackAI = null;
+
     private int turn = 1;
 
     private boolean removeSummoningSickness = false;
@@ -535,6 +538,13 @@ public abstract class GameState {
                 precastAI = categoryValue;
         }
 
+        else if (categoryName.endsWith("putonstack")) {
+            if (isHuman)
+                putOnStackHuman = categoryValue;
+            else
+                putOnStackAI = categoryValue;
+        }
+
         else if (categoryName.endsWith("manapool")) {
             if (isHuman)
                 humanManaPool = categoryValue;
@@ -613,6 +623,9 @@ public abstract class GameState {
         handleMarkedDamage();
 
         game.getTriggerHandler().setSuppressAllTriggers(false);
+
+        // SAs added to stack cause triggers to fire, as if the relevant SAs were cast
+        handleAddSAsToStack(game);
 
         // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
         // Note: triggers may fire during combat declarations ("whenever X attacks, ...", etc.)
@@ -803,6 +816,9 @@ public abstract class GameState {
     }
 
     private void executeScript(Game game, Card c, String sPtr) {
+        executeScript(game, c, sPtr, false);
+    }
+    private void executeScript(Game game, Card c, String sPtr, boolean putOnStack) {
         int tgtID = TARGET_NONE;
         if (sPtr.contains("->")) {
             String tgtDef = sPtr.substring(sPtr.lastIndexOf("->") + 2);
@@ -878,13 +894,17 @@ public abstract class GameState {
         sa.setActivatingPlayer(c.getController());
         handleScriptedTargetingForSA(game, sa, tgtID);
 
-        sa.resolve();
+        if (putOnStack) {
+            game.getStack().addAndUnfreeze(sa);
+        } else {
+            sa.resolve();
 
-        // resolve subabilities
-        SpellAbility subSa = sa.getSubAbility();
-        while (subSa != null) {
-            subSa.resolve();
-            subSa = subSa.getSubAbility();
+            // resolve subabilities
+            SpellAbility subSa = sa.getSubAbility();
+            while (subSa != null) {
+                subSa.resolve();
+                subSa = subSa.getSubAbility();
+            }
         }
     }
 
@@ -906,7 +926,28 @@ public abstract class GameState {
         }
     }
 
+    private void handleAddSAsToStack(final Game game) {
+        Player human = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
+        if (putOnStackHuman != null) {
+            String[] spellList = TextUtil.split(putOnStackHuman, ';');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, human, game, true);
+            }
+        }
+        if (putOnStackAI != null) {
+            String[] spellList = TextUtil.split(putOnStackAI, ';');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, ai, game, true);
+            }
+        }
+    }
+
     private void precastSpellFromCard(String spellDef, final Player activator, final Game game) {
+        precastSpellFromCard(spellDef, activator, game, false);
+    }
+    private void precastSpellFromCard(String spellDef, final Player activator, final Game game, final boolean putOnStack) {
         int tgtID = TARGET_NONE;
         String scriptID = "";
 
@@ -931,7 +972,7 @@ public abstract class GameState {
         SpellAbility sa = null;
 
         if (!scriptID.isEmpty()) {
-            executeScript(game, c, scriptID);
+            executeScript(game, c, scriptID, putOnStack);
             return;
         }
 
@@ -940,7 +981,11 @@ public abstract class GameState {
 
         handleScriptedTargetingForSA(game, sa, tgtID);
 
-        sa.resolve();
+        if (putOnStack) {
+            game.getStack().addAndUnfreeze(sa);
+        } else {
+            sa.resolve();
+        }
     }
 
     private void handleMarkedDamage() {
@@ -1167,6 +1212,14 @@ public abstract class GameState {
                     // TODO: improve this for game states with more than two players
                     String tgt = info.substring(info.indexOf(':') + 1);
                     cardToEnchantPlayerId.put(c, tgt.equalsIgnoreCase("AI") ? TARGET_AI : TARGET_HUMAN);
+                } else if (info.startsWith("Owner:")) {
+                    // TODO: improve this for game states with more than two players
+                    Player human = player.getGame().getPlayers().get(0);
+                    Player ai = player.getGame().getPlayers().get(1);
+                    String owner = info.substring(info.indexOf(':') + 1);
+                    Player controller = c.getController();
+                    c.setOwner(owner.equalsIgnoreCase("AI") ? ai : human);
+                    c.setController(controller, c.getGame().getNextTimestamp());
                 } else if (info.startsWith("Ability:")) {
                     String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
