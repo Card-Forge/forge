@@ -8,6 +8,7 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CCardCatalog;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -23,7 +24,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Catalog");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblCardCatalog"));
 
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;

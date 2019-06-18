@@ -124,19 +124,16 @@ public enum FControl implements KeyEventDispatcher {
      * instantiated separately by each screen's top level view class.
      */
     FControl() {
+        final Localizer localizer = Localizer.getInstance();
         Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
                 case NONE: //prompt user for close action if not previously specified
-                    final List<String> options = ImmutableList.of("Close Screen", "Exit Forge", "Cancel");
+                    final List<String> options = ImmutableList.of(localizer.getMessage("lblCloseScreen"), localizer.getMessage("lblExitForge"), localizer.getMessage("lblCancel"));
                     final int reply = FOptionPane.showOptionDialog(
-                            "Forge now supports navigation tabs which allow closing and switching between different screens with ease. "
-                            + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back."
-                            + "\n\n"
-                            + "Please select what you want to happen when clicking the X button in the upper right. This choice will be used "
-                            + "going forward and you will not see this message again. You can change this behavior at any time in Preferences.",
-                            "Select Your Close Action",
+                            localizer.getMessage("txCloseAction1") + "\n\n" + localizer.getMessage("txCloseAction2"),
+                            localizer.getMessage("titCloseAction"),
                             FOptionPane.INFORMATION_ICON,
                             options,
                             2);
@@ -179,13 +176,14 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean canExitForge(final boolean forRestart) {
-        final String action = (forRestart ? "Restart" : "Exit");
-        String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
+        final Localizer localizer = Localizer.getInstance();
+        final String action = (forRestart ? localizer.getMessage("lblRestart") : localizer.getMessage("lblExit"));
+        String userPrompt =(forRestart ? localizer.getMessage("lblAreYouSureYouWishRestartForge") : localizer.getMessage("lblAreYouSureYouWishExitForge"));
         final boolean hasCurrentMatches = hasCurrentMatches();
         if (hasCurrentMatches) {
-            userPrompt = "One or more games are currently active. " + userPrompt;
+            userPrompt = localizer.getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", !hasCurrentMatches)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, localizer.getMessage("lblCancel"), !hasCurrentMatches)) { //default Yes if no game active
             return false;
         }
         return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true);
@@ -223,7 +221,8 @@ public enum FControl implements KeyEventDispatcher {
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Loading quest...");
+        final Localizer localizer = Localizer.getInstance();
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblLoadingQuest"));
         // Preload quest data if present
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -258,7 +257,6 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
         setGlobalKeyboardHandler();
-        final Localizer localizer = Localizer.getInstance();
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -318,7 +316,8 @@ public enum FControl implements KeyEventDispatcher {
         try {
             SLayoutIO.loadLayout(null);
         } catch (final InvalidLayoutFileException ex) {
-            SOptionPane.showMessageDialog(String.format("Your %s layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.", screen.getTabCaption()), "Warning!");
+            final Localizer localizer = Localizer.getInstance();
+            SOptionPane.showMessageDialog(String.format(localizer.getMessage("lblerrLoadingLayoutFile"), screen.getTabCaption()), "Warning!");
             if (screen.deleteLayoutFile()) {
                 SLayoutIO.loadLayout(null); //try again
             }

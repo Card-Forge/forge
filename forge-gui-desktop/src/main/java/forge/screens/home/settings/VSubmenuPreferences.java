@@ -862,7 +862,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private JPanel getPlayerNamePanel() {
         JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
         p.setOpaque(false);
-        FLabel lbl = new FLabel.Builder().text("Player Name: ").fontSize(12).fontStyle(Font.BOLD).build();
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblPlayerName") +": ").fontSize(12).fontStyle(Font.BOLD).build();
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnPlayerName, "aligny top, h 100%, w 200px!");
         return p;

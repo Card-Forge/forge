@@ -5,6 +5,7 @@ import forge.menus.MenuUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -24,8 +25,8 @@ public final class DeckFileMenu {
 
     public static JMenu getMenu(boolean showMenuIcons) {
     	showIcons = showMenuIcons;
-
-        JMenu menu = new JMenu("File");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu menu = new JMenu(localizer.getMessage("lblFile"));
         menu.setMnemonic(KeyEvent.VK_F);
         menu.add(getMenuItem_New());
         menu.add(getMenuItem_Open());
@@ -51,7 +52,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_New() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("New Deck");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblNewDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_NEW) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_N));
         menuItem.addActionListener(getNewAction());
@@ -68,7 +70,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_Open() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Open Deck");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblOpenDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_OPEN) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
         menuItem.addActionListener(getOpenAction());
@@ -85,7 +88,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_Import() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Import Deck");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblImportDeck"));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_I));
         menuItem.addActionListener(getImportAction());
         return menuItem;
@@ -101,7 +105,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_Save() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save Deck");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblSaveDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SAVE) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_S));
         menuItem.addActionListener(getSaveAction());
@@ -119,7 +124,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_SaveAs() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save Deck As");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblSaveDeckAs"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SAVEAS) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
         menuItem.addActionListener(getSaveAsAction());
@@ -137,7 +143,8 @@ public final class DeckFileMenu {
     }
 
     private static SkinnedMenuItem getMenuItem_Print() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Print to HTML file");
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblPrinttoHTMLfile"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_PRINT) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_P));
         menuItem.addActionListener(getPrintAction());

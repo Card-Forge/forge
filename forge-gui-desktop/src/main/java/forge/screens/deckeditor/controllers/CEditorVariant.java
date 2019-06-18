@@ -35,6 +35,7 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.storage.IStorage;
 
 import java.util.Map.Entry;
@@ -70,8 +71,9 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
 
         final CardManager catalogManager = new CardManager(cDetailPicture, true, false);
         final CardManager deckManager = new CardManager(cDetailPicture, true, false);
+        final Localizer localizer = Localizer.getInstance();
 
-        catalogManager.setCaption("Catalog");
+        catalogManager.setCaption(localizer.getMessage("lblCatalog"));
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
@@ -131,12 +133,12 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Add", "to deck");
+        cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodeck"));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Remove", "from deck");
+        cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
     }
 
     /*
