@@ -16,6 +16,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 13 U Devout Decree
 14 C Disenchant
 
+22 R Hanged Executioner
+
 24 R Leyline of Sanctity
 
 27 R Loxodon Lifesinger
@@ -80,6 +82,10 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 163 U Uncaged Fury
 
+165 U Barkhide Troll
+
+175 C Growth Cycle
+
 180 U Loaming Shaman
 
 187 U Overgrowth Elemental
@@ -117,3 +123,4 @@ ajanis_pridemate
 r_1_1_elemental
 w_1_1_soldier
 w_1_1_spirit_flying
+b_2_2_zombie
