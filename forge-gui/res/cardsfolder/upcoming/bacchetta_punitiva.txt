@@ -1,0 +1,4 @@
+Name:Bacchetta Punitiva
+ManaCost:3
+Types:Artifact
+Oracle:{3}, {T}: Bacchetta Punitiva deals 1 damage to any target.\nWhen Bacchetta Punitiva is put into a graveyard from the battlefield, it deals 5 damage to any target.

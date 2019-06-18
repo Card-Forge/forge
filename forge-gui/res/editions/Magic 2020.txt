@@ -19,6 +19,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 24 R Leyline of Sanctity
 
 27 R Loxodon Lifesinger
+28 U Loyal Pegasus
 
 33 R Planar Cleansing
 
@@ -29,6 +30,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 42 U Aether Gust
 
 46 R Atemsis, All-Seeing
+
+55 C Convolute
 
 59 R Flood of Tears
 
@@ -66,7 +69,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 139 U Flame Sweep
 
-142 C Bird Tangle Goblin
+142 C Goblin Hitchhiker
 143 U Goblin Ringleader
 
 145 C Infuriate
@@ -76,6 +79,10 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 154 C Reckless Airstrike
 
 163 U Uncaged Fury
+
+180 U Loaming Shaman
+
+187 U Overgrowth Elemental
 
 195 C Silverback Shaman
 
@@ -90,10 +97,15 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 207 U Creeping Trailblazer
 208 U Empyrean Eagle
 209 U Ironroot Warlord
+210 M Kaalia, Zenith Seeker
 
 212 M Kykar, Wind's Fury
 
 217 U Risen Reef
+
+226 R Golos, Tireless Pilgrim
+
+236 U Bacchetta Punitiva
 
 244 U Cryptic Caves
 

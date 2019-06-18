@@ -1,0 +1,5 @@
+Name:Golos, Tireless Pilgrim
+ManaCost:5
+Types:Legendary Artifact Creature Scout
+PT:3/5
+Oracle:When Golos, Tireless Pilgrim enters the battlefield, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle your library.\n{2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
