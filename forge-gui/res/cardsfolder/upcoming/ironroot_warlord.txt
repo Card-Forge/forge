@@ -1,5 +1,5 @@
 Name:Ironroot Warlord
 ManaCost:1 G W
 Types:Creature Treefolk Soldier
-Oracle:Ironroot Warlord's power is equal to the number of creatures you control.\n{3}{G}{W}: Create a 1/1 white Soldier creature token.
 PT:*/5
+Oracle:Ironroot Warlord's power is equal to the number of creatures you control.\n{3}{G}{W}: Create a 1/1 white Soldier creature token.

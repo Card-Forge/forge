@@ -1,5 +1,5 @@
 Name:Wakeroot Elemental
 ManaCost:4 G G
 Types:Creature Elemental
-Oracle:{G}{G}{G}{G}{G}: Untap a land of your choice that you control. It becomes a 5/5 Elemental creature with haste. It's still a land. (This effect lasts until as long as that land is in play.)
 PT:5/5
+Oracle:{G}{G}{G}{G}{G}: Untap a land of your choice that you control. It becomes a 5/5 Elemental creature with haste. It's still a land. (This effect lasts until as long as that land is in play.)
