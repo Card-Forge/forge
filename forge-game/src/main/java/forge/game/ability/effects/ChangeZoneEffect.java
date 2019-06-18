@@ -543,13 +543,27 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.turnFaceDown(true);
                     }
                     if (sa.hasParam("Attacking")) {
-                        // What should they attack?
-                        FCollectionView<GameEntity> defenders = game.getCombat().getDefenders();
-                        if (!defenders.isEmpty()) { 
-                            // Blockeres are already declared, set this to unblocked
-                            game.getCombat().addAttacker(tgtC, defenders.getFirst());
-                            game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
-                            game.fireEvent(new GameEventCombatChanged());
+                        final Combat combat = game.getCombat();
+                        if ( null != combat ) {
+                            final FCollectionView<GameEntity> e = combat.getDefenders();
+
+                            GameEntity defender = null;
+                            if (sa.hasParam("DefinedDefender")) {
+                                FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("DefinedDefender"), sa);
+                                for(GameObject obj : objs) {
+                                    if (obj instanceof GameEntity) {
+                                        defender = (GameEntity)obj;
+                                        break;
+                                    }
+                                }
+                            } else {
+                                defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare a defender for " + movedCard );
+                            }
+                            if (defender != null) {
+                                combat.addAttacker(movedCard, defender);
+                                game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
+                                game.fireEvent(new GameEventCombatChanged());
+                            }
                         }
                     }
                     if (sa.hasParam("Ninjutsu")) {
@@ -1028,6 +1042,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         if (defender != null) {
                             combat.addAttacker(c, defender);
+                            game.getCombat().getBandOfAttacker(c).setBlocked(false);
                             game.fireEvent(new GameEventCombatChanged());
                         }
                     }
