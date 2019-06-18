@@ -23,6 +23,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 27 R Loxodon Lifesinger
 28 U Loyal Pegasus
 
+C Pacifism
+
 33 R Planar Cleansing
 
 35 R Rule of Law
