@@ -357,6 +357,8 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 runParams.put("Target", tgt);
                 getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
+            runParams.put("Targets", target.getTargets());
+            getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
     }
 
