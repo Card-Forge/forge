@@ -74,6 +74,7 @@ public abstract class GameState {
     private final Map<Card, Integer> cardToEnchantPlayerId = new HashMap<>();
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
+    private final Map<Card, CardCollection> cardToChosenCards = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
@@ -101,6 +102,7 @@ public abstract class GameState {
 
     private int turn = 1;
 
+    private boolean removeSummoningSickness = false;
 
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
@@ -215,6 +217,10 @@ public abstract class GameState {
                     // Remember the IDs of imprinted cards
                     cardsReferencedByID.add(i);
                 }
+                for (Card i : card.getChosenCards()) {
+                    // Remember the IDs of chosen cards
+                    cardsReferencedByID.add(i);
+                }
                 if (game.getCombat() != null && game.getCombat().isAttacking(card)) {
                     // Remember the IDs of attacked planeswalkers
                     GameEntity def = game.getCombat().getDefenderByAttacker(card);
@@ -314,6 +320,17 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
+            }
+
+            List<String> chosenCardIds = Lists.newArrayList();
+            for (Object obj : c.getChosenCards()) {
+                if (obj instanceof Card) {
+                    int id = ((Card)obj).getId();
+                    chosenCardIds.add(String.valueOf(id));
+                }
+            }
+            if (!chosenCardIds.isEmpty()) {
+                newText.append("|ChosenCards:").append(TextUtil.join(chosenCardIds, ","));
             }
 
             List<String> rememberedCardIds = Lists.newArrayList();
@@ -434,6 +451,10 @@ public abstract class GameState {
 
         if (categoryName.equals("turn")) {
             turn = Integer.parseInt(categoryValue);
+        }
+
+        else if (categoryName.equals("removesummoningsickness")) {
+            removeSummoningSickness = categoryValue.equalsIgnoreCase("true");
         }
 
         else if (categoryName.endsWith("life")) {
@@ -563,6 +584,7 @@ public abstract class GameState {
         cardToExiledWithId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
+        cardToChosenCards.clear();
         cardToChosenType.clear();
         cardToScript.clear();
         cardAttackMap.clear();
@@ -617,6 +639,12 @@ public abstract class GameState {
         // Advance to a certain phase, activating all triggered abilities
         if (advPhase != null) {
             game.getPhaseHandler().devAdvanceToPhase(advPhase);
+        }
+
+        if (removeSummoningSickness) {
+            for (Card card : game.getCardsInGame()) {
+                card.setSickness(false);
+            }
         }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
@@ -993,6 +1021,12 @@ public abstract class GameState {
             Card c = entry.getKey();
             c.setNamedCard(entry.getValue());
         }
+
+        // Chosen cards
+        for (Entry<Card, CardCollection> entry : cardToChosenCards.entrySet()) {
+            Card c = entry.getKey();
+            c.setChosenCards(entry.getValue());
+        }
     }
 
     private void handleCardAttachments() {
@@ -1154,7 +1188,7 @@ public abstract class GameState {
                 } else if (info.startsWith("SummonSick")) {
                     c.setSickness(true);
                 } else if (info.startsWith("FaceDown")) {
-                    c.setState(CardStateName.FaceDown, true);
+                    c.turnFaceDown(true);
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
                     }
@@ -1197,6 +1231,13 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("ChosenCards:")) {
+                    CardCollection chosen = new CardCollection();
+                    String[] idlist = info.substring(info.indexOf(':') + 1).split(",");
+                    for (String id : idlist) {
+                        chosen.add(idToCard.get(Integer.parseInt(id)));
+                    }
+                    cardToChosenCards.put(c, chosen);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
