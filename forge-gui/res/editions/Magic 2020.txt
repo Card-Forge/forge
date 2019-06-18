@@ -20,6 +20,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 27 R Loxodon Lifesinger
 
+33 R Planar Cleansing
+
 42 U Aether Gust
 
 46 R Atemsis, All-Seeing
@@ -28,8 +30,12 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 78 C Unsummon
 
+87 U Blightbeetle
+
 95 U Disfigure
 96 R Dread Presence
+
+107 R Leyline of the Void
 
 113 R Scheming Symmetry
 
@@ -50,9 +56,19 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 139 U Flame Sweep
 
+142 C Bird Tangle Goblin
+143 U Goblin Ringleader
+
 145 C Infuriate
 
+148 R Leyline of Combustion
+
+195 C Silverback Shaman
+
 197 R Thrashing Brontodon
+198 U Veil of Summer
+
+200 R Voracious Hydra
 
 202 R Wakeroot Elemental
 

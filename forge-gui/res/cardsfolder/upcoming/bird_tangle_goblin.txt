@@ -1,0 +1,5 @@
+Name:Bird Tangle Goblin
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/1
+Oracle:{R}: Bird Tangle Goblin gains flying until end of turn. Activate this ability only if you control a creature with flying.

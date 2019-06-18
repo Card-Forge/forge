@@ -1,0 +1,4 @@
+Name:Leyline of Combustion
+ManaCost:2 R R
+Types:Enchantment
+Oracle:If Leyline of Combustion is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you and/or at least one permanent you control becomes the target of a spell or ability an opponent controls, Leyline of Combustion deals 2 damage to that player.
