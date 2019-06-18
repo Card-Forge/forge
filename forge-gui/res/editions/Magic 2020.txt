@@ -37,6 +37,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 59 R Flood of Tears
 
+64 R Leyline of Anticipation
+
 69 C Negate
 70 C Octoprophet
 
