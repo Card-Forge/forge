@@ -201,7 +201,7 @@ public class PermanentAi extends SpellAbilityAi {
 
                     int numControlled = 0;
                     if (param.endsWith("WithoutOppAuras")) {
-                        // Check that the permanet does not have any auras attached to it by the opponent (this assumes that if
+                        // Check that the permanent does not have any auras attached to it by the opponent (this assumes that if
                         // the opponent cast an aura on the opposing permanent, it's not with good intentions, and thus it might
                         // be better to have a pristine copy of the card - might not always be a correct assumption, but sounds
                         // like a reasonable default for some cards).
