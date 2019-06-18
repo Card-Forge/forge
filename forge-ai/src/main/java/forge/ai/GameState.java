@@ -1127,7 +1127,6 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
-
     }
 
     /**
