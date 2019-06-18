@@ -11,7 +11,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 2 M Ajani, Strength of the Pride
 4 U Angel of Vitality
 
-10 C Octoprophet
+8 R Angelic Cleric
 
 13 U Devout Decree
 14 C Disenchant
@@ -22,11 +22,18 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 33 R Planar Cleansing
 
+35 R Rule of Law
+
+39 R Starfield Mystic
+
 42 U Aether Gust
 
 46 R Atemsis, All-Seeing
 
+59 R Flood of Tears
+
 69 C Negate
+70 C Octoprophet
 
 78 C Unsummon
 
@@ -52,7 +59,10 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 131 R Chandra's Regulator
 132 U Chandra's Spitfire
 
+134 C Chinese Goblin Miner
 135 U Dragon Mage
+
+137 U Ember Hauler
 
 139 U Flame Sweep
 
@@ -62,6 +72,10 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 145 C Infuriate
 
 148 R Leyline of Combustion
+
+154 C Reckless Airstrike
+
+163 U Uncaged Fury
 
 195 C Silverback Shaman
 
@@ -90,3 +104,4 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 ajanis_pridemate
 r_1_1_elemental
 w_1_1_soldier
+w_1_1_spirit_flying

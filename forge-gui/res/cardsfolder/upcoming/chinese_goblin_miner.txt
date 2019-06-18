@@ -1,0 +1,5 @@
+Name:Chinese Goblin Miner
+ManaCost:2 R
+Types:Creature Goblin
+PT:3/2
+Oracle:{3}, {T}, Sacrifice a land or artifact: Draw a card.
