@@ -1,4 +1,0 @@
-Name:Flood of Tears
-ManaCost:4 U U
-Types:Sorcery
-Oracle:Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way, you may put a permanent card from your hand onto the battlefield.

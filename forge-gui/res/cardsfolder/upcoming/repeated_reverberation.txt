@@ -1,4 +1,0 @@
-Name:Repeated Reverberation
-ManaCost:2 R R
-Types:Instant
-Oracle:When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.

@@ -1,4 +1,0 @@
-Name:Veil of Summer
-ManaCost:G
-Types:Instant
-Oracle:Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)

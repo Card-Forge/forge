@@ -1,4 +1,0 @@
-Name:Field of the Dead
-ManaCost:no cost
-Types:Land
-Oracle:Field of the Dead enters the battlefield tapped.\n{T}: Add {C}.\nWhenever Field fo the Dead or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.

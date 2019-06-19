@@ -1,6 +1,0 @@
-Name:Blightbeetle
-ManaCost:1 B
-Types:Creature Insect
-PT:1/1
-K:Protection from green
-Oracle:Protection from green (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything green.)\nCreatures your opponents control can't have +1/+1 counters put on them.

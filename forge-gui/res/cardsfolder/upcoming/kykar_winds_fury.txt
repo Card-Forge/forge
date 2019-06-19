@@ -1,6 +1,0 @@
-Name:Kykar, Wind's Fury
-ManaCost:1 U R W
-Types:Legendary Creature Bird Wizard
-K:Flying
-PT:3/3
-Oracle:Flying\nWhenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying.\nSacrifice a Spirit: Add {R}.

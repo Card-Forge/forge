@@ -1,6 +1,0 @@
-Name:Silverback Shaman
-ManaCost:3 G G
-Types:Creature Ape Shaman
-K:Trample
-PT:5/4
-Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhen Silverback Shaman dies, draw a card.

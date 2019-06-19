@@ -1,4 +1,0 @@
-Name:Aether Gust
-ManaCost:1 U
-Types:Instant
-Oracle:Choose target spell or permanent that's red or green. Its owner puts it on the top or bottom of their library.
