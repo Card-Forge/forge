@@ -1,0 +1,4 @@
+Name:Reckless Airstrike
+ManaCost:R
+Types:Sorcery
+Oracle:Choose one--\n*Reckless Airstrike deals 3 damage to target creature with flying.\n*Destroy target artifact.

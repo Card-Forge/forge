@@ -1,0 +1,4 @@
+Name:Legion's End
+ManaCost:1 B
+Types:Sorcery
+Oracle:Exile target creature an opponent controls with converted mana cost 2 or less and all other creatures that player controls with the same name as that creature. Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.
