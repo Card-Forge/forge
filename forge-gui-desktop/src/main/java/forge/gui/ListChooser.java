@@ -134,10 +134,8 @@ public class ListChooser<T> {
             }
         });
         this.lstChoices.addMouseListener(new FMouseAdapter() {
-            @Override public void onLeftClick(final MouseEvent e) {
-                if (e.getClickCount() == 2) {
+            @Override public void onLeftDoubleClick(final MouseEvent e) {
                     ListChooser.this.commit();
-                }
             }
         });
     }
