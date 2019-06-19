@@ -8,7 +8,9 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
 
 [cards]
+
 2 M Ajani, Strength of the Pride
+
 4 U Angel of Vitality
 
 8 R Angelic Cleric
@@ -27,7 +29,7 @@ C Pacifism
 
 33 R Planar Cleansing
 
-35 R Rule of Law
+35 U Rule of Law
 
 39 R Starfield Mystic
 
@@ -35,7 +37,11 @@ C Pacifism
 
 46 R Atemsis, All-Seeing
 
+51 U Captivating Gyre
+
 55 C Convolute
+
+57 R Dungeon Geists
 
 59 R Flood of Tears
 
@@ -48,9 +54,12 @@ C Pacifism
 
 87 U Blightbeetle
 
+92 C Bone Splinters
+
 95 U Disfigure
 96 R Dread Presence
 
+106 R Legion's End
 107 R Leyline of the Void
 
 113 R Scheming Symmetry
@@ -84,8 +93,10 @@ C Pacifism
 
 154 C Reckless Airstrike
 
-163 U Uncaged Fury
+156 R Repeated Reverberation
 
+163 U Uncaged Fury
+164 U Unchained Berserker
 165 U Barkhide Troll
 
 175 C Growth Cycle
@@ -93,6 +104,10 @@ C Pacifism
 180 U Loaming Shaman
 
 187 U Overgrowth Elemental
+
+189 U Pulse of Murasa
+
+191 U Season of Growth
 
 195 C Silverback Shaman
 
@@ -102,6 +117,8 @@ C Pacifism
 200 R Voracious Hydra
 
 202 R Wakeroot Elemental
+
+204 U Wolfrider's Saddle
 
 206 U Corpse Knight
 207 U Creeping Trailblazer
@@ -119,6 +136,8 @@ C Pacifism
 
 244 U Cryptic Caves
 
+247 R Field of the Dead
+
 280 L Forest
 281 M Rienne, Angel of Rebirth
 
@@ -127,4 +146,5 @@ ajanis_pridemate
 r_1_1_elemental
 w_1_1_soldier
 w_1_1_spirit_flying
+g_2_2_wolf
 b_2_2_zombie
