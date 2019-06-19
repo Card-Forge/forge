@@ -1,4 +1,0 @@
-Name:Season of Growth
-ManaCost:1 G
-Types:Enchantment
-Oracle:Whenever a creature enters the battlefield under your control, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nWhenever you cast a spell that targets a creature you control, draw a card.

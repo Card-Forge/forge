@@ -1,6 +1,0 @@
-Name:Voracious Hydra
-ManaCost:X G G
-Types:Creature Hydra
-PT:0/1
-K:Trample
-Oracle:Trample\nVoracious Hydra enters the battlefield with X +1/+1 counters.\nWhen Voracious Hydra enters the battlefield, choose one--\n*Double the number of +1/+1 counters on Voracious Hydra.\n*You may have Voracious Hydra fight with target creature you don't control.

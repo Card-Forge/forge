@@ -1,6 +1,0 @@
-Name:Unchained Berserker
-ManaCost:1 R
-Types:Creature Human Berserker
-K:Protection from white
-PT:1/1
-Oracle:Protection from white (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything white.)\nUnchained Berserker gets +2/+0 as long as it's attacking.

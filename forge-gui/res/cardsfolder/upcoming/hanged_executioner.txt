@@ -1,6 +1,0 @@
-Name:Hanged Executioner
-ManaCost:2 W
-Types:Creature Spirit
-K:Flying
-PT:1/1
-Oracle:Flying\nWhen Hanged Executioner enters the battlefield, create a 1/1 white Spirit creature token with flying.\n{3}{W}, Exile Hanged Executioner: Exile target creature.

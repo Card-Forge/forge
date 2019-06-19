@@ -1,5 +1,0 @@
-Name:Dread Presence
-ManaCost:3 B
-Types:Creature Nightmare
-PT:3/3
-Oracle:Whenever a Swamp enters the battlefield under your control, choose one--\n*You draw a card and you lose 1 life.\n*Dread Presence deals 2 damage to any target and you gain 2 life.
