@@ -1,0 +1,13 @@
+Name:Angel of Vitality
+ManaCost:2 W
+Types:Creature Angel
+PT:2/2
+K:Flying
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X | References$ X
+SVar:X:ReplaceCount$LifeGained/Plus.1
+SVar:PlayMain1:True
+DeckHints:Ability$LifeGain
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ Y | SVarCompare$ GE25 | Description$ CARDNAME gets +2/+2 as long as you have 25 or more life.
+SVar:Y:Count$YourLifeTotal
+Oracle:Flying\nIf you would gain life, you gain that much life plus 1 instead.\nAngel of Vitality gets +2/+2 as long as you have 25 or more life.
