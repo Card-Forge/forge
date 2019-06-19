@@ -56,6 +56,7 @@ import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
 import forge.toolbox.special.CardZoomer;
+import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
@@ -83,6 +84,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private final List<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final List<Group> groups = new ArrayList<Group>();
+    final Localizer localizer = Localizer.getInstance();
 
     private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
         return FModel.getPreferences().getPrefBoolean(preferenceName);
@@ -127,9 +129,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 repaintSelf();
             }
         }
-
         private void updateToolTip() {
-            setToolTipText(isAllCollapsed ? "Expand all groups" : "Collapse all groups");
+            setToolTipText(isAllCollapsed ? localizer.getMessage("lblExpandallgroups") : localizer.getMessage("lblCollapseallgroups"));
         }
 
         @Override
@@ -211,11 +212,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         });
 
         getPnlOptions().add(btnExpandCollapseAll, "w " + FTextField.HEIGHT + "px, h " + FTextField.HEIGHT + "px");
-        getPnlOptions().add(new FLabel.Builder().text("Group by:").fontSize(12).build());
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblGroupby") +":").fontSize(12).build());
         cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
-        getPnlOptions().add(new FLabel.Builder().text("Pile by:").fontSize(12).build());
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblPileby") +":").fontSize(12).build());
         cbPileByOptions.addTo(getPnlOptions(), "pushx, growx");
-        getPnlOptions().add(new FLabel.Builder().text("Columns:").fontSize(12).build());
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblColumns") +":").fontSize(12).build());
         cbColumnCount.addTo(getPnlOptions(), "w 38px!");
 
         //setup display

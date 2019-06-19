@@ -6,6 +6,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.deckeditor.controllers.CDeckgen;
 import forge.toolbox.FLabel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /** 
@@ -16,30 +17,29 @@ import net.miginfocom.swing.MigLayout;
 public enum VDeckgen implements IVDoc<CDeckgen> {
     /** */
     SINGLETON_INSTANCE;
-
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Deck Generation");
-
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblDeckGeneration"));
     // Deckgen buttons
     private final FLabel btnRandCardpool = new FLabel.Builder()
-        .tooltip("Generate random constructed cardpool in current deck area")
-        .text("Random Cardpool").fontSize(14)
+        .tooltip(localizer.getMessage("ttbtnRandCardpool"))
+        .text(localizer.getMessage("btnRandCardpool")).fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final FLabel btnRandDeck2 = new FLabel.Builder()
-        .tooltip("Generate 2 color constructed deck in current deck area")
-        .text("Constructed (2 color)").fontSize(14)
+        .tooltip(localizer.getMessage("ttbtnRandDeck2"))
+        .text(localizer.getMessage("btnRandDeck2")).fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final FLabel btnRandDeck3 = new FLabel.Builder()
-        .tooltip("Generate 3 color constructed deck in current deck area")
-        .text("Constructed (3 color)").fontSize(14)
+        .tooltip(localizer.getMessage("ttbtnRandDeck3"))
+        .text(localizer.getMessage("btnRandDeck3")).fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final FLabel btnRandDeck5 = new FLabel.Builder()
-        .tooltip("Generate 5 color constructed deck in current deck area")
-        .text("Constructed (5 color)").fontSize(14)
+        .tooltip(localizer.getMessage("ttbtnRandDeck5"))
+        .text(localizer.getMessage("btnRandDeck5")).fontSize(14)
         .opaque(true).hoverable(true).build();
 
     //========== Constructor

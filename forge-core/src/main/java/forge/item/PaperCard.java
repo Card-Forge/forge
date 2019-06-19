@@ -28,6 +28,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 /**
@@ -95,7 +96,8 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public String getItemType() {
-        return "Card";
+        final Localizer localizer = Localizer.getInstance();
+        return localizer.getMessage("lblCard");
     }
 
     public boolean hasImage() {

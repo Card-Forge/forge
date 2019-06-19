@@ -10,6 +10,7 @@ import forge.quest.data.QuestPreferences;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -81,8 +82,8 @@ public class CardManager extends ItemManager<PaperCard> {
 
     public void buildAddFilterMenu(JMenu menu, final ItemManager<? super PaperCard> itemManager) {
         GuiUtils.addSeparator(menu); //separate from current search item
-
-        JMenu fmt = GuiUtils.createMenu("Format");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu fmt = GuiUtils.createMenu(localizer.getMessage("lblFormat"));
         for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
@@ -93,7 +94,7 @@ public class CardManager extends ItemManager<PaperCard> {
         }
         menu.add(fmt);
 
-        GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, new Runnable() {
             @Override public void run() {
                 final CardFormatFilter existingFilter = itemManager.getFilter(CardFormatFilter.class);
                 if (existingFilter != null) {
@@ -113,7 +114,7 @@ public class CardManager extends ItemManager<PaperCard> {
             }
         });
 
-        GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, new Runnable() {
             @Override
             public void run() {
                 CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
@@ -135,7 +136,7 @@ public class CardManager extends ItemManager<PaperCard> {
             }
         });
 
-        JMenu world = GuiUtils.createMenu("Quest world");
+        JMenu world = GuiUtils.createMenu(localizer.getMessage("lblQuestWorld"));
         for (final QuestWorld w : FModel.getWorlds()) {
             GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                 @Override
@@ -148,19 +149,19 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "Colors", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardColorFilter(itemManager));
             }
         }, itemManager.getFilter(CardColorFilter.class) == null);
-        GuiUtils.addMenuItem(menu, "Types", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblTypes"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardTypeFilter(itemManager));
             }
         }, itemManager.getFilter(CardTypeFilter.class) == null);
-        GuiUtils.addMenuItem(menu, "Converted mana costs", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblConvertedManaCosts"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardCMCFilter(itemManager));
@@ -169,19 +170,19 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "CMC range", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblCMCRange"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardCMCRangeFilter(itemManager));
             }
         }, itemManager.getFilter(CardCMCRangeFilter.class) == null);
-        GuiUtils.addMenuItem(menu, "Power range", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblPowerRange"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardPowerFilter(itemManager));
             }
         }, itemManager.getFilter(CardPowerFilter.class) == null);
-        GuiUtils.addMenuItem(menu, "Toughness range", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblToughnessRange"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardToughnessFilter(itemManager));
@@ -190,7 +191,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "Foil", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFoil"), null, new Runnable() {
             @Override
             public void run() {
                 itemManager.addFilter(new CardFoilFilter(itemManager));
@@ -198,7 +199,7 @@ public class CardManager extends ItemManager<PaperCard> {
         }, itemManager.getFilter(CardFoilFilter.class) == null);
 
         if (QuestMode) {
-            GuiUtils.addMenuItem(menu, "Personal Rating", null, new Runnable() {
+            GuiUtils.addMenuItem(menu, localizer.getMessage("lblPersonalRating"), null, new Runnable() {
                 @Override
                 public void run() {
                     itemManager.addFilter(new CardRatingFilter(itemManager));
@@ -208,7 +209,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "Advanced...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced")+ "...", null, new Runnable() {
             @Override
             @SuppressWarnings("unchecked")
             public void run() {

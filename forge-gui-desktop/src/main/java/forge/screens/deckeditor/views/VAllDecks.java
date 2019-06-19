@@ -10,6 +10,7 @@ import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CAllDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Constructed");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblConstructed"));
 
     private DeckManager lstDecks;
 
@@ -93,6 +95,6 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
-        this.lstDecks.setCaption("Constructed Decks");
+        this.lstDecks.setCaption(localizer.getMessage("lblConstructedDecks"));
     }
 }

@@ -38,6 +38,7 @@ import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -126,7 +127,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
         deckManager = new CardManager(getCDetailPicture(), wantUnique, false);
 
-        catalogManager.setCaption("Catalog");
+        final Localizer localizer = Localizer.getInstance();
+
+        catalogManager.setCaption(localizer.getMessage("lblCatalog"));
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
@@ -258,13 +261,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     }
 
     public static void buildAddContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode) {
+        final Localizer localizer = Localizer.getInstance();
         switch (sectionMode) {
         case Main:
-            cmb.addMoveItems("Add", "to deck");
-            cmb.addMoveAlternateItems("Add", "to sideboard");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodeck"));
+            cmb.addMoveAlternateItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
             break;
         case Sideboard:
-            cmb.addMoveItems("Add", "to sideboard");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to sideboard");
             break;
         case Commander:
             cmb.addMoveItems("Set", "as commander");
@@ -273,41 +277,42 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems("Set", "as avatar");
             break;
         case Schemes:
-            cmb.addMoveItems("Add", "to scheme deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to scheme deck");
             break;
         case Planes:
-            cmb.addMoveItems("Add", "to planar deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to planar deck");
             break;
         case Conspiracy:
-            cmb.addMoveItems("Add", "to conspiracy deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to conspiracy deck");
             break;
         }
     }
 
     public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode, boolean foilAvailable) {
+        final Localizer localizer = Localizer.getInstance();
         switch (sectionMode) {
         case Main:
-            cmb.addMoveItems("Remove", "from deck");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
             cmb.addMoveAlternateItems("Move", "to sideboard");
             break;
         case Sideboard:
-            cmb.addMoveItems("Remove", "from sideboard");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
             cmb.addMoveAlternateItems("Move", "to deck");
             break;
         case Commander:
-            cmb.addMoveItems("Remove", "as commander");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
             break;
         case Avatar:
-            cmb.addMoveItems("Remove", "as avatar");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblasavatar"));
             break;
         case Schemes:
-            cmb.addMoveItems("Remove", "from scheme deck");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromschemedeck"));
             break;
         case Planes:
-            cmb.addMoveItems("Remove", "from planar deck");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromplanardeck"));
             break;
         case Conspiracy:
-            cmb.addMoveItems("Remove", "from conspiracy deck");
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromconspiracydeck"));
             break;
         }
         if (foilAvailable) {
