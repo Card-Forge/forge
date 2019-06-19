@@ -138,7 +138,7 @@ C Pacifism
 
 226 R Golos, Tireless Pilgrim
 
-236 U Bacchetta Punitiva
+236 U Punitive Wand
 
 244 U Cryptic Caves
 
