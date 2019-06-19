@@ -21,7 +21,6 @@ package forge.quest;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
-import forge.model.FModel;
 
 /**
  * <p>
