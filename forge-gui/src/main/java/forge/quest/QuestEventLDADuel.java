@@ -20,6 +20,7 @@ package forge.quest;
 
 import forge.deck.DeckgenUtil;
 import forge.deck.io.Archetype;
+import forge.game.GameFormat;
 import forge.model.FModel;
 
 /**
@@ -32,14 +33,16 @@ import forge.model.FModel;
 public class QuestEventLDADuel extends QuestEventDuel {
 
     private Archetype archetype;
+    private GameFormat baseFormat;
 
     /**
      * Instantiates a new quest duel.
      */
-    public QuestEventLDADuel(Archetype archetype) {
+    public QuestEventLDADuel(Archetype archetype, GameFormat baseFormat) {
         super();
+        this.baseFormat = baseFormat;
         this.archetype = archetype;
-        this.eventDeck = DeckgenUtil.buildLDACArchetypeDeck(archetype, FModel.getFormats().getStandard(),true);
+        this.eventDeck = DeckgenUtil.buildLDACArchetypeDeck(archetype, baseFormat,true);
     }
 
 }

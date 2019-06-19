@@ -446,9 +446,12 @@ public class QuestController {
 
         if (world != null) {
             if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
-                this.duelManager = new QuestEventLDADuelManager();
+                this.duelManager = new QuestEventLDADuelManager(FModel.getFormats().getStandard());
                 return;
-            } else if (world.isCustom()) {
+            } else if (world.getName().equals(QuestWorld.MODERNWORLDNAME)) {
+                this.duelManager = new QuestEventLDADuelManager(FModel.getFormats().getModern());
+                return;
+            }else if (world.isCustom()) {
                 path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getDuelsDir();
             } else {
                 path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
@@ -475,7 +478,12 @@ public class QuestController {
         if (world != null) {
 
             if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
-                allChallenges = QuestChallengeGenerator.generateChallenges();
+                QuestChallengeGenerator gen = new QuestChallengeGenerator(FModel.getFormats().getStandard());
+                allChallenges = gen.generateChallenges();
+                return;
+            }else if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
+                QuestChallengeGenerator gen = new QuestChallengeGenerator(FModel.getFormats().getModern());
+                allChallenges = gen.generateChallenges();
                 return;
             } else if (world.isCustom()) {
                 path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();

@@ -19,6 +19,7 @@ package forge.quest;
 
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.io.Archetype;
+import forge.game.GameFormat;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
@@ -42,9 +43,11 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
 
     private List<Archetype> archetypes;
     private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
+    private GameFormat baseFormat;
 
-    public QuestEventLDADuelManager(){
-        archetypes = CardArchetypeLDAGenerator.ldaArchetypes.get(FModel.getFormats().getStandard().getName());
+    public QuestEventLDADuelManager(GameFormat baseFormat){
+        this.baseFormat = baseFormat;
+        archetypes = CardArchetypeLDAGenerator.ldaArchetypes.get(baseFormat.getName());
         assembleDuelDifficultyLists();
     }
 
@@ -58,7 +61,7 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
 
         int i=0;
         for(Archetype archetype : archetypes){
-            QuestEventLDADuel duel = new QuestEventLDADuel((archetype));
+            QuestEventLDADuel duel = new QuestEventLDADuel(archetype,baseFormat);
             duel.setDescription("Randomly generated "+archetype.getName()+" archetype deck.");
             duel.setName(archetype.getName());
             duel.setTitle(archetype.getName());
