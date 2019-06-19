@@ -21,6 +21,7 @@ import forge.StaticData;
 import forge.deck.*;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Supplier;
@@ -402,9 +403,10 @@ public class DeckController<T extends DeckBase> {
     }
 
     public void updateCaptions() {
-        String tabCaption = "Current Deck";
+        final Localizer localizer = Localizer.getInstance();
+        String tabCaption = localizer.getMessage("lblCurrentDeck2");
         final String title = getModelName();
-        String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
+        String itemManagerCaption = title.isEmpty() ? "[" + localizer.getMessage("lblUntitled") +"]" : title;
 
         if (!saved) {
             tabCaption = "*" + tabCaption;

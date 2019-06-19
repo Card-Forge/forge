@@ -3,6 +3,7 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
@@ -24,16 +25,17 @@ import forge.toolbox.FTextField;
  */
 public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Current Deck");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblVCurrentDeck"));
 
     // Other fields
 
     private final FLabel btnSave = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Save Deck (Ctrl+S)")
+            .tooltip(localizer.getMessage("ttbtnSave"))
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkinProp.ICO_SAVE))
@@ -41,7 +43,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnSaveAs = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Save Deck As (Ctrl+E)")
+            .tooltip(localizer.getMessage("ttbtnSaveAs"))
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkinProp.ICO_SAVEAS))
@@ -49,7 +51,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnLoad = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Open Deck (Ctrl+O)")
+            .tooltip(localizer.getMessage("ttbtnLoadDeck"))
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkinProp.ICO_OPEN))
@@ -57,7 +59,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnNew = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("New Deck (Ctrl+N)")
+            .tooltip(localizer.getMessage("ttbtnNewDeck"))
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkinProp.ICO_NEW))
@@ -65,7 +67,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnPrintProxies = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Print to HTML file (Ctrl+P)")
+            .tooltip(localizer.getMessage("ttbtnPrintProxies"))
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkinProp.ICO_PRINT))
@@ -73,15 +75,15 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnImport = new FLabel.Builder()
             .fontSize(14)
-            .text("Import")
-            .tooltip("Attempt to import a deck from a non-Forge format (Ctrl+I)")
+            .text(localizer.getMessage("lblImport"))
+            .tooltip(localizer.getMessage("ttImportDeck"))
             .opaque(true).hoverable(true).build();
 
     private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").build();
 
     private final JPanel pnlHeader = new JPanel();
 
-    private final FLabel lblTitle = new FLabel.Builder().text("Title").fontSize(14).build();
+    private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
 
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;

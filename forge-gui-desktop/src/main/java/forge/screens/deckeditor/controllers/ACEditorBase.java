@@ -44,6 +44,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.view.FView;
 
 import javax.swing.*;
@@ -77,37 +78,39 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private final CDetailPicture cDetailPicture;
 
     // card transfer buttons
+    final Localizer localizer = Localizer.getInstance();
+
     private final FLabel btnAdd = new FLabel.Builder()
             .fontSize(14)
-            .text("Add card")
-            .tooltip("Add selected card to current deck (or double click the row or hit the spacebar)")
+            .text(localizer.getMessage("lblAddcard"))
+            .tooltip(localizer.getMessage("ttAddcard"))
             .icon(FSkin.getIcon(FSkinProp.ICO_PLUS))
             .iconScaleAuto(false).hoverable().build();
     private final FLabel btnAdd4 = new FLabel.Builder()
             .fontSize(14)
-            .text("Add 4 of card")
-            .tooltip("Add up to 4 of selected card to current deck")
+            .text(localizer.getMessage("lblAdd4ofcard"))
+            .tooltip(localizer.getMessage("ttAdd4ofcard"))
             .icon(FSkin.getIcon(FSkinProp.ICO_PLUS))
             .iconScaleAuto(false).hoverable().build();
 
     private final FLabel btnRemove = new FLabel.Builder()
             .fontSize(14)
-            .text("Remove card")
-            .tooltip("Remove selected card from current deck (or double click the row or hit the spacebar)")
+            .text(localizer.getMessage("lblRemovecard"))
+            .tooltip(localizer.getMessage("ttRemovecard"))
             .icon(FSkin.getIcon(FSkinProp.ICO_MINUS))
             .iconScaleAuto(false).hoverable().build();
 
     private final FLabel btnRemove4 = new FLabel.Builder()
             .fontSize(14)
-            .text("Remove 4 of card")
-            .tooltip("Remove up to 4 of selected card to current deck")
+            .text(localizer.getMessage("lblRemove4ofcard"))
+            .tooltip(localizer.getMessage("ttRemove4ofcard"))
             .icon(FSkin.getIcon(FSkinProp.ICO_MINUS))
             .iconScaleAuto(false).hoverable().build();
 
     private final FLabel btnAddBasicLands = new FLabel.Builder()
             .fontSize(14)
-            .text("Add Basic Lands")
-            .tooltip("Add basic lands to the deck")
+            .text(localizer.getMessage("lblAddBasicLands"))
+            .tooltip(localizer.getMessage("ttAddBasicLands"))
             .icon(FSkin.getImage(FSkinProp.IMG_LAND, 18, 18))
             .iconScaleAuto(false).hoverable().build();
 
@@ -390,13 +393,13 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(localizer.getMessage("lblCardCatalog"));
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
         getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
+        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(localizer.getMessage("lblTitle") + ":");
     }
 
     public FLabel getBtnAdd()     { return btnAdd; }
@@ -445,7 +448,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 menu.addSeparator();
             }
 
-            GuiUtils.addMenuItem(menu, "Jump to previous table",
+            GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptoprevioustable"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
                     new Runnable() {
                 @Override
@@ -453,7 +456,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     getNextItemManager().focus();
                 }
             });
-            GuiUtils.addMenuItem(menu, "Jump to next table",
+            GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptopnexttable"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
                     new Runnable() {
                 @Override
@@ -461,7 +464,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     getNextItemManager().focus();
                 }
             });
-            GuiUtils.addMenuItem(menu, "Jump to text filter",
+            GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptotextfilter"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                     new Runnable() {
                 @Override
@@ -498,13 +501,13 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          * @param qty           a negative quantity will prompt the user for a number
          */
         private void addMakeFoil(final int qty) {
-            String label = "Foil " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+            String label = localizer.getMessage("lblConvertToFoil") + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
 
             GuiUtils.addMenuItem(menu, label, null, new Runnable() {
                         @Override public void run() {
                             Integer quantity = qty;
                             if (quantity < 0) {
-                                quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
+                                quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
                                 if (quantity == null) { return; }
                             }
                             // get the currently selected card from the editor
@@ -525,7 +528,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                         }
                     }, true, true);
         }
-
+//TODO: need to translate getItemDisplayString
         private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
             String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
             if (dest != null && !dest.isEmpty()) {
@@ -536,7 +539,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 @Override public void run() {
                     Integer quantity = qty;
                     if (quantity < 0) {
-                        quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
+                        quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
                         if (quantity == null) { return; }
                     }
                     if (isAddContextMenu) {

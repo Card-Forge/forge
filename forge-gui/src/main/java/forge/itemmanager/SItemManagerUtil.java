@@ -9,6 +9,7 @@ import forge.deck.DeckProxy;
 import forge.interfaces.IComboBox;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,49 +29,49 @@ import java.util.Map.Entry;
 public final class SItemManagerUtil {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes implements IHasSkinProp {
-        WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "White cards"),
-        BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "Blue cards"),
-        BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "Black cards"),
-        RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.Presets.IS_RED, "Red cards"),
-        GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.Presets.IS_GREEN, "Green cards"),
-        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "Colorless cards"),
-        MULTICOLOR (FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "Multicolor cards"),
+        WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "lblWhitecards"),
+        BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "lblBluecards"),
+        BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "lblBlackcards"),
+        RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.Presets.IS_RED, "lblRedcards"),
+        GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.Presets.IS_GREEN, "lblGreencards"),
+        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "lblColorlesscards"),
+        MULTICOLOR (FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "lblMulticolorcards"),
 
-        PACK_OR_DECK (FSkinProp.IMG_PACK,         null, "Card packs and prebuilt decks"),
-        LAND         (FSkinProp.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "Lands"),
-        ARTIFACT     (FSkinProp.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, "Artifacts"),
-        CREATURE     (FSkinProp.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, "Creatures"),
-        ENCHANTMENT  (FSkinProp.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, "Enchantments"),
-        PLANESWALKER (FSkinProp.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, "Planeswalkers"),
-        INSTANT      (FSkinProp.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, "Instants"),
-        SORCERY      (FSkinProp.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, "Sorceries"),
+        PACK_OR_DECK (FSkinProp.IMG_PACK,         null, "lblPackordeck"),
+        LAND         (FSkinProp.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "lblLands"),
+        ARTIFACT     (FSkinProp.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, "lblArtifacts"),
+        CREATURE     (FSkinProp.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, "lblCreatures"),
+        ENCHANTMENT  (FSkinProp.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, "lblEnchantments"),
+        PLANESWALKER (FSkinProp.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, "lblPlaneswalkers"),
+        INSTANT      (FSkinProp.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, "lblInstants"),
+        SORCERY      (FSkinProp.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, "lblSorceries"),
 
-        CMC_0 (FSkinProp.IMG_MANA_0, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 0), "Cards with CMC 0"),
-        CMC_1 (FSkinProp.IMG_MANA_1, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 1), "Cards with CMC 1"),
-        CMC_2 (FSkinProp.IMG_MANA_2, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 2), "Cards with CMC 2"),
-        CMC_3 (FSkinProp.IMG_MANA_3, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 3), "Cards with CMC 3"),
-        CMC_4 (FSkinProp.IMG_MANA_4, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 4), "Cards with CMC 4"),
-        CMC_5 (FSkinProp.IMG_MANA_5, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 5), "Cards with CMC 5"),
-        CMC_6 (FSkinProp.IMG_MANA_6, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.GT_OR_EQUAL, 6), "Cards with CMC 6+"),
+        CMC_0 (FSkinProp.IMG_MANA_0, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 0), "lblCCMC0"),
+        CMC_1 (FSkinProp.IMG_MANA_1, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 1), "lblCCMC1"),
+        CMC_2 (FSkinProp.IMG_MANA_2, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 2), "lblCCMC2"),
+        CMC_3 (FSkinProp.IMG_MANA_3, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 3), "lblCCMC3"),
+        CMC_4 (FSkinProp.IMG_MANA_4, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 4), "lblCCMC4"),
+        CMC_5 (FSkinProp.IMG_MANA_5, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 5), "lblCCMC5"),
+        CMC_6 (FSkinProp.IMG_MANA_6, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.GT_OR_EQUAL, 6), "lblCCMC6orMore"),
 
-        DECK_WHITE      (FSkinProp.IMG_MANA_W,         null, "White decks"),
-        DECK_BLUE       (FSkinProp.IMG_MANA_U,         null, "Blue decks"),
-        DECK_BLACK      (FSkinProp.IMG_MANA_B,         null, "Black decks"),
-        DECK_RED        (FSkinProp.IMG_MANA_R,         null, "Red decks"),
-        DECK_GREEN      (FSkinProp.IMG_MANA_G,         null, "Green decks"),
-        DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "Colorless decks"),
-        DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "Multicolor decks"),
+        DECK_WHITE      (FSkinProp.IMG_MANA_W,         null, "lblWhitedecks"),
+        DECK_BLUE       (FSkinProp.IMG_MANA_U,         null, "lblBluedecks"),
+        DECK_BLACK      (FSkinProp.IMG_MANA_B,         null, "lblBlackdecks"),
+        DECK_RED        (FSkinProp.IMG_MANA_R,         null, "lblReddecks"),
+        DECK_GREEN      (FSkinProp.IMG_MANA_G,         null, "lblGreendecks"),
+        DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "lblColorlessdecks"),
+        DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "lblMulticolordecks"),
     	
-        FOIL_OLD  (FSkinProp.FOIL_11,   null, "Old style Foil cards"),
-        FOIL_NEW  (FSkinProp.FOIL_01,   null, "New style Foil cards"),
-        FOIL_NONE (FSkinProp.ICO_CLOSE, null, "Non-Foil cards"),
+        FOIL_OLD  (FSkinProp.FOIL_11,   null, "lblOldstyleFoilcards"),
+        FOIL_NEW  (FSkinProp.FOIL_01,   null, "lblNewstyleFoilcards"),
+        FOIL_NONE (FSkinProp.ICO_CLOSE, null, "lblNon-Foilcards"),
 
-        RATE_NONE (FSkinProp.IMG_FAVNONE, null, "Unrated cards"),
-        RATE_1    (FSkinProp.IMG_FAV1,    null, "1 star cards"),
-        RATE_2    (FSkinProp.IMG_FAV2,    null, "2 star cards"),
-        RATE_3    (FSkinProp.IMG_FAV3,    null, "3 star cards"),
-        RATE_4    (FSkinProp.IMG_FAV4,    null, "4 star cards"),
-        RATE_5    (FSkinProp.IMG_FAV5,    null, "5 star cards");
+        RATE_NONE (FSkinProp.IMG_FAVNONE, null, "lblUnratedcards"),
+        RATE_1    (FSkinProp.IMG_FAV1,    null, "lbl1starcards"),
+        RATE_2    (FSkinProp.IMG_FAV2,    null, "lbl2starcards"),
+        RATE_3    (FSkinProp.IMG_FAV3,    null, "lbl3starcards"),
+        RATE_4    (FSkinProp.IMG_FAV4,    null, "lbl4starcards"),
+        RATE_5    (FSkinProp.IMG_FAV5,    null, "lbl5starcards");
 
 
         public final FSkinProp skinProp;
@@ -80,7 +81,8 @@ public final class SItemManagerUtil {
         private StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
             skinProp = skinProp0;
             predicate = predicate0;
-            label = label0;
+            final Localizer localizer = Localizer.getInstance();
+            label = localizer.getMessage(label0);
         }
 
         @Override
@@ -95,6 +97,7 @@ public final class SItemManagerUtil {
         return getItemDisplayString(items, qty, forTitle);
     }
     public static String getItemDisplayString(final Iterable<? extends InventoryItem> items, final int qty, final boolean forTitle) {
+        final Localizer localizer = Localizer.getInstance();
         //determine shared type among items
         int itemCount = 0;
         String sharedType = null;
@@ -130,10 +133,10 @@ public final class SItemManagerUtil {
                 result = itemCount + " " + result + "s";
             }
             if (qty < 0) { //treat negative numbers as unknown quantity
-                result = "X copies of " + result;
+                result = localizer.getMessage("lblXcopiesof") + " " + result;
             }
             else if (qty != 1) {
-                result = qty + " copies of " + result;
+                result = qty + " " + localizer.getMessage("lblcopiesof")+ " " + result;
             }
         }
         return result;
@@ -166,8 +169,9 @@ public final class SItemManagerUtil {
         final boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
         final GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
         final ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
-        cbGroupByOptions.addItem("(none)");
-        cbPileByOptions.addItem("(none)");
+        final Localizer localizer = Localizer.getInstance();
+        cbGroupByOptions.addItem("(" + localizer.getMessage("lblNone") + ")");
+        cbPileByOptions.addItem("(" + localizer.getMessage("lblNone") + ")");
         for (final GroupDef option : groupByOptions) {
             cbGroupByOptions.addItem(option);
         }

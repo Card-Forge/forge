@@ -10,6 +10,7 @@ import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CTinyLeadersDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public enum VTinyLeadersDecks implements IVDoc<CTinyLeadersDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Tiny Leaders");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblTinyLeaders"));
 
     private DeckManager lstDecks;
 
@@ -93,6 +95,6 @@ public enum VTinyLeadersDecks implements IVDoc<CTinyLeadersDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.TinyLeaders, cDetailPicture);
-        this.lstDecks.setCaption("Tiny Leaders Decks");
+        this.lstDecks.setCaption(localizer.getMessage("lblTinyLeadersDecks"));
     }
 }
