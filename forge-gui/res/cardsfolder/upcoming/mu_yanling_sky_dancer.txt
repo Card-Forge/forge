@@ -1,0 +1,5 @@
+Name:Mu Yanling, Sky Dancer
+ManaCost:1 U U
+Types:Legendary Planeswalker Yanling
+Loyalty:2
+Oracle:[+2]: Until your next turn, up to one target creature gets -2/-0 and loses flying.\n[-3]: Create a 4/4 blue Elemental Bird creature token with flying.\n[-8]: You get an emblem with "Islands you control have '{T}: Draw a card.'"

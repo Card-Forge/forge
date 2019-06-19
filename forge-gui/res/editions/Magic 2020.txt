@@ -15,6 +15,8 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 8 R Angelic Cleric
 
+10 M Cavalier of Dawn
+
 13 U Devout Decree
 14 C Disenchant
 
@@ -47,8 +49,11 @@ C Pacifism
 
 64 R Leyline of Anticipation
 
+68 M Mu Yanling, Sky Dancer
 69 C Negate
 70 C Octoprophet
+
+74 U Scholar of the Ages
 
 78 C Unsummon
 
@@ -59,6 +64,7 @@ C Pacifism
 95 U Disfigure
 96 R Dread Presence
 
+105 R Knight of the Ebon Legion
 106 R Legion's End
 107 R Leyline of the Void
 
@@ -144,6 +150,7 @@ C Pacifism
 [tokens]
 ajanis_pridemate
 r_1_1_elemental
+u_4_4_elemental_bird_flying
 w_1_1_soldier
 w_1_1_spirit_flying
 g_2_2_wolf

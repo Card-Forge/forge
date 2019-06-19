@@ -1,0 +1,5 @@
+Name:Scholar of the Ages
+ManaCost:5 U U
+Types:Creature Human Wizard
+PT:3/3
+Oracle:When Scholar of the Ages enters the battlefield, return up to two target instant and/or sorcery cards from your graveyard to your hand.

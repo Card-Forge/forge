@@ -1,0 +1,5 @@
+Name:Knight of the Ebon Legion
+ManaCost:B
+Types:Creature Vampire Knight
+PT:1/2
+Oracle:{2}{B}: Knight of the Ebon Legion gets +3/+3 and gains deathtouch until end of turn.\nAt the beginning of your end step, if any player lost 4 or more life this turn, put a +1/+1 counter on Knight of the Ebon Legion.
