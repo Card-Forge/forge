@@ -24,7 +24,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 24 R Leyline of Sanctity
 
-27 R Loxodon Lifesinger
+27 R Loxodon Lifechanter
 28 U Loyal Pegasus
 
 C Pacifism
