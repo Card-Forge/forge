@@ -2,5 +2,5 @@ Name:Rienne, Angel of Rebirth
 ManaCost:2 R G W
 Types:Legendary Creature Angel
 K:Flying
-Oracle:Flying\nOther multicolored creatures you control get +1/+0.\nWhenever another multicolored creature you control dies, return it to its owner's hand at the beginning of the next end step.
 PT:5/4
+Oracle:Flying\nOther multicolored creatures you control get +1/+0.\nWhenever another multicolored creature you control dies, return it to its owner's hand at the beginning of the next end step.

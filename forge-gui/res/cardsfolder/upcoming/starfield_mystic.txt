@@ -1,0 +1,5 @@
+Name:Starfield Mystic
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+Oracle:Enchantment spells you cast cost {1} less to cast.\nWhenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Starfield Mystic.

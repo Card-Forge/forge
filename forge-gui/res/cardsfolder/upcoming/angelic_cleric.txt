@@ -1,0 +1,5 @@
+Name:Angelic Cleric
+ManaCost:W W
+Types:Human Cleric
+PT:1/4
+Oracle:Whenever an Angel enters the battlefield under your control, you gain 4 life.\nWhenever an Angel you control dies, create a 1/1 white Spirit creature token with flying.

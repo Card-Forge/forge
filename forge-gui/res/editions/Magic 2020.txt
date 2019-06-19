@@ -11,25 +11,47 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 2 M Ajani, Strength of the Pride
 4 U Angel of Vitality
 
-10 C Octoprophet
+8 R Angelic Cleric
 
 13 U Devout Decree
 14 C Disenchant
 
+22 R Hanged Executioner
+
 24 R Leyline of Sanctity
 
 27 R Loxodon Lifesinger
+28 U Loyal Pegasus
+
+C Pacifism
+
+33 R Planar Cleansing
+
+35 R Rule of Law
+
+39 R Starfield Mystic
 
 42 U Aether Gust
 
 46 R Atemsis, All-Seeing
 
+55 C Convolute
+
+59 R Flood of Tears
+
+64 R Leyline of Anticipation
+
 69 C Negate
+70 C Octoprophet
 
 78 C Unsummon
 
+87 U Blightbeetle
+
 95 U Disfigure
 96 R Dread Presence
+
+107 R Leyline of the Void
 
 113 R Scheming Symmetry
 
@@ -46,13 +68,38 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 131 R Chandra's Regulator
 132 U Chandra's Spitfire
 
+134 C Chinese Goblin Miner
 135 U Dragon Mage
+
+137 U Ember Hauler
 
 139 U Flame Sweep
 
+142 C Goblin Hitchhiker
+143 U Goblin Ringleader
+
 145 C Infuriate
 
+148 R Leyline of Combustion
+
+154 C Reckless Airstrike
+
+163 U Uncaged Fury
+
+165 U Barkhide Troll
+
+175 C Growth Cycle
+
+180 U Loaming Shaman
+
+187 U Overgrowth Elemental
+
+195 C Silverback Shaman
+
 197 R Thrashing Brontodon
+198 U Veil of Summer
+
+200 R Voracious Hydra
 
 202 R Wakeroot Elemental
 
@@ -60,10 +107,15 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 207 U Creeping Trailblazer
 208 U Empyrean Eagle
 209 U Ironroot Warlord
+210 M Kaalia, Zenith Seeker
 
 212 M Kykar, Wind's Fury
 
 217 U Risen Reef
+
+226 R Golos, Tireless Pilgrim
+
+236 U Bacchetta Punitiva
 
 244 U Cryptic Caves
 
@@ -74,3 +126,5 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 ajanis_pridemate
 r_1_1_elemental
 w_1_1_soldier
+w_1_1_spirit_flying
+b_2_2_zombie
