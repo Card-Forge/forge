@@ -1,0 +1,4 @@
+Name:Captivating Gyre
+ManaCost:4 U U
+Types:Sorcery
+Oracle:Return up to three target creatures to their owners' hands.

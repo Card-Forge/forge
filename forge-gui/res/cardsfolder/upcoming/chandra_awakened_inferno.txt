@@ -1,0 +1,5 @@
+Name:Chandra, Awakened Inferno
+ManaCost:4 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:6
+Oracle:This spell can't be countered.\n[+2]: Each opponent gets an emblem with "At the beginning of your upkeep, this emblem deals 1 damage to you."\n[-3]: Chandra, Awakened Inferno deals 3 damage to each non-Elemental creature.\n[-X]: Chandra, Awakened Inferno deals X damage to target creature or planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.

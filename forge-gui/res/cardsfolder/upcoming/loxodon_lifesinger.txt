@@ -1,0 +1,5 @@
+Name:Loxodon Lifesinger
+ManaCost:5 W
+Types:Creature Elephant Cleric
+PT:4/6
+Oracle:When Loxodon Lifesinger enters the battlefield, you may have your life total become the total toughness of creatures you control.\n{5}{W}: Loxodon Lifesinger gets +X/+X until end of turn, where X is your life total.
