@@ -1,4 +1,4 @@
-Name:Angelic Cleric
+Name:Bishop of Wings
 ManaCost:W W
 Types:Human Cleric
 PT:1/4

@@ -1,0 +1,4 @@
+Name:Retributive Wand
+ManaCost:3
+Types:Artifact
+Oracle:{3}, {T}: Retributive Wand deals 1 damage to any target.\nWhen Retributive Wand is put into a graveyard from the battlefield, it deals 5 damage to any target.

@@ -1,0 +1,5 @@
+Name:Goblin Bird-Grabber
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/1
+Oracle:{R}: Goblin Bird-Grabber gains flying until end of turn. Activate this ability only if you control a creature with flying.

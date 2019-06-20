@@ -1,4 +1,0 @@
-Name:Punitive Wand
-ManaCost:3
-Types:Artifact
-Oracle:{3}, {T}: Punitive Wand deals 1 damage to any target.\nWhen Punitive Wand is put into a graveyard from the battlefield, it deals 5 damage to any target.
