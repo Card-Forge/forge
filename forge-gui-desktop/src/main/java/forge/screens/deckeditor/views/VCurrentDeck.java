@@ -79,7 +79,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .tooltip(localizer.getMessage("ttImportDeck"))
             .opaque(true).hoverable(true).build();
 
-    private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").build();
+    private final FTextField txfTitle = new FTextField.Builder().ghostText("[" + localizer.getMessage("lblNewDeck") +"]").build();
 
     private final JPanel pnlHeader = new JPanel();
 
