@@ -1,0 +1,8 @@
+Name:Yarok, the Desecrated
+ManaCost:2 B G U
+Types:Legendary Creature Elemental Horror
+PT:3/5
+K:Deathtouch
+K:Lifelink
+K:Panharmonicon:Permanent:If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Deathtouch, lifelink\nIf a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

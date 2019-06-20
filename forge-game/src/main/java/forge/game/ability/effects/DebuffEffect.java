@@ -140,17 +140,28 @@ public class DebuffEffect extends SpellAbilityEffect {
                 tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp);
             }
             if (!sa.hasParam("Permanent")) {
-                game.getEndOfTurn().addUntil(new GameCommand() {
+                final GameCommand until = new GameCommand() {
                     private static final long serialVersionUID = 5387486776282932314L;
 
                     @Override
                     public void run() {
                         tgtC.removeChangedCardKeywords(timestamp);
                     }
-                });
+                };
+                addUntilCommand(sa, until);
             }
         }
 
     } // debuffResolve
+
+    private static void addUntilCommand(final SpellAbility sa, GameCommand until) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        if (sa.hasParam("UntilYourNextTurn")) {
+            game.getCleanup().addUntil(sa.getActivatingPlayer(), until);
+        } else {
+            game.getEndOfTurn().addUntil(until);
+        }
+    }
 
 }
