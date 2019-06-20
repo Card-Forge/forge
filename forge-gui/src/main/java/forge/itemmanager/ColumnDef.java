@@ -30,172 +30,14 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
+import forge.util.Localizer;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
 
 public enum ColumnDef {
-   /**The column containing the inventory item name.*/
-    STRING("", "", 0, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getKey() instanceof Comparable<?> ? (Comparable<?>)from.getKey() : from.getKey().getName();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getKey().toString();
-                }
-            }),
-    /**The name column.*/
-    NAME("Name", "Name", 180, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toSortableName(from.getKey().getName());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getKey().getName();
-                }
-            }),
-            
-    /**The column for sorting cards in collector order.*/
-    COLLECTOR_ORDER("CN", "Collector Number Order", 20, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toCollectorPrefix(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return "";
-                }
-            }),
-    /**The type column.*/
-    TYPE("Type", "Type", 100, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toType(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toType(from.getKey());
-                }
-            }),
-    /**The mana cost column.*/
-    COST("Cost", "Cost", 70, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toManaCost(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCardRules(from.getKey());
-                }
-            }),
-    /**The color column.*/
-    COLOR("Color", "Color", 46, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toColor(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toColor(from.getKey());
-                }
-            }),
-    /**The power column.*/
-    POWER("Power", "Power", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toPower(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toPower(from.getKey());
-                }
-            }),
-    /**The toughness column.*/
-    TOUGHNESS("Toughness", "Toughness", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toToughness(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toToughness(from.getKey());
-                }
-            }),
-    /**The converted mana cost column.*/
-    CMC("CMC", "CMC", 20, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toCMC(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCMC(from.getKey());
-                }
-            }),
-    /**The rarity column.*/
-    RARITY("Rarity", "Rarity", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toRarity(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toRarity(from.getKey());
-                }
-            }),
-    /**The set code column.*/
-    SET("Set", "Set", 38, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    return i instanceof InventoryItemFromSet ? FModel.getMagicDb().getEditions()
-                            .get(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
-                }
-            }),
-    /**The AI compatibility flag column*/
-    AI("AI", "AI Status", 30, true, SortState.ASC,
+    AI("lblAI", "lblAIStatus", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -216,81 +58,111 @@ public enum ColumnDef {
                     return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "AI ?" : "AI")
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
-            }),
-    /**The Draft ranking column.*/
-    RANKING("Ranking", "Draft Ranking", 50, true, SortState.ASC,
+            })/**The AI compatibility flag column*/
+    ,
+    CMC("lblCMC", "ttCMC", 20, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toRanking(from.getKey(), false);
+                    return toCMC(from.getKey());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toRanking(from.getKey(), true);
+                    return toCMC(from.getKey());
                 }
-            }),
-    /**The quantity column.*/
-    QUANTITY("Qty", "Quantity", 25, true, SortState.ASC,
+            })/**The converted mana cost column.*/
+    ,
+
+    COLLECTOR_ORDER("lblCN", "ttCN", 20, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
+                    return toCollectorPrefix(from.getKey());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
+                    return "";
                 }
-            }),
-    /**The quantity in deck column.*/
-    DECK_QUANTITY("Quantity", "Quantity", 50, true, SortState.ASC,
+            })/**The column for sorting cards in collector order.*/
+    ,
+    COLOR("lblColor", "ttColor", 46, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
+                    return toColor(from.getKey());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
+                    return toColor(from.getKey());
                 }
-            }),
-    /**The new inventory flag column.*/
-    NEW("New", "New", 30, true, SortState.DESC,
-            null, null), //functions will be set later
-    /**The price column.*/
-    PRICE("Price", "Price", 35, true, SortState.DESC,
-            null, null),
-    /**The quantity owned column.*/
-    OWNED("Owned", "Owned", 20, true, SortState.ASC,
-            null, null),
-    /**The deck name column.*/
-    DECKS("Decks", "Decks", 20, true, SortState.ASC,
-            null, null),
-    /**The favorite flag column.*/
-    FAVORITE("", "Favorite", 18, true, SortState.DESC,
+            })/**The color column.*/
+    ,
+    COST("lblCost", "ttCost", 70, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    IPaperCard card = toCard(from.getKey());
-                    if (card == null) {
-                        return -1;
-                    }
-                    return CardPreferences.getPrefs(card).getStarCount();
+                    return toManaCost(from.getKey());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCard(from.getKey());
+                    return toCardRules(from.getKey());
                 }
-            }),
-    /**The favorite deck flag column.*/
-    DECK_FAVORITE("", "Favorite", 18, true, SortState.DESC,
+            })/**The mana cost column.*/
+    ,
+    DECKS("lblDecks", "lblDecks", 20, true, SortState.ASC,
+            null, null)/**The deck name column.*/
+    ,
+    DECK_ACTIONS("", "lblDeleteEdit", 40, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return 0;
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toDeck(from.getKey());
+                }
+            })/**The edit/delete deck column.*/
+    ,
+    DECK_COLOR("lblColor", "lblColor", 70, true, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toDeckColor(from.getKey());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toDeckColor(from.getKey());
+                }
+            })/**The deck color column.*/
+    ,
+    DECK_EDITION("lblSet", "lblSetEdition", 38, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toDeck(from.getKey()).getEdition();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toDeck(from.getKey()).getEdition().getCode();
+                }
+            })/**The deck edition column, a mystery to us all.*/
+    ,
+    DECK_FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -306,23 +178,9 @@ public enum ColumnDef {
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toDeck(from.getKey());
                 }
-            }),
-    /**The edit/delete deck column.*/
-    DECK_ACTIONS("", "Delete/Edit", 40, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return 0;
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey());
-                }
-            }),
-    /**The deck folder column.*/
-    DECK_FOLDER("Folder", "Folder", 80, false, SortState.ASC,
+            })/**The favorite deck flag column.*/
+    ,
+    DECK_FOLDER("lblFolder", "lblFolder", 80, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -334,23 +192,9 @@ public enum ColumnDef {
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toDeckFolder(from.getKey());
                 }
-            }),
-    /**The deck color column.*/
-    DECK_COLOR("Color", "Color", 70, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeckColor(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeckColor(from.getKey());
-                }
-            }),
-    /**The deck format column.*/
-    DECK_FORMAT("Format", "Formats deck is legal in", 60, false, SortState.DESC,
+            })/**The deck folder column.*/
+    ,
+    DECK_FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -360,9 +204,9 @@ public enum ColumnDef {
                     }
                     Iterable<GameFormat> all = deck.getExhaustiveFormats();
                     int acc = 0;
-                    for(GameFormat gf : all) {
+                    for (GameFormat gf : all) {
                         int ix = gf.getIndex();
-                        if( ix < 30 && ix > 0)
+                        if (ix < 30 && ix > 0)
                             acc |= 0x40000000 >> (ix - 1);
                     }
                     return acc;
@@ -377,23 +221,9 @@ public enum ColumnDef {
                     }
                     return deck.getFormatsString();
                 }
-            }),
-    /**The deck edition column, a mystery to us all.*/
-    DECK_EDITION("Set", "Mystery column. We don't know what it does or if that's what it should do.", 38, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getEdition();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getEdition().getCode();
-                }
-            }),
-    /**The main library size column.*/
-    DECK_MAIN("Main", "Main Deck", 30, true, SortState.ASC,
+            })/**The deck format column.*/
+    ,
+    DECK_MAIN("lblMain", "ttMain", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -405,9 +235,23 @@ public enum ColumnDef {
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toDeck(from.getKey()).getMainSize();
                 }
-            }),
-    /**The sideboard size column.*/
-    DECK_SIDE("Side", "Sideboard", 30, true, SortState.ASC,
+            })/**The main library size column.*/
+    ,
+    DECK_QUANTITY("lblQty", "lblQuantity", 50, true, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return from.getValue();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return from.getValue();
+                }
+            })/**The quantity in deck column.*/
+    ,
+    DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -419,13 +263,174 @@ public enum ColumnDef {
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toDeck(from.getKey()).getSideSize();
                 }
-            });
+            })/**The sideboard size column.*/
+    ,
+    FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    IPaperCard card = toCard(from.getKey());
+                    if (card == null) {
+                        return -1;
+                    }
+                    return CardPreferences.getPrefs(card).getStarCount();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toCard(from.getKey());
+                }
+            })/**The favorite flag column.*/
+    ,
+    NAME("lblName", "lblName", 180, false, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toSortableName(from.getKey().getName());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return from.getKey().getName();
+                }
+            })/**The name column.*/
+    ,
+    NEW("lblNew", "lblNew", 30, true, SortState.DESC,
+            null, null)/**The new inventory flag column.*/
+    , //functions will be set later
+    OWNED("lblOwned", "lblOwned", 20, true, SortState.ASC,
+            null, null)/**The quantity owned column.*/
+    ,
+    POWER("lblPower", "ttPower", 20, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toPower(from.getKey());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toPower(from.getKey());
+                }
+            })/**The power column.*/
+    ,
+    PRICE("lblPrice", "ttPrice", 35, true, SortState.DESC,
+            null, null)/**The price column.*/
+    ,
+    QUANTITY("lblQty", "lblQuantity", 25, true, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return from.getValue();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return from.getValue();
+                }
+            })/**The quantity column.*/
+    ,
+    RANKING("lblRanking", "lblDraftRanking", 50, true, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toRanking(from.getKey(), false);
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toRanking(from.getKey(), true);
+                }
+            })/**The Draft ranking column.*/
+    ,
+    RARITY("lblRarity", "lblRarity", 20, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toRarity(from.getKey());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toRarity(from.getKey());
+                }
+            })/**The rarity column.*/
+    ,
+    SET("lblSet", "lblSet", 38, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    InventoryItem i = from.getKey();
+                    return i instanceof InventoryItemFromSet ? FModel.getMagicDb().getEditions()
+                            .get(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    InventoryItem i = from.getKey();
+                    return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
+                }
+            })/**The set code column.*/
+    ,
+    STRING("", "", 0, false, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return from.getKey() instanceof Comparable<?> ? (Comparable<?>) from.getKey() : from.getKey().getName();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return from.getKey().toString();
+                }
+            })/**The column containing the inventory item name.*/
+    ,
+    TOUGHNESS("lblToughness", "ttToughness", 20, true, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toToughness(from.getKey());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toToughness(from.getKey());
+                }
+            })/**The toughness column.*/
+    ,
+    TYPE("lblType", "ttType", 100, false, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toType(from.getKey());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toType(from.getKey());
+                }
+            })/**The type column.*/
+    ;
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
-            Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
-            Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
-        this.shortName = shortName0;
-        this.longName = longName0;
+              Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
+              Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
+
+        final Localizer localizer = Localizer.getInstance();
+
+        if (shortName0 != null && !shortName0.isEmpty()) { this.shortName = localizer.getMessage(shortName0);} else {this.shortName = shortName0;}
+        if (longName0 != null && !longName0.isEmpty()) { this.longName = localizer.getMessage(longName0);} else {this.longName = longName0;}
+
         this.preferredWidth = preferredWidth0;
         this.isWidthFixed = isWidthFixed0;
         this.sortState = sortState0;
@@ -444,57 +449,60 @@ public enum ColumnDef {
     public String toString() {
         return this.longName;
     }
-/**
-   *Converts a card name to a sortable name.
-    * Trim leading quotes, then move article last, then replace characters.
-    * Because An-Havva Constable.
-    * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
-    * Apostrophes matter, though: "D'Avenant" before "Danitha"
-    * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
-    * @param printedName The name of the card.
-    * @return A sortable name.
-   */
+
+    /**
+     *Converts a card name to a sortable name.
+     * Trim leading quotes, then move article last, then replace characters.
+     * Because An-Havva Constable.
+     * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
+     * Apostrophes matter, though: "D'Avenant" before "Danitha"
+     * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
+     * @param printedName The name of the card.
+     * @return A sortable name.
+     */
     private static String toSortableName(String printedName) {
-      if (printedName.startsWith("\"")) printedName = printedName.substring(1);
-      return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]","");
+        if (printedName.startsWith("\"")) printedName = printedName.substring(1);
+        return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]", "");
     }
 
-    
+
     /**Article words. These words get kicked to the end of a sortable name.
-    For localization, simply overwrite this array with appropriate words.
-      Words in this list are used by the method String moveArticleToEnd(String), useful
-      for alphabetizing phrases, in particular card or other inventory object names.*/
+     For localization, simply overwrite this array with appropriate words.
+     Words in this list are used by the method String moveArticleToEnd(String), useful
+     for alphabetizing phrases, in particular card or other inventory object names.*/
     private static final String[] ARTICLE_WORDS = {
-         "A",
-         "An",
-         "The"
+            "A",
+            "An",
+            "The"
     };
-    
+
     /**Detects whether a string begins with an article word
-    @param str The name of the card.
-    @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".*/
-    private static String moveArticleToEnd(String str){
-      String articleWord;
-      for (int i = 0; i < ARTICLE_WORDS.length; i++){
-         articleWord = ARTICLE_WORDS[i];
-         if (str.startsWith(articleWord + " ")){
-            str = str.substring(articleWord.length()+1) + " " + articleWord;
-            return str;
-         }
-      }
-      return str;
+     @param str The name of the card.
+     @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".*/
+    private static String moveArticleToEnd(String str) {
+        String articleWord;
+        for (int i = 0; i < ARTICLE_WORDS.length; i++) {
+            articleWord = ARTICLE_WORDS[i];
+            if (str.startsWith(articleWord + " ")) {
+                str = str.substring(articleWord.length() + 1) + " " + articleWord;
+                return str;
+            }
+        }
+        return str;
     }
-    
+
     private static String toType(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getType().toString() : i.getItemType();
     }
 
     private static IPaperCard toCard(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i) : null;
     }
+
     private static ManaCost toManaCost(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getManaCost() : ManaCost.NO_COST;
     }
+
     private static CardRules toCardRules(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules() : null;
     }
@@ -508,7 +516,7 @@ public enum ColumnDef {
         if (i instanceof PaperCard) {
             result = ((IPaperCard) i).getRules().getIntPower();
             if (result == Integer.MAX_VALUE) {
-                if (((IPaperCard)i).getRules().getType().isPlaneswalker()) {
+                if (((IPaperCard) i).getRules().getType().isPlaneswalker()) {
                     result = ((IPaperCard) i).getRules().getInitialLoyalty();
                 }
             }
@@ -523,13 +531,13 @@ public enum ColumnDef {
     private static Integer toCMC(final InventoryItem i) {
         return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : -1;
     }
-    
-   private static CardRarity toRarity(final InventoryItem i) {
+
+    private static CardRarity toRarity(final InventoryItem i) {
         return i instanceof PaperCard ? ((IPaperCard) i).getRarity() : CardRarity.Unknown;
     }
 
     private static Double toRanking(final InventoryItem i, boolean truncate) {
-        if (i instanceof IPaperCard){
+        if (i instanceof IPaperCard) {
             IPaperCard cp = (IPaperCard) i;
             Double ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
             if (ranking != null) {
@@ -545,222 +553,224 @@ public enum ColumnDef {
     private static DeckProxy toDeck(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i) : null;
     }
+
     private static ColorSet toDeckColor(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i).getColor() : null;
     }
+
     private static String toDeckFolder(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i).getPath() + "/" : null;
     }
-    
+
     /**Generates a sortable numeric string based on a card's attributes.
-        This is a multi-layer sort. It is coded in layers to make it easier to manipulate.
-        This method can be fed any inventory item, but is only useful for paper cards.
-        @param i An inventory item.
-        @return A sortable numeric string based on the item's attributes.*/
+     This is a multi-layer sort. It is coded in layers to make it easier to manipulate.
+     This method can be fed any inventory item, but is only useful for paper cards.
+     @param i An inventory item.
+     @return A sortable numeric string based on the item's attributes.*/
     private static String toCollectorPrefix(final InventoryItem i) {
-      //make sure it's a card. if not, pointless to proceed.
-      return (i instanceof PaperCard ? toBasicLandsLast(i) + " " : "") + toSortableName(i.getName());
+        //make sure it's a card. if not, pointless to proceed.
+        return (i instanceof PaperCard ? toBasicLandsLast(i) + " " : "") + toSortableName(i.getName());
     }
-    
+
     /**Returns 1 for land, otherwise 0 and continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toLandsLast(final InventoryItem i) {
-         //nonland?
-         return !(((IPaperCard) i).getRules().getType().isLand()) ?
-            "0" + toArtifactsWithColorlessCostsLast(i)
-         //land
-         : "1";
+        //nonland?
+        return !(((IPaperCard) i).getRules().getType().isLand()) ?
+                "0" + toArtifactsWithColorlessCostsLast(i)
+                //land
+                : "1";
     }
-    
+
     /**Returns 1 for artifacts without color shards in their mana cost, otherwise 0 and continues sorting.
-    As of 2019, colored artifacts appear here if there are no colored shards in their casting cost.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     As of 2019, colored artifacts appear here if there are no colored shards in their casting cost.
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toArtifactsWithColorlessCostsLast(final InventoryItem i) {
-      forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
-      
-      return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
-            //If it isn't colorless, see if it can be paid with only white, only blue, only black.
-            //No need to check others since three-color hybrid shards don't exist.
-               manaCost.canBePaidWithAvaliable(MagicColor.WHITE) &&
-               manaCost.canBePaidWithAvaliable(MagicColor.BLUE) &&
-               manaCost.canBePaidWithAvaliable(MagicColor.BLACK)))
-            ? "0" + toSplitLast(i): "1";
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+
+        return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
+                //If it isn't colorless, see if it can be paid with only white, only blue, only black.
+                //No need to check others since three-color hybrid shards don't exist.
+                manaCost.canBePaidWithAvaliable(MagicColor.WHITE) &&
+                        manaCost.canBePaidWithAvaliable(MagicColor.BLUE) &&
+                        manaCost.canBePaidWithAvaliable(MagicColor.BLACK)))
+                ? "0" + toSplitLast(i) : "1";
     }
-    
+
     /**Returns 1 for split cards or 0 for other cards; continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toSplitLast(final InventoryItem i) {
-      return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
-            "0" + toConspiracyFirst(i) : "1" + toSplitCardSort(i);
+        return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
+                "0" + toConspiracyFirst(i) : "1" + toSplitCardSort(i);
     }
-    
+
     /**Returns 0 for Conspiracy cards, otherwise 1 and continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toConspiracyFirst(final InventoryItem i) {
         return ((IPaperCard) i).getRules().getType().isConspiracy()
                 ? "0" //is a Conspiracy
                 : "1" + toColorlessFirst(i); //isn't a Conspiracy
     }
-    
+
     /**Returns 0 for colorless cards, otherwise 1 and continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toColorlessFirst(final InventoryItem i) {
-      return toColor(i).isColorless() ?
-            "0" : "1" + toMonocolorFirst(i);
+        return toColor(i).isColorless() ?
+                "0" : "1" + toMonocolorFirst(i);
     }
-    
+
     /**Returns 0 for monocolor cards, 1 for multicolor cards; continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toMonocolorFirst(final InventoryItem i) {
-      return toColor(i).isMonoColor() ?
-            "0" + toWubrgOrder(i): "1" + toGoldFirst(i);
+        return toColor(i).isMonoColor() ?
+                "0" + toWubrgOrder(i) : "1" + toGoldFirst(i);
     }
-    
+
     /**Returns 0 for gold cards and continues sorting, 1 otherwise.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toGoldFirst(final InventoryItem i) {
-      forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
-      
-      return !(manaCost.canBePaidWithAvaliable(MagicColor.WHITE) | manaCost.canBePaidWithAvaliable(MagicColor.BLUE) |
-            manaCost.canBePaidWithAvaliable(MagicColor.BLACK) | manaCost.canBePaidWithAvaliable(MagicColor.RED) |
-            manaCost.canBePaidWithAvaliable(MagicColor.GREEN)) ? "0" : "1";
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+
+        return !(manaCost.canBePaidWithAvaliable(MagicColor.WHITE) | manaCost.canBePaidWithAvaliable(MagicColor.BLUE) |
+                manaCost.canBePaidWithAvaliable(MagicColor.BLACK) | manaCost.canBePaidWithAvaliable(MagicColor.RED) |
+                manaCost.canBePaidWithAvaliable(MagicColor.GREEN)) ? "0" : "1";
     }
-    
+
     /**Entry point for generating split card sortable strings.
-    Splits the card into two card faces, then sends it to the next
-    sorting method.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     Splits the card into two card faces, then sends it to the next
+     sorting method.
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     //Split card sorting is probably as complex as sorting gets.
     //This method serves as an entry point only, separating the two card parts for convenience.
     private static String toSplitCardSort(final InventoryItem i) {
-      CardRules rules = ((IPaperCard) i).getRules();
-      forge.card.ICardFace mainPart = rules.getMainPart();
-      forge.card.ICardFace otherPart = rules.getOtherPart();
-      return toSplitSort(mainPart, otherPart);
+        CardRules rules = ((IPaperCard) i).getRules();
+        ICardFace mainPart = rules.getMainPart();
+        ICardFace otherPart = rules.getOtherPart();
+        return toSplitSort(mainPart, otherPart);
     }
-    
+
     /**Generates a sortable numeric string for split cards.
-    Split cards are sorted by color on both halves.
-    Sort order is C//C, W//W, U//U, B//B, R//R, G//G,
-    Gold/Gold,
-    W//U, U//B, B//R, R//G, G//W,
-    W//B, U//R, B//G, R//W, G//U,
-    W//R, U//G, B//W, R//U, G//B,
-    W//G, U//W, B//U, R//B, G//R.
-    Any that do not conform will sort at the end.
-    @param mainPart The first half of the card.
-    @param otherPart The other half of the card.
-    @return Part of a sortable numeric string.*/
-      private static String toSplitSort(final ICardFace mainPart, final ICardFace otherPart) {
-      ColorSet mainPartColor = mainPart.getColor();
-      ColorSet otherPartColor = otherPart.getColor();
-      
-      return mainPartColor.isEqual(otherPartColor.getColor())
-      
-            ? //both halves match
-            
-            (mainPartColor.isEqual(MagicColor.WHITE) ? "01" :
-            mainPartColor.isEqual(MagicColor.BLUE) ? "02" :
-            mainPartColor.isEqual(MagicColor.BLACK) ? "03" :
-            mainPartColor.isEqual(MagicColor.RED) ? "04" :
-            mainPartColor.isEqual(MagicColor.GREEN) ? "05" : "00")
-            
-            : //halves don't match
-            
-            //both halves gold
-            mainPartColor.isMulticolor() && otherPartColor.isMulticolor() ? "06" :
-            
-            //second color is << 1
-            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLUE) ? "11" : 
-            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.BLACK) ? "12" :
-            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.RED) ? "13" :
-            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.GREEN) ? "14" :
-            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.WHITE) ? "15" :
-            
-            //second color is << 2
-            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLACK) ? "21" : 
-            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.RED) ? "22" :
-            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.GREEN) ? "23" :
-            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.WHITE) ? "24" :
-            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLUE) ? "25" :
-            
-            //second color is << 3            
-            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.RED) ? "31" :
-            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.GREEN) ? "32" :
-            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.WHITE) ? "33" :
-            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLUE) ? "34" :
-            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLACK) ? "35" :
-                        
-            //second color is << 4
-            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.GREEN) ? "41" :
-            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.WHITE) ? "42" :
-            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.BLUE) ? "43" :
-            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLACK) ? "44" :
-            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.RED) ? "45"
-            
-            ://No split cards have been printed that don't fall into one of these groups.
-            
-            "99";
+     Split cards are sorted by color on both halves.
+     Sort order is C//C, W//W, U//U, B//B, R//R, G//G,
+     Gold/Gold,
+     W//U, U//B, B//R, R//G, G//W,
+     W//B, U//R, B//G, R//W, G//U,
+     W//R, U//G, B//W, R//U, G//B,
+     W//G, U//W, B//U, R//B, G//R.
+     Any that do not conform will sort at the end.
+     @param mainPart The first half of the card.
+     @param otherPart The other half of the card.
+     @return Part of a sortable numeric string.*/
+    private static String toSplitSort(final ICardFace mainPart, final ICardFace otherPart) {
+        ColorSet mainPartColor = mainPart.getColor();
+        ColorSet otherPartColor = otherPart.getColor();
+
+        return mainPartColor.isEqual(otherPartColor.getColor())
+
+                ? //both halves match
+
+                (mainPartColor.isEqual(MagicColor.WHITE) ? "01" :
+                        mainPartColor.isEqual(MagicColor.BLUE) ? "02" :
+                                mainPartColor.isEqual(MagicColor.BLACK) ? "03" :
+                                        mainPartColor.isEqual(MagicColor.RED) ? "04" :
+                                                mainPartColor.isEqual(MagicColor.GREEN) ? "05" : "00")
+
+                : //halves don't match
+
+                //both halves gold
+                mainPartColor.isMulticolor() && otherPartColor.isMulticolor() ? "06" :
+
+                        //second color is << 1
+                        mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLUE) ? "11" :
+                                mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.BLACK) ? "12" :
+                                        mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.RED) ? "13" :
+                                                mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.GREEN) ? "14" :
+                                                        mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.WHITE) ? "15" :
+
+                                                                //second color is << 2
+                                                                mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLACK) ? "21" :
+                                                                        mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.RED) ? "22" :
+                                                                                mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.GREEN) ? "23" :
+                                                                                        mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.WHITE) ? "24" :
+                                                                                                mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLUE) ? "25" :
+
+                                                                                                        //second color is << 3
+                                                                                                        mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.RED) ? "31" :
+                                                                                                                mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.GREEN) ? "32" :
+                                                                                                                        mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.WHITE) ? "33" :
+                                                                                                                                mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLUE) ? "34" :
+                                                                                                                                        mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLACK) ? "35" :
+
+                                                                                                                                                //second color is << 4
+                                                                                                                                                mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.GREEN) ? "41" :
+                                                                                                                                                        mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.WHITE) ? "42" :
+                                                                                                                                                                mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.BLUE) ? "43" :
+                                                                                                                                                                        mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLACK) ? "44" :
+                                                                                                                                                                                mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.RED) ? "45"
+
+                                                                                                                                                                                        ://No split cards have been printed that don't fall into one of these groups.
+
+                                                                                                                                                                                        "99";
     }
-    
+
     /**Returns 0 for white, 1 for blue, 2 for black, 3 for red, or 4 for green.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toWubrgOrder(final InventoryItem i) {
-      ColorSet color = toColor(i);
-      return color.hasWhite() ? "0" : color.hasBlue() ? "1" : color.hasBlack() ? "2" :
-            color.hasRed() ? "3" : "4";
+        ColorSet color = toColor(i);
+        return color.hasWhite() ? "0" : color.hasBlue() ? "1" : color.hasBlack() ? "2" :
+                color.hasRed() ? "3" : "4";
     }
-    
+
     /**Returns 1 for Contraptions, otherwise 0 and continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toContraptionsLast(final InventoryItem i) {
-      return !(((IPaperCard) i).getRules().getType().hasSubtype("Contraption")) ?
-            "0" + toLandsLast(i) : "1";
+        return !(((IPaperCard) i).getRules().getType().hasSubtype("Contraption")) ?
+                "0" + toLandsLast(i) : "1";
     }
-    
+
     /**Returns 1 for basic lands, 0 otherwise, and continues sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toBasicLandsLast(final InventoryItem i) {
-      return !(((IPaperCard) i).getRules().getType().isBasicLand())
-            ? "0" + toContraptionsLast(i)
-            : "1" + toFullArtFirst(i);
+        return !(((IPaperCard) i).getRules().getType().isBasicLand())
+                ? "0" + toContraptionsLast(i)
+                : "1" + toFullArtFirst(i);
     }
-    
+
     /**Currently only continues sorting. If Forge is updated to
-    use a flag for full-art lands, this method should be updated
-    to assign those 0 and regular lands 1, then continue sorting.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     use a flag for full-art lands, this method should be updated
+     to assign those 0 and regular lands 1, then continue sorting.
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toFullArtFirst(final InventoryItem i) {
-      return toBasicLandSort(i);
+        return toBasicLandSort(i);
     }
-    
+
     /**Returns 0 for wastes, 1 for plains, 2 for island,
-    3 for swamp, 4 for mountain, 5 for forest. Snow
-    lands are treated like nonsnow.
-    @param i A paper card.
-    @return Part of a sortable numeric string.*/
+     3 for swamp, 4 for mountain, 5 for forest. Snow
+     lands are treated like nonsnow.
+     @param i A paper card.
+     @return Part of a sortable numeric string.*/
     private static String toBasicLandSort(final InventoryItem i) {
-      CardType basicLandType = ((IPaperCard) i).getRules().getType();
-      return basicLandType.hasStringType("Plains") ? "1" : (
-         basicLandType.hasStringType("Island") ? "2" : (
-            basicLandType.hasStringType("Swamp") ? "3" : (
-               basicLandType.hasStringType("Mountain") ? "4" : (
-                  basicLandType.hasStringType("Forest") ? "5" : "0"
-               )
-            )
-         )
-      );
+        CardType basicLandType = ((IPaperCard) i).getRules().getType();
+        return basicLandType.hasStringType("Plains") ? "1" : (
+                basicLandType.hasStringType("Island") ? "2" : (
+                        basicLandType.hasStringType("Swamp") ? "3" : (
+                                basicLandType.hasStringType("Mountain") ? "4" : (
+                                        basicLandType.hasStringType("Forest") ? "5" : "0"
+                                )
+                        )
+                )
+        );
     }
 }

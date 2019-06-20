@@ -268,22 +268,22 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveAlternateItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
             break;
         case Sideboard:
-            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to sideboard");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
             break;
         case Commander:
-            cmb.addMoveItems("Set", "as commander");
+            cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblascommander"));
             break;
         case Avatar:
-            cmb.addMoveItems("Set", "as avatar");
+            cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblasavatar"));
             break;
         case Schemes:
-            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to scheme deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoschemedeck"));
             break;
         case Planes:
-            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to planar deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoplanardeck"));
             break;
         case Conspiracy:
-            cmb.addMoveItems(localizer.getMessage("lblAdd"), "to conspiracy deck");
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoconspiracydeck"));
             break;
         }
     }
@@ -293,7 +293,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         switch (sectionMode) {
         case Main:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
-            cmb.addMoveAlternateItems("Move", "to sideboard");
+            cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltosideboard"));
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));

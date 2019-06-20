@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import forge.deck.Deck;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.home.quest.DialogChooseFormats;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -200,6 +201,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     @Override
+
     protected void buildAddFilterMenu(final JMenu menu) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
@@ -210,7 +212,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 merge(hierarchy, buildHierarchy(path));
             }
         }
-        final JMenu folder = GuiUtils.createMenu("Folder");
+
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu folder = GuiUtils.createMenu(localizer.getMessage("lblFolder"));
         if (hierarchy.size() > 0) {
             buildNestedMenu(hierarchy, folder, null);
         }
@@ -219,7 +223,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         }
         menu.add(folder);
 
-        final JMenu fmt = GuiUtils.createMenu("Format");
+        final JMenu fmt = GuiUtils.createMenu(localizer.getMessage("lblFormat"));
+
         for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
@@ -231,7 +236,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         menu.add(fmt);
 
 
-        GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, new Runnable() {
             @Override public void run() {
                 final DeckFormatFilter existingFilter = getFilter(DeckFormatFilter.class);
                 if (existingFilter != null) {
@@ -253,7 +258,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
 
 
-        GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, new Runnable() {
             @Override public void run() {
                 final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
                 if (existingFilter != null) {
@@ -272,7 +277,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
         });
 
-        final JMenu world = GuiUtils.createMenu("Quest world");
+        final JMenu world = GuiUtils.createMenu(localizer.getMessage("lblQuestWorld"));
         for (final QuestWorld w : FModel.getWorlds()) {
             GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                 @Override public void run() {
@@ -284,7 +289,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "Colors", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, new Runnable() {
             @Override
             public void run() {
                 addFilter(new DeckColorFilter(DeckManager.this));
@@ -293,7 +298,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, "Advanced...", null, new Runnable() {
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced") + "...", null, new Runnable() {
             @Override
             @SuppressWarnings("unchecked")
             public void run() {
