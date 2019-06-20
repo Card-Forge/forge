@@ -131,16 +131,15 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                 ss = s.split("\\|");
                 
                 int lc = 0;
-                while ((cardCounts.get(ss[0]) >= g.maxCnt) || (lc > 999)) {
+                while ((cardCounts.get(ss[0]) >= g.maxCnt)) {
                     // looping
                     // forever
                     s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));
                     ss = s.split("\\|");
-                    lc++;
-                }
-                if (lc > 999) {
-                    throw new RuntimeException("ThemeDeckGenerator : getThemeDeck -- looped too much -- filename is "
-                            + tFileName);
+                    if (lc > 999) {
+                        throw new RuntimeException("ThemeDeckGenerator : getThemeDeck -- looped too much -- filename is "
+                                + tFileName);
+                    }
                 }
 
                 final int n = cardCounts.get(ss[0]);
