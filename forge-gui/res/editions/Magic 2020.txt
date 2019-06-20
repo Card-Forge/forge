@@ -122,6 +122,8 @@ C Pacifism
 
 169 R Elvish Reclaimer
 
+171 C Ferocious Pup
+
 175 C Growth Cycle
 
 179 R Leyline of Abundance
@@ -154,10 +156,12 @@ C Pacifism
 
 214 U Moldervine Reclamation
 215 U Ogre Siegebreaker
-
+216 M Omnath, Locus of the Roil
 217 U Risen Reef
 
 220 M Yarok, the Desecrated
+
+224 U Cavalier of Diamond
 
 226 R Golos, Tireless Pilgrim
 
