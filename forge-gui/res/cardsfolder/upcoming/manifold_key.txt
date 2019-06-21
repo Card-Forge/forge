@@ -1,0 +1,7 @@
+Name:Manifold Key
+ManaCost:1
+Types:Artifact
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Artifact.Other | TgtPrompt$ Select another target artifact. | SpellDescription$ Untap another target artifact.
+AI:RemoveDeck:All
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn. | TgtPrompt$ Select target creature.
+Oracle:{1}, {T}: Untap another target artifact.\n{3}, {T}: Target creature can't be blocked this turn.
