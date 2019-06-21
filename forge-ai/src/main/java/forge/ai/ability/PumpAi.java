@@ -113,7 +113,8 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
         }
-        if (game.getStack().isEmpty() && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if (game.getStack().isEmpty() && (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
+                || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa) && !main1Preferred) {
