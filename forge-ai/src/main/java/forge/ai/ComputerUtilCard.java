@@ -1457,6 +1457,10 @@ public class ComputerUtilCard {
                     }
                     if (totalPowerUnblocked >= opp.getLife()) {
                         return true;
+                    } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost()) {
+                            return true; // always activate abilities which cost no mana and which can increase unblocked damage
+                        }
                     }
                 }
                 float value = 1.0f * (pumpedDmg - dmg);
