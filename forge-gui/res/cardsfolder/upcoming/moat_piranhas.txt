@@ -1,0 +1,6 @@
+Name:Moat Piranhas
+ManaCost:1 U
+Types:Creature Fish
+PT:3/3
+K:Defender
+Oracle:Defender (This creature can't attack.)
