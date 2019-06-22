@@ -13,6 +13,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.screens.workshop.controllers.CWorkshopCatalog;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -27,10 +28,10 @@ import javax.swing.event.ListSelectionListener;
  */
 public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     SINGLETON_INSTANCE;
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Catalog");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblCardCatalog"));
     private final ItemManagerContainer cardManagerContainer = new ItemManagerContainer();
     private final CardManager cardManager;
     private final CDetailPicture cDetailPicture = new CDetailPicture();
@@ -38,7 +39,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     //========== Constructor
     VWorkshopCatalog() {
         this.cardManager = new CardManager(cDetailPicture, true, false);
-        this.cardManager.setCaption("Catalog");
+        this.cardManager.setCaption(localizer.getMessage("lblCatalog"));
         final Iterable<PaperCard> allCards = Iterables.concat(FModel.getMagicDb().getCommonCards(), FModel.getMagicDb().getVariantCards());
         this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);

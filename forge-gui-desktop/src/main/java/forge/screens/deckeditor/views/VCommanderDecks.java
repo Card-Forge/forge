@@ -10,6 +10,7 @@ import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CCommanderDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public enum VCommanderDecks implements IVDoc<CCommanderDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Commander");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblCommander"));
 
     private DeckManager lstDecks;
 
@@ -93,6 +95,6 @@ public enum VCommanderDecks implements IVDoc<CCommanderDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.Commander, cDetailPicture);
-        this.lstDecks.setCaption("Commander Decks");
+        this.lstDecks.setCaption(localizer.getMessage("lblCommanderDecks"));
     }
 }

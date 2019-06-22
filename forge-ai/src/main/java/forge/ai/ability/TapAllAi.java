@@ -24,8 +24,7 @@ import java.util.List;
 public class TapAllAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
-        // If tapping all creatures do it either during declare attackers of AIs
-        // turn
+        // If tapping all creatures do it either during declare attackers of AIs turn
         // or during upkeep/begin combat?
 
         final Card source = sa.getHostCard();
@@ -86,7 +85,7 @@ public class TapAllAi extends SpellAbilityAi {
             return false;
         }
         // in AI's turn, check if there are possible attackers, before tapping blockers
-        if (game.getPhaseHandler().isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (game.getPhaseHandler().isPlayerTurn(ai)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
             final boolean any = Iterables.any(validTappables, new Predicate<Card>() {
                 @Override

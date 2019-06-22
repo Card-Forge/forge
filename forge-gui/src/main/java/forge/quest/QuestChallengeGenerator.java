@@ -12,11 +12,24 @@ import java.util.*;
 
 public class QuestChallengeGenerator {
 
-    public static QuestEventChallengeList generateChallenges(){
+    private GameFormat formatMedium=FModel.getFormats().getModern();
+    private GameFormat formatHard=FModel.getFormats().get("Legacy");
+    private GameFormat formatExpert=FModel.getFormats().get("Vintage");
+    private GameFormat baseFormat;
+
+    QuestChallengeGenerator(GameFormat baseFormat){
+        this.baseFormat=baseFormat;
+        if(baseFormat.getName().equals((FModel.getFormats().getModern().getName()))){
+            formatMedium=FModel.getFormats().get("Legacy");
+            formatHard=FModel.getFormats().get("Vintage");
+        }
+    }
+
+    public QuestEventChallengeList generateChallenges(){
         Map<String,QuestEventChallenge> challenges = new HashMap<>();
         int id = 0;
         for (int i=0;i<5;++i) {
-            QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().getModern());
+            QuestEventChallenge qc = getFormatChallenge(formatMedium);
             qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(1000);
             qc.setWinsReqd(MyRandom.getRandom().nextInt(5));
@@ -36,7 +49,7 @@ public class QuestChallengeGenerator {
             id++;
         }
         for (int i=0;i<5;++i) {
-            QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().get("Legacy"));
+            QuestEventChallenge qc = getFormatChallenge(formatHard);
             qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(5000);
             qc.setCardReward("2 multicolor rares");
@@ -56,7 +69,7 @@ public class QuestChallengeGenerator {
             id++;
         }
         for (int i=0;i<5;++i) {
-            QuestEventChallenge qc = getFormatChallenge(FModel.getFormats().get("Vintage"));
+            QuestEventChallenge qc = getFormatChallenge(formatExpert);
             qc.setId(Integer.valueOf(id).toString());
             qc.setCreditsReward(10000);
             qc.setCardReward("3 multicolor rares");
@@ -78,7 +91,7 @@ public class QuestChallengeGenerator {
         return new QuestEventChallengeList(challenges);
     }
 
-    public static QuestEventChallenge getFormatChallenge(GameFormat format){
+    public QuestEventChallenge getFormatChallenge(GameFormat format){
         QuestEventChallenge qc = new QuestEventChallenge();
 
         qc.setAiLife(20);
@@ -92,11 +105,11 @@ public class QuestChallengeGenerator {
         return qc;
     }
 
-    public static QuestEventChallenge getAIHeadstartChallenge(int extras){
+    public QuestEventChallenge getAIHeadstartChallenge(int extras){
         QuestEventChallenge qc = new QuestEventChallenge();
 
         qc.setAiLife(20);
-        qc.setEventDeck(DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),true));
+        qc.setEventDeck(DeckgenUtil.buildLDACArchetypeDeck(baseFormat,true));
         qc.setTitle(qc.getEventDeck().getName() + " headstart challenge");
         qc.setName(qc.getEventDeck().getName() + " headstart  challenge");
         qc.setOpponentName(qc.getEventDeck().getName());
@@ -117,7 +130,7 @@ public class QuestChallengeGenerator {
         return qc;
     }
 
-    public static class QuestEventChallengeList implements IStorage<QuestEventChallenge>{
+    public class QuestEventChallengeList implements IStorage<QuestEventChallenge>{
 
         private Map<String,QuestEventChallenge> challenges;
 

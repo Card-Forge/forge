@@ -104,6 +104,7 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
+        boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
         if (game.getStack().isEmpty() && hasTapCost(sa.getPayCosts(), sa.getHostCard())) {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                 return false;
@@ -112,10 +113,11 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
         }
-        if (game.getStack().isEmpty() && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if (game.getStack().isEmpty() && (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
+                || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
+            if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa) && !main1Preferred) {
                 return false;
             }
         }

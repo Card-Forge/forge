@@ -10,6 +10,7 @@ import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CBrawlDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public enum VBrawlDecks implements IVDoc<CBrawlDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Brawl");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblBrawl"));
 
     private DeckManager lstDecks;
 
@@ -93,6 +95,6 @@ public enum VBrawlDecks implements IVDoc<CBrawlDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.Brawl, cDetailPicture);
-        this.lstDecks.setCaption("Brawl Decks");
+        this.lstDecks.setCaption(localizer.getMessage("lblBrawlDecks"));
     }
 }

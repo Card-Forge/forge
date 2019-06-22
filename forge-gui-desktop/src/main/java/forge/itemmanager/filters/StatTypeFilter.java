@@ -12,6 +12,7 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -28,9 +29,10 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     @SuppressWarnings("serial")
     protected void addToggleButton(JPanel widget, final StatTypes st) {
+        final Localizer localizer = Localizer.getInstance();
         StringBuilder tooltip = new StringBuilder();
         tooltip.append(st.label);
-        tooltip.append(" (click to toggle the filter, right-click to show only ");
+        tooltip.append(" (" + localizer.getMessage("lblclicktotoogle") + " ");
         if (st.label.length() > 1 && !Character.isUpperCase(st.label.charAt(1))) {
             tooltip.append(st.label.substring(0, 1).toLowerCase());
             tooltip.append(st.label.substring(1));

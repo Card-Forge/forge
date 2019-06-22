@@ -184,6 +184,10 @@ public class ForgeScript {
             if (!sa.isKicked()) {
                 return false;
             }
+        } else if (property.equals("Loyalty")) {
+            if (!sa.isPwAbility()) {
+                return false;
+            }
         } else if (property.equals("Aftermath")) {
             if (!sa.isAftermath()) {
                 return false;

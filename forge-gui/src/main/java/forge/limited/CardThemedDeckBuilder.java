@@ -19,6 +19,7 @@ import forge.game.GameFormat;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.MyRandom;
 
 import java.util.*;
@@ -206,22 +207,27 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // 5. If there are still on-color cards, and the average cmc is low, add
         // extras.
         double avCMC = getAverageCMC(deckList);
-        int maxCMC = getMaxCMC(deckList);
-        if (avCMC < 4) {
-            addLowCMCCard();
-            if (targetSize > 60) {
+        //calculated required lands based on https://www.channelfireball.com/articles/how-many-lands-do-you-need-to-consistently-hit-your-land-drops/
+        float baseLandParameter = 16f;
+        //reduce landcount if filtered hands enabled
+        if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.FILTERED_HANDS)){
+            baseLandParameter--;
+        }
+        landsNeeded = new Double((baseLandParameter + 3.14f * avCMC) * targetSize/60f).intValue();
+        if (logToConsole) {
+            System.out.println("Required lands from linear regression : " + avCMC + " cmc, needed:  " + landsNeeded);
+        }
+        numSpellsNeeded = targetSize-landsNeeded;
+        int extraCardsToAdd = numSpellsNeeded - deckList.size();
+        if (logToConsole) {
+            System.out.println("Extra cards to add : " + extraCardsToAdd);
+        }
+        if(extraCardsToAdd>0){
+            for(int i=0; i<extraCardsToAdd; ++i){
                 addLowCMCCard();
             }
         }
-        if (avCMC < 3 && maxCMC < 6) {
-            addLowCMCCard();
-        }
-        if (avCMC < 2.5 && maxCMC < 5) {
-            addLowCMCCard();
-            if (targetSize > 60) {
-                addLowCMCCard();
-            }
-        }
+
         if (logToConsole) {
             System.out.println("Post lowcoc : " + deckList.size());
         }
@@ -237,6 +243,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // 7. If there are still less than 22 non-land cards add off-color
         // cards. This should be avoided.
         int stillNeeds = numSpellsNeeded - deckList.size();
+        if (logToConsole) {
+            System.out.println("Still Needs? : " + stillNeeds);
+        }
         if (stillNeeds > 0)
             addCards(onColorCreaturesAndSpells, stillNeeds);
         stillNeeds = numSpellsNeeded - deckList.size();
@@ -274,12 +283,13 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             }
         }
 
-
+        if (logToConsole) {
+            System.out.println("Lands needed : " + landsNeeded);
+        }
         if (landsNeeded > 0) {
             addLands(clrCnts);
         }
         if (logToConsole) {
-            System.out.println("Lands needed : " + landsNeeded);
             System.out.println("Post Lands : " + deckList.size());
         }
         addWastesIfRequired();
@@ -345,8 +355,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     protected void generateTargetCMCs(){
         targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(12)+4)*targetSize/60));//10
-        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(16)+8)*targetSize/60));//16
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(16)+2)*targetSize/60));//10
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(20)+6)*targetSize/60));//16
         targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(10)+8)*targetSize/60));//13
         targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//8
         targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//7
@@ -488,7 +498,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             aiPlayables.remove(card);
             rankedColorList.remove(card);
 
-            landsNeeded--;
+            //landsNeeded--;
             if (logToConsole) {
                 System.out.println("Low CMC: " + card.getName());
             }
@@ -681,7 +691,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 float p = (float) clrCnts[i] / (float) totalColor;
                 int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (logToConsole) {
-                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
+                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand + 1);
                 }
 
                 PaperCard snowLand = null;
