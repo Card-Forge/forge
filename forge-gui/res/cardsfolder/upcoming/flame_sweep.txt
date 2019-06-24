@@ -1,4 +1,0 @@
-Name:Flame Sweep
-ManaCost:2 R
-Types:Instant
-Oracle:Flame Sweep deals 2 damage to each creature except for creatures you control with flying.

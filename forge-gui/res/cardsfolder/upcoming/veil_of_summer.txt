@@ -1,7 +1,0 @@
-Name:Veil of Summer
-ManaCost:G
-Types:Instant
-A:SP$ Effect | Cost$ G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBEffect | SpellDescription$ Draw a card if an opponent has cast a blue or spell this turn. Spells you control can't be countered this turn. You and permanents you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
-SVar:DBEffect:DB$ Effect | Name$ CARDNAME Effect | StaticAbilities$ KWPump | SubAbility$ DBDraw
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected
-Oracle:Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
