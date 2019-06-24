@@ -13,22 +13,25 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 
 4 U Angel of Vitality
 
-8 R Angelic Cleric
+8 R Bishop of Wings
+
+10 M Cavalier of Dawn
 
 13 U Devout Decree
 14 C Disenchant
 
+21 U Herald of the Sun
 22 R Hanged Executioner
 
 24 R Leyline of Sanctity
 
-27 R Loxodon Lifesinger
+27 R Loxodon Lifechanter
 28 U Loyal Pegasus
 
 C Pacifism
 
 33 R Planar Cleansing
-
+34 C Raise the Alarm
 35 U Rule of Law
 
 39 R Starfield Mystic
@@ -40,31 +43,46 @@ C Pacifism
 51 U Captivating Gyre
 
 55 C Convolute
-
+56 R Drawn from Dreams
 57 R Dungeon Geists
 
 59 R Flood of Tears
 
+63 U Dukkeoun Poji
 64 R Leyline of Anticipation
+65 R Masterful Replication
 
+68 M Mu Yanling, Sky Dancer
 69 C Negate
 70 C Octoprophet
+71 U Portal of Sanctuary
+72 U Renowned Weaponsmith
+
+74 U Scholar of the Ages
 
 78 C Unsummon
 
 87 U Blightbeetle
 
+91 U Bloodthirsty Aerialist
 92 C Bone Splinters
 
 95 U Disfigure
 96 R Dread Presence
 
+105 R Knight of the Ebon Legion
 106 R Legion's End
 107 R Leyline of the Void
 
+111 R Rotting Regisaur
+
 113 R Scheming Symmetry
 
+115 M Sorin, Imperious Bloodlord
+
 117 U Thought Distortion
+
+120 U Vampire of the Dire Moon
 
 123 U Yarok's Fenlurker
 
@@ -77,21 +95,24 @@ C Pacifism
 131 R Chandra's Regulator
 132 U Chandra's Spitfire
 
-134 C Chinese Goblin Miner
+134 C Destructive Digger
 135 U Dragon Mage
 
 137 U Ember Hauler
 
 139 U Flame Sweep
+140 U Fry
 
-142 C Goblin Hitchhiker
+142 C Goblin Bird-Grabber
 143 U Goblin Ringleader
 
 145 C Infuriate
 
 148 R Leyline of Combustion
 
-154 C Reckless Airstrike
+150 R Marauding Raptor
+
+154 C Reckless Air Strike
 
 156 R Repeated Reverberation
 
@@ -99,8 +120,13 @@ C Pacifism
 164 U Unchained Berserker
 165 U Barkhide Troll
 
+169 R Elvish Reclaimer
+
+171 C Ferocious Pup
+
 175 C Growth Cycle
 
+179 R Leyline of Abundance
 180 U Loaming Shaman
 
 187 U Overgrowth Elemental
@@ -119,7 +145,7 @@ C Pacifism
 202 R Wakeroot Elemental
 
 204 U Wolfrider's Saddle
-
+205 U Woodland Champion
 206 U Corpse Knight
 207 U Creeping Trailblazer
 208 U Empyrean Eagle
@@ -128,22 +154,45 @@ C Pacifism
 
 212 M Kykar, Wind's Fury
 
+214 U Moldervine Reclamation
+215 U Ogre Siegebreaker
+216 M Omnath, Locus of the Roil
 217 U Risen Reef
+
+220 M Yarok, the Desecrated
+
+224 U Cavalier of Diamond
 
 226 R Golos, Tireless Pilgrim
 
-236 U Bacchetta Punitiva
+228 C Heart-Piercer Bow
+
+236 U Retributive Wand
+
+238 U Sommozzatore Fedele
+
+241 C Vial of Dragonfire
 
 244 U Cryptic Caves
 
 247 R Field of the Dead
 
+253 R Temple of Epiphany
+254 R Temple of Malady
+255 R Temple of Mystery
+256 R Temple of Silence
+257 R Temple of Triumph
+
 280 L Forest
 281 M Rienne, Angel of Rebirth
+
+R Sorin, Vampire Lord
 
 [tokens]
 ajanis_pridemate
 r_1_1_elemental
+u_4_4_elemental_bird_flying
+c_3_3_a_golem
 w_1_1_soldier
 w_1_1_spirit_flying
 g_2_2_wolf
