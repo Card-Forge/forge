@@ -27,6 +27,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -46,11 +47,12 @@ public class VPrompt implements IVDoc<CPrompt> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Prompt");
+    final Localizer localizer = Localizer.getInstance();
+    private final DragTab tab = new DragTab(localizer.getMessage("lblPrompt"));
 
     // Various components
-    private final FButton btnOK = new FButton("OK");
-    private final FButton btnCancel = new FButton("Cancel");
+    private final FButton btnOK = new FButton(localizer.getMessage("lblOk"));
+    private final FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
     private final FHtmlViewer tarMessage = new FHtmlViewer();
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -122,7 +124,7 @@ public class VPrompt implements IVDoc<CPrompt> {
         	container.add(lblGames, "span 2, w 10:100%, h 22px!");
             tarMessage.setFont(FSkin.getRelativeFont(14));
         }
-        lblGames.setText("Game Setup");
+        lblGames.setText(localizer.getMessage("lblGameSetup"));
 
         container.add(messageScroller, "span 2, w 10:100%, h 0:100%");
 

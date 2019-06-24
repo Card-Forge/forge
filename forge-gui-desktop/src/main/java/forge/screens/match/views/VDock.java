@@ -27,6 +27,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -39,20 +40,19 @@ import java.awt.event.MouseEvent;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VDock implements IVDoc<CDock> {
-
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Dock");
-
+    private final DragTab tab = new DragTab(localizer.getMessage("lblDock"));
     // Dock button instances
-    private final DockButton btnConcede = new DockButton(FSkin.getIcon(FSkinProp.ICO_CONCEDE), "Concede Game");
-    private final DockButton btnSettings = new DockButton(FSkin.getIcon(FSkinProp.ICO_SETTINGS), "Game Settings");
-    private final DockButton btnEndTurn = new DockButton(FSkin.getIcon(FSkinProp.ICO_ENDTURN), "End Turn");
-    private final DockButton btnViewDeckList = new DockButton(FSkin.getIcon(FSkinProp.ICO_DECKLIST), "View Deck List");
-    private final DockButton btnRevertLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_REVERTLAYOUT), "Revert Layout");
-    private final DockButton btnOpenLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_OPENLAYOUT), "Open Layout");
-    private final DockButton btnSaveLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_SAVELAYOUT), "Save Layout");
-    private final DockButton btnAlphaStrike = new DockButton(FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), "Alpha Strike");
+    private final DockButton btnConcede = new DockButton(FSkin.getIcon(FSkinProp.ICO_CONCEDE), localizer.getMessage("lblConcedeGame"));
+    private final DockButton btnSettings = new DockButton(FSkin.getIcon(FSkinProp.ICO_SETTINGS), localizer.getMessage("lblGameSettings"));
+    private final DockButton btnEndTurn = new DockButton(FSkin.getIcon(FSkinProp.ICO_ENDTURN), localizer.getMessage("lblEndTurn"));
+    private final DockButton btnViewDeckList = new DockButton(FSkin.getIcon(FSkinProp.ICO_DECKLIST), localizer.getMessage("lblViewDeckList"));
+    private final DockButton btnRevertLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_REVERTLAYOUT), localizer.getMessage("lblRevertLayout"));
+    private final DockButton btnOpenLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_OPENLAYOUT), localizer.getMessage("lblOpenLayout"));
+    private final DockButton btnSaveLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_SAVELAYOUT), localizer.getMessage("lblSaveLayout"));
+    private final DockButton btnAlphaStrike = new DockButton(FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), localizer.getMessage("lblAlphaStrike"));
     private final FLabel btnTargeting = new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF))
                 .hoverable(true).iconInBackground(true).iconScaleFactor(1.0).build();
 
