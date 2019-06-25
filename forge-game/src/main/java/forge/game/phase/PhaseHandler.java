@@ -76,6 +76,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
+    private int nMain1sThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
 
@@ -392,6 +393,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     playerTurn.removeKeyword("Skip all combat phases of this turn.");
                     nUpkeepsThisTurn = 0;
+                    nMain1sThisTurn = 0;
 
                     // Rule 514.3
                     givePriorityToPlayer = false;
@@ -457,6 +459,10 @@ public class PhaseHandler implements java.io.Serializable {
                 }
                 game.getUpkeep().executeUntilEndOfPhase(playerTurn);
                 game.getUpkeep().registerUntilEndCommand(playerTurn);
+                break;
+
+            case MAIN1:
+                nMain1sThisTurn++;
                 break;
 
             case COMBAT_END:
@@ -920,15 +926,16 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean isFirstUpkeep() {
-        return (nUpkeepsThisTurn == 0);
+        return is(PhaseType.UPKEEP) && (nUpkeepsThisTurn == 0);
     }
 
     public final boolean isFirstUpkeepThisGame() {
-        return (nUpkeepsThisGame == 0);
+        return is(PhaseType.UPKEEP) && (nUpkeepsThisGame == 0);
     }
 
     public final boolean isPreCombatMain() {
-        return (nCombatsThisTurn == 0);
+        // 505.1a. Only the first main phase of the turn is a precombat main phase.
+        return is(PhaseType.MAIN1) && (nMain1sThisTurn == 0);
     }
 
     private final static boolean DEBUG_PHASES = false;

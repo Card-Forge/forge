@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant player
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | FirstUpkeep$ True | Execute$ AddUpkeep | TriggerDescription$ At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
+T:Mode$ Phase | FirstUpkeep$ True | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ AddUpkeep | TriggerDescription$ At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
 SVar:AddUpkeep:DB$ AddPhase | ExtraPhase$ Upkeep
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradox_haze.jpg
