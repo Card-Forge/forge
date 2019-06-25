@@ -1,0 +1,7 @@
+Name:Lightning Stormkin
+ManaCost:U R
+Types:Creature Elemental Wizard
+PT:2/2
+K:Flying
+K:Haste
+Oracle:Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)
