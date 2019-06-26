@@ -271,6 +271,9 @@ https://downloads.cardforge.org/images/products/boosters/M19_2.jpg
 https://downloads.cardforge.org/images/products/boosters/M19_3.jpg
 https://downloads.cardforge.org/images/products/boosters/M19_4.jpg
 https://downloads.cardforge.org/images/products/boosters/M19_5.jpg
+https://downloads.cardforge.org/images/products/boosters/M20_1.png
+https://downloads.cardforge.org/images/products/boosters/M20_2.png
+https://downloads.cardforge.org/images/products/boosters/M20_3.png
 https://downloads.cardforge.org/images/products/boosters/MBS.png
 https://downloads.cardforge.org/images/products/boosters/MBS_1.jpg
 https://downloads.cardforge.org/images/products/boosters/MBS_2.jpg
@@ -285,6 +288,9 @@ https://downloads.cardforge.org/images/products/boosters/MIR_2.jpg
 https://downloads.cardforge.org/images/products/boosters/MIR_3.jpg
 https://downloads.cardforge.org/images/products/boosters/MIR_4.jpg
 https://downloads.cardforge.org/images/products/boosters/MIR_5.jpg
+https://downloads.cardforge.org/images/products/boosters/MH1_1.png
+https://downloads.cardforge.org/images/products/boosters/MH1_2.png
+https://downloads.cardforge.org/images/products/boosters/MH1_3.png
 https://downloads.cardforge.org/images/products/boosters/MM2_1.jpg
 https://downloads.cardforge.org/images/products/boosters/MM2_2.jpg
 https://downloads.cardforge.org/images/products/boosters/MM2_3.jpg
@@ -368,6 +374,11 @@ https://downloads.cardforge.org/images/products/boosters/RIX_2.jpg
 https://downloads.cardforge.org/images/products/boosters/RIX_3.jpg
 https://downloads.cardforge.org/images/products/boosters/RIX_4.jpg
 https://downloads.cardforge.org/images/products/boosters/RIX_5.jpg
+https://downloads.cardforge.org/images/products/boosters/RNA_1.png
+https://downloads.cardforge.org/images/products/boosters/RNA_2.png
+https://downloads.cardforge.org/images/products/boosters/RNA_3.png
+https://downloads.cardforge.org/images/products/boosters/RNA_4.png
+https://downloads.cardforge.org/images/products/boosters/RNA_5.png
 https://downloads.cardforge.org/images/products/boosters/RTR.png
 https://downloads.cardforge.org/images/products/boosters/RTR_1.jpg
 https://downloads.cardforge.org/images/products/boosters/RTR_2.jpg
@@ -434,6 +445,9 @@ https://downloads.cardforge.org/images/products/boosters/VIS.jpg
 https://downloads.cardforge.org/images/products/boosters/VIS.png
 https://downloads.cardforge.org/images/products/boosters/VMA.jpg
 https://downloads.cardforge.org/images/products/boosters/VMA_1.jpg
+https://downloads.cardforge.org/images/products/boosters/WAR_1.png
+https://downloads.cardforge.org/images/products/boosters/WAR_2.png
+https://downloads.cardforge.org/images/products/boosters/WAR_3.png
 https://downloads.cardforge.org/images/products/boosters/WTH.jpg
 https://downloads.cardforge.org/images/products/boosters/WTH.png
 https://downloads.cardforge.org/images/products/boosters/WWK.png
