@@ -309,13 +309,39 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 299 R Ethereal Elk
 300 U Gnarlback Rhino
 301 C Vivien's Crocodile
-307 C Imperial Outrider
-321 C Dark Remedy
-328 C Engulfing Eruption
-333 C Nimble Birdsticker
-337 R Aggressive Mammoth
-[tokens]
 
+C Impassioned Orator
+
+307 C Imperial Outrider
+
+310 R Serra's Guardian
+
+317 R Riddlemaster Sphinx
+
+321 C Dark Remedy
+
+323 R Gravewaker
+
+C Sorin's Thirst
+
+C Vampire Opportunist
+
+328 C Engulfing Eruption
+
+332 R Immortal Phoenix
+333 C Nimble Birdsticker
+334 C Rubblebelt Recluse
+
+R Shivan Dragon
+
+337 R Aggressive Mammoth
+338 C Bristling Boar
+
+342 C Prized Unicorn
+
+C Titanic Growth
+
+[tokens]
 ajanis_pridemate
 b_5_5_demon_flying
 r_1_1_elemental
