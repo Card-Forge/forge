@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:XLN, RIX, DOM, M19, G18, GRN, RNA, WAR
+Sets:XLN, RIX, DOM, M19, G18, GRN, RNA, WAR, M20
 Banned: Rampaging Ferocidon
