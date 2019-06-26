@@ -1,4 +1,4 @@
-Name:Vivien, Nature's Advantage
+Name:Vivien, Nature's Avenger
 ManaCost:4 G G
 Types:Legendary Planeswalker Vivien
 Loyalty:3

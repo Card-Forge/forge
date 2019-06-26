@@ -26,7 +26,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 16 U Fencing Ace
 17 U Gauntlets of Light
 18 C Glaring Aegis
-19 C Gods Willing
+19 U Gods Willing
 20 C Griffin Protector
 21 C Griffin Sentinel
 22 R Hanged Executioner
@@ -204,7 +204,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 194 R Shifting Ceratops
 195 C Silverback Shaman
 196 C Thicket Crasher
-197 R Thrashing Brontodon
+197 U Thrashing Brontodon
 198 U Veil of Summer
 199 M Vivien, Arkbow Ranger
 200 R Voracious Hydra
@@ -242,7 +242,7 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 232 U Meteor Golem
 233 R Mystic Forge
 234 U Pattern Matcher
-236 C Prismite
+235 C Prismite
 236 U Retributive Wand
 237 U Salvager of Ruin
 238 U Scuttlemutt
@@ -309,39 +309,13 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 299 R Ethereal Elk
 300 U Gnarlback Rhino
 301 C Vivien's Crocodile
-
-C Impassioned Orator
-
 307 C Imperial Outrider
-
-310 R Serra's Guardian
-
-317 R Riddlemaster Sphinx
-
 321 C Dark Remedy
-
-323 R Gravewaker
-
-C Sorin's Thirst
-
-C Vampire Opportunist
-
 328 C Engulfing Eruption
-
-332 R Immortal Phoenix
 333 C Nimble Birdsticker
-334 C Rubblebelt Recluse
-
-R Shivan Dragon
-
 337 R Aggressive Mammoth
-338 C Bristling Boar
-
-342 C Prized Unicorn
-
-C Titanic Growth
-
 [tokens]
+
 ajanis_pridemate
 b_5_5_demon_flying
 r_1_1_elemental
