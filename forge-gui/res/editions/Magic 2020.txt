@@ -349,6 +349,6 @@ u_4_4_elemental_bird_flying
 c_3_3_a_golem
 w_1_1_soldier
 w_1_1_spirit_flying
-c_a_treasure
+c_a_treasure_sac
 g_2_2_wolf
 b_2_2_zombie
