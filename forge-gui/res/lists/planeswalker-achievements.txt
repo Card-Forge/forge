@@ -4,7 +4,9 @@ Ajani Unyielding|Ajani's Mentoring|Today's lesson: How to be strong.
 Ajani Vengeant|Ajani's Tantrum|Look Ma! No lands!
 Ajani, Adversary of Tyrants|Ajani's House of Cats|Here, kitty, kitty, kitty...
 Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
+Ajani, Inspiring Leader|Ajani's Leap of Faith|Cats from above!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
+Ajani, Strength of the Pride|Ajani's Obliteration|A defiant roar... then silence.
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
 Ajani, Wise Counselor|Ajani's Mega-growth|Let's just pile these on...
 Aminatou, the Fateshifter|Aminatou's Twist of Fate|Let's shuffle this a bit.
@@ -14,8 +16,10 @@ Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
 Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
+Chandra, Awakened Inferno|Chandra's Utter Disintegration|Is it hot here or is it just me?
 Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
 Chandra, Fire Artisan|Chandra's Fiery Rush|Combo time!
+Chandra, Flame's Fury|Chandra's Lake of Flame|Come in! The fire's great!
 Chandra, Flamecaller|Chandra's Sea of Flames|You didn't activate this for 0 just to get the achievement, did you?
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
@@ -115,8 +119,10 @@ Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a gloriou
 Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!
+Sorin, Imperious Bloodlord|Sorin's Progeny|Welcome to your new life. You serve me now.
 Sorin, Lord of Innistrad|Sorin's Recruitment|My favorite game is Shogi!
 Sorin, Solemn Visitor|Sorin's Abyss|Don't get so close to the edge!
+Sorin, Vampire Lord|Sorin's Siring Party|Go forth and multiply.
 Tamiyo, Field Researcher|Tamiyo's Omniscience|I know exactly how your story ends...
 Tamiyo, the Moon Sage|Tamiyo's Recycling|Wash, rinse, repeat!
 Teferi, Hero of Dominaria|Teferi's Oblivion|Don't worry. It's just a phase.
@@ -134,6 +140,8 @@ Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought 
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
 Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
+Vivien, Arkbow Ranger|Vivien's Wish|Welcome, old friend. I was afraid I lost you forever.
+Vivien, Nature's Avenger|Vivien's Magnification|Magnificent!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
 Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. There's no step two.
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
@@ -143,3 +151,5 @@ Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
 Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.
+Mu Yanling, Celestial Wind|Yanling's Wind of Heavens|Let's clear the skies.
+Mu Yanling, Sky Dancer|Yanling's Secrets of the Deep|The water knows. Read in it.
