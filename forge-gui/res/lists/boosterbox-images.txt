@@ -62,8 +62,10 @@ https://downloads.cardforge.org/images/products/boosterboxes/M13.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M14.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M15.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M19.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/M20.png
 https://downloads.cardforge.org/images/products/boosterboxes/MBS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MIR.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/MH1.png
 https://downloads.cardforge.org/images/products/boosterboxes/MM2.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MM3.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MMA.jpg
@@ -82,6 +84,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/PLC.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/PLS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/RAV.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/RIX.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/RNA.png
 https://downloads.cardforge.org/images/products/boosterboxes/ROE.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/RTR.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/SCG.jpg
@@ -99,6 +102,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/UDS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ULG.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/USG.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/VIS.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/WAR.png
 https://downloads.cardforge.org/images/products/boosterboxes/WTH.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/WWK.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/XLN.jpg
