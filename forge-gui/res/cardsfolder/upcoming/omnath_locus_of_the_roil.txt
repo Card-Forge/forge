@@ -7,6 +7,6 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:X:Count$Valid Elemental.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a land enters the battlefield under your control, put a +1/+1 counter on target Elemental you control. If you control eight or more lands, draw a card.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Elemental.YouCtrl | TgtPrompt$ Select target Elemental you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | References$ X
-SVar:X:Count$Valid Land.YouCtrl
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE8 | References$ Y
+SVar:Y:Count$Valid Land.YouCtrl
 Oracle:When Omnath, Locus of the Roil enters the battlefield, it deals damage to any target equal to the number of Elementals you control.\nWhenever a land enters the battlefield under your control, put a +1/+1 counter on target Elemental you control. If you control eight or more lands, draw a card.
