@@ -8,142 +8,209 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
 
 [cards]
-
+1 C Aerial Assault
 2 M Ajani, Strength of the Pride
-
+3 U Ancestral Blade
 4 U Angel of Vitality
-
+5 C Angelic Gift
+6 U Apostle of Purifying Light
+7 C Battalion Foot Soldier
 8 R Bishop of Wings
-
+9 R Brought Back
 10 M Cavalier of Dawn
-
+11 C Dawning Angel
+12 C Daybreak Chaplain
 13 U Devout Decree
 14 C Disenchant
-
-21 U Herald of the Sun
+15 U Eternal Isolation
+16 U Fencing Ace
+17 U Gauntlets of Light
+18 C Glaring Aegis
+19 U Gods Willing
+20 C Griffin Protector
+21 C Griffin Sentinel
 22 R Hanged Executioner
-
-24 R Leyline of Sanctity
-
+23 U Herald of the Sun
+24 C Inspired Charge
+25 C Inspiring Captain
+26 R Leyline of Sanctity
 27 R Loxodon Lifechanter
 28 U Loyal Pegasus
-
-C Pacifism
-
+29 U Master Splicer
+30 C Moment of Heroism
+31 C Moorland Inquisitor
+32 C Pacifism
 33 R Planar Cleansing
 34 C Raise the Alarm
 35 U Rule of Law
-
+36 R Sephara, Sky's Blade
+37 C Soulmender
+38 C Squad Captain
 39 R Starfield Mystic
-
+40 C Steadfast Sentry
+41 C Yoked Ox
 42 U Aether Gust
-
+43 R Agent of Treachery
+44 U Air Elemental
+45 C Anticipate
 46 R Atemsis, All-Seeing
-
+47 C Befuddle
+48 C Bone to Ash
+49 C Boreal Elemental
+50 U Brineborn Cutthroat
 51 U Captivating Gyre
-
+52 M Cavalier of Gales
+53 U Cerulean Drake
+54 C Cloudkin Seer
 55 C Convolute
 56 R Drawn from Dreams
 57 R Dungeon Geists
-
+58 C Faerie Miscreant
 59 R Flood of Tears
-
-63 U Dukkeoun Poji
+60 C Fortress Crab
+61 C Frilled Sea Serpent
+62 C Frost Lynx
+63 U Hard Cover
 64 R Leyline of Anticipation
 65 R Masterful Replication
-
+66 C Metropolis Sprite
+67 C Moat Piranhas
 68 M Mu Yanling, Sky Dancer
 69 C Negate
 70 C Octoprophet
 71 U Portal of Sanctuary
 72 U Renowned Weaponsmith
-
+73 C Sage's Row Denizen
 74 U Scholar of the Ages
-
+75 C Sleep Paralysis
+76 U Spectral Sailor
+77 R Tale's End
 78 C Unsummon
-
+79 U Warden of Evos Isle
+80 C Winged Words
+81 U Yarok's Wavecrasher
+82 C Zephyr Charge
+83 C Agonizing Syphon
+84 C Audacious Thief
+85 C Barony Vampire
+86 C Bladebrand
 87 U Blightbeetle
-
+88 C Blood Burglar
+89 U Blood for Bones
+90 U Bloodsoaked Altar
 91 U Bloodthirsty Aerialist
 92 C Bone Splinters
-
+93 C Boneclad Necromancer
+94 M Cavalier of Night
 95 U Disfigure
 96 R Dread Presence
-
+97 C Duress
+98 R Embodiment of Agonies
+99 C Epicure of Blood
+100 C Fathom Fleet Cutthroat
+101 C Feral Abomination
+102 C Gorging Vulture
+103 U Gravedigger
+104 U Gruesome Scourger
 105 R Knight of the Ebon Legion
 106 R Legion's End
 107 R Leyline of the Void
-
+108 C Mind Rot
+109 C Murder
+110 U Noxious Grasp
 111 R Rotting Regisaur
-
+112 C Sanitarium Skeleton
 113 R Scheming Symmetry
-
+114 C Sorcerer of the Fang
 115 M Sorin, Imperious Bloodlord
-
+116 C Soul Salvage
 117 U Thought Distortion
-
+118 C Undead Servant
+119 C Unholy Indenture
 120 U Vampire of the Dire Moon
-
+121 U Vengeful Warchief
+122 R Vilis, Broker of Blood
 123 U Yarok's Fenlurker
-
+124 C Act of Treason
 125 M Cavalier of Flame
 126 R Chandra, Acolyte of Flame
 127 M Chandra, Awakened Inferno
 128 U Chandra, Novice Pyromancer
 129 C Chandra's Embercat
-
+130 C Chandra's Outrage
 131 R Chandra's Regulator
 132 U Chandra's Spitfire
-
+133 C Daggersail Aeronaut
 134 C Destructive Digger
 135 U Dragon Mage
-
+136 R Drakuseth, Maw of Flames
 137 U Ember Hauler
-
+138 C Fire Elemental
 139 U Flame Sweep
 140 U Fry
-
+141 R Glint-Horn Buccaneer
 142 C Goblin Bird-Grabber
 143 U Goblin Ringleader
-
+144 C Goblin Smuggler
 145 C Infuriate
-
+146 C Keldon Raider
+147 C Lavakin Brawler
 148 R Leyline of Combustion
-
+149 C Maniacal Rage
 150 R Marauding Raptor
-
+151 U Mask of Immolation
+152 C Pack Mastiff
+153 U Rapacious Dragon
 154 C Reckless Air Strike
-
+155 C Reduce to Ashes
 156 R Repeated Reverberation
-
+157 C Ripscale Predator
+158 U Scampering Scorcher
+159 C Scorch Spitter
+160 C Shock
+161 C Tectonic Rift
+162 R Thunderkin Awakener
 163 U Uncaged Fury
 164 U Unchained Berserker
 165 U Barkhide Troll
-
+166 C Brightwood Tracker
+167 M Cavalier of Thorns
+168 C Centaur Courser
 169 R Elvish Reclaimer
-
+170 C Feral Invocation
 171 C Ferocious Pup
-
+172 R Gargos, Vicious Watcher
+173 C Gift of Paradise
+174 C Greenwood Sentinel
 175 C Growth Cycle
-
+176 C Healer of the Glade
+177 U Howling Giant
+178 C Leafkin Druid
 179 R Leyline of Abundance
 180 U Loaming Shaman
-
+181 C Mammoth Spider
+182 U Might of the Masses
+183 C Natural End
+184 C Netcaster Spider
+185 R Nightpack Ambusher
+186 U Overcome
 187 U Overgrowth Elemental
-
+188 C Plummet
 189 U Pulse of Murasa
-
+190 C Rabid Bite
 191 U Season of Growth
-
+192 C Sedge Scorpion
+193 R Shared Summons
+194 R Shifting Ceratops
 195 C Silverback Shaman
-
-197 R Thrashing Brontodon
+196 C Thicket Crasher
+197 U Thrashing Brontodon
 198 U Veil of Summer
-
+199 M Vivien, Arkbow Ranger
 200 R Voracious Hydra
-
+201 C Vorstclaw
 202 R Wakeroot Elemental
-
+203 C Wolfkin Bond
 204 U Wolfrider's Saddle
 205 U Woodland Champion
 206 U Corpse Knight
@@ -151,49 +218,137 @@ C Pacifism
 208 U Empyrean Eagle
 209 U Ironroot Warlord
 210 M Kaalia, Zenith Seeker
-
+211 M Kethis, the Hidden Hand
 212 M Kykar, Wind's Fury
-
+213 U Lightning Stormkin
 214 U Moldervine Reclamation
 215 U Ogre Siegebreaker
 216 M Omnath, Locus of the Roil
 217 U Risen Reef
-
+218 U Skyknight Vanguard
+219 U Tomebound Lich
 220 M Yarok, the Desecrated
-
-224 U Cavalier of Diamond
-
+221 C Anvilwrought Raptor
+222 R Bag of Holding
+223 U Colossus Hammer
+224 U Diamond Knight
+225 U Diviner's Lockbox
 226 R Golos, Tireless Pilgrim
-
+227 R Grafdigger's Cage
 228 C Heart-Piercer Bow
-
+229 R Icon of Ancestry
+230 U Manifold Key
+231 C Marauder's Axe
+232 U Meteor Golem
+233 R Mystic Forge
+234 U Pattern Matcher
+235 C Prismite
 236 U Retributive Wand
-
-238 U Sommozzatore Fedele
-
+237 U Salvager of Ruin
+238 U Scuttlemutt
+239 R Steel Overseer
+240 C Stone Golem
 241 C Vial of Dragonfire
-
+242 C Bloodfell Caves
+243 C Blossoming Sands
 244 U Cryptic Caves
-
+245 C Dismal Backwater
+246 C Evolving Wilds
 247 R Field of the Dead
-
+248 C Jungle Hollow
+249 R Lotus Field
+250 C Rugged Highlands
+251 C Scoured Barrens
+252 C Swiftwater Cliffs
 253 R Temple of Epiphany
 254 R Temple of Malady
 255 R Temple of Mystery
 256 R Temple of Silence
 257 R Temple of Triumph
-
+258 C Thornwood Falls
+259 C Tranquil Cove
+260 C Wind-Scarred Crag
+261 L Plains
+262 L Plains
+263 L Plains
+264 L Plains
+265 L Island
+266 L Island
+267 L Island
+268 L Island
+269 L Swamp
+270 L Swamp
+271 L Swamp
+272 L Swamp
+273 L Mountain
+274 L Mountain
+275 L Mountain
+276 L Mountain
+277 L Forest
+278 L Forest
+279 L Forest
 280 L Forest
 281 M Rienne, Angel of Rebirth
+282 M Ajani, Inspiring Leader
+283 R Goldmane Griffin
+284 C Savannah Sage
+285 U Twinblade Paladin
+286 M Mu Yanling, Celestial Wind
+287 C Celestial Messenger
+288 U Waterkin Shaman
+289 R Yanling's Harbinger
+290 M Sorin, Vampire Lord
+291 C Savage Gorger
+292 R Sorin's Guide
+293 U Thirsting Bloodlord
+294 M Chandra, Flame's Fury
+295 R Chandra's Flame Wave
+296 U Pyroclastic Elemental
+297 C Wildfire Elemental
+298 M Vivien, Nature's Avenger
+299 R Ethereal Elk
+300 U Gnarlback Rhino
+301 C Vivien's Crocodile
 
-R Sorin, Vampire Lord
+C Impassioned Orator
+
+307 C Imperial Outrider
+
+310 R Serra's Guardian
+
+317 R Riddlemaster Sphinx
+
+321 C Dark Remedy
+
+323 R Gravewaker
+
+C Sorin's Thirst
+
+C Vampire Opportunist
+
+328 C Engulfing Eruption
+
+332 R Immortal Phoenix
+333 C Nimble Birdsticker
+334 C Rubblebelt Recluse
+
+R Shivan Dragon
+
+337 R Aggressive Mammoth
+338 C Bristling Boar
+
+342 C Prized Unicorn
+
+C Titanic Growth
 
 [tokens]
 ajanis_pridemate
+b_5_5_demon_flying
 r_1_1_elemental
 u_4_4_elemental_bird_flying
 c_3_3_a_golem
 w_1_1_soldier
 w_1_1_spirit_flying
+c_a_treasure
 g_2_2_wolf
 b_2_2_zombie

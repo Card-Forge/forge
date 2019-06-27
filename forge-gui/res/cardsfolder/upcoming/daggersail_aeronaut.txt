@@ -1,0 +1,6 @@
+Name:Daggersail Aeronaut
+ManaCost:3 R
+Types:Creature Goblin
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has flying.
+Oracle:As long as it's your turn, Daggersail Aeronaut has flying.

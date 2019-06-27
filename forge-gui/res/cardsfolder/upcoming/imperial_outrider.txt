@@ -1,0 +1,5 @@
+Name:Imperial Outrider
+ManaCost:3 W
+Types:Creature Human Knight
+PT:1/5
+Oracle:

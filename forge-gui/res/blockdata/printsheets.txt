@@ -1461,3 +1461,40 @@ Snow-Covered Forest
 
 [M20 Secret Cards]
 Rienne, Angel of Rebirth
+Ajani, Inspiring Leader
+Goldmane Griffin
+Savannah Sage
+Twinblade Paladin
+Mu Yanling, Celestial Wind
+Celestial Messenger
+Waterkin Shaman
+Yanling's Harbinger
+Sorin, Vampire Lord
+Savage Gorger
+Sorin's Guide
+Thirsting Bloodlord
+Chandra, Flame's Fury
+Chandra's Flame Wave
+Pyroclastic Elemental
+Wildfire Elemental
+Vivien, Nature's Avenger
+Ethereal Elk
+Gnarlback Rhino
+Vivien's Crocodile
+Impassioned Orator
+Imperial Outrider
+Serra's Guardian
+Riddlemaster Sphinx
+Dark Remedy
+Gravewaker
+Sorin's Thirst
+Vampire Opportunist
+Engulfing Eruption
+Immortal Phoenix
+Nimble Birdsticker
+Rubblebelt Recluse
+Shivan Dragon
+Aggressive Mammoth
+Bristling Boar
+Prized Unicorn
+Titanic Growth
