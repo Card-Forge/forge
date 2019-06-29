@@ -1,0 +1,8 @@
+Name:Goblin Smuggler
+ManaCost:2 R
+Types:Creature Goblin Rogue
+PT:2/2
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Other+powerLE2 | TgtPrompt$ Select another target creature with power 2 or less. | KW$ HIDDEN Unblockable | SpellDescription$ Another target creature with power 2 or less can't be blocked this turn.
+AI:RemoveDeck:All
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}: Another target creature with power 2 or less can't be blocked this turn.

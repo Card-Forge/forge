@@ -1,0 +1,10 @@
+Name:Goldmane Griffin
+ManaCost:3 W W
+Types:Creature Griffin
+PT:3/2
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a card named Ajani, Valiant it, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedAjani; Inspiring Leader | ChangeNum$ 1 | Optional$ True
+DeckHints:Name$Ajani, Inspiring Leader
+Oracle:Flying, vigilance\nWhen Goldmane Griffin enters the battlefield, you may search your library and/or graveyard for a card named Ajani, Inspiring Leader, reveal it, and put it into your hand. If you search your library this way, shuffle it.

@@ -32,3 +32,5 @@ Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zi
 Genetic Algorithm AI Decks | https://downloads.cardforge.org/decks/geneticalgorithmdecks.zip
 Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
 Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip
+Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
+Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermetagame.zip

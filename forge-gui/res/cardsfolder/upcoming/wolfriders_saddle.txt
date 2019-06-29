@@ -1,0 +1,11 @@
+Name:Wolfrider's Saddle
+ManaCost:3 G
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token, then attach CARDNAME to it.
+SVar:TrigToken:DB$ Token | LegacyImage$ g 2 2 wolf m20 | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ CantBeBlockedByAmount GT1 | Description$ Equipped creature get +1/+1 and can't be blocked by more than one creature.
+K:Equip:3
+Oracle:When Wolfrider's Saddle enters the battlefield, create a 2/2 green Wolf creature token, then attach Wolfrider's Saddle to it.\nEquipped creature get +1/+1 and can't be blocked by more than one creature.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery)

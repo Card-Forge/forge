@@ -30,7 +30,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
-
+import forge.util.Localizer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
@@ -51,7 +51,7 @@ public enum ColumnDef {
                 }
             }),
     /**The name column.*/
-    NAME("Name", "Name", 180, false, SortState.ASC,
+    NAME("lblName", "lblName", 180, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -66,7 +66,7 @@ public enum ColumnDef {
             }),
             
     /**The column for sorting cards in collector order.*/
-    COLLECTOR_ORDER("CN", "Collector Number Order", 20, false, SortState.ASC,
+    COLLECTOR_ORDER("lblCN", "ttCN", 20, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -80,7 +80,7 @@ public enum ColumnDef {
                 }
             }),
     /**The type column.*/
-    TYPE("Type", "Type", 100, false, SortState.ASC,
+    TYPE("lblType", "ttType", 100, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -94,7 +94,7 @@ public enum ColumnDef {
                 }
             }),
     /**The mana cost column.*/
-    COST("Cost", "Cost", 70, true, SortState.ASC,
+    COST("lblCost", "ttCost", 70, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -108,7 +108,7 @@ public enum ColumnDef {
                 }
             }),
     /**The color column.*/
-    COLOR("Color", "Color", 46, true, SortState.ASC,
+    COLOR("lblColor", "ttColor", 46, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -122,7 +122,7 @@ public enum ColumnDef {
                 }
             }),
     /**The power column.*/
-    POWER("Power", "Power", 20, true, SortState.DESC,
+    POWER("lblPower", "ttPower", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -136,7 +136,7 @@ public enum ColumnDef {
                 }
             }),
     /**The toughness column.*/
-    TOUGHNESS("Toughness", "Toughness", 20, true, SortState.DESC,
+    TOUGHNESS("lblToughness", "ttToughness", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -150,7 +150,7 @@ public enum ColumnDef {
                 }
             }),
     /**The converted mana cost column.*/
-    CMC("CMC", "CMC", 20, true, SortState.ASC,
+    CMC("lblCMC", "ttCMC", 20, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -164,7 +164,7 @@ public enum ColumnDef {
                 }
             }),
     /**The rarity column.*/
-    RARITY("Rarity", "Rarity", 20, true, SortState.DESC,
+    RARITY("lblRarity", "lblRarity", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -178,7 +178,7 @@ public enum ColumnDef {
                 }
             }),
     /**The set code column.*/
-    SET("Set", "Set", 38, true, SortState.DESC,
+    SET("lblSet", "lblSet", 38, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -195,7 +195,7 @@ public enum ColumnDef {
                 }
             }),
     /**The AI compatibility flag column*/
-    AI("AI", "AI Status", 30, true, SortState.ASC,
+    AI("lblAI", "lblAIStatus", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -218,7 +218,7 @@ public enum ColumnDef {
                 }
             }),
     /**The Draft ranking column.*/
-    RANKING("Ranking", "Draft Ranking", 50, true, SortState.ASC,
+    RANKING("lblRanking", "lblDraftRanking", 50, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -232,7 +232,7 @@ public enum ColumnDef {
                 }
             }),
     /**The quantity column.*/
-    QUANTITY("Qty", "Quantity", 25, true, SortState.ASC,
+    QUANTITY("lblQty", "lblQuantity", 25, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -246,7 +246,7 @@ public enum ColumnDef {
                 }
             }),
     /**The quantity in deck column.*/
-    DECK_QUANTITY("Quantity", "Quantity", 50, true, SortState.ASC,
+    DECK_QUANTITY("lblQuantity", "lblQuantity", 50, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -260,19 +260,19 @@ public enum ColumnDef {
                 }
             }),
     /**The new inventory flag column.*/
-    NEW("New", "New", 30, true, SortState.DESC,
+    NEW("lblNew", "lblNew", 30, true, SortState.DESC,
             null, null), //functions will be set later
     /**The price column.*/
-    PRICE("Price", "Price", 35, true, SortState.DESC,
+    PRICE("lblPrice", "ttPrice", 35, true, SortState.DESC,
             null, null),
     /**The quantity owned column.*/
-    OWNED("Owned", "Owned", 20, true, SortState.ASC,
+    OWNED("lblOwned", "lblOwned", 20, true, SortState.ASC,
             null, null),
     /**The deck name column.*/
-    DECKS("Decks", "Decks", 20, true, SortState.ASC,
+    DECKS("lblDecks", "lblDecks", 20, true, SortState.ASC,
             null, null),
     /**The favorite flag column.*/
-    FAVORITE("", "Favorite", 18, true, SortState.DESC,
+    FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -290,7 +290,7 @@ public enum ColumnDef {
                 }
             }),
     /**The favorite deck flag column.*/
-    DECK_FAVORITE("", "Favorite", 18, true, SortState.DESC,
+    DECK_FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -308,7 +308,7 @@ public enum ColumnDef {
                 }
             }),
     /**The edit/delete deck column.*/
-    DECK_ACTIONS("", "Delete/Edit", 40, true, SortState.DESC,
+    DECK_ACTIONS("", "lblDeleteEdit", 40, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -322,7 +322,7 @@ public enum ColumnDef {
                 }
             }),
     /**The deck folder column.*/
-    DECK_FOLDER("Folder", "Folder", 80, false, SortState.ASC,
+    DECK_FOLDER("lblFolder", "lblFolder", 80, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -336,7 +336,7 @@ public enum ColumnDef {
                 }
             }),
     /**The deck color column.*/
-    DECK_COLOR("Color", "Color", 70, true, SortState.ASC,
+    DECK_COLOR("lblColor", "ttColor", 70, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -350,7 +350,7 @@ public enum ColumnDef {
                 }
             }),
     /**The deck format column.*/
-    DECK_FORMAT("Format", "Formats deck is legal in", 60, false, SortState.DESC,
+    DECK_FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -379,7 +379,7 @@ public enum ColumnDef {
                 }
             }),
     /**The deck edition column, a mystery to us all.*/
-    DECK_EDITION("Set", "Mystery column. We don't know what it does or if that's what it should do.", 38, true, SortState.DESC,
+    DECK_EDITION("lblSet", "lblSetEdition", 38, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -393,7 +393,7 @@ public enum ColumnDef {
                 }
             }),
     /**The main library size column.*/
-    DECK_MAIN("Main", "Main Deck", 30, true, SortState.ASC,
+    DECK_MAIN("lblMain", "ttMain", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -407,7 +407,7 @@ public enum ColumnDef {
                 }
             }),
     /**The sideboard size column.*/
-    DECK_SIDE("Side", "Sideboard", 30, true, SortState.ASC,
+    DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -424,8 +424,11 @@ public enum ColumnDef {
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
             Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
             Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
-        this.shortName = shortName0;
-        this.longName = longName0;
+        final Localizer localizer = Localizer.getInstance();
+
+        if (shortName0 != null && !shortName0.isEmpty()) { this.shortName = localizer.getMessage(shortName0);} else {this.shortName = shortName0;}
+        if (longName0 != null && !longName0.isEmpty()) { this.longName = localizer.getMessage(longName0);} else {this.longName = longName0;}
+
         this.preferredWidth = preferredWidth0;
         this.isWidthFixed = isWidthFixed0;
         this.sortState = sortState0;

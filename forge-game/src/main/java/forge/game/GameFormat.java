@@ -509,6 +509,10 @@ public class GameFormat implements Comparable<GameFormat> {
                     //exclude Digital formats from lists for now
                     continue;
                 }
+                if (gf.getFormatSubType().equals(FormatSubType.Commander)){
+                    //exclude Commander format as other deck checks are not performed here
+                    continue;
+                }
                 if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())
                         && !exhaustive){
                     //exclude duplicate formats - only keep first of e.g. Standard historical

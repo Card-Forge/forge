@@ -720,7 +720,7 @@ public class VLobby implements ILobbyView {
         switch (forGameType) {
         case Constructed:
             decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
-            if (deckChoosers.get(playerWithFocus).getSelectedDeckType().toString().contains("Random")) {
+            if (deckChoosers.get(playerWithFocus).getSelectedDeckType().toString().contains(localizer.getMessage("lblRandom"))) {
                 final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
                 decksFrame.add(cbSingletons, strCheckboxConstraints);
                 decksFrame.add(cbArtifacts, strCheckboxConstraints);
@@ -894,7 +894,7 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%n","\"" +newName + "\"");
         } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
 
         return newName;

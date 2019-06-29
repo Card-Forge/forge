@@ -1,0 +1,7 @@
+Name:Boreal Elemental
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/4
+K:Flying
+S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
+Oracle:Flying\nSpells your opponents cast that target Boreal Elemental cost {2} more to cast.

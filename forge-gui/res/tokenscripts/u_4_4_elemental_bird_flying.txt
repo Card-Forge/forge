@@ -1,0 +1,7 @@
+Name:Elemental Bird
+ManaCost:no cost
+Types:Creature Elemental Bird
+Colors:blue
+PT:4/4
+K:Flying
+Oracle:Flying

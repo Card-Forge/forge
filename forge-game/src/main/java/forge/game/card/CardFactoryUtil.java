@@ -1113,7 +1113,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("CreatureType")) {
-            String[] sqparts = sq[0].split(" ", 2);
+            String[] sqparts = l[0].split(" ", 2);
             final String[] rest = sqparts[1].split(",");
 
             final CardCollectionView cardsInZones = sqparts[0].length() > 12
@@ -1130,6 +1130,23 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
 
+        if (sq[0].contains("ExactManaCost")) {
+            String[] sqparts = l[0].split(" ", 2);
+            final String[] rest = sqparts[1].split(",");
+
+            final CardCollectionView cardsInZones = sqparts[0].length() > 13
+                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(13)))
+                : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
+            final Set<String> manaCost = Sets.newHashSet();
+
+            for (Card card : cards) {
+                manaCost.add(card.getManaCost().getShortString());
+            }
+
+            return doXMath(manaCost.size(), m, c);
+        }
 
         if (sq[0].contains("Hellbent")) {
             return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);

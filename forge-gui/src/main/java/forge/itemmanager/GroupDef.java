@@ -15,10 +15,9 @@ import forge.deck.DeckProxy;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.Localizer;
 
 public enum GroupDef {
-    COLOR("lblColor", getColorGroups(),
+    COLOR("Color", getColorGroups(),
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -37,7 +36,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    COLOR_IDENTITY("lblColorIdentity", getColorGroups(),
+    COLOR_IDENTITY("Color Identity", getColorGroups(),
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -56,7 +55,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    SET("lblSet", getSetGroups(),
+    SET("Set", getSetGroups(),
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -75,7 +74,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    DEFAULT("lblDefault",
+    DEFAULT("Default",
             new String[] { "Creatures", "Spells", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
@@ -105,7 +104,7 @@ public enum GroupDef {
                 }
             }),
 
-    CARD_TYPE("lblType",
+    CARD_TYPE("Type",
             new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant" },
             new Function<Integer, ColumnDef>() {
                 @Override
@@ -149,7 +148,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    PW_DECK_SORT("lblPlaneswalkerDeckSort",
+    PW_DECK_SORT("Planeswalker Deck Sort",
             new String[] { "Planeswalker", "Rares", "Creature", "Land", "Other Spells" },
             new Function<Integer, ColumnDef>() {
                 @Override
@@ -179,8 +178,8 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    CARD_RARITY("lblRarity",
-            new String[] {"Mythic Rares", "Rares", "Uncommons", "Commons", "Basic Lands"},
+    CARD_RARITY("Rarity",
+            new String[] { "Mythic Rares", "Rares", "Uncommons", "Commons", "Basic Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -192,18 +191,18 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         switch (((PaperCard) item).getRarity()) {
-                        case MythicRare:
-                            return 0;
-                        case Rare:
-                            return 1;
-                        case Uncommon:
-                            return 2;
-                        case Common:
-                            return 3;
-                        case BasicLand:
-                            return 4;
-                        default:
-                            return -1; //show Special and Unknown in "Other" group
+                            case MythicRare:
+                                return 0;
+                            case Rare:
+                                return 1;
+                            case Uncommon:
+                                return 2;
+                            case Common:
+                                return 3;
+                            case BasicLand:
+                                return 4;
+                            default:
+                                return -1; //show Special and Unknown in "Other" group
                         }
                     }
                     return -1;
@@ -211,8 +210,7 @@ public enum GroupDef {
             });
 
     GroupDef(String name0, String[] groups0, Function<Integer, ColumnDef> fnGetPileByOverride0, Function<InventoryItem, Integer> fnGroupItem0) {
-        final Localizer localizer = Localizer.getInstance();
-        this.name = localizer.getMessage(name0);
+        this.name = name0;
         this.groups = groups0;
         this.fnGetPileByOverride = fnGetPileByOverride0;
         this.fnGroupItem = fnGroupItem0;
@@ -249,15 +247,8 @@ public enum GroupDef {
     }
 
     private static String[] getColorGroups() {
-        final Localizer localizer = Localizer.getInstance();
-        String white = new String(localizer.getMessage("lblWhite"));
-        String blue = new String(localizer.getMessage("lblBlue"));
-        String black = new String(localizer.getMessage("lblBlack"));
-        String green = new String(localizer.getMessage("lblGreen"));
-        String multicolor = new String(localizer.getMessage("lblMulticolor"));
-        String colorless = new String(localizer.getMessage("lblColorless"));
         //TODO: Support breaking up Multicolor into separate groups for each color combination
-        return new String[] {white,blue,black,green,multicolor,colorless };
+        return new String[] { "White", "Blue", "Black", "Red", "Green", "Multicolor", "Colorless" };
     }
 
     private static Integer getColorGroup(ColorSet color) {
