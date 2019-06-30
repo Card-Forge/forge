@@ -797,7 +797,7 @@ public class ComputerUtil {
 
         final int max = Math.min(remaining.size(), amount);
 
-        if (exceptSelf) {
+        if (exceptSelf && max < remaining.size()) {
             removedSelf = remaining.remove(source.getHostCard());
         }
 
