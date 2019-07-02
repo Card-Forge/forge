@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/06/119.-WAR9-2.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start at the beginning of your upkeep. Due to your cast Rubble Reading and Run Aground, you know that the second card of your library is Electrodominance and the first card of your library is Run Aground; the first card of opponent's library is Benalish Marshal. Forbidding Spirit entered the battlefield on your opponent's last turn.
+[state]
+humanlife=20
+ailife=20
+turn=3
+activeplayer=human
+activephase=UPKEEP
+humanhand=Finale of Promise;Release to the Wind;Maximize Velocity;Act of Treason
+humanlibrary=Run Aground;Electrodominance;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humangraveyard=Thud;Rubble Reading;Run Aground;Beacon Bolt
+humanbattlefield=God-Eternal Kefnet;Etali, Primal Storm;Jaya, Venerated Firemage|Counters:LOYALTY=3;Dreadhorde Arcanist;Emergence Zone;Island;Island;Island;Island;Island;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+ailibrary=Benalish Marshal;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Forbidding Spirit;Teferi, Time Raveler|Counters:LOYALTY=6;Lavinia, Azorius Renegade;Raff Capashen, Ship's Mage
+aiprecast=Forbidding Spirit:TempAttackTax
