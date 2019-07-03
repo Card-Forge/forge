@@ -1042,7 +1042,7 @@ public final class CMatchUI
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        return (List<GameEntityView>) order(title,"Selected", min, max, optionList, null, null, false);
+        return (List<GameEntityView>) order(title,"Selected", optionList.size() - max, optionList.size() - min, optionList, null, null, false);
     }
 
     @Override
