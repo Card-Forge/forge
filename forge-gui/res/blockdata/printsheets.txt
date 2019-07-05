@@ -1481,20 +1481,46 @@ Vivien, Nature's Avenger
 Ethereal Elk
 Gnarlback Rhino
 Vivien's Crocodile
+Angelic Guardian
+Bastion Enforcer
+Concordia Pegasus
+Haazda Officer
 Impassioned Orator
 Imperial Outrider
+Ironclad Krovod
+Prowling Caracal
 Serra's Guardian
+Show of Valor
+Siege Mastodon
+Take Vengeance
+Trusted Pegasus
+Coral Merfolk
+Phantom Warrior
 Riddlemaster Sphinx
+Snapping Drake
+Bartizan Bats
+Bogstomper
 Dark Remedy
+Disentomb
 Gravewaker
+Skeleton Archer
 Sorin's Thirst
 Vampire Opportunist
+Walking Corpse
 Engulfing Eruption
+Fearless Halberdier
+Goblin Assailant
+Hostile Minotaur
 Immortal Phoenix
 Nimble Birdsticker
 Rubblebelt Recluse
 Shivan Dragon
+Volcanic Dragon
 Aggressive Mammoth
 Bristling Boar
+Canopy Spider
+Frilled Sandwalla
+Oakenform
 Prized Unicorn
 Titanic Growth
+Woodland Mystic
