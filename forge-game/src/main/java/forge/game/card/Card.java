@@ -1905,13 +1905,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         sb.append(keywordsToText(getUnhiddenKeywords(state)));
 
-        // Process replacement effects first so that ETB tabbed can be printed
+        // Process replacement effects first so that "enters the battlefield tapped"
+        // and "as ~ enters the battlefield, choose...", etc can be printed
         // here. The rest will be printed later.
         StringBuilder replacementEffects = new StringBuilder();
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
                 String text = replacementEffect.toString();
-                if (text.equals("CARDNAME enters the battlefield tapped.")) {
+                if (text.contains("enters the battlefield")) {
                     sb.append(text).append("\r\n");
                 } else {
                     replacementEffects.append(text).append("\r\n");
