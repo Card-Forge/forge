@@ -309,38 +309,49 @@ Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Sec
 299 R Ethereal Elk
 300 U Gnarlback Rhino
 301 C Vivien's Crocodile
-
-C Impassioned Orator
-
+302 R Angelic Guardian
+303 C Bastion Enforcer
+304 C Concordia Pegasus
+305 C Haazda Officer
+306 C Impassioned Orator
 307 C Imperial Outrider
-
+308 C Ironclad Krovod
+309 C Prowling Caracal
 310 R Serra's Guardian
-
+311 C Show of Valor
+312 C Siege Mastodon
+313 C Take Vengeance
+314 C Trusted Pegasus
+315 C Coral Merfolk
+316 C Phantom Warrior
 317 R Riddlemaster Sphinx
-
+318 C Snapping Drake
+319 C Bartizan Bats
+320 C Bogstomper
 321 C Dark Remedy
-
+322 C Disentomb
 323 R Gravewaker
-
-C Sorin's Thirst
-
-C Vampire Opportunist
-
+324 C Skeleton Archer
+325 C Sorin's Thirst
+326 C Vampire Opportunist
+327 C Walking Corpse
 328 C Engulfing Eruption
-
+329 C Fearless Halberdier
+330 C Goblin Assailant
+331 C Hostile Minotaur
 332 R Immortal Phoenix
 333 C Nimble Birdsticker
 334 C Rubblebelt Recluse
-
-R Shivan Dragon
-
+335 R Shivan Dragon
+336 U Volcanic Dragon
 337 R Aggressive Mammoth
 338 C Bristling Boar
-
+339 C Canopy Spider
+340 C Frilled Sandwalla
+341 C Oakenform
 342 C Prized Unicorn
-
-C Titanic Growth
-
+343 C Titanic Growth
+344 C Woodland Mystic
 [tokens]
 ajanis_pridemate
 b_5_5_demon_flying
