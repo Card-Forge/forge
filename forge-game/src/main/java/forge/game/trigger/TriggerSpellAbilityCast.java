@@ -32,7 +32,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
@@ -213,18 +212,6 @@ public class TriggerSpellAbilityCast extends Trigger {
             final Cost cost = (Cost) (runParams2.get("Cost"));
             if (!cost.getTotalMana().isZero()) {
                 return false;
-            }
-        }
-
-        if (hasParam("Conspire")) {
-            if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
-                return false;
-            }
-            if (spellAbility.getConspireInstances() == 0) {
-                return false;
-            } else {
-                spellAbility.subtractConspireInstance();
-                //System.out.println("Conspire instances left = " + spellAbility.getConspireInstances());
             }
         }
 

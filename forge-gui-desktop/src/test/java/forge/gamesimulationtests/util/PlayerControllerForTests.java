@@ -29,6 +29,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -693,6 +694,13 @@ public class PlayerControllerForTests extends PlayerController {
     public boolean confirmMulliganScry(Player p) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
+            int max) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
