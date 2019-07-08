@@ -29,7 +29,9 @@ import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.spellability.*;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -250,11 +252,6 @@ public final class GameActionUtil {
             if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
-            } else if (keyword.equals("Conspire")) {
-                final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
-            "untapped creature you control that shares a color with " + source.getName() + ">";
-                final Cost cost = new Cost(conspireCost, false);
-                costs.add(new OptionalCostValue(OptionalCost.Conspire, cost));
             } else if (keyword.startsWith("Entwine")) {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
@@ -301,15 +298,11 @@ public final class GameActionUtil {
         }
         final SpellAbility result = sa.copy();
         for (OptionalCostValue v : list) {
-            // need to copy cost, otherwise it does alter the original
-            result.setPayCosts(result.getPayCosts().copy().add(v.getCost()));
+            result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
             
             // add some extra logic, try to move it to other parts
             switch (v.getType()) {
-            case Conspire:
-                result.addConspireInstance();
-                break;
             case Retrace:
             case Jumpstart:
                 result.getRestrictions().setZone(ZoneType.Graveyard);
@@ -363,6 +356,71 @@ public final class GameActionUtil {
         return abilities;
     }
     
+    public static SpellAbility addExtraKeywordCost(final SpellAbility sa) {
+        if (!sa.isSpell() || sa.isCopied()) {
+            return sa;
+        }
+        SpellAbility result = null;
+        final Card host = sa.getHostCard();
+        final PlayerController pc = sa.getActivatingPlayer().getController();
+
+        host.getGame().getAction().checkStaticAbilities(false);
+
+        boolean reset = false;
+
+        for (KeywordInterface ki : host.getKeywords()) {
+            final String o = ki.getOriginal();
+            if (o.equals("Conspire")) {
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
+                        "untapped creature you control that shares a color with " + host.getName() + ">";
+                    final Cost cost = new Cost(conspireCost, false);
+                    String str = "Pay for Conspire? " + cost.toSimpleString();
+
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                    tr.setSVar("Conspire", v ? "1" : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
+            } else if (o.startsWith("Replicate")) {
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String costStr = o.split(":")[1];
+                    final Cost cost = new Cost(costStr, false);
+
+                    String str = "Choose Amount for Replicate: " + cost.toSimpleString();
+
+                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                    tr.setSVar("ReplicateAmount", String.valueOf(v));
+                    tr.getOverridingAbility().setSVar("ReplicateAmount", String.valueOf(v));
+
+                    for (int i = 0; i < v; i++) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
+            }
+        }
+
+        // reset active Trigger
+        if (reset) {
+            host.getGame().getTriggerHandler().resetActiveTriggers(false);
+        }
+
+        return result != null ? result : sa;
+    }
+
     private static boolean hasUrzaLands(final Player p) {
         final CardCollectionView landsControlled = p.getCardsIn(ZoneType.Battlefield);
         return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))

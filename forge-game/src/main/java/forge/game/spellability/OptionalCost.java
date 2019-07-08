@@ -5,7 +5,6 @@ package forge.game.spellability;
  *
  */
 public enum OptionalCost {
-    Conspire("Conspire"),
     Buyback("Buyback"),
     Entwine("Entwine"),
     Kicker1("Kicker"),

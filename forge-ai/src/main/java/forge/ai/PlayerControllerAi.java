@@ -25,6 +25,7 @@ import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -1252,5 +1253,26 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmMulliganScry(Player p) {
         // Always true?
         return true;
+    }
+
+    @Override
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
+            int max) {
+        // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
+        int chosenAmount = 0;
+
+        Cost costSoFar = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+
+        for (int i = 0; i < max; i++) {
+            costSoFar.add(cost);
+            SpellAbility fullCostSa = sa.copyWithDefinedCost(costSoFar);
+            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+                chosenAmount++;
+            } else {
+                break;
+            }
+        }
+
+        return chosenAmount;
     }
 }

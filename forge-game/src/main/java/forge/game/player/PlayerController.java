@@ -19,6 +19,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.replacement.ReplacementEffect;
@@ -47,7 +48,6 @@ public abstract class PlayerController {
         DeclareBlocker,
         Echo,
         Multikicker,
-        Replicate,
         CumulativeUpkeep,
     }
 
@@ -181,6 +181,11 @@ public abstract class PlayerController {
 
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
+
+    public abstract int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max);
+    public boolean addKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt) {
+        return chooseNumberForKeywordCost(sa, cost, keyword, prompt, 1) == 1;
+    }
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
     public abstract int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer);

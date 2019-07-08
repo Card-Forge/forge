@@ -23,6 +23,7 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -53,13 +54,11 @@ import java.util.Map;
  */
 public class HumanPlaySpellAbility {
     private final PlayerControllerHuman controller;
-    private final SpellAbility ability;
-    private final CostPayment payment;
+    private SpellAbility ability;
 
-    public HumanPlaySpellAbility(final PlayerControllerHuman controller0, final SpellAbility ability0, final CostPayment payment0) {
+    public HumanPlaySpellAbility(final PlayerControllerHuman controller0, final SpellAbility ability0) {
         controller = controller0;
         ability = ability0;
-        payment = payment0;
     }
 
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
@@ -116,6 +115,11 @@ public class HumanPlaySpellAbility {
             ability.resetPaidHash();
         }
 
+        ability = GameActionUtil.addExtraKeywordCost(ability);
+
+        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        CostPayment payment = new CostPayment(abCost, ability);
+
         // TODO Apply this to the SAStackInstance instead of the Player
         if (manaTypeConversion) {
             AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
@@ -155,7 +159,7 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, fromState, zonePosition);
+                rollbackAbility(fromZone, fromState, zonePosition, payment);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
@@ -240,7 +244,7 @@ public class HumanPlaySpellAbility {
         }
     }
 
-    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition) {
+    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition, CostPayment payment) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 

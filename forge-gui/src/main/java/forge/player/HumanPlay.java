@@ -103,10 +103,8 @@ public class HumanPlay {
 
         // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getHostCard() +  " new = " + newAbility);
         if (newAbility) {
-            Cost abCost = sa.getPayCosts() == null ? new Cost("0", sa.isAbility()) : sa.getPayCosts();
-            CostPayment payment = new CostPayment(abCost, sa);
 
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
             if (!req.playAbility(true, false, false)) {
                 if (flippedToCast && !castFaceDown) {
                     source.turnFaceDown(true);
@@ -199,9 +197,8 @@ public class HumanPlay {
                 }
                 sa = AbilityUtils.addSpliceEffects(sa);
             }
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
             req.playAbility(mayChooseNewTargets, true, false);
         }
         else {
@@ -231,7 +228,7 @@ public class HumanPlay {
         sa.setActivatingPlayer(player);
 
         if (sa.getPayCosts() != null) {
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, new CostPayment(sa.getPayCosts(), sa));
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
 
             req.playAbility(!useOldTargets, false, true);
         }

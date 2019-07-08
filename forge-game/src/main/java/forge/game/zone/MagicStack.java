@@ -38,7 +38,6 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -58,7 +57,6 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
@@ -319,35 +317,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                 // The ability is added to stack HERE
                 si = push(sp);
-
-                if (sp.isSpell() && (source.hasStartOfKeyword("Replicate")
-                        || ((source.isInstant() || source.isSorcery()) && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
-                                CardPredicates.hasKeyword("Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost."))))) {
-                    Integer magnitude = sp.getSVarInt("Replicate");
-                    if (magnitude == null) {
-                        magnitude = 0;
-                        final Cost costReplicate = new Cost(source.getManaCost(), false);
-                        boolean hasPaid = false;
-                        int replicateCMC = source.getManaCost().getCMC();
-                        do {
-                            String prompt = TextUtil.concatWithSpace("Replicate for", source.toString(),"\r\nTimes Replicated:", magnitude.toString(),"\r\n");
-                            hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
-                            if (hasPaid) {
-                                magnitude++;
-                                totManaSpent += replicateCMC;
-                            }
-                        } while (hasPaid);
-                    }
-
-                    // Replicate Trigger
-                    String effect = TextUtil.concatWithSpace("DB$ CopySpellAbility | Cost$ 0 | Defined$ Parent | Amount$", magnitude.toString());
-                    AbilitySub sa = (AbilitySub) AbilityFactory.getAbility(effect, source);
-                    sa.setParent(sp);
-                    sa.setDescription("Replicate - " + source);
-                    sa.setTrigger(true);
-                    sa.setCopied(true);
-                    addSimultaneousStackEntry(sa);
-                }
             }
         }
 
