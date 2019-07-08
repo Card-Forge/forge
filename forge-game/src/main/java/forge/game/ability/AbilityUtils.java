@@ -1843,7 +1843,11 @@ public class AbilityUtils {
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
-        
+
+        if (!sa.isSpell() || source.isCopiedSpell()) {
+            return sa;
+        }
+
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
 
         if (hand.isEmpty()) {
