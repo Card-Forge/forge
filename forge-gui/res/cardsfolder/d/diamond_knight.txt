@@ -8,4 +8,5 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell of the chosen color, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.ChosenColor
+DeckHas:Ability$Counters
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nAs Diamond Knight enters the battlefield, choose a color.\nWhenever you cast a spell of the chosen color, put a +1/+1 counter on Diamond Knight.

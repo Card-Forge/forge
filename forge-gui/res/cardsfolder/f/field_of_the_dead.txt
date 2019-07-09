@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE7 | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie m20
 SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
+DeckHas:Ability$Token
 Oracle:Field of the Dead enters the battlefield tapped.\n{T}: Add {C}.\nWhenever Field of the Dead or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
