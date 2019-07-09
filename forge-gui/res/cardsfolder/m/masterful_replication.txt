@@ -8,4 +8,5 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Artifact.YouCtrl+IsNotImprinted | Re
 SVar:DBClone:DB$ Clone | Defined$ Imprinted | CloneTarget$ Remembered | Duration$ UntilEndOfTurn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AI:RemoveDeck:All
+DeckHas:Ability$Token
 Oracle:Choose one —\n• Create two 3/3 colorless Golem artifact creature tokens.\n• Choose target artifact you control. Each other artifact you control becomes a copy of that artifact until end of turn.
