@@ -6,4 +6,5 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | References$ X | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if an opponent lost life this turn, put a +1/+1 counter on CARDNAME. (Damage causes loss of life.)
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Counters
 Oracle:Flying\nAt the beginning of your upkeep, if an opponent lost life this turn, put a +1/+1 counter on Savage Gorger. (Damage causes loss of life.)

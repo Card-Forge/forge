@@ -1,5 +1,2 @@
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
-
-- Random Modern World -
-Just like the random standard world, there is now also a random modern world for quest mode that includes randomly generated deck archetypes and is limited to the modern card pool

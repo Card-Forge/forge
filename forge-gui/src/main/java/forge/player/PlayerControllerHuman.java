@@ -30,6 +30,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.*;
@@ -2928,6 +2929,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmMulliganScry(Player p) {
         return InputConfirm.confirm(this, (SpellAbility)null, "Do you want to scry?");
+    }
+
+    @Override
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
+            int max) {
+        if (max <= 0) {
+            return 0;
+        }
+        if (max == 1) {
+            return InputConfirm.confirm(this, sa, prompt) ? 1 : 0;
+        }
+
+        Integer v = getGui().getInteger(prompt, 0, max, 9);
+        return v == null ? 0 : v.intValue();
     }
 
 }

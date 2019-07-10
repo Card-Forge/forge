@@ -2361,11 +2361,12 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
             inst.addTrigger(parsedTrigReturn);
         } else if (keyword.equals("Conspire")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1";
 
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             conspireTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
+            conspireTrigger.setSVar("Conspire", "0");
             inst.addTrigger(conspireTrigger);
         } else if (keyword.startsWith("Cumulative upkeep")) {
             final String[] k = keyword.split(":");
@@ -2942,6 +2943,17 @@ public class CardFactoryUtil {
                         + " exile CARDNAME. | Secondary$ True";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             inst.addTrigger(myTrigger);
+        } else if (keyword.startsWith("Replicate")) {
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ ReplicateAmount | Secondary$ True | TriggerDescription$ Copy CARDNAME for each time you paid its replicate cost";
+            final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ ReplicateAmount";
+
+            final Trigger replicateTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
+            final SpellAbility replicateAbility = AbilityFactory.getAbility(abString, card);
+            replicateAbility.setSVar("ReplicateAmount", "0");
+            replicateTrigger.setOverridingAbility(replicateAbility);
+            replicateTrigger.setSVar("ReplicateAmount", "0");
+            inst.addTrigger(replicateTrigger);
+
         } else if (keyword.startsWith("Ripple")) {
             final String[] k = keyword.split(":");
             final String num = k[1];
@@ -4225,9 +4237,6 @@ public class CardFactoryUtil {
 
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
-            
-        } else if (keyword.startsWith("Replicate")) {
-            card.getFirstSpellAbility().addAnnounceVar("Replicate");
         } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

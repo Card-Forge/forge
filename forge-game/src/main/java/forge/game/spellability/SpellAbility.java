@@ -144,7 +144,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardCollection tappedForConvoke = new CardCollection();
     private Card sacrificedAsOffering = null;
     private Card sacrificedAsEmerge = null;
-    private int conspireInstances = 0;
 
     private AbilityManaPart manaPart = null;
 
@@ -301,9 +300,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     
     public boolean canPlayWithOptionalCost(OptionalCostValue opt) {
-        SpellAbility saCopy = this.copy();
-        saCopy = GameActionUtil.addOptionalCosts(saCopy, Lists.newArrayList(opt));
-        return saCopy.canPlay();
+        return GameActionUtil.addOptionalCosts(this, Lists.newArrayList(opt)).canPlay();
     }
 
     public boolean isPossible() {
@@ -1699,19 +1696,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
     }
-
-    // Methods enabling multiple instances of conspire
-    public void addConspireInstance() {
-        conspireInstances++;
-    }
-
-    public void subtractConspireInstance() {
-        conspireInstances--;
-    }
-
-    public int getConspireInstances() {
-        return conspireInstances;
-    } // End of Conspire methods
 
     public boolean isCumulativeupkeep() {
         return cumulativeupkeep;

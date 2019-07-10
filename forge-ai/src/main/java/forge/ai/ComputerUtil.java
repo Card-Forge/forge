@@ -99,6 +99,8 @@ public class ComputerUtil {
             sa.resetPaidHash();
         }
 
+        sa = GameActionUtil.addExtraKeywordCost(sa);
+
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
         }
@@ -208,9 +210,9 @@ public class ComputerUtil {
     }
 
     // this is used for AI's counterspells
-    public static final boolean playStack(final SpellAbility sa, final Player ai, final Game game) {
+    public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
-        if (!ComputerUtilCost.canPayCost(sa, ai)) 
+        if (!ComputerUtilCost.canPayCost(sa, ai))
             return false;
             
         final Card source = sa.getHostCard();
@@ -220,6 +222,9 @@ public class ComputerUtil {
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
+
+        sa = GameActionUtil.addExtraKeywordCost(sa);
+
         final Cost cost = sa.getPayCosts();
         if (cost == null) {
             ComputerUtilMana.payManaCost(ai, sa);
@@ -249,12 +254,14 @@ public class ComputerUtil {
     }
 
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
-        final SpellAbility newSA = sa.copyWithNoManaCost();
+        SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
         if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA)) {
             return false;
         }
+
+        newSA = GameActionUtil.addExtraKeywordCost(newSA);
 
         final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
@@ -275,7 +282,7 @@ public class ComputerUtil {
         return true;
     }
 
-    public static final void playNoStack(final Player ai, final SpellAbility sa, final Game game) {
+    public static final void playNoStack(final Player ai, SpellAbility sa, final Game game) {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
@@ -286,6 +293,8 @@ public class ComputerUtil {
                 sa.setLastStateGraveyard(game.getLastStateGraveyard());
                 sa.setHostCard(game.getAction().moveToStack(source, sa));
             }
+
+            sa = GameActionUtil.addExtraKeywordCost(sa);
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
