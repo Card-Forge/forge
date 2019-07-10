@@ -1524,3 +1524,33 @@ Oakenform
 Prized Unicorn
 Titanic Growth
 Woodland Mystic
+
+Bloodfell Caves
+Blossoming Sands
+Dismal Backwater
+Jungle Hollow
+Rugged Highlands
+Scoured Barrens
+Swiftwater Cliffs
+Thornwood Falls
+Tranquil Cove
+Wind-Scarred Crag
+Evolving Wilds
+
+[M20 Lands]
+5 Bloodfell Caves|M20
+5 Blossoming Sands|M20
+5 Dismal Backwater|M20
+5 Jungle Hollow|M20
+5 Rugged Highlands|M20
+5 Scoured Barrens|M20
+5 Swiftwater Cliffs|M20
+5 Thornwood Falls|M20
+5 Tranquil Cove|M20
+5 Wind-Scarred Crag|M20
+5 Evolving Wilds
+13 Forest|M20
+13 Island|M20
+13 Mountain|M20
+13 Plains|M20
+13 Swamp|M20
