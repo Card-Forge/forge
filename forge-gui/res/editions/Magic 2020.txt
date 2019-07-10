@@ -5,7 +5,7 @@ Name=Core Set 2020
 MciCode=m20
 Type=Core
 BoosterCovers=3
-Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 BasicLand
+Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 fromSheet("M20 Lands")
 
 [cards]
 1 C Aerial Assault
