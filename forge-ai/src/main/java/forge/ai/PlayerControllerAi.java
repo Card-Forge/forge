@@ -1275,4 +1275,10 @@ public class PlayerControllerAi extends PlayerController {
 
         return chosenAmount;
     }
+
+    @Override
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+        // TODO Auto-generated method stub
+        return new CardCollection();
+    }
 }

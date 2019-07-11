@@ -2945,5 +2945,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return v == null ? 0 : v.intValue();
     }
 
+    @Override
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+        CardCollection result = new CardCollection();
+        for (Map.Entry<String, CardCollection> e : validMap.entrySet()) {
+            result.addAll(chooseCardsForEffect(e.getValue(), sa, title + " " + e.getKey(), 0, 1, true));
+        }
+        return result;
+    }
+
 }
 

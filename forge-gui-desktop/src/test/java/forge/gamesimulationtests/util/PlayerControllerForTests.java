@@ -703,4 +703,9 @@ public class PlayerControllerForTests extends PlayerController {
         return 0;
     }
 
+    @Override
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+        // TODO Auto-generated method stub
+        return new CardCollection();
+    }
 }
