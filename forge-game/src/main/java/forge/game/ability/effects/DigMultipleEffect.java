@@ -81,7 +81,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
             CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, "Choose cards");
 
-            if (chosen.isEmpty()) {
+            if (!chosen.isEmpty()) {
                 game.getAction().reveal(chosen, chooser, true,
                     chooser + " picked " + (chosen.size() == 1 ? "this card" : "these cards") + " from ");
             }
