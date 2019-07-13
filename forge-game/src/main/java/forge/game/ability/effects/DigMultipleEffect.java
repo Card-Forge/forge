@@ -1,22 +1,17 @@
 package forge.game.ability.effects;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
@@ -62,8 +57,12 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
             rest.addAll(top);
 
-            // reveal cards first
-            game.getAction().revealTo(top, player);
+            if (sa.hasParam("Reveal")) {
+                game.getAction().reveal(top, p, false);
+            } else {
+                // reveal cards first
+                game.getAction().revealTo(top, player);
+            }
 
             Map<String, CardCollection> validMap = Maps.newHashMap();
 
