@@ -66,8 +66,6 @@ public class DigEffect extends SpellAbilityEffect {
         int destZone1ChangeNum = 1;
         final boolean mitosis = sa.hasParam("Mitosis");
         String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
-        //andOrValid is for cards with "creature card and/or a land card"
-        String andOrValid = sa.hasParam("AndOrValid") ? sa.getParam("AndOrValid") : "";
         final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
@@ -173,28 +171,18 @@ public class DigEffect extends SpellAbilityEffect {
 
                 if (!noMove) {
                     CardCollection movedCards;
-                    CardCollection andOrCards;
                     for (final Card c : top) {
                         rest.add(c);
                     }
                     CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
-                        andOrCards = new CardCollection();
                     }
                     else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
                         valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host, sa);
-                        if (!andOrValid.equals("")) {
-                            andOrCards = CardLists.getValidCards(top, andOrValid.split(","), host.getController(), host, sa);
-                            andOrCards.removeAll((Collection<?>)valid);
-                            valid.addAll(andOrCards);  //pfps need to add andOr cards to valid to have set of all valid cards set up
-                        }
-                        else {
-                            andOrCards = new CardCollection();
-                        }
                     }
                     else {
                         // If all the cards are valid choices, no need for a separate reveal dialog to the chooser. pfps??
@@ -202,7 +190,6 @@ public class DigEffect extends SpellAbilityEffect {
                             delayedReveal = null;
                         }
                         valid = top;
-                        andOrCards = new CardCollection();
                     }
 
                     if (forceRevealToController) {
@@ -282,16 +269,13 @@ public class DigEffect extends SpellAbilityEffect {
                                 chooser.getController().tempShowCards(top);
                             }
                             List<Card> chosen = new ArrayList<Card>();
-                            if (!andOrValid.equals("")) {
-                                valid.removeAll(andOrCards); //pfps remove andOr cards to get two two choices set up correctly
-                                chosen = chooser.getController().chooseFromTwoListsForEffect(valid, andOrCards, optional, delayedReveal, sa, prompt, p);
-                            } else {
-                                int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
-                                int min = (anyNumber || optional) ? 0 : max;
-                                if ( max > 0 ) { // if max is 0 don't make a choice
-                                    chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
-                                }
+
+                            int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
+                            int min = (anyNumber || optional) ? 0 : max;
+                            if ( max > 0 ) { // if max is 0 don't make a choice
+                                chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
                             }
+
                             chooser.getController().endTempShowCards();
                             movedCards.addAll(chosen);
                         }

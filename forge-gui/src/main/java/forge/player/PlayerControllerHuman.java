@@ -512,41 +512,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(final FCollectionView<T> optionList1, final FCollectionView<T> optionList2,
-			      boolean optional, final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
-        // Human is supposed to read the message and understand from it what to choose
-        // useful details for debugging problems with the mass select logic
-        Sentry.getContext().addExtra("Card", sa.getCardView().toString());
-        Sentry.getContext().addExtra("SpellAbility", sa.toString());
-
-        if (delayedReveal != null) {
-            tempShow(delayedReveal.getCards());
-        }
-
-    	tempShow(optionList1);
-    	tempShow(optionList2);
-
-        if (useSelectCardsInput(optionList1) && useSelectCardsInput(optionList2)) {
-            final InputSelectFromTwoLists<T> input = new InputSelectFromTwoLists<T>(this, optional, optionList1, optionList2, sa);
-            input.setCancelAllowed(optional);
-            input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
-            input.showAndWait();
-    	    endTempShowCards();
-            return (List<T>) input.getSelected();
-    	}
-
-        final GameEntityView result1 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList1), null, optional);
-        final GameEntityView result2 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList2), null, (result1==null)?optional:true);
-        endTempShowCards();
-	    List<T> results = new ArrayList<>();
-    	GameEntity entity1 = convertToEntity(result1);
-    	if (entity1!=null) { results.add((T) entity1); }
-       	GameEntity entity2 = convertToEntity(result2);
-    	if (entity2!=null) { results.add((T) entity2); }
-        return results;
-    }
-
-    @Override
     public int chooseNumber(final SpellAbility sa, final String title, final int min, final int max) {
         if (min >= max) {
             return min;

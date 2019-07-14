@@ -182,20 +182,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2,
-	       boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
-	if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
-        }
-	T selected1 = chooseSingleEntityForEffect(optionList1, null, sa, title, optional, targetedPlayer);
-	T selected2 = chooseSingleEntityForEffect(optionList2, null, sa, title, optional || selected1!=null, targetedPlayer);
-	List<T> selecteds = new ArrayList<T>();
-	if ( selected1 != null ) { selecteds.add(selected1); }
-	if ( selected2 != null ) { selecteds.add(selected2); }
-	return selecteds;
-    }
-
-    @Override
     public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title,
             Map<String, Object> params) {
         ApiType api = sa.getApi();
