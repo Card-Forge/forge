@@ -2125,7 +2125,7 @@ public class CardFactoryUtil {
     }
 
 
-    private static ReplacementEffect makeEtbCounter(final String kw, final Card card, final boolean intrinsic)
+    public static ReplacementEffect makeEtbCounter(final String kw, final Card card, final boolean intrinsic)
     {
         String parse = kw;
 
