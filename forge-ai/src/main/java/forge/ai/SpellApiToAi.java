@@ -62,6 +62,7 @@ public enum SpellApiToAi {
             .put(ApiType.Destroy, DestroyAi.class)
             .put(ApiType.DestroyAll, DestroyAllAi.class)
             .put(ApiType.Dig, DigAi.class)
+            .put(ApiType.DigMultiple, DigMultipleAi.class)
             .put(ApiType.DigUntil, DigUntilAi.class)
             .put(ApiType.Discard, DiscardAi.class)
             .put(ApiType.DrainMana, DrainManaAi.class)

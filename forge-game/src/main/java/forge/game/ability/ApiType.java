@@ -60,6 +60,7 @@ public enum ApiType {
     Destroy (DestroyEffect.class),
     DestroyAll (DestroyAllEffect.class),
     Dig (DigEffect.class),
+    DigMultiple (DigMultipleEffect.class),
     DigUntil (DigUntilEffect.class),
     Discard (DiscardEffect.class),
     DrainMana (DrainManaEffect.class),
