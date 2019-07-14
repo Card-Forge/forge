@@ -115,7 +115,6 @@ public abstract class PlayerController {
             Map<String, Object> params);
 
     public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
-    public abstract <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
@@ -273,4 +272,7 @@ public abstract class PlayerController {
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
 
     public abstract boolean confirmMulliganScry(final Player p);
+
+    public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
+            SpellAbility sa, String title);
 }
