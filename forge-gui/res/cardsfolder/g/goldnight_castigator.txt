@@ -4,8 +4,8 @@ Types:Creature Angel
 PT:4/9
 K:Flying
 K:Haste
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ You | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to you, it deals double that damage to you instead.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Card.Self | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ You | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to you, it deals double that damage to you instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Card.Self | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_castigator.jpg
