@@ -28,13 +28,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
@@ -43,8 +41,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardPredicates;
-import forge.game.cost.Cost;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -53,10 +49,6 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
@@ -280,41 +272,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 si = push(sp);
             }
             else {
-                if (sp.isSpell() && source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
-                                " you may pay any amount of mana. If you do, that creature enters " +
-                                "the battlefield with that many additional +1/+1 counters on it."))) {
-                    final Cost costPseudoKicker = new Cost(ManaCost.ONE, false);
-                    boolean hasPaid = false;
-                    do {
-                        int mkMagnitude = source.getPseudoKickerMagnitude();
-                        String prompt = TextUtil.concatWithSpace("Additional Cost for",source.toString(),"\r\nTimes Kicked:",  String.valueOf(mkMagnitude),"\r\n");
-                        hasPaid = activator.getController().payManaOptional(source, costPseudoKicker, sp, prompt, ManaPaymentPurpose.Multikicker);
-                        if (hasPaid) {
-                            source.addPseudoMultiKickerMagnitude(1);
-                            totManaSpent += 1;
-                        }
-                    } while (hasPaid);
-                    if (source.getPseudoKickerMagnitude() > 0) {
-                        String abStr = "DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ P1P1 | CounterNum$ "
-                                + source.getPseudoKickerMagnitude() + " | SubAbility$ ChorusDBETBCounters";
-                        String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                                + "| Defined$ ReplacedCard";
-                        
-                        source.setSVar("ChorusETBCounters", abStr);
-                        source.setSVar("ChorusDBETBCounters", dbStr);
-
-                        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                                + "| ReplaceWith$ ChorusETBCounters | Secondary$ True | Description$ CARDNAME"
-                                + " enters the battlefield with " + source.getPseudoKickerMagnitude() + " +1/+1 counters.";
-
-                        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, source, false);
-                        re.setLayer(ReplacementLayer.Other);
-
-                        source.addReplacementEffect(re);
-                    }
-                }
-
                 // The ability is added to stack HERE
                 si = push(sp);
             }
