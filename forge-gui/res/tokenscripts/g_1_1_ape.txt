@@ -1,0 +1,6 @@
+Name:Ape
+ManaCost:no cost
+Types:Creature Ape
+Colors:green
+PT:1/1
+Oracle:
