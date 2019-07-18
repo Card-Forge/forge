@@ -21,6 +21,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -362,7 +364,8 @@ public final class GameActionUtil {
         }
         SpellAbility result = null;
         final Card host = sa.getHostCard();
-        final PlayerController pc = sa.getActivatingPlayer().getController();
+        final Player activator = sa.getActivatingPlayer();
+        final PlayerController pc = activator.getController();
 
         host.getGame().getAction().checkStaticAbilities(false);
 
@@ -408,6 +411,33 @@ public final class GameActionUtil {
                         }
                         result.getPayCosts().add(cost);
                         reset = true;
+                    }
+                }
+            }
+        }
+
+        if (host.isCreature()) {
+            String kw = "As an additional cost to cast creature spells," +
+                    " you may pay any amount of mana. If you do, that creature enters " +
+                    "the battlefield with that many additional +1/+1 counters on it.";
+
+            for (final Card c : activator.getZone(ZoneType.Battlefield)) {
+                for (KeywordInterface ki : c.getKeywords()) {
+                    if (kw.equals(ki.getOriginal())) {
+                        final Cost cost = new Cost(ManaCost.ONE, false);
+                        String str = "Choose Amount for " + c.getName() + ": " + cost.toSimpleString();
+
+                        int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                        if (v > 0) {
+                            host.addReplacementEffect(CardFactoryUtil.makeEtbCounter("etbCounter:P1P1:" + v, host, false));
+                            if (result == null) {
+                                result = sa.copy();
+                            }
+                            for (int i = 0; i < v; i++) {
+                                result.getPayCosts().add(cost);
+                            }
+                        }
                     }
                 }
             }
