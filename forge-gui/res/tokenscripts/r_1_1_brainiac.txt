@@ -1,0 +1,6 @@
+Name:Brainiac
+ManaCost:no cost
+Types:Creature Brainiac
+Colors:red
+PT:1/1
+Oracle:
