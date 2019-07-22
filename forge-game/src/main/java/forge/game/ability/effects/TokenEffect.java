@@ -38,6 +38,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
@@ -277,6 +278,17 @@ public class TokenEffect extends SpellAbilityEffect {
             tokenInfo = new TokenInfo(prototype, host);
         }
 
+        boolean useZoneTable = true;
+        CardZoneTable triggerList = sa.getChangeZoneTable();
+        if (triggerList == null) {
+            triggerList = new CardZoneTable();
+            useZoneTable = false;
+        }
+        if (sa.hasParam("ChangeZoneTable")) {
+            sa.setChangeZoneTable(triggerList);
+            useZoneTable = true;
+        }
+
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             List<Card> tokens;
 
@@ -302,6 +314,9 @@ public class TokenEffect extends SpellAbilityEffect {
 
                 // Should this be catching the Card that's returned?
                 Card c = game.getAction().moveToPlay(tok, sa);
+                if (c.getZone() != null) {
+                    triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
+                }
 
                 if (sa.hasParam("AtEOTTrig")) {
                     addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
@@ -334,6 +349,11 @@ public class TokenEffect extends SpellAbilityEffect {
             if ("Clue".equals(tokenName)) { // investigate trigger
                 controller.addInvestigatedThisTurn();
             }
+        }
+
+        if (!useZoneTable) {
+            triggerList.triggerChangesZoneAll(game);
+            triggerList.clear();
         }
 
         game.fireEvent(new GameEventTokenCreated());

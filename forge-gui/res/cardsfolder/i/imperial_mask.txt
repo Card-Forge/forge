@@ -2,7 +2,7 @@ Name:Imperial Mask
 ManaCost:4 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+nonToken | Execute$ TrigCopyPermanent | TriggerDescription$ When CARDNAME enters the battlefield, if it's not a token, each of your teammates creates a token that's a copy of CARDNAME.
-SVar:TrigCopyPermanent:DB$ RepeatEach | RepeatSubAbility$ DBClone | RepeatPlayers$ Player.Allies
+SVar:TrigCopyPermanent:DB$ RepeatEach | RepeatSubAbility$ DBClone | RepeatPlayers$ Player.Allies | ChangeZoneTable$ True
 SVar:DBClone:DB$ CopyPermanent | Defined$ TriggeredCard | Controller$ Remembered
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
 SVar:NonStackingEffect:True

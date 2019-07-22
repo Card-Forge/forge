@@ -31,10 +31,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             return SpecialCardAi.PriceOfProgress.consider(aiPlayer, sa);
         } else if ("Never".equals(logic)) {
             return false;
-        } else if ("CloneMyTokens".equals(logic)) {
-            if (CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN).size() < 2) {
-                return false;
-            }
         } else if ("CloneAllTokens".equals(logic)) {
             List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
             List<Card> compTokenCreats = CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN);

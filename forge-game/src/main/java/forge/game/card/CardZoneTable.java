@@ -19,10 +19,23 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     // TODO use EnumBasedTable if exist
     private Table<ZoneType, ZoneType, CardCollection> dataMap = HashBasedTable.create();
 
+    public CardZoneTable(Table<ZoneType, ZoneType, CardCollection> cardZoneTable) {
+        this.putAll(cardZoneTable);
+    }
+
+    public CardZoneTable() {
+    }
+
     /**
      * special put logic, add Card to Card Collection
      */
     public CardCollection put(ZoneType rowKey, ZoneType columnKey, Card value) {
+        if (rowKey == null) {
+            rowKey = ZoneType.None;
+        }
+        if (columnKey == null) {
+            columnKey = ZoneType.None;
+        }
         CardCollection old;
         if (contains(rowKey, columnKey)) {
             old = get(rowKey, columnKey);
@@ -42,7 +55,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     public void triggerChangesZoneAll(final Game game) {
         if (!isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", this);
+            runParams.put("Cards", new CardZoneTable(this));
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
     }

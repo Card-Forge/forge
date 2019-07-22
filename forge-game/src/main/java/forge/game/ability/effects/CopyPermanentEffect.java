@@ -15,6 +15,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
@@ -153,11 +154,23 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
             }
         } else {
-            tgtCards = getTargetCards(sa);
+            tgtCards = getDefinedCardsOrTargeted(sa);
+        }
+
+        boolean useZoneTable = true;
+        CardZoneTable triggerList = sa.getChangeZoneTable();
+        if (triggerList == null) {
+            triggerList = new CardZoneTable();
+            useZoneTable = false;
+        }
+        if (sa.hasParam("ChangeZoneTable")) {
+            sa.setChangeZoneTable(triggerList);
+            useZoneTable = true;
         }
 
         for (final Card c : tgtCards) {
-            if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
+            // if it only targets player, it already got all needed cards from defined
+            if (!sa.usesTargeting() || sa.getTargetRestrictions().canTgtPlayer() || c.canBeTargetedBy(sa)) {
                 Card proto = getProtoType(sa, c);
                 List <Card> token = TokenInfo.makeToken(proto, controller, true, numCopies);
 
@@ -169,6 +182,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
                     final Card copyInPlay = game.getAction().moveToPlay(t, sa, null);
+
+                    if (copyInPlay.getZone() != null) {
+                        triggerList.put(ZoneType.None, copyInPlay.getZone().getZoneType(), copyInPlay);
+                    }
 
                     // when copying something stolen:
                     //copyInPlay.setSetCode(c.getSetCode());
@@ -245,6 +262,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
             } // end canBeTargetedBy
         } // end foreach Card
+
+        if (!useZoneTable) {
+            triggerList.triggerChangesZoneAll(game);
+            triggerList.clear();
+        }
     } // end resolve
 
 
