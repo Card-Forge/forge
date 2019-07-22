@@ -594,6 +594,11 @@ public class ComputerUtilCost {
             if (c == null || c.isUntapped()) {
                 return false;
             }
+        } else if ("RiskFactor".equals(aiLogic)) {
+            final Player activator = sa.getActivatingPlayer();
+            if (!activator.canDraw() || activator.hasKeyword("You can't draw more than one card each turn.")) {
+                return false;
+            }
         } else if ("MorePowerful".equals(aiLogic)) {
             final int sourceCreatures = sa.getActivatingPlayer().getCreaturesInPlay().size();
             final int payerCreatures = payer.getCreaturesInPlay().size();
