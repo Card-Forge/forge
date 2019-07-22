@@ -8,7 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:DB$ Charm | Choices$ LifePact,DiscardPact,ZombiesPact | ChoiceRestriction$ NotRemembered | RememberChoice$ True | CharmNum$ 1
 SVar:LifePact:DB$ SetLife | Defined$ You | LifeAmount$ 4 | ChoiceName$ LifePact | SpellDescription$ Your life total becomes 4.
 SVar:DiscardPact:DB$ Discard | Defined$ You | Mode$ Hand | ChoiceName$ DiscardPact | SpellDescription$ Discard your hand.
-SVar:ZombiesPact:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ MakeZombies | ChoiceName$ ZombiesPact | SpellDescription$ Each opponent creates five 2/2 black Zombie creature tokens.
+SVar:ZombiesPact:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ MakeZombies | ChoiceName$ ZombiesPact | ChangeZoneTable$ True | SpellDescription$ Each opponent creates five 2/2 black Zombie creature tokens.
 SVar:MakeZombies:DB$ Token | LegacyImage$ b 2 2 zombie rna | TokenAmount$ 5 | TokenScript$ b_2_2_zombie | TokenOwner$ Remembered | SpellDescription$ Each opponent creates five 2/2 black Zombie creature tokens.
 # Clear RememberChoice just in case it's not getting cleared by Zone changes
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ClearRemembered | Static$ True

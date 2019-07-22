@@ -22,9 +22,8 @@ import java.util.List;
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        // Card source = sa.getHostCard();
         // TODO - I'm sure someone can do this AI better
-
+        Card source = sa.getHostCard();
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
@@ -38,6 +37,11 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return ph.is(PhaseType.END_OF_TURN);
         } else if ("AtOppEOT".equals(aiLogic)) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn() != aiPlayer;
+        } else if ("DuplicatePerms".equals(aiLogic)) {
+            final List<Card> valid = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if (valid.size() < 2) {
+                return false;
+            }
         }
 
         if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
@@ -46,7 +50,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (sa.hasParam("Defined")) {
             // If there needs to be an imprinted card, don't activate the ability if nothing was imprinted yet (e.g. Mimic Vat)
-            if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && sa.getHostCard().getImprintedCards().isEmpty()) {
+            if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && source.getImprintedCards().isEmpty()) {
                 return false;
             }
         }
@@ -60,9 +64,32 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
             sa.resetTargets();
-            Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
+            Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
+        } else if (sa.getTargetRestrictions() != null && sa.getTargetRestrictions().canTgtPlayer()) {
+                if (!sa.isCurse()) {
+                    if (sa.canTarget(aiPlayer)) {
+                        sa.getTargets().add(aiPlayer);
+                        return true;
+                    } else {
+                        for (Player p : aiPlayer.getTeamMates(true)) {
+                            if (sa.canTarget(p)) {
+                                sa.getTargets().add(p);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                } else {
+                    for (Player p : aiPlayer.getOpponents()) {
+                        if (sa.canTarget(p)) {
+                            sa.getTargets().add(p);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
         } else {
             return this.doTriggerAINoCost(aiPlayer, sa, false);
         }

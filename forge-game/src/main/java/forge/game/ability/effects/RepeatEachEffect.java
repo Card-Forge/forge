@@ -84,6 +84,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             sa.setDamageMap(new CardDamageMap());
             sa.setPreventMap(new CardDamageMap());
         }
+        if (sa.hasParam("ChangeZoneTable")) {
+            sa.setChangeZoneTable(new CardZoneTable());
+        }
 
         if (loopOverCards) {
             // TODO (ArsenalNut 22 Dec 2012) Add logic to order cards for AI
@@ -215,6 +218,10 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             // non combat damage cause lifegain there
             sa.getDamageMap().triggerDamageDoneOnce(false, sa);
             sa.setDamageMap(null);
+        }
+        if (sa.hasParam("ChangeZoneTable")) {
+            sa.getChangeZoneTable().triggerChangesZoneAll(game);
+            sa.setChangeZoneTable(null);
         }
     }
 }
