@@ -52,6 +52,9 @@ public final class CardScriptInfo {
         try {
             final PrintWriter p = new PrintWriter(file);
             p.print(text0);
+            if (!text0.endsWith(("\n"))){
+                p.print("\n");
+            }
             p.close();
 
             text = text0;
