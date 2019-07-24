@@ -106,8 +106,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        // If reached Minimum targets, enable OK button
-        if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
+        if (tgt.isDividedAsYouChoose() && tgt.getMinTargets(sa.getHostCard(), sa) == 0 && sa.getTargets().getNumTargeted() == 0) {
+            // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
+            getController().getGui().updateButtons(getOwner(), true, true, false);
+        } else if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
+            // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
                 getController().getGui().updateButtons(getOwner(), false, false, false);
