@@ -185,6 +185,8 @@ public class PlayEffect extends SpellAbilityEffect {
 
                 tgtCard.setToken(true);
                 tgtCard.setZone(zone);
+                // to fix the CMC
+                tgtCard.setCopiedPermanent(original);
                 if (zone != null) {
                     zone.add(tgtCard);
                 }
