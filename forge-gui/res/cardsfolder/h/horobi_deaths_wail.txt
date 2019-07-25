@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Legendary Creature Spirit
 PT:4/4
 K:Flying
-T:Mode$ BecomesTarget | ValidTarget$ Creature+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, destroy that creature.
+T:Mode$ BecomesTarget | ValidTarget$ Creature.inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, destroy that creature.
 SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horobi_deaths_wail.jpg
 Oracle:Flying\nWhenever a creature becomes the target of a spell or ability, destroy that creature.
