@@ -1,0 +1,16 @@
+[metadata]
+Code=ELD
+Date=2019-10-04
+Name=Throne of Eldraine
+Code2=ELD
+MciCode=eld
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+326 M Chulane, Teller of Tales
+331 C Arcane Signet
+
+[tokens]
+
