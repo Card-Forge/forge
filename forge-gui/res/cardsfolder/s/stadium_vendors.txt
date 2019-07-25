@@ -2,7 +2,6 @@ Name:Stadium Vendors
 ManaCost:3 R
 Types:Creature Goblin
 PT:3/3
-K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoosePlayer | TriggerDescription$ When CARDNAME enters the battlefield, choose a player. That player adds two mana of any one color they choose.
 SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player | ChoiceTitle$ Choose a player | AILogic$ Pump | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ Any | Defined$ ChosenPlayer | Amount$ 2
