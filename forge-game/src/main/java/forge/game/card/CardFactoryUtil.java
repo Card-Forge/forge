@@ -108,6 +108,9 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
+                if (hostCard.isInPlay()) {
+                    return false; // cut short if already on the battlefield, avoids side effects when checking statics
+                }
                 CardStateName stateBackup = hostCard.getCurrentStateName();
                 boolean face = hostCard.isFaceDown();
                 hostCard.turnFaceDownNoUpdate();
