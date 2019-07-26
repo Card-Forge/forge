@@ -23,7 +23,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
         // create Effect for Regeneration
         final Card eff = createEffect(
-                hostCard, sa.getActivatingPlayer(), hostCard.getName() + "'s Regeneration", hostCard.getImageKey());
+                sa, sa.getActivatingPlayer(), hostCard.getName() + "'s Regeneration", hostCard.getImageKey());
         
         eff.addRemembered(list);
         addForgetOnMovedTrigger(eff, "Battlefield");

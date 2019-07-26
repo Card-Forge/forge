@@ -116,7 +116,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = hostCard.getImageKey();
         }
 
-        final Card eff = createEffect(hostCard, controller, name, image);
+        final Card eff = createEffect(sa, controller, name, image);
 
         // Grant SVars first in order to give references to granted abilities
         if (effectSVars != null) {

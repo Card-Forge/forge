@@ -105,6 +105,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
 
+    private SpellAbility effectSourceAbility = null;
+
     private GameEntity entityAttachedTo = null;
 
     private GameEntity mustAttackEntity = null;
@@ -5609,10 +5611,22 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public Card getEffectSource() {
+        if (effectSourceAbility != null) {
+            return effectSourceAbility.getHostCard();
+        }
         return effectSource;
     }
+
+    public SpellAbility getEffectSourceAbility() {
+        return effectSourceAbility;
+    }
+
     public void setEffectSource(Card src) {
         effectSource = src;
+    }
+
+    public void setEffectSource(SpellAbility sa) {
+        effectSourceAbility = sa;
     }
 
     public boolean isStartsGameInPlay() {
