@@ -284,6 +284,8 @@ public final class ForgeConstants {
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
     public static final String URL_PRICE_DOWNLOAD = URL_CARDFORGE + "/all-prices.txt";
+    private static final String URL_SCRYFALL = "https://api.scryfall.com";
+    public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
