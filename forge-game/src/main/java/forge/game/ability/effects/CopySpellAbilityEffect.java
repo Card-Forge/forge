@@ -174,10 +174,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Epic")) {
                     copy.getHostCard().removeIntrinsicKeyword("Epic");
                     SpellAbility sub = copy;
-                    while (sub.getSubAbility() != null) {
+                    while (sub.getSubAbility() != null && !sub.hasParam("Epic")) {
                         sub = sub.getSubAbility();
                     }
-                    sub.getParent().setSubAbility(null);
+                    if (sub != null) {
+                        sub.getParent().setSubAbility(sub.getSubAbility());
+                    }
                 }
 
                 copies.add(copy);

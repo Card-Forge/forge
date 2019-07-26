@@ -286,7 +286,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final Player controller = sa.getActivatingPlayer();
         final String name = hostCard.getName() + "'s Effect";
         final String image = hostCard.getImageKey();
-        final Card eff = createEffect(hostCard, controller, name, image);
+        final Card eff = createEffect(sa, controller, name, image);
 
         eff.addRemembered(c);
 

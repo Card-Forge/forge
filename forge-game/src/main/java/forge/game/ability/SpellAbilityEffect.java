@@ -341,7 +341,7 @@ public abstract class SpellAbilityEffect {
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
         final Card host = sa.getHostCard();
         final Game game = card.getGame();
-        final Card eff = createEffect(host, sa.getActivatingPlayer(), host.getName() + "'s Effect", host.getImageKey());
+        final Card eff = createEffect(sa, sa.getActivatingPlayer(), host.getName() + "'s Effect", host.getImageKey());
 
         addLeaveBattlefieldReplacement(eff, zone);
 
@@ -378,8 +378,9 @@ public abstract class SpellAbilityEffect {
     }
     
     // create a basic template for Effect to be used somewhere else
-    protected static Card createEffect(final Card hostCard, final Player controller, final String name,
+    protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
             final String image) {
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
@@ -404,7 +405,7 @@ public abstract class SpellAbilityEffect {
             eff.setColor(hostCard.determineColor().getColor());
         }
         eff.setImmutable(true);
-        eff.setEffectSource(hostCard);
+        eff.setEffectSource(sa);
 
         return eff;
     }
@@ -440,7 +441,7 @@ public abstract class SpellAbilityEffect {
             // build an Effect with that infomation
             String name = host.getName() + "'s Effect";
 
-            final Card eff = createEffect(host, controller, name, host.getImageKey());
+            final Card eff = createEffect(sa, controller, name, host.getImageKey());
             if (cards != null) {
                 eff.addRemembered(cards);
             }
