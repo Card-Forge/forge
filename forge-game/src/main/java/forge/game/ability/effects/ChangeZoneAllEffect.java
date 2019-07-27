@@ -134,6 +134,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         		&& !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
             Player p = AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("DefinedPlayer", "You"), sa).get(0);
             cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination);
+            //the last card in this list will be the closest to the top, but we want the first card to be closest.
+            //so reverse it here before moving them to the library.
+            java.util.Collections.reverse(cards);
         }
 
         if (destination == ZoneType.Graveyard) {
