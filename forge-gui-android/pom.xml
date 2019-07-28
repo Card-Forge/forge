@@ -2,16 +2,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <android.sdk.path>C:\Users\Peter\AppData\Local\Android\Sdk</android.sdk.path>
         <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
         <packaging.type>jar</packaging.type>
-        <build.min.memory>-Xms4g</build.min.memory>
-        <build.max.memory>-Xmx8g</build.max.memory>
+        <build.min.memory>-Xms1024m</build.min.memory>
+        <build.max.memory>-Xmx1536m</build.max.memory>
         <alpha-version>1.6.27.001</alpha-version>
-        <sign.keystore>C:\Users\Peter\forge.keystore</sign.keystore>
-        <sign.alias>Forge</sign.alias>
-        <sign.storepass>parodius</sign.storepass>
-        <sign.keypass>parodius</sign.keypass>
+        <sign.keystore>keystore</sign.keystore>
+        <sign.alias>alias</sign.alias>
+        <sign.storepass>storepass</sign.storepass>
+        <sign.keypass>keypass</sign.keypass>
         <cardforge.user>user</cardforge.user>
         <cardforge.pass>pass</cardforge.pass>
         <cardforge.server>ftp.cardforge.org</cardforge.server>
