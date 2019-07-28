@@ -254,7 +254,7 @@ public class CardRenderer {
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
-            String name = state.getName();
+            String name = CardTranslation.getTranslatedName(state.getName());
             if (count > 0) { //preface name with count if applicable
                 name = count + " " + name;
             }
@@ -316,7 +316,7 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
 
         x += cardArtWidth;
-        String name = card.getCurrentState().getName();
+        String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }

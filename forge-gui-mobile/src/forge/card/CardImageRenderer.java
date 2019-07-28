@@ -260,7 +260,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getText(state);
+            final String text = CardTranslation.getTranslatedOracle(card.getName(), card.getText(state));
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
