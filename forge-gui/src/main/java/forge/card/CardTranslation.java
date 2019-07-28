@@ -50,7 +50,7 @@ public class CardTranslation {
         }
     }
 
-    static String getTranslatedName(String name) {
+    public static String getTranslatedName(String name) {
         String tname = translatednames.get(name);
 
         if (tname != null) {
@@ -62,7 +62,7 @@ public class CardTranslation {
         return tname;
     }
 
-    static String getTranslatedType(String name, String originaltype) {
+    public static String getTranslatedType(String name, String originaltype) {
         String ttype = translatedtypes.get(name);
 
         if (ttype != null) {
@@ -74,7 +74,7 @@ public class CardTranslation {
         return ttype;
     }
 
-    static String getTranslatedOracle(String name, String originaloracle) {
+    public static String getTranslatedOracle(String name, String originaloracle) {
         String toracle = translatedoracles.get(name);
 
         if (toracle != null) {
