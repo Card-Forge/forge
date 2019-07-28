@@ -1639,6 +1639,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isSurged();
+        } else if (property.startsWith("dashed")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isDash();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;

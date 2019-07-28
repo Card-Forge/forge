@@ -238,7 +238,7 @@ public abstract class SpellAbilityEffect {
             }
             sb.append(Lang.joinHomogenous(crds));
             if (location.equals("Hand")) {
-                sb.append("to your hand").append(" ");
+                sb.append(" to your hand");
             }
             sb.append(" at the ");
             if (combat) {

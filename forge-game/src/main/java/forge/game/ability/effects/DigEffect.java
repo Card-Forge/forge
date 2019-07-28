@@ -83,10 +83,6 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
-        final List<String> keywords = new ArrayList<String>();
-        if (sa.hasParam("Keywords")) {
-            keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
-        }
 
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
@@ -307,9 +303,6 @@ public class DigEffect extends SpellAbilityEffect {
                         else {
                             c = game.getAction().moveTo(zone, c, sa);
                             if (destZone1.equals(ZoneType.Battlefield)) {
-                                for (final String kw : keywords) {
-                                    c.addExtrinsicKeyword(kw);
-                                }
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
@@ -377,11 +370,7 @@ public class DigEffect extends SpellAbilityEffect {
                             if (!origin.equals(c.getZone().getZoneType())) {
                                 table.put(origin, c.getZone().getZoneType(), c);
                             }
-                            if (destZone2 == ZoneType.Battlefield && !keywords.isEmpty()) {
-                                for (final String kw : keywords) {
-                                    c.addExtrinsicKeyword(kw);
-                                }
-                            } else if (destZone2 == ZoneType.Exile) {
+                            if (destZone2 == ZoneType.Exile) {
                                 if (sa.hasParam("ExileWithCounter")) {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
                                             1, player, true, counterTable);
