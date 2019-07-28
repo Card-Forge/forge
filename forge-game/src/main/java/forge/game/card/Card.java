@@ -3939,6 +3939,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         extrinsicKeyword.insertAll(extrinsicKeyword2);
     }
 
+    @Deprecated
     public void addExtrinsicKeyword(final String s) {
         if (s.startsWith("HIDDEN")) {
             addHiddenExtrinsicKeyword(s);
@@ -3948,6 +3949,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    @Deprecated
     public void removeExtrinsicKeyword(final String s) {
         if (s.startsWith("HIDDEN")) {
             removeHiddenExtrinsicKeyword(s);
