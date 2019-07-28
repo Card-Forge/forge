@@ -32,16 +32,13 @@ public class CardTranslation {
         try (LineReader translationFile = new LineReader(new FileInputStream(ForgeConstants.LANG_DIR + filename), Charsets.UTF_8)) {
             for (String line : translationFile.readLines()) {
                 String[] matches = line.split("#");
-
-                if(matches.length >= 2) {
+                if (matches.length >= 2) {
                     translatednames.put(matches[0], matches[1]);
                 }
-
-                if(matches.length >= 3) {
+                if (matches.length >= 3) {
                     translatedtypes.put(matches[0], matches[2]);
                 }
-
-                if(matches.length >= 4) {
+                if (matches.length >= 4) {
                     translatedoracles.put(matches[0], matches[3].replace("\\n", "\n\n"));
                 }
             }
