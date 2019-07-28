@@ -290,7 +290,6 @@ public class GameCopier {
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
                 newCard.addHiddenExtrinsicKeyword(kw);
-            newCard.setExtrinsicKeyword(Lists.newArrayList(c.getExtrinsicKeyword()));
             if (c.isTapped()) {
                 newCard.setTapped(true);
             }
