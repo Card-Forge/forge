@@ -113,10 +113,10 @@ public class Localizer {
 			observer.localizationChanged();
 		}
 	}
-	
+
 	public static class Language {
 		public String languageName;
-		public String langaugeID; 
-	} 
-	
+		public String languageID;
+	}
+
 }

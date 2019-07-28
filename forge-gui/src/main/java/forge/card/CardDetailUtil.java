@@ -160,11 +160,13 @@ public class CardDetailUtil {
 
     public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {
         final String name = forAltState ? card.getAlternateState().getName() : card.getName();
-        return StringUtils.isEmpty(name) || !canShow ? "???" : name.trim();
+        String translatedname = CardTranslation.getTranslatedName(name);
+        return StringUtils.isEmpty(translatedname) || !canShow ? "???" : translatedname.trim();
     }
 
     public static String formatCardType(final CardStateView card, final boolean canShow) {
-        return canShow ? card.getType().toString() : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
+        String translatedtype = CardTranslation.getTranslatedType(card.getName(), card.getType().toString());
+        return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
     }
 
     public static String formatPowerToughness(final CardStateView card, final boolean canShow) {
@@ -276,7 +278,7 @@ public class CardDetailUtil {
         if (area.length() != 0) {
             area.append("\n");
         }
-        String text = card.getText(state);
+        String text = CardTranslation.getTranslatedOracle(card.getName(), card.getText(state));
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
 
