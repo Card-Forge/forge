@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
+
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -25,9 +27,8 @@ public class PermanentEffect extends SpellAbilityEffect {
 
         // some extra for Dashing
         if (sa.isDash()) {
-            c.addExtrinsicKeyword("Haste");
             c.setSVar("EndOfTurnLeavePlay", "Dash");
-            c.updateKeywords();
+            registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
         }
     }
 }

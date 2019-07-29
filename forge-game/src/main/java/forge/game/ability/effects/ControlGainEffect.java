@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -11,6 +13,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
@@ -35,23 +38,26 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (tgts.isEmpty()) {
         	sb.append(" (nothing)");
         } else {
-        	for (final Card c : getDefinedCards(sa)) {
-        	    sb.append(" ");
-        	    if (c.isFaceDown()) {
-        	        sb.append("Face-down creature (").append(c.getId()).append(')');
-        	    } else {
-        	        sb.append(c);
-        	    }
-        	}
+            for (final Card c : tgts) {
+                sb.append(" ");
+                if (c.isFaceDown()) {
+                    sb.append("Face-down creature (").append(c.getId()).append(')');
+                } else {
+                    sb.append(c);
+                }
+            }
         }
         sb.append(".");
+
+        if (sa.hasParam("Untap")) {
+            sb.append(" Untap it.");
+        }
 
         return sb.toString();
     }
 
     private static void doLoseControl(final Card c, final Card host,
-            final boolean tapOnLose, final List<String> addedKeywords,
-            final long tStamp) {
+            final boolean tapOnLose, final long tStamp) {
         if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
             return;
         }
@@ -60,12 +66,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             if (tapOnLose) {
                 c.tap();
-            }
-
-            if (null != addedKeywords) {
-                for (final String kw : addedKeywords) {
-                    c.removeExtrinsicKeyword(kw);
-                }
             }
         } // if
         host.removeGainControlTargets(c);
@@ -82,7 +82,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final boolean remember = sa.hasParam("RememberControlled");
         final boolean forget = sa.hasParam("ForgetControlled");
         final List<String> destroyOn = sa.hasParam("DestroyTgt") ? Arrays.asList(sa.getParam("DestroyTgt").split(",")) : null;
-        final List<String> kws = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
+        final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
@@ -125,13 +125,20 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 tgtC.untap();
             }
 
-            if (null != kws) {
-                for (final String kw : kws) {
-                    tgtC.addExtrinsicKeyword(kw);
-                    if (kw.equals("Haste")) {
-                        tgtC.updateStateForView(); // ensure that summoning sickness icon is removed
+            final List<String> kws = Lists.newArrayList();
+            if (null != keywords) {
+                for (final String kw : keywords) {
+                    if (kw.startsWith("HIDDEN")) {
+                        tgtC.addHiddenExtrinsicKeyword(kw);
+                    } else {
+                        kws.add(kw);
                     }
                 }
+            }
+
+            if (!kws.isEmpty()) {
+                tgtC.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, tStamp);
+                game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
 
             if (remember && !sa.getHostCard().isRemembered(tgtC)) {
@@ -143,7 +150,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (lose != null) {
-                final GameCommand loseControl = getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws);
+                final GameCommand loseControl = getLoseControlCommand(tgtC, tStamp, bTapOnLose, source);
                 if (lose.contains("LeavesPlay")) {
                     sa.getHostCard().addLeavesPlayCommand(loseControl);
                 }
@@ -181,6 +188,26 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 if (destroyOn.contains("LoseControl")) {
                     sa.getHostCard().addChangeControllerCommand(getDestroyCommand(tgtC, source, bNoRegen));
                 }
+            }
+
+            if (keywords != null) {
+                // Add keywords only until end of turn
+                final GameCommand untilKeywordEOT = new GameCommand() {
+                    private static final long serialVersionUID = -42244224L;
+
+                    @Override
+                    public void run() {
+                        if (keywords.size() > 0) {
+                            for (String kw : keywords) {
+                                if (kw.startsWith("HIDDEN")) {
+                                    tgtC.removeHiddenExtrinsicKeyword(kw);
+                                }
+                            }
+                            tgtC.removeChangedCardKeywords(tStamp);
+                        }
+                    }
+                };
+                game.getEndOfTurn().addUntil(untilKeywordEOT);
             }
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
@@ -236,14 +263,13 @@ public class ControlGainEffect extends SpellAbilityEffect {
      * @return a {@link forge.GameCommand} object.
      */
     private static GameCommand getLoseControlCommand(final Card c,
-            final long tStamp, final boolean bTapOnLose, final Card hostCard,
-            final List<String> kws) {
+            final long tStamp, final boolean bTapOnLose, final Card hostCard) {
         final GameCommand loseControl = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
             public void run() { 
-                doLoseControl(c, hostCard, bTapOnLose, kws, tStamp);
+                doLoseControl(c, hostCard, bTapOnLose, tStamp);
                 c.getSVars().remove("SacMe");
             }
         };

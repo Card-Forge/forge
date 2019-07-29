@@ -3850,23 +3850,11 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
-            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | SubAbility$"
-                    + " DashDelayedTrigger";
-            final String dbDelayTrigger = "DB$ DelayedTrigger | Mode$ Phase | Phase$"
-                    + " End of Turn | Execute$ DashReturnSelf | RememberObjects$ Self"
-                    + " | TriggerDescription$ Return CARDNAME from the battlefield to" + " its owner's hand.";
-            final String dbReturn = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand"
-                    + " | Defined$ DelayTriggerRemembered";
-            card.setSVar("DashDelayedTrigger", dbDelayTrigger);
-            card.setSVar("DashReturnSelf", dbReturn);
+            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | StackDescription$ CARDNAME (Dash)"
+                    + " | Dash$ True | NonBasicSpell$ True"
+                    + " | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
 
             final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
-            String desc = "Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText()
-                    + ")";
-            newSA.setStackDescription(card.getName() + " (Dash)");
-            newSA.setDescription(desc);
-            newSA.setBasicSpell(false);
-            newSA.setDash(true);
             newSA.setIntrinsic(intrinsic);
 
             newSA.setTemporary(!intrinsic);
@@ -4527,6 +4515,8 @@ public class CardFactoryUtil {
 
             card.setSVar("CipherTrigger", trig);
             card.setSVar("PlayEncoded", ab);
+        } else if (keyword.startsWith("Dash")) {
+            effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Devoid")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
