@@ -57,6 +57,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
     private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
     private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
+    private final FLabel btnDownloadPicsHQ            = _makeButton(localizer.getMessage("btnDownloadPicsHQ"));
     private final FLabel btnDownloadQuestImages       = _makeButton(localizer.getMessage("btnDownloadQuestImages"));
     private final FLabel btnDownloadAchievementImages = _makeButton(localizer.getMessage("btnDownloadAchievementImages"));
     private final FLabel btnReportBug                 = _makeButton(localizer.getMessage("btnReportBug"));
@@ -81,6 +82,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
+
+            pnlContent.add(btnDownloadPicsHQ, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPicsHQ")), constraintsLBL);
 
             pnlContent.add(btnDownloadSetPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
@@ -159,6 +163,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
+    public void setDownloadPicsHQCommand(UiCommand command)            { btnDownloadPicsHQ.setCommand(command);      }
     public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
     public void setDownloadQuestImagesCommand(UiCommand command)       { btnDownloadQuestImages.setCommand(command); }
     public void setDownloadAchievementImagesCommand(UiCommand command) { btnDownloadAchievementImages.setCommand(command); }
