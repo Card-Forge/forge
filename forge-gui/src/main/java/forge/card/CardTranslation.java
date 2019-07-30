@@ -34,7 +34,7 @@ public class CardTranslation {
                 }
             }
         } catch (IOException e) {
-            Log.error("Error reading translated file. Language: " + language);
+            Log.error("Error reading translation file: cardnames-" + language + ".txt");
         }
     }
 
@@ -56,13 +56,13 @@ public class CardTranslation {
         return originaltype;
     }
 
-    public static String getTranslatedOracle(String name, String originaloracle) {
+    public static String getTranslatedOracle(String name) {
         if (needsTranslation()) {
             String toracle = translatedoracles.get(name);
-            return toracle == null ? originaloracle : toracle;
+            return toracle == null ? "" : toracle;
         }
 
-        return originaloracle;
+        return "";
     }
 
     private static boolean needsTranslation() {
