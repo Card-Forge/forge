@@ -3,7 +3,6 @@ package forge.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Charsets;
 import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.util.LineReader;
 
 import java.io.FileInputStream;
@@ -16,6 +15,7 @@ public class CardTranslation {
     private static Map <String, String> translatednames;
     private static Map <String, String> translatedtypes;
     private static Map <String, String> translatedoracles;
+    private static String languageSelected;
 
     private static void readTranslationFile(String language) {
         String filename = "cardnames-" + language + ".txt";
@@ -66,16 +66,17 @@ public class CardTranslation {
     }
 
     private static boolean needsTranslation() {
-        ForgePreferences preferences = new ForgePreferences();
-        return !preferences.getPref(ForgePreferences.FPref.UI_LANGUAGE).equals("en-US");
+        return !languageSelected.equals("en-US");
     }
 
     public static void preloadTranslation(String language) {
+        languageSelected = language;
+        
         if (needsTranslation()) {
             translatednames = new HashMap<>();
             translatedtypes = new HashMap<>();
             translatedoracles = new HashMap<>();
-            readTranslationFile(language);
+            readTranslationFile(languageSelected);
         }
     }
 }
