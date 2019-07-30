@@ -462,6 +462,26 @@ public class Forge implements ApplicationListener {
             if (keyCode == Keys.SHIFT_LEFT || keyCode == Keys.SHIFT_RIGHT) {
                 shiftKeyDown = true;
             }
+
+            // Cursor keys emulate swipe gestures
+            // First we touch the screen and later swipe (fling) in the direction of the key pressed
+            if (keyCode == Keys.LEFT) {
+                touchDown(0,0,0,0);
+                return fling(1000,0);
+            }
+            if (keyCode == Keys.RIGHT) {
+                touchDown(0,0,0,0);
+                return fling(-1000,0);
+            }
+            if (keyCode == Keys.UP) {
+                touchDown(0,0,0,0);
+                return fling(0,-1000);
+            }
+            if (keyCode == Keys.DOWN) {
+                touchDown(0,0,0,0);
+                return fling(0,1000);
+            }
+
             if (keyInputAdapter == null) {
                 if (KeyInputAdapter.isModifierKey(keyCode)) {
                     return false; //don't process modifiers keys for unknown adapter
