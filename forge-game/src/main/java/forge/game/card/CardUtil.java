@@ -255,7 +255,6 @@ public final class CardUtil {
         newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost() + in.getSemiPermanentToughnessBoost());
 
         newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
-        newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());

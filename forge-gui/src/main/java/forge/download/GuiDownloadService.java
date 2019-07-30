@@ -32,6 +32,7 @@ import java.net.URLDecoder;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -272,7 +273,13 @@ public abstract class GuiDownloadService implements Runnable {
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
                     // don't allow redirections here -- they indicate 'file not found' on the server
-                    conn.setInstanceFollowRedirects(false);
+                    // only allow redirections to consume Scryfall API
+                    if(url.contains("api.scryfall.com")) {
+                        conn.setInstanceFollowRedirects(true);
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    } else {
+                        conn.setInstanceFollowRedirects(false);
+                    }
                     conn.connect();
                     
                     // if file is not found and this is a JPG, give PNG a shot...

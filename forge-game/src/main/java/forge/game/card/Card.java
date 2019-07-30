@@ -94,7 +94,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = Maps.newTreeMap();
-    private KeywordCollection extrinsicKeyword = new KeywordCollection();
     // Hidden keywords won't be displayed on the card
     private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
@@ -2698,6 +2697,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final Player getController() {
+        if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
+            //only permanents and spells have controllers [108.4],
+            //so a card really only has a controller while it's on the stack or battlefield.
+            //everywhere else, just use the owner [108.4a].
+            return owner;
+        }
+
         Entry<Long, Player> lastEntry = tempControllers.lastEntry();
         if (lastEntry != null) {
             final long lastTimestamp = lastEntry.getKey();
@@ -3727,7 +3733,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!removeIntrinsic) {
             keywords.insertAll(state.getIntrinsicKeywords());
         }
-        keywords.insertAll(extrinsicKeyword.getValues());
 
         // see if keyword changes are in effect
         for (final KeywordsChange ck : changedCardKeywords.values()) {
@@ -3751,11 +3756,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (changedCardKeywords.isEmpty()) {
             // Fast path that doesn't involve temp allocations.
             for (KeywordInterface kw : state.getIntrinsicKeywords()) {
-                if (!visitor.visit(kw)) {
-                    return;
-                }
-            }
-            for (KeywordInterface kw : extrinsicKeyword.getValues()) {
                 if (!visitor.visit(kw)) {
                     return;
                 }
@@ -3923,53 +3923,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void removeIntrinsicKeyword(final KeywordInterface s) {
         if (currentState.removeIntrinsicKeyword(s)) {
-            currentState.getView().updateKeywords(this, currentState);
-        }
-    }
-
-    public Collection<KeywordInterface> getExtrinsicKeyword() {
-        return extrinsicKeyword.getValues();
-    }
-    public final void setExtrinsicKeyword(final List<String> a) {
-        extrinsicKeyword.clear();
-        extrinsicKeyword.addAll(a);
-    }
-    public void setExtrinsicKeyword(Collection<KeywordInterface> extrinsicKeyword2) {
-        extrinsicKeyword.clear();
-        extrinsicKeyword.insertAll(extrinsicKeyword2);
-    }
-
-    public void addExtrinsicKeyword(final String s) {
-        if (s.startsWith("HIDDEN")) {
-            addHiddenExtrinsicKeyword(s);
-        }
-        else {
-            extrinsicKeyword.add(s);
-        }
-    }
-
-    public void removeExtrinsicKeyword(final String s) {
-        if (s.startsWith("HIDDEN")) {
-            removeHiddenExtrinsicKeyword(s);
-        }
-        else if (extrinsicKeyword.remove(s)) {
-            currentState.getView().updateKeywords(this, currentState);
-        }
-    }
-
-    public void removeAllExtrinsicKeyword(final String s) {
-        final List<String> strings = Lists.newArrayList();
-        strings.add(s);
-        boolean needKeywordUpdate = false;
-        if (extrinsicKeyword.removeAll(strings)) {
-            needKeywordUpdate = true;
-        }
-        strings.add("HIDDEN " + s);
-        if (hiddenExtrinsicKeyword.removeAll(strings)) {
-            view.updateNonAbilityText(this);
-            needKeywordUpdate = true;
-        }
-        if (needKeywordUpdate) {
             currentState.getView().updateKeywords(this, currentState);
         }
     }
