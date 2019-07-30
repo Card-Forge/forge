@@ -6,6 +6,7 @@ import forge.Graphics;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.assets.FLanguage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -48,6 +49,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addGroup("Sound Options");
 
         //General Settings
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, "Language",
+                "Select Language (Excluded Game part. Still a work in progress) (RESTART REQUIRED)",
+                FLanguage.getAllLanguages()) {
+            @Override
+            public void valueChanged(String newValue) {
+                FLanguage.changeLanguage(newValue);
+            }
+        }, 0);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
                 "Sets the theme that determines how display components are skinned.",
                 FSkin.getAllSkins()) {

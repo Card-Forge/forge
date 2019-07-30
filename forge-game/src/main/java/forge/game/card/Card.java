@@ -2697,6 +2697,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final Player getController() {
+        if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
+            //only permanents and spells have controllers [108.4],
+            //so a card really only has a controller while it's on the stack or battlefield.
+            //everywhere else, just use the owner [108.4a].
+            return owner;
+        }
+
         Entry<Long, Player> lastEntry = tempControllers.lastEntry();
         if (lastEntry != null) {
             final long lastTimestamp = lastEntry.getKey();
