@@ -94,6 +94,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         cardname = cardname.replace("'", "");
         String scryfallurl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + "named?fuzzy=" + cardname;
         if(!setCode.equals("???")) scryfallurl += "&set=" + setCode.toLowerCase();
+        if(backFace) scryfallurl += "&face=back";
         scryfallurl += "&format=image";
 
         downloads.put(destPath, scryfallurl);
