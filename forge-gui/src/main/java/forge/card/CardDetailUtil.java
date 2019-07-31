@@ -279,15 +279,7 @@ public class CardDetailUtil {
             area.append("\n");
         }
 
-
-        String[] translationTexts = {
-                card.getName(),
-                CardTranslation.getTranslatedOracle(card.getName()),
-                card.isSplitCard() ? card.getAlternateState().getName() : "",
-                card.isSplitCard() ? CardTranslation.getTranslatedOracle(card.getAlternateState().getName()) : "",
-        };
-
-        String text = card.getText(state, translationTexts);
+        String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+

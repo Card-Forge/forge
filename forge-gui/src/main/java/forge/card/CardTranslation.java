@@ -65,6 +65,15 @@ public class CardTranslation {
         return "";
     }
 
+    public static HashMap<String, String> getTranslationTexts(String cardname, String altcardname) {
+        HashMap<String, String> translations = new HashMap<String, String>();
+        translations.put("name", getTranslatedName(cardname));
+        translations.put("oracle", getTranslatedOracle(cardname));
+        translations.put("altname", getTranslatedName(altcardname));
+        translations.put("altoracle", getTranslatedOracle(altcardname));
+        return translations;
+    }
+
     private static boolean needsTranslation() {
         return !languageSelected.equals("en-US");
     }

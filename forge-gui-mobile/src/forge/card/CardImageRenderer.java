@@ -260,13 +260,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            String[] translationTexts = {
-                    card.getName(),
-                    CardTranslation.getTranslatedOracle(card.getName()),
-                    card.isSplitCard() ? card.getAlternateState().getName() : "",
-                    card.isSplitCard() ? CardTranslation.getTranslatedOracle(card.getAlternateState().getName()) : "",
-            };
-            final String text = card.getText(state, translationTexts);
+            final String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;

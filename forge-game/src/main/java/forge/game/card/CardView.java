@@ -520,24 +520,24 @@ public class CardView extends GameEntityView {
     public String getText() {
         return getText(getCurrentState(), null);
     }
-    public String getText(CardStateView state, String[] translationsText) {
+    public String getText(CardStateView state, HashMap<String, String> translationsText) {
         final StringBuilder sb = new StringBuilder();
         //final boolean isSplitCard = (state.getState() == CardStateName.LeftSplit);
 
         String tname = "", toracle = "", taltname = "", taltoracle = "";
 
-        if (translationsText == null) {
-            tname = state.getName();
-            toracle = state.getOracleText();
-            if (isSplitCard()) {
-                taltname = getAlternateState().getName();
-                taltoracle = getAlternateState().getOracleText();
-            }
-        } else {
-            if (!translationsText[0].isEmpty()) tname = translationsText[0];
-            if (!translationsText[1].isEmpty()) toracle = translationsText[1];
-            if (!translationsText[2].isEmpty()) taltname = translationsText[2];
-            if (!translationsText[3].isEmpty()) taltoracle = translationsText[3];
+        if (translationsText != null) {
+            tname = translationsText.get("name");
+            toracle = translationsText.get("oracle");
+            taltname = translationsText.get("altname");
+            taltoracle = translationsText.get("altoracle");
+        }
+
+        tname = tname.isEmpty() ? state.getName() : tname;
+        toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+        if (isSplitCard()) {
+            taltname = getAlternateState().getName();
+            taltoracle = getAlternateState().getOracleText();
         }
 
         if (getId() < 0) {
