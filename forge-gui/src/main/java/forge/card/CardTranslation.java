@@ -22,7 +22,7 @@ public class CardTranslation {
 
         try (LineReader translationFile = new LineReader(new FileInputStream(ForgeConstants.LANG_DIR + filename), Charsets.UTF_8)) {
             for (String line : translationFile.readLines()) {
-                String[] matches = line.split("#");
+                String[] matches = line.split("\\|");
                 if (matches.length >= 2) {
                     translatednames.put(matches[0], matches[1]);
                 }
