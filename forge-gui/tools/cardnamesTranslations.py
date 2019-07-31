@@ -10,9 +10,22 @@ languages = ['es', 'de']
 urllib.request.urlretrieve(scryfalldburl, database)
 
 def oracleformat(oracle):
-    oracle = re.sub(r"[)]([A-Z,{,•,-])", ")\n\1", toracle)
-    oracle = re.sub(r"(.)[\.]([A-Z,{,•,-])", "\1.\n\2", toracle)
+    oracle = re.sub(r"[)]([A-Z,{,•,-])", ")\n\1", oracle)
+    oracle = re.sub(r"(.)[\.]([A-Z,{,•,-])", "\1.\n\2", oracle)
     return oracle
+
+# Sort file and remove duplicates
+def cleanfile(filename):
+    names_seen = set()
+    outfile = open(filename + ".txt", "w", encoding='utf8')
+    with open(filename + ".tmp", "r", encoding='utf8') as r:
+        for line in sorted(r):
+            name = line.split('|')[0]
+            if name not in names_seen:
+                outfile.write(line)
+                names_seen.add(name)
+    outfile.close()
+    os.remove(filename + ".tmp")
 
 with open(database, mode='r', encoding='utf8') as json_file:
     data = json.load(json_file)
@@ -141,24 +154,6 @@ with open(database, mode='r', encoding='utf8') as json_file:
     feses.close()
     fdede.close()
 
-# Remove duplicates
-names_seen = set()
-outfile = open("cardnames-es-ES.txt", "w", encoding='utf8')
-for line in open("cardnames-es-ES.tmp", "r", encoding='utf8'):
-    name = line.split('|')[0]
-    if name not in names_seen:
-        outfile.write(line)
-        names_seen.add(name)
-outfile.close()
-os.remove("cardnames-es-ES.tmp")
-
-# Remove duplicates
-names_seen = set()
-outfile = open("cardnames-de-DE.txt", "w", encoding='utf8')
-for line in open("cardnames-de-DE.tmp", "r", encoding='utf8'):
-    name = line.split('|')[0]
-    if name not in names_seen:
-        outfile.write(line)
-        names_seen.add(name)
-outfile.close()
-os.remove("cardnames-de-DE.tmp")
+# Sort file and remove duplicates
+cleanfile("cardnames-es-ES")
+cleanfile("cardnames-de-DE")
