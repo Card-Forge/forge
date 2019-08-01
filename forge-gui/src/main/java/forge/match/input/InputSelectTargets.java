@@ -144,7 +144,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+        if (tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return false;
         }
 
