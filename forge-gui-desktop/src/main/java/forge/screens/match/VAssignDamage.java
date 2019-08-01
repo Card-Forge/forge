@@ -437,7 +437,7 @@ public class VAssignDamage {
             }
             else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;
-                lethalDamage = pw.getCurrentState().getLoyalty();
+                lethalDamage = Integer.valueOf(pw.getCurrentState().getLoyalty());
             }
         }
         else {

@@ -1339,7 +1339,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
                 for (Card pw : aiPlaneswalkers) {
                     int curLoyalty = pw.getCounters(CounterType.LOYALTY);
-                    int freshLoyalty = pw.getCurrentState().getBaseLoyalty();
+                    int freshLoyalty = Integer.valueOf(pw.getCurrentState().getBaseLoyalty());
                     if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
                         return pw;
                     }
