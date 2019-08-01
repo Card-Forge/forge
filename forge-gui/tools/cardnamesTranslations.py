@@ -9,15 +9,10 @@ languages = ['es', 'de']
 
 urllib.request.urlretrieve(scryfalldburl, database)
 
-def oracleformat(oracle):
-    oracle = re.sub(r"[)]([A-Z,{,•,-])", ")\n\1", oracle)
-    oracle = re.sub(r"(.)[\.]([A-Z,{,•,-])", "\1.\n\2", oracle)
-    return oracle
-
 # Sort file and remove duplicates
 def cleanfile(filename):
     names_seen = set()
-    outfile = open(filename + ".txt", "w", encoding='utf8')
+    outfile = open(filename + ".tmp2", "w", encoding='utf8')
     with open(filename + ".tmp", "r", encoding='utf8') as r:
         for line in sorted(r):
             name = line.split('|')[0]
@@ -26,6 +21,26 @@ def cleanfile(filename):
                 names_seen.add(name)
     outfile.close()
     os.remove(filename + ".tmp")
+
+# Manual patch of file translations
+def patchtranslations(filename):
+    ffinal = open(filename + '.txt', 'w', encoding='utf8')
+    fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
+    patchline = fpatch.readline()
+
+    with open(filename + '.tmp2', 'r', encoding='utf8') as temp:
+        for templine in temp:
+            tempname = templine.split('|')[0]
+            patchname = patchline.split('|')[0]
+            if patchname == tempname:
+                ffinal.write(patchline)
+                patchline = fpatch.readline()
+            else:
+                ffinal.write(templine)
+
+    ffinal.close()
+    fpatch.close()
+    os.remove(filename + '.tmp2')
 
 with open(database, mode='r', encoding='utf8') as json_file:
     data = json.load(json_file)
@@ -60,18 +75,14 @@ with open(database, mode='r', encoding='utf8') as json_file:
                     pass
 
                 output = name + '|' + tname + '|' + ttype
-
-                # Format oracle
-                if toracle != "":
-                    toracle = oracleformat(toracle)
-                
                 output = output + '|' + toracle
                 output = output.replace('\n', '\\n')
+                output = output + '\n'
 
                 if card['lang'] == 'es':
-                    feses.write(output + '\n')
+                    feses.write(output)
                 if card['lang'] == 'de':
-                    fdede.write(output + '\n')
+                    fdede.write(output)
 
             # Parse double card
             else:
@@ -122,11 +133,6 @@ with open(database, mode='r', encoding='utf8') as json_file:
                 # Output Card0
 
                 output0 = name0 + '|' + tname0 + '|' + ttype0
-
-                # Format oracle for card0
-                if toracle0 != "":
-                    toracle0 = oracleformat(toracle0)
-                
                 output0 = output0 + '|' + toracle0
                 output0 = output0.replace('\n', '\\n')
 
@@ -138,11 +144,6 @@ with open(database, mode='r', encoding='utf8') as json_file:
                 # Output Card1
                 
                 output1 = name1 + '|' + tname1 + '|' + ttype1
-
-                # Format oracle for card0
-                if toracle1 != "":
-                    toracle1 = oracleformat(toracle1)
-                
                 output1 = output1 + '|' + toracle1
                 output1 = output1.replace('\n', '\\n')
 
@@ -157,3 +158,7 @@ with open(database, mode='r', encoding='utf8') as json_file:
 # Sort file and remove duplicates
 cleanfile("cardnames-es-ES")
 cleanfile("cardnames-de-DE")
+
+# Patch language files
+patchtranslations("cardnames-es-ES")
+patchtranslations("cardnames-de-DE")
