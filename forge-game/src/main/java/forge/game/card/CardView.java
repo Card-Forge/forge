@@ -659,6 +659,8 @@ public class CardView extends GameEntityView {
             if (c.getGame() != null) {
                 currentStateView.updateColors(currentState);
             }
+        } else {
+            currentStateView.updateLoyalty(currentState);
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
@@ -685,6 +687,8 @@ public class CardView extends GameEntityView {
                 if (c.getGame() != null) {
                     alternateStateView.updateColors(alternateState);
                 }
+            } else {
+                alternateStateView.updateLoyalty(alternateState);
             }
             alternateState.getView().updateKeywords(c, alternateState);
         }

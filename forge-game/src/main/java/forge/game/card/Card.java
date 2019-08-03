@@ -539,8 +539,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void updatePowerToughnessForView() {
-        currentState.getView().updatePower(this);
-        currentState.getView().updateToughness(this);
+        view.updateCounters(this);
     }
 
     public final void updateTypesForView() {
