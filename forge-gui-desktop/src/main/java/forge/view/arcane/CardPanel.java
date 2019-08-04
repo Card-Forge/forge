@@ -705,7 +705,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         String sPt = "";
         if (state.isCreature() && state.isPlaneswalker()) {
             sPt = state.getPower() + "/" + state.getToughness() +
-                    " (" + String.valueOf(state.getLoyalty()) + ")";
+                    " (" + state.getLoyalty() + ")";
         }
         else if (state.isCreature()) {
             sPt = state.getPower() + "/" + state.getToughness();
@@ -714,7 +714,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             sPt = "[" + state.getPower() + "/" + state.getToughness() + "]";
         }
         else if (state.isPlaneswalker()) {
-            sPt = String.valueOf(state.getLoyalty());
+            sPt = state.getLoyalty();
         }
         ptText.setText(sPt);
     }

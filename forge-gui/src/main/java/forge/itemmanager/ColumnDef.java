@@ -35,6 +35,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum ColumnDef {
    /**The column containing the inventory item name.*/
     STRING("", "", 0, false, SortState.ASC,
@@ -512,7 +514,8 @@ public enum ColumnDef {
             result = ((IPaperCard) i).getRules().getIntPower();
             if (result == Integer.MAX_VALUE) {
                 if (((IPaperCard)i).getRules().getType().isPlaneswalker()) {
-                    result = ((IPaperCard) i).getRules().getInitialLoyalty();
+                    String loy = ((IPaperCard) i).getRules().getInitialLoyalty();
+                    result = StringUtils.isNumeric(loy) ? Integer.valueOf(loy) : 0;
                 }
             }
         }

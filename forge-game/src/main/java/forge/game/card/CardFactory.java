@@ -325,9 +325,6 @@ public class CardFactory {
 
             // ******************************************************************
             // ************** Link to different CardFactories *******************
-            if (card.isPlaneswalker()) {
-                buildPlaneswalkerAbilities(card);
-            }
 
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 for (final SpellAbility sa : card.getSpellAbilities()) {
@@ -381,18 +378,6 @@ public class CardFactory {
         planarRoll.setSVar("X", "Count$RolledThisTurn");
 
         card.addSpellAbility(planarRoll);
-    }
-
-    private static void buildPlaneswalkerAbilities(Card card) {
-        CardState state = card.getCurrentState();
-    	// etbCounter only for Original Card
-        if (state.getBaseLoyalty() > 0) {
-            final String loyalty = Integer.toString(state.getBaseLoyalty());
-            // keyword need to be added to state directly, so init can be disabled
-            if (state.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc", false) != null) {
-                card.updateKeywords();
-            }
-        }
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
