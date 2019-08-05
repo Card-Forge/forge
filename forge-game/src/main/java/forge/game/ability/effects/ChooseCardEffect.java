@@ -52,7 +52,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
         CardCollectionView choices = game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
         }
         if (sa.hasParam("TargetControls")) {
             choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));

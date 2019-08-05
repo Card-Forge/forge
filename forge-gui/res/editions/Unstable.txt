@@ -43,8 +43,8 @@ g_1_1_saproling
 g_1_1_saproling
 g_1_1_squirrel
 g_6_6_wurm
-gw_x_x_vigilance_total_creatures
-gw_x_x_vigilance_total_creatures
+gw_x_x_elemental_total_creatures
+gw_x_x_elemental_total_creatures
 c_a_clue_draw
 c_a_clue_draw
 c_x_x_a_construct

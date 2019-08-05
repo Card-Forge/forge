@@ -77,7 +77,7 @@ public enum TrackableProperty {
     RulesText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
     Toughness(TrackableTypes.IntegerType),
-    Loyalty(TrackableTypes.IntegerType),
+    Loyalty(TrackableTypes.StringType),
     ChangedColorWords(TrackableTypes.StringMapType),
     ChangedTypes(TrackableTypes.StringMapType),
     HasDeathtouch(TrackableTypes.BooleanType),

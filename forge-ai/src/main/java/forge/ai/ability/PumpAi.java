@@ -74,6 +74,10 @@ public class PumpAi extends PumpAiBase {
             return doAristocratLogic(sa, ai);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return doAristocratWithCountersLogic(sa, ai);
+        } else if ("RiskFactor".equals(aiLogic)) {
+            if (ai.getCardsIn(ZoneType.Hand).size() + 3 >= ai.getMaxHandSize()) {
+                return false;
+            }
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);

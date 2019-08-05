@@ -28,6 +28,11 @@ public enum CSubmenuDownloaders implements ICDoc {
             new GuiDownloader(new GuiDownloadPicturesLQ()).show();
         }
     };
+    private final UiCommand cmdPicDownloadHQ = new UiCommand() {
+        @Override public void run() {
+            new GuiDownloader(new GuiDownloadPicturesHQ()).show();
+        }
+    };
     private final UiCommand cmdSetDownload = new UiCommand() {
         @Override public void run() {
             new GuiDownloader(new GuiDownloadSetPicturesLQ()).show();
@@ -80,6 +85,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     public void initialize() {
         final VSubmenuDownloaders view = VSubmenuDownloaders.SINGLETON_INSTANCE;
         view.setDownloadPicsCommand(cmdPicDownload);
+        view.setDownloadPicsHQCommand(cmdPicDownloadHQ);
         view.setDownloadSetPicsCommand(cmdSetDownload);
         view.setDownloadQuestImagesCommand(cmdQuestImages);
         view.setDownloadAchievementImagesCommand(cmdAchievementImages);

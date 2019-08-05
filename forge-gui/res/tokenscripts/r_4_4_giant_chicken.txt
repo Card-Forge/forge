@@ -1,0 +1,6 @@
+Name:Giant Chicken
+ManaCost:no cost
+Types:Creature Giant Chicken
+Colors:red
+PT:4/4
+Oracle:

@@ -1,0 +1,20 @@
+[metadata]
+Code=MPS_WAR
+Date=2019-05-03
+Name=Mythic Edition - War of the Spark
+MciCode=med
+Type=Other
+
+[cards]
+M Ugin, the Spirit Dragon
+M Gideon Blackblade
+M Jace, the Mind Sculptor
+M Tezzeret the Seeker
+M Garruk, Apex Predator
+M Nicol Bolas, Dragon-God
+M Nahiri, the Harbinger
+M Sarkhan Unbroken
+
+[tokens]
+b_3_3_beast_deathtouch
+r_4_4_dragon_flying

@@ -108,6 +108,9 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
+                if (hostCard.isInPlay()) {
+                    return false; // cut short if already on the battlefield, avoids side effects when checking statics
+                }
                 CardStateName stateBackup = hostCard.getCurrentStateName();
                 boolean face = hostCard.isFaceDown();
                 hostCard.turnFaceDownNoUpdate();
@@ -3505,7 +3508,7 @@ public class CardFactoryUtil {
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " + 
             " | OptionalDecider$ You | RememberObjects$ Self | TriggerDescription$"
-            + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying it's manacost.";
+            + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
             // TODO add check for still in exile
             String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
 
@@ -3847,23 +3850,11 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
-            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | SubAbility$"
-                    + " DashDelayedTrigger";
-            final String dbDelayTrigger = "DB$ DelayedTrigger | Mode$ Phase | Phase$"
-                    + " End of Turn | Execute$ DashReturnSelf | RememberObjects$ Self"
-                    + " | TriggerDescription$ Return CARDNAME from the battlefield to" + " its owner's hand.";
-            final String dbReturn = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand"
-                    + " | Defined$ DelayTriggerRemembered";
-            card.setSVar("DashDelayedTrigger", dbDelayTrigger);
-            card.setSVar("DashReturnSelf", dbReturn);
+            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | StackDescription$ CARDNAME (Dash)"
+                    + " | Dash$ True | NonBasicSpell$ True"
+                    + " | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
 
             final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
-            String desc = "Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText()
-                    + ")";
-            newSA.setStackDescription(card.getName() + " (Dash)");
-            newSA.setDescription(desc);
-            newSA.setBasicSpell(false);
-            newSA.setDash(true);
             newSA.setIntrinsic(intrinsic);
 
             newSA.setTemporary(!intrinsic);
@@ -3903,14 +3894,14 @@ public class CardFactoryUtil {
             // Epic does modify existing SA, and does not add new one
 
             // Add the Epic effect as a subAbility
-            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent";
+            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Epic$ True";
 
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
 
-            card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
-            card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
+            newSA.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
+            newSA.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                     + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
-            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource | Epic$ True");
+            newSA.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource | Epic$ True");
 
             final SpellAbility origSA = card.getFirstSpellAbility();
 
@@ -4524,6 +4515,8 @@ public class CardFactoryUtil {
 
             card.setSVar("CipherTrigger", trig);
             card.setSVar("PlayEncoded", ab);
+        } else if (keyword.startsWith("Dash")) {
+            effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Devoid")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +

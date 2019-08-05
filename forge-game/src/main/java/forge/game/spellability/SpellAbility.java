@@ -31,6 +31,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactory;
+import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
@@ -125,7 +126,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;
-    
+
     private Map<String, AbilitySub> additionalAbilities = Maps.newHashMap();
     private Map<String, List<AbilitySub>> additionalAbilityLists = Maps.newHashMap();
 
@@ -161,9 +162,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
-    
+
     private CardDamageMap damageMap = null;
     private CardDamageMap preventMap = null;
+    private CardZoneTable changeZoneTable = null;
 
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
@@ -283,7 +285,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Spell, and Ability, and other Ability objects override this method
     public abstract boolean canPlay();
-    
+
     public boolean canPlay(boolean checkOptionalCosts) {
         if (canPlay()) {
             return true;
@@ -298,17 +300,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return false;
     }
-    
+
     public boolean canPlayWithOptionalCost(OptionalCostValue opt) {
         return GameActionUtil.addOptionalCosts(this, Lists.newArrayList(opt)).canPlay();
     }
 
     public boolean isPossible() {
-    	return canPlay(); //by default, ability is only possible if it can be played
+        return canPlay(); //by default, ability is only possible if it can be played
     }
 
     public boolean promptIfOnlyPossibleAbility() {
-    	return false; //by default, don't prompt user if ability is only possible ability
+        return false; //by default, don't prompt user if ability is only possible ability
     }
 
     // all Spell's and Abilities must override this method
@@ -607,7 +609,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
     }
-    
+
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description
     public String yieldKey() {
         if (getHostCard() != null) {
@@ -631,7 +633,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             setDescription(s);
         }
     }
-    
+
     public String getOriginalStackDescription() {
         return originalStackDescription;
     }
@@ -645,7 +647,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         originalDescription = s;
         description = originalDescription;
     }
-    
+
     public String getOriginalDescription() {
         return originalDescription;
     }
@@ -709,7 +711,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         view.updateDescription(this); //description changes when sub-abilities change
     }
-    
+
     public Map<String, AbilitySub> getAdditionalAbilities() {
         return additionalAbilities;
     }
@@ -719,7 +721,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return null;
     }
-    
+
     public boolean hasAdditionalAbility(final String name) {
         return additionalAbilities.containsKey(name);
     }
@@ -744,7 +746,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return ImmutableList.of();
         }
     }
-    
+
     public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
         if (list == null || list.isEmpty()) {
             additionalAbilityLists.remove(name);
@@ -889,6 +891,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (preventMap != null) {
                 clone.preventMap = new CardDamageMap(preventMap);
+            }
+            if (changeZoneTable != null) {
+                clone.changeZoneTable = new CardZoneTable();
+                clone.changeZoneTable.putAll(changeZoneTable);
             }
 
             // clear maps for copy, the values will be added later
@@ -1127,7 +1133,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // Restrictions coming from target
         return entity.canBeTargetedBy(this);
     }
-    
+
     // is this a wrapping ability (used by trigger abilities)
     public boolean isWrapper() {
         return false;
@@ -1387,20 +1393,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /**
      * returns true if another target can be added
-     * @return 
+     * @return
      */
     public boolean canAddMoreTarget() {
         if (!this.usesTargeting()) {
             return false;
         }
-        
+
         return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
-    
+
     public boolean isZeroTargets() {
         return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().getNumTargeted() == 0;
     }
-    
+
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
             return getTargets().isEmpty();
@@ -1776,7 +1782,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         for (AbilitySub sa : additionalAbilities.values()) {
             sa.changeText();
         }
-        
+
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
                 sa.changeText();
@@ -1886,12 +1892,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         return score;
     }
-    
+
     public CardDamageMap getDamageMap() {
         if (damageMap != null) {
             return damageMap;
         } else if (getParent() != null) {
-            return getParent().getDamageMap();            
+            return getParent().getDamageMap();
         }
         return null;
     }
@@ -1900,7 +1906,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (preventMap != null) {
             return preventMap;
         } else if (getParent() != null) {
-            return getParent().getPreventMap();            
+            return getParent().getPreventMap();
+        }
+        return null;
+    }
+
+    public CardZoneTable getChangeZoneTable() {
+        if (changeZoneTable != null) {
+            return changeZoneTable;
+        } else if (getParent() != null) {
+            return getParent().getChangeZoneTable();
         }
         return null;
     }
@@ -1910,6 +1925,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPreventMap(final CardDamageMap map) {
         preventMap = map;
+    }
+    public void setChangeZoneTable(final CardZoneTable table) {
+        changeZoneTable = table;
     }
 
     public SpellAbility getOriginalAbility() {

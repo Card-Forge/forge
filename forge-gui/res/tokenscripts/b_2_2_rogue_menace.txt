@@ -1,0 +1,7 @@
+Name:Rogue
+ManaCost:no cost
+Types:Creature Rogue
+Colors:black
+PT:2/2
+K:Menace
+Oracle:Menace

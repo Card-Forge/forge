@@ -1296,8 +1296,8 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("EffectSource")) {
-            if (card.getEffectSource() != null) {
-                sas.addAll(card.getEffectSource().getSpellAbilities());
+            if (card.getEffectSourceAbility() != null) {
+                sas.add(card.getEffectSourceAbility().getRootAbility());
             }
         }
         else if (defined.equals("SourceFirstSpell")) {

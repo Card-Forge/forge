@@ -659,6 +659,8 @@ public class CardView extends GameEntityView {
             if (c.getGame() != null) {
                 currentStateView.updateColors(currentState);
             }
+        } else {
+            currentStateView.updateLoyalty(currentState);
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
@@ -685,6 +687,8 @@ public class CardView extends GameEntityView {
                 if (c.getGame() != null) {
                     alternateStateView.updateColors(alternateState);
                 }
+            } else {
+                alternateStateView.updateLoyalty(alternateState);
             }
             alternateState.getView().updateKeywords(c, alternateState);
         }
@@ -889,13 +893,17 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Toughness, c.getBaseToughness());
         }
 
-        public int getLoyalty() {
+        public String getLoyalty() {
             return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            updateLoyalty(c.getCurrentLoyalty());
+            if (c.isInZone(ZoneType.Battlefield)) {
+                updateLoyalty(String.valueOf(c.getCurrentLoyalty()));
+            } else {
+                updateLoyalty(c.getCurrentState().getBaseLoyalty());
+            }
         }
-        void updateLoyalty(int loyalty) {
+        void updateLoyalty(String loyalty) {
             set(TrackableProperty.Loyalty, loyalty);
         }
         void updateLoyalty(CardState c) {
@@ -911,7 +919,7 @@ public class CardView extends GameEntityView {
                     return;
                 }
             }
-            set(TrackableProperty.Loyalty, 0); //alternates don't need loyalty
+            set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
 
         public String getSetCode() {
