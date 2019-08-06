@@ -53,7 +53,7 @@ public class CardState extends GameObject {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
-    private int baseLoyalty = 0;
+    private String baseLoyalty = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
@@ -71,6 +71,8 @@ public class CardState extends GameObject {
 
     private final CardStateView view;
     private final Card card;
+
+    private ReplacementEffect loyaltyRep = null;
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -174,11 +176,11 @@ public class CardState extends GameObject {
         view.updateToughness(this);
     }
 
-    public int getBaseLoyalty() {
+    public String getBaseLoyalty() {
         return baseLoyalty;
     }
-    public final void setBaseLoyalty(final int loyalty) {
-        baseLoyalty = loyalty;
+    public final void setBaseLoyalty(final String string) {
+        baseLoyalty = string;
         view.updateLoyalty(this);
     }
 
@@ -400,6 +402,14 @@ public class CardState extends GameObject {
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
+
+        if (getTypeWithChanges().isPlaneswalker()) {
+            if (loyaltyRep == null) {
+                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, card, true);
+            }
+            result.add(loyaltyRep);
+        }
+
         card.updateReplacementEffects(result, this);
         return result;
     }

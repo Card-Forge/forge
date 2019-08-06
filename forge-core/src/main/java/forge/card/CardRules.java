@@ -186,7 +186,7 @@ public final class CardRules implements ICardCharacteristics {
     @Override public int getIntToughness() { return mainPart.getIntToughness(); }
     @Override public String getPower() { return mainPart.getPower(); }
     @Override public String getToughness() { return mainPart.getToughness(); }
-    @Override public int getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
+    @Override public String getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
 
     @Override
     public String getOracleText() {
@@ -409,7 +409,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'L':
                     if ("Loyalty".equals(key)) {
-                        this.faces[this.curFace].setInitialLoyalty(Integer.valueOf(value));
+                        this.faces[this.curFace].setInitialLoyalty(value);
                     }
                     break;
 
