@@ -446,7 +446,7 @@ public class VAssignDamage extends FDialog {
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;
-                lethalDamage = pw.getCurrentState().getLoyalty();
+                lethalDamage = Integer.valueOf(pw.getCurrentState().getLoyalty());
             }
         }
         else {

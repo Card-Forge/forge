@@ -376,6 +376,9 @@ public class GameAction {
             copied.clearEtbCounters();
         }
 
+        // update state for view
+        copied.updateStateForView();
+
         if (fromBattlefield) {
             c.setDamage(0); //clear damage after a card leaves the battlefield
             c.setHasBeenDealtDeathtouchDamage(false);

@@ -38,7 +38,7 @@ final class CardFace implements ICardFace {
     private int iToughness = Integer.MAX_VALUE;
     private String power = null;
     private String toughness = null;
-    private int initialLoyalty = -1;
+    private String initialLoyalty = "";
 
     private String nonAbilityText = null;
     private List<String> keywords = null;
@@ -56,7 +56,7 @@ final class CardFace implements ICardFace {
     @Override public int getIntToughness()          { return iToughness; }
     @Override public String getPower()              { return power; }
     @Override public String getToughness()          { return toughness; }
-    @Override public int getInitialLoyalty()              { return initialLoyalty; }
+    @Override public String getInitialLoyalty()              { return initialLoyalty; }
     @Override public String getName()               { return this.name; }
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
@@ -84,7 +84,7 @@ final class CardFace implements ICardFace {
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
     void setOracleText(String text)          { this.oracleText = text; }
-    void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
+    void setInitialLoyalty(String value)        { this.initialLoyalty = value; }
 
     void setPtText(String value) {
         final String k[] = value.split("/");

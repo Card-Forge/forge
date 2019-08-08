@@ -90,7 +90,7 @@ public class ReplacementHandler {
             if (cause != null && cause.isReplacementAbility()) {
                 final ReplacementEffect re = cause.getReplacementEffect();
                 // only return for same layer
-                if (layer.equals(re.getLayer())) {
+                if ("Moved".equals(re.getParam("Event")) && layer.equals(re.getLayer())) {
                     return re.getOtherChoices();
                 }
             }
