@@ -1,0 +1,7 @@
+Name:Sculpture
+ManaCost:no cost
+Types:Artifact Creature Sculpture
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ CARDNAME's power and toughness are each equal to the number of sculptures you control.
+SVar:TokenX:Count$Valid Sculpture.YouCtrl
+Oracle:This creature's power and toughness are each equal to the number of sculptures you control.

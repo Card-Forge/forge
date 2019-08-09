@@ -1,0 +1,7 @@
+Name:Egg
+ManaCost:no cost
+Types:Creature Egg
+Colors:green
+PT:0/1
+K:Defender
+Oracle:Defender

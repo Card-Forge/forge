@@ -1,0 +1,19 @@
+[metadata]
+Code=C19
+Date=2019-08-23
+Name=Commander 2019
+Code2=C19
+MciCode=c19
+Type=Other
+
+[cards]
+
+
+[tokens]
+c_10_10_eldrazi
+c_a_treasure_sac
+g_0_1_egg_defender
+g_1_1_plant
+g_4_4_rhino_trample
+w_1_1_spirit_flying
+
