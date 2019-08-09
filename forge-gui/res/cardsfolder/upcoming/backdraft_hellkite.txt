@@ -1,0 +1,8 @@
+Name:Backdraft Hellkite
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigFlashback | TriggerDescription$ Whenever CARDNAME attacks, each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+SVar:TrigFlashback:DB$ PumpAll | ValidCards$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | PumpZone$ Graveyard
+Oracle:Flying\nWhenever Backdraft Hellkite attacks, each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.

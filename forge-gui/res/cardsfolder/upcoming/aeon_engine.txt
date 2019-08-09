@@ -1,0 +1,7 @@
+Name:Aeon Engine
+ManaCost:5
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ReverseTurnOrder | Cost$ T Exile<1/CARDNAME> | SpellDescription$ Reverse the game's turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)
+AI:RemoveDeck:All
+Oracle:Aeon Engine enters the battlefield tapped.\n{T}, Exile Aeon Engine: Reverse the game's turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)
