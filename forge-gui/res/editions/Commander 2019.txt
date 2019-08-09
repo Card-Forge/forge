@@ -15,4 +15,5 @@ c_a_treasure_sac
 g_0_1_egg_defender
 g_1_1_plant
 g_4_4_rhino_trample
+w_1_1_spirit_flying
 

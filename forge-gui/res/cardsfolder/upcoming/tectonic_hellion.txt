@@ -1,0 +1,9 @@
+Name:Tectonic Hellion
+ManaCost:5 R R
+Types:Creature Hellion
+PT:8/5
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks, each player who controls the most lands sacrifices two lands.
+SVar:TrigSac:DB$ Sacrifice | Amount$ 2 | SacValid$ Land | Defined$ Player.withMostTypeLand
+AI:RemoveDeck:Random
+Oracle:Haste\nWhenever Tectonic Hellion attacks, each player who controls the most lands sacrifices two lands.
