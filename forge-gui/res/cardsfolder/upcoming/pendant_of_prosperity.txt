@@ -1,7 +1,7 @@
 Name:Pendant of Prosperity
 ManaCost:3
 Types:Artifact
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Description$ CARDNAME enters the battlefield under the control of an opponent of your choice.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Layer$ Control | Description$ CARDNAME enters the battlefield under the control of an opponent of your choice.
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True |  NewController$ ChosenPlayer
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card, then you may put a land card from your hand onto the battlefield. CARDNAME's owner draws a card, then that player may put a land card from their hand onto the battlefield.
