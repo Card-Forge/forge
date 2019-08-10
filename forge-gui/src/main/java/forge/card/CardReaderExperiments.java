@@ -174,8 +174,7 @@ public class CardReaderExperiments {
         }
         
         if (updated) {
-            try {
-                PrintWriter p = new PrintWriter(file);
+            try (PrintWriter p = new PrintWriter(file)) {
                 for (int i = 0; i < lines.size(); i++) {
                     if (i < lines.size() - 1) {
                         p.println(lines.get(i));
@@ -184,7 +183,6 @@ public class CardReaderExperiments {
                         p.print(lines.get(i));
                     }
                 }
-                p.close();
                 output.add(rules.getName());
             } catch (final Exception ex) {
             }

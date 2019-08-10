@@ -353,6 +353,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         return other != this && other != null && (other.teamNumber < 0 || other.teamNumber != teamNumber);
     }
 
+    public boolean isOpponentOf(String other) {
+        Player otherPlayer = null;
+        for (Player p : game.getPlayers()) {
+            if (p.getName().equals(other)) {
+                otherPlayer = p;
+                break;
+            }
+        }
+        return isOpponentOf(otherPlayer);
+    }
+
     public final boolean setLife(final int newLife, final Card source) {
         boolean change = false;
         // rule 118.5

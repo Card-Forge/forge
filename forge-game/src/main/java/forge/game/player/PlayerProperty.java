@@ -253,12 +253,11 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("hasFewer")) {
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            if (property.substring(8).startsWith("CreaturesInYard")) {
-                final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
-                final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
-                if (oppList.size() >= yourList.size()) {
-                    return false;
-                }
+            final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
+            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), Presets.CREATURES);
+            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), Presets.CREATURES);
+            if (oppList.size() >= yourList.size()) {
+                return false;
             }
         } else if (property.startsWith("withMost")) {
             final String kind = property.substring(8);

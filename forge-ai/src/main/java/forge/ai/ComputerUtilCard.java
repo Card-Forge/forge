@@ -228,7 +228,7 @@ public class ComputerUtilCard {
         Card cheapest = null;
     
         for (Card c : all) {
-            if (cheapest == null || cheapest.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
+            if (cheapest == null || c.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
                 cheapest = c;
             }
         }

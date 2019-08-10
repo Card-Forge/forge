@@ -211,7 +211,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
         }
     }
 
-    protected void copyInputStream(final InputStream in, final String outPath) throws IOException{
+    protected void copyInputStream(final InputStream in, final String outPath) throws IOException {
         final byte[] buffer = new byte[1024];
         int len;
         final BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath));

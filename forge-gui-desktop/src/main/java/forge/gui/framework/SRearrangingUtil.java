@@ -140,6 +140,7 @@ public final class SRearrangingUtil {
         }
 
         if (evtX < (tempX + nestingMargin)
+                && evtY > tempY + SLayoutConstants.HEAD_H
                 && (cellTarget.getW() / 2) > SResizingUtil.W_MIN) {
             dropzone = Dropzone.LEFT;
             pnlDocument.setCursor(CUR_L);
@@ -152,6 +153,7 @@ public final class SRearrangingUtil {
 
         }
         else if (evtX > (tempX + tempW - nestingMargin)
+                && evtY > tempY + SLayoutConstants.HEAD_H
                 && (cellTarget.getW() / 2) > SResizingUtil.W_MIN) {
             dropzone = Dropzone.RIGHT;
             pnlDocument.setCursor(CUR_R);
