@@ -88,12 +88,11 @@ public class DeckController<T extends DeckBase> {
      * Load deck from file or clipboard
      */
     public void loadDeck(Deck deck) {
-
-        if (deck.getName() == "") {
-            newModel();
-        }
-
-        if (!view.getCatalogManager().isInfinite()) {
+        if (view.getCatalogManager().isInfinite()) {
+            if (deck.getName() == "") {
+                newModel();
+            }
+        } else {
             CardPool catalogClone = new CardPool(view.getInitialCatalog());
             deck = pickFromCatalog(deck, catalogClone);
             ItemPool<PaperCard> catalogPool = view.getCatalogManager().getPool();
