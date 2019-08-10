@@ -49,13 +49,11 @@ public final class CardScriptInfo {
     public boolean trySetText(final String text0) {
         if (file == null) { return false; }
 
-        try {
-            final PrintWriter p = new PrintWriter(file);
+        try (PrintWriter p = new PrintWriter(file)) {
             p.print(text0);
             if (!text0.endsWith(("\n"))){
                 p.print("\n");
             }
-            p.close();
 
             text = text0;
             return true;

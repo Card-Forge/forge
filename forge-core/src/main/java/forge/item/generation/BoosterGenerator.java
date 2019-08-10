@@ -306,7 +306,7 @@ public class BoosterGenerator {
                                 // 1 out of ~30 normal and mythic rares are foil,
                                 // match that.
                                 // If not special card, make it always foil.
-                                if ((MyRandom.getRandom().nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
+                                if ((MyRandom.getRandom().nextInt(30) == 1) || (!foilSlot.equals(BoosterSlots.SPECIAL))) {
                                     foilCardGeneratedAndHeld.add(generateFoilCard(ps));
                                 } else {
                                     // Otherwise it's not foil (even though this is the

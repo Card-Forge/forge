@@ -19,33 +19,21 @@ public class CardThemedLDAIO {
 
     public static void saveRawLDA(String format, List<Archetype> lda){
         File file = getRAWLDAFile(format);
-        ObjectOutputStream s = null;
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            s = new ObjectOutputStream(f);
+        try (FileOutputStream f = new FileOutputStream(file);
+             ObjectOutputStream s = new ObjectOutputStream(f)){
             s.writeObject(lda);
             s.close();
         } catch (IOException e) {
             System.out.println("Error writing matrix data: " + e);
-        } finally {
-            if(s!=null) {
-                try {
-                    s.close();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     public static List<Archetype> loadRawLDA(String format){
-        try {
-            FileInputStream fin = new FileInputStream(getRAWLDAFile(format));
-            ObjectInputStream s = new ObjectInputStream(fin);
+        try (FileInputStream fin = new FileInputStream(getRAWLDAFile(format));
+             ObjectInputStream s = new ObjectInputStream(fin)) {
             List<Archetype> matrix = (List<Archetype>) s.readObject();
-            s.close();
             return matrix;
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("Error reading LDA data: " + e);
             return null;
         }
@@ -54,37 +42,24 @@ public class CardThemedLDAIO {
 
     public static void saveLDA(String format, Map<String,List<List<Pair<String, Double>>>> map){
         File file = getLDAFile(format);
-        ObjectOutputStream s = null;
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            s = new ObjectOutputStream(f);
+
+        try (FileOutputStream f = new FileOutputStream(file);
+             ObjectOutputStream s = new ObjectOutputStream(f)){
             s.writeObject(map);
-            s.close();
         } catch (IOException e) {
             System.out.println("Error writing matrix data: " + e);
-        } finally {
-            if(s!=null) {
-                try {
-                    s.close();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     public static Map<String,List<List<Pair<String, Double>>>> loadLDA(String format){
-        try {
-            FileInputStream fin = new FileInputStream(getLDAFile(format));
-            ObjectInputStream s = new ObjectInputStream(fin);
+        try (FileInputStream fin = new FileInputStream(getLDAFile(format));
+             ObjectInputStream s = new ObjectInputStream(fin)) {
             Map<String,List<List<Pair<String, Double>>>> matrix = (Map<String,List<List<Pair<String, Double>>>>) s.readObject();
-            s.close();
             return matrix;
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("Error reading LDA data: " + e);
             return null;
         }
-
     }
 
     public static File getLDAFile(final String name) {

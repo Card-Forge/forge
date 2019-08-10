@@ -145,12 +145,9 @@ public class BugReporter {
 
         f = GuiBase.getInterface().getSaveFile(f);
 
-        try {
-            final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
             bw.write(text);
-            bw.close();
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             SOptionPane.showMessageDialog("There was an error during saving. Sorry!\n" + ex,
                     "Error saving file", SOptionPane.ERROR_ICON);
         }

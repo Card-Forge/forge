@@ -1011,21 +1011,12 @@ public class ImportDialog {
             destFile.createNewFile();
         }
 
-        FileInputStream srcStream = null;
-        FileChannel src  = null;
-        FileOutputStream destStream = null;
-        FileChannel dest = null;
-        try {
-        	srcStream = new FileInputStream(srcFile);
-            src  = srcStream.getChannel();
-            destStream = new FileOutputStream(destFile);
-            dest = destStream.getChannel();
+        try (FileInputStream srcStream = new FileInputStream(srcFile);
+             FileChannel src = srcStream.getChannel();
+             FileOutputStream destStream = new FileOutputStream(destFile);
+             FileChannel dest = destStream.getChannel()
+             ) {
             dest.transferFrom(src, 0, src.size());
-        } finally {
-            if (src  != null) { src.close();  }
-            if (srcStream != null) { srcStream.close(); }
-            if (dest != null) { dest.close(); }
-            if (destStream != null) { destStream.close(); }
         }
 
         if (deleteSrcAfter) {
