@@ -172,7 +172,7 @@ public class SpecialCardAi {
                 }
             }
 
-            return best.getName();
+            return best != null ? best.getName() : "";
         }
     }
 
@@ -1231,7 +1231,7 @@ public class SpecialCardAi {
             // no options with smaller CMC, so discard the one that is harder to cast for the one that is
             // easier to cast right now, but only if the best card in the library is at least CMC 3
             // (probably not worth it to grab low mana cost cards this way)
-            if (maxCMC != null && maxCMC.getCMC() < bestInLib.getCMC() && bestInLib.getCMC() >= 3) {
+            if (maxCMC != null && bestInLib != null && maxCMC.getCMC() < bestInLib.getCMC() && bestInLib.getCMC() >= 3) {
                 return maxCMC;
             }
             // We appear to be playing Reanimator (or we have a reanimator card in hand already), so it's

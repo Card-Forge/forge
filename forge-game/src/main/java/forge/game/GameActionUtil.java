@@ -311,6 +311,7 @@ public final class GameActionUtil {
                 break;
             case Flash:
                 result.getRestrictions().setInstantSpeed(true);
+                break;
             default:
                 break;
             }
