@@ -727,6 +727,10 @@ public final class StaticAbilityContinuous {
                 }
             }
 
+            if (layer == StaticAbilityLayer.RULES && params.containsKey("Goad")) {
+                affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
+            }
+
             if (mayLookAt != null) {
                 for (Player p : mayLookAt) {
                     affectedCard.setMayLookAt(p, true);
