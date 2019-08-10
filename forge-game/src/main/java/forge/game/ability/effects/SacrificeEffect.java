@@ -119,8 +119,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("Random")) {
                     choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                }
-                else {
+                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, "Do you want to sacrifice?")) {
+                    choosenToSacrifice = CardCollection.EMPTY;
+                } else {
                     boolean isOptional = sa.hasParam("Optional");
                     boolean isStrict = sa.hasParam("StrictAmount");
                     int minTargets = isOptional ? 0 : amount;
