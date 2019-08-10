@@ -5333,6 +5333,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (source.getController().equals(chosenPlayer)) {
                     return true;
                 }
+            } else if (kw.equals("Protection from each opponent")) {
+                if (source.getController().isOpponentOf(getController())) {
+                    return true;
+                }
             } else if (kw.startsWith("Protection from ")) {
                 final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
                 if (source.getType().hasStringType(protectType)) {
