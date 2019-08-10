@@ -106,11 +106,8 @@ public final class FileUtil {
         File source = new File(sourceFilename);
         if (!source.exists()) { return; } //if source doesn't exist, nothing to copy
 
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new FileInputStream(source);
-            os = new FileOutputStream(new File(destFilename));
+        try (InputStream is = new FileInputStream(source);
+             OutputStream os = new FileOutputStream(new File(destFilename))){
             byte[] buffer = new byte[1024];
             int length;
             while ((length = is.read(buffer)) > 0) {
@@ -120,15 +117,6 @@ public final class FileUtil {
         catch (Exception e) {
             e.printStackTrace();
         }
-        finally {
-            try {
-                is.close();
-                os.close();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public static void writeFile(String filename, String text) {
@@ -136,10 +124,8 @@ public final class FileUtil {
     }
 
     public static void writeFile(File file, String text) {
-        try {
-            PrintWriter p = new PrintWriter(file);
+        try (PrintWriter p = new PrintWriter(file)) {
             p.print(text);
-            p.close();
         } catch (final Exception ex) {
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
@@ -174,12 +160,10 @@ public final class FileUtil {
      *            a {@link java.util.List} object.
      */
     public static void writeFile(File file, Collection<?> data) {
-        try {
-            PrintWriter p = new PrintWriter(file);
+        try (PrintWriter p = new PrintWriter(file)) {
             for (Object o : data) {
                 p.println(o);
             }
-            p.close();
         } catch (final Exception ex) {
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
@@ -291,10 +275,11 @@ public final class FileUtil {
         ThreadUtil.executeWithTimeout(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-                String line;
-                while ((line = in.readLine()) != null) {
-                    lines.add(line);
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        lines.add(line);
+                    }
                 }
                 return null;
             }

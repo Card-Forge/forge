@@ -120,20 +120,19 @@ public class QuestDataIO {
      */
     public static QuestData loadData(final File xmlSaveFile) throws IOException {
         QuestData data;
-
-        final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
         final StringBuilder xml = new StringBuilder();
-        final char[] buf = new char[1024];
-        final InputStreamReader reader = new InputStreamReader(zin);
-        while (reader.ready()) {
-            final int len = reader.read(buf);
-            if (len == -1) {
-                break;
-            } // when end of stream was reached
-            xml.append(buf, 0, len);
-        }
 
-        zin.close();
+        try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+             InputStreamReader reader = new InputStreamReader(zin)) {
+            final char[] buf = new char[1024];
+            while (reader.ready()) {
+                final int len = reader.read(buf);
+                if (len == -1) {
+                    break;
+                } // when end of stream was reached
+                xml.append(buf, 0, len);
+            }
+        }
 
         String bigXML = xml.toString();
         try {

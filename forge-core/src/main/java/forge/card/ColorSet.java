@@ -283,7 +283,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
             return "n/a";
         }
         final String toReturn = MagicColor.toLongString(myColor);
-        if (toReturn == MagicColor.Constant.COLORLESS && myColor != 0) {
+        if (toReturn.equals(MagicColor.Constant.COLORLESS) && myColor != 0) {
             return "multi";
         }
         return toReturn;
