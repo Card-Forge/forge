@@ -311,10 +311,27 @@ Type=Other
 302 L Forest
 
 [tokens]
+b_1_1_assassin_lose_con
+b_2_2_zombie
+c_3_4_a_gargoyle_flying
 c_10_10_eldrazi
 c_a_treasure_sac
+c_x_x_a_horror
+c_x_x_a_sculpture_total_sculptures
 g_0_1_egg_defender
 g_1_1_plant
+g_1_1_saproling
+g_1_1_snake
+g_3_3_beast
+g_3_3_centaur
+g_4_4_beast
 g_4_4_rhino_trample
+g_6_6_wurm
+r_5_5_dragon_flying
+w_1_1_human
+w_1_1_pegasus_flying
 w_1_1_spirit_flying
+w_3_3_bird_flying
+w_3_4_bird_flying
+u_2_2_drake_flying
 
