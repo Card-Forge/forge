@@ -161,7 +161,7 @@ public class CostAdjustment {
         if (sa.isSpell()) {
             if (((Spell) sa).isCastFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
-                originalCard.setState(CardStateName.FaceDown, false);
+                originalCard.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
             }
         } // isSpell
@@ -240,6 +240,7 @@ public class CostAdjustment {
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
+            originalCard.setFaceDown(false);
             originalCard.setState(CardStateName.Original, false);
         }
     }
@@ -451,11 +452,8 @@ public class CostAdjustment {
                     if (activator == null ) {
                         return false;
                     }
-                    CardCollection list = CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(), activator);
-                    if (params.containsKey("ValidCard")) {
-                        list = CardLists.getValidCards(list, params.get("ValidCard"), hostCard.getController(), hostCard);
-                    }
-                    if (list.size() > 0) {
+                    List<Card> list = CardUtil.getThisTurnCast(params.get("ValidCard"), hostCard);
+                    if (CardLists.filterControlledBy(list, activator).size() > 0) {
                         return false;
                     }
                 }
