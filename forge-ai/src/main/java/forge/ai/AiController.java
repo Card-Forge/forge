@@ -655,10 +655,10 @@ public class AiController {
             return false;
         }
 
-        AiCardMemory.MemorySet memSet;
+        AiCardMemory.MemorySet memSet = null;
         if (phaseType == null && forNextSpell) {
             memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL;
-        } else {
+        } else if (phaseType != null) {
             switch (phaseType) {
                 case MAIN2:
                     memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;

@@ -631,7 +631,9 @@ public abstract class GameState {
         // Note: triggers may fire during combat declarations ("whenever X attacks, ...", etc.)
         if (newPhase == PhaseType.COMBAT_DECLARE_ATTACKERS || newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
             boolean toDeclareBlockers = newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS;
-            handleCombat(game, newPlayerTurn, newPlayerTurn.getSingleOpponent(), toDeclareBlockers);
+            if (newPlayerTurn != null) {
+                handleCombat(game, newPlayerTurn, newPlayerTurn.getSingleOpponent(), toDeclareBlockers);
+            }
         }
 
         game.getStack().setResolving(false);
@@ -891,7 +893,9 @@ public abstract class GameState {
             }
         }
 
-        sa.setActivatingPlayer(c.getController());
+        if (sa != null) {
+            sa.setActivatingPlayer(c.getController());
+        }
         handleScriptedTargetingForSA(game, sa, tgtID);
 
         if (putOnStack) {

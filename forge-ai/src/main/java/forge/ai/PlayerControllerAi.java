@@ -733,6 +733,7 @@ public class PlayerControllerAi extends PlayerController {
                                     return true;
                                 }
                             }
+                            break;
                         case "BetterTgtThanRemembered":
                             if (source.getRememberedCount() > 0) {
                                 Card rem = (Card) source.getFirstRemembered();
@@ -746,6 +747,7 @@ public class PlayerControllerAi extends PlayerController {
                                 }
                                 return false;
                             }
+                            break;
                         default:
                             break;
                     }

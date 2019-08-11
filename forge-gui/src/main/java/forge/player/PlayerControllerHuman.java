@@ -2040,9 +2040,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 final File f = GuiBase.getInterface().getSaveFile(new File(ForgeConstants.USER_GAMES_DIR, "state.txt"));
                 if (f != null
                         && (!f.exists() || getGui().showConfirmDialog("Overwrite existing file?", "File exists!"))) {
-                    final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(state.toString());
-                    bw.close();
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+                        bw.write(state.toString());
+                    }
                 }
             } catch (final Exception e) {
                 String err = e.getClass().getName();

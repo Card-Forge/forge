@@ -111,7 +111,7 @@ public class SaveOpenDialog extends JPanel {
             RetFile = fc.getSelectedFile();
 
             /* Adds extension if it is known and not given */
-            if (type != null & !(RetFile.getAbsolutePath().endsWith(type.TypeExtension))) {
+            if (type != null && !(RetFile.getAbsolutePath().endsWith(type.TypeExtension))) {
                 RetFile = new File(RetFile.getAbsolutePath() + "." + type.TypeExtension);
             }
 

@@ -150,12 +150,15 @@ public class AiCardMemory {
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set) {
         Set<Card> memorySet = getMemorySet(set);
-        Iterator<Card> it = memorySet.iterator();
 
-        while (it.hasNext()) {
-            Card c = it.next();
-            if (c.getName().equals(cardName)) {
-                return true;
+        if (memorySet != null) {
+            Iterator<Card> it = memorySet.iterator();
+
+            while (it.hasNext()) {
+                Card c = it.next();
+                if (c.getName().equals(cardName)) {
+                    return true;
+                }
             }
         }
 
@@ -174,12 +177,15 @@ public class AiCardMemory {
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set, Player owner) {
         Set<Card> memorySet = getMemorySet(set);
-        Iterator<Card> it = memorySet.iterator();
 
-        while (it.hasNext()) {
-            Card c = it.next();
-            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
-                return true;
+        if (memorySet != null) {
+            Iterator<Card> it = memorySet.iterator();
+
+            while (it.hasNext()) {
+                Card c = it.next();
+                if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                    return true;
+                }
             }
         }
 
@@ -197,7 +203,12 @@ public class AiCardMemory {
         if (c == null)
             return false;
 
-        getMemorySet(set).add(c);
+        Set<Card> memorySet = getMemorySet(set);
+
+        if (memorySet != null) {
+            memorySet.add(c);
+        }
+
         return true;
     }
 
@@ -216,7 +227,12 @@ public class AiCardMemory {
             return false;
         }
 
-        getMemorySet(set).remove(c);
+        Set<Card> memorySet = getMemorySet(set);
+
+        if (memorySet != null) {
+            memorySet.remove(c);
+        }
+
         return true;
     }
 
@@ -229,12 +245,15 @@ public class AiCardMemory {
      */
     public boolean forgetAnyCardWithName(String cardName, MemorySet set) {
         Set<Card> memorySet = getMemorySet(set);
-        Iterator<Card> it = memorySet.iterator();
 
-        while (it.hasNext()) { 
-            Card c = it.next();
-            if (c.getName().equals(cardName)) {
-                return forgetCard(c, set);
+        if (memorySet != null) {
+            Iterator<Card> it = memorySet.iterator();
+
+            while (it.hasNext()) {
+                Card c = it.next();
+                if (c.getName().equals(cardName)) {
+                    return forgetCard(c, set);
+                }
             }
         }
         
@@ -251,15 +270,18 @@ public class AiCardMemory {
      */
     public boolean forgetAnyCardWithName(String cardName, MemorySet set, Player owner) {
         Set<Card> memorySet = getMemorySet(set);
-        Iterator<Card> it = memorySet.iterator();
 
-        while (it.hasNext()) { 
-            Card c = it.next();
-            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
-                return forgetCard(c, set);
+        if (memorySet != null) {
+            Iterator<Card> it = memorySet.iterator();
+
+            while (it.hasNext()) {
+                Card c = it.next();
+                if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                    return forgetCard(c, set);
+                }
             }
         }
-        
+
         return false;
     }
 
@@ -269,14 +291,16 @@ public class AiCardMemory {
      * @return true, if the given memory set contains no remembered cards.
      */
     public boolean isMemorySetEmpty(MemorySet set) {
-        return getMemorySet(set).isEmpty();
+        return set == null ? true : getMemorySet(set).isEmpty();
     }
     
     /**
      * Clears the given memory set.
      */
     public void clearMemorySet(MemorySet set) {
-        getMemorySet(set).clear();
+        if (set != null) {
+            getMemorySet(set).clear();
+        }
     }
 
     /**
