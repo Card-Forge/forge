@@ -4,6 +4,6 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBToken | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a 3/3 black Horror creature token and prevent all damage that would be dealt to creatures you control this turn.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror | TokenOwner$ You | LegacyImage$ b 3 3 horror e01 | SubAbility$ DBPrevent
 SVar:DBPrevent:DB$ Effect | Name$ Delight in the Hunt Effect | ReplacementEffects$ RPrevent
-SVar:RPrevent:Event$ DamageDone | Prevent$ True | | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control this turn.
 SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Delight in the Hunt.full.jpg
 Oracle:When you set this scheme in motion, create a 3/3 black Horror creature token and prevent all damage that would be dealt to creatures you control this turn.
