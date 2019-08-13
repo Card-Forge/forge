@@ -274,12 +274,12 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case COMBAT_BEGIN:
+                    combat = new Combat(playerTurn);
                     //PhaseUtil.verifyCombat();
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
                     if (!playerTurn.hasLost()) {
-                        combat = new Combat(playerTurn);
                         game.getStack().freezeStack();
                         declareAttackersTurnBasedAction();
                         game.getStack().unfreezeStack();
@@ -1134,6 +1134,17 @@ public class PhaseHandler implements java.io.Serializable {
         devModeSet(phase0, player0, endCombat, 0);
     }
 
+    public final void endCombatPhaseByEffect() {
+        if (!inCombat()) {
+            return;
+        }
+        endCombat();
+        game.getAction().checkStateEffects(true);
+        setPhase(PhaseType.COMBAT_END);
+        // End Combat always happens
+        game.getEndOfCombat().executeUntil();
+        advanceToNextPhase();
+    }
 
     public final void endTurnByEffect() {
         endCombat();

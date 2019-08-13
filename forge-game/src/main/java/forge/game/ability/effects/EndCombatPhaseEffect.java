@@ -8,14 +8,11 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
-public class EndTurnEffect extends SpellAbilityEffect {
+public class EndCombatPhaseEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ************************* END TURN **************************************
-    // *************************************************************************
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+    /*
+     * (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
      */
     @Override
     public void resolve(SpellAbility sa) {
@@ -32,7 +29,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         game.getTriggerHandler().clearWaitingTriggers();
 
         // 2) All attacking and blocking creatures are removed from combat.
-        game.getPhaseHandler().endCombat();
+        //game.getPhaseHandler().endCombat();
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
@@ -40,15 +37,16 @@ public class EndTurnEffect extends SpellAbilityEffect {
 
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.
-        game.getPhaseHandler().endTurnByEffect();
+        game.getPhaseHandler().endCombatPhaseByEffect();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+    /*
+     * (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return "End the turn.";
+        return "End the combat phase.";
     }
 
 }

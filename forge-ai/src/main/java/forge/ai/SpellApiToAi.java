@@ -70,6 +70,7 @@ public enum SpellApiToAi {
             .put(ApiType.EachDamage, DamageEachAi.class)
             .put(ApiType.Effect, EffectAi.class)
             .put(ApiType.Encode, EncodeAi.class)
+            .put(ApiType.EndCombatPhase, EndTurnAi.class)
             .put(ApiType.EndTurn, EndTurnAi.class)
             .put(ApiType.ExchangeLife, LifeExchangeAi.class)
             .put(ApiType.ExchangeLifeVariant, LifeExchangeVariantAi.class)
