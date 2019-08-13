@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/08/124.-M205.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards you could draw would be Mountains, and that both Chandra, Flame's Fury and Chandra, Bold Pyromancer are in your library.
+[state]
+humanlife=20
+ailife=15
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Chandra's Flame Wave;Tajic, Legion's Edge;Solar Blaze;Chandra's Outburst
+humanlibrary=Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Chandra, Flame's Fury;Chandra, Bold Pyromancer
+humanbattlefield=Chandra's Regulator;Cavalier of Dawn;Chandra, Novice Pyromancer|Counters:LOYALTY=1;Chandra, Awakened Inferno|Counters:LOYALTY=2;Chandra, Acolyte of Flame|Counters:LOYALTY=2;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs;Mountain;Mountain;Mountain
+aibattlefield=Dragon Egg;Drakuseth, Maw of Flames;Paladin of Atonement|Counters:P1P1=7;Rekindling Phoenix;Open the Graves
