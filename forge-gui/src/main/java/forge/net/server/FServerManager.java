@@ -218,28 +218,26 @@ public final class FServerManager {
     //  https://stackoverflow.com/a/34873630
     //  https://stackoverflow.com/a/901943
     private String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
-        DatagramSocket s = new DatagramSocket();
-        s.connect(InetAddress.getByAddress(this.externalAddress), 0);
-        NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
-        Enumeration<InetAddress> en = n.getInetAddresses();
-        while (en.hasMoreElements()) {
-            InetAddress addr = (InetAddress) en.nextElement();
-            if (addr instanceof Inet4Address) {
-                if (preferIPv6) {
-                    continue;
+        try (DatagramSocket s = new DatagramSocket()) {
+            s.connect(InetAddress.getByAddress(this.externalAddress), 0);
+            NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
+            Enumeration<InetAddress> en = n.getInetAddresses();
+            while (en.hasMoreElements()) {
+                InetAddress addr = (InetAddress) en.nextElement();
+                if (addr instanceof Inet4Address) {
+                    if (preferIPv6) {
+                        continue;
+                    }
+                    return addr.getHostAddress();
                 }
-                s.close();
-                return addr.getHostAddress();
-            }
-            if (addr instanceof Inet6Address) {
-                if (preferIpv4) {
-                    continue;
+                if (addr instanceof Inet6Address) {
+                    if (preferIpv4) {
+                        continue;
+                    }
+                    return addr.getHostAddress();
                 }
-                s.close();
-                return addr.getHostAddress();
             }
         }
-        s.close();
         return null;
     }
 

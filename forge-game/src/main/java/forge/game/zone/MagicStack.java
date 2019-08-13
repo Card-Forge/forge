@@ -41,6 +41,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -420,7 +421,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isSpell() && !sp.isCopied()) {
-            thisTurnCast.add(sp.getHostCard());
+            thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
             sp.getActivatingPlayer().addSpellCastThisTurn();
         }
         if (sp.isAbility() && sp.isPwAbility()) {
