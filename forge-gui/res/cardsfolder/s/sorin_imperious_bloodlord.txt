@@ -9,7 +9,7 @@ SVar:TrigPayCost:DB$ ImmediateTrigger | Execute$ DBDmg | ConditionDefined$ Remem
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Vampire | ChangeNum$ 1 | SpellDescription$ You may put a vampire creature card from your hand onto the battlefield.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Ultimate$ True | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Vampire | ChangeNum$ 1 | SpellDescription$ You may put a vampire creature card from your hand onto the battlefield.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 DeckHints:Type$Vampire
