@@ -526,7 +526,8 @@ public class CardView extends GameEntityView {
 
         String tname = "", toracle = "", taltname = "", taltoracle = "";
 
-        if (translationsText != null) {
+        // Don't translated if the card is a cloned one :(
+        if (translationsText != null && ((String) get(TrackableProperty.Cloner)).isEmpty()) {
             tname = translationsText.get("name");
             toracle = translationsText.get("oracle");
             taltname = translationsText.get("altname");
