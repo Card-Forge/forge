@@ -211,16 +211,16 @@ public class GuiDownloadZipService extends GuiDownloadService {
         }
     }
 
-    protected void copyInputStream(final InputStream in, final String outPath) throws IOException{
+    protected void copyInputStream(final InputStream in, final String outPath) throws IOException {
         final byte[] buffer = new byte[1024];
         int len;
-        final BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath));
 
-        while((len = in.read(buffer)) >= 0) {
-            out.write(buffer, 0, len);
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath))) {
+            while ((len = in.read(buffer)) >= 0) {
+                out.write(buffer, 0, len);
+            }
         }
 
         in.close();
-        out.close();
     }
 }

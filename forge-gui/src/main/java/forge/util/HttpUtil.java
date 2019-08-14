@@ -86,15 +86,9 @@ public class HttpUtil {
             return;
         }
 
-        FileInputStream uploadFileReader = null;
-        try {
-            uploadFileReader = new FileInputStream(f);
-        } catch (final FileNotFoundException e) {
-            return;
-        }
         final int numBytesToRead = 1024;
         int availableBytesToRead;
-        try {
+        try (FileInputStream uploadFileReader = new FileInputStream(f)) {
             while ((availableBytesToRead = uploadFileReader.available()) > 0) {
                 byte[] bufferBytesRead;
                 bufferBytesRead = availableBytesToRead >= numBytesToRead ? new byte[numBytesToRead]
@@ -103,10 +97,10 @@ public class HttpUtil {
                 httpOut.write(bufferBytesRead);
                 httpOut.flush();
             }
-            uploadFileReader.close();
         } catch (final IOException e) {
             return;
         }
+
         try {
             httpOut.write(("--" + HttpUtil.BOUNDARY + "--\r\n").getBytes());
         } catch (final IOException e) {
@@ -150,22 +144,17 @@ public class HttpUtil {
         }
     }
 
-    public static  String getURL(final String sURL) {
+    public static String getURL(final String sURL) {
         URL url = null;
         try {
             url = new URL(sURL);
         } catch (final MalformedURLException e) {
             return null;
         }
-        InputStream is = null;
-        try {
-            is = url.openStream();
-        } catch (final IOException e) {
-            return null;
-        }
+
         int ptr = 0;
         final StringBuffer buffer = new StringBuffer();
-        try {
+        try (InputStream is = url.openStream()) {
             while ((ptr = is.read()) != -1) {
                 buffer.append((char) ptr);
             }

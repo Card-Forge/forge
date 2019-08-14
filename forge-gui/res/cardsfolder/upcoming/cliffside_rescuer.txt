@@ -1,0 +1,7 @@
+Name:Cliffside Rescuer
+ManaCost:1 W
+Types:Creature Kor Soldier
+PT:2/2
+K:Vigilance
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection from opponent of ActivatorName | DefinedKW$ ActivatorName | SpellDescription$ Target permanent you control gets protection from each opponent until end of turn.
+Oracle:Vigilance\n{T}, Sacrifice Cliffside Rescuer: Target permanent you control gets protection from each opponent until end of turn.

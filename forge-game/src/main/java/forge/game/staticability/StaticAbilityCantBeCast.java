@@ -19,6 +19,7 @@ package forge.game.staticability;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -81,8 +82,7 @@ public class StaticAbilityCantBeCast {
         if (params.containsKey("NumLimitEachTurn") && activator != null) {
             int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
             String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
-            List<Card> thisTurnCast = CardLists.getValidCards(card.getGame().getStack().getSpellsCastThisTurn(),
-                    valid, card.getController(), card);
+            List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, card);
             if (CardLists.filterControlledBy(thisTurnCast, activator).size() < limit) {
                 return false;
             }

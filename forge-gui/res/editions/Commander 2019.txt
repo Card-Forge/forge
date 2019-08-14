@@ -1,0 +1,337 @@
+[metadata]
+Code=C19
+Date=2019-08-23
+Name=Commander 2019
+Code2=C19
+MciCode=c19
+Type=Other
+
+[cards]
+1 U Cliffside Rescuer
+2 R Commander's Insignia
+3 R Doomed Artisan
+4 R Mandate of Peace
+5 R Sevinne's Reclamation
+6 R Song of the Worldsoul
+7 R Thalia's Geistcaller
+8 R Kadena's Silencer
+9 U Leadership Vacuum
+10 R Mass Diminish
+11 R Sudden Substitution
+12 R Thought Sponge
+13 R Wall of Stolen Identity
+14 R Archfiend of Spite
+15 R Bone Miser
+16 R Curse of Fool's Wisdom
+17 R Gift of Doom
+18 R K'rrik, Son of Yawgmoth
+19 U Mire in Misery
+20 R Nightmare Unmaking
+21 R Thieving Amalgam
+22 R Anje's Ravager
+23 R Backdraft Hellkite
+24 R Dockside Extortionist
+25 R Ghired's Belligerence
+26 U Hate Mirage
+27 R Ignite the Future
+28 R Skyfire Phoenix
+29 R Tectonic Hellion
+30 R Wildfire Devils
+31 R Apex Altisaur
+32 R Full Flowering
+33 R Ohran Frostfang
+34 R Road of Return
+35 R Selesnya Eulogist
+36 U Voice of Many
+37 M Anje Falkenrath
+38 M Atla Palani, Nest Tender
+39 M Chainer, Nightmare Adept
+40 M Elsha of the Infinite
+41 R Gerrard, Weatherlight Hero
+42 M Ghired, Conclave Exile
+43 M Greven, Predator Captain
+44 R Grismold, the Dreadsower
+45 M Kadena, Slinking Sorcerer
+46 M Marisi, Breaker of the Coil
+47 M Pramikon, Sky Rampart
+48 M Rayami, First of the Fallen
+49 M Sevinne, the Chronoclasm
+50 R Tahngarth, First Mate
+51 M Volrath, the Shapestealer
+52 R Aeon Engine
+53 U Bloodthirsty Blade
+54 R Empowered Autogenerator
+55 R Idol of Oblivion
+56 R Pendant of Prosperity
+57 C Scaretiller
+58 R Scroll of Fate
+59 R Sanctum of Eternity
+60 R Desolation Twin
+61 M Angel of Sanctions
+62 R Divine Reckoning
+63 R Dusk // Dawn
+64 U Ghostly Prison
+65 R Hour of Reckoning
+66 R Increasing Devotion
+67 U Intangible Virtue
+68 R Phyrexian Rebirth
+69 C Prismatic Strands
+70 M Pristine Angel
+71 U Purify the Grave
+72 C Ray of Distortion
+73 U Roc Egg
+74 C Rootborn Defenses
+75 R Storm Herd
+76 M Sun Titan
+77 C Trostani's Judgment
+78 M Wingmate Roc
+79 R Zetalpa, Primal Dawn
+80 U Chemister's Insight
+81 R Chromeshell Crab
+82 M Clever Impersonator
+83 C Deep Analysis
+84 C Echoing Truth
+85 U Fact or Fiction
+86 U Fervent Denial
+87 R Ixidron
+88 R Jace's Sanctum
+89 R Kheru Spellsnatcher
+90 U Mystic Retrieval
+91 C Oona's Grace
+92 U Reality Shift
+93 R River Kelpie
+94 U Runic Repetition
+95 U Secrets of the Dead
+96 R Stratus Dancer
+97 R Talrand, Sky Summoner
+98 U Tezzeret's Gambit
+99 C Think Twice
+100 R Thousand Winds
+101 R Vesuvan Shapeshifter
+102 U Willbender
+103 R Asylum Visitor
+104 R Bane of the Living
+105 R Beacon of Unrest
+106 U Big Game Hunter
+107 M Boneyard Parley
+108 C Call to the Netherworld
+109 M Champion of Stray Souls
+110 C Dark Withering
+111 R Doomed Necromancer
+112 U Faith of the Devoted
+113 R From Under the Floorboards
+114 M Geth, Lord of the Vault
+115 M Ghastly Conscription
+116 C Gorgon Recluse
+117 C Grave Scrabbler
+118 R Grim Haruspex
+119 R Hedonist's Trove
+120 R Hex
+121 R In Garruk's Wake
+122 C Murderous Compulsion
+123 C Nightshade Assassin
+124 M Ob Nixilis Reignited
+125 R Overseer of the Damned
+126 U Plaguecrafter
+127 C Sanitarium Skeleton
+128 R Silumgar Assassin
+129 C Skinthinner
+130 M Soul of Innistrad
+131 U The Eldest Reborn
+132 U Zombie Infestation
+133 C Alchemist's Greeting
+134 R Avacyn's Judgment
+135 U Burning Vengeance
+136 R Chaos Warp
+137 U Desperate Ravings
+138 R Devil's Play
+139 M Dragonmaster Outcast
+140 C Faithless Looting
+141 M Feldon of the Third Path
+142 C Fiery Temper
+143 R Flamerush Rider
+144 R Flayer of the Hatebound
+145 U Guttersnipe
+146 R Heart-Piercer Manticore
+147 R Increasing Vengeance
+148 R Magmaquake
+149 R Magus of the Wheel
+150 U Malevolent Whispers
+151 U Rolling Temblor
+152 R Squee, Goblin Nabob
+153 R Stromkirk Occultist
+154 U Violent Eruption
+155 R Warstorm Surge
+156 C Ainok Survivalist
+157 U Beast Within
+158 U Colossal Majesty
+159 C Cultivate
+160 M Deathmist Raptor
+161 R Den Protector
+162 C Druid's Deliverance
+163 U Elemental Bond
+164 C Explore
+165 C Farseek
+166 R Fresh Meat
+167 M Garruk, Primal Hunter
+168 U Garruk's Packleader
+169 M Giant Adephage
+170 U Great Oak Guardian
+171 U Harmonize
+172 M Hooded Hydra
+173 R Momentous Fall
+174 C Nantuko Vigilante
+175 R Overwhelming Stampede
+176 R Rampaging Baloths
+177 C Sakura-Tribe Elder
+178 R Second Harvest
+179 R Seedborn Muse
+180 R Shamanic Revelation
+181 U Slice in Twain
+182 M Soul of Zendikar
+183 R Tempt with Discovery
+184 R Thelonite Hermit
+185 R Thragtusk
+186 R Trail of Mystery
+187 R Biomass Mutation
+188 R Bloodhall Priest
+189 R Bounty of the Luxa
+190 U Crackling Drake
+191 R Emmara Tandris
+192 U Farm // Market
+193 R Growing Ranks
+194 U Icefeather Aven
+195 U Naya Charm
+196 R Pristine Skywise
+197 U Putrefy
+198 M Ral Zarek
+199 R Refuse // Cooperate
+200 R Sagu Mauler
+201 U Secret Plans
+202 U Sultai Charm
+203 C Sundering Growth
+204 M Trostani, Selesnya's Voice
+205 U Urban Evolution
+206 U Vitu-Ghazi Guildmage
+207 M Vraska the Unseen
+208 R Wayfaring Temple
+209 C Armillary Sphere
+210 C Azorius Locket
+211 U Burnished Hart
+212 C Commander's Sphere
+213 M Grimoire of the Dead
+214 U Hedron Archive
+215 C Izzet Locket
+216 R Key to the City
+217 U Lightning Greaves
+218 U Meteor Golem
+219 R Mimic Vat
+220 C Rakdos Locket
+221 U Sol Ring
+222 R Solemn Simulacrum
+223 R Soul Foundry
+224 R Strionic Resonator
+225 U Thran Dynamo
+226 U Akoum Refuge
+227 C Ash Barrens
+228 U Azorius Chancery
+229 U Barren Moor
+230 C Bloodfell Caves
+231 C Blossoming Sands
+232 C Bojuka Bog
+233 C Boros Garrison
+234 C Boros Guildgate
+235 C Cinder Barrens
+236 R Cinder Glade
+237 C Command Tower
+238 R Darkwater Catacombs
+239 U Dimir Aqueduct
+240 R Drownyard Temple
+241 C Evolving Wilds
+242 R Exotic Orchard
+243 C Forgotten Cave
+244 U Foul Orchard
+245 R Gargoyle Castle
+246 R Geier Reach Sanitarium
+247 C Golgari Guildgate
+248 U Golgari Rot Farm
+249 U Graypelt Refuge
+250 U Gruul Turf
+251 U Highland Lake
+252 U Izzet Boilerworks
+253 C Izzet Guildgate
+254 C Jungle Hollow
+255 U Jungle Shrine
+256 U Kazandu Refuge
+257 U Krosan Verge
+258 R Llanowar Wastes
+259 U Memorial to Folly
+260 C Mortuary Mire
+261 U Myriad Landscape
+262 U Mystic Monastery
+263 C Naya Panorama
+264 U Opulent Palace
+265 R Prairie Stream
+266 C Rakdos Carnarium
+267 C Rakdos Guildgate
+268 U Reliquary Tower
+269 U Rix Maadi, Dungeon Palace
+270 U Rogue's Passage
+271 C Rugged Highlands
+272 C Selesnya Sanctuary
+273 R Shrine of the Forsaken Gods
+274 U Simic Growth Chamber
+275 C Simic Guildgate
+276 U Stone Quarry
+277 R Sungrass Prairie
+278 R Sunken Hollow
+279 C Swiftwater Cliffs
+280 U Temple of the False God
+281 C Terramorphic Expanse
+282 R Thespian's Stage
+283 C Thornwood Falls
+284 C Tranquil Cove
+285 C Wind-Scarred Crag
+286 C Woodland Stream
+287 R Yavimaya Coast
+288 L Plains
+289 L Plains
+290 L Plains
+291 L Island
+292 L Island
+293 L Island
+294 L Swamp
+295 L Swamp
+296 L Swamp
+297 L Mountain
+298 L Mountain
+299 L Mountain
+300 L Forest
+301 L Forest
+302 L Forest
+
+[tokens]
+b_1_1_assassin_lose_con
+b_2_2_zombie
+c_3_4_a_gargoyle_flying
+c_10_10_eldrazi
+c_a_treasure_sac
+c_x_x_a_horror
+c_x_x_a_sculpture_total_sculptures
+g_0_1_egg_defender
+g_1_1_plant
+g_1_1_saproling
+g_1_1_snake
+g_3_3_beast
+g_3_3_centaur
+g_4_4_beast
+g_4_4_rhino_trample
+g_6_6_wurm
+r_5_5_dragon_flying
+w_1_1_human
+w_1_1_pegasus_flying
+w_1_1_spirit_flying
+w_3_3_bird_flying
+w_3_4_bird_flying
+u_2_2_drake_flying
+

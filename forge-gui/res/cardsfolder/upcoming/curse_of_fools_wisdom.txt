@@ -1,0 +1,10 @@
+Name:Curse of Fool's Wisdom
+ManaCost:4 B B
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ Drawn | ValidCard$ Card.OwnedBy Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted player draws a card, they lose 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+K:Madness:3 B
+Oracle:Enchant player\nWhenever enchanted player draws a card, they lose 2 life and you gain 2 life.\nMadness {3}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

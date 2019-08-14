@@ -198,6 +198,7 @@ Scarecrow:Scarecrows
 Scion:Scions
 Scorpion:Scorpions
 Scout:Scouts
+Sculpture:Sculptures
 Serf:Serfs
 Serpent:Serpents
 Servo:Servos

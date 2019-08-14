@@ -370,7 +370,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 rarities = Lists.newArrayList();
                 for (String s: Arrays.asList(strCars.split(", "))) {
                     cr = CardRarity.smartValueOf(s);
-                    if (cr.name() != "Unknown") {
+                    if (!cr.name().equals("Unknown")) {
                         rarities.add(cr);
                     }
                 }

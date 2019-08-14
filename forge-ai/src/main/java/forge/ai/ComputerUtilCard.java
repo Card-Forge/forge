@@ -228,7 +228,7 @@ public class ComputerUtilCard {
         Card cheapest = null;
     
         for (Card c : all) {
-            if (cheapest == null || cheapest.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
+            if (cheapest == null || c.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
                 cheapest = c;
             }
         }
@@ -926,7 +926,7 @@ public class ComputerUtilCard {
             }
             else if (logic.equals("MostProminentInComputerDeckButGreen")) {
             	List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
-            	if (prominence.get(0) == MagicColor.Constant.GREEN) {
+            	if (prominence.get(0).equals(MagicColor.Constant.GREEN)) {
                     chosen.add(prominence.get(1));
             	} else {
                     chosen.add(prominence.get(0));
@@ -1878,7 +1878,7 @@ public class ComputerUtilCard {
 
             // A special case which checks that this creature will attack if it's the AI's turn
             if (needsToPlay.equalsIgnoreCase("WillAttack")) {
-                if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (sa != null && game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return ComputerUtilCard.doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
                         AiPlayDecision.WillPlay : AiPlayDecision.BadEtbEffects;
                 } else {

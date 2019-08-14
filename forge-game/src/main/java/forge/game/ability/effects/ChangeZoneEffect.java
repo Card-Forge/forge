@@ -180,7 +180,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
                 sb.append(destination.equals("Exile") ? " exiles " : " puts ");
-                if (type == "Card") {
+                if (type.equals("Card")) {
                     sb.append(num);
                 } else {
                     sb.append(num).append(" ").append(type);
@@ -208,7 +208,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 sb.append(" of ").append(fetchPlayer);
-                if (fetchPlayer != "their") {
+                if (!fetchPlayer.equals("their")) {
                     sb.append("'s");
                 }
                 sb.append(" library");

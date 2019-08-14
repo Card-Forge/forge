@@ -24,37 +24,23 @@ public class CardThemedMatrixIO {
 
     public static void saveMatrix(String format, HashMap<String,List<Map.Entry<PaperCard,Integer>>> map){
         File file = getMatrixFile(format);
-        ObjectOutputStream s = null;
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            s = new ObjectOutputStream(f);
+        try (FileOutputStream f = new FileOutputStream(file);
+             ObjectOutputStream s = new ObjectOutputStream(f)) {
             s.writeObject(map);
-            s.close();
         } catch (IOException e) {
             System.out.println("Error writing matrix data: " + e);
-        } finally {
-            if(s!=null) {
-                try {
-                    s.close();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> loadMatrix(String format){
-        try {
-            FileInputStream fin = new FileInputStream(getMatrixFile(format));
-            ObjectInputStream s = new ObjectInputStream(fin);
+        try (FileInputStream fin = new FileInputStream(getMatrixFile(format));
+             ObjectInputStream s = new ObjectInputStream(fin)){
             HashMap<String, List<Map.Entry<PaperCard,Integer>>> matrix = (HashMap<String, List<Map.Entry<PaperCard,Integer>>>) s.readObject();
-            s.close();
             return matrix;
         }catch (Exception e){
             System.out.println("Error reading matrix data: " + e);
             return null;
         }
-
     }
 
     public static File getMatrixFile(final String name) {

@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 
+import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -22,7 +24,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
-        for (final Card c : game.getStackZone().getCards()) {
+        for (final Card c : Lists.newArrayList(game.getStackZone().getCards())) {
             game.getAction().exile(c, sa);
         }
         game.getStack().clear();
@@ -41,11 +43,9 @@ public class EndTurnEffect extends SpellAbilityEffect {
         game.getPhaseHandler().endTurnByEffect();
     }
 
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "End the turn.";

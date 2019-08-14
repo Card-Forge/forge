@@ -1,12 +1,17 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -79,37 +84,22 @@ public class ManifestAi extends SpellAbilityAi {
                 return false;
             }
         }
-        
+
         return true;
     }
 
-    @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    static boolean shouldManyfest(final Card card, final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
-
-        // Library is empty, no Manifest
-        final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
-        if (library.isEmpty())
-            return false;
-
-        // try not to mill himself with Manifest
-        if (library.size() < 5 && !ai.isCardInPlay("Laboratory Maniac")) {
-            return false;
-        }
-
         // check to ensure that there are no replacement effects that prevent creatures ETBing from library
         // (e.g. Grafdigger's Cage)
-        Card topCopy = CardUtil.getLKICopy(library.getFirst());
+        Card topCopy = CardUtil.getLKICopy(card);
         topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "Moved");
         repParams.put("Affected", topCopy);
-        repParams.put("Origin", ZoneType.Library);
+        repParams.put("Origin", card.getZone().getZoneType());
         repParams.put("Destination", ZoneType.Battlefield);
         repParams.put("Source", sa.getHostCard());
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.Other);
@@ -117,27 +107,62 @@ public class ManifestAi extends SpellAbilityAi {
             return false;
         }
 
-        // if the AI can see the top card of the library, check it
-        final Card topCard = library.getFirst();
-        if (topCard.mayPlayerLook(ai)) {
+        if (card.mayPlayerLook(ai)) {
             // try to avoid manifest a non Permanent
-            if (!topCard.isPermanent())
+            if (!card.isPermanent())
                 return false;
 
             // do not manifest a card with X in its cost
-            if (topCard.getManaCost().countX() > 0)
+            if (card.getManaCost().countX() > 0)
                 return false;
 
             // try to avoid manifesting a creature with zero or less thoughness
-            if (topCard.isCreature() && topCard.getNetToughness() <= 0)
+            if (card.isCreature() && card.getNetToughness() <= 0)
                 return false;
 
             // card has ETBTrigger or ETBReplacement
-            if (topCard.hasETBTrigger(false) || topCard.hasETBReplacement()) {
+            if (card.hasETBTrigger(false) || card.hasETBReplacement()) {
                 return false;
             }
         }
+        return true;
+    }
 
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        final Game game = ai.getGame();
+        final Card host = sa.getHostCard();
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
+        if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
+            ZoneType choiceZone = ZoneType.Hand;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            }
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+            if (sa.hasParam("Choices")) {
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), ai, host);
+            }
+            if (choices.isEmpty()) {
+                return false;
+            }
+        } else {
+            // Library is empty, no Manifest
+            final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+            if (library.isEmpty())
+                return false;
+
+            // try not to mill himself with Manifest
+            if (library.size() < 5 && !ai.isCardInPlay("Laboratory Maniac")) {
+                return false;
+            }
+
+            if (!shouldManyfest(library.getFirst(), ai, sa)) {
+                return false;
+            }
+        }
         // Probably should be a little more discerning on playing during OPPs turn
         if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
@@ -151,5 +176,27 @@ public class ManifestAi extends SpellAbilityAi {
         }
 
         return MyRandom.getRandom().nextFloat() < .8;
+    }
+
+    protected Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+        if (Iterables.size(options) <= 1) {
+            return Iterables.getFirst(options, null);
+        }
+        CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card input) {
+                if (shouldManyfest(input, ai, sa)) {
+                    return false;
+                }
+                return true;
+            }
+        });
+        if (!filtered.isEmpty()) {
+            return ComputerUtilCard.getBestAI(filtered);
+        }
+        if (isOptional) {
+            return null;
+        }
+        return Iterables.getFirst(options, null);
     }
 }

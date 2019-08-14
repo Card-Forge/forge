@@ -1,0 +1,12 @@
+Name:Archfiend of Spite
+ManaCost:5 B B
+Types:Creature Demon
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ Whenever a source an opponent controls deals damage to CARDNAME, that source’s controller loses that much life unless they sacrifice that many permanents.
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ TriggeredSourceController | SacValid$ Permanent | Amount$ X | References$ X | StrictAmount$ True | OptionalSacrifice$ True | RememberSacrificed$ True | SubAbility$ DBCurseDamage
+SVar:DBCurseDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+K:Madness:3 B B
+Oracle:Flying\nWhenever a source an opponent controls deals damage to Archfiend of Spite, that source’s controller loses that much life unless they sacrifice that many permanents.\nMadness {3}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

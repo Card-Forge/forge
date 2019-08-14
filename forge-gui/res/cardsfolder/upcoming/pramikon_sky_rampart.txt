@@ -1,0 +1,11 @@
+Name:Pramikon, Sky Rampart
+ManaCost:U R W
+Types:Legendary Creature Wall
+PT:1/5
+K:Flying
+K:Defender
+K:ETBReplacement:Other:ChooseDirection
+SVar:ChooseDirection:DB$ ChooseDirection | SpellDescription$ As CARDNAME enters the battlefield, choose left or right.
+S:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Description$ Each player may attack only the nearest opponent in the chosen direction and planeswalkers controller by that opponent.
+AI:RemoveDeck:Random
+Oracle:Flying, defender\nAs Pramikon, Sky Rampart enters the battlefield, choose left or right.\nEach player may attack only the nearest opponent in the chosen direction and planeswalkers controlled by that opponent.

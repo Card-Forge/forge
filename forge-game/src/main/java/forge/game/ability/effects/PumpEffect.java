@@ -255,6 +255,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 replaced = host.getChosenType();
             } else if (defined.equals("CardUIDSource")) {
                 replaced = "CardUID_" + String.valueOf(host.getId());
+            } else if (defined.equals("ActivatorName")) {
+                replaced = sa.getActivatingPlayer().getName();
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
