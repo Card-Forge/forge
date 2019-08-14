@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -95,7 +96,10 @@ public class CostSacrifice extends CostPartWithList {
 
             CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
-            final Integer amount = this.convertAmount();
+            Integer amount = this.convertAmount();
+            if (amount == null) {
+                amount = AbilityUtils.calculateAmount(source, getAmount(), ability);
+            }
 
             typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
