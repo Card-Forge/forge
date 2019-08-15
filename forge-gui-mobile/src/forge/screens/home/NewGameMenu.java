@@ -18,17 +18,20 @@ import forge.screens.planarconquest.NewConquestScreen;
 import forge.screens.quest.NewQuestScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class NewGameMenu extends FPopupMenu {
+    final static Localizer localizer = Localizer.getInstance();
+
     public enum NewGameScreen {
-        Constructed("Constructed", FSkinImage.DECKLIST, ConstructedScreen.class),
-        BoosterDraft("Booster Draft", FSkinImage.HAND, NewDraftScreen.class),
-        SealedDeck("Sealed Deck", FSkinImage.PACK, NewSealedScreen.class),
-        QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, NewQuestScreen.class),
-        PuzzleMode("Puzzle Mode", FSkinImage.QUEST_BOOK, PuzzleScreen.class),
-        PlanarConquest("Planar Conquest", FSkinImage.MULTIVERSE, NewConquestScreen.class),
-        Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, NewGauntletScreen.class);
- 
+        Constructed(localizer.getMessage("lblConstructed"), FSkinImage.DECKLIST, ConstructedScreen.class),
+        BoosterDraft(localizer.getMessage("lblBoosterDraft"), FSkinImage.HAND, NewDraftScreen.class),
+        SealedDeck(localizer.getMessage("lblSealedDeck"), FSkinImage.PACK, NewSealedScreen.class),
+        QuestMode(localizer.getMessage("lblQuestMode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
+        PuzzleMode(localizer.getMessage("lblPuzzleMode"), FSkinImage.QUEST_BOOK, PuzzleScreen.class),
+        PlanarConquest(localizer.getMessage("lblPlanarConquest"), FSkinImage.MULTIVERSE, NewConquestScreen.class),
+        Gauntlet(localizer.getMessage("lblGauntlet"), FSkinImage.ALPHASTRIKE, NewGauntletScreen.class);
+
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
@@ -48,7 +51,7 @@ public class NewGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("New Game - " + item.getText());
+                    screen.setHeaderCaption(localizer.getMessage("lblNewGame") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
