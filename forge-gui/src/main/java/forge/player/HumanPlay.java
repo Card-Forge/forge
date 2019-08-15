@@ -569,10 +569,11 @@ public class HumanPlay {
                 return true;
             }
             else if (part instanceof CostSacrifice) {
-                int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
-                if (!hasPaid) { return false; }
+                PaymentDecision pd = part.accept(hcd);
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(((CostGainControl)part).getAmount());
