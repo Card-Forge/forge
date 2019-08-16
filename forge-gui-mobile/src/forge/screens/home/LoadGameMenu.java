@@ -16,14 +16,17 @@ import forge.screens.planarconquest.LoadConquestScreen;
 import forge.screens.quest.LoadQuestScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class LoadGameMenu extends FPopupMenu {
+    final static Localizer localizer = Localizer.getInstance();
+
     public enum LoadGameScreen {
-        BoosterDraft("Booster Draft", FSkinImage.HAND, LoadDraftScreen.class),
-        SealedDeck("Sealed Deck", FSkinImage.PACK, LoadSealedScreen.class),
-        QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
-        PlanarConquest("Planar Conquest", FSkinImage.MULTIVERSE, LoadConquestScreen.class),
-        Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
+        BoosterDraft(localizer.getMessage("lblBoosterDraft"), FSkinImage.HAND, LoadDraftScreen.class),
+        SealedDeck(localizer.getMessage("lblSealedDeck"), FSkinImage.PACK, LoadSealedScreen.class),
+        QuestMode(localizer.getMessage("lblQuestMode"), FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
+        PlanarConquest(localizer.getMessage("lblPlanarConquest"), FSkinImage.MULTIVERSE, LoadConquestScreen.class),
+        Gauntlet(localizer.getMessage("lblGauntlet"), FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -44,7 +47,7 @@ public class LoadGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("Load Game - " + item.getText());
+                    screen.setHeaderCaption(localizer.getMessage("lblLoadGame") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
