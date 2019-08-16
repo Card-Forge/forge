@@ -375,7 +375,7 @@ public class AttackConstraints {
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {
             final AttackRestriction restriction = restrictions.get(attacker.getKey());
-            if (!restriction.canAttack(attacker.getKey(), attackers)) {
+            if (restriction != null && !restriction.canAttack(attacker.getKey(), attackers)) {
                 // Violating a restriction!
                 return -1;
             }
@@ -384,7 +384,9 @@ public class AttackConstraints {
         int violations = 0;
         for (final Card possibleAttacker : possibleAttackers) {
             final AttackRequirement requirement = requirements.get(possibleAttacker);
-            violations += requirement.countViolations(attackers.get(possibleAttacker), attackers);
+            if (requirement != null) {
+                violations += requirement.countViolations(attackers.get(possibleAttacker), attackers);
+            }
         }
 
         return violations;
