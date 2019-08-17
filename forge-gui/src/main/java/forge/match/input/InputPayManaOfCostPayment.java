@@ -1,5 +1,11 @@
 package forge.match.input;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import forge.card.mana.ManaAtom;
+import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -9,6 +15,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
+import forge.util.Lang;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
     public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix) {
@@ -19,14 +26,21 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
-    private int phyLifeToLose = 0;
+    //private int phyLifeToLose = 0;
     private ManaConversionMatrix extraMatrix;
 
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
-                this.phyLifeToLose += 2;
+            if (player.canPayLife(this.phyLifeToLose + 2)) {
+                if (manaCost.payPhyrexian()) {
+                    this.phyLifeToLose += 2;
+                } else {
+                    if (player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK)) {
+                        manaCost.decreaseShard(ManaCostShard.BLACK, 1);
+                        this.phyLifeToLose += 2;
+                    }
+                }
             }
 
             this.showMessage();
@@ -71,8 +85,20 @@ public class InputPayManaOfCostPayment extends InputPayMana {
             msg.append(" life paid for phyrexian mana)");
         }
 
-        if (manaCost.containsPhyrexianMana()) {
-            msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
+        boolean isLifeInsteadBlack = player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK);
+
+        if (manaCost.containsPhyrexianMana() || isLifeInsteadBlack) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Click on your life total to pay life for ");
+            List<String> list = Lists.newArrayList();
+            if (manaCost.containsPhyrexianMana()) {
+                list.add("phyrexian mana");
+            }
+            if (isLifeInsteadBlack) {
+                list.add("black mana");
+            }
+            sb.append(Lang.joinHomogenous(list, null, "or")).append(".");
+            msg.append("\n(").append(sb).append(")");
         }
 
         return msg.toString();
