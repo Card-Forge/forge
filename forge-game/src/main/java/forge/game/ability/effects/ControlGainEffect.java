@@ -169,6 +169,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     game.getEndOfTurn().addUntil(loseControl);
                     tgtC.setSVar("SacMe", "6");
                 }
+                if (lose.contains("EndOfCombat")) {
+                    game.getEndOfCombat().addUntil(loseControl);
+                    tgtC.setSVar("SacMe", "6");
+                }
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
