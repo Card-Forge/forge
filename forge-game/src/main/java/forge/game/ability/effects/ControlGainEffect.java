@@ -8,16 +8,20 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.combat.Combat;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 public class ControlGainEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -81,6 +85,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final boolean bNoRegen = sa.hasParam("NoRegen");
         final boolean remember = sa.hasParam("RememberControlled");
         final boolean forget = sa.hasParam("ForgetControlled");
+        final boolean attacking = sa.hasParam("Attacking");
         final List<String> destroyOn = sa.hasParam("DestroyTgt") ? Arrays.asList(sa.getParam("DestroyTgt").split(",")) : null;
         final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
@@ -164,6 +169,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     game.getEndOfTurn().addUntil(loseControl);
                     tgtC.setSVar("SacMe", "6");
                 }
+                if (lose.contains("EndOfCombat")) {
+                    game.getEndOfCombat().addUntil(loseControl);
+                    tgtC.setSVar("SacMe", "6");
+                }
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
@@ -211,6 +220,22 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
+
+            if (attacking) {
+                final Combat combat = game.getCombat();
+                if ( null != combat ) {
+                    final FCollectionView<GameEntity> e = combat.getDefenders();
+
+                    final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
+                            "Declare a defender for " + tgtC);
+
+                    if (defender != null) {
+                        combat.addAttacker(tgtC, defender);
+                        game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
+                        game.fireEvent(new GameEventCombatChanged());
+                    }
+                }
+            }
         } // end foreach target
     }
 
