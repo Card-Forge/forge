@@ -192,6 +192,14 @@ public class CloneAi extends SpellAbilityAi {
         if (!newOptions.isEmpty()) {
             options = newOptions;
         }
+
+        if (sa.hasParam("AiChoiceLogic")) {
+            final String logic = sa.getParam("AiChoiceLogic");
+            if ("BestOppCtrl".equals(logic)) {
+                options = CardLists.filterControlledBy(options, ctrl.getOpponents());
+            }
+        }
+
         Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);
 
         if (isVesuva && "Vesuva".equals(choice.getName())) {

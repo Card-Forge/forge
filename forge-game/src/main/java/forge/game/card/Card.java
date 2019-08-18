@@ -3204,6 +3204,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return clStates.getHost();
     }
 
+    public final Card getLastClonedStateOrigin() {
+        CardCloneStates clStates = getLastClonedState();
+        if (clStates == null) {
+            return null;
+        }
+        return clStates.getOrigin();
+    }
+
     public final void removeCloneStates() {
         clonedStates.clear();
     }
