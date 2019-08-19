@@ -17,7 +17,13 @@
  */
 package forge.match.input;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
@@ -27,6 +33,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
+import forge.util.Lang;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
@@ -64,8 +71,15 @@ public class InputPayManaSimple extends InputPayMana {
     @Override
     protected final void onPlayerSelected(final Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
-                this.phyLifeToLose += 2;
+            if (player.canPayLife(this.phyLifeToLose + 2)) {
+                if (manaCost.payPhyrexian()) {
+                    this.phyLifeToLose += 2;
+                } else {
+                    if (player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK)) {
+                        manaCost.decreaseShard(ManaCostShard.BLACK, 1);
+                        this.phyLifeToLose += 2;
+                    }
+                }
             }
 
             this.showMessage();
@@ -132,8 +146,20 @@ public class InputPayManaSimple extends InputPayMana {
             msg.append(" life paid for phyrexian mana)");
         }
 
-        if (this.manaCost.containsPhyrexianMana()) {
-            msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
+        boolean isLifeInsteadBlack = player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK);
+
+        if (manaCost.containsPhyrexianMana() || isLifeInsteadBlack) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Click on your life total to pay life for ");
+            List<String> list = Lists.newArrayList();
+            if (manaCost.containsPhyrexianMana()) {
+                list.add("phyrexian mana");
+            }
+            if (isLifeInsteadBlack) {
+                list.add("black mana");
+            }
+            sb.append(Lang.joinHomogenous(list, null, "or")).append(".");
+            msg.append("\n(").append(sb).append(")");
         }
 
         // has its own variant of checkIfPaid

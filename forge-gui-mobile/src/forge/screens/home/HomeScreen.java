@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -20,7 +19,10 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
@@ -41,28 +43,30 @@ public class HomeScreen extends FScreen {
     private HomeScreen() {
         super((Header)null);
 
-        addButton("New Game", new FEventHandler() {
+        final Localizer localizer = Localizer.getInstance();
+
+        addButton(localizer.getMessage("lblNewGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 0;
                 NewGameMenu.getPreferredScreen().open();
             }
         });
-        addButton("Load Game", new FEventHandler() {
+        addButton(localizer.getMessage("lblLoadGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 1;
                 LoadGameMenu.getPreferredScreen().open();
             }
         });
-        addButton("Play Online", new FEventHandler() {
+        addButton(localizer.getMessage("lblOnlineMultiplayer"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 2;
                 OnlineScreen.Lobby.open();
             }
         });
-        addButton("Deck Manager", new FEventHandler() {
+        addButton(localizer.getMessage("lblDeckManager"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 3;
@@ -76,23 +80,40 @@ public class HomeScreen extends FScreen {
                             return 0;
                         }
                     };
-                    deckManager.setHeaderCaption("Deck Manager");
+                    deckManager.setHeaderCaption(localizer.getMessage("lblDeckManager"));
                 }
                 Forge.openScreen(deckManager);
             }
         });
-        addButton("Achievements", new FEventHandler() {
+        addButton(localizer.getMessage("Achievements"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 4;
                 AchievementsScreen.show();
             }
         });
-        addButton("Settings", new FEventHandler() {
+        addButton(localizer.getMessage("lblGameSettings"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 5;
                 SettingsScreen.show(true);
+            }
+        });
+        addButton(localizer.getMessage("lblExit"), new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                activeButtonIndex = 6;
+                FOptionPane.showConfirmDialog(
+                        localizer.getMessage("lblAreYouSureYouWishExitForge"),
+                        localizer.getMessage("lblExitForge"),
+                        localizer.getMessage("lblExit"), localizer.getMessage("lblCancel"), false, new Callback<Boolean>() {
+                            @Override
+                            public void run(Boolean result) {
+                                if (result) {
+                                    Forge.exit(true);
+                                }
+                            }
+                        });
             }
         });
         baseButtonCount = buttons.size();
