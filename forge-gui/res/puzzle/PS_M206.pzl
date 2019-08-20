@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/08/125.-M206.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has eight cards left in their library.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Metamorphic Alteration;Role Reversal;Maximize Velocity;Domri's Ambush;Persistent Petitioners
+humanbattlefield=Domri, Anarch of Bolas|Counters:LOYALTY=2;Millstone;Drowned Secrets;Primal Amulet|Transformed;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Breeding Pool|NoETBTrigs
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Valduk, Keeper of the Flame|Id:1;Howling Golem;Nissa, Who Shakes the World|Counters:LOYALTY=3;Helm of the Host|AttachedTo:1|ExecuteScript:TrigCopy;Jousting Lance|AttachedTo:1
