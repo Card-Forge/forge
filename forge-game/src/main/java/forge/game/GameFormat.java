@@ -296,7 +296,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Commander.txt");
             coreFormats.add("Extended.txt");
             coreFormats.add("Brawl.txt");
-
+            coreFormats.add("Oathbreaker.txt");
         }
         
         public Reader(File forgeFormats, File customFormats, boolean includeHistoric) {

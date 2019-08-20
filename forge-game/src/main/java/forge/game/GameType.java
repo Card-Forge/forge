@@ -24,6 +24,7 @@ public enum GameType {
     DeckManager     (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
     Commander       (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    Oathbreaker     (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
     TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
     Brawl           (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
     Planeswalker    (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
@@ -126,6 +127,7 @@ public enum GameType {
         /*switch (this) {
         case Archenemy:
         case Commander:
+        case Oathbreaker:
         case TinyLeaders:
         case Planechase:
         case Vanguard:

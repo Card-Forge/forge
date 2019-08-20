@@ -166,8 +166,10 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
-        magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
+        magicDb.setCommanderPredicate(formats.get("Commander").getFilterRules());
+        magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());
+        magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
 
         magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
         magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));

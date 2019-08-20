@@ -338,6 +338,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
+            case Oathbreaker:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
             case Brawl:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
                 DeckPreferences.setBrawlDeck((deck != null) ? deck.toString() : "");
@@ -397,6 +402,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         switch(this.gameType) {
             case Brawl:
             case Commander:
+            case Oathbreaker:
             case TinyLeaders:
             case Constructed:
             case Draft:

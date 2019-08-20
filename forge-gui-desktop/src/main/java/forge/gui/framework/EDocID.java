@@ -14,6 +14,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
@@ -60,6 +61,7 @@ public enum EDocID {
     EDITOR_COMMANDER (VCommanderDecks.SINGLETON_INSTANCE),
     EDITOR_BRAWL (VBrawlDecks.SINGLETON_INSTANCE),
     EDITOR_TINY_LEADERS (VTinyLeadersDecks.SINGLETON_INSTANCE),
+    EDITOR_OATHBREAKER (VOathbreakerDecks.SINGLETON_INSTANCE),
 
     WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
     WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),

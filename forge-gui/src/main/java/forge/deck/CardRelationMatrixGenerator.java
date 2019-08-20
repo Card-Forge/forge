@@ -34,42 +34,34 @@ public final class CardRelationMatrixGenerator {
     public static final int MIN_REQUIRED_CONNECTIONS = 14;
 
     public static boolean initialize(){
-        List<String> formatStrings = new ArrayList<>();
-/*        formatStrings.add(FModel.getFormats().getStandard().getName());
-        formatStrings.add(FModel.getFormats().getModern().getName());*/
-        formatStrings.add(DeckFormat.Commander.toString());
-
-        for (String formatString : formatStrings){
-            if(!initializeFormat(formatString)){
-                return false;
-            }
-        }
-        return true;
+        return initializeFormat(DeckFormat.Commander) && initializeFormat(DeckFormat.Oathbreaker);
     }
 
     /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
-    public static boolean initializeFormat(String format){
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> formatMap = CardThemedMatrixIO.loadMatrix(format);
-        if(formatMap==null) {
-            if (CardThemedMatrixIO.getMatrixFolder(format).exists()) {
-                if(format.equals(FModel.getFormats().getStandard().getName())){
+    public static boolean initializeFormat(DeckFormat format){
+        String formatName = format.toString();
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> formatMap = CardThemedMatrixIO.loadMatrix(formatName);
+        if (formatMap==null) {
+            if (CardThemedMatrixIO.getMatrixFolder(formatName).exists()) {
+                if (formatName.equals(FModel.getFormats().getStandard().getName())){
                     formatMap=initializeFormat(FModel.getFormats().getStandard());
-                }else if(format.equals(FModel.getFormats().getModern().getName())){
-                    formatMap=initializeFormat(FModel.getFormats().getModern());
-                }else{
-                    formatMap=initializeCommanderFormat();
                 }
-                CardThemedMatrixIO.saveMatrix(format, formatMap);
+                else if (formatName.equals(FModel.getFormats().getModern().getName())){
+                    formatMap=initializeFormat(FModel.getFormats().getModern());
+                }
+                else{
+                    formatMap=initializeCommanderFormat(format);
+                }
+                CardThemedMatrixIO.saveMatrix(formatName, formatMap);
             } else {
                 return false;
             }
         }
-        cardPools.put(format, formatMap);
+        cardPools.put(formatName, formatMap);
         return true;
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeFormat(GameFormat format){
-
         IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR+ForgeConstants.PATH_SEPARATOR+format.getName()),
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
@@ -100,7 +92,6 @@ public final class CardRelationMatrixGenerator {
                                 //Todo: Not sure what was failing here
                             }
                         }
-
                     }
                 }
             }
@@ -137,10 +128,9 @@ public final class CardRelationMatrixGenerator {
         return cardPools;
     }
 
-    public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(){
-
+    public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(DeckFormat format){
         IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator",
-                new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR,DeckFormat.Commander.toString()),
+                new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR, format.toString()),
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
@@ -164,7 +154,7 @@ public final class CardRelationMatrixGenerator {
                 new Predicate<CardRules>() {
                     @Override
                     public boolean apply(CardRules rules) {
-                        return DeckFormat.Commander.isLegalCommander(rules);
+                        return format.isLegalCommander(rules);
                     }
                 }, PaperCard.FN_GET_RULES)));
 

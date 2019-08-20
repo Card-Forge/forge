@@ -37,6 +37,7 @@ public enum TrackableProperty {
     Tapped(TrackableTypes.BooleanType),
     Token(TrackableTypes.BooleanType),
     IsCommander(TrackableTypes.BooleanType),
+    CommanderAltType(TrackableTypes.StringType),
     Damage(TrackableTypes.IntegerType),
     AssignedDamage(TrackableTypes.IntegerType),
     ShieldCount(TrackableTypes.IntegerType),

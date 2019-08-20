@@ -1,6 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.deck.*;
+import forge.game.GameType;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.screens.match.controllers.CDetailPicture;
@@ -8,9 +9,8 @@ import forge.screens.match.controllers.CDetailPicture;
 import java.util.*;
 
 public abstract class CDeckEditor<TModel extends DeckBase> extends ACEditorBase<PaperCard, TModel> {
-
-    protected CDeckEditor(FScreen screen0, CDetailPicture cDetailPicture) {
-        super(screen0, cDetailPicture);
+    protected CDeckEditor(FScreen screen0, CDetailPicture cDetailPicture0, GameType gameType0) {
+        super(screen0, cDetailPicture0, gameType0);
     }
 
     /**

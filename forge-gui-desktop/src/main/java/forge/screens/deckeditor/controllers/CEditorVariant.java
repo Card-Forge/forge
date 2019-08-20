@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -63,14 +64,14 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
      * all cards are available.
      */
     @SuppressWarnings("serial")
-    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0, final CDetailPicture cDetailPicture) {
-        super(screen0, cDetailPicture);
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0, final CDetailPicture cDetailPicture0) {
+        super(screen0, cDetailPicture0, GameType.Constructed);
 
         this.cardPoolCondition = poolCondition;
         this.sectionMode = deckSection0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, true, false);
-        final CardManager deckManager = new CardManager(cDetailPicture, true, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, true, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, true, false);
         final Localizer localizer = Localizer.getInstance();
 
         catalogManager.setCaption(localizer.getMessage("lblCatalog"));
