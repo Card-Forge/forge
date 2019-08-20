@@ -59,7 +59,7 @@ public class HomeScreen extends FScreen {
                 LoadGameMenu.getPreferredScreen().open();
             }
         });
-        addButton(localizer.getMessage("lblOnlineMultiplayer"), new FEventHandler() {
+        addButton(localizer.getMessage("lblPlayOnline"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 2;
@@ -85,35 +85,18 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(deckManager);
             }
         });
-        addButton(localizer.getMessage("Achievements"), new FEventHandler() {
+        addButton(localizer.getMessage("lblAchievements"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 4;
                 AchievementsScreen.show();
             }
         });
-        addButton(localizer.getMessage("lblGameSettings"), new FEventHandler() {
+        addButton(localizer.getMessage("lblSettings"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 5;
                 SettingsScreen.show(true);
-            }
-        });
-        addButton(localizer.getMessage("lblExit"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 6;
-                FOptionPane.showConfirmDialog(
-                        localizer.getMessage("lblAreYouSureYouWishExitForge"),
-                        localizer.getMessage("lblExitForge"),
-                        localizer.getMessage("lblExit"), localizer.getMessage("lblCancel"), false, new Callback<Boolean>() {
-                            @Override
-                            public void run(Boolean result) {
-                                if (result) {
-                                    Forge.exit(true);
-                                }
-                            }
-                        });
             }
         });
         baseButtonCount = buttons.size();
