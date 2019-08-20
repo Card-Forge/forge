@@ -61,8 +61,6 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool, commanderPool;
 
-    private final GameType gameType;
-
     Predicate<CardRules> commanderFilter;
 
     CardManager catalogManager;
@@ -75,13 +73,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      * all cards are available.
      */
     @SuppressWarnings("serial")
-    public CEditorConstructed(final CDetailPicture cDetailPicture) {
-        this(cDetailPicture, GameType.Constructed);
+    public CEditorConstructed(final CDetailPicture cDetailPicture0) {
+        this(cDetailPicture0, GameType.Constructed);
     }
 
-    public CEditorConstructed(final CDetailPicture cDetailPicture, final GameType gameType) {
-        super(FScreen.DECK_EDITOR_CONSTRUCTED, cDetailPicture);
-        this.gameType = gameType;
+    public CEditorConstructed(final CDetailPicture cDetailPicture0, final GameType gameType0) {
+        super(FScreen.DECK_EDITOR_CONSTRUCTED, cDetailPicture0, gameType0);
 
         boolean wantUnique = false;
 
@@ -107,6 +104,15 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+
+                wantUnique = true;
+                break;
+            case Oathbreaker:
+                allSections.add(DeckSection.Commander);
+
+                commanderFilter = Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL);
                 commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
                 normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 
@@ -148,6 +154,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case Commander:
                 this.controller = new DeckController<Deck>(FModel.getDecks().getCommander(), this, newCreator);
                 break;
+            case Oathbreaker:
+                this.controller = new DeckController<Deck>(FModel.getDecks().getOathbreaker(), this, newCreator);
+                break;
             case Brawl:
                 this.controller = new DeckController<Deck>(FModel.getDecks().getBrawl(), this, newCreator);
                 break;
@@ -176,6 +185,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 case Constructed:
                     return CardLimit.Default;
                 case Commander:
+                case Oathbreaker:
                 case TinyLeaders:
                 case Brawl:
                     return CardLimit.Singleton;
@@ -188,8 +198,37 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         DeckSection sectionMode = editor.sectionMode;
         DeckController<Deck> controller = editor.getDeckController();
 
-        if (sectionMode == DeckSection.Commander || sectionMode == DeckSection.Avatar) {
+        switch (sectionMode) {
+        case Commander:
+            int count = editor.getDeckManager().getItemCount();
+            if (count > 0) {
+                PaperCard newCard = items.iterator().next().getKey(); //can only add one card at a time when on commander section
+                if (editor.gameType == GameType.Oathbreaker) { //replace oathbreaker or signature spell if needed
+                    for (Entry<PaperCard, Integer> entry : editor.getDeckManager().getPool()) {
+                        if (entry.getKey().getRules().canBeOathbreaker() == newCard.getRules().canBeOathbreaker()) {
+                            editor.getDeckManager().removeItem(entry.getKey(), entry.getValue());
+                            break;
+                        }
+                    }
+                }
+                else { //replace existing commander unless new commander is valid partner commander
+                    if (count == 1 && newCard.getRules().canBePartnerCommander()) { //replace existing partners regardless
+                        PaperCard commander = editor.getDeckManager().getPool().toFlatList().get(0);
+                        if (!commander.getRules().canBePartnerCommander()) {
+                            editor.getDeckManager().removeAllItems();
+                        }
+                    }
+                    else {
+                        editor.getDeckManager().removeAllItems();
+                    }
+                }
+            }
+            break;
+        case Avatar:
             editor.getDeckManager().removeAllItems();
+            break;
+        default:
+            break;
         }
 
         ItemPool<PaperCard> itemsToAdd = editor.getAllowedAdditions(items);
@@ -260,7 +299,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         onRemoveItems(this, items, toAlternate);
     }
 
-    public static void buildAddContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode) {
+    public static void buildAddContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode, GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
         switch (sectionMode) {
         case Main:
@@ -271,7 +310,18 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
             break;
         case Commander:
-            cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblascommander"));
+            if (gameType == GameType.Oathbreaker) {
+                PaperCard pc = cmb.getItemManager().getSelectedItem();
+                if (pc != null && pc.getRules().canBeSignatureSpell()) {
+                    cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblassignaturespell"));
+                }
+                else {
+                    cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblasoathbreaker"));
+                }
+            }
+            else {
+                cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblascommander"));
+            }
             break;
         case Avatar:
             cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblasavatar"));
@@ -325,7 +375,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        buildAddContextMenu(cmb, sectionMode);
+        buildAddContextMenu(cmb, sectionMode, gameType);
     }
 
     /* (non-Javadoc)
@@ -377,26 +427,31 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                     case Main:
                         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
                         this.getCatalogManager().setPool(normalPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getMain());
                         break;
                     case Sideboard:
                         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
                         this.getCatalogManager().setPool(normalPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                         break;
                     case Avatar:
                         this.getCatalogManager().setup(ItemManagerConfig.AVATAR_POOL);
                         this.getCatalogManager().setPool(avatarPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(false);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
                         break;
                     case Planes:
                         this.getCatalogManager().setup(ItemManagerConfig.PLANAR_POOL);
                         this.getCatalogManager().setPool(planePool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
                         break;
                     case Schemes:
                         this.getCatalogManager().setup(ItemManagerConfig.SCHEME_POOL);
                         this.getCatalogManager().setPool(schemePool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                         break;
                     case Commander:
@@ -404,25 +459,30 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                     case Conspiracy:
                         this.getCatalogManager().setup(ItemManagerConfig.CONSPIRACY_DECKS);
                         this.getCatalogManager().setPool(conspiracyPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
                 }
             case Commander:
+            case Oathbreaker:
             case TinyLeaders:
             case Brawl:
                 switch(sectionMode) {
                     case Main:
                         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
                         this.getCatalogManager().setPool(normalPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getMain());
                         break;
                     case Sideboard:
                         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
                         this.getCatalogManager().setPool(normalPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                         break;
                     case Commander:
                         this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
                         this.getCatalogManager().setPool(commanderPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(false);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
                         break;
                     default:

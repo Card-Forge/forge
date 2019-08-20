@@ -23,6 +23,7 @@ import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
@@ -91,16 +92,16 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
     @SuppressWarnings("serial")
-    public CEditorQuestLimited(final QuestController questData0, final CDetailPicture cDetailPicture) {
-        super(FScreen.DECK_EDITOR_QUEST_TOURNAMENT, cDetailPicture);
+    public CEditorQuestLimited(final QuestController questData0, final CDetailPicture cDetailPicture0) {
+        super(FScreen.DECK_EDITOR_QUEST_TOURNAMENT, cDetailPicture0, GameType.QuestDraft);
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false, true);
-        final CardManager deckManager = new CardManager(cDetailPicture, false, true);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, true);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, true);
 
         catalogManager.setCaption("Sideboard");
 

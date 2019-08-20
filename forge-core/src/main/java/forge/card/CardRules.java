@@ -210,6 +210,16 @@ public final class CardRules implements ICardCharacteristics {
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty());
     }
 
+    public boolean canBeOathbreaker() {
+        CardType type = mainPart.getType();
+        return type.isPlaneswalker();
+    }
+
+    public boolean canBeSignatureSpell() {
+        CardType type = mainPart.getType();
+        return type.isInstant() || type.isSorcery();
+    }
+
     public boolean canBeBrawlCommander() {
         CardType type = mainPart.getType();
         return (type.isLegendary() && type.isCreature()) || type.isPlaneswalker();
@@ -219,7 +229,7 @@ public final class CardRules implements ICardCharacteristics {
         return meldWith;
     }
 
-    public String getParterWith() {
+    public String getPartnerWith() {
         return partnerWith;
     }
 

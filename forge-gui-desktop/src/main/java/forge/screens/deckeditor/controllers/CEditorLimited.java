@@ -24,6 +24,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -32,12 +33,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
@@ -62,6 +58,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     private final DeckController<DeckGroup> controller;
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
+    private DragCell oathbreakerDecksParent = null;
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
@@ -75,11 +72,11 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     @SuppressWarnings("serial")
-    public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture) {
-        super(screen0, cDetailPicture);
+    public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture0) {
+        super(screen0, cDetailPicture0, GameType.Sealed);
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false, false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
 
         catalogManager.setCaption("Sideboard");
 
@@ -208,7 +205,6 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         }
     }
 
-
     public void setEditorMode(DeckSection sectionMode) {
         switch(sectionMode) {
             case Conspiracy:
@@ -244,6 +240,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
+        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
@@ -273,6 +270,9 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         }
         if (commanderDecksParent != null) {
             commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
+        }
+        if (oathbreakerDecksParent != null) {
+            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
         }
         if (brawlDecksParent!= null) {
             brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);

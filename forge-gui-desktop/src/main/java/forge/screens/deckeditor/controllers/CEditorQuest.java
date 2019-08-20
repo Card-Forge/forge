@@ -29,6 +29,7 @@ import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -104,8 +105,8 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
     @SuppressWarnings("serial")
-    public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture) {
-        super(FScreen.DECK_EDITOR_QUEST, cDetailPicture);
+    public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture0) {
+        super(FScreen.DECK_EDITOR_QUEST, cDetailPicture0, GameType.Quest);
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
@@ -120,8 +121,8 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false, true);
-        final CardManager deckManager = new CardManager(cDetailPicture, false, true);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, true);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, true);
 
         catalogManager.setCaption("Quest Inventory");
 
@@ -203,7 +204,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildAddContextMenu(final EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
+        CEditorConstructed.buildAddContextMenu(cmb, sectionMode, GameType.Quest);
         AddRatingItem(cmb, 1);
         AddRatingItem(cmb, 2);
         AddRatingItem(cmb, 3);

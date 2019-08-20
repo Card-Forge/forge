@@ -42,6 +42,7 @@ import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
@@ -63,6 +64,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
     private final VCommanderDecks vCommanderDecks;
+    private final VOathbreakerDecks vOathbreakerDecks;
     private final VBrawlDecks vBrawlDecks;
     private final VTinyLeadersDecks vTinyLeadersDecks;
 
@@ -73,6 +75,8 @@ public enum CDeckEditorUI implements ICDoc {
         this.vAllDecks.setCDetailPicture(cDetailPicture);
         this.vCommanderDecks = VCommanderDecks.SINGLETON_INSTANCE;
         this.vCommanderDecks.setCDetailPicture(cDetailPicture);
+        this.vOathbreakerDecks = VOathbreakerDecks.SINGLETON_INSTANCE;
+        this.vOathbreakerDecks.setCDetailPicture(cDetailPicture);
         this.vBrawlDecks = VBrawlDecks.SINGLETON_INSTANCE;
         this.vBrawlDecks.setCDetailPicture(cDetailPicture);
         this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;

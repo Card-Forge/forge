@@ -36,6 +36,8 @@ public class StaticData {
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
     private Predicate<PaperCard> modernPredicate;
+    private Predicate<PaperCard> commanderPredicate;
+    private Predicate<PaperCard> oathbreakerPredicate;
 
     private boolean filteredHandsEnabled = false;
 
@@ -201,17 +203,23 @@ public class StaticData {
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
-    public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
-
     public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = standardPredicate; }
+
+    public void setCommanderPredicate(Predicate<PaperCard> commanderPredicate) { this.commanderPredicate = commanderPredicate; }
+
+    public void setOathbreakerPredicate(Predicate<PaperCard> oathbreakerPredicate) { this.oathbreakerPredicate = oathbreakerPredicate; }
+
+    public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
     public Predicate<PaperCard> getModernPredicate() {
         return modernPredicate;
     }
 
-    public Predicate<PaperCard> getBrawlPredicate() {
-        return brawlPredicate;
-    }
+    public Predicate<PaperCard> getCommanderPredicate() { return commanderPredicate; }
+
+    public Predicate<PaperCard> getOathbreakerPredicate() { return oathbreakerPredicate; }
+
+    public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
     public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
         this.filteredHandsEnabled = filteredHandsEnabled;

@@ -20,6 +20,7 @@ package forge.screens.deckeditor.controllers;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.deck.DeckBase;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.*;
@@ -96,13 +97,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public CEditorQuestCardShop(final QuestController qd, final CDetailPicture cDetailPicture) {
-        super(FScreen.QUEST_CARD_SHOP, cDetailPicture);
+    public CEditorQuestCardShop(final QuestController qd, final CDetailPicture cDetailPicture0) {
+        super(FScreen.QUEST_CARD_SHOP, cDetailPicture0, GameType.Quest);
 
         this.questData = qd;
 
-        final SpellShopManager catalogManager = new SpellShopManager(getCDetailPicture(), false);
-        final SpellShopManager deckManager = new SpellShopManager(getCDetailPicture(), false);
+        final SpellShopManager catalogManager = new SpellShopManager(cDetailPicture0, false);
+        final SpellShopManager deckManager = new SpellShopManager(cDetailPicture0, false);
 
         catalogManager.setCaption("Spell Shop");
         deckManager.setCaption("Quest Inventory");

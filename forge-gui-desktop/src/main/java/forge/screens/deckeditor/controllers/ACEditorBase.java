@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.deck.*;
+import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.framework.*;
@@ -76,6 +77,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private ItemManager<TItem> deckManager;
     protected DeckSection sectionMode = DeckSection.Main;
     private final CDetailPicture cDetailPicture;
+    protected final GameType gameType;
 
     // card transfer buttons
     final Localizer localizer = Localizer.getInstance();
@@ -114,9 +116,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .icon(FSkin.getImage(FSkinProp.IMG_LAND, 18, 18))
             .iconScaleAuto(false).hoverable().build();
 
-    protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture) {
+    protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture0, final GameType gameType0) {
         this.screen = screen0;
-        this.cDetailPicture = cDetailPicture;
+        this.cDetailPicture = cDetailPicture0;
+        this.gameType = gameType0;
     }
 
     public FScreen getScreen() {

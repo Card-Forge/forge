@@ -86,6 +86,14 @@ public class CLobby {
                     view.focusOnAvatar();
                 }
             });
+            final FDeckChooser fdobcom = view.getOathbreakerDeckChooser(iSlot);
+            fdobcom.initialize(FPref.OATHBREAKER_DECK_STATES[iSlot], defaultDeckTypeForOathbreakerSlot(iSlot));
+            fdobcom.populate();
+            fdobcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
+                    view.focusOnAvatar();
+                }
+            });
             final FDeckChooser fdtlcom = view.getTinyLeaderDeckChooser(iSlot);
             fdtlcom.initialize(FPref.TINY_LEADER_DECK_STATES[iSlot], defaultDeckTypeForTinyLeaderSlot(iSlot));
             fdtlcom.populate();
@@ -135,11 +143,15 @@ public class CLobby {
         return iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 
+    private static DeckType defaultDeckTypeForOathbreakerSlot(final int iSlot) {
+        return iSlot == 0 ? DeckType.OATHBREAKER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+    }
+
     private static DeckType defaultDeckTypeForTinyLeaderSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.TINY_LEADERS_DECKS : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+        return iSlot == 0 ? DeckType.TINY_LEADERS_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 
     private static DeckType defaultDeckTypeForBrawlSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.BRAWL_DECKS : DeckType.CUSTOM_DECK;
+        return iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
     }
 }

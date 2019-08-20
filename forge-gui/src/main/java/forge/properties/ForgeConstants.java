@@ -217,6 +217,7 @@ public final class ForgeConstants {
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme" + PATH_SEPARATOR;
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar" + PATH_SEPARATOR;
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander" + PATH_SEPARATOR;
+    public static final String DECK_OATHBREAKER_DIR = DECK_BASE_DIR + "oathbreaker" + PATH_SEPARATOR;
     public static final String DECK_NET_DIR         = DECK_BASE_DIR + "net" + PATH_SEPARATOR;
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR    = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
@@ -268,6 +269,7 @@ public final class ForgeConstants {
             DECK_SCHEME_DIR,
             DECK_PLANE_DIR,
             DECK_COMMANDER_DIR,
+            DECK_OATHBREAKER_DIR,
             DECK_NET_DIR,
             QUEST_SAVE_DIR,
             CACHE_TOKEN_PICS_DIR,

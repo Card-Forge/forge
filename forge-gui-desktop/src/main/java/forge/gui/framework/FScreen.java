@@ -88,6 +88,15 @@ public class FScreen {
             "Close Editor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
+    public static final FScreen DECK_EDITOR_OATHBREAKER = new FScreen(
+            VDeckEditorUI.SINGLETON_INSTANCE,
+            CDeckEditorUI.SINGLETON_INSTANCE,
+            "Oathbreaker Deck Editor",
+            FSkin.getImage(FSkinProp.IMG_PACK),
+            true,
+            "Close Editor",
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
     public static final FScreen DECK_EDITOR_PLANECHASE = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,

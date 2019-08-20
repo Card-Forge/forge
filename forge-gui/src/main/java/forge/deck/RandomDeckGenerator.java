@@ -78,6 +78,8 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         switch (lstDecks.getGameType()) {
         case Commander:
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
+        case Oathbreaker:
+            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Oathbreaker);
         case TinyLeaders:
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
         case Brawl:
@@ -138,6 +140,9 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         case Commander:
             decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
             break;
+        case Oathbreaker:
+            decks = DeckProxy.getAllOathbreakerDecks(DeckFormat.Oathbreaker.isLegalDeckPredicate());
+            break;
         case TinyLeaders:
             decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
             break;
@@ -165,6 +170,9 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         switch (lstDecks.getGameType()) {
         case Commander:
             decks = DeckProxy.getAllCommanderDecks();
+            break;
+        case Oathbreaker:
+            decks = DeckProxy.getAllOathbreakerDecks();
             break;
         case TinyLeaders:
             decks = DeckProxy.getAllTinyLeadersDecks();

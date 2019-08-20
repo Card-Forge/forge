@@ -143,7 +143,7 @@ public class ConquestUtil {
 
         //remove any cards that aren't allowed in deck due to color identity
         if (colorIdentity != MagicColor.ALL_COLORS) {
-            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(deck.getCommanders());
+            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderPredicate(deck.getCommanders());
 
             availableCards.retainAll(Lists.newArrayList(Iterables.filter(availableCards, pred)));
         }
