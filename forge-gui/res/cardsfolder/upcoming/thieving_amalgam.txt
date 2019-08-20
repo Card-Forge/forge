@@ -1,0 +1,10 @@
+Name:Thieving Amalgam
+ManaCost:5 B B
+Types:Creature Ape Snake
+PT:6/7
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigManifest | TriggerDescription$ At the beginning of each opponent's upkeep, you manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ ValidLibrary Card.TopLibrary+ActivePlayerCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontOwn+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:At the beginning of each opponent's upkeep, you manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life.
