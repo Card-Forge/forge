@@ -92,11 +92,6 @@ public class AbilityUtils {
         else if (defined.equals("OriginalHost")) {
             c = sa.getRootAbility().getOriginalHost();
         }
-        else if (defined.equals("CloneStateOrigin")) {
-            if (hostCard.isCloned()) {
-                c = hostCard.getLastClonedStateOrigin();
-            }
-        }
         else if (defined.equals("EffectSource")) {
             if (hostCard.isEmblem() || hostCard.getType().hasSubtype("Effect")) {
                 c = AbilityUtils.findEffectRoot(hostCard);
