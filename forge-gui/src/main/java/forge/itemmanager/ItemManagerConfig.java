@@ -70,6 +70,8 @@ public enum ItemManagerConfig {
             null, null, 4, 0),
     COMMANDER_SECTION(SColumnUtil.getCatalogDefaultColumns(true), true, false, true,
             null, null, 1, 1),
+    OATHBREAKER_SECTION(SColumnUtil.getCatalogDefaultColumns(true), true, false, true,
+            null, null, 2, 1),
     WORKSHOP_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, true, false,
             null, null, 4, 0),
     DECK_VIEWER(SColumnUtil.getDeckViewerDefaultColumns(), false, false, false,

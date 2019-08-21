@@ -7,6 +7,7 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.GameEntityView;
+import forge.game.GameType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -195,7 +196,29 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.IsCommander);
     }
     void updateCommander(Card c) {
-        set(TrackableProperty.IsCommander, c.isCommander());
+        boolean isCommander = c.isCommander();
+        set(TrackableProperty.IsCommander, isCommander);
+        if (c.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)) {
+            //store alternate type for oathbreaker or signature spell for display in card text
+            if (isCommander) {
+                if (c.getPaperCard().getRules().canBeSignatureSpell()) {
+                    set(TrackableProperty.CommanderAltType, "Signature Spell");
+                }
+                else {
+                    set(TrackableProperty.CommanderAltType, "Oathbreaker");
+                }
+            }
+            else {
+                set(TrackableProperty.CommanderAltType, null);
+            }
+        }
+    }
+    public String getCommanderType() {
+        String type = get(TrackableProperty.CommanderAltType);
+        if (type == null) {
+            type = "Commander";
+        }
+        return type;
     }
 
     public Map<CounterType, Integer> getCounters() {
@@ -542,7 +565,7 @@ public class CardView extends GameEntityView {
             sb.append(rulesText).append("\r\n\r\n");
         }
         if (isCommander()) {
-            sb.append(getOwner()).append("'s Commander\r\n");
+            sb.append(getOwner()).append("'s " + getCommanderType() + "\r\n");
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 

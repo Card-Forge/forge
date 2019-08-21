@@ -166,6 +166,9 @@ public class CloneEffect extends SpellAbilityEffect {
                 sa.getHostCard().addFacedownCommand(unclone);
             }
         }
+        if (sa.hasParam("RememberCloneOrigin")) {
+            tgtCard.addRemembered(cardToCopy);
+        }
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
 

@@ -34,8 +34,6 @@ import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -1674,7 +1672,7 @@ public class AbilityUtils {
 
         for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
             // Use the strings from MagicColor, since that's how the Script will be coming in as
-            String key = WordUtils.capitalize(c) + "Conversion";
+            String key = StringUtils.capitalize(c) + "Conversion";
             if (params.containsKey(key)) {
                 String convertTo = params.get(key);
                 byte convertByte = 0;

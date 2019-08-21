@@ -21,6 +21,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -30,12 +31,7 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
@@ -58,6 +54,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private String ccAddLabel = "Add card";
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
+    private DragCell oathbreakerDecksParent = null;
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
@@ -68,11 +65,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
-    public CEditorDraftingProcess(final CDetailPicture cDetailPicture) {
-        super(FScreen.DRAFTING_PROCESS, cDetailPicture);
+    public CEditorDraftingProcess(final CDetailPicture cDetailPicture0) {
+        super(FScreen.DRAFTING_PROCESS, cDetailPicture0, GameType.Draft);
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false, false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
@@ -285,6 +282,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
+        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
 
@@ -333,6 +331,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
         if (commanderDecksParent != null) {
             commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
+        }
+        if (oathbreakerDecksParent != null) {
+            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
         }
         if (brawlDecksParent!= null) {
             brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);

@@ -1,6 +1,7 @@
 package forge.deck.io;
 
 import forge.deck.DeckProxy;
+import forge.deck.DeckType;
 import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
@@ -21,8 +22,19 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
+    private static String selectedDeckType = "", currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "",
+            oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
+
+    public static DeckType getSelectedDeckType() {
+        return selectedDeckType.isEmpty() ? DeckType.CONSTRUCTED_DECK : DeckType.valueOf(selectedDeckType);
+    }
+    public static void setSelectedDeckType(DeckType selectedDeckType0) {
+        String selectedDeckTypeStr = selectedDeckType0 == DeckType.CONSTRUCTED_DECK ? "" : selectedDeckType0.name();
+        if (selectedDeckTypeStr.equals(selectedDeckType)) { return; }
+        selectedDeckType = selectedDeckTypeStr;
+        save();
+    }
 
     public static String getCurrentDeck() {
         return currentDeck;
@@ -57,6 +69,15 @@ public class DeckPreferences {
     public static void setCommanderDeck(String commanderDeck0) {
         if (commanderDeck.equals(commanderDeck0)) { return; }
         commanderDeck = commanderDeck0;
+        save();
+    }
+
+    public static String getOathbreakerDeck() {
+        return oathbreakerDeck;
+    }
+    public static void setOathbreakerDeck(String oathbreakerDeck0) {
+        if (oathbreakerDeck.equals(oathbreakerDeck0)) { return; }
+        oathbreakerDeck = oathbreakerDeck0;
         save();
     }
 
@@ -114,10 +135,12 @@ public class DeckPreferences {
             final Document document = builder.parse(new File(ForgeConstants.DECK_PREFS_FILE));
 
             final Element root = (Element)document.getElementsByTagName("preferences").item(0);
+            selectedDeckType = root.getAttribute("selectedDeckType");
             currentDeck = root.getAttribute("currentDeck");
             draftDeck = root.getAttribute("draftDeck");
             sealedDeck = root.getAttribute("sealedDeck");
             commanderDeck = root.getAttribute("commanderDeck");
+            oathbreakerDeck = root.getAttribute("oathbreakerDeck");
             brawlDeck = root.getAttribute("brawlDeck");
             tinyLeadersDeck = root.getAttribute("tinyLeadersDeck");
             planarDeck = root.getAttribute("planarDeck");
@@ -145,10 +168,12 @@ public class DeckPreferences {
             Document document = builder.newDocument();
             Element root = document.createElement("preferences");
             root.setAttribute("type", "decks");
+            root.setAttribute("selectedDeckType", selectedDeckType);
             root.setAttribute("currentDeck", currentDeck);
             root.setAttribute("draftDeck", draftDeck);
             root.setAttribute("sealedDeck", sealedDeck);
             root.setAttribute("commanderDeck", commanderDeck);
+            root.setAttribute("oathbreakerDeck", oathbreakerDeck);
             root.setAttribute("brawlDeck", brawlDeck);
             root.setAttribute("tinyLeadersDeck", tinyLeadersDeck);
             root.setAttribute("planarDeck", planarDeck);

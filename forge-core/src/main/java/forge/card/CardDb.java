@@ -219,7 +219,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
                 } else {
-                    System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
+                    System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }
             }

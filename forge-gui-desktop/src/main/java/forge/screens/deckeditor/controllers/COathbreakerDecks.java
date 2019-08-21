@@ -3,18 +3,18 @@ package forge.screens.deckeditor.controllers;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
 
 /**
- * Controls the "Brawl Decks" panel in the deck editor UI.
+ * Controls the "Oathbreaker Decks" panel in the deck editor UI.
  *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CBrawlDecks implements ICDoc {
+public enum COathbreakerDecks implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final VBrawlDecks view = VBrawlDecks.SINGLETON_INSTANCE;
+    private final VOathbreakerDecks view = VOathbreakerDecks.SINGLETON_INSTANCE;
 
     //========== Overridden methods
 
@@ -31,7 +31,7 @@ public enum CBrawlDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllBrawlDecks());
+        view.getLstDecks().setPool(DeckProxy.getAllOathbreakerDecks());
     }
 
     /* (non-Javadoc)

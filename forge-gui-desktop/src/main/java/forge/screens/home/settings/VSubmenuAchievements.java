@@ -59,9 +59,9 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab(localizer.getMessage("Achievements"));
+    private final DragTab tab = new DragTab(localizer.getMessage("lblAchievements"));
     private final FLabel lblTitle = new FLabel.Builder()
-        .text(localizer.getMessage("Achievements")).fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("lblAchievements")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
     private final FComboBox<AchievementCollection> cbCollections = new FComboBox<AchievementCollection>();
     private final TrophyCase trophyCase = new TrophyCase();
@@ -169,7 +169,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
      */
     @Override
     public String getMenuTitle() {
-        return localizer.getMessage("Achievements");
+        return localizer.getMessage("lblAchievements");
     }
 
     /* (non-Javadoc)
