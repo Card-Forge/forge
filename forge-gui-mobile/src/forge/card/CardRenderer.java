@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import forge.CachedCardImage;
 import forge.FThreads;
@@ -40,7 +40,7 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FList;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
-
+import forge.util.TextBounds;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -95,6 +95,7 @@ public class CardRenderer {
     private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
+    private static final GlyphLayout layout = new GlyphLayout();
 
     static {
         try {
@@ -261,7 +262,7 @@ public class CardRenderer {
             if (suffix != null) {
                 name += suffix;
             }
-            g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+            g.drawText(name, font, foreColor, x, y, w, h, false, Align.center, true);
         }
     }
 
@@ -310,7 +311,7 @@ public class CardRenderer {
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
             manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
-            g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+            g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, Align.left, true);
         }
         manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
@@ -323,7 +324,7 @@ public class CardRenderer {
         if (suffix != null) {
             name += suffix;
         }
-        g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+        g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, Align.left, true);
 
         if (compactMode) {
             return; //skip second line if rendering in compact mode
@@ -350,7 +351,7 @@ public class CardRenderer {
         else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
             type += String.format(" [%s / %s]", power, toughness);
         }
-        g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
+        g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
 
     public static boolean cardListItemTap(List<?> cards, int selectedIndex, ActivateHandler activateHandler, float x, float y, int count, boolean compactMode) {
@@ -379,7 +380,7 @@ public class CardRenderer {
         Color backColor = getRarityColor(rarity);
         Color foreColor = FSkinColor.getHighContrastColor(backColor);
         g.fillRect(backColor, x, y, w, h);
-        g.drawText(set, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        g.drawText(set, font, foreColor, x, y, w, h, false, Align.center, true);
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
@@ -447,7 +448,7 @@ public class CardRenderer {
         //draw name and mana cost overlays if card is small or default card image being used
         if (h <= NAME_COST_THRESHOLD && canShow) {
             if (showCardNameOverlay(card)) {
-                g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
+                g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
@@ -476,7 +477,7 @@ public class CardRenderer {
         if (canShow && showCardIdOverlay(card)) {
             FSkinFont idFont = FSkinFont.forHeight(h * 0.12f);
             float idHeight = idFont.getCapHeight();
-            g.drawOutlinedText(String.valueOf(card.getId()), idFont, Color.WHITE, Color.BLACK, x + padding, y + h - idHeight - padding, w, h, false, HAlignment.LEFT, false);
+            g.drawOutlinedText(String.valueOf(card.getId()), idFont, Color.WHITE, Color.BLACK, x + padding, y + h - idHeight - padding, w, h, false, Align.left, false);
         }
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
@@ -556,7 +557,11 @@ public class CardRenderer {
                 maxCounters = Math.max(maxCounters, numberOfCounters);
             }
 
-            if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
+            //if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
+            layout.setText(font, String.valueOf(maxCounters));
+
+            if (counterBoxBaseWidth + layout.width > w) {
+
                 drawCounterImage(card, g, x, y, w, h);
                 return;
             }
@@ -567,7 +572,9 @@ public class CardRenderer {
 
             final CounterType counter = counterEntry.getKey();
             final int numberOfCounters = counterEntry.getValue();
-            final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
+            //final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
+            layout.setText(font, String.valueOf(numberOfCounters));
+            final float counterBoxRealWidth = counterBoxBaseWidth + layout.width + 4;
 
             final float counterYOffset = spaceFromTopOfCard - (currentCounter++ * (counterBoxHeight + counterBoxSpacing));
 
@@ -579,8 +586,8 @@ public class CardRenderer {
 
             Color counterColor = counterColorCache.get(counter);
 
-            drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
-            drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
+            drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
+            drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
 
         }
 
@@ -588,13 +595,14 @@ public class CardRenderer {
 
     private static final int GL_BLEND = GL20.GL_BLEND;
 
-    private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, HAlignment horizontalAlignment) {
+    private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, int horizontalAlignment) {
 
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }
 
-        TextBounds textBounds = font.getMultiLineBounds(text);
+        layout.setText(font, text);
+        TextBounds textBounds = new TextBounds(layout.width, layout.height);
 
         float textHeight = textBounds.height;
         if (h > textHeight) {
@@ -602,7 +610,7 @@ public class CardRenderer {
         }
 
         font.setColor(color);
-        font.drawMultiLine(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment);
+        font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, true);
 
         if (color.a < 1) {
             Gdx.gl.glDisable(GL_BLEND);
@@ -685,7 +693,7 @@ public class CardRenderer {
 
         //draw card damage above P/T box if needed
         if (card.getDamage() > 0) {
-            g.drawOutlinedText(">" + card.getDamage() + "<", font, Color.RED, Color.WHITE, x, y - h + padding, w, h, false, HAlignment.CENTER, true);
+            g.drawOutlinedText(">" + card.getDamage() + "<", font, Color.RED, Color.WHITE, x, y - h + padding, w, h, false, Align.center, true);
         }
 
         g.fillRect(color, x, y, w, h);
@@ -693,7 +701,7 @@ public class CardRenderer {
 
         x += padding;
         for (int i = 0; i < pieces.size(); i++) {
-            g.drawText(pieces.get(i), font, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+            g.drawText(pieces.get(i), font, Color.BLACK, x, y, w, h, false, Align.left, true);
             x += pieceWidths.get(i);
         }
     }
@@ -771,7 +779,8 @@ public class CardRenderer {
             @Override
             public void run() {
 
-                TextureRegion[] textureRegions = new TextureRegion[pages.size];
+                //TextureRegion[] textureRegions = new TextureRegion[pages.size];
+                Array<TextureRegion> textureRegions = new Array<>();
                 for (int i = 0; i < pages.size; i++) {
                     PixmapPacker.Page p = pages.get(i);
                     Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
@@ -782,7 +791,8 @@ public class CardRenderer {
                         }
                     };
                     texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-                    textureRegions[i] = new TextureRegion(texture);
+                    //textureRegions[i] = new TextureRegion(texture);
+                    textureRegions.add(new TextureRegion(texture));
                 }
 
                 counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));

@@ -1,7 +1,8 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.interfaces.IProgressBar;
@@ -161,13 +162,13 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
             MSG_FONT = FSkinFont.get(11);
         }
 
-        g.drawText(message, MSG_FONT, FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+        g.drawText(message, MSG_FONT, FORE_COLOR, 0, 0, w, h, false, Align.center, true);
 
         //draw text using selection fore color in needed regions over top of regular text using clipping
         if (!SEL_FORE_COLOR.equals(FORE_COLOR)) {
             for (Pair<Float, Float> region : selTextRegions) {
                 g.startClip(region.getLeft(), 0, region.getRight(), h);
-                g.drawText(message, MSG_FONT, SEL_FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+                g.drawText(message, MSG_FONT, SEL_FORE_COLOR, 0, 0, w, h, false, Align.center, true);
                 g.endClip();
             }
         }

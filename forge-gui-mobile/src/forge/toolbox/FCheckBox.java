@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -21,7 +21,7 @@ public class FCheckBox extends FLabel implements ICheckBox {
         this(text0, false);
     }
     public FCheckBox(String text0, boolean selected0) {
-        super(new Builder().text(text0).align(HAlignment.LEFT).selectable().selected(selected0));
+        super(new Builder().text(text0).align(Align.left).selectable().selected(selected0));
         setIcon(new CheckBoxIcon());
     }
 

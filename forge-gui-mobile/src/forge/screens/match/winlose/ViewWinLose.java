@@ -1,7 +1,7 @@
 package forge.screens.match.winlose;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinColor;
@@ -40,8 +40,8 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         game = game0;
 
-        lblTitle = add(new FLabel.Builder().font(FSkinFont.get(30)).align(HAlignment.CENTER).build());
-        lblStats = add(new FLabel.Builder().font(FSkinFont.get(26)).align(HAlignment.CENTER).build());
+        lblTitle = add(new FLabel.Builder().font(FSkinFont.get(30)).align(Align.center).build());
+        lblStats = add(new FLabel.Builder().font(FSkinFont.get(26)).align(Align.center).build());
         pnlOutcomes = add(new OutcomesPanel());
 
         btnContinue = add(new FButton());
@@ -88,7 +88,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnQuit.setFont(btnContinue.getFont());
         btnContinue.setEnabled(!game0.isMatchOver());
 
-        lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).font(FSkinFont.get(18)).build());
+        lblLog = add(new FLabel.Builder().text("Game Log").align(Align.center).font(FSkinFont.get(18)).build());
         txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {

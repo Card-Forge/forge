@@ -2,7 +2,7 @@ package forge.card;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.Graphics;
 import forge.assets.*;
@@ -175,7 +175,7 @@ public class CardImageRenderer {
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
             manaCostWidth += NAME_FONT.getBounds("//").width + HEADER_PADDING;
-            g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, HAlignment.LEFT, true);
+            g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, Align.left, true);
         }
         manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
@@ -183,7 +183,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(state.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(state.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
     }
 
     public static final FBufferedImage forgeArt;
@@ -221,7 +221,7 @@ public class CardImageRenderer {
 
         //draw type
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
     }
 
     //use text renderer to handle mana symbols and reminder text
@@ -268,7 +268,7 @@ public class CardImageRenderer {
             y += padding;
             w -= 2 * padding;
             h -= 2 * padding;
-            cardTextRenderer.drawText(g, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+            cardTextRenderer.drawText(g, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, Align.left, true);
         }
     }
 
@@ -313,7 +313,7 @@ public class CardImageRenderer {
 
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
-            g.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+            g.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
             x += pieceWidths[i];
         }
     }
@@ -451,7 +451,7 @@ public class CardImageRenderer {
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
                 //draw "//" between two parts of mana cost
                 manaCostWidth += NAME_FONT.getBounds("//").width + HEADER_PADDING;
-                g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, HAlignment.LEFT, true);
+                g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, Align.left, true);
             }
             manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
             CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
@@ -460,7 +460,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(CardDetailUtil.formatCardName(card, canShow, state == card.getAlternateState()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardName(card, canShow, state == card.getAlternateState()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
 
         //draw type and set label for card
         y += h;
@@ -478,7 +478,7 @@ public class CardImageRenderer {
             w -= setWidth; //reduce available width for type
         }
 
-        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
     }
 
     private static void drawDetailsTextBox(Graphics g, CardStateView state, GameView gameView, boolean canShow, Color[] colors, float x, float y, float w, float h) {
@@ -491,14 +491,14 @@ public class CardImageRenderer {
         y += padY;
         w -= 2 * padX;
         h -= 2 * padY;
-        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, gameView, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
+        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, gameView, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, Align.left, false);
     }
 
     private static void drawDetailsIdAndPtBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color idForeColor, Color[] colors, float x, float y, float w, float h) {
         float idWidth = 0;
         if (canShow) {
             String idText = CardDetailUtil.formatCardId(state);
-            g.drawText(idText, TYPE_FONT, idForeColor, x, y + TYPE_FONT.getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
+            g.drawText(idText, TYPE_FONT, idForeColor, x, y + TYPE_FONT.getCapHeight() / 2, w, h, false, Align.left, false);
             idWidth = TYPE_FONT.getBounds(idText).width;
         }
 
@@ -513,6 +513,6 @@ public class CardImageRenderer {
 
         fillColorBackground(g, colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
+        g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, Align.center, true);
     }
 }

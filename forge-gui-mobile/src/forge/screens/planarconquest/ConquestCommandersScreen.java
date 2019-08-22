@@ -2,7 +2,7 @@ package forge.screens.planarconquest;
 
 import java.util.Map.Entry;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 
 import forge.Forge;
@@ -217,7 +217,7 @@ public class ConquestCommandersScreen extends FScreen {
                     float imageSize = CardRenderer.MANA_SYMBOL_SIZE;
                     ColorSet cardColor = card.getRules().getColorIdentity();
                     float availableWidth = w - cardArtWidth - CardFaceSymbols.getWidth(cardColor, imageSize) - FList.PADDING;
-                    g.drawText(card.getName(), font, foreColor, x, y, availableWidth, imageSize, false, HAlignment.LEFT, true);
+                    g.drawText(card.getName(), font, foreColor, x, y, availableWidth, imageSize, false, Align.left, true);
                     CardFaceSymbols.drawColorSet(g, cardColor, x + availableWidth + FList.PADDING, y, imageSize);
 
                     if (compactModeHandler.isCompactMode()) {
@@ -233,7 +233,7 @@ public class ConquestCommandersScreen extends FScreen {
                     float setWidth = CardRenderer.getSetWidth(font, set);
                     availableWidth = w - cardArtWidth - setWidth;
 
-                    g.drawText(commander.getOrigin() + " (" + record.getWins() + "W / " + record.getLosses() + "L)", font, foreColor, x, y, availableWidth, lineHeight, false, HAlignment.LEFT, true);
+                    g.drawText(commander.getOrigin() + " (" + record.getWins() + "W / " + record.getLosses() + "L)", font, foreColor, x, y, availableWidth, lineHeight, false, Align.left, true);
 
                     x += availableWidth + CardRenderer.SET_BOX_MARGIN;
                     y -= CardRenderer.SET_BOX_MARGIN;

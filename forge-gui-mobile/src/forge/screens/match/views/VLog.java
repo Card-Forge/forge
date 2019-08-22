@@ -2,7 +2,7 @@ package forge.screens.match.views;
 
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -108,7 +108,7 @@ public class VLog extends FDropDown {
             }
 
             //use full height without padding so text not scaled down
-            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, HAlignment.LEFT, false);
+            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, Align.left, false);
         }
     }
 }

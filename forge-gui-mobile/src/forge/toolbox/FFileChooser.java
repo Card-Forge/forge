@@ -1,7 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -394,7 +394,7 @@ public class FFileChooser extends FDialog {
                         g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
                         x += iconSize + FList.PADDING;
                     }
-                    g.drawText(value.getName(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    g.drawText(value.getName(), font, foreColor, x, y, w, h, false, Align.left, true);
                 }
             });
         }

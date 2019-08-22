@@ -3,7 +3,7 @@ package forge.screens.home;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -247,7 +247,7 @@ public class HomeScreen extends FScreen {
         public void draw(Graphics g) {
             if (Forge.isLandscapeMode()) {
                 //draw text only for Landscape mode
-                g.drawText(getText(), getFont(), getForeColor(), 0, 0, getWidth(), getHeight(), false, HAlignment.LEFT, true);
+                g.drawText(getText(), getFont(), getForeColor(), 0, 0, getWidth(), getHeight(), false, Align.left, true);
             }
             else { //draw buttons normally for portrait mode
                 super.draw(g);

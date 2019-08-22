@@ -18,8 +18,8 @@
 package forge.itemmanager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -83,7 +83,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final FLabel btnView = new FLabel.ButtonBuilder()
         .iconScaleFactor(0.9f).build(); //icon set later
     private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
-        .selectable(true).align(HAlignment.CENTER)
+        .selectable(true).align(Align.center)
         .icon(FSkinImage.SETTINGS).iconScaleFactor(0.9f)
         .build();
 

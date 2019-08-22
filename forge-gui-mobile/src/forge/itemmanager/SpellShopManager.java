@@ -3,7 +3,7 @@ package forge.itemmanager;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 
 import forge.Graphics;
@@ -67,7 +67,7 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
                     CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
                 }
                 else {
-                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
+                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, Align.left, true);
                     Texture image = ImageCache.getImage(value.getKey());
                     if (image != null) {
                         float imageRatio = (float)image.getWidth() / (float)image.getHeight();
@@ -87,7 +87,7 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
                 g.fillRect(backColor, x - FList.PADDING, y, cardArtWidth, priceHeight);
                 g.drawImage(FSkinImage.QUEST_COINSTACK, x, y, priceHeight, priceHeight);
                 float offset = priceHeight * 1.1f;
-                g.drawText(fnGetPrice.apply(value).toString(), font, foreColor, x + offset, y, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, HAlignment.LEFT, true);
+                g.drawText(fnGetPrice.apply(value).toString(), font, foreColor, x + offset, y, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
             }
 
             @Override

@@ -1,6 +1,6 @@
 package forge.screens;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Forge;
@@ -95,6 +95,6 @@ public class LoadingOverlay extends FOverlay {
         y += padding;
         g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
-        g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, HAlignment.CENTER, false);
+        g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, Align.center, false);
     }
 }

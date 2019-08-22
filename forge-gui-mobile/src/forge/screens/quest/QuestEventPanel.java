@@ -1,7 +1,7 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
@@ -109,11 +109,11 @@ class QuestEventPanel extends FDisplayObject {
 		//draw title
 		w -= x + 2 * (RADIO_BUTTON_RADIUS + PADDING);
 		String title = event.getFullTitle();
-		g.drawText(title, TITLE_FONT, TITLE_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
+		g.drawText(title, TITLE_FONT, TITLE_COLOR, x, y, w, h, false, Align.left, false);
 
 		//draw description
 		y += TITLE_FONT.getCapHeight() + 2 * PADDING;
-		g.drawText(event.getDescription(), DESC_FONT, DESC_COLOR, x, y, w, h - PADDING - y, true, HAlignment.LEFT, false);
+		g.drawText(event.getDescription(), DESC_FONT, DESC_COLOR, x, y, w, h - PADDING - y, true, Align.left, false);
 
 		//draw radio button
 		x = getWidth() - PADDING - RADIO_BUTTON_RADIUS;

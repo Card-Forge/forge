@@ -1,6 +1,6 @@
 package forge.screens.match.views;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -62,7 +62,7 @@ public class VPlayers extends FDropDown {
             g.drawImage(avatarImage, x, y, h, h);
             x += h + PADDING;
 
-            g.drawText(player.getDetails(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);
+            g.drawText(player.getDetails(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, Align.left, true);
         }
 
         @Override

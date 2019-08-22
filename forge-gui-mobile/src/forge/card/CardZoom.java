@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -281,10 +281,10 @@ public class CardZoom extends FOverlay {
 
         if (currentActivateAction != null) {
             g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText("Swipe up to " + currentActivateAction, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
+            g.drawText("Swipe up to " + currentActivateAction, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);
+        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
     }
 
     @Override

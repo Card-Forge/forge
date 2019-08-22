@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 
 public class GifAnimation extends ForgeAnimation {
-    private final Animation animation;
+    private final Animation<TextureRegion> animation;
     private TextureRegion currentFrame;
     private float stateTime;
 

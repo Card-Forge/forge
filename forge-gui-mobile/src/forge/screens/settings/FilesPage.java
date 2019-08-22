@@ -3,7 +3,7 @@ package forge.screens.settings;
 import forge.download.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -142,9 +142,9 @@ public class FilesPage extends TabPage<SettingsScreen> {
             float totalHeight = h;
             h = font.getMultiLineBounds(value.label).height + SettingsScreen.SETTING_PADDING;
 
-            g.drawText(value.label, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
+            g.drawText(value.label, font, foreColor, x, y, w, h, false, Align.left, false);
             h += SettingsScreen.SETTING_PADDING;
-            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);
+            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
         }
     }
 

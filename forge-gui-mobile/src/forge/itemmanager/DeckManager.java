@@ -20,7 +20,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Utils;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import java.util.Map.Entry;
 
@@ -118,7 +118,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
                 if (DeckManager.this.getConfig().getCols().size() == 1) {
                     //if just string column, just draw deck string value
-                    g.drawText(deck.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    g.drawText(deck.toString(), font, foreColor, x, y, w, h, false, Align.left, true);
                     return;
                 }
 
@@ -131,7 +131,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 if (!deck.getPath().isEmpty()) { //render path after name if needed
                     name += " (" + deck.getPath().substring(1) + ")";
                 }
-                g.drawText(name, font, foreColor, x, y, availableNameWidth, IMAGE_SIZE, false, HAlignment.LEFT, true);
+                g.drawText(name, font, foreColor, x, y, availableNameWidth, IMAGE_SIZE, false, Align.left, true);
                 x += availableNameWidth + FList.PADDING;
                 CardFaceSymbols.drawColorSet(g, deckColor, x, y, IMAGE_SIZE);
 
@@ -158,7 +158,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                     sideSize = 0; //show sideboard as 0 if empty
                 }
 
-                g.drawText(deck.getFormatsString() + " (" + mainSize + " / " + sideSize + ")", font, foreColor, x, y, availableFormatWidth, lineHeight, false, HAlignment.LEFT, true);
+                g.drawText(deck.getFormatsString() + " (" + mainSize + " / " + sideSize + ")", font, foreColor, x, y, availableFormatWidth, lineHeight, false, Align.left, true);
 
                 x += availableFormatWidth + CardRenderer.SET_BOX_MARGIN;
                 y -= CardRenderer.SET_BOX_MARGIN;
