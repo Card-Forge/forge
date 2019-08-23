@@ -79,7 +79,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RemoveLandTypes")) {
-            removeCreatureTypes = true;
+            removeLandTypes = true;
         }
         if (sa.hasParam("RemoveCreatureTypes")) {
             removeCreatureTypes = true;
