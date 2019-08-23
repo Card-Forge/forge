@@ -37,9 +37,9 @@ import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
@@ -789,7 +789,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float x = GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
                 float y = 0;
                 String caption = name + " (" + items.size() + ")";
-                g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
+                g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, Align.left, true);
                 x += GROUP_HEADER_FONT.getBounds(caption).width + PADDING;
                 y += GROUP_HEADER_HEIGHT / 2;
                 g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, getWidth(), y);
@@ -963,7 +963,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 else {
                     g.fillRect(Color.BLACK, x, y, w, h);
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, HAlignment.CENTER, false);
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 }
             }
         }

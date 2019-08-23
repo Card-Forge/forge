@@ -3,7 +3,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -25,7 +25,7 @@ public class FRadioButton extends FLabel {
         this(text0, false);
     }
     public FRadioButton(String text0, boolean selected0) {
-        super(new Builder().text(text0).align(HAlignment.LEFT).selectable().selected(selected0));
+        super(new Builder().text(text0).align(Align.left).selectable().selected(selected0));
         setIcon(new RadioButtonIcon());
     }
     

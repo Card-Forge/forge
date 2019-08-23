@@ -1,6 +1,6 @@
 package forge.screens.quest;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Forge;
@@ -95,7 +95,7 @@ public class NewQuestScreen extends FScreen {
                         obj.setBounds(x, y, visibleWidth / 2 - x, h); //make label take up half of line so combo boxes all the same width
                         x += obj.getWidth();
                         continue;
-                    } else if (lbl.getAlignment() == HAlignment.RIGHT) {
+                    } else if (lbl.getAlignment() == Align.right) {
                         y -= gapY; //remove most of the padding above description text
                     }
                 }
@@ -121,7 +121,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text("Starting pool:").build());
     private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<StartingPoolType>());
 
-    private final FLabel lblUnrestricted = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("All cards will be available to play.").build());
+    private final FLabel lblUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("All cards will be available to play.").build());
 
     private final FLabel lblPreconDeck = scroller.add(new FLabel.Builder().text("Starter/Event deck:").build());
     private final FComboBox<String> cbxPreconDeck = scroller.add(new FComboBox<String>());
@@ -161,8 +161,8 @@ public class NewQuestScreen extends FScreen {
     private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text("Defined format:").build());
     private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<GameFormat>());
 
-    private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("All cards will be available to win.").build());
-    private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("Only sets found in starting pool will be available.").build());
+    private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("All cards will be available to win.").build());
+    private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("Only sets found in starting pool will be available.").build());
     private final FLabel btnPrizeSelectFormat = scroller.add(new FLabel.ButtonBuilder().text("Choose format").build());
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox("Allow unlock of additional editions"));

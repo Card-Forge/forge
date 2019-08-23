@@ -1,7 +1,7 @@
 package forge.screens.online;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -149,7 +149,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
             float w = getWidth() - TRIANGLE_WIDTH;
             float h = getHeight() - TEXT_INSET;
             FSkinColor color = isLocal ? LOCAL_COLOR : REMOTE_COLOR;
-            HAlignment horzAlignment = isLocal ? HAlignment.RIGHT : HAlignment.LEFT;
+            int horzAlignment = isLocal ? Align.right : Align.left;
             float timestampHeight = FONT.getCapHeight();
             
             //draw bubble fill

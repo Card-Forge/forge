@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 public class VAssignDamage extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
@@ -64,8 +64,8 @@ public class VAssignDamage extends FDialog {
 
     private final GameEntityView defender;
 
-    private final FLabel lblTotalDamage = add(new FLabel.Builder().text("Available damage points: Unknown").align(HAlignment.CENTER).build());
-    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").align(HAlignment.CENTER).build());
+    private final FLabel lblTotalDamage = add(new FLabel.Builder().text("Available damage points: Unknown").align(Align.center).build());
+    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").align(Align.center).build());
 
     private final AttDefCardPanel pnlAttacker;
     private final DefendersPanel pnlDefenders;
@@ -215,7 +215,7 @@ public class VAssignDamage extends FDialog {
             else {
                 obj = add(new MiscAttDefPanel(defender.toString(), FSkinImage.UNKNOWN));
             }
-            label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
+            label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
             btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -284,7 +284,7 @@ public class VAssignDamage extends FDialog {
             float w = getWidth();
             float h = getHeight();
             g.drawImage(image, 0, 0, w, w);
-            g.drawText(name, FONT, FORE_COLOR, 0, w, w, h - w, false, HAlignment.CENTER, true);
+            g.drawText(name, FONT, FORE_COLOR, 0, w, w, h - w, false, Align.center, true);
         }
     }
 

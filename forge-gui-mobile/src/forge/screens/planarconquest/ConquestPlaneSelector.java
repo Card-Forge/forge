@@ -3,8 +3,8 @@ package forge.screens.planarconquest;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -206,7 +206,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         float monitorBottom = monitorTop + monitorHeight;
         float remainingHeight = h - monitorBottom;
         ConquestPlane plane = getSelectedPlane();
-        g.drawText(plane.getName().replace("_", " " ), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, remainingHeight, false, HAlignment.CENTER, true);
+        g.drawText(plane.getName().replace("_", " " ), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, remainingHeight, false, Align.center, true);
 
         //draw left/right arrows
         float yMid = monitorBottom + remainingHeight / 2;

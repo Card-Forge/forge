@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -133,7 +133,7 @@ public class VStack extends FDropDown {
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
-            FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
+            FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(Align.center).build());
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
@@ -371,7 +371,7 @@ public class VStack extends FDropDown {
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
-            textRenderer.drawText(g, text, FONT, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+            textRenderer.drawText(g, text, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
             g.endClip();
 

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 public class AvatarSelector extends FScreen {
     public static int getRandomAvatar(List<Integer> usedAvatars) {
@@ -87,7 +87,7 @@ public class AvatarSelector extends FScreen {
     }
 
     private void addAvatarLabel(final FImage img, final int index) {
-        final FLabel lbl = new FLabel.Builder().icon(img).iconScaleFactor(0.95f).align(HAlignment.CENTER)
+        final FLabel lbl = new FLabel.Builder().icon(img).iconScaleFactor(0.95f).align(Align.center)
                 .iconInBackground(true).selectable(true).selected(currentIndex == index)
                 .build();
 

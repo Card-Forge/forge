@@ -3,8 +3,8 @@ package forge.screens.quest;
 import java.util.List;
 import java.util.Set;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -56,12 +56,12 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         private static final float PADDING = Utils.scale(5);
 
         private final QuestStallDefinition stallDef;
-        private final FLabel lblStallName = add(new FLabel.Builder().text("").align(HAlignment.CENTER).build());
+        private final FLabel lblStallName = add(new FLabel.Builder().text("").align(Align.center).build());
         private final FLabel lblEmpty = add(new FLabel.Builder().font(FSkinFont.get(12))
                 .text("The merchant does not have anything useful for sale.")
-                .align(HAlignment.CENTER).build());
+                .align(Align.center).build());
         private final FLabel lblCredits = add(new FLabel.Builder().font(FSkinFont.get(15)).icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
-        private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_LIFE).iconScaleFactor(1f).align(HAlignment.RIGHT).build());
+        private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_LIFE).iconScaleFactor(1f).align(Align.right).build());
         private final FTextArea lblFluff = add(new FTextArea(false));
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
@@ -87,7 +87,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             stallDef = stallDef0;
 
             lblFluff.setFont(FSkinFont.get(12));
-            lblFluff.setAlignment(HAlignment.CENTER);
+            lblFluff.setAlignment(Align.center);
             lblFluff.setTextColor(FLabel.INLINE_LABEL_COLOR); //make fluff text a little lighter
         }
 

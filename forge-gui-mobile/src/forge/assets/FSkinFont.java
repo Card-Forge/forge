@@ -5,13 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.BitmapFontData;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
-import com.badlogic.gdx.graphics.g2d.PixmapPacker;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
@@ -19,8 +14,8 @@ import com.badlogic.gdx.utils.Array;
 import forge.FThreads;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.TextBounds;
 import forge.util.Utils;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +26,7 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
+    private static final GlyphLayout layout = new GlyphLayout();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -98,15 +94,22 @@ public class FSkinFont {
     // Expose methods from font that updates scale as needed
     public TextBounds getBounds(CharSequence str) {
         updateScale(); //must update scale before measuring text
-        return font.getBounds(str);
+        layout.setText(font, str);
+        return new TextBounds(layout.width, layout.height);
+
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
         updateScale();
-        return font.getMultiLineBounds(str);
+        layout.setText(font, str);
+        return new TextBounds(layout.width, layout.height);
+
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
         updateScale();
-        return font.getWrappedBounds(str, wrapWidth);
+        layout.setText(font, str);
+        layout.width = wrapWidth;
+        return new TextBounds(layout.width, layout.height);
+
     }
     public float getAscent() {
         updateScale();
@@ -121,20 +124,16 @@ public class FSkinFont {
         return font.getLineHeight();
     }
 
-    public void draw(SpriteBatch batch, String text, Color color, float x, float y, float w, boolean wrap, HAlignment horzAlignment) {
+    public void draw(SpriteBatch batch, String text, Color color, float x, float y, float w, boolean wrap, int horzAlignment) {
         updateScale();
         font.setColor(color);
-        if (wrap) {
-            font.drawWrapped(batch, text, x, y, w, horzAlignment);
-        } else {
-            font.drawMultiLine(batch, text, x, y, w, horzAlignment);
-        }
+        font.draw(batch, text, x, y, w, horzAlignment, wrap);
     }
 
     //update scale of font if needed
     private void updateScale() {
         if (font.getScaleX() != scale) {
-            font.setScale(scale);
+            font.getData().setScale(scale);
         }
     }
 
@@ -187,7 +186,7 @@ public class FSkinFont {
 
         //only generate images for characters that could be used by Forge
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014\u2022";
-
+        chars += "ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÑñÄËÏÖÜäëïöüẞß";
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.characters = chars;
@@ -200,7 +199,7 @@ public class FSkinFont {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                TextureRegion[] textureRegions = new TextureRegion[pages.size];
+                Array<TextureRegion> textureRegions = new Array<>();
                 for (int i = 0; i < pages.size; i++) {
                     PixmapPacker.Page p = pages.get(i);
                     Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
@@ -211,7 +210,7 @@ public class FSkinFont {
                         }
                     };
                     texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-                    textureRegions[i] = new TextureRegion(texture);
+                    textureRegions.addAll(new TextureRegion(texture));
                 }
 
                 font = new BitmapFont(fontData, textureRegions, true);
