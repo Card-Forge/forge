@@ -1,8 +1,8 @@
 package forge.screens.match.views;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -70,7 +70,7 @@ public class VAvatar extends FDisplayObject {
             //use font and padding from phase indicator so text lines up
             FSkinFont font = VPhaseIndicator.BASE_FONT;
             float xpHeight = font.getCapHeight();
-            g.drawOutlinedText(xp + " XP", font, Color.WHITE, Color.BLACK, 0, h - xpHeight - VPhaseIndicator.PADDING_Y, w - VPhaseIndicator.PADDING_X, h, false, HAlignment.RIGHT, false);
+            g.drawOutlinedText(xp + " XP", font, Color.WHITE, Color.BLACK, 0, h - xpHeight - VPhaseIndicator.PADDING_Y, w - VPhaseIndicator.PADDING_X, h, false, Align.right, false);
         }
     }
 }

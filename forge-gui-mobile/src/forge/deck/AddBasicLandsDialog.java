@@ -48,7 +48,7 @@ import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.Utils;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import java.util.Map;
 
 
@@ -122,7 +122,7 @@ public class AddBasicLandsDialog extends FDialog {
         callback = callback0;
         currentDeck = deck;
 
-        lblDeckInfo.setAlignment(HAlignment.CENTER);
+        lblDeckInfo.setAlignment(Align.center);
         lblDeckInfo.setFont(FSkinFont.get(12));
 
         cbLandSet.setFont(lblLandSet.getFont());
@@ -322,7 +322,7 @@ public class AddBasicLandsDialog extends FDialog {
                     card = generateCard(artIndex); //generate card for display
                 }
             });
-            lblCount = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
+            lblCount = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
             btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

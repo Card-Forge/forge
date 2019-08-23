@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.assets.FImage;
@@ -315,7 +315,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class InventoryPage extends SpellShopBasePage {
         protected FLabel lblSellExtras = add(new FLabel.Builder().text("Sell all extras")
-                .icon(FSkinImage.MINUS).iconScaleFactor(1f).align(HAlignment.RIGHT).font(FSkinFont.get(16))
+                .icon(FSkinImage.MINUS).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
                 .command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

@@ -334,6 +334,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
             }
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCopy, runParams, false);
         }
 
         // Run BecomesTarget triggers

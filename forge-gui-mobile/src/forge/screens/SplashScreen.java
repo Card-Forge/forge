@@ -2,7 +2,7 @@ package forge.screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -94,7 +94,7 @@ public class SplashScreen extends FContainer {
         String disclaimer = "Forge is not affiliated in any way with Wizards of the Coast.\n"
                 + "Forge is open source software, released under the GNU Public License.";
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
-                x, y, w, disclaimerHeight, true, HAlignment.CENTER, true);
+                x, y, w, disclaimerHeight, true, Align.center, true);
 
         float padding = 20f / 450f * w;
         float pbHeight = 57f / 450f * h;
@@ -103,6 +103,6 @@ public class SplashScreen extends FContainer {
         g.draw(progressBar);
 
         String version = "v. " + Forge.CURRENT_VERSION + " (Alpha)";
-        g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, HAlignment.CENTER, true);
+        g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
     }
 }

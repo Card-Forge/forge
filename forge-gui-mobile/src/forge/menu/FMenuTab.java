@@ -1,6 +1,6 @@
 package forge.menu;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -99,6 +99,6 @@ public class FMenuTab extends FDisplayObject {
         y = PADDING;
         w = getWidth() - 2 * PADDING;
         h = getHeight() - 2 * PADDING;
-        g.drawText(text, FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
     }
 }

@@ -6,7 +6,7 @@ import forge.deck.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
@@ -413,10 +413,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 float totalHeight = h;
                 h = font.getMultiLineBounds(text).height + SettingsScreen.SETTING_PADDING;
 
-                g.drawText(text, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
+                g.drawText(text, font, foreColor, x, y, w, h, false, Align.left, false);
                 value.draw(g, font, foreColor, x, y, w, h);
                 h += SettingsScreen.SETTING_PADDING;
-                g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);            
+                g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
             }
         }
     }

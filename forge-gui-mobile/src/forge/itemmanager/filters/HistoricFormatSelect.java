@@ -1,6 +1,6 @@
 package forge.itemmanager.filters;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -132,7 +132,7 @@ public class HistoricFormatSelect extends FScreen {
             float textHeight = h;
             h *= 0.66f;
 
-            g.drawText(value.toString(), font, foreColor, x, y, w - h - FList.PADDING, textHeight, false, BitmapFont.HAlignment.LEFT, true);
+            g.drawText(value.toString(), font, foreColor, x, y, w - h - FList.PADDING, textHeight, false, Align.left, true);
 
             x += w - h;
             y += (textHeight - h) / 2;

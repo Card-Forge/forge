@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -338,7 +337,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), HAlignment.LEFT, true);
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
         }
     }
     protected class NumberRenderer extends DefaultItemRenderer {
@@ -365,7 +364,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, Align.center, true);
         }
     }
     //special renderer for cards
@@ -484,7 +483,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;
             w -= dx;
-            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, Align.left, true);
         }
     }
     protected class PlayerItemRenderer extends ItemRenderer {
@@ -514,7 +513,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             g.drawImage(MatchController.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;
-            g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+            g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, Align.left, true);
         }
     }
     protected class IHasSkinPropRenderer extends DefaultItemRenderer {
@@ -533,7 +532,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                 x += dx;
                 w -= dx;
             }
-            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, Align.left, true);
         }
     }
 
