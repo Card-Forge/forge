@@ -881,7 +881,7 @@ public class MatchScreen extends FScreen {
                 case "Mirrored Depths":
                     g.drawImage(FSkinTexture.BG_PLANE77, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
                     break;
-                case "Talon_Gates":
+                case "Talon Gates":
                     g.drawImage(FSkinTexture.BG_PLANE78, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
                     break;
 
