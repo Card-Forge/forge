@@ -28,18 +28,35 @@ public class SwingImageFetcher extends ImageFetcher {
         private void doFetch(String urlToDownload) throws IOException {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            java.net.URLConnection c = url.openConnection();
-            c.setRequestProperty("User-Agent", "");
-            BufferedImage image = ImageIO.read(c.getInputStream());
+            BufferedImage image = ImageIO.read(url);
             // First, save to a temporary file so that nothing tries to read
             // a partial download.
             File destFile = new File(destPath + ".tmp");
-            destFile.mkdirs();
-            ImageIO.write(image, "jpg", destFile);
-            // Now, rename it to the correct name.
-            destFile.renameTo(new File(destPath));
-            System.out.println("Saved image to " + destPath);
-            SwingUtilities.invokeLater(notifyObservers);
+            // need to check directory folder for mkdir
+            destFile.getParentFile().mkdirs();
+            if (ImageIO.write(image, "jpg", destFile)) {
+                // Now, rename it to the correct name.
+                if (destFile.renameTo(new File(destPath))) {
+                    System.out.println("Saved image to " + destPath);
+                    SwingUtilities.invokeLater(notifyObservers);
+                } else {
+                    System.err.println("Failed to rename image to " + destPath);
+                }
+            } else {
+                System.err.println("Failed to save image from " + url + " as jpeg");
+                // try to save image as png instead
+                if (ImageIO.write(image, "png", destFile)) {
+                    String newPath = destPath.replace(".jpg", ".png");
+                    if (destFile.renameTo(new File(newPath))) {
+                        System.out.println("Saved image to " + newPath);
+                        SwingUtilities.invokeLater(notifyObservers);
+                    } else {
+                        System.err.println("Failed to rename image to " + newPath);
+                    }
+                } else {
+                    System.err.println("Failed to save image from " + url + " as png");
+                }
+            }
         }
 
         public void run() {
@@ -48,7 +65,7 @@ public class SwingImageFetcher extends ImageFetcher {
                     doFetch(urlToDownload);
                     break;
                 } catch (IOException e) {
-                    System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                    System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
                 }
             }
         }
