@@ -255,7 +255,9 @@ public abstract class GuiDownloadService implements Runnable {
         byte[] buffer = new byte[1024];
 
         for (Entry<String, String> kv : files.entrySet()) {
-            if (cancel) { break; }
+            if (cancel) {//stop prevent sleep
+                GuiBase.getInterface().preventSystemSleep(false);
+                break; }
 
             count++;
             cardSkipped = true; //assume skipped unless saved successfully
