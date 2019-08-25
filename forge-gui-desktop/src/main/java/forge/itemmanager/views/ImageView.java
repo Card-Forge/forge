@@ -28,8 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import forge.ImageCache;
 import forge.assets.FSkinProp;
@@ -53,7 +51,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
-import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {

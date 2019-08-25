@@ -65,7 +65,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.assets.FSkinProp;
