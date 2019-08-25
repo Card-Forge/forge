@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -392,21 +392,21 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             if (poisonCounters == 0 && energyCounters == 0) {
-                g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
+                g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, Align.center, true);
             }
             else {
                 float halfHeight = getHeight() / 2;
                 float textStart = halfHeight + Utils.scale(1);
                 float textWidth = getWidth() - textStart;
                 g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
-                g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, Align.center, true);
                 if (poisonCounters > 0) { //prioritize showing poison counters over energy counters
                     g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
-                    g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                    g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                 }
                 else {
                     g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
-                    g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                    g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                 }
             }
         }
@@ -510,10 +510,10 @@ public class VPlayerPanel extends FContainer {
                 }
 
                 x += w + INFO_TAB_PADDING_X;
-                HAlignment alignX = HAlignment.LEFT;
+                int alignX = Align.left;
                 if (lblLife.getRotate180()) {
                     g.startRotateTransform(x + (getWidth() - x + 1) / 2, getHeight() / 2, 180);
-                    alignX = HAlignment.RIGHT;
+                    alignX = Align.right;
                 }
                 g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, alignX, true);
                 if (lblLife.getRotate180()) {
@@ -535,7 +535,7 @@ public class VPlayerPanel extends FContainer {
                 g.drawImage(icon, x, y, w, h);
 
                 y += h + INFO_TAB_PADDING_Y;
-                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, HAlignment.CENTER, false);
+                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }

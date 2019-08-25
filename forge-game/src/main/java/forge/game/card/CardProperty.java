@@ -874,6 +874,15 @@ public class CardProperty {
                             }
                         }
                         return false;
+                    case "TriggeredCard":
+                        final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
+                        if (!(triggeringObject instanceof Card)) {
+                            return false;
+                        }
+                        if (card.sharesCardTypeWith((Card) triggeringObject)) {
+                            return true;
+                        }
+                        return false;
                     case "EachTopLibrary":
                         final CardCollection cards = new CardCollection();
                         for (Player p : game.getPlayers()) {
@@ -1066,34 +1075,6 @@ public class CardProperty {
             }
             if (p == null || !controller.equals(game.getNextPlayerAfter(p, direction))) {
                 return false;
-            }
-        } else if (property.startsWith("sharesTypeWith")) {
-            if (property.equals("sharesTypeWith")) {
-                if (!card.sharesTypeWith(source)) {
-                    return false;
-                }
-            } else {
-                final String restriction = property.split("sharesTypeWith ")[1];
-                final Card checkCard;
-                if (restriction.startsWith("Triggered")) {
-                    final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
-                    if (!(triggeringObject instanceof Card)) {
-                        return false;
-                    }
-                    checkCard = (Card) triggeringObject;
-                } else if (restriction.startsWith("Remembered")) {
-                    final Object rememberedObject = source.getFirstRemembered();
-                    if (!(rememberedObject instanceof Card)) {
-                        return false;
-                    }
-                    checkCard = (Card) rememberedObject;
-                } else {
-                    return false;
-                }
-
-                if (!card.sharesTypeWith(checkCard)) {
-                    return false;
-                }
             }
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings

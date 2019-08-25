@@ -3,6 +3,7 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
+import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -507,8 +508,8 @@ public class MatchScreen extends FScreen {
                 float w = getWidth() - x;
 
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane())
-                    setPlanarBG(g, getPlaneName(), x, y, w, midField);
+                        && hasActivePlane()) //TODO: scale BG to correct aspect ratio/crop center
+                    setPlanarBG(g, getPlaneName(), x, y, w, ForgeConstants.isGdxPortLandscape ? getHeight() : midField);
                 else
                     g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
             }
@@ -880,7 +881,7 @@ public class MatchScreen extends FScreen {
                 case "Mirrored Depths":
                     g.drawImage(FSkinTexture.BG_PLANE77, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
                     break;
-                case "Talon_Gates":
+                case "Talon Gates":
                     g.drawImage(FSkinTexture.BG_PLANE78, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
                     break;
 

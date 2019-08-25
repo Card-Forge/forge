@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -122,8 +122,8 @@ public class DualListBox<T> extends FDialog {
             }
         });
 
-        selectOrder = add(new FLabel.Builder().align(HAlignment.CENTER).text("Select Order").build());
-        orderedLabel = add(new FLabel.Builder().align(HAlignment.CENTER).build());
+        selectOrder = add(new FLabel.Builder().align(Align.center).text("Select Order").build());
+        orderedLabel = add(new FLabel.Builder().align(Align.center).build());
 
         setButtonState();
     }

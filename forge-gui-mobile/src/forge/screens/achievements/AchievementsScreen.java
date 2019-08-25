@@ -1,8 +1,8 @@
 package forge.screens.achievements;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -54,7 +54,7 @@ public class AchievementsScreen extends FScreen {
         AchievementCollection.buildComboBox(cbCollections);
 
         cbCollections.setSelectedIndex(0);
-        cbCollections.setAlignment(HAlignment.CENTER);
+        cbCollections.setAlignment(Align.center);
         cbCollections.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -271,11 +271,11 @@ public class AchievementsScreen extends FScreen {
                 if (plateY + plateHeight > 0) {
                     g.drawImage((FImage)achievement.getImage(), x + trophyOffset, y, trophyImageWidth, trophyHeight);
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
-                    g.drawText(achievement.getDisplayName(), titleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, titleHeight, false, HAlignment.CENTER, true);
+                    g.drawText(achievement.getDisplayName(), titleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, titleHeight, false, Align.center, true);
     
                     String subTitle = achievement.getSubTitle(false);
                     if (subTitle != null) {
-                        g.drawText(subTitle, subTitleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, subTitleHeight, false, HAlignment.CENTER, true);
+                        g.drawText(subTitle, subTitleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, subTitleHeight, false, Align.center, true);
                     }
 
                     if (achievement == selectedAchievement) {
@@ -338,40 +338,40 @@ public class AchievementsScreen extends FScreen {
                 y += PADDING;
                 w -= 2 * PADDING;
                 h -= 2 * PADDING;
-                g.drawText(selectedAchievement.getDisplayName(), NAME_FONT, TEXT_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
+                g.drawText(selectedAchievement.getDisplayName(), NAME_FONT, TEXT_COLOR, x, y, w, h, false, Align.left, false);
                 y += NAME_FONT.getLineHeight();
                 if (subTitle != null) {
-                    g.drawText(subTitle, DESC_FONT, TEXT_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(subTitle, DESC_FONT, TEXT_COLOR, x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 y += PADDING;
                 if (sharedDesc != null) {
                     g.drawText(selectedAchievement.isSpecial() ? sharedDesc : sharedDesc + "...", DESC_FONT, TEXT_COLOR,
-                            x, y, w, h, false, HAlignment.LEFT, false);
+                            x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (mythicDesc != null) {
                     g.drawText(selectedAchievement.isSpecial() ? mythicDesc : "(Mythic) " + mythicDesc, DESC_FONT, //handle flavor text here too
                             selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR,
-                            x, y, w, h, false, HAlignment.LEFT, false);
+                            x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (rareDesc != null) {
                     g.drawText("(Rare) " + rareDesc, DESC_FONT,
                             selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR,
-                            x, y, w, h, false, HAlignment.LEFT, false);
+                            x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (uncommonDesc != null) {
                     g.drawText("(Uncommon) " + uncommonDesc, DESC_FONT,
                             selectedAchievement.earnedUncommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
-                            x, y, w, h, false, HAlignment.LEFT, false);
+                            x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (commonDesc != null) {
                     g.drawText("(Common) " + commonDesc, DESC_FONT,
                             selectedAchievement.earnedCommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
-                            x, y, w, h, false, HAlignment.LEFT, false);
+                            x, y, w, h, false, Align.left, false);
                 }
             }
         }

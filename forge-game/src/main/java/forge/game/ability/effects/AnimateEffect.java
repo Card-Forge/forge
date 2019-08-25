@@ -292,6 +292,7 @@ public class AnimateEffect extends AnimateEffectBase {
                             addedStaticAbilities, timestamp);
 
                     c.removeChangedName(timestamp);
+                    c.updateStateForView();
 
                     game.fireEvent(new GameEventCardStatsChanged(c));
 

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.animation.ForgeAnimation;
@@ -281,7 +280,7 @@ public class ConquestRewardDialog extends FScrollPane {
             if (reward.isDuplicate()) {
                 setFont(FSkinFont.get(20));
                 setIcon(FSkinImage.AETHER_SHARD);
-                setAlignment(HAlignment.CENTER);
+                setAlignment(Align.center);
                 setText(String.valueOf(reward.getReplacementShards()));
             }
         }

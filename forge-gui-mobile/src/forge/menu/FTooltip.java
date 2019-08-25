@@ -1,8 +1,6 @@
 package forge.menu;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
-
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -10,6 +8,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
+import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class FTooltip extends FDropDown {
@@ -68,6 +67,6 @@ public class FTooltip extends FDropDown {
     @Override
     public void drawBackground(Graphics g) {
         super.drawBackground(g);
-        g.drawText(text, FONT, FORE_COLOR, PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, true, HAlignment.LEFT, false);
+        g.drawText(text, FONT, FORE_COLOR, PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, true, Align.left, false);
     }
 }

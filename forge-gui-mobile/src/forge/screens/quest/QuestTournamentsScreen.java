@@ -1,7 +1,7 @@
 package forge.screens.quest;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Forge;
@@ -45,10 +45,10 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     private final FLabel btnSpendToken = pnlSelectTournament.add(new FLabel.ButtonBuilder().text("Spend Token (0)").build());
 
     private final FLabel lblInfo = pnlSelectTournament.add(new FLabel.Builder().text("Select a tournament to join:")
-            .align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+            .align(Align.center).font(FSkinFont.get(16)).build());
 
     private final FLabel lblNoTournaments = pnlSelectTournament.add(new FLabel.Builder()
-            .align(HAlignment.CENTER).text("There are no tournaments available at this time.").insets(Vector2.Zero)
+            .align(Align.center).text("There are no tournaments available at this time.").insets(Vector2.Zero)
             .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlTournaments = pnlSelectTournament.add(new QuestEventPanel.Container());
@@ -372,7 +372,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             int[] iconIDs = new int[16];
 
             String draftTitle = qd.getFullTitle();
-            FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
+            FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(Align.center).font(FSkinFont.get(20)).build());
             lblStandings.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
             y += lblStandings.getHeight() + PADDING;
 
@@ -385,7 +385,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 String sid = qd.getStandings()[qd.getStandings().length - 1];
                 String winnersName = sid.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : 
                         sid.equals(QuestEventDraft.UNDETERMINED) ? "---" : qd.getAINames()[Integer.parseInt(sid) - 1];
-                FLabel lblWinner = add(new FLabel.Builder().text("Winner: " + winnersName).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
+                FLabel lblWinner = add(new FLabel.Builder().text("Winner: " + winnersName).align(Align.center).font(FSkinFont.get(20)).build());
                 lblWinner.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
                 y += lblWinner.getHeight() + PADDING;
                 getBtnLeaveTournamentInTourn().setText("Collect Prizes");
@@ -427,17 +427,17 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 for (int j = 0; j < 13; j += 2) {
                     switch (j) {
                         case 0:
-                            FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(Align.center).font(FSkinFont.get(16)).build());
                             qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
                             y += qfinals.getHeight() + PADDING;
                             break;
                         case 8:
-                            FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(Align.center).font(FSkinFont.get(16)).build());
                             sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
                             y += sfinals.getHeight() + PADDING;
                             break;
                         case 12:
-                            FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(Align.center).font(FSkinFont.get(16)).build());
                             finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
                             y += finals.getHeight() + PADDING;
                             break;
@@ -453,7 +453,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                     FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
                     FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
                      */
-                    labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                    labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
                     labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
                     if (currentMatch) {
                         labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));
