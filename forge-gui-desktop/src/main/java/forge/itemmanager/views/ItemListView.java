@@ -109,7 +109,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     private final ItemTable table = new ItemTable();
     private final ItemTableModel tableModel;
-    final Localizer localizer = Localizer.getInstance();
     public ItemTableModel getTableModel() {
         return this.tableModel;
     }
@@ -177,22 +176,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         getPnlOptions().removeAll();
 
         if (config.getShowUniqueCardsOption()) {
-            final FCheckBox chkBox = new FCheckBox(localizer.getMessage("lblUniqueCardsOnly"), this.itemManager.getWantUnique());
-            chkBox.setFont(ROW_FONT);
-            chkBox.setToolTipText("Toggle whether to show unique cards only");
-            chkBox.addChangeListener(new ChangeListener() {
-                @Override public void stateChanged(final ChangeEvent arg0) {
-                    final boolean wantUnique = chkBox.isSelected();
-                    if (itemManager.getWantUnique() == wantUnique) { return; }
-                    itemManager.setWantUnique(wantUnique);
-                    itemManager.refresh();
-
-                    if (itemManager.getConfig() != null) {
-                        itemManager.getConfig().setUniqueCardsOnly(wantUnique);
-                    }
-                }
-            });
-            getPnlOptions().add(chkBox);
+            this.setUniqueCardsOnlyFilter();
         }
 
         int modelIndex = 0;
@@ -203,7 +187,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (!hideHeader) {
                 final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
                         col.getLongName() : col.getShortName(), col.isVisible());
-                chkBox.setFont(ROW_FONT);
+                chkBox.setFont(ItemView.ROW_FONT);
                 chkBox.setToolTipText(col.getLongName());
                 chkBox.addChangeListener(new ChangeListener() {
                     @Override public void stateChanged(final ChangeEvent arg0) {

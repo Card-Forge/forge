@@ -28,9 +28,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.toolbox.*;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.CharUtils;
@@ -41,16 +45,15 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FScrollPanel;
-import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.ToolTipListener;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+
+    // UniqueCards Options Added
+    static final FSkin.SkinFont ROW_FONT = FSkin.getFont();
+    protected final Localizer localizer = Localizer.getInstance();
 
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
@@ -60,6 +63,7 @@ public abstract class ItemView<T extends InventoryItem> {
             new MigLayout("insets 3 1 0 1, gap 3 4, hidemode 3"), true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    protected FCheckBox uniqueCardsOnlyChkBox;
 
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
@@ -88,6 +92,9 @@ public abstract class ItemView<T extends InventoryItem> {
             .iconScaleAuto(false)
             .tooltip(getCaption())
             .build();
+
+        this.uniqueCardsOnlyChkBox = new FCheckBox(localizer.getMessage("lblUniqueCardsOnly"),
+                                                   this.itemManager.getWantUnique());
     }
 
     public void initialize(final int index) {
@@ -159,9 +166,31 @@ public abstract class ItemView<T extends InventoryItem> {
         this.model.refreshSort();
         onRefresh();
         fixSelection(itemsToSelect, backupIndexToSelect, scrollValueToRestore);
+        this.uniqueCardsOnlyChkBox.setSelected(this.itemManager.getWantUnique());
     }
     protected abstract void onResize();
     protected abstract void onRefresh();
+    /*
+
+     */
+    protected void setUniqueCardsOnlyFilter() {
+        this.uniqueCardsOnlyChkBox.setFont(ROW_FONT);
+        this.uniqueCardsOnlyChkBox.setToolTipText("Toggle whether to show unique cards only");
+        this.uniqueCardsOnlyChkBox.addChangeListener(new ChangeListener() {
+            @Override public void stateChanged(final ChangeEvent arg0) {
+                final boolean wantUnique = uniqueCardsOnlyChkBox.isSelected();
+                if (itemManager.getWantUnique() == wantUnique) { return; }
+                itemManager.setWantUnique(wantUnique);
+                itemManager.refresh();
+
+                if (itemManager.getConfig() != null) {
+                    itemManager.getConfig().setUniqueCardsOnly(wantUnique);
+                }
+            }
+        });
+        getPnlOptions().add(uniqueCardsOnlyChkBox);
+    }
+
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final int scrollValueToRestore) {
         if (itemsToSelect == null) {
             setSelectedIndex(0, false); //select first item if no items to select
