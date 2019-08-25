@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
+import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
@@ -57,7 +56,7 @@ public class LoadQuestScreen extends LaunchScreen {
         super(null, LoadGameMenu.getMenu());
 
         lblOldQuests.setFont(FSkinFont.get(12));
-        lblOldQuests.setAlignment(HAlignment.CENTER);
+        lblOldQuests.setAlignment(Align.center);
 
         btnNewQuest.setFont(FSkinFont.get(16));
         btnNewQuest.setCommand(new FEventHandler() {
@@ -304,8 +303,8 @@ public class LoadQuestScreen extends LaunchScreen {
                     String winRatio = value.getAchievements().getWin() + "W / " + value.getAchievements().getLost() + "L";
                     float winRatioWidth = font.getBounds(winRatio).width + SettingsScreen.SETTING_PADDING;
 
-                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
-                    g.drawText(winRatio, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, Align.left, false);
+                    g.drawText(winRatio, font, foreColor, x, y, w, h, false, Align.right, false);
 
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
@@ -318,11 +317,11 @@ public class LoadQuestScreen extends LaunchScreen {
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     float creditsWidth = font.getBounds(credits).width + iconSize + SettingsScreen.SETTING_PADDING;
-                    g.drawText(FModel.getQuest().getRank(value.getAchievements().getLevel()), font, SettingsScreen.DESC_COLOR, x, y, w - creditsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
+                    g.drawText(FModel.getQuest().getRank(value.getAchievements().getLevel()), font, SettingsScreen.DESC_COLOR, x, y, w - creditsWidth - cardsWidth, h, false, Align.left, false);
                     g.drawImage(FSkinImage.HAND, x + w - creditsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, Align.left, false);
                     g.drawImage(FSkinImage.QUEST_COINSTACK, x + w - creditsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(credits, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(credits, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, Align.left, false);
                 }
             });
         }

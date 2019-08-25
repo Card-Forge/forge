@@ -598,9 +598,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        //Tiny Leaders and Brawl ignore commander damage rule.
-        if (source.isCommander() && isCombat && this.getGame().getRules().getGameType() != GameType.TinyLeaders
-                && this.getGame().getRules().getGameType() != GameType.Brawl) {
+        //Oathbreaker, Tiny Leaders, and Brawl ignore commander damage rule
+        if (source.isCommander() && isCombat
+                && !this.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)
+                && !this.getGame().getRules().hasAppliedVariant(GameType.TinyLeaders)
+                && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
             commanderDamage.put(source, getCommanderDamage(source) + amount);
             view.updateCommanderDamage(this);
         }
@@ -2641,9 +2643,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public List<Card> getCommanders() {
         return commanders;
     }
-    public void setCommanders(List<Card> commander0) {
-    	if (commander0 == commanders) { return; }
-        commanders = commander0;
+    public void setCommanders(List<Card> commanders0) {
+    	if (commanders0 == commanders) { return; }
+        commanders = commanders0;
         view.updateCommander(this);
     }
 
@@ -2767,15 +2769,30 @@ public class Player extends GameEntity implements Comparable<Player> {
         final String name = Lang.getPossesive(commander.getName()) + " Commander Effect";
         DetachedCardEffect eff = new DetachedCardEffect(commander, name);
 
-        eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
+        if (game.getRules().hasAppliedVariant(GameType.Oathbreaker) && commander.getRules().canBeSignatureSpell()) {
+            //signature spells can only reside on the stack or in the command zone
+            eff.setSVar("SignatureSpellMoveReplacement", "DB$ ChangeZone | Origin$ Stack | Destination$ Command | Defined$ ReplacedCard");
 
-        String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement ";
-        if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
-            moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
-        } else {
-            moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
+            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | ReplaceWith$ SignatureSpellMoveReplacement | Destination$ Graveyard,Exile,Hand,Library | " +
+                    "Description$ If a signature spell would be put into another zone from the stack, put it into the command zone instead.";
+            eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
+
+            //signature spells can only be cast if your oathbreaker is in on the battlefield under your control
+            String castRestriction = "Mode$ CantBeCast | ValidCard$ Card.EffectSource+YouOwn | EffectZone$ Command | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | PresentZone$ Battlefield | PresentCompare$ EQ0 | " +
+                    "Description$ Signature spell can only be cast if your oathbreaker is on the battlefield under your control.";
+            eff.addStaticAbility(castRestriction);
         }
-        eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
+        else {
+            eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
+
+            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement ";
+            if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
+                moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
+            } else {
+                moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
+            }
+            eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
+        }
 
         String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana

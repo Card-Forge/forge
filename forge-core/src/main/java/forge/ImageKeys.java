@@ -163,6 +163,10 @@ public final class ImageKeys {
         for (String ext : FILE_EXTENSIONS) {
             File file = new File(dir, filename + ext);
             if (file.exists()) {
+                if (file.isDirectory()) {
+                    file.delete();
+                    continue;
+                }
                 return file;
             }
         }

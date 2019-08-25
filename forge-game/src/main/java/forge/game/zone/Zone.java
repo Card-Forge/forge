@@ -20,6 +20,7 @@ package forge.game.zone;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -80,12 +81,21 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         add(c, index, null);
     }
 
-    public void add(final Card c, final Integer index, final Card latestState) {
+    public void add(final Card c, Integer index, final Card latestState) {
         if (index != null && cardList.isEmpty() && index.intValue() > 0) {
             // something went wrong, most likely the method fired when the game was in an unexpected state
             // (e.g. conceding during the mana payment prompt)
             System.out.println("Warning: tried to add a card to zone with a specific non-zero index, but the zone was empty! Canceling Zone#add to avoid a crash.");
             return;
+        }
+
+        //ensure commander returns to being first card in command zone
+        if (index == null && zoneType == ZoneType.Command && c.isCommander()) {
+            index = 0;
+            if (game.getRules().hasAppliedVariant(GameType.Oathbreaker) && c.getRules().canBeSignatureSpell()
+                    && !cardList.isEmpty() && cardList.get(0).isCommander()) {
+                index = 1; //signature spell should return to being second card in command zone if oathbreaker is there too
+            }
         }
 
         // Immutable cards are usually emblems and effects

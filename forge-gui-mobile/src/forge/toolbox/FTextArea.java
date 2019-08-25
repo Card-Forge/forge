@@ -1,7 +1,7 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -11,7 +11,7 @@ import forge.assets.TextRenderer;
 public class FTextArea extends FScrollPane {
     private String text;
     private FSkinFont font;
-    private HAlignment alignment;
+    private int alignment;
     private Vector2 insets;
     private FSkinColor textColor;
     private final TextRenderer renderer;
@@ -23,7 +23,7 @@ public class FTextArea extends FScrollPane {
     public FTextArea(boolean parseReminderText0, String text0) {
         text = text0;
         font = FSkinFont.get(14);
-        alignment = HAlignment.LEFT;
+        alignment = Align.left;
         insets = new Vector2(1, 1); //prevent text getting cut off by clip
         textColor = FLabel.DEFAULT_TEXT_COLOR;
         renderer = new TextRenderer(parseReminderText0);
@@ -37,10 +37,10 @@ public class FTextArea extends FScrollPane {
         revalidate();
     }
 
-    public HAlignment getAlignment() {
+    public int getAlignment() {
         return alignment;
     }
-    public void setAlignment(HAlignment alignment0) {
+    public void setAlignment(int alignment0) {
         alignment = alignment0;
     }
 

@@ -3,8 +3,8 @@ package forge.screens;
 import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -197,13 +197,13 @@ public abstract class FScreen extends FContainer {
         protected final FLabel btnBack, lblCaption;
 
         public DefaultHeader(String headerCaption) {
-            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back();
                 }
             }).build());
-            lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(HAlignment.CENTER).build());
+            lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(Align.center).build());
         }
 
         @Override
@@ -245,7 +245,7 @@ public abstract class FScreen extends FContainer {
         public MenuHeader(String headerCaption, FPopupMenu menu0) {
             super(headerCaption);
             menu = menu0;
-            btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+            btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     menu.show(btnMenu, 0, HEIGHT);

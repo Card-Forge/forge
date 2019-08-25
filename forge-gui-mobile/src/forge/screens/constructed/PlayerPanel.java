@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
@@ -71,12 +70,13 @@ public class PlayerPanel extends FContainer {
     private final FLabel btnDeck            = new FLabel.ButtonBuilder().text("Loading Deck...").build();
     private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
     private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
+    private final FLabel btnOathbreakDeck   = new FLabel.ButtonBuilder().text("Oathbreaker Deck: Random Generated Deck").build();
     private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text("Tiny Leaders Deck: Random Generated Deck").build();
     private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text("Brawl Deck: Random Generated Deck").build();
     private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
     private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
 
-    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
+    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
     public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
@@ -121,6 +121,17 @@ public class PlayerPanel extends FContainer {
                     lstCommanderDecks.saveState();
                 }else{
                     btnCommanderDeck.setText("Commander Deck");
+                }
+            }
+        });
+        lstOathbreakerDecks = new FDeckChooser(GameType.Oathbreaker, isAi, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
+                    btnOathbreakDeck.setText("Oathbreaker Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    lstOathbreakerDecks.saveState();
+                }else{
+                    btnOathbreakDeck.setText("Oathbreaker Deck");
                 }
             }
         });
@@ -212,6 +223,14 @@ public class PlayerPanel extends FContainer {
                 Forge.openScreen(lstCommanderDecks);
             }
         });
+        add(btnOathbreakDeck);
+        btnOathbreakDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                lstOathbreakerDecks.setHeaderCaption("Select Oathbreaker Deck for " + txtPlayerName.getText());
+                Forge.openScreen(lstOathbreakerDecks);
+            }
+        });
         add(btnTinyLeadersDeck);
         btnTinyLeadersDeck.setCommand(new FEventHandler() {
             @Override
@@ -262,11 +281,12 @@ public class PlayerPanel extends FContainer {
         setMayControl(mayControl0);
     }
 
-    public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
+    public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
         deckChooser.initialize(savedStateSetting, defaultDeckType);
         lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
-        lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECKS);
-        lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECKS);
+        lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+        lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+        lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
         lstPlanarDecks.initialize(null, DeckType.RANDOM_DECK);
         lstSchemeDecks.initialize(null, DeckType.RANDOM_DECK);
     }
@@ -312,6 +332,10 @@ public class PlayerPanel extends FContainer {
             btnCommanderDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
         }
+        else if (btnOathbreakDeck.isVisible()) {
+            btnOathbreakDeck.setBounds(x, y, w, fieldHeight);
+            y += dy;
+        }
         else if (btnTinyLeadersDeck.isVisible()) {
             btnTinyLeadersDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
@@ -342,7 +366,7 @@ public class PlayerPanel extends FContainer {
         if (!btnDeck.isVisible()) {
             rows--;
         }
-        if (btnCommanderDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
+        if (btnCommanderDeck.isVisible() || btnOathbreakDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
             rows++;
         }
         if (btnSchemeDeck.isVisible()) {
@@ -460,6 +484,7 @@ public class PlayerPanel extends FContainer {
 
     public void updateVariantControlsVisibility() {
         boolean isCommanderApplied = false;
+        boolean isOathbreakerApplied = false;
         boolean isTinyLeadersApplied = false;
         boolean isBrawlApplied = false;
         boolean isPlanechaseApplied = false;
@@ -482,6 +507,10 @@ public class PlayerPanel extends FContainer {
             case Commander:
                 isCommanderApplied = true;
                 isDeckBuildingAllowed = false; //Commander deck replaces basic deck, so hide that
+                break;
+            case Oathbreaker:
+                isOathbreakerApplied = true;
+                isDeckBuildingAllowed = false; //Oathbreaker deck replaces basic deck, so hide that
                 break;
             case TinyLeaders:
                 isTinyLeadersApplied = true;
@@ -507,6 +536,7 @@ public class PlayerPanel extends FContainer {
 
         btnDeck.setVisible(isDeckBuildingAllowed);
         btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
+        btnOathbreakDeck.setVisible(isOathbreakerApplied && mayEdit);
         btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
         btnBrawlDeck.setVisible(isBrawlApplied && mayEdit);
 
@@ -760,6 +790,10 @@ public class PlayerPanel extends FContainer {
         return lstCommanderDecks;
     }
 
+    public FDeckChooser getOathbreakerDeckChooser() {
+        return lstOathbreakerDecks;
+    }
+
     public FDeckChooser getTinyLeadersDeckChooser() {
         return lstTinyLeadersDecks;
     }
@@ -768,13 +802,14 @@ public class PlayerPanel extends FContainer {
         return lstBrawlDecks;
     }
 
-
     public Deck getDeck() {
         return deckChooser.getDeck();
     }
 
-    public Deck getCommanderDeck() {
-        return lstCommanderDecks.getDeck();
+    public Deck getCommanderDeck() { return lstCommanderDecks.getDeck(); }
+
+    public Deck getOathbreakerDeck() {
+        return lstOathbreakerDecks.getDeck();
     }
 
     public Deck getTinyLeadersDeck() {
@@ -799,7 +834,7 @@ public class PlayerPanel extends FContainer {
 
     /** Adds a pre-styled FLabel component with the specified title. */
     private FLabel newLabel(String title) {
-        return new FLabel.Builder().text(title).font(LABEL_FONT).align(HAlignment.RIGHT).build();
+        return new FLabel.Builder().text(title).font(LABEL_FONT).align(Align.right).build();
     }
     
     private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any");

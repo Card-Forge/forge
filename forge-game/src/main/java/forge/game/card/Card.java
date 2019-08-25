@@ -2700,7 +2700,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             //only permanents and spells have controllers [108.4],
             //so a card really only has a controller while it's on the stack or battlefield.
             //everywhere else, just use the owner [108.4a].
-            return owner;
+            if (owner != null) {
+                return owner;
+            }
         }
 
         Entry<Long, Player> lastEntry = tempControllers.lastEntry();

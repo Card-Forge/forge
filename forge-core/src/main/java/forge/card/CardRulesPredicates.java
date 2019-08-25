@@ -570,6 +570,19 @@ public final class CardRulesPredicates {
             }
         };
 
+        public static final Predicate<CardRules> CAN_BE_OATHBREAKER = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return subject.canBeOathbreaker();
+            }
+        };
+        public static final Predicate<CardRules> CAN_BE_SIGNATURE_SPELL = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return subject.canBeSignatureSpell();
+            }
+        };
+
         public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
         public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
         public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);

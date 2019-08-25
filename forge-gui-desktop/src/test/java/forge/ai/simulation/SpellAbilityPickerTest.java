@@ -317,7 +317,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         assertNull(picker.chooseSpellAbilityToPlay(null));
 
-        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_BEGIN, p);
+        game.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_BEGIN);
         game.getAction().checkStateEffects(true);
         assertNull(picker.chooseSpellAbilityToPlay(null));
 

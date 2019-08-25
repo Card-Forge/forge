@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
-
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.card.CardFaceSymbols;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.TextBounds;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
@@ -528,10 +527,10 @@ public class TextRenderer {
         return getCurrentBounds();
     }
 
-    public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+    public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, int horzAlignment, boolean centerVertically) {
         drawText(g, text, skinFont, skinColor.getColor(), x, y, w, h, visibleStartY, visibleHeight, wrap0, horzAlignment, centerVertically);
     }
-    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, int horzAlignment, boolean centerVertically) {
         setProps(text, skinFont, w, h, wrap0);
         if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
             g.startClip(x, y, w, h);
@@ -542,13 +541,13 @@ public class TextRenderer {
         float[] alignmentOffsets = new float[lineWidths.size()];
         for (int i = 0; i < lineWidths.size(); i++) {
             switch (horzAlignment) {
-            case LEFT:
+            case Align.left:
                 alignmentOffsets[i] = 0;
                 break;
-            case CENTER:
+            case Align.center:
                 alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
                 break;
-            case RIGHT:
+            case Align.right:
                 alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
                 break;
             }
@@ -603,7 +602,7 @@ public class TextRenderer {
             else if (inReminderText) {
                 color = FSkinColor.alphaColor(color, ALPHA_COMPOSITE);
             }
-            g.drawText(text, font, color, x + offsetX, y + offsetY, w, h, false, HAlignment.LEFT, false);
+            g.drawText(text, font, color, x + offsetX, y + offsetY, w, h, false, Align.left, false);
         }
     }
 

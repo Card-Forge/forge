@@ -41,6 +41,7 @@ public class CardCollections {
     private IStorage<Deck> scheme;
     private IStorage<Deck> plane;
     private IStorage<Deck> commander;
+    private IStorage<Deck> oathbreaker;
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
 
@@ -110,6 +111,14 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return commander;
+    }
+
+    public IStorage<Deck> getOathbreaker() {
+        if (oathbreaker == null) {
+            oathbreaker = new StorageImmediatelySerialized<Deck>("Oathbreaker decks",
+                    new DeckStorage(new File(ForgeConstants.DECK_OATHBREAKER_DIR), ForgeConstants.DECK_BASE_DIR));
+        }
+        return oathbreaker;
     }
 
     public IStorage<Deck> getTinyLeaders() {

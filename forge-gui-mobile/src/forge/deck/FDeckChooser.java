@@ -41,7 +41,7 @@ import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -189,13 +189,14 @@ public class FDeckChooser extends FScreen {
         case Constructed:
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
+        case Oathbreaker:
         case TinyLeaders:
         case Brawl:
         case Gauntlet:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
         case DeckManager:
-            initialize(null, DeckType.CONSTRUCTED_DECK);
+            initialize(null, DeckPreferences.getSelectedDeckType());
             break;
         default:
             initialize(null, DeckType.RANDOM_DECK);
@@ -225,6 +226,9 @@ public class FDeckChooser extends FScreen {
             case Commander:
                 lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
                 break;
+            case Oathbreaker:
+                lstDecks.setSelectedString(DeckPreferences.getOathbreakerDeck());
+                break;
             case TinyLeaders:
                 lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                 break;
@@ -242,22 +246,25 @@ public class FDeckChooser extends FScreen {
                 case COMMANDER_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
                     break;
-                case TINY_LEADERS_DECKS:
+                case OATHBREAKER_DECK:
+                    lstDecks.setSelectedString(DeckPreferences.getOathbreakerDeck());
+                    break;
+                case TINY_LEADERS_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                     break;
-                case BRAWL_DECKS:
+                case BRAWL_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
                     break;
-                case SCHEME_DECKS:
+                case SCHEME_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
                     break;
-                case PLANAR_DECKS:
+                case PLANAR_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
                     break;
-                case DRAFT_DECKS:
+                case DRAFT_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
                     break;
-                case SEALED_DECKS:
+                case SEALED_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
                     break;
                 default:
@@ -275,10 +282,10 @@ public class FDeckChooser extends FScreen {
     private void createNewDeck() {
         FDeckEditor editor;
         switch (selectedDeckType) {
-        case DRAFT_DECKS:
+        case DRAFT_DECK:
             NewGameScreen.BoosterDraft.open();
             return;
-        case SEALED_DECKS:
+        case SEALED_DECK:
             NewGameScreen.SealedDeck.open();
             return;
         case COLOR_DECK:
@@ -318,12 +325,13 @@ public class FDeckChooser extends FScreen {
                     if (lstDecks.getGameType() == GameType.DeckManager) {
                         switch (selectedDeckType) {
                         case COMMANDER_DECK:
-                        case TINY_LEADERS_DECKS:
-                        case BRAWL_DECKS:
-                        case SCHEME_DECKS:
-                        case PLANAR_DECKS:
-                        case DRAFT_DECKS:
-                        case SEALED_DECKS:
+                        case OATHBREAKER_DECK:
+                        case TINY_LEADERS_DECK:
+                        case BRAWL_DECK:
+                        case SCHEME_DECK:
+                        case PLANAR_DECK:
+                        case DRAFT_DECK:
+                        case SEALED_DECK:
                             break;
                         default:
                             setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
@@ -347,12 +355,13 @@ public class FDeckChooser extends FScreen {
         case CUSTOM_DECK:
         case CONSTRUCTED_DECK:
         case COMMANDER_DECK:
-        case TINY_LEADERS_DECKS:
-        case BRAWL_DECKS:
-        case SCHEME_DECKS:
-        case PLANAR_DECKS:
-        case DRAFT_DECKS:
-        case SEALED_DECKS:
+        case OATHBREAKER_DECK:
+        case TINY_LEADERS_DECK:
+        case BRAWL_DECK:
+        case SCHEME_DECK:
+        case PLANAR_DECK:
+        case DRAFT_DECK:
+        case SEALED_DECK:
             editDeck(deck);
             break;
         default:
@@ -390,23 +399,27 @@ public class FDeckChooser extends FScreen {
             switch (selectedDeckType) {
             case COMMANDER_DECK:
                 return EditorType.Commander;
-            case TINY_LEADERS_DECKS:
+            case OATHBREAKER_DECK:
+                return EditorType.Oathbreaker;
+            case TINY_LEADERS_DECK:
                 return EditorType.TinyLeaders;
-            case BRAWL_DECKS:
+            case BRAWL_DECK:
                 return EditorType.Brawl;
-            case SCHEME_DECKS:
+            case SCHEME_DECK:
                 return EditorType.Archenemy;
-            case PLANAR_DECKS:
+            case PLANAR_DECK:
                 return EditorType.Planechase;
-            case DRAFT_DECKS:
+            case DRAFT_DECK:
                 return EditorType.Draft;
-            case SEALED_DECKS:
+            case SEALED_DECK:
                 return EditorType.Sealed;
             default:
                 return EditorType.Constructed;
             }
         case Commander:
             return EditorType.Commander;
+        case Oathbreaker:
+            return EditorType.Oathbreaker;
         case TinyLeaders:
             return EditorType.TinyLeaders;
         case Brawl:
@@ -425,6 +438,9 @@ public class FDeckChooser extends FScreen {
         switch (editorType) {
         case Commander:
             DeckPreferences.setCommanderDeck(deck.getName());
+            break;
+        case Oathbreaker:
+            DeckPreferences.setOathbreakerDeck(deck.getName());
             break;
         case TinyLeaders:
             DeckPreferences.setTinyLeadersDeck(deck.getName());
@@ -477,6 +493,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;
             case Commander:
+            case Oathbreaker:
             case TinyLeaders:
             case Brawl:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
@@ -490,12 +507,13 @@ public class FDeckChooser extends FScreen {
             case DeckManager:
                 cmbDeckTypes.addItem(DeckType.CONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
-                cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECKS);
-                cmbDeckTypes.addItem(DeckType.BRAWL_DECKS);
-                cmbDeckTypes.addItem(DeckType.SCHEME_DECKS);
-                cmbDeckTypes.addItem(DeckType.PLANAR_DECKS);
-                cmbDeckTypes.addItem(DeckType.DRAFT_DECKS);
-                cmbDeckTypes.addItem(DeckType.SEALED_DECKS);
+                cmbDeckTypes.addItem(DeckType.OATHBREAKER_DECK);
+                cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECK);
+                cmbDeckTypes.addItem(DeckType.BRAWL_DECK);
+                cmbDeckTypes.addItem(DeckType.SCHEME_DECK);
+                cmbDeckTypes.addItem(DeckType.PLANAR_DECK);
+                cmbDeckTypes.addItem(DeckType.DRAFT_DECK);
+                cmbDeckTypes.addItem(DeckType.SEALED_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
@@ -506,7 +524,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 break;
             }
-            cmbDeckTypes.setAlignment(HAlignment.CENTER);
+            cmbDeckTypes.setAlignment(Align.center);
             restoreSavedState();
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override
@@ -586,6 +604,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getAllCommanderDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
                 break;
+            case Oathbreaker:
+                pool = DeckProxy.getAllOathbreakerDecks();
+                config = ItemManagerConfig.COMMANDER_DECKS;
+                break;
             case TinyLeaders:
                 pool = DeckProxy.getAllTinyLeadersDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
@@ -616,11 +638,15 @@ public class FDeckChooser extends FScreen {
             pool = DeckProxy.getAllCommanderDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
-        case TINY_LEADERS_DECKS:
+        case OATHBREAKER_DECK:
+            pool = DeckProxy.getAllOathbreakerDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case TINY_LEADERS_DECK:
             pool = DeckProxy.getAllTinyLeadersDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
-        case BRAWL_DECKS:
+        case BRAWL_DECK:
             pool = DeckProxy.getAllBrawlDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
@@ -635,19 +661,19 @@ public class FDeckChooser extends FScreen {
             }
             config = ItemManagerConfig.STRING_ONLY;
             break;
-        case SCHEME_DECKS:
+        case SCHEME_DECK:
             pool = DeckProxy.getAllSchemeDecks();
             config = ItemManagerConfig.SCHEME_DECKS;
             break;
-        case PLANAR_DECKS:
+        case PLANAR_DECK:
             pool = DeckProxy.getAllPlanarDecks();
             config = ItemManagerConfig.PLANAR_DECKS;
             break;
-        case DRAFT_DECKS:
+        case DRAFT_DECK:
             pool = DeckProxy.getAllDraftDecks();
             config = ItemManagerConfig.DRAFT_DECKS;
             break;
-        case SEALED_DECKS:
+        case SEALED_DECK:
             pool = DeckProxy.getAllSealedDecks();
             config = ItemManagerConfig.SEALED_DECKS;
             break;
@@ -678,22 +704,21 @@ public class FDeckChooser extends FScreen {
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case LEGACY_CARDGEN_DECK:
-                maxSelections = 1;
-                pool= new ArrayList<>();
-                if(FModel.isdeckGenMatrixLoaded()) {
-                    pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Legacy"), isAi);
-                }
-                config = ItemManagerConfig.STRING_ONLY;
-                break;
+            maxSelections = 1;
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Legacy"), isAi);
+            }
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
         case VINTAGE_CARDGEN_DECK:
-                maxSelections = 1;
-                pool= new ArrayList<>();
-                if(FModel.isdeckGenMatrixLoaded()) {
-                    pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Vintage"), isAi);
-                }
-                config = ItemManagerConfig.STRING_ONLY;
-                break;
-
+            maxSelections = 1;
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Vintage"), isAi);
+            }
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
         case MODERN_COLOR_DECK:
             maxSelections = 3;
             pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getModern().getFilterPrinted(), isAi);
@@ -770,8 +795,8 @@ public class FDeckChooser extends FScreen {
                 btnRandom.setText("Test Deck");
 
                 switch (selectedDeckType) {
-                case SCHEME_DECKS:
-                case PLANAR_DECKS: //don't allow testing secondary decks this way
+                case SCHEME_DECK:
+                case PLANAR_DECK: //don't allow testing secondary decks this way
                     btnRandom.setEnabled(false);
                     break;
                 default:
@@ -793,6 +818,9 @@ public class FDeckChooser extends FScreen {
             }
             else {
                 lstDecks.setSelectedIndex(0);
+            }
+            if (lstDecks.getGameType() == GameType.DeckManager) {
+                DeckPreferences.setSelectedDeckType(deckType); //update saved Deck Manager type
             }
         }
     }
@@ -1016,13 +1044,19 @@ public class FDeckChooser extends FScreen {
             return;
         }
 
-        if (selectedDeckType == DeckType.TINY_LEADERS_DECKS) {
+        if (selectedDeckType == DeckType.OATHBREAKER_DECK) {
+            //cannot create gauntlet for oathbreaker decks, so just start single match
+            testVariantDeck(userDeck, GameType.Oathbreaker);
+            return;
+        }
+
+        if (selectedDeckType == DeckType.TINY_LEADERS_DECK) {
             //cannot create gauntlet for tiny leaders decks, so just start single match
             testVariantDeck(userDeck, GameType.TinyLeaders);
             return;
         }
 
-        if (selectedDeckType == DeckType.BRAWL_DECKS) {
+        if (selectedDeckType == DeckType.BRAWL_DECK) {
             //cannot create gauntlet for tiny leaders decks, so just start single match
             testVariantDeck(userDeck, GameType.Brawl);
             return;

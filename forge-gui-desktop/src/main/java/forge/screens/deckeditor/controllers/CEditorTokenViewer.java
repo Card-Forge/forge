@@ -2,6 +2,7 @@ package forge.screens.deckeditor.controllers;
 
 
 import forge.deck.DeckBase;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperToken;
@@ -35,14 +36,14 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
      * Child controller for quest card shop UI.
      *
      */
-    public CEditorTokenViewer(final CDetailPicture cDetailPicture) {
-        super(FScreen.TOKEN_VIEWER, cDetailPicture);
+    public CEditorTokenViewer(final CDetailPicture cDetailPicture0) {
+        super(FScreen.TOKEN_VIEWER, cDetailPicture0, GameType.Quest);
 
         FModel.getMagicDb().getAllTokens().preloadTokens();
         fullCatalogCards = FModel.getMagicDb().getAllTokens().getAllTokens();
 
-        final TokenManager catalogManager = new TokenManager(getCDetailPicture(), false);
-        final TokenManager deckManager = new TokenManager(cDetailPicture, false);
+        final TokenManager catalogManager = new TokenManager(cDetailPicture0, false);
+        final TokenManager deckManager = new TokenManager(cDetailPicture0, false);
         catalogManager.setCaption("All Tokens");
         catalogManager.setAlwaysNonUnique(true);
         this.setCatalogManager(catalogManager);

@@ -5,7 +5,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.ImmutableList;
 
@@ -239,7 +240,7 @@ public class FOptionPane extends FDialog {
             centerIcon = icon.getWidth() >= 100; //for large icon, center in dialog
             lblIcon = add(new FLabel.Builder().icon(icon).iconScaleFactor(1).insets(new Vector2(0, 0)).iconInBackground(centerIcon).build());
             if (centerIcon) {
-                lblIcon.setAlignment(HAlignment.CENTER);
+                lblIcon.setAlignment(Align.center);
             }
         }
         else {
@@ -251,7 +252,7 @@ public class FOptionPane extends FDialog {
             prompt = add(new FTextArea(true, message));
             prompt.setFont(messageFont != null ? messageFont : FSkinFont.get(12));
             if (centerIcon || centerPrompt()) {
-                prompt.setAlignment(HAlignment.CENTER);
+                prompt.setAlignment(Align.center);
             }
         }
         else {

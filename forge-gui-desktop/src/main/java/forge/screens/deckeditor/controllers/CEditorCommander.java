@@ -21,15 +21,19 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import forge.UiCommand;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -70,26 +74,27 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
      * all cards are available.
      */
     @SuppressWarnings("serial")
-    public CEditorCommander(final CDetailPicture cDetailPicture, boolean tinyLeaders, boolean brawl) {
-        super(tinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : brawl ? FScreen.DECK_EDITOR_BRAWL : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
+    public CEditorCommander(final CDetailPicture cDetailPicture, GameType gameType0) {
+        super(gameType0 == GameType.TinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : gameType0 == GameType.Brawl ? FScreen.DECK_EDITOR_BRAWL :
+                gameType0 == GameType.Oathbreaker ? FScreen.DECK_EDITOR_OATHBREAKER : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture, gameType0);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
 
-        if(brawl){
+        CardDb commonCards = FModel.getMagicDb().getCommonCards();
+        if (gameType == GameType.Brawl){
+            GameFormat format = FModel.getFormats().get("Brawl");
             Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
-                    FModel.getFormats().get("Brawl").getFilterPrinted(),Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))),PaperCard.class);
-        }else{
-            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER ;
-            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
+            commanderPool = ItemPool.createFrom(commonCards.getAllCards(Predicates.and(
+                    format.getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+            normalPool = ItemPool.createFrom(format.getAllCards(), PaperCard.class);
         }
-
-
-        if(brawl){
-            normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
-        }else {
-            normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+        else {
+            Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
+                    ? Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
+                    : CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+            commanderPool = ItemPool.createFrom(commonCards.getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
+            normalPool = ItemPool.createFrom(commonCards.getAllCards(), PaperCard.class);
         }
 
         CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
@@ -106,7 +111,21 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
                 return new Deck();
             }
         };
-        this.controller = new DeckController<Deck>(tinyLeaders ? FModel.getDecks().getTinyLeaders() :brawl ? FModel.getDecks().getBrawl(): FModel.getDecks().getCommander(), this, newCreator);
+        CardCollections decks = FModel.getDecks();
+        switch (gameType) {
+        case TinyLeaders:
+            this.controller = new DeckController<Deck>(decks.getTinyLeaders(), this, newCreator);
+            break;
+        case Brawl:
+            this.controller = new DeckController<Deck>(decks.getBrawl(), this, newCreator);
+            break;
+        case Oathbreaker:
+            this.controller = new DeckController<Deck>(decks.getOathbreaker(), this, newCreator);
+            break;
+        default:
+            this.controller = new DeckController<Deck>(decks.getCommander(), this, newCreator);
+            break;
+        }
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
@@ -144,7 +163,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
+        CEditorConstructed.buildAddContextMenu(cmb, sectionMode, gameType);
     }
 
     /* (non-Javadoc)

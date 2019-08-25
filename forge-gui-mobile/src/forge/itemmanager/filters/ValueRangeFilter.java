@@ -1,6 +1,6 @@
 package forge.itemmanager.filters;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -55,7 +55,7 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
         lowerBound = addSpinner(widget, true);
 
         String text = "<= " + this.getCaption() + " <=";
-        label = new FLabel.Builder().text(text).align(HAlignment.CENTER).font(ListLabelFilter.LABEL_FONT).build();
+        label = new FLabel.Builder().text(text).align(Align.center).font(ListLabelFilter.LABEL_FONT).build();
         widget.add(label);
 
         upperBound = addSpinner(widget, false);

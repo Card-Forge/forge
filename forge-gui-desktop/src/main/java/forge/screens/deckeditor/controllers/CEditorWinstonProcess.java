@@ -24,6 +24,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -75,11 +76,11 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * Updates the deck editor UI as necessary draft selection mode.
      */
     @SuppressWarnings("serial")
-    public CEditorWinstonProcess(final CDetailPicture cDetailPicture) {
-        super(FScreen.DRAFTING_PROCESS, cDetailPicture);
+    public CEditorWinstonProcess(final CDetailPicture cDetailPicture0) {
+        super(FScreen.DRAFTING_PROCESS, cDetailPicture0, GameType.Draft);
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false, false);
-        final CardManager deckManager = new CardManager(cDetailPicture, false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);

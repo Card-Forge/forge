@@ -321,11 +321,17 @@ public class ComputerUtilMana {
 
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, true);
             if (saPayment == null) {
-                if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
+                boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2)) {
                     break; // cannot pay
                 }
 
-                cost.payPhyrexian();
+                if (toPay.isPhyrexian()) {
+                    cost.payPhyrexian();
+                } else if (lifeInsteadOfBlack) {
+                    cost.decreaseShard(ManaCostShard.BLACK, 1);
+                }
+
                 continue;
             }
 
@@ -381,6 +387,8 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost);
 
+            boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
+
             Collection<SpellAbility> saList = null;
             if (hasConverge && 
             		(toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X)) {
@@ -431,7 +439,8 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if (!toPay.isPhyrexian() || !ai.canPayLife(2) || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2)
+                        || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
 
@@ -446,7 +455,12 @@ public class ComputerUtilMana {
                     }
                 }
 
-                cost.payPhyrexian();
+                if (toPay.isPhyrexian()) {
+                    cost.payPhyrexian();
+                } else if (lifeInsteadOfBlack) {
+                    cost.decreaseShard(ManaCostShard.BLACK, 1);
+                }
+
                 if (!test) {
                     ai.payLife(2, sa.getHostCard());
                 }

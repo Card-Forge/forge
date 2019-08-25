@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Graphics;
@@ -253,8 +252,8 @@ public class LoadGauntletScreen extends LaunchScreen {
                     String progress = completed + " / " + opponents + " (" + percent.format((double)completed / (double)opponents) + ")";
                     float progressWidth = font.getBounds(progress).width + SettingsScreen.SETTING_PADDING;
 
-                    g.drawText(name, font, foreColor, x, y, w - progressWidth, h, false, HAlignment.LEFT, false);
-                    g.drawText(progress, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+                    g.drawText(name, font, foreColor, x, y, w - progressWidth, h, false, Align.left, false);
+                    g.drawText(progress, font, foreColor, x, y, w, h, false, Align.right, false);
 
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
@@ -263,8 +262,8 @@ public class LoadGauntletScreen extends LaunchScreen {
                     String timestamp = value.getTimestamp();
                     font = FSkinFont.get(12);
                     float timestampWidth = font.getBounds(timestamp).width + SettingsScreen.SETTING_PADDING;
-                    g.drawText(value.getUserDeck() == null ? "(none)" : value.getUserDeck().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - timestampWidth, h, false, HAlignment.LEFT, false);
-                    g.drawText(timestamp, font, SettingsScreen.DESC_COLOR, x + w - timestampWidth + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(value.getUserDeck() == null ? "(none)" : value.getUserDeck().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - timestampWidth, h, false, Align.left, false);
+                    g.drawText(timestamp, font, SettingsScreen.DESC_COLOR, x + w - timestampWidth + SettingsScreen.SETTING_PADDING, y, w, h, false, Align.left, false);
                 }
             });
         }

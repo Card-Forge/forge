@@ -1,16 +1,16 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 public class FNumericTextField extends FTextField {
     private int value;
 
     public FNumericTextField() {
-        setAlignment(HAlignment.RIGHT);
+        setAlignment(Align.right);
     }
 
     public FNumericTextField(int value0) {
-        setAlignment(HAlignment.RIGHT);
+        setAlignment(Align.right);
         setValue(value0);
     }
 

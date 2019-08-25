@@ -1,6 +1,6 @@
 package forge.itemmanager.filters;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -97,7 +97,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         private String toolTipText;
 
         private FiltersLabel() {
-            super(new FLabel.Builder().align(HAlignment.LEFT).parseSymbols(true).font(ListLabelFilter.LABEL_FONT));
+            super(new FLabel.Builder().align(Align.left).parseSymbols(true).font(ListLabelFilter.LABEL_FONT));
         }
 
         @Override
@@ -231,12 +231,12 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             private AdvancedSearch.Filter<T> filter;
 
             private Filter() {
-                btnNotBeforeParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
-                btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
-                btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
+                btnNotBeforeParen = add(new FLabel.Builder().align(Align.center).text("NOT").selectable().build());
+                btnOpenParen = add(new FLabel.Builder().align(Align.center).text("(").selectable().build());
+                btnNotAfterParen = add(new FLabel.Builder().align(Align.center).text("NOT").selectable().build());
                 btnFilter = add(new FLabel.ButtonBuilder().parseSymbols(true).build());
-                btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
-                btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
+                btnCloseParen = add(new FLabel.Builder().align(Align.center).selectable().text(")").build());
+                btnAnd = add(new FLabel.Builder().align(Align.center).text("AND").selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         if (btnAnd.isSelected()) {
@@ -248,7 +248,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                         }
                     }
                 }).build());
-                btnOr = add(new FLabel.Builder().align(HAlignment.CENTER).text("OR").selectable().command(new FEventHandler() {
+                btnOr = add(new FLabel.Builder().align(Align.center).text("OR").selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         if (btnOr.isSelected()) {

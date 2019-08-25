@@ -3,7 +3,7 @@ package forge.itemmanager.filters;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.assets.FImage;
 import forge.item.InventoryItem;
@@ -70,7 +70,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
         private ToggleButton(FImage icon) {
             super(new FLabel.Builder()
                 .icon(icon).iconScaleFactor(1f)
-                .align(HAlignment.CENTER)
+                .align(Align.center)
                 .selectable(true).selected(true)
                 .command(new FEventHandler() {
                     @Override

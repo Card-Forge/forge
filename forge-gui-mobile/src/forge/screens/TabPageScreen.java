@@ -1,6 +1,6 @@
 package forge.screens;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -183,7 +183,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public TabHeader(TabPage<T>[] tabPages0, boolean showBackButton) {
             tabPages = tabPages0;
             if (showBackButton) {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         Forge.back();
@@ -365,7 +365,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 if (parentScreen.showCompactTabs() && !isLandscapeMode) {
                     h -= 2 * padding;
                     if (icon == null) {
-                        g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, HAlignment.CENTER, true);
+                        g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, Align.center, true);
                     }
                     else {
                         //center combination of icon and text
@@ -393,13 +393,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                         x += iconOffset;
                         w -= iconOffset;
                         g.startClip(x, y, w, h);
-                        g.drawText(caption, font, TAB_FORE_COLOR, x, y, w, h, false, HAlignment.LEFT, true);
+                        g.drawText(caption, font, TAB_FORE_COLOR, x, y, w, h, false, Align.left, true);
                         g.endClip();
                     }
                 }
                 else {
                     float y = h - padding - TAB_FONT.getCapHeight();
-                    g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, y - padding, w, h - y + padding, false, HAlignment.CENTER, true);
+                    g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, y - padding, w, h - y + padding, false, Align.center, true);
 
                     if (icon != null) {
                         float iconHeight = y - 2 * padding;

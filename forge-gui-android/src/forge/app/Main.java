@@ -17,6 +17,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
+import android.provider.Settings;
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import com.badlogic.gdx.Gdx;
@@ -35,6 +37,8 @@ import java.io.OutputStream;
 import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
+    public int time = -2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,13 +239,17 @@ public class Main extends AndroidApplication {
 
         @Override
         public void preventSystemSleep(final boolean preventSleep) {
+            if (time == -2)
+                time = Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0);
             FThreads.invokeInEdtNowOrLater(new Runnable() { //must set window flags from EDT thread
                 @Override
                 public void run() {
                     if (preventSleep) {
+                        Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, Integer.MAX_VALUE);
                         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     }
                     else {
+                        Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, time);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     }
                 }

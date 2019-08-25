@@ -19,17 +19,19 @@ import java.util.List;
  */
 public class CommanderDeckGenerator extends DeckProxy implements Comparable<CommanderDeckGenerator> {
     public static List<DeckProxy> getCommanderDecks(final DeckFormat format, boolean isForAi, boolean isCardGen){
-        if(format.equals(DeckFormat.Brawl)){
+        if (format.equals(DeckFormat.Brawl)){
             return getBrawlDecks(format, isForAi, isCardGen);
         }
         ItemPool uniqueCards;
-        if(isCardGen){
+        if (isCardGen){
             uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
-            Iterable<String> legendNames=CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).keySet();
-            for(String legendName:legendNames) {
+            String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
+            Iterable<String> legendNames = CardRelationMatrixGenerator.cardPools.get(matrixKey).keySet();
+            for (String legendName : legendNames) {
                 uniqueCards.add(FModel.getMagicDb().getCommonCards().getUniqueByName(legendName));
             }
-        }else {
+        }
+        else {
             uniqueCards = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class);
         }
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
@@ -43,7 +45,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
                     },
                     canPlay), PaperCard.FN_GET_RULES));
         final List<DeckProxy> decks = new ArrayList<DeckProxy>();
-        for(PaperCard legend: legends) {
+        for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));
         }
         return decks;
@@ -51,14 +53,15 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
 
     public static List<DeckProxy> getBrawlDecks(final DeckFormat format, boolean isForAi, boolean isCardGen){
         ItemPool uniqueCards;
-        if(isCardGen){
+        if (isCardGen){
             uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
-            //TODO: upate to actual Brawl model from real Brawl decks
+            //TODO: update to actual Brawl model from real Brawl decks
             Iterable<String> legendNames=CardArchetypeLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).keySet();
-            for(String legendName:legendNames) {
+            for (String legendName : legendNames) {
                 uniqueCards.add(FModel.getMagicDb().getCommonCards().getUniqueByName(legendName));
             }
-        }else {
+        }
+        else {
             uniqueCards = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class);
         }
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
@@ -68,7 +71,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
                 CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER,
                 canPlay), PaperCard.FN_GET_RULES)));
         final List<DeckProxy> decks = new ArrayList<DeckProxy>();
-        for(PaperCard legend: legends) {
+        for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));
         }
         return decks;
@@ -79,7 +82,6 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
     private final DeckFormat format;
     private final boolean isForAi;
     private final boolean isCardgen;
-
 
     private CommanderDeckGenerator(PaperCard legend0, DeckFormat format0, boolean isForAi0, boolean isCardgen0) {
         super();
@@ -93,7 +95,6 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
     public CardEdition getEdition() {
         return CardEdition.UNKNOWN;
     }
-
 
     @Override
     public String getName() {
@@ -112,7 +113,6 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
 
     @Override
     public Deck getDeck() {
-
         return DeckgenUtil.generateRandomCommanderDeck(legend, format,isForAi, isCardgen);
     }
 

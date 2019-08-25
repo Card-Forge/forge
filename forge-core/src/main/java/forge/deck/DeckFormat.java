@@ -48,48 +48,25 @@ public enum DeckFormat {
     Constructed    ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
-    Commander      ( Range.is(99),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = ImmutableSet.of(
-               "Adriana's Valor", "Advantageous Proclamation", "Amulet of Quoz", "Ancestral Recall", "Assemble the Rank and Vile",
-               "Backup Plan", "Balance", "Biorhythm", "Black Lotus", "Brago's Favor", "Braids, Cabal Minion", "Bronze Tablet",
-               "Channel", "Chaos Orb", "Coalition Victory", "Contract from Below", "Darkpact", "Demonic Attorney", "Double Stroke",
-               "Echoing Boon", "Emissary's Ploy", "Emrakul, the Aeons Torn", "Erayo, Soratami Ascendant", "Falling Star",
-               "Fastbond", "Gifts Ungiven", "Griselbrand", "Hired Heist", "Hold the Perimeter", "Hymn of the Wilds", "Immediate Action",
-               "Incendiary Dissent", "Iterative Analysis", "Jeweled Bird", "Karakas", "Leovold, Emissary of Trest", "Library of Alexandria",
-               "Limited Resources", "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Muzzio's Preparations",
-               "Natural Unity", "Painter's Servant", "Panoptic Mirror", "Power Play", "Primeval Titan", "Prophet of Kruphix",
-               "Rebirth", "Recurring Nightmare", "Rofellos, Llanowar Emissary", "Secret Summoning", "Secrets of Paradise",
-               "Sentinel Dispatch", "Shahrazad", "Sovereign's Realm", "Summoner's Bond", "Sundering Titan", "Sway of the Stars",
-               "Sylvan Primordial", "Tempest Efreet", "Time Vault", "Time Walk", "Timmerian Fiends", "Tinker", "Tolarian Academy",
-               "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain");
+    Commander      ( Range.is(99),                         Range.between(0, 10), 1, null, new Predicate<PaperCard>() {
         @Override
-        public boolean apply(CardRules rules) {
-            if (bannedCards.contains(rules.getName())) {
-                return false;
-            }
-            return true;
+        public boolean apply(PaperCard card) {
+            return StaticData.instance().getCommanderPredicate().apply(card);
+        }
+    }),
+    Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null, new Predicate<PaperCard>() {
+        @Override
+        public boolean apply(PaperCard card) {
+            return StaticData.instance().getOathbreakerPredicate().apply(card);
         }
     }),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
     Brawl      ( Range.is(59), Range.between(0, 15), 1, null, new Predicate<PaperCard>() {
-        private final Set<String> bannedCards = ImmutableSet.of(
-                "Baral, Chief of Compliance","Smuggler's Copter","Sorcerous Spyglass");
         @Override
         public boolean apply(PaperCard card) {
-            //why do we need to hard code the bannings here - they are defined in the GameFormat predicate used below
-            if (bannedCards.contains(card.getName())) {
-                return false;
-            }
-            return StaticData.instance() == null ? false : StaticData.instance().getBrawlPredicate().apply(card);
+            return StaticData.instance().getBrawlPredicate().apply(card);
         }
-    }) {
-        private final Set<String> bannedCommanders = ImmutableSet.of("Baral, Chief of Compliance");
-
-        @Override
-        public boolean isLegalCommander(CardRules rules) {
-            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
-        }
-        },
+    }),
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
@@ -167,8 +144,12 @@ public enum DeckFormat {
         cardPoolFilter = null;
     }
 
-    private boolean hasCommander() {
-        return this == Commander || this == TinyLeaders || this == Brawl;
+    public boolean hasCommander() {
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+    }
+
+    public boolean hasSignatureSpell() {
+        return this == Oathbreaker;
     }
 
     /**
@@ -232,41 +213,56 @@ public enum DeckFormat {
             noBasicLands = conspiracies.countByName(SOVREALM, false) > 0;
         }
 
-        if (hasCommander()) { // 1 Commander, or 2 Partner Commanders
-            final List<PaperCard> commanders = deck.getCommanders();
-
-            if (commanders.isEmpty()) {
-                return "is missing a commander";
-            }
-
-            if (commanders.size() > 2) {
-                return "too many commanders";
-            }
-
+        if (hasCommander()) {
             byte cmdCI = 0;
-            for (PaperCard pc : commanders) {
-                if (!isLegalCommander(pc.getRules())) {
-                    return "has an illegal commander";
+            if (equals(DeckFormat.Oathbreaker)) { // 1 Oathbreaker and 1 Signature Spell
+                PaperCard oathbreaker = deck.getOathbreaker();
+                if (oathbreaker == null) {
+                    return "is missing an oathbreaker";
                 }
-                cmdCI |= pc.getRules().getColorIdentity().getColor();
+                if (deck.getSignatureSpell() == null) {
+                    return "is missing a signature spell";
+                }
+                if (deck.getCommanders().size() > 2) {
+                    return "has too many commanders";
+                }
+                cmdCI = oathbreaker.getRules().getColorIdentity().getColor();
             }
+            else { // 1 Commander or 2 Partner Commanders
+                final List<PaperCard> commanders = deck.getCommanders();
 
-            // special check for Partner
-            if (commanders.size() == 2) {
-                // two commander = 98 cards
-                min--;
-                max--;
+                if (commanders.isEmpty()) {
+                    return "is missing a commander";
+                }
 
-                PaperCard a = commanders.get(0);
-                PaperCard b = commanders.get(1);
+                if (commanders.size() > 2) {
+                    return "has too many commanders";
+                }
 
-                if (a.getRules().hasKeyword("Partner") && b.getRules().hasKeyword("Partner")) {
-                    // normal partner commander
-                } else if (a.getName().equals(b.getRules().getParterWith())
-                        && b.getName().equals(a.getRules().getParterWith())) {
-                    // paired partner commander
-                } else {
-                    return "has an illegal commander partnership";
+                for (PaperCard pc : commanders) {
+                    if (!isLegalCommander(pc.getRules())) {
+                        return "has an illegal commander";
+                    }
+                    cmdCI |= pc.getRules().getColorIdentity().getColor();
+                }
+
+                // special check for Partner
+                if (commanders.size() == 2) {
+                    // two commander = 98 cards
+                    min--;
+                    max--;
+
+                    PaperCard a = commanders.get(0);
+                    PaperCard b = commanders.get(1);
+
+                    if (a.getRules().hasKeyword("Partner") && b.getRules().hasKeyword("Partner")) {
+                        // normal partner commander
+                    } else if (a.getName().equals(b.getRules().getPartnerWith())
+                            && b.getName().equals(a.getRules().getPartnerWith())) {
+                        // paired partner commander
+                    } else {
+                        return "has an illegal commander partnership";
+                    }
                 }
             }
 
@@ -443,7 +439,10 @@ public enum DeckFormat {
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
         }
-        if(this.equals(DeckFormat.Brawl)) {
+        if (this.equals(DeckFormat.Oathbreaker)) {
+            return rules.canBeOathbreaker();
+        }
+        if (this.equals(DeckFormat.Brawl)) {
             return rules.canBeBrawlCommander();
         }
         return rules.canBeCommander();
@@ -505,19 +504,17 @@ public enum DeckFormat {
 
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
         byte cmdCI = 0;
+        boolean hasPartner = false;
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
+            if (p.getRules().canBePartnerCommander()) {
+                hasPartner = true;
+            }
         }
-        return Predicates.compose(CardRulesPredicates.hasColorIdentity(cmdCI), PaperCard.FN_GET_RULES);
-    }
-
-    public Predicate<PaperCard> isLegalCardForCommanderOrLegalPartnerPredicate(List<PaperCard> commanders) {
-        byte cmdCI = 0;
-        for (final PaperCard p : commanders) {
-            cmdCI |= p.getRules().getColorIdentity().getColor();
+        Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
+        if (hasPartner) { //also show available partners a commander can have a partner
+            predicate = Predicates.or(predicate, CardRulesPredicates.Presets.CAN_BE_PARTNER_COMMANDER);
         }
-        // TODO : check commander what kind of Partner it needs
-        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI),
-                CardRulesPredicates.Presets.CAN_BE_PARTNER_COMMANDER), PaperCard.FN_GET_RULES);
+        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
     }
 }

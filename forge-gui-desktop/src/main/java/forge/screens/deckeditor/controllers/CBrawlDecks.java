@@ -6,7 +6,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.screens.deckeditor.views.VBrawlDecks;
 
 /**
- * Controls the "Commander Decks" panel in the deck editor UI.
+ * Controls the "Brawl Decks" panel in the deck editor UI.
  *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *

@@ -707,4 +707,13 @@ public class ManaCostBeingPaid {
         }
         return result;
     }
+    
+    public boolean hasAnyKind(int kind) {
+        for (ManaCostShard s : unpaidShards.keySet()) {
+            if (s.isOfKind(kind)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
