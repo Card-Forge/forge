@@ -42,17 +42,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         lstSettings.setListItemRenderer(new SettingRenderer());
 
-        lstSettings.addGroup("General Settings");
-        lstSettings.addGroup("Gameplay Options");
-        lstSettings.addGroup("Random Deck Generation");
-        lstSettings.addGroup("Advanced Settings");
-        lstSettings.addGroup("Graphic Options");
-        lstSettings.addGroup("Card Overlays");
-        lstSettings.addGroup("Vibration Options");
-        lstSettings.addGroup("Sound Options");
+        lstSettings.addGroup(localizer.getMessage("lblGeneralSettings"));
+        lstSettings.addGroup(localizer.getMessage("lblGameplayOptions"));
+        lstSettings.addGroup(localizer.getMessage("RandomDeckGeneration"));
+        lstSettings.addGroup(localizer.getMessage("AdvancedSettings"));
+        lstSettings.addGroup(localizer.getMessage("GraphicOptions"));
+        lstSettings.addGroup(localizer.getMessage("lblCardOverlays"));
+        lstSettings.addGroup(localizer.getMessage("lblVibrationOptions"));
+        lstSettings.addGroup(localizer.getMessage("SoundOptions"));
 
         //General Settings
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, "Language",
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, localizer.getMessage("cbpSelectLanguage"),
                 localizer.getMessage("nlSelectLanguage"),
                 FLanguage.getAllLanguages()) {
             @Override
@@ -60,8 +60,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 FLanguage.changeLanguage(newValue);
             }
         }, 0);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
-                "Sets the theme that determines how display components are skinned.",
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, localizer.getMessage("lblTheme"),
+                localizer.getMessage("nlTheme"),
                 FSkin.getAllSkins()) {
             @Override
             public void valueChanged(String newValue) {
@@ -69,15 +69,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
-                "Landscape Mode",
-                "Use landscape (horizontal) orientation for app instead of portrait (vertical).") {
+                localizer.getMessage("lblLandscapeMode"),
+                localizer.getMessage("nlLandscapeMode")) {
                     @Override
                     public void select() {
                         super.select();
                         boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
                         Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
                         if (Forge.isLandscapeMode() != landscapeMode) {
-                            FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
+                            FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), "Restart", localizer.getMessage("lblLater"), new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
                                     if (result) {
@@ -89,12 +89,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
-                "Minimize on Screen Lock",
-                "Minimize Forge when screen is locked (enable if you experience graphic glitches after locking your screen)."),
+                localizer.getMessage("lblMinimizeScreenLock"),
+                localizer.getMessage("nlMinimizeScreenLock")),
                 0);
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
-                "Automatic Bug Reports",
-                "Automatically send bug reports to the developers, without prompting."),
+                localizer.getMessage("lblAutomaticBugReports"),
+                localizer.getMessage("nlAutomaticBugReports")),
                 0);
 
         //Gameplay Options
@@ -121,8 +121,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlAnteMatchRarity")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
-                "Hot Seat Mode",
-                "When starting a game with 2 human players, use single prompt to control both players."),
+                localizer.getMessage("lblHotSeatMode"),
+                localizer.getMessage("nlHotSeatMode")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
                 localizer.getMessage("cbEnableAICheats"),
@@ -173,8 +173,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlPreselectPrevAbOrder")),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
-                "Order Graveyard",
-                "Determines when to allow to order cards going to graveyard (never/always/only with relevant cards).",
+                localizer.getMessage("lblOrderGraveyard"),
+                localizer.getMessage("nlOrderGraveyard"),
                         new String[]{
                                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS}),
@@ -250,8 +250,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlRandomArtInPools")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_TABS,
-                "Compact Tabs",
-                "Show smaller tabs on the top of tab page screens (such as this screen).") {
+                localizer.getMessage("lblCompactTabs"),
+                localizer.getMessage("nlCompactTabs")) {
                     @Override
                     public void select() {
                         super.select();
@@ -261,20 +261,20 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
-                "Compact List Items",
-                "Show only a single line of text for cards and decks on all list views by default."),
+                localizer.getMessage("lblCompactListItems"),
+                localizer.getMessage("nlCompactListItems")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
                 localizer.getMessage("cbHideReminderText"),
                 localizer.getMessage("nlHideReminderText")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MATCH_IMAGE_VISIBLE,
-                "Show Match Background",
-                "Show match background image on battlefield, otherwise background texture shown instead."),
+                localizer.getMessage("lblShowMatchBackground"),
+                localizer.getMessage("nlShowMatchBackground")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LIBGDX_TEXTURE_FILTERING,
-                "Battlefield Texture Filtering",
-                "Filter card art on battlefield to make it less pixelated on large screens (restart required, may reduce performance)."),
+                localizer.getMessage("lblBattlefieldTextureFiltering"),
+                localizer.getMessage("nlBattlefieldTextureFiltering")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
                 localizer.getMessage("cbpDisplayCurrentCardColors"),
@@ -285,20 +285,20 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-                        "Rotate Zoom Image of Split Cards",
-                        "Rotates the zoomed image of split cards."),
+                        localizer.getMessage("lblRotateZoomSplit"),
+                        localizer.getMessage("nlRotateZoomSplit")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-                        "Rotate Zoom Image of Planes/Phenomena",
-                        "Rotates the zoomed image of Plane or Phenomenon cards."),
+                        localizer.getMessage("lblRotateZoomPlanesPhenomena"),
+                        localizer.getMessage("nlRotateZoomPlanesPhenomena")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DYNAMIC_PLANECHASE_BG,
-                        "Dynamic Background Planechase",
-                        "Use current plane images as background (Planes Card images must be on the cache/pics/planechase folder)."),
+                        localizer.getMessage("lblDynamicBackgroundPlanechase"),
+                        localizer.getMessage("nlDynamicBackgroundPlanechase")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
-                        "Disable Card 'Effect' Images",
-                        "Disable the zoomed image for the 'Effect' cards."),
+                        localizer.getMessage("lblDisableCardEffect"),
+                        localizer.getMessage("nlDisableCardEffect")),
                 4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
@@ -311,34 +311,34 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         //Card Overlays
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_CARD_OVERLAYS,
-                "Show Card Overlays",
-                "Show name, mana cost, p/t, and id overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardOverlays"),
+                localizer.getMessage("nlShowCardOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_NAME,
-                "Show Card Name Overlays",
-                "Show name overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardNameOverlays"),
+                localizer.getMessage("nlShowCardNameOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_MANA_COST,
-                "Show Card Mana Cost Overlays",
-                "Show mana cost overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardManaCostOverlays"),
+                localizer.getMessage("nlShowCardManaCostOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
-                "Show Card P/T Overlays",
-                "Show power/toughness/loyalty overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardPTOverlays"),
+                localizer.getMessage("nlShowCardPTOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
-                "Show Card ID Overlays",
-                "Show id overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardIDOverlays"),
+                localizer.getMessage("nlShowCardIDOverlays")),
                 5);
 
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-                "Vibrate When Losing Life",
-                "Enable vibration when your player loses life or takes damage during a game."),
+                localizer.getMessage("lblVibrateWhenLosingLife"),
+                localizer.getMessage("nlVibrateWhenLosingLife")),
                 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
-                "Vibrate After Long Press",
-                "Enable quick vibration to signify a long press, such as for card zooming."),
+                localizer.getMessage("lblVibrateAfterLongPress"),
+                localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
 
         //Sound Options
