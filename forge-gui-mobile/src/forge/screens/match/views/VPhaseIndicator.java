@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -14,6 +13,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.game.phase.PhaseType;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class VPhaseIndicator extends FContainer {
@@ -160,7 +160,7 @@ public class VPhaseIndicator extends FContainer {
                 backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
             }
             g.fillRect(backColor, x, 0, w, h);
-            g.drawText(caption, font, Color.BLACK, x, 0, w, h, false, HAlignment.CENTER, true);
+            g.drawText(caption, font, Color.BLACK, x, 0, w, h, false, Align.center, true);
         }
     }
 }

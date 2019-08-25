@@ -6,9 +6,9 @@ import forge.planarconquest.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Forge;
@@ -641,7 +641,7 @@ public class ConquestMultiverseScreen extends FScreen {
             float y = PADDING;
             float symbolSize = CardRenderer.MANA_SYMBOL_SIZE;
             float availableNameWidth = w - CardFaceSymbols.getWidth(regionColors, symbolSize) - 3 * PADDING;
-            g.drawText(region.toString(), PLANE_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, availableNameWidth, symbolSize, false, HAlignment.LEFT, true);
+            g.drawText(region.toString(), PLANE_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, availableNameWidth, symbolSize, false, Align.left, true);
             x += availableNameWidth + PADDING;
             CardFaceSymbols.drawColorSet(g, regionColors, x, y, symbolSize);
 
@@ -653,7 +653,7 @@ public class ConquestMultiverseScreen extends FScreen {
             }
             x = PADDING;
             y += symbolSize;
-            g.drawText(details, EVENT_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, w - 2 * PADDING, h - y, false, HAlignment.CENTER, true);
+            g.drawText(details, EVENT_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, w - 2 * PADDING, h - y, false, Align.center, true);
 
             //draw top and bottom borders
             g.drawLine(1, Color.BLACK, 0, 0, w, 0);
@@ -702,10 +702,10 @@ public class ConquestMultiverseScreen extends FScreen {
             float labelHeight = playerAvatar.getTop();
 
             if (playerAvatar.card != null) {
-                g.drawText(playerAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
+                g.drawText(playerAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, Align.left, true);
             }
             if (opponentAvatar.card != null) {
-                g.drawText(opponentAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
+                g.drawText(opponentAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, Align.right, true);
             }
         }
 

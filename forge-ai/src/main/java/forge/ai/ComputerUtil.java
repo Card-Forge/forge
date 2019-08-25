@@ -95,7 +95,7 @@ public class ComputerUtil {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
-        if (sa.isCopied()) {
+        if (!sa.isCopied()) {
             sa.resetPaidHash();
         }
 

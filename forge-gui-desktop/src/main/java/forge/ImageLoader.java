@@ -14,6 +14,13 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
     public BufferedImage load(String key) {
         File file = ImageKeys.getImageFile(key);
         if (file != null) {
+            if (!file.exists()) {
+                return null;
+            }
+            if (file.isDirectory()) {
+                file.delete();
+                return null;
+            }
             try {
                 return ImageIO.read(file);
             }

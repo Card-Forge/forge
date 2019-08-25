@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
 import forge.Graphics;
@@ -55,7 +55,7 @@ public class LoadConquestScreen extends LaunchScreen {
         super(null, LoadGameMenu.getMenu());
 
         lblOldConquests.setFont(FSkinFont.get(12));
-        lblOldConquests.setAlignment(HAlignment.CENTER);
+        lblOldConquests.setAlignment(Align.center);
 
         btnNewConquest.setFont(FSkinFont.get(16));
         btnNewConquest.setCommand(new FEventHandler() {
@@ -301,8 +301,8 @@ public class LoadConquestScreen extends LaunchScreen {
                     String progress = value.getProgress();
                     float winRatioWidth = font.getBounds(progress).width + SettingsScreen.SETTING_PADDING;
 
-                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
-                    g.drawText(progress, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, Align.left, false);
+                    g.drawText(progress, font, foreColor, x, y, w, h, false, Align.right, false);
 
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
@@ -315,11 +315,11 @@ public class LoadConquestScreen extends LaunchScreen {
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     float shardsWidth = font.getBounds(shards).width + iconSize + SettingsScreen.SETTING_PADDING;
-                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName().replace("_", " "), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
+                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName().replace("_", " "), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, Align.left, false);
                     g.drawImage(FSkinImage.SPELLBOOK, x + w - shardsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, Align.left, false);
                     g.drawImage(FSkinImage.AETHER_SHARD, x + w - shardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(shards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawText(shards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, Align.left, false);
                 }
             });
         }

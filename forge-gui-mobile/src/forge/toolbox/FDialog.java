@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -225,7 +225,7 @@ public abstract class FDialog extends FOverlay {
         if (btnMiddle != null && !title.isEmpty()) { //render title above prompt if middle button present
             y -= MSG_HEIGHT;
             g.fillRect(VPrompt.BACK_COLOR, 0, y, w, MSG_HEIGHT);
-            g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
+            g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, Align.center, true);
         }
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
     }

@@ -1,6 +1,6 @@
 package forge.menu;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -135,10 +135,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
         }
 
         if (textRenderer == null) {
-            g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, HAlignment.LEFT, true);
+            g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, Align.left, true);
         }
         else {
-            textRenderer.drawText(g, text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, 0, h, false, HAlignment.LEFT, true);
+            textRenderer.drawText(g, text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, 0, h, false, Align.left, true);
         }
 
         //draw separator line

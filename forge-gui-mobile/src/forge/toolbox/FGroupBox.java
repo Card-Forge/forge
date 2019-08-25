@@ -1,7 +1,6 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
+import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -32,7 +31,7 @@ public abstract class FGroupBox extends FContainer {
         g.drawLine(BORDER_THICKNESS, FORE_COLOR, w, h, w, y); //draw right border
 
         //draw caption
-        g.drawText(caption, FONT, FORE_COLOR, x, 0, w - x - PADDING, h, false, HAlignment.LEFT, false);
+        g.drawText(caption, FONT, FORE_COLOR, x, 0, w - x - PADDING, h, false, Align.left, false);
 
         //draw border left of caption
         g.drawLine(BORDER_THICKNESS, FORE_COLOR, 0, y, x, y);

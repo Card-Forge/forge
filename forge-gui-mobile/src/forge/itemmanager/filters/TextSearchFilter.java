@@ -1,6 +1,6 @@
 package forge.itemmanager.filters;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -101,7 +101,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         @Override
         public void draw(Graphics g) {
             super.draw(g);
-            g.drawText(ratio, renderedFont, GHOST_TEXT_COLOR, 0, 0, getWidth() - PADDING, getHeight(), false, HAlignment.RIGHT, true);
+            g.drawText(ratio, renderedFont, GHOST_TEXT_COLOR, 0, 0, getWidth() - PADDING, getHeight(), false, Align.right, true);
         }
     }
 }

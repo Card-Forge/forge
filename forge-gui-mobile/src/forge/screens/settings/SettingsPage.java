@@ -1,6 +1,6 @@
 package forge.screens.settings;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.MulliganDefs;
@@ -456,7 +456,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         w -= 2 * offset;
                         h -= 2 * offset;
 
-                        g.drawText(value, font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                        g.drawText(value, font, foreColor, x, y, w, h, false, Align.left, true);
 
                         float radius = h / 3;
                         x += w - radius;
@@ -485,7 +485,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         @Override
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
-            g.drawText(FModel.getPreferences().getPref(pref), font, color, x, y, w, h, false, HAlignment.RIGHT, false);
+            g.drawText(FModel.getPreferences().getPref(pref), font, color, x, y, w, h, false, Align.right, false);
         }
     }
 
@@ -512,10 +512,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             float totalHeight = h;
             h = font.getMultiLineBounds(value.label).height + SettingsScreen.SETTING_PADDING;
 
-            g.drawText(value.label, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
+            g.drawText(value.label, font, foreColor, x, y, w, h, false, Align.left, false);
             value.drawPrefValue(g, font, foreColor, x, y, w, h);
             h += SettingsScreen.SETTING_PADDING;
-            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);
+            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
         }
     }
 }

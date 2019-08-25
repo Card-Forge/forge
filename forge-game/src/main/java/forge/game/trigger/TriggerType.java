@@ -83,6 +83,7 @@ public enum TriggerType {
     SetInMotion(TriggerSetInMotion.class),
     Shuffled(TriggerShuffled.class),
     SpellAbilityCast(TriggerSpellAbilityCast.class),
+    SpellAbilityCopy(TriggerSpellAbilityCopy.class),
     SpellCast(TriggerSpellAbilityCast.class),
     SpellCopy(TriggerSpellAbilityCopy.class),
     Surveil(TriggerSurveil.class),

@@ -41,7 +41,7 @@ import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -524,7 +524,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 break;
             }
-            cmbDeckTypes.setAlignment(HAlignment.CENTER);
+            cmbDeckTypes.setAlignment(Align.center);
             restoreSavedState();
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override

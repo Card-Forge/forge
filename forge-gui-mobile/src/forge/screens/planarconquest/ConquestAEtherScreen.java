@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -64,7 +64,7 @@ public class ConquestAEtherScreen extends FScreen {
     private final FilterButton btnRarityFilter = add(new FilterButton("Rarity", ConquestUtil.RARITY_FILTERS));
     private final FilterButton btnCMCFilter = add(new FilterButton("CMC", ConquestUtil.CMC_FILTERS));
 
-    private final FLabel lblShards = add(new FLabel.Builder().font(LABEL_FONT).align(HAlignment.CENTER).parseSymbols().build());
+    private final FLabel lblShards = add(new FLabel.Builder().font(LABEL_FONT).align(Align.center).parseSymbols().build());
 
     private PullAnimation activePullAnimation;
     private int shardCost;
@@ -273,7 +273,7 @@ public class ConquestAEtherScreen extends FScreen {
                 activePullAnimation.drawCard(g);
             }
             else {
-                textRenderer.drawText(g, message, MESSAGE_FONT, Color.WHITE, 0, 0, w, h, 0, h, false, HAlignment.CENTER, true);
+                textRenderer.drawText(g, message, MESSAGE_FONT, Color.WHITE, 0, 0, w, h, 0, h, false, Align.center, true);
             }
         }
 
@@ -361,7 +361,7 @@ public class ConquestAEtherScreen extends FScreen {
 
         private FilterButton(String caption0, AEtherFilter[] options0) {
             super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
-                    .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(HAlignment.CENTER));
+                    .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
             caption = caption0;
             options = ImmutableList.copyOf(options0);
             setSelectedOption(options.get(0));

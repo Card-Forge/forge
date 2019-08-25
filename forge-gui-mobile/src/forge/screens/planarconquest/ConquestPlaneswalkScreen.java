@@ -1,7 +1,7 @@
 package forge.screens.planarconquest;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
@@ -57,7 +57,7 @@ public class ConquestPlaneswalkScreen extends FScreen {
 
         private PlaneswalkButton() {
             super(new FLabel.Builder().font(FSkinFont.get(20)).parseSymbols().pressedColor(ConquestAEtherScreen.FILTER_BUTTON_PRESSED_COLOR)
-                    .textColor(ConquestAEtherScreen.FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(HAlignment.CENTER));
+                    .textColor(ConquestAEtherScreen.FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
             setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

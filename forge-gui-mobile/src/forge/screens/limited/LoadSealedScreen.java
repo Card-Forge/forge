@@ -1,6 +1,6 @@
 package forge.screens.limited;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 
 import forge.Forge;
@@ -39,7 +39,7 @@ public class LoadSealedScreen extends LaunchScreen {
     private final FLabel lblTip = add(new FLabel.Builder()
         .text("Double-tap to edit deck (Long-press to view)")
         .textColor(FLabel.INLINE_LABEL_COLOR)
-        .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
+        .align(Align.center).font(FSkinFont.get(12)).build());
 
     private final FSkinFont GAME_MODE_FONT= FSkinFont.get(12);
     private final FLabel lblMode = add(new FLabel.Builder().text("Mode:").font(GAME_MODE_FONT).build());
