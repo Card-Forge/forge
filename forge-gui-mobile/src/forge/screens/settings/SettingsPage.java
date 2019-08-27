@@ -514,7 +514,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
             g.drawText(value.label, font, foreColor, x, y, w, h, false, Align.left, false);
             value.drawPrefValue(g, font, foreColor, x, y, w, h);
-            h += SettingsScreen.SETTING_PADDING;
+            h += SettingsScreen.SETTING_PADDING;//TODO: adjust settings page description bounds
             g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
         }
     }
