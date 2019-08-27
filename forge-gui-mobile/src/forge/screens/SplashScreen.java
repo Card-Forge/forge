@@ -94,7 +94,7 @@ public class SplashScreen extends FContainer {
         String disclaimer = "Forge is not affiliated in any way with Wizards of the Coast.\n"
                 + "Forge is open source software, released under the GNU Public License.";
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
-                x, y, w, disclaimerHeight, true, Align.center, true);
+                x, y, w, disclaimerHeight, false, Align.center, true);
 
         float padding = 20f / 450f * w;
         float pbHeight = 57f / 450f * h;

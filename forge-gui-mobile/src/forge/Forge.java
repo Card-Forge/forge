@@ -49,6 +49,7 @@ public class Forge implements ApplicationListener {
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Stack<FScreen> screens = new Stack<FScreen>();
     private static boolean textureFiltering = false;
+    private static boolean destroyThis = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -70,7 +71,14 @@ public class Forge implements ApplicationListener {
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         Gdx.input.setInputProcessor(new MainInputProcessor());
-
+        /*
+         Set CatchBackKey here and exit the app when you hit the
+         back button while the textures,fonts,etc are still loading,
+         to prevent rendering issue when you try to restart
+         the app again (seems it doesnt dispose correctly...?!?)
+         */
+        Gdx.input.setCatchBackKey(true);
+        destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
 
         String skinName;
@@ -115,7 +123,7 @@ public class Forge implements ApplicationListener {
         FSkin.loadFull(splashScreen);
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
-
+        destroyThis = false; //Allow back()
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
         openScreen(HomeScreen.instance);
@@ -167,6 +175,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
+        if(destroyThis)
+            return;
         if (screens.size() < 2) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
@@ -481,7 +491,12 @@ public class Forge implements ApplicationListener {
                 touchDown(0,0,0,0);
                 return fling(0,1000);
             }
-
+            if(keyCode == Keys.BACK){
+                if (destroyThis)
+                    deviceAdapter.exit();
+                else if(onHomeScreen())
+                    back();
+            }
             if (keyInputAdapter == null) {
                 if (KeyInputAdapter.isModifierKey(keyCode)) {
                     return false; //don't process modifiers keys for unknown adapter
