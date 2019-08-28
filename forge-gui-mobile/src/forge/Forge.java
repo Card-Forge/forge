@@ -175,7 +175,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
-        if(destroyThis)
+        if(destroyThis && isLandscapeMode())
             return;
         if (screens.size() < 2) {
             exit(false); //prompt to exit if attempting to go back from home screen
@@ -494,7 +494,7 @@ public class Forge implements ApplicationListener {
             if(keyCode == Keys.BACK){
                 if (destroyThis)
                     deviceAdapter.exit();
-                else if(onHomeScreen())
+                else if(onHomeScreen() && isLandscapeMode())
                     back();
             }
             if (keyInputAdapter == null) {

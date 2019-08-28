@@ -270,7 +270,7 @@ public abstract class GuiDownloadService implements Runnable {
             final String filePath = fileDest.getPath();
             final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";
 
-            System.out.println(count + "/" + totalCount + " - ..\\" + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
+            System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
             FileOutputStream fos = null;
             try {
@@ -295,7 +295,7 @@ public abstract class GuiDownloadService implements Runnable {
                         conn.disconnect();
                         if(url.contains("/images/")){
                             isLogged = true;
-                            System.out.println("File not found: ../" + url.substring(url.lastIndexOf("/images/")+1));
+                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         }
                         url = url.substring(0,url.length() - 4) + ".png";
                         imageUrl = new URL(url);
@@ -316,7 +316,7 @@ public abstract class GuiDownloadService implements Runnable {
                     case HttpURLConnection.HTTP_NOT_FOUND:
                         conn.disconnect();
                         if(url.contains("/images/") && !isJPG && !isLogged)
-                            System.out.println("File not found: ../" + url.substring(url.lastIndexOf("/images/")+1));
+                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         break;
                     default:
                         conn.disconnect();
