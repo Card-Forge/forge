@@ -25,6 +25,7 @@ import forge.properties.ForgeConstants;
 import java.io.File;
 import java.io.IOException;
 import java.util.MissingResourceException;
+import java.util.function.Supplier;
 
 
 /**
@@ -35,6 +36,7 @@ import java.util.MissingResourceException;
  */
 public class AudioClip implements IAudioClip {
     private Clip clip;
+    private boolean started;
 
     public static boolean fileExists(String fileName) {
         File fSound = new File(ForgeConstants.SOUND_DIR, fileName);
@@ -52,6 +54,7 @@ public class AudioClip implements IAudioClip {
             AudioFormat format = stream.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
             clip = (Clip) AudioSystem.getLine(info);
+            clip.addLineListener(this::lineStatusChanged);
             clip.open(stream);
             return;
 
@@ -72,13 +75,12 @@ public class AudioClip implements IAudioClip {
         if (null == clip) {
             return;
         }
-        clip.setMicrosecondPosition(0);
-        try {
-            Thread.sleep(SoundSystem.DELAY);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        synchronized (this) {
+            clip.setMicrosecondPosition(0);
+            this.started = false;
+            clip.start();
+            wait(() -> this.started);
         }
-        clip.start();
     }
 
     @Override
@@ -86,13 +88,12 @@ public class AudioClip implements IAudioClip {
         if (null == clip) {
             return;
         }
-        clip.setMicrosecondPosition(0);
-        try {
-            Thread.sleep(SoundSystem.DELAY);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        synchronized (this) {
+            clip.setMicrosecondPosition(0);
+            this.started = false;
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            wait(() -> this.started);
         }
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     @Override
@@ -100,7 +101,9 @@ public class AudioClip implements IAudioClip {
         if (null == clip) {
             return;
         }
-        clip.stop();
+        synchronized (this) {
+            clip.stop();
+        }
     }
 
     @Override
@@ -109,5 +112,25 @@ public class AudioClip implements IAudioClip {
             return false;
         }
         return !clip.isRunning();
+    }
+
+    private void wait(Supplier<Boolean> completed) {
+        final int attempts = 5;
+        for (int i = 0; i < attempts; i++) {
+            if (completed.get()) {
+                break;
+            }
+            try {
+                Thread.sleep(SoundSystem.DELAY);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+                break;
+            }
+        }
+    }
+
+    private void lineStatusChanged(LineEvent line) {
+        LineEvent.Type status = line.getType();
+        this.started |= status == LineEvent.Type.START;
     }
 }
