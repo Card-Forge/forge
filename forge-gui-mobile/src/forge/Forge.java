@@ -177,14 +177,14 @@ public class Forge implements ApplicationListener {
 
     public static void adjustHeightModifier(float DisplayW, float DisplayH) {
         if(isLandscapeMode())
-        {
+        {//TODO: Fullscreen support for Display without screen controls
             float aspectratio = DisplayW / DisplayH;
             if(aspectratio > 1.82f) {/* extra wide */
                 setHeightModifier(200.0f);
                 extrawide = "extrawide";
             }
             else if(aspectratio > 1.7f) {/* wide */
-                setHeightModifier(60.0f);
+                setHeightModifier(100.0f);
                 extrawide = "wide";
             }
         }
