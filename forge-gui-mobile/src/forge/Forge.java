@@ -179,8 +179,8 @@ public class Forge implements ApplicationListener {
         if(isLandscapeMode())
         {
             float aspectratio = DisplayW / DisplayH;
-            if(aspectratio > 1.8f) {/* extra wide */
-                setHeightModifier(100.0f);
+            if(aspectratio > 1.82f) {/* extra wide */
+                setHeightModifier(200.0f);
                 extrawide = "extrawide";
             }
             else if(aspectratio > 1.7f) {/* wide */
