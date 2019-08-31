@@ -3,7 +3,6 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
-import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
