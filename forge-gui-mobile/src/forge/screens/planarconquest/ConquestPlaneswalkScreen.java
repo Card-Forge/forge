@@ -46,9 +46,9 @@ public class ConquestPlaneswalkScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         planeSelector.setBounds(0, startY, width, height - startY);
-
+        float btnMod = Forge.extrawide.equals("extrawide") ? 1.5f : 2.5f;
         float buttonWidth = width * 0.6f;
-        float buttonHeight = btnPlaneswalk.getFont().getCapHeight() * 2.5f;
+        float buttonHeight = btnPlaneswalk.getFont().getCapHeight() * btnMod;
         btnPlaneswalk.setBounds((width - buttonWidth) / 2, height - buttonHeight - PADDING, buttonWidth, buttonHeight);
     }
 

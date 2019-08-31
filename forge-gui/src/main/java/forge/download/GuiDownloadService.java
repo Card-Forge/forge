@@ -255,6 +255,8 @@ public abstract class GuiDownloadService implements Runnable {
         byte[] buffer = new byte[1024];
 
         for (Entry<String, String> kv : files.entrySet()) {
+            boolean isJPG = true;
+            boolean isLogged = false;
             if (cancel) {//stop prevent sleep
                 GuiBase.getInterface().preventSystemSleep(false);
                 break; }
@@ -265,8 +267,10 @@ public abstract class GuiDownloadService implements Runnable {
             //decode URL Key
             String decodedKey = URLDecoder.decode(kv.getKey());
             final File fileDest = new File(decodedKey);
+            final String filePath = fileDest.getPath();
+            final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";
 
-            System.out.println(count + "/" + totalCount + " - " + fileDest);
+            System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
             FileOutputStream fos = null;
             try {
@@ -287,8 +291,12 @@ public abstract class GuiDownloadService implements Runnable {
                     // if file is not found and this is a JPG, give PNG a shot...
                     if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg")))
                     {
+                        isJPG = false;
                         conn.disconnect();
-                        System.out.println("  File not found: " + url);
+                        if(url.contains("/images/")){
+                            isLogged = true;
+                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
+                        }
                         url = url.substring(0,url.length() - 4) + ".png";
                         imageUrl = new URL(url);
                         conn = (HttpURLConnection) imageUrl.openConnection(p);
@@ -307,7 +315,8 @@ public abstract class GuiDownloadService implements Runnable {
                         break;
                     case HttpURLConnection.HTTP_NOT_FOUND:
                         conn.disconnect();
-                        System.out.println("  File not found: " + url);
+                        if(url.contains("/images/") && !isJPG && !isLogged)
+                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         break;
                     default:
                         conn.disconnect();

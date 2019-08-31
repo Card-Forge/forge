@@ -3,7 +3,6 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
-import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -508,10 +507,20 @@ public class MatchScreen extends FScreen {
                 float w = getWidth() - x;
 
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane()) //TODO: scale BG to correct aspect ratio/crop center
-                    setPlanarBG(g, getPlaneName(), x, y, w, ForgeConstants.isGdxPortLandscape ? getHeight() : midField);
-                else
-                    g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+                        && hasActivePlane())
+                    setPlanarBG(g, getPlaneName(), x, y, w, midField);
+                else {
+                    float bgFullWidth;
+                    float scaledbgHeight;
+                    float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
+                    bgFullWidth = bgHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
+                    if (bgFullWidth < w) {
+                        scaledbgHeight = w * (bgHeight / bgFullWidth);
+                        bgFullWidth = w;
+                        bgHeight = scaledbgHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_MATCH, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                }
             }
         }
 
@@ -649,245 +658,799 @@ public class MatchScreen extends FScreen {
             return false;
         }
         private void setPlanarBG(Graphics g, String planeName, float x, float y, float w, float midField ){
+            float planeFullWidth;
+            float scaledPlaneHeight;
+            float planeHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
             switch (planeName) {
-                case "Academy at Tolaria West":
-                    g.drawImage(FSkinTexture.BG_PLANE1, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Agyrem":
-                    g.drawImage(FSkinTexture.BG_PLANE2, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Akoum":
-                    g.drawImage(FSkinTexture.BG_PLANE3, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Aretopolis":
-                    g.drawImage(FSkinTexture.BG_PLANE4, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Astral Arena":
-                    g.drawImage(FSkinTexture.BG_PLANE5, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Bant":
-                    g.drawImage(FSkinTexture.BG_PLANE6, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Bloodhill Bastion":
-                    g.drawImage(FSkinTexture.BG_PLANE7, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Cliffside Market":
-                    g.drawImage(FSkinTexture.BG_PLANE8, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Edge of Malacol":
-                    g.drawImage(FSkinTexture.BG_PLANE9, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Eloren Wilds":
-                    g.drawImage(FSkinTexture.BG_PLANE10, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Feeding Grounds":
-                    g.drawImage(FSkinTexture.BG_PLANE11, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Fields of Summer":
-                    g.drawImage(FSkinTexture.BG_PLANE12, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Furnace Layer":
-                    g.drawImage(FSkinTexture.BG_PLANE13, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Gavony":
-                    g.drawImage(FSkinTexture.BG_PLANE14, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Glen Elendra":
-                    g.drawImage(FSkinTexture.BG_PLANE15, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Glimmervoid Basin":
-                    g.drawImage(FSkinTexture.BG_PLANE16, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Goldmeadow":
-                    g.drawImage(FSkinTexture.BG_PLANE17, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grand Ossuary":
-                    g.drawImage(FSkinTexture.BG_PLANE18, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grixis":
-                    g.drawImage(FSkinTexture.BG_PLANE19, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grove of the Dreampods":
-                    g.drawImage(FSkinTexture.BG_PLANE20, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Hedron Fields of Agadeem":
-                    g.drawImage(FSkinTexture.BG_PLANE21, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Immersturm":
-                    g.drawImage(FSkinTexture.BG_PLANE22, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Isle of Vesuva":
-                    g.drawImage(FSkinTexture.BG_PLANE23, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Izzet Steam Maze":
-                    g.drawImage(FSkinTexture.BG_PLANE24, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Jund":
-                    g.drawImage(FSkinTexture.BG_PLANE25, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kessig":
-                    g.drawImage(FSkinTexture.BG_PLANE26, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kharasha Foothills":
-                    g.drawImage(FSkinTexture.BG_PLANE27, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kilnspire District":
-                    g.drawImage(FSkinTexture.BG_PLANE28, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Krosa":
-                    g.drawImage(FSkinTexture.BG_PLANE29, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Lair of the Ashen Idol":
-                    g.drawImage(FSkinTexture.BG_PLANE30, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Lethe Lake":
-                    g.drawImage(FSkinTexture.BG_PLANE31, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Llanowar":
-                    g.drawImage(FSkinTexture.BG_PLANE32, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Minamo":
-                    g.drawImage(FSkinTexture.BG_PLANE33, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Mount Keralia":
-                    g.drawImage(FSkinTexture.BG_PLANE34, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Murasa":
-                    g.drawImage(FSkinTexture.BG_PLANE35, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Naar Isle":
-                    g.drawImage(FSkinTexture.BG_PLANE36, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Naya":
-                    g.drawImage(FSkinTexture.BG_PLANE37, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Nephalia":
-                    g.drawImage(FSkinTexture.BG_PLANE38, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Norn's Dominion":
-                    g.drawImage(FSkinTexture.BG_PLANE39, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Onakke Catacomb":
-                    g.drawImage(FSkinTexture.BG_PLANE40, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Orochi Colony":
-                    g.drawImage(FSkinTexture.BG_PLANE41, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Orzhova":
-                    g.drawImage(FSkinTexture.BG_PLANE42, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Otaria":
-                    g.drawImage(FSkinTexture.BG_PLANE43, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Panopticon":
-                    g.drawImage(FSkinTexture.BG_PLANE44, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Pools of Becoming":
-                    g.drawImage(FSkinTexture.BG_PLANE45, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Prahv":
-                    g.drawImage(FSkinTexture.BG_PLANE46, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Quicksilver Sea":
-                    g.drawImage(FSkinTexture.BG_PLANE47, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Raven's Run":
-                    g.drawImage(FSkinTexture.BG_PLANE48, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sanctum of Serra":
-                    g.drawImage(FSkinTexture.BG_PLANE49, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sea of Sand":
-                    g.drawImage(FSkinTexture.BG_PLANE50, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Selesnya Loft Gardens":
-                    g.drawImage(FSkinTexture.BG_PLANE51, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Shiv":
-                    g.drawImage(FSkinTexture.BG_PLANE52, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Skybreen":
-                    g.drawImage(FSkinTexture.BG_PLANE53, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sokenzan":
-                    g.drawImage(FSkinTexture.BG_PLANE54, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stairs to Infinity":
-                    g.drawImage(FSkinTexture.BG_PLANE55, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stensia":
-                    g.drawImage(FSkinTexture.BG_PLANE56, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stronghold Furnace":
-                    g.drawImage(FSkinTexture.BG_PLANE57, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Takenuma":
-                    g.drawImage(FSkinTexture.BG_PLANE58, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Tazeem":
-                    g.drawImage(FSkinTexture.BG_PLANE59, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Aether Flues":
-                    g.drawImage(FSkinTexture.BG_PLANE60, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Dark Barony":
-                    g.drawImage(FSkinTexture.BG_PLANE61, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Eon Fog":
-                    g.drawImage(FSkinTexture.BG_PLANE62, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Fourth Sphere":
-                    g.drawImage(FSkinTexture.BG_PLANE63, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Great Forest":
-                    g.drawImage(FSkinTexture.BG_PLANE64, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Hippodrome":
-                    g.drawImage(FSkinTexture.BG_PLANE65, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Maelstrom":
-                    g.drawImage(FSkinTexture.BG_PLANE66, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Zephyr Maze":
-                    g.drawImage(FSkinTexture.BG_PLANE67, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Trail of the Mage-Rings":
-                    g.drawImage(FSkinTexture.BG_PLANE68, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Truga Jungle":
-                    g.drawImage(FSkinTexture.BG_PLANE69, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Turri Island":
-                    g.drawImage(FSkinTexture.BG_PLANE70, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Undercity Reaches":
-                    g.drawImage(FSkinTexture.BG_PLANE71, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Velis Vel":
-                    g.drawImage(FSkinTexture.BG_PLANE72, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Windriddle Palaces":
-                    g.drawImage(FSkinTexture.BG_PLANE73, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Tember City":
-                    g.drawImage(FSkinTexture.BG_PLANE74, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Celestine Reef":
-                    g.drawImage(FSkinTexture.BG_PLANE75, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Horizon Boughs":
-                    g.drawImage(FSkinTexture.BG_PLANE76, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Mirrored Depths":
-                    g.drawImage(FSkinTexture.BG_PLANE77, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Talon Gates":
-                    g.drawImage(FSkinTexture.BG_PLANE78, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
+                case "Academy at Tolaria West": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE1.getWidth() / FSkinTexture.BG_PLANE1.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE1, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                    break;
+                case "Agyrem": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE2.getWidth() / FSkinTexture.BG_PLANE2.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE2, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Akoum": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE3.getWidth() / FSkinTexture.BG_PLANE3.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE3, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Aretopolis": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE4.getWidth() / FSkinTexture.BG_PLANE4.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE4, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Astral Arena": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE5.getWidth() / FSkinTexture.BG_PLANE5.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE5, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Bant": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE6.getWidth() / FSkinTexture.BG_PLANE6.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE6, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Bloodhill Bastion": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE7.getWidth() / FSkinTexture.BG_PLANE7.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE7, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Cliffside Market": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE8.getWidth() / FSkinTexture.BG_PLANE8.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE8, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Edge of Malacol": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE9.getWidth() / FSkinTexture.BG_PLANE9.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE9, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Eloren Wilds": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE10.getWidth() / FSkinTexture.BG_PLANE10.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE10, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Feeding Grounds": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE11.getWidth() / FSkinTexture.BG_PLANE11.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE11, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Fields of Summer": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE12.getWidth() / FSkinTexture.BG_PLANE12.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE12, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Furnace Layer": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE13.getWidth() / FSkinTexture.BG_PLANE13.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE13, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Gavony": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE14.getWidth() / FSkinTexture.BG_PLANE14.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE14, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Glen Elendra": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE15.getWidth() / FSkinTexture.BG_PLANE15.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE15, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Glimmervoid Basin": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE16.getWidth() / FSkinTexture.BG_PLANE16.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE16, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Goldmeadow": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE17.getWidth() / FSkinTexture.BG_PLANE17.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE17, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Grand Ossuary": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE18.getWidth() / FSkinTexture.BG_PLANE18.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE18, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Grixis": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE19.getWidth() / FSkinTexture.BG_PLANE19.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE19, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Grove of the Dreampods": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE20.getWidth() / FSkinTexture.BG_PLANE20.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE20, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Hedron Fields of Agadeem": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE21.getWidth() / FSkinTexture.BG_PLANE21.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE21, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Immersturm": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE22.getWidth() / FSkinTexture.BG_PLANE22.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE22, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Isle of Vesuva": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE23.getWidth() / FSkinTexture.BG_PLANE23.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE23, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Izzet Steam Maze": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE24.getWidth() / FSkinTexture.BG_PLANE24.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE24, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Jund": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE25.getWidth() / FSkinTexture.BG_PLANE25.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE25, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Kessig": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE26.getWidth() / FSkinTexture.BG_PLANE26.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE26, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Kharasha Foothills": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE27.getWidth() / FSkinTexture.BG_PLANE27.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE27, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Kilnspire District": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE28.getWidth() / FSkinTexture.BG_PLANE28.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE28, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Krosa": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE29.getWidth() / FSkinTexture.BG_PLANE29.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE29, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Lair of the Ashen Idol": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE30.getWidth() / FSkinTexture.BG_PLANE30.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE30, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Lethe Lake": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE31.getWidth() / FSkinTexture.BG_PLANE31.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE31, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Llanowar": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE32.getWidth() / FSkinTexture.BG_PLANE32.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE32, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Minamo": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE33.getWidth() / FSkinTexture.BG_PLANE33.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE33, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Mount Keralia": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE34.getWidth() / FSkinTexture.BG_PLANE34.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE34, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Murasa": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE35.getWidth() / FSkinTexture.BG_PLANE35.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE35, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Naar Isle": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE36.getWidth() / FSkinTexture.BG_PLANE36.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE36, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Naya": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE37.getWidth() / FSkinTexture.BG_PLANE37.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE37, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Nephalia": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE38.getWidth() / FSkinTexture.BG_PLANE38.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE38, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Norn's Dominion": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE39.getWidth() / FSkinTexture.BG_PLANE39.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE39, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Onakke Catacomb": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE40.getWidth() / FSkinTexture.BG_PLANE40.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE40, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Orochi Colony": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE41.getWidth() / FSkinTexture.BG_PLANE41.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE41, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Orzhova": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE42.getWidth() / FSkinTexture.BG_PLANE42.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE42, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Otaria": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE43.getWidth() / FSkinTexture.BG_PLANE43.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE43, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Panopticon": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE44.getWidth() / FSkinTexture.BG_PLANE44.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE44, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Pools of Becoming": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE45.getWidth() / FSkinTexture.BG_PLANE45.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE45, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Prahv": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE46.getWidth() / FSkinTexture.BG_PLANE46.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE46, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Quicksilver Sea": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE47.getWidth() / FSkinTexture.BG_PLANE47.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE47, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Raven's Run": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE48.getWidth() / FSkinTexture.BG_PLANE48.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE48, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Sanctum of Serra": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE49.getWidth() / FSkinTexture.BG_PLANE49.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE49, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Sea of Sand": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE50.getWidth() / FSkinTexture.BG_PLANE50.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE50, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Selesnya Loft Gardens": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE51.getWidth() / FSkinTexture.BG_PLANE51.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE51, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Shiv": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE52.getWidth() / FSkinTexture.BG_PLANE52.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE52, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Skybreen": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE53.getWidth() / FSkinTexture.BG_PLANE53.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE53, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Sokenzan": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE54.getWidth() / FSkinTexture.BG_PLANE54.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE54, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Stairs to Infinity": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE55.getWidth() / FSkinTexture.BG_PLANE55.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE55, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Stensia": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE56.getWidth() / FSkinTexture.BG_PLANE56.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE56, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Stronghold Furnace": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE57.getWidth() / FSkinTexture.BG_PLANE57.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE57, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Takenuma": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE58.getWidth() / FSkinTexture.BG_PLANE58.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE58, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Tazeem": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE59.getWidth() / FSkinTexture.BG_PLANE59.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE59, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Aether Flues": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE60.getWidth() / FSkinTexture.BG_PLANE60.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE60, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Dark Barony": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE61.getWidth() / FSkinTexture.BG_PLANE61.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE61, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Eon Fog": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE62.getWidth() / FSkinTexture.BG_PLANE62.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE62, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Fourth Sphere": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE63.getWidth() / FSkinTexture.BG_PLANE63.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE63, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Great Forest": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE64.getWidth() / FSkinTexture.BG_PLANE64.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE64, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Hippodrome": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE65.getWidth() / FSkinTexture.BG_PLANE65.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE65, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Maelstrom": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE66.getWidth() / FSkinTexture.BG_PLANE66.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE66, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "The Zephyr Maze": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE67.getWidth() / FSkinTexture.BG_PLANE67.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE67, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Trail of the Mage-Rings": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE68.getWidth() / FSkinTexture.BG_PLANE68.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE68, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Truga Jungle": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE69.getWidth() / FSkinTexture.BG_PLANE69.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE69, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Turri Island": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE70.getWidth() / FSkinTexture.BG_PLANE70.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE70, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Undercity Reaches": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE71.getWidth() / FSkinTexture.BG_PLANE71.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE71, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Velis Vel": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE72.getWidth() / FSkinTexture.BG_PLANE72.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE72, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Windriddle Palaces": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE73.getWidth() / FSkinTexture.BG_PLANE73.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE73, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Tember City": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE74.getWidth() / FSkinTexture.BG_PLANE74.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE74, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Celestine Reef": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE75.getWidth() / FSkinTexture.BG_PLANE75.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE75, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Horizon Boughs": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE76.getWidth() / FSkinTexture.BG_PLANE76.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE76, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Mirrored Depths": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE77.getWidth() / FSkinTexture.BG_PLANE77.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE77, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
+                case "Talon Gates": {
+                    planeFullWidth = planeHeight * FSkinTexture.BG_PLANE78.getWidth() / FSkinTexture.BG_PLANE78.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_PLANE78, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                }
+                break;
 
                 default: {
-                    //draw default
-                    g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+                    planeFullWidth = planeHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
+                    if (planeFullWidth < w) {
+                        scaledPlaneHeight = w * (planeHeight / planeFullWidth);
+                        planeFullWidth = w;
+                        planeHeight = scaledPlaneHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_MATCH, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
                 }
             }
         }
