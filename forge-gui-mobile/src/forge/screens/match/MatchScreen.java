@@ -669,9 +669,9 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE1, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE1, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
-                    break;
+                break;
                 case "Agyrem": {
                     planeFullWidth = planeHeight * FSkinTexture.BG_PLANE2.getWidth() / FSkinTexture.BG_PLANE2.getHeight();
                     if (planeFullWidth < w) {
@@ -679,7 +679,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE2, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE2, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Akoum": {
@@ -689,7 +689,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE3, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE3, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Aretopolis": {
@@ -699,7 +699,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE4, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE4, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Astral Arena": {
@@ -709,7 +709,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE5, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE5, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Bant": {
@@ -719,7 +719,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE6, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE6, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Bloodhill Bastion": {
@@ -729,7 +729,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE7, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE7, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Cliffside Market": {
@@ -739,7 +739,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE8, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE8, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Edge of Malacol": {
@@ -749,7 +749,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE9, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE9, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Eloren Wilds": {
@@ -759,7 +759,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE10, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE10, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Feeding Grounds": {
@@ -769,7 +769,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE11, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE11, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Fields of Summer": {
@@ -779,7 +779,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE12, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE12, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Furnace Layer": {
@@ -789,7 +789,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE13, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE13, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Gavony": {
@@ -799,7 +799,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE14, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE14, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Glen Elendra": {
@@ -809,7 +809,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE15, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE15, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Glimmervoid Basin": {
@@ -819,7 +819,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE16, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE16, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Goldmeadow": {
@@ -829,7 +829,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE17, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE17, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Grand Ossuary": {
@@ -839,7 +839,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE18, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE18, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Grixis": {
@@ -849,7 +849,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE19, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE19, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Grove of the Dreampods": {
@@ -859,7 +859,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE20, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE20, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Hedron Fields of Agadeem": {
@@ -869,7 +869,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE21, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE21, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Immersturm": {
@@ -879,7 +879,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE22, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE22, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Isle of Vesuva": {
@@ -889,7 +889,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE23, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE23, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Izzet Steam Maze": {
@@ -899,7 +899,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE24, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE24, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Jund": {
@@ -909,7 +909,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE25, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE25, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Kessig": {
@@ -919,7 +919,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE26, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE26, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Kharasha Foothills": {
@@ -929,7 +929,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE27, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE27, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Kilnspire District": {
@@ -939,7 +939,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE28, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE28, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Krosa": {
@@ -949,7 +949,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE29, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE29, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Lair of the Ashen Idol": {
@@ -959,7 +959,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE30, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE30, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Lethe Lake": {
@@ -969,7 +969,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE31, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE31, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Llanowar": {
@@ -979,7 +979,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE32, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE32, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Minamo": {
@@ -989,7 +989,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE33, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE33, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Mount Keralia": {
@@ -999,7 +999,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE34, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE34, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Murasa": {
@@ -1009,7 +1009,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE35, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE35, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Naar Isle": {
@@ -1019,7 +1019,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE36, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE36, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Naya": {
@@ -1029,7 +1029,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE37, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE37, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Nephalia": {
@@ -1039,7 +1039,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE38, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE38, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Norn's Dominion": {
@@ -1049,7 +1049,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE39, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE39, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Onakke Catacomb": {
@@ -1059,7 +1059,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE40, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE40, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Orochi Colony": {
@@ -1069,7 +1069,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE41, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE41, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Orzhova": {
@@ -1079,7 +1079,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE42, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE42, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Otaria": {
@@ -1089,7 +1089,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE43, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE43, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Panopticon": {
@@ -1099,7 +1099,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE44, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE44, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Pools of Becoming": {
@@ -1109,7 +1109,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE45, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE45, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Prahv": {
@@ -1119,7 +1119,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE46, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE46, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Quicksilver Sea": {
@@ -1129,7 +1129,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE47, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE47, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Raven's Run": {
@@ -1139,7 +1139,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE48, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE48, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Sanctum of Serra": {
@@ -1149,7 +1149,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE49, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE49, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Sea of Sand": {
@@ -1159,7 +1159,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE50, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE50, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Selesnya Loft Gardens": {
@@ -1169,7 +1169,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE51, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE51, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Shiv": {
@@ -1179,7 +1179,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE52, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE52, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Skybreen": {
@@ -1189,7 +1189,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE53, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE53, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Sokenzan": {
@@ -1199,7 +1199,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE54, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE54, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Stairs to Infinity": {
@@ -1209,7 +1209,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE55, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE55, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Stensia": {
@@ -1219,7 +1219,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE56, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE56, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Stronghold Furnace": {
@@ -1229,7 +1229,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE57, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE57, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Takenuma": {
@@ -1239,7 +1239,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE58, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE58, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Tazeem": {
@@ -1249,7 +1249,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE59, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE59, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Aether Flues": {
@@ -1259,7 +1259,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE60, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE60, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Dark Barony": {
@@ -1269,7 +1269,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE61, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE61, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Eon Fog": {
@@ -1279,7 +1279,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE62, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE62, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Fourth Sphere": {
@@ -1289,7 +1289,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE63, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE63, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Great Forest": {
@@ -1299,7 +1299,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE64, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE64, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Hippodrome": {
@@ -1309,7 +1309,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE65, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE65, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Maelstrom": {
@@ -1319,7 +1319,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE66, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE66, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "The Zephyr Maze": {
@@ -1329,7 +1329,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE67, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE67, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Trail of the Mage-Rings": {
@@ -1339,7 +1339,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE68, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE68, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Truga Jungle": {
@@ -1349,7 +1349,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE69, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE69, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Turri Island": {
@@ -1359,7 +1359,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE70, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE70, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Undercity Reaches": {
@@ -1369,7 +1369,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE71, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE71, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Velis Vel": {
@@ -1379,7 +1379,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE72, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE72, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Windriddle Palaces": {
@@ -1389,7 +1389,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE73, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE73, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Tember City": {
@@ -1399,7 +1399,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE74, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE74, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Celestine Reef": {
@@ -1409,7 +1409,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE75, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE75, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Horizon Boughs": {
@@ -1419,7 +1419,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE76, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE76, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Mirrored Depths": {
@@ -1429,7 +1429,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE77, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE77, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
                 case "Talon Gates": {
@@ -1439,7 +1439,7 @@ public class MatchScreen extends FScreen {
                         planeFullWidth = w;
                         planeHeight = scaledPlaneHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_PLANE78, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
+                    g.drawImage(FSkinTexture.BG_PLANE78, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
                 }
                 break;
 

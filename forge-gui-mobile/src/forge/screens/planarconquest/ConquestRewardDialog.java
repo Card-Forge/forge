@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.animation.ForgeAnimation;
@@ -60,10 +61,22 @@ public class ConquestRewardDialog extends FScrollPane {
             columnCount = 1;
         }
         else if (cardCount < 5) {
-            columnCount = 2;
+            if (Forge.extrawide.equals("default"))
+                columnCount = 2;
+            else {
+                if (cardCount == 4)
+                    columnCount = 4;
+                else
+                    columnCount = 3;
+            }
         }
         else {
-            columnCount = 3;
+            if (Forge.extrawide.equals("extrawide"))
+                columnCount = 5;
+            else if (Forge.extrawide.equals("wide"))
+                columnCount = 4;
+            else
+                columnCount = 3;
         }
 
         animation = new CardRevealAnimation();
@@ -230,7 +243,10 @@ public class ConquestRewardDialog extends FScrollPane {
                 //ensure current card in view
                 if (getScrollHeight() > getHeight() && index < cardCount) {
                     CardRevealer currentCard = cardRevealers.get(index);
-                    scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
+                    if (!Forge.extrawide.equals("default"))
+                        scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
+                    else
+                        scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
                 }
             }
 
