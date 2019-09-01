@@ -179,17 +179,11 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddPower")) {
             addP = params.get("AddPower");
             powerBonus = AbilityUtils.calculateAmount(hostCard, addP, stAb, true);
-            if (!StringUtils.isNumeric(addP) && !addP.equals("AffectedX")) {
-                se.setXValue(powerBonus);
-            }
         }
 
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
             toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb, true);
-            if (!StringUtils.isNumeric(addT) && !addT.equals("AffectedX")) {
-                se.setYValue(toughnessBonus);
-            }
         }
 
         if (params.containsKey("KeywordMultiplier")) {
@@ -547,14 +541,11 @@ public final class StaticAbilityContinuous {
             if (layer == StaticAbilityLayer.MODIFYPT) {
                 if (addP.startsWith("AffectedX")) {
                     powerBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addP));
-                    se.addXMapValue(affectedCard, powerBonus);
                 }
                 if (addT.startsWith("AffectedX")) {
                     toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
-                    se.addXMapValue(affectedCard, toughnessBonus);
                 }
-                affectedCard.addSemiPermanentPowerBoost(powerBonus, false);
-                affectedCard.addSemiPermanentToughnessBoost(toughnessBonus, false);
+                affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp());
             }
 
             // add keywords

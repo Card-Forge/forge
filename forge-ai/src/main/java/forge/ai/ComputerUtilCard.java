@@ -1601,8 +1601,8 @@ public class ComputerUtilCard {
         }
 
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
-        pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
-        pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
+        pumped.setPTBoost(c.getPTBoostMap());
+        pumped.addPTBoost(power + berserkPower, toughness, timestamp);
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
@@ -1648,6 +1648,8 @@ public class ComputerUtilCard {
         }
         list.add(vCard); // account for the static abilities that may be present on the card itself
         for (final Card c : list) {
+            // remove old boost that might be copied
+            vCard.removePTBoost(c.getTimestamp());
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
@@ -1663,26 +1665,25 @@ public class ComputerUtilCard {
                 if (!vCard.isValid(valid, c.getController(), c, null)) {
                     continue;
                 }
+                int att = 0;
                 if (params.containsKey("AddPower")) {
                     String addP = params.get("AddPower");
-                    int att = 0;
                     if (addP.equals("AffectedX")) {
                         att = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addP));
                     } else {
                         att = AbilityUtils.calculateAmount(c, addP, stAb);
                     }
-                    vCard.addTempPowerBoost(att);
                 }
+                int def = 0;
                 if (params.containsKey("AddToughness")) {
                     String addT = params.get("AddToughness");
-                    int def = 0;
                     if (addT.equals("AffectedY")) {
                         def = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addT));
                     } else {
                         def = AbilityUtils.calculateAmount(c, addT, stAb);
                     }
-                    vCard.addTempToughnessBoost(def);
                 }
+                vCard.addPTBoost(att, def, c.getTimestamp());
             }
         }
     }
