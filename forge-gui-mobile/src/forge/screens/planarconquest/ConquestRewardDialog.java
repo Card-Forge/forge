@@ -63,8 +63,12 @@ public class ConquestRewardDialog extends FScrollPane {
         else if (cardCount < 5) {
             if (Forge.extrawide.equals("default"))
                 columnCount = 2;
-            else
-                columnCount = 5;
+            else {
+                if(cardCount == 4)
+                    columnCount = 4;
+                else
+                    columnCount = 3;
+            }
         }
         else {
             if (Forge.extrawide.equals("extrawide"))
