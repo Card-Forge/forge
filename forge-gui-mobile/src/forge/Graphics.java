@@ -535,7 +535,16 @@ public class Graphics {
     }
 
     public void drawImage(FImage image, float x, float y, float w, float h) {
+        drawImage(image, x, y, w, h, false);
+    }
+    public void drawImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay) {
         image.draw(this, x, y, w, h);
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
     }
     public void drawImage(Texture image, float x, float y, float w, float h) {
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
