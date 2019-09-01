@@ -195,6 +195,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     // stack of set power/toughness
     private Map<Long, Pair<Integer,Integer>> newPT = Maps.newTreeMap();
     private Map<Long, Pair<Integer,Integer>> newPTCharacterDefining = Maps.newTreeMap();
+    private Map<Long, Pair<Integer,Integer>> boostPT = Maps.newTreeMap();
+
     private String basePowerString = null;
     private String baseToughnessString = null;
     private String oracleText = "";
@@ -207,12 +209,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int regeneratedThisTurn = 0;
 
     private int turnInZone;
-
-    private int tempPowerBoost = 0;
-    private int tempToughnessBoost = 0;
-
-    private int semiPermanentPowerBoost = 0;
-    private int semiPermanentToughnessBoost = 0;
 
     private int xManaCostPaid = 0;
     private Map<String, Integer> xManaCostPaidByColor;
@@ -3343,7 +3339,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final StatBreakdown getUnswitchedPowerBreakdown() {
-        return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getSemiPermanentPowerBoost(), getPowerBonusFromCounters());
+        return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
     }
     public final int getUnswitchedPower() {
         return getUnswitchedPowerBreakdown().getTotal();
@@ -3380,31 +3376,28 @@ public class Card extends GameEntity implements Comparable<Card> {
     public static class StatBreakdown {
         public final int currentValue;
         public final int tempBoost;
-        public final int semiPermanentBoost;
         public final int bonusFromCounters;
         public StatBreakdown() {
             this.currentValue = 0;
             this.tempBoost = 0;
-            this.semiPermanentBoost = 0;
             this.bonusFromCounters = 0;
         }
-        public StatBreakdown(int currentValue, int tempBoost, int semiPermanentBoost, int bonusFromCounters){
+        public StatBreakdown(int currentValue, int tempBoost, int bonusFromCounters){
             this.currentValue = currentValue;
             this.tempBoost = tempBoost;
-            this.semiPermanentBoost = semiPermanentBoost;
             this.bonusFromCounters = bonusFromCounters;
         }
         public int getTotal() {
-            return currentValue + tempBoost + semiPermanentBoost + bonusFromCounters;
+            return currentValue + tempBoost + bonusFromCounters;
         }
         @Override
         public String toString() {
-            return TextUtil.concatWithSpace("c:"+String.valueOf(currentValue),"tb:"+String.valueOf(tempBoost), "spb:"+String.valueOf(semiPermanentBoost),"bfc:"+String.valueOf(bonusFromCounters));
+            return TextUtil.concatWithSpace("c:"+String.valueOf(currentValue),"tb:"+String.valueOf(tempBoost),"bfc:"+String.valueOf(bonusFromCounters));
         }
     }
 
     public final StatBreakdown getUnswitchedToughnessBreakdown() {
-        return new StatBreakdown(getCurrentToughness(), getTempToughnessBoost(), getSemiPermanentToughnessBoost(), getToughnessBonusFromCounters());
+        return new StatBreakdown(getCurrentToughness(), getTempToughnessBoost(), getToughnessBonusFromCounters());
     }
     public final int getUnswitchedToughness() {
         return getUnswitchedToughnessBreakdown().getTotal();
@@ -3465,60 +3458,42 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
-        return tempPowerBoost;
+        int result = 0;
+        for (Pair<Integer, Integer> pair : boostPT.values()) {
+            if (pair.getLeft() != null) {
+                result += pair.getLeft();
+            }
+        }
+        return result;
     }
 
     public final int getTempToughnessBoost() {
-        return tempToughnessBoost;
-    }
-
-    public final void addTempPowerBoost(final int n) {
-        if (n == 0) { return; }
-        tempPowerBoost += n;
-        currentState.getView().updatePower(this);
-    }
-
-    public final void addTempToughnessBoost(final int n) {
-        if (n == 0) { return; }
-        tempToughnessBoost += n;
-        currentState.getView().updateToughness(this);
-    }
-
-    // for cards like Glorious Anthem, etc.
-    public final int getSemiPermanentPowerBoost() {
-        return semiPermanentPowerBoost;
-    }
-
-    public final int getSemiPermanentToughnessBoost() {
-        return semiPermanentToughnessBoost;
-    }
-
-    public final void addSemiPermanentPowerBoost(final int n, final boolean updateViewImmediately) {
-        if (n == 0) { return; }
-        semiPermanentPowerBoost += n;
-        if (updateViewImmediately) {
-            currentState.getView().updatePower(this);
+        int result = 0;
+        for (Pair<Integer, Integer> pair : boostPT.values()) {
+            if (pair.getRight() != null) {
+                result += pair.getRight();
+            }
         }
+        return result;
     }
 
-    public final void addSemiPermanentToughnessBoost(final int n, final boolean updateViewImmediately) {
-        if (n == 0) { return; }
-        semiPermanentToughnessBoost += n;
-        if (updateViewImmediately) {
-            currentState.getView().updateToughness(this);
+    public void addPTBoost(final Integer power, final Integer toughness, final long timestamp) {
+        boostPT.put(timestamp, Pair.of(power, toughness));
+    }
+
+    public void removePTBoost(final long timestamp) {
+        boostPT.remove(timestamp);
+    }
+
+    public Map<Long, Pair<Integer, Integer>> getPTBoostMap() {
+        return ImmutableMap.copyOf(boostPT);
+    }
+
+    public void setPTBoost(Map<Long, Pair<Integer, Integer>> map) {
+        this.boostPT.clear();
+        for (Map.Entry<Long, Pair<Integer,Integer>> e : map.entrySet()) {
+            this.boostPT.put(e.getKey(), Pair.of(e.getValue().getLeft(), e.getValue().getRight()));
         }
-    }
-
-    public final void setSemiPermanentPowerBoost(final int n) {
-        if (semiPermanentPowerBoost == n) { return; }
-        semiPermanentPowerBoost = n;
-        currentState.getView().updatePower(this);
-    }
-
-    public final void setSemiPermanentToughnessBoost(final int n) {
-        if (semiPermanentToughnessBoost == n) { return; }
-        semiPermanentToughnessBoost = n;
-        currentState.getView().updateToughness(this);
     }
 
     public final boolean isUntapped() {
