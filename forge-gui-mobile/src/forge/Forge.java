@@ -50,6 +50,8 @@ public class Forge implements ApplicationListener {
     private static final Stack<FScreen> screens = new Stack<FScreen>();
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
+    public static String extrawide = "default";
+    public static  float heigtModifier = 0.0f;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -134,6 +136,9 @@ public class Forge implements ApplicationListener {
             NewGameMenu.getPreferredScreen().open();
         }
 
+        //adjust height modifier
+        adjustHeightModifier(getScreenWidth(), getScreenHeight());
+
         //update landscape mode preference if it doesn't match what the app loaded as
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode) {
             FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode);
@@ -159,6 +164,29 @@ public class Forge implements ApplicationListener {
         if (continuousRenderingCount > 0 && --continuousRenderingCount == 0) {
             //only set continuous rendering to false if all continuous rendering requests have been ended
             Gdx.graphics.setContinuousRendering(false);
+        }
+    }
+
+    public static void setHeightModifier(float height) {
+        heigtModifier = height;
+    }
+
+    public static float getHeightModifier() {
+        return heigtModifier;
+    }
+
+    public static void adjustHeightModifier(float DisplayW, float DisplayH) {
+        if(isLandscapeMode())
+        {//TODO: Fullscreen support for Display without screen controls
+            float aspectratio = DisplayW / DisplayH;
+            if(aspectratio > 1.82f) {/* extra wide */
+                setHeightModifier(200.0f);
+                extrawide = "extrawide";
+            }
+            else if(aspectratio > 1.7f) {/* wide */
+                setHeightModifier(100.0f);
+                extrawide = "wide";
+            }
         }
     }
 
