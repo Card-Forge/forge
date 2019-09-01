@@ -6262,7 +6262,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean removeCanBlockAny(long timestamp) {
-        return canBlockAny.remove(timestamp) != null;
+        return canBlockAny.remove(timestamp);
     }
 
     public boolean canBlockAny() {
