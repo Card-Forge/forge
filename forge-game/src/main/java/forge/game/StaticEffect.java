@@ -47,11 +47,8 @@ public class StaticEffect {
 
     private final Card source;
     private StaticAbility ability;
-    private int keywordNumber = 0;
     private CardCollectionView affectedCards = new CardCollection();
     private List<Player> affectedPlayers = Lists.newArrayList();
-    private int xValue = 0;
-    private int yValue = 0;
     private long timestamp = -1;
 
     private String chosenType;
@@ -88,11 +85,8 @@ public class StaticEffect {
     private StaticEffect makeMappedCopy(GameObjectMap map) {
         StaticEffect copy = new StaticEffect(map.map(this.source));
         copy.ability = this.ability;
-        copy.keywordNumber = this.keywordNumber;
         copy.affectedCards = map.mapCollection(this.affectedCards);
         copy.affectedPlayers  = map.mapList(this.affectedPlayers);
-        copy.xValue = this.xValue;
-        copy.yValue = this.yValue;
         copy.timestamp = this.timestamp;
         copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
@@ -629,29 +623,6 @@ public class StaticEffect {
 
     /**
      * <p>
-     * Setter for the field <code>keywordNumber</code>.
-     * </p>
-     * 
-     * @param i
-     *            a int.
-     */
-    public final void setKeywordNumber(final int i) {
-        this.keywordNumber = i;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>keywordNumber</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getKeywordNumber() {
-        return this.keywordNumber;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>affectedCards</code>.
      * </p>
      * 
@@ -690,52 +661,6 @@ public class StaticEffect {
      */
     public final void setAffectedPlayers(final List<Player> list) {
         this.affectedPlayers = list;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>xValue</code>.
-     * </p>
-     * 
-     * @param x
-     *            a int.
-     */
-    public final void setXValue(final int x) {
-        this.xValue = x;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>xValue</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getXValue() {
-        return this.xValue;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>yValue</code>.
-     * </p>
-     * 
-     * @param y
-     *            a int.
-     */
-    public final void setYValue(final int y) {
-        this.yValue = y;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>yValue</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getYValue() {
-        return this.yValue;
     }
 
     /**
@@ -788,7 +713,6 @@ public class StaticEffect {
 
         String changeColorWordsTo = null;
 
-        int keywordMultiplier = 1;
         boolean setPT = false;
         String[] addHiddenKeywords = null;
         String addColors = null;
@@ -803,15 +727,6 @@ public class StaticEffect {
 
         if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
             setPT = true;
-        }
-
-        if (params.containsKey("KeywordMultiplier")) {
-            String multiplier = params.get("KeywordMultiplier");
-            if (multiplier.equals("X")) {
-                keywordMultiplier = getXValue();
-            } else {
-                keywordMultiplier = Integer.valueOf(multiplier);
-            }
         }
 
         if (params.containsKey("AddHiddenKeyword")) {
@@ -906,9 +821,7 @@ public class StaticEffect {
 
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
-                    for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.removeHiddenExtrinsicKeyword(k);
-                    }
+                    affectedCard.removeHiddenExtrinsicKeyword(k);
                 }
             }
 
@@ -947,6 +860,13 @@ public class StaticEffect {
 
             if (params.containsKey("Goad")) {
                 affectedCard.removeGoad(getTimestamp());
+            }
+
+            if (params.containsKey("CanBlockAny")) {
+                affectedCard.removeCanBlockAny(getTimestamp());
+            }
+            if (params.containsKey("CanBlockAmount")) {
+                affectedCard.removeCanBlockAdditional(getTimestamp());
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

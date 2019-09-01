@@ -123,6 +123,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
+    private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
+    private final Set<Long> canBlockAny = Sets.newHashSet();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -2043,6 +2045,17 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (isGoaded()) {
             sb.append("is goaded by: ").append(Lang.joinHomogenous(getGoaded()));
+            sb.append("\r\n");
+        }
+
+        // maybe move to CardView for better output
+        if (canBlockAny()) {
+            sb.append("CARDNAME can block any number of creatures.");
+            sb.append("\r\n");
+        } else if (!canBlockAdditional.isEmpty()){
+            sb.append("CARDNAME can block an additional ");
+            sb.append(Lang.nounWithNumeral(canBlockAdditional(), "creature"));
+            sb.append(" creatures each combat.");
             sb.append("\r\n");
         }
         // replace triple line feeds with double line feeds
@@ -6223,5 +6236,36 @@ public class Card extends GameEntity implements Comparable<Card> {
         planeswalkerAbilityActivated = 0;
         numberTurnActivations.clear();
         numberTurnActivationsStatic.clear();
+    }
+
+    public void addCanBlockAdditional(int n, long timestamp) {
+        if (n <= 0) {
+            return;
+        }
+        canBlockAdditional.put(timestamp, n);
+    }
+
+    public boolean removeCanBlockAdditional(long timestamp) {
+        return canBlockAdditional.remove(timestamp) != null;
+    }
+    
+    public int canBlockAdditional() {
+        int result = 0;
+        for (Integer v : canBlockAdditional.values()) {
+            result += v;
+        }
+        return result;
+    }
+
+    public void addCanBlockAny(long timestamp) {
+        canBlockAny.add(timestamp);
+    }
+
+    public boolean removeCanBlockAny(long timestamp) {
+        return canBlockAny.remove(timestamp) != null;
+    }
+
+    public boolean canBlockAny() {
+        return !canBlockAny.isEmpty();
     }
 }

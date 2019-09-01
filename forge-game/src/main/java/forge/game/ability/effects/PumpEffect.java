@@ -64,7 +64,15 @@ public class PumpEffect extends SpellAbilityEffect {
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
-        
+
+        if (sa.hasParam("CanBlockAny")) {
+            gameCard.addCanBlockAny(timestamp);
+        }
+        if (sa.hasParam("CanBlockAmount")) {
+            int v = AbilityUtils.calculateAmount(host, sa.getParam("CanBlockAmount"), sa, true);
+            gameCard.addCanBlockAdditional(v, timestamp);
+        }
+
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
@@ -77,6 +85,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     gameCard.removePTBoost(timestamp);
+                    boolean updateText = false;
+                    updateText = gameCard.removeCanBlockAny(timestamp) || updateText;
+                    updateText = gameCard.removeCanBlockAdditional(timestamp) || updateText;
 
                     if (keywords.size() > 0) {
 
@@ -88,6 +99,9 @@ public class PumpEffect extends SpellAbilityEffect {
                         gameCard.removeChangedCardKeywords(timestamp);
                     }
                     gameCard.updatePowerToughnessForView();
+                    if (updateText) {
+                        gameCard.updateAbilityTextForView();
+                    }
 
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }

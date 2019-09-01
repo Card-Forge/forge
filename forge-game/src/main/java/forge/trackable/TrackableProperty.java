@@ -88,7 +88,6 @@ public enum TrackableProperty {
     HasTrample(TrackableTypes.BooleanType),
     YouMayLook(TrackableTypes.BooleanType),
     OpponentMayLook(TrackableTypes.BooleanType),
-    BlockAdditional(TrackableTypes.IntegerType),
     AbilityText(TrackableTypes.StringType),
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),

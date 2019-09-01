@@ -581,16 +581,6 @@ public class CardView extends GameEntityView {
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
-        int blockAdditional = state.getBlockAdditional();
-        if (blockAdditional > 1) {
-            final StringBuilder ab = new StringBuilder();
-            ab.append("CARDNAME can block an additional ");
-            ab.append(blockAdditional);
-            ab.append(" creatures each combat.");
-            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature each combat.", ab.toString());
-            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature each combat.", "");
-            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
-        }
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
@@ -989,9 +979,6 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.HasTrample);
         }
 
-        public int getBlockAdditional() {
-            return get(TrackableProperty.BlockAdditional);
-        }
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
         }
@@ -1005,7 +992,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
             set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
-            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }
 
