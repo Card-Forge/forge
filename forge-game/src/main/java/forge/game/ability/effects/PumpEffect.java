@@ -55,8 +55,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        gameCard.addTempPowerBoost(a);
-        gameCard.addTempToughnessBoost(d);
+        gameCard.addPTBoost(a, d,timestamp);
         gameCard.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
@@ -73,23 +72,18 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    gameCard.addTempPowerBoost(-1 * a);
-                    gameCard.addTempToughnessBoost(-1 * d);
+                    gameCard.removePTBoost(timestamp);
 
                     if (keywords.size() > 0) {
-                        boolean redrawPT = false;
 
                         for (String kw : keywords) {
-                            redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
                             if (kw.startsWith("HIDDEN")) {
                                 gameCard.removeHiddenExtrinsicKeyword(kw);
-                                if (redrawPT) {
-                                    gameCard.updatePowerToughnessForView();
-                                }
                             }
                         }
                         gameCard.removeChangedCardKeywords(timestamp);
                     }
+                    gameCard.updatePowerToughnessForView();
 
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }

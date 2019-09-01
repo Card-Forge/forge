@@ -49,8 +49,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addTempPowerBoost(a);
-            tgtC.addTempToughnessBoost(d);
+            tgtC.addPTBoost(a, d, timestamp);
             tgtC.addChangedCardKeywords(kws, null, false, false, timestamp);
 
             for (String kw : hiddenkws) {
@@ -68,8 +67,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.addTempPowerBoost(-1 * a);
-                        tgtC.addTempToughnessBoost(-1 * d);
+                        tgtC.removePTBoost(timestamp);
                         tgtC.removeChangedCardKeywords(timestamp);
 
                         for (String kw : hiddenkws) {

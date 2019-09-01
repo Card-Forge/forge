@@ -251,8 +251,8 @@ public final class CardUtil {
         }
 
         // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost() + in.getSemiPermanentPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost() + in.getSemiPermanentToughnessBoost());
+        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
+        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
 
         newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
 

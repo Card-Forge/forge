@@ -53,7 +53,6 @@ public class StaticEffect {
     private int xValue = 0;
     private int yValue = 0;
     private long timestamp = -1;
-    private Map<Card, Integer> xValueMap = Maps.newTreeMap();
 
     private String chosenType;
     private Map<String, String> mapParams = Maps.newTreeMap();
@@ -95,7 +94,6 @@ public class StaticEffect {
         copy.xValue = this.xValue;
         copy.yValue = this.yValue;
         copy.timestamp = this.timestamp;
-        copy.xValueMap = this.xValueMap;
         copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
         copy.overwriteTypes = this.overwriteTypes;
@@ -741,29 +739,6 @@ public class StaticEffect {
     }
 
     /**
-     * Store xValue relative to a specific card.
-     * @param affectedCard the card affected
-     * @param xValue the xValue
-     */
-    public final void addXMapValue(final Card affectedCard, final Integer xValue) {
-        if (this.xValueMap.containsKey(affectedCard)) {
-            if (!this.xValueMap.get(affectedCard).equals(xValue)) {
-                this.xValueMap.remove(affectedCard);
-            }
-        }
-        this.xValueMap.put(affectedCard, xValue);
-    }
-
-    /**
-     * Get the xValue for specific card.
-     * @param affectedCard the affected card
-     * @return an int.
-     */
-    public int getXMapValue(Card affectedCard) {
-        return this.xValueMap.get(affectedCard);
-    }
-
-    /**
      * setParams. TODO Write javadoc for this method.
      * 
      * @param params
@@ -813,10 +788,6 @@ public class StaticEffect {
 
         String changeColorWordsTo = null;
 
-        int powerBonus = 0;
-        String addP = "";
-        int toughnessBonus = 0;
-        String addT = "";
         int keywordMultiplier = 1;
         boolean setPT = false;
         String[] addHiddenKeywords = null;
@@ -832,28 +803,6 @@ public class StaticEffect {
 
         if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
             setPT = true;
-        }
-
-        if (params.containsKey("AddPower")) {
-            addP = params.get("AddPower");
-            if (addP.matches("[0-9][0-9]?")) {
-                powerBonus = Integer.valueOf(addP);
-            } else if (addP.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                powerBonus = getXValue();
-            }
-        }
-
-        if (params.containsKey("AddToughness")) {
-            addT = params.get("AddToughness");
-            if (addT.matches("[0-9][0-9]?")) {
-                toughnessBonus = Integer.valueOf(addT);
-            } else if (addT.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                toughnessBonus = getYValue();
-            }
         }
 
         if (params.containsKey("KeywordMultiplier")) {
@@ -934,15 +883,9 @@ public class StaticEffect {
             }
 
             // remove P/T bonus
-            if (addP.startsWith("AffectedX")) {
-                powerBonus = getXMapValue(affectedCard);
-            }
-            if (addT.startsWith("AffectedX")) {
-                toughnessBonus = getXMapValue(affectedCard);
-            }
+            affectedCard.removePTBoost(getTimestamp());
+
             // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1, false);
-            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1, false);
 
             // remove keywords
             // TODO regular keywords currently don't try to use keyword multiplier
