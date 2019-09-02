@@ -1516,13 +1516,9 @@ public class AiController {
             // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
             return true;
         }
-        if ((predictedMana <= totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandBasedEffect) {
-            // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
-            // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
-            return false;
-        }
-
-        return true;
+        // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
+        // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
+        return (predictedMana > totalCMCInHand || !canCastWithLandDrop) && (!hasRelevantAbsOTB || isTapLand) && !hasLandBasedEffect;
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
@@ -1641,12 +1637,8 @@ public class AiController {
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
-        if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
-            // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
-            return true;
-        }
-        
-        return false;
+        // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
+        return spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null;
     }
     
     /**
@@ -1690,16 +1682,11 @@ public class AiController {
                 left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
             }
             System.out.println("aiShouldRun?" + left + comparator + compareTo);
-            if (Expressions.compare(left, comparator, compareTo)) {
-                return true;
-            }
+            return Expressions.compare(left, comparator, compareTo);
         } else if (effect.getMapParams().containsKey("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
-        } else if (sa != null && doTrigger(sa, false)) {
-            return true;
-        }
+        } else return sa != null && doTrigger(sa, false);
 
-        return false;
     }
 
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
@@ -2078,9 +2065,7 @@ public class AiController {
         // AI-specific restrictions specified as activation parameters in spell abilities
         
         if (sa.hasParam("AILifeThreshold")) {
-            if (player.getLife() <= Integer.parseInt(sa.getParam("AILifeThreshold"))) {
-                return false;
-            }
+            return player.getLife() > Integer.parseInt(sa.getParam("AILifeThreshold"));
         }
         
         return true;

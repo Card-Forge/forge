@@ -133,9 +133,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
         final Integer amount = this.convertAmount();
         if (this.payCostFromSource()) {
-            if ((amount != null) && ((source.getCounters(cntrs) - amount) < 0)) {
-                return false;
-            }
+            return (amount == null) || ((source.getCounters(cntrs) - amount) >= 0);
         }
         else {
             List<Card> typeList;
@@ -152,9 +150,7 @@ public class CostRemoveCounter extends CostPartWithList {
                     for (Card c : typeList) {
                         totalCounters += c.getCounters(cntrs);
                     }
-                    if (totalCounters >= amount) {
-                        return true;
-                    }
+                    return totalCounters >= amount;
                     
                 } else {
                     // (default logic) remove X counters from a single permanent

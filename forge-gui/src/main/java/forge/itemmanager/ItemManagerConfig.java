@@ -114,7 +114,7 @@ public enum ItemManagerConfig {
     private Prop<Integer> imageColumnCount;
     private Prop<Integer> viewIndex;
 
-    private ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, boolean hideFilters0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
+    ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, boolean hideFilters0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
         cols = cols0;
         for (ItemColumnConfig colConfig : cols.values()) {
             colConfig.establishDefaults();

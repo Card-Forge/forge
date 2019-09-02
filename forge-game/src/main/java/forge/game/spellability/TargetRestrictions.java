@@ -773,9 +773,7 @@ public class TargetRestrictions {
      * @param portionAllocated the divided portion allocated
      */
     public final void addDividedAllocation(final Object tgt, final Integer portionAllocated) {
-        if (this.dividedMap.containsKey(tgt)) {
-            this.dividedMap.remove(tgt);
-        }
+        this.dividedMap.remove(tgt);
         this.dividedMap.put(tgt, portionAllocated);
     }
 

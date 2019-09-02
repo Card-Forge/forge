@@ -114,8 +114,7 @@ public class TriggerSacrificed extends Trigger {
                 }
             }
 
-            if (!withKeyword)
-                return false;
+            return withKeyword;
         }
 
         return true;

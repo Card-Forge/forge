@@ -31,9 +31,7 @@ public class ReplaceSurveil extends ReplacementEffect {
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard());
         }
 
         return true;

@@ -283,11 +283,7 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 final SpellAbility topStack = game.getStack().peekAbility();
-                if (topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife) {
-                	return true;
-                } else {
-                	return false;
-                }
+                return topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife;
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Burn")) {
@@ -301,11 +297,9 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 if (logic.contains(":")) {
-                    String k[] = logic.split(":");
+                    String[] k = logic.split(":");
                     Integer i = Integer.valueOf(k[1]);
-                    if (ai.getCreaturesInPlay().size() < i) {
-                        return false;
-                    }
+                    return ai.getCreaturesInPlay().size() >= i;
                 }
                 return true;
             } else if (logic.equals("CastFromGraveThisTurn")) {

@@ -320,7 +320,7 @@ public class TokenInfo {
                 if (!CardUtil.isKeywordModifiable(o)) {
                     continue;
                 }
-                String r = new String(o);
+                String r = o;
                 // replace types
                 for (final Map.Entry<String, String> e : typeMap.entrySet()) {
                     final String key = e.getKey();

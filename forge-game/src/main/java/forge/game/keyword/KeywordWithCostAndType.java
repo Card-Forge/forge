@@ -18,7 +18,7 @@ public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndTy
         if (k.length > 2) {
             strType = k[2];
         } else {
-            String n[] = type.split(",");
+            String[] n = type.split(",");
             for (int i = 0; i < n.length; i++) {
                 if (CardType.isACardType(n[i])) {
                     n[i] = n[i].toLowerCase();

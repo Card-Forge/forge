@@ -1061,7 +1061,7 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
+        entity.setCounters(Maps.newEnumMap(CounterType.class));
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
@@ -1107,7 +1107,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
+                    c.setCounters(Maps.newEnumMap(CounterType.class));
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)

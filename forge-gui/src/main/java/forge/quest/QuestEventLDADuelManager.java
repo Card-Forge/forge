@@ -42,7 +42,7 @@ import java.util.List;
 public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface {
 
     private List<Archetype> archetypes;
-    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
+    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
     private GameFormat baseFormat;
 
     public QuestEventLDADuelManager(GameFormat baseFormat){

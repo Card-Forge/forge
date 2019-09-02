@@ -49,9 +49,7 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
-                return false;
-            }
+            return ComputerUtilCost.checkRemoveCounterCost(cost, source);
         } else {
             // don't sac possible blockers
             if (!ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
@@ -63,9 +61,7 @@ public class LifeGainAi extends SpellAbilityAi {
                 skipCheck |= ComputerUtilCost.isSacrificeSelfCost(cost) && !source.isCreature();
 
                 if (!skipCheck) {
-                    if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
-                        return false;
-                    }
+                    return ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa, false);
                 }
             }
         }
@@ -106,13 +102,9 @@ public class LifeGainAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!lifeCritical && !activateForCost
-                && (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)) {
-            return false;
-        }
-
-        return true;
+        return lifeCritical || activateForCost
+                || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                || sa.hasParam("PlayerTurn") || SpellAbilityAi.isSorcerySpeed(sa);
     }
 
     /*
@@ -304,9 +296,7 @@ public class LifeGainAi extends SpellAbilityAi {
                     hasTgt = true;
                 }
             }
-            if (!hasTgt) {
-                return false;
-            }
+            return hasTgt;
         }
         return true;
     }

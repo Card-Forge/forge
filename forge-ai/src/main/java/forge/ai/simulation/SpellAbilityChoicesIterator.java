@@ -49,7 +49,7 @@ public class SpellAbilityChoicesIterator {
             // TODO: Do we need to do something special to support cards that have extra costs
             // when choosing more modes, like Blessed Alliance?
             if (!allowRepeat) {
-                modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);;
+                modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);
             } else {
                 // Note: When allowRepeat is true, it does result in many possibilities being tried.
                 // We should ideally prune some of those at a higher level.

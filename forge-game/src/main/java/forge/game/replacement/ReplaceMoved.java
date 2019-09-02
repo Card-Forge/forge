@@ -105,9 +105,7 @@ public class ReplaceMoved extends ReplacementEffect {
             if (runParams.containsKey("Cause")) {
                 SpellAbility cause = (SpellAbility) runParams.get("Cause");
                 if (cause != null) {
-                    if (cause.isValid(getParam("NotCause").split(","), controller, getHostCard(), null)) {
-                        return false;
-                    }
+                    return !cause.isValid(getParam("NotCause").split(","), controller, getHostCard(), null);
                 }
             }
         }

@@ -17,16 +17,11 @@ public class StaticAbilityCantPutCounter {
             }
         }
 
+        // for the other part
         if (staticAbility.hasParam("ValidCard")) {
-            if (!card.isValid(staticAbility.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
-                return false;
-            }
-        } else if (staticAbility.hasParam("ValidPlayer")) {
-            // for the other part
-            return false;
-        }
+            return card.isValid(staticAbility.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null);
+        } else return !staticAbility.hasParam("ValidPlayer");
 
-        return true;
     }
 
     public static boolean applyCantPutCounter(final StaticAbility staticAbility, final Player player,
@@ -40,15 +35,10 @@ public class StaticAbilityCantPutCounter {
             }
         }
 
+        // for the other part
         if (staticAbility.hasParam("ValidPlayer")) {
-            if (!player.isValid(staticAbility.getParam("ValidPlayer").split(","), hostCard.getController(), hostCard, null)) {
-                return false;
-            }
-        } else if (staticAbility.hasParam("ValidCard")) {
-            // for the other part
-            return false;
-        }
+            return player.isValid(staticAbility.getParam("ValidPlayer").split(","), hostCard.getController(), hostCard, null);
+        } else return !staticAbility.hasParam("ValidCard");
 
-        return true;
     }
 }

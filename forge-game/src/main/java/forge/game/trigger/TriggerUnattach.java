@@ -60,10 +60,8 @@ public class TriggerUnattach extends Trigger {
         }
 
         if (hasParam("ValidAttachment")) {
-            if (!attach.isValid(getParam("ValidAttachment").split(","), getHostCard()
-                    .getController(), getHostCard(), null)) {
-                return false;
-            }
+            return attach.isValid(getParam("ValidAttachment").split(","), getHostCard()
+                    .getController(), getHostCard(), null);
         }
 
         return true;

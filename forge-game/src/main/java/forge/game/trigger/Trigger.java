@@ -284,9 +284,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         if (this.mapParams.containsKey("TurnCount")) {
             int turn = Integer.parseInt(this.mapParams.get("TurnCount"));
-            if (phaseHandler.getTurn() != turn) {
-                return false;
-            }
+            return phaseHandler.getTurn() == turn;
         }
 
         return true;
@@ -356,10 +354,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if ( !meetsCommonRequirements(this.mapParams))
-            return false;
-
-        return true;
+        return meetsCommonRequirements(this.mapParams);
     }
 
 
@@ -382,8 +377,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         String condition = this.mapParams.get("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get("Card");
-            if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
-                return false;
+            return null == moved || moved.isOptionalCostPaid(OptionalCost.AltCost);
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get("Attacked");
             if (attacked == null) {
@@ -391,10 +385,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // ends up being in Defender at that point.
                 attacked = (GameEntity) runParams.get("Defender");
             }
-            if (attacked == null || !attacked.isValid("Player.withMostLife",
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+            return attacked != null && attacked.isValid("Player.withMostLife",
+                    this.getHostCard().getController(), this.getHostCard(), null);
         } else if ("AttackedPlayerWhoAttackedYouLastTurn".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get("Attacked");
             if (attacked == null) {
@@ -411,9 +403,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 }
             }
 
-            if (attacked == null || !valid) {
-                return false;
-            }
+            return attacked != null && valid;
         }
         return true;
     }

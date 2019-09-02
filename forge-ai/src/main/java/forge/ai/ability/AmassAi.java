@@ -23,9 +23,7 @@ public class AmassAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            if (CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterType.P1P1)) <= 0) {
-                return false;
-            }
+            return CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterType.P1P1)) > 0;
         } else {
             final String tokenScript = "b_0_0_zombie_army";
             final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
@@ -57,12 +55,9 @@ public class AmassAi extends SpellAbilityAi {
             //reset static abilities
             game.getAction().checkStaticAbilities(false);
 
-            if (!result) {
-                return false;
-            }
+            return result;
         }
 
-        return true;
     }
 
     @Override

@@ -71,9 +71,7 @@ public class TriggerCounterRemoved extends Trigger {
         if (hasParam("NewCounterAmount")) {
             final String amtString = getParam("NewCounterAmount");
             int amt = Integer.parseInt(amtString);
-            if(amt != addedNewCounterAmount.intValue()) {
-                return false;
-            }
+            return amt == addedNewCounterAmount.intValue();
         }
 
         return true;

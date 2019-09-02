@@ -123,7 +123,7 @@ public final class ImageKeys {
             int index = filename.lastIndexOf('_');
             if (index != -1) {
                 String setlessFilename = filename.substring(0, index);
-                String setCode = filename.substring(index + 1, filename.length());
+                String setCode = filename.substring(index + 1);
                 // try with upper case set
                 file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
                 if (file != null) { return file; }
@@ -133,7 +133,7 @@ public final class ImageKeys {
                 // if there's an art variant try without it
                 if (setlessFilename.matches(".*[0-9]*$")) {
                     file = findFile(dir, setlessFilename.replaceAll("[0-9]*$", ""));
-                    if (file != null) { return file; }
+                    return file;
                 }
             }
         } else if (filename.contains("/")) {
@@ -144,7 +144,7 @@ public final class ImageKeys {
             // try lowering the art index to the minimum for regular cards
             if (setlessFilename.contains(".full")) {
                 file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
-                if (file != null) { return file; }
+                return file;
             }
         }
 

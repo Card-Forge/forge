@@ -147,7 +147,7 @@ public class CardFactoryUtil {
             sbCost.append("— ");
         }
         // get rid of the ": " at the end
-        sbCost.append(costDesc.substring(0, costDesc.length() - 2));
+        sbCost.append(costDesc, 0, costDesc.length() - 2);
 
         StringBuilder sb = new StringBuilder();
         sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
@@ -292,11 +292,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
-        if (c.hasKeyword("CARDNAME can't be countered.") || !c.getCanCounter()) {
-            return false;
-        }
-
-        return true;
+        return !c.hasKeyword("CARDNAME can't be countered.") && c.getCanCounter();
     }
 
     /**
@@ -318,7 +314,7 @@ public class CardFactoryUtil {
         for (KeywordInterface k : c.getKeywords()) {
             final String o = k.getOriginal();
             if (o.startsWith("CantBeCounteredBy")) {
-                final String m[] = o.split(":");
+                final String[] m = o.split(":");
                 if (sa.isValid(m[1].split(","), c.getController(), c, null)) {
                     return false;
                 }
@@ -2186,12 +2182,12 @@ public class CardFactoryUtil {
             final String abStringAfflict = "DB$ LoseLife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
 
-            final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
 
             inst.addTrigger(afflictTrigger);
         } else if (keyword.startsWith("Afterlife")) {
-            final String k[] = keyword.split(":");
+            final String[] k = keyword.split(":");
             final String name = StringUtils.join(k, " ");
 
             final StringBuilder sb = new StringBuilder();
@@ -2435,7 +2431,7 @@ public class CardFactoryUtil {
             final String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
                     + "CounterNum$ 1 | Evolve$ True";
             
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(trigger);
@@ -2731,7 +2727,7 @@ public class CardFactoryUtil {
                     " | TriggerDescription$ Melee (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ MeleeX | NumDef$ MeleeX";
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("MeleeX", "TriggeredPlayersDefenders$Amount");
@@ -2746,7 +2742,7 @@ public class CardFactoryUtil {
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1"
                     + " | ValidTgts$ Creature.attacking+powerLTX"
                     + " | TgtPrompt$ Select target attacking creature with less power";
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("X", "Count$CardPower");
@@ -2854,7 +2850,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Secondary$ True"
                     + " | TriggerZones$ Battlefield | TriggerDescription$ Poisonous " + n + " (" + inst.getReminderText() + ")";
 
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
             final String effect = "DB$ Poison | Defined$ TriggeredTarget | Num$ " + n;
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2902,7 +2898,7 @@ public class CardFactoryUtil {
             final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy" +
                     " | NumAtt$ Rampage" + n + " | NumDef$ Rampage" + n;
 
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
@@ -3070,7 +3066,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Suspend")) {
             //upkeep trigger
-            StringBuilder upkeepTrig = new StringBuilder();;
+            StringBuilder upkeepTrig = new StringBuilder();
 
             upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile ");
             upkeepTrig.append(" | IsPresent$ Card.Self+suspended | PresentZone$ Exile");
@@ -3201,7 +3197,7 @@ public class CardFactoryUtil {
             
             SpellAbility saDelay = AbilityFactory.getAbility(strDelay, card);
             saDelay.setAdditionalAbility("Execute", (AbilitySub) AbilityFactory.getAbility(strSac, card));
-            final Trigger trigger = TriggerHandler.parseTrigger(strTrig.toString(), card, intrinsic);
+            final Trigger trigger = TriggerHandler.parseTrigger(strTrig, card, intrinsic);
             trigger.setOverridingAbility(saDelay);
             inst.addTrigger(trigger);
         }
@@ -3404,7 +3400,7 @@ public class CardFactoryUtil {
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
 
             if (keyword.contains(":")) {
-                final String k[] = keyword.split(":");
+                final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append( cost.isOnlyManaCost() ? " " : "—");
     
@@ -3896,7 +3892,7 @@ public class CardFactoryUtil {
             // Add the Epic effect as a subAbility
             String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Epic$ True";
 
-            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
+            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
 
             newSA.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
             newSA.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
@@ -3964,7 +3960,7 @@ public class CardFactoryUtil {
             // don't use SimpleString there because it does has "and" between cost i dont want that
             costStr = cost.toString();
             // but now it has ": " at the end i want to remove
-            sb.append("| CostDesc$ ").append(costStr.substring(0, costStr.length() - 2));
+            sb.append("| CostDesc$ ").append(costStr, 0, costStr.length() - 2);
             if (!cost.isOnlyManaCost()) {
                 sb.append(".");
             }
@@ -4542,7 +4538,7 @@ public class CardFactoryUtil {
             final StringBuilder sbValid = new StringBuilder();
 
             if (!keyword.equals("Hexproof")) {
-                final String k[] = keyword.split(":");
+                final String[] k = keyword.split(":");
 
                 sbDesc.append(" from ").append(k[2]);
                 sbValid.append("| ValidSource$ ").append(k[1]);

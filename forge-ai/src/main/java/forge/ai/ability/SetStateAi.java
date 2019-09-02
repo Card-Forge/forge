@@ -33,10 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
             return false;
         }
 
-        if("Transform".equals(mode) || "Flip".equals(mode)) {
-            return true;
-        }
-        return false;
+        return "Transform".equals(mode) || "Flip".equals(mode);
     }
 
     @Override
@@ -92,9 +89,7 @@ public class SetStateAi extends SpellAbilityAi {
                     }
                 }
 
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
-                    return false;
-                }
+                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
             }
         } else if ("TurnFace".equals(mode)) {
             if (!sa.usesTargeting()) {
@@ -123,9 +118,7 @@ public class SetStateAi extends SpellAbilityAi {
                     }
                 }
 
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
-                    return false;
-                }
+                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
             }
         }
         return true;
@@ -254,9 +247,7 @@ public class SetStateAi extends SpellAbilityAi {
                 // for legendary KI counter creatures
                 if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
                     // if the other legendary is useless try to replace it
-                    if (!ComputerUtilCard.isUselessCreature(aiPlayer, othercard)) {
-                        return false;
-                    }
+                    return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }
             }
         }
@@ -266,10 +257,6 @@ public class SetStateAi extends SpellAbilityAi {
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // TODO: improve the AI for when it may want to transform something that's optional to transform
-        if (!isSafeToTransformIntoLegendary(player, sa.getHostCard())) {
-            return false;
-        }
-
-        return true;
+        return isSafeToTransformIntoLegendary(player, sa.getHostCard());
     }
 }

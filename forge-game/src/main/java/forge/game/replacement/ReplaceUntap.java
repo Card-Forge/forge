@@ -63,9 +63,7 @@ public class ReplaceUntap extends ReplacementEffect {
             final Card card = (Card) o;
             // all replace untap with untapStep does have "your untap step"
             final Player player = card.getController();
-            if (!player.getGame().getPhaseHandler().is(PhaseType.UNTAP, player)) {
-                return false;
-            }
+            return player.getGame().getPhaseHandler().is(PhaseType.UNTAP, player);
         }
 
         return true;

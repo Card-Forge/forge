@@ -516,12 +516,8 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             return false;
         }
 
-        if (hasParam("PlayerAttackedWithCreatureThisTurn")
-                && !player.getAttackedWithCreatureThisTurn()) {
-            return false;
-        }
-        
-        return true;
+        return !hasParam("PlayerAttackedWithCreatureThisTurn")
+                || player.getAttackedWithCreatureThisTurn();
     }
 
     /**
@@ -706,9 +702,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
-            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
-                return false;
-            }
+            return Expressions.compare(sVar, svarOperator, operandValue);
         }
 
         return true;

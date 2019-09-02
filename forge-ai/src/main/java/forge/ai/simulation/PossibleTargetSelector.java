@@ -80,7 +80,7 @@ public class PossibleTargetSelector {
     }
 
     private static class SimilarTargetSkipper {
-        private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.<String, Card>create();
+        private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
         private HashMap<Card, String> cardTypeStrings = new HashMap<Card, String>();
         private HashMap<Card, Integer> creatureScores;
 

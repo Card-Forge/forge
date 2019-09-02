@@ -62,9 +62,7 @@ public class ReplaceDiscard extends ReplacementEffect {
             }
         }
         if (this.getMapParams().containsKey("DiscardFromEffect")) {
-            if (null == runParams.get("Source")) {
-                return false;
-            }
+            return null != runParams.get("Source");
         }
 
         return true;

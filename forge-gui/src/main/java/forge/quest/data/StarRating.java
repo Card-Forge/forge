@@ -44,10 +44,6 @@ public class StarRating {
             return false;
         }
 
-        if (rating != other.rating) {
-            return false;
-        }
-
-        return true;
+        return rating == other.rating;
     }
 }

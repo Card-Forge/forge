@@ -469,7 +469,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     int left = amount;
                     for (Card c : list) {
                         if (ComputerUtilCard.shouldPumpCard(ai, sa, c, i, i,
-                                Lists.<String>newArrayList())) {
+                                Lists.newArrayList())) {
                             sa.getTargets().add(c);
                             abTgt.addDividedAllocation(c, i);
                             left -= i;
@@ -506,7 +506,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
                         for (Card c : list) {
                             if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount,
-                                    Lists.<String>newArrayList())) {
+                                    Lists.newArrayList())) {
                                 choice = c;
                                 break;
                             }
@@ -592,11 +592,7 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         }
 
-        if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
-        }
-        
-        return true;
+        return !ComputerUtil.waitForBlocking(sa);
     }
 
     @Override
@@ -1071,10 +1067,8 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 int totBlkPower = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
-                if (source.getNetToughness() <= totBlkPower
-                        && source.getNetToughness() + amount > totBlkPower) {
-                    return true;
-                }
+                return source.getNetToughness() <= totBlkPower
+                        && source.getNetToughness() + amount > totBlkPower;
             }
         } else if (combat.isBlocking(source)) {
             for (Card blocked : combat.getAttackersBlockedBy(source)) {
@@ -1085,10 +1079,8 @@ public class CountersPutAi extends SpellAbilityAi {
             }
 
             int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower);
-            if (source.getNetToughness() <= totAtkPower
-                    && source.getNetToughness() + amount > totAtkPower) {
-                return true;
-            }
+            return source.getNetToughness() <= totAtkPower
+                    && source.getNetToughness() + amount > totAtkPower;
         }
         return false;
     }

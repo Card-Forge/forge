@@ -57,7 +57,7 @@ public class TournamentSwiss extends AbstractTournament {
         if (byePlayer != null) {
             groupPlayers.remove(byePlayer);
 
-            TournamentPairing byePair = new TournamentPairing(activeRound, Lists.<TournamentPlayer>newArrayList(byePlayer));
+            TournamentPairing byePair = new TournamentPairing(activeRound, Lists.newArrayList(byePlayer));
             byePair.setBye(true);
             activePairings.add(byePair);
         }

@@ -905,10 +905,8 @@ public class ComputerUtilMana {
             AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
         }
         else {
-            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
-                // This mana source is held elsewhere for a Main Phase 2 spell.
-                return true;
-            }
+            // This mana source is held elsewhere for a Main Phase 2 spell.
+            return AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
         }
 
         return false;

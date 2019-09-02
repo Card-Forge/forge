@@ -144,7 +144,7 @@ public abstract class CostPartWithList extends CostPart {
     protected abstract Card doPayment(SpellAbility ability, Card targetCard);
     // Overload these two only together, set to true and perform payment on list
     protected boolean canPayListAtOnce() { return false; }
-    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards) { return CardCollection.EMPTY; };
+    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards) { return CardCollection.EMPTY; }
 
     /**
      * TODO: Write javadoc for this method.

@@ -276,7 +276,7 @@ public final class FModel {
                 } else if (s.length() > 1) {
                     if (tList != null) {
                         if (s.contains(":")) {
-                            String k[] = s.split(":");
+                            String[] k = s.split(":");
                             tList.add(k[0]);
                             CardType.Constant.pluralTypes.put(k[0], k[1]);
                         } else {

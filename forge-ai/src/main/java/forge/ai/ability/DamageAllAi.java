@@ -233,12 +233,8 @@ public class  DamageAllAi extends SpellAbilityAi {
             return true;
         }
 
-        if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) > ComputerUtilCard
-                .evaluateCreatureList(humanList)) {
-            return false;
-        }
-
-        return true;
+        return computerList.isEmpty() || ComputerUtilCard.evaluateCreatureList(computerList) <= ComputerUtilCard
+                .evaluateCreatureList(humanList);
     }
 
     /**
@@ -320,11 +316,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             return true;
         }
 
-        if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) + 50 >= ComputerUtilCard
-                .evaluateCreatureList(humanList)) {
-            return false;
-        }
-
-        return true;
+        return computerList.isEmpty() || ComputerUtilCard.evaluateCreatureList(computerList) + 50 < ComputerUtilCard
+                .evaluateCreatureList(humanList);
     }
 }

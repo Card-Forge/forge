@@ -8,7 +8,7 @@ public class GameEventCardDamaged extends GameEvent {
         Normal, 
         M1M1Counters, 
         Deathtouch, 
-        LoyaltyLoss;
+        LoyaltyLoss
     }
 
     public final Card card;

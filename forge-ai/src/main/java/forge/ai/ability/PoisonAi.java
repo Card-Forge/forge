@@ -24,11 +24,8 @@ public class PoisonAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        if (ph.getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
-            return false;
-        }
-        return true;
+        return !ph.getPhase().isBefore(PhaseType.MAIN2)
+                || sa.hasParam("ActivationPhases");
     }
 
     /*
@@ -78,13 +75,10 @@ public class PoisonAi extends SpellAbilityAi {
             }
 
             Player max = players.max(PlayerPredicates.compareByPoison());
-            if (ai.getPoisonCounters() == max.getPoisonCounters()) {
-                // ai is one of the max
-                return false;
-            }
+            // ai is one of the max
+            return ai.getPoisonCounters() != max.getPoisonCounters();
         }
 
-        return true;
     }
 
     private boolean tgtPlayer(Player ai, SpellAbility sa, boolean mandatory) {
@@ -96,11 +90,8 @@ public class PoisonAi extends SpellAbilityAi {
                 public boolean apply(Player input) {
                     if (input.cantLose()) {
                         return false;
-                    } else if (!input.canReceiveCounters(CounterType.POISON)) {
-                        return false;
-                    }
+                    } else return input.canReceiveCounters(CounterType.POISON);
 
-                    return true;
                 }
 
             });
@@ -132,10 +123,7 @@ public class PoisonAi extends SpellAbilityAi {
                             if (input.cantLose()) {
                                 return true;
                             }
-                            if (!input.canReceiveCounters(CounterType.POISON)) {
-                                return true;
-                            }
-                            return false;
+                            return !input.canReceiveCounters(CounterType.POISON);
                         }
 
                     });

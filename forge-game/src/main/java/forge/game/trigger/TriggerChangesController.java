@@ -58,10 +58,8 @@ public class TriggerChangesController extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidOriginalController")) {
-            if (!matchesValid(runParams2.get("OriginalController"), this.mapParams.get("ValidOriginalController").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("OriginalController"), this.mapParams.get("ValidOriginalController").split(","),
+                    this.getHostCard());
         }
 
         return true;

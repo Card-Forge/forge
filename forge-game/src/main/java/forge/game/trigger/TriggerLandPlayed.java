@@ -72,9 +72,7 @@ public class TriggerLandPlayed extends Trigger {
         }
         
         if (this.mapParams.containsKey("NotFirstLand")) {
-            if (land.getController().getLandsPlayedThisTurn() < 1) {
-                return false;
-            }
+            return land.getController().getLandsPlayedThisTurn() >= 1;
         }
         return true;
     }

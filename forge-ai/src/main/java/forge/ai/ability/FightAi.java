@@ -273,9 +273,8 @@ public class FightAi extends SpellAbilityAi {
     		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
     			return true;
     		} else {
-    			if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
-    				return true;
-    			}
+                // trade
+                return MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC());
     		}
     	}
     	return false;
@@ -289,10 +288,7 @@ public class FightAi extends SpellAbilityAi {
                 || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
             return false;
         }
-        if (fighter.hasKeyword(Keyword.DEATHTOUCH)
-                || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetPower() + pumpAttack) {
-            return true;
-        }
-        return false;
+        return fighter.hasKeyword(Keyword.DEATHTOUCH)
+                || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetPower() + pumpAttack;
     }
 }

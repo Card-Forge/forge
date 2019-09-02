@@ -5,5 +5,5 @@ package forge.card;
  *
  */
 public interface ICardFace extends ICardCharacteristics, ICardRawAbilites, Comparable<ICardFace> {
-    public String getAltName();
+    String getAltName();
 }

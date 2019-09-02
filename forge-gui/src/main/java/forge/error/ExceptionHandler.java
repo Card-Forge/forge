@@ -61,7 +61,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
         int i = 0;
         while (logFile.exists() && !logFile.delete()) {
-            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", String.valueOf(i++) + ".log");
+            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", i++ + ".log");
             logFile = new File(pathname);
         }
         

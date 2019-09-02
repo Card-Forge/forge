@@ -57,9 +57,7 @@ public class ReplaceDrawCards extends ReplacementEffect {
             String comparator = this.getMapParams().get("Number");
             final String operator = comparator.substring(0, 2);
             final int operandValue = Integer.parseInt(comparator.substring(2));
-            if (!Expressions.compare(n, operator, operandValue)) {
-                return false;
-            }
+            return Expressions.compare(n, operator, operandValue);
         }
 
         return true;

@@ -335,11 +335,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         		return true;
 
         	// if AI creature is better than Human Creature
-        	if (ComputerUtilCard.evaluateCreatureList(aiCards) >= ComputerUtilCard
-                    .evaluateCreatureList(humanCards)) {
-                return true;
-            }
-        	return false;
+            return ComputerUtilCard.evaluateCreatureList(aiCards) >= ComputerUtilCard
+                    .evaluateCreatureList(humanCards);
         }
         return true;
     }
@@ -441,29 +438,21 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
                 if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
-                    if ((ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
-                            .evaluateCreatureList(humanType)) < 1) {
-                        return false;
-                    }
+                    return (ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
+                            .evaluateCreatureList(humanType)) >= 1;
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
-                else if ((ComputerUtilCard.evaluatePermanentList(computerType) + ComputerUtilCard
-                        .evaluatePermanentList(humanType)) < 1) {
-                    return false;
-                }
+                else return (ComputerUtilCard.evaluatePermanentList(computerType) + ComputerUtilCard
+                        .evaluatePermanentList(humanType)) >= 1;
             } else {
                 // don't activate if human gets more back than AI does
                 if ((CardLists.getNotType(humanType, "Creature").isEmpty()) && (CardLists.getNotType(computerType, "Creature").isEmpty())) {
-                    if (ComputerUtilCard.evaluateCreatureList(computerType) <= ComputerUtilCard
-                            .evaluateCreatureList(humanType)) {
-                        return false;
-                    }
+                    return ComputerUtilCard.evaluateCreatureList(computerType) > ComputerUtilCard
+                            .evaluateCreatureList(humanType);
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
-                else if (ComputerUtilCard.evaluatePermanentList(computerType) <= ComputerUtilCard
-                        .evaluatePermanentList(humanType)) {
-                    return false;
-                }
+                else return ComputerUtilCard.evaluatePermanentList(computerType) > ComputerUtilCard
+                        .evaluatePermanentList(humanType);
             }
         }
 

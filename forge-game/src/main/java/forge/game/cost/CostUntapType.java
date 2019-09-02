@@ -89,10 +89,7 @@ public class CostUntapType extends CostPartWithList {
         typeList = CardLists.filter(typeList, Presets.TAPPED);
 
         final Integer amount = convertAmount();
-        if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
-            return false;
-        }
-        return true;
+        return (typeList.size() != 0) && ((amount == null) || (typeList.size() >= amount));
     }
 
     @Override

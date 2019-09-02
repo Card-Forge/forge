@@ -602,11 +602,7 @@ public class AiAttackController {
             return true;
         }
 
-        if (totalPoisonDamage >= 10 - opp.getPoisonCounters()) {
-            return true;
-        }
-
-        return false;
+        return totalPoisonDamage >= 10 - opp.getPoisonCounters();
     }
 
     private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
@@ -1021,7 +1017,7 @@ public class AiAttackController {
         } // stay at home to block
 
         if ( LOG_AI_ATTACKS )
-            System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
+            System.out.println(this.aiAggression + " = ai aggression");
 
         // ****************
         // Evaluation the end
@@ -1454,10 +1450,7 @@ public class AiAttackController {
         if (color != null) {
             return color;
         }
-        if (artifact != null) {
-            return artifact;
-        }
-        return null;    //should never get here
+        return artifact;//should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

@@ -57,7 +57,7 @@ public class TriggerHandler {
 
     private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
     private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
-    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Player, Trigger>create());
+    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<TriggerWaiting>());
     private final Game game;
 
@@ -536,9 +536,7 @@ public class TriggerHandler {
                 final String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     final Card card = (Card) runParams.get("Card");
-                    if (card.isCreature()) {
-                        return false;
-                    }
+                    return !card.isCreature();
                 }
             }
         } // Torpor Orb check

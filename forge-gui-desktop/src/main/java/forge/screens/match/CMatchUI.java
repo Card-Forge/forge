@@ -101,7 +101,6 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
-import forge.match.input.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of

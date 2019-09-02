@@ -270,11 +270,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.isRightSplit()) {
-                        return false;
-                    }
-
-                    return true;
+                    return this.getZone() == ZoneType.Graveyard || !sa.isAftermath() || !sa.isRightSplit();
                 }
             }
             return false;
@@ -315,9 +311,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 }
             }
 
-            if (!isPhase) {
-                return false;
-            }
+            return isPhase;
         }
         return true;
     }
@@ -356,9 +350,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (sa.isSpell()) {
             final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-            if (o != null && o.getPlayer() == activator) {
-                return true;
-            }
+            return o != null && o.getPlayer() == activator;
         }
         
         return false;
@@ -515,9 +507,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarToCheck(), sa);
             final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarOperand(), sa);
 
-            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
-                return false;
-            }
+            return Expressions.compare(svarValue, this.getsVarOperator(), operandValue);
         }
     	return true;
     }
@@ -582,9 +572,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
             this.setGameActivationLimit(gameActivationLimit);
 
-            if ((this.getGameActivationLimit() != -1) && (sa.getActivationsThisGame() >= this.getGameActivationLimit())) {
-                return false;
-            }
+            return (this.getGameActivationLimit() == -1) || (sa.getActivationsThisGame() < this.getGameActivationLimit());
         }
 
         return true;

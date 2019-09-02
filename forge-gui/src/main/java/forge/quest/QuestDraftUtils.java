@@ -427,11 +427,7 @@ public class QuestDraftUtils {
         String sid1 = qd.getStandings()[offset];
         String sid2 = qd.getStandings()[offset + 1];
 
-        if (sid1.equals(QuestEventDraft.HUMAN) || sid2.equals(QuestEventDraft.HUMAN)) {
-            return false;
-        }
-
-        return true;
+        return !sid1.equals(QuestEventDraft.HUMAN) && !sid2.equals(QuestEventDraft.HUMAN);
     }
 
     public static boolean injectRandomMatchOutcome(boolean simHumanMatches) {

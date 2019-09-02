@@ -45,9 +45,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                         if (c.getCounters(counterType) <= 0) {
                             return false;
                         }
-                        if (!c.canReceiveCounters(counterType)) {
-                            return false;
-                        }
+                        return c.canReceiveCounters(counterType);
                     } else {
                         for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
                             // has negative counter it would double
@@ -87,19 +85,12 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 }
             }
         }
-        if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
-        }
-
-        return true;
+        return !ComputerUtil.waitForBlocking(sa);
     }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting() && !setTargets(ai, sa) && !mandatory) {
-            return false;
-        }
-        return true;
+        return !sa.usesTargeting() || setTargets(ai, sa) || mandatory;
     }
 
     private CounterType getCounterType(SpellAbility sa) {
@@ -135,9 +126,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                     if (c.getCounters(counterType) <= 0) {
                         return false;
                     }
-                    if (!c.canReceiveCounters(counterType)) {
-                        return false;
-                    }
+                    return c.canReceiveCounters(counterType);
                 }
 
                 return true;

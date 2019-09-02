@@ -95,10 +95,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             }
         }
 
-        if (totalMana() == safeMana) {
-            return false; //won't lose floating mana if all mana is of colors that aren't going to be emptied
-        }
-        return true;
+        return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
     public final List<Mana> clearPool(boolean isEndOfPhase) {
@@ -370,7 +367,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         // TODO The following may not be needed anymore?
-        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) (byte)ManaAtom.COLORLESS)) {
+        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte)ManaAtom.COLORLESS)) {
             return true;
         }
 

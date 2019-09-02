@@ -53,9 +53,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (sa.usesTargeting()) {
-            if (!doTgt(ai, sa, false)) {
-                return false;
-            }
+            return doTgt(ai, sa, false);
         }
 
         return true;
@@ -148,12 +146,8 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        if (SpellAbilityAi.isSorcerySpeed(sa) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
-                || ComputerUtil.activateForCost(sa, ai)) {
-            return true;
-        }
-
-        return false;
+        return SpellAbilityAi.isSorcerySpeed(sa) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
+                || ComputerUtil.activateForCost(sa, ai);
     }
 
     /*
@@ -187,12 +181,8 @@ public class LifeLoseAi extends SpellAbilityAi {
                 ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
-        if (!mandatory && tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
-            // For cards like Foul Imp, ETB you lose life
-            return false;
-        }
-
-        return true;
+        // For cards like Foul Imp, ETB you lose life
+        return mandatory || !tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife();
     }
 
     protected boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {

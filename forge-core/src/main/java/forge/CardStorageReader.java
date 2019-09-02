@@ -64,7 +64,7 @@ public class CardStorageReader {
         void report(int current, int total);
 
         // does nothing, used when they pass null instead of an instance
-        public final static ProgressObserver emptyObserver = new ProgressObserver() {
+        ProgressObserver emptyObserver = new ProgressObserver() {
             @Override public void setOperationName(final String name, final boolean usePercents) {}
             @Override public void report(final int current, final int total) {}
         };

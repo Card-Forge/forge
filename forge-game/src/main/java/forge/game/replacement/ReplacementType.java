@@ -29,7 +29,7 @@ public enum ReplacementType {
     Untap(ReplaceUntap.class);
 
     Class<? extends ReplacementEffect> clasz;
-    private ReplacementType(Class<? extends ReplacementEffect> cls) {
+    ReplacementType(Class<? extends ReplacementEffect> cls) {
         clasz = cls;
     }
 

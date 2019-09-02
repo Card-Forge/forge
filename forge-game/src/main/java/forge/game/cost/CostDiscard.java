@@ -112,15 +112,11 @@ public class CostDiscard extends CostPartWithList {
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
-            if (!source.canBeDiscardedBy(ability)) {
-                return false;
-            }
+            return source.canBeDiscardedBy(ability);
         }
         else {
             if (type.equals("Hand")) {
-                if (!payer.canDiscardBy(ability)) {
-                    return false;
-                }
+                return payer.canDiscardBy(ability);
                 // this will always work
             }
             else if (type.equals("LastDrawn")) {
@@ -153,14 +149,11 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                if ((amount != null) && (amount > handList.size() - adjustment)) {
-                    // not enough cards in hand to pay
-                    return false;
-                }
+                // not enough cards in hand to pay
+                return (amount == null) || (amount <= handList.size() - adjustment);
             }
         }
 
-        return true;
     }
 
     /* (non-Javadoc)

@@ -73,7 +73,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public final boolean isPermanent;
         private static final ImmutableList<String> allCoreTypeNames = EnumUtil.getNames(CoreType.class);
 
-        private CoreType(final boolean permanent) {
+        CoreType(final boolean permanent) {
             isPermanent = permanent;
         }
     }
@@ -598,10 +598,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (multiWordTypes[0].startsWith(type) && !multiWordTypes[0].equals(type)) {
             return true;
         }
-        if (multiWordTypes[1].startsWith(type) && !multiWordTypes[1].equals(type)) {
-            return true;
-        }
-        return false;
+        return multiWordTypes[1].startsWith(type) && !multiWordTypes[1].equals(type);
     }
 
     public static class Constant {

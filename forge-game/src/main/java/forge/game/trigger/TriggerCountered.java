@@ -80,9 +80,7 @@ public class TriggerCountered extends Trigger {
             if (ctrdSA != null) {
                 if (validType.equals("Spell") && !ctrdSA.isSpell()) {
                     return false;
-                } else if (validType.equals("Ability") && !ctrdSA.isAbility()) {
-                    return false;
-                }
+                } else return !validType.equals("Ability") || ctrdSA.isAbility();
             }
             
         }

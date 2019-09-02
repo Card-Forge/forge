@@ -23,9 +23,7 @@ public class VariantWins extends ProgressiveAchievement {
             if (game.getRules().hasAppliedVariant(variant)) {
                 return true;
             }
-            if (variant == GameType.Archenemy && game.getRules().hasAppliedVariant(GameType.ArchenemyRumble)) {
-                return true; //lump Archenemy Rumble into same achievement as Archenemy 
-            }
+            return variant == GameType.Archenemy && game.getRules().hasAppliedVariant(GameType.ArchenemyRumble); //lump Archenemy Rumble into same achievement as Archenemy
         }
         return false;
     }

@@ -52,10 +52,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Addle".equals(sourceName)) {
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
-                return false;
-            }
-            return true;
+            return !ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && !ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).isEmpty();
         }
 
         if (logic.equals("MostExcessOpponentControls")) {

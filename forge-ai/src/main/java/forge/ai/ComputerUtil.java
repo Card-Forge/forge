@@ -423,7 +423,7 @@ public class ComputerUtil {
                 int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
 
                 boolean cantAffordSoon = activate.getCMC() > mana + 1;
-                boolean wrongColor = !activate.determineColor().hasNoColorsExcept(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(ai, ImmutableList.<Card>of())).getColor());
+                boolean wrongColor = !activate.determineColor().hasNoColorsExcept(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(ai, ImmutableList.of())).getColor());
 
                 // Only do this for spells, not activated abilities
                 // We can't pay for this spell even if we play another land, or have wrong colors
@@ -524,7 +524,7 @@ public class ComputerUtil {
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
-        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai) {
             typeList.remove(target); // don't sacrifice the card we're pumping
         }
 
@@ -554,7 +554,7 @@ public class ComputerUtil {
             final Card target, final int amount) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
         
-        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai) {
             typeList.remove(target); // don't exile the card we're pumping
         }
 
@@ -575,7 +575,7 @@ public class ComputerUtil {
             final Card target, final int amount) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
         
-        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai) {
             typeList.remove(target); // don't move the card we're pumping
         }
 
@@ -704,7 +704,7 @@ public class ComputerUtil {
     public static CardCollection chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
         final CardCollection typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
-        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai) {
             // don't bounce the card we're pumping
             typeList.remove(target);
         }
@@ -794,12 +794,8 @@ public class ComputerUtil {
                     if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
                         return true;
                     }
-                    
-                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                        return true;
-                    }
-                    
-                    return false;
+
+                    return ComputerUtilCard.hasActiveUndyingOrPersist(c);
                 }
             });
         }
@@ -1107,10 +1103,8 @@ public class ComputerUtil {
                     creatures2.add(creatures.get(i));
                 }
             }
-            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
-                    && card.isCreature() && card.getManaCost().getCMC() <= 3) {
-                return true;
-            }
+            return ((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
+                    && card.isCreature() && card.getManaCost().getCMC() <= 3;
         }
         return false;
     }
@@ -1161,30 +1155,25 @@ public class ComputerUtil {
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
-            if (landsInPlay.size() >= highestCMC
+            // Don't need more land.
+            return landsInPlay.size() >= highestCMC
                     || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
-                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
-                // Don't need more land.
-                return true;
-            }
+                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0);
         } else { //non-land
             if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
                 return true;
-            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
+            } else // Probably don't need small stuff now.
+                if (!game.getPhaseHandler().isPlayerTurn(ai)
                     && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
                     && discardCMC > landsInPlay.size() + landsInHand.size()
                     && discardCMC > landsInPlay.size() + 1
                     && nonLandsInHand.size() > 1) {
                 // not castable for at least one other turn.
                 return true;
-            } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
-                    && !discard.hasProperty("hasXCost", ai, null, null)) {
-                // Probably don't need small stuff now.
-                return true;
-            }
+            } else return landsInPlay.size() > 5 && discard.getCMC() <= 1
+                        && !discard.hasProperty("hasXCost", ai, null, null);
         }
-        return false;
     }
 
     // returns true if it's better to wait until blockers are declared
@@ -1925,16 +1914,12 @@ public class ComputerUtil {
             if (predictThreatenedObjects(ai, null).contains(source)) {
                 return true;
             }
-            if (game.getPhaseHandler().inCombat() && 
-            		ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
-            	return true;
-            }
+            return game.getPhaseHandler().inCombat() &&
+                    ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat());
         } else if (zone.getZoneType() == ZoneType.Exile && sa.getMayPlay() != null) {
             // play cards in exile that can only be played that turn
             if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
-                if (source.mayPlay(sa.getMayPlay()) != null) {
-                    return true;
-                }
+                return source.mayPlay(sa.getMayPlay()) != null;
             }
         }
         return false;
@@ -1967,11 +1952,8 @@ public class ComputerUtil {
         final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.getManaCost().getCMC() > 0 || c.hasSVar("NeedsToPlay")
-                        || (!c.getType().isLand() && !c.getType().isArtifact())) {
-                    return false;
-                }
-                return true;
+                return c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")
+                        && (c.getType().isLand() || c.getType().isArtifact());
             }
         });
 
@@ -1986,10 +1968,7 @@ public class ComputerUtil {
         final CardCollectionView castables = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.getManaCost().getCMC() > 0 && c.getManaCost().getCMC() <= landSize) {
-                    return false;
-                }
-                return true;
+                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() > landSize;
             }
         });
 
@@ -2186,10 +2165,7 @@ public class ComputerUtil {
         CardCollection goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.hasSVar("DiscardMeByOpp") || c.hasSVar("DiscardMe")) {
-                    return false;
-                }
-                return true;
+                return !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe");
             }
         });
         if (goodChoices.isEmpty()) {
@@ -2225,7 +2201,7 @@ public class ComputerUtil {
 
     public static String chooseSomeType(Player ai, String kindOfType, String logic, List<String> invalidTypes) {
         if (invalidTypes == null) {
-            invalidTypes = ImmutableList.<String>of();
+            invalidTypes = ImmutableList.of();
         }
 
         final Game game = ai.getGame();
@@ -2546,8 +2522,7 @@ public class ComputerUtil {
             @Override
             public boolean apply(final Card c) {
                 if (c.getController() == ai) {
-                    if (c.getSVar("Targeting").equals("Dies") || c.getSVar("Targeting").equals("Counter"))
-                    return false;
+                    return !c.getSVar("Targeting").equals("Dies") && !c.getSVar("Targeting").equals("Counter");
                 }
                 return true;
             }
@@ -2872,11 +2847,8 @@ public class ComputerUtil {
             return false;
         } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
-            return false;
-        }
+        } else return !Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"));
 
-        return true;
     }
 
     public static boolean lifegainNegative(final Player player, final Card source) {
@@ -3074,10 +3046,7 @@ public class ComputerUtil {
         if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
             return true;
         }
-        if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
-            return true;
-        }
-        return false;
+        return (!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment));
 
     }
 }

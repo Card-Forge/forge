@@ -4,7 +4,6 @@ import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
@@ -14,8 +13,8 @@ public final class ServerGameLobby extends GameLobby {
 
     public ServerGameLobby() {
         super(true);
-        addSlot(new LobbySlot(LobbySlotType.LOCAL, localName(), localAvatarIndices()[0], 0, true, false, Collections.<AIOption>emptySet()));
-        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, 1, false, false, Collections.<AIOption>emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.LOCAL, localName(), localAvatarIndices()[0], 0, true, false, Collections.emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, 1, false, false, Collections.emptySet()));
     }
 
     public int connectPlayer(final String name, final int avatarIndex) {

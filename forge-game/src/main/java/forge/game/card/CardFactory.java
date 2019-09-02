@@ -645,7 +645,7 @@ public class CardFactory {
         Trigger t = null;
         if (sa.isWrapper()) {
             // copy trigger?
-            t = ((WrappedAbility) sa).getTrigger();
+            t = sa.getTrigger();
         } else { // some keyword ability, e.g. Exalted, Annihilator
             return sa.copy();
         }
@@ -677,7 +677,7 @@ public class CardFactory {
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(((WrappedAbility) sa).isMandatory());
+        wrapperAbility.setMandatory(sa.isMandatory());
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         t.setTriggeredSA(wrapperAbility);
         return wrapperAbility;
@@ -774,7 +774,7 @@ public class CardFactory {
 
             // triggers to add to clone
             if (sa.hasParam("AddTriggers")) {
-                for (final String s : Arrays.asList(sa.getParam("AddTriggers").split(","))) {
+                for (final String s : sa.getParam("AddTriggers").split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualTrigger = origSVars.get(s);
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
@@ -786,7 +786,7 @@ public class CardFactory {
             // SVars to add to clone
             if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
                 final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
-                for (final String s : Arrays.asList(str.split(","))) {
+                for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
                         state.setSVar(s, actualsVar);
@@ -797,7 +797,7 @@ public class CardFactory {
             // abilities to add to clone
             if (sa.hasParam("AddAbilities") || sa.hasParam("GainTextAbilities")) {
                 final String str = sa.getParamOrDefault("GainTextAbilities", sa.getParam("AddAbilities"));
-                for (final String s : Arrays.asList(str.split(","))) {
+                for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
                         final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);

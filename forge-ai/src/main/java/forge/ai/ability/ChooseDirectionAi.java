@@ -33,9 +33,7 @@ public class ChooseDirectionAi extends SpellAbilityAi {
                 CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(ai, Direction.Right));
                 int leftValue = Aggregates.sum(left, CardPredicates.Accessors.fnGetCmc);
                 int rightValue = Aggregates.sum(right, CardPredicates.Accessors.fnGetCmc);
-                if (aiValue > leftValue || aiValue > rightValue) {
-                    return false;
-                }
+                return aiValue <= leftValue && aiValue <= rightValue;
             }
         }
         return true;

@@ -109,9 +109,7 @@ public class TriggerCounterAdded extends Trigger {
             final int operand = Integer.parseInt(fullParam.substring(2));
             final int actualAmount = (Integer) runParams2.get("CounterAmount");
 
-            if (!Expressions.compare(actualAmount, operator, operand)) {
-                return false;
-            }
+            return Expressions.compare(actualAmount, operator, operand);
         }
 
         return true;

@@ -74,9 +74,7 @@ public class ReplaceDestroy extends ReplacementEffect {
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), getHostCard());
         }
 
         return true;

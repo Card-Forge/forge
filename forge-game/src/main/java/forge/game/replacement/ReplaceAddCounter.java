@@ -59,9 +59,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
         if (mapParams.containsKey("ValidCounterType")) {
             String type = this.getMapParams().get("ValidCounterType");
-            if (CounterType.getType(type) != runParams.get("CounterType")) {
-                return false;
-            }
+            return CounterType.getType(type) == runParams.get("CounterType");
         }
 
         return true;

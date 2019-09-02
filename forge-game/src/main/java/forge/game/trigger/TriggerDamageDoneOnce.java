@@ -45,9 +45,7 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
         
         if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard());
         }
         
 

@@ -84,7 +84,7 @@ public class ComputerUtilCombat {
         return Iterables.any(defenders, new Predicate<GameEntity>() {
             @Override public boolean apply(final GameEntity input) {
                 return ComputerUtilCombat.canAttackNextTurn(attacker, input);
-            };
+            }
         });
     } // canAttackNextTurn(Card)
 
@@ -119,11 +119,7 @@ public class ComputerUtilCombat {
         }
 
         // The creature won't untap next turn
-        if (atacker.isTapped() && !Untap.canUntap(atacker)) {
-            return false;
-        }
-
-        return true;
+        return !atacker.isTapped() || Untap.canUntap(atacker);
     } // canAttackNextTurn(Card, GameEntity)
 
     /**
@@ -889,12 +885,10 @@ public class ComputerUtilCombat {
                                 || CardTraitBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source))) {
                     return true;
                 }
-                if (CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                return CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
                         && attacker.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                                || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source))) {
-                    return true;
-                }
+                        || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source));
             }
             return false;
         }
@@ -1414,7 +1408,7 @@ public class ComputerUtilCombat {
             if (att.matches("[0-9][0-9]?") || att.matches("-" + "[0-9][0-9]?")) {
                 power += Integer.parseInt(att);
             } else {
-                String bonus = new String(source.getSVar(att));
+                String bonus = source.getSVar(att);
                 if (bonus.contains("TriggerCount$NumBlockers")) {
                     bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
@@ -1655,7 +1649,7 @@ public class ComputerUtilCombat {
             if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
                 toughness += Integer.parseInt(def);
             } else {
-                String bonus = new String(source.getSVar(def));
+                String bonus = source.getSVar(def);
                 if (bonus.contains("TriggerCount$NumBlockers")) {
                     bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
@@ -1795,11 +1789,7 @@ public class ComputerUtilCombat {
         }
 
         // all damage will be prevented
-        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
-            return true;
-        }
-
-        return false;
+        return attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource");
     }
 
     // can the blocker destroy the attacker?
@@ -1922,9 +1912,7 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-            if (attackerLife <= 2 * defenderDamage) {
-                return true;
-            }
+            return attackerLife <= 2 * defenderDamage;
         } // defender double strike
 
         else { // no double strike for defender
@@ -1948,7 +1936,7 @@ public class ComputerUtilCombat {
             return defenderDamage >= attackerLife;
 
         } // defender no double strike
-        return false; // should never arrive here
+        // should never arrive here
     } // canDestroyAttacker
 
     // For AI safety measures like Regeneration
@@ -2169,9 +2157,7 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-            if (defenderLife <= 2 * attackerDamage) {
-                return true;
-            }
+            return defenderLife <= 2 * attackerDamage;
         } // attacker double strike
 
         else { // no double strike for attacker
@@ -2195,7 +2181,7 @@ public class ComputerUtilCombat {
             return attackerDamage >= defenderLife;
 
         } // attacker no double strike
-        return false; // should never arrive here
+        // should never arrive here
     } // canDestroyBlocker
 
 

@@ -159,11 +159,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (!edition.equals(other.edition)) {
             return false;
         }
-        if ((other.foil != foil) || (other.artIndex != artIndex)) {
-            return false;
-        }
-
-        return true;
+        return (other.foil == foil) && (other.artIndex == artIndex);
     }
 
     /*
@@ -238,13 +234,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     // Return true if card is one of the five basic lands that can be added for free
     public boolean isVeryBasicLand() {
-        if ((this.getName().equals("Swamp"))
+        return (this.getName().equals("Swamp"))
                 || (this.getName().equals("Plains"))
                 || (this.getName().equals("Island"))
                 || (this.getName().equals("Forest"))
-                || (this.getName().equals("Mountain"))) {
-            return true;
-        } else return false;
+                || (this.getName().equals("Mountain"));
     }
 }
 

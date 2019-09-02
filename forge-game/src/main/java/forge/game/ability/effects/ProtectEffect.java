@@ -27,7 +27,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final List<String> gains = getProtectionList(sa);
-        final boolean choose = (sa.hasParam("Choices")) ? true : false;
+        final boolean choose = sa.hasParam("Choices");
         final String joiner = choose ? "or" : "and";
 
         final StringBuilder sb = new StringBuilder();

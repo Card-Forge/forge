@@ -214,7 +214,7 @@ public class QuestController {
                     PreconDeck result = super.getPreconDeckFromSections(sections);
                     preconDeals.put(result.getName(), new SellRules(sections.get("shop")));
                     return result;
-                };
+                }
             });
         }
         return QuestController.preconManager;

@@ -57,10 +57,8 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
         }
         final Card card = (Card) runParams2.get("Card");
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!card.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+            return card.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null);
         }
         return true;
     }

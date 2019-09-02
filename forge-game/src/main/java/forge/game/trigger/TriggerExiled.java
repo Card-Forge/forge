@@ -84,10 +84,8 @@ public class TriggerExiled extends Trigger {
             if (cause == null) {
                 return false;
             }
-            if (!cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+            return cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
+                    getHostCard(), null);
         }
 
         return true;

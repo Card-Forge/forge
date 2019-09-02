@@ -98,7 +98,7 @@ public enum TriggerType {
 
     private final Constructor<? extends Trigger> constructor;
 
-    private TriggerType(Class<? extends Trigger> clasz) {
+    TriggerType(Class<? extends Trigger> clasz) {
         constructor = findConstructor(clasz);
     }
 

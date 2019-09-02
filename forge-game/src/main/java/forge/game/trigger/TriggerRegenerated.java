@@ -57,9 +57,7 @@ public class TriggerRegenerated extends Trigger {
             }
         }
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard());
         }
         return true;
     }

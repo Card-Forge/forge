@@ -20,9 +20,7 @@ public class FlipACoinAi extends SpellAbilityAi {
             if (AILogic.equals("Never")) {
                 return false;
             } else if (AILogic.equals("PhaseOut")) {
-            	if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard())) {
-                    return false;
-            	}
+                return ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard());
             } else if (AILogic.equals("KillOrcs")) {
             	if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN) ) {
                     return false;

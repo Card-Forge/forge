@@ -25,9 +25,9 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
             if (s.startsWith("desc:") || s.startsWith("Desc:")) {
                 final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
-                    buildDesc = new String(tmp[1]);
+                    buildDesc = tmp[1];
                 } else {
-                    buildDesc = new String();
+                    buildDesc = "";
                 }
             } else if (buildDesc != null) {
                 if (s.contains(":")) {

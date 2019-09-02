@@ -54,10 +54,8 @@ public class TriggerUntaps extends Trigger {
         final Card untapper = (Card) runParams2.get("Card");
 
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!untapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+            return untapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null);
         }
 
         return true;

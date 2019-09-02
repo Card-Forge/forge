@@ -82,9 +82,7 @@ public class StaticAbilityCantAttackBlock {
         }
         if (params.containsKey("UnlessDefender")) {
         	final String type = params.get("UnlessDefender");
-        	if (defender.hasProperty(type, hostCard.getController(), hostCard, null)) {
-        		return false;
-        	}
+            return !defender.hasProperty(type, hostCard.getController(), hostCard, null);
         }
 
         return true;
@@ -113,7 +111,7 @@ public class StaticAbilityCantAttackBlock {
                         for (KeywordInterface inst : blocker.getKeywords()) {
                             String k = inst.getOriginal();
                             if (k.startsWith("IfReach")) {
-                                String n[] = k.split(":");
+                                String[] n = k.split(":");
                                 if (attacker.getType().hasCreatureType(n[1])) {
                                     stillblock = true;
                                     break;

@@ -117,12 +117,9 @@ public class AnimateAi extends SpellAbilityAi {
         boolean activateAsPotentialBlocker = sa.hasParam("UntilYourNextTurn")
                 && ai.getGame().getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
-        if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
-                && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
-                && !sa.hasParam("AILogic") && !sa.hasParam("Permanent") && !activateAsPotentialBlocker) {
-            return false;
-        }
-        return true;
+        return !ph.isPlayerTurn(ai) || ai.getLife() >= 6 || opponent.getLife() <= 6
+                || !Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
+                || sa.hasParam("AILogic") || sa.hasParam("Permanent") || activateAsPotentialBlocker;
     }
 
     @Override
@@ -207,21 +204,16 @@ public class AnimateAi extends SpellAbilityAi {
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
             sa.resetTargets();
-            if (!animateTgtAI(sa)) {
-                return false;
-            }
+            return animateTgtAI(sa);
         }
 
-        return true;
     }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!animateTgtAI(sa)) {
-                return false;
-            }
+            return animateTgtAI(sa);
         }
 
         return true;

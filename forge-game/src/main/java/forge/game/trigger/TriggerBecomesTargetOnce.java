@@ -70,9 +70,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
                     break;
                 }
             }
-            if (!valid) {
-                return false;
-            }
+            return valid;
         }
         return true;
     }

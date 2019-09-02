@@ -60,10 +60,8 @@ public class TriggerChampioned extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidSource")) {
-            if (!source.isValid(this.mapParams.get("ValidSource").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+            return source.isValid(this.mapParams.get("ValidSource").split(","),
+                    this.getHostCard().getController(), this.getHostCard(), null);
         }
         return true;
     }

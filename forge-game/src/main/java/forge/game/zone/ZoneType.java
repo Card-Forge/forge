@@ -22,10 +22,10 @@ public enum ZoneType {
     PlanarDeck(true),
     None(true);
 
-    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(new ZoneType[]{Battlefield, Graveyard, Exile, Command/*, Hand*/});
+    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command/*, Hand*/);
 
     private final boolean holdsHiddenInfo;
-    private ZoneType(boolean holdsHidden) {
+    ZoneType(boolean holdsHidden) {
         holdsHiddenInfo = holdsHidden;
     }
 

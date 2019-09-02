@@ -181,10 +181,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         if (!this.landSet.equals(other.landSet)) {
             return false;
         }
-        if (!this.name.equals(other.name)) {
-            return false;
-        }
-        return true;
+        return this.name.equals(other.name);
     }
 
     /*

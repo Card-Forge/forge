@@ -80,11 +80,7 @@ public class RevealAi extends RevealAiBase {
 
         }
 
-        if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
-            return false;
-        }
-
-        return true;
+        return revealHandTargetAI(ai, sa/*, false, mandatory*/);
     }
 
 }

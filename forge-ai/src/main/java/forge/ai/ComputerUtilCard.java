@@ -368,7 +368,7 @@ public class ComputerUtilCard {
         }
     
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
+            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     return !card.hasSVar("DoNotDiscardIfAble");
@@ -1301,7 +1301,7 @@ public class ComputerUtilCard {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                            : Lists.<String>newArrayList();
+                            : Lists.newArrayList();
                     for (String kw : kws) {
                         if (!kw.equals("Trample") && !kw.equals("First Strike") && !kw.equals("Double Strike")) {
                             combatTrick = false;
@@ -1742,20 +1742,14 @@ public class ComputerUtilCard {
         if (!c.isCreature()) {
             return false;
         }
-        if (c.hasKeyword("CARDNAME can't attack or block.") || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped()) || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
-            return true;
-        }
-        return false;
+        return c.hasKeyword("CARDNAME can't attack or block.") || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped()) || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()));
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
         if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
-            return true;
-        }
-        return false;
+        return c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0;
     }
 
     public static boolean isPresentOnBattlefield(final Game game, final String cardName) {

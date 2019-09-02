@@ -59,9 +59,7 @@ public class ReplaceCounter extends ReplacementEffect {
         }
         if (this.getMapParams().containsKey("ValidType")) {
             String type = this.getMapParams().get("ValidType");
-            if (type.equals("Spell") && !spellAbility.isSpell()) {
-                return false;
-            }
+            return !type.equals("Spell") || spellAbility.isSpell();
         }
         return true;
     }

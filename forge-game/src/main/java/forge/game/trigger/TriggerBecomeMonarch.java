@@ -24,10 +24,8 @@ public class TriggerBecomeMonarch extends Trigger {
         }
 
         if (this.mapParams.containsKey("BeginTurn")) {
-            if (!matchesValid(game.getMonarchBeginTurn(), this.mapParams.get("BeginTurn").split(","),
-                    host)) {
-                return false;
-            }
+            return matchesValid(game.getMonarchBeginTurn(), this.mapParams.get("BeginTurn").split(","),
+                    host);
         }
         return true;
     }

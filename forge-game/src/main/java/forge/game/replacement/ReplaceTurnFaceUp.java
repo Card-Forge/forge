@@ -30,9 +30,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard());
         }
         return true;
     }

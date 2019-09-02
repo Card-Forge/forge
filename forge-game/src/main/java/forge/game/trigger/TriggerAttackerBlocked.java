@@ -73,9 +73,7 @@ public class TriggerAttackerBlocked extends Trigger {
                     getHostCard().getController(), getHostCard()
             );
 
-            if ( count == 0 ) {
-                return false;
-            }
+            return count != 0;
         }
 
         return true;
