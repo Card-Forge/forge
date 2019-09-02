@@ -563,14 +563,18 @@ public class AiAttackController {
             if (remainingAttackers.isEmpty() || maxBlockersAfterCrew == 0) {
                 break;
             }
-            // TODO replace with better amount
-            if (blocker.hasKeyword("CARDNAME can block an additional creature each combat.")) {
-                blockedAttackers.add(remainingAttackers.get(0));
-                remainingAttackers.remove(0);
-                maxBlockersAfterCrew--;
-                if (remainingAttackers.isEmpty()) {
-                    break;
+
+            int numExtraBlocks = blocker.canBlockAdditional();
+            if (numExtraBlocks > 0) {
+                while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
+                    blockedAttackers.add(remainingAttackers.get(0));
+                    remainingAttackers.remove(0);
+                    maxBlockersAfterCrew--;
                 }
+            }
+
+            if (remainingAttackers.isEmpty()) {
+                break;
             }
             blockedAttackers.add(remainingAttackers.get(0));
             remainingAttackers.remove(0);
