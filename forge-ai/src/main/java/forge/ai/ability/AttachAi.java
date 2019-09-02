@@ -1145,6 +1145,7 @@ public class AttachAi extends SpellAbilityAi {
         int totPower = 0;
         final List<String> keywords = new ArrayList<>();
         boolean grantingAbilities = false;
+        boolean grantingExtraBlock = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -1163,6 +1164,7 @@ public class AttachAi extends SpellAbilityAi {
                 totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), stAbility);
 
                 grantingAbilities |= stabMap.containsKey("AddAbility");
+                grantingExtraBlock |= stabMap.containsKey("CanBlockAmount") || stabMap.containsKey("CanBlockAny");
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
@@ -1192,18 +1194,25 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         //only add useful keywords unless P/T bonus is significant
-        if (totToughness + totPower < 4 && !keywords.isEmpty()) {
+        if (totToughness + totPower < 4 && (!keywords.isEmpty() || grantingExtraBlock)) {
             final int pow = totPower;
+            final boolean extraBlock = grantingExtraBlock;
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (final String keyword : keywords) {
-                        if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
-                            return true;
+                    if (!keywords.isEmpty()) {
+                        for (final String keyword : keywords) {
+                            if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
+                                return true;
+                            }
                         }
                     }
+
                     if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
                         // consider +2 power a significant bonus on Infect creatures
+                        return true;
+                    }
+                    if (extraBlock && CombatUtil.canBlock(c, true) && !c.canBlockAny()) {
                         return true;
                     }
                     return false;

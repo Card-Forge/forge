@@ -37,6 +37,24 @@ public abstract class PumpAiBase extends SpellAbilityAi {
     }
 
 
+    public boolean grantsUsefulExtraBlockOpts(final Player ai, final Card card) {
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai) || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
+        }
+        int canBlockNum = 1 + card.canBlockAdditional();
+        int possibleBlockNum = 0;
+        for (Card attacker : ai.getGame().getCombat().getAttackers()) {
+            if (CombatUtil.canBlock(attacker, card)) {
+                possibleBlockNum++;
+                if (possibleBlockNum > canBlockNum) {
+                    break;
+                }
+            }
+        }
+        return possibleBlockNum > canBlockNum;
+    }
+
     /**
      * Checks if is useful keyword.
      * 
