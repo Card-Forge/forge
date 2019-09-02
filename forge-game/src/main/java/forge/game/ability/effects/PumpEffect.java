@@ -55,7 +55,11 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        gameCard.addPTBoost(a, d,timestamp);
+        if (a > 0 || d > 0) {
+            gameCard.addPTBoost(a, d, timestamp);
+            redrawPT = true;
+        }
+
         gameCard.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
