@@ -49,8 +49,17 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addPTBoost(a, d, timestamp);
+            boolean redrawPT = false;
+
+            if (a > 0 || d > 0) {
+                tgtC.addPTBoost(a, d, timestamp);
+                redrawPT = true;
+            }
+
             tgtC.addChangedCardKeywords(kws, null, false, false, timestamp);
+            if (redrawPT) {
+                tgtC.updatePowerToughnessForView();
+            }
 
             for (String kw : hiddenkws) {
                 tgtC.addHiddenExtrinsicKeyword(kw);
