@@ -1107,8 +1107,10 @@ public class ComputerUtil {
                     creatures2.add(creatures.get(i));
                 }
             }
-            return ((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
-                    && card.isCreature() && card.getManaCost().getCMC() <= 3;
+            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
+                    && card.isCreature() && card.getManaCost().getCMC() <= 3) {
+                return true;
+            }
         }
         return false;
     }

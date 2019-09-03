@@ -607,7 +607,6 @@ public class AiAttackController {
         }
 
         return false;
-
     }
 
     private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {

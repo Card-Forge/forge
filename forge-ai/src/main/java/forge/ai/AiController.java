@@ -1645,7 +1645,6 @@ public class AiController {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
-
         return false;
     }
     
