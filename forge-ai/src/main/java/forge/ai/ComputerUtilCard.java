@@ -1742,14 +1742,20 @@ public class ComputerUtilCard {
         if (!c.isCreature()) {
             return false;
         }
-        return c.hasKeyword("CARDNAME can't attack or block.") || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped()) || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()));
+        if (c.hasKeyword("CARDNAME can't attack or block.") || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped()) || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
         if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
             return true;
         }
-        return c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0;
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean isPresentOnBattlefield(final Game game, final String cardName) {

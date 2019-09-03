@@ -149,11 +149,13 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                // not enough cards in hand to pay
-                return (amount == null) || (amount <= handList.size() - adjustment);
+                if ((amount != null) && (amount > handList.size() - adjustment)) {
+                    // not enough cards in hand to pay
+                    return false;
+                }
             }
         }
-
+        return true;
     }
 
     /* (non-Javadoc)

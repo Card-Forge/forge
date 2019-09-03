@@ -602,7 +602,12 @@ public class AiAttackController {
             return true;
         }
 
-        return totalPoisonDamage >= 10 - opp.getPoisonCounters();
+        if (totalPoisonDamage >= 10 - opp.getPoisonCounters()) {
+            return true;
+        }
+
+        return false;
+
     }
 
     private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
@@ -1450,7 +1455,10 @@ public class AiAttackController {
         if (color != null) {
             return color;
         }
-        return artifact;//should never get here
+        if (artifact != null) {
+            return artifact;
+        }
+        return null;//should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

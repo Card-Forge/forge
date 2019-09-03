@@ -159,7 +159,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (!edition.equals(other.edition)) {
             return false;
         }
-        return (other.foil == foil) && (other.artIndex == artIndex);
+        if ((other.foil != foil) || (other.artIndex != artIndex)) {
+            return false;
+        }
+
+        return true;
     }
 
     /*

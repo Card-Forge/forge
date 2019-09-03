@@ -49,8 +49,10 @@ public class TriggerAbandoned extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            return matchesValid(runParams2.get("Scheme"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard());
+            if (!matchesValid(runParams2.get("Scheme"), this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
         }
 
         return true;

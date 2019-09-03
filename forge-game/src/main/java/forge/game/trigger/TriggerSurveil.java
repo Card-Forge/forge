@@ -69,7 +69,9 @@ public class TriggerSurveil extends Trigger {
         }
 
         if (hasParam("OnlyFirst")) {
-            return (int) runParams2.get("NumThisTurn") == 1;
+            if ((int) runParams2.get("NumThisTurn") != 1) {
+                return false;
+            }
         }
         return true;
     }

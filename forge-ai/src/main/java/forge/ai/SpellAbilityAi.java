@@ -133,7 +133,10 @@ public abstract class SpellAbilityAi {
         if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)) {
             return false;
         }
-        return ComputerUtilCost.checkRemoveCounterCost(cost, source, sa);
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
+            return false;
+        }
+        return true;
     }
 
     /**

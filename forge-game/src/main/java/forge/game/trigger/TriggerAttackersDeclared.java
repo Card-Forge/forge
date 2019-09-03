@@ -76,7 +76,9 @@ public class TriggerAttackersDeclared extends Trigger {
                     valid = true;
                 }
             }
-            return valid;
+            if (!valid) {
+                return false;
+            }
         }
         return true;
     }

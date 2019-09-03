@@ -42,7 +42,9 @@ public class TriggerPlanarDice extends Trigger {
 
         if (this.mapParams.containsKey("Result")) {
             PlanarDice cond = PlanarDice.smartValueOf(this.mapParams.get("Result"));
-            return cond == runParams2.get("Result");
+            if (cond != runParams2.get("Result")) {
+                return false;
+            }
         }
 
         return true;

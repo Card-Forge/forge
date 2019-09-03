@@ -327,7 +327,11 @@ public class CountersMoveAi extends SpellAbilityAi {
                                 return true;
                             }
                         }
-                        return CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST);
+                        if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
+                            return true;
+                        }
+
+                        return false;
                     }
                 });
 
@@ -421,7 +425,11 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         // source would leave the game
-                        return !card.hasSVar("EndOfTurnLeavePlay");
+                        if (!card.hasSVar("EndOfTurnLeavePlay")) {
+                            return true;
+                        }
+
+                        return false;
                     }
                 });
 

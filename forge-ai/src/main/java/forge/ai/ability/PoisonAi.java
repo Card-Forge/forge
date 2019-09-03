@@ -75,10 +75,12 @@ public class PoisonAi extends SpellAbilityAi {
             }
 
             Player max = players.max(PlayerPredicates.compareByPoison());
-            // ai is one of the max
-            return ai.getPoisonCounters() != max.getPoisonCounters();
+            if (ai.getPoisonCounters() == max.getPoisonCounters()) {
+                // ai is one of the max
+                return false;
+            }
         }
-
+        return true;
     }
 
     private boolean tgtPlayer(Player ai, SpellAbility sa, boolean mandatory) {
@@ -90,8 +92,10 @@ public class PoisonAi extends SpellAbilityAi {
                 public boolean apply(Player input) {
                     if (input.cantLose()) {
                         return false;
-                    } else return input.canReceiveCounters(CounterType.POISON);
-
+                    } else if (!input.canReceiveCounters(CounterType.POISON)) {
+                        return false;
+                    }
+                    return true;
                 }
 
             });

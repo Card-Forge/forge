@@ -62,7 +62,9 @@ public class TriggerShuffled extends Trigger {
         }
         if (this.mapParams.containsKey("ShuffleBySelfControlled")) {
             SpellAbility source = (SpellAbility) runParams2.get("Source");
-            return source.getActivatingPlayer().equals(runParams2.get("Player"));
+            if (!source.getActivatingPlayer().equals(runParams2.get("Player"))) {
+                return false;
+            }
         }
         return true;
     }

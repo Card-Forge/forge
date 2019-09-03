@@ -45,7 +45,9 @@ public class ReplaceToken extends ReplacementEffect {
 
         if (hasParam("ValidToken")) {
             if (runParams.containsKey("Token")) {
-                return matchesValid(runParams.get("Token"), getParam("ValidToken").split(","), getHostCard());
+                if (!matchesValid(runParams.get("Token"), getParam("ValidToken").split(","), getHostCard())) {
+                    return false;
+                }
             } else {
                 // in case RE is not updated yet
                 return false;

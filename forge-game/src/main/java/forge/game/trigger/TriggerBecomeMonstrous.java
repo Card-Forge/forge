@@ -52,8 +52,10 @@ public class TriggerBecomeMonstrous extends Trigger {
     @Override
     public final boolean performTest(Map<String, Object> runParams2) {
         if (hasParam("ValidCard")) {
-            return matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","),
-                    this.getHostCard());
+            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
         }
 
         return true;

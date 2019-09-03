@@ -62,7 +62,9 @@ public class TriggerLifeGained extends Trigger {
         }
         if (hasParam("Spell")) {
             final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
-            return spellAbility != null && spellAbility.getRootAbility().isSpell();
+            if (spellAbility == null || !spellAbility.getRootAbility().isSpell()) {
+                return false;
+            }
         }
 
         return true;

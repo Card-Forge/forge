@@ -24,7 +24,9 @@ public class StaticAbilityCantAttach {
            }
            Card tcard = (Card) target;
 
-           return card.isValid(stAb.getParam("ValidCardToTarget").split(","), tcard.getController(), tcard, null);
+           if (!card.isValid(stAb.getParam("ValidCardToTarget").split(","), tcard.getController(), tcard, null)) {
+               return false;
+           }
        }
 
        return true;

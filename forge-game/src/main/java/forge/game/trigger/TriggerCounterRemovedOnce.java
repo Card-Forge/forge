@@ -62,7 +62,9 @@ public class TriggerCounterRemovedOnce extends Trigger {
 
         if (hasParam("CounterType")) {
             final String type = getParam("CounterType");
-            return type.equals(removedType.toString());
+            if (!type.equals(removedType.toString())) {
+                return false;
+            }
         }
 
         return true;

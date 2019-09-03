@@ -57,7 +57,9 @@ public class TriggerDestroyed extends Trigger {
             }
         }
         if (hasParam("ValidCard")) {
-            return matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard());
+            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard())) {
+                return false;
+            }
         }
         return true;
     }

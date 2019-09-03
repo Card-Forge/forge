@@ -49,7 +49,9 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
 
-            return ComputerUtilCost.checkRemoveCounterCost(cost, source);
+            if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+                return false;
+            }
         } else {
             // don't sac possible blockers
             if (!ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
@@ -61,7 +63,9 @@ public class LifeGainAi extends SpellAbilityAi {
                 skipCheck |= ComputerUtilCost.isSacrificeSelfCost(cost) && !source.isCreature();
 
                 if (!skipCheck) {
-                    return ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa, false);
+                    if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
+                        return false;
+                    }
                 }
             }
         }

@@ -59,7 +59,9 @@ public class TriggerClashed extends Trigger {
         }
 
         if (this.mapParams.containsKey("Won")) {
-            return this.mapParams.get("Won").equals(runParams2.get("Won"));
+            if (!this.mapParams.get("Won").equals(runParams2.get("Won"))) {
+                return false;
+            }
         }
 
         return true;

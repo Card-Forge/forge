@@ -83,7 +83,9 @@ public class StaticAbilityCantBeCast {
             int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
             String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
             List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, card);
-            return CardLists.filterControlledBy(thisTurnCast, activator).size() >= limit;
+            if (CardLists.filterControlledBy(thisTurnCast, activator).size() < limit) {
+                return false;
+            }
         }
 
         return true;
@@ -136,8 +138,12 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        return !params.containsKey("NonActivatorTurn") || (activator == null)
-                || !activator.getGame().getPhaseHandler().isPlayerTurn(activator);
+        if (params.containsKey("NonActivatorTurn") && (activator != null)
+                && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -168,8 +174,12 @@ public class StaticAbilityCantBeCast {
             }
         }
 
-        return !params.containsKey("Player") || (player == null)
-                || player.isValid(params.get("Player"), hostCard.getController(), hostCard, null);
+        if (params.containsKey("Player") && (player != null)
+                && !player.isValid(params.get("Player"), hostCard.getController(), hostCard, null)) {
+            return false;
+        }
+
+        return true;
     }
 
 }

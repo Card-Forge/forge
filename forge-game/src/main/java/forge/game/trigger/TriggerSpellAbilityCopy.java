@@ -78,8 +78,10 @@ public class TriggerSpellAbilityCopy extends Trigger {
             }
         }
         if (hasParam("ValidActivatingPlayer")) {
-            return si != null && matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer")
-                    .split(","), getHostCard());
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer")
+                    .split(","), getHostCard())) {
+                return false;
+            }
         }
         return true;
     }

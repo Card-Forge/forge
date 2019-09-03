@@ -113,7 +113,9 @@ public class TriggerAttacks extends Trigger {
                     }
                 }
             }
-            return found;
+            if (!found) {
+                return false;
+            }
         }
 
         return true;

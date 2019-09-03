@@ -59,9 +59,13 @@ public class TriggerSetInMotion extends Trigger {
 
         if (this.mapParams.containsKey("SchemeType")) {
             if (this.mapParams.get("SchemeType").equals("NonOngoing")) {
-                return !((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing);
+                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                    return false;
+                }
             } else if (this.mapParams.get("SchemeType").equals("Ongoing")) {
-                return ((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing);
+                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                    return false;
+                }
             }
         }
 

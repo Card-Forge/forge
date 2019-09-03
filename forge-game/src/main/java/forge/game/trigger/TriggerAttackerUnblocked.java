@@ -58,8 +58,10 @@ public class TriggerAttackerUnblocked extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidDefender")) {
-            return matchesValid(runParams2.get("Defender"), this.mapParams.get("ValidDefender").split(","),
-                    this.getHostCard());
+            if (!matchesValid(runParams2.get("Defender"), this.mapParams.get("ValidDefender").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
         }
         return true;
     }

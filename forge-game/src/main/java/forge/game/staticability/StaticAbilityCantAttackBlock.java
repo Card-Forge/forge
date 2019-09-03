@@ -82,7 +82,9 @@ public class StaticAbilityCantAttackBlock {
         }
         if (params.containsKey("UnlessDefender")) {
         	final String type = params.get("UnlessDefender");
-            return !defender.hasProperty(type, hostCard.getController(), hostCard, null);
+            if (defender.hasProperty(type, hostCard.getController(), hostCard, null)) {
+                return false;
+            }
         }
 
         return true;

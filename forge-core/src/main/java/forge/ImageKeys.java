@@ -133,7 +133,7 @@ public final class ImageKeys {
                 // if there's an art variant try without it
                 if (setlessFilename.matches(".*[0-9]*$")) {
                     file = findFile(dir, setlessFilename.replaceAll("[0-9]*$", ""));
-                    return file;
+                    if (file != null) { return file; }
                 }
             }
         } else if (filename.contains("/")) {
@@ -144,7 +144,7 @@ public final class ImageKeys {
             // try lowering the art index to the minimum for regular cards
             if (setlessFilename.contains(".full")) {
                 file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
-                return file;
+                if (file != null) { return file; }
             }
         }
 

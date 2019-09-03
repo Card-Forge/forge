@@ -1720,7 +1720,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isSpell() && text.contains("was spent to cast")) {
             return true;
         }
-        return isAbility() && text.contains("mana spent to pay");
+        if (isAbility() && text.contains("mana spent to pay")) {
+            return true;
+        }
+        return false;
     }
 
     public void checkActivationResloveSubs() {

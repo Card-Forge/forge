@@ -60,9 +60,13 @@ public class TriggerTaps extends Trigger {
         }
         if (hasParam("Attacker")) {
             if ("True".equalsIgnoreCase(getParam("Attacker"))) {
-                return (Boolean) runParams2.get("Attacker");
+                if (!(Boolean)runParams2.get("Attacker")) {
+                    return false;
+                }
             } else if ("False".equalsIgnoreCase(getParam("Attacker"))) {
-                return !((Boolean) runParams2.get("Attacker"));
+                if ((Boolean)runParams2.get("Attacker")) {
+                    return false;
+                }
             }
         }
 

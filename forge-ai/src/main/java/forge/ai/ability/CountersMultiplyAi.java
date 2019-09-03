@@ -45,7 +45,10 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                         if (c.getCounters(counterType) <= 0) {
                             return false;
                         }
-                        return c.canReceiveCounters(counterType);
+                        if (!c.canReceiveCounters(counterType)) {
+                            return false;
+                        }
+
                     } else {
                         for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
                             // has negative counter it would double
@@ -85,7 +88,11 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 }
             }
         }
-        return !ComputerUtil.waitForBlocking(sa);
+        if (ComputerUtil.waitForBlocking(sa)) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -126,7 +133,9 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                     if (c.getCounters(counterType) <= 0) {
                         return false;
                     }
-                    return c.canReceiveCounters(counterType);
+                    if (!c.canReceiveCounters(counterType)) {
+                        return false;
+                    }
                 }
 
                 return true;

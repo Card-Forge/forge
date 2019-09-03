@@ -879,18 +879,19 @@ public class ComputerUtilCombat {
         } else if (mode == TriggerType.DamageDone) {
             willTrigger = true;
             if (trigParams.containsKey("ValidSource")) {
-                if (CardTraitBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
+                if (!(CardTraitBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
                         && defender.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                                || CardTraitBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source))) {
-                    return true;
+                                || CardTraitBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source)))) {
+                    return false;
                 }
-                return CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                if (!(CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
                         && attacker.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                        || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source));
+                        || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source)))) {
+                    return false;
+                }
             }
-            return false;
         }
 
         return willTrigger;
@@ -1789,7 +1790,11 @@ public class ComputerUtilCombat {
         }
 
         // all damage will be prevented
-        return attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource");
+        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
+            return true;
+        }
+
+        return false;
     }
 
     // can the blocker destroy the attacker?
@@ -1912,7 +1917,9 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-            return attackerLife <= 2 * defenderDamage;
+            if (attackerLife <= 2 * defenderDamage) {
+                return true;
+            }
         } // defender double strike
 
         else { // no double strike for defender
@@ -1936,7 +1943,7 @@ public class ComputerUtilCombat {
             return defenderDamage >= attackerLife;
 
         } // defender no double strike
-        // should never arrive here
+        return false;// should never arrive here
     } // canDestroyAttacker
 
     // For AI safety measures like Regeneration
@@ -2157,7 +2164,9 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-            return defenderLife <= 2 * attackerDamage;
+            if (defenderLife <= 2 * attackerDamage) {
+                return true;
+            }
         } // attacker double strike
 
         else { // no double strike for attacker
@@ -2181,7 +2190,7 @@ public class ComputerUtilCombat {
             return attackerDamage >= defenderLife;
 
         } // attacker no double strike
-        // should never arrive here
+        return false;// should never arrive here
     } // canDestroyBlocker
 
 

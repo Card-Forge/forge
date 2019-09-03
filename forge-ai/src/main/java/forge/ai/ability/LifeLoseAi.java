@@ -146,8 +146,12 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        return SpellAbilityAi.isSorcerySpeed(sa) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
-                || ComputerUtil.activateForCost(sa, ai);
+        if (SpellAbilityAi.isSorcerySpeed(sa) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
+                || ComputerUtil.activateForCost(sa, ai)) {
+            return true;
+        }
+
+        return false;
     }
 
     /*

@@ -2476,7 +2476,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                     "Skip all combat phases of this turn.");
             return true;
         }
-        return hasKeyword("Skip all combat phases of this turn.");
+        if (hasKeyword("Skip all combat phases of this turn.")) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isSkippingMain() {
@@ -2596,7 +2599,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             removeKeyword("Skip your next draw step.");
             return true;
         }
-        return hasKeyword("Skip your draw step.");
+        if (hasKeyword("Skip your draw step.")) {
+            return true;
+        }
+        return false;
     }
 
     public CardCollectionView getInboundTokens() {

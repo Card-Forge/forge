@@ -77,7 +77,9 @@ public class TriggerBlocks extends Trigger {
             	}
             }
 
-            return foundMatch;
+            if (!foundMatch) {
+                return false;
+            }
         }
 
         return true;

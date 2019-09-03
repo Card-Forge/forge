@@ -93,8 +93,10 @@ public class TriggerCounterAddedOnce extends Trigger {
                 return false;
             }
 
-            return source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
-                    getHostCard(), null);
+            if (!source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
+                return false;
+            }
         }
 
         return true;

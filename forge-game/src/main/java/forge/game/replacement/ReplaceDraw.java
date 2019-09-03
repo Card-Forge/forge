@@ -55,9 +55,11 @@ public class ReplaceDraw extends ReplacementEffect {
         }
         if (this.getMapParams().containsKey("NotFirstCardInDrawStep")) {
             final Player p = (Player)runParams.get("Affected");
-            return p.numDrawnThisDrawStep() != 0
-                    || !this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)
-                    || !this.getHostCard().getGame().getPhaseHandler().isPlayerTurn(p);
+            if (p.numDrawnThisDrawStep() == 0
+                    && this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)
+                    && this.getHostCard().getGame().getPhaseHandler().isPlayerTurn(p)) {
+                return false;
+            }
         }
 
         return true;

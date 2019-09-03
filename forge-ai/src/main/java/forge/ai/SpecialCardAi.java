@@ -377,12 +377,15 @@ public class SpecialCardAi {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
-            // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
-            return !oppCantDie || source.hasKeyword(Keyword.TRAMPLE) || source.hasKeyword(Keyword.WITHER)
-                    || source.hasKeyword(Keyword.INFECT) || predictedPT.getLeft() > oppT;
+            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.hasKeyword(Keyword.WITHER)
+                    && !source.hasKeyword(Keyword.INFECT) && predictedPT.getLeft() <= oppT) {
+                // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
+                return false;
+            }
 
             // If we got here, it should be a favorable combat pump, resulting in at least one
             // opposing creature dying, and hopefully with the Pummeler surviving combat.
+            return true;
         }
 
         public static boolean predictOverwhelmingDamage(final Player ai, final SpellAbility sa) {
@@ -471,13 +474,15 @@ public class SpecialCardAi {
             }
 
             if (isExileMode) {
-                // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
-                // since the AI does not prioritize/value cards vs. permission at the moment.
                 if (blueCards.size() < 2) {
                     // Need to have something else in hand that is blue in addition to Force of Will itself,
                     // otherwise the AI will fail to play the card and the card will disappear from the pool
                     return false;
-                } else return !CardLists.filter(blueCards, CardPredicates.lessCMC(3)).isEmpty();
+                } else if (CardLists.filter(blueCards, CardPredicates.lessCMC(3)).isEmpty()) {
+                    // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
+                    // since the AI does not prioritize/value cards vs. permission at the moment.
+                    return false;
+                }
             }
 
             return true;
@@ -891,13 +896,15 @@ public class SpecialCardAi {
                 }
             } else if (blackViseOTB && computerHandSize + exiledWithNecro - 1 >= 4) { 
                 // try not to overdraw in presence of Black Vise
-                return false; 
-            } else // Only activate in AI's own turn (sans the exception above)
-                if (computerHandSize + exiledWithNecro - 1 >= maxHandSize) {
+                return false;
+            } else if (computerHandSize + exiledWithNecro - 1 >= maxHandSize) {
                 // Only draw until we reach max hand size
                 return false;
-            } else return ph.isPlayerTurn(ai) && ph.is(PhaseType.MAIN2);
-
+            } else if (!ph.isPlayerTurn(ai) || !ph.is(PhaseType.MAIN2)) {
+                // Only activate in AI's own turn (sans the exception above)
+                return false;
+            }
+            return true;
         }
     }
 
@@ -1426,12 +1433,14 @@ public class SpecialCardAi {
             } else if (blackViseOTB && computerHandSize + 1 > 4) {
                     // try not to overdraw in presence of Black Vise
                     return false;
-            } else // Only activate in AI's own turn (sans the exception above)
-                if (computerHandSize + 1 > maxHandSize) {
+            } else if (computerHandSize + 1 > maxHandSize) {
                 // Only draw until we reach max hand size
                 return false;
-            } else return ph.isPlayerTurn(ai);
-
+            } else if (!ph.isPlayerTurn(ai)) {
+                // Only activate in AI's own turn (sans the exception above)
+                return false;
+            }
+            return true;
         }
     }
     

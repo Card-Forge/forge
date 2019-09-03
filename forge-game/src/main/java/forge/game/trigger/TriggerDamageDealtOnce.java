@@ -94,7 +94,9 @@ public class TriggerDamageDealtOnce extends Trigger {
             final int operand = Integer.parseInt(fullParam.substring(2));
             final int actualAmount = (Integer) runParams2.get("DamageAmount");
 
-            return Expressions.compare(actualAmount, operator, operand);
+            if (!Expressions.compare(actualAmount, operator, operand)) {
+                return false;
+            }
         }
 
         return true;

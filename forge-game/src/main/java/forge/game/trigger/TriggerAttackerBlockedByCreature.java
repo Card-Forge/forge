@@ -73,8 +73,12 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
         if (this.mapParams.containsKey("ValidBlocker")) {
         	final String validBlocker = this.mapParams.get("ValidBlocker");
         	if (validBlocker.equals("LessPowerThanAttacker")) {
-                return blocker.getNetPower() < attacker.getNetPower();
-        	} else return matchesValid(blocker, validBlocker.split(","), this.getHostCard());
+                if (blocker.getNetPower() >= attacker.getNetPower()) {
+                    return false;
+                }
+            } else if (!matchesValid(blocker, validBlocker.split(","), this.getHostCard())) {
+                return false;
+            }
         }
 
         return true;

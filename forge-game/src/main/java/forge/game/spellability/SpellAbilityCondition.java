@@ -444,7 +444,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             final int svarValue = AbilityUtils.calculateAmount(host, this.getsVarToCheck(), sa);
             final int operandValue = AbilityUtils.calculateAmount(host, this.getsVarOperand(), sa);
 
-            return Expressions.compare(svarValue, this.getsVarOperator(), operandValue);
+            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
+                return false;
+            }
 
         }
 

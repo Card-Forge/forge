@@ -598,7 +598,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (multiWordTypes[0].startsWith(type) && !multiWordTypes[0].equals(type)) {
             return true;
         }
-        return multiWordTypes[1].startsWith(type) && !multiWordTypes[1].equals(type);
+        if (multiWordTypes[1].startsWith(type) && !multiWordTypes[1].equals(type)) {
+            return true;
+        }
+        return false;
     }
 
     public static class Constant {

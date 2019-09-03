@@ -536,7 +536,9 @@ public class TriggerHandler {
                 final String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     final Card card = (Card) runParams.get("Card");
-                    return !card.isCreature();
+                    if (card.isCreature()) {
+                        return false;
+                    }
                 }
             }
         } // Torpor Orb check

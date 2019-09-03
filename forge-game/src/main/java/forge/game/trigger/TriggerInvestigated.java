@@ -73,7 +73,9 @@ public class TriggerInvestigated extends Trigger {
         }
         
         if (this.mapParams.containsKey("OnlyFirst")) {
-            return (int) runParams2.get("Num") == 1;
+            if ((int) runParams2.get("Num") != 1) {
+                return false;
+            }
         }
         return true;
     }

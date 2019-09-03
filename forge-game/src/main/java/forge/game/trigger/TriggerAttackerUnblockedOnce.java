@@ -73,8 +73,10 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
             */
         }
         if (hasParam("ValidAttackingPlayer")) {
-            return matchesValid(runParams2.get("AttackingPlayer"),
-                    this.mapParams.get("ValidAttackingPlayer").split(","), this.getHostCard());
+            if (!matchesValid(runParams2.get("AttackingPlayer"),
+                    this.mapParams.get("ValidAttackingPlayer").split(","), this.getHostCard())) {
+                return false;
+            }
         }
         return true;
     }

@@ -119,7 +119,10 @@ public final class CardScriptParser {
             if (!(part.startsWith("P") || part.startsWith("2") || isManaSymbol(part.charAt(0)))) {
                 return false;
             }
-            return (isManaSymbol(part.charAt(1))) && part.charAt(0) != part.charAt(1);
+            if ((!isManaSymbol(part.charAt(1))) || part.charAt(0) == part.charAt(1)) {
+                return false;
+            }
+            return true;
         }
         return false;
     }

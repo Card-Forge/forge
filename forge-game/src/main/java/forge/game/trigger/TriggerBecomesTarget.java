@@ -77,7 +77,9 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (this.mapParams.containsKey("FirstTime")) {
-            return runParams2.containsKey("FirstTime");
+            if (!runParams2.containsKey("FirstTime")) {
+                return false;
+            }
         }
 
         return true;

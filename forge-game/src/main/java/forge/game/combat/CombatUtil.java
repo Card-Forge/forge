@@ -1069,7 +1069,11 @@ public class CombatUtil {
             return false;
         }
 
-        return !attacker.hasKeyword(Keyword.INTIMIDATE) || blocker.isArtifact() || blocker.sharesColorWith(attacker);
+        if (attacker.hasKeyword(Keyword.INTIMIDATE) && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
+            return false;
+        }
+
+        return true;
     } // canBlock()
 
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {

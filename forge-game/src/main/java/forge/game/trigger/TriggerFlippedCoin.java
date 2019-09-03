@@ -58,7 +58,9 @@ public class TriggerFlippedCoin extends Trigger {
         if (this.mapParams.containsKey("ValidResult")) {
             final boolean result = (Boolean) runParams2.get("Result");
             final boolean valid = "Win".equals(this.mapParams.get("ValidResult"));
-            return !(result ^ valid);
+            if (result ^ valid) {
+                return false;
+            }
         }
 
         return true;

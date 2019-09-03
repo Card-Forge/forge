@@ -59,7 +59,9 @@ public class TriggerLifeLost extends Trigger {
         }
 
         if (this.mapParams.containsKey("FirstTime")) {
-            return (boolean) runParams2.get("FirstTime");
+            if (!(boolean)runParams2.get("FirstTime")) {
+                return false;
+            }
         }
 
         return true;

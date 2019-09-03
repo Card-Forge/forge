@@ -562,7 +562,9 @@ public class HumanPlay {
                 }
                 else { // Tainted Specter, Gurzigost, etc.
                     boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
-                    return hasPaid;
+                    if (!hasPaid) {
+                        return false;
+                    }
                 }
                 return true;
             }

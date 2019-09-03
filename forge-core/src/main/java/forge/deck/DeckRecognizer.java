@@ -216,7 +216,10 @@ public class DeckRecognizer {
         if (line.toLowerCase().contains("schemes")) {
             return true;
         }
-        return line.toLowerCase().contains("vanguard");
+        if (line.toLowerCase().contains("vanguard")) {
+            return true;
+        }
+        return false;
     }
 
     public void setDateConstraint(int month, Integer year) {

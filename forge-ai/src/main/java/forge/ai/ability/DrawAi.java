@@ -68,7 +68,10 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
 
-        return canLoot(ai, sa);
+        if (!canLoot(ai, sa)) {
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -104,7 +107,11 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
-        return ComputerUtilCost.checkRemoveCounterCost(cost, source, sa);
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
+            return false;
+        }
+
+        return true;
     }
 
     /*
@@ -195,7 +202,9 @@ public class DrawAi extends SpellAbilityAi {
             if (numHand == 0 && numDraw == numDiscard) {
                 return false; // no looting since everything is dumped
             }
-            return numHand + numDraw >= numDiscard; // net loss of cards
+            if (numHand + numDraw < numDiscard) {
+                return false; // net loss of cards
+            }
         }
         return true;
     }
@@ -477,8 +486,11 @@ public class DrawAi extends SpellAbilityAi {
 
             // ability is not targeted
             if (numCards >= computerLibrarySize) {
-                return ai.isCardInPlay("Laboratory Maniac");
+                if (ai.isCardInPlay("Laboratory Maniac")) {
+                    return true;
+                }
                 // Don't deck yourself
+                return false;
             }
 
             if (numCards == 0 && !drawback) {
@@ -491,7 +503,9 @@ public class DrawAi extends SpellAbilityAi {
                     && !assumeSafeX) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                return drawback;
+                if (!drawback) {
+                    return false;
+                }
             }
         }
         return true;

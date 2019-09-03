@@ -57,7 +57,9 @@ public class ReplaceGainLife extends ReplacementEffect {
             }
         }
         if ("True".equals(this.getMapParams().get("SourceController"))) {
-            return runParams.get("Source") != null && runParams.get("Affected").equals(((Card) runParams.get("Source")).getController());
+            if (runParams.get("Source") == null || !runParams.get("Affected").equals(((Card)runParams.get("Source")).getController())) {
+                return false;
+            }
         }
 
         return true;

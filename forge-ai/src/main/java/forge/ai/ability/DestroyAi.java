@@ -295,9 +295,11 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
 
-            return !list.isEmpty()
-                    && CardLists.filterControlledBy(list, ai).isEmpty()
-                    && !CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty();
+            if (list.isEmpty()
+                    || !CardLists.filterControlledBy(list, ai).isEmpty()
+                    || CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
+                return false;
+            }
         }
         return true;
     }

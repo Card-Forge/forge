@@ -146,7 +146,10 @@ public class DestroyAllAi extends SpellAbilityAi {
             AiBlockController block = new AiBlockController(ai);
             block.assignBlockersForCombat(combat);
 
-            return ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
+            if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+                return true;
+            }
+            return false;
         } // only lands involved
         else if (CardLists.getNotType(opplist, "Land").isEmpty() && CardLists.getNotType(ailist, "Land").isEmpty()) {
         	if (ai.isCardInPlay("Crucible of Worlds") && !opponent.isCardInPlay("Crucible of Worlds") && !opplist.isEmpty()) {
@@ -161,9 +164,13 @@ public class DestroyAllAi extends SpellAbilityAi {
                 }
             }
             // check if the AI would lose more lands than the opponent would
-            return ComputerUtilCard.evaluatePermanentList(ailist) <= ComputerUtilCard.evaluatePermanentList(opplist) + 1;
+            if (ComputerUtilCard.evaluatePermanentList(ailist) > ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
+                return false;
+            }
         } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-        else return (ComputerUtilCard.evaluatePermanentList(ailist) + 3) < ComputerUtilCard.evaluatePermanentList(opplist);
-
+        else if ((ComputerUtilCard.evaluatePermanentList(ailist) + 3) >= ComputerUtilCard.evaluatePermanentList(opplist)) {
+            return false;
+        }
+        return true;
     }
 }

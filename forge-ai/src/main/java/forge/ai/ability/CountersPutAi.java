@@ -592,7 +592,11 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         }
 
-        return !ComputerUtil.waitForBlocking(sa);
+        if (ComputerUtil.waitForBlocking(sa)) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -1067,8 +1071,10 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 int totBlkPower = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
-                return source.getNetToughness() <= totBlkPower
-                        && source.getNetToughness() + amount > totBlkPower;
+                if (source.getNetToughness() <= totBlkPower
+                        && source.getNetToughness() + amount > totBlkPower) {
+                    return true;
+                }
             }
         } else if (combat.isBlocking(source)) {
             for (Card blocked : combat.getAttackersBlockedBy(source)) {
@@ -1079,8 +1085,10 @@ public class CountersPutAi extends SpellAbilityAi {
             }
 
             int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower);
-            return source.getNetToughness() <= totAtkPower
-                    && source.getNetToughness() + amount > totAtkPower;
+            if (source.getNetToughness() <= totAtkPower
+                    && source.getNetToughness() + amount > totAtkPower) {
+                return true;
+            }
         }
         return false;
     }

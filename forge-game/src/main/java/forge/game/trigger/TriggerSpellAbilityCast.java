@@ -252,7 +252,9 @@ public class TriggerSpellAbilityCast extends Trigger {
                     break;
                 }
             }
-            return sameNameFound;
+            if (!sameNameFound) {
+                return false;
+            }
         }
         return true;
     }

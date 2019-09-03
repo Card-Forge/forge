@@ -795,7 +795,11 @@ public class ComputerUtil {
                         return true;
                     }
 
-                    return ComputerUtilCard.hasActiveUndyingOrPersist(c);
+                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                        return true;
+                    }
+
+                    return false;
                 }
             });
         }
@@ -1155,25 +1159,30 @@ public class ComputerUtil {
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
-            // Don't need more land.
-            return landsInPlay.size() >= highestCMC
+            if (landsInPlay.size() >= highestCMC
                     || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
-                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0);
+                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
+                // Don't need more land.
+                return true;
+            }
         } else { //non-land
             if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
                 return true;
-            } else // Probably don't need small stuff now.
-                if (!game.getPhaseHandler().isPlayerTurn(ai)
+            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
                     && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
                     && discardCMC > landsInPlay.size() + landsInHand.size()
                     && discardCMC > landsInPlay.size() + 1
                     && nonLandsInHand.size() > 1) {
                 // not castable for at least one other turn.
                 return true;
-            } else return landsInPlay.size() > 5 && discard.getCMC() <= 1
-                        && !discard.hasProperty("hasXCost", ai, null, null);
+            } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
+                    && !discard.hasProperty("hasXCost", ai, null, null)) {
+                // Probably don't need small stuff now.
+                return true;
+            }
         }
+        return false;
     }
 
     // returns true if it's better to wait until blockers are declared
@@ -1914,12 +1923,16 @@ public class ComputerUtil {
             if (predictThreatenedObjects(ai, null).contains(source)) {
                 return true;
             }
-            return game.getPhaseHandler().inCombat() &&
-                    ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat());
+            if (game.getPhaseHandler().inCombat() &&
+                    ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
+                return true;
+            }
         } else if (zone.getZoneType() == ZoneType.Exile && sa.getMayPlay() != null) {
             // play cards in exile that can only be played that turn
             if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
-                return source.mayPlay(sa.getMayPlay()) != null;
+                if (source.mayPlay(sa.getMayPlay()) != null) {
+                    return true;
+                }
             }
         }
         return false;
@@ -2847,8 +2860,10 @@ public class ComputerUtil {
             return false;
         } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
             return false;
-        } else return !Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"));
-
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
+            return false;
+        }
+        return true;
     }
 
     public static boolean lifegainNegative(final Player player, final Card source) {
@@ -3046,7 +3061,10 @@ public class ComputerUtil {
         if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
             return true;
         }
-        return (!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment));
+        if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
+            return true;
+        }
+        return false;
 
     }
 }

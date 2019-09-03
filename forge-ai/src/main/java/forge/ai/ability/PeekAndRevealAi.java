@@ -24,8 +24,10 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             return false;
         }
         if ("Main2".equals(sa.getParam("AILogic"))) {
-            return !aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2);
-    	}
+            if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                return false;
+            }
+        }
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
         return true;

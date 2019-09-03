@@ -80,7 +80,9 @@ public class ManifestAi extends SpellAbilityAi {
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(x));
-            return x > 0;
+            if (x <= 0) {
+                return false;
+            }
         }
 
         return true;
@@ -119,7 +121,9 @@ public class ManifestAi extends SpellAbilityAi {
                 return false;
 
             // card has ETBTrigger or ETBReplacement
-            return !card.hasETBTrigger(false) && !card.hasETBReplacement();
+            if (card.hasETBTrigger(false) || card.hasETBReplacement()) {
+                return false;
+            }
         }
         return true;
     }

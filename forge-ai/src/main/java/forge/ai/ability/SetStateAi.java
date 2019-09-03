@@ -33,7 +33,10 @@ public class SetStateAi extends SpellAbilityAi {
             return false;
         }
 
-        return "Transform".equals(mode) || "Flip".equals(mode);
+        if("Transform".equals(mode) || "Flip".equals(mode)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

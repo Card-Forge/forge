@@ -23,9 +23,13 @@ public class PlayerProperty {
 
         Game game = player.getGame();
         if (property.equals("You")) {
-            return player.equals(sourceController);
+            if (!player.equals(sourceController)) {
+                return false;
+            }
         } else if (property.equals("Opponent")) {
-            return !player.equals(sourceController) && player.isOpponentOf(sourceController);
+            if (player.equals(sourceController) || !player.isOpponentOf(sourceController)) {
+                return false;
+            }
         } else if (property.startsWith("OpponentOf ")) {
             final String v = property.split(" ")[1];
             final List<Player> players = AbilityUtils.getDefinedPlayers(source, v, spellAbility);
@@ -35,24 +39,42 @@ public class PlayerProperty {
                 }
             }
         } else if (property.equals("YourTeam")) {
-            return player.sameTeam(sourceController);
+            if (!player.sameTeam(sourceController)) {
+                return false;
+            }
         } else if (property.equals("Allies")) {
-            return !player.equals(sourceController) && !player.isOpponentOf(sourceController);
+            if (player.equals(sourceController) || player.isOpponentOf(sourceController)) {
+                return false;
+            }
         } else if (property.equals("Active")) {
-            return player.equals(game.getPhaseHandler().getPlayerTurn());
+            if (!player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                return false;
+            }
         } else if (property.equals("NonActive")) {
-            return !player.equals(game.getPhaseHandler().getPlayerTurn());
+            if (player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                return false;
+            }
         } else if (property.equals("OpponentToActive")) {
             final Player active = game.getPhaseHandler().getPlayerTurn();
-            return !player.equals(active) && player.isOpponentOf(active);
+            if (player.equals(active) || !player.isOpponentOf(active)) {
+                return false;
+            }
         } else if (property.equals("Other")) {
-            return !player.equals(sourceController);
+            if (player.equals(sourceController)) {
+                return false;
+            }
         } else if (property.equals("OtherThanSourceOwner")) {
-            return !player.equals(source.getOwner());
+            if (player.equals(source.getOwner())) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
-            return player.equals(game.getMonarch());
+            if (!player.equals(game.getMonarch())) {
+                return false;
+            }
         } else if (property.equals("hasBlessing")) {
-            return player.hasBlessing();
+            if (!player.hasBlessing()) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
             String v = property.split(" ")[1];
 
@@ -69,7 +91,9 @@ public class PlayerProperty {
                     found++;
                 }
             }
-            return found >= count;
+            if (found < count) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
             String v = property.split(" ")[1];
 
@@ -86,7 +110,9 @@ public class PlayerProperty {
                     found++;
                 }
             }
-            return found >= count;
+            if (found < count) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtDamageThisTurnBy ")) {
             String v = property.split(" ")[1];
             int count = 1;
@@ -103,7 +129,9 @@ public class PlayerProperty {
                     found++;
                 }
             }
-            return found >= count;
+            if (found < count) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtCombatDamageThisTurnBy ")) {
             String v = property.split(" ")[1];
 
@@ -121,54 +149,90 @@ public class PlayerProperty {
                     found++;
                 }
             }
-            return found >= count;
+            if (found < count) {
+                return false;
+            }
         } else if (property.equals("attackedBySourceThisCombat")) {
-            return game.getCombat() != null && player.equals(game.getCombat().getDefenderPlayerByAttacker(source));
+            if (game.getCombat() == null || !player.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
+                return false;
+            }
         } else if (property.equals("wasDealtDamageThisTurn")) {
-            return player.getAssignedDamage() != 0;
+            if (player.getAssignedDamage() == 0) {
+                return false;
+            }
         } else if (property.equals("wasDealtCombatDamageThisTurn")) {
-            return player.getAssignedCombatDamage() != 0;
+            if (player.getAssignedCombatDamage() == 0) {
+                return false;
+            }
         } else if (property.equals("LostLifeThisTurn")) {
-            return player.getLifeLostThisTurn() > 0;
+            if (player.getLifeLostThisTurn() <= 0) {
+                return false;
+            }
         } else if (property.equals("DeclaredAttackerThisTurn")) {
-            return player.getAttackersDeclaredThisTurn() > 0;
+            if (player.getAttackersDeclaredThisTurn() <= 0) {
+                return false;
+            }
         } else if (property.equals("TappedLandForManaThisTurn")) {
-            return player.hasTappedLandForManaThisTurn();
+            if (!player.hasTappedLandForManaThisTurn()) {
+                return false;
+            }
         } else if (property.equals("NoCardsInHandAtBeginningOfTurn")) {
-            return player.getNumCardsInHandStartedThisTurnWith() <= 0;
+            if (player.getNumCardsInHandStartedThisTurnWith() > 0) {
+                return false;
+            }
         } else if (property.equals("CardsInHandAtBeginningOfTurn")) {
-            return player.getNumCardsInHandStartedThisTurnWith() > 0;
+            if (player.getNumCardsInHandStartedThisTurnWith() <= 0) {
+                return false;
+            }
         } else if (property.startsWith("WithCardsInHand")) {
             if (property.contains("AtLeast")) {
                 int amount = Integer.parseInt(property.split("AtLeast")[1]);
-                return player.getCardsIn(ZoneType.Hand).size() >= amount;
+                if (player.getCardsIn(ZoneType.Hand).size() < amount) {
+                    return false;
+                }
             }
         } else if (property.equals("IsRemembered")) {
-            return source.isRemembered(player);
+            if (!source.isRemembered(player)) {
+                return false;
+            }
         } else if (property.equals("IsNotRemembered")) {
-            return !source.isRemembered(player);
+            if (source.isRemembered(player)) {
+                return false;
+            }
         } else if (property.equals("EnchantedBy")) {
-            return player.isEnchantedBy(source);
+            if (!player.isEnchantedBy(source)) {
+                return false;
+            }
         } else if (property.equals("Chosen")) {
-            return source.getChosenPlayer() != null && source.getChosenPlayer().equals(player);
+            if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(player)) {
+                return false;
+            }
         } else if (property.startsWith("LifeEquals_")) {
             int life = AbilityUtils.calculateAmount(source, property.substring(11), null);
-            return player.getLife() == life;
+            if (player.getLife() != life) {
+                return false;
+            }
         } else if (property.equals("IsPoisoned")) {
-            return player.getPoisonCounters() > 0;
+            if (player.getPoisonCounters() <= 0) {
+                return false;
+            }
         } else if (property.startsWith("controls")) {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
             String comparator = type[1];
             String compareTo = comparator.substring(2);
             int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
-            return Expressions.compare(list.size(), comparator, y);
+            if (!Expressions.compare(list.size(), comparator, y)) {
+                return false;
+            }
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            return oppList.size() > yourList.size();
+            if (oppList.size() <= yourList.size()) {
+                return false;
+            }
         } else if (property.startsWith("withAtLeast")) {
             final String cardType = property.split("More")[1].split("sThan")[0];
             final int amount = Integer.parseInt(property.substring(11, 12));
@@ -176,19 +240,25 @@ public class PlayerProperty {
             final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             System.out.println(yourList.size());
-            return oppList.size() >= yourList.size() + amount;
+            if (oppList.size() < yourList.size() + amount) {
+                return false;
+            }
         } else if (property.startsWith("hasMore")) {
             final Player controller = property.contains("Than") && "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             if (property.substring(7).startsWith("Life") && player.getLife() <= controller.getLife()) {
                 return false;
-            } else return !property.substring(7).startsWith("CardsInHand")
-                    || player.getCardsIn(ZoneType.Hand).size() > controller.getCardsIn(ZoneType.Hand).size();
+            } else if (property.substring(7).startsWith("CardsInHand")
+                    && player.getCardsIn(ZoneType.Hand).size() <= controller.getCardsIn(ZoneType.Hand).size()) {
+                return false;
+            }
         } else if (property.startsWith("hasFewer")) {
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
             final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), Presets.CREATURES);
             final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), Presets.CREATURES);
-            return oppList.size() < yourList.size();
+            if (oppList.size() >= yourList.size()) {
+                return false;
+            }
         } else if (property.startsWith("withMost")) {
             final String kind = property.substring(8);
             if (kind.equals("Life")) {
@@ -198,7 +268,9 @@ public class PlayerProperty {
                         highestLife = p.getLife();
                     }
                 }
-                return player.getLife() == highestLife;
+                if (player.getLife() != highestLife) {
+                    return false;
+                }
             }
             else if (kind.equals("PermanentInPlay")) {
                 int typeNum = 0;
@@ -214,7 +286,9 @@ public class PlayerProperty {
                     }
                 }
 
-                return controlmost.size() == 1 && controlmost.contains(player);
+                if (controlmost.size() != 1 || !controlmost.contains(player)) {
+                    return false;
+                }
             }
             else if (kind.equals("CardsInHand")) {
                 int largestHand = 0;
@@ -225,7 +299,9 @@ public class PlayerProperty {
                         withLargestHand = p;
                     }
                 }
-                return player.equals(withLargestHand);
+                if (!player.equals(withLargestHand)) {
+                    return false;
+                }
             }
             else if (kind.startsWith("Type")) {
                 String type = property.split("Type")[1];
@@ -249,7 +325,9 @@ public class PlayerProperty {
                 if (checkOnly && controlmost.size() != 1) {
                     return false;
                 }
-                return controlmost.contains(player);
+                if (!controlmost.contains(player)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("withLowest")) {
             if (property.substring(10).equals("Life")) {
@@ -264,12 +342,18 @@ public class PlayerProperty {
                         lowestlifep.add(p);
                     }
                 }
-                return lowestlifep.contains(player);
+                if (!lowestlifep.contains(player)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("LessThanHalfStartingLifeTotal")) {
-            return player.getLife() < (int) Math.ceil(player.getStartingLife() / 2.0);
+            if (player.getLife() >= (int) Math.ceil(player.getStartingLife() / 2.0)) {
+                return false;
+            }
         } else if (property.startsWith("Triggered")) {
-            return AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player);
+            if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
+                return false;
+            }
         }
         return true;
     }

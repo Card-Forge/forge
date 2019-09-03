@@ -1516,9 +1516,13 @@ public class AiController {
             // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
             return true;
         }
-        // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
-        // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
-        return (predictedMana > totalCMCInHand || !canCastWithLandDrop) && (!hasRelevantAbsOTB || isTapLand) && !hasLandBasedEffect;
+        if ((predictedMana <= totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandBasedEffect) {
+            // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
+            // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
+            return false;
+        }
+
+        return true;
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
@@ -1637,8 +1641,12 @@ public class AiController {
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
-        // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
-        return spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null;
+        if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
+            // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
+            return true;
+        }
+
+        return false;
     }
     
     /**

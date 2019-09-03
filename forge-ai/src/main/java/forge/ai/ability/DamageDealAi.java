@@ -845,7 +845,10 @@ public class DamageDealAi extends DamageAiBase {
         if (!positive && !(saMe instanceof AbilitySub)) {
             return false;
         }
-        return urgent || SpellAbilityAi.playReusable(ai, saMe);
+        if (!urgent && !SpellAbilityAi.playReusable(ai, saMe)) {
+            return false;
+        }
+        return true;
     }
 
     /**

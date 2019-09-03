@@ -120,7 +120,9 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 MagicStack stack = game.getStack();
                 if (!stack.isEmpty()) {
                     SpellAbility saTop = stack.peekAbility();
-                    return ComputerUtil.predictDamageFromSpell(saTop, ai) >= aiLife;
+                    if (ComputerUtil.predictDamageFromSpell(saTop, ai) >= aiLife) {
+                        return true;
+                    }
                 }
             }
 

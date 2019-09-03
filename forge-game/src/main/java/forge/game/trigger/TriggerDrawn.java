@@ -70,7 +70,11 @@ public class TriggerDrawn extends Trigger {
         }
 
         // trigger should not happen while Mulligan
-        return game.getAge() != GameStage.Mulligan;
+        if (game.getAge() == GameStage.Mulligan) {
+            return false;
+        }
+
+        return true;
     }
 
     /** {@inheritDoc} */
