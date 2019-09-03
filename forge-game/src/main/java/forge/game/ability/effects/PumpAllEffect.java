@@ -51,7 +51,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             boolean redrawPT = false;
 
-            if (a > 0 || d > 0) {
+            if (a != 0 || d != 0) {
                 tgtC.addPTBoost(a, d, timestamp);
                 redrawPT = true;
             }
