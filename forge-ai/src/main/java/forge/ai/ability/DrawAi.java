@@ -69,7 +69,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (!canLoot(ai, sa)) {
-                return false;
+            return false;
         }
         return true;
     }

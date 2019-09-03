@@ -94,7 +94,7 @@ public class AttackConstraints {
         final int globalMax = globalRestrictions.getMax();
         final int myMax = Ints.min(globalMax == -1 ? Integer.MAX_VALUE : globalMax, possibleAttackers.size());
         if (myMax == 0) {
-            return Pair.of(Collections.<Card, GameEntity>emptyMap(), Integer.valueOf(0));
+            return Pair.of(Collections.emptyMap(), Integer.valueOf(0));
         }
 
         final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<Map<Card, GameEntity>>();
@@ -163,8 +163,8 @@ public class AttackConstraints {
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
         possible.putAll(Maps.asMap(legalAttackers.asSet(), FN_COUNT_VIOLATIONS));
-        if (countViolations(Collections.<Card, GameEntity>emptyMap()) != -1) {
-            possible.put(Collections.<Card, GameEntity>emptyMap(), countViolations(Collections.<Card, GameEntity>emptyMap()));
+        if (countViolations(Collections.emptyMap()) != -1) {
+            possible.put(Collections.emptyMap(), countViolations(Collections.emptyMap()));
         }
  
         // take the case with the fewest violations
@@ -173,7 +173,7 @@ public class AttackConstraints {
 
     private final FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
         return new FCollection<Map<Card, GameEntity>>
-            (collectLegalAttackers(Collections.<Card, GameEntity>emptyMap(), deepClone(reqs), new CardCollection(), maximum));
+            (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
     }
 
     private final List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {

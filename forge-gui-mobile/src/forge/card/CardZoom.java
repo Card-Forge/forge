@@ -291,7 +291,7 @@ public class CardZoom extends FOverlay {
     protected void doLayout(float width, float height) {
     }
 
-    public static interface ActivateHandler {
+    public interface ActivateHandler {
         String getActivateAction(int index);
         void setSelectedIndex(int index);
         void activate(int index);

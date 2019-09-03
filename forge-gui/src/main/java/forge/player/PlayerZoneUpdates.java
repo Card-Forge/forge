@@ -12,7 +12,7 @@ import forge.game.player.PlayerView;
 public class PlayerZoneUpdates implements Iterable<PlayerZoneUpdate>, Serializable {
     private static final long serialVersionUID = 7023549243041119023L;
 
-    private final Map<PlayerView, PlayerZoneUpdate> updates = Collections.synchronizedMap(Maps.<PlayerView, PlayerZoneUpdate>newHashMap());
+    private final Map<PlayerView, PlayerZoneUpdate> updates = Collections.synchronizedMap(Maps.newHashMap());
 
     public PlayerZoneUpdates() {
     }

@@ -43,7 +43,7 @@ import java.util.Map;
  */
 public abstract class PlayerController {
 
-    public static enum ManaPaymentPurpose {
+    public enum ManaPaymentPurpose {
         DeclareAttacker,
         DeclareBlocker,
         Echo,
@@ -51,7 +51,7 @@ public abstract class PlayerController {
         CumulativeUpkeep,
     }
 
-    public static enum BinaryChoiceType {
+    public enum BinaryChoiceType {
         HeadsOrTails, // coin
         TapOrUntap,
         PlayOrDraw,

@@ -84,9 +84,7 @@ public class ControlGainAi extends SpellAbilityAi {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), opponents);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
-                if (tgtCards.isEmpty()) {
-                    return false;
-                }
+                return !tgtCards.isEmpty();
             }
             return true;
         } else {
@@ -247,7 +245,7 @@ public class ControlGainAi extends SpellAbilityAi {
                         break;
                     }
                 }
-            };
+            }
 
             if (t != null) {
                 sa.getTargets().add(t);
@@ -296,15 +294,12 @@ public class ControlGainAi extends SpellAbilityAi {
                 lose.addAll(Lists.newArrayList(sa.getParam("LoseControl").split(",")));
             }
 
-            if (lose.contains("EOT")
-                    && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return false;
-            }
+            return !lose.contains("EOT")
+                    || !game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
         } else {
             return this.canPlayAI(ai, sa);
         }
 
-        return true;
     } // pumpDrawbackAI()
 
     @Override

@@ -94,12 +94,8 @@ public class SpecialCardAi {
             int minCMC = isLowCMCDeck ? 3 : 4; // probably not worth wasting a lotus on a low-CMC spell (<4 CMC), except in low-CMC decks, where 3 CMC may be fine
             int paidCMC = cost.getConvertedManaCost();
             if (paidCMC < minCMC) {
-                if (paidCMC == 3 && numManaSrcs < 3) {
-                    // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it anyway
-                    return true;
-                } 
-
-                return false;
+                // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it anyway
+                return paidCMC == 3 && numManaSrcs < 3;
             }
 
             return true;
@@ -218,11 +214,7 @@ public class SpecialCardAi {
                 }
             }
 
-            if (ai.getLife() <= sa.getHostCard().getNetPower() && !hasUsefulBlocker) {
-                return true;
-            } else {
-                return false;
-            }
+            return ai.getLife() <= sa.getHostCard().getNetPower() && !hasUsefulBlocker;
         }
         
         public static int getSacThreshold() {
@@ -335,7 +327,7 @@ public class SpecialCardAi {
             boolean canTrample = source.hasKeyword(Keyword.TRAMPLE);
 
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
-                int loyalty = ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY);
+                int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterType.LOYALTY);
                 int totalDamageToPW = 0;
                 for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
                     if (combat.isUnblocked(atk)) {
@@ -411,11 +403,7 @@ public class SpecialCardAi {
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
             int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
 
-            if (potentialBlockers.isEmpty() || (source.hasKeyword(Keyword.TRAMPLE) && predictedPT.getLeft() - oppT >= oppLife)) {
-                return true;
-            }
-
-            return false;
+            return potentialBlockers.isEmpty() || (source.hasKeyword(Keyword.TRAMPLE) && predictedPT.getLeft() - oppT >= oppLife);
         }
 
         public static Pair<Integer, Integer> getPumpedPT(Player ai, int power, int toughness) {
@@ -522,7 +510,7 @@ public class SpecialCardAi {
                         best.add(sp); // these SAs are prioritized since the AI sees a reason to play them now
                     }
                     final List<String> keywords = sp.hasParam("KW") ? Arrays.asList(sp.getParam("KW").split(" & "))
-                            : Lists.<String>newArrayList();
+                            : Lists.newArrayList();
                     for (String kw : keywords) {
                         if (!tgtCard.hasKeyword(kw)) {
                             if ("Indestructible".equals(kw) && ai.getOpponents().getCreaturesInPlay().isEmpty()) {
@@ -568,10 +556,7 @@ public class SpecialCardAi {
                     @Override
                     public boolean apply(final Card c) {
                         // Don't enchant creatures that can survive
-                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetToughness() || c.isEnchantedBy("Guilty Conscience")) {
-                            return false;
-                        }
-                        return true;
+                        return c.canBeDestroyed() && c.getNetCombatDamage() >= c.getNetToughness() && !c.isEnchantedBy("Guilty Conscience");
                     }
                 });
                 chosen = ComputerUtilCard.getBestCreatureAI(creatures);
@@ -911,15 +896,14 @@ public class SpecialCardAi {
                 }
             } else if (blackViseOTB && computerHandSize + exiledWithNecro - 1 >= 4) { 
                 // try not to overdraw in presence of Black Vise
-                return false; 
+                return false;
             } else if (computerHandSize + exiledWithNecro - 1 >= maxHandSize) {
                 // Only draw until we reach max hand size
                 return false;
             } else if (!ph.isPlayerTurn(ai) || !ph.is(PhaseType.MAIN2)) {
                 // Only activate in AI's own turn (sans the exception above)
                 return false;
-            } 
-
+            }
             return true;
         }
     }
@@ -941,11 +925,7 @@ public class SpecialCardAi {
 
             }
             // Maybe use it for some important high-impact spells even if there are more cards in hand?
-            if (ai.getCardsIn(ZoneType.Hand).size() > 1 && !hasEnsnaringBridgeEffect) {
-                return false;
-            }
-
-            return true;
+            return ai.getCardsIn(ZoneType.Hand).size() <= 1 || hasEnsnaringBridgeEffect;
         }
     }
 
@@ -1310,12 +1290,8 @@ public class SpecialCardAi {
                 }
             }
 
-            if (aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
-                // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
-                return true;
-            }
-
-            return false;
+            // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
+            return aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD;
         }
     }
 
@@ -1342,9 +1318,7 @@ public class SpecialCardAi {
                 if (topGY == null
                         || !topGY.isCreature()
                         || ComputerUtilCard.evaluateCreature(creatHand) > ComputerUtilCard.evaluateCreature(topGY) + 80) {
-                    if (numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0)) {
-                        return true;
-                    }
+                    return numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0);
                 }
             }
 
@@ -1465,8 +1439,7 @@ public class SpecialCardAi {
             } else if (!ph.isPlayerTurn(ai)) {
                 // Only activate in AI's own turn (sans the exception above)
                 return false;
-            } 
-
+            }
             return true;
         }
     }

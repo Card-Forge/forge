@@ -67,10 +67,8 @@ public class AddTurnAi extends SpellAbilityAi {
                     return false;
                 }
             }
-            if (!StringUtils.isNumeric(sa.getParam("NumTurns"))) {
-                // TODO: improve ai for Sage of Hours
-                return false;
-            }
+            // TODO: improve ai for Sage of Hours
+            return StringUtils.isNumeric(sa.getParam("NumTurns"));
             // not sure if the AI should be playing with cards that give the
             // Human more turns.
         }

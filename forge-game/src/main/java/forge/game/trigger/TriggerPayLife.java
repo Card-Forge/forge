@@ -51,9 +51,7 @@ public class TriggerPayLife extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard());
         }
 
         return true;

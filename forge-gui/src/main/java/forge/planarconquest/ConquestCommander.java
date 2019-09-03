@@ -29,10 +29,7 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
             @Override
             public boolean apply(PaperCard pc) {
                 CardRules rules = pc.getRules();
-                if (rules.canBeCommander() || rules.getType().isPlaneswalker()) {
-                    return false; //prevent including additional commanders or planeswalkers in starting deck
-                }
-                return true;
+                return !rules.canBeCommander() && !rules.getType().isPlaneswalker(); //prevent including additional commanders or planeswalkers in starting deck
             }
         })), false), null);
     }

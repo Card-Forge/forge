@@ -618,7 +618,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (fizzle != null && fizzle && rememberTgt) {
                 source.clearRemembered();
             }
-            return fizzle == null ? false : fizzle.booleanValue();
+            return fizzle != null && fizzle.booleanValue();
         }
         return hasFizzled(sa.getSubAbility(), source, fizzle) && (fizzle == null || fizzle.booleanValue());
     }

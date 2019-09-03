@@ -20,7 +20,7 @@ final class CardFace implements ICardFace {
     public enum FaceSelectionMethod { // 
         USE_ACTIVE_FACE,
         USE_PRIMARY_FACE,
-        COMBINE;
+        COMBINE
     }
 
     
@@ -87,7 +87,7 @@ final class CardFace implements ICardFace {
     void setInitialLoyalty(String value)        { this.initialLoyalty = value; }
 
     void setPtText(String value) {
-        final String k[] = value.split("/");
+        final String[] k = value.split("/");
 
         if (k.length != 2) {
             throw new RuntimeException("Creature '" + this.getName() + "' has bad p/t stats");

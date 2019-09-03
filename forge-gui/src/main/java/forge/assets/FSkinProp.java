@@ -297,7 +297,7 @@ public enum FSkinProp {
     private int[] coords;
     private PropType type;
 
-    private FSkinProp(final int[] coords0, final PropType type0) {
+    FSkinProp(final int[] coords0, final PropType type0) {
         coords = coords0;
         type = type0;
     }

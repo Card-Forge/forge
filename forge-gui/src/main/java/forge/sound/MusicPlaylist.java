@@ -14,7 +14,7 @@ public enum MusicPlaylist {
     private int mostRecentTrackIdx = -1;
     private String[] filenames;
 
-    private MusicPlaylist(String subDir0) {
+    MusicPlaylist(String subDir0) {
         subDir = subDir0;
     }
 

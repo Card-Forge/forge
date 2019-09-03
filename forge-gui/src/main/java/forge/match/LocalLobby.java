@@ -3,7 +3,6 @@ package forge.match;
 import java.util.Collections;
 
 import forge.GuiBase;
-import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 
 public final class LocalLobby extends GameLobby {
@@ -15,10 +14,10 @@ public final class LocalLobby extends GameLobby {
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();
 
-        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, true, Collections.<AIOption>emptySet());
+        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, true, Collections.emptySet());
         addSlot(slot0);
 
-        final LobbySlot slot1 = new LobbySlot(LobbySlotType.AI, null, avatarIndices[1], 1, false, true, Collections.<AIOption>emptySet());
+        final LobbySlot slot1 = new LobbySlot(LobbySlotType.AI, null, avatarIndices[1], 1, false, true, Collections.emptySet());
         addSlot(slot1);
     }
 

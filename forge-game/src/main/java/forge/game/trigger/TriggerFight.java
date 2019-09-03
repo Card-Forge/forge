@@ -53,10 +53,8 @@ public class TriggerFight extends Trigger {
         final Card fighter = (Card) runParams2.get("Fighter");
 
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!fighter.isValid(this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+            return fighter.isValid(this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard().getController(), this.getHostCard(), null);
         }
         return true;
     }

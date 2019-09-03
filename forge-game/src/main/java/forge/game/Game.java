@@ -845,7 +845,7 @@ public class Game {
                     }
                 }
                 
-                library.removeAll((Collection<?>)toRemove);
+                library.removeAll(toRemove);
                 
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));

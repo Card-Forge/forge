@@ -30,14 +30,14 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
 
-        final List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList(sa.getAdditionalAbilityList("Choices"));
+        final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         for (final Player p : tgtPlayers) {
             // determine if any of the choices are not valid
-            List<SpellAbility> saToRemove = Lists.<SpellAbility>newArrayList();
+            List<SpellAbility> saToRemove = Lists.newArrayList();
             
             for (SpellAbility saChoice : abilities) {
                 if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {

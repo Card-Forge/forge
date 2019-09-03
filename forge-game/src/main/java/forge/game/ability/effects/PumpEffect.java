@@ -60,7 +60,7 @@ public class PumpEffect extends SpellAbilityEffect {
             redrawPT = true;
         }
 
-        gameCard.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
+        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
@@ -106,7 +106,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
-        p.addChangedKeywords(keywords, ImmutableList.<String>of(), timestamp);
+        p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
@@ -252,7 +252,7 @@ public class PumpEffect extends SpellAbilityEffect {
             if (defined.equals("ChosenType")) {
                 replaced = host.getChosenType();
             } else if (defined.equals("CardUIDSource")) {
-                replaced = "CardUID_" + String.valueOf(host.getId());
+                replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
             }
@@ -277,9 +277,7 @@ public class PumpEffect extends SpellAbilityEffect {
             if (sa.hasParam("NoRepetition")) {
                 for (KeywordInterface inst : tgtCards.get(0).getKeywords()) {
                     final String kws = inst.getOriginal();
-                    if (total.contains(kws)) {
-                        total.remove(kws);
-                    }
+                    total.remove(kws);
                 }
             }
             final int min = Math.min(total.size(), numkw);

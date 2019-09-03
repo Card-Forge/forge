@@ -24,10 +24,10 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     
     private boolean hidden;
     
-    private List<Trigger> triggers = Lists.<Trigger>newArrayList();
-    private List<ReplacementEffect> replacements = Lists.<ReplacementEffect>newArrayList();
-    private List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList();
-    private List<StaticAbility> staticAbilities = Lists.<StaticAbility>newArrayList();
+    private List<Trigger> triggers = Lists.newArrayList();
+    private List<ReplacementEffect> replacements = Lists.newArrayList();
+    private List<SpellAbility> abilities = Lists.newArrayList();
+    private List<StaticAbility> staticAbilities = Lists.newArrayList();
 
 
     /* (non-Javadoc)

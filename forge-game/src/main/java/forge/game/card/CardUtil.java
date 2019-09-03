@@ -80,7 +80,7 @@ public final class CardUtil {
     }
 
     public static boolean isStackingKeyword(final String keyword) {
-        String kw = new String(keyword);
+        String kw = keyword;
         if (kw.startsWith("HIDDEN")) {
             kw = kw.substring(7);
         }
@@ -345,7 +345,7 @@ public final class CardUtil {
 
     // a nice entry point with minimum parameters
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
-        return getReflectableManaColors(sa, sa, Sets.<String>newHashSet(), new CardCollection());
+        return getReflectableManaColors(sa, sa, Sets.newHashSet(), new CardCollection());
     }
 
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
@@ -390,9 +390,7 @@ public final class CardUtil {
 
         // remove anything cards that is already in parents
         for (final Card p : parents) {
-            if (cards.contains(p)) {
-                cards.remove(p);
-            }
+            cards.remove(p);
         }
 
         if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
@@ -506,9 +504,7 @@ public final class CardUtil {
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         for (final Card c : targeted) {
-            if (choices.contains(c)) {
-                choices.remove(c);
-            }
+            choices.remove(c);
         }
 
         // Remove cards exceeding total CMC

@@ -38,7 +38,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
 
         List<GameObject> defined = getDefinedOrTargeted(sa, "Defined");
 
-        final List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList(sa.getAdditionalAbilityList("Choices"));
+        final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
 
         Player chooser = sa.getActivatingPlayer();
         if (sa.hasParam("Chooser")) {

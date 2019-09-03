@@ -248,12 +248,8 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             sa.getTargets().add(choice);
         }
 
-        if (sa.getTargets().getNumTargeted() == 0) {
-            // Nothing was ever targeted, so we need to bail.
-            return false;
-        }
-
-        return true;
+        // Nothing was ever targeted, so we need to bail.
+        return sa.getTargets().getNumTargeted() != 0;
     }
 
     /**
@@ -307,11 +303,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         // just tap whatever we can
         tapList = list;
 
-        if (tapTargetList(ai, sa, tapList, mandatory)) {
-            return true;
-        }
-
-        return false;
+        return tapTargetList(ai, sa, tapList, mandatory);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class GameEventCardStatsChanged extends GameEvent {
             return "Card state changes: " + card.getName() +
                   " (" + StringUtils.join(card.getType(), ' ') + ") " +
                   card.getNetPower() + "/" + card.getNetToughness() +
-                  " and " + String.valueOf(cards.size() - 1) + " more";
+                  " and " + (cards.size() - 1) + " more";
     }
 
 }

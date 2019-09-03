@@ -46,7 +46,7 @@ public class CardDetailUtil {
 
         public final int r, g, b;
 
-        private DetailColors(final int r0, final int g0, final int b0) {
+        DetailColors(final int r0, final int g0, final int b0) {
             r = r0;
             g = g0;
             b = b0;

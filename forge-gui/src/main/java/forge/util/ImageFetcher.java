@@ -118,7 +118,7 @@ public abstract class ImageFetcher {
 
     protected abstract Runnable getDownloadTask(String[] toArray, String destPath, Runnable notifyObservers);
 
-    public static interface Callback {
-        public void onImageFetched();
+    public interface Callback {
+        void onImageFetched();
     }
 }

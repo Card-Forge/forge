@@ -207,21 +207,16 @@ public class AnimateAi extends SpellAbilityAi {
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
             sa.resetTargets();
-            if (!animateTgtAI(sa)) {
-                return false;
-            }
+            return animateTgtAI(sa);
         }
 
-        return true;
     }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!animateTgtAI(sa)) {
-                return false;
-            }
+            return animateTgtAI(sa);
         }
 
         return true;

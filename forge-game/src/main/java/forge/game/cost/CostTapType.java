@@ -150,11 +150,7 @@ public class CostTapType extends CostPartWithList {
         }
 
         final Integer amount = this.convertAmount();
-        if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
-            return false;
-        }
-
-        return true;
+        return (typeList.size() != 0) && ((amount == null) || (typeList.size() >= amount));
     }
 
     /* (non-Javadoc)

@@ -10,7 +10,7 @@ public enum DeckSection {
     Conspiracy(0);
 
     private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
-    private DeckSection(int commonSize) {
+    DeckSection(int commonSize) {
         typicalSize = commonSize;
     }
     
