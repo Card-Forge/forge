@@ -39,7 +39,7 @@ public enum PlanarDice {
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", roller);
         runParams.put("Result", trigRes);
-        roller.getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
+        roller.getGame().getTriggerHandler().runTriggerOld(TriggerType.PlanarDice, runParams,false);
     
         
         return res;

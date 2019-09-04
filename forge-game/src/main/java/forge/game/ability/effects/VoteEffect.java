@@ -101,7 +101,7 @@ public class VoteEffect extends SpellAbilityEffect {
         
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AllVotes", votes);
-        game.getTriggerHandler().runTrigger(TriggerType.Vote, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Vote, runParams, false);
 
         List<String> subAbs = Lists.newArrayList();
         final List<Object> mostVotes = getMostVotes(votes);

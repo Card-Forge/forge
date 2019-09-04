@@ -411,7 +411,7 @@ public class GameAction {
             runParams.putAll(params);
         }
 
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
+        game.getTriggerHandler().runTriggerOld(TriggerType.ChangesZone, runParams, true);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);
@@ -419,7 +419,7 @@ public class GameAction {
             if(params != null) {
                 runParams2.putAll(params);
             }
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.ChangesController, runParams2, false);
         }
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
@@ -602,7 +602,7 @@ public class GameAction {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", c);
         runParams.put("OriginalController", original);
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         for (Player p : game.getPlayers()) {
@@ -717,7 +717,7 @@ public class GameAction {
             runParams.putAll(params);
         }
 
-        game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Exiled, runParams, false);
 
         return copied;
     }
@@ -909,9 +909,9 @@ public class GameAction {
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
-            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.Always, runParams, false);
 
-            game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.Immediate, runParams, false);
         }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
@@ -1433,7 +1433,7 @@ public class GameAction {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", c);
         runParams.put("Causer", activator);
-        game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Destroyed, runParams, false);
 
         final Card sacrificed = sacrificeDestroy(c, sa, table);
         return sacrificed != null;
@@ -1611,7 +1611,7 @@ public class GameAction {
 
             // Run Trigger beginning of the game
             final Map<String, Object> runParams = Maps.newHashMap();
-            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, true);
+            game.getTriggerHandler().runTriggerOld(TriggerType.NewGame, runParams, true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
 
@@ -1776,7 +1776,7 @@ public class GameAction {
         // Run triggers
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", p);
-        game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.BecomeMonarch, runParams, false);
     }
 
     // Make scry an action function so that it can be used for mulligans (with a null cause)
@@ -1838,7 +1838,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Player", p);
-                game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Scry, runParams, false);
             }
         }
     }

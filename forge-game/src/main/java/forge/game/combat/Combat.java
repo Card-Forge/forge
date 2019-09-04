@@ -638,7 +638,7 @@ public class Combat {
                     runParams.put("Attacker", attacker);
                     runParams.put("Defender",getDefenderByAttacker(attacker));
                     runParams.put("DefendingPlayer", getDefenderPlayerByAttacker(attacker));
-                    game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
+                    game.getTriggerHandler().runTriggerOld(TriggerType.AttackerUnblocked, runParams, false);
                 }
             }
         }
@@ -649,7 +649,7 @@ public class Combat {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("AttackingPlayer", getAttackingPlayer());
             runParams.put("Defenders", defenders);
-            game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblockedOnce, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.AttackerUnblockedOnce, runParams, false);
         }
     }
 

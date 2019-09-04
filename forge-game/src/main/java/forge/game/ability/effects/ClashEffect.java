@@ -53,7 +53,7 @@ public class ClashEffect extends SpellAbilityEffect {
         }
 
         
-        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
+        sa.getHostCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.Clashed, runParams, false);
     }
 
     /**

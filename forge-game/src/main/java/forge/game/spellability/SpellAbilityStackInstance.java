@@ -355,10 +355,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                     ((Card) tgt).setBecameTargetThisTurn(true);
                 }
                 runParams.put("Target", tgt);
-                getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+                getSourceCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.BecomesTarget, runParams, false);
             }
             runParams.put("Targets", target.getTargets());
-            getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+            getSourceCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.BecomesTargetOnce, runParams, false);
         }
     }
 

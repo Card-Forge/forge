@@ -213,7 +213,7 @@ public class CounterEffect extends SpellAbilityEffect {
         runParams.put("Card", tgtSA.getHostCard());
         runParams.put("Cause", srcSA.getHostCard());
         runParams.put("CounteredSA", tgtSA);
-        game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Countered, runParams, false);
         
 
         if (!tgtSA.isAbility()) {

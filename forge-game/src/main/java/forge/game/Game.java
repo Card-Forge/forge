@@ -715,7 +715,7 @@ public class Game {
 
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
-        getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
+        getTriggerHandler().runTriggerOld(TriggerType.LosesGame, runParams, false);
     }
 
     /**

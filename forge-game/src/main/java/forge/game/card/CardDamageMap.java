@@ -39,7 +39,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put("DamageAmount", sum);
                 runParams.put("IsCombatDamage", isCombat);
                 
-                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamagePreventedOnce, runParams, false);
+                ge.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamagePreventedOnce, runParams, false);
             }
         }
     }
@@ -59,7 +59,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put("DamageAmount", sum);
                 runParams.put("IsCombatDamage", isCombat);
                 
-                sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
+                sourceLKI.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDealtOnce, runParams, false);
                 
                 if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                     sourceLKI.getController().gainLife(sum, sourceLKI, sa);
@@ -80,7 +80,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put("DamageAmount", sum);
                 runParams.put("IsCombatDamage", isCombat);
                 
-                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);
+                ge.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDoneOnce, runParams, false);
             }
         }
     }

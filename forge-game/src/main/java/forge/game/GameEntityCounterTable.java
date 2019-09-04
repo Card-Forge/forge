@@ -49,7 +49,7 @@ public class GameEntityCounterTable extends ForwardingTable<GameEntity, CounterT
         if (!isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Objects", this);
-            game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.CounterAddedAll, runParams, false);
         }
     }
 }

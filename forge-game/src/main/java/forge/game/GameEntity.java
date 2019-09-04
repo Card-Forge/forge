@@ -220,7 +220,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             runParams.put("DamageSource", source);
             runParams.put("IsCombatDamage", isCombat);
 
-            getGame().getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
+            getGame().getTriggerHandler().runTriggerOld(TriggerType.DamagePrevented, runParams, false);
         }
 
         return restDamage;

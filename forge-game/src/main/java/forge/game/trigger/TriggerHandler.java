@@ -51,6 +51,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
+import static forge.util.EnumMapUtil.toStringMap;
+
 public class TriggerHandler {
     private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<TriggerType>());
     private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
@@ -318,12 +320,17 @@ public class TriggerHandler {
         return false;
     }
 
-    public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
+    public final void runTrigger(final TriggerType mode, final Map<TriggerKey, Object> runParams, boolean holdTrigger) {
+        runTriggerOld(mode, toStringMap(runParams), holdTrigger);
+    }
+    // The plan is to slowly refactor any usages of `runTriggerOld` to use `runTrigger`. Then we can just inline
+    // `runTriggerOld` into `runTrigger` and change the code inside to just always use a `Map<TriggerKey, Object>`.
+    // The reason we can't just call them both `runTrigger` is because we get a `same erasure` compile error if we do.
+    public final void runTriggerOld(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (suppressedModes.contains(mode)) {
             return;
         }
 
-        //runWaitingTrigger(new TriggerWaiting(mode, runParams));
         if (mode == TriggerType.Always) {
             runStateTrigger(runParams);
         } else if (game.getStack().isFrozen() || holdTrigger) {
@@ -331,20 +338,14 @@ public class TriggerHandler {
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));
         }
-        // Tell auto stop to stop
     }
 
-    public final boolean runStateTrigger(Map<String, Object> runParams) {
-        boolean checkStatics = false;
-        // only cards in play can run state triggers
-
+    private void runStateTrigger(Map<String, Object> runParams) {
         for (final Trigger t: activeTriggers) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
                 runSingleTrigger(t, runParams);
-                checkStatics = true;
             }
         }
-        return checkStatics;
     }
 
     public final boolean runWaitingTriggers() {
@@ -362,7 +363,7 @@ public class TriggerHandler {
         return haveWaiting;
     }
 
-    public final boolean runWaitingTrigger(final TriggerWaiting wt) {
+    private boolean runWaitingTrigger(final TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();
 

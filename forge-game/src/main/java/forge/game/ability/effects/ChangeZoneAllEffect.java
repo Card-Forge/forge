@@ -82,7 +82,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", sa.getActivatingPlayer());
             runParams.put("Target", tgtPlayers);
-            game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.SearchedLibrary, runParams, false);
         }
         if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
             CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source),

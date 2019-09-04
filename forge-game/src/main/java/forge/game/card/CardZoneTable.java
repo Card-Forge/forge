@@ -56,7 +56,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         if (!isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Cards", new CardZoneTable(this));
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.ChangesZoneAll, runParams, false);
         }
     }
 

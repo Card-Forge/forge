@@ -56,12 +56,12 @@ public class BlockEffect extends SpellAbilityEffect {
                 Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Attacker", attacker);
                 runParams.put("Blocker", blocker);
-                game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlockedByCreature, runParams, false);
 
                 runParams = Maps.newHashMap();
                 runParams.put("Blocker", blocker);
                 runParams.put("Attackers", attacker);
-                game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Blocks, runParams, false);
             }
 
             attacker.getDamageHistory().setCreatureGotBlockedThisCombat(true);
@@ -72,7 +72,7 @@ public class BlockEffect extends SpellAbilityEffect {
                 runParams.put("NumBlockers", blockers.size());
                 runParams.put("Defender", combat.getDefenderByAttacker(attacker));
                 runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(attacker));
-                game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlocked, runParams, false);
 
                 combat.orderBlockersForDamageAssignment(attacker, new CardCollection(blockers));
             }
