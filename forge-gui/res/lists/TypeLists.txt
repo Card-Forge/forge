@@ -270,6 +270,7 @@ Shrine
 Clue
 Contraption
 Equipment
+Food
 Fortification
 Treasure
 Vehicle
