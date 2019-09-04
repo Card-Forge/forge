@@ -304,6 +304,7 @@ Nahiri
 Narset
 Nissa
 Nixilis
+Oko
 Ral
 Rowan
 Saheeli
