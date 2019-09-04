@@ -505,14 +505,25 @@ public class MatchScreen extends FScreen {
                 float x = topPlayerPanel.getField().getLeft();
                 float y = midField - topPlayerPanel.getField().getHeight();
                 float w = getWidth() - x;
-
+                float bgFullWidth, scaledbgHeight;
+                float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane())
-                    setPlanarBG(g, getPlaneName(), x, y, w, midField);
+                        && hasActivePlane()) {
+                    String imageName = getPlaneName()
+                                .replace(" ", "_")
+                                .replace("'", "")
+                                .replace("-", "");
+                    if (FSkinTexture.getValues().contains(imageName)) {
+                        bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
+                        if (bgFullWidth < w) {
+                            scaledbgHeight = w * (bgHeight / bgFullWidth);
+                            bgFullWidth = w;
+                            bgHeight = scaledbgHeight;
+                        }
+                        g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                    }
+                }
                 else {
-                    float bgFullWidth;
-                    float scaledbgHeight;
-                    float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
                     bgFullWidth = bgHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
                     if (bgFullWidth < w) {
                         scaledbgHeight = w * (bgHeight / bgFullWidth);
@@ -656,35 +667,6 @@ public class MatchScreen extends FScreen {
                     return MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName() != "";
             }
             return false;
-        }
-        private void setPlanarBG(Graphics g, String planeName, float x, float y, float w, float midField ){
-            float planeFullWidth;
-            float scaledPlaneHeight;
-            float planeHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
-            String imageName = planeName
-                    .replace(" ", "_")
-                    .replace("'", "")
-                    .replace("-", "");
-            if (FSkinTexture.getValues().contains(imageName))
-            {
-                planeFullWidth = planeHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
-                if (planeFullWidth < w) {
-                    scaledPlaneHeight = w * (planeHeight / planeFullWidth);
-                    planeFullWidth = w;
-                    planeHeight = scaledPlaneHeight;
-                }
-                g.drawImage(FSkinTexture.valueOf(imageName), x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight, true);
-            }
-            else
-            {
-                planeFullWidth = planeHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
-                if (planeFullWidth < w) {
-                    scaledPlaneHeight = w * (planeHeight / planeFullWidth);
-                    planeFullWidth = w;
-                    planeHeight = scaledPlaneHeight;
-                }
-                g.drawImage(FSkinTexture.BG_MATCH, x + (w - planeFullWidth) / 2, y, planeFullWidth, planeHeight);
-            }
         }
     }
 }
