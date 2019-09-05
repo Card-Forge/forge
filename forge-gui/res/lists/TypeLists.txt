@@ -270,6 +270,7 @@ Shrine
 Clue
 Contraption
 Equipment
+Food
 Fortification
 Treasure
 Vehicle
@@ -303,6 +304,7 @@ Nahiri
 Narset
 Nissa
 Nixilis
+Oko
 Ral
 Rowan
 Saheeli
