@@ -1,7 +1,5 @@
 package forge.ai;
-/**
- * Refactoring this class to use List sort (Instead of Collection) causes Android build not to compile...
- * */
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
@@ -130,7 +128,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        Collections.sort(orderedCards, new Comparator<Card>() {
+        orderedCards.sort(new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
                 return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
@@ -153,7 +151,7 @@ public class ComputerUtilMana {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
-            Collections.sort(newAbilities, new Comparator<SpellAbility>() {
+            newAbilities.sort(new Comparator<SpellAbility>() {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
@@ -172,8 +170,7 @@ public class ComputerUtilMana {
                         }
 
                         return ability1.compareTo(ability2);
-                    }
-                    else {
+                    } else {
                         return preOrder;
                     }
                 }
@@ -346,6 +343,10 @@ public class ComputerUtilMana {
             payMultipleMana(cost, manaProduced, ai);
 
             // remove from available lists
+            /*
+             * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+             * causes Android build not to compile
+             * */
             Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
             while (itSa.hasNext()) {
                 SpellAbility srcSa = itSa.next();
@@ -489,6 +490,10 @@ public class ComputerUtilMana {
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
+                /*
+                 * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+                 * causes Android build not to compile
+                 * */
                 Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
                 while (itSa.hasNext()) {
                     SpellAbility srcSa = itSa.next();
@@ -519,6 +524,10 @@ public class ComputerUtilMana {
                 
                 if (hasConverge) {	// hack to prevent converge re-using sources
                 	// remove from available lists
+                    /*
+                    * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+                    * causes Android build not to compile
+                    * */
 	                Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
 	                while (itSa.hasNext()) {
 	                    SpellAbility srcSa = itSa.next();

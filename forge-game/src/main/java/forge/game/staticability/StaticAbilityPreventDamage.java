@@ -83,7 +83,7 @@ public class StaticAbilityPreventDamage {
 
         if (params.containsKey("Optional")) { //Assume if param is present it should be optional
             if (!isTest) {
-                final String logic = params.containsKey("AILogic") ? params.get("AILogic") : "";
+                final String logic = params.getOrDefault("AILogic", "");
                 final String message = "Apply the effect of " + hostCard + "? (Affected: " + target + ")";
                 boolean confirmed = hostCard.getController().getController().confirmStaticApplication(hostCard, target, logic, message);
     

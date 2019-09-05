@@ -96,7 +96,7 @@ public class CostAdjustment {
             return;
         }
 
-        final String scost = params.containsKey("Cost") ? params.get("Cost") : "1";
+        final String scost = params.getOrDefault("Cost", "1");
         Cost part = new Cost(scost, sa.isAbility());
         int count = 0;
 

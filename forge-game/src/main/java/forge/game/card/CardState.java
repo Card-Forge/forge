@@ -449,11 +449,7 @@ public class CardState extends GameObject {
         return sVars;
     }
     public final String getSVar(final String var) {
-        if (sVars.containsKey(var)) {
-            return sVars.get(var);
-        } else {
-            return "";
-        }
+        return sVars.getOrDefault(var, "");
     }
     public final boolean hasSVar(final String var) {
         if (var == null) {

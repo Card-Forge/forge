@@ -1330,7 +1330,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int counterAmount = 0;
         if (countersAddedBy.containsKey(source)) {
             final Map<CounterType, Integer> counterMap = countersAddedBy.get(source);
-            counterAmount = counterMap.containsKey(counterType) ? counterMap.get(counterType) : 0;
+            counterAmount = counterMap.getOrDefault(counterType, 0);
             countersAddedBy.remove(source);
         }
         return counterAmount;
@@ -6189,7 +6189,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             return 0;
         }
-        return numberTurnActivations.containsKey(original) ? numberTurnActivations.get(original) : 0;
+        return numberTurnActivations.getOrDefault(original, 0);
     }
 
     public int getAbilityActivatedThisGame(SpellAbility ability) {
@@ -6204,7 +6204,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             return 0;
         }
-        return numberGameActivations.containsKey(original) ? numberGameActivations.get(original) : 0;
+        return numberGameActivations.getOrDefault(original, 0);
     }
 
     public void resetTurnActivations() {
