@@ -1,7 +1,7 @@
 package forge.game.ability;
 
 /**
- * Keys for Trigger parameter maps.
+ * Keys for Ability parameter maps.
  */
 public enum AbilityKey {
     Attackers("Attackers"),
