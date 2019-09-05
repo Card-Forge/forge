@@ -171,7 +171,7 @@ public class CardRanker {
     }
 
     private static List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
-        Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
+        cardScores.sort(Collections.reverseOrder(new CardRankingComparator()));
 
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
         for (Pair<Double, PaperCard> pair : cardScores) {

@@ -12,7 +12,6 @@ import forge.util.ComparableOp;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -147,7 +146,7 @@ public final class SItemManagerUtil {
         for (final Entry<InventoryItem, Integer> itemEntry : items) {
             sorted.add(itemEntry);
         }
-        Collections.sort(sorted, new Comparator<Entry<InventoryItem, Integer>>() {
+        sorted.sort(new Comparator<Entry<InventoryItem, Integer>>() {
             @Override
             public int compare(final Entry<InventoryItem, Integer> x, final Entry<InventoryItem, Integer> y) {
                 return x.getKey().toString().compareTo(y.getKey().toString());

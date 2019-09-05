@@ -991,7 +991,7 @@ public class QuestEventDraft implements IQuestEvent {
         }
 
         final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
-        Collections.sort(allowedSets, new Comparator<CardEdition>() {
+        allowedSets.sort(new Comparator<CardEdition>() {
             @Override
             public int compare(final CardEdition edition1, final CardEdition edition2) {
                 if (edition1.getDate().before(edition2.getDate())) {

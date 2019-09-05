@@ -67,7 +67,7 @@ public class QuestFileLister extends JPanel {
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
         List<QuestData> sorted = new ArrayList<QuestData>();
         for (QuestData qd : qd0) { sorted.add(qd); }
-        Collections.sort(sorted, new Comparator<QuestData>() {
+        sorted.sort(new Comparator<QuestData>() {
             @Override
             public int compare(final QuestData x, final QuestData y) {
                 return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());

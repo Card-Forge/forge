@@ -229,7 +229,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 cols.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(cols, new Comparator<ItemColumn>() {
+        cols.sort(new Comparator<ItemColumn>() {
             @Override
             public int compare(ItemColumn arg0, ItemColumn arg1) {
                 return Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex());

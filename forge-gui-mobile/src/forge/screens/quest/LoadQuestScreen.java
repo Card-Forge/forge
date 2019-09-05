@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -339,7 +338,7 @@ public class LoadQuestScreen extends LaunchScreen {
             for (QuestData qd : qd0) {
                 sorted.add(qd);
             }
-            Collections.sort(sorted, new Comparator<QuestData>() {
+            sorted.sort(new Comparator<QuestData>() {
                 @Override
                 public int compare(final QuestData x, final QuestData y) {
                     return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
