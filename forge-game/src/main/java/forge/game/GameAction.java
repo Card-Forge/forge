@@ -612,11 +612,8 @@ public class GameAction {
     }
 
     public final Card moveToStack(final Card c, SpellAbility cause) {
-        return moveToStack(c, cause, null);
-    }
-    public final Card moveToStack(final Card c, SpellAbility cause, Map<String, Object> params) {
         final Zone stack = game.getStackZone();
-        return moveTo(stack, c, cause, params);
+        return moveTo(stack, c, cause);
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
@@ -638,12 +635,8 @@ public class GameAction {
     }
 
     public final Card moveToPlay(final Card c, SpellAbility cause) {
-        return moveToPlay(c, cause, null);
-    }
-    
-    public final Card moveToPlay(final Card c, SpellAbility cause, Map<String, Object> params) {
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
-        return moveTo(play, c, cause, params);
+        return moveTo(play, c, cause, null);
     }
 
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause) {
@@ -685,15 +678,11 @@ public class GameAction {
     }
 
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, null);
-    }
-    
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<String, Object> params) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
             deckPosition = deck.size();
         }
-        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
+        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause);
     }
 
     public final Card exile(final Card c, SpellAbility cause) {
@@ -729,16 +718,16 @@ public class GameAction {
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
-            case Hand:          return moveToHand(c, cause, null);
-            case Library:       return moveToLibrary(c, libPosition, cause, null);
-            case Battlefield:   return moveToPlay(c, cause, null);
-            case Graveyard:     return moveToGraveyard(c, cause, null);
-            case Exile:         return exile(c, cause, null);
-            case Stack:         return moveToStack(c, cause, null);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, null);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, null);
+            case Hand:          return moveToHand(c, cause);
+            case Library:       return moveToLibrary(c, libPosition, cause);
+            case Battlefield:   return moveToPlay(c, cause);
+            case Graveyard:     return moveToGraveyard(c, cause);
+            case Exile:         return exile(c, cause);
+            case Stack:         return moveToStack(c, cause);
+            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause);
+            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause);
             default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause, null);
+                return moveTo(c.getOwner().getZone(name), c, cause);
         }
     }
 

@@ -470,7 +470,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition, sa, null);
+                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition, sa);
 
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
@@ -967,7 +967,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, null);
+                movedCard = game.getAction().moveToLibrary(c, libraryPos, sa);
             }
             else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
@@ -1108,7 +1108,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c, sa, null);
+                movedCard = game.getAction().exile(c, sa);
                 if (!c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {

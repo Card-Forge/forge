@@ -9,7 +9,15 @@ public enum AbilityKey {
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
-    Player("Player");
+    Card("Card"),
+    Cause("Cause"),
+    Destination("Destination"),
+    Player("Player"),
+    IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
+    Origin("Origin"),
+    SpellAbilityStackInstance("SpellAbilityStackInstance")
+    ;
+
 
     private String key;
 

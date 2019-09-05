@@ -1308,7 +1308,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (toGrave != null) {
             for(Card c : toGrave) {
-                getGame().getAction().moveToGraveyard(c, cause, null);
+                getGame().getAction().moveToGraveyard(c, cause);
                 numToGrave++;
             }
         }
@@ -1316,7 +1316,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toTop != null) {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {
-                getGame().getAction().moveToLibrary(c, cause, null);
+                getGame().getAction().moveToLibrary(c, cause);
                 numToTop++;
             }
         }
@@ -1399,7 +1399,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c, null, null);
+            c = game.getAction().moveToHand(c, null);
             drawn.add(c);
 
             if (topCardRevealed) {
@@ -1574,16 +1574,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
         if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa, null);
+            newCard = game.getAction().moveToLibrary(c, 0, sa);
             sb.append(" to the library");
             // Play the Discard sound
         }
         else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa, null);
+            newCard = game.getAction().exile(c, sa);
             sb.append(" with Madness");
         }
         else {
-            newCard = game.getAction().moveToGraveyard(c, sa, null);
+            newCard = game.getAction().moveToGraveyard(c, sa);
             // Play the Discard sound
         }
         if (table != null) {
