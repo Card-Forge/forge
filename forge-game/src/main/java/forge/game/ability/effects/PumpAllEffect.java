@@ -82,6 +82,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                         for (String kw : hiddenkws) {
                             tgtC.removeHiddenExtrinsicKeyword(kw);
                         }
+                        tgtC.updatePowerToughnessForView();
 
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }
