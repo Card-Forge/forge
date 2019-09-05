@@ -1,16 +1,16 @@
-package forge.game.trigger;
+package forge.game.ability;
 
 /**
  * Keys for Trigger parameter maps.
  */
-public enum TriggerKey {
+public enum AbilityKey {
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget");
 
     private String key;
 
-    TriggerKey(String key) {
+    AbilityKey(String key) {
         this.key = key;
     }
 

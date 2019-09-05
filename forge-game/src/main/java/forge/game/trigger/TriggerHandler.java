@@ -23,6 +23,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -320,7 +321,7 @@ public class TriggerHandler {
         return false;
     }
 
-    public final void runTrigger(final TriggerType mode, final Map<TriggerKey, Object> runParams, boolean holdTrigger) {
+    public final void runTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams, boolean holdTrigger) {
         runTriggerOld(mode, toStringMap(runParams), holdTrigger);
     }
     // The plan is to slowly refactor any usages of `runTriggerOld` to use `runTrigger`. Then we can just inline

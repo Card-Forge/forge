@@ -25,7 +25,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerKey;
+import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -720,10 +720,10 @@ public abstract class GameState {
             for (final Card c : combat.getAttackers()) {
                 attackedTarget.add(combat.getDefenderByAttacker(c));
             }
-            final Map<TriggerKey, Object> runParams = Maps.newEnumMap(TriggerKey.class);
-            runParams.put(TriggerKey.Attackers, combat.getAttackers());
-            runParams.put(TriggerKey.AttackingPlayer, combat.getAttackingPlayer());
-            runParams.put(TriggerKey.AttackedTarget, attackedTarget);
+            final Map<AbilityKey, Object> runParams = Maps.newEnumMap(AbilityKey.class);
+            runParams.put(AbilityKey.Attackers, combat.getAttackers());
+            runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
+            runParams.put(AbilityKey.AttackedTarget, attackedTarget);
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
