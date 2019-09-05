@@ -14,8 +14,8 @@ public class StoreMapEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        List<GameEntity> entity = new ArrayList<GameEntity>();
-        List<Object> objects = new ArrayList<Object>();
+        List<GameEntity> entity = new ArrayList<>();
+        List<Object> objects = new ArrayList<>();
 
         if (sa.hasParam("RememberEntity")) {
             entity.addAll(AbilityUtils.getDefinedPlayers(source, sa.getParam("RememberEntity"), sa));

@@ -130,7 +130,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
         final GameOutcome outcome1 = gamesPlayed.get(0);
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
-        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<RegisteredPlayer, Integer>();
+        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<>();
 
         // Calculate total games each player has won.
         for (final GameOutcome game : gamesPlayed) {

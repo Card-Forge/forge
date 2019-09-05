@@ -59,7 +59,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                 if (tmp.length > 1) {
                     final String [] setcodes = tmp[1].split(",");
                     if (setcodes.length > 0) {
-                        final List<String> sets = new ArrayList<String>();
+                        final List<String> sets = new ArrayList<>();
                         for (final String code : setcodes) {
                             if (FModel.getMagicDb().getEditions().contains(code)) {
                                 // System.out.println("Set " + code + " was found!");

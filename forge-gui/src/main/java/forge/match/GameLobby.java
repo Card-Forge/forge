@@ -407,7 +407,7 @@ public abstract class GameLobby implements IHasGameType {
             }
         }
 
-        final List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> players = new ArrayList<>();
         final Map<RegisteredPlayer, IGuiGame> guis = Maps.newHashMap();
         final Map<RegisteredPlayer, LobbySlot> playerToSlot = Maps.newHashMap();
         boolean hasNameBeenSet = false;

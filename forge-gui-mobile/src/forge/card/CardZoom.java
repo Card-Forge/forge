@@ -47,7 +47,7 @@ public class CardZoom extends FOverlay {
     private static boolean showAltState;
 
     public static void show(Object item) {
-        List<Object> items0 = new ArrayList<Object>();
+        List<Object> items0 = new ArrayList<>();
         items0.add(item);
         show(items0, 0, null);
     }

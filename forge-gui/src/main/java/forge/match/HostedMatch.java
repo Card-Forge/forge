@@ -160,7 +160,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.arrayLists());
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
@@ -197,7 +197,7 @@ public class HostedMatch {
         }
 
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.entrySet()) {
-            e.getKey().openView(new TrackableCollection<PlayerView>(e.getValue()));
+            e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
 
         if (humanCount == 0) { //watch game but do not participate

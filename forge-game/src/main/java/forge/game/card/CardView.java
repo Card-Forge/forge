@@ -46,7 +46,7 @@ public class CardView extends GameEntityView {
         if (cards == null) {
             return null;
         }
-        TrackableCollection<CardView> collection = new TrackableCollection<CardView>();
+        TrackableCollection<CardView> collection = new TrackableCollection<>();
         for (Card c : cards) {
             if (c.getCardForUi() == c) { //only add cards that match their card for UI
                 collection.add(c.getView());
@@ -352,7 +352,7 @@ public class CardView extends GameEntityView {
         TrackableCollection<PlayerView> col = get(prop);
         if (mayLook) {
             if (col == null) {
-                col = new TrackableCollection<PlayerView>(p.getView());
+                col = new TrackableCollection<>(p.getView());
                 set(prop, col);
             }
             else if (col.add(p.getView())) {
@@ -1060,7 +1060,7 @@ public class CardView extends GameEntityView {
         if (oldCards.add(cardToAdd)) {
             TrackableCollection<CardView> views = get(key);
             if (views == null) {
-                views = new TrackableCollection<CardView>();
+                views = new TrackableCollection<>();
                 views.add(cardToAdd.getView());
                 set(key, views);
             }
@@ -1081,7 +1081,7 @@ public class CardView extends GameEntityView {
         for (Card c : cardsToAdd) {
             if (c != null && oldCards.add(c)) {
                 if (views == null) {
-                    views = new TrackableCollection<CardView>();
+                    views = new TrackableCollection<>();
                     views.add(c.getView());
                     set(key, views);
                 }

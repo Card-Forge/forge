@@ -69,8 +69,8 @@ public class VStack extends FDropDown {
     private void revealTargetZones() {
         if (activeStackInstance == null) { return; }
 
-        final Set<ZoneType> zones = new HashSet<ZoneType>();
-        playersWithValidTargets = new HashMap<PlayerView, Object>();
+        final Set<ZoneType> zones = new HashSet<>();
+        playersWithValidTargets = new HashMap<>();
         for (final CardView c : activeStackInstance.getTargetCards()) {
             if (c.getZone() != null) {
                 zones.add(c.getZone());

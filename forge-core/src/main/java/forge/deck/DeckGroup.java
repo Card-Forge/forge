@@ -37,7 +37,7 @@ public class DeckGroup extends DeckBase {
 
     private static final long serialVersionUID = -1628725522049635829L;
     private Deck humanDeck;
-    private List<Deck> aiDecks = new ArrayList<Deck>();
+    private List<Deck> aiDecks = new ArrayList<>();
 
     /**
      * Gets the human deck.

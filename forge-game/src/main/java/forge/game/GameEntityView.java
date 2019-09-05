@@ -17,7 +17,7 @@ public abstract class GameEntityView extends TrackableObject {
         if (entities == null) {
             return null;
         }
-        TrackableCollection<GameEntityView> collection = new TrackableCollection<GameEntityView>();
+        TrackableCollection<GameEntityView> collection = new TrackableCollection<>();
         for (GameEntity e : entities) {
             collection.add(e.getView());
         }

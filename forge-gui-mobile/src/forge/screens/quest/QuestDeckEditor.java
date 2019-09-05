@@ -27,7 +27,7 @@ public class QuestDeckEditor extends FDeckEditor {
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
-        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
         switch (config) {
         case QUEST_EDITOR_POOL:
             ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());

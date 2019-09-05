@@ -121,13 +121,13 @@ public enum ItemManagerConfig {
         }
         showUniqueCardsOption = showUniqueCardsOption0;
 
-        uniqueCardsOnly = new Prop<Boolean>(uniqueCardsOnly0);
-        hideFilters = new Prop<Boolean>(hideFilters0);
-        compactListView = new Prop<Boolean>(FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)); //use main setting to determine default
-        groupBy = new Prop<GroupDef>(groupBy0);
-        pileBy = new Prop<ColumnDef>(pileBy0);
-        imageColumnCount = new Prop<Integer>(imageColumnCount0);
-        viewIndex = new Prop<Integer>(viewIndex0);
+        uniqueCardsOnly = new Prop<>(uniqueCardsOnly0);
+        hideFilters = new Prop<>(hideFilters0);
+        compactListView = new Prop<>(FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)); //use main setting to determine default
+        groupBy = new Prop<>(groupBy0);
+        pileBy = new Prop<>(pileBy0);
+        imageColumnCount = new Prop<>(imageColumnCount0);
+        viewIndex = new Prop<>(viewIndex0);
     }
 
     private class Prop<T> {

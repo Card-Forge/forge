@@ -34,7 +34,7 @@ import java.util.Observable;
 public class GameLog extends Observable implements Serializable {
     private static final long serialVersionUID = 6465283802022948827L;
 
-    private final List<GameLogEntry> log = new ArrayList<GameLogEntry>();
+    private final List<GameLogEntry> log = new ArrayList<>();
 
     private final transient GameLogFormatter formatter = new GameLogFormatter(this);
     
@@ -70,7 +70,7 @@ public class GameLog extends Observable implements Serializable {
      * @return the log text
      */
     public List<GameLogEntry> getLogEntries(final GameLogEntryType logLevel) { // null to fetch all
-        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
+        final List<GameLogEntry> result = new ArrayList<>();
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
@@ -82,7 +82,7 @@ public class GameLog extends Observable implements Serializable {
     }
 
     public List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel) { // null to fetch all
-        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
+        final List<GameLogEntry> result = new ArrayList<>();
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);

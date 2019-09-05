@@ -32,7 +32,7 @@ public class QuestDeckGroupMap extends StorageBase<DeckGroup> {
      * Instantiates a new quest deck map.
      */
     public QuestDeckGroupMap(Map<String, DeckGroup> in) {
-        super("Quest draft decks", null, in == null ? new HashMap<String, DeckGroup>() : in);
+        super("Quest draft decks", null, in == null ? new HashMap<>() : in);
     }
 
 

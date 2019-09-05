@@ -423,7 +423,7 @@ public final class CardUtil {
                 colors.add(MagicColor.Constant.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final FCollection<SpellAbility> abilities = new FCollection<SpellAbility>();
+            final FCollection<SpellAbility> abilities = new FCollection<>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbilities());
             }

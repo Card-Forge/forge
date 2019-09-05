@@ -79,10 +79,10 @@ public class DualListBox<T> extends FDialog {
 
         targetRemainingSourcesMin = remainingSourcesMin;
         targetRemainingSourcesMax = remainingSourcesMax;
-        sourceListModel = new UnsortedListModel<T>();
-        sourceList = new FList<T>(sourceListModel);
-        destListModel = new UnsortedListModel<T>();
-        destList = new FList<T>(destListModel);
+        sourceListModel = new UnsortedListModel<>();
+        sourceList = new FList<>(sourceListModel);
+        destListModel = new UnsortedListModel<>();
+        destList = new FList<>(destListModel);
 
         final Runnable onAdd = new Runnable() {
             @SuppressWarnings("unchecked")
@@ -90,7 +90,7 @@ public class DualListBox<T> extends FDialog {
             public void run() {
                 if (!addButton.isEnabled()) { return; }
 
-                List<T> selected = new ArrayList<T>();
+                List<T> selected = new ArrayList<>();
                 for (Object item : sourceList.getSelectedValuesList()) {
                     selected.add((T)item);
                 }
@@ -107,7 +107,7 @@ public class DualListBox<T> extends FDialog {
             public void run() {
                 if (!removeButton.isEnabled()) { return; }
 
-                List<T> selected = new ArrayList<T>();
+                List<T> selected = new ArrayList<>();
                 for (Object item : destList.getSelectedValuesList()) {
                     selected.add((T)item);
                 }

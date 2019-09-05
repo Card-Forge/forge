@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
-    private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
+    private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
 
     public SettingsPage() {
         super("Settings", FSkinImage.SETTINGS);
@@ -397,7 +397,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     }
 
     private class CustomSelectSetting extends Setting {
-        private final List<String> options = new ArrayList<String>();
+        private final List<String> options = new ArrayList<>();
 
         public CustomSelectSetting(FPref pref0, String label0, String description0, String[] options0) {
             super(pref0, label0 + ":", description0);
@@ -437,7 +437,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
             private CustomSelectScreen() {
                 super("Select " + label.substring(0, label.length() - 1));
-                lstOptions = add(new FList<String>(options));
+                lstOptions = add(new FList<>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
                     public boolean tap(Integer index, String value, float x, float y, int count) {

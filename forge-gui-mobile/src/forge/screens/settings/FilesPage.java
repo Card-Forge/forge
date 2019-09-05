@@ -19,7 +19,7 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
 public class FilesPage extends TabPage<SettingsScreen> {
-    private final FGroupList<FilesItem> lstItems = add(new FGroupList<FilesItem>());
+    private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
 
     protected FilesPage() {
         super("Files", FSkinImage.OPEN);

@@ -27,7 +27,7 @@ public class CLobby {
     }
 
     private void addDecks(final Iterable<DeckProxy> commanderDecks, FList<Object> deckList, String... initialItems) {
-        Vector<Object> listData = new Vector<Object>();
+        Vector<Object> listData = new Vector<>();
         for (String item : initialItems) {
             listData.add(item);
         }

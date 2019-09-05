@@ -73,7 +73,7 @@ public class ConquestController {
         File decksDir = new File(model.getDirectory(), "decks");
         FileUtil.ensureDirectoryExists(decksDir);
         DeckStorage storage = new DeckStorage(decksDir, ForgeConstants.CONQUEST_SAVE_DIR);
-        decks = new StorageImmediatelySerialized<Deck>(model.getName() + " decks", storage);
+        decks = new StorageImmediatelySerialized<>(model.getName() + " decks", storage);
     }
 
     public IStorage<Deck> getDecks() {
@@ -121,7 +121,7 @@ public class ConquestController {
             aiPlayerName += " (AI)"; //ensure player names are distinct
         }
 
-        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         humanPlayer = new LobbyPlayerHuman(humanPlayerName);
         humanPlayer.setAvatarCardImageKey(commander.getCard().getImageKey(false));
         starter.add(humanStart.setPlayer(humanPlayer));
@@ -151,9 +151,9 @@ public class ConquestController {
 
     private List<PaperCard> generatePlanarPool() {
         String planeName = model.getCurrentPlane().getName();
-        List<PaperCard> pool = new ArrayList<PaperCard>();
-        List<PaperCard> otherPlanes = new ArrayList<PaperCard>();
-        List<PaperCard> phenomenons = new ArrayList<PaperCard>();
+        List<PaperCard> pool = new ArrayList<>();
+        List<PaperCard> otherPlanes = new ArrayList<>();
+        List<PaperCard> phenomenons = new ArrayList<>();
 
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
             CardType type = c.getRules().getType();
@@ -196,7 +196,7 @@ public class ConquestController {
 
     public List<ConquestReward> awardBooster(ConquestAwardPool pool) {
         ConquestPreferences prefs = FModel.getConquestPreferences();
-        List<PaperCard> rewards = new ArrayList<PaperCard>();
+        List<PaperCard> rewards = new ArrayList<>();
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
         int raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
         for (int i = 0; i < raresPerBooster; i++) {
@@ -220,7 +220,7 @@ public class ConquestController {
         //also build list of all rewards including replacement shards for each duplicate card
         //build this list in reverse order so commons appear first
         int shards = 0;
-        final List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
+        final List<ConquestReward> allRewards = new ArrayList<>();
         for (int i = rewards.size() - 1; i >= 0; i--) {
             int replacementShards = 0;
             PaperCard card = rewards.get(i);

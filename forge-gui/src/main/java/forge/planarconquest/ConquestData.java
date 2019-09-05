@@ -51,11 +51,11 @@ public final class ConquestData {
     private int planeswalkEmblems;
 
     private final ConquestRecord chaosBattleRecord;
-    private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<String, ConquestPlaneData>();
-    private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
-    private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
-    private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
-    private final HashSet<PaperCard> exiledCards = new HashSet<PaperCard>();
+    private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<>();
+    private final HashSet<PaperCard> unlockedCards = new HashSet<>();
+    private final List<ConquestCommander> commanders = new ArrayList<>();
+    private final HashSet<PaperCard> newCards = new HashSet<>();
+    private final HashSet<PaperCard> exiledCards = new HashSet<>();
 
     public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
@@ -153,7 +153,7 @@ public final class ConquestData {
     }
 
     public Iterable<PaperCard> getSortedPlaneswalkers() {
-        List<PaperCard> planeswalkers = new ArrayList<PaperCard>();
+        List<PaperCard> planeswalkers = new ArrayList<>();
         for (PaperCard card : unlockedCards) {
             if (card.getRules().getType().isPlaneswalker() && !isInExile(card)) {
                 planeswalkers.add(card);
@@ -285,7 +285,7 @@ public final class ConquestData {
                         return false;
                     }
                     if (commandersBeingExiled == null) {
-                        commandersBeingExiled = new ArrayList<ConquestCommander>();
+                        commandersBeingExiled = new ArrayList<>();
                     }
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
@@ -537,7 +537,7 @@ public final class ConquestData {
     };
 
     public static Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
-        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
         return colOverrides;
     }
@@ -548,8 +548,8 @@ public final class ConquestData {
     }
 
     private class PathFinder {
-        private final HashSet<Node> closedSet = new HashSet<Node>();
-        private final HashSet<Node> openSet = new HashSet<Node>();
+        private final HashSet<Node> closedSet = new HashSet<>();
+        private final HashSet<Node> openSet = new HashSet<>();
         private final Node[][] map;
 
         private PathFinder() {
@@ -585,7 +585,7 @@ public final class ConquestData {
 
                 //if we've reach goal, reconstruct path and return it
                 if (current == goal) {
-                    List<ConquestLocation> path = new ArrayList<ConquestLocation>();
+                    List<ConquestLocation> path = new ArrayList<>();
                     while (current != null) {
                         path.add(current.loc);
                         current = current.came_from;

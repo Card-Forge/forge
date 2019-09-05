@@ -139,7 +139,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
      */
     @Override
     public List<JMenu> getMenus() {
-        final List<JMenu> menus = new ArrayList<JMenu>();
+        final List<JMenu> menus = new ArrayList<>();
         menus.add(ConstructedGameMenu.getMenu());
         return menus;
     }

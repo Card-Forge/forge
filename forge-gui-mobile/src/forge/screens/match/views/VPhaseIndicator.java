@@ -21,7 +21,7 @@ public class VPhaseIndicator extends FContainer {
     public static final float PADDING_X = Utils.scale(1);
     public static final float PADDING_Y = Utils.scale(2);
 
-    private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
+    private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<>();
     private FSkinFont font;
 
     public VPhaseIndicator() {

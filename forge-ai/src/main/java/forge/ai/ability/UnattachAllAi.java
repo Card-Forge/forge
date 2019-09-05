@@ -66,7 +66,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         final Card card = sa.getHostCard();
         final Player opp = ai.getWeakestOpponent();
         // Check if there are any valid targets
-        List<GameObject> targets = new ArrayList<GameObject>();
+        List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);

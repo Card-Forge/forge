@@ -24,7 +24,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     public StatTypeFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
-        buttonMap = new HashMap<StatTypes, FLabel>();
+        buttonMap = new HashMap<>();
     }
 
     @SuppressWarnings("serial")

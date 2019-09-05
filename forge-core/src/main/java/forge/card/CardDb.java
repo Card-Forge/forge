@@ -41,16 +41,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static char NameSetSeparator = '|';
 
     // need this to obtain cardReference by name+set+artindex
-    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private static Map<String, String> artPrefs = new HashMap<String, String>();
+    private static Map<String, String> artPrefs = new HashMap<>();
 
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, Integer> artIds = new HashMap<String, Integer>();
+    private final Map<String, Integer> artIds = new HashMap<>();
 
-    private final List<PaperCard> allCards = new ArrayList<PaperCard>();
+    private final List<PaperCard> allCards = new ArrayList<>();
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
     private final CardEdition.Collection editions;
 
@@ -166,8 +166,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
-        Set<String> allMissingCards = new LinkedHashSet<String>();
-        List<String> missingCards = new ArrayList<String>();
+        Set<String> allMissingCards = new LinkedHashSet<>();
+        List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
         Date today = new Date();
 
@@ -342,10 +342,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (request.artIndex <= 0) { // this stands for 'random art'
             Collection<PaperCard> candidates;
             if (reqEdition == null) {
-                candidates = new ArrayList<PaperCard>(cards);
+                candidates = new ArrayList<>(cards);
             }
             else {
-                candidates = new ArrayList<PaperCard>();
+                candidates = new ArrayList<>();
                 for (PaperCard pc : cards) {
                     if (pc.getEdition().equalsIgnoreCase(reqEdition)) {
                         candidates.add(pc);
@@ -452,7 +452,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                                     firstWithoutImage = pc; //ensure first without image returns if none have image
                                 }
                                 if (cardsListReadOnly) { //ensure we don't modify a cached collection
-                                    cards = new ArrayList<PaperCard>(cards);
+                                    cards = new ArrayList<>(cards);
                                     cardsListReadOnly = false;
                                 }
                                 cards.remove(randomIndex); //remove card from collection and try another random card
@@ -686,7 +686,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             result = rulesByName.put(cardName, rules);
 
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
-            List<PaperCard> paperCards = new ArrayList<PaperCard>();
+            List<PaperCard> paperCards = new ArrayList<>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
                 for (CardEdition e : editions.getOrderedEditions()) {
                     int artIdx = 1;

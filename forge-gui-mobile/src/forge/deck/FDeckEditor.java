@@ -49,79 +49,79 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     public enum EditorType {
-        Constructed(new DeckController<Deck>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
+        Constructed(new DeckController<>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        Draft(new DeckController<DeckGroup>(FModel.getDecks().getDraft(), new Supplier<DeckGroup>() {
+        Draft(new DeckController<>(FModel.getDecks().getDraft(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
         }), null),
-        Sealed(new DeckController<DeckGroup>(FModel.getDecks().getSealed(), new Supplier<DeckGroup>() {
+        Sealed(new DeckController<>(FModel.getDecks().getSealed(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
         }), null),
-        Winston(new DeckController<DeckGroup>(FModel.getDecks().getWinston(), new Supplier<DeckGroup>() {
+        Winston(new DeckController<>(FModel.getDecks().getWinston(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
         }), null),
-        Commander(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
+        Commander(new DeckController<>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        Oathbreaker(new DeckController<Deck>(FModel.getDecks().getOathbreaker(), new Supplier<Deck>() {
+        Oathbreaker(new DeckController<>(FModel.getDecks().getOathbreaker(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        TinyLeaders(new DeckController<Deck>(FModel.getDecks().getTinyLeaders(), new Supplier<Deck>() {
+        TinyLeaders(new DeckController<>(FModel.getDecks().getTinyLeaders(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), DeckFormat.TinyLeaders.isLegalCardPredicate()),
-        Brawl(new DeckController<Deck>(FModel.getDecks().getBrawl(), new Supplier<Deck>() {
+        Brawl(new DeckController<>(FModel.getDecks().getBrawl(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), DeckFormat.Brawl.isLegalCardPredicate()),
-        Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
+        Archenemy(new DeckController<>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        Planechase(new DeckController<Deck>(FModel.getDecks().getPlane(), new Supplier<Deck>() {
+        Planechase(new DeckController<>(FModel.getDecks().getPlane(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        Quest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
+        Quest(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), null),
-        QuestDraft(new DeckController<DeckGroup>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
+        QuestDraft(new DeckController<>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
         }), null),
-        PlanarConquest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
+        PlanarConquest(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
             @Override
             public Deck get() {
                 return new Deck();
@@ -152,7 +152,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 filter = Predicates.and(filter, additionalFilter);
             }
 
-            ItemPool<PaperCard> filteredPool = new ItemPool<PaperCard>(PaperCard.class);
+            ItemPool<PaperCard> filteredPool = new ItemPool<>(PaperCard.class);
             for (Entry<PaperCard, Integer> entry : cardPool) {
                 if (filter.apply(entry.getKey())) {
                     filteredPool.add(entry.getKey(), entry.getValue());
@@ -733,7 +733,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
         private ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, boolean isAddSource) {
-            ItemPool<PaperCard> additions = new ItemPool<PaperCard>(cardManager.getGenericType());
+            ItemPool<PaperCard> additions = new ItemPool<>(cardManager.getGenericType());
             CardLimit limit = parentScreen.getCardLimit();
             Deck deck = parentScreen.getDeck();
 
@@ -1026,7 +1026,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
                 break;
             case Quest:
-                final ItemPool<PaperCard> questPool = new ItemPool<PaperCard>(PaperCard.class);
+                final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
                 questPool.addAll(FModel.getQuest().getCards().getCardpool());
                 // remove bottom cards that are in the deck from the card pool
                 questPool.removeAll(parentScreen.getDeck().getMain());
@@ -1175,7 +1175,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         @Override
                         public void handleEvent(FEvent e) {
                             //sort options so current option is on top and selected by default
-                            List<PaperCard> sortedOptions = new ArrayList<PaperCard>();
+                            List<PaperCard> sortedOptions = new ArrayList<>();
                             sortedOptions.add(card);
                             for (PaperCard option : artOptions) {
                                 if (option != card) {

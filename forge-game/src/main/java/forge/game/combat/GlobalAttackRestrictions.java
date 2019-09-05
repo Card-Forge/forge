@@ -48,7 +48,7 @@ public class GlobalAttackRestrictions {
             return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.emptyMap(), MapToAmountUtil.emptyMap());
         }
 
-        final MapToAmount<GameEntity> defenderTooMany = new LinkedHashMapToAmount<GameEntity>(defenderMax.size());
+        final MapToAmount<GameEntity> defenderTooMany = new LinkedHashMapToAmount<>(defenderMax.size());
         outer: for (final GameEntity defender : attackers.values()) {
             final Integer max = defenderMax.get(defender);
             if (max == null) {
@@ -76,7 +76,7 @@ public class GlobalAttackRestrictions {
             }
         }
 
-        final MapToAmount<GameEntity> defenderTooFew = new LinkedHashMapToAmount<GameEntity>(defenderMax.size());
+        final MapToAmount<GameEntity> defenderTooFew = new LinkedHashMapToAmount<>(defenderMax.size());
         for (final GameEntity mandatoryDef : mustBeAttackedByEachOpp) {
             // check to ensure that this defender can even legally be attacked in the first place
             boolean canAttackThisDef = false;
@@ -145,7 +145,7 @@ public class GlobalAttackRestrictions {
      */
     public static GlobalAttackRestrictions getGlobalRestrictions(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
         int max = -1;
-        final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<GameEntity>(possibleDefenders.size());
+        final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<>(possibleDefenders.size());
         final PlayerCollection mustBeAttacked = new PlayerCollection();
         final Game game = attackingPlayer.getGame();
 

@@ -282,7 +282,7 @@ public enum GroupDef {
     private static Map<String, Integer> setGroupMap;
 
     private static String[] getSetGroups() {
-        setGroupMap = new HashMap<String, Integer>(); //cache mappings to make lookup quicker later
+        setGroupMap = new HashMap<>(); //cache mappings to make lookup quicker later
 
         //build sorted list of sets
         List<CardEdition> sortedSets = Lists.newArrayList(FModel.getMagicDb().getEditions());

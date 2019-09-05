@@ -239,9 +239,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             String imagePath;
             int artIndex = 1;
-            ArrayList<String> cis = new ArrayList<String>();
+            ArrayList<String> cis = new ArrayList<>();
 
-            HashMap<String, Integer> cardCount = new HashMap<String, Integer>();
+            HashMap<String, Integer> cardCount = new HashMap<>();
             for (CardInSet c : e.getCards()) {
                 if (cardCount.containsKey(c.name)) {
                     cardCount.put(c.name, cardCount.get(c.name) + 1);

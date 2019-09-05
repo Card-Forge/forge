@@ -23,7 +23,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedAttacker")) {
             cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
         } else {
-            cards = new ArrayList<Card>();
+            cards = new ArrayList<>();
             cards.add(host);
         }
 

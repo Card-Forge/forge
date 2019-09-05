@@ -46,7 +46,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JRadioButton radSingle = new FRadioButton(localizer.getMessage("lblPlayAnOpponent"));
     private final JRadioButton radAll = new FRadioButton(localizer.getMessage("lblPlayAll7opponents"));
 
-    private final JComboBox<String> cbOpponent = new JComboBox<String>();
+    private final JComboBox<String> cbOpponent = new JComboBox<>();
 
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

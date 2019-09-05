@@ -641,7 +641,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
-            FCollection<Player> pl = new FCollection<Player>();
+            FCollection<Player> pl = new FCollection<>();
             // use defined controller. it does need to work even without Targets.
             if (sa.hasParam("TargetsWithDefinedController")) {
                 pl.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("TargetsWithDefinedController"), sa));

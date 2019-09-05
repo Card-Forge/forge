@@ -51,7 +51,7 @@ import java.util.regex.Pattern;
  */
 public abstract class DeckGeneratorBase {
     protected final DebugTrace trace = new DebugTrace();
-    protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
+    protected final Map<String, Integer> cardCounts = new HashMap<>();
     protected int maxDuplicates = 4;
     protected boolean useArtifacts = true;
     protected String basicLandEdition = null;
@@ -299,7 +299,7 @@ public abstract class DeckGeneratorBase {
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
         // attempt to optimize basic land counts according
         // to color representation
-        Map<String, Integer> res = new TreeMap<String, Integer>();
+        Map<String, Integer> res = new TreeMap<>();
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
         for (Entry<PaperCard, Integer> cpe : outList) {
@@ -418,7 +418,7 @@ public abstract class DeckGeneratorBase {
     }
 
     public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards){
-        final List<String> dLands = new ArrayList<String>();
+        final List<String> dLands = new ArrayList<>();
         Pattern p = Pattern.compile(pattern);
         for (PaperCard card:landCards){
             if (card.getRules().getAiHints().getRemAIDecks()) {

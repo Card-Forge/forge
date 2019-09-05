@@ -63,7 +63,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private AdvancedSearchFilter<? extends T> advancedSearchFilter;
-    private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
+    private final List<ItemFilter<? extends T>> filters = new ArrayList<>();
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean multiSelectMode = false;
@@ -74,7 +74,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
     private boolean viewUpdating, needSecondUpdate;
-    private List<ItemColumn> sortCols = new ArrayList<ItemColumn>();
+    private List<ItemColumn> sortCols = new ArrayList<>();
 
     private final TextSearchFilter<? extends T> searchFilter;
 
@@ -89,7 +89,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     private final FComboBox<ItemColumn> cbxSortOptions;
 
-    private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
+    private final List<ItemView<T>> views = new ArrayList<>();
     private final ItemListView<T> listView;
     private final ImageView<T> imageView;
     private ItemView<T> currentView;
@@ -106,11 +106,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
         genericType = genericType0;
         wantUnique = wantUnique0;
-        model = new ItemManagerModel<T>(genericType0);
+        model = new ItemManagerModel<>(genericType0);
 
         searchFilter = createSearchFilter();
 
-        listView = new ItemListView<T>(this, model);
+        listView = new ItemListView<>(this, model);
         imageView = createImageView(model);
 
         views.add(listView);
@@ -125,7 +125,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
         if (allowSortChange()) {
-            cbxSortOptions = add(new FComboBox<ItemColumn>("Sort: "));
+            cbxSortOptions = add(new FComboBox<>("Sort: "));
             cbxSortOptions.setFont(FSkinFont.get(12));
         }
         else {
@@ -205,7 +205,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
-        return new ImageView<T>(this, model0);
+        return new ImageView<>(this, model0);
     }
 
     public ItemManagerConfig getConfig() {
@@ -220,7 +220,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setWantUnique(config0.getUniqueCardsOnly());
 
         //ensure sort cols ordered properly
-        final List<ItemColumn> cols = new LinkedList<ItemColumn>();
+        final List<ItemColumn> cols = new LinkedList<>();
         for (ItemColumnConfig colConfig : config.getCols().values()) {
             if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
                 cols.add(new ItemColumn(colConfig));
@@ -437,7 +437,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public ItemPool<T> getSelectedItemPool() {
-        ItemPool<T> selectedItemPool = new ItemPool<T>(genericType);
+        ItemPool<T> selectedItemPool = new ItemPool<>(genericType);
         if (currentView == listView) {
             for (T item : getSelectedItems()) {
                 selectedItemPool.add(item, getItemCount(item));
@@ -475,7 +475,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public boolean setSelectedStrings(Iterable<String> strings) {
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         for (String str : strings) {
             T item = stringToItem(str);
             if (item != null) {
@@ -486,7 +486,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public boolean selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         for (Entry<T, Integer> itemEntry : itemEntrys) {
             items.add(itemEntry.getKey());
         }
@@ -521,7 +521,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (isUnfiltered()) {
             model.addItem(item, qty);
         }
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         items.add(item);
         updateView(false, items);
     }
@@ -532,7 +532,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             model.addItems(itemsToAdd);
         }
 
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         for (Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
@@ -695,7 +695,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public boolean applyFilters() {
         if (lockFiltering || !initialized) { return false; }
 
-        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        List<Predicate<? super T>> predicates = new ArrayList<>();
         for (ItemFilter<? extends T> filter : filters) {
             if (!filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(genericType));

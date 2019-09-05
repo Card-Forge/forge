@@ -8,10 +8,10 @@ public class ConquestAwardPool {
     public final List<PaperCard> commons, uncommons, rares, mythics;
 
     public ConquestAwardPool(Iterable<PaperCard> cards) {
-        commons = new ArrayList<PaperCard>();
-        uncommons = new ArrayList<PaperCard>();
-        rares = new ArrayList<PaperCard>();
-        mythics = new ArrayList<PaperCard>();
+        commons = new ArrayList<>();
+        uncommons = new ArrayList<>();
+        rares = new ArrayList<>();
+        mythics = new ArrayList<>();
 
         for (PaperCard c : cards) {
             switch (c.getRarity()) {

@@ -62,7 +62,7 @@ public final class CardRelationMatrixGenerator {
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeFormat(GameFormat format){
-        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR+ForgeConstants.PATH_SEPARATOR+format.getName()),
+        IStorage<Deck> decks = new StorageImmediatelySerialized<>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR + ForgeConstants.PATH_SEPARATOR + format.getName()),
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
@@ -117,7 +117,7 @@ public final class CardRelationMatrixGenerator {
                     if(!cardToAdd.getRules().getMainPart().getType().isLand()){//need x non-land cards
                         ++j;
                     }
-                    deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
+                    deckPool.add(new AbstractMap.SimpleEntry<>(cardToAdd, distances[indices[cardList.size() - 1 - k]]));
                 }
                 if(excludeThisCard){
                     continue;
@@ -129,9 +129,9 @@ public final class CardRelationMatrixGenerator {
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(DeckFormat format){
-        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator",
+        IStorage<Deck> decks = new StorageImmediatelySerialized<>("Generator",
                 new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR, format.toString()),
-                ForgeConstants.DECK_GEN_DIR, false),
+                        ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
         //get all cards
@@ -186,7 +186,7 @@ public final class CardRelationMatrixGenerator {
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 for(int k=0;k<cardList.size(); k++){
                     if(matrix[col][k]>0){
-                        deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(integerCardMap.get(k),matrix[col][k]));
+                        deckPool.add(new AbstractMap.SimpleEntry<>(integerCardMap.get(k), matrix[col][k]));
                     }
                 }
                 cardPools.put(card.getName(), deckPool);

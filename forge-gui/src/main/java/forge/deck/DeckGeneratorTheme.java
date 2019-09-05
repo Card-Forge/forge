@@ -72,7 +72,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
      * @return a {@link java.util.ArrayList} object.
      */
     public static final List<String> getThemeNames() {
-        final List<String> ltNames = new ArrayList<String>();
+        final List<String> ltNames = new ArrayList<>();
 
         final File file = new File(ForgeConstants.THEMES_DIR);
 
@@ -180,7 +180,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
 
     private class Grp {
         /** The Cardnames. */
-        private final List<String> cardnames = new ArrayList<String>();
+        private final List<String> cardnames = new ArrayList<>();
 
         /** The Max cnt. */
         private int maxCnt;
@@ -190,7 +190,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
     }
 
     private List<Grp> readGroups(List<String> lines) {
-        final List<Grp> groups = new ArrayList<Grp>();
+        final List<Grp> groups = new ArrayList<>();
 
         Grp g = null;
         for (String s : lines) {

@@ -451,7 +451,7 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final boolean mandatory) {
-        List<Player> targetable = new ArrayList<Player>();
+        List<Player> targetable = new ArrayList<>();
         for (final Player player : aiPlayer.getGame().getPlayers()) {
             if (sa.canTarget(player)) {
                 targetable.add(player);
@@ -855,7 +855,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final List<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<>();
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -906,7 +906,7 @@ public class AttachAi extends SpellAbilityAi {
 
         Card c = null;
         if (prefList == null || prefList.isEmpty()) {
-            prefList = new ArrayList<Card>(list);
+            prefList = new ArrayList<>(list);
         } else {
             c = ComputerUtilCard.getBestAI(prefList);
             if (c != null) {
@@ -960,7 +960,7 @@ public class AttachAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
-        List<GameObject> targets = new ArrayList<GameObject>();
+        List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
@@ -1150,7 +1150,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final List<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<>();
         boolean grantingAbilities = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {

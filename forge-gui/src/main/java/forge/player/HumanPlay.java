@@ -274,7 +274,7 @@ public class HumanPlay {
         }
 
         final List<CostPart> parts = CostAdjustment.adjust(cost, sourceAbility).getCostParts();
-        final List<CostPart> remainingParts = new ArrayList<CostPart>(parts);
+        final List<CostPart> remainingParts = new ArrayList<>(parts);
         CostPart costPart = null;
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
@@ -319,7 +319,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostDraw) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                List<Player> res = new ArrayList<Player>();
+                List<Player> res = new ArrayList<>();
                 String type = part.getType();
                 for (Player player : p.getGame().getPlayers()) {
                     if (player.isValid(type, p, source, sourceAbility) && player.canDraw()) {
@@ -455,7 +455,7 @@ public class HumanPlay {
                     }
                     Card selected = inp.getFirstSelected();
                     final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-                    final List<CounterType> typeChoices = new ArrayList<CounterType>();
+                    final List<CounterType> typeChoices = new ArrayList<>();
                     for (CounterType key : tgtCounters.keySet()) {
                         if (tgtCounters.get(key) > 0) {
                             typeChoices.add(key);
@@ -528,7 +528,7 @@ public class HumanPlay {
 
                 if (sameZone) { // Jotun Grunt
                     FCollectionView<Player> players = p.getGame().getPlayers();
-                    List<Player> payableZone = new ArrayList<Player>();
+                    List<Player> payableZone = new ArrayList<>();
                     for (Player player : players) {
                         CardCollectionView enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
                         if (enoughType.size() < amount) {

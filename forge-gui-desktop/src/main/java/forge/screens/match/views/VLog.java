@@ -181,7 +181,7 @@ public class VLog implements IVDoc<CLog> {
             logEntries.removeAll(this.displayedLogEntries);
             return logEntries;
         }
-        return new ArrayList<GameLogEntry>();
+        return new ArrayList<>();
     }
 
     private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {

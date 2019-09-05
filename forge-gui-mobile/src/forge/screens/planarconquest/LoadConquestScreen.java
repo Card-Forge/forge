@@ -92,7 +92,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
                 final ConquestController qc = FModel.getConquest();
 
-                Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
+                Map<String, ConquestData> arrConquests = new HashMap<>();
                 if (dirConquests.listFiles() != null) {
                     for (File f : dirConquests.listFiles()) {
                         if (f.isDirectory()) {
@@ -103,7 +103,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 }
 
                 // Populate list with available conquest data.
-                lstConquests.setConquests(new ArrayList<ConquestData>(arrConquests.values()));
+                lstConquests.setConquests(new ArrayList<>(arrConquests.values()));
 
                 // If there are quests available, force select.
                 if (arrConquests.size() > 0) {
@@ -332,7 +332,7 @@ public class LoadConquestScreen extends LaunchScreen {
         }
 
         public void setConquests(List<ConquestData> qd0) {
-            List<ConquestData> sorted = new ArrayList<ConquestData>();
+            List<ConquestData> sorted = new ArrayList<>();
             for (ConquestData qd : qd0) {
                 sorted.add(qd);
             }

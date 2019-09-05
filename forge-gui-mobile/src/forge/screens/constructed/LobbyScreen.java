@@ -55,9 +55,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     // Variants frame and variables
     private final FLabel lblVariants = new FLabel.Builder().text("Variants:").font(VARIANTS_FONT).build();
-    private final FComboBox<Object> cbVariants = new FComboBox<Object>();
+    private final FComboBox<Object> cbVariants = new FComboBox<>();
 
-    private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
+    private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -87,7 +87,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(false); //disable start button until decks loaded
 
         add(lblPlayers);
-        cbPlayerCount = add(new FComboBox<Integer>());
+        cbPlayerCount = add(new FComboBox<>());
         cbPlayerCount.setFont(VARIANTS_FONT);
         for (int i = 2; i <= MAX_PLAYERS; i++) {
             cbPlayerCount.addItem(i);
@@ -322,7 +322,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     List<String> getPlayerNames() {
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         for (PlayerPanel pp : playerPanels) {
             names.add(pp.getPlayerName());
         }
@@ -341,7 +341,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     //========== Various listeners in build order
     
     private class MultiVariantSelect extends FScreen {
-        private final FList<Variant> lstVariants = add(new FList<Variant>());
+        private final FList<Variant> lstVariants = add(new FList<>());
 
         private MultiVariantSelect() {
             super("Select Variants");

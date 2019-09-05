@@ -48,7 +48,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final List<String> choices = ProtectEffect.getProtectionList(sa);
-        final List<String> gains = new ArrayList<String>();
+        final List<String> gains = new ArrayList<>();
         if (isChoice) {
             Player choser = sa.getActivatingPlayer();
             final String choice = choser.getController().chooseProtectionType("Choose a protection", sa, choices);

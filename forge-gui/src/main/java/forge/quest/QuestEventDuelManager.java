@@ -218,10 +218,10 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
     private void assembleDuelDifficultyLists() {
 
         sortedDuels.clear();
-        sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<QuestEventDuel>());
+        sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<>());
 
         for (final QuestEventDuel qd : allDuels) {
             sortedDuels.add(qd.getDifficulty(), qd);

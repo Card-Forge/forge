@@ -330,7 +330,7 @@ public class MatchScreen extends FScreen {
         if (game == null) { return; }
 
         //draw arrows for paired cards
-        Set<CardView> pairedCards = new HashSet<CardView>();
+        Set<CardView> pairedCards = new HashSet<>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways
@@ -616,7 +616,7 @@ public class MatchScreen extends FScreen {
             y += oldScrollTop - VAvatar.HEIGHT;
 
             //build map of all horizontal scroll panes and their current scrollWidths and adjusted X values
-            Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<FScrollPane, Pair<Float, Float>>();
+            Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<>();
             backupHorzScrollPanes(topPlayerPanel, x, horzScrollPanes);
             backupHorzScrollPanes(bottomPlayerPanel, x, horzScrollPanes);
 

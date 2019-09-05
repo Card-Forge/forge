@@ -34,10 +34,10 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final StartButton btnStart  = new StartButton();
-    private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
+    private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<>();
     private final FCheckBox cbPlant = new FCheckBox(localizer.getMessage("cbSummonPlant"));
 
-    private final FComboBoxWrapper<String> cbxMatchLength  = new FComboBoxWrapper<String>();
+    private final FComboBoxWrapper<String> cbxMatchLength  = new FComboBoxWrapper<>();
 
     private final FLabel lblZep   = new FLabel.Builder().text(localizer.getMessage("htmlLaunchZeppelin"))
             .hoverable(true).icon(FSkin.getIcon(FSkinProp.ICO_QUEST_ZEP))

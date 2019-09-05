@@ -49,7 +49,7 @@ public class QuestPetController implements IQuestBazaarItem {
     @XStreamAsAttribute()
     private final int maxLevel;
 
-    private final List<QuestPetStats> levels = new ArrayList<QuestPetStats>();
+    private final List<QuestPetStats> levels = new ArrayList<>();
 
     @XStreamAsAttribute()
     private final String name;

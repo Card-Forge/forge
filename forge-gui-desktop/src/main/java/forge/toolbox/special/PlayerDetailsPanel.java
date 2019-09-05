@@ -39,7 +39,7 @@ public class PlayerDetailsPanel extends JPanel {
     private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "Exile (%s)");
     private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "Flashback cards (%s)");
     private final DetailLabel lblCommand = new DetailLabel(FSkinProp.IMG_PLANESWALKER, "Command zone (%s)");
-    private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
+    private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
         player = player0;

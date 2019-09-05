@@ -84,7 +84,7 @@ public class SpellAbilityChoicesIterator {
         }
         ChoicePoint cp = choicePoints.get(cpIndex);
         // Prune duplicates.
-        HashSet<String> uniqueCards = new HashSet<String>();
+        HashSet<String> uniqueCards = new HashSet<>();
         for (int i = 0; i < fetchList.size(); i++) {
             Card card = fetchList.get(i);
             if (uniqueCards.add(card.getName()) && uniqueCards.size() == cp.nextChoice + 1) {
@@ -213,7 +213,7 @@ public class SpellAbilityChoicesIterator {
     }
 
     public static List<AbilitySub> getModeCombination(List<AbilitySub> choices, int[] modeIndexes) {
-        ArrayList<AbilitySub> modes = new ArrayList<AbilitySub>();
+        ArrayList<AbilitySub> modes = new ArrayList<>();
         for (int modeIndex : modeIndexes) {
             modes.add(choices.get(modeIndex));
         }

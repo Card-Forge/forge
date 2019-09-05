@@ -14,7 +14,7 @@ import java.util.Set;
  *
  */
 public class CardSetFilter extends CardFormatFilter {
-    private final Set<String> sets = new HashSet<String>();
+    private final Set<String> sets = new HashSet<>();
 
     public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);

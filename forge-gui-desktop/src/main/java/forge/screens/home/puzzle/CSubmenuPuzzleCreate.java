@@ -48,7 +48,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
 
     @Override
     public List<JMenu> getMenus() {
-        final List<JMenu> menus = new ArrayList<JMenu>();
+        final List<JMenu> menus = new ArrayList<>();
         menus.add(PuzzleGameMenu.getMenu());
         return menus;
     }
@@ -104,7 +104,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
             }
         });
 
-        final List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> players = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         human.setStartingHand(0);
         players.add(human);

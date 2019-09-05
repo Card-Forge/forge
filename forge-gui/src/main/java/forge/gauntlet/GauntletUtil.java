@@ -18,8 +18,8 @@ public class GauntletUtil {
 
         // Generate gauntlet decks
         Deck deck;
-        final List<String> eventNames = new ArrayList<String>();
-        final List<Deck> decks = new ArrayList<Deck>();
+        final List<String> eventNames = new ArrayList<>();
+        final List<Deck> decks = new ArrayList<>();
 
         final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
 
@@ -86,7 +86,7 @@ public class GauntletUtil {
 
     public static void setDefaultGauntletName(GauntletData gauntlet, String prefix) {
         final File[] arrFiles = GauntletIO.getGauntletFilesUnlocked(prefix);
-        final Set<String> setNames = new HashSet<String>();
+        final Set<String> setNames = new HashSet<>();
         for (File f : arrFiles) {
             setNames.add(f.getName());
         }

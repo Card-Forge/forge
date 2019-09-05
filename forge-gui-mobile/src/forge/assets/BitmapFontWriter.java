@@ -237,7 +237,7 @@ import com.badlogic.gdx.utils.Array;
             buf.append("\t</pages>\n");
         
         //CHARS
-        Array<Glyph> glyphs = new Array<Glyph>(256);
+        Array<Glyph> glyphs = new Array<>(256);
         for (int i=0; i<fontData.glyphs.length; i++) {
             if (fontData.glyphs[i]==null)
                 continue;

@@ -101,7 +101,7 @@ public class LoadQuestScreen extends LaunchScreen {
                     }
                 };
                 File[] arrFiles = dirQuests.listFiles(takeDatFiles);
-                Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
+                Map<String, QuestData> arrQuests = new HashMap<>();
                 for (File f : arrFiles) {
                     try {
                         arrQuests.put(f.getName(), QuestDataIO.loadData(f));
@@ -113,7 +113,7 @@ public class LoadQuestScreen extends LaunchScreen {
                 }
 
                 // Populate list with available quest data.
-                lstQuests.setQuests(new ArrayList<QuestData>(arrQuests.values()));
+                lstQuests.setQuests(new ArrayList<>(arrQuests.values()));
 
                 // If there are quests available, force select.
                 if (arrQuests.size() > 0) {
@@ -334,7 +334,7 @@ public class LoadQuestScreen extends LaunchScreen {
         }
 
         public void setQuests(List<QuestData> qd0) {
-            List<QuestData> sorted = new ArrayList<QuestData>();
+            List<QuestData> sorted = new ArrayList<>();
             for (QuestData qd : qd0) {
                 sorted.add(qd);
             }

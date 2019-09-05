@@ -51,7 +51,7 @@ public class Combat {
     private final Player playerWhoAttacks;
     private final AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
-    private final FCollection<GameEntity> attackableEntries = new FCollection<GameEntity>();
+    private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
     // Keyed by attackable defender (player or planeswalker)
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
@@ -87,7 +87,7 @@ public class Combat {
         HashMap<AttackingBand, AttackingBand> bandsMap = new HashMap<>();
         for (Entry<GameEntity, AttackingBand> entry : combat.attackedByBands.entries()) {
             AttackingBand origBand = entry.getValue();
-            ArrayList<Card> attackers = new ArrayList<Card>();
+            ArrayList<Card> attackers = new ArrayList<>();
             for (Card c : origBand.getAttackers()) {
                 attackers.add(map.map(c));
             }
@@ -187,7 +187,7 @@ public class Combat {
     }
 
     public final FCollection<GameEntity> getDefendersControlledBy(Player who) {
-        FCollection<GameEntity> res = new FCollection<GameEntity>();
+        FCollection<GameEntity> res = new FCollection<>();
         for (GameEntity ge : attackableEntries) {
             // if defender is the player himself or his cards
             if (ge == who || ge instanceof Card && ((Card) ge).getController() == who) {
@@ -198,7 +198,7 @@ public class Combat {
     }
 
     public final FCollectionView<Player> getDefendingPlayers() {
-        return new FCollection<Player>(Iterables.filter(attackableEntries, Player.class));
+        return new FCollection<>(Iterables.filter(attackableEntries, Player.class));
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
@@ -414,7 +414,7 @@ public class Combat {
     }
 
     public final FCollectionView<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
-        FCollection<AttackingBand> bands = new FCollection<AttackingBand>();
+        FCollection<AttackingBand> bands = new FCollection<>();
         for (Entry<AttackingBand, Card> kv : blockedBands.entries()) {
             if (kv.getValue().equals(blocker)) {
                 bands.add(kv.getKey());
@@ -902,7 +902,7 @@ public class Combat {
                 return; // card was not even in combat
             }
         }
-        final FCollectionView<AttackingBand> relatedBands = isAttacker ? new FCollection<AttackingBand>(attackingBand) : attackersBlocked;
+        final FCollectionView<AttackingBand> relatedBands = isAttacker ? new FCollection<>(attackingBand) : attackersBlocked;
         lkiCache.put(lastKnownInfo, new CombatLki(isAttacker, relatedBands));
     }
 }

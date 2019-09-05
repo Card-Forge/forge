@@ -35,7 +35,7 @@ import java.util.*;
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
 
-    public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", null, new HashMap<String, Object>());
+    public final static StorageBase<?> emptyMap = new StorageBase<>("Empty", null, new HashMap<>());
     public final String name, fullPath;
 
     public StorageBase(final String name0, final IItemReader<T> io) {
@@ -55,7 +55,7 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public final Collection<String> getItemNames() {
-        return new ArrayList<String>(map.keySet());
+        return new ArrayList<>(map.keySet());
     }
 
     @Override

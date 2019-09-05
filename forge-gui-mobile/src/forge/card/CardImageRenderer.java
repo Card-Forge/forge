@@ -273,7 +273,7 @@ public class CardImageRenderer {
     }
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
-        List<String> pieces = new ArrayList<String>();
+        List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
             pieces.add("/");

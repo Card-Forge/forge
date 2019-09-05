@@ -136,7 +136,7 @@ public class ConquestPlane {
 
     public FCollectionView<PaperCard> getPlaneCards() {
         if (planeCards == null) {
-            planeCards = new FCollection<PaperCard>();
+            planeCards = new FCollection<>();
 
             CardDb variantCards = FModel.getMagicDb().getVariantCards();
             List<String> planeCardNames = FileUtil.readFile(directory + "plane_cards.txt");
@@ -160,7 +160,7 @@ public class ConquestPlane {
         if (regions != null) { return; }
 
         //load regions
-        regions = new FCollection<ConquestRegion>(new ConquestRegion.Reader(this));
+        regions = new FCollection<>(new ConquestRegion.Reader(this));
 
         //load events
         int eventIndex = 0;
@@ -168,7 +168,7 @@ public class ConquestPlane {
         int regionEndIndex = eventsPerRegion;
         events = new ConquestEvent[regions.size() * eventsPerRegion];
         for (ConquestRegion region : regions) {
-            FCollection<ConquestEvent> regionEvents = new FCollection<ConquestEvent>(new ConquestEvent.Reader(region));
+            FCollection<ConquestEvent> regionEvents = new FCollection<>(new ConquestEvent.Reader(region));
             for (ConquestEvent event : regionEvents) {
                 events[eventIndex++] = event;
                 if (eventIndex == regionEndIndex) {
@@ -184,11 +184,11 @@ public class ConquestPlane {
 
         //load card pool
         cardPool = new DeckGenPool();
-        commanders = new FCollection<PaperCard>();
+        commanders = new FCollection<>();
 
         CardDb commonCards = FModel.getMagicDb().getCommonCards();
         List<String> bannedCards = FileUtil.readFile(directory + "banned_cards.txt");
-        Set<String> bannedCardSet = bannedCards.isEmpty() ? null : new HashSet<String>(bannedCards);
+        Set<String> bannedCardSet = bannedCards.isEmpty() ? null : new HashSet<>(bannedCards);
 
         List<String> setCodes = FileUtil.readFile(directory + "sets.txt");
         for (String setCode : setCodes) {
@@ -292,7 +292,7 @@ public class ConquestPlane {
     }
 
     public static Set<ConquestPlane> getAllPlanesOfCard(PaperCard card) {
-        Set<ConquestPlane> planes = new HashSet<ConquestPlane>();
+        Set<ConquestPlane> planes = new HashSet<>();
         for (ConquestPlane plane : FModel.getPlanes()) {
             if (plane.cardPool.contains(card)) {
                 planes.add(plane);

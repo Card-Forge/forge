@@ -18,12 +18,12 @@ public class CardReaderExperiments {
         if (args.length < 2) { return; }
 
         int totalParsedCount = 0;
-        final List<List<String>> output = new ArrayList<List<String>>();
+        final List<List<String>> output = new ArrayList<>();
         for (int i = 1; i < args.length; i++) {
-            output.add(new ArrayList<String>());
+            output.add(new ArrayList<>());
         }
         
-        final List<File> allFiles = CardStorageReader.collectCardFiles(new ArrayList<File>(), new File(ForgeConstants.CARD_DATA_DIR));
+        final List<File> allFiles = CardStorageReader.collectCardFiles(new ArrayList<>(), new File(ForgeConstants.CARD_DATA_DIR));
         Charset charset = Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME);
         final CardRules.Reader rulesReader = new CardRules.Reader();
         for (File file : allFiles) {

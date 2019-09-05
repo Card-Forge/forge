@@ -29,9 +29,9 @@ import java.util.Map;
  */
 public class QuestPetStorage {
 
-    private Map<Integer, List<QuestPetController>> petsBySlot = new HashMap<Integer, List<QuestPetController>>();
+    private Map<Integer, List<QuestPetController>> petsBySlot = new HashMap<>();
 
-    private Map<String, QuestPetController> petsByName = new HashMap<String, QuestPetController>();
+    private Map<String, QuestPetController> petsByName = new HashMap<>();
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -95,7 +95,7 @@ public class QuestPetStorage {
         * */
         List<QuestPetController> list = this.petsBySlot.get(Integer.valueOf(iSlot));
         if (null == list) {
-            list = new ArrayList<QuestPetController>();
+            list = new ArrayList<>();
             this.petsBySlot.put(Integer.valueOf(iSlot), list);
         }
         this.petsByName.put(petCtrl.getName(), petCtrl);
@@ -120,7 +120,7 @@ public class QuestPetStorage {
      * @return List
      */
     public List<QuestPetController> getAvaliablePets(final int iSlot, final QuestAssets qA) {
-        final List<QuestPetController> result = new ArrayList<QuestPetController>();
+        final List<QuestPetController> result = new ArrayList<>();
         final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
         if (null != allPossible) {
             for (final QuestPetController c : allPossible) {
@@ -139,7 +139,7 @@ public class QuestPetStorage {
      * @return List<QuestPetController>
      */
     public List<QuestPetController> getAllPets(final int iSlot) {
-        final List<QuestPetController> result = new ArrayList<QuestPetController>();
+        final List<QuestPetController> result = new ArrayList<>();
         final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
         if (null != allPossible) {
             for (final QuestPetController c : allPossible) {

@@ -41,7 +41,7 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertTrue(hints.isValid());
 
-        List<PaperCard> list = new ArrayList<PaperCard>();
+        List<PaperCard> list = new ArrayList<>();
         list.add(readCard("assault_griffin.txt"));
         list.add(readCard("auramancer.txt"));
 
@@ -61,7 +61,7 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertTrue(hints.isValid());
 
-        List<PaperCard> list = new ArrayList<PaperCard>();
+        List<PaperCard> list = new ArrayList<>();
         list.add(readCard("assault_griffin.txt"));
         list.add(readCard("scepter_of_empires.txt"));
         list.add(readCard("crown_of_empires.txt"));
@@ -79,7 +79,7 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertTrue(hints.isValid());
 
-        List<PaperCard> list = new ArrayList<PaperCard>();
+        List<PaperCard> list = new ArrayList<>();
         list.add(readCard("acidic_slime.txt"));
         list.add(readCard("ajanis_sunstriker.txt"));
 
@@ -96,7 +96,7 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertTrue(hints.isValid());
 
-        List<PaperCard> list = new ArrayList<PaperCard>();
+        List<PaperCard> list = new ArrayList<>();
         list.add(readCard("llanowar_elves.txt"));
         list.add(readCard("unsummon.txt"));
 
@@ -125,7 +125,7 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertTrue(hints.isValid());
 
-        List<PaperCard> list = new ArrayList<PaperCard>();
+        List<PaperCard> list = new ArrayList<>();
         list.add(readCard("assault_griffin.txt"));
         list.add(readCard("breaker_of_armies.txt"));
         list.add(readCard("benthic_infiltrator.txt"));

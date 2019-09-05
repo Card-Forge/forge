@@ -16,7 +16,7 @@ public class ChooseDirectionEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final FCollection<Player> left = new FCollection<Player>(game.getPlayers());
+        final FCollection<Player> left = new FCollection<>(game.getPlayers());
         // TODO: We'd better set up turn order UI here
         final String info = "Left (clockwise): " + left + "\r\nRight (anticlockwise):" + Lists.reverse(left);
         sa.getActivatingPlayer().getController().notifyOfValue(sa, source, info);

@@ -79,7 +79,7 @@ public class TriggerVote extends Trigger {
     private static FCollection<Player> getVoters(final Player player,
             final ListMultimap<Object, Player> votes,
             final boolean isOpponent, final boolean votedOtherchoice) {
-        final FCollection<Player> voters = new FCollection<Player>();
+        final FCollection<Player> voters = new FCollection<>();
         for (final Object voteType : votes.keySet()) {
             final List<Player> players = votes.get(voteType);
             if (votedOtherchoice ^ players.contains(player)) {

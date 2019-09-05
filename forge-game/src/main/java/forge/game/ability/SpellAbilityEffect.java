@@ -186,7 +186,7 @@ public abstract class SpellAbilityEffect {
 
     private static FCollection<Player> getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+        return useTargets ? new FCollection<>(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 

@@ -12,7 +12,7 @@ import forge.menu.FMenuItem;
 import forge.toolbox.FEvent.*;
 
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
-    private final List<T> items = new ArrayList<T>();
+    private final List<T> items = new ArrayList<>();
     private T selectedItem;
     private String label = "";
     private final DropDown dropDown = new DropDown();

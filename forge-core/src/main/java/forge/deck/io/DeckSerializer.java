@@ -41,7 +41,7 @@ public class DeckSerializer {
     }
 
     private static List<String> serializeDeck(Deck d) {
-        final List<String> out = new ArrayList<String>();
+        final List<String> out = new ArrayList<>();
         out.add(TextUtil.enclosedBracket("metadata"));
     
         out.add(TextUtil.concatNoSpace(DeckFileHeader.NAME,"=", d.getName().replaceAll("\n", "")));

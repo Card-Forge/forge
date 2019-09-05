@@ -12,8 +12,8 @@ public class GameStateSpecificationBuilder {
 	private final Map<String,PlayerSpecification> playerFacts;
 	
 	public GameStateSpecificationBuilder() {
-		cards = new ArrayList<CardSpecification>();
-		playerFacts = new HashMap<String,PlayerSpecification>();
+		cards = new ArrayList<>();
+		playerFacts = new HashMap<>();
 	}
 	
 	public GameStateSpecificationBuilder addCard( final CardSpecification cardSpecification ) {

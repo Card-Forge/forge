@@ -506,13 +506,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private List<String> getSelectedDecksFromSavedState(final String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
-                return new ArrayList<String>();
+                return new ArrayList<>();
             } else {
                 return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
             }
         } catch (final Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 

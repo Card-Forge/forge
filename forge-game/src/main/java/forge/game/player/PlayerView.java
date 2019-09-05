@@ -41,7 +41,7 @@ public class PlayerView extends GameEntityView {
         if (players == null) {
             return null;
         }
-        TrackableCollection<PlayerView> collection = new TrackableCollection<PlayerView>();
+        TrackableCollection<PlayerView> collection = new TrackableCollection<>();
         for (Player p : players) {
             collection.add(p.getView());
         }
@@ -91,7 +91,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<PlayerView> getOpponents() {
-        return MoreObjects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
+        return MoreObjects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<>());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
@@ -262,7 +262,7 @@ public class PlayerView extends GameEntityView {
         return damage == null ? 0 : damage.intValue();
     }
     void updateCommanderDamage(Player p) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (Entry<Card, Integer> entry : p.getCommanderDamage()) {
             map.put(entry.getKey().getId(), entry.getValue());
         }
@@ -415,7 +415,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Mana);
     }
     void updateMana(Player p) {
-        Map<Byte, Integer> mana = new HashMap<Byte, Integer>();
+        Map<Byte, Integer> mana = new HashMap<>();
         for (byte b : ManaAtom.MANATYPES) {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }

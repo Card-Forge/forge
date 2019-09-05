@@ -96,7 +96,7 @@ public class PrintSheet {
             number -= uniqueCards;
         }
 
-        List<PaperCard> uniques = wantUnique ? new ArrayList<PaperCard>() : null;
+        List<PaperCard> uniques = wantUnique ? new ArrayList<>() : null;
         for(int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
             PaperCard toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);

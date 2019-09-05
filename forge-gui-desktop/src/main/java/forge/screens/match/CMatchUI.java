@@ -121,7 +121,7 @@ public final class CMatchUI
     private final TargetingOverlay targetingOverlay = new TargetingOverlay(this);
 
     private FCollectionView<PlayerView> sortedPlayers;
-    private final Map<String, String> avatarImages = new HashMap<String, String>();
+    private final Map<String, String> avatarImages = new HashMap<>();
     private boolean allHands;
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
@@ -140,7 +140,7 @@ public final class CMatchUI
     public CMatchUI() {
         this.view = new VMatchUI(this);
         this.screen = FScreen.getMatchScreen(this, view);
-        this.myDocs = new EnumMap<EDocID, IVDoc<? extends ICDoc>>(EDocID.class);
+        this.myDocs = new EnumMap<>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
         // only create an ante doc if playing for ante
@@ -257,7 +257,7 @@ public final class CMatchUI
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
-        final List<VField> fields = new ArrayList<VField>();
+        final List<VField> fields = new ArrayList<>();
         Singletons.getView().getLpnDocument().add(targetingOverlay.getPanel(), FView.TARGETING_LAYER);
         targetingOverlay.getPanel().setSize(Singletons.getControl().getDisplaySize());
 
@@ -285,7 +285,7 @@ public final class CMatchUI
     }
 
     private void initHandViews() {
-        final List<VHand> hands = new ArrayList<VHand>();
+        final List<VHand> hands = new ArrayList<>();
         final Iterable<PlayerView> localPlayers = getLocalPlayers();
 
         int i = 0;
@@ -613,7 +613,7 @@ public final class CMatchUI
         }
     }
     private List<CardPanel> getVisibleCardPanels() {
-        final List<CardPanel> panels = new ArrayList<CardPanel>();
+        final List<CardPanel> panels = new ArrayList<>();
         for (final VHand h : view.getHands()) {
             panels.addAll(h.getHandArea().getCardPanels());
         }
@@ -950,7 +950,7 @@ public final class CMatchUI
             return ImmutableMap.of(firstBlocker, damage);
         }
 
-        final AtomicReference<Map<CardView, Integer>> result = new AtomicReference<Map<CardView,Integer>>();
+        final AtomicReference<Map<CardView, Integer>> result = new AtomicReference<>();
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
@@ -968,7 +968,7 @@ public final class CMatchUI
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
-            players = new FCollection<PlayerView>(new PlayerView[] { players.get(1), players.get(0) });
+            players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
         initMatch(players, myPlayers);
 

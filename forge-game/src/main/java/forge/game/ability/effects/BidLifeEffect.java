@@ -22,7 +22,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final FCollection<Player> bidPlayers = new FCollection<Player>();
+        final FCollection<Player> bidPlayers = new FCollection<>();
         final int startBidding;
         if (sa.hasParam("StartBidding")) {
             String start = sa.getParam("StartBidding");

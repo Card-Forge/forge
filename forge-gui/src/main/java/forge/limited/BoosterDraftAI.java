@@ -40,8 +40,8 @@ public class BoosterDraftAI {
     protected static final int N_DECKS = 7;
 
     // holds all the cards for each of the computer's decks
-    protected final List<List<PaperCard>> decks = new ArrayList<List<PaperCard>>();
-    protected final List<DeckColors> playerColors = new ArrayList<DeckColors>();
+    protected final List<List<PaperCard>> decks = new ArrayList<>();
+    protected final List<DeckColors> playerColors = new ArrayList<>();
 
     /**
      * <p>
@@ -95,7 +95,7 @@ public class BoosterDraftAI {
     public BoosterDraftAI() {
         // Initialize deck array and playerColors list
         for (int i = 0; i < N_DECKS; i++) {
-            this.decks.add(new ArrayList<PaperCard>());
+            this.decks.add(new ArrayList<>());
             this.playerColors.add(new DeckColors());
         }
     } // BoosterDraftAI()

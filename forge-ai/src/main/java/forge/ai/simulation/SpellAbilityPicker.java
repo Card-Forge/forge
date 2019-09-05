@@ -61,7 +61,7 @@ public class SpellAbilityPicker {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
         CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsToPlay != null) {
-            HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
+            HashMap<String, Card> landsDeDupe = new HashMap<>();
             for (Card land : landsToPlay) {
                 Card previousLand = landsDeDupe.get(land.getName());
                 // Skip identical lands.
@@ -165,7 +165,7 @@ public class SpellAbilityPicker {
 
         PhaseType currentPhase = game.getPhaseHandler().getPhase();
         if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            List<SpellAbility> candidateSAs2 = new ArrayList<SpellAbility>();
+            List<SpellAbility> candidateSAs2 = new ArrayList<>();
             for (SpellAbility sa : candidateSAs) {
                 if (!isSorcerySpeed(sa, player)) {
                     System.err.println("Not sorcery: " + sa);

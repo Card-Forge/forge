@@ -69,7 +69,7 @@ public class CardDetailUtil {
         return getBorderColors(colorSet, false, true, true);
     }
     private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple) {
-        final List<DetailColors> borderColors = new ArrayList<DetailColors>();
+        final List<DetailColors> borderColors = new ArrayList<>();
 
         if (cardColors == null || !canShow) {
             borderColors.add(DetailColors.FACE_DOWN);

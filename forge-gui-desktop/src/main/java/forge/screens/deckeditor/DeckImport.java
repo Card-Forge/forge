@@ -85,8 +85,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
     private final FCheckBox onlyCoreExpCheck = new FCheckBox("Use only core and expansion sets", true);
 
-    private final FComboBox<String> monthDropdown = new FComboBox<String>(); //don't need wrappers since skin can't change while this dialog is open
-    private final FComboBox<Integer> yearDropdown = new FComboBox<Integer>();
+    private final FComboBox<String> monthDropdown = new FComboBox<>(); //don't need wrappers since skin can't change while this dialog is open
+    private final FComboBox<Integer> yearDropdown = new FComboBox<>();
 
     private final DeckImportController controller;
     private final ACEditorBase<TItem, TModel> host;

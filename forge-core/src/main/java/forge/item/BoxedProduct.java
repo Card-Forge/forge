@@ -44,7 +44,7 @@ public abstract class BoxedProduct extends SealedProduct {
     }
     
     public List<PaperCard> getExtraCards() {
-    	return new ArrayList<PaperCard>();
+    	return new ArrayList<>();
     }
     
     @Override

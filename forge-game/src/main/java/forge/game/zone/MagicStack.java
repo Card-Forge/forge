@@ -72,9 +72,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
-    private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
-    private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<SpellAbilityStackInstance>();
-    private final Stack<SpellAbility> undoStack = new Stack<SpellAbility>();
+    private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
+    private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<>();
+    private final Stack<SpellAbility> undoStack = new Stack<>();
     private Player undoStackOwner;
 
     private boolean frozen = false;

@@ -435,7 +435,7 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         
-        final List<String> imageNames = new ArrayList<String>(1);
+        final List<String> imageNames = new ArrayList<>(1);
         if (tokenImage.equals("")) {
             imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(colorDesc, " ", ""), tokenPower, tokenToughness, tokenName));
         } else {

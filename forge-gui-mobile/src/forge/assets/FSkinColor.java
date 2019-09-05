@@ -69,8 +69,8 @@ public class FSkinColor {
         return new FSkinColor(c0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
     }
 
-    private static final HashMap<Colors, FSkinColor> baseColors = new HashMap<Colors, FSkinColor>();
-    private static final HashMap<String, FSkinColor> derivedColors = new HashMap<String, FSkinColor>();
+    private static final HashMap<Colors, FSkinColor> baseColors = new HashMap<>();
+    private static final HashMap<String, FSkinColor> derivedColors = new HashMap<>();
     private static final int NO_BRIGHTNESS_DELTA = 0;
     private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
     private static final int NO_ALPHA = -1;

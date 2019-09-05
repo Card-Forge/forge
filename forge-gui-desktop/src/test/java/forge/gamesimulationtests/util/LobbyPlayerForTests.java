@@ -22,7 +22,7 @@ public class LobbyPlayerForTests extends LobbyPlayer implements IGameEntitiesFac
     
     public LobbyPlayerForTests(String name, PlayerActions playerActions) {
         super(name);
-        playerControllers = new HashMap<Player, PlayerControllerForTests>();
+        playerControllers = new HashMap<>();
         this.playerActions = playerActions;
     }
 

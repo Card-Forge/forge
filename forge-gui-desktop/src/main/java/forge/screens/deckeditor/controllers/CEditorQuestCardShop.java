@@ -209,8 +209,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemTableColumn>();
-        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<ColumnDef, ItemTableColumn>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<>();
 
         // Add spell shop-specific columns
         ItemTableColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
@@ -251,7 +251,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         double multiplier = QuestSpellShop.updateMultiplier();
         this.cardsForSale = this.questData.getCards().getShopList();
 
-        final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
+        final ItemPool<InventoryItem> ownedItems = new ItemPool<>(InventoryItem.class);
         ownedItems.addAllOfType(this.questData.getCards().getCardpool().getView());
 
         this.getCatalogManager().setPool(cardsForSale);

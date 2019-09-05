@@ -31,7 +31,7 @@ import java.util.Set;
 public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, Cloneable, Serializable {
     private static final long serialVersionUID = -1664555336364294106L;
 
-    private static final FCollection<?> EMPTY = new EmptyFCollection<Object>();
+    private static final FCollection<?> EMPTY = new EmptyFCollection<>();
 
     @SuppressWarnings("unchecked")
     public static <T> FCollection<T> getEmpty() {
@@ -527,7 +527,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     public Iterable<T> threadSafeIterable() {
         //create a new linked list for iterating to make it thread safe and avoid concurrent modification exceptions
-        return Iterables.unmodifiableIterable(new LinkedList<T>(list));
+        return Iterables.unmodifiableIterable(new LinkedList<>(list));
     }
 
     @Override

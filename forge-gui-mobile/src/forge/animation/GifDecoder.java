@@ -405,7 +405,7 @@ public class GifDecoder {
     protected void init() {
         status = STATUS_OK;
         frameCount = 0;
-        frames = new Vector<GifFrame>();
+        frames = new Vector<>();
         gct = null;
         lct = null;
     }
@@ -712,7 +712,7 @@ public class GifDecoder {
         }
 
         Texture texture = new Texture(target);
-        Array<TextureRegion> texReg = new Array<TextureRegion>();
+        Array<TextureRegion> texReg = new Array<>();
 
         for(h = 0; h < hzones; h++) {
             for(v = 0; v < vzones; v++) {

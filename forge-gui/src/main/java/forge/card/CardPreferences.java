@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
  *
  */
 public class CardPreferences {
-    private static Map<String, CardPreferences> allPrefs = new HashMap<String, CardPreferences>();
+    private static Map<String, CardPreferences> allPrefs = new HashMap<>();
 
     public static CardPreferences getPrefs(IPaperCard card) {
         String cardName = card.getName();

@@ -71,7 +71,7 @@ public class SFilterUtil {
     private static List<String> getSplitText(String text) {
         boolean inQuotes = false;
         String entry = "";
-        List<String> splitText = new ArrayList<String>();
+        List<String> splitText = new ArrayList<>();
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             switch (ch) {

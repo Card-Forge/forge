@@ -182,7 +182,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
-                ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+                ? new FCollection<>(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         // For cards like Foul Imp, ETB you lose life

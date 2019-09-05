@@ -14,7 +14,7 @@ public class CombatLki {
 
     public CombatLki(boolean isAttacker, FCollectionView<AttackingBand> relatedBands) {
         this.isAttacker = isAttacker;
-        this.relatedBands = new FCollection<AttackingBand>(relatedBands);
+        this.relatedBands = new FCollection<>(relatedBands);
     }
 
     public AttackingBand getFirstBand() {

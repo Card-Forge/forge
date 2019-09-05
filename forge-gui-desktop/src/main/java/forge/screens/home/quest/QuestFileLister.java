@@ -64,8 +64,8 @@ public class QuestFileLister extends JPanel {
     /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
     public void setQuests(List<QuestData> qd0) {
         this.removeAll();
-        List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        List<QuestData> sorted = new ArrayList<QuestData>();
+        List<RowPanel> tempRows = new ArrayList<>();
+        List<QuestData> sorted = new ArrayList<>();
         for (QuestData qd : qd0) { sorted.add(qd); }
         sorted.sort(new Comparator<QuestData>() {
             @Override

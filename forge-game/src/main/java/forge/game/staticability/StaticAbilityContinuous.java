@@ -750,7 +750,7 @@ public final class StaticAbilityContinuous {
     }
 
     private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
-        final List<Player> validActivator = new ArrayList<Player>(players);
+        final List<Player> validActivator = new ArrayList<>(players);
         for (final Card c : cards) {
             validActivator.add(c.getController());
         }
@@ -793,7 +793,7 @@ public final class StaticAbilityContinuous {
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
-        final List<Player> players = new ArrayList<Player>();
+        final List<Player> players = new ArrayList<>();
 
         if (!params.containsKey("Affected")) {
             return players;

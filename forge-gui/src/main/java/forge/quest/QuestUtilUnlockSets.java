@@ -67,7 +67,7 @@ public class QuestUtilUnlockSets {
 
         final ReadPriceList prices = new ReadPriceList();
         final Map<String, Integer> mapPrices = prices.getPriceList();
-        final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition, Integer>>();
+        final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<>();
 
         Double multiplier = 1d;
         int j = 0;
@@ -90,7 +90,7 @@ public class QuestUtilUnlockSets {
         }
 
         final String setPrompt = "You have " + qData.getAssets().getCredits() + " credits. Unlock:";
-        List<String> options = new ArrayList<String>();
+        List<String> options = new ArrayList<>();
         for (ImmutablePair<CardEdition, Integer> ee : setPrices) {
             options.add(TextUtil.concatNoSpace(ee.left.getName()," [PRICE: ", String.valueOf(ee.right), " credits]"));
         }
@@ -142,7 +142,7 @@ public class QuestUtilUnlockSets {
         if (qData.getUnlocksTokens() < 1) { // Should never happen if we made it this far but better safe than sorry...
             throw new RuntimeException("BUG? Could not find unlockable sets even though we should.");
         }
-        List<CardEdition> options = new ArrayList<CardEdition>();
+        List<CardEdition> options = new ArrayList<>();
 
         // Sort current sets by date
         List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
@@ -153,7 +153,7 @@ public class QuestUtilUnlockSets {
         Collections.sort(excludedSets);
         
         // get a number of sets between an excluded and any included set
-        List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Long>>();
+        List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<>();
         for (CardEdition ex : excludedSets) {
             if (!unlockableSetTypes.contains(ex.getType())) // don't add non-traditional sets
                 continue;
@@ -205,7 +205,7 @@ public class QuestUtilUnlockSets {
             qData.getFormat().unlockSet(additionalSet);
         }
 
-        List<PaperCard> cardsWon = new ArrayList<PaperCard>();
+        List<PaperCard> cardsWon = new ArrayList<>();
 
         if (starters.contains(unlockedSet.getCode())) {
             UnOpenedProduct starter = new UnOpenedProduct(starters.get(unlockedSet.getCode()));

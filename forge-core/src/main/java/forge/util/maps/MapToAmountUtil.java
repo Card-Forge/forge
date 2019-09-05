@@ -59,11 +59,11 @@ public final class MapToAmountUtil {
             throw new NullPointerException();
         }
         if (map.isEmpty()) {
-            return new FCollection<T>();
+            return new FCollection<>();
         }
 
         final int max = Collections.max(map.values());
-        final FCollection<T> set = new FCollection<T>();
+        final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
             if (entry.getValue().intValue() == max) {
                 set.add(entry.getKey());
@@ -114,11 +114,11 @@ public final class MapToAmountUtil {
             throw new NullPointerException();
         }
         if (map.isEmpty()) {
-            return new FCollection<T>();
+            return new FCollection<>();
         }
 
         final int min = Collections.min(map.values());
-        final FCollection<T> set = new FCollection<T>();
+        final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
             if (entry.getValue().intValue() == min) {
                 set.add(entry.getKey());

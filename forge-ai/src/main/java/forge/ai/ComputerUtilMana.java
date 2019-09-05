@@ -365,7 +365,7 @@ public class ComputerUtilMana {
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
-        List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
+        List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         int testEnergyPool = ai.getCounters(CounterType.ENERGY);
 
@@ -1359,7 +1359,7 @@ public class ComputerUtilMana {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
-        List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
+        List<ReplacementEffect> replacementEffects = new ArrayList<>();
         for (final Player p : game.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
@@ -1565,7 +1565,7 @@ public class ComputerUtilMana {
      * @return map between creatures and shards to convoke
      */
     public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean improvise) {
-        final Map<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
+        final Map<Card, ManaCostShard> convoke = new HashMap<>();
         Card convoked = null;
         if (!improvise) {
             for (ManaCostShard toPay : cost) {

@@ -39,8 +39,8 @@ import java.util.Map.Entry;
  */
 @SuppressWarnings("serial")
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
-    private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
-    private final Set<String> tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<DeckSection, CardPool> parts = new EnumMap<>(DeckSection.class);
+    private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private Map<String, List<String>> deferredSections;

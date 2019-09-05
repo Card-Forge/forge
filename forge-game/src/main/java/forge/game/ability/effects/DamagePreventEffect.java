@@ -69,7 +69,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         final List<GameObject> tgts = getTargets(sa);
-        final List<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<>();
         
         if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
             Card origin = null;
@@ -96,12 +96,12 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
                     if (preventionWithEffect) {
-                        Map<String, String> effectMap = new TreeMap<String, String>();
+                        Map<String, String> effectMap = new TreeMap<>();
                         effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {
                             String effTgtString = "";
-                            List<GameObject> effTgts = new ArrayList<GameObject>();
+                            List<GameObject> effTgts = new ArrayList<>();
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {
@@ -123,12 +123,12 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
                     if (preventionWithEffect) {
-                        Map<String, String> effectMap = new TreeMap<String, String>();
+                        Map<String, String> effectMap = new TreeMap<>();
                         effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {
                             String effTgtString = "";
-                            List<GameObject> effTgts = new ArrayList<GameObject>();
+                            List<GameObject> effTgts = new ArrayList<>();
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {

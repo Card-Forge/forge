@@ -153,7 +153,7 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getPnlChallenges().removeAll();
         qCtrl.regenerateChallenges();
-        final List<QuestEventChallenge> challenges = new ArrayList<QuestEventChallenge>();
+        final List<QuestEventChallenge> challenges = new ArrayList<>();
         for(final Object id : qCtrl.getAchievements().getCurrentChallenges()) {
             challenges.add(qCtrl.getChallenges().get(id.toString()));
         }

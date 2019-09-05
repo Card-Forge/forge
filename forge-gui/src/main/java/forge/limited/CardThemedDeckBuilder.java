@@ -948,7 +948,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
 
 
-        final Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();
+        final Map<Integer, Integer> creatureCosts = new HashMap<>();
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }

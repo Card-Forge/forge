@@ -50,7 +50,7 @@ public class CardCollections {
 
     public final IStorage<Deck> getConstructed() {
         if (constructed == null) {
-            constructed = new StorageImmediatelySerialized<Deck>("Constructed decks",
+            constructed = new StorageImmediatelySerialized<>("Constructed decks",
                     new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), ForgeConstants.DECK_BASE_DIR, true),
                     true);
         }
@@ -59,7 +59,7 @@ public class CardCollections {
 
     public final IStorage<DeckGroup> getDraft() {
         if (draft == null) {
-            draft = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets",
+            draft = new StorageImmediatelySerialized<>("Draft deck sets",
                     new DeckGroupSerializer(new File(ForgeConstants.DECK_DRAFT_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return draft;
@@ -67,7 +67,7 @@ public class CardCollections {
 
     public IStorage<DeckGroup> getSealed() {
         if (sealed == null) {
-            sealed = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets",
+            sealed = new StorageImmediatelySerialized<>("Sealed deck sets",
                     new DeckGroupSerializer(new File(ForgeConstants.DECK_SEALED_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return sealed;
@@ -75,7 +75,7 @@ public class CardCollections {
 
     public final IStorage<DeckGroup> getWinston() {
         if (winston == null) {
-            winston = new StorageImmediatelySerialized<DeckGroup>("Winston draft deck sets",
+            winston = new StorageImmediatelySerialized<>("Winston draft deck sets",
                     new DeckGroupSerializer(new File(ForgeConstants.DECK_WINSTON_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return winston;
@@ -83,7 +83,7 @@ public class CardCollections {
 
     public final IStorage<Deck> getCubes() {
         if (cube == null) {
-            cube = new StorageImmediatelySerialized<Deck>("Cubes",
+            cube = new StorageImmediatelySerialized<>("Cubes",
                     new DeckStorage(new File(ForgeConstants.DECK_CUBE_DIR), ForgeConstants.RES_DIR));
         }
         return cube;
@@ -91,7 +91,7 @@ public class CardCollections {
 
     public IStorage<Deck> getScheme() {
         if (scheme == null) {
-            scheme = new StorageImmediatelySerialized<Deck>("Archenemy decks",
+            scheme = new StorageImmediatelySerialized<>("Archenemy decks",
                     new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return scheme;
@@ -99,7 +99,7 @@ public class CardCollections {
 
     public IStorage<Deck> getPlane() {
         if (plane == null) {
-            plane = new StorageImmediatelySerialized<Deck>("Planechase decks",
+            plane = new StorageImmediatelySerialized<>("Planechase decks",
                     new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return plane;
@@ -107,7 +107,7 @@ public class CardCollections {
 
     public IStorage<Deck> getCommander() {
         if (commander == null) {
-            commander = new StorageImmediatelySerialized<Deck>("Commander decks",
+            commander = new StorageImmediatelySerialized<>("Commander decks",
                     new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return commander;
@@ -115,7 +115,7 @@ public class CardCollections {
 
     public IStorage<Deck> getOathbreaker() {
         if (oathbreaker == null) {
-            oathbreaker = new StorageImmediatelySerialized<Deck>("Oathbreaker decks",
+            oathbreaker = new StorageImmediatelySerialized<>("Oathbreaker decks",
                     new DeckStorage(new File(ForgeConstants.DECK_OATHBREAKER_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return oathbreaker;
@@ -123,7 +123,7 @@ public class CardCollections {
 
     public IStorage<Deck> getTinyLeaders() {
         if (tinyLeaders == null) {
-            tinyLeaders = new StorageImmediatelySerialized<Deck>("Tiny Leaders decks",
+            tinyLeaders = new StorageImmediatelySerialized<>("Tiny Leaders decks",
                     new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return tinyLeaders;
@@ -131,7 +131,7 @@ public class CardCollections {
 
     public IStorage<Deck> getBrawl() {
         if (brawl == null) {
-            brawl = new StorageImmediatelySerialized<Deck>("Brawl decks",
+            brawl = new StorageImmediatelySerialized<>("Brawl decks",
                     new DeckStorage(new File(ForgeConstants.DECK_BRAWL_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return brawl;

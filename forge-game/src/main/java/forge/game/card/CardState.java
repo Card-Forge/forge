@@ -56,11 +56,11 @@ public class CardState extends GameObject {
     private String baseLoyalty = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
-    private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
-    private final FCollection<SpellAbility> manaAbilities = new FCollection<SpellAbility>();
-    private FCollection<Trigger> triggers = new FCollection<Trigger>();
-    private FCollection<ReplacementEffect> replacementEffects = new FCollection<ReplacementEffect>();
-    private FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
+    private final FCollection<SpellAbility> nonManaAbilities = new FCollection<>();
+    private final FCollection<SpellAbility> manaAbilities = new FCollection<>();
+    private FCollection<Trigger> triggers = new FCollection<>();
+    private FCollection<ReplacementEffect> replacementEffects = new FCollection<>();
+    private FCollection<StaticAbility> staticAbilities = new FCollection<>();
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
 
@@ -257,24 +257,24 @@ public class CardState extends GameObject {
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
+        FCollection<SpellAbility> newCol = new FCollection<>(manaAbilities);
         newCol.addAll(nonManaAbilities);
         card.updateSpellAbilities(newCol, this, null);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
+        FCollection<SpellAbility> newCol = new FCollection<>(manaAbilities);
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(nonManaAbilities);
+        FCollection<SpellAbility> newCol = new FCollection<>(nonManaAbilities);
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
     }
 
     public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
-        return new FCollection<SpellAbility>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
+        return new FCollection<>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {
@@ -386,7 +386,7 @@ public class CardState extends GameObject {
         return staticAbilities.remove(stab);
     }
     public final void setStaticAbilities(final Iterable<StaticAbility> staticAbilities0) {
-        staticAbilities = new FCollection<StaticAbility>(staticAbilities0);
+        staticAbilities = new FCollection<>(staticAbilities0);
     }
     public final void clearStaticAbilities() {
         staticAbilities.clear();
