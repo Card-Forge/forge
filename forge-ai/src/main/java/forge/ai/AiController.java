@@ -608,7 +608,7 @@ public class AiController {
             ComputerUtilAbility.getAvailableCards(game, player);
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        Collections.sort(all, saComparator); // put best spells first
+        all.sort(saComparator); // put best spells first
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             ApiType saApi = sa.getApi();
@@ -1571,7 +1571,7 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
-        Collections.sort(all, saComparator); // put best spells first
+        all.sort(saComparator); // put best spells first
         
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups

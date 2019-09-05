@@ -403,7 +403,7 @@ public class GameFormat implements Comparable<GameFormat> {
             naturallyOrdered = reader.naturallyOrdered;
             reverseDateOrdered = new ArrayList<>(naturallyOrdered);
             Collections.sort(naturallyOrdered);
-            Collections.sort(reverseDateOrdered, new InverseDateComparator());
+            reverseDateOrdered.sort(new InverseDateComparator());
         }
 
         public Iterable<GameFormat> getOrderedList() {

@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -126,7 +125,7 @@ public class Cost implements Serializable {
         // Things that are pretty much happen at the end (Untap) 16+
         // Things that NEED to happen last 100+
 
-        Collections.sort(this.costParts, new Comparator<CostPart>() {
+        this.costParts.sort(new Comparator<CostPart>() {
             @Override
             public int compare(CostPart o1, CostPart o2) {
                 return o1.paymentOrder() - o2.paymentOrder();

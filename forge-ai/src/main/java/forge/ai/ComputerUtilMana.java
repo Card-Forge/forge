@@ -1,5 +1,7 @@
 package forge.ai;
-
+/**
+ * Refactoring this class to use List sort (Instead of Collection) causes Android build not to compile...
+ * */
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;

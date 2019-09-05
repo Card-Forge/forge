@@ -579,7 +579,7 @@ public class SpecialCardAi {
             int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ChangeNum"), sa);
             CardCollection lib = CardLists.filter(ai.getCardsIn(ZoneType.Library),
                     Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
-            Collections.sort(lib, CardLists.CmcComparatorInv);
+            lib.sort(CardLists.CmcComparatorInv);
 
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
             List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
@@ -679,7 +679,7 @@ public class SpecialCardAi {
             // If we're playing Reanimator, we're really interested just in the highest CMC spells, not the
             // ones we necessarily have multiples of
             if (ComputerUtil.isPlayingReanimator(ai)) {
-                Collections.sort(libHighPriorityList, CardLists.CmcComparatorInv);
+                libHighPriorityList.sort(CardLists.CmcComparatorInv);
             }
 
             // Otherwise, try to grab something that is hopefully decent to grab, in priority order
@@ -1173,7 +1173,7 @@ public class SpecialCardAi {
             if (atTargetCMCInLib.isEmpty()) {
                 atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
             }
-            Collections.sort(atTargetCMCInLib, CardLists.CmcComparatorInv);
+            atTargetCMCInLib.sort(CardLists.CmcComparatorInv);
             if (atTargetCMCInLib.isEmpty()) {
                 // Nothing to aim for?
                 return null;
@@ -1181,11 +1181,11 @@ public class SpecialCardAi {
 
             // Cards in hand that are below the max CMC affordable by the AI
             CardCollection belowMaxCMC = CardLists.filter(creatsInHand, CardPredicates.lessCMC(numManaSrcs - 1));
-            Collections.sort(belowMaxCMC, Collections.reverseOrder(CardLists.CmcComparatorInv));
+            belowMaxCMC.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
 
             // Cards in hand that are above the max CMC affordable by the AI
             CardCollection aboveMaxCMC = CardLists.filter(creatsInHand, CardPredicates.greaterCMC(numManaSrcs + 1));
-            Collections.sort(aboveMaxCMC, CardLists.CmcComparatorInv);
+            aboveMaxCMC.sort(CardLists.CmcComparatorInv);
 
             Card maxCMC = !aboveMaxCMC.isEmpty() ? aboveMaxCMC.getFirst() : null;
             Card minCMC = !belowMaxCMC.isEmpty() ? belowMaxCMC.getFirst() : null;
@@ -1218,7 +1218,7 @@ public class SpecialCardAi {
             // worth to fill the graveyard now
             if (ComputerUtil.isPlayingReanimator(ai) && !creatsInLib.isEmpty()) {
                 CardCollection creatsInHandByCMC = new CardCollection(creatsInHand);
-                Collections.sort(creatsInHandByCMC, CardLists.CmcComparatorInv);
+                creatsInHandByCMC.sort(CardLists.CmcComparatorInv);
                 return creatsInHandByCMC.getFirst();
             }
 
@@ -1243,14 +1243,14 @@ public class SpecialCardAi {
             if (atTargetCMCInLib.isEmpty()) {
                 atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
             }
-            Collections.sort(atTargetCMCInLib, CardLists.CmcComparatorInv);
+            atTargetCMCInLib.sort(CardLists.CmcComparatorInv);
 
             Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
 
             if (bestInLib == null && ComputerUtil.isPlayingReanimator(ai)) {
                 // For Reanimator, we don't mind grabbing the biggest thing possible to recycle it again with SotF later.
                 CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
-                Collections.sort(creatsInLibByCMC, CardLists.CmcComparatorInv);
+                creatsInLibByCMC.sort(CardLists.CmcComparatorInv);
                 return creatsInLibByCMC.getFirst();
             }
 

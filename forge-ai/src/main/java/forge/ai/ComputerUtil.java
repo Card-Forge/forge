@@ -2197,7 +2197,7 @@ public class ComputerUtil {
             }
         }
     
-        Collections.sort(goodChoices, CardLists.TextLenComparator);
+        goodChoices.sort(CardLists.TextLenComparator);
     
         CardLists.sortByCmcDesc(goodChoices);
         dChoices.add(goodChoices.get(0));

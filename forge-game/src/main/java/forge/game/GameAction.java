@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game;
-
+/**
+ * Refactoring this class to use List sort (Instead of Collection) causes Android build not to compile...
+ * */
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.GameCommand;
