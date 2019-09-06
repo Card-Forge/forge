@@ -74,21 +74,14 @@ public class CostUnattach extends CostPartWithList {
 
         final String type = this.getType();
         if (type.equals("CARDNAME")) {
-            if (source.isEquipping()) {
-                return true;
-            }
+            return source.isEquipping();
         } else if (type.equals("OriginalHost")) {
             Card originalEquipment = ability.getOriginalHost();
-            if (originalEquipment.isEquipping()) {
-                return true;
-            }
+            return originalEquipment.isEquipping();
         } else {
-            if (CardLists.getValidCards(source.getEquippedBy(), type, payer, source).size() > 0) {
-                return true;
-            }
+            return CardLists.getValidCards(source.getEquippedBy(), type, payer, source).size() > 0;
         }
 
-        return false;
     }
 
     public Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {

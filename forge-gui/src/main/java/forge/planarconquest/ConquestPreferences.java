@@ -27,7 +27,7 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     /**
      * Preference identifiers, and their default values.
      */
-    public static enum CQPref {
+    public enum CQPref {
         CURRENT_CONQUEST("DEFAULT"),
 
         AETHER_BASE_DUPLICATE_VALUE("100"),

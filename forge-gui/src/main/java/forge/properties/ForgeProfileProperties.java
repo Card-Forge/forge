@@ -74,7 +74,7 @@ public class ForgeProfileProperties {
         cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics" + File.separator + "cards" + File.separator);
         cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
         decksDir    = getDir(props, DECKS_DIR_KEY, userDir + "decks" + File.separator);
-        decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);;
+        decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);
         serverPort = getInt(props, SERVER_PORT_KEY, 36743); // "Forge" using phone keypad
 
         //ensure directories exist

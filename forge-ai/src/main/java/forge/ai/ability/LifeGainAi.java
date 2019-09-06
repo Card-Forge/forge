@@ -106,13 +106,9 @@ public class LifeGainAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!lifeCritical && !activateForCost
-                && (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)) {
-            return false;
-        }
-
-        return true;
+        return lifeCritical || activateForCost
+                || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                || sa.hasParam("PlayerTurn") || SpellAbilityAi.isSorcerySpeed(sa);
     }
 
     /*
@@ -304,9 +300,7 @@ public class LifeGainAi extends SpellAbilityAi {
                     hasTgt = true;
                 }
             }
-            if (!hasTgt) {
-                return false;
-            }
+            return hasTgt;
         }
         return true;
     }

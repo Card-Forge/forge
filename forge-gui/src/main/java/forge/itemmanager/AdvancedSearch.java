@@ -363,7 +363,7 @@ public class AdvancedSearch {
         private final FilterOperator[] operatorOptions;
         private final FilterEvaluator<? extends InventoryItem, ?> evaluator;
 
-        private FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterEvaluator<? extends InventoryItem, ?> evaluator0) {
+        FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterEvaluator<? extends InventoryItem, ?> evaluator0) {
             name = name0;
             type = type0;
             operatorOptions = operatorOptions0;
@@ -680,7 +680,7 @@ public class AdvancedSearch {
         private final FilterValueCount valueCount;
         private final OperatorEvaluator<?> evaluator;
 
-        private FilterOperator(String caption0, String formatStr0, FilterValueCount valueCount0, OperatorEvaluator<?> evaluator0) {
+        FilterOperator(String caption0, String formatStr0, FilterValueCount valueCount0, OperatorEvaluator<?> evaluator0) {
             caption = caption0;
             formatStr = formatStr0;
             valueCount = valueCount0;
@@ -1302,7 +1302,7 @@ public class AdvancedSearch {
 
             private final String token;
 
-            private Operator(String token0) {
+            Operator(String token0) {
                 token = token0;
             }
 

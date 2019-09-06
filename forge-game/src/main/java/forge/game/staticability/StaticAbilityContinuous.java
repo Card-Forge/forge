@@ -627,7 +627,7 @@ public final class StaticAbilityContinuous {
                 for (String rep : addReplacements) {
                     final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
                     actualRep.setIntrinsic(false);
-                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
+                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);
                 }
             }
 

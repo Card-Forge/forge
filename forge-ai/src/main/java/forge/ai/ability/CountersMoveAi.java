@@ -90,9 +90,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             // for Simic Fluxmage and other
-            if (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
-                return false;
-            }
+            return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
 
         } else if (CounterType.P1P1.equals(cType) && sa.hasParam("Defined")) {
             // something like Cyptoplast Root-kin
@@ -107,9 +105,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
             // Make sure that removing the last counter doesn't kill the creature
             if ("Self".equals(sa.getParam("Source"))) {
-                if (host != null && host.getNetToughness() - 1 <= 0) {
-                    return false;
-                }
+                return host == null || host.getNetToughness() - 1 > 0;
             }
         }
         return true;
@@ -193,9 +189,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 // check for some specific AI preferences
                 if ("DontMoveCounterIfLethal".equals(sa.getParam("AILogic"))) {
-                    if (cType == CounterType.P1P1 && src.getNetToughness() - src.getTempToughnessBoost() - 1 <= 0) {
-                        return false;
-                    }
+                    return cType != CounterType.P1P1 || src.getNetToughness() - src.getTempToughnessBoost() - 1 > 0;
                 }
             }
             // no target
@@ -207,9 +201,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!moveTgtAI(ai, sa)) {
-                return false;
-            }
+            return moveTgtAI(ai, sa);
         }
 
         return true;
@@ -287,10 +279,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                         // do not steal a P1P1 from Undying if it would die
                         // this way
                         if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                            if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken()) {
-                                return true;
-                            }
-                            return false;
+                            return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
                         }
                         return true;
                     }

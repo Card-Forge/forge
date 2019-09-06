@@ -145,7 +145,7 @@ public abstract class FDialog extends FOverlay {
 
     public boolean isButtonEnabled(int index) {
         FButton button = getButton(index);
-        return button != null ? button.isEnabled() : false;
+        return button != null && button.isEnabled();
     }
 
     public void setButtonEnabled(int index, boolean enabled) {
@@ -283,9 +283,7 @@ public abstract class FDialog extends FOverlay {
                 if (revealPercent != newRevealPercent) {
                     revealPercent = newRevealPercent;
                     updateDisplayTop();
-                    if (physicsObj.isMoving()) {
-                        return true;
-                    }
+                    return physicsObj.isMoving();
                 }
             }
 

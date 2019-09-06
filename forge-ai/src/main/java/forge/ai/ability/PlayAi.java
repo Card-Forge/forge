@@ -178,11 +178,7 @@ public class PlayAi extends SpellAbilityAi {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).
                         // Proceeding past this point if the spell is not correctly targeted will result
                         // in "Failed to add to stack" error and the card disappearing from the game completely.
-                        if (!spell.isTargetNumberValid()) {
-                            return false;
-                        }
-
-                        return true;
+                        return spell.isTargetNumberValid();
                     }
                 }
                 return false;

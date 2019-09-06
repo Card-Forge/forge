@@ -48,6 +48,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                         if (!c.canReceiveCounters(counterType)) {
                             return false;
                         }
+
                     } else {
                         for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
                             // has negative counter it would double
@@ -96,10 +97,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting() && !setTargets(ai, sa) && !mandatory) {
-            return false;
-        }
-        return true;
+        return !sa.usesTargeting() || setTargets(ai, sa) || mandatory;
     }
 
     private CounterType getCounterType(SpellAbility sa) {

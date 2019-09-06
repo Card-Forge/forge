@@ -28,10 +28,8 @@ public class TriggerLosesGame extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+                    this.getHostCard());
         }
 
         return true;

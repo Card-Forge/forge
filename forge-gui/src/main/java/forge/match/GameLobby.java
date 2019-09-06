@@ -158,7 +158,7 @@ public abstract class GameLobby implements IHasGameType {
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
         final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
-        addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.<AIOption>emptySet()));
+        addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
         if (slot == null) {
@@ -485,7 +485,7 @@ public abstract class GameLobby implements IHasGameType {
                             return null;
                         }
                     }
-                    schemes = schemePool == null ? Collections.<PaperCard>emptyList() : schemePool.toFlatList();
+                    schemes = schemePool == null ? Collections.emptyList() : schemePool.toFlatList();
                 }
 
                 //Planechase
@@ -498,7 +498,7 @@ public abstract class GameLobby implements IHasGameType {
                             return null;
                         }
                     }
-                    planes = planePool == null ? Collections.<PaperCard>emptyList() : planePool.toFlatList();
+                    planes = planePool == null ? Collections.emptyList() : planePool.toFlatList();
                 }
 
                 //Vanguard

@@ -35,9 +35,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
             List<Card> compTokenCreats = CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN);
 
-            if (compTokenCreats.size() <= humTokenCreats.size()) {
-                return false;
-            }
+            return compTokenCreats.size() > humTokenCreats.size();
         } else if ("BalanceLands".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
                 return false;
@@ -111,9 +109,7 @@ public class RepeatEachAi extends SpellAbilityAi {
                 }
             }
             // would not hit oppoent, don't do that
-            if (!hitOpp) {
-                return false;
-            }
+            return hitOpp;
         }
 
         // TODO Add some normal AI variability here

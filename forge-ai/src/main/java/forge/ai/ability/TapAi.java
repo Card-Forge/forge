@@ -64,9 +64,7 @@ public class TapAi extends TapAiBase {
                 bFlag |= c.isUntapped();
             }
 
-            if (!bFlag) {
-                return false;
-            }
+            return bFlag;
         } else {
             if ("TapForXCounters".equals(sa.getParam("AILogic"))) {
                 // e.g. Waxmane Baku
@@ -83,12 +81,9 @@ public class TapAi extends TapAiBase {
             }
 
             sa.resetTargets();
-            if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
-                return false;
-            }
+            return tapPrefTargeting(ai, source, tgt, sa, false);
         }
 
-        return true;
     }
 
 }

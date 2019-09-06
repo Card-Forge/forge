@@ -1021,7 +1021,7 @@ public class AiAttackController {
         } // stay at home to block
 
         if ( LOG_AI_ATTACKS )
-            System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
+            System.out.println(this.aiAggression + " = ai aggression");
 
         // ****************
         // Evaluation the end
@@ -1457,7 +1457,7 @@ public class AiAttackController {
         if (artifact != null) {
             return artifact;
         }
-        return null;    //should never get here
+        return null;//should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

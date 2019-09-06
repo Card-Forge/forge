@@ -33,7 +33,7 @@ public enum ComparableOp {
     
     private final String caption;
     
-    private ComparableOp(String caption0) {
+    ComparableOp(String caption0) {
         caption = caption0;
     }
 

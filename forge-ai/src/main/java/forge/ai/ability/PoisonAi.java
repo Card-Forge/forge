@@ -24,11 +24,8 @@ public class PoisonAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        if (ph.getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
-            return false;
-        }
-        return true;
+        return !ph.getPhase().isBefore(PhaseType.MAIN2)
+                || sa.hasParam("ActivationPhases");
     }
 
     /*
@@ -83,7 +80,6 @@ public class PoisonAi extends SpellAbilityAi {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -99,7 +95,6 @@ public class PoisonAi extends SpellAbilityAi {
                     } else if (!input.canReceiveCounters(CounterType.POISON)) {
                         return false;
                     }
-
                     return true;
                 }
 
@@ -132,10 +127,7 @@ public class PoisonAi extends SpellAbilityAi {
                             if (input.cantLose()) {
                                 return true;
                             }
-                            if (!input.canReceiveCounters(CounterType.POISON)) {
-                                return true;
-                            }
-                            return false;
+                            return !input.canReceiveCounters(CounterType.POISON);
                         }
 
                     });

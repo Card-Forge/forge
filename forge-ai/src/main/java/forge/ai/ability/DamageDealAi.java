@@ -80,10 +80,7 @@ public class DamageDealAi extends DamageAiBase {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
         }
-        if (!this.damageTargetAI(ai, sa, dmg, true)) {
-            return false;
-        }
-        return true;
+        return this.damageTargetAI(ai, sa, dmg, true);
     }
 
     @Override
@@ -490,9 +487,7 @@ public class DamageDealAi extends DamageAiBase {
         for (final Object o : objects) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (hPlay.contains(c)) {
-                    hPlay.remove(c);
-                }
+                hPlay.remove(c);
             }
         }
         hPlay = CardLists.getTargetableCards(hPlay, sa);
@@ -952,9 +947,7 @@ public class DamageDealAi extends DamageAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // If it's not mandatory check a few things
-            if (!mandatory && !this.damageChooseNontargeted(ai, sa, dmg)) {
-                return false;
-            }
+            return mandatory || this.damageChooseNontargeted(ai, sa, dmg);
         } else {
             if (!this.damageChoosingTargets(ai, sa, tgt, dmg, mandatory, true) && !mandatory) {
                 return false;

@@ -123,7 +123,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {
                 for (final String gain : gains) {
-                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.<String>of(), timestamp);
+                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.of(), timestamp);
                 }
 
                 if (!sa.hasParam("Permanent")) {

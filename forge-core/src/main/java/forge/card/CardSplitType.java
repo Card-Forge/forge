@@ -10,7 +10,7 @@ public enum CardSplitType
     Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
     Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped);
 
-    private CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
+    CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
         method = calcMode;
         this.changedStateName = stateName;
     }

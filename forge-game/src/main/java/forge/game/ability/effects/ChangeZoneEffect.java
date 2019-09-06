@@ -908,7 +908,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (totalcmc != null) {
                     if (totcmc >= 0) {
-                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), source.getController(), source);
+                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source);
                     }
                 }
 

@@ -40,9 +40,7 @@ public class PermanentCreatureAi extends PermanentAi {
 
             ComputerUtilCard.applyStaticContPT(game, copy, null);
 
-            if (copy.getNetToughness() <= 0) {
-                return false;
-            }
+            return copy.getNetToughness() > 0;
         }
         return true;
     }
@@ -225,13 +223,9 @@ public class PermanentCreatureAi extends PermanentAi {
          */
         final Card copy = CardUtil.getLKICopy(sa.getHostCard());
         ComputerUtilCard.applyStaticContPT(game, copy, null);
-        if (copy.getNetToughness() <= 0 && !copy.hasStartOfKeyword("etbCounter") && mana.countX() == 0
-                && !copy.hasETBTrigger(false) && !copy.hasETBReplacement() && !copy.hasSVar("NoZeroToughnessAI")) {
-            // AiPlayDecision.WouldBecomeZeroToughnessCreature
-            return false;
-        }
-
-        return true;
+        // AiPlayDecision.WouldBecomeZeroToughnessCreature
+        return copy.getNetToughness() > 0 || copy.hasStartOfKeyword("etbCounter") || mana.countX() != 0
+                || copy.hasETBTrigger(false) || copy.hasETBReplacement() || copy.hasSVar("NoZeroToughnessAI");
     }
 
 }

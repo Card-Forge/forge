@@ -79,8 +79,8 @@ public class ContestGauntletLister extends JPanel {
             name = gd.getName();
             name = name.substring(GauntletIO.PREFIX_LOCKED.length());
 
-            progress = String.valueOf(Math.round(
-                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + " %";
+            progress = Math.round(
+                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100) + " %";
 
             if (gd.getUserDeck() == null) {
                 progress = "---";

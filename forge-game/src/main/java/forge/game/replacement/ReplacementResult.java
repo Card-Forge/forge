@@ -8,5 +8,5 @@ public enum ReplacementResult {
     Replaced,
     NotReplaced,
     Prevented,
-    Updated;
+    Updated
 }

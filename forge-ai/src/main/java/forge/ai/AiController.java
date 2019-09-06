@@ -1645,7 +1645,6 @@ public class AiController {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
-        
         return false;
     }
     
@@ -1690,16 +1689,11 @@ public class AiController {
                 left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
             }
             System.out.println("aiShouldRun?" + left + comparator + compareTo);
-            if (Expressions.compare(left, comparator, compareTo)) {
-                return true;
-            }
+            return Expressions.compare(left, comparator, compareTo);
         } else if (effect.getMapParams().containsKey("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
-        } else if (sa != null && doTrigger(sa, false)) {
-            return true;
-        }
+        } else return sa != null && doTrigger(sa, false);
 
-        return false;
     }
 
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
@@ -2078,9 +2072,7 @@ public class AiController {
         // AI-specific restrictions specified as activation parameters in spell abilities
         
         if (sa.hasParam("AILifeThreshold")) {
-            if (player.getLife() <= Integer.parseInt(sa.getParam("AILifeThreshold"))) {
-                return false;
-            }
+            return player.getLife() > Integer.parseInt(sa.getParam("AILifeThreshold"));
         }
         
         return true;

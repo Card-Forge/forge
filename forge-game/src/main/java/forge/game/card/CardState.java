@@ -471,9 +471,7 @@ public class CardState extends GameObject {
         view.updateFoilIndex(card.getState(CardStateName.Original));
     }
     public final void removeSVar(final String var) {
-        if (sVars.containsKey(var)) {
-            sVars.remove(var);
-        }
+        sVars.remove(var);
     }
 
     public final int getFoil() {

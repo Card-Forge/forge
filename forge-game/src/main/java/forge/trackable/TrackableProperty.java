@@ -172,10 +172,10 @@ public enum TrackableProperty {
     private final TrackableType<?> type;
     private final FreezeMode freezeMode;
 
-    private TrackableProperty(TrackableType<?> type0) {
+    TrackableProperty(TrackableType<?> type0) {
         this(type0, FreezeMode.RespectsFreeze);
     }
-    private TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
+    TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
         type = type0;
         freezeMode = freezeMode0;
     }

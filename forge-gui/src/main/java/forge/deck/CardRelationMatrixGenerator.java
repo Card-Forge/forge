@@ -100,7 +100,7 @@ public final class CardRelationMatrixGenerator {
         for (PaperCard card:cardList){
             int col=cardIntegerMap.get(card.getName());
             int[] distances = matrix[col];
-            int max = (Integer) Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
+            int max = Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
             if (max>0) {
                 ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
                 Integer[] indices = comparator.createIndexArray();
@@ -118,7 +118,7 @@ public final class CardRelationMatrixGenerator {
                         ++j;
                     }
                     deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
-                };
+                }
                 if(excludeThisCard){
                     continue;
                 }
@@ -181,7 +181,7 @@ public final class CardRelationMatrixGenerator {
         for (PaperCard card:legends){
             int col=legendIntegerMap.get(card.getName());
             int[] distances = matrix[col];
-            int max = (Integer) Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
+            int max = Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
             if (max>0) {
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 for(int k=0;k<cardList.size(); k++){

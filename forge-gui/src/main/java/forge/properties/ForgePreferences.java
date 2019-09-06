@@ -240,7 +240,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         private final String strDefaultVal;
 
-        private FPref(final String s0) {
+        FPref(final String s0) {
             this.strDefaultVal = s0;
         }
 

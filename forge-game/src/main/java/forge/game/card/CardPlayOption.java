@@ -11,7 +11,7 @@ public final class CardPlayOption {
         /** Indicates the mana cost must be paid. */
         YES,
         /** Indicates the mana cost may not be paid. */
-        NO;
+        NO
     }
 
     private final Player player;

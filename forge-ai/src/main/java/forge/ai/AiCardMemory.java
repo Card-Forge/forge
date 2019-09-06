@@ -137,7 +137,7 @@ public class AiCardMemory {
 
         Set<Card> memorySet = getMemorySet(set);
 
-        return memorySet == null ? false : memorySet.contains(c);
+        return memorySet != null && memorySet.contains(c);
     }
 
     /**
@@ -291,7 +291,7 @@ public class AiCardMemory {
      * @return true, if the given memory set contains no remembered cards.
      */
     public boolean isMemorySetEmpty(MemorySet set) {
-        return set == null ? true : getMemorySet(set).isEmpty();
+        return set == null || getMemorySet(set).isEmpty();
     }
     
     /**

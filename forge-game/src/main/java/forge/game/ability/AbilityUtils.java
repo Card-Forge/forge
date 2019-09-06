@@ -35,7 +35,6 @@ import io.sentry.event.BreadcrumbBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1063,7 +1062,7 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("OppNon")) {
             players.addAll(player.getOpponents());
-            players.removeAll((Collection<?>)getDefinedPlayers(card, defined.substring(6), sa));
+            players.removeAll(getDefinedPlayers(card, defined.substring(6), sa));
         }
         else if (defined.startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
@@ -1800,7 +1799,7 @@ public class AbilityUtils {
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
         String val = null;
         if (ability instanceof SpellAbility) {
-            val = ((SpellAbility) ability).getSVar(sVarName);
+            val = ability.getSVar(sVarName);
         }
         if (StringUtils.isEmpty(val)) {
             Card host = null;
@@ -1857,7 +1856,7 @@ public class AbilityUtils {
             public boolean apply(Card input) {
                 for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
                     String k = inst.getOriginal();
-                    final String n[] = k.split(":");
+                    final String[] n = k.split(":");
                     if (source.isValid(n[1].split(","), player, input, sa)) {
                         return true;
                     }
@@ -1890,7 +1889,7 @@ public class AbilityUtils {
         // This Function thinks that Splice exist only once on the card
         for (final KeywordInterface inst : c.getKeywords(Keyword.SPLICE)) {
             final String k = inst.getOriginal();
-            final String n[] = k.split(":");
+            final String[] n = k.split(":");
             spliceCost = new Cost(n[2], false);
         }
 

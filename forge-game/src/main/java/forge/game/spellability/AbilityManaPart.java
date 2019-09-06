@@ -97,8 +97,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = (null == params.get("PersistentMana")) ? false :
-            "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
         this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
     }
 
@@ -489,12 +488,8 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.getOrigProduced().length() != 1 && !this.getOrigProduced().contains("Any")
-                && !this.getOrigProduced().contains("Chosen")) {
-            return false;
-        }
-
-        return true;
+        return this.getOrigProduced().length() == 1 || this.getOrigProduced().contains("Any")
+                || this.getOrigProduced().contains("Chosen");
     }
 
     /** {@inheritDoc} */

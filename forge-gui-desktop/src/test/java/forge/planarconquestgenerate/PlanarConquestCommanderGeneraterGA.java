@@ -109,7 +109,7 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
     @Override
     protected Deck mutateObject(Deck parent1) {
         PaperCard allele = parent1.getCommanders().get(0);
-        if(!standardMap.keySet().contains(allele.getName())){
+        if(!standardMap.containsKey(allele.getName())){
             return null;
         }
         return getDeckForCard(allele);

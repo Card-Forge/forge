@@ -301,7 +301,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         if (null != c) {
             effect = c.getSVar("SoundEffect");
         }
-        return effect.isEmpty() ? false : true;
+        return !effect.isEmpty();
     }
 
 

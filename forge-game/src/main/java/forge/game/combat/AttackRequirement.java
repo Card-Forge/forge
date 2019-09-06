@@ -80,7 +80,7 @@ public class AttackRequirement {
                     for (Card pw : CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
                         // Add the attack alternatives that suffice (planeswalkers that can be attacked instead of the player)
                         if (!defenderSpecificAlternatives.containsKey(c.getController())) {
-                            defenderSpecificAlternatives.put(c.getController(), Lists.<GameEntity>newArrayList());
+                            defenderSpecificAlternatives.put(c.getController(), Lists.newArrayList());
                         }
                         defenderSpecificAlternatives.get(c.getController()).add(pw);
                     }
@@ -147,7 +147,7 @@ public class AttackRequirement {
         int violations = 0;
 
         // first. check to see if "must attack X or Y with at least one creature" requirements are satisfied
-        List<GameEntity> toRemoveFromDefSpecific = Lists.<GameEntity>newArrayList();
+        List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
         if (!defenderOrPWSpecific.isEmpty()) {
             for (GameEntity def : defenderOrPWSpecific.keySet()) {
                 if (defenderSpecificAlternatives.containsKey(def)) {
