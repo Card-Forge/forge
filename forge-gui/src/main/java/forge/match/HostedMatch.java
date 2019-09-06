@@ -202,6 +202,7 @@ public class HostedMatch {
 
         if (humanCount == 0) { //watch game but do not participate
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
+            gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
 
             final PlayerControllerHuman humanController = new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui);
