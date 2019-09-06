@@ -210,7 +210,7 @@ public class FSkinFont {
               +  "距跳踢转轮轻载较辑输辨边过运近返还这进远连述退适选逐递速造道那"
               +  "部都配醒释里重量金钮铁银销锁锋错锦键长门闪闭间队防阴阶阻限除险"
               +  "隆随隐障难雄集雪需静非靠面音页顶项顺须顿预题颜风飞首验骰高魔鹏"
-              +  "黑默鼠！（），：？"
+              +  "黑默鼠！（），：？";
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.characters = chars;
