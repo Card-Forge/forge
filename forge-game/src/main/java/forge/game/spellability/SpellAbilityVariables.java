@@ -89,7 +89,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.targetValidTargeting = sav.getTargetValidTargeting();
         this.targetsSingleTarget = sav.targetsSingleTarget();
         this.presenceCondition = sav.getPresenceCondition();
-        this.adamantCondition = sav.getAdamantCondition();
     }
 
     // default values for Sorcery speed abilities
@@ -201,8 +200,6 @@ public class SpellAbilityVariables implements Cloneable {
     /** The Presence keyword value containing the relevant condition */
     private String presenceCondition = "";
 
-    /** The Adamant keyword value containing the relevant condition */
-    private String adamantCondition = "";
     /**
      * <p>
      * Setter for the field <code>manaSpent</code>.
@@ -945,18 +942,5 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public void setPresenceCondition(String s) {
         this.presenceCondition = s;
-    }
-    /**
-     * @return the condition from the Adamant keyword, empty if keyword is absent
-     */
-    public String getAdamantCondition() {
-        return this.adamantCondition;
-    }
-
-    /**
-     * @param s the condition from the Adamant keyword
-     */
-    public void setAdamantCondition(String s) {
-        this.adamantCondition = s;
     }
 } // end class SpellAbilityVariables
