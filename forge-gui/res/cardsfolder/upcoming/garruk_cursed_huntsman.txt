@@ -1,4 +1,4 @@
-Name:Garruk, Cursed Hunstman
+Name:Garruk, Cursed Huntsman
 Types:Legendary Planeswalker Garruk
 ManaCost:4 B G
 Loyalty:5
