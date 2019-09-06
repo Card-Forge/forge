@@ -1,5 +1,6 @@
 package forge.game;
 
+import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -15,6 +16,8 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -249,6 +252,16 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
         if (params.containsKey("Blessing")) {
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
+        }
+        
+        if (params.containsKey("Adamant")) {
+            if (hostCard.getCastSA() == null) {
+                return false;
+            }
+            final String payingMana = StringUtils.join(hostCard.getCastSA().getPayingMana());
+            if (StringUtils.countMatches(payingMana, MagicColor.toShortString(params.get("Adamant"))) < 3) {
+                return false;
+            }
         }
 
         if (params.containsKey("Presence")) {
