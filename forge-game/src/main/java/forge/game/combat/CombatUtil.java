@@ -426,11 +426,7 @@ public class CombatUtil {
         }
 
         final List<Card> list = blocker.getController().getCreaturesInPlay();
-        if (list.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
-            return false;
-        }
-
-        return true;
+        return list.size() >= 2 || !blocker.hasKeyword("CARDNAME can't attack or block alone.");
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
@@ -500,8 +496,7 @@ public class CombatUtil {
 
         // Landwalk
         if (isUnblockableFromLandwalk(attacker, defender)) {
-            if (CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") == 0)
-            	return false;
+            return CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") != 0;
         }
 
         return true;
@@ -518,7 +513,7 @@ public class CombatUtil {
         IGNORE_LANDWALK_KEYWORDS = new String[size];
         for (int i = 0; i < size; i++) {
             final String basic = MagicColor.Constant.BASIC_LANDS.get(i);
-            final String landwalk = basic + "walk";;
+            final String landwalk = basic + "walk";
             LANDWALK_KEYWORDS[i] = landwalk;
             SNOW_LANDWALK_KEYWORDS[i] = "Snow " + landwalk.toLowerCase();
             IGNORE_LANDWALK_KEYWORDS[i] = "May be blocked as though it doesn't have " + landwalk + ".";
@@ -1053,7 +1048,7 @@ public class CombatUtil {
             for (KeywordInterface inst : blocker.getKeywords()) {
                 String k = inst.getOriginal();
                 if (k.startsWith("IfReach")) {
-                    String n[] = k.split(":");
+                    String[] n = k.split(":");
                     if (attacker.getType().hasCreatureType(n[1])) {
                         stillblock = true;
                         break;  
@@ -1114,9 +1109,7 @@ public class CombatUtil {
                 System.out.println("Warning: it was impossible to deduce the defending player in CombatUtil#canAttackerBeBlockedWithAmount, returning 'true' (safest default).");
                 return true;
             }
-            if (amount < defender.getCreaturesInPlay().size()) {
-                return false;
-            }
+            return amount >= defender.getCreaturesInPlay().size();
         }
 
         return true;

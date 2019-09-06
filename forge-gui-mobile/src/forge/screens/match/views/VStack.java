@@ -325,7 +325,7 @@ public class VStack extends FDropDown {
                                     CardZoom.show(stackInstance.getSourceCard());
                                 }
                             }));
-                        };
+                        }
                     };
 
                     menu.show(this, x, y);

@@ -168,7 +168,7 @@ public final class MagicColor {
         private final String name, symbol;
         private final byte colormask;
 
-        private Color(String name0, byte colormask0, String symbol0) {
+        Color(String name0, byte colormask0, String symbol0) {
             name = name0;
             colormask = colormask0;
             symbol = symbol0;

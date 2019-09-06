@@ -221,7 +221,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         if (n == 0) {
             s = "Remove custom rating";
         } else {
-            s = "Rate this card as " + Integer.toString(n) + " stars";
+            s = "Rate this card as " + n + " stars";
         }
         GuiUtils.addMenuItem(cmb.getMenu(), s,
                 KeyStroke.getKeyStroke(48 + n, 0),

@@ -461,10 +461,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canGainLife() {
-        if (hasKeyword("You can't gain life.") || hasKeyword("Your life total can't change.")) {
-            return false;
-        }
-        return true;
+        return !hasKeyword("You can't gain life.") && !hasKeyword("Your life total can't change.");
     }
 
     public final int loseLife(final int toLose) {
@@ -513,20 +510,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        if (hasKeyword("Your life total can't change.")) {
-            return false;
-        }
-        return true;
+        return !hasKeyword("Your life total can't change.");
     }
 
     public final boolean canPayLife(final int lifePayment) {
         if (life < lifePayment) {
             return false;
         }
-        if ((lifePayment > 0) && hasKeyword("Your life total can't change.")) {
-            return false;
-        }
-        return true;
+        return (lifePayment <= 0) || !hasKeyword("Your life total can't change.");
     }
 
     public final boolean payLife(final int lifePayment, final Card source) {
@@ -826,7 +817,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 CardCollection newCardsInCommand = new CardCollection(getGame().getCardsIn(ZoneType.Command));
                 newCardsInCommand.removeAll(cardsInCommand);
                 if (!newCardsInCommand.isEmpty()) {
-                    newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
+                    newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + dmgToBePrevented);
                 }
             }
             subtractPreventNextDamageWithEffect(shieldSource, restDamage);
@@ -1067,7 +1058,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param keyword the keyword to add.
      */
     public final void addKeyword(final String keyword) {
-        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.<String>of(), getGame().getNextTimestamp());
+        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp());
     }
 
     /**
@@ -1185,7 +1176,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         PlayerZone com = getZone(ZoneType.Command);
         for (DetachedCardEffect eff : staticAbilities.values()) {
             com.remove(eff);
-            eff.setStaticAbilities(Lists.<StaticAbility>newArrayList());
+            eff.setStaticAbilities(Lists.newArrayList());
         }
 	    this.updateZoneForView(com);
     }
@@ -1201,7 +1192,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 boolean cancelHexproof = false;
                 for (String k : a.getKeywords()) {
                     if (k.startsWith("IgnoreHexproof")) {
-                        String m[] = k.split(":");
+                        String[] m = k.split(":");
                         if (isValid(m[1].split(","), a, sa.getHostCard(), sa)) {
                             cancelHexproof = true;
                             break;
@@ -1218,10 +1209,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        if ((hasKeyword("You can't be the targets of spells or activated abilities") && (sa.isSpell() || (sa instanceof AbilityActivated)))) {
-            return false;
-        }
-        return true;
+        return (!hasKeyword("You can't be the targets of spells or activated abilities") || (!sa.isSpell() && (!(sa instanceof AbilityActivated))));
     }
 
 
@@ -1783,10 +1771,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 adjMax += Integer.valueOf(k[1]);
             }
         }
-        if (landsPlayedThisTurn < adjMax) {
-            return true;
-        }
-        return false;
+        return landsPlayedThisTurn < adjMax;
     }
 
     public final ManaPool getManaPool() {
@@ -2957,11 +2942,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        if (isOpponentOf(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities your opponents control can't cause you to discard cards.")) {
-            return false;
-        }
-
-        return true;
+        return !isOpponentOf(sa.getActivatingPlayer()) || !hasKeyword("Spells and abilities your opponents control can't cause you to discard cards.");
     }
 
     public boolean canSacrificeBy(SpellAbility sa) {
@@ -2969,11 +2950,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        if (isOpponentOf(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
-            return false;
-        }
-
-        return true;
+        return !isOpponentOf(sa.getActivatingPlayer()) || !hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.");
     }
 
     public boolean canSearchLibraryWith(SpellAbility sa, Player targetPlayer) {
@@ -2983,11 +2960,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (this.hasKeyword("CantSearchLibrary")) {
             return false;
-        } else if (targetPlayer != null && targetPlayer.equals(sa.getActivatingPlayer())
-                && hasKeyword("Spells and abilities you control can't cause you to search your library.")) {
-            return false;
-        }
+        } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
+                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
 
-        return true;
     }
 }

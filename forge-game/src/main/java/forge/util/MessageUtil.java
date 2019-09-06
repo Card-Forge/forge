@@ -9,7 +9,7 @@ import forge.game.spellability.SpellAbility;
 
 
 public class MessageUtil {
-    private MessageUtil() { };
+    private MessageUtil() { }
 
     public static String formatMessage(String message, Player player, Object related) {
         if (related instanceof Player && message.indexOf("{player") >= 0) {

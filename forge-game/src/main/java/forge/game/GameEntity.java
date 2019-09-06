@@ -407,11 +407,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
 
         // true for all
-        if (hasProtectionFrom(attach, checkSBA)) {
-            return false;
-        }
-
-        return true;
+        return !hasProtectionFrom(attach, checkSBA);
     }
 
     protected boolean canBeEquippedBy(final Card aura) {

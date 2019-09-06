@@ -72,11 +72,8 @@ public class ChallengeAchievements extends AchievementCollection {
     }
 
     public static boolean checkValidGameMode(final Game game) {
-        if (game.getRules().hasAppliedVariant(GameType.MomirBasic) || game.getRules().hasAppliedVariant(GameType.MoJhoSto)
-                || game.getRules().hasAppliedVariant(GameType.Puzzle)) {
-            // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
-            return false;
-        }
-        return true;
+        // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
+        return !game.getRules().hasAppliedVariant(GameType.MomirBasic) && !game.getRules().hasAppliedVariant(GameType.MoJhoSto)
+                && !game.getRules().hasAppliedVariant(GameType.Puzzle);
     }
 }

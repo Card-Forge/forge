@@ -159,9 +159,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      */
     public final boolean isSecondary() {
         if (this.mapParams.containsKey("Secondary")) {
-            if (this.mapParams.get("Secondary").equals("True")) {
-                return true;
-            }
+            return this.mapParams.get("Secondary").equals("True");
         }
         return false;
     }
@@ -451,9 +449,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
         if (params.containsKey("ActivateNoLoyaltyAbilitiesCondition")) {
             final Player active = game.getPhaseHandler().getPlayerTurn();
-            if (active.getActivateLoyaltyAbilityThisTurn()) {
-                return false;
-            }
+            return !active.getActivateLoyaltyAbilityThisTurn();
         }
         return true;
     }

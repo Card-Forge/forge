@@ -63,7 +63,7 @@ public class TriggerSetInMotion extends Trigger {
                     return false;
                 }
             } else if (this.mapParams.get("SchemeType").equals("Ongoing")) {
-                if (!((Card)runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
                     return false;
                 }
             }

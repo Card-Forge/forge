@@ -693,7 +693,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         titleText.setText(card.getCurrentState().getName());
 
         final int damage = card.getDamage();
-        damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
+        damageText.setText(damage > 0 ? "\u00BB " + damage + " \u00AB" : "");
 
         // Card Id overlay
         cardIdText.setText(card.getCurrentState().getDisplayId());

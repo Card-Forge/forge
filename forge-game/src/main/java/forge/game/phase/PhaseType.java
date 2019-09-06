@@ -36,10 +36,10 @@ public enum PhaseType {
     public final String nameForUi;
     public final String nameForScripts;
     
-    private PhaseType(String name) {
+    PhaseType(String name) {
         this(name, name);
     }
-    private PhaseType(String name, String name_for_scripts) {
+    PhaseType(String name, String name_for_scripts) {
         nameForUi = name;
         nameForScripts = name_for_scripts;
     }

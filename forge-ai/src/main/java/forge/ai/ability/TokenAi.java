@@ -103,12 +103,9 @@ public class TokenAi extends SpellAbilityAi {
 
         if (actualToken == null) {
             final AbilitySub sub = sa.getSubAbility();
-            if (pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai))) {
-                return true; // planeswalker plus ability or sub-ability is
-                             // useful
-            } else {
-                return false; // no token created
-            }
+            // useful
+            // no token created
+            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai)); // planeswalker plus ability or sub-ability is
         }
 
         // X-cost spells
@@ -154,10 +151,7 @@ public class TokenAi extends SpellAbilityAi {
                 && !haste && !pwMinus) {
             return false;
         }
-        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || !ph.isPlayerTurn(ai)) && oneShot) {
-            return false;
-        }
-        return true;
+        return (!ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai)) || !oneShot;
     }
     
     @Override
@@ -269,10 +263,8 @@ public class TokenAi extends SpellAbilityAi {
             list.add(token);
             list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(), sa);
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-            if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
-                    && list.contains(token)) {
-                return true;
-            }
+            return ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
+                    && list.contains(token);
         }
         return false;
     }

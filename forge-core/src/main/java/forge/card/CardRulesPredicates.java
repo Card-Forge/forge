@@ -435,10 +435,10 @@ public final class CardRulesPredicates {
                 return this.op(card.getManaCost().getGenericCost(), this.operand);
             case POWER:
                 value = card.getIntPower();
-                return value != Integer.MAX_VALUE ? this.op(value, this.operand) : false;
+                return value != Integer.MAX_VALUE && this.op(value, this.operand);
             case TOUGHNESS:
                 value = card.getIntToughness();
-                return value != Integer.MAX_VALUE ? this.op(value, this.operand) : false;
+                return value != Integer.MAX_VALUE && this.op(value, this.operand);
             default:
                 return false;
             }

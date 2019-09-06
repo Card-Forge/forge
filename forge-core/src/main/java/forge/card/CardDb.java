@@ -41,7 +41,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static char NameSetSeparator = '|';
 
     // need this to obtain cardReference by name+set+artindex
-    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -62,7 +62,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Random(false);
 
         final boolean filterSets;
-        private SetPreference(boolean filterIrregularSets) {
+        SetPreference(boolean filterIrregularSets) {
             filterSets = filterIrregularSets;
         }
 

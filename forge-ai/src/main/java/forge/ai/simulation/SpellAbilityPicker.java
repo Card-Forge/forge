@@ -308,9 +308,7 @@ public class SpellAbilityPicker {
                 return true;
             }
             List<PhaseType> phases = conditions.getPhases();
-            if (phases.isEmpty() || phases.contains(PhaseType.MAIN1)) {
-                return true;
-            }
+            return phases.isEmpty() || phases.contains(PhaseType.MAIN1);
         }
 
         return false;

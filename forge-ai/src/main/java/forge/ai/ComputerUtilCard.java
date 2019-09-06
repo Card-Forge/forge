@@ -368,7 +368,7 @@ public class ComputerUtilCard {
         }
     
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
+            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     return !card.hasSVar("DoNotDiscardIfAble");
@@ -1301,7 +1301,7 @@ public class ComputerUtilCard {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                            : Lists.<String>newArrayList();
+                            : Lists.newArrayList();
                     for (String kw : kws) {
                         if (!kw.equals("Trample") && !kw.equals("First Strike") && !kw.equals("Double Strike")) {
                             combatTrick = false;

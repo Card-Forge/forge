@@ -385,9 +385,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         final Player opp = player.getWeakestOpponent();
         if (opp != null) {
             // TODO add predict Combat Damage?
-            if (opp.getLife() < copy.getNetPower()) {
-                return true;
-            }
+            return opp.getLife() < copy.getNetPower();
         }
 
         // haste might not be good enough?

@@ -44,7 +44,7 @@ public class CardThemedConquestDeckBuilder extends CardThemedDeckBuilder {
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();
         numCreaturesToStart = ((Double)Math.ceil(targetSize*(getCreaturePercentage()))).intValue();
-        landsNeeded = ((Double)Math.ceil(targetSize*(getLandPercentage()))).intValue();;
+        landsNeeded = ((Double)Math.ceil(targetSize*(getLandPercentage()))).intValue();
         if (logColorsToConsole) {
             System.out.println(keyCard.getName());
             System.out.println("Pre Colors: " + colors.toEnumSet().toString());

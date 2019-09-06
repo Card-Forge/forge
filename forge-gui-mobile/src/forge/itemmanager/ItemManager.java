@@ -901,10 +901,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         @Override
         protected boolean hideBackdropOnPress(float x, float y) {
             Rectangle bounds = currentView.getSelectionBounds();
-            if (bounds == null || bounds.contains(x, y)) {
-                return false; //don't hide on press if within selection bounds
-            }
-            return true;
+            return bounds != null && !bounds.contains(x, y); //don't hide on press if within selection bounds
         }
 
         @Override

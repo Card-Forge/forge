@@ -60,11 +60,7 @@ public class SellRules {
         if (quest.getWin() < minWins) {
             return false;
         }
-        if (quest.getDifficulty() < minDifficulty || quest.getDifficulty() > maxDifficulty) {
-            return false;
-        }
-
-        return true;
+        return quest.getDifficulty() >= minDifficulty && quest.getDifficulty() <= maxDifficulty;
     }
 
     /**

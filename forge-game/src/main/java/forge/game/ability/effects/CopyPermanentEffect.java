@@ -192,7 +192,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     copyInPlay.setCloneOrigin(host);
                     if (!pumpKeywords.isEmpty()) {
-                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, timestamp);
+                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp);
                     }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {

@@ -181,7 +181,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             int count;
             long total = 0;
-            final byte data[] = new byte[1024];
+            final byte[] data = new byte[1024];
 
             while ((count = input.read(data)) != -1) {
                 if (cancel) { break; }

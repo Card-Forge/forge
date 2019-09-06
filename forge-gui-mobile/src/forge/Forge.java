@@ -79,7 +79,7 @@ public class Forge implements ApplicationListener {
          to prevent rendering issue when you try to restart
          the app again (seems it doesnt dispose correctly...?!?)
          */
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
 
@@ -126,8 +126,7 @@ public class Forge implements ApplicationListener {
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
-        Gdx.input.setCatchBackKey(true);
-        Gdx.input.setCatchMenuKey(true);
+        Gdx.input.setCatchKey(Keys.MENU, true);
         openScreen(HomeScreen.instance);
         splashScreen = null;
 

@@ -11,10 +11,7 @@ public class SkipTurnAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        if ("Always".equals(sa.getParam("AILogic"))) {
-            return true;
-        }
-        return false;
+        return "Always".equals(sa.getParam("AILogic"));
     }
 
     /* (non-Javadoc)

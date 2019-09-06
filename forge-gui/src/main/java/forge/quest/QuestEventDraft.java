@@ -1022,7 +1022,6 @@ public class QuestEventDraft implements IQuestEvent {
             if (allowedSets.size() == 2) {
                 final boolean draftOrder2016 = set0.getDate().after(FModel.getMagicDb().getEditions().get("BFZ").getDate()) || 
                         set1.getDate().after(FModel.getMagicDb().getEditions().get("BFZ").getDate());
-;
                 if (draftOrder2016) {
                     if (set0.isLargeSet()) {
                         possibleCombinations.add(TextUtil.concatNoSpace(set1.getCode(), "/", set1.getCode(), "/", set0.getCode()));

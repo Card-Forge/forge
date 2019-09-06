@@ -48,7 +48,7 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
 
-            hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getAmountOfX() > 0 : false;
+            hasXCost = abCost.getCostMana() != null && abCost.getCostMana().getAmountOfX() > 0;
         }
 
         if ("AtOpponentsCombatOrAfter".equals(sa.getParam("AILogic"))) {
@@ -132,7 +132,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
+            list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
@@ -296,8 +296,8 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             if (list.isEmpty()
-                || !CardLists.filterControlledBy(list, ai).isEmpty()
-                || CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
+                    || !CardLists.filterControlledBy(list, ai).isEmpty()
+                    || CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
                 return false;
             }
         }
@@ -342,7 +342,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Filter AI-specific targets if provided
-            preferred = ComputerUtil.filterAITgts(sa, ai, (CardCollection)preferred, true);
+            preferred = ComputerUtil.filterAITgts(sa, ai, preferred, true);
 
             for (final Card c : preferred) {
                 list.remove(c);
@@ -400,16 +400,11 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
-                return false;
-            }
+            return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa);
         } else {
-            if (!mandatory) {
-                return false;
-            }
+            return mandatory;
         }
 
-        return true;
     }
 
     public boolean doLandForLandRemovalLogic(SpellAbility sa, Player ai, Card tgtLand, String logic) {

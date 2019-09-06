@@ -15,10 +15,7 @@ public class MatchWinStreak extends StreakAchievement {
     @Override
     protected Boolean eval(Player player, Game game) {
         if (game.getMatch().isMatchOver()) {
-            if (game.getMatch().isWonBy(player.getLobbyPlayer())) {
-                return true;
-            }
-            return false;
+            return game.getMatch().isWonBy(player.getLobbyPlayer());
         }
         return null;
     }

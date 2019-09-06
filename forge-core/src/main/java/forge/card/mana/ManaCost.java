@@ -69,7 +69,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     private ManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
-        sealClass(Lists.<ManaCostShard>newArrayList());
+        sealClass(Lists.newArrayList());
     }
     
     private ManaCost(int cmc, List<ManaCostShard> shards0) {

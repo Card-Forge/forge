@@ -28,7 +28,7 @@ import java.util.Map.Entry;
  */
 public final class SItemManagerUtil {
     /** An enum to encapsulate metadata for the stats/filter objects. */
-    public static enum StatTypes implements IHasSkinProp {
+    public enum StatTypes implements IHasSkinProp {
         WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "lblWhitecards"),
         BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "lblBluecards"),
         BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "lblBlackcards"),
@@ -78,7 +78,7 @@ public final class SItemManagerUtil {
         public final Predicate<CardRules> predicate;
         public final String label;
 
-        private StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
+        StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
             skinProp = skinProp0;
             predicate = predicate0;
             final Localizer localizer = Localizer.getInstance();

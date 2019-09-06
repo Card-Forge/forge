@@ -98,7 +98,7 @@ public class HostedMatch {
             throw new IllegalArgumentException();
         }
 
-        this.guis = guis == null ? ImmutableMap.<RegisteredPlayer, IGuiGame>of() : guis;
+        this.guis = guis == null ? ImmutableMap.of() : guis;
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for (final RegisteredPlayer rp : players) {
             rp.setRandomFoil(useRandomFoil);
@@ -160,7 +160,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.<PlayerView>arrayLists());
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.arrayLists());
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);

@@ -234,7 +234,7 @@ public final class GameActionUtil {
 
                 // there is a flashback cost (and not the cards cost)
                 if (keyword.contains(":")) {
-                    final String k[] = keyword.split(":"); 
+                    final String[] k = keyword.split(":");
                     flashback.setPayCosts(new Cost(k[1], false));
                 }
                 alternatives.add(flashback);

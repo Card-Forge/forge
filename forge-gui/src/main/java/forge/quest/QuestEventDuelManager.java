@@ -40,7 +40,7 @@ import java.util.*;
  */
 public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
 
-    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
+    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
     private final IStorage<QuestEventDuel> allDuels;
 
     /**

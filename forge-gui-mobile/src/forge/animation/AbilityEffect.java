@@ -11,7 +11,7 @@ public enum AbilityEffect {
     private GifAnimation animation;
     private AudioClip soundClip;
 
-    private AbilityEffect(String gif0, String wav0) {
+    AbilityEffect(String gif0, String wav0) {
         gif = gif0;
         wav = wav0;
     }

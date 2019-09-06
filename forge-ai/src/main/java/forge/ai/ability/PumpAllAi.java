@@ -141,10 +141,7 @@ public class PumpAllAi extends PumpAiBase {
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
-            if ((ComputerUtilCard.evaluateCreatureList(comp) + 200) >= ComputerUtilCard.evaluateCreatureList(human)) {
-                return false;
-            }
-            return true;
+            return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
         } // end Curse
 
         return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source).isEmpty();

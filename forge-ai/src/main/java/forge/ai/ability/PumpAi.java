@@ -92,10 +92,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            if (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
-                return false;
-            }
-            return true;
+            return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
@@ -121,9 +118,7 @@ public class PumpAi extends PumpAiBase {
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa) && !main1Preferred) {
-                return false;
-            }
+            return sa.isCurse() || SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred;
         }
         return true;
     }
@@ -134,7 +129,7 @@ public class PumpAi extends PumpAiBase {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                : Lists.<String>newArrayList();
+                : Lists.newArrayList();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
@@ -191,11 +186,8 @@ public class PumpAi extends PumpAiBase {
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                             if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                                if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
-                                        || card.isToken()) {
-                                    return true;
-                                }
-                                return false;
+                                return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
+                                        || card.isToken();
                             }
                             return false;
                         }
@@ -244,11 +236,8 @@ public class PumpAi extends PumpAiBase {
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                                 if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
-                                    if (srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
-                                            || card.isToken()) {
-                                        return true;
-                                    }
-                                    return false;
+                                    return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
+                                            || card.isToken();
                                 }
                                 return true;
                             }
@@ -395,9 +384,7 @@ public class PumpAi extends PumpAiBase {
                         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
                         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)
                                 || game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
-                            if (!ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                                return false;
-                            }
+                            return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped);
                         }
 
                         return true;
@@ -432,7 +419,7 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
     		boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                : Lists.<String>newArrayList();
+                : Lists.newArrayList();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
@@ -555,7 +542,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Filter AI-specific targets if provided
-        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
+        list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
         if (list.isEmpty()) {
             if (ComputerUtil.activateForCost(sa, ai)) {
@@ -788,15 +775,11 @@ public class PumpAi extends PumpAiBase {
                 if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
                     return false;
                 }
-                if (source.getNetToughness() + defense <= 0) {
-                    return false;
-                }
+                return source.getNetToughness() + defense > 0;
             }
         } else {
             //Targeted
-            if (!pumpTgtAI(ai, sa, defense, attack, false, true)) {
-                return false;
-            }
+            return pumpTgtAI(ai, sa, defense, attack, false, true);
         }
 
         return true;
@@ -849,9 +832,7 @@ public class PumpAi extends PumpAiBase {
                                 }
                             }
                     );
-                    if (sacFodder.size() >= numCreatsToSac) {
-                        return true;
-                    }
+                    return sacFodder.size() >= numCreatsToSac;
                 }
             }
 

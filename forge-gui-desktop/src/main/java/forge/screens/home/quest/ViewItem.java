@@ -89,7 +89,7 @@ public class ViewItem extends FPanel {
                 ViewItem.this.lblIcon.setIcon(i);
 
                 ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
-                ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(bazaarItem.getBuyingPrice(qA)) + " credits");
+                ViewItem.this.lblPrice.setText("Cost: " + bazaarItem.getBuyingPrice(qA) + " credits");
                 String desc = bazaarItem.getPurchaseDescription(qA);
                 ViewItem.this.tarDesc.setText(FSkin.encodeSymbols(desc, false)); //encode in case there are mana symbols in description
 

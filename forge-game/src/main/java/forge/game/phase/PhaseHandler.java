@@ -663,7 +663,7 @@ public class PhaseHandler implements java.io.Serializable {
             // map: defender => (many) attacker => (many) blocker
             Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.arrayLists());
                 for (Card att : combat.getAttackersOf(ge)) {
                     protectThisDefender.addAll(att, combat.getBlockers(att));
                 }
