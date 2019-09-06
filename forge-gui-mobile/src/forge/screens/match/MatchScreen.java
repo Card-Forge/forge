@@ -506,7 +506,8 @@ public class MatchScreen extends FScreen {
                 float y = midField - topPlayerPanel.getField().getHeight();
                 float w = getWidth() - x;
                 float bgFullWidth, scaledbgHeight;
-                float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
+                int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
+                float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
                         && hasActivePlane()) {
                     String imageName = getPlaneName()
