@@ -1623,6 +1623,13 @@ public class AbilityUtils {
                     return count;
                 }
 
+                // Count$Adamant.<Color>.<True>.<False>
+                if (sq[0].startsWith("Adamant")) {
+                    final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
+                    final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= 3;
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
+                }
+
                 if (l[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
                     CardCollectionView list = null;
