@@ -156,6 +156,7 @@ Nephilim:Nephilims
 Nightmare:Nightmares
 Nightstalker:Nightstalkers
 Ninja:Ninjas
+Noble:Nobles
 Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
@@ -243,6 +244,7 @@ Vedalken:Vedalkens
 Viashino:Viashinos
 Volver:Volvers
 Wall:Walls
+Warlock:Warlocks
 Warrior:Warriors
 Weird:Weirds
 Werewolf:Werewolves
@@ -258,6 +260,7 @@ Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
 [SpellTypes]
+Adventure
 Arcane
 Trap
 [EnchantmentTypes]
