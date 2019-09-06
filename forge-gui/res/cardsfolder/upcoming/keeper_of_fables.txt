@@ -1,0 +1,7 @@
+Name:Keeper of Fables
+ManaCost:3 G G
+Types:Creature Cat
+PT:4/5
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.nonHuman+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card.
