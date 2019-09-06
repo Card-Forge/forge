@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -148,7 +149,7 @@ public class LoadConquestScreen extends LaunchScreen {
     @Override
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
-        float y = getHeader().getBottom();
+        float y = Forge.isLandscapeMode() ? 0 : getHeader().getBottom();
         g.fillRect(OLD_CONQUESTS_BACK_COLOR, 0, y, lstConquests.getWidth(), lstConquests.getTop() - y);
     }
 
