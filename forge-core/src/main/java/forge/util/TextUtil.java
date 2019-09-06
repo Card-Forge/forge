@@ -38,7 +38,7 @@ public class TextUtil {
             } else {
                 mapAsString.append("; ");
             }
-            mapAsString.append(p.getKey() + " => " + (p.getValue() == null ? "(null)" : p.getValue().toString()));
+            mapAsString.append(p.getKey()).append(" => ").append(p.getValue() == null ? "(null)" : p.getValue().toString());
         }
         return mapAsString.toString();
     }

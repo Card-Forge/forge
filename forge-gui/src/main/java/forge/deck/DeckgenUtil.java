@@ -622,9 +622,8 @@ public class DeckgenUtil {
                     }
                 }
             }else {
-                List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
                 String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
-                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
+                List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
                 Collections.shuffle(potentialCards, MyRandom.getRandom());
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {

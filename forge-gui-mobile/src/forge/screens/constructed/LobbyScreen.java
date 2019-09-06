@@ -216,14 +216,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbVariants.setSelectedItem(appliedVariants.iterator().next());
         }
         else {
-            String text = "";
+            StringBuilder text = new StringBuilder();
             for (GameType variantType : appliedVariants) {
                 if (text.length() > 0) {
-                    text += ", ";
+                    text.append(", ");
                 }
-                text += variantType.toString();
+                text.append(variantType.toString());
             }
-            cbVariants.setText(text);
+            cbVariants.setText(text.toString());
         }
     }
 

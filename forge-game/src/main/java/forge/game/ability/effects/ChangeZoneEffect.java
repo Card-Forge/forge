@@ -876,9 +876,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
             } while (selectedCards != null && selectedCards.size() > changeNum);
             if (selectedCards != null) {
-                for (Card card : selectedCards) {
-                    chosenCards.add(card);
-                }
+                chosenCards.addAll(selectedCards);
             }
             // maybe prompt the user if they selected fewer than the maximum possible?
         } else {

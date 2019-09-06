@@ -161,7 +161,7 @@ public enum CSubmenuChallenges implements ICDoc {
         final JXButtonPanel grpPanel = new JXButtonPanel();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(localizer.getMessage("lblMatchBestof") + " ").append(FModel.getQuest().getMatchLength());
+        sb.append(localizer.getMessage("lblMatchBestof")).append(" ").append(FModel.getQuest().getMatchLength());
         view.getCbxMatchLength().setSelectedItem(sb.toString());
 
         boolean haveAnyChallenges = true;

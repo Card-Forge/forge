@@ -950,7 +950,7 @@ public class FDeckChooser extends FScreen {
         if (cmbDeckTypes.getSelectedItem() == null || cmbDeckTypes.getSelectedItem() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
-            state.append(NetDeckCategory.PREFIX + netDeckCategory.getName());
+            state.append(NetDeckCategory.PREFIX).append(netDeckCategory.getName());
         }
         else {
             state.append(cmbDeckTypes.getSelectedItem().name());

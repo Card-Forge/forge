@@ -79,7 +79,7 @@ public class FDeckImportDialog extends FDialog {
                                 if (sb.length() > 0) {
                                     sb.append("\n");
                                 }
-                                sb.append(token.getNumber() + " " + token.getText());
+                                sb.append(token.getNumber()).append(" ").append(token.getText());
                             }
                         }
                         if (sb.length() > 0) {

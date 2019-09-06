@@ -149,9 +149,7 @@ public class AbilityUtils {
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
                 } else if (crd instanceof Iterable) {
-                    for (final Card cardItem : Iterables.filter((Iterable<?>) crd, Card.class)) {
-                        cards.add(cardItem);
-                    }
+                    cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
             }
         }
@@ -161,9 +159,7 @@ public class AbilityUtils {
             if (crd instanceof Card) {
                 c = game.getCardState((Card) crd);
             } else if (crd instanceof List<?>) {
-                for (final Card cardItem : (CardCollection) crd) {
-                    cards.add(cardItem);
-                }
+                cards.addAll((CardCollection) crd);
             }
         }
         else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
@@ -530,9 +526,7 @@ public class AbilityUtils {
             }
 
             if (calcX[0].endsWith("LKI")) { // last known information
-                for (final Card c : newCard.getImprintedCards()) {
-                    list.add(c);
-                }
+                list.addAll(newCard.getImprintedCards());
             }
             else {
                 for (final Card c : newCard.getImprintedCards()) {

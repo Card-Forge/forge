@@ -597,9 +597,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     piles.get(key).items.add(itemInfo);
                 }
                 group.piles.clear();
-                for (Pile pile : piles.values()) {
-                    group.piles.add(pile);
-                }
+                group.piles.addAll(piles.values());
             }
 
             groupY = y;

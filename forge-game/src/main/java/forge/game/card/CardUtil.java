@@ -92,7 +92,7 @@ public final class CardUtil {
     public static String getShortColorsString(final Iterable<String> colors) {
         StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
-            colorDesc.append(MagicColor.toShortString(col) + " ");
+            colorDesc.append(MagicColor.toShortString(col)).append(" ");
         }
         return colorDesc.toString();
     }

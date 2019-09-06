@@ -119,9 +119,7 @@ public class DeckGroup extends DeckBase {
      * @param computer the computer
      */
     public void addAiDecks(final Deck[] computer) {
-        for (final Deck element : computer) {
-            aiDecks.add(element);
-        }
+        aiDecks.addAll(Arrays.asList(computer));
     }
 
     /*

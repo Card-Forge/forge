@@ -71,9 +71,7 @@ public class Combat {
         playerWhoAttacks = attacker;
 
         // Create keys for all possible attack targets
-        for (final GameEntity defender : CombatUtil.getAllPossibleDefenders(playerWhoAttacks)) {
-            attackableEntries.add(defender);
-        }
+        attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
 
         attackConstraints = new AttackConstraints(this);
     }

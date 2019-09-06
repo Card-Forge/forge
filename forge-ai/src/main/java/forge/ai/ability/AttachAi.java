@@ -31,10 +31,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -875,15 +872,11 @@ public class AttachAi extends SpellAbilityAi {
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
                 kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
             }
         }
@@ -1173,15 +1166,11 @@ public class AttachAi extends SpellAbilityAi {
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
                 kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
             }
         }

@@ -886,12 +886,12 @@ public class AdvancedSearch {
                 return formatValue(values.get(0)) + finalDelim + formatValue(values.get(1));
             default:
                 int lastValueIdx = valueCount - 1;
-                String result = formatValue(values.get(0));
+                StringBuilder result = new StringBuilder(formatValue(values.get(0)));
                 for (int i = 1; i < lastValueIdx; i++) {
-                    result += delim + formatValue(values.get(i));
+                    result.append(delim).append(formatValue(values.get(i)));
                 }
-                result += delim.trim() + finalDelim + formatValue(values.get(lastValueIdx));
-                return result;
+                result.append(delim.trim()).append(finalDelim).append(formatValue(values.get(lastValueIdx)));
+                return result.toString();
             }
         }
 
@@ -1233,15 +1233,15 @@ public class AdvancedSearch {
             StringBuilder builder = new StringBuilder();
             builder.append("Filter:\n");
 
-            String indent = "";
+            StringBuilder indent = new StringBuilder();
 
             for (Object piece : expression) {
-                if (piece.equals(Operator.CLOSE_PAREN) && !indent.isEmpty()) {
-                    indent = indent.substring(2); //trim an indent level when a close paren is hit
+                if (piece.equals(Operator.CLOSE_PAREN) && (indent.length() > 0)) {
+                    indent = new StringBuilder(indent.substring(2)); //trim an indent level when a close paren is hit
                 }
-                builder.append("\n" + indent + piece.toString().trim());
+                builder.append("\n").append(indent).append(piece.toString().trim());
                 if (piece.equals(Operator.OPEN_PAREN)) {
-                    indent += "  "; //add an indent level when an open paren is hit
+                    indent.append("  "); //add an indent level when an open paren is hit
                 }
             }
             return GuiBase.getInterface().encodeSymbols(builder.toString(), false);

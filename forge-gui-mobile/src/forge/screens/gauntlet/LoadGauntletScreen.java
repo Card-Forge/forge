@@ -295,9 +295,7 @@ public class LoadGauntletScreen extends LaunchScreen {
 
         public void refresh() {
             List<GauntletData> sorted = new ArrayList<>();
-            for (GauntletData gauntlet : gauntlets) {
-                sorted.add(gauntlet);
-            }
+            sorted.addAll(gauntlets);
             sorted.sort(new Comparator<GauntletData>() {
                 @Override
                 public int compare(final GauntletData x, final GauntletData y) {

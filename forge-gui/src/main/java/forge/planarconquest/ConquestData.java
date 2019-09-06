@@ -270,14 +270,14 @@ public final class ConquestData {
 
         List<ConquestCommander> commandersBeingExiled = null;
 
-        String message = "Exile the following " + cardStr + " to receive {AE}" + value + "?\n";
+        StringBuilder message = new StringBuilder("Exile the following " + cardStr + " to receive {AE}" + value + "?\n");
         for (PaperCard card : cards) {
             if (planeswalker == card) {
                 SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            String commandersUsingCard = "";
+            StringBuilder commandersUsingCard = new StringBuilder();
             for (ConquestCommander commander : commanders) {
                 if (commander.getCard() == card) {
                     if (!commander.getDeck().getMain().isEmpty()) {
@@ -290,19 +290,19 @@ public final class ConquestData {
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
                 if (commander.getDeck().getMain().contains(card)) {
-                    commandersUsingCard += "\n" + commander.getName();
+                    commandersUsingCard.append("\n").append(commander.getName());
                 }
             }
 
-            if (!commandersUsingCard.isEmpty()) {
+            if (commandersUsingCard.length() > 0) {
                 SOptionPane.showMessageDialog(card.getName() + " is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            message += "\n" + card.getName();
+            message.append("\n").append(card.getName());
         }
 
-        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
             if (exiledCards.addAll(cards)) {
                 if (commandersBeingExiled != null) {
                     commanders.removeAll(commandersBeingExiled);
@@ -326,11 +326,11 @@ public final class ConquestData {
             return false;
         }
 
-        String message = "Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n";
+        StringBuilder message = new StringBuilder("Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n");
         for (PaperCard card : cards) {
-            message += "\n" + card.getName();
+            message.append("\n").append(card.getName());
         }
-        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
             if (exiledCards.removeAll(cards)) {
                 for (PaperCard card : cards) {
                     if (card.getRules().canBeCommander()) { //add back commander for card if needed

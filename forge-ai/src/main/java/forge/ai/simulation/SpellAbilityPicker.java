@@ -270,28 +270,28 @@ public class SpellAbilityPicker {
         return abilityToString(sa, true);
     }
     public static String abilityToString(SpellAbility sa, boolean withTargets) {
-        String saString = "N/A";
+        StringBuilder saString = new StringBuilder("N/A");
         if (sa != null) {
-            saString = sa.toString();
+            saString = new StringBuilder(sa.toString());
             String cardName = sa.getHostCard().getName();
             if (!cardName.isEmpty()) {
-                saString = TextUtil.fastReplace(saString, cardName, "<$>");
+                saString = new StringBuilder(TextUtil.fastReplace(saString.toString(), cardName, "<$>"));
             }
             if (saString.length() > 40) {
-                saString = saString.substring(0, 40) + "...";
+                saString = new StringBuilder(saString.substring(0, 40) + "...");
             }
             if (withTargets) {
                 SpellAbility saOrSubSa = sa;
                 do {
                     if (saOrSubSa.usesTargeting()) {
-                        saString += " (targets: " + saOrSubSa.getTargets().getTargetedString() + ")";
+                        saString.append(" (targets: ").append(saOrSubSa.getTargets().getTargetedString()).append(")");
                     }
                     saOrSubSa = saOrSubSa.getSubAbility();
                 } while (saOrSubSa != null);
             }
-            saString = sa.getHostCard() + " -> " + saString;
+            saString.insert(0, sa.getHostCard() + " -> ");
         }
-        return saString;
+        return saString.toString();
     }
 
     private boolean shouldWaitForLater(final SpellAbility sa) {

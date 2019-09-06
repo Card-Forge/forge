@@ -403,7 +403,7 @@ public class VAssignDamage {
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
             if( overkill >= 0 ) { 
-                sb.append(" (" +localizer.getMessage("lblLethal"));
+                sb.append(" (").append(localizer.getMessage("lblLethal"));
                 if( overkill > 0 ) 
                     sb.append(" +").append(overkill);
                 sb.append(")");

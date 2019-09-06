@@ -333,7 +333,7 @@ public class HumanPlay {
 
                 StringBuilder sb = new StringBuilder("Do you want to ");
                 sb.append(res.contains(p) ? "" : "let that player ");
-                sb.append("draw " + Lang.nounWithAmount(amount, " card") + "?" + orString);
+                sb.append("draw ").append(Lang.nounWithAmount(amount, " card")).append("?").append(orString);
 
                 if (!p.getController().confirmPayment(part, sb.toString(), sourceAbility)) {
                     return false;

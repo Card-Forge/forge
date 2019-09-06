@@ -142,9 +142,7 @@ public class QuestPetStorage {
         final List<QuestPetController> result = new ArrayList<>();
         final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
         if (null != allPossible) {
-            for (final QuestPetController c : allPossible) {
-                result.add(c);
-            }
+            result.addAll(allPossible);
         }
         return result;
     }

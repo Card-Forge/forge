@@ -559,7 +559,7 @@ public class CardView extends GameEntityView {
             sb.append(rulesText).append("\r\n\r\n");
         }
         if (isCommander()) {
-            sb.append(getOwner()).append("'s " + getCommanderType() + "\r\n");
+            sb.append(getOwner()).append("'s ").append(getCommanderType()).append("\r\n");
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 

@@ -136,9 +136,7 @@ public final class SResizingUtil {
         int smoothVal = 0;
         
         Set<Component> existingComponents = new HashSet<>();
-        for (Component c : pnlContent.getComponents()) {
-            existingComponents.add(c);
-        }
+        existingComponents.addAll(Arrays.asList(pnlContent.getComponents()));
 
         // This is the core of the pixel-perfect layout. To avoid ±1 px errors on borders
         // from rounding individual panels, the intermediate values (exactly accurate, in %)

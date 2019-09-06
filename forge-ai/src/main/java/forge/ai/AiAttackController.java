@@ -103,8 +103,7 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
-        List<Card> defenders = new ArrayList<>();
-        defenders.addAll(defender.getCreaturesInPlay());
+        List<Card> defenders = new ArrayList<>(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {

@@ -98,9 +98,7 @@ public final class SRearrangingUtil {
         }
         // Otherwise, add all of the documents.
         else {
-            for (final IVDoc<? extends ICDoc> vDoc : cellSrc.getDocs()) {
-                docsToMove.add(vDoc);
-            }
+            docsToMove.addAll(cellSrc.getDocs());
         }
 
         // Reset and show preview panel

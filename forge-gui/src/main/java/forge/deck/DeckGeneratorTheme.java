@@ -124,7 +124,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
             final float p = (float) (g.percentage * .01);
             final int grpCnt = (int) (p * size);
             final int cnSize = g.cardnames.size();
-            errorBuilder.append("Group" + i + ":" + grpCnt + "\n");
+            errorBuilder.append("Group").append(i).append(":").append(grpCnt).append("\n");
 
             for (int j = 0; j < grpCnt; j++) {
                 s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));
@@ -150,7 +150,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                 	tDeck.add(pool.getCard(ss[0],ss[1]));
                 }
                 cardCounts.put(ss[0], n + 1);
-                errorBuilder.append(s + "\n");
+                errorBuilder.append(s).append("\n");
             }
         }
 
@@ -162,15 +162,15 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
             numBLands = size - tDeck.countAll();
         }
 
-        errorBuilder.append("numBLands:" + numBLands + "\n");
+        errorBuilder.append("numBLands:").append(numBLands).append("\n");
 
         addBasicLand(numBLands,basicLandSet);
 
-        errorBuilder.append("DeckSize:" + tDeck.countAll() + "\n");
+        errorBuilder.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         adjustDeckSize(size);
 
-        errorBuilder.append("DeckSize:" + tDeck.countAll() + "\n");
+        errorBuilder.append("DeckSize:").append(tDeck.countAll()).append("\n");
         if (!testing) {
             errorBuilder.delete(0, errorBuilder.length()); //clear if not testing
         }

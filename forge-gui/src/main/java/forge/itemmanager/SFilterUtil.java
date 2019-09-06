@@ -70,7 +70,7 @@ public class SFilterUtil {
 
     private static List<String> getSplitText(String text) {
         boolean inQuotes = false;
-        String entry = "";
+        StringBuilder entry = new StringBuilder();
         List<String> splitText = new ArrayList<>();
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
@@ -78,8 +78,8 @@ public class SFilterUtil {
             case ' ':
                 if (!inQuotes) { //if not in quotes, end current entry
                     if (entry.length() > 0) {
-                        splitText.add(entry);
-                        entry = "";
+                        splitText.add(entry.toString());
+                        entry = new StringBuilder();
                     }
                     continue;
                 }
@@ -99,10 +99,10 @@ public class SFilterUtil {
                 }
                 break;
             }
-            entry += ch;
+            entry.append(ch);
         }
         if (entry.length() > 0) {
-            splitText.add(entry);
+            splitText.add(entry.toString());
         }
         return splitText;
     }

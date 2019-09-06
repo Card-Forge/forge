@@ -132,10 +132,8 @@ public class ProtectEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("Radiance") && (tgt != null)) {
-            for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0),
-                    sa.getParam("ValidTgts").split(","))) {
-                untargetedCards.add(c);
-            }
+            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0),
+                    sa.getParam("ValidTgts").split(",")));
         }
 
 

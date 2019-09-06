@@ -2283,8 +2283,7 @@ public class ComputerUtil {
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
                 } else  if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield 
-                    final List<String> basics = new ArrayList<>();
-                    basics.addAll(CardType.Constant.BASIC_TYPES);
+                    final List<String> basics = new ArrayList<>(CardType.Constant.BASIC_TYPES);
                     CardCollectionView presentCards = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
                     CardCollectionView possibleCards = ai.getAllCards();
                     

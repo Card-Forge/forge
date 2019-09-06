@@ -81,9 +81,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
             }
             if (origin != null) {
                 // Can't radiate from a player
-                for (final Card c : CardUtil.getRadiance(host, origin, sa.getParam("ValidTgts").split(","))) {
-                    untargetedCards.add(c);
-                }
+                untargetedCards.addAll(CardUtil.getRadiance(host, origin, sa.getParam("ValidTgts").split(",")));
             }
         }
 

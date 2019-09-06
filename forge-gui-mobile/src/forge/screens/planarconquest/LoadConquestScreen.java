@@ -333,9 +333,7 @@ public class LoadConquestScreen extends LaunchScreen {
 
         public void setConquests(List<ConquestData> qd0) {
             List<ConquestData> sorted = new ArrayList<>();
-            for (ConquestData qd : qd0) {
-                sorted.add(qd);
-            }
+            sorted.addAll(qd0);
             sorted.sort(new Comparator<ConquestData>() {
                 @Override
                 public int compare(final ConquestData x, final ConquestData y) {

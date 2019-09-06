@@ -164,7 +164,7 @@ public class CardReaderExperiments {
                     StringBuilder newLineBuilder = new StringBuilder();
                     newLineBuilder.append(line, 0, m.start(1));
                     for (String sym : m.group(1).split(" ")) {
-                        newLineBuilder.append("{" + sym + "}");
+                        newLineBuilder.append("{").append(sym).append("}");
                     }
                     newLineBuilder.append(line.substring(m.end(1) - 1)); //-1 so final space appended
                     updated = true;

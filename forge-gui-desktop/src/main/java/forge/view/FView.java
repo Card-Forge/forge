@@ -459,8 +459,7 @@ public enum FView {
 	 * @return {@link java.util.List}<{@link forge.gui.framework.DragCell}>
 	 */
 	public List<DragCell> getDragCells() {
-		final List<DragCell> clone = new ArrayList<>();
-		clone.addAll(allCells);
+        final List<DragCell> clone = new ArrayList<>(allCells);
 		return clone;
 	}
 

@@ -337,7 +337,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min == 0) {
             builder.append("up to ");
         }
-        builder.append("%d " + message + "(s) to " + action + ".");
+        builder.append("%d ").append(message).append("(s) to ").append(action).append(".");
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(builder.toString());
@@ -544,8 +544,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (SpellAbility spellAbility : spells) {
             spellViewCache.put(spellAbility.getView(), spellAbility);
         }
-        List<TrackableObject> choices = new ArrayList<>();
-        choices.addAll(spellViewCache.keySet());
+        List<TrackableObject> choices = new ArrayList<>(spellViewCache.keySet());
         Object choice = getGui().one(title, choices);
 
         // Human is supposed to read the message and understand from it what to
@@ -634,13 +633,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<String, Object> tos = sa.getTriggeringObjects();
         if (tos.containsKey("Attacker")) {
-            buildQuestion.append("\nAttacker: " + tos.get("Attacker"));
+            buildQuestion.append("\nAttacker: ").append(tos.get("Attacker"));
         }
         if (tos.containsKey("Card")) {
             final Card card = (Card) tos.get("Card");
             if (card != null && (card.getController() == player || game.getZoneOf(card) == null
                     || game.getZoneOf(card).getZoneType().isKnown())) {
-                buildQuestion.append("\nTriggered by: " + tos.get("Card"));
+                buildQuestion.append("\nTriggered by: ").append(tos.get("Card"));
             }
         }
 
@@ -1623,7 +1622,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             // for the purpose of pre-ordering, no need for extra granularity
             Integer idxAdditionalInfo = firstStr.indexOf(" [");
-            String saLookupKey = idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr;
+            StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;
             for (int i = 1; i < activePlayerSAs.size(); i++) {
@@ -1635,14 +1634,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                        // are the same
                 }
 
-                saLookupKey += delim + saStr;
+                saLookupKey.append(delim).append(saStr);
                 idxAdditionalInfo = saLookupKey.indexOf(" [");
                 if (idxAdditionalInfo != -1) {
-                    saLookupKey = saLookupKey.substring(0, idxAdditionalInfo - 1);
+                    saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
                 }
             }
             if (needPrompt) {
-                List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
+                List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
                 List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
 
                 // create a mapping between a spell's view and the spell itself
@@ -1681,7 +1680,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (SpellAbility sa : orderedSAs) {
                     savedOrder.add(activePlayerSAs.indexOf(sa));
                 }
-                orderedSALookup.put(saLookupKey, savedOrder);
+                orderedSALookup.put(saLookupKey.toString(), savedOrder);
             }
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {

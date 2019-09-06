@@ -254,7 +254,7 @@ public abstract class GameState {
             newText.append(";");
         }
         if (c.isToken()) {
-            newText.append("t:" + new TokenInfo(c).toString());
+            newText.append("t:").append(new TokenInfo(c).toString());
         } else {
             if (c.getPaperCard() == null) {
                 return;
@@ -377,7 +377,7 @@ public abstract class GameState {
                 newText.append("|Attacking");
                 GameEntity def = c.getGame().getCombat().getDefenderByAttacker(c);
                 if (def instanceof Card) {
-                    newText.append(":" + def.getId());
+                    newText.append(":").append(def.getId());
                 }
             }
         }
@@ -653,15 +653,15 @@ public abstract class GameState {
     }
 
     private String processManaPool(ManaPool manaPool) {
-        String mana = "";
+        StringBuilder mana = new StringBuilder();
         for (final byte c : MagicColor.WUBRGC) {
             int amount = manaPool.getAmountOfColor(c);
             for (int i = 0; i < amount; i++) {
-                mana += MagicColor.toShortString(c) + " ";
+                mana.append(MagicColor.toShortString(c)).append(" ");
             }
         }
 
-        return mana.trim();
+        return mana.toString().trim();
     }
 
     private void updateManaPool(Player p, String manaDef, boolean clearPool, boolean persistent) {

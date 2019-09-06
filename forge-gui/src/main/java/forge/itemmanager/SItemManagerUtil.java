@@ -154,7 +154,7 @@ public final class SItemManagerUtil {
         });
         final StringBuilder builder = new StringBuilder();
         for (final Entry<InventoryItem, Integer> itemEntry : sorted) {
-            builder.append("\n" + itemEntry.getValue() + " * " + itemEntry.getKey().toString());
+            builder.append("\n").append(itemEntry.getValue()).append(" * ").append(itemEntry.getKey().toString());
         }
         return builder.toString();
     }

@@ -610,12 +610,12 @@ public class ManaCostBeingPaid {
 
         if (nGeneric > 0) {
             if (nGeneric <= 20) {
-                sb.append("{" + nGeneric + "}");
+                sb.append("{").append(nGeneric).append("}");
             }
             else { //if no mana symbol exists for generic amount, use combination of symbols for each digit
                 String genericStr = String.valueOf(nGeneric);
                 for (int i = 0; i < genericStr.length(); i++) {
-                    sb.append("{" + genericStr.charAt(i) + "}");
+                    sb.append("{").append(genericStr.charAt(i)).append("}");
                 }
             }
         }

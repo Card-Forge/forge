@@ -29,6 +29,7 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
@@ -402,9 +403,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         public CustomSelectSetting(FPref pref0, String label0, String description0, String[] options0) {
             super(pref0, label0 + ":", description0);
 
-            for (String option : options0) {
-                options.add(option);
-            }
+            options.addAll(Arrays.asList(options0));
         }
         public CustomSelectSetting(FPref pref0, String label0, String description0, Iterable<String> options0) {
             super(pref0, label0 + ":", description0);

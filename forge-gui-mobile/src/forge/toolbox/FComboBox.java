@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -26,9 +27,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         setLabel(label0);
     }
     public FComboBox(T[] itemArray) {
-        for (T item : itemArray) {
-            items.add(item);
-        }
+        items.addAll(Arrays.asList(itemArray));
         initialize();
     }
     public FComboBox(Iterable<T> items0) {
@@ -66,9 +65,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     public void setItems(T[] itemArray, T selectedItem0) {
         items.clear();
         if (itemArray != null) {
-            for (T item : itemArray) {
-                items.add(item);
-            }
+            items.addAll(Arrays.asList(itemArray));
         }
         setSelectedItem(selectedItem0);
     }

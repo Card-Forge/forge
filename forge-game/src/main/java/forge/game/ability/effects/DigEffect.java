@@ -167,9 +167,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                 if (!noMove) {
                     CardCollection movedCards;
-                    for (final Card c : top) {
-                        rest.add(c);
-                    }
+                    rest.addAll(top);
                     CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
