@@ -155,6 +155,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setPresenceCondition(params.get("Presence"));
         }
 
+        if (params.containsKey("ConditionAdamant")) {
+            this.setAdamantCondition(params.get("ConditionAdamant"));
+        }
+
         // Condition version of IsPresent stuff
         if (params.containsKey("ConditionPresent")) {
             this.setIsPresent(params.get("ConditionPresent"));
@@ -260,6 +264,15 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int ctrl = AbilityUtils.calculateAmount(host, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", host.getCastSA());
 
             if (revealed + ctrl == 0) {
+                return false;
+            }
+        }
+
+        if (!this.getAdamantCondition().isEmpty()) {
+            if (host.getCastSA() == null)   return false;
+            final String color = this.getAdamantCondition();
+            final String payingMana = StringUtils.join(host.getCastSA().getPayingMana());
+            if (StringUtils.countMatches(payingMana, MagicColor.toShortString(color)) < 3) {
                 return false;
             }
         }
