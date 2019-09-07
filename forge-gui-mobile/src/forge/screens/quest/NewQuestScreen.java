@@ -111,7 +111,7 @@ public class NewQuestScreen extends FScreen {
 
     @SuppressWarnings("unused")
     private final FLabel lblStartingWorld = scroller.add(new FLabel.Builder().text("Starting world:").build());
-    private final FComboBox<QuestWorld> cbxStartingWorld = scroller.add(new FComboBox<QuestWorld>());
+    private final FComboBox<QuestWorld> cbxStartingWorld = scroller.add(new FComboBox<>());
 
     @SuppressWarnings("unused")
     private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text("Difficulty:").build());
@@ -119,18 +119,18 @@ public class NewQuestScreen extends FScreen {
 
     @SuppressWarnings("unused")
     private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text("Starting pool:").build());
-    private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<StartingPoolType>());
+    private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<>());
 
     private final FLabel lblUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("All cards will be available to play.").build());
 
     private final FLabel lblPreconDeck = scroller.add(new FLabel.Builder().text("Starter/Event deck:").build());
-    private final FComboBox<String> cbxPreconDeck = scroller.add(new FComboBox<String>());
+    private final FComboBox<String> cbxPreconDeck = scroller.add(new FComboBox<>());
 
     private final FLabel lblFormat = scroller.add(new FLabel.Builder().text("Select format:").build());
-    private final FComboBox<GameFormat> cbxFormat = scroller.add(new FComboBox<GameFormat>());
+    private final FComboBox<GameFormat> cbxFormat = scroller.add(new FComboBox<>());
 
     private final FLabel lblCustomDeck = scroller.add(new FLabel.Builder().text("Custom deck:").build());
-    private final FComboBox<Deck> cbxCustomDeck = scroller.add(new FComboBox<Deck>());
+    private final FComboBox<Deck> cbxCustomDeck = scroller.add(new FComboBox<>());
 
     private final FLabel btnSelectFormat = scroller.add(new FLabel.ButtonBuilder().text("Choose format").build());
 
@@ -159,7 +159,7 @@ public class NewQuestScreen extends FScreen {
     private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<>());
 
     private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text("Defined format:").build());
-    private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<GameFormat>());
+    private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<>());
 
     private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("All cards will be available to win.").build());
     private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text("Only sets found in starting pool will be available.").build());

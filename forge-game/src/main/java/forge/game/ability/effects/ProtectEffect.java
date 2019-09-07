@@ -27,7 +27,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final List<String> gains = getProtectionList(sa);
-        final boolean choose = (sa.hasParam("Choices")) ? true : false;
+        final boolean choose = sa.hasParam("Choices");
         final String joiner = choose ? "or" : "and";
 
         final StringBuilder sb = new StringBuilder();
@@ -100,7 +100,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final List<String> choices = getProtectionList(sa);
-        final List<String> gains = new ArrayList<String>();
+        final List<String> gains = new ArrayList<>();
         final List<Card> tgtCards = getTargetCards(sa);
         
         if (isChoice && !choices.isEmpty())  {
@@ -128,14 +128,12 @@ public class ProtectEffect extends SpellAbilityEffect {
             gainsKWList.add(TextUtil.concatWithSpace("Protection from", color));
         }
 
-        final List<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("Radiance") && (tgt != null)) {
-            for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0),
-                    sa.getParam("ValidTgts").split(","))) {
-                untargetedCards.add(c);
-            }
+            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0),
+                    sa.getParam("ValidTgts").split(",")));
         }
 
 
@@ -205,7 +203,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     
 
     public static List<String> getProtectionList(final SpellAbility sa) {
-        final List<String> gains = new ArrayList<String>();
+        final List<String> gains = new ArrayList<>();
 
         final String gainStr = sa.getParam("Gains");
         if (gainStr.equals("Choice")) {

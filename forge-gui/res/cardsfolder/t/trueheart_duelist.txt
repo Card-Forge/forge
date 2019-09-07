@@ -2,7 +2,7 @@ Name:Trueheart Duelist
 ManaCost:1 W
 Types:Creature Human Warrior
 PT:2/2
-K:CARDNAME can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
 K:Embalm:2 W
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trueheart_duelist.jpg

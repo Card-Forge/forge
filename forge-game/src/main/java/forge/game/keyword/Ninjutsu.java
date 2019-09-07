@@ -10,7 +10,7 @@ public class Ninjutsu extends KeywordWithCost {
     @Override
     protected void parse(String details) {
         if (details.contains(":")) {
-            String k[] = details.split(":");
+            String[] k = details.split(":");
             details = k[0];
             if (k[1].equals("Commander")) {
                 commander = true;

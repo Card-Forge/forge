@@ -306,7 +306,7 @@ public final class ForgeConstants {
     public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
 
     // Set boolean constant for landscape mode for gdx port
-    public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini") ? true : false;
+    public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");
 
     public enum CounterDisplayLocation {
 

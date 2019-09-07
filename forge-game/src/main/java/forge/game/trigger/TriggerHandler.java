@@ -55,13 +55,13 @@ import com.google.common.collect.Multimaps;
 import static forge.util.EnumMapUtil.toStringMap;
 
 public class TriggerHandler {
-    private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<TriggerType>());
-    private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
+    private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
 
-    private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
-    private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
-    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Player, Trigger>create());
-    private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<TriggerWaiting>());
+    private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
+    private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
     private final Game game;
 
     public TriggerHandler(final Game gameState) {
@@ -130,7 +130,7 @@ public class TriggerHandler {
     }
 
     public final void clearDelayedTrigger(final Card card) {
-        final List<Trigger> deltrigs = new ArrayList<Trigger>(delayedTriggers);
+        final List<Trigger> deltrigs = new ArrayList<>(delayedTriggers);
 
         for (final Trigger trigger : deltrigs) {
             if (trigger.getHostCard().equals(card)) {
@@ -285,7 +285,7 @@ public class TriggerHandler {
     public final void clearInstrinsicActiveTriggers(final Card c, Zone zoneFrom) {
         final Iterator<Trigger> itr = activeTriggers.iterator();
         Trigger t;
-        final List<Trigger> toBeRemoved = new ArrayList<Trigger>();
+        final List<Trigger> toBeRemoved = new ArrayList<>();
 
         while(itr.hasNext()) {
             t = itr.next();
@@ -350,7 +350,7 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        final List<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
+        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
         waitingTriggers.clear();
         if (waiting.isEmpty()) {
             return false;
@@ -375,7 +375,7 @@ public class TriggerHandler {
         }
 
         // Copy triggers here, so things can be modified just in case
-        final List<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
+        final List<Trigger> delayedTriggersWorkingCopy = new ArrayList<>(delayedTriggers);
 
         boolean checkStatics = false;
 

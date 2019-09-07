@@ -47,7 +47,7 @@ public class StoreSVarAi extends SpellAbilityAi {
                 possibleBlockers = CardLists.filter(possibleBlockers, Presets.UNTAPPED);
                 int oppLife = opp.getLife();
                 int potentialDmg = 0;
-                List<Card> currentAttackers = new ArrayList<Card>();
+                List<Card> currentAttackers = new ArrayList<>();
 
                 if (possibleBlockers.size() == 0) { return false; }
 

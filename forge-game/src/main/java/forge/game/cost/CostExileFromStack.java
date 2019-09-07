@@ -94,11 +94,7 @@ public class CostExileFromStack extends CostPart {
         list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
         final Integer amount = this.convertAmount();
-        if ((amount != null) && (list.size() < amount)) {
-            return false;
-        }
-
-        return true;
+        return (amount == null) || (list.size() >= amount);
     }
 
 

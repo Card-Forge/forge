@@ -108,7 +108,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         //final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final List<Card> discarded = new ArrayList<Card>();
+        final List<Card> discarded = new ArrayList<>();
         final List<Player> targets = getTargetPlayers(sa),
                 discarders;
         Player firstTarget = null;

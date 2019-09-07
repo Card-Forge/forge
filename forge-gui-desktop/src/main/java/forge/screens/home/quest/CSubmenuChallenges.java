@@ -153,7 +153,7 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getPnlChallenges().removeAll();
         qCtrl.regenerateChallenges();
-        final List<QuestEventChallenge> challenges = new ArrayList<QuestEventChallenge>();
+        final List<QuestEventChallenge> challenges = new ArrayList<>();
         for(final Object id : qCtrl.getAchievements().getCurrentChallenges()) {
             challenges.add(qCtrl.getChallenges().get(id.toString()));
         }
@@ -161,7 +161,7 @@ public enum CSubmenuChallenges implements ICDoc {
         final JXButtonPanel grpPanel = new JXButtonPanel();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(localizer.getMessage("lblMatchBestof") + " ").append(FModel.getQuest().getMatchLength());
+        sb.append(localizer.getMessage("lblMatchBestof")).append(" ").append(FModel.getQuest().getMatchLength());
         view.getCbxMatchLength().setSelectedItem(sb.toString());
 
         boolean haveAnyChallenges = true;

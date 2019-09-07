@@ -77,7 +77,7 @@ public class Main {
         boolean fullscreenFlag = true;
         if (FileUtil.doesFileExist(desktopModeAssetsDir + "screen_resolution.ini")) {
             res = FileUtil.readFileToString(desktopModeAssetsDir + "screen_resolution.ini").split("x");
-            fullscreenFlag = res.length == 3 ? Integer.parseInt(res[2].trim()) > 0 : true;
+            fullscreenFlag = res.length != 3 || Integer.parseInt(res[2].trim()) > 0;
             if (res.length >= 2) {
                 desktopScreenWidth = Integer.parseInt(res[0].trim());
                 desktopScreenHeight = Integer.parseInt(res[1].trim());

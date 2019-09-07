@@ -424,7 +424,7 @@ public class ComputerUtilCost {
                     continue;
                 }
                 final int remainingLife = ai.getLife();
-                final int lifeCost = ((CostPayLife) part).convertAmount();
+                final int lifeCost = part.convertAmount();
                 if ((remainingLife - lifeCost) < 10) {
                     return false; //Don't pay life if it would put AI under 10 life
                 } else if ((remainingLife / lifeCost) < 4) {
@@ -552,7 +552,7 @@ public class ComputerUtilCost {
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
         boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
-        boolean payOwner = sa.hasParam("UnlessAI") ? aiLogic.startsWith("Defined") : false;
+        boolean payOwner = sa.hasParam("UnlessAI") && aiLogic.startsWith("Defined");
         boolean payNever = "Never".equals(aiLogic);
         boolean shockland = "Shockland".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);

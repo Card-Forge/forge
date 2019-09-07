@@ -50,7 +50,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     private final int margin = 2 * tabPaddingPx;
 
     // Tab handling layout stuff
-    private final List<IVDoc<? extends ICDoc>> allDocs = new ArrayList<IVDoc<? extends ICDoc>>();
+    private final List<IVDoc<? extends ICDoc>> allDocs = new ArrayList<>();
     private final JLabel lblHandle = new DragHandle();
     private final JLabel lblOverflow = new JLabel();
     private IVDoc<? extends ICDoc> docSelected = null;
@@ -355,7 +355,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         if (allDocs.isEmpty())      { return; }
 
         // Order tabs by priority
-        final List<DragTab> priority = new ArrayList<DragTab>();
+        final List<DragTab> priority = new ArrayList<>();
         final DragTab selectedTab = docSelected.getTabLabel();
         DragTab nextTab = selectedTab;
 

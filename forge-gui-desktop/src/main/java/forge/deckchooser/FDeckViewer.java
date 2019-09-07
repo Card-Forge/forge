@@ -36,7 +36,7 @@ import java.util.TreeMap;
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {
     private final Deck deck;
-    private final List<DeckSection> sections = new ArrayList<DeckSection>();
+    private final List<DeckSection> sections = new ArrayList<>();
     private final CardManager cardManager;
     private DeckSection currentSection;
 

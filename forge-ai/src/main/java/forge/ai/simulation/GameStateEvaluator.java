@@ -161,17 +161,6 @@ public class GameStateEvaluator {
             }
             return super.addValue(value, text);
         }
-
-        @Override
-        protected int getEffectivePower(final Card c) {
-            Card.StatBreakdown breakdown = c.getNetCombatDamageBreakdown();
-            return breakdown.getTotal() - breakdown.tempBoost;
-        }
-        @Override
-        protected int getEffectiveToughness(final Card c) {
-            Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
-            return breakdown.getTotal() - breakdown.tempBoost;
-        }
     }
 
     public static class Score {

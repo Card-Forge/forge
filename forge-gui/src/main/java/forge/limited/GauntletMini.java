@@ -47,7 +47,7 @@ public class GauntletMini {
     private int losses;
     private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
-    private final List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
+    private final List<RegisteredPlayer> aiOpponents = new ArrayList<>();
 
     public GauntletMini() {
         currentRound = 1;
@@ -135,7 +135,7 @@ public class GauntletMini {
      * Starts the tournament.
      */
     private void startRound() {
-        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));

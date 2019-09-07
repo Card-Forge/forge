@@ -86,7 +86,7 @@ public enum ManaCostShard {
      * @param sValue
      *            the s value
      */
-    private ManaCostShard(final int value, final String sValue) {
+    ManaCostShard(final int value, final String sValue) {
         this(value, sValue, sValue);
     }
 
@@ -100,7 +100,7 @@ public enum ManaCostShard {
      * @param imgKey
      *            the img key
      */
-    private ManaCostShard(final int value, final String sValue, final String imgKey) {
+    ManaCostShard(final int value, final String sValue, final String imgKey) {
         this.shard = value;
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();

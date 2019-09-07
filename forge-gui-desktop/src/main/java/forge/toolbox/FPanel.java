@@ -170,7 +170,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
         // More implementations can be added as necessary.
         // See drawForegroundScaled().
 
-        final List<Integer> implemented = new ArrayList<Integer>();
+        final List<Integer> implemented = new ArrayList<>();
         implemented.add(SwingConstants.BOTTOM);
         implemented.add(SwingConstants.CENTER);
 

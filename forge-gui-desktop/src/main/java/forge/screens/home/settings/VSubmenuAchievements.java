@@ -63,7 +63,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private final FLabel lblTitle = new FLabel.Builder()
         .text(localizer.getMessage("lblAchievements")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
-    private final FComboBox<AchievementCollection> cbCollections = new FComboBox<AchievementCollection>();
+    private final FComboBox<AchievementCollection> cbCollections = new FComboBox<>();
     private final TrophyCase trophyCase = new TrophyCase();
     private final FScrollPane scroller = new FScrollPane(trophyCase, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

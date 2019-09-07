@@ -24,7 +24,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     public StatTypeFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
-        buttonMap = new HashMap<StatTypes, FLabel>();
+        buttonMap = new HashMap<>();
     }
 
     @SuppressWarnings("serial")
@@ -32,7 +32,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         final Localizer localizer = Localizer.getInstance();
         StringBuilder tooltip = new StringBuilder();
         tooltip.append(st.label);
-        tooltip.append(" (" + localizer.getMessage("lblclicktotoogle") + " ");
+        tooltip.append(" (").append(localizer.getMessage("lblclicktotoogle")).append(" ");
         if (st.label.length() > 1 && !Character.isUpperCase(st.label.charAt(1))) {
             tooltip.append(st.label.substring(0, 1).toLowerCase());
             tooltip.append(st.label.substring(1));

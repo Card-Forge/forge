@@ -85,7 +85,7 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
                 return new Deck();
             }
         };
-        this.controller = new DeckController<Deck>(folder, this, newCreator);
+        this.controller = new DeckController<>(folder, this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override

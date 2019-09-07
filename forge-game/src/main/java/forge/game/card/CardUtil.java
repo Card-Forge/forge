@@ -80,7 +80,7 @@ public final class CardUtil {
     }
 
     public static boolean isStackingKeyword(final String keyword) {
-        String kw = new String(keyword);
+        String kw = keyword;
         if (kw.startsWith("HIDDEN")) {
             kw = kw.substring(7);
         }
@@ -92,7 +92,7 @@ public final class CardUtil {
     public static String getShortColorsString(final Iterable<String> colors) {
         StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
-            colorDesc.append(MagicColor.toShortString(col) + " ");
+            colorDesc.append(MagicColor.toShortString(col)).append(" ");
         }
         return colorDesc.toString();
     }
@@ -251,8 +251,8 @@ public final class CardUtil {
         }
 
         // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost() + in.getSemiPermanentPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost() + in.getSemiPermanentToughnessBoost());
+        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
+        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
 
         newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
 
@@ -345,7 +345,7 @@ public final class CardUtil {
 
     // a nice entry point with minimum parameters
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
-        return getReflectableManaColors(sa, sa, Sets.<String>newHashSet(), new CardCollection());
+        return getReflectableManaColors(sa, sa, Sets.newHashSet(), new CardCollection());
     }
 
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
@@ -390,9 +390,7 @@ public final class CardUtil {
 
         // remove anything cards that is already in parents
         for (final Card p : parents) {
-            if (cards.contains(p)) {
-                cards.remove(p);
-            }
+            cards.remove(p);
         }
 
         if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
@@ -425,7 +423,7 @@ public final class CardUtil {
                 colors.add(MagicColor.Constant.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final FCollection<SpellAbility> abilities = new FCollection<SpellAbility>();
+            final FCollection<SpellAbility> abilities = new FCollection<>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbilities());
             }
@@ -506,9 +504,7 @@ public final class CardUtil {
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         for (final Card c : targeted) {
-            if (choices.contains(c)) {
-                choices.remove(c);
-            }
+            choices.remove(c);
         }
 
         // Remove cards exceeding total CMC

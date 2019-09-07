@@ -41,8 +41,8 @@ public class TargetChoices implements Cloneable {
 
     // Card or Player are legal targets.
     private final CardCollection targetCards = new CardCollection();
-    private final List<Player> targetPlayers = new ArrayList<Player>();
-    private final List<SpellAbility> targetSpells = new ArrayList<SpellAbility>();
+    private final List<Player> targetPlayers = new ArrayList<>();
+    private final List<SpellAbility> targetSpells = new ArrayList<>();
 
     public final int getNumTargeted() {
         return numTargeted;
@@ -117,7 +117,7 @@ public class TargetChoices implements Cloneable {
     }
 
     public final List<GameObject> getTargets() {
-        final List<GameObject> tgts = new ArrayList<GameObject>();
+        final List<GameObject> tgts = new ArrayList<>();
         tgts.addAll(targetPlayers);
         tgts.addAll(targetCards);
         tgts.addAll(targetSpells);

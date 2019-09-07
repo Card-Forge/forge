@@ -195,7 +195,7 @@ public final class NameGenerator {
 			"Coreshaker", "Forgewulf", "Sheepspear", "Elvenworm", "Lipswalker", "Sealight", "the Rotten"
 	};
 
-	private static List<String> usedMonikers = new ArrayList<String>();
+	private static List<String> usedMonikers = new ArrayList<>();
 	private static List<String> usedNames;
     private static String[] sourceList;
 
@@ -239,8 +239,8 @@ public final class NameGenerator {
         	break;
 
         default:
-        	List<String> all = new ArrayList<String>(
-        			genericMales.length + fantasyMales.length + genericFemales.length + fantasyFemales.length);
+        	List<String> all = new ArrayList<>(
+					genericMales.length + fantasyMales.length + genericFemales.length + fantasyFemales.length);
         	Collections.addAll(all, genericMales);
         	Collections.addAll(all, fantasyMales);
         	Collections.addAll(all, genericFemales);
@@ -272,7 +272,7 @@ public final class NameGenerator {
 	/** Generates a specified number of random names. */
 	public static List<String> getRandomNames(final int generateAmount, final List<String> excludeNames) {
 		usedNames = excludeNames;
-		final List<String> names = new ArrayList<String>(generateAmount);
+		final List<String> names = new ArrayList<>(generateAmount);
         for (int i = 0; i < generateAmount; i++) {
         	getRandomName("Any", "Any", usedNames);
         }
@@ -281,7 +281,7 @@ public final class NameGenerator {
 
 	/** Generates a single name that doesn't match any names in the supplied list. */
 	public static String getRandomName(final String gender, final String type, final String notNamed) {
-		List<String> exclude = new ArrayList<String>(1);
+		List<String> exclude = new ArrayList<>(1);
 		exclude.add(notNamed);
 		return getRandomName(gender, type, exclude);
 	}

@@ -61,17 +61,17 @@ public enum CProbabilities implements ICDoc {
         final ACEditorBase<T, TModel> ed = (ACEditorBase<T, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-        if (ed == null) { return new ArrayList<String>(); }
+        if (ed == null) { return new ArrayList<>(); }
 
         final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
-        final List<String> cardProbabilities = new ArrayList<String>();
+        final List<String> cardProbabilities = new ArrayList<>();
 
         final List<PaperCard> shuffled = deck.toFlatList();
         Collections.shuffle(shuffled, MyRandom.getRandom());
 
         // Log totals of each card for decrementing
-        final Map<PaperCard, Integer> cardTotals = new HashMap<PaperCard, Integer>();
+        final Map<PaperCard, Integer> cardTotals = new HashMap<>();
         for (final PaperCard c : shuffled) {
             if (cardTotals.containsKey(c)) { cardTotals.put(c, cardTotals.get(c) + 1); }
             else { cardTotals.put(c, 1); }

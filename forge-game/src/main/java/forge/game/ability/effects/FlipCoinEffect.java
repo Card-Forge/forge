@@ -35,7 +35,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
         sb.append(player).append(" flips a coin.");
         if (tgts != null && !tgts.isEmpty()) {
-        	sb.append(" Targeting: " + tgts + ".");
+        	sb.append(" Targeting: ").append(tgts).append(".");
         }
         return sb.toString();
     }

@@ -20,7 +20,7 @@ public class RunSVarAbilityEffect extends SpellAbilityEffect {
         if (sVars == null || cards.isEmpty()) {
         	return;
         }
-        List<SpellAbility> validSA = new ArrayList<SpellAbility>();
+        List<SpellAbility> validSA = new ArrayList<>();
         final boolean isTrigger = sa.hasParam("IsTrigger");
         for (final Card tgtC : cards) {
             if (!tgtC.hasSVar(sVars)) {

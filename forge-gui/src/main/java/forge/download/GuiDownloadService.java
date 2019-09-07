@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -29,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -265,7 +267,9 @@ public abstract class GuiDownloadService implements Runnable {
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
             //decode URL Key
-            String decodedKey = URLDecoder.decode(kv.getKey());
+            String decodedKey = "";
+            try { decodedKey = URLDecoder.decode(kv.getKey(), StandardCharsets.UTF_8.toString()); }
+            catch (UnsupportedEncodingException e) { Log.error("UTF-8 is unknown", e); }
             final File fileDest = new File(decodedKey);
             final String filePath = fileDest.getPath();
             final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";

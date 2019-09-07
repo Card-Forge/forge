@@ -35,7 +35,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -156,7 +155,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
-        final List<ItemTableColumn> columns = new LinkedList<ItemTableColumn>();
+        final List<ItemTableColumn> columns = new LinkedList<>();
         for (final ItemColumnConfig colConfig : config.getCols().values()) {
             if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
                 columns.add(new ItemTableColumn(new ItemColumn(colConfig)));
@@ -165,8 +164,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 columns.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(columns, new Comparator<ItemTableColumn>() {
-            @Override public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
+        columns.sort(new Comparator<ItemTableColumn>() {
+            @Override
+            public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
                 return Integer.compare(arg0.getIndex(), arg1.getIndex());
             }
         });
@@ -287,7 +287,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public Iterable<Integer> getSelectedIndices() {
-        final List<Integer> indices = new ArrayList<Integer>();
+        final List<Integer> indices = new ArrayList<>();
         final int[] selectedRows = this.table.getSelectedRows();
         for (int i = 0; i < selectedRows.length; i++) {
             indices.add(selectedRows[i]);

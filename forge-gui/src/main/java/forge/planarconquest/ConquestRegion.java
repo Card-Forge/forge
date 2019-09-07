@@ -73,7 +73,7 @@ public class ConquestRegion {
     }
 
     public FCollectionView<PaperCard> getCommanders() {
-        FCollection<PaperCard> commanders = new FCollection<PaperCard>();
+        FCollection<PaperCard> commanders = new FCollection<>();
         for (PaperCard commander : plane.getCommanders()) {
             if (cardPool.contains(commander)) {
                 commanders.add(commander);
@@ -172,7 +172,7 @@ public class ConquestRegion {
     }
 
     public static Set<ConquestRegion> getAllRegionsOfCard(PaperCard card) {
-        Set<ConquestRegion> regions = new HashSet<ConquestRegion>();
+        Set<ConquestRegion> regions = new HashSet<>();
         for (ConquestPlane plane : FModel.getPlanes()) {
             if (plane.getCardPool().contains(card)) {
                 for (ConquestRegion region : plane.getRegions()) {
@@ -186,7 +186,7 @@ public class ConquestRegion {
     }
 
     public static List<ConquestRegion> getAllRegions() {
-        List<ConquestRegion> regions = new ArrayList<ConquestRegion>();
+        List<ConquestRegion> regions = new ArrayList<>();
         for (ConquestPlane plane : FModel.getPlanes()) {
             for (ConquestRegion region : plane.getRegions()) {
                 regions.add(region);

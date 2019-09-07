@@ -713,7 +713,7 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
-        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        final Map<String, Object> runParams = new TreeMap<>();
         runParams.put("Player", p);
         getTriggerHandler().runTriggerOld(TriggerType.LosesGame, runParams, false);
     }
@@ -845,7 +845,7 @@ public class Game {
                     }
                 }
                 
-                library.removeAll((Collection<?>)toRemove);
+                library.removeAll(toRemove);
                 
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));

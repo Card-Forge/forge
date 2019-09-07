@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 public class DeckPreferences {
     private static String selectedDeckType = "", currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "",
             oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
-    private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
+    private static Map<String, DeckPreferences> allPrefs = new HashMap<>();
 
     public static DeckType getSelectedDeckType() {
         return selectedDeckType.isEmpty() ? DeckType.CONSTRUCTED_DECK : DeckType.valueOf(selectedDeckType);

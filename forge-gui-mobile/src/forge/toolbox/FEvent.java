@@ -36,7 +36,7 @@ public class FEvent {
         return args;
     }
 
-    public static interface FEventHandler {
+    public interface FEventHandler {
         void handleEvent(FEvent e);
     }
 }

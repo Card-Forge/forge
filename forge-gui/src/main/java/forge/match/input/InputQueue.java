@@ -33,7 +33,7 @@ import forge.player.PlayerControllerHuman;
  * @version $Id: InputQueue.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputQueue extends Observable {
-    private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
+    private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<>();
     private final Game game;
 
     public InputQueue(final Game game, final InputProxy inputProxy) {

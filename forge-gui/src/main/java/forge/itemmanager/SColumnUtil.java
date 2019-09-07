@@ -34,7 +34,7 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 public final class SColumnUtil {
     public static Map<ColumnDef, ItemColumnConfig> getColumns(Iterable<ColumnDef> colDefs) {
         int i = 0;
-        final Map<ColumnDef, ItemColumnConfig> columns = new HashMap<ColumnDef, ItemColumnConfig>();
+        final Map<ColumnDef, ItemColumnConfig> columns = new HashMap<>();
         for (ColumnDef colDef : colDefs) {
             ItemColumnConfig column = new ItemColumnConfig(colDef);
             column.setIndex(i++);
@@ -44,7 +44,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getStringColumn() {
-        Map<ColumnDef, ItemColumnConfig> columns = new HashMap<ColumnDef, ItemColumnConfig>();
+        Map<ColumnDef, ItemColumnConfig> columns = new HashMap<>();
         ItemColumnConfig column = new ItemColumnConfig(ColumnDef.STRING);
         column.setSortPriority(1);
         columns.put(ColumnDef.STRING, column);
@@ -56,7 +56,7 @@ public final class SColumnUtil {
     }
     private static Map<ColumnDef, ItemColumnConfig> getCardColumns(ColumnDef quantityColDef, boolean includeFavorite,
             boolean includeOwned, boolean includePrice, boolean includeNew, boolean includeDecks) {
-        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<>();
         if (includeFavorite) {
             colDefs.add(ColumnDef.FAVORITE);
         }
@@ -128,7 +128,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getSpecialCardPoolDefaultColumns() {
-        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.FAVORITE);
         colDefs.add(ColumnDef.NAME);
         colDefs.add(ColumnDef.TYPE);
@@ -195,7 +195,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getConquestCommandersDefaultColumns() {
-        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.NAME);
         colDefs.add(ColumnDef.COLOR);
 
@@ -206,7 +206,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
-        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
             colDefs.add(ColumnDef.DECK_ACTIONS);

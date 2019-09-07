@@ -151,7 +151,7 @@ public class ListChooser<T> extends FContainer {
                     show(); //show if user tries to cancel when input is mandatory
                 }
                 else {
-                    callback.run(new ArrayList<T>());
+                    callback.run(new ArrayList<>());
                 }
             }
         }) {
@@ -179,7 +179,7 @@ public class ListChooser<T> extends FContainer {
     public void applyFilters() {
         lstChoices.clearSelection();
 
-        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        List<Predicate<? super T>> predicates = new ArrayList<>();
 
         final String pattern = txtSearch.getText().toLowerCase();
         if (!pattern.isEmpty()) {

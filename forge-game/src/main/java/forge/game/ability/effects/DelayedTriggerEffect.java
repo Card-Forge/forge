@@ -30,9 +30,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
-        if (mapParams.containsKey("Cost")) {
-            mapParams.remove("Cost");
-        }
+        mapParams.remove("Cost");
 
         if (mapParams.containsKey("SpellDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));

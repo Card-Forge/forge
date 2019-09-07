@@ -7,7 +7,7 @@ import com.google.common.base.Function;
 import forge.item.InventoryItem;
 
 public class ItemColumnConfig {
-    public static enum SortState {
+    public enum SortState {
         NONE,
         ASC,
         DESC

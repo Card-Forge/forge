@@ -39,7 +39,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
     @Override
     protected final Map<String, String> getNeededFiles() {
         File f = new File(ForgeConstants.CACHE_CARD_PICS_DIR);
-        existingImages = new ArrayList<String>(Arrays.asList(f.list()));
+        existingImages = new ArrayList<>(Arrays.asList(f.list()));
         existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {

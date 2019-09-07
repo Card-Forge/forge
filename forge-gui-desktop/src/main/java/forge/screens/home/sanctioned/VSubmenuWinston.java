@@ -47,7 +47,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     private final StartButton btnStart  = new StartButton();
 
     private final DeckManager lstDecks = new DeckManager(GameType.Winston, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-    private final JList<String> lstAI = new FList<String>();
+    private final JList<String> lstAI = new FList<>();
 
     private final JLabel lblInfo = new FLabel.Builder()
             .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

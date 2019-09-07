@@ -95,15 +95,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             }
         }
 
-        if (totalMana() == safeMana) {
-            return false; //won't lose floating mana if all mana is of colors that aren't going to be emptied
-        }
-        return true;
+        return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
     public final List<Mana> clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
-        List<Mana> cleared = new ArrayList<Mana>();
+        List<Mana> cleared = new ArrayList<>();
         if (floatingMana.isEmpty()) { return cleared; }
 
         if (isEndOfPhase && owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
@@ -128,7 +125,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         for (Byte b : keys) {
             Collection<Mana> cm = floatingMana.get(b);
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
-                final List<Mana> pMana = new ArrayList<Mana>();
+                final List<Mana> pMana = new ArrayList<>();
                 for (final Mana mana : cm) {
                     if (mana.getManaAbility()!= null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
@@ -162,7 +159,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     private void convertManaColor(final byte originalColor, final byte toColor) {
-        List<Mana> convert = new ArrayList<Mana>();
+        List<Mana> convert = new ArrayList<>();
         Collection<Mana> cm = floatingMana.get(originalColor);
         for (Mana m : cm) {
             convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility()));
@@ -290,7 +287,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false;
         }
 
-        final List<Mana> removeFloating = new ArrayList<Mana>();
+        final List<Mana> removeFloating = new ArrayList<>();
 
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
@@ -370,7 +367,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         // TODO The following may not be needed anymore?
-        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) (byte)ManaAtom.COLORLESS)) {
+        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte)ManaAtom.COLORLESS)) {
             return true;
         }
 

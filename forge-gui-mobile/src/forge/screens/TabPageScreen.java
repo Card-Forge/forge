@@ -32,7 +32,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     }
 
     public TabPageScreen(TabPage<T>[] tabPages0, boolean showBackButton) {
-        this(new TabHeader<T>(tabPages0, showBackButton));
+        this(new TabHeader<>(tabPages0, showBackButton));
     }
 
     public TabPageScreen(TabHeader<T> tabHeader0) {
@@ -44,7 +44,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
     public TabPageScreen(String headerCaption, FPopupMenu menu, TabPage<T>[] tabPages0) {
         super(headerCaption, menu);
-        tabHeader = add(new TabHeader<T>(tabPages0, false));
+        tabHeader = add(new TabHeader<>(tabPages0, false));
         tabHeader.showBottomBorder = false;
         tabPages = tabHeader.tabPages;
         initialize();
@@ -52,7 +52,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
     public TabPageScreen(String headerCaption, FPopupMenu menu, TabPage<T>[] tabPages0, boolean alwaysRenderHorizontal) {
         super(headerCaption, menu);
-        tabHeader = add(new TabHeader<T>(tabPages0, false));
+        tabHeader = add(new TabHeader<>(tabPages0, false));
         tabHeader.showBottomBorder = false;
         tabHeader.alwaysRenderHorizontal = alwaysRenderHorizontal;
         tabPages = tabHeader.tabPages;

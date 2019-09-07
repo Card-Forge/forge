@@ -223,7 +223,7 @@ public final class FServerManager {
             NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
             Enumeration<InetAddress> en = n.getInetAddresses();
             while (en.hasMoreElements()) {
-                InetAddress addr = (InetAddress) en.nextElement();
+                InetAddress addr = en.nextElement();
                 if (addr instanceof Inet4Address) {
                     if (preferIPv6) {
                         continue;

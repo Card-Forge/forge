@@ -65,7 +65,7 @@ public class MatchController extends AbstractGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
-    private static final Map<String, FImage> avatarImages = new HashMap<String, FImage>();
+    private static final Map<String, FImage> avatarImages = new HashMap<>();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
@@ -116,7 +116,7 @@ public class MatchController extends AbstractGuiGame {
         final boolean noHumans = !hasLocalPlayers();
 
         final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();
-        final List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
+        final List<VPlayerPanel> playerPanels = new ArrayList<>();
         for (final PlayerView p : allPlayers) {
             final boolean isLocal = isLocalPlayer(p);
             final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, allPlayers.size());

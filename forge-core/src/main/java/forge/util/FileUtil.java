@@ -196,7 +196,7 @@ public final class FileUtil {
     public static List<String> readFile(final File file) {
         try {
             if ((file == null) || !file.exists()) {
-                return new ArrayList<String>();
+                return new ArrayList<>();
             }
             return FileUtil.readAllLines(new FileReader(file), false);
         } catch (final Exception ex) {
@@ -222,7 +222,7 @@ public final class FileUtil {
      * @return list of strings
      */
     public static List<String> readAllLines(final Reader reader, final boolean mayTrim) {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
         try {
             final BufferedReader in = new BufferedReader(reader);
             String line;
@@ -244,7 +244,7 @@ public final class FileUtil {
         Pattern lineSplitter = Pattern.compile(Pattern.quote(" "));
         Pattern replacer = Pattern.compile(Pattern.quote("%20"));
 
-        List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
+        List<Pair<String, String>> list = new ArrayList<>();
 
         for (String line : readFile(nameUrlFile)) {
             if (StringUtils.isBlank(line) || line.startsWith("#")) {
@@ -271,7 +271,7 @@ public final class FileUtil {
     }
 
     public static List<String> readFile(final URL url) {
-        final List<String> lines = new ArrayList<String>();
+        final List<String> lines = new ArrayList<>();
         ThreadUtil.executeWithTimeout(new Callable<Void>() {
             @Override
             public Void call() throws Exception {

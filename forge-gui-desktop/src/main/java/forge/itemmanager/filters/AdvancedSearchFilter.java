@@ -38,7 +38,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     public AdvancedSearchFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
-        model = new AdvancedSearch.Model<T>();
+        model = new AdvancedSearch.Model<>();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     @Override
     public ItemFilter<T> createCopy() {
-        return new AdvancedSearchFilter<T>(itemManager);
+        return new AdvancedSearchFilter<>(itemManager);
     }
 
     @Override

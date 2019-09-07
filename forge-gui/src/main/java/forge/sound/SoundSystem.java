@@ -23,8 +23,8 @@ public class SoundSystem {
     public static final int DELAY = 30;
 
     private static final IAudioClip emptySound = new NoSoundClip();
-    private static final Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
-    private static final Map<String, IAudioClip> loadedScriptClips = new HashMap<String, IAudioClip>();
+    private static final Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<>(SoundEffectType.class);
+    private static final Map<String, IAudioClip> loadedScriptClips = new HashMap<>();
 
     private final EventVisualizer visualizer;
 

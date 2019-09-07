@@ -135,8 +135,7 @@ public class CardRanker {
     }
 
     private static List<PaperCard> getCardsExceptOne(List<PaperCard> cache, int i) {
-        List<PaperCard> otherCards = new ArrayList<>();
-        otherCards.addAll(cache.subList(0, i));
+        List<PaperCard> otherCards = new ArrayList<>(cache.subList(0, i));
         if (i + 1 < cache.size()) {
             otherCards.addAll(cache.subList(i + 1, cache.size()));
         }
@@ -171,7 +170,7 @@ public class CardRanker {
     }
 
     private static List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
-        Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
+        cardScores.sort(Collections.reverseOrder(new CardRankingComparator()));
 
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
         for (Pair<Double, PaperCard> pair : cardScores) {

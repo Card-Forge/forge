@@ -22,7 +22,7 @@ import forge.util.Utils;
 public class ConquestStatsScreen extends FScreen implements IVConquestStats {
     private static final float PADDING = Utils.scale(5f);
 
-    private final FComboBox<Object> cbPlanes = add(new FComboBox<Object>());
+    private final FComboBox<Object> cbPlanes = add(new FComboBox<>());
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {

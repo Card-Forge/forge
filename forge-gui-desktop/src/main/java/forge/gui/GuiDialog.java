@@ -35,7 +35,7 @@ public class GuiDialog {
                 return Boolean.valueOf(answer == 0);
             }};
 
-        final FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
+        final FutureTask<Boolean> future = new FutureTask<>(confirmTask);
         FThreads.invokeInEdtAndWait(future);
         try {
             return future.get().booleanValue();

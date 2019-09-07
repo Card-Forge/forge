@@ -363,7 +363,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getPlayerContains() != null) {
-            List<Player> list = new ArrayList<Player>();
+            List<Player> list = new ArrayList<>();
             if (this.getPlayerDefined() != null) {
                 list.addAll(AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerDefined(), sa));
             }

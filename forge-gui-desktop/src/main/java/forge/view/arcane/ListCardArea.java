@@ -62,9 +62,9 @@ public class ListCardArea extends FloatingCardArea {
 	if (storedArea==null) {
 	    storedArea = new ListCardArea(matchUI);
 	}
-	cardList = new ArrayList<CardView>();
+	cardList = new ArrayList<>();
 	for ( CardView cv : cardList0 ) { cardList.add(cv) ; } 
-	moveableCards = new ArrayList<CardView>();  // make sure moveable cards are in cardlist
+	moveableCards = new ArrayList<>();  // make sure moveable cards are in cardlist
 	for ( CardView card : moveableCards0 ) {
 	    if ( cardList.contains(card) ) {
 		moveableCards.add(card);
@@ -90,8 +90,8 @@ public class ListCardArea extends FloatingCardArea {
 		@Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
 	    });
 	window.add(doneButton,BorderLayout.SOUTH);
-	cardList = new ArrayList<CardView>(cardList0);  // this is modified - pfps - is there a better way?
-	moveableCards = new ArrayList<CardView>(moveableCards0);
+	cardList = new ArrayList<>(cardList0);  // this is modified - pfps - is there a better way?
+	moveableCards = new ArrayList<>(moveableCards0);
 	title = title0;
 	toTop = toTop0;
 	toBottom = toBottom0;

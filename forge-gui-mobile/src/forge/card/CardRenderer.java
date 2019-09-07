@@ -133,7 +133,7 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static final Map<String, FImageComplex> cardArtCache = new HashMap<String, FImageComplex>();
+    private static final Map<String, FImageComplex> cardArtCache = new HashMap<>();
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
 
@@ -651,7 +651,7 @@ public class CardRenderer {
     private static void drawPtBox(Graphics g, CardView card, CardStateView details, Color color, float x, float y, float w, float h) {
         //use array of strings to render separately with a tiny amount of space in between
         //instead of using actual spaces which are too wide
-        List<String> pieces = new ArrayList<String>();
+        List<String> pieces = new ArrayList<>();
         if (details.isCreature()) {
             pieces.add(String.valueOf(details.getPower()));
             pieces.add("/");
@@ -678,7 +678,7 @@ public class CardRenderer {
         FSkinFont font = FSkinFont.forHeight(h * 0.15f);
         float padding = Math.round(font.getCapHeight() / 4);
         float boxWidth = padding;
-        List<Float> pieceWidths = new ArrayList<Float>();
+        List<Float> pieceWidths = new ArrayList<>();
         for (String piece : pieces) {
             float pieceWidth = font.getBounds(piece).width + padding;
             pieceWidths.add(pieceWidth);

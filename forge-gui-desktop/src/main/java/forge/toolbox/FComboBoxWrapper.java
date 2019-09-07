@@ -23,7 +23,7 @@ import forge.toolbox.FSkin.SkinFont;
  */
 public class FComboBoxWrapper<E> implements IComboBox<E> {
 
-    private static final List<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
+    private static final List<FComboBoxWrapper<?>> allWrappers = new ArrayList<>();
 
     public static void refreshAllSkins() {
         for (final FComboBoxWrapper<?> wrapper : allWrappers) {
@@ -37,7 +37,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
 
     public FComboBoxWrapper() {
         super();
-        comboBox = new FComboBox<E>();
+        comboBox = new FComboBox<>();
         allWrappers.add(this);
     }
 
@@ -209,7 +209,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         }
 
         //create copy of combo box
-        final FComboBox<E> newComboBox = new FComboBox<E>();
+        final FComboBox<E> newComboBox = new FComboBox<>();
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             newComboBox.addItem(comboBox.getItemAt(i));
         }

@@ -1,5 +1,6 @@
 package forge.game;
 
+import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -15,6 +16,8 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -159,9 +162,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      */
     public final boolean isSecondary() {
         if (this.mapParams.containsKey("Secondary")) {
-            if (this.mapParams.get("Secondary").equals("True")) {
-                return true;
-            }
+            return this.mapParams.get("Secondary").equals("True");
         }
         return false;
     }
@@ -251,6 +252,16 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
         if (params.containsKey("Blessing")) {
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
+        }
+        
+        if (params.containsKey("Adamant")) {
+            if (hostCard.getCastSA() == null) {
+                return false;
+            }
+            final String payingMana = StringUtils.join(hostCard.getCastSA().getPayingMana());
+            if (StringUtils.countMatches(payingMana, MagicColor.toShortString(params.get("Adamant"))) < 3) {
+                return false;
+            }
         }
 
         if (params.containsKey("Presence")) {
@@ -451,9 +462,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
         if (params.containsKey("ActivateNoLoyaltyAbilitiesCondition")) {
             final Player active = game.getPhaseHandler().getPlayerTurn();
-            if (active.getActivateLoyaltyAbilityThisTurn()) {
-                return false;
-            }
+            return !active.getActivateLoyaltyAbilityThisTurn();
         }
         return true;
     }

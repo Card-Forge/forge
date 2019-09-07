@@ -27,7 +27,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     @Override
     public ItemFilter<T> createCopy() {
-        TextSearchFilter<T> copy = new TextSearchFilter<T>(itemManager);
+        TextSearchFilter<T> copy = new TextSearchFilter<>(itemManager);
         copy.getWidget(); //initialize widget
         copy.txtSearch.setText(this.txtSearch.getText());
         return copy;

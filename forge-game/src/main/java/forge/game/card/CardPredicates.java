@@ -214,7 +214,7 @@ public final class CardPredicates {
                 return c.canBeSacrificedBy(sa);
             }
         };
-    };
+    }
 
     public static final Predicate<Card> canBeAttached(final Card aura) {
         return new Predicate<Card>() {
@@ -223,7 +223,7 @@ public final class CardPredicates {
                 return c.canBeAttached(aura);
             }
         };
-    };
+    }
 
     public static final Predicate<Card> isColor(final byte color) {
         return new Predicate<Card>() {

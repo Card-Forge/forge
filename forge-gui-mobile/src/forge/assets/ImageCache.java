@@ -51,7 +51,7 @@ import java.util.concurrent.TimeUnit;
 public class ImageCache {
     // short prefixes to save memory
 
-    private static final Set<String> missingIconKeys = new HashSet<String>();
+    private static final Set<String> missingIconKeys = new HashSet<>();
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
             .maximumSize(400)
             .expireAfterAccess(15,TimeUnit.MINUTES)

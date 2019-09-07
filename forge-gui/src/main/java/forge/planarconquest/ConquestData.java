@@ -51,11 +51,11 @@ public final class ConquestData {
     private int planeswalkEmblems;
 
     private final ConquestRecord chaosBattleRecord;
-    private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<String, ConquestPlaneData>();
-    private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
-    private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
-    private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
-    private final HashSet<PaperCard> exiledCards = new HashSet<PaperCard>();
+    private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<>();
+    private final HashSet<PaperCard> unlockedCards = new HashSet<>();
+    private final List<ConquestCommander> commanders = new ArrayList<>();
+    private final HashSet<PaperCard> newCards = new HashSet<>();
+    private final HashSet<PaperCard> exiledCards = new HashSet<>();
 
     public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
@@ -153,7 +153,7 @@ public final class ConquestData {
     }
 
     public Iterable<PaperCard> getSortedPlaneswalkers() {
-        List<PaperCard> planeswalkers = new ArrayList<PaperCard>();
+        List<PaperCard> planeswalkers = new ArrayList<>();
         for (PaperCard card : unlockedCards) {
             if (card.getRules().getType().isPlaneswalker() && !isInExile(card)) {
                 planeswalkers.add(card);
@@ -270,14 +270,14 @@ public final class ConquestData {
 
         List<ConquestCommander> commandersBeingExiled = null;
 
-        String message = "Exile the following " + cardStr + " to receive {AE}" + value + "?\n";
+        StringBuilder message = new StringBuilder("Exile the following " + cardStr + " to receive {AE}" + value + "?\n");
         for (PaperCard card : cards) {
             if (planeswalker == card) {
                 SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            String commandersUsingCard = "";
+            StringBuilder commandersUsingCard = new StringBuilder();
             for (ConquestCommander commander : commanders) {
                 if (commander.getCard() == card) {
                     if (!commander.getDeck().getMain().isEmpty()) {
@@ -285,24 +285,24 @@ public final class ConquestData {
                         return false;
                     }
                     if (commandersBeingExiled == null) {
-                        commandersBeingExiled = new ArrayList<ConquestCommander>();
+                        commandersBeingExiled = new ArrayList<>();
                     }
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
                 if (commander.getDeck().getMain().contains(card)) {
-                    commandersUsingCard += "\n" + commander.getName();
+                    commandersUsingCard.append("\n").append(commander.getName());
                 }
             }
 
-            if (!commandersUsingCard.isEmpty()) {
+            if (commandersUsingCard.length() > 0) {
                 SOptionPane.showMessageDialog(card.getName() + " is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            message += "\n" + card.getName();
+            message.append("\n").append(card.getName());
         }
 
-        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
             if (exiledCards.addAll(cards)) {
                 if (commandersBeingExiled != null) {
                     commanders.removeAll(commandersBeingExiled);
@@ -326,11 +326,11 @@ public final class ConquestData {
             return false;
         }
 
-        String message = "Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n";
+        StringBuilder message = new StringBuilder("Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n");
         for (PaperCard card : cards) {
-            message += "\n" + card.getName();
+            message.append("\n").append(card.getName());
         }
-        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
             if (exiledCards.removeAll(cards)) {
                 for (PaperCard card : cards) {
                     if (card.getRules().canBeCommander()) { //add back commander for card if needed
@@ -537,7 +537,7 @@ public final class ConquestData {
     };
 
     public static Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
-        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
         return colOverrides;
     }
@@ -548,8 +548,8 @@ public final class ConquestData {
     }
 
     private class PathFinder {
-        private final HashSet<Node> closedSet = new HashSet<Node>();
-        private final HashSet<Node> openSet = new HashSet<Node>();
+        private final HashSet<Node> closedSet = new HashSet<>();
+        private final HashSet<Node> openSet = new HashSet<>();
         private final Node[][] map;
 
         private PathFinder() {
@@ -585,7 +585,7 @@ public final class ConquestData {
 
                 //if we've reach goal, reconstruct path and return it
                 if (current == goal) {
-                    List<ConquestLocation> path = new ArrayList<ConquestLocation>();
+                    List<ConquestLocation> path = new ArrayList<>();
                     while (current != null) {
                         path.add(current.loc);
                         current = current.came_from;

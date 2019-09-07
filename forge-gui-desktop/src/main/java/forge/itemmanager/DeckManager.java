@@ -108,7 +108,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
             final ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
             column.setCellRenderer(new DeckActionsRenderer());
-            colOverrides = new HashMap<ColumnDef, ItemTableColumn>();
+            colOverrides = new HashMap<>();
             colOverrides.put(ColumnDef.DECK_ACTIONS, column);
         }
         super.setup(config0, colOverrides);
@@ -307,7 +307,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                     filter.edit();
                 }
                 else {
-                    filter = new AdvancedSearchFilter<DeckProxy>(DeckManager.this);
+                    filter = new AdvancedSearchFilter<>(DeckManager.this);
                     lockFiltering = true; //ensure filter not applied until added
                     boolean result = filter.edit();
                     lockFiltering = false;

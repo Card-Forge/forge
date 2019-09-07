@@ -206,7 +206,7 @@ public class ConquestUtil {
         }
     }
 
-    public static enum AEtherFilter implements IHasSkinProp {
+    public enum AEtherFilter implements IHasSkinProp {
         C (null, new ColorFilter(MagicColor.COLORLESS), "Playable in {C}"),
         W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
         U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
@@ -262,7 +262,7 @@ public class ConquestUtil {
         private final Predicate<PaperCard> predicate;
         private String caption;
 
-        private AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
+        AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
             skinProp = skinProp0;
             predicate = predicate0;
             caption = caption0;
@@ -311,13 +311,13 @@ public class ConquestUtil {
     }
 
     public static AEtherFilter getColorFilter(ColorSet color) {
-        String name = "";
+        StringBuilder name = new StringBuilder();
         for (ManaCostShard s : color.getOrderedShards()) {
-            name += s.toString();
+            name.append(s.toString());
         }
-        name = name.replaceAll("[{}]", ""); //remove all brackets
+        name = new StringBuilder(name.toString().replaceAll("[{}]", "")); //remove all brackets
         try {
-            return AEtherFilter.valueOf(name);
+            return AEtherFilter.valueOf(name.toString());
         }
         catch (Exception e) {
             System.err.println("No color filter with name " + name);
@@ -462,7 +462,7 @@ public class ConquestUtil {
             double baseOdds = 0;
             double remainingOdds = 1;
             CardRarity baseRarity = null;
-            String caption = "";
+            StringBuilder caption = new StringBuilder();
 
             for (CardRarity rarity : rarityOdds.keySet()) {
                 Double odds = oddsLookup.get(rarity);
@@ -479,16 +479,16 @@ public class ConquestUtil {
                     final String display = rounded < 1d
                             ? Double.toString(rounded) // Display decimal if < 1%
                             : Long.toString(Math.round(rounded));
-                    caption += ", " + rarity.getLongName() + " (" + display + "%)";
+                    caption.append(", ").append(rarity.getLongName()).append(" (").append(display).append("%)");
                     rarityOdds.put(rarity, odds);
                 }
             }
 
             //prepend base rarity and odds
-            caption = baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)" + caption;
+            caption.insert(0, baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)");
             rarityOdds.put(baseRarity, remainingOdds);
 
-            return caption;
+            return caption.toString();
         }
 
         @Override
@@ -509,8 +509,7 @@ public class ConquestUtil {
         public boolean apply(PaperCard card) {
             int cardCmc = card.getRules().getManaCost().getCMC();
             if (cardCmc < cmcMin) { return false; }
-            if (cmcMax != -1 && cardCmc > cmcMax) { return false; }
-            return true;
+            return cmcMax == -1 || cardCmc <= cmcMax;
         }
     }
 }

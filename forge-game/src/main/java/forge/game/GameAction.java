@@ -763,7 +763,7 @@ public class GameAction {
         checkStaticAbilities(true);
     }
     public final void checkStaticAbilities(final boolean runEvents) {
-        checkStaticAbilities(runEvents, Sets.<Card>newHashSet(), CardCollection.EMPTY);
+        checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
         if (isCheckingStaticAbilitiesOnHold()) {
@@ -787,7 +787,7 @@ public class GameAction {
         }
 
         // search for cards with static abilities
-        final FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
+        final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
 
         game.forEachCardInGame(new Visitor<Card>() {
@@ -880,6 +880,10 @@ public class GameAction {
             c.getStaticCommandList().removeAll(toRemove);
         }
         // Exclude cards in hidden zones from update
+        /*
+         * Refactoring this code to affectedCards.removeIf((Card c) -> c.isInZone(ZoneType.Library));
+         * causes Android build not to compile
+         * */
         Iterator<Card> it = affectedCards.iterator();
         while (it.hasNext()) {
             Card c = it.next();
@@ -929,7 +933,7 @@ public class GameAction {
     }
 
     public final void checkStateEffects(final boolean runEvents) {
-        checkStateEffects(runEvents, Sets.<Card>newHashSet());
+        checkStateEffects(runEvents, Sets.newHashSet());
     }
     public final void checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
         // sol(10/29) added for Phase updates, state effects shouldn't be

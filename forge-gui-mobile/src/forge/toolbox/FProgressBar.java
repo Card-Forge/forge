@@ -119,7 +119,7 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         float h = getHeight();
 
         //draw background and progress
-        List<Pair<Float, Float>> selTextRegions = new ArrayList<Pair<Float, Float>>();
+        List<Pair<Float, Float>> selTextRegions = new ArrayList<>();
         if (showProgressTrail) {
             long now = new Date().getTime();
             if (progressTrailStart == -1) {

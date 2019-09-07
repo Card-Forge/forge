@@ -49,7 +49,7 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
         //use special technique for getting unique cards so that cards without art aren't shown
-        HashMap<String, Entry<PaperCard, Integer>> map = new HashMap<String, Entry<PaperCard, Integer>>();
+        HashMap<String, Entry<PaperCard, Integer>> map = new HashMap<>();
         for (Entry<PaperCard, Integer> item : items) {
             final String key = item.getKey().getName();
             final Entry<PaperCard, Integer> oldValue = map.get(key);
@@ -218,7 +218,7 @@ public class CardManager extends ItemManager<PaperCard> {
                     filter.edit();
                 }
                 else {
-                    filter = new AdvancedSearchFilter<PaperCard>(itemManager);
+                    filter = new AdvancedSearchFilter<>(itemManager);
                     itemManager.lockFiltering = true; //ensure filter not applied until added
                     boolean result = filter.edit();
                     itemManager.lockFiltering = false;

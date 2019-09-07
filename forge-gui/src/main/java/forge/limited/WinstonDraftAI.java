@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.deck.CardPool;
-import forge.item.PaperCard;
 import forge.util.MyRandom;
 
 public class WinstonDraftAI extends BoosterDraftAI{
@@ -25,7 +24,7 @@ public class WinstonDraftAI extends BoosterDraftAI{
         this.decks.clear();
         this.playerColors.clear();
         for (int i = 0; i < N_DECKS; i++) {
-            this.decks.add(new ArrayList<PaperCard>());
+            this.decks.add(new ArrayList<>());
             this.playerColors.add(new DeckColors());
         }
     }

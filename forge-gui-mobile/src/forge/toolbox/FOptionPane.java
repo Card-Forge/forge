@@ -173,7 +173,7 @@ public class FOptionPane extends FDialog {
         }
         else {
             txtInput = null;
-            cbInput = new FComboBox<T>(inputOptions);
+            cbInput = new FComboBox<>(inputOptions);
             cbInput.setSelectedItem(initialInput);
             inputField = cbInput;
         }

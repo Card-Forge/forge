@@ -40,7 +40,7 @@ public enum GlobalRuleChange {
     
     private final String ruleText;
 
-    private GlobalRuleChange(String text) {
+    GlobalRuleChange(String text) {
         ruleText = text;
     }
 

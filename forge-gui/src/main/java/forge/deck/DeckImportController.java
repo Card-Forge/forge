@@ -19,7 +19,7 @@ public class DeckImportController {
     private final ICheckBox newEditionCheck, dateTimeCheck, onlyCoreExpCheck;
     private final IComboBox<String> monthDropdown;
     private final IComboBox<Integer> yearDropdown;
-    private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
+    private final List<DeckRecognizer.Token> tokens = new ArrayList<>();
 
     public DeckImportController(boolean replacingDeck0, ICheckBox newEditionCheck0, ICheckBox dateTimeCheck0, ICheckBox onlyCoreExpCheck0, IComboBox<String> monthDropdown0, IComboBox<Integer> yearDropdown0) {
         replacingDeck = replacingDeck0;

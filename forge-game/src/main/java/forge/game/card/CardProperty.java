@@ -27,8 +27,7 @@ import java.util.List;
 
 public class CardProperty {
 
-    public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source,
-            SpellAbility spellAbility) {
+    public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, SpellAbility spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
         // lki can't be null but it does return this
@@ -40,7 +39,7 @@ public class CardProperty {
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // for some legendary cards
             if (!card.sharesNameWith(name)) {
                 return false;
-            }   
+            }
         } else if (property.startsWith("notnamed")) {
             if (card.sharesNameWith(property.substring(8))) {
                 return false;
@@ -1115,9 +1114,9 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DrawnThisTurn")) {
-          if (!card.getDrawnThisTurn()) {
-              return false;
-          }
+            if (!card.getDrawnThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
             if (!(card.getTurnInZone() == game.getPhaseHandler().getTurn())) {
                 return false;
@@ -1749,7 +1748,7 @@ public class CardProperty {
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             // lki last zone does fall back to this zone
             final Zone lkiZone = lki.getLastKnownZone();
-            
+
             if (lkiZone == null || !lkiZone.is(realZone)) {
                 return false;
             }

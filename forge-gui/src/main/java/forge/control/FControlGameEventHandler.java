@@ -32,10 +32,10 @@ import forge.util.maps.MapOfLists;
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final PlayerControllerHuman humanController;
     private final IGuiGame matchController;
-    private final Set<CardView> cardsUpdate = new HashSet<CardView>();
-    private final Set<CardView> cardsRefreshDetails = new HashSet<CardView>();
-    private final Set<PlayerView> livesUpdate = new HashSet<PlayerView>();
-    private final Set<PlayerView> manaPoolUpdate = new HashSet<PlayerView>();
+    private final Set<CardView> cardsUpdate = new HashSet<>();
+    private final Set<CardView> cardsRefreshDetails = new HashSet<>();
+    private final Set<PlayerView> livesUpdate = new HashSet<>();
+    private final Set<PlayerView> manaPoolUpdate = new HashSet<>();
     private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate;
@@ -301,7 +301,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
-        final Set<Card> cards = new HashSet<Card>();
+        final Set<Card> cards = new HashSet<>();
         for (final MapOfLists<Card, Card> kv : event.blockers.values()) {
             for (final Collection<Card> blockers : kv.values()) {
                 cards.addAll(blockers);

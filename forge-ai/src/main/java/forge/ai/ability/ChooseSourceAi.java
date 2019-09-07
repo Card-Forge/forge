@@ -97,10 +97,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                         return false;
                     }
                     int dmg = AbilityUtils.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
-                    if (ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) <= 0) {
-                        return false;
-                    }
-                    return true;
+                    return ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) > 0;
                 }
                 if (game.getPhaseHandler().getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
                     return false;
@@ -119,9 +116,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                         return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                     }
                 });
-                if (choices.isEmpty()) {
-                    return false;
-                }
+                return !choices.isEmpty();
             }
         }
 

@@ -206,7 +206,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        Collections.sort(sortedPlayers, new Comparator<RegisteredPlayer>() {
+        sortedPlayers.sort(new Comparator<RegisteredPlayer>() {
             @Override
             public final int compare(final RegisteredPlayer p1, final RegisteredPlayer p2) {
                 final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
@@ -231,7 +231,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 if (trackableObject.getTracker() == null) {
                     trackableObject.setTracker(this.tracker);
                     // walk the props
-                    EnumMap props = (EnumMap) trackableObject.getProps();
+                    EnumMap props = trackableObject.getProps();
                     if (!(props == null)) {
                         for (Object propObj : props.values()) {
                             updateTrackers(new Object[]{propObj});

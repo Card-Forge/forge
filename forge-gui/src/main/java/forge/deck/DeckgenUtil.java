@@ -389,7 +389,7 @@ public class DeckgenUtil {
     public static Deck getRandomColorDeck(Predicate<PaperCard> formatFilter, boolean forAi) {
         final int[] colorCount = new int[] {1, 2, 3};
         final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
-        final List<String> selection = new ArrayList<String>();
+        final List<String> selection = new ArrayList<>();
 
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection.add("Random"); }
@@ -400,7 +400,7 @@ public class DeckgenUtil {
     public static Deck getRandomColorDeck(boolean forAi) {
         final int[] colorCount = new int[] {1, 2, 3, 5};
         final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
-        final List<String> selection = new ArrayList<String>();
+        final List<String> selection = new ArrayList<>();
 
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection.add("Random"); }
@@ -430,7 +430,7 @@ public class DeckgenUtil {
     }
 
     public static Deck getRandomQuestDeck() {
-        final List<Deck> allQuestDecks = new ArrayList<Deck>();
+        final List<Deck> allQuestDecks = new ArrayList<>();
         QuestController qCtrl = FModel.getQuest();
 
         for (final QuestEvent e : qCtrl.getDuelsManager().getAllDuels()) {
@@ -512,7 +512,7 @@ public class DeckgenUtil {
 
     public static CardPool generateSchemePool() {
         CardPool schemes = new CardPool();
-        List<PaperCard> allSchemes = new ArrayList<PaperCard>();
+        List<PaperCard> allSchemes = new ArrayList<>();
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
             if (c.getRules().getType().isScheme()) {
                 allSchemes.add(c);
@@ -544,7 +544,7 @@ public class DeckgenUtil {
 
     public static CardPool generatePlanarPool() {
         CardPool res = new CardPool();
-        List<PaperCard> allPlanars = new ArrayList<PaperCard>();
+        List<PaperCard> allPlanars = new ArrayList<>();
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
             if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
@@ -622,9 +622,8 @@ public class DeckgenUtil {
                     }
                 }
             }else {
-                List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
                 String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
-                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
+                List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
                 Collections.shuffle(potentialCards, MyRandom.getRandom());
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {

@@ -102,7 +102,7 @@ public final class Lang {
             strCount = startsWithVowel(noun) ? "an " : "a ";
         }
         else {
-            strCount = String.valueOf(cnt) + " ";
+            strCount = cnt + " ";
         }
         return strCount + countedForm;
     }

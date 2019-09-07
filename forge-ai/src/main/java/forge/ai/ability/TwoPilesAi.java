@@ -39,7 +39,7 @@ public class TwoPilesAi extends SpellAbilityAi {
         }
 
         final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
-                ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+                ? new FCollection<>(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         final Player p = tgtPlayers.get(0);

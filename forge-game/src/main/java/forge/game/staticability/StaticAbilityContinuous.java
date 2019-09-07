@@ -110,7 +110,6 @@ public final class StaticAbilityContinuous {
         int setPower = Integer.MAX_VALUE;
         String setT = "";
         int setToughness = Integer.MAX_VALUE;
-        int keywordMultiplier = 1;
 
         String[] addKeywords = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
@@ -179,27 +178,11 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddPower")) {
             addP = params.get("AddPower");
             powerBonus = AbilityUtils.calculateAmount(hostCard, addP, stAb, true);
-            if (!StringUtils.isNumeric(addP) && !addP.equals("AffectedX")) {
-                se.setXValue(powerBonus);
-            }
         }
 
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
             toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb, true);
-            if (!StringUtils.isNumeric(addT) && !addT.equals("AffectedX")) {
-                se.setYValue(toughnessBonus);
-            }
-        }
-
-        if (params.containsKey("KeywordMultiplier")) {
-            final String multiplier = params.get("KeywordMultiplier");
-            if (multiplier.equals("X")) {
-                keywordMultiplier = AbilityUtils.calculateAmount(hostCard, "X", stAb);
-                se.setXValue(keywordMultiplier);
-            } else {
-                keywordMultiplier = Integer.valueOf(multiplier);
-            }
         }
 
         if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddKeyword")) {
@@ -454,9 +437,7 @@ public final class StaticAbilityContinuous {
 
             // add keywords
             if (addKeywords != null) {
-                for (int i = 0; i < keywordMultiplier; i++) {
-                    p.addChangedKeywords(addKeywords, removeKeywords == null ? new String[0] : removeKeywords, se.getTimestamp());
-                }
+                p.addChangedKeywords(addKeywords, removeKeywords == null ? new String[0] : removeKeywords, se.getTimestamp());
             }
 
             // add static abilities
@@ -547,14 +528,11 @@ public final class StaticAbilityContinuous {
             if (layer == StaticAbilityLayer.MODIFYPT) {
                 if (addP.startsWith("AffectedX")) {
                     powerBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addP));
-                    se.addXMapValue(affectedCard, powerBonus);
                 }
                 if (addT.startsWith("AffectedX")) {
                     toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
-                    se.addXMapValue(affectedCard, toughnessBonus);
                 }
-                affectedCard.addSemiPermanentPowerBoost(powerBonus, false);
-                affectedCard.addSemiPermanentToughnessBoost(toughnessBonus, false);
+                affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp());
             }
 
             // add keywords
@@ -586,9 +564,7 @@ public final class StaticAbilityContinuous {
             // add HIDDEN keywords
             if (!addHiddenKeywords.isEmpty()) {
                 for (final String k : addHiddenKeywords) {
-                    for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.addHiddenExtrinsicKeyword(k);
-                    }
+                    affectedCard.addHiddenExtrinsicKeyword(k);
                 }
             }
 
@@ -636,7 +612,7 @@ public final class StaticAbilityContinuous {
                 for (String rep : addReplacements) {
                     final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
                     actualRep.setIntrinsic(false);
-                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
+                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);
                 }
             }
 
@@ -727,8 +703,17 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (layer == StaticAbilityLayer.RULES && params.containsKey("Goad")) {
-                affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
+            if (layer == StaticAbilityLayer.RULES) {
+                if (params.containsKey("Goad")) {
+                    affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
+                }
+                if (params.containsKey("CanBlockAny")) {
+                    affectedCard.addCanBlockAny(se.getTimestamp());
+                }
+                if (params.containsKey("CanBlockAmount")) {
+                    int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
+                    affectedCard.addCanBlockAdditional(v, se.getTimestamp());
+                }
             }
 
             if (mayLookAt != null) {
@@ -759,7 +744,7 @@ public final class StaticAbilityContinuous {
     }
 
     private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
-        final List<Player> validActivator = new ArrayList<Player>(players);
+        final List<Player> validActivator = new ArrayList<>(players);
         for (final Card c : cards) {
             validActivator.add(c.getController());
         }
@@ -802,7 +787,7 @@ public final class StaticAbilityContinuous {
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
-        final List<Player> players = new ArrayList<Player>();
+        final List<Player> players = new ArrayList<>();
 
         if (!params.containsKey("Affected")) {
             return players;

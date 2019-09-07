@@ -68,12 +68,12 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     @Override
     protected TextSearchFilter<DeckProxy> createSearchFilter() {
-        return new TextSearchFilter<DeckProxy>(this);
+        return new TextSearchFilter<>(this);
     }
 
     @Override
     protected AdvancedSearchFilter<DeckProxy> createAdvancedSearchFilter() {
-        return new AdvancedSearchFilter<DeckProxy>(this);
+        return new AdvancedSearchFilter<>(this);
     }
 
     @Override

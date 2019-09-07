@@ -174,7 +174,7 @@ public class VAssignDamage {
         final JPanel pnlDefenders = new JPanel();
         pnlDefenders.setOpaque(false);
         int cols = attackerHasTrample ? blockers.size() + 1 : blockers.size();
-        final String wrap = "wrap " +  Integer.toString(cols);
+        final String wrap = "wrap " + cols;
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
         final FScrollPane scrDefenders = new FScrollPane(pnlDefenders, false);
@@ -403,7 +403,7 @@ public class VAssignDamage {
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
             if( overkill >= 0 ) { 
-                sb.append(" (" +localizer.getMessage("lblLethal"));
+                sb.append(" (").append(localizer.getMessage("lblLethal"));
                 if( overkill > 0 ) 
                     sb.append(" +").append(overkill);
                 sb.append(")");

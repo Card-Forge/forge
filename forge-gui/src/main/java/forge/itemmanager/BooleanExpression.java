@@ -43,7 +43,7 @@ public class BooleanExpression {
 
     public Predicate<CardRules> evaluate() {
 
-        String currentValue = "";
+        StringBuilder currentValue = new StringBuilder();
         boolean escapeNext = false;
 
         while (expression.hasNext()) {
@@ -59,7 +59,7 @@ public class BooleanExpression {
                 operator = Operator.OPEN_PAREN;
             } else if (token.equals(Operator.CLOSE_PAREN.token)) {
                 operator = Operator.CLOSE_PAREN;
-            } else if (token.equals(Operator.NOT.token) && currentValue.trim().isEmpty()) { //Ignore ! operators that aren't the first token in a search term (Don't use '!' in 'Kaboom!')
+            } else if (token.equals(Operator.NOT.token) && currentValue.toString().trim().isEmpty()) { //Ignore ! operators that aren't the first token in a search term (Don't use '!' in 'Kaboom!')
                 operator = Operator.NOT;
             } else if (token.equals(Operator.ESCAPE.token)) {
                 escapeNext = true;
@@ -67,20 +67,20 @@ public class BooleanExpression {
             }
 
             if (operator == null) {
-                currentValue += token;
+                currentValue.append(token);
             } else {
 
                 if (escapeNext) {
                     escapeNext = false;
-                    currentValue += token;
+                    currentValue.append(token);
                     continue;
                 }
 
-                if (!currentValue.trim().isEmpty()) {
-                    operands.push(valueOf(currentValue.trim()));
+                if (!currentValue.toString().trim().isEmpty()) {
+                    operands.push(valueOf(currentValue.toString().trim()));
                 }
 
-                currentValue = "";
+                currentValue = new StringBuilder();
 
                 if (!operators.isEmpty() && operator.precedence < operators.peek().precedence) {
                     resolve(true);
@@ -98,8 +98,8 @@ public class BooleanExpression {
 
         }
 
-        if (!currentValue.trim().isEmpty()) {
-            operands.push(valueOf(currentValue.trim()));
+        if (!currentValue.toString().trim().isEmpty()) {
+            operands.push(valueOf(currentValue.toString().trim()));
         }
 
         while (!operators.isEmpty()) {

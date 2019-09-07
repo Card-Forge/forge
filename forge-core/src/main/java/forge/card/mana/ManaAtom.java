@@ -44,7 +44,7 @@ public abstract class ManaAtom {
         if (s.length() == 2) { //if name is two characters, check for combination of two colors
             return (byte)(fromName(s.charAt(0)) | fromName(s.charAt(1)));
         } else if (s.length() == 1) {
-            return (byte) fromName(s.charAt(0));
+            return fromName(s.charAt(0));
         }
         s = s.toLowerCase();
 

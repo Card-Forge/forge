@@ -12,7 +12,7 @@ public enum StartingPoolType {
 
     private final String caption;
 
-    private StartingPoolType(String caption0) {
+    StartingPoolType(String caption0) {
         caption = caption0;
     }
 

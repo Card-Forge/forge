@@ -27,7 +27,7 @@ public class FLanguage {
      * @return the languages
      */
     public static Iterable<String> getAllLanguages() {
-        final List<String> allLanguages = new ArrayList<String>();
+        final List<String> allLanguages = new ArrayList<>();
 
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.LANG_DIR);
         for (FileHandle languageFile : dir.list()) {

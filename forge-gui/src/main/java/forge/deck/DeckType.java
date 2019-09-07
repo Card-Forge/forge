@@ -85,7 +85,7 @@ public enum DeckType {
     }
 
     private String value;
-    private DeckType(final String value) {
+    DeckType(final String value) {
         final Localizer localizer = Localizer.getInstance();
         this.value = localizer.getMessage(value);
     }

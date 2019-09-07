@@ -19,7 +19,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
 public class FDigitalClock extends SkinnedLabel {
     private static final Calendar now = Calendar.getInstance();
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
-    private static final List<FDigitalClock> clocks = new ArrayList<FDigitalClock>();
+    private static final List<FDigitalClock> clocks = new ArrayList<>();
     private static Timer timer;
     private static String currentTimeDisplay;
 

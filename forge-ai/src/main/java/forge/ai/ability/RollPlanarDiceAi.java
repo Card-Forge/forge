@@ -144,7 +144,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
             }
         }
 
-        return decideToRoll ? true : false;
+        return decideToRoll;
     }
 
     /* (non-Javadoc)

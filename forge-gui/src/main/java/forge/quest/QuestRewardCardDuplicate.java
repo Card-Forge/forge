@@ -60,7 +60,7 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
         final ItemPool<PaperCard> playerCards = FModel.getQuest().getAssets().getCardPool();
         if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
-            final List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+            final List<PaperCard> cardChoices = new ArrayList<>();
             for (final Map.Entry<PaperCard, Integer> card : playerCards) {
                 cardChoices.add(card.getKey());
             }

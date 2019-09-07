@@ -114,20 +114,20 @@ public enum ItemManagerConfig {
     private Prop<Integer> imageColumnCount;
     private Prop<Integer> viewIndex;
 
-    private ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, boolean hideFilters0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
+    ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, boolean hideFilters0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
         cols = cols0;
         for (ItemColumnConfig colConfig : cols.values()) {
             colConfig.establishDefaults();
         }
         showUniqueCardsOption = showUniqueCardsOption0;
 
-        uniqueCardsOnly = new Prop<Boolean>(uniqueCardsOnly0);
-        hideFilters = new Prop<Boolean>(hideFilters0);
-        compactListView = new Prop<Boolean>(FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)); //use main setting to determine default
-        groupBy = new Prop<GroupDef>(groupBy0);
-        pileBy = new Prop<ColumnDef>(pileBy0);
-        imageColumnCount = new Prop<Integer>(imageColumnCount0);
-        viewIndex = new Prop<Integer>(viewIndex0);
+        uniqueCardsOnly = new Prop<>(uniqueCardsOnly0);
+        hideFilters = new Prop<>(hideFilters0);
+        compactListView = new Prop<>(FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)); //use main setting to determine default
+        groupBy = new Prop<>(groupBy0);
+        pileBy = new Prop<>(pileBy0);
+        imageColumnCount = new Prop<>(imageColumnCount0);
+        viewIndex = new Prop<>(viewIndex0);
     }
 
     private class Prop<T> {

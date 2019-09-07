@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,10 +43,10 @@ public class ContestGauntletLister extends JPanel {
 
     public void setGauntlets(final List<GauntletData> gd0) {
         this.removeAll();
-        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        final List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (final GauntletData gd : gd0) { sorted.add(gd); }
-        Collections.sort(sorted, new Comparator<GauntletData>() {
+        final List<RowPanel> tempRows = new ArrayList<>();
+        final List<GauntletData> sorted = new ArrayList<>();
+        sorted.addAll(gd0);
+        sorted.sort(new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
                 return x.getName().compareTo(y.getName());
@@ -79,8 +78,8 @@ public class ContestGauntletLister extends JPanel {
             name = gd.getName();
             name = name.substring(GauntletIO.PREFIX_LOCKED.length());
 
-            progress = String.valueOf(Math.round(
-                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + " %";
+            progress = Math.round(
+                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100) + " %";
 
             if (gd.getUserDeck() == null) {
                 progress = "---";

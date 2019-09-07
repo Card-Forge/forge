@@ -57,7 +57,7 @@ public class TournamentSwiss extends AbstractTournament {
         if (byePlayer != null) {
             groupPlayers.remove(byePlayer);
 
-            TournamentPairing byePair = new TournamentPairing(activeRound, Lists.<TournamentPlayer>newArrayList(byePlayer));
+            TournamentPairing byePair = new TournamentPairing(activeRound, Lists.newArrayList(byePlayer));
             byePair.setBye(true);
             activePairings.add(byePair);
         }
@@ -129,7 +129,7 @@ public class TournamentSwiss extends AbstractTournament {
             return pairSwissGroup(players);
         }
 
-        Collections.sort(players, new Comparator<TournamentPlayer>() {
+        players.sort(new Comparator<TournamentPlayer>() {
             @Override
             public int compare(TournamentPlayer o1, TournamentPlayer o2) {
                 return availableOpponents.get(o1).size() - availableOpponents.get(o2).size();

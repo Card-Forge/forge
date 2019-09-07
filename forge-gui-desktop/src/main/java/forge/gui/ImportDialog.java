@@ -313,7 +313,7 @@ public class ImportDialog {
         // associates a file operation type with its enablement checkbox and the set
         // of file move/copy operations that enabling it would entail
         private final Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> _selections =
-                new HashMap<OpType, Pair<FCheckBox, ? extends Map<File, File>>>();
+                new HashMap<>();
 
         // attached to all changeable widgets to keep the UI in sync
         private final ChangeListener _stateChangedListener = new ChangeListener() {
@@ -359,7 +359,7 @@ public class ImportDialog {
             _addSelectionWidget(knownDeckPanel, OpType.UNKNOWN_DECK,     "Unknown decks");
             final JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             unknownDeckPanel.setOpaque(false);
-            _unknownDeckCombo = new FComboBoxWrapper<_UnknownDeckChoice>();
+            _unknownDeckCombo = new FComboBoxWrapper<>();
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Constructed", ForgeConstants.DECK_CONSTRUCTED_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Draft",       ForgeConstants.DECK_DRAFT_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      ForgeConstants.DECK_PLANE_DIR));
@@ -464,14 +464,14 @@ public class ImportDialog {
             // use a skip list map instead of a regular hashmap so that the files are sorted
             // alphabetically in the logs.  note that this is a concurrent data structure
             // since it will be modified and read simultaneously by different threads
-            _selections.put(type, Pair.of(cb, new ConcurrentSkipListMap<File, File>()));
+            _selections.put(type, Pair.of(cb, new ConcurrentSkipListMap<>()));
             parent.add(cb, constraints);
         }
 
         // must be called from GUI event loop thread
         private void _updateUI() {
             // update checkbox text labels with current totals
-            final Set<OpType> selectedOptions = new HashSet<OpType>();
+            final Set<OpType> selectedOptions = new HashSet<>();
             for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                 final Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 final FCheckBox cb = selection.getLeft();
@@ -494,7 +494,7 @@ public class ImportDialog {
             Timer timer = null;
 
             try {
-                final Map<OpType, Map<File, File>> selections = new HashMap<OpType, Map<File, File>>();
+                final Map<OpType, Map<File, File>> selections = new HashMap<>();
                 for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                     selections.put(entry.getKey(), entry.getValue().getRight());
                 }
@@ -607,7 +607,7 @@ public class ImportDialog {
                         // user an option to fix
                         if (_isMigration) {
                             // assemble a list of selections that need to be selected to complete a full migration
-                            final List<String> unselectedButShouldBe = new ArrayList<String>();
+                            final List<String> unselectedButShouldBe = new ArrayList<>();
                             for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                                 if (OpType.POSSIBLE_SET_CARD_PIC == entry.getKey()) {
                                     continue;
@@ -709,7 +709,7 @@ public class ImportDialog {
             super("OperationLogUpdater");
             setDaemon(true);
 
-            _selections   = new HashMap<OpType, Map<File, File>>();
+            _selections   = new HashMap<>();
             _operationLog = operationLog;
 
             // remove references to FCheckBox when populating map -- we can't safely access it from a thread
@@ -844,7 +844,7 @@ public class ImportDialog {
 
             // build local operations map that only includes data that we can access from the background thread
             // use a tree map to maintain alphabetical order
-            _operations = new TreeMap<File, File>();
+            _operations = new TreeMap<>();
             for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : selections.entrySet()) {
                 final Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 if (selection.getLeft().isSelected()) {

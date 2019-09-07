@@ -194,7 +194,7 @@ public class TargetSelection {
             else if (zz.is(ZoneType.Stack))     crdsStack.add(cardView);
             else if (zz.is(ZoneType.Ante))      crdsAnte.add(cardView);
         }
-        List<Object> choicesFiltered = new ArrayList<Object>();
+        List<Object> choicesFiltered = new ArrayList<>();
         if (!crdsBattle.isEmpty()) {
             choicesFiltered.add("--CARDS ON BATTLEFIELD:--");
             choicesFiltered.addAll(crdsBattle);
@@ -251,7 +251,7 @@ public class TargetSelection {
         final TargetRestrictions tgt = this.getTgt();
         final String message = tgt.getVTSelection();
         // Find what's targetable, then allow human to choose
-        final List<Object> selectOptions = new ArrayList<Object>();
+        final List<Object> selectOptions = new ArrayList<>();
         HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewCache = new HashMap<>();
 
         final Game game = ability.getActivatingPlayer().getGame();

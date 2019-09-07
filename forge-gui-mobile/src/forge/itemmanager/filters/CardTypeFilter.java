@@ -38,7 +38,7 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
 
     @Override
     protected final Predicate<PaperCard> buildPredicate() {
-        final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> types = new ArrayList<>();
 
         for (StatTypes s : buttonMap.keySet()) {
             if (s.predicate != null && buttonMap.get(s).isSelected()) {

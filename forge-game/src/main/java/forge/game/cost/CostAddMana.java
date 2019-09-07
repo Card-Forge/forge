@@ -76,7 +76,7 @@ public class CostAddMana extends CostPart {
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
         Card source = sa.getHostCard();
 
-        List<Mana> manaProduced = new ArrayList<Mana>();
+        List<Mana> manaProduced = new ArrayList<>();
         final String type = this.getType();
         for (int n = 0; n < decision.c; n++) {
             if (StringUtils.isNumeric(type)) {

@@ -67,7 +67,7 @@ public class AddBasicLandsDialog {
     private static final int ADD_BTN_SIZE = 30;
     private static final int LAND_PANEL_PADDING = 3;
 
-    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<CardEdition>("Land Set:", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
+    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>("Land Set:", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");
@@ -313,7 +313,7 @@ public class AddBasicLandsDialog {
 
             cardName = cardName0;
             cardPanel = new LandCardPanel();
-            cbLandArt = new FComboBox<String>();
+            cbLandArt = new FComboBox<>();
             cbLandArt.setFont(cbLandSet.getFont());
             cbLandArt.addActionListener(new ActionListener() {
                 @Override

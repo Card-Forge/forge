@@ -43,7 +43,7 @@ public class LoadSealedScreen extends LaunchScreen {
 
     private final FSkinFont GAME_MODE_FONT= FSkinFont.get(12);
     private final FLabel lblMode = add(new FLabel.Builder().text("Mode:").font(GAME_MODE_FONT).build());
-    private final FComboBox<String> cbMode = add(new FComboBox<String>());
+    private final FComboBox<String> cbMode = add(new FComboBox<>());
 
     public LoadSealedScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -146,7 +146,7 @@ public class LoadSealedScreen extends LaunchScreen {
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
-                                    final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+                                    final List<RegisteredPlayer> starter = new ArrayList<>();
                                     final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
                                     starter.add(human);
                                     starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));

@@ -37,7 +37,7 @@ public class DeckGroup extends DeckBase {
 
     private static final long serialVersionUID = -1628725522049635829L;
     private Deck humanDeck;
-    private List<Deck> aiDecks = new ArrayList<Deck>();
+    private List<Deck> aiDecks = new ArrayList<>();
 
     /**
      * Gets the human deck.
@@ -79,7 +79,7 @@ public class DeckGroup extends DeckBase {
         if (aiDecks.size() < 2) {
             return;
         }
-        Collections.sort(aiDecks, comparator);
+        aiDecks.sort(comparator);
     }
     
     @Override
@@ -119,9 +119,7 @@ public class DeckGroup extends DeckBase {
      * @param computer the computer
      */
     public void addAiDecks(final Deck[] computer) {
-        for (final Deck element : computer) {
-            aiDecks.add(element);
-        }
+        aiDecks.addAll(Arrays.asList(computer));
     }
 
     /*

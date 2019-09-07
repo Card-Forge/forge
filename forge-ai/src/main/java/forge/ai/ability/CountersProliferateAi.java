@@ -83,12 +83,9 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 }
             }));
         }
-        
 
-        if (cperms.isEmpty() && hperms.isEmpty() && !opponentPoison && !allyExpOrEnergy) {
-            return false;
-        }
-        return true;
+
+        return !cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy;
     }
 
     @Override
