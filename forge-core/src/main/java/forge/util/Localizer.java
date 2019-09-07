@@ -1,10 +1,10 @@
 package forge.util;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class Localizer {
 		
 		try {
 			//formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
-			formatter = new MessageFormat(resourceBundle.getString(key.toString()), locale);
+			formatter = new MessageFormat(resourceBundle.getString(key), locale);
 		} catch (final IllegalArgumentException | MissingResourceException e) {
 			e.printStackTrace();
 		}
@@ -51,14 +51,10 @@ public class Localizer {
 		formatter.setLocale(locale);
 		
 		String formattedMessage = "CHAR ENCODING ERROR";
-		try {
-			//Support non-English-standard characters
-			formattedMessage = new String(formatter.format(messageArguments).getBytes("ISO-8859-1"), "UTF-8");
-		} catch (final UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		return formattedMessage;
+        //Support non-English-standard characters
+        formattedMessage = new String(formatter.format(messageArguments).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+
+        return formattedMessage;
 		
 	}
 

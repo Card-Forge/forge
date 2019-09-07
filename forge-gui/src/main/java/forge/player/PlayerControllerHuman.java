@@ -776,7 +776,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 	    } else {
 		toBottom = game.getCardList(getGui().many("Select cards to be put on the bottom of your library",
 							  "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
-		topN.removeAll((Collection<?>) toBottom);
+		topN.removeAll(toBottom);
 		if (topN.isEmpty()) {
 		    toTop = null;
 		} else if (topN.size() == 1) {
@@ -814,7 +814,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             toGrave = game.getCardList(getGui().many("Select cards to be put into the graveyard",
                     "Cards to put in the graveyard", -1, CardView.getCollection(topN), null));
-            topN.removeAll((Collection<?>) toGrave);
+            topN.removeAll(toGrave);
             if (topN.isEmpty()) {
                 toTop = null;
             } else if (topN.size() == 1) {
@@ -1404,7 +1404,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final boolean call) {
         final String[] labelsSrc = call ? new String[] { "heads", "tails" }
                 : new String[] { "win the flip", "lose the flip" };
-        final ImmutableList.Builder<String> strResults = ImmutableList.<String>builder();
+        final ImmutableList.Builder<String> strResults = ImmutableList.builder();
         for (int i = 0; i < results.length; i++) {
             strResults.add(labelsSrc[results[i] ? 0 : 1]);
         }
@@ -1665,8 +1665,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     boolean preselect = FModel.getPreferences()
                             .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
                     orderedSAVs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
-                            preselect ? Lists.<SpellAbilityView>newArrayList() : orderedSAVs,
-                            preselect ? orderedSAVs : Lists.<SpellAbilityView>newArrayList(), null, false);
+                            preselect ? Lists.newArrayList() : orderedSAVs,
+                            preselect ? orderedSAVs : Lists.newArrayList(), null, false);
                 } else {
                     orderedSAVs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAVs,
                             null);
@@ -1829,10 +1829,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return false;
         }
         final Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        if (priorityPlayer == null || priorityPlayer != player) {
-            return false;
-        }
-        return true;
+        return priorityPlayer != null && priorityPlayer == player;
     }
 
     @Override
@@ -2741,7 +2738,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (final Player player : game.getPlayers()) {
                         if (player.getId() == entity.getKey()) {
                             found = true;
-                            rememberedActions.add(Pair.of((GameEntityView) player.getView(), true));
+                            rememberedActions.add(Pair.of(player.getView(), true));
                             break;
                         }
                     }
@@ -2749,7 +2746,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (final Card card : cards) {
                         if (card.getId() == entity.getKey()) {
                             found = true;
-                            rememberedActions.add(Pair.of((GameEntityView) card.getView(), false));
+                            rememberedActions.add(Pair.of(card.getView(), false));
                             break;
                         }
                     }

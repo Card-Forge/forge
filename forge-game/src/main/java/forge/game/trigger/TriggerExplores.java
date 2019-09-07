@@ -51,10 +51,8 @@ public class TriggerExplores extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard());
         }
 
         return true;

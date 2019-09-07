@@ -32,7 +32,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         int amount = 0;
         if (!num.equals("All") && !num.equals("Remembered")) {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
-        };
+        }
 
         sb.append("Remove ");
         if (sa.hasParam("UpTo")) {

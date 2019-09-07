@@ -160,9 +160,7 @@ public class CostPutCardToLib extends CostPartWithList {
                     break;
                 }
             }
-            if (!foundPayable) {
-                return false;
-            }
+            return foundPayable;
         }
         return true;
     }

@@ -99,7 +99,7 @@ public class StaticAbilityCantTarget {
         if (params.containsKey("Hexproof") && (activator != null)) {
             for (String k : activator.getKeywords()) {
                 if (k.startsWith("IgnoreHexproof")) {
-                    String m[] = k.split(":");
+                    String[] m = k.split(":");
                     if (card.isValid(m[1].split(","), activator, source, spellAbility)) {
                         return false;
                     }

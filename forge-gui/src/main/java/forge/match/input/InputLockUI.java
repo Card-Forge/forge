@@ -55,7 +55,7 @@ public class InputLockUI implements Input {
             }
             FThreads.invokeInEdtLater(showMessageFromEdt);
         }
-    };
+    }
 
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override

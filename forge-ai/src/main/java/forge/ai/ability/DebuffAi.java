@@ -124,7 +124,7 @@ public class DebuffAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-        CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
+        CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.newArrayList() : kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         // several uses here:

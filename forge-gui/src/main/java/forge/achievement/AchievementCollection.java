@@ -81,7 +81,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
-        this(name0, filename0, isLimitedFormat0, (String) null);
+        this(name0, filename0, isLimitedFormat0, null);
     }
     
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0, String path0) {
@@ -125,7 +125,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             final List<String> achievementListFile = FileUtil.readFile(path);
             for (final String s : achievementListFile) {
                 if (!s.isEmpty()) {
-                    String k[] = StringUtils.split(s, "|");
+                    String[] k = StringUtils.split(s, "|");
                     add(k[0],k[1],k[2]);
                 }
             }

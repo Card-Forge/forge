@@ -162,11 +162,8 @@ public class ProtectAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
-        if (SpellAbilityAi.isSorcerySpeed(sa) && notAiMain1) {
-            // sorceries can only give protection in order to create an unblockable attacker
-            return false;
-        }
-        return true;
+        // sorceries can only give protection in order to create an unblockable attacker
+        return !SpellAbilityAi.isSorcerySpeed(sa) || !notAiMain1;
     }
     
     @Override
@@ -177,9 +174,7 @@ public class ProtectAi extends SpellAbilityAi {
                 return false;
             } else if (cards.size() == 1) {
                 // Affecting single card
-                if ((getProtectCreatures(ai, sa)).contains(cards.get(0))) {
-                    return true;
-                }
+                return (getProtectCreatures(ai, sa)).contains(cards.get(0));
             }
             /*
              * when this happens we need to expand AI to consider if its ok

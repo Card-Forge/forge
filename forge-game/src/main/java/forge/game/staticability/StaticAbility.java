@@ -520,7 +520,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
                 && !player.getAttackedWithCreatureThisTurn()) {
             return false;
         }
-        
+
         return true;
     }
 

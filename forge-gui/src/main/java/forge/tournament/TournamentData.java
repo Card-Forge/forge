@@ -57,7 +57,7 @@ public class TournamentData {
 
     public void stamp() {
         final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
-        timestamp = dateFormat.format(new Date()).toString();
+        timestamp = dateFormat.format(new Date());
     }
 
     /** Resets a Tournament data to an unplayed state, then stamps and saves. */

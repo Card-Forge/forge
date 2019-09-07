@@ -98,7 +98,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
-                            "Select creature(s) with total power less than or equal to " + Integer.toString(totP - chosenP - negativeNum)
+                            "Select creature(s) with total power less than or equal to " + (totP - chosenP - negativeNum)
                             + "\r\n(Selected:" + chosenPool + ")\r\n" + "(Total Power: " + chosenP + ")", chosenP <= totP);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, "Cancel Choose?")) {

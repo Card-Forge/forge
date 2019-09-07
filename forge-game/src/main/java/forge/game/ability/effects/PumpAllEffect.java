@@ -49,9 +49,17 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addTempPowerBoost(a);
-            tgtC.addTempToughnessBoost(d);
+            boolean redrawPT = false;
+
+            if (a != 0 || d != 0) {
+                tgtC.addPTBoost(a, d, timestamp);
+                redrawPT = true;
+            }
+
             tgtC.addChangedCardKeywords(kws, null, false, false, timestamp);
+            if (redrawPT) {
+                tgtC.updatePowerToughnessForView();
+            }
 
             for (String kw : hiddenkws) {
                 tgtC.addHiddenExtrinsicKeyword(kw);
@@ -68,13 +76,13 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.addTempPowerBoost(-1 * a);
-                        tgtC.addTempToughnessBoost(-1 * d);
+                        tgtC.removePTBoost(timestamp);
                         tgtC.removeChangedCardKeywords(timestamp);
 
                         for (String kw : hiddenkws) {
                             tgtC.removeHiddenExtrinsicKeyword(kw);
                         }
+                        tgtC.updatePowerToughnessForView();
 
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }

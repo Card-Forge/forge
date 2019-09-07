@@ -514,7 +514,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostPutCardToLib) {
-                int amount = Integer.parseInt(((CostPutCardToLib) part).getAmount());
+                int amount = Integer.parseInt(part.getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
                 final boolean sameZone = ((CostPutCardToLib) part).isSameZone();
                 CardCollectionView listView;
@@ -576,7 +576,7 @@ public class HumanPlay {
                     part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostGainControl) {
-                int amount = Integer.parseInt(((CostGainControl)part).getAmount());
+                int amount = Integer.parseInt(part.getAmount());
                 CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
                 if (!hasPaid) { return false; }

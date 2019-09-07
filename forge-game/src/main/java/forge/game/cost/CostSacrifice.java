@@ -103,19 +103,14 @@ public class CostSacrifice extends CostPartWithList {
 
             typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
-            if (!needsAnnoucement && (amount != null) && (typeList.size() < amount)) {
-                return false;
-            }
+            return needsAnnoucement || (amount == null) || (typeList.size() >= amount);
 
             // If amount is null, it's either "ALL" or "X"
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0
         }
-        else if (!source.canBeSacrificedBy(ability)) {
-            return false;
-        }
+        else return source.canBeSacrificedBy(ability);
 
-        return true;
     }
 
     @Override

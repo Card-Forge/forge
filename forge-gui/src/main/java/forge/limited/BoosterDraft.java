@@ -346,7 +346,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public Deck[] getDecks() {
-        Deck decks[] = new Deck[7];
+        Deck[] decks = new Deck[7];
         for (int i = 1; i < N_PLAYERS; i++) {
             decks[i - 1] = ((LimitedPlayerAI) this.players.get(i)).buildDeck();
         }

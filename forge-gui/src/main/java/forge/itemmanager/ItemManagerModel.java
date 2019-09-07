@@ -190,7 +190,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
             for (final ItemColumn col : colsToSort) {
                 oneColSorters.add(new ItemPoolSorter<InventoryItem>(
                         col.getFnSort(),
-                        col.getConfig().getSortState().equals(SortState.ASC) ? true : false));
+                        col.getConfig().getSortState().equals(SortState.ASC)));
             }
 
             return new Sorter(oneColSorters);

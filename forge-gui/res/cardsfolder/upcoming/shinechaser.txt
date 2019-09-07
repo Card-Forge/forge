@@ -1,0 +1,10 @@
+Name:Shinechaser
+ManaCost:1 W U
+Types:Creature Faerie
+PT:1/1
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Enchantment.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an enchantment.
+SVar:BuffedBy:Enchantment,Artifact
+Oracle:Flying, vigilance\nShinechaser gets +1/+1 as long as you control an artifact.\nShinechaser gets +1/+1 as long as you control an enchantment.

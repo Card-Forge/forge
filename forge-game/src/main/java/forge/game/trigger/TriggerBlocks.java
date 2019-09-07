@@ -76,9 +76,9 @@ public class TriggerBlocks extends Trigger {
             		break;
             	}
             }
-            
+
             if (!foundMatch) {
-            	return false;
+                return false;
             }
         }
 

@@ -3,7 +3,6 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
-import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -506,12 +505,33 @@ public class MatchScreen extends FScreen {
                 float x = topPlayerPanel.getField().getLeft();
                 float y = midField - topPlayerPanel.getField().getHeight();
                 float w = getWidth() - x;
-
+                float bgFullWidth, scaledbgHeight;
+                float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane()) //TODO: scale BG to correct aspect ratio/crop center
-                    setPlanarBG(g, getPlaneName(), x, y, w, ForgeConstants.isGdxPortLandscape ? getHeight() : midField);
-                else
-                    g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+                        && hasActivePlane()) {
+                    String imageName = getPlaneName()
+                                .replace(" ", "_")
+                                .replace("'", "")
+                                .replace("-", "");
+                    if (FSkinTexture.getValues().contains(imageName)) {
+                        bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
+                        if (bgFullWidth < w) {
+                            scaledbgHeight = w * (bgHeight / bgFullWidth);
+                            bgFullWidth = w;
+                            bgHeight = scaledbgHeight;
+                        }
+                        g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                    }
+                }
+                else {
+                    bgFullWidth = bgHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
+                    if (bgFullWidth < w) {
+                        scaledbgHeight = w * (bgHeight / bgFullWidth);
+                        bgFullWidth = w;
+                        bgHeight = scaledbgHeight;
+                    }
+                    g.drawImage(FSkinTexture.BG_MATCH, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                }
             }
         }
 
@@ -647,249 +667,6 @@ public class MatchScreen extends FScreen {
                     return MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName() != "";
             }
             return false;
-        }
-        private void setPlanarBG(Graphics g, String planeName, float x, float y, float w, float midField ){
-            switch (planeName) {
-                case "Academy at Tolaria West":
-                    g.drawImage(FSkinTexture.BG_PLANE1, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Agyrem":
-                    g.drawImage(FSkinTexture.BG_PLANE2, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Akoum":
-                    g.drawImage(FSkinTexture.BG_PLANE3, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Aretopolis":
-                    g.drawImage(FSkinTexture.BG_PLANE4, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Astral Arena":
-                    g.drawImage(FSkinTexture.BG_PLANE5, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Bant":
-                    g.drawImage(FSkinTexture.BG_PLANE6, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Bloodhill Bastion":
-                    g.drawImage(FSkinTexture.BG_PLANE7, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Cliffside Market":
-                    g.drawImage(FSkinTexture.BG_PLANE8, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Edge of Malacol":
-                    g.drawImage(FSkinTexture.BG_PLANE9, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Eloren Wilds":
-                    g.drawImage(FSkinTexture.BG_PLANE10, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Feeding Grounds":
-                    g.drawImage(FSkinTexture.BG_PLANE11, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Fields of Summer":
-                    g.drawImage(FSkinTexture.BG_PLANE12, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Furnace Layer":
-                    g.drawImage(FSkinTexture.BG_PLANE13, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Gavony":
-                    g.drawImage(FSkinTexture.BG_PLANE14, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Glen Elendra":
-                    g.drawImage(FSkinTexture.BG_PLANE15, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Glimmervoid Basin":
-                    g.drawImage(FSkinTexture.BG_PLANE16, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Goldmeadow":
-                    g.drawImage(FSkinTexture.BG_PLANE17, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grand Ossuary":
-                    g.drawImage(FSkinTexture.BG_PLANE18, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grixis":
-                    g.drawImage(FSkinTexture.BG_PLANE19, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Grove of the Dreampods":
-                    g.drawImage(FSkinTexture.BG_PLANE20, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Hedron Fields of Agadeem":
-                    g.drawImage(FSkinTexture.BG_PLANE21, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Immersturm":
-                    g.drawImage(FSkinTexture.BG_PLANE22, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Isle of Vesuva":
-                    g.drawImage(FSkinTexture.BG_PLANE23, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Izzet Steam Maze":
-                    g.drawImage(FSkinTexture.BG_PLANE24, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Jund":
-                    g.drawImage(FSkinTexture.BG_PLANE25, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kessig":
-                    g.drawImage(FSkinTexture.BG_PLANE26, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kharasha Foothills":
-                    g.drawImage(FSkinTexture.BG_PLANE27, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Kilnspire District":
-                    g.drawImage(FSkinTexture.BG_PLANE28, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Krosa":
-                    g.drawImage(FSkinTexture.BG_PLANE29, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Lair of the Ashen Idol":
-                    g.drawImage(FSkinTexture.BG_PLANE30, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Lethe Lake":
-                    g.drawImage(FSkinTexture.BG_PLANE31, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Llanowar":
-                    g.drawImage(FSkinTexture.BG_PLANE32, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Minamo":
-                    g.drawImage(FSkinTexture.BG_PLANE33, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Mount Keralia":
-                    g.drawImage(FSkinTexture.BG_PLANE34, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Murasa":
-                    g.drawImage(FSkinTexture.BG_PLANE35, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Naar Isle":
-                    g.drawImage(FSkinTexture.BG_PLANE36, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Naya":
-                    g.drawImage(FSkinTexture.BG_PLANE37, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Nephalia":
-                    g.drawImage(FSkinTexture.BG_PLANE38, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Norn's Dominion":
-                    g.drawImage(FSkinTexture.BG_PLANE39, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Onakke Catacomb":
-                    g.drawImage(FSkinTexture.BG_PLANE40, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Orochi Colony":
-                    g.drawImage(FSkinTexture.BG_PLANE41, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Orzhova":
-                    g.drawImage(FSkinTexture.BG_PLANE42, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Otaria":
-                    g.drawImage(FSkinTexture.BG_PLANE43, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Panopticon":
-                    g.drawImage(FSkinTexture.BG_PLANE44, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Pools of Becoming":
-                    g.drawImage(FSkinTexture.BG_PLANE45, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Prahv":
-                    g.drawImage(FSkinTexture.BG_PLANE46, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Quicksilver Sea":
-                    g.drawImage(FSkinTexture.BG_PLANE47, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Raven's Run":
-                    g.drawImage(FSkinTexture.BG_PLANE48, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sanctum of Serra":
-                    g.drawImage(FSkinTexture.BG_PLANE49, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sea of Sand":
-                    g.drawImage(FSkinTexture.BG_PLANE50, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Selesnya Loft Gardens":
-                    g.drawImage(FSkinTexture.BG_PLANE51, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Shiv":
-                    g.drawImage(FSkinTexture.BG_PLANE52, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Skybreen":
-                    g.drawImage(FSkinTexture.BG_PLANE53, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Sokenzan":
-                    g.drawImage(FSkinTexture.BG_PLANE54, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stairs to Infinity":
-                    g.drawImage(FSkinTexture.BG_PLANE55, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stensia":
-                    g.drawImage(FSkinTexture.BG_PLANE56, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Stronghold Furnace":
-                    g.drawImage(FSkinTexture.BG_PLANE57, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Takenuma":
-                    g.drawImage(FSkinTexture.BG_PLANE58, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Tazeem":
-                    g.drawImage(FSkinTexture.BG_PLANE59, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Aether Flues":
-                    g.drawImage(FSkinTexture.BG_PLANE60, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Dark Barony":
-                    g.drawImage(FSkinTexture.BG_PLANE61, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Eon Fog":
-                    g.drawImage(FSkinTexture.BG_PLANE62, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Fourth Sphere":
-                    g.drawImage(FSkinTexture.BG_PLANE63, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Great Forest":
-                    g.drawImage(FSkinTexture.BG_PLANE64, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Hippodrome":
-                    g.drawImage(FSkinTexture.BG_PLANE65, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Maelstrom":
-                    g.drawImage(FSkinTexture.BG_PLANE66, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "The Zephyr Maze":
-                    g.drawImage(FSkinTexture.BG_PLANE67, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Trail of the Mage-Rings":
-                    g.drawImage(FSkinTexture.BG_PLANE68, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Truga Jungle":
-                    g.drawImage(FSkinTexture.BG_PLANE69, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Turri Island":
-                    g.drawImage(FSkinTexture.BG_PLANE70, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Undercity Reaches":
-                    g.drawImage(FSkinTexture.BG_PLANE71, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Velis Vel":
-                    g.drawImage(FSkinTexture.BG_PLANE72, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Windriddle Palaces":
-                    g.drawImage(FSkinTexture.BG_PLANE73, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Tember City":
-                    g.drawImage(FSkinTexture.BG_PLANE74, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Celestine Reef":
-                    g.drawImage(FSkinTexture.BG_PLANE75, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Horizon Boughs":
-                    g.drawImage(FSkinTexture.BG_PLANE76, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Mirrored Depths":
-                    g.drawImage(FSkinTexture.BG_PLANE77, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-                case "Talon Gates":
-                    g.drawImage(FSkinTexture.BG_PLANE78, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                    break;
-
-                default: {
-                    //draw default
-                    g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-                }
-            }
         }
     }
 }

@@ -37,9 +37,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         }
         if ("SelfDamage".equals(sa.getParam("AILogic"))) {
             if (comp.getLife() * 0.75 < enemy.getLife()) {
-                if (!lifelink) {
-                    return true;
-                }
+                return !lifelink;
             }
         }
         return false;

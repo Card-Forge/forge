@@ -53,8 +53,8 @@ public enum QuestItemType {
     private final Class<? extends QuestItemBasic> bazaarControllerClass;
     private final Class<? extends QuestItemCondition> modelClass;
 
-    private QuestItemType(final String key, final Class<? extends QuestItemBasic> controllerClass0,
-            final Class<? extends QuestItemCondition> modelClass0) {
+    QuestItemType(final String key, final Class<? extends QuestItemBasic> controllerClass0,
+                  final Class<? extends QuestItemCondition> modelClass0) {
         this.saveFileKey = key;
         this.bazaarControllerClass = controllerClass0;
         this.modelClass = modelClass0;

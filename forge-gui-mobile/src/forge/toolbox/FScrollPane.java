@@ -232,9 +232,7 @@ public abstract class FScrollPane extends FContainer {
             if (physicsObj.isMoving()) { //avoid storing last fling stop time if scroll manually stopped
                 physicsObj.advance(dt);
                 Vector2 pos = physicsObj.getPosition();
-                if (setScrollPositions(pos.x, pos.y) && physicsObj.isMoving()) {
-                    return true;
-                }
+                return setScrollPositions(pos.x, pos.y) && physicsObj.isMoving();
             }
 
             //end fling animation if can't scroll anymore or physics object is no longer moving

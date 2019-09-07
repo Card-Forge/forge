@@ -71,9 +71,6 @@ public abstract class FDropDownMenu extends FDropDown {
     @Override
     public boolean tap(float x, float y, int count) {
         super.tap(x, y, count);
-        if (getDropDownOwner() instanceof FSubMenu) {
-            return false; //return false so owning sub menu can be hidden
-        }
-        return true;
+        return !(getDropDownOwner() instanceof FSubMenu); //return false so owning sub menu can be hidden
     }
 }

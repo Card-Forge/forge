@@ -45,11 +45,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard())) {
-            return false;
-        }
-
-        return true;
+        return ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard());
     }
 
     @Override
@@ -63,16 +59,11 @@ public class UntapAi extends SpellAbilityAi {
 
         if (tgt == null) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
-                return false;
-            }
+            return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
         } else {
-            if (!untapPrefTargeting(ai, tgt, sa, false)) {
-                return false;
-            }
+            return untapPrefTargeting(ai, tgt, sa, false);
         }
 
-        return true;
     }
 
     @Override
@@ -86,11 +77,7 @@ public class UntapAi extends SpellAbilityAi {
 
             // TODO: use Defined to determine, if this is an unfavorable result
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
-                return false;
-            }
-
-            return true;
+            return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
         } else {
             if (untapPrefTargeting(ai, tgt, sa, mandatory)) {
                 return true;
@@ -271,11 +258,7 @@ public class UntapAi extends SpellAbilityAi {
         // just tap whatever we can
         tapList = list;
 
-        if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
-            return true;
-        }
-
-        return false;
+        return untapTargetList(source, tgt, sa, mandatory, tapList);
     }
 
     private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
@@ -438,13 +421,10 @@ public class UntapAi extends SpellAbilityAi {
 
         // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
-        if (ph.getNextTurn() == ai
-                && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            return true;
-        }
+        return ph.getNextTurn() == ai
+                && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
 
         // haven't found any immediate playable options
-        return false;
     }
 
 }

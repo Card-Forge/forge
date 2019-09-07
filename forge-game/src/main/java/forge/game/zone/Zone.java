@@ -51,10 +51,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final ZoneType zoneType;
     protected final Game game;
 
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
 
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;

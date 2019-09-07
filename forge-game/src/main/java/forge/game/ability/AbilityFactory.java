@@ -64,7 +64,7 @@ public final class AbilityFactory {
         SubAbility("DB");
         
         private final String prefix;
-        private AbilityRecordType(String prefix) {
+        AbilityRecordType(String prefix) {
             this.prefix = prefix;
         }
         public String getPrefix() {

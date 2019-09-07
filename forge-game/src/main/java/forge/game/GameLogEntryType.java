@@ -20,7 +20,7 @@ public enum GameLogEntryType {
     PHASE("Phase");
     
     private final String caption; 
-    private GameLogEntryType(String name) {
+    GameLogEntryType(String name) {
         this.caption = name;
     }
 

@@ -145,10 +145,10 @@ public class ScryAi extends SpellAbilityAi {
                 if (maxToRemove <= 0) {
                 	return false;
                 }
-                sa.setSVar("ChosenX", "Number$" + Integer.toString(maxToRemove));
+                sa.setSVar("ChosenX", "Number$" + maxToRemove);
             } else {
                 // no Instant or Sorceries anymore, just scry
-                sa.setSVar("ChosenX", "Number$" + Integer.toString(Math.min(counterNum, libsize)));
+                sa.setSVar("ChosenX", "Number$" + Math.min(counterNum, libsize));
             }
         }
         return true;

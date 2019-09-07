@@ -54,8 +54,8 @@ public class Combat {
     private final FCollection<GameEntity> attackableEntries = new FCollection<GameEntity>();
 
     // Keyed by attackable defender (player or planeswalker)
-    private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.<GameEntity, AttackingBand>create());
-    private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.<AttackingBand, Card>create());
+    private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
+    private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
     private final Map<Card, Integer> defendingDamageMap = Maps.newHashMap();
 
@@ -353,7 +353,7 @@ public class Combat {
 
     public final boolean isBlocked(final Card attacker) {
         AttackingBand band = getBandOfAttacker(attacker);
-        return band == null ? false : Boolean.TRUE.equals(band.isBlocked());
+        return band != null && Boolean.TRUE.equals(band.isBlocked());
     }
 
     // Some cards in Alpha may UNBLOCK an attacker, so second parameter is not always-true
@@ -804,7 +804,7 @@ public class Combat {
         for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
+                defender.addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
             }
             else if (defender instanceof Card) { // planeswalker
                 ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
@@ -843,7 +843,7 @@ public class Combat {
 
     public final boolean isUnblocked(final Card att) {
         AttackingBand band = getBandOfAttacker(att);
-        return band == null ? false : Boolean.FALSE.equals(band.isBlocked());
+        return band != null && Boolean.FALSE.equals(band.isBlocked());
     }
 
     public final CardCollection getUnblockedAttackers() {
@@ -875,7 +875,7 @@ public class Combat {
     public boolean isBlocking(Card blocker) {
         if (blockedBands.containsValue(blocker)) {
             return true; // is blocking something at the moment
-        };
+        }
 
         CombatLki lki = lkiCache.get(blocker);
         return null != lki && !lki.isAttacker; // was blocking something anyway

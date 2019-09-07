@@ -85,7 +85,7 @@ public final class CardFacePredicates {
 
         @Override
         public boolean apply(ICardFace input) {
-            String k[] = valid.split("\\.", 2);
+            String[] k = valid.split("\\.", 2);
 
             if ("Card".equals(k[0])) {
                 // okay
@@ -110,10 +110,7 @@ public final class CardFacePredicates {
         static protected boolean hasProperty(ICardFace input, final String v) {
             if (v.startsWith("non")) {
                 return !hasProperty(input, v.substring(3));
-            } else if (!input.getType().hasStringType(v)) {
-                return false;
-            }
-            return true;
+            } else return input.getType().hasStringType(v);
         }
     }
 

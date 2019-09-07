@@ -36,6 +36,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A Base64 encoder/decoder.
@@ -377,7 +378,7 @@ public final class Base64Coder {
         SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
         Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
         pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
-        return String.valueOf(encode(pbeCipher.doFinal(value.getBytes("UTF-8"))));
+        return String.valueOf(encode(pbeCipher.doFinal(value.getBytes(StandardCharsets.UTF_8))));
     }
 
     public static String decrypt(String value) throws Exception {
@@ -385,7 +386,7 @@ public final class Base64Coder {
         SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
         Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
         pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
-        return new String(pbeCipher.doFinal(decode(value)), "UTF-8");
+        return new String(pbeCipher.doFinal(decode(value)), StandardCharsets.UTF_8);
     }
 
     // Dummy constructor.

@@ -123,9 +123,7 @@ public class AttachAi extends SpellAbilityAi {
                     return !(c.hasProtectionFrom(source) || c.hasKeyword(Keyword.SHROUD) || c.hasKeyword(Keyword.HEXPROOF));
                 }
             });
-            if (targets.isEmpty()) {
-                return false;
-            }
+            return !targets.isEmpty();
         }
 
         return true;
@@ -239,9 +237,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!(combat.isAttacking(attachTarget) || combat.isBlocking(attachTarget))) {
-                return false;
-            }
+            return combat.isAttacking(attachTarget) || combat.isBlocking(attachTarget);
         }
 
         return true;
@@ -987,9 +983,7 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
                 // don't equip creatures that don't gain anything
-                if (card.hasSVar("NonStackingAttachEffect") && newTarget.isEquippedBy(card.getName())) {
-                    return false;
-                }
+                return !card.hasSVar("NonStackingAttachEffect") || !newTarget.isEquippedBy(card.getName());
             }
         }
 
@@ -1218,10 +1212,10 @@ public class AttachAi extends SpellAbilityAi {
                         if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
                             return true;
                         }
-                        if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
-                            // consider +2 power a significant bonus on Infect creatures
-                            return true;
-                        }
+                    }
+                    if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
+                        // consider +2 power a significant bonus on Infect creatures
+                        return true;
                     }
                     return false;
                 }
@@ -1353,7 +1347,7 @@ public class AttachAi extends SpellAbilityAi {
         CardCollection prefList = list;
 
         // Filter AI-specific targets if provided
-        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, (CardCollection)list, true);
+        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, list, true);
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
@@ -1557,86 +1551,55 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (evasive) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !ComputerUtilCombat.canAttackNextTurn(card)
-                    || !canBeBlocked) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && ComputerUtilCombat.canAttackNextTurn(card)
+                    && canBeBlocked;
         } else if (keyword.equals("Haste")) {
-            if (!card.hasSickness() || !ph.isPlayerTurn(sa.getActivatingPlayer()) || card.isTapped()
-                    || card.getNetCombatDamage() + powerBonus <= 0
-                    || card.hasKeyword("CARDNAME can attack as though it had haste.")
-                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || !ComputerUtilCombat.canAttackNextTurn(card)) {
-                return false;
-            }
+            return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
+                    && card.getNetCombatDamage() + powerBonus > 0
+                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
+                    && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {
             return true;
         } else if (keyword.endsWith("Deathtouch") || keyword.endsWith("Wither")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || ((!canBeBlocked || !ComputerUtilCombat.canAttackNextTurn(card))
-                            && !CombatUtil.canBlock(card, true))) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && ((canBeBlocked && ComputerUtilCombat.canAttackNextTurn(card))
+                    || CombatUtil.canBlock(card, true));
         } else if (keyword.equals("Double Strike") || keyword.equals("Lifelink")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || (!ComputerUtilCombat.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.equals("First Strike")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0 || card.hasKeyword(Keyword.DOUBLE_STRIKE)
-            		|| (!ComputerUtilCombat.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0 && !card.hasKeyword(Keyword.DOUBLE_STRIKE)
+                    && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.startsWith("Flanking")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !ComputerUtilCombat.canAttackNextTurn(card)
-                    || !canBeBlocked) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && ComputerUtilCombat.canAttackNextTurn(card)
+                    && canBeBlocked;
         } else if (keyword.startsWith("Bushido")) {
-            if ((!canBeBlocked || !ComputerUtilCombat.canAttackNextTurn(card))
-                    && !CombatUtil.canBlock(card, true)) {
-                return false;
-            }
+            return (canBeBlocked && ComputerUtilCombat.canAttackNextTurn(card))
+                    || CombatUtil.canBlock(card, true);
         } else if (keyword.equals("Trample")) {
-            if (card.getNetCombatDamage() + powerBonus <= 1
-                    || !canBeBlocked
-                    || !ComputerUtilCombat.canAttackNextTurn(card)) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 1
+                    && canBeBlocked
+                    && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.equals("Infect")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !ComputerUtilCombat.canAttackNextTurn(card)) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.equals("Vigilance")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !ComputerUtilCombat.canAttackNextTurn(card)
-                    || !CombatUtil.canBlock(card, true)) {
-                return false;
-            }
+            return card.getNetCombatDamage() + powerBonus > 0
+                    && ComputerUtilCombat.canAttackNextTurn(card)
+                    && CombatUtil.canBlock(card, true);
         } else if (keyword.equals("Reach")) {
-            if (card.hasKeyword(Keyword.FLYING) || !CombatUtil.canBlock(card, true)) {
-                return false;
-            }
+            return !card.hasKeyword(Keyword.FLYING) && CombatUtil.canBlock(card, true);
         } else if (keyword.endsWith("CARDNAME can block an additional creature each combat.")) {
-            if (!CombatUtil.canBlock(card, true) || card.hasKeyword("CARDNAME can block any number of creatures.")
-                    || card.hasKeyword("CARDNAME can block an additional ninety-nine creatures each combat.")) {
-                return false;
-            }
+            return CombatUtil.canBlock(card, true) && !card.hasKeyword("CARDNAME can block any number of creatures.")
+                    && !card.hasKeyword("CARDNAME can block an additional ninety-nine creatures each combat.");
         } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
-            if (!card.hasKeyword(Keyword.DEFENDER) || card.getNetCombatDamage() + powerBonus <= 0) {
-                return false;
-            }
+            return card.hasKeyword(Keyword.DEFENDER) && card.getNetCombatDamage() + powerBonus > 0;
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
-            if (card.hasKeyword(Keyword.SHROUD) || card.hasKeyword(Keyword.HEXPROOF)) {
-                return false;
-            }
-        } else if (keyword.equals("Defender")) {
-        	return false;
-        }
-        return true;
+            return !card.hasKeyword(Keyword.SHROUD) && !card.hasKeyword(Keyword.HEXPROOF);
+        } else return !keyword.equals("Defender");
     }
 
     /**
@@ -1657,17 +1620,11 @@ public class AttachAi extends SpellAbilityAi {
 
         if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")
                 || keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (!ComputerUtilCombat.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
-                return false;
-            }
+            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 1;
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.") || keyword.endsWith("CARDNAME attacks each combat if able.")) {
-            if (!ComputerUtilCombat.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true) || ai.getCreaturesInPlay().isEmpty()) {
-                return false;
-            }
+            return ComputerUtilCombat.canAttackNextTurn(card) && CombatUtil.canBlock(card, true) && !ai.getCreaturesInPlay().isEmpty();
         } else if (keyword.endsWith("CARDNAME can't block.") || keyword.contains("CantBlock")) {
-            if (!CombatUtil.canBlock(card, true)) {
-                return false;
-            }
+            return CombatUtil.canBlock(card, true);
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
             for (SpellAbility ability : card.getSpellAbilities()) {
                 if (ability.isAbility()) {
@@ -1676,18 +1633,12 @@ public class AttachAi extends SpellAbilityAi {
             }
             return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
-            if (!ComputerUtilCombat.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
-                return false;
-            }
+            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 1;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            if (!ComputerUtilCombat.canAttackNextTurn(card) || card.getNetCombatDamage() < 2) {
-                return false;
-            }
+            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 2;
         } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {
-            if (card.isUntapped()) {
-                return false;
-            }
+            return !card.isUntapped();
         }
         return true;
     }
@@ -1711,12 +1662,8 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         }
 
-        if (sa.getHostCard().isEquipment() && ComputerUtilCard.isUselessCreature(ai, c)) {
-            // useless to equip a creature that can't attack or block.
-            return false;
-        }
-
-        return true;
+        // useless to equip a creature that can't attack or block.
+        return !sa.getHostCard().isEquipment() || !ComputerUtilCard.isUselessCreature(ai, c);
     }
 
     public static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
