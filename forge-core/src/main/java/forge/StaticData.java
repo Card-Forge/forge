@@ -110,7 +110,7 @@ public class StaticData {
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
         if (sortedEditions == null) {
-            sortedEditions = new ArrayList<CardEdition>();
+            sortedEditions = new ArrayList<>();
             for (CardEdition set : editions) {
                 sortedEditions.add(set);
             }

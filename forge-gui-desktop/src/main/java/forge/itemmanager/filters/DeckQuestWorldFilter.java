@@ -11,7 +11,7 @@ import forge.quest.QuestWorld;
 
 
 public class DeckQuestWorldFilter extends DeckFormatFilter {
-    private final Set<QuestWorld> questWorlds = new HashSet<QuestWorld>();
+    private final Set<QuestWorld> questWorlds = new HashSet<>();
 
     public DeckQuestWorldFilter(final ItemManager<? super DeckProxy> itemManager0) {
         super(itemManager0);
@@ -72,7 +72,7 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
 
     @Override
     protected Iterable<String> getList() {
-        final Set<String> strings = new HashSet<String>();
+        final Set<String> strings = new HashSet<>();
         for (final QuestWorld w : this.questWorlds) {
             strings.add(w.getName());
         }

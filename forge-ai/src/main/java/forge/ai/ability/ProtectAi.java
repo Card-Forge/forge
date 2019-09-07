@@ -30,7 +30,7 @@ import forge.util.MyRandom;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        final List<String> onlyColors = new ArrayList<String>(MagicColor.Constant.ONLY_COLORS);
+        final List<String> onlyColors = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {

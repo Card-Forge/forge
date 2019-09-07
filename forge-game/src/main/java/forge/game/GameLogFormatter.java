@@ -130,7 +130,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
         final GameOutcome outcome1 = gamesPlayed.get(0);
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
-        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<RegisteredPlayer, Integer>();
+        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<>();
 
         // Calculate total games each player has won.
         for (final GameOutcome game : gamesPlayed) {
@@ -229,11 +229,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 continue;
             }
             if (sb.length() > 0) sb.append("\n");
-            sb.append(ev.player + " assigned " + Lang.joinHomogenous(attackers));
-            sb.append(" to attack " + k + ".");
+            sb.append(ev.player).append(" assigned ").append(Lang.joinHomogenous(attackers));
+            sb.append(" to attack ").append(k).append(".");
         }
         if (sb.length() == 0) {
-            sb.append(ev.player + " didn't attack this turn.");
+            sb.append(ev.player).append(" didn't attack this turn.");
         }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -265,10 +265,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
                 blockers = att.getValue();
                 if (blockers.isEmpty()) {
-                    sb.append(controllerName + " didn't block ");
+                    sb.append(controllerName).append(" didn't block ");
                 }
                 else {
-                    sb.append(controllerName + " assigned " + Lang.joinHomogenous(blockers) + " to block ");
+                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
                 }
 
                 sb.append(att.getKey()).append(".");

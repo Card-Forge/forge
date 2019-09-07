@@ -19,27 +19,27 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
             return defaultDescription;
         }
 
-        String buildDesc = null;
+        StringBuilder buildDesc = null;
 
         for (final String s : input) {
             if (s.startsWith("desc:") || s.startsWith("Desc:")) {
                 final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
-                    buildDesc = tmp[1];
+                    buildDesc = new StringBuilder(tmp[1]);
                 } else {
-                    buildDesc = "";
+                    buildDesc = new StringBuilder();
                 }
             } else if (buildDesc != null) {
                 if (s.contains(":")) {
-                    return buildDesc;
+                    return buildDesc.toString();
                 } else {
-                    buildDesc = buildDesc + " " + s;
+                    buildDesc.append(" ").append(s);
                 }
             }
         }
 
         if (buildDesc != null) {
-            return buildDesc;
+            return buildDesc.toString();
         }
         return defaultDescription;
     }
@@ -59,7 +59,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                 if (tmp.length > 1) {
                     final String [] setcodes = tmp[1].split(",");
                     if (setcodes.length > 0) {
-                        final List<String> sets = new ArrayList<String>();
+                        final List<String> sets = new ArrayList<>();
                         for (final String code : setcodes) {
                             if (FModel.getMagicDb().getEditions().contains(code)) {
                                 // System.out.println("Set " + code + " was found!");

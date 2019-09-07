@@ -27,7 +27,7 @@ public class Graphics {
 
     private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
-    private final Stack<Matrix4> transforms = new Stack<Matrix4>();
+    private final Stack<Matrix4> transforms = new Stack<>();
     private final Vector3 tmp = new Vector3();
     private float regionHeight;
     private Rectangle bounds;

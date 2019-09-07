@@ -129,7 +129,7 @@ public class TournamentSwiss extends AbstractTournament {
             return pairSwissGroup(players);
         }
 
-        Collections.sort(players, new Comparator<TournamentPlayer>() {
+        players.sort(new Comparator<TournamentPlayer>() {
             @Override
             public int compare(TournamentPlayer o1, TournamentPlayer o2) {
                 return availableOpponents.get(o1).size() - availableOpponents.get(o2).size();

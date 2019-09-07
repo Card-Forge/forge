@@ -114,7 +114,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
 
         final StringBuilder sb = new StringBuilder();
         if (this.genericCost > 0) {
-            sb.append("{" + this.genericCost + "}");
+            sb.append("{").append(this.genericCost).append("}");
         }
         for (final ManaCostShard s : this.shards) {
             if (s == ManaCostShard.X) {
@@ -251,7 +251,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         StringBuilder builder = new StringBuilder();
         builder.append(mc.hasNoCost ? -1 : mc.genericCost);
         for (ManaCostShard shard : mc.shards) {
-            builder.append(DELIM + shard.name());
+            builder.append(DELIM).append(shard.name());
         }
         return builder.toString();
     }

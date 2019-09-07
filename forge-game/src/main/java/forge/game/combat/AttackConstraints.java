@@ -45,7 +45,7 @@ public class AttackConstraints {
                     "If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.");
         }
 
-        final MapToAmount<Card> attacksIfOtherAttacks = new LinkedHashMapToAmount<Card>();
+        final MapToAmount<Card> attacksIfOtherAttacks = new LinkedHashMapToAmount<>();
         for (final Card possibleAttacker : possibleAttackers) {
             attacksIfOtherAttacks.add(possibleAttacker, possibleAttacker.getAmountOfKeyword("If a creature you control attacks, CARDNAME also attacks if able."));
         }
@@ -53,7 +53,7 @@ public class AttackConstraints {
         for (final Card possibleAttacker : possibleAttackers) {
             restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
 
-            final MapToAmount<Card> causesToAttack = new LinkedHashMapToAmount<Card>();
+            final MapToAmount<Card> causesToAttack = new LinkedHashMapToAmount<>();
             for (final Entry<Card, Integer> entry : attacksIfOtherAttacks.entrySet()) {
                 if (entry.getKey() != possibleAttacker) {
                     causesToAttack.add(entry.getKey(), entry.getValue().intValue());
@@ -97,7 +97,7 @@ public class AttackConstraints {
             return Pair.of(Collections.emptyMap(), Integer.valueOf(0));
         }
 
-        final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<Map<Card, GameEntity>>();
+        final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<>();
         final List<Attack> reqs = getSortedFilteredRequirements();
         final CardCollection myPossibleAttackers = new CardCollection(possibleAttackers);
 
@@ -172,8 +172,8 @@ public class AttackConstraints {
     }
 
     private final FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
-        return new FCollection<Map<Card, GameEntity>>
-            (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
+        return new FCollection<>
+                (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
     }
 
     private final List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
@@ -182,7 +182,7 @@ public class AttackConstraints {
         int localMaximum = maximum;
         final boolean isLimited = globalRestrictions.getMax() != -1;
         final Map<Card, GameEntity> myAttackers = Maps.newHashMap(attackers);
-        final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<GameEntity>();
+        final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<>();
         int attackersNeeded = 0;
 
         outer: while(!reqs.isEmpty()) {

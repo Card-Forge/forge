@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FDropDownMenu extends FDropDown {
-    protected final List<FMenuItem> items = new ArrayList<FMenuItem>();
+    protected final List<FMenuItem> items = new ArrayList<>();
 
     public FDropDownMenu() {
     }

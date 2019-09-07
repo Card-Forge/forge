@@ -220,19 +220,19 @@ public class Untap extends Phase {
     private static void optionalUntap(final Card c) {
         if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
             if (c.isTapped()) {
-                String prompt = "Untap " + c.toString() + "?";
+                StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
                 boolean defaultChoice = true;
                 if (c.getGainControlTargets().size() > 0) {
                     final Iterable<Card> targets = c.getGainControlTargets();
-                    prompt += "\r\n" + c + " is controlling: ";
+                    prompt.append("\r\n").append(c).append(" is controlling: ");
                     for (final Card target : targets) {
-                        prompt += target;
+                        prompt.append(target);
                         if (target.isInPlay()) {
                             defaultChoice = false;
                         }
                     }
                 }
-                boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt, BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
+                boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
                 if (untap) {
                     c.untap();
                 }

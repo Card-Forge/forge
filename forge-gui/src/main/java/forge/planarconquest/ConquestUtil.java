@@ -311,13 +311,13 @@ public class ConquestUtil {
     }
 
     public static AEtherFilter getColorFilter(ColorSet color) {
-        String name = "";
+        StringBuilder name = new StringBuilder();
         for (ManaCostShard s : color.getOrderedShards()) {
-            name += s.toString();
+            name.append(s.toString());
         }
-        name = name.replaceAll("[{}]", ""); //remove all brackets
+        name = new StringBuilder(name.toString().replaceAll("[{}]", "")); //remove all brackets
         try {
-            return AEtherFilter.valueOf(name);
+            return AEtherFilter.valueOf(name.toString());
         }
         catch (Exception e) {
             System.err.println("No color filter with name " + name);
@@ -462,7 +462,7 @@ public class ConquestUtil {
             double baseOdds = 0;
             double remainingOdds = 1;
             CardRarity baseRarity = null;
-            String caption = "";
+            StringBuilder caption = new StringBuilder();
 
             for (CardRarity rarity : rarityOdds.keySet()) {
                 Double odds = oddsLookup.get(rarity);
@@ -479,16 +479,16 @@ public class ConquestUtil {
                     final String display = rounded < 1d
                             ? Double.toString(rounded) // Display decimal if < 1%
                             : Long.toString(Math.round(rounded));
-                    caption += ", " + rarity.getLongName() + " (" + display + "%)";
+                    caption.append(", ").append(rarity.getLongName()).append(" (").append(display).append("%)");
                     rarityOdds.put(rarity, odds);
                 }
             }
 
             //prepend base rarity and odds
-            caption = baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)" + caption;
+            caption.insert(0, baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)");
             rarityOdds.put(baseRarity, remainingOdds);
 
-            return caption;
+            return caption.toString();
         }
 
         @Override

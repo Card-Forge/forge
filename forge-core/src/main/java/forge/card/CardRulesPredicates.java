@@ -627,7 +627,7 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
 
         /** The Constant colors. */
-        public static final List<Predicate<CardRules>> COLORS = new ArrayList<Predicate<CardRules>>();
+        public static final List<Predicate<CardRules>> COLORS = new ArrayList<>();
         static {
             Presets.COLORS.add(Presets.IS_WHITE);
             Presets.COLORS.add(Presets.IS_BLUE);

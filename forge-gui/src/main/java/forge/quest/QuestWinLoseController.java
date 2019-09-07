@@ -227,7 +227,7 @@ public class QuestWinLoseController {
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
         if(qEvent.getIsRandomMatch()){
-            sb.append("Random Opponent Bonus: " + credBase + " credit" + (credBase > 1 ? "s." : ".") + "\n");
+            sb.append("Random Opponent Bonus: ").append(credBase).append(" credit").append(credBase > 1 ? "s." : ".").append("\n");
             credBase += credBase;
         }
 

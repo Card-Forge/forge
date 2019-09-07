@@ -482,7 +482,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        List<ZoneType> origin = new ArrayList<ZoneType>();
+        List<ZoneType> origin = new ArrayList<>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
@@ -557,7 +557,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
         final CardCollectionView combined = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
-        final List<String> basics = new ArrayList<String>();
+        final List<String> basics = new ArrayList<>();
 
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
@@ -1281,7 +1281,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             final List<GameObject> objects = ComputerUtil
                     .predictThreatenedObjects(ai, sa);
 
-            final List<Card> threatenedTargets = new ArrayList<Card>();
+            final List<Card> threatenedTargets = new ArrayList<>();
 
             for (final Card c : aiPermanents) {
                 if (objects.contains(c)) {

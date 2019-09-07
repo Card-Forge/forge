@@ -34,7 +34,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         int min = Integer.MAX_VALUE;
         
         final FCollectionView<Player> players = game.getPlayersInTurnOrder();
-        final List<CardCollection> validCards = new ArrayList<CardCollection>(players.size());
+        final List<CardCollection> validCards = new ArrayList<>(players.size());
         
         for(int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player

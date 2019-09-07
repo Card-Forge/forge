@@ -139,7 +139,7 @@ public class AdvancedSearch {
             @Override
             protected Set<String> getItemValues(PaperCard input) {
                 final CardType type = input.getRules().getType();
-                final Set<String> types = new HashSet<String>();
+                final Set<String> types = new HashSet<>();
                 for (Supertype t : type.getSupertypes()) {
                     types.add(t.name());
                 }
@@ -209,7 +209,7 @@ public class AdvancedSearch {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
                 if (cards.size() <= 1) { return true; }
 
-                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                cards.sort(FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
                 return cards.get(0) == input;
             }
         }),
@@ -736,7 +736,7 @@ public class AdvancedSearch {
                     }
                 };
             }
-            return new Filter<T>(option, operator, caption, predicate);
+            return new Filter<>(option, operator, caption, predicate);
         }
 
         protected abstract List<V> getValues(FilterOption option, FilterOperator operator);
@@ -754,7 +754,7 @@ public class AdvancedSearch {
 
         @Override
         protected List<Boolean> getValues(FilterOption option, FilterOperator operator) {
-            List<Boolean> values = new ArrayList<Boolean>();
+            List<Boolean> values = new ArrayList<>();
             values.add(operator == FilterOperator.IS_TRUE); //just always add a single boolean value so other logic works
             return values;
         }
@@ -785,7 +785,7 @@ public class AdvancedSearch {
             Integer lowerBound = SGuiChoose.getInteger(message, min, max);
             if (lowerBound == null) { return null; }
 
-            final List<Integer> values = new ArrayList<Integer>();
+            final List<Integer> values = new ArrayList<>();
             values.add(lowerBound);
 
             if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
@@ -825,7 +825,7 @@ public class AdvancedSearch {
 
             initialInput = value; //store value as initial input for next time
 
-            List<String> values = new ArrayList<String>();
+            List<String> values = new ArrayList<>();
             values.add(value);
             return values;
         }
@@ -886,12 +886,12 @@ public class AdvancedSearch {
                 return formatValue(values.get(0)) + finalDelim + formatValue(values.get(1));
             default:
                 int lastValueIdx = valueCount - 1;
-                String result = formatValue(values.get(0));
+                StringBuilder result = new StringBuilder(formatValue(values.get(0)));
                 for (int i = 1; i < lastValueIdx; i++) {
-                    result += delim + formatValue(values.get(i));
+                    result.append(delim).append(formatValue(values.get(i)));
                 }
-                result += delim.trim() + finalDelim + formatValue(values.get(lastValueIdx));
-                return result;
+                result.append(delim.trim()).append(finalDelim).append(formatValue(values.get(lastValueIdx)));
+                return result.toString();
             }
         }
 
@@ -934,10 +934,10 @@ public class AdvancedSearch {
                 if (amount == null) { return null; }
             }
 
-            Map<String, Integer> map = new HashMap<String, Integer>();
+            Map<String, Integer> map = new HashMap<>();
             map.put(card.getName(), amount);
 
-            List<Map<String, Integer>> values = new ArrayList<Map<String, Integer>>();
+            List<Map<String, Integer>> values = new ArrayList<>();
             values.add(map);
             return values;
         }
@@ -958,7 +958,7 @@ public class AdvancedSearch {
         final FilterOption defaultOption = editFilter == null ? null : editFilter.option;
         if (defaultOption == null || reselectOption) {
             //build list of filter options based on ItemManager type
-            List<FilterOption> options = new ArrayList<FilterOption>();
+            List<FilterOption> options = new ArrayList<>();
             if (editFilter != null) {
                 options.add(FilterOption.NONE); //provide option to clear existing filter
             }
@@ -1051,8 +1051,8 @@ public class AdvancedSearch {
     public static class Model<T extends InventoryItem> {
         private static final String EMPTY_FILTER_TEXT = "Select Filter...";
 
-        private final List<Object> expression = new ArrayList<Object>();
-        private final List<IFilterControl<T>> controls = new ArrayList<IFilterControl<T>>();
+        private final List<Object> expression = new ArrayList<>();
+        private final List<IFilterControl<T>> controls = new ArrayList<>();
         private IButton label;
 
         public Model() {
@@ -1233,15 +1233,15 @@ public class AdvancedSearch {
             StringBuilder builder = new StringBuilder();
             builder.append("Filter:\n");
 
-            String indent = "";
+            StringBuilder indent = new StringBuilder();
 
             for (Object piece : expression) {
-                if (piece.equals(Operator.CLOSE_PAREN) && !indent.isEmpty()) {
-                    indent = indent.substring(2); //trim an indent level when a close paren is hit
+                if (piece.equals(Operator.CLOSE_PAREN) && (indent.length() > 0)) {
+                    indent = new StringBuilder(indent.substring(2)); //trim an indent level when a close paren is hit
                 }
-                builder.append("\n" + indent + piece.toString().trim());
+                builder.append("\n").append(indent).append(piece.toString().trim());
                 if (piece.equals(Operator.OPEN_PAREN)) {
-                    indent += "  "; //add an indent level when an open paren is hit
+                    indent.append("  "); //add an indent level when an open paren is hit
                 }
             }
             return GuiBase.getInterface().encodeSymbols(builder.toString(), false);

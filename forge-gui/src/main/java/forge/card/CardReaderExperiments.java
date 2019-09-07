@@ -18,12 +18,12 @@ public class CardReaderExperiments {
         if (args.length < 2) { return; }
 
         int totalParsedCount = 0;
-        final List<List<String>> output = new ArrayList<List<String>>();
+        final List<List<String>> output = new ArrayList<>();
         for (int i = 1; i < args.length; i++) {
-            output.add(new ArrayList<String>());
+            output.add(new ArrayList<>());
         }
         
-        final List<File> allFiles = CardStorageReader.collectCardFiles(new ArrayList<File>(), new File(ForgeConstants.CARD_DATA_DIR));
+        final List<File> allFiles = CardStorageReader.collectCardFiles(new ArrayList<>(), new File(ForgeConstants.CARD_DATA_DIR));
         Charset charset = Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME);
         final CardRules.Reader rulesReader = new CardRules.Reader();
         for (File file : allFiles) {
@@ -164,7 +164,7 @@ public class CardReaderExperiments {
                     StringBuilder newLineBuilder = new StringBuilder();
                     newLineBuilder.append(line, 0, m.start(1));
                     for (String sym : m.group(1).split(" ")) {
-                        newLineBuilder.append("{" + sym + "}");
+                        newLineBuilder.append("{").append(sym).append("}");
                     }
                     newLineBuilder.append(line.substring(m.end(1) - 1)); //-1 so final space appended
                     updated = true;

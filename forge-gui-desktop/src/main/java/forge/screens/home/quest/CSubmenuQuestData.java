@@ -101,7 +101,7 @@ public enum CSubmenuQuestData implements ICDoc {
                     @Override
                     public void run() {
                         customFormatCodes.clear();
-                        Set<String> sets = new HashSet<String>();
+                        Set<String> sets = new HashSet<>();
                         for(GameFormat format:dialog.getSelectedFormats()){
                             sets.addAll(format.getAllowedSetCodes());
                         }
@@ -133,7 +133,7 @@ public enum CSubmenuQuestData implements ICDoc {
                     @Override
                     public void run() {
                         customPrizeFormatCodes.clear();
-                        Set<String> sets = new HashSet<String>();
+                        Set<String> sets = new HashSet<>();
                         for(GameFormat format:dialog.getSelectedFormats()){
                             sets.addAll(format.getAllowedSetCodes());
                         }

@@ -444,7 +444,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (decksComboBox.getDeckType() == null || decksComboBox.getDeckType() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
-            state.append(NetDeckCategory.PREFIX + netDeckCategory.getName());
+            state.append(NetDeckCategory.PREFIX).append(netDeckCategory.getName());
         }
         else {
             state.append(decksComboBox.getDeckType().name());
@@ -506,13 +506,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private List<String> getSelectedDecksFromSavedState(final String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
-                return new ArrayList<String>();
+                return new ArrayList<>();
             } else {
                 return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
             }
         } catch (final Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 

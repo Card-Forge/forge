@@ -98,7 +98,7 @@ public class CustomLimited extends DeckBase {
     public static CustomLimited parse(final List<String> dfData, final IStorage<Deck> cubes) {
         final FileSection data = FileSection.parse(dfData, ":");
 
-        List<Pair<String, Integer>> slots = new ArrayList<Pair<String, Integer>>();
+        List<Pair<String, Integer>> slots = new ArrayList<>();
         String boosterData = data.get("Booster");
         if (StringUtils.isNotEmpty(boosterData)) {
             final String[] booster = TextUtil.splitWithParenthesis(boosterData, ',');

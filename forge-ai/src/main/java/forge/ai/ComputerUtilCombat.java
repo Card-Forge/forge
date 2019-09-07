@@ -965,7 +965,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1100,7 +1100,7 @@ public class ComputerUtilCombat {
         } 
 
         final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1284,7 +1284,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1505,7 +1505,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1726,7 +1726,7 @@ public class ComputerUtilCombat {
         }
 
         // check Destroy triggers (Cockatrice and friends)
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : attacker.getGame().getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -2006,7 +2006,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = blocker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }

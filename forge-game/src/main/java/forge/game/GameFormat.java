@@ -101,14 +101,14 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             allowedSetCodes = Lists.newArrayList(parsedSets);
         }else{
-            allowedSetCodes = new ArrayList<String>();
+            allowedSetCodes = new ArrayList<>();
         }
 
-        bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
-        restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
-        allowedRarities = rarities == null ? new ArrayList<CardRarity>() : rarities;
+        bannedCardNames = bannedCards == null ? new ArrayList<>() : Lists.newArrayList(bannedCards);
+        restrictedCardNames = restrictedCards == null ? new ArrayList<>() : Lists.newArrayList(restrictedCards);
+        allowedRarities = rarities == null ? new ArrayList<>() : rarities;
         this.restrictedLegendary = restrictedLegendary;
-        additionalCardNames = additionalCards == null ? new ArrayList<String>() : Lists.newArrayList(additionalCards);
+        additionalCardNames = additionalCards == null ? new ArrayList<>() : Lists.newArrayList(additionalCards);
 
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
@@ -195,7 +195,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public List<PaperCard> getAllCards() {
-        List<PaperCard> cards = new ArrayList<PaperCard>();
+        List<PaperCard> cards = new ArrayList<>();
         CardDb commonCards = StaticData.instance().getCommonCards();
         for (String setCode : allowedSetCodes_ro) {
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
@@ -285,7 +285,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public static class Reader extends StorageReaderRecursiveFolderWithUserFolder<GameFormat> {
-        List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
+        List<GameFormat> naturallyOrdered = new ArrayList<>();
         boolean includeHistoric;
         private List<String> coreFormats = new ArrayList<>();
         {
@@ -403,6 +403,7 @@ public class GameFormat implements Comparable<GameFormat> {
             naturallyOrdered = reader.naturallyOrdered;
             reverseDateOrdered = new ArrayList<>(naturallyOrdered);
             Collections.sort(naturallyOrdered);
+            //Why this refactor doesnt work on some android phones? -> reverseDateOrdered.sort(new InverseDateComparator());
             Collections.sort(reverseDateOrdered, new InverseDateComparator());
         }
 
@@ -484,7 +485,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public Set<GameFormat> getAllFormatsOfCard(PaperCard card) {
-            Set<GameFormat> result = new HashSet<GameFormat>();
+            Set<GameFormat> result = new HashSet<>();
             for (GameFormat gf : naturallyOrdered) {
                 if (gf.getFilterRules().apply(card)) {
                     result.add(gf);
@@ -501,7 +502,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public Set<GameFormat> getAllFormatsOfDeck(Deck deck, Boolean exhaustive) {
-            SortedSet<GameFormat> result = new TreeSet<GameFormat>();
+            SortedSet<GameFormat> result = new TreeSet<>();
             Set<FormatSubType> coveredTypes = new HashSet<>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : reverseDateOrdered) {

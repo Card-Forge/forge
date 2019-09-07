@@ -320,7 +320,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         if (isColorless()) {
             return EnumSet.of(Color.COLORLESS);
         }
-        List<Color> list = new ArrayList<Color>();
+        List<Color> list = new ArrayList<>();
         for (Color c : Color.values()) {
             if (hasAnyColor(c.getColormask())) {
                 list.add(c);

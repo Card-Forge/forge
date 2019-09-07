@@ -25,7 +25,7 @@ public class FSkinFont {
     private static final int MAX_FONT_SIZE = 72;
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
+    private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
     private static final GlyphLayout layout = new GlyphLayout();
 
     static {

@@ -15,7 +15,7 @@ public class ForgeTransition extends ForgeAnimation {
         @Override protected void doLayout(final float width, final float height) {
         }
     };
-    private static final Map<FDisplayObject, TransitionObject> transitionLookup = new LinkedHashMap<FDisplayObject, TransitionObject>();
+    private static final Map<FDisplayObject, TransitionObject> transitionLookup = new LinkedHashMap<>();
 
     public static void queue(final FDisplayObject obj, final Rectangle destBounds, final float duration, final Runnable onFinished) {
         queue(obj, destBounds, duration, 0, false, onFinished);
@@ -87,7 +87,7 @@ public class ForgeTransition extends ForgeAnimation {
 
     private static class TransitionObject extends FDisplayObject {
         private final FDisplayObject originalObj;
-        private final LinkedList<ForgeTransition> transitions = new LinkedList<ForgeTransition>();
+        private final LinkedList<ForgeTransition> transitions = new LinkedList<>();
 
         private TransitionObject(final FDisplayObject originalObj0) {
             originalObj = originalObj0;

@@ -24,7 +24,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         }
         ItemPool uniqueCards;
         if (isCardGen){
-            uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
+            uniqueCards = new ItemPool<>(PaperCard.class);
             String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
             Iterable<String> legendNames = CardRelationMatrixGenerator.cardPools.get(matrixKey).keySet();
             for (String legendName : legendNames) {
@@ -44,7 +44,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
                         }
                     },
                     canPlay), PaperCard.FN_GET_RULES));
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));
         }
@@ -54,7 +54,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
     public static List<DeckProxy> getBrawlDecks(final DeckFormat format, boolean isForAi, boolean isCardGen){
         ItemPool uniqueCards;
         if (isCardGen){
-            uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
+            uniqueCards = new ItemPool<>(PaperCard.class);
             //TODO: update to actual Brawl model from real Brawl decks
             Iterable<String> legendNames=CardArchetypeLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).keySet();
             for (String legendName : legendNames) {
@@ -70,7 +70,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
                 Predicates.compose(Predicates.and(
                 CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER,
                 canPlay), PaperCard.FN_GET_RULES)));
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));
         }

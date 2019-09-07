@@ -77,7 +77,7 @@ public class CostTapType extends CostPartWithList {
             sb.append("two untapped creatures you control that share a creature type");
         } else if (type.contains("+withTotalPowerGE")) {
             String num = type.split("\\+withTotalPowerGE")[1];
-            sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power " + num + "or greater");
+            sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power ").append(num).append("or greater");
         } else {
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
             sb.append(" you control");

@@ -168,8 +168,8 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-	FCollection<T> remaining = new FCollection<T>(optionList);
-	List<T> selecteds = new ArrayList<T>();
+	FCollection<T> remaining = new FCollection<>(optionList);
+	List<T> selecteds = new ArrayList<>();
 	T selected;
 	do {
 	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
@@ -1072,7 +1072,7 @@ public class PlayerControllerAi extends PlayerController {
                     }
                 });
             } else {
-                return new HashMap<Card, ManaCostShard>();
+                return new HashMap<>();
             }
         }
         

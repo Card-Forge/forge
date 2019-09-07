@@ -24,7 +24,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
     private static Map<String, NetDeckCategory> constructed, commander;
 
     private static Map<String, NetDeckCategory> loadCategories(String filename) {
-        Map<String, NetDeckCategory> categories = new TreeMap<String, NetDeckCategory>();
+        Map<String, NetDeckCategory> categories = new TreeMap<>();
         if (FileUtil.doesFileExist(filename)) {
             List<String> lines = FileUtil.readFile(filename);
             for (String line : lines) {
@@ -108,7 +108,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
     private final String url;
 
     private NetDeckCategory(String name0, String url0) {
-        super(name0, ForgeConstants.DECK_NET_DIR + name0, new HashMap<String, Deck>());
+        super(name0, ForgeConstants.DECK_NET_DIR + name0, new HashMap<>());
         url = url0;
     }
 

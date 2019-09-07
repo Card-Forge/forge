@@ -51,7 +51,7 @@ public class PossibleTargetSelector {
         this.sa = sa;
         this.targetingSa = targetingSa;
         this.targetingSaIndex = targetingSaIndex;
-        this.validTargets = new ArrayList<GameObject>();
+        this.validTargets = new ArrayList<>();
         generateValidTargets(sa.getHostCard().getController());
     }
 
@@ -81,7 +81,7 @@ public class PossibleTargetSelector {
 
     private static class SimilarTargetSkipper {
         private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
-        private HashMap<Card, String> cardTypeStrings = new HashMap<Card, String>();
+        private HashMap<Card, String> cardTypeStrings = new HashMap<>();
         private HashMap<Card, Integer> creatureScores;
 
         private int getCreatureScore(Card c) {
@@ -91,7 +91,7 @@ public class PossibleTargetSelector {
                     return score;
                 }
             } else  {
-                creatureScores = new HashMap<Card, Integer>();
+                creatureScores = new HashMap<>();
             }
 
             int score = ComputerUtilCard.evaluateCreature(c);

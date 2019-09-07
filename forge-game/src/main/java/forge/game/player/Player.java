@@ -119,7 +119,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
-    private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
+    private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<>();
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
@@ -768,8 +768,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             CardCollection preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {
-                Map<String, Card> choiceMap = new TreeMap<String, Card>();
-                List<String> choices = new ArrayList<String>();
+                Map<String, Card> choiceMap = new TreeMap<>();
+                List<String> choices = new ArrayList<>();
                 for (final Card key : preventionEffectSources) {
                     String effDesc = shieldMap.get(key).get("EffectString");
                     int descIndex = effDesc.indexOf("SpellDescription");
@@ -1148,7 +1148,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final FCollectionView<StaticAbility> getStaticAbilities() {
-        FCollection<StaticAbility> result = new FCollection<StaticAbility>();
+        FCollection<StaticAbility> result = new FCollection<>();
         for (DetachedCardEffect eff : staticAbilities.values()) {
             result.addAll(eff.getStaticAbilities());
         }
@@ -1711,7 +1711,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (land.isFaceDown()) {
             land.turnFaceUp();
         }
-        game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, new HashMap<String, Object>());
+        game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, new HashMap<>());
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(this, land));

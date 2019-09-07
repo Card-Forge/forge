@@ -29,9 +29,9 @@ public class AttackRequirement {
     private final MapToAmount<Card> causesToAttack;
 
     public AttackRequirement(final Card attacker, final MapToAmount<Card> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
-        this.defenderSpecific = new LinkedHashMapToAmount<GameEntity>();
-        this.defenderOrPWSpecific = new LinkedHashMapToAmount<GameEntity>();
-        this.defenderSpecificAlternatives = new HashMap<GameEntity, List<GameEntity>>();
+        this.defenderSpecific = new LinkedHashMapToAmount<>();
+        this.defenderOrPWSpecific = new LinkedHashMapToAmount<>();
+        this.defenderSpecificAlternatives = new HashMap<>();
 
         this.causesToAttack = causesToAttack;
 

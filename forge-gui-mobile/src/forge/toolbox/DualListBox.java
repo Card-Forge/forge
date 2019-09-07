@@ -206,7 +206,7 @@ public class DualListBox<T> extends FDialog {
         private final FEventHandler onActivate;
 
         private ChoiceList(Collection<T> items, final T typeItem, final FEventHandler onActivate0) {
-            super(items != null ? items : new ArrayList<T>(), typeItem); //handle null without crashing
+            super(items != null ? items : new ArrayList<>(), typeItem); //handle null without crashing
             onActivate = onActivate0;
         }
 

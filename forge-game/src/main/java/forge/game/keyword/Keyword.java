@@ -245,20 +245,20 @@ public enum Keyword {
 
     public static List<Keyword> getAllKeywords() {
         Keyword[] values = values();
-        List<Keyword> keywords = new ArrayList<Keyword>();
+        List<Keyword> keywords = new ArrayList<>();
         for (int i = 1; i < values.length; i++) { //skip UNDEFINED
             keywords.add(values[i]);
         }
         return keywords;
     }
 
-    private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<String, Set<Keyword>>();
+    private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
         String key = card.getName();
         Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
         if (keywordSet == null) {
-            keywordSet = new HashSet<Keyword>();
+            keywordSet = new HashSet<>();
             for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
                 final Keyword keyword = inst.getKeyword();
                 if (keyword != Keyword.UNDEFINED) {

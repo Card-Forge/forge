@@ -63,7 +63,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
-    private List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private List<DeckSection> allSections = new ArrayList<>();
     private final ItemPool<PaperCard> commanderPool;
     private final ItemPool<PaperCard> normalPool;
 
@@ -114,16 +114,16 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         CardCollections decks = FModel.getDecks();
         switch (gameType) {
         case TinyLeaders:
-            this.controller = new DeckController<Deck>(decks.getTinyLeaders(), this, newCreator);
+            this.controller = new DeckController<>(decks.getTinyLeaders(), this, newCreator);
             break;
         case Brawl:
-            this.controller = new DeckController<Deck>(decks.getBrawl(), this, newCreator);
+            this.controller = new DeckController<>(decks.getBrawl(), this, newCreator);
             break;
         case Oathbreaker:
-            this.controller = new DeckController<Deck>(decks.getOathbreaker(), this, newCreator);
+            this.controller = new DeckController<>(decks.getOathbreaker(), this, newCreator);
             break;
         default:
-            this.controller = new DeckController<Deck>(decks.getCommander(), this, newCreator);
+            this.controller = new DeckController<>(decks.getCommander(), this, newCreator);
             break;
         }
 

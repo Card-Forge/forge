@@ -79,7 +79,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private final CMatchUI matchUI;
     private CardView card;
     private CardPanel attachedToPanel;
-    private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
+    private List<CardPanel> attachedPanels = new ArrayList<>();
     private List<CardPanel> stack;
     private boolean tapped;
     private double tappedAngle = 0;

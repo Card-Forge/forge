@@ -19,7 +19,7 @@ public class RegisteredPlayer {
     private final Deck originalDeck; // never return or modify this instance (it's a reference to game resources)
     private Deck currentDeck;
 
-    private static final Iterable<PaperCard> EmptyList = Collections.unmodifiableList(new ArrayList<PaperCard>());
+    private static final Iterable<PaperCard> EmptyList = Collections.unmodifiableList(new ArrayList<>());
     
     private LobbyPlayer player = null;
     

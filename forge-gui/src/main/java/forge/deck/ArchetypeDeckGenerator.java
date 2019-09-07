@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<ArchetypeDeckGenerator> {
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
             for(Archetype archetype: CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName())) {
                 decks.add(new ArchetypeDeckGenerator(archetype, format, isForAi));
             }

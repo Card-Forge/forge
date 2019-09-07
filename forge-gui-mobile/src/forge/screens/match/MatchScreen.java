@@ -330,7 +330,7 @@ public class MatchScreen extends FScreen {
         if (game == null) { return; }
 
         //draw arrows for paired cards
-        Set<CardView> pairedCards = new HashSet<CardView>();
+        Set<CardView> pairedCards = new HashSet<>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways
@@ -506,7 +506,8 @@ public class MatchScreen extends FScreen {
                 float y = midField - topPlayerPanel.getField().getHeight();
                 float w = getWidth() - x;
                 float bgFullWidth, scaledbgHeight;
-                float bgHeight = midField + bottomPlayerPanel.getField().getHeight() - y;
+                int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
+                float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
                         && hasActivePlane()) {
                     String imageName = getPlaneName()
@@ -616,7 +617,7 @@ public class MatchScreen extends FScreen {
             y += oldScrollTop - VAvatar.HEIGHT;
 
             //build map of all horizontal scroll panes and their current scrollWidths and adjusted X values
-            Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<FScrollPane, Pair<Float, Float>>();
+            Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<>();
             backupHorzScrollPanes(topPlayerPanel, x, horzScrollPanes);
             backupHorzScrollPanes(bottomPlayerPanel, x, horzScrollPanes);
 

@@ -81,7 +81,7 @@ public class NewGauntletScreen extends LaunchScreen {
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
 
-                ListChooser<DeckType> chooser = new ListChooser<DeckType>(
+                ListChooser<DeckType> chooser = new ListChooser<>(
                         "Choose allowed deck types for opponents", 0, 11, Arrays.asList(DeckType.CUSTOM_DECK,
                         DeckType.PRECONSTRUCTED_DECK,
                         DeckType.QUEST_OPPONENT_DECK,
@@ -95,12 +95,16 @@ public class NewGauntletScreen extends LaunchScreen {
                         DeckType.THEME_DECK), null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
-                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
+                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) {
+                            return;
+                        }
 
                         FDeckChooser.promptForDeck("Select Your Deck", GameType.Gauntlet, false, new Callback<Deck>() {
                             @Override
                             public void run(Deck userDeck) {
-                                if (userDeck == null) { return; }
+                                if (userDeck == null) {
+                                    return;
+                                }
 
                                 GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, null);
                                 launchGauntlet(gauntlet);
@@ -120,7 +124,7 @@ public class NewGauntletScreen extends LaunchScreen {
                 if (numOpponents == null) { return; }
 
                 GauntletData gauntlet = new GauntletData();
-                gauntlet.setDecks(new ArrayList<Deck>());
+                gauntlet.setDecks(new ArrayList<>());
                 promptForAiDeck(gauntlet, numOpponents);
             }
         });
@@ -158,7 +162,7 @@ public class NewGauntletScreen extends LaunchScreen {
 
     private void createGauntletContest() {
         final File[] files = GauntletIO.getGauntletFilesLocked();
-        final List<GauntletData> contests = new ArrayList<GauntletData>();
+        final List<GauntletData> contests = new ArrayList<>();
         for (final File f : files) {
             GauntletData gd = GauntletIO.loadGauntlet(f);
             if (gd != null) {
@@ -178,8 +182,8 @@ public class NewGauntletScreen extends LaunchScreen {
 
                         //create copy of contest to use as gauntlet
                         GauntletData gauntlet = new GauntletData();
-                        gauntlet.setDecks(new ArrayList<Deck>(contest.getDecks()));
-                        gauntlet.setEventNames(new ArrayList<String>(contest.getEventNames()));
+                        gauntlet.setDecks(new ArrayList<>(contest.getDecks()));
+                        gauntlet.setEventNames(new ArrayList<>(contest.getEventNames()));
                         gauntlet.setUserDeck(userDeck);
                         GauntletUtil.setDefaultGauntletName(gauntlet, contest.getDisplayName() + "_");
                         launchGauntlet(gauntlet);
@@ -195,7 +199,7 @@ public class NewGauntletScreen extends LaunchScreen {
         gauntlet.reset();
 
         RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        List<RegisteredPlayer> players = new ArrayList<>();
         players.add(humanPlayer);
         players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
         gauntlet.startRound(players, humanPlayer);

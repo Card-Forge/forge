@@ -2,6 +2,7 @@ package forge.screens.home;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.SwingUtilities;
@@ -27,10 +28,8 @@ public class CLobby {
     }
 
     private void addDecks(final Iterable<DeckProxy> commanderDecks, FList<Object> deckList, String... initialItems) {
-        Vector<Object> listData = new Vector<Object>();
-        for (String item : initialItems) {
-            listData.add(item);
-        }
+        Vector<Object> listData = new Vector<>();
+        listData.addAll(Arrays.asList(initialItems));
         listData.add("Generate");
         if (!Iterables.isEmpty(commanderDecks)) {
             listData.add("Random");

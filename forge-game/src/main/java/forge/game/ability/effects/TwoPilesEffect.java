@@ -106,16 +106,16 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 CardCollectionView chosenPile = pile1WasChosen ? pile1 : pile2;
                 CardCollectionView unchosenPile = !pile1WasChosen ? pile1 : pile2;
                 
-                String notification = chooser + " chooses Pile " + (pile1WasChosen ? "1" : "2") + ":\n";
+                StringBuilder notification = new StringBuilder(chooser + " chooses Pile " + (pile1WasChosen ? "1" : "2") + ":\n");
                 if (!chosenPile.isEmpty()) {
                     for (Card c : chosenPile) {
-                        notification += c.getName() + "\n";
+                        notification.append(c.getName()).append("\n");
                     }
                 } else {
-                    notification += "(Empty pile)";
+                    notification.append("(Empty pile)");
                 }
 
-                p.getGame().getAction().nofityOfValue(sa, chooser, notification, chooser);
+                p.getGame().getAction().nofityOfValue(sa, chooser, notification.toString(), chooser);
 
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {

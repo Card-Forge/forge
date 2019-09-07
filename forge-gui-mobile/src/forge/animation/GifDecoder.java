@@ -405,7 +405,7 @@ public class GifDecoder {
     protected void init() {
         status = STATUS_OK;
         frameCount = 0;
-        frames = new Vector<GifFrame>();
+        frames = new Vector<>();
         gct = null;
         lct = null;
     }
@@ -504,11 +504,11 @@ public class GifDecoder {
                             break;
                         case 0xff: // application extension
                             readBlock();
-                            String app = "";
+                            StringBuilder app = new StringBuilder();
                             for (int i = 0; i < 11; i++) {
-                                app += (char) block[i];
+                                app.append((char) block[i]);
                             }
-                            if (app.equals("NETSCAPE2.0")) {
+                            if (app.toString().equals("NETSCAPE2.0")) {
                                 readNetscapeExt();
                             } else {
                                 skip(); // don't care
@@ -554,11 +554,11 @@ public class GifDecoder {
      * Reads GIF file header information.
      */
     protected void readHeader() {
-        String id = "";
+        StringBuilder id = new StringBuilder();
         for (int i = 0; i < 6; i++) {
-            id += (char) read();
+            id.append((char) read());
         }
-        if (!id.startsWith("GIF")) {
+        if (!id.toString().startsWith("GIF")) {
             status = STATUS_FORMAT_ERROR;
             return;
         }
@@ -712,7 +712,7 @@ public class GifDecoder {
         }
 
         Texture texture = new Texture(target);
-        Array<TextureRegion> texReg = new Array<TextureRegion>();
+        Array<TextureRegion> texReg = new Array<>();
 
         for(h = 0; h < hzones; h++) {
             for(v = 0; v < vzones; v++) {

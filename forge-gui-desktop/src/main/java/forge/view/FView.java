@@ -46,7 +46,7 @@ public enum FView {
 	public static final Integer OVERLAY_LAYER = NAVIGATION_BAR_REVEAL_LAYER - 1;
 	public static final Integer TARGETING_LAYER = OVERLAY_LAYER - 1;
 
-	private final List<DragCell> allCells = new ArrayList<DragCell>();
+	private final List<DragCell> allCells = new ArrayList<>();
 	private SplashFrame frmSplash;
 
 	// Top-level UI components; all have getters.
@@ -139,17 +139,17 @@ public enum FView {
 		{
 			// get profile directories -- if one of them is actually under the res directory, don't
 			// count is as data to migrate
-			final Set<File> profileDirs = new HashSet<File>();
+			final Set<File> profileDirs = new HashSet<>();
 			for (final String dname : ForgeConstants.PROFILE_DIRS) {
 				profileDirs.add(new File(dname));
 			}
 
-			final List<File> resDirs = new ArrayList<File>();
+			final List<File> resDirs = new ArrayList<>();
 			for (final String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
 				resDirs.add(new File("res", resDir));
 			}
 
-			final Set<File> doNotDeleteDirs = new HashSet<File>();
+			final Set<File> doNotDeleteDirs = new HashSet<>();
 			for (final String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
 				doNotDeleteDirs.add(new File("res", dir));
 			}
@@ -165,7 +165,7 @@ public enum FView {
 						}
 
 						// assemble a list of remaining files.
-						final List<File> remainingFiles = new LinkedList<File>();
+						final List<File> remainingFiles = new LinkedList<>();
 						_addRemainingFiles(remainingFiles, resDirs, profileDirs, doNotDeleteDirs);
 
 						// if any files remain, display them and make clear that they should be moved or
@@ -356,8 +356,8 @@ public enum FView {
 	// directories listed in profileDirs will not be searched
 	// removes empty directories to reduce tree conflicts
 	private static boolean _addRemainingFiles(final List<File> remainingFiles, final List<File> dirRoots, final Set<File> profileDirs, final Set<File> doNotDeleteDirs) {
-		final Deque<File> stack = new LinkedList<File>(dirRoots);
-		final Set<File> seenDirs = new HashSet<File>();
+		final Deque<File> stack = new LinkedList<>(dirRoots);
+		final Set<File> seenDirs = new HashSet<>();
 		boolean ret = false;
 		while (!stack.isEmpty()) {
 			File cur = stack.peek();
@@ -459,8 +459,7 @@ public enum FView {
 	 * @return {@link java.util.List}<{@link forge.gui.framework.DragCell}>
 	 */
 	public List<DragCell> getDragCells() {
-		final List<DragCell> clone = new ArrayList<DragCell>();
-		clone.addAll(allCells);
+        final List<DragCell> clone = new ArrayList<>(allCells);
 		return clone;
 	}
 

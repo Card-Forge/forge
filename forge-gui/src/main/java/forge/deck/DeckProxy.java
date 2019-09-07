@@ -172,7 +172,7 @@ public class DeckProxy implements InventoryItem {
                                 //track phyrexian and hybrid costs separately as they won't always affect color
                                 if (shard.isPhyrexian() || shard.isOr2Generic() || !shard.isMonoColor()) {
                                     if (nonReqColors == null) {
-                                        nonReqColors = new HashSet<Byte>();
+                                        nonReqColors = new HashSet<>();
                                     }
                                     nonReqColors.add(shard.getColorMask());
                                 }
@@ -350,7 +350,7 @@ public class DeckProxy implements InventoryItem {
         return getAllConstructedDecks(null);
     }
     public static Iterable<DeckProxy> getAllConstructedDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Constructed", GameType.Constructed, result, "", FModel.getDecks().getConstructed(), filter);
         return result;
     }
@@ -359,7 +359,7 @@ public class DeckProxy implements InventoryItem {
         return getAllCommanderDecks(null);
     }
     public static Iterable<DeckProxy> getAllCommanderDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander(), filter);
         return result;
     }
@@ -368,7 +368,7 @@ public class DeckProxy implements InventoryItem {
         return getAllOathbreakerDecks(null);
     }
     public static Iterable<DeckProxy> getAllOathbreakerDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Oathbreaker", GameType.Oathbreaker, result, "", FModel.getDecks().getOathbreaker(), filter);
         return result;
     }
@@ -377,7 +377,7 @@ public class DeckProxy implements InventoryItem {
         return getAllTinyLeadersDecks(null);
     }
     public static Iterable<DeckProxy> getAllTinyLeadersDecks(Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate();
         }
@@ -392,7 +392,7 @@ public class DeckProxy implements InventoryItem {
         return getAllBrawlDecks(null);
     }
     public static Iterable<DeckProxy> getAllBrawlDecks(Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.Brawl.hasLegalCardsPredicate();
         }
@@ -407,7 +407,7 @@ public class DeckProxy implements InventoryItem {
         return getAllSchemeDecks(null);
     }
     public static Iterable<DeckProxy> getAllSchemeDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Scheme", GameType.Archenemy, result, "", FModel.getDecks().getScheme(), filter);
         return result;
     }
@@ -416,7 +416,7 @@ public class DeckProxy implements InventoryItem {
         return getAllPlanarDecks(null);
     }
     public static Iterable<DeckProxy> getAllPlanarDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Plane", GameType.Planechase, result, "", FModel.getDecks().getPlane(), filter);
         return result;
     }
@@ -510,7 +510,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getAllThemeDecks() {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (final String s : DeckGeneratorTheme.getThemeNames()) {
             decks.add(new ThemeDeckGenerator(s));
         }
@@ -519,7 +519,7 @@ public class DeckProxy implements InventoryItem {
 
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getAllPreconstructedDecks(final IStorage<PreconDeck> iStorage) {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (final PreconDeck preconDeck : iStorage) {
             decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
         }
@@ -527,7 +527,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getAllQuestEventAndChallenges() {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         final QuestController quest = FModel.getQuest();
         for (final QuestEvent e : quest.getDuelsManager().getAllDuels()) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
@@ -540,7 +540,7 @@ public class DeckProxy implements InventoryItem {
 
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getAllSealedDecks() {
-        final List<DeckProxy> humanDecks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> humanDecks = new ArrayList<>();
         final IStorage<DeckGroup> sealed = FModel.getDecks().getSealed();
 
         // Since AI decks are tied directly to the human choice,
@@ -552,7 +552,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getAllQuestDecks(final IStorage<Deck> storage) {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         if (storage != null) {
             for (final Deck deck : storage) {
                 decks.add(new DeckProxy(deck, "Quest", GameType.Quest, storage));
@@ -563,7 +563,7 @@ public class DeckProxy implements InventoryItem {
 
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getAllDraftDecks() {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
         for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
@@ -573,7 +573,7 @@ public class DeckProxy implements InventoryItem {
 
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getWinstonDecks(final IStorage<DeckGroup> draft) {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Winston, draft));
         }
@@ -581,7 +581,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getNetDecks(final NetDeckCategory category) {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
         }

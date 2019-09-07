@@ -73,7 +73,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostChooseCreatureType cost) {
-        final String choice = controller.chooseSomeType("Creature", ability, new ArrayList<String>(CardType.Constant.CREATURE_TYPES), new ArrayList<String>(), true);
+        final String choice = controller.chooseSomeType("Creature", ability, new ArrayList<>(CardType.Constant.CREATURE_TYPES), new ArrayList<>(), true);
         if (null == choice) {
             return null;
         }
@@ -282,7 +282,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
 
         final FCollectionView<Player> players = game.getPlayers();
-        final List<Player> payableZone = new ArrayList<Player>();
+        final List<Player> payableZone = new ArrayList<>();
         for (final Player p : players) {
             final CardCollection enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
             if (enoughType.size() < c) {
@@ -332,8 +332,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         final String type = cost.getType();
-        final List<SpellAbility> saList = new ArrayList<SpellAbility>();
-        final List<String> descList = new ArrayList<String>();
+        final List<SpellAbility> saList = new ArrayList<>();
+        final List<String> descList = new ArrayList<>();
 
         for (final SpellAbilityStackInstance si : game.getStack()) {
             final Card stC = si.getSourceCard();
@@ -366,7 +366,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        final List<SpellAbility> exiled = new ArrayList<SpellAbility>();
+        final List<SpellAbility> exiled = new ArrayList<>();
         for (int i = 0; i < c; i++) {
             //Have to use the stack descriptions here because some copied spells have no description otherwise
             final String o = controller.getGui().oneOrNone("Exile from Stack", descList);
@@ -545,7 +545,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
+        final List<Player> oppsThatCanGainLife = new ArrayList<>();
         for (final Player opp : cost.getPotentialTargets(player, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
@@ -677,7 +677,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.sameZone){
             final FCollectionView<Player> players = player.getGame().getPlayers();
-            final List<Player> payableZone = new ArrayList<Player>();
+            final List<Player> payableZone = new ArrayList<>();
             for (final Player p : players) {
                 final CardCollectionView enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
                 if (enoughType.size() < c) {
@@ -898,7 +898,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         inp.showAndWait();
         final Card selected = inp.getFirstSelected();
         final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-        final List<CounterType> typeChoices = new ArrayList<CounterType>();
+        final List<CounterType> typeChoices = new ArrayList<>();
         for (final CounterType key : tgtCounters.keySet()) {
             if (tgtCounters.get(key) > 0) {
                 typeChoices.add(key);
@@ -922,7 +922,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
             counterType = cType;
-            cardsChosen = cntCounters > 0 ? new HashMap<Card, Integer>() : null;
+            cardsChosen = cntCounters > 0 ? new HashMap<>() : null;
         }
 
         @Override

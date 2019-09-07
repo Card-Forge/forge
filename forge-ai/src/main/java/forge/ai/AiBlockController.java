@@ -148,9 +148,7 @@ public class AiBlockController {
                 final CardCollection attackers = combat.getAttackersOf(defender);
                 // Begin with the attackers that pose the biggest threat
                 CardLists.sortByPowerDesc(attackers);
-                for (final Card c : attackers) {
-                    sortedAttackers.add(c);
-                }
+                sortedAttackers.addAll(attackers);
             } else if (defender instanceof Player && defender.equals(ai)) {
                 firstAttacker = combat.getAttackersOf(defender);
             }
@@ -163,9 +161,7 @@ public class AiBlockController {
             }
         } else {
             // add creatures attacking the Player to the back of the list
-            for (final Card c : firstAttacker) {
-                sortedAttackers.add(c);
-            }
+            sortedAttackers.addAll(firstAttacker);
         }
         return sortedAttackers;
     }
@@ -481,8 +477,7 @@ public class AiBlockController {
                 final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, secondBlocker, combat, false);
 
-                List<Card> usableBlockersAsThird = new ArrayList<>();
-                usableBlockersAsThird.addAll(usableBlockers);
+                List<Card> usableBlockersAsThird = new ArrayList<>(usableBlockers);
                 usableBlockersAsThird.remove(secondBlocker);
 
                 // loop over the remaining blockers in search of a good third blocker candidate

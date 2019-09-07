@@ -31,10 +31,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -451,7 +448,7 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final boolean mandatory) {
-        List<Player> targetable = new ArrayList<Player>();
+        List<Player> targetable = new ArrayList<>();
         for (final Player player : aiPlayer.getGame().getPlayers()) {
             if (sa.canTarget(player)) {
                 targetable.add(player);
@@ -855,7 +852,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final List<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<>();
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -875,15 +872,11 @@ public class AttachAi extends SpellAbilityAi {
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
                 kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
             }
         }
@@ -906,7 +899,7 @@ public class AttachAi extends SpellAbilityAi {
 
         Card c = null;
         if (prefList == null || prefList.isEmpty()) {
-            prefList = new ArrayList<Card>(list);
+            prefList = new ArrayList<>(list);
         } else {
             c = ComputerUtilCard.getBestAI(prefList);
             if (c != null) {
@@ -960,7 +953,7 @@ public class AttachAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
-        List<GameObject> targets = new ArrayList<GameObject>();
+        List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
@@ -1150,7 +1143,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final List<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<>();
         boolean grantingAbilities = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
@@ -1173,15 +1166,11 @@ public class AttachAi extends SpellAbilityAi {
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
                 kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
-                    for (final String kw : kws.split(" & ")) {
-                        keywords.add(kw);
-                    }
+                    keywords.addAll(Arrays.asList(kws.split(" & ")));
                 }
             }
         }

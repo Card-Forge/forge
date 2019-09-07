@@ -19,7 +19,6 @@ package forge.view.arcane;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Collections;
 import java.util.Comparator;
 
 import java.awt.event.MouseEvent;
@@ -41,7 +40,7 @@ import forge.util.collect.FCollection;
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
-    private static final Map<Integer, FloatingZone> floatingAreas = new HashMap<Integer, FloatingZone>();
+    private static final Map<Integer, FloatingZone> floatingAreas = new HashMap<>();
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
@@ -125,9 +124,9 @@ public class FloatingZone extends FloatingCardArea {
     protected Iterable<CardView> getCards() {
         Iterable<CardView> zoneCards = player.getCards(zone);
         if ( zoneCards != null ) {
-            cardList = new FCollection<CardView>(zoneCards);
+            cardList = new FCollection<>(zoneCards);
             if ( sortedByName ) {
-                Collections.sort(cardList, comp);
+                cardList.sort(comp);
             }
             return cardList;
         } else {

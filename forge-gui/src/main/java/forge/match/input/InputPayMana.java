@@ -43,7 +43,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     private final boolean wasFloatingMana;
-    private final Queue<Card> delaySelectCards = new LinkedList<Card>();
+    private final Queue<Card> delaySelectCards = new LinkedList<>();
 
     private boolean bPaid = false;
     protected Boolean canPayManaCost = null;
@@ -141,7 +141,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public List<SpellAbility> getUsefulManaAbilities(Card card) {
-        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        List<SpellAbility> abilities = new ArrayList<>();
 
         if (card.getController() != player) {
             return abilities;
@@ -362,7 +362,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
         final Game g = source.getGame();
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final HashMap<String, Object> repParams = new HashMap<>();
         repParams.put("Event", "ProduceMana");
         repParams.put("Mana", m.getOrigProduced());
         repParams.put("Affected", source);

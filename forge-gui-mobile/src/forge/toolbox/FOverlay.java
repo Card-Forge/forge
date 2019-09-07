@@ -18,7 +18,7 @@ import forge.screens.match.MatchController;
 
 public abstract class FOverlay extends FContainer {
     public static final float ALPHA_COMPOSITE = 0.5f;
-    private static final Stack<FOverlay> overlays = new Stack<FOverlay>();
+    private static final Stack<FOverlay> overlays = new Stack<>();
     private static boolean hidingAll = false;
     private static FOverlay tempOverlay;
 
@@ -49,7 +49,7 @@ public abstract class FOverlay extends FContainer {
         if (overlays.size() < 2) {
             return overlays; //don't need to create new list if one or fewer overlay
         }
-        List<FOverlay> reversedList = new ArrayList<FOverlay>();
+        List<FOverlay> reversedList = new ArrayList<>();
         for (int i = overlays.size() - 1; i >= 0; i--) {
             reversedList.add(overlays.get(i));
         }

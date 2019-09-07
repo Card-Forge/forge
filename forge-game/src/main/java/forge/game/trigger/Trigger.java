@@ -122,7 +122,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = nextId();
         this.intrinsic = intrinsic;
 
-        this.setRunParams(new HashMap<String, Object>()); // TODO: Consider whether this can be null instead, for performance reasons.
+        this.setRunParams(new HashMap<>()); // TODO: Consider whether this can be null instead, for performance reasons.
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
@@ -303,7 +303,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = Integer.MIN_VALUE; // Negative base just in case a few Lich's or Platinum Angels are running around
-            final List<Player> healthiest = new ArrayList<Player>();
+            final List<Player> healthiest = new ArrayList<>();
             for (final Player p : game.getPlayers()) {
                 if (p.getLife() > highestLife) {
                     healthiest.clear();
@@ -323,7 +323,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         if (this.mapParams.containsKey("APlayerHasMostCardsInHand")) {
             int largestHand = 0;
-            final List<Player> withLargestHand = new ArrayList<Player>();
+            final List<Player> withLargestHand = new ArrayList<>();
             for (final Player p : game.getPlayers()) {
                 if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
                     withLargestHand.clear();

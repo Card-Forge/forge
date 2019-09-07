@@ -61,7 +61,7 @@ public class SpellAbilityPicker {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
         CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsToPlay != null) {
-            HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
+            HashMap<String, Card> landsDeDupe = new HashMap<>();
             for (Card land : landsToPlay) {
                 Card previousLand = landsDeDupe.get(land.getName());
                 // Skip identical lands.
@@ -165,7 +165,7 @@ public class SpellAbilityPicker {
 
         PhaseType currentPhase = game.getPhaseHandler().getPhase();
         if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            List<SpellAbility> candidateSAs2 = new ArrayList<SpellAbility>();
+            List<SpellAbility> candidateSAs2 = new ArrayList<>();
             for (SpellAbility sa : candidateSAs) {
                 if (!isSorcerySpeed(sa, player)) {
                     System.err.println("Not sorcery: " + sa);
@@ -270,28 +270,28 @@ public class SpellAbilityPicker {
         return abilityToString(sa, true);
     }
     public static String abilityToString(SpellAbility sa, boolean withTargets) {
-        String saString = "N/A";
+        StringBuilder saString = new StringBuilder("N/A");
         if (sa != null) {
-            saString = sa.toString();
+            saString = new StringBuilder(sa.toString());
             String cardName = sa.getHostCard().getName();
             if (!cardName.isEmpty()) {
-                saString = TextUtil.fastReplace(saString, cardName, "<$>");
+                saString = new StringBuilder(TextUtil.fastReplace(saString.toString(), cardName, "<$>"));
             }
             if (saString.length() > 40) {
-                saString = saString.substring(0, 40) + "...";
+                saString = new StringBuilder(saString.substring(0, 40) + "...");
             }
             if (withTargets) {
                 SpellAbility saOrSubSa = sa;
                 do {
                     if (saOrSubSa.usesTargeting()) {
-                        saString += " (targets: " + saOrSubSa.getTargets().getTargetedString() + ")";
+                        saString.append(" (targets: ").append(saOrSubSa.getTargets().getTargetedString()).append(")");
                     }
                     saOrSubSa = saOrSubSa.getSubAbility();
                 } while (saOrSubSa != null);
             }
-            saString = sa.getHostCard() + " -> " + saString;
+            saString.insert(0, sa.getHostCard() + " -> ");
         }
-        return saString;
+        return saString.toString();
     }
 
     private boolean shouldWaitForLater(final SpellAbility sa) {

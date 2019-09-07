@@ -32,7 +32,7 @@ public class ClashEffect extends SpellAbilityEffect {
         final boolean victory = clashWithOpponent(sa);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final HashMap<String, Object> runParams = new HashMap<>();
         runParams.put("Player", sa.getHostCard().getController());
 
         if (victory) {

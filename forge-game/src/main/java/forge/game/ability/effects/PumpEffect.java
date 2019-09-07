@@ -332,10 +332,8 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
-                    .split(","))) {
-                untargetedCards.add(c);
-            }
+            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
+                    .split(",")));
         }
 
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))

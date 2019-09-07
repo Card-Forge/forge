@@ -263,7 +263,7 @@ public enum DeckFormat {
                 }
             }
 
-            final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
+            final List<PaperCard> erroneousCI = new ArrayList<>();
 
             Set<String> basicLandNames = new HashSet<>();
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
@@ -306,7 +306,7 @@ public enum DeckFormat {
         }
 
         if (cardPoolFilter != null) {
-            final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
+            final List<PaperCard> erroneousCI = new ArrayList<>();
             for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                 if (!cardPoolFilter.apply(cp.getKey().getRules())) {
                     erroneousCI.add(cp.getKey());

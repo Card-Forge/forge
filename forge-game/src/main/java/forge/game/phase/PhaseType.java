@@ -74,7 +74,7 @@ public enum PhaseType {
     }
 
     public static List<PhaseType> listValueOf(final String values) {
-        final List<PhaseType> result = new ArrayList<PhaseType>();
+        final List<PhaseType> result = new ArrayList<>();
         for (final String s : values.split("[, ]+")) {
             result.add(PhaseType.smartValueOf(s));
         }
@@ -87,7 +87,7 @@ public enum PhaseType {
      * @return
      */
     public static List<PhaseType> parseRange(String values) {
-        final List<PhaseType> result = new ArrayList<PhaseType>();
+        final List<PhaseType> result = new ArrayList<>();
         for (final String s : values.split(",")) {
             int idxArrow = s.indexOf("->");
             if (idxArrow >= 0) {

@@ -44,7 +44,7 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
 
     @Override
     protected final Predicate<PaperCard> buildPredicate() {
-        final List<Predicate<CardRules>> cmcs = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> cmcs = new ArrayList<>();
 
         for (StatTypes s : buttonMap.keySet()) {
             if (s.predicate != null && buttonMap.get(s).isSelected()) {

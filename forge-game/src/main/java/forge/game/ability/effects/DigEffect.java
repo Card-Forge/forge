@@ -167,9 +167,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                 if (!noMove) {
                     CardCollection movedCards;
-                    for (final Card c : top) {
-                        rest.add(c);
-                    }
+                    rest.addAll(top);
                     CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
@@ -264,7 +262,7 @@ public class DigEffect extends SpellAbilityEffect {
                             if ( p == chooser ) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
                             }
-                            List<Card> chosen = new ArrayList<Card>();
+                            List<Card> chosen = new ArrayList<>();
 
                             int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;

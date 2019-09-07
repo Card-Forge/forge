@@ -713,7 +713,7 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
-        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        final Map<String, Object> runParams = new TreeMap<>();
         runParams.put("Player", p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
     }

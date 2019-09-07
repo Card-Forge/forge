@@ -34,7 +34,7 @@ public class HomeScreen extends FScreen {
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final ButtonScroller buttonScroller = add(new ButtonScroller());
-    private final List<MenuButton> buttons = new ArrayList<MenuButton>();
+    private final List<MenuButton> buttons = new ArrayList<>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
 

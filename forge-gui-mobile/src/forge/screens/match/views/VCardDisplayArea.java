@@ -22,8 +22,8 @@ import forge.util.ThreadUtil;
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
-    protected final List<CardView> orderedCards = new ArrayList<CardView>();
-    protected final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
+    protected final List<CardView> orderedCards = new ArrayList<>();
+    protected final List<CardAreaPanel> cardPanels = new ArrayList<>();
     private boolean rotateCards180;
 
     public Iterable<CardView> getOrderedCards() {
@@ -206,7 +206,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     public static class CardAreaPanel extends FCardPanel {
-        private static final Map<Integer, CardAreaPanel> allCardPanels = new HashMap<Integer, CardAreaPanel>();
+        private static final Map<Integer, CardAreaPanel> allCardPanels = new HashMap<>();
 
         public static CardAreaPanel get(CardView card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getId());
@@ -230,7 +230,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         private VCardDisplayArea displayArea;
         private CardAreaPanel attachedToPanel;
-        private final List<CardAreaPanel> attachedPanels = new ArrayList<CardAreaPanel>();
+        private final List<CardAreaPanel> attachedPanels = new ArrayList<>();
         private CardAreaPanel nextPanelInStack, prevPanelInStack;
 
         //use static get(card) function instead
@@ -404,7 +404,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             //on double-tap select all other cards in stack if any
             if (prevPanelInStack == null && nextPanelInStack == null) { return null; }
 
-            List<CardView> cards = new ArrayList<CardView>();
+            List<CardView> cards = new ArrayList<>();
 
             CardAreaPanel panel = nextPanelInStack;
             while (panel != null) {

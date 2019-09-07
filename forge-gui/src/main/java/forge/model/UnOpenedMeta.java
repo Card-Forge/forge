@@ -54,7 +54,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      *            the GuiBase.getInterface().
      */
     private UnOpenedMeta(final String creationString, final JoinOperation op) {
-        metaSets = new ArrayList<MetaSet>();
+        metaSets = new ArrayList<>();
         operation = op;
 
         for (String m : TextUtil.splitWithParenthesis(creationString, ';')) {
@@ -107,7 +107,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
                 return newBooster.get();
 
             case SelectAll:
-                List<PaperCard> allCards = new ArrayList<PaperCard>();
+                List<PaperCard> allCards = new ArrayList<>();
                 for (MetaSet ms : metaSets) {
                     allCards.addAll(ms.getBooster().get());
                 }

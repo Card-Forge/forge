@@ -517,7 +517,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      * @return a list of text lines to render
      */
     protected List<String> prepareLines(final JLabel l) {
-        final List<String> lines = new ArrayList<String>(MultiLineLabelUI.defaultSize);
+        final List<String> lines = new ArrayList<>(MultiLineLabelUI.defaultSize);
         final String text = l.getText();
         if (text == null) {
             return null; // Null guard
@@ -603,7 +603,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
         /**
          * Reused segments.
          */
-        private final List<Segment> segments = new ArrayList<Segment>(2);
+        private final List<Segment> segments = new ArrayList<>(2);
 
         /**
          * Singleton instance.

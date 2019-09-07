@@ -58,7 +58,7 @@ import java.util.Map.Entry;
  */
 public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
-    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool, commanderPool;
 
     Predicate<CardRules> commanderFilter;
@@ -149,19 +149,19 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
         switch (this.gameType) {
             case Constructed:
-                this.controller = new DeckController<Deck>(FModel.getDecks().getConstructed(), this, newCreator);
+                this.controller = new DeckController<>(FModel.getDecks().getConstructed(), this, newCreator);
                 break;
             case Commander:
-                this.controller = new DeckController<Deck>(FModel.getDecks().getCommander(), this, newCreator);
+                this.controller = new DeckController<>(FModel.getDecks().getCommander(), this, newCreator);
                 break;
             case Oathbreaker:
-                this.controller = new DeckController<Deck>(FModel.getDecks().getOathbreaker(), this, newCreator);
+                this.controller = new DeckController<>(FModel.getDecks().getOathbreaker(), this, newCreator);
                 break;
             case Brawl:
-                this.controller = new DeckController<Deck>(FModel.getDecks().getBrawl(), this, newCreator);
+                this.controller = new DeckController<>(FModel.getDecks().getBrawl(), this, newCreator);
                 break;
             case TinyLeaders:
-                this.controller = new DeckController<Deck>(FModel.getDecks().getTinyLeaders(), this, newCreator);
+                this.controller = new DeckController<>(FModel.getDecks().getTinyLeaders(), this, newCreator);
                 break;
         }
 

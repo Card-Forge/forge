@@ -40,7 +40,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         sb.append(tgtCard);
-        sb.append(" becomes a copy of " + cardToCopy + ".");
+        sb.append(" becomes a copy of ").append(cardToCopy).append(".");
 
         return sb.toString();
     } // end cloneStackDescription()

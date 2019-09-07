@@ -61,7 +61,7 @@ import java.util.concurrent.TimeUnit;
 public class ImageCache {
     // short prefixes to save memory
 
-    private static final Set<String> _missingIconKeys = new HashSet<String>();
+    private static final Set<String> _missingIconKeys = new HashSet<>();
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
             .maximumSize(FModel.getPreferences().getPrefInt((FPref.UI_IMAGE_CACHE_MAXIMUM)))
             .expireAfterAccess(15, TimeUnit.MINUTES)

@@ -47,7 +47,7 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
-    private static final Stack<FScreen> screens = new Stack<FScreen>();
+    private static final Stack<FScreen> screens = new Stack<>();
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     public static String extrawide = "default";
@@ -486,7 +486,7 @@ public class Forge implements ApplicationListener {
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
-        private static final List<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
+        private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
         private static char lastKeyTyped;
         private static boolean keyTyped, shiftKeyDown;
 

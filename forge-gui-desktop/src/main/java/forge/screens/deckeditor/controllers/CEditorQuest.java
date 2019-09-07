@@ -75,7 +75,7 @@ import java.util.Map.Entry;
 public final class CEditorQuest extends CDeckEditor<Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
-    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private final List<DeckSection> allSections = new ArrayList<>();
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
@@ -139,7 +139,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
             }
         };
 
-        this.controller = new DeckController<Deck>(questData0.getMyDecks(), this, newCreator);
+        this.controller = new DeckController<>(questData0.getMyDecks(), this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
@@ -158,7 +158,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
     // fills number of decks using each card
     private Map<PaperCard, Integer> countDecksForEachCard() {
-        final Map<PaperCard, Integer> result = new HashMap<PaperCard, Integer>();
+        final Map<PaperCard, Integer> result = new HashMap<>();
         for (final Deck deck : this.questData.getMyDecks()) {
             for (final Entry<PaperCard, Integer> e : deck.getMain()) {
                 final PaperCard card = e.getKey();
@@ -393,7 +393,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         //Fixes null pointer error on switching tabs while quest deck editor is open. TODO: Find source of bug possibly?
         if(sectionMode == null) sectionMode = DeckSection.Main;
 
-        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemTableColumn>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<>();
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
 
         //Based on which section the editor is in, display the remaining card pool (or applicable card pool if in
@@ -428,8 +428,8 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     public void update() {
         this.decksUsingMyCards = this.countDecksForEachCard();
 
-        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemTableColumn>();
-        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<ColumnDef, ItemTableColumn>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<>();
 
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_DECK_EDITOR, colOverridesDeck, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());

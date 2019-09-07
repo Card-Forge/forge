@@ -78,7 +78,7 @@ public class ConquestLocation implements IXmlWritable {
 
     public static List<ConquestLocation> getNeighbors(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
         int regionCount = plane0.getRegions().size();
-        List<ConquestLocation> locations = new ArrayList<ConquestLocation>();
+        List<ConquestLocation> locations = new ArrayList<>();
 
         //add location above
         if (row0 < plane0.getRowsPerRegion() - 1) {

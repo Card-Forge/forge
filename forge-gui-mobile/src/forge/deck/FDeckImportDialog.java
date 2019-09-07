@@ -49,8 +49,8 @@ public class FDeckImportDialog extends FDialog {
     */
     private final FCheckBox onlyCoreExpCheck = add(new FCheckBox("Use only core and expansion sets", false));
 
-    private final FComboBox<String> monthDropdown = add(new FComboBox<String>()); //don't need wrappers since skin can't change while this dialog is open
-    private final FComboBox<Integer> yearDropdown = add(new FComboBox<Integer>());
+    private final FComboBox<String> monthDropdown = add(new FComboBox<>()); //don't need wrappers since skin can't change while this dialog is open
+    private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
 
     private final boolean showOptions;
     private final DeckImportController controller;
@@ -79,7 +79,7 @@ public class FDeckImportDialog extends FDialog {
                                 if (sb.length() > 0) {
                                     sb.append("\n");
                                 }
-                                sb.append(token.getNumber() + " " + token.getText());
+                                sb.append(token.getNumber()).append(" ").append(token.getText());
                             }
                         }
                         if (sb.length() > 0) {

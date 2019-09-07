@@ -23,7 +23,7 @@ public class VManaPool extends VDisplayArea {
     private static final FSkinFont FONT = FSkinFont.get(16);
 
     private final PlayerView player;
-    private final List<ManaLabel> manaLabels = new ArrayList<ManaLabel>();
+    private final List<ManaLabel> manaLabels = new ArrayList<>();
     private int totalMana;
 
     public VManaPool(PlayerView player0) {

@@ -40,7 +40,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
     protected final int minChoices, maxChoices;
     private final CompactModeHandler compactModeHandler = new CompactModeHandler();
-    private final List<Integer> selectedIndices = new ArrayList<Integer>();
+    private final List<Integer> selectedIndices = new ArrayList<>();
 
     public FChoiceList(Iterable<? extends T> items) {
         this(items, null);
@@ -172,7 +172,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     }
 
     public List<T> getSelectedItems() {
-        List<T> choices = new ArrayList<T>();
+        List<T> choices = new ArrayList<>();
         for (int i : selectedIndices) {
             choices.add(getItemAt(i));
         }

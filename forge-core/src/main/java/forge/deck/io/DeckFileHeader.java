@@ -74,7 +74,7 @@ public class DeckFileHeader {
         this.deckType = DeckFormat.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), DeckFormat.Constructed);
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
-        this.tags = new TreeSet<String>();
+        this.tags = new TreeSet<>();
         
         String rawTags = kvPairs.get(DeckFileHeader.TAGS);
         if( StringUtils.isNotBlank(rawTags) ) {

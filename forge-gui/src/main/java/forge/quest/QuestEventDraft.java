@@ -701,17 +701,17 @@ public class QuestEventDraft implements IQuestEvent {
             if (edition != null) {
                 return edition.getName() + " (" + edition.getCode() + ")";
             }
-            String blockString = block.getName() + " (";
+            StringBuilder blockString = new StringBuilder(block.getName() + " (");
             List<CardEdition> sets = block.getSets();
             for (int i = 0; i < sets.size(); i++) {
                 CardEdition cardEdition = sets.get(i);
-                blockString += cardEdition.getCode();
+                blockString.append(cardEdition.getCode());
                 if (i < sets.size() - 1) {
-                    blockString += ", ";
+                    blockString.append(", ");
                 }
             }
-            blockString += ")";
-            return blockString;
+            blockString.append(")");
+            return blockString.toString();
         }
 
         public String getName() {
@@ -971,14 +971,14 @@ public class QuestEventDraft implements IQuestEvent {
         final String s0c = sets.get(0).getCode();
         if (sets.size() == 1) {
             int numBoosters = block.getCntBoostersDraft();
-            String combination = "";
+            StringBuilder combination = new StringBuilder();
             for (int i = 0; i < numBoosters; i++) {
-                combination += s0c;
+                combination.append(s0c);
                 if (i < numBoosters - 1) {
-                    combination += "/";
+                    combination.append("/");
                 }
             }
-            possibleCombinations.add(combination);
+            possibleCombinations.add(combination.toString());
             return possibleCombinations;
         }
 
@@ -991,7 +991,7 @@ public class QuestEventDraft implements IQuestEvent {
         }
 
         final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
-        Collections.sort(allowedSets, new Comparator<CardEdition>() {
+        allowedSets.sort(new Comparator<CardEdition>() {
             @Override
             public int compare(final CardEdition edition1, final CardEdition edition2) {
                 if (edition1.getDate().before(edition2.getDate())) {
@@ -1099,15 +1099,15 @@ public class QuestEventDraft implements IQuestEvent {
     }
 
     public String getBoosterList() {
-        String boosterList = "";
+        StringBuilder boosterList = new StringBuilder();
         String[] boosterArray = boosterConfiguration.split("/");
         for (int i = 0; i < boosterArray.length; i++) {
-            boosterList += FModel.getMagicDb().getEditions().get(boosterArray[i]).getName();
+            boosterList.append(FModel.getMagicDb().getEditions().get(boosterArray[i]).getName());
             if (i != boosterArray.length - 1) {
-                boosterList += " | ";
+                boosterList.append(" | ");
             }
         }
-        return boosterList;
+        return boosterList.toString();
     }
 
     @Override

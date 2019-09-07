@@ -29,7 +29,7 @@ public class ConquestRewardDialog extends FScrollPane {
     private static final float PADDING = Utils.scale(5);
 
     public static void show(String title, PaperCard card, Runnable callback0) {
-        List<ConquestReward> rewards = new ArrayList<ConquestReward>(1);
+        List<ConquestReward> rewards = new ArrayList<>(1);
         rewards.add(new ConquestReward(card, 0));
         show(title, rewards, callback0);
     }
@@ -39,7 +39,7 @@ public class ConquestRewardDialog extends FScrollPane {
     }
 
     private final RevealDialog dialog;
-    private final List<CardRevealer> cardRevealers = new ArrayList<CardRevealer>();
+    private final List<CardRevealer> cardRevealers = new ArrayList<>();
     private final CardRevealAnimation animation;
     private final Runnable callback;
 
@@ -303,7 +303,7 @@ public class ConquestRewardDialog extends FScrollPane {
 
         private boolean showCardZoom() {
             int index = -1;
-            List<PaperCard> cards = new ArrayList<PaperCard>();
+            List<PaperCard> cards = new ArrayList<>();
             for (int i = 0; i < animation.currentIndex; i++) {
                 CardRevealer revealer = cardRevealers.get(i);
                 if (revealer == this) {

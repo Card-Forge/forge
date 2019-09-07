@@ -26,7 +26,7 @@ import forge.util.ITriggerEvent;
 
 public final class InputSelectCardsForConvokeOrImprovise extends InputSelectManyBase<Card> {
     private static final long serialVersionUID = -1779224307654698954L;
-    private final Map<Card, ImmutablePair<Byte, ManaCostShard>> chosenCards = new HashMap<Card, ImmutablePair<Byte, ManaCostShard>>();
+    private final Map<Card, ImmutablePair<Byte, ManaCostShard>> chosenCards = new HashMap<>();
     private final ManaCostBeingPaid remainingCost;
     private final Player player;
     private final CardCollectionView availableCards;
@@ -115,7 +115,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
     }
 
     public Map<Card, ManaCostShard> getConvokeMap() {
-        final Map<Card, ManaCostShard> result = new HashMap<Card, ManaCostShard>();
+        final Map<Card, ManaCostShard> result = new HashMap<>();
         if(!hasCancelled()) {
             for(final Entry<Card, ImmutablePair<Byte, ManaCostShard>> c : chosenCards.entrySet()) {
                 result.put(c.getKey(), c.getValue().right);

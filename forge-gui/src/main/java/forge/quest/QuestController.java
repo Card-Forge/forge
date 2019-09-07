@@ -161,7 +161,7 @@ public class QuestController {
 
     public IStorage<DeckGroup> getDraftDecks() {
         if (draftDecks == null) {
-            draftDecks = new QuestDeckGroupMap(new HashMap<String, DeckGroup>());
+            draftDecks = new QuestDeckGroupMap(new HashMap<>());
         }
         final QuestAchievements achievements = this.getAchievements();
         if (achievements != null && (achievements.getCurrentDraftIndex() == -1 || achievements.getCurrentDraft() == null)) {
@@ -208,9 +208,9 @@ public class QuestController {
     public static IStorage<PreconDeck> getPrecons() {
         if (null == preconManager) {
             // read with a special class, that will fill sell rules as it processes each PreconDeck
-            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconDeck.Reader(new File(ForgeConstants.QUEST_PRECON_DIR)){
+            preconManager = new StorageBase<>("Quest shop decks", new PreconDeck.Reader(new File(ForgeConstants.QUEST_PRECON_DIR)) {
                 @Override
-                protected PreconDeck getPreconDeckFromSections(java.util.Map<String,java.util.List<String>> sections) {
+                protected PreconDeck getPreconDeckFromSections(java.util.Map<String, java.util.List<String>> sections) {
                     PreconDeck result = super.getPreconDeckFromSections(sections);
                     preconDeals.put(result.getName(), new SellRules(sections.get("shop")));
                     return result;
@@ -219,7 +219,7 @@ public class QuestController {
         }
         return QuestController.preconManager;
     }
-    private final static Map<String, SellRules> preconDeals = new TreeMap<String, SellRules>();
+    private final static Map<String, SellRules> preconDeals = new TreeMap<>();
     public static SellRules getPreconDeals(PreconDeck deck) {
         return preconDeals.get(deck.getName());
     }
@@ -558,11 +558,11 @@ public class QuestController {
 
     public final void regenerateChallenges() {
         final QuestAchievements achievements = model.getAchievements();
-        final List<String> unlockedChallengeIds = new ArrayList<String>();
+        final List<String> unlockedChallengeIds = new ArrayList<>();
         final List<String> availableChallengeIds = achievements.getCurrentChallenges();
 
         // clean up challenges potentially coming over from a different quest world
-        List<String> nonExistentIds = new ArrayList<String>();
+        List<String> nonExistentIds = new ArrayList<>();
         for (String cid : availableChallengeIds) {
             if (this.getChallenges().get(cid) == null) {
                 System.out.println("Warning: removing a challenge that does not exist in the current quest world: " + cid);

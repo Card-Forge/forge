@@ -85,9 +85,9 @@ public enum VHomeUI implements IVTopLevelUI {
     private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final SkinColor l00 = clrTheme.stepColor(0);
 
-    private final List<IVSubmenu<? extends ICDoc>> allSubmenus = new ArrayList<IVSubmenu<? extends ICDoc>>();
-    private final Map<EDocID, LblMenuItem> allSubmenuLabels = new HashMap<EDocID, LblMenuItem>();
-    private final Map<EMenuGroup, LblGroup> allGroupLabels = new HashMap<EMenuGroup, LblGroup>();
+    private final List<IVSubmenu<? extends ICDoc>> allSubmenus = new ArrayList<>();
+    private final Map<EDocID, LblMenuItem> allSubmenuLabels = new HashMap<>();
+    private final Map<EMenuGroup, LblGroup> allGroupLabels = new HashMap<>();
 
     private final PnlMenu pnlMenu = new PnlMenu();
     private final PnlDisplay pnlDisplay = new PnlDisplay();
@@ -144,7 +144,7 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
 
         // For each group: init its panel
-        final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<EMenuGroup, JPanel>();
+        final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<>();
         for (final EMenuGroup e : EMenuGroup.values()) {
             allGroupPanels.put(e, new PnlGroup());
             allGroupPanels.get(e).setVisible(false);

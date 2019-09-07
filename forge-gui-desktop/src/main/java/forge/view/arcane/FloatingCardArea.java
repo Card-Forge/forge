@@ -177,7 +177,7 @@ public abstract class FloatingCardArea extends CardArea {
     }
 
     protected void doRefresh() {
-        List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+        List<CardPanel> cardPanels = new ArrayList<>();
         Iterable<CardView> cards = getCards();
         if (cards != null) {
             for (final CardView card : cards) {

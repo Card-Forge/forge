@@ -87,7 +87,7 @@ public class ListChooser<T> {
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
         this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
-        this.lstChoices = new FList<T>(new ChooserListModel());
+        this.lstChoices = new FList<>(new ChooserListModel());
 
         final ImmutableList<String> options;
         if (minChoices == 0) {

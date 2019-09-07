@@ -564,7 +564,7 @@ public class ComputerUtilCard {
         AiBlockController aiBlk = new AiBlockController(ai);
         Combat combat = new Combat(ai);
         combat.addAttacker(attacker, ai);
-        final List<Card> attackers = new ArrayList<Card>();
+        final List<Card> attackers = new ArrayList<>();
         attackers.add(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
@@ -788,7 +788,7 @@ public class ComputerUtilCard {
 
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
-        final List<Pair<Byte,Integer>> map = new ArrayList<Pair<Byte,Integer>>();
+        final List<Pair<Byte,Integer>> map = new ArrayList<>();
         for(int i = 0; i < cntColors; i++) {
             map.add(MutablePair.of(MagicColor.WUBRG[i], 0));
         }
@@ -809,7 +809,7 @@ public class ComputerUtilCard {
         });
     
         // will this part be once dropped?
-        List<String> result = new ArrayList<String>(cntColors);
+        List<String> result = new ArrayList<>(cntColors);
         for(Pair<Byte, Integer> idx : map) { // fetch color names in the same order
             result.add(MagicColor.toLongString(idx.getKey()));
         }
@@ -881,7 +881,7 @@ public class ComputerUtilCard {
         }
     };
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
-        List<String> chosen = new ArrayList<String>();
+        List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
         Player opp = ai.getWeakestOpponent();
@@ -1571,7 +1571,7 @@ public class ComputerUtilCard {
         Card pumped = CardFactory.copyCard(c, true);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
-        final List<String> kws = new ArrayList<String>();
+        final List<String> kws = new ArrayList<>();
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 pumped.addHiddenExtrinsicKeyword(kw);

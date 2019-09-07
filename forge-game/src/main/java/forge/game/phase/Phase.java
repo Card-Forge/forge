@@ -45,11 +45,11 @@ public class Phase implements java.io.Serializable {
         this.type = type;
     }
 
-    protected final List<GameCommand> at = new ArrayList<GameCommand>();
-    private final List<GameCommand> until = new ArrayList<GameCommand>();
-    private final HashMap<Player, ArrayList<GameCommand>> untilMap = new HashMap<Player, ArrayList<GameCommand>>();
-    private final HashMap<Player, ArrayList<GameCommand>> untilEndMap = new HashMap<Player, ArrayList<GameCommand>>();
-    private final HashMap<Player, ArrayList<GameCommand>> registerMap = new HashMap<Player, ArrayList<GameCommand>>();
+    protected final List<GameCommand> at = new ArrayList<>();
+    private final List<GameCommand> until = new ArrayList<>();
+    private final HashMap<Player, ArrayList<GameCommand>> untilMap = new HashMap<>();
+    private final HashMap<Player, ArrayList<GameCommand>> untilEndMap = new HashMap<>();
+    private final HashMap<Player, ArrayList<GameCommand>> registerMap = new HashMap<>();
 
     /**
      * <p>

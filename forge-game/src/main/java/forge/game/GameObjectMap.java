@@ -36,7 +36,7 @@ public abstract class GameObjectMap {
 
     @SuppressWarnings("unchecked")
     public <T extends GameObject> List<T> mapList(final List<T> objects) {
-        final List<T> result = new ArrayList<T>();
+        final List<T> result = new ArrayList<>();
         for (final T o : objects) {
             result.add((T) map(o));
         }

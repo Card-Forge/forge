@@ -50,7 +50,7 @@ public class PumpAllAi extends PumpAiBase {
 
         final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
-        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
 
         final PhaseType phase = game.getPhaseHandler().getPhase();
 

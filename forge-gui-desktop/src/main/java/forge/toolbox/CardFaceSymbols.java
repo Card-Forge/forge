@@ -38,7 +38,7 @@ import java.util.StringTokenizer;
  */
 public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
-    private static final Map<String, SkinImage> MANA_IMAGES = new HashMap<String, SkinImage>();
+    private static final Map<String, SkinImage> MANA_IMAGES = new HashMap<>();
 
     private static final int manaImageSize = 13;
 

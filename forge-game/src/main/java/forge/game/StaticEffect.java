@@ -166,7 +166,7 @@ public class StaticEffect {
      */
     public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
         if (!this.originalAbilities.containsKey(c)) {
-            final List<SpellAbility> list = new ArrayList<SpellAbility>();
+            final List<SpellAbility> list = new ArrayList<>();
             list.add(sa);
             this.originalAbilities.put(c, list);
         } else {
@@ -185,7 +185,7 @@ public class StaticEffect {
      *            a {@link java.util.List} object.
      */
     public final void addOriginalAbilities(final Card c, final List<SpellAbility> s) {
-        final List<SpellAbility> list = new ArrayList<SpellAbility>(s);
+        final List<SpellAbility> list = new ArrayList<>(s);
         if (!this.originalAbilities.containsKey(c)) {
             this.originalAbilities.put(c, list);
         } else {
@@ -204,7 +204,7 @@ public class StaticEffect {
      * @return a {@link java.util.List} object.
      */
     public final List<SpellAbility> getOriginalAbilities(final Card c) {
-        final List<SpellAbility> returnList = new ArrayList<SpellAbility>();
+        final List<SpellAbility> returnList = new ArrayList<>();
         if (this.originalAbilities.containsKey(c)) {
             returnList.addAll(this.originalAbilities.get(c));
         }
@@ -271,7 +271,7 @@ public class StaticEffect {
      */
     public final void addOriginalKeyword(final Card c, final String s) {
         if (!this.originalKeywords.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.originalKeywords.put(c, list);
         } else {
@@ -290,7 +290,7 @@ public class StaticEffect {
      *            a {@link List} object.
      */
     public final void addOriginalKeywords(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<String>(s);
+        final List<String> list = new ArrayList<>(s);
         if (!this.originalKeywords.containsKey(c)) {
             this.originalKeywords.put(c, list);
         } else {
@@ -309,7 +309,7 @@ public class StaticEffect {
      * @return a {@link List} object.
      */
     public final List<String> getOriginalKeywords(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.originalKeywords.containsKey(c)) {
             returnList.addAll(this.originalKeywords.get(c));
         }
@@ -424,7 +424,7 @@ public class StaticEffect {
      */
     public final void addOriginalType(final Card c, final String s) {
         if (!this.originalTypes.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.originalTypes.put(c, list);
         } else {
@@ -443,7 +443,7 @@ public class StaticEffect {
      *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalTypes(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<String>(s);
+        final List<String> list = new ArrayList<>(s);
         if (!this.originalTypes.containsKey(c)) {
             this.originalTypes.put(c, list);
         } else {
@@ -462,7 +462,7 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final List<String> getOriginalTypes(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.originalTypes.containsKey(c)) {
             returnList.addAll(this.originalTypes.get(c));
         }
@@ -505,7 +505,7 @@ public class StaticEffect {
      */
     public final void addType(final Card c, final String s) {
         if (!this.types.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.types.put(c, list);
         } else {
@@ -523,7 +523,7 @@ public class StaticEffect {
      * @return a {@link java.util.List} object.
      */
     public final List<String> getTypes(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.types.containsKey(c)) {
             returnList.addAll(this.types.get(c));
         }
@@ -823,7 +823,7 @@ public class StaticEffect {
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
             }
         }
 
@@ -832,7 +832,7 @@ public class StaticEffect {
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
             }
         }
 

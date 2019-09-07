@@ -29,9 +29,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final String type = sa.getParam("Type");
-        final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<String>();
+        final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<>();
 
-        final List<String> validTypes = new ArrayList<String>();
+        final List<String> validTypes = new ArrayList<>();
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
         }

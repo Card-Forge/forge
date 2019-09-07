@@ -80,7 +80,7 @@ public class GameLogPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().add(scrollablePanel);
-        layer = new JLayer<FScrollPane>(scrollPane, layerUI);
+        layer = new JLayer<>(scrollPane, layerUI);
         this.add(layer, "w 10:100%, h 100%");
     }
 

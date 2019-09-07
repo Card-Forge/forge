@@ -376,7 +376,7 @@ public class TrackableTypes {
     public static final TrackableCollectionType<StackItemView> StackItemViewListType = new TrackableCollectionType<StackItemView>(StackItemViewType) {
         @Override
         protected TrackableCollection<StackItemView> getDefaultValue() {
-            return new TrackableCollection<StackItemView>();
+            return new TrackableCollection<>();
         }
 
         @Override

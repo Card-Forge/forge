@@ -39,7 +39,7 @@ import java.util.Map;
  * @version $Id: AIProfile.java 20169 2013-03-08 08:24:17Z Agetian $
  */
 public class AiProfileUtil {
-    private static Map<String, Map<AiProps, String>> loadedProfiles = new HashMap<String, Map<AiProps, String>>();
+    private static Map<String, Map<AiProps, String>> loadedProfiles = new HashMap<>();
 
     private static String AI_PROFILE_DIR;
     private static final String AI_PROFILE_EXT = ".ai";
@@ -74,7 +74,7 @@ public class AiProfileUtil {
      * @param profileName a profile to load.
      */
     private static final Map<AiProps, String> loadProfile(final String profileName) {
-        Map<AiProps, String> profileMap = new HashMap<AiProps, String>();
+        Map<AiProps, String> profileMap = new HashMap<>();
 
         List<String> lines = FileUtil.readFile(buildFileName(profileName));
         for (String line : lines) {
@@ -122,7 +122,7 @@ public class AiProfileUtil {
      */
     public static List<String> getAvailableProfiles()
     {
-        final List<String> availableProfiles = new ArrayList<String>();
+        final List<String> availableProfiles = new ArrayList<>();
 
         final File dir = new File(AI_PROFILE_DIR);
         final String[] children = dir.list();
@@ -146,7 +146,7 @@ public class AiProfileUtil {
      * available profiles including special random profile tags.
      */
     public static List<String> getProfilesDisplayList() {
-        final List<String> availableProfiles = new ArrayList<String>();
+        final List<String> availableProfiles = new ArrayList<>();
         availableProfiles.add(AI_PROFILE_RANDOM_MATCH);
         availableProfiles.add(AI_PROFILE_RANDOM_DUEL);
         availableProfiles.addAll(getAvailableProfiles());

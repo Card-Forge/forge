@@ -25,12 +25,12 @@ public class ReadDraftRankings {
      * </p>
      */
     public ReadDraftRankings() {
-        this.setSizes = new HashMap<String, Integer>();
+        this.setSizes = new HashMap<>();
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_RANKINGS_FILE));
     } // setup()
 
     public ReadDraftRankings(String customFile) {
-        this.setSizes = new HashMap<String, Integer>();
+        this.setSizes = new HashMap<>();
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_DIR + customFile));
     }
 
@@ -45,7 +45,7 @@ public class ReadDraftRankings {
      */
     private Map<String, Map<String, Integer>> readFile(List<String> lines) {
 
-        final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
+        final Map<String, Map<String, Integer>> map = new HashMap<>();
         for (String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
@@ -64,7 +64,7 @@ public class ReadDraftRankings {
             try {
                 final int rank = Integer.parseInt(rankStr);
                 if (!map.containsKey(edition)) {
-                    map.put(edition, new HashMap<String, Integer>());
+                    map.put(edition, new HashMap<>());
                 }
                 map.get(edition).put(name, rank);
                 if (setSizes.containsKey(edition)) {
