@@ -166,7 +166,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             layers.add(StaticAbilityLayer.RULES);
         }
 
-        if (hasParam("IgnoreEffectCost") || hasParam("Goad")) {
+        if (hasParam("IgnoreEffectCost") || hasParam("Goad") || hasParam("CanBlockAny") || hasParam("CanBlockAmount")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 

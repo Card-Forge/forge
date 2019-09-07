@@ -388,6 +388,8 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         return true;
+                    } else if (grantsUsefulExtraBlockOpts(ai, card)) {
+                        return true;
                     }
                 }
             }

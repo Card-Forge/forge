@@ -37,6 +37,24 @@ public abstract class PumpAiBase extends SpellAbilityAi {
     }
 
 
+    public boolean grantsUsefulExtraBlockOpts(final Player ai, final Card card) {
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai) || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
+        }
+        int canBlockNum = 1 + card.canBlockAdditional();
+        int possibleBlockNum = 0;
+        for (Card attacker : ai.getGame().getCombat().getAttackers()) {
+            if (CombatUtil.canBlock(attacker, card)) {
+                possibleBlockNum++;
+                if (possibleBlockNum > canBlockNum) {
+                    break;
+                }
+            }
+        }
+        return possibleBlockNum > canBlockNum;
+    }
+
     /**
      * Checks if is useful keyword.
      * 
@@ -256,7 +274,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
             return false;
-        } else if (keyword.equals("Bushido")) {
+        } else if (keyword.startsWith("Bushido")) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && !opp.getCreaturesInPlay().isEmpty()
@@ -335,22 +353,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && !CardLists.getKeyword(game.getCombat().getAttackers(), Keyword.FLYING).isEmpty()
                     && !card.hasKeyword(Keyword.FLYING)
                     && CombatUtil.canBlock(card);
-        } else if (keyword.endsWith("CARDNAME can block an additional creature each combat.")) {
-            if (ph.isPlayerTurn(ai)
-                    || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return false;
-            }
-            int canBlockNum = 1 + CombatUtil.numberOfAdditionalCreaturesCanBlock(card);
-            int possibleBlockNum = 0;
-            for (Card attacker : game.getCombat().getAttackers()) {
-                if (CombatUtil.canBlock(attacker, card)) {
-                    possibleBlockNum++;
-                    if (possibleBlockNum > canBlockNum) {
-                        break;
-                    }
-                }
-            }
-            return possibleBlockNum > canBlockNum;
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             return ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(card);
         } else if (keyword.equals("Persist")) {

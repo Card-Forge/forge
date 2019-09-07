@@ -18,6 +18,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.Lang;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -581,16 +582,6 @@ public class CardView extends GameEntityView {
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
-        int blockAdditional = state.getBlockAdditional();
-        if (blockAdditional > 1) {
-            final StringBuilder ab = new StringBuilder();
-            ab.append("CARDNAME can block an additional ");
-            ab.append(blockAdditional);
-            ab.append(" creatures each combat.");
-            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature each combat.", ab.toString());
-            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature each combat.", "");
-            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
-        }
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
@@ -616,6 +607,22 @@ public class CardView extends GameEntityView {
         if (pairedWith != null) {
             sb.append("\r\n \r\nPaired With: ").append(pairedWith);
             sb.append("\r\n");
+        }
+
+        if (getCanBlockAny()) {
+            sb.append("\r\n\r\n");
+            sb.append("CARDNAME can block any number of creatures.".replaceAll("CARDNAME", getName()));
+            sb.append("\r\n");
+        } else {
+            int i = getBlockAdditional();
+            if (i > 0) {
+                sb.append("\r\n\r\n");
+                sb.append("CARDNAME can block an additional ".replaceAll("CARDNAME", getName()));
+                sb.append(i == 1 ? "creature" : Lang.nounWithNumeral(i, "creature"));
+                sb.append(" each combat.");
+                sb.append("\r\n");
+            }
+
         }
 
         String cloner = get(TrackableProperty.Cloner);
@@ -720,6 +727,19 @@ public class CardView extends GameEntityView {
     }
     void updateHiddenId(final int hiddenId) {
         set(TrackableProperty.HiddenId, hiddenId);
+    }
+
+    int getBlockAdditional() {
+        return get(TrackableProperty.BlockAdditional);
+    }
+
+    boolean getCanBlockAny() {
+        return get(TrackableProperty.BlockAny);
+    }
+
+    void updateBlockAdditional(Card c) {
+        set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
+        set(TrackableProperty.BlockAny, c.canBlockAny());
     }
 
     @Override
@@ -989,9 +1009,6 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.HasTrample);
         }
 
-        public int getBlockAdditional() {
-            return get(TrackableProperty.BlockAdditional);
-        }
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
         }
@@ -1005,7 +1022,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
             set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
-            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }
 
