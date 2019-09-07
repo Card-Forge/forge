@@ -74,9 +74,6 @@ public class AudioClip implements IAudioClip {
     }
 
     public final boolean isDone() {
-        if (clip == null) {
-            return false;
-        }
-        return true; //TODO: Make this smarter if Sound supports marking as done
+        return clip != null;//TODO: Make this smarter if Sound supports marking as done
     }
 }

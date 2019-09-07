@@ -345,10 +345,7 @@ public class CardView extends GameEntityView {
             return true;
         }
         col = get(TrackableProperty.PlayerMayLookTemp);
-        if (col != null && col.contains(pv)) {
-            return true;
-        }
-        return false;
+        return col != null && col.contains(pv);
     }
     void setPlayerMayLook(Player p, boolean mayLook, boolean temp) {
         TrackableProperty prop = temp ? TrackableProperty.PlayerMayLookTemp : TrackableProperty.PlayerMayLook;
@@ -380,7 +377,7 @@ public class CardView extends GameEntityView {
         return Iterables.any(viewers, new Predicate<PlayerView>() {
             public final boolean apply(final PlayerView input) {
                 return canBeShownTo(input);
-            };
+            }
         });
     }
 
@@ -462,10 +459,7 @@ public class CardView extends GameEntityView {
         if (mindSlaveMaster != null && canFaceDownBeShownTo(mindSlaveMaster)) {
             return true;
         }
-        if (isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer)) {
-            return true;
-        }
-        return false;
+        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
     }
 
     public FCollectionView<CardView> getEncodedCards() {
@@ -1067,7 +1061,7 @@ public class CardView extends GameEntityView {
             TrackableCollection<CardView> views = get(key);
             if (views == null) {
                 views = new TrackableCollection<CardView>();
-                views.add(cardToAdd.getView());;
+                views.add(cardToAdd.getView());
                 set(key, views);
             }
             else if (views.add(cardToAdd.getView())) {

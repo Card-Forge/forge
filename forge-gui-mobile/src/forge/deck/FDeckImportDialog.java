@@ -42,7 +42,12 @@ public class FDeckImportDialog extends FDialog {
     private final FTextArea txtInput = add(new FTextArea(true));
     private final FCheckBox newEditionCheck = add(new FCheckBox("Import latest version of card", true));
     private final FCheckBox dateTimeCheck = add(new FCheckBox("Use only sets released before:", false));
-    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox("Use only core and expansion sets", true));
+    /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
+      forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
+      forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
+      (as of latest commit: 8e6655e3ee67688cff66b422d4722c58392eaa7e)
+    */
+    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox("Use only core and expansion sets", false));
 
     private final FComboBox<String> monthDropdown = add(new FComboBox<String>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<Integer>());

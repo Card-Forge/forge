@@ -36,7 +36,7 @@ public class NewGameMenu extends FPopupMenu {
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
-        private NewGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
+        NewGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
             item = new FMenuItem(caption0, icon0, new FEventHandler() {
                 @Override

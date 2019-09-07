@@ -174,7 +174,7 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
     @Override
     protected Deck mutateObject(Deck parent1) {
         PaperCard allele = parent1.getMain().get(MyRandom.getRandom().nextInt(8));
-        if(!standardMap.keySet().contains(allele.getName())){
+        if(!standardMap.containsKey(allele.getName())){
             return null;
         }
         return getDeckForCard(allele);
@@ -184,8 +184,8 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
     protected Deck createChild(Deck parent1, Deck parent2) {
         PaperCard allele = parent1.getMain().get(MyRandom.getRandom().nextInt(8));
         PaperCard allele2 = parent2.getMain().get(MyRandom.getRandom().nextInt(8));
-        if(!standardMap.keySet().contains(allele.getName())
-                ||!standardMap.keySet().contains(allele2.getName())
+        if(!standardMap.containsKey(allele.getName())
+                ||!standardMap.containsKey(allele2.getName())
                 ||allele.getName().equals(allele2.getName())){
             return null;
         }

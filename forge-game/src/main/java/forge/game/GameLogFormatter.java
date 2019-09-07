@@ -182,7 +182,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.type == DamageType.LoyaltyLoss) {
             additionalLog = " (Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
         }
-        String message = event.source.toString() + " deals " + String.valueOf(event.amount) + " damage" + additionalLog + " to " + event.card.toString() + ".";
+        String message = event.source.toString() + " deals " + event.amount + " damage" + additionalLog + " to " + event.card.toString() + ".";
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -197,7 +197,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = "Turn " + String.valueOf(event.turnNumber) + " (" + event.turnOwner.toString() + ")";
+        String message = "Turn " + event.turnNumber + " (" + event.turnOwner.toString() + ")";
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
@@ -205,7 +205,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
         String extra = ev.infect ? " (as poison counters)" : "";
         String damageType = ev.combat ? "combat" : "non-combat";
-        String message = ev.source.toString() + " deals " + String.valueOf(ev.amount) + " " + damageType + " damage to " + ev.target.toString() + extra + ".";
+        String message = ev.source.toString() + " deals " + ev.amount + " " + damageType + " damage to " + ev.target.toString() + extra + ".";
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -281,7 +281,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = ev.player.toString() + " has mulliganed down to " + String.valueOf(ev.player.getZone(ZoneType.Hand).size()) + " cards.";
+        String message = ev.player.toString() + " has mulliganed down to " + ev.player.getZone(ZoneType.Hand).size() + " cards.";
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

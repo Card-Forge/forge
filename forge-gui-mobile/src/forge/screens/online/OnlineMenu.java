@@ -21,7 +21,7 @@ public class OnlineMenu extends FPopupMenu {
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
-        private OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
+        OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
             item = new FMenuItem(caption0, icon0, new FEventHandler() {
                 @Override

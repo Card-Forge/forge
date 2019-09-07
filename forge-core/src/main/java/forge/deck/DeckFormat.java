@@ -85,10 +85,7 @@ public enum DeckFormat {
             if (otherPart != null && otherPart.getManaCost().getCMC() > 3) {
                 return false; //only cards with CMC less than 3 are allowed
             }
-            if (bannedCards.contains(rules.getName())) {
-                return false;
-            }
-            return true;
+            return !bannedCards.contains(rules.getName());
         }
     }) {
         private final Set<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
@@ -120,7 +117,7 @@ public enum DeckFormat {
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     private final static String SOVREALM = "Sovereign's Realm";
 
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
+    DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
@@ -128,7 +125,7 @@ public enum DeckFormat {
         paperCardPoolFilter = paperCardPoolFilter0;
     }
 
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
+    DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
@@ -136,7 +133,7 @@ public enum DeckFormat {
         cardPoolFilter = cardPoolFilter0;
     }
 
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
+    DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;

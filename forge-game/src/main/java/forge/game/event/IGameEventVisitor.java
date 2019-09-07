@@ -51,7 +51,7 @@ public interface IGameEventVisitor<T> {
 
 
     // This is base class for all visitors.
-    public static class Base<T> implements IGameEventVisitor<T>{
+    class Base<T> implements IGameEventVisitor<T>{
         public T visit(GameEventAnteCardsSelected event) { return null; }
         public T visit(GameEventAttackersDeclared event) { return null; }
         public T visit(GameEventBlockersDeclared event) { return null; }

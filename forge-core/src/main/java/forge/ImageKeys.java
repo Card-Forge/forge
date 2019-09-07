@@ -123,7 +123,7 @@ public final class ImageKeys {
             int index = filename.lastIndexOf('_');
             if (index != -1) {
                 String setlessFilename = filename.substring(0, index);
-                String setCode = filename.substring(index + 1, filename.length());
+                String setCode = filename.substring(index + 1);
                 // try with upper case set
                 file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
                 if (file != null) { return file; }

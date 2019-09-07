@@ -44,10 +44,7 @@ public class PlayerZone extends Zone {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (!c.mayPlay(who).isEmpty() || c.mayPlayerLook(who)) {
-                    return true;
-                }
-                return false;
+                return !c.mayPlay(who).isEmpty() || c.mayPlayerLook(who);
             }
         };
     }

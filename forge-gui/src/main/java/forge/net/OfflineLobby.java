@@ -2,7 +2,6 @@ package forge.net;
 
 import java.util.Collections;
 
-import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
@@ -16,10 +15,10 @@ public final class OfflineLobby extends GameLobby {
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();
 
-        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, false, Collections.<AIOption>emptySet());
+        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, false, Collections.emptySet());
         addSlot(slot0);
 
-        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, null, -1, -1, false, false, Collections.<AIOption>emptySet());
+        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, null, -1, -1, false, false, Collections.emptySet());
         addSlot(slot1);
     }
 

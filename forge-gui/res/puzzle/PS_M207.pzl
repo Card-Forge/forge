@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/08/126.-M207.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your Dauntless Bodyguard chose Shanna, Sisay's Legacy when it entered the battlefield.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Strength of the Pack;Depose // Deploy;Storm the Citadel;Masterful Replication;Short Sword
+humanbattlefield=Gideon Blackblade|Counters:LOYALTY=6;Blackblade Reforged;Omnispell Adept;Shanna, Sisay's Legacy|Id:9;Sigiled Sword of Valeron|AttachedTo:9;Dauntless Bodyguard|ChosenCards:9|Id:10|NoETBTrigs;Forebear's Blade|AttachedTo:10;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs
+aibattlefield=Charity Extractor;Looming Altisaur;Gate Colossus;Looming Altisaur;Charity Extractor

@@ -206,7 +206,7 @@ public class ConquestUtil {
         }
     }
 
-    public static enum AEtherFilter implements IHasSkinProp {
+    public enum AEtherFilter implements IHasSkinProp {
         C (null, new ColorFilter(MagicColor.COLORLESS), "Playable in {C}"),
         W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
         U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
@@ -262,7 +262,7 @@ public class ConquestUtil {
         private final Predicate<PaperCard> predicate;
         private String caption;
 
-        private AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
+        AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
             skinProp = skinProp0;
             predicate = predicate0;
             caption = caption0;
@@ -509,8 +509,7 @@ public class ConquestUtil {
         public boolean apply(PaperCard card) {
             int cardCmc = card.getRules().getManaCost().getCMC();
             if (cardCmc < cmcMin) { return false; }
-            if (cmcMax != -1 && cardCmc > cmcMax) { return false; }
-            return true;
+            return cmcMax == -1 || cardCmc <= cmcMax;
         }
     }
 }

@@ -22,7 +22,7 @@ public class TriggerRevealed extends Trigger {
         }
         if (this.mapParams.containsKey("Miracle")) {
             Boolean madness = (Boolean) runParams2.get("Miracle");
-            if (this.mapParams.get("Miracle").equals("True") ^ madness) {
+            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }

@@ -244,9 +244,6 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (ph.is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
-            return false;
-        }
-        return true;
+        return !ph.is(PhaseType.MAIN2) || sa.hasParam("Permanent");
     }
 }

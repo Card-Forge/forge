@@ -859,7 +859,7 @@ public class AiBlockController {
                                 damageToPW += ComputerUtilCombat.predictDamageTo((Card) def, pwatkr.getNetCombatDamage(), pwatkr, true);
                             }
                         }
-                        if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= ((Card) def).getCounters(CounterType.LOYALTY)) {
+                        if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= def.getCounters(CounterType.LOYALTY)) {
                             threatenedPWs.add((Card) def);
                         }
                     }
@@ -879,7 +879,7 @@ public class AiBlockController {
             if (!chumpPWDefenders.isEmpty()) {
                 for (final Card attacker : attackers) {
                     GameEntity def = combat.getDefenderByAttacker(attacker);
-                    if (def instanceof Card && threatenedPWs.contains((Card) def)) {
+                    if (def instanceof Card && threatenedPWs.contains(def)) {
                         if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                             // don't bother trying to chump a trampling creature
                             continue;
@@ -914,7 +914,7 @@ public class AiBlockController {
                                 pwDefenders.addAll(combat.getBlockers(pwAtk));
                             } else {
                                 isFullyBlocked = false;
-                                damageToPW += ComputerUtilCombat.predictDamageTo((Card) pw, pwAtk.getNetCombatDamage(), pwAtk, true);
+                                damageToPW += ComputerUtilCombat.predictDamageTo(pw, pwAtk.getNetCombatDamage(), pwAtk, true);
                             }
                         }
                         if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterType.LOYALTY)) {
@@ -1329,13 +1329,9 @@ public class AiBlockController {
                 && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
         boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
 
-        if (((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.
+        return ((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.
                 && powerParityOrHigher
                 && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
-                && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
-            return true;
-        }
-
-        return false;
+                && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker);
     }
 }

@@ -118,7 +118,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean basicLandAbility = false;
 
     private SplitSide splitSide = null;
-    enum SplitSide { LEFT, RIGHT };
+    enum SplitSide { LEFT, RIGHT }
+
     private int totalManaSpent = 0;
 
     /** The pay costs. */
@@ -209,7 +210,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof SpellAbility && this.id == ((SpellAbility) obj).id;
-    };
+    }
 
     @Override
     public void setHostCard(final Card c) {
@@ -271,7 +272,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
-        if (isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
+        if (isWrapper() && this.getTrigger().getMode() != TriggerType.TapsForMana) {
             return false;
         }
 
@@ -1428,10 +1429,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             maxTargets = Integer.parseInt(this.getHostCard().getSVar("CostCountersRemoved"));
         }
 
-        if (minTargets > numTargets || maxTargets < numTargets) {
-            return false;
-        }
-        return true;
+        return minTargets <= numTargets && maxTargets >= numTargets;
     }
     /**
      * <p>

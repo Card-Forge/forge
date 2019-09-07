@@ -135,7 +135,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return controller;
         }
 
-        private EditorType(DeckController<? extends DeckBase> controller0, Predicate<PaperCard> cardFilter0) {
+        EditorType(DeckController<? extends DeckBase> controller0, Predicate<PaperCard> cardFilter0) {
             controller = controller0;
             cardFilter = cardFilter0;
         }

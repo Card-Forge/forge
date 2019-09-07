@@ -93,9 +93,7 @@ public class CostExert extends CostPartWithList {
             final Integer amount = this.convertAmount();
 
 
-            if (!needsAnnoucement && (amount != null) && (typeList.size() < amount)) {
-                return false;
-            }
+            return needsAnnoucement || (amount == null) || (typeList.size() >= amount);
 
         }
 

@@ -15,7 +15,7 @@ public enum QuestEventDifficulty {
     private final String inFile;
     private final double multiplier;
 
-    private QuestEventDifficulty(final String storedInFile, final double multiplier) {
+    QuestEventDifficulty(final String storedInFile, final double multiplier) {
         inFile = storedInFile;
         this.multiplier = multiplier;
     }

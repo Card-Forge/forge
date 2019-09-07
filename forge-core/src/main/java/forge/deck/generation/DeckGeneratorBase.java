@@ -142,7 +142,7 @@ public abstract class DeckGeneratorBase {
                 if(basicLandEdition == null){
                     if(setBasicLandPool(cp.getEdition())){
                         basicLandEdition = cp.getEdition();
-                    };
+                    }
                 }
                 cardCounts.put(cp.getName(), newCount);
                 trace.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));

@@ -31,19 +31,13 @@ public class MillAi extends SpellAbilityAi {
         PhaseHandler ph = ai.getGame().getPhaseHandler();
 
         if (aiLogic.equals("Main1")) {
-            if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                    && !ComputerUtil.castSpellInMain1(ai, sa)) {
-                return false;
-            }
+            return !ph.getPhase().isBefore(PhaseType.MAIN2) || sa.hasParam("ActivationPhases")
+                    || ComputerUtil.castSpellInMain1(ai, sa);
         } else if (aiLogic.equals("EndOfOppTurn")) {
-            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai))) {
-                return false;
-            }
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         } else if (aiLogic.equals("LilianaMill")) {
             // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
-            if (CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() < 1) {
-                return false;
-            }
+            return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() >= 1;
         }
         return true;
     }
@@ -62,11 +56,9 @@ public class MillAi extends SpellAbilityAi {
             }
         }
         if (sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) {
-            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai))) {
-                // creatures with a tap cost to mill (e.g. Doorkeeper) should be activated at the opponent's end step
-                // because they are also potentially useful for combat
-                return false;
-            }
+            // creatures with a tap cost to mill (e.g. Doorkeeper) should be activated at the opponent's end step
+            // because they are also potentially useful for combat
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         }
         return true;
     }
@@ -100,9 +92,7 @@ public class MillAi extends SpellAbilityAi {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(ai, sa);
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
-            if (cardsToDiscard <= 0) {
-                return false;
-            }
+            return cardsToDiscard > 0;
         }
         return true;
     }

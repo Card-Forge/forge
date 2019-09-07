@@ -254,7 +254,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
             if (!sameNameFound) {
                 return false;
-           }
+            }
         }
         return true;
     }

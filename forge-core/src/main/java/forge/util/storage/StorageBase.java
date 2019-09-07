@@ -65,7 +65,7 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public boolean contains(String name) {
-        return name == null ? false : map.containsKey(name);
+        return name != null && map.containsKey(name);
     }
 
     @Override

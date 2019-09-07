@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.27.001";
+    public static final String CURRENT_VERSION = "1.6.28.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -49,6 +49,9 @@ public class Forge implements ApplicationListener {
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Stack<FScreen> screens = new Stack<FScreen>();
     private static boolean textureFiltering = false;
+    private static boolean destroyThis = false;
+    public static String extrawide = "default";
+    public static  float heigtModifier = 0.0f;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -70,7 +73,14 @@ public class Forge implements ApplicationListener {
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         Gdx.input.setInputProcessor(new MainInputProcessor());
-
+        /*
+         Set CatchBackKey here and exit the app when you hit the
+         back button while the textures,fonts,etc are still loading,
+         to prevent rendering issue when you try to restart
+         the app again (seems it doesnt dispose correctly...?!?)
+         */
+        Gdx.input.setCatchKey(Keys.BACK, true);
+        destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
 
         String skinName;
@@ -115,9 +125,8 @@ public class Forge implements ApplicationListener {
         FSkin.loadFull(splashScreen);
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
-
-        Gdx.input.setCatchBackKey(true);
-        Gdx.input.setCatchMenuKey(true);
+        destroyThis = false; //Allow back()
+        Gdx.input.setCatchKey(Keys.MENU, true);
         openScreen(HomeScreen.instance);
         splashScreen = null;
 
@@ -125,6 +134,9 @@ public class Forge implements ApplicationListener {
         if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
         }
+
+        //adjust height modifier
+        adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
         //update landscape mode preference if it doesn't match what the app loaded as
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode) {
@@ -154,6 +166,29 @@ public class Forge implements ApplicationListener {
         }
     }
 
+    public static void setHeightModifier(float height) {
+        heigtModifier = height;
+    }
+
+    public static float getHeightModifier() {
+        return heigtModifier;
+    }
+
+    public static void adjustHeightModifier(float DisplayW, float DisplayH) {
+        if(isLandscapeMode())
+        {//TODO: Fullscreen support for Display without screen controls
+            float aspectratio = DisplayW / DisplayH;
+            if(aspectratio > 1.82f) {/* extra wide */
+                setHeightModifier(200.0f);
+                extrawide = "extrawide";
+            }
+            else if(aspectratio > 1.7f) {/* wide */
+                setHeightModifier(100.0f);
+                extrawide = "wide";
+            }
+        }
+    }
+
     public static void showMenu() {
         if (currentScreen == null) { return; }
         endKeyInput(); //end key input before menu shown
@@ -167,6 +202,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
+        if(destroyThis && isLandscapeMode())
+            return;
         if (screens.size() < 2) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
@@ -481,7 +518,12 @@ public class Forge implements ApplicationListener {
                 touchDown(0,0,0,0);
                 return fling(0,1000);
             }
-
+            if(keyCode == Keys.BACK){
+                if (destroyThis)
+                    deviceAdapter.exit();
+                else if(onHomeScreen() && isLandscapeMode())
+                    back();
+            }
             if (keyInputAdapter == null) {
                 if (KeyInputAdapter.isModifierKey(keyCode)) {
                     return false; //don't process modifiers keys for unknown adapter

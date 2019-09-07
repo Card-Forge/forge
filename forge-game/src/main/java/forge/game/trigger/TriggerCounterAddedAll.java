@@ -19,11 +19,7 @@ public class TriggerCounterAddedAll extends Trigger {
     public boolean performTest(Map<String, Object> runParams2) {
         final GameEntityCounterTable table = (GameEntityCounterTable) runParams2.get("Objects");
 
-        if (filterTable(table).isEmpty()) {
-            return false;
-        }
-
-        return true;
+        return !filterTable(table).isEmpty();
     }
 
     @Override

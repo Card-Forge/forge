@@ -355,9 +355,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(final Card c) {
                         if (c.getType().isLegendary()) {
-                            if (ai.isCardInPlay(c.getName())) {
-                                return false;
-                            }
+                            return !ai.isCardInPlay(c.getName());
                         }
                         return true;
                     }
@@ -738,11 +736,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb)) {
-            return false;
-        }
-
-        return true;
+        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
     }
 
     /*
@@ -864,7 +858,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
 
         // Filter AI-specific targets if provided
-        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
+        list = ComputerUtil.filterAITgts(sa, ai, list, true);
         if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -995,11 +989,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 	                    @Override
 	                    public boolean apply(final Card c) {
 	                        for (Card aura : c.getEnchantedBy()) {
-	                            if (aura.getController().isOpponentOf(ai)) {
-	                                return true;
-	                            } else {
-	                                return false;
-	                            }
+                                return aura.getController().isOpponentOf(ai);
 	                        }
 	                        if (blink) {
 	                            return c.isToken();
@@ -1471,16 +1461,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
-                    if (attachedTo.getController().isOpponentOf(ai)) {
-                        return false;
-                    }
+                    return !attachedTo.getController().isOpponentOf(ai);
                 }
             }
         } else if (isPreferredTarget(ai, sa, mandatory, true)) {
             // do nothing
-        } else if (!isUnpreferredTarget(ai, sa, mandatory)) {
-            return false;
-        }
+        } else return isUnpreferredTarget(ai, sa, mandatory);
 
         return true;
     }
@@ -1532,9 +1518,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     if (c.getType().isLegendary()) {
-                        if (decider.isCardInPlay(c.getName())) {
-                            return false;
-                        }
+                        return !decider.isCardInPlay(c.getName());
                     }
                     return true;
                 }
@@ -1543,10 +1527,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (ComputerUtilCard.isCardRemAIDeck(c) || ComputerUtilCard.isCardRemRandomDeck(c)) {
-                            return false;
-                        }
-                        return true;
+                        return !ComputerUtilCard.isCardRemAIDeck(c) && !ComputerUtilCard.isCardRemRandomDeck(c);
                     }
                 });
             }
@@ -1718,9 +1699,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     if (c.getType().isLegendary()) {
-                        if (ai.isCardInPlay(c.getName())) {
-                            return false;
-                        }
+                        return !ai.isCardInPlay(c.getName());
                     }
                     return true;
                 }
@@ -1826,20 +1805,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     && "Battlefield".equals(causeSub.getParam("Destination"))) {
                 // A blink effect implemented using ChangeZone API
                 return false;
-            } else if (subApi == ApiType.DelayedTrigger) {
+            } else // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
+                // return the commander to the Command zone.
+                if (subApi == ApiType.DelayedTrigger) {
                 SpellAbility exec = causeSub.getAdditionalAbility("Execute");
                 if (exec != null && exec.getApi() == ApiType.ChangeZone) {
-                    if ("Exile".equals(exec.getParam("Origin")) && "Battlefield".equals(exec.getParam("Destination"))) {
-                        // A blink effect implemented using a delayed trigger
-                        return false;
-                    }
+                    // A blink effect implemented using a delayed trigger
+                    return !"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"));
                 }
-            } else if (causeSa.getHostCard() != null && causeSa.getHostCard().equals((Card)sa.getReplacingObject("Card"))
-                    && causeSa.getActivatingPlayer().equals(aiPlayer)) {
-                // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
-                // return the commander to the Command zone.
-                return false;
-            }
+            } else return causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject("Card"))
+                        || !causeSa.getActivatingPlayer().equals(aiPlayer);
         }
         
         // Normally we want the commander back in Command zone to recast him later

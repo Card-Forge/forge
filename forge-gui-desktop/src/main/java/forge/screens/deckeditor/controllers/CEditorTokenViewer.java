@@ -24,10 +24,10 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
     private List<PaperToken> fullCatalogCards;
 
     // remember changed gui elements
-    private String CCTabLabel = new String();
-    private String CCAddLabel = new String();
-    private String CDTabLabel = new String();
-    private String CDRemLabel = new String();
+    private String CCTabLabel = "";
+    private String CCAddLabel = "";
+    private String CDTabLabel = "";
+    private String CDRemLabel = "";
     private String prevRem4Label = null;
     private String prevRem4Tooltip = null;
     private Runnable prevRem4Cmd = null;

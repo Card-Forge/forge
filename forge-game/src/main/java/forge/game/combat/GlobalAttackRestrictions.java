@@ -45,7 +45,7 @@ public class GlobalAttackRestrictions {
     private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers, final boolean returnQuickly) {
         final int nTooMany = max < 0 ? 0 : attackers.size() - max;
         if (returnQuickly && nTooMany > 0) {
-            return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.<GameEntity>emptyMap(), MapToAmountUtil.<GameEntity>emptyMap());
+            return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.emptyMap(), MapToAmountUtil.emptyMap());
         }
 
         final MapToAmount<GameEntity> defenderTooMany = new LinkedHashMapToAmount<GameEntity>(defenderMax.size());

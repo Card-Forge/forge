@@ -159,7 +159,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(discarded);
         }
 
-        final String type = new String(discardType);
+        final String type = discardType;
         final String[] validType = type.split(";");
         hand = CardLists.getValidCards(hand, validType, player, source, ability);
 
@@ -860,7 +860,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
             if (num == 0) {
                 return PaymentDecision.number(0);
-            };
+            }
 
             inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
             inp.setMessage("Select %d more " + cost.getDescriptiveType() + " card(s) to reveal.");

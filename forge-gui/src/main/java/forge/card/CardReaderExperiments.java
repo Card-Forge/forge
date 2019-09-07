@@ -162,7 +162,7 @@ public class CardReaderExperiments {
                 Matcher m = p.matcher(line);
                 if (m.matches()) {
                     StringBuilder newLineBuilder = new StringBuilder();
-                    newLineBuilder.append(line.substring(0, m.start(1)));
+                    newLineBuilder.append(line, 0, m.start(1));
                     for (String sym : m.group(1).split(" ")) {
                         newLineBuilder.append("{" + sym + "}");
                     }
