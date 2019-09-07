@@ -128,7 +128,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        orderedCards.sort(new Comparator<Card>() {
+        Collections.sort(orderedCards, new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
                 return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
@@ -151,7 +151,7 @@ public class ComputerUtilMana {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
-            newAbilities.sort(new Comparator<SpellAbility>() {
+            Collections.sort(newAbilities, new Comparator<SpellAbility>() {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());

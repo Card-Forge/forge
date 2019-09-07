@@ -124,7 +124,7 @@ public class AiBlockController {
             ComputerUtilCard.sortByEvaluateCreature(attackers);
             CardLists.sortByPowerDesc(attackers);
             //move cards like Phage the Untouchable to the front
-            attackers.sort(new Comparator<Card>() {
+            Collections.sort(attackers, new Comparator<Card>() {
                 @Override
                 public int compare(final Card o1, final Card o2) {
                     if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {

@@ -2196,8 +2196,8 @@ public class ComputerUtil {
                 }
             }
         }
-    
-        goodChoices.sort(CardLists.TextLenComparator);
+
+        Collections.sort(goodChoices, CardLists.TextLenComparator);
     
         CardLists.sortByCmcDesc(goodChoices);
         dChoices.add(goodChoices.get(0));

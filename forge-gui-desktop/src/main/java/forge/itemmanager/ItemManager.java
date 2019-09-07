@@ -857,7 +857,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @SuppressWarnings("unchecked")
     public void addFilter(final ItemFilter<? extends T> filter) {
         final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
-        List<ItemFilter<? extends T>> classFilters = this.filters.computeIfAbsent(filterClass, k -> new ArrayList<>());
+        List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
+        if (classFilters == null) {
+            classFilters = new ArrayList<>();
+            this.filters.put(filterClass, classFilters);
+        }
         if (classFilters.size() > 0) {
             //if filter with the same class already exists, try to merge if allowed
             //NOTE: can always use first filter for these checks since if

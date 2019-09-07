@@ -598,12 +598,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             view.updateCommanderDamage(this);
         }
 
-        int old = assignedDamage.getOrDefault(source, 0);
+        int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
         assignedDamage.put(source, old + amount);
         source.getDamageHistory().registerDamage(this);
 
         if (isCombat) {
-            old = assignedCombatDamage.getOrDefault(source, 0);
+            old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
             assignedCombatDamage.put(source, old + amount);
             for (final String type : source.getType().getCreatureTypes()) {
                 source.getController().addProwlType(type);

@@ -70,7 +70,7 @@ public class ComputerUtilCard {
      * @param list
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
-        list.sort(ComputerUtilCard.EvaluateCreatureComparator);
+        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
     } // sortByEvaluateCreature()
     
     // The AI doesn't really pick the best artifact, just the most expensive.
@@ -390,7 +390,7 @@ public class ComputerUtilCard {
         if (!Iterables.isEmpty(list)) {
             CardCollection cc = CardLists.filter(new CardCollection(list),
                     Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
-            cc.sort(CardLists.CmcComparatorInv);
+            Collections.sort(cc, CardLists.CmcComparatorInv);
 
             if (cc.isEmpty()) {
                 return null;
@@ -802,9 +802,8 @@ public class ComputerUtilCard {
             if (color.hasGreen()) map.get(4).setValue(Integer.valueOf(map.get(4).getValue()+1));
         } // for
 
-        map.sort(new Comparator<Pair<Byte, Integer>>() {
-            @Override
-            public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
+        Collections.sort(map, new Comparator<Pair<Byte,Integer>>() {
+            @Override public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
                 return o2.getValue() - o1.getValue();
             }
         });

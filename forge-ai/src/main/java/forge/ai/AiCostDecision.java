@@ -631,7 +631,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 CardPredicates.hasKeyword("Undying"));
 
         if (!prefs.isEmpty()) {
-            prefs.sort(CardPredicates.compareByCounterType(CounterType.P1P1));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.P1P1));
             PaymentDecision result = PaymentDecision.card(prefs);
             result.ct = CounterType.P1P1;
             return result;
@@ -642,7 +642,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 CardPredicates.hasKeyword("Persist"));
 
         if (!prefs.isEmpty()) {
-            prefs.sort(CardPredicates.compareByCounterType(CounterType.M1M1));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.M1M1));
             PaymentDecision result = PaymentDecision.card(prefs);
             result.ct = CounterType.M1M1;
             return result;
@@ -653,7 +653,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 CardPredicates.nameEquals("Chronozoa"));
 
         if (!prefs.isEmpty()) {
-            prefs.sort(CardPredicates.compareByCounterType(CounterType.TIME));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.TIME));
             PaymentDecision result = PaymentDecision.card(prefs);
             result.ct = CounterType.TIME;
             return result;
@@ -676,7 +676,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     return crd.getCounters(CounterType.QUEST) >= e + c;
                 }
             });
-            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.QUEST)));
+            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.QUEST)));
             PaymentDecision result = PaymentDecision.card(prefs);
             result.ct = CounterType.QUEST;
             return result;

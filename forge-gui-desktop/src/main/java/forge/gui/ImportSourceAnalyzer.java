@@ -446,7 +446,7 @@ public class ImportSourceAnalyzer {
         analyzeListedDir(root, ForgeConstants.CACHE_ICON_PICS_DIR, new ListedAnalyzer() {
             @Override
             public String map(final String filename) {
-                return iconFileNames.getOrDefault(filename, null);
+                return iconFileNames.containsKey(filename) ? iconFileNames.get(filename) : null;
             }
 
             @Override
@@ -618,7 +618,7 @@ public class ImportSourceAnalyzer {
         analyzeListedDir(root, targetDir, new ListedAnalyzer() {
             @Override
             public String map(final String filename) {
-                return fileDb.getOrDefault(filename, null);
+                return fileDb.containsKey(filename) ? fileDb.get(filename) : null;
             }
 
             @Override

@@ -547,7 +547,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         Map<String, String> result = Maps.newHashMap(output);
         for (Map.Entry<String, String> e : input.entrySet()) {
             String value = e.getValue();
-            result.put(e.getKey(), output.getOrDefault(value, value));
+            result.put(e.getKey(), output.containsKey(value) ? output.get(value) : value);
         }
         return result;
     }

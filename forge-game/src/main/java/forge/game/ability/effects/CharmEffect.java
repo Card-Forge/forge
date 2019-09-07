@@ -11,6 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.collect.FCollection;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -190,7 +191,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         // Sort Chosen by SA order
-        chosen.sort(new Comparator<AbilitySub>() {
+        Collections.sort(chosen, new Comparator<AbilitySub>() {
             @Override
             public int compare(AbilitySub o1, AbilitySub o2) {
                 return Integer.compare(o1.getSVarInt("CharmOrder"), o2.getSVarInt("CharmOrder"));

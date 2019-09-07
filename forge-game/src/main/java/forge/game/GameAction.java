@@ -824,7 +824,7 @@ public class GameAction {
                         .result();
             }
         };
-        staticAbilities.sort(comp);
+        Collections.sort(staticAbilities, comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {

@@ -89,8 +89,8 @@ public class AbilityManaPart implements java.io.Serializable {
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
 
-        origProduced = params.getOrDefault("Produced", "1");
-        this.manaRestrictions = params.getOrDefault("RestrictValid", "");
+        origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
+        this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
         this.addsKeywords = params.get("AddsKeywords");
         this.addsKeywordsType = params.get("AddsKeywordsType");
@@ -98,7 +98,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
-        this.manaReplaceType = params.getOrDefault("ManaReplaceType", "");
+        this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
     }
 
     /**

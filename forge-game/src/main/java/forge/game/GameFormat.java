@@ -403,7 +403,8 @@ public class GameFormat implements Comparable<GameFormat> {
             naturallyOrdered = reader.naturallyOrdered;
             reverseDateOrdered = new ArrayList<>(naturallyOrdered);
             Collections.sort(naturallyOrdered);
-            reverseDateOrdered.sort(new InverseDateComparator());
+            //Why this refactor doesnt work on some android phones? -> reverseDateOrdered.sort(new InverseDateComparator());
+            Collections.sort(reverseDateOrdered, new InverseDateComparator());
         }
 
         public Iterable<GameFormat> getOrderedList() {

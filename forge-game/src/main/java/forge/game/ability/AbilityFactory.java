@@ -311,8 +311,8 @@ public final class AbilityFactory {
     }
 
     private static final TargetRestrictions readTarget(Map<String, String> mapParams) {
-        final String min = mapParams.getOrDefault("TargetMin", "1");
-        final String max = mapParams.getOrDefault("TargetMax", "1");
+        final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
+        final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
 
         // TgtPrompt now optional
