@@ -203,7 +203,12 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            sb.append("gains ");
+            boolean gains = sa.hasParam("NumAtt") || sa.hasParam("NumDef") || !keywords.isEmpty();
+
+            if (gains) {
+                sb.append("gains ");
+            }
+
             if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
                 if (atk >= 0) {
                     sb.append("+");
@@ -221,8 +226,25 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(keywords.get(i)).append(" ");
             }
 
+            if (sa.hasParam("CanBlockAny")) {
+                if (gains) {
+                    sb.append(" and ");
+                }
+                sb.append("can block any number of creatures ");
+            } else if (sa.hasParam("CanBlockAmount")) {
+                if (gains) {
+                    sb.append(" and ");
+                }
+                String n = sa.getParam("CanBlockAmount");
+                sb.append("can block an additional ");
+                sb.append("1".equals(n) ? "creature" : Lang.nounWithNumeral(n, "creature"));
+                sb.append(" each combat ");
+            }
+
             if (!sa.hasParam("Permanent")) {
                 sb.append("until end of turn.");
+            } else {
+                sb.append(".");
             }
 
         }

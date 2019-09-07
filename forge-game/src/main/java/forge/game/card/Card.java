@@ -2048,16 +2048,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n");
         }
 
-        // maybe move to CardView for better output
-        if (canBlockAny()) {
-            sb.append("CARDNAME can block any number of creatures.");
-            sb.append("\r\n");
-        } else if (!canBlockAdditional.isEmpty()){
-            sb.append("CARDNAME can block an additional ");
-            sb.append(Lang.nounWithNumeral(canBlockAdditional(), "creature"));
-            sb.append(" creatures each combat.");
-            sb.append("\r\n");
-        }
         // replace triple line feeds with double line feeds
         int start;
         final String s = "\r\n\r\n\r\n";
@@ -6243,12 +6233,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             return;
         }
         canBlockAdditional.put(timestamp, n);
+        getView().updateBlockAdditional(this);
     }
 
     public boolean removeCanBlockAdditional(long timestamp) {
-        return canBlockAdditional.remove(timestamp) != null;
+        boolean result = canBlockAdditional.remove(timestamp) != null;
+        if (result) {
+            getView().updateBlockAdditional(this);
+        }
+        return result;
     }
-    
+
     public int canBlockAdditional() {
         int result = 0;
         for (Integer v : canBlockAdditional.values()) {
@@ -6259,10 +6254,15 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void addCanBlockAny(long timestamp) {
         canBlockAny.add(timestamp);
+        getView().updateBlockAdditional(this);
     }
 
     public boolean removeCanBlockAny(long timestamp) {
-        return canBlockAny.remove(timestamp);
+        boolean result = canBlockAny.remove(timestamp);
+        if (result) {
+            getView().updateBlockAdditional(this);
+        }
+        return result;
     }
 
     public boolean canBlockAny() {
