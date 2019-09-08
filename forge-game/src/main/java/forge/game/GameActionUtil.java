@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityUtils;
@@ -100,6 +101,19 @@ public final class GameActionUtil {
                     source = CardUtil.getLKICopy(source);
                 }
                 source.turnFaceDownNoUpdate();
+                lkicheck = true;
+            } else if (sa.isAdventure() && !source.isInZone(ZoneType.Battlefield)) {
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+                // need way to copy adventure state
+                if (!source.hasState(CardStateName.Adventure)) {
+                    source.addAlternateState(CardStateName.Adventure, false);
+                    source.getState(CardStateName.Adventure).copyFrom(
+                            sa.getHostCard().getState(CardStateName.Adventure), true);
+                }
+
+                source.setState(CardStateName.Adventure, false);
                 lkicheck = true;
             }
 

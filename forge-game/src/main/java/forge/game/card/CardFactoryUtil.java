@@ -4738,4 +4738,30 @@ public class CardFactoryUtil {
         }
         return byClause + StringUtils.join(orClauses, " or ") + ".";
     }
+
+    public static void setupAdventureAbility(Card card) {
+        if (card.getCurrentStateName() != CardStateName.Adventure) {
+            return;
+        }
+        SpellAbility sa = card.getFirstSpellAbility();
+        if (sa == null) {
+            return;
+        }
+        sa.setAdventure(true);
+
+        String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
+
+        AbilitySub saExile = (AbilitySub)AbilityFactory.getAbility(abExile, card);
+
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile";
+        AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+        sb.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+        saEffect.setSVar("Play", sb.toString());
+
+        saExile.setSubAbility(saEffect);
+        sa.appendSubAbility(saExile);
+    }
 }

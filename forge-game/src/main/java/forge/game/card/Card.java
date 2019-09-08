@@ -351,8 +351,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             else if (isDoubleFaced() && currentStateName != CardStateName.Transformed) {
                 return CardStateName.Transformed;
             }
-            else if (this.isMeldable() && currentStateName != CardStateName.Meld) {
+            else if (isMeldable() && currentStateName != CardStateName.Meld) {
                 return CardStateName.Meld;
+            }
+            else if (this.isAdventureCard() && currentStateName != CardStateName.Adventure) {
+                return CardStateName.Adventure;
             }
             else {
                 return CardStateName.Original;
@@ -801,6 +804,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean isSplitCard() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+    }
+
+    public final boolean isAdventureCard() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Adventure;
     }
 
     public final boolean isBackSide() {
@@ -1989,7 +1996,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
-            final String sAbility = formatSpellAbility(sa);
+            String sAbility = formatSpellAbility(sa);
+
+            // add Adventure to AbilityText
+            if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
+                StringBuilder sbSA = new StringBuilder();
+                sbSA.append("Adventure ").append(getState(CardStateName.Adventure).getName());
+                if (sa.getPayCosts() != null) {
+                    sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
+                }
+                sbSA.append(": ");
+                sbSA.append(sAbility);
+                sAbility = sbSA.toString();
+            }
 
             if (sa.getManaPart() != null) {
                 if (addedManaStrings.contains(sAbility)) {
@@ -2397,10 +2416,21 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
-        if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
-            for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
-                if (sa.isManifestUp() || sa.isMorphUp()) {
-                    list.add(sa);
+        if (isInZone(ZoneType.Battlefield)) {
+            if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
+                for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
+                    if (sa.isManifestUp() || sa.isMorphUp()) {
+                        list.add(sa);
+                    }
+                }
+            }
+        } else {
+            // Adenture may only be cast not from Battlefield
+            if (isAdventureCard() && state.getView().getState() == CardStateName.Original) {
+                for (SpellAbility sa : getState(CardStateName.Adventure).getSpellAbilities()) {
+                    if (mana == null || mana == sa.isManaAbility()) {
+                        list.add(sa);
+                    }
                 }
             }
         }
@@ -5731,6 +5761,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
+        if (isAdventureCard()) {
+            if (sa.isAdventure()) {
+                setState(CardStateName.Adventure, true);
+            }
+            return;
+        }
         if (!isSplitCard()) {
             return; // just in case
         }
