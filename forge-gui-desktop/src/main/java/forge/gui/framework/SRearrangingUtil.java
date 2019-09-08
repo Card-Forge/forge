@@ -45,7 +45,7 @@ public final class SRearrangingUtil {
     private static DragCell cellSrc                        = null;
     private static DragCell cellNew                        = null;
     private static Dropzone dropzone                       = Dropzone.NONE;
-    private static List<IVDoc<? extends ICDoc>> docsToMove = new ArrayList<IVDoc<? extends ICDoc>>();
+    private static List<IVDoc<? extends ICDoc>> docsToMove = new ArrayList<>();
     private static IVDoc<? extends ICDoc> srcSelectedDoc   = null;
 
     private static final SkinCursor CUR_L = FSkin.getCursor(FSkinProp.IMG_CUR_L, 16, 16, "CUR_L");
@@ -98,9 +98,7 @@ public final class SRearrangingUtil {
         }
         // Otherwise, add all of the documents.
         else {
-            for (final IVDoc<? extends ICDoc> vDoc : cellSrc.getDocs()) {
-                docsToMove.add(vDoc);
-            }
+            docsToMove.addAll(cellSrc.getDocs());
         }
 
         // Reset and show preview panel
@@ -312,7 +310,7 @@ public final class SRearrangingUtil {
      * from any side which shares corners with the gap.  */
     private static void fillGap() {
         // Variables to help with matching the borders
-        final List<DragCell> cellsToResize = new ArrayList<DragCell>();
+        final List<DragCell> cellsToResize = new ArrayList<>();
         final int srcX = cellSrc.getAbsX();
         final int srcX2 = cellSrc.getAbsX2();
         final int srcY = cellSrc.getAbsY();

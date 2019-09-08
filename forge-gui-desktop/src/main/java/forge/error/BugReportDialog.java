@@ -67,7 +67,7 @@ public class BugReportDialog {
 
         // Button is not modified, String gets the automatic listener to hide
         // the dialog
-        List<Object> options = new ArrayList<Object>();
+        List<Object> options = new ArrayList<>();
         options.add(new JButton(new _Report()));
         // option to enable automatic Sentry submission
         options.add(new JCheckBox(new _ActivateSentry()));

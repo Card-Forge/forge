@@ -60,12 +60,12 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     };
 
     public ItemPool(final Class<T> cls) {
-        this(new LinkedHashMap<T, Integer>(), cls);
+        this(new LinkedHashMap<>(), cls);
     }
 
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final ItemPool<Tin> from, final Class<Tout> clsHint) {
-        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
+        final ItemPool<Tout> result = new ItemPool<>(clsHint);
         if (from != null) {
             for (final Entry<Tin, Integer> e : from) {
                 final Tin srcKey = e.getKey();
@@ -79,7 +79,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final Iterable<Tin> from, final Class<Tout> clsHint) {
-        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
+        final ItemPool<Tout> result = new ItemPool<>(clsHint);
         if (from != null) {
             for (final Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
@@ -95,7 +95,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             items = items0;
         }
         else {
-            items = new HashMap<T, Integer>(); //prevent items being null
+            items = new HashMap<>(); //prevent items being null
         }
         myClass = cls;
     }
@@ -161,7 +161,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public final List<T> toFlatList() {
-        final List<T> result = new ArrayList<T>();
+        final List<T> result = new ArrayList<>();
         for (final Entry<T, Integer> e : this) {
             for (int i = 0; i < e.getValue(); i++) {
                 result.add(e.getKey());
@@ -171,7 +171,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public Map<String, Integer> toNameLookup() {
-        final Map<String, Integer> result = new HashMap<String, Integer>();
+        final Map<String, Integer> result = new HashMap<>();
         for (final Entry<T, Integer> e : this) {
             result.put(e.getKey().getName(), e.getValue());
         }
@@ -183,7 +183,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public ItemPool<T> getView() {
-        return new ItemPool<T>(Collections.unmodifiableMap(items), getMyClass());
+        return new ItemPool<>(Collections.unmodifiableMap(items), getMyClass());
     }
 
     public void add(final T item) {

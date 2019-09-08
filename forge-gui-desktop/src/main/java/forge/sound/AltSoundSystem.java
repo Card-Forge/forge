@@ -11,7 +11,7 @@ import java.util.Map;
  * @author agetian
  */
 class AsyncSoundRegistry {
-    static Map<String, Integer> soundsPlayed = new HashMap<String, Integer>();
+    static Map<String, Integer> soundsPlayed = new HashMap<>();
 
     public synchronized static void registerSound(String soundName) {
         if (soundsPlayed.containsKey(soundName)) {

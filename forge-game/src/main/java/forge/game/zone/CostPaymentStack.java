@@ -15,7 +15,7 @@ public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>
     private Stack<IndividualCostPaymentInstance> stack;
 
     public CostPaymentStack() {
-        stack = new Stack<IndividualCostPaymentInstance>();
+        stack = new Stack<>();
     }
 
     public IndividualCostPaymentInstance push(final CostPart cost, final CostPayment payment) {

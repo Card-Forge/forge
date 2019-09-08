@@ -93,9 +93,7 @@ public class TapAllAi extends SpellAbilityAi {
                     return CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c);
                 }
             });
-            if(!any) {
-                return false;
-            }
+            return any;
         }
         return true;
     }

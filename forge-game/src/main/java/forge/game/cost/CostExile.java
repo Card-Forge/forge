@@ -146,9 +146,7 @@ public class CostExile extends CostPartWithList {
                     break;
                 }
             }
-            if (!foundPayable) {
-                return false;
-            }
+            return foundPayable;
         }
         return true;
     }

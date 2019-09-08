@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class FTrace {
     private static long appStartTime;
-    private static Map<String, FTrace> traces = new HashMap<String, FTrace>();
+    private static Map<String, FTrace> traces = new HashMap<>();
 
     public static void initialize() {
         appStartTime = new Date().getTime();

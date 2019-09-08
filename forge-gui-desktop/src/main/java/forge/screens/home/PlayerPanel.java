@@ -75,8 +75,8 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
-    private final FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
-    private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<>();
 
     private final FLabel closeBtn;
     private final FLabel deckBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaDeck")).build();

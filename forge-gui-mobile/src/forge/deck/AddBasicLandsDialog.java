@@ -61,7 +61,7 @@ public class AddBasicLandsDialog extends FDialog {
     private final Callback<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
-    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
+    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -312,7 +312,7 @@ public class AddBasicLandsDialog extends FDialog {
         private LandPanel(String cardName0) {
             cardName = cardName0;
             cardPanel = add(new LandCardPanel());
-            cbLandArt = add(new FComboBox<String>());
+            cbLandArt = add(new FComboBox<>());
             cbLandArt.setFont(cbLandSet.getFont());
             cbLandArt.setChangedHandler(new FEventHandler() {
                 @Override

@@ -66,7 +66,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
     private void updateData() {
         final File[] files = GauntletIO.getGauntletFilesLocked();
-        final List<GauntletData> data = new ArrayList<GauntletData>();
+        final List<GauntletData> data = new ArrayList<>();
         if (files != null) {
             for (final File f : files) {
                 final GauntletData gd = GauntletIO.loadGauntlet(f);
@@ -105,7 +105,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
-        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));

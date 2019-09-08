@@ -76,9 +76,7 @@ public class SurveilAi extends SpellAbilityAi {
         if ("Never".equals(aiLogic)) {
             return false;
         } else if ("Once".equals(aiLogic)) {
-            if (AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return false;
-            }
+            return !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         }
 
         // TODO: add card-specific Surveil AI logic here when/if necessary

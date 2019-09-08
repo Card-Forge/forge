@@ -77,7 +77,7 @@ public class TargetRestrictions {
 
     // For "Divided" cards. Is this better in TargetChoices?
     private boolean dividedAsYouChoose = false;
-    private HashMap<Object, Integer> dividedMap = new HashMap<Object, Integer>();
+    private HashMap<Object, Integer> dividedMap = new HashMap<>();
     private int stillToDivide = 0;
     
     // Not sure what's up with Mandatory? Why wouldn't targeting be mandatory?
@@ -773,9 +773,7 @@ public class TargetRestrictions {
      * @param portionAllocated the divided portion allocated
      */
     public final void addDividedAllocation(final Object tgt, final Integer portionAllocated) {
-        if (this.dividedMap.containsKey(tgt)) {
-            this.dividedMap.remove(tgt);
-        }
+        this.dividedMap.remove(tgt);
         this.dividedMap.put(tgt, portionAllocated);
     }
 

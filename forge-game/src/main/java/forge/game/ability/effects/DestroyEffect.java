@@ -78,10 +78,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardCollection untargetedCards = new CardCollection();
 
         if (sa.hasParam("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(card, tgtCards.get(0),
-                    sa.getParam("ValidTgts").split(","))) {
-                untargetedCards.add(c);
-            }
+            untargetedCards.addAll(CardUtil.getRadiance(card, tgtCards.get(0),
+                    sa.getParam("ValidTgts").split(",")));
         }
 
         if (tgtCards.size() > 1) {

@@ -472,7 +472,7 @@ public class FDeckChooser extends FScreen {
         selectedDeckType = defaultDeckType;
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
-            cmbDeckTypes = new FComboBox<DeckType>();
+            cmbDeckTypes = new FComboBox<>();
             switch (lstDecks.getGameType()) {
             case Constructed:
             case Gauntlet:
@@ -950,7 +950,7 @@ public class FDeckChooser extends FScreen {
         if (cmbDeckTypes.getSelectedItem() == null || cmbDeckTypes.getSelectedItem() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
-            state.append(NetDeckCategory.PREFIX + netDeckCategory.getName());
+            state.append(NetDeckCategory.PREFIX).append(netDeckCategory.getName());
         }
         else {
             state.append(cmbDeckTypes.getSelectedItem().name());
@@ -1015,7 +1015,7 @@ public class FDeckChooser extends FScreen {
     private List<String> getSelectedDecksFromSavedState(String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
-                return new ArrayList<String>();
+                return new ArrayList<>();
             }
             else {
                 return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
@@ -1023,7 +1023,7 @@ public class FDeckChooser extends FScreen {
         }
         catch (Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 
@@ -1087,11 +1087,13 @@ public class FDeckChooser extends FScreen {
                     deckTypes.remove(DeckType.VINTAGE_CARDGEN_DECK);
                 }
 
-                ListChooser<DeckType> chooser = new ListChooser<DeckType>(
+                ListChooser<DeckType> chooser = new ListChooser<>(
                         "Choose allowed deck types for opponents", 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
-                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
+                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) {
+                            return;
+                        }
 
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
@@ -1112,7 +1114,7 @@ public class FDeckChooser extends FScreen {
                                                 GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, netCat);
                                                 FModel.setGauntletData(gauntlet);
 
-                                                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                                                List<RegisteredPlayer> players = new ArrayList<>();
                                                 RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
                                                 players.add(humanPlayer);
                                                 players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
@@ -1140,10 +1142,10 @@ public class FDeckChooser extends FScreen {
                 LoadingOverlay.show("Loading new game...", new Runnable() {
                     @Override
                     public void run() {
-                        Set<GameType> appliedVariants = new HashSet<GameType>();
+                        Set<GameType> appliedVariants = new HashSet<>();
                         appliedVariants.add(variant);
 
-                        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                        List<RegisteredPlayer> players = new ArrayList<>();
                         RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
                         humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
                         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, aiDeck, null, false, null, null);
@@ -1151,7 +1153,7 @@ public class FDeckChooser extends FScreen {
                         players.add(humanPlayer);
                         players.add(aiPlayer);
 
-                        final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
+                        final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
                         guiMap.put(humanPlayer, MatchController.instance);
 
                         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();

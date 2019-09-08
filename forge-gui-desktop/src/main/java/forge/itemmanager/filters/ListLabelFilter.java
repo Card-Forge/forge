@@ -45,10 +45,10 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
             labelBuilder.append("s: All");
             break;
         case 1:
-            labelBuilder.append(": " + getList().iterator().next());
+            labelBuilder.append(": ").append(getList().iterator().next());
             break;
         default:
-            labelBuilder.append("s: " + TextUtil.join(getList(), ", "));
+            labelBuilder.append("s: ").append(TextUtil.join(getList(), ", "));
             break;
         }
         label.setText(labelBuilder.toString());

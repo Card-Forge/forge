@@ -641,7 +641,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
-            FCollection<Player> pl = new FCollection<Player>();
+            FCollection<Player> pl = new FCollection<>();
             // use defined controller. it does need to work even without Targets.
             if (sa.hasParam("TargetsWithDefinedController")) {
                 pl.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("TargetsWithDefinedController"), sa));
@@ -876,9 +876,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
             } while (selectedCards != null && selectedCards.size() > changeNum);
             if (selectedCards != null) {
-                for (Card card : selectedCards) {
-                    chosenCards.add(card);
-                }
+                chosenCards.addAll(selectedCards);
             }
             // maybe prompt the user if they selected fewer than the maximum possible?
         } else {
@@ -908,7 +906,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (totalcmc != null) {
                     if (totcmc >= 0) {
-                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), source.getController(), source);
+                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source);
                     }
                 }
 

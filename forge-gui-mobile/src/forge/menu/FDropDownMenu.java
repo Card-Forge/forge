@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FDropDownMenu extends FDropDown {
-    protected final List<FMenuItem> items = new ArrayList<FMenuItem>();
+    protected final List<FMenuItem> items = new ArrayList<>();
 
     public FDropDownMenu() {
     }
@@ -71,9 +71,6 @@ public abstract class FDropDownMenu extends FDropDown {
     @Override
     public boolean tap(float x, float y, int count) {
         super.tap(x, y, count);
-        if (getDropDownOwner() instanceof FSubMenu) {
-            return false; //return false so owning sub menu can be hidden
-        }
-        return true;
+        return !(getDropDownOwner() instanceof FSubMenu); //return false so owning sub menu can be hidden
     }
 }

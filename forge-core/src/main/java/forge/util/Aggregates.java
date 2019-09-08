@@ -124,7 +124,7 @@ public class Aggregates {
     }
 
     public static final <T> List<T> random(final Iterable<T> source, final int count) {
-        return random(source, count, new ArrayList<T>());
+        return random(source, count, new ArrayList<>());
     }
     public static final <T, L extends List<T>> L random(final Iterable<T> source, final int count, final L list) {
         // Using Reservoir Sampling to grab X random values from source
@@ -163,7 +163,7 @@ public class Aggregates {
     }
 
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
-        final Map<K, U> uniques = new Hashtable<K, U>();
+        final Map<K, U> uniques = new Hashtable<>();
         for (final U c : source) {
              uniques.put(fnUniqueKey.apply(c), c);
         }
@@ -206,7 +206,7 @@ public class Aggregates {
     }
 
     public static <T, U> Iterable<Entry<U, Integer>> groupSumBy(Iterable<Entry<T, Integer>> source, Function<T, U> fnGetField) {
-        Map<U, Integer> result = new HashMap<U, Integer>();
+        Map<U, Integer> result = new HashMap<>();
         for (Entry<T, Integer> kv : source) {
             U k = fnGetField.apply(kv.getKey());
             Integer v = kv.getValue();

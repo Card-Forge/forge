@@ -89,7 +89,7 @@ public class GuiChoose {
             return getInteger(message, min, max);
         }
 
-        final List<Object> choices = new ArrayList<Object>();
+        final List<Object> choices = new ArrayList<>();
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
@@ -143,7 +143,7 @@ public class GuiChoose {
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final CMatchUI matchUI) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
-                return new ArrayList<T>();
+                return new ArrayList<>();
             }
             throw new RuntimeException("choice required from empty list");
         }
@@ -151,7 +151,7 @@ public class GuiChoose {
         final Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
-                final ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
+                final ListChooser<T> c = new ListChooser<>(message, min, max, choices, display);
                 final JList<T> list = c.getLstChoices();
                 if (matchUI != null) {
                     list.addListSelectionListener(new ListSelectionListener() {
@@ -224,7 +224,7 @@ public class GuiChoose {
             }
         };
 
-        final FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
+        final FutureTask<List<T>> future = new FutureTask<>(showChoice);
         FThreads.invokeInEdtAndWait(future);
         try {
             return future.get();
@@ -251,7 +251,7 @@ public class GuiChoose {
         final Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
             public List<T> call() {
-                final DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
+                final DualListBox<T> dual = new DualListBox<>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
                 dual.setSecondColumnLabelText(top);
 
                 dual.setSideboardMode(sideboardingMode);
@@ -275,7 +275,7 @@ public class GuiChoose {
             }
         };
 
-        final FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
+        final FutureTask<List<T>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
         try {
             return ft.get();
@@ -298,7 +298,7 @@ public class GuiChoose {
 		    return cardList;
 		}
 	    };
-	final FutureTask<List<CardView>> ft = new FutureTask<List<CardView>>(callable);
+	final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
 	gui.clearSelectables();
         try {

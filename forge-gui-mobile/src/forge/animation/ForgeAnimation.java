@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import forge.Forge;
 
 public abstract class ForgeAnimation {
-    private static final List<ForgeAnimation> activeAnimations = new ArrayList<ForgeAnimation>();
+    private static final List<ForgeAnimation> activeAnimations = new ArrayList<>();
     // A guard against inspecting activeAnimations while it's in the process of being edited
     private static boolean changingActiveAnimations = false;
 

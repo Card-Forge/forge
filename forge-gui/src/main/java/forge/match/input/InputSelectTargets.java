@@ -29,7 +29,7 @@ import forge.FThreads;
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
     // some cards can be targeted several times (eg: distribute damage as you choose)
-    private final Map<GameEntity, Integer> targetDepth = new HashMap<GameEntity, Integer>();
+    private final Map<GameEntity, Integer> targetDepth = new HashMap<>();
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
     private Card lastTarget = null;
@@ -172,7 +172,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
         // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {
-            final List<Player> targetedControllers = new ArrayList<Player>();
+            final List<Player> targetedControllers = new ArrayList<>();
             for (final GameObject o : targetDepth.keySet()) {
                 if (o instanceof Card) {
                     final Player p = ((Card) o).getController();

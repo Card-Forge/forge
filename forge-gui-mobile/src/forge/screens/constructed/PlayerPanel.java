@@ -64,8 +64,8 @@ public class PlayerPanel extends FContainer {
     private final FToggleSwitch humanAiSwitch;
     private final FToggleSwitch devModeSwitch;
 
-    private FComboBox<Object> cbTeam = new FComboBox<Object>();
-    private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
+    private FComboBox<Object> cbTeam = new FComboBox<>();
+    private FComboBox<Object> cbArchenemyTeam = new FComboBox<>();
 
     private final FLabel btnDeck            = new FLabel.ButtonBuilder().text("Loading Deck...").build();
     private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
@@ -719,7 +719,7 @@ public class PlayerPanel extends FContainer {
     public Set<AIOption> getAiOptions() {
         return isSimulatedAi()
                 ? ImmutableSet.of(AIOption.USE_SIMULATION)
-                : Collections.<AIOption>emptySet();
+                : Collections.emptySet();
     }
     private boolean isSimulatedAi() {
         return isAi() && useAiSimulation;

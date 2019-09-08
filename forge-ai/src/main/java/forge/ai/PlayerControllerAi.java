@@ -168,8 +168,8 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-	FCollection<T> remaining = new FCollection<T>(optionList);
-	List<T> selecteds = new ArrayList<T>();
+	FCollection<T> remaining = new FCollection<>(optionList);
+	List<T> selecteds = new ArrayList<>();
 	T selected;
 	do {
 	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
@@ -492,7 +492,7 @@ public class PlayerControllerAi extends PlayerController {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
             return new CardCollection(toDiscard);
         }
-        return getAi().getCardsToDiscard(num, (String[])null, sa);
+        return getAi().getCardsToDiscard(num, null, sa);
     }
 
 
@@ -612,7 +612,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
-        return brains.getCardsToDiscard(numDiscard, (String[])null, null);
+        return brains.getCardsToDiscard(numDiscard, null, null);
     }
 
     @Override
@@ -669,7 +669,7 @@ public class PlayerControllerAi extends PlayerController {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseNumber(player, sa, min, max, params);
-    };
+    }
 
     @Override
     public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
@@ -1072,7 +1072,7 @@ public class PlayerControllerAi extends PlayerController {
                     }
                 });
             } else {
-                return new HashMap<Card, ManaCostShard>();
+                return new HashMap<>();
             }
         }
         

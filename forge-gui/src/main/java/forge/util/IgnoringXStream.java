@@ -16,7 +16,7 @@ import java.util.List;
  * (but are there any fields?)
  */
 public class IgnoringXStream extends XStream {
-    private final List<String> ignoredFields = new ArrayList<String>();
+    private final List<String> ignoredFields = new ArrayList<>();
 
     @Override
     protected MapperWrapper wrapMapper(final MapperWrapper next) {

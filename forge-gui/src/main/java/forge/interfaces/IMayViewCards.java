@@ -22,7 +22,7 @@ public interface IMayViewCards {
     boolean mayFlip(CardView c);
 
     /** {@link IMayViewCards} that lets you view all cards unconditionally. */
-    public static final IMayViewCards ALL = new IMayViewCards() {
+    IMayViewCards ALL = new IMayViewCards() {
         @Override
         public boolean mayView(final CardView c) {
             return true;

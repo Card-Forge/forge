@@ -60,7 +60,7 @@ public class QuestRewardCardFiltered extends QuestRewardCard {
      */
     @Override
     public final List<PaperCard> getChoices() {
-        List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+        List<PaperCard> cardChoices = new ArrayList<>();
         for (final PaperCard card : Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicates)) {
             cardChoices.add(card);
         }

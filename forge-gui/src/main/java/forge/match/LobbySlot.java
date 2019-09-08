@@ -137,7 +137,7 @@ public final class LobbySlot implements Serializable {
     }
 
     public void setAiOptions(final Set<AIOption> aiOptions) {
-        this.aiOptions = aiOptions == null ? ImmutableSet.<AIOption>of() : ImmutableSet.copyOf(aiOptions);
+        this.aiOptions = aiOptions == null ? ImmutableSet.of() : ImmutableSet.copyOf(aiOptions);
     }
 
 }

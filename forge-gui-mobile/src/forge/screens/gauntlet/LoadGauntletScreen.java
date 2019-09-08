@@ -3,7 +3,6 @@ package forge.screens.gauntlet;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import com.badlogic.gdx.utils.Align;
@@ -75,7 +74,7 @@ public class LoadGauntletScreen extends LaunchScreen {
 
     public void onActivate() {
         final File[] files = GauntletIO.getGauntletFilesUnlocked(null);
-        final List<GauntletData> data = new ArrayList<GauntletData>();
+        final List<GauntletData> data = new ArrayList<>();
 
         for (final File f : files) {
             GauntletData gd = GauntletIO.loadGauntlet(f);
@@ -138,7 +137,7 @@ public class LoadGauntletScreen extends LaunchScreen {
             @Override
             public void run() {
                 final GauntletData gauntlet = FModel.getGauntletData();
-                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                List<RegisteredPlayer> players = new ArrayList<>();
                 RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
                 players.add(humanPlayer);
                 players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
@@ -295,11 +294,9 @@ public class LoadGauntletScreen extends LaunchScreen {
         }
 
         public void refresh() {
-            List<GauntletData> sorted = new ArrayList<GauntletData>();
-            for (GauntletData gauntlet : gauntlets) {
-                sorted.add(gauntlet);
-            }
-            Collections.sort(sorted, new Comparator<GauntletData>() {
+            List<GauntletData> sorted = new ArrayList<>();
+            sorted.addAll(gauntlets);
+            sorted.sort(new Comparator<GauntletData>() {
                 @Override
                 public int compare(final GauntletData x, final GauntletData y) {
                     return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());

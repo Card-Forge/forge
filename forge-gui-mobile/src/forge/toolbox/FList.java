@@ -24,7 +24,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
     public static final float LINE_THICKNESS = Utils.scale(1);
 
-    protected final List<T> items = new ArrayList<T>();
+    protected final List<T> items = new ArrayList<>();
     private FSkinFont font;
     private ListItemRenderer<T> renderer;
     private int pressedIndex = -1;
@@ -47,7 +47,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
     private void initialize() {
         font = FSkinFont.get(14);
-        renderer = new DefaultListItemRenderer<T>();
+        renderer = new DefaultListItemRenderer<>();
     }
 
     public synchronized void addItem(T item) {
@@ -65,7 +65,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     }
 
     public List<T> extractListData() {
-        return new ArrayList<T>(items); //create copy to avoid modifying items
+        return new ArrayList<>(items); //create copy to avoid modifying items
     }
     public synchronized void setListData(Iterable<? extends T> items0) {
         clear();

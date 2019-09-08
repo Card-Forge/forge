@@ -30,8 +30,8 @@ public final class GauntletData {
 
     private int completed;
     private String timestamp;
-    private List<String> eventRecords = new ArrayList<String>();
-    private List<String> eventNames = new ArrayList<String>();
+    private List<String> eventRecords = new ArrayList<>();
+    private List<String> eventNames = new ArrayList<>();
     private Deck userDeck;
     private List<Deck> decks;
 
@@ -64,7 +64,7 @@ public final class GauntletData {
 
     public void stamp() {
         final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
-        timestamp = dateFormat.format(new Date()).toString();
+        timestamp = dateFormat.format(new Date());
     }
 
     /** Resets a gauntlet data to an unplayed state, then stamps and saves. */
@@ -101,7 +101,7 @@ public final class GauntletData {
     }
 
     public List<String> getDeckNames() {
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         for (final Deck d : decks) { names.add(d.getName()); }
         return names;
     }

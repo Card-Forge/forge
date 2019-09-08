@@ -132,7 +132,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();
         numCreaturesToStart = ((Double)Math.ceil(targetSize*(getCreaturePercentage()))).intValue();
-        landsNeeded = ((Double)Math.ceil(targetSize*(getLandPercentage()))).intValue();;
+        landsNeeded = ((Double)Math.ceil(targetSize*(getLandPercentage()))).intValue();
         if (logColorsToConsole) {
             System.out.println(keyCard.getName());
             System.out.println("Pre Colors: " + colors.toEnumSet().toString());
@@ -948,7 +948,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
 
 
-        final Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();
+        final Map<Integer, Integer> creatureCosts = new HashMap<>();
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }

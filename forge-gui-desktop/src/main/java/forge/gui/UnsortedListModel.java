@@ -44,7 +44,7 @@ public class UnsortedListModel<T> extends AbstractListModel<T> {
     }
 
     public void addAll(final ListModel<T> otherModel) {
-        final Collection<T> elements = new ArrayList<T>();
+        final Collection<T> elements = new ArrayList<>();
         final int size = otherModel.getSize();
         for (int i = 0; size > i; ++i) {
             elements.add(otherModel.getElementAt(i));

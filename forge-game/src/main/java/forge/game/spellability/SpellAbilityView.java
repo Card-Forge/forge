@@ -17,7 +17,7 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
         if (spabs == null) {
             return null;
         }
-        TrackableCollection<SpellAbilityView> collection = new TrackableCollection<SpellAbilityView>();
+        TrackableCollection<SpellAbilityView> collection = new TrackableCollection<>();
         for (SpellAbility spab : spabs) {
             collection.add(spab.getView());
         }

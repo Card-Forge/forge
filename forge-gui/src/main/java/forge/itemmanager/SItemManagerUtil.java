@@ -12,7 +12,6 @@ import forge.util.ComparableOp;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -28,7 +27,7 @@ import java.util.Map.Entry;
  */
 public final class SItemManagerUtil {
     /** An enum to encapsulate metadata for the stats/filter objects. */
-    public static enum StatTypes implements IHasSkinProp {
+    public enum StatTypes implements IHasSkinProp {
         WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "lblWhitecards"),
         BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "lblBluecards"),
         BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "lblBlackcards"),
@@ -78,7 +77,7 @@ public final class SItemManagerUtil {
         public final Predicate<CardRules> predicate;
         public final String label;
 
-        private StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
+        StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
             skinProp = skinProp0;
             predicate = predicate0;
             final Localizer localizer = Localizer.getInstance();
@@ -92,7 +91,7 @@ public final class SItemManagerUtil {
     }
 
     public static String getItemDisplayString(final InventoryItem item, final int qty, final boolean forTitle) {
-        final List<InventoryItem> items = new ArrayList<InventoryItem>();
+        final List<InventoryItem> items = new ArrayList<>();
         items.add(item);
         return getItemDisplayString(items, qty, forTitle);
     }
@@ -143,11 +142,11 @@ public final class SItemManagerUtil {
     }
 
     public static String buildDisplayList(final Iterable<Entry<InventoryItem, Integer>> items) {
-        final List<Entry<InventoryItem, Integer>> sorted = new ArrayList<Entry<InventoryItem, Integer>>();
+        final List<Entry<InventoryItem, Integer>> sorted = new ArrayList<>();
         for (final Entry<InventoryItem, Integer> itemEntry : items) {
             sorted.add(itemEntry);
         }
-        Collections.sort(sorted, new Comparator<Entry<InventoryItem, Integer>>() {
+        sorted.sort(new Comparator<Entry<InventoryItem, Integer>>() {
             @Override
             public int compare(final Entry<InventoryItem, Integer> x, final Entry<InventoryItem, Integer> y) {
                 return x.getKey().toString().compareTo(y.getKey().toString());
@@ -155,7 +154,7 @@ public final class SItemManagerUtil {
         });
         final StringBuilder builder = new StringBuilder();
         for (final Entry<InventoryItem, Integer> itemEntry : sorted) {
-            builder.append("\n" + itemEntry.getValue() + " * " + itemEntry.getKey().toString());
+            builder.append("\n").append(itemEntry.getValue()).append(" * ").append(itemEntry.getKey().toString());
         }
         return builder.toString();
     }

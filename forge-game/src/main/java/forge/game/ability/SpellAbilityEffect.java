@@ -83,7 +83,7 @@ public abstract class SpellAbilityEffect {
                             "CARDNAME", sa.getHostCard().getName()));
                 }
                 if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-                    sb.append(" (Targeting: " + sa.getTargets().getTargets() + ")");
+                    sb.append(" (Targeting: ").append(sa.getTargets().getTargets()).append(")");
                 }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 makeSpellDescription(sa, sb, stackDesc);
@@ -186,7 +186,7 @@ public abstract class SpellAbilityEffect {
 
     private static FCollection<Player> getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+        return useTargets ? new FCollection<>(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -258,7 +258,7 @@ public abstract class SpellAbilityEffect {
         if (your) {
             delTrig.append("| ValidPlayer$ You ");
         }
-        delTrig.append("| TriggerDescription$ " + desc);
+        delTrig.append("| TriggerDescription$ ").append(desc);
         
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {

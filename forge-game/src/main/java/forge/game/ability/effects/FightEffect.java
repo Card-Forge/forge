@@ -26,10 +26,10 @@ public class FightEffect extends DamageBaseEffect {
         List<Card> fighters = getFighters(sa);
 
         if (fighters.size() > 1) {
-            sb.append(fighters.get(0) + " fights " + fighters.get(1));
+            sb.append(fighters.get(0)).append(" fights ").append(fighters.get(1));
         }
         else if (fighters.size() == 1) {
-            sb.append(fighters.get(0) + " fights unknown");
+            sb.append(fighters.get(0)).append(" fights unknown");
         }
         return sb.toString();
     }

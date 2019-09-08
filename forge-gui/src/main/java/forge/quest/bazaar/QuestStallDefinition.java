@@ -69,7 +69,7 @@ public class QuestStallDefinition {
         name = null;
         displayName = null;
         description = null;
-        items = new ArrayList<String>();
+        items = new ArrayList<>();
         icon = null;
     }
 

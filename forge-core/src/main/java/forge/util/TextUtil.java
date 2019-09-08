@@ -38,7 +38,7 @@ public class TextUtil {
             } else {
                 mapAsString.append("; ");
             }
-            mapAsString.append(p.getKey() + " => " + (p.getValue() == null ? "(null)" : p.getValue().toString()));
+            mapAsString.append(p.getKey()).append(" => ").append(p.getValue() == null ? "(null)" : p.getValue().toString());
         }
         return mapAsString.toString();
     }
@@ -71,7 +71,7 @@ public class TextUtil {
      * It's faster than String.split, and allows parenthesis
      */
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, int maxEntries, char openPar, char closePar, boolean skipEmpty) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         // Assume that when equal non-zero parenthesis are passed, they need to be discarded
         boolean trimParenthesis = openPar == closePar && openPar > 0;
         int nPar = 0;

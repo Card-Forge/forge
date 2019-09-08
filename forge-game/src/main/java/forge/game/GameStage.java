@@ -5,5 +5,5 @@ public enum GameStage {
     Mulligan,
     Play,
     RestartedByKarn,
-    GameOver;
+    GameOver
 }

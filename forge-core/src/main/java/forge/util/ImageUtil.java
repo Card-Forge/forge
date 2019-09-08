@@ -10,7 +10,7 @@ import forge.item.PaperCard;
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
-        return (float)Math.round(actualSize) * (float)Math.pow(2, (double)Math.round(Math.log((double)(baseSize / actualSize)) / Math.log(2)));
+        return (float)Math.round(actualSize) * (float)Math.pow(2, (double)Math.round(Math.log(baseSize / actualSize) / Math.log(2)));
     }
 
     public static PaperCard getPaperCardFromImageKey(String key) {
@@ -119,7 +119,6 @@ public class ImageUtil {
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
             if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-                out.append("");
             } else {
                 out.append(c);
             }

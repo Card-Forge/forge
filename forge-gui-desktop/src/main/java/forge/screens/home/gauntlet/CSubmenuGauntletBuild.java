@@ -31,7 +31,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final VSubmenuGauntletBuild view = VSubmenuGauntletBuild.SINGLETON_INSTANCE;
-    private final List<Deck> workingDecks = new ArrayList<Deck>();
+    private final List<Deck> workingDecks = new ArrayList<>();
     private final File openStartDir = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
 
     private final FileFilter filterDAT = new FileFilter() {
@@ -169,7 +169,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     }
 
     private void dumpDecksIntoList() {
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
 
         for (final Deck d : workingDecks) {
             names.add(d.getName());
@@ -211,7 +211,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
             gd = new GauntletData();
         }
 
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         for (final Deck d : workingDecks) {
             names.add(d.getName());
         }

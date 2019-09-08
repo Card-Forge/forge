@@ -142,7 +142,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (!kws.isEmpty()) {
-                tgtC.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, tStamp);
+                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
 

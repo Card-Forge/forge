@@ -22,10 +22,10 @@ import java.util.List;
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public final class SResizingUtil {
-    private static final List<DragCell> LEFT_PANELS = new ArrayList<DragCell>();
-    private static final List<DragCell> RIGHT_PANELS = new ArrayList<DragCell>();
-    private static final List<DragCell> TOP_PANELS = new ArrayList<DragCell>();
-    private static final List<DragCell> BOTTOM_PANELS = new ArrayList<DragCell>();
+    private static final List<DragCell> LEFT_PANELS = new ArrayList<>();
+    private static final List<DragCell> RIGHT_PANELS = new ArrayList<>();
+    private static final List<DragCell> TOP_PANELS = new ArrayList<>();
+    private static final List<DragCell> BOTTOM_PANELS = new ArrayList<>();
 
     private static int dX;
     private static int evtX;
@@ -135,10 +135,8 @@ public final class SResizingUtil {
         double roughVal = 0;
         int smoothVal = 0;
         
-        Set<Component> existingComponents = new HashSet<Component>();
-        for (Component c : pnlContent.getComponents()) {
-            existingComponents.add(c);
-        }
+        Set<Component> existingComponents = new HashSet<>();
+        existingComponents.addAll(Arrays.asList(pnlContent.getComponents()));
 
         // This is the core of the pixel-perfect layout. To avoid ±1 px errors on borders
         // from rounding individual panels, the intermediate values (exactly accurate, in %)

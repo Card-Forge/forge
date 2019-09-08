@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.27.001";
+    public static final String CURRENT_VERSION = "1.6.28.002";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -47,7 +47,7 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
-    private static final Stack<FScreen> screens = new Stack<FScreen>();
+    private static final Stack<FScreen> screens = new Stack<>();
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     public static String extrawide = "default";
@@ -79,7 +79,7 @@ public class Forge implements ApplicationListener {
          to prevent rendering issue when you try to restart
          the app again (seems it doesnt dispose correctly...?!?)
          */
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
 
@@ -126,8 +126,7 @@ public class Forge implements ApplicationListener {
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
-        Gdx.input.setCatchBackKey(true);
-        Gdx.input.setCatchMenuKey(true);
+        Gdx.input.setCatchKey(Keys.MENU, true);
         openScreen(HomeScreen.instance);
         splashScreen = null;
 
@@ -487,7 +486,7 @@ public class Forge implements ApplicationListener {
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
-        private static final List<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
+        private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
         private static char lastKeyTyped;
         private static boolean keyTyped, shiftKeyDown;
 

@@ -18,10 +18,8 @@
 package forge.itemmanager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
@@ -38,7 +36,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     private final CascadeManager cascadeManager = new CascadeManager();
 
     public ItemManagerModel(final Class<T> genericType0) {
-        data = new ItemPool<T>(genericType0);
+        data = new ItemPool<>(genericType0);
     }
 
     public void clear() {
@@ -47,7 +45,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
-    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
+    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<>();
 
     protected transient boolean isListInSync = false;
 
@@ -126,12 +124,12 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         if (getOrderedList().isEmpty()) { return; }
 
-        Collections.sort(getOrderedList(), new MyComparator());
+        getOrderedList().sort(new MyComparator());
     }
 
     //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
-        private final List<ItemColumn> colsToSort = new ArrayList<ItemColumn>(3);
+        private final List<ItemColumn> colsToSort = new ArrayList<>(3);
         private Sorter sorter = null;
 
         // Adds a column to sort cascade list.
@@ -185,12 +183,12 @@ public final class ItemManagerModel<T extends InventoryItem> {
         }
 
         private Sorter createSorter() {
-            final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
+            final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
 
             for (final ItemColumn col : colsToSort) {
-                oneColSorters.add(new ItemPoolSorter<InventoryItem>(
+                oneColSorters.add(new ItemPoolSorter<>(
                         col.getFnSort(),
-                        col.getConfig().getSortState().equals(SortState.ASC) ? true : false));
+                        col.getConfig().getSortState().equals(SortState.ASC)));
             }
 
             return new Sorter(oneColSorters);

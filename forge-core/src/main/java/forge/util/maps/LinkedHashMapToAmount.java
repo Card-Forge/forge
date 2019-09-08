@@ -6,7 +6,7 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     private static final long serialVersionUID = 1438913784333297606L;
 
     public static <T> LinkedHashMapToAmount<T> emptyMap() {
-        return new LinkedHashMapToAmount<T>(0);
+        return new LinkedHashMapToAmount<>(0);
     }
 
     /**

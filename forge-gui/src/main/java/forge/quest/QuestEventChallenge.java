@@ -61,10 +61,10 @@ public class QuestEventChallenge extends QuestEvent {
 
     // Other cards used in assignment: starting, and reward.
     /** The human extra cards. */
-    private List<String> humanExtraCards = new ArrayList<String>();
+    private List<String> humanExtraCards = new ArrayList<>();
 
     /** The ai extra cards. */
-    private List<String> aiExtraCards = new ArrayList<String>();
+    private List<String> aiExtraCards = new ArrayList<>();
 
     /** If persistent, the challenge does not disappear if the player fails it. */
     private boolean persistent = false;

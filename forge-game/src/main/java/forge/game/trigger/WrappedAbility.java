@@ -463,7 +463,7 @@ public class WrappedAbility extends Ability {
 
         if (triggerParams.containsKey("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
-            Map<String, String> recheck = new HashMap<String, String>();
+            Map<String, String> recheck = new HashMap<>();
             String key = triggerParams.get("ResolvingCheck");
             String value = regtrig.getMapParams().get(key);
             recheck.put(key, value);
@@ -532,7 +532,7 @@ public class WrappedAbility extends Ability {
                 }
             }
         }
-        final Map<String, Object> triggerMap = new HashMap<String, Object>(sa.getTriggeringObjects());
+        final Map<String, Object> triggerMap = new HashMap<>(sa.getTriggeringObjects());
         for (Entry<String, Object> ev : triggerMap.entrySet()) {
             if (ev.getValue() instanceof Card) {
                 Card card = (Card) ev.getValue();

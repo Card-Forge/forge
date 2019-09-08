@@ -69,7 +69,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final VTinyLeadersDecks vTinyLeadersDecks;
 
     CDeckEditorUI() {
-        screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
+        screenChildControllers = new HashMap<>();
         this.cDetailPicture = new CDetailPicture();
         this.vAllDecks = VAllDecks.SINGLETON_INSTANCE;
         this.vAllDecks.setCDetailPicture(cDetailPicture);
@@ -163,7 +163,7 @@ public enum CDeckEditorUI implements ICDoc {
     private <T extends InventoryItem> void moveSelectedItems(final ItemManager<T> itemManager, final _MoveAction moveAction, final int maxQty) {
         if (maxQty == 0) { return; }
 
-        final ItemPool<T> items = new ItemPool<T>(itemManager.getGenericType());
+        final ItemPool<T> items = new ItemPool<>(itemManager.getGenericType());
         for (final T item : itemManager.getSelectedItems()) {
             final int qty = Math.min(maxQty, itemManager.getItemCount(item));
             if (qty > 0) {

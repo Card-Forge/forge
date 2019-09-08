@@ -52,7 +52,7 @@ public class KeyboardShortcuts {
         final InputMap im = c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         final ActionMap am = c.getActionMap();
 
-        final List<Shortcut> list = new ArrayList<Shortcut>();
+        final List<Shortcut> list = new ArrayList<>();
 
         //========== Match Shortcuts
         /** Show stack. */
@@ -345,9 +345,9 @@ public class KeyboardShortcuts {
         List<String> existingCodes;
 
         if (codestring != null) {
-            existingCodes = new ArrayList<String>(Arrays.asList(codestring.split(" ")));
+            existingCodes = new ArrayList<>(Arrays.asList(codestring.split(" ")));
         } else {
-            existingCodes = new ArrayList<String>();
+            existingCodes = new ArrayList<>();
         }
 
         // Backspace (8) will remove last code from list.

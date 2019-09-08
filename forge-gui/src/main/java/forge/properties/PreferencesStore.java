@@ -36,7 +36,7 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     private final String filename;
 
     public PreferencesStore(final String filename0, final Class<T> clasz) {
-        preferenceValues = new EnumMap<T, String>(clasz);
+        preferenceValues = new EnumMap<>(clasz);
         filename = filename0;
 
         final List<String> lines = FileUtil.readFile(filename);

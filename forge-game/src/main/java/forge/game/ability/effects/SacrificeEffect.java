@@ -62,7 +62,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             game.updateLastStateForCard(card);
             
             StringBuilder sb = new StringBuilder();
-            sb.append("Cumulative upkeep for " + card);
+            sb.append("Cumulative upkeep for ").append(card);
             
             boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
             final Map<String, Object> runParams = Maps.newHashMap();

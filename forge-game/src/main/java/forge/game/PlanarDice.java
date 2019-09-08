@@ -36,7 +36,7 @@ public enum PlanarDice {
             trigRes = Chaos;
         }
         
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        HashMap<String,Object> runParams = new HashMap<>();
         runParams.put("Player", roller);
         runParams.put("Result", trigRes);
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);

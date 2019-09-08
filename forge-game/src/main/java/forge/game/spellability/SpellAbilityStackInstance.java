@@ -314,7 +314,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                     // try to deduce which target has been replaced
                     // (this may be imprecise, updateTarget should specify old target if possible)
                     for (Object obj : map.keySet()) {
-                        if (!target.getTargets().contains((GameObject)obj)) {
+                        if (!target.getTargets().contains(obj)) {
                             toRemove = obj;
                             break;
                         }

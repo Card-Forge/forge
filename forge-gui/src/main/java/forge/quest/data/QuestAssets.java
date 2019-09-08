@@ -41,7 +41,7 @@ public class QuestAssets {
 
     // Cards associated with quest
     /** The card pool. */
-    private final ItemPool<PaperCard> cardPool = new ItemPool<PaperCard>(PaperCard.class); // player's
+    private final ItemPool<PaperCard> cardPool = new ItemPool<>(PaperCard.class); // player's
     /** The credits. */
     private long credits; // this money is good for all modes
     // game
@@ -49,25 +49,25 @@ public class QuestAssets {
 
     // Decks collected by player
     /** The my decks. */
-    private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
+    private final HashMap<String, Deck> myDecks = new HashMap<>();
     // current
     // shop
     // list
     /** The new card list. */
-    private final ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
+    private final ItemPool<InventoryItem> newCardList = new ItemPool<>(InventoryItem.class); // cards
     // belonging
     /** The shop list. */
-    private final ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
+    private final ItemPool<InventoryItem> shopList = new ItemPool<>(InventoryItem.class); // the
     // gadgets
 
     /** The inventory items. */
-    private final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(
+    private final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<>(
             QuestItemType.class);
 
     // Much the same like other map, but keyed by string (to support a lot of custom pets)
-    private final Map<String, QuestItemCondition> combatPets = new HashMap<String, QuestItemCondition>();
+    private final Map<String, QuestItemCondition> combatPets = new HashMap<>();
     
-    private final HashMap<String, DeckGroup> draftDecks = new HashMap<String, DeckGroup>();
+    private final HashMap<String, DeckGroup> draftDecks = new HashMap<>();
     /**
      * Checks for item.
      *

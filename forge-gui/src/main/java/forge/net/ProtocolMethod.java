@@ -101,23 +101,23 @@ public enum ProtocolMethod {
         CLIENT(IGameController.class);
 
         private final Class<?> toInvoke;
-        private Mode(final Class<?> toInvoke) {
+        Mode(final Class<?> toInvoke) {
             this.toInvoke = toInvoke;
         }
-    };
+    }
 
     private final ProtocolMethod.Mode mode;
     private final Class<?> returnType;
     private final Class<?>[] args;
 
-    private ProtocolMethod(final ProtocolMethod.Mode mode) {
+    ProtocolMethod(final ProtocolMethod.Mode mode) {
         this(mode, Void.TYPE);
     }
-    private ProtocolMethod(final ProtocolMethod.Mode mode, final Class<?> returnType) {
+    ProtocolMethod(final ProtocolMethod.Mode mode, final Class<?> returnType) {
         this(mode, returnType, (Class<?>[]) null);
     }
     @SafeVarargs
-    private ProtocolMethod(final ProtocolMethod.Mode mode, final Class<?> returnType, final Class<?> ... args) {
+    ProtocolMethod(final ProtocolMethod.Mode mode, final Class<?> returnType, final Class<?>... args) {
         this.mode = mode;
         this.returnType = returnType;
         this.args = args == null ? new Class<?>[] {} : args;

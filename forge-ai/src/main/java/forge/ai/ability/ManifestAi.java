@@ -185,10 +185,7 @@ public class ManifestAi extends SpellAbilityAi {
         CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
-                if (shouldManyfest(input, ai, sa)) {
-                    return false;
-                }
-                return true;
+                return !shouldManyfest(input, ai, sa);
             }
         });
         if (!filtered.isEmpty()) {

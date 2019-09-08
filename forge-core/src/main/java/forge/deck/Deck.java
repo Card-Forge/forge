@@ -39,8 +39,8 @@ import java.util.Map.Entry;
  */
 @SuppressWarnings("serial")
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
-    private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
-    private final Set<String> tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<DeckSection, CardPool> parts = new EnumMap<>(DeckSection.class);
+    private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private Map<String, List<String>> deferredSections;
@@ -123,7 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            Collections.sort(result, new Comparator<PaperCard>() {
+            result.sort(new Comparator<PaperCard>() {
                 @Override
                 public int compare(final PaperCard c1, final PaperCard c2) {
                     return Boolean.compare(c1.getRules().canBeSignatureSpell(), c2.getRules().canBeSignatureSpell());

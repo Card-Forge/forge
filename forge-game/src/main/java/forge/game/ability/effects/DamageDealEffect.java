@@ -108,10 +108,8 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
             // Can't radiate from a player
             if (origin != null) {
-                for (final Card c : CardUtil.getRadiance(hostCard, origin,
-                        sa.getParam("ValidTgts").split(","))) {
-                    tgts.add(c);
-                }
+                tgts.addAll(CardUtil.getRadiance(hostCard, origin,
+                        sa.getParam("ValidTgts").split(",")));
             }
         }
 

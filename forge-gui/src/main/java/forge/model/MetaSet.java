@@ -108,7 +108,7 @@ public class MetaSet {
         
         private final String shortHand;
         public final String descriptiveName;
-        private MetaSetType(String shortname, String descName) {
+        MetaSetType(String shortname, String descName) {
             shortHand = shortname;
             descriptiveName = descName;
         }

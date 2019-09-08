@@ -94,6 +94,6 @@ public class FRadioButton extends FLabel {
     }
 
     public static class RadioButtonGroup {
-        private final List<FRadioButton> buttons = new ArrayList<FRadioButton>();
+        private final List<FRadioButton> buttons = new ArrayList<>();
     }
 }

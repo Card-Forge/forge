@@ -20,7 +20,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     }
 
     public static List<DeckProxy> getRandomDecks(final IHasGameType lstDecks0, final boolean isAi0) {
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
 
         decks.add(new RandomDeckGenerator("Random Generated Deck", RandomDeckType.Generated, lstDecks0, isAi0));
         decks.add(new RandomDeckGenerator("Random User Deck", RandomDeckType.User, lstDecks0, isAi0));
@@ -96,7 +96,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 case QUEST_OPPONENT_DECK:
                     return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
                 case COLOR_DECK:
-                    List<String> colors = new ArrayList<String>();
+                    List<String> colors = new ArrayList<>();
                     int count = Aggregates.randomInt(1, 3);
                     for (int i = 1; i <= count; i++) {
                         colors.add("Random " + i);
@@ -111,14 +111,14 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 case VINTAGE_CARDGEN_DECK:
                         return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"),isAi);
                 case STANDARD_COLOR_DECK:
-                    colors = new ArrayList<String>();
+                    colors = new ArrayList<>();
                     count = Aggregates.randomInt(1, 3);
                     for (int i = 1; i <= count; i++) {
                         colors.add("Random " + i);
                     }
                     return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
                 case MODERN_COLOR_DECK:
-                    colors = new ArrayList<String>();
+                    colors = new ArrayList<>();
                     count = Aggregates.randomInt(1, 3);
                     for (int i = 1; i <= count; i++) {
                         colors.add("Random " + i);

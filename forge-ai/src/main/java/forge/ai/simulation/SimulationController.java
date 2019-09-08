@@ -18,7 +18,7 @@ public class SimulationController {
     private List<GameSimulator> simulatorStack;
     private Plan.Decision bestSequence; // last action of sequence
     private Score bestScore;
-    private List<CachedEffect> effectCache = new ArrayList<CachedEffect>();
+    private List<CachedEffect> effectCache = new ArrayList<>();
     private GameObject[] currentHostAndTarget;
 
     private static class CachedEffect {
@@ -39,10 +39,10 @@ public class SimulationController {
 
     public SimulationController(Score score) {
         bestScore = score;
-        scoreStack = new ArrayList<Score>();
+        scoreStack = new ArrayList<>();
         scoreStack.add(score);
-        simulatorStack = new ArrayList<GameSimulator>();
-        currentStack = new ArrayList<Plan.Decision>();
+        simulatorStack = new ArrayList<>();
+        currentStack = new ArrayList<>();
     }
     
     private int getRecursionDepth() {
@@ -97,7 +97,7 @@ public class SimulationController {
             throw new RuntimeException("getBestPlan() expects currentStack to be empty!");
         }
 
-        ArrayList<Plan.Decision> sequence = new ArrayList<Plan.Decision>();
+        ArrayList<Plan.Decision> sequence = new ArrayList<>();
         Plan.Decision current = bestSequence;
         while (current != null) {
             sequence.add(current);

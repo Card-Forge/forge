@@ -23,8 +23,8 @@ public class TournamentData {
 
     private int completed;
     private String timestamp;
-    private List<String> eventRecords = new ArrayList<String>();
-    private List<String> eventNames = new ArrayList<String>();
+    private List<String> eventRecords = new ArrayList<>();
+    private List<String> eventNames = new ArrayList<>();
     private Deck userDeck;
     private List<Deck> decks;
 
@@ -57,7 +57,7 @@ public class TournamentData {
 
     public void stamp() {
         final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
-        timestamp = dateFormat.format(new Date()).toString();
+        timestamp = dateFormat.format(new Date());
     }
 
     /** Resets a Tournament data to an unplayed state, then stamps and saves. */
@@ -94,7 +94,7 @@ public class TournamentData {
     }
 
     public List<String> getDeckNames() {
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         for (final Deck d : decks) { names.add(d.getName()); }
         return names;
     }

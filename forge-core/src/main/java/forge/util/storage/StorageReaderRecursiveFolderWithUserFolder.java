@@ -77,14 +77,14 @@ public abstract class StorageReaderRecursiveFolderWithUserFolder<T> extends Stor
         }
     }
 
-    public final List<String> objectsThatFailedToLoad = new ArrayList<String>();
+    public final List<String> objectsThatFailedToLoad = new ArrayList<>();
 
     /* (non-Javadoc)
      * @see forge.util.IItemReader#readAll()
      */
     @Override
     public Map<String, T> readAll() {
-        final Map<String, T> result = new TreeMap<String, T>();
+        final Map<String, T> result = new TreeMap<>();
 
         Collection<File> forgeFormats = listFileTree(directory);
         Collection<File> customFormats = listFileTree(userDirectory);
@@ -115,7 +115,7 @@ public abstract class StorageReaderRecursiveFolderWithUserFolder<T> extends Stor
     }
 
     private Collection<File> listFileTree(File dir) {
-        Set<File> fileTree = new HashSet<File>();
+        Set<File> fileTree = new HashSet<>();
         if(dir==null||dir.listFiles(getFileFilter())==null){
             return fileTree;
         }

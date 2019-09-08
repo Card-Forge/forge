@@ -147,7 +147,7 @@ public class DestroyAllAi extends SpellAbilityAi {
             block.assignBlockersForCombat(combat);
 
             if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
-            	return true;
+                return true;
             }
             return false;
         } // only lands involved
@@ -171,7 +171,6 @@ public class DestroyAllAi extends SpellAbilityAi {
         else if ((ComputerUtilCard.evaluatePermanentList(ailist) + 3) >= ComputerUtilCard.evaluatePermanentList(opplist)) {
             return false;
         }
-
         return true;
     }
 }

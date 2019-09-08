@@ -14,7 +14,7 @@ public class PlayerActions {
 	private final List<BasePlayerAction> playerActions;
 	
 	public PlayerActions( List<? extends BasePlayerAction> playerActions ) {
-		this.playerActions = new LinkedList<BasePlayerAction>( playerActions );
+		this.playerActions = new LinkedList<>(playerActions);
 	}
 	
 	public PlayerActions( BasePlayerAction... basePlayerActions ) {

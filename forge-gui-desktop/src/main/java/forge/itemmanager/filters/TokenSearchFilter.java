@@ -51,7 +51,7 @@ public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
     protected final void buildWidget(JPanel widget) {
         super.buildWidget(widget);
 
-        cbSearchMode = new FComboBoxWrapper<String>();
+        cbSearchMode = new FComboBoxWrapper<>();
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.addTo(widget);

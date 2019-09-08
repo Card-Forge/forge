@@ -71,21 +71,15 @@ public class ChooseCardAi extends SpellAbilityAi {
             choices = CardLists.filterControlledBy(choices, ai.getOpponents());
         }
         if (aiLogic.equals("AtLeast1") || aiLogic.equals("OppPreferred")) {
-            if (choices.isEmpty()) {
-                return false;
-            }
+            return !choices.isEmpty();
         } else if (aiLogic.equals("AtLeast2") || aiLogic.equals("BestBlocker")) {
-            if (choices.size() < 2) {
-                return false;
-            }
+            return choices.size() >= 2;
         } else if (aiLogic.equals("Clone") || aiLogic.equals("Vesuva")) {
             final String filter = aiLogic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
                     : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
 
             choices = CardLists.getValidCards(choices, filter, host.getController(), host);
-            if (choices.isEmpty()) {
-                return false;
-            }
+            return !choices.isEmpty();
         } else if (aiLogic.equals("Never")) {
             return false;
         } else if (aiLogic.equals("NeedsPrevention")) {
@@ -103,9 +97,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                 }
             });
-            if (choices.isEmpty()) {
-                return false;
-            }
+            return !choices.isEmpty();
         } else if (aiLogic.equals("Ashiok")) {
             final int loyalty = host.getCounters(CounterType.LOYALTY) - 1;
             for (int i = loyalty; i >= 0; i--) {
@@ -117,13 +109,9 @@ public class ChooseCardAi extends SpellAbilityAi {
                 }
             }
 
-            if (choices.isEmpty()) {
-                return false;
-            }
+            return !choices.isEmpty();
         } else if (aiLogic.equals("RandomNonLand")) {
-            if (CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host).isEmpty()) {
-                return false;
-            }
+            return !CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host).isEmpty();
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
             CardCollection oppCreatures = ai.getWeakestOpponent().getCreaturesInPlay();
@@ -139,10 +127,8 @@ public class ChooseCardAi extends SpellAbilityAi {
             aiCreatures.remove(chosen);
             int minGain = 200;
 
-            if ((ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) >= ComputerUtilCard
-                    .evaluateCreatureList(oppCreatures)) {
-                return false;
-            }
+            return (ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) < ComputerUtilCard
+                    .evaluateCreatureList(oppCreatures);
         }
         return true;
     }

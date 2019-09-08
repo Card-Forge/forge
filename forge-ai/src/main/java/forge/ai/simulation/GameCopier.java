@@ -277,10 +277,7 @@ public class GameCopier {
                 // TODO: Copy the full list with timestamps.
                 newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
             }
-            newCard.addTempPowerBoost(c.getTempPowerBoost());
-            newCard.setSemiPermanentPowerBoost(c.getSemiPermanentPowerBoost());
-            newCard.addTempToughnessBoost(c.getTempToughnessBoost());
-            newCard.setSemiPermanentToughnessBoost(c.getSemiPermanentToughnessBoost());
+            newCard.setPTBoost(c.getPTBoostMap());
             newCard.setDamage(c.getDamage());
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());

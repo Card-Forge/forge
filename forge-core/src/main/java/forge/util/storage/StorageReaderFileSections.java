@@ -53,7 +53,7 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
     }
 
     protected Map<String, T> createMap() {
-        return new TreeMap<String, T>();
+        return new TreeMap<>();
     }
 
     /* (non-Javadoc)
@@ -66,7 +66,7 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
         int idx = 0;
         Iterable<String> contents = FileUtil.readFile(file);
 
-        List<String> accumulator = new ArrayList<String>();
+        List<String> accumulator = new ArrayList<>();
         String header = null;
 
         for (final String s : contents) {

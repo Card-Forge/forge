@@ -71,7 +71,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MAX_COLUMN_COUNT = 10;
 
     private final CardViewDisplay display;
-    private final List<Integer> selectedIndices = new ArrayList<Integer>();
+    private final List<Integer> selectedIndices = new ArrayList<>();
     private int columnCount = 4;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
@@ -82,8 +82,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
-    private final List<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
-    private final List<Group> groups = new ArrayList<Group>();
+    private final List<ItemInfo> orderedItems = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
     final Localizer localizer = Localizer.getInstance();
 
     private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
@@ -162,9 +162,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
 
-    private final FComboBoxWrapper<Object> cbGroupByOptions = new FComboBoxWrapper<Object>();
-    private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<Object>();
-    private final FComboBoxWrapper<Integer> cbColumnCount = new FComboBoxWrapper<Integer>();
+    private final FComboBoxWrapper<Object> cbGroupByOptions = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<Integer> cbColumnCount = new FComboBoxWrapper<>();
 
     public ImageView(final ItemManager<T> itemManager0, final ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -588,7 +588,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (forRefresh && pileBy != null) { //refresh piles if needed
                 //use TreeMap to build pile set so iterating below sorts on key
                 ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
-                Map<Comparable<?>, Pile> piles = new TreeMap<Comparable<?>, Pile>();
+                Map<Comparable<?>, Pile> piles = new TreeMap<>();
                 for (ItemInfo itemInfo : group.items) {
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
                     if (!piles.containsKey(key)) {
@@ -597,9 +597,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     piles.get(key).items.add(itemInfo);
                 }
                 group.piles.clear();
-                for (Pile pile : piles.values()) {
-                    group.piles.add(pile);
-                }
+                group.piles.addAll(piles.values());
             }
 
             groupY = y;
@@ -927,8 +925,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private class Group extends DisplayArea {
-        private final List<ItemInfo> items = new ArrayList<ItemInfo>();
-        private final List<Pile> piles = new ArrayList<Pile>();
+        private final List<ItemInfo> items = new ArrayList<>();
+        private final List<Pile> piles = new ArrayList<>();
         private final String name;
         private boolean isCollapsed;
 
@@ -946,7 +944,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private class Pile extends DisplayArea {
-        private final List<ItemInfo> items = new ArrayList<ItemInfo>();
+        private final List<ItemInfo> items = new ArrayList<>();
     }
     private class ItemInfo extends DisplayArea implements Entry<InventoryItem, Integer> {
         private final T item;

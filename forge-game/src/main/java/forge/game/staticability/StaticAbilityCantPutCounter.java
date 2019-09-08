@@ -17,6 +17,7 @@ public class StaticAbilityCantPutCounter {
             }
         }
 
+        // for the other part
         if (staticAbility.hasParam("ValidCard")) {
             if (!card.isValid(staticAbility.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
                 return false;
@@ -25,7 +26,6 @@ public class StaticAbilityCantPutCounter {
             // for the other part
             return false;
         }
-
         return true;
     }
 
@@ -40,6 +40,7 @@ public class StaticAbilityCantPutCounter {
             }
         }
 
+        // for the other part
         if (staticAbility.hasParam("ValidPlayer")) {
             if (!player.isValid(staticAbility.getParam("ValidPlayer").split(","), hostCard.getController(), hostCard, null)) {
                 return false;
@@ -48,7 +49,6 @@ public class StaticAbilityCantPutCounter {
             // for the other part
             return false;
         }
-
         return true;
     }
 }

@@ -30,7 +30,7 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
      */
     private ColorSet chooseColors() {
         // choose colors based on top 33% of cards
-        final List<PaperCard> colorChooserList = new ArrayList<PaperCard>();
+        final List<PaperCard> colorChooserList = new ArrayList<>();
         // this is not exactly right, because the rankings here are taking into account deckhints
         // for the whole set of cards, when some of those cards could be in colors that won't
         // make it into the deck
@@ -54,8 +54,8 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);
         Arrays.sort(countsCopy);
 
-        List<String> maxColors = new ArrayList<String>();
-        List<String> secondColors = new ArrayList<String>();
+        List<String> maxColors = new ArrayList<>();
+        List<String> secondColors = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             if (countsCopy[4] == colorCounts[i]) {
                 maxColors.add(MagicColor.Constant.ONLY_COLORS.get(i));

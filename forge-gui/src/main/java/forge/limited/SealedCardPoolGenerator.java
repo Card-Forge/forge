@@ -60,7 +60,7 @@ import java.util.Stack;
 public class SealedCardPoolGenerator {
     public static final String FILE_EXT = ".sealed";
 
-    private final List<IUnOpenedProduct> product = new ArrayList<IUnOpenedProduct>();
+    private final List<IUnOpenedProduct> product = new ArrayList<>();
 
     /** The Land set code. */
     private String landSetCode = null;
@@ -168,7 +168,7 @@ public class SealedCardPoolGenerator {
 
             case Block:
             case FantasyBlock:
-                List<CardBlock> blocks = new ArrayList<CardBlock>();
+                List<CardBlock> blocks = new ArrayList<>();
                 Iterable<CardBlock> src = poolType == LimitedPoolType.Block ? FModel.getBlocks() : FModel.getFantasyBlocks();
                 for (CardBlock b : src) {
                     blocks.add(b);
@@ -178,7 +178,7 @@ public class SealedCardPoolGenerator {
                 if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
-                final Stack<String> sets = new Stack<String>();
+                final Stack<String> sets = new Stack<>();
 
                 for (CardEdition edition : block.getSets()) {
                     sets.add(edition.getCode());
@@ -218,7 +218,7 @@ public class SealedCardPoolGenerator {
 
             case Custom:
                 String[] dList;
-                final List<CustomLimited> customs = new ArrayList<CustomLimited>();
+                final List<CustomLimited> customs = new ArrayList<>();
 
                 // get list of custom draft files
                 final File dFolder = new File(ForgeConstants.SEALED_DIR);
@@ -283,7 +283,7 @@ public class SealedCardPoolGenerator {
     private static List<String> getSetCombos(final List<String> setz, final int nPacks) {
         // TODO These permutations really should be completely generated
         String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        List<String> setCombos = new ArrayList<String>();
+        List<String> setCombos = new ArrayList<>();
 
         if (nPacks == 3) {
             if (sets.length >= 2) {

@@ -123,7 +123,7 @@ public class PlayerControllerForTests extends PlayerController {
                 (attacker.getName().equals("Grizzly Bears") && blockers.get(0).getName().equals("Ajani's Sunstriker")) ||
                 (attacker.getName().equals("Ajani's Sunstriker") && blockers.get(0).getName().equals("Grizzly Bears"))
         )) {//test_104_3b_player_with_less_than_zero_life_loses_the_game_only_when_a_player_receives_priority_variant_with_combat
-            Map<Card, Integer> result = new HashMap<Card, Integer>();
+            Map<Card, Integer> result = new HashMap<>();
             result.put(blockers.get(0), damageDealt);
             return result;
         }
@@ -609,7 +609,7 @@ public class PlayerControllerForTests extends PlayerController {
                                                                      CardCollectionView untappedCards, boolean improvise) {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
-        return new HashMap<Card, ManaCostShard>();
+        return new HashMap<>();
     }
 
     @Override

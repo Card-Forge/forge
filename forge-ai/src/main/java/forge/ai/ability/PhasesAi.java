@@ -33,9 +33,7 @@ public class PhasesAi extends SpellAbilityAi {
             if (tgtCards.contains(source)) {
                 // Protect it from something
                 final boolean isThreatened = ComputerUtil.predictThreatenedObjects(aiPlayer, null, true).contains(source);
-                if (isThreatened) {
-                    return true;
-                }
+                return isThreatened;
             } else {
                 // Card def = tgtCards.get(0);
                 // Phase this out if it might attack me, or before it can be

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,10 +62,10 @@ public class QuickGauntletLister extends JPanel {
 
     public void refresh() {
         this.removeAll();
-        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        final List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (final GauntletData gd : gauntlets) { sorted.add(gd); }
-        Collections.sort(sorted, new Comparator<GauntletData>() {
+        final List<RowPanel> tempRows = new ArrayList<>();
+        final List<GauntletData> sorted = new ArrayList<>();
+        sorted.addAll(gauntlets);
+        sorted.sort(new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
                 return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
@@ -110,8 +109,8 @@ public class QuickGauntletLister extends JPanel {
             row.add(new FLabel.Builder().text(String.valueOf(gd.getDecks().size()))
                     .fontAlign(SwingConstants.RIGHT).build(),
                     "w 90px!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel.Builder().text(String.valueOf(Math.round(
-                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + "%")
+            row.add(new FLabel.Builder().text(Math.round(
+                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100) + "%")
                     .fontAlign(SwingConstants.RIGHT).build(),
                     "w 90px!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");

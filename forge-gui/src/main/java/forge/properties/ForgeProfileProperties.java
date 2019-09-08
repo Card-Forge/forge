@@ -74,7 +74,7 @@ public class ForgeProfileProperties {
         cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics" + File.separator + "cards" + File.separator);
         cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
         decksDir    = getDir(props, DECKS_DIR_KEY, userDir + "decks" + File.separator);
-        decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);;
+        decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);
         serverPort = getInt(props, SERVER_PORT_KEY, 36743); // "Forge" using phone keypad
 
         //ensure directories exist
@@ -212,16 +212,16 @@ public class ForgeProfileProperties {
         //only append values that aren't equal to defaults
         final StringBuilder sb = new StringBuilder();
         if (!userDir.equals(defaultUserDir)) { //ensure backslashes are escaped
-            sb.append(USER_DIR_KEY + "=" + userDir.replace("\\", "\\\\") + "\n");
+            sb.append(USER_DIR_KEY + "=").append(userDir.replace("\\", "\\\\")).append("\n");
         }
         if (!decksDir.equals(defaultDecksDir)) {
-            sb.append(DECKS_DIR_KEY + "=" + decksDir.replace("\\", "\\\\") + "\n");
+            sb.append(DECKS_DIR_KEY + "=").append(decksDir.replace("\\", "\\\\")).append("\n");
         }
         if (!cacheDir.equals(defaultCacheDir)) {
-            sb.append(CACHE_DIR_KEY + "=" + cacheDir.replace("\\", "\\\\") + "\n");
+            sb.append(CACHE_DIR_KEY + "=").append(cacheDir.replace("\\", "\\\\")).append("\n");
         }
         if (!cardPicsDir.equals(defaultCardPicsDir)) {
-            sb.append(CARD_PICS_DIR_KEY + "=" + cardPicsDir.replace("\\", "\\\\") + "\n");
+            sb.append(CARD_PICS_DIR_KEY + "=").append(cardPicsDir.replace("\\", "\\\\")).append("\n");
         }
         if (cardPicsSubDirs.size() > 0) {
             sb.append(CARD_PICS_SUB_DIRS_KEY + "=");
@@ -230,12 +230,12 @@ public class ForgeProfileProperties {
                 if (needDelim) {
                     sb.append("|");
                 }
-                sb.append(entry.getKey() + "->" + entry.getValue());
+                sb.append(entry.getKey()).append("->").append(entry.getValue());
             }
             sb.append("\n");
         }
         if (serverPort != 0) {
-            sb.append(SERVER_PORT_KEY + "=" + serverPort);
+            sb.append(SERVER_PORT_KEY + "=").append(serverPort);
         }
         if (sb.length() > 0) {
             FileUtil.writeFile(ForgeConstants.PROFILE_FILE, sb.toString());

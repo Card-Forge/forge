@@ -22,7 +22,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> tgts = tgt == null ? new ArrayList<Card>() : Lists.newArrayList(sa.getTargets().getTargetCards());
+        List<Card> tgts = tgt == null ? new ArrayList<>() : Lists.newArrayList(sa.getTargets().getTargetCards());
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
@@ -47,7 +47,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> tgts = tgt == null ? new ArrayList<Card>() : Lists.newArrayList(sa.getTargets().getTargetCards());
+        List<Card> tgts = tgt == null ? new ArrayList<>() : Lists.newArrayList(sa.getTargets().getTargetCards());
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }

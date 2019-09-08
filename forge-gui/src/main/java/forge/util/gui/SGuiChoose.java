@@ -105,7 +105,7 @@ public class SGuiChoose {
             return getInteger(message, min, max);
         }
 
-        final List<Object> choices = new ArrayList<Object>();
+        final List<Object> choices = new ArrayList<>();
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }

@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 public class DeckFolderFilter extends ListLabelFilter<DeckProxy> {
-    protected final Set<String> folders = new HashSet<String>();
+    protected final Set<String> folders = new HashSet<>();
 
     public DeckFolderFilter(ItemManager<? super DeckProxy> itemManager0) {
         super(itemManager0);

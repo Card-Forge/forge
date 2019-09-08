@@ -18,7 +18,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
 @SuppressWarnings("serial")
 public class FComboBoxPanel<E> extends JPanel {
 
-    private static final List<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
+    private static final List<FComboBoxPanel<?>> allPanels = new ArrayList<>();
 
     public static void refreshAllSkins() {
         for (final FComboBoxPanel<?> panel : allPanels) {
@@ -48,7 +48,7 @@ public class FComboBoxPanel<E> extends JPanel {
         this(comboBoxCaption0, flowLayout0);
 
         List<E> list = ImmutableList.copyOf(items);
-        setComboBox(new FComboBox<E>(list), list.get(0));
+        setComboBox(new FComboBox<>(list), list.get(0));
     }
 
     public void setComboBox(final FComboBox<E> comboBox0, final E selectedItem) {

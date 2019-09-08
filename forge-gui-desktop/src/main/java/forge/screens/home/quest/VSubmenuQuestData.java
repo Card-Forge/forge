@@ -49,7 +49,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     private final FLabel lblTitleNew = new FLabel.Builder().text(localizer.getMessage("lblStartanewQuest")).opaque(true).fontSize(16).build();
 
-    String str=new String( ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/'));
+    String str= ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/');
     private final FLabel lblOldQuests = new FLabel.Builder().text(localizer.getMessage("lblOldQuestData").replace("%s",str)).fontAlign(SwingConstants.CENTER).fontSize(12).build();
     private final QuestFileLister lstQuests = new QuestFileLister();
     private final FScrollPane scrQuests = new FScrollPane(lstQuests, false);

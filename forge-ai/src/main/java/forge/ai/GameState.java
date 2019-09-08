@@ -41,7 +41,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class GameState {
-    private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
+    private static final Map<ZoneType, String> ZONES = new HashMap<>();
     static {
         ZONES.put(ZoneType.Battlefield, "battlefield");
         ZONES.put(ZoneType.Hand, "hand");
@@ -66,8 +66,8 @@ public abstract class GameState {
 
     private boolean puzzleCreatorState = false;
 
-    private final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
-    private final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+    private final Map<ZoneType, String> humanCardTexts = new EnumMap<>(ZoneType.class);
+    private final Map<ZoneType, String> aiCardTexts = new EnumMap<>(ZoneType.class);
 
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
@@ -254,7 +254,7 @@ public abstract class GameState {
             newText.append(";");
         }
         if (c.isToken()) {
-            newText.append("t:" + new TokenInfo(c).toString());
+            newText.append("t:").append(new TokenInfo(c).toString());
         } else {
             if (c.getPaperCard() == null) {
                 return;
@@ -377,7 +377,7 @@ public abstract class GameState {
                 newText.append("|Attacking");
                 GameEntity def = c.getGame().getCombat().getDefenderByAttacker(c);
                 if (def instanceof Card) {
-                    newText.append(":" + def.getId());
+                    newText.append(":").append(def.getId());
                 }
             }
         }
@@ -653,15 +653,15 @@ public abstract class GameState {
     }
 
     private String processManaPool(ManaPool manaPool) {
-        String mana = "";
+        StringBuilder mana = new StringBuilder();
         for (final byte c : MagicColor.WUBRGC) {
             int amount = manaPool.getAmountOfColor(c);
             for (int i = 0; i < amount; i++) {
-                mana += MagicColor.toShortString(c) + " ";
+                mana.append(MagicColor.toShortString(c)).append(" ");
             }
         }
 
-        return mana.trim();
+        return mana.toString().trim();
     }
 
     private void updateManaPool(Player p, String manaDef, boolean clearPool, boolean persistent) {
@@ -1061,7 +1061,7 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
+        entity.setCounters(Maps.newEnumMap(CounterType.class));
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
@@ -1078,7 +1078,7 @@ public abstract class GameState {
             p.getZone(zt).removeAllCards(true);
         }
 
-        Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
+        Map<ZoneType, CardCollectionView> playerCards = new EnumMap<>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
             String value = kv.getValue();
             playerCards.put(kv.getKey(), processCardsForZone(value.isEmpty() ? new String[0] : value.split(";"), p));
@@ -1091,7 +1091,7 @@ public abstract class GameState {
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             PlayerZone zone = p.getZone(kv.getKey());
             if (kv.getKey() == ZoneType.Battlefield) {
-                List<Card> cards = new ArrayList<Card>();
+                List<Card> cards = new ArrayList<>();
                 for (final Card c : kv.getValue()) {
                     if (c.isToken()) {
                         cards.add(c);
@@ -1107,7 +1107,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
+                    c.setCounters(Maps.newEnumMap(CounterType.class));
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)

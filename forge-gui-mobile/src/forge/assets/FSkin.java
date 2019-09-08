@@ -28,8 +28,8 @@ import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 
 public class FSkin {
-    private static final Map<FSkinProp, FSkinImage> images = new HashMap<FSkinProp, FSkinImage>();
-    private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
+    private static final Map<FSkinProp, FSkinImage> images = new HashMap<>();
+    private static final Map<Integer, TextureRegion> avatars = new HashMap<>();
 
     private static List<String> allSkins;
     private static FileHandle preferredDir;
@@ -98,7 +98,7 @@ public class FSkin {
         else {
             if (splashScreen != null) {
                 if (allSkins == null) { //initialize
-                    allSkins = new ArrayList<String>();
+                    allSkins = new ArrayList<>();
                     final List<String> skinDirectoryNames = getSkinDirectoryNames();
                     for (final String skinDirectoryName : skinDirectoryNames) {
                         allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
@@ -173,7 +173,7 @@ public class FSkin {
 
         avatars.clear();
 
-        final Map<String, Texture> textures = new HashMap<String, Texture>();
+        final Map<String, Texture> textures = new HashMap<>();
 
         // Grab and test various sprite files.
         final FileHandle f1 = getDefaultSkinFile(SourceFile.ICONS.getFilename());
@@ -309,7 +309,7 @@ public class FSkin {
      * @return the skins
      */
     public static List<String> getSkinDirectoryNames() {
-        final List<String> mySkins = new ArrayList<String>();
+        final List<String> mySkins = new ArrayList<>();
 
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         for (FileHandle skinFile : dir.list()) {

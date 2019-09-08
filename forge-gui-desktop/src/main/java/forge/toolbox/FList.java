@@ -44,7 +44,7 @@ public class FList<E> extends SkinnedList<E> {
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setSelectionForeground(this.getSkin().getForeground());
         this.setFont(FSkin.getFont(12));
-        this.setCellRenderer(new ComplexCellRenderer<E>());
+        this.setCellRenderer(new ComplexCellRenderer<>());
 
         this.addFocusListener(new FocusListener() {
             @Override

@@ -98,7 +98,7 @@ public class CardListViewer extends FDialog {
      */
     public CardListViewer(final String title, final String message, final List<PaperCard> list, final Icon dialogIcon) {
         this.list = Collections.unmodifiableList(list);
-        this.jList = new JList<PaperCard>(new ChooserListModel());
+        this.jList = new JList<>(new ChooserListModel());
         this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
         this.picture.setOpaque(false);

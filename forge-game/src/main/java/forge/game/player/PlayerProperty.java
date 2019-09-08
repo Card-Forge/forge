@@ -274,7 +274,7 @@ public class PlayerProperty {
             }
             else if (kind.equals("PermanentInPlay")) {
                 int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
+                List<Player> controlmost = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     final int num = p.getCardsIn(ZoneType.Battlefield).size();
                     if (num > typeNum) {
@@ -311,7 +311,7 @@ public class PlayerProperty {
                     type = TextUtil.fastReplace(type, "Only", "");
                 }
                 int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
+                List<Player> controlmost = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     final int num = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), type).size();
                     if (num > typeNum) {
@@ -332,7 +332,7 @@ public class PlayerProperty {
         } else if (property.startsWith("withLowest")) {
             if (property.substring(10).equals("Life")) {
                 int lowestLife = player.getLife();
-                List<Player> lowestlifep = new ArrayList<Player>();
+                List<Player> lowestlifep = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() == lowestLife) {
                         lowestlifep.add(p);

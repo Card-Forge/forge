@@ -282,7 +282,7 @@ public class FImagePanel extends JPanel {
         at.translate(this.getWidth() / 2, this.getHeight() / 2);
 
         // 3. rotate around (0,0).
-        at.rotate(Math.toRadians((double) degreesOfRotation));
+        at.rotate(Math.toRadians(degreesOfRotation));
 
         // 2. scale image.
         if (createScaleTransform) {

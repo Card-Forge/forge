@@ -47,13 +47,9 @@ public class StaticEffect {
 
     private final Card source;
     private StaticAbility ability;
-    private int keywordNumber = 0;
     private CardCollectionView affectedCards = new CardCollection();
     private List<Player> affectedPlayers = Lists.newArrayList();
-    private int xValue = 0;
-    private int yValue = 0;
     private long timestamp = -1;
-    private Map<Card, Integer> xValueMap = Maps.newTreeMap();
 
     private String chosenType;
     private Map<String, String> mapParams = Maps.newTreeMap();
@@ -89,13 +85,9 @@ public class StaticEffect {
     private StaticEffect makeMappedCopy(GameObjectMap map) {
         StaticEffect copy = new StaticEffect(map.map(this.source));
         copy.ability = this.ability;
-        copy.keywordNumber = this.keywordNumber;
         copy.affectedCards = map.mapCollection(this.affectedCards);
         copy.affectedPlayers  = map.mapList(this.affectedPlayers);
-        copy.xValue = this.xValue;
-        copy.yValue = this.yValue;
         copy.timestamp = this.timestamp;
-        copy.xValueMap = this.xValueMap;
         copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
         copy.overwriteTypes = this.overwriteTypes;
@@ -168,7 +160,7 @@ public class StaticEffect {
      */
     public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
         if (!this.originalAbilities.containsKey(c)) {
-            final List<SpellAbility> list = new ArrayList<SpellAbility>();
+            final List<SpellAbility> list = new ArrayList<>();
             list.add(sa);
             this.originalAbilities.put(c, list);
         } else {
@@ -187,7 +179,7 @@ public class StaticEffect {
      *            a {@link java.util.List} object.
      */
     public final void addOriginalAbilities(final Card c, final List<SpellAbility> s) {
-        final List<SpellAbility> list = new ArrayList<SpellAbility>(s);
+        final List<SpellAbility> list = new ArrayList<>(s);
         if (!this.originalAbilities.containsKey(c)) {
             this.originalAbilities.put(c, list);
         } else {
@@ -206,7 +198,7 @@ public class StaticEffect {
      * @return a {@link java.util.List} object.
      */
     public final List<SpellAbility> getOriginalAbilities(final Card c) {
-        final List<SpellAbility> returnList = new ArrayList<SpellAbility>();
+        final List<SpellAbility> returnList = new ArrayList<>();
         if (this.originalAbilities.containsKey(c)) {
             returnList.addAll(this.originalAbilities.get(c));
         }
@@ -273,7 +265,7 @@ public class StaticEffect {
      */
     public final void addOriginalKeyword(final Card c, final String s) {
         if (!this.originalKeywords.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.originalKeywords.put(c, list);
         } else {
@@ -292,7 +284,7 @@ public class StaticEffect {
      *            a {@link List} object.
      */
     public final void addOriginalKeywords(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<String>(s);
+        final List<String> list = new ArrayList<>(s);
         if (!this.originalKeywords.containsKey(c)) {
             this.originalKeywords.put(c, list);
         } else {
@@ -311,7 +303,7 @@ public class StaticEffect {
      * @return a {@link List} object.
      */
     public final List<String> getOriginalKeywords(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.originalKeywords.containsKey(c)) {
             returnList.addAll(this.originalKeywords.get(c));
         }
@@ -426,7 +418,7 @@ public class StaticEffect {
      */
     public final void addOriginalType(final Card c, final String s) {
         if (!this.originalTypes.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.originalTypes.put(c, list);
         } else {
@@ -445,7 +437,7 @@ public class StaticEffect {
      *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalTypes(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<String>(s);
+        final List<String> list = new ArrayList<>(s);
         if (!this.originalTypes.containsKey(c)) {
             this.originalTypes.put(c, list);
         } else {
@@ -464,7 +456,7 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final List<String> getOriginalTypes(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.originalTypes.containsKey(c)) {
             returnList.addAll(this.originalTypes.get(c));
         }
@@ -507,7 +499,7 @@ public class StaticEffect {
      */
     public final void addType(final Card c, final String s) {
         if (!this.types.containsKey(c)) {
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             list.add(s);
             this.types.put(c, list);
         } else {
@@ -525,7 +517,7 @@ public class StaticEffect {
      * @return a {@link java.util.List} object.
      */
     public final List<String> getTypes(final Card c) {
-        final List<String> returnList = new ArrayList<String>();
+        final List<String> returnList = new ArrayList<>();
         if (this.types.containsKey(c)) {
             returnList.addAll(this.types.get(c));
         }
@@ -631,29 +623,6 @@ public class StaticEffect {
 
     /**
      * <p>
-     * Setter for the field <code>keywordNumber</code>.
-     * </p>
-     * 
-     * @param i
-     *            a int.
-     */
-    public final void setKeywordNumber(final int i) {
-        this.keywordNumber = i;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>keywordNumber</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getKeywordNumber() {
-        return this.keywordNumber;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>affectedCards</code>.
      * </p>
      * 
@@ -692,75 +661,6 @@ public class StaticEffect {
      */
     public final void setAffectedPlayers(final List<Player> list) {
         this.affectedPlayers = list;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>xValue</code>.
-     * </p>
-     * 
-     * @param x
-     *            a int.
-     */
-    public final void setXValue(final int x) {
-        this.xValue = x;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>xValue</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getXValue() {
-        return this.xValue;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>yValue</code>.
-     * </p>
-     * 
-     * @param y
-     *            a int.
-     */
-    public final void setYValue(final int y) {
-        this.yValue = y;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>yValue</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getYValue() {
-        return this.yValue;
-    }
-
-    /**
-     * Store xValue relative to a specific card.
-     * @param affectedCard the card affected
-     * @param xValue the xValue
-     */
-    public final void addXMapValue(final Card affectedCard, final Integer xValue) {
-        if (this.xValueMap.containsKey(affectedCard)) {
-            if (!this.xValueMap.get(affectedCard).equals(xValue)) {
-                this.xValueMap.remove(affectedCard);
-            }
-        }
-        this.xValueMap.put(affectedCard, xValue);
-    }
-
-    /**
-     * Get the xValue for specific card.
-     * @param affectedCard the affected card
-     * @return an int.
-     */
-    public int getXMapValue(Card affectedCard) {
-        return this.xValueMap.get(affectedCard);
     }
 
     /**
@@ -813,11 +713,6 @@ public class StaticEffect {
 
         String changeColorWordsTo = null;
 
-        int powerBonus = 0;
-        String addP = "";
-        int toughnessBonus = 0;
-        String addT = "";
-        int keywordMultiplier = 1;
         boolean setPT = false;
         String[] addHiddenKeywords = null;
         String addColors = null;
@@ -834,37 +729,6 @@ public class StaticEffect {
             setPT = true;
         }
 
-        if (params.containsKey("AddPower")) {
-            addP = params.get("AddPower");
-            if (addP.matches("[0-9][0-9]?")) {
-                powerBonus = Integer.valueOf(addP);
-            } else if (addP.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                powerBonus = getXValue();
-            }
-        }
-
-        if (params.containsKey("AddToughness")) {
-            addT = params.get("AddToughness");
-            if (addT.matches("[0-9][0-9]?")) {
-                toughnessBonus = Integer.valueOf(addT);
-            } else if (addT.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                toughnessBonus = getYValue();
-            }
-        }
-
-        if (params.containsKey("KeywordMultiplier")) {
-            String multiplier = params.get("KeywordMultiplier");
-            if (multiplier.equals("X")) {
-                keywordMultiplier = getXValue();
-            } else {
-                keywordMultiplier = Integer.valueOf(multiplier);
-            }
-        }
-
         if (params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
@@ -874,7 +738,7 @@ public class StaticEffect {
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
             }
         }
 
@@ -883,7 +747,7 @@ public class StaticEffect {
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
             }
         }
 
@@ -934,15 +798,9 @@ public class StaticEffect {
             }
 
             // remove P/T bonus
-            if (addP.startsWith("AffectedX")) {
-                powerBonus = getXMapValue(affectedCard);
-            }
-            if (addT.startsWith("AffectedX")) {
-                toughnessBonus = getXMapValue(affectedCard);
-            }
+            affectedCard.removePTBoost(getTimestamp());
+
             // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1, false);
-            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1, false);
 
             // remove keywords
             // TODO regular keywords currently don't try to use keyword multiplier
@@ -963,9 +821,7 @@ public class StaticEffect {
 
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
-                    for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.removeHiddenExtrinsicKeyword(k);
-                    }
+                    affectedCard.removeHiddenExtrinsicKeyword(k);
                 }
             }
 
@@ -1004,6 +860,13 @@ public class StaticEffect {
 
             if (params.containsKey("Goad")) {
                 affectedCard.removeGoad(getTimestamp());
+            }
+
+            if (params.containsKey("CanBlockAny")) {
+                affectedCard.removeCanBlockAny(getTimestamp());
+            }
+            if (params.containsKey("CanBlockAmount")) {
+                affectedCard.removeCanBlockAdditional(getTimestamp());
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

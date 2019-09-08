@@ -66,7 +66,7 @@ public class CostGainLife extends CostPart {
     
     public List<Player> getPotentialTargets(final Player payer, final Card source)
     {
-        List<Player> res = new ArrayList<Player>();
+        List<Player> res = new ArrayList<>();
         for(Player p : payer.getGame().getPlayers())
         {
             if(p.isValid(getType(), payer, source, null))

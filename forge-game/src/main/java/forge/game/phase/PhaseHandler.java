@@ -70,7 +70,7 @@ public class PhaseHandler implements java.io.Serializable {
     private PhaseType phase = null;
     private int turn = 0;
 
-    private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
+    private final transient Stack<ExtraTurn> extraTurns = new Stack<>();
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = Maps.newEnumMap(PhaseType.class);
 
     private int nUpkeepsThisTurn = 0;
@@ -663,7 +663,7 @@ public class PhaseHandler implements java.io.Serializable {
             // map: defender => (many) attacker => (many) blocker
             Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
                 for (Card att : combat.getAttackersOf(ge)) {
                     protectThisDefender.addAll(att, combat.getBlockers(att));
                 }
@@ -916,7 +916,7 @@ public class PhaseHandler implements java.io.Serializable {
         // 500.8. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase.
         // If multiple extra phases are created after the same phase, the most recently created phase will occur first.
         if (!extraPhases.containsKey(afterPhase)) {
-            extraPhases.put(afterPhase, new Stack<PhaseType>());
+            extraPhases.put(afterPhase, new Stack<>());
         }
         extraPhases.get(afterPhase).push(extraPhase);
     }
@@ -1077,7 +1077,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private boolean checkStateBasedEffects() {
-        final Set<Card> allAffectedCards = new HashSet<Card>();
+        final Set<Card> allAffectedCards = new HashSet<>();
         do {
             // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
             game.getAction().checkStateEffects(false, allAffectedCards);

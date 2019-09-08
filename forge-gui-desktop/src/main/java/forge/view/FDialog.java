@@ -527,7 +527,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         return getIconImages().isEmpty() ? null : getIconImages().get(0);
     }
 
-    private static final Stack<FDialog> openModals = new Stack<FDialog>();
+    private static final Stack<FDialog> openModals = new Stack<>();
     private static final BackdropPanel backdropPanel = new BackdropPanel();
 
     public static boolean isModalOpen() {

@@ -117,8 +117,8 @@ public class CHand implements ICDoc {
             ordering.addAll(cards);
         }
 
-        final List<CardPanel> placeholders = new ArrayList<CardPanel>();
-        final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+        final List<CardPanel> placeholders = new ArrayList<>();
+        final List<CardPanel> cardPanels = new ArrayList<>();
 
         for (final CardView card : ordering) {
             CardPanel cardPanel = p.getCardPanel(card.getId());

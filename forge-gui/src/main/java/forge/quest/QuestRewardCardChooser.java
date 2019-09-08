@@ -98,7 +98,7 @@ public class QuestRewardCardChooser extends QuestRewardCard {
             final ItemPool<PaperCard> playerCards = FModel.getQuest().getAssets().getCardPool();
             if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
-                List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+                List<PaperCard> cardChoices = new ArrayList<>();
                 for (final Map.Entry<PaperCard, Integer> card : playerCards) {
                     cardChoices.add(card.getKey());
                 }
@@ -108,7 +108,7 @@ public class QuestRewardCardChooser extends QuestRewardCard {
             }
 
         } else if (type == poolType.predicateFilter) {
-            List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+            List<PaperCard> cardChoices = new ArrayList<>();
 
             for (final PaperCard card : Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicates)) {
                 cardChoices.add(card);

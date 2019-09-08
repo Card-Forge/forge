@@ -264,7 +264,11 @@ public abstract class GuiDownloadService implements Runnable {
             count++;
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
-            //decode URL Key
+            /*
+            * decode URL Key, Reverted to old version,
+            * on Android 6.0 it throws an error
+            *  when you download the card price
+            */
             String decodedKey = URLDecoder.decode(kv.getKey());
             final File fileDest = new File(decodedKey);
             final String filePath = fileDest.getPath();

@@ -103,7 +103,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 Cost unless = new Cost(unlessCost, false);
                 SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
                 paycost.setPayCosts(unless);
-                if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, new FCollection<Player>(player))
+                if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
                         && ComputerUtilCost.canPayCost(paycost, player)) {
                     return sp;
                 }
@@ -385,9 +385,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         final Player opp = player.getWeakestOpponent();
         if (opp != null) {
             // TODO add predict Combat Damage?
-            if (opp.getLife() < copy.getNetPower()) {
-                return true;
-            }
+            return opp.getLife() < copy.getNetPower();
         }
 
         // haste might not be good enough?

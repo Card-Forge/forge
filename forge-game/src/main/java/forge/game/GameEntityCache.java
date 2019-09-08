@@ -8,7 +8,7 @@ import java.util.List;
 import forge.trackable.TrackableObject;
 
 public class GameEntityCache<Entity extends IIdentifiable, View extends TrackableObject> {
-    private HashMap<Integer, Entity> entityCache = new HashMap<Integer, Entity>();
+    private HashMap<Integer, Entity> entityCache = new HashMap<>();
  
     public void put(Integer id, Entity entity) {
         entityCache.put(id, entity);
@@ -33,7 +33,7 @@ public class GameEntityCache<Entity extends IIdentifiable, View extends Trackabl
     }
 
     public List<Entity> getList(Iterable<View> views) {
-        List<Entity> list = new ArrayList<Entity>();
+        List<Entity> list = new ArrayList<>();
         addToList(views, list);
         return list;
     }

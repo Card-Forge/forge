@@ -28,7 +28,7 @@ public class Match {
     private final GameRules rules;
     private final String title;
 
-    private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
+    private final List<GameOutcome> gamesPlayed = new ArrayList<>();
     private final List<GameOutcome> gamesPlayedRo;
 
     public Match(final GameRules rules0, final List<RegisteredPlayer> players0, final String title) {
@@ -171,7 +171,7 @@ public class Match {
 
     private static Set<PaperCard> getRemovedAnteCards(Deck toUse) {
         final String keywordToRemove = "Remove CARDNAME from your deck before playing if you're not playing for ante.";
-        Set<PaperCard> myRemovedAnteCards = new HashSet<PaperCard>();
+        Set<PaperCard> myRemovedAnteCards = new HashSet<>();
         for (Entry<DeckSection, CardPool> ds : toUse) {
             for (Entry<PaperCard, Integer> cp : ds.getValue()) {
                 if (Iterables.contains(cp.getKey().getRules().getMainPart().getKeywords(), keywordToRemove)) {
@@ -184,7 +184,7 @@ public class Match {
 
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
-        List<Card> newLibrary = new ArrayList<Card>();
+        List<Card> newLibrary = new ArrayList<>();
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -304,7 +304,7 @@ public class Match {
         GameOutcome outcome = lastGame.getOutcome();
 
         // remove all the lost cards from owners' decks
-        List<PaperCard> losses = new ArrayList<PaperCard>();
+        List<PaperCard> losses = new ArrayList<>();
         int cntPlayers = players.size();
         int iWinner = -1;
         for (int i = 0; i < cntPlayers; i++) {

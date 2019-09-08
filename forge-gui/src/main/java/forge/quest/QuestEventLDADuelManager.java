@@ -42,7 +42,7 @@ import java.util.List;
 public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface {
 
     private List<Archetype> archetypes;
-    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
+    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
     private GameFormat baseFormat;
 
     public QuestEventLDADuelManager(GameFormat baseFormat){
@@ -54,10 +54,10 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
     private void assembleDuelDifficultyLists() {
 
         sortedDuels.clear();
-        sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<QuestEventDuel>());
-        sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<QuestEventDuel>());
+        sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<>());
 
         int i=0;
         for(Archetype archetype : archetypes){
@@ -223,7 +223,7 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
 
     @Override
     public Iterable<QuestEventDuel> getAllDuels() {
-        return new ArrayList<QuestEventDuel>();
+        return new ArrayList<>();
     }
 
     public Iterable<QuestEventDuel> getDuels(QuestEventDifficulty difficulty) {
