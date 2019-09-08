@@ -2001,7 +2001,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // add Adventure to AbilityText
             if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
                 StringBuilder sbSA = new StringBuilder();
-                sbSA.append("Adventure ").append(getState(CardStateName.Adventure).getName());
+                sbSA.append("Adventure — ").append(getState(CardStateName.Adventure).getName());
                 if (sa.getPayCosts() != null) {
                     sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
                 }
