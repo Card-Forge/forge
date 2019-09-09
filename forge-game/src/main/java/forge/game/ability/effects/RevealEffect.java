@@ -81,7 +81,7 @@ public class RevealEffect extends SpellAbilityEffect {
                         runParams.put("Miracle", true);
                     }
                     //*/
-                    game.getTriggerHandler().runTrigger(TriggerType.Revealed, runParams, false);
+                    game.getTriggerHandler().runTriggerOld(TriggerType.Revealed, runParams, false);
                     if (sa.hasParam("RememberRevealed")) {
                         host.addRemembered(c);
                     }

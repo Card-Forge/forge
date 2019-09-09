@@ -47,7 +47,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Card", c);
             runParams.put("Cause", host);
-            game.getTriggerHandler().runTrigger(TriggerType.Regenerated, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.Regenerated, runParams, false);
         }
 
     }

@@ -294,7 +294,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put("CurrentStormCount", thisTurnCast.size());
             runParams.put("CurrentCastSpells", new CardCollection(thisTurnCast));
-            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
+            game.getTriggerHandler().runTriggerOld(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
@@ -302,27 +302,27 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         && source.getOwner().equals(activator)) {
                     activator.incCommanderCast(source);
                 }
-                game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
+                game.getTriggerHandler().runTriggerOld(TriggerType.SpellCast, runParams, true);
                 executeCastCommand(si.getSpellAbility(true).getHostCard());
             }
 
             // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
-                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
+                game.getTriggerHandler().runTriggerOld(TriggerType.AbilityCast, runParams, true);
             }
 
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getHostCard());
-                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Cycled, runParams, false);
             }
             
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
                 runParams.put("Vehicle", sp.getHostCard());
                 runParams.put("Crew", sp.getPaidList("TappedCards"));
-                game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Crewed, runParams, false);
             }
         }
 
@@ -332,9 +332,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("CopySA", si.getSpellAbility(true));
             // Run SpellCopy triggers
             if (sp.isSpell()) {
-                game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.SpellCopy, runParams, false);
             }
-            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCopy, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.SpellAbilityCopy, runParams, false);
         }
 
         // Run BecomesTarget triggers
@@ -364,10 +364,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                             ((Card) tgt).setBecameTargetThisTurn(true);
                         }
                         runParams.put("Target", tgt);
-                        game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+                        game.getTriggerHandler().runTriggerOld(TriggerType.BecomesTarget, runParams, false);
                     }
                     runParams.put("Targets", tc.getTargets());
-                    game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+                    game.getTriggerHandler().runTriggerOld(TriggerType.BecomesTargetOnce, runParams, false);
                 }
             }
         }
@@ -376,10 +376,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         else if (sp.getTargetCard() != null) {
             runParams.put("Target", sp.getTargetCard());
 
-            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.BecomesTarget, runParams, false);
 
             runParams.put("Targets", Lists.newArrayList(sp.getTargetCard()));
-            game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
         game.fireEvent(new GameEventZone(ZoneType.Stack, sp.getActivatingPlayer(), EventValueChangeType.Added, source));

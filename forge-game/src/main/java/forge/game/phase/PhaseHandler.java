@@ -415,7 +415,7 @@ public class PhaseHandler implements java.io.Serializable {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Phase", phase.nameForScripts);
             runParams.put("Player", playerTurn);
-            game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.Phase, runParams, false);
         }
 
         // This line fixes Combat Damage triggers not going off when they should
@@ -489,7 +489,7 @@ public class PhaseHandler implements java.io.Serializable {
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Player", playerTurn);
-                    game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
+                    game.getTriggerHandler().runTriggerOld(TriggerType.TurnBegin, runParams, false);
                 }
                 planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
@@ -581,7 +581,7 @@ public class PhaseHandler implements java.io.Serializable {
             runParams.put("Attackers", combat.getAttackers());
             runParams.put("AttackingPlayer", combat.getAttackingPlayer());
             runParams.put("AttackedTarget", attackedTarget);
-            game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.AttackersDeclared, runParams, false);
         }
 
         for (final Card c : combat.getAttackers()) {
@@ -693,7 +693,7 @@ public class PhaseHandler implements java.io.Serializable {
             final Map<String, Object> bdRunParams = Maps.newHashMap();
             bdRunParams.put("Blockers", declaredBlockers);
             bdRunParams.put("Attackers", blockedAttackers);
-            game.getTriggerHandler().runTrigger(TriggerType.BlockersDeclared, bdRunParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.BlockersDeclared, bdRunParams, false);
         }
 
         for (final Card c1 : combat.getAllBlockers()) {
@@ -706,7 +706,7 @@ public class PhaseHandler implements java.io.Serializable {
                 final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Blocker", c1);
                 runParams.put("Attackers", combat.getAttackersBlockedBy(c1));
-                game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Blocks, runParams, false);
             }
 
             c1.getDamageHistory().setCreatureBlockedThisCombat(true);
@@ -730,7 +730,7 @@ public class PhaseHandler implements java.io.Serializable {
             runParams.put("NumBlockers", blockers.size());
             runParams.put("Defender", combat.getDefenderByAttacker(a));
             runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(a));
-            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlocked, runParams, false);
             
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
@@ -741,7 +741,7 @@ public class PhaseHandler implements java.io.Serializable {
             	final Map<String, Object> runParams2 = Maps.newHashMap();
             	runParams2.put("Attacker", a);
             	runParams2.put("Blocker", b);
-            	game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams2, false);
+            	game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlockedByCreature, runParams2, false);
             }
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);

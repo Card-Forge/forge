@@ -48,7 +48,7 @@ public class SetInMotionEffect extends SpellAbilityEffect {
                 // Run triggers
                 final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Scheme", controller.getActiveScheme());
-                game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.SetInMotion, runParams, false);
             } else {
                 controller.setSchemeInMotion();
             }

@@ -262,27 +262,27 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (sa.hasParam("Evolve")) {
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                            game.getTriggerHandler().runTriggerOld(TriggerType.Evolved, runParams, false);
                         }
                         if (sa.hasParam("Monstrosity")) {
                             tgtCard.setMonstrous(true);
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
                             runParams.put("MonstrosityAmount", counterAmount);
-                            game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
+                            game.getTriggerHandler().runTriggerOld(TriggerType.BecomeMonstrous, runParams, false);
                         }
                         if (sa.hasParam("Renown")) {
                             tgtCard.setRenowned(true);
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
+                            game.getTriggerHandler().runTriggerOld(TriggerType.BecomeRenowned, runParams, false);
                         }
                         if (sa.hasParam("Adapt")) {
                             // need to remove special keyword
                             tgtCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.Adapt, runParams, false);
+                            game.getTriggerHandler().runTriggerOld(TriggerType.Adapt, runParams, false);
                         }
                     } else {
                         // adding counters to something like re-suspend cards

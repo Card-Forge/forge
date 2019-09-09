@@ -138,7 +138,8 @@ public class GameWrapper {
         //skip drawing initial hand and mulliganing
         game.setAge( GameStage.Play );
         final HashMap<String, Object> runParams = new HashMap<>();
-        game.getTriggerHandler().runTrigger( TriggerType.NewGame, runParams, false );
+        game.getTriggerHandler().runTriggerOld( TriggerType.NewGame, runParams, false );
+
         //first player in the list starts, no coin toss etc
         game.getPhaseHandler().startFirstTurn( game.getPlayers().get( 0 ) );
         game.fireEvent( new GameEventGameFinished() );

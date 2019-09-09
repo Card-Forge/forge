@@ -61,7 +61,7 @@ public class FightEffect extends DamageBaseEffect {
         for (Card c : fighters) {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Fighter", c);
-            game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.Fight, runParams, false);
         }
     }
 

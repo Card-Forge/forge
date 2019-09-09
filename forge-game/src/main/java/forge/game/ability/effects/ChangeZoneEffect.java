@@ -833,7 +833,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", decider);
             runParams.put("Target", Lists.newArrayList(player));
-            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+            decider.getGame().getTriggerHandler().runTriggerOld(TriggerType.SearchedLibrary, runParams, false);
         }
 
         if (!defined && changeType != null) {
@@ -1134,7 +1134,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Card", source);
                 runParams.put("Championed", c);
-                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+                game.getTriggerHandler().runTriggerOld(TriggerType.Championed, runParams, false);
             }
             
             if (remember) {

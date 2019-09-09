@@ -569,7 +569,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Transformer", this);
-            getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
+            getGame().getTriggerHandler().runTriggerOld(TriggerType.Transformed, runParams, false);
             incrementTransformedTimestamp();
 
             return result;
@@ -689,7 +689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 final Map<String, Object> runParams = Maps.newTreeMap();
                 runParams.put("Card", this);
-                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
+                getGame().getTriggerHandler().runTriggerOld(TriggerType.TurnFaceUp, runParams, false);
             }
             return result;
         }
@@ -1287,12 +1287,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("CounterType", counterType);
             for (int i = 0; i < addAmount; i++) {
                 runParams.put("CounterAmount", oldValue + i + 1);
-                getGame().getTriggerHandler().runTrigger(
+                getGame().getTriggerHandler().runTriggerOld(
                         TriggerType.CounterAdded, Maps.newHashMap(runParams), false);
             }
             if (addAmount > 0) {
                 runParams.put("CounterAmount", addAmount);
-                getGame().getTriggerHandler().runTrigger(
+                getGame().getTriggerHandler().runTriggerOld(
                         TriggerType.CounterAddedOnce, Maps.newHashMap(runParams), false);
             }
         } else {
@@ -1368,10 +1368,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("CounterType", counterName);
         for (int i = 0; i < delta && curCounters != 0; i++) {
             runParams.put("NewCounterAmount", --curCounters);
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
+            getGame().getTriggerHandler().runTriggerOld(TriggerType.CounterRemoved, runParams, false);
         }
         runParams.put("CounterAmount", delta);
-        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
+        getGame().getTriggerHandler().runTriggerOld(TriggerType.CounterRemovedOnce, runParams, false);
     }
 
     @Override
@@ -2938,7 +2938,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AttachSource", this);
         runParams.put("AttachTarget", entity);
-        getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
+        getController().getGame().getTriggerHandler().runTriggerOld(TriggerType.Attached, runParams, false);
 
     }
 
@@ -2960,7 +2960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Attach", this);
         runParams.put("Object", entity);
-        getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
+        getGame().getTriggerHandler().runTriggerOld(TriggerType.Unattach, runParams, false);
         runUnattachCommands();
     }
 
@@ -3519,7 +3519,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
         runParams.put("Attacker", attacker);
-        getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
+        getGame().getTriggerHandler().runTriggerOld(TriggerType.Taps, runParams, false);
 
         setTapped(true);
         getGame().fireEvent(new GameEventCardTapped(this, true));
@@ -3540,7 +3540,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Run triggers
         final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
-        getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
+        getGame().getTriggerHandler().runTriggerOld(TriggerType.Untaps, runParams, false);
 
         for (final GameCommand var : untapCommandList) {
             var.run();
@@ -4105,7 +4105,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!isPhasedOut()) {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
-            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+            getGame().getTriggerHandler().runTriggerOld(TriggerType.PhaseOut, runParams, false);
         }
 
         setPhasedOut(!phasedOut);
@@ -4117,7 +4117,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!phasedOut) {
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
+            getGame().getTriggerHandler().runTriggerOld(TriggerType.PhaseIn, runParams, false);
         }
 
         return true;
@@ -4910,7 +4910,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         // Defending player at the time the damage was dealt
         runParams.put("DefendingPlayer", game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
-        getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
+        getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDone, runParams, false);
 
         GameEventCardDamaged.DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) {
@@ -5011,7 +5011,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", this);
         runParams.put("Player", getController());
-        game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Exerted, runParams, false);
     }
 
     public boolean isExertedBy(final Player player) {

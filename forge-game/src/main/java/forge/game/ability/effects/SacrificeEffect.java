@@ -39,7 +39,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("EchoPaid", Boolean.valueOf(isPaid));
             runParams.put("Card", card);
-            game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.PayEcho, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
                 return;
             }
@@ -69,7 +69,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             runParams.put("CumulativeUpkeepPaid", Boolean.valueOf(isPaid));
             runParams.put("Card", card);
             runParams.put("PayingMana", StringUtils.join(sa.getPayingMana(), ""));
-            game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
+            game.getTriggerHandler().runTriggerOld(TriggerType.PayCumulativeUpkeep, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
                 return;
             }
@@ -149,14 +149,14 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         card.addDevoured(lKICopy);
                         final Map<String, Object> runParams = Maps.newHashMap();
                         runParams.put("Devoured", sac);
-                        game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                        game.getTriggerHandler().runTriggerOld(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
                         card.addExploited(lKICopy);
                         final Map<String, Object> runParams = Maps.newHashMap();
                         runParams.put("Exploited", lKICopy);
                         runParams.put("Card", card);
-                        game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
+                        game.getTriggerHandler().runTriggerOld(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
                     	countSacrificed++;

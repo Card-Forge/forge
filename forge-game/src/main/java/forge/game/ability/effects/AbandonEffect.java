@@ -42,7 +42,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         // Run triggers
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Scheme", source);
-        game.getTriggerHandler().runTrigger(TriggerType.Abandoned, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Abandoned, runParams, false);
     }
 
 }

@@ -313,7 +313,7 @@ public class CombatUtil {
         runParams.put("Attacked", combat.getDefenderByAttacker(c));
         runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(c));
         runParams.put("Defenders", combat.getDefenders());
-        game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
+        game.getTriggerHandler().runTriggerOld(TriggerType.Attacks, runParams, false);
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
