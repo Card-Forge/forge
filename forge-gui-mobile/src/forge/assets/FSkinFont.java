@@ -5,8 +5,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.BitmapFontData;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
+import com.badlogic.gdx.graphics.g2d.PixmapPacker;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
@@ -26,7 +30,6 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
-    private static final GlyphLayout layout = new GlyphLayout();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -90,26 +93,188 @@ public class FSkinFont {
         fontSize = fontSize0;
         updateFont();
     }
+    static int indexOf (CharSequence text, char ch, int start) {
+        final int n = text.length();
+        for (; start < n; start++)
+            if (text.charAt(start) == ch) return start;
+        return n;
 
+    }
+    public int computeVisibleGlyphs (CharSequence str, int start, int end, float availableWidth) {
+        BitmapFontData data = font.getData();
+        int index = start;
+        float width = 0;
+        Glyph lastGlyph = null;
+        availableWidth /= data.scaleX;
+
+        for (; index < end; index++) {
+            char ch = str.charAt(index);
+            if (ch == '[' && data.markupEnabled) {
+                index++;
+                if (!(index < end && str.charAt(index) == '[')) { // non escaped '['
+                    while (index < end && str.charAt(index) != ']')
+                        index++;
+                    continue;
+                }
+            }
+
+            Glyph g = data.getGlyph(ch);
+
+            if (g != null) {
+                if (lastGlyph != null) width += lastGlyph.getKerning(ch);
+                if ((width + g.xadvance) - availableWidth > 0.001f) break;
+                width += g.xadvance;
+                lastGlyph = g;
+            }
+        }
+
+        return index - start;
+    }
+    public boolean isBreakChar (char c) {
+        BitmapFontData data = font.getData();
+        if (data.breakChars == null) return false;
+        for (char br : data.breakChars)
+            if (c == br) return true;
+        return false;
+    }
+    static boolean isWhitespace (char c) {
+        switch (c) {
+            case '\n':
+            case '\r':
+            case '\t':
+            case ' ':
+                return true;
+            default:
+                return false;
+        }
+    }
     // Expose methods from font that updates scale as needed
     public TextBounds getBounds(CharSequence str) {
         updateScale(); //must update scale before measuring text
-        layout.setText(font, str);
-        return new TextBounds(layout.width, layout.height);
+        return getBounds(str, 0, str.length());
+    }
+    public TextBounds getBounds(CharSequence str, int start, int end) {
+        BitmapFontData data = font.getData();
+        //int start = 0;
+        //int end = str.length();
+        int width = 0;
+        Glyph lastGlyph = null;
+
+        while (start < end) {
+            char ch = str.charAt(start++);
+            if (ch == '[' && data.markupEnabled) {
+                if (!(start < end && str.charAt(start) == '[')) { // non escaped '['
+                    while (start < end && str.charAt(start) != ']')
+                        start++;
+                    start++;
+                    continue;
+                }
+                start++;
+            }
+            lastGlyph = data.getGlyph(ch);
+            if (lastGlyph != null) {
+                width = lastGlyph.xadvance;
+                break;
+            }
+        }
+        while (start < end) {
+            char ch = str.charAt(start++);
+            if (ch == '[' && data.markupEnabled) {
+                if (!(start < end && str.charAt(start) == '[')) { // non escaped '['
+                    while (start < end && str.charAt(start) != ']')
+                        start++;
+                    start++;
+                    continue;
+                }
+                start++;
+            }
+
+            Glyph g = data.getGlyph(ch);
+            if (g != null) {
+                width += lastGlyph.getKerning(ch);
+                lastGlyph = g;
+                width += g.xadvance;
+            }
+        }
+
+        return new TextBounds(width * data.scaleX, data.capHeight);
 
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
         updateScale();
-        layout.setText(font, str);
-        return new TextBounds(layout.width, layout.height);
+        BitmapFontData data = font.getData();
+        int start = 0;
+        float maxWidth = 0;
+        int numLines = 0;
+        int length = str.length();
+
+        while (start < length) {
+            int lineEnd = indexOf(str, '\n', start);
+            float lineWidth = getBounds(str, start, lineEnd).width;
+            maxWidth = Math.max(maxWidth, lineWidth);
+            start = lineEnd + 1;
+            numLines++;
+        }
+
+        return new TextBounds(maxWidth, data.capHeight + (numLines - 1) * data.lineHeight);
 
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
         updateScale();
-        layout.setText(font, str);
-        layout.width = wrapWidth;
-        return new TextBounds(layout.width, layout.height);
+        BitmapFontData data = font.getData();
+        if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
+        int start = 0;
+        int numLines = 0;
+        int length = str.length();
+        float maxWidth = 0;
+        while (start < length) {
+            int newLine = indexOf(str, '\n', start);
+            int lineEnd = start + computeVisibleGlyphs(str, start, newLine, wrapWidth);
+            int nextStart = lineEnd + 1;
+            if (lineEnd < newLine) {
+                // Find char to break on.
+                while (lineEnd > start) {
+                    if (isWhitespace(str.charAt(lineEnd))) break;
+                    if (isBreakChar(str.charAt(lineEnd - 1))) break;
+                    lineEnd--;
+                }
 
+                if (lineEnd == start) {
+
+                    if (nextStart > start + 1) nextStart--;
+
+                    lineEnd = nextStart; // If no characters to break, show all.
+
+                } else {
+                    nextStart = lineEnd;
+
+                    // Eat whitespace at start of wrapped line.
+
+                    while (nextStart < length) {
+                        char c = str.charAt(nextStart);
+                        if (!isWhitespace(c)) break;
+                        nextStart++;
+                        if (c == '\n') break; // Eat only the first wrapped newline.
+                    }
+
+                    // Eat whitespace at end of line.
+                    while (lineEnd > start) {
+
+                        if (!isWhitespace(str.charAt(lineEnd - 1))) break;
+                        lineEnd--;
+                    }
+                }
+            }
+
+            if (lineEnd > start) {
+                float lineWidth = getBounds(str, start, lineEnd).width;
+                maxWidth = Math.max(maxWidth, lineWidth);
+            }
+            start = nextStart;
+            numLines++;
+        }
+
+        return new TextBounds(maxWidth, data.capHeight + (numLines - 1) * data.lineHeight);
     }
     public float getAscent() {
         updateScale();
