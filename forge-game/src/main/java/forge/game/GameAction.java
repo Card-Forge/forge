@@ -79,7 +79,7 @@ public class GameAction {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
     
-    public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
+    private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
@@ -528,18 +528,18 @@ public class GameAction {
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause) {
         return moveTo(zoneTo, c, cause, null);
     }
-    
-    public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<String, Object> params) {
-       // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
-                                             // use FThreads.invokeInNewThread to run code in a pooled thread
-        return moveTo(zoneTo, c, null, cause, params);
-    }
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
         return moveTo(zoneTo, c, position, cause, null);
     }
-    
-    public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
+
+    private Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<String, Object> params) {
+        // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
+        // use FThreads.invokeInNewThread to run code in a pooled thread
+        return moveTo(zoneTo, c, null, cause, params);
+    }
+
+    private Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final Zone zoneFrom = game.getZoneOf(c);
@@ -723,30 +723,22 @@ public class GameAction {
     }
 
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
-        return moveTo(name, c, cause, null);
-    }
-    
-    public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause, Map<String, Object> params) {
-        return moveTo(name, c, 0, cause, params);
-    }
-    
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
-        return moveTo(name, c, libPosition, cause, null);
+        return moveTo(name, c, 0, cause);
     }
 
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
-            case Hand:          return moveToHand(c, cause, params);
-            case Library:       return moveToLibrary(c, libPosition, cause, params);
-            case Battlefield:   return moveToPlay(c, cause, params);
-            case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:         return exile(c, cause, params);
-            case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
+            case Hand:          return moveToHand(c, cause, null);
+            case Library:       return moveToLibrary(c, libPosition, cause, null);
+            case Battlefield:   return moveToPlay(c, cause, null);
+            case Graveyard:     return moveToGraveyard(c, cause, null);
+            case Exile:         return exile(c, cause, null);
+            case Stack:         return moveToStack(c, cause, null);
+            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, null);
+            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, null);
             default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause, params);
+                return moveTo(c.getOwner().getZone(name), c, cause, null);
         }
     }
 

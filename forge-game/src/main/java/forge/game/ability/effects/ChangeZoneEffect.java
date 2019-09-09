@@ -534,7 +534,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     movedCard = game.getAction().moveTo(
-                            tgtC.getController().getZone(destination), tgtC, sa, null);
+                            tgtC.getController().getZone(destination), tgtC, sa);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, false,
@@ -591,7 +591,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         tgtC.setExiledWith(host);
                     }
-                    movedCard = game.getAction().moveTo(destination, tgtC, sa, null);
+                    movedCard = game.getAction().moveTo(destination, tgtC, sa);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
                         if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)
@@ -1096,7 +1096,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addFaceupCommand(unanimate);
                     }
                 }
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa, null);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
@@ -1121,7 +1121,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             else {
-                movedCard = game.getAction().moveTo(destination, c, sa, null);
+                movedCard = game.getAction().moveTo(destination, c, sa);
             }
             
             movedCards.add(movedCard);
