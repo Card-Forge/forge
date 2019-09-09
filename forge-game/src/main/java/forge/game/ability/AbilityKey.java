@@ -1,12 +1,15 @@
 package forge.game.ability;
 
+import java.util.EnumMap;
+
 /**
  * Keys for Ability parameter maps.
  */
 public enum AbilityKey {
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
-    AttackedTarget("AttackedTarget");
+    AttackedTarget("AttackedTarget"),
+    Player("Player");
 
     private String key;
 
@@ -17,5 +20,9 @@ public enum AbilityKey {
     @Override
     public String toString() {
         return key;
+    }
+
+    public static <V> EnumMap<AbilityKey, V> newMap() {
+        return new EnumMap<>(AbilityKey.class);
     }
 }
