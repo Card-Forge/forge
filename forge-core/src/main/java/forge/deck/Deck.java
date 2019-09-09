@@ -123,7 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            result.sort(new Comparator<PaperCard>() {
+            Collections.sort(result, new Comparator<PaperCard>() {
                 @Override
                 public int compare(final PaperCard c1, final PaperCard c2) {
                     return Boolean.compare(c1.getRules().canBeSignatureSpell(), c2.getRules().canBeSignatureSpell());

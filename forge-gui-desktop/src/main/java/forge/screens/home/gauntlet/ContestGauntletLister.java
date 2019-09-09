@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class ContestGauntletLister extends JPanel {
         final List<RowPanel> tempRows = new ArrayList<>();
         final List<GauntletData> sorted = new ArrayList<>();
         sorted.addAll(gd0);
-        sorted.sort(new Comparator<GauntletData>() {
+        Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
                 return x.getName().compareTo(y.getName());

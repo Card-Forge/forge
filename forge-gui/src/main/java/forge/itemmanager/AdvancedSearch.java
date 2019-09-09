@@ -209,7 +209,7 @@ public class AdvancedSearch {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
                 if (cards.size() <= 1) { return true; }
 
-                cards.sort(FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
                 return cards.get(0) == input;
             }
         }),

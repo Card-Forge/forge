@@ -3,6 +3,7 @@ package forge.screens.gauntlet;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import com.badlogic.gdx.utils.Align;
@@ -296,7 +297,7 @@ public class LoadGauntletScreen extends LaunchScreen {
         public void refresh() {
             List<GauntletData> sorted = new ArrayList<>();
             sorted.addAll(gauntlets);
-            sorted.sort(new Comparator<GauntletData>() {
+            Collections.sort(sorted, new Comparator<GauntletData>() {
                 @Override
                 public int compare(final GauntletData x, final GauntletData y) {
                     return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());

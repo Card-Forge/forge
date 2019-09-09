@@ -18,6 +18,7 @@
 package forge.itemmanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -124,7 +125,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         if (getOrderedList().isEmpty()) { return; }
 
-        getOrderedList().sort(new MyComparator());
+        Collections.sort(getOrderedList(), new MyComparator());
     }
 
     //Manages sorting orders for multiple depths of sorting
