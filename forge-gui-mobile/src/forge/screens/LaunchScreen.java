@@ -41,6 +41,9 @@ public abstract class LaunchScreen extends FScreen {
 
     protected class StartButton extends FDisplayObject {
         private boolean pressed;
+        private long lastTap;
+        private int tapCount;
+        private float lastX, lastY;
 
         /**
          * Instantiates a new FButton.
@@ -62,8 +65,13 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public final boolean tap(float x, float y, int count) {
-            if (count == 1) {
+            tapCount = count;
+            lastX = x;
+            lastY = y;
+            lastTap = System.currentTimeMillis(); //try prevent rapid tap on start button causing issues
+            if (tapCount == 1 && System.currentTimeMillis() - lastTap < 10 && lastX == x && lastY == y) {
                 startMatch();
+                tapCount++;
             }
             return true;
         }
