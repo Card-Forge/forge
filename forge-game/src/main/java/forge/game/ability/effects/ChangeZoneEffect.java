@@ -10,6 +10,7 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -1199,9 +1200,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
         
-        Map<String,Object> params = Maps.newHashMap();
-        params.put("StackSa", tgtSA);
-        params.put("StackSi", si);
+        Map<AbilityKey,Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.StackSa, tgtSA);
+        params.put(AbilityKey.StackSi, si);
 
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {

@@ -6,17 +6,24 @@ import java.util.EnumMap;
  * Keys for Ability parameter maps.
  */
 public enum AbilityKey {
+    Affected("Affected"),
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
     Card("Card"),
+    CardLKI("CardLKI"),
     Cause("Cause"),
+    CounteredSA("CounteredSA"),
     Destination("Destination"),
+    Event("Event"),
+    Fizzle("Fizzle"),
     Player("Player"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
     Origin("Origin"),
-    SpellAbilityStackInstance("SpellAbilityStackInstance")
-    ;
+    OriginalController("OriginalController"),
+    SpellAbilityStackInstance("SpellAbilityStackInstance"),
+    StackSa("StackSa"),
+    StackSi("StackSi");
 
 
     private String key;

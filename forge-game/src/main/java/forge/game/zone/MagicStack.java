@@ -36,6 +36,7 @@ import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -531,10 +532,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         else if ((source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-            Map<String, Object> params = Maps.newHashMap();
-            params.put("StackSa", sa);
-            params.put("StackSi", si);
-            params.put("Fizzle", fizzle);
+            Map<AbilityKey, Object> params = AbilityKey.newMap();
+            params.put(AbilityKey.StackSa, sa);
+            params.put(AbilityKey.StackSi, si);
+            params.put(AbilityKey.Fizzle, fizzle);
             game.getAction().moveToGraveyard(source, null, params);
         }
     }
