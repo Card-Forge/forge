@@ -158,7 +158,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog("No custom draft files found.");
                 } else {
-                    myDrafts.sort(new Comparator<CustomLimited>() {
+                    Collections.sort(myDrafts, new Comparator<CustomLimited>() {
                         @Override
                         public int compare(CustomLimited o1, CustomLimited o2) {
                             return o1.getName().compareTo(o2.getName());

@@ -35,6 +35,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -164,9 +165,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 columns.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        columns.sort(new Comparator<ItemTableColumn>() {
-            @Override
-            public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
+        Collections.sort(columns, new Comparator<ItemTableColumn>() {
+            @Override public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
                 return Integer.compare(arg0.getIndex(), arg1.getIndex());
             }
         });

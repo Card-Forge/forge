@@ -79,7 +79,7 @@ public class DeckGroup extends DeckBase {
         if (aiDecks.size() < 2) {
             return;
         }
-        aiDecks.sort(comparator);
+        Collections.sort(aiDecks, comparator);
     }
     
     @Override

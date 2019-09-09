@@ -168,7 +168,7 @@ public class QuestUtilUnlockSets {
         }
 
         // sort by distance, then by code desc
-        excludedWithDistances.sort(new Comparator<ImmutablePair<CardEdition, Long>>() {
+        Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
             @Override
             public int compare(ImmutablePair<CardEdition, Long> o1, ImmutablePair<CardEdition, Long> o2) {
                 long delta = o2.right - o1.right;

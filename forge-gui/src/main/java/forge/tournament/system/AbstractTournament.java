@@ -109,21 +109,21 @@ public abstract class AbstractTournament implements Serializable {
 
     public void sortAllPlayers(String sortType) {
         if (sortType.equals("score")) {
-            allPlayers.sort(new Comparator<TournamentPlayer>() {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
                 @Override
                 public int compare(TournamentPlayer o1, TournamentPlayer o2) {
                     return o2.getScore() - o1.getScore();
                 }
             });
         } else if (sortType.equals("index")) {
-            allPlayers.sort(new Comparator<TournamentPlayer>() {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
                 @Override
                 public int compare(TournamentPlayer o1, TournamentPlayer o2) {
                     return o2.getIndex() - o1.getIndex();
                 }
             });
         } else if (sortType.equals("swiss")) {
-            allPlayers.sort(new Comparator<TournamentPlayer>() {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
                 @Override
                 public int compare(TournamentPlayer o1, TournamentPlayer o2) {
                     return o2.getSwissScore() - o1.getSwissScore();
