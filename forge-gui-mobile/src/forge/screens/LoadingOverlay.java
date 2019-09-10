@@ -32,6 +32,7 @@ public class LoadingOverlay extends FOverlay {
                     public void run() {
                         runnable.run();
                         loader.hide();
+                        loader.finishedloading(); //setLoadingaMatch to false
                     }
                 });
             }

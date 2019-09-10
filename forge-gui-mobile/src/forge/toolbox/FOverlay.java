@@ -85,6 +85,10 @@ public abstract class FOverlay extends FContainer {
         setVisible(false);
     }
 
+    public void finishedloading() {
+        Forge.setLoadingaMatch(false);
+    }
+
     public boolean isVisibleOnScreen(FScreen screen) {
         return (openedOnScreen == screen); //by default, only show overlay on the same screen it's opened on
     }

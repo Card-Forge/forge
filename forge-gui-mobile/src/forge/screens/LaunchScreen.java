@@ -2,6 +2,7 @@ package forge.screens;
 
 import com.badlogic.gdx.Input.Keys;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
@@ -41,9 +42,6 @@ public abstract class LaunchScreen extends FScreen {
 
     protected class StartButton extends FDisplayObject {
         private boolean pressed;
-        private long lastTap;
-        private int tapCount;
-        private float lastX, lastY;
 
         /**
          * Instantiates a new FButton.
@@ -65,13 +63,9 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public final boolean tap(float x, float y, int count) {
-            tapCount = count;
-            lastX = x;
-            lastY = y;
-            lastTap = System.currentTimeMillis(); //try prevent rapid tap on start button causing issues
-            if (tapCount == 1 && System.currentTimeMillis() - lastTap < 10 && lastX == x && lastY == y) {
+            if (count == 1) {
+                btnStart.setEnabled(false);
                 startMatch();
-                tapCount++;
             }
             return true;
         }
@@ -80,6 +74,11 @@ public abstract class LaunchScreen extends FScreen {
         public void draw(Graphics g) {
             g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
                     0, 0, getWidth(), getHeight());
+            //its must be enabled or you can't start any game modes
+            if (!Forge.isLoadingaMatch()) {
+                if(!btnStart.isEnabled())
+                    btnStart.setEnabled(true);
+            }
         }
     }
 

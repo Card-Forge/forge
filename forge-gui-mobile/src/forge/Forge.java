@@ -51,7 +51,8 @@ public class Forge implements ApplicationListener {
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     public static String extrawide = "default";
-    public static  float heigtModifier = 0.0f;
+    public static float heigtModifier = 0.0f;
+    private static boolean isloadingaMatch = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -305,6 +306,14 @@ public class Forge implements ApplicationListener {
 
     public static boolean isLandscapeMode() {
         return screenWidth > screenHeight;
+    }
+
+    public static boolean isLoadingaMatch() {
+        return isloadingaMatch;
+    }
+
+    public static void setLoadingaMatch(boolean value) {
+        isloadingaMatch = value;
     }
 
     public static int getScreenWidth() {
