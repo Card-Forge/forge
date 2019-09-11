@@ -327,6 +327,7 @@ public class TriggerHandler {
     // The plan is to slowly refactor any usages of `runTriggerOld` to use `runTrigger`. Then we can just inline
     // `runTriggerOld` into `runTrigger` and change the code inside to just always use a `Map<TriggerKey, Object>`.
     // The reason we can't just call them both `runTrigger` is because we get a `same erasure` compile error if we do.
+    @Deprecated
     public final void runTriggerOld(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (suppressedModes.contains(mode)) {
             return;
