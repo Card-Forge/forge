@@ -21,6 +21,7 @@ import forge.CachedCardImage;
 import forge.FThreads;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardTranslation;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -690,7 +691,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        titleText.setText(card.getCurrentState().getName());
+        titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
 
         final int damage = card.getDamage();
         damageText.setText(damage > 0 ? "\u00BB " + damage + " \u00AB" : "");

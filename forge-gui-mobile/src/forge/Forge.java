@@ -10,6 +10,7 @@ import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.card.CardTranslation;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
@@ -107,6 +108,9 @@ public class Forge implements ApplicationListener {
 
                 splashScreen.getProgressBar().setDescription("Loading fonts...");
                 FSkinFont.preloadAll();
+
+                splashScreen.getProgressBar().setDescription("Loading card translations...");
+                CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
 
                 splashScreen.getProgressBar().setDescription("Finishing startup...");
 
