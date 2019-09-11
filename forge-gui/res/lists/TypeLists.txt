@@ -147,6 +147,7 @@ Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
 Moonfolk:Moonfolks
+Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
