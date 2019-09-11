@@ -255,7 +255,7 @@ public class CardRenderer {
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
-            String name = state.getName();
+            String name = CardTranslation.getTranslatedName(state.getName());
             if (count > 0) { //preface name with count if applicable
                 name = count + " " + name;
             }
@@ -317,7 +317,7 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
 
         x += cardArtWidth;
-        String name = card.getCurrentState().getName();
+        String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }
@@ -448,7 +448,7 @@ public class CardRenderer {
         //draw name and mana cost overlays if card is small or default card image being used
         if (h <= NAME_COST_THRESHOLD && canShow) {
             if (showCardNameOverlay(card)) {
-                g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
+                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
