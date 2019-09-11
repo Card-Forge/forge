@@ -171,6 +171,7 @@ Ouphe:Ouphes
 Ox:Oxen
 Oyster:Oysters
 Pangolin:Pangolins
+Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
 Pest:Pests
