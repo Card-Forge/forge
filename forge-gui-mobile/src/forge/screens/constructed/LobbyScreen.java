@@ -271,6 +271,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         for (int i = 0; i < getNumPlayers(); i++) {
             updateDeck(i);
         }
+        //set this so we cant get any multi/rapid tap on start button
+        Forge.setLoadingaMatch(true);
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
             @Override
             public void run() {

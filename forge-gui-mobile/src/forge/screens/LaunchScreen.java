@@ -2,6 +2,7 @@ package forge.screens;
 
 import com.badlogic.gdx.Input.Keys;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
@@ -63,6 +64,7 @@ public abstract class LaunchScreen extends FScreen {
         @Override
         public final boolean tap(float x, float y, int count) {
             if (count == 1) {
+                btnStart.setEnabled(false);
                 startMatch();
             }
             return true;
@@ -72,6 +74,11 @@ public abstract class LaunchScreen extends FScreen {
         public void draw(Graphics g) {
             g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
                     0, 0, getWidth(), getHeight());
+            //its must be enabled or you can't start any game modes
+            if (!Forge.isLoadingaMatch()) {
+                if(!btnStart.isEnabled())
+                    btnStart.setEnabled(true);
+            }
         }
     }
 
