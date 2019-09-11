@@ -355,7 +355,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeDefaultLanguageComboBox() {
-        final String [] choices = {"en-US", "es-ES", "de-DE"};
+        final String [] choices = {"en-US", "es-ES", "de-DE", "zh-CN"};
         final FPref userSetting = FPref.UI_LANGUAGE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
