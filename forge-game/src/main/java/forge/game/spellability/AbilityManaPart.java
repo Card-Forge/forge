@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import forge.card.mana.ManaAtom;
+import forge.game.ability.AbilityKey;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.util.TextUtil;
@@ -166,13 +167,11 @@ public class AbilityManaPart implements java.io.Serializable {
         manaPool.add(this.lastManaProduced);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-
-        runParams.put("Card", source);
-        runParams.put("Player", player);
-        runParams.put("AbilityMana", sa);
-        runParams.put("Produced", afterReplace);
-        player.getGame().getTriggerHandler().runTriggerOld(TriggerType.TapsForMana, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+        runParams.put(AbilityKey.Player, player);
+        runParams.put(AbilityKey.AbilityMana, sa);
+        runParams.put(AbilityKey.Produced, afterReplace);
+        player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
         if (source.isLand()) {
         	player.setTappedLandForManaThisTurn(true);
         }

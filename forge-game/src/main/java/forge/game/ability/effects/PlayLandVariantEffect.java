@@ -10,6 +10,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -80,9 +81,9 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventLandPlayed(activator, source));
         
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", source);
-        game.getTriggerHandler().runTriggerOld(TriggerType.LandPlayed, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Card, source);
+        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
         game.getStack().unfreezeStack();
         activator.addLandPlayedThisTurn();
     }
