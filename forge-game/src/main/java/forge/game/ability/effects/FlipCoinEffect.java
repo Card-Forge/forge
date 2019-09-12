@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;

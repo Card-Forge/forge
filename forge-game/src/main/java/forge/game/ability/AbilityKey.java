@@ -1,7 +1,5 @@
 package forge.game.ability;
 
-import forge.game.card.Card;
-
 import java.util.EnumMap;
 import java.util.Map;
 

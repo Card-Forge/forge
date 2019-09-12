@@ -13,7 +13,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ClashEffect extends SpellAbilityEffect {

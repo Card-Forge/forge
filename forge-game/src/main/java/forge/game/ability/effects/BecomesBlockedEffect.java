@@ -12,7 +12,6 @@ import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import java.util.List;
 import java.util.Map;

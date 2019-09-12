@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;

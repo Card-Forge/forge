@@ -4,7 +4,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
