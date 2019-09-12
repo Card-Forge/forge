@@ -2,6 +2,7 @@ package forge.gamesimulationtests.util;
 
 import forge.deck.Deck;
 import forge.game.*;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -137,8 +138,7 @@ public class GameWrapper {
         //game.getAction().startGame( null ) determines starting player, draws starting hands, handles mulligans, and initiates the first turn
         //skip drawing initial hand and mulliganing
         game.setAge( GameStage.Play );
-        final HashMap<String, Object> runParams = new HashMap<>();
-        game.getTriggerHandler().runTriggerOld( TriggerType.NewGame, runParams, false );
+        game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), false);
 
         //first player in the list starts, no coin toss etc
         game.getPhaseHandler().startFirstTurn( game.getPlayers().get( 0 ) );

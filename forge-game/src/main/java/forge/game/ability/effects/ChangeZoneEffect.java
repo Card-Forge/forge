@@ -831,10 +831,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Player", decider);
-            runParams.put("Target", Lists.newArrayList(player));
-            decider.getGame().getTriggerHandler().runTriggerOld(TriggerType.SearchedLibrary, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Player, decider);
+            runParams.put(AbilityKey.Target, Lists.newArrayList(player));
+            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
 
         if (!defined && changeType != null) {
@@ -1132,10 +1132,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (champion) {
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Card", source);
-                runParams.put("Championed", c);
-                game.getTriggerHandler().runTriggerOld(TriggerType.Championed, runParams, false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Card, source);
+                runParams.put(AbilityKey.Championed, c);
+                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
             
             if (remember) {

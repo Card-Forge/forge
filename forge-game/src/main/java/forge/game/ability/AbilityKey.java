@@ -7,23 +7,41 @@ import java.util.EnumMap;
  */
 public enum AbilityKey {
     Affected("Affected"),
+    Attacker("Attacker"),
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
+    Blocker("Blocker"),
+    Blockers("Blockers"),
     Card("Card"),
     CardLKI("CardLKI"),
     Cause("Cause"),
+    Causer("Causer"),
+    Championed("Championed"),
     CounteredSA("CounteredSA"),
+    DamageAmount("DamageAmount"),
+    DamageSource("DamageSource"),
+    DamageTarget("DamageTarget"),
+    Defender("Defender"),
+    DefendingPlayer("DefendingPlayer"),
     Destination("Destination"),
     Event("Event"),
     Fizzle("Fizzle"),
+    IsCombatDamage("IsCombatDamage"),
     Player("Player"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
+    MonstrosityAmount("MonstrosityAmount"),
+    NumBlockers("NumBlockers"),
+    Objects("Objects"),
     Origin("Origin"),
     OriginalController("OriginalController"),
+    Result("Result"),
+    Scheme("Scheme"),
     SpellAbilityStackInstance("SpellAbilityStackInstance"),
     StackSa("StackSa"),
-    StackSi("StackSi");
+    StackSi("StackSi"),
+    Target("Target"),
+    Won("Won");
 
 
     private String key;
