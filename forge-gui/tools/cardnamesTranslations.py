@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 import os
 import re
@@ -5,11 +7,16 @@ import urllib.request
 
 database = 'scryfall-all-cards.json'
 scryfalldburl = 'https://archive.scryfall.com/json/' + database
-languages = ['es', 'de']
+# 'scryfall lang code':'ISO 639 lang code'
+languages = {'es': 'es-ES', 'de': 'de-DE',
+             'zhs': 'zh-CN'}
+langfiles = {'es': None, 'de': None, 'zhs': None}
 
 urllib.request.urlretrieve(scryfalldburl, database)
 
 # Sort file and remove duplicates
+
+
 def cleanfile(filename):
     names_seen = set()
     outfile = open(filename + ".tmp2", "w", encoding='utf8')
@@ -23,9 +30,16 @@ def cleanfile(filename):
     os.remove(filename + ".tmp")
 
 # Manual patch of file translations
+
+
 def patchtranslations(filename):
     ffinal = open(filename + '.txt', 'w', encoding='utf8')
-    fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
+    try:
+        fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
+    except FileNotFoundError:
+        open(filename + '-patch.txt', 'w', encoding='utf8').close()
+        fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
+
     patchline = fpatch.readline()
 
     with open(filename + '.tmp2', 'r', encoding='utf8') as temp:
@@ -42,14 +56,17 @@ def patchtranslations(filename):
     fpatch.close()
     os.remove(filename + '.tmp2')
 
+
 with open(database, mode='r', encoding='utf8') as json_file:
+    # todo:all cards json size >= 800MB,using json iteration library,avoid load all content in to memory.
     data = json.load(json_file)
 
-    feses = open('cardnames-es-ES.tmp', 'w', encoding='utf8')
-    fdede = open('cardnames-de-DE.tmp', 'w', encoding='utf8')
+    for lang in languages.keys():
+        langfiles[lang] = open(
+            'cardnames-{0}.tmp'.format(languages[lang]), 'w', encoding='utf8')
 
     for card in data:
-        if card['lang'] in languages:
+        if card['lang'] in languages.keys():
             try:
                 name = card['name']
             except:
@@ -79,10 +96,9 @@ with open(database, mode='r', encoding='utf8') as json_file:
                 output = output.replace('\n', '\\n')
                 output = output + '\n'
 
-                if card['lang'] == 'es':
-                    feses.write(output)
-                if card['lang'] == 'de':
-                    fdede.write(output)
+                for lang in languages.keys():
+                    if card['lang'] == lang:
+                        langfiles[lang].write(output)
 
             # Parse double card
             else:
@@ -129,36 +145,34 @@ with open(database, mode='r', encoding='utf8') as json_file:
                     toracle1 = cardfaces[1]['printed_text']
                 except:
                     pass
-                
+
                 # Output Card0
 
                 output0 = name0 + '|' + tname0 + '|' + ttype0
                 output0 = output0 + '|' + toracle0
                 output0 = output0.replace('\n', '\\n')
 
-                if card['lang'] == 'es':
-                    feses.write(output0 + '\n')
-                if card['lang'] == 'de':
-                    fdede.write(output0 + '\n')
+                for lang in languages.keys():
+                    if card['lang'] == lang:
+                        langfiles[lang].write(output0 + '\n')
 
                 # Output Card1
-                
+
                 output1 = name1 + '|' + tname1 + '|' + ttype1
                 output1 = output1 + '|' + toracle1
                 output1 = output1.replace('\n', '\\n')
 
-                if card['lang'] == 'es':
-                    feses.write(output1 + '\n')
-                if card['lang'] == 'de':
-                    fdede.write(output1 + '\n')
-    
-    feses.close()
-    fdede.close()
+                for lang in languages.keys():
+                    if card['lang'] == lang:
+                        langfiles[lang].write(output1 + '\n')
+
+    for lang in languages.keys():
+        langfiles[lang].close()
 
 # Sort file and remove duplicates
-cleanfile("cardnames-es-ES")
-cleanfile("cardnames-de-DE")
+for lang in languages.keys():
+    cleanfile("cardnames-{0}".format(languages[lang]))
 
 # Patch language files
-patchtranslations("cardnames-es-ES")
-patchtranslations("cardnames-de-DE")
+for lang in languages.keys():
+    patchtranslations("cardnames-{0}".format(languages[lang]))
