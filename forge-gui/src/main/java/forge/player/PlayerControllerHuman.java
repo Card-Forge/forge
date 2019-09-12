@@ -2433,9 +2433,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                     TextUtil.concatWithSpace("Should", forgeCard.toString(), "be added to the top or to the bottom of the library?"), true, Arrays.asList("Top", "Bottom"));
                         }
                         if (lastTopOfTheLibrary) {
-                            game.getAction().moveToLibrary(forgeCard, null, null);
+                            game.getAction().moveToLibrary(forgeCard, null);
                         } else {
-                            game.getAction().moveToBottomOfLibrary(forgeCard, null, null);
+                            game.getAction().moveToBottomOfLibrary(forgeCard, null);
                         }
                     } else {
                         game.getAction().moveTo(targetZone, forgeCard, null);

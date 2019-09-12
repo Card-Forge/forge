@@ -4,12 +4,12 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -23,7 +23,6 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 import java.util.List;
-import java.util.Map;
 
 public class PlayLandVariantEffect extends SpellAbilityEffect {
 
@@ -80,9 +79,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventLandPlayed(activator, source));
         
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", source);
-        game.getTriggerHandler().runTriggerOld(TriggerType.LandPlayed, runParams, false);
+        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(source), false);
         game.getStack().unfreezeStack();
         activator.addLandPlayedThisTurn();
     }

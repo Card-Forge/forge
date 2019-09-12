@@ -51,10 +51,10 @@ public class Localizer {
 		formatter.setLocale(locale);
 		
 		String formattedMessage = "CHAR ENCODING ERROR";
-        //Support non-English-standard characters
-        formattedMessage = new String(formatter.format(messageArguments).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+		//Support non-English-standard characters
+		formattedMessage = new String(formatter.format(messageArguments).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 
-        return formattedMessage;
+		return formattedMessage;
 		
 	}
 
@@ -109,10 +109,10 @@ public class Localizer {
 			observer.localizationChanged();
 		}
 	}
-	
+
 	public static class Language {
 		public String languageName;
-		public String langaugeID; 
-	} 
-	
+		public String languageID;
+	}
+
 }

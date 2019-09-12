@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -79,10 +79,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
             }
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Player", sa.getActivatingPlayer());
-            runParams.put("Target", tgtPlayers);
-            game.getTriggerHandler().runTriggerOld(TriggerType.SearchedLibrary, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
+            runParams.put(AbilityKey.Target, tgtPlayers);
+            game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
         if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
             CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source),

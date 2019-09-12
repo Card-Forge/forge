@@ -223,7 +223,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null, null);
+                        final Card d = game.getAction().exile(c, null);
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }

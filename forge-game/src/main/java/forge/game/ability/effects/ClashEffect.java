@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.GameAction;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -12,7 +13,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ClashEffect extends SpellAbilityEffect {
 
@@ -32,8 +33,8 @@ public class ClashEffect extends SpellAbilityEffect {
         final boolean victory = clashWithOpponent(sa);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<>();
-        runParams.put("Player", sa.getHostCard().getController());
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, sa.getHostCard().getController());
 
         if (victory) {
 
@@ -42,18 +43,18 @@ public class ClashEffect extends SpellAbilityEffect {
                 AbilityUtils.resolve(sub);
             }
 
-            runParams.put("Won", "True");
+            runParams.put(AbilityKey.Won, "True");
         } else {
             AbilitySub sub = sa.getAdditionalAbility("OtherwiseSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
 
-            runParams.put("Won", "False");
+            runParams.put(AbilityKey.Won, "False");
         }
 
         
-        sa.getHostCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.Clashed, runParams, false);
+        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
     }
 
     /**

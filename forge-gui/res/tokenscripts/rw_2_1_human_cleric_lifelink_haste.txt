@@ -1,0 +1,8 @@
+Name:Human Cleric
+Types:Creature Human Cleric
+Colors:red,white
+ManaCost:no cost
+PT:2/1
+K:Lifelink
+K:Haste
+Oracle:Lifelink, haste

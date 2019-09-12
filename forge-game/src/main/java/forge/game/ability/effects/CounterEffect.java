@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -168,9 +169,9 @@ public class CounterEffect extends SpellAbilityEffect {
             tgtSA.getHostCard().unanimateBestow(true);
         }
 
-        Map<String, Object> params = Maps.newHashMap();
-        params.put("StackSa", tgtSA);
-        params.put("StackSi", si);
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.StackSa, tgtSA);
+        params.put(AbilityKey.StackSi, si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
@@ -208,12 +209,11 @@ public class CounterEffect extends SpellAbilityEffect {
                     + srcSA.getHostCard().getName());
         }
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Player", tgtSA.getActivatingPlayer());
-        runParams.put("Card", tgtSA.getHostCard());
-        runParams.put("Cause", srcSA.getHostCard());
-        runParams.put("CounteredSA", tgtSA);
-        game.getTriggerHandler().runTriggerOld(TriggerType.Countered, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(tgtSA.getHostCard());
+        runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
+        runParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        runParams.put(AbilityKey.CounteredSA, tgtSA);
+        game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
         
 
         if (!tgtSA.isAbility()) {

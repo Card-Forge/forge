@@ -1,10 +1,10 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
@@ -59,9 +59,9 @@ public class FightEffect extends DamageBaseEffect {
         dealDamage(sa, fighters.get(0), fighters.get(1));
 
         for (Card c : fighters) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Fighter", c);
-            game.getTriggerHandler().runTriggerOld(TriggerType.Fight, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Fighter, c);
+            game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
         }
     }
 

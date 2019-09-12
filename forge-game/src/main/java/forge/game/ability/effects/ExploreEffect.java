@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -16,7 +16,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 import java.util.List;
-import java.util.Map;
 
 public class ExploreEffect extends SpellAbilityEffect {
 
@@ -83,9 +82,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             }
 
             // a creature does explore even if it isn't on the battlefield anymore
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Card", c);
-            game.getTriggerHandler().runTriggerOld(TriggerType.Explores, runParams, false);
+            game.getTriggerHandler().runTrigger(TriggerType.Explores, AbilityKey.mapFromCard(c), false);
         }
         table.triggerCountersPutAll(game);
     }

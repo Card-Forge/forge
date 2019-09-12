@@ -26,6 +26,7 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -38,28 +39,30 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     public SettingsPage() {
         super("Settings", FSkinImage.SETTINGS);
 
+        final Localizer localizer = Localizer.getInstance();
+
         lstSettings.setListItemRenderer(new SettingRenderer());
 
-        lstSettings.addGroup("General Settings");
-        lstSettings.addGroup("Gameplay Options");
-        lstSettings.addGroup("Random Deck Generation");
-        lstSettings.addGroup("Advanced Settings");
-        lstSettings.addGroup("Graphic Options");
-        lstSettings.addGroup("Card Overlays");
-        lstSettings.addGroup("Vibration Options");
-        lstSettings.addGroup("Sound Options");
+        lstSettings.addGroup(localizer.getMessage("lblGeneralSettings"));
+        lstSettings.addGroup(localizer.getMessage("lblGameplayOptions"));
+        lstSettings.addGroup(localizer.getMessage("RandomDeckGeneration"));
+        lstSettings.addGroup(localizer.getMessage("AdvancedSettings"));
+        lstSettings.addGroup(localizer.getMessage("GraphicOptions"));
+        lstSettings.addGroup(localizer.getMessage("lblCardOverlays"));
+        lstSettings.addGroup(localizer.getMessage("lblVibrationOptions"));
+        lstSettings.addGroup(localizer.getMessage("SoundOptions"));
 
         //General Settings
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, "Language",
-                "Select Language (Excluded Game part. Still a work in progress) (RESTART REQUIRED)",
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, localizer.getMessage("cbpSelectLanguage"),
+                localizer.getMessage("nlSelectLanguage"),
                 FLanguage.getAllLanguages()) {
             @Override
             public void valueChanged(String newValue) {
                 FLanguage.changeLanguage(newValue);
             }
         }, 0);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
-                "Sets the theme that determines how display components are skinned.",
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, localizer.getMessage("lblTheme"),
+                localizer.getMessage("nlTheme"),
                 FSkin.getAllSkins()) {
             @Override
             public void valueChanged(String newValue) {
@@ -67,15 +70,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
-                "Landscape Mode",
-                "Use landscape (horizontal) orientation for app instead of portrait (vertical).") {
+                localizer.getMessage("lblLandscapeMode"),
+                localizer.getMessage("nlLandscapeMode")) {
                     @Override
                     public void select() {
                         super.select();
                         boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
                         Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
                         if (Forge.isLandscapeMode() != landscapeMode) {
-                            FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
+                            FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), "Restart", localizer.getMessage("lblLater"), new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
                                     if (result) {
@@ -87,17 +90,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
-                "Minimize on Screen Lock",
-                "Minimize Forge when screen is locked (enable if you experience graphic glitches after locking your screen)."),
+                localizer.getMessage("lblMinimizeScreenLock"),
+                localizer.getMessage("nlMinimizeScreenLock")),
                 0);
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
-                "Automatic Bug Reports",
-                "Automatically send bug reports to the developers, without prompting."),
+                localizer.getMessage("lblAutomaticBugReports"),
+                localizer.getMessage("nlAutomaticBugReports")),
                 0);
 
         //Gameplay Options
-        lstSettings.addItem(new CustomSelectSetting(FPref.MULLIGAN_RULE, "Mulligan Rule",
-                "Choose the version of the Mulligan rule.",
+        lstSettings.addItem(new CustomSelectSetting(FPref.MULLIGAN_RULE, localizer.getMessage("cbpMulliganRule"),
+                 localizer.getMessage("nlpMulliganRule"),
                  MulliganDefs.getMulliganRuleNames()) {
                     @Override
                     public void valueChanged(String newValue) {
@@ -107,108 +110,108 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
                 "AI Personality",
-                "Choose your AI opponent.",
+                localizer.getMessage("nlpAiProfiles"),
                 AiProfileUtil.getProfilesArray()),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE,
-                "Play for Ante",
-                "Determines whether or not the game is played for ante."),
+                localizer.getMessage("cbAnte"),
+                localizer.getMessage("nlAnte")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_MATCH_RARITY,
-                "Match Ante Rarity",
-                "Attempts to make antes the same rarity for all players."),
+                localizer.getMessage("cbAnteMatchRarity"),
+                localizer.getMessage("nlAnteMatchRarity")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
-                "Hot Seat Mode",
-                "When starting a game with 2 human players, use single prompt to control both players."),
+                localizer.getMessage("lblHotSeatMode"),
+                localizer.getMessage("nlHotSeatMode")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
-                "Allow AI Cheating",
-                "Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."),
+                localizer.getMessage("cbEnableAICheats"),
+                localizer.getMessage("nlEnableAICheats")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
-                "Mana Burn",
-                "Play with mana burn (from pre-Magic 2010 rules)."),
+                localizer.getMessage("cbManaBurn"),
+                localizer.getMessage("nlManaBurn")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANA_LOST_PROMPT,
-                "Prompt Mana Pool Emptying",
-                "When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."),
+                localizer.getMessage("cbManaLostPrompt"),
+                localizer.getMessage("nlManaLostPrompt")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.ENFORCE_DECK_LEGALITY,
-                "Deck Conformance",
-                "Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."),
+                localizer.getMessage("cbEnforceDeckLegality"),
+                localizer.getMessage("nlEnforceDeckLegality")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.PERFORMANCE_MODE,
-                        "Performance Mode",
-                        "Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."),
+                localizer.getMessage("cbPerformanceMode"),
+                localizer.getMessage("nlPerformanceMode")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_SIDEBOARD_FOR_AI,
-                        "Human Sideboard for AI",
-                        "Allows users to sideboard with the AIs deck and sideboard in constructed game formats."),
+                localizer.getMessage("cbSideboardForAI"),
+                localizer.getMessage("nlSideboardForAI")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
-                        "Filtered Hands",
-                        "Generates two starting hands and keeps the one with the closest to average land count for the deck. (Requires restart)"),
+                localizer.getMessage("cbFilteredHands"),
+                localizer.getMessage("nlFilteredHands")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
-                "Clones Use Original Card Art",
-                "When enabled clones will use their original art instead of the cloned card's art."),
+                localizer.getMessage("cbCloneImgSource"),
+                localizer.getMessage("nlCloneImgSource")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCHPREF_PROMPT_FREE_BLOCKS,
-                "Free Block Handling",
-                "When enabled, if you would have to pay 0 to block, pay automatically without prompt."),
+                localizer.getMessage("cbPromptFreeBlocks"),
+                localizer.getMessage("nlPromptFreeBlocks")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT,
-                "Spell Description in Payment Prompt",
-                "When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."),
+                localizer.getMessage("cbDetailedPaymentDesc"),
+                localizer.getMessage("nlDetailedPaymentDesc")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
-                "Show Storm Count in Prompt Panel",
-                "When enabled, displays the current storm count in the prompt panel."),
+                localizer.getMessage("cbShowStormCount"),
+                localizer.getMessage("nlShowStormCount")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER,
-                "Preselect Last Order of Abilities",
-                "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),
+                localizer.getMessage("cbPreselectPrevAbOrder"),
+                localizer.getMessage("nlPreselectPrevAbOrder")),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
-                "Order Graveyard",
-                "Determines when to allow to order cards going to graveyard (never/always/only with relevant cards).",
+                localizer.getMessage("lblOrderGraveyard"),
+                localizer.getMessage("nlOrderGraveyard"),
                         new String[]{
                                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS}),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
-                "Auto-Yield",
-                "Defines the granularity level of auto-yields (yield to each unique ability or to each unique card).",
+                localizer.getMessage("lblAutoYields"),
+                localizer.getMessage("nlpAutoYieldMode"),
                 new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
-                "Use Escape Key To End Turn",
-                "Allows to use Esc keyboard shortcut to end turn prematurely"),
+                localizer.getMessage("cbEscapeEndsTurn"),
+                localizer.getMessage("nlEscapeEndsTurn")),
                 1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
-                "Remove Small Creatures",
-                "Disables 1/1 and 0/X creatures in generated decks."),
+                localizer.getMessage("cbRemoveSmall"),
+                localizer.getMessage("nlRemoveSmall")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_CARDBASED,
-                        "Include Card-based Deck Generation",
-                        "Builds more synergistic random decks"),
+                localizer.getMessage("cbCardBased"),
+                localizer.getMessage("nlCardBased")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_SINGLETONS,
-                "Singleton Mode",
-                "Disables non-land duplicates in generated decks."),
+                localizer.getMessage("cbSingletons"),
+                localizer.getMessage("nlSingletons")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_ARTIFACTS,
-                "Remove Artifacts",
-                "Disables artifact cards in generated decks."),
+                localizer.getMessage("cbRemoveArtifacts"),
+                localizer.getMessage("nlRemoveArtifacts")),
                 2);
 
         //Advanced Settings
         lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED,
-                "Developer Mode",
-                "Enables menu with functions for testing during development.") {
+                localizer.getMessage("cbDevMode"),
+                localizer.getMessage("nlDevMode")) {
                     @Override
                     public void select() {
                         super.select();
@@ -217,37 +220,39 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }, 3);
         lstSettings.addItem(new CustomSelectSetting(FPref.DEV_LOG_ENTRY_TYPE,
-                "Game Log Verbosity",
-                "Changes how much information is displayed in the game log. Sorted by least to most verbose.",
+                localizer.getMessage("cbpGameLogEntryType"),
+                localizer.getMessage("nlGameLogEntryType"),
                 GameLogEntryType.class),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
-                "Load Card Scripts Lazily",
-                "If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), 3);
+                localizer.getMessage("cbLoadCardsLazily"),
+                localizer.getMessage("nlLoadCardsLazily")),
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
-                "Load Historic Formats",
-                "If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), 3);
+                localizer.getMessage("cbLoadHistoricFormats"),
+                localizer.getMessage("nlLoadHistoricFormats")),
+                3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
-                "Download missing card art",
-                "Automatically download missing card art"),
+                localizer.getMessage("cbImageFetcher"),
+                localizer.getMessage("nlImageFetcher")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
-                "Display Foil Overlay",
-                "Displays foil cards with the visual foil overlay effect."),
+                localizer.getMessage("cbDisplayFoil"),
+                localizer.getMessage("nlDisplayFoil")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_FOIL,
-                "Random Foil",
-                "Adds foil effect to random cards."),
+                localizer.getMessage("cbRandomFoil"),
+                localizer.getMessage("nlRandomFoil")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_ART_IN_POOLS,
-                "Randomize Card Art",
-                "Generates cards with random art in generated limited mode card pools."),
+                localizer.getMessage("cbRandomArtInPools"),
+                localizer.getMessage("nlRandomArtInPools")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_TABS,
-                "Compact Tabs",
-                "Show smaller tabs on the top of tab page screens (such as this screen).") {
+                localizer.getMessage("lblCompactTabs"),
+                localizer.getMessage("nlCompactTabs")) {
                     @Override
                     public void select() {
                         super.select();
@@ -257,49 +262,49 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
-                "Compact List Items",
-                "Show only a single line of text for cards and decks on all list views by default."),
+                localizer.getMessage("lblCompactListItems"),
+                localizer.getMessage("nlCompactListItems")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
-                "Hide Reminder Text",
-                "Hide reminder text in Card Detail pane."),
+                localizer.getMessage("cbHideReminderText"),
+                localizer.getMessage("nlHideReminderText")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MATCH_IMAGE_VISIBLE,
-                "Show Match Background",
-                "Show match background image on battlefield, otherwise background texture shown instead."),
+                localizer.getMessage("lblShowMatchBackground"),
+                localizer.getMessage("nlShowMatchBackground")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LIBGDX_TEXTURE_FILTERING,
-                "Battlefield Texture Filtering",
-                "Filter card art on battlefield to make it less pixelated on large screens (restart required, may reduce performance)."),
+                localizer.getMessage("lblBattlefieldTextureFiltering"),
+                localizer.getMessage("nlBattlefieldTextureFiltering")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
-                "Detailed Card Color",
-                "Displays the breakdown of the current color of cards in the card detail information panel.",
+                localizer.getMessage("cbpDisplayCurrentCardColors"),
+                localizer.getMessage("nlDisplayCurrentCardColors"),
                 new String[]{
                     ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                     ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                     ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-                        "Rotate Zoom Image of Split Cards",
-                        "Rotates the zoomed image of split cards."),
+                        localizer.getMessage("lblRotateZoomSplit"),
+                        localizer.getMessage("nlRotateZoomSplit")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-                        "Rotate Zoom Image of Planes/Phenomena",
-                        "Rotates the zoomed image of Plane or Phenomenon cards."),
+                        localizer.getMessage("lblRotateZoomPlanesPhenomena"),
+                        localizer.getMessage("nlRotateZoomPlanesPhenomena")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DYNAMIC_PLANECHASE_BG,
-                        "Dynamic Background Planechase",
-                        "Use current plane images as background (Planes Card images must be on the cache/pics/planechase folder)."),
+                        localizer.getMessage("lblDynamicBackgroundPlanechase"),
+                        localizer.getMessage("nlDynamicBackgroundPlanechase")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
-                        "Disable Card 'Effect' Images",
-                        "Disable the zoomed image for the 'Effect' cards."),
+                        localizer.getMessage("lblDisableCardEffect"),
+                        localizer.getMessage("nlDisableCardEffect")),
                 4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
-                        "Counter Display Type",
-                        "Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once.",
+                        localizer.getMessage("cbpCounterDisplayType"),
+                        localizer.getMessage("nlCounterDisplayType"),
                         new String[]{
                                 ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
                                 ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
@@ -307,44 +312,44 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         //Card Overlays
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_CARD_OVERLAYS,
-                "Show Card Overlays",
-                "Show name, mana cost, p/t, and id overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardOverlays"),
+                localizer.getMessage("nlShowCardOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_NAME,
-                "Show Card Name Overlays",
-                "Show name overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardNameOverlays"),
+                localizer.getMessage("nlShowCardNameOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_MANA_COST,
-                "Show Card Mana Cost Overlays",
-                "Show mana cost overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardManaCostOverlays"),
+                localizer.getMessage("nlShowCardManaCostOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
-                "Show Card P/T Overlays",
-                "Show power/toughness/loyalty overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardPTOverlays"),
+                localizer.getMessage("nlShowCardPTOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
-                "Show Card ID Overlays",
-                "Show id overlays for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowCardIDOverlays"),
+                localizer.getMessage("nlShowCardIDOverlays")),
                 5);
 
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-                "Vibrate When Losing Life",
-                "Enable vibration when your player loses life or takes damage during a game."),
+                localizer.getMessage("lblVibrateWhenLosingLife"),
+                localizer.getMessage("nlVibrateWhenLosingLife")),
                 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
-                "Vibrate After Long Press",
-                "Enable quick vibration to signify a long press, such as for card zooming."),
+                localizer.getMessage("lblVibrateAfterLongPress"),
+                localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
 
         //Sound Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
-                "Enable Sounds",
-                "Enable sound effects during the game."),
+                localizer.getMessage("cbEnableSounds"),
+                localizer.getMessage("nlEnableSounds")),
                 7);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
-                "Enable Music",
-                "Enable background music during the game.") {
+                localizer.getMessage("cbEnableMusic"),
+                localizer.getMessage("nlEnableMusic")) {
                     @Override
                     public void select() {
                         super.select();
