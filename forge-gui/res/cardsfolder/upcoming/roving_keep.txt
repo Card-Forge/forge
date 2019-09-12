@@ -1,0 +1,7 @@
+Name:Roving Keep
+ManaCost:7
+Types:Artifact Creature Wall
+PT:5/7
+K:Defender
+A:AB$ Pump | Cost$ 7 | NumAtt$ +2 | KW$ Trample & HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME gets +2/+0 and gains trample until end of turn. It can attack this turn as though it didn't have defender.
+Oracle:Defender\n{7}: Roving Keep gets +2/+0 and gains trample until end of turn. It can attack this turn as though it didn't have defender.
