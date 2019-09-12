@@ -190,11 +190,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
 
             if (obj instanceof Card) {
-                Card tgtCard = gameCard;
-                counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
-                if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
+                counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(gameCard) : counterAmount;
+                if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                     if (max != -1) {
-                        counterAmount = Math.max(Math.min(max - tgtCard.getCounters(counterType), counterAmount), 0);
+                        counterAmount = Math.max(Math.min(max - gameCard.getCounters(counterType), counterAmount), 0);
                     }
                     if (sa.hasParam("UpTo")) {
                         Map<String, Object> params = Maps.newHashMap();
@@ -205,15 +204,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                     // Adapt need extra logic
                     if (sa.hasParam("Adapt")) {
-                        if (!(tgtCard.getCounters(CounterType.P1P1) == 0
-                                || tgtCard.hasKeyword("CARDNAME adapts as though it had no +1/+1 counters"))) {
+                        if (!(gameCard.getCounters(CounterType.P1P1) == 0
+                                || gameCard.hasKeyword("CARDNAME adapts as though it had no +1/+1 counters"))) {
                             continue;
                         }
                     }
 
                     if (sa.hasParam("Tribute")) {
                         // make a copy to check if it would be on the battlefield 
-                        Card noTributeLKI = CardUtil.getLKICopy(tgtCard);
+                        Card noTributeLKI = CardUtil.getLKICopy(gameCard);
                         // this check needs to check if this card would be on the battlefield
                         noTributeLKI.setLastKnownZone(activator.getZone(ZoneType.Battlefield));
 
@@ -236,65 +235,65 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
 
-                        String message = "Do you want to put " + counterAmount + " +1/+1 counters on " + tgtCard + " ?";
+                        String message = "Do you want to put " + counterAmount + " +1/+1 counters on " + gameCard + " ?";
                         Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
 
                         if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
-                            tgtCard.setTributed(true);
+                            gameCard.setTributed(true);
                         } else {
                             continue;
                         }
                     }
                     if (rememberCards) {
-                        card.addRemembered(tgtCard);
+                        card.addRemembered(gameCard);
                     }
-                    final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
+                    final Zone zone = gameCard.getGame().getZoneOf(gameCard);
                     if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                         if (etbcounter) {
-                            tgtCard.addEtbCounter(counterType, counterAmount, placer);
+                            gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, placer, true, table);
+                            gameCard.addCounter(counterType, counterAmount, placer, true, table);
                         }
                         if (remember) {
-                            final int value = tgtCard.getTotalCountersToAdd();
-                            tgtCard.addCountersAddedBy(card, counterType, value);
+                            final int value = gameCard.getTotalCountersToAdd();
+                            gameCard.addCountersAddedBy(card, counterType, value);
                         }
 
                         if (sa.hasParam("Evolve")) {
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, tgtCard);
+                            runParams.put(AbilityKey.Card, gameCard);
                             game.getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
                         }
                         if (sa.hasParam("Monstrosity")) {
-                            tgtCard.setMonstrous(true);
+                            gameCard.setMonstrous(true);
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, tgtCard);
+                            runParams.put(AbilityKey.Card, gameCard);
                             runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                         }
                         if (sa.hasParam("Renown")) {
-                            tgtCard.setRenowned(true);
+                            gameCard.setRenowned(true);
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, tgtCard);
+                            runParams.put(AbilityKey.Card, gameCard);
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
                         }
                         if (sa.hasParam("Adapt")) {
                             // need to remove special keyword
-                            tgtCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
+                            gameCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, tgtCard);
+                            runParams.put(AbilityKey.Card, gameCard);
                             game.getTriggerHandler().runTrigger(TriggerType.Adapt, runParams, false);
                         }
                     } else {
                         // adding counters to something like re-suspend cards
                         // etbcounter should apply multiplier
                         if (etbcounter) {
-                            tgtCard.addEtbCounter(counterType, counterAmount, placer);
+                            gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, placer, false, table);
+                            gameCard.addCounter(counterType, counterAmount, placer, false, table);
                         }
                     }
-                    game.updateLastStateForCard(tgtCard);
+                    game.updateLastStateForCard(gameCard);
                 }
             } else if (obj instanceof Player) {
                 // Add Counters to players!
