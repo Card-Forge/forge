@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -53,26 +53,28 @@ public class BlockEffect extends SpellAbilityEffect {
                 blocker.addBlockedThisTurn(attacker);
                 attacker.addBlockedByThisTurn(blocker);
 
-                Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Attacker", attacker);
-                runParams.put("Blocker", blocker);
-                game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlockedByCreature, runParams, false);
+                {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attacker, attacker);
+                    runParams.put(AbilityKey.Blocker, blocker);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
+                }
 
-                runParams = Maps.newHashMap();
-                runParams.put("Blocker", blocker);
-                runParams.put("Attackers", attacker);
-                game.getTriggerHandler().runTriggerOld(TriggerType.Blocks, runParams, false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Blocker, blocker);
+                runParams.put(AbilityKey.Attackers, attacker);
+                game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
             }
 
             attacker.getDamageHistory().setCreatureGotBlockedThisCombat(true);
             if (!wasBlocked) {
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Attacker", attacker);
-                runParams.put("Blockers", blockers);
-                runParams.put("NumBlockers", blockers.size());
-                runParams.put("Defender", combat.getDefenderByAttacker(attacker));
-                runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(attacker));
-                game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlocked, runParams, false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Attacker, attacker);
+                runParams.put(AbilityKey.Blockers, blockers);
+                runParams.put(AbilityKey.NumBlockers, blockers.size());
+                runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(attacker));
+                runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(attacker));
+                game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
 
                 combat.orderBlockersForDamageAssignment(attacker, new CardCollection(blockers));
             }

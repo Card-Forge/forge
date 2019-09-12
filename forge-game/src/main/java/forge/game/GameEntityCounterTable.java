@@ -7,6 +7,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
@@ -47,9 +48,9 @@ public class GameEntityCounterTable extends ForwardingTable<GameEntity, CounterT
 
     public void triggerCountersPutAll(final Game game) {
         if (!isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Objects", this);
-            game.getTriggerHandler().runTriggerOld(TriggerType.CounterAddedAll, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Objects, this);
+            game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
         }
     }
 }

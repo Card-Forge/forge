@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCombatChanged;
@@ -11,7 +12,6 @@ import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import java.util.List;
 import java.util.Map;
@@ -40,13 +40,13 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                 game.getCombat().setBlocked(c, true);
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                     isCombatChanged = true;
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Attacker", c);
-                    runParams.put("Blockers", Lists.<Card>newArrayList());
-                    runParams.put("NumBlockers", 0);
-                    runParams.put("Defender", game.getCombat().getDefenderByAttacker(c));
-                    runParams.put("DefendingPlayer", game.getCombat().getDefenderPlayerByAttacker(c));
-                    game.getTriggerHandler().runTriggerOld(TriggerType.AttackerBlocked, runParams, false);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attacker, c);
+                    runParams.put(AbilityKey.Blockers, Lists.<Card>newArrayList());
+                    runParams.put(AbilityKey.NumBlockers, 0);
+                    runParams.put(AbilityKey.Defender, game.getCombat().getDefenderByAttacker(c));
+                    runParams.put(AbilityKey.DefendingPlayer, game.getCombat().getDefenderPlayerByAttacker(c));
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
                 }
             }
         }

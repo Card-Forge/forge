@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -40,9 +40,9 @@ public class AbandonEffect extends SpellAbilityEffect {
         controller.getZone(ZoneType.SchemeDeck).add(source);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Scheme", source);
-        game.getTriggerHandler().runTriggerOld(TriggerType.Abandoned, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Scheme, source);
+        game.getTriggerHandler().runTrigger(TriggerType.Abandoned, runParams, false);
     }
 
 }
