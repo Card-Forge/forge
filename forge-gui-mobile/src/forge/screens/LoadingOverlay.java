@@ -1,5 +1,6 @@
 package forge.screens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
@@ -91,6 +92,12 @@ public class LoadingOverlay extends FOverlay {
         float panelHeight = logoSize + fontHeight + 4 * padding;
 
         float y = (getHeight() - panelHeight) / 2;
+        float oldAlpha = g.getfloatAlphaComposite();
+        //dark translucent back..
+        g.setAlphaComposite(0.6f);
+        g.fillRect(Color.BLACK, 0, 0, getWidth(), getHeight());
+        g.setAlphaComposite(oldAlpha);
+        //overlay
         g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
         g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
         y += padding;
