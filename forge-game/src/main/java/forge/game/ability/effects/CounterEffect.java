@@ -209,9 +209,8 @@ public class CounterEffect extends SpellAbilityEffect {
                     + srcSA.getHostCard().getName());
         }
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(tgtSA.getHostCard());
         runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
-        runParams.put(AbilityKey.Card, tgtSA.getHostCard());
         runParams.put(AbilityKey.Cause, srcSA.getHostCard());
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);

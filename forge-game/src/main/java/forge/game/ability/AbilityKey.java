@@ -1,11 +1,15 @@
 package forge.game.ability;
 
+import forge.game.card.Card;
+
 import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Keys for Ability parameter maps.
  */
 public enum AbilityKey {
+    AbilityMana("AbilityMana"),
     Affected("Affected"),
     Attacker("Attacker"),
     Attackers("Attackers"),
@@ -59,5 +63,12 @@ public enum AbilityKey {
 
     public static <V> EnumMap<AbilityKey, V> newMap() {
         return new EnumMap<>(AbilityKey.class);
+    }
+
+    public static Map<AbilityKey, Object> mapFromCard(forge.game.card.Card card) {
+        final Map<AbilityKey, Object> runParams = newMap();
+
+        runParams.put(Card, card);
+        return runParams;
     }
 }

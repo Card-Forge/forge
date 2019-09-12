@@ -260,29 +260,22 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
 
                         if (sa.hasParam("Evolve")) {
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, gameCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                            game.getTriggerHandler().runTrigger(TriggerType.Evolved, AbilityKey.mapFromCard(gameCard), false);
                         }
                         if (sa.hasParam("Monstrosity")) {
                             gameCard.setMonstrous(true);
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, gameCard);
+                            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                         }
                         if (sa.hasParam("Renown")) {
                             gameCard.setRenowned(true);
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, gameCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
+                            game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, AbilityKey.mapFromCard(gameCard), false);
                         }
                         if (sa.hasParam("Adapt")) {
                             // need to remove special keyword
                             gameCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Card, gameCard);
-                            game.getTriggerHandler().runTrigger(TriggerType.Adapt, runParams, false);
+                            game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                         }
                     } else {
                         // adding counters to something like re-suspend cards

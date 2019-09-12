@@ -400,8 +400,7 @@ public class GameAction {
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Card, lastKnownInfo);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(lastKnownInfo);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
@@ -414,8 +413,7 @@ public class GameAction {
 
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
-            final Map<AbilityKey, Object> runParams2 = AbilityKey.newMap();
-            runParams2.put(AbilityKey.Card, lastKnownInfo);
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
             runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
             if(params != null) {
                 runParams2.putAll(params);
@@ -600,8 +598,7 @@ public class GameAction {
         c.setTurnInZone(tiz);
         c.setCameUnderControlSinceLastUpkeep(true);
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Card, c);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.OriginalController, original);
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
@@ -699,8 +696,7 @@ public class GameAction {
         final Card copied = moveTo(removed, c, cause, params);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Card, c);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Origin, origin.getZoneType().name());
         if (params != null) {
@@ -1416,8 +1412,7 @@ public class GameAction {
         game.fireEvent(new GameEventCardDestroyed());
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Card, c);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Causer, activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 

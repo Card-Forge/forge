@@ -1132,8 +1132,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (champion) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Card, source);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
                 runParams.put(AbilityKey.Championed, c);
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
