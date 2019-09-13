@@ -1,9 +1,11 @@
 package forge.util;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.*;
@@ -33,6 +35,25 @@ public class Localizer {
 		setLanguage(localeID, languagesDirectory);
 	}
 
+	public String convert(String value, String fromEncoding, String toEncoding) throws UnsupportedEncodingException {
+		return new String(value.getBytes(fromEncoding), toEncoding);
+	}
+
+	public String charset(String value, String charsets[]) {
+		String probe = StandardCharsets.UTF_8.name();
+		for(String c : charsets) {
+			Charset charset = Charset.forName(c);
+			if(charset != null) {
+				try {
+					if (value.equals(convert(convert(value, charset.name(), probe), probe, charset.name()))) {
+						return c;
+					}
+				} catch(UnsupportedEncodingException ignored) {}
+			}
+		}
+		return StandardCharsets.UTF_8.name();
+	}
+
 	public String getMessage(final String key, final Object... messageArguments) {
 		MessageFormat formatter = null;
 		
@@ -52,7 +73,11 @@ public class Localizer {
 		
 		String formattedMessage = "CHAR ENCODING ERROR";
 		//Support non-English-standard characters
-		formattedMessage = new String(formatter.format(messageArguments).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+		String detectedCharset = charset(new String(formatter.format(messageArguments)), new String[] { "ISO-8859-1", "UTF-8" });
+
+		try {
+			formattedMessage = new String(formatter.format(messageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
+		} catch(UnsupportedEncodingException ignored) {}
 
 		return formattedMessage;
 		
