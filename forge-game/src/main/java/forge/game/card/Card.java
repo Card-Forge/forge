@@ -1357,19 +1357,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Play the Subtract Counter sound
-        getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue == null ? 0 : oldValue, newValue));
+        getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue, newValue));
 
         // Run triggers
         int curCounters = oldValue;
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("Card", this);
-        runParams.put("CounterType", counterName);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+        runParams.put(AbilityKey.CounterType, counterName);
         for (int i = 0; i < delta && curCounters != 0; i++) {
-            runParams.put("NewCounterAmount", --curCounters);
-            getGame().getTriggerHandler().runTriggerOld(TriggerType.CounterRemoved, runParams, false);
+            runParams.put(AbilityKey.NewCounterAmount, --curCounters);
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
-        runParams.put("CounterAmount", delta);
-        getGame().getTriggerHandler().runTriggerOld(TriggerType.CounterRemovedOnce, runParams, false);
+        runParams.put(AbilityKey.CounterAmount, delta);
+        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
     }
 
     @Override
@@ -2933,10 +2932,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, entity));
 
         // run trigger
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("AttachSource", this);
-        runParams.put("AttachTarget", entity);
-        getController().getGame().getTriggerHandler().runTriggerOld(TriggerType.Attached, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.AttachSource, this);
+        runParams.put(AbilityKey.AttachTarget, entity);
+        getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
 
     }
 
@@ -2955,10 +2954,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("Attach", this);
-        runParams.put("Object", entity);
-        getGame().getTriggerHandler().runTriggerOld(TriggerType.Unattach, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Attach, this);
+        runParams.put(AbilityKey.Object, entity);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
         runUnattachCommands();
     }
 
@@ -3514,10 +3513,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (tapped) { return; }
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("Card", this);
-        runParams.put("Attacker", attacker);
-        getGame().getTriggerHandler().runTriggerOld(TriggerType.Taps, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+        runParams.put(AbilityKey.Attacker, attacker);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);
         getGame().fireEvent(new GameEventCardTapped(this, true));
@@ -3536,9 +3534,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("Card", this);
-        getGame().getTriggerHandler().runTriggerOld(TriggerType.Untaps, runParams, false);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, AbilityKey.mapFromCard(this), false);
 
         for (final GameCommand var : untapCommandList) {
             var.run();
@@ -4097,13 +4093,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("Card", this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
 
         if (!isPhasedOut()) {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
-            getGame().getTriggerHandler().runTriggerOld(TriggerType.PhaseOut, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
         }
 
         setPhasedOut(!phasedOut);
@@ -4115,7 +4110,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!phasedOut) {
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            getGame().getTriggerHandler().runTriggerOld(TriggerType.PhaseIn, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
         }
 
         return true;
@@ -5006,10 +5001,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         exertedByPlayer.add(getController());
         exertThisTurn++;
         view.updateExertedThisTurn(this, true);
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", this);
-        runParams.put("Player", getController());
-        game.getTriggerHandler().runTriggerOld(TriggerType.Exerted, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+        runParams.put(AbilityKey.Player, getController());
+        game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
     }
 
     public boolean isExertedBy(final Player player) {
