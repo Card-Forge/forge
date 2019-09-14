@@ -1601,8 +1601,8 @@ public class ComputerUtilCard {
         }
 
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
-        pumped.setPTBoost(c.getPTBoostMap());
-        pumped.addPTBoost(power + berserkPower, toughness, timestamp);
+        pumped.setPTBoost(c.getPTBoostTable());
+        pumped.addPTBoost(power + berserkPower, toughness, timestamp, null);
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
@@ -1649,8 +1649,8 @@ public class ComputerUtilCard {
         list.add(vCard); // account for the static abilities that may be present on the card itself
         for (final Card c : list) {
             // remove old boost that might be copied
-            vCard.removePTBoost(c.getTimestamp());
             for (final StaticAbility stAb : c.getStaticAbilities()) {
+                vCard.removePTBoost(c.getTimestamp(), stAb.getId());
                 final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
@@ -1683,7 +1683,7 @@ public class ComputerUtilCard {
                         def = AbilityUtils.calculateAmount(c, addT, stAb);
                     }
                 }
-                vCard.addPTBoost(att, def, c.getTimestamp());
+                vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
             }
         }
     }

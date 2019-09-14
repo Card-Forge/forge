@@ -52,7 +52,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             boolean redrawPT = false;
 
             if (a != 0 || d != 0) {
-                tgtC.addPTBoost(a, d, timestamp);
+                tgtC.addPTBoost(a, d, timestamp, 0);
                 redrawPT = true;
             }
 
@@ -76,7 +76,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removePTBoost(timestamp);
+                        tgtC.removePTBoost(timestamp, 0);
                         tgtC.removeChangedCardKeywords(timestamp);
 
                         for (String kw : hiddenkws) {
