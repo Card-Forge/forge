@@ -1338,10 +1338,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final void subtractCounter(final CounterType counterName, final int n) {
-        Integer oldValue = getCounters(counterName);
-        int newValue = oldValue == null ? 0 : Math.max(oldValue - n, 0);
+        int oldValue = getCounters(counterName);
+        int newValue = Math.max(oldValue - n, 0);
 
-        final int delta = (oldValue == null ? 0 : oldValue) - newValue;
+        final int delta = oldValue - newValue;
         if (delta == 0) { return; }
 
         int powerBonusBefore = getPowerBonusFromCounters();
@@ -1360,7 +1360,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue == null ? 0 : oldValue, newValue));
 
         // Run triggers
-        int curCounters = oldValue == null ? 0 : oldValue;
+        int curCounters = oldValue;
         final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
