@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardRegenerated;
@@ -44,10 +45,9 @@ public class RegenerationEffect extends SpellAbilityEffect {
             }
 
             // Run triggers
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Card", c);
-            runParams.put("Cause", host);
-            game.getTriggerHandler().runTriggerOld(TriggerType.Regenerated, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            runParams.put(AbilityKey.Cause, host);
+            game.getTriggerHandler().runTrigger(TriggerType.Regenerated, runParams, false);
         }
 
     }

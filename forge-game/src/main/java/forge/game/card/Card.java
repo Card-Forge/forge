@@ -30,6 +30,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -567,9 +568,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Clear old dfc trigger from the trigger handler
             getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Transformer", this);
-            getGame().getTriggerHandler().runTriggerOld(TriggerType.Transformed, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Transformer, this);
+            getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
             incrementTransformedTimestamp();
 
             return result;
@@ -687,9 +688,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
-                final Map<String, Object> runParams = Maps.newTreeMap();
-                runParams.put("Card", this);
-                getGame().getTriggerHandler().runTriggerOld(TriggerType.TurnFaceUp, runParams, false);
+                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, AbilityKey.mapFromCard(this), false);
             }
             return result;
         }
@@ -1281,18 +1280,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             // Run triggers
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Card", this);
-            runParams.put("Source", source);
-            runParams.put("CounterType", counterType);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+            runParams.put(AbilityKey.Source, source);
+            runParams.put(AbilityKey.CounterType, counterType);
             for (int i = 0; i < addAmount; i++) {
-                runParams.put("CounterAmount", oldValue + i + 1);
-                getGame().getTriggerHandler().runTriggerOld(
+                runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
+                getGame().getTriggerHandler().runTrigger(
                         TriggerType.CounterAdded, Maps.newHashMap(runParams), false);
             }
             if (addAmount > 0) {
-                runParams.put("CounterAmount", addAmount);
-                getGame().getTriggerHandler().runTriggerOld(
+                runParams.put(AbilityKey.CounterAmount, addAmount);
+                getGame().getTriggerHandler().runTrigger(
                         TriggerType.CounterAddedOnce, Maps.newHashMap(runParams), false);
             }
         } else {
@@ -4900,17 +4898,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         source.addDealtDamageToThisTurn(this, damageIn);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newTreeMap();
-        runParams.put("DamageSource", source);
-        runParams.put("DamageTarget", this);
-        runParams.put("DamageAmount", damageIn);
-        runParams.put("IsCombatDamage", isCombat);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.DamageSource, source);
+        runParams.put(AbilityKey.DamageTarget, this);
+        runParams.put(AbilityKey.DamageAmount, damageIn);
+        runParams.put(AbilityKey.IsCombatDamage, isCombat);
         if (!isCombat) {
-            runParams.put("SpellAbilityStackInstance", game.stack.peek());
+            runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
         }
         // Defending player at the time the damage was dealt
-        runParams.put("DefendingPlayer", game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
-        getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDone, runParams, false);
+        runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
+        getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         GameEventCardDamaged.DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) {

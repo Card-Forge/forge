@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -98,10 +99,10 @@ public class VoteEffect extends SpellAbilityEffect {
                 host.getGame().getAction().nofityOfValue(sa, p, result + "\r\nCurrent Votes:" + votes, p);
             }
         }
-        
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("AllVotes", votes);
-        game.getTriggerHandler().runTriggerOld(TriggerType.Vote, runParams, false);
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.AllVotes, votes);
+        game.getTriggerHandler().runTrigger(TriggerType.Vote, runParams, false);
 
         List<String> subAbs = Lists.newArrayList();
         final List<Object> mostVotes = getMostVotes(votes);

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -74,9 +75,7 @@ public class RevealEffect extends SpellAbilityEffect {
 
                 game.getAction().reveal(revealed, p);
                 for (final Card c : revealed) {
-                    Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Card", c);
-                    game.getTriggerHandler().runTriggerOld(TriggerType.Revealed, runParams, false);
+                    game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
                     if (sa.hasParam("RememberRevealed")) {
                         host.addRemembered(c);
                     }
