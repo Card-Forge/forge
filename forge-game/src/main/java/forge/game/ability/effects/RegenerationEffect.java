@@ -10,8 +10,6 @@ import forge.game.trigger.TriggerType;
 
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 public class RegenerationEffect extends SpellAbilityEffect {
 
     /*

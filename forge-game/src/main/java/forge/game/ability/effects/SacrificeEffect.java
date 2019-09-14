@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;

@@ -15,9 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import java.util.List;
-import java.util.Map;
 
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
 public class RevealEffect extends SpellAbilityEffect {
