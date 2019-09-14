@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public enum AbilityKey {
     AbilityMana("AbilityMana"),
+    Activator("Activator"),
     Affected("Affected"),
     Attach("Attach"),
     AllVotes("AllVotes"),
@@ -20,17 +21,24 @@ public enum AbilityKey {
     AttackedTarget("AttackedTarget"),
     Blocker("Blocker"),
     Blockers("Blockers"),
+    CastSA("CastSA"),
+    CastSACMC("CastSACMC"),
     Card("Card"),
     Cards("Cards"),
     CardLKI("CardLKI"),
     Cause("Cause"),
     Causer("Causer"),
     Championed("Championed"),
+    CopySA("CopySA"),
+    Cost("Cost"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
     CounteredSA("CounteredSA"),
     CounterType("CounterType"),
+    Crew("Crew"),
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),
+    CurrentCastSpells("CurrentCastSpells"),
+    CurrentStormCount("CurrentStormCount"),
     DamageAmount("DamageAmount"),
     DamageSource("DamageSource"),
     DamageSources("DamageSources"),
@@ -74,7 +82,9 @@ public enum AbilityKey {
     StackSa("StackSa"),
     StackSi("StackSi"),
     Target("Target"),
+    Targets("Targets"),
     Transformer("Transformer"),
+    Vehicle("Vehicle"),
     Won("Won");
 
 
