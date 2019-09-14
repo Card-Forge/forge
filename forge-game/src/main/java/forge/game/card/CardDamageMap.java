@@ -7,11 +7,11 @@ import java.util.Map;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -34,12 +34,12 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             }
             if (sum > 0) {
                 final GameEntity ge = e.getKey();
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("DamageTarget", ge);
-                runParams.put("DamageAmount", sum);
-                runParams.put("IsCombatDamage", isCombat);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.DamageTarget, ge);
+                runParams.put(AbilityKey.DamageAmount, sum);
+                runParams.put(AbilityKey.IsCombatDamage, isCombat);
                 
-                ge.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamagePreventedOnce, runParams, false);
+                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamagePreventedOnce, runParams, false);
             }
         }
     }
@@ -53,13 +53,13 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 sum += i;
             }
             if (sum > 0) {
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("DamageSource", sourceLKI);
-                runParams.put("DamageTargets", Sets.newHashSet(e.getValue().keySet()));
-                runParams.put("DamageAmount", sum);
-                runParams.put("IsCombatDamage", isCombat);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.DamageSource, sourceLKI);
+                runParams.put(AbilityKey.DamageTargets, Sets.newHashSet(e.getValue().keySet()));
+                runParams.put(AbilityKey.DamageAmount, sum);
+                runParams.put(AbilityKey.IsCombatDamage, isCombat);
                 
-                sourceLKI.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDealtOnce, runParams, false);
+                sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
                 
                 if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                     sourceLKI.getController().gainLife(sum, sourceLKI, sa);
@@ -74,13 +74,13 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             }
             if (sum > 0) {
                 final GameEntity ge = e.getKey();
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("DamageTarget", ge);
-                runParams.put("DamageSources", Sets.newHashSet(e.getValue().keySet()));
-                runParams.put("DamageAmount", sum);
-                runParams.put("IsCombatDamage", isCombat);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.DamageTarget, ge);
+                runParams.put(AbilityKey.DamageSources, Sets.newHashSet(e.getValue().keySet()));
+                runParams.put(AbilityKey.DamageAmount, sum);
+                runParams.put(AbilityKey.IsCombatDamage, isCombat);
                 
-                ge.getGame().getTriggerHandler().runTriggerOld(TriggerType.DamageDoneOnce, runParams, false);
+                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);
             }
         }
     }

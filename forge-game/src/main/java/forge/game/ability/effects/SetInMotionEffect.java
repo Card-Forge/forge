@@ -1,8 +1,8 @@
 package forge.game.ability.effects;
 
 
-import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -46,9 +46,9 @@ public class SetInMotionEffect extends SpellAbilityEffect {
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
                 // Run triggers
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Scheme", controller.getActiveScheme());
-                game.getTriggerHandler().runTriggerOld(TriggerType.SetInMotion, runParams, false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Scheme, controller.getActiveScheme());
+                game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
             } else {
                 controller.setSchemeInMotion();
             }
