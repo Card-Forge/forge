@@ -532,7 +532,7 @@ public final class StaticAbilityContinuous {
                 if (addT.startsWith("AffectedX")) {
                     toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
                 }
-                affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp());
+                affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp(), stAb.getId());
             }
 
             // add keywords

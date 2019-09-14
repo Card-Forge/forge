@@ -798,7 +798,7 @@ public class StaticEffect {
             }
 
             // remove P/T bonus
-            affectedCard.removePTBoost(getTimestamp());
+            affectedCard.removePTBoost(getTimestamp(), ability.getId());
 
             // the view is updated in GameAction#checkStaticAbilities to avoid flickering
 

@@ -246,7 +246,7 @@ public class GameCopier {
             newCard.addType(type);
         }
         for (StaticAbility stAb : c.getStaticAbilities()) {
-            newCard.addStaticAbility(stAb);
+            newCard.addStaticAbility(stAb.copy(newCard, true));
         }
         for (SpellAbility sa : c.getSpellAbilities()) {
             SpellAbility saCopy = sa.copy(newCard, true);
@@ -277,7 +277,7 @@ public class GameCopier {
                 // TODO: Copy the full list with timestamps.
                 newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
             }
-            newCard.setPTBoost(c.getPTBoostMap());
+            newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());

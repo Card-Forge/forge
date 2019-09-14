@@ -198,7 +198,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     // stack of set power/toughness
     private Map<Long, Pair<Integer,Integer>> newPT = Maps.newTreeMap();
     private Map<Long, Pair<Integer,Integer>> newPTCharacterDefining = Maps.newTreeMap();
-    private Map<Long, Pair<Integer,Integer>> boostPT = Maps.newTreeMap();
+
+    // x=Static Avility id or 0, y=timestamp
+    private Table<Integer, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create();
 
     private String basePowerString = null;
     private String baseToughnessString = null;
@@ -3474,23 +3476,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         return result;
     }
 
-    public void addPTBoost(final Integer power, final Integer toughness, final long timestamp) {
-        boostPT.put(timestamp, Pair.of(power, toughness));
+    public void addPTBoost(final Integer power, final Integer toughness, final long timestamp, final Integer staticId) {
+        boostPT.put(staticId == null ? 0 : staticId, timestamp, Pair.of(power, toughness));
     }
 
-    public void removePTBoost(final long timestamp) {
-        boostPT.remove(timestamp);
+    public void removePTBoost(final long timestamp, final Integer staticId) {
+        boostPT.remove(staticId, timestamp);
     }
 
-    public Map<Long, Pair<Integer, Integer>> getPTBoostMap() {
-        return ImmutableMap.copyOf(boostPT);
+    public Table<Integer, Long, Pair<Integer, Integer>> getPTBoostTable() {
+        return ImmutableTable.copyOf(boostPT);
     }
 
-    public void setPTBoost(Map<Long, Pair<Integer, Integer>> map) {
+    public void setPTBoost(Table<Integer, Long, Pair<Integer, Integer>> table) {
         this.boostPT.clear();
-        for (Map.Entry<Long, Pair<Integer,Integer>> e : map.entrySet()) {
-            this.boostPT.put(e.getKey(), Pair.of(e.getValue().getLeft(), e.getValue().getRight()));
-        }
+        boostPT.putAll(table);
     }
 
     public final boolean isUntapped() {
@@ -3965,12 +3965,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         return null;
     }
     public final StaticAbility addStaticAbility(final StaticAbility stAb) {
-        return addStaticAbility(stAb, false);
-    }
-    public final StaticAbility addStaticAbility(final StaticAbility stAb, boolean intrinsic) {
-        final StaticAbility stAbCopy = new StaticAbility(stAb, this);
-        currentState.addStaticAbility(stAbCopy);
-        return stAbCopy;
+        currentState.addStaticAbility(stAb);
+        return stAb;
     }
     public final void removeStaticAbility(StaticAbility stAb) {
         currentState.removeStaticAbility(stAb);
