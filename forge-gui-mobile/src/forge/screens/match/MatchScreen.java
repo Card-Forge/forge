@@ -576,7 +576,7 @@ public class MatchScreen extends FScreen {
 
             //Draw Priority Human Multiplayer 2 player
             float oldAlphaComposite = g.getfloatAlphaComposite();
-            if ((getPlayerPanels().keySet().size() == 2) && noAIPlayer()){
+            if ((getPlayerPanels().keySet().size() == 2) && (countHuman() == 2)){
                 for (VPlayerPanel playerPanel: playerPanelsList){
                     midField = playerPanel.getTop();
                     y = midField - 0.5f;
@@ -694,13 +694,13 @@ public class MatchScreen extends FScreen {
             }
             return false;
         }
-        private boolean noAIPlayer(){
-            boolean noAi = true;
+        private int countHuman(){
+            int humanplayers = 0;
             for (VPlayerPanel playerPanel: playerPanelsList) {
-            if(playerPanel.getPlayer().isAI())
-                noAi = false;
+            if(!playerPanel.getPlayer().isAI())
+                humanplayers++;
             }
-            return noAi;
+            return humanplayers;
         }
     }
 }
