@@ -5,9 +5,6 @@ PT:0/0
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each color among permanents you control.
 SVar:X:Count$ColorsCtrl Permanent.YouCtrl+inZoneBattlefield
-A:AB$ Mana | Cost$ T | Produced$ W | ConditionPresent$ Permanent.YouCtrl+White | SubAbility$ DBManaU | SpellDescription$ For each color among permanents you control, add one mana of that color.
-SVar:DBManaU:DB$ Mana | Produced$ U | ConditionPresent$ Permanent.YouCtrl+Blue | SubAbility$ DBManaB
-SVar:DBManaB:DB$ Mana | Produced$ B | ConditionPresent$ Permanent.YouCtrl+Black | SubAbility$ DBManaR
-SVar:DBManaR:DB$ Mana | Produced$ R | ConditionPresent$ Permanent.YouCtrl+Red | SubAbility$ DBManaG
-SVar:DBManaG:DB$ Mana | Produced$ G | ConditionPresent$ Permanent.YouCtrl+Green
+A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmong_Permanent.YouCtrl | SpellDescription$ For each color among permanents you control, add one mana of that color.
+AI:RemoveDeck:All
 Oracle:Vigilance\nFaeburrow Elder gets +1/+1 for each color among permanents you control.\n{T}: For each color among permanents you control, add one mana of that color.

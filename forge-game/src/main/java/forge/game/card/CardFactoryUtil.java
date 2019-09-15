@@ -1102,13 +1102,11 @@ public class CardFactoryUtil {
             final String restriction = l[0].substring(11);
             final String[] rest = restriction.split(",");
             final CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
-            int n = 0;
-            for (final byte col : MagicColor.WUBRG) {
-                if (!CardLists.getColor(list, col).isEmpty()) {
-                    n++;
-                }
+            byte n = 0;
+            for (final Card card : list) {
+                n |= card.determineColor().getColor();
             }
-            return doXMath(n, m, c);
+            return doXMath(ColorSet.fromMask(n).countColors(), m, c);
         }
 
         if (sq[0].contains("CreatureType")) {
