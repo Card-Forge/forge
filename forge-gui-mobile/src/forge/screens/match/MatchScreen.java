@@ -3,7 +3,11 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
+
+import com.badlogic.gdx.graphics.Color;
+
 import forge.util.Localizer;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -569,6 +573,23 @@ public class MatchScreen extends FScreen {
                 y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
                 g.drawLine(1, BORDER_COLOR, x, y, w, y);
             }
+
+            //Draw Priority Human Multiplayer 2 player
+            float oldAlphaComposite = g.getfloatAlphaComposite();
+            if ((getPlayerPanels().keySet().size() == 2) && (countHuman() == 2)){
+                for (VPlayerPanel playerPanel: playerPanelsList){
+                    midField = playerPanel.getTop();
+                    y = midField - 0.5f;
+                    float adjustY = Forge.isLandscapeMode() ? y + 1f : midField;
+                    float adjustH = Forge.isLandscapeMode() ? playerPanel.getField().getBottom() - 1f : playerPanel.getBottom() - 1f;
+                    if(playerPanel.getPlayer().getHasPriority() && !playerPanel.getPlayer().isAI())
+                        g.setAlphaComposite(0.8f);
+                    else
+                        g.setAlphaComposite(0f);
+                    g.drawRect(4f, Color.CYAN, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
+                    g.setAlphaComposite(oldAlphaComposite);
+                }
+            }
         }
 
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -672,6 +693,14 @@ public class MatchScreen extends FScreen {
                     return !MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName().equals("");
             }
             return false;
+        }
+        private int countHuman(){
+            int humanplayers = 0;
+            for (VPlayerPanel playerPanel: playerPanelsList) {
+            if(!playerPanel.getPlayer().isAI())
+                humanplayers++;
+            }
+            return humanplayers;
         }
     }
 }
