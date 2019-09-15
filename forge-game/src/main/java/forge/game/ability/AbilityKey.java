@@ -10,8 +10,9 @@ public enum AbilityKey {
     AbilityMana("AbilityMana"),
     Activator("Activator"),
     Affected("Affected"),
-    Attach("Attach"),
     AllVotes("AllVotes"),
+    Amount("Amount"),
+    Attach("Attach"),
     AttachSource("AttachSource"),
     AttachTarget("AttachTarget"),
     Attacked("Attacked"),
@@ -51,14 +52,12 @@ public enum AbilityKey {
     Devoured("Devoured"),
     EchoPaid("EchoPaid"),
     Exploited("Exploited"),
+    Explorer("Explorer"),
     Event("Event"),
     Fighter("Fighter"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
     IsCombatDamage("IsCombatDamage"),
-    PayingMana("PayingMana"),
-    Phase("Phase"),
-    Player("Player"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
     IsMadness("IsMadness"),
     LifeAmount("LifeAmount"),
@@ -71,14 +70,23 @@ public enum AbilityKey {
     Object("Object"),
     Objects("Objects"),
     OtherAttackers("OtherAttackers"),
+    OtherVoters("OtherVoters"),
     Origin("Origin"),
     OriginalController("OriginalController"),
+    OriginalDefender("OriginalDefender"),
+    PayingMana("PayingMana"),
+    Phase("Phase"),
+    Player("Player"),
     Produced("Produced"),
     Result("Result"),
     Scheme("Scheme"),
     Source("Source"),
+    Sources("Sources"),
     SourceSA("SourceSA"),
+    SpellAbility("SpellAbility"),
     SpellAbilityStackInstance("SpellAbilityStackInstance"),
+    SpellAbilityTargetingCards("SpellAbilityTargetingCards"),
+    StackInstance("StackInstance"),
     StackSa("StackSa"),
     StackSi("StackSi"),
     Target("Target"),
@@ -99,8 +107,20 @@ public enum AbilityKey {
         return key;
     }
 
+    /**
+     * @param s A string that would be output from toString
+     * @return the corresponding key if there is one or null otherwise
+     */
+    public static AbilityKey fromString(String s) {
+        return null;
+    }
+
     public static <V> EnumMap<AbilityKey, V> newMap() {
         return new EnumMap<>(AbilityKey.class);
+    }
+
+    public static <V> EnumMap<AbilityKey, V> newMap(Map<AbilityKey, V> map) {
+        return new EnumMap<>(map);
     }
 
     public static Map<AbilityKey, Object> mapFromCard(forge.game.card.Card card) {

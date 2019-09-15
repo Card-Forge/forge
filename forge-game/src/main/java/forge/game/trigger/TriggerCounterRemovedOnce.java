@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
@@ -73,15 +74,15 @@ public class TriggerCounterRemovedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Amount", this.getRunParams().get("CounterAmount"));
+        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
+        sa.setTriggeringObject(AbilityKey.Amount, this.getRunParams().get("CounterAmount"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Removed from: ").append(sa.getTriggeringObject("Card"));
-        sb.append(" Amount: ").append(sa.getTriggeringObject("Amount"));
+        sb.append("Removed from: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(" Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 }

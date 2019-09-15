@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -138,7 +139,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
-    private Map<String, Object> triggeringObjects = Maps.newHashMap();
+    private Map<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
     private HashMap<String, Object> replacingObjects = Maps.newHashMap();
 
@@ -552,19 +553,19 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sa;
     }
 
-    public Map<String, Object> getTriggeringObjects() {
+    public Map<AbilityKey, Object> getTriggeringObjects() {
         return triggeringObjects;
     }
-    public void setTriggeringObjects(final Map<String, Object> triggeredObjects) {
-        triggeringObjects = Maps.newHashMap(triggeredObjects);
+    public void setTriggeringObjects(final Map<AbilityKey, Object> triggeredObjects) {
+        triggeringObjects = AbilityKey.newMap(triggeredObjects);
     }
-    public Object getTriggeringObject(final String type) {
+    public Object getTriggeringObject(final AbilityKey type) {
         return triggeringObjects.get(type);
     }
-    public void setTriggeringObject(final String type, final Object o) {
+    public void setTriggeringObject(final AbilityKey type, final Object o) {
         triggeringObjects.put(type, o);
     }
-    public boolean hasTriggeringObject(final String type) {
+    public boolean hasTriggeringObject(final AbilityKey type) {
         return triggeringObjects.containsKey(type);
     }
     public void resetTriggeringObjects() {

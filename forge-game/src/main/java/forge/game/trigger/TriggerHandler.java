@@ -248,7 +248,7 @@ public class TriggerHandler {
 
             List<Trigger> trigger = Lists.newArrayList();
             for (final Trigger t : activeTriggers) {
-                if (canRunTrigger(t,wt.getMode(),toStringMap(wt.getParams()))) {
+                if (canRunTrigger(t,wt.getMode(),wt.getParams())) {
                     trigger.add(t);
                 }
             }
@@ -337,7 +337,7 @@ public class TriggerHandler {
 
     private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
         for (final Trigger t: activeTriggers) {
-            if (canRunTrigger(t, TriggerType.Always, toStringMap(runParams))) {
+            if (canRunTrigger(t, TriggerType.Always, runParams)) {
                 runSingleTrigger(t, toStringMap(runParams));
             }
         }
@@ -375,7 +375,7 @@ public class TriggerHandler {
 
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
-            if (t.isStatic() && canRunTrigger(t, mode, toStringMap(runParams))) {
+            if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
                 runSingleTrigger(t, toStringMap(runParams));
 
                 checkStatics = true;
@@ -427,7 +427,7 @@ public class TriggerHandler {
         boolean checkStatics = false;
 
         for (final Trigger t : triggers) {
-            if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, stringRunParams)) {
+            if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
                 if (runParams.containsKey(AbilityKey.Card) && runParams.get(AbilityKey.Card) instanceof Card) {
                     card = (Card) runParams.get(AbilityKey.Card);
                     if (runParams.containsKey(AbilityKey.Destination)
@@ -458,7 +458,7 @@ public class TriggerHandler {
 
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
-                if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, stringRunParams)) {
+                if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
                     runSingleTrigger(deltrig, stringRunParams);
                     delayedTriggers.remove(deltrig);
                 }
@@ -501,7 +501,7 @@ public class TriggerHandler {
         return true;
     }
 
-    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
+    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<AbilityKey, Object> runParams) {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
@@ -514,7 +514,7 @@ public class TriggerHandler {
             return false; // Conditions aren't right.
         }
 
-        if (!regtrig.performTest(runParams)) {
+        if (!regtrig.performTest(toStringMap(runParams))) {
             return false; // Test failed.
         }
         if (regtrig.isSuppressed()) {
@@ -531,10 +531,10 @@ public class TriggerHandler {
         // Torpor Orb check
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
                 && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
-            if (runParams.get("Destination") instanceof String) {
-                final String dest = (String) runParams.get("Destination");
-                if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
-                    final Card card = (Card) runParams.get("Card");
+            if (runParams.get(AbilityKey.Destination) instanceof String) {
+                final String dest = (String) runParams.get(AbilityKey.Destination);
+                if (dest.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                    final Card card = (Card) runParams.get(AbilityKey.Card);
                     if (card.isCreature()) {
                         return false;
                     }

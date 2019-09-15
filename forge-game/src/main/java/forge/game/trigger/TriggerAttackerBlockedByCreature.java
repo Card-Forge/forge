@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -87,15 +88,15 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
+        sa.setTriggeringObject(AbilityKey.Attacker, this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject(AbilityKey.Blocker, this.getRunParams().get("Blocker"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject("Attacker")).append(", ");
-        sb.append("Blocker: ").append(sa.getTriggeringObject("Blocker"));
+        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
+        sb.append("Blocker: ").append(sa.getTriggeringObject(AbilityKey.Blocker));
         return sb.toString();
     }
 }

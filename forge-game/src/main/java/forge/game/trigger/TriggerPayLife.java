@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -60,15 +61,15 @@ public class TriggerPayLife extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("LifeAmount", getRunParams().get("LifeAmount"));
-        sa.setTriggeringObject("Player", getRunParams().get("Player"));
+        sa.setTriggeringObject(AbilityKey.LifeAmount, getRunParams().get("LifeAmount"));
+        sa.setTriggeringObject(AbilityKey.Player, getRunParams().get("Player"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
-        sb.append("paid Amount: ").append(sa.getTriggeringObject("LifeAmount"));
+        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append("paid Amount: ").append(sa.getTriggeringObject(AbilityKey.LifeAmount));
         return sb.toString();
     }
 }

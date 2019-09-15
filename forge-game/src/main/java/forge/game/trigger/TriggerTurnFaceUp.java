@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -60,13 +61,13 @@ public class TriggerTurnFaceUp extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Turn Face up: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Turn Face up: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

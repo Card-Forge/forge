@@ -139,13 +139,15 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             if (defined.contains("LKICopy")) { //Triggered*LKICopy
                 int lkiPosition = defined.indexOf("LKICopy");
-                final Object crd = root.getTriggeringObject(defined.substring(9, lkiPosition));
+                AbilityKey type = AbilityKey.fromString(defined.substring(9, lkiPosition));
+                final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
                     c = (Card) crd;
                 }
             }
             else {
-                final Object crd = root.getTriggeringObject(defined.substring(9));
+                AbilityKey type = AbilityKey.fromString(defined.substring(9));
+                final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
                 } else if (crd instanceof Iterable) {
@@ -641,12 +643,12 @@ public class AbilityUtils {
         }
         if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
             final SpellAbility root = sa.getRootAbility();
-            Object o = root.getTriggeringObject(calcX[0].substring(9));
+            Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
             return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
         }
         if (calcX[0].equals("TriggeredSpellAbility")) {
             final SpellAbility root = sa.getRootAbility();
-            SpellAbility sat = (SpellAbility) root.getTriggeringObject("SpellAbility");
+            SpellAbility sat = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
             return calculateAmount(sat.getHostCard(), calcX[1], sat);
         }
         // Added on 9/30/12 (ArsenalNut) - Ended up not using but might be useful in future
@@ -695,11 +697,11 @@ public class AbilityUtils {
         }
         else if (calcX[0].startsWith("TriggerObjects")) {
             final SpellAbility root = sa.getRootAbility();
-            list = (CardCollection) root.getTriggeringObject(calcX[0].substring(14));
+            list = (CardCollection) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14)));
         }
         else if (calcX[0].startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
-            list = new CardCollection((Card) root.getTriggeringObject(calcX[0].substring(9)));
+            list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9))));
         }
         else if (calcX[0].startsWith("TriggerCount")) {
             // TriggerCount is similar to a regular Count, but just
@@ -707,7 +709,7 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getTriggeringObject(l[0]);
+            final int count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
 
             return CardFactoryUtil.doXMath(count, m, card) * multiplier;
         }
@@ -777,19 +779,19 @@ public class AbilityUtils {
         final Object o;
         if (type.startsWith("Triggered")) {
             if (type.contains("Card")) {
-                o = sa.getTriggeringObject("Card");
+                o = sa.getTriggeringObject(AbilityKey.Card);
             }
             else if (type.contains("Object")) {
-                o = sa.getTriggeringObject("Object");
+                o = sa.getTriggeringObject(AbilityKey.Object);
             }
             else if (type.contains("Attacker")) {
-                o = sa.getTriggeringObject("Attacker");
+                o = sa.getTriggeringObject(AbilityKey.Attacker);
             }
             else if (type.contains("Blocker")) {
-                o = sa.getTriggeringObject("Blocker");
+                o = sa.getTriggeringObject(AbilityKey.Blocker);
             }
             else {
-                o = sa.getTriggeringObject("Card");
+                o = sa.getTriggeringObject(AbilityKey.Card);
             }
 
             if (!(o instanceof Card)) {
@@ -1004,7 +1006,7 @@ public class AbilityUtils {
             if (defParsed.endsWith("Controller")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 10);
-                final Object c = root.getTriggeringObject(triggeringType);
+                final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (c instanceof Card) {
                     o = ((Card) c).getController();
                 }
@@ -1015,7 +1017,7 @@ public class AbilityUtils {
             else if (defParsed.endsWith("Opponent")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
-                final Object c = root.getTriggeringObject(triggeringType);
+                final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (c instanceof Card) {
                     o = ((Card) c).getController().getOpponents();
                 }
@@ -1026,14 +1028,14 @@ public class AbilityUtils {
             else if (defParsed.endsWith("Owner")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 5);
-                final Object c = root.getTriggeringObject(triggeringType);
+                final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (c instanceof Card) {
                     o = ((Card) c).getOwner();
                 }
             }
             else {
                 final String triggeringType = defParsed.substring(9);
-                o = root.getTriggeringObject(triggeringType);
+                o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             }
             if (o != null) {
                 if (o instanceof Player) {
@@ -1252,13 +1254,13 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
 
             final String triggeringType = defined.substring(9);
-            final Object o = root.getTriggeringObject(triggeringType);
+            final Object o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
                 // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
                 // information so it's not lost if the calling code is interested in targets of the triggered SA.
                 if (triggeringType.equals("SpellAbility")) {
-                    final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject("SpellAbilityTargetingCards");
+                    final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
                     if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
                         if (tgtList != null && tgtList.size() > 0) {
                             TargetChoices tc = new TargetChoices();
@@ -1390,7 +1392,7 @@ public class AbilityUtils {
             cost = new Cost(source.getManaCost(), true);
         }
         else if (unlessCost.equals("TriggeredSpellManaCost")) {
-            SpellAbility triggered = (SpellAbility) sa.getRootAbility().getTriggeringObject("SpellAbility");
+            SpellAbility triggered = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
             Card triggeredCard = triggered.getHostCard();
             if (triggeredCard.getManaCost() == null) {
                 cost = new Cost(ManaCost.ZERO, true);
@@ -1608,7 +1610,7 @@ public class AbilityUtils {
                 // Count$TriggeredPayingMana.<Color1>.<Color2>
                 if (sq[0].startsWith("TriggeredPayingMana")) {
                     final SpellAbility root = sa.getRootAbility();
-                    String mana = (String) root.getTriggeringObject("PayingMana");
+                    String mana = (String) root.getTriggeringObject(AbilityKey.PayingMana);
                     int count = 0;
                     Matcher mat = Pattern.compile(StringUtils.join(sq, "|", 1, sq.length)).matcher(mana);
                     while (mat.find()) {
