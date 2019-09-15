@@ -23,6 +23,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
@@ -79,7 +80,7 @@ public class GameAction {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
     
-    public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
+    private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
@@ -284,19 +285,19 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            Map<String, Object> repParams = Maps.newHashMap();
-            repParams.put("Event", "Moved");
-            repParams.put("Affected", copied);
-            repParams.put("CardLKI", lastKnownInfo);
-            repParams.put("Cause", cause);
-            repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
-            repParams.put("Destination", zoneTo.getZoneType());
+            Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+            repParams.put(AbilityKey.Event, "Moved");
+            repParams.put(AbilityKey.Affected, copied);
+            repParams.put(AbilityKey.CardLKI, lastKnownInfo);
+            repParams.put(AbilityKey.Cause, cause);
+            repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
+            repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
 
             if (params != null) {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(repParams);
+            ReplacementResult repres = game.getReplacementHandler().run(EnumMapUtil.toStringMap(repParams));
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -399,13 +400,12 @@ public class GameAction {
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", lastKnownInfo);
-        runParams.put("Cause", cause);
-        runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
-        runParams.put("Destination", zoneTo.getZoneType().name());
-        runParams.put("SpellAbilityStackInstance", game.stack.peek());
-        runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(lastKnownInfo);
+        runParams.put(AbilityKey.Cause, cause);
+        runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
+        runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
+        runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
 
         if (params != null) {
             runParams.putAll(params);
@@ -413,9 +413,8 @@ public class GameAction {
 
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
-            final Map<String, Object> runParams2 = Maps.newHashMap();
-            runParams2.put("Card", lastKnownInfo);
-            runParams2.put("OriginalController", zoneFrom.getPlayer());
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
+            runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
             if(params != null) {
                 runParams2.putAll(params);
             }
@@ -528,18 +527,18 @@ public class GameAction {
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause) {
         return moveTo(zoneTo, c, cause, null);
     }
-    
-    public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<String, Object> params) {
-       // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
-                                             // use FThreads.invokeInNewThread to run code in a pooled thread
-        return moveTo(zoneTo, c, null, cause, params);
-    }
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
         return moveTo(zoneTo, c, position, cause, null);
     }
-    
-    public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
+
+    private Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
+        // use FThreads.invokeInNewThread to run code in a pooled thread
+        return moveTo(zoneTo, c, null, cause, params);
+    }
+
+    private Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final Zone zoneFrom = game.getZoneOf(c);
@@ -599,9 +598,8 @@ public class GameAction {
         c.setTurnInZone(tiz);
         c.setCameUnderControlSinceLastUpkeep(true);
 
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", c);
-        runParams.put("OriginalController", original);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+        runParams.put(AbilityKey.OriginalController, original);
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -612,17 +610,14 @@ public class GameAction {
     }
 
     public final Card moveToStack(final Card c, SpellAbility cause) {
-        return moveToStack(c, cause, null);
-    }
-    public final Card moveToStack(final Card c, SpellAbility cause, Map<String, Object> params) {
         final Zone stack = game.getStackZone();
-        return moveTo(stack, c, cause, params);
+        return moveTo(stack, c, cause);
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
         return moveToGraveyard(c, cause, null);
     }
-    public final Card moveToGraveyard(final Card c, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToGraveyard(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone grave = c.getOwner().getZone(ZoneType.Graveyard);
         // must put card in OWNER's graveyard not controller's
         return moveTo(grave, c, cause, params);
@@ -632,25 +627,21 @@ public class GameAction {
         return moveToHand(c, cause, null);
     }
     
-    public final Card moveToHand(final Card c, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToHand(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c, cause, params);
     }
 
     public final Card moveToPlay(final Card c, SpellAbility cause) {
-        return moveToPlay(c, cause, null);
-    }
-    
-    public final Card moveToPlay(final Card c, SpellAbility cause, Map<String, Object> params) {
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
-        return moveTo(play, c, cause, params);
+        return moveTo(play, c, cause, null);
     }
 
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause) {
         return moveToPlay(c, p, cause, null);
     }
     
-    public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<AbilityKey, Object> params) {
         // move to a specific player's Battlefield
         final PlayerZone play = p.getZone(ZoneType.Battlefield);
         return moveTo(play, c, cause, params);
@@ -660,7 +651,7 @@ public class GameAction {
         return moveToBottomOfLibrary(c, cause, null);
     }
     
-    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToLibrary(c, -1, cause, params);
     }
 
@@ -668,7 +659,7 @@ public class GameAction {
         return moveToLibrary(c, cause, null);
     }
     
-    public final Card moveToLibrary(final Card c, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToLibrary(c, 0, cause, params);
     }
 
@@ -676,7 +667,7 @@ public class GameAction {
         return moveToLibrary(c, libPosition, cause, null);
     }
     
-    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
         if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
@@ -685,21 +676,17 @@ public class GameAction {
     }
 
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, null);
-    }
-    
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<String, Object> params) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
             deckPosition = deck.size();
         }
-        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
+        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause);
     }
 
     public final Card exile(final Card c, SpellAbility cause) {
         return exile(c, cause, null);
     }
-    public final Card exile(final Card c, SpellAbility cause, Map<String, Object> params) {
+    public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         if (game.isCardExiled(c)) {
             return c;
         }
@@ -709,10 +696,9 @@ public class GameAction {
         final Card copied = moveTo(removed, c, cause, params);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", c);
-        runParams.put("Cause", cause);
-        runParams.put("Origin", origin.getZoneType().name());
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+        runParams.put(AbilityKey.Cause, cause);
+        runParams.put(AbilityKey.Origin, origin.getZoneType().name());
         if (params != null) {
             runParams.putAll(params);
         }
@@ -723,30 +709,22 @@ public class GameAction {
     }
 
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
-        return moveTo(name, c, cause, null);
-    }
-    
-    public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause, Map<String, Object> params) {
-        return moveTo(name, c, 0, cause, params);
-    }
-    
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
-        return moveTo(name, c, libPosition, cause, null);
+        return moveTo(name, c, 0, cause);
     }
 
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<String, Object> params) {
+    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
-            case Hand:          return moveToHand(c, cause, params);
-            case Library:       return moveToLibrary(c, libPosition, cause, params);
-            case Battlefield:   return moveToPlay(c, cause, params);
-            case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:         return exile(c, cause, params);
-            case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
+            case Hand:          return moveToHand(c, cause);
+            case Library:       return moveToLibrary(c, libPosition, cause);
+            case Battlefield:   return moveToPlay(c, cause);
+            case Graveyard:     return moveToGraveyard(c, cause);
+            case Exile:         return exile(c, cause);
+            case Stack:         return moveToStack(c, cause);
+            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause);
+            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause);
             default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause, params);
+                return moveTo(c.getOwner().getZone(name), c, cause);
         }
     }
 
@@ -912,7 +890,7 @@ public class GameAction {
         // preList means that this is run by a pre Check with LKI objects
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
             game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
@@ -1434,9 +1412,8 @@ public class GameAction {
         game.fireEvent(new GameEventCardDestroyed());
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", c);
-        runParams.put("Causer", activator);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+        runParams.put(AbilityKey.Causer, activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 
         final Card sacrificed = sacrificeDestroy(c, sa, table);
@@ -1614,8 +1591,7 @@ public class GameAction {
             checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game
-            final Map<String, Object> runParams = Maps.newHashMap();
-            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, true);
+            game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
 
@@ -1778,8 +1754,8 @@ public class GameAction {
         game.setMonarch(p);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Player", p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
 
@@ -1840,8 +1816,8 @@ public class GameAction {
 
             if (cause != null) {
                 // set up triggers (but not actually do them until later)
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Player", p);
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, p);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }

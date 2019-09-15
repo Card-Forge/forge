@@ -1,6 +1,7 @@
 package forge.match;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -108,9 +109,9 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        sortedPlayers.sort(new Comparator<RegisteredPlayer>() {
-            @Override
-            public final int compare(final RegisteredPlayer p1, final RegisteredPlayer p2) {
+        Collections.sort(sortedPlayers, new Comparator<RegisteredPlayer>() {
+            @Override public final int compare(final RegisteredPlayer p1, final RegisteredPlayer p2) {
+
                 final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
                 final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
                 return Integer.compare(v1, v2);

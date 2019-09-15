@@ -1146,7 +1146,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
-        sortedList.sort(new Comparator<Entry<String, Integer>>() {
+        Collections.sort(sortedList, new Comparator<Entry<String, Integer>>() {
             public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
@@ -2433,9 +2433,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                     TextUtil.concatWithSpace("Should", forgeCard.toString(), "be added to the top or to the bottom of the library?"), true, Arrays.asList("Top", "Bottom"));
                         }
                         if (lastTopOfTheLibrary) {
-                            game.getAction().moveToLibrary(forgeCard, null, null);
+                            game.getAction().moveToLibrary(forgeCard, null);
                         } else {
-                            game.getAction().moveToBottomOfLibrary(forgeCard, null, null);
+                            game.getAction().moveToBottomOfLibrary(forgeCard, null);
                         }
                     } else {
                         game.getAction().moveTo(targetZone, forgeCard, null);

@@ -205,6 +205,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.ExtraTurnCount, val);
     }
 
+    public boolean getHasPriority() {
+        return get(TrackableProperty.HasPriority);
+    }
+    public void setHasPriority(final boolean val) {
+        set(TrackableProperty.HasPriority, val);
+    }
+
     public int getMaxHandSize() {
         return get(TrackableProperty.MaxHandSize);
     }

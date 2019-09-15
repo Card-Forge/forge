@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -214,11 +215,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             int prevent = damage - restDamage;
             preventMap.put(source, this, damage - restDamage);
 
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("DamageTarget", this);
-            runParams.put("DamageAmount", prevent);
-            runParams.put("DamageSource", source);
-            runParams.put("IsCombatDamage", isCombat);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.DamageTarget, this);
+            runParams.put(AbilityKey.DamageAmount, prevent);
+            runParams.put(AbilityKey.DamageSource, source);
+            runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
             getGame().getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
         }

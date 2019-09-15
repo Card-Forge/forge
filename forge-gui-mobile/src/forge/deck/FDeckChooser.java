@@ -36,6 +36,7 @@ import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -63,10 +64,10 @@ public class FDeckChooser extends FScreen {
     private boolean refreshingDeckType;
 
     private final DeckManager lstDecks;
-    private final FButton btnNewDeck = new FButton("New Deck");
-    private final FButton btnEditDeck = new FButton("Edit Deck");
-    private final FButton btnViewDeck = new FButton("View Deck");
-    private final FButton btnRandom = new FButton("Random Deck");
+    private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
+    private final FButton btnEditDeck = new FButton(Localizer.getInstance().getMessage("btnEditDeck"));
+    private final FButton btnViewDeck = new FButton(Localizer.getInstance().getMessage("lblViewDeck"));
+    private final FButton btnRandom = new FButton(Localizer.getInstance().getMessage("lblRandomDeck"));
 
     private RegisteredPlayer player;
     private boolean isAi;

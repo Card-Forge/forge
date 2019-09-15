@@ -2036,4 +2036,23 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(dimirdgAfterCopy2.isFlipped());
         assertFalse(dimirdgAfterCopy2.getType().isLegendary());
     }
+
+    public void testStaticMultiPump() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card c1 = addCard("Creakwood Liege", p);
+        Card c2 = addCard("Creakwood Liege", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        // update stats state
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(c1.getNetPower() == 4);
+        assertTrue(c1.getNetToughness() == 4);
+
+        assertTrue(c2.getNetPower() == 4);
+        assertTrue(c2.getNetToughness() == 4);
+    }
 }

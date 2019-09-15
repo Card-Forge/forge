@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -209,9 +209,9 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             caller.getGame().getAction().nofityOfValue(sa, caller, wonFlip ? "win" : "lose", null);
 
             // Run triggers
-            Map<String,Object> runParams = Maps.newHashMap();
-            runParams.put("Player", caller);
-            runParams.put("Result", Boolean.valueOf(wonFlip));
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Player, caller);
+            runParams.put(AbilityKey.Result, wonFlip);
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         } while (sa.hasParam("FlipUntilYouLose") && wonFlip);
         

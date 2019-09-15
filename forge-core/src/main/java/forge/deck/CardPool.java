@@ -27,6 +27,7 @@ import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -197,7 +198,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
-        main2sort.sort(ItemPoolSorter.BY_NAME_THEN_SET);
+        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
         final CardDb commonDb = StaticData.instance().getCommonCards();
         StringBuilder sb = new StringBuilder();
 

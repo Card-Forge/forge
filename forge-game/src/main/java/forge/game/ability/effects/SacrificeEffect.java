@@ -1,10 +1,10 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -36,9 +36,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
                     sa, "Pay Echo", ManaPaymentPurpose.Echo);
             }
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("EchoPaid", Boolean.valueOf(isPaid));
-            runParams.put("Card", card);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+            runParams.put(AbilityKey.EchoPaid, isPaid);
             game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
                 return;
@@ -65,10 +64,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
             sb.append("Cumulative upkeep for ").append(card);
             
             boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("CumulativeUpkeepPaid", Boolean.valueOf(isPaid));
-            runParams.put("Card", card);
-            runParams.put("PayingMana", StringUtils.join(sa.getPayingMana(), ""));
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+            runParams.put(AbilityKey.CumulativeUpkeepPaid, isPaid);
+            runParams.put(AbilityKey.PayingMana, StringUtils.join(sa.getPayingMana(), ""));
             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
                 return;
@@ -147,15 +145,14 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);
-                        final Map<String, Object> runParams = Maps.newHashMap();
-                        runParams.put("Devoured", sac);
+                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                        runParams.put(AbilityKey.Devoured, sac);
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
                         card.addExploited(lKICopy);
-                        final Map<String, Object> runParams = Maps.newHashMap();
-                        runParams.put("Exploited", lKICopy);
-                        runParams.put("Card", card);
+                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+                        runParams.put(AbilityKey.Exploited, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {

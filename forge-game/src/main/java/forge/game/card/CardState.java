@@ -529,7 +529,7 @@ public class CardState extends GameObject {
         staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
-                staticAbilities.add(new StaticAbility(sa, this.card));
+                staticAbilities.add(sa.copy(card, lki));
             }
         }
     }

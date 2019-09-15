@@ -1,0 +1,6 @@
+Name:Raging Redcap
+ManaCost:2 R
+Types:Creature Goblin Knight
+PT:1/2
+K:Double Strike
+Oracle:Double strike

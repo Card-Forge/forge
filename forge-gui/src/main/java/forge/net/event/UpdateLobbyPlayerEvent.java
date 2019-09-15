@@ -38,6 +38,13 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public static UpdateLobbyPlayerEvent deckUpdate(final DeckSection section, final CardPool cards) {
         return new UpdateLobbyPlayerEvent(section, cards);
     }
+    public static UpdateLobbyPlayerEvent nameUpdate(final String name) {
+        return new UpdateLobbyPlayerEvent(name);
+    }
+
+    private UpdateLobbyPlayerEvent(String name) {
+        this.name = name;
+    }
 
     private UpdateLobbyPlayerEvent(final Deck deck) {
         this.deck = deck;

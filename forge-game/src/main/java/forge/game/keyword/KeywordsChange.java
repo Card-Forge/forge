@@ -192,7 +192,7 @@ public class KeywordsChange  implements Cloneable {
 
             result.removeKeywordInterfaces = Lists.newArrayList();
             for (KeywordInterface ki : this.removeKeywordInterfaces) {
-                removeKeywordInterfaces.add(ki.copy(host, lki));
+                result.removeKeywordInterfaces.add(ki.copy(host, lki));
             }
 
             return result;

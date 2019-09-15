@@ -30,7 +30,7 @@ public abstract class AbstractMulligan {
         CardCollection toMulligan = new CardCollection(player.getCardsIn(ZoneType.Hand));
         revealPreMulligan(toMulligan);
         for (final Card c : toMulligan) {
-            player.getGame().getAction().moveToLibrary(c, null, null);
+            player.getGame().getAction().moveToLibrary(c, null);
         }
         try {
             Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up

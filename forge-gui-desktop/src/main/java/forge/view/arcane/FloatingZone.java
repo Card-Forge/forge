@@ -19,6 +19,7 @@ package forge.view.arcane;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 import java.util.Comparator;
 
 import java.awt.event.MouseEvent;
@@ -126,7 +127,7 @@ public class FloatingZone extends FloatingCardArea {
         if ( zoneCards != null ) {
             cardList = new FCollection<>(zoneCards);
             if ( sortedByName ) {
-                cardList.sort(comp);
+                Collections.sort(cardList, comp);
             }
             return cardList;
         } else {

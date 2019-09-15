@@ -255,7 +255,7 @@ public class CardRenderer {
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
-            String name = state.getName();
+            String name = CardTranslation.getTranslatedName(state.getName());
             if (count > 0) { //preface name with count if applicable
                 name = count + " " + name;
             }
@@ -317,7 +317,7 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
 
         x += cardArtWidth;
-        String name = card.getCurrentState().getName();
+        String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }
@@ -448,7 +448,7 @@ public class CardRenderer {
         //draw name and mana cost overlays if card is small or default card image being used
         if (h <= NAME_COST_THRESHOLD && canShow) {
             if (showCardNameOverlay(card)) {
-                g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
+                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
@@ -558,39 +558,37 @@ public class CardRenderer {
             }
 
             //if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
-            layout.setText(font, String.valueOf(maxCounters));
-
-            if (counterBoxBaseWidth + layout.width > w) {
-
-                drawCounterImage(card, g, x, y, w, h);
-                return;
+            if(font != null && !String.valueOf(maxCounters).isEmpty()){
+                layout.setText(font, String.valueOf(maxCounters));
+                if (counterBoxBaseWidth + layout.width > w) {
+                    drawCounterImage(card, g, x, y, w, h);
+                    return;
+                }
             }
-
         }
 
         for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
-
             final CounterType counter = counterEntry.getKey();
             final int numberOfCounters = counterEntry.getValue();
             //final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
-            layout.setText(font, String.valueOf(numberOfCounters));
-            final float counterBoxRealWidth = counterBoxBaseWidth + layout.width + 4;
+            if(font != null && !String.valueOf(numberOfCounters).isEmpty()){
+                layout.setText(font, String.valueOf(numberOfCounters));
+                final float counterBoxRealWidth = counterBoxBaseWidth + layout.width + 4;
 
-            final float counterYOffset = spaceFromTopOfCard - (currentCounter++ * (counterBoxHeight + counterBoxSpacing));
+                final float counterYOffset = spaceFromTopOfCard - (currentCounter++ * (counterBoxHeight + counterBoxSpacing));
 
-            g.fillRect(counterBackgroundColor, x - 3, counterYOffset, counterBoxRealWidth, counterBoxHeight);
+                g.fillRect(counterBackgroundColor, x - 3, counterYOffset, counterBoxRealWidth, counterBoxHeight);
 
-            if (!counterColorCache.containsKey(counter)) {
-                counterColorCache.put(counter, new Color(counter.getRed() / 255.0f, counter.getGreen() / 255.0f, counter.getBlue() / 255.0f, 1.0f));
+                if (!counterColorCache.containsKey(counter)) {
+                    counterColorCache.put(counter, new Color(counter.getRed() / 255.0f, counter.getGreen() / 255.0f, counter.getBlue() / 255.0f, 1.0f));
+                }
+
+                Color counterColor = counterColorCache.get(counter);
+
+                drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
+                drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
             }
-
-            Color counterColor = counterColorCache.get(counter);
-
-            drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
-            drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
-
         }
-
     }
 
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -600,22 +598,22 @@ public class CardRenderer {
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }
+        if(font != null && !text.isEmpty()) {
+            layout.setText(font, text);
+            TextBounds textBounds = new TextBounds(layout.width, layout.height);
 
-        layout.setText(font, text);
-        TextBounds textBounds = new TextBounds(layout.width, layout.height);
+            float textHeight = textBounds.height;
+            if (h > textHeight) {
+                y += (h - textHeight) / 2;
+            }
 
-        float textHeight = textBounds.height;
-        if (h > textHeight) {
-            y += (h - textHeight) / 2;
+            font.setColor(color);
+            font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, true);
+
+            if (color.a < 1) {
+                Gdx.gl.glDisable(GL_BLEND);
+            }
         }
-
-        font.setColor(color);
-        font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, true);
-
-        if (color.a < 1) {
-            Gdx.gl.glDisable(GL_BLEND);
-        }
-
     }
 
     private static void drawCounterImage(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {

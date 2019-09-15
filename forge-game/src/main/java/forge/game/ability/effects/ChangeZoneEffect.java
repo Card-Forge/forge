@@ -4,12 +4,12 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -470,7 +470,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition, sa, null);
+                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition, sa);
 
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
@@ -534,7 +534,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     movedCard = game.getAction().moveTo(
-                            tgtC.getController().getZone(destination), tgtC, sa, null);
+                            tgtC.getController().getZone(destination), tgtC, sa);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, false,
@@ -591,7 +591,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         tgtC.setExiledWith(host);
                     }
-                    movedCard = game.getAction().moveTo(destination, tgtC, sa, null);
+                    movedCard = game.getAction().moveTo(destination, tgtC, sa);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
                         if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)
@@ -830,9 +830,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Player", decider);
-            runParams.put("Target", Lists.newArrayList(player));
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Player, decider);
+            runParams.put(AbilityKey.Target, Lists.newArrayList(player));
             decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
 
@@ -967,7 +967,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, null);
+                movedCard = game.getAction().moveToLibrary(c, libraryPos, sa);
             }
             else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
@@ -1096,7 +1096,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addFaceupCommand(unanimate);
                     }
                 }
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa, null);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
@@ -1108,7 +1108,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c, sa, null);
+                movedCard = game.getAction().exile(c, sa);
                 if (!c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
@@ -1121,7 +1121,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             else {
-                movedCard = game.getAction().moveTo(destination, c, sa, null);
+                movedCard = game.getAction().moveTo(destination, c, sa);
             }
             
             movedCards.add(movedCard);
@@ -1131,9 +1131,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (champion) {
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Card", source);
-                runParams.put("Championed", c);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+                runParams.put(AbilityKey.Championed, c);
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
             
@@ -1199,9 +1198,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
         
-        Map<String,Object> params = Maps.newHashMap();
-        params.put("StackSa", tgtSA);
-        params.put("StackSi", si);
+        Map<AbilityKey,Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.StackSa, tgtSA);
+        params.put(AbilityKey.StackSi, si);
 
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {

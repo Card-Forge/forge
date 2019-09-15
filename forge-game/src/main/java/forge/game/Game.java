@@ -27,6 +27,7 @@ import com.google.common.eventbus.EventBus;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
+import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
@@ -713,8 +714,8 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
-        final Map<String, Object> runParams = new TreeMap<>();
-        runParams.put("Player", p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
     }
 

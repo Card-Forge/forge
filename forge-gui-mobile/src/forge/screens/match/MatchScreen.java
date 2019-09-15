@@ -3,6 +3,11 @@ package forge.screens.match;
 import java.util.*;
 import java.util.Map.Entry;
 
+
+import com.badlogic.gdx.graphics.Color;
+
+import forge.util.Localizer;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -136,17 +141,18 @@ public class MatchScreen extends FScreen {
         stack.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
+        final Localizer localizer = Localizer.getInstance();
         if (topPlayerPrompt == null) {
-            menuBar.addTab("Game", gameMenu);
-            menuBar.addTab("Players (" + playerPanels.size() + ")", players);
-            menuBar.addTab("Log", log);
-            menuBar.addTab("Dev", devMenu);
-            menuBar.addTab("Stack (0)", stack);
+            menuBar.addTab(localizer.getMessage("lblGame"), gameMenu);
+            menuBar.addTab(localizer.getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
+            menuBar.addTab(localizer.getMessage("lblLog"), log);
+            menuBar.addTab(localizer.getMessage("lblDev"), devMenu);
+            menuBar.addTab( localizer.getMessage("lblStack") + " (0)", stack);
         }
         else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
-            menuBar.addTab("Stack (0)", stack);
+            menuBar.addTab(localizer.getMessage("Stack") + " (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
 
             //create fake menu tabs for other drop downs so they can be positioned as needed
@@ -223,16 +229,18 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
+            final Localizer localizer = Localizer.getInstance();
+
             if (isTopHumanPlayerActive() == getRotate180()) {
-                addItem(new MenuItem("Game", gameMenu));
-                addItem(new MenuItem("Players (" + playerPanels.size() + ")", players));
-                addItem(new MenuItem("Log", log));
+                addItem(new MenuItem(localizer.getMessage("lblGame"), gameMenu));
+                addItem(new MenuItem(localizer.getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
+                addItem(new MenuItem(localizer.getMessage("lblLog"), log));
                 if (ForgePreferences.DEV_MODE) {
-                    addItem(new MenuItem("Dev", devMenu));
+                    addItem(new MenuItem(localizer.getMessage("lblDev"), devMenu));
                 }
             }
             else { //TODO: Support using menu when player doesn't have priority
-                FMenuItem item = new FMenuItem("Must wait for priority...", null);
+                FMenuItem item = new FMenuItem(localizer.getMessage("lblMustWaitPriority"), null);
                 item.setEnabled(false);
                 addItem(item);
             }
@@ -565,6 +573,23 @@ public class MatchScreen extends FScreen {
                 y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
                 g.drawLine(1, BORDER_COLOR, x, y, w, y);
             }
+
+            //Draw Priority Human Multiplayer 2 player
+            float oldAlphaComposite = g.getfloatAlphaComposite();
+            if ((getPlayerPanels().keySet().size() == 2) && (countHuman() == 2)){
+                for (VPlayerPanel playerPanel: playerPanelsList){
+                    midField = playerPanel.getTop();
+                    y = midField - 0.5f;
+                    float adjustY = Forge.isLandscapeMode() ? y + 1f : midField;
+                    float adjustH = Forge.isLandscapeMode() ? playerPanel.getField().getBottom() - 1f : playerPanel.getBottom() - 1f;
+                    if(playerPanel.getPlayer().getHasPriority() && !playerPanel.getPlayer().isAI())
+                        g.setAlphaComposite(0.8f);
+                    else
+                        g.setAlphaComposite(0f);
+                    g.drawRect(4f, Color.CYAN, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
+                    g.setAlphaComposite(oldAlphaComposite);
+                }
+            }
         }
 
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -665,9 +690,17 @@ public class MatchScreen extends FScreen {
         private boolean hasActivePlane(){
             if(MatchController.instance.getGameView() != null)
                 if(MatchController.instance.getGameView().getPlanarPlayer() != null) {
-                    return MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName() != "";
+                    return !MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName().equals("");
             }
             return false;
+        }
+        private int countHuman(){
+            int humanplayers = 0;
+            for (VPlayerPanel playerPanel: playerPanelsList) {
+            if(!playerPanel.getPlayer().isAI())
+                humanplayers++;
+            }
+            return humanplayers;
         }
     }
 }
