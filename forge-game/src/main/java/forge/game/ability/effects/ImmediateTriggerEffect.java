@@ -65,6 +65,11 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             }
         }
 
+        if (sa.hasParam("RememberDefinedNumber")) {
+            immediateTrig.addRemembered((Integer) AbilityUtils.calculateAmount(sa.getHostCard(),
+                    sa.getParam("RememberDefinedNumber"), sa));
+        }
+
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
             SpellAbility overridingSA = sa.getAdditionalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
