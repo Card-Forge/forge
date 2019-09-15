@@ -431,7 +431,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return 41 * (41 + this.getId());
+        return Objects.hash(Trigger.class, getId());
     }
 
     /**

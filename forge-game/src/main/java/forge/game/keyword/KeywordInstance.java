@@ -228,7 +228,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             
             result.staticAbilities = Lists.newArrayList();
             for (StaticAbility sa : this.staticAbilities) {
-                result.staticAbilities.add(new StaticAbility(sa, host));
+                result.staticAbilities.add(sa.copy(host, lki));
             }
             
             return result;

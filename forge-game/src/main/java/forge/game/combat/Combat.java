@@ -24,6 +24,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.GameObjectMap;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -632,11 +633,11 @@ public class Combat {
                 defenders.add(getDefenderByAttacker(ab));
                 for (Card attacker : ab.getAttackers()) {
                     // Run Unblocked Trigger
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Attacker", attacker);
-                    runParams.put("Defender",getDefenderByAttacker(attacker));
-                    runParams.put("DefendingPlayer", getDefenderPlayerByAttacker(attacker));
-                    game.getTriggerHandler().runTriggerOld(TriggerType.AttackerUnblocked, runParams, false);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attacker, attacker);
+                    runParams.put(AbilityKey.Defender,getDefenderByAttacker(attacker));
+                    runParams.put(AbilityKey.DefendingPlayer, getDefenderPlayerByAttacker(attacker));
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
                 }
             }
         }
@@ -644,10 +645,10 @@ public class Combat {
             // triggers for Coveted Jewel
             // currently there is only one attacking player
             // should be updated when two-headed-giant is done
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("AttackingPlayer", getAttackingPlayer());
-            runParams.put("Defenders", defenders);
-            game.getTriggerHandler().runTriggerOld(TriggerType.AttackerUnblockedOnce, runParams, false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.AttackingPlayer, getAttackingPlayer());
+            runParams.put(AbilityKey.Defenders, defenders);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblockedOnce, runParams, false);
         }
     }
 

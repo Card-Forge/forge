@@ -27,6 +27,7 @@ import forge.util.TextUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * TODO: Write javadoc for this type.
@@ -261,6 +262,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return 42 * (42 + this.getId());
+        return Objects.hash(ReplacementEffect.class, getId());
     }
 }

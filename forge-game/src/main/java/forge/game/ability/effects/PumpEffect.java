@@ -56,7 +56,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (a != 0 || d != 0) {
-            gameCard.addPTBoost(a, d, timestamp);
+            gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
         }
 
@@ -84,7 +84,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    gameCard.removePTBoost(timestamp);
+                    gameCard.removePTBoost(timestamp, 0);
                     boolean updateText = false;
                     updateText = gameCard.removeCanBlockAny(timestamp) || updateText;
                     updateText = gameCard.removeCanBlockAdditional(timestamp) || updateText;

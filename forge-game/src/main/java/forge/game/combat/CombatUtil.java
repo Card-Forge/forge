@@ -20,13 +20,13 @@ package forge.game.combat;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -305,15 +305,15 @@ public class CombatUtil {
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Attacker", c);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Attacker, c);
         final List<Card> otherAttackers = combat.getAttackers();
         otherAttackers.remove(c);
-        runParams.put("OtherAttackers", otherAttackers);
-        runParams.put("Attacked", combat.getDefenderByAttacker(c));
-        runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(c));
-        runParams.put("Defenders", combat.getDefenders());
-        game.getTriggerHandler().runTriggerOld(TriggerType.Attacks, runParams, false);
+        runParams.put(AbilityKey.OtherAttackers, otherAttackers);
+        runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
+        runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
+        runParams.put(AbilityKey.Defenders, combat.getDefenders());
+        game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();

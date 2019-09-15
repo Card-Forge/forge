@@ -17,6 +17,7 @@
  */
 package forge.game.staticability;
 
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.MagicColor;
@@ -24,6 +25,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameStage;
+import forge.game.IIdentifiable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -43,17 +45,37 @@ import forge.util.TextUtil;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * The Class StaticAbility.
  */
-public class StaticAbility extends CardTraitBase implements Comparable<StaticAbility> {
+public class StaticAbility extends CardTraitBase implements IIdentifiable, Cloneable, Comparable<StaticAbility> {
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
 
-    private final Set<StaticAbilityLayer> layers;
+    private int id;
+
+    private Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
     private int mayPlayTurn = 0;
+
+    @Override
+    public final int getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(StaticAbility.class, getId());
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        return obj instanceof StaticAbility && this.id == ((StaticAbility) obj).id;
+    }
 
     /**
      * <p>
@@ -228,23 +250,11 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
      *            the host
      */
     private StaticAbility(final Map<String, String> params, final Card host) {
+        this.id = nextId();
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.layers = this.generateLayer();
         this.hostCard = host;
-        buildCommonAttributes(host);
-    }
-
-    public StaticAbility(StaticAbility stAb, Card host) {
-        this.originalMapParams.putAll(stAb.originalMapParams);
-        this.mapParams.putAll(stAb.mapParams);
-        this.layers = this.generateLayer();
-        this.hostCard = host;
-        this.intrinsic = stAb.intrinsic;
-
-        // Copy old sVars
-        this.sVars.putAll(stAb.sVars);
-        // but if they are References use this ones
         buildCommonAttributes(host);
     }
 
@@ -769,6 +779,32 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
     @Override
     public int compareTo(StaticAbility arg0) {
-        return getHostCard().compareTo(arg0.getHostCard());
+        return ComparisonChain.start()
+        .compare(getHostCard(),arg0.getHostCard())
+        .compare(getId(), arg0.getId())
+        .result();
+    }
+
+    public StaticAbility copy(Card host, final boolean lki) {
+        StaticAbility clone = null;
+        try {
+            clone = (StaticAbility) clone();
+            clone.id = lki ? id : nextId();
+
+            // dont use setHostCard to not trigger the not copied parts yet
+            clone.hostCard = host;
+            // need to clone the maps too so they can be changed
+            clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
+            clone.mapParams = Maps.newHashMap(this.mapParams);
+
+            clone.sVars = Maps.newHashMap(this.sVars);
+
+            clone.layers = this.generateLayer();
+
+            clone.buildCommonAttributes(host);
+        } catch (final CloneNotSupportedException e) {
+            System.err.println(e);
+        }
+        return clone;
     }
 } // end class StaticAbility
