@@ -107,6 +107,10 @@ public class CardProperty {
             if (card.isSplitCard()) {
                 return false;
             }
+        } else if (property.equals("AdventureCard")) {
+            if (!card.isAdventureCard()) {
+                return false;
+            }
         } else if (property.startsWith("leftcmc") || property.startsWith("rightcmc")) {
             int x;
             int y = 0;
