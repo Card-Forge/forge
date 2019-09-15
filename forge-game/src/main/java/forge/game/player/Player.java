@@ -2672,6 +2672,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setExtraTurnCount(final int val) {
         view.setExtraTurnCount(val);
     }
+    public void setHasPriority(final boolean val) {
+        view.setHasPriority(val);
+    }
+    public boolean isAI() {
+        return view.isAI();
+    }
 
     public void initVariantsZones(RegisteredPlayer registeredPlayer) {
         PlayerZone bf = getZone(ZoneType.Battlefield);

@@ -1,0 +1,6 @@
+Name:Mirrormade
+ManaCost:1 U U
+Types:Enchantment
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Artifact.Other,Enchantment.Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or enchantment on the battlefield.
+Oracle:You may have Mirrormade enter the battlefield as a copy of any artifact or enchantment on the battlefield.
