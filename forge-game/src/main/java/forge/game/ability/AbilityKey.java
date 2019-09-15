@@ -298,6 +298,10 @@ public enum AbilityKey {
     }
 
     public static <V> EnumMap<AbilityKey, V> newMap(Map<AbilityKey, V> map) {
+        // The EnumMap constructor throws IllegalArgumentException if the map is empty.
+        if (map.isEmpty()) {
+            return newMap();
+        }
         return new EnumMap<>(map);
     }
 

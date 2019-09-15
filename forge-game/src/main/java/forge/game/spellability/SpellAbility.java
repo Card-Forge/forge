@@ -139,7 +139,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
-    private Map<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
+    private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
     private HashMap<String, Object> replacingObjects = Maps.newHashMap();
 
@@ -569,7 +569,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return triggeringObjects.containsKey(type);
     }
     public void resetTriggeringObjects() {
-        triggeringObjects = Maps.newHashMap();
+        triggeringObjects = AbilityKey.newMap();
     }
 
     public List<Object> getTriggerRemembered() {
@@ -878,7 +878,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
             clone.mapParams = Maps.newHashMap(this.mapParams);
 
-            clone.triggeringObjects = Maps.newHashMap(this.triggeringObjects);
+            clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
             if (getPayCosts() != null) {
                 clone.setPayCosts(getPayCosts().copy());
