@@ -3,7 +3,6 @@ package forge.game.ability;
 import com.google.common.collect.Maps;
 import junit.framework.TestCase;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 public class AbilityKeyTest extends TestCase {
