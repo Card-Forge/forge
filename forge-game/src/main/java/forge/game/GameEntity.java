@@ -170,7 +170,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         int restDamage = damage;
 
         // first try to replace the damage
-        final Map<String, Object> repParams = Maps.newHashMap();
+         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
