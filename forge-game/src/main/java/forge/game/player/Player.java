@@ -124,7 +124,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
-    private boolean attackedWithCreatureThisTurn = false;
+    private CardCollection creatureAttackedThisTurn = new CardCollection();
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
@@ -1824,11 +1824,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         activateLoyaltyAbilityThisTurn = b;
     }
 
-    public final boolean getAttackedWithCreatureThisTurn() {
-        return attackedWithCreatureThisTurn;
+    public final CardCollection getCreaturesAttackedThisTurn() {
+        return creatureAttackedThisTurn;
     }
-    public final void setAttackedWithCreatureThisTurn(final boolean b) {
-        attackedWithCreatureThisTurn = b;
+    public final void addCreaturesAttackedThisTurn(final Card c) {
+        creatureAttackedThisTurn.add(c);
+    }
+    public final void clearCreaturesAttackedThisTurn() {
+        creatureAttackedThisTurn.clear();
     }
 
     public final int getAttackersDeclaredThisTurn() {
@@ -2389,7 +2392,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDrawnThisTurn();
         resetNumDiscardedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
-        setAttackedWithCreatureThisTurn(false);
+        clearCreaturesAttackedThisTurn();
         setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
