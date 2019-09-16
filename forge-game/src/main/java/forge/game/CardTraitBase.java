@@ -259,7 +259,19 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 return false;
             }
             final String payingMana = StringUtils.join(hostCard.getCastSA().getPayingMana());
-            if (StringUtils.countMatches(payingMana, MagicColor.toShortString(params.get("Adamant"))) < 3) {
+            final String color = params.get("Adamant");
+            if ("Any".equals(color)) {
+                boolean bFlag = false;
+                for (byte c : MagicColor.WUBRG) {
+                    if (StringUtils.countMatches(payingMana, MagicColor.toShortString(c)) >= 3) {
+                        bFlag = true;
+                        break;
+                    }
+                }
+                if (!bFlag) {
+                    return false;
+                }
+            } else if (StringUtils.countMatches(payingMana, MagicColor.toShortString(color)) < 3) {
                 return false;
             }
         }
