@@ -1620,7 +1620,8 @@ public class AbilityUtils {
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
-                    final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= 3;
+                    final int num = sq[0].length() > 7 ? Integer.parseInt(sq[0].split("_")[1]) : 3;
+                    final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= num;
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
                 }
 
