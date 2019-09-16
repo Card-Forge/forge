@@ -4,12 +4,7 @@ Types:Plane Ravnica
 S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.YouCtrl | CheckSVar$ CheckThisTurnCast | Description$ If you cast a spell this turn, you can't attack with creatures.
 SVar:CheckThisTurnCast:Count$ThisTurnCast_Card.YouCtrl
 S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You | CheckSVar$ CheckThisTurnAttacked | Description$ If you attacked with creatures this turn, you can't cast spells.
-SVar:CheckThisTurnAttacked:Number$0
-T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ DBStoreSVar | Static$ True
-SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckThisTurnAttacked | Type$ Number | Expression$ 1
-T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ DBReset | Static$ True
-T:Mode$ Phase | Phase$ Cleanup | Execute$ DBReset | Static$ True
-SVar:DBReset:DB$ StoreSVar | SVar$ CheckThisTurnAttacked | Type$ Number | Expression$ 0
+SVar:CheckThisTurnAttacked:Count$AttackersDeclared
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you gain life equal to the number of cards in your hand.
 SVar:RolledChaos:DB$ GainLife | LifeAmount$ PrahvX | References$ PrahvX | Defined$ You
 SVar:PrahvX:Count$InYourHand
