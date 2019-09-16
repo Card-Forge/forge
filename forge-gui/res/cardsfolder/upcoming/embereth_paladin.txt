@@ -3,7 +3,5 @@ ManaCost:3 R
 Types:Creature Human Knight
 PT:4/1
 K:Haste
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Adamant$ Red | ReplaceWith$ ETBAddCounter | Description$ Adamant — If at least three red mana was spent to cast this spell, CARDNAME enters the battlefield with a +1/+1 counter on it.
-SVar:ETBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:etbCounter:P1P1:1:Adamant$ Red:Adamant — If at least three red mana was spent to cast this spell, CARDNAME enters the battlefield with a +1/+1 counter on it.
 Oracle:Haste\nAdamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.
