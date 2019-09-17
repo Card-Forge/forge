@@ -61,7 +61,7 @@ public class TriggerDevoured extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Devoured, this.getRunParams().get("Devoured"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Devoured);
     }
 
     @Override

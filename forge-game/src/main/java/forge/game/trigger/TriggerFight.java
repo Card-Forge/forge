@@ -63,7 +63,7 @@ public class TriggerFight extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Fighter, this.getRunParams().get("Fighter"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Fighter);
     }
 
     @Override

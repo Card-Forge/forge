@@ -65,8 +65,13 @@ public class TriggerVote extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         @SuppressWarnings("unchecked")
-        final ListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
-        sa.setTriggeringObject(AbilityKey.OtherVoters, getVoters(this.getHostCard().getController(), votes, true, true));
+        FCollection<Player> voters = getVoters(
+            this.getHostCard().getController(),
+            (ListMultimap<Object, Player>) getFromRunParams(AbilityKey.AllVotes),
+            true,
+            true
+        );
+        sa.setTriggeringObject(AbilityKey.OtherVoters, voters);
     }
 
     @Override

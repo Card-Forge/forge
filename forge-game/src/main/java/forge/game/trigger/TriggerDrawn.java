@@ -81,8 +81,7 @@ public class TriggerDrawn extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Player, getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Transformer, this.getRunParams().get("Transformer"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Transformer);
     }
 
     @Override

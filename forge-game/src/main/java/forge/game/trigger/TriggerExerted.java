@@ -33,8 +33,7 @@ public class TriggerExerted extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override
