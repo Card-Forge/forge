@@ -1329,6 +1329,13 @@ public class CardFactoryUtil {
             return doXMath(cc.getAttackersDeclaredThisTurn(), m, c);
         }
 
+        // Count$CardAttackedThisTurn_<Valid>
+        if (sq[0].contains("CreaturesAttackedThisTurn")) {
+            final String[] workingCopy = l[0].split("_");
+            final String validFilter = workingCopy[1];
+            return doXMath(CardLists.getType(cc.getCreaturesAttackedThisTurn(), validFilter).size(), m, c);
+        }
+
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].contains("ThisTurnCast") || sq[0].contains("LastTurnCast")) {

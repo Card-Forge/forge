@@ -150,7 +150,7 @@ public class GlobalAttackRestrictions {
         final Game game = attackingPlayer.getGame();
 
         /* if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
-            if (attackingPlayer.getAttackedWithCreatureThisTurn()) {
+            if (!attackingPlayer.getAttackedWithCreatureThisTurn().isEmpty()) {
                 max = 0;
             } else {
                 max = 1;
