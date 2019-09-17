@@ -125,10 +125,13 @@ public class TriggerAttacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Attacker, this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject(AbilityKey.Defender, this.getRunParams().get("Attacked"));
-        sa.setTriggeringObject(AbilityKey.Defenders, this.getRunParams().get("Defenders"));
-        sa.setTriggeringObject(AbilityKey.DefendingPlayer, this.getRunParams().get("DefendingPlayer"));
+        sa.setTriggeringObjectsFrom(
+            this,
+            AbilityKey.Attacker,
+            AbilityKey.Defender,
+            AbilityKey.Defenders,
+            AbilityKey.DefendingPlayer
+        );
     }
 
     @Override

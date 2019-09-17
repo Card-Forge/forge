@@ -565,6 +565,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setTriggeringObject(final AbilityKey type, final Object o) {
         triggeringObjects.put(type, o);
     }
+    public void setTriggeringObjectsFrom(final Trigger trigger, final AbilityKey... types) {
+        int typesLength = types.length;
+        for (int i = 0; i < typesLength; i += 1) {
+            AbilityKey type = types[i];
+            triggeringObjects.put(type, trigger.getFromRunParams(type));
+        }
+    }
+
+
     public boolean hasTriggeringObject(final AbilityKey type) {
         return triggeringObjects.containsKey(type);
     }

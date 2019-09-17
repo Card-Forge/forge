@@ -52,8 +52,7 @@ public class TriggerBlockersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Blockers, this.getRunParams().get("Blockers"));
-        sa.setTriggeringObject(AbilityKey.Attackers, this.getRunParams().get("Attackers"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Blockers, AbilityKey.Attackers);
     }
 
     @Override

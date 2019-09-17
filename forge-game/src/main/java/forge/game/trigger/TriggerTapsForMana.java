@@ -105,9 +105,7 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
-        sa.setTriggeringObject(AbilityKey.Produced, this.getRunParams().get("Produced"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
     }
 
     @Override
