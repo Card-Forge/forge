@@ -21,6 +21,7 @@ import forge.deck.DeckSection;
 import forge.events.UiEventNextGameDecision;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
@@ -631,15 +632,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     "CARDNAME", regtrig.getHostCard().getName()));
             buildQuestion.append(")");
         }
-        final Map<String, Object> tos = sa.getTriggeringObjects();
-        if (tos.containsKey("Attacker")) {
-            buildQuestion.append("\nAttacker: ").append(tos.get("Attacker"));
+        final Map<AbilityKey, Object> tos = sa.getTriggeringObjects();
+        if (tos.containsKey(AbilityKey.Attacker)) {
+            buildQuestion.append("\nAttacker: ").append(tos.get(AbilityKey.Attacker));
         }
-        if (tos.containsKey("Card")) {
-            final Card card = (Card) tos.get("Card");
+        if (tos.containsKey(AbilityKey.Card)) {
+            final Card card = (Card) tos.get(AbilityKey.Card);
             if (card != null && (card.getController() == player || game.getZoneOf(card) == null
                     || game.getZoneOf(card).getZoneType().isKnown())) {
-                buildQuestion.append("\nTriggered by: ").append(tos.get("Card"));
+                buildQuestion.append("\nTriggered by: ").append(tos.get(AbilityKey.Card));
             }
         }
 

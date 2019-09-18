@@ -25,6 +25,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
@@ -56,7 +57,8 @@ public final class CardUtil {
             "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
-            "Scavenge", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:").build();
+            "Scavenge", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
+            "etbCounter").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
     public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(
             "walk", "cycling", "offering").build();
@@ -411,7 +413,7 @@ public final class CardUtil {
             }
         } else if (reflectProperty.equals("Produced")) {
             // Why is this name so similar to the one below?
-            final String producedColors = abMana instanceof AbilitySub ? (String) abMana.getRootAbility().getTriggeringObject("Produced") : (String) abMana.getTriggeringObject("Produced");
+            final String producedColors = abMana instanceof AbilitySub ? (String) abMana.getRootAbility().getTriggeringObject(AbilityKey.Produced) : (String) abMana.getTriggeringObject(AbilityKey.Produced);
             for (final String col : MagicColor.Constant.ONLY_COLORS) {
                 final String s = MagicColor.toShortString(col);
                 if (producedColors.contains(s)) {

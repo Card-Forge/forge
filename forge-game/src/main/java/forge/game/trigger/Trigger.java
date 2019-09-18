@@ -21,6 +21,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -36,7 +37,6 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.util.TextUtil;
 
@@ -70,7 +70,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private TriggerType mode;
 
-    private Map<String, Object> storedTriggeredObjects = null;
+    private Map<AbilityKey, Object> storedTriggeredObjects = null;
     
     private List<Object> triggerRemembered = Lists.newArrayList();
 
@@ -87,8 +87,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public final void setStoredTriggeredObjects(final Map<String, Object> storedTriggeredObjects) {
-        this.storedTriggeredObjects = Maps.newHashMap(storedTriggeredObjects);
+    public final void setStoredTriggeredObjects(final Map<AbilityKey, Object> storedTriggeredObjects) {
+        this.storedTriggeredObjects = AbilityKey.newMap(storedTriggeredObjects);
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public final Map<String, Object> getStoredTriggeredObjects() {
+    public final Map<AbilityKey, Object> getStoredTriggeredObjects() {
         return this.storedTriggeredObjects;
     }
 
@@ -363,9 +363,9 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
 
-    public boolean meetsRequirementsOnTriggeredObjects(Game game,  Map<String, Object> runParams) {
+    public boolean meetsRequirementsOnTriggeredObjects(Game game,  final Map<AbilityKey, Object> runParams) {
         if ("True".equals(this.mapParams.get("EvolveCondition"))) {
-            final Card moved = (Card) runParams.get("Card");
+            final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {
                 return false;
                 // final StringBuilder sb = new StringBuilder();
@@ -381,26 +381,26 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         String condition = this.mapParams.get("Condition");
         if ("AltCost".equals(condition)) {
-            final Card moved = (Card) runParams.get("Card");
+            final Card moved = (Card) runParams.get(AbilityKey.Card);
             if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
-            GameEntity attacked = (GameEntity) runParams.get("Attacked");
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {
                 // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
                 // ends up being in Defender at that point.
-                attacked = (GameEntity) runParams.get("Defender");
+                attacked = (GameEntity) runParams.get(AbilityKey.Defender);
             }
             if (attacked == null || !attacked.isValid("Player.withMostLife",
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         } else if ("AttackedPlayerWhoAttackedYouLastTurn".equals(condition)) {
-            GameEntity attacked = (GameEntity) runParams.get("Attacked");
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {
                 // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
                 // ends up being in Defender at that point.
-                attacked = (GameEntity) runParams.get("DefendingPlayer");
+                attacked = (GameEntity) runParams.get(AbilityKey.DefendingPlayer);
             }
             Player attacker = this.getHostCard().getController();
 

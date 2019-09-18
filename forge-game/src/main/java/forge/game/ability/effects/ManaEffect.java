@@ -9,15 +9,18 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
-
 import java.util.List;
 
 public class ManaEffect extends SpellAbilityEffect {
@@ -181,6 +184,16 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     String  cs = manaType.toString();
                     abMana.setExpressChoice(cs);
+                } else if (type.startsWith("EachColorAmong")) {
+                    final String res = type.split("_")[1];
+                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),
+                            res, sa.getActivatingPlayer(), card, sa);
+                    byte colors = 0;
+                    for (Card c : list) {
+                        colors |= c.determineColor().getColor();
+                    }
+                    if (colors == 0) return;
+                    abMana.setExpressChoice(ColorSet.fromMask(colors));
                 }
 
                 if (abMana.getExpressChoice().isEmpty()) {

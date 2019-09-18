@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -58,13 +59,13 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Transformer", this.getRunParams().get("Transformer"));
+        sa.setTriggeringObject(AbilityKey.Transformer, this.getRunParams().get("Transformer"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Transformed: ").append(sa.getTriggeringObject("Transformer"));
+        sb.append("Transformed: ").append(sa.getTriggeringObject(AbilityKey.Transformer));
         return sb.toString();
     }
 

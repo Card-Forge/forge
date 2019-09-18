@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.card.MagicColor;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -104,16 +105,16 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
-        sa.setTriggeringObject("Produced", this.getRunParams().get("Produced"));
+        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
+        sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
+        sa.setTriggeringObject(AbilityKey.Produced, this.getRunParams().get("Produced"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tapped for Mana: ").append(sa.getTriggeringObject("Card"));
-        sb.append("Produced: ").append(sa.getTriggeringObject("Produced"));
+        sb.append("Tapped for Mana: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append("Produced: ").append(sa.getTriggeringObject(AbilityKey.Produced));
         return sb.toString();
     }
 

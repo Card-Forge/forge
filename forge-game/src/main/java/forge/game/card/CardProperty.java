@@ -6,6 +6,7 @@ import forge.card.MagicColor;
 import forge.game.Direction;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
@@ -874,7 +875,7 @@ public class CardProperty {
                         }
                         return false;
                     case "TriggeredCard":
-                        final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
+                        final Object triggeringObject = source.getTriggeringObject(AbilityKey.fromString(restriction.substring("Triggered".length())));
                         if (!(triggeringObject instanceof Card)) {
                             return false;
                         }
@@ -957,7 +958,7 @@ public class CardProperty {
                     if (spellAbility == null) {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
-                        Card triggeredCard = ((Card)spellAbility.getTriggeringObject("Card"));
+                        Card triggeredCard = ((Card) spellAbility.getTriggeringObject(AbilityKey.Card));
                         if (triggeredCard != null && card.sharesNameWith(triggeredCard)) {
                             return true;
                         }

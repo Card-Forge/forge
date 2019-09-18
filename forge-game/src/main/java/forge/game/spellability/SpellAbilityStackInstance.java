@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import forge.game.IIdentifiable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -91,7 +92,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     // is Kicked, is Buyback
 
     // Triggers
-    private final Map<String, Object> triggeringObjects;
+    private final Map<AbilityKey, Object> triggeringObjects;
     private final List<Object> triggerRemembered;
 
     private final Map<String, String> storedSVars = Maps.newHashMap();
@@ -342,27 +343,28 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             }
             
             // Run BecomesTargetTrigger
-            Map<String, Object> runParams = new HashMap<>();
-            runParams.put("SourceSA", ability);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.SourceSA, ability);
             Set<Object> distinctObjects = new HashSet<>();
             for (final Object tgt : target.getTargets()) {
                 if (distinctObjects.contains(tgt)) {
                     continue;
                 }
                 distinctObjects.add(tgt);
+
                 if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
-                    runParams.put("FirstTime", null);
+                    runParams.put(AbilityKey.FirstTime, null);
                     ((Card) tgt).setBecameTargetThisTurn(true);
                 }
-                runParams.put("Target", tgt);
-                getSourceCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.BecomesTarget, runParams, false);
+                runParams.put(AbilityKey.Target, tgt);
+                getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
-            runParams.put("Targets", target.getTargets());
-            getSourceCard().getGame().getTriggerHandler().runTriggerOld(TriggerType.BecomesTargetOnce, runParams, false);
+            runParams.put(AbilityKey.Targets, target.getTargets());
+            getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
     }
 
-    public boolean addTriggeringObject(String trigObj, Object value) {
+    public boolean addTriggeringObject(AbilityKey trigObj, Object value) {
         if (!triggeringObjects.containsKey(trigObj)) {
             triggeringObjects.put(trigObj, value);
             return true;
@@ -370,7 +372,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return false;
     }
 
-    public boolean updateTriggeringObject(String trigObj, Object value) {
+    public boolean updateTriggeringObject(AbilityKey trigObj, Object value) {
         if (triggeringObjects.containsKey(trigObj)) {
             triggeringObjects.replace(trigObj, value);
             return true;
@@ -378,7 +380,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return false;
     }
 
-    public Object getTriggeringObject(String trigObj) {
+    public Object getTriggeringObject(AbilityKey trigObj) {
         if (triggeringObjects.containsKey(trigObj)) {
             return triggeringObjects.get(trigObj);
         }
