@@ -930,7 +930,6 @@ public class CardFactoryUtil {
             }
 
         }
-        
         if (sq[0].equals("StormCount")) {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, m, c);
         }
