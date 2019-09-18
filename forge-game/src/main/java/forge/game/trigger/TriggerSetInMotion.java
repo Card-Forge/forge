@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -76,7 +77,7 @@ public class TriggerSetInMotion extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Scheme", this.getRunParams().get("Scheme"));
+        sa.setTriggeringObject(AbilityKey.Scheme, this.getRunParams().get("Scheme"));
     }
 
     @Override

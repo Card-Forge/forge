@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.combat.AttackingBand;
@@ -54,12 +55,12 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
                     // retarget triggers to the new defender (e.g. Ulamog, Ceaseless Hunger + Portal Mage)
                     for (SpellAbilityStackInstance si : game.getStack()) {
                         if (si.isTrigger() && c.equals(si.getSourceCard())
-                                && si.getTriggeringObject("Attacker") != null) {
-                            si.addTriggeringObject("OriginalDefender", originalDefender);
+                                && si.getTriggeringObject(AbilityKey.Attacker) != null) {
+                            si.addTriggeringObject(AbilityKey.OriginalDefender, originalDefender);
                             if (defender instanceof Player) {
-                                si.updateTriggeringObject("DefendingPlayer", defender);
+                                si.updateTriggeringObject(AbilityKey.DefendingPlayer, defender);
                             } else if (defender instanceof Card) {
-                                si.updateTriggeringObject("DefendingPlayer", ((Card)defender).getController());
+                                si.updateTriggeringObject(AbilityKey.DefendingPlayer, ((Card)defender).getController());
                             }
                         }
                     }

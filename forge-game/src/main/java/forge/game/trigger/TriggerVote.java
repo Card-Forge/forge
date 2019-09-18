@@ -23,6 +23,7 @@ import java.util.Map;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -65,13 +66,13 @@ public class TriggerVote extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         @SuppressWarnings("unchecked")
         final ListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
-        sa.setTriggeringObject("OtherVoters", getVoters(this.getHostCard().getController(), votes, true, true));
+        sa.setTriggeringObject(AbilityKey.OtherVoters, getVoters(this.getHostCard().getController(), votes, true, true));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Voters: ").append(sa.getTriggeringObject("OtherVoters"));
+        sb.append("Voters: ").append(sa.getTriggeringObject(AbilityKey.OtherVoters));
         return sb.toString();
     }
 

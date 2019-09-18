@@ -54,6 +54,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
+import static forge.util.EnumMapUtil.toStringMap;
+
 /**
  * Methods for common actions performed during a game.
  * 
@@ -297,7 +299,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(EnumMapUtil.toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().run(toStringMap(repParams));
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
