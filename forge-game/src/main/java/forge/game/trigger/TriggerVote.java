@@ -20,7 +20,6 @@ package forge.game.trigger;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
 import forge.game.ability.AbilityKey;
