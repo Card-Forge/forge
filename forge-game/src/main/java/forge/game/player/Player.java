@@ -84,6 +84,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
     private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn = 0;
+    private int spellsCastThisGame = 0;
     private int spellsCastLastTurn = 0;
     private int landsPlayedThisTurn = 0;
     private int landsPlayedLastTurn = 0;
@@ -2209,6 +2210,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addSpellCastThisTurn() {
         spellsCastThisTurn++;
+        spellsCastThisGame++;
         achievementTracker.spellsCast++;
         if (spellsCastThisTurn > achievementTracker.maxStormCount) {
             achievementTracker.maxStormCount = spellsCastThisTurn;
@@ -2220,7 +2222,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setSpellsCastLastTurn(int num) {
         spellsCastLastTurn = num;
     }
-
+    public final int getSpellsCastThisGame() {
+        return spellsCastThisGame;
+    }
+    public final void resetSpellCastThisGame() {
+        spellsCastThisGame = 0;
+    }
     public final int getLifeGainedByTeamThisTurn() {
         return lifeGainedByTeamThisTurn;
     }

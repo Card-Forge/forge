@@ -918,6 +918,10 @@ public class CardFactoryUtil {
             return doXMath(cc.getSurveilThisTurn(), m, c);
         }
 
+        if (sq[0].equals("YouCastThisGame")) {
+            return doXMath(cc.getSpellsCastThisGame(), m, c);
+        }
+
         if (sq[0].equals("FirstSpellTotalManaSpent")) {
             try{
                 return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
