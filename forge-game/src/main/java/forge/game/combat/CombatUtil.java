@@ -317,7 +317,7 @@ public class CombatUtil {
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().setAttackedWithCreatureThisTurn(true);
+        c.getController().addCreaturesAttackedThisTurn(c);
         c.getController().incrementAttackersDeclaredThisTurn();
 
         if (combat.getDefenderByAttacker(c) != null && combat.getDefenderByAttacker(c) instanceof Player) {

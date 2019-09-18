@@ -3,6 +3,7 @@ package forge.game.trigger;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -101,27 +102,27 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public Map<String, Object> getTriggeringObjects() {
+    public Map<AbilityKey, Object> getTriggeringObjects() {
         return sa.getTriggeringObjects();
     }
 
     @Override
-    public void setTriggeringObjects(final Map<String, Object> triggeredObjects) {
+    public void setTriggeringObjects(final Map<AbilityKey, Object> triggeredObjects) {
         sa.setTriggeringObjects(triggeredObjects);
     }
 
     @Override
-    public void setTriggeringObject(final String type, final Object o) {
+    public void setTriggeringObject(final AbilityKey type, final Object o) {
         sa.setTriggeringObject(type, o);
     }
 
     @Override
-    public Object getTriggeringObject(final String type) {
+    public Object getTriggeringObject(final AbilityKey type) {
         return sa.getTriggeringObject(type);
     }
 
     @Override
-    public boolean hasTriggeringObject(final String type) {
+    public boolean hasTriggeringObject(final AbilityKey type) {
         return sa.hasTriggeringObject(type);
     }
 
@@ -532,8 +533,8 @@ public class WrappedAbility extends Ability {
                 }
             }
         }
-        final Map<String, Object> triggerMap = new HashMap<>(sa.getTriggeringObjects());
-        for (Entry<String, Object> ev : triggerMap.entrySet()) {
+        final Map<AbilityKey, Object> triggerMap = AbilityKey.newMap(sa.getTriggeringObjects());
+        for (Entry<AbilityKey, Object> ev : triggerMap.entrySet()) {
             if (ev.getValue() instanceof Card) {
                 Card card = (Card) ev.getValue();
                 Card current = game.getCardState(card);

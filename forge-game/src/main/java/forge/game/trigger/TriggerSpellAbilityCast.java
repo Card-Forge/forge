@@ -26,6 +26,7 @@ import com.google.common.collect.Sets;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -265,23 +266,23 @@ public class TriggerSpellAbilityCast extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         final SpellAbility castSA = (SpellAbility) getRunParams().get("CastSA");
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
-        sa.setTriggeringObject("Card", castSA.getHostCard());
-        sa.setTriggeringObject("SpellAbility", castSA);
-        sa.setTriggeringObject("StackInstance", si);
-        sa.setTriggeringObject("SpellAbilityTargetingCards", (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
-        sa.setTriggeringObject("Player", getRunParams().get("Player"));
-        sa.setTriggeringObject("Activator", getRunParams().get("Activator"));
-        sa.setTriggeringObject("CurrentStormCount", getRunParams().get("CurrentStormCount"));
-        sa.setTriggeringObject("CurrentCastSpells", getRunParams().get("CurrentCastSpells"));
-        sa.setTriggeringObject("CastSACMC", getRunParams().get("CastSACMC"));
+        sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
+        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
+        sa.setTriggeringObject(AbilityKey.StackInstance, si);
+        sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
+        sa.setTriggeringObject(AbilityKey.Player, getRunParams().get("Player"));
+        sa.setTriggeringObject(AbilityKey.Activator, getRunParams().get("Activator"));
+        sa.setTriggeringObject(AbilityKey.CurrentStormCount, getRunParams().get("CurrentStormCount"));
+        sa.setTriggeringObject(AbilityKey.CurrentCastSpells, getRunParams().get("CurrentCastSpells"));
+        sa.setTriggeringObject(AbilityKey.CastSACMC, getRunParams().get("CastSACMC"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Card: ").append(sa.getTriggeringObject("Card")).append(", ");
-        sb.append("Activator: ").append(sa.getTriggeringObject("Activator")).append(", ");
-        sb.append("SpellAbility: ").append(sa.getTriggeringObject("SpellAbility"));
+        sb.append("Card: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append("Activator: ").append(sa.getTriggeringObject(AbilityKey.Activator)).append(", ");
+        sb.append("SpellAbility: ").append(sa.getTriggeringObject(AbilityKey.SpellAbility));
         return sb.toString();
     }
 }

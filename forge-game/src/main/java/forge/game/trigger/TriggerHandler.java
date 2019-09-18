@@ -322,13 +322,6 @@ public class TriggerHandler {
     }
 
     public final void runTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams, boolean holdTrigger) {
-        runTriggerOld(mode, toStringMap(runParams), holdTrigger);
-    }
-    // The plan is to slowly refactor any usages of `runTriggerOld` to use `runTrigger`. Then we can just inline
-    // `runTriggerOld` into `runTrigger` and change the code inside to just always use a `Map<TriggerKey, Object>`.
-    // The reason we can't just call them both `runTrigger` is because we get a `same erasure` compile error if we do.
-    @Deprecated
-    private void runTriggerOld(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (suppressedModes.contains(mode)) {
             return;
         }
@@ -342,10 +335,10 @@ public class TriggerHandler {
         }
     }
 
-    private void runStateTrigger(Map<String, Object> runParams) {
+    private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
         for (final Trigger t: activeTriggers) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
-                runSingleTrigger(t, runParams);
+                runSingleTrigger(t, toStringMap(runParams));
             }
         }
     }
@@ -367,7 +360,7 @@ public class TriggerHandler {
 
     private boolean runWaitingTrigger(final TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
-        final Map<String, Object> runParams = wt.getParams();
+        final Map<AbilityKey, Object> runParams = wt.getParams();
 
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
@@ -383,19 +376,19 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                runSingleTrigger(t, runParams);
+                runSingleTrigger(t, toStringMap(runParams));
 
                 checkStatics = true;
             }
         }
 
-        if (runParams.containsKey("Destination")) {
+        if (runParams.containsKey(AbilityKey.Destination)) {
             // Check static abilities when a card enters the battlefield
-            if (runParams.get("Destination") instanceof String) {
-                final String type = (String) runParams.get("Destination");
+            if (runParams.get(AbilityKey.Destination) instanceof String) {
+                final String type = (String) runParams.get(AbilityKey.Destination);
                 checkStatics |= type.equals("Battlefield");
             } else {
-                final ZoneType zone = (ZoneType) runParams.get("Destination");
+                final ZoneType zone = (ZoneType) runParams.get(AbilityKey.Destination);
                 checkStatics |= zone.equals(ZoneType.Battlefield);
             }
         }
@@ -425,8 +418,9 @@ public class TriggerHandler {
 
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy ) {
 
-        final TriggerType mode = wt.getMode(); 
-        final Map<String, Object> runParams = wt.getParams();
+        final TriggerType mode = wt.getMode();
+        final Map<AbilityKey, Object> runParams = wt.getParams();
+        final Map<String, Object> stringRunParams = toStringMap(runParams);
         final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
 
         Card card = null;
@@ -434,18 +428,20 @@ public class TriggerHandler {
 
         for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
-                if (runParams.containsKey("Card") && runParams.get("Card") instanceof Card) {
-                    card = (Card) runParams.get("Card");
-                    if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))) {
+                if (runParams.containsKey(AbilityKey.Card) && runParams.get(AbilityKey.Card) instanceof Card) {
+                    card = (Card) runParams.get(AbilityKey.Card);
+                    if (runParams.containsKey(AbilityKey.Destination)
+                            && !ZoneType.Battlefield.name().equals(runParams.get(AbilityKey.Destination))) {
                         card = CardUtil.getLKICopy(card);
                         if (card.isCloned() || !t.isIntrinsic()) {
-                            runParams.put("Card", card);
+                            runParams.put(AbilityKey.Card, card);
                         }
                     }
                 }
 
                 if (t.getMapParams().containsKey("OncePerEffect")) {
-                    SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get("SpellAbilityStackInstance");
+                    SpellAbilityStackInstance si =
+                            (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
                     if (si != null) {
                         si.addOncePerEffectTrigger(t);
                     }
@@ -454,7 +450,7 @@ public class TriggerHandler {
                 int x = 1 + handlePanharmonicon(t, runParams, player);
 
                 for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, runParams);
+                    runSingleTrigger(t, stringRunParams);
                 }
                 checkStatics = true;
             }
@@ -463,7 +459,7 @@ public class TriggerHandler {
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
                 if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
-                    runSingleTrigger(deltrig, runParams);
+                    runSingleTrigger(deltrig, stringRunParams);
                     delayedTriggers.remove(deltrig);
                 }
             }
@@ -505,7 +501,7 @@ public class TriggerHandler {
         return true;
     }
 
-    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
+    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<AbilityKey, Object> runParams) {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
@@ -518,7 +514,7 @@ public class TriggerHandler {
             return false; // Conditions aren't right.
         }
 
-        if (!regtrig.performTest(runParams)) {
+        if (!regtrig.performTest(toStringMap(runParams))) {
             return false; // Test failed.
         }
         if (regtrig.isSuppressed()) {
@@ -535,10 +531,10 @@ public class TriggerHandler {
         // Torpor Orb check
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
                 && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
-            if (runParams.get("Destination") instanceof String) {
-                final String dest = (String) runParams.get("Destination");
-                if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
-                    final Card card = (Card) runParams.get("Card");
+            if (runParams.get(AbilityKey.Destination) instanceof String) {
+                final String dest = (String) runParams.get(AbilityKey.Destination);
+                if (dest.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                    final Card card = (Card) runParams.get(AbilityKey.Card);
                     if (card.isCreature()) {
                         return false;
                     }
@@ -698,7 +694,7 @@ public class TriggerHandler {
         }
     }
 
-    private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams, final Player p) {
+    private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams, final Player p) {
         Card host = t.getHostCard();
 
         // not a changesZone trigger or changesZoneAll
@@ -727,10 +723,10 @@ public class TriggerHandler {
                     final String kw = ki.getOriginal();
                     if (kw.startsWith("Panharmonicon")) {
                         // Enter the Battlefield Trigger
-                        if (runParams.get("Destination") instanceof String) {
-                            final String dest = (String) runParams.get("Destination");
-                            if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
-                                final Card card = (Card) runParams.get("Card");
+                        if (runParams.get(AbilityKey.Destination) instanceof String) {
+                            final String dest = (String) runParams.get(AbilityKey.Destination);
+                            if ("Battlefield".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {
+                                final Card card = (Card) runParams.get(AbilityKey.Card);
                                 final String valid = kw.split(":")[1];
                                 if (card.isValid(valid.split(","), p, ck, null)) {
                                     n++;
@@ -739,12 +735,12 @@ public class TriggerHandler {
                         }
                     } else if (kw.startsWith("Dieharmonicon")) {
                         // 700.4. The term dies means "is put into a graveyard from the battlefield."
-                        if (runParams.get("Origin") instanceof String) {
-                            final String origin = (String) runParams.get("Origin");
-                            if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
-                                final String dest = (String) runParams.get("Destination");
-                                if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
-                                    final Card card = (Card) runParams.get("Card");
+                        if (runParams.get(AbilityKey.Destination) instanceof String) {
+                            final String origin = (String) runParams.get(AbilityKey.Destination);
+                            if ("Battlefield".equals(origin) && runParams.get(AbilityKey.Destination) instanceof String) {
+                                final String dest = (String) runParams.get(AbilityKey.Destination);
+                                if ("Graveyard".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {
+                                    final Card card = (Card) runParams.get(AbilityKey.Card);
                                     final String valid = kw.split(":")[1];
                                     if (card.isValid(valid.split(","), p, ck, null)) {
                                         n++;
@@ -756,7 +752,7 @@ public class TriggerHandler {
                 }
             }
         } else if (t.getMode() == TriggerType.ChangesZoneAll) {
-            final CardZoneTable table = (CardZoneTable) runParams.get("Cards");
+            final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
             // iterate over all cards
             for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
                 for (final KeywordInterface ki : ck.getKeywords()) {

@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
 
@@ -33,14 +34,14 @@ public class TriggerCounterAddedAll extends Trigger {
             amount += v;
         }
 
-        sa.setTriggeringObject("Objects", Lists.newArrayList(all.keySet()));
-        sa.setTriggeringObject("Amount", amount);
+        sa.setTriggeringObject(AbilityKey.Objects, Lists.newArrayList(all.keySet()));
+        sa.setTriggeringObject(AbilityKey.Amount, amount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Amount: ").append(sa.getTriggeringObject("Amount"));
+        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 

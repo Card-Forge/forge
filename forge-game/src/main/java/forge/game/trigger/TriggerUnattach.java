@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -72,15 +73,15 @@ public class TriggerUnattach extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Object", getRunParams().get("Object"));
-        sa.setTriggeringObject("Attach", getRunParams().get("Attach"));
+        sa.setTriggeringObject(AbilityKey.Object, getRunParams().get("Object"));
+        sa.setTriggeringObject(AbilityKey.Attach, getRunParams().get("Attach"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Object: ").append(sa.getTriggeringObject("Object")).append(", ");
-        sb.append("Attachment: ").append(sa.getTriggeringObject("Attach"));
+        sb.append("Object: ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
+        sb.append("Attachment: ").append(sa.getTriggeringObject(AbilityKey.Attach));
         return sb.toString();
     }
 

@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -105,17 +106,17 @@ public class TriggerDamageDealtOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
-        sa.setTriggeringObject("Targets", this.getRunParams().get("DamageTargets"));
-        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
+        sa.setTriggeringObject(AbilityKey.Source, this.getRunParams().get("DamageSource"));
+        sa.setTriggeringObject(AbilityKey.Targets, this.getRunParams().get("DamageTargets"));
+        sa.setTriggeringObject(AbilityKey.DamageAmount, this.getRunParams().get("DamageAmount"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(sa.getTriggeringObject("Source")).append(", ");
-        sb.append("Damaged: ").append(sa.getTriggeringObject("Targets")).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
+        sb.append("Damage Source: ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
+        sb.append("Damaged: ").append(sa.getTriggeringObject(AbilityKey.Targets)).append(", ");
+        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 }
