@@ -282,7 +282,7 @@ public class DeckgenUtil {
         }
         List<String> restrictedCardsAdded = new ArrayList<>();
         for (PaperCard c:selectedCards){
-            if (format.getRestrictedCards().contains(c.getName())&&!restrictedCardsAdded.contains(c)){
+            if (format.getRestrictedCards().contains(c.getName())&&!restrictedCardsAdded.contains(c.getName())){
                 playsetList.add(c);
                 restrictedCardsAdded.add(c.getName());
                 continue;
