@@ -557,7 +557,7 @@ public class CardView extends GameEntityView {
         }
 
         tname = tname.isEmpty() ? state.getName() : tname;
-        toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+
         if (isSplitCard()) {
             taltname = getAlternateState().getName();
             taltoracle = getAlternateState().getOracleText();
@@ -572,7 +572,7 @@ public class CardView extends GameEntityView {
                 sb.append(taltoracle);
                 return sb.toString().trim();
             } else {
-                return toracle;
+                return toracle.isEmpty() ? state.getOracleText() : toracle;
             }
         }
 
