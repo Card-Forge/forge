@@ -428,6 +428,8 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        float cx, cy, cw, ch;
+        cx = x; cy = y; cw = w; ch = h;
         drawCard(g, card, x, y, w, h, pos, false);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
@@ -529,6 +531,17 @@ public class CardRenderer {
             drawPtBox(g, card, details, color, x, y, w, h);
         }
 
+        float oldAlpha = g.getfloatAlphaComposite();
+        //Darken unselectable cards
+        if(!MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting()){
+            g.setAlphaComposite(0.6f);
+            g.fillRect(Color.BLACK, cx, cy, cw, ch);
+            g.setAlphaComposite(oldAlpha);
+        }
+        //Magenta outline when card is chosen
+        if(MatchController.instance.isUsedToPay(card)){
+            g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+        }
     }
 
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
