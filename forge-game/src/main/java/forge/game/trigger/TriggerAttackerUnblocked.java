@@ -49,17 +49,18 @@ public class TriggerAttackerUnblocked extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Attacker), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("ValidDefender")) {
-            if (!matchesValid(runParams2.get("Defender"), this.mapParams.get("ValidDefender").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Defender), this.mapParams.get("ValidDefender").split(","),
                     this.getHostCard())) {
                 return false;
             }

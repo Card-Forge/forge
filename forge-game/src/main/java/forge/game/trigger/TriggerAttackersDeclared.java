@@ -45,19 +45,20 @@ public class TriggerAttackersDeclared extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
 	@SuppressWarnings("unchecked")
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("AttackingPlayer")) {
-            if (!matchesValid(runParams2.get("AttackingPlayer"),
+            if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
                     this.mapParams.get("AttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("AttackedTarget")) {
             boolean valid = false;
-            List<GameEntity> list = (List<GameEntity>) runParams2.get("AttackedTarget");
+            List<GameEntity> list = (List<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
             for (GameEntity b : list) {
                 if (matchesValid(b, this.mapParams.get("AttackedTarget").split(","), this.getHostCard())) {
                     valid = true;
@@ -71,7 +72,7 @@ public class TriggerAttackersDeclared extends Trigger {
         if (this.mapParams.containsKey("ValidAttackers")) {
             boolean valid = false;
 
-            final Iterable<Card> srcs = (Iterable<Card>) runParams2.get("Attackers");
+            final Iterable<Card> srcs = (Iterable<Card>) runParams.get(AbilityKey.Attackers);
             for (Card c : srcs) {
                 if (c.isValid(this.mapParams.get("ValidAttackers").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                     valid = true;

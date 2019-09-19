@@ -50,9 +50,9 @@ public class TriggerExplores extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidCard")) {
-            return matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+            return matchesValid(runParams.get(AbilityKey.Card), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard());
         }
 

@@ -49,18 +49,19 @@ public class TriggerLifeLost extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("FirstTime")) {
-            if (!(boolean)runParams2.get("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
                 return false;
             }
         }

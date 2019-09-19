@@ -49,11 +49,12 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-    	final Object a = runParams2.get("Attacker"),
-    			b = runParams2.get("Blocker");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+    	final Object a = runParams.get(AbilityKey.Attacker),
+    			b = runParams.get(AbilityKey.Blocker);
     	if (!(a instanceof Card && b instanceof Card)) {
     		return false;
     	}

@@ -22,6 +22,8 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_CounterRemovedOnce class.
@@ -48,11 +50,12 @@ public class TriggerCounterRemovedOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card removedFrom = (Card) runParams2.get("Card");
-        final CounterType removedType = (CounterType) runParams2.get("CounterType");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card removedFrom = (Card) runParams.get(AbilityKey.Card);
+        final CounterType removedType = (CounterType) runParams.get(AbilityKey.CounterType);
 
         if (hasParam("ValidCard")) {
             if (!removedFrom.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),

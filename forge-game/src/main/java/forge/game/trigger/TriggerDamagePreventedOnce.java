@@ -22,6 +22,8 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_DamageDone class.
@@ -48,10 +50,11 @@ public class TriggerDamagePreventedOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Object tgt = runParams2.get("DamageTarget");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
         if (this.mapParams.containsKey("ValidTarget")) {
             if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
@@ -61,11 +64,11 @@ public class TriggerDamagePreventedOnce extends Trigger {
 
         if (this.mapParams.containsKey("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams2.get("IsCombatDamage"))) {
+                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             } else if (this.mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams2.get("IsCombatDamage"))) {
+                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             }
@@ -76,7 +79,7 @@ public class TriggerDamagePreventedOnce extends Trigger {
 
             final String operator = fullParam.substring(0, 2);
             final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams2.get("DamageAmount");
+            final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
 
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;

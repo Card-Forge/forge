@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Attached class.
@@ -47,11 +49,12 @@ public class TriggerAttached extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card src = (Card) runParams2.get("AttachSource");
-        final Object tgt = runParams2.get("AttachTarget");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card src = (Card) runParams.get(AbilityKey.AttachSource);
+        final Object tgt = runParams.get(AbilityKey.AttachTarget);
 
         if (this.mapParams.containsKey("ValidSource")) {
             if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),

@@ -48,21 +48,22 @@ public class TriggerLifeGained extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams2.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
         if (hasParam("Spell")) {
-            final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
+            final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.SourceSA);
             if (spellAbility == null || !spellAbility.getRootAbility().isSpell()) {
                 return false;
             }

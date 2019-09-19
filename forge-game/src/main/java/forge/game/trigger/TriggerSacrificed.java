@@ -24,6 +24,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Sacrificed class.
@@ -50,12 +52,13 @@ public class TriggerSacrificed extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card sac = (Card) runParams2.get("Card");
-        final Player player = (Player) runParams2.get("Player");
-        final SpellAbility sourceSA = (SpellAbility) runParams2.get("Cause");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card sac = (Card) runParams.get(AbilityKey.Card);
+        final Player player = (Player) runParams.get(AbilityKey.Player);
+        final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
         if (this.mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(player, this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
@@ -89,7 +92,7 @@ public class TriggerSacrificed extends Trigger {
             boolean withKeyword = false;
 
             // When cast with Emerge, the cost instance is there
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
+            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
             SpellAbility sa = currentPayment.getPayment().getAbility();
 
             if (sa != null && sa.getHostCard() != null) {
@@ -100,7 +103,7 @@ public class TriggerSacrificed extends Trigger {
 
             if (!withKeyword) {
                 // When done for another card to get the Mana, the Emerge card is there
-                CostPaymentStack stack = (CostPaymentStack) runParams2.get("CostStack");
+                CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
 
                 for (IndividualCostPaymentInstance individual : stack) {
                     sa = individual.getPayment().getAbility();

@@ -12,10 +12,11 @@ public class TriggerPhaseOut extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card phaser = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card phaser = (Card) runParams.get(AbilityKey.Card);
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (this.mapParams.get("ValidCard").equals("Card.Self")) {

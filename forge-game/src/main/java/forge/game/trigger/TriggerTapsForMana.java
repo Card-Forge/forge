@@ -23,6 +23,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_TapsForMana class.
@@ -49,20 +51,21 @@ public class TriggerTapsForMana extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         
         //Check for tapping
         if (!mapParams.containsKey("NoTapCheck")) {
-            final SpellAbility manaAbility = (SpellAbility) runParams2.get("AbilityMana");
+            final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("ValidCard")) {
-            final Card tapper = (Card) runParams2.get("Card");
+            final Card tapper = (Card) runParams.get(AbilityKey.Card);
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
@@ -70,14 +73,14 @@ public class TriggerTapsForMana extends Trigger {
         }
 
         if (this.mapParams.containsKey("Player")) {
-            final Player player = (Player) runParams2.get("Player");
+            final Player player = (Player) runParams.get(AbilityKey.Player);
             if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("Activator")) {
-            final SpellAbility sa = (SpellAbility) runParams2.get("AbilityMana");
+            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (sa == null) return false;
             final Player activator = sa.getActivatingPlayer();
             if (!activator.isValid(this.mapParams.get("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
@@ -86,7 +89,7 @@ public class TriggerTapsForMana extends Trigger {
         }
 
         if (this.mapParams.containsKey("Produced")) {
-            Object prod = runParams2.get("Produced");
+            Object prod = runParams.get(AbilityKey.Produced);
             if (prod == null || !(prod instanceof String)) {
                 return false;
             }

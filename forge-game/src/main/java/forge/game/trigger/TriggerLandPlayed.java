@@ -62,10 +62,11 @@ public class TriggerLandPlayed extends Trigger {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        Card land = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        Card land = (Card) runParams.get(AbilityKey.Card);
         if (this.mapParams.containsKey("ValidCard")) {
             if (!matchesValid(land, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
                 return false;

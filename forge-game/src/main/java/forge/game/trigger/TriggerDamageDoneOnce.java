@@ -17,17 +17,17 @@ public class TriggerDamageDoneOnce extends Trigger {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        final Set<Card> srcs = (Set<Card>) runParams2.get("DamageSources");
-        final GameEntity tgt = (GameEntity) runParams2.get("DamageTarget");
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        final Set<Card> srcs = (Set<Card>) runParams.get(AbilityKey.DamageSources);
+        final GameEntity tgt = (GameEntity) runParams.get(AbilityKey.DamageTarget);
 
         if (this.mapParams.containsKey("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams2.get("IsCombatDamage"))) {
+                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             } else if (this.mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams2.get("IsCombatDamage"))) {
+                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             }

@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Devoured class.
@@ -47,10 +49,11 @@ public class TriggerDevoured extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card sac = (Card) runParams2.get("Devoured");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card sac = (Card) runParams.get(AbilityKey.Devoured);
         if (this.mapParams.containsKey("ValidDevoured")) {
             return sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null);

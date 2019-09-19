@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import java.util.List;
+import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -50,19 +51,20 @@ public class TriggerSearchedLibrary extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("SearchOwnLibrary")) {
             @SuppressWarnings("unchecked")
-            List<Player> targets = (List<Player>) runParams2.get("Target");
-            if (!targets.contains(runParams2.get("Player"))) {
+            List<Player> targets = (List<Player>) runParams.get(AbilityKey.Target);
+            if (!targets.contains(runParams.get(AbilityKey.Player))) {
                 return false;
             }
         }

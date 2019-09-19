@@ -52,18 +52,19 @@ public class TriggerAttacks extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Attacker), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("Attacked")) {
-            GameEntity attacked = (GameEntity) runParams2.get("Attacked");
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (!attacked.isValid(this.mapParams.get("Attacked").split(",")
                     , this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
@@ -72,7 +73,7 @@ public class TriggerAttacks extends Trigger {
 
         if (this.mapParams.containsKey("Alone")) {
             @SuppressWarnings("unchecked")
-            final List<Card> otherAttackers = (List<Card>) runParams2.get("OtherAttackers");
+            final List<Card> otherAttackers = (List<Card>) runParams.get(AbilityKey.OtherAttackers);
             if (otherAttackers == null) {
                 return false;
             }
@@ -88,25 +89,25 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.mapParams.containsKey("FirstAttack")) {
-            Card attacker = (Card) runParams2.get("Attacker");
+            Card attacker = (Card) runParams.get(AbilityKey.Attacker);
             if (attacker.getDamageHistory().getCreatureAttacksThisTurn() > 1) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("DefendingPlayerPoisoned")) {
-            Player defendingPlayer = (Player) runParams2.get("DefendingPlayer");
+            Player defendingPlayer = (Player) runParams.get(AbilityKey.DefendingPlayer);
         	if (defendingPlayer.getPoisonCounters() == 0) {
         		return false;
         	}
         }
 
         if (this.mapParams.containsKey("AttackDifferentPlayers")) {
-            GameEntity attacked = (GameEntity) runParams2.get("Attacked");
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             boolean found = false;
             if (attacked instanceof Player) {
                 @SuppressWarnings("unchecked")
-                List<GameEntity> list = (List<GameEntity>) runParams2.get("Defenders");
+                List<GameEntity> list = (List<GameEntity>) runParams.get(AbilityKey.Defenders);
                 for (GameEntity e : list) {
                     if ((e instanceof Player) && !e.equals(attacked)) {
                         found = true;

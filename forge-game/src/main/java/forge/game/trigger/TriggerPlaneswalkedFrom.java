@@ -33,9 +33,9 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
     @Override
-    public boolean performTest(final Map<String, Object> runParams2) {
+    public boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("ValidCard")) {
-            final CardCollection moved = (CardCollection) runParams2.get("Cards");
+            final CardCollection moved = (CardCollection) runParams.get(AbilityKey.Cards);
             for(Card c : moved) {
                 if (c.isValid(this.mapParams.get("ValidCard").split(","), this
                         .getHostCard().getController(), this.getHostCard(), null)) {

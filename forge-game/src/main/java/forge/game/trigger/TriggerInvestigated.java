@@ -63,10 +63,11 @@ public class TriggerInvestigated extends Trigger {
         sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        Player p = (Player) runParams2.get("Player");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        Player p = (Player) runParams.get(AbilityKey.Player);
         if (this.mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(p, this.mapParams.get("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
@@ -74,7 +75,7 @@ public class TriggerInvestigated extends Trigger {
         }
         
         if (this.mapParams.containsKey("OnlyFirst")) {
-            if ((int) runParams2.get("Num") != 1) {
+            if ((int) runParams.get(AbilityKey.Num) != 1) {
                 return false;
             }
         }

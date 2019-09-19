@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Championed class.
@@ -48,11 +50,12 @@ public class TriggerChampioned extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card championed = (Card) runParams2.get("Championed");
-        final Card source = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card championed = (Card) runParams.get(AbilityKey.Championed);
+        final Card source = (Card) runParams.get(AbilityKey.Card);
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!championed.isValid(this.mapParams.get("ValidCard").split(","),

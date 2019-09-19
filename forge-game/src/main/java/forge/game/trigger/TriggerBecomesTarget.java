@@ -50,11 +50,12 @@ public class TriggerBecomesTarget extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (this.mapParams.containsKey("SourceType")) {
-            final SpellAbility sa = (SpellAbility) runParams2.get("SourceSA");
+            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.SourceSA);
             if (this.mapParams.get("SourceType").equalsIgnoreCase("spell")) {
                 if (!sa.isSpell()) {
                     return false;
@@ -66,19 +67,19 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getHostCard(), this.mapParams
+            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), this.mapParams
                     .get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(runParams2.get("Target"), this.mapParams.get("ValidTarget").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Target), this.mapParams.get("ValidTarget").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("FirstTime")) {
-            if (!runParams2.containsKey("FirstTime")) {
+            if (!runParams.containsKey(AbilityKey.FirstTime)) {
                 return false;
             }
         }

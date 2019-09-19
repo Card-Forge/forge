@@ -52,16 +52,17 @@ public class TriggerExiled extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("Origin")) {
             if (!getParam("Origin").equals("Any")) {
                 if (getParam("Origin") == null) {
                     return false;
                 }
                 if (!ArrayUtils.contains(
-                    getParam("Origin").split(","), runParams2.get("Origin")
+                    getParam("Origin").split(","), runParams.get(AbilityKey.Origin)
                 )) {
                     return false;
                 }
@@ -69,7 +70,7 @@ public class TriggerExiled extends Trigger {
         }
 
         if (hasParam("ValidCard")) {
-            Card moved = (Card) runParams2.get("Card");
+            Card moved = (Card) runParams.get(AbilityKey.Card);
 
             if (!moved.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
@@ -78,10 +79,10 @@ public class TriggerExiled extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams2.containsKey("Cause") ) {
+            if (!runParams.containsKey("Cause") ) {
                 return false;
             }
-            SpellAbility cause = (SpellAbility) runParams2.get("Cause");
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             if (cause == null) {
                 return false;
             }

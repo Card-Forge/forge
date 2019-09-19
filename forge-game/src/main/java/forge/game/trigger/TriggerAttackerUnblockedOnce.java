@@ -51,14 +51,15 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @SuppressWarnings("unchecked")
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidDefenders")) {
             boolean valid = false;
 
-            final List<GameEntity> srcs = (List<GameEntity>) runParams2.get("Defenders");
+            final List<GameEntity> srcs = (List<GameEntity>) runParams.get(AbilityKey.Defenders);
             for (GameEntity c : srcs) {
                 if (c.isValid(this.mapParams.get("ValidDefenders").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                     valid = true;
@@ -74,7 +75,7 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
             */
         }
         if (hasParam("ValidAttackingPlayer")) {
-            if (!matchesValid(runParams2.get("AttackingPlayer"),
+            if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
                     this.mapParams.get("ValidAttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }

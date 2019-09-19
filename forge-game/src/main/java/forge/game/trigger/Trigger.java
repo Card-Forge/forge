@@ -439,11 +439,11 @@ public abstract class Trigger extends TriggerReplacementBase {
      * performTest.
      * </p>
      * 
-     * @param runParams2
-     *            a {@link java.util.HashMap} object.
+     * @param runParams
+     *            a {@link HashMap} object.
      * @return a boolean.
      */
-    public abstract boolean performTest(java.util.Map<String, Object> runParams2);
+    public abstract boolean performTest(Map<AbilityKey, Object> runParams);
 
     /**
      * <p>
