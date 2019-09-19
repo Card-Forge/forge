@@ -1,0 +1,7 @@
+Name:Revenge of Ravens
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life and you gain 1 life.

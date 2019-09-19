@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.util.TextUtil;
 
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.Map;
  */
 public class TriggerWaiting {
     private TriggerType mode;
-    private Map<String, Object> params;
+    private Map<AbilityKey, Object> params;
     private List<Trigger> triggers = null;
 
-    public TriggerWaiting(TriggerType m, Map<String, Object> p) {
+    public TriggerWaiting(TriggerType m, Map<AbilityKey, Object> p) {
         mode = m;
         params = p;
     }
@@ -22,7 +23,7 @@ public class TriggerWaiting {
         return mode;
     }
 
-    public Map<String, Object> getParams() {
+    public Map<AbilityKey, Object> getParams() {
         return params;
     }
 

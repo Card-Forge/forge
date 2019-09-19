@@ -381,6 +381,9 @@ public class CostAdjustment {
         } else if ("Undaunted".equals(amount)) {
             value = card.getController().getOpponents().size();
         } else if (staticAbility.hasParam("Relative")) {
+            // TODO: update cards with "This spell costs X less to cast...if you..."
+            // The caster is sa.getActivatingPlayer()
+            // cards like Hostage Taker can cast spells from other players.
             value = AbilityUtils.calculateAmount(hostCard, amount, sa);
         } else {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);

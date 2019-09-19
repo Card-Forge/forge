@@ -92,7 +92,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     // is Kicked, is Buyback
 
     // Triggers
-    private final Map<String, Object> triggeringObjects;
+    private final Map<AbilityKey, Object> triggeringObjects;
     private final List<Object> triggerRemembered;
 
     private final Map<String, String> storedSVars = Maps.newHashMap();
@@ -364,7 +364,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         }
     }
 
-    public boolean addTriggeringObject(String trigObj, Object value) {
+    public boolean addTriggeringObject(AbilityKey trigObj, Object value) {
         if (!triggeringObjects.containsKey(trigObj)) {
             triggeringObjects.put(trigObj, value);
             return true;
@@ -372,7 +372,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return false;
     }
 
-    public boolean updateTriggeringObject(String trigObj, Object value) {
+    public boolean updateTriggeringObject(AbilityKey trigObj, Object value) {
         if (triggeringObjects.containsKey(trigObj)) {
             triggeringObjects.replace(trigObj, value);
             return true;
@@ -380,7 +380,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return false;
     }
 
-    public Object getTriggeringObject(String trigObj) {
+    public Object getTriggeringObject(AbilityKey trigObj) {
         if (triggeringObjects.containsKey(trigObj)) {
             return triggeringObjects.get(trigObj);
         }

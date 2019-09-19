@@ -546,13 +546,13 @@ public class Combat {
         Game game = c.getGame();
         for (SpellAbilityStackInstance si : game.getStack()) {
             if (si.isTrigger() && c.equals(si.getSourceCard())) {
-                GameEntity origDefender = (GameEntity)si.getTriggeringObject("OriginalDefender");
+                GameEntity origDefender = (GameEntity)si.getTriggeringObject(AbilityKey.OriginalDefender);
                 if (origDefender != null) {
-                    si.updateTriggeringObject("Defender", origDefender);
+                    si.updateTriggeringObject(AbilityKey.Defender, origDefender);
                     if (origDefender instanceof Player) {
-                        si.updateTriggeringObject("DefendingPlayer", origDefender);
+                        si.updateTriggeringObject(AbilityKey.DefendingPlayer, origDefender);
                     } else if (origDefender instanceof Card) {
-                        si.updateTriggeringObject("DefendingPlayer", ((Card)origDefender).getController());
+                        si.updateTriggeringObject(AbilityKey.DefendingPlayer, ((Card)origDefender).getController());
                     }
                 }
             }

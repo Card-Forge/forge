@@ -156,7 +156,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
             }
-            if (ai.getAttackedWithCreatureThisTurn()) {
+            if (!ai.getCreaturesAttackedThisTurn().isEmpty()) {
                 dmg = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
             }
         } else if ("WildHunt".equals(logic)) {
