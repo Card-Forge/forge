@@ -1,0 +1,9 @@
+Name:Stormfist Crusader
+ManaCost:B R
+Types:Creature Human Knight
+PT:2/2
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each player draws a card and loses 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1
+Oracle:Menace\nAt the beginning of your upkeep, each player draws a card and loses 1 life.
