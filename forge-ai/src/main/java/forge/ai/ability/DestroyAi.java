@@ -63,7 +63,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
         } else if ("AtEOTIfNotAttacking".equals(sa.getParam("AILogic"))) {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
-            if (!ph.is(PhaseType.END_OF_TURN) || ai.getAttackedWithCreatureThisTurn()) {
+            if (!ph.is(PhaseType.END_OF_TURN) || !ai.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
         }

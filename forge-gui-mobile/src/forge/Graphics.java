@@ -533,6 +533,7 @@ public class Graphics {
         alphaComposite = 1;
         batch.setColor(Color.WHITE);
     }
+    public float getfloatAlphaComposite() { return  alphaComposite; }
 
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);

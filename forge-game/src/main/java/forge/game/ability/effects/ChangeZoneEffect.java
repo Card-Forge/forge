@@ -980,7 +980,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     } 
                     c.setController(newController, game.getNextTimestamp());
                 }
-
+                if (sa.hasParam("WithCounters")) {
+                    String[] parse = sa.getParam("WithCounters").split("_");
+                    c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
+                }
                 if (sa.hasParam("Transformed")) {
                     if (c.isDoubleFaced()) {
                         c.changeCardState("Transform", null);

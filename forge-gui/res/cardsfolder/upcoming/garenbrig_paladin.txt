@@ -2,8 +2,6 @@ Name:Garenbrig Paladin
 ManaCost:4 G
 Types:Creature Giant Knight
 PT:4/4
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Adamant$ Green | ReplaceWith$ ETBAddCounter | Description$ Adamant — If at least three green mana was spent to cast this spell, CARDNAME enters the battlefield with a +1/+1 counter on it.
-SVar:ETBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:etbCounter:P1P1:1:Adamant$ Green:Adamant — If at least three green mana was spent to cast this spell, CARDNAME enters the battlefield with a +1/+1 counter on it.
 K:CantBeBlockedBy Creature.powerLE2
 Oracle:Adamant — If at least three green mana was spent to cast this spell, Garenbrig Paladin enters the battlefield with a +1/+1 counter on it.\nGarenbrig Paladin can't be blocked by creatures with power 2 or less.

@@ -1076,6 +1076,14 @@ public class PhaseHandler implements java.io.Serializable {
                 game.fireEvent(new GameEventGameRestarted(playerTurn));
                 return;
             }
+
+            // update Priority for all players
+            for (final Player p : game.getPlayers()) {
+                if(getPriorityPlayer() == p)
+                    p.setHasPriority(true);
+                else
+                    p.setHasPriority(false);
+            }
         }
     }
 

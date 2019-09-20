@@ -28,6 +28,7 @@ import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -96,6 +97,8 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
 
+        final Localizer localizer = Localizer.getInstance();
+
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
@@ -106,13 +109,13 @@ public class Forge implements ApplicationListener {
 
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
-                splashScreen.getProgressBar().setDescription("Loading fonts...");
+                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
                 FSkinFont.preloadAll();
 
-                splashScreen.getProgressBar().setDescription("Loading card translations...");
+                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
                 CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
 
-                splashScreen.getProgressBar().setDescription("Finishing startup...");
+                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
@@ -248,11 +251,16 @@ public class Forge implements ApplicationListener {
                 }
             }
         };
+
+        final Localizer localizer = Localizer.getInstance();
+
         if (silent) {
             callback.run(true);
         }
         else {
-            FOptionPane.showConfirmDialog("Are you sure you wish to restart Forge?", "Restart Forge", "Restart", "Cancel", callback);
+            FOptionPane.showConfirmDialog(
+                    localizer.getMessage("lblAreYouSureYouWishRestartForge"), localizer.getMessage("lblRestartForge"),
+                    localizer.getMessage("lblRestart"), localizer.getMessage("lblCancel"), callback);
         }
     }
 
@@ -268,11 +276,16 @@ public class Forge implements ApplicationListener {
                 }
             }
         };
+        
+        final Localizer localizer = Localizer.getInstance();
+
         if (silent) {
             callback.run(true);
         }
         else {
-            FOptionPane.showConfirmDialog("Are you sure you wish to exit Forge?", "Exit Forge", "Exit", "Cancel", callback);
+            FOptionPane.showConfirmDialog(
+                localizer.getMessage("lblAreYouSureYouWishExitForge"), localizer.getMessage("lblExitForge"),
+                localizer.getMessage("lblExit"), localizer.getMessage("lblCancel"), callback);
         }
     }
 
