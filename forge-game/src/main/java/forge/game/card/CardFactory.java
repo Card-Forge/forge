@@ -735,6 +735,14 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
             ret2.copyFrom(in.getState(CardStateName.Flipped, true), false);
             result.put(CardStateName.Flipped, ret2);
+        } else if (in.isAdventureCard()) {
+            final CardState ret1 = new CardState(out, CardStateName.Original);
+            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
+            result.put(CardStateName.Original, ret1);
+
+            final CardState ret2 = new CardState(out, CardStateName.Adventure);
+            ret2.copyFrom(in.getState(CardStateName.Adventure, true), false);
+            result.put(CardStateName.Adventure, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);

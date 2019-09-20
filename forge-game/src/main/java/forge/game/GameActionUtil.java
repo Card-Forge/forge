@@ -106,12 +106,6 @@ public final class GameActionUtil {
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
                 }
-                // need way to copy adventure state
-                if (!source.hasState(CardStateName.Adventure)) {
-                    source.addAlternateState(CardStateName.Adventure, false);
-                    source.getState(CardStateName.Adventure).copyFrom(
-                            sa.getHostCard().getState(CardStateName.Adventure), true);
-                }
 
                 source.setState(CardStateName.Adventure, false);
 

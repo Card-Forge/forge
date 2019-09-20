@@ -1340,6 +1340,14 @@ public class CardProperty {
             if (card.isToken()) {
                 return false;
             }
+        } else if (property.startsWith("copiedSpell")) {
+            if (!card.isCopiedSpell()) {
+                return false;
+            }
+        } else if (property.startsWith("nonCopiedSpell")) {
+            if (card.isCopiedSpell()) {
+                return false;
+            }
         } else if (property.startsWith("hasXCost")) {
             SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && !sa1.isXCost()) {

@@ -807,7 +807,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean isAdventureCard() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Adventure;
+        return hasState(CardStateName.Adventure);
     }
 
     public final boolean isBackSide() {

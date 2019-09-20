@@ -138,12 +138,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             if (!card.isLKI()) {
                 card = CardUtil.getLKICopy(card);
             }
-            // need way to copy adventure state
-            if (!card.hasState(CardStateName.Adventure)) {
-                card.addAlternateState(CardStateName.Adventure, false);
-                card.getState(CardStateName.Adventure).copyFrom(
-                    getHostCard().getState(CardStateName.Adventure), true);
-            }
 
             card.setState(CardStateName.Adventure, false);
             lkicheck = true;
