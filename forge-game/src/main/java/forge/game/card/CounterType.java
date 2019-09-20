@@ -147,6 +147,8 @@ public enum CounterType {
 
     KI("KI", 190, 189, 255),
 
+    KNOWLEDGE("KNOWLEDGE", 0, 115, 255),
+
     LANDMARK("LNMRK", 186, 28, 28),
 
     LEVEL("LEVEL", 60, 222, 185),

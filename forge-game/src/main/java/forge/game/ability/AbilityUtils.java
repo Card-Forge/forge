@@ -464,12 +464,9 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            else if (hType.startsWith("PropertyYou") && !(ability instanceof SpellAbility)) {
-                // Related to the controller of the card with ability when the ability is static (or otherwise not a SpellAbility)
-                // TODO: This doesn't work in situations when the controller of the card is different from the spell caster
-                // (e.g. opponent's Hollow One exiled by Hostage Taker - cost reduction will not work in this scenario, requires
-                // a more significant rework).
-                players.add(card.getController());
+            else if (hType.startsWith("PropertyYou") && ability instanceof SpellAbility) {
+                // Hollow One
+                players.add(((SpellAbility) ability).getActivatingPlayer());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
@@ -1622,7 +1619,8 @@ public class AbilityUtils {
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
-                    final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= 3;
+                    final int num = sq[0].length() > 7 ? Integer.parseInt(sq[0].split("_")[1]) : 3;
+                    final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= num;
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
                 }
 

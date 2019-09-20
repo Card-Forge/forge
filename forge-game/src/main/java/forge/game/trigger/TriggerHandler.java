@@ -732,8 +732,8 @@ public class TriggerHandler {
                         }
                     } else if (kw.startsWith("Dieharmonicon")) {
                         // 700.4. The term dies means "is put into a graveyard from the battlefield."
-                        if (runParams.get(AbilityKey.Destination) instanceof String) {
-                            final String origin = (String) runParams.get(AbilityKey.Destination);
+                        if (runParams.get(AbilityKey.Origin) instanceof String) {
+                            final String origin = (String) runParams.get(AbilityKey.Origin);
                             if ("Battlefield".equals(origin) && runParams.get(AbilityKey.Destination) instanceof String) {
                                 final String dest = (String) runParams.get(AbilityKey.Destination);
                                 if ("Graveyard".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {

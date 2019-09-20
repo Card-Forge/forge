@@ -269,15 +269,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     protected void startMatch() {
         for (int i = 0; i < getNumPlayers(); i++) {
-            updateDeck(i);
+            updateDeck(i);//TODO: Investigate why AI names cannot be overriden?
+            updateName(i, getPlayerName(i));
         }
-        //set this so we cant get any multi/rapid tap on start button
-        Forge.setLoadingaMatch(true);
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
             @Override
             public void run() {
                 final Runnable startGame = lobby.startGame();
                 if (startGame != null) {
+                    //set this so we cant get any multi/rapid tap on start button
+                    Forge.setLoadingaMatch(true);
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
@@ -611,6 +612,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         decks[playerIndex] = playerDeck;
         if (playerChangeListener != null) {
             playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.deckUpdate(playerDeck));
+        }
+    }
+
+    private void updateName(final int playerIndex, final String name) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.nameUpdate(name));
         }
     }
 

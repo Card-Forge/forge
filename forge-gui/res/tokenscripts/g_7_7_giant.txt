@@ -1,0 +1,6 @@
+Name:Giant
+Colors:green
+ManaCost:no cost
+PT:7/7
+Types:Creature Giant
+Oracle:
