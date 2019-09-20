@@ -111,28 +111,6 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
-        } else if (property.startsWith("leftcmc") || property.startsWith("rightcmc")) {
-            int x;
-            int y = 0;
-            String rhs = "";
-
-            if (property.startsWith("leftcmc")) {
-                rhs = property.substring(9);
-                y = card.getCMC(Card.SplitCMCMode.LeftSplitCMC);
-            } else if (property.startsWith("rightcmc")) {
-                rhs = property.substring(10);
-                y = card.getCMC(Card.SplitCMCMode.RightSplitCMC);
-            }
-
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
-
-            if (!Expressions.compare(y, property, x)) {
-                return false;
-            }
         } else if (property.startsWith("YouCtrl")) {
             if (!controller.equals(sourceController)) {
                 return false;

@@ -114,6 +114,38 @@ public final class GameActionUtil {
                 }
 
                 source.setState(CardStateName.Adventure, false);
+
+                // need to reset CMC
+                source.setLKICMC(-1);
+                source.setLKICMC(source.getCMC());
+                lkicheck = true;
+            } else if (source.isSplitCard() && (sa.isLeftSplit() || sa.isRightSplit())) {
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+                if (sa.isLeftSplit()) {
+                    if (!source.hasState(CardStateName.LeftSplit)) {
+                        source.addAlternateState(CardStateName.LeftSplit, false);
+                        source.getState(CardStateName.LeftSplit).copyFrom(
+                                sa.getHostCard().getState(CardStateName.LeftSplit), true);
+                    }
+
+                    source.setState(CardStateName.LeftSplit, false);
+                }
+
+                if (sa.isRightSplit()) {
+                    if (!source.hasState(CardStateName.RightSplit)) {
+                        source.addAlternateState(CardStateName.RightSplit, false);
+                        source.getState(CardStateName.RightSplit).copyFrom(
+                                sa.getHostCard().getState(CardStateName.RightSplit), true);
+                    }
+
+                    source.setState(CardStateName.RightSplit, false);
+                }
+
+                // need to reset CMC
+                source.setLKICMC(-1);
+                source.setLKICMC(source.getCMC());
                 lkicheck = true;
             }
 
@@ -146,20 +178,6 @@ public final class GameActionUtil {
                     newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
                     newSA.setBasicSpell(false);
                     changedManaCost = true;
-                    if (host.hasSVar("AsForetoldSplitCMCHack")) {
-                        // TODO: This is a temporary workaround for As Foretold interaction with split cards, better solution needed.
-                        if (sa.isLeftSplit()) {
-                            int leftCMC = sa.getHostCard().getCMC(Card.SplitCMCMode.LeftSplitCMC);
-                            if (leftCMC > host.getCounters(CounterType.TIME)) {
-                                continue;
-                            }
-                        } else if (sa.isRightSplit()) {
-                            int rightCMC = sa.getHostCard().getCMC(Card.SplitCMCMode.RightSplitCMC);
-                            if (rightCMC > host.getCounters(CounterType.TIME)) {
-                                continue;
-                            }
-                        }
-                    }
                 } else {
                     newSA = sa.copy(activator);
                 }
