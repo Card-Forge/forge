@@ -1,0 +1,15 @@
+Name:Faerie Guidemother
+ManaCost:W
+Types:Creature Faerie
+PT:1/1
+K:Flying
+Oracle:Flying
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:Gift of the Fae
+ManaCost:1 W
+Types:Sorcery Adventure
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 1 | KW$ Flying | SpellDescription$ Target creature gets +2/+1 and gains flying until end of turn.
+Oracle:Target creature gets +2/+1 and gains flying until end of turn.
