@@ -146,6 +146,10 @@ public class GameAction {
             }
         }
 
+        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
+        if (c.isAdventureCard() && (zoneFrom.is(ZoneType.Stack) || !zoneTo.is(ZoneType.Stack))) {
+            c.setState(CardStateName.Original, true);
+        }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
         // Clean up the temporary AtEOT SVar

@@ -107,26 +107,8 @@ public class CardProperty {
             if (card.isSplitCard()) {
                 return false;
             }
-        } else if (property.startsWith("leftcmc") || property.startsWith("rightcmc")) {
-            int x;
-            int y = 0;
-            String rhs = "";
-
-            if (property.startsWith("leftcmc")) {
-                rhs = property.substring(9);
-                y = card.getCMC(Card.SplitCMCMode.LeftSplitCMC);
-            } else if (property.startsWith("rightcmc")) {
-                rhs = property.substring(10);
-                y = card.getCMC(Card.SplitCMCMode.RightSplitCMC);
-            }
-
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
-
-            if (!Expressions.compare(y, property, x)) {
+        } else if (property.equals("AdventureCard")) {
+            if (!card.isAdventureCard()) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
@@ -1356,6 +1338,14 @@ public class CardProperty {
             }
         } else if (property.startsWith("nonToken")) {
             if (card.isToken()) {
+                return false;
+            }
+        } else if (property.startsWith("copiedSpell")) {
+            if (!card.isCopiedSpell()) {
+                return false;
+            }
+        } else if (property.startsWith("nonCopiedSpell")) {
+            if (card.isCopiedSpell()) {
                 return false;
             }
         } else if (property.startsWith("hasXCost")) {
