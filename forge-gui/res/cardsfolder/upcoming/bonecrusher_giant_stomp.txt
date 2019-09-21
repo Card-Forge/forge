@@ -1,0 +1,18 @@
+Name:Bonecrusher Giant
+ManaCost:2 R
+Types:Creature Giant
+PT:4/3
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When CARDNAME becomes the target of a spell, CARDNAME deals 2 damage to that spell's controller.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ 2
+Oracle:Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell's controller.
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:Stomp
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Effect | Cost$ 1 R | Name$ Stomp Effect | StaticAbilities$ STCantPrevent | AILogic$ Burn | SubAbility$ DBDamage | SpellDescription$ Damage can't be prevented this turn. CARDNAME deals 2 damage to any target.
+SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker,Creature | TgtPrompt$ Select any target | NumDmg$ 2 | NoPrevention$ True
+Oracle:Damage can't be prevented this turn. Stomp deals 2 damage to any target.
