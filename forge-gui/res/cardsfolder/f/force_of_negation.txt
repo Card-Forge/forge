@@ -3,5 +3,4 @@ ManaCost:1 U U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target nonCreature Spell | ValidTgts$ Card.nonCreature | Destination$ Exile | SpellDescription$ Counter target noncreature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyayrd.
 SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a blue card from your hand rather than pay this spell's mana cost. 
-Svar:Picture:http://mythicspoiler.com/mh1/cards/forceofnegation.jpg
 Oracle:If it's not your turn, you may exile a blue card from your hand rather than pay this spell's mana cost.\nCounter target noncreature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyayrd.

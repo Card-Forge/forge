@@ -39,8 +39,7 @@ public class TriggerCrewed extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Vehicle, this.getRunParams().get("Vehicle"));
-        sa.setTriggeringObject(AbilityKey.Crew, this.getRunParams().get("Crew"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Vehicle, AbilityKey.Crew);
     }
 
     @Override

@@ -338,7 +338,7 @@ public class TriggerHandler {
     private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
         for (final Trigger t: activeTriggers) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
-                runSingleTrigger(t, toStringMap(runParams));
+                runSingleTrigger(t, runParams);
             }
         }
     }
@@ -376,7 +376,7 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                runSingleTrigger(t, toStringMap(runParams));
+                runSingleTrigger(t, runParams);
 
                 checkStatics = true;
             }
@@ -420,7 +420,6 @@ public class TriggerHandler {
 
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
-        final Map<String, Object> stringRunParams = toStringMap(runParams);
         final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
 
         Card card = null;
@@ -450,7 +449,7 @@ public class TriggerHandler {
                 int x = 1 + handlePanharmonicon(t, runParams, player);
 
                 for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, stringRunParams);
+                    runSingleTrigger(t, runParams);
                 }
                 checkStatics = true;
             }
@@ -459,7 +458,7 @@ public class TriggerHandler {
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
                 if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
-                    runSingleTrigger(deltrig, stringRunParams);
+                    runSingleTrigger(deltrig, runParams);
                     delayedTriggers.remove(deltrig);
                 }
             }
@@ -541,20 +540,34 @@ public class TriggerHandler {
                 }
             }
         } // Torpor Orb check
+
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureDyingTriggers)
+                && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
+            if (runParams.get(AbilityKey.Destination) instanceof String && runParams.get(AbilityKey.Origin) instanceof String) {
+                final String dest = (String) runParams.get(AbilityKey.Destination);
+                final String origin = (String) runParams.get(AbilityKey.Origin);
+                if (dest.equals("Graveyard") && origin.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                    final Card card = (Card) runParams.get(AbilityKey.Card);
+                    if (card.isCreature()) {
+                        return false;
+                    }
+                }
+            }
+        } 
         return true;
     }
 
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTrigger(final Trigger regtrig, final Map<String, Object> runParams) {
+    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         final Map<String, String> triggerParams = regtrig.getMapParams();
 
         regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
-            final SpellAbility abMana = (SpellAbility) runParams.get("AbilityMana");
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
@@ -562,7 +575,7 @@ public class TriggerHandler {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-        final Card trigCard = regtrig.getRunParams().containsKey("Card") ? (Card)regtrig.getRunParams().get("Card") : null;
+        final Card trigCard = (Card) regtrig.getFromRunParams(AbilityKey.Card);
 
         if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
@@ -735,8 +748,8 @@ public class TriggerHandler {
                         }
                     } else if (kw.startsWith("Dieharmonicon")) {
                         // 700.4. The term dies means "is put into a graveyard from the battlefield."
-                        if (runParams.get(AbilityKey.Destination) instanceof String) {
-                            final String origin = (String) runParams.get(AbilityKey.Destination);
+                        if (runParams.get(AbilityKey.Origin) instanceof String) {
+                            final String origin = (String) runParams.get(AbilityKey.Origin);
                             if ("Battlefield".equals(origin) && runParams.get(AbilityKey.Destination) instanceof String) {
                                 final String dest = (String) runParams.get(AbilityKey.Destination);
                                 if ("Graveyard".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {

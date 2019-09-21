@@ -93,10 +93,13 @@ public class TriggerCountered extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Cause, this.getRunParams().get("Cause"));
-        sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
-        sa.setTriggeringObject(AbilityKey.CounteredSA, this.getRunParams().get("CounteredSA"));
+        sa.setTriggeringObjectsFrom(
+            this,
+            AbilityKey.Card,
+            AbilityKey.Cause,
+            AbilityKey.Player,
+            AbilityKey.CounteredSA
+        );
     }
 
     @Override

@@ -66,7 +66,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
 
     /** The run params. */
-    private Map<String, Object> runParams;
+    private Map<AbilityKey, Object> runParams;
 
     private TriggerType mode;
 
@@ -122,7 +122,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = nextId();
         this.intrinsic = intrinsic;
 
-        this.setRunParams(new HashMap<>()); // TODO: Consider whether this can be null instead, for performance reasons.
+        this.setRunParams(AbilityKey.newMap()); // TODO: Consider whether this can be null instead, for performance reasons.
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
@@ -460,8 +460,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      * 
      * @return the runParams
      */
-    public Map<String, Object> getRunParams() {
-        return this.runParams;
+    public Object getFromRunParams(AbilityKey key) {
+        return this.runParams.get(key);
     }
 
     /**
@@ -470,7 +470,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param runParams0
      *            the runParams to set
      */
-    public void setRunParams(final Map<String, Object> runParams0) {
+    public void setRunParams(final Map<AbilityKey, Object> runParams0) {
         this.runParams = runParams0;
     }
 

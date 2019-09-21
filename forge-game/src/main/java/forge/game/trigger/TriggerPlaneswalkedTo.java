@@ -53,7 +53,7 @@ public class TriggerPlaneswalkedTo extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Cards, this.getRunParams().get("Cards"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Cards);
     }
 
     @Override

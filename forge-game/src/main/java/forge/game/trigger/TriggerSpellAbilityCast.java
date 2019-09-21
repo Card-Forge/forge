@@ -264,17 +264,20 @@ public class TriggerSpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        final SpellAbility castSA = (SpellAbility) getRunParams().get("CastSA");
+        final SpellAbility castSA = (SpellAbility) getFromRunParams(AbilityKey.CastSA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
         sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
-        sa.setTriggeringObject(AbilityKey.Player, getRunParams().get("Player"));
-        sa.setTriggeringObject(AbilityKey.Activator, getRunParams().get("Activator"));
-        sa.setTriggeringObject(AbilityKey.CurrentStormCount, getRunParams().get("CurrentStormCount"));
-        sa.setTriggeringObject(AbilityKey.CurrentCastSpells, getRunParams().get("CurrentCastSpells"));
-        sa.setTriggeringObject(AbilityKey.CastSACMC, getRunParams().get("CastSACMC"));
+        sa.setTriggeringObjectsFrom(
+            this,
+            AbilityKey.Player,
+            AbilityKey.Activator,
+            AbilityKey.CurrentStormCount,
+            AbilityKey.CurrentCastSpells,
+            AbilityKey.CastSACMC
+        );
     }
 
     @Override
