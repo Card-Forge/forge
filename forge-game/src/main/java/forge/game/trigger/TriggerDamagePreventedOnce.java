@@ -94,8 +94,8 @@ public class TriggerDamagePreventedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Target, this.getRunParams().get("DamageTarget"));
-        sa.setTriggeringObject(AbilityKey.DamageAmount, this.getRunParams().get("DamageAmount"));
+        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
     }
 
     @Override

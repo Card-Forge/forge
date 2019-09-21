@@ -74,8 +74,7 @@ public class TriggerCounterRemovedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Amount, this.getRunParams().get("CounterAmount"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Amount);
     }
 
     @Override

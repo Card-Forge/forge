@@ -85,8 +85,7 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.AttackingPlayer, this.getRunParams().get("AttackingPlayer"));
-        sa.setTriggeringObject(AbilityKey.Defenders, this.getRunParams().get("Defenders"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.AttackingPlayer, AbilityKey.Defenders);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class TriggerPlanarDice extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
     @Override

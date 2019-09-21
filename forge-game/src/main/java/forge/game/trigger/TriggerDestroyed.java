@@ -68,8 +68,7 @@ public class TriggerDestroyed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.Causer, this.getRunParams().get("Causer"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Causer);
     }
 
     @Override
