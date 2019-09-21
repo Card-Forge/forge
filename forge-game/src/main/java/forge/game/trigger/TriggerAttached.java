@@ -73,7 +73,8 @@ public class TriggerAttached extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Source, AbilityKey.Target);
+        sa.setTriggeringObject(AbilityKey.Source, getFromRunParams(AbilityKey.AttachSource));
+        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.AttachTarget));
     }
 
     @Override
