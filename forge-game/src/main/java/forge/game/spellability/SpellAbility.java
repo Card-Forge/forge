@@ -118,6 +118,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean basicLandAbility = false;
 
+    private boolean adventure = false;
     private SplitSide splitSide = null;
     enum SplitSide { LEFT, RIGHT }
 
@@ -860,6 +861,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setRightSplit() {
         splitSide = SplitSide.RIGHT;
+    }
+    public boolean isAdventure() {
+        return this.adventure;
+    }
+    public void setAdventure(boolean adventure) {
+        this.adventure = adventure;
     }
 
     public SpellAbility copy() {

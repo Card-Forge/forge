@@ -538,6 +538,20 @@ public class TriggerHandler {
                 }
             }
         } // Torpor Orb check
+
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureDyingTriggers)
+                && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
+            if (runParams.get(AbilityKey.Destination) instanceof String && runParams.get(AbilityKey.Origin) instanceof String) {
+                final String dest = (String) runParams.get(AbilityKey.Destination);
+                final String origin = (String) runParams.get(AbilityKey.Origin);
+                if (dest.equals("Graveyard") && origin.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                    final Card card = (Card) runParams.get(AbilityKey.Card);
+                    if (card.isCreature()) {
+                        return false;
+                    }
+                }
+            }
+        } 
         return true;
     }
 
