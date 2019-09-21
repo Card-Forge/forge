@@ -1,0 +1,6 @@
+Name:Locthwain Gargoyle
+ManaCost:1
+Types:Artifact Creature Gargoyle
+PT:0/3
+A:AB$ Pump | Cost$ 4 | Defined$ Self | NumAtt$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+0 and gains flying until end of turn.
+Oracle:{4}: Locthwain Gargoyle gets +2/+0 and gains flying until end of turn.

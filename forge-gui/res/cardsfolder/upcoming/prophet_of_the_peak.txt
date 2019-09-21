@@ -1,0 +1,7 @@
+Name:Prophet of the Peak
+ManaCost:6
+Types:Artifact Creature Cat
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:When Prophet of the Peak enters the battlefield, scry 2.
