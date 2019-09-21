@@ -125,10 +125,10 @@ public class TriggerAttacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
+        sa.setTriggeringObject(AbilityKey.Defender, getFromRunParams(AbilityKey.Attacked));
         sa.setTriggeringObjectsFrom(
             this,
             AbilityKey.Attacker,
-            AbilityKey.Defender,
             AbilityKey.Defenders,
             AbilityKey.DefendingPlayer
         );
