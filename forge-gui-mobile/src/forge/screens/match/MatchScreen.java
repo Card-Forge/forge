@@ -152,7 +152,7 @@ public class MatchScreen extends FScreen {
         else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
-            menuBar.addTab(localizer.getMessage("Stack") + " (0)", stack);
+            menuBar.addTab(localizer.getMessage("lblStack") + " (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
 
             //create fake menu tabs for other drop downs so they can be positioned as needed
