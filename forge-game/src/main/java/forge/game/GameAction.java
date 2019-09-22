@@ -781,7 +781,7 @@ public class GameAction {
                 final Card co = preList.get(c);
                 List<StaticAbility> toRemove = Lists.newArrayList();
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.getMapParams().get("Mode").equals("Continuous")) {
+                    if (stAb.getParam("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                     if (stAb.isTemporary()) {

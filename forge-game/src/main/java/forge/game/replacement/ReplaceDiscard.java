@@ -47,17 +47,17 @@ public class ReplaceDiscard extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Card"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Card"), this.getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), this.getMapParams().get("ValidSource").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Source"), this.getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }

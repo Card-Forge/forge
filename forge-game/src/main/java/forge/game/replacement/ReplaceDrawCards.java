@@ -48,13 +48,13 @@ public class ReplaceDrawCards extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("Number")) {
             final int n = (Integer)runParams.get("Number");
-            String comparator = this.getMapParams().get("Number");
+            String comparator = this.getParam("Number");
             final String operator = comparator.substring(0, 2);
             final int operandValue = Integer.parseInt(comparator.substring(2));
             if (!Expressions.compare(n, operator, operandValue)) {

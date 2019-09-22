@@ -48,17 +48,17 @@ public class ReplaceCounter extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidCause")) {
-            if (!matchesValid(runParams.get("Cause"), this.getMapParams().get("ValidCause").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Cause"), this.getParam("ValidCause").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidType")) {
-            String type = this.getMapParams().get("ValidType");
+            String type = this.getParam("ValidType");
             if (type.equals("Spell") && !spellAbility.isSpell()) {
                 return false;
             }

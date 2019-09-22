@@ -754,7 +754,7 @@ public class ComputerUtil {
         	if (source.hasParam("Exploit")) {
         		for (Trigger t : host.getTriggers()) {
         			if (t.getMode() == TriggerType.Exploited) {
-        	            final String execute = t.getMapParams().get("Execute");
+        	            final String execute = t.getParam("Execute");
         	            if (execute == null) {
         	                continue;
         	            }
@@ -1235,7 +1235,7 @@ public class ComputerUtil {
             //Fill the graveyard for Threshold
             if (checkThreshold) {
                 for (StaticAbility stAb : buffedCard.getStaticAbilities()) {
-                    if ("Threshold".equals(stAb.getMapParams().get("Condition"))) {
+                    if ("Threshold".equals(stAb.getParam("Condition"))) {
                         return true;
                     }
                 }

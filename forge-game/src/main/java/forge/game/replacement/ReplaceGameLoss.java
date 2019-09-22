@@ -29,7 +29,7 @@ public class ReplaceGameLoss extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }

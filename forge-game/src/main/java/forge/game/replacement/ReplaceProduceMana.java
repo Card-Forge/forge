@@ -58,7 +58,7 @@ public class ReplaceProduceMana extends ReplacementEffect {
         }
 
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
