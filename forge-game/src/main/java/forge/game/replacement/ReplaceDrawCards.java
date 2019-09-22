@@ -47,12 +47,12 @@ public class ReplaceDrawCards extends ReplacementEffect {
         if (!runParams.get("Event").equals("DrawCards")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
+        if (this.hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("Number")) {
+        if (this.hasParam("Number")) {
             final int n = (Integer)runParams.get("Number");
             String comparator = this.getParam("Number");
             final String operator = comparator.substring(0, 2);

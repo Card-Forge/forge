@@ -1364,7 +1364,7 @@ public class ComputerUtilMana {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck(game)
-                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.hasParam("ManaReplacement")
                             && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
                         replacementEffects.add(replacementEffect);
                     }

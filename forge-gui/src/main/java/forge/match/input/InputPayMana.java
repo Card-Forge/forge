@@ -374,7 +374,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck(g)
                             && replacementEffect.canReplace(repParams)
-                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.hasParam("ManaReplacement")
                             && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
                         return true;
                     }

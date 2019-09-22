@@ -46,22 +46,22 @@ public class ReplaceDiscard extends ReplacementEffect {
         if (!runParams.get("Event").equals("Discard")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
+        if (this.hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
+        if (this.hasParam("ValidCard")) {
             if (!matchesValid(runParams.get("Card"), this.getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidSource")) {
+        if (this.hasParam("ValidSource")) {
             if (!matchesValid(runParams.get("Source"), this.getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("DiscardFromEffect")) {
+        if (this.hasParam("DiscardFromEffect")) {
             if (null == runParams.get("Source")) {
                 return false;
             }

@@ -48,12 +48,12 @@ public class ReplaceDraw extends ReplacementEffect {
         if (!runParams.get("Event").equals("Draw")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
+        if (this.hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("NotFirstCardInDrawStep")) {
+        if (this.hasParam("NotFirstCardInDrawStep")) {
             final Player p = (Player)runParams.get("Affected");
             if (p.numDrawnThisDrawStep() == 0
                     && this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)

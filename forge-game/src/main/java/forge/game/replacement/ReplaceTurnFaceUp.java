@@ -29,7 +29,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
         if (!runParams.get("Event").equals("TurnFaceUp")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
+        if (this.hasParam("ValidCard")) {
             if (!matchesValid(runParams.get("Affected"), this.getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }

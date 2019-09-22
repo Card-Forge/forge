@@ -263,7 +263,7 @@ public class ReplacementHandler {
         }
 
         // Decider gets to choose whether or not to apply the replacement.
-        if (replacementEffect.getMapParams().containsKey("Optional")) {
+        if (replacementEffect.hasParam("Optional")) {
             Player optDecider = decider;
             if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
                 effectSA.setActivatingPlayer(host.getController());

@@ -1660,13 +1660,13 @@ public class AiController {
             hostCard = game.getCardState(hostCard);
         }
 
-        if (effect.getMapParams().containsKey("AICheckSVar")) {
+        if (effect.hasParam("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = effect.getParam("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
 
-            if (effect.getMapParams().containsKey("AISVarCompare")) {
+            if (effect.hasParam("AISVarCompare")) {
                 final String fullCmp = effect.getParam("AISVarCompare");
                 comparator = fullCmp.substring(0, 2);
                 final String strCmpTo = fullCmp.substring(2);
@@ -1690,7 +1690,7 @@ public class AiController {
             }
             System.out.println("aiShouldRun?" + left + comparator + compareTo);
             return Expressions.compare(left, comparator, compareTo);
-        } else if (effect.getMapParams().containsKey("AICheckDredge")) {
+        } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
 
