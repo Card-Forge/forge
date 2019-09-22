@@ -88,7 +88,6 @@ public class CostAdjustment {
     }
     
     private static void applyRaise(final Cost cost, final SpellAbility sa, final StaticAbility st) {
-        final Map<String, String> params = st.getMapParams();
         final Card hostCard = st.getHostCard();
         final Card card = sa.getHostCard();
         
@@ -96,22 +95,22 @@ public class CostAdjustment {
             return;
         }
 
-        final String scost = params.containsKey("Cost") ? params.get("Cost") : "1";
+        final String scost = st.getParamOrDefault("Cost", "1");
         Cost part = new Cost(scost, sa.isAbility());
         int count = 0;
 
-        if (params.containsKey("ForEachShard")) {
+        if (st.hasParam("ForEachShard")) {
             CostPartMana mc = cost.getCostMana();
             if (mc != null) {
-                byte atom = ManaAtom.fromName(params.get("ForEachShard").toLowerCase());
+                byte atom = ManaAtom.fromName(st.getParam("ForEachShard").toLowerCase());
                 for (ManaCostShard shard : mc.getManaCostFor(sa)) {
                     if ((shard.getColorMask() & atom) != 0) {
                         ++count;
                     }
                 }
             }
-        } else if (params.containsKey("Amount")) {
-            String amount = params.get("Amount");
+        } else if (st.hasParam("Amount")) {
+            String amount = st.getParam("Amount");
             if ("Escalate".equals(amount)) {
                 SpellAbility sub = sa;
                 while(sub != null) {
@@ -130,7 +129,7 @@ public class CostAdjustment {
                 if (StringUtils.isNumeric(amount)) {
                     count = Integer.parseInt(amount);
                 } else {
-                    if (params.containsKey("AffectedAmount")) {
+                    if (st.hasParam("AffectedAmount")) {
                         count = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, sa);
@@ -330,8 +329,7 @@ public class CostAdjustment {
      *            a ManaCost
      */
     private  static void applySetCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
-        final Map<String, String> params = staticAbility.getMapParams();
-        final String amount = params.get("Amount");
+        final String amount = staticAbility.getParam("Amount");
 
         if (!checkRequirement(sa, staticAbility)) {
             return;
@@ -420,41 +418,40 @@ public class CostAdjustment {
             return false;
         }
 
-        final Map<String, String> params = st.getMapParams();
         final Card hostCard = st.getHostCard();
         final Player controller = hostCard.getController();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), controller, hostCard, sa)) {
+        if (st.hasParam("ValidCard")
+                && !card.isValid(st.getParam("ValidCard").split(","), controller, hostCard, sa)) {
             return false;
         }
-        if (params.containsKey("ValidSpell")) {
-            if (!sa.isValid(params.get("ValidSpell").split(","), controller, hostCard, sa)) {
+        if (st.hasParam("ValidSpell")) {
+            if (!sa.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, sa)) {
                 return false;
             }
         }
-        if (params.containsKey("Activator") && ((activator == null)
-                || !activator.isValid(params.get("Activator"), controller, hostCard, sa))) {
+        if (st.hasParam("Activator") && ((activator == null)
+                || !activator.isValid(st.getParam("Activator"), controller, hostCard, sa))) {
             return false;
         }
-        if (params.containsKey("NonActivatorTurn") && ((activator == null)
+        if (st.hasParam("NonActivatorTurn") && ((activator == null)
                 || hostCard.getGame().getPhaseHandler().isPlayerTurn(activator))) {
             return false;
         }
 
-        if (params.containsKey("Type")) {
-            final String type = params.get("Type");
+        if (st.hasParam("Type")) {
+            final String type = st.getParam("Type");
             if (type.equals("Spell")) {
                 if (!sa.isSpell()) {
                     return false;
                 }
-                if (params.containsKey("OnlyFirstSpell")) {
+                if (st.hasParam("OnlyFirstSpell")) {
                     if (activator == null ) {
                         return false;
                     }
-                    List<Card> list = CardUtil.getThisTurnCast(params.get("ValidCard"), hostCard);
+                    List<Card> list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
                     if (CardLists.filterControlledBy(list, activator).size() > 0) {
                         return false;
                     }
@@ -497,8 +494,8 @@ public class CostAdjustment {
                 }
             }
         }
-        if (params.containsKey("AffectedZone")) {
-            List<ZoneType> zones = ZoneType.listValueOf(params.get("AffectedZone"));
+        if (st.hasParam("AffectedZone")) {
+            List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));
             boolean found = false;
             for(ZoneType zt : zones) {
                 if(card.isInZone(zt))
@@ -511,7 +508,7 @@ public class CostAdjustment {
                 return false;
             }
         }
-        if (params.containsKey("ValidTarget")) {
+        if (st.hasParam("ValidTarget")) {
             SpellAbility curSa = sa;
             boolean targetValid = false;
             outer: while (curSa != null) {
@@ -520,7 +517,7 @@ public class CostAdjustment {
                     continue;
                 }
                 for (GameObject target : curSa.getTargets().getTargets()) {
-                    if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                    if (target.isValid(st.getParam("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
                         break outer;
                     }
@@ -531,7 +528,7 @@ public class CostAdjustment {
                 return false;
             }
         }
-        if (params.containsKey("ValidSpellTarget")) {
+        if (st.hasParam("ValidSpellTarget")) {
             SpellAbility curSa = sa;
             boolean targetValid = false;
             outer: while (curSa != null) {
@@ -541,7 +538,7 @@ public class CostAdjustment {
                 }
                 for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
                     Card targetCard = target.getHostCard();
-                    if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                    if (targetCard.isValid(st.getParam("ValidSpellTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
                         break outer;
                     }
