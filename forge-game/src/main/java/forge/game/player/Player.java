@@ -93,6 +93,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
+    private int lifeGainedTimesThisTurn = 0;
     private int lifeGainedByTeamThisTurn = 0;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn = 0; //The number of times this player has searched his library
@@ -440,6 +441,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             view.updateLife(this);
             newLifeSet = true;
             lifeGainedThisTurn += lifeGain;
+            lifeGainedTimesThisTurn++;
 
             // team mates need to be notified about life gained
             for (final Player p : getTeamMates(true)) {
@@ -2242,6 +2244,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeGainedThisTurn = n;
     }
 
+    public final int getLifeGainedTimesThisTurn() {
+        return lifeGainedTimesThisTurn;
+    }
+
     public final int getLifeLostThisTurn() {
         return lifeLostThisTurn;
     }
@@ -2935,6 +2941,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLifeLostLastTurn(getLifeLostThisTurn());
         setLifeLostThisTurn(0);
         lifeGainedThisTurn = 0;
+        lifeGainedTimesThisTurn = 0;
         lifeGainedByTeamThisTurn = 0;
         setLibrarySearched(0);
         setNumManaConversion(0);
