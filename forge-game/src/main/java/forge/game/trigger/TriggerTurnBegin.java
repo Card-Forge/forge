@@ -15,7 +15,7 @@ public class TriggerTurnBegin extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            return matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
+            return matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard());
         }
         return true;

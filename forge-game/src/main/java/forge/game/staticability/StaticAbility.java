@@ -201,7 +201,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     private void buildCommonAttributes(Card host) {
         if (hasParam("References")) {
-            for (String svar : mapParams.get("References").split(",")) {
+            for (String svar : getParam("References").split(",")) {
                 if (host.hasSVar(svar)) {
                     this.setSVar(svar, host.getSVar(svar));
                 }

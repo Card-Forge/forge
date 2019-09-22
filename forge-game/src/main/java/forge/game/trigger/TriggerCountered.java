@@ -54,14 +54,14 @@ public class TriggerCountered extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -71,7 +71,7 @@ public class TriggerCountered extends Trigger {
             if (runParams.get(AbilityKey.Cause) == null) {
                 return false;
             }
-            if (!matchesValid(runParams.get(AbilityKey.Cause), this.mapParams.get("ValidCause").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -80,7 +80,7 @@ public class TriggerCountered extends Trigger {
         if (hasParam("ValidType")) {
             // TODO: if necessary, expand the syntax to account for multiple valid types (e.g. Spell,Ability)
             SpellAbility ctrdSA = (SpellAbility) runParams.get(AbilityKey.CounteredSA);
-            String validType = this.mapParams.get("ValidType");
+            String validType = getParam("ValidType");
             if (ctrdSA != null) {
                 if (validType.equals("Spell") && !ctrdSA.isSpell()) {
                     return false;

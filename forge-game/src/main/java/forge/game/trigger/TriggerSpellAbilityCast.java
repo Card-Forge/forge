@@ -180,7 +180,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                 }
             }
             candidates.removeAll(targetedSA.getTargets().getTargetCards());
-            String valid = this.mapParams.get("CanTargetOtherCondition");
+            String valid = getParam("CanTargetOtherCondition");
             if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard()).isEmpty()) {
                 return false;
             }

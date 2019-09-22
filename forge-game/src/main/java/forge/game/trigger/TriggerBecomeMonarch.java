@@ -18,14 +18,14 @@ public class TriggerBecomeMonarch extends Trigger {
         final Card host = this.getHostCard();
         final Game game = host.getGame();
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     host)) {
                 return false;
             }
         }
 
         if (hasParam("BeginTurn")) {
-            if (!matchesValid(game.getMonarchBeginTurn(), this.mapParams.get("BeginTurn").split(","),
+            if (!matchesValid(game.getMonarchBeginTurn(), getParam("BeginTurn").split(","),
                     host)) {
                 return false;
             }

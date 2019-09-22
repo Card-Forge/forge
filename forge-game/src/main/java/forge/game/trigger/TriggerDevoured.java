@@ -55,7 +55,7 @@ public class TriggerDevoured extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Card sac = (Card) runParams.get(AbilityKey.Devoured);
         if (hasParam("ValidDevoured")) {
-            return sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
+            return sac.isValid(getParam("ValidDevoured").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null);
         }
         return true;

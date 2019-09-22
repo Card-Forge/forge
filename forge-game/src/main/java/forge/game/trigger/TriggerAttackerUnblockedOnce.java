@@ -61,7 +61,7 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
 
             final List<GameEntity> srcs = (List<GameEntity>) runParams.get(AbilityKey.Defenders);
             for (GameEntity c : srcs) {
-                if (c.isValid(this.mapParams.get("ValidDefenders").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+                if (c.isValid(getParam("ValidDefenders").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                     valid = true;
                 }
             }
@@ -76,7 +76,7 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
         }
         if (hasParam("ValidAttackingPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
-                    this.mapParams.get("ValidAttackingPlayer").split(","), this.getHostCard())) {
+                    getParam("ValidAttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }

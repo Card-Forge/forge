@@ -56,24 +56,23 @@ public class TriggerBecomesTarget extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("SourceType")) {
             final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.SourceSA);
-            if (this.mapParams.get("SourceType").equalsIgnoreCase("spell")) {
+            if (getParam("SourceType").equalsIgnoreCase("spell")) {
                 if (!sa.isSpell()) {
                     return false;
                 }
-            } else if (this.mapParams.get("SourceType").equalsIgnoreCase("ability")) {
+            } else if (getParam("SourceType").equalsIgnoreCase("ability")) {
                 if (!sa.isAbility()) {
                     return false;
                 }
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), this.mapParams
-                    .get("ValidSource").split(","), this.getHostCard())) {
+            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(runParams.get(AbilityKey.Target), this.mapParams.get("ValidTarget").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","),
                     this.getHostCard())) {
                 return false;
             }

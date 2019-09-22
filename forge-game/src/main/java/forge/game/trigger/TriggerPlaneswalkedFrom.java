@@ -37,7 +37,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
         if (hasParam("ValidCard")) {
             final CardCollection moved = (CardCollection) runParams.get(AbilityKey.Cards);
             for(Card c : moved) {
-                if (c.isValid(this.mapParams.get("ValidCard").split(","), this
+                if (c.isValid(getParam("ValidCard").split(","), this
                         .getHostCard().getController(), this.getHostCard(), null)) {
                     return true;
                 }

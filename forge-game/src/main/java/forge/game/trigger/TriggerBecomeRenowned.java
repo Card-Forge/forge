@@ -54,7 +54,7 @@ public class TriggerBecomeRenowned extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }

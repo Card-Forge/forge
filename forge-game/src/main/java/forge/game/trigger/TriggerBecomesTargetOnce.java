@@ -58,8 +58,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), this.mapParams
-                    .get("ValidSource").split(","), this.getHostCard())) {
+            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
@@ -67,7 +66,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
             List<GameObject> targets = (List<GameObject>) runParams.get(AbilityKey.Targets);
             boolean valid = false;
             for (GameObject b : targets) {
-                if (matchesValid(b, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+                if (matchesValid(b, getParam("ValidTarget").split(","), this.getHostCard())) {
                     valid = true;
                     break;
                 }

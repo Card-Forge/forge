@@ -60,19 +60,19 @@ public class TriggerSacrificed extends Trigger {
         final Player player = (Player) runParams.get(AbilityKey.Player);
         final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(player, this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(player, getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidCard")) {
-            if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!sac.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
         if (hasParam("ValidSourceController")) {
-            if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
+            if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(getParam("ValidSourceController"),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
@@ -88,7 +88,7 @@ public class TriggerSacrificed extends Trigger {
         }
 
         if (hasParam("WhileKeyword")) {
-            final String keyword = this.mapParams.get("WhileKeyword");
+            final String keyword = getParam("WhileKeyword");
             boolean withKeyword = false;
 
             // When cast with Emerge, the cost instance is there

@@ -19,13 +19,13 @@ public class TriggerPhaseOut extends Trigger {
         final Card phaser = (Card) runParams.get(AbilityKey.Card);
 
         if (hasParam("ValidCard")) {
-            if (this.mapParams.get("ValidCard").equals("Card.Self")) {
+            if (getParam("ValidCard").equals("Card.Self")) {
                 // Since Phased out cards aren't visible in .isValid, use a special check here.
                 // NOTE: All Phase Out Triggers should use ValidCard$ Card.Self
                 if (phaser != this.getHostCard()) {
                     return false;
                 }
-            } else if (!phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            } else if (!phaser.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }

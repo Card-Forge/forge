@@ -68,7 +68,7 @@ public class TriggerLandPlayed extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Card land = (Card) runParams.get(AbilityKey.Card);
         if (hasParam("ValidCard")) {
-            if (!matchesValid(land, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(land, getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }

@@ -57,14 +57,14 @@ public class TriggerAttached extends Trigger {
         final Object tgt = runParams.get(AbilityKey.AttachTarget);
 
         if (hasParam("ValidSource")) {
-            if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
+            if (!src.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }

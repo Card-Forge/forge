@@ -54,14 +54,14 @@ public class TriggerDiscarded extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -71,14 +71,14 @@ public class TriggerDiscarded extends Trigger {
             if (runParams.get(AbilityKey.Cause) == null) {
                 return false;
             }
-            if (!matchesValid(runParams.get(AbilityKey.Cause), this.mapParams.get("ValidCause").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("IsMadness")) {
             Boolean madness = (Boolean) runParams.get(AbilityKey.IsMadness);
-            if (this.mapParams.get("IsMadness").equals("True") ^ madness) {
+            if (getParam("IsMadness").equals("True") ^ madness) {
                 return false;
             }
         }

@@ -35,14 +35,14 @@ public class TriggerPlanarDice extends Trigger {
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Result")) {
-            PlanarDice cond = PlanarDice.smartValueOf(this.mapParams.get("Result"));
+            PlanarDice cond = PlanarDice.smartValueOf(getParam("Result"));
             if (cond != runParams.get(AbilityKey.Result)) {
                 return false;
             }

@@ -25,7 +25,7 @@ public class TriggerExerted extends Trigger {
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         final Card exerter = (Card) runParams.get(AbilityKey.Card);
         if (hasParam("ValidCard")) {
-            return exerter.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            return exerter.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null);
         }
         return true;

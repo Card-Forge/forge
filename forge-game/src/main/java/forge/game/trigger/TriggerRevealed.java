@@ -16,7 +16,7 @@ public class TriggerRevealed extends Trigger {
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!moved.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }

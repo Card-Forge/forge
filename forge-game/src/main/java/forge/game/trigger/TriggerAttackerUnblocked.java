@@ -54,13 +54,13 @@ public class TriggerAttackerUnblocked extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Attacker), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidDefender")) {
-            if (!matchesValid(runParams.get(AbilityKey.Defender), this.mapParams.get("ValidDefender").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Defender), getParam("ValidDefender").split(","),
                     this.getHostCard())) {
                 return false;
             }

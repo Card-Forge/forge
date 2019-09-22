@@ -57,7 +57,7 @@ public class TriggerAttacks extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Attacker), this.mapParams.get("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -65,7 +65,7 @@ public class TriggerAttacks extends Trigger {
 
         if (hasParam("Attacked")) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
-            if (!attacked.isValid(this.mapParams.get("Attacked").split(",")
+            if (!attacked.isValid(getParam("Attacked").split(",")
                     , this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
@@ -77,7 +77,7 @@ public class TriggerAttacks extends Trigger {
             if (otherAttackers == null) {
                 return false;
             }
-            if (this.mapParams.get("Alone").equals("True")) {
+            if (getParam("Alone").equals("True")) {
                 if (otherAttackers.size() != 0) {
                     return false;
                 }

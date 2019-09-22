@@ -66,7 +66,7 @@ public class TriggerTapsForMana extends Trigger {
 
         if (hasParam("ValidCard")) {
             final Card tapper = (Card) runParams.get(AbilityKey.Card);
-            if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!tapper.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
@@ -74,7 +74,7 @@ public class TriggerTapsForMana extends Trigger {
 
         if (hasParam("Player")) {
             final Player player = (Player) runParams.get(AbilityKey.Player);
-            if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!player.isValid(getParam("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
@@ -83,7 +83,7 @@ public class TriggerTapsForMana extends Trigger {
             final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (sa == null) return false;
             final Player activator = sa.getActivatingPlayer();
-            if (!activator.isValid(this.mapParams.get("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!activator.isValid(getParam("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
@@ -94,7 +94,7 @@ public class TriggerTapsForMana extends Trigger {
                 return false;
             }
             String produced = (String) prod;
-            if ("ChosenColor".equals(mapParams.get("Produced"))) {
+            if ("ChosenColor".equals(getParam("Produced"))) {
                 if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
                     return false;
                 }

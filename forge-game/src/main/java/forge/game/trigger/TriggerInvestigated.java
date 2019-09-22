@@ -69,7 +69,7 @@ public class TriggerInvestigated extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Player p = (Player) runParams.get(AbilityKey.Player);
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(p, this.mapParams.get("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(p, getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }

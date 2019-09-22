@@ -58,13 +58,13 @@ public class TriggerChampioned extends Trigger {
         final Card source = (Card) runParams.get(AbilityKey.Card);
 
         if (hasParam("ValidCard")) {
-            if (!championed.isValid(this.mapParams.get("ValidCard").split(","),
+            if (!championed.isValid(getParam("ValidCard").split(","),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
         if (hasParam("ValidSource")) {
-            if (!source.isValid(this.mapParams.get("ValidSource").split(","),
+            if (!source.isValid(getParam("ValidSource").split(","),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }

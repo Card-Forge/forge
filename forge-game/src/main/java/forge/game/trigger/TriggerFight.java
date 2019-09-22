@@ -57,7 +57,7 @@ public class TriggerFight extends Trigger {
         final Card fighter = (Card) runParams.get(AbilityKey.Fighter);
 
         if (hasParam("ValidCard")) {
-            return fighter.isValid(this.mapParams.get("ValidCard").split(","),
+            return fighter.isValid(getParam("ValidCard").split(","),
                     this.getHostCard().getController(), this.getHostCard(), null);
         }
         return true;
