@@ -53,13 +53,13 @@ public class TriggerFlippedCoin extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidResult")) {
+        if (hasParam("ValidResult")) {
             final boolean result = (Boolean) runParams.get(AbilityKey.Result);
             final boolean valid = "Win".equals(this.mapParams.get("ValidResult"));
             if (result ^ valid) {

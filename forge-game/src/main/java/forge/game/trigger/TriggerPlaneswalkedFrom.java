@@ -34,7 +34,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             final CardCollection moved = (CardCollection) runParams.get(AbilityKey.Cards);
             for(Card c : moved) {
                 if (c.isValid(this.mapParams.get("ValidCard").split(","), this

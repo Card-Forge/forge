@@ -34,7 +34,7 @@ public class ReplaceProduceMana extends ReplacementEffect {
             return false;
         }
         //Check for tapping
-        if (!mapParams.containsKey("NoTapCheck")) {
+        if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get("AbilityMana");
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;

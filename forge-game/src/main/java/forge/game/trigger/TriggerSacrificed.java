@@ -59,26 +59,26 @@ public class TriggerSacrificed extends Trigger {
         final Card sac = (Card) runParams.get(AbilityKey.Card);
         final Player player = (Player) runParams.get(AbilityKey.Player);
         final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(player, this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidSourceController")) {
+        if (hasParam("ValidSourceController")) {
             if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
         
-        if (this.mapParams.containsKey("CauseParam")) {
+        if (hasParam("CauseParam")) {
             // For now only for Heart-Piecer Manticore, extend it if it appears on different effects too
             if (sourceSA == null || !sourceSA.hasParam("SacrificeParam")
                     || !sourceSA.getParam("SacrificeParam").equals(getParam("CauseParam"))
@@ -87,7 +87,7 @@ public class TriggerSacrificed extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("WhileKeyword")) {
+        if (hasParam("WhileKeyword")) {
             final String keyword = this.mapParams.get("WhileKeyword");
             boolean withKeyword = false;
 

@@ -68,13 +68,13 @@ public class TriggerInvestigated extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Player p = (Player) runParams.get(AbilityKey.Player);
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(p, this.mapParams.get("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         
-        if (this.mapParams.containsKey("OnlyFirst")) {
+        if (hasParam("OnlyFirst")) {
             if ((int) runParams.get(AbilityKey.Num) != 1) {
                 return false;
             }

@@ -57,14 +57,14 @@ public class TriggerTapsForMana extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         
         //Check for tapping
-        if (!mapParams.containsKey("NoTapCheck")) {
+        if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             final Card tapper = (Card) runParams.get(AbilityKey.Card);
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
@@ -72,14 +72,14 @@ public class TriggerTapsForMana extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("Player")) {
+        if (hasParam("Player")) {
             final Player player = (Player) runParams.get(AbilityKey.Player);
             if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Activator")) {
+        if (hasParam("Activator")) {
             final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (sa == null) return false;
             final Player activator = sa.getActivatingPlayer();
@@ -88,7 +88,7 @@ public class TriggerTapsForMana extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("Produced")) {
+        if (hasParam("Produced")) {
             Object prod = runParams.get(AbilityKey.Produced);
             if (prod == null || !(prod instanceof String)) {
                 return false;

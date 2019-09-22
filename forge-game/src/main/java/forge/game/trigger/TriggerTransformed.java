@@ -45,7 +45,7 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             return matchesValid(runParams.get(AbilityKey.Transformer), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard());
         }

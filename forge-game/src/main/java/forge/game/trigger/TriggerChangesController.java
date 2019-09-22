@@ -55,13 +55,13 @@ public class TriggerChangesController extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Card moved = (Card) runParams.get(AbilityKey.Card);
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidOriginalController")) {
+        if (hasParam("ValidOriginalController")) {
             if (!matchesValid(runParams.get(AbilityKey.OriginalController), this.mapParams.get("ValidOriginalController").split(","),
                     this.getHostCard())) {
                 return false;

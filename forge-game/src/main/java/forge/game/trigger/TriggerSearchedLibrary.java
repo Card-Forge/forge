@@ -55,13 +55,13 @@ public class TriggerSearchedLibrary extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("SearchOwnLibrary")) {
+        if (hasParam("SearchOwnLibrary")) {
             @SuppressWarnings("unchecked")
             List<Player> targets = (List<Player>) runParams.get(AbilityKey.Target);
             if (!targets.contains(runParams.get(AbilityKey.Player))) {

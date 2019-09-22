@@ -141,7 +141,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
     
     public String toString(boolean active) {
-        if (this.mapParams.containsKey("TriggerDescription") && !this.isSuppressed()) {
+        if (hasParam("TriggerDescription") && !this.isSuppressed()) {
 
             StringBuilder sb = new StringBuilder();
             String desc = this.mapParams.get("TriggerDescription");
@@ -240,49 +240,49 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (this.mapParams.containsKey("PreCombatMain")) {
+        if (hasParam("PreCombatMain")) {
             if (!phaseHandler.isPreCombatMain()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("PlayerTurn")) {
+        if (hasParam("PlayerTurn")) {
             if (!phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("NotPlayerTurn")) {
+        if (hasParam("NotPlayerTurn")) {
             if (phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("OpponentTurn")) {
+        if (hasParam("OpponentTurn")) {
             if (!this.getHostCard().getController().isOpponentOf(phaseHandler.getPlayerTurn())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("FirstUpkeep")) {
+        if (hasParam("FirstUpkeep")) {
             if (!phaseHandler.isFirstUpkeep()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("FirstUpkeepThisGame")) {
+        if (hasParam("FirstUpkeepThisGame")) {
             if (!phaseHandler.isFirstUpkeepThisGame()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("FirstCombat")) {
+        if (hasParam("FirstCombat")) {
             if (!phaseHandler.isFirstCombat()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("TurnCount")) {
+        if (hasParam("TurnCount")) {
             int turn = Integer.parseInt(this.mapParams.get("TurnCount"));
             if (phaseHandler.getTurn() != turn) {
                 return false;
@@ -301,7 +301,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final boolean requirementsCheck(Game game) {
 
-        if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
+        if (hasParam("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = Integer.MIN_VALUE; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<>();
             for (final Player p : game.getPlayers()) {
@@ -321,7 +321,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (this.mapParams.containsKey("APlayerHasMostCardsInHand")) {
+        if (hasParam("APlayerHasMostCardsInHand")) {
             int largestHand = 0;
             final List<Player> withLargestHand = new ArrayList<>();
             for (final Player p : game.getPlayers()) {
@@ -341,7 +341,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (this.mapParams.containsKey("TriggerRememberedInZone")) {
+        if (hasParam("TriggerRememberedInZone")) {
             // check delayed trigger remembered objects (Mnemonic Betrayal)
             // make this check more general if possible
             boolean bFlag = true;
@@ -566,7 +566,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public boolean isStatic() {
-        return this.mapParams.containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
+        return hasParam("Static"); // && params.get("Static").equals("True") [always true if present]
     }
 
     public void setTriggerPhases(List<PhaseType> phases) {

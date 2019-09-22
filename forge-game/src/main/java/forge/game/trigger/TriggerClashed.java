@@ -53,14 +53,14 @@ public class TriggerClashed extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Won")) {
+        if (hasParam("Won")) {
             if (!this.mapParams.get("Won").equals(runParams.get(AbilityKey.Won))) {
                 return false;
             }

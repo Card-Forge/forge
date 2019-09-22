@@ -32,14 +32,14 @@ public class ReplaceAddCounter extends ReplacementEffect {
             return false;
         }
 
-        if (mapParams.containsKey("EffectOnly")) {
+        if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get("EffectOnly");
             if (!effectOnly) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             Object o = runParams.get("Affected");
             if (!(o instanceof Card)) {
                 return false;
@@ -47,7 +47,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
             if (!matchesValid(o, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
-        } else if (mapParams.containsKey("ValidPlayer")) {
+        } else if (hasParam("ValidPlayer")) {
             Object o = runParams.get("Affected");
             if (!(o instanceof Player)) {
                 return false;
@@ -57,7 +57,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
             }
         }
 
-        if (mapParams.containsKey("ValidCounterType")) {
+        if (hasParam("ValidCounterType")) {
             String type = this.getMapParams().get("ValidCounterType");
             if (CounterType.getType(type) != runParams.get("CounterType")) {
                 return false;

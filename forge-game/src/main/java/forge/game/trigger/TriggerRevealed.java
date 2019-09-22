@@ -14,14 +14,14 @@ public class TriggerRevealed extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("Miracle")) {
+        if (hasParam("Miracle")) {
             if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }

@@ -59,20 +59,20 @@ public class TriggerDamageDone extends Trigger {
         final Card src = (Card) runParams.get(AbilityKey.DamageSource);
         final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
-        if (this.mapParams.containsKey("ValidSource")) {
+        if (hasParam("ValidSource")) {
             if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidTarget")) {
+        if (hasParam("ValidTarget")) {
             if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CombatDamage")) {
+        if (hasParam("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
@@ -84,7 +84,7 @@ public class TriggerDamageDone extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("DamageAmount")) {
+        if (hasParam("DamageAmount")) {
             final String fullParam = this.mapParams.get("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);
@@ -101,7 +101,7 @@ public class TriggerDamageDone extends Trigger {
             System.out.println(operand);
         }
 
-        if (this.mapParams.containsKey("OncePerEffect")) {
+        if (hasParam("OncePerEffect")) {
             // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
             // to change zones.
 

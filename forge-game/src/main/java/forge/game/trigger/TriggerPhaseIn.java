@@ -18,7 +18,7 @@ public class TriggerPhaseIn extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Card phaser = (Card) runParams.get(AbilityKey.Card);
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             return phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null);
         }

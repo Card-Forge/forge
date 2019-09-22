@@ -56,13 +56,13 @@ public class TriggerDamagePreventedOnce extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
-        if (this.mapParams.containsKey("ValidTarget")) {
+        if (hasParam("ValidTarget")) {
             if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CombatDamage")) {
+        if (hasParam("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
@@ -74,7 +74,7 @@ public class TriggerDamagePreventedOnce extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("DamageAmount")) {
+        if (hasParam("DamageAmount")) {
             final String fullParam = this.mapParams.get("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);

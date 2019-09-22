@@ -34,7 +34,7 @@ public class TriggerPlaneswalkedTo extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             for(Card moved : (Iterable<Card>) runParams.get(AbilityKey.Cards))
             {
                 if (moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),

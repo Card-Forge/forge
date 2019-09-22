@@ -56,7 +56,7 @@ public class TriggerFight extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Card fighter = (Card) runParams.get(AbilityKey.Fighter);
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             return fighter.isValid(this.mapParams.get("ValidCard").split(","),
                     this.getHostCard().getController(), this.getHostCard(), null);
         }

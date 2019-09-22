@@ -56,14 +56,14 @@ public class TriggerAttacks extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!matchesValid(runParams.get(AbilityKey.Attacker), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Attacked")) {
+        if (hasParam("Attacked")) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (!attacked.isValid(this.mapParams.get("Attacked").split(",")
                     , this.getHostCard().getController(), this.getHostCard(), null)) {
@@ -71,7 +71,7 @@ public class TriggerAttacks extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("Alone")) {
+        if (hasParam("Alone")) {
             @SuppressWarnings("unchecked")
             final List<Card> otherAttackers = (List<Card>) runParams.get(AbilityKey.OtherAttackers);
             if (otherAttackers == null) {
@@ -88,21 +88,21 @@ public class TriggerAttacks extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("FirstAttack")) {
+        if (hasParam("FirstAttack")) {
             Card attacker = (Card) runParams.get(AbilityKey.Attacker);
             if (attacker.getDamageHistory().getCreatureAttacksThisTurn() > 1) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("DefendingPlayerPoisoned")) {
+        if (hasParam("DefendingPlayerPoisoned")) {
             Player defendingPlayer = (Player) runParams.get(AbilityKey.DefendingPlayer);
         	if (defendingPlayer.getPoisonCounters() == 0) {
         		return false;
         	}
         }
 
-        if (this.mapParams.containsKey("AttackDifferentPlayers")) {
+        if (hasParam("AttackDifferentPlayers")) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             boolean found = false;
             if (attacked instanceof Player) {

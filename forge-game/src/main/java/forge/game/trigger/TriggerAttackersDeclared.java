@@ -50,13 +50,13 @@ public class TriggerAttackersDeclared extends Trigger {
 	@SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("AttackingPlayer")) {
+        if (hasParam("AttackingPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
                     this.mapParams.get("AttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("AttackedTarget")) {
+        if (hasParam("AttackedTarget")) {
             boolean valid = false;
             List<GameEntity> list = (List<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
             for (GameEntity b : list) {
@@ -69,7 +69,7 @@ public class TriggerAttackersDeclared extends Trigger {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidAttackers")) {
+        if (hasParam("ValidAttackers")) {
             boolean valid = false;
 
             final Iterable<Card> srcs = (Iterable<Card>) runParams.get(AbilityKey.Attackers);

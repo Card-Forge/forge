@@ -54,14 +54,14 @@ public class TriggerSetInMotion extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!matchesValid(runParams.get(AbilityKey.Scheme), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("SchemeType")) {
+        if (hasParam("SchemeType")) {
             if (this.mapParams.get("SchemeType").equals("NonOngoing")) {
                 if (((Card) runParams.get(AbilityKey.Scheme)).getType().hasSupertype(CardType.Supertype.Ongoing)) {
                     return false;

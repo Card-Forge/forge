@@ -53,18 +53,18 @@ public class TriggerShuffled extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get(AbilityKey.Player), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ShuffleFromEffect")) {
+        if (hasParam("ShuffleFromEffect")) {
             if (null == runParams.get(AbilityKey.Source)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ShuffleBySelfControlled")) {
+        if (hasParam("ShuffleBySelfControlled")) {
             SpellAbility source = (SpellAbility) runParams.get(AbilityKey.Source);
             if (!source.getActivatingPlayer().equals(runParams.get(AbilityKey.Player))) {
                 return false;

@@ -53,14 +53,14 @@ public class TriggerPayEcho extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("Paid")) {
+        if (hasParam("Paid")) {
             Boolean paid = (Boolean) runParams.get(AbilityKey.EchoPaid);
             if (this.mapParams.get("Paid").equals("True") ^ paid) {
                 return false;
             }
         }
         final Card card = (Card) runParams.get(AbilityKey.Card);
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!card.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;

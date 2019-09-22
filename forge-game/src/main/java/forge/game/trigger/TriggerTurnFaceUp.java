@@ -53,7 +53,7 @@ public class TriggerTurnFaceUp extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             return matchesValid(runParams.get(AbilityKey.Card), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard());
         }

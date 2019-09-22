@@ -60,7 +60,7 @@ public class TriggerDamageDealtOnce extends Trigger {
         final Card srcs = (Card) runParams.get(AbilityKey.DamageSource);
         final Set<GameEntity> tgt = (Set<GameEntity>) runParams.get(AbilityKey.DamageTargets);
 
-        if (this.mapParams.containsKey("CombatDamage")) {
+        if (hasParam("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
@@ -72,7 +72,7 @@ public class TriggerDamageDealtOnce extends Trigger {
             }
         }
         
-        if (this.mapParams.containsKey("ValidTarget")) {
+        if (hasParam("ValidTarget")) {
             boolean valid = false;
             for (GameEntity c : tgt) {
                 if (c.isValid(this.mapParams.get("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
@@ -84,13 +84,13 @@ public class TriggerDamageDealtOnce extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidSource")) {
+        if (hasParam("ValidSource")) {
             if (!matchesValid(srcs, this.mapParams.get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("DamageAmount")) {
+        if (hasParam("DamageAmount")) {
             final String fullParam = this.mapParams.get("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);

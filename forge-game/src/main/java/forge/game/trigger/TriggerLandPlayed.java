@@ -67,13 +67,13 @@ public class TriggerLandPlayed extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Card land = (Card) runParams.get(AbilityKey.Card);
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!matchesValid(land, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
         
-        if (this.mapParams.containsKey("NotFirstLand")) {
+        if (hasParam("NotFirstLand")) {
             if (land.getController().getLandsPlayedThisTurn() < 1) {
                 return false;
             }
