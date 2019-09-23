@@ -13,6 +13,7 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.util.Localizer;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
@@ -44,7 +45,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         protected void buildMenu() {
             if (text.length() > 0) {
                 if (!readOnly) {
-                    addItem(new FMenuItem("Cut", new FEventHandler() {
+                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCut"), new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             Forge.getClipboard().setContents(getSelectedText());
@@ -54,7 +55,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                         }
                     }));
                 }
-                addItem(new FMenuItem("Copy", new FEventHandler() {
+                addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCopy"), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         Forge.getClipboard().setContents(getSelectedText());
@@ -62,7 +63,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                 }));
             }
             if (!readOnly) {
-                addItem(new FMenuItem("Paste", new FEventHandler() {
+                addItem(new FMenuItem(Localizer.getInstance().getMessage("lblPaste"), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         textBeforeKeyInput = text;

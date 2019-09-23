@@ -2,6 +2,7 @@ package forge.deck;
 
 import java.util.List;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.assets.FImage;
@@ -24,11 +25,11 @@ public class FSideboardDialog extends FDialog {
     private final Callback<List<PaperCard>> callback;
 
     public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0, String message) {
-        super("Update main deck from sideboard" + message, 1);
+        super(String.format(Localizer.getInstance().getMessage("lblUpdateMainFromSideboard"), message), 1);
 
         callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));
-        initButton(0, "OK", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -129,7 +130,7 @@ public class FSideboardDialog extends FDialog {
                             callback.run(max);
                         }
                         else {
-                            GuiChoose.getInteger(card + " - " + verb + " how many?", 1, max, 20, callback);
+                            GuiChoose.getInteger(card + " - " + verb + " " + Localizer.getInstance().getMessage("lblHowMany"), 1, max, 20, callback);
                         }
                     }
                 }));
@@ -148,12 +149,12 @@ public class FSideboardDialog extends FDialog {
         private static class SideboardPage extends TabPageBase {
             protected SideboardPage(CardPool cardPool) {
                 super(cardPool, FDeckEditor.SIDEBOARD_ICON);
-                cardManager.setCaption("Sideboard");
+                cardManager.setCaption(Localizer.getInstance().getMessage("lblSideboard"));
             }
 
             @Override
             protected void updateCaption() {
-                caption = "Sideboard (" + cardManager.getPool().countAll() + ")";
+                caption = Localizer.getInstance().getMessage("lblSideboard") + " (" + cardManager.getPool().countAll() + ")";
             }
 
             @Override
@@ -164,7 +165,7 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, "Move", "to main deck", FDeckEditor.MAIN_DECK_ICON, new Callback<Integer>() {
+                addItem(menu, Localizer.getInstance().getMessage("lblMove"), Localizer.getInstance().getMessage("lblToMainDeck"), FDeckEditor.MAIN_DECK_ICON, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -179,12 +180,12 @@ public class FSideboardDialog extends FDialog {
         private static class MainDeckPage extends TabPageBase {
             protected MainDeckPage(CardPool cardPool) {
                 super(cardPool, FDeckEditor.MAIN_DECK_ICON);
-                cardManager.setCaption("Main Deck");
+                cardManager.setCaption(Localizer.getInstance().getMessage("ttMain"));
             }
 
             @Override
             protected void updateCaption() {
-                caption = "Main Deck (" + cardManager.getPool().countAll() + ")";
+                caption = Localizer.getInstance().getMessage("ttMain") + " (" + cardManager.getPool().countAll() + ")";
             }
 
             @Override
@@ -195,7 +196,7 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, "Move", "to sideboard", FDeckEditor.SIDEBOARD_ICON, new Callback<Integer>() {
+                addItem(menu, Localizer.getInstance().getMessage("lblMove"), Localizer.getInstance().getMessage("lbltosideboard"), FDeckEditor.SIDEBOARD_ICON, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
