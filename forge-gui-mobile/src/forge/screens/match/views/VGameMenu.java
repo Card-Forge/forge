@@ -11,6 +11,7 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class VGameMenu extends FDropDownMenu {
@@ -19,6 +20,8 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
+        final Localizer localizer = Localizer.getInstance();
+
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -43,7 +46,7 @@ public class VGameMenu extends FDropDownMenu {
                 GameStateDeserializer.loadGameState(MatchUtil.getGame(), ForgeConstants.USER_GAMES_DIR + "GameSave.txt");
             }
         }));*/
-        addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblDeckList"), FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final Player player = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn();
@@ -54,10 +57,10 @@ public class VGameMenu extends FDropDownMenu {
                         return;
                     }
                 }
-                FOptionPane.showMessageDialog("No player has priority at the moment, so deck list can't be viewed.");
+                FOptionPane.showMessageDialog(localizer.getMessage("lblNoPlayerPriorityNoDeckListViewed"));
             }
         }));
-        addItem(new FMenuItem("Auto-Yields", FSkinImage.WARNING, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();
@@ -82,7 +85,7 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
-        addItem(new FMenuItem("Settings", FSkinImage.SETTINGS, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblSettings"), FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 SettingsScreen.show(false);

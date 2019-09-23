@@ -25,6 +25,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -126,13 +127,13 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                             item.setTextRenderer(new TextRenderer()); //ensure symbols are displayed
                             addItem(item);
                         }
-                        addItem(new FMenuItem("Edit Expression", FSkinImage.EDIT, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblEditExpression"), FSkinImage.EDIT, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 edit();
                             }
                         }));
-                        addItem(new FMenuItem("Remove Filter", FSkinImage.DELETE, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRemoveFilter"), FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 reset();
@@ -176,7 +177,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         });
 
         private EditScreen() {
-            super("Advanced Search");
+            super(Localizer.getInstance().getMessage("lblAdvancedSearch"));
             Filter filter = new Filter();
             model.addFilterControl(filter);
             scroller.add(filter);
