@@ -5,8 +5,8 @@ Name=Throne of Eldraine
 Code2=ELD
 MciCode=eld
 Type=Expansion
-BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+BoosterCovers=5
+Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Secret Cards"), 1 RareMythic:!fromSheet("ELD Secret Cards"), 1 BasicLand
 
 [cards]
 1 R Acclaimed Contender
@@ -258,26 +258,26 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 247 C Mystic Sanctuary
 248 U Tournament Grounds
 249 C Witch's Cottage
-250 C Plains
-251 C Plains
-252 C Plains
-253 C Plains
-254 C Island
-255 C Island
-256 C Island
-257 C Island
-258 C Swamp
-259 C Swamp
-260 C Swamp
-261 C Swamp
-262 C Mountain
-263 C Mountain
-264 C Mountain
-265 C Mountain
-266 C Forest
-267 C Forest
-268 C Forest
-269 C Forest
+250 L Plains
+251 L Plains
+252 L Plains
+253 L Plains
+254 L Island
+255 L Island
+256 L Island
+257 L Island
+258 L Swamp
+259 L Swamp
+260 L Swamp
+261 L Swamp
+262 L Mountain
+263 L Mountain
+264 L Mountain
+265 L Mountain
+266 L Forest
+267 L Forest
+268 L Forest
+269 L Forest
 303 M Kenrith, the Returned King
 304 M Rowan, Fearless Sparkmage
 305 C Garrison Griffin
