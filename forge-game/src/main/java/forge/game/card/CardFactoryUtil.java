@@ -999,6 +999,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("LifeYourTeamGainedThisTurn")) {
             return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
         }
+        if (sq[0].contains("LifeYouGainedTimesThisTurn")) {
+            return doXMath(cc.getLifeGainedTimesThisTurn(), m, c);
+        }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             return doXMath(cc.getOpponentLostLifeThisTurn(), m, c);
         }
@@ -1271,7 +1274,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
+            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.listValueOf(sq[1]))), m, c);
         }
 
         if (sq[0].contains("CardTypes")) {
@@ -4737,5 +4740,31 @@ public class CardFactoryUtil {
             orClauses.add(sbShort.toString());
         }
         return byClause + StringUtils.join(orClauses, " or ") + ".";
+    }
+
+    public static void setupAdventureAbility(Card card) {
+        if (card.getCurrentStateName() != CardStateName.Adventure) {
+            return;
+        }
+        SpellAbility sa = card.getFirstSpellAbility();
+        if (sa == null) {
+            return;
+        }
+        sa.setAdventure(true);
+
+        String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
+
+        AbilitySub saExile = (AbilitySub)AbilityFactory.getAbility(abExile, card);
+
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
+        AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+        sb.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+        saEffect.setSVar("Play", sb.toString());
+
+        saExile.setSubAbility(saEffect);
+        sa.appendSubAbility(saExile);
     }
 }

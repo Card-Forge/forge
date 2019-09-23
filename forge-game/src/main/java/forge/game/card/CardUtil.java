@@ -225,6 +225,11 @@ public final class CardUtil {
             newCopy.turnFaceDownNoUpdate();
         }
 
+        if (in.isAdventureCard() && in.getFaceupCardStateName().equals(CardStateName.Original)) {
+            newCopy.addAlternateState(CardStateName.Adventure, false);
+            newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
+        }
+
         /*
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);

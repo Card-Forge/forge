@@ -106,11 +106,8 @@ public class TriggerCounterAddedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        if (this.getRunParams().containsKey("Card"))
-            sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        if (this.getRunParams().containsKey("Player"))
-            sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
-        sa.setTriggeringObject(AbilityKey.Amount, this.getRunParams().get("CounterAmount"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
+        sa.setTriggeringObject(AbilityKey.Amount, getFromRunParams(AbilityKey.CounterAmount));
     }
 
     @Override

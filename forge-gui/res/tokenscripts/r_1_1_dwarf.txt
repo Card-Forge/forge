@@ -1,0 +1,6 @@
+Name:Dwarf
+ManaCost:no cost
+Types:Creature Dwarf
+Colors:red
+PT:1/1
+Oracle:

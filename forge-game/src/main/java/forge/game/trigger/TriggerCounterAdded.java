@@ -121,10 +121,7 @@ public class TriggerCounterAdded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        if (this.getRunParams().containsKey("Card"))
-            sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
-        if (this.getRunParams().containsKey("Player"))
-            sa.setTriggeringObject(AbilityKey.Player, this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override

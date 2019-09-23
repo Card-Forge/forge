@@ -103,9 +103,9 @@ public class TriggerDamagePrevented extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)this.getRunParams().get("DamageSource")));
-        sa.setTriggeringObject(AbilityKey.Target, this.getRunParams().get("DamageTarget"));
-        sa.setTriggeringObject(AbilityKey.DamageAmount, this.getRunParams().get("DamageAmount"));
+        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)getFromRunParams(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
     }
 
     @Override

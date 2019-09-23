@@ -1,0 +1,8 @@
+Name:Mysterious Pathlighter
+ManaCost:2 W
+Types:Creature Faerie
+PT:2/2
+K:Flying
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+AdventureCard
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each creature you control that has an Adventure enters the battlefield with an additional +1/+1 counter on it.
+Oracle:Flying\nEach creature you control that has an Adventure enters the battlefield with an additional +1/+1 counter on it.

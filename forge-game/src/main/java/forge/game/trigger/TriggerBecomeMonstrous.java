@@ -65,8 +65,7 @@ public class TriggerBecomeMonstrous extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Card, getRunParams().get("Card"));
-        sa.setTriggeringObject(AbilityKey.MonstrosityAmount, getRunParams().get("MonstrosityAmount"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.MonstrosityAmount);
     }
 
     @Override

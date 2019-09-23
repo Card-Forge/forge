@@ -659,7 +659,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
         for (SpellAbilityStackInstance si : stack) {
             SpellAbility sa = si.getSpellAbility(false);
-            if (sa.getTriggeringObjects().containsKey("Target") && sa.getTriggeringObjects().get("Target").equals(c)) {
+            if (sa.getTriggeringObjects().containsKey(AbilityKey.Target) && sa.getTriggeringObjects().get(AbilityKey.Target).equals(c)) {
                 if (sa instanceof WrappedAbility) {
                     WrappedAbility wi = (WrappedAbility)sa;
                     if (wi.getTrigger().getMode() == t) {

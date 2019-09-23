@@ -37,7 +37,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
 
     public SettingsPage() {
-        super("Settings", FSkinImage.SETTINGS);
+        super(Localizer.getInstance().getMessage("lblSettings"), FSkinImage.SETTINGS);
 
         final Localizer localizer = Localizer.getInstance();
 

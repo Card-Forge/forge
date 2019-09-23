@@ -63,7 +63,7 @@ public class TriggerAbandoned extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Scheme, this.getRunParams().get("Scheme"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Scheme);
     }
 
     @Override

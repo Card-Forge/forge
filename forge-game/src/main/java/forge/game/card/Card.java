@@ -351,8 +351,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             else if (isDoubleFaced() && currentStateName != CardStateName.Transformed) {
                 return CardStateName.Transformed;
             }
-            else if (this.isMeldable() && currentStateName != CardStateName.Meld) {
+            else if (isMeldable() && currentStateName != CardStateName.Meld) {
                 return CardStateName.Meld;
+            }
+            else if (this.isAdventureCard() && currentStateName != CardStateName.Adventure) {
+                return CardStateName.Adventure;
             }
             else {
                 return CardStateName.Original;
@@ -801,6 +804,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean isSplitCard() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+    }
+
+    public final boolean isAdventureCard() {
+        return hasState(CardStateName.Adventure);
     }
 
     public final boolean isBackSide() {
@@ -1989,7 +1996,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
-            final String sAbility = formatSpellAbility(sa);
+            String sAbility = formatSpellAbility(sa);
+
+            // add Adventure to AbilityText
+            if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
+                StringBuilder sbSA = new StringBuilder();
+                sbSA.append("Adventure — ").append(getState(CardStateName.Adventure).getName());
+                if (sa.getPayCosts() != null) {
+                    sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
+                }
+                sbSA.append(": ");
+                sbSA.append(sAbility);
+                sAbility = sbSA.toString();
+            }
 
             if (sa.getManaPart() != null) {
                 if (addedManaStrings.contains(sAbility)) {
@@ -2397,10 +2416,21 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
-        if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
-            for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
-                if (sa.isManifestUp() || sa.isMorphUp()) {
-                    list.add(sa);
+        if (isInZone(ZoneType.Battlefield)) {
+            if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
+                for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
+                    if (sa.isManifestUp() || sa.isMorphUp()) {
+                        list.add(sa);
+                    }
+                }
+            }
+        } else {
+            // Adenture may only be cast not from Battlefield
+            if (isAdventureCard() && state.getView().getState() == CardStateName.Original) {
+                for (SpellAbility sa : getState(CardStateName.Adventure).getSpellAbilities()) {
+                    if (mana == null || mana == sa.isManaAbility()) {
+                        list.add(sa);
+                    }
                 }
             }
         }
@@ -2692,9 +2722,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final Player getController() {
         if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
-            //only permanents and spells have controllers [108.4],
-            //so a card really only has a controller while it's on the stack or battlefield.
-            //everywhere else, just use the owner [108.4a].
+            /*
+             * 108.4. A card doesn’t have a controller unless that card represents a permanent or spell; in those cases,
+             * its controller is determined by the rules for permanents or spells. See rules 110.2 and 112.2.
+             * 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent
+             * or spell), use its owner instead.
+             *
+             * Control, Controller: "Control" is the system that determines who gets to use an object in the game.
+             * An object's "controller" is the player who currently controls it. See rule 108.4.
+             * 
+             * 400.6. If an object would move from one zone to another, determine what event is moving the object. 
+             * If the object is moving to a public zone and its owner will be able to look at it in that zone, 
+             * its owner looks at it to see if it has any abilities that would affect the move. 
+             * If the object is moving to the battlefield, each other player who will be able to look at it in that 
+             * zone does so. Then any appropriate replacement effects, whether they come from that object or from 
+             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or 
+             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER 
+             * IF IT HAS NO CONTROLLER—chooses which effect to apply, and what that effect does.
+             */
+            if (controller != null) {
+                return controller; // if there's a controller we return this
+            }
             if (owner != null) {
                 return owner;
             }
@@ -5731,6 +5779,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
+        if (isAdventureCard()) {
+            if (sa.isAdventure()) {
+                setState(CardStateName.Adventure, true);
+            }
+            return;
+        }
         if (!isSplitCard()) {
             return; // just in case
         }

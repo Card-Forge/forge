@@ -8,7 +8,8 @@ public enum CardSplitType
     Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Transformed),
     Meld(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Meld),
     Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
-    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped);
+    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped),
+    Adventure(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Adventure);
 
     CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
         method = calcMode;

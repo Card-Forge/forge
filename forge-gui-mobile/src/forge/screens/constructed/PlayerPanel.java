@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
@@ -39,10 +40,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Callback;
-import forge.util.Lang;
-import forge.util.NameGenerator;
-import forge.util.Utils;
 
 public class PlayerPanel extends FContainer {
     private static final ForgePreferences prefs = FModel.getPreferences();
@@ -60,21 +57,22 @@ public class PlayerPanel extends FContainer {
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
     private int avatarIndex;
 
-    private final FTextField txtPlayerName = new FTextField("Player name");
+    final Localizer localizer = Localizer.getInstance();
+    private final FTextField txtPlayerName = new FTextField(localizer.getMessage("lblPlayerName"));
     private final FToggleSwitch humanAiSwitch;
     private final FToggleSwitch devModeSwitch;
 
     private FComboBox<Object> cbTeam = new FComboBox<>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<>();
 
-    private final FLabel btnDeck            = new FLabel.ButtonBuilder().text("Loading Deck...").build();
-    private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
-    private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
-    private final FLabel btnOathbreakDeck   = new FLabel.ButtonBuilder().text("Oathbreaker Deck: Random Generated Deck").build();
-    private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text("Tiny Leaders Deck: Random Generated Deck").build();
-    private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text("Brawl Deck: Random Generated Deck").build();
-    private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
-    private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
+    private final FLabel btnDeck            = new FLabel.ButtonBuilder().text(localizer.getMessage("lblLoadingDeck")).build();
+    private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSchemeDeckRandomGenerated")).build();
+    private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text(localizer.getMessage("lblCommanderDeckRandomGenerated")).build();
+    private final FLabel btnOathbreakDeck   = new FLabel.ButtonBuilder().text(localizer.getMessage("lblOathbreakerDeckRandomGenerated")).build();
+    private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblTinyLeadersDeckRandomGenerated")).build();
+    private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text(localizer.getMessage("lblBrawlDeckRandomGenerated")).build();
+    private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text(localizer.getMessage("lblPlanarDeckRandomGenerated")).build();
+    private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text(localizer.getMessage("lblVanguardAvatarRandom")).build();
 
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
@@ -84,10 +82,10 @@ public class PlayerPanel extends FContainer {
         screen = screen0;
         allowNetworking = allowNetworking0;
         if (allowNetworking) {
-            humanAiSwitch = new FToggleSwitch("Not Ready", "Ready");
+            humanAiSwitch = new FToggleSwitch(localizer.getMessage("lblNotReady"), localizer.getMessage("lblReady"));
         }
         else {
-            humanAiSwitch = new FToggleSwitch("Human", "AI");
+            humanAiSwitch = new FToggleSwitch(localizer.getMessage("lblHuman"), localizer.getMessage("lblAI"));
         }
         index = index0;
         populateTeamsComboBoxes();
@@ -97,7 +95,7 @@ public class PlayerPanel extends FContainer {
         setPlayerName(slot.getName());
         setAvatarIndex(slot.getAvatarIndex());
 
-        devModeSwitch = new FToggleSwitch("Normal", "Dev Mode");
+        devModeSwitch = new FToggleSwitch(localizer.getMessage("lblNormal"), localizer.getMessage("lblDevMode"));
         devModeSwitch.setVisible(isNetworkHost());
 
         cbTeam.setEnabled(true);
@@ -117,10 +115,10 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnCommanderDeck.setText("Commander Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstCommanderDecks.saveState();
                 }else{
-                    btnCommanderDeck.setText("Commander Deck");
+                    btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck"));
                 }
             }
         });
@@ -128,10 +126,10 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnOathbreakDeck.setText("Oathbreaker Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstOathbreakerDecks.saveState();
                 }else{
-                    btnOathbreakDeck.setText("Oathbreaker Deck");
+                    btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck"));
                 }
             }
         });
@@ -139,10 +137,10 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnTinyLeadersDeck.setText("Tiny Leaders Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstTinyLeadersDecks.saveState();
                 }else{
-                    btnTinyLeadersDeck.setText("Tiny Leaders Deck");
+                    btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck"));
                 }
             }
         });
@@ -150,10 +148,10 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnBrawlDeck.setText("Brawl Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstBrawlDecks.saveState();
                 }else{
-                    btnBrawlDeck.setText("Brawl Deck");
+                    btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck"));
                 }
             }
         });
@@ -161,9 +159,9 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnSchemeDeck.setText("Scheme Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
                 }else{
-                    btnSchemeDeck.setText("Scheme Deck");
+                    btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck"));
                 }
             }
         });
@@ -171,16 +169,16 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnPlanarDeck.setText("Planar Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
                 }else{
-                    btnPlanarDeck.setText("Planar Deck");
+                    btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck"));
                 }
             }
         });
         lstVanguardAvatars = new FVanguardChooser(isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnVanguardAvatar.setText("Vanguard: " + ((CardManager)e.getSource()).getSelectedItem().getName());
+                btnVanguardAvatar.setText(localizer.getMessage("lblVanguard") + ": " + ((CardManager)e.getSource()).getSelectedItem().getName());
             }
         });
 
@@ -188,7 +186,7 @@ public class PlayerPanel extends FContainer {
         add(avatarLabel);
 
         createNameEditor();
-        add(newLabel("Name:"));
+        add(newLabel(localizer.getMessage("lblName") + ":"));
         add(txtPlayerName);
 
         nameRandomiser = createNameRandomizer();
@@ -197,7 +195,7 @@ public class PlayerPanel extends FContainer {
         humanAiSwitch.setChangedHandler(humanAiSwitched);
         add(humanAiSwitch);
 
-        add(newLabel("Team:"));
+        add(newLabel(localizer.getMessage("lblTeam") + ":"));
         cbTeam.setChangedHandler(teamChangedHandler);
         cbArchenemyTeam.setChangedHandler(teamChangedHandler);
         add(cbTeam);
@@ -211,7 +209,7 @@ public class PlayerPanel extends FContainer {
         btnDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                deckChooser.setHeaderCaption("Select Deck for " + txtPlayerName.getText());
+                deckChooser.setHeaderCaption(localizer.getMessage("lblSelectDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(deckChooser);
             }
         });
@@ -219,7 +217,7 @@ public class PlayerPanel extends FContainer {
         btnCommanderDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstCommanderDecks.setHeaderCaption("Select Commander Deck for " + txtPlayerName.getText());
+                lstCommanderDecks.setHeaderCaption(localizer.getMessage("lblSelectCommanderDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstCommanderDecks);
             }
         });
@@ -227,7 +225,7 @@ public class PlayerPanel extends FContainer {
         btnOathbreakDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstOathbreakerDecks.setHeaderCaption("Select Oathbreaker Deck for " + txtPlayerName.getText());
+                lstOathbreakerDecks.setHeaderCaption(localizer.getMessage("lblSelectOathbreakerDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstOathbreakerDecks);
             }
         });
@@ -235,7 +233,7 @@ public class PlayerPanel extends FContainer {
         btnTinyLeadersDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstTinyLeadersDecks.setHeaderCaption("Select Tiny Leaders Deck for " + txtPlayerName.getText());
+                lstTinyLeadersDecks.setHeaderCaption(localizer.getMessage("lblSelectTinyLeadersDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstTinyLeadersDecks);
             }
         });
@@ -243,7 +241,7 @@ public class PlayerPanel extends FContainer {
         btnBrawlDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstBrawlDecks.setHeaderCaption("Select Brawl Deck for " + txtPlayerName.getText());
+                lstBrawlDecks.setHeaderCaption(localizer.getMessage("lblSelectBrawlDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstBrawlDecks);
             }
         });
@@ -251,7 +249,7 @@ public class PlayerPanel extends FContainer {
         btnSchemeDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstSchemeDecks.setHeaderCaption("Select Scheme Deck for " + txtPlayerName.getText());
+                lstSchemeDecks.setHeaderCaption(localizer.getMessage("lblSelectSchemeDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstSchemeDecks);
             }
         });
@@ -259,7 +257,7 @@ public class PlayerPanel extends FContainer {
         btnPlanarDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstPlanarDecks.setHeaderCaption("Select Planar Deck for " + txtPlayerName.getText());
+                lstPlanarDecks.setHeaderCaption(localizer.getMessage("lblSelectPlanarDeckFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstPlanarDecks);
             }
         });
@@ -267,7 +265,7 @@ public class PlayerPanel extends FContainer {
         btnVanguardAvatar.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstVanguardAvatars.setHeaderCaption("Select Vanguard for " + txtPlayerName.getText());
+                lstVanguardAvatars.setHeaderCaption(localizer.getMessage("lblSelectVanguardFor").replace("%s", txtPlayerName.getText()));
                 Forge.openScreen(lstVanguardAvatars);
             }
         });
@@ -565,11 +563,11 @@ public class PlayerPanel extends FContainer {
     }
 
     private void populateTeamsComboBoxes() {
-        cbArchenemyTeam.addItem("Archenemy");
-        cbArchenemyTeam.addItem("Heroes");
+        cbArchenemyTeam.addItem(localizer.getMessage("lblArchenemy"));
+        cbArchenemyTeam.addItem(localizer.getMessage("lblHeroes"));
 
         for (int i = 1; i <= LobbyScreen.MAX_PLAYERS; i++) {
-            cbTeam.addItem("Team " + i);
+            cbTeam.addItem(localizer.getMessage("lblTeam") + " " + i);
         }
         cbTeam.setEnabled(mayEdit);
     }
@@ -639,7 +637,7 @@ public class PlayerPanel extends FContainer {
         if (index == 0) {
             name = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
             if (name.isEmpty()) {
-                name = "Human";
+                name = localizer.getMessage("lblHuman");
             }
         }
         else {
@@ -837,11 +835,11 @@ public class PlayerPanel extends FContainer {
         return new FLabel.Builder().text(title).font(LABEL_FONT).align(Align.right).build();
     }
     
-    private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any");
-    private static final ImmutableList<String> typeOptions   = ImmutableList.of("Fantasy", "Generic", "Any");
+    private static final ImmutableList<String> genderOptions = ImmutableList.of(Localizer.getInstance().getMessage("lblMale"), Localizer.getInstance().getMessage("lblFemale"), Localizer.getInstance().getMessage("lblAny"));
+    private static final ImmutableList<String> typeOptions   = ImmutableList.of(Localizer.getInstance().getMessage("lblFantasy"), Localizer.getInstance().getMessage("lblGeneric"), Localizer.getInstance().getMessage("lblAny"));
     private final void getNewName(final Callback<String> callback) {
-        final String title = "Get new random name";
-        final String message = "What type of name do you want to generate?";
+        final String title = localizer.getMessage("lblGetNewRandomName");
+        final String message = localizer.getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
 
         FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, new Callback<Integer>() {
@@ -869,8 +867,8 @@ public class PlayerPanel extends FContainer {
 
     private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Callback<String> callback) {
         final String newName = NameGenerator.getRandomName(gender, type, usedNames);
-        String confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
-        FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true, new Callback<Boolean>() {
+        String confirmMsg = localizer.getMessage("lblconfirmName").replace("%s", newName);
+        FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true, new Callback<Boolean>() {
             @Override
             public void run(Boolean result) {
                 if (result) {

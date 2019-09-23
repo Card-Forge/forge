@@ -74,8 +74,7 @@ public class TriggerLifeGained extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.LifeAmount, getRunParams().get("LifeAmount"));
-        sa.setTriggeringObject(AbilityKey.Player, getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.LifeAmount, AbilityKey.Player);
     }
 
     @Override

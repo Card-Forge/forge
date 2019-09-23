@@ -89,9 +89,8 @@ public class TriggerBecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.SourceSA, this.getRunParams().get("SourceSA"));
-        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) this.getRunParams().get("SourceSA")).getHostCard());
-        sa.setTriggeringObject(AbilityKey.Target, this.getRunParams().get("Target"));
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
+        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Target);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class TriggerExplores extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Explorer, this.getRunParams().get("Card"));
+        sa.setTriggeringObject(AbilityKey.Explorer, getFromRunParams(AbilityKey.Card));
     }
 
     @Override

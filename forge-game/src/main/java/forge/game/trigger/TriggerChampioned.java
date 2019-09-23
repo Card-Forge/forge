@@ -72,8 +72,7 @@ public class TriggerChampioned extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Championed, this.getRunParams().get("Championed"));
-        sa.setTriggeringObject(AbilityKey.Card, this.getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Championed, AbilityKey.Card);
     }
 
     @Override

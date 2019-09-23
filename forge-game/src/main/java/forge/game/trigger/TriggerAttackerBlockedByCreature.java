@@ -88,8 +88,7 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Attacker, this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject(AbilityKey.Blocker, this.getRunParams().get("Blocker"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Attacker, AbilityKey.Blocker);
     }
 
     @Override

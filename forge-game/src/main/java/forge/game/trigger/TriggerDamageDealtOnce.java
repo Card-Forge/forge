@@ -106,9 +106,9 @@ public class TriggerDamageDealtOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, this.getRunParams().get("DamageSource"));
-        sa.setTriggeringObject(AbilityKey.Targets, this.getRunParams().get("DamageTargets"));
-        sa.setTriggeringObject(AbilityKey.DamageAmount, this.getRunParams().get("DamageAmount"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
+        sa.setTriggeringObject(AbilityKey.Source, getFromRunParams(AbilityKey.DamageSource));
+        sa.setTriggeringObject(AbilityKey.Targets, getFromRunParams(AbilityKey.DamageTargets));
     }
 
     @Override
