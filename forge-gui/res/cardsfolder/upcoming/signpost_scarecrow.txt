@@ -1,0 +1,8 @@
+Name:Signpost Scarecrow
+ManaCost:4
+Types:Artifact Creature Scarecrow
+PT:2/4
+K:Vigilance
+A:AB$ Mana | Cost$ 2 | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:Vigilance\n{2}: Add one mana of any color.

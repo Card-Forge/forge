@@ -48,6 +48,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -2085,35 +2086,35 @@ public class AiController {
             return Iterables.getFirst(list, null);
         }
 
-        if (runParams.containsKey("Event")) {
-            // replace lifegain effects
-            if ("GainLife".equals(runParams.get("Event"))) {
-                List<ReplacementEffect> noGain = filterListByAiLogic(list, "NoLife");
-                List<ReplacementEffect> loseLife = filterListByAiLogic(list, "LoseLife");
-                List<ReplacementEffect> doubleLife = filterListByAiLogic(list, "DoubleLife");
-                List<ReplacementEffect> lichDraw = filterListByAiLogic(list, "LichDraw");
+        ReplacementType mode = Iterables.getFirst(list, null).getMode();
 
-                if (!noGain.isEmpty()) {
-                    // no lifegain is better than lose life
-                    return Iterables.getFirst(noGain, null);
-                } else if (!loseLife.isEmpty()) {
-                    // lose life before double life to prevent lose double
-                    return Iterables.getFirst(loseLife, null);
-                } else if (!lichDraw.isEmpty()) {
-                    // lich draw before double life to prevent to draw to much
-                    return Iterables.getFirst(lichDraw, null);
-                } else if (!doubleLife.isEmpty()) {
-                    // other than that, do double life
-                    return Iterables.getFirst(doubleLife, null);
-                }
-            } else if ("DamageDone".equals(runParams.get("Event"))) {
-                List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevention"));
+        // replace lifegain effects
+        if (mode.equals(ReplacementType.GainLife)) {
+            List<ReplacementEffect> noGain = filterListByAiLogic(list, "NoLife");
+            List<ReplacementEffect> loseLife = filterListByAiLogic(list, "LoseLife");
+            List<ReplacementEffect> doubleLife = filterListByAiLogic(list, "DoubleLife");
+            List<ReplacementEffect> lichDraw = filterListByAiLogic(list, "LichDraw");
 
-                // TODO when Protection is done as ReplacementEffect do them
-                // before normal prevention
-                if (!prevention.isEmpty()) {
-                    return Iterables.getFirst(prevention, null);
-                }
+            if (!noGain.isEmpty()) {
+                // no lifegain is better than lose life
+                return Iterables.getFirst(noGain, null);
+            } else if (!loseLife.isEmpty()) {
+                // lose life before double life to prevent lose double
+                return Iterables.getFirst(loseLife, null);
+            } else if (!lichDraw.isEmpty()) {
+                // lich draw before double life to prevent to draw to much
+                return Iterables.getFirst(lichDraw, null);
+            } else if (!doubleLife.isEmpty()) {
+                // other than that, do double life
+                return Iterables.getFirst(doubleLife, null);
+            }
+        } else if (mode.equals(ReplacementType.DamageDone)) {
+            List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevention"));
+
+            // TODO when Protection is done as ReplacementEffect do them
+            // before normal prevention
+            if (!prevention.isEmpty()) {
+                return Iterables.getFirst(prevention, null);
             }
         }
 

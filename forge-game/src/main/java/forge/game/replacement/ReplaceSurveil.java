@@ -26,12 +26,12 @@ public class ReplaceSurveil extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Surveil") || ((int) runParams.get("SurveilNum")) <= 0) {
+        if (((int) runParams.get("SurveilNum")) <= 0) {
             return false;
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }

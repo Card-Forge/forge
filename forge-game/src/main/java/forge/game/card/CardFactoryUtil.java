@@ -999,6 +999,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("LifeYourTeamGainedThisTurn")) {
             return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
         }
+        if (sq[0].contains("LifeYouGainedTimesThisTurn")) {
+            return doXMath(cc.getLifeGainedTimesThisTurn(), m, c);
+        }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             return doXMath(cc.getOpponentLostLifeThisTurn(), m, c);
         }
@@ -1271,7 +1274,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
+            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.listValueOf(sq[1]))), m, c);
         }
 
         if (sq[0].contains("CardTypes")) {

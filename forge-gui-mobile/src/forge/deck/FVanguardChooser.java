@@ -10,6 +10,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 public class FVanguardChooser extends FScreen {
@@ -38,7 +39,7 @@ public class FVanguardChooser extends FScreen {
     }
 
     private final CardManager lstVanguards = add(new CardManager(true));
-    private final FButton btnRandom = add(new FButton("Random Vanguard"));
+    private final FButton btnRandom = add(new FButton(Localizer.getInstance().getMessage("lblRandomVanguard")));
     private boolean isAi;
 
     public FVanguardChooser(boolean isAi0, FEventHandler selectionChangedHandler) {

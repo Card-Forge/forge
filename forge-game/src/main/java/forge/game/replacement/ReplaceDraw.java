@@ -45,15 +45,12 @@ public class ReplaceDraw extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Draw")) {
-            return false;
-        }
-        if (this.hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.hasParam("NotFirstCardInDrawStep")) {
+        if (hasParam("NotFirstCardInDrawStep")) {
             final Player p = (Player)runParams.get("Affected");
             if (p.numDrawnThisDrawStep() == 0
                     && this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)

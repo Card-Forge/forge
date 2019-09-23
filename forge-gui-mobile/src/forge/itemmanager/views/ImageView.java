@@ -30,6 +30,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.*;
@@ -358,7 +359,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         otherItems = groups.get(groups.size() - 1);
                     }
                     else {
-                        otherItems = new Group("Other");
+                        otherItems = new Group(Localizer.getInstance().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
                     }

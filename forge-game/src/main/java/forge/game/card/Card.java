@@ -48,6 +48,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -687,9 +688,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (result && runTriggers) {
                 // Run replacement effects
                 Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Event", "TurnFaceUp");
                 repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1234,14 +1234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("Source", source);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
@@ -2722,9 +2721,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final Player getController() {
         if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
-            //only permanents and spells have controllers [108.4],
-            //so a card really only has a controller while it's on the stack or battlefield.
-            //everywhere else, just use the owner [108.4a].
+            /*
+             * 108.4. A card doesn’t have a controller unless that card represents a permanent or spell; in those cases,
+             * its controller is determined by the rules for permanents or spells. See rules 110.2 and 112.2.
+             * 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent
+             * or spell), use its owner instead.
+             *
+             * Control, Controller: "Control" is the system that determines who gets to use an object in the game.
+             * An object's "controller" is the player who currently controls it. See rule 108.4.
+             * 
+             * 400.6. If an object would move from one zone to another, determine what event is moving the object. 
+             * If the object is moving to a public zone and its owner will be able to look at it in that zone, 
+             * its owner looks at it to see if it has any abilities that would affect the move. 
+             * If the object is moving to the battlefield, each other player who will be able to look at it in that 
+             * zone does so. Then any appropriate replacement effects, whether they come from that object or from 
+             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or 
+             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER 
+             * IF IT HAS NO CONTROLLER—chooses which effect to apply, and what that effect does.
+             */
+            if (controller != null) {
+                return controller; // if there's a controller we return this
+            }
             if (owner != null) {
                 return owner;
             }
@@ -3556,10 +3573,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Run Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "Untap");
         repRunParams.put("Affected", this);
 
-        if (getGame().getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -4684,7 +4700,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final Card ca : getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
                 if (params.containsKey("ValidSource")

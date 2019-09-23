@@ -26,11 +26,8 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("TurnFaceUp")) {
-            return false;
-        }
-        if (this.hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }

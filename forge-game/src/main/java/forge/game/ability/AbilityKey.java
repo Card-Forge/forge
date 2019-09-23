@@ -3,6 +3,8 @@ package forge.game.ability;
 import java.util.EnumMap;
 import java.util.Map;
 
+import forge.game.card.Card;
+
 /**
  * Keys for Ability parameter maps.
  */
@@ -112,184 +114,12 @@ public enum AbilityKey {
      * @return the corresponding key if there is one or null otherwise
      */
     public static AbilityKey fromString(String s) {
-        switch (s) {
-            case "AbilityMana":
-                return AbilityMana;
-            case "Activator":
-                return Activator;
-            case "Affected":
-                return Affected;
-            case "AllVotes":
-                return AllVotes;
-            case "Amount":
-                return Amount;
-            case "Attach":
-                return Attach;
-            case "AttachSource":
-                return AttachSource;
-            case "AttachTarget":
-                return AttachTarget;
-            case "Attacked":
-                return Attacked;
-            case "Attacker":
-                return Attacker;
-            case "Attackers":
-                return Attackers;
-            case "AttackingPlayer":
-                return AttackingPlayer;
-            case "AttackedTarget":
-                return AttackedTarget;
-            case "Blocker":
-                return Blocker;
-            case "Blockers":
-                return Blockers;
-            case "CastSA":
-                return CastSA;
-            case "CastSACMC":
-                return CastSACMC;
-            case "Card":
-                return Card;
-            case "Cards":
-                return Cards;
-            case "CardLKI":
-                return CardLKI;
-            case "Cause":
-                return Cause;
-            case "Causer":
-                return Causer;
-            case "Championed":
-                return Championed;
-            case "CopySA":
-                return CopySA;
-            case "Cost":
-                return Cost;
-            case "CostStack":
-                return CostStack;
-            case "CounterAmount":
-                return CounterAmount;
-            case "CounteredSA":
-                return CounteredSA;
-            case "CounterType":
-                return CounterType;
-            case "Crew":
-                return Crew;
-            case "CumulativeUpkeepPaid":
-                return CumulativeUpkeepPaid;
-            case "CurrentCastSpells":
-                return CurrentCastSpells;
-            case "CurrentStormCount":
-                return CurrentStormCount;
-            case "DamageAmount":
-                return DamageAmount;
-            case "DamageSource":
-                return DamageSource;
-            case "DamageSources":
-                return DamageSources;
-            case "DamageTarget":
-                return DamageTarget;
-            case "DamageTargets":
-                return DamageTargets;
-            case "Defender":
-                return Defender;
-            case "Defenders":
-                return Defenders;
-            case "DefendingPlayer":
-                return DefendingPlayer;
-            case "Destination":
-                return Destination;
-            case "Devoured":
-                return Devoured;
-            case "EchoPaid":
-                return EchoPaid;
-            case "Exploited":
-                return Exploited;
-            case "Explorer":
-                return Explorer;
-            case "Event":
-                return Event;
-            case "Fighter":
-                return Fighter;
-            case "FirstTime":
-                return FirstTime;
-            case "Fizzle":
-                return Fizzle;
-            case "IsCombatDamage":
-                return IsCombatDamage;
-            case "IndividualCostPaymentInstance":
-                return IndividualCostPaymentInstance;
-            case "IsMadness":
-                return IsMadness;
-            case "LifeAmount":
-                return LifeAmount;
-            case "MonstrosityAmount":
-                return MonstrosityAmount;
-            case "NewCounterAmount":
-                return NewCounterAmount;
-            case "Num":
-                return Num;
-            case "NumBlockers":
-                return NumBlockers;
-            case "NumThisTurn":
-                return NumThisTurn;
-            case "Number":
-                return Number;
-            case "Object":
-                return Object;
-            case "Objects":
-                return Objects;
-            case "OtherAttackers":
-                return OtherAttackers;
-            case "OtherVoters":
-                return OtherVoters;
-            case "Origin":
-                return Origin;
-            case "OriginalController":
-                return OriginalController;
-            case "OriginalDefender":
-                return OriginalDefender;
-            case "PayingMana":
-                return PayingMana;
-            case "Phase":
-                return Phase;
-            case "Player":
-                return Player;
-            case "Produced":
-                return Produced;
-            case "Result":
-                return Result;
-            case "Scheme":
-                return Scheme;
-            case "Source":
-                return Source;
-            case "Sources":
-                return Sources;
-            case "SourceSA":
-                return SourceSA;
-            case "SpellAbility":
-                return SpellAbility;
-            case "SpellAbilityStackInstance":
-                return SpellAbilityStackInstance;
-            case "SpellAbilityTargetingCards":
-                return SpellAbilityTargetingCards;
-            case "StackInstance":
-                return StackInstance;
-            case "StackSa":
-                return StackSa;
-            case "StackSi":
-                return StackSi;
-            case "Target":
-                return Target;
-            case "Targets":
-                return Targets;
-            case "Transformer":
-                return Transformer;
-            case "Vehicle":
-                return Vehicle;
-            case "Won":
-                return Won;
-            default:
-                return null;
+        for (AbilityKey k : values()) {
+            if (k.toString().equalsIgnoreCase(s)) {
+                return k;
+            }
         }
+        return null;
 
     }
 
@@ -305,7 +135,7 @@ public enum AbilityKey {
         return new EnumMap<>(map);
     }
 
-    public static Map<AbilityKey, Object> mapFromCard(forge.game.card.Card card) {
+    public static Map<AbilityKey, Object> mapFromCard(Card card) {
         final Map<AbilityKey, Object> runParams = newMap();
 
         runParams.put(Card, card);

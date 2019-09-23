@@ -44,21 +44,18 @@ public class ReplaceCounter extends ReplacementEffect {
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
         final SpellAbility spellAbility = (SpellAbility) runParams.get("TgtSA");
-        if (!runParams.get("Event").equals("Counter")) {
-            return false;
-        }
-        if (this.hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.hasParam("ValidCause")) {
-            if (!matchesValid(runParams.get("Cause"), this.getParam("ValidCause").split(","), this.getHostCard())) {
+        if (hasParam("ValidCause")) {
+            if (!matchesValid(runParams.get("Cause"), getParam("ValidCause").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.hasParam("ValidType")) {
-            String type = this.getParam("ValidType");
+        if (hasParam("ValidType")) {
+            String type = getParam("ValidType");
             if (type.equals("Spell") && !spellAbility.isSpell()) {
                 return false;
             }

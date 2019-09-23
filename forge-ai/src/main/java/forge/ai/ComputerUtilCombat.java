@@ -42,6 +42,7 @@ import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -2397,7 +2398,7 @@ public class ComputerUtilCombat {
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
                 // Immortal Coil prevents the damage but has a similar negative effect
@@ -2583,7 +2584,6 @@ public class ComputerUtilCombat {
 
         // first try to replace the damage
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
         repParams.put("Affected", target);
         repParams.put("DamageSource", attacker);
         repParams.put("DamageAmount", damage);
@@ -2591,8 +2591,8 @@ public class ComputerUtilCombat {
         repParams.put("Prevention", true);
         // repParams.put("PreventMap", preventMap);
 
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams,
-                ReplacementLayer.Other);
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(
+                ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
         
         return !list.isEmpty();
     }

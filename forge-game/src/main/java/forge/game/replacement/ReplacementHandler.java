@@ -52,7 +52,7 @@ public class ReplacementHandler {
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
-    public ReplacementResult run(final Map<String, Object> runParams) {
+    public ReplacementResult run(ReplacementType event, final Map<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
         Player decider = null;
 
@@ -66,7 +66,7 @@ public class ReplacementHandler {
 
         // try out all layer
         for (ReplacementLayer layer : ReplacementLayer.values()) {
-            ReplacementResult res = run(runParams, layer, decider);
+            ReplacementResult res = run(event, runParams, layer, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
@@ -76,21 +76,21 @@ public class ReplacementHandler {
 
     }
 
-    public List<ReplacementEffect> getReplacementList(final Map<String, Object> runParams, final ReplacementLayer layer) {
+    public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer) {
 
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
         Card affectedLKI = null;
         Card affectedCard = null;
 
-        if ("Moved".equals(runParams.get("Event")) && ZoneType.Battlefield.equals(runParams.get("Destination"))) {
+        if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get("Destination"))) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
             SpellAbility cause = (SpellAbility) runParams.get("Cause");
             if (cause != null && cause.isReplacementAbility()) {
                 final ReplacementEffect re = cause.getReplacementEffect();
                 // only return for same layer
-                if ("Moved".equals(re.getParam("Event")) && layer.equals(re.getLayer())) {
+                if (ReplacementType.Moved.equals(re.getMode()) && layer.equals(re.getLayer())) {
                     return re.getOtherChoices();
                 }
             }
@@ -137,6 +137,7 @@ public class ReplacementHandler {
 
                     if (!replacementEffect.hasRun()
                             && (layer == null || replacementEffect.getLayer() == layer)
+                            && event.equals(replacementEffect.getMode())
                             && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
@@ -172,8 +173,8 @@ public class ReplacementHandler {
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public ReplacementResult run(final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
-        final List<ReplacementEffect> possibleReplacers = getReplacementList(runParams, layer);
+    public ReplacementResult run(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
+        final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
             return ReplacementResult.NotReplaced;
@@ -188,7 +189,7 @@ public class ReplacementHandler {
         ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
-                res = run(runParams);
+                res = run(event, runParams);
             }
             chosenRE.setHasRun(false);
             chosenRE.setOtherChoices(null);

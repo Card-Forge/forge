@@ -42,11 +42,8 @@ public class ReplaceSetInMotion extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("SetInMotion")) {
-            return false;
-        }
-        if (this.hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getParam("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }

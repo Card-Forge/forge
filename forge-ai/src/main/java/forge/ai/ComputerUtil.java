@@ -43,6 +43,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -2849,12 +2850,13 @@ public class ComputerUtil {
 
         // Run any applicable replacement effects.
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "GainLife");
         repParams.put("Affected", player);
         repParams.put("LifeGained", 1);
         repParams.put("Source", source);
 
-        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
+        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
+                ReplacementType.GainLife,
+                repParams,
                 ReplacementLayer.Other);
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
@@ -2879,12 +2881,13 @@ public class ComputerUtil {
 
         // Run any applicable replacement effects.
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "GainLife");
         repParams.put("Affected", player);
         repParams.put("LifeGained", n);
         repParams.put("Source", source);
 
-        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
+        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
+                ReplacementType.GainLife,
+                repParams,
                 ReplacementLayer.Other);
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
