@@ -36,6 +36,7 @@ import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -63,15 +64,16 @@ public class FDeckChooser extends FScreen {
     private boolean refreshingDeckType;
 
     private final DeckManager lstDecks;
-    private final FButton btnNewDeck = new FButton("New Deck");
-    private final FButton btnEditDeck = new FButton("Edit Deck");
-    private final FButton btnViewDeck = new FButton("View Deck");
-    private final FButton btnRandom = new FButton("Random Deck");
+    private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
+    private final FButton btnEditDeck = new FButton(Localizer.getInstance().getMessage("btnEditDeck"));
+    private final FButton btnViewDeck = new FButton(Localizer.getInstance().getMessage("lblViewDeck"));
+    private final FButton btnRandom = new FButton(Localizer.getInstance().getMessage("lblRandomDeck"));
 
     private RegisteredPlayer player;
     private boolean isAi;
 
     private final ForgePreferences prefs = FModel.getPreferences();
+    private final Localizer localizer = Localizer.getInstance();
     private FPref stateSetting = null;
     private FOptionPane optionPane;
 
@@ -97,7 +99,7 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 if (result == 0) {
@@ -308,7 +310,7 @@ public class FDeckChooser extends FScreen {
                 editor = new FDeckEditor(getEditorType(), generatedDeck, true);
             }
             else {
-                FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblMustSelectGenerateNewDeck"));
                 return;
             }
             break;
@@ -376,9 +378,10 @@ public class FDeckChooser extends FScreen {
                 return;
             }
 
+
             //prompt to duplicate deck if deck doesn't exist already
-            FOptionPane.showConfirmDialog(selectedDeckType + " cannot be edited directly. Would you like to duplicate " + deck.getName() + " for editing as a custom user deck?",
-                    "Duplicate Deck?", "Duplicate", "Cancel", new Callback<Boolean>() {
+            FOptionPane.showConfirmDialog(selectedDeckType + " " + localizer.getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
+                    localizer.getMessage("lblDuplicateDeck"), localizer.getMessage("lblDuplicate"), localizer.getMessage("lblCancel"), new Callback<Boolean>() {
                 @Override
                 public void run(Boolean result) {
                     if (result) {
@@ -472,7 +475,7 @@ public class FDeckChooser extends FScreen {
         selectedDeckType = defaultDeckType;
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
-            cmbDeckTypes = new FComboBox<DeckType>();
+            cmbDeckTypes = new FComboBox<>();
             switch (lstDecks.getGameType()) {
             case Constructed:
             case Gauntlet:
@@ -769,16 +772,16 @@ public class FDeckChooser extends FScreen {
             btnViewDeck.setVisible(false);
             btnRandom.setWidth(btnNewDeck.getWidth());
 
-            btnNewDeck.setText("Generate New Deck");
+            btnNewDeck.setText(localizer.getMessage("lblGenerateNewDeck"));
             switch (deckType) {
             case COLOR_DECK:
-                btnRandom.setText("Random Colors");
+                btnRandom.setText(localizer.getMessage("lblRandomColors"));
                 break;
             case THEME_DECK:
-                btnRandom.setText("Random Theme");
+                btnRandom.setText(localizer.getMessage("lblRandomTheme"));
                 break;
             default:
-                btnRandom.setText("Random Deck");
+                btnRandom.setText(localizer.getMessage("lblRandomDeck"));
                 break;
             }
         }
@@ -788,11 +791,11 @@ public class FDeckChooser extends FScreen {
             btnViewDeck.setVisible(true);
             btnRandom.setWidth(btnNewDeck.getWidth());
 
-            btnNewDeck.setText("New Deck");
+            btnNewDeck.setText(localizer.getMessage("lblNewDeck"));
 
             if (lstDecks.getGameType() == GameType.DeckManager) {
                 //handle special case of Deck Editor screen where this button will start a game with the deck
-                btnRandom.setText("Test Deck");
+                btnRandom.setText(localizer.getMessage("lblTestDeck"));
 
                 switch (selectedDeckType) {
                 case SCHEME_DECK:
@@ -805,7 +808,7 @@ public class FDeckChooser extends FScreen {
                 }
             }
             else {
-                btnRandom.setText("Random Deck");
+                btnRandom.setText(localizer.getMessage("lblRandomDeck"));
             }
         }
 
@@ -950,7 +953,7 @@ public class FDeckChooser extends FScreen {
         if (cmbDeckTypes.getSelectedItem() == null || cmbDeckTypes.getSelectedItem() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
-            state.append(NetDeckCategory.PREFIX + netDeckCategory.getName());
+            state.append(NetDeckCategory.PREFIX).append(netDeckCategory.getName());
         }
         else {
             state.append(cmbDeckTypes.getSelectedItem().name());
@@ -1015,7 +1018,7 @@ public class FDeckChooser extends FScreen {
     private List<String> getSelectedDecksFromSavedState(String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
-                return new ArrayList<String>();
+                return new ArrayList<>();
             }
             else {
                 return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
@@ -1023,7 +1026,7 @@ public class FDeckChooser extends FScreen {
         }
         catch (Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 
@@ -1062,7 +1065,7 @@ public class FDeckChooser extends FScreen {
             return;
         }
 
-        GuiChoose.getInteger("How many opponents are you willing to face?", 1, 50, new Callback<Integer>() {
+        GuiChoose.getInteger(localizer.getMessage("lblHowManyOpponents"), 1, 50, new Callback<Integer>() {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
@@ -1087,11 +1090,13 @@ public class FDeckChooser extends FScreen {
                     deckTypes.remove(DeckType.VINTAGE_CARDGEN_DECK);
                 }
 
-                ListChooser<DeckType> chooser = new ListChooser<DeckType>(
-                        "Choose allowed deck types for opponents", 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
+                ListChooser<DeckType> chooser = new ListChooser<>(
+                        localizer.getMessage("lblChooseAllowedDeckTypeOpponents"), 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
-                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
+                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) {
+                            return;
+                        }
 
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
@@ -1106,13 +1111,13 @@ public class FDeckChooser extends FScreen {
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        LoadingOverlay.show("Loading new game...", new Runnable() {
+                                        LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
                                             @Override
                                             public void run() {
                                                 GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, netCat);
                                                 FModel.setGauntletData(gauntlet);
 
-                                                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                                                List<RegisteredPlayer> players = new ArrayList<>();
                                                 RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
                                                 players.add(humanPlayer);
                                                 players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
@@ -1132,18 +1137,18 @@ public class FDeckChooser extends FScreen {
     }
 
     private void testVariantDeck(final Deck userDeck, final GameType variant) {
-        promptForDeck("Select Opponent's Deck", variant, true, new Callback<Deck>() {
+        promptForDeck(localizer.getMessage("lblSelectOpponentDeck"), variant, true, new Callback<Deck>() {
             @Override
             public void run(final Deck aiDeck) {
                 if (aiDeck == null) { return; }
 
-                LoadingOverlay.show("Loading new game...", new Runnable() {
+                LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
                     @Override
                     public void run() {
-                        Set<GameType> appliedVariants = new HashSet<GameType>();
+                        Set<GameType> appliedVariants = new HashSet<>();
                         appliedVariants.add(variant);
 
-                        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                        List<RegisteredPlayer> players = new ArrayList<>();
                         RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
                         humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
                         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, aiDeck, null, false, null, null);
@@ -1151,7 +1156,7 @@ public class FDeckChooser extends FScreen {
                         players.add(humanPlayer);
                         players.add(aiPlayer);
 
-                        final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
+                        final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
                         guiMap.put(humanPlayer, MatchController.instance);
 
                         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();

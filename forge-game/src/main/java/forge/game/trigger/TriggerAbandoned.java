@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -62,7 +63,7 @@ public class TriggerAbandoned extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Scheme", this.getRunParams().get("Scheme"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Scheme);
     }
 
     @Override

@@ -183,7 +183,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(state.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
+        g.drawText(CardTranslation.getTranslatedName(state.getName()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
     }
 
     public static final FBufferedImage forgeArt;
@@ -260,7 +260,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getText(state);
+            final String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
@@ -273,7 +273,7 @@ public class CardImageRenderer {
     }
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
-        List<String> pieces = new ArrayList<String>();
+        List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
             pieces.add("/");

@@ -45,7 +45,7 @@ public class AchievementsScreen extends FScreen {
         Forge.openScreen(achievementsScreen);
     }
 
-    private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
+    private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<>());
     private final TrophyCase trophyCase = add(new TrophyCase());
 
     private AchievementsScreen() {

@@ -355,7 +355,21 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeDefaultLanguageComboBox() {
-        final String [] choices = {"en-US", "es-ES", "de-DE"};
+    	final File lang_root = new File(ForgeConstants.LANG_DIR);
+    	final File[] files = lang_root.listFiles();
+    	final List<String> allLanguages = new ArrayList<>();
+    	for ( File file : files ) {
+    		if ( !file.isFile() ) {
+    			continue;
+    		}
+    		String languageName = file.getName();
+    		if (!languageName.endsWith(".properties")) {
+    			continue;
+    		}
+    		allLanguages.add(languageName.replace(".properties", ""));
+    	}
+        final String [] choices = new String[ allLanguages.size() ];
+        allLanguages.toArray( choices );
         final FPref userSetting = FPref.UI_LANGUAGE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);

@@ -8,7 +8,7 @@ public enum LimitedPoolType {
     Chaos("Chaos Draft");
     
     private final String displayName;
-    private LimitedPoolType(String name) {
+    LimitedPoolType(String name) {
         displayName = name;
     }
 

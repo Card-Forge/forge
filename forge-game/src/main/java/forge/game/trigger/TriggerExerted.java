@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -24,24 +25,21 @@ public class TriggerExerted extends Trigger {
     public boolean performTest(Map<String, Object> runParams2) {
         final Card exerter = (Card) runParams2.get("Card");
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!exerter.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+            return exerter.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null);
         }
         return true;
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Exerted: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Exerted: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 }

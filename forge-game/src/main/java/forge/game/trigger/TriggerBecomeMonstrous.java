@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -64,14 +65,13 @@ public class TriggerBecomeMonstrous extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", getRunParams().get("Card"));
-        sa.setTriggeringObject("MonstrosityAmount", getRunParams().get("MonstrosityAmount"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.MonstrosityAmount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Monstrous: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Monstrous: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 }

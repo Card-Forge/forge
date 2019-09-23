@@ -43,7 +43,7 @@ import forge.util.ITriggerEvent;
 public class InputProxy implements Observer {
 
     /** The input. */
-    private AtomicReference<Input> input = new AtomicReference<Input>();
+    private AtomicReference<Input> input = new AtomicReference<>();
     private final PlayerControllerHuman controller;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
@@ -136,7 +136,7 @@ public class InputProxy implements Observer {
                         final Card c = getCard(cv);
                         if (c != null) {
                             if (otherCardsToSelect == null) {
-                                otherCardsToSelect = new ArrayList<Card>();
+                                otherCardsToSelect = new ArrayList<>();
                             }
                             otherCardsToSelect.add(c);
                         }

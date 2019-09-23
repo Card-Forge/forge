@@ -48,7 +48,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        final Map<String, String> files = new HashMap<String, String>();
+        final Map<String, String> files = new HashMap<>();
         files.put("_", "_");
         return files; //not needed by zip service, so just return map of size 1
     }
@@ -181,7 +181,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             int count;
             long total = 0;
-            final byte data[] = new byte[1024];
+            final byte[] data = new byte[1024];
 
             while ((count = input.read(data)) != -1) {
                 if (cancel) { break; }

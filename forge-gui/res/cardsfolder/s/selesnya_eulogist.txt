@@ -1,0 +1,9 @@
+Name:Selesnya Eulogist
+ManaCost:2 G
+Types:Creature Centaur Druid
+PT:3/3
+A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBCopy | SpellDescription$ Exile target creature card from a graveyard, then populate. (Create a token that's a copy of a creature token you control.)
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
+AI:RemoveDeck:All
+DeckHints:Ability$Token
+Oracle:{2}{G}: Exile target creature card from a graveyard, then populate. (Create a token that's a copy of a creature token you control.)

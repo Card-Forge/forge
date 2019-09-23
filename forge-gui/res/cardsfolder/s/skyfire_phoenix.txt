@@ -1,0 +1,11 @@
+Name:Skyfire Phoenix
+ManaCost:2 R R
+Types:Creature Phoenix
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.IsCommander+YouOwn | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When you cast your commander, return CARDNAME from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:SacMe:2
+SVar:DiscardMe:3
+Oracle:Flying, haste\nWhen you cast your commander, return Skyfire Phoenix from your graveyard to the battlefield.

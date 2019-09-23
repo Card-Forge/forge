@@ -22,7 +22,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     protected TrackableObject(final int id0, final Tracker tracker) {
         id = id0;
         this.tracker = tracker;
-        props = new EnumMap<TrackableProperty, Object>(TrackableProperty.class);
+        props = new EnumMap<>(TrackableProperty.class);
         changedProps = EnumSet.noneOf(TrackableProperty.class);
     }
 

@@ -56,8 +56,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     protected Predicate<CardRules> hasColor;
     protected final List<PaperCard> availableList;
     protected final List<PaperCard> aiPlayables;
-    protected final List<PaperCard> deckList = new ArrayList<PaperCard>();
-    protected final List<String> setsWithBasicLands = new ArrayList<String>();
+    protected final List<PaperCard> deckList = new ArrayList<>();
+    protected final List<String> setsWithBasicLands = new ArrayList<>();
     protected List<PaperCard> rankedColorList;
     protected final List<PaperCard> draftedConspiracies;
 
@@ -324,7 +324,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * Find the sets that have basic lands for the available cards.
      */
     private void findBasicLandSets() {
-        final Set<String> sets = new HashSet<String>();
+        final Set<String> sets = new HashSet<>();
         for (final PaperCard cp : aiPlayables) {
             final CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
             if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee)) {
@@ -348,7 +348,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private void addLands(final int[] clrCnts, final String landSetCode) {
         // basic lands that are available in the deck
         final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        final Set<PaperCard> snowLands = new HashSet<PaperCard>();
+        final Set<PaperCard> snowLands = new HashSet<>();
 
         // total of all ClrCnts
         int totalColor = 0;
@@ -598,7 +598,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             final PaperCard card = it.next();
             final CardAiHints ai = card.getRules().getAiHints();
             if (ai.getRemRandomDecks()) {
-                final List<PaperCard> comboCards = new ArrayList<PaperCard>();
+                final List<PaperCard> comboCards = new ArrayList<>();
                 if (ai.getDeckNeeds() != null && ai.getDeckNeeds().isValid()) {
                     final DeckHints needs = ai.getDeckNeeds();
                     comboCards.addAll(needs.filter(deckList));
@@ -676,7 +676,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *            number to add
      */
     private void addManaCurveCreatures(final Iterable<PaperCard> creatures, int num) {
-        final Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();
+        final Map<Integer, Integer> creatureCosts = new HashMap<>();
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }

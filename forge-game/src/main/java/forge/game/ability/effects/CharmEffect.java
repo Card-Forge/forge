@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.collect.FCollection;
 
@@ -57,6 +58,7 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
         boolean repeat = sa.hasParam("CanRepeatModes");
+        boolean random = sa.hasParam("Random");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
@@ -73,6 +75,9 @@ public class CharmEffect extends SpellAbilityEffect {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
 
+        if (random) {
+            sb.append("at random.");
+        }
         if (repeat) {
             sb.append(". You may choose the same mode more than once.");
         }
@@ -93,6 +98,7 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
         boolean repeat = sa.hasParam("CanRepeatModes");
+        boolean random = sa.hasParam("Random");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
@@ -116,6 +122,9 @@ public class CharmEffect extends SpellAbilityEffect {
             }
         }
 
+        if (random) {
+            sb.append("at random.");
+        }
         if (repeat) {
             sb.append(". You may choose the same mode more than once.");
         }
@@ -164,6 +173,11 @@ public class CharmEffect extends SpellAbilityEffect {
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa)
                 : Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
+
+        if (sa.hasParam("Random")) {
+            chainAbilities(sa, Aggregates.random(makePossibleOptions(sa), num));
+            return true;
+        }
 
         Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();

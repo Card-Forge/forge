@@ -1,6 +1,7 @@
 package forge.game.trigger;
 
 import forge.game.PlanarDice;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -42,7 +43,7 @@ public class TriggerPlanarDice extends Trigger {
 
         if (this.mapParams.containsKey("Result")) {
             PlanarDice cond = PlanarDice.smartValueOf(this.mapParams.get("Result"));
-            if (cond != ((PlanarDice) runParams2.get("Result"))) {
+            if (cond != runParams2.get("Result")) {
                 return false;
             }
         }
@@ -55,13 +56,13 @@ public class TriggerPlanarDice extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Roller: ").append(sa.getTriggeringObject("Player"));
+        sb.append("Roller: ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

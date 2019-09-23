@@ -35,7 +35,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -93,11 +92,8 @@ public class Untap extends Phase {
         }
         //exerted need current player turn
         final Player playerTurn = c.getGame().getPhaseHandler().getPlayerTurn();
-        
-        if (c.isExertedBy(playerTurn)) {
-            return false;
-        }
-        return true;
+
+        return !c.isExertedBy(playerTurn);
     }
 
     public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
@@ -125,7 +121,7 @@ public class Untap extends Phase {
         for (final Card c : bounceList) {
             game.getAction().moveToHand(c, null);
         }
-        list.removeAll((Collection<?>)bounceList);
+        list.removeAll(bounceList);
 
         final Map<String, Integer> restrictUntap = Maps.newHashMap();
         boolean hasChosen = false;
@@ -154,10 +150,7 @@ public class Untap extends Phase {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
-                if (c.isValid(restrict, player, null, null)) {
-                    return false;
-                }
-                return true;
+                return !c.isValid(restrict, player, null, null);
             }
         });
 
@@ -187,7 +180,7 @@ public class Untap extends Phase {
             Map<String, Integer> remaining = Maps.newHashMap(restrictUntap);
             for (Entry<String, Integer> entry : remaining.entrySet()) {
                 if (entry.getValue() == 0) {
-                    cardList.removeAll((Collection<?>)CardLists.getValidCards(cardList, entry.getKey(), player, null));
+                    cardList.removeAll(CardLists.getValidCards(cardList, entry.getKey(), player, null));
                     restrictUntap.remove(entry.getKey());
                 }
             }
@@ -227,19 +220,19 @@ public class Untap extends Phase {
     private static void optionalUntap(final Card c) {
         if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
             if (c.isTapped()) {
-                String prompt = "Untap " + c.toString() + "?";
+                StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
                 boolean defaultChoice = true;
                 if (c.getGainControlTargets().size() > 0) {
                     final Iterable<Card> targets = c.getGainControlTargets();
-                    prompt += "\r\n" + c + " is controlling: ";
+                    prompt.append("\r\n").append(c).append(" is controlling: ");
                     for (final Card target : targets) {
-                        prompt += target;
+                        prompt.append(target);
                         if (target.isInPlay()) {
                             defaultChoice = false;
                         }
                     }
                 }
-                boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt, BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
+                boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
                 if (untap) {
                     c.untap();
                 }

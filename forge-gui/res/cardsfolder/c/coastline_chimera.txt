@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Chimera
 PT:1/5
 K:Flying
-A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ HIDDEN CARDNAME can block an additional creature each combat. | SpellDescription$ CARDNAME can block an additional creature this turn.
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastline_chimera.jpg
 Oracle:Flying\n{1}{W}: Coastline Chimera can block an additional creature this turn.

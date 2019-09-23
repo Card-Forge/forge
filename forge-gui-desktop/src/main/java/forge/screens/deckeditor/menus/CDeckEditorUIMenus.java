@@ -13,7 +13,7 @@ public class CDeckEditorUIMenus {
     private final boolean SHOW_ICONS = true;
 
     public List<JMenu> getMenus() {
-        List<JMenu> menus = new ArrayList<JMenu>();
+        List<JMenu> menus = new ArrayList<>();
         menus.add(DeckFileMenu.getMenu(SHOW_ICONS));
         return menus;
     }

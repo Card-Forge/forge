@@ -368,14 +368,14 @@ public class TokenEffect extends SpellAbilityEffect {
     }
 
     private String parseColorForImage() {
-        String originalColorDesc = "";
+        StringBuilder originalColorDesc = new StringBuilder();
         for (final String col : this.tokenOriginalColors) {
-            originalColorDesc += MagicColor.toShortString(col);
-            if (originalColorDesc.equals("C")) {
-                return originalColorDesc;
+            originalColorDesc.append(MagicColor.toShortString(col));
+            if (originalColorDesc.toString().equals("C")) {
+                return originalColorDesc.toString();
             }
         }
-        return originalColorDesc;
+        return originalColorDesc.toString();
     }
 
     private String determineTokenColor(Card host) {

@@ -27,7 +27,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Mana> drained = new ArrayList<Mana>();
+        List<Mana> drained = new ArrayList<>();
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

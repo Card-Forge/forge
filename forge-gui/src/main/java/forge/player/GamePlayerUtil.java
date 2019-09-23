@@ -17,7 +17,7 @@ import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 
 public final class GamePlayerUtil {
-    private GamePlayerUtil() { };
+    private GamePlayerUtil() { }
 
     private static final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
     public static final LobbyPlayer getGuiPlayer() {

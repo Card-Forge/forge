@@ -29,9 +29,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
-        if (mapParams.containsKey("Cost")) {
-            mapParams.remove("Cost");
-        }
+        mapParams.remove("Cost");
 
         if (mapParams.containsKey("SpellDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
@@ -65,6 +63,11 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
                     immediateTrig.addRemembered(o);
                 }
             }
+        }
+
+        if (sa.hasParam("RememberDefinedNumber")) {
+            immediateTrig.addRemembered((Integer) AbilityUtils.calculateAmount(sa.getHostCard(),
+                    sa.getParam("RememberDefinedNumber"), sa));
         }
 
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {

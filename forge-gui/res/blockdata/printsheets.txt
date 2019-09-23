@@ -1554,3 +1554,36 @@ Evolving Wilds
 13 Mountain|M20
 13 Plains|M20
 13 Swamp|M20
+
+[ELD Secret Cards]
+Kenrith, the Returned King
+Rowan, Fearless Sparkmage
+Garrison Griffin
+Rowan's Battleguard
+Rowan's Stalwarts
+Wind-Scarred Crag
+Oko, the Trickster
+Oko's Accomplices
+Bramblefort Fink
+Oko's Hospitality
+Thornwood Falls
+Mace of the Valiant
+Silverwing Squadron
+Faerie Formation
+Shimmer Dragon
+Workshop Elders
+Chittering Witch
+Taste of Death
+Embereth Skyblazer
+Steelbane Hydra
+Thorn Mammoth
+Alela, Artful Provocateur
+Banish into Fable
+Chulane, Teller of Tales
+Gluttonous Troll
+Knights' Charge
+Korvold, Fae-Cursed King
+Syr Gwyn, Hero of Ashvale
+Arcane Signet
+Tome of Legends
+Command Tower

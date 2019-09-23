@@ -23,7 +23,7 @@ import forge.toolbox.LayoutHelper;
 @SuppressWarnings("serial")
 public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected boolean lockFiltering;
-    private final List<FLabel> buttons = new ArrayList<FLabel>();
+    private final List<FLabel> buttons = new ArrayList<>();
 
     protected ToggleButtonsFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);

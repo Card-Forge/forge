@@ -540,14 +540,14 @@ public class QuestDataIO {
                 writer.endNode();
 
                 writer.startNode("packs");
-                String output = "";
+                StringBuilder output = new StringBuilder();
                 for (int i = 0; i < draft.getBoosterConfiguration().length; i++) {
-                    output += draft.getBoosterConfiguration()[i];
+                    output.append(draft.getBoosterConfiguration()[i]);
                     if (i != draft.getBoosterConfiguration().length - 1) {
-                        output += "/";
+                        output.append("/");
                     }
                 }
-                writer.setValue(output);
+                writer.setValue(output.toString());
                 writer.endNode();
 
                 writer.startNode("entryFee");

@@ -1,0 +1,9 @@
+Name:Rowan's Battleguard
+ManaCost:3 R
+Types:Creature Human Knight
+PT:3/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | IsPresent$ Planeswalker.YouCtrl+Rowan | Description$ As long as you control a Rowan planeswalker, CARDNAME gets +3/+0.
+SVar:BuffedBy:Planeswalker.Rowan
+DeckNeeds:Type$Rowan
+Oracle:First strike\nAs long as you control a Rowan planeswalker, Rowan's Battleguard gets +3/+0.

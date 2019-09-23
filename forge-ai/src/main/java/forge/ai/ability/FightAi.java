@@ -273,10 +273,10 @@ public class FightAi extends SpellAbilityAi {
     		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
     			return true;
     		} else {
-    			if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
-    				return true;
-    			}
-    		}
+                if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
+                    return true;
+                }
+            }
     	}
     	return false;
     }

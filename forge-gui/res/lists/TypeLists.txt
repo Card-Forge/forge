@@ -147,6 +147,7 @@ Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
 Moonfolk:Moonfolks
+Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
@@ -156,6 +157,7 @@ Nephilim:Nephilims
 Nightmare:Nightmares
 Nightstalker:Nightstalkers
 Ninja:Ninjas
+Noble:Nobles
 Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
@@ -169,6 +171,7 @@ Ouphe:Ouphes
 Ox:Oxen
 Oyster:Oysters
 Pangolin:Pangolins
+Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
 Pest:Pests
@@ -243,6 +246,7 @@ Vedalken:Vedalkens
 Viashino:Viashinos
 Volver:Volvers
 Wall:Walls
+Warlock:Warlocks
 Warrior:Warriors
 Weird:Weirds
 Werewolf:Werewolves
@@ -258,6 +262,7 @@ Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
 [SpellTypes]
+Adventure
 Arcane
 Trap
 [EnchantmentTypes]
@@ -270,6 +275,7 @@ Shrine
 Clue
 Contraption
 Equipment
+Food
 Fortification
 Treasure
 Vehicle
@@ -303,6 +309,7 @@ Nahiri
 Narset
 Nissa
 Nixilis
+Oko
 Ral
 Rowan
 Saheeli

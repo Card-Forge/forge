@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.List;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -73,13 +74,13 @@ public class TriggerSearchedLibrary extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Searcher: ").append(sa.getTriggeringObject("Player"));
+        sb.append("Searcher: ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

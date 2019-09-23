@@ -111,7 +111,7 @@ public class FatPack extends BoxedProduct {
                 final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
                 int nBoosters = 6;
 
-                List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
+                List<Pair<String, Integer>> slots = new ArrayList<>();
                 for(String slotDesc : data) {
                     String[] kv = TextUtil.split(slotDesc, ' ', 2);
                     if (kv[1].startsWith("Booster"))

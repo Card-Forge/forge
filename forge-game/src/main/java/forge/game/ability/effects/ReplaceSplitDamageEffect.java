@@ -16,6 +16,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 
 public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
@@ -26,9 +27,11 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
         final Game game = card.getGame();
 
         // outside of Replacement Effect, unwanted result
-        if (!sa.getRootAbility().isReplacementAbility()) {
+        if (!sa.isReplacementAbility()) {
             return;
         }
+
+        final ReplacementType event = sa.getReplacementEffect().getMode();
         
         String varValue = sa.getParamOrDefault("VarName", "1");
 
@@ -77,7 +80,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
         params.put("DamageAmount", dmg);
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(params); 
+        ReplacementResult result = game.getReplacementHandler().run(event, params);
         switch (result) {
         case NotReplaced:
         case Updated: {

@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -70,15 +71,14 @@ public class TriggerLifeLost extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("LifeAmount", this.getRunParams().get("LifeAmount"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.LifeAmount, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
-        sb.append("Lost Amount: ").append(sa.getTriggeringObject("LifeAmount"));
+        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append("Lost Amount: ").append(sa.getTriggeringObject(AbilityKey.LifeAmount));
         return sb.toString();
     }
 }

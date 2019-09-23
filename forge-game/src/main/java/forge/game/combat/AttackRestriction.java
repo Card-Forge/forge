@@ -26,7 +26,7 @@ public class AttackRestriction {
         this.attacker = attacker;
         setRestrictions();
 
-        final FCollection<GameEntity> cantAttackDefender = new FCollection<GameEntity>();
+        final FCollection<GameEntity> cantAttackDefender = new FCollection<>();
         for (final GameEntity defender : possibleDefenders) {
             if (!CombatUtil.canAttack(attacker, defender)) {
                 cantAttackDefender.add(defender);

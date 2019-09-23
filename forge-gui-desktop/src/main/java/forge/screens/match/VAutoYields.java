@@ -34,11 +34,11 @@ public class VAutoYields extends FDialog {
         super();
         setTitle("Auto-Yields");
 
-        autoYields = new ArrayList<String>();
+        autoYields = new ArrayList<>();
         for (final String autoYield : matchUI.getAutoYields()) {
             autoYields.add(autoYield);
         }
-        lstAutoYields = new FList<String>(new AutoYieldsListModel());
+        lstAutoYields = new FList<>(new AutoYieldsListModel());
 
         int x = PADDING;
         int y = PADDING;

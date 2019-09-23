@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -51,9 +52,7 @@ public class TriggerPayLife extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard());
         }
 
         return true;
@@ -62,15 +61,14 @@ public class TriggerPayLife extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("LifeAmount", getRunParams().get("LifeAmount"));
-        sa.setTriggeringObject("Player", getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.LifeAmount, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
-        sb.append("paid Amount: ").append(sa.getTriggeringObject("LifeAmount"));
+        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append("paid Amount: ").append(sa.getTriggeringObject(AbilityKey.LifeAmount));
         return sb.toString();
     }
 }

@@ -10,7 +10,7 @@ import forge.Graphics;
 import forge.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
-    private final List<FDisplayObject> children = new ArrayList<FDisplayObject>();
+    private final List<FDisplayObject> children = new ArrayList<>();
 
     public <T extends FDisplayObject> T add(T child) {
         children.add(child);

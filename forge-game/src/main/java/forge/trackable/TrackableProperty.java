@@ -89,6 +89,7 @@ public enum TrackableProperty {
     YouMayLook(TrackableTypes.BooleanType),
     OpponentMayLook(TrackableTypes.BooleanType),
     BlockAdditional(TrackableTypes.IntegerType),
+    BlockAny(TrackableTypes.BooleanType),
     AbilityText(TrackableTypes.StringType),
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
@@ -119,6 +120,7 @@ public enum TrackableProperty {
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
+    HasPriority(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -172,10 +174,10 @@ public enum TrackableProperty {
     private final TrackableType<?> type;
     private final FreezeMode freezeMode;
 
-    private TrackableProperty(TrackableType<?> type0) {
+    TrackableProperty(TrackableType<?> type0) {
         this(type0, FreezeMode.RespectsFreeze);
     }
-    private TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
+    TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
         type = type0;
         freezeMode = freezeMode0;
     }

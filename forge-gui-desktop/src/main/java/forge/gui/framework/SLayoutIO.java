@@ -556,7 +556,7 @@ public final class SLayoutIO {
         EDocID selectedId = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
         
-        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<LayoutInfo, EDocID>(CollectionSuppliers.arrayLists());
+        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
         
         LayoutInfo currentKey = null;
         while (null != reader && reader.hasNext()) {

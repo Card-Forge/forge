@@ -18,7 +18,7 @@ public class VAutoYields extends FDialog {
 
     public VAutoYields() {
         super("Auto-Yields", 2);
-        List<String> autoYields = new ArrayList<String>();
+        List<String> autoYields = new ArrayList<>();
         for (String autoYield : MatchController.instance.getAutoYields()) {
             autoYields.add(autoYield);
         }

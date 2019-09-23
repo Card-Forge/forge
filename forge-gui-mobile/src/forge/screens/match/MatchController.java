@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -65,7 +66,7 @@ public class MatchController extends AbstractGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
-    private static final Map<String, FImage> avatarImages = new HashMap<String, FImage>();
+    private static final Map<String, FImage> avatarImages = new HashMap<>();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
@@ -116,7 +117,7 @@ public class MatchController extends AbstractGuiGame {
         final boolean noHumans = !hasLocalPlayers();
 
         final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();
-        final List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
+        final List<VPlayerPanel> playerPanels = new ArrayList<>();
         for (final PlayerView p : allPlayers) {
             final boolean isLocal = isLocalPlayer(p);
             final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, allPlayers.size());
@@ -244,7 +245,7 @@ public class MatchController extends AbstractGuiGame {
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
-        return SGuiChoose.oneOrNone("Choose ability to play", abilities);
+        return SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAbilityToPlay"), abilities);
     }
 
     @Override
@@ -519,7 +520,7 @@ public class MatchController extends AbstractGuiGame {
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
         final int m1 = max >= 0 ? optionList.size() - max : -1;
         final int m2 = min >= 0 ? optionList.size() - min : -1;
-        return SGuiChoose.order(title, "Selected", m1, m2, (List<GameEntityView>) optionList, null);
+        return SGuiChoose.order(title, Localizer.getInstance().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);
     }
 
     @Override

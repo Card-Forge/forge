@@ -26,7 +26,7 @@ public class FCheckBoxList<E> extends JList<E> {
 
 	public FCheckBoxList(final boolean keepSelectionWhenFocusLost) {
 
-		setCellRenderer(new CellRenderer<E>());
+		setCellRenderer(new CellRenderer<>());
 
 		addMouseListener(new MouseAdapter() {
 			@Override

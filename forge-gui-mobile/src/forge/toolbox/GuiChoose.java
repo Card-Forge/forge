@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import forge.game.card.CardView;
 import forge.util.Callback;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -110,7 +111,7 @@ public class GuiChoose {
 
     // Nothing to choose here. Code uses this to just reveal one or more items
     public static <T> void reveal(final String message, final T item) {
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         items.add(item);
         reveal(message, items);
     }
@@ -162,11 +163,11 @@ public class GuiChoose {
             return;
         }
 
-        List<Object> choices = new ArrayList<Object>();
+        List<Object> choices = new ArrayList<>();
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("Other...");
+        choices.add(Localizer.getInstance().getMessage("lblOther") + "...");
 
         oneOrNone(message, choices, new Callback<Object>() {
             @Override
@@ -229,13 +230,13 @@ public class GuiChoose {
     public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final Callback<List<T>> callback) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
-                callback.run(new ArrayList<T>());
+                callback.run(new ArrayList<>());
                 return;
             }
             throw new RuntimeException("choice required from empty list");
         }
 
-        ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display, callback);
+        ListChooser<T> c = new ListChooser<>(message, min, max, choices, display, callback);
         c.show(selected, false);
     }
 
@@ -256,7 +257,7 @@ public class GuiChoose {
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final Callback<List<T>> callback) {
         // An input box for handling the order of choices.
-        DualListBox<T> dual = new DualListBox<T>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
+        DualListBox<T> dual = new DualListBox<>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
         dual.setSecondColumnLabelText(top);
         dual.show();
     }

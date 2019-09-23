@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -53,10 +54,8 @@ public class TriggerFight extends Trigger {
         final Card fighter = (Card) runParams2.get("Fighter");
 
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!fighter.isValid(this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+            return fighter.isValid(this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard().getController(), this.getHostCard(), null);
         }
         return true;
     }
@@ -64,13 +63,13 @@ public class TriggerFight extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Fighter", this.getRunParams().get("Fighter"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Fighter);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Fighter: ").append(sa.getTriggeringObject("Fighter"));
+        sb.append("Fighter: ").append(sa.getTriggeringObject(AbilityKey.Fighter));
         return sb.toString();
     }
 }

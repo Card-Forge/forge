@@ -64,7 +64,7 @@ public class CardStorageReader {
         void report(int current, int total);
 
         // does nothing, used when they pass null instead of an instance
-        public final static ProgressObserver emptyObserver = new ProgressObserver() {
+        ProgressObserver emptyObserver = new ProgressObserver() {
             @Override public void setOperationName(final String name, final boolean usePercents) {}
             @Override public void report(final int current, final int total) {}
         };
@@ -175,7 +175,7 @@ public class CardStorageReader {
         }
 
         if (zipEntriesMap == null) {
-            zipEntriesMap = new HashMap<String, ZipEntry>();
+            zipEntriesMap = new HashMap<>();
             for (ZipEntry entry : getZipEntries()) {
                 zipEntriesMap.put(entry.getName(), entry);
             }
@@ -256,7 +256,7 @@ public class CardStorageReader {
             return result;
         }
  
-        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
+        final List<File> allFiles = collectCardFiles(new ArrayList<>(), this.cardsfolder);
         if (!allFiles.isEmpty()) {
             int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
             if (allFiles.size() < fileParts * 100) {

@@ -50,7 +50,7 @@ public class PumpAllAi extends PumpAiBase {
 
         final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
-        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
 
         final PhaseType phase = game.getPhaseHandler().getPhase();
 
@@ -141,10 +141,7 @@ public class PumpAllAi extends PumpAiBase {
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
-            if ((ComputerUtilCard.evaluateCreatureList(comp) + 200) >= ComputerUtilCard.evaluateCreatureList(human)) {
-                return false;
-            }
-            return true;
+            return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
         } // end Curse
 
         return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source).isEmpty();

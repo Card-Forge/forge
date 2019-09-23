@@ -83,10 +83,7 @@ public class CostGainControl extends CostPartWithList {
         if (amount == null) {
             amount = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
-        if (typeList.size() < amount) {
-            return false;
-        }
-        return true;
+        return typeList.size() >= amount;
     }
 
     /* (non-Javadoc)

@@ -22,7 +22,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final FCollection<Player> bidPlayers = new FCollection<Player>();
+        final FCollection<Player> bidPlayers = new FCollection<>();
         final int startBidding;
         if (sa.hasParam("StartBidding")) {
             String start = sa.getParam("StartBidding");
@@ -54,7 +54,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
             willBid = false;
             for (final Player p : bidPlayers) {
                 final boolean result = p.getController().confirmBidAction(sa, PlayerActionConfirmMode.BidLife,
-                        "Do you want to top bid? Current Bid =" + String.valueOf(bid), bid, winner);
+                        "Do you want to top bid? Current Bid =" + bid, bid, winner);
                 willBid |= result;
                 if (result) { // a different choose number
                     bid += p.getController().chooseNumber(sa, "Bid life:", 1, 9);

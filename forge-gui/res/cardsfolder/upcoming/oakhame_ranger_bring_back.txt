@@ -1,0 +1,15 @@
+Name:Oakhame Ranger
+ManaCost::G/W G/W G/W G/W
+Types:Creature Elf Knight
+PT:2/2
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{T}: Creatures you control get +1/+1 until end of turn.
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:Bring Back
+ManaCost::G/W G/W G/W G/W
+Types:Sorcery Adventure
+A:SP$ Token | Cost$ G/W G/W G/W G/W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human eld | SpellDescription$ Create two 1/1 white Human creature tokens.
+Oracle:Create two 1/1 white Human creature tokens.

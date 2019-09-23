@@ -62,7 +62,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
-    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private final List<DeckSection> allSections = new ArrayList<>();
 
     //========== Constructor
 
@@ -92,7 +92,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
                 return new DeckGroup("");
             }
         };
-        this.controller = new DeckController<DeckGroup>(deckMap0, this, newCreator);
+        this.controller = new DeckController<>(deckMap0, this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override

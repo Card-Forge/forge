@@ -38,7 +38,7 @@ public class GameSimulator {
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
         
-        origLines = new ArrayList<String>();
+        origLines = new ArrayList<>();
         debugLines = origLines;
 
         debugPrint = false;
@@ -52,7 +52,7 @@ public class GameSimulator {
         // first and get the updated eval score, since this is what we'll
         // want to compare to the eval score after simulating.
         if (COPY_STACK && !origGame.getStackZone().isEmpty()) {
-            origLines = new ArrayList<String>();
+            origLines = new ArrayList<>();
             debugLines = origLines;
             Game copyOrigGame = copier.makeCopy();
             Player copyOrigAiPlayer = copyOrigGame.getPlayers().get(1);
@@ -66,12 +66,12 @@ public class GameSimulator {
 
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
         eval.setDebugging(true);
-        List<String> simLines = new ArrayList<String>();
+        List<String> simLines = new ArrayList<>();
         debugLines = simLines;
         Score simScore = eval.getScoreForGameState(simGame, aiPlayer);
         if (!simScore.equals(origScore)) {
             // Re-eval orig with debug printing.
-            origLines = new ArrayList<String>();
+            origLines = new ArrayList<>();
             debugLines = origLines;
             eval.getScoreForGameState(origGame, origAiPlayer);
             // Print debug info.
@@ -216,7 +216,7 @@ public class GameSimulator {
         List<String> simLines = null;
         if (debugPrint) {
             debugPrint("SimGame:");
-            simLines = new ArrayList<String>();
+            simLines = new ArrayList<>();
             debugLines = simLines;
             debugPrint = false;
         }
@@ -245,7 +245,7 @@ public class GameSimulator {
         opponent.runWithController(new Runnable() {
             @Override
             public void run() {
-                final Set<Card> allAffectedCards = new HashSet<Card>();
+                final Set<Card> allAffectedCards = new HashSet<>();
                 game.getAction().checkStateEffects(false, allAffectedCards);
                 game.getStack().addAllTriggeredAbilitiesToStack();
                 while (!game.getStack().isEmpty() && !game.isGameOver()) {

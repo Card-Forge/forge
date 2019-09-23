@@ -305,6 +305,11 @@ public class CardFactory {
             } else if (c.isMeldable() && cp instanceof PaperCard) {
                 c.setState(CardStateName.Meld, false);
                 c.setImageKey(cp.getImageKey(true));
+            } else if (c.isAdventureCard()) {
+                c.setState(CardStateName.Adventure, false);
+                c.setImageKey(originalPicture);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
             }
 
             c.setSetCode(cp.getEdition());
@@ -325,7 +330,6 @@ public class CardFactory {
 
             // ******************************************************************
             // ************** Link to different CardFactories *******************
-
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 for (final SpellAbility sa : card.getSpellAbilities()) {
                     if (state == CardStateName.LeftSplit) {
@@ -341,6 +345,9 @@ public class CardFactory {
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original){
             	CardFactoryUtil.setupKeywordedAbilities(card);
+            }
+            if (state == CardStateName.Adventure) {
+                CardFactoryUtil.setupAdventureAbility(card);
             }
         }
 
@@ -645,7 +652,7 @@ public class CardFactory {
         Trigger t = null;
         if (sa.isWrapper()) {
             // copy trigger?
-            t = ((WrappedAbility) sa).getTrigger();
+            t = sa.getTrigger();
         } else { // some keyword ability, e.g. Exalted, Annihilator
             return sa.copy();
         }
@@ -664,12 +671,12 @@ public class CardFactory {
         }
 
         trig.setActivatingPlayer(sa.getActivatingPlayer());
-        if (t.getMapParams().containsKey("TriggerController")) {
+        if (t.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getMapParams().get("TriggerController"), trig).get(0);
             trig.setActivatingPlayer(p);
         }
 
-        if (t.getMapParams().containsKey("RememberController")) {
+        if (t.hasParam("RememberController")) {
             sa.getHostCard().addRemembered(sa.getActivatingPlayer());
         }
 
@@ -677,7 +684,7 @@ public class CardFactory {
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(((WrappedAbility) sa).isMandatory());
+        wrapperAbility.setMandatory(sa.isMandatory());
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         t.setTriggeredSA(wrapperAbility);
         return wrapperAbility;
@@ -728,6 +735,14 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
             ret2.copyFrom(in.getState(CardStateName.Flipped, true), false);
             result.put(CardStateName.Flipped, ret2);
+        } else if (in.isAdventureCard()) {
+            final CardState ret1 = new CardState(out, CardStateName.Original);
+            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
+            result.put(CardStateName.Original, ret1);
+
+            final CardState ret2 = new CardState(out, CardStateName.Adventure);
+            ret2.copyFrom(in.getState(CardStateName.Adventure, true), false);
+            result.put(CardStateName.Adventure, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
@@ -774,7 +789,7 @@ public class CardFactory {
 
             // triggers to add to clone
             if (sa.hasParam("AddTriggers")) {
-                for (final String s : Arrays.asList(sa.getParam("AddTriggers").split(","))) {
+                for (final String s : sa.getParam("AddTriggers").split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualTrigger = origSVars.get(s);
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
@@ -786,7 +801,7 @@ public class CardFactory {
             // SVars to add to clone
             if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
                 final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
-                for (final String s : Arrays.asList(str.split(","))) {
+                for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
                         state.setSVar(s, actualsVar);
@@ -797,7 +812,7 @@ public class CardFactory {
             // abilities to add to clone
             if (sa.hasParam("AddAbilities") || sa.hasParam("GainTextAbilities")) {
                 final String str = sa.getParamOrDefault("GainTextAbilities", sa.getParam("AddAbilities"));
-                for (final String s : Arrays.asList(str.split(","))) {
+                for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
                         final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);

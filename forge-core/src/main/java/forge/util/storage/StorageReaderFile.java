@@ -52,7 +52,7 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
 
     @Override
     public Map<String, T> readAll() {
-        final Map<String, T> result = new TreeMap<String, T>();
+        final Map<String, T> result = new TreeMap<>();
 
         int idx = 0;
         for (String line : FileUtil.readFile(file)) {

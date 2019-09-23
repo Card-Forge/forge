@@ -134,7 +134,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
         final SpellAbility ability = getController().getAbilityToPlay(card, abilities, triggerEvent);
         if (ability != null) {
-            chosenSa = new ArrayList<SpellAbility>();
+            chosenSa = new ArrayList<>();
             chosenSa.add(ability);
             if (otherCardsToSelect != null && ability.isManaAbility()) {
                 //if mana ability activated, activate same ability on other cards to select if possible
@@ -172,7 +172,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     public boolean selectAbility(final SpellAbility ab) {
     	if (ab != null) {
-    	    chosenSa = new ArrayList<SpellAbility>();
+    	    chosenSa = new ArrayList<>();
             chosenSa.add(ab);
             stop();
             return true;

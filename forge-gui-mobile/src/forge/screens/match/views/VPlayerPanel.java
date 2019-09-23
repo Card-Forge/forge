@@ -42,8 +42,8 @@ public class VPlayerPanel extends FContainer {
     private final VZoneDisplay commandZone;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
-    private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<ZoneType, InfoTab>();
-    private final List<InfoTab> tabs = new ArrayList<InfoTab>();
+    private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<>();
+    private final List<InfoTab> tabs = new ArrayList<>();
     private InfoTab selectedTab;
     private float avatarHeight = VAvatar.HEIGHT;
     private float displayAreaHeightFactor = 1.0f;

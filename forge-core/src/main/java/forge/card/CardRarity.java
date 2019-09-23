@@ -35,7 +35,7 @@ public enum CardRarity {
 
     private final String shortName, longName;
 
-    private CardRarity(final String shortName0, final String longName0) {
+    CardRarity(final String shortName0, final String longName0) {
         shortName = shortName0;
         longName = longName0;
     }

@@ -144,7 +144,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public final Collection<T> getSelectedItems() {
-        List<T> items = new ArrayList<T>();
+        List<T> items = new ArrayList<>();
         for (Integer i : getSelectedIndices()) {
             T item = getItemAtIndex(i);
             if (item != null) {
@@ -170,7 +170,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return setSelectedItems(items, true);
     }
     public final boolean setSelectedItems(Iterable<T> items, boolean scrollIntoView) {
-        List<Integer> indices = new ArrayList<Integer>();
+        List<Integer> indices = new ArrayList<>();
         for (T item : items) {
             int index = getIndexOfItem(item);
             if (index != -1) {
@@ -199,7 +199,7 @@ public abstract class ItemView<T extends InventoryItem> {
         if (index < 0) {
             if (index == -1 && minSelections == 0) { //allow passing -1 to clear selection if no selection allowed
                 if (getSelectionCount() > 0) {
-                    onSetSelectedIndices(new ArrayList<Integer>());
+                    onSetSelectedIndices(new ArrayList<>());
                     onSelectionChange();
                 }
                 return;
@@ -225,7 +225,7 @@ public abstract class ItemView<T extends InventoryItem> {
         int count = getCount();
         if (count == 0) { return; }
 
-        List<Integer> indexList = new ArrayList<Integer>();
+        List<Integer> indexList = new ArrayList<>();
         for (Integer index : indices) {
             if (index >= 0 && index < count) {
                 indexList.add(index);

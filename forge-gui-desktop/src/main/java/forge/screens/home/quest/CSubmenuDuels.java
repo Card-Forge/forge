@@ -197,7 +197,7 @@ public enum CSubmenuDuels implements ICDoc {
 			view.getPnlDuels().add(grpPanel, "w 100%!");
 
 			StringBuilder sb = new StringBuilder();
-			sb.append(localizer.getMessage("lblMatchBestof") + " ").append(FModel.getQuest().getMatchLength());
+			sb.append(localizer.getMessage("lblMatchBestof")).append(" ").append(FModel.getQuest().getMatchLength());
 			view.getCbxMatchLength().setSelectedItem(sb.toString());
 		}
 	}

@@ -11,7 +11,7 @@ public final class CardPlayOption {
         /** Indicates the mana cost must be paid. */
         YES,
         /** Indicates the mana cost may not be paid. */
-        NO;
+        NO
     }
 
     private final Player player;
@@ -82,7 +82,7 @@ public final class CardPlayOption {
         switch (getPayManaCost()) {
             case YES:
                 if (altManaCost != null) {
-                    sb.append(" (by paying " + getFormattedAltManaCost() + " instead of paying its mana cost");
+                    sb.append(" (by paying ").append(getFormattedAltManaCost()).append(" instead of paying its mana cost");
                     if (isWithFlash()) {
                         sb.append(" and as though it has flash");
                     }

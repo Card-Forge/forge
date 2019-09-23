@@ -130,7 +130,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
         final GameOutcome outcome1 = gamesPlayed.get(0);
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
-        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<RegisteredPlayer, Integer>();
+        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<>();
 
         // Calculate total games each player has won.
         for (final GameOutcome game : gamesPlayed) {
@@ -182,7 +182,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.type == DamageType.LoyaltyLoss) {
             additionalLog = " (Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
         }
-        String message = event.source.toString() + " deals " + String.valueOf(event.amount) + " damage" + additionalLog + " to " + event.card.toString() + ".";
+        String message = event.source.toString() + " deals " + event.amount + " damage" + additionalLog + " to " + event.card.toString() + ".";
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -197,7 +197,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = "Turn " + String.valueOf(event.turnNumber) + " (" + event.turnOwner.toString() + ")";
+        String message = "Turn " + event.turnNumber + " (" + event.turnOwner.toString() + ")";
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
@@ -205,7 +205,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
         String extra = ev.infect ? " (as poison counters)" : "";
         String damageType = ev.combat ? "combat" : "non-combat";
-        String message = ev.source.toString() + " deals " + String.valueOf(ev.amount) + " " + damageType + " damage to " + ev.target.toString() + extra + ".";
+        String message = ev.source.toString() + " deals " + ev.amount + " " + damageType + " damage to " + ev.target.toString() + extra + ".";
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -229,11 +229,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 continue;
             }
             if (sb.length() > 0) sb.append("\n");
-            sb.append(ev.player + " assigned " + Lang.joinHomogenous(attackers));
-            sb.append(" to attack " + k + ".");
+            sb.append(ev.player).append(" assigned ").append(Lang.joinHomogenous(attackers));
+            sb.append(" to attack ").append(k).append(".");
         }
         if (sb.length() == 0) {
-            sb.append(ev.player + " didn't attack this turn.");
+            sb.append(ev.player).append(" didn't attack this turn.");
         }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -265,10 +265,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
                 blockers = att.getValue();
                 if (blockers.isEmpty()) {
-                    sb.append(controllerName + " didn't block ");
+                    sb.append(controllerName).append(" didn't block ");
                 }
                 else {
-                    sb.append(controllerName + " assigned " + Lang.joinHomogenous(blockers) + " to block ");
+                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
                 }
 
                 sb.append(att.getKey()).append(".");
@@ -281,7 +281,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = ev.player.toString() + " has mulliganed down to " + String.valueOf(ev.player.getZone(ZoneType.Hand).size()) + " cards.";
+        String message = ev.player.toString() + " has mulliganed down to " + ev.player.getZone(ZoneType.Hand).size() + " cards.";
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

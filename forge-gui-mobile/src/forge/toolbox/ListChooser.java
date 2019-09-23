@@ -36,6 +36,7 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class ListChooser<T> extends FContainer {
         if (list.size() > 25 && !lstChoices.getListItemRenderer().layoutHorizontal()) {
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
-            txtSearch.setGhostText("Search");
+            txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch"));
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -110,13 +111,13 @@ public class ListChooser<T> extends FContainer {
                             FPopupMenu menu = new FPopupMenu() {
                                 @Override
                                 protected void buildMenu() {
-                                    addItem(new FMenuItem("Advanced Search", FSkinImage.SEARCH, new FEventHandler() {
+                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), FSkinImage.SEARCH, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             advancedSearchFilter.edit();
                                         }
                                     }));
-                                    addItem(new FMenuItem("Reset Filters", FSkinImage.DELETE, new FEventHandler() {
+                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), FSkinImage.DELETE, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             resetFilters();
@@ -133,9 +134,9 @@ public class ListChooser<T> extends FContainer {
 
         final List<String> options;
         if (minChoices == 0) {
-            options = ImmutableList.of("OK", "Cancel");
+            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"));
         } else {
-            options = ImmutableList.of("OK");
+            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
         }
 
         updateHeight();
@@ -151,7 +152,7 @@ public class ListChooser<T> extends FContainer {
                     show(); //show if user tries to cancel when input is mandatory
                 }
                 else {
-                    callback.run(new ArrayList<T>());
+                    callback.run(new ArrayList<>());
                 }
             }
         }) {
@@ -179,7 +180,7 @@ public class ListChooser<T> extends FContainer {
     public void applyFilters() {
         lstChoices.clearSelection();
 
-        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        List<Predicate<? super T>> predicates = new ArrayList<>();
 
         final String pattern = txtSearch.getText().toLowerCase();
         if (!pattern.isEmpty()) {

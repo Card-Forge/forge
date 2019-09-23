@@ -100,6 +100,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (card.isSplitCard()) {
             CardStateName name = isLeftSplit() ? CardStateName.LeftSplit : CardStateName.RightSplit;
             isInstant = card.getState(name).getType().isInstant();
+        } else if (isAdventure()) {
+            if (card.hasState(CardStateName.Adventure)) {
+                isInstant = card.getState(CardStateName.Adventure).getType().isInstant();
+            }
         }
 
         boolean lkicheck = false;
@@ -129,6 +133,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 card = CardUtil.getLKICopy(card);
             }
             card.turnFaceDownNoUpdate();
+            lkicheck = true;
+        } else if (isAdventure()) {
+            if (!card.isLKI()) {
+                card = CardUtil.getLKICopy(card);
+            }
+
+            card.setState(CardStateName.Adventure, false);
             lkicheck = true;
         }
 

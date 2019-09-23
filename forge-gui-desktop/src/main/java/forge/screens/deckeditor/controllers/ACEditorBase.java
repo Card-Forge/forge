@@ -163,7 +163,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private ItemPool<TItem> createPoolForItem(final TItem item, final int qty) {
         if (item == null || qty <= 0) { return null; }
 
-        final ItemPool<TItem> pool = new ItemPool<TItem>((Class<TItem>)item.getClass());
+        final ItemPool<TItem> pool = new ItemPool<>((Class<TItem>) item.getClass());
         pool.add(item, qty);
         return pool;
     }

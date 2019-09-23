@@ -435,10 +435,10 @@ public final class CardRulesPredicates {
                 return this.op(card.getManaCost().getGenericCost(), this.operand);
             case POWER:
                 value = card.getIntPower();
-                return value != Integer.MAX_VALUE ? this.op(value, this.operand) : false;
+                return value != Integer.MAX_VALUE && this.op(value, this.operand);
             case TOUGHNESS:
                 value = card.getIntToughness();
-                return value != Integer.MAX_VALUE ? this.op(value, this.operand) : false;
+                return value != Integer.MAX_VALUE && this.op(value, this.operand);
             default:
                 return false;
             }
@@ -627,7 +627,7 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
 
         /** The Constant colors. */
-        public static final List<Predicate<CardRules>> COLORS = new ArrayList<Predicate<CardRules>>();
+        public static final List<Predicate<CardRules>> COLORS = new ArrayList<>();
         static {
             Presets.COLORS.add(Presets.IS_WHITE);
             Presets.COLORS.add(Presets.IS_BLUE);

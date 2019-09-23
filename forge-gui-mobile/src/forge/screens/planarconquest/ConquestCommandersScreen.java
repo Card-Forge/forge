@@ -166,12 +166,12 @@ public class ConquestCommandersScreen extends FScreen {
 
         @Override
         protected TextSearchFilter<? extends ConquestCommander> createSearchFilter() {
-            return new TextSearchFilter<ConquestCommander>(this);
+            return new TextSearchFilter<>(this);
         }
 
         @Override
         protected AdvancedSearchFilter<? extends ConquestCommander> createAdvancedSearchFilter() {
-            return new AdvancedSearchFilter<ConquestCommander>(this);
+            return new AdvancedSearchFilter<>(this);
         }
 
         @Override

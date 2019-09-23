@@ -59,7 +59,7 @@ public class CombatView extends TrackableObject {
     public Iterable<CardView> getAttackers() {
         final HashSet<CardView> allAttackers;
         synchronized (this) {
-            allAttackers = new HashSet<CardView>(getAttackersWithDefenders().keySet());
+            allAttackers = new HashSet<>(getAttackersWithDefenders().keySet());
         }
         return allAttackers;
     }
@@ -67,7 +67,7 @@ public class CombatView extends TrackableObject {
     public Iterable<GameEntityView> getDefenders() {
         final HashSet<GameEntityView> allDefenders;
         synchronized (this) {
-            allDefenders = new HashSet<GameEntityView>(getAttackersWithDefenders().values());
+            allDefenders = new HashSet<>(getAttackersWithDefenders().values());
         }
         return allDefenders;
     }
@@ -139,7 +139,7 @@ public class CombatView extends TrackableObject {
         synchronized (this) {
             attackersWithDefenders = Lists.newArrayList(getAttackersWithDefenders().entrySet());
         }
-        final FCollection<CardView> views = new FCollection<CardView>();
+        final FCollection<CardView> views = new FCollection<>();
         for (final Entry<CardView, GameEntityView> entry : attackersWithDefenders) {
             if (defender != null && defender.equals(entry.getValue())) {
                 views.add(entry.getKey());
@@ -152,7 +152,7 @@ public class CombatView extends TrackableObject {
         synchronized (this) {
             bandsWithDefenders = Lists.newArrayList(getBandsWithDefenders().entrySet());
         }
-        final List<FCollection<CardView>> views = new ArrayList<FCollection<CardView>>();
+        final List<FCollection<CardView>> views = new ArrayList<>();
         for (final Entry<FCollection<CardView>, GameEntityView> entry : bandsWithDefenders) {
             if (defender != null && defender.equals(entry.getValue())) {
                 views.add(entry.getKey());
@@ -164,9 +164,9 @@ public class CombatView extends TrackableObject {
     public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
         if (defender == null) { return; }
 
-        final FCollection<CardView> attackingBandCopy = new FCollection<CardView>();
-        final FCollection<CardView> blockersCopy = new FCollection<CardView>();
-        final FCollection<CardView> plannedBlockersCopy = new FCollection<CardView>();
+        final FCollection<CardView> attackingBandCopy = new FCollection<>();
+        final FCollection<CardView> blockersCopy = new FCollection<>();
+        final FCollection<CardView> plannedBlockersCopy = new FCollection<>();
 
         attackingBandCopy.addAll(attackingBand);
         if (blockers != null) {

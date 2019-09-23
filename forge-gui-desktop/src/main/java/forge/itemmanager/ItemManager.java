@@ -77,8 +77,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private final Map<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>> filters =
-            new HashMap<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>>();
-    private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<ItemFilter<? extends T>>();
+            new HashMap<>();
+    private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
@@ -88,7 +88,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private final Class<T> genericType;
     private final CDetailPicture cDetailPicture;
     private ItemManagerConfig config;
-    private final List<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
+    private final List<ListSelectionListener> selectionListeners = new ArrayList<>();
 
     private final ItemFilter<? extends T> mainSearchFilter;
     private final SkinnedPanel pnlButtons = new SkinnedPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
@@ -125,7 +125,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .tooltip("Toggle to show/hide options for current view")
         .build();
 
-    private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
+    private final List<ItemView<T>> views = new ArrayList<>();
     private final ItemListView<T> listView;
     private final ImageView<T> imageView;
     private ItemView<T> currentView;
@@ -143,12 +143,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.cDetailPicture = cDetailPicture;
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
-        this.model = new ItemManagerModel<T>(genericType0);
+        this.model = new ItemManagerModel<>(genericType0);
 
         this.mainSearchFilter = createSearchFilter();
         this.mainSearchFilter.setAllowRemove(false);
 
-        this.listView = new ItemListView<T>(this, this.model);
+        this.listView = new ItemListView<>(this, this.model);
         this.imageView = createImageView(this.model);
 
         this.views.add(this.listView);
@@ -157,7 +157,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
-        return new ImageView<T>(this, model0);
+        return new ImageView<>(this, model0);
     }
 
     public final CDetailPicture getCDetailPicture() {
@@ -562,7 +562,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public ItemPool<T> getSelectedItemPool() {
-        final ItemPool<T> selectedItemPool = new ItemPool<T>(this.genericType);
+        final ItemPool<T> selectedItemPool = new ItemPool<>(this.genericType);
         for (final T item : getSelectedItems()) {
             selectedItemPool.add(item, getItemCount(item));
         }
@@ -634,7 +634,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public boolean setSelectedStrings(final Iterable<String> strings) {
-        final List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<>();
         for (final String str : strings) {
             final T item = stringToItem(str);
             if (item != null) {
@@ -652,7 +652,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public boolean selectItemEntrys(final Iterable<Entry<T, Integer>> itemEntrys) {
-        final List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<>();
         for (final Entry<T, Integer> itemEntry : itemEntrys) {
             items.add(itemEntry.getKey());
         }
@@ -734,7 +734,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
         }
-        final List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<>();
         items.add(item);
         this.updateView(false, items);
     }
@@ -755,7 +755,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             this.model.addItems(itemsToAdd);
         }
 
-        final List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<>();
         for (final Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
@@ -859,7 +859,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
         List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
         if (classFilters == null) {
-            classFilters = new ArrayList<ItemFilter<? extends T>>();
+            classFilters = new ArrayList<>();
             this.filters.put(filterClass, classFilters);
         }
         if (classFilters.size() > 0) {
@@ -936,7 +936,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     public boolean applyFilters() {
         if (this.lockFiltering || !this.initialized) { return false; }
 
-        final List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        final List<Predicate<? super T>> predicates = new ArrayList<>();
         for (final ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
             if (filter.isEnabled() && !filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(this.genericType));

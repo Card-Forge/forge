@@ -29,10 +29,10 @@ public class RestartGameEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         FCollectionView<Player> players = game.getPlayers();
-        Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
+        Map<Player, List<Card>> playerLibraries = new HashMap<>();
 
         // Don't grab Ante Zones
-        List<ZoneType> restartZones = new ArrayList<ZoneType>(Arrays.asList(ZoneType.Battlefield,
+        List<ZoneType> restartZones = new ArrayList<>(Arrays.asList(ZoneType.Battlefield,
                 ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
 
         ZoneType leaveZone = ZoneType.smartValueOf(sa.hasParam("RestrictFromZone") ? sa.getParam("RestrictFromZone") : null);
@@ -70,6 +70,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0, sa.getHostCard());
+            player.resetSpellCastThisGame();
             player.setLandsPlayedLastTurn(0);
             player.resetLandsPlayedThisTurn();
             player.resetInvestigatedThisTurn();

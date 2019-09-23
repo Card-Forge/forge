@@ -1,0 +1,6 @@
+Forest|Bosque|Tierra básica - Bosque|({T}: Agrega {G}.)
+Island|Isla|Tierra básica - Isla|({T}: Agrega {U}.)
+Mountain|Montaña|Tierra básica - Montaña|({T}: Agrega {R}.)
+Plains|Llanura|Tierra básica - Llanura|({T}: Agrega {W}.)
+Swamp|Pantano|Tierra básica - Pantano|({T}: Agrega {B}.)
+

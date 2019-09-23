@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -90,19 +91,19 @@ public class TriggerSpellAbilityCopy extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        final SpellAbility copySA = (SpellAbility) getRunParams().get("CopySA");
+        final SpellAbility copySA = (SpellAbility) getFromRunParams(AbilityKey.CopySA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(copySA);
-        sa.setTriggeringObject("Card", copySA.getHostCard());
-        sa.setTriggeringObject("SpellAbility", copySA);
-        sa.setTriggeringObject("StackInstance", si);
+        sa.setTriggeringObject(AbilityKey.Card, copySA.getHostCard());
+        sa.setTriggeringObject(AbilityKey.SpellAbility, copySA);
+        sa.setTriggeringObject(AbilityKey.StackInstance, si);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Card: ").append(sa.getTriggeringObject("Card")).append(", ");
-        sb.append("Activator: ").append(sa.getTriggeringObject("Activator")).append(", ");
-        sb.append("SpellAbility: ").append(sa.getTriggeringObject("SpellAbility"));
+        sb.append("Card: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append("Activator: ").append(sa.getTriggeringObject(AbilityKey.Activator)).append(", ");
+        sb.append("SpellAbility: ").append(sa.getTriggeringObject(AbilityKey.SpellAbility));
         return sb.toString();
     }
 }

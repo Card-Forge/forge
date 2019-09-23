@@ -49,7 +49,7 @@ public class SpellAbilityChoicesIterator {
             // TODO: Do we need to do something special to support cards that have extra costs
             // when choosing more modes, like Blessed Alliance?
             if (!allowRepeat) {
-                modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);;
+                modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);
             } else {
                 // Note: When allowRepeat is true, it does result in many possibilities being tried.
                 // We should ideally prune some of those at a higher level.
@@ -84,7 +84,7 @@ public class SpellAbilityChoicesIterator {
         }
         ChoicePoint cp = choicePoints.get(cpIndex);
         // Prune duplicates.
-        HashSet<String> uniqueCards = new HashSet<String>();
+        HashSet<String> uniqueCards = new HashSet<>();
         for (int i = 0; i < fetchList.size(); i++) {
             Card card = fetchList.get(i);
             if (uniqueCards.add(card.getName()) && uniqueCards.size() == cp.nextChoice + 1) {
@@ -213,7 +213,7 @@ public class SpellAbilityChoicesIterator {
     }
 
     public static List<AbilitySub> getModeCombination(List<AbilitySub> choices, int[] modeIndexes) {
-        ArrayList<AbilitySub> modes = new ArrayList<AbilitySub>();
+        ArrayList<AbilitySub> modes = new ArrayList<>();
         for (int modeIndex : modeIndexes) {
             modes.add(choices.get(modeIndex));
         }

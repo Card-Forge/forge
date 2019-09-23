@@ -12,8 +12,8 @@ public class DeclareAttackersAction extends BasePlayerAction {
 	
 	public DeclareAttackersAction( PlayerSpecification player ) {
 		super( player );
-		playerAttackAssignments = new HashMap<CardSpecification, PlayerSpecification>();
-		planeswalkerAttackAssignments = new HashMap<CardSpecification, CardSpecification>();
+		playerAttackAssignments = new HashMap<>();
+		planeswalkerAttackAssignments = new HashMap<>();
 	}
 	
 	/**

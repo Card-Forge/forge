@@ -24,7 +24,7 @@ import java.util.Set;
 public class HistoricFormatSelect extends FScreen {
 
     private GameFormat selectedFormat;
-    private final FGroupList<GameFormat> lstFormats = add(new FGroupList<GameFormat>());
+    private final FGroupList<GameFormat> lstFormats = add(new FGroupList<>());
     private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.Block,
             GameFormat.FormatSubType.Standard,GameFormat.FormatSubType.Extended,GameFormat.FormatSubType.Modern,
             GameFormat.FormatSubType.Legacy, GameFormat.FormatSubType.Vintage));

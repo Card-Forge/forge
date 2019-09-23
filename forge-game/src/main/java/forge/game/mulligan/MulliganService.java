@@ -68,7 +68,7 @@ public class MulliganService {
                     continue;
                 }
                 Player p = mulligan.getPlayer();
-                boolean keep = mulligan.canMulligan() ? p.getController().mulliganKeepHand(firstPlayer, mulligan.tuckCardsAfterKeepHand()) : true;
+                boolean keep = !mulligan.canMulligan() || p.getController().mulliganKeepHand(firstPlayer, mulligan.tuckCardsAfterKeepHand());
 
                 if (game.isGameOver()) { // conceded on mulligan prompt
                     return;

@@ -1,0 +1,8 @@
+Name:Human Warrior
+Types:Creature Human Warrior
+Colors:red,white
+ManaCost:no cost
+PT:3/1
+K:Trample
+K:Haste
+Oracle:Trample, haste

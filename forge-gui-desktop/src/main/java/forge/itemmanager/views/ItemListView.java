@@ -154,7 +154,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
-        final List<ItemTableColumn> columns = new LinkedList<ItemTableColumn>();
+        final List<ItemTableColumn> columns = new LinkedList<>();
         for (final ItemColumnConfig colConfig : config.getCols().values()) {
             if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
                 columns.add(new ItemTableColumn(new ItemColumn(colConfig)));
@@ -270,7 +270,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public Iterable<Integer> getSelectedIndices() {
-        final List<Integer> indices = new ArrayList<Integer>();
+        final List<Integer> indices = new ArrayList<>();
         final int[] selectedRows = this.table.getSelectedRows();
         for (int i = 0; i < selectedRows.length; i++) {
             indices.add(selectedRows[i]);

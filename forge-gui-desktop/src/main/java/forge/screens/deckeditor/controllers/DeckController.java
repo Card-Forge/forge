@@ -136,7 +136,7 @@ public class DeckController<T extends DeckBase> {
     }
 
     private HashMap<String, Integer> groupByName(CardPool section) {
-        HashMap<String, Integer> result = new HashMap<String, Integer>();
+        HashMap<String, Integer> result = new HashMap<>();
 
         for (Map.Entry<PaperCard, Integer> entry : section) {
             PaperCard importedCard = entry.getKey();
@@ -190,7 +190,7 @@ public class DeckController<T extends DeckBase> {
     }
 
     private HashMap<String, PaperCard> getBasicLandsByName(CardPool sourceSection) {
-        HashMap<String, PaperCard> result = new HashMap<String, PaperCard>();
+        HashMap<String, PaperCard> result = new HashMap<>();
 
         for (Map.Entry<PaperCard, Integer> entry : sourceSection) {
             PaperCard card = entry.getKey();

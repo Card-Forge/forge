@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
@@ -38,16 +39,15 @@ public class TriggerCrewed extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Vehicle", this.getRunParams().get("Vehicle"));
-        sa.setTriggeringObject("Crew", this.getRunParams().get("Crew"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Vehicle, AbilityKey.Crew);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Vehicle: ").append(sa.getTriggeringObject("Vehicle"));
+        sb.append("Vehicle: ").append(sa.getTriggeringObject(AbilityKey.Vehicle));
         sb.append("  ");
-        sb.append("Crew: ").append(sa.getTriggeringObject("Crew"));
+        sb.append("Crew: ").append(sa.getTriggeringObject(AbilityKey.Crew));
         return sb.toString();
     }
 }

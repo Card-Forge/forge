@@ -2,36 +2,36 @@ package forge.game.cost;
 
 public interface ICostVisitor<T> {
 
-    public T visit(CostGainControl cost);
-    public T visit(CostChooseCreatureType cost);
-    public T visit(CostDiscard cost);
-    public T visit(CostDamage cost);
-    public T visit(CostDraw cost);
-    public T visit(CostExile cost);
-    public T visit(CostExileFromStack cost);
-    public T visit(CostExiledMoveToGrave cost);
-    public T visit(CostExert cost);
-    public T visit(CostFlipCoin cost);
-    public T visit(CostMill cost);
-    public T visit(CostAddMana cost);
-    public T visit(CostPayLife cost);
-    public T visit(CostPayEnergy cost);
-    public T visit(CostGainLife cost);
-    public T visit(CostPartMana cost);
-    public T visit(CostPutCardToLib cost);
-    public T visit(CostTap cost);
-    public T visit(CostSacrifice cost);
-    public T visit(CostReturn cost);
-    public T visit(CostReveal cost);
-    public T visit(CostRemoveAnyCounter cost);
-    public T visit(CostRemoveCounter cost);
-    public T visit(CostPutCounter cost);
-    public T visit(CostUntapType cost);
-    public T visit(CostUntap cost);
-    public T visit(CostUnattach cost);
-    public T visit(CostTapType cost);
+    T visit(CostGainControl cost);
+    T visit(CostChooseCreatureType cost);
+    T visit(CostDiscard cost);
+    T visit(CostDamage cost);
+    T visit(CostDraw cost);
+    T visit(CostExile cost);
+    T visit(CostExileFromStack cost);
+    T visit(CostExiledMoveToGrave cost);
+    T visit(CostExert cost);
+    T visit(CostFlipCoin cost);
+    T visit(CostMill cost);
+    T visit(CostAddMana cost);
+    T visit(CostPayLife cost);
+    T visit(CostPayEnergy cost);
+    T visit(CostGainLife cost);
+    T visit(CostPartMana cost);
+    T visit(CostPutCardToLib cost);
+    T visit(CostTap cost);
+    T visit(CostSacrifice cost);
+    T visit(CostReturn cost);
+    T visit(CostReveal cost);
+    T visit(CostRemoveAnyCounter cost);
+    T visit(CostRemoveCounter cost);
+    T visit(CostPutCounter cost);
+    T visit(CostUntapType cost);
+    T visit(CostUntap cost);
+    T visit(CostUnattach cost);
+    T visit(CostTapType cost);
 
-    public static class Base<T> implements ICostVisitor<T> {
+    class Base<T> implements ICostVisitor<T> {
 
         @Override
         public T visit(CostGainControl cost) {

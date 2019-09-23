@@ -1,9 +1,10 @@
 package forge.game;
 
+import forge.game.ability.AbilityKey;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
@@ -35,10 +36,10 @@ public enum PlanarDice {
         {
             trigRes = Chaos;
         }
-        
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Player", roller);
-        runParams.put("Result", trigRes);
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, roller);
+        runParams.put(AbilityKey.Result, trigRes);
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
     
         

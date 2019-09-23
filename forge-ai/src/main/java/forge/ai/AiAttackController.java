@@ -81,7 +81,7 @@ public class AiAttackController {
         this.defendingOpponent = choosePreferredDefenderPlayer();       
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
-        this.attackers = new ArrayList<Card>();
+        this.attackers = new ArrayList<>();
         for (Card c : myList) {
             if (CombatUtil.canAttack(c, this.defendingOpponent)) {
                 attackers.add(c);
@@ -95,7 +95,7 @@ public class AiAttackController {
         this.defendingOpponent = choosePreferredDefenderPlayer();       
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
-        this.attackers = new ArrayList<Card>();
+        this.attackers = new ArrayList<>();
         if (CombatUtil.canAttack(attacker, this.defendingOpponent)) {
             attackers.add(attacker);
         }
@@ -103,8 +103,7 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
-        List<Card> defenders = new ArrayList<Card>();
-        defenders.addAll(defender.getCreaturesInPlay());
+        List<Card> defenders = new ArrayList<>(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -151,7 +150,7 @@ public class AiAttackController {
      *
      */
     public final static List<Card> sortAttackers(final List<Card> in) {
-        final List<Card> list = new ArrayList<Card>();
+        final List<Card> list = new ArrayList<>();
 
         // Cards with triggers should come first (for Battle Cry)
         for (final Card attacker : in) {
@@ -256,7 +255,7 @@ public class AiAttackController {
     }
 
     public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
-        List<Card> possibleBlockers = new ArrayList<Card>(blockers);
+        List<Card> possibleBlockers = new ArrayList<>(blockers);
         possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -267,7 +266,7 @@ public class AiAttackController {
     }
 
     public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
-        final List<Card> attackerList = new ArrayList<Card>(attackers);
+        final List<Card> attackerList = new ArrayList<>(attackers);
         if (!c.isCreature()) {
             return false;
         }
@@ -280,7 +279,7 @@ public class AiAttackController {
     }
 
     public final static Card getCardCanBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
-        final List<Card> attackerList = new ArrayList<Card>(attackers);
+        final List<Card> attackerList = new ArrayList<>(attackers);
         if (!c.isCreature()) {
             return null;
         }
@@ -295,9 +294,9 @@ public class AiAttackController {
     // this checks to make sure that the computer player doesn't lose when the human player attacks
     // this method is used by getAttackers()
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
-        final List<Card> notNeededAsBlockers = new ArrayList<Card>(attackers);
+        final List<Card> notNeededAsBlockers = new ArrayList<>(attackers);
         int fixedBlockers = 0;
-        final List<Card> vigilantes = new ArrayList<Card>();
+        final List<Card> vigilantes = new ArrayList<>();
         //check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
@@ -336,7 +335,7 @@ public class AiAttackController {
             }
         }
 
-        List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
+        List<Card> opponentsAttackers = new ArrayList<>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -548,8 +547,7 @@ public class AiAttackController {
         remainingAttackers.removeAll(unblockedAttackers);
 
         for (Card blocker : this.blockers) {
-            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")
-                    || blocker.hasKeyword("CARDNAME can block an additional ninety-nine creatures each combat.")) {
+            if (blocker.canBlockAny()) {
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
                         remainingAttackers.remove(attacker);
@@ -565,13 +563,18 @@ public class AiAttackController {
             if (remainingAttackers.isEmpty() || maxBlockersAfterCrew == 0) {
                 break;
             }
-            if (blocker.hasKeyword("CARDNAME can block an additional creature each combat.")) {
-                blockedAttackers.add(remainingAttackers.get(0));
-                remainingAttackers.remove(0);
-                maxBlockersAfterCrew--;
-                if (remainingAttackers.isEmpty()) {
-                    break;
+
+            int numExtraBlocks = blocker.canBlockAdditional();
+            if (numExtraBlocks > 0) {
+                while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
+                    blockedAttackers.add(remainingAttackers.get(0));
+                    remainingAttackers.remove(0);
+                    maxBlockersAfterCrew--;
                 }
+            }
+
+            if (remainingAttackers.isEmpty()) {
+                break;
             }
             blockedAttackers.add(remainingAttackers.get(0));
             remainingAttackers.remove(0);
@@ -681,7 +684,7 @@ public class AiAttackController {
 
         // Determine who will be attacked
         GameEntity defender = this.chooseDefender(combat, bAssault);
-        List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
+        List<Card> attackersLeft = new ArrayList<>(this.attackers);
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
@@ -821,12 +824,12 @@ public class AiAttackController {
         int humanForcesForAttritionalAttack = 0;
 
         // examine the potential forces
-        final List<Card> nextTurnAttackers = new ArrayList<Card>();
+        final List<Card> nextTurnAttackers = new ArrayList<>();
         int candidateCounterAttackDamage = 0;
         
         final Player opp = this.defendingOpponent;
         // get the potential damage and strength of the AI forces
-        final List<Card> candidateAttackers = new ArrayList<Card>();
+        final List<Card> candidateAttackers = new ArrayList<>();
         int candidateUnblockedDamage = 0;
         for (final Card pCard : this.myList) {
             // if the creature can attack then it's a potential attacker this
@@ -885,7 +888,7 @@ public class AiAttackController {
         final int outNumber = computerForces - humanForces;
 
         for (Card blocker : this.blockers) {
-            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+            if (blocker.canBlockAny()) {
                 aiLifeToPlayerDamageRatio--;
             }
         }
@@ -908,7 +911,7 @@ public class AiAttackController {
         // get player life total
         int humanLife = opp.getLife();
         // get the list of attackers up to the first blocked one
-        final List<Card> attritionalAttackers = new ArrayList<Card>();
+        final List<Card> attritionalAttackers = new ArrayList<>();
         for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
             attritionalAttackers.add(this.attackers.get(x));
         }
@@ -1021,7 +1024,7 @@ public class AiAttackController {
         } // stay at home to block
 
         if ( LOG_AI_ATTACKS )
-            System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
+            System.out.println(this.aiAggression + " = ai aggression");
 
         // ****************
         // Evaluation the end
@@ -1457,7 +1460,7 @@ public class AiAttackController {
         if (artifact != null) {
             return artifact;
         }
-        return null;    //should never get here
+        return null;//should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

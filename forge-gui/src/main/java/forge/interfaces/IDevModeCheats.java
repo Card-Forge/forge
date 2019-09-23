@@ -61,7 +61,7 @@ public interface IDevModeCheats {
      * Implementation of {@link IDevModeCheats} that disallows cheating by
      * performing no action whatsoever when any of its methods is called.
      */
-    public static final IDevModeCheats NO_CHEAT = new IDevModeCheats() {
+    IDevModeCheats NO_CHEAT = new IDevModeCheats() {
         @Override
         public void winGame() {
         }

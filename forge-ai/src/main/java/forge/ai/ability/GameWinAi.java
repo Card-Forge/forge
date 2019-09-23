@@ -11,9 +11,7 @@ public class GameWinAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        if (ai.cantWin()) {
-            return false;
-        }
+        return !ai.cantWin();
 
         // TODO Check conditions are met on card (e.g. Coalition Victory)
 
@@ -21,7 +19,6 @@ public class GameWinAi extends SpellAbilityAi {
 
         // In general, don't return true.
         // But this card wins the game, I can make an exception for that
-        return true;
     }
 
     @Override

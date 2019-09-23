@@ -103,12 +103,9 @@ public class TokenAi extends SpellAbilityAi {
 
         if (actualToken == null) {
             final AbilitySub sub = sa.getSubAbility();
-            if (pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai))) {
-                return true; // planeswalker plus ability or sub-ability is
-                             // useful
-            } else {
-                return false; // no token created
-            }
+            // useful
+            // no token created
+            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai)); // planeswalker plus ability or sub-ability is
         }
 
         // X-cost spells
@@ -154,10 +151,7 @@ public class TokenAi extends SpellAbilityAi {
                 && !haste && !pwMinus) {
             return false;
         }
-        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || !ph.isPlayerTurn(ai)) && oneShot) {
-            return false;
-        }
-        return true;
+        return (!ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai)) || !oneShot;
     }
     
     @Override
@@ -269,10 +263,8 @@ public class TokenAi extends SpellAbilityAi {
             list.add(token);
             list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(), sa);
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-            if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
-                    && list.contains(token)) {
-                return true;
-            }
+            return ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
+                    && list.contains(token);
         }
         return false;
     }
@@ -411,7 +403,7 @@ public class TokenAi extends SpellAbilityAi {
         String tokenToughness = sa.getParam("TokenToughness");
         String tokenName = sa.getParam("TokenName");
         String[] tokenTypes = sa.getParam("TokenTypes").split(",");
-        String cost = "";
+        StringBuilder cost = new StringBuilder();
         String[] tokenColors = sa.getParam("TokenColors").split(",");
         String tokenImage = sa.hasParam("TokenImage") ? PaperToken.makeTokenFileName(sa.getParam("TokenImage")) : "";
         String[] tokenAbilities = sa.hasParam("TokenAbilities") ? sa.getParam("TokenAbilities").split(",") : null;
@@ -426,35 +418,35 @@ public class TokenAi extends SpellAbilityAi {
                 substitutedColors[i] = host.getChosenColor();
             }
         }
-        String colorDesc = "";
+        StringBuilder colorDesc = new StringBuilder();
         for (final String col : substitutedColors) {
             if (col.equalsIgnoreCase("White")) {
-                colorDesc += "W ";
+                colorDesc.append("W ");
             } else if (col.equalsIgnoreCase("Blue")) {
-                colorDesc += "U ";
+                colorDesc.append("U ");
             } else if (col.equalsIgnoreCase("Black")) {
-                colorDesc += "B ";
+                colorDesc.append("B ");
             } else if (col.equalsIgnoreCase("Red")) {
-                colorDesc += "R ";
+                colorDesc.append("R ");
             } else if (col.equalsIgnoreCase("Green")) {
-                colorDesc += "G ";
+                colorDesc.append("G ");
             } else if (col.equalsIgnoreCase("Colorless")) {
-                colorDesc = "C";
+                colorDesc = new StringBuilder("C");
             }
         }
         
-        final List<String> imageNames = new ArrayList<String>(1);
+        final List<String> imageNames = new ArrayList<>(1);
         if (tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(colorDesc, " ", ""), tokenPower, tokenToughness, tokenName));
+            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(colorDesc.toString(), " ", ""), tokenPower, tokenToughness, tokenName));
         } else {
             imageNames.add(0, tokenImage);
         }
 
-        for (final char c : colorDesc.toCharArray()) {
-            cost += c + ' ';
+        for (final char c : colorDesc.toString().toCharArray()) {
+            cost.append(c + ' ');
         }
 
-        cost = colorDesc.replace('C', '1').trim();
+        cost = new StringBuilder(colorDesc.toString().replace('C', '1').trim());
 
         final int finalPower = AbilityUtils.calculateAmount(host, tokenPower, sa);
         final int finalToughness = AbilityUtils.calculateAmount(host, tokenToughness, sa);
@@ -468,7 +460,7 @@ public class TokenAi extends SpellAbilityAi {
         final String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
         final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
         final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
-                cost, substitutedTypes, tokenKeywords, finalPower, finalToughness);
+                cost.toString(), substitutedTypes, tokenKeywords, finalPower, finalToughness);
         Card token = tokenInfo.makeOneToken(ai);
 
         if (token == null) {

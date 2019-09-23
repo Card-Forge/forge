@@ -13,7 +13,7 @@ public class CWorkshopUIMenus {
     private final boolean SHOW_ICONS = true;
 
     public List<JMenu> getMenus() {
-        List<JMenu> menus = new ArrayList<JMenu>();
+        List<JMenu> menus = new ArrayList<>();
         menus.add(WorkshopFileMenu.getMenu(SHOW_ICONS));
         return menus;
     }

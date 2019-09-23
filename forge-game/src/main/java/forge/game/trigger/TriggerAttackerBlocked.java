@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
@@ -84,18 +85,21 @@ public class TriggerAttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", getRunParams().get("Attacker"));
-        sa.setTriggeringObject("Blockers", getRunParams().get("Blockers"));
-        sa.setTriggeringObject("Defender", getRunParams().get("Defender"));
-        sa.setTriggeringObject("DefendingPlayer", getRunParams().get("DefendingPlayer"));
-        sa.setTriggeringObject("NumBlockers", getRunParams().get("NumBlockers"));
+        sa.setTriggeringObjectsFrom(
+            this,
+            AbilityKey.Attacker,
+            AbilityKey.Blockers,
+            AbilityKey.Defender,
+            AbilityKey.DefendingPlayer,
+            AbilityKey.NumBlockers
+        );
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject("Attacker")).append(", ");
-        sb.append("Number Blockers: ").append(sa.getTriggeringObject("NumBlockers"));
+        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
+        sb.append("Number Blockers: ").append(sa.getTriggeringObject(AbilityKey.NumBlockers));
         return sb.toString();
     }
 }

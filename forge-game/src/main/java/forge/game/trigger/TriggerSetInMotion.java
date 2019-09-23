@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -63,7 +64,7 @@ public class TriggerSetInMotion extends Trigger {
                     return false;
                 }
             } else if (this.mapParams.get("SchemeType").equals("Ongoing")) {
-                if (!((Card)runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
                     return false;
                 }
             }
@@ -76,7 +77,7 @@ public class TriggerSetInMotion extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Scheme", this.getRunParams().get("Scheme"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Scheme);
     }
 
     @Override

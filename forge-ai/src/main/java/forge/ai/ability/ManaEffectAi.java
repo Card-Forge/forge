@@ -80,12 +80,9 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (sa.hasParam("AILogic")) {
             return true; // handled elsewhere, does not meet the standard requirements
         }
-        
-        if (!(sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa))) {
-            return false;
-        }
-        return true;
+
+        return sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
+                && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa);
         // return super.checkApiLogic(ai, sa);
     }
 

@@ -48,7 +48,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private static final long serialVersionUID = -6400018234895548306L;
     private static final int DRAG_SMUDGE = 10;
 
-    private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+    private final List<CardPanel> cardPanels = new ArrayList<>();
     private final CMatchUI matchUI;
     private final FScrollPane scrollPane;
 
@@ -59,7 +59,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private CardPanel mouseDownPanel;
     private CardPanel mouseDragPanel;
 
-    private final List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
+    private final List<CardPanelMouseListener> listeners = new ArrayList<>(2);
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;

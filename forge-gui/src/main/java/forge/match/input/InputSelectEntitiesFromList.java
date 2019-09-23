@@ -23,7 +23,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     private static final long serialVersionUID = -6609493252672573139L;
 
     private final FCollectionView<T> validChoices;
-    protected final FCollection<T> selected = new FCollection<T>();
+    protected final FCollection<T> selected = new FCollection<>();
     protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
@@ -36,7 +36,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (min > validChoices.size()) {  // pfps does this really do anything useful??
             System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
-	ArrayList<CardView> vCards = new ArrayList<CardView>();
+	ArrayList<CardView> vCards = new ArrayList<>();
 	for ( T c : validChoices0 ) {
 	    if ( c instanceof Card ) {
 		vCards.add(((Card)c).getView()) ;

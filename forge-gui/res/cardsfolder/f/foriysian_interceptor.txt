@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 PT:0/5
 K:Flash
 K:Defender
-K:CARDNAME can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_interceptor.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender\nForiysian Interceptor can block an additional creature each combat.

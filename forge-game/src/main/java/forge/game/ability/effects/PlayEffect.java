@@ -97,7 +97,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                final List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
+                final List<PaperCard> copysource = new ArrayList<>(cards);
                 final CardCollection choice = new CardCollection();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);

@@ -123,7 +123,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         sb.append("Remove ");
         sb.append(Cost.convertIntAndTypeToWords(this.convertAmount(), "counter"));
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        sb.append(" from " + desc);
+        sb.append(" from ").append(desc);
 
         return sb.toString();
     }

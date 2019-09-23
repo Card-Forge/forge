@@ -9,6 +9,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -151,6 +152,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        float hmod = Forge.getHeightModifier();
         float w = getWidth();
         float h = getHeight();
 
@@ -164,7 +166,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         FImage monitor = FSkinImage.PLANE_MONITOR;
         float monitorLeft = FOptionPane.PADDING / 2;
         float monitorWidth = w - 2 * monitorLeft;
-        float monitorHeight = monitorWidth * monitor.getHeight() / monitor.getWidth();
+        float monitorHeight = (monitorWidth * monitor.getHeight() / monitor.getWidth()) - hmod;
         float monitorLeftOffset = monitorWidth * MONITOR_LEFT_MULTIPLIER;
         float monitorTopOffset = monitorHeight * MONITOR_TOP_MULTIPLIER;
         float monitorBottomOffset = monitorHeight * MONITOR_BOTTOM_MULTIPLIER;
@@ -186,7 +188,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
                 float scaledArtHeight = monitorWidth * (artHeight / fullArtWidth);
                 fullArtWidth = monitorWidth;
                 artHeightClipMod = scaledArtHeight - artHeight;
-                artHeight = scaledArtHeight;                
+                artHeight = scaledArtHeight;
             }
             
             g.startClip(x, y, artWidth, artHeight - artHeightClipMod);

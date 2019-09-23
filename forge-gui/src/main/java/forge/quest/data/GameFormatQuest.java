@@ -75,7 +75,7 @@ public final class GameFormatQuest extends GameFormat {
 	 */
 	public List<String> getLockedSets() {
 
-		List<String> exSets = new ArrayList<String>();
+		List<String> exSets = new ArrayList<>();
 		if (this.allowedSetCodes.isEmpty()) {
 			return exSets;
 		}

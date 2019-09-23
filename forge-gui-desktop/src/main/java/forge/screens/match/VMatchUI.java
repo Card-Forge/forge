@@ -29,8 +29,8 @@ import forge.view.FView;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VMatchUI implements IVTopLevelUI {
-    private List<VField> lstFields = new ArrayList<VField>();
-    private List<VHand> lstHands = new ArrayList<VHand>();
+    private List<VField> lstFields = new ArrayList<>();
+    private List<VHand> lstHands = new ArrayList<>();
 
     // Other instantiations
     private final CMatchUI control;

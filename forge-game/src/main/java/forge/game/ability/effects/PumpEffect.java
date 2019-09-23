@@ -55,13 +55,24 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        gameCard.addTempPowerBoost(a);
-        gameCard.addTempToughnessBoost(d);
-        gameCard.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
+        if (a != 0 || d != 0) {
+            gameCard.addPTBoost(a, d, timestamp, 0);
+            redrawPT = true;
+        }
+
+        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
-        
+
+        if (sa.hasParam("CanBlockAny")) {
+            gameCard.addCanBlockAny(timestamp);
+        }
+        if (sa.hasParam("CanBlockAmount")) {
+            int v = AbilityUtils.calculateAmount(host, sa.getParam("CanBlockAmount"), sa, true);
+            gameCard.addCanBlockAdditional(v, timestamp);
+        }
+
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
@@ -73,22 +84,23 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    gameCard.addTempPowerBoost(-1 * a);
-                    gameCard.addTempToughnessBoost(-1 * d);
+                    gameCard.removePTBoost(timestamp, 0);
+                    boolean updateText = false;
+                    updateText = gameCard.removeCanBlockAny(timestamp) || updateText;
+                    updateText = gameCard.removeCanBlockAdditional(timestamp) || updateText;
 
                     if (keywords.size() > 0) {
-                        boolean redrawPT = false;
 
                         for (String kw : keywords) {
-                            redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
                             if (kw.startsWith("HIDDEN")) {
                                 gameCard.removeHiddenExtrinsicKeyword(kw);
-                                if (redrawPT) {
-                                    gameCard.updatePowerToughnessForView();
-                                }
                             }
                         }
                         gameCard.removeChangedCardKeywords(timestamp);
+                    }
+                    gameCard.updatePowerToughnessForView();
+                    if (updateText) {
+                        gameCard.updateAbilityTextForView();
                     }
 
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
@@ -108,7 +120,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
-        p.addChangedKeywords(keywords, ImmutableList.<String>of(), timestamp);
+        p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
@@ -191,7 +203,12 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            sb.append("gains ");
+            boolean gains = sa.hasParam("NumAtt") || sa.hasParam("NumDef") || !keywords.isEmpty();
+
+            if (gains) {
+                sb.append("gains ");
+            }
+
             if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
                 if (atk >= 0) {
                     sb.append("+");
@@ -209,8 +226,25 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(keywords.get(i)).append(" ");
             }
 
+            if (sa.hasParam("CanBlockAny")) {
+                if (gains) {
+                    sb.append(" and ");
+                }
+                sb.append("can block any number of creatures ");
+            } else if (sa.hasParam("CanBlockAmount")) {
+                if (gains) {
+                    sb.append(" and ");
+                }
+                String n = sa.getParam("CanBlockAmount");
+                sb.append("can block an additional ");
+                sb.append("1".equals(n) ? "creature" : Lang.nounWithNumeral(n, "creature"));
+                sb.append(" each combat ");
+            }
+
             if (!sa.hasParam("Permanent")) {
                 sb.append("until end of turn.");
+            } else {
+                sb.append(".");
             }
 
         }
@@ -254,7 +288,7 @@ public class PumpEffect extends SpellAbilityEffect {
             if (defined.equals("ChosenType")) {
                 replaced = host.getChosenType();
             } else if (defined.equals("CardUIDSource")) {
-                replaced = "CardUID_" + String.valueOf(host.getId());
+                replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
             }
@@ -279,9 +313,7 @@ public class PumpEffect extends SpellAbilityEffect {
             if (sa.hasParam("NoRepetition")) {
                 for (KeywordInterface inst : tgtCards.get(0).getKeywords()) {
                     final String kws = inst.getOriginal();
-                    if (total.contains(kws)) {
-                        total.remove(kws);
-                    }
+                    total.remove(kws);
                 }
             }
             final int min = Math.min(total.size(), numkw);
@@ -336,10 +368,8 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
-                    .split(","))) {
-                untargetedCards.add(c);
-            }
+            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
+                    .split(",")));
         }
 
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))

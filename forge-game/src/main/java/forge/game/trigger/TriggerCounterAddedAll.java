@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
 
@@ -19,16 +20,12 @@ public class TriggerCounterAddedAll extends Trigger {
     public boolean performTest(Map<String, Object> runParams2) {
         final GameEntityCounterTable table = (GameEntityCounterTable) runParams2.get("Objects");
 
-        if (filterTable(table).isEmpty()) {
-            return false;
-        }
-
-        return true;
+        return !filterTable(table).isEmpty();
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        final GameEntityCounterTable table = (GameEntityCounterTable) getRunParams().get("Objects");
+        final GameEntityCounterTable table = (GameEntityCounterTable) getFromRunParams(AbilityKey.Objects);
 
         Map<GameEntity, Integer> all = this.filterTable(table);
 
@@ -37,14 +34,14 @@ public class TriggerCounterAddedAll extends Trigger {
             amount += v;
         }
 
-        sa.setTriggeringObject("Objects", Lists.newArrayList(all.keySet()));
-        sa.setTriggeringObject("Amount", amount);
+        sa.setTriggeringObject(AbilityKey.Objects, Lists.newArrayList(all.keySet()));
+        sa.setTriggeringObject(AbilityKey.Amount, amount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Amount: ").append(sa.getTriggeringObject("Amount"));
+        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 

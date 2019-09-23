@@ -225,6 +225,15 @@ public class PlayerProperty {
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
+        } else if (property.startsWith("HasCardsIn")) { // HasCardsIn[zonetype]_[cardtype]_[comparator]
+            final String[] type = property.substring(10).split("_");
+            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source);
+            String comparator = type[2];
+            String compareTo = comparator.substring(2);
+            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            if (!Expressions.compare(list.size(), comparator, y)) {
+                return false;
+            }
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
@@ -274,7 +283,7 @@ public class PlayerProperty {
             }
             else if (kind.equals("PermanentInPlay")) {
                 int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
+                List<Player> controlmost = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     final int num = p.getCardsIn(ZoneType.Battlefield).size();
                     if (num > typeNum) {
@@ -311,7 +320,7 @@ public class PlayerProperty {
                     type = TextUtil.fastReplace(type, "Only", "");
                 }
                 int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
+                List<Player> controlmost = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     final int num = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), type).size();
                     if (num > typeNum) {
@@ -332,7 +341,7 @@ public class PlayerProperty {
         } else if (property.startsWith("withLowest")) {
             if (property.substring(10).equals("Life")) {
                 int lowestLife = player.getLife();
-                List<Player> lowestlifep = new ArrayList<Player>();
+                List<Player> lowestlifep = new ArrayList<>();
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() == lowestLife) {
                         lowestlifep.add(p);

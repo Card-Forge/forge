@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 public class DeckSetFilter extends DeckFormatFilter {
-    private final Set<String> sets = new HashSet<String>();
+    private final Set<String> sets = new HashSet<>();
 
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);

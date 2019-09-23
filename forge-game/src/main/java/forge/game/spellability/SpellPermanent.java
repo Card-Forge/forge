@@ -48,7 +48,7 @@ public class SpellPermanent extends SpellApiBased {
      */
     public SpellPermanent(final Card sourceCard) {
         super(sourceCard.isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
-                new Cost(sourceCard.getManaCost(), false), null, Maps.<String, String>newHashMap());
+                new Cost(sourceCard.getManaCost(), false), null, Maps.newHashMap());
 
         // reset StackDescription for something with Text
         this.setStackDescription("");

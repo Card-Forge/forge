@@ -18,7 +18,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     public StatTypeFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
-        buttonMap = new HashMap<SItemManagerUtil.StatTypes, FLabel>();
+        buttonMap = new HashMap<>();
     }
 
     protected void addToggleButton(Widget widget, final StatTypes st) {

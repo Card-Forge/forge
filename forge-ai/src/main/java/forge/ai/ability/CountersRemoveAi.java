@@ -101,7 +101,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
 
         // Filter AI-specific targets if provided
-        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 

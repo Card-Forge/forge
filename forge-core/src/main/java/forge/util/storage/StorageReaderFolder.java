@@ -75,14 +75,14 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
         }
     }
 
-    public final List<String> objectsThatFailedToLoad = new ArrayList<String>();
+    public final List<String> objectsThatFailedToLoad = new ArrayList<>();
 
     /* (non-Javadoc)
      * @see forge.util.IItemReader#readAll()
      */
     @Override
     public Map<String, T> readAll() {
-        final Map<String, T> result = new TreeMap<String, T>();
+        final Map<String, T> result = new TreeMap<>();
 
         final File[] files = this.directory.listFiles(this.getFileFilter());
         for (final File file : files) {

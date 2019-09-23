@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import forge.card.mana.ManaAtom;
+import forge.game.ability.AbilityKey;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.util.TextUtil;
@@ -44,6 +45,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
 
 /**
@@ -97,8 +99,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = (null == params.get("PersistentMana")) ? false :
-            "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
         this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
     }
 
@@ -128,12 +129,11 @@ public class AbilityManaPart implements java.io.Serializable {
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "ProduceMana");
         repParams.put("Mana", afterReplace);
         repParams.put("Affected", source);
         repParams.put("Player", player);
         repParams.put("AbilityMana", sa);
-        if (player.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         //clear lastProduced
@@ -167,12 +167,10 @@ public class AbilityManaPart implements java.io.Serializable {
         manaPool.add(this.lastManaProduced);
 
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-
-        runParams.put("Card", source);
-        runParams.put("Player", player);
-        runParams.put("AbilityMana", sa);
-        runParams.put("Produced", afterReplace);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+        runParams.put(AbilityKey.Player, player);
+        runParams.put(AbilityKey.AbilityMana, sa);
+        runParams.put(AbilityKey.Produced, afterReplace);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
         if (source.isLand()) {
         	player.setTappedLandForManaThisTurn(true);
@@ -489,12 +487,8 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.getOrigProduced().length() != 1 && !this.getOrigProduced().contains("Any")
-                && !this.getOrigProduced().contains("Chosen")) {
-            return false;
-        }
-
-        return true;
+        return this.getOrigProduced().length() == 1 || this.getOrigProduced().contains("Any")
+                || this.getOrigProduced().contains("Chosen");
     }
 
     /** {@inheritDoc} */

@@ -2,6 +2,6 @@ Name:Spike-Tailed Ceratops
 ManaCost:4 G
 Types:Creature Dinosaur
 PT:4/4
-K:CARDNAME can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_tailed_ceratops.jpg
 Oracle:Spike-Tailed Ceratops can block an additional creature each combat.

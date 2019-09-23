@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CardThemedDeckGenerator extends DeckProxy implements Comparable<CardThemedDeckGenerator> {
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
             for(String card: CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet()) {
                 //exclude non AI playables as keycards for AI decks
                 if(isForAi&&FModel.getMagicDb().getCommonCards().getUniqueByName(card).getRules().getAiHints().getRemAIDecks()){

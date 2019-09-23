@@ -13,7 +13,7 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
     public static List<DeckProxy> getColorDecks(final IItemManager<DeckProxy> lstDecks0, final Predicate<PaperCard> formatFilter0, final boolean isAi0) {
         final String[] colors = new String[] { "Random 1", "Random 2", "Random 3",
                 "White", "Blue", "Black", "Red", "Green" };
-        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<>();
         for (int i = 0; i < colors.length; i++) {
             decks.add(new ColorDeckGenerator(colors[i], i, lstDecks0, formatFilter0, isAi0));
         }
@@ -56,7 +56,7 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
 
     @Override
     public Deck getDeck() {
-        final List<String> selection = new ArrayList<String>();
+        final List<String> selection = new ArrayList<>();
         for (final DeckProxy deck : lstDecks.getSelectedItems()) {
             selection.add(deck.getName());
         }

@@ -11,7 +11,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
 public class DeckGenPool implements IDeckGenPool {
-    private final Map<String, PaperCard> cards = new HashMap<String, PaperCard>();
+    private final Map<String, PaperCard> cards = new HashMap<>();
 
     public DeckGenPool() {
     }

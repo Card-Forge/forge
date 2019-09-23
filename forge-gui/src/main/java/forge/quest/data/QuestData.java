@@ -66,7 +66,7 @@ public final class QuestData {
     private final Map<Integer, String> petSlots = new HashMap<>();
     private int matchLength = 3;
 
-    public HashSet<StarRating> Ratings = new HashSet<StarRating>();
+    public HashSet<StarRating> Ratings = new HashSet<>();
 
     public String currentDeck = "DEFAULT";
 

@@ -1,0 +1,6 @@
+Name:Mouse
+ManaCost:no cost
+Types:Creature Mouse
+Colors:white
+PT:1/1
+Oracle:

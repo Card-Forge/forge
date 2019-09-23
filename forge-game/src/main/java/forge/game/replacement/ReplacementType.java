@@ -29,7 +29,7 @@ public enum ReplacementType {
     Untap(ReplaceUntap.class);
 
     Class<? extends ReplacementEffect> clasz;
-    private ReplacementType(Class<? extends ReplacementEffect> cls) {
+    ReplacementType(Class<? extends ReplacementEffect> cls) {
         clasz = cls;
     }
 
@@ -58,6 +58,7 @@ public enum ReplacementType {
             if (pp[0].isAssignableFrom(Map.class)) {
                 try {
                     ReplacementEffect res = c.newInstance(mapParams, host, intrinsic);
+                    res.setMode(this);
                     return res;
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.

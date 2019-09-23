@@ -235,7 +235,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     FThreads.invokeInBackgroundThread(new Runnable() {
                         @Override
                         public void run() {
-                            ItemPool<InventoryItem> items = new ItemPool<InventoryItem>(InventoryItem.class);
+                            ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
                             items.add(item, result);
                             activateItems(items);
                             FThreads.invokeInEdtLater(new Runnable() {
@@ -284,7 +284,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void refresh() {
-            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
             ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
             ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
             itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
@@ -341,13 +341,13 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void refresh() {
-            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceSellGet);
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.DECKS, QuestSpellShop.fnDeckCompare, QuestSpellShop.fnDeckGet);
             itemManager.setup(ItemManagerConfig.QUEST_INVENTORY, colOverrides);
 
-            final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
+            final ItemPool<InventoryItem> ownedItems = new ItemPool<>(InventoryItem.class);
             ownedItems.addAllOfType(FModel.getQuest().getCards().getCardpool().getView());
             itemManager.setPool(ownedItems);
         }

@@ -208,7 +208,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public final Collection<T> getSelectedItems() {
-        final List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<>();
         for (final Integer i : getSelectedIndices()) {
             final T item = getItemAtIndex(i);
             if (item != null) {
@@ -234,7 +234,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return setSelectedItems(items, true);
     }
     public final boolean setSelectedItems(final Iterable<T> items, final boolean scrollIntoView) {
-        final List<Integer> indices = new ArrayList<Integer>();
+        final List<Integer> indices = new ArrayList<>();
         for (final T item : items) {
             final int index = getIndexOfItem(item);
             if (index != -1) {
@@ -278,7 +278,7 @@ public abstract class ItemView<T extends InventoryItem> {
         final int count = getCount();
         if (count == 0) { return; }
 
-        final List<Integer> indexList = new ArrayList<Integer>();
+        final List<Integer> indexList = new ArrayList<>();
         for (final Integer index : indices) {
             if (index >= 0 && index < count) {
                 indexList.add(index);

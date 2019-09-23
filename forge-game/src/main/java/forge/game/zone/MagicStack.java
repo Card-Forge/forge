@@ -36,6 +36,7 @@ import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -72,9 +73,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
-    private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
-    private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<SpellAbilityStackInstance>();
-    private final Stack<SpellAbility> undoStack = new Stack<SpellAbility>();
+    private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
+    private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<>();
+    private final Stack<SpellAbility> undoStack = new Stack<>();
     private Player undoStackOwner;
 
     private boolean frozen = false;
@@ -136,7 +137,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // on the stack zone, move there
         if (ability.isSpell()) {
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability, null));
+                ability.setHostCard(game.getAction().moveToStack(source, ability));
             }
         }
 
@@ -284,16 +285,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        Map<String, Object> runParams = Maps.newHashMap();
+        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         if (!(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
-            runParams.put("Cost", sp.getPayCosts());
-            runParams.put("Player", sp.getHostCard().getController());
-            runParams.put("Activator", sp.getActivatingPlayer());
-            runParams.put("CastSA", si.getSpellAbility(true));
-            runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
-            runParams.put("CurrentStormCount", thisTurnCast.size());
-            runParams.put("CurrentCastSpells", new CardCollection(thisTurnCast));
+            runParams.put(AbilityKey.Cost, sp.getPayCosts());
+            runParams.put(AbilityKey.Player, sp.getHostCard().getController());
+            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
+            runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
+            runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
+            runParams.put(AbilityKey.CurrentCastSpells, new CardCollection(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
@@ -314,22 +315,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
-                runParams.put("Card", sp.getHostCard());
+                runParams.put(AbilityKey.Card, sp.getHostCard());
                 game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
             }
             
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
-                runParams.put("Vehicle", sp.getHostCard());
-                runParams.put("Crew", sp.getPaidList("TappedCards"));
+                runParams.put(AbilityKey.Vehicle, sp.getHostCard());
+                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards"));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
         }
 
         // Run SpellAbilityCopy triggers
         if (sp.isCopied()) {
-            runParams.put("Activator", sp.getActivatingPlayer());
-            runParams.put("CopySA", si.getSpellAbility(true));
+            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.CopySA, si.getSpellAbility(true));
             // Run SpellCopy triggers
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
@@ -347,7 +348,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 s = si.getSpellAbility(true);
                 chosenTargets = s.getAllTargetChoices();
             }
-            runParams.put("SourceSA", s);
+            runParams.put(AbilityKey.SourceSA, s);
             Set<Object> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
                 if (tc != null && tc.getTargetCards() != null) {
@@ -360,13 +361,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         
                         distinctObjects.add(tgt);
                         if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
-                            runParams.put("FirstTime", null);
+                            runParams.put(AbilityKey.FirstTime, null);
                             ((Card) tgt).setBecameTargetThisTurn(true);
                         }
-                        runParams.put("Target", tgt);
+                        runParams.put(AbilityKey.Target, tgt);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                     }
-                    runParams.put("Targets", tc.getTargets());
+                    runParams.put(AbilityKey.Targets, tc.getTargets());
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
                 }
             }
@@ -374,11 +375,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Not sure these clauses are necessary. Consider it a precaution
         // for backwards compatibility for hardcoded cards.
         else if (sp.getTargetCard() != null) {
-            runParams.put("Target", sp.getTargetCard());
+            runParams.put(AbilityKey.Target, sp.getTargetCard());
 
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
 
-            runParams.put("Targets", Lists.newArrayList(sp.getTargetCard()));
+            runParams.put(AbilityKey.Targets, Lists.newArrayList(sp.getTargetCard()));
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
@@ -531,10 +532,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         else if ((source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-            Map<String, Object> params = Maps.newHashMap();
-            params.put("StackSa", sa);
-            params.put("StackSi", si);
-            params.put("Fizzle", fizzle);
+            Map<AbilityKey, Object> params = AbilityKey.newMap();
+            params.put(AbilityKey.StackSa, sa);
+            params.put(AbilityKey.StackSi, si);
+            params.put(AbilityKey.Fizzle, fizzle);
             game.getAction().moveToGraveyard(source, null, params);
         }
     }
@@ -618,7 +619,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (fizzle != null && fizzle && rememberTgt) {
                 source.clearRemembered();
             }
-            return fizzle == null ? false : fizzle.booleanValue();
+            return fizzle != null && fizzle.booleanValue();
         }
         return hasFizzled(sa.getSubAbility(), source, fizzle) && (fizzle == null || fizzle.booleanValue());
     }
@@ -658,7 +659,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
         for (SpellAbilityStackInstance si : stack) {
             SpellAbility sa = si.getSpellAbility(false);
-            if (sa.getTriggeringObjects().containsKey("Target") && sa.getTriggeringObjects().get("Target").equals(c)) {
+            if (sa.getTriggeringObjects().containsKey(AbilityKey.Target) && sa.getTriggeringObjects().get(AbilityKey.Target).equals(c)) {
                 if (sa instanceof WrappedAbility) {
                     WrappedAbility wi = (WrappedAbility)sa;
                     if (wi.getTrigger().getMode() == t) {

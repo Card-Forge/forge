@@ -109,7 +109,7 @@ public class ManaCostBeingPaid {
 
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<ManaCostShard, ShardCount>();
+    private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<>();
     private Map<String, Integer> xManaCostPaidByColor;
     private final String sourceRestriction;
     private byte sunburstMap = 0;
@@ -124,7 +124,7 @@ public class ManaCostBeingPaid {
             unpaidShards.put(m.getKey(), new ShardCount(m.getValue()));
         }
         if (manaCostBeingPaid.xManaCostPaidByColor != null) {
-            xManaCostPaidByColor = new HashMap<String, Integer>(manaCostBeingPaid.xManaCostPaidByColor);
+            xManaCostPaidByColor = new HashMap<>(manaCostBeingPaid.xManaCostPaidByColor);
         }
         sourceRestriction = manaCostBeingPaid.sourceRestriction;
         sunburstMap = manaCostBeingPaid.sunburstMap;
@@ -503,7 +503,7 @@ public class ManaCostBeingPaid {
             sc.xCount--;
             String color = MagicColor.toShortString(colorMask);
             if (xManaCostPaidByColor == null) {
-                xManaCostPaidByColor = new HashMap<String, Integer>();
+                xManaCostPaidByColor = new HashMap<>();
             }
             Integer xColor = xManaCostPaidByColor.get(color);
             if (xColor == null) {
@@ -594,7 +594,7 @@ public class ManaCostBeingPaid {
         }
 
         int nGeneric = getGenericManaAmount();
-        List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
+        List<ManaCostShard> shards = new ArrayList<>(unpaidShards.keySet());
 
         // TODO Fix this. Should we really be changing Shards here?
         if (false && pool != null) { //replace shards with generic mana if they can be paid with any color mana
@@ -610,12 +610,12 @@ public class ManaCostBeingPaid {
 
         if (nGeneric > 0) {
             if (nGeneric <= 20) {
-                sb.append("{" + nGeneric + "}");
+                sb.append("{").append(nGeneric).append("}");
             }
             else { //if no mana symbol exists for generic amount, use combination of symbols for each digit
                 String genericStr = String.valueOf(nGeneric);
                 for (int i = 0; i < genericStr.length(); i++) {
-                    sb.append("{" + genericStr.charAt(i) + "}");
+                    sb.append("{").append(genericStr.charAt(i)).append("}");
                 }
             }
         }
@@ -668,7 +668,7 @@ public class ManaCostBeingPaid {
     }
 
     public final List<ManaCostShard> getUnpaidShards() {
-        List<ManaCostShard> result = new ArrayList<ManaCostShard>();
+        List<ManaCostShard> result = new ArrayList<>();
         for (Entry<ManaCostShard, ShardCount> kv : unpaidShards.entrySet()) {
            for (int i = kv.getValue().totalCount; i > 0; i--) {
                result.add(kv.getKey());

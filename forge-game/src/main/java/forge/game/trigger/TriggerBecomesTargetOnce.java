@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -80,16 +81,15 @@ public class TriggerBecomesTargetOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("SourceSA", this.getRunParams().get("SourceSA"));
-        sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getHostCard());
-        sa.setTriggeringObject("Targets", this.getRunParams().get("Targets"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Targets);
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Source: ").append(((SpellAbility) sa.getTriggeringObject("SourceSA")).getHostCard()).append(", ");
-        sb.append("Targets: ").append(sa.getTriggeringObject("Targets"));
+        sb.append("Source: ").append(((SpellAbility) sa.getTriggeringObject(AbilityKey.SourceSA)).getHostCard()).append(", ");
+        sb.append("Targets: ").append(sa.getTriggeringObject(AbilityKey.Targets));
         return sb.toString();
     }
 }

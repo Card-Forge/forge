@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.animation.ForgeAnimation;
@@ -28,7 +29,7 @@ public class ConquestRewardDialog extends FScrollPane {
     private static final float PADDING = Utils.scale(5);
 
     public static void show(String title, PaperCard card, Runnable callback0) {
-        List<ConquestReward> rewards = new ArrayList<ConquestReward>(1);
+        List<ConquestReward> rewards = new ArrayList<>(1);
         rewards.add(new ConquestReward(card, 0));
         show(title, rewards, callback0);
     }
@@ -38,7 +39,7 @@ public class ConquestRewardDialog extends FScrollPane {
     }
 
     private final RevealDialog dialog;
-    private final List<CardRevealer> cardRevealers = new ArrayList<CardRevealer>();
+    private final List<CardRevealer> cardRevealers = new ArrayList<>();
     private final CardRevealAnimation animation;
     private final Runnable callback;
 
@@ -60,10 +61,22 @@ public class ConquestRewardDialog extends FScrollPane {
             columnCount = 1;
         }
         else if (cardCount < 5) {
-            columnCount = 2;
+            if (Forge.extrawide.equals("default"))
+                columnCount = 2;
+            else {
+                if (cardCount == 4)
+                    columnCount = 4;
+                else
+                    columnCount = 3;
+            }
         }
         else {
-            columnCount = 3;
+            if (Forge.extrawide.equals("extrawide"))
+                columnCount = 5;
+            else if (Forge.extrawide.equals("wide"))
+                columnCount = 4;
+            else
+                columnCount = 3;
         }
 
         animation = new CardRevealAnimation();
@@ -230,7 +243,10 @@ public class ConquestRewardDialog extends FScrollPane {
                 //ensure current card in view
                 if (getScrollHeight() > getHeight() && index < cardCount) {
                     CardRevealer currentCard = cardRevealers.get(index);
-                    scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
+                    if (!Forge.extrawide.equals("default"))
+                        scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
+                    else
+                        scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
                 }
             }
 
@@ -287,7 +303,7 @@ public class ConquestRewardDialog extends FScrollPane {
 
         private boolean showCardZoom() {
             int index = -1;
-            List<PaperCard> cards = new ArrayList<PaperCard>();
+            List<PaperCard> cards = new ArrayList<>();
             for (int i = 0; i < animation.currentIndex; i++) {
                 CardRevealer revealer = cardRevealers.get(i);
                 if (revealer == this) {

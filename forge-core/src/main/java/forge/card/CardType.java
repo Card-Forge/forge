@@ -73,7 +73,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public final boolean isPermanent;
         private static final ImmutableList<String> allCoreTypeNames = EnumUtil.getNames(CoreType.class);
 
-        private CoreType(final boolean permanent) {
+        CoreType(final boolean permanent) {
             isPermanent = permanent;
         }
     }
