@@ -51,6 +51,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
