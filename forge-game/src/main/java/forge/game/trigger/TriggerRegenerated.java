@@ -49,16 +49,17 @@ public class TriggerRegenerated extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCause")) {
-            if (!matchesValid(runParams2.get("Cause"), getParam("ValidCause").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","), getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }

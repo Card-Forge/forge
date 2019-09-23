@@ -50,12 +50,13 @@ public class TriggerSpellAbilityCopy extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        final SpellAbility spellAbility = (SpellAbility) runParams2.get("CopySA");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CopySA);
         if (spellAbility == null) {
-            System.out.println("TriggerSpellAbilityCopy performTest encountered spellAbility == null. runParams2 = " + runParams2);
+            System.out.println("TriggerSpellAbilityCopy performTest encountered spellAbility == null. runParams2 = " + runParams);
             return false;
         }
         final Card cast = spellAbility.getHostCard();

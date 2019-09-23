@@ -1663,12 +1663,12 @@ public class AiController {
 
         if (effect.hasParam("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
-            final String svarToCheck = effect.getMapParams().get("AICheckSVar");
+            final String svarToCheck = effect.getParam("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
 
             if (effect.hasParam("AISVarCompare")) {
-                final String fullCmp = effect.getMapParams().get("AISVarCompare");
+                final String fullCmp = effect.getParam("AISVarCompare");
                 comparator = fullCmp.substring(0, 2);
                 final String strCmpTo = fullCmp.substring(2);
                 try {

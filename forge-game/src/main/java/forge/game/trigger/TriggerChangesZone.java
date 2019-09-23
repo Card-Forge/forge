@@ -64,16 +64,17 @@ public class TriggerChangesZone extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("Origin")) {
             if (!getParam("Origin").equals("Any")) {
                 if (getParam("Origin") == null) {
                     return false;
                 }
                 if (!ArrayUtils.contains(
-                    getParam("Origin").split(","), runParams2.get("Origin")
+                    getParam("Origin").split(","), runParams.get(AbilityKey.Origin)
                 )) {
                     return false;
                 }
@@ -83,7 +84,7 @@ public class TriggerChangesZone extends Trigger {
         if (hasParam("Destination")) {
             if (!getParam("Destination").equals("Any")) {
                 if (!ArrayUtils.contains(
-                    getParam("Destination").split(","), runParams2.get("Destination")
+                    getParam("Destination").split(","), runParams.get(AbilityKey.Destination)
                 )) {
                     return false;
                 }
@@ -92,14 +93,14 @@ public class TriggerChangesZone extends Trigger {
 
         if (hasParam("ExcludedDestinations")) {
             if (!ArrayUtils.contains(
-                getParam("ExcludedDestinations").split(","), runParams2.get("Destination")
+                getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)
             )) {
                 return false;
             }
         }
 
         if (hasParam("ValidCard")) {
-            Card moved = (Card) runParams2.get("Card");
+            Card moved = (Card) runParams.get(AbilityKey.Card);
             final Game game = getHostCard().getGame();
             boolean leavesBattlefield = "Battlefield".equals(getParam("Origin"));
             boolean isDiesTrig = leavesBattlefield && "Graveyard".equals(getParam("Destination"));
@@ -121,10 +122,10 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams2.containsKey("Cause") ) {
+            if (!runParams.containsKey(AbilityKey.Cause) ) {
                 return false;
             }
-            SpellAbility cause = (SpellAbility) runParams2.get("Cause");
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             if (cause == null) {
                 return false;
             }
@@ -141,7 +142,7 @@ public class TriggerChangesZone extends Trigger {
             final Card host = hostCard.getGame().getCardState(hostCard);
             final String comparator = condition.length < 2 ? "GE1" : condition[1];
             final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), this);
-            final Card triggered = (Card)runParams2.get("Card"); 
+            final Card triggered = (Card) runParams.get(AbilityKey.Card);
             final int actualValue = CardFactoryUtil.xCount(triggered, host.getSVar(condition[0]));
             if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
                 return false;
@@ -158,7 +159,7 @@ public class TriggerChangesZone extends Trigger {
             final Card card;
             final int rightSide;
             try {
-                card = (Card) runParams2.get("Card");
+                card = (Card) runParams.get(AbilityKey.Card);
                 rightSide = Integer.parseInt(cond.substring(2));
             } catch (NumberFormatException | ClassCastException e) {
                 return false;
@@ -181,7 +182,7 @@ public class TriggerChangesZone extends Trigger {
             // to change zones.
 
             // check if this is triggered by a cost payment & only fire if it isn't a duplicate trigger
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
+            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
             if (currentPayment != null) {  // only if there is an active cost
 
                 // each cost in a payment can trigger the effect for example Sinsiter Concoction has five costs:
@@ -200,7 +201,7 @@ public class TriggerChangesZone extends Trigger {
                 // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
                 // card, rather than keeping track of the host card itself - but it's good enough for now - since there
                 // are no cards with multiple different OncePerEffect triggers.
-                SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams2.get("SpellAbilityStackInstance");
+                SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
 
                 // si == null means the stack is empty
                 return si == null || !si.hasOncePerEffectTrigger(this);

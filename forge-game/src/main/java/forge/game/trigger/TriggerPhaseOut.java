@@ -12,19 +12,20 @@ public class TriggerPhaseOut extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card phaser = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card phaser = (Card) runParams.get(AbilityKey.Card);
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (this.mapParams.get("ValidCard").equals("Card.Self")) {
+        if (hasParam("ValidCard")) {
+            if (getParam("ValidCard").equals("Card.Self")) {
                 // Since Phased out cards aren't visible in .isValid, use a special check here.
                 // NOTE: All Phase Out Triggers should use ValidCard$ Card.Self
                 if (phaser != this.getHostCard()) {
                     return false;
                 }
-            } else if (!phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            } else if (!phaser.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }

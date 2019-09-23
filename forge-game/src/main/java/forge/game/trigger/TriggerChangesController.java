@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * TriggerChangesController class.
@@ -47,19 +49,20 @@ public class TriggerChangesController extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card moved = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card moved = (Card) runParams.get(AbilityKey.Card);
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+        if (hasParam("ValidCard")) {
+            if (!moved.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidOriginalController")) {
-            if (!matchesValid(runParams2.get("OriginalController"), this.mapParams.get("ValidOriginalController").split(","),
+        if (hasParam("ValidOriginalController")) {
+            if (!matchesValid(runParams.get(AbilityKey.OriginalController), getParam("ValidOriginalController").split(","),
                     this.getHostCard())) {
                 return false;
             }

@@ -49,19 +49,20 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-    	final Object a = runParams2.get("Attacker"),
-    			b = runParams2.get("Blocker");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+    	final Object a = runParams.get(AbilityKey.Attacker),
+    			b = runParams.get(AbilityKey.Blocker);
     	if (!(a instanceof Card && b instanceof Card)) {
     		return false;
     	}
 
     	final Card attacker = (Card) a,
     			blocker = (Card) b;
-        if (this.mapParams.containsKey("ValidCard")) {
-        	final String validCard = this.mapParams.get("ValidCard");
+        if (hasParam("ValidCard")) {
+        	final String validCard = getParam("ValidCard");
         	if (validCard.equals("LessPowerThanBlocker")) {
         		if (attacker.getNetPower() >= blocker.getNetPower()) {
         			return false;
@@ -71,8 +72,8 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidBlocker")) {
-        	final String validBlocker = this.mapParams.get("ValidBlocker");
+        if (hasParam("ValidBlocker")) {
+        	final String validBlocker = getParam("ValidBlocker");
         	if (validBlocker.equals("LessPowerThanAttacker")) {
                 if (blocker.getNetPower() >= attacker.getNetPower()) {
                     return false;

@@ -659,7 +659,7 @@ public class CardFactory {
         // set up copied wrapped ability
         SpellAbility trig = t.getOverridingAbility();
         if (trig == null) {
-            trig = AbilityFactory.getAbility(sa.getHostCard().getSVar(t.getMapParams().get("Execute")), sa.getHostCard());
+            trig = AbilityFactory.getAbility(sa.getHostCard().getSVar(t.getParam("Execute")), sa.getHostCard());
         }
         trig.setHostCard(sa.getHostCard());
         trig.setTrigger(true);
@@ -672,7 +672,7 @@ public class CardFactory {
 
         trig.setActivatingPlayer(sa.getActivatingPlayer());
         if (t.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getMapParams().get("TriggerController"), trig).get(0);
+            Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getParam("TriggerController"), trig).get(0);
             trig.setActivatingPlayer(p);
         }
 

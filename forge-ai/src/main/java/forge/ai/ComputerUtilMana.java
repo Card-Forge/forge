@@ -1415,7 +1415,7 @@ public class ComputerUtilMana {
                 for (final ReplacementEffect replacementEffect : replacementEffects) {
                     if (replacementEffect.canReplace(repParams)) {
                         Card crd = replacementEffect.getHostCard();
-                        String repType = crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement"));
+                        String repType = crd.getSVar(replacementEffect.getParam("ManaReplacement"));
                         if (repType.contains("Chosen")) {
                             repType = TextUtil.fastReplace(repType, "Chosen", MagicColor.toShortString(crd.getChosenColor()));
                         }

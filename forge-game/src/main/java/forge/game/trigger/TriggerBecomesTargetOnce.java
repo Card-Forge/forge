@@ -52,21 +52,21 @@ public class TriggerBecomesTargetOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @SuppressWarnings("unchecked")
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getHostCard(), this.mapParams
-                    .get("ValidSource").split(","), this.getHostCard())) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidTarget")) {
-            List<GameObject> targets = (List<GameObject>) runParams2.get("Targets");
+        if (hasParam("ValidTarget")) {
+            List<GameObject> targets = (List<GameObject>) runParams.get(AbilityKey.Targets);
             boolean valid = false;
             for (GameObject b : targets) {
-                if (matchesValid(b, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+                if (matchesValid(b, getParam("ValidTarget").split(","), this.getHostCard())) {
                     valid = true;
                     break;
                 }

@@ -33,17 +33,17 @@ public class TriggerPlanarDice extends Trigger {
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Result")) {
-            PlanarDice cond = PlanarDice.smartValueOf(this.mapParams.get("Result"));
-            if (cond != runParams2.get("Result")) {
+        if (hasParam("Result")) {
+            PlanarDice cond = PlanarDice.smartValueOf(getParam("Result"));
+            if (cond != runParams.get(AbilityKey.Result)) {
                 return false;
             }
         }

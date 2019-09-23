@@ -49,19 +49,20 @@ public class TriggerBlocks extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            String validBlocker = this.mapParams.get("ValidCard");
-            if (!matchesValid(runParams2.get("Blocker"), validBlocker.split(","), this.getHostCard())) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            String validBlocker = getParam("ValidCard");
+            if (!matchesValid(runParams.get(AbilityKey.Blocker), validBlocker.split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidBlocked")) {
-            final String[] validBlockedSplit = this.mapParams.get("ValidBlocked").split(",");
-            final Object a = runParams2.get("Attackers");
+        if (hasParam("ValidBlocked")) {
+            final String[] validBlockedSplit = getParam("ValidBlocked").split(",");
+            final Object a = runParams.get(AbilityKey.Attackers);
             if (!(a instanceof Iterable<?>)) {
             	return false;
             }

@@ -13,17 +13,16 @@ public class TriggerRevealed extends Trigger {
     }
 
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            final Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            final Card moved = (Card) runParams.get(AbilityKey.Card);
+            if (!moved.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("Miracle")) {
-            Boolean madness = (Boolean) runParams2.get("Miracle");
-            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","), getHostCard())) {
+        if (hasParam("Miracle")) {
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }

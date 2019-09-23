@@ -54,14 +54,14 @@ public class TriggerCounterAdded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        final CounterType addedType = (CounterType) runParams2.get("CounterType");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
 
         if (hasParam("ValidCard")) {
-            if (!runParams2.containsKey("Card"))
+            if (!runParams.containsKey(AbilityKey.Card))
                 return false;
 
-            final Card addedTo = (Card) runParams2.get("Card");
+            final Card addedTo = (Card) runParams.get(AbilityKey.Card);
             if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
                 return false;
@@ -69,10 +69,10 @@ public class TriggerCounterAdded extends Trigger {
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!runParams2.containsKey("Player"))
+            if (!runParams.containsKey(AbilityKey.Player))
                 return false;
 
-            final Player addedTo = (Player) runParams2.get("Player");
+            final Player addedTo = (Player) runParams.get(AbilityKey.Player);
             if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
                 return false;
@@ -80,10 +80,10 @@ public class TriggerCounterAdded extends Trigger {
         }
         
         if (hasParam("ValidSource")) {
-            if (!runParams2.containsKey("Source"))
+            if (!runParams.containsKey(AbilityKey.Source))
                 return false;
 
-            final Card source = (Card) runParams2.get("Source");
+            final Card source = (Card) runParams.get(AbilityKey.Source);
 
             if (source == null) {
                 return false;
@@ -101,14 +101,14 @@ public class TriggerCounterAdded extends Trigger {
                 return false;
             }
         }
-        if (hasParam("CounterAmount") && runParams2.containsKey("CounterAmount")) {
+        if (hasParam("CounterAmount") && runParams.containsKey(AbilityKey.CounterAmount)) {
             // this one is for Saga to trigger
             // the right ability for the counters on the card
             final String fullParam = getParam("CounterAmount");
 
             final String operator = fullParam.substring(0, 2);
             final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams2.get("CounterAmount");
+            final int actualAmount = (Integer) runParams.get(AbilityKey.CounterAmount);
 
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;

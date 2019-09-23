@@ -51,12 +51,13 @@ public class TriggerDrawn extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Game game = getHostCard().getGame();
-        final Card draw = ((Card) runParams2.get("Card"));
-        final int number = ((Integer) runParams2.get("Number"));
+        final Card draw = ((Card) runParams.get(AbilityKey.Card));
+        final int number = ((Integer) runParams.get(AbilityKey.Number));
 
         if (hasParam("ValidCard")) {
             if (!draw.isValid(getParam("ValidCard").split(","), getHostCard().getController(), getHostCard(), null)) {

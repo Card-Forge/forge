@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Cycled class.
@@ -60,11 +62,12 @@ public class TriggerCycled extends Trigger {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            return matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            return matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard());
         }
         return true;
