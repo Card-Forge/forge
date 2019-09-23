@@ -45,6 +45,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -1061,6 +1062,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     return false;
                 }
             }
+            if (hasParam("TargetsWithControllerProperty") && entity instanceof Card) {
+                final String prop = getParam("TargetsWithControllerProperty");
+                final Card c = (Card) entity;
+                if (prop.equals("cmcLECardsInGraveyard")
+                        && c.getCMC() > c.getController().getCardsIn(ZoneType.Graveyard).size()) {
+                    return false;
+                }
+            }
             if (hasParam("TargetsWithRelatedProperty") && entity instanceof Card) {
                 final String related = getParam("TargetsWithRelatedProperty");
                 final Card c = (Card) entity;
@@ -1602,6 +1611,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard(), this)) {
             return false;
+        }
+        if (hasParam("TargetsWithControllerProperty")) {
+            final String prop = getParam("TargetsWithControllerProperty");
+            if (prop.equals("cmcLECardsInGraveyard")
+                    && topSA.getHostCard().getCMC() > topSA.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size()) {
+                return false;
+            }
         }
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
