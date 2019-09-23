@@ -64,7 +64,7 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidCard")) {
-            if (!runParams.containsKey("Card"))
+            if (!runParams.containsKey(AbilityKey.Card))
                 return false;
 
             final Card addedTo = (Card) runParams.get(AbilityKey.Card);
@@ -75,7 +75,7 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!runParams.containsKey("Player"))
+            if (!runParams.containsKey(AbilityKey.Player))
                 return false;
 
             final Player addedTo = (Player) runParams.get(AbilityKey.Player);
@@ -86,7 +86,7 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidSource")) {
-            if (!runParams.containsKey("Source"))
+            if (!runParams.containsKey(AbilityKey.Source))
                 return false;
 
             final Player source = (Player) runParams.get(AbilityKey.Source);

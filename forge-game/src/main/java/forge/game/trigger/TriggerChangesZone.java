@@ -122,7 +122,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams.containsKey("Cause") ) {
+            if (!runParams.containsKey(AbilityKey.Cause) ) {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
