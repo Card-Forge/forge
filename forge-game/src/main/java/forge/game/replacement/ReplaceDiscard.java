@@ -43,25 +43,22 @@ public class ReplaceDiscard extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Discard")) {
-            return false;
-        }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Card"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Card"), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), this.getMapParams().get("ValidSource").split(","), this.getHostCard())) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("DiscardFromEffect")) {
+        if (hasParam("DiscardFromEffect")) {
             if (null == runParams.get("Source")) {
                 return false;
             }

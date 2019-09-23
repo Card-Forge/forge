@@ -438,7 +438,7 @@ public class TriggerHandler {
                     }
                 }
 
-                if (t.getMapParams().containsKey("OncePerEffect")) {
+                if (t.hasParam("OncePerEffect")) {
                     SpellAbilityStackInstance si =
                             (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
                     if (si != null) {

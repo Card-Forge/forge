@@ -43,9 +43,6 @@ public class ReplaceDestroy extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Destroy")) {
-            return false;
-        }
         if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;

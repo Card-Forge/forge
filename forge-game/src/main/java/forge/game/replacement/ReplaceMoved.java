@@ -29,9 +29,6 @@ public class ReplaceMoved extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Moved")) {
-            return false;
-        }
         final Player controller = getHostCard().getController();
         final Card affected = (Card) runParams.get("Affected");
 

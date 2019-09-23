@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 
 public class ReplaceDamageEffect extends SpellAbilityEffect {
@@ -21,9 +22,11 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         final Game game = card.getGame();
 
         // outside of Replacement Effect, unwanted result
-        if (!sa.getRootAbility().isReplacementAbility()) {
+        if (!sa.isReplacementAbility()) {
             return;
         }
+
+        final ReplacementType event = sa.getReplacementEffect().getMode();
         
         String varValue = sa.getParamOrDefault("VarName", "1");
 
@@ -58,7 +61,7 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
 
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(params); 
+        ReplacementResult result = game.getReplacementHandler().run(event, params);
         switch (result) {
         case NotReplaced:
         case Updated: {
