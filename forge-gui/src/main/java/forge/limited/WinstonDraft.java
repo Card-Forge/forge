@@ -38,7 +38,7 @@ public class WinstonDraft extends BoosterDraft {
     }
 
     private void initializeWinstonDraft() {
-        this.deck = new Stack<PaperCard>();
+        this.deck = new Stack<>();
         for (int i = 0; i < this.product.size(); i++) {
             final Supplier<List<PaperCard>> supply = this.product.get(i);
             for(int j = 0; j < NUM_PLAYERS; j++) {
@@ -53,7 +53,7 @@ public class WinstonDraft extends BoosterDraft {
         // Create three Winston piles, adding the top card from the Winston deck to start each pile
         this.piles = new ArrayList<>();
         for(int i = 0; i < NUM_PILES; i++) {
-            final List<PaperCard> pile = new ArrayList<PaperCard>();
+            final List<PaperCard> pile = new ArrayList<>();
             pile.add(this.deck.pop());
             this.piles.add(pile);
         }

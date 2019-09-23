@@ -27,6 +27,7 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
+import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
@@ -47,7 +48,7 @@ public class CardZoom extends FOverlay {
     private static boolean showAltState;
 
     public static void show(Object item) {
-        List<Object> items0 = new ArrayList<Object>();
+        List<Object> items0 = new ArrayList<>();
         items0.add(item);
         show(items0, 0, null);
     }
@@ -281,17 +282,17 @@ public class CardZoom extends FOverlay {
 
         if (currentActivateAction != null) {
             g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText("Swipe up to " + currentActivateAction, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
+            g.drawText(Localizer.getInstance().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+        g.drawText(zoomMode ? Localizer.getInstance().getMessage("lblSwipeDownDetailView") : Localizer.getInstance().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
     }
 
     @Override
     protected void doLayout(float width, float height) {
     }
 
-    public static interface ActivateHandler {
+    public interface ActivateHandler {
         String getActivateAction(int index);
         void setSelectedIndex(int index);
         void activate(int index);

@@ -19,7 +19,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
         final boolean redistribute = sa.hasParam("Redistribute");
         final int lifeAmount = redistribute ? 20 : AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Integer> lifetotals = new ArrayList<Integer>();
+        final List<Integer> lifetotals = new ArrayList<>();
         
         if (redistribute) {
             for (final Player p : getTargetPlayers(sa)) {

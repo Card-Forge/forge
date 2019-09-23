@@ -16,7 +16,7 @@ import forge.util.Utils;
 public class FGroupList<E> extends FScrollPane {
     private static final float GROUP_HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
 
-    private final List<ListGroup> groups = new ArrayList<ListGroup>();
+    private final List<ListGroup> groups = new ArrayList<>();
     private FSkinFont font;
     private ListItemRenderer<E> renderer;
 
@@ -38,7 +38,7 @@ public class FGroupList<E> extends FScrollPane {
 
     private void initialize() {
         font = FSkinFont.get(14);
-        renderer = new DefaultListItemRenderer<E>();
+        renderer = new DefaultListItemRenderer<>();
     }
 
     public void addGroup(String groupName) {
@@ -166,7 +166,7 @@ public class FGroupList<E> extends FScrollPane {
 
     private class ListGroup extends FContainer {
         private final FLabel header;
-        private final List<ListItem> items = new ArrayList<ListItem>();
+        private final List<ListItem> items = new ArrayList<>();
 
         private boolean isCollapsed;
 

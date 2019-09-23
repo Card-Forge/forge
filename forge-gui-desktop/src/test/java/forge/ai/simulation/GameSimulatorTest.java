@@ -2036,4 +2036,61 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(dimirdgAfterCopy2.isFlipped());
         assertFalse(dimirdgAfterCopy2.getType().isLegendary());
     }
+
+    public void testStaticMultiPump() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card c1 = addCard("Creakwood Liege", p);
+        Card c2 = addCard("Creakwood Liege", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        // update stats state
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(c1.getNetPower() == 4);
+        assertTrue(c1.getNetToughness() == 4);
+
+        assertTrue(c2.getNetPower() == 4);
+        assertTrue(c2.getNetToughness() == 4);
+    }
+
+    public void testPathtoExileActofTreason() {
+        Game game = initAndCreateGame();
+        Player p0 = game.getPlayers().get(0);
+        Player p1 = game.getPlayers().get(1);
+        Card serraAngel = addCardToZone("Serra Angel", p1, ZoneType.Battlefield);
+        Card actOfTreason = addCardToZone("Act of Treason", p0, ZoneType.Hand);
+        Card pathToExile = addCardToZone("Path to Exile", p0, ZoneType.Hand);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Plateau", p0, ZoneType.Battlefield);
+        }
+        addCardToZone("Island", p1, ZoneType.Library);
+        addCardToZone("Forest", p0, ZoneType.Library);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p0);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p0);
+        Game simGame = sim.getSimulatedGameState();
+
+        SpellAbility actSA = actOfTreason.getSpellAbilities().get(0);
+        assertNotNull(actSA);
+        actSA.setActivatingPlayer(p0);
+        actSA.setTargetCard(serraAngel);
+        sim.simulateSpellAbility(actSA);
+        simGame.getAction().checkStateEffects(true);
+
+        SpellAbility pathSA = pathToExile.getSpellAbilities().get(0);
+        assertNotNull(pathSA);
+        pathSA.setActivatingPlayer(p0);
+        pathSA.setTargetCard(serraAngel);
+        sim.simulateSpellAbility(pathSA);
+        simGame.getAction().checkStateEffects(true);
+
+        int numForest = countCardsWithName(simGame, "Forest");
+        assertTrue(numForest == 1);
+        assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Battlefield).size());
+    }
 }

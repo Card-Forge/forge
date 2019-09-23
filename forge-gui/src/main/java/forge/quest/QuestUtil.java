@@ -323,7 +323,7 @@ public class QuestUtil {
         view.getCbxMatchLength().removeAllItems();
         boolean activeCharms = false;
         StringBuilder matchLength = new StringBuilder();
-        matchLength.append(localizer.getMessage("lblMatchBestof") + " ").append(qCtrl.getMatchLength());
+        matchLength.append(localizer.getMessage("lblMatchBestof")).append(" ").append(qCtrl.getMatchLength());
         if (qCtrl.getAssets().hasItem(QuestItemType.CHARM_VIM)) {
             view.getCbxMatchLength().addItem(localizer.getMessage("lblMatchBestOf1"));
             activeCharms = true;
@@ -677,7 +677,7 @@ public class QuestUtil {
     }
 
     public static String getDeckConformanceProblems(Deck deck){
-        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);;
+        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
 
         if(errorMessage != null) return errorMessage; //return immediately if the deck does not conform to quest requirements
 

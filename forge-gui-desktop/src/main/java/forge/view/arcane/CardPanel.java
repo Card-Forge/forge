@@ -21,6 +21,7 @@ import forge.CachedCardImage;
 import forge.FThreads;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardTranslation;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -79,7 +80,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private final CMatchUI matchUI;
     private CardView card;
     private CardPanel attachedToPanel;
-    private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
+    private List<CardPanel> attachedPanels = new ArrayList<>();
     private List<CardPanel> stack;
     private boolean tapped;
     private double tappedAngle = 0;
@@ -690,10 +691,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        titleText.setText(card.getCurrentState().getName());
+        titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
 
         final int damage = card.getDamage();
-        damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
+        damageText.setText(damage > 0 ? "\u00BB " + damage + " \u00AB" : "");
 
         // Card Id overlay
         cardIdText.setText(card.getCurrentState().getDisplayId());

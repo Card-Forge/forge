@@ -30,7 +30,7 @@ public class VField extends FContainer {
     }
 
     public Iterable<CardAreaPanel> getCardPanels() {
-        List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
+        List<CardAreaPanel> cardPanels = new ArrayList<>();
         for (CardAreaPanel cardPanel : row1.getCardPanels()) {
             cardPanels.add(cardPanel);
         }
@@ -60,9 +60,9 @@ public class VField extends FContainer {
                 cardPanel.setPrevPanelInStack(null);
             }
 
-            List<CardView> creatures = new ArrayList<CardView>();
-            List<CardView> lands = new ArrayList<CardView>();
-            List<CardView> otherPermanents = new ArrayList<CardView>();
+            List<CardView> creatures = new ArrayList<>();
+            List<CardView> lands = new ArrayList<>();
+            List<CardView> otherPermanents = new ArrayList<>();
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);

@@ -57,7 +57,7 @@ public class CardManager extends ItemManager<PaperCard> {
     }
 
     public static AdvancedSearchFilter<PaperCard> createAdvancedSearchFilter(final ItemManager<? super PaperCard> itemManager) {
-        return new AdvancedSearchFilter<PaperCard>(itemManager);
+        return new AdvancedSearchFilter<>(itemManager);
     }
 
     @Override

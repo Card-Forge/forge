@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -93,15 +94,15 @@ public class TriggerDamagePreventedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
-        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
+        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Target: ").append(sa.getTriggeringObject("Target")).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
+        sb.append("Damage Target: ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
+        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 }

@@ -181,7 +181,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
-                    final Card copyInPlay = game.getAction().moveToPlay(t, sa, null);
+                    final Card copyInPlay = game.getAction().moveToPlay(t, sa);
 
                     if (copyInPlay.getZone() != null) {
                         triggerList.put(ZoneType.None, copyInPlay.getZone().getZoneType(), copyInPlay);
@@ -192,7 +192,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     copyInPlay.setCloneOrigin(host);
                     if (!pumpKeywords.isEmpty()) {
-                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, timestamp);
+                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp);
                     }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {

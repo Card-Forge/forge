@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -49,13 +50,13 @@ public class TriggerCycled extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cycled: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Cycled: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 
@@ -63,10 +64,8 @@ public class TriggerCycled extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard());
         }
         return true;
     }

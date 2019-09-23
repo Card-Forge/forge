@@ -100,7 +100,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             	tcs.add(ai);
                 chance = true;
             }
-            final List<Card> threatenedTargets = new ArrayList<Card>();
+            final List<Card> threatenedTargets = new ArrayList<>();
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard, sa);
             targetables = CardLists.getTargetableCards(targetables, sa);

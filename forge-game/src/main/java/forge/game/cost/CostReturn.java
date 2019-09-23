@@ -102,14 +102,9 @@ public class CostReturn extends CostPartWithList {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
 
             final Integer amount = this.convertAmount();
-            if (!needsAnnoucement && amount != null && typeList.size() < amount) {
-                return false;
-            }
-        } else if (!source.isInPlay()) {
-            return false;
-        }
+            return needsAnnoucement || amount == null || typeList.size() >= amount;
+        } else return source.isInPlay();
 
-        return true;
     }
 
     /* (non-Javadoc)

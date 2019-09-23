@@ -189,7 +189,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getBoosterMustContain() { return boosterMustContain; }
     public CardInSet[] getCards() { return cards; }
 
-    public Map<String, Integer> getTokens() { return tokenNormalized; };
+    public Map<String, Integer> getTokens() { return tokenNormalized; }
 
     public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
         @Override

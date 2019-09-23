@@ -66,7 +66,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final boolean mirror;
 
     // Computed in layout.
-    private List<CardStackRow> rows = new ArrayList<CardStackRow>();
+    private List<CardStackRow> rows = new ArrayList<>();
     private int cardWidth, cardHeight;
     private int playAreaWidth, playAreaHeight;
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
@@ -373,7 +373,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private List<CardStackRow> tryArrangePilesOfWidth(final CardStackRow lands, final CardStackRow tokens, final CardStackRow creatures, CardStackRow others) {
-        List<CardStackRow> template = new ArrayList<PlayArea.CardStackRow>();
+        List<CardStackRow> template = new ArrayList<>();
         
         int afterFirstRow;
 
@@ -400,7 +400,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int cntOthers = others.size();
 
         // Copy the template for the case 1st approach won't work
-        final List<CardStackRow> templateCopy = new ArrayList<CardStackRow>(template.size());
+        final List<CardStackRow> templateCopy = new ArrayList<>(template.size());
         for (final CardStackRow row : template) {
             templateCopy.add((CardStackRow) row.clone());
         }
@@ -554,7 +554,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 for (CardPanel p : stack) {
                     if (p != panel && p.getCard() != null && p.getStack() == stack) {
                         if (otherCardViewsToSelect == null) {
-                            otherCardViewsToSelect = new ArrayList<CardView>();
+                            otherCardViewsToSelect = new ArrayList<>();
                         }
                         otherCardViewsToSelect.add(p.getCard());
                     }
@@ -628,10 +628,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
 
-        final List<CardView> toAdd = new ArrayList<CardView>(modelCopy);
+        final List<CardView> toAdd = new ArrayList<>(modelCopy);
         toAdd.removeAll(oldCards);
 
-        final List<CardPanel> newPanels = new ArrayList<CardPanel>();
+        final List<CardPanel> newPanels = new ArrayList<>();
         for (final CardView card : toAdd) {
             final CardPanel placeholder = new CardPanel(getMatchUI(), card);
             placeholder.setDisplayEnabled(false);

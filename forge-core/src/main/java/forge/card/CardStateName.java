@@ -9,6 +9,7 @@ public enum CardStateName {
     Meld,
     LeftSplit,
     RightSplit,
+    Adventure,
 
     ;
 

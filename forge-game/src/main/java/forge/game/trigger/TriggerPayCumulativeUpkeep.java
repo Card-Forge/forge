@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -69,14 +70,13 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("PayingMana", this.getRunParams().get("PayingMana"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.PayingMana);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Mana: ").append(sa.getTriggeringObject("PayingMana"));
+        sb.append("Mana: ").append(sa.getTriggeringObject(AbilityKey.PayingMana));
         return sb.toString();
     }
 }

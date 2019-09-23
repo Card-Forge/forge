@@ -1,6 +1,7 @@
 package forge.screens.settings;
 
 import forge.download.*;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -19,48 +20,49 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
 public class FilesPage extends TabPage<SettingsScreen> {
-    private final FGroupList<FilesItem> lstItems = add(new FGroupList<FilesItem>());
+    private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
+    private final Localizer localizer = Localizer.getInstance();
 
     protected FilesPage() {
-        super("Files", FSkinImage.OPEN);
+        super(Localizer.getInstance().getMessage("lblFiles"), FSkinImage.OPEN);
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
-        lstItems.addGroup("Content Downloaders");
-        lstItems.addGroup("Storage Locations");
+        lstItems.addGroup(localizer.getMessage("ContentDownloaders"));
+        lstItems.addGroup(localizer.getMessage("lblStorageLocations"));
         //lstItems.addGroup("Data Import");
 
         //content downloaders
-        lstItems.addItem(new ContentDownloader("Download LQ Card Pictures",
-                "Download default card picture for each card.") {
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadPics"),
+                localizer.getMessage("lblDownloadPics")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPicturesLQ();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader("Download LQ Set Pictures",
-                "Download all pictures of each card (one for each set the card appeared in)") {
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSetPics"),
+                localizer.getMessage("lblDownloadSetPics")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadSetPicturesLQ();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader("Download Quest Images",
-                "Download tokens and icons used in Quest mode.") {
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadQuestImages"),
+                localizer.getMessage("lblDownloadQuestImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadQuestImages();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader("Download Achievement Images",
-                "Download achievement images to really make your trophies stand out.") {
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadAchievementImages"),
+                localizer.getMessage("lblDownloadAchievementImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadAchievementImages();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader("Download Card Prices",
-                "Download up-to-date price list for in-game card shops.") {
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadPrices"),
+                localizer.getMessage("lblDownloadPrices")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPrices();
@@ -68,19 +70,19 @@ public class FilesPage extends TabPage<SettingsScreen> {
         }, 0);
 
         //storage locations
-        final StorageOption cardPicsOption = new StorageOption("Card Pics Location", ForgeProfileProperties.getCardPicsDir()) {
+        final StorageOption cardPicsOption = new StorageOption(localizer.getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setCardPicsDir(newDir);
             }
         };
-        final StorageOption decksOption = new StorageOption("Decks Location", ForgeProfileProperties.getDecksDir()) {
+        final StorageOption decksOption = new StorageOption(localizer.getMessage("lblDecksLocation"), ForgeProfileProperties.getDecksDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setDecksDir(newDir);
             }
         };
-        lstItems.addItem(new StorageOption("Data Location (e.g. Settings and Quests)", ForgeProfileProperties.getUserDir()) {
+        lstItems.addItem(new StorageOption(localizer.getMessage("lblDataLocation"), ForgeProfileProperties.getUserDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setUserDir(newDir);
@@ -89,7 +91,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 decksOption.updateDir(ForgeProfileProperties.getDecksDir());
             }
         }, 1);
-        lstItems.addItem(new StorageOption("Image Cache Location", ForgeProfileProperties.getCacheDir()) {
+        lstItems.addItem(new StorageOption(localizer.getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setCacheDir(newDir);
@@ -171,13 +173,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            FFileChooser.show("Select " + label, ChoiceType.GetDirectory, description, new Callback<String>() {
+            FFileChooser.show(localizer.getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, new Callback<String>() {
                 @Override
                 public void run(String result) {
                     if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
                     updateDir(result);
                     onDirectoryChanged(result);
-                    FOptionPane.showMessageDialog("You'll need to restart Forge for this change to take effect. Be sure to move any necessary files to the new location before you do.", "Restart Required", FOptionPane.INFORMATION_ICON);
+                    FOptionPane.showMessageDialog(localizer.getMessage("lblRestartForgeMoveFilesNewLocation"), localizer.getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
                 }
             });
         }

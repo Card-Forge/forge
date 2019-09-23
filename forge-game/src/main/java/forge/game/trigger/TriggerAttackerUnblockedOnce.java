@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -84,15 +85,14 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("AttackingPlayer", this.getRunParams().get("AttackingPlayer"));
-        sa.setTriggeringObject("Defenders", this.getRunParams().get("Defenders"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.AttackingPlayer, AbilityKey.Defenders);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("AttackingPlayer: ").append(sa.getTriggeringObject("AttackingPlayer"));
-        sb.append("Defenders: ").append(sa.getTriggeringObject("Defenders"));
+        sb.append("AttackingPlayer: ").append(sa.getTriggeringObject(AbilityKey.AttackingPlayer));
+        sb.append("Defenders: ").append(sa.getTriggeringObject(AbilityKey.Defenders));
         return sb.toString();
     }
 }

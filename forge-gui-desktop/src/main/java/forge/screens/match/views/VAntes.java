@@ -52,7 +52,7 @@ public class VAntes implements IVDoc<CAntes> {
 
     private final JPanel pnl = new JPanel();
     private final FScrollPane scroller = new FScrollPane(pnl, false);
-    private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
+    private final SortedSet<AntePanel> allAntes = new TreeSet<>();
 
     //========== Constructor
     public VAntes(final CAntes controller) {

@@ -51,12 +51,9 @@ public class DrainManaAi extends SpellAbilityAi {
             } else {
                 final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
-                if (!defined.contains(opp)) {
-                    return false;
-                }
+                return defined.contains(opp);
             }
 
-            return true;
         } else {
             sa.resetTargets();
             sa.getTargets().add(opp);

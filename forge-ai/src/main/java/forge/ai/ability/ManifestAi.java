@@ -19,6 +19,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -97,12 +98,11 @@ public class ManifestAi extends SpellAbilityAi {
         topCopy.setManifested(true);
 
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "Moved");
         repParams.put("Affected", topCopy);
         repParams.put("Origin", card.getZone().getZoneType());
         repParams.put("Destination", ZoneType.Battlefield);
         repParams.put("Source", sa.getHostCard());
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.Other);
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other);
         if (!list.isEmpty()) {
             return false;
         }
@@ -185,10 +185,7 @@ public class ManifestAi extends SpellAbilityAi {
         CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
-                if (shouldManyfest(input, ai, sa)) {
-                    return false;
-                }
-                return true;
+                return !shouldManyfest(input, ai, sa);
             }
         });
         if (!filtered.isEmpty()) {

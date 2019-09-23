@@ -24,7 +24,7 @@ public final class ForgeMenu {
 
     private JPopupMenu popupMenu;
     private IMenuProvider provider;
-    private static HashMap<KeyStroke, JMenuItem> activeShortcuts = new HashMap<KeyStroke, JMenuItem>();
+    private static HashMap<KeyStroke, JMenuItem> activeShortcuts = new HashMap<>();
 
     public ForgeMenu() {
         refresh();

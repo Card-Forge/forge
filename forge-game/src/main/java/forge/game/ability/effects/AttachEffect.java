@@ -166,7 +166,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
         Player p = source.getController();
         if (tgt.canTgtPlayer()) {
-            final FCollection<Player> players = new FCollection<Player>();
+            final FCollection<Player> players = new FCollection<>();
 
             for (Player player : game.getPlayers()) {
                 if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, null)) {

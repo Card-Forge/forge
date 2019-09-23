@@ -57,9 +57,7 @@ public class CostReveal extends CostPartWithList {
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
-            if (!source.isInZone(ZoneType.Hand)) {
-                return false;
-            }
+            return source.isInZone(ZoneType.Hand);
         } else if (this.getType().equals("Hand")) {
             return true;
         } else if (this.getType().equals("SameColor")) {
@@ -85,14 +83,11 @@ public class CostReveal extends CostPartWithList {
                 handList = modifiedHand;
             }
             handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
-            if ((amount != null) && (amount > handList.size())) {
-                // not enough cards in hand to pay
-                return false;
-            }
+            // not enough cards in hand to pay
+            return (amount == null) || (amount <= handList.size());
             //System.out.println("revealcost - " + amount + type + handList);
         }
 
-        return true;
     }
 
     @Override

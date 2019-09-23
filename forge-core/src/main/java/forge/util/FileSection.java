@@ -50,7 +50,7 @@ public class FileSection {
      * Instantiates a new file section.
      */
     protected FileSection() {
-        this(new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER));
+        this(new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
     }
 
     protected FileSection(Map<String, String> lines0) {
@@ -71,7 +71,7 @@ public class FileSection {
     }
     
     public static Map<String, String> parseToMap(final String line, final String kvSeparator, final String pairSeparator) {
-        Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         if (!StringUtils.isEmpty(line)) {
             final String[] pairs = line.split(Pattern.quote(pairSeparator));
             final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
@@ -211,7 +211,7 @@ public class FileSection {
      */
     @SuppressWarnings("unchecked")
     public static Map<String, List<String>> parseSections(final List<String> source) {
-        final Map<String, List<String>> result = new TreeMap<String, List<String>>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, List<String>> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         String currentSection = "";
         List<String> currentList = null;
 
@@ -234,7 +234,7 @@ public class FileSection {
                 currentList = null;
             } else {
                 if (currentList == null) {
-                    currentList = new ArrayList<String>();
+                    currentList = new ArrayList<>();
                 }
                 currentList.add(st);
             }

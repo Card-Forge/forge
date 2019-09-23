@@ -31,7 +31,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     protected GameFormat format;
     private String selectedFormat;
     private boolean preventHandling = false;
-    private FComboBox<Object> cbxFormats = new FComboBox<Object>();
+    private FComboBox<Object> cbxFormats = new FComboBox<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -122,8 +122,8 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     }
 
     private class MultiSetSelect extends FScreen {
-        private final Set<CardEdition> selectedSets = new HashSet<CardEdition>();
-        private final FGroupList<CardEdition> lstSets = add(new FGroupList<CardEdition>());
+        private final Set<CardEdition> selectedSets = new HashSet<>();
+        private final FGroupList<CardEdition> lstSets = add(new FGroupList<>());
 
         private MultiSetSelect() {
             super("Choose Sets");
@@ -177,8 +177,8 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         @Override
         public void onClose(Callback<Boolean> canCloseCallback) {
             if (selectedSets.size() > 0) {
-                List<String> setCodes = new ArrayList<String>();
-                List<CardEdition> sortedSets = new ArrayList<CardEdition>(selectedSets);
+                List<String> setCodes = new ArrayList<>();
+                List<CardEdition> sortedSets = new ArrayList<>(selectedSets);
                 Collections.sort(sortedSets);
                 for (CardEdition set : sortedSets) {
                     setCodes.add(set.getCode());

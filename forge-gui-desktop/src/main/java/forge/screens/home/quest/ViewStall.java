@@ -73,7 +73,7 @@ public class ViewStall extends JPanel {
         this.pnlInventory = new JPanel();
         this.scrInventory = new FScrollPane(this.pnlInventory, false);
         this.parentView = v0;
-        this.lstItemPanels = new ArrayList<ViewItem>();
+        this.lstItemPanels = new ArrayList<>();
 
         // Component styling
         this.setOpaque(false);

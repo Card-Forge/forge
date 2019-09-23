@@ -7,10 +7,10 @@ import java.util.Map;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -54,8 +54,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game) {
         if (!isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", new CardZoneTable(this));
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, new CardZoneTable(this));
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
     }

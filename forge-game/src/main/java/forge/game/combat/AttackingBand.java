@@ -65,7 +65,7 @@ public class AttackingBand {
     
     public boolean canJoinBand(Card card) {
         // Trying to join an existing band, attackers should be non-empty and card should exist
-        List<Card> newBand = new ArrayList<Card>(attackers);
+        List<Card> newBand = new ArrayList<>(attackers);
         if (card != null) {
             newBand.add(card);
         }

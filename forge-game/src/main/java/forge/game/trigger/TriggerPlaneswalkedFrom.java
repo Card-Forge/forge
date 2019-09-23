@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
@@ -52,13 +53,13 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Cards", this.getRunParams().get("Cards"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Cards);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Planeswalked From: ").append(sa.getTriggeringObject("Cards"));
+        sb.append("Planeswalked From: ").append(sa.getTriggeringObject(AbilityKey.Cards));
         return sb.toString();
     }
 

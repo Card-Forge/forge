@@ -160,7 +160,7 @@ public enum CSubmenuDraft implements ICDoc {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));

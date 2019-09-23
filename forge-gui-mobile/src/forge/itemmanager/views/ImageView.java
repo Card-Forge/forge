@@ -30,6 +30,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.*;
@@ -55,7 +56,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
-    private final List<Integer> selectedIndices = new ArrayList<Integer>();
+    private final List<Integer> selectedIndices = new ArrayList<>();
     private int columnCount = 4;
     private float scrollHeight = 0;
     private ColumnDef pileBy = null;
@@ -63,8 +64,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private boolean updatingLayout;
     private float totalZoomAmount;
-    private final List<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
-    private final List<Group> groups = new ArrayList<Group>();
+    private final List<ItemInfo> orderedItems = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
 
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;
@@ -135,8 +136,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>("Groups: ");
-    private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>("Piles: ");
+    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>("Groups: ");
+    private final FComboBox<Object> cbPileByOptions = new FComboBox<>("Piles: ");
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -358,7 +359,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         otherItems = groups.get(groups.size() - 1);
                     }
                     else {
-                        otherItems = new Group("Other");
+                        otherItems = new Group(Localizer.getInstance().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
                     }
@@ -424,7 +425,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (forRefresh && pileBy != null) { //refresh piles if needed
                 //use TreeMap to build pile set so iterating below sorts on key
                 ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
-                Map<Comparable<?>, Pile> piles = new TreeMap<Comparable<?>, Pile>();
+                Map<Comparable<?>, Pile> piles = new TreeMap<>();
                 for (ItemInfo itemInfo : group.items) {
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
                     if (!piles.containsKey(key)) {
@@ -433,9 +434,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     piles.get(key).items.add(itemInfo);
                 }
                 group.piles.clear();
-                for (Pile pile : piles.values()) {
-                    group.piles.add(pile);
-                }
+                group.piles.addAll(piles.values());
             }
 
             groupY = y;
@@ -761,8 +760,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private class Group extends FScrollPane {
-        private final List<ItemInfo> items = new ArrayList<ItemInfo>();
-        private final List<Pile> piles = new ArrayList<Pile>();
+        private final List<ItemInfo> items = new ArrayList<>();
+        private final List<Pile> piles = new ArrayList<>();
         private final String name;
         private boolean isCollapsed;
         private float scrollWidth;
@@ -879,7 +878,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private class Pile extends FDisplayObject {
-        private final List<ItemInfo> items = new ArrayList<ItemInfo>();
+        private final List<ItemInfo> items = new ArrayList<>();
 
         @Override
         public void draw(Graphics g) {

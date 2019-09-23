@@ -17,7 +17,7 @@ import forge.item.PaperCard;
 public class XmlWriter {
     private final Document document;
     private final String filename;
-    private final Stack<Element> parentElements = new Stack<Element>();
+    private final Stack<Element> parentElements = new Stack<>();
 
     private Element currentElement;
 

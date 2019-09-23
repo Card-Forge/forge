@@ -25,6 +25,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -170,8 +171,7 @@ public class ComputerUtilMana {
                         }
 
                         return ability1.compareTo(ability2);
-                    }
-                    else {
+                    } else {
                         return preOrder;
                     }
                 }
@@ -344,6 +344,10 @@ public class ComputerUtilMana {
             payMultipleMana(cost, manaProduced, ai);
 
             // remove from available lists
+            /*
+             * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+             * causes Android build not to compile
+             * */
             Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
             while (itSa.hasNext()) {
                 SpellAbility srcSa = itSa.next();
@@ -362,7 +366,7 @@ public class ComputerUtilMana {
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
-        List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
+        List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         int testEnergyPool = ai.getCounters(CounterType.ENERGY);
 
@@ -487,6 +491,10 @@ public class ComputerUtilMana {
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
+                /*
+                 * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+                 * causes Android build not to compile
+                 * */
                 Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
                 while (itSa.hasNext()) {
                     SpellAbility srcSa = itSa.next();
@@ -517,6 +525,10 @@ public class ComputerUtilMana {
                 
                 if (hasConverge) {	// hack to prevent converge re-using sources
                 	// remove from available lists
+                    /*
+                    * Refactoring this code to sourcesForShards.values().removeIf((SpellAbility srcSa) -> srcSa.getHostCard().equals(saPayment.getHostCard()));
+                    * causes Android build not to compile
+                    * */
 	                Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
 	                while (itSa.hasNext()) {
 	                    SpellAbility srcSa = itSa.next();
@@ -880,10 +892,12 @@ public class ComputerUtilMana {
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
-            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
-        } else if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai)) && (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP)) {
-            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
-            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai))) {
+                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
+                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            }
+            else
+                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
         } else {
             if ((AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK)) ||
                     (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK))) {
@@ -1346,12 +1360,13 @@ public class ComputerUtilMana {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
-        List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
+        List<ReplacementEffect> replacementEffects = new ArrayList<>();
         for (final Player p : game.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck(game)
-                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.getMode() == ReplacementType.ProduceMana
+                            && replacementEffect.hasParam("ManaReplacement")
                             && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
                         replacementEffects.add(replacementEffect);
                     }
@@ -1392,7 +1407,6 @@ public class ComputerUtilMana {
 
                 // setup produce mana replacement effects
                 final Map<String, Object> repParams = new HashMap<>();
-                repParams.put("Event", "ProduceMana");
                 repParams.put("Mana", mp.getOrigProduced());
                 repParams.put("Affected", sourceCard);
                 repParams.put("Player", ai);
@@ -1552,7 +1566,7 @@ public class ComputerUtilMana {
      * @return map between creatures and shards to convoke
      */
     public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean improvise) {
-        final Map<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
+        final Map<Card, ManaCostShard> convoke = new HashMap<>();
         Card convoked = null;
         if (!improvise) {
             for (ManaCostShard toPay : cost) {

@@ -20,13 +20,13 @@ package forge.game.combat;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -59,7 +59,7 @@ import java.util.Map;
 public class CombatUtil {
 
     public static FCollectionView<GameEntity> getAllPossibleDefenders(final Player playerWhoAttacks) {
-        final FCollection<GameEntity> defenders = new FCollection<GameEntity>();
+        final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
             final CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS);
@@ -305,19 +305,19 @@ public class CombatUtil {
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
         // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Attacker", c);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Attacker, c);
         final List<Card> otherAttackers = combat.getAttackers();
         otherAttackers.remove(c);
-        runParams.put("OtherAttackers", otherAttackers);
-        runParams.put("Attacked", combat.getDefenderByAttacker(c));
-        runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(c));
-        runParams.put("Defenders", combat.getDefenders());
+        runParams.put(AbilityKey.OtherAttackers, otherAttackers);
+        runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
+        runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
+        runParams.put(AbilityKey.Defenders, combat.getDefenders());
         game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().setAttackedWithCreatureThisTurn(true);
+        c.getController().addCreaturesAttackedThisTurn(c);
         c.getController().incrementAttackersDeclaredThisTurn();
 
         if (combat.getDefenderByAttacker(c) != null && combat.getDefenderByAttacker(c) instanceof Player) {
@@ -426,26 +426,15 @@ public class CombatUtil {
         }
 
         final List<Card> list = blocker.getController().getCreaturesInPlay();
-        if (list.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
-            return false;
-        }
-
-        return true;
+        return list.size() >= 2 || !blocker.hasKeyword("CARDNAME can't attack or block alone.");
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
-        if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+        if (blockedBy.isEmpty() || blocker.canBlockAny()) {
             return true;
         }
-        int canBlockMore = numberOfAdditionalCreaturesCanBlock(blocker);
+        int canBlockMore = blocker.canBlockAdditional();
         return canBlockMore >= blockedBy.size();
-    }
-
-    public static int numberOfAdditionalCreaturesCanBlock(final Card blocker) {
-        // If Wizards makes a few more of these, we should really just make a generic version
-        return blocker.getAmountOfKeyword("CARDNAME can block an additional creature each combat.") +
-                blocker.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99 +
-                blocker.getAmountOfKeyword("CARDNAME can block an additional seven creatures each combat.") * 7;
     }
 
     // can the attacker be blocked at all?
@@ -500,8 +489,7 @@ public class CombatUtil {
 
         // Landwalk
         if (isUnblockableFromLandwalk(attacker, defender)) {
-            if (CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") == 0)
-            	return false;
+            return CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") != 0;
         }
 
         return true;
@@ -518,7 +506,7 @@ public class CombatUtil {
         IGNORE_LANDWALK_KEYWORDS = new String[size];
         for (int i = 0; i < size; i++) {
             final String basic = MagicColor.Constant.BASIC_LANDS.get(i);
-            final String landwalk = basic + "walk";;
+            final String landwalk = basic + "walk";
             LANDWALK_KEYWORDS[i] = landwalk;
             SNOW_LANDWALK_KEYWORDS[i] = "Snow " + landwalk.toLowerCase();
             IGNORE_LANDWALK_KEYWORDS[i] = "May be blocked as though it doesn't have " + landwalk + ".";
@@ -1053,7 +1041,7 @@ public class CombatUtil {
             for (KeywordInterface inst : blocker.getKeywords()) {
                 String k = inst.getOriginal();
                 if (k.startsWith("IfReach")) {
-                    String n[] = k.split(":");
+                    String[] n = k.split(":");
                     if (attacker.getType().hasCreatureType(n[1])) {
                         stillblock = true;
                         break;  
@@ -1114,9 +1102,7 @@ public class CombatUtil {
                 System.out.println("Warning: it was impossible to deduce the defending player in CombatUtil#canAttackerBeBlockedWithAmount, returning 'true' (safest default).");
                 return true;
             }
-            if (amount < defender.getCreaturesInPlay().size()) {
-                return false;
-            }
+            return amount >= defender.getCreaturesInPlay().size();
         }
 
         return true;

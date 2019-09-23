@@ -222,6 +222,6 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
             throw new ClassCastException("Tried to compare a Puzzle object to a non-Puzzle object.");
         }
         
-        return getName().compareTo(((Puzzle)pzl).getName());
+        return getName().compareTo(pzl.getName());
     }
 }

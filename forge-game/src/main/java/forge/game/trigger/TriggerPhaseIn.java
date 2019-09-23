@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -17,10 +18,8 @@ public class TriggerPhaseIn extends Trigger {
         final Card phaser = (Card) runParams2.get("Card");
 
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+            return phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null);
         }
 
         return true;
@@ -29,13 +28,13 @@ public class TriggerPhaseIn extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Phased In: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Phased In: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 }

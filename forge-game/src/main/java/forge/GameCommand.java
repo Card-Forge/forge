@@ -27,7 +27,7 @@ package forge;
  */
 public interface GameCommand extends java.io.Serializable, Runnable {
     /** Constant <code>Blank</code>. */
-    public final GameCommand BLANK = new GameCommand() {
+    GameCommand BLANK = new GameCommand() {
 
         private static final long serialVersionUID = 2689172297036001710L;
 

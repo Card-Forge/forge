@@ -16,6 +16,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 
@@ -166,13 +167,12 @@ public class TokenInfo {
         Card proto = prototype;
 
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "CreateToken");
         repParams.put("Affected", player);
         repParams.put("Token", prototype);
         repParams.put("TokenNum", multiplier);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (game.getReplacementHandler().run(repParams)) {
+        switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
@@ -320,7 +320,7 @@ public class TokenInfo {
                 if (!CardUtil.isKeywordModifiable(o)) {
                     continue;
                 }
-                String r = new String(o);
+                String r = o;
                 // replace types
                 for (final Map.Entry<String, String> e : typeMap.entrySet()) {
                     final String key = e.getKey();

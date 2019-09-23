@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -67,15 +68,14 @@ public class TriggerDestroyed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Causer", this.getRunParams().get("Causer"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Causer);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Destroyed: ").append(sa.getTriggeringObject("Card")).append(", ");
-        sb.append("Destroyer: ").append(sa.getTriggeringObject("Causer"));
+        sb.append("Destroyed: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append("Destroyer: ").append(sa.getTriggeringObject(AbilityKey.Causer));
         return sb.toString();
     }
 }

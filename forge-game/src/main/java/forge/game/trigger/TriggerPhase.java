@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -50,10 +51,8 @@ public class TriggerPhase extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+                    this.getHostCard());
         }
         return true;
     }
@@ -61,13 +60,13 @@ public class TriggerPhase extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Phase: ").append(sa.getTriggeringObject("Player"));
+        sb.append("Phase: ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

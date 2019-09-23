@@ -145,8 +145,8 @@ public class QuestWorld implements Comparable<QuestWorld>{
             String useDir = null;
             GameFormatQuest useFormat = null;
 
-            final List<String> sets = new ArrayList<String>();
-            final List<String> bannedCards = new ArrayList<String>(); // if both empty, no format
+            final List<String> sets = new ArrayList<>();
+            final List<String> bannedCards = new ArrayList<>(); // if both empty, no format
 
             String key, value;
             String[] pieces = line.split("\\|");
@@ -234,7 +234,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     }
 
     public static Set<QuestWorld> getAllQuestWorldsOfCard(PaperCard card) {
-        Set<QuestWorld> result = new HashSet<QuestWorld>();
+        Set<QuestWorld> result = new HashSet<>();
         for (QuestWorld qw : FModel.getWorlds()) {
             GameFormat format = qw.getFormat();
             if (format == null) {
@@ -248,7 +248,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     }
 
     public static Set<QuestWorld> getAllQuestWorldsOfDeck(Deck deck) {
-        Set<QuestWorld> result = new HashSet<QuestWorld>();
+        Set<QuestWorld> result = new HashSet<>();
         for (QuestWorld qw : FModel.getWorlds()) {
             GameFormat format = qw.getFormat();
             if (format == null) {

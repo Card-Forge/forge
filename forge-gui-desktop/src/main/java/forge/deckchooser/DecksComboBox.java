@@ -27,9 +27,9 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
 
     public void refresh(final DeckType deckType, final boolean isForCommander) {
         if(isForCommander){
-            setModel(new DefaultComboBoxModel<DeckType>(DeckType.CommanderOptions));
+            setModel(new DefaultComboBoxModel<>(DeckType.CommanderOptions));
         }else {
-            setModel(new DefaultComboBoxModel<DeckType>(DeckType.ConstructedOptions));
+            setModel(new DefaultComboBoxModel<>(DeckType.ConstructedOptions));
         }
         setSelectedItem(deckType);
     }

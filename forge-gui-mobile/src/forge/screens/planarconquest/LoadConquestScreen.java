@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -93,7 +94,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
                 final ConquestController qc = FModel.getConquest();
 
-                Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
+                Map<String, ConquestData> arrConquests = new HashMap<>();
                 if (dirConquests.listFiles() != null) {
                     for (File f : dirConquests.listFiles()) {
                         if (f.isDirectory()) {
@@ -104,7 +105,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 }
 
                 // Populate list with available conquest data.
-                lstConquests.setConquests(new ArrayList<ConquestData>(arrConquests.values()));
+                lstConquests.setConquests(new ArrayList<>(arrConquests.values()));
 
                 // If there are quests available, force select.
                 if (arrConquests.size() > 0) {
@@ -149,7 +150,7 @@ public class LoadConquestScreen extends LaunchScreen {
     @Override
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
-        float y = getHeader().getBottom();
+        float y = Forge.isLandscapeMode() ? 0 : getHeader().getBottom();
         g.fillRect(OLD_CONQUESTS_BACK_COLOR, 0, y, lstConquests.getWidth(), lstConquests.getTop() - y);
     }
 
@@ -333,10 +334,8 @@ public class LoadConquestScreen extends LaunchScreen {
         }
 
         public void setConquests(List<ConquestData> qd0) {
-            List<ConquestData> sorted = new ArrayList<ConquestData>();
-            for (ConquestData qd : qd0) {
-                sorted.add(qd);
-            }
+            List<ConquestData> sorted = new ArrayList<>();
+            sorted.addAll(qd0);
             Collections.sort(sorted, new Comparator<ConquestData>() {
                 @Override
                 public int compare(final ConquestData x, final ConquestData y) {

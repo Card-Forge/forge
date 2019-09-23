@@ -16,6 +16,7 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 import java.util.Map.Entry;
 
@@ -36,27 +37,27 @@ public class FDeckViewer extends FScreen {
                 switch (section) {
                 default:
                 case Main:
-                    captionPrefix = "Main Deck";
+                    captionPrefix = Localizer.getInstance().getMessage("ttMain");
                     icon = FDeckEditor.MAIN_DECK_ICON;
                     break;
                 case Sideboard:
-                    captionPrefix = "Sideboard";
+                    captionPrefix = Localizer.getInstance().getMessage("lblSideboard");
                     icon = FDeckEditor.SIDEBOARD_ICON;
                     break;
                 case Commander:
-                    captionPrefix = "Commander";
+                    captionPrefix = Localizer.getInstance().getMessage("lblCommander");
                     icon = FSkinImage.COMMANDER;
                     break;
                 case Avatar:
-                    captionPrefix = "Avatar";
+                    captionPrefix = Localizer.getInstance().getMessage("lblAvatar");
                     icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
                     break;
                 case Planes:
-                    captionPrefix = "Planes";
+                    captionPrefix = Localizer.getInstance().getMessage("lblPlanes");
                     icon = FSkinImage.CHAOS;
                     break;
                 case Schemes:
-                    captionPrefix = "Schemes";
+                    captionPrefix = Localizer.getInstance().getMessage("lblSchemes");
                     icon = FSkinImage.POISON;
                     break;
                 }
@@ -72,7 +73,7 @@ public class FDeckViewer extends FScreen {
                 }
                 addItem(item);
             }
-            addItem(new FMenuItem("Copy to Clipboard", new FEventHandler() {
+            addItem(new FMenuItem(Localizer.getInstance().getMessage("btnCopyToClipboard"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     copyDeckToClipboard(deckViewer.deck);
@@ -101,7 +102,7 @@ public class FDeckViewer extends FScreen {
         }
 
         Forge.getClipboard().setContents(deckList.toString());
-        FOptionPane.showMessageDialog("Deck list for '" + deck.getName() + "' copied to clipboard.");
+        FOptionPane.showMessageDialog(String.format(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard"), deck.getName()));
     }
 
     private final Deck deck;

@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -51,10 +52,8 @@ public class TriggerDevoured extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Devoured");
         if (this.mapParams.containsKey("ValidDevoured")) {
-            if (!sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+            return sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null);
         }
         return true;
     }
@@ -62,13 +61,13 @@ public class TriggerDevoured extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Devoured", this.getRunParams().get("Devoured"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Devoured);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Devoured: ").append(sa.getTriggeringObject("Devoured"));
+        sb.append("Devoured: ").append(sa.getTriggeringObject(AbilityKey.Devoured));
         return sb.toString();
     }
 }

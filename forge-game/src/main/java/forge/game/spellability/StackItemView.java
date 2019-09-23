@@ -19,7 +19,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         if (instances == null) {
             return null;
         }
-        TrackableCollection<StackItemView> collection = new TrackableCollection<StackItemView>();
+        TrackableCollection<StackItemView> collection = new TrackableCollection<>();
         for (SpellAbilityStackInstance si : instances) {
             collection.add(si.getView());
         }

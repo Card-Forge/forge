@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -52,10 +53,8 @@ public class TriggerEvolved extends Trigger {
     public final boolean performTest(final Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
         if (hasParam("ValidCard")) {
-            if (!sac.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+            return sac.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null);
         }
         return true;
     }
@@ -63,13 +62,13 @@ public class TriggerEvolved extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Evolved: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Evolved: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 }

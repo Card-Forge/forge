@@ -27,6 +27,7 @@ import forge.util.TextUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * TODO: Write javadoc for this type.
@@ -38,6 +39,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /** The ID. */
     private int id;
+
+    private ReplacementType mode;
 
     private ReplacementLayer layer = ReplacementLayer.Other;
 
@@ -261,6 +264,14 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return 42 * (42 + this.getId());
+        return Objects.hash(ReplacementEffect.class, getId());
+    }
+
+    public ReplacementType getMode() {
+        return mode;
+    }
+
+    void setMode(ReplacementType mode) {
+        this.mode = mode;
     }
 }

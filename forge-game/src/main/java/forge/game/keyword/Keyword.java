@@ -164,7 +164,7 @@ public enum Keyword {
     protected final boolean isMultipleRedundant;
     protected final String reminderText, displayName;
 
-    private Keyword(Class<? extends KeywordInstance<?>> type0, boolean isMultipleRedundant0, String reminderText0) {
+    Keyword(Class<? extends KeywordInstance<?>> type0, boolean isMultipleRedundant0, String reminderText0) {
         type = type0;
         isMultipleRedundant = isMultipleRedundant0;
         reminderText = reminderText0;
@@ -176,7 +176,7 @@ public enum Keyword {
         String details = k;
         // try to get real part
         if (k.contains(":")) {
-            final String x[] = k.split(":", 2);
+            final String[] x = k.split(":", 2);
             keyword = smartValueOf(x[0]);
             details = x[1];
         } else if (k.contains(" ")) {
@@ -186,7 +186,7 @@ public enum Keyword {
 
             // other keywords that contains other stuff like Enchant
             if (keyword == Keyword.UNDEFINED) {
-                final String x[] = k.split(" ", 2);
+                final String[] x = k.split(" ", 2);
 
                 final Keyword k2 = smartValueOf(x[0]);
                 // Keywords that needs to be undefined
@@ -245,20 +245,20 @@ public enum Keyword {
 
     public static List<Keyword> getAllKeywords() {
         Keyword[] values = values();
-        List<Keyword> keywords = new ArrayList<Keyword>();
+        List<Keyword> keywords = new ArrayList<>();
         for (int i = 1; i < values.length; i++) { //skip UNDEFINED
             keywords.add(values[i]);
         }
         return keywords;
     }
 
-    private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<String, Set<Keyword>>();
+    private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
         String key = card.getName();
         Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
         if (keywordSet == null) {
-            keywordSet = new HashSet<Keyword>();
+            keywordSet = new HashSet<>();
             for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
                 final Keyword keyword = inst.getKeyword();
                 if (keyword != Keyword.UNDEFINED) {

@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
@@ -120,20 +121,17 @@ public class TriggerCounterAdded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        if (this.getRunParams().containsKey("Card"))
-            sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        if (this.getRunParams().containsKey("Player"))
-            sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append("Added once: ");
-        if (sa.hasTriggeringObject("Card"))
-            sb.append(sa.getTriggeringObject("Card"));
-        if (sa.hasTriggeringObject("Player"))
-            sb.append(sa.getTriggeringObject("Player"));
+        if (sa.hasTriggeringObject(AbilityKey.Card))
+            sb.append(sa.getTriggeringObject(AbilityKey.Card));
+        if (sa.hasTriggeringObject(AbilityKey.Player))
+            sb.append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

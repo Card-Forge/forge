@@ -46,7 +46,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
-    private List<Integer> selectedIndices = new ArrayList<Integer>();
+    private List<Integer> selectedIndices = new ArrayList<>();
 
     public ItemListModel getListModel() {
         return listModel;

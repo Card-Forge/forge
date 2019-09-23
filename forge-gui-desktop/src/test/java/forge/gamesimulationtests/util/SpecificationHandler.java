@@ -22,7 +22,7 @@ public abstract class SpecificationHandler<TYPE, SPECIFICATION extends Specifica
     }
 
     public final Iterable<TYPE> findMatches(Iterable<TYPE> items, final SPECIFICATION specification, final IntegerConstraint expectedNumberOfResults) {
-        List<TYPE> matches = new ArrayList<TYPE>();
+        List<TYPE> matches = new ArrayList<>();
         for (TYPE item : items) {
             if (matches(item, specification)) {
                 matches.add(item);

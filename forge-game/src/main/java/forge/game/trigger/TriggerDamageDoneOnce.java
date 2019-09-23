@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -57,24 +58,18 @@ public class TriggerDamageDoneOnce extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        if (this.getRunParams().containsKey("DamageTarget")) {
-            sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
-        }
-        if (this.getRunParams().containsKey("DamageSources")) {
-            sa.setTriggeringObject("Sources", this.getRunParams().get("DamageSources"));
-        }
-        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
-        
-
+        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+        sa.setTriggeringObject(AbilityKey.Sources, getFromRunParams(AbilityKey.DamageSources));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        if (sa.getTriggeringObject("Target") != null) {
-            sb.append("Damaged: ").append(sa.getTriggeringObject("Target")).append(", ");
+        if (sa.getTriggeringObject(AbilityKey.Target) != null) {
+            sb.append("Damaged: ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
         }
-        sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
+        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 

@@ -82,7 +82,7 @@ public class VLobby implements ILobbyView {
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
-    private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
+    private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
 
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text(localizer.getMessage("lblAddAPlayer")).build();
 
@@ -99,21 +99,21 @@ public class VLobby implements ILobbyView {
     private final List<FDeckChooser> tinyLeadersDeckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
     private final List<FDeckChooser> brawlDeckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
 
-    private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+    private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
+    private final List<FPanel> schemeDeckPanels = new ArrayList<>(MAX_PLAYERS);
 
-    private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+    private final List<FList<Object>> planarDeckLists = new ArrayList<>();
+    private final List<FPanel> planarDeckPanels = new ArrayList<>(MAX_PLAYERS);
 
-    private final List<FList<Object>> vgdAvatarLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> vgdPanels = new ArrayList<FPanel>(MAX_PLAYERS);
-    private final List<CardDetailPanel> vgdAvatarDetails = new ArrayList<CardDetailPanel>();
-    private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
-    private final Vector<Object> humanListData = new Vector<Object>();
-    private final Vector<Object> aiListData = new Vector<Object>();
+    private final List<FList<Object>> vgdAvatarLists = new ArrayList<>();
+    private final List<FPanel> vgdPanels = new ArrayList<>(MAX_PLAYERS);
+    private final List<CardDetailPanel> vgdAvatarDetails = new ArrayList<>();
+    private final List<PaperCard> vgdAllAvatars = new ArrayList<>();
+    private final List<PaperCard> vgdAllAiAvatars = new ArrayList<>();
+    private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<>();
+    private final List<PaperCard> nonRandomAiAvatars = new ArrayList<>();
+    private final Vector<Object> humanListData = new Vector<>();
+    private final Vector<Object> aiListData = new Vector<>();
 
     public boolean isForCommander() {
         return isForCommander;
@@ -486,7 +486,7 @@ public class VLobby implements ILobbyView {
         deckPanel.add(new FLabel.Builder().text("Select " + formatName)
                 .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
                 .build(), "gaptop 10px, gapbottom 5px, growx, pushx");
-        final FList<Object> deckList = new FList<Object>();
+        final FList<Object> deckList = new FList<>();
         deckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         deckList.addListSelectionListener(selectionListener);
 
@@ -902,7 +902,7 @@ public class VLobby implements ILobbyView {
     }
 
     List<String> getPlayerNames() {
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         for (final PlayerPanel pp : playerPanels) {
             names.add(pp.getPlayerName());
         }

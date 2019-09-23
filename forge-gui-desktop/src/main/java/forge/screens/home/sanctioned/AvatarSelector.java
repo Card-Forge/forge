@@ -20,7 +20,7 @@ import forge.view.FDialog;
 
 @SuppressWarnings("serial")
 public class AvatarSelector extends FDialog {
-    private final List<FLabel> selectables = new ArrayList<FLabel>();
+    private final List<FLabel> selectables = new ArrayList<>();
     private final Map<Integer, SkinImage> avatarMap = FSkin.getAvatars();
 
     public AvatarSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {

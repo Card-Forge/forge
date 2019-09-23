@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -73,12 +74,12 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
         if (this.mapParams.containsKey("ValidBlocker")) {
         	final String validBlocker = this.mapParams.get("ValidBlocker");
         	if (validBlocker.equals("LessPowerThanAttacker")) {
-        		if (blocker.getNetPower() >= attacker.getNetPower()) {
-        			return false;
-        		}
-        	} else if (!matchesValid(blocker, validBlocker.split(","), this.getHostCard())) {
-        		return false;
-        	}
+                if (blocker.getNetPower() >= attacker.getNetPower()) {
+                    return false;
+                }
+            } else if (!matchesValid(blocker, validBlocker.split(","), this.getHostCard())) {
+                return false;
+            }
         }
 
         return true;
@@ -87,15 +88,14 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Attacker, AbilityKey.Blocker);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject("Attacker")).append(", ");
-        sb.append("Blocker: ").append(sa.getTriggeringObject("Blocker"));
+        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
+        sb.append("Blocker: ").append(sa.getTriggeringObject(AbilityKey.Blocker));
         return sb.toString();
     }
 }

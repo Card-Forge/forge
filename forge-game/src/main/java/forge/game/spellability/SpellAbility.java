@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -44,6 +45,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -117,8 +119,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean basicLandAbility = false;
 
+    private boolean adventure = false;
     private SplitSide splitSide = null;
-    enum SplitSide { LEFT, RIGHT };
+    enum SplitSide { LEFT, RIGHT }
+
     private int totalManaSpent = 0;
 
     /** The pay costs. */
@@ -137,7 +141,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
-    private Map<String, Object> triggeringObjects = Maps.newHashMap();
+    private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
     private HashMap<String, Object> replacingObjects = Maps.newHashMap();
 
@@ -204,12 +208,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     @Override
     public int hashCode() {
-        return getId();
+        return Objects.hash(SpellAbility.class, getId());
     }
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof SpellAbility && this.id == ((SpellAbility) obj).id;
-    };
+    }
 
     @Override
     public void setHostCard(final Card c) {
@@ -271,7 +275,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
-        if (isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
+        if (isWrapper() && this.getTrigger().getMode() != TriggerType.TapsForMana) {
             return false;
         }
 
@@ -551,23 +555,32 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sa;
     }
 
-    public Map<String, Object> getTriggeringObjects() {
+    public Map<AbilityKey, Object> getTriggeringObjects() {
         return triggeringObjects;
     }
-    public void setTriggeringObjects(final Map<String, Object> triggeredObjects) {
-        triggeringObjects = Maps.newHashMap(triggeredObjects);
+    public void setTriggeringObjects(final Map<AbilityKey, Object> triggeredObjects) {
+        triggeringObjects = AbilityKey.newMap(triggeredObjects);
     }
-    public Object getTriggeringObject(final String type) {
+    public Object getTriggeringObject(final AbilityKey type) {
         return triggeringObjects.get(type);
     }
-    public void setTriggeringObject(final String type, final Object o) {
+    public void setTriggeringObject(final AbilityKey type, final Object o) {
         triggeringObjects.put(type, o);
     }
-    public boolean hasTriggeringObject(final String type) {
+    public void setTriggeringObjectsFrom(final Trigger trigger, final AbilityKey... types) {
+        int typesLength = types.length;
+        for (int i = 0; i < typesLength; i += 1) {
+            AbilityKey type = types[i];
+            triggeringObjects.put(type, trigger.getFromRunParams(type));
+        }
+    }
+
+
+    public boolean hasTriggeringObject(final AbilityKey type) {
         return triggeringObjects.containsKey(type);
     }
     public void resetTriggeringObjects() {
-        triggeringObjects = Maps.newHashMap();
+        triggeringObjects = AbilityKey.newMap();
     }
 
     public List<Object> getTriggerRemembered() {
@@ -850,6 +863,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setRightSplit() {
         splitSide = SplitSide.RIGHT;
     }
+    public boolean isAdventure() {
+        return this.adventure;
+    }
+    public void setAdventure(boolean adventure) {
+        this.adventure = adventure;
+    }
 
     public SpellAbility copy() {
         return copy(hostCard, false);
@@ -876,7 +895,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
             clone.mapParams = Maps.newHashMap(this.mapParams);
 
-            clone.triggeringObjects = Maps.newHashMap(this.triggeringObjects);
+            clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
             if (getPayCosts() != null) {
                 clone.setPayCosts(getPayCosts().copy());
@@ -1040,6 +1059,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     }
                 }
                 if (!flag) {
+                    return false;
+                }
+            }
+            if (hasParam("TargetsWithControllerProperty") && entity instanceof Card) {
+                final String prop = getParam("TargetsWithControllerProperty");
+                final Card c = (Card) entity;
+                if (prop.equals("cmcLECardsInGraveyard")
+                        && c.getCMC() > c.getController().getCardsIn(ZoneType.Graveyard).size()) {
                     return false;
                 }
             }
@@ -1428,10 +1455,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             maxTargets = Integer.parseInt(this.getHostCard().getSVar("CostCountersRemoved"));
         }
 
-        if (minTargets > numTargets || maxTargets < numTargets) {
-            return false;
-        }
-        return true;
+        return minTargets <= numTargets && maxTargets >= numTargets;
     }
     /**
      * <p>
@@ -1587,6 +1611,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard(), this)) {
             return false;
+        }
+        if (hasParam("TargetsWithControllerProperty")) {
+            final String prop = getParam("TargetsWithControllerProperty");
+            if (prop.equals("cmcLECardsInGraveyard")
+                    && topSA.getHostCard().getCMC() > topSA.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size()) {
+                return false;
+            }
         }
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();

@@ -3,6 +3,7 @@ package forge.game.trigger;
 import java.util.Map;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -35,13 +36,13 @@ public class TriggerBecomeMonarch extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
+        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
         return sb.toString();
     }
 }

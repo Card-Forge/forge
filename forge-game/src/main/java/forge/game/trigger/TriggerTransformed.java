@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -45,10 +46,8 @@ public class TriggerTransformed extends Trigger {
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Transformer"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Transformer"), this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard());
         }
 
         return true;
@@ -60,13 +59,13 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Transformer", this.getRunParams().get("Transformer"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Transformer);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Transformed: ").append(sa.getTriggeringObject("Transformer"));
+        sb.append("Transformed: ").append(sa.getTriggeringObject(AbilityKey.Transformer));
         return sb.toString();
     }
 

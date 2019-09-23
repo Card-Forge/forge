@@ -344,10 +344,7 @@ public final class CardScriptParser {
         if (DEFINED_CARDS.contains(defined)) {
             return true;
         }
-        if (Iterables.any(DEFINED_CARDS_STARTSWITH, startsWith(defined))) {
-            return true;
-        }
-        return false;
+        return Iterables.any(DEFINED_CARDS_STARTSWITH, startsWith(defined));
     }
     private static boolean isDefinedPlayerLegal(final String defined) {
         final boolean non = defined.startsWith("Non"), flipped = defined.startsWith("Flipped");
@@ -363,10 +360,7 @@ public final class CardScriptParser {
         if (DEFINED_PLAYERS.contains(defined)) {
             return true;
         }
-        if (Iterables.any(DEFINED_PLAYERS_STARTSWITH, startsWith(defined))) {
-            return true;
-        }
-        return false;
+        return Iterables.any(DEFINED_PLAYERS_STARTSWITH, startsWith(defined));
     }
 
     private static final Set<String> VALID_INCLUSIVE = ImmutableSortedSet.of(
@@ -472,10 +466,7 @@ public final class CardScriptParser {
         if (VALID_EXCLUSIVE.contains(valid)) {
             return true;
         }
-        if (Iterables.any(VALID_EXCLUSIVE_STARTSWITH, startsWith(valid))) {
-            return true;
-        }
-        return false;
+        return Iterables.any(VALID_EXCLUSIVE_STARTSWITH, startsWith(valid));
     }
 
     private static final class KeyValuePair {

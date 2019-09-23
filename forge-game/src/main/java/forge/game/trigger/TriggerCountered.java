@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -92,17 +93,20 @@ public class TriggerCountered extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Cause", this.getRunParams().get("Cause"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
-        sa.setTriggeringObject("CounteredSA", this.getRunParams().get("CounteredSA"));
+        sa.setTriggeringObjectsFrom(
+            this,
+            AbilityKey.Card,
+            AbilityKey.Cause,
+            AbilityKey.Player,
+            AbilityKey.CounteredSA
+        );
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Countered: ").append(sa.getTriggeringObject("Card")).append(", ");
-        sb.append("Cause: ").append(sa.getTriggeringObject("Cause"));
+        sb.append("Countered: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append("Cause: ").append(sa.getTriggeringObject(AbilityKey.Cause));
         return sb.toString();
     }
 }

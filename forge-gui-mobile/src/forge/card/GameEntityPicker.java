@@ -83,7 +83,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                         list.setListData(items);
                     }
                     else {
-                        List<GameEntityView> filteredList = new ArrayList<GameEntityView>();
+                        List<GameEntityView> filteredList = new ArrayList<>();
                         for (GameEntityView option : items) {
                             if (option.toString().toLowerCase().contains(pattern)) {
                                 filteredList.add(option);

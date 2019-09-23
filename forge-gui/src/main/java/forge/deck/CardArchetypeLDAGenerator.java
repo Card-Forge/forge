@@ -69,7 +69,7 @@ public final class CardArchetypeLDAGenerator {
     public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<Archetype> lda) throws Exception{
 
         List<List<Pair<String, Double>>> topics = new ArrayList<>();
-        Set<String> cards = new HashSet<String>();
+        Set<String> cards = new HashSet<>();
         for (int t = 0; t < lda.size(); ++t) {
             List<Pair<String, Double>> topic = new ArrayList<>();
             Set<String> topicCards = new HashSet<>();
@@ -80,7 +80,7 @@ public final class CardArchetypeLDAGenerator {
             System.out.print("t" + t + ": ");
             int i = 0;
             while (topic.size()<=40&&i<highRankVocabs.size()) {
-                String cardName = highRankVocabs.get(i).getLeft();;
+                String cardName = highRankVocabs.get(i).getLeft();
                 if(!StaticData.instance().getCommonCards().getUniqueByName(cardName).getRules().getType().isBasicLand()){
                     if(highRankVocabs.get(i).getRight()>=0.005d) {
                         topicCards.add(cardName);

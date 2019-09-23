@@ -13,7 +13,6 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
@@ -40,7 +39,7 @@ public class CostAdjustment {
         Cost result = cost.copy();
     
         boolean isStateChangeToFaceDown = false;
-        if (sa.isSpell() && ((Spell) sa).isCastFaceDown()) {
+        if (sa.isSpell() && sa.isCastFaceDown()) {
             // Turn face down to apply cost modifiers correctly
             host.turnFaceDownNoUpdate();
             isStateChangeToFaceDown = true;
@@ -159,7 +158,7 @@ public class CostAdjustment {
 
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell()) {
-            if (((Spell) sa).isCastFaceDown()) {
+            if (sa.isCastFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 originalCard.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -224,7 +223,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null, null);
+                        final Card d = game.getAction().exile(c, null);
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
@@ -382,6 +381,9 @@ public class CostAdjustment {
         } else if ("Undaunted".equals(amount)) {
             value = card.getController().getOpponents().size();
         } else if (staticAbility.hasParam("Relative")) {
+            // TODO: update cards with "This spell costs X less to cast...if you..."
+            // The caster is sa.getActivatingPlayer()
+            // cards like Hostage Taker can cast spells from other players.
             value = AbilityUtils.calculateAmount(hostCard, amount, sa);
         } else {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
@@ -490,7 +492,7 @@ public class CostAdjustment {
                     return false;
                 }
             } else if (type.equals("MorphDown")) {
-                if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
+                if (!sa.isSpell() || !sa.isCastFaceDown()) {
                     return false;
                 }
             }
@@ -546,9 +548,7 @@ public class CostAdjustment {
                 }
                 curSa = curSa.getSubAbility();
             }
-            if (!targetValid) {
-                return false;
-            }
+            return targetValid;
         }
         return true;
     }

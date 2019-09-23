@@ -63,12 +63,12 @@ import forge.view.arcane.util.CardPanelMouseListener;
 public class TargetingOverlay {
     private final CMatchUI matchUI;
     private final OverlayPanel pnl = new OverlayPanel();
-    private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    private final List<Arc> arcsFoeAtk = new ArrayList<Arc>();
-    private final List<Arc> arcsFoeDef = new ArrayList<Arc>();
-    private final List<Arc> arcsFriend = new ArrayList<Arc>();
+    private final List<CardPanel> cardPanels = new ArrayList<>();
+    private final List<Arc> arcsFoeAtk = new ArrayList<>();
+    private final List<Arc> arcsFoeDef = new ArrayList<>();
+    private final List<Arc> arcsFriend = new ArrayList<>();
     private final ArcAssembler assembler = new ArcAssembler();
-    private final Set<Integer> stackItemIDs = new HashSet<Integer>();
+    private final Set<Integer> stackItemIDs = new HashSet<>();
 
     private static class Arc {
         private final int x1, y1, x2, y2;
@@ -88,7 +88,7 @@ public class TargetingOverlay {
         }
     }
 
-    private final Set<CardView> cardsVisualized = new HashSet<CardView>();
+    private final Set<CardView> cardsVisualized = new HashSet<>();
     private CardPanel activePanel = null;
 
     //private long lastUpdated = System.currentTimeMillis(); // TODO: determine if timer is needed (see below)
@@ -158,7 +158,7 @@ public class TargetingOverlay {
 
         //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
         // Locations of arc endpoint, per card, with ID as primary key.
-        final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
+        final Map<Integer, Point> endpoints = new HashMap<>();
 
         Point cardLocOnScreen;
         Point locOnScreen = this.getPanel().getLocationOnScreen();
@@ -306,7 +306,7 @@ public class TargetingOverlay {
     }
 
     private Map<Integer, Point> getCardEndpoints() {
-        final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
+        final Map<Integer, Point> endpoints = new HashMap<>();
 
         Point cardLocOnScreen;
         Point locOnScreen = this.getPanel().getLocationOnScreen();

@@ -1,0 +1,8 @@
+Name:Crashing Drawbridge
+ManaCost:2
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Defender\n{T}: Creatures you control gain haste until end of turn.

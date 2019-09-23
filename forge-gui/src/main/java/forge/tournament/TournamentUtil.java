@@ -20,8 +20,8 @@ public class TournamentUtil {
 
         // Generate tournament decks
         Deck deck;
-        final List<String> eventNames = new ArrayList<String>();
-        final List<Deck> decks = new ArrayList<Deck>();
+        final List<String> eventNames = new ArrayList<>();
+        final List<Deck> decks = new ArrayList<>();
 
         for (int i = 0; i < numOpponents; i++) {
             int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());
@@ -81,7 +81,7 @@ public class TournamentUtil {
 
     public static void setDefaultTournamentName(TournamentData tournament, String prefix) {
         final File[] arrFiles = TournamentIO.getTournamentFilesUnlocked(prefix);
-        final Set<String> setNames = new HashSet<String>();
+        final Set<String> setNames = new HashSet<>();
         for (File f : arrFiles) {
             setNames.add(f.getName());
         }

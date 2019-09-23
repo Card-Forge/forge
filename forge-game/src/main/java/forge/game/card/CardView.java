@@ -18,6 +18,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.Lang;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -46,7 +47,7 @@ public class CardView extends GameEntityView {
         if (cards == null) {
             return null;
         }
-        TrackableCollection<CardView> collection = new TrackableCollection<CardView>();
+        TrackableCollection<CardView> collection = new TrackableCollection<>();
         for (Card c : cards) {
             if (c.getCardForUi() == c) { //only add cards that match their card for UI
                 collection.add(c.getView());
@@ -345,17 +346,14 @@ public class CardView extends GameEntityView {
             return true;
         }
         col = get(TrackableProperty.PlayerMayLookTemp);
-        if (col != null && col.contains(pv)) {
-            return true;
-        }
-        return false;
+        return col != null && col.contains(pv);
     }
     void setPlayerMayLook(Player p, boolean mayLook, boolean temp) {
         TrackableProperty prop = temp ? TrackableProperty.PlayerMayLookTemp : TrackableProperty.PlayerMayLook;
         TrackableCollection<PlayerView> col = get(prop);
         if (mayLook) {
             if (col == null) {
-                col = new TrackableCollection<PlayerView>(p.getView());
+                col = new TrackableCollection<>(p.getView());
                 set(prop, col);
             }
             else if (col.add(p.getView())) {
@@ -380,7 +378,7 @@ public class CardView extends GameEntityView {
         return Iterables.any(viewers, new Predicate<PlayerView>() {
             public final boolean apply(final PlayerView input) {
                 return canBeShownTo(input);
-            };
+            }
         });
     }
 
@@ -462,10 +460,7 @@ public class CardView extends GameEntityView {
         if (mindSlaveMaster != null && canFaceDownBeShownTo(mindSlaveMaster)) {
             return true;
         }
-        if (isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer)) {
-            return true;
-        }
-        return false;
+        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
     }
 
     public FCollectionView<CardView> getEncodedCards() {
@@ -541,35 +536,59 @@ public class CardView extends GameEntityView {
     }
 
     public String getText() {
-        return getText(getCurrentState());
+        return getText(getCurrentState(), null);
     }
-    public String getText(CardStateView state) {
+    public String getText(CardStateView state, HashMap<String, String> translationsText) {
         final StringBuilder sb = new StringBuilder();
         //final boolean isSplitCard = (state.getState() == CardStateName.LeftSplit);
 
+        String tname = "", toracle = "", taltname = "", taltoracle = "";
+
+        // If we have translations, use them
+        if (translationsText != null) {
+            tname = translationsText.get("name");
+            taltname = translationsText.get("altname");
+
+            // Don't translate oracles if the card is a cloned one
+            if (((String) get(TrackableProperty.Cloner)).isEmpty()) {
+                toracle = translationsText.get("oracle");
+                taltoracle = translationsText.get("altoracle");
+            }
+        }
+
+        tname = tname.isEmpty() ? state.getName() : tname;
+
+        if (isSplitCard()) {
+            taltname = getAlternateState().getName();
+            taltoracle = getAlternateState().getOracleText();
+        }
+
         if (getId() < 0) {
             if (isSplitCard()) {
-                sb.append("(").append(state.getName()).append(") ");
-                sb.append(state.getOracleText());
+                sb.append("(").append(tname).append(") ");
+                sb.append(toracle);
                 sb.append("\r\n\r\n");
-                sb.append("(").append(getAlternateState().getName()).append(") ");
-                sb.append(getAlternateState().getOracleText());
+                sb.append("(").append(taltname).append(") ");
+                sb.append(taltoracle);
                 return sb.toString().trim();
             } else {
-                return state.getOracleText();
+                return toracle.isEmpty() ? state.getOracleText() : toracle;
             }
         }
 
         final String rulesText = state.getRulesText();
-        if (!rulesText.isEmpty()) {
+        if (!toracle.isEmpty()) {
+            sb.append(toracle).append("\r\n\r\n");
+        } else if (!rulesText.isEmpty()) {
             sb.append(rulesText).append("\r\n\r\n");
         }
         if (isCommander()) {
-            sb.append(getOwner()).append("'s " + getCommanderType() + "\r\n");
+            sb.append(getOwner()).append("'s ").append(getCommanderType()).append("\r\n");
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
         if (isSplitCard() && !isFaceDown()) {
+            // TODO: Translation?
             CardStateView view = state.getState() == CardStateName.LeftSplit ? state : getAlternateState();
             if (getZone() != ZoneType.Stack) {
                 sb.append("(");
@@ -578,25 +597,15 @@ public class CardView extends GameEntityView {
             }
             sb.append(view.getAbilityText());
         } else {
-            sb.append(state.getAbilityText());
+            if (toracle.isEmpty()) sb.append(state.getAbilityText());
         }
 
         if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
             //ensure ability text for right half of split card is included unless spell is on stack
-            sb.append("\r\n\r\n").append("(").append(getAlternateState().getName()).append(") ").append(getAlternateState().getOracleText());
+            sb.append("\r\n\r\n").append("(").append(taltname).append(") ").append(taltoracle);
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
-        int blockAdditional = state.getBlockAdditional();
-        if (blockAdditional > 1) {
-            final StringBuilder ab = new StringBuilder();
-            ab.append("CARDNAME can block an additional ");
-            ab.append(blockAdditional);
-            ab.append(" creatures each combat.");
-            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature each combat.", ab.toString());
-            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature each combat.", "");
-            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
-        }
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
@@ -622,6 +631,22 @@ public class CardView extends GameEntityView {
         if (pairedWith != null) {
             sb.append("\r\n \r\nPaired With: ").append(pairedWith);
             sb.append("\r\n");
+        }
+
+        if (getCanBlockAny()) {
+            sb.append("\r\n\r\n");
+            sb.append("CARDNAME can block any number of creatures.".replaceAll("CARDNAME", getName()));
+            sb.append("\r\n");
+        } else {
+            int i = getBlockAdditional();
+            if (i > 0) {
+                sb.append("\r\n\r\n");
+                sb.append("CARDNAME can block an additional ".replaceAll("CARDNAME", getName()));
+                sb.append(i == 1 ? "creature" : Lang.nounWithNumeral(i, "creature"));
+                sb.append(" each combat.");
+                sb.append("\r\n");
+            }
+
         }
 
         String cloner = get(TrackableProperty.Cloner);
@@ -726,6 +751,19 @@ public class CardView extends GameEntityView {
     }
     void updateHiddenId(final int hiddenId) {
         set(TrackableProperty.HiddenId, hiddenId);
+    }
+
+    int getBlockAdditional() {
+        return get(TrackableProperty.BlockAdditional);
+    }
+
+    boolean getCanBlockAny() {
+        return get(TrackableProperty.BlockAny);
+    }
+
+    void updateBlockAdditional(Card c) {
+        set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
+        set(TrackableProperty.BlockAny, c.canBlockAny());
     }
 
     @Override
@@ -995,9 +1033,6 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.HasTrample);
         }
 
-        public int getBlockAdditional() {
-            return get(TrackableProperty.BlockAdditional);
-        }
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
         }
@@ -1011,7 +1046,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
             set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
-            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }
 
@@ -1066,8 +1100,8 @@ public class CardView extends GameEntityView {
         if (oldCards.add(cardToAdd)) {
             TrackableCollection<CardView> views = get(key);
             if (views == null) {
-                views = new TrackableCollection<CardView>();
-                views.add(cardToAdd.getView());;
+                views = new TrackableCollection<>();
+                views.add(cardToAdd.getView());
                 set(key, views);
             }
             else if (views.add(cardToAdd.getView())) {
@@ -1087,7 +1121,7 @@ public class CardView extends GameEntityView {
         for (Card c : cardsToAdd) {
             if (c != null && oldCards.add(c)) {
                 if (views == null) {
-                    views = new TrackableCollection<CardView>();
+                    views = new TrackableCollection<>();
                     views.add(c.getView());
                     set(key, views);
                 }

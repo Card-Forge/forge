@@ -122,10 +122,10 @@ public class QuestBazaarManager {
     }
 
     /** Constant <code>stalls</code>. */
-    private final Map<String, QuestStallDefinition> stalls = new TreeMap<String, QuestStallDefinition>();
+    private final Map<String, QuestStallDefinition> stalls = new TreeMap<>();
     /** Constant <code>items</code>. */
-    private final Map<String, SortedSet<IQuestBazaarItem>> itemsOnStalls = new TreeMap<String, SortedSet<IQuestBazaarItem>>(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, IQuestBazaarItem> items = new TreeMap<String, IQuestBazaarItem>();
+    private final Map<String, SortedSet<IQuestBazaarItem>> itemsOnStalls = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, IQuestBazaarItem> items = new TreeMap<>();
 
     /**
      * <p>
@@ -149,7 +149,7 @@ public class QuestBazaarManager {
      * and maps to appropriate merchant.
      */
     public void buildItems(final QuestController qCtrl) {
-        final Map<String, IQuestBazaarItem> itemSet = new HashMap<String, IQuestBazaarItem>();
+        final Map<String, IQuestBazaarItem> itemSet = new HashMap<>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
 
@@ -164,7 +164,7 @@ public class QuestBazaarManager {
         itemsOnStalls.clear();
 
         for (final QuestStallDefinition thisStall : stalls.values()) {
-            final SortedSet<IQuestBazaarItem> set = new TreeSet<IQuestBazaarItem>();
+            final SortedSet<IQuestBazaarItem> set = new TreeSet<>();
 
             for (final String itemName : thisStall.getItems()) {
                 final IQuestBazaarItem item = itemSet.get(itemName);
@@ -184,7 +184,7 @@ public class QuestBazaarManager {
     public List<IQuestBazaarItem> getItems(final QuestController qCtrl, final String stallName) {
         buildItems(qCtrl);
 
-        final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
+        final List<IQuestBazaarItem> ret = new ArrayList<>();
 
         final QuestAssets qA = FModel.getQuest().getAssets();
         for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {

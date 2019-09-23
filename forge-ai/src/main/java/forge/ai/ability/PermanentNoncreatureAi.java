@@ -19,10 +19,7 @@ public class PermanentNoncreatureAi extends PermanentAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic) || "DontCast".equals(aiLogic)) {
-            return false;
-        }
-        return true;
+        return !"Never".equals(aiLogic) && !"DontCast".equals(aiLogic);
     }
 
     /**
@@ -54,10 +51,8 @@ public class PermanentNoncreatureAi extends PermanentAi {
                 // TODO: consider replacing the condition with host.hasSVar("OblivionRing")
                 targets = CardLists.filterControlledBy(targets, ai.getOpponents());
             }
-            if (targets.isEmpty()) {
-                // AiPlayDecision.AnotherTime
-                return false;
-            }
+            // AiPlayDecision.AnotherTime
+            return !targets.isEmpty();
         }
         return true;
     }

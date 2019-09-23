@@ -13,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.card.token.TokenInfo;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 
 public class ReplaceEffect extends SpellAbilityEffect {
@@ -25,6 +26,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
         final String varName = sa.getParam("VarName");
         final String varValue = sa.getParam("VarValue");
         final String type = sa.getParamOrDefault("VarType", "amount");
+        final ReplacementType retype = sa.getReplacementEffect().getMode();
 
         @SuppressWarnings("unchecked")
         Map<String, Object> originalParams = (Map<String, Object>) sa.getReplacingObject("OriginalParams");
@@ -59,7 +61,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
         }
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(params); 
+        ReplacementResult result = game.getReplacementHandler().run(retype, params);
         switch (result) {
         case NotReplaced:
         case Updated: {

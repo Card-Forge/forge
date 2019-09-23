@@ -7,7 +7,7 @@ import forge.Graphics;
 import forge.screens.FScreen.Header;
 
 public class FMenuBar extends Header {
-    private final List<FMenuTab> tabs = new ArrayList<FMenuTab>();
+    private final List<FMenuTab> tabs = new ArrayList<>();
 
     public void addTab(String text0, FDropDown dropDown0) {
         FMenuTab tab = new FMenuTab(text0, this, dropDown0, tabs.size());

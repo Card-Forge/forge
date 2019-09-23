@@ -118,7 +118,7 @@ public class LineReader implements Iterable<String>, Closeable {
      * @return The lines read from the stream.
      */
     public Collection<String> readLines() {
-        final Collection<String> lines = new ArrayList<String>();
+        final Collection<String> lines = new ArrayList<>();
         for (final String line : this) {
             lines.add(line);
         }

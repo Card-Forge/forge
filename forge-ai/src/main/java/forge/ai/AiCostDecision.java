@@ -56,7 +56,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
         String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
-                Lists.<String>newArrayList());
+                Lists.newArrayList());
         return PaymentDecision.type(choice);
     }
 
@@ -475,7 +475,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 if (ability.getPayCosts().hasTapCost() && typeList.contains(ability.getHostCard())) {
                     c--;
                 }
-                source.setSVar("ChosenX", "Number$" + Integer.toString(c));
+                source.setSVar("ChosenX", "Number$" + c);
             } else {
                 if (!isVehicle) {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
@@ -809,7 +809,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
-                source.setSVar("ChosenX", "Number$" + String.valueOf(c));
+                source.setSVar("ChosenX", "Number$" + c);
             } else if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
             } else if (sVar.equals("Targeted$CardManaCost")) {
@@ -865,7 +865,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 }
                 typeList = CardLists.filter(typeList, Presets.TAPPED);
                 c = typeList.size();
-                source.setSVar("ChosenX", "Number$" + Integer.toString(c));
+                source.setSVar("ChosenX", "Number$" + c);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

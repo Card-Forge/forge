@@ -46,7 +46,7 @@ public class CardDetailUtil {
 
         public final int r, g, b;
 
-        private DetailColors(final int r0, final int g0, final int b0) {
+        DetailColors(final int r0, final int g0, final int b0) {
             r = r0;
             g = g0;
             b = b0;
@@ -69,7 +69,7 @@ public class CardDetailUtil {
         return getBorderColors(colorSet, false, true, true);
     }
     private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple) {
-        final List<DetailColors> borderColors = new ArrayList<DetailColors>();
+        final List<DetailColors> borderColors = new ArrayList<>();
 
         if (cardColors == null || !canShow) {
             borderColors.add(DetailColors.FACE_DOWN);
@@ -160,11 +160,13 @@ public class CardDetailUtil {
 
     public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {
         final String name = forAltState ? card.getAlternateState().getName() : card.getName();
-        return StringUtils.isEmpty(name) || !canShow ? "???" : name.trim();
+        String translatedname = CardTranslation.getTranslatedName(name);
+        return StringUtils.isEmpty(translatedname) || !canShow ? "???" : translatedname.trim();
     }
 
     public static String formatCardType(final CardStateView card, final boolean canShow) {
-        return canShow ? card.getType().toString() : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
+        String translatedtype = CardTranslation.getTranslatedType(card.getName(), card.getType().toString());
+        return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
     }
 
     public static String formatPowerToughness(final CardStateView card, final boolean canShow) {
@@ -276,7 +278,9 @@ public class CardDetailUtil {
         if (area.length() != 0) {
             area.append("\n");
         }
-        String text = card.getText(state);
+
+        String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
+
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
 
@@ -339,7 +343,7 @@ public class CardDetailUtil {
                     if (area.length() != 0) {
                         area.append("\n");
                     }
-                    area.append(c.getKey().getName() + " counters: ");
+                    area.append(c.getKey().getName()).append(" counters: ");
                     area.append(c.getValue());
                 }
             }
@@ -351,7 +355,7 @@ public class CardDetailUtil {
                 if (area.length() != 0) {
                     area.append("\n");
                 }
-                area.append("Damage: " + damage);
+                area.append("Damage: ").append(damage);
             }
         }
         if (state.isCreature() || state.isPlaneswalker()) {
@@ -360,7 +364,7 @@ public class CardDetailUtil {
                 if (area.length() != 0) {
                     area.append("\n");
                 }
-                area.append("Assigned Damage: " + assigned);
+                area.append("Assigned Damage: ").append(assigned);
             }
         }
 
@@ -416,7 +420,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen player: " + card.getChosenPlayer() + ")");
+            area.append("(chosen player: ").append(card.getChosenPlayer()).append(")");
         }
 
         // chosen mode
@@ -424,7 +428,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen mode: " + card.getChosenMode() + ")");
+            area.append("(chosen mode: ").append(card.getChosenMode()).append(")");
         }
 
         // named card
@@ -506,7 +510,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Haunting " + card.getHaunting());
+            area.append("Haunting ").append(card.getHaunting());
         }
 
         // Cipher
@@ -514,7 +518,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Encoded: " + card.getEncodedCards());
+            area.append("Encoded: ").append(card.getEncodedCards());
         }
 
         // must block
@@ -523,7 +527,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             final String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
-            area.append("Must block " + mustBlockThese);
+            area.append("Must block ").append(mustBlockThese);
         }
 
         // exerted
@@ -550,7 +554,7 @@ public class CardDetailUtil {
                 if (area.length() != 0) {
                     area.append("\n\n");
                 }
-                area.append("Current Storm Count: " + gameView.getStormCount());
+                area.append("Current Storm Count: ").append(gameView.getStormCount());
             }
         }
         return area.toString();

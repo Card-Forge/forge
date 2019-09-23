@@ -44,7 +44,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     private final int orderNum;
     private final String name;
     private final List<CardEdition> sets;
-    private final Map<String, MetaSet> metaSets = new TreeMap<String, MetaSet>();
+    private final Map<String, MetaSet> metaSets = new TreeMap<>();
     private final CardEdition landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
@@ -139,7 +139,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     }
 
     private Predicate<PaperCard> buildFilter() {
-        final List<String> setCodes = new ArrayList<String>();
+        final List<String> setCodes = new ArrayList<>();
         for (final CardEdition set : this.sets) {
             setCodes.add(set.getCode());
         }
@@ -246,8 +246,8 @@ public final class CardBlock implements Comparable<CardBlock> {
             int sealedBoosters = StringUtils.isNumeric(numbers[1]) ? Integer.parseInt(numbers[1]) : 0;
             CardEdition landSet = editions.getEditionByCodeOrThrow(numbers[2]);
 
-            List<CardEdition> sets = new ArrayList<CardEdition>();
-            List<MetaSet> metas = new ArrayList<MetaSet>();
+            List<CardEdition> sets = new ArrayList<>();
+            List<MetaSet> metas = new ArrayList<>();
             
             String[] setNames = TextUtil.splitWithParenthesis(sParts[2], ' ' );
             for(final String set : setNames ) {

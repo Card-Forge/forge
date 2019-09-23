@@ -3,6 +3,7 @@ package forge.screens.constructed;
 import java.util.*;
 
 import forge.deck.*;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -49,15 +50,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // General variables
     private GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
-    private final FLabel lblPlayers = new FLabel.Builder().text("Players:").font(VARIANTS_FONT).build();
+    final Localizer localizer = Localizer.getInstance();
+    private final FLabel lblPlayers = new FLabel.Builder().text(localizer.getMessage("lblPlayers") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<Integer> cbPlayerCount;
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants frame and variables
-    private final FLabel lblVariants = new FLabel.Builder().text("Variants:").font(VARIANTS_FONT).build();
-    private final FComboBox<Object> cbVariants = new FComboBox<Object>();
+    private final FLabel lblVariants = new FLabel.Builder().text(localizer.getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
+    private final FComboBox<Object> cbVariants = new FComboBox<>();
 
-    private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
+    private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -87,7 +89,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(false); //disable start button until decks loaded
 
         add(lblPlayers);
-        cbPlayerCount = add(new FComboBox<Integer>());
+        cbPlayerCount = add(new FComboBox<>());
         cbPlayerCount.setFont(VARIANTS_FONT);
         for (int i = 2; i <= MAX_PLAYERS; i++) {
             cbPlayerCount.addItem(i);
@@ -117,7 +119,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         add(lblVariants);
         add(cbVariants);
         cbVariants.setFont(VARIANTS_FONT);
-        cbVariants.addItem("(None)");
+        cbVariants.addItem("(" + localizer.getMessage("lblNone") + ")");
         cbVariants.addItem(GameType.Vanguard);
         cbVariants.addItem(GameType.MomirBasic);
         cbVariants.addItem(GameType.MoJhoSto);
@@ -128,7 +130,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
-        cbVariants.addItem("More....");
+        cbVariants.addItem(localizer.getMessage("lblMore"));
         cbVariants.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -216,14 +218,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbVariants.setSelectedItem(appliedVariants.iterator().next());
         }
         else {
-            String text = "";
+            StringBuilder text = new StringBuilder();
             for (GameType variantType : appliedVariants) {
                 if (text.length() > 0) {
-                    text += ", ";
+                    text.append(", ");
                 }
-                text += variantType.toString();
+                text.append(variantType.toString());
             }
-            cbVariants.setText(text);
+            cbVariants.setText(text.toString());
         }
     }
 
@@ -269,17 +271,20 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     protected void startMatch() {
         for (int i = 0; i < getNumPlayers(); i++) {
-            updateDeck(i);
+            updateDeck(i);//TODO: Investigate why AI names cannot be overriden?
+            updateName(i, getPlayerName(i));
         }
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
             @Override
             public void run() {
                 final Runnable startGame = lobby.startGame();
                 if (startGame != null) {
+                    //set this so we cant get any multi/rapid tap on start button
+                    Forge.setLoadingaMatch(true);
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
-                            LoadingOverlay.show("Loading new game...", startGame);
+                            LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), startGame);
                         }
                     });
                 }
@@ -309,7 +314,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         // Name
         String prefName = prefs.getPref(FPref.PLAYER_NAME);
-        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? "Human" : prefName);
+        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? Localizer.getInstance().getMessage("lblHuman") : prefName);
     }
 
     List<Integer> getUsedAvatars() {
@@ -322,7 +327,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     List<String> getPlayerNames() {
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         for (PlayerPanel pp : playerPanels) {
             names.add(pp.getPlayerName());
         }
@@ -341,10 +346,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     //========== Various listeners in build order
     
     private class MultiVariantSelect extends FScreen {
-        private final FList<Variant> lstVariants = add(new FList<Variant>());
+        private final FList<Variant> lstVariants = add(new FList<>());
 
         private MultiVariantSelect() {
-            super("Select Variants");
+            super(Localizer.getInstance().getMessage("lblSelectVariants"));
 
             lstVariants.setListItemRenderer(new VariantRenderer());
             lstVariants.addItem(new Variant(GameType.Vanguard));
@@ -612,11 +617,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    private void updateName(final int playerIndex, final String name) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.nameUpdate(name));
+        }
+    }
+
     void setReady(final int index, final boolean ready) {
         if (ready) {
             updateDeck(index);
             if (decks[index] == null) {
-                FOptionPane.showErrorDialog("Select a deck before readying!");
+                FOptionPane.showErrorDialog(localizer.getMessage("msgSelectAdeckBeforeReadying"));
                 update(false);
                 return;
             }

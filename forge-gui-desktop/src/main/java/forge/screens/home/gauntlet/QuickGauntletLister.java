@@ -63,9 +63,9 @@ public class QuickGauntletLister extends JPanel {
 
     public void refresh() {
         this.removeAll();
-        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        final List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (final GauntletData gd : gauntlets) { sorted.add(gd); }
+        final List<RowPanel> tempRows = new ArrayList<>();
+        final List<GauntletData> sorted = new ArrayList<>();
+        sorted.addAll(gauntlets);
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
@@ -110,8 +110,8 @@ public class QuickGauntletLister extends JPanel {
             row.add(new FLabel.Builder().text(String.valueOf(gd.getDecks().size()))
                     .fontAlign(SwingConstants.RIGHT).build(),
                     "w 90px!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel.Builder().text(String.valueOf(Math.round(
-                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + "%")
+            row.add(new FLabel.Builder().text(Math.round(
+                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100) + "%")
                     .fontAlign(SwingConstants.RIGHT).build(),
                     "w 90px!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");

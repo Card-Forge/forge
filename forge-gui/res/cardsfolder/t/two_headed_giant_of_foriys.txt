@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Giant
 PT:4/4
 K:Trample
-K:CARDNAME can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_giant_of_foriys.jpg
 Oracle:Trample\nTwo-Headed Giant of Foriys can block an additional creature each combat.

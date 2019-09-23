@@ -124,7 +124,7 @@ public class DebuffAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-        CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
+        CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.newArrayList() : kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         // several uses here:
@@ -266,7 +266,7 @@ public class DebuffAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
+        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<>();
 
         if (sa.getTargetRestrictions() == null) {
             if (mandatory) {

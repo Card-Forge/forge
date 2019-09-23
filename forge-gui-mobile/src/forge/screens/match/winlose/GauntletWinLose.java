@@ -52,17 +52,16 @@ public class GauntletWinLose extends ControlWinLose {
                         if (!lstEventNames.isEmpty()) {
                             for (int i = 0; i < len; i++) {
                                 if (i <= num) {
-                                    sb.append((i + 1) + ". " + lstEventNames.get(i)
-                                            + " (" + lstEventRecords.get(i) + ")\n");
+                                    sb.append(i + 1).append(". ").append(lstEventNames.get(i)).append(" (").append(lstEventRecords.get(i)).append(")\n");
                                 } else {
-                                    sb.append((i + 1) + ". ??????\n");
+                                    sb.append(i + 1).append(". ??????\n");
                                 }
                             }
                         }
 
                         if (message1 != null) {
                             sb.append("\n");
-                            sb.append(message1 + "\n\n");
+                            sb.append(message1).append("\n\n");
                             sb.append(message2);
                         }
                         else {

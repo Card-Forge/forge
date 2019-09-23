@@ -17,5 +17,5 @@ public enum AiPlayDecision {
     WouldBecomeZeroToughnessCreature,
     WouldDestroyWorldEnchantment,
     BadEtbEffects,
-    CurseEffects;
+    CurseEffects
 }

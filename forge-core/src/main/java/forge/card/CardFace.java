@@ -20,12 +20,12 @@ final class CardFace implements ICardFace {
     public enum FaceSelectionMethod { // 
         USE_ACTIVE_FACE,
         USE_PRIMARY_FACE,
-        COMBINE;
+        COMBINE
     }
 
     
-    private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<String>());
-    private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<String, String>());
+    private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
+    private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
 
     private final String name;
     private String altName = null;
@@ -87,7 +87,7 @@ final class CardFace implements ICardFace {
     void setInitialLoyalty(String value)        { this.initialLoyalty = value; }
 
     void setPtText(String value) {
-        final String k[] = value.split("/");
+        final String[] k = value.split("/");
 
         if (k.length != 2) {
             throw new RuntimeException("Creature '" + this.getName() + "' has bad p/t stats");
@@ -112,12 +112,12 @@ final class CardFace implements ICardFace {
 
     // Raw fields used for Card creation
     void setNonAbilityText(String value)     { this.nonAbilityText = value; }
-    void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<String>(); } this.keywords.add(value); }
-    void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<String>(); } this.abilities.add(value);}
-    void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<String>(); } this.triggers.add(value);}
-    void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<String>(); } this.staticAbilities.add(value);}
-    void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<String>(); } this.replacements.add(value);}
-    void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
+    void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<>(); } this.keywords.add(value); }
+    void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<>(); } this.abilities.add(value);}
+    void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<>(); } this.triggers.add(value);}
+    void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<>(); } this.staticAbilities.add(value);}
+    void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<>(); } this.replacements.add(value);}
+    void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
 
     
     void assignMissingFields() { // Most scripts do not specify color explicitly

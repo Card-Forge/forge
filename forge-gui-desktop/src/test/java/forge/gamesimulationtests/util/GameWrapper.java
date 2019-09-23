@@ -2,6 +2,7 @@ package forge.gamesimulationtests.util;
 
 import forge.deck.Deck;
 import forge.game.*;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -50,7 +51,7 @@ public class GameWrapper {
 	 * Note that if you use this option, regular startup is ignored (using player deck, shuffling, drawing hand, mulligan, ...)
 	 */
 	public void runGame() {
-		List<RegisteredPlayer> registeredPlayers = new ArrayList<RegisteredPlayer>();
+		List<RegisteredPlayer> registeredPlayers = new ArrayList<>();
 		for( PlayerSpecification player : players ) {
 			RegisteredPlayer registeredPlayer = new RegisteredPlayer(new Deck(player.getName()));
 			LobbyPlayerForTests lobbyPlayer = new LobbyPlayerForTests( player.getName(), playerActions );
@@ -137,8 +138,8 @@ public class GameWrapper {
         //game.getAction().startGame( null ) determines starting player, draws starting hands, handles mulligans, and initiates the first turn
         //skip drawing initial hand and mulliganing
         game.setAge( GameStage.Play );
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        game.getTriggerHandler().runTrigger( TriggerType.NewGame, runParams, false );
+        game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), false);
+
         //first player in the list starts, no coin toss etc
         game.getPhaseHandler().startFirstTurn( game.getPlayers().get( 0 ) );
         game.fireEvent( new GameEventGameFinished() );

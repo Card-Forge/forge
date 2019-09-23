@@ -234,14 +234,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("-------------------\n\n");
 
         for (CardEdition e : editions) {
-            nifSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
-            cniSB.append("Edition: " + e.getName() + " " + "(" + e.getCode() + "/" + e.getCode2() + ")\n");
+            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+            cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
 
             String imagePath;
             int artIndex = 1;
-            ArrayList<String> cis = new ArrayList<String>();
+            ArrayList<String> cis = new ArrayList<>();
 
-            HashMap<String, Integer> cardCount = new HashMap<String, Integer>();
+            HashMap<String, Integer> cardCount = new HashMap<>();
             for (CardInSet c : e.getCards()) {
                 if (cardCount.containsKey(c.name)) {
                     cardCount.put(c.name, cardCount.get(c.name) + 1);
@@ -261,7 +261,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 if (cp == null) {
-                    cniSB.append(" " + c + "\n");
+                    cniSB.append(" ").append(c).append("\n");
                     notImplementedCount++;
                     continue;
                 }
@@ -274,7 +274,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
                     if (file == null) {
-                        nifSB.append(" " + imagePath + "\n");
+                        nifSB.append(" ").append(imagePath).append("\n");
                         missingCount++;
                     }
                 } 
@@ -287,7 +287,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
-                            nifSB.append(" " + imagePath + "\n");
+                            nifSB.append(" ").append(imagePath).append("\n");
                             missingCount++;
                         }
                     } 
@@ -310,7 +310,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                         String imgKey = token.getImageKey(i);
                         File file = ImageKeys.getImageFile(imgKey);
                         if (file == null) {
-                            nifSB.append(" " + token.getImageFilename(i+1) + "\n");
+                            nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
                             missingCount++;
                         }
                     }

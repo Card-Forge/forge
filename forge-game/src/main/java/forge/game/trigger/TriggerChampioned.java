@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -71,14 +72,13 @@ public class TriggerChampioned extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Championed", this.getRunParams().get("Championed"));
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Championed, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Championed: ").append(sa.getTriggeringObject("Championed"));
+        sb.append("Championed: ").append(sa.getTriggeringObject(AbilityKey.Championed));
         return sb.toString();
     }
 }

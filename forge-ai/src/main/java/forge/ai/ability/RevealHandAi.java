@@ -30,11 +30,7 @@ public class RevealHandAi extends RevealAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
-            return false;
-        }
-
-        return true;
+        return revealHandTargetAI(ai, sa/*, false, mandatory*/);
     }
 
 }

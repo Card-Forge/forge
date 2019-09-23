@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -51,10 +52,8 @@ public class TriggerExplores extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+            return matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+                    this.getHostCard());
         }
 
         return true;
@@ -63,14 +62,14 @@ public class TriggerExplores extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Explorer", this.getRunParams().get("Card"));
+        sa.setTriggeringObject(AbilityKey.Explorer, getFromRunParams(AbilityKey.Card));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Explorer: ").append(sa.getTriggeringObject("Explorer"));
+        sb.append("Explorer: ").append(sa.getTriggeringObject(AbilityKey.Explorer));
         return sb.toString();
     }
 }

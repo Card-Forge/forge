@@ -37,7 +37,7 @@ public class Domain extends ProgressiveAchievement {
             return false;
         }
         if (player.getOutcome().hasWon()) {
-            Set<String> basicLands = new HashSet<String>();
+            Set<String> basicLands = new HashSet<>();
             for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
                 String name = c.getName();
                 if (c.isBasicLand() && basicLandMap.containsKey(name)) {

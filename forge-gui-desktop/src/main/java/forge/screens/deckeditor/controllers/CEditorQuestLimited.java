@@ -62,7 +62,7 @@ import java.util.Map.Entry;
 public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
     private final QuestController questData;
     private final DeckController<DeckGroup> controller;
-    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private final List<DeckSection> allSections = new ArrayList<>();
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
@@ -118,7 +118,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
             }
         };
 
-        this.controller = new DeckController<DeckGroup>(questData0.getDraftDecks(), this, newCreator);
+        this.controller = new DeckController<>(questData0.getDraftDecks(), this, newCreator);
         controller.getView().getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
         controller.setModel(questData0.getDraftDecks().get(QuestEventDraft.DECK_NAME));
 
@@ -132,7 +132,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
 
     // fills number of decks using each card
     private Map<PaperCard, Integer> countDecksForEachCard() {
-        final Map<PaperCard, Integer> result = new HashMap<PaperCard, Integer>();
+        final Map<PaperCard, Integer> result = new HashMap<>();
         for (final Deck deck : this.questData.getMyDecks()) {
             for (final Entry<PaperCard, Integer> e : deck.getMain()) {
                 final PaperCard card = e.getKey();
@@ -234,8 +234,8 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
 
         this.decksUsingMyCards = this.countDecksForEachCard();
 
-        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemTableColumn>();
-        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<ColumnDef, ItemTableColumn>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<>();
+        final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<>();
 
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_DECK_EDITOR, colOverridesDeck, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());

@@ -368,7 +368,7 @@ public class ComputerUtilCard {
         }
     
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
+            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     return !card.hasSVar("DoNotDiscardIfAble");
@@ -564,7 +564,7 @@ public class ComputerUtilCard {
         AiBlockController aiBlk = new AiBlockController(ai);
         Combat combat = new Combat(ai);
         combat.addAttacker(attacker, ai);
-        final List<Card> attackers = new ArrayList<Card>();
+        final List<Card> attackers = new ArrayList<>();
         attackers.add(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
@@ -788,7 +788,7 @@ public class ComputerUtilCard {
 
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
-        final List<Pair<Byte,Integer>> map = new ArrayList<Pair<Byte,Integer>>();
+        final List<Pair<Byte,Integer>> map = new ArrayList<>();
         for(int i = 0; i < cntColors; i++) {
             map.add(MutablePair.of(MagicColor.WUBRG[i], 0));
         }
@@ -809,7 +809,7 @@ public class ComputerUtilCard {
         });
     
         // will this part be once dropped?
-        List<String> result = new ArrayList<String>(cntColors);
+        List<String> result = new ArrayList<>(cntColors);
         for(Pair<Byte, Integer> idx : map) { // fetch color names in the same order
             result.add(MagicColor.toLongString(idx.getKey()));
         }
@@ -881,7 +881,7 @@ public class ComputerUtilCard {
         }
     };
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
-        List<String> chosen = new ArrayList<String>();
+        List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
         Player opp = ai.getWeakestOpponent();
@@ -1301,7 +1301,7 @@ public class ComputerUtilCard {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                            : Lists.<String>newArrayList();
+                            : Lists.newArrayList();
                     for (String kw : kws) {
                         if (!kw.equals("Trample") && !kw.equals("First Strike") && !kw.equals("Double Strike")) {
                             combatTrick = false;
@@ -1571,7 +1571,7 @@ public class ComputerUtilCard {
         Card pumped = CardFactory.copyCard(c, true);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
-        final List<String> kws = new ArrayList<String>();
+        final List<String> kws = new ArrayList<>();
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 pumped.addHiddenExtrinsicKeyword(kw);
@@ -1601,8 +1601,8 @@ public class ComputerUtilCard {
         }
 
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
-        pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
-        pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
+        pumped.setPTBoost(c.getPTBoostTable());
+        pumped.addPTBoost(power + berserkPower, toughness, timestamp, null);
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
@@ -1648,7 +1648,9 @@ public class ComputerUtilCard {
         }
         list.add(vCard); // account for the static abilities that may be present on the card itself
         for (final Card c : list) {
+            // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
+                vCard.removePTBoost(c.getTimestamp(), stAb.getId());
                 final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
@@ -1663,26 +1665,25 @@ public class ComputerUtilCard {
                 if (!vCard.isValid(valid, c.getController(), c, null)) {
                     continue;
                 }
+                int att = 0;
                 if (params.containsKey("AddPower")) {
                     String addP = params.get("AddPower");
-                    int att = 0;
                     if (addP.equals("AffectedX")) {
                         att = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addP));
                     } else {
                         att = AbilityUtils.calculateAmount(c, addP, stAb);
                     }
-                    vCard.addTempPowerBoost(att);
                 }
+                int def = 0;
                 if (params.containsKey("AddToughness")) {
                     String addT = params.get("AddToughness");
-                    int def = 0;
                     if (addT.equals("AffectedY")) {
                         def = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addT));
                     } else {
                         def = AbilityUtils.calculateAmount(c, addT, stAb);
                     }
-                    vCard.addTempToughnessBoost(def);
                 }
+                vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
             }
         }
     }

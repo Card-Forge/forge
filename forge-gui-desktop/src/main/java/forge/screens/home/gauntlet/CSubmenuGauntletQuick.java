@@ -68,7 +68,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         });
 
         // Find appropriate filename for new save, create and set new save file.
-        final List<DeckType> allowedDeckTypes = new ArrayList<DeckType>();
+        final List<DeckType> allowedDeckTypes = new ArrayList<>();
         if (view.getBoxColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.COLOR_DECK); }
         if (view.getBoxStandardColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.STANDARD_COLOR_DECK); }
         if (view.getBoxStandardGenDecks().isSelected()) { allowedDeckTypes.add(DeckType.STANDARD_CARDGEN_DECK); }
@@ -83,7 +83,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         final GauntletData gd = GauntletUtil.createQuickGauntlet(view.getLstDecks().getPlayer().getDeck(), view.getSliOpponents().getValue(), allowedDeckTypes, null);
 
-        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(new RegisteredPlayer(gd.getDecks().get(gd.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));

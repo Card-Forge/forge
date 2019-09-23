@@ -45,7 +45,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         
         
         final StringBuilder sb = new StringBuilder();
-        sb.append("Do you want to exile " + host + " and encode it onto a creature you control?");
+        sb.append("Do you want to exile ").append(host).append(" and encode it onto a creature you control?");
         if (!player.getController().confirmAction(sa, null, sb.toString())) {
             return;
         }

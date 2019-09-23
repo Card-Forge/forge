@@ -71,8 +71,8 @@ public class VAssignDamage extends FDialog {
     private final DefendersPanel pnlDefenders;
 
     // Indexes of defenders correspond to their indexes in the damage list and labels.
-    private final List<DamageTarget> defenders = new ArrayList<DamageTarget>(); // NULL in this map means defender
-    private final Map<CardView, DamageTarget> damage = new HashMap<CardView, DamageTarget>();  // NULL in this map means defender
+    private final List<DamageTarget> defenders = new ArrayList<>(); // NULL in this map means defender
+    private final Map<CardView, DamageTarget> damage = new HashMap<>();  // NULL in this map means defender
 
     private boolean canAssignTo(CardView card) {
         for (DamageTarget dt : defenders) {
@@ -456,7 +456,7 @@ public class VAssignDamage extends FDialog {
     }
 
     public Map<CardView, Integer> getDamageMap() {
-        Map<CardView, Integer> result = new HashMap<CardView, Integer>();
+        Map<CardView, Integer> result = new HashMap<>();
         for (DamageTarget dt : defenders) {
             result.put(dt.card, dt.damage);
         }

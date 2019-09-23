@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -217,13 +218,13 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Zone Changer: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Zone Changer: ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

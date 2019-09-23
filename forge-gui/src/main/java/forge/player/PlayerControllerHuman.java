@@ -21,6 +21,7 @@ import forge.deck.DeckSection;
 import forge.events.UiEventNextGameDecision;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
@@ -136,7 +137,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return mayLookAtAllCards;
     }
 
-    private final ArrayList<Card> tempShownCards = new ArrayList<Card>();
+    private final ArrayList<Card> tempShownCards = new ArrayList<>();
 
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
@@ -337,7 +338,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min == 0) {
             builder.append("up to ");
         }
-        builder.append("%d " + message + "(s) to " + action + ".");
+        builder.append("%d ").append(message).append("(s) to ").append(action).append(".");
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(builder.toString());
@@ -446,7 +447,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
         if (useSelectCardsInput(optionList)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1,
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
@@ -485,7 +486,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShow(optionList);
         if (useSelectCardsInput(optionList)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, min, max,
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max,
                     optionList, sa);
             input.setCancelAllowed(true);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
@@ -544,8 +545,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (SpellAbility spellAbility : spells) {
             spellViewCache.put(spellAbility.getView(), spellAbility);
         }
-        List<TrackableObject> choices = new ArrayList<>();
-        choices.addAll(spellViewCache.keySet());
+        List<TrackableObject> choices = new ArrayList<>(spellViewCache.keySet());
         Object choice = getGui().one(title, choices);
 
         // Human is supposed to read the message and understand from it what to
@@ -632,15 +632,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     "CARDNAME", regtrig.getHostCard().getName()));
             buildQuestion.append(")");
         }
-        final Map<String, Object> tos = sa.getTriggeringObjects();
-        if (tos.containsKey("Attacker")) {
-            buildQuestion.append("\nAttacker: " + tos.get("Attacker"));
+        final Map<AbilityKey, Object> tos = sa.getTriggeringObjects();
+        if (tos.containsKey(AbilityKey.Attacker)) {
+            buildQuestion.append("\nAttacker: ").append(tos.get(AbilityKey.Attacker));
         }
-        if (tos.containsKey("Card")) {
-            final Card card = (Card) tos.get("Card");
+        if (tos.containsKey(AbilityKey.Card)) {
+            final Card card = (Card) tos.get(AbilityKey.Card);
             if (card != null && (card.getController() == player || game.getZoneOf(card) == null
                     || game.getZoneOf(card).getZoneType().isKnown())) {
-                buildQuestion.append("\nTriggered by: " + tos.get("Card"));
+                buildQuestion.append("\nTriggered by: ").append(tos.get(AbilityKey.Card));
             }
         }
 
@@ -661,8 +661,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final String prompt = String.format(
                     "%s, you %s\n\nWho would you like to start this game? (Click on the portrait.)", player.getName(),
                     isFirstGame ? " have won the coin toss." : " lost the last game.");
-            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<Player>(this, 1, 1,
-                    new FCollection<Player>(game.getPlayersInTurnOrder()));
+            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1,
+                    new FCollection<>(game.getPlayersInTurnOrder()));
             input.setMessage(prompt);
             input.showAndWait();
             return input.getFirstSelected();
@@ -684,9 +684,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             mapCVtoC.put(card.getView(), card);
         }
         List<CardView> chosen;
-        List<CardView> choices = new ArrayList<CardView>(mapCVtoC.keySet());
+        List<CardView> choices = new ArrayList<>(mapCVtoC.keySet());
         chosen = getGui().order("Exert Attackers?", "Exerted", 0, choices.size(), choices, null, null, false);
-        List<Card> chosenCards = new ArrayList<Card>();
+        List<Card> chosenCards = new ArrayList<>();
         for (CardView cardView : chosen) {
             chosenCards.add(mapCVtoC.get(cardView));
         }
@@ -776,7 +776,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 	    } else {
 		toBottom = game.getCardList(getGui().many("Select cards to be put on the bottom of your library",
 							  "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
-		topN.removeAll((Collection<?>) toBottom);
+		topN.removeAll(toBottom);
 		if (topN.isEmpty()) {
 		    toTop = null;
 		} else if (topN.size() == 1) {
@@ -814,7 +814,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             toGrave = game.getCardList(getGui().many("Select cards to be put into the graveyard",
                     "Cards to put in the graveyard", -1, CardView.getCollection(topN), null));
-            topN.removeAll((Collection<?>) toGrave);
+            topN.removeAll(toGrave);
             if (topN.isEmpty()) {
                 toTop = null;
             } else if (topN.size() == 1) {
@@ -1404,7 +1404,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final boolean call) {
         final String[] labelsSrc = call ? new String[] { "heads", "tails" }
                 : new String[] { "win the flip", "lose the flip" };
-        final ImmutableList.Builder<String> strResults = ImmutableList.<String>builder();
+        final ImmutableList.Builder<String> strResults = ImmutableList.builder();
         for (int i = 0; i < results.length; i++) {
             strResults.add(labelsSrc[results[i] ? 0 : 1]);
         }
@@ -1623,7 +1623,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             // for the purpose of pre-ordering, no need for extra granularity
             Integer idxAdditionalInfo = firstStr.indexOf(" [");
-            String saLookupKey = idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr;
+            StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;
             for (int i = 1; i < activePlayerSAs.size(); i++) {
@@ -1635,14 +1635,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                        // are the same
                 }
 
-                saLookupKey += delim + saStr;
+                saLookupKey.append(delim).append(saStr);
                 idxAdditionalInfo = saLookupKey.indexOf(" [");
                 if (idxAdditionalInfo != -1) {
-                    saLookupKey = saLookupKey.substring(0, idxAdditionalInfo - 1);
+                    saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
                 }
             }
             if (needPrompt) {
-                List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
+                List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
                 List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
 
                 // create a mapping between a spell's view and the spell itself
@@ -1665,8 +1665,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     boolean preselect = FModel.getPreferences()
                             .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
                     orderedSAVs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
-                            preselect ? Lists.<SpellAbilityView>newArrayList() : orderedSAVs,
-                            preselect ? orderedSAVs : Lists.<SpellAbilityView>newArrayList(), null, false);
+                            preselect ? Lists.newArrayList() : orderedSAVs,
+                            preselect ? orderedSAVs : Lists.newArrayList(), null, false);
                 } else {
                     orderedSAVs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAVs,
                             null);
@@ -1681,7 +1681,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (SpellAbility sa : orderedSAs) {
                     savedOrder.add(activePlayerSAs.indexOf(sa));
                 }
-                orderedSALookup.put(saLookupKey, savedOrder);
+                orderedSALookup.put(saLookupKey.toString(), savedOrder);
             }
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
@@ -1829,10 +1829,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return false;
         }
         final Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        if (priorityPlayer == null || priorityPlayer != player) {
-            return false;
-        }
-        return true;
+        return priorityPlayer != null && priorityPlayer == player;
     }
 
     @Override
@@ -2437,9 +2434,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                     TextUtil.concatWithSpace("Should", forgeCard.toString(), "be added to the top or to the bottom of the library?"), true, Arrays.asList("Top", "Bottom"));
                         }
                         if (lastTopOfTheLibrary) {
-                            game.getAction().moveToLibrary(forgeCard, null, null);
+                            game.getAction().moveToLibrary(forgeCard, null);
                         } else {
-                            game.getAction().moveToBottomOfLibrary(forgeCard, null, null);
+                            game.getAction().moveToBottomOfLibrary(forgeCard, null);
                         }
                     } else {
                         game.getAction().moveTo(targetZone, forgeCard, null);
@@ -2741,7 +2738,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (final Player player : game.getPlayers()) {
                         if (player.getId() == entity.getKey()) {
                             found = true;
-                            rememberedActions.add(Pair.of((GameEntityView) player.getView(), true));
+                            rememberedActions.add(Pair.of(player.getView(), true));
                             break;
                         }
                     }
@@ -2749,7 +2746,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (final Card card : cards) {
                         if (card.getId() == entity.getKey()) {
                             found = true;
-                            rememberedActions.add(Pair.of((GameEntityView) card.getView(), false));
+                            rememberedActions.add(Pair.of(card.getView(), false));
                             break;
                         }
                     }
@@ -2861,7 +2858,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (Card card : cards) {
             mapCVtoC.put(card.getView(), card);
         }
-        List<CardView> choices = new ArrayList<CardView>(mapCVtoC.keySet());
+        List<CardView> choices = new ArrayList<>(mapCVtoC.keySet());
         List<CardView> chosen;
         chosen = getGui().many(
                 "Choose cards to Splice onto",
@@ -2871,7 +2868,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 choices,
                 sa.getHostCard().getView()
         );
-        List<Card> chosenCards = new ArrayList<Card>();
+        List<Card> chosenCards = new ArrayList<>();
         for (CardView cardView : chosen) {
             chosenCards.add(mapCVtoC.get(cardView));
         }

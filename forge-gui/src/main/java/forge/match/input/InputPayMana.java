@@ -26,6 +26,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
@@ -43,7 +44,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     private final boolean wasFloatingMana;
-    private final Queue<Card> delaySelectCards = new LinkedList<Card>();
+    private final Queue<Card> delaySelectCards = new LinkedList<>();
 
     private boolean bPaid = false;
     protected Boolean canPayManaCost = null;
@@ -141,7 +142,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public List<SpellAbility> getUsefulManaAbilities(Card card) {
-        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        List<SpellAbility> abilities = new ArrayList<>();
 
         if (card.getController() != player) {
             return abilities;
@@ -362,8 +363,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
         final Game g = source.getGame();
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
-        repParams.put("Event", "ProduceMana");
+        final HashMap<String, Object> repParams = new HashMap<>();
         repParams.put("Mana", m.getOrigProduced());
         repParams.put("Affected", source);
         repParams.put("Player", activator);
@@ -373,8 +373,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck(g)
+                            && replacementEffect.getMode() == ReplacementType.ProduceMana
                             && replacementEffect.canReplace(repParams)
-                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.hasParam("ManaReplacement")
                             && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
                         return true;
                     }

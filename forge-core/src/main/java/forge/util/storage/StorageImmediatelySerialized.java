@@ -39,7 +39,7 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     private final Function<File, IStorage<T>> nestedFactory = new Function<File, IStorage<T>>() {
         @Override
         public IStorage<T> apply(File file) {
-            return new StorageImmediatelySerialized<T>(file.getName(), (IItemSerializer<T>) serializer.getReaderForFolder(file), true);
+            return new StorageImmediatelySerialized<>(file.getName(), (IItemSerializer<T>) serializer.getReaderForFolder(file), true);
         }
     };
 
@@ -57,7 +57,7 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     public StorageImmediatelySerialized(String name, final IItemSerializer<T> io, boolean withSubFolders) {
         super(name, io);
         this.serializer = io;
-        subfolders = withSubFolders ? new StorageNestedFolders<T>(io.getDirectory(), io.getSubFolders(), nestedFactory) : null;
+        subfolders = withSubFolders ? new StorageNestedFolders<>(io.getDirectory(), io.getSubFolders(), nestedFactory) : null;
     }
 
     /*

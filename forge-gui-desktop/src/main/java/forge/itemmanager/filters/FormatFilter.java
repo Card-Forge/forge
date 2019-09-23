@@ -13,7 +13,7 @@ import java.util.Set;
 
 public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFilter<T> {
     protected boolean allowReprints = true;
-    protected final Set<GameFormat> formats = new HashSet<GameFormat>();
+    protected final Set<GameFormat> formats = new HashSet<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -25,8 +25,8 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
 
     @Override
     protected String getTooltip() {
-        Set<String> sets = new HashSet<String>();
-        Set<String> bannedCards = new HashSet<String>();
+        Set<String> sets = new HashSet<>();
+        Set<String> bannedCards = new HashSet<>();
         Set<String> additionalCards = new HashSet<>();
 
         for (GameFormat format : this.formats) {
@@ -158,7 +158,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
 
     @Override
     protected Iterable<String> getList() {
-        Set<String> strings = new HashSet<String>();
+        Set<String> strings = new HashSet<>();
         for (GameFormat f : this.formats) {
             strings.add(f.getName());
         }

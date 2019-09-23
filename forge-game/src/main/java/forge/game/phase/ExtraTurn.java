@@ -36,7 +36,7 @@ import forge.game.trigger.Trigger;
 public class ExtraTurn {
 
     private Player player = null;
-    private List<Trigger> delTrig = Collections.synchronizedList(new ArrayList<Trigger>());
+    private List<Trigger> delTrig = Collections.synchronizedList(new ArrayList<>());
     private boolean skipUntap = false;
     private boolean cantSetSchemesInMotion = false;
     /**

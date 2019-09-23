@@ -1,0 +1,11 @@
+Name:Brimstone Trebuchet
+ManaCost:2 R
+Types:Artifact Creature Wall
+PT:1/3
+K:Defender
+K:Reach
+A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Knight+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Knight enters the battlefield under your control, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:BuffedBy:Knight
+Oracle:Defender, reach\n{T}: Brimstone Trebuchet deals 1 damage to each opponent.\nWhenever a Knight enters the battlefield under your control, untap Brimstone Trebuchet.

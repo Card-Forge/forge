@@ -69,19 +69,19 @@ public class XmlReader {
         return parseChildElements(key, null, collectionType, paperCardBuilder);
     }
     public <T extends IXmlWritable> T read(String key, Class<T> type) {
-        return parseChildElements(key, new GenericBuilder<T>(type));
+        return parseChildElements(key, new GenericBuilder<>(type));
     }
     public <V extends IXmlWritable, T extends Collection<V>> void read(String key, T collectionToLoad, Class<V> elementType) {
-        parseChildElements(key, collectionToLoad, null, new GenericBuilder<V>(elementType));
+        parseChildElements(key, collectionToLoad, null, new GenericBuilder<>(elementType));
     }
     public <V extends IXmlWritable, T extends Collection<V>> T read(String key, Class<T> collectionType, Class<V> elementType) {
-        return parseChildElements(key, null, collectionType, new GenericBuilder<V>(elementType));
+        return parseChildElements(key, null, collectionType, new GenericBuilder<>(elementType));
     }
     public <V extends IXmlWritable> void read(final String key, final V[] array, final Class<V> elementType) {
         parseChildElements(key, new Evaluator<Void>() {
             @Override
             public Void evaluate() {
-                final GenericBuilder<V> builder = new GenericBuilder<V>(elementType);
+                final GenericBuilder<V> builder = new GenericBuilder<>(elementType);
                 return parseChildElements(null, new Evaluator<Void>() {
                     @Override
                     public Void evaluate() {
@@ -107,7 +107,7 @@ public class XmlReader {
         parseChildElements(key, new Evaluator<Void>() {
             @Override
             public Void evaluate() {
-                final GenericBuilder<V> builder = new GenericBuilder<V>(valueType);
+                final GenericBuilder<V> builder = new GenericBuilder<>(valueType);
                 return parseChildElements(null, new Evaluator<Void>() {
                     @Override
                     public Void evaluate() {
@@ -131,7 +131,7 @@ public class XmlReader {
         parseChildElements(key, new Evaluator<Void>() {
             @Override
             public Void evaluate() {
-                final GenericBuilder<V> builder = new GenericBuilder<V>(valueType);
+                final GenericBuilder<V> builder = new GenericBuilder<>(valueType);
                 return parseChildElements(null, new Evaluator<Void>() {
                     @Override
                     public Void evaluate() {

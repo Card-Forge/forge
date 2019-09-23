@@ -78,7 +78,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
 
         boolean mayChooseNewTargets = true;
-        List<SpellAbility> copies = new ArrayList<SpellAbility>();
+        List<SpellAbility> copies = new ArrayList<>();
         
         if (sa.hasParam("CopyMultipleSpells")) {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));

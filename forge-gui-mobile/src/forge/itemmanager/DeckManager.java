@@ -18,6 +18,7 @@ import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import com.badlogic.gdx.utils.Align;
@@ -39,7 +40,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
         gameType = gt;
-        setCaption("Decks");
+        setCaption(Localizer.getInstance().getMessage("lblDecks"));
     }
 
     public GameType getGameType() {
@@ -68,12 +69,12 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     @Override
     protected TextSearchFilter<DeckProxy> createSearchFilter() {
-        return new TextSearchFilter<DeckProxy>(this);
+        return new TextSearchFilter<>(this);
     }
 
     @Override
     protected AdvancedSearchFilter<DeckProxy> createAdvancedSearchFilter() {
-        return new AdvancedSearchFilter<DeckProxy>(this);
+        return new AdvancedSearchFilter<>(this);
     }
 
     @Override

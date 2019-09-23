@@ -14,7 +14,7 @@ import forge.game.player.RegisteredPlayer;
 
 @SuppressWarnings("unused")
 public class DeckRecords {
-    private static final Map<String, DeckRecords> recordLookup = new HashMap<String, DeckRecords>();
+    private static final Map<String, DeckRecords> recordLookup = new HashMap<>();
 
     public static void recordMatchOutcome(Match match) {
         for (RegisteredPlayer p1 : match.getPlayers()) {
@@ -25,7 +25,7 @@ public class DeckRecords {
         }
     }
 
-    private final List<DeckMatch> matches = new ArrayList<DeckMatch>();
+    private final List<DeckMatch> matches = new ArrayList<>();
 
     public void addMatch(Match match, LobbyPlayer player) {
         matches.add(new DeckMatch(match, player));
