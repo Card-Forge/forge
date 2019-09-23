@@ -48,6 +48,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -687,9 +688,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (result && runTriggers) {
                 // Run replacement effects
                 Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Event", "TurnFaceUp");
                 repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1234,14 +1234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("Source", source);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
@@ -3574,10 +3573,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Run Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "Untap");
         repRunParams.put("Affected", this);
 
-        if (getGame().getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -4702,7 +4700,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final Card ca : getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
                 if (params.containsKey("ValidSource")

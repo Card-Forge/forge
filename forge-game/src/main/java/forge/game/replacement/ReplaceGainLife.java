@@ -43,20 +43,20 @@ public class ReplaceGainLife extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("GainLife") || ((int)runParams.get("LifeGained")) <= 0) {
+        if (((int)runParams.get("LifeGained")) <= 0) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), this.getMapParams().get("ValidSource").split(","), this.getHostCard())) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if ("True".equals(this.getMapParams().get("SourceController"))) {
+        if ("True".equals(getParam("SourceController"))) {
             if (runParams.get("Source") == null || !runParams.get("Affected").equals(((Card)runParams.get("Source")).getController())) {
                 return false;
             }

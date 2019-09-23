@@ -25,6 +25,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -1364,7 +1365,8 @@ public class ComputerUtilMana {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck(game)
-                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.getMode() == ReplacementType.ProduceMana
+                            && replacementEffect.hasParam("ManaReplacement")
                             && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
                         replacementEffects.add(replacementEffect);
                     }
@@ -1405,7 +1407,6 @@ public class ComputerUtilMana {
 
                 // setup produce mana replacement effects
                 final Map<String, Object> repParams = new HashMap<>();
-                repParams.put("Event", "ProduceMana");
                 repParams.put("Mana", mp.getOrigProduced());
                 repParams.put("Affected", sourceCard);
                 repParams.put("Player", ai);

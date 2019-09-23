@@ -35,6 +35,7 @@ import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
@@ -292,7 +293,6 @@ public class GameAction {
             }
 
             Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-            repParams.put(AbilityKey.Event, "Moved");
             repParams.put(AbilityKey.Affected, copied);
             repParams.put(AbilityKey.CardLKI, lastKnownInfo);
             repParams.put(AbilityKey.Cause, cause);
@@ -303,7 +303,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, toStringMap(repParams));
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -1399,13 +1399,12 @@ public class GameAction {
 
         // Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "Destroy");
         repRunParams.put("Source", sa);
         repRunParams.put("Card", c);
         repRunParams.put("Affected", c);
         repRunParams.put("Regeneration", regenerate);
 
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 

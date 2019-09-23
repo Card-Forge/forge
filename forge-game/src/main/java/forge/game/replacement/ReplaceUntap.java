@@ -45,15 +45,12 @@ public class ReplaceUntap extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("Untap")) {
-            return false;
-        }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("UntapStep")) {
+        if (hasParam("UntapStep")) {
             final Object o = runParams.get("Affected");
             //normally should not happen, but protect from possible crash.
             if (!(o instanceof Card)) {

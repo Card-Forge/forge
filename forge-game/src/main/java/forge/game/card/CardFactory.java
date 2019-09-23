@@ -671,12 +671,12 @@ public class CardFactory {
         }
 
         trig.setActivatingPlayer(sa.getActivatingPlayer());
-        if (t.getMapParams().containsKey("TriggerController")) {
+        if (t.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getMapParams().get("TriggerController"), trig).get(0);
             trig.setActivatingPlayer(p);
         }
 
-        if (t.getMapParams().containsKey("RememberController")) {
+        if (t.hasParam("RememberController")) {
             sa.getHostCard().addRemembered(sa.getActivatingPlayer());
         }
 
