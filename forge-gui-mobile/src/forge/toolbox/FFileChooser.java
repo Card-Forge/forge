@@ -12,6 +12,7 @@ import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,7 +63,7 @@ public class FFileChooser extends FDialog {
             }
         });
 
-        initButton(0, "OK", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activateSelectedFile(true);
