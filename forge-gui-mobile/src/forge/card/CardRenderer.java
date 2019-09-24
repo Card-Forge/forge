@@ -544,7 +544,7 @@ public class CardRenderer {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
         }
         //Ability Icons
-        boolean onbattlefield = card.getZone().equals(ZoneType.Battlefield);
+        boolean onbattlefield = ZoneType.Battlefield.equals(card.getZone());
         float abiY = cy;
         float abiX = cx + ((cw*2)/2.3f);
         float abiScale = cw / 5.5f;
