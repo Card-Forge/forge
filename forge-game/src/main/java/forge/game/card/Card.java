@@ -5358,7 +5358,63 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
-
+    public String getProtectionKey() {
+        String protectKey = "";
+        boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("Protection")) {
+                continue;
+            }
+            if (kw.equals("Protection from red")) {
+                if (!pR) {
+                    pR = true;
+                    protectKey += "R";
+                }
+            } else if (kw.equals("Protection from green")) {
+                if (!pG) {
+                    pG = true;
+                    protectKey += "G";
+                }
+            } else if (kw.equals("Protection from black")) {
+                if (!pB) {
+                    pB = true;
+                    protectKey += "B";
+                }
+            } else if (kw.equals("Protection from blue")) {
+                if (!pU) {
+                    pU = true;
+                    protectKey += "U";
+                }
+            } else if (kw.equals("Protection from white")) {
+                if (!pW) {
+                    pW = true;
+                    protectKey += "W";
+                }
+            } else if (kw.equals("Protection from monocolored")) {
+                protectKey += "monocolored:";
+            } else if (kw.equals("Protection from multicolored")) {
+                protectKey += "multicolored:";
+            } else if (kw.equals("Protection from all colors")) {
+                protectKey += "allcolors:";
+            } else if (kw.equals("Protection from colorless")) {
+                protectKey += "colorless:";
+            } else if (kw.equals("Protection from creatures")) {
+                protectKey += "creatures:";
+            } else if (kw.equals("Protection from artifacts")) {
+                protectKey += "artifacts:";
+            } else if (kw.equals("Protection from enchantments")) {
+                protectKey += "enchantments:";
+            } else if (kw.equals("Protection from everything")) {
+                protectKey += "everything:";
+            } else if (kw.equals("Protection from colored spells")) {
+                protectKey += "coloredspells:";
+            } else if (kw.startsWith("Protection")) {
+                protectKey += "generic";
+            }
+        }
+        return protectKey;
+    }
     public Zone getZone() {
         return currentZone;
     }

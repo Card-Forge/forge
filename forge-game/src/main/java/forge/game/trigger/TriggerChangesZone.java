@@ -113,12 +113,6 @@ public class TriggerChangesZone extends Trigger {
                     getHostCard(), null)) {
                 return false;
             }
-
-            // if it is a die trigger, and the hostcard is the moved one, but it doesn't has the trigger
-            // only for non-static
-            if (!isStatic() && leavesBattlefield && moved.equals(getHostCard()) && !moved.hasTrigger(this)) {
-                return false;
-            }
         }
 
         if (hasParam("ValidCause")) {

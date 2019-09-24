@@ -292,7 +292,42 @@ public enum FSkinProp {
     IMG_FAV5    (new int[] {400, 0, 100, 100}, PropType.FAVICON),
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
  
-    IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE);
+    IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
+
+    IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FLYING         (new int[] {330, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF       (new int[] {412, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_INDESTRUCTIBLE (new int[] {2, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_INTIMIDATE     (new int[] {166, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_LIFELINK       (new int[] {84, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_MENACE         (new int[] {166, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_REACH          (new int[] {248, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_SHROUD         (new int[] {330, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_TRAMPLE        (new int[] {412, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_VIGILANCE      (new int[] {2, 412, 80, 80}, PropType.ABILITY),
+
+    IMG_ABILITY_PROTECT_ALL           (new int[] {248, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_B             (new int[] {330, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_BU            (new int[] {412, 84, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_BW            (new int[] {2, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_COLOREDSPELLS (new int[] {84, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_G             (new int[] {166, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_GB            (new int[] {248, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_GU            (new int[] {330, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_GW            (new int[] {412, 166, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_GENERIC       (new int[] {2, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_R             (new int[] {84, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_RB            (new int[] {166, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_RG            (new int[] {248, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_RU            (new int[] {330, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_RW            (new int[] {412, 248, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_U             (new int[] {2, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_UW            (new int[] {84, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_PROTECT_W             (new int[] {166, 330, 80, 80}, PropType.ABILITY);
     
     private int[] coords;
     private PropType type;
@@ -325,6 +360,7 @@ public enum FSkinProp {
         FOIL,
         OLD_FOIL,
         TROPHY,
+        ABILITY,
         PLANAR_CONQUEST,
         FAVICON
     }
