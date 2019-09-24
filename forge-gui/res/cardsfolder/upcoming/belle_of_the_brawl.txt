@@ -2,8 +2,8 @@ Name:Belle of the Brawl
 ManaCost:2 B
 Types:Creature Human Knight
 PT:3/2
-K:Menance
+K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other Knights you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Knight.YouCtrl+Other | NumAtt$ 1
 DeckHints:Type$Knight
-Oracle:Menance\nWhenever Belle of the Brawl attacks, other Knights you control get +1/+0 until end of turn.
+Oracle:Menace\nWhenever Belle of the Brawl attacks, other Knights you control get +1/+0 until end of turn.
