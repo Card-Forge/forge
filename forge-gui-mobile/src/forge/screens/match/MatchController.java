@@ -187,7 +187,9 @@ public class MatchController extends AbstractGuiGame {
         final PlayerView p = gameView.getPlayerTurn();
         final PhaseType ph = gameView.getPhase();
 
-        final PhaseLabel lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        PhaseLabel lbl = null;
+        if(p != null && ph != null)
+            lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
 
         view.resetAllPhaseButtons();
         if (lbl != null) {

@@ -67,6 +67,8 @@ public class ComputerUtilMana {
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
+        if(ai == null || sa == null)
+            return false;
         sa.setActivatingPlayer(ai);
         return payManaCost(sa, ai, true, 0, false);
     }
