@@ -609,7 +609,26 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasHexproof()) {
-                CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
+                if (!card.getCurrentState().getHexproofKey().isEmpty()){
+                    if (card.getCurrentState().getHexproofKey().equals("R"))
+                        CardFaceSymbols.drawSymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("B"))
+                        CardFaceSymbols.drawSymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("U"))
+                        CardFaceSymbols.drawSymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("G"))
+                        CardFaceSymbols.drawSymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("W"))
+                        CardFaceSymbols.drawSymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("UB") || card.getCurrentState().getHexproofKey().equals("BU"))
+                        CardFaceSymbols.drawSymbol("hexproofUB", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("monocolored"))
+                        CardFaceSymbols.drawSymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
+                    else
+                        CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
+                }
+                else
+                    CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
                 abiY += abiSpace;

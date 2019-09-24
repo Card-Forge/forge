@@ -118,7 +118,15 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("shroud", FSkinImage.IMG_ABILITY_SHROUD);
         MANA_IMAGES.put("trample", FSkinImage.IMG_ABILITY_TRAMPLE);
         MANA_IMAGES.put("vigilance", FSkinImage.IMG_ABILITY_VIGILANCE);
-
+        //hexproof from
+        MANA_IMAGES.put("hexproofR", FSkinImage.IMG_ABILITY_HEXPROOF_R);
+        MANA_IMAGES.put("hexproofG", FSkinImage.IMG_ABILITY_HEXPROOF_G);
+        MANA_IMAGES.put("hexproofB", FSkinImage.IMG_ABILITY_HEXPROOF_B);
+        MANA_IMAGES.put("hexproofU", FSkinImage.IMG_ABILITY_HEXPROOF_U);
+        MANA_IMAGES.put("hexproofW", FSkinImage.IMG_ABILITY_HEXPROOF_W);
+        MANA_IMAGES.put("hexproofC", FSkinImage.IMG_ABILITY_HEXPROOF_C);
+        MANA_IMAGES.put("hexproofUB", FSkinImage.IMG_ABILITY_HEXPROOF_UB);
+        //protection from
         MANA_IMAGES.put("protectAll", FSkinImage.IMG_ABILITY_PROTECT_ALL);
         MANA_IMAGES.put("protectB", FSkinImage.IMG_ABILITY_PROTECT_B);
         MANA_IMAGES.put("protectBU", FSkinImage.IMG_ABILITY_PROTECT_BU);

@@ -309,7 +309,15 @@ public enum FSkinProp {
     IMG_ABILITY_SHROUD         (new int[] {330, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_TRAMPLE        (new int[] {412, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_VIGILANCE      (new int[] {2, 412, 80, 80}, PropType.ABILITY),
-
+    //Hexproof From
+    IMG_ABILITY_HEXPROOF_R       (new int[] {2, 494, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_G       (new int[] {412, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_B       (new int[] {248, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_U       (new int[] {84, 494, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_W       (new int[] {248, 494, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_C       (new int[] {330, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_HEXPROOF_UB      (new int[] {166, 494, 80, 80}, PropType.ABILITY),
+    //Protection From
     IMG_ABILITY_PROTECT_ALL           (new int[] {248, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_B             (new int[] {330, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_BU            (new int[] {412, 84, 80, 80}, PropType.ABILITY),
