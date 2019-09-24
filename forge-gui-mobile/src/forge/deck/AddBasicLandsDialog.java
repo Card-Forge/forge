@@ -46,6 +46,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import com.badlogic.gdx.utils.Align;
@@ -60,7 +61,7 @@ public class AddBasicLandsDialog extends FDialog {
 
     private final Callback<CardPool> callback;
 
-    private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
+    private final FLabel lblLandSet = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblLandSet") + ":").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
     private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
@@ -117,7 +118,7 @@ public class AddBasicLandsDialog extends FDialog {
     private CardEdition landSet;
 
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
-        super("Add Basic Lands to " + deck.getName() + "\n(double-tap statistics to auto-suggest)", 2);
+        super(Localizer.getInstance().getMessage("lblAddBasicLandsAutoSuggest").replace("%s", deck.getName()), 2);
 
         callback = callback0;
         currentDeck = deck;
@@ -139,7 +140,7 @@ public class AddBasicLandsDialog extends FDialog {
         });
         cbLandSet.setSelectedItem(defaultLandSet);
 
-        initButton(0, "OK", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 CardPool landsToAdd = new CardPool();
@@ -156,7 +157,7 @@ public class AddBasicLandsDialog extends FDialog {
                 }
             }
         });
-        initButton(1, "Cancel", new FEventHandler() {
+        initButton(1, Localizer.getInstance().getMessage("lblCancel"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -289,10 +290,10 @@ public class AddBasicLandsDialog extends FDialog {
         }
         int newTotalCount = nonLandCount + oldLandCount + newLandCount;
         lblDeckInfo.setText(
-                nonLandCount + " non-lands + " +
-                oldLandCount + " lands + " +
-                newLandCount + " added lands = " +
-                newTotalCount + " cards\n" +
+                String.format(Localizer.getInstance().getMessage("lblNonLandCount"), nonLandCount) + " + " +
+                String.format(Localizer.getInstance().getMessage("lblOldLandCount"), oldLandCount) + " + " +
+                String.format(Localizer.getInstance().getMessage("lblNewLandCount"), newLandCount) + " = " +
+                String.format(Localizer.getInstance().getMessage("lblNewTotalCount"), newTotalCount) + "\n" +
                 "{W} " + integer.format(pnlPlains.symbolCount) + " (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
                 "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
                 "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
@@ -374,9 +375,9 @@ public class AddBasicLandsDialog extends FDialog {
             if (landSet == null) { return; }
 
             int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
-            cbLandArt.addItem("Assorted Art");
+            cbLandArt.addItem(Localizer.getInstance().getMessage("lblAssortedArt"));
             for (int i = 1; i <= artChoiceCount; i++) {
-                cbLandArt.addItem("Card Art " + i);
+                cbLandArt.addItem(String.format(Localizer.getInstance().getMessage("lblCardArt"), i));
             }
         }
 

@@ -40,6 +40,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -235,10 +236,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "SetInMotion");
         repRunParams.put("Affected", this);
 
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.SetInMotion, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -404,7 +404,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Run any applicable replacement effects.
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
         repParams.put("LifeGained", lifeGain);
         repParams.put("Source", source);
@@ -413,7 +412,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:
             break;
         case Updated:
@@ -916,14 +915,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("Source", source);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
@@ -1279,12 +1277,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void surveil(int num, SpellAbility cause) {
 
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "Surveil");
         repParams.put("Affected", this);
         repParams.put("Source", cause);
         repParams.put("SurveilNum", num);
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.Surveil, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
@@ -1350,11 +1347,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "DrawCards");
         repRunParams.put("Affected", this);
         repRunParams.put("Number", n);
 
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1383,10 +1379,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "Draw");
         repRunParams.put("Affected", this);
 
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Draw, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1562,12 +1557,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!discardToTopOfLibrary && !discardMadness) {
             // Replacement effects
             final Map<String, Object> repRunParams = Maps.newHashMap();
-            repRunParams.put("Event", "Discard");
             repRunParams.put("Card", c);
             repRunParams.put("Source", source);
             repRunParams.put("Affected", this);
 
-            if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
                 return null;
             }
         }
@@ -1869,9 +1863,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             // Replacement effects
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Affected", this);
-            runParams.put("Event", "GameLoss");
 
-            if (game.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().run(ReplacementType.GameLoss, runParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }

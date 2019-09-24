@@ -48,10 +48,11 @@ public class TriggerAdapt extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        final Card sac = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card sac = (Card) runParams.get(AbilityKey.Card);
         if (hasParam("ValidCard")) {
             if (!sac.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
                     getHostCard(), null)) {

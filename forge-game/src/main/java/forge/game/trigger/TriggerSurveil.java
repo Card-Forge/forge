@@ -59,10 +59,11 @@ public class TriggerSurveil extends Trigger {
         sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        Player p = (Player) runParams2.get("Player");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        Player p = (Player) runParams.get(AbilityKey.Player);
         if (hasParam("ValidPlayer")) {
             if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
@@ -70,7 +71,7 @@ public class TriggerSurveil extends Trigger {
         }
 
         if (hasParam("OnlyFirst")) {
-            if ((int) runParams2.get("NumThisTurn") != 1) {
+            if ((int) runParams.get(AbilityKey.NumThisTurn) != 1) {
                 return false;
             }
         }

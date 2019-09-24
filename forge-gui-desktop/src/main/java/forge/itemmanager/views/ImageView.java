@@ -46,15 +46,10 @@ import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.FComboBoxWrapper;
-import forge.toolbox.FLabel;
-import forge.toolbox.FMouseAdapter;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextField;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
@@ -82,6 +77,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
+
     private final List<ItemInfo> orderedItems = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
     final Localizer localizer = Localizer.getInstance();
@@ -210,14 +206,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 setColumnCount(cbColumnCount.getSelectedItem());
             }
         });
-
-        getPnlOptions().add(btnExpandCollapseAll, "w " + FTextField.HEIGHT + "px, h " + FTextField.HEIGHT + "px");
-        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblGroupby") +":").fontSize(12).build());
-        cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
-        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblPileby") +":").fontSize(12).build());
-        cbPileByOptions.addTo(getPnlOptions(), "pushx, growx");
-        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblColumns") +":").fontSize(12).build());
-        cbColumnCount.addTo(getPnlOptions(), "w 38px!");
 
         //setup display
         display = new CardViewDisplay();
@@ -349,9 +337,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemTableColumn> colOverrides) {
+        setPanelOptions(config.getShowUniqueCardsOption());
         setGroupBy(config.getGroupBy(), true);
         setPileBy(config.getPileBy(), true);
         setColumnCount(config.getImageColumnCount(), true);
+    }
+
+    private void setPanelOptions(boolean showUniqueCardsOption) {
+        // Collapse all groups first
+        getPnlOptions().add(btnExpandCollapseAll, "w " + FTextField.HEIGHT + "px, h " + FTextField.HEIGHT + "px");
+        // Show Unique Cards Only Option
+        if (showUniqueCardsOption) {
+            setUniqueCardsOnlyFilter();
+        }
+        // GroupBy, Pile by, Columns
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblGroupby") +":").fontSize(12).build());
+        cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblPileby") +":").fontSize(12).build());
+        cbPileByOptions.addTo(getPnlOptions(), "pushx, growx");
+        getPnlOptions().add(new FLabel.Builder().text(localizer.getMessage("lblColumns") +":").fontSize(12).build());
+        cbColumnCount.addTo(getPnlOptions(), "w 38px!");
     }
 
     public GroupDef getGroupBy() {

@@ -40,6 +40,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** The ID. */
     private int id;
 
+    private ReplacementType mode;
+
     private ReplacementLayer layer = ReplacementLayer.Other;
 
     /** The has run. */
@@ -263,5 +265,13 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     @Override
     public int hashCode() {
         return Objects.hash(ReplacementEffect.class, getId());
+    }
+
+    public ReplacementType getMode() {
+        return mode;
+    }
+
+    void setMode(ReplacementType mode) {
+        this.mode = mode;
     }
 }

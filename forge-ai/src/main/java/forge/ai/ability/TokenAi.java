@@ -488,7 +488,7 @@ public class TokenAi extends SpellAbilityAi {
             for (final String s : tokenTriggers) {
                 final String actualTrigger = host.getSVar(s);
                 final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, token, true);
-                final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
+                final String ability = host.getSVar(parsedTrigger.getParam("Execute"));
                 parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, token));
                 token.addTrigger(parsedTrigger);
             }

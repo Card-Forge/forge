@@ -49,11 +49,12 @@ public class TriggerBecomeMonstrous extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(Map<String, Object> runParams2) {
+    public final boolean performTest(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }

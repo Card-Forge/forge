@@ -45,6 +45,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
 
 /**
@@ -128,12 +129,11 @@ public class AbilityManaPart implements java.io.Serializable {
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "ProduceMana");
         repParams.put("Mana", afterReplace);
         repParams.put("Affected", source);
         repParams.put("Player", player);
         repParams.put("AbilityMana", sa);
-        if (player.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         //clear lastProduced

@@ -48,10 +48,11 @@ public class TriggerTaps extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        final Card tapper = (Card) runParams2.get("Card");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card tapper = (Card) runParams.get(AbilityKey.Card);
 
         if (hasParam("ValidCard")) {
             if (!tapper.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
@@ -61,11 +62,11 @@ public class TriggerTaps extends Trigger {
         }
         if (hasParam("Attacker")) {
             if ("True".equalsIgnoreCase(getParam("Attacker"))) {
-                if (!(Boolean)runParams2.get("Attacker")) {
+                if (!(Boolean) runParams.get(AbilityKey.Attacker)) {
                     return false;
                 }
             } else if ("False".equalsIgnoreCase(getParam("Attacker"))) {
-                if ((Boolean)runParams2.get("Attacker")) {
+                if ((Boolean) runParams.get(AbilityKey.Attacker)) {
                     return false;
                 }
             }

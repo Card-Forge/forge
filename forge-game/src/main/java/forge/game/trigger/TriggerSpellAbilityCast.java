@@ -65,12 +65,13 @@ public class TriggerSpellAbilityCast extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
-        final SpellAbility spellAbility = (SpellAbility) runParams2.get("CastSA");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CastSA);
         if (spellAbility == null) {
-            System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams2);
+            System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams);
             return false;
         }
         final Card cast = spellAbility.getHostCard();
@@ -179,28 +180,28 @@ public class TriggerSpellAbilityCast extends Trigger {
                 }
             }
             candidates.removeAll(targetedSA.getTargets().getTargetCards());
-            String valid = this.mapParams.get("CanTargetOtherCondition");
+            String valid = getParam("CanTargetOtherCondition");
             if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard()).isEmpty()) {
                 return false;
             }
         }
 
         if (hasParam("NonTapCost")) {
-            final Cost cost = (Cost) (runParams2.get("Cost"));
+            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
             if (cost.hasTapCost()) {
                 return false;
             }
         }
 
         if (hasParam("HasTapCost")) {
-            final Cost cost = (Cost) (runParams2.get("Cost"));
+            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
             if (!cost.hasTapCost()) {
                 return false;
             }
         }
 
         if (hasParam("HasXManaCost")) {
-            final Cost cost = (Cost) (runParams2.get("Cost"));
+            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
             if (cost.hasNoManaCost()) {
                 return false;
             }
@@ -210,7 +211,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (hasParam("HasNoManaCost")) {
-            final Cost cost = (Cost) (runParams2.get("Cost"));
+            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
             if (!cost.getTotalMana().isZero()) {
                 return false;
             }

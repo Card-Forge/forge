@@ -14,20 +14,20 @@ public class TriggerCrewed extends Trigger {
     }
 
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidVehicle")) {
-            if (!matchesValid(runParams2.get("Vehicle"), getParam("ValidVehicle").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Vehicle), getParam("ValidVehicle").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidCrew")) {
-            if (runParams2.get("Crew") == null) {
+            if (runParams.get(AbilityKey.Crew) == null) {
                 return false;
             }
 
             boolean passes = false;
-            for (Object member : (CardCollection)runParams2.get("Crew")) {
+            for (Object member : (CardCollection) runParams.get(AbilityKey.Crew)) {
                 passes |= matchesValid(member, getParam("ValidCrew").split(","),
                         this.getHostCard());
             }

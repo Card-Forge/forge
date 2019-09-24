@@ -28,37 +28,37 @@ public class ReplaceAddCounter extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("AddCounter") || ((int) runParams.get("CounterNum")) <= 0) {
+        if (((int) runParams.get("CounterNum")) <= 0) {
             return false;
         }
 
-        if (mapParams.containsKey("EffectOnly")) {
+        if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get("EffectOnly");
             if (!effectOnly) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             Object o = runParams.get("Affected");
             if (!(o instanceof Card)) {
                 return false;
             }
-            if (!matchesValid(o, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(o, getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
-        } else if (mapParams.containsKey("ValidPlayer")) {
+        } else if (hasParam("ValidPlayer")) {
             Object o = runParams.get("Affected");
             if (!(o instanceof Player)) {
                 return false;
             }
-            if (!matchesValid(o, this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(o, getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidCounterType")) {
-            String type = this.getMapParams().get("ValidCounterType");
+        if (hasParam("ValidCounterType")) {
+            String type = getParam("ValidCounterType");
             if (CounterType.getType(type) != runParams.get("CounterType")) {
                 return false;
             }

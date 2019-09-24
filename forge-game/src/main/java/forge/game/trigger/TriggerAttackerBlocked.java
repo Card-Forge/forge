@@ -50,18 +50,19 @@ public class TriggerAttackerBlocked extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), getParam("ValidCard").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
                     getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("MinBlockers")) {
-            if ((int)runParams2.get("NumBlockers") < Integer.valueOf(getParam("MinBlockers"))) {
+            if ((int) runParams.get(AbilityKey.NumBlockers) < Integer.valueOf(getParam("MinBlockers"))) {
                 return false;
             }
         }
@@ -69,7 +70,7 @@ public class TriggerAttackerBlocked extends Trigger {
         if (hasParam("ValidBlocker")) {
             @SuppressWarnings("unchecked")
             int count = CardLists.getValidCardCount(
-                    (Iterable<Card>) runParams2.get("Blockers"),
+                    (Iterable<Card>) runParams.get(AbilityKey.Blockers),
                     getParam("ValidBlocker"),
                     getHostCard().getController(), getHostCard()
             );

@@ -23,6 +23,7 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -51,29 +52,30 @@ public class TriggerDamageDealtOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @SuppressWarnings("unchecked")
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card srcs = (Card) runParams2.get("DamageSource");
-        final Set<GameEntity> tgt = (Set<GameEntity>) runParams2.get("DamageTargets");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card srcs = (Card) runParams.get(AbilityKey.DamageSource);
+        final Set<GameEntity> tgt = (Set<GameEntity>) runParams.get(AbilityKey.DamageTargets);
 
-        if (this.mapParams.containsKey("CombatDamage")) {
-            if (this.mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams2.get("IsCombatDamage"))) {
+        if (hasParam("CombatDamage")) {
+            if (getParam("CombatDamage").equals("True")) {
+                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
-            } else if (this.mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams2.get("IsCombatDamage"))) {
+            } else if (getParam("CombatDamage").equals("False")) {
+                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             }
         }
         
-        if (this.mapParams.containsKey("ValidTarget")) {
+        if (hasParam("ValidTarget")) {
             boolean valid = false;
             for (GameEntity c : tgt) {
-                if (c.isValid(this.mapParams.get("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
+                if (c.isValid(getParam("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
                     valid = true;
                 }
             }
@@ -82,18 +84,18 @@ public class TriggerDamageDealtOnce extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(srcs, this.mapParams.get("ValidSource").split(","), this.getHostCard())) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(srcs, getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("DamageAmount")) {
-            final String fullParam = this.mapParams.get("DamageAmount");
+        if (hasParam("DamageAmount")) {
+            final String fullParam = getParam("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);
             final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams2.get("DamageAmount");
+            final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
 
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;

@@ -44,9 +44,9 @@ public class TriggerTransformed extends Trigger {
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            return matchesValid(runParams2.get("Transformer"), this.mapParams.get("ValidCard").split(","),
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            return matchesValid(runParams.get(AbilityKey.Transformer), getParam("ValidCard").split(","),
                     this.getHostCard());
         }
 

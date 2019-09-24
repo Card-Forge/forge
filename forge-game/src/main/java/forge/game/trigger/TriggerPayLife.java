@@ -48,11 +48,12 @@ public class TriggerPayLife extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            return matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard());
+            return matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","), getHostCard());
         }
 
         return true;
