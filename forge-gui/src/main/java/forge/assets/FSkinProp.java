@@ -317,6 +317,8 @@ public enum FSkinProp {
     IMG_ABILITY_HEXPROOF_W       (new int[] {248, 494, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HEXPROOF_C       (new int[] {330, 412, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HEXPROOF_UB      (new int[] {166, 494, 80, 80}, PropType.ABILITY),
+    //token icon
+    IMG_ABILITY_TOKEN            (new int[] {330, 494, 80, 80}, PropType.ABILITY),
     //Protection From
     IMG_ABILITY_PROTECT_ALL           (new int[] {248, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_B             (new int[] {330, 84, 80, 80}, PropType.ABILITY),

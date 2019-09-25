@@ -552,6 +552,10 @@ public class CardRenderer {
         float abiCount = 0;
 
         if (onbattlefield && onTop) {
+            if (card.isToken()){
+                CardFaceSymbols.drawSymbol("token", g, abiX, abiY, abiScale, abiScale);
+                abiY += abiSpace;
+            }
             if (card.getCurrentState().hasFlying()) {
                 CardFaceSymbols.drawSymbol("flying", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){

@@ -126,6 +126,8 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("hexproofW", FSkinImage.IMG_ABILITY_HEXPROOF_W);
         MANA_IMAGES.put("hexproofC", FSkinImage.IMG_ABILITY_HEXPROOF_C);
         MANA_IMAGES.put("hexproofUB", FSkinImage.IMG_ABILITY_HEXPROOF_UB);
+        //token icon
+        MANA_IMAGES.put("token", FSkinImage.IMG_ABILITY_TOKEN);
         //protection from
         MANA_IMAGES.put("protectAll", FSkinImage.IMG_ABILITY_PROTECT_ALL);
         MANA_IMAGES.put("protectB", FSkinImage.IMG_ABILITY_PROTECT_B);
