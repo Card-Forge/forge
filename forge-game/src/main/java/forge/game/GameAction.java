@@ -55,8 +55,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 /**
  * Methods for common actions performed during a game.
  * 
