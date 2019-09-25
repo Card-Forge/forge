@@ -128,7 +128,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             repParams.put("Cause", cause);
         }
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.DamageDone, repParams)) {
         case NotReplaced:
             return damage;
         case Updated:
@@ -181,7 +181,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             repParams.put("Cause", cause);
         }
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.DamageDone, repParams)) {
         case NotReplaced:
             restDamage = damage;
             break;

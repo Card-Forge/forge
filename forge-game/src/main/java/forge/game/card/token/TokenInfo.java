@@ -172,7 +172,7 @@ public class TokenInfo {
         repParams.put("TokenNum", multiplier);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {
+        switch (game.getReplacementHandler().runOld(ReplacementType.CreateToken, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {

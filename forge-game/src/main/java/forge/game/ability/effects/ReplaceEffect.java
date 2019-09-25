@@ -61,7 +61,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
         }
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(retype, params);
+        ReplacementResult result = game.getReplacementHandler().runOld(retype, params);
         switch (result) {
         case NotReplaced:
         case Updated: {

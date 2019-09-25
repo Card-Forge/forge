@@ -80,7 +80,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
         params.put("DamageAmount", dmg);
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(event, params);
+        ReplacementResult result = game.getReplacementHandler().runOld(event, params);
         switch (result) {
         case NotReplaced:
         case Updated: {

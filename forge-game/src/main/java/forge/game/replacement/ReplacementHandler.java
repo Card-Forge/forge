@@ -21,6 +21,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -40,6 +41,8 @@ import com.google.common.collect.Sets;
 
 import java.util.*;
 
+import static forge.util.EnumMapUtil.toStringMap;
+
 public class ReplacementHandler {
     private final Game game;
     /**
@@ -51,30 +54,6 @@ public class ReplacementHandler {
     }
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
-
-    public ReplacementResult run(ReplacementType event, final Map<String, Object> runParams) {
-        final Object affected = runParams.get("Affected");
-        Player decider = null;
-
-        // Figure out who decides which of multiple replacements to apply
-        // as well as whether or not to apply optional replacements.
-        if (affected instanceof Player) {
-            decider = (Player) affected;
-        } else {
-            decider = ((Card) affected).getController();
-        }
-
-        // try out all layer
-        for (ReplacementLayer layer : ReplacementLayer.values()) {
-            ReplacementResult res = run(event, runParams, layer, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
-        }
-
-        return ReplacementResult.NotReplaced;
-
-    }
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer) {
 
@@ -171,9 +150,42 @@ public class ReplacementHandler {
      *
      * @param runParams
      *            the run params,same as for triggers.
-     * @return true if the event was replaced.
+     * @return ReplacementResult, an enum that represents what happened to the replacement effect.
      */
-    public ReplacementResult run(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
+    public ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return runOld(event, toStringMap(runParams));
+    }
+
+    // The plan is to slowly refactor any usages of runOld to use run. Then we can just inline
+    // runOld into run and change the code inside to just always use a Map<AbilityKey, Object>.
+    // The reason we can't just call them both run is because we get a same erasure compile error if we do.
+    @Deprecated
+    public ReplacementResult runOld(ReplacementType event, final Map<String, Object> runParams) {
+        final Object affected = runParams.get("Affected");
+        Player decider = null;
+
+        // Figure out who decides which of multiple replacements to apply
+        // as well as whether or not to apply optional replacements.
+        if (affected instanceof Player) {
+            decider = (Player) affected;
+        } else {
+            decider = ((Card) affected).getController();
+        }
+
+        // try out all layer
+        for (ReplacementLayer layer : ReplacementLayer.values()) {
+            ReplacementResult res = run(event, runParams, layer, decider);
+            if (res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+        }
+
+        return ReplacementResult.NotReplaced;
+
+    }
+
+    @Deprecated
+    private ReplacementResult run(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
         final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
@@ -189,7 +201,7 @@ public class ReplacementHandler {
         ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
-                res = run(event, runParams);
+                res = runOld(event, runParams);
             }
             chosenRE.setHasRun(false);
             chosenRE.setOtherChoices(null);

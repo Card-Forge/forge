@@ -159,7 +159,7 @@ public class CounterEffect extends SpellAbilityEffect {
         repParams.put("TgtSA", tgtSA);
         repParams.put("Affected", tgtSA.getHostCard());
         repParams.put("Cause", srcSA.getHostCard());
-        if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().runOld(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         game.getStack().remove(si);

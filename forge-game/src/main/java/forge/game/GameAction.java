@@ -303,7 +303,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().runOld(ReplacementType.Moved, toStringMap(repParams));
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -1404,7 +1404,7 @@ public class GameAction {
         repRunParams.put("Affected", c);
         repRunParams.put("Regeneration", regenerate);
 
-        if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().runOld(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 

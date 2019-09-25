@@ -238,7 +238,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Affected", this);
 
-        if (game.getReplacementHandler().run(ReplacementType.SetInMotion, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().runOld(ReplacementType.SetInMotion, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -412,7 +412,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.GainLife, repParams)) {
         case NotReplaced:
             break;
         case Updated:
@@ -921,7 +921,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.AddCounter, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
@@ -1281,7 +1281,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         repParams.put("Source", cause);
         repParams.put("SurveilNum", num);
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.Surveil, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.Surveil, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
@@ -1350,7 +1350,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         repRunParams.put("Affected", this);
         repRunParams.put("Number", n);
 
-        if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().runOld(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1381,7 +1381,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Affected", this);
 
-        if (game.getReplacementHandler().run(ReplacementType.Draw, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().runOld(ReplacementType.Draw, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1561,7 +1561,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             repRunParams.put("Source", source);
             repRunParams.put("Affected", this);
 
-            if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().runOld(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
                 return null;
             }
         }
@@ -1864,7 +1864,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Affected", this);
 
-            if (game.getReplacementHandler().run(ReplacementType.GameLoss, runParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().runOld(ReplacementType.GameLoss, runParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }

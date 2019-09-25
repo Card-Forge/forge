@@ -133,7 +133,7 @@ public class AbilityManaPart implements java.io.Serializable {
         repParams.put("Affected", source);
         repParams.put("Player", player);
         repParams.put("AbilityMana", sa);
-        if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
+        if (player.getGame().getReplacementHandler().runOld(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         //clear lastProduced

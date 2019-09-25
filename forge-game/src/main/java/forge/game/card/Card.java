@@ -689,7 +689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // Run replacement effects
                 Map<String, Object> repParams = Maps.newHashMap();
                 repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
+                getGame().getReplacementHandler().runOld(ReplacementType.TurnFaceUp, repParams);
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1240,7 +1240,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
+        switch (getGame().getReplacementHandler().runOld(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
@@ -3575,7 +3575,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Affected", this);
 
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().runOld(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
