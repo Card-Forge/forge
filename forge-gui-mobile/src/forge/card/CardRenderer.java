@@ -19,7 +19,13 @@ import forge.CachedCardImage;
 import forge.FThreads;
 import forge.Graphics;
 import forge.StaticData;
-import forge.assets.*;
+import forge.assets.FImageComplex;
+import forge.assets.FRotatedImage;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
@@ -42,6 +48,7 @@ import forge.toolbox.FList;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import forge.util.TextBounds;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -614,29 +621,64 @@ public class CardRenderer {
             }
             if (card.getCurrentState().hasHexproof()) {
                 if (!card.getCurrentState().getHexproofKey().isEmpty()){
-                    if (card.getCurrentState().getHexproofKey().equals("R"))
-                        CardFaceSymbols.drawSymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("B"))
-                        CardFaceSymbols.drawSymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("U"))
-                        CardFaceSymbols.drawSymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("G"))
-                        CardFaceSymbols.drawSymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("W"))
-                        CardFaceSymbols.drawSymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("UB") || card.getCurrentState().getHexproofKey().equals("BU"))
-                        CardFaceSymbols.drawSymbol("hexproofUB", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("monocolored"))
-                        CardFaceSymbols.drawSymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
-                    else
+                    String[] splitK = card.getCurrentState().getHexproofKey().split(":");
+                    List<String> listHK = Arrays.asList(splitK);
+                    if (listHK.contains("generic")) {
                         CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                }
-                else
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("R")) {
+                        CardFaceSymbols.drawSymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("B")) {
+                        CardFaceSymbols.drawSymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("U")) {
+                        CardFaceSymbols.drawSymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("G")) {
+                        CardFaceSymbols.drawSymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("W")) {
+                        CardFaceSymbols.drawSymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                    if (listHK.contains("monocolored")) {
+                        CardFaceSymbols.drawSymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
+                        if (unselectable){
+                            g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                        abiY += abiSpace;
+                        abiCount += 1;
+                    }
+                } else {
                     CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                if (unselectable){
-                    g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
-                abiY += abiSpace;
-                abiCount += 1;
+                    if (unselectable){
+                        g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
+                    abiY += abiSpace;
+                    abiCount += 1;
+                }
             }
             else if (card.getCurrentState().hasShroud()) {
                 CardFaceSymbols.drawSymbol("shroud", g, abiX, abiY, abiScale, abiScale);

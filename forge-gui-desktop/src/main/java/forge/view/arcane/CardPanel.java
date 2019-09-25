@@ -50,6 +50,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -545,29 +546,43 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 abiY += abiSpace;
             }
             if (card.getCurrentState().hasHexproof()) {
-                if (!card.getCurrentState().getHexproofKey().isEmpty()) {
-                    if (card.getCurrentState().getHexproofKey().equals("R"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("B"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("U"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("G"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("W"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("UB") || card.getCurrentState().getHexproofKey().equals("BU"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofUB", g, abiX, abiY, abiScale, abiScale);
-                    else if (card.getCurrentState().getHexproofKey().equals("monocolored"))
-                        CardFaceSymbols.drawAbilitySymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
-                    else
+                if (!card.getCurrentState().getHexproofKey().isEmpty()){
+                    String[] splitK = card.getCurrentState().getHexproofKey().split(":");
+                    List<String> listHK = Arrays.asList(splitK);
+                    if (listHK.contains("generic")) {
                         CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                } else
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("R")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("B")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("U")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("G")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("W")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                    if (listHK.contains("monocolored")) {
+                        CardFaceSymbols.drawAbilitySymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
+                        abiY += abiSpace;
+                    }
+                } else {
                     CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-
-                abiY += abiSpace;
+                    abiY += abiSpace;
+                }
             }
-            if (card.getCurrentState().hasShroud()) {
+            else if (card.getCurrentState().hasShroud()) {
                 CardFaceSymbols.drawAbilitySymbol("shroud", g, abiX, abiY, abiScale, abiScale);
                 abiY += abiSpace;
             }
