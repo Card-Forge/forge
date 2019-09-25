@@ -545,7 +545,26 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 abiY += abiSpace;
             }
             if (card.getCurrentState().hasHexproof()) {
-                CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
+                if (!card.getCurrentState().getHexproofKey().isEmpty()) {
+                    if (card.getCurrentState().getHexproofKey().equals("R"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("B"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("U"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("G"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("W"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("UB") || card.getCurrentState().getHexproofKey().equals("BU"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofUB", g, abiX, abiY, abiScale, abiScale);
+                    else if (card.getCurrentState().getHexproofKey().equals("monocolored"))
+                        CardFaceSymbols.drawAbilitySymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
+                    else
+                        CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
+                } else
+                    CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
+
                 abiY += abiSpace;
             }
             if (card.getCurrentState().hasShroud()) {
