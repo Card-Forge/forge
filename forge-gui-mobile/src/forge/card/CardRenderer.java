@@ -551,7 +551,7 @@ public class CardRenderer {
         float abiSpace = cw / 5.7f;
         float abiCount = 0;
 
-        if (onbattlefield && onTop) {
+        if (onbattlefield && onTop && showAbilityIcons(card)) {
             if (card.isToken()){
                 CardFaceSymbols.drawSymbol("token", g, abiX, abiY, abiScale, abiScale);
                 abiY += abiSpace;
@@ -1024,6 +1024,10 @@ public class CardRenderer {
     private static boolean showCardManaCostOverlay(CardView card) {
         return isShowingOverlays(card) &&
                 isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
+    }
+
+    private static boolean showAbilityIcons(CardView card) {
+        return isShowingOverlays(card) && isPreferenceEnabled(FPref.UI_OVERLAY_ABILITY_ICONS);
     }
 
     private static boolean showCardIdOverlay(CardView card) {

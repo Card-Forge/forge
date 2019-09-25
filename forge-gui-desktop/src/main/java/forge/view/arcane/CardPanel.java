@@ -511,7 +511,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         int abiX = cardXOffset + (cardWidth / 2) + (cardWidth / 3);
         int abiSpace = (cardWidth / 7);
         int abiY = cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50;
-        if (ZoneType.Battlefield.equals(card.getZone())){
+        if (ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons()){
             if (card.getCurrentState().hasFlying()) {
                 CardFaceSymbols.drawAbilitySymbol("flying", g, abiX, abiY, abiScale, abiScale);
                 abiY += abiSpace;
@@ -980,6 +980,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private boolean showCardIdOverlay() {
         return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_ID);
+    }
+
+    private boolean showAbilityIcons() {
+        return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_ABILITY_ICONS);
     }
 
     public void repaintOverlays() {
