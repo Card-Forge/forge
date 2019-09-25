@@ -99,7 +99,8 @@ public enum TrackableProperty {
     HasVigilance(TrackableTypes.BooleanType),
     //protectionkey
     ProtectionKey(TrackableTypes.StringType),
-
+    //hexproofkey
+    HexproofKey(TrackableTypes.StringType),
     HasHaste(TrackableTypes.BooleanType),
     HasInfect(TrackableTypes.BooleanType),
     HasStorm(TrackableTypes.BooleanType),

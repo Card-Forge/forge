@@ -30,6 +30,7 @@ public final class CardOverlaysMenu {
         menu.add(getMenuItem_CardOverlay("Mana Cost", FPref.UI_OVERLAY_CARD_MANA_COST));
         menu.add(getMenuItem_CardOverlay("Power/Toughness", FPref.UI_OVERLAY_CARD_POWER));
         menu.add(getMenuItem_CardOverlay("Card Id", FPref.UI_OVERLAY_CARD_ID));
+        menu.add(getMenuItem_CardOverlay("Ability Icon", FPref.UI_OVERLAY_ABILITY_ICONS));
         return menu;
     }
 

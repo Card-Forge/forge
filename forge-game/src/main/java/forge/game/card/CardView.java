@@ -1018,6 +1018,7 @@ public class CardView extends GameEntityView {
         }
 
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
+        public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
@@ -1031,12 +1032,8 @@ public class CardView extends GameEntityView {
         public boolean hasMenace() { return get(TrackableProperty.HasMenace); }
         public boolean hasReach() { return get(TrackableProperty.HasReach); }
         public boolean hasShroud() { return get(TrackableProperty.HasShroud); }
-        public boolean hasTrample() {
-            return get(TrackableProperty.HasTrample);
-        }
-        public boolean hasVigilance() {
-            return get(TrackableProperty.HasVigilance);
-        }
+        public boolean hasTrample() { return get(TrackableProperty.HasTrample); }
+        public boolean hasVigilance() { return get(TrackableProperty.HasVigilance); }
 
         public boolean hasHaste() {
             return get(TrackableProperty.HasHaste);
@@ -1077,6 +1074,8 @@ public class CardView extends GameEntityView {
             updateAbilityText(c, state);
             //set protectionKey for Icons
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());
+            //set hexproofKeys for Icons
+            set(TrackableProperty.HexproofKey, c.getHexproofKey());
         }
 
         public boolean isBasicLand() {

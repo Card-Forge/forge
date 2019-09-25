@@ -5415,6 +5415,51 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return protectKey;
     }
+    public String getHexproofKey() {
+        String hexproofKey = "";
+        boolean hR = false; boolean hG = false; boolean hB = false; boolean hU = false; boolean hW = false;
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("Hexproof")) {
+                continue;
+            }
+            if (kw.equals("Hexproof")) {
+                hexproofKey += "generic:";
+            }
+            if (kw.startsWith("Hexproof:")) {
+                String[] k = kw.split(":");
+                if (k[2].toString().equals("red")) {
+                    if (!hR) {
+                        hR = true;
+                        hexproofKey += "R:";
+                    }
+                } else if (k[2].toString().equals("green")) {
+                    if (!hG) {
+                        hG = true;
+                        hexproofKey += "G:";
+                    }
+                } else if (k[2].toString().equals("black")) {
+                    if (!hB) {
+                        hB = true;
+                        hexproofKey += "B:";
+                    }
+                } else if (k[2].toString().equals("blue")) {
+                    if (!hU) {
+                        hU = true;
+                        hexproofKey += "U:";
+                    }
+                } else if (k[2].toString().equals("white")) {
+                    if (!hW) {
+                        hW = true;
+                        hexproofKey += "W:";
+                    }
+                } else if (k[2].toString().equals("monocolored")) {
+                    hexproofKey += "monocolored:";
+                }
+            }
+        }
+        return hexproofKey;
+    }
     public Zone getZone() {
         return currentZone;
     }
