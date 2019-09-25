@@ -4,7 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import forge.util.*;
+import forge.util.Callback;
+import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.NameGenerator;
+import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;

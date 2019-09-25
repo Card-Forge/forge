@@ -10,7 +10,8 @@ import forge.Graphics;
 import forge.interfaces.IComboBox;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
-import forge.toolbox.FEvent.*;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private final List<T> items = new ArrayList<>();
