@@ -29,6 +29,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -2849,10 +2850,10 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", player);
-        repParams.put("LifeGained", 1);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        repParams.put(AbilityKey.Affected, player);
+        repParams.put(AbilityKey.LifeGained, 1);
+        repParams.put(AbilityKey.Source, source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
                 ReplacementType.GainLife,
@@ -2880,15 +2881,16 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", player);
-        repParams.put("LifeGained", n);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        repParams.put(AbilityKey.Affected, player);
+        repParams.put(AbilityKey.LifeGained, n);
+        repParams.put(AbilityKey.Source, source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
-                ReplacementType.GainLife,
-                repParams,
-                ReplacementLayer.Other);
+            ReplacementType.GainLife,
+            repParams,
+            ReplacementLayer.Other
+        );
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
             // no life gain is not negative

@@ -59,10 +59,12 @@ public enum AbilityKey {
     Fighter("Fighter"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
+    IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
     IsMadness("IsMadness"),
-    LifeAmount("LifeAmount"),
+    LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
+    LifeGained("LifeGained"),
     MonstrosityAmount("MonstrosityAmount"),
     NewCounterAmount("NewCounterAmount"),
     Num("Num"), // TODO confirm that this and NumThisTurn can be merged
@@ -79,6 +81,7 @@ public enum AbilityKey {
     PayingMana("PayingMana"),
     Phase("Phase"),
     Player("Player"),
+    Prevention("Prevention"),
     Produced("Produced"),
     Result("Result"),
     Scheme("Scheme"),

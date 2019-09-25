@@ -55,7 +55,13 @@ public class ReplacementHandler {
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
-    public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer) {
+    public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
+        return getReplacementListOld(event, toStringMap(runParams), layer);
+    }
+    // The plan is to slowly refactor any usages of getReplacementListOld to use getReplacementList. Then we can just inline
+    // getReplacementListOld into getReplacementList and change the code inside to just always use a Map<AbilityKey, Object>.
+    // The reason we can't just call them both getReplacementList is because we get a same erasure compile error if we do.
+    private List<ReplacementEffect> getReplacementListOld(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer) {
 
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
@@ -186,7 +192,7 @@ public class ReplacementHandler {
 
     @Deprecated
     private ReplacementResult run(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
-        final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
+        final List<ReplacementEffect> possibleReplacers = getReplacementListOld(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
             return ReplacementResult.NotReplaced;
