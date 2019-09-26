@@ -358,7 +358,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(final GameEventRemoveSummoningSickness event) {
+    public Void visit(final GameEventTokenStateUpdate event) {
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }

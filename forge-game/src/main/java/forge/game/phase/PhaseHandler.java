@@ -73,7 +73,6 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<>();
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = Maps.newEnumMap(PhaseType.class);
-    private final List<Card> toUpdate = new ArrayList<>();
 
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
@@ -178,11 +177,10 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Tokens starting game in play should suffer from Sum. Sickness
             final CardCollectionView list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
-            toUpdate.clear();
             for (final Card c : list) {
                 if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
-                    if (c.isSick() && c.isToken()) //add toupdate stacking tokens
-                        toUpdate.add(c);
+                    if (c.isToken()) //update token stacking on battlefield
+                        game.fireEvent(new GameEventTokenStateUpdate(c));
 
                     c.setSickness(false);
                 }
@@ -193,8 +191,6 @@ public class PhaseHandler implements java.io.Serializable {
 
             final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
             playerTurn.setNumPowerSurgeLands(lands.size());
-            if (!toUpdate.isEmpty()) //fire event toupdate stacking tokens
-                game.fireEvent(new GameEventRemoveSummoningSickness(toUpdate));
         }
 
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, phaseType));
