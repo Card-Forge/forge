@@ -290,8 +290,7 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-            repParams.put(AbilityKey.Affected, copied);
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(copied);
             repParams.put(AbilityKey.CardLKI, lastKnownInfo);
             repParams.put(AbilityKey.Cause, cause);
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);

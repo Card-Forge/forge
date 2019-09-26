@@ -98,8 +98,7 @@ public class ManifestAi extends SpellAbilityAi {
         topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-        repParams.put(AbilityKey.Affected, topCopy);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(topCopy);
         repParams.put(AbilityKey.Origin, card.getZone().getZoneType());
         repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
         repParams.put(AbilityKey.Source, sa.getHostCard());

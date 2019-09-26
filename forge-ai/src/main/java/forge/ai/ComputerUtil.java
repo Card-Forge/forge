@@ -2850,8 +2850,7 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-        repParams.put(AbilityKey.Affected, player);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
         repParams.put(AbilityKey.LifeGained, 1);
         repParams.put(AbilityKey.Source, source);
 
@@ -2881,8 +2880,7 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-        repParams.put(AbilityKey.Affected, player);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
         repParams.put(AbilityKey.LifeGained, n);
         repParams.put(AbilityKey.Source, source);
 

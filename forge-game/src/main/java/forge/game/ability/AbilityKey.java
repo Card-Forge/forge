@@ -3,6 +3,7 @@ package forge.game.ability;
 import java.util.EnumMap;
 import java.util.Map;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 
 /**
@@ -142,6 +143,13 @@ public enum AbilityKey {
         final Map<AbilityKey, Object> runParams = newMap();
 
         runParams.put(Card, card);
+        return runParams;
+    }
+
+    public static Map<AbilityKey, Object> mapFromAffected(GameEntity gameEntity) {
+        final Map<AbilityKey, Object> runParams = newMap();
+
+        runParams.put(Affected, gameEntity);
         return runParams;
     }
 }

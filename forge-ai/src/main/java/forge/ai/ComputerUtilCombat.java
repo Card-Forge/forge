@@ -2584,8 +2584,7 @@ public class ComputerUtilCombat {
         final Game game = attacker.getGame();
 
         // first try to replace the damage
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-        repParams.put(AbilityKey.Affected, target);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(target);
         repParams.put(AbilityKey.DamageSource, attacker);
         repParams.put(AbilityKey.DamageAmount, damage);
         repParams.put(AbilityKey.IsCombat, true);

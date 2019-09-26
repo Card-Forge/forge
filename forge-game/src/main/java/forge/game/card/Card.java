@@ -687,9 +687,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (result && runTriggers) {
                 // Run replacement effects
-                Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-                repParams.put(AbilityKey.Affected, this);
-                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
