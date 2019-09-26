@@ -235,10 +235,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().runOld(ReplacementType.SetInMotion, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -1378,10 +1375,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone library = getZone(ZoneType.Library);
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().runOld(ReplacementType.Draw, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Draw, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1861,10 +1855,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             // Replacement effects
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Affected", this);
-
-            if (game.getReplacementHandler().runOld(ReplacementType.GameLoss, runParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().run(ReplacementType.GameLoss, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }
