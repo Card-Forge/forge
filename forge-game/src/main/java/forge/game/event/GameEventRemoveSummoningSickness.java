@@ -2,15 +2,14 @@ package forge.game.event;
 
 import forge.game.card.Card;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class GameEventRemoveSummoningSickness extends GameEvent {
 
     public final Collection<Card> cards;
-
-    public GameEventRemoveSummoningSickness(List<Card> affected) {
-        cards = affected;
+    public GameEventRemoveSummoningSickness(Card affected) {
+        cards = Arrays.asList(affected);
     }
 
     @Override
