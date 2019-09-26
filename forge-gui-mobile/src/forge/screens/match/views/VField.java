@@ -110,6 +110,7 @@ public class VField extends FContainer {
             if (!c.hasCardAttachments() &&
                     cardName.equals(c.getCurrentState().getName()) &&
                     card.hasSameCounters(c) &&
+                    card.isSick() == c.isSick() && //don't stack sick tokens on non sick - stack will refresh on event
                     card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
                 CardAreaPanel cPanel = CardAreaPanel.get(c);
                 while (cPanel.getNextPanelInStack() != null) {
