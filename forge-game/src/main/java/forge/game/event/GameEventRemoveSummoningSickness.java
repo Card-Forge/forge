@@ -2,7 +2,6 @@ package forge.game.event;
 
 import forge.game.card.Card;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
