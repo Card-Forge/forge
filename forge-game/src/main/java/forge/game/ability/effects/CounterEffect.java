@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
