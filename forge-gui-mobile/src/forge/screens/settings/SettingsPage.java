@@ -332,8 +332,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlShowCardIDOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
-                "Show Ability Icons",
-                "Show ability icons for cards, otherwise they're hidden."),
+                localizer.getMessage("lblShowAbilityIconsOverlays"),
+                localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
 
         //Vibration Options
