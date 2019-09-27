@@ -82,6 +82,7 @@ public enum TrackableProperty {
     ChangedColorWords(TrackableTypes.StringMapType),
     ChangedTypes(TrackableTypes.StringMapType),
 
+    KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDefender(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),

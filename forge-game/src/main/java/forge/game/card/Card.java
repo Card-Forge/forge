@@ -3659,6 +3659,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
     }
 
@@ -3713,6 +3715,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null && updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
         return change;
     }
@@ -5459,6 +5463,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return hexproofKey;
+    }
+    public String getKeywordKey() {
+        List<String> ability = new ArrayList<>();
+        for (final KeywordInterface inst : getKeywords()) {
+            ability.add(inst.getOriginal());
+        }
+        Collections.sort(ability);
+        return String.join(",", ability);
     }
     public Zone getZone() {
         return currentZone;

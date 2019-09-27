@@ -189,6 +189,8 @@ public class PhaseHandler implements java.io.Serializable {
             final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
             playerTurn.setNumPowerSurgeLands(lands.size());
         }
+        //update tokens
+        game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
 
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, phaseType));
     }
