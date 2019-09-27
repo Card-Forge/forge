@@ -5463,8 +5463,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public String getKeywordKey() {
         List<String> ability = new ArrayList<>();
         for (final KeywordInterface inst : getKeywords()) {
-            String kw = inst.getOriginal();
-            ability.add(kw);
+            ability.add(inst.getOriginal());
         }
         Collections.sort(ability);
         return String.join(",", ability);
