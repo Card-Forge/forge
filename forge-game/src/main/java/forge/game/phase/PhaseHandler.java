@@ -177,14 +177,16 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Tokens starting game in play should suffer from Sum. Sickness
             final CardCollectionView list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+            final List<Card> toupdate = new ArrayList<>();
             for (final Card c : list) {
                 if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
                     if (c.isToken()) //update token stacking on battlefield
-                        game.fireEvent(new GameEventTokenStateUpdate(c));
+                        toupdate.add(c);
 
                     c.setSickness(false);
                 }
             }
+            game.fireEvent(new GameEventTokenStateUpdate(toupdate));
             playerTurn.incrementTurn();
 
             game.getAction().resetActivationsPerTurn();
