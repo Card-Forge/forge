@@ -3659,6 +3659,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
     }
 
@@ -3713,6 +3715,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null && updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
         return change;
     }
