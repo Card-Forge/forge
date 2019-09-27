@@ -1,9 +1,17 @@
 package forge.screens.constructed;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-import forge.deck.*;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.DeckType;
+import forge.deck.FDeckChooser;
+
 import forge.util.Localizer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;

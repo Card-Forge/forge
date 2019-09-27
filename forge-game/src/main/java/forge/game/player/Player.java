@@ -2349,6 +2349,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * use to get a list of tokens in play for a given player.
+     */
+    public CardCollection getTokensInPlay() {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.TOKEN);
+    }
+
+    /**
      * use to get a list of all lands a given player has on the battlefield.
      */
     public CardCollection getLandsInPlay() {

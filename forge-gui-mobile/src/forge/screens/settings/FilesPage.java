@@ -1,7 +1,14 @@
 package forge.screens.settings;
 
-import forge.download.*;
+import forge.download.GuiDownloadAchievementImages;
+import forge.download.GuiDownloadPicturesLQ;
+import forge.download.GuiDownloadPrices;
+import forge.download.GuiDownloadQuestImages;
+import forge.download.GuiDownloadSetPicturesLQ;
+import forge.download.GuiDownloadService;
+
 import forge.util.Localizer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
