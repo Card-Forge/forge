@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.event.GameEventTokenStateUpdate;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -151,6 +152,8 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
 
             tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
+            if (tgtC.isToken()) // update protection -> cast blessed breath on any token belonging to a stack
+                game.fireEvent(new GameEventTokenStateUpdate(tgtC));
 
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
@@ -161,6 +164,8 @@ public class ProtectEffect extends SpellAbilityEffect {
                     public void run() {
                         if (tgtC.isInPlay()) {
                             tgtC.removeChangedCardKeywords(timestamp, true);
+                            if (tgtC.isToken()) // update remove protection
+                                game.fireEvent(new GameEventTokenStateUpdate(tgtC));
                         }
                     }
                 };
@@ -189,6 +194,8 @@ public class ProtectEffect extends SpellAbilityEffect {
                     public void run() {
                         if (unTgtC.isInPlay()) {
                             unTgtC.removeChangedCardKeywords(timestamp, true);
+                            if (unTgtC.isToken()) // update removed protection
+                                game.fireEvent(new GameEventTokenStateUpdate(unTgtC));
                         }
                     }
                 };

@@ -5460,6 +5460,22 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return hexproofKey;
     }
+    public String getKeywordKey() {
+        String sorted = "";
+        List<String> ability = new ArrayList<>();
+        ability.clear();
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            ability.add(kw);
+        }
+        if (ability != null) {
+            Collections.sort(ability);
+            for (final String s : ability){
+                sorted += s + ",";
+            }
+        }
+        return sorted;
+    }
     public Zone getZone() {
         return currentZone;
     }

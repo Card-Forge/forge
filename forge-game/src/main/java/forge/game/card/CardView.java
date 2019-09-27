@@ -1017,6 +1017,7 @@ public class CardView extends GameEntityView {
             foilIndexOverride = index0;
         }
 
+        public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
@@ -1076,6 +1077,8 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());
             //set hexproofKeys for Icons
             set(TrackableProperty.HexproofKey, c.getHexproofKey());
+            //keywordkey
+            set(TrackableProperty.KeywordKey, c.getKeywordKey());
         }
 
         public boolean isBasicLand() {
