@@ -599,10 +599,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean hasReplacingObject(final String type) {
         return replacingObjects.containsKey(type);
     }
+    public Object getReplacingObject(final AbilityKey type) {
+        return getReplacingObject(type.toString());
+    }
+    // Eventually we want to switch the internal map to be a `Map<AbilityKey, Object>` instead of a
+    // `Map<String, Object>`.
+    @Deprecated
     public Object getReplacingObject(final String type) {
         final Object res = replacingObjects.get(type);
         return res;
     }
+    public void setReplacingObject(final AbilityKey type, final Object o) {
+        setReplacingObject(type.toString(), o);
+    }
+    // Eventually we want to switch the internal map to be a `Map<AbilityKey, Object>` instead of a
+    // `Map<String, Object>`.
+    @Deprecated
     public void setReplacingObject(final String type, final Object o) {
         replacingObjects.put(type, o);
     }

@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -23,14 +24,14 @@ public class ReplaceEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
 
-        final String varName = sa.getParam("VarName");
+        final AbilityKey varName = AbilityKey.fromString(sa.getParam("VarName"));
         final String varValue = sa.getParam("VarValue");
         final String type = sa.getParamOrDefault("VarType", "amount");
         final ReplacementType retype = sa.getReplacementEffect().getMode();
 
         @SuppressWarnings("unchecked")
-        Map<String, Object> originalParams = (Map<String, Object>) sa.getReplacingObject("OriginalParams");
-        Map<String, Object> params = Maps.newHashMap(originalParams);
+        Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
+        Map<AbilityKey, Object> params = Maps.newHashMap(originalParams);
 
         if ("Card".equals(type)) {
             List<Card> list = AbilityUtils.getDefinedCards(card, varValue, sa);
@@ -56,25 +57,25 @@ public class ReplaceEffect extends SpellAbilityEffect {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
         }
 
-        if (params.containsKey("EffectOnly")) {
-            params.put("EffectOnly", true);
+        if (params.containsKey(AbilityKey.EffectOnly)) {
+            params.put(AbilityKey.EffectOnly, true);
         }
 
         //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().runOld(retype, params);
+        ReplacementResult result = game.getReplacementHandler().run(retype, params);
         switch (result) {
         case NotReplaced:
         case Updated: {
-            for (Map.Entry<String, Object> e : params.entrySet()) {
+            for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
                 originalParams.put(e.getKey(), e.getValue());
             }
             // effect was updated
-            originalParams.put("ReplacementResult", ReplacementResult.Updated);
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
             break;
         }
         default:
             // effect was replaced with something else
-            originalParams.put("ReplacementResult", result);
+            originalParams.put(AbilityKey.ReplacementResult, result);
             break;
         }
     }
