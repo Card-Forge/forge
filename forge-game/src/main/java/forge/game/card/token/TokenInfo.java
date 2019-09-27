@@ -9,6 +9,7 @@ import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -166,19 +167,18 @@ public class TokenInfo {
         Player player = controller;
         Card proto = prototype;
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", player);
-        repParams.put("Token", prototype);
-        repParams.put("TokenNum", multiplier);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.Token, prototype);
+        repParams.put(AbilityKey.TokenNum, multiplier);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
-        switch (game.getReplacementHandler().runOld(ReplacementType.CreateToken, repParams)) {
+        switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
-                multiplier = (int) repParams.get("TokenNum");
-                player = (Player) repParams.get("Affected");
-                proto = (Card) repParams.get("Token");
+                multiplier = (int) repParams.get(AbilityKey.TokenNum);
+                player = (Player) repParams.get(AbilityKey.Affected);
+                proto = (Card) repParams.get(AbilityKey.Token);
                 break;
             }
             default:

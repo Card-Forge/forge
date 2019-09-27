@@ -400,22 +400,21 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("LifeGained", lifeGain);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.LifeGained, lifeGain);
+        repParams.put(AbilityKey.Source, source);
 
         if (!canGainLife()) {
             return false;
         }
 
-        switch (getGame().getReplacementHandler().runOld(ReplacementType.GainLife, repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:
             break;
         case Updated:
             // check if this is still the affected player
-            if (this.equals(repParams.get("Affected"))) {
-                lifeGain = (int) repParams.get("LifeGained");
+            if (this.equals(repParams.get(AbilityKey.Affected))) {
+                lifeGain = (int) repParams.get(AbilityKey.LifeGained);
                 // negative update means life loss
                 if (lifeGain < 0) {
                     this.loseLife(-lifeGain);
@@ -911,18 +910,17 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", source);
-        repParams.put("CounterType", counterType);
-        repParams.put("CounterNum", addAmount);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.CounterType, counterType);
+        repParams.put(AbilityKey.CounterNum, addAmount);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
-        switch (getGame().getReplacementHandler().runOld(ReplacementType.AddCounter, repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
-                addAmount = (int) repParams.get("CounterNum");
+                addAmount = (int) repParams.get(AbilityKey.CounterNum);
                 break;
             }
             default:
@@ -1273,16 +1271,15 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void surveil(int num, SpellAbility cause) {
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", cause);
-        repParams.put("SurveilNum", num);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, cause);
+        repParams.put(AbilityKey.SurveilNum, num);
 
-        switch (getGame().getReplacementHandler().runOld(ReplacementType.Surveil, repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.Surveil, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
-                num = (int) repParams.get("SurveilNum");
+                num = (int) repParams.get(AbilityKey.SurveilNum);
                 break;
             }
             default:
@@ -1343,11 +1340,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection toReveal = new CardCollection();
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-        repRunParams.put("Number", n);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+        repRunParams.put(AbilityKey.Number, n);
 
-        if (game.getReplacementHandler().runOld(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1550,12 +1546,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         // that should not trigger other Replacement again
         if (!discardToTopOfLibrary && !discardMadness) {
             // Replacement effects
-            final Map<String, Object> repRunParams = Maps.newHashMap();
-            repRunParams.put("Card", c);
-            repRunParams.put("Source", source);
-            repRunParams.put("Affected", this);
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+            repRunParams.put(AbilityKey.Source, source);
+            repRunParams.put(AbilityKey.Affected, this);
 
-            if (game.getReplacementHandler().runOld(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
                 return null;
             }
         }

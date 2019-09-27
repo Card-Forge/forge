@@ -155,11 +155,10 @@ public class CounterEffect extends SpellAbilityEffect {
             final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         // Run any applicable replacement effects. 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("TgtSA", tgtSA);
-        repParams.put("Affected", tgtSA.getHostCard());
-        repParams.put("Cause", srcSA.getHostCard());
-        if (game.getReplacementHandler().runOld(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
+        repParams.put(AbilityKey.TgtSA, tgtSA);
+        repParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         game.getStack().remove(si);

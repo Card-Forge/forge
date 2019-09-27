@@ -1395,13 +1395,12 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Source", sa);
-        repRunParams.put("Card", c);
-        repRunParams.put("Affected", c);
-        repRunParams.put("Regeneration", regenerate);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        repRunParams.put(AbilityKey.Source, sa);
+        repRunParams.put(AbilityKey.Affected, c);
+        repRunParams.put(AbilityKey.Regeneration, regenerate);
 
-        if (game.getReplacementHandler().runOld(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 
