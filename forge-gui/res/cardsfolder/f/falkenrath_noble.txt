@@ -1,6 +1,6 @@
 Name:Falkenrath Noble
 ManaCost:3 B
-Types:Creature Vampire
+Types:Creature Vampire Noble
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another creature dies, target player loses 1 life and you gain 1 life.

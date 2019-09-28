@@ -1,6 +1,6 @@
 Name:Sprite Noble
 ManaCost:1 U U
-Types:Creature Faerie
+Types:Creature Faerie Noble
 PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl+Other | AddToughness$ 1 | Description$ Other creatures you control with flying get +0/+1.
