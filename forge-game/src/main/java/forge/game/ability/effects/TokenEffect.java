@@ -431,7 +431,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 final String actualTrigger = AbilityUtils.getSVar(root, s);
                 for (final Card c : tokens) {
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                    final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
+                    final String ability = AbilityUtils.getSVar(root, parsedTrigger.getParam("Execute"));
                     parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
                     c.addTrigger(parsedTrigger);
                 }

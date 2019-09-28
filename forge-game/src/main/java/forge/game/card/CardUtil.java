@@ -248,7 +248,7 @@ public final class CardUtil {
         }
         for (Trigger tr : in.getTriggers()) {
             if (!tr.isIntrinsic()) {
-                newCopy.addTrigger(tr.copy(newCopy, true));
+                newCopy.moveTrigger(tr.copy(newCopy, true));
             }
         }
         for (ReplacementEffect re : in.getReplacementEffects()) {

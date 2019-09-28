@@ -17,8 +17,11 @@
  */
 package forge.game.trigger;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -46,9 +49,10 @@ public class TriggerNewGame extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         return true;
     }
 

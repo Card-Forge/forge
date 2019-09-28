@@ -18,8 +18,13 @@ import forge.itemmanager.filters.HistoricFormatSelect;
 import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
-import forge.quest.*;
+import forge.quest.QuestController;
+import forge.quest.QuestMode;
+import forge.quest.QuestUtil;
+import forge.quest.QuestWorld;
+import forge.quest.StartingPoolPreferences;
 import forge.quest.StartingPoolPreferences.PoolType;
+import forge.quest.StartingPoolType;
 import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
@@ -27,9 +32,17 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
-import forge.toolbox.*;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FNumericTextField;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
+import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
@@ -38,8 +51,13 @@ import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class NewQuestScreen extends FScreen {
 

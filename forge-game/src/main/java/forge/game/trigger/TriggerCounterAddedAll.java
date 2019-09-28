@@ -17,8 +17,8 @@ public class TriggerCounterAddedAll extends Trigger {
     }
 
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        final GameEntityCounterTable table = (GameEntityCounterTable) runParams2.get("Objects");
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        final GameEntityCounterTable table = (GameEntityCounterTable) runParams.get(AbilityKey.Objects);
 
         return !filterTable(table).isEmpty();
     }

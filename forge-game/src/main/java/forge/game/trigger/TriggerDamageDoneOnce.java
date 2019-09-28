@@ -17,26 +17,26 @@ public class TriggerDamageDoneOnce extends Trigger {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        final Set<Card> srcs = (Set<Card>) runParams2.get("DamageSources");
-        final GameEntity tgt = (GameEntity) runParams2.get("DamageTarget");
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        final Set<Card> srcs = (Set<Card>) runParams.get(AbilityKey.DamageSources);
+        final GameEntity tgt = (GameEntity) runParams.get(AbilityKey.DamageTarget);
 
-        if (this.mapParams.containsKey("CombatDamage")) {
-            if (this.mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams2.get("IsCombatDamage"))) {
+        if (hasParam("CombatDamage")) {
+            if (getParam("CombatDamage").equals("True")) {
+                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
-            } else if (this.mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams2.get("IsCombatDamage"))) {
+            } else if (getParam("CombatDamage").equals("False")) {
+                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             }
         }
         
-        if (this.mapParams.containsKey("ValidSource")) {
+        if (hasParam("ValidSource")) {
             boolean valid = false;
             for (Card c : srcs) {
-                if (c.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
+                if (c.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
                     valid = true;
                 }
             }
@@ -45,8 +45,8 @@ public class TriggerDamageDoneOnce extends Trigger {
             }
         }
         
-        if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+        if (hasParam("ValidTarget")) {
+            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }

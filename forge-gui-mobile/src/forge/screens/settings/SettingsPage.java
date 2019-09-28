@@ -331,6 +331,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowCardIDOverlays"),
                 localizer.getMessage("nlShowCardIDOverlays")),
                 5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
+                localizer.getMessage("lblShowAbilityIconsOverlays"),
+                localizer.getMessage("nlShowAbilityIconsOverlays")),
+                5);
 
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,

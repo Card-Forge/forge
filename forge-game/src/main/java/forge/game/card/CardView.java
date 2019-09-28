@@ -1017,9 +1017,25 @@ public class CardView extends GameEntityView {
             foilIndexOverride = index0;
         }
 
-        public boolean hasDeathtouch() {
-            return get(TrackableProperty.HasDeathtouch);
-        }
+        public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
+        public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
+        public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
+        public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
+        public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
+        public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
+        public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
+        public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
+        public boolean hasFear() { return get(TrackableProperty.HasFear); }
+        public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
+        public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
+        public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
+        public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
+        public boolean hasMenace() { return get(TrackableProperty.HasMenace); }
+        public boolean hasReach() { return get(TrackableProperty.HasReach); }
+        public boolean hasShroud() { return get(TrackableProperty.HasShroud); }
+        public boolean hasTrample() { return get(TrackableProperty.HasTrample); }
+        public boolean hasVigilance() { return get(TrackableProperty.HasVigilance); }
+
         public boolean hasHaste() {
             return get(TrackableProperty.HasHaste);
         }
@@ -1028,9 +1044,6 @@ public class CardView extends GameEntityView {
         }
         public boolean hasStorm() {
             return get(TrackableProperty.HasStorm);
-        }
-        public boolean hasTrample() {
-            return get(TrackableProperty.HasTrample);
         }
 
         public String getAbilityText() {
@@ -1042,11 +1055,30 @@ public class CardView extends GameEntityView {
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasDefender, c.hasKeyword(Keyword.DEFENDER, state));
+            set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
+            set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
+            set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
+            set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
+            set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
+            set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
+            set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
+            set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));
+            set(TrackableProperty.HasMenace, c.hasKeyword(Keyword.MENACE, state));
+            set(TrackableProperty.HasReach, c.hasKeyword(Keyword.REACH, state));
+            set(TrackableProperty.HasShroud, c.hasKeyword(Keyword.SHROUD, state));
+            set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
+            set(TrackableProperty.HasVigilance, c.hasKeyword(Keyword.VIGILANCE, state));
             set(TrackableProperty.HasHaste, c.hasKeyword(Keyword.HASTE, state));
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
-            set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
             updateAbilityText(c, state);
+            //set protectionKey for Icons
+            set(TrackableProperty.ProtectionKey, c.getProtectionKey());
+            //set hexproofKeys for Icons
+            set(TrackableProperty.HexproofKey, c.getHexproofKey());
+            //keywordkey
+            set(TrackableProperty.KeywordKey, c.getKeywordKey());
         }
 
         public boolean isBasicLand() {

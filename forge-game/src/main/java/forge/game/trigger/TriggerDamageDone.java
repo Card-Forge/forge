@@ -24,6 +24,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_DamageDone class.
@@ -50,43 +52,44 @@ public class TriggerDamageDone extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card src = (Card) runParams2.get("DamageSource");
-        final Object tgt = runParams2.get("DamageTarget");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final Card src = (Card) runParams.get(AbilityKey.DamageSource);
+        final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
-        if (this.mapParams.containsKey("ValidSource")) {
-            if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
+        if (hasParam("ValidSource")) {
+            if (!src.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+        if (hasParam("ValidTarget")) {
+            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CombatDamage")) {
-            if (this.mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams2.get("IsCombatDamage"))) {
+        if (hasParam("CombatDamage")) {
+            if (getParam("CombatDamage").equals("True")) {
+                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
-            } else if (this.mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams2.get("IsCombatDamage"))) {
+            } else if (getParam("CombatDamage").equals("False")) {
+                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
                     return false;
                 }
             }
         }
 
-        if (this.mapParams.containsKey("DamageAmount")) {
-            final String fullParam = this.mapParams.get("DamageAmount");
+        if (hasParam("DamageAmount")) {
+            final String fullParam = getParam("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);
             final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams2.get("DamageAmount");
+            final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
 
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
@@ -98,7 +101,7 @@ public class TriggerDamageDone extends Trigger {
             System.out.println(operand);
         }
 
-        if (this.mapParams.containsKey("OncePerEffect")) {
+        if (hasParam("OncePerEffect")) {
             // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
             // to change zones.
 
@@ -107,7 +110,7 @@ public class TriggerDamageDone extends Trigger {
             // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
             // card, rather than keeping track of the host card itself - but it's good enough for now - since there
             // are no cards with multiple different OncePerEffect triggers.
-            SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams2.get("SpellAbilityStackInstance");
+            SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
 
             // si == null means the stack is empty
             return si == null || !si.hasOncePerEffectTrigger(this);

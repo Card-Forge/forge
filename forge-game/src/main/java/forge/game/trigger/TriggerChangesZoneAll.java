@@ -15,8 +15,8 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
-        final CardZoneTable table = (CardZoneTable) runParams2.get("Cards");
+    public boolean performTest(Map<AbilityKey, Object> runParams) {
+        final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
         return !filterCards(table).isEmpty();
     }

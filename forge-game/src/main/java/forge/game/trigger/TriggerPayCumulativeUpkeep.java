@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_LifeGained class.
@@ -47,18 +49,19 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("Paid")) {
-            Boolean paid = (Boolean) runParams2.get("CumulativeUpkeepPaid");
-            if (this.mapParams.get("Paid").equals("True") ^ paid) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("Paid")) {
+            Boolean paid = (Boolean) runParams.get(AbilityKey.CumulativeUpkeepPaid);
+            if (getParam("Paid").equals("True") ^ paid) {
                 return false;
             }
         }
-        final Card card = (Card) runParams2.get("Card");
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!card.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+        final Card card = (Card) runParams.get(AbilityKey.Card);
+        if (hasParam("ValidCard")) {
+            if (!card.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }

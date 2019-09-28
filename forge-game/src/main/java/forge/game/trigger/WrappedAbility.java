@@ -466,7 +466,7 @@ public class WrappedAbility extends Ability {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
             Map<String, String> recheck = new HashMap<>();
             String key = triggerParams.get("ResolvingCheck");
-            String value = regtrig.getMapParams().get(key);
+            String value = regtrig.getParam(key);
             recheck.put(key, value);
             if (!meetsCommonRequirements(recheck)) {
                 return;

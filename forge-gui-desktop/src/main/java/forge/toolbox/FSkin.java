@@ -1039,7 +1039,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies;
+    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1171,10 +1171,13 @@ public class FSkin {
         final File f7 = new File(defaultDir + ForgeConstants.SPRITE_TROPHIES_FILE);
         final File f8 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
         final File f9 = new File(defaultDir + ForgeConstants.SPRITE_FAVICONS_FILE);
+        final File f10 = new File(defaultDir + ForgeConstants.SPRITE_ABILITY_FILE);
 
         try {
             int p = 0;
             bimDefaultSprite = ImageIO.read(f1);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimAbilities = ImageIO.read(f10);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1236,6 +1239,9 @@ public class FSkin {
                 case FAVICON:
                     setImage(prop, bimFavIcon);
                     break;
+                case ABILITY:
+                    setImage(prop, bimAbilities);
+                    break;
                 default:
                     break;
             }
@@ -1256,6 +1262,7 @@ public class FSkin {
         bimDefaultAvatars.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
+        bimAbilities.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
 
@@ -1267,6 +1274,7 @@ public class FSkin {
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;
+        bimAbilities = null;
 
         //establish encoding symbols
         final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);

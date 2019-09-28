@@ -358,6 +358,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventTokenStateUpdate event) {
+        processCards(event.cards, cardsRefreshDetails);
+        return processCards(event.cards, cardsUpdate);
+    }
+
+    @Override
     public Void visit(final GameEventShuffle event) {
         //pfps the change to the library has already been performed by a setCards call
 	// this is only for playing a sound

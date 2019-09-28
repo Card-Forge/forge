@@ -67,6 +67,8 @@ public class ComputerUtilMana {
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
+        if(ai == null || sa == null)
+            return false;
         sa.setActivatingPlayer(ai);
         return payManaCost(sa, ai, true, 0, false);
     }
@@ -1415,7 +1417,7 @@ public class ComputerUtilMana {
                 for (final ReplacementEffect replacementEffect : replacementEffects) {
                     if (replacementEffect.canReplace(repParams)) {
                         Card crd = replacementEffect.getHostCard();
-                        String repType = crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement"));
+                        String repType = crd.getSVar(replacementEffect.getParam("ManaReplacement"));
                         if (repType.contains("Chosen")) {
                             repType = TextUtil.fastReplace(repType, "Chosen", MagicColor.toShortString(crd.getChosenColor()));
                         }

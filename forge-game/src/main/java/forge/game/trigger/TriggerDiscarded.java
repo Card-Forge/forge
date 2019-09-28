@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Discarded class.
@@ -47,35 +49,36 @@ public class TriggerDiscarded extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidCause")) {
-            if (runParams2.get("Cause") == null) {
+        if (hasParam("ValidCause")) {
+            if (runParams.get(AbilityKey.Cause) == null) {
                 return false;
             }
-            if (!matchesValid(runParams2.get("Cause"), this.mapParams.get("ValidCause").split(","),
+            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("IsMadness")) {
-            Boolean madness = (Boolean) runParams2.get("IsMadness");
-            if (this.mapParams.get("IsMadness").equals("True") ^ madness) {
+        if (hasParam("IsMadness")) {
+            Boolean madness = (Boolean) runParams.get(AbilityKey.IsMadness);
+            if (getParam("IsMadness").equals("True") ^ madness) {
                 return false;
             }
         }

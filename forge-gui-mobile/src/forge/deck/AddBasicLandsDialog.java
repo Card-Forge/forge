@@ -85,11 +85,11 @@ public class AddBasicLandsDialog extends FDialog {
             return new ScrollBounds(totalWidth, visibleHeight);
         }
     });
-    private final LandPanel pnlPlains = scroller.add(new LandPanel(Localizer.getInstance().getMessage("lblPlains")));
-    private final LandPanel pnlIsland = scroller.add(new LandPanel(Localizer.getInstance().getMessage("lblIsland")));
-    private final LandPanel pnlSwamp = scroller.add(new LandPanel(Localizer.getInstance().getMessage("lblSwamp")));
-    private final LandPanel pnlMountain = scroller.add(new LandPanel(Localizer.getInstance().getMessage("lblMountain")));
-    private final LandPanel pnlForest = scroller.add(new LandPanel(Localizer.getInstance().getMessage("lblForest")));
+    private final LandPanel pnlPlains = scroller.add(new LandPanel("Plains"));
+    private final LandPanel pnlIsland = scroller.add(new LandPanel("Island"));
+    private final LandPanel pnlSwamp = scroller.add(new LandPanel("Swamp"));
+    private final LandPanel pnlMountain = scroller.add(new LandPanel("Mountain"));
+    private final LandPanel pnlForest = scroller.add(new LandPanel("Forest"));
 
     private final FTextArea lblDeckInfo = add(new FTextArea(true) {
         @Override
