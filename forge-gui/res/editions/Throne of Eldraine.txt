@@ -5,63 +5,63 @@ Name=Throne of Eldraine
 Code2=ELD
 MciCode=eld
 Type=Expansion
-BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+BoosterCovers=5
+Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Secret Cards"), 1 RareMythic:!fromSheet("ELD Secret Cards"), 1 BasicLand
 
 [cards]
 1 R Acclaimed Contender
 2 U All That Glitters
 3 U Archon of Absolution
 4 C Ardenvale Paladin
-5 C Ardenvale Tactician // Dizzying Swoop
+5 C Ardenvale Tactician
 6 C Bartered Cow
 7 C Beloved Princess
 8 R Charming Prince
 9 M The Circle of Loyalty
 10 U Deafening Silence
-11 C Faerie Guidemother // Gift of the Fae
+11 C Faerie Guidemother
 12 C Flutterfox
 13 C Fortifying Provisions
-14 R Giant Killer // Chop Down
+14 R Giant Killer
 15 U Glass Casket
 16 R Happily Ever After
 17 M Harmonious Archon
 18 R Hushbringer
 19 C Knight of the Keep
 20 R Linden, the Steadfast Queen
-21 C Lonesome Unicorn // Rider in Need
+21 C Lonesome Unicorn
 22 U Mysterious Pathlighter
 23 C Outflank
 24 C Prized Griffin
 25 U Rally for the Throne
-26 M Realm-Cloaked Giant // Cast Off
+26 M Realm-Cloaked Giant
 27 U Righteousness
-28 U Shepherd of the Flock // Usher to Safety
+28 U Shepherd of the Flock
 29 C Shining Armor
 30 C Silverflame Ritual
-31 C Silverflame Squire // On Alert
+31 C Silverflame Squire
 32 U Syr Alin, the Lion's Claw
 33 C Trapped in the Tower
 34 C True Love's Kiss
 35 U Venerable Knight
 36 R Worthy Knight
 37 C Youthful Knight
-38 U Animating Faerie // Bring to Life
-39 M Brazen Borrower // Petty Theft
+38 U Animating Faerie
+39 M Brazen Borrower
 40 C Charmed Sleep
 41 C Corridor Monitor
 42 C Didn't Say Please
 43 R Emry, Lurker of the Loch
-44 R Fae of Wishes // Granted
+44 R Fae of Wishes
 45 U Faerie Vandal
 46 R Folio of Fancies
 47 U Frogify
 48 R Gadwick, the Wizened
-49 U Hypnotic Sprite // Mesmeric Glare
+49 U Hypnotic Sprite
 50 U Into the Story
 51 M The Magic Mirror
 52 C Mantle of Tides
-53 C Merfolk Secretkeeper // Venture Deeper
+53 C Merfolk Secretkeeper
 54 R Midnight Clock
 55 R Mirrormade
 56 C Mistford River Turtle
@@ -69,7 +69,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 58 U Mystical Dispute
 59 C Opt
 60 U Overwhelmed Apprentice
-61 C Queen of Ice // Rage of Winter
+61 C Queen of Ice
 62 C Run Away Together
 63 U Sage of the Falls
 64 C So Tiny
@@ -98,22 +98,22 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 87 C Festive Funeral
 88 C Foreboding Fruit
 89 C Forever Young
-90 U Foulmire Knight // Profane Insight
+90 U Foulmire Knight
 91 C Giant's Skewer
 92 C Lash of Thorns
 93 C Locthwain Paladin
 94 C Lost Legion
 95 C Malevolent Noble
 96 C Memory Theft
-97 R Murderous Rider // Swift End
+97 R Murderous Rider
 98 R Oathsworn Knight
-99 U Order of Midnight // Alter Fate
+99 U Order of Midnight
 100 R Piper of the Swarm
 101 M Rankle, Master of Pranks
-102 C Reaper of Night // Harvest Fear
+102 C Reaper of Night
 103 C Reave Soul
 104 U Revenge of Ravens
-105 C Smitten Swordmaster // Curry Favor
+105 C Smitten Swordmaster
 106 U Specter's Shriek
 107 U Syr Konrad, the Grim
 108 C Tempting Witch
@@ -123,14 +123,14 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 112 C Barge In
 113 C Bloodhaze Wolverine
 114 C Blow Your House Down
-115 R Bonecrusher Giant // Stomp
+115 R Bonecrusher Giant
 116 C Brimstone Trebuchet
 117 U Burning-Yard Trainer
 118 U Claim the Firstborn
 119 C Crystal Slipper
 120 M Embercleave
 121 C Embereth Paladin
-122 U Embereth Shieldbreaker // Battle Display
+122 U Embereth Shieldbreaker
 123 U Ferocity of the Wilds
 124 R Fervent Champion
 125 R Fires of Invention
@@ -139,13 +139,13 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 128 R Irencrag Pyromancer
 129 U Joust
 130 U Mad Ratter
-131 C Merchant of the Vale // Haggle
+131 C Merchant of the Vale
 132 C Ogre Errant
 133 R Opportunistic Dragon
 134 C Raging Redcap
 135 U Redcap Melee
 136 C Redcap Raiders
-137 C Rimrock Knight // Boulder Rush
+137 C Rimrock Knight
 138 M Robber of the Rich
 139 C Scorching Dragonfire
 140 C Searing Barrage
@@ -157,14 +157,14 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 146 C Thrill of Possibility
 147 R Torbran, Thane of Red Fell
 148 C Weaselback Redcap
-149 U Beanstalk Giant // Fertile Footsteps
-150 C Curious Pair // Treats to Share
+149 U Beanstalk Giant
+150 C Curious Pair
 151 U Edgewall Innkeeper
 152 R Feasting Troll King
 153 C Fell the Pheasant
 154 C Fierce Witchstalker
-155 U Flaxen Intruder // Welcome Home
-156 C Garenbrig Carver // Shield's Might
+155 U Flaxen Intruder
+156 C Garenbrig Carver
 157 C Garenbrig Paladin
 158 C Garenbrig Squire
 159 U Giant Opportunity
@@ -173,7 +173,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 162 C Insatiable Appetite
 163 U Keeper of Fables
 164 U Kenrith's Transformation
-165 R Lovestruck Beast // Heart's Desire
+165 R Lovestruck Beast
 166 C Maraleaf Rider
 167 U Oakhame Adversary
 168 U Once and Future
@@ -182,13 +182,13 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 171 M Questing Beast
 172 R Return of the Wildspeaker
 173 C Return to Nature
-174 C Rosethorn Acolyte // Seasonal Ritual
+174 C Rosethorn Acolyte
 175 C Rosethorn Halberd
 176 C Sporecap Spider
 177 U Syr Faren, the Hengehammer
 178 C Tall as a Beanstalk
 179 U Trail of Crumbs
-180 C Tuinvale Treefolk // Oaken Boon
+180 C Tuinvale Treefolk
 181 R Wicked Wolf
 182 R Wildborn Preserver
 183 C Wildwood Tracker
@@ -220,7 +220,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 209 U Elite Headhunter
 210 U Fireborn Knight
 211 U Loch Dragon
-212 U Oakhame Ranger // Bring Back
+212 U Oakhame Ranger
 213 U Rampart Smasher
 214 U Resolute Rider
 215 U Thunderous Snapper
@@ -258,26 +258,26 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 247 C Mystic Sanctuary
 248 U Tournament Grounds
 249 C Witch's Cottage
-250 C Plains
-251 C Plains
-252 C Plains
-253 C Plains
-254 C Island
-255 C Island
-256 C Island
-257 C Island
-258 C Swamp
-259 C Swamp
-260 C Swamp
-261 C Swamp
-262 C Mountain
-263 C Mountain
-264 C Mountain
-265 C Mountain
-266 C Forest
-267 C Forest
-268 C Forest
-269 C Forest
+250 L Plains
+251 L Plains
+252 L Plains
+253 L Plains
+254 L Island
+255 L Island
+256 L Island
+257 L Island
+258 L Swamp
+259 L Swamp
+260 L Swamp
+261 L Swamp
+262 L Mountain
+263 L Mountain
+264 L Mountain
+265 L Mountain
+266 L Forest
+267 L Forest
+268 L Forest
+269 L Forest
 303 M Kenrith, the Returned King
 304 M Rowan, Fearless Sparkmage
 305 C Garrison Griffin

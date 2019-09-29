@@ -30,11 +30,8 @@ public class ReplaceProduceMana extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("ProduceMana")) {
-            return false;
-        }
         //Check for tapping
-        if (!mapParams.containsKey("NoTapCheck")) {
+        if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get("AbilityMana");
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
@@ -57,8 +54,8 @@ public class ReplaceProduceMana extends ReplacementEffect {
             }
         }
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }

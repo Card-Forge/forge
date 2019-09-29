@@ -37,7 +37,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
 
     public SettingsPage() {
-        super("Settings", FSkinImage.SETTINGS);
+        super(Localizer.getInstance().getMessage("lblSettings"), FSkinImage.SETTINGS);
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -330,6 +330,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
                 localizer.getMessage("lblShowCardIDOverlays"),
                 localizer.getMessage("nlShowCardIDOverlays")),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
+                localizer.getMessage("lblShowAbilityIconsOverlays"),
+                localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
 
         //Vibration Options

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
+import forge.util.Localizer;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -113,8 +114,8 @@ public class DualListBox<T> extends FDialog {
         };
 
         // Dual List Complete Buttons
-        initButton(0, "OK", onAccept);
-        initButton(1, "Auto", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblOK"), onAccept);
+        initButton(1, Localizer.getInstance().getMessage("lblAuto"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 addAll();

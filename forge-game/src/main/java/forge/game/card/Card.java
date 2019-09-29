@@ -48,6 +48,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -687,9 +688,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (result && runTriggers) {
                 // Run replacement effects
                 Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Event", "TurnFaceUp");
                 repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1234,14 +1234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("Source", source);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
@@ -2722,9 +2721,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final Player getController() {
         if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
-            //only permanents and spells have controllers [108.4],
-            //so a card really only has a controller while it's on the stack or battlefield.
-            //everywhere else, just use the owner [108.4a].
+            /*
+             * 108.4. A card doesn’t have a controller unless that card represents a permanent or spell; in those cases,
+             * its controller is determined by the rules for permanents or spells. See rules 110.2 and 112.2.
+             * 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent
+             * or spell), use its owner instead.
+             *
+             * Control, Controller: "Control" is the system that determines who gets to use an object in the game.
+             * An object's "controller" is the player who currently controls it. See rule 108.4.
+             * 
+             * 400.6. If an object would move from one zone to another, determine what event is moving the object. 
+             * If the object is moving to a public zone and its owner will be able to look at it in that zone, 
+             * its owner looks at it to see if it has any abilities that would affect the move. 
+             * If the object is moving to the battlefield, each other player who will be able to look at it in that 
+             * zone does so. Then any appropriate replacement effects, whether they come from that object or from 
+             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or 
+             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER 
+             * IF IT HAS NO CONTROLLER—chooses which effect to apply, and what that effect does.
+             */
+            if (controller != null) {
+                return controller; // if there's a controller we return this
+            }
             if (owner != null) {
                 return owner;
             }
@@ -3556,10 +3573,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Run Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Event", "Untap");
         repRunParams.put("Affected", this);
 
-        if (getGame().getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -3643,6 +3659,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
     }
 
@@ -3697,6 +3715,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null && updateView) {
             updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
         return change;
     }
@@ -4675,16 +4695,30 @@ public class Card extends GameEntity implements Comparable<Card> {
         return 0;
     }
 
+    public final boolean canDamagePrevented(final boolean isCombat) {
+        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        list.add(this);
+        for (final Card ca : list) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantPreventDamage", this, isCombat)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // This is used by the AI to forecast an effect (so it must not change the game state)
     public final int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damage;
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
                 if (params.containsKey("ValidSource")
@@ -4719,7 +4753,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damageIn;
         }
 
@@ -5342,7 +5376,116 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
-
+    public String getProtectionKey() {
+        String protectKey = "";
+        boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("Protection")) {
+                continue;
+            }
+            if (kw.equals("Protection from red")) {
+                if (!pR) {
+                    pR = true;
+                    protectKey += "R";
+                }
+            } else if (kw.equals("Protection from green")) {
+                if (!pG) {
+                    pG = true;
+                    protectKey += "G";
+                }
+            } else if (kw.equals("Protection from black")) {
+                if (!pB) {
+                    pB = true;
+                    protectKey += "B";
+                }
+            } else if (kw.equals("Protection from blue")) {
+                if (!pU) {
+                    pU = true;
+                    protectKey += "U";
+                }
+            } else if (kw.equals("Protection from white")) {
+                if (!pW) {
+                    pW = true;
+                    protectKey += "W";
+                }
+            } else if (kw.equals("Protection from monocolored")) {
+                protectKey += "monocolored:";
+            } else if (kw.equals("Protection from multicolored")) {
+                protectKey += "multicolored:";
+            } else if (kw.equals("Protection from all colors")) {
+                protectKey += "allcolors:";
+            } else if (kw.equals("Protection from colorless")) {
+                protectKey += "colorless:";
+            } else if (kw.equals("Protection from creatures")) {
+                protectKey += "creatures:";
+            } else if (kw.equals("Protection from artifacts")) {
+                protectKey += "artifacts:";
+            } else if (kw.equals("Protection from enchantments")) {
+                protectKey += "enchantments:";
+            } else if (kw.equals("Protection from everything")) {
+                protectKey += "everything:";
+            } else if (kw.equals("Protection from colored spells")) {
+                protectKey += "coloredspells:";
+            } else if (kw.startsWith("Protection")) {
+                protectKey += "generic";
+            }
+        }
+        return protectKey;
+    }
+    public String getHexproofKey() {
+        String hexproofKey = "";
+        boolean hR = false; boolean hG = false; boolean hB = false; boolean hU = false; boolean hW = false;
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("Hexproof")) {
+                continue;
+            }
+            if (kw.equals("Hexproof")) {
+                hexproofKey += "generic:";
+            }
+            if (kw.startsWith("Hexproof:")) {
+                String[] k = kw.split(":");
+                if (k[2].toString().equals("red")) {
+                    if (!hR) {
+                        hR = true;
+                        hexproofKey += "R:";
+                    }
+                } else if (k[2].toString().equals("green")) {
+                    if (!hG) {
+                        hG = true;
+                        hexproofKey += "G:";
+                    }
+                } else if (k[2].toString().equals("black")) {
+                    if (!hB) {
+                        hB = true;
+                        hexproofKey += "B:";
+                    }
+                } else if (k[2].toString().equals("blue")) {
+                    if (!hU) {
+                        hU = true;
+                        hexproofKey += "U:";
+                    }
+                } else if (k[2].toString().equals("white")) {
+                    if (!hW) {
+                        hW = true;
+                        hexproofKey += "W:";
+                    }
+                } else if (k[2].toString().equals("monocolored")) {
+                    hexproofKey += "monocolored:";
+                }
+            }
+        }
+        return hexproofKey;
+    }
+    public String getKeywordKey() {
+        List<String> ability = new ArrayList<>();
+        for (final KeywordInterface inst : getKeywords()) {
+            ability.add(inst.getOriginal());
+        }
+        Collections.sort(ability);
+        return String.join(",", ability);
+    }
     public Zone getZone() {
         return currentZone;
     }

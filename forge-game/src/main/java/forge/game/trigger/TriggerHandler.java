@@ -52,8 +52,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 public class TriggerHandler {
     private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<>());
     private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
@@ -438,7 +436,7 @@ public class TriggerHandler {
                     }
                 }
 
-                if (t.getMapParams().containsKey("OncePerEffect")) {
+                if (t.hasParam("OncePerEffect")) {
                     SpellAbilityStackInstance si =
                             (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
                     if (si != null) {
@@ -513,7 +511,7 @@ public class TriggerHandler {
             return false; // Conditions aren't right.
         }
 
-        if (!regtrig.performTest(toStringMap(runParams))) {
+        if (!regtrig.performTest(runParams)) {
             return false; // Test failed.
         }
         if (regtrig.isSuppressed()) {

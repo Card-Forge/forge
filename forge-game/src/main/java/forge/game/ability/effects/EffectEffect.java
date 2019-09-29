@@ -147,7 +147,7 @@ public class EffectEffect extends SpellAbilityEffect {
                     final String actualTrigger = AbilityUtils.getSVar(sa, s);
 
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
-                    final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getMapParams().get("Execute"));
+                    final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getParam("Execute"));
                     parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, eff));
                     final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
                     addedTrigger.setIntrinsic(true);

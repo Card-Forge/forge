@@ -51,11 +51,12 @@ public class TriggerCounterAddedOnce extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("CounterType")) {
-            final CounterType addedType = (CounterType) runParams2.get("CounterType");
+            final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
             final String type = getParam("CounterType");
             if (!type.equals(addedType.toString())) {
                 return false;
@@ -63,10 +64,10 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidCard")) {
-            if (!runParams2.containsKey("Card"))
+            if (!runParams.containsKey(AbilityKey.Card))
                 return false;
 
-            final Card addedTo = (Card) runParams2.get("Card");
+            final Card addedTo = (Card) runParams.get(AbilityKey.Card);
             if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
                 return false;
@@ -74,10 +75,10 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidPlayer")) {
-            if (!runParams2.containsKey("Player"))
+            if (!runParams.containsKey(AbilityKey.Player))
                 return false;
 
-            final Player addedTo = (Player) runParams2.get("Player");
+            final Player addedTo = (Player) runParams.get(AbilityKey.Player);
             if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
                 return false;
@@ -85,10 +86,10 @@ public class TriggerCounterAddedOnce extends Trigger {
         }
 
         if (hasParam("ValidSource")) {
-            if (!runParams2.containsKey("Source"))
+            if (!runParams.containsKey(AbilityKey.Source))
                 return false;
 
-            final Player source = (Player) runParams2.get("Source");
+            final Player source = (Player) runParams.get(AbilityKey.Source);
 
             if (source == null) {
                 return false;

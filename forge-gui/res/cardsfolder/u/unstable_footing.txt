@@ -3,7 +3,7 @@ ManaCost:R
 Types:Instant
 K:Kicker:3 R
 A:SP$ Effect | Cost$ R | Name$ Unstable Footing | StaticAbilities$ STCantPrevent | SubAbility$ DBDamage | SpellDescription$ Damage can't be prevented this turn. If CARDNAME was kicked, it deals 5 damage to target player or planeswalker.
-SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
+SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | NoPrevention$ True | Condition$ Kicked | ConditionDescription$ If it was kicked,
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_footing.jpg

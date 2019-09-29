@@ -53,8 +53,16 @@ import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
+import forge.util.Localizer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -125,7 +133,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
         if (allowSortChange()) {
-            cbxSortOptions = add(new FComboBox<>("Sort: "));
+            cbxSortOptions = add(new FComboBox<>(Localizer.getInstance().getMessage("lblSort") + ": "));
             cbxSortOptions.setFont(FSkinFont.get(12));
         }
         else {
@@ -140,7 +148,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
-                        addItem(new FMenuItem("Advanced Search", FSkinImage.SEARCH, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), FSkinImage.SEARCH, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 if (advancedSearchFilter == null) {
@@ -150,7 +158,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                                 advancedSearchFilter.edit();
                             }
                         }));
-                        addItem(new FMenuItem("Reset Filters", FSkinImage.DELETE, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 resetFilters();
@@ -261,7 +269,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         if (cbxSortOptions != null) {
-            cbxSortOptions.setText("(none)");
+            cbxSortOptions.setText("(" + Localizer.getInstance().getMessage("lblNone") + ")");
         }
 
         model.getCascadeManager().reset();

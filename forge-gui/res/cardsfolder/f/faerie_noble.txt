@@ -1,6 +1,6 @@
 Name:Faerie Noble
 ManaCost:2 G
-Types:Creature Faerie
+Types:Creature Faerie Noble
 PT:1/2
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddToughness$ 1 | Description$ Other Faerie creatures you control get +0/+1.

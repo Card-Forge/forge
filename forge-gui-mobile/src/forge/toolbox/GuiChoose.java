@@ -6,9 +6,15 @@ import com.google.common.collect.Iterables;
 import forge.game.card.CardView;
 import forge.util.Callback;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class GuiChoose {
 
@@ -166,7 +172,7 @@ public class GuiChoose {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("Other...");
+        choices.add(Localizer.getInstance().getMessage("lblOther") + "...");
 
         oneOrNone(message, choices, new Callback<Object>() {
             @Override

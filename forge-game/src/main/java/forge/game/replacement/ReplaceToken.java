@@ -26,7 +26,7 @@ public class ReplaceToken extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("CreateToken") || ((int) runParams.get("TokenNum")) <= 0) {
+        if (((int) runParams.get("TokenNum")) <= 0) {
             return false;
         }
 

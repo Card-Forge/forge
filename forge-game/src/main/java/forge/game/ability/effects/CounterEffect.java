@@ -7,6 +7,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
@@ -155,11 +156,10 @@ public class CounterEffect extends SpellAbilityEffect {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         // Run any applicable replacement effects. 
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "Counter");
         repParams.put("TgtSA", tgtSA);
         repParams.put("Affected", tgtSA.getHostCard());
         repParams.put("Cause", srcSA.getHostCard());
-        if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
         game.getStack().remove(si);

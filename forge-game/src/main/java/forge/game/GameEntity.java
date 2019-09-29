@@ -28,6 +28,7 @@ import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -115,7 +116,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Replacement effects
         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
@@ -128,7 +128,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             repParams.put("Cause", cause);
         }
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
         case NotReplaced:
             return damage;
         case Updated:
@@ -162,8 +162,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public final int preventDamage(
             final int damage, final Card source, final boolean isCombat, CardDamageMap preventMap,
             final SpellAbility cause) {
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
-                || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damage;
         }
 
@@ -171,7 +170,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
         // first try to replace the damage
          final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
@@ -182,7 +180,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             repParams.put("Cause", cause);
         }
 
-        switch (getGame().getReplacementHandler().run(repParams)) {
+        switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
         case NotReplaced:
             restDamage = damage;
             break;

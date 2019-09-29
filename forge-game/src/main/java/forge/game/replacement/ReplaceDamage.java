@@ -47,9 +47,6 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("DamageDone")) {
-            return false;
-        }
         if (!(runParams.containsKey("Prevention") == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
             return false;
         }

@@ -9,7 +9,6 @@ import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
@@ -267,7 +266,7 @@ public class EffectAi extends SpellAbilityAi {
                 final SpellAbility saTop = game.getStack().peekAbility();
                 final Card host = saTop.getHostCard();
                 if (saTop.getActivatingPlayer() != ai   // from opponent
-                        && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)  // no prevent damage
+                        && host.canDamagePrevented(false)  // no prevent damage
                         && host != null && (host.isInstant() || host.isSorcery())
                         && !host.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {  // valid target
                     final ApiType type = saTop.getApi();

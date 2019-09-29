@@ -22,6 +22,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_LifeGained class.
@@ -48,23 +50,24 @@ public class TriggerSetInMotion extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Scheme"), this.mapParams.get("ValidCard").split(","),
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get(AbilityKey.Scheme), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("SchemeType")) {
-            if (this.mapParams.get("SchemeType").equals("NonOngoing")) {
-                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+        if (hasParam("SchemeType")) {
+            if (getParam("SchemeType").equals("NonOngoing")) {
+                if (((Card) runParams.get(AbilityKey.Scheme)).getType().hasSupertype(CardType.Supertype.Ongoing)) {
                     return false;
                 }
-            } else if (this.mapParams.get("SchemeType").equals("Ongoing")) {
-                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+            } else if (getParam("SchemeType").equals("Ongoing")) {
+                if (((Card) runParams.get(AbilityKey.Scheme)).getType().hasSupertype(CardType.Supertype.Ongoing)) {
                     return false;
                 }
             }

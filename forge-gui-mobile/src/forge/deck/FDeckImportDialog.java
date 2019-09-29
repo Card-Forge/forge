@@ -33,6 +33,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.gui.SOptionPane;
 
 
@@ -40,14 +41,14 @@ public class FDeckImportDialog extends FDialog {
     private final Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
-    private final FCheckBox newEditionCheck = add(new FCheckBox("Import latest version of card", true));
-    private final FCheckBox dateTimeCheck = add(new FCheckBox("Use only sets released before:", false));
+    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), true));
+    private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
     /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
       forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
       forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
       (as of latest commit: 8e6655e3ee67688cff66b422d4722c58392eaa7e)
     */
-    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox("Use only core and expansion sets", false));
+    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), false));
 
     private final FComboBox<String> monthDropdown = add(new FComboBox<>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
@@ -55,16 +56,16 @@ public class FDeckImportDialog extends FDialog {
     private final boolean showOptions;
     private final DeckImportController controller;
 
-    private final static ImmutableList<String> importOrCancel = ImmutableList.of("Import", "Cancel");
+    private final static ImmutableList<String> importOrCancel = ImmutableList.of(Localizer.getInstance().getMessage("lblImport"), Localizer.getInstance().getMessage("lblCancel"));
 
     public FDeckImportDialog(final boolean replacingDeck, final Callback<Deck> callback0) {
-        super("Import from Clipboard", 2);
+        super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
 
         callback = callback0;
         controller = new DeckImportController(replacingDeck, newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
         txtInput.setText(Forge.getClipboard().getContents()); //just pull import directly off the clipboard
 
-        initButton(0, "Import", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 FThreads.invokeInBackgroundThread(new Runnable() {
@@ -83,7 +84,7 @@ public class FDeckImportDialog extends FDialog {
                             }
                         }
                         if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
+                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb.toString(), Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
                                 return;
                             }
                         }
@@ -102,7 +103,7 @@ public class FDeckImportDialog extends FDialog {
                 });
             }
         });
-        initButton(1, "Cancel", new FEventHandler() {
+        initButton(1, Localizer.getInstance().getMessage("lblCancel"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -129,7 +130,7 @@ public class FDeckImportDialog extends FDialog {
 
         showOptions = false;
         setButtonEnabled(0, false);
-        txtInput.setText("No known cards found on clipboard.\n\nCopy the decklist to the clipboard, then reopen this dialog.");
+        txtInput.setText(Localizer.getInstance().getMessage("lblNoKnownCardsOnClipboard"));
     }
 
     private void updateDropDownEnabled() {

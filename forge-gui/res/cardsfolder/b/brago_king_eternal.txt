@@ -1,6 +1,6 @@
 Name:Brago, King Eternal
 ManaCost:2 W U
-Types:Legendary Creature Spirit
+Types:Legendary Creature Spirit Noble
 PT:2/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.

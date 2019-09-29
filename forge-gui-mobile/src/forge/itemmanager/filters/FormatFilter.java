@@ -22,7 +22,11 @@ import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.badlogic.gdx.utils.Align;
 

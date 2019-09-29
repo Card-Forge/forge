@@ -2,7 +2,18 @@ package forge.screens.planarconquest;
 
 import java.util.List;
 
-import forge.planarconquest.*;
+import forge.planarconquest.ConquestAwardPool;
+import forge.planarconquest.ConquestBattle;
+import forge.planarconquest.ConquestChaosBattle;
+import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestEvent;
+import forge.planarconquest.ConquestLocation;
+import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestPlaneData;
+import forge.planarconquest.ConquestRegion;
+import forge.planarconquest.ConquestReward;
+import forge.planarconquest.ConquestUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;

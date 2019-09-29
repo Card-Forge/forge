@@ -22,6 +22,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Unattach class.
@@ -47,11 +49,12 @@ public class TriggerUnattach extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final GameEntity object = (GameEntity) runParams2.get("Object");
-        final Card attach = (Card) runParams2.get("Attach");
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final GameEntity object = (GameEntity) runParams.get(AbilityKey.Object);
+        final Card attach = (Card) runParams.get(AbilityKey.Attach);
 
         if (hasParam("ValidObject")) {
             if (!object.isValid(getParam("ValidObject").split(","), getHostCard().getController(),

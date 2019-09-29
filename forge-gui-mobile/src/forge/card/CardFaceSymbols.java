@@ -101,6 +101,52 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil18", FSkinImage.FOIL_18);
         MANA_IMAGES.put("foil19", FSkinImage.FOIL_19);
         MANA_IMAGES.put("foil20", FSkinImage.FOIL_20);
+
+
+        MANA_IMAGES.put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
+        MANA_IMAGES.put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
+        MANA_IMAGES.put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
+        MANA_IMAGES.put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
+        MANA_IMAGES.put("fear", FSkinImage.IMG_ABILITY_FEAR);
+        MANA_IMAGES.put("flying", FSkinImage.IMG_ABILITY_FLYING);
+        MANA_IMAGES.put("hexproof", FSkinImage.IMG_ABILITY_HEXPROOF);
+        MANA_IMAGES.put("indestructible", FSkinImage.IMG_ABILITY_INDESTRUCTIBLE);
+        MANA_IMAGES.put("intimidate", FSkinImage.IMG_ABILITY_INTIMIDATE);
+        MANA_IMAGES.put("lifelink", FSkinImage.IMG_ABILITY_LIFELINK);
+        MANA_IMAGES.put("menace", FSkinImage.IMG_ABILITY_MENACE);
+        MANA_IMAGES.put("reach", FSkinImage.IMG_ABILITY_REACH);
+        MANA_IMAGES.put("shroud", FSkinImage.IMG_ABILITY_SHROUD);
+        MANA_IMAGES.put("trample", FSkinImage.IMG_ABILITY_TRAMPLE);
+        MANA_IMAGES.put("vigilance", FSkinImage.IMG_ABILITY_VIGILANCE);
+        //hexproof from
+        MANA_IMAGES.put("hexproofR", FSkinImage.IMG_ABILITY_HEXPROOF_R);
+        MANA_IMAGES.put("hexproofG", FSkinImage.IMG_ABILITY_HEXPROOF_G);
+        MANA_IMAGES.put("hexproofB", FSkinImage.IMG_ABILITY_HEXPROOF_B);
+        MANA_IMAGES.put("hexproofU", FSkinImage.IMG_ABILITY_HEXPROOF_U);
+        MANA_IMAGES.put("hexproofW", FSkinImage.IMG_ABILITY_HEXPROOF_W);
+        MANA_IMAGES.put("hexproofC", FSkinImage.IMG_ABILITY_HEXPROOF_C);
+        MANA_IMAGES.put("hexproofUB", FSkinImage.IMG_ABILITY_HEXPROOF_UB);
+        //token icon
+        MANA_IMAGES.put("token", FSkinImage.IMG_ABILITY_TOKEN);
+        //protection from
+        MANA_IMAGES.put("protectAll", FSkinImage.IMG_ABILITY_PROTECT_ALL);
+        MANA_IMAGES.put("protectB", FSkinImage.IMG_ABILITY_PROTECT_B);
+        MANA_IMAGES.put("protectBU", FSkinImage.IMG_ABILITY_PROTECT_BU);
+        MANA_IMAGES.put("protectBW", FSkinImage.IMG_ABILITY_PROTECT_BW);
+        MANA_IMAGES.put("protectColoredSpells", FSkinImage.IMG_ABILITY_PROTECT_COLOREDSPELLS);
+        MANA_IMAGES.put("protectG", FSkinImage.IMG_ABILITY_PROTECT_G);
+        MANA_IMAGES.put("protectGB", FSkinImage.IMG_ABILITY_PROTECT_GB);
+        MANA_IMAGES.put("protectGU", FSkinImage.IMG_ABILITY_PROTECT_GU);
+        MANA_IMAGES.put("protectGW", FSkinImage.IMG_ABILITY_PROTECT_GW);
+        MANA_IMAGES.put("protectGeneric", FSkinImage.IMG_ABILITY_PROTECT_GENERIC);
+        MANA_IMAGES.put("protectR", FSkinImage.IMG_ABILITY_PROTECT_R);
+        MANA_IMAGES.put("protectRB", FSkinImage.IMG_ABILITY_PROTECT_RB);
+        MANA_IMAGES.put("protectRG", FSkinImage.IMG_ABILITY_PROTECT_RG);
+        MANA_IMAGES.put("protectRU", FSkinImage.IMG_ABILITY_PROTECT_RU);
+        MANA_IMAGES.put("protectRW", FSkinImage.IMG_ABILITY_PROTECT_RW);
+        MANA_IMAGES.put("protectU", FSkinImage.IMG_ABILITY_PROTECT_U);
+        MANA_IMAGES.put("protectUW", FSkinImage.IMG_ABILITY_PROTECT_UW);
+        MANA_IMAGES.put("protectW", FSkinImage.IMG_ABILITY_PROTECT_W);
     }
 
     public static void drawManaCost(Graphics g, ManaCost manaCost, float x, float y, final float imageSize) {

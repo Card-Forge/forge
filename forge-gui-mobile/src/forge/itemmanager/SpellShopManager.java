@@ -19,6 +19,7 @@ import forge.itemmanager.filters.TextSearchFilter;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
+import forge.util.Localizer;
 
 
 public class SpellShopManager extends ItemManager<InventoryItem> {
@@ -29,7 +30,7 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
 
         fnGetPrice = isShop0 ? QuestSpellShop.fnPriceGet : QuestSpellShop.fnPriceSellGet;
         if (!isShop0) {
-            setCaption("Cards");
+            setCaption(Localizer.getInstance().getMessage("lblCards"));
         }
     }
 

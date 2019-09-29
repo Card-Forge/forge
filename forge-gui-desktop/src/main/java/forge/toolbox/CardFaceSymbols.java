@@ -118,6 +118,52 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil18", FSkin.getImage(FSkinProp.FOIL_18));
         MANA_IMAGES.put("foil19", FSkin.getImage(FSkinProp.FOIL_19));
         MANA_IMAGES.put("foil20", FSkin.getImage(FSkinProp.FOIL_20));
+
+        //ability icons
+        MANA_IMAGES.put("deathtouch", FSkin.getImage(FSkinProp.IMG_ABILITY_DEATHTOUCH));
+        MANA_IMAGES.put("defender", FSkin.getImage(FSkinProp.IMG_ABILITY_DEFENDER));
+        MANA_IMAGES.put("doublestrike", FSkin.getImage(FSkinProp.IMG_ABILITY_DOUBLE_STRIKE));
+        MANA_IMAGES.put("firststrike", FSkin.getImage(FSkinProp.IMG_ABILITY_FIRST_STRIKE));
+        MANA_IMAGES.put("fear", FSkin.getImage(FSkinProp.IMG_ABILITY_FEAR));
+        MANA_IMAGES.put("flying", FSkin.getImage(FSkinProp.IMG_ABILITY_FLYING));
+        MANA_IMAGES.put("hexproof", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF));
+        MANA_IMAGES.put("indestructible", FSkin.getImage(FSkinProp.IMG_ABILITY_INDESTRUCTIBLE));
+        MANA_IMAGES.put("intimidate", FSkin.getImage(FSkinProp.IMG_ABILITY_INTIMIDATE));
+        MANA_IMAGES.put("lifelink", FSkin.getImage(FSkinProp.IMG_ABILITY_LIFELINK));
+        MANA_IMAGES.put("menace", FSkin.getImage(FSkinProp.IMG_ABILITY_MENACE));
+        MANA_IMAGES.put("reach", FSkin.getImage(FSkinProp.IMG_ABILITY_REACH));
+        MANA_IMAGES.put("shroud", FSkin.getImage(FSkinProp.IMG_ABILITY_SHROUD));
+        MANA_IMAGES.put("trample", FSkin.getImage(FSkinProp.IMG_ABILITY_TRAMPLE));
+        MANA_IMAGES.put("vigilance", FSkin.getImage(FSkinProp.IMG_ABILITY_VIGILANCE));
+        //hexproof from
+        MANA_IMAGES.put("hexproofR", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_R));
+        MANA_IMAGES.put("hexproofG", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_G));
+        MANA_IMAGES.put("hexproofB", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_B));
+        MANA_IMAGES.put("hexproofU", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_U));
+        MANA_IMAGES.put("hexproofW", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_W));
+        MANA_IMAGES.put("hexproofC", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_C));
+        MANA_IMAGES.put("hexproofUB", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_UB));
+        //token icon
+        MANA_IMAGES.put("token", FSkin.getImage(FSkinProp.IMG_ABILITY_TOKEN));
+        //protection from
+        MANA_IMAGES.put("protectAll", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_ALL));
+        MANA_IMAGES.put("protectB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_B));
+        MANA_IMAGES.put("protectBU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_BU));
+        MANA_IMAGES.put("protectBW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_BW));
+        MANA_IMAGES.put("protectColoredSpells", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_COLOREDSPELLS));
+        MANA_IMAGES.put("protectG", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_G));
+        MANA_IMAGES.put("protectGB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GB));
+        MANA_IMAGES.put("protectGU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GU));
+        MANA_IMAGES.put("protectGW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GW));
+        MANA_IMAGES.put("protectGeneric", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GENERIC));
+        MANA_IMAGES.put("protectR", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_R));
+        MANA_IMAGES.put("protectRB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RB));
+        MANA_IMAGES.put("protectRG", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RG));
+        MANA_IMAGES.put("protectRU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RU));
+        MANA_IMAGES.put("protectRW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RW));
+        MANA_IMAGES.put("protectU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_U));
+        MANA_IMAGES.put("protectUW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_UW));
+        MANA_IMAGES.put("protectW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_W));
     }
 
     /**
@@ -215,6 +261,9 @@ public class CardFaceSymbols {
      */
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
+    }
+    public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y, w, h);
     }
 
     /**

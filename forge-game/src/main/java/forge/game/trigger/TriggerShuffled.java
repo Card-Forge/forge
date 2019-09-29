@@ -21,6 +21,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_Shuffled class.
@@ -47,23 +49,24 @@ public class TriggerShuffled extends Trigger {
         super(params, host, intrinsic);
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     * @param runParams*/
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ShuffleFromEffect")) {
-            if (null == runParams2.get("Source")) {
+        if (hasParam("ShuffleFromEffect")) {
+            if (null == runParams.get(AbilityKey.Source)) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ShuffleBySelfControlled")) {
-            SpellAbility source = (SpellAbility) runParams2.get("Source");
-            if (!source.getActivatingPlayer().equals(runParams2.get("Player"))) {
+        if (hasParam("ShuffleBySelfControlled")) {
+            SpellAbility source = (SpellAbility) runParams.get(AbilityKey.Source);
+            if (!source.getActivatingPlayer().equals(runParams.get(AbilityKey.Player))) {
                 return false;
             }
         }

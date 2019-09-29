@@ -1,8 +1,11 @@
 package forge.screens.match;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-
+import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -152,7 +155,7 @@ public class MatchScreen extends FScreen {
         else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
-            menuBar.addTab(localizer.getMessage("Stack") + " (0)", stack);
+            menuBar.addTab(localizer.getMessage("lblStack") + " (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
 
             //create fake menu tabs for other drop downs so they can be positioned as needed

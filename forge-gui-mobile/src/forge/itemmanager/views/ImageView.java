@@ -11,7 +11,11 @@ import forge.assets.ImageCache;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
-import forge.deck.*;
+import forge.deck.ArchetypeDeckGenerator;
+import forge.deck.CardThemedDeckGenerator;
+import forge.deck.CommanderDeckGenerator;
+import forge.deck.DeckProxy;
+import forge.deck.FDeckViewer;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -30,10 +34,14 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import forge.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -358,7 +366,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         otherItems = groups.get(groups.size() - 1);
                     }
                     else {
-                        otherItems = new Group("Other");
+                        otherItems = new Group(Localizer.getInstance().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
                     }

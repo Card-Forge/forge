@@ -58,6 +58,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -90,6 +91,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
+
+    private final Localizer localizer = Localizer.getInstance();
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp) {
         super(game0, p, lp);
@@ -243,13 +246,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (newMain != null) {
                 String errMsg;
                 if (newMain.size() < deckMinSize) {
-                    errMsg = TextUtil.concatNoSpace("Too few cards in your main deck (minimum ",
-                            String.valueOf(deckMinSize), "), please make modifications to your deck again.");
+                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooFewCardsMainDeck").replace("%s", String.valueOf(deckMinSize)));
+
                 } else {
-                    errMsg = TextUtil.concatNoSpace("Too many cards in your sideboard (maximum ",
-                            String.valueOf(sbMax), "), please make modifications to your deck again.");
+                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooManyCardsSideboard").replace("%s", String.valueOf(sbMax)));
                 }
-                getGui().showErrorDialog(errMsg, "Invalid Deck");
+                getGui().showErrorDialog(errMsg, localizer.getMessage("lblInvalidDeck"));
             }
             // Sideboard rules have changed for M14, just need to consider min
             // maindeck and max sideboard sizes
@@ -301,7 +303,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || attacker
                 .hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
             return InputConfirm.confirm(this, CardView.get(attacker),
-                    "Do you want to assign its combat damage as though it weren't blocked?");
+                    localizer.getMessage("lblAssignCombatDamageWerentBlocked"));
         } else {
             return false;
         }
@@ -404,7 +406,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         tempShowCards(sourceList);
-        final CardCollection choices = getGame().getCardList(getGui().many(title, "Chosen Cards", min, max,
+        final CardCollection choices = getGame().getCardList(getGui().many(title, localizer.getMessage("lblChosenCards"), min, max,
                 CardView.getCollection(sourceList), CardView.get(sa.getHostCard())));
         endTempShowCards();
 
@@ -634,13 +636,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<AbilityKey, Object> tos = sa.getTriggeringObjects();
         if (tos.containsKey(AbilityKey.Attacker)) {
-            buildQuestion.append("\nAttacker: ").append(tos.get(AbilityKey.Attacker));
+            buildQuestion.append("\n").append(localizer.getMessage("lblAttacker")).append(": ").append(tos.get(AbilityKey.Attacker));
         }
         if (tos.containsKey(AbilityKey.Card)) {
             final Card card = (Card) tos.get(AbilityKey.Card);
             if (card != null && (card.getController() == player || game.getZoneOf(card) == null
                     || game.getZoneOf(card).getZoneType().isKnown())) {
-                buildQuestion.append("\nTriggered by: ").append(tos.get(AbilityKey.Card));
+                buildQuestion.append("\n").append(localizer.getMessage("lblTriggeredby")).append(": ").append(tos.get(AbilityKey.Card));
             }
         }
 
@@ -652,15 +654,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
         if (game.getPlayers().size() == 2) {
-            final String prompt = String.format("%s, you %s\n\nWould you like to play or draw?", player.getName(),
-                    isFirstGame ? " have won the coin toss." : " lost the last game.");
-            final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw");
+            String prompt = String.format(
+                    isFirstGame ? localizer.getMessage("lblYouHaveWonTheCoinToss") : localizer.getMessage("lblYouLostTheLastGame"),
+                    player.getName());
+            prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
+            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         } else {
-            final String prompt = String.format(
-                    "%s, you %s\n\nWho would you like to start this game? (Click on the portrait.)", player.getName(),
-                    isFirstGame ? " have won the coin toss." : " lost the last game.");
+            String prompt = String.format(
+                    isFirstGame ? localizer.getMessage("lblYouHaveWonTheCoinToss") : localizer.getMessage("lblYouLostTheLastGame"),
+                    player.getName());
+            prompt += "\n\n" + localizer.getMessage("lblWhoWouldYouLiketoStartthisGame");
             final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1,
                     new FCollection<>(game.getPlayersInTurnOrder()));
             input.setMessage(prompt);
@@ -739,7 +744,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
-	List<Card> result = manipulateCardList("Move cards to top or bottom of library", cards, manipulable, topOK, bottomOK, false);
+	List<Card> result = manipulateCardList(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cards, manipulable, topOK, bottomOK, false);
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
 	for (int i = 0; i<cards.size() && manipulable.contains(result.get(i)) ; i++ ) {
@@ -763,7 +768,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 	     (!GuiBase.getInterface().isLibgdxPort()) ) {
 	    CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
 	    ImmutablePair<CardCollection, CardCollection> result =
-		arrangeForMove("Move cards to top or bottom of library", cardList, topN, true, true);
+		arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
 	    toTop = result.getLeft();
 	    toBottom = result.getRight();
 	} else {
@@ -774,16 +779,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 		    toBottom = topN;
 		}
 	    } else {
-		toBottom = game.getCardList(getGui().many("Select cards to be put on the bottom of your library",
-							  "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
+		toBottom = game.getCardList(getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
+							  localizer.getMessage("lblCardsToPutOnTheBottom"), -1, CardView.getCollection(topN), null));
 		topN.removeAll(toBottom);
 		if (topN.isEmpty()) {
 		    toTop = null;
 		} else if (topN.size() == 1) {
 		    toTop = topN;
 		} else {
-		    toTop = game.getCardList(getGui().order("Arrange cards to be put on top of your library",
-							    "Top of Library", CardView.getCollection(topN), null));
+		    toTop = game.getCardList(getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
+							    localizer.getMessage("lblTopOfLibrary"), CardView.getCollection(topN), null));
 		}
 	    }
 	}
@@ -812,16 +817,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 toGrave = topN;
             }
         } else {
-            toGrave = game.getCardList(getGui().many("Select cards to be put into the graveyard",
-                    "Cards to put in the graveyard", -1, CardView.getCollection(topN), null));
+            toGrave = game.getCardList(getGui().many(localizer.getMessage("lblSelectCardsToBePutIntoTheGraveyard"),
+                    localizer.getMessage("lblCardsToPutInTheGraveyard"), -1, CardView.getCollection(topN), null));
             topN.removeAll(toGrave);
             if (topN.isEmpty()) {
                 toTop = null;
             } else if (topN.size() == 1) {
                 toTop = topN;
             } else {
-                toTop = game.getCardList(getGui().order("Arrange cards to be put on top of your library",
-                        "Top of Library", CardView.getCollection(topN), null));
+                toTop = game.getCardList(getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
+                        localizer.getMessage("lblTopOfLibrary"), CardView.getCollection(topN), null));
             }
         }
         endTempShowCards();
@@ -1324,7 +1329,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         max = Math.min(max, valid.size());
         min = Math.min(min, max);
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
-        inp.setMessage("Choose Which Cards to Reveal");
+        inp.setMessage(localizer.getMessage("lblChooseWhichCardstoReveal"));
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
     }
@@ -1349,8 +1354,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (srcCards.isEmpty()) {
             return result;
         }
-        final List<CardView> chosen = getGui().many("Choose cards to activate from opening hand and their order",
-                "Activate first", -1, CardView.getCollection(srcCards), null);
+        final List<CardView> chosen = getGui().many(localizer.getMessage("lblChooseCardsActivateOpeningHandandOrder"),
+                localizer.getMessage("lblActivateFirst"), -1, CardView.getCollection(srcCards), null);
         for (final CardView view : chosen) {
             final Card c = game.getCard(view);
             for (final SpellAbility sa : usableFromOpeningHand) {
@@ -1664,11 +1669,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (savedOrder != null) {
                     boolean preselect = FModel.getPreferences()
                             .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
-                    orderedSAVs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
+                    orderedSAVs = getGui().order(localizer.getMessage("lblReorderSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), 0, 0,
                             preselect ? Lists.newArrayList() : orderedSAVs,
                             preselect ? orderedSAVs : Lists.newArrayList(), null, false);
                 } else {
-                    orderedSAVs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAVs,
+                    orderedSAVs = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), orderedSAVs,
                             null);
                 }
                 orderedSAs = Lists.newArrayList();
@@ -1742,7 +1747,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // make sure Pile 1 or Pile 2 is clicked on
         boolean result;
         while (true) {
-            final CardView chosen = getGui().one("Choose a pile", cards);
+            final CardView chosen = getGui().one(localizer.getMessage("lblChooseaPile"), cards);
             if (chosen.equals(pileView1)) {
                 result = true;
                 break;
@@ -1767,7 +1772,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
-        return getGui().many("Select cards to add to your deck", "Add these to my deck", 0, losses.size(), losses,
+        return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses,
                 null);
     }
 
@@ -2079,13 +2084,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 SOptionPane.showErrorDialog("File not found: " + filename);
                 return;
             } catch (final Exception e) {
-                SOptionPane.showErrorDialog("Error loading battle setup file!");
+                SOptionPane.showErrorDialog(localizer.getMessage("lblErrorLoadingBattleSetupFile"));
                 return;
             }
 
             final Player pPriority = game.getPhaseHandler().getPriorityPlayer();
             if (pPriority == null) {
-                getGui().message("No player has priority at the moment, so game state cannot be setup.");
+                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
                 return;
             }
             state.applyToGame(game);
@@ -2100,7 +2105,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void tutorForCard() {
             final Player pPriority = game.getPhaseHandler().getPriorityPlayer();
             if (pPriority == null) {
-                getGui().message("No player has priority at the moment, so their deck can't be tutored from.");
+                getGui().message(localizer.getMessage("lblNoPlayerPriorityDeckCantBeTutoredFrom"));
                 return;
             }
 
@@ -2108,7 +2113,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final List<ZoneType> origin = Lists.newArrayList();
             origin.add(ZoneType.Library);
             final SpellAbility sa = new SpellAbility.EmptySa(new Card(-1, game));
-            final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, null, "Choose a card", true,
+            final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, null, localizer.getMessage("lblChooseaCard"), true,
                     pPriority);
             if (card == null) {
                 return;
@@ -2143,7 +2148,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         public void modifyCountersOnPermanent(boolean subtract) {
-            final String titleMsg = subtract ? "Remove counters from which card?" : "Add counters to which card?";
+            final String titleMsg = subtract ? localizer.getMessage("lblRemoveCountersFromWhichCard") : localizer.getMessage("lblAddCountersToWhichCard");
             final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             final Card card = game
                     .getCard(getGui().oneOrNone(titleMsg, CardView.getCollection(cards)));
@@ -2154,12 +2159,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
                 : CounterType.values;
 
-            final CounterType counter = getGui().oneOrNone("Which type of counter?", counters);
+            final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {
                 return;
             }
 
-            final Integer count = getGui().getInteger("How many counters?", 1, Integer.MAX_VALUE, 10);
+            final Integer count = getGui().getInteger(localizer.getMessage("lblHowManyCounters"), 1, Integer.MAX_VALUE, 10);
             if (count == null) {
                 return;
             }
@@ -2187,7 +2192,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                             Integer.MAX_VALUE, untapped);
                     inp.setCancelAllowed(true);
-                    inp.setMessage("Choose permanents to tap");
+                    inp.setMessage(localizer.getMessage("lblChoosePermanentstoTap"));
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
@@ -2213,7 +2218,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                             Integer.MAX_VALUE, tapped);
                     inp.setCancelAllowed(true);
-                    inp.setMessage("Choose permanents to untap");
+                    inp.setMessage(localizer.getMessage("lblChoosePermanentstoUntap"));
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
@@ -2232,12 +2237,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @Override
         public void setPlayerLife() {
             final Player player = game.getPlayer(
-                    getGui().oneOrNone("Set life for which player?", PlayerView.getCollection(game.getPlayers())));
+                    getGui().oneOrNone(localizer.getMessage("lblSetLifeforWhichPlayer"), PlayerView.getCollection(game.getPlayers())));
             if (player == null) {
                 return;
             }
 
-            final Integer life = getGui().getInteger("Set life to what?", 0);
+            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0);
             if (life == null) {
                 return;
             }
@@ -2254,7 +2259,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void winGame() {
             final Input input = inputQueue.getInput();
             if (!(input instanceof InputPassPriority)) {
-                getGui().message("You must have priority to use this feature.", "Win Game");
+                getGui().message(localizer.getMessage("lblYouMustHavePrioritytoUseThisFeature"), localizer.getMessage("lblWinGame"));
                 return;
             }
 
@@ -2361,7 +2366,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Collections.sort(faces);
 
             // use standard forge's list selection dialog
-            final ICardFace f = repeatLast ? lastAdded : getGui().oneOrNone("Name the card", faces);
+            final ICardFace f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), faces);
             if (f == null) {
                 return;
             }
@@ -2390,7 +2395,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                     forgeCard.setSickness(lastSummoningSickness);
                                 }
                             } else {
-                                getGui().message("The chosen card is not a permanent or can't exist independently on the battlefield.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell and place it on stack, please use the Cast Spell/Play Land button.", "Error");
+                                getGui().message(localizer.getMessage("lblChosenCardNotPermanentorCantExistIndependentlyontheBattleground"), localizer.getMessage("lblError"));
                                 return;
                             }
                         } else {
@@ -2565,12 +2570,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @Override
         public void riggedPlanarRoll() {
             final Player player = game.getPlayer(
-                    getGui().oneOrNone("Which player should roll?", PlayerView.getCollection(game.getPlayers())));
+                    getGui().oneOrNone(localizer.getMessage("lblWhichPlayerShouldRoll"), PlayerView.getCollection(game.getPlayers())));
             if (player == null) {
                 return;
             }
 
-            final PlanarDice res = getGui().oneOrNone("Choose result", PlanarDice.values);
+            final PlanarDice res = getGui().oneOrNone(localizer.getMessage("lblChooseResult"), PlanarDice.values);
             if (res == null) {
                 return;
             }
@@ -2606,7 +2611,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Collections.sort(allPlanars);
 
             // use standard forge's list selection dialog
-            final IPaperCard c = getGui().oneOrNone("Name the card", allPlanars);
+            final IPaperCard c = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), allPlanars);
             if (c == null) {
                 return;
             }
@@ -2647,12 +2652,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         @Override
         public void setRememberedActions() {
-            final String dialogTitle = "Remember Action Sequence";
+            final String dialogTitle = localizer.getMessage("lblRememberActionSequence");
             // Not sure if this priority guard is really needed, but it seems
             // like an alright idea.
             final Input input = inputQueue.getInput();
             if (!(input instanceof InputPassPriority)) {
-                getGui().message("You must have priority to use this feature.", dialogTitle);
+                getGui().message(localizer.getMessage("lblYouMustHavePrioritytoUseThisFeature"), dialogTitle);
                 return;
             }
 
@@ -2761,9 +2766,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         @Override
         public void nextRememberedAction() {
-            final String dialogTitle = "Do Next Action in Sequence";
+            final String dialogTitle = localizer.getMessage("lblDoNextActioninSequence");
             if (rememberedActions.isEmpty()) {
-                getGui().message("Please define an action sequence first.", dialogTitle);
+                getGui().message(localizer.getMessage("lblPleaseDefineanActionSequenceFirst"), dialogTitle);
                 return;
             }
             if (sequenceIndex >= rememberedActions.size()) {
@@ -2861,8 +2866,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<CardView> choices = new ArrayList<>(mapCVtoC.keySet());
         List<CardView> chosen;
         chosen = getGui().many(
-                "Choose cards to Splice onto",
-                "Chosen Cards",
+                localizer.getMessage("lblChooseCardstoSpliceonto"),
+                localizer.getMessage("lblChosenCards"),
                 0,
                 choices.size(),
                 choices,
@@ -2884,13 +2889,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
             List<OptionalCostValue> optionalCost) {
-        return getGui().many("Choose optional Costs", "Optional Costs", 0, optionalCost.size(),
+        return getGui().many(localizer.getMessage("lblChooseOptionalCosts"), localizer.getMessage("lblOptionalCosts"), 0, optionalCost.size(),
                 optionalCost, choosen.getHostCard().getView());
     }
 
     @Override
     public boolean confirmMulliganScry(Player p) {
-        return InputConfirm.confirm(this, (SpellAbility)null, "Do you want to scry?");
+        return InputConfirm.confirm(this, (SpellAbility)null, localizer.getMessage("lblDoYouWanttoScry"));
     }
 
     @Override

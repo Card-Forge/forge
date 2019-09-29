@@ -3,6 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Prevent all damage that would be dealt to and dealt by CARDNAME. | Description$ Prevent all damage that would be dealt to and dealt by enchanted creature.
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.EnchantedBy | Description$ Prevent all combat damage that would be dealt to and dealt by enchanted creature.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.EnchantedBy | Secondary$ True | Description$ Prevent all combat damage that would be dealt to and dealt by enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_light.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nPrevent all damage that would be dealt to and dealt by enchanted creature.

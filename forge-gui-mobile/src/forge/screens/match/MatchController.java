@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -186,7 +187,9 @@ public class MatchController extends AbstractGuiGame {
         final PlayerView p = gameView.getPlayerTurn();
         final PhaseType ph = gameView.getPhase();
 
-        final PhaseLabel lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        PhaseLabel lbl = null;
+        if(p != null && ph != null)
+            lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
 
         view.resetAllPhaseButtons();
         if (lbl != null) {
@@ -244,7 +247,7 @@ public class MatchController extends AbstractGuiGame {
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
-        return SGuiChoose.oneOrNone("Choose ability to play", abilities);
+        return SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAbilityToPlay"), abilities);
     }
 
     @Override
@@ -519,7 +522,7 @@ public class MatchController extends AbstractGuiGame {
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
         final int m1 = max >= 0 ? optionList.size() - max : -1;
         final int m2 = min >= 0 ? optionList.size() - min : -1;
-        return SGuiChoose.order(title, "Selected", m1, m2, (List<GameEntityView>) optionList, null);
+        return SGuiChoose.order(title, Localizer.getInstance().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);
     }
 
     @Override
