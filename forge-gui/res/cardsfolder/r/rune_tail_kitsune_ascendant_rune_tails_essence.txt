@@ -13,7 +13,7 @@ ALTERNATE
 Name:Rune-Tail's Essence
 ManaCost:2 W
 Types:Legendary Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures you control.
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/rune_tails_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Prevent all damage that would be dealt to creatures you control.

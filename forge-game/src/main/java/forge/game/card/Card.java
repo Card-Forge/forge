@@ -4695,9 +4695,23 @@ public class Card extends GameEntity implements Comparable<Card> {
         return 0;
     }
 
+    public final boolean canDamagePrevented(final boolean isCombat) {
+        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        list.add(this);
+        for (final Card ca : list) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantPreventDamage", this, isCombat)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // This is used by the AI to forecast an effect (so it must not change the game state)
     public final int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damage;
         }
 
@@ -4739,7 +4753,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damageIn;
         }
 

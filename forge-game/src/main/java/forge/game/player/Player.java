@@ -635,7 +635,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (damage <= 0) {
             return 0;
         }
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damage;
         }
 
