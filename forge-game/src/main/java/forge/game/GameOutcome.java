@@ -234,6 +234,6 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     }
 
     public String getOutcomeString(RegisteredPlayer player) {
-        return playerNames.get(player) + " has " + playerRating.get(player).getOutcome();
+        return playerNames.get(player) + " " + playerRating.get(player).getOutcome();
     }
 }

@@ -1,6 +1,8 @@
 package forge.game.player;
 
 
+import forge.util.Localizer;
+
 /**
  * TODO: Write javadoc for this type.
  */
@@ -58,23 +60,24 @@ public class PlayerOutcome {
      */
     @Override
     public String toString() {
+        Localizer localizer = Localizer.getInstance();
         if ( lossState == null ) {
             if ( altWinSourceName == null )
-                return "won because all opponents have lost";
+                return localizer.getMessage("lblWonBecauseAllOpponentsHaveLost");
             else 
-                return "won due to effect of '" + altWinSourceName + "'";
+                return localizer.getMessage("lblWonDueToEffectOf").replace("%s", altWinSourceName);
         }
         switch(lossState){
-            case Conceded: return "conceded";
-            case Milled: return "lost trying to draw cards from empty library";
-            case LifeReachedZero: return "lost because life total reached 0";
-            case Poisoned: return "lost because of obtaining 10 poison counters";
-            case OpponentWon: return "lost because an opponent has won by spell '" + loseConditionSpell + "'";
-            case SpellEffect: return "lost due to effect of spell '" + loseConditionSpell + "'";
-            case CommanderDamage: return "lost due to accumulation of 21 damage from generals";
-            case IntentionalDraw: return "accepted that the game is a draw";
+            case Conceded: return localizer.getMessage("lblConceded");
+            case Milled: return localizer.getMessage("lblLostTryingToDrawCardsFromEmptyLibrary");
+            case LifeReachedZero: return localizer.getMessage("lblLostBecauseLifeTotalReachedZero");
+            case Poisoned: return localizer.getMessage("lblLostBecauseOfObtainingTenPoisonCounters");
+            case OpponentWon: return localizer.getMessage("lblLostBecauseAnOpponentHasWonBySpell").replace("%s", loseConditionSpell);
+            case SpellEffect: return localizer.getMessage("lblLostDueToEffectOfSpell").replace("%s", loseConditionSpell);
+            case CommanderDamage: return localizer.getMessage("lblLostDueToAccumulationOf21DamageFromGenerals");
+            case IntentionalDraw: return localizer.getMessage("lblAcceptedThatTheGameIsADraw");
         }
-        return "lost for unknown reason (this is a bug)";
+        return localizer.getMessage("lblLostForUnknownReasonBug");
     }
 
 }
