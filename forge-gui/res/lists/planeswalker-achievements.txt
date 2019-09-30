@@ -44,6 +44,7 @@ Garruk, the Veil-Cursed|Garruk's Graveyard|The dead shall help the living!
 Garruk Wildspeaker|Garruk's Overrun|I speak seven languages, including Wild!
 Garruk, Apex Predator|Garruk's Prey|Funny, it's usually a good thing to have an emblem...
 Garruk, Caller of Beasts|Garruk's Wild Pair|Can you beat two for the price of one?
+Garruk, Cursed Huntman|Garruk's Cursed Overrun|Run wild / run free / here's your / plus three
 Garruk, Primal Hunter|Garruk's Garden|They came out after a rain...
 Gideon Blackblade|Gideon's Righteous Strike|Blackblade cleaving black heart!
 Gideon Jura|Gideon's Brawl|Are you man enough to mess with me?
@@ -104,9 +105,12 @@ Nissa, Who Shakes the World|Nissa's Primeval Forest|No trees fall in MY forest, 
 Nissa, Worldwaker|Nissa's Awakening|The whole country is here!
 Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifices sometimes.
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
+Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
+Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
+Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
 Saheeli, the Gifted|Saheeli's Doubling Season|Polished to mirror sheen.
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
@@ -135,6 +139,7 @@ Tezzeret, Artifice Master|Tezzeret's Planar Bridge|What's behind the door number
 Tezzeret, Cruel Machinist|Tezzeret's Artificial Morph|Ixidor, Ugin... THIS is how you do it!
 Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grander design - mine.
 Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
+The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where.
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...

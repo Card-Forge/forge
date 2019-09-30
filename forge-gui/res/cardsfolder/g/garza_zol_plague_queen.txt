@@ -1,6 +1,6 @@
 Name:Garza Zol, Plague Queen
 ManaCost:4 U B R
-Types:Legendary Creature Vampire
+Types:Legendary Creature Vampire Noble
 PT:5/5
 K:Flying
 K:Haste

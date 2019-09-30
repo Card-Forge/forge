@@ -1,0 +1,17 @@
+Name:Brazen Borrower
+ManaCost:1 U U
+Types:Creature Faerie Rogue
+PT:3/1
+K:Flash
+K:Flying
+K:CARDNAME can block only creatures with flying.
+Oracle:Flash\nFlying\nBrazen Borrower can block only creatures with flying.
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:Petty Theft
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent an opponent controls to its owner's hand.
+Oracle:Return target nonland permanent an opponent controls to its owner's hand.

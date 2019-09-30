@@ -1,0 +1,7 @@
+Name:Thrill of Possibility
+ManaCost:1 R
+Types:Instant
+A:SP$ Draw | Cost$ 1 R Discard<1/Card> | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards.

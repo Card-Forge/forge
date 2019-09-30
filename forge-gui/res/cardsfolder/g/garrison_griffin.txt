@@ -1,0 +1,9 @@
+Name:Garrison Griffin
+ManaCost:2 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target Knight you control gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Knight.YouCtrl | TgtPrompt$ Select target Knight you control | KW$ Flying
+DeckNeeds:Type$Knight
+Oracle:Flying\nWhenever Garrison Griffin attacks, target Knight you control gains flying until end of turn.

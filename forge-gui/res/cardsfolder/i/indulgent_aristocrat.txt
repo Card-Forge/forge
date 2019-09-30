@@ -1,6 +1,6 @@
 Name:Indulgent Aristocrat
 ManaCost:B
-Types:Creature Vampire
+Types:Creature Vampire Noble
 PT:1/1
 K:Lifelink
 A:AB$ PutCounterAll | Cost$ 2 Sac<1/Creature> | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Vampire you control.

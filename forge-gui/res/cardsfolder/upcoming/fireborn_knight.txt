@@ -1,7 +1,0 @@
-Name:Fireborn Knight
-ManaCost:R/W R/W R/W R/W
-Types:Creature Human Knight
-PT:2/3
-K:Double Strike
-A:AB$ Pump | Cost$ RW RW RW RW | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-Oracle:Double strike\n{R/W}{R/W}{R/W}{R/W}: Fireborn Knight gets +1/+1 until end of turn.

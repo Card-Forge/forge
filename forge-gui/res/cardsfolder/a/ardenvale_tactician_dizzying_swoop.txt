@@ -1,0 +1,15 @@
+Name:Ardenvale Tactician
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/3
+K:Flying
+Oracle:Flying
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:Dizzying Swoop
+ManaCost:1 W
+Types:Instant Adventure
+A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures.
+Oracle:Tap up to two target creatures.

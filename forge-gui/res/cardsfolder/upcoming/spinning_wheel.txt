@@ -1,6 +1,0 @@
-Name:Spinning Wheel
-ManaCost:3
-Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-A:AB$ Tap | Cost$ 5 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-Oracle:{T}: Add one mana of any color.\n{5}, {T}: Tap target creature.

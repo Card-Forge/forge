@@ -1,7 +1,0 @@
-Name:Beloved Princess
-ManaCost:W
-Types:Creature Human Noble
-PT:1/1
-K:Lifelink
-K:CantBeBlockedBy Creature.powerGE3
-Oracle:Lifelink\nBeloved Princess can't be blocked by creatures with power 3 or greater.
