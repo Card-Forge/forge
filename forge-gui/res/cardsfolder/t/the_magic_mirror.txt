@@ -9,4 +9,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KNOWLEDGE | CounterNum$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | References$ Y
 SVar:Y:Count$CardCounters.KNOWLEDGE
+DeckHas:Ability$Counters
 Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nYou have no maximum hand size.\nAt the beginning of your upkeep, put a knowledge counter on The Magic Mirror, then draw a card for each knowledge counter on The Magic Mirror.

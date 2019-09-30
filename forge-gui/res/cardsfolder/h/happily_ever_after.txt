@@ -10,4 +10,5 @@ SVar:X:Count$ColorsCtrl Permanent.YouCtrl+inZoneBattlefield/LimitMax.5
 SVar:Y:Count$CardControllerTypes.Battlefield,Graveyard/LimitMax.6
 SVar:Z:SVar$X/Plus.Y
 SVar:W:Count$YourStartingLife
+DeckHas:Ability$LifeGain
 Oracle:When Happily Ever After enters the battlefield, each player gains 5 life and draws a card.\nAt the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.

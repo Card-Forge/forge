@@ -5,4 +5,5 @@ PT:3/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target Knight gains deathtouch and lifelink until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Knight | TgtPrompt$ Select target Knight | KW$ Deathtouch & Lifelink
+DeckHints:Type$Knight
 Oracle:Flash\nWhen Blacklance Paragon enters the battlefield, target Knight gains deathtouch and lifelink until end of turn.

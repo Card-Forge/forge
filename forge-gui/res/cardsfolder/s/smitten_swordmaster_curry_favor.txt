@@ -14,4 +14,5 @@ Types:Sorcery Adventure
 A:SP$ GainLife | Cost$ B | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBLoseLife | SpellDescription$ You gain X life and each opponent loses X life, where X is the number of Knights you control.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Knight.YouCtrl
+DeckHas:Ability$LifeGain
 Oracle:You gain X life and each opponent loses X life, where X is the number of Knights you control.

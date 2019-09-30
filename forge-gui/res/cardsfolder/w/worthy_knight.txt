@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Knight | ValidActivatingPlayer$ You | Trigge
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | LegacyImage$ w 1 1 human eld
 SVar:BuffedBy:Knight
 DeckHints:Type$Knight
+DeckHas:Ability$Token
 Oracle:Whenever you cast a Knight spell, create a 1/1 white Human creature token.
