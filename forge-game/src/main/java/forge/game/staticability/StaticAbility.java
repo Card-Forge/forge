@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -81,7 +81,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * <p>
      * Getter for the field <code>mapParams</code>.
      * </p>
-     * 
+     *
      * @param abString
      *            a {@link java.lang.String} object.
      * @param hostCard
@@ -129,7 +129,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     /**
      * Gets the {@link Set} of {@link StaticAbilityLayer}s in which this
      * {@link StaticAbility} is to be applied.
-     * 
+     *
      * @return the applicable layers.
      */
     private final Set<StaticAbilityLayer> generateLayer() {
@@ -213,7 +213,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * <p>
      * toString.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     @Override
@@ -231,7 +231,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     // main constructor
     /**
      * Instantiates a new static ability.
-     * 
+     *
      * @param params
      *            the params
      * @param host
@@ -243,7 +243,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Instantiates a new static ability.
-     * 
+     *
      * @param params
      *            the params
      * @param host
@@ -274,7 +274,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Check whether a continuous ability should be applied.
-     * 
+     *
      * @param layer
      *            the {@link StaticAbilityLayer} under investigation.
      * @param ignoreTempSuppression
@@ -299,7 +299,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     // apply the ability if it has the right mode
     /**
      * Apply ability.
-     * 
+     *
      * @param mode
      *            the mode
      * @param source
@@ -333,7 +333,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Apply ability if it has the right mode.
-     * 
+     *
      * @param mode
      *            the mode
      * @param card
@@ -366,7 +366,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Apply ability.
-     * 
+     *
      * @param mode
      *            the mode
      * @param card
@@ -437,7 +437,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Apply ability.
-     * 
+     *
      * @param mode
      *            the mode
      * @param card
@@ -466,9 +466,26 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
+    public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantPreventDamage")) {
+            return StaticAbilityCantPreventDamage.applyCantPreventDamage(this, card, isCombat);
+        }
+
+        return false;
+    }
+
     /**
      * Apply ability.
-     * 
+     *
      * @param mode
      *            the mode
      * @param card
@@ -516,7 +533,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     /**
      * Check conditions for static abilities acting on a specific player. Also
      * automatically check the general conditions.
-     * 
+     *
      * @param player a {@link Player}.
      * @return true, if the static ability is applicable.
      * @see {@link StaticAbility#checkConditions()}
@@ -536,7 +553,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     /**
      * Check conditions.
-     * 
+     *
      * @return true, if the static ability is applicable.
      */
     public final boolean checkConditions() {

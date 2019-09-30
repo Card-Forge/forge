@@ -1,9 +1,9 @@
 Name:Sea Kings' Blessing
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Blue | OverwriteColors$ True | References$ MaxTgts | SpellDescription$ Any number of target creatures become blue until end of turn.
+A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Blue | OverwriteColors$ True | References$ MaxTgts | SpellDescription$ One or more target creatures become blue until end of turn.
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_kings_blessing.jpg
-Oracle:Any number of target creatures become blue until end of turn.
+Oracle:One or more target creatures become blue until end of turn.

@@ -1,6 +1,6 @@
 Name:Vampire Noble
 ManaCost:2 B
-Types:Creature Vampire
+Types:Creature Vampire Noble
 PT:3/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_noble.jpg
 Oracle:
