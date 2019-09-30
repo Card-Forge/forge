@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.util.Localizer;
-import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;

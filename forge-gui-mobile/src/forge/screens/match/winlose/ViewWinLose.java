@@ -24,7 +24,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Localizer;
-import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
