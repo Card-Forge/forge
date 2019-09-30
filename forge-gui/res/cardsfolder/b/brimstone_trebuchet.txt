@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescrip
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Knight+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Knight enters the battlefield under your control, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Knight
+DeckHints:Type$Knight
 Oracle:Defender, reach\n{T}: Brimstone Trebuchet deals 1 damage to each opponent.\nWhenever a Knight enters the battlefield under your control, untap Brimstone Trebuchet.

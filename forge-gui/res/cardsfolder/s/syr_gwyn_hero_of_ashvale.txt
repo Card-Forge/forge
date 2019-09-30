@@ -8,4 +8,5 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+equipped | TriggerZones$ Battlefie
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddKeyword$ Equip:0:Creature.YouCtrl+Knight:Knight | Description$ Equipment you control have equip Knight {0}.
+DeckHints:Type$Knight
 Oracle:Vigilance, menace\nWhenever an equipped creature you control attacks, you draw a card and you lose 1 life.\nEquipment you control have equip Knight {0}.
