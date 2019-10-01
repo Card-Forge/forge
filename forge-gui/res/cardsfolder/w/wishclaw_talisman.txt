@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ 1 T SubCounter<1/WISH> | Origin$ Library | Destination$
 SVar:DBChoose:DB$ ChoosePlayer | Choices$ Player.Opponent | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+DeckHas:Ability$Counters
 Oracle:Wishclaw Talisman enters the battlefield with three wish counters on it.\n{1}, {T}, Remove a wish counter from Wishclaw Talisman: Search your library for a card, put it into your hand, then shuffle your library. An opponent gains control of Wishclaw Talisman. Activate this ability only during your turn.
