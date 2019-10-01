@@ -109,12 +109,15 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
         MANA_IMAGES.put("fear", FSkinImage.IMG_ABILITY_FEAR);
         MANA_IMAGES.put("flying", FSkinImage.IMG_ABILITY_FLYING);
+        MANA_IMAGES.put("haste", FSkinImage.IMG_ABILITY_HASTE);
         MANA_IMAGES.put("hexproof", FSkinImage.IMG_ABILITY_HEXPROOF);
+        MANA_IMAGES.put("horsemanship", FSkinImage.IMG_ABILITY_HORSEMANSHIP);
         MANA_IMAGES.put("indestructible", FSkinImage.IMG_ABILITY_INDESTRUCTIBLE);
         MANA_IMAGES.put("intimidate", FSkinImage.IMG_ABILITY_INTIMIDATE);
         MANA_IMAGES.put("lifelink", FSkinImage.IMG_ABILITY_LIFELINK);
         MANA_IMAGES.put("menace", FSkinImage.IMG_ABILITY_MENACE);
         MANA_IMAGES.put("reach", FSkinImage.IMG_ABILITY_REACH);
+        MANA_IMAGES.put("shadow", FSkinImage.IMG_ABILITY_SHADOW);
         MANA_IMAGES.put("shroud", FSkinImage.IMG_ABILITY_SHROUD);
         MANA_IMAGES.put("trample", FSkinImage.IMG_ABILITY_TRAMPLE);
         MANA_IMAGES.put("vigilance", FSkinImage.IMG_ABILITY_VIGILANCE);

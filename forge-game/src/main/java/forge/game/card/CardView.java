@@ -1027,11 +1027,13 @@ public class CardView extends GameEntityView {
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
         public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
+        public boolean hasHorsemanship() { return get(TrackableProperty.HasHorsemanship); }
         public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
         public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
         public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
         public boolean hasMenace() { return get(TrackableProperty.HasMenace); }
         public boolean hasReach() { return get(TrackableProperty.HasReach); }
+        public boolean hasShadow() { return get(TrackableProperty.HasShadow); }
         public boolean hasShroud() { return get(TrackableProperty.HasShroud); }
         public boolean hasTrample() { return get(TrackableProperty.HasTrample); }
         public boolean hasVigilance() { return get(TrackableProperty.HasVigilance); }
@@ -1061,11 +1063,13 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
+            set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
             set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));
             set(TrackableProperty.HasMenace, c.hasKeyword(Keyword.MENACE, state));
             set(TrackableProperty.HasReach, c.hasKeyword(Keyword.REACH, state));
+            set(TrackableProperty.HasShadow, c.hasKeyword(Keyword.SHADOW, state));
             set(TrackableProperty.HasShroud, c.hasKeyword(Keyword.SHROUD, state));
             set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
             set(TrackableProperty.HasVigilance, c.hasKeyword(Keyword.VIGILANCE, state));

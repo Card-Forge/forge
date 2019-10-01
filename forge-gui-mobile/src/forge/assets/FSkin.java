@@ -182,6 +182,7 @@ public class FSkin {
         final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
+        final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -193,6 +194,11 @@ public class FSkin {
             }
             else {
                 textures.put(f6.path(), textures.get(f3.path()));
+            }
+            if (f7.exists()){
+                Texture t = new Texture(f7, true);
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f7.path(), t);
             }
 
             //update colors
