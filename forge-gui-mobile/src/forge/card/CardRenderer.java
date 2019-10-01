@@ -593,7 +593,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasDeathtouch()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -601,7 +601,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasIndestructible()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("indestructible", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -609,7 +609,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasMenace()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("menace", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -617,7 +617,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasFear()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("fear", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -625,7 +625,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasIntimidate()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("intimidate", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -633,7 +633,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasShadow()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("shadow", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -641,7 +641,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasHorsemanship()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("horsemanship", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -649,7 +649,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasHexproof()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 if (!card.getCurrentState().getHexproofKey().isEmpty()){
                     String[] splitK = card.getCurrentState().getHexproofKey().split(":");
                     List<String> listHK = Arrays.asList(splitK);
@@ -711,7 +711,7 @@ public class CardRenderer {
                 }
             }
             else if (card.getCurrentState().hasShroud()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("shroud", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -719,7 +719,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasVigilance()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("vigilance", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -727,7 +727,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasTrample()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("trample", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -735,7 +735,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasReach()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("reach", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -743,7 +743,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasLifelink()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("lifelink", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -751,7 +751,7 @@ public class CardRenderer {
                 abiCount += 1;
             }
             if (card.getCurrentState().hasDefender()) {
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 CardFaceSymbols.drawSymbol("defender", g, abiX, abiY, abiScale, abiScale);
                 if (unselectable){
                     g.setAlphaComposite(0.6f); g.fillRect(Color.BLACK, abiX, abiY, abiScale, abiScale ); g.setAlphaComposite(oldAlpha);}
@@ -760,7 +760,7 @@ public class CardRenderer {
             }
             //Protection Icons
             if (!card.getCurrentState().getProtectionKey().isEmpty()){
-                if (abiCount > 5 ) { abiY = cy + (abiScale * (abiCount - 6)); abiX = cx + ((cw*2)/1.93f); }
+                if (abiCount > 5 ) { abiY = cy + (abiSpace * (abiCount - 6)); abiX = cx + ((cw*2)/1.92f); }
                 if (card.getCurrentState().getProtectionKey().contains("everything") || card.getCurrentState().getProtectionKey().contains("allcolors")) {
                     CardFaceSymbols.drawSymbol("protectAll", g, abiX, abiY, abiScale, abiScale);
                     if (unselectable){
