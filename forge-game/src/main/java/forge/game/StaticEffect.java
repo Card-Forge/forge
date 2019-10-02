@@ -51,27 +51,7 @@ public class StaticEffect {
     private List<Player> affectedPlayers = Lists.newArrayList();
     private long timestamp = -1;
 
-    private String chosenType;
     private Map<String, String> mapParams = Maps.newTreeMap();
-
-    // for types
-    private boolean overwriteTypes = false;
-    private boolean keepSupertype = false;
-    private boolean removeSubTypes = false;
-    private final Map<Card, List<String>> types = Maps.newTreeMap();
-    private final Map<Card, List<String>> originalTypes = Maps.newTreeMap();
-
-    // keywords
-    private boolean overwriteKeywords = false;
-    private final Map<Card, List<String>> originalKeywords = Maps.newTreeMap();
-
-    // for abilities
-    private boolean overwriteAbilities = false;
-    private final Map<Card, List<SpellAbility>> originalAbilities = Maps.newTreeMap();
-
-    // for colors
-    private String colorDesc = "";
-    private boolean overwriteColors = false;
 
     StaticEffect(final Card source) {
         this.source = source;
@@ -88,19 +68,7 @@ public class StaticEffect {
         copy.affectedCards = map.mapCollection(this.affectedCards);
         copy.affectedPlayers  = map.mapList(this.affectedPlayers);
         copy.timestamp = this.timestamp;
-        copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
-        copy.overwriteTypes = this.overwriteTypes;
-        copy.keepSupertype = this.keepSupertype;
-        copy.removeSubTypes = this.removeSubTypes;
-        map.fillKeyedMap(this.types, this.types);
-        map.fillKeyedMap(this.originalTypes, this.originalTypes);
-        copy.overwriteKeywords = this.overwriteKeywords;
-        map.fillKeyedMap(this.originalKeywords, this.originalKeywords);
-        copy.overwriteAbilities = this.overwriteAbilities;
-        map.fillKeyedMap(this.originalAbilities, this.originalAbilities);
-        copy.colorDesc = this.colorDesc;
-        copy.overwriteColors = this.overwriteColors;
         return copy;
     }
 
@@ -121,493 +89,6 @@ public class StaticEffect {
      */
     public final long getTimestamp() {
         return this.timestamp;
-    }
-
-    // overwrite SAs
-    /**
-     * <p>
-     * isOverwriteAbilities.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isOverwriteAbilities() {
-        return this.overwriteAbilities;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>overwriteAbilities</code>.
-     * </p>
-     * 
-     * @param overwriteAbilitiesIn
-     *            a boolean.
-     */
-    public final void setOverwriteAbilities(final boolean overwriteAbilitiesIn) {
-        this.overwriteAbilities = overwriteAbilitiesIn;
-    }
-
-    // original SAs
-    /**
-     * <p>
-     * addOriginalAbilities.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
-        if (!this.originalAbilities.containsKey(c)) {
-            final List<SpellAbility> list = new ArrayList<>();
-            list.add(sa);
-            this.originalAbilities.put(c, list);
-        } else {
-            this.originalAbilities.get(c).add(sa);
-        }
-    }
-
-    /**
-     * <p>
-     * addOriginalAbilities.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link java.util.List} object.
-     */
-    public final void addOriginalAbilities(final Card c, final List<SpellAbility> s) {
-        final List<SpellAbility> list = new ArrayList<>(s);
-        if (!this.originalAbilities.containsKey(c)) {
-            this.originalAbilities.put(c, list);
-        } else {
-            this.originalAbilities.remove(c);
-            this.originalAbilities.put(c, list);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>originalAbilities</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.List} object.
-     */
-    public final List<SpellAbility> getOriginalAbilities(final Card c) {
-        final List<SpellAbility> returnList = new ArrayList<>();
-        if (this.originalAbilities.containsKey(c)) {
-            returnList.addAll(this.originalAbilities.get(c));
-        }
-        return returnList;
-    }
-
-    /**
-     * <p>
-     * clearOriginalAbilities.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public final void clearOriginalAbilities(final Card c) {
-        if (this.originalAbilities.containsKey(c)) {
-            this.originalAbilities.get(c).clear();
-        }
-    }
-
-    /**
-     * <p>
-     * clearAllOriginalAbilities.
-     * </p>
-     */
-    public final void clearAllOriginalAbilities() {
-        this.originalAbilities.clear();
-    }
-
-    // overwrite keywords
-    /**
-     * <p>
-     * isOverwriteKeywords.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isOverwriteKeywords() {
-        return this.overwriteKeywords;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>overwriteKeywords</code>.
-     * </p>
-     * 
-     * @param overwriteKeywordsIn
-     *            a boolean.
-     */
-    public final void setOverwriteKeywords(final boolean overwriteKeywordsIn) {
-        this.overwriteKeywords = overwriteKeywordsIn;
-    }
-
-    // original keywords
-    /**
-     * <p>
-     * addOriginalKeyword.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addOriginalKeyword(final Card c, final String s) {
-        if (!this.originalKeywords.containsKey(c)) {
-            final List<String> list = new ArrayList<>();
-            list.add(s);
-            this.originalKeywords.put(c, list);
-        } else {
-            this.originalKeywords.get(c).add(s);
-        }
-    }
-
-    /**
-     * <p>
-     * addOriginalKeywords.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link List} object.
-     */
-    public final void addOriginalKeywords(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<>(s);
-        if (!this.originalKeywords.containsKey(c)) {
-            this.originalKeywords.put(c, list);
-        } else {
-            this.originalKeywords.remove(c);
-            this.originalKeywords.put(c, list);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>originalKeywords</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link List} object.
-     */
-    public final List<String> getOriginalKeywords(final Card c) {
-        final List<String> returnList = new ArrayList<>();
-        if (this.originalKeywords.containsKey(c)) {
-            returnList.addAll(this.originalKeywords.get(c));
-        }
-        return returnList;
-    }
-
-    /**
-     * <p>
-     * clearOriginalKeywords.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public final void clearOriginalKeywords(final Card c) {
-        if (this.originalKeywords.containsKey(c)) {
-            this.originalKeywords.get(c).clear();
-        }
-    }
-
-    /**
-     * <p>
-     * clearAllOriginalKeywords.
-     * </p>
-     */
-    public final void clearAllOriginalKeywords() {
-        this.originalKeywords.clear();
-    }
-
-
-    // should we overwrite types?
-    /**
-     * <p>
-     * isOverwriteTypes.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isOverwriteTypes() {
-        return this.overwriteTypes;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>overwriteTypes</code>.
-     * </p>
-     * 
-     * @param overwriteTypesIn
-     *            a boolean.
-     */
-    public final void setOverwriteTypes(final boolean overwriteTypesIn) {
-        this.overwriteTypes = overwriteTypesIn;
-    }
-
-    /**
-     * <p>
-     * isKeepSupertype.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isKeepSupertype() {
-        return this.keepSupertype;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>keepSupertype</code>.
-     * </p>
-     * 
-     * @param keepSupertypeIn
-     *            a boolean.
-     */
-    public final void setKeepSupertype(final boolean keepSupertypeIn) {
-        this.keepSupertype = keepSupertypeIn;
-    }
-
-    // should we overwrite land types?
-    /**
-     * <p>
-     * isRemoveSubTypes.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isRemoveSubTypes() {
-        return this.removeSubTypes;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>removeSubTypes</code>.
-     * </p>
-     * 
-     * @param removeSubTypesIn
-     *            a boolean.
-     */
-    public final void setRemoveSubTypes(final boolean removeSubTypesIn) {
-        this.removeSubTypes = removeSubTypesIn;
-    }
-
-    // original types
-    /**
-     * <p>
-     * addOriginalType.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addOriginalType(final Card c, final String s) {
-        if (!this.originalTypes.containsKey(c)) {
-            final List<String> list = new ArrayList<>();
-            list.add(s);
-            this.originalTypes.put(c, list);
-        } else {
-            this.originalTypes.get(c).add(s);
-        }
-    }
-
-    /**
-     * <p>
-     * addOriginalTypes.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void addOriginalTypes(final Card c, final List<String> s) {
-        final List<String> list = new ArrayList<>(s);
-        if (!this.originalTypes.containsKey(c)) {
-            this.originalTypes.put(c, list);
-        } else {
-            this.originalTypes.remove(c);
-            this.originalTypes.put(c, list);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>originalTypes</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<String> getOriginalTypes(final Card c) {
-        final List<String> returnList = new ArrayList<>();
-        if (this.originalTypes.containsKey(c)) {
-            returnList.addAll(this.originalTypes.get(c));
-        }
-        return returnList;
-    }
-
-    /**
-     * <p>
-     * clearOriginalTypes.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public final void clearOriginalTypes(final Card c) {
-        if (this.originalTypes.containsKey(c)) {
-            this.originalTypes.get(c).clear();
-        }
-    }
-
-    /**
-     * <p>
-     * clearAllOriginalTypes.
-     * </p>
-     */
-    public final void clearAllOriginalTypes() {
-        this.originalTypes.clear();
-    }
-
-    // statically assigned types
-    /**
-     * <p>
-     * addType.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addType(final Card c, final String s) {
-        if (!this.types.containsKey(c)) {
-            final List<String> list = new ArrayList<>();
-            list.add(s);
-            this.types.put(c, list);
-        } else {
-            this.types.get(c).add(s);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>types</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.List} object.
-     */
-    public final List<String> getTypes(final Card c) {
-        final List<String> returnList = new ArrayList<>();
-        if (this.types.containsKey(c)) {
-            returnList.addAll(this.types.get(c));
-        }
-        return returnList;
-    }
-
-    /**
-     * <p>
-     * removeType.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     */
-    public final void removeType(final Card c, final String type) {
-        if (this.types.containsKey(c)) {
-            this.types.get(c).remove(type);
-        }
-    }
-
-    /**
-     * <p>
-     * clearTypes.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public final void clearTypes(final Card c) {
-        if (this.types.containsKey(c)) {
-            this.types.get(c).clear();
-        }
-    }
-
-    /**
-     * <p>
-     * clearAllTypes.
-     * </p>
-     */
-    public final void clearAllTypes() {
-        this.types.clear();
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>colorDesc</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getColorDesc() {
-        return this.colorDesc;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>colorDesc</code>.
-     * </p>
-     * 
-     * @param colorDesc
-     *            a {@link java.lang.String} object.
-     */
-    public final void setColorDesc(final String colorDesc) {
-        this.colorDesc = colorDesc;
-    }
-
-    // overwrite color
-    /**
-     * <p>
-     * isOverwriteColors.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isOverwriteColors() {
-        return this.overwriteColors;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>overwriteColors</code>.
-     * </p>
-     * 
-     * @param overwriteColors
-     *            a boolean.
-     */
-    public final void setOverwriteColors(final boolean overwriteColors) {
-        this.overwriteColors = overwriteColors;
     }
 
     /**
@@ -682,23 +163,12 @@ public class StaticEffect {
         return this.mapParams;
     }
 
-    /**
-     * Sets the chosen type.
-     * 
-     * @param type
-     *            the new chosen type
-     */
-    public final void setChosenType(final String type) {
-        this.chosenType = type;
+    public boolean hasParam(final String key) {
+        return this.mapParams.containsKey(key);
     }
 
-    /**
-     * getChosenType. TODO Write javadoc for this method.
-     * 
-     * @return the chosen type
-     */
-    public final String getChosenType() {
-        return this.chosenType;
+    public String getParam(final String key) {
+        return this.mapParams.get(key);
     }
 
     /**
@@ -709,7 +179,7 @@ public class StaticEffect {
     final CardCollectionView remove() {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
-        final Map<String, String> params = getParams();
+        //final Map<String, String> params = getParams();
 
         String changeColorWordsTo = null;
 
@@ -721,20 +191,20 @@ public class StaticEffect {
 
         List<Player> mayLookAt = null;
 
-        if (params.containsKey("ChangeColorWordsTo")) {
-            changeColorWordsTo = params.get("ChangeColorWordsTo");
+        if (hasParam("ChangeColorWordsTo")) {
+            changeColorWordsTo = getParam("ChangeColorWordsTo");
         }
 
-        if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
+        if (hasParam("SetPower") || hasParam("SetToughness")) {
             setPT = true;
         }
 
-        if (params.containsKey("AddHiddenKeyword")) {
-            addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
+        if (hasParam("AddHiddenKeyword")) {
+            addHiddenKeywords = getParam("AddHiddenKeyword").split(" & ");
         }
 
-        if (params.containsKey("AddColor")) {
-            final String colors = params.get("AddColor");
+        if (hasParam("AddColor")) {
+            final String colors = getParam("AddColor");
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
@@ -742,8 +212,8 @@ public class StaticEffect {
             }
         }
 
-        if (params.containsKey("SetColor")) {
-            final String colors = params.get("SetColor");
+        if (hasParam("SetColor")) {
+            final String colors = getParam("SetColor");
             if (colors.equals("ChosenColor")) {
                 addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
             } else {
@@ -751,21 +221,21 @@ public class StaticEffect {
             }
         }
 
-        if (params.containsKey("MayLookAt")) {
-            String look = params.get("MayLookAt");
+        if (hasParam("MayLookAt")) {
+            String look = getParam("MayLookAt");
             if ("True".equals(look)) {
                 look = "You";
             }
             mayLookAt = AbilityUtils.getDefinedPlayers(source, look, null);
         }
-        if (params.containsKey("MayPlay")) {
+        if (hasParam("MayPlay")) {
             removeMayPlay = true;
         }
-        if (params.containsKey("WithFlash")) {
+        if (hasParam("WithFlash")) {
             removeWithFlash = true;
         }
 
-        if (params.containsKey("IgnoreEffectCost")) {
+        if (hasParam("IgnoreEffectCost")) {
             for (final SpellAbility s : getSource().getSpellAbilities()) {
                 if (s instanceof AbilityStatic && s.isTemporary()) {
                     getSource().removeSpellAbility(s);
@@ -783,7 +253,7 @@ public class StaticEffect {
         // modify the affected card
         for (final Card affectedCard : affectedCards) {
             // Gain control
-            if (params.containsKey("GainControl")) {
+            if (hasParam("GainControl")) {
                 affectedCard.removeTempController(getTimestamp());
             }
 
@@ -805,13 +275,13 @@ public class StaticEffect {
             // remove keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword")
-                    || params.containsKey("RemoveAllAbilities")) {
+            if (hasParam("AddKeyword") || hasParam("RemoveKeyword")
+                    || hasParam("RemoveAllAbilities")) {
                 affectedCard.removeChangedCardKeywords(getTimestamp());
             }
 
             // remove abilities
-            if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
+            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")) {
                 for (final SpellAbility s : affectedCard.getSpellAbilities().threadSafeIterable()) {
                     if (s.isTemporary()) {
                         affectedCard.removeSpellAbility(s, false);
@@ -826,12 +296,12 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (params.containsKey("RemoveAllAbilities") || params.containsKey("RemoveIntrinsicAbilities")) {
+            if (hasParam("RemoveAllAbilities") || hasParam("RemoveIntrinsicAbilities")) {
                 affectedCard.unSuppressCardTraits();
             }
 
             // remove Types
-            if (params.containsKey("AddType") || params.containsKey("RemoveType")) {
+            if (hasParam("AddType") || hasParam("RemoveType")) {
                 // the view is updated in GameAction#checkStaticAbilities to avoid flickering
                 affectedCard.removeChangedCardTypes(getTimestamp(), false);
             }
@@ -854,18 +324,18 @@ public class StaticEffect {
                 affectedCard.removeWithFlash(getTimestamp());
             }
 
-            if (params.containsKey("GainTextOf")) {
+            if (hasParam("GainTextOf")) {
                 affectedCard.removeTextChangeState(getTimestamp());
             }
 
-            if (params.containsKey("Goad")) {
+            if (hasParam("Goad")) {
                 affectedCard.removeGoad(getTimestamp());
             }
 
-            if (params.containsKey("CanBlockAny")) {
+            if (hasParam("CanBlockAny")) {
                 affectedCard.removeCanBlockAny(getTimestamp());
             }
-            if (params.containsKey("CanBlockAmount")) {
+            if (hasParam("CanBlockAmount")) {
                 affectedCard.removeCanBlockAdditional(getTimestamp());
             }
 
