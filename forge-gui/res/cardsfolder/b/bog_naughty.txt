@@ -4,7 +4,7 @@ Types:Creature Faerie
 PT:3/3
 K:Flying
 A:AB$ Pump | Cost$ 2 B Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True |  SpellDescription$ Target creature gets -3/-3 until end of turn.
-SVar:AIPreference:SacCost$Card.namedFood,Card.Food
+SVar:AIPreference:SacCost$Card.Food
 DeckHints:Ability$Food
 AI:RemoveDeck:All
 Oracle:Flying\n{2}{B}, Sacrifice a Food: Target creature gets -3/-3 until end of turn.

@@ -134,6 +134,8 @@ public final class StaticAbilityContinuous {
         boolean removeArtifactTypes = false;
         boolean removeEnchantmentTypes = false;
 
+        boolean overwriteColors = false;
+
         List<Player> mayLookAt = null;
         List<Player> withFlash = null;
 
@@ -269,7 +271,6 @@ public final class StaticAbilityContinuous {
             if (addTypes[0].equals("ChosenType")) {
                 final String chosenType = hostCard.getChosenType();
                 addTypes[0] = chosenType;
-                se.setChosenType(chosenType);
             } else if (addTypes[0].equals("ImprintedCreatureType")) {
                 if (hostCard.hasImprintedCard()) {
                     final Set<String> imprinted = hostCard.getImprintedCards().getFirst().getType().getCreatureTypes();
@@ -283,7 +284,6 @@ public final class StaticAbilityContinuous {
             if (removeTypes[0].equals("ChosenType")) {
                 final String chosenType = hostCard.getChosenType();
                 removeTypes[0] = chosenType;
-                se.setChosenType(chosenType);
             }
         }
 
@@ -335,7 +335,7 @@ public final class StaticAbilityContinuous {
                 } else {
                     addColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(" & ")));
                 }
-                se.setOverwriteColors(true);
+                overwriteColors = true;
             }
         }
 
@@ -625,7 +625,7 @@ public final class StaticAbilityContinuous {
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !se.isOverwriteColors(), hostCard.getTimestamp());
+                affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp());
             }
 
             // add triggers

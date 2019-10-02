@@ -1039,7 +1039,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities;
+    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1172,12 +1172,15 @@ public class FSkin {
         final File f8 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
         final File f9 = new File(defaultDir + ForgeConstants.SPRITE_FAVICONS_FILE);
         final File f10 = new File(defaultDir + ForgeConstants.SPRITE_ABILITY_FILE);
+        final File f11 = new File(defaultDir + ForgeConstants.SPRITE_MANAICONS_FILE);
 
         try {
             int p = 0;
             bimDefaultSprite = ImageIO.read(f1);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimAbilities = ImageIO.read(f10);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimManaIcons = ImageIO.read(f11);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1242,6 +1245,9 @@ public class FSkin {
                 case ABILITY:
                     setImage(prop, bimAbilities);
                     break;
+                case MANAICONS:
+                    setImage(prop, bimManaIcons);
+                    break;
                 default:
                     break;
             }
@@ -1263,6 +1269,7 @@ public class FSkin {
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
+        bimManaIcons.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
 
@@ -1275,6 +1282,7 @@ public class FSkin {
         bimQuestDraftDeck = null;
         bimTrophies = null;
         bimAbilities = null;
+        bimManaIcons = null;
 
         //establish encoding symbols
         final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);
