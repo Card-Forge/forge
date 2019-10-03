@@ -1,6 +1,6 @@
 Name:Baron Sengir
 ManaCost:5 B B B
-Types:Legendary Creature Vampire
+Types:Legendary Creature Vampire Noble
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +2/+2 counter on CARDNAME.

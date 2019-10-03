@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
@@ -25,67 +26,67 @@ public enum FSkinImage implements FImage {
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
 
     //Mana symbols
-    MANA_COLORLESS (FSkinProp.IMG_MANA_COLORLESS, SourceFile.ICONS),
-    MANA_B         (FSkinProp.IMG_MANA_B, SourceFile.ICONS),
-    MANA_R         (FSkinProp.IMG_MANA_R, SourceFile.ICONS),
-    MANA_U         (FSkinProp.IMG_MANA_U, SourceFile.ICONS),
-    MANA_G         (FSkinProp.IMG_MANA_G, SourceFile.ICONS),
-    MANA_W         (FSkinProp.IMG_MANA_W, SourceFile.ICONS),
-    MANA_2B        (FSkinProp.IMG_MANA_2B, SourceFile.ICONS),
-    MANA_2G        (FSkinProp.IMG_MANA_2G, SourceFile.ICONS),
-    MANA_2R        (FSkinProp.IMG_MANA_2R, SourceFile.ICONS),
-    MANA_2U        (FSkinProp.IMG_MANA_2U, SourceFile.ICONS),
-    MANA_2W        (FSkinProp.IMG_MANA_2W, SourceFile.ICONS),
-    MANA_HYBRID_BG (FSkinProp.IMG_MANA_HYBRID_BG, SourceFile.ICONS),
-    MANA_HYBRID_BR (FSkinProp.IMG_MANA_HYBRID_BR, SourceFile.ICONS),
-    MANA_HYBRID_GU (FSkinProp.IMG_MANA_HYBRID_GU, SourceFile.ICONS),
-    MANA_HYBRID_GW (FSkinProp.IMG_MANA_HYBRID_GW, SourceFile.ICONS),
-    MANA_HYBRID_RG (FSkinProp.IMG_MANA_HYBRID_RG, SourceFile.ICONS),
-    MANA_HYBRID_RW (FSkinProp.IMG_MANA_HYBRID_RW, SourceFile.ICONS),
-    MANA_HYBRID_UB (FSkinProp.IMG_MANA_HYBRID_UB, SourceFile.ICONS),
-    MANA_HYBRID_UR (FSkinProp.IMG_MANA_HYBRID_UR, SourceFile.ICONS),
-    MANA_HYBRID_WB (FSkinProp.IMG_MANA_HYBRID_WB, SourceFile.ICONS),
-    MANA_HYBRID_WU (FSkinProp.IMG_MANA_HYBRID_WU, SourceFile.ICONS),
-    MANA_PHRYX_U   (FSkinProp.IMG_MANA_PHRYX_U, SourceFile.ICONS),
-    MANA_PHRYX_W   (FSkinProp.IMG_MANA_PHRYX_W, SourceFile.ICONS),
-    MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.ICONS),
-    MANA_PHRYX_G   (FSkinProp.IMG_MANA_PHRYX_G, SourceFile.ICONS),
-    MANA_PHRYX_B   (FSkinProp.IMG_MANA_PHRYX_B, SourceFile.ICONS),
-    MANA_SNOW      (FSkinProp.IMG_MANA_SNOW, SourceFile.ICONS),
-    MANA_0         (FSkinProp.IMG_MANA_0, SourceFile.ICONS),
-    MANA_1         (FSkinProp.IMG_MANA_1, SourceFile.ICONS),
-    MANA_2         (FSkinProp.IMG_MANA_2, SourceFile.ICONS),
-    MANA_3         (FSkinProp.IMG_MANA_3, SourceFile.ICONS),
-    MANA_4         (FSkinProp.IMG_MANA_4, SourceFile.ICONS),
-    MANA_5         (FSkinProp.IMG_MANA_5, SourceFile.ICONS),
-    MANA_6         (FSkinProp.IMG_MANA_6, SourceFile.ICONS),
-    MANA_7         (FSkinProp.IMG_MANA_7, SourceFile.ICONS),
-    MANA_8         (FSkinProp.IMG_MANA_8, SourceFile.ICONS),
-    MANA_9         (FSkinProp.IMG_MANA_9, SourceFile.ICONS),
-    MANA_10        (FSkinProp.IMG_MANA_10, SourceFile.ICONS),
-    MANA_11        (FSkinProp.IMG_MANA_11, SourceFile.ICONS),
-    MANA_12        (FSkinProp.IMG_MANA_12, SourceFile.ICONS),
-    MANA_13        (FSkinProp.IMG_MANA_13, SourceFile.ICONS),
-    MANA_14        (FSkinProp.IMG_MANA_14, SourceFile.ICONS),
-    MANA_15        (FSkinProp.IMG_MANA_15, SourceFile.ICONS),
-    MANA_16        (FSkinProp.IMG_MANA_16, SourceFile.ICONS),
-    MANA_17        (FSkinProp.IMG_MANA_17, SourceFile.ICONS),
-    MANA_18        (FSkinProp.IMG_MANA_18, SourceFile.ICONS),
-    MANA_19        (FSkinProp.IMG_MANA_19, SourceFile.ICONS),
-    MANA_20        (FSkinProp.IMG_MANA_20, SourceFile.ICONS),
-    MANA_X         (FSkinProp.IMG_MANA_X, SourceFile.ICONS),
-    MANA_Y         (FSkinProp.IMG_MANA_Y, SourceFile.ICONS),
-    MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.ICONS),
+    MANA_COLORLESS (FSkinProp.IMG_MANA_COLORLESS, SourceFile.MANAICONS),
+    MANA_B         (FSkinProp.IMG_MANA_B, SourceFile.MANAICONS),
+    MANA_R         (FSkinProp.IMG_MANA_R, SourceFile.MANAICONS),
+    MANA_U         (FSkinProp.IMG_MANA_U, SourceFile.MANAICONS),
+    MANA_G         (FSkinProp.IMG_MANA_G, SourceFile.MANAICONS),
+    MANA_W         (FSkinProp.IMG_MANA_W, SourceFile.MANAICONS),
+    MANA_2B        (FSkinProp.IMG_MANA_2B, SourceFile.MANAICONS),
+    MANA_2G        (FSkinProp.IMG_MANA_2G, SourceFile.MANAICONS),
+    MANA_2R        (FSkinProp.IMG_MANA_2R, SourceFile.MANAICONS),
+    MANA_2U        (FSkinProp.IMG_MANA_2U, SourceFile.MANAICONS),
+    MANA_2W        (FSkinProp.IMG_MANA_2W, SourceFile.MANAICONS),
+    MANA_HYBRID_BG (FSkinProp.IMG_MANA_HYBRID_BG, SourceFile.MANAICONS),
+    MANA_HYBRID_BR (FSkinProp.IMG_MANA_HYBRID_BR, SourceFile.MANAICONS),
+    MANA_HYBRID_GU (FSkinProp.IMG_MANA_HYBRID_GU, SourceFile.MANAICONS),
+    MANA_HYBRID_GW (FSkinProp.IMG_MANA_HYBRID_GW, SourceFile.MANAICONS),
+    MANA_HYBRID_RG (FSkinProp.IMG_MANA_HYBRID_RG, SourceFile.MANAICONS),
+    MANA_HYBRID_RW (FSkinProp.IMG_MANA_HYBRID_RW, SourceFile.MANAICONS),
+    MANA_HYBRID_UB (FSkinProp.IMG_MANA_HYBRID_UB, SourceFile.MANAICONS),
+    MANA_HYBRID_UR (FSkinProp.IMG_MANA_HYBRID_UR, SourceFile.MANAICONS),
+    MANA_HYBRID_WB (FSkinProp.IMG_MANA_HYBRID_WB, SourceFile.MANAICONS),
+    MANA_HYBRID_WU (FSkinProp.IMG_MANA_HYBRID_WU, SourceFile.MANAICONS),
+    MANA_PHRYX_U   (FSkinProp.IMG_MANA_PHRYX_U, SourceFile.MANAICONS),
+    MANA_PHRYX_W   (FSkinProp.IMG_MANA_PHRYX_W, SourceFile.MANAICONS),
+    MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.MANAICONS),
+    MANA_PHRYX_G   (FSkinProp.IMG_MANA_PHRYX_G, SourceFile.MANAICONS),
+    MANA_PHRYX_B   (FSkinProp.IMG_MANA_PHRYX_B, SourceFile.MANAICONS),
+    MANA_SNOW      (FSkinProp.IMG_MANA_SNOW, SourceFile.MANAICONS),
+    MANA_0         (FSkinProp.IMG_MANA_0, SourceFile.MANAICONS),
+    MANA_1         (FSkinProp.IMG_MANA_1, SourceFile.MANAICONS),
+    MANA_2         (FSkinProp.IMG_MANA_2, SourceFile.MANAICONS),
+    MANA_3         (FSkinProp.IMG_MANA_3, SourceFile.MANAICONS),
+    MANA_4         (FSkinProp.IMG_MANA_4, SourceFile.MANAICONS),
+    MANA_5         (FSkinProp.IMG_MANA_5, SourceFile.MANAICONS),
+    MANA_6         (FSkinProp.IMG_MANA_6, SourceFile.MANAICONS),
+    MANA_7         (FSkinProp.IMG_MANA_7, SourceFile.MANAICONS),
+    MANA_8         (FSkinProp.IMG_MANA_8, SourceFile.MANAICONS),
+    MANA_9         (FSkinProp.IMG_MANA_9, SourceFile.MANAICONS),
+    MANA_10        (FSkinProp.IMG_MANA_10, SourceFile.MANAICONS),
+    MANA_11        (FSkinProp.IMG_MANA_11, SourceFile.MANAICONS),
+    MANA_12        (FSkinProp.IMG_MANA_12, SourceFile.MANAICONS),
+    MANA_13        (FSkinProp.IMG_MANA_13, SourceFile.MANAICONS),
+    MANA_14        (FSkinProp.IMG_MANA_14, SourceFile.MANAICONS),
+    MANA_15        (FSkinProp.IMG_MANA_15, SourceFile.MANAICONS),
+    MANA_16        (FSkinProp.IMG_MANA_16, SourceFile.MANAICONS),
+    MANA_17        (FSkinProp.IMG_MANA_17, SourceFile.MANAICONS),
+    MANA_18        (FSkinProp.IMG_MANA_18, SourceFile.MANAICONS),
+    MANA_19        (FSkinProp.IMG_MANA_19, SourceFile.MANAICONS),
+    MANA_20        (FSkinProp.IMG_MANA_20, SourceFile.MANAICONS),
+    MANA_X         (FSkinProp.IMG_MANA_X, SourceFile.MANAICONS),
+    MANA_Y         (FSkinProp.IMG_MANA_Y, SourceFile.MANAICONS),
+    MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.MANAICONS),
 
     //CMC ranges
-    CMC_LOW      (FSkinProp.IMG_CMC_LOW, SourceFile.ICONS),
-    CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, SourceFile.ICONS),
-    CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.ICONS),
-    CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, SourceFile.ICONS),
+    CMC_LOW      (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
+    CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
+    CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
+    CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
 
     //Gameplay
-    TAP             (FSkinProp.IMG_TAP, SourceFile.ICONS),
-    UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.ICONS),
+    TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
+    UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.MANAICONS),
     CHAOS           (FSkinProp.IMG_CHAOS, SourceFile.ICONS),
     SLASH           (FSkinProp.IMG_SLASH, SourceFile.ICONS),
     ATTACK          (FSkinProp.IMG_ATTACK, SourceFile.ICONS),
@@ -194,15 +195,15 @@ public enum FSkinImage implements FImage {
     //Editor images
     STAR_OUTINE     (FSkinProp.IMG_STAR_OUTINE, SourceFile.ICONS),
     STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
-    ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.ICONS),
-    CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.ICONS),
-    ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.ICONS),
-    INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.ICONS),
-    LAND            (FSkinProp.IMG_LAND, SourceFile.ICONS),
+    ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
+    CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),
+    ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.MANAICONS),
+    INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.MANAICONS),
+    LAND            (FSkinProp.IMG_LAND, SourceFile.MANAICONS),
     MULTI           (FSkinProp.IMG_MULTI, SourceFile.ICONS),
-    PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.ICONS),
+    PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
-    SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.ICONS),
+    SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),
     COMMANDER       (FSkinProp.IMG_COMMANDER, SourceFile.ICONS),
 
     //Buttons
@@ -259,12 +260,15 @@ public enum FSkinImage implements FImage {
     IMG_ABILITY_FIRST_STRIKE   (FSkinProp.IMG_ABILITY_FIRST_STRIKE, SourceFile.ABILITIES),
     IMG_ABILITY_FEAR           (FSkinProp.IMG_ABILITY_FEAR, SourceFile.ABILITIES),
     IMG_ABILITY_FLYING         (FSkinProp.IMG_ABILITY_FLYING, SourceFile.ABILITIES),
+    IMG_ABILITY_HASTE          (FSkinProp.IMG_ABILITY_HASTE, SourceFile.ABILITIES),
     IMG_ABILITY_HEXPROOF       (FSkinProp.IMG_ABILITY_HEXPROOF, SourceFile.ABILITIES),
+    IMG_ABILITY_HORSEMANSHIP   (FSkinProp.IMG_ABILITY_HORSEMANSHIP, SourceFile.ABILITIES),
     IMG_ABILITY_INDESTRUCTIBLE (FSkinProp.IMG_ABILITY_INDESTRUCTIBLE, SourceFile.ABILITIES),
     IMG_ABILITY_INTIMIDATE     (FSkinProp.IMG_ABILITY_INTIMIDATE, SourceFile.ABILITIES),
     IMG_ABILITY_LIFELINK       (FSkinProp.IMG_ABILITY_LIFELINK, SourceFile.ABILITIES),
     IMG_ABILITY_MENACE         (FSkinProp.IMG_ABILITY_MENACE, SourceFile.ABILITIES),
     IMG_ABILITY_REACH          (FSkinProp.IMG_ABILITY_REACH, SourceFile.ABILITIES),
+    IMG_ABILITY_SHADOW         (FSkinProp.IMG_ABILITY_SHADOW, SourceFile.ABILITIES),
     IMG_ABILITY_SHROUD         (FSkinProp.IMG_ABILITY_SHROUD, SourceFile.ABILITIES),
     IMG_ABILITY_TRAMPLE        (FSkinProp.IMG_ABILITY_TRAMPLE, SourceFile.ABILITIES),
     IMG_ABILITY_VIGILANCE      (FSkinProp.IMG_ABILITY_VIGILANCE, SourceFile.ABILITIES),
@@ -304,6 +308,7 @@ public enum FSkinImage implements FImage {
         OLD_FOILS(ForgeConstants.SPRITE_OLD_FOILS_FILE),
         TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
+        MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;
@@ -338,7 +343,12 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    texture = new Texture(preferredFile);
+                    if (Forge.isTextureFilteringEnabled()){
+                        texture = new Texture(preferredFile, true);
+                        texture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    } else {
+                        texture = new Texture(preferredFile);
+                    }
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + preferredFile);
@@ -409,7 +419,12 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    texture = new Texture(defaultFile);
+                    if (Forge.isTextureFilteringEnabled()){
+                        texture = new Texture(defaultFile, true);
+                        texture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    } else {
+                        texture = new Texture(defaultFile);
+                    }
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

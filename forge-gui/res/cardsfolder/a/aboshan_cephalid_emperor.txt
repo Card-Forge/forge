@@ -1,6 +1,6 @@
 Name:Aboshan, Cephalid Emperor
 ManaCost:4 U U
-Types:Legendary Creature Cephalid
+Types:Legendary Creature Cephalid Noble
 PT:3/3
 A:AB$ Tap | Cost$ tapXType<1/Cephalid> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 A:AB$ TapAll | Cost$ U U U | ValidCards$ Creature.withoutFlying | SpellDescription$ Tap all creatures without flying.

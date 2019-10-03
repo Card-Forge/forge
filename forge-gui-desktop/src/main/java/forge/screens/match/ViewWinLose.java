@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import forge.util.TextUtil;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -116,11 +116,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
         lblStats.setFont(FSkin.getRelativeFont(26));
 
-        btnContinue.setText("Next Game");
+        final Localizer localizer = Localizer.getInstance();
+        btnContinue.setText(localizer.getMessage("btnNextGame"));
         btnContinue.setFont(FSkin.getRelativeFont(22));
-        btnRestart.setText("Start New Match");
+        btnRestart.setText(localizer.getMessage("btnStartNewMatch"));
         btnRestart.setFont(FSkin.getRelativeFont(22));
-        btnQuit.setText("Quit Match");
+        btnQuit.setText(localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
 
@@ -130,7 +131,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         txtLog.setFont(FSkin.getRelativeFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
-        final FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
+        final FLabel btnCopyLog = new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).build();
         btnCopyLog.setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -178,7 +179,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLog.setOpaque(false);
 
         pnlLog.add(
-                new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER).fontSize(18)
+                new FLabel.Builder().text(localizer.getMessage("lblGameLog")).fontAlign(SwingConstants.CENTER).fontSize(18)
                 .fontStyle(Font.BOLD).build(), "w 300px!, h 28px!, gaptop 20px");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
@@ -214,12 +215,13 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private static String composeTitle(final GameView game) {
         final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
+        final Localizer localizer = Localizer.getInstance();
         if (winner == null || winner.isEmpty()) {
-            return "It's a draw!";
+            return localizer.getMessage("lblItsADraw");
         } else if (winningTeam != -1) {
-            return TextUtil.concatNoSpace("Team ", String.valueOf(winningTeam), " won!");
+            return localizer.getMessage("lblTeamWon").replace("%s", String.valueOf(winningTeam));
         } else {
-            return TextUtil.concatNoSpace(winner, " won!");
+            return localizer.getMessage("lblWinnerWon").replace("%s", winner);
         }
     }
 

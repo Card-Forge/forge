@@ -162,8 +162,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public final int preventDamage(
             final int damage, final Card source, final boolean isCombat, CardDamageMap preventMap,
             final SpellAbility cause) {
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
-                || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
+        if (!source.canDamagePrevented(isCombat)) {
             return damage;
         }
 

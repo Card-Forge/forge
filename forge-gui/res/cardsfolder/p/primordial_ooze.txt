@@ -4,13 +4,10 @@ Types:Creature Ooze
 PT:1/1
 K:CARDNAME attacks each combat if able.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap CARDNAME and it deals X damage to you.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPay
-SVar:DBPay:DB$ StoreSVar | SVar$ PrimordialPaid | Type$ CountSVar | Expression$ PrimordialPaid/Plus.1 | UnlessCost$ X | UnlessPayer$ You | SubAbility$ DBTap | References$ X
-SVar:DBTap:DB$ Tap | Defined$ Self | ConditionCheckSVar$ PrimordialPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ You | References$ X | ConditionCheckSVar$ PrimordialPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBReset
-SVar:DBReset:DB$ StoreSVar | SVar$ PrimordialPaid | Type$ Number | Expression$ 0
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBDmg | References$ X
+SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ You | References$ X
 SVar:X:Count$CardCounters.P1P1
-SVar:PrimordialPaid:Number$0
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_ooze.jpg
 Oracle:Primordial Ooze attacks each combat if able.\nAt the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.

@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -238,7 +239,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true;
         }
         if (hasLocalPlayers()) {
-            if (showConfirmDialog("This will concede the current game and you will lose.\n\nConcede anyway?", "Concede Game?", "Concede", "Cancel")) {
+            if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
                 for (final IGameController c : getOriginalGameControllers()) {
                     // Concede each player on this Gui (except mind-controlled players)
                     c.concede();
@@ -262,7 +263,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if no local players or spectator, just quit
         }
         else {
-            if (showConfirmDialog("This will close this game and you will not be able to resume watching it.\n\nClose anyway?", "Close Game?", "Close", "Cancel")) {
+            if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
                 IGameController controller = spectator;
                 spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
                 controller.nextGameDecision(NextGameDecision.QUIT);
@@ -273,14 +274,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     public String getConcedeCaption() {
         if (hasLocalPlayers()) {
-            return "Concede";
+            return Localizer.getInstance().getMessage("lblConcede");
         }
-        return "Stop Watching";
+        return Localizer.getInstance().getMessage("lblStopWatching");
     }
 
     @Override
     public void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
-        updateButtons(owner, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
+        updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);
     }
 
     // Auto-yield and other input-related code
@@ -341,7 +342,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     protected final void updatePromptForAwait(final PlayerView playerView) {
-        showPromptMessage(playerView, "Waiting for opponent...");
+        showPromptMessage(playerView, Localizer.getInstance().getMessage("lblWaitingForOpponent"));
         updateButtons(playerView, false, false, false);
     }
 
@@ -362,7 +363,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (!autoPassUntilEndOfTurn.isEmpty()) {
             //allow user to cancel auto-pass
             cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
-            showPromptMessage(getCurrentPlayer(), "Yielding until end of turn.\nYou may cancel this yield to take an action.");
+            showPromptMessage(getCurrentPlayer(), Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
             updateButtons(getCurrentPlayer(), false, true, false);
         }
     }
@@ -540,17 +541,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         //if Other option picked, prompt for number input
-        String prompt = "Enter a number";
+        Localizer localizer = Localizer.getInstance();
+        String prompt = "";
         if (min != Integer.MIN_VALUE) {
             if (max != Integer.MAX_VALUE) {
-                prompt += " between " + min + " and " + max;
+                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax").replace("%min", String.valueOf(min)).replace("%max", String.valueOf(max));
             } else {
-                prompt += " greater than or equal to " + min;
+                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin").replace("%min", String.valueOf(min));
             }
         } else if (max != Integer.MAX_VALUE) {
-            prompt += " less than or equal to " + max;
+            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax").replace("%max", String.valueOf(max));
         }
-        prompt += ":";
 
         while (true) {
             final String str = showInputDialog(prompt, message);
@@ -651,7 +652,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public boolean showConfirmDialog(final String message, final String title,
             final boolean defaultYes) {
-        return showConfirmDialog(message, title, "Yes", "No");
+        return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
     }
 
     @Override

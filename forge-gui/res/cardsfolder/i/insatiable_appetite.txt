@@ -6,4 +6,5 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target Creature |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Compare Y GE1.5.3
 SVar:Y:Remembered$Amount
+DeckHints:Ability$Food
 Oracle:You may sacrifice a Food. If you do, target creature gets +5/+5 until end of turn. Otherwise, that creature gets +3/+3 until end of turn.

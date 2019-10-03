@@ -3,7 +3,8 @@ ManaCost:2 W W
 Types:Creature Boar Beast
 PT:7/7
 K:etbCounter:ICE:3
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_ICE | AddKeyword$ Prevent all combat damage that would be dealt by CARDNAME. & Defender | Description$ As long as CARDNAME has an ice counter on it, prevent all combat damage it would deal and it has defender.
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.Self+counters_GE1_ICE | Description$ As long as CARDNAME has an ice counter on it, prevent all combat damage it would deal
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_ICE | AddKeyword$ Defender | Description$ As long as CARDNAME has an ice counter on it, it has defender.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks, remove an ice counter from it.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ ICE | CounterNum$ 1 | Defined$ TriggeredBlockerLKICopy
 SVar:HasBlockEffect:TRUE
