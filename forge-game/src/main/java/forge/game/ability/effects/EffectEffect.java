@@ -158,7 +158,8 @@ public class EffectEffect extends SpellAbilityEffect {
             if (effectStaticAbilities != null) {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
-                    addedStaticAbility.setIntrinsic(true);
+                    if (addedStaticAbility != null) //prevent npe casting adventure card spell
+                        addedStaticAbility.setIntrinsic(true);
                 }
             }
 
