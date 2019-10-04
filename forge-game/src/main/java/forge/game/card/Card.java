@@ -5484,7 +5484,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             ability.add(inst.getOriginal());
         }
         Collections.sort(ability);
-        return String.join(",", ability);
+        return StringUtils.join(ability.toArray(), ","); //fix nosuchmethod on some android devices...
     }
     public Zone getZone() {
         return currentZone;
