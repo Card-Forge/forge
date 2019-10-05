@@ -1128,14 +1128,14 @@ public class ComputerUtilCard {
                 // assume it either benefits the player or disrupts the opponent
                 for (final StaticAbility stAb : c.getStaticAbilities()) {
                     final Map<String, String> params = stAb.getMapParams();
-                    if (params.get("Mode").equals("Continuous") && stAb.isIntrinsic() && !stAb.isTemporary()) {
+                    if (params.get("Mode").equals("Continuous") && stAb.isIntrinsic()) {
                         priority = true;
                         break;
                     }
                 }
                 if (!priority) {
                     for (final Trigger t : c.getTriggers()) {
-                        if (t.isIntrinsic() && !t.isTemporary()) {
+                        if (t.isIntrinsic()) {
                             // has a triggered ability, could be benefitting the opponent or disrupting the AI
                             priority = true;
                             break;

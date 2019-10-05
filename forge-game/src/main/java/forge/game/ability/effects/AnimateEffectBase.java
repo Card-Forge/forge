@@ -20,10 +20,8 @@ package forge.game.ability.effects;
 import forge.card.CardType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.replacement.ReplacementEffect;
+
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
-import forge.game.trigger.Trigger;
 import java.util.List;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
@@ -128,14 +126,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * @param timestamp
      *            a long.
      */
-    static void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
-            final List<String> hiddenKeywords, final List<SpellAbility> addedAbilities,
-            final List<Trigger> addedTriggers, final List<ReplacementEffect> addedReplacements, 
-            final List<StaticAbility> addedStaticAbilities, final long timestamp) {
-
-        if (sa.hasParam("LastsIndefinitely")) {
-            return;
-        }
+    static void doUnanimate(final Card c, SpellAbility sa,
+            final List<String> hiddenKeywords, final long timestamp) {
 
         c.removeNewPT(timestamp);
 
@@ -144,24 +136,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         c.removeChangedCardTypes(timestamp);
         c.removeColor(timestamp);
 
+        c.removeChangedCardTraits(timestamp);
+
         for (final String k : hiddenKeywords) {
             c.removeHiddenExtrinsicKeyword(k);
-        }
-
-        for (final SpellAbility saAdd : addedAbilities) {
-            c.removeSpellAbility(saAdd);
-        }
-
-        for (final Trigger t : addedTriggers) {
-            c.removeTrigger(t);
-        }
-
-        for (final ReplacementEffect rep : addedReplacements) {
-            c.removeReplacementEffect(rep);
-        }
-
-        for (final StaticAbility stAb : addedStaticAbilities) {
-            c.removeStaticAbility(stAb);
         }
 
         // any other unanimate cleanup

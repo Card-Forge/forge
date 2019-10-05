@@ -38,14 +38,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The is intrinsic. */
     protected boolean intrinsic;
 
-    /** The temporary. */
-    protected boolean temporary = false;
-
     /** The suppressed. */
     protected boolean suppressed = false;
-
-    /** The temporarily suppressed. */
-    protected boolean temporarilySuppressed = false;
 
     protected Map<String, String> sVars = Maps.newHashMap();
 
@@ -66,24 +60,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
             .add("TokenScript", "LegacyImage", "TokenImage", "NewName").build();
-    /**
-     * Sets the temporary.
-     *
-     * @param temp
-     *            the new temporary
-     */
-    public final void setTemporary(final boolean temp) {
-        this.temporary = temp;
-    }
-
-    /**
-     * Checks if is temporary.
-     *
-     * @return true, if is temporary
-     */
-    public final boolean isTemporary() {
-        return this.temporary;
-    }
 
     /**
      * <p>
@@ -197,25 +173,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     }
 
     /**
-     * Sets the temporarily suppressed.
-     * 
-     * @param supp
-     *            the new temporarily suppressed
-     */
-    public final void setTemporarilySuppressed(final boolean supp) {
-        this.temporarilySuppressed = supp;
-    }
-
-    /**
      * Checks if is suppressed.
      * 
      * @return true, if is suppressed
      */
     public final boolean isSuppressed() {
-        return (this.suppressed || this.temporarilySuppressed);
-    }
-
-    protected final boolean isNonTempSuppressed() {
         return this.suppressed;
     }
 

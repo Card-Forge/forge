@@ -32,6 +32,15 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
             }
         };
     }
+
+    public static final Predicate<SpellAbility> isManaAbility() {
+        return new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(final SpellAbility sa) {
+                return sa.isManaAbility();
+            }
+        };
+    }
     
     public static final Predicate<SpellAbility> isIntrinsic() {
         return new Predicate<SpellAbility>() {

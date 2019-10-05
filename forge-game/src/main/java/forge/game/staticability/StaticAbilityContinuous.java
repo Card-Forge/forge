@@ -122,7 +122,6 @@ public final class StaticAbilityContinuous {
         String addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
-        List<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
         boolean removeIntrinsicAbilities = false;
         boolean removeNonMana = false;
@@ -187,7 +186,7 @@ public final class StaticAbilityContinuous {
             toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb, true);
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddKeyword")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
             final Iterable<String> chosencolors = hostCard.getChosenColors();
             for (final String color : chosencolors) {
@@ -222,31 +221,31 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if ((layer == StaticAbilityLayer.RULES || layer == StaticAbilityLayer.ABILITIES1) && params.containsKey("AddHiddenKeyword")) {
+        if ((layer == StaticAbilityLayer.RULES || layer == StaticAbilityLayer.ABILITIES) && params.containsKey("AddHiddenKeyword")) {
             // can't have or gain, need to be applyed in ABILITIES1
             for (String k : params.get("AddHiddenKeyword").split(" & ")) {
-                if ( (k.contains("can't have or gain")) == (layer == StaticAbilityLayer.ABILITIES1))
+                if ( (k.contains("can't have or gain")) == (layer == StaticAbilityLayer.ABILITIES))
                     addHiddenKeywords.add(k);
             }
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("RemoveKeyword")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("RemoveKeyword")) {
             removeKeywords = params.get("RemoveKeyword").split(" & ");
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("RemoveAllAbilities")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("RemoveAllAbilities")) {
             removeAllAbilities = true;
             if (params.containsKey("ExceptManaAbilities")) {
                 removeNonMana = true;
             }
         }
         // do this in type layer too in case of blood moon
-        if ((layer == StaticAbilityLayer.ABILITIES1 || layer == StaticAbilityLayer.TYPE)
+        if ((layer == StaticAbilityLayer.TYPE)
                 && params.containsKey("RemoveIntrinsicAbilities")) {
             removeIntrinsicAbilities = true;
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddAbility")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddAbility")) {
             final String[] sVars = params.get("AddAbility").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
                 sVars[i] = hostCard.getSVar(sVars[i]);
@@ -254,7 +253,7 @@ public final class StaticAbilityContinuous {
             addAbilities = sVars;
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddReplacementEffects")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddReplacementEffects")) {
             final String[] sVars = params.get("AddReplacementEffects").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
                 sVars[i] = hostCard.getSVar(sVars[i]);
@@ -262,7 +261,7 @@ public final class StaticAbilityContinuous {
             addReplacements = sVars;
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddSVar")) {
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddSVar")) {
             addSVars = params.get("AddSVar").split(" & ");
         }
 
@@ -339,7 +338,7 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2) {
+        if (layer == StaticAbilityLayer.ABILITIES) {
             if (params.containsKey("AddTrigger")) {
                 final String[] sVars = params.get("AddTrigger").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
@@ -354,45 +353,6 @@ public final class StaticAbilityContinuous {
                     sVars[i] = hostCard.getSVar(sVars[i]);
                 }
                 addStatics = sVars;
-            }
-        }
-
-        if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("GainsAbilitiesOf")) {
-            final String[] valids = params.get("GainsAbilitiesOf").split(",");
-            List<ZoneType> validZones;
-            final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
-            if (params.containsKey("GainsAbilitiesOfZones")) {
-                validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
-            } else {
-                validZones = ImmutableList.of(ZoneType.Battlefield);
-            }
-
-            CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
-            cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard, null);
-
-            if (cardsIGainedAbilitiesFrom.size() > 0) {
-                addFullAbs = Lists.newArrayList();
-
-                for (Card c : cardsIGainedAbilitiesFrom) {
-                    for (SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa instanceof AbilityActivated) {
-                            if (loyaltyAB && !sa.isPwAbility()) {
-                                continue;
-                            }
-                            SpellAbility newSA = sa.copy(hostCard, false);
-                            if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
-                                newSA.setRestrictions(sa.getRestrictions());
-                                newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
-                            }
-                            newSA.setOriginalHost(c);
-                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
-                            newSA.setGrantorStatic(stAb);
-                            newSA.setIntrinsic(false);
-                            newSA.setTemporary(true);
-                            addFullAbs.add(newSA);
-                        }
-                    }
-                }
             }
         }
 
@@ -444,7 +404,6 @@ public final class StaticAbilityContinuous {
             if (addStatics != null) {
                 for (String s : addStatics) {
                     StaticAbility stat = p.addStaticAbility(hostCard, s);
-                    stat.setTemporary(true);
                     stat.setIntrinsic(false);
                 }
             }
@@ -582,38 +541,117 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (addFullAbs != null) {
-                for (final SpellAbility ab : addFullAbs) {
-                    affectedCard.addSpellAbility(ab, false);
+            if (layer == StaticAbilityLayer.ABILITIES) {
+
+                List<SpellAbility> addedAbilities = Lists.newArrayList();
+                List<ReplacementEffect> addedReplacementEffects = Lists.newArrayList();
+                List<Trigger> addedTrigger = Lists.newArrayList();
+                List<StaticAbility> addedStaticAbility = Lists.newArrayList();
+                // add abilities
+                if (addAbilities != null) {
+                    for (String abilty : addAbilities) {
+                        if (abilty.contains("CardManaCost")) {
+                            abilty = TextUtil.fastReplace(abilty, "CardManaCost", affectedCard.getManaCost().getShortString());
+                        } else if (abilty.contains("ConvertedManaCost")) {
+                            final String costcmc = Integer.toString(affectedCard.getCMC());
+                            abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
+                        }
+                        if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
+                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
+                            sa.setIntrinsic(false);
+                            sa.setOriginalHost(hostCard);
+                            addedAbilities.add(sa);
+                        }
+                    }
+                }
+
+                if (params.containsKey("GainsAbilitiesOf")) {
+                    final String[] valids = params.get("GainsAbilitiesOf").split(",");
+                    List<ZoneType> validZones;
+                    final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
+                    if (params.containsKey("GainsAbilitiesOfZones")) {
+                        validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+                    } else {
+                        validZones = ImmutableList.of(ZoneType.Battlefield);
+                    }
+
+                    CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
+                    cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard, null);
+
+                    for (Card c : cardsIGainedAbilitiesFrom) {
+                        for (SpellAbility sa : c.getSpellAbilities()) {
+                            if (sa instanceof AbilityActivated) {
+                                if (loyaltyAB && !sa.isPwAbility()) {
+                                    continue;
+                                }
+                                SpellAbility newSA = sa.copy(affectedCard, false);
+                                if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
+                                    newSA.setRestrictions(sa.getRestrictions());
+                                    newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
+                                }
+                                newSA.setOriginalHost(c);
+                                newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
+                                newSA.setGrantorStatic(stAb);
+                                newSA.setIntrinsic(false);
+                                addedAbilities.add(newSA);
+                            }
+                        }
+                    }
+                }
+
+                // add Replacement effects
+                if (addReplacements != null) {
+                    for (String rep : addReplacements) {
+                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
+                        actualRep.setIntrinsic(false);
+                        addedReplacementEffects.add(actualRep);
+                    }
+                }
+
+                // add triggers
+                if (addTriggers != null) {
+                    for (final String trigger : addTriggers) {
+                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                        // if the trigger has Execute param, which most trigger gained by Static Abilties should have
+                        // turn them into SpellAbility object before adding to card
+                        // with that the TargetedCard does not need the Svars added to them anymore
+                        // but only do it if the trigger doesn't already have a overriding ability
+                        if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
+                            SpellAbility sa = AbilityFactory.getAbility(hostCard, actualTrigger.getParam("Execute"));
+                            // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
+                            sa.setHostCard(affectedCard);
+                            // set OriginalHost to get the owner of this static ability
+                            sa.setOriginalHost(hostCard);
+                            // set overriding ability to the trigger
+                            actualTrigger.setOverridingAbility(sa);
+                        }
+                        actualTrigger.setIntrinsic(false);
+                        addedTrigger.add(actualTrigger);
+                    }
+                }
+
+                // add static abilities
+                if (addStatics != null) {
+                    for (String s : addStatics) {
+                        if (s.contains("ConvertedManaCost")) {
+                            final String costcmc = Integer.toString(affectedCard.getCMC());
+                            s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
+                        }
+
+                        StaticAbility stat = new StaticAbility(s, affectedCard);
+                        stat.setIntrinsic(false);
+                        addedStaticAbility.add(stat);
+                    }
+                }
+
+                if (!addedAbilities.isEmpty() || addReplacements != null || addTriggers != null || addStatics != null
+                    || removeAllAbilities) {
+                    affectedCard.addChangedCardTraits(addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false, hostCard.getTimestamp());
                 }
             }
 
-            // add abilities
-            if (addAbilities != null) {
-                for (String abilty : addAbilities) {
-                    if (abilty.contains("CardManaCost")) {
-                        abilty = TextUtil.fastReplace(abilty, "CardManaCost", affectedCard.getManaCost().getShortString());
-                    } else if (abilty.contains("ConvertedManaCost")) {
-                        final String costcmc = Integer.toString(affectedCard.getCMC());
-                        abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
-                    }
-                    if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                        final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
-                        sa.setTemporary(true);
-                        sa.setIntrinsic(false);
-                        sa.setOriginalHost(hostCard);
-                        affectedCard.addSpellAbility(sa, false);
-                    }
-                }
-            }
-
-            // add Replacement effects
-            if (addReplacements != null) {
-                for (String rep : addReplacements) {
-                    final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
-                    actualRep.setIntrinsic(false);
-                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);
-                }
+            if (layer == StaticAbilityLayer.TYPE && removeIntrinsicAbilities) {
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeIntrinsicAbilities, hostCard.getTimestamp());
             }
 
             // add Types
@@ -626,81 +664,6 @@ public final class StaticAbilityContinuous {
             // add colors
             if (addColors != null) {
                 affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp());
-            }
-
-            // add triggers
-            if (addTriggers != null) {
-                for (final String trigger : addTriggers) {
-                    final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
-                    // if the trigger has Execute param, which most trigger gained by Static Abilties should have
-                    // turn them into SpellAbility object before adding to card
-                    // with that the TargetedCard does not need the Svars added to them anymore
-                    // but only do it if the trigger doesn't already have a overriding ability
-                    if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                        SpellAbility sa = AbilityFactory.getAbility(hostCard, actualTrigger.getParam("Execute"));
-                        // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
-                        sa.setHostCard(affectedCard);
-                        // set OriginalHost to get the owner of this static ability
-                        sa.setOriginalHost(hostCard);
-                        // set overriding ability to the trigger
-                        actualTrigger.setOverridingAbility(sa);
-                    }
-                    actualTrigger.setIntrinsic(false);
-                    affectedCard.addTrigger(actualTrigger).setTemporary(true);
-                }
-            }
-
-            // add static abilities
-            if (addStatics != null) {
-                for (String s : addStatics) {
-                    if (s.contains("ConvertedManaCost")) {
-                        final String costcmc = Integer.toString(affectedCard.getCMC());
-                        s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
-                    }
-
-                    StaticAbility stat = affectedCard.addStaticAbility(s);
-                    stat.setTemporary(true);
-                    stat.setIntrinsic(false);
-                }
-            }
-
-            // remove triggers
-            if ((layer == StaticAbilityLayer.ABILITIES2 && (params.containsKey("RemoveTriggers"))
-                    || removeAllAbilities || removeIntrinsicAbilities)) {
-                for (final Trigger trigger : affectedCard.getTriggers()) {
-                    if (removeAllAbilities || (removeIntrinsicAbilities && trigger.isIntrinsic())) {
-                        trigger.setTemporarilySuppressed(true);
-                    }
-                }
-            }
-
-            // remove activated and static abilities
-            if (removeAllAbilities || removeIntrinsicAbilities) {
-                if (removeNonMana) { // Blood Sun
-                    for (final SpellAbility mana : affectedCard.getNonManaAbilities()) {
-                        if (removeAllAbilities
-                                || (removeIntrinsicAbilities && mana.isIntrinsic() && !mana.isBasicLandAbility())) {
-                            mana.setTemporarilySuppressed(true);
-                        }
-                    }
-                } else {
-                    for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                        if (removeAllAbilities
-                                || (removeIntrinsicAbilities && ab.isIntrinsic() && !ab.isBasicLandAbility())) {
-                            ab.setTemporarilySuppressed(true);
-                        }
-                    }
-            	}
-                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
-                    if (removeAllAbilities || (removeIntrinsicAbilities && stA.isIntrinsic())) {
-                        stA.setTemporarilySuppressed(true);
-                    }
-                }
-                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
-                    if (removeAllAbilities || (removeIntrinsicAbilities && rE.isIntrinsic())) {
-                        rE.setTemporarilySuppressed(true);
-                    }
-                }
             }
 
             if (layer == StaticAbilityLayer.RULES) {
@@ -765,11 +728,11 @@ public final class StaticAbilityContinuous {
             }
 
         };
-        addIgnore.setTemporary(true);
+
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addSpellAbility(addIgnore);
+        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, false, sourceCard.getTimestamp());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;

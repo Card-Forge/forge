@@ -3758,7 +3758,6 @@ public class CardFactoryUtil {
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 newSA.setIntrinsic(intrinsic);
 
-                newSA.setTemporary(intrinsic);
                 inst.addSpellAbility(newSA);
                 
             }
@@ -3788,8 +3787,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.equals("Aftermath") && card.getCurrentStateName().equals(CardStateName.RightSplit)) {
             // Aftermath does modify existing SA, and does not add new one
@@ -3809,8 +3806,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
@@ -3835,8 +3830,6 @@ public class CardFactoryUtil {
             awakenSpell.setBasicSpell(false);
             awakenSpell.setPayCosts(awakenCost);
             awakenSpell.setIntrinsic(intrinsic);
-
-            awakenSpell.setTemporary(!intrinsic);
             inst.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
             final String[] params = keyword.split(":");
@@ -3854,8 +3847,6 @@ public class CardFactoryUtil {
             sa.setStackDescription("Bestow - " + card.getName());
             sa.setBasicSpell(false);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
@@ -3865,8 +3856,6 @@ public class CardFactoryUtil {
 
             final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Emerge")) {
             final String[] kw = keyword.split(":");
@@ -3882,8 +3871,6 @@ public class CardFactoryUtil {
             newSA.setPayCosts(new Cost(costStr, false));
             newSA.setDescription(sa.getDescription() + " (Emerge)");
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Embalm")) {
             final String[] kw = keyword.split(":");
@@ -3896,8 +3883,6 @@ public class CardFactoryUtil {
             "| SpellDescription$ (" + inst.getReminderText() + ")" ; 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.equals("Epic")) {
             // Epic does modify existing SA, and does not add new one
@@ -3952,7 +3937,6 @@ public class CardFactoryUtil {
             // instantiate attach ability
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Eternalize")) {
             final String[] kw = keyword.split(":");
@@ -3982,8 +3966,6 @@ public class CardFactoryUtil {
             .append("| SpellDescription$ (").append(inst.getReminderText()).append(")"); 
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
@@ -4005,8 +3987,6 @@ public class CardFactoryUtil {
             newSA.setBasicSpell(false);
             newSA.setEvoke(true);
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fortify")) {
             String[] k = keyword.split(":");
@@ -4027,14 +4007,10 @@ public class CardFactoryUtil {
  
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Fuse") && card.getCurrentStateName().equals(CardStateName.Original)) {
             final SpellAbility sa = AbilityFactory.buildFusedAbility(card);
             card.addSpellAbility(sa);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Haunt")) {            
             if (!card.isCreature() && intrinsic) {
@@ -4067,8 +4043,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
-            
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Monstrosity")) {
             final String[] k = keyword.split(":");
@@ -4103,8 +4077,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
         } else if (keyword.startsWith("Morph")) {
@@ -4146,8 +4118,6 @@ public class CardFactoryUtil {
 
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
 
             // extra secondary effect for Commander Ninjutsu
@@ -4161,8 +4131,6 @@ public class CardFactoryUtil {
 
                 sa = AbilityFactory.getAbility(effect, card);
                 sa.setIntrinsic(intrinsic);
-
-                sa.setTemporary(!intrinsic);
                 inst.addSpellAbility(sa);
             }
         } else if (keyword.startsWith("Outlast")) {
@@ -4187,8 +4155,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
 
         } else if (keyword.startsWith("Prowl")) {
@@ -4212,7 +4178,6 @@ public class CardFactoryUtil {
             newSA.setProwl(true);
 
             newSA.setIntrinsic(intrinsic);
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Reinforce")) {
             final String[] k = keyword.split(":");
@@ -4234,8 +4199,6 @@ public class CardFactoryUtil {
             if (n.equals("X")) {
                 sa.setSVar("X", "Count$xPaid");
             }
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
@@ -4250,8 +4213,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("ScavengeX", "Count$CardPower");
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
 
         } else if (keyword.startsWith("Spectacle")) {
@@ -4267,8 +4228,6 @@ public class CardFactoryUtil {
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
 
         } else if (keyword.startsWith("Surge")) {
@@ -4284,8 +4243,6 @@ public class CardFactoryUtil {
             newSA.setDescription(desc);
             
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
             
         } else if (keyword.startsWith("Suspend") && !keyword.equals("Suspend")) {
@@ -4336,8 +4293,6 @@ public class CardFactoryUtil {
             suspend.setStackDescription(sbStack.toString());
 
             suspend.getRestrictions().setZone(ZoneType.Hand);
-
-            suspend.setTemporary(!intrinsic);
             inst.addSpellAbility(suspend);
         } else if (keyword.startsWith("Transfigure")) {
             final String[] k = keyword.split(":");
@@ -4351,8 +4306,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("TransfigureX", "Count$CardManaCost");
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Transmute")) {
             final String[] k = keyword.split(":");
@@ -4367,8 +4320,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("TransmuteX", "Count$CardManaCost");
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Unearth")) {
             final String[] k = keyword.split(":");
@@ -4383,8 +4334,6 @@ public class CardFactoryUtil {
             
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
         } else if (keyword.endsWith(" offering")) {
@@ -4403,8 +4352,6 @@ public class CardFactoryUtil {
             newSA.setPayCosts(sa.getPayCosts());
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
             
         } else if (keyword.startsWith("Crew")) {
@@ -4420,8 +4367,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
         } else if (keyword.startsWith("Cycling")) {
@@ -4440,8 +4385,6 @@ public class CardFactoryUtil {
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
         } else if (keyword.startsWith("TypeCycling")) {
@@ -4466,8 +4409,6 @@ public class CardFactoryUtil {
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
             sa.setIntrinsic(intrinsic);
-
-            sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
         }

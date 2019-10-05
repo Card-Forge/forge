@@ -55,7 +55,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
         forge.game.trigger.Trigger.resetIDs();
         TriggerHandler trigHandler = game.getTriggerHandler();
         trigHandler.clearDelayedTrigger();
-        trigHandler.cleanUpTemporaryTriggers();
         trigHandler.suppressMode(TriggerType.ChangesZone);
 
         game.getStack().reset();

@@ -162,25 +162,15 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // remove abilities
             final List<SpellAbility> removedAbilities = Lists.newArrayList();
-            boolean clearAbilities = sa.hasParam("OverwriteAbilities");
             boolean clearSpells = sa.hasParam("OverwriteSpells");
             boolean removeAll = sa.hasParam("RemoveAllAbilities");
             boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
 
-            if (clearAbilities || clearSpells || removeAll) {
-                for (final SpellAbility ab : c.getSpellAbilities()) {
-                    if (removeAll
-                            || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())
-                            || (ab.isAbility() && clearAbilities)
-                            || (ab.isSpell() && clearSpells)) {
-                        ab.setTemporarilySuppressed(true);
-                        removedAbilities.add(ab);
-                    }
-                }
+            if (clearSpells) {
+                removedAbilities.addAll(Lists.newArrayList(c.getSpells()));
             }
 
             if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
-                c.removeSpellAbility(sa);
                 removedAbilities.add(sa);
             }
 
@@ -189,9 +179,7 @@ public class AnimateEffect extends AnimateEffectBase {
             if (abilities.size() > 0) {
                 for (final String s : abilities) {
                     final String actualAbility = source.getSVar(s);
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
-                    addedAbilities.add(grantedAbility);
-                    c.addSpellAbility(grantedAbility);
+                    addedAbilities.add(AbilityFactory.getAbility(actualAbility, c));
                 }
             }
 
@@ -201,7 +189,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 for (final String s : triggers) {
                     final String actualTrigger = source.getSVar(s);
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
-                    addedTriggers.add(c.addTrigger(parsedTrigger));
+                    addedTriggers.add(parsedTrigger);
                 }
             }
 
@@ -211,19 +199,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 for (final String s : replacements) {
                     final String actualReplacement = source.getSVar(s);
                     final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, c, false);
-                    addedReplacements.add(c.addReplacementEffect(parsedReplacement));
-                }
-            }
-
-            // suppress triggers from the animated card
-            final List<Trigger> removedTriggers = Lists.newArrayList();
-            if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
-                for (final Trigger trigger : c.getTriggers()) {
-                    if (removeIntrinsic && !trigger.isIntrinsic()) {
-                        continue;
-                    }
-                    trigger.setSuppressed(true);  // why this not TemporarilySuppressed?
-                    removedTriggers.add(trigger);
+                    addedReplacements.add(parsedReplacement);
                 }
             }
 
@@ -233,7 +209,7 @@ public class AnimateEffect extends AnimateEffectBase {
             if (stAbs.size() > 0) {
                 for (final String s : stAbs) {
                     final String actualAbility = source.getSVar(s);
-                    addedStaticAbilities.add(c.addStaticAbility(actualAbility));
+                    addedStaticAbilities.add(new StaticAbility(actualAbility, c));
                 }
             }
 
@@ -251,30 +227,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 }
             }
 
-            // suppress static abilities from the animated card
-            final List<StaticAbility> removedStatics = Lists.newArrayList();
-            if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
-                for (final StaticAbility stAb : c.getStaticAbilities()) {
-                    if (removeIntrinsic && !stAb.isIntrinsic()) {
-                        continue;
-                    }
-                    stAb.setTemporarilySuppressed(true);
-                    removedStatics.add(stAb);
-                }
-            }
-
-            // suppress static abilities from the animated card
-            final List<ReplacementEffect> removedReplacements = Lists.newArrayList();
-            if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
-                for (final ReplacementEffect re : c.getReplacementEffects()) {
-                    if (removeIntrinsic && !re.isIntrinsic()) {
-                        continue;
-                    }
-                    re.setTemporarilySuppressed(true);
-                    removedReplacements.add(re);
-                }
-            }
-
             // give Remembered
             if (animateRemembered != null) {
                 for (final Object o : AbilityUtils.getDefinedObjects(source, animateRemembered, sa)) {
@@ -287,34 +239,39 @@ public class AnimateEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, finalDesc, hiddenKeywords,
-                            addedAbilities, addedTriggers, addedReplacements,
-                            addedStaticAbilities, timestamp);
+                    doUnanimate(c, sa, hiddenKeywords, timestamp);
 
                     c.removeChangedName(timestamp);
                     c.updateStateForView();
 
                     game.fireEvent(new GameEventCardStatsChanged(c));
-
-                    for (final SpellAbility sa : removedAbilities) {
-                        sa.setTemporarilySuppressed(false);
-                    }
-                    // give back suppressed triggers
-                    for (final Trigger t : removedTriggers) {
-                        t.setSuppressed(false);
-                    }
-
-                    // give back suppressed static abilities
-                    for (final StaticAbility s : removedStatics) {
-                        s.setTemporarilySuppressed(false);
-                    }
-
-                    // give back suppressed replacement effects
-                    for (final ReplacementEffect re : removedReplacements) {
-                        re.setTemporarilySuppressed(false);
-                    }
                 }
             };
+
+
+            if (sa.hasParam("RevertCost")) {
+                final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
+                final String desc = this.getStackDescription(sa);
+                final SpellAbility revertSA = new AbilityStatic(c, cost) {
+                    @Override
+                    public void resolve() {
+                        unanimate.run();
+                    }
+                    @Override
+                    public String getDescription() {
+                        return cost + ": End Effect: " + desc;
+                    }
+                };
+                addedAbilities.add(revertSA);
+            }
+
+            // after unanimate to add RevertCost
+            if (removeAll || removeIntrinsic
+                    || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
+                    || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
+                c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                        addedStaticAbilities, removeAll, false, removeIntrinsic, timestamp);
+            }
 
             if (!permanent) {
                 if (sa.hasParam("UntilEndOfCombat")) {
@@ -343,22 +300,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 }
             }
 
-            if (sa.hasParam("RevertCost")) {
-            	final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
-            	final String desc = this.getStackDescription(sa);
-                final SpellAbility revertSA = new AbilityStatic(c, cost) {
-                    @Override
-                    public void resolve() {
-                        unanimate.run();
-                        c.removeSpellAbility(this);
-                    }
-                    @Override
-                    public String getDescription() {
-                        return cost + ": End Effect: " + desc;
-                    }
-                };
-                c.addSpellAbility(revertSA);
-            }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
         }

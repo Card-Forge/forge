@@ -356,31 +356,4 @@ public class ReplacementHandler {
 
         return ret;
     }
-
-    public void cleanUpTemporaryReplacements() {
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                List<ReplacementEffect> toRemove = Lists.newArrayList();
-                for (ReplacementEffect rep : c.getReplacementEffects()) {
-                    if (rep.isTemporary()) {
-                        toRemove.add(rep);
-                    }
-                }
-                for (ReplacementEffect rep : toRemove) {
-                    c.removeReplacementEffect(rep);
-                }
-                return true;
-            }
-        });
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                    c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
-                }
-                return true;
-            }
-        });
-    }
 }

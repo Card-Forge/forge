@@ -561,7 +561,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             copy.setTriggerPhases(Lists.newArrayList(validPhases));
         }
         copy.setActiveZone(validHostZones);
-        copy.setTemporary(isTemporary());
         return copy;
     }
 
