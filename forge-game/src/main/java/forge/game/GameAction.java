@@ -148,7 +148,7 @@ public class GameAction {
         }
 
         // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (c.isAdventureCard() && (ZoneType.Stack.equals(zoneFrom) || !ZoneType.Stack.equals(zoneTo))) { //fix NPE momir
+        if (c.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
             c.setState(CardStateName.Original, true);
         }
 
