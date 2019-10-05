@@ -159,14 +159,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf")) {
-            layers.add(StaticAbilityLayer.ABILITIES1);
+            layers.add(StaticAbilityLayer.ABILITIES);
         }
 
         if (hasParam("AddKeyword") || hasParam("AddAbility")
                 || hasParam("AddTrigger") || hasParam("RemoveTriggers")
                 || hasParam("RemoveKeyword") || hasParam("AddReplacementEffects")
                 || hasParam("AddStaticAbility") || hasParam("AddSVar")) {
-            layers.add(StaticAbilityLayer.ABILITIES2);
+            layers.add(StaticAbilityLayer.ABILITIES);
         }
 
         if (hasParam("CharacteristicDefining")) {
@@ -183,7 +183,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("AddHiddenKeyword")) {
             // special rule for can't have or gain
             if (getParam("AddHiddenKeyword").contains("can't have or gain")) {
-                layers.add(StaticAbilityLayer.ABILITIES1);
+                layers.add(StaticAbilityLayer.ABILITIES);
             }
             layers.add(StaticAbilityLayer.RULES);
         }
@@ -259,14 +259,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public final CardCollectionView applyContinuousAbilityBefore(final StaticAbilityLayer layer, final CardCollectionView preList) {
-        if (!shouldApplyContinuousAbility(layer, false)) {
+        if (!shouldApplyContinuousAbility(layer)) {
             return null;
         }
         return StaticAbilityContinuous.applyContinuousAbility(this, layer, preList);
     }
 
     public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer, final CardCollectionView affected) {
-        if (!shouldApplyContinuousAbility(layer, true)) {
+        if (!shouldApplyContinuousAbility(layer)) {
             return null;
         }
         return StaticAbilityContinuous.applyContinuousAbility(this, affected, layer);
@@ -286,14 +286,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         affects the specified layer, it's not suppressed, and its
      *         conditions are fulfilled.
      */
-    private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean ignoreTempSuppression) {
-        final boolean isSuppressed;
-        if (ignoreTempSuppression) {
-            isSuppressed = this.isNonTempSuppressed();
-        } else {
-            isSuppressed = this.isSuppressed();
-        }
-        return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed && this.checkConditions();
+    private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer) {
+        return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && this.checkConditions();
     }
 
     // apply the ability if it has the right mode

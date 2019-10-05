@@ -18,11 +18,8 @@ public enum StaticAbilityLayer {
     /** Layer 5 for color-changing effects. */
     COLOR,
 
-    /** Layer 6 for ability-removing and -copying effects. */
-    ABILITIES1,
-
-    /** Layer 6 for ability-granting effects. */
-    ABILITIES2,
+    /** Layer 6 for ability effects. */
+    ABILITIES,
 
     /** Layer 7a for characteristic-defining power/toughness effects. */
     CHARACTERISTIC,
@@ -37,5 +34,5 @@ public enum StaticAbilityLayer {
     RULES;
 
     public final static ImmutableList<StaticAbilityLayer> CONTINUOUS_LAYERS =
-            ImmutableList.of(COPY, CONTROL, TEXT, TYPE, COLOR, ABILITIES1, ABILITIES2, CHARACTERISTIC, SETPT, MODIFYPT, RULES);
+            ImmutableList.of(COPY, CONTROL, TEXT, TYPE, COLOR, ABILITIES, CHARACTERISTIC, SETPT, MODIFYPT, RULES);
 }

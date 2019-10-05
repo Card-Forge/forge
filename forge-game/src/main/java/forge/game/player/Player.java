@@ -1178,7 +1178,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.remove(eff);
             eff.setStaticAbilities(Lists.newArrayList());
         }
-	    this.updateZoneForView(com);
+        this.updateZoneForView(com);
     }
 
     @Override

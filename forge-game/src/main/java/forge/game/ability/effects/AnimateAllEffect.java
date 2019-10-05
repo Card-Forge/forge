@@ -14,18 +14,14 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.collect.ImmutableList;
 
 public class AnimateAllEffect extends AnimateEffectBase {
 
@@ -160,30 +156,16 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     final String actualAbility = host.getSVar(s);
                     final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                     addedAbilities.add(grantedAbility);
-                    c.addSpellAbility(grantedAbility);
                 }
             }
 
-            // remove abilities
-            final List<SpellAbility> removedAbilities = new ArrayList<>();
-            if (sa.hasParam("OverwriteAbilities") || removeAll || removeIntrinsic) {
-                for (final SpellAbility ab : c.getSpellAbilities()) {
-                    if (ab.isAbility()) {
-                        if (removeAll
-                                || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())) {
-                            ab.setTemporarilySuppressed(true);
-                            removedAbilities.add(ab);
-                        }
-                    }
-                }
-            }
             // give replacement effects
             final List<ReplacementEffect> addedReplacements = new ArrayList<>();
             if (replacements.size() > 0) {
                 for (final String s : replacements) {
                     final String actualReplacement = host.getSVar(s);
                     final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, c, false);
-                    addedReplacements.add(c.addReplacementEffect(parsedReplacement));
+                    addedReplacements.add(parsedReplacement);
                 }
             }
             // Grant triggers
@@ -192,45 +174,12 @@ public class AnimateAllEffect extends AnimateEffectBase {
                 for (final String s : triggers) {
                     final String actualTrigger = host.getSVar(s);
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
-                    addedTriggers.add(c.addTrigger(parsedTrigger));
+                    addedTriggers.add(parsedTrigger);
                 }
             }
 
-            // suppress triggers from the animated card
-            final List<Trigger> removedTriggers = new ArrayList<>();
-            if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
-                final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
-                for (final Trigger trigger : triggersToRemove) {
-                    if (removeIntrinsic && !trigger.isIntrinsic()) {
-                        continue;
-                    }
-                    trigger.setSuppressed(true); // why this not TemporarilySuppressed?
-                    removedTriggers.add(trigger);
-                }
-            }
-
-            // suppress static abilities from the animated card
-            final List<StaticAbility> removedStatics = new ArrayList<>();
-            if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
-                for (final StaticAbility stAb : c.getStaticAbilities()) {
-                    if (removeIntrinsic && !stAb.isIntrinsic()) {
-                        continue;
-                    }
-                    stAb.setTemporarilySuppressed(true);
-                    removedStatics.add(stAb);
-                }
-            }
-
-            // suppress static abilities from the animated card
-            final List<ReplacementEffect> removedReplacements = new ArrayList<>();
-            if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
-                for (final ReplacementEffect re : c.getReplacementEffects()) {
-                    if (removeIntrinsic && !re.isIntrinsic()) {
-                        continue;
-                    }
-                    re.setTemporarilySuppressed(true);
-                    removedReplacements.add(re);
-                }
+            if (!addedAbilities.isEmpty() || !addedTriggers.isEmpty() || !addedReplacements.isEmpty()) {
+                c.addChangedCardTraits(addedAbilities, null, addedTriggers, addedReplacements, null, removeAll, false, removeIntrinsic, timestamp);
             }
 
             // give sVars
@@ -247,27 +196,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, finalDesc, hiddenKeywords,
-                            addedAbilities, addedTriggers, addedReplacements,
-                            ImmutableList.of(), timestamp);
+                    doUnanimate(c, sa, hiddenKeywords, timestamp);
 
-                    for (final SpellAbility sa : removedAbilities) {
-                        sa.setTemporarilySuppressed(false);
-                    }
-                    // give back suppressed triggers
-                    for (final Trigger t : removedTriggers) {
-                        t.setSuppressed(false);
-                    }
-
-                    // give back suppressed static abilities
-                    for (final StaticAbility s : removedStatics) {
-                        s.setTemporarilySuppressed(false);
-                    }
-
-                    // give back suppressed replacement effects
-                    for (final ReplacementEffect re : removedReplacements) {
-                        re.setTemporarilySuppressed(false);
-                    }
                     game.fireEvent(new GameEventCardStatsChanged(c));
                 }
             };

@@ -1266,7 +1266,7 @@ public class ComputerUtil {
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
         int activations = sa.getActivationsThisTurn();
 
-        if (sa.isTemporary()) {
+        if (!sa.isIntrinsic()) {
         	return MyRandom.getRandom().nextFloat() >= .95; // Abilities created by static abilities have no memory
         }
 
