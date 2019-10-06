@@ -118,7 +118,7 @@ public class ReplacementHandler {
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && event.equals(replacementEffect.getMode())
                             && replacementEffect.requirementsCheck(game)
-                            && replacementEffect.canReplace(toStringMap(runParams))
+                            && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(cardZone)) {
                         possibleReplacers.add(replacementEffect);

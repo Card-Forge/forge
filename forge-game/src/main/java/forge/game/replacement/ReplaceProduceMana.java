@@ -1,5 +1,6 @@
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
@@ -29,10 +30,10 @@ public class ReplaceProduceMana extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
         //Check for tapping
         if (!hasParam("NoTapCheck")) {
-            final SpellAbility manaAbility = (SpellAbility) runParams.get("AbilityMana");
+            final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
@@ -48,14 +49,14 @@ public class ReplaceProduceMana extends ReplacementEffect {
             } catch (NumberFormatException e) {
                 intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
             }
-            int manaAmount = StringUtils.countMatches((String) runParams.get("Mana"), " ") + 1;
+            int manaAmount = StringUtils.countMatches((String) runParams.get(AbilityKey.Mana), " ") + 1;
             if (!Expressions.compare(manaAmount, operator, intoperand)) {
                 return false;
             }
         }
 
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }

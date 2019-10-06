@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -121,7 +122,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the run params
      * @return true, if successful
      */
-    public abstract boolean canReplace(final Map<String, Object> runParams);
+    public abstract boolean canReplace (final Map<AbilityKey, Object> runParams);
 
     /**
      * <p>

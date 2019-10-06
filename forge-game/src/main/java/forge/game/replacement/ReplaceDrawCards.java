@@ -17,6 +17,7 @@
  */
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -43,14 +44,14 @@ public class ReplaceDrawCards extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("Number")) {
-            final int n = (Integer)runParams.get("Number");
+            final int n = (Integer)runParams.get(AbilityKey.Number);
             String comparator = getParam("Number");
             final String operator = comparator.substring(0, 2);
             final int operandValue = Integer.parseInt(comparator.substring(2));

@@ -1,5 +1,6 @@
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 
 import forge.game.player.Player;
@@ -28,9 +29,9 @@ public class ReplaceMoved extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
         final Player controller = getHostCard().getController();
-        final Card affected = (Card) runParams.get("Affected");
+        final Card affected = (Card) runParams.get(AbilityKey.Affected);
 
         if (hasParam("ValidCard")) {
             if (!matchesValid(affected, getParam("ValidCard").split(","), getHostCard())) {
@@ -39,27 +40,27 @@ public class ReplaceMoved extends ReplacementEffect {
         }
 
         if (hasParam("ValidLKI")) {
-            if (!matchesValid(runParams.get("CardLKI"), getParam("ValidLKI").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.CardLKI), getParam("ValidLKI").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Origin")) {
-            ZoneType zt = (ZoneType) runParams.get("Origin");
+            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Origin);
             if (!ZoneType.listValueOf(getParam("Origin")).contains(zt)) {
                 return false;
             }
         }        
 
         if (hasParam("Destination")) {
-            ZoneType zt = (ZoneType) runParams.get("Destination");
+            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Destination);
             if (!ZoneType.listValueOf(getParam("Destination")).contains(zt)) {
                 return false;
             }
         }
         
         if (hasParam("ExcludeDestination")) {
-            ZoneType zt = (ZoneType) runParams.get("Destination");
+            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Destination);
             if (ZoneType.listValueOf(getParam("ExcludeDestination")).contains(zt)) {
                 return false;
             }
@@ -67,29 +68,29 @@ public class ReplaceMoved extends ReplacementEffect {
         
         if (hasParam("Fizzle")) {
             // if Replacement look for Fizzle
-            if (!runParams.containsKey("Fizzle")) {
+            if (!runParams.containsKey(AbilityKey.Fizzle)) {
                 return false;
             }
-            Boolean val = (Boolean) runParams.get("Fizzle");
+            Boolean val = (Boolean) runParams.get(AbilityKey.Fizzle);
             if ("True".equals(getParam("Fizzle")) != val) {
                 return false;
             }
         }
         
         if (hasParam("ValidStackSa")) {
-            if (!runParams.containsKey("StackSa")) {
+            if (!runParams.containsKey(AbilityKey.StackSa)) {
                 return false;
             }
-            if (!((SpellAbility)runParams.get("StackSa")).isValid(getParam("ValidStackSa").split(","), getHostCard().getController(), getHostCard(), null)) {
+            if (!((SpellAbility)runParams.get(AbilityKey.StackSa)).isValid(getParam("ValidStackSa").split(","), getHostCard().getController(), getHostCard(), null)) {
                 return false;
             }
         }
 
         if (hasParam("Cause")) {
-            if (!runParams.containsKey("Cause")) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
                 return false;
             }
-            SpellAbility cause = (SpellAbility) runParams.get("Cause");
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             if (cause == null) {
                 return false;
             }
@@ -99,8 +100,8 @@ public class ReplaceMoved extends ReplacementEffect {
         }
 
         if (hasParam("NotCause")) {
-            if (runParams.containsKey("Cause")) {
-                SpellAbility cause = (SpellAbility) runParams.get("Cause");
+            if (runParams.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
                 if (cause != null) {
                     if (cause.isValid(getParam("NotCause").split(","), controller, getHostCard(), null)) {
                         return false;

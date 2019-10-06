@@ -17,6 +17,7 @@
  */
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.phase.PhaseType;
@@ -44,14 +45,14 @@ public class ReplaceUntap extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("UntapStep")) {
-            final Object o = runParams.get("Affected");
+            final Object o = runParams.get(AbilityKey.Affected);
             //normally should not happen, but protect from possible crash.
             if (!(o instanceof Card)) {
                 return false;
