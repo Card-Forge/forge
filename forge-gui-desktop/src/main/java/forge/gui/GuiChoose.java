@@ -288,16 +288,12 @@ public class GuiChoose {
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	gui.setSelectables(manipulable);
-	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
-		@Override 
-		public List<CardView> call() {
-		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
-		    //		tempArea.pack();
-		    tempArea.show();
-		    final List<CardView> cardList = tempArea.getCards();
-		    return cardList;
-		}
-	    };
+	final Callable<List<CardView>> callable = () -> {
+        ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
+        //		tempArea.pack();
+        tempArea.setVisible(true);
+        return tempArea.getCards();
+    };
 	final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
 	gui.clearSelectables();
