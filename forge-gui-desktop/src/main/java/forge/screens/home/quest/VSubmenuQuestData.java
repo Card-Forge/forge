@@ -17,7 +17,6 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
-import forge.util.storage.IStorage;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.text.WordUtils;
@@ -243,17 +242,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<>();
-        final IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
-        for (final PreconDeck preconDeck : preconDecks) {
+        for (final PreconDeck preconDeck : QuestController.getPrecons()) {
             if (QuestController.getPreconDeals(preconDeck).getMinWins() > 0) {
                 continue;
             }
             final String name = preconDeck.getName();
             cbxPreconDeck.addItem(name);
             String description = preconDeck.getDescription();
-            description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
-            preconDescriptions.put(name, description);
+            preconDescriptions.put(name, wordWrapAsHTML(description));
         }
 
         // The cbx needs strictly typed renderer
@@ -361,6 +358,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
 
         pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
+    }
+
+    private static String wordWrapAsHTML(String str) {
+        return "<html>" + WordUtils.wrap(str, 40, "<br>", false, " ") + "</html>";
     }
 
     /* (non-Javadoc)
