@@ -1587,7 +1587,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(final String prompt,
-            final List<ReplacementEffect> possibleReplacers, final Map<String, Object> runParams) {
+            final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;

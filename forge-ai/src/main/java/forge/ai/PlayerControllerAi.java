@@ -866,8 +866,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams) {
-        return brains.chooseSingleReplacementEffect(possibleReplacers, runParams);
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+        return brains.chooseSingleReplacementEffect(possibleReplacers);
     }
 
     @Override

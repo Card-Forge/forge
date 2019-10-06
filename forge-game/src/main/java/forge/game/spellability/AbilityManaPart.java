@@ -128,11 +128,10 @@ public class AbilityManaPart implements java.io.Serializable {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Mana", afterReplace);
-        repParams.put("Affected", source);
-        repParams.put("Player", player);
-        repParams.put("AbilityMana", sa);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+        repParams.put(AbilityKey.Mana, afterReplace);
+        repParams.put(AbilityKey.Player, player);
+        repParams.put(AbilityKey.AbilityMana, sa);
         if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
             return;
         }

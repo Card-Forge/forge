@@ -2,9 +2,8 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -31,10 +30,10 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         String varValue = sa.getParamOrDefault("VarName", "1");
 
         @SuppressWarnings("unchecked")
-        Map<String, Object> originalParams = (Map<String, Object>) sa.getReplacingObject("OriginalParams");
-        Map<String, Object> params = Maps.newHashMap(originalParams);
+        Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
+        Map<AbilityKey, Object> params = AbilityKey.newMap(originalParams);
         
-        Integer dmg = (Integer) sa.getReplacingObject("DamageAmount");
+        Integer dmg = (Integer) sa.getReplacingObject(AbilityKey.DamageAmount);
                 
         int prevent = AbilityUtils.calculateAmount(card, varValue, sa);
         
@@ -54,10 +53,10 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
 
         // no damage for original target anymore
         if (dmg <= 0) {
-            originalParams.put("ReplacementResult", ReplacementResult.Replaced);
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);
             return;
         }
-        params.put("DamageAmount", dmg);
+        params.put(AbilityKey.DamageAmount, dmg);
 
 
         //try to call replacementHandler with new Params
@@ -65,16 +64,16 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         switch (result) {
         case NotReplaced:
         case Updated: {
-            for (Map.Entry<String, Object> e : params.entrySet()) {
+            for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
                 originalParams.put(e.getKey(), e.getValue());
             }
             // effect was updated
-            originalParams.put("ReplacementResult", ReplacementResult.Updated);
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
             break;
         }
         default:
             // effect was replaced with something else
-            originalParams.put("ReplacementResult", result);
+            originalParams.put(AbilityKey.ReplacementResult, result);
             break;
         }
     }

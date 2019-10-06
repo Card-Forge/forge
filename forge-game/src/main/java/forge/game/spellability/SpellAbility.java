@@ -143,7 +143,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
-    private HashMap<String, Object> replacingObjects = Maps.newHashMap();
+    private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -593,17 +593,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggerRemembered = Lists.newArrayList();
     }
 
-    public HashMap<String, Object> getReplacingObjects() {
+    public Map<AbilityKey, Object> getReplacingObjects() {
         return replacingObjects;
     }
-    public boolean hasReplacingObject(final String type) {
-        return replacingObjects.containsKey(type);
-    }
-    public Object getReplacingObject(final String type) {
+    public Object getReplacingObject(final AbilityKey type) {
         final Object res = replacingObjects.get(type);
         return res;
     }
-    public void setReplacingObject(final String type, final Object o) {
+
+    public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
     }
 

@@ -3,9 +3,8 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -36,10 +35,10 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
         String varValue = sa.getParamOrDefault("VarName", "1");
 
         @SuppressWarnings("unchecked")
-        Map<String, Object> originalParams = (Map<String, Object>) sa.getReplacingObject("OriginalParams");
-        Map<String, Object> params = Maps.newHashMap(originalParams);
+        Map<AbilityKey, Object> originalParams = (Map<AbilityKey , Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
+        Map<AbilityKey, Object> params = AbilityKey.newMap(originalParams);
         
-        Integer dmg = (Integer) sa.getReplacingObject("DamageAmount");
+        Integer dmg = (Integer) sa.getReplacingObject(AbilityKey.DamageAmount);
         
         
         int prevent = AbilityUtils.calculateAmount(card, varValue, sa);
@@ -57,15 +56,15 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
                 card.setSVar(varValue, "Number$" + prevent);
             }
             
-            Card sourceLKI = (Card) sa.getReplacingObject("Source");
+            Card sourceLKI = (Card) sa.getReplacingObject(AbilityKey.Source);
 
-            CardDamageMap damageMap = (CardDamageMap) originalParams.get("DamageMap");
-            CardDamageMap preventMap = (CardDamageMap) originalParams.get("PreventMap");
-            GameEntityCounterTable counterTable = (GameEntityCounterTable) originalParams.get("CounterTable");
-            SpellAbility cause = (SpellAbility) originalParams.get("Cause");
+            CardDamageMap damageMap = (CardDamageMap) originalParams.get(AbilityKey.DamageMap);
+            CardDamageMap preventMap = (CardDamageMap) originalParams.get(AbilityKey.PreventMap);
+            GameEntityCounterTable counterTable = (GameEntityCounterTable) originalParams.get(AbilityKey.CounterTable);
+            SpellAbility cause = (SpellAbility) originalParams.get(AbilityKey.Cause);
             
-            boolean isCombat = (Boolean) originalParams.get("IsCombat");
-            boolean noPrevention = (Boolean) originalParams.get("NoPreventDamage");
+            boolean isCombat = (Boolean) originalParams.get(AbilityKey.IsCombat);
+            boolean noPrevention = (Boolean) originalParams.get(AbilityKey.NoPreventDamage);
             
             GameEntity obj = (GameEntity) list.get(0);
 
@@ -74,26 +73,26 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
 
         // no damage for original target anymore
         if (dmg <= 0) {
-            originalParams.put("ReplacementResult", ReplacementResult.Replaced);
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);
             return;
         }
-        params.put("DamageAmount", dmg);
+        params.put(AbilityKey.DamageAmount, dmg);
 
         //try to call replacementHandler with new Params
         ReplacementResult result = game.getReplacementHandler().run(event, params);
         switch (result) {
         case NotReplaced:
         case Updated: {
-            for (Map.Entry<String, Object> e : params.entrySet()) {
+            for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
                 originalParams.put(e.getKey(), e.getValue());
             }
             // effect was updated
-            originalParams.put("ReplacementResult", ReplacementResult.Updated);
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
             break;
         }
         default:
             // effect was replaced with something else
-            originalParams.put("ReplacementResult", result);
+            originalParams.put(AbilityKey.ReplacementResult, result);
             break;
         }
     }

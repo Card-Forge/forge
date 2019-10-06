@@ -689,9 +689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (result && runTriggers) {
                 // Run replacement effects
-                Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1241,18 +1239,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             addAmount = 0; // As per rule 107.1b
             return 0;
         }
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", source);
-        repParams.put("CounterType", counterType);
-        repParams.put("CounterNum", addAmount);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.CounterType, counterType);
+        repParams.put(AbilityKey.CounterNum, addAmount);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
-            addAmount = (int) repParams.get("CounterNum");
+            addAmount = (int) repParams.get(AbilityKey.CounterNum);
             break;
         }
         default:
@@ -3611,10 +3608,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!tapped) { return; }
 
         // Run Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
 

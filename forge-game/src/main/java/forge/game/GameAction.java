@@ -55,8 +55,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 /**
  * Methods for common actions performed during a game.
  * 
@@ -292,8 +290,7 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-            repParams.put(AbilityKey.Affected, copied);
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(copied);
             repParams.put(AbilityKey.CardLKI, lastKnownInfo);
             repParams.put(AbilityKey.Cause, cause);
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
@@ -303,7 +300,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -1389,11 +1386,10 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Source", sa);
-        repRunParams.put("Card", c);
-        repRunParams.put("Affected", c);
-        repRunParams.put("Regeneration", regenerate);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        repRunParams.put(AbilityKey.Source, sa);
+        repRunParams.put(AbilityKey.Affected, c);
+        repRunParams.put(AbilityKey.Regeneration, regenerate);
 
         if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
