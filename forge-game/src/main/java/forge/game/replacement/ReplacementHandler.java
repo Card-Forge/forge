@@ -41,8 +41,6 @@ import com.google.common.collect.Sets;
 
 import java.util.*;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 public class ReplacementHandler {
     private final Game game;
     /**
