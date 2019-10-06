@@ -19,7 +19,6 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
@@ -362,22 +361,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
     }
 
+    final static Pattern patternToWrapOn = Pattern.compile(" ");
     private static String wordWrapAsHTML(String str) {
         String result = null;
         int wrapLength = 40;
         String newLineStr = "<br>";
-        String wrapOn = " ";
         if (str != null) {
-            if (newLineStr == null) {
-                newLineStr = System.lineSeparator();
-            }
-            if (wrapLength < 1) {
-                wrapLength = 1;
-            }
-            if (StringUtils.isBlank(wrapOn)) {
-                wrapOn = " ";
-            }
-            final Pattern patternToWrapOn = Pattern.compile(wrapOn);
             final int inputLineLength = str.length();
             int offset = 0;
             final StringBuilder wrappedLine = new StringBuilder(inputLineLength + 32);
@@ -408,27 +397,19 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
                     offset = spaceToWrapAt + 1;
 
                 } else {
-                    // really long word or URL
-                    if (false) {
-                        // wrap really long word one line at a time
-                        wrappedLine.append(str, offset, wrapLength + offset);
-                        wrappedLine.append(newLineStr);
-                        offset += wrapLength;
-                    } else {
-                        // do not wrap really long word, just extend beyond limit
-                        matcher = patternToWrapOn.matcher(str.substring(offset + wrapLength));
-                        if (matcher.find()) {
-                            spaceToWrapAt = matcher.start() + offset + wrapLength;
-                        }
+                    // do not wrap really long word, just extend beyond limit
+                    matcher = patternToWrapOn.matcher(str.substring(offset + wrapLength));
+                    if (matcher.find()) {
+                        spaceToWrapAt = matcher.start() + offset + wrapLength;
+                    }
 
-                        if (spaceToWrapAt >= 0) {
-                            wrappedLine.append(str, offset, spaceToWrapAt);
-                            wrappedLine.append(newLineStr);
-                            offset = spaceToWrapAt + 1;
-                        } else {
-                            wrappedLine.append(str, offset, str.length());
-                            offset = inputLineLength;
-                        }
+                    if (spaceToWrapAt >= 0) {
+                        wrappedLine.append(str, offset, spaceToWrapAt);
+                        wrappedLine.append(newLineStr);
+                        offset = spaceToWrapAt + 1;
+                    } else {
+                        wrappedLine.append(str, offset, str.length());
+                        offset = inputLineLength;
                     }
                 }
             }// Whatever is left in line is short enough to just pass through
