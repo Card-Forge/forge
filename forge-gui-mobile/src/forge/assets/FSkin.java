@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.text.WordUtils;
+import forge.util.WordUtil;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -101,7 +101,7 @@ public class FSkin {
                     allSkins = new ArrayList<>();
                     final List<String> skinDirectoryNames = getSkinDirectoryNames();
                     for (final String skinDirectoryName : skinDirectoryNames) {
-                        allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
+                        allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
                     }
                     Collections.sort(allSkins);
                 }
