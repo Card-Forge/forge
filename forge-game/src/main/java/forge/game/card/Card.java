@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.*;
 import forge.GameCommand;
@@ -121,6 +122,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
     private final NavigableMap<Long, String> changedCardNames = Maps.newTreeMap();
     private final Map<Long, KeywordsChange> changedCardKeywords = Maps.newTreeMap();
+    private final Map<Long, CardTraitChanges> changedCardTraits = Maps.newTreeMap();
     private final Map<Long, CardColor> changedCardColors = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
@@ -687,9 +689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (result && runTriggers) {
                 // Run replacement effects
-                Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1012,28 +1012,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final FCollectionView<Trigger> getTriggers() {
         return currentState.getTriggers();
     }
-    // only used for LKI
-    public final void setTriggers(final Iterable<Trigger> trigs, boolean intrinsicOnly) {
-        final FCollection<Trigger> copyList = new FCollection<>();
-        for (final Trigger t : trigs) {
-            if (!intrinsicOnly || t.isIntrinsic()) {
-                copyList.add(t.copy(this, true));
-            }
-        }
-        currentState.setTriggers(copyList);
-    }
     public final Trigger addTrigger(final Trigger t) {
-        final Trigger newtrig = t.copy(this, false);
-        currentState.addTrigger(newtrig);
-        return newtrig;
-    }
-    public final void moveTrigger(final Trigger t) {
-        t.setHostCard(this);
         currentState.addTrigger(t);
+        return t;
     }
+    @Deprecated
     public final void removeTrigger(final Trigger t) {
         currentState.removeTrigger(t);
     }
+    @Deprecated
     public final void removeTrigger(final Trigger t, final CardStateName state) {
         getState(state).removeTrigger(t);
     }
@@ -1050,6 +1037,25 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateTriggers(List<Trigger> list, CardState state) {
+
+        boolean removeIntrinsic = false;
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveIntrinsic()) {
+                removeIntrinsic = true;
+                break;
+            }
+        }
+        if (removeIntrinsic) {
+            list.clear();
+        }
+
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveAll()) {
+                list.clear();
+            }
+            list.addAll(ck.getTriggers());
+        }
+
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getTriggers());
         }
@@ -1233,18 +1239,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             addAmount = 0; // As per rule 107.1b
             return 0;
         }
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", source);
-        repParams.put("CounterType", counterType);
-        repParams.put("CounterNum", addAmount);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.CounterType, counterType);
+        repParams.put(AbilityKey.CounterNum, addAmount);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
-            addAmount = (int) repParams.get("CounterNum");
+            addAmount = (int) repParams.get(AbilityKey.CounterNum);
             break;
         }
         default:
@@ -2379,10 +2384,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    @Deprecated
     public final void removeSpellAbility(final SpellAbility a) {
         removeSpellAbility(a, true);
     }
 
+    @Deprecated
     public final void removeSpellAbility(final SpellAbility a, final boolean updateView) {
         if (currentState.removeSpellAbility(a) && updateView) {
             currentState.getView().updateAbilityText(this, currentState);
@@ -2408,15 +2415,44 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
+
+        boolean removeIntrinsic = false;
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveIntrinsic()) {
+                removeIntrinsic = true;
+                break;
+            }
+        }
+        if (removeIntrinsic) {
+            list.clear();
+        }
+
         // do Basic Land Abilities there
-        if (mana == null || mana == true) {
+        if (null == mana || true == mana) {
             updateBasicLandAbilities(list, state);
+        }
+
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveNonMana()) {
+                // List only has nonMana
+                if (null == mana) {
+                    List<SpellAbility> toRemove = Lists.newArrayList(
+                            Iterables.filter(list, Predicates.not(SpellAbilityPredicates.isManaAbility())));
+                    list.removeAll(toRemove);
+                } else if (false == mana) {
+                    list.clear();
+                }
+            } else if (ck.isRemoveAll()) {
+                list.clear();
+            }
+            list.removeAll(ck.getRemovedAbilities());
+            list.addAll(ck.getAbilities());
         }
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
         if (isInZone(ZoneType.Battlefield)) {
-            if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
+            if ((null == mana || false == mana) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
                 for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
                     if (sa.isManifestUp() || sa.isMorphUp()) {
                         list.add(sa);
@@ -2729,14 +2765,14 @@ public class Card extends GameEntity implements Comparable<Card> {
              *
              * Control, Controller: "Control" is the system that determines who gets to use an object in the game.
              * An object's "controller" is the player who currently controls it. See rule 108.4.
-             * 
-             * 400.6. If an object would move from one zone to another, determine what event is moving the object. 
-             * If the object is moving to a public zone and its owner will be able to look at it in that zone, 
-             * its owner looks at it to see if it has any abilities that would affect the move. 
-             * If the object is moving to the battlefield, each other player who will be able to look at it in that 
-             * zone does so. Then any appropriate replacement effects, whether they come from that object or from 
-             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or 
-             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER 
+             *
+             * 400.6. If an object would move from one zone to another, determine what event is moving the object.
+             * If the object is moving to a public zone and its owner will be able to look at it in that zone,
+             * its owner looks at it to see if it has any abilities that would affect the move.
+             * If the object is moving to the battlefield, each other player who will be able to look at it in that
+             * zone does so. Then any appropriate replacement effects, whether they come from that object or from
+             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or
+             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER
              * IF IT HAS NO CONTROLLER—chooses which effect to apply, and what that effect does.
              */
             if (controller != null) {
@@ -3572,10 +3608,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!tapped) { return; }
 
         // Run Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -3587,6 +3620,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         setTapped(false);
         getGame().fireEvent(new GameEventCardTapped(this, false));
+    }
+
+    public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+            Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
+            boolean removeAll, boolean removeNonMana, boolean removeIntrinsic, long timestamp) {
+        changedCardTraits.put(timestamp, new CardTraitChanges(
+            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, removeIntrinsic
+        ));
+        // update view
+        updateAbilityTextForView();
+    }
+
+    public final boolean removeChangedCardTraits(long timestamp) {
+        return changedCardTraits.remove(timestamp) != null;
+    }
+
+    public final Map<Long, CardTraitChanges> getChangedCardTraits() {
+        return changedCardTraits;
+    }
+
+    public final void setChangedCardTraits(Map<Long, CardTraitChanges> changes) {
+        changedCardTraits.clear();
+        for (Entry<Long, CardTraitChanges> e : changes.entrySet()) {
+            changedCardTraits.put(e.getKey(), e.getValue().copy(this, true));
+        }
     }
 
     // keywords are like flying, fear, first strike, etc...
@@ -4018,11 +4076,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.addStaticAbility(stAb);
         return stAb;
     }
+
+    @Deprecated
     public final void removeStaticAbility(StaticAbility stAb) {
         currentState.removeStaticAbility(stAb);
     }
 
     public void updateStaticAbilities(List<StaticAbility> list, CardState state) {
+        boolean removeIntrinsic = false;
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveIntrinsic()) {
+                removeIntrinsic = true;
+                break;
+            }
+        }
+        if (removeIntrinsic) {
+            list.clear();
+        }
+
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveAll()) {
+                list.clear();
+            }
+            list.addAll(ck.getStaticAbilities());
+        }
+
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getStaticAbilities());
         }
@@ -5641,24 +5719,35 @@ public class Card extends GameEntity implements Comparable<Card> {
         return currentState.getReplacementEffects();
     }
 
-    public void setReplacementEffects(final Iterable<ReplacementEffect> res) {
-        currentState.clearReplacementEffects();
-        for (final ReplacementEffect replacementEffect : res) {
-            if (replacementEffect.isIntrinsic()) {
-                addReplacementEffect(replacementEffect.copy(this, false));
-            }
-        }
-    }
-
     public ReplacementEffect addReplacementEffect(final ReplacementEffect replacementEffect) {
         currentState.addReplacementEffect(replacementEffect);
         return replacementEffect;
     }
+
+    @Deprecated
     public void removeReplacementEffect(ReplacementEffect replacementEffect) {
         currentState.removeReplacementEffect(replacementEffect);
     }
 
     public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
+
+        boolean removeIntrinsic = false;
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveIntrinsic()) {
+                removeIntrinsic = true;
+                break;
+            }
+        }
+        if (removeIntrinsic) {
+            list.clear();
+        }
+
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveAll()) {
+                list.clear();
+            }
+            list.addAll(ck.getReplacements());
+        }
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getReplacements());
         }
@@ -6294,27 +6383,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void removeWithFlash(Long timestamp) {
         withFlash.removeAll(timestamp);
-    }
-
-    public void unSuppressCardTraits() {
-        // specially reset basic land abilities
-        for (final SpellAbility ab : basicLandAbilities) {
-            if (ab != null) {
-                ab.setTemporarilySuppressed(false);
-            }
-        }
-        for (final SpellAbility ab : getSpellAbilities()) {
-            ab.setTemporarilySuppressed(false);
-        }
-        for (final Trigger t : getTriggers()) {
-            t.setTemporarilySuppressed(false);
-        }
-        for (final StaticAbility stA : getStaticAbilities()) {
-            stA.setTemporarilySuppressed(false);
-        }
-        for (final ReplacementEffect rE : getReplacementEffects()) {
-            rE.setTemporarilySuppressed(false);
-        }
     }
 
     public boolean canBeDiscardedBy(SpellAbility sa) {

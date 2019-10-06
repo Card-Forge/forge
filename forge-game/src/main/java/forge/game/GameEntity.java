@@ -115,25 +115,24 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention,
             final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Replacement effects
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("DamageSource", source);
-        repParams.put("DamageAmount", damage);
-        repParams.put("IsCombat", isCombat);
-        repParams.put("NoPreventDamage", !prevention);
-        repParams.put("DamageMap", damageMap);
-        repParams.put("PreventMap", preventMap);
-        repParams.put("CounterTable", counterTable);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.DamageSource, source);
+        repParams.put(AbilityKey.DamageAmount, damage);
+        repParams.put(AbilityKey.IsCombat, isCombat);
+        repParams.put(AbilityKey.NoPreventDamage, !prevention);
+        repParams.put(AbilityKey.DamageMap, damageMap);
+        repParams.put(AbilityKey.PreventMap, preventMap);
+        repParams.put(AbilityKey.CounterTable, counterTable);
         if (cause != null) {
-            repParams.put("Cause", cause);
+            repParams.put(AbilityKey.Cause, cause);
         }
 
         switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
         case NotReplaced:
             return damage;
         case Updated:
-            int newDamage = (int) repParams.get("DamageAmount");
-            GameEntity newTarget = (GameEntity) repParams.get("Affected");
+            int newDamage = (int) repParams.get(AbilityKey.DamageAmount);
+            GameEntity newTarget = (GameEntity) repParams.get(AbilityKey.Affected);
             // check if this is still the affected card or player
             if (this.equals(newTarget)) {
                 return newDamage;
@@ -169,15 +168,14 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         int restDamage = damage;
 
         // first try to replace the damage
-         final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("DamageSource", source);
-        repParams.put("DamageAmount", damage);
-        repParams.put("IsCombat", isCombat);
-        repParams.put("Prevention", true);
-        repParams.put("PreventMap", preventMap);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.DamageSource, source);
+        repParams.put(AbilityKey.DamageAmount, damage);
+        repParams.put(AbilityKey.IsCombat, isCombat);
+        repParams.put(AbilityKey.Prevention, true);
+        repParams.put(AbilityKey.PreventMap, preventMap);
         if (cause != null) {
-            repParams.put("Cause", cause);
+            repParams.put(AbilityKey.Cause, cause);
         }
 
         switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
@@ -185,7 +183,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             restDamage = damage;
             break;
         case Updated:
-            restDamage = (int) repParams.get("DamageAmount");
+            restDamage = (int) repParams.get(AbilityKey.DamageAmount);
             break;
         default:
             restDamage = 0;

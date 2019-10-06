@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -121,7 +122,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the run params
      * @return true, if successful
      */
-    public abstract boolean canReplace(final Map<String, Object> runParams);
+    public abstract boolean canReplace (final Map<AbilityKey, Object> runParams);
 
     /**
      * <p>
@@ -193,19 +194,16 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
-        res.setTemporary(isTemporary());
         return res;
     }
 
     /**
      * Sets the replacing objects.
-     *
-     * @param runParams
+     *  @param runParams
      *            the run params
      * @param spellAbility
-     *            the SpellAbility
      */
-    public void setReplacingObjects(final Map<String, Object> runParams, final SpellAbility spellAbility) {
+    public void setReplacingObjects(final Map<AbilityKey, Object> runParams, final SpellAbility spellAbility) {
         // Should be overridden by replacers that need it.
     }
 

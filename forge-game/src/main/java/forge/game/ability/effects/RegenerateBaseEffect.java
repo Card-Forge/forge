@@ -58,7 +58,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
                     + " | TriggerDescription$ " + trigSA.getDescription();
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, eff, true);
             trigger.setOverridingAbility(trigSA);
-            eff.moveTrigger(trigger);
+            eff.addTrigger(trigger);
         }
         
         // Copy text changes

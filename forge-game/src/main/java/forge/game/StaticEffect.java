@@ -23,8 +23,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 
 import java.util.ArrayList;
@@ -236,11 +234,7 @@ public class StaticEffect {
         }
 
         if (hasParam("IgnoreEffectCost")) {
-            for (final SpellAbility s : getSource().getSpellAbilities()) {
-                if (s instanceof AbilityStatic && s.isTemporary()) {
-                    getSource().removeSpellAbility(s);
-                }
-            }
+            getSource().removeChangedCardTraits(getTimestamp());
         }
 
         // modify players
@@ -273,20 +267,10 @@ public class StaticEffect {
             // the view is updated in GameAction#checkStaticAbilities to avoid flickering
 
             // remove keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword")
                     || hasParam("RemoveAllAbilities")) {
                 affectedCard.removeChangedCardKeywords(getTimestamp());
-            }
-
-            // remove abilities
-            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")) {
-                for (final SpellAbility s : affectedCard.getSpellAbilities().threadSafeIterable()) {
-                    if (s.isTemporary()) {
-                        affectedCard.removeSpellAbility(s, false);
-                    }
-                }
             }
 
             if (addHiddenKeywords != null) {
@@ -296,8 +280,10 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (hasParam("RemoveAllAbilities") || hasParam("RemoveIntrinsicAbilities")) {
-                affectedCard.unSuppressCardTraits();
+            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
+                    || hasParam("AddTrigger") || hasParam("AddStaticAbility") || hasParam("AddReplacementEffects")
+                    || hasParam("RemoveAllAbilities") || hasParam("RemoveIntrinsicAbilities")) {
+                affectedCard.removeChangedCardTraits(getTimestamp());
             }
 
             // remove Types

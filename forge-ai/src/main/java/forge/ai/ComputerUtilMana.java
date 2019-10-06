@@ -13,6 +13,7 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -1408,11 +1409,11 @@ public class ComputerUtilMana {
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
-                final Map<String, Object> repParams = new HashMap<>();
-                repParams.put("Mana", mp.getOrigProduced());
-                repParams.put("Affected", sourceCard);
-                repParams.put("Player", ai);
-                repParams.put("AbilityMana", m);
+                final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+                repParams.put(AbilityKey.Mana, mp.getOrigProduced());
+                repParams.put(AbilityKey.Affected, sourceCard);
+                repParams.put(AbilityKey.Player, ai);
+                repParams.put(AbilityKey.AbilityMana, m);
 
                 for (final ReplacementEffect replacementEffect : replacementEffects) {
                     if (replacementEffect.canReplace(repParams)) {

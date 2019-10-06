@@ -67,42 +67,6 @@ public class TriggerHandler {
     }
 
     public final void cleanUpTemporaryTriggers() {
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                boolean changed = false;
-                List<Trigger> toRemove = Lists.newArrayList();
-                for (Trigger t : c.getTriggers()) {
-                    if (t.isTemporary()) {
-                        toRemove.add(t);
-                    }
-                }
-                for (Trigger t : toRemove) {
-                    changed = true;
-                    c.removeTrigger(t);
-                }
-                if (changed) {
-                    c.updateStateForView();
-                }
-                return true;
-            }
-        });
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                boolean changed = false;
-                for (int i = 0; i < c.getTriggers().size(); i++) {
-                    if (c.getTriggers().get(i).isSuppressed()) {
-                        c.getTriggers().get(i).setTemporarilySuppressed(false);
-                        changed = true;
-                    }
-                }
-                if (changed) {
-                    c.updateStateForView();
-                }
-                return true;
-            }
-        });
     }
 
     public final boolean hasDelayedTriggers() {
@@ -698,9 +662,6 @@ public class TriggerHandler {
             if (regtrig.getHostCard().isImmutable()) {
                 Player p = regtrig.getHostCard().getController();
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
-            }
-            else {
-                regtrig.getHostCard().removeTrigger(regtrig);
             }
         }
     }

@@ -3,6 +3,7 @@ package forge.game.ability;
 import java.util.EnumMap;
 import java.util.Map;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 
 /**
@@ -37,12 +38,15 @@ public enum AbilityKey {
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
     CounteredSA("CounteredSA"),
+    CounterNum("CounterNum"),
+    CounterTable("CounterTable"),
     CounterType("CounterType"),
     Crew("Crew"),
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),
     CurrentCastSpells("CurrentCastSpells"),
     CurrentStormCount("CurrentStormCount"),
     DamageAmount("DamageAmount"),
+    DamageMap("DamageMap"),
     DamageSource("DamageSource"),
     DamageSources("DamageSources"),
     DamageTarget("DamageTarget"),
@@ -53,18 +57,23 @@ public enum AbilityKey {
     Destination("Destination"),
     Devoured("Devoured"),
     EchoPaid("EchoPaid"),
+    EffectOnly("EffectOnly"),
     Exploited("Exploited"),
     Explorer("Explorer"),
     Event("Event"),
     Fighter("Fighter"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
+    IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
     IsMadness("IsMadness"),
-    LifeAmount("LifeAmount"),
+    LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
+    LifeGained("LifeGained"),
+    Mana("Mana"),
     MonstrosityAmount("MonstrosityAmount"),
     NewCounterAmount("NewCounterAmount"),
+    NoPreventDamage("NoPreventDamage"),
     Num("Num"), // TODO confirm that this and NumThisTurn can be merged
     NumBlockers("NumBlockers"),
     NumThisTurn("NumThisTurn"),
@@ -76,10 +85,15 @@ public enum AbilityKey {
     Origin("Origin"),
     OriginalController("OriginalController"),
     OriginalDefender("OriginalDefender"),
+    OriginalParams("OriginalParams"),
     PayingMana("PayingMana"),
     Phase("Phase"),
     Player("Player"),
+    PreventMap("PreventMap"),
+    Prevention("Prevention"),
     Produced("Produced"),
+    Regeneration("Regeneration"),
+    ReplacementResult("ReplacementResult"),
     Result("Result"),
     Scheme("Scheme"),
     Source("Source"),
@@ -91,8 +105,12 @@ public enum AbilityKey {
     StackInstance("StackInstance"),
     StackSa("StackSa"),
     StackSi("StackSi"),
+    SurveilNum("SurveilNum"),
     Target("Target"),
     Targets("Targets"),
+    TgtSA("TgtSA"),
+    Token("Token"),
+    TokenNum("TokenNum"),
     Transformer("Transformer"),
     Vehicle("Vehicle"),
     Won("Won");
@@ -139,6 +157,13 @@ public enum AbilityKey {
         final Map<AbilityKey, Object> runParams = newMap();
 
         runParams.put(Card, card);
+        return runParams;
+    }
+
+    public static Map<AbilityKey, Object> mapFromAffected(GameEntity gameEntity) {
+        final Map<AbilityKey, Object> runParams = newMap();
+
+        runParams.put(Affected, gameEntity);
         return runParams;
     }
 }

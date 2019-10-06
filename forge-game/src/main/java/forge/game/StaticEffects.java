@@ -80,4 +80,13 @@ public class StaticEffects {
     public Iterable<StaticEffect> getEffects() {
         return staticEffects.values();
     }
+
+    public boolean removeStaticEffect(final StaticAbility staticAbility) {
+        final StaticEffect currentEffect = staticEffects.remove(staticAbility);
+        if (currentEffect == null) {
+            return false;
+        }
+        currentEffect.remove();
+        return true;
+    }
 }

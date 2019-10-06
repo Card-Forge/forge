@@ -2079,8 +2079,7 @@ public class AiController {
         return true;
     }
 
-    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list,
-            Map<String, Object> runParams) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list) {
         // no need to choose anything
         if (list.size() <= 1) {
             return Iterables.getFirst(list, null);

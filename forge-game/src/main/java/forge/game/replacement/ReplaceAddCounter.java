@@ -1,5 +1,6 @@
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
@@ -27,20 +28,20 @@ public class ReplaceAddCounter extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
-        if (((int) runParams.get("CounterNum")) <= 0) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        if (((int) runParams.get(AbilityKey.CounterNum)) <= 0) {
             return false;
         }
 
         if (hasParam("EffectOnly")) {
-            final Boolean effectOnly = (Boolean) runParams.get("EffectOnly");
+            final Boolean effectOnly = (Boolean) runParams.get(AbilityKey.EffectOnly);
             if (!effectOnly) {
                 return false;
             }
         }
 
         if (hasParam("ValidCard")) {
-            Object o = runParams.get("Affected");
+            Object o = runParams.get(AbilityKey.Affected);
             if (!(o instanceof Card)) {
                 return false;
             }
@@ -48,7 +49,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
                 return false;
             }
         } else if (hasParam("ValidPlayer")) {
-            Object o = runParams.get("Affected");
+            Object o = runParams.get(AbilityKey.Affected);
             if (!(o instanceof Player)) {
                 return false;
             }
@@ -59,7 +60,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
         if (hasParam("ValidCounterType")) {
             String type = getParam("ValidCounterType");
-            if (CounterType.getType(type) != runParams.get("CounterType")) {
+            if (CounterType.getType(type) != runParams.get(AbilityKey.CounterType)) {
                 return false;
             }
         }
@@ -71,14 +72,14 @@ public class ReplaceAddCounter extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("CounterNum", runParams.get("CounterNum"));
-        sa.setReplacingObject("CounterType", ((CounterType) runParams.get("CounterType")).getName());
-        Object o = runParams.get("Affected");
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.CounterNum, runParams.get(AbilityKey.CounterNum));
+        sa.setReplacingObject(AbilityKey.CounterType, ((CounterType) runParams.get(AbilityKey.CounterType)).getName());
+        Object o = runParams.get(AbilityKey.Affected);
         if (o instanceof Card) {
-            sa.setReplacingObject("Card", o);
+            sa.setReplacingObject(AbilityKey.Card, o);
         } else if (o instanceof Player) {
-            sa.setReplacingObject("Player", o);
+            sa.setReplacingObject(AbilityKey.Player, o);
         }
     }
 

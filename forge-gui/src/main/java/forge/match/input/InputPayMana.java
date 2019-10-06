@@ -1,13 +1,10 @@
 package forge.match.input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 import forge.GuiBase;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -363,11 +360,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
         final Game g = source.getGame();
-        final HashMap<String, Object> repParams = new HashMap<>();
-        repParams.put("Mana", m.getOrigProduced());
-        repParams.put("Affected", source);
-        repParams.put("Player", activator);
-        repParams.put("AbilityMana", am);
+        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        repParams.put(AbilityKey.Mana, m.getOrigProduced());
+        repParams.put(AbilityKey.Affected, source);
+        repParams.put(AbilityKey.Player, activator);
+        repParams.put(AbilityKey.AbilityMana, am);
 
         for (final Player p : g.getPlayers()) {
             for (final Card crd : p.getAllCards()) {

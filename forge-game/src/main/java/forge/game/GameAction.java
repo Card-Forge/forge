@@ -55,8 +55,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 /**
  * Methods for common actions performed during a game.
  * 
@@ -148,7 +146,7 @@ public class GameAction {
         }
 
         // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (c.isAdventureCard() && (ZoneType.Stack.equals(zoneFrom) || !ZoneType.Stack.equals(zoneTo))) { //fix NPE momir
+        if (c.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
             c.setState(CardStateName.Original, true);
         }
 
@@ -292,8 +290,7 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-            repParams.put(AbilityKey.Affected, copied);
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(copied);
             repParams.put(AbilityKey.CardLKI, lastKnownInfo);
             repParams.put(AbilityKey.Cause, cause);
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
@@ -303,7 +300,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -760,8 +757,6 @@ public class GameAction {
 
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards);
-        game.getTriggerHandler().cleanUpTemporaryTriggers();
-        game.getReplacementHandler().cleanUpTemporaryReplacements();
 
         for (final Player p : game.getPlayers()) {
             if (!game.getStack().isFrozen()) {
@@ -779,16 +774,10 @@ public class GameAction {
             public boolean visit(final Card c) {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
-                List<StaticAbility> toRemove = Lists.newArrayList();
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.isTemporary()) {
-                        toRemove.add(stAb);
-                    } else if (stAb.getParam("Mode").equals("Continuous")) {
+                    if (stAb.getParam("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
-                 }
-                 for (StaticAbility stAb : toRemove) {
-                     co.removeStaticAbility(stAb);
                  }
                  if (!co.getStaticCommandList().isEmpty()) {
                      staticList.add(co);
@@ -1397,11 +1386,10 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Source", sa);
-        repRunParams.put("Card", c);
-        repRunParams.put("Affected", c);
-        repRunParams.put("Regeneration", regenerate);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        repRunParams.put(AbilityKey.Source, sa);
+        repRunParams.put(AbilityKey.Affected, c);
+        repRunParams.put(AbilityKey.Regeneration, regenerate);
 
         if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;

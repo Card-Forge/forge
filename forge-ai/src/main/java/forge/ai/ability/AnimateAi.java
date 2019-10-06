@@ -467,26 +467,19 @@ public class AnimateAi extends SpellAbilityAi {
 
         AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 
-        // back to duplicating AnimateEffect.resolve
-        // TODO will all these abilities/triggers/replacements/etc. lead to
-        // memory leaks or unintended effects?
+
         // remove abilities
         final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        boolean clearAbilities = sa.hasParam("OverwriteAbilities");
         boolean clearSpells = sa.hasParam("OverwriteSpells");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
         boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
 
-        if (clearAbilities || clearSpells || removeAll) {
-            for (final SpellAbility ab : card.getSpellAbilities()) {
-                if (removeAll
-                        || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())
-                        || (ab.isAbility() && clearAbilities)
-                        || (ab.isSpell() && clearSpells)) {
-                    card.removeSpellAbility(ab);
-                    removedAbilities.add(ab);
-                }
-            }
+        if (clearSpells) {
+            removedAbilities.addAll(Lists.newArrayList(card.getSpells()));
+        }
+
+        if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
+            removedAbilities.add(sa);
         }
 
         // give abilities
@@ -494,9 +487,7 @@ public class AnimateAi extends SpellAbilityAi {
         if (abilities.size() > 0) {
             for (final String s : abilities) {
                 final String actualAbility = source.getSVar(s);
-                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, source);
-                addedAbilities.add(grantedAbility);
-                card.addSpellAbility(grantedAbility);
+                addedAbilities.add(AbilityFactory.getAbility(actualAbility, card));
             }
         }
 
@@ -505,8 +496,8 @@ public class AnimateAi extends SpellAbilityAi {
         if (triggers.size() > 0) {
             for (final String s : triggers) {
                 final String actualTrigger = source.getSVar(s);
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, source, false);
-                addedTriggers.add(card.addTrigger(parsedTrigger));
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, false);
+                addedTriggers.add(parsedTrigger);
             }
         }
 
@@ -515,22 +506,26 @@ public class AnimateAi extends SpellAbilityAi {
         if (replacements.size() > 0) {
             for (final String s : replacements) {
                 final String actualReplacement = source.getSVar(s);
-                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement,
-                        source, false);
-                addedReplacements.add(card.addReplacementEffect(parsedReplacement));
+                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, card, false);
+                addedReplacements.add(parsedReplacement);
             }
         }
 
-        // suppress triggers from the animated card
-        final List<Trigger> removedTriggers = Lists.newArrayList();
-        if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
-            for (final Trigger trigger : card.getTriggers()) {
-                if (removeIntrinsic && !trigger.isIntrinsic()) {
-                    continue;
-                }
-                trigger.setSuppressed(true);
-                removedTriggers.add(trigger);
+        // give static abilities (should only be used by cards to give
+        // itself a static ability)
+        final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
+        if (stAbs.size() > 0) {
+            for (final String s : stAbs) {
+                final String actualAbility = source.getSVar(s);
+                addedStaticAbilities.add(new StaticAbility(actualAbility, card));
             }
+        }
+
+        if (removeAll || removeIntrinsic
+                || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
+                || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
+            card.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                    addedStaticAbilities, removeAll, false, removeIntrinsic, timestamp);
         }
 
         // give static abilities (should only be used by cards to give
@@ -558,30 +553,6 @@ public class AnimateAi extends SpellAbilityAi {
                     actualsVar = actualsVar.split(":")[1];
                 }
                 card.setSVar(name, actualsVar);
-            }
-        }
-
-        // suppress static abilities from the animated card
-        final List<StaticAbility> removedStatics = Lists.newArrayList();
-        if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
-            for (final StaticAbility stAb : card.getStaticAbilities()) {
-                if (removeIntrinsic && !stAb.isIntrinsic()) {
-                    continue;
-                }
-                stAb.setTemporarilySuppressed(true);
-                removedStatics.add(stAb);
-            }
-        }
-
-        // suppress static abilities from the animated card
-        final List<ReplacementEffect> removedReplacements = Lists.newArrayList();
-        if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
-            for (final ReplacementEffect re : card.getReplacementEffects()) {
-                if (removeIntrinsic && !re.isIntrinsic()) {
-                    continue;
-                }
-                re.setTemporarilySuppressed(true);
-                removedReplacements.add(re);
             }
         }
         ComputerUtilCard.applyStaticContPT(game, card, null);

@@ -10,6 +10,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -1789,8 +1790,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     public boolean doReturnCommanderLogic(SpellAbility sa, Player aiPlayer) {
-        Map<String, Object> originalParams = (Map<String, Object>)sa.getReplacingObject("OriginalParams");
-        SpellAbility causeSa = (SpellAbility)originalParams.get("Cause");
+        Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>)sa.getReplacingObject(AbilityKey.OriginalParams);
+        SpellAbility causeSa = (SpellAbility)originalParams.get(AbilityKey.Cause);
         SpellAbility causeSub = null;
 
         // Squee, the Immortal: easier to recast it (the call below has to be "contains" since SA is an intrinsic effect)
@@ -1813,7 +1814,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     // A blink effect implemented using a delayed trigger
                     return !"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"));
                 }
-            } else return causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject("Card"))
+            } else return causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
                         || !causeSa.getActivatingPlayer().equals(aiPlayer);
         }
         

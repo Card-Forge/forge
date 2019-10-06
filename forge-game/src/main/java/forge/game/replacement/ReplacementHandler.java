@@ -21,6 +21,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -52,41 +53,17 @@ public class ReplacementHandler {
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
-    public ReplacementResult run(ReplacementType event, final Map<String, Object> runParams) {
-        final Object affected = runParams.get("Affected");
-        Player decider = null;
-
-        // Figure out who decides which of multiple replacements to apply
-        // as well as whether or not to apply optional replacements.
-        if (affected instanceof Player) {
-            decider = (Player) affected;
-        } else {
-            decider = ((Card) affected).getController();
-        }
-
-        // try out all layer
-        for (ReplacementLayer layer : ReplacementLayer.values()) {
-            ReplacementResult res = run(event, runParams, layer, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
-        }
-
-        return ReplacementResult.NotReplaced;
-
-    }
-
-    public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer) {
+    public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
 
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
         Card affectedLKI = null;
         Card affectedCard = null;
 
-        if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get("Destination"))) {
+        if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination))) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
-            SpellAbility cause = (SpellAbility) runParams.get("Cause");
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             if (cause != null && cause.isReplacementAbility()) {
                 final ReplacementEffect re = cause.getReplacementEffect();
                 // only return for same layer
@@ -96,13 +73,13 @@ public class ReplacementHandler {
             }
 
             // Rule 614.12 Enter the Battlefield Replacement Effects look at what the card would be on the battlefield
-            affectedCard = (Card) runParams.get("Affected");
+            affectedCard = (Card) runParams.get(AbilityKey.Affected);
             affectedLKI = CardUtil.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
-            runParams.put("Affected", affectedLKI);
+            runParams.put(AbilityKey.Affected, affectedLKI);
         }
 
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
@@ -157,7 +134,7 @@ public class ReplacementHandler {
                 for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
                     re.setHostCard(affectedCard);
                 }
-                runParams.put("Affected", affectedCard);
+                runParams.put(AbilityKey.Affected, affectedCard);
             }
             game.getAction().checkStaticAbilities(false);
         }
@@ -171,16 +148,40 @@ public class ReplacementHandler {
      *
      * @param runParams
      *            the run params,same as for triggers.
-     * @return true if the event was replaced.
+     * @return ReplacementResult, an enum that represents what happened to the replacement effect.
      */
-    public ReplacementResult run(final ReplacementType event, final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
+    public ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        final Object affected = runParams.get(AbilityKey.Affected);
+        Player decider = null;
+
+        // Figure out who decides which of multiple replacements to apply
+        // as well as whether or not to apply optional replacements.
+        if (affected instanceof Player) {
+            decider = (Player) affected;
+        } else {
+            decider = ((Card) affected).getController();
+        }
+
+        // try out all layer
+        for (ReplacementLayer layer : ReplacementLayer.values()) {
+            ReplacementResult res = run(event, runParams, layer, decider);
+            if (res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+        }
+
+        return ReplacementResult.NotReplaced;
+
+    }
+
+    private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider) {
         final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose a replacement effect to apply first.", possibleReplacers, runParams);
+        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose a replacement effect to apply first.", possibleReplacers);
 
         possibleReplacers.remove(chosenRE);
 
@@ -213,7 +214,7 @@ public class ReplacementHandler {
      * @param replacementEffect
      *            the replacement effect to run
      */
-    private ReplacementResult executeReplacement(final Map<String, Object> runParams,
+    private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
         final ReplacementEffect replacementEffect, final Player decider, final Game game) {
         final Map<String, String> mapParams = replacementEffect.getMapParams();
 
@@ -237,7 +238,7 @@ public class ReplacementHandler {
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
-                tailend.setReplacingObject("OriginalParams", runParams);
+                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
@@ -248,7 +249,7 @@ public class ReplacementHandler {
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
-                tailend.setReplacingObject("OriginalParams", runParams);
+                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
         }
@@ -275,7 +276,7 @@ public class ReplacementHandler {
             Card cardForUi = host.getCardForUi();
             String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", cardForUi.getName());
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get("Card").toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
+                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get(AbilityKey.Card).toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
                 : TextUtil.concatWithSpace("Apply replacement effect of", TextUtil.addSuffix(cardForUi.toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc));
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
@@ -292,9 +293,9 @@ public class ReplacementHandler {
         Player player = host.getController();
 
         if (mapParams.containsKey("ManaReplacement")) {
-            final SpellAbility manaAb = (SpellAbility) runParams.get("AbilityMana");
-            final Player player1 = (Player) runParams.get("Player");
-            final String rep = (String) runParams.get("Mana");
+            final SpellAbility manaAb = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
+            final Player player1 = (Player) runParams.get(AbilityKey.Player);
+            final String rep = (String) runParams.get(AbilityKey.Mana);
             // Replaced mana type
             final Card repHost = host;
             String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
@@ -307,8 +308,8 @@ public class ReplacementHandler {
             player.getController().playSpellAbilityNoStack(effectSA, true);
             // if the spellability is a replace effect then its some new logic
             // if ReplacementResult is set in run params use that instead
-            if (runParams.containsKey("ReplacementResult")) {
-                return (ReplacementResult) runParams.get("ReplacementResult");
+            if (runParams.containsKey(AbilityKey.ReplacementResult)) {
+                return (ReplacementResult) runParams.get(AbilityKey.ReplacementResult);
             }
         }
 
@@ -355,32 +356,5 @@ public class ReplacementHandler {
         }
 
         return ret;
-    }
-
-    public void cleanUpTemporaryReplacements() {
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                List<ReplacementEffect> toRemove = Lists.newArrayList();
-                for (ReplacementEffect rep : c.getReplacementEffects()) {
-                    if (rep.isTemporary()) {
-                        toRemove.add(rep);
-                    }
-                }
-                for (ReplacementEffect rep : toRemove) {
-                    c.removeReplacementEffect(rep);
-                }
-                return true;
-            }
-        });
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                    c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
-                }
-                return true;
-            }
-        });
     }
 }

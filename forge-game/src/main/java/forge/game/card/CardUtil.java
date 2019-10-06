@@ -29,9 +29,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
-import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -240,23 +238,6 @@ public final class CardUtil {
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
 
-        // extra copy non Intrinsic traits
-        for (SpellAbility sa : in.getSpellAbilities()) {
-            if (!sa.isIntrinsic()) {
-                newCopy.addSpellAbility(sa.copy(newCopy, true));
-            }
-        }
-        for (Trigger tr : in.getTriggers()) {
-            if (!tr.isIntrinsic()) {
-                newCopy.moveTrigger(tr.copy(newCopy, true));
-            }
-        }
-        for (ReplacementEffect re : in.getReplacementEffects()) {
-            if (!re.isIntrinsic()) {
-                newCopy.addReplacementEffect(re.copy(newCopy, true));
-            }
-        }
-
         // lock in the current P/T without bonus from counters
         newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
         newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
@@ -293,6 +274,7 @@ public final class CardUtil {
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
         newCopy.setChangedCardNames(in.getChangedCardNames());
+        newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
         newCopy.copyChangedTextFrom(in);
 
