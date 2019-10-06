@@ -44,9 +44,9 @@ public class ReplaceSurveil extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("Player", runParams.get("Affected"));
-        sa.setReplacingObject("SurveilNum", runParams.get("SurveilNum"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObject(AbilityKey.SurveilNum, runParams.get(AbilityKey.SurveilNum));
     }
 
 }

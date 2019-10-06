@@ -238,7 +238,7 @@ public class ReplacementHandler {
 
             SpellAbility tailend = effectSA;
             do {
-                replacementEffect.setReplacingObjects(toStringMap(runParams), tailend);
+                replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend = tailend.getSubAbility();
@@ -249,7 +249,7 @@ public class ReplacementHandler {
             effectSA = replacementEffect.getOverridingAbility();
             SpellAbility tailend = effectSA;
             do {
-                replacementEffect.setReplacingObjects(toStringMap(runParams), tailend);
+                replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend = tailend.getSubAbility();

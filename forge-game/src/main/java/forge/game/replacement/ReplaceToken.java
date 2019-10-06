@@ -62,9 +62,9 @@ public class ReplaceToken extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("TokenNum", runParams.get("TokenNum"));
-        sa.setReplacingObject("Player", runParams.get("Affected"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.TokenNum, runParams.get(AbilityKey.TokenNum));
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 
 }

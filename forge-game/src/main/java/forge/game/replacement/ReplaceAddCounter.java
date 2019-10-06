@@ -72,14 +72,14 @@ public class ReplaceAddCounter extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("CounterNum", runParams.get("CounterNum"));
-        sa.setReplacingObject("CounterType", ((CounterType) runParams.get("CounterType")).getName());
-        Object o = runParams.get("Affected");
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.CounterNum, runParams.get(AbilityKey.CounterNum));
+        sa.setReplacingObject(AbilityKey.CounterType, ((CounterType) runParams.get(AbilityKey.CounterType)).getName());
+        Object o = runParams.get(AbilityKey.Affected);
         if (o instanceof Card) {
-            sa.setReplacingObject("Card", o);
+            sa.setReplacingObject(AbilityKey.Card, o);
         } else if (o instanceof Player) {
-            sa.setReplacingObject("Player", o);
+            sa.setReplacingObject(AbilityKey.Player, o);
         }
     }
 

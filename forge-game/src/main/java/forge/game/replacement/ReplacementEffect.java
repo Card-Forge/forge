@@ -200,13 +200,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Sets the replacing objects.
-     *
-     * @param runParams
+     *  @param runParams
      *            the run params
      * @param spellAbility
-     *            the SpellAbility
      */
-    public void setReplacingObjects(final Map<String, Object> runParams, final SpellAbility spellAbility) {
+    public void setReplacingObjects(final Map<AbilityKey, Object> runParams, final SpellAbility spellAbility) {
         // Should be overridden by replacers that need it.
     }
 

@@ -69,7 +69,7 @@ public class ReplaceDraw extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("Player", runParams.get("Affected"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 }

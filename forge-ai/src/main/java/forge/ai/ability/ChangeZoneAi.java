@@ -1814,7 +1814,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     // A blink effect implemented using a delayed trigger
                     return !"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"));
                 }
-            } else return causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject("Card"))
+            } else return causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
                         || !causeSa.getActivatingPlayer().equals(aiPlayer);
         }
         

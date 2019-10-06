@@ -117,10 +117,10 @@ public class ReplaceMoved extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("Card", runParams.get("Affected"));
-        sa.setReplacingObject("CardLKI", runParams.get("CardLKI"));
-        sa.setReplacingObject("Cause", runParams.get("Cause"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObject(AbilityKey.CardLKI, runParams.get(AbilityKey.CardLKI));
+        sa.setReplacingObject(AbilityKey.Cause, runParams.get(AbilityKey.Cause));
     }
 
 }

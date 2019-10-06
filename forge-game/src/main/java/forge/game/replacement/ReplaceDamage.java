@@ -150,10 +150,10 @@ public class ReplaceDamage extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("DamageAmount", runParams.get("DamageAmount"));
-        sa.setReplacingObject("Target", runParams.get("Affected"));
-        sa.setReplacingObject("Source", runParams.get("DamageSource"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.DamageAmount, runParams.get(AbilityKey.DamageAmount));
+        sa.setReplacingObject(AbilityKey.Target, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObject(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
     }
 
 }

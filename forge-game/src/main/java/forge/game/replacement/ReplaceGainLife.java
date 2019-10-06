@@ -70,9 +70,9 @@ public class ReplaceGainLife extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("LifeGained", runParams.get("LifeGained"));
-        sa.setReplacingObject("Player", runParams.get("Affected"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.LifeGained, runParams.get(AbilityKey.LifeGained));
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 
 }
