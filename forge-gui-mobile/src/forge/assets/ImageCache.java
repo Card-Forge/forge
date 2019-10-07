@@ -31,7 +31,6 @@ import org.cache2k.Cache2kBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -53,10 +52,9 @@ public class ImageCache {
     private static final Set<String> missingIconKeys = new HashSet<>();
     private static final Cache<String, Texture> cache  = new Cache2kBuilder<String, Texture>() {}
             .name("cache")
-            .entryCapacity(500)
-            .expireAfterWrite(15, TimeUnit.MINUTES)
-            .refreshAhead(true)
+            .eternal(true)
             .permitNullValues(true)
+            .disableStatistics(true)
             .loader(new ImageLoader())
             .build();
     public static final Texture defaultImage;
