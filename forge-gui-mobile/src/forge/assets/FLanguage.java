@@ -39,12 +39,4 @@ public class FLanguage {
         return allLanguages;
     }
 
-    public static boolean getLanguage(final String languageName) {
-        final ForgePreferences prefs = FModel.getPreferences();
-        if (languageName.equals(prefs.getPref(FPref.UI_LANGUAGE)))
-            return true;
-
-        return false;
-    }
-
 }

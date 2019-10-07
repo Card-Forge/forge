@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;
-    private static final int MAX_FONT_SIZE = FLanguage.getLanguage("zh-CN") ? 28 : 72;
+    private static final int MAX_FONT_SIZE = 72; //todo method
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
