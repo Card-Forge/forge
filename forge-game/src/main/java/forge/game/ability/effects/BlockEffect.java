@@ -12,6 +12,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
+import forge.util.Lang;
+
 import java.util.*;
 
 public class BlockEffect extends SpellAbilityEffect {
@@ -106,7 +108,7 @@ public class BlockEffect extends SpellAbilityEffect {
             }
         }
 
-        sb.append(String.join(", ", blockers)).append(" block ").append(String.join(", ", attackers));
+        sb.append(Lang.joinHomogenous(blockers)).append(" block ").append(Lang.joinHomogenous(attackers));
 
         return sb.toString();
     }
