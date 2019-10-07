@@ -532,6 +532,9 @@ public class CardState extends GameObject {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
+        if (lki && source.loyaltyRep != null) {
+            this.loyaltyRep = source.loyaltyRep.copy(card, lki);
+        }
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {

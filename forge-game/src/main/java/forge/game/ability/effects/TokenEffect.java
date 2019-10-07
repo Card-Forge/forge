@@ -226,9 +226,9 @@ public class TokenEffect extends SpellAbilityEffect {
         // but if its a Replacement Effect, it might be something else or null
         SpellAbility cause = sa;
         if (root.isReplacementAbility()) {
-            Object replacingObject = root.getReplacingObject(AbilityKey.Cause);
+            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
             if (replacingObject != null) {
-                cause = (SpellAbility) replacingObject;
+                cause = replacingObject;
             }
         }
 

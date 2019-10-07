@@ -25,7 +25,10 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardTraitChanges;
 import forge.game.card.CardUtil;
+import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
@@ -43,6 +46,8 @@ import java.util.*;
 
 public class ReplacementHandler {
     private final Game game;
+
+    private Set<ReplacementEffect> hasRun = Sets.newHashSet();
     /**
      * ReplacementHandler.
      * @param gameState
@@ -68,7 +73,8 @@ public class ReplacementHandler {
                 final ReplacementEffect re = cause.getReplacementEffect();
                 // only return for same layer
                 if (ReplacementType.Moved.equals(re.getMode()) && layer.equals(re.getLayer())) {
-                    return re.getOtherChoices();
+                    if (!re.getOtherChoices().isEmpty())
+                        return re.getOtherChoices();
                 }
             }
 
@@ -79,6 +85,54 @@ public class ReplacementHandler {
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
+
+            // need to check if Intrinsic has run
+            for (ReplacementEffect re : affectedLKI.getReplacementEffects()) {
+                if (re.isIntrinsic() && this.hasRun.contains(re)) {
+                    re.setHasRun(true);
+                }
+            }
+
+            // need to check non Intrinsic
+            for (Map.Entry<Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().entrySet()) {
+                boolean hasRunRE = false;
+                String skey = String.valueOf(e.getKey());
+
+                for (ReplacementEffect re : this.hasRun) {
+                    if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
+                        hasRunRE = true;
+                        break;
+                    }
+                }
+
+                for (ReplacementEffect re : e.getValue().getReplacements()) {
+                    re.setSVar("_ReplacedTimestamp", skey);
+                    if (hasRunRE) {
+                        re.setHasRun(true);
+                    }
+                }
+            }
+            for (Map.Entry<Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().entrySet()) {
+                boolean hasRunRE = false;
+                String skey = String.valueOf(e.getKey());
+
+                for (ReplacementEffect re : this.hasRun) {
+                    if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
+                        hasRunRE = true;
+                        break;
+                    }
+                }
+
+                for (KeywordInterface k : e.getValue().getKeywords()) {
+                    for (ReplacementEffect re : k.getReplacements()) {
+                        re.setSVar("_ReplacedTimestamp", skey);
+                        if (hasRunRE) {
+                            re.setHasRun(true);
+                        }
+                    }
+                }
+            }
+
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
 
@@ -186,6 +240,7 @@ public class ReplacementHandler {
         possibleReplacers.remove(chosenRE);
 
         chosenRE.setHasRun(true);
+        hasRun.add(chosenRE);
         chosenRE.setOtherChoices(possibleReplacers);
         ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
         if (res == ReplacementResult.NotReplaced) {
@@ -193,10 +248,12 @@ public class ReplacementHandler {
                 res = run(event, runParams);
             }
             chosenRE.setHasRun(false);
+            hasRun.remove(chosenRE);
             chosenRE.setOtherChoices(null);
             return res;
         }
         chosenRE.setHasRun(false);
+        hasRun.remove(chosenRE);
         chosenRE.setOtherChoices(null);
         String message = chosenRE.toString();
         if ( !StringUtils.isEmpty(message))
