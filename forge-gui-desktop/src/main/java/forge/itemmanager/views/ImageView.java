@@ -77,6 +77,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
+    private boolean panelOptionsCreated = false;
 
     private final List<ItemInfo> orderedItems = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
@@ -337,7 +338,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemTableColumn> colOverrides) {
-        setPanelOptions(config.getShowUniqueCardsOption());
+        // if this is the first setup call, panel options will be added to UI components
+        if (!this.panelOptionsCreated){
+            setPanelOptions(config.getShowUniqueCardsOption());
+            this.panelOptionsCreated = true;
+        }
+        // set status of components in the panel
         setGroupBy(config.getGroupBy(), true);
         setPileBy(config.getPileBy(), true);
         setColumnCount(config.getImageColumnCount(), true);
