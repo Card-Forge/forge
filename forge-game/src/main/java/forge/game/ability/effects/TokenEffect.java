@@ -225,8 +225,11 @@ public class TokenEffect extends SpellAbilityEffect {
         // Cause of the Token Effect, in general it should be this
         // but if its a Replacement Effect, it might be something else or null
         SpellAbility cause = sa;
-        if (root.isReplacementAbility() && root.hasReplacingObject(AbilityKey.Cause)) {
-            cause = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
+        if (root.isReplacementAbility()) {
+            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
+            if (replacingObject != null) {
+                cause = replacingObject;
+            }
         }
 
         final boolean remember = sa.hasParam("RememberTokens");
