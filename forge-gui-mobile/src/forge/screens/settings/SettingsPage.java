@@ -301,6 +301,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         localizer.getMessage("lblDisableCardEffect"),
                         localizer.getMessage("nlDisableCardEffect")),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_BORDER_MASKING,
+                        "Enable Round Border Mask",
+                        "When enabled, the card corners are rounded (Longer Caching)."),
+                4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                         localizer.getMessage("cbpCounterDisplayType"),

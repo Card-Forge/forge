@@ -392,7 +392,8 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
-        Texture image = new RendererCachedCardImage(pc, false).getImage();
+        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
+        Texture image = new RendererCachedCardImage(pc, false).getImage(mask);
 
         if (image != null) {
             if (image == ImageCache.defaultImage) {
@@ -409,13 +410,17 @@ public class CardRenderer {
                 drawFoilEffect(g, card, x, y, w, h, false);
             }
         }
-        else { //draw cards without textures as just a black rectangle
-            g.fillRect(Color.BLACK, x, y, w, h);
+        else {
+            if (mask) //render this if mask is still loading
+                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
+            else //draw cards without textures as just a black rectangle
+                g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
 
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        Texture image = new RendererCachedCardImage(card, false).getImage();
+        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
+        Texture image = new RendererCachedCardImage(card, false).getImage(mask);
 
         if (image != null) {
             if (image == ImageCache.defaultImage) {
@@ -430,8 +435,11 @@ public class CardRenderer {
             }
             drawFoilEffect(g, card, x, y, w, h, false);
         }
-        else { //draw cards without textures as just a black rectangle
-            g.fillRect(Color.BLACK, x, y, w, h);
+        else {
+            if (mask) //render this if mask is still loading
+                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
+            else //draw cards without textures as just a black rectangle
+                g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
 
