@@ -24,48 +24,43 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                 alphaCard = true;
             //TODO dont add border on some sets???
         }
+
         File file = ImageKeys.getImageFile(key.replaceAll("#drawroundcorner#",""));
         if (file != null) {
             FileHandle fh = new FileHandle(file);
+            Texture t = new Texture(fh, textureFilter);
             try {
-                Texture t;
-                if (mask) {
-                    Pixmap pImage = new Pixmap(fh);
-                    int w = pImage.getWidth();
-                    int h = pImage.getHeight();
-                    int radius = alphaCard ? (h - w) / 6 : (h - w) / 8;
-                    Pixmap pMask = createRoundedRectangle(w, h, radius, Color.RED);
-                    drawPixelstoMask(pImage, pMask);
-                    TextureData textureData = new PixmapTextureData(
-                            pMask, //pixmap to use
-                            Pixmap.Format.RGBA8888,
-                            textureFilter, //use mipmaps
-                            false, true);
-                    if (textureFilter)
-                    {
-                        t = new Texture(textureData);
-                        t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    } else {
-                        t = new Texture(textureData);
-                    }
-                    pImage.dispose();
-                    pMask.dispose();
-                    return t;
-                } else {
-                    if (textureFilter) {
-                        t = new Texture(fh, true);
-                        t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                        return t;
-                    }
-                    else
-                        return new Texture(fh);
-                }
+                return generateTexture(fh, t, mask, alphaCard, textureFilter);
             }
             catch (Exception ex) {
                 Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex.toString());
             }
         }
         return null;
+    }
+    public Texture generateTexture(FileHandle fh, Texture t, boolean mask, boolean alphaCard, boolean textureFilter) {
+        if (!mask) {
+            if (textureFilter)
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            return t;
+        }
+        Pixmap pImage = new Pixmap(fh);
+        int w = pImage.getWidth();
+        int h = pImage.getHeight();
+        int radius = alphaCard ? (h - w) / 6 : (h - w) / 8;
+        Pixmap pMask = createRoundedRectangle(w, h, radius, Color.RED);
+        drawPixelstoMask(pImage, pMask);
+        TextureData textureData = new PixmapTextureData(
+                pMask, //pixmap to use
+                Pixmap.Format.RGBA8888,
+                textureFilter, //use mipmaps
+                false, true);
+        t = new Texture(textureData);
+        if (textureFilter)
+            t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+        pImage.dispose();
+        pMask.dispose();
+        return t;
     }
     public Pixmap createRoundedRectangle(int width, int height, int cornerRadius, Color color) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
