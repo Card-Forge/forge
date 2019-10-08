@@ -343,6 +343,30 @@ public class Graphics {
         batch.begin();
     }
 
+    public void fillRoundRect(Color color, float x, float y, float w, float h, float radius) {
+        batch.end(); //must pause batch while rendering shapes
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        shapeRenderer.circle(adjustX(x+radius), adjustY(y+radius, 0), radius);
+        shapeRenderer.circle(adjustX((x+w) - radius), adjustY(y+radius, 0), radius);
+        shapeRenderer.circle(adjustX(x+radius), adjustY((y+h) - radius, 0), radius);
+        shapeRenderer.circle(adjustX((x+w) - radius), adjustY((y+h) - radius, 0), radius);
+
+        shapeRenderer.rect(adjustX(x), adjustY(y+radius, h-radius*2), w, h-radius*2);
+        shapeRenderer.rect(adjustX(x+radius), adjustY(y, h), w-radius*2, h);
+        endShape();
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        batch.begin();
+    }
+
     public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
         drawRect(thickness, skinColor.getColor(), x, y, w, h);
     }
