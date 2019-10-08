@@ -8,6 +8,8 @@ import forge.assets.ImageCache;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.toolbox.FCardPanel;
 
 public class CardImage implements FImage {
@@ -16,6 +18,9 @@ public class CardImage implements FImage {
 
     public CardImage(PaperCard card0) {
         card = card0;
+    }
+    private static boolean isPreferenceEnabled(ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     @Override
@@ -34,8 +39,12 @@ public class CardImage implements FImage {
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
         if (image == null) { //attempt to retrieve card image if needed
-            image = ImageCache.getImage(card);
+            boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+            image = ImageCache.getImage(card, mask);
             if (image == null) {
+                if (mask) //render this if mask is still loading
+                    CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top);
+
                 return; //can't draw anything if can't be loaded yet
             }
         }

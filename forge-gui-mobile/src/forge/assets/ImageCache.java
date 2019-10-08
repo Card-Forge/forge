@@ -20,19 +20,17 @@ package forge.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
 import forge.ImageKeys;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.cache2k.Cache;
+import org.cache2k.Cache2kBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -52,10 +50,13 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> missingIconKeys = new HashSet<>();
-    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
-            .maximumSize(400)
-            .expireAfterAccess(15,TimeUnit.MINUTES)
-            .build(new ImageLoader());
+    private static final Cache<String, Texture> cache  = new Cache2kBuilder<String, Texture>() {}
+            .name("cache")
+            .eternal(true)
+            .permitNullValues(true)
+            .disableStatistics(true)
+            .loader(new ImageLoader())
+            .build();
     public static final Texture defaultImage;
 
     private static boolean imageLoaded, delayLoadRequested;
@@ -76,12 +77,16 @@ public class ImageCache {
     }
 
     public static void clear() {
-        cache.invalidateAll();
+        cache.clear();
         missingIconKeys.clear();
     }
 
     public static Texture getImage(InventoryItem ii) {
-        return getImage(ii.getImageKey(false), true);
+        return getImage(ii.getImageKey(false), true, false);
+    }
+
+    public static Texture getImage(InventoryItem ii, Boolean mask) {
+        return getImage(ii.getImageKey(false), true, mask);
     }
 
     /**
@@ -107,6 +112,9 @@ public class ImageCache {
      * </p>
      */
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
+        return getImage(imageKey, useDefaultIfNotFound, false);
+    }
+    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean maskCard) {
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
@@ -125,7 +133,10 @@ public class ImageCache {
         Texture image;
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = cache.getIfPresent(imageKey);
+            if (maskCard)//if we add pixmap modification here, it will slow performance so we do this on the image loader lol :)...
+                imageKey += "#drawroundcorner#";
+            image = cache.get(imageKey);
+
             if (image != null) { return image; }
 
             if (imageLoaded) { //prevent loading more than one image each render for performance
@@ -139,15 +150,7 @@ public class ImageCache {
             imageLoaded = true;
         }
 
-        try {
-            image = cache.get(imageKey);
-        }
-        catch (final ExecutionException ex) {
-            if (!(ex.getCause() instanceof NullPointerException)) {
-                ex.printStackTrace();
-            }
-            image = null;
-        }
+        try { image = cache.get(imageKey); }
         catch (final Exception ex) {
             image = null;
         }

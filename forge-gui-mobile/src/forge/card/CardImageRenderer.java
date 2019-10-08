@@ -325,7 +325,8 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
-        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
+        boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true, mask);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
@@ -520,5 +521,9 @@ public class CardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, Align.center, true);
+    }
+
+    private static boolean isPreferenceEnabled(ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 }
