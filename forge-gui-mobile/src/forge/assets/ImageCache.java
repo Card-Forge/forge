@@ -82,11 +82,7 @@ public class ImageCache {
     }
 
     public static Texture getImage(InventoryItem ii) {
-        return getImage(ii.getImageKey(false), true, false);
-    }
-
-    public static Texture getImage(InventoryItem ii, Boolean mask) {
-        return getImage(ii.getImageKey(false), true, mask);
+        return getImage(ii.getImageKey(false), true);
     }
 
     /**
@@ -112,9 +108,6 @@ public class ImageCache {
      * </p>
      */
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
-        return getImage(imageKey, useDefaultIfNotFound, false);
-    }
-    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean maskCard) {
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
@@ -133,8 +126,6 @@ public class ImageCache {
         Texture image;
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            if (maskCard)//if we add pixmap modification here, it will slow performance so we do this on the image loader lol :)...
-                imageKey += "#drawroundcorner#";
             image = cache.get(imageKey);
 
             if (image != null) { return image; }
