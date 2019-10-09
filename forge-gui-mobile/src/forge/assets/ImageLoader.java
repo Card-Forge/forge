@@ -3,11 +3,7 @@ package forge.assets;
 import java.io.File;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
-import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import org.cache2k.integration.CacheLoader;
 
 import forge.Forge;
