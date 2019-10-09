@@ -2,7 +2,6 @@ package forge.card;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.Graphics;
@@ -324,25 +323,7 @@ public class CardImageRenderer {
             x += pieceWidths[i];
         }
     }
-    public static TextureRegion croppedBorderImage(Texture image) {
-        float rscale = 0.96f;
-        int rw = Math.round(image.getWidth()*rscale);
-        int rh = Math.round(image.getHeight()*rscale);
-        int rx = Math.round((image.getWidth() - rw)/2);
-        int ry = Math.round((image.getHeight() - rh)/2)-2;
-        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
-        return rimage;
-    }
-    public static Color borderColor(CardView c) {
-        if (c == null)
-            return Color.valueOf("#1d1d1d");
 
-        CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#1d1d1d");
-    }
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
         //this one is currently using the mask, others are cropped and use generated borders from shaperenderer ...
@@ -375,39 +356,44 @@ public class CardImageRenderer {
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 if (mask){
-                    if (rotatePlane) {
-                        g.drawRoundRect(3, borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                        g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                    }
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
-                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
-                        g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                        if (rotatePlane)
+                            g.drawfillBorder(3, ImageCache.borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
+                        else
+                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                     }
-                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
-                if (mask){
-                    if (rotateSplit) {
-                        g.drawRoundRect(3, borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                        g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                    }
+                if (mask) {
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
-                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
-                        g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                        if (rotateSplit)
+                            g.drawfillBorder(3, ImageCache.borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
+                        else
+                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x + radius / 2.3f, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2.3f) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
                     }
-                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, isAftermath ? 90 : -90);
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             }
             else {
                 if (mask) {
-                    g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
-                    g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                    g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawImage(image, x, y, w, h);
+                    else {
+                        g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+                        g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                    }
                 }
                 else
                     g.drawImage(image, x, y, w, h);
