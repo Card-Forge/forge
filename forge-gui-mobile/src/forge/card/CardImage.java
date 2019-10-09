@@ -29,7 +29,7 @@ public class CardImage implements FImage {
         int rw = Math.round(image.getWidth()*rscale);
         int rh = Math.round(image.getHeight()*rscale);
         int rx = Math.round((image.getWidth() - rw)/2);
-        int ry = Math.round((image.getHeight() - rh)/2);
+        int ry = Math.round((image.getHeight() - rh)/2)-2;
         TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
         return rimage;
     }
