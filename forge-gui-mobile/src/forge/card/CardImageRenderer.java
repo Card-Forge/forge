@@ -2,6 +2,7 @@ package forge.card;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.Graphics;
@@ -323,11 +324,29 @@ public class CardImageRenderer {
             x += pieceWidths[i];
         }
     }
+    public static TextureRegion croppedBorderImage(Texture image) {
+        float rscale = 0.96f;
+        int rw = Math.round(image.getWidth()*rscale);
+        int rh = Math.round(image.getHeight()*rscale);
+        int rx = Math.round((image.getWidth() - rw)/2);
+        int ry = Math.round((image.getHeight() - rh)/2);
+        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
+        return rimage;
+    }
+    public static Color borderColor(CardView c) {
+        if (c == null)
+            return Color.valueOf("#1d1d1d");
 
+        CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return Color.valueOf("#fffffd");
+        return Color.valueOf("#1d1d1d");
+    }
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
         //this one is currently using the mask, others are cropped and use generated borders from shaperenderer ...
-        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true, mask);
+        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
@@ -344,21 +363,45 @@ public class CardImageRenderer {
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
         }
         else {
+            float radius = (h - w)/8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
             float new_w = w*wh_Adj;
             float new_h = h*wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
+            float new_xRotate = (dispW - new_h) /2;
+            float new_yRotate = (dispH - new_w) /2;
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
-                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                if (mask){
+                    if (rotatePlane)
+                        g.fillRoundRect(borderColor(card), new_yRotate, new_yRotate, new_h, new_w, radius);
+                    else
+                        g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.4f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.4f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
+                }
+                else
+                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
-                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                if (mask){
+                    if (rotateSplit)
+                        g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
+                    else
+                        g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.4f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.4f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, isAftermath ? 90 : -90);
+                }
+                else
+                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             }
             else {
-                g.drawImage(image, x, y, w, h);
+                if (mask) {
+                    g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                    g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
+                }
+                else
+                    g.drawImage(image, x, y, w, h);
             }
         }
         CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canLook && image != ImageCache.defaultImage);

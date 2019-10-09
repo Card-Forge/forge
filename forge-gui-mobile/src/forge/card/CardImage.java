@@ -35,12 +35,12 @@ public class CardImage implements FImage {
     }
     public static Color borderColor(PaperCard c) {
         if (c == null)
-            return Color.valueOf("#1c1c1c");
+            return Color.valueOf("#1d1d1d");
 
         CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
         if (ed != null && ed.isWhiteBorder())
             return Color.valueOf("#fffffd");
-        return Color.valueOf("#1c1c1c");
+        return Color.valueOf("#1d1d1d");
     }
 
     @Override

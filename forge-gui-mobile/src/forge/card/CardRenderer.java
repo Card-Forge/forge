@@ -402,22 +402,22 @@ public class CardRenderer {
     }
     public static Color borderColor(IPaperCard c) {
         if (c == null)
-            return Color.valueOf("#1c1c1c");
+            return Color.valueOf("#1d1d1d");
 
         CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
         if (ed != null && ed.isWhiteBorder())
             return Color.valueOf("#fffffd");
-        return Color.valueOf("#1c1c1c");
+        return Color.valueOf("#1d1d1d");
     }
     public static Color borderColor(CardView c) {
         if (c == null)
-            return Color.valueOf("#1c1c1c");
+            return Color.valueOf("#1d1d1d");
 
         CardStateView state = c.getCurrentState();
         CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
         if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
             return Color.valueOf("#fffffd");
-        return Color.valueOf("#1c1c1c");
+        return Color.valueOf("#1d1d1d");
     }
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
@@ -431,7 +431,7 @@ public class CardRenderer {
                 if (mask) {
                     float radius = (h - w)/8;
                     g.fillRoundRect(borderColor(pc), x, y, w, h, radius);
-                    g.drawImage(croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                    g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
                 }
                 else
                     g.drawImage(image, x, y, w, h);
@@ -466,7 +466,7 @@ public class CardRenderer {
                     if (mask) {
                         float radius = (h - w)/8;
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                        g.drawRotatedImage(croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
+                        g.drawRotatedImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.4f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                     }
                     else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -475,7 +475,7 @@ public class CardRenderer {
                     if (mask) {
                         float radius = (h - w)/8;
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                        g.drawImage(croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                        g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
                     }
                     else
                         g.drawImage(image, x, y, w, h);

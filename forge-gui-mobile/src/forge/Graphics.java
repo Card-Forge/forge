@@ -344,6 +344,7 @@ public class Graphics {
     }
 
     public void fillRoundRect(Color color, float x, float y, float w, float h, float radius) {
+        //TODO Smooth Rounded Corner???
         batch.end(); //must pause batch while rendering shapes
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
