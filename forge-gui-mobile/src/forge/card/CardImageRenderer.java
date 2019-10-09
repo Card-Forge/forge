@@ -375,10 +375,14 @@ public class CardImageRenderer {
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 if (mask){
-                    if (rotatePlane)
+                    if (rotatePlane) {
+                        g.drawRoundRect(3, borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
                         g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                    else
+                    }
+                    else {
+                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                    }
                     g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                 }
                 else
@@ -386,10 +390,14 @@ public class CardImageRenderer {
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
                 if (mask){
-                    if (rotateSplit)
+                    if (rotateSplit) {
+                        g.drawRoundRect(3, borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
                         g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                    else
+                    }
+                    else {
+                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
+                    }
                     g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, isAftermath ? 90 : -90);
                 }
                 else
@@ -397,6 +405,7 @@ public class CardImageRenderer {
             }
             else {
                 if (mask) {
+                    g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                     g.fillRoundRect(borderColor(card), x, y, w, h, radius);
                     g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
                 }

@@ -430,6 +430,7 @@ public class CardRenderer {
             else {
                 if (mask) {
                     float radius = (h - w)/8;
+                    g.drawRoundRect(3, borderColor(pc), x, y, w, h, radius);
                     g.fillRoundRect(borderColor(pc), x, y, w, h, radius);
                     g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
                 }
@@ -465,6 +466,7 @@ public class CardRenderer {
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
                     if (mask) {
                         float radius = (h - w)/8;
+                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
                         g.drawRotatedImage(croppedBorderImage(image), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                     }
@@ -474,6 +476,7 @@ public class CardRenderer {
                 else {
                     if (mask) {
                         float radius = (h - w)/8;
+                        g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
                         g.drawImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f);
                     }

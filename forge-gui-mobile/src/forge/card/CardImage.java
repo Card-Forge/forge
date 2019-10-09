@@ -75,6 +75,7 @@ public class CardImage implements FImage {
         else {
             if (mask) {
                 float radius = (h - w)/8;
+                g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
                 g.fillRoundRect(borderColor(card), x, y, w, h, radius);
                 g.drawImage(croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
             }
