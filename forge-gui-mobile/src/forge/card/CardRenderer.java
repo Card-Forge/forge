@@ -466,7 +466,7 @@ public class CardRenderer {
                     if (mask) {
                         float radius = (h - w)/8;
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                        g.drawRotatedImage(croppedBorderImage(image), x+radius/2.4f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.4f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
+                        g.drawRotatedImage(croppedBorderImage(image), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                     }
                     else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);

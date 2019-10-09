@@ -376,10 +376,10 @@ public class CardImageRenderer {
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 if (mask){
                     if (rotatePlane)
-                        g.fillRoundRect(borderColor(card), new_yRotate, new_yRotate, new_h, new_w, radius);
+                        g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
                     else
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.4f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.4f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
+                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
@@ -390,7 +390,7 @@ public class CardImageRenderer {
                         g.fillRoundRect(borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
                     else
                         g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.4f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.4f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, isAftermath ? 90 : -90);
+                    g.drawRotatedImage(croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, isAftermath ? 90 : -90);
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
