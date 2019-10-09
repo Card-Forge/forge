@@ -312,21 +312,21 @@ public class Graphics {
         }
 
         //adjust width/height so rectangle covers equivalent filled area
-        w = Math.round(w - 1);
-        h = Math.round(h - 1);
+        w = Math.round(w + 1);
+        h = Math.round(h + 1);
 
         startShape(ShapeType.Line);
         shapeRenderer.setColor(color);
 
-        x = adjustX(x);
-        float y2 = adjustY(y, h);
-        float x2 = x + w;
-        y = y2 + h;
-        //TODO: draw arcs at corners
-        shapeRenderer.line(x, y, x, y2);
-        shapeRenderer.line(x, y2, x2 + 1, y2); //+1 prevents corner not being filled
-        shapeRenderer.line(x2, y2, x2, y);
-        shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+
+        shapeRenderer.rect(adjustX(x) + cornerRadius, adjustY(y, cornerRadius), w - 2*cornerRadius, cornerRadius);
+        shapeRenderer.rect(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, h - 2*cornerRadius), cornerRadius, h - 2*cornerRadius);
+        shapeRenderer.rect(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, cornerRadius), w - 2*cornerRadius, cornerRadius);
+        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - 2*cornerRadius), cornerRadius, h - 2*cornerRadius);
 
         endShape();
 
@@ -344,7 +344,6 @@ public class Graphics {
     }
 
     public void fillRoundRect(Color color, float x, float y, float w, float h, float radius) {
-        //TODO Smooth Rounded Corner???
         batch.end(); //must pause batch while rendering shapes
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
