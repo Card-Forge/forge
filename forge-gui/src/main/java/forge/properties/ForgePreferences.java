@@ -135,6 +135,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ENABLE_BORDER_MASKING("false"),
+        UI_SHOW_FPS("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),

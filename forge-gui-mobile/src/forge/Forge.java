@@ -48,6 +48,7 @@ public class Forge implements ApplicationListener {
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
+    private static FrameRate frameRate;
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
@@ -59,6 +60,7 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
+    public static boolean showFPS = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -79,6 +81,7 @@ public class Forge implements ApplicationListener {
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
+        frameRate = new FrameRate();
         Gdx.input.setInputProcessor(new MainInputProcessor());
         /*
          Set CatchBackKey here and exit the app when you hit the
@@ -100,6 +103,8 @@ public class Forge implements ApplicationListener {
         FSkin.loadLight(skinName, splashScreen);
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
+
+        showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -366,6 +371,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render() {
+        if (showFPS)
+            frameRate.update();
+
         try {
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
@@ -408,6 +416,8 @@ public class Forge implements ApplicationListener {
             graphics.end();
             BugReporter.reportException(ex);
         }
+        if (showFPS)
+            frameRate.render();
     }
 
     @Override
