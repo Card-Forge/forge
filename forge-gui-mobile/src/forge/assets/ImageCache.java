@@ -164,19 +164,8 @@ public class ImageCache {
         }
         return image;
     }
-    public static void preloadCache(String imageKey) {
-        if (StringUtils.isEmpty(imageKey)) {
-            return;
-        }
-        Texture image;
-        try { image = cache.get(imageKey); }
-        catch (final Exception ex) {
-            image = null;
-        }
-        if (image == null) {
-            image = defaultImage;
-            cache.put(imageKey, defaultImage);
-        }
+    public static void preloadCache(Iterable keys) {
+        cache.getAll(keys);
     }
     public static TextureRegion croppedBorderImage(Texture image) {
         float rscale = 0.96f;

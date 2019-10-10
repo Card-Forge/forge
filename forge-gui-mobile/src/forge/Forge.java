@@ -128,10 +128,15 @@ public class Forge implements ApplicationListener {
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
+                //add reminder to preload
+                splashScreen.getProgressBar().setDescription("Preload Extended Art...");
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
                         afterDbLoaded();
+                        /*  call preloadExtendedArt here, if we put it above we will  *
+                         *  get error: No OpenGL context found in the current thread. */
+                        preloadExtendedArt();
                     }
                 });
             }
@@ -156,14 +161,12 @@ public class Forge implements ApplicationListener {
                 }
             }
         }
-        for (String artKeys : keys) {
-            ImageCache.preloadCache(artKeys);
-        }
+        if (!keys.isEmpty())
+            ImageCache.preloadCache((Iterable<String>)keys);
     }
 
     private void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
-        preloadExtendedArt(); // Preloads Extended Art to Cache...
 
         FSkin.loadFull(splashScreen);
 
