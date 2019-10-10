@@ -121,7 +121,7 @@ public class Forge implements ApplicationListener {
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
-                FSkinFont.preloadAll();
+                FSkinFont.preloadAll(prefs.getPref(FPref.UI_LANGUAGE));
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
                 CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
@@ -147,7 +147,7 @@ public class Forge implements ApplicationListener {
     private void preloadExtendedArt() {
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
             return;
-            List<String> keys = new ArrayList<>();
+        List<String> keys = new ArrayList<>();
         File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
