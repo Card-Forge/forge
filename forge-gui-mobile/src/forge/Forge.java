@@ -129,7 +129,8 @@ public class Forge implements ApplicationListener {
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
-                splashScreen.getProgressBar().setDescription("Preload Extended Art...");
+                if (prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+                    splashScreen.getProgressBar().setDescription("Preload Extended Art...");
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
@@ -144,7 +145,9 @@ public class Forge implements ApplicationListener {
     }
 
     private void preloadExtendedArt() {
-        List<String> keys = new ArrayList<>();
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+            return;
+            List<String> keys = new ArrayList<>();
         File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
