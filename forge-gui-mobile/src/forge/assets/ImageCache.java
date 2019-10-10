@@ -64,6 +64,8 @@ public class ImageCache {
             .loader(new ImageLoader())
             .build();
     public static final Texture defaultImage;
+    public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
+    public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -162,6 +164,20 @@ public class ImageCache {
         }
         return image;
     }
+    public static void preloadCache(String imageKey) {
+        if (StringUtils.isEmpty(imageKey)) {
+            return;
+        }
+        Texture image;
+        try { image = cache.get(imageKey); }
+        catch (final Exception ex) {
+            image = null;
+        }
+        if (image == null) {
+            image = defaultImage;
+            cache.put(imageKey, defaultImage);
+        }
+    }
     public static TextureRegion croppedBorderImage(Texture image) {
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
@@ -170,6 +186,25 @@ public class ImageCache {
         int ry = Math.round((image.getHeight() - rh)/2)-2;
         TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
         return rimage;
+    }
+    public static boolean isWhiteBordered(IPaperCard c) {
+        if (c == null)
+            return false;
+
+        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
+        if (ed != null && ed.isWhiteBorder())
+            return true;
+        return false;
+    }
+    public static boolean isWhiteBordered(CardView c) {
+        if (c == null)
+            return false;
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return true;
+        return false;
     }
     public static Color borderColor(IPaperCard c) {
         if (c == null)
@@ -206,5 +241,15 @@ public class ImageCache {
         if (c.getEdition().contains("MPS_"))
             return true;
         return false;
+    }
+    public static FImage getBorderImage(CardView c) {
+        if (isWhiteBordered(c))
+            return WhiteBorder;
+        return BlackBorder;
+    }
+    public static FImage getBorderImage(IPaperCard c) {
+        if (isWhiteBordered(c))
+            return WhiteBorder;
+        return BlackBorder;
     }
 }

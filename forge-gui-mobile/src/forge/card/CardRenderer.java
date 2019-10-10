@@ -405,7 +405,7 @@ public class CardRenderer {
                     if (ImageCache.isExtendedArt(pc))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawfillBorder(3, ImageCache.borderColor(pc), x, y, w, h, radius);
+                        g.drawImage(ImageCache.getBorderImage(pc), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
                 }
@@ -456,7 +456,7 @@ public class CardRenderer {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
-                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+                            g.drawImage(ImageCache.getBorderImage(card), x, y, w, h);
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
                     }

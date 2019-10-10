@@ -21,7 +21,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         if (key.length() > 4){
             if ((key.substring(0,4).contains("MPS_"))) //TODO add sets to get all extended art???
                 extendedArt = true;
-            //use generated extended art... very few cards have this so little performance lost
+            //use generated extended art... it will preload the cache at startup so... yeah! :)
         }
         File file = ImageKeys.getImageFile(key);
         if (file != null) {

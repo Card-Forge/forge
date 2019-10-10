@@ -35,6 +35,8 @@ import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.Utils;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -136,8 +138,32 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    private void preloadExtendedArt() {
+        List<String> keys = new ArrayList<>();
+        File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if (!file.getName().startsWith("MPS_"))
+                    return false;
+                return file.isDirectory();
+            }
+        });
+        for (File folder : directories) {
+            File[] files = new File(folder.toString()).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    keys.add(folder.getName() + "/" +file.getName().replace(".jpg","").replace(".png",""));
+                }
+            }
+        }
+        for (String artKeys : keys) {
+            ImageCache.preloadCache(artKeys);
+        }
+    }
+
     private void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
+        preloadExtendedArt(); // Preloads Extended Art to Cache...
 
         FSkin.loadFull(splashScreen);
 
