@@ -35,6 +35,8 @@ import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.Utils;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -48,6 +50,7 @@ public class Forge implements ApplicationListener {
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
+    private static FrameRate frameRate;
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
@@ -59,6 +62,7 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
+    public static boolean showFPS = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -79,6 +83,7 @@ public class Forge implements ApplicationListener {
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
+        frameRate = new FrameRate();
         Gdx.input.setInputProcessor(new MainInputProcessor());
         /*
          Set CatchBackKey here and exit the app when you hit the
@@ -101,6 +106,8 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
 
+        showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
+
         final Localizer localizer = Localizer.getInstance();
 
         //load model on background thread (using progress bar to report progress)
@@ -114,21 +121,51 @@ public class Forge implements ApplicationListener {
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
-                FSkinFont.preloadAll();
+                FSkinFont.preloadAll(prefs.getPref(FPref.UI_LANGUAGE));
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
                 CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
+                //add reminder to preload
+                if (prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+                    splashScreen.getProgressBar().setDescription("Preload Extended Art...");
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
                         afterDbLoaded();
+                        /*  call preloadExtendedArt here, if we put it above we will  *
+                         *  get error: No OpenGL context found in the current thread. */
+                        preloadExtendedArt();
                     }
                 });
             }
         });
+    }
+
+    private void preloadExtendedArt() {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+            return;
+        List<String> keys = new ArrayList<>();
+        File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if (!file.getName().startsWith("MPS_"))
+                    return false;
+                return file.isDirectory();
+            }
+        });
+        for (File folder : directories) {
+            File[] files = new File(folder.toString()).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    keys.add(folder.getName() + "/" +file.getName().replace(".jpg","").replace(".png",""));
+                }
+            }
+        }
+        if (!keys.isEmpty())
+            ImageCache.preloadCache((Iterable<String>)keys);
     }
 
     private void afterDbLoaded() {
@@ -366,6 +403,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render() {
+        if (showFPS)
+            frameRate.update();
+
         try {
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
@@ -408,6 +448,8 @@ public class Forge implements ApplicationListener {
             graphics.end();
             BugReporter.reportException(ex);
         }
+        if (showFPS)
+            frameRate.render();
     }
 
     @Override

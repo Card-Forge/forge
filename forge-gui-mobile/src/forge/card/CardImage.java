@@ -1,9 +1,7 @@
 package forge.card;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.ImageCache;
@@ -23,24 +21,6 @@ public class CardImage implements FImage {
     }
     private static boolean isPreferenceEnabled(ForgePreferences.FPref preferenceName) {
         return FModel.getPreferences().getPrefBoolean(preferenceName);
-    }
-    public static TextureRegion croppedBorderImage(Texture image) {
-        float rscale = 0.96f;
-        int rw = Math.round(image.getWidth()*rscale);
-        int rh = Math.round(image.getHeight()*rscale);
-        int rx = Math.round((image.getWidth() - rw)/2);
-        int ry = Math.round((image.getHeight() - rh)/2)-2;
-        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
-        return rimage;
-    }
-    public static Color borderColor(PaperCard c) {
-        if (c == null)
-            return Color.valueOf("#1d1d1d");
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#1d1d1d");
     }
 
     @Override
@@ -74,10 +54,13 @@ public class CardImage implements FImage {
         }
         else {
             if (mask) {
-                float radius = (h - w)/8;
-                g.drawRoundRect(3, borderColor(card), x, y, w, h, radius);
-                g.fillRoundRect(borderColor(card), x, y, w, h, radius);
-                g.drawImage(croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                if (ImageCache.isExtendedArt(card))
+                    g.drawImage(image, x, y, w, h);
+                else {
+                    float radius = (h - w)/8;
+                    g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+                    g.drawImage(ImageCache.croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                }
             }
             else
                 g.drawImage(image, x, y, w, h);

@@ -292,6 +292,11 @@ public class Graphics {
         return index + 2;
     }
 
+    public void drawfillBorder(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
+        drawRoundRect(thickness, color, x, y, w, h, cornerRadius);
+        fillRoundRect(color, x, y, w, h, cornerRadius);
+    }
+
     public void drawRoundRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
         drawRoundRect(thickness, skinColor.getColor(), x, y, w, h, cornerRadius);
     }
@@ -322,11 +327,8 @@ public class Graphics {
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
         shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
-
-        shapeRenderer.rect(adjustX(x) + cornerRadius, adjustY(y, cornerRadius), w - 2*cornerRadius, cornerRadius);
-        shapeRenderer.rect(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, h - 2*cornerRadius), cornerRadius, h - 2*cornerRadius);
-        shapeRenderer.rect(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, cornerRadius), w - 2*cornerRadius, cornerRadius);
-        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - 2*cornerRadius), cornerRadius, h - 2*cornerRadius);
+        shapeRenderer.rect(adjustX(x), adjustY(y+cornerRadius, h-cornerRadius*2), w, h-cornerRadius*2);
+        shapeRenderer.rect(adjustX(x+cornerRadius), adjustY(y, h), w-cornerRadius*2, h);
 
         endShape();
 
@@ -343,7 +345,10 @@ public class Graphics {
         batch.begin();
     }
 
-    public void fillRoundRect(Color color, float x, float y, float w, float h, float radius) {
+    public void fillRoundRect(FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
+        fillRoundRect(skinColor.getColor(), x, y, w, h, cornerRadius);
+    }
+    public void fillRoundRect(Color color, float x, float y, float w, float h, float cornerRadius) {
         batch.end(); //must pause batch while rendering shapes
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
@@ -353,13 +358,12 @@ public class Graphics {
         }
         startShape(ShapeType.Filled);
         shapeRenderer.setColor(color);
-        shapeRenderer.circle(adjustX(x+radius), adjustY(y+radius, 0), radius);
-        shapeRenderer.circle(adjustX((x+w) - radius), adjustY(y+radius, 0), radius);
-        shapeRenderer.circle(adjustX(x+radius), adjustY((y+h) - radius, 0), radius);
-        shapeRenderer.circle(adjustX((x+w) - radius), adjustY((y+h) - radius, 0), radius);
-
-        shapeRenderer.rect(adjustX(x), adjustY(y+radius, h-radius*2), w, h-radius*2);
-        shapeRenderer.rect(adjustX(x+radius), adjustY(y, h), w-radius*2, h);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+        shapeRenderer.rect(adjustX(x), adjustY(y+cornerRadius, h-cornerRadius*2), w, h-cornerRadius*2);
+        shapeRenderer.rect(adjustX(x+cornerRadius), adjustY(y, h), w-cornerRadius*2, h);
         endShape();
         if (color.a < 1) {
             Gdx.gl.glDisable(GL_BLEND);
