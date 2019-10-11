@@ -18,11 +18,17 @@
 package forge.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.ImageKeys;
+import forge.card.CardEdition;
+import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -58,6 +64,8 @@ public class ImageCache {
             .loader(new ImageLoader())
             .build();
     public static final Texture defaultImage;
+    public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
+    public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -155,5 +163,82 @@ public class ImageCache {
             }
         }
         return image;
+    }
+    public static void preloadCache(Iterable keys) {
+        cache.getAll(keys);
+    }
+    public static TextureRegion croppedBorderImage(Texture image) {
+        float rscale = 0.96f;
+        int rw = Math.round(image.getWidth()*rscale);
+        int rh = Math.round(image.getHeight()*rscale);
+        int rx = Math.round((image.getWidth() - rw)/2);
+        int ry = Math.round((image.getHeight() - rh)/2)-2;
+        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
+        return rimage;
+    }
+    public static boolean isWhiteBordered(IPaperCard c) {
+        if (c == null)
+            return false;
+
+        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
+        if (ed != null && ed.isWhiteBorder())
+            return true;
+        return false;
+    }
+    public static boolean isWhiteBordered(CardView c) {
+        if (c == null)
+            return false;
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return true;
+        return false;
+    }
+    public static Color borderColor(IPaperCard c) {
+        if (c == null)
+            return Color.valueOf("#171717");
+
+        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
+        if (ed != null && ed.isWhiteBorder())
+            return Color.valueOf("#fffffd");
+        return Color.valueOf("#171717");
+    }
+    public static Color borderColor(CardView c) {
+        if (c == null)
+            return Color.valueOf("#171717");
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return Color.valueOf("#fffffd");
+        return Color.valueOf("#171717");
+    }
+    public static boolean isExtendedArt(CardView c) {
+        if (c == null)
+            return false;
+
+        CardView.CardStateView state = c.getCurrentState();
+        if (state.getSetCode().contains("MPS_"))
+            return true;
+        return false;
+    }
+    public static boolean isExtendedArt(IPaperCard c) {
+        if (c == null)
+            return false;
+
+        if (c.getEdition().contains("MPS_"))
+            return true;
+        return false;
+    }
+    public static FImage getBorderImage(CardView c) {
+        if (isWhiteBordered(c))
+            return WhiteBorder;
+        return BlackBorder;
+    }
+    public static FImage getBorderImage(IPaperCard c) {
+        if (isWhiteBordered(c))
+            return WhiteBorder;
+        return BlackBorder;
     }
 }

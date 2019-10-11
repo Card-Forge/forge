@@ -305,6 +305,20 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         "Enable Round Border Mask",
                         "When enabled, the card corners are rounded (Preferably Card with Full Borders)."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
+                        "Preload Extended Art Cards",
+                        "When enabled, Preloads Extended Art Cards to Cache on Startup."),
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
+                        "Show FPS Display",
+                        "When enabled, show the FPS Display (Experimental)."){
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    //update
+                                    Forge.showFPS = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+                                }
+                            },4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                         localizer.getMessage("cbpCounterDisplayType"),

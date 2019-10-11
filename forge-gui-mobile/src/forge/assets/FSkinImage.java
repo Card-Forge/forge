@@ -282,6 +282,9 @@ public enum FSkinImage implements FImage {
     IMG_ABILITY_HEXPROOF_UB      (FSkinProp.IMG_ABILITY_HEXPROOF_UB, SourceFile.ABILITIES),
     //token icon
     IMG_ABILITY_TOKEN            (FSkinProp.IMG_ABILITY_TOKEN, SourceFile.ABILITIES),
+    //border
+    IMG_BORDER_BLACK            (FSkinProp.IMG_BORDER_BLACK, SourceFile.BORDERS),
+    IMG_BORDER_WHITE            (FSkinProp.IMG_BORDER_WHITE, SourceFile.BORDERS),
     //PROTECT ICONS
     IMG_ABILITY_PROTECT_ALL           (FSkinProp.IMG_ABILITY_PROTECT_ALL, SourceFile.ABILITIES),
     IMG_ABILITY_PROTECT_B             (FSkinProp.IMG_ABILITY_PROTECT_B, SourceFile.ABILITIES),
@@ -308,6 +311,7 @@ public enum FSkinImage implements FImage {
         OLD_FOILS(ForgeConstants.SPRITE_OLD_FOILS_FILE),
         TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
+        BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
