@@ -523,7 +523,6 @@ public class CardView extends GameEntityView {
     void updateChangedColorWords(Card c) {
         set(TrackableProperty.ChangedColorWords, c.getChangedTextColorWords());
     }
-
     public Map<String, String> getChangedTypes() {
         return get(TrackableProperty.ChangedTypes);
     }
@@ -706,11 +705,13 @@ public class CardView extends GameEntityView {
             // update the color only while in Game
             if (c.getGame() != null) {
                 currentStateView.updateColors(currentState);
+                currentStateView.updateHasChangeColors(!c.getChangedCardColors().isEmpty());
             }
         } else {
             currentStateView.updateLoyalty(currentState);
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
+        currentState.getView().setOriginalColors(c); //set original Colors
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -840,13 +841,22 @@ public class CardView extends GameEntityView {
         public ColorSet getColors() {
             return get(TrackableProperty.Colors);
         }
+        public ColorSet getOriginalColors() {
+            return get(TrackableProperty.OriginalColors);
+        }
         void updateColors(Card c) {
             set(TrackableProperty.Colors, c.determineColor());
         }
         void updateColors(CardState c) {
             set(TrackableProperty.Colors, ColorSet.fromMask(c.getColor()));
         }
-
+        void setOriginalColors(Card c) {
+            set(TrackableProperty.OriginalColors, c.determineColor());
+        }
+        void updateHasChangeColors(boolean hasChangeColor) {
+            set(TrackableProperty.HasChangedColors, hasChangeColor);
+        }
+        public boolean hasChangeColors() { return get(TrackableProperty.HasChangedColors); }
         public String getImageKey() {
             return getImageKey(null);
         }

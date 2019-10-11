@@ -129,6 +129,7 @@ public class VField extends FContainer {
                         cardName.equals(c.getCurrentState().getName()) &&
                         card.hasSameCounters(c) &&
                         card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
+                        card.getCurrentState().getColors() == c.getCurrentState().getColors() &&
                         card.isSick() == c.isSick() && //don't stack sick tokens on non sick
                         card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
                     CardAreaPanel cPanel = CardAreaPanel.get(c);

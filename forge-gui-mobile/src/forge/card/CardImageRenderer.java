@@ -326,7 +326,6 @@ public class CardImageRenderer {
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
-        //this one is currently using the mask, others are cropped and use generated borders from shaperenderer ...
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -391,7 +390,7 @@ public class CardImageRenderer {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(card), x, y, w, h);
+                        g.drawImage(ImageCache.getBorderImage(card, canLook), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
                 }

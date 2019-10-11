@@ -3155,6 +3155,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addColor(final String s, final boolean addToColors, final long timestamp) {
         changedCardColors.put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
+        currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
     }
 
     public final void removeColor(final long timestampIn) {
@@ -3162,6 +3163,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (removeCol != null) {
             currentState.getView().updateColors(this);
+            currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
         }
     }
 

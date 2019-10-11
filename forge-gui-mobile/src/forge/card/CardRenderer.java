@@ -427,7 +427,6 @@ public class CardRenderer {
                 g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
-
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
         boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
         Texture image = new RendererCachedCardImage(card, false).getImage();
@@ -456,7 +455,8 @@ public class CardRenderer {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
-                            g.drawImage(ImageCache.getBorderImage(card), x, y, w, h);
+                            boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
+                            g.drawBorderImage(ImageCache.getBorderImage(card,  MatchController.instance.mayView(card)), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
                     }
@@ -475,6 +475,9 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        boolean canShow = MatchController.instance.mayView(card);
+        float oldAlpha = g.getfloatAlphaComposite();
+        boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
         float cx, cy, cw, ch;
         cx = x; cy = y; cw = w; ch = h;
         drawCard(g, card, x, y, w, h, pos, false);
@@ -484,10 +487,6 @@ public class CardRenderer {
         y += padding;
         w -= 2 * padding;
         h -= 2 * padding;
-
-        boolean canShow = MatchController.instance.mayView(card);
-        float oldAlpha = g.getfloatAlphaComposite();
-        boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
         final CardStateView details = card.getCurrentState();
