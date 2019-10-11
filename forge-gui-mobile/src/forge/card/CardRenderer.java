@@ -120,6 +120,8 @@ public class CardRenderer {
     }
 
     public static Color getRarityColor(CardRarity rarity) {
+        if (rarity == null)// NPE from Rarity weird...
+            return Color.CLEAR;
         switch(rarity) {
         case Uncommon:
             return fromDetailColor(DetailColors.UNCOMMON);
