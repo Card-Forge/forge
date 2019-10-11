@@ -569,7 +569,7 @@ public class Graphics {
         if(tint){
             float oldalpha = alphaComposite;
             setAlphaComposite(0.8f);
-            drawRoundRect(1f, Color.WHITE, x, y, w, h, (h-w)/12);
+            drawRoundRect(2f, Color.WHITE, x, y, w, h, (h-w)/12);
             setAlphaComposite(1f);
             fillRoundRect(color, x, y, w, h, (h-w)/12);
             setAlphaComposite(oldalpha);
