@@ -4693,19 +4693,30 @@ public class CardFactoryUtil {
         }
         sa.setAdventure(true);
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+        sb.append("| ValidStackSa$ Spell.Adventure | Fizzle$ False | Secondary$ True | Description$ Adventure");
+
+        String repeffstr = sb.toString();
+
         String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
 
-        AbilitySub saExile = (AbilitySub)AbilityFactory.getAbility(abExile, card);
+        SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
         String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
-        sb.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
-        saEffect.setSVar("Play", sb.toString());
+        StringBuilder sbPlay = new StringBuilder();
+        sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+        sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+        saEffect.setSVar("Play", sbPlay.toString());
 
         saExile.setSubAbility(saEffect);
-        sa.appendSubAbility(saExile);
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
+        re.setLayer(ReplacementLayer.Other);
+
+        re.setOverridingAbility(saExile);
+        card.addReplacementEffect(re);
     }
 }
