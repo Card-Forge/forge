@@ -610,8 +610,14 @@ public class AiController {
             ComputerUtilAbility.getAvailableCards(game, player);
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        ComparatorUtil.verifyTransitivity(saComparator, all);
-        Collections.sort(all, saComparator); // put best spells first
+
+        try {
+            Collections.sort(all, saComparator); // put best spells first
+        }
+        catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            ComparatorUtil.verifyTransitivity(saComparator, all);
+        }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             ApiType saApi = sa.getApi();
@@ -1574,8 +1580,13 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
-        ComparatorUtil.verifyTransitivity(saComparator, all);
-        Collections.sort(all, saComparator); // put best spells first
+        try {
+            Collections.sort(all, saComparator); // put best spells first
+        }
+        catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            ComparatorUtil.verifyTransitivity(saComparator, all);
+        }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
