@@ -15,8 +15,9 @@ public final class ComparatorUtil
      * @param elements   the elements to test against
      * @throws AssertionError if the comparator is not transitive
      */
-    public static <T> void verifyTransitivity(Comparator<T> comparator, Collection<T> elements)
+    public static <T> String verifyTransitivity(Comparator<T> comparator, Collection<T> elements)
     {
+        String exception = "";
         for (T first: elements)
         {
             for (T second: elements)
@@ -27,8 +28,12 @@ public final class ComparatorUtil
                 {
                     // Uncomment the following line to step through the failed case
                     //comparator.compare(first, second);
-                    throw new AssertionError("compare(" + first + ", " + second + ") == " + result1 +
-                        " but swapping the parameters returns " + result2);
+                    /*throw new AssertionError("compare(" + first + ", " + second + ") == " + result1 +
+                        " but swapping the parameters returns " + result2);*/
+                    exception = "compare(" + first + ", " + second + ") == " + result1 +
+                            " but swapping the parameters returns " + result2;
+                    System.err.println(exception);
+                    return exception;
                 }
             }
         }
@@ -49,13 +54,19 @@ public final class ComparatorUtil
                     {
                         // Uncomment the following line to step through the failed case
                         //comparator.compare(first, third);
-                        throw new AssertionError("compare(" + first + ", " + second + ") > 0, " +
+                        /*throw new AssertionError("compare(" + first + ", " + second + ") > 0, " +
                             "compare(" + second + ", " + third + ") > 0, but compare(" + first + ", " + third + ") == " +
-                            firstGreaterThanThird);
+                            firstGreaterThanThird);*/
+                        exception = "compare(" + first + ", " + second + ") > 0, " +
+                                "compare(" + second + ", " + third + ") > 0, but compare(" + first + ", " + third + ") == " +
+                                firstGreaterThanThird;
+                        System.err.println(exception);
+                        return exception;
                     }
                 }
             }
         }
+        return exception;
     }
 
     /**
