@@ -145,11 +145,6 @@ public class GameAction {
             }
         }
 
-        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (c.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
-            c.setState(CardStateName.Original, true);
-        }
-
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
         // Clean up the temporary AtEOT SVar
         String endofTurn = c.getSVar("EndOfTurnLeavePlay");
@@ -350,6 +345,11 @@ public class GameAction {
                     e.removeEncodedCard(c);
                 }
             }
+        }
+
+        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
+        if (copied.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
+            copied.setState(CardStateName.Original, false);
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
