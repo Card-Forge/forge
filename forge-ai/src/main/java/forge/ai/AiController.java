@@ -59,6 +59,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.ComparatorUtil;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
@@ -609,6 +610,7 @@ public class AiController {
             ComputerUtilAbility.getAvailableCards(game, player);
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        ComparatorUtil.verifyTransitivity(saComparator, all);
         Collections.sort(all, saComparator); // put best spells first
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1572,8 +1574,9 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
+        ComparatorUtil.verifyTransitivity(saComparator, all);
         Collections.sort(all, saComparator); // put best spells first
-        
+
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
