@@ -610,15 +610,13 @@ public class AiController {
             ComputerUtilAbility.getAvailableCards(game, player);
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+
         try {
             Collections.sort(all, saComparator); // put best spells first
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
-            if (!assertex.isEmpty())
-                Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
-
+            ComparatorUtil.verifyTransitivity(saComparator, all);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1581,14 +1579,13 @@ public class AiController {
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
+
         try {
             Collections.sort(all, saComparator); // put best spells first
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
-            if (!assertex.isEmpty())
-                Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            ComparatorUtil.verifyTransitivity(saComparator, all);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -2138,6 +2135,6 @@ public class AiController {
         // happens here.
         return Iterables.getFirst(list, null);
     }
-
+    
 }
 
