@@ -563,6 +563,18 @@ public class Graphics {
     }
     public float getfloatAlphaComposite() { return  alphaComposite; }
 
+
+    public void drawBorderImage(FImage image, Color color, float x, float y, float w, float h, boolean tint) {
+        image.draw(this, x, y, w, h);
+        if(tint){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.8f);
+            drawRoundRect(2f, Color.WHITE, x, y, w, h, (h-w)/12);
+            setAlphaComposite(1f);
+            fillRoundRect(color, x, y, w, h, (h-w)/12);
+            setAlphaComposite(oldalpha);
+        }
+    }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
     }

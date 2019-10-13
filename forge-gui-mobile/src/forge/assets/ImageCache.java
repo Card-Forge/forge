@@ -231,7 +231,9 @@ public class ImageCache {
             return true;
         return false;
     }
-    public static FImage getBorderImage(CardView c) {
+    public static FImage getBorderImage(CardView c, boolean canshow) {
+        if (!canshow)
+            return BlackBorder;
         if (isWhiteBordered(c))
             return WhiteBorder;
         return BlackBorder;
@@ -240,5 +242,30 @@ public class ImageCache {
         if (isWhiteBordered(c))
             return WhiteBorder;
         return BlackBorder;
+    }
+    public static Color getTint(CardView c) {
+        if (c == null)
+            return Color.CLEAR;
+        if (c.isFaceDown())
+            return Color.CLEAR;
+
+        CardView.CardStateView state = c.getCurrentState();
+        if (state.getColors().isColorless()) //Moonlace -> target spell or permanent becomes colorless.
+            return Color.valueOf("#A0A6A4");
+        else if (state.getColors().isMonoColor()) {
+            if (state.getColors().hasBlack())
+                return Color.valueOf("#48494a");
+            else if (state.getColors().hasBlue())
+                return Color.valueOf("#62b5f8");
+            else if (state.getColors().hasRed())
+                return Color.valueOf("#f6532d");
+            else if (state.getColors().hasGreen())
+                return Color.valueOf("#66cb35");
+            else if (state.getColors().hasWhite())
+                return Color.valueOf("#EEEBE1");
+        }
+        else if (state.getColors().isMulticolor())
+            return Color.valueOf("#F9E084");
+        return Color.CLEAR;
     }
 }
