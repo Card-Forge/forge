@@ -616,7 +616,9 @@ public class AiController {
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            if (!assertex.isEmpty())
+                Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1585,7 +1587,9 @@ public class AiController {
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            if (!assertex.isEmpty())
+                Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
