@@ -26,8 +26,10 @@ import java.util.Map;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;
-    private static final int MAX_FONT_SIZE = 72;
-    private static final int MAX_FONT_SIZE_ZH_CN = 28;
+    private static int MAX_FONT_SIZE = 72;
+
+    private static final int MAX_FONT_SIZE_LESS_GLYPHS = 72;
+    private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
@@ -60,8 +62,9 @@ public class FSkinFont {
 
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
-        int maxfontSize = (language.equals("zh-CN")) ? MAX_FONT_SIZE_ZH_CN : MAX_FONT_SIZE;
-        for (int size = MIN_FONT_SIZE; size <= maxfontSize; size++) {
+        //todo:really check the language glyph is a lot
+        MAX_FONT_SIZE = (language.equals("zh-CN")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
     }
