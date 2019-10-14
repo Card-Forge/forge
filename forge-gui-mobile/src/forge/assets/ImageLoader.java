@@ -8,12 +8,14 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import forge.FThreads;
 import org.cache2k.integration.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
+    Texture n;
     @Override
     public Texture load(String key) {
         boolean extendedArt = false;
@@ -44,23 +46,28 @@ final class ImageLoader extends CacheLoader<String, Texture> {
     public Texture generateTexture(FileHandle fh, Texture t, boolean textureFilter) {
         if (t == null || fh == null)
             return t;
-        Pixmap pImage = new Pixmap(fh);
-        int w = pImage.getWidth();
-        int h = pImage.getHeight();
-        int radius = (h - w) / 8;
-        Pixmap pMask = createRoundedRectangle(w, h, radius, Color.RED);
-        drawPixelstoMask(pImage, pMask);
-        TextureData textureData = new PixmapTextureData(
-                pMask, //pixmap to use
-                Pixmap.Format.RGBA8888,
-                textureFilter, //use mipmaps
-                false, true);
-        t = new Texture(textureData);
-        if (textureFilter)
-            t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-        pImage.dispose();
-        pMask.dispose();
-        return t;
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                Pixmap pImage = new Pixmap(fh);
+                int w = pImage.getWidth();
+                int h = pImage.getHeight();
+                int radius = (h - w) / 8;
+                Pixmap pMask = createRoundedRectangle(w, h, radius, Color.RED);
+                drawPixelstoMask(pImage, pMask);
+                TextureData textureData = new PixmapTextureData(
+                        pMask, //pixmap to use
+                        Pixmap.Format.RGBA8888,
+                        textureFilter, //use mipmaps
+                        false, true);
+                n = new Texture(textureData);
+                if (textureFilter)
+                    n.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                pImage.dispose();
+                pMask.dispose();
+            }
+        });
+        return n;
     }
     public Pixmap createRoundedRectangle(int width, int height, int cornerRadius, Color color) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);

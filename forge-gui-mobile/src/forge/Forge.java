@@ -63,6 +63,9 @@ public class Forge implements ApplicationListener {
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
     public static boolean showFPS = false;
+    public static boolean enableUIMask = false;
+    public static boolean enablePreloadExtendedArt = false;
+    public static String locale = "en-US";
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -105,8 +108,10 @@ public class Forge implements ApplicationListener {
         FSkin.loadLight(skinName, splashScreen);
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
-
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
+        enableUIMask = prefs.getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
+        enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+        locale = prefs.getPref(FPref.UI_LANGUAGE);
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -121,15 +126,15 @@ public class Forge implements ApplicationListener {
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
-                FSkinFont.preloadAll(prefs.getPref(FPref.UI_LANGUAGE));
+                FSkinFont.preloadAll(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
-                CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
+                CardTranslation.preloadTranslation(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
-                if (prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+                if (enablePreloadExtendedArt)
                     splashScreen.getProgressBar().setDescription("Preload Extended Art...");
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
@@ -145,7 +150,7 @@ public class Forge implements ApplicationListener {
     }
 
     private void preloadExtendedArt() {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART))
+        if (!enablePreloadExtendedArt)
             return;
         List<String> keys = new ArrayList<>();
         File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
