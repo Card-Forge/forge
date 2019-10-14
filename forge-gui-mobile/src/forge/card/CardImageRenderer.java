@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkinColor;
@@ -325,7 +326,6 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
-        boolean mask = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -354,7 +354,7 @@ public class CardImageRenderer {
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
-                if (mask){
+                if (Forge.enableUIMask){
                     if (ImageCache.isExtendedArt(card))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
@@ -370,7 +370,7 @@ public class CardImageRenderer {
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
-                if (mask) {
+                if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
@@ -386,7 +386,7 @@ public class CardImageRenderer {
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             }
             else {
-                if (mask) {
+                if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
                     else {
@@ -559,9 +559,5 @@ public class CardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, Align.center, true);
-    }
-
-    private static boolean isPreferenceEnabled(ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 }

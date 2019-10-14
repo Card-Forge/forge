@@ -1,5 +1,6 @@
 package forge.itemmanager.views;
 
+import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -181,7 +182,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getPnlOptions().add(cbPileByOptions);
 
         Group group = new Group(""); //add default group
-        groups.add(group); 
+        groups.add(group);
         getScroller().add(group);
     }
 
@@ -300,7 +301,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 updateLayout(false);
                 return;
             }
-    
+
             float offsetTop = focalItem0.getTop() - getScrollValue();
             updateLayout(false);
             setScrollValue(focalItem0.getTop() - offsetTop);
@@ -891,7 +892,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public void draw(Graphics g) {
             final float visibleTop = getScrollValue();
             final float visibleBottom = visibleTop + getScroller().getHeight();
-            
+
             ItemInfo skippedItem = null;
             for (ItemInfo itemInfo : items) {
                 if (itemInfo.getBottom() < visibleTop) {
@@ -954,9 +955,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final float w = getWidth();
             final float h = getHeight();
 
-            if (selected) {
-                g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
-                        w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+            if (selected) { //if round border is enabled, the select highlight is also rounded..
+                if (Forge.enableUIMask) {
+                    //fillroundrect has rough/aliased corner
+                    g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
+                    //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
+                    g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                            w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
+                }
+                else //default rectangle highlight
+                    g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
             }
 
             if (item instanceof PaperCard) {

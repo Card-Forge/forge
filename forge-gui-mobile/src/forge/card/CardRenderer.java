@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import forge.CachedCardImage;
+import forge.Forge;
 import forge.FThreads;
 import forge.Graphics;
 import forge.StaticData;
@@ -394,7 +395,6 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
-        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
         Texture image = new RendererCachedCardImage(pc, false).getImage();
         float radius = (h - w)/8;
 
@@ -403,7 +403,7 @@ public class CardRenderer {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             }
             else {
-                if (mask) {
+                if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(pc))
                         g.drawImage(image, x, y, w, h);
                     else {
@@ -423,14 +423,13 @@ public class CardRenderer {
             }
         }
         else {
-            if (mask) //render this if mask is still loading
+            if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
         Texture image = new RendererCachedCardImage(card, false).getImage();
         float radius = (h - w)/8;
 
@@ -441,7 +440,7 @@ public class CardRenderer {
             else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
-                    if (mask) {
+                    if (Forge.enableUIMask) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
@@ -453,7 +452,7 @@ public class CardRenderer {
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 }
                 else {
-                    if (mask) {
+                    if (Forge.enableUIMask) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
@@ -469,7 +468,7 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         }
         else {
-            if (mask) //render this if mask is still loading
+            if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
