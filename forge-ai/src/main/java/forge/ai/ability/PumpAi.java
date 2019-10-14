@@ -309,7 +309,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
-            if (numDefense.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+            if (numDefense.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 defense--; // the card will be spent casting the spell, so actual toughness is 1 less
             }
         }
@@ -328,7 +328,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
-            if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+            if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 attack--; // the card will be spent casting the spell, so actual power is 1 less
             }
         }

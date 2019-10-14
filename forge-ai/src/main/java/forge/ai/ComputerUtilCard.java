@@ -1294,7 +1294,7 @@ public class ComputerUtilCard {
                 // cast it during Declare Blockers, thus ruining its attacker
                 if (holdCombatTricks && sa.getApi() == ApiType.Pump
                         && sa.hasParam("NumAtt") && sa.getHostCard() != null
-                        && sa.getHostCard().getZone() != null && sa.getHostCard().getZone().is(ZoneType.Hand)
+                        && sa.getHostCard().isInZone(ZoneType.Hand)
                         && c.getNetPower() > 0 // too obvious if attacking with a 0-power creature
                         && sa.getHostCard().isInstant() // only do it for instant speed spells in hand
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(sa, ai)) {

@@ -251,7 +251,7 @@ public class GameAction {
             }
             if(noLandLKI.isLand()) {
                 // if it isn't on the Stack, it stays in that Zone
-                if (!c.getZone().is(ZoneType.Stack)) {
+                if (!c.isInZone(ZoneType.Stack)) {
                     return c;
                 }
                 // if something would only be a land when entering the battlefield and not before
