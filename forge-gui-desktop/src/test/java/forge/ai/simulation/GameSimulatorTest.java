@@ -1850,7 +1850,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
         assertNotNull(simSpark);
-        assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
+        assertTrue(simSpark.isInZone(ZoneType.Battlefield));
         assertEquals(1, simSpark.getCounters(CounterType.P1P1));
         assertEquals(5, simSpark.getCounters(CounterType.LOYALTY));
     }

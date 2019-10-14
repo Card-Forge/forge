@@ -2403,7 +2403,7 @@ public class ComputerUtil {
             }
             // if source is not on the battlefield anymore, choose +1/+1
             // ones
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Feather" : "Quill";
             }
             // if no hand cards, try to mill opponent
@@ -2435,7 +2435,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Strength" : "Numbers";
             }
 
@@ -2484,7 +2484,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Sprout" : "Harvest";
             }
             // TODO add Lifegain to +1/+1 counters trigger

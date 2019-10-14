@@ -110,7 +110,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("CloneZone")) {
-            if (!tgtCard.getZone().is(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
+            if (!tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
                 return;
             }
         }
@@ -134,7 +134,7 @@ public class CloneEffect extends SpellAbilityEffect {
         tgtCard.clearImprintedCards();
 
         // check if clone is now an Aura that needs to be attached
-        if (tgtCard.isAura() && !tgtCard.getZone().is(ZoneType.Battlefield)) {
+        if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
         }
 
