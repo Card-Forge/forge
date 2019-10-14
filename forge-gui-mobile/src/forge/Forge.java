@@ -129,7 +129,7 @@ public class Forge implements ApplicationListener {
                 FSkinFont.preloadAll(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
-                CardTranslation.preloadTranslation(prefs.getPref(FPref.UI_LANGUAGE));
+                CardTranslation.preloadTranslation(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
