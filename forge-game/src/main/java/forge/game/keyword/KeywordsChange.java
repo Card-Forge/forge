@@ -23,6 +23,11 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 
 /**
  * <p>
@@ -131,7 +136,13 @@ public class KeywordsChange  implements Cloneable {
             inst.createTraits(host, false, true);
         }
     }
-    
+
+    public final void addKeywordsToPlayer(final Player player) {
+        for (KeywordInterface inst : keywords.getValues()) {
+            inst.createTraits(player, true);
+        }
+    }
+
     public final boolean removeKeywordfromAdd(final String keyword) {
         return keywords.remove(keyword);
     }
@@ -199,6 +210,47 @@ public class KeywordsChange  implements Cloneable {
         }  catch (final Exception ex) {
             throw new RuntimeException("KeywordsChange : clone() error", ex);
         }
+    }
+
+    /**
+     * @return the triggers
+     */
+    public Collection<Trigger> getTriggers() {
+        List<Trigger> result = Lists.newArrayList();
+        for (KeywordInterface k : this.keywords.getValues()) {
+            result.addAll(k.getTriggers());
+        }
+        return result;
+    }
+    /**
+     * @return the replacements
+     */
+    public Collection<ReplacementEffect> getReplacements() {
+        List<ReplacementEffect> result = Lists.newArrayList();
+        for (KeywordInterface k : this.keywords.getValues()) {
+            result.addAll(k.getReplacements());
+        }
+        return result;
+    }
+    /**
+     * @return the abilities
+     */
+    public Collection<SpellAbility> getAbilities() {
+        List<SpellAbility> result = Lists.newArrayList();
+        for (KeywordInterface k : this.keywords.getValues()) {
+            result.addAll(k.getAbilities());
+        }
+        return result;
+    }
+    /**
+     * @return the staticAbilities
+     */
+    public Collection<StaticAbility> getStaticAbilities() {
+        List<StaticAbility> result = Lists.newArrayList();
+        for (KeywordInterface k : this.keywords.getValues()) {
+            result.addAll(k.getStaticAbilities());
+        }
+        return result;
     }
 
     /* (non-Javadoc)

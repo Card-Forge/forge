@@ -20,6 +20,8 @@ package forge.game.player;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+
+import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.*;
@@ -41,7 +43,6 @@ import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -155,6 +156,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Card monarchEffect = null;
     private Card blessingEffect = null;
+    private Card keywordEffect = null;
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -1025,23 +1027,25 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
         // if the key already exists - merge entries
+        KeywordsChange cks = null;
         if (changedKeywords.containsKey(timestamp)) {
-            final KeywordsChange cks = changedKeywords.get(timestamp);
+            getKeywordCard().removeChangedCardTraits(timestamp);
 
-            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords,
-                    cks.isRemoveAllKeywords(), cks.isRemoveIntrinsicKeywords()));
-            updateKeywords();
-            return;
+            cks = changedKeywords.get(timestamp).merge(addKeywords, removeKeywords, false, false);
+        } else {
+            cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
         }
-
-        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false, false));
+        cks.addKeywordsToPlayer(this);
+        getKeywordCard().addChangedCardTraits(cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp);
+        changedKeywords.put(timestamp, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp) {
-        KeywordsChange change = changedKeywords.remove(Long.valueOf(timestamp));
+        KeywordsChange change = changedKeywords.remove(timestamp);
         if (change != null) {
+            getKeywordCard().removeChangedCardTraits(timestamp);
             updateKeywords();
             game.fireEvent(new GameEventPlayerStatsChanged(this));
         }
@@ -1100,6 +1104,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final Entry<Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.entrySet())) {
             if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getKey()) != null) {
                 keywordRemoved = true;
+                getKeywordCard().removeChangedCardTraits(ck.getKey());
             }
         }
 
@@ -1178,33 +1183,17 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (hasKeyword("Shroud")) {
-            return false;
-        }
-        if (hasKeyword("Hexproof")) {
-            final Player a = sa.getActivatingPlayer();
-            if (isOpponentOf(a)) {
-                boolean cancelHexproof = false;
-                for (String k : a.getKeywords()) {
-                    if (k.startsWith("IgnoreHexproof")) {
-                        String[] m = k.split(":");
-                        if (isValid(m[1].split(","), a, sa.getHostCard(), sa)) {
-                            cancelHexproof = true;
-                            break;
-                        }
-                    }
-                }
-                if (!cancelHexproof) {
+
+        // CantTarget static abilities
+        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
                 }
             }
         }
 
-        if (hasProtectionFrom(sa.getHostCard())) {
-            return false;
-        }
-
-        return (!hasKeyword("You can't be the targets of spells or activated abilities") || (!sa.isSpell() && (!(sa instanceof AbilityActivated))));
+        return !hasProtectionFrom(sa.getHostCard());
     }
 
 
@@ -2970,5 +2959,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
                 || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
 
+    }
+
+    public Card getKeywordCard() {
+        if (keywordEffect != null) {
+            return keywordEffect;
+        }
+
+        final PlayerZone com = getZone(ZoneType.Command);
+
+        keywordEffect = new Card(game.nextCardId(), null, false, game);
+        keywordEffect.setImmutable(true);
+        keywordEffect.setOwner(this);
+        keywordEffect.setName("Keyword Effects");
+        keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);
+        keywordEffect.addType("Effect");
+
+        keywordEffect.updateStateForView();
+
+        com.add(keywordEffect);
+
+        this.updateZoneForView(com);
+        return keywordEffect;
     }
 }

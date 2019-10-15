@@ -228,7 +228,7 @@ public class GameCopier {
             CardFactory.copyCopiableCharacteristics(c, result);
             return result;
         }
-        if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
+        if (USE_FROM_PAPER_CARD && !c.isEmblem() && c.getPaperCard() != null) {
             Card newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
             newCard.setCommander(c.isCommander());
             return newCard;

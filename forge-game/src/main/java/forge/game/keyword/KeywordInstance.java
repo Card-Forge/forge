@@ -9,6 +9,8 @@ import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerFactoryUtil;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -82,7 +84,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public final void createTraits(final Card host, final boolean intrinsic) {
         createTraits(host, intrinsic, false);
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
@@ -125,6 +127,53 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         }
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player)
+     */
+    @Override
+    public void createTraits(Player player) {
+        createTraits(player, false);
+    }
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player, boolean)
+     */
+    @Override
+    public void createTraits(Player player, boolean clear) {
+        if (clear) {
+            triggers.clear();
+            replacements.clear();
+            abilities.clear();
+            staticAbilities.clear();
+        }
+        try {
+            String msg = "KeywordInstance:createTraits: make Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Player", player.getName()).withData("Keyword", this.original).build()
+            );
+
+            // add Extra for debugging
+            Sentry.getContext().addExtra("Player", player);
+            Sentry.getContext().addExtra("Keyword", this.original);
+
+            PlayerFactoryUtil.addTriggerAbility(this, player);
+            PlayerFactoryUtil.addReplacementEffect(this, player);
+            PlayerFactoryUtil.addSpellAbility(this, player);
+            PlayerFactoryUtil.addStaticAbility(this, player);
+        } catch (Exception e) {
+            String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Player", player.getName()).withData("Keyword", this.original).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + this.original + " for player " + player.getName(), e);
+        } finally {
+            // remove added extra
+            Sentry.getContext().removeExtra("Player");
+            Sentry.getContext().removeExtra("Keyword");
+        }
+    }
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#addTrigger(forge.game.trigger.Trigger)
