@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/10/132.-ELD1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You have three cards in your graveyard.
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Irencrag Feat;Charnel Troll;Steelbane Hydra;Festive Funeral;Trollbred Guardian
+humangraveyard=Molderhulk;Stomping Ground;Deathless Knight
+humanbattlefield=Fires of Invention;Goblin Smuggler;Yorvo, Lord of Garenbrig|Counters:P1P1=8;Vraska, Golgari Queen|Counters:LOYALTY=9;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Forest|Set:ELD;Forest|Set:ELD
+aibattlefield=Inspiring Veteran
+aiprecast=The Circle of Loyalty:TrigToken;The Circle of Loyalty:TrigToken;The Circle of Loyalty:TrigToken;The Circle of Loyalty:TrigToken;The Circle of Loyalty:TrigToken;The Circle of Loyalty:TrigToken
+removesummoningsickness=true
