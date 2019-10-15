@@ -4501,7 +4501,9 @@ public class CardFactoryUtil {
             effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
-
+        } else if (keyword.equals("Shroud")) {
+            effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
+                    + " | Description$ Shroud (" + inst.getReminderText() + ")";
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

@@ -120,7 +120,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
-        p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
+
+        if (!keywords.isEmpty()) {
+            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
+        }
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
@@ -129,12 +132,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-
-                    if (keywords.size() > 0) {
-                        for (int i = 0; i < keywords.size(); i++) {
-                            p.removeKeyword(keywords.get(i));
-                        }
-                    }
+                    p.removeChangedKeywords(timestamp);
                 }
             };
             addUntilCommand(sa, untilEOT);
