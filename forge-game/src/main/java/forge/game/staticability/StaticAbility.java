@@ -391,6 +391,23 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
+    public final boolean applyAbility(final String mode, final Player player, final SpellAbility spellAbility) {
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantTarget")) {
+            return StaticAbilityCantTarget.applyCantTargetAbility(this, player, spellAbility);
+        }
+
+        return false;
+    }
+
     public final boolean applyAbility(String mode, Card card, CounterType type) {
 
         // don't apply the ability if it hasn't got the right mode

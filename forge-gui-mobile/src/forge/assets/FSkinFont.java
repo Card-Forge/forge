@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import forge.FThreads;
+import forge.Forge;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.TextBounds;
@@ -26,8 +27,10 @@ import java.util.Map;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;
-    private static final int MAX_FONT_SIZE = 72;
-    private static final int MAX_FONT_SIZE_ZH_CN = 28;
+    private static int MAX_FONT_SIZE = 72;
+
+    private static final int MAX_FONT_SIZE_LESS_GLYPHS = 72;
+    private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
@@ -60,8 +63,9 @@ public class FSkinFont {
 
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
-        int maxfontSize = (language.equals("zh-CN")) ? MAX_FONT_SIZE_ZH_CN : MAX_FONT_SIZE;
-        for (int size = MIN_FONT_SIZE; size <= maxfontSize; size++) {
+        //todo:really check the language glyph is a lot
+        MAX_FONT_SIZE = (language.equals("zh-CN")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
     }
@@ -357,7 +361,8 @@ public class FSkinFont {
         //generate from zh-CN.properties,and cardnames-zh-CN.txt
         //forge generate 3000+ characters cache need Take some time(MIN_FONT_SIZE - MAX_FONT_SIZE all size)
         //maybe using libgdx-hiero generate font cache is better
-        chars += "●、。「」『』一丁七万三上下不与丑专且世丘业丛东丝两严丧个中"
+        if (Forge.locale.equals("zh-CN"))
+            chars += "●、。「」『』一丁七万三上下不与丑专且世丘业丛东丝两严丧个中"
               +  "丰临丸丹为主丽举乃久么义之乌乍乐乔乖乘乙九也乡书乱乳乾了予争"
               +  "事二于云互五井亘亚些亡交亥亦产享京亮亲亵人亿什仁仅仆仇今介仍"
               +  "从仑仓仕他仗付仙代令以仪们仰仲件价任份仿伊伍伏伐休众优伙会伟"

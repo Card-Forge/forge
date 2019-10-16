@@ -3,6 +3,7 @@ package forge.game.keyword;
 import java.util.Collection;
 
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -24,6 +25,9 @@ public interface KeywordInterface extends Cloneable {
     void createTraits(final Card host, final boolean intrinsic);
     void createTraits(final Card host, final boolean intrinsic, final boolean clear);
     
+    void createTraits(final Player player);
+    void createTraits(final Player player, final boolean clear);
+
     void addTrigger(final Trigger trg);
     
     void addReplacement(final ReplacementEffect trg);

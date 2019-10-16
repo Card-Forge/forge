@@ -616,7 +616,8 @@ public class AiController {
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1585,7 +1586,8 @@ public class AiController {
         }
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1844,7 +1846,7 @@ public class AiController {
                     // Special case for Bow to My Command which simulates a complex tap cost via ChooseCard
                     // TODO: consider enhancing support for tapXType<Any/...> in UnlessCost to get rid of this hack
                     if ("BowToMyCommand".equals(sa.getParam("AILogic"))) {
-                        if (!sa.getHostCard().getZone().is(ZoneType.Command)) {
+                        if (!sa.getHostCard().isInZone(ZoneType.Command)) {
                             // Make sure that other opponents do not tap for an already abandoned scheme
                             result.clear();
                             break;

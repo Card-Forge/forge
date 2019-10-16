@@ -69,6 +69,7 @@ public enum TrackableProperty {
     //Card State
     Name(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
+    OriginalColors(TrackableTypes.ColorSetType),
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
@@ -80,6 +81,7 @@ public enum TrackableProperty {
     Toughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.StringType),
     ChangedColorWords(TrackableTypes.StringMapType),
+    HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
     KeywordKey(TrackableTypes.StringType),

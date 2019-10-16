@@ -300,12 +300,12 @@ public final class GameActionUtil {
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {
-                if (source.getZone().is(ZoneType.Graveyard)) {
+                if (source.isInZone(ZoneType.Graveyard)) {
                     final Cost cost = new Cost("Discard<1/Land>", false);
                     costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
                 }
             } else if (keyword.equals("Jump-start")) {
-                if (source.getZone().is(ZoneType.Graveyard)) {
+                if (source.isInZone(ZoneType.Graveyard)) {
                     final Cost cost = new Cost("Discard<1/Card>", false);
                     costs.add(new OptionalCostValue(OptionalCost.Jumpstart, cost));
                 }

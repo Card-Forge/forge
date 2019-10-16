@@ -192,7 +192,7 @@ public class CostAdjustment {
         }
 
         for (final StaticAbility stAb : reduceAbilities) {
-            sumGeneric += applyReduceCostAbility(stAb, sa, cost);
+            sumGeneric += applyReduceCostAbility(stAb, sa, cost, sumGeneric);
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
@@ -360,7 +360,7 @@ public class CostAdjustment {
      * @param manaCost
      *            a ManaCost
      */
-    private static int applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+    private static int applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost, int sumReduced) {
         //Can't reduce zero cost
         if (manaCost.toString().equals("{0}")) {
             return 0;
@@ -393,7 +393,7 @@ public class CostAdjustment {
                 minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
             }
 
-            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
+            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana - sumReduced);
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }

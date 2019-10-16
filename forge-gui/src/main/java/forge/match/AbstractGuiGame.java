@@ -58,7 +58,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final void setCurrentPlayer(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
-        if (!gameControllers.containsKey(player)) {
+        if (hasLocalPlayers() && !isLocalPlayer(player)) { //add check if gameControllers is not empty
             throw new IllegalArgumentException();
         }
 

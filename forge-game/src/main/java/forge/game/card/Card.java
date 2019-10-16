@@ -3155,6 +3155,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addColor(final String s, final boolean addToColors, final long timestamp) {
         changedCardColors.put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
+        currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
     }
 
     public final void removeColor(final long timestampIn) {
@@ -3162,6 +3163,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (removeCol != null) {
             currentState.getView().updateColors(this);
+            currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
         }
     }
 
@@ -5616,34 +5618,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final Card source = sa.getHostCard();
-        final MutableBoolean result = new MutableBoolean(true);
-        visitKeywords(currentState, new Visitor<KeywordInterface>() {
-            @Override
-            public boolean visit(KeywordInterface kw) {
-                switch (kw.getOriginal()) {
-                    case "Shroud":
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("Can target CardUID_").append(getId());
-                        sb.append(" with spells and abilities as though it didn't have shroud.");
-                        if (sa.getActivatingPlayer() == null) {
-                            System.err.println("Unexpected behavior: SA activator was null when trying to determine if the activating player could target a card with Shroud. SA host card = " + source + ", SA = " + sa);
-                            result.setFalse(); // FIXME: maybe this should check by SA host card controller at this point instead?
-                        } else if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of spells.":
-                        if (sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
-                }
-                return result.isTrue();
-            }
-        });
-        if (result.isFalse()) {
-            return false;
-        }
+
         if (sa.isSpell()) {
             for(KeywordInterface inst : source.getKeywords()) {
                 String kw = inst.getOriginal();

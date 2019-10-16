@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import forge.CachedCardImage;
+import forge.Forge;
 import forge.FThreads;
 import forge.Graphics;
 import forge.StaticData;
@@ -120,6 +121,8 @@ public class CardRenderer {
     }
 
     public static Color getRarityColor(CardRarity rarity) {
+        if (rarity == null)// NPE from Rarity weird...
+            return Color.CLEAR;
         switch(rarity) {
         case Uncommon:
             return fromDetailColor(DetailColors.UNCOMMON);
@@ -392,7 +395,6 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
-        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
         Texture image = new RendererCachedCardImage(pc, false).getImage();
         float radius = (h - w)/8;
 
@@ -401,7 +403,7 @@ public class CardRenderer {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             }
             else {
-                if (mask) {
+                if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(pc))
                         g.drawImage(image, x, y, w, h);
                     else {
@@ -421,15 +423,13 @@ public class CardRenderer {
             }
         }
         else {
-            if (mask) //render this if mask is still loading
+            if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
-
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        boolean mask = isPreferenceEnabled(FPref.UI_ENABLE_BORDER_MASKING);
         Texture image = new RendererCachedCardImage(card, false).getImage();
         float radius = (h - w)/8;
 
@@ -440,7 +440,7 @@ public class CardRenderer {
             else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
-                    if (mask) {
+                    if (Forge.enableUIMask) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
@@ -452,11 +452,12 @@ public class CardRenderer {
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 }
                 else {
-                    if (mask) {
+                    if (Forge.enableUIMask) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
-                            g.drawImage(ImageCache.getBorderImage(card), x, y, w, h);
+                            boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
+                            g.drawBorderImage(ImageCache.getBorderImage(card,  MatchController.instance.mayView(card)), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
                     }
@@ -467,7 +468,7 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         }
         else {
-            if (mask) //render this if mask is still loading
+            if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
@@ -475,6 +476,9 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        boolean canShow = MatchController.instance.mayView(card);
+        float oldAlpha = g.getfloatAlphaComposite();
+        boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
         float cx, cy, cw, ch;
         cx = x; cy = y; cw = w; ch = h;
         drawCard(g, card, x, y, w, h, pos, false);
@@ -484,10 +488,6 @@ public class CardRenderer {
         y += padding;
         w -= 2 * padding;
         h -= 2 * padding;
-
-        boolean canShow = MatchController.instance.mayView(card);
-        float oldAlpha = g.getfloatAlphaComposite();
-        boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
         final CardStateView details = card.getCurrentState();
