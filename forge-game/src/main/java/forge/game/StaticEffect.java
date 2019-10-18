@@ -324,6 +324,9 @@ public class StaticEffect {
             if (hasParam("CanBlockAmount")) {
                 affectedCard.removeCanBlockAdditional(getTimestamp());
             }
+            if (hasParam("CantUntap")) {
+                affectedCard.removeCantUntap(getTimestamp());
+            }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }

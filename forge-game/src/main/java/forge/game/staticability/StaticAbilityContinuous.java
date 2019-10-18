@@ -677,6 +677,9 @@ public final class StaticAbilityContinuous {
                     int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
                     affectedCard.addCanBlockAdditional(v, se.getTimestamp());
                 }
+                if (params.containsKey("CantUntap")) {
+                    affectedCard.addCantUntap(se.getTimestamp());
+                }
             }
 
             if (mayLookAt != null) {

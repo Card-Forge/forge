@@ -86,14 +86,13 @@ public class Untap extends Phase {
 
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")
-                || c.hasKeyword("This card doesn't untap during your next two untap steps.")
-                || c.hasKeyword("This card doesn't untap.")) {
+                || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
             return false;
         }
+
         //exerted need current player turn
         final Player playerTurn = c.getGame().getPhaseHandler().getPlayerTurn();
-
-        return !c.isExertedBy(playerTurn);
+        return c.canUntapPhase(playerTurn);
     }
 
     public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
@@ -161,11 +160,10 @@ public class Untap extends Phase {
         // other players untapping during your untap phase
         List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
-        cardsWithKW = CardLists.getNotKeyword(cardsWithKW, "This card doesn't untap.");
         
         cardsWithKW = CardLists.filterControlledBy(cardsWithKW, player.getAllOtherPlayers());
         for (final Card cardWithKW : cardsWithKW) {
-            if (cardWithKW.isExertedBy(player)) {
+            if (!cardWithKW.canUntapPhase(player)) {
                 continue;
             }
             cardWithKW.untap();

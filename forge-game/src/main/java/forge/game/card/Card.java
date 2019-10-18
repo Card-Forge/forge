@@ -280,6 +280,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Table<SpellAbility, StaticAbility, Integer> numberTurnActivationsStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, Integer> numberGameActivationsStatic = HashBasedTable.create();
 
+    private final Map<Long, Integer> cantUntapTurns = Maps.newTreeMap();
+    private final Set<Long> cantUntap = Sets.newHashSet();
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -3604,6 +3606,24 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         setTapped(true);
         getGame().fireEvent(new GameEventCardTapped(this, true));
+    }
+
+    public final boolean canUntapPhase(Player activePlayer) {
+        if (activePlayer.equals(getController())) {
+            if (!cantUntap.isEmpty() || !cantUntapTurns.isEmpty()) {
+                return false;
+            }
+        }
+
+        return !isExertedBy(activePlayer);
+    }
+
+    public final boolean addCantUntap(final long timestamp) {
+        return cantUntap.add(timestamp);
+    }
+
+    public final boolean removeCantUntap(final long timestamp) {
+        return cantUntap.remove(timestamp);
     }
 
     public final void untap() {
