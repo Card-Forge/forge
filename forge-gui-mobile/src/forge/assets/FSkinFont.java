@@ -463,7 +463,7 @@ public class FSkinFont {
               +  "驽驾驿骁骂骄骆骇验骏骐骑骗骚骤骨骰骷骸骼髅髓高鬃鬓鬣鬼魁魂魄"
               +  "魅魇魈魏魔鰴鱼鲁鲜鲤鲨鲮鲸鲽鳃鳄鳍鳐鳗鳝鳞鸟鸠鸡鸢鸣鸦鸽鹅鹉"
               +  "鹊鹏鹗鹞鹤鹦鹫鹭鹰鹿麋麒麟麦麻黄黎黏黑默黛黜點黠黯鼎鼓鼠鼬鼹"
-              +  "鼻齐齑齿龇龙龟！（），／：；？～";
+              +  "鼻齐齑齿龇龙龟伸！（），／：；？～";
 
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
