@@ -2,7 +2,7 @@ Name:Blizzard
 ManaCost:G G
 Types:Enchantment
 K:Cumulative upkeep:2
-S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with flying don't untap during their controllers' untap steps.
+S:Mode$ Continuous | Affected$ Creature.withFlying | CantUntap$ True | Description$ Creatures with flying don't untap during their controllers' untap steps.
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Cast CARDNAME only if you control a snow land.
 SVar:X:Count$Valid Snow.Land+YouCtrl
 AI:RemoveDeck:Random

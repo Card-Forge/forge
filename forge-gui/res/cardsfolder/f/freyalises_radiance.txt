@@ -1,7 +1,7 @@
 Name:Freyalise's Radiance
 ManaCost:1 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Permanent.Snow | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Snow permanents don't untap during their controllers' untap steps.
+S:Mode$ Continuous | Affected$ Permanent.Snow | CantUntap$ True | Description$ Snow permanents don't untap during their controllers' untap steps.
 K:Cumulative upkeep:2
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

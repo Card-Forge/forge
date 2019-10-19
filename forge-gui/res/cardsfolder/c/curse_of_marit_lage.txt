@@ -1,7 +1,7 @@
 Name:Curse of Marit Lage
 ManaCost:3 R R
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Island | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Islands don't untap during their controllers' untap steps.
+S:Mode$ Continuous | Affected$ Island | CantUntap$ True | Description$ Islands don't untap during their controllers' untap steps.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all Islands.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Island
 SVar:NonStackingEffect:True

@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | CantUntap$ True | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If they do, untap the creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted | UnlessCost$ 4 | UnlessPayer$ EnchantedController | UnlessSwitched$ True | UnlessAI$ Paralyze
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyze.jpg
