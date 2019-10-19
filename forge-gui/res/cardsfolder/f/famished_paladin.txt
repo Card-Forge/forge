@@ -2,7 +2,7 @@ Name:Famished Paladin
 ManaCost:1 W
 Types:Creature Vampire Knight
 PT:3/3
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap  | TriggerDescription$ Whenever you gain life, untap CARDNAME. 
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random

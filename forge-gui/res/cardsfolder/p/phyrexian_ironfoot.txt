@@ -2,7 +2,7 @@ Name:Phyrexian Ironfoot
 ManaCost:3
 Types:Snow Artifact Creature Construct
 PT:3/4
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 1 S | SpellDescription$ Untap CARDNAME.
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random

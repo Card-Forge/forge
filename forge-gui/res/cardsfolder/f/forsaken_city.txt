@@ -1,7 +1,7 @@
 Name:Forsaken City
 ManaCost:no cost
 Types:Land
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ ExileFromHand<1/Card> | Defined$ Self

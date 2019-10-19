@@ -1,7 +1,7 @@
 Name:Basalt Monolith
 ManaCost:3
 Types:Artifact
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 3 | SpellDescription$ Untap CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
 AI:RemoveDeck:Random

@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Construct
 PT:7/7
 K:Trample
 K:CARDNAME enters the battlefield tapped.
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, untap Traxos. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Card.Historic

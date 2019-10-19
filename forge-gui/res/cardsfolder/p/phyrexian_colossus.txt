@@ -2,7 +2,7 @@ Name:Phyrexian Colossus
 ManaCost:7
 Types:Artifact Creature Golem
 PT:8/8
-K:CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.Self | CantUntap$ True | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ PayLife<8> | SpellDescription$ Untap CARDNAME.
 K:CantBeBlockedByAmount LT3
 AI:RemoveDeck:All
