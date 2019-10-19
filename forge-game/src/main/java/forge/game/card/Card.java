@@ -3610,12 +3610,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean canUntapPhase(Player activePlayer) {
         if (activePlayer.equals(getController())) {
-            if (!cantUntap.isEmpty() || !cantUntapTurns.isEmpty()) {
-                return false;
-            }
+            return canUntapPhaseController();
         }
 
         return !isExertedBy(activePlayer);
+    }
+
+    public final boolean canUntapPhaseController() {
+        if (!cantUntap.isEmpty() || !cantUntapTurns.isEmpty()) {
+            return false;
+        }
+
+        return !isExertedBy(getController());
     }
 
     public final boolean addCantUntap(final long timestamp) {

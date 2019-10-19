@@ -2779,7 +2779,7 @@ public class ComputerUtil {
                 // Iceberg does use Ice as Storage
                 || (type == CounterType.ICE && !"Iceberg".equals(c.getName()))
                 // some lands does use Depletion as Storage Counter
-                || (type == CounterType.DEPLETION && c.hasKeyword("CARDNAME doesn't untap during your untap step."))
+                || (type == CounterType.DEPLETION && !c.canUntapPhaseController())
                 // treat Time Counters on suspended Cards as Bad,
                 // and also on Chronozoa
                 || (type == CounterType.TIME && (!c.isInPlay() || "Chronozoa".equals(c.getName())))

@@ -67,6 +67,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final  Predicate<Card> canUntapPhaseController() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.canUntapPhaseController();
+            }
+        };
+    }
+
     public static final Predicate<Card> isType(final String cardType) {
         return new Predicate<Card>() {
             @Override

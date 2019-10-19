@@ -173,7 +173,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
             value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
         }
-        if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
+        if (!c.canUntapPhaseController()) {
             if (c.isTapped()) {
                 value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
             } else {
