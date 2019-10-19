@@ -5,10 +5,9 @@ PT:1/4
 K:Defender
 K:Reach
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ T | ValidTgts$ Creature.withFlying+blockedBySource | TgtPrompt$ Select target creature with flying blocked by Whip Vine | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target creature with flying blocked by CARDNAME. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature.withFlying+blockedBySource | TgtPrompt$ Select target creature with flying blocked by Whip Vine | SubAbility$ DBEffect | SpellDescription$ Tap target creature with flying blocked by CARDNAME. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_vine.jpg
 Oracle:Defender, reach (This creature can block creatures with flying.)\nYou may choose not to untap Whip Vine during your untap step.\n{T}: Tap target creature with flying blocked by Whip Vine. That creature doesn't untap during its controller's untap step for as long as Whip Vine remains tapped.

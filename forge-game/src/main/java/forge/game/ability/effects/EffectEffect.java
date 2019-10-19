@@ -51,7 +51,8 @@ public class EffectEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
 
         // special for until lose control or host leaves play
-        if ("UntilLoseControlOfHost".equals(duration) || "UntilHostLeavesPlay".equals(duration)) {
+        if ("UntilLoseControlOfHost".equals(duration) || "UntilHostLeavesPlay".equals(duration)
+                || "UntilUntaps".equals(duration)) {
             if (!hostCard.isInPlay()) {
                 return;
             }
@@ -269,6 +270,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 else if (duration.equals("HostLeavesOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
                     hostCard.addLeavesPlayCommand(endEffect);
+                }
+                else if (duration.equals("UntilUntaps")) {
+                    hostCard.addLeavesPlayCommand(endEffect);
+                    hostCard.addUntapCommand(endEffect);
                 }
                 else if (duration.equals("UntilYourNextTurn")) {
                     game.getCleanup().addUntil(controller, endEffect);
