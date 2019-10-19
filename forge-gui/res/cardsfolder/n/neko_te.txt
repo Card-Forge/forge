@@ -3,8 +3,9 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip:2
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature | Execute$ TrigNekoTeTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains on the battlefield.
-SVar:TrigNekoTeTap:DB$ Tap | Defined$ TriggeredTarget | SubAbility$ DBNekoTeAnimate
-SVar:DBNekoTeAnimate:DB$ Animate | Defined$ TriggeredTarget | HiddenKeywords$ CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
+SVar:TrigNekoTeTap:DB$ Tap | Defined$ TriggeredTarget | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredTarget | StaticAbilities$ DontUntap | Duration$ UntilLoseControlOfHost
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap for as long as you control EFFECTSOURCE.
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | Execute$ TrigNekoTeLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a player, that player loses 1 life.
 SVar:TrigNekoTeLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neko_te.jpg

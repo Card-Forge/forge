@@ -48,6 +48,14 @@ public class EffectEffect extends SpellAbilityEffect {
         String effectImprinted = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
+        final String duration = sa.getParam("Duration");
+
+        // special for until lose control or host leaves play
+        if ("UntilLoseControlOfHost".equals(duration) || "UntilHostLeavesPlay".equals(duration)) {
+            if (!hostCard.isInPlay()) {
+                return;
+            }
+        }
 
         if (sa.hasParam("Abilities")) {
             effectAbilities = sa.getParam("Abilities").split(",");
@@ -238,7 +246,6 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Duration
-            final String duration = sa.getParam("Duration");
             if ((duration == null) || !duration.equals("Permanent")) {
                 final GameCommand endEffect = new GameCommand() {
                     private static final long serialVersionUID = -5861759814760561373L;
@@ -254,6 +261,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
                 else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);
+                }
+                else if (duration.equals("UntilLoseControlOfHost")) {
+                    hostCard.addLeavesPlayCommand(endEffect);
+                    hostCard.addChangeControllerCommand(endEffect);
                 }
                 else if (duration.equals("HostLeavesOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
