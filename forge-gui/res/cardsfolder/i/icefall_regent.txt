@@ -5,7 +5,7 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls. That creature doesn't untap for as long as you control CARDNAME.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilLoseControlOfHost
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilLoseControlOfHost | ForgetOnMoved$ Battlefield
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap for as long as you control EFFECTSOURCE.
 S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
 SVar:PlayMain1:TRUE

@@ -5,7 +5,7 @@ A:SP$ Shuffle | Cost$ 4 R R | Defined$ You | SubAbility$ DBMill | SpellDescripti
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 4 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsRemembered+YouOwn+cmcLE5 | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBNoUntap
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | SVars$ ExileEffect | Duration$ Permanent | Name$ Hazoret's Undying Fury Effect | SubAbility$ DBCleanup | SpellDescription$ Lands you control don't untap during your next untap step.
-SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | CantUntap$ True | Description$ Lands you control don't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -4,7 +4,7 @@ Types:Artifact Creature Insect
 PT:1/3
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Artifact | SubAbility$ DBEffect | SpellDescription$ Tap target artifact. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps | ForgetOnMoved$ Battlefield
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust_tick.jpg

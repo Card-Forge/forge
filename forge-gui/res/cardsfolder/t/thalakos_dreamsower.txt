@@ -6,7 +6,7 @@ K:Shadow
 K:You may choose not to untap CARDNAME during your untap step.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps | ForgetOnMoved$ Battlefield
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_dreamsower.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nYou may choose not to untap Thalakos Dreamsower during your untap step.\nWhenever Thalakos Dreamsower deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as Thalakos Dreamsower remains tapped.

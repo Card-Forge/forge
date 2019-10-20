@@ -5,7 +5,7 @@ PT:2/2
 K:Islandwalk
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Tap target creature. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ DontUntap | Duration$ UntilUntaps | ForgetOnMoved$ Battlefield
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ Remembered doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sand_squid.jpg
