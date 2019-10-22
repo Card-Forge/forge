@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -69,7 +70,7 @@ public class TriggerExplores extends Trigger {
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Explorer: ").append(sa.getTriggeringObject(AbilityKey.Explorer));
+        sb.append(Localizer.getInstance().getMessage("lblExplorer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Explorer));
         return sb.toString();
     }
 }

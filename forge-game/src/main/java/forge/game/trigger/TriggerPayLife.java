@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -68,8 +69,8 @@ public class TriggerPayLife extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
-        sb.append("paid Amount: ").append(sa.getTriggeringObject(AbilityKey.LifeAmount));
+        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblPaidAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.LifeAmount));
         return sb.toString();
     }
 }

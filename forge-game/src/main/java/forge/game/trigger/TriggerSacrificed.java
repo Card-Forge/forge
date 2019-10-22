@@ -23,6 +23,7 @@ import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -135,7 +136,7 @@ public class TriggerSacrificed extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Sacrificed: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblSacrificed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 
