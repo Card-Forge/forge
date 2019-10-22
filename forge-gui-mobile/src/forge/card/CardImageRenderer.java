@@ -6,7 +6,10 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.assets.FBufferedImage;
+import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -326,7 +329,9 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
+        boolean canshow = MatchController.instance.mayView(card);
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
+        FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
@@ -336,8 +341,6 @@ public class CardImageRenderer {
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-
-        boolean canLook = MatchController.instance.mayView(card);
 
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
@@ -358,47 +361,43 @@ public class CardImageRenderer {
                     if (ImageCache.isExtendedArt(card))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
-                        if (rotatePlane)
-                            g.drawfillBorder(3, ImageCache.borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                        else
-                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
-
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x+radius/2.3f, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2.3f) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
+                        g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x+radius/2, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                     }
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
+            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
                 if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
-                        if (rotateSplit)
-                            g.drawfillBorder(3, ImageCache.borderColor(card), new_xRotate, new_yRotate, new_h, new_w, radius);
-                        else
-                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
-
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x + radius / 2.3f, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2.3f) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
+                        g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x + radius / 2, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
                     }
                 }
                 else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             }
             else {
-                if (Forge.enableUIMask) {
+                if (Forge.enableUIMask && canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey())) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(card, canLook), x, y, w, h);
+                        g.drawImage(ImageCache.getBorderImage(card, canshow), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
                 }
-                else
-                    g.drawImage(image, x, y, w, h);
+                else {
+                    if (canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey()))
+                        g.drawImage(image, x, y, w, h);
+                    else // sleeve
+                        g.drawImage(sleeves, x, y, w, h);
+                }
             }
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canLook && image != ImageCache.defaultImage);
+        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canshow && image != ImageCache.defaultImage);
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {

@@ -122,6 +122,7 @@ public enum TrackableProperty {
     LobbyPlayerName(TrackableTypes.StringType),
     AvatarIndex(TrackableTypes.IntegerType),
     AvatarCardImageKey(TrackableTypes.StringType),
+    SleeveIndex(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     PoisonCounters(TrackableTypes.IntegerType),

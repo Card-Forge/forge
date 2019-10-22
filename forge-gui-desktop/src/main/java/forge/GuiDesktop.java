@@ -203,6 +203,12 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public int getSleevesCount() {
+        //TODO
+        return 0;
+    }
+
+    @Override
     public String showFileDialog(final String title, final String defaultDir) {
         final JFileChooser fc = new JFileChooser(defaultDir);
         final int rc = fc.showDialog(null, title);

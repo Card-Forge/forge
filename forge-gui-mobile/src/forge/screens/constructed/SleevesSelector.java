@@ -12,7 +12,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.Utils;
 
@@ -22,17 +21,17 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
-public class AvatarSelector extends FScreen {
-    public static int getRandomAvatar(List<Integer> usedAvatars) {
+public class SleevesSelector  extends FScreen {
+    public static int getRandomSleeves(List<Integer> usedSleeves) {
         int random = 0;
         do {
-            random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
-        } while (usedAvatars.contains(random));
+            random = MyRandom.getRandom().nextInt(FSkin.getSleeves().size());
+        } while (usedSleeves.contains(random));
         return random;
     }
 
-    public static void show(final String playerName, final int currentIndex0, final List<Integer> usedAvatars0, final Callback<Integer> callback0) {
-        AvatarSelector selector = new AvatarSelector(playerName, currentIndex0, usedAvatars0, callback0);
+    public static void show(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Callback<Integer> callback0) {
+        SleevesSelector selector = new SleevesSelector(playerName, currentIndex0, usedSleeves0, callback0);
         Forge.openScreen(selector);
     }
 
@@ -40,7 +39,7 @@ public class AvatarSelector extends FScreen {
     private static final int COLUMNS = 5;
 
     private final int currentIndex;
-    private final List<Integer> usedAvatars;
+    private final List<Integer> usedSleeves;
     private final Callback<Integer> callback;
     private final FScrollPane scroller = new FScrollPane() {
         @Override
@@ -63,32 +62,32 @@ public class AvatarSelector extends FScreen {
         }
     };
 
-    private AvatarSelector(final String playerName, final int currentIndex0, final List<Integer> usedAvatars0, final Callback<Integer> callback0) {
-        super(Localizer.getInstance().getMessage("lblSelectAvatarFor").replace("%s",playerName));
+    private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Callback<Integer> callback0) {
+        super("Select Sleeves for " + playerName);
 
         currentIndex = currentIndex0;
-        usedAvatars = usedAvatars0;
+        usedSleeves = usedSleeves0;
         callback = callback0;
 
-        //add label for selecting random avatar first
-        addAvatarLabel(FSkinImage.UNKNOWN, -1);
+        //add label for selecting random sleeves first
+        addSleevesLabel(FSkinImage.UNKNOWN, -1);
 
-        //add label for currently selected avatar next
-        final Map<Integer, TextureRegion> avatarMap = FSkin.getAvatars();
-        addAvatarLabel(new FTextureRegionImage(avatarMap.get(currentIndex)), currentIndex);
+        //add label for currently selected sleeves next
+        final Map<Integer, TextureRegion> sleeveMap = FSkin.getSleeves();
+        addSleevesLabel(new FTextureRegionImage(sleeveMap.get(currentIndex)), currentIndex);
 
-        //add label for remaining avatars
-        for (final Integer i : avatarMap.keySet()) {
+        //add label for remaining sleeves
+        for (final Integer i : sleeveMap.keySet()) {
             if (currentIndex != i) {
-                addAvatarLabel(new FTextureRegionImage(avatarMap.get(i)), i);
+                addSleevesLabel(new FTextureRegionImage(sleeveMap.get(i)), i);
             }
         }
 
         add(scroller);
     }
 
-    private void addAvatarLabel(final FImage img, final int index) {
-        final FLabel lbl = new FLabel.Builder().icon(img).iconScaleFactor(0.95f).align(Align.center)
+    private void addSleevesLabel(final FImage img, final int index) {
+        final FLabel lbl = new FLabel.Builder().icon(img).iconScaleFactor(0.99f).align(Align.center)
                 .iconInBackground(true).selectable(true).selected(currentIndex == index)
                 .build();
 
@@ -96,7 +95,7 @@ public class AvatarSelector extends FScreen {
             lbl.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    callback.run(getRandomAvatar(usedAvatars));
+                    callback.run(getRandomSleeves(usedSleeves));
                     Forge.back();
                 }
             });

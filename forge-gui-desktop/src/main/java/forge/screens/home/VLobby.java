@@ -397,7 +397,7 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), -1/*TODO panel.getSleeveIndex()*/, panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.

@@ -15,6 +15,7 @@ public final class LobbySlot implements Serializable {
     private LobbySlotType type;
     private String name;
     private int avatarIndex;
+    private int sleeveIndex;
     private int team;
     private boolean isArchenemy;
     private boolean isReady;
@@ -22,10 +23,11 @@ public final class LobbySlot implements Serializable {
     private Deck deck;
     private ImmutableSet<AIOption> aiOptions;
 
-    public LobbySlot(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
+    public LobbySlot(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
+        this.sleeveIndex = sleeveIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
@@ -45,6 +47,10 @@ public final class LobbySlot implements Serializable {
         }
         if (data.getAvatarIndex() != -1) {
             setAvatarIndex(data.getAvatarIndex());
+            changed = true;
+        }
+        if (data.getSleeveIndex() != -1) {
+            setSleeveIndex(data.getSleeveIndex());
             changed = true;
         }
         if (data.getTeam() != -1) {
@@ -93,8 +99,14 @@ public final class LobbySlot implements Serializable {
     public int getAvatarIndex() {
         return avatarIndex;
     }
+    public int getSleeveIndex() {
+        return sleeveIndex;
+    }
     public void setAvatarIndex(final int avatarIndex) {
         this.avatarIndex = avatarIndex;
+    }
+    public void setSleeveIndex(final int sleeveIndex) {
+        this.sleeveIndex = sleeveIndex;
     }
 
     public int getTeam() {

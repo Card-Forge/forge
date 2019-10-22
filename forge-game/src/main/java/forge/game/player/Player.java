@@ -2430,6 +2430,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         controllerCreator = ctrlr;
         controller = ctrlr;
         updateAvatar();
+        updateSleeve();
         view.updateIsAI(this);
         view.updateLobbyPlayerName(this);
     }
@@ -2437,6 +2438,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateAvatar() {
         view.updateAvatarIndex(this);
         view.updateAvatarCardImageKey(this);
+    }
+
+    public void updateSleeve() {
+        view.updateSleeveIndex(this);
     }
 
     /**
