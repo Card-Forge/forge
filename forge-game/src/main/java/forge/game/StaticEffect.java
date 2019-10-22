@@ -327,6 +327,9 @@ public class StaticEffect {
             if (hasParam("CantUntap")) {
                 affectedCard.removeCantUntap(getTimestamp());
             }
+            if (hasParam("CantUntapPlayer")) {
+                affectedCard.removeCantUntapPlayer(getTimestamp());
+            }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }

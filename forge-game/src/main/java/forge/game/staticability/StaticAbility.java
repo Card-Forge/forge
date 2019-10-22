@@ -190,7 +190,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("IgnoreEffectCost") || hasParam("Goad")
                 || hasParam("CanBlockAny") || hasParam("CanBlockAmount")
-                || hasParam("CantUntap")) {
+                || hasParam("CantUntap") || hasParam("CantUntapPlayer")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 

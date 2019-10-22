@@ -680,6 +680,13 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("CantUntap")) {
                     affectedCard.addCantUntap(se.getTimestamp());
                 }
+                if (params.containsKey("CantUntapPlayer")) {
+                    Player p = Iterables.getFirst(
+                            AbilityUtils.getDefinedPlayers(hostCard, params.get("CantUntapPlayer"), null), null);
+                    if (p != null) {
+                        affectedCard.addCantUntapPlayer(p, se.getTimestamp());
+                    }
+                }
             }
 
             if (mayLookAt != null) {

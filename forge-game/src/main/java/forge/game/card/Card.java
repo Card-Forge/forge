@@ -282,6 +282,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final Map<Long, Integer> cantUntapTurns = Maps.newTreeMap();
     private final Set<Long> cantUntap = Sets.newHashSet();
+    private final Map<Long, Player> cantUntapPlayer = Maps.newTreeMap();
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -3613,6 +3614,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             return canUntapPhaseController();
         }
 
+        if (cantUntapPlayer.containsValue(activePlayer)) {
+            return false;
+        }
+
         return !isExertedBy(activePlayer);
     }
 
@@ -3621,7 +3626,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        return !isExertedBy(getController());
+        Player p = getController();
+        if (cantUntapPlayer.containsValue(p)) {
+            return false;
+        }
+
+        return !isExertedBy(p);
     }
 
     public final boolean addCantUntap(final long timestamp) {
@@ -3630,6 +3640,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean removeCantUntap(final long timestamp) {
         return cantUntap.remove(timestamp);
+    }
+
+    public final void addCantUntapPlayer(final Player p, final long timestamp) {
+        cantUntapPlayer.put(timestamp, p);
+    }
+
+    public final void removeCantUntapPlayer(final long timestamp) {
+        cantUntapPlayer.remove(timestamp);
     }
 
     public final void untap() {

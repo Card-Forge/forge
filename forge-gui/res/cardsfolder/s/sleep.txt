@@ -1,7 +1,10 @@
 Name:Sleep
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ TapAll | Cost$ 2 U U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.
-SVar:DBPumpAll:DB$PumpAll | Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+A:SP$ TapAll | Cost$ 2 U U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.
+SVar:DBEffect:DB$ Effect | RememberObjects$ TargetedPlayer,Valid Creature.TargetedPlayerCtrl | StaticAbilities$ DontUntap | Duration$ Permanent | ForgetOnMoved$ Battlefield | Triggers$ RemoveEffect | SVars$ ExileEffect
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntapPlayer$ Remembered | Description$ Remembered doesn't untap during its controller's next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleep.jpg
 Oracle:Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.
