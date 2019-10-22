@@ -2,8 +2,11 @@ Name:Pollen Lullaby
 ManaCost:1 W
 Types:Instant
 A:SP$ Fog | Cost$ 1 W | SubAbility$ DBClash | SpellDescription$ Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
-SVar:DBClash:DB$Clash | WinSubAbility$ DBPumpAll | RememberClasher$ True | SubAbility$ DBCleanup
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:DBClash:DB$Clash | WinSubAbility$ DBEffect | RememberClasher$ True | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | SVars$ ExileEffect | RememberObjects$ Remembered | Duration$ Permanent
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | CantUntap$ True | Description$ If you win, creatures that player controls don't untap during the player's next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollen_lullaby.jpg
 Oracle:Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)

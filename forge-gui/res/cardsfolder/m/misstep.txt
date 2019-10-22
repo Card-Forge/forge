@@ -1,6 +1,9 @@
 Name:Misstep
 ManaCost:1 U
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Creature.TargetedPlayerCtrl | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step. | SpellDescription$ Creatures target player controls don't untap during that player's next untap step.
+A:SP$ Effect | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | SVars$ ExileEffect | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$ Creatures target player controls don't untap during that player's next untap step.
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | CantUntap$ True | Description$ Creatures target player controls don't untap during that player's next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misstep.jpg
 Oracle:Creatures target player controls don't untap during that player's next untap step.
