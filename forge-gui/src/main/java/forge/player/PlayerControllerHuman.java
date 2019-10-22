@@ -921,7 +921,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-        inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
+        inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
     }
@@ -1003,7 +1003,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return super.hasAllTargets();
             }
         };
-        target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
+        target.setMessage(localizer.getMessage("lblSelectNCardsToDiscardUnlessDiscarduType").replace("%s", uType));
         target.showAndWait();
         return new CardCollection(target.getSelected());
     }
@@ -1316,8 +1316,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                              // opponent's next turn
             }
         };
-        final String message = "Cleanup Phase\nSelect " + nDiscard + " card" + (nDiscard > 1 ? "s" : "")
-                + " to discard to bring your hand down to the maximum of " + max + " cards.";
+        final String message = localizer.getMessage("lblCleanupPhase") + "\n"
+                + localizer.getMessage("lblSelectCardsToDiscardHandDownMaximum").replace("%d", String.valueOf(nDiscard)).replace("%max", String.valueOf(max));
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();
