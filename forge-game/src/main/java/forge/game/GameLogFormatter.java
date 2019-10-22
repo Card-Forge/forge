@@ -217,6 +217,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(final GameEventAttackersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
+        final Localizer localizer = Localizer.getInstance();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -232,7 +233,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             sb.append(" to attack ").append(k).append(".");
         }
         if (sb.length() == 0) {
-            sb.append(ev.player).append(" didn't attack this turn.");
+            sb.append(localizer.getMessage("lblPlayerDidntAttackThisTurn").replace("%s", ev.player.toString()));
         }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -280,7 +281,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = ev.player.toString() + " has mulliganed down to " + ev.player.getZone(ZoneType.Hand).size() + " cards.";
+        String message = String.format(Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards"), ev.player.getZone(ZoneType.Hand).size()).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
