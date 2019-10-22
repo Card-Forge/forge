@@ -1736,16 +1736,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setPlanarDeck(deckStr);
                 break;
             case Draft:
+            case QuestDraft:
                 DeckPreferences.setDraftDeck(deckStr);
                 break;
             case Sealed:
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
-                FModel.getQuest().setCurrentDeck(model.toString());
-                FModel.getQuest().save();
-                break;
-            case QuestDraft:
                 FModel.getQuest().setCurrentDeck(model.toString());
                 FModel.getQuest().save();
                 break;
