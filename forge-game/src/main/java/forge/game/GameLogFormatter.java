@@ -281,7 +281,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = String.format(Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards"), ev.player.getZone(ZoneType.Hand).size()).replace("%s", ev.player.toString());
+        String message = Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

@@ -4,6 +4,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,9 +46,9 @@ public class TriggerCrewed extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Vehicle: ").append(sa.getTriggeringObject(AbilityKey.Vehicle));
+        sb.append(Localizer.getInstance().getMessage("lblVehicle")).append(": ").append(sa.getTriggeringObject(AbilityKey.Vehicle));
         sb.append("  ");
-        sb.append("Crew: ").append(sa.getTriggeringObject(AbilityKey.Crew));
+        sb.append(Localizer.getInstance().getMessage("lblCrew")).append(": ").append(sa.getTriggeringObject(AbilityKey.Crew));
         return sb.toString();
     }
 }

@@ -21,6 +21,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -92,8 +93,8 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("AttackingPlayer: ").append(sa.getTriggeringObject(AbilityKey.AttackingPlayer));
-        sb.append("Defenders: ").append(sa.getTriggeringObject(AbilityKey.Defenders));
+        sb.append(Localizer.getInstance().getMessage("lblAttackingPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.AttackingPlayer));
+        sb.append(Localizer.getInstance().getMessage("lblDefenders")).append(": ").append(sa.getTriggeringObject(AbilityKey.Defenders));
         return sb.toString();
     }
 }
