@@ -1124,7 +1124,7 @@ public class CardRenderer {
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
         float new_x = x; float new_y = y; float new_w = w; float new_h = h; float radius = (h - w)/8;
         if (Forge.enableUIMask) {
-            new_x += radius/2.4f; new_y += radius/2; new_w *= 0.96f; new_h += 0.96f;
+            new_x += radius/2.4f; new_y += radius/2; new_w = w * 0.96f; new_h = h * 0.96f;
         }
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
             boolean rotateSplit = isPreferenceEnabled(FPref.UI_ROTATE_SPLIT_CARDS) && card.isSplitCard() && inZoomer;
