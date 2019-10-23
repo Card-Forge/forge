@@ -30,6 +30,7 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.toolbox.FComboBox;
+import forge.util.Localizer;
 import forge.util.gui.SGuiChoose;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,20 +38,20 @@ import java.util.List;
 public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
     private final FLabel lblTip = add(new FLabel.Builder()
-        .text("Double-tap to edit deck (Long-press to view)")
+        .text(Localizer.getInstance().getMessage("lblDoubleTapToEditDeck"))
         .textColor(FLabel.INLINE_LABEL_COLOR)
         .align(Align.center).font(FSkinFont.get(12)).build());
 
     private final FSkinFont GAME_MODE_FONT= FSkinFont.get(12);
-    private final FLabel lblMode = add(new FLabel.Builder().text("Mode:").font(GAME_MODE_FONT).build());
+    private final FLabel lblMode = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblMode")).font(GAME_MODE_FONT).build());
     private final FComboBox<String> cbMode = add(new FComboBox<>());
 
     public LoadDraftScreen() {
         super(null, LoadGameMenu.getMenu());
 
         cbMode.setFont(GAME_MODE_FONT);
-        cbMode.addItem("Gauntlet");
-        cbMode.addItem("Single Match");
+        cbMode.addItem(Localizer.getInstance().getMessage("lblGauntlet"));
+        cbMode.addItem(Localizer.getInstance().getMessage("lblSingleMatch"));
 
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
@@ -98,17 +99,18 @@ public class LoadDraftScreen extends LaunchScreen {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
+                Localizer localizer = Localizer.getInstance();
                 final DeckProxy humanDeck = lstDecks.getSelectedItem();
                 if (humanDeck == null) {
-                    FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new booster draft game.", "No Deck");
+                    FOptionPane.showErrorDialog(localizer.getMessage("lblYouMustSelectExistingDeck"), localizer.getMessage("lblNoDeck"));
                     return;
                 }
 
                 // TODO: if booster draft tournaments are supported in the future, add the possibility to choose them here
-                final boolean gauntlet = cbMode.getSelectedItem().equals("Gauntlet");
+                final boolean gauntlet = cbMode.getSelectedItem().equals(localizer.getMessage("lblGauntlet"));
 
                 if (gauntlet) {
-                    final Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?",
+                    final Integer rounds = SGuiChoose.getInteger(localizer.getMessage("lblHowManyOpponents"),
                             1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
                     if (rounds == null) {
                         return;
@@ -121,7 +123,7 @@ public class LoadDraftScreen extends LaunchScreen {
                                 return;
                             }
 
-                            LoadingOverlay.show("Loading new game...", new Runnable() {
+                            LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
                                 @Override
                                 public void run() {
                                     FModel.getGauntletMini().resetGauntletDraft();
@@ -131,7 +133,7 @@ public class LoadDraftScreen extends LaunchScreen {
                         }
                     });
                 } else {
-                    final Integer aiIndex = SGuiChoose.getInteger("Which opponent would you like to face?",
+                    final Integer aiIndex = SGuiChoose.getInteger(localizer.getMessage("lblWhichOpponentWouldYouLikeToFace"),
                             1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
                     if (aiIndex == null) {
                         return; // Cancel was pressed
@@ -146,7 +148,7 @@ public class LoadDraftScreen extends LaunchScreen {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
-                            LoadingOverlay.show("Loading new game...", new Runnable() {
+                            LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
                                 @Override
                                 public void run() {
                                     if (!checkDeckLegality(humanDeck)) {
@@ -177,7 +179,7 @@ public class LoadDraftScreen extends LaunchScreen {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Draft.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (errorMessage != null) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblInvalidDeckDesc").replace("%n", errorMessage), Localizer.getInstance().getMessage("lblInvalidDeck"));
                 return false;
             }
         }

@@ -302,8 +302,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         localizer.getMessage("nlDisableCardEffect")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_BORDER_MASKING,
-                "Enable Round Border Mask",
-                "When enabled, the card corners are rounded (Preferably Card with Full Borders)."){
+                        localizer.getMessage("lblEnableRoundBorder"),
+                        localizer.getMessage("nlEnableRoundBorder")){
                     @Override
                     public void select() {
                         super.select();
@@ -312,8 +312,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
-                "Preload Extended Art Cards",
-                "When enabled, Preloads Extended Art Cards to Cache on Startup."){
+                        localizer.getMessage("lblPreloadExtendedArtCards"),
+                        localizer.getMessage("nlPreloadExtendedArtCards")){
                 @Override
                     public void select() {
                         super.select();
@@ -322,8 +322,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
-                "Show FPS Display",
-                "When enabled, show the FPS Display (Experimental)."){
+                        localizer.getMessage("lblShowFPSDisplay"),
+                        localizer.getMessage("nlShowFPSDisplay")){
                 @Override
                     public void select() {
                         super.select();
