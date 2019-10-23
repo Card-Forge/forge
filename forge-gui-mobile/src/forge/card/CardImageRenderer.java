@@ -25,6 +25,7 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
+import forge.util.CardTranslation;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 

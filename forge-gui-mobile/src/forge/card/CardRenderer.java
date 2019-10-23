@@ -46,6 +46,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
+import forge.util.CardTranslation;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import forge.util.TextBounds;
