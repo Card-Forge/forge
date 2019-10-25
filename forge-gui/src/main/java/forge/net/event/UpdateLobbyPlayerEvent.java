@@ -47,6 +47,19 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.name = name;
     }
 
+    public static UpdateLobbyPlayerEvent avatarUpdate(final int index) {
+        return new UpdateLobbyPlayerEvent(index, true);
+    }
+    public static UpdateLobbyPlayerEvent sleeveUpdate(final int index) {
+        return new UpdateLobbyPlayerEvent(index, false);
+    }
+    private UpdateLobbyPlayerEvent(int index, boolean avatar) {
+        if (avatar)
+            this.avatarIndex = index;
+        else
+            this.sleeveIndex = index;
+    }
+
     private UpdateLobbyPlayerEvent(final Deck deck) {
         this.deck = deck;
     }

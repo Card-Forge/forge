@@ -480,6 +480,7 @@ public class PlayerPanel extends FContainer {
                     setAvatarIndex(result);
 
                     if (index < 2) {
+                        screen.updateAvatar(index, result);
                         screen.updateAvatarPrefs();
                     }
                     if (allowNetworking) {
@@ -499,6 +500,7 @@ public class PlayerPanel extends FContainer {
                     setSleeveIndex(result);
 
                     if (index < 2) {
+                        screen.updateSleeve(index, result);
                         screen.updateSleevePrefs();
                     }
                     if (allowNetworking) {

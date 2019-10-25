@@ -373,6 +373,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return playerPanels.get(i).getAvatarIndex();
     }
 
+    public int getPlayerSleeve(int i) {
+        return playerPanels.get(i).getSleeveIndex();
+    }
+
     /////////////////////////////////////////////
     //========== Various listeners in build order
     
@@ -552,7 +556,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.setType(type);
                 if (type != LobbySlotType.AI) {
                     panel.setPlayerName(slot.getName());
-                    //override where???
+                    panel.setAvatarIndex(slot.getAvatarIndex());
+                    panel.setSleeveIndex(slot.getSleeveIndex());
                 } else {
                     //AI: this one overrides the setplayername if blank
                     if (panel.getPlayerName().isEmpty())
@@ -660,6 +665,18 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private void updateName(final int playerIndex, final String name) {
         if (playerChangeListener != null) {
             playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.nameUpdate(name));
+        }
+    }
+
+    void updateAvatar(final int index, final int avatarIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.avatarUpdate(avatarIndex));
+        }
+    }
+
+    void updateSleeve(final int index, final int sleeveIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveUpdate(sleeveIndex));
         }
     }
 
