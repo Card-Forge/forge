@@ -859,6 +859,7 @@ public class FSkin {
     }
 
     private static Map<Integer, SkinImage> avatars;
+    private static Map<Integer, SkinImage> sleeves;
     private static Map<Integer, Font> fixedFonts = new HashMap<>();
 
     public static Font getFixedFont() {
@@ -1039,7 +1040,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons;
+    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1173,6 +1174,8 @@ public class FSkin {
         final File f9 = new File(defaultDir + ForgeConstants.SPRITE_FAVICONS_FILE);
         final File f10 = new File(defaultDir + ForgeConstants.SPRITE_ABILITY_FILE);
         final File f11 = new File(defaultDir + ForgeConstants.SPRITE_MANAICONS_FILE);
+        final File f12 = new File(defaultDir + ForgeConstants.SPRITE_SLEEVES_FILE);
+        final File f13 = new File(defaultDir + ForgeConstants.SPRITE_SLEEVES2_FILE);
 
         try {
             int p = 0;
@@ -1189,6 +1192,10 @@ public class FSkin {
             bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultAvatars = ImageIO.read(f4);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultSleeve = ImageIO.read(f12);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultSleeve2 = ImageIO.read(f13);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimTrophies = ImageIO.read(f7);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1255,6 +1262,8 @@ public class FSkin {
 
         // Assemble avatar images
         assembleAvatars();
+        // Sleeves
+        assembleSleeves();
 
         // Images loaded; can start UI init.
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
@@ -1266,6 +1275,8 @@ public class FSkin {
         bimOldFoils.flush();
         bimPreferredSprite.flush();
         bimDefaultAvatars.flush();
+        bimDefaultSleeve.flush();
+        bimDefaultSleeve2.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
@@ -1278,6 +1289,8 @@ public class FSkin {
         bimOldFoils = null;
         bimPreferredSprite = null;
         bimDefaultAvatars = null;
+        bimDefaultSleeve = null;
+        bimDefaultSleeve2 = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;
@@ -1379,6 +1392,10 @@ public class FSkin {
         return avatars;
     }
 
+    public static Map<Integer, SkinImage> getSleeves() {
+        return sleeves;
+    }
+
     public static boolean isLoaded() { return loaded; }
 
     /**
@@ -1478,6 +1495,34 @@ public class FSkin {
                     }
                     avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
                 }
+            }
+        }
+    }
+
+    private static void assembleSleeves() {
+        sleeves = new HashMap<>();
+        int counter = 0;
+        Color pxTest;
+
+        final int pw = bimDefaultSleeve.getWidth();
+        final int ph = bimDefaultSleeve.getHeight();
+
+        for (int j = 0; j < ph; j += 500) {
+            for (int i = 0; i < pw; i += 360) {
+                pxTest = getColorFromPixel(bimDefaultSleeve.getRGB(i + 180, j + 250));
+                if (pxTest.getAlpha() == 0) { continue; }
+                sleeves.put(counter++, new SkinImage(bimDefaultSleeve.getSubimage(i, j, 360, 500)));
+            }
+        }
+        //2nd set
+        final int aw = bimDefaultSleeve2.getWidth();
+        final int ah = bimDefaultSleeve2.getHeight();
+
+        for (int j = 0; j < ah; j += 500) {
+            for (int i = 0; i < aw; i += 360) {
+                pxTest = getColorFromPixel(bimDefaultSleeve2.getRGB(i + 180, j + 250));
+                if (pxTest.getAlpha() == 0) { continue; }
+                sleeves.put(counter++, new SkinImage(bimDefaultSleeve2.getSubimage(i, j, 360, 500)));
             }
         }
     }
