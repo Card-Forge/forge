@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/10/133.-ELD2-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your Sentinel's Mark is attached to your Tajic, Legion's Edge, and your opponent's Sentinel Mark is attached to their Harmonious Archon. Neither was cast this turn. Remember that your solution must satisfy all possible blocking scenarios!
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Silverflame Squire;Arrester's Zeal;Burn Bright;Torch Courier
+humanbattlefield=Ferocity of the Wilds;Torbran, Thane of Red Fell;Tajic, Legion's Edge|Id:1;Sentinel's Mark|AttachedTo:1;Sacred Foundry|NoETBTrigs;Mountain;Mountain;Plains
+aibattlefield=Harmonious Archon|Id:2;Sentinel's Mark|AttachedTo:2;t:Human,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Human,Keywords:,Image:w_1_1_human_eld;t:Human,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Human,Keywords:,Image:w_1_1_human_eld

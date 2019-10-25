@@ -11,6 +11,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SGuiChoose;
@@ -19,9 +20,9 @@ public class NewDraftScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
     private final FTextArea lblDesc = add(new FTextArea(false,
-            "In Draft mode, three booster packs are rotated around eight players.\n\n" +
-            "Build a deck from the cards you choose. The AI will do the same.\n\n" +
-            "Then, play against any number of the AI opponents."));
+            Localizer.getInstance().getMessage("lblDraftText1") + "\n\n" +
+                    Localizer.getInstance().getMessage("lblDraftText2") + "\n\n" +
+                    Localizer.getInstance().getMessage("lblDraftText3")));
 
     public NewDraftScreen() {
         super(null, NewGameMenu.getMenu());
@@ -44,7 +45,7 @@ public class NewDraftScreen extends LaunchScreen {
         ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
             @Override
             public void run() {
-                final LimitedPoolType poolType = SGuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
+                final LimitedPoolType poolType = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
                 if (poolType == null) { return; }
 
                 final BoosterDraft draft = BoosterDraft.createDraft(poolType);
@@ -53,7 +54,7 @@ public class NewDraftScreen extends LaunchScreen {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingOverlay.show("Loading new draft...", new Runnable() {
+                        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewDraft"), new Runnable() {
                             @Override
                             public void run() {
                                 Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null));
