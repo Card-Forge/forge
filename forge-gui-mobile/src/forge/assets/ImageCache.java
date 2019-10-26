@@ -214,6 +214,16 @@ public class ImageCache {
             return Color.valueOf("#fffffd");
         return Color.valueOf("#171717");
     }
+    public static int getFSkinBorders(CardView c) {
+        if (c == null)
+            return 0;
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return 1;
+        return 0;
+    }
     public static boolean isExtendedArt(CardView c) {
         if (c == null)
             return false;

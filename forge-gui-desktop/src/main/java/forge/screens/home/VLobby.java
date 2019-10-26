@@ -397,7 +397,7 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), -1/*TODO panel.getSleeveIndex()*/, panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -858,6 +858,15 @@ public class VLobby implements ILobbyView {
         prefs.save();
     }
 
+    /** Saves sleeve prefs for players one and two. */
+    void updateSleevePrefs() {
+        final int pOneIndex = playerPanels.get(0).getSleeveIndex();
+        final int pTwoIndex = playerPanels.get(1).getSleeveIndex();
+
+        prefs.setPref(FPref.UI_SLEEVES, pOneIndex + "," + pTwoIndex);
+        prefs.save();
+    }
+
     /** Adds a pre-styled FLabel component with the specified title. */
     FLabel newLabel(final String title) {
         return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
@@ -869,6 +878,14 @@ public class VLobby implements ILobbyView {
             usedAvatars.add(pp.getAvatarIndex());
         }
         return usedAvatars;
+    }
+
+    List<Integer> getUsedSleeves() {
+        final List<Integer> usedSleeves = Lists.newArrayListWithCapacity(MAX_PLAYERS);
+        for (final PlayerPanel pp : playerPanels) {
+            usedSleeves.add(pp.getSleeveIndex());
+        }
+        return usedSleeves;
     }
 
 

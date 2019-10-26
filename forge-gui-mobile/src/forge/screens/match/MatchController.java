@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.assets.FSkinImage;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,6 +69,8 @@ public class MatchController extends AbstractGuiGame {
 
     private static final Map<String, FImage> avatarImages = new HashMap<>();
 
+    private static final Map<String, FImage> sleeveImages = new HashMap<>();
+
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
 
@@ -98,6 +101,17 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         return avatar;
+    }
+
+    public static FImage getPlayerSleeve(final PlayerView p) {
+        if (p == null)
+            return FSkinImage.UNKNOWN;
+        final String lp = p.getLobbyPlayerName();
+        FImage sleeve = sleeveImages.get(lp);
+        if (sleeve == null) {
+            sleeve = new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
+        }
+        return sleeve;
     }
 
     @Override

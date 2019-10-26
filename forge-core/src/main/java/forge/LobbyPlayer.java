@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class LobbyPlayer {
     protected String name;
     private int avatarIndex = -1;
+    private int sleeveIndex = -1;
     private String avatarCardImageKey;
 
     public LobbyPlayer(String name) {
@@ -59,8 +60,14 @@ public abstract class LobbyPlayer {
     public int getAvatarIndex() {
         return avatarIndex;
     }
+    public int getSleeveIndex() {
+        return sleeveIndex;
+    }
     public void setAvatarIndex(int avatarIndex) {
         this.avatarIndex = avatarIndex;
+    }
+    public void setSleeveIndex(int sleeveIndex) {
+        this.sleeveIndex = sleeveIndex;
     }
 
     public String getAvatarCardImageKey() {

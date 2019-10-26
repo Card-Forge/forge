@@ -158,7 +158,7 @@ public abstract class GameLobby implements IHasGameType {
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
         final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
-        addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
+        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
         if (slot == null) {
@@ -194,6 +194,15 @@ public abstract class GameLobby implements IHasGameType {
         final int[] result = new int[sAvatars.length];
         for (int i = 0; i < sAvatars.length; i++) {
             final Integer val = Ints.tryParse(sAvatars[i]);
+            result[i] = val == null ? -1 : val.intValue();
+        }
+        return result;
+    }
+    protected final static int[] localSleeveIndices() {
+        final String[] sSleeves = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
+        final int[] result = new int[sSleeves.length];
+        for (int i = 0; i < sSleeves.length; i++) {
+            final Integer val = Ints.tryParse(sSleeves[i]);
             result[i] = val == null ? -1 : val.intValue();
         }
         return result;
@@ -415,6 +424,7 @@ public abstract class GameLobby implements IHasGameType {
             final IGuiGame gui = getGui(data.slots.indexOf(slot));
             final String name = slot.getName();
             final int avatar = slot.getAvatarIndex();
+            final int sleeve = slot.getSleeveIndex();
             final boolean isArchenemy = slot.isArchenemy();
             final int team = GameType.Archenemy.equals(currentGameType) && !isArchenemy ? 1 : slot.getTeam();
             final Set<AIOption> aiOptions = slot.getAiOptions();
@@ -422,7 +432,7 @@ public abstract class GameLobby implements IHasGameType {
             final boolean isAI = slot.getType() == LobbySlotType.AI;
             final LobbyPlayer lobbyPlayer;
             if (isAI) {
-                lobbyPlayer = GamePlayerUtil.createAiPlayer(name, avatar, aiOptions);
+                lobbyPlayer = GamePlayerUtil.createAiPlayer(name, avatar, sleeve, aiOptions);
             }
             else {
                 boolean setNameNow = false;
@@ -430,7 +440,7 @@ public abstract class GameLobby implements IHasGameType {
                     setNameNow = true;
                     hasNameBeenSet = true;
                 }
-                lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, setNameNow);
+                lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, sleeve, setNameNow);
             }
 
             Deck deck = slot.getDeck();

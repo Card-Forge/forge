@@ -203,6 +203,14 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public int getSleevesCount() {
+        if (FSkin.isLoaded()) {
+            return FSkin.getSleeves().size();
+        }
+        return 0;
+    }
+
+    @Override
     public String showFileDialog(final String title, final String defaultDir) {
         final JFileChooser fc = new JFileChooser(defaultDir);
         final int rc = fc.showDialog(null, title);

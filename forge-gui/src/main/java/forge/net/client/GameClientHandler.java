@@ -198,7 +198,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             );
             LobbyPlayer lobbyPlayer = new LobbyPlayerHuman(
                     playerSlot.getName(),
-                    playerSlot.getAvatarIndex()
+                    playerSlot.getAvatarIndex(),
+                    playerSlot.getSleeveIndex()
             );
             player.setPlayer(lobbyPlayer);
             player.setTeamNumber(playerSlot.getTeam());
@@ -287,7 +288,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         // Don't use send() here, as this.channel is not yet set!
-        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0])));
+        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])));
     }
 
 }
