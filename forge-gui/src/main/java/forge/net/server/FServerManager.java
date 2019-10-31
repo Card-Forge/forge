@@ -329,7 +329,7 @@ public final class FServerManager {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
-                final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex());
+                final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
                 if (index == -1) {
                     ctx.close();
                 } else {

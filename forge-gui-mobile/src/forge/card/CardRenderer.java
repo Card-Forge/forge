@@ -19,9 +19,12 @@ import forge.CachedCardImage;
 import forge.Forge;
 import forge.FThreads;
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.StaticData;
+import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FRotatedImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -430,7 +433,9 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
+        boolean canshow = MatchController.instance.mayView(card) && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getCurrentState().getImageKey());
         Texture image = new RendererCachedCardImage(card, false).getImage();
+        FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
 
         if (image != null) {
@@ -444,7 +449,7 @@ public class CardRenderer {
                         if (ImageCache.isExtendedArt(card))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
-                            g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
+                            g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
                             g.drawRotatedImage(ImageCache.croppedBorderImage(image), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                         }
                     }
@@ -452,17 +457,21 @@ public class CardRenderer {
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 }
                 else {
-                    if (Forge.enableUIMask) {
+                    if (Forge.enableUIMask && canshow) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
-                            g.drawBorderImage(ImageCache.getBorderImage(card,  MatchController.instance.mayView(card)), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
+                            g.drawBorderImage(ImageCache.getBorderImage(card, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
                     }
-                    else
-                        g.drawImage(image, x, y, w, h);
+                    else {
+                        if (canshow)
+                            g.drawImage(image, x, y, w, h);
+                        else // draw card back sleeves
+                            g.drawImage(sleeves, x, y, w, h);
+                    }
                 }
             }
             drawFoilEffect(g, card, x, y, w, h, false);
@@ -1113,11 +1122,15 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
+        float new_x = x; float new_y = y; float new_w = w; float new_h = h; float radius = (h - w)/8;
+        if (Forge.enableUIMask) {
+            new_x += radius/2.4f; new_y += radius/2; new_w = w * 0.96f; new_h = h * 0.96f;
+        }
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
             boolean rotateSplit = isPreferenceEnabled(FPref.UI_ROTATE_SPLIT_CARDS) && card.isSplitCard() && inZoomer;
             int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
-                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h, rotateSplit);
+                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), new_x, new_y, new_w, new_h, rotateSplit);
             }
         }
     }
