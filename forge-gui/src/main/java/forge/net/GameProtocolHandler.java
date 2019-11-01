@@ -40,7 +40,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             }
 
             final Object[] args = event.getObjects();
-            //protocolMethod.checkArgs(args);
+            protocolMethod.checkArgs(args);
 
             final Object toInvoke = getToInvoke(ctx);
 

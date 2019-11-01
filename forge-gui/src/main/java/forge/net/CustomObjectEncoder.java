@@ -19,10 +19,9 @@ public class CustomObjectEncoder extends MessageToByteEncoder<Serializable> {
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
         int startIdx = out.writerIndex();
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
-        ElsaObjectOutputStream oout = null;
-        ObjectOutputStream ooutOld = null;
 
         if (GuiBase.getpropertyConfig()){
+            ElsaObjectOutputStream oout = null;
             try {
                 bout.write(LENGTH_PLACEHOLDER);
                 oout = new ElsaObjectOutputStream(bout);
@@ -35,21 +34,22 @@ public class CustomObjectEncoder extends MessageToByteEncoder<Serializable> {
                     bout.close();
                 }
             }
-        }
-        else {
+        } else {
+            ObjectOutputStream oout = null;
             try {
                 bout.write(LENGTH_PLACEHOLDER);
-                ooutOld = new ObjectOutputStream(bout);
-                ooutOld.writeObject(msg);
-                ooutOld.flush();
+                oout = new ObjectOutputStream(bout);
+                oout.writeObject(msg);
+                oout.flush();
             } finally {
-                if (ooutOld != null) {
-                    ooutOld.close();
+                if (oout != null) {
+                    oout.close();
                 } else {
                     bout.close();
                 }
             }
         }
+
         int endIdx = out.writerIndex();
         out.setInt(startIdx, endIdx - startIdx - 4);
     }

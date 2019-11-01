@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -155,6 +156,8 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
+        if (GuiBase.getpropertyConfig())
+            return; //uses custom serializer for Android 8+..
         for (int iArg = 0; iArg < args.length; iArg++) {
             Object arg = null;
             Class<?> type = null;
