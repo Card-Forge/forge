@@ -50,7 +50,7 @@ public final class Main {
         GuiBase.setInterface(new GuiDesktop());
 
         //set PropertyConfig log4j to true
-        GuiBase.setpropertyConfig(true);
+        GuiBase.enablePropertyConfig(true);
 
         //install our error handler
         ExceptionHandler.registerErrorHandling();

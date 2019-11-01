@@ -20,7 +20,7 @@ public class CustomObjectEncoder extends MessageToByteEncoder<Serializable> {
         int startIdx = out.writerIndex();
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
 
-        if (GuiBase.getpropertyConfig()){
+        if (GuiBase.hasPropertyConfig()){
             ElsaObjectOutputStream oout = null;
             try {
                 bout.write(LENGTH_PLACEHOLDER);

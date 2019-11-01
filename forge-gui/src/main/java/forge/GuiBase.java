@@ -13,7 +13,7 @@ public class GuiBase {
     public static void setInterface(IGuiBase i0) {
         guiInterface = i0;
     }
-    public static void setpropertyConfig(boolean value) {
+    public static void enablePropertyConfig(boolean value) {
         propertyConfig = value;
     }
     public static boolean isNetworkplay() {
@@ -22,7 +22,7 @@ public class GuiBase {
     public static void setNetworkplay(boolean value) {
         networkplay = value;
     }
-    public static boolean getpropertyConfig() {
+    public static boolean hasPropertyConfig() {
         return propertyConfig;
     }
 }

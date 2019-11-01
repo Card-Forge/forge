@@ -156,7 +156,7 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
-        if (GuiBase.getpropertyConfig())
+        if (GuiBase.hasPropertyConfig())
             return; //uses custom serializer for Android 8+..
         for (int iArg = 0; iArg < args.length; iArg++) {
             Object arg = null;

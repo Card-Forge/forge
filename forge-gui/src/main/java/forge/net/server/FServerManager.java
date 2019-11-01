@@ -87,7 +87,7 @@ public final class FServerManager {
      */
     public static FServerManager getInstance() {
         if (instance == null) {
-            if(GuiBase.getpropertyConfig())
+            if(GuiBase.hasPropertyConfig())
                 PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
             instance = new FServerManager();
         }

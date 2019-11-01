@@ -27,7 +27,7 @@ public class CustomObjectDecoder extends LengthFieldBasedFrameDecoder {
         if (frame == null) {
             return null;
         } else {
-            if (GuiBase.getpropertyConfig()){
+            if (GuiBase.hasPropertyConfig()){
                 ElsaObjectInputStream ois = new ElsaObjectInputStream(new ByteBufInputStream(frame, true));
 
                 Object var5;

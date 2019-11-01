@@ -72,7 +72,7 @@ public class Forge implements ApplicationListener {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.setpropertyConfig(value);
+            GuiBase.enablePropertyConfig(value);
         }
         return app;
     }
