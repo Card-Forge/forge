@@ -1,11 +1,14 @@
 package forge.net;
 
+import forge.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.serialization.ClassResolver;
 import org.mapdb.elsa.ElsaObjectInputStream;
+
+import java.io.ObjectInputStream;
 
 public class CustomObjectDecoder extends LengthFieldBasedFrameDecoder {
     private final ClassResolver classResolver;
@@ -24,16 +27,30 @@ public class CustomObjectDecoder extends LengthFieldBasedFrameDecoder {
         if (frame == null) {
             return null;
         } else {
-            ElsaObjectInputStream ois = new ElsaObjectInputStream(new ByteBufInputStream(frame, true));
+            if (GuiBase.getpropertyConfig()){
+                ElsaObjectInputStream ois = new ElsaObjectInputStream(new ByteBufInputStream(frame, true));
 
-            Object var5;
-            try {
-                var5 = ois.readObject();
-            } finally {
-                ois.close();
+                Object var5;
+                try {
+                    var5 = ois.readObject();
+                } finally {
+                    ois.close();
+                }
+
+                return var5;
             }
+            else {
+                ObjectInputStream ois = new ObjectInputStream(new ByteBufInputStream(frame, true));
 
-            return var5;
+                Object var5;
+                try {
+                    var5 = ois.readObject();
+                } finally {
+                    ois.close();
+                }
+
+                return var5;
+            }
         }
     }
 
