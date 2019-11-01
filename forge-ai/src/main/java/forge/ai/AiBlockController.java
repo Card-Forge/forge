@@ -1281,7 +1281,8 @@ public class AiBlockController {
             oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
         }
 
-        if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
+        if (attacker != null && attacker.getOwner() != null)
+            if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
             // Temporarily controlled object - don't trade with it
             // TODO: find a more reliable way to figure out that control will be reestablished next turn
             return false;
