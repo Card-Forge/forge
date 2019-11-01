@@ -6,6 +6,8 @@ import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
+import forge.net.CustomObjectDecoder;
+import forge.net.CustomObjectEncoder;
 import forge.net.event.LobbyUpdateEvent;
 import forge.net.event.LoginEvent;
 import forge.net.event.LogoutEvent;
@@ -25,8 +27,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -40,6 +40,8 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import org.apache.log4j.PropertyConfigurator;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.Log4JLoggerFactory;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.support.igd.PortMappingListener;
@@ -85,7 +87,8 @@ public final class FServerManager {
      */
     public static FServerManager getInstance() {
         if (instance == null) {
-            PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
+            if(GuiBase.getpropertyConfig())
+                PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
             instance = new FServerManager();
         }
         return instance;
@@ -93,16 +96,18 @@ public final class FServerManager {
 
     public void startServer(final int port) {
         try {
+            InternalLoggerFactory.setDefaultFactory(Log4JLoggerFactory.INSTANCE);
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override public final void initChannel(final SocketChannel ch) {
+                        @Override
+                        public final void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new ObjectEncoder(),
-                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new CustomObjectEncoder(),
+                                    new CustomObjectDecoder(CustomObjectDecoder.maxObjectsize, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),

@@ -65,7 +65,7 @@ public enum ProtocolMethod {
     confirm             (Mode.SERVER, Boolean.TYPE, CardView.class, String.class, Boolean.TYPE, List/*String*/.class),
     getChoices          (Mode.SERVER, List.class, String.class, Integer.TYPE, Integer.TYPE, List.class, Object.class, Function.class),
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
-    sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class),
+    sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class, String.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
     chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
@@ -156,10 +156,19 @@ public enum ProtocolMethod {
 
     public void checkArgs(final Object[] args) {
         for (int iArg = 0; iArg < args.length; iArg++) {
-            final Object arg = args[iArg];
-            final Class<?> type = this.args[iArg];
-            if (!ReflectionUtil.isInstance(arg, type)) {
-                throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+            Object arg = null;
+            Class<?> type = null;
+            try {
+                arg = args[iArg];
+                if (this.args.length > iArg)
+                    type = this.args[iArg];
+            }
+            catch (ArrayIndexOutOfBoundsException ex){ ex.printStackTrace(); }
+            catch(ConcurrentModificationException ex) { ex.printStackTrace(); }
+            if (arg != null)
+                if (type != null)
+                    if (!ReflectionUtil.isInstance(arg, type)) {
+                        throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
             }
             if (arg != null) {
                 // attempt to Serialize each argument, this will throw an exception if it can't.
