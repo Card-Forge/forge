@@ -14,7 +14,6 @@ import forge.net.event.LogoutEvent;
 import forge.net.event.MessageEvent;
 import forge.net.event.NetEvent;
 import forge.net.event.UpdateLobbyPlayerEvent;
-import forge.properties.ForgeConstants;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -39,9 +38,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 
-import org.apache.log4j.PropertyConfigurator;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-import io.netty.util.internal.logging.Log4JLoggerFactory;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.support.igd.PortMappingListener;
@@ -87,8 +83,6 @@ public final class FServerManager {
      */
     public static FServerManager getInstance() {
         if (instance == null) {
-            if(GuiBase.hasPropertyConfig())
-                PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
             instance = new FServerManager();
         }
         return instance;
@@ -96,7 +90,6 @@ public final class FServerManager {
 
     public void startServer(final int port) {
         try {
-            InternalLoggerFactory.setDefaultFactory(Log4JLoggerFactory.INSTANCE);
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
