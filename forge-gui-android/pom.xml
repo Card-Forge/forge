@@ -307,9 +307,6 @@
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
                                         </copy>
-                                        <copy todir="${project.build.directory}/res/src/main/resources/">
-                                        <fileset dir="${basedir}/../forge-gui/src/main/resources/" includes="log4jConfig.config" />
-                                        </copy>
                                         <mkdir dir="${project.build.directory}/res/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
                                         <zip destfile="${project.build.directory}/assets.zip" basedir="${project.build.directory}/res" level="1" />
