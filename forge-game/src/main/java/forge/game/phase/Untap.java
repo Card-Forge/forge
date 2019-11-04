@@ -65,7 +65,7 @@ public class Untap extends Phase {
      */
     @Override
     public void executeAt() {
-        this.execute(this.at);
+        super.executeAt();
 
         final Player turn = game.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);
@@ -84,8 +84,7 @@ public class Untap extends Phase {
      */
     public static boolean canUntap(final Card c) {
 
-        if (c.hasKeyword("This card doesn't untap during your next untap step.")
-                || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
+        if (c.hasKeyword("This card doesn't untap during your next untap step.")) {
             return false;
         }
 
@@ -199,11 +198,9 @@ public class Untap extends Phase {
 
         // Remove temporary keywords
         for (final Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            c.removeCantUntapTurn();
+
             c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
-                c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next two untap steps.");
-                c.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            }
         }
         
         // remove exerted flags from all things in play

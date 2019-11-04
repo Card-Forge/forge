@@ -2,6 +2,8 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ImageKeys;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -22,6 +24,7 @@ import forge.util.Lang;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -604,7 +607,7 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\n").append("(").append(taltname).append(") ").append(taltoracle);
         }
 
-        String nonAbilityText = get(TrackableProperty.NonAbilityText);
+        String nonAbilityText = getNonAbilityText();
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
@@ -632,28 +635,63 @@ public class CardView extends GameEntityView {
             sb.append("\r\n");
         }
 
-        if (getCanBlockAny()) {
-            sb.append("\r\n\r\n");
-            sb.append("CARDNAME can block any number of creatures.".replaceAll("CARDNAME", getName()));
-            sb.append("\r\n");
-        } else {
-            int i = getBlockAdditional();
-            if (i > 0) {
-                sb.append("\r\n\r\n");
-                sb.append("CARDNAME can block an additional ".replaceAll("CARDNAME", getName()));
-                sb.append(i == 1 ? "creature" : Lang.nounWithNumeral(i, "creature"));
-                sb.append(" each combat.");
-                sb.append("\r\n");
-            }
-
-        }
-
         String cloner = get(TrackableProperty.Cloner);
         if (!cloner.isEmpty()) {
             sb.append("\r\nCloned by: ").append(cloner);
         }
 
         return sb.toString().trim();
+    }
+
+    public String getNonAbilityText() {
+        StringBuilder sb = new StringBuilder(get(TrackableProperty.NonAbilityText));
+
+        if (getCanBlockAny()) {
+            sb.append("\r\n");
+            sb.append("CARDNAME can block any number of creatures.");
+            sb.append("\r\n");
+        } else {
+            int i = getBlockAdditional();
+            if (i > 0) {
+                sb.append("\r\n");
+                sb.append("CARDNAME can block an additional ");
+                sb.append(i == 1 ? "creature" : Lang.nounWithNumeral(i, "creature"));
+                sb.append(" each combat.");
+                sb.append("\r\n");
+            }
+        }
+
+        if (getCantUntap()) {
+            String msg = "CARDNAME doesn’t untap during its controller’s untap step.";
+            sb.append("\r\n");
+            sb.append(msg);
+            sb.append("\r\n");
+        } else {
+            int i = this.getCantUntapTurn();
+            if (i == 1) {
+                String msg = "CARDNAME doesn’t untap during its controller’s next untap step.";
+                sb.append("\r\n");
+                sb.append(msg);
+                sb.append("\r\n");
+            } else if (i > 1) {
+                String str = Lang.nounWithNumeral(i, "untap step");
+                String msg = ("CARDNAME doesn’t untap during its controller’s next " + str + ".");
+                sb.append("\r\n");
+                sb.append(msg);
+                sb.append("\r\n");
+            }
+        }
+
+        FCollectionView<PlayerView> untapList = getCantUntapPlayer();
+        if (untapList != null && !untapList.isEmpty()) {
+            String p = Lang.joinHomogenous(Lists.newArrayList(untapList), null, "or");
+            String msg = "CARDNAME doesn’t untap during " + p + " untap step.";
+            sb.append("\r\n");
+            sb.append(msg);
+            sb.append("\r\n");
+        }
+
+        return sb.toString();
     }
 
     public CardStateView getCurrentState() {
@@ -765,6 +803,39 @@ public class CardView extends GameEntityView {
     void updateBlockAdditional(Card c) {
         set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
         set(TrackableProperty.BlockAny, c.canBlockAny());
+    }
+
+    boolean getCantUntap() {
+        return get(TrackableProperty.CantUntapAny);
+    }
+    int getCantUntapTurn() {
+        return get(TrackableProperty.CantUntapTurns);
+    }
+
+    FCollectionView<PlayerView> getCantUntapPlayer() {
+        return get(TrackableProperty.CantUntapPlayer);
+    }
+
+    void updateCantUntap(Card c) {
+        set(TrackableProperty.CantUntapAny, c.isCantUntap());
+        set(TrackableProperty.CantUntapTurns, c.getCantUntapTurnValue());
+
+        Collection<Player> list = c.getCantUntapPlayer();
+        if (list.isEmpty()) {
+            set(TrackableProperty.CantUntapPlayer, null);
+        } else {
+            TrackableCollection<PlayerView> prop = get(TrackableProperty.CantUntapPlayer);
+            if (prop == null) {
+                prop = new TrackableCollection<>();
+            } else {
+                prop.clear();
+            }
+            for (Player p : list) {
+                prop.add(p.getView());
+            }
+
+            set(TrackableProperty.CantUntapPlayer, prop);
+        }
     }
 
     @Override

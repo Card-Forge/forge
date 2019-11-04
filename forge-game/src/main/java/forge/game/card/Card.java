@@ -3634,20 +3634,67 @@ public class Card extends GameEntity implements Comparable<Card> {
         return !isExertedBy(p);
     }
 
+    public boolean isCantUntap() {
+        return !cantUntap.isEmpty();
+    }
+
     public final boolean addCantUntap(final long timestamp) {
-        return cantUntap.add(timestamp);
+        boolean result = cantUntap.add(timestamp);
+        getView().updateCantUntap(this);
+        return result;
     }
 
     public final boolean removeCantUntap(final long timestamp) {
-        return cantUntap.remove(timestamp);
+        boolean result = cantUntap.remove(timestamp);
+        getView().updateCantUntap(this);
+        return result;
+    }
+
+    public final void addCantUntapTurn(final long timestamp, final int value) {
+        cantUntapTurns.put(timestamp, value);
+        getView().updateCantUntap(this);
+    }
+
+    public final void removeCantUntapTurn(final long timestamp) {
+        cantUntapTurns.remove(timestamp);
+        getView().updateCantUntap(this);
+    }
+
+    public final void removeCantUntapTurn() {
+        // reduce by one each turn
+
+        List<Long> toRemove = Lists.newArrayList();
+        for (final Map.Entry<Long, Integer> e : cantUntapTurns.entrySet()) {
+            e.setValue(e.getValue() - 1);
+            if (e.getValue() <= 0) {
+                toRemove.add(e.getKey());
+            }
+        }
+        for (final long l : toRemove) {
+            cantUntapTurns.remove(l);
+        }
+        getView().updateCantUntap(this);
+    }
+
+    public final int getCantUntapTurnValue() {
+        if (cantUntapTurns.isEmpty()) {
+            return 0;
+        }
+        return Collections.max(cantUntapTurns.values());
     }
 
     public final void addCantUntapPlayer(final Player p, final long timestamp) {
         cantUntapPlayer.put(timestamp, p);
+        getView().updateCantUntap(this);
     }
 
     public final void removeCantUntapPlayer(final long timestamp) {
         cantUntapPlayer.remove(timestamp);
+        getView().updateCantUntap(this);
+    }
+
+    public final Collection<Player> getCantUntapPlayer() {
+        return cantUntapPlayer.values();
     }
 
     public final void untap() {

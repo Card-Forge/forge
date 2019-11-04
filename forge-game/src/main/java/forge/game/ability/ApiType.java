@@ -30,6 +30,7 @@ public enum ApiType {
     Block (BlockEffect.class),
     Bond (BondEffect.class),
     Branch (BranchEffect.class),
+    CantUntapTurn (CantUntapTurnEffect.class),
     ChangeCombatants (ChangeCombatantsEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),
