@@ -3,6 +3,7 @@ package forge.screens.home;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.ai.AIOption;
 import forge.deck.*;
@@ -258,6 +259,9 @@ public class VLobby implements ILobbyView {
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        GuiBase.setNetworkplay(allowNetworking);
+
         ImmutableList<VariantCheckBox> vntBoxes = null;
         if (allowNetworking) {
             vntBoxes = vntBoxesNetwork;

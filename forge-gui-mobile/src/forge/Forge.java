@@ -67,11 +67,12 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static String locale = "en-US";
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
+            GuiBase.enablePropertyConfig(value);
         }
         return app;
     }

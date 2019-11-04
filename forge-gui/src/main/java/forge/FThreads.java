@@ -13,6 +13,8 @@ public class FThreads {
      * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
      */
     public static void assertExecutedByEdt(final boolean mustBeEDT) {
+        if (GuiBase.isNetworkplay())
+            return; //don't check for networkplay
         if (isGuiThread() != mustBeEDT) {
             final StackTraceElement[] trace = Thread.currentThread().getStackTrace();
             final String methodName = trace[2].getClassName() + "." + trace[2].getMethodName();
