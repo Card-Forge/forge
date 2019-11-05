@@ -20,6 +20,7 @@ public final class CardArchetypeLDAGenerator {
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
         formatStrings.add(FModel.getFormats().getStandard().getName());
+        formatStrings.add(FModel.getFormats().getPioneer().getName());
         formatStrings.add(FModel.getFormats().getModern().getName());
         formatStrings.add("Legacy");
         formatStrings.add("Vintage");
