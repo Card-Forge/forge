@@ -53,21 +53,24 @@ public class ControlWinLose {
         view.hide();
         saveOptions();
 
-        MatchController.getHostedMatch().continueMatch();
+        try { MatchController.getHostedMatch().continueMatch();
+        } catch (NullPointerException e) {}
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         view.hide();
         saveOptions();
-        MatchController.getHostedMatch().restartMatch();
+        try { MatchController.getHostedMatch().restartMatch();
+        } catch (NullPointerException e) {}
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        MatchController.getHostedMatch().endCurrentGame();
+        try { MatchController.getHostedMatch().endCurrentGame();
+        } catch (NullPointerException e) {}
         view.hide();
     }
 

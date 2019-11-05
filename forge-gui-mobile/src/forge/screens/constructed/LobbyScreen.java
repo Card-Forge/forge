@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.GuiBase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -525,6 +526,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updateVariantSelection();
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        GuiBase.setNetworkplay(allowNetworking);
+
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {

@@ -29,7 +29,7 @@ public class Main extends IOSApplication.Delegate {
         final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir);
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, false);
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }
