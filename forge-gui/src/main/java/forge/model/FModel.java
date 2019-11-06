@@ -168,6 +168,7 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setPioneerPredicate(formats.getPioneer().getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
         magicDb.setCommanderPredicate(formats.get("Commander").getFilterRules());
         magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());
