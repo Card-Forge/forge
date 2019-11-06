@@ -136,7 +136,7 @@ public class Forge implements ApplicationListener {
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt)
-                    splashScreen.getProgressBar().setDescription("Preload Extended Art...");
+                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
