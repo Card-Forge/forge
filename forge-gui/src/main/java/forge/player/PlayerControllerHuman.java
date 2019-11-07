@@ -678,7 +678,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection orderBlockers(final Card attacker, final CardCollection blockers) {
         final CardView vAttacker = CardView.get(attacker);
         getGui().setPanelSelection(vAttacker);
-        return game.getCardList(getGui().order("Choose Damage Order for " + vAttacker, "Damaged First",
+        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor").replace("%s", vAttacker.toString()), localizer.getMessage("lblDamagedFirst"),
                 CardView.getCollection(blockers), vAttacker));
     }
 
@@ -703,7 +703,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vAttacker = CardView.get(attacker);
         getGui().setPanelSelection(vAttacker);
         return game.getCardList(getGui().insertInList(
-                "Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first",
+                localizer.getMessage("lblChooseBlockerAfterWhichToPlaceAttackert").replace("%s", vAttacker.toString()),
                 CardView.get(blocker), CardView.getCollection(oldBlockers)));
     }
 
@@ -711,7 +711,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection orderAttackers(final Card blocker, final CardCollection attackers) {
         final CardView vBlocker = CardView.get(blocker);
         getGui().setPanelSelection(vBlocker);
-        return game.getCardList(getGui().order("Choose Damage Order for " + vBlocker, "Damaged First",
+        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor").replace("%s", vBlocker.toString()), localizer.getMessage("lblDamagedFirst"),
                 CardView.getCollection(attackers), vBlocker));
     }
 
@@ -841,7 +841,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setCard(c.getView());
 
         boolean result = false;
-        result = InputConfirm.confirm(this, view, TextUtil.concatNoSpace("Put ", view.toString(), " on the top or bottom of your library?"),
+        result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary").replace("%s", view.toString()),
                 true, ImmutableList.of("Top", "Bottom"));
 
         endTempShowCards();
@@ -876,27 +876,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tempShowCards(cards);
         switch (destinationZone) {
         case Library:
-            choices = getGui().order("Choose order of cards to put into the library", "Closest to top",
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoLibrary"), localizer.getMessage("lblClosestToTop"),
                     CardView.getCollection(cards), null);
             break;
         case Battlefield:
-            choices = getGui().order("Choose order of cards to put onto the battlefield", "Put first",
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutOntoBattlefield"), localizer.getMessage("lblPutFirst"),
                     CardView.getCollection(cards), null);
             break;
         case Graveyard:
-            choices = getGui().order("Choose order of cards to put into the graveyard", "Closest to bottom",
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoGraveyard"), localizer.getMessage("lblClosestToBottom"),
                     CardView.getCollection(cards), null);
             break;
         case PlanarDeck:
-            choices = getGui().order("Choose order of cards to put into the planar deck", "Closest to top",
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoPlanarDeck"), localizer.getMessage("lblClosestToTop"),
                     CardView.getCollection(cards), null);
             break;
         case SchemeDeck:
-            choices = getGui().order("Choose order of cards to put into the scheme deck", "Closest to top",
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoSchemeDeck"), localizer.getMessage("lblClosestToTop"),
                     CardView.getCollection(cards), null);
             break;
         case Stack:
-            choices = getGui().order("Choose order of copies to cast", "Put first", CardView.getCollection(cards),
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCopiesCast"), localizer.getMessage("lblPutFirst"), CardView.getCollection(cards),
                     null);
             break;
         default:
@@ -914,14 +914,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (p != player) {
             tempShowCards(valid);
             final CardCollection choices = game
-                    .getCardList(getGui().many("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
-                            "Discarded", min, min, CardView.getCollection(valid), null));
+                    .getCardList(getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), min),
+                            localizer.getMessage("lblDiscarded"), min, min, CardView.getCollection(valid), null));
             endTempShowCards();
             return choices;
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-        inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
+        inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
     }
@@ -938,9 +938,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i <= cardsInGrave; i++) {
             cntChoice.add(Integer.valueOf(i));
         }
-        final int chosenAmount = getGui().one("Delve how many cards?", cntChoice.build()).intValue();
+        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
         for (int i = 0; i < chosenAmount; i++) {
-            final CardView nowChosen = getGui().oneOrNone("Exile which card?", CardView.getCollection(grave));
+            final CardView nowChosen = getGui().oneOrNone(localizer.getMessage("lblExileWhichCard"), CardView.getCollection(grave));
 
             if (nowChosen == null) {
                 // User canceled,abort delving.
@@ -1003,7 +1003,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return super.hasAllTargets();
             }
         };
-        target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
+        target.setMessage(localizer.getMessage("lblSelectNCardsToDiscardUnlessDiscarduType").replace("%s", uType));
         target.showAndWait();
         return new CardCollection(target.getSelected());
     }
@@ -1316,8 +1316,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                              // opponent's next turn
             }
         };
-        final String message = "Cleanup Phase\nSelect " + nDiscard + " card" + (nDiscard > 1 ? "s" : "")
-                + " to discard to bring your hand down to the maximum of " + max + " cards.";
+        final String message = localizer.getMessage("lblCleanupPhase") + "\n"
+                + localizer.getMessage("lblSelectCardsToDiscardHandDownMaximum").replace("%d", String.valueOf(nDiscard)).replace("%max", String.valueOf(max));
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();

@@ -24,7 +24,6 @@ import forge.CardStorageReader.ProgressObserver;
 import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
-import forge.card.CardTranslation;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
@@ -49,6 +48,7 @@ import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.tournament.TournamentData;
+import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
@@ -147,7 +147,7 @@ public final class FModel {
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
-        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE));
+        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {
@@ -168,6 +168,7 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setPioneerPredicate(formats.getPioneer().getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
         magicDb.setCommanderPredicate(formats.get("Commander").getFilterRules());
         magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());

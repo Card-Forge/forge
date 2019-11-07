@@ -14,6 +14,7 @@ import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
