@@ -66,6 +66,7 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
     private static List<QuestEventDifficulty> mediumOrder = Arrays.asList(QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
     private static List<QuestEventDifficulty> hardOrder = Arrays.asList(QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
     private static List<QuestEventDifficulty> expertOrder = Arrays.asList(QuestEventDifficulty.EXPERT, QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY);
+    private static List<QuestEventDifficulty> wildOrder = Arrays.asList(QuestEventDifficulty.WILD);
 
     private List<QuestEventDifficulty> getOrderForDifficulty(QuestEventDifficulty d) {
         final List<QuestEventDifficulty> difficultyOrder;
@@ -82,6 +83,9 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
                 break;
             case EXPERT:
                 difficultyOrder = expertOrder;
+                break;
+            case WILD:
+                difficultyOrder = wildOrder;
                 break;
             default:
                 throw new RuntimeException("unhandled difficulty: " + d);
@@ -203,6 +207,7 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
             }
         }
 
+        addDuel(duelOpponents, QuestEventDifficulty.WILD, 1);
         addRandomDuel(duelOpponents, randomDuelDifficulty);
 
         return duelOpponents;
@@ -222,6 +227,7 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
         sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<>());
         sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<>());
         sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.WILD, new ArrayList<>());
 
         for (final QuestEventDuel qd : allDuels) {
             sortedDuels.add(qd.getDifficulty(), qd);
