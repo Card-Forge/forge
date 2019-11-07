@@ -701,7 +701,9 @@ public class GameAction {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, cause);
-        runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+        if (origin != null) { // is generally null when adding via dev mode
+            runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+        }
         if (params != null) {
             runParams.putAll(params);
         }
