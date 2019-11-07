@@ -1,9 +1,6 @@
-package forge.card;
+package forge.util;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Charsets;
-import forge.properties.ForgeConstants;
-import forge.util.LineReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,12 +12,12 @@ public class CardTranslation {
     private static Map <String, String> translatednames;
     private static Map <String, String> translatedtypes;
     private static Map <String, String> translatedoracles;
-    private static String languageSelected;
+    private static String languageSelected = "en-US";
 
-    private static void readTranslationFile(String language) {
+    private static void readTranslationFile(String language, String languagesDirectory) {
         String filename = "cardnames-" + language + ".txt";
 
-        try (LineReader translationFile = new LineReader(new FileInputStream(ForgeConstants.LANG_DIR + filename), Charsets.UTF_8)) {
+        try (LineReader translationFile = new LineReader(new FileInputStream(languagesDirectory + filename), Charsets.UTF_8)) {
             for (String line : translationFile.readLines()) {
                 String[] matches = line.split("\\|");
                 if (matches.length >= 2) {
@@ -34,7 +31,7 @@ public class CardTranslation {
                 }
             }
         } catch (IOException e) {
-            Log.error("Error reading translation file: cardnames-" + language + ".txt");
+            System.err.println("Error reading translation file: cardnames-" + language + ".txt");
         }
     }
 
@@ -66,7 +63,7 @@ public class CardTranslation {
     }
 
     public static HashMap<String, String> getTranslationTexts(String cardname, String altcardname) {
-        HashMap<String, String> translations = new HashMap<String, String>();
+        HashMap<String, String> translations = new HashMap<>();
         translations.put("name", getTranslatedName(cardname));
         translations.put("oracle", getTranslatedOracle(cardname));
         translations.put("altname", getTranslatedName(altcardname));
@@ -78,14 +75,14 @@ public class CardTranslation {
         return !languageSelected.equals("en-US");
     }
 
-    public static void preloadTranslation(String language) {
+    public static void preloadTranslation(String language, String languagesDirectory) {
         languageSelected = language;
         
         if (needsTranslation()) {
             translatednames = new HashMap<>();
             translatedtypes = new HashMap<>();
             translatedoracles = new HashMap<>();
-            readTranslationFile(languageSelected);
+            readTranslationFile(languageSelected, languagesDirectory);
         }
     }
 }

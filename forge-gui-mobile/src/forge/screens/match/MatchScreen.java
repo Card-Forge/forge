@@ -395,7 +395,7 @@ public class MatchScreen extends FScreen {
             return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
             if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
-                if (getActivePrompt().getBtnCancel().getText().equals("End Turn")) {
+                if (getActivePrompt().getBtnCancel().getText().equals(Localizer.getInstance().getMessage("lblEndTurn"))) {
                     return false;
                 }
             }

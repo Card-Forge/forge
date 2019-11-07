@@ -11,10 +11,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -24,6 +21,7 @@ import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
@@ -362,6 +360,12 @@ public abstract class GameState {
             if (c.isFaceDown()) {
                 newText.append("|FaceDown"); // Exiled face down
             }
+            if (c.isAdventureCard() && c.getZone().is(ZoneType.Exile)) {
+                // TODO: this will basically default all exiled cards with Adventure to being "On Adventure".
+                // Need to figure out a better way to detect if it's actually on adventure.
+                newText.append("|OnAdventure");
+            }
+
         }
 
         if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Exile) {
@@ -1202,6 +1206,16 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
+                } else if (info.startsWith("OnAdventure")) {
+                    String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
+                    AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
+                    StringBuilder sbPlay = new StringBuilder();
+                    sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+                    sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+                    saAdventure.setSVar("Play", sbPlay.toString());
+                    saAdventure.setActivatingPlayer(c.getOwner());
+                    saAdventure.resolve();
+                    c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                 } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);

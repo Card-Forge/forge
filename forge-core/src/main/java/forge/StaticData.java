@@ -35,6 +35,7 @@ public class StaticData {
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
+    private Predicate<PaperCard> pioneerPredicate;
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
     private Predicate<PaperCard> oathbreakerPredicate;
@@ -197,13 +198,13 @@ public class StaticData {
 
     public TokenDb getAllTokens() { return allTokens; }
 
-    public Predicate<PaperCard> getStandardPredicate() {
-        return standardPredicate;
-    }
+    
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
-    public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = standardPredicate; }
+    public void setPioneerPredicate(Predicate<PaperCard> pioneerPredicate) { this.pioneerPredicate = pioneerPredicate; }
+
+    public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = modernPredicate; }
 
     public void setCommanderPredicate(Predicate<PaperCard> commanderPredicate) { this.commanderPredicate = commanderPredicate; }
 
@@ -211,9 +212,11 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
-    public Predicate<PaperCard> getModernPredicate() {
-        return modernPredicate;
-    }
+    public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
+    
+    public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
+    
+    public Predicate<PaperCard> getModernPredicate() { return modernPredicate; }
 
     public Predicate<PaperCard> getCommanderPredicate() { return commanderPredicate; }
 

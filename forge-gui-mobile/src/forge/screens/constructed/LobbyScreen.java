@@ -476,6 +476,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
             case LEGACY_CARDGEN_DECK:
             case VINTAGE_CARDGEN_DECK:
