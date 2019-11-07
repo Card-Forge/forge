@@ -21,7 +21,6 @@ import forge.CachedCardImage;
 import forge.FThreads;
 import forge.StaticData;
 import forge.card.CardEdition;
-import forge.card.CardTranslation;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -39,6 +38,7 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
+import forge.util.CardTranslation;
 import forge.view.arcane.util.OutlinedLabel;
 
 import javax.swing.*;

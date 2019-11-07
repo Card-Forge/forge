@@ -10,7 +10,6 @@ import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
-import forge.card.CardTranslation;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
@@ -31,6 +30,7 @@ import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Callback;
+import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.Utils;
@@ -130,7 +130,7 @@ public class Forge implements ApplicationListener {
                 FSkinFont.preloadAll(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
-                CardTranslation.preloadTranslation(locale);
+                CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
