@@ -360,7 +360,7 @@ public abstract class GameState {
             if (c.isFaceDown()) {
                 newText.append("|FaceDown"); // Exiled face down
             }
-            if (c.hasAlternateState() && c.getAlternateStateName() == CardStateName.Adventure && c.getZone().is(ZoneType.Exile)) {
+            if (c.isAdventureCard() && c.getZone().is(ZoneType.Exile)) {
                 // TODO: this will basically default all exiled cards with Adventure to being "On Adventure".
                 // Need to figure out a better way to detect if it's actually on adventure.
                 newText.append("|OnAdventure");
