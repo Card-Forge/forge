@@ -38,7 +38,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Set<PlayerView> manaPoolUpdate = new HashSet<>();
     private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
 
-    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate;
+    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate;
     private boolean gameOver, gameFinished;
     private PlayerView turnUpdate;
 
@@ -95,6 +95,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (needPlayerControlUpdate) {
                 needPlayerControlUpdate = false;
                 matchController.updatePlayerControl();
+            }
+            if (refreshFieldUpdate) {
+                refreshFieldUpdate = false;
+                matchController.refreshField();
             }
             synchronized (zonesUpdate) {
                 if (!zonesUpdate.isEmpty()) {
@@ -277,6 +281,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardTapped event) {
+        if(GuiBase.isNetworkplay())
+            refreshFieldUpdate = true; //update all players field when event un/tapped
         processCard(event.card, cardsUpdate);
         return processEvent();
     }

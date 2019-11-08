@@ -159,6 +159,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public void refreshField() {
+        //not needed for base game implementation
+    }
+
+    @Override
     public boolean mayView(final CardView c) {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown

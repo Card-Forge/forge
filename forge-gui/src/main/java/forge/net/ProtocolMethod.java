@@ -71,6 +71,9 @@ public enum ProtocolMethod {
     chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
+    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    clearSelectables    (Mode.SERVER),
+    refreshField        (Mode.SERVER),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
     restoreOldZones     (Mode.SERVER, Void.TYPE, Map/*PlayerView,Object*/.class),
