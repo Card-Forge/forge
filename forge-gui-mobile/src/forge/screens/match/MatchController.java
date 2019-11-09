@@ -125,8 +125,13 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        for (final VPlayerPanel pnl : view.getPlayerPanels().values())
-            pnl.getField().update();
+        if(getGameView() == null)
+            return;
+        if(getGameView().getPhase() == null)
+            return;
+        if (getGameView().getPhase().phaseforUpdateField())
+            for (final VPlayerPanel pnl : view.getPlayerPanels().values())
+                pnl.getField().update();
     }
 
     public boolean hotSeatMode() {

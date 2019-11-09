@@ -44,7 +44,16 @@ public enum PhaseType {
         nameForScripts = name_for_scripts;
     }
 
-    
+
+    public final boolean phaseforUpdateField() {
+        boolean result =
+                ((ALL_PHASES.indexOf(this) >= ALL_PHASES.indexOf(UNTAP)
+                && ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(COMBAT_FIRST_STRIKE_DAMAGE))
+                || (ALL_PHASES.indexOf(this) >= ALL_PHASES.indexOf(MAIN2)
+                && ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(CLEANUP)));
+        return result;
+    }
+
     public final boolean isAfter(final PhaseType phase) {
         return ALL_PHASES.indexOf(this) > ALL_PHASES.indexOf(phase);
     }

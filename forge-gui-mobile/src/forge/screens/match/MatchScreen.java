@@ -378,9 +378,10 @@ public class MatchScreen extends FScreen {
                 }
                 //player
                 if (is4Player() || is3Player()) {
+                    int numplayers = is3Player() ? 3 : 4;
                     for (final PlayerView p : game.getPlayers()) {
                         if (combat.getAttackersOf(p).contains(attacker))
-                            TargetingOverlay.drawArrow(g, attacker, p);
+                            TargetingOverlay.drawArrow(g, attacker, p, numplayers);
                     }
                 }
             }

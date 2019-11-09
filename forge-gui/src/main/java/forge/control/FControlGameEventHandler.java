@@ -96,16 +96,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 needPlayerControlUpdate = false;
                 matchController.updatePlayerControl();
             }
-            if (refreshFieldUpdate) {
-                refreshFieldUpdate = false;
-                matchController.refreshField();
-            }
             synchronized (zonesUpdate) {
                 if (!zonesUpdate.isEmpty()) {
                     // Copy to prevent concurrency issues
                     matchController.updateZones(new PlayerZoneUpdates(zonesUpdate));
                     zonesUpdate.clear();
                 }
+            }
+            if (refreshFieldUpdate) {
+                refreshFieldUpdate = false;
+                matchController.refreshField();
             }
             if (gameOver) {
                 gameOver = false;
@@ -338,6 +338,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
+        if(event.to.getZoneType() == ZoneType.Battlefield)
+            refreshFieldUpdate = true;
         //pfps the change to the zones have already been performed with add and remove calls
 	// this is only for playing a sound
 	//        updateZone(event.from);

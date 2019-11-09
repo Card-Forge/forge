@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import forge.GuiBase;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,6 +60,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         if (hasLocalPlayers() && !isLocalPlayer(player)) { //add check if gameControllers is not empty
+            if(GuiBase.getInterface().isLibgdxPort()){//spectator is registered as localplayer bug on ai vs ai (after .
+                if (spectator != null){               //human vs ai game), then it loses "control" when you watch ai vs ai,
+                    currentPlayer = null;             //again, and vice versa, This is to prevent throwing error, lose control,
+                    updateCurrentPlayer(null);        //workaround fix on mayviewcards below is needed or it will bug the UI..
+                    gameControllers.clear();
+                    return;
+                }
+            }
+
             throw new IllegalArgumentException();
         }
 
@@ -168,8 +178,22 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown
         }
-        if (getGameController().mayLookAtAllCards()) {
-            return true;
+        if(GuiBase.getInterface().isLibgdxPort()){
+            if(spectator!=null) { //workaround fix!! this is needed on above code or it will
+                gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
+                return true;
+            }
+            try{
+                if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
+                    return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
+                }
+            } catch (NullPointerException e){
+                return true; // return true so it will work as normal
+            }
+        } else {
+            if (getGameController().mayLookAtAllCards()) {
+                return true;
+            }
         }
         return c.canBeShownToAny(getLocalPlayers());
     }
@@ -271,6 +295,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
                 IGameController controller = spectator;
                 spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
+                controller.selectButtonOk(); //pause
                 controller.nextGameDecision(NextGameDecision.QUIT);
             }
             return false; //let logic above handle closing current screen
