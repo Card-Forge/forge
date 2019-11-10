@@ -38,7 +38,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Set<PlayerView> manaPoolUpdate = new HashSet<>();
     private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
 
-    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate;
+    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate;
     private boolean gameOver, gameFinished;
     private PlayerView turnUpdate;
 
@@ -102,6 +102,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                     matchController.updateZones(new PlayerZoneUpdates(zonesUpdate));
                     zonesUpdate.clear();
                 }
+            }
+            if (refreshFieldUpdate) {
+                refreshFieldUpdate = false;
+                matchController.refreshField();
             }
             if (gameOver) {
                 gameOver = false;
@@ -277,6 +281,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardTapped event) {
+        if(GuiBase.isNetworkplay())
+            refreshFieldUpdate = true; //update all players field when event un/tapped
         processCard(event.card, cardsUpdate);
         return processEvent();
     }
@@ -332,6 +338,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
+        if(event.to.getZoneType() == ZoneType.Battlefield)
+            refreshFieldUpdate = true;
         //pfps the change to the zones have already been performed with add and remove calls
 	// this is only for playing a sound
 	//        updateZone(event.from);

@@ -63,6 +63,7 @@ public class SacrificeAi extends SpellAbilityAi {
         final boolean destroy = sa.hasParam("Destroy");
 
         Player opp = ai.getWeakestOpponent();
+
         if (tgt != null) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
@@ -74,8 +75,16 @@ public class SacrificeAi extends SpellAbilityAi {
             num = (num == null) ? "1" : num;
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
-            List<Card> list =
-                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            List<Card> list = null;
+            try {
+                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            } catch (NullPointerException e) {
+                return false;
+            } finally {
+                if (list == null)
+                    return false;
+            }//prevent NPE on MoJhoSto
+
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
                 	return false;
