@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventTokenCreated;
@@ -44,6 +45,17 @@ public class AmassEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
         final boolean remember = sa.hasParam("RememberAmass");
 
+        boolean useZoneTable = true;
+        CardZoneTable triggerList = sa.getChangeZoneTable();
+        if (triggerList == null) {
+            triggerList = new CardZoneTable();
+            useZoneTable = false;
+        }
+        if (sa.hasParam("ChangeZoneTable")) {
+            sa.setChangeZoneTable(triggerList);
+            useZoneTable = true;
+        }
+
         // create army token if needed
         if (CardLists.count(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army")) == 0) {
             final String tokenScript = "b_0_0_zombie_army";
@@ -54,9 +66,16 @@ public class AmassEffect extends SpellAbilityEffect {
 
                 // Should this be catching the Card that's returned?
                 Card c = game.getAction().moveToPlay(tok, sa);
+                if (c.getZone() != null) {
+                    triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
+                }
                 c.updateStateForView();
             }
 
+            if (!useZoneTable) {
+                triggerList.triggerChangesZoneAll(game);
+                triggerList.clear();
+            }
             game.fireEvent(new GameEventTokenCreated());
         }
 

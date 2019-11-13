@@ -4,4 +4,4 @@ Order:102
 Subtype:Pioneer
 Type:Sanctioned
 Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, SOI, EMN, KLD, AER, AKH, HOU, XLN, RIX, DOM, M19, GRN, RNA, WAR, M20, ELD
-Banned:Bloodstained Mire; Flooded Strand; Polluted Delta; Windswept Heath; Wooded Foothills; Felidar Guardian; Leyline of Abundance; Oath of Nissa
+Banned:Bloodstained Mire; Flooded Strand; Polluted Delta; Windswept Heath; Wooded Foothills; Felidar Guardian; Leyline of Abundance; Oath of Nissa; Veil of Summer
