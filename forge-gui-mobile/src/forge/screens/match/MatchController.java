@@ -117,21 +117,23 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
-        /*//ensure cards appear in the correct row of the field
+        //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
-            pnl.getField().update();
-        }*/
+            pnl.getField().update(true);
+        }
     }
 
     @Override
     public void refreshField() {
+        if(!GuiBase.isNetworkplay()) //TODO alternate method for update Netplay...
+            return;
         if(getGameView() == null)
             return;
         if(getGameView().getPhase() == null)
             return;
         if (getGameView().getPhase().phaseforUpdateField())
             for (final VPlayerPanel pnl : view.getPlayerPanels().values())
-                pnl.getField().update();
+                pnl.getField().update(false);
     }
 
     public boolean hotSeatMode() {

@@ -176,7 +176,7 @@ public class VPlayerPanel extends FContainer {
 
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield ) {
-            field.update();
+            field.update(true);
         }
         else if (zoneType == ZoneType.Command) {
             commandZone.update();
