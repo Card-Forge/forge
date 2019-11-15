@@ -119,7 +119,7 @@ public class MatchController extends AbstractGuiGame {
     public void refreshCardDetails(final Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
-            pnl.getField().update();
+            pnl.getField().update(true);
         }
     }
 
@@ -133,7 +133,7 @@ public class MatchController extends AbstractGuiGame {
             return;
         if (getGameView().getPhase().phaseforUpdateField())
             for (final VPlayerPanel pnl : view.getPlayerPanels().values())
-                pnl.getField().update();
+                pnl.getField().update(false);
     }
 
     public boolean hotSeatMode() {
