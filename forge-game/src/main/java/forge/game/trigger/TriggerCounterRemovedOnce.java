@@ -21,6 +21,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -84,8 +85,8 @@ public class TriggerCounterRemovedOnce extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Removed from: ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append(" Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
+        sb.append(Localizer.getInstance().getMessage("lblRemovedFrom")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(" ").append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 }

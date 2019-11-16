@@ -24,6 +24,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.Map;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -104,7 +105,7 @@ public class TriggerExiled extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Exiled: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblExiled")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

@@ -22,6 +22,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -95,8 +96,8 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
-        sb.append("Blocker: ").append(sa.getTriggeringObject(AbilityKey.Blocker));
+        sb.append(Localizer.getInstance().getMessage("lblAttacker")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblBlocker")).append(": ").append(sa.getTriggeringObject(AbilityKey.Blocker));
         return sb.toString();
     }
 }

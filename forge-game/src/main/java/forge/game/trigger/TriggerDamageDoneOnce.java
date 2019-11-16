@@ -7,6 +7,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 public class TriggerDamageDoneOnce extends Trigger {
 
@@ -67,9 +68,9 @@ public class TriggerDamageDoneOnce extends Trigger {
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         if (sa.getTriggeringObject(AbilityKey.Target) != null) {
-            sb.append("Damaged: ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
+            sb.append(Localizer.getInstance().getMessage("lblDamaged")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
         }
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 

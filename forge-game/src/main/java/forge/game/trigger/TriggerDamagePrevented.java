@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -114,9 +115,9 @@ public class TriggerDamagePrevented extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
-        sb.append("Damage Target: ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
+        sb.append(Localizer.getInstance().getMessage("lblDamageSource")).append(": ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblDamageTarget")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 }

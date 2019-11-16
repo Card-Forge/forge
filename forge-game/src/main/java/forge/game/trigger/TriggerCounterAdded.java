@@ -25,6 +25,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -127,7 +128,7 @@ public class TriggerCounterAdded extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Added once: ");
+        sb.append(Localizer.getInstance().getMessage("lblAddedOnce")).append(": ");
         if (sa.hasTriggeringObject(AbilityKey.Card))
             sb.append(sa.getTriggeringObject(AbilityKey.Card));
         if (sa.hasTriggeringObject(AbilityKey.Player))

@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -79,7 +80,7 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Mana: ").append(sa.getTriggeringObject(AbilityKey.PayingMana));
+        sb.append(Localizer.getInstance().getMessage("lblMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.PayingMana));
         return sb.toString();
     }
 }

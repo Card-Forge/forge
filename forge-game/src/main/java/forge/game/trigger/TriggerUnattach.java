@@ -21,6 +21,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -82,8 +83,8 @@ public class TriggerUnattach extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Object: ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
-        sb.append("Attachment: ").append(sa.getTriggeringObject(AbilityKey.Attach));
+        sb.append(Localizer.getInstance().getMessage("lblObject")).append(": ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblAttachment")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attach));
         return sb.toString();
     }
 

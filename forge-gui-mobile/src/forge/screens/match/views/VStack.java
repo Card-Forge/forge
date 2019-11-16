@@ -38,6 +38,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
@@ -98,7 +99,7 @@ public class VStack extends FDropDown {
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
-            getMenuTab().setText("Stack (" + stackSize + ")");
+            getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + stackSize + ")");
 
             if (stackSize > 0) {
                 if (!isVisible()) {
@@ -133,7 +134,7 @@ public class VStack extends FDropDown {
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
-            FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(Align.center).build());
+            FLabel label = add(new FLabel.Builder().text("[" + Localizer.getInstance().getMessage("lblEmpty") + "]").font(FONT).align(Align.center).build());
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
