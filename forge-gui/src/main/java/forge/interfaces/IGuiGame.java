@@ -53,6 +53,7 @@ public interface IGuiGame {
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);
     void refreshCardDetails(Iterable<CardView> cards);
+    void refreshField();
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
@@ -160,6 +161,8 @@ public interface IGuiGame {
     void setSelectables(final Iterable<CardView> cards);
     void clearSelectables();
     boolean isSelecting();
+    boolean isGamePaused();
+    public void setgamePause(boolean pause);
 
     void awaitNextInput();
     void cancelAwaitNextInput();

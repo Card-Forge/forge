@@ -59,7 +59,8 @@ public class PlayerPanel extends FContainer {
 
     private final FLabel nameRandomiser;
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
-    private int avatarIndex;
+    private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
+    private int avatarIndex, sleeveIndex;
 
     final Localizer localizer = Localizer.getInstance();
     private final FTextField txtPlayerName = new FTextField(localizer.getMessage("lblPlayerName"));
@@ -98,6 +99,7 @@ public class PlayerPanel extends FContainer {
         setType(slot.getType());
         setPlayerName(slot.getName());
         setAvatarIndex(slot.getAvatarIndex());
+        setSleeveIndex(slot.getSleeveIndex());
 
         devModeSwitch = new FToggleSwitch(localizer.getMessage("lblNormal"), localizer.getMessage("lblDevMode"));
         devModeSwitch.setVisible(isNetworkHost());
@@ -188,6 +190,9 @@ public class PlayerPanel extends FContainer {
 
         createAvatar();
         add(avatarLabel);
+
+        createSleeve();
+        add(sleeveLabel);
 
         createNameEditor();
         add(newLabel(localizer.getMessage("lblName") + ":"));
@@ -299,12 +304,16 @@ public class PlayerPanel extends FContainer {
         float y = PADDING;
         float fieldHeight = txtPlayerName.getHeight();
         float avatarSize = 2 * fieldHeight + PADDING;
+        float sleeveSize = 2 * fieldHeight + PADDING;
+        float sleeveSizeW = (sleeveSize/4)*3;
         float dy = fieldHeight + PADDING;
 
         avatarLabel.setBounds(x, y, avatarSize, avatarSize);
         x += avatarSize + PADDING;
+        sleeveLabel.setBounds(x, y, sleeveSizeW, sleeveSize);
+        x += sleeveSizeW + PADDING;
         float w = width - x - fieldHeight - 2 * PADDING;
-        txtPlayerName.setBounds(x, y, w, fieldHeight);
+        txtPlayerName.setBounds(x, y, w, fieldHeight); //add space for card back
         x += w + PADDING;
         nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
 
@@ -312,8 +321,8 @@ public class PlayerPanel extends FContainer {
         humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
         x = width - humanAiSwitch.getWidth() - PADDING;
         humanAiSwitch.setPosition(x, y);
-        w = x - avatarSize - 3 * PADDING;
-        x = avatarSize + 2 * PADDING;
+        w = x - (avatarSize+sleeveSizeW+PADDING) - 3 * PADDING;
+        x = (avatarSize+sleeveSizeW+PADDING) + 2 * PADDING;
         if (cbArchenemyTeam.isVisible()) {
             cbArchenemyTeam.setBounds(x, y, w, fieldHeight);
         }
@@ -411,6 +420,7 @@ public class PlayerPanel extends FContainer {
                 //update may edit in-case it changed as a result of the AI change
                 setMayEdit(screen.getLobby().mayEdit(index));
                 setAvatarIndex(slot.getAvatarIndex());
+                setSleeveIndex(slot.getSleeveIndex());
                 setPlayerName(slot.getName());
             }
         }
@@ -470,7 +480,28 @@ public class PlayerPanel extends FContainer {
                     setAvatarIndex(result);
 
                     if (index < 2) {
+                        screen.updateAvatar(index, result);
                         screen.updateAvatarPrefs();
+                    }
+                    if (allowNetworking) {
+                        screen.firePlayerChangeListener(index);
+                    }
+                }
+            });
+        }
+    };
+
+    private FEventHandler sleeveCommand = new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    setSleeveIndex(result);
+
+                    if (index < 2) {
+                        screen.updateSleeve(index, result);
+                        screen.updateSleevePrefs();
                     }
                     if (allowNetworking) {
                         screen.firePlayerChangeListener(index);
@@ -664,6 +695,17 @@ public class PlayerPanel extends FContainer {
         avatarLabel.setCommand(avatarCommand);
     }
 
+    private void createSleeve() {
+        String[] currentPrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
+        if (index < currentPrefs.length) {
+            setSleeveIndex(Integer.parseInt(currentPrefs[index]));
+        }
+        else {
+            setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
+        }
+        sleeveLabel.setCommand(sleeveCommand);
+    }
+
     public void setAvatarIndex(int newAvatarIndex) {
         avatarIndex = newAvatarIndex;
         if (avatarIndex != -1) {
@@ -674,8 +716,22 @@ public class PlayerPanel extends FContainer {
         }
     }
 
+    public void setSleeveIndex(int newSleeveIndex) {
+        sleeveIndex = newSleeveIndex;
+        if (sleeveIndex != -1) {
+            sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
+        }
+        else {
+            sleeveLabel.setIcon(null);
+        }
+    }
+
     public int getAvatarIndex() {
         return avatarIndex;
+    }
+
+    public int getSleeveIndex() {
+        return sleeveIndex;
     }
 
     public void setPlayerName(String string) {
@@ -759,6 +815,7 @@ public class PlayerPanel extends FContainer {
         if (mayEdit == mayEdit0) { return; }
         mayEdit = mayEdit0;
         avatarLabel.setEnabled(mayEdit);
+        sleeveLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
         humanAiSwitch.setEnabled(mayEdit);

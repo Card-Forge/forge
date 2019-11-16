@@ -79,6 +79,11 @@ public class TargetingOverlay {
                     CardAreaPanel.get(endCard).getTargetingArrowOrigin(),
                     connects);
     }
+    public static void drawArrow(Graphics g, CardView startCard, PlayerView targetPlayer, int numplayers) {
+        drawArrow(g, CardAreaPanel.get(startCard).getTargetingArrowOrigin(),
+                MatchController.getView().getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(numplayers),
+                ArcConnection.FoesAttacking);
+    }
     public static void drawArrow(Graphics g, Vector2 start, CardView targetCard, ArcConnection connects) {
         drawArrow(g, start,
                 CardAreaPanel.get(targetCard).getTargetingArrowOrigin(),

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.GuiBase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -301,11 +302,18 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     /** Saves avatar prefs for players one and two. */
-    void updateAvatarPrefs() {
+    void  updateAvatarPrefs() {
         int pOneIndex = playerPanels.get(0).getAvatarIndex();
         int pTwoIndex = playerPanels.get(1).getAvatarIndex();
 
         prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
+        prefs.save();
+    }
+    void  updateSleevePrefs() {
+        int pOneIndex = playerPanels.get(0).getSleeveIndex();
+        int pTwoIndex = playerPanels.get(1).getSleeveIndex();
+
+        prefs.setPref(FPref.UI_SLEEVES, pOneIndex + "," + pTwoIndex);
         prefs.save();
     }
 
@@ -318,6 +326,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         for (int i = 0; i < avatarPrefs.length; i++) {
             int avatarIndex = Integer.parseInt(avatarPrefs[i]);
             playerPanels.get(i).setAvatarIndex(avatarIndex);
+        }
+
+        // Sleeves
+        String[] sleevePrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
+        for (int i = 0; i < sleevePrefs.length; i++) {
+            int sleeveIndex = Integer.parseInt(sleevePrefs[i]);
+            playerPanels.get(i).setSleeveIndex(sleeveIndex);
         }
 
         // Name
@@ -334,6 +349,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return usedAvatars;
     }
 
+    List<Integer> getUsedSleeves() {
+        List<Integer> usedSleeves = Arrays.asList(-1,-1,-1,-1,-1,-1,-1,-1);
+        int i = 0;
+        for (PlayerPanel pp : playerPanels) {
+            usedSleeves.set(i++, pp.getSleeveIndex());
+        }
+        return usedSleeves;
+    }
+
     List<String> getPlayerNames() {
         List<String> names = new ArrayList<>();
         for (PlayerPanel pp : playerPanels) {
@@ -348,6 +372,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     public int getPlayerAvatar(int i) {
         return playerPanels.get(i).getAvatarIndex();
+    }
+
+    public int getPlayerSleeve(int i) {
+        return playerPanels.get(i).getSleeveIndex();
     }
 
     /////////////////////////////////////////////
@@ -448,6 +476,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
             case LEGACY_CARDGEN_DECK:
             case VINTAGE_CARDGEN_DECK:
@@ -498,6 +527,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updateVariantSelection();
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        GuiBase.setNetworkplay(allowNetworking);
+
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
@@ -527,8 +559,18 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
                 final LobbySlotType type = slot.getType();
                 panel.setType(type);
-                panel.setPlayerName(slot.getName());
-                panel.setAvatarIndex(slot.getAvatarIndex());
+                if (type != LobbySlotType.AI) {
+                    panel.setPlayerName(slot.getName());
+                    panel.setAvatarIndex(slot.getAvatarIndex());
+                    panel.setSleeveIndex(slot.getSleeveIndex());
+                } else {
+                    //AI: this one overrides the setplayername if blank
+                    if (panel.getPlayerName().isEmpty())
+                        panel.setPlayerName(slot.getName());
+                    //AI: override settings if somehow player changes it for AI
+                    slot.setAvatarIndex(panel.getAvatarIndex());
+                    slot.setSleeveIndex(panel.getSleeveIndex());
+                }
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
@@ -631,6 +673,18 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    void updateAvatar(final int index, final int avatarIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.avatarUpdate(avatarIndex));
+        }
+    }
+
+    void updateSleeve(final int index, final int sleeveIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveUpdate(sleeveIndex));
+        }
+    }
+
     void setReady(final int index, final boolean ready) {
         if (ready) {
             updateDeck(index);
@@ -667,7 +721,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getSleeveIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     public List<PlayerPanel> getPlayerPanels() {

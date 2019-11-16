@@ -20,6 +20,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
@@ -73,7 +74,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
             super(caption0 + " (" + items.size() + ")", icon0);
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
-            txtSearch.setGhostText("Search");
+            txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch"));
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

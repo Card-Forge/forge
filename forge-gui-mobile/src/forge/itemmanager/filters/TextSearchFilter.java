@@ -13,6 +13,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
+import forge.util.Localizer;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -78,10 +79,10 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     }
 
     public String getCaption() {
-        return txtSearch.getGhostText().substring("Search ".length());
+        return txtSearch.getGhostText().substring((Localizer.getInstance().getMessage("lblSearch") + " ").length());
     }
     public void setCaption(String caption0) {
-        txtSearch.setGhostText("Search " + caption0);
+        txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch") + " " + caption0);
     }
 
     protected class SearchField extends FTextField {
@@ -89,7 +90,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
         private SearchField() {
             setFont(FONT);
-            setGhostText("Search");
+            setGhostText(Localizer.getInstance().getMessage("lblSearch"));
             setHeight(getDefaultHeight(DEFAULT_FONT)); //set height based on default filter font
         }
 

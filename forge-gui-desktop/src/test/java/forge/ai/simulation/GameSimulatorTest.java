@@ -2093,4 +2093,34 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, numForest);
         assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Battlefield).size());
     }
+
+    public void testAmassTrigger() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        String WCname = "Woodland Champion";
+        addCard(WCname, p);
+        for (int i = 0; i < 5; i++)
+            addCard("Island", p);
+
+        String CardName = "Eternal Skylord";
+        Card c = addCardToZone(CardName, p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playSa = c.getSpellAbilities().get(0);
+        playSa.setActivatingPlayer(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        int score = sim.simulateSpellAbility(playSa).value;
+        assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simWC = findCardWithName(simGame, WCname);
+
+        assertEquals(1, simWC.getPowerBonusFromCounters());
+        assertEquals(3, simGame.getPlayers().get(0).getCreaturesInPlay().size());
+
+    }
 }

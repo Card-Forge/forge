@@ -376,6 +376,14 @@ public class MatchScreen extends FScreen {
                         TargetingOverlay.drawArrow(g, blocker, attacker);
                     }
                 }
+                //player
+                if (is4Player() || is3Player()) {
+                    int numplayers = is3Player() ? 3 : 4;
+                    for (final PlayerView p : game.getPlayers()) {
+                        if (combat.getAttackersOf(p).contains(attacker))
+                            TargetingOverlay.drawArrow(g, attacker, p, numplayers);
+                    }
+                }
             }
         }
 
@@ -395,7 +403,7 @@ public class MatchScreen extends FScreen {
             return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
             if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
-                if (getActivePrompt().getBtnCancel().getText().equals("End Turn")) {
+                if (getActivePrompt().getBtnCancel().getText().equals(Localizer.getInstance().getMessage("lblEndTurn"))) {
                     return false;
                 }
             }

@@ -124,7 +124,7 @@ public class StaticAbilityCantTarget {
             }
         }
 
-        return true;
+        return common(st, spellAbility);
     }
 
     protected static boolean common(final StaticAbility st, final SpellAbility spellAbility) {

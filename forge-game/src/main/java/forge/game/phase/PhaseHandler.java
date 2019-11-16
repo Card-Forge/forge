@@ -283,6 +283,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_DECLARE_ATTACKERS:
                     if (!playerTurn.hasLost()) {
+                        combat.initConstraints();
                         game.getStack().freezeStack();
                         declareAttackersTurnBasedAction();
                         game.getStack().unfreezeStack();

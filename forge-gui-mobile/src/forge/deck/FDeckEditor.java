@@ -10,11 +10,7 @@ import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
+import forge.assets.*;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardPreferences;
@@ -37,26 +33,14 @@ import forge.planarconquest.ConquestUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
-import forge.util.Callback;
-import forge.util.ItemPool;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.Utils;
+import forge.util.*;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
@@ -774,6 +758,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
                 else {
                     max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
+
+                    Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
+                    if (cardCopies != null) {
+                        max = cardCopies;
+                    }
+
                     max -= deck.getMain().count(card);
                     if (deck.has(DeckSection.Sideboard)) {
                         max -= deck.get(DeckSection.Sideboard).count(card);

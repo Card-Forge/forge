@@ -212,6 +212,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
             else {
                 max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
+
+                Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
+                if (cardCopies != null) {
+                    max = cardCopies;
+                }
+
                 Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName, new Predicate<Entry<String, Integer>>() {
                     @Override
                     public boolean apply(Entry<String, Integer> t) {

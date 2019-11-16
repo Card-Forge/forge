@@ -127,7 +127,7 @@ public class ConquestController {
         starter.add(humanStart.setPlayer(humanPlayer));
 
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
+        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1, -1);
         battle.setOpponentAvatar(aiPlayer, gui);
         starter.add(aiStart.setPlayer(aiPlayer));
 

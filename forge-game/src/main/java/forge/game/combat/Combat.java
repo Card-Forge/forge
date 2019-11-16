@@ -50,7 +50,7 @@ import java.util.Map.Entry;
  */
 public class Combat {
     private final Player playerWhoAttacks;
-    private final AttackConstraints attackConstraints;
+    private AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
@@ -71,10 +71,6 @@ public class Combat {
     public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
 
-        // Create keys for all possible attack targets
-        attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
-
-        attackConstraints = new AttackConstraints(this);
     }
 
     public Combat(Combat combat, GameObjectMap map) {
@@ -115,6 +111,13 @@ public class Combat {
         for (Table.Cell<Card, GameEntity, Integer> entry : combat.dealtDamageTo.cellSet()) {
             dealtDamageTo.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
         }
+
+        attackConstraints = new AttackConstraints(this);
+    }
+
+    public void initConstraints() {
+        // Create keys for all possible attack targets
+        attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
 
         attackConstraints = new AttackConstraints(this);
     }

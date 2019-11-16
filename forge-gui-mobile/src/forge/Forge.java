@@ -10,7 +10,6 @@ import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
-import forge.card.CardTranslation;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
@@ -31,6 +30,7 @@ import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Callback;
+import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.Utils;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.29.001";
+    public static final String CURRENT_VERSION = "1.6.30.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -67,11 +67,12 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static String locale = "en-US";
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
+            GuiBase.enablePropertyConfig(value);
         }
         return app;
     }
@@ -129,13 +130,13 @@ public class Forge implements ApplicationListener {
                 FSkinFont.preloadAll(locale);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
-                CardTranslation.preloadTranslation(locale);
+                CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt)
-                    splashScreen.getProgressBar().setDescription("Preload Extended Art...");
+                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {

@@ -16,6 +16,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private LobbySlotType type = null;
     private String name = null;
     private int avatarIndex = -1;
+    private int sleeveIndex = -1;
     private int team = -1;
     private Boolean isArchenemy = null;
     private Boolean isReady = null;
@@ -26,11 +27,11 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private Set<AIOption> aiOptions = null;
 
 
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, aiOptions);
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, aiOptions);
     }
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, isDevMode, aiOptions);
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode, aiOptions);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
@@ -46,6 +47,19 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.name = name;
     }
 
+    public static UpdateLobbyPlayerEvent avatarUpdate(final int index) {
+        return new UpdateLobbyPlayerEvent(index, true);
+    }
+    public static UpdateLobbyPlayerEvent sleeveUpdate(final int index) {
+        return new UpdateLobbyPlayerEvent(index, false);
+    }
+    private UpdateLobbyPlayerEvent(int index, boolean avatar) {
+        if (avatar)
+            this.avatarIndex = index;
+        else
+            this.sleeveIndex = index;
+    }
+
     private UpdateLobbyPlayerEvent(final Deck deck) {
         this.deck = deck;
     }
@@ -59,6 +73,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
             final LobbySlotType type,
             final String name,
             final int avatarIndex,
+            final int sleeveIndex,
             final int team,
             final boolean isArchenemy,
             final boolean isReady,
@@ -66,6 +81,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
+        this.sleeveIndex = sleeveIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
@@ -76,6 +92,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
             final LobbySlotType type,
             final String name,
             final int avatarIndex,
+            final int sleeveIndex,
             final int team,
             final boolean isArchenemy,
             final boolean isReady,
@@ -84,6 +101,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
+        this.sleeveIndex = sleeveIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
@@ -103,6 +121,9 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public int getAvatarIndex() {
         return avatarIndex;
+    }
+    public int getSleeveIndex() {
+        return sleeveIndex;
     }
     public int getTeam() {
         return team;
