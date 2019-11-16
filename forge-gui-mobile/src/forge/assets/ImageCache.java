@@ -167,7 +167,9 @@ public class ImageCache {
     public static void preloadCache(Iterable keys) {
         cache.getAll(keys);
     }
-    public static TextureRegion croppedBorderImage(Texture image) {
+    public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
+        if (!fullborder)
+            return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
         int rh = Math.round(image.getHeight()*rscale);

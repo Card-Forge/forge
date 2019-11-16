@@ -53,6 +53,7 @@ import forge.util.CardTranslation;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import forge.util.TextBounds;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -400,6 +401,7 @@ public class CardRenderer {
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = new RendererCachedCardImage(pc, false).getImage();
+        boolean fullborder = image.toString().contains(".fullborder.");
         float radius = (h - w)/8;
 
         if (image != null) {
@@ -412,7 +414,7 @@ public class CardRenderer {
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(pc), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
                 }
                 else
@@ -436,6 +438,7 @@ public class CardRenderer {
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
         boolean canshow = MatchController.instance.mayView(card) && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getCurrentState().getImageKey());
         Texture image = new RendererCachedCardImage(card, false).getImage();
+        boolean fullborder = image.toString().contains(".fullborder.");
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
 
@@ -451,7 +454,7 @@ public class CardRenderer {
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
-                            g.drawRotatedImage(ImageCache.croppedBorderImage(image), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
+                            g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                         }
                     }
                     else
@@ -464,7 +467,7 @@ public class CardRenderer {
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(card, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                            g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
                     }
                     else {
