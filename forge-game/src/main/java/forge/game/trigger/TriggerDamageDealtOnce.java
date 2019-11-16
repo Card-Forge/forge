@@ -22,6 +22,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
+import forge.util.Localizer;
 
 import java.util.Map;
 import java.util.Set;
@@ -116,9 +117,9 @@ public class TriggerDamageDealtOnce extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
-        sb.append("Damaged: ").append(sa.getTriggeringObject(AbilityKey.Targets)).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
+        sb.append(Localizer.getInstance().getMessage("lblDamageSource")).append(": ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblDamaged")).append(": ").append(sa.getTriggeringObject(AbilityKey.Targets)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 }

@@ -38,6 +38,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -284,9 +285,9 @@ public class TriggerSpellAbilityCast extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Card: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
-        sb.append("Activator: ").append(sa.getTriggeringObject(AbilityKey.Activator)).append(", ");
-        sb.append("SpellAbility: ").append(sa.getTriggeringObject(AbilityKey.SpellAbility));
+        sb.append(Localizer.getInstance().getMessage("lblCard")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblActivator")).append(": ").append(sa.getTriggeringObject(AbilityKey.Activator)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblSpellAbility")).append(": ").append(sa.getTriggeringObject(AbilityKey.SpellAbility));
         return sb.toString();
     }
 }

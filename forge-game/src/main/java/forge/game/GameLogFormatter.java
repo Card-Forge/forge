@@ -33,11 +33,11 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private final GameLog log;
-
     public GameLogFormatter(GameLog gameLog) {
         log = gameLog;
     }
@@ -52,16 +52,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventScry ev) {
+        final Localizer localizer = Localizer.getInstance();
         String scryOutcome = "";
-        String toTop = Lang.nounWithAmount(ev.toTop, "card") + " to the top of the library";
-        String toBottom = Lang.nounWithAmount(ev.toBottom, "card") + " to the bottom of the library";
 
         if (ev.toTop > 0 && ev.toBottom > 0) {
-            scryOutcome = ev.player.toString() + " scried " + toTop + " and " + toBottom;
+            scryOutcome = localizer.getMessage("lblLogScryTopBottomLibrary").replace("%s", ev.player.toString()).replace("%top", String.valueOf(ev.toTop)).replace("%bottom", String.valueOf(ev.toBottom));
         } else if (ev.toBottom == 0) {
-            scryOutcome = ev.player.toString() + " scried " + toTop;
+            scryOutcome = localizer.getMessage("lblLogScryTopLibrary").replace("%s", ev.player.toString()).replace("%top", String.valueOf(ev.toTop));
         } else {
-            scryOutcome = ev.player.toString() + " scried " + toBottom;
+            scryOutcome = localizer.getMessage("lblLogScryBottomLibrary").replace("%s", ev.player.toString()).replace("%bottom", String.valueOf(ev.toBottom));
         }
 
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
@@ -218,6 +217,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(final GameEventAttackersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
+        final Localizer localizer = Localizer.getInstance();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -233,7 +233,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             sb.append(" to attack ").append(k).append(".");
         }
         if (sb.length() == 0) {
-            sb.append(ev.player).append(" didn't attack this turn.");
+            sb.append(localizer.getMessage("lblPlayerDidntAttackThisTurn").replace("%s", ev.player.toString()));
         }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -281,7 +281,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = ev.player.toString() + " has mulliganed down to " + ev.player.getZone(ZoneType.Hand).size() + " cards.";
+        String message = Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

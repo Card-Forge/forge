@@ -30,6 +30,7 @@ import forge.util.Expressions;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Sets;
@@ -219,7 +220,7 @@ public class TriggerChangesZone extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Zone Changer: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblZoneChanger")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

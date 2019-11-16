@@ -6,6 +6,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 public class TriggerBecomeMonarch extends Trigger {
 
@@ -42,7 +43,7 @@ public class TriggerBecomeMonarch extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
         return sb.toString();
     }
 }

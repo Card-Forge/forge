@@ -24,6 +24,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -82,7 +83,7 @@ public class TriggerSearchedLibrary extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Searcher: ").append(sa.getTriggeringObject(AbilityKey.Player));
+        sb.append(Localizer.getInstance().getMessage("lblSearcher")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

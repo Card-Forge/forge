@@ -22,6 +22,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -114,8 +115,8 @@ public class TriggerTapsForMana extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tapped for Mana: ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append("Produced: ").append(sa.getTriggeringObject(AbilityKey.Produced));
+        sb.append(Localizer.getInstance().getMessage("lblTappedForMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(sa.getTriggeringObject(AbilityKey.Produced));
         return sb.toString();
     }
 
