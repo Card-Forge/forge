@@ -111,7 +111,11 @@ public final class ImageKeys {
             file = findFile(dir, TextUtil.fastReplace(filename, "AE", "Ae"));
             if (file != null) { return file; }
         }
-
+        //try fullborder...
+        if (filename.contains(".full")) {
+            file = findFile(dir, TextUtil.fastReplace(filename, ".full", ".fullborder"));
+            if (file != null) { return file; }
+        }
         // some S00 cards are really part of 6ED
         String s2kAlias = getSetFolder("S00");
         if (filename.startsWith(s2kAlias)) {
