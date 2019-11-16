@@ -332,7 +332,6 @@ public class CardImageRenderer {
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean canshow = MatchController.instance.mayView(card);
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
-        boolean fullborder = image.toString().contains(".fullborder.");
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -346,8 +345,8 @@ public class CardImageRenderer {
 
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
-        }
-        else {
+        } else {
+            boolean fullborder = image.toString().contains(".fullborder.");
             float radius = (h - w)/8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
             float new_w = w*wh_Adj;
@@ -366,8 +365,7 @@ public class CardImageRenderer {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                         g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x+radius/2, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
                     }
-                }
-                else
+                } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
@@ -378,11 +376,9 @@ public class CardImageRenderer {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                         g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x + radius / 2, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
                     }
-                }
-                else
+                } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-            }
-            else {
+            } else {
                 if (Forge.enableUIMask && canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey())) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
@@ -390,8 +386,7 @@ public class CardImageRenderer {
                         g.drawImage(ImageCache.getBorderImage(card, canshow), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
-                }
-                else {
+                } else {
                     if (canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey()))
                         g.drawImage(image, x, y, w, h);
                     else // sleeve
