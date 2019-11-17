@@ -140,15 +140,31 @@ public class SacrificeAi extends SpellAbilityAi {
                 amount = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
             }
 
-            List<Card> humanList =
-                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            List<Card> humanList = null;
+            try {
+                humanList = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            } catch (NullPointerException e) {
+                return false;
+            } finally {
+                if (humanList == null)
+                    return false;
+            }//prevent NPE on MoJhoSto
 
             // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             return humanList.size() >= amount;
         } else if (defined.equals("You")) {
-            List<Card> computerList =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+
+            List<Card> computerList = null;
+            try {
+                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            } catch (NullPointerException e) {
+                return false;
+            } finally {
+                if (computerList == null)
+                    return false;
+            }//prevent NPE on MoJhoSto
+
             for (Card c : computerList) {
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;

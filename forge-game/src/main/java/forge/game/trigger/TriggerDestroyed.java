@@ -22,6 +22,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -75,8 +76,8 @@ public class TriggerDestroyed extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Destroyed: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
-        sb.append("Destroyer: ").append(sa.getTriggeringObject(AbilityKey.Causer));
+        sb.append(Localizer.getInstance().getMessage("lblDestroyed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblDestroyer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Causer));
         return sb.toString();
     }
 }

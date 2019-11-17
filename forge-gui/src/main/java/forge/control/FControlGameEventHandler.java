@@ -301,8 +301,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardTapped event) {
-        if(GuiBase.isNetworkplay())
-            refreshFieldUpdate = true; //update all players field when event un/tapped
+        refreshFieldUpdate = true; //update all players field when event un/tapped
         processCard(event.card, cardsUpdate);
         return processEvent();
     }

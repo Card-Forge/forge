@@ -165,6 +165,8 @@ public interface IGuiGame {
     void setSelectables(final Iterable<CardView> cards);
     void clearSelectables();
     boolean isSelecting();
+    boolean isGamePaused();
+    public void setgamePause(boolean pause);
 
     void awaitNextInput();
     void cancelAwaitNextInput();

@@ -40,6 +40,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private IGameController spectator = null;
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
+    private boolean gamePause = false;
 
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
@@ -263,6 +264,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean isSelecting() {
     return !selectableCards.isEmpty();
     }
+    public boolean isGamePaused() { return gamePause; }
+    public void setgamePause(boolean pause) { gamePause = pause; }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
@@ -297,7 +300,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
                 IGameController controller = spectator;
                 spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
-                controller.selectButtonOk(); //pause
+                if (!isGamePaused())
+                    controller.selectButtonOk(); //pause
                 controller.nextGameDecision(NextGameDecision.QUIT);
             }
             return false; //let logic above handle closing current screen

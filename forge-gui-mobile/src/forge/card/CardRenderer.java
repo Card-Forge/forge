@@ -53,6 +53,7 @@ import forge.util.CardTranslation;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import forge.util.TextBounds;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -405,17 +406,16 @@ public class CardRenderer {
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
-            }
-            else {
+            } else {
+                boolean fullborder = image.toString().contains(".fullborder.");
                 if (Forge.enableUIMask) {
                     if (ImageCache.isExtendedArt(pc))
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(pc), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                     }
-                }
-                else
+                } else
                     g.drawImage(image, x, y, w, h);
             }
             if (pc.isFoil()) { //draw foil effect if needed
@@ -425,8 +425,7 @@ public class CardRenderer {
                 }
                 drawFoilEffect(g, card, x, y, w, h, false);
             }
-        }
-        else {
+        } else {
             if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
@@ -442,8 +441,8 @@ public class CardRenderer {
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
-            }
-            else {
+            } else {
+                boolean fullborder = image.toString().contains(".fullborder.");
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
                     if (Forge.enableUIMask) {
@@ -451,23 +450,20 @@ public class CardRenderer {
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
-                            g.drawRotatedImage(ImageCache.croppedBorderImage(image), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
+                            g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
                         }
-                    }
-                    else
+                    } else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
-                }
-                else {
+                } else {
                     if (Forge.enableUIMask && canshow) {
                         if (ImageCache.isExtendedArt(card))
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(card, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                            g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
                         }
-                    }
-                    else {
+                    } else {
                         if (canshow)
                             g.drawImage(image, x, y, w, h);
                         else // draw card back sleeves
@@ -476,8 +472,7 @@ public class CardRenderer {
                 }
             }
             drawFoilEffect(g, card, x, y, w, h, false);
-        }
-        else {
+        } else {
             if (Forge.enableUIMask) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle

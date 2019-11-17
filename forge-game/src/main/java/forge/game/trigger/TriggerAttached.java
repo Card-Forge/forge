@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -83,7 +84,7 @@ public class TriggerAttached extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attachee: ").append(sa.getTriggeringObject(AbilityKey.Target));
+        sb.append(Localizer.getInstance().getMessage("lblAttachee")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target));
         return sb.toString();
     }
 }

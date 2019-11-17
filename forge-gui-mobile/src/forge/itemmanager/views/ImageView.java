@@ -144,8 +144,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>("Groups: ");
-    private final FComboBox<Object> cbPileByOptions = new FComboBox<>("Piles: ");
+    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblGroups") + " ");
+    private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblPiles") + " ");
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -670,7 +670,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public String getCaption() {
-        return "Image View";
+        return Localizer.getInstance().getMessage("lblImageView");
     }
 
     @Override

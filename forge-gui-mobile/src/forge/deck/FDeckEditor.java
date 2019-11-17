@@ -173,6 +173,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new DeckSectionPage(DeckSection.Sideboard)
             };
         case Draft:
+        case QuestDraft:
             return new DeckEditorPage[] {
                     new DraftPackPage(),
                     new DeckSectionPage(DeckSection.Main),
@@ -214,12 +215,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
-            };
-        case QuestDraft:
-            return new DeckEditorPage[] {
-                    new DraftPackPage(),
-                    new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
             };
         case PlanarConquest:
             return new DeckEditorPage[] {
@@ -1731,16 +1726,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setPlanarDeck(deckStr);
                 break;
             case Draft:
+            case QuestDraft:
                 DeckPreferences.setDraftDeck(deckStr);
                 break;
             case Sealed:
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
-                FModel.getQuest().setCurrentDeck(model.toString());
-                FModel.getQuest().save();
-                break;
-            case QuestDraft:
                 FModel.getQuest().setCurrentDeck(model.toString());
                 FModel.getQuest().save();
                 break;
