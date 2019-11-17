@@ -12,6 +12,8 @@ import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.event.GameEventSpellAbilityCast;
+import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -47,6 +49,8 @@ public interface IGuiGame {
     void showManaPool(PlayerView player);
     void hideManaPool(PlayerView player);
     void updateStack();
+    void notifyStackAddition(final GameEventSpellAbilityCast event);
+    void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);

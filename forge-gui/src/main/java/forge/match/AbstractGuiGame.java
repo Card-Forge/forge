@@ -24,6 +24,8 @@ import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.event.GameEventSpellAbilityCast;
+import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
@@ -250,16 +252,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
     public void setSelectables(final Iterable<CardView> cards) {
-	for ( CardView cv : cards ) { selectableCards.add(cv); }
+    for ( CardView cv : cards ) { selectableCards.add(cv); }
     }
     public void clearSelectables() {
-	selectableCards.clear();
+    selectableCards.clear();
     }
     public boolean isSelectable(final CardView card) {
-	return selectableCards.contains(card);
+    return selectableCards.contains(card);
     }
     public boolean isSelecting() {
-	return !selectableCards.isEmpty();
+    return !selectableCards.isEmpty();
     }
 
     /** Concede game, bring up WinLose UI. */
@@ -690,6 +692,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             final String yesButtonText, final String noButtonText) {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
-
+    
+    @Override
+    public void notifyStackAddition(GameEventSpellAbilityCast event) { 
+    }
+    
+    @Override
+    public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
+    }
+    
     // End of Choice code
 }

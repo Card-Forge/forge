@@ -414,6 +414,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
 
         stack.addFirst(si);
+        int stackIndex = stack.size() - 1;
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
@@ -430,7 +431,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, false));
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex, false));
         return si;
     }
 
