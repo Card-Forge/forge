@@ -118,9 +118,9 @@ public final class ImageKeys {
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
         if (!filename.contains(".full")) {
-            file = findFile(dir, filename+".full");
+            file = findFile(dir, TextUtil.addSuffix(filename,".full"));
             if (file != null) { return file; }
-            file = findFile(dir, filename+".fullborder");
+            file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
             if (file != null) { return file; }
         }
         // some S00 cards are really part of 6ED
