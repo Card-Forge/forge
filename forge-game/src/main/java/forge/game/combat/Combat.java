@@ -70,7 +70,7 @@ public class Combat {
 
     public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
-
+        initConstraints();
     }
 
     public Combat(Combat combat, GameObjectMap map) {
@@ -116,9 +116,9 @@ public class Combat {
     }
 
     public void initConstraints() {
+        attackableEntries.clear();
         // Create keys for all possible attack targets
         attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
-
         attackConstraints = new AttackConstraints(this);
     }
 
