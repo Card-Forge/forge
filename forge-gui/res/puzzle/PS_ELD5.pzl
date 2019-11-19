@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/11/136.-ELD5.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You own a Smitten Swordmaster "on an adventure" in exile. You chose "Red" with Diamond Knight. Your solution must satisfy all possible opponent decisions/actions. Assume you have 10 life.
+[state]
+humanlife=10
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Smitten Swordmaster;Bonecrusher Giant;The Circle of Loyalty;Cavalier of Night
+humanbattlefield=Charity Extractor;Diamond Knight|NoETBTrigs|ChosenColor:red;Syr Konrad, the Grim;Jaya, Venerated Firemage|Counters:LOYALTY=1;Tournament Grounds;Tournament Grounds;Swamp;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+humanexile=Smitten Swordmaster|OnAdventure
+aibattlefield=Windstorm Drake|Tapped;Teferi, Time Raveler|Counters:LOYALTY=1;Cerulean Drake;Cerulean Drake;Vindictive Vampire|Id:1;Mantle of Tides|AttachedTo:1
