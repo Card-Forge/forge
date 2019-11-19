@@ -1,31 +1,31 @@
-Abandon Hope|Perder la esperanza||
+Abandon Hope|Perder la esperanza|Conjuro|Como coste adicional para lanzar este hechizo, descarta X cartas..\nMira la mano del oponente objetivo y elige X cartas de este. Ese jugador descarta esas cartas.
 Abandon Reason|Perder la razón|Instantáneo|Hasta dos criaturas objetivo obtienen +1/+0 cada una y ganan la habilidad de dañar primero hasta el final del turno.\nDemencia {1}{R}. (Si descartas esta carta, exíliala. Cuando lo hagas, lánzala por su coste de demencia o ponla en tu cementerio.)
 Abandoned Outpost|Puesto de avanzada abandonado|Tierra|El Puesto de avanzada abandonado entra en juego girado.\n{T}: Agrega {W} a tu reserva de maná.\n{T}, sacrificar el Puesto de avanzada abandonado: Agrega un maná de cualquier color a tu reserva de maná.
 Abandoned Sarcophagus|Sarcófago abandonado|Artefacto|Puedes lanzar cartas que no sean tierra con la habilidad de ciclo desde tu cementerio\nSi una carta con la habilidad de ciclo fuera a ir a tu cementerio desde cualquier parte sin haberse activado su habilidad de ciclo, en vez de eso, exíliala.
 Abattoir Ghoul|Necrófago del matadero|Criatura — Zombie|Daña primero.\nSiempre que una criatura que recibió daño del Necrófago del matadero este turno muera, ganas vidas igual a la resistencia de esa criatura.
-Abbey Gargoyles|Gárgolas de la Abadía||
+Abbey Gargoyles|Gárgolas de la Abadía|Criatura - Gárgola|Vuela, protección contra el rojo
 Abbey Griffin|Grifo de la abadía|Criatura — Grifo|Vuela, vigilancia.
-Abbey Matron|Abadesa||
+Abbey Matron|Abadesa|Criatura - Clérigo Humano|{W}, {T}: La Abadesa recibe +0/+3 hasta el final del turno.
 Abbot of Keral Keep|Abad de la Fortaleza Keral|Criatura — Monje humano|Destreza. (Siempre que lances un hechizo que no sea de criatura, esta criatura obtiene +1/+1 hasta el final del turno.)Cuando el Abad de la Fortaleza Keral entre al campo de batalla, exilia la primera carta de tu biblioteca. Hasta el final del turno, puedes jugar esa carta.
-Abduction|Secuestro||
+Abduction|Secuestro|Encantamiento - Aura|Encantar criatura\nCuando el Secuestro entre en el campo de batalla, endereza a la criatura encantada.\nTú controlas a la criatura encantada.\nCuando la criatura encantada muera, devuelve esa carta al campo de batalla bajo el control de su dueño.
 Aberrant Researcher|Investigador aberrante|Criatura — Insecto humano|Vuela.\nAl comienzo de tu mantenimiento, pon la primera carta de tu biblioteca en tu cementerio. Si es una carta de instantáneo o de conjuro, transforma al Investigador aberrante.
-Abeyance|Supresión||
+Abeyance|Supresión|Instantáneo|Hasta el final del turno, el jugador objetivo no puede lanzar hechizos instantáneos o de brujería, y ese jugador no puede activar habilidades que no sean habilidades de maná.\nRoba una carta.
 Abhorrent Overlord|Jefe supremo aberrante|Criatura — Demonio|Vuela.\nCuando el Jefe supremo aberrante entre al campo de batalla, pon en el campo de batalla una cantidad de fichas de criatura Arpía negras 1/1 con la habilidad de volar igual a tu devoción al negro. (Cada {B} en los costes de maná de los permanentes que controlas cuenta para tu devoción al negro.)\nAl comienzo de tu mantenimiento, sacrifica una criatura.
-Abjure|Abjurar||
+Abjure|Abjurar|Instantáneo|Como coste adicional para lanzar este hechizo, sacrifica un permanente azul.\nContrarresta el hechizo objetivo.
 Abnormal Endurance|Resistencia anormal|Instantáneo|Hasta el final del turno, la criatura objetivo obtiene +2/+0 y gana "Cuando esta criatura muera, regrésala al campo de batalla girada bajo el control de su propietario".
 Abolisher of Bloodlines|Abolidora de linajes|Criatura — Vampiro eldrazi|Vuela.\nCuando esta criatura se transforme en la Abolidora de linajes, el oponente objetivo sacrifica tres criaturas.
 Abolish|Abolir|Instantáneo|Puedes descartar una carta de llanura en lugar de pagar el coste de maná de Abolir.\nDestruye el artefacto o encantamiento objetivo.
 Abominable Treefolk|Pueblo arbóreo abominable|Criatura nevada — Pueblo-arbóreo|Arrolla.\nTanto la fuerza como la resistencia del Pueblo arbóreo abominable son iguales a la cantidad de permanentes nevados que controlas.\nCuando el Pueblo arbóreo abominable entre al campo de batalla, gira la criatura objetivo que controla un oponente. Esa criatura no se endereza durante el próximo paso de enderezar de su controlador.
 Abomination of Gudul|Abominación de Gudul|Criatura — Horror|Vuela.\nSiempre que la Abominación de Gudul haga daño de combate a un jugador, puedes robar una carta. Si lo haces, descarta una carta.\nMetamorfosis {2}{B}{G}{U}. (Puedes lanzar esta carta boca abajo como una criatura 2/2 pagando {3}. Ponla boca arriba en cualquier momento pagando su coste de metamorfosis.)
-Abomination|Abominación||
-Aboroth|Aboroth||
+Abomination|Abominación|Criatura - Horror|Siempre que la Abominación bloquee o sea bloqueada por una criatura verde o blanca, destruye a esa criatura al final del combate.
+Aboroth|Aboroth|Criatura — Elemental|Mantenimiento acumulativo - Pon un contador de -1/-1 en Aboroth. (Al principio de tu mantenimiento, pon un contador de edad en este permanente, luego sacrifícalo a menos que pagues su coste de mantenimiento por cada contador de edad en él).
 Aboshan's Desire|Deseo de Áboshan|Encantar criatura|La criatura encantada tiene la habilidad de volar.\nUmbral La criatura encantada no puede ser objetivo de hechizos o habilidades. (Tienes umbral mientras haya siete o más cartas en tu cementerio.)
 Aboshan, Cephalid Emperor|Áboshan, Emperador cefálido|Criatura — Cefálido legendario|Girar un Cefálido enderezado que controles: Gira el permanente objetivo.\n{U}{U}{U}: Gira todas las criaturas que no tengan la habilidad de volar.
-About Face|Media vuelta||
+About Face|Media vuelta|Instantáneo|Intercambia la potencia y resistencia de la criatura objetivo hasta el final del turno.
 Abrade|Erosionar|Instantáneo|Elige uno:\n• Erosionar hace 3 puntos de daño a la criatura objetivo.\n• Destruye el artefacto objetivo.
 Abrupt Decay|Deterioro brusco|Instantáneo|Deterioro brusco no puede ser contrarrestado por hechizos o habilidades.\nDestruye el permanente objetivo que no sea tierra con coste de maná convertido de 3 o menos.
-Absolute Grace|Gracia absoluta||
-Absolute Law|Ley absoluta||
+Absolute Grace|Gracia absoluta|Encantamiento|Todas las criaturas tienen protección contra el negro.
+Absolute Law|Ley absoluta|Encantamiento|Todas las criaturas tienen protección contra el rojo.
 Absolver Thrull|Absolutor thrull|Criatura — Clérigo thrull|Acechar (Cuando esta carta vaya a un cementerio desde el juego, remuévela del juego acechando a la criatura objetivo.)\nCuando el Absolutor thrull entre en juego o la criatura a la que acecha vaya a un cementerio, destruye el encantamiento objetivo.
 Absorb Vis|Absorber vis|Conjuro|El jugador objetivo pierde 4 vidas y tú ganas 4 vidas.\nCiclo de tierra básica {1}{B}. ({1}{B}, descartar esta carta: Busca en tu biblioteca una carta de tierra básica, muéstrala y ponla en tu mano. Luego baraja tu biblioteca.)
 Absorb|Absorber|Instantáneo|Contrarresta el hechizo objetivo. Ganas 3 vidas.
@@ -35,10 +35,10 @@ Abuna's Chant|Canto del abunas|Instantáneo|Elige uno: Gana 5 vidas; o prevén l
 Abundance|Abundancia|Encantamiento|Si fueras a robar una carta, en vez de eso, puedes elegir tierra o no tierra y mostrar cartas de la parte superior de tu biblioteca hasta que muestres una carta del tipo elegido. Pon esa carta en tu mano y pon todas las otras cartas mostradas de esta manera en el fondo de tu biblioteca en cualquier orden.
 Abundant Growth|Crecimiento abundante|Encantamiento — Aura|Encantar tierra.\nCuando Crecimiento abundante entre al campo de batalla, roba una carta.\nLa tierra encantada tiene "{T}: Agrega un maná de cualquier color a tu reserva de maná".
 Abundant Maw|Milfauces|Criatura — Sanguijuela eldrazi|Emerger {6}{B}. (Puedes lanzar este hechizo sacrificando una criatura y pagando el coste de emerger menos el coste de maná convertido de esa criatura.)\nCuando lances el Milfauces, el oponente objetivo pierde 3 vidas y tú ganas 3 vidas.
-Abyssal Gatekeeper|Portero abismal||
-Abyssal Horror|Horror abismal||
-Abyssal Hunter|Cazador abismal||
-Abyssal Nightstalker|Cazador nocturno abismal||
+Abyssal Gatekeeper|Portero abismal|Criatura — Horror|Cuando el Portero abismal muera, cada jugador sacrifica a una criatura.
+Abyssal Horror|Horror abismal|Criatura — Horror|Vuela\nCuando el Horror abismal entre en el campo de batalla, el jugador objetivo descarta dos cartas.
+Abyssal Hunter|Cazador abismal|Criatura - Asesino Humano|{B}, {T}: Gira la criatura objetivo. El Cazador abismal inflige un daño igual a la potencia del Cazador abismal sobre esa criatura.
+Abyssal Nightstalker|Cazador nocturno abismal|Criatura — Cazador nocturno|Siempre que el Cazador nocturno abismal ataque y no sea bloqueado, el jugador defensor descarta una carta.
 Abyssal Nocturnus|Nócturnus abismal|Criatura — Horror|Siempre que un oponente descarte una carta, el Nócturnus abismal obtiene +2/+2 y gana la habilidad de inspirar temor hasta el final del turno.
 Abyssal Persecutor|Perseguidor abismal|Criatura — Demonio|Vuela, arrolla.\nTú no puedes ganar el juego y tus oponentes no pueden perder el juego.
 Abyssal Specter|Espectro abismal|Criatura — Espectro|Vuela. (Esta criatura no puede ser bloqueada excepto por criaturas que tengan la habilidad de volar.)\nSiempre que el Espectro abismal haga daño a un jugador, ese jugador descarta una carta de su mano.
@@ -57,7 +57,7 @@ Academy Drake|Draco de la Academia|Criatura — Draco|Estímulo {4}. (Puedes pag
 Academy Elite|Élite de la academia|Criatura — Hechicero humano|La Élite de la academia entra al campo de batalla con X contadores +1/+1 sobre ella, donde X es la cantidad de cartas de instantáneo y de conjuro que hay en todos los cementerios.\n{2}{U}, remover un contador +1/+1 de la Élite de la academia: Roba una carta, luego descarta una carta.
 Academy Journeymage|Maga graduada de la Academia|Criatura — Hechicero humano|Te cuesta {1} menos lanzar este hechizo si controlas un Hechicero.\nCuando la Maga graduada de la Academia entre al campo de batalla, regresa la criatura objetivo que controla un oponente a la mano de su propietario.
 Academy Raider|Incursor de la academia|Criatura — Guerrero humano|Intimidar. (Esta criatura no puede ser bloqueada excepto por criaturas artefacto y/o criaturas que compartan un color con ella.)Siempre que el Incursor de la academia haga daño de combate a un jugador, puedes descartar una carta. Si lo haces, roba una carta.
-Academy Rector|Rector de la Academia||
+Academy Rector|Rector de la Academia|Criatura - Clérigo Humano|Cuando el Rector de la Academia muera, puedes exiliarlo. Si lo haces, busca en tu biblioteca una carta de encantamiento, pon esa carta en el campo de batalla y luego baraja tu biblioteca.
 Academy Researchers|Investigadores de la Academia|Criatura — Hechicero humano|Cuando los Investigadores de la Academia entren en juego, puedes poner en juego una carta de aura de tu mano anexada a los Investigadores de la Academia.
 Academy Ruins|Ruinas de la Academia|Tierra legendaria|{T}: Agrega {1} a tu reserva de maná.\n{1}{U}, {T}: Pon la carta de artefacto objetivo de tu cementerio en la parte superior de tu biblioteca.
 Academy at Tolaria West|Academia en Tolaria Oeste|Plano — Dominaria|Al comienzo de tu paso final, si no tienes cartas en tu mano, roba siete cartas.\nSiempre que lances caos, descarta tu mano.
@@ -68,24 +68,24 @@ Acclaimed Contender|Contendiente aclamada|Criatura — Caballero humano|Cuando l
 Accomplished Automaton|Autómata consumado|Criatura artefacto — Constructo|Fabricar 1. (Cuando esta criatura entre al campo de batalla, pon un contador +1/+1 sobre ella o crea una ficha de criatura artefacto Servo incolora 1/1.)
 Accorder Paladin|Paladín de los acordantes|Criatura — Caballero humano|Grito de batalla. (Siempre que esta criatura ataque, cada otra criatura atacante obtiene +1/+0 hasta el final del turno.)
 Accorder's Shield|Escudo del acordante|Artefacto — Equipo|La criatura equipada obtiene +0/+3 y tiene la habilidad de vigilancia. (Esta criatura no se gira al atacar.)Equipar {3}. ({3}: Anexa este equipo a la criatura objetivo que controles. Juega la habilidad de equipar como un conjuro.)
-Accumulated Knowledge|Conocimiento acumulado||
+Accumulated Knowledge|Conocimiento acumulado|Instantáneo|Roba una carta, luego roba tantas cartas como el número de cartas llamadas Conocimiento Acumulado en todos los cementerios.
 Accursed Centaur|Centauro maldito|Criatura — Centauro zombie|Cuando el Centauro maldito entre en juego, sacrifica una criatura.
 Accursed Horde|Horda maldita|Criatura — Zombie|{1}{B}: El Zombie objetivo atacante gana la habilidad de indestructible hasta el final del turno. (El daño y los efectos que dicen "destruir" no lo destruyen. Si su resistencia es 0 o menos, va al cementerio de su propietario igualmente.)
 Accursed Spirit|Espíritu maldito|Criatura — Espíritu|Intimidar. (Esta criatura no puede ser bloqueada excepto por criaturas artefacto y/o criaturas que compartan un color con ella.)
 Accursed Witch|Bruja maldita|Criatura — Chamán humano|A tus oponentes les cuesta {1} menos lanzar hechizos que hagan objetivo a la Bruja maldita.\nCuando la Bruja maldita muera, regrésala al campo de batalla transformada bajo tu control anexada al oponente objetivo.
 Acid Web Spider|Araña de red ácida|Criatura — Araña|Alcance.\nCuando la Araña de red ácida entre al campo de batalla, puedes destruir el equipo objetivo.
 Acid-Spewer Dragon|Dragón escupeácido|Criatura — Dragón|Vuela, toque mortal.\nMegametamorfosis {5}{B}{B}. (Puedes lanzar esta carta boca abajo como una criatura 2/2 pagando {3}. Ponla boca arriba en cualquier momento pagando su coste de megametamorfosis y pon un contador +1/+1 sobre ella.)\nCuando el Dragón escupeácido se ponga boca arriba, pon un contador +1/+1 sobre cada otra criatura Dragón que controlas.
-Acidic Dagger|Daga corrosiva||
+Acidic Dagger|Daga corrosiva|Artefacto|{4}, {T}: Siempre que una criatura objetivo inflija daño de combate a una criatura no muralla en este turno, destruye a esa criatura no muralla. Cuando la criatura objetivo abandone el campo de batalla este turno, sacrifica la Daga corrosiva. Activa esta habilidad sólo antes de que se declaren los bloqueadores.
 Acidic Slime|Fango ácido|Criatura — Cieno|Toque mortal. (Cualquier cantidad de daño que esto haga a una criatura es suficiente para destruirla.)Cuando el Fango ácido entre al campo de batalla, destruye el artefacto, encantamiento o tierra objetivo.
-Acidic Sliver|Fragmentado corrosivo||
-Acidic Soil|Suelo ácido||
+Acidic Sliver|Fragmentado corrosivo|Criatura - Fragmentado|Todos los fragmentados tienen "{2}, Sacrifica este permanente: Este permanente causa 2 de daño a cualquier objetivo."
+Acidic Soil|Suelo ácido|Sorcery|Conjuro|Suelo ácido inflige daño a cada jugador igual al número de tierras que controlan.
 Acolyte of Xathrid|Acólita de Xathrid|Criatura — Clérigo humano|{1}{B}, {T}: El jugador objetivo pierde 1 vida.
 Acolyte of the Inferno|Acólito del infierno|Criatura — Monje humano|Prestigio 1. (Cuando esta criatura haga daño de combate a un jugador, si no tiene prestigio, pon un contador +1/+1 sobre ella y gana prestigio.)Siempre que el Acólito del infierno sea bloqueado por una criatura, hace 2 puntos de daño a esa criatura.
 Acolyte's Reward|Recompensa del acólito|Instantáneo|Prevén los siguientes X puntos de daño que se le fueran a hacer a la criatura objetivo este turno, donde X es tu devoción al blanco. Si se previene daño de esta manera, la Recompensa del acólito hace esa misma cantidad de daño a la criatura o jugador objetivo. (Cada {W} en los costes de maná de los permanentes que controlas cuenta para tu devoción al blanco.)
 Acorn Catapult|Catapulta de bellotas|Artefacto|{1}, {T}: La Catapulta de bellotas hace 1 punto de daño a la criatura o jugador objetivo. El controlador de esa criatura o ese jugador pone en el campo de batalla una ficha de criatura Ardilla verde 1/1.
 Acorn Harvest|Cosechar bellotas|Conjuro|Pon en juego dos fichas de criatura Ardilla verde 1/1.\nRetrospectiva {1}{G}, pagar 3 vidas. (Puedes jugar esta carta desde tu cementerio pagando su coste de retrospectiva. Luego remuévela del juego.)
 Acquire|Adquirir|Conjuro|Busca una carta de artefacto en la biblioteca del oponente objetivo y ponla en juego bajo tu control. Luego ese jugador baraja su biblioteca.
-Acridian|Acrídido||
+Acridian|Acrídido|Criatura - Insecto|Eco {1}{G} (Al principio de su mantenimiento, si esto ha estado bajo tu control desde el principio de tu último mantenimiento, sacrifícalo a menos que pagues el coste del eco).
 Acrobatic Maneuver|Maniobra acrobática|Instantáneo|Exilia la criatura objetivo que controlas, luego regresa esa carta al campo de batalla bajo el control de su propietario.\nRoba una carta.
 Act of Aggression|Acto de agresión|Instantáneo|({R/P} puede pagarse con {R} o con 2 vidas.)Gana el control de la criatura objetivo que controla un oponente hasta el final del turno. Endereza esa criatura. Gana la habilidad de prisa hasta el final del turno.
 Act of Authority|Acto de autoridad|Encantamiento|Cuando el Acto de autoridad entre al campo de batalla, puedes exiliar el encantamiento o artefacto objetivo.Al comienzo de tu mantenimiento, puedes exiliar el artefacto o encantamiento objetivo. Si lo haces, su controlador gana el control del Acto de autoridad.
@@ -99,19 +99,19 @@ Adanto Vanguard|Vanguardia de Adanto|Criatura — Soldado vampiro|Mientras la Va
 Adanto, the First Fort|Adanto, la primera fortaleza|Tierra legendaria|(Se transforma del Desembarco de la Legión.)\n{T}: Agrega {W} a tu reserva de maná.\n{2}{W}, {T}: Crea una ficha de criatura Vampiro blanca 1/1 con la habilidad de vínculo vital.
 Adaptive Automaton|Autómata adaptativo|Criatura artefacto — Constructo|En cuanto el Autómata adaptativo entre al campo de batalla, elige un tipo de criatura.\nEl Autómata adaptativo es del tipo elegido además de sus otros tipos.\nLas otras criaturas que controlas del tipo elegido obtienen +1/+1.
 Adaptive Snapjaw|Mandibulatensa adaptativo|Criatura — Bestia lagarto|Evolucionar. (Siempre que una criatura entre al campo de batalla bajo tu control, si la fuerza o la resistencia de esa criatura es mayor que la de esta criatura, pon un contador +1/+1 sobre esta criatura.)
-Adarkar Sentinel|Centinela de Adarkar||
-Adarkar Unicorn|Unicornio de Adarkar||
+Adarkar Sentinel|Centinela de Adarkar|Criatura Artefacto - Soldado|{1}: El Centinela de Adarkar recibe +0/+1 hasta el final del turno.
+Adarkar Unicorn|Unicornio de Adarkar|Criatura - Unicornio|{T}: Agrega {U} o {C}{U}. Gasta este maná sólo para pagar los costes acumulativos de mantenimiento.
 Adarkar Valkyrie|Valkiria de Adarkar|Criatura nevada — Ángel|Vuela, vigilancia.\n{T}: Cuando la criatura objetivo que no sea la Valkiria de Adarkar muera este turno, regresa esa carta al campo de batalla bajo tu control.
 Adarkar Wastes|Yermos de Adarkar|Tierra|{T}: Agrega {1} a tu reserva de maná.\n{T}: Agrega {W} o {U} a tu reserva de maná. Los Yermos de Adarkar te hacen 1 punto de daño.
 Adarkar Windform|Eolomorfo de Adarkar|Criatura nevada — Ilusión|Vuela.\n{1}{S}: La criatura objetivo pierde la habilidad de volar hasta el final del turno. ({S} puede pagarse con un maná de un permanente nevado.)
 Adder-Staff Boggart|Boggart vara de culebra|Criatura — Guerrero trasgo|Cuando el Boggart vara de culebra entre en juego, enfréntate con un oponente. Si ganas, pon un contador +1/+1 sobre el Boggart vara de culebra. (Cada jugador enfrentado muestra la primera carta de su biblioteca, luego pone esa carta en la parte superior o inferior. Gana el jugador cuya carta tenga el mayor coste de maná convertido.)
-Addle|Turbar||
+Addle|Turbar|Conjuro|Elige un color. El jugador objetivo revela su mano y tú eliges una carta de ese color. Ese jugador descarta esa carta.
 Adeliz, the Cinder Wind|Adeliz, Viento de Ceniza|Criatura legendaria — Hechicero humano|Vuela, prisa.\nSiempre que lances un hechizo de instantáneo o de conjuro, los Hechiceros que controlas obtienen +1/+1 hasta el final del turno.
 Admiral Beckett Brass|Almirante Beckett Azófar|Criatura legendaria — Pirata humano|Los otros Piratas que controlas obtienen +1/+1.\nAl comienzo de tu paso final, gana el control del permanente objetivo que no sea tierra y que esté controlado por un jugador que recibió daño de combate de tres o más Piratas este turno.
 Admiral's Order|Orden de la almirante|Instantáneo|Incursión — Si atacaste con una criatura este turno, puedes pagar {U} en vez de pagar el coste de maná de este hechizo.\nContrarresta el hechizo objetivo.
 Admonition Angel|Ángel de admonición|Criatura — Ángel|Vuela.\nAterrizaje — Siempre que una tierra entre al campo de batalla bajo tu control, puedes exiliar el permanente objetivo que no sea tierra distinto del Ángel de admonición.\nCuando el Ángel de admonición deje el campo de batalla, regresa al campo de batalla bajo el control de sus propietarios todas las cartas exiliadas con él.
 Adorned Pouncer|Acechador ornamentado|Criatura — Felino|Daña dos veces.\nEternizar {3}{W}{W}. ({3}{W}{W}, exiliar esta carta de tu cementerio: Crea una ficha que es una copia de esta carta, excepto que es un Felino Zombie negro 4/4 sin coste de maná. Activa la habilidad de eternizar solo como un conjuro.)
-Advance Scout|Explorador avanzado||
+Advance Scout|Explorador avanzado|Criatura - Soldado Explorador Humano|Golpea primero\n{W}: La criatura objetivo recibe el primer golpe hasta el final del turno.
 Advanced Hoverguard|Aeroguarda mejorado|Criatura — Zángano|Vuela.\n{U}: El Aeroguarda mejorado no puede ser objetivo de hechizos o habilidades este turno.
 Advanced Stitchwing|Alacosida avanzado|Criatura — Horror zombie|Vuela.\n{2}{U}, descartar dos cartas: Regresa el Alacosida avanzado de tu cementerio al campo de batalla girado.
 Advent of the Wurm|Advenimiento de la sierpe|Instantáneo|Crea una ficha de criatura Sierpe verde 5/5 con la habilidad de arrollar.
@@ -125,11 +125,11 @@ Aegis Automaton|Autómata de la égida|Criatura artefacto — Constructo|{4}{W}:
 Aegis of Honor|Égida del honor|Encantamiento|{1}: La siguiente vez que un hechizo de instantáneo o de conjuro fuera a hacerte daño este turno, en vez de eso, ese hechizo hace ese daño a su controlador.
 Aegis of the Gods|Égida de los dioses|Criatura encantamiento — Soldado humano|Tienes la habilidad de antimaleficio. (No puedes ser objetivo de hechizos o habilidades que controlan tus oponentes.)
 Aegis of the Heavens|Égida de los cielos|Instantáneo|La criatura objetivo obtiene +1/+7 hasta el final del turno.
-Aegis of the Meek|Égida de los mansos||
+Aegis of the Meek|Égida de los mansos|Artefacto|{1}, {T}: La criatura objetivo 1/1 recibe +1/+2 hasta el final del turno.
 Aeon Chronicler|Aeon Chronicler|Creature — Avatar|Aeon Chronicler's power and toughness are each equal to the number of cards in your hand.\nSuspend X—{X}{3}{U}. X can't be 0.\nWhenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.
 Aeon Engine|Rotor de los eones|Artefacto|El Rotor de los eones entra al campo de batalla girado.\n{T}, exiliar el Rotor de los eones: Invierte el orden de turno del juego. (Por ejemplo, si el juego avanza por la mesa hacia la izquierda, ahora avanza hacia la derecha.)
 Aerial Assault|Asalto aéreo|Conjuro|Destruye la criatura girada objetivo. Ganas 1 vida por cada criatura que controlas con la habilidad de volar.
-Aerial Caravan|Caravana aérea||
+Aerial Caravan|Caravana aérea|Criatura - Soldado Humano|Vuela\n{1}{U}{U}: Exilia la carta superior de tu biblioteca. Hasta el final del turno, puedes jugar esa carta. (Revela la carta cuando la exilies.)
 Aerial Engineer|Ingeniera aérea|Criatura — Artífice humano|Mientras controles un artefacto, la Ingeniera aérea obtiene +2/+0 y tiene la habilidad de volar.
 Aerial Formation|Formación aérea|Instantáneo|Esfuerzo — Lanzar la Formación aérea cuesta {2}{U} más por cada objetivo después del primero.\nCualquier cantidad de criaturas objetivo obtienen +1/+1 cada una y ganan la habilidad de volar hasta el final del turno.
 Aerial Guide|Guía aéreo|Criatura — Draco|Vuela.\nSiempre que el Guía aéreo ataque, otra criatura atacante objetivo gana la habilidad de volar hasta el final del turno.
@@ -147,12 +147,12 @@ Aeronaut Admiral|Almirante aeronauta|Criatura — Piloto humano|Vuela.\nLos Veh�
 Aeronaut Tinkerer|Reparador de aeronaves|Criatura — Artífice humano|El Reparador de aeronaves tiene la habilidad de volar mientras controles un artefacto. (No puede ser bloqueada excepto por criaturas que tengan la habilidad de volar o alcance.)
 Aesthir Glider|Planeador aesthir|Criatura artefacto — Constructo ave|Vuela.\nEl Planeador aesthir no puede bloquear.
 Aether Adept|Perito del éter|Criatura — Hechicero humano|Cuando el Perito del éter entre al campo de batalla, regresa la criatura objetivo a la mano de su propietario.
-Aether Barrier|Barrera de éter||
+Aether Barrier|Barrera de éter|Encantamiento|Cuando un jugador lance un hechizo de criatura, ese jugador sacrifica un permanente a menos que pague {1}.
 Aether Burst|Estallido del Éter|Instantáneo|Regresa hasta X criaturas objetivo a las manos de sus propietarios, donde X es 1 más el número de cartas de Estallido del Éter que haya en todos los cementerios en cuanto juegues el Estallido del Éter.
 Aether Charge|Carga de Éter|Encantamiento|Siempre que una Bestia entre en juego bajo tu control, puedes elegir que haga 4 puntos de daño al oponente objetivo.
 Aether Chaser|Perseguidor de éter|Criatura — Artífice humano|Daña primero.\nCuando el Perseguidor de éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nSiempre que el Perseguidor de éter ataque, puedes pagar {E}{E}. Si lo haces, crea una ficha de criatura artefacto Servo incolora 1/1.
 Aether Figment|Imaginario del éter|Criatura — Ilusión|Estímulo {3}. (Puedes pagar {3} adicionales en cuanto lances este hechizo.)\nEl Imaginario del éter es imbloqueable.\nSi el Imaginario del éter fue estimulado, entra al campo de batalla con dos contadores +1/+1 sobre él.
-Aether Flash|Destello del Éter||
+Aether Flash|Destello del Éter|Cada vez que una criatura entre en el campo de batalla, el Destello del Éter le inflige 2 puntos de daño.
 Aether Gale|Vendaval del éter|Conjuro|Regresa seis permanentes objetivo que no sean tierra a las manos de sus propietarios.
 Aether Gust|Ráfaga de éter|Instantáneo|Elige el hechizo o permanente objetivo que sea rojo o verde. Su propietario lo pone en la parte superior o en el fondo de su biblioteca.
 Aether Herder|Pastor del éter|Criatura — Druida artífice elfo|Cuando el Pastor del éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nSiempre que el Pastor del éter ataque, puedes pagar {E}{E}. Si lo haces, crea una ficha de criatura artefacto Servo incolora 1/1.
@@ -160,17 +160,17 @@ Aether Hub|Planta de éter central|Tierra|Cuando la Planta de éter central entr
 Aether Inspector|Inspector de éter|Criatura — Enano artífice|Vigilancia.\nCuando el Inspector de éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nSiempre que el Inspector de éter ataque, puedes pagar {E}{E}. Si lo haces, crea una ficha de criatura artefacto Servo incolora 1/1.
 Aether Meltdown|Colapso del éter|Encantamiento — Aura|Destello. (Puedes lanzar este hechizo en cualquier momento en que pudieras lanzar un instantáneo.)\nEncantar criatura o vehículo.\nCuando el Colapso del éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nEl permanente encantado obtiene -4/-0.
 Aether Membrane|Membrana de éter|Criatura — Muro|Defensor.\nLa Membrana de éter puede bloquear como si tuviera la habilidad de volar.\nSiempre que la Membrana de éter bloquee a una criatura, regresa esa criatura a la mano de su propietario al final del combate.
-Aether Mutation|Mutación del éter||
+Aether Mutation|Mutación del éter|Conjuro|Devuelve la criatura objetivo a la mano de su dueño. Crea X fichas de criaturas verdes Saprolín 1/1, donde X es el coste de maná convertido de esa criatura.
 Aether Poisoner|Envenenadora de éter|Criatura — Artífice humano|Toque mortal. (Cualquier cantidad de daño que esto haga a una criatura es suficiente para destruirla.)\nCuando la Envenenadora de éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nSiempre que la Envenenadora de éter ataque, puedes pagar {E}{E}. Si lo haces, crea una ficha de criatura artefacto Servo incolora 1/1.
-Aether Rift|Grieta de éter||
+Aether Rift|Grieta de éter|Encantamiento|Al principio de tu mantenimiento, descarta una carta al azar. Si descartas una carta de criatura de esta manera, devuélvela de tu cementerio al campo de batalla a menos que algún jugador pague 5 vidas.
 Aether Shockwave|Onda expansiva de éter|Instantáneo|Elige uno: Gira todos los Espíritus; o gira todas las criaturas que no sean Espíritus.
 Aether Snap|Chasquido del éter|Conjuro|Remueve todos los contadores de todos los permanentes y exilia todas las fichas.
 Aether Spellbomb|Bombahechizo de éter|Artefacto|{U}, sacrificar la Bombahechizo de éter: Regresa la criatura objetivo a la mano de su propietario.\n{1}, sacrificar la Bombahechizo de éter: Roba una carta.
-Aether Sting|Piquete de Éter||
-Aether Storm|Tormenta del éter||
+Aether Sting|Piquete de Éter|Encantamiento|Siempre que un oponente lance un hechizo de criatura, el Piquete de Éter inflige 1 de daño a ese jugador.
+Aether Storm|Tormenta del éter|Encantamiento|No se pueden lanzar hechizos de criaturas.\nPaga 4 vidas: Destruir la Tormenta del éter. No se puede regenerar. Cualquier jugador puede activar esta habilidad.
 Aether Swooper|Surcadora de éter|Criatura — Artífice vedalken|Vuela.\nCuando la Surcadora de éter entre al campo de batalla, obtienes {E}{E} (dos contadores de energía).\nSiempre que la Surcadora de éter ataque, puedes pagar {E}{E}. Si lo haces, crea una ficha de criatura artefacto Servo incolora 1/1.
 Aether Theorist|Teórico del éter|Criatura — Bribón vedalken|Cuando el Teórico del éter entre al campo de batalla, obtienes {E}{E}{E} (tres contadores de energía).\n{T}, pagar {E}: Adivina 1. (Mira la primera carta de tu biblioteca. Puedes poner esa carta en el fondo de tu biblioteca.)
-Aether Tide|Corriente de éter||
+Aether Tide|Corriente de éter|Conjuro|Como coste adicional para lanzar este hechizo, descarta X cartas de criatura. Devuelve las X criaturas objetivo a las manos de sus dueños.
 Aether Tradewinds|Vientos alisios del éter|Instantáneo|Regresa el permanente objetivo que controlas y el permanente objetivo que no controlas a las manos de sus propietarios.
 Aether Tunnel|Túnel de éter|Encantamiento — Aura|Encantar criatura.\nLa criatura encantada obtiene +1/+0 y no puede ser bloqueada.
 Aether Vial|Frasco de éter|Artefacto|Al comienzo de tu mantenimiento, puedes poner un contador de carga sobre el Frasco de éter.\n{T}: puedes poner en juego de tu mano una criatura con coste de maná convertido igual al número de contadores de carga sobre el Frasco de éter.
@@ -201,27 +201,27 @@ Affa Protector|Protector de Affa|Criatura — Soldado humano aliado|Vigilancia.
 Affectionate Indrik|Indrik cariñoso|Criatura — Bestia|Cuando el Indrik cariñoso entre al campo de batalla, puedes hacer que luche contra la criatura objetivo que no controlas. (Cada una hace una cantidad de daño igual a su fuerza a la otra.)
 Afflicted Deserter|Desertor afligido|Criatura — Licántropo humano|Al comienzo de cada mantenimiento, si no se lanzaron hechizos en el último turno, transforma al Desertor afligido.
 Afflict|Afligir|Instantáneo|La criatura objetivo obtiene -1/-1 hasta el final del turno.\nRoba una carta.
-Afiya Grove|Arboleda de Afiya||
+Afiya Grove|Arboleda de Afiya|Encantamiento|La Arboleda de Afiya entra en el campo de batalla con tres contadores +1/+1.\nAl principio de tu mantenimiento, mueve un contador +1/+1 de la Arboleda de Afiya a la criatura objetivo.\nCuando la Arboleda de Afiya Grove no tenga contadores +1/+1, sacrifícala.
 Afterlife|Vestigio de vida|Instantáneo|Destruye la criatura objetivo. No puede ser regenerada. Su controlador pone en el campo de batalla una ficha de criatura Espíritu blanca 1/1 con la habilidad de volar.
-Aftershock|Conmoción posterior||
+Aftershock|Conmoción posterior|Conjuto|Destruye el artefacto, la criatura o la tierra objetivo. La Conmoción posterior te inflinge 3 de daño.
 Agadeem Occultist|Ocultista de Agadeem|Criatura — Chamán humano aliado|{T}: Pon en el campo de batalla bajo tu control la carta de criatura objetivo del cementerio de un oponente si su coste de maná convertido es menor o igual al número de Aliados que controlas.
 Ageless Entity|Entidad sempiterna|Criatura — Elemental|Siempre que ganes vida, pon esa misma cantidad de contadores +1/+1 sobre la Entidad sempiterna.
 Ageless Sentinels|Centinelas eternos|Criatura — Muro|(Los muros no pueden atacar.)Vuela.\nCuando los Centinelas eternos bloquean, su tipo de criatura se convierte en Ave Gigante. (Deja de ser Muro. Este efecto no termina al final del turno.)
 Agent of Erebos|Agente de Erebos|Criatura encantamiento — Zombie|Constelación — Siempre que el Agente de Erebos u otro encantamiento entre al campo de batalla bajo tu control, exilia todas las cartas del cementerio del jugador objetivo.
 Agent of Horizons|Agente de los horizontes|Criatura — Bribón humano|{2}{U}: El Agente de los horizontes no puede ser bloqueado este turno.
 Agent of Masks|Agente de máscaras|Criatura — Consejero humano|Al comienzo de tu mantenimiento, cada oponente pierde 1 vida. Ganas vida igual a la cantidad de vida perdida de esta manera.
-Agent of Shauku|Agente de Shauku||
-Agent of Stromgald|Agente de Stromgald||
+Agent of Shauku|Agente de Shauku|Criatura - Mercenario Humano|{1}{B}, Sacrifica una tierra: La criatura objetivo recibe +2/+0 hasta el final del turno.
+Agent of Stromgald|Agente de Stromgald|Criatura — Caballero Humano|{R}: Agrega {B}.
 Agent of Treachery|Agente de la traición|Criatura — Bribón humano|Cuando el Agente de la traición entre al campo de batalla, gana el control del permanente objetivo.\nAl comienzo de tu paso final, si controlas tres o más permanentes de los que no eres propietario, roba tres cartas.
 Agent of the Fates|Agente de las Moiras|Criatura — Asesino humano|Toque mortal.\nHeroísmo — Siempre que lances un hechizo que haga objetivo al Agente de las Moiras, cada oponente sacrifica una criatura.
 Aggravated Assault|Agresión con agravantes|Encantamiento|{3}{R}{R}: Endereza todas las criaturas que controles. Después de esta fase, hay una fase de combate adicional seguida de una fase principal adicional. Juega esta habilidad sólo en cualquier momento en que pudieras jugar un conjuro.
 Aggravate|Agravar|Instantáneo|Agravar hace 1 punto de daño a cada criatura que controle el jugador objetivo. Cada criatura que recibió daño de esta manera ataca este turno si puede.
-Aggression|Agresión||
+Aggression|Agresión|Encantamiento - Aura|Encantar criatura no muralla\nLa criatura encantada tiene la habilidad golpea primero y arrollar.\nAl principio del paso final del controlador de la criatura encantada, destruye esa criatura si no atacó este turno.
 Aggressive Mammoth|Mamut agresivo|Criatura — Elefante|Arrolla. (Esta criatura puede hacer el daño de combate sobrante al jugador o planeswalker al que ataca.)\nLas otras criaturas que controlas tienen la habilidad de arrollar.
 Aggressive Mining|Excavación intensiva|Encantamiento|No puedes jugar tierras.\nSacrificar una tierra: Roba dos cartas. Activa esta habilidad solo una vez cada turno.
-Aggressive Urge|Impulso Agresivo||
-Agility|Agilidad||
-Agonizing Demise|Fallecimiento Agónico||
+Aggressive Urge|Impulso Agresivo|Instantáneo|La criatura objetivo recibe +1/+1 hasta el final del turno.\nRoba una carta.
+Agility|Agilidad|Encantamiento - Aura|Encantar criatura.\nLa criatura encantada obtiene +1/+1 y tiene la habilidad de flanquear. (Siempre que una criatura sin la habilidad de flanquear bloquee a esta criatura, la criatura bloqueadora obtiene -1/-1 hasta el final del turno.)
+Agonizing Demise|Fallecimiento Agónico|Instantáneo|Estímulo {1}{R} (Puedes pagar {1}{R} adicionales al lanzar este hechizo.)\nDestruye la criatura objetivo que no sea negra. No puede ser regenerada. Si el Fallecimiento Agónico fue estimulado, le hace daño al controlador de esa criatura igual a la fuerza de esa criatura.
 Agonizing Memories|Recuerdos agónicos|Conjuro|Mira la mano del jugador objetivo y elige dos cartas de ahí. Pon esas cartas en la parte superior de la biblioteca de ese jugador en cualquier orden.
 Agonizing Syphon|Extracción agonizante|Conjuro|La Extracción agonizante hace 3 puntos de daño a cualquier objetivo y tú ganas 3 vidas.
 Agony Warp|Deformar agónicamente|Instantáneo|La criatura objetivo obtiene -3/-0 hasta el final del turno.\nLa criatura objetivo obtiene -0/-3 hasta el final del turno.
@@ -239,7 +239,7 @@ Ainok Bond-Kin|Ainok unido por la fe|Criatura — Soldado perro|Supervivencia {1
 Ainok Guide|Guía ainok|Criatura — Explorador perro|Cuando el Guía ainok entre al campo de batalla, elige uno:\n• Pon un contador +1/+1 sobre el Guía ainok.\n• Busca en tu biblioteca una carta de tierra básica, muéstrala, luego baraja tu biblioteca y pon esa carta en la parte superior.
 Ainok Survivalist|Sobreviviente ainok|Criatura — Chamán perro|Megametamorfosis {1}{G}. (Puedes lanzar esta carta boca abajo como una criatura 2/2 pagando {3}. Ponla boca arriba en cualquier momento pagando su coste de megametamorfosis y pon un contador +1/+1 sobre ella.)\nCuando el Sobreviviente ainok se ponga boca arriba, destruye el artefacto o encantamiento objetivo que controla un oponente.
 Ainok Tracker|Rastreador ainok|Criatura — Explorador perro|Daña primero.Metamorfosis {4}{R}. (Puedes lanzar esta carta boca abajo como una criatura 2/2 pagando {3}. Ponla boca arriba en cualquier momento pagando su coste de metamorfosis.)
-Air Bladder|Vejiga de aire||
+Air Bladder|Vejiga de aire|Encantamiento — Aura|Encantar criatura\nLa criatura encantada tiene la habilidad de volar.\nLa criatura encantada sólo puede bloquear a las criaturas con la habilidad de volar.
 Air Elemental|Elemental de aire|Criatura — Elemental|Vuela.
 Air Servant|Sirviente de aire|Criatura — Elemental|Vuela. (Esta criatura no puede ser bloqueada excepto por criaturas que tengan la habilidad de volar o alcance.)\n{2}{U}: Gira la criatura objetivo con la habilidad de volar.
 Airborne Aid|Ayuda aérea|Conjuro|Roba una carta por cada Ave en juego.
@@ -301,63 +301,63 @@ Akroma's Memorial|Monumento a Akroma|Artefacto legendario|Las criaturas que cont
 Akroma's Vengeance|Venganza de Akroma|Conjuro|Destruye todos los artefactos, criaturas y encantamientos.\nCiclo {3}. ({3}, descartar esta carta de tu mano: Roba una carta.)
 Akroma, Angel of Fury|Akroma, ángel de furia|Criatura legendaria — Ángel|Akroma, ángel de furia no puede ser contrarrestada.\nVuela, arrolla, protección contra blanco y contra azul.\n{R}: Akroma, ángel de furia obtiene +1/+0 hasta el final del turno.\nMetamorfosis {3}{R}{R}{R}. (Puedes lanzar esta carta boca abajo como una criatura 2/2 pagando {3}. Ponla boca arriba en cualquier momento pagando su coste de metamorfosis.)
 Akroma, Angel of Wrath|Akroma, Ángel de Ira|Criatura — Ángel legendario|Vuela, daña primero, arrolla, prisa, protección contra negro, protección contra rojo.\nAkroma, Ángel de Ira no se gira al atacar.
-Akron Legionnaire|Legionario de Akron||
-Aku Djinn|Djinn de Aku||
+Akron Legionnaire|Legionario de Akron|Criatura - Soldado Gigante|Excepto las criaturas llamadas Legionario de Akron y las criaturas artefacto, las criaturas que controlas no pueden atacar.
+Aku Djinn|Djinn de Aku|Criatura — Djinn|Arrolla\nAl principio de tu mantenimiento, pon un contador +1/+1 en cada criatura que cada oponente controle.
 Akuta, Born of Ash|Akuta, nacido de la ceniza|Criatura legendaria - Espíritu|Prisa.\nAl comienzo de tu mantenimiento, si tienes más cartas en tu mano que cada oponente, puedes sacrificar un pantano. Si lo haces, regresa a Akuta, nacido de la ceniza de tu cementerio al juego.
-Alabaster Dragon|Dragón alabastro||
+Alabaster Dragon|Dragón alabastro|Criatura - Dragón Volador|Cuando el Dragón alabastro muera, mételo en la biblioteca de su dueño.
 Alabaster Kirin|Kirin de alabastro|Criatura — Kirin|Vuela, vigilancia.
-Alabaster Leech|Sanguijuela de Alabastro||
+Alabaster Leech|Sanguijuela de Alabastro|Criatura - Sanguijuela|Los hechizos blancos que lanzas cuestan {W} más de lo que cuestan.
 Alabaster Mage|Mago de alabastro|Criatura — Hechicero humano|{1}{W}: La criatura objetivo que controlas gana la habilidad de vínculo vital hasta el final del turno. (El daño hecho por la criatura también hace que su controlador gane esa misma cantidad de vidas.)
-Alabaster Potion|Poción de alabastro||
-Alabaster Wall|Muro de alabastro||
+Alabaster Potion|Poción de alabastro|Instántaneo|Elige uno —\n• El jugador objetivo gana X de vida.\n• Evita el siguiente daño X que se infligiría a cualquier objetivo en este turno.
+Alabaster Wall|Muro de alabastro|Criatura - Muro|Defensor (Esta criatura no puede atacar.)\n{T}: Evita el siguiente daño de 1 que sería infligido a cualquier objetivo en este turno.
 Alaborn Cavalier|Caballero de Alaborn|Criatura — Caballero humano|Siempre que el Caballero de Alaborn ataque, puedes girar la criatura objetivo.
-Alaborn Grenadier|Granadero de Alaborn||
-Alaborn Musketeer|Mosquetero de Alaborn||
-Alaborn Trooper|Soldado de caballeria de Alaborn||
-Alaborn Veteran|Veterano alaborn||
-Alaborn Zealot|Defensor alaborn||
-Aladdin's Lamp|Lámpara de Aladino||
+Alaborn Grenadier|Granadero de Alaborn|Criatura — Soldado humano|Vigilancia
+Alaborn Musketeer|Mosquetero de Alaborn|Criatura — Soldado humano|Alcance (Esta criatura puede bloquear a las criaturas con la habilidad de volar.)
+Alaborn Trooper|Soldado de caballeria de Alaborn|Criatura — Soldado humano|
+Alaborn Veteran|Veterano alaborn|Criatura — Caballero humano|{T}: La criatura objetivo recibe +2/+2 hasta el final del turno. Activa esta habilidad sólo durante tu turno, antes de que los atacantes sean declarados.
+Alaborn Zealot|Defensor alaborn|Criatura — Soldado humano|Cuando el Defensor alaborn bloquee a una criatura, destruye a esa criatura y al Defensor alaborn.
+Aladdin's Lamp|Lámpara de Aladino|Artefacto|{X}, {T}: La próxima vez que robes una carta en este turno, mira las X cartas de la parte superior de tu biblioteca, pon todas menos una en la parte inferior de tu biblioteca en un orden aleatorio, y luego roba una carta. X no puede ser 0.
 Aladdin's Ring|Anillo de Aladino|Artefacto|{8}, {T}: El Anillo de Aladino hace 4 puntos de daño a la criatura o jugador objetivo.
-Alarum|Voz de alarma||
-Albino Troll|Troll albino||
+Alarum|Voz de alarma|Instantáneo|Endereza la criatura objetivo que no atacante. Obtiene +1/+3 hasta el final del turno.
+Albino Troll|Troll albino|Criatura — Troll|Eco {1}{G} (Al principio de tu mantenimiento, si esto ha estado bajo tu control desde el principio de tu último mantenimiento, sacrifícalo a menos que pagues su coste de eco.)\n{1}{G}: Regenera el Troll albino.
 Alchemist's Apprentice|Aprendiz de alquimista|Criatura — Hechicero humano|Sacrificar el Aprendiz de alquimista: Roba una carta.
 Alchemist's Greeting|Saludo del alquimista|Conjuro|El Saludo del alquimista hace 4 puntos de daño a la criatura objetivo.\nDemencia {1}{R}. (Si descartas esta carta, exíliala. Cuando lo hagas, lánzala por su coste de demencia o ponla en tu cementerio.)
 Alchemist's Refuge|Refugio del alquimista|Tierra|{T}: Agrega {1} a tu reserva de maná.\n{G}{U}, {T}: Puedes lanzar las cartas que no sean tierra este turno como si tuvieran la habilidad de destello.
 Alchemist's Vial|Frasco del alquimista|Artefacto|Cuando el Frasco del alquimista entre al campo de batalla, roba una carta.{1}, {T}, sacrificar el Frasco del alquimista: La criatura objetivo no puede atacar ni bloquear este turno.
-Aleatory|Azar||
+Aleatory|Azar|Instantáneo|Lanza este hechizo sólo durante el combate después de que los bloqueadores sean declarados.\nLanza una moneda al aire. Si ganas la tirada, la criatura objetivo obtiene +1/+1 hasta el final del turno.\nRoba una carta al comienzo del mantenimiento del turno siguiente.
 Alesha's Vanguard|Vanguardia de Alesha|Criatura — Guerrero orco|Rapidez {2}{B}. (Puedes lanzar este hechizo por su coste de rapidez. Si lo haces, gana la habilidad de prisa y regresa del campo de batalla a la mano de su propietario al comienzo del próximo paso final.)
 Alesha, Who Smiles at Death|Alesha, la que sonríe a la muerte|Criatura legendaria — Guerrero humano|Daña primero.\nSiempre que Alesha, la que sonríe a la muerte ataque, puedes pagar {W/B}{W/B}. Si lo haces, regresa la carta de criatura objetivo con fuerza de 2 o menos de tu cementerio al campo de batalla girada y atacando.
-Alexi's Cloak|Capa de Alexi||
-Alexi, Zephyr Mage|Alexi, Maga Céfira||
+Alexi's Cloak|Capa de Alexi|Encantamiento — Aura|Destello\nEncantar criatura\nLa criatura encantada tiene la habilidad de velo. (No puede ser objetivo de hechizos o habilidades.)
+Alexi, Zephyr Mage|Alexi, Maga Céfira|Criatura Legendaria - Hechicero Humano|{X}{U}, {T}, Descarta dos cartas: Devuelve X criaturas objetivo a las manos de sus dueños.
 Algae Gharial|Gavial de algas|Criatura — Cocodrilo|Velo.\nSiempre que otra criatura vaya a un cementerio desde el juego, puedes poner un contador +1/+1 sobre el Gavial de algas.
 Alhammarret's Archive|Archivo de Alhammarret|Artefacto legendario|Si fueras a ganar vidas, en vez de eso, ganas el doble de esas vidas.Si fueras a robar una carta, excepto la primera que robas en tus pasos de robar, en vez de eso, roba dos cartas.
 Alhammarret, High Arbiter|Alhammarret, árbitro supremo|Criatura legendaria — Esfinge|Vuela.Cuando Alhammarret, árbitro supremo entre al campo de batalla, cada oponente muestra su mano. Eliges el nombre de una carta que no sea tierra mostrada de esta manera.Tus oponentes no pueden lanzar hechizos con el nombre elegido (mientras esta criatura esté en el campo de batalla).
-Ali Baba|Ali Baba||
-Aliban's Tower|Torre de Alibán||
+Ali Baba|Ali Baba|Criatura — Pícaro humano|{R}: Gira el Muro objetivo.
+Aliban's Tower|Torre de Alibán|Instantáneo|La criatura objetivo que bloquea obtiene +3/+1 hasta el final del turno.
 Aligned Hedron Network|Edros alineados|Artefacto|Cuando los Edros alineados entren al campo de batalla, exilia todas las criaturas con fuerza de 5 o más hasta que los Edros alineados dejen el campo de batalla. (Esas criaturas regresan bajo el control de sus propietarios.)
 All Is Dust|Todo es polvo|Conjuro tribal — Eldrazi|Cada jugador sacrifica todos los permanentes de color que controla.
 All Suns' Dawn|Amanecer de todos los soles|Conjuro|Por cada color, regresa hasta una carta objetivo de ese color de tu cementerio a tu mano. Luego remueve del juego el Amanecer de todos los soles.
 All That Glitters|Todo lo que reluce|Encantamiento — Aura|Encantar criatura.\nLa criatura encantada obtiene +1/+1 por cada artefacto y/o encantamiento que controlas.
-Allay|Mitigar||
+Allay|Mitigar|Instantáneo|Recompra {3} (Puedes pagar {3} adicionales mientras lanzas este hechizo. Si lo haces, pon esta carta en tu mano mientras se resuelve.)\nDestruye el encantamiento objetivo.
 Alley Evasion|Huida por el callejón|Instantáneo|Elige uno:\n• La criatura objetivo que controlas obtiene +1/+2 hasta el final del turno.\n• Regresa la criatura objetivo que controlas a la mano de su propietario.
-Alley Grifters|Embaucadores callejeros||
+Alley Grifters|Embaucadores callejeros|Criatura — Mercenario humano|Siempre que los Embaucadores callejeros sean bloqueados, el jugador defensor descarta una carta.
 Alley Strangler|Estrangulador del callejón|Criatura — Bribón etergénito|Amenaza.
 Alliance of Arms|Alianza de armas|Conjuro|Unir fuerzas — Comenzando contigo, cada jugador puede pagar cualquier cantidad de maná. Cada jugador pone en el campo de batalla X fichas de criatura Soldado blancas 1/1, donde X es el la cantidad total de maná pagado de esta manera.
 Allied Reinforcements|Refuerzos aliados|Conjuro|Pon en el campo de batalla dos fichas de criatura Caballero Aliado blancas 2/2.
-Allied Strategies|Estrategias Aliadas||
+Allied Strategies|Estrategias Aliadas|Conjuro|Dominio - El jugador objetivo roba una carta por cada tipo de tierra básica entre las tierras que controle.
 Allosaurus Rider|Jinete de alosaurio|Criatura — Guerrero elfo|Puedes remover del juego dos cartas verdes de tu mano en lugar de pagar el coste de maná del Jinete de alosaurio.\nTanto la fuerza como la resistencia del Jinete de alosaurio son iguales a 1 más el número de tierras que controlas.
-Alloy Golem|Gólem de Aleación||
+Alloy Golem|Gólem de Aleación|Criatura artefacto — Golem|Cuando el Gólem de Aleación entre en el campo de batalla, elige un color.\nEl Gólem de Aleación es el color elegido. (Sigue siendo un artefacto.)
 Alloy Myr|Myr de aleación|Criatura artefacto — Myr|{T}: Agrega un maná de cualquier color a tu reserva de maná.
-Alluring Scent|Aroma seductor||
+Alluring Scent|Aroma seductor|Conjuro|Todas las criaturas capaces de bloquear a la criatura objetivo en este turno lo hacen.
 Alluring Siren|Sirena tentadora|Criatura — Sirena|{T}: La criatura objetivo que controla un oponente te ataca este turno si puede.
 Ally Encampment|Campamento aliado|Tierra|{T}: Agrega {1} a tu reserva de maná.{T}: Agrega un maná de cualquier color a tu reserva de maná. Usa este maná solo para lanzar un hechizo de Aliado.{1}, {T}, sacrificar el Campamento aliado: Regresa el Aliado objetivo que controlas a la mano de su propietario.
 Alms Beast|Bestia de las limosnas|Criatura — Bestia|Las criaturas que bloquean o son bloqueadas por la Bestia de las limosnas tienen la habilidad de vínculo vital.
 Alms Collector|Recaudador de dádivas|Criatura — Clérigo felino|Destello.\nSi un oponente fuera a robar dos o más cartas, en vez de eso, ese jugador y tú roban una carta cada uno.
 Alms of the Vein|Limosna sanguinolenta|Conjuro|El oponente objetivo pierde 3 vidas y tú ganas 3 vidas.\nDemencia {B}. (Si descartas esta carta, exíliala. Cuando lo hagas, lánzala por su coste de demencia o ponla en tu cementerio.)
-Alms|Limosna||
+Alms|Limosna|Encantamiento|{1}, Exilia la carta superior de tu cementerio: Evita el siguiente daño de 1 que sería infligido a la criatura objetivo en este turno.
 Alpha Authority|Autoridad del alfa|Encantamiento — Aura|Encantar criatura.La criatura encantada tiene la habilidad de antimaleficio y no puede ser bloqueada por más de una criatura.
 Alpha Brawl|Lucha de alfas|Conjuro|La criatura objetivo que controla un oponente le hace daño igual a su fuerza a cada otra criatura que controla ese jugador, luego cada una de esas criaturas le hace daño igual a su fuerza a esa criatura.
-Alpha Kavu|Kavu alfa||
+Alpha Kavu|Kavu alfa|Criatura — Kavu|{1}{G}: La criatura Kavu objetivo recibe -1/+1 hasta el final del turno.
 Alpha Myr|Myr alfa|Criatura artefacto — Myr|
 Alpha Status|Categoría alfa|Encantar criatura|La criatura encantada obtiene +2/+2 por cada una de las demás criaturas en juego que compartan un tipo de criatura con ella.
 Alpha Tyrranax|Tyrranax alfa|Criatura — Bestia|
@@ -366,7 +366,7 @@ Alpine Guide|Guía alpino|Criatura nevada — Explorador humano|Cuando el Guía 
 Alpine Moon|Luna alpina|Encantamiento|En cuanto la Luna alpina entre al campo de batalla, elige el nombre de una carta de tierra no básica.\nLas tierras que tus oponentes controlen con el nombre elegido pierden todos los tipos de tierra y habilidades y ganan "{T}: Agrega un maná de cualquier color".
 Altac Bloodseeker|Buscasangre de Altac|Criatura — Berserker humano|Siempre que una criatura que controla un oponente muera, el Buscasangre de Altac obtiene +2/+0 y gana las habilidades de dañar primero y prisa hasta el final del turno. (Hace daño de combate antes que las criaturas sin la habilidad de dañar primero y puede atacar y {T} tan pronto como entra bajo tu control.)
 Altar Golem|Gólem del altar|Criatura artefacto — Gólem|Arrolla.\nTanto la fuerza como la resistencia de Gólem del altar son iguales al número de criaturas que haya en juego.\nEl Gólem del altar no se endereza durante el paso de enderezar de su controlador.\nGirar cinco criaturas enderezadas que controlas: Endereza el Gólem del altar.
-Altar of Bone|Altar de hueso||
+Altar of Bone|Altar de hueso|Conjuro|Como coste adicional para lanzar este hechizo, sacrifica a una criatura.\nBusca en tu biblioteca una carta de criatura, revela esa carta y ponla en tu mano. Luego baraja tu biblioteca.
 Altar of Dementia|Altar de la demencia|Artefacto|Sacrificar una criatura: El jugador objetivo pone en su cementerio una cantidad de cartas de la parte superior de su biblioteca igual a la fuerza de la criatura sacrificada.
 Altar of Shadows|Altar de sombras|Artefacto|Al comienzo de tu fase principal precombate, agrega {B} a tu reserva de maná por cada contador de carga sobre el Altar de sombras.\n{7}, {T}: Destruye la criatura objetivo. Luego pon un contador de carga sobre el Altar de sombras.
 Altar of the Brood|Altar de la progenie|Artefacto|Siempre que otro permanente entre al campo de batalla bajo tu control, cada oponente pone la primera carta de su biblioteca en su cementerio.
@@ -3347,6 +3347,7 @@ Curio Vendor|Vendedora de rarezas|Criatura — Vedalken|
 Curiosity|Curiosidad|Encantamiento — Aura|Encantar criatura.\nSiempre que la criatura encantada haga daño a un oponente, puedes robar una carta.
 Curious Homunculus|Homúnculo curioso|Criatura — Homúnculo|{T}: Agrega {C} a tu reserva de maná. Usa este maná solo para lanzar un hechizo de instantáneo o de conjuro.\nAl comienzo de tu mantenimiento, si hay tres o más cartas de instantáneo o de conjuro en tu cementerio, transforma al Homúnculo curioso.
 Curious Obsession|Curiosidad obsesiva|Encantamiento — Aura|Encantar criatura.\nLa criatura encantada obtiene +1/+1 y tiene "Siempre que esta criatura haga daño de combate a un jugador, puedes robar una carta".\nAl comienzo de tu paso final, si no atacaste con una criatura este turno, sacrifica la Curiosidad obsesiva.
+Curious Pair|Par de curiosos|Criatura — Plebeyo humano|
 Curry Favor|Ganarse el favor|Conjuro — Aventura|Ganas X vidas y cada oponente pierde X vidas, donde X es la cantidad de Caballeros que controlas.
 Curse of Bloodletting|Maldición de sangrado|Encantamiento — Aura maldición|Encantar jugador.\nSi una fuente fuera a hacer daño al jugador encantado, en vez de eso, le hace el doble de ese daño a ese jugador.
 Curse of Bounty|Maldición de abundancia|Encantamiento — Aura maldición|Encantar jugador.\nSiempre que el jugador encantado sea atacado, endereza todos los permanentes que no sean tierra que controles. Cada oponente que ataque a ese jugador endereza todos los permanentes que no sean tierra que controla.
@@ -16797,6 +16798,7 @@ Treasure Nabber|Ladronzuelo de tesoros|Criatura — Bribón trasgo|Siempre que u
 Treasure Trove|Descubrimiento del tesoro|Encantamiento|{2}{U}{U}: Roba una carta.
 Treasured Find|Hallazgo preciado|Conjuro|Regresa la carta objetivo de tu cementerio a tu mano. Exilia el Hallazgo preciado
 Treasury Thrull|Thrull del tesoro|Criatura — Thrull|Extorsionar. (Siempre que lances un hechizo, puedes pagar {W/B}. Si lo haces, cada oponente pierde 1 vida y tú ganas esa cantidad de vidas.)Siempre que el Thrull del tesoro ataque, puedes regresar la carta de artefacto, criatura o encantamiento objetivo de tu cementerio a tu mano.
+Treats to Share|Dulces que compartir|Conjuro — Aventura|Crea una ficha de Comida. (Luego, exilia esta carta. Puedes lanzar la criatura más adelante desde el exilio.)
 Tree Monkey|Mono de los arboles||
 Tree of Perdition|Árbol de la perdición|Criatura — Planta|Defensor.\n{T}: Intercambia el total de vidas del oponente objetivo con la resistencia del Árbol de la perdición.
 Tree of Redemption|Árbol de la redención|Criatura — Planta|Defensor.\n{T}: Intercambia tu total de vidas con la resistencia del Árbol de la redención.
