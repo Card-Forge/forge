@@ -18,6 +18,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.Localizer;
+import forge.util.WordUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -27,8 +28,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Assembles Swing components of quest data submenu singleton.
@@ -251,7 +250,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             final String name = preconDeck.getName();
             cbxPreconDeck.addItem(name);
             String description = preconDeck.getDescription();
-            preconDescriptions.put(name, wordWrapAsHTML(description));
+            preconDescriptions.put(name, WordUtil.wordWrapAsHTML(description));
         }
 
         // The cbx needs strictly typed renderer
@@ -359,65 +358,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
 
         pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
-    }
-
-    final static Pattern patternToWrapOn = Pattern.compile(" ");
-    private static String wordWrapAsHTML(String str) {
-        String result = null;
-        int wrapLength = 40;
-        String newLineStr = "<br>";
-        if (str != null) {
-            final int inputLineLength = str.length();
-            int offset = 0;
-            final StringBuilder wrappedLine = new StringBuilder(inputLineLength + 32);
-            while (offset < inputLineLength) {
-                int spaceToWrapAt = -1;
-                Matcher matcher = patternToWrapOn.matcher(str.substring(offset, Math.min(offset + wrapLength + 1, inputLineLength)));
-                if (matcher.find()) {
-                    if (matcher.start() == 0) {
-                        offset += matcher.end();
-                        continue;
-                    }
-                    spaceToWrapAt = matcher.start() + offset;
-                }
-
-                // only last line without leading spaces is left
-                if (inputLineLength - offset <= wrapLength) {
-                    break;
-                }
-
-                while (matcher.find()) {
-                    spaceToWrapAt = matcher.start() + offset;
-                }
-
-                if (spaceToWrapAt >= offset) {
-                    // normal case
-                    wrappedLine.append(str, offset, spaceToWrapAt);
-                    wrappedLine.append(newLineStr);
-                    offset = spaceToWrapAt + 1;
-
-                } else {
-                    // do not wrap really long word, just extend beyond limit
-                    matcher = patternToWrapOn.matcher(str.substring(offset + wrapLength));
-                    if (matcher.find()) {
-                        spaceToWrapAt = matcher.start() + offset + wrapLength;
-                    }
-
-                    if (spaceToWrapAt >= 0) {
-                        wrappedLine.append(str, offset, spaceToWrapAt);
-                        wrappedLine.append(newLineStr);
-                        offset = spaceToWrapAt + 1;
-                    } else {
-                        wrappedLine.append(str, offset, str.length());
-                        offset = inputLineLength;
-                    }
-                }
-            }// Whatever is left in line is short enough to just pass through
-            wrappedLine.append(str, offset, str.length());
-            result = wrappedLine.toString();
-        }
-
-        return "<html>" + result + "</html>";
     }
 
     /* (non-Javadoc)
