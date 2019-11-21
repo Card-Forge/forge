@@ -4,4 +4,4 @@ Order:101
 Type:Casual
 Subtype:Commander
 Sets:GRN, RNA, WAR, M20, ELD
-Banned:
+Banned:Oko, Thief of Crowns
