@@ -20,6 +20,8 @@ package forge.game.player;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+
+import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.*;
@@ -41,7 +43,6 @@ import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -155,6 +156,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Card monarchEffect = null;
     private Card blessingEffect = null;
+    private Card keywordEffect = null;
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -235,10 +237,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().run(ReplacementType.SetInMotion, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -403,10 +402,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("LifeGained", lifeGain);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.LifeGained, lifeGain);
+        repParams.put(AbilityKey.Source, source);
 
         if (!canGainLife()) {
             return false;
@@ -417,8 +415,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             break;
         case Updated:
             // check if this is still the affected player
-            if (this.equals(repParams.get("Affected"))) {
-                lifeGain = (int) repParams.get("LifeGained");
+            if (this.equals(repParams.get(AbilityKey.Affected))) {
+                lifeGain = (int) repParams.get(AbilityKey.LifeGained);
                 // negative update means life loss
                 if (lifeGain < 0) {
                     this.loseLife(-lifeGain);
@@ -914,18 +912,17 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", source);
-        repParams.put("CounterType", counterType);
-        repParams.put("CounterNum", addAmount);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.CounterType, counterType);
+        repParams.put(AbilityKey.CounterNum, addAmount);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
-                addAmount = (int) repParams.get("CounterNum");
+                addAmount = (int) repParams.get(AbilityKey.CounterNum);
                 break;
             }
             default:
@@ -1030,23 +1027,25 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
         // if the key already exists - merge entries
+        KeywordsChange cks = null;
         if (changedKeywords.containsKey(timestamp)) {
-            final KeywordsChange cks = changedKeywords.get(timestamp);
+            getKeywordCard().removeChangedCardTraits(timestamp);
 
-            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords,
-                    cks.isRemoveAllKeywords(), cks.isRemoveIntrinsicKeywords()));
-            updateKeywords();
-            return;
+            cks = changedKeywords.get(timestamp).merge(addKeywords, removeKeywords, false, false);
+        } else {
+            cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
         }
-
-        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false, false));
+        cks.addKeywordsToPlayer(this);
+        getKeywordCard().addChangedCardTraits(cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp);
+        changedKeywords.put(timestamp, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp) {
-        KeywordsChange change = changedKeywords.remove(Long.valueOf(timestamp));
+        KeywordsChange change = changedKeywords.remove(timestamp);
         if (change != null) {
+            getKeywordCard().removeChangedCardTraits(timestamp);
             updateKeywords();
             game.fireEvent(new GameEventPlayerStatsChanged(this));
         }
@@ -1105,6 +1104,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final Entry<Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.entrySet())) {
             if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getKey()) != null) {
                 keywordRemoved = true;
+                getKeywordCard().removeChangedCardTraits(ck.getKey());
             }
         }
 
@@ -1183,33 +1183,17 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (hasKeyword("Shroud")) {
-            return false;
-        }
-        if (hasKeyword("Hexproof")) {
-            final Player a = sa.getActivatingPlayer();
-            if (isOpponentOf(a)) {
-                boolean cancelHexproof = false;
-                for (String k : a.getKeywords()) {
-                    if (k.startsWith("IgnoreHexproof")) {
-                        String[] m = k.split(":");
-                        if (isValid(m[1].split(","), a, sa.getHostCard(), sa)) {
-                            cancelHexproof = true;
-                            break;
-                        }
-                    }
-                }
-                if (!cancelHexproof) {
+
+        // CantTarget static abilities
+        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
                 }
             }
         }
 
-        if (hasProtectionFrom(sa.getHostCard())) {
-            return false;
-        }
-
-        return (!hasKeyword("You can't be the targets of spells or activated abilities") || (!sa.isSpell() && (!(sa instanceof AbilityActivated))));
+        return !hasProtectionFrom(sa.getHostCard());
     }
 
 
@@ -1276,16 +1260,15 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void surveil(int num, SpellAbility cause) {
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", cause);
-        repParams.put("SurveilNum", num);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, cause);
+        repParams.put(AbilityKey.SurveilNum, num);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.Surveil, repParams)) {
             case NotReplaced:
                 break;
             case Updated: {
-                num = (int) repParams.get("SurveilNum");
+                num = (int) repParams.get(AbilityKey.SurveilNum);
                 break;
             }
             default:
@@ -1346,9 +1329,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection toReveal = new CardCollection();
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-        repRunParams.put("Number", n);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+        repRunParams.put(AbilityKey.Number, n);
 
         if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
@@ -1378,10 +1360,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone library = getZone(ZoneType.Library);
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().run(ReplacementType.Draw, repRunParams) != ReplacementResult.NotReplaced) {
+        if (game.getReplacementHandler().run(ReplacementType.Draw, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1556,10 +1535,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         // that should not trigger other Replacement again
         if (!discardToTopOfLibrary && !discardMadness) {
             // Replacement effects
-            final Map<String, Object> repRunParams = Maps.newHashMap();
-            repRunParams.put("Card", c);
-            repRunParams.put("Source", source);
-            repRunParams.put("Affected", this);
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+            repRunParams.put(AbilityKey.Source, source);
+            repRunParams.put(AbilityKey.Affected, this);
 
             if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
                 return null;
@@ -1861,10 +1839,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             // Replacement effects
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Affected", this);
-
-            if (game.getReplacementHandler().run(ReplacementType.GameLoss, runParams) != ReplacementResult.NotReplaced) {
+            if (game.getReplacementHandler().run(ReplacementType.GameLoss, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }
@@ -2455,6 +2430,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         controllerCreator = ctrlr;
         controller = ctrlr;
         updateAvatar();
+        updateSleeve();
         view.updateIsAI(this);
         view.updateLobbyPlayerName(this);
     }
@@ -2462,6 +2438,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateAvatar() {
         view.updateAvatarIndex(this);
         view.updateAvatarCardImageKey(this);
+    }
+
+    public void updateSleeve() {
+        view.updateSleeveIndex(this);
     }
 
     /**
@@ -2984,5 +2964,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
                 || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
 
+    }
+
+    public Card getKeywordCard() {
+        if (keywordEffect != null) {
+            return keywordEffect;
+        }
+
+        final PlayerZone com = getZone(ZoneType.Command);
+
+        keywordEffect = new Card(game.nextCardId(), null, false, game);
+        keywordEffect.setImmutable(true);
+        keywordEffect.setOwner(this);
+        keywordEffect.setName("Keyword Effects");
+        keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);
+        keywordEffect.addType("Effect");
+
+        keywordEffect.updateStateForView();
+
+        com.add(keywordEffect);
+
+        this.updateZoneForView(com);
+        return keywordEffect;
     }
 }

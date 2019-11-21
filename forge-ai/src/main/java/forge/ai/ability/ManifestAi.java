@@ -2,12 +2,12 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -97,11 +97,10 @@ public class ManifestAi extends SpellAbilityAi {
         topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", topCopy);
-        repParams.put("Origin", card.getZone().getZoneType());
-        repParams.put("Destination", ZoneType.Battlefield);
-        repParams.put("Source", sa.getHostCard());
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(topCopy);
+        repParams.put(AbilityKey.Origin, card.getZone().getZoneType());
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        repParams.put(AbilityKey.Source, sa.getHostCard());
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other);
         if (!list.isEmpty()) {
             return false;

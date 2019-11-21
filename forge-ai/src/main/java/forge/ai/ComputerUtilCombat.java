@@ -29,6 +29,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -2580,13 +2581,11 @@ public class ComputerUtilCombat {
         final Game game = attacker.getGame();
 
         // first try to replace the damage
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", target);
-        repParams.put("DamageSource", attacker);
-        repParams.put("DamageAmount", damage);
-        repParams.put("IsCombat", true);
-        repParams.put("Prevention", true);
-        // repParams.put("PreventMap", preventMap);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(target);
+        repParams.put(AbilityKey.DamageSource, attacker);
+        repParams.put(AbilityKey.DamageAmount, damage);
+        repParams.put(AbilityKey.IsCombat, true);
+        repParams.put(AbilityKey.Prevention, true);
 
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(
                 ReplacementType.DamageDone, repParams, ReplacementLayer.Other);

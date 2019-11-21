@@ -293,6 +293,7 @@ public class GuiChoose {
         @Override
         public List<CardView> call()  {
             ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
+
             //		tempArea.pack();
             tempArea.setVisible(true);
             return tempArea.getCards();

@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -71,7 +72,8 @@ public class Main extends AndroidApplication {
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir));
+        boolean value = Build.VERSION.SDK_INT >= 26;
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, value));
     }
 
     /*@Override

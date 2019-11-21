@@ -28,7 +28,7 @@ public class FScreen {
     public static final FScreen HOME_SCREEN = new FScreen(
             VHomeUI.SINGLETON_INSTANCE,
             CHomeUI.SINGLETON_INSTANCE,
-            "Home",
+            "Home  ",
             FSkin.getIcon(FSkinProp.ICO_FAVICON),
             false,
             "Exit Forge",
@@ -46,7 +46,7 @@ public class FScreen {
     public static final FScreen DECK_EDITOR_CONSTRUCTED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Deck Editor",
+            "Deck Editor   ",
             FSkin.getImage(FSkinProp.IMG_PACK),
             false,
             "Back to Home",

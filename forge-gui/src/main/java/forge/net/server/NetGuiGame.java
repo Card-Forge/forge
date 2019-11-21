@@ -184,6 +184,12 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void refreshField() {
+        updateGameView();
+        send(ProtocolMethod.refreshField);
+    }
+
+    @Override
     public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
         return sendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, triggerEvent);
     }
@@ -257,6 +263,18 @@ public class NetGuiGame extends AbstractGuiGame {
     public void setCard(final CardView card) {
         updateGameView();
         send(ProtocolMethod.setCard, card);
+    }
+
+    @Override
+    public void setSelectables(final Iterable<CardView> cards) {
+        updateGameView();
+        send(ProtocolMethod.setSelectables, cards);
+    }
+
+    @Override
+    public void clearSelectables() {
+        updateGameView();
+        send(ProtocolMethod.clearSelectables);
     }
 
     @Override

@@ -322,6 +322,9 @@ public enum FSkinProp {
     IMG_ABILITY_HEXPROOF_UB      (new int[] {166, 494, 80, 80}, PropType.ABILITY),
     //token icon
     IMG_ABILITY_TOKEN            (new int[] {330, 494, 80, 80}, PropType.ABILITY),
+    //border
+    IMG_BORDER_BLACK             (new int[] {2, 2, 672, 936}, PropType.BORDERS),
+    IMG_BORDER_WHITE             (new int[] {676, 2, 672, 936}, PropType.BORDERS),
     //Protection From
     IMG_ABILITY_PROTECT_ALL           (new int[] {248, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_B             (new int[] {330, 84, 80, 80}, PropType.ABILITY),
@@ -374,6 +377,7 @@ public enum FSkinProp {
         OLD_FOIL,
         TROPHY,
         ABILITY,
+        BORDERS,
         MANAICONS,
         PLANAR_CONQUEST,
         FAVICON

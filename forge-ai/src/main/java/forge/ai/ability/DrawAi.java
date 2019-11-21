@@ -409,7 +409,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
-                        if (sa.getHostCard().getZone().is(ZoneType.Hand)) {
+                        if (sa.getHostCard().isInZone(ZoneType.Hand)) {
                             numCards++; // the card will be spent
                         }
                         source.setSVar("PayX", Integer.toString(numCards));

@@ -260,7 +260,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         TabPageScreen.COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
                         parentScreen.revalidate();
                     }
-                }, 4);
+                },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
                 localizer.getMessage("lblCompactListItems"),
                 localizer.getMessage("nlCompactListItems")),
@@ -301,15 +301,43 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         localizer.getMessage("lblDisableCardEffect"),
                         localizer.getMessage("nlDisableCardEffect")),
                 4);
-
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_BORDER_MASKING,
+                        localizer.getMessage("lblEnableRoundBorder"),
+                        localizer.getMessage("nlEnableRoundBorder")){
+                    @Override
+                    public void select() {
+                        super.select();
+                        //update
+                        Forge.enableUIMask = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
+                    }
+                },4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
+                        localizer.getMessage("lblPreloadExtendedArtCards"),
+                        localizer.getMessage("nlPreloadExtendedArtCards")){
+                @Override
+                    public void select() {
+                        super.select();
+                        //update
+                        Forge.enablePreloadExtendedArt = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+                    }
+                },4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
+                        localizer.getMessage("lblShowFPSDisplay"),
+                        localizer.getMessage("nlShowFPSDisplay")){
+                @Override
+                    public void select() {
+                        super.select();
+                        //update
+                        Forge.showFPS = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+                    }
+                },4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
-                        localizer.getMessage("cbpCounterDisplayType"),
-                        localizer.getMessage("nlCounterDisplayType"),
-                        new String[]{
-                                ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
-                                ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
+                localizer.getMessage("cbpCounterDisplayType"),
+                localizer.getMessage("nlCounterDisplayType"),
+                new String[]{
+                    ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
+                    ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
                 4);
-
         //Card Overlays
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_CARD_OVERLAYS,
                 localizer.getMessage("lblShowCardOverlays"),
@@ -335,7 +363,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
-
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
                 localizer.getMessage("lblVibrateWhenLosingLife"),
@@ -345,7 +372,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblVibrateAfterLongPress"),
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
-
         //Sound Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
                 localizer.getMessage("cbEnableSounds"),
@@ -360,7 +386,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         //update background music when this setting changes
                         SoundSystem.instance.changeBackgroundTrack();
                     }
-                }, 7);
+                },7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),

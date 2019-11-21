@@ -40,6 +40,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     private final String dir;
     private final GameFormatQuest format;
     public static final String STANDARDWORLDNAME = "Random Standard";
+    public static final String PIONEERWORLDNAME = "Random Pioneer";
     public static final String MODERNWORLDNAME = "Random Modern";
     public static final String RANDOMCOMMANDERWORLDNAME = "Random Commander";
 
@@ -193,6 +194,12 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
                         FModel.getFormats().getStandard().getAllowedSetCodes(),
                         FModel.getFormats().getStandard().getBannedCardNames(),false);
+            }
+
+            if (useName.equalsIgnoreCase(QuestWorld.PIONEERWORLDNAME)){
+                useFormat = new GameFormatQuest(QuestWorld.PIONEERWORLDNAME,
+                        FModel.getFormats().getPioneer().getAllowedSetCodes(),
+                        FModel.getFormats().getPioneer().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.MODERNWORLDNAME)){

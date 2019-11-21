@@ -59,6 +59,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.ComparatorUtil;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
@@ -609,7 +610,15 @@ public class AiController {
             ComputerUtilAbility.getAvailableCards(game, player);
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        Collections.sort(all, saComparator); // put best spells first
+
+        try {
+            Collections.sort(all, saComparator); // put best spells first
+        }
+        catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             ApiType saApi = sa.getApi();
@@ -1572,8 +1581,15 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
-        Collections.sort(all, saComparator); // put best spells first
-        
+        try {
+            Collections.sort(all, saComparator); // put best spells first
+        }
+        catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        }
+
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
@@ -1830,7 +1846,7 @@ public class AiController {
                     // Special case for Bow to My Command which simulates a complex tap cost via ChooseCard
                     // TODO: consider enhancing support for tapXType<Any/...> in UnlessCost to get rid of this hack
                     if ("BowToMyCommand".equals(sa.getParam("AILogic"))) {
-                        if (!sa.getHostCard().getZone().is(ZoneType.Command)) {
+                        if (!sa.getHostCard().isInZone(ZoneType.Command)) {
                             // Make sure that other opponents do not tap for an already abandoned scheme
                             result.clear();
                             break;
@@ -2079,8 +2095,7 @@ public class AiController {
         return true;
     }
 
-    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list,
-            Map<String, Object> runParams) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list) {
         // no need to choose anything
         if (list.size() <= 1) {
             return Iterables.getFirst(list, null);

@@ -48,7 +48,7 @@ public class AbilityUtils {
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
         if ("ReplacedCounterType".equals(name)) {
-        	name = (String) sa.getReplacingObject("CounterType");
+        	name = (String) sa.getReplacingObject(AbilityKey.CounterType);
         }
         try {
             counterType = CounterType.getType(name);
@@ -157,7 +157,9 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("Replaced") && (sa != null)) {
             final SpellAbility root = sa.getRootAbility();
-            final Object crd = root.getReplacingObject(defined.substring(8));
+            AbilityKey type = AbilityKey.fromString(defined.substring(8));
+            final Object crd = root.getReplacingObject(type);
+
             if (crd instanceof Card) {
                 c = game.getCardState((Card) crd);
             } else if (crd instanceof List<?>) {
@@ -712,7 +714,7 @@ public class AbilityUtils {
         }
         else if (calcX[0].startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
-            list = new CardCollection((Card) root.getReplacingObject(calcX[0].substring(8)));
+            list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
         }
         else if (calcX[0].startsWith("ReplaceCount")) {
             // ReplaceCount is similar to a regular Count, but just
@@ -720,7 +722,7 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getReplacingObject(l[0]);
+            final int count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
             return CardFactoryUtil.doXMath(count, m, card) * multiplier;
         }
@@ -1063,7 +1065,7 @@ public class AbilityUtils {
             if (defined.endsWith("Controller")) {
                 String replacingType = defined.substring(8);
                 replacingType = replacingType.substring(0, replacingType.length() - 10);
-                final Object c = root.getReplacingObject(replacingType);
+                final Object c = root.getReplacingObject(AbilityKey.fromString(replacingType));
                 if (c instanceof Card) {
                     o = ((Card) c).getController();
                 }
@@ -1074,14 +1076,14 @@ public class AbilityUtils {
             else if (defined.endsWith("Owner")) {
                 String replacingType = defined.substring(8);
                 replacingType = replacingType.substring(0, replacingType.length() - 5);
-                final Object c = root.getReplacingObject(replacingType);
+                final Object c = root.getReplacingObject(AbilityKey.fromString(replacingType));
                 if (c instanceof Card) {
                     o = ((Card) c).getOwner();
                 }
             }
             else {
                 final String replacingType = defined.substring(8);
-                o = root.getReplacingObject(replacingType);
+                o = root.getReplacingObject(AbilityKey.fromString(replacingType));
             }
             if (o != null) {
                 if (o instanceof Player) {

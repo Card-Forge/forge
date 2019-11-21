@@ -17,6 +17,7 @@
  */
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -42,22 +43,22 @@ public class ReplaceGainLife extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
-        if (((int)runParams.get("LifeGained")) <= 0) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        if (((int)runParams.get(AbilityKey.LifeGained)) <= 0) {
             return false;
         }
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if ("True".equals(getParam("SourceController"))) {
-            if (runParams.get("Source") == null || !runParams.get("Affected").equals(((Card)runParams.get("Source")).getController())) {
+            if (runParams.get(AbilityKey.Source) == null || !runParams.get(AbilityKey.Affected).equals(((Card)runParams.get(AbilityKey.Source)).getController())) {
                 return false;
             }
         }
@@ -69,9 +70,9 @@ public class ReplaceGainLife extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("LifeGained", runParams.get("LifeGained"));
-        sa.setReplacingObject("Player", runParams.get("Affected"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.LifeGained, runParams.get(AbilityKey.LifeGained));
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 
 }

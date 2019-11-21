@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.FThreads;
+import forge.assets.FSkinImage;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,6 +70,8 @@ public class MatchController extends AbstractGuiGame {
 
     private static final Map<String, FImage> avatarImages = new HashMap<>();
 
+    private static final Map<String, FImage> sleeveImages = new HashMap<>();
+
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
 
@@ -100,12 +104,36 @@ public class MatchController extends AbstractGuiGame {
         return avatar;
     }
 
+    public static FImage getPlayerSleeve(final PlayerView p) {
+        if (p == null)
+            return FSkinImage.UNKNOWN;
+        final String lp = p.getLobbyPlayerName();
+        FImage sleeve = sleeveImages.get(lp);
+        if (sleeve == null) {
+            sleeve = new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
+        }
+        return sleeve;
+    }
+
     @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
-            pnl.getField().update();
+            pnl.getField().update(true);
         }
+    }
+
+    @Override
+    public void refreshField() {
+        if(!GuiBase.isNetworkplay()) //TODO alternate method for update Netplay...
+            return;
+        if(getGameView() == null)
+            return;
+        if(getGameView().getPhase() == null)
+            return;
+        if (getGameView().getPhase().phaseforUpdateField())
+            for (final VPlayerPanel pnl : view.getPlayerPanels().values())
+                pnl.getField().update(false);
     }
 
     public boolean hotSeatMode() {
@@ -361,6 +389,42 @@ public class MatchController extends AbstractGuiGame {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
         }
+    }
+
+    @Override
+    public void setSelectables(final Iterable<CardView> cards) {
+        super.setSelectables(cards);
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void clearSelectables() {
+        super.clearSelectables();
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+            }
+        });
     }
 
     @Override

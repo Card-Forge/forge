@@ -689,9 +689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (result && runTriggers) {
                 // Run replacement effects
-                Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Affected", this);
-                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
+                getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1241,18 +1239,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             addAmount = 0; // As per rule 107.1b
             return 0;
         }
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", this);
-        repParams.put("Source", source);
-        repParams.put("CounterType", counterType);
-        repParams.put("CounterNum", addAmount);
-        repParams.put("EffectOnly", applyMultiplier);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.CounterType, counterType);
+        repParams.put(AbilityKey.CounterNum, addAmount);
+        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
         case NotReplaced:
             break;
         case Updated: {
-            addAmount = (int) repParams.get("CounterNum");
+            addAmount = (int) repParams.get(AbilityKey.CounterNum);
             break;
         }
         default:
@@ -3158,6 +3155,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addColor(final String s, final boolean addToColors, final long timestamp) {
         changedCardColors.put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
+        currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
     }
 
     public final void removeColor(final long timestampIn) {
@@ -3165,6 +3163,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (removeCol != null) {
             currentState.getView().updateColors(this);
+            currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
         }
     }
 
@@ -3611,10 +3610,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!tapped) { return; }
 
         // Run Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Affected", this);
-
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repRunParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
 
@@ -5622,34 +5618,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final Card source = sa.getHostCard();
-        final MutableBoolean result = new MutableBoolean(true);
-        visitKeywords(currentState, new Visitor<KeywordInterface>() {
-            @Override
-            public boolean visit(KeywordInterface kw) {
-                switch (kw.getOriginal()) {
-                    case "Shroud":
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("Can target CardUID_").append(getId());
-                        sb.append(" with spells and abilities as though it didn't have shroud.");
-                        if (sa.getActivatingPlayer() == null) {
-                            System.err.println("Unexpected behavior: SA activator was null when trying to determine if the activating player could target a card with Shroud. SA host card = " + source + ", SA = " + sa);
-                            result.setFalse(); // FIXME: maybe this should check by SA host card controller at this point instead?
-                        } else if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of spells.":
-                        if (sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
-                }
-                return result.isTrue();
-            }
-        });
-        if (result.isFalse()) {
-            return false;
-        }
+
         if (sa.isSpell()) {
             for(KeywordInterface inst : source.getKeywords()) {
                 String kw = inst.getOriginal();

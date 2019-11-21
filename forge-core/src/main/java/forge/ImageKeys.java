@@ -111,7 +111,18 @@ public final class ImageKeys {
             file = findFile(dir, TextUtil.fastReplace(filename, "AE", "Ae"));
             if (file != null) { return file; }
         }
-
+        //try fullborder...
+        if (filename.contains(".full")) {
+            file = findFile(dir, TextUtil.fastReplace(filename, ".full", ".fullborder"));
+            if (file != null) { return file; }
+        }
+        //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
+        if (!filename.contains(".full")) {
+            file = findFile(dir, TextUtil.addSuffix(filename,".full"));
+            if (file != null) { return file; }
+            file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
+            if (file != null) { return file; }
+        }
         // some S00 cards are really part of 6ED
         String s2kAlias = getSetFolder("S00");
         if (filename.startsWith(s2kAlias)) {

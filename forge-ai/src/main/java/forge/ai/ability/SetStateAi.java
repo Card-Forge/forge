@@ -148,7 +148,7 @@ public class SetStateAi extends SpellAbilityAi {
         if (card.isFaceDown()) {
             // hidden agenda
             if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
-                    && card.getZone().is(ZoneType.Command)) {
+                    && card.isInZone(ZoneType.Command)) {
                 String chosenName = card.getNamedCard();
                 for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
                     if (cast.getController() == ai && cast.getName().equals(chosenName)) {

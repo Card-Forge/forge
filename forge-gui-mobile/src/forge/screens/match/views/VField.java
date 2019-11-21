@@ -40,8 +40,11 @@ public class VField extends FContainer {
         return cardPanels;
     }
 
-    public void update() {
-        FThreads.invokeInEdtNowOrLater(updateRoutine);
+    public void update(boolean invokeInEdtNowOrLater) {
+        if (invokeInEdtNowOrLater)
+            FThreads.invokeInEdtNowOrLater(updateRoutine);
+        else
+            FThreads.invokeInEdtLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {
@@ -107,21 +110,40 @@ public class VField extends FContainer {
         }
         final String cardName = card.getCurrentState().getName();
         for (CardView c : cardsOfType) {
-            if (!c.hasCardAttachments() &&
-                    cardName.equals(c.getCurrentState().getName()) &&
-                    card.hasSameCounters(c) &&
-                    card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
-                    card.isTapped() == c.isTapped() && // don't stack tapped tokens on untapped tokens
-                    card.isSick() == c.isSick() && //don't stack sick tokens on non sick
-                    card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
-                CardAreaPanel cPanel = CardAreaPanel.get(c);
-                while (cPanel.getNextPanelInStack() != null) {
-                    cPanel = cPanel.getNextPanelInStack();
+            if (c.getCurrentState().isCreature()) {
+                if (!c.hasCardAttachments() &&
+                        cardName.equals(c.getCurrentState().getName()) &&
+                        card.hasSameCounters(c) &&
+                        card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
+                        card.isTapped() == c.isTapped() && // don't stack tapped tokens on untapped tokens
+                        card.isSick() == c.isSick() && //don't stack sick tokens on non sick
+                        card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
+                    CardAreaPanel cPanel = CardAreaPanel.get(c);
+                    while (cPanel.getNextPanelInStack() != null) {
+                        cPanel = cPanel.getNextPanelInStack();
+                    }
+                    CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                    cPanel.setNextPanelInStack(cardPanel);
+                    cardPanel.setPrevPanelInStack(cPanel);
+                    return true;
                 }
-                CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                cPanel.setNextPanelInStack(cardPanel);
-                cardPanel.setPrevPanelInStack(cPanel);
-                return true;
+            } else {
+                if (!c.hasCardAttachments() &&
+                        cardName.equals(c.getCurrentState().getName()) &&
+                        card.hasSameCounters(c) &&
+                        card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
+                        card.getCurrentState().getColors() == c.getCurrentState().getColors() &&
+                        card.isSick() == c.isSick() && //don't stack sick tokens on non sick
+                        card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
+                    CardAreaPanel cPanel = CardAreaPanel.get(c);
+                    while (cPanel.getNextPanelInStack() != null) {
+                        cPanel = cPanel.getNextPanelInStack();
+                    }
+                    CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                    cPanel.setNextPanelInStack(cardPanel);
+                    cardPanel.setPrevPanelInStack(cPanel);
+                    return true;
+                }
             }
         }
         return false;

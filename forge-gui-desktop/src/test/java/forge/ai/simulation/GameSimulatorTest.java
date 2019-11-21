@@ -1284,7 +1284,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         int numZombies = countCardsWithName(simGame, "Zombie");
-        assertTrue(numZombies == 2);
+        assertEquals(2, numZombies);
     }
 
     public void testKalitasNumberOfTokens() {
@@ -1309,7 +1309,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(fatalPushSA);
         fatalPushSA.setTargetCard(goblin);
 
-        // Electrify: should only generate 1 token
+        // Electrify: should also generate 2 tokens after the Ixalan rules update
         Card electrify = addCardToZone("Electrify", p, ZoneType.Hand);
         SpellAbility electrifySA = electrify.getFirstSpellAbility();
         assertNotNull(electrifySA);
@@ -1318,11 +1318,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(fatalPushSA).value;
         assertTrue(score > 0);
-        assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 2);
+        assertEquals(2, countCardsWithName(sim.getSimulatedGameState(), "Zombie"));
 
         score = sim.simulateSpellAbility(electrifySA).value;
         assertTrue(score > 0);
-        assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
+        assertEquals(countCardsWithName(sim.getSimulatedGameState(), "Zombie"), 4);
     }
 
     public void testPlayerXCount() {
@@ -1531,7 +1531,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertNotNull(simGoblin);
         int effects = simGoblin.getCounters(CounterType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
-        assertTrue(effects == 2);
+        assertEquals(2, effects);
     }
 
     public void testTeysaKarlovXathridNecromancer() {
@@ -1560,7 +1560,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         int numZombies = countCardsWithName(simGame, "Zombie");
-        assertTrue(numZombies == 4);
+        assertEquals(4, numZombies);
     }
 
     public void testDoubleTeysaKarlovXathridNecromancer() {
@@ -1588,7 +1588,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         int numZombies = countCardsWithName(simGame, "Zombie");
-        assertTrue(numZombies == 3);
+        assertEquals(3, numZombies);
     }
 
 
@@ -1619,7 +1619,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         // Two cards drawn
-        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 2);
+        assertEquals(2, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
     }
 
     public void testTeysaKarlovGitrogMonsterGitrogDies() {
@@ -1657,7 +1657,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         // One cards drawn
-        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
+        assertEquals(1, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
     }
 
     public void testTeysaKarlovGitrogMonsterTeysaDies() {
@@ -1695,7 +1695,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         // One cards drawn
-        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
+        assertEquals(1, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
     }
 
 
@@ -1742,9 +1742,9 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Game simGame = sim.getSimulatedGameState();
 
-        assertTrue(countCardsWithName(simGame, outLawName) == 0);
-        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
-        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+        assertEquals(0, countCardsWithName(simGame, outLawName));
+        assertEquals(2, countCardsWithName(simGame, hillGiantName));
+        assertEquals(0, countCardsWithName(simGame, terrorName));
 
         Card clonedOutLaw = (Card)sim.getGameCopier().find(outlaw);
 
@@ -1754,7 +1754,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(clonedOutLaw.canTransform());
         assertFalse(clonedOutLaw.isBackSide());
 
-        assertTrue(clonedOutLaw.getName().equals(hillGiantName));
+        assertEquals(clonedOutLaw.getName(), hillGiantName);
 
         assertTrue(clonedOutLaw.isDoubleFaced());
 
@@ -1763,9 +1763,9 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         simGame = sim.getSimulatedGameState();
 
-        assertTrue(countCardsWithName(simGame, outLawName) == 0);
-        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
-        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+        assertEquals(0, countCardsWithName(simGame, outLawName));
+        assertEquals(2, countCardsWithName(simGame, hillGiantName));
+        assertEquals(0, countCardsWithName(simGame, terrorName));
 
         Card transformOutLaw = (Card)sim.getGameCopier().find(outlaw);
 
@@ -1775,14 +1775,14 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(transformOutLaw.canTransform());
         assertTrue(transformOutLaw.isBackSide());
 
-        assertTrue(transformOutLaw.getName().equals(hillGiantName));
+        assertEquals(transformOutLaw.getName(), hillGiantName);
 
         // need to clean up the clone state
         simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.CLEANUP);
 
-        assertTrue(countCardsWithName(simGame, outLawName) == 0);
-        assertTrue(countCardsWithName(simGame, hillGiantName) == 1);
-        assertTrue(countCardsWithName(simGame, terrorName) == 1);
+        assertEquals(0, countCardsWithName(simGame, outLawName));
+        assertEquals(1, countCardsWithName(simGame, hillGiantName));
+        assertEquals(1, countCardsWithName(simGame, terrorName));
 
         assertFalse(transformOutLaw.isCloned());
         assertTrue(transformOutLaw.isDoubleFaced());
@@ -1790,7 +1790,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(transformOutLaw.canTransform());
         assertTrue(transformOutLaw.isBackSide());
 
-        assertTrue(transformOutLaw.getName().equals(terrorName));
+        assertEquals(transformOutLaw.getName(), terrorName);
     }
 
     public void testVolrathsShapeshifter() {
@@ -1808,9 +1808,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCardToZone("Abattoir Ghoul", p, ZoneType.Graveyard);
         game.getAction().checkStateEffects(true);
 
-        assertTrue(volrath.getName().equals("Abattoir Ghoul"));
-        assertTrue(volrath.getNetPower() == 3);
-        assertTrue(volrath.getNetToughness() == 2);
+        assertEquals("Abattoir Ghoul", volrath.getName());
+        assertEquals(3, volrath.getNetPower());
+        assertEquals(2, volrath.getNetToughness());
         assertTrue(volrath.hasKeyword(Keyword.FIRST_STRIKE));
 
         SpellAbility discardAfterCopy = findSAWithPrefix(volrath, "{2}");
@@ -1820,9 +1820,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCardToZone("Plains", p, ZoneType.Graveyard);
         game.getAction().checkStateEffects(true);
 
-        assertTrue(volrath.getName().equals("Volrath's Shapeshifter"));
-        assertTrue(volrath.getNetPower() == 0);
-        assertTrue(volrath.getNetToughness() == 1);
+        assertEquals("Volrath's Shapeshifter", volrath.getName());
+        assertEquals(0, volrath.getNetPower());
+        assertEquals(1, volrath.getNetToughness());
         assertTrue(volrath.getKeywords().isEmpty());
 
         SpellAbility discardAfterRevert = findSAWithPrefix(volrath, "{2}");
@@ -1850,9 +1850,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
 
         assertNotNull(simSpark);
-        assertTrue(simSpark.getZone().is(ZoneType.Battlefield));
-        assertTrue(simSpark.getCounters(CounterType.P1P1) == 1);
-        assertTrue(simSpark.getCounters(CounterType.LOYALTY) == 5);
+        assertTrue(simSpark.isInZone(ZoneType.Battlefield));
+        assertEquals(1, simSpark.getCounters(CounterType.P1P1));
+        assertEquals(5, simSpark.getCounters(CounterType.LOYALTY));
     }
 
     public void testVituGhaziAndCytoshape() {
@@ -1883,8 +1883,8 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card awakened = findCardWithName(sim.getSimulatedGameState(), "Vitu-Ghazi");
 
         assertNotNull(awakened);
-        assertTrue(awakened.getName().equals("Vitu-Ghazi"));
-        assertTrue(awakened.getCounters(CounterType.P1P1) == 9);
+        assertEquals("Vitu-Ghazi", awakened.getName());
+        assertEquals(9, awakened.getCounters(CounterType.P1P1));
         assertTrue(awakened.hasKeyword(Keyword.HASTE));
         assertTrue(awakened.getType().hasSubtype("Goblin"));
     }
@@ -1910,7 +1910,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         SpellAbility copiedSA = findSAWithPrefix(oozeOTB, "{1}{G}:");
         assertNotNull(copiedSA);
-        assertTrue(copiedSA.getRestrictions().getLimitToCheck().equals("1"));
+        assertEquals("1", copiedSA.getRestrictions().getLimitToCheck());
     }
 
     public void testEpochrasite() {
@@ -1932,7 +1932,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card epoOTB = findCardWithName(sim.getSimulatedGameState(), "Epochrasite");
 
         assertNotNull(epoOTB);
-        assertTrue(epoOTB.getCounters(CounterType.P1P1) == 3);
+        assertEquals(3, epoOTB.getCounters(CounterType.P1P1));
     }
 
     @SuppressWarnings("unused")
@@ -1967,9 +1967,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(score > 0);
 
         Card dimirdgAfterCopy1 = (Card)sim.getGameCopier().find(dimirdg);
-        assertTrue(dimirdgAfterCopy1.getName().equals("Jushi Apprentice"));
-        assertTrue(dimirdgAfterCopy1.getNetPower() == 1);
-        assertTrue(dimirdgAfterCopy1.getNetToughness() == 2);
+        assertEquals("Jushi Apprentice", dimirdgAfterCopy1.getName());
+        assertEquals(1, dimirdgAfterCopy1.getNetPower());
+        assertEquals(2, dimirdgAfterCopy1.getNetToughness());
         assertTrue(dimirdgAfterCopy1.isFlipCard());
         assertFalse(dimirdgAfterCopy1.isFlipped());
         assertFalse(dimirdgAfterCopy1.getType().isLegendary());
@@ -1982,7 +1982,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Player copiedPlayer = (Player)sim.getGameCopier().find(p);
         int handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
-        assertTrue(handSize == 9);
+        assertEquals(9, handSize);
 
         SpellAbility draw = findSAWithPrefix(dimirdgAfterCopy1, "{2}{U}");
         score = sim.simulateSpellAbility(draw).value;
@@ -1990,7 +1990,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         copiedPlayer = (Player)sim.getGameCopier().find(p);
         handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
-        assertTrue(handSize == 10);
+        assertEquals(10, handSize);
 
         simGame = sim.getSimulatedGameState();
 
@@ -2006,9 +2006,9 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card dimirdgAfterFlip1 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
 
-        assertTrue(dimirdgAfterFlip1.getName().equals("Tomoya the Revealer"));
-        assertTrue(dimirdgAfterFlip1.getNetPower() == 2);
-        assertTrue(dimirdgAfterFlip1.getNetToughness() == 3);
+        assertEquals("Tomoya the Revealer", dimirdgAfterFlip1.getName());
+        assertEquals(2, dimirdgAfterFlip1.getNetPower());
+        assertEquals(3, dimirdgAfterFlip1.getNetToughness());
         assertTrue(dimirdgAfterFlip1.isFlipped());
         assertTrue(dimirdgAfterFlip1.getType().isLegendary());
 
@@ -2030,9 +2030,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         System.out.println(dimirdgAfterCopy2.isFlipCard());
         System.out.println(dimirdgAfterCopy2.isFlipped());
 
-        assertTrue(dimirdgAfterCopy2.getName().equals("Runeclaw Bear"));
-        assertTrue(dimirdgAfterCopy2.getNetPower() == 2);
-        assertTrue(dimirdgAfterCopy2.getNetToughness() == 2);
+        assertEquals("Runeclaw Bear", dimirdgAfterCopy2.getName());
+        assertEquals(2, dimirdgAfterCopy2.getNetPower());
+        assertEquals(2, dimirdgAfterCopy2.getNetToughness());
         assertTrue(dimirdgAfterCopy2.isFlipped());
         assertFalse(dimirdgAfterCopy2.getType().isLegendary());
     }
@@ -2049,11 +2049,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         // update stats state
         game.getAction().checkStateEffects(true);
 
-        assertTrue(c1.getNetPower() == 4);
-        assertTrue(c1.getNetToughness() == 4);
+        assertEquals(4, c1.getNetPower());
+        assertEquals(4, c1.getNetToughness());
 
-        assertTrue(c2.getNetPower() == 4);
-        assertTrue(c2.getNetToughness() == 4);
+        assertEquals(4, c2.getNetPower());
+        assertEquals(4, c2.getNetToughness());
     }
 
     public void testPathtoExileActofTreason() {
@@ -2090,7 +2090,37 @@ public class GameSimulatorTest extends SimulationTestCase {
         simGame.getAction().checkStateEffects(true);
 
         int numForest = countCardsWithName(simGame, "Forest");
-        assertTrue(numForest == 1);
+        assertEquals(1, numForest);
         assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Battlefield).size());
+    }
+
+    public void testAmassTrigger() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        String WCname = "Woodland Champion";
+        addCard(WCname, p);
+        for (int i = 0; i < 5; i++)
+            addCard("Island", p);
+
+        String CardName = "Eternal Skylord";
+        Card c = addCardToZone(CardName, p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playSa = c.getSpellAbilities().get(0);
+        playSa.setActivatingPlayer(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        int score = sim.simulateSpellAbility(playSa).value;
+        assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simWC = findCardWithName(simGame, WCname);
+
+        assertEquals(1, simWC.getPowerBonusFromCounters());
+        assertEquals(3, simGame.getPlayers().get(0).getCreaturesInPlay().size());
+
     }
 }

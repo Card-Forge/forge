@@ -292,6 +292,11 @@ public class Graphics {
         return index + 2;
     }
 
+    public void drawfillBorder(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
+        drawRoundRect(thickness, color, x, y, w, h, cornerRadius);
+        fillRoundRect(color, x, y, w, h, cornerRadius);
+    }
+
     public void drawRoundRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
         drawRoundRect(thickness, skinColor.getColor(), x, y, w, h, cornerRadius);
     }
@@ -312,21 +317,18 @@ public class Graphics {
         }
 
         //adjust width/height so rectangle covers equivalent filled area
-        w = Math.round(w - 1);
-        h = Math.round(h - 1);
+        w = Math.round(w + 1);
+        h = Math.round(h + 1);
 
         startShape(ShapeType.Line);
         shapeRenderer.setColor(color);
 
-        x = adjustX(x);
-        float y2 = adjustY(y, h);
-        float x2 = x + w;
-        y = y2 + h;
-        //TODO: draw arcs at corners
-        shapeRenderer.line(x, y, x, y2);
-        shapeRenderer.line(x, y2, x2 + 1, y2); //+1 prevents corner not being filled
-        shapeRenderer.line(x2, y2, x2, y);
-        shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+        shapeRenderer.rect(adjustX(x), adjustY(y+cornerRadius, h-cornerRadius*2), w, h-cornerRadius*2);
+        shapeRenderer.rect(adjustX(x+cornerRadius), adjustY(y, h), w-cornerRadius*2, h);
 
         endShape();
 
@@ -340,6 +342,32 @@ public class Graphics {
             Gdx.gl.glLineWidth(1);
         }
 
+        batch.begin();
+    }
+
+    public void fillRoundRect(FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
+        fillRoundRect(skinColor.getColor(), x, y, w, h, cornerRadius);
+    }
+    public void fillRoundRect(Color color, float x, float y, float w, float h, float cornerRadius) {
+        batch.end(); //must pause batch while rendering shapes
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+        shapeRenderer.rect(adjustX(x), adjustY(y+cornerRadius, h-cornerRadius*2), w, h-cornerRadius*2);
+        shapeRenderer.rect(adjustX(x+cornerRadius), adjustY(y, h), w-cornerRadius*2, h);
+        endShape();
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
         batch.begin();
     }
 
@@ -535,6 +563,18 @@ public class Graphics {
     }
     public float getfloatAlphaComposite() { return  alphaComposite; }
 
+
+    public void drawBorderImage(FImage image, Color color, float x, float y, float w, float h, boolean tint) {
+        image.draw(this, x, y, w, h);
+        if(tint){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.8f);
+            drawRoundRect(2f, Color.WHITE, x, y, w, h, (h-w)/12);
+            setAlphaComposite(1f);
+            fillRoundRect(color, x, y, w, h, (h-w)/12);
+            setAlphaComposite(oldalpha);
+        }
+    }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
     }

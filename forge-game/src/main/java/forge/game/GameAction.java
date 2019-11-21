@@ -55,8 +55,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
-import static forge.util.EnumMapUtil.toStringMap;
-
 /**
  * Methods for common actions performed during a game.
  * 
@@ -145,11 +143,6 @@ public class GameAction {
             if (resetToOriginal) {
                 c.setState(CardStateName.Original, true);
             }
-        }
-
-        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (c.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
-            c.setState(CardStateName.Original, true);
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
@@ -258,7 +251,7 @@ public class GameAction {
             }
             if(noLandLKI.isLand()) {
                 // if it isn't on the Stack, it stays in that Zone
-                if (!c.getZone().is(ZoneType.Stack)) {
+                if (!c.isInZone(ZoneType.Stack)) {
                     return c;
                 }
                 // if something would only be a land when entering the battlefield and not before
@@ -292,8 +285,7 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-            repParams.put(AbilityKey.Affected, copied);
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(copied);
             repParams.put(AbilityKey.CardLKI, lastKnownInfo);
             repParams.put(AbilityKey.Cause, cause);
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
@@ -303,7 +295,7 @@ public class GameAction {
                 repParams.putAll(params);
             }
 
-            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, toStringMap(repParams));
+            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
@@ -353,6 +345,11 @@ public class GameAction {
                     e.removeEncodedCard(c);
                 }
             }
+        }
+
+        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
+        if (copied.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
+            copied.setState(CardStateName.Original, false);
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
@@ -704,7 +701,9 @@ public class GameAction {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, cause);
-        runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+        if (origin != null) { // is generally null when adding via dev mode
+            runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+        }
         if (params != null) {
             runParams.putAll(params);
         }
@@ -1389,11 +1388,10 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<String, Object> repRunParams = Maps.newHashMap();
-        repRunParams.put("Source", sa);
-        repRunParams.put("Card", c);
-        repRunParams.put("Affected", c);
-        repRunParams.put("Regeneration", regenerate);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        repRunParams.put(AbilityKey.Source, sa);
+        repRunParams.put(AbilityKey.Affected, c);
+        repRunParams.put(AbilityKey.Regeneration, regenerate);
 
         if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;

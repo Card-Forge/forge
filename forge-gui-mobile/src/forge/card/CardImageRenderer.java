@@ -4,8 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
+import forge.Forge;
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.assets.FBufferedImage;
+import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -24,6 +28,7 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
+import forge.util.CardTranslation;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -325,7 +330,9 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
+        boolean canshow = MatchController.instance.mayView(card);
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
+        FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
@@ -336,30 +343,58 @@ public class CardImageRenderer {
             return;
         }
 
-        boolean canLook = MatchController.instance.mayView(card);
-
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
-        }
-        else {
+        } else {
+            boolean fullborder = image.toString().contains(".fullborder.");
+            float radius = (h - w)/8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
             float new_w = w*wh_Adj;
             float new_h = h*wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
+            float new_xRotate = (dispW - new_h) /2;
+            float new_yRotate = (dispH - new_w) /2;
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
-                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
+                if (Forge.enableUIMask){
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                    else {
+                        g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x+radius/2, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
+                    }
+                } else
+                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
-                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-            }
-            else {
-                g.drawImage(image, x, y, w, h);
+                if (Forge.enableUIMask) {
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                    else {
+                        g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x + radius / 2, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
+                    }
+                } else
+                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+            } else {
+                if (Forge.enableUIMask && canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey())) {
+                    if (ImageCache.isExtendedArt(card))
+                        g.drawImage(image, x, y, w, h);
+                    else {
+                        g.drawImage(ImageCache.getBorderImage(card, canshow), x, y, w, h);
+                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                    }
+                } else {
+                    if (canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey()))
+                        g.drawImage(image, x, y, w, h);
+                    else // sleeve
+                        g.drawImage(sleeves, x, y, w, h);
+                }
             }
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canLook && image != ImageCache.defaultImage);
+        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canshow && image != ImageCache.defaultImage);
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {

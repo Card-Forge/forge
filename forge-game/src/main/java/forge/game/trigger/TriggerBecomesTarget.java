@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -96,8 +97,8 @@ public class TriggerBecomesTarget extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Source: ").append(((SpellAbility) sa.getTriggeringObject(AbilityKey.SourceSA)).getHostCard()).append(", ");
-        sb.append("Target: ").append(sa.getTriggeringObject(AbilityKey.Target));
+        sb.append(Localizer.getInstance().getMessage("lblSource")).append(": ").append(((SpellAbility) sa.getTriggeringObject(AbilityKey.SourceSA)).getHostCard()).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblTarget")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target));
         return sb.toString();
     }
 }

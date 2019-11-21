@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -155,10 +154,9 @@ public class CounterEffect extends SpellAbilityEffect {
             final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         // Run any applicable replacement effects. 
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("TgtSA", tgtSA);
-        repParams.put("Affected", tgtSA.getHostCard());
-        repParams.put("Cause", srcSA.getHostCard());
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
+        repParams.put(AbilityKey.TgtSA, tgtSA);
+        repParams.put(AbilityKey.Cause, srcSA.getHostCard());
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return;
         }

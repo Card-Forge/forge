@@ -17,6 +17,7 @@
  */
 package forge.game.replacement;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -42,23 +43,23 @@ public class ReplaceDestroy extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(Map<String, Object> runParams) {
+    public boolean canReplace(Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
         if (hasParam("ValidCard")) {
-            Card card = (Card)runParams.get("Card");
+            Card card = (Card)runParams.get(AbilityKey.Card);
             if (!matchesValid(card, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
             // extra check for Regeneration
             if (hasParam("Regeneration")) {
-                if (!runParams.containsKey("Regeneration")) {
+                if (!runParams.containsKey(AbilityKey.Regeneration)) {
                     return false;
                 }
-                if (!(Boolean)runParams.get("Regeneration")) {
+                if (!(Boolean)runParams.get(AbilityKey.Regeneration)) {
                     return false;
                 }
                 if (!card.canBeShielded()) {
@@ -71,7 +72,7 @@ public class ReplaceDestroy extends ReplacementEffect {
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -83,8 +84,8 @@ public class ReplaceDestroy extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject("Card", runParams.get("Card"));
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Card));
     }
 
 }

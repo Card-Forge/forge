@@ -18,6 +18,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,10 +29,9 @@ public class PuzzleScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
     private final FTextArea lblDesc = add(new FTextArea(false,
-            "Puzzle Mode loads in a puzzle that you have to win in a predetermined time/way.\n\n" +
-            "To begin, press the Start button below, then select a puzzle from a list.\n\n" +
-            "Your objective will be displayed in a pop-up window when the puzzle starts and also " +
-            "specified on a special effect card which will be placed in your command zone."));
+            Localizer.getInstance().getMessage("lblPuzzleText1") + "\n\n" +
+            Localizer.getInstance().getMessage("lblPuzzleText2") + "\n\n" +
+            Localizer.getInstance().getMessage("lblPuzzleText3")));
 
     public PuzzleScreen() {
         super(null, NewGameMenu.getMenu());
@@ -54,10 +54,10 @@ public class PuzzleScreen extends LaunchScreen {
         final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
         Collections.sort(puzzles);
 
-        GuiChoose.one("Choose a puzzle", puzzles, new Callback<Puzzle>() {
+        GuiChoose.one(Localizer.getInstance().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {
             @Override
             public void run(final Puzzle chosen) {
-                LoadingOverlay.show("Loading the puzzle...", new Runnable() {
+                LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingThePuzzle"), new Runnable() {
                     @Override
                     public void run() {
                         // Load selected puzzle

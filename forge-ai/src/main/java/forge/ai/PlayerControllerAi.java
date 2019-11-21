@@ -729,7 +729,7 @@ public class PlayerControllerAi extends PlayerController {
                                 return true;
                             } else {
                                 Card rem = (Card) source.getFirstRemembered();
-                                if (!rem.getZone().is(ZoneType.Battlefield)) {
+                                if (!rem.isInZone(ZoneType.Battlefield)) {
                                     return true;
                                 }
                             }
@@ -737,7 +737,7 @@ public class PlayerControllerAi extends PlayerController {
                         case "BetterTgtThanRemembered":
                             if (source.getRememberedCount() > 0) {
                                 Card rem = (Card) source.getFirstRemembered();
-                                if (!rem.getZone().is(ZoneType.Battlefield)) {
+                                if (!rem.isInZone(ZoneType.Battlefield)) {
                                     return true;
                                 }
                                 for (Card c : source.getController().getCreaturesInPlay()) {
@@ -866,8 +866,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams) {
-        return brains.chooseSingleReplacementEffect(possibleReplacers, runParams);
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+        return brains.chooseSingleReplacementEffect(possibleReplacers);
     }
 
     @Override

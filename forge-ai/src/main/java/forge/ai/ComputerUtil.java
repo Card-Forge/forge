@@ -29,6 +29,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -2402,7 +2403,7 @@ public class ComputerUtil {
             }
             // if source is not on the battlefield anymore, choose +1/+1
             // ones
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Feather" : "Quill";
             }
             // if no hand cards, try to mill opponent
@@ -2434,7 +2435,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Strength" : "Numbers";
             }
 
@@ -2483,7 +2484,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Sprout" : "Harvest";
             }
             // TODO add Lifegain to +1/+1 counters trigger
@@ -2849,10 +2850,9 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", player);
-        repParams.put("LifeGained", 1);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.LifeGained, 1);
+        repParams.put(AbilityKey.Source, source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
                 ReplacementType.GainLife,
@@ -2880,15 +2880,15 @@ public class ComputerUtil {
         }
 
         // Run any applicable replacement effects.
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Affected", player);
-        repParams.put("LifeGained", n);
-        repParams.put("Source", source);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.LifeGained, n);
+        repParams.put(AbilityKey.Source, source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(
-                ReplacementType.GainLife,
-                repParams,
-                ReplacementLayer.Other);
+            ReplacementType.GainLife,
+            repParams,
+            ReplacementLayer.Other
+        );
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
             // no life gain is not negative
