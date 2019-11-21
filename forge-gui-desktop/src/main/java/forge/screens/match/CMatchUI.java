@@ -51,10 +51,12 @@ import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
 import forge.assets.FSkinProp;
+import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
+import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.ability.AbilityKey;
@@ -70,6 +72,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetChoices;
@@ -1213,114 +1216,68 @@ public final class CMatchUI
             if(stackIndex == nextNotifiableStackIndex) {
                 
                 // We can go and show the modal
-                StackItemView siv = event.si.getView();
-                
-                String who = event.sa.getActivatingPlayer().getName();
-                String action = event.sa.isSpell() ? " cast " : event.sa.isTrigger() ? " triggered " : " activated ";
-                String what = event.sa.getStackDescription().startsWith("Morph ") ? "Morph" : event.sa.getHostCard().toString();
-
-                StringBuilder sb = new StringBuilder();
-                sb.append(who).append(action).append(what);
-
-                if (event.sa.getTargetRestrictions() != null) {
-                    sb.append(" targeting ");
-                    TargetChoices targets = event.si.getTargetChoices();
-                    sb.append(targets.getTargetedString());
-                }
-                sb.append(".");        
-                String message1 = sb.toString();
-                String message2 = event.si.getStackDescription();       
-                String messageTotal = message1 + "\n\n" + message2; 
-                
-                
-                int rotation = getRotation(event.sa.getCardView());
-
-                FImagePanel imagePanel = new FImagePanel();               
-                BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState()); 
-                imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
-                int imageWidth = 433;
-                int imageHeight = 600;
-                Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
-                imagePanel.setMinimumSize(imagePanelDimension);
- 
-                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-                Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+                SpellAbility sa = event.sa;
+                SpellAbilityStackInstance si = event.si;
                 
                 MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
                 JPanel mainPanel = new JPanel(migLayout);
+                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+                Dimension maxSize = new Dimension(1400, parentSize.height - 100);
                 mainPanel.setMaximumSize(maxSize);
-                mainPanel.setOpaque(false);
+                mainPanel.setOpaque(false);              
+               
+                // Big Image
+                addBigImageToStackModalPanel(mainPanel, si);
                 
-                mainPanel.add(imagePanel, "cell 0 0, spany 3"); 
+                // Text
+                addTextToStackModalPanel(mainPanel,sa,si);
                 
-                final FTextArea prompt1 = new FTextArea(messageTotal);
-                prompt1.setFont(FSkin.getFont(21));
-                prompt1.setAutoSize(true);
-                prompt1.setMinimumSize(new Dimension(475,200));
-                mainPanel.add(prompt1, "cell 1 0, aligny top");
-                              
-                SpellAbility sourceSA = (SpellAbility) event.sa.getTriggeringObject(AbilityKey.SourceSA);
+                // Small images
+                int numSmallImages = 0;
+                
+                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+                GameEntityView enchantedEntityView = null;
+                Card hostCard = sa.getHostCard();
+                if(hostCard.isEnchantment()) {
+                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
+                    if(enchantedEntity != null) {
+                        enchantedEntityView = enchantedEntity.getView();
+                        numSmallImages++;
+                    } else if ((sa.getRootAbility() != null)
+                            && (sa.getRootAbility().getPaidList("Sacrificed") != null)
+                            && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
+                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
+                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
+                        if(enchantedEntity != null) {            
+                            enchantedEntityView = enchantedEntity.getView();                            
+                            numSmallImages++;
+                        }
+                    }
+                 }
+                    
+                // If current effect is a triggered ability, I want to show the triggering card if present
+                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
+                CardView sourceCardView = null;
                 if(sourceSA != null) {
-                    // Current card is target of a triggered ability
-                    CardView sourceCardView = sourceSA.getHostCard().getView();
-                    int currRotation = getRotation(sourceCardView);                        
-                    FImagePanel targetPanel = new FImagePanel();
-                    bufferedImage = FImageUtil.getImage(sourceCardView.getCurrentState()); 
-                    targetPanel.setImage(bufferedImage, currRotation, AutoSizeImageMode.SOURCE);
-                    imageWidth = 217;
-                    imageHeight = 300;
-                    Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
-                    targetPanel.setMinimumSize(targetPanelDimension);
-                    mainPanel.add(targetPanel, "cell 1 1,  aligny bottom");                                            
-                } else {                    
-                    FCollectionView<CardView> targetCards = CardView.getCollection(event.si.getTargetChoices().getTargetCards());
-                    
-                    List<CardView> targetSpellCards = new ArrayList<CardView>();
-                    for(SpellAbility currSA : event.si.getTargetChoices().getTargetSpells()) {
-                        CardView currCardView = currSA.getCardView();
-                        targetSpellCards.add(currCardView);
-                    }
-                    
-                    FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(event.si.getTargetChoices().getTargetPlayers());
-                    
-                    int numTarget = targetCards.size() + targetSpellCards.size() + targetPlayers.size();
-                    
-                    if(targetCards != null) {                 
-                        for (CardView currCardView : targetCards) {
-                            int currRotation = getRotation(currCardView);                        
-                            FImagePanel targetPanel = new FImagePanel();
-                            bufferedImage = FImageUtil.getImage(currCardView.getCurrentState()); 
-                            targetPanel.setImage(bufferedImage, currRotation, AutoSizeImageMode.SOURCE);
-                            imageWidth = 217;
-                            imageHeight = 300;
-                            Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
-                            targetPanel.setMinimumSize(targetPanelDimension);
-                            mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");                         
-                        }
-                    }
-                    if(targetSpellCards != null) {                 
-                        for (CardView currCardView : targetSpellCards) {
-                            int currRotation = getRotation(currCardView);                        
-                            FImagePanel targetPanel = new FImagePanel();
-                            bufferedImage = FImageUtil.getImage(currCardView.getCurrentState()); 
-                            targetPanel.setImage(bufferedImage, currRotation, AutoSizeImageMode.SOURCE);
-                            imageWidth = 217;
-                            imageHeight = 300;
-                            Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
-                            targetPanel.setMinimumSize(targetPanelDimension);
-                            mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");                         
-                        }
-                    }
-                    if(targetPlayers != null) {
-                        for (PlayerView playerView : targetPlayers) {
-                            SkinImage playerAvatar = getPlayerAvatar(playerView, 0);
-                            final FLabel lblIcon = new FLabel.Builder().icon(playerAvatar).build();
-                            Dimension dimension = playerAvatar.getSizeForPaint(JOptionPane.getRootFrame().getGraphics());
-                            mainPanel.add(lblIcon, "cell 1 1, split " + numTarget+ ", w " + dimension.getWidth() + ", h " + dimension.getHeight() + ", aligny bottom");
-                        }
-                    }
-                }   
-                                    
+                    sourceCardView = sourceSA.getHostCard().getView();
+                    numSmallImages++;
+                } 
+              
+                // I also want to show each type of targets (both cards and players)
+                List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
+                numSmallImages = numSmallImages + targets.size();
+                
+                // Now I know how many small images - on to render them
+                if(enchantedEntityView != null) {
+                    addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);                                                                                 
+                }
+                if(sourceCardView != null) {
+                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);                                                             
+                }
+                for(GameEntityView gev : targets) {
+                    addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
+                }                                                                       
+                
                 FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of("OK"));                               
                 // here the user closed the modal - time to update the next notifiable stack index
                 nextNotifiableStackIndex++;
@@ -1340,6 +1297,90 @@ public final class CMatchUI
         }
     }
     
+    private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
+        if(si == null) {
+            return result;
+        } else {
+            FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
+            for(CardView currCardView: targetCards) {
+                result.add(currCardView);
+            }
+            
+            for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
+                CardView currCardView = currSA.getCardView();
+                result.add(currCardView);
+            }
+            
+            FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
+            for(PlayerView currPlayerView : targetPlayers) {
+                result.add(currPlayerView);
+            }
+            
+            return getTargets(si.getSubInstance(),result);
+        }
+    }
+    
+    private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {
+        StackItemView siv = si.getView();
+        int rotation = getRotation(si.getCardView());
+
+        FImagePanel imagePanel = new FImagePanel();               
+        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState()); 
+        imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
+        int imageWidth = 433;
+        int imageHeight = 600;
+        Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
+        imagePanel.setMinimumSize(imagePanelDimension);
+                
+        mainPanel.add(imagePanel, "cell 0 0, spany 3");         
+    }
+    
+    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbility sa, SpellAbilityStackInstance si) {
+        String who = sa.getActivatingPlayer().getName();
+        String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
+        String what = sa.getStackDescription().startsWith("Morph ") ? "Morph" : sa.getHostCard().toString();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(who).append(action).append(what);
+
+        if (sa.getTargetRestrictions() != null) {
+            sb.append(" targeting ");
+            TargetChoices targets = si.getTargetChoices();
+            sb.append(targets.getTargetedString());
+        }
+        sb.append(".");        
+        String message1 = sb.toString();
+        String message2 = si.getStackDescription();       
+        String messageTotal = message1 + "\n\n" + message2;
+        
+        final FTextArea prompt1 = new FTextArea(messageTotal);
+        prompt1.setFont(FSkin.getFont(21));
+        prompt1.setAutoSize(true);
+        prompt1.setMinimumSize(new Dimension(475,200));
+        mainPanel.add(prompt1, "cell 1 0, aligny top");    
+    }
+    
+    private void addSmallImageToStackModalPanel(GameEntityView gameEntityView, JPanel mainPanel, int numTarget) {
+        if(gameEntityView instanceof CardView) {
+            CardView cardView = (CardView) gameEntityView;
+            int currRotation = getRotation(cardView);                        
+            FImagePanel targetPanel = new FImagePanel();
+            BufferedImage bufferedImage = FImageUtil.getImage(cardView.getCurrentState()); 
+            targetPanel.setImage(bufferedImage, currRotation, AutoSizeImageMode.SOURCE);
+            int imageWidth = 217;
+            int imageHeight = 300;
+            Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
+            targetPanel.setMinimumSize(targetPanelDimension);
+            mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");                                     
+        } else if(gameEntityView instanceof PlayerView) {
+            PlayerView playerView = (PlayerView) gameEntityView;
+            SkinImage playerAvatar = getPlayerAvatar(playerView, 0);
+            final FLabel lblIcon = new FLabel.Builder().icon(playerAvatar).build();
+            Dimension dimension = playerAvatar.getSizeForPaint(JOptionPane.getRootFrame().getGraphics());
+            mainPanel.add(lblIcon, "cell 1 1, split " + numTarget+ ", w " + dimension.getWidth() + ", h " + dimension.getHeight() + ", aligny bottom");      
+        }
+    }  
+    
     private int getRotation(CardView cardView) {
         final int rotation;
         if (cardView.isSplitCard()) {
@@ -1347,9 +1388,9 @@ public final class CMatchUI
             if (cardName.isEmpty()) { cardName = cardView.getAlternateState().getName(); }
             
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
-            boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);
+            boolean hasKeywordAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);
 
-            rotation = cardView.isFaceDown() ? 0 : isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
+            rotation = cardView.isFaceDown() ? 0 : hasKeywordAftermath ? (CardStateName.LeftSplit.equals(cardView.getState(false).getState()) ? 0 : 270) : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
         } else {
             CardStateView cardStateView = cardView.getState(false);
             rotation = cardStateView.isPlane() || cardStateView.isPhenomenon() ? 90 : 0;
