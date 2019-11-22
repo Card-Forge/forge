@@ -253,16 +253,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
     public void setSelectables(final Iterable<CardView> cards) {
-    for ( CardView cv : cards ) { selectableCards.add(cv); }
+        for ( CardView cv : cards ) { selectableCards.add(cv); }
     }
     public void clearSelectables() {
-    selectableCards.clear();
+        selectableCards.clear();
     }
     public boolean isSelectable(final CardView card) {
-    return selectableCards.contains(card);
+        return selectableCards.contains(card);
     }
     public boolean isSelecting() {
-    return !selectableCards.isEmpty();
+        return !selectableCards.isEmpty();
     }
     public boolean isGamePaused() { return gamePause; }
     public void setgamePause(boolean pause) { gamePause = pause; }
