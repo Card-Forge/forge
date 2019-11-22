@@ -28,8 +28,8 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.OperatingSystem;
+import forge.util.WordUtil;
 import forge.view.FView;
-import org.apache.commons.lang3.text.WordUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -1085,7 +1085,7 @@ public class FSkin {
                 allSkins = new ArrayList<>();
                 final List<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (String skinDirectoryName : skinDirectoryNames) {
-                    allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
+                    allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
                 }
                 Collections.sort(allSkins);
             }

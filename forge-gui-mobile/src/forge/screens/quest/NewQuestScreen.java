@@ -47,15 +47,10 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
-import forge.util.storage.IStorage;
-
-import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -282,18 +277,12 @@ public class NewQuestScreen extends FScreen {
 
         cbAllowUnlocks.setSelected(true);
 
-        final Map<String, String> preconDescriptions = new HashMap<>();
-        IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
-
-        for (PreconDeck preconDeck : preconDecks) {
+        for (PreconDeck preconDeck : QuestController.getPrecons()) {
             if (QuestController.getPreconDeals(preconDeck).getMinWins() > 0) {
                 continue;
             }
             String name = preconDeck.getName();
             cbxPreconDeck.addItem(name);
-            String description = preconDeck.getDescription();
-            description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
-            preconDescriptions.put(name, description);
         }
 
         // disable the very powerful sets -- they can be unlocked later for a high price
