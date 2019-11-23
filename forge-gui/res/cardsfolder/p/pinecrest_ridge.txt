@@ -4,6 +4,9 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBStayTapped | SpellDescription$ Add {R}. CARDNAME doesn't untap during your next untap step.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBStayTapped | SpellDescription$ Add {G}. CARDNAME doesn't untap during your next untap step.
-SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:DBStayTapped:DB$ Effect | RememberObjects$ Self | StaticAbilities$ DontUntap | Duration$ Permanent | ForgetOnMoved$ Battlefield | Triggers$ RemoveEffect | SVars$ ExileEffect
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ EFFECTSOURCE don't untap during your next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pinecrest_ridge.jpg
 Oracle:{T}: Add {C}.\n{T}: Add {R} or {G}. Pinecrest Ridge doesn't untap during your next untap step.

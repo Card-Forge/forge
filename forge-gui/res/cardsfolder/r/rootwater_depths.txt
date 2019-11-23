@@ -2,8 +2,11 @@ Name:Rootwater Depths
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
-SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBStayTapped | SpellDescription$ Add {U}. CARDNAME doesn't untap during your next untap step.
+A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBStayTapped | SpellDescription$ Add {B}. CARDNAME doesn't untap during your next untap step.
+SVar:DBStayTapped:DB$ Effect | RememberObjects$ Self | StaticAbilities$ DontUntap | Duration$ Permanent | ForgetOnMoved$ Battlefield | Triggers$ RemoveEffect | SVars$ ExileEffect
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ EFFECTSOURCE don't untap during your next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://magiccards.info/scans/en/tp/329.jpg
 Oracle:{T}: Add {C}.\n{T}: Add {U} or {B}. Rootwater Depths doesn't untap during your next untap step.
