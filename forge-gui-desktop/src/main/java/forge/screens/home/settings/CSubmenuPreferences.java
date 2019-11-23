@@ -227,6 +227,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeDefaultFontSizeComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeStackAdditionsComboBox();
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
         initializeCounterDisplayTypeComboBox();
@@ -408,6 +409,16 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
+    private void initializeStackAdditionsComboBox() {
+        final String[] elems = {ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER, ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS,
+                ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED};
+        final FPref userSetting = FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY;
+        final FComboBoxPanel<String> panel = this.view.getCbpStackAdditionsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+    
     private void initializeColorIdentityCombobox() {
         final String[] elems = {ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_CHANGED,
             ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
