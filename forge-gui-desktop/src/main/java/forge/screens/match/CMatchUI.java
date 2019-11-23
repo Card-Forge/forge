@@ -96,6 +96,7 @@ import forge.match.AbstractGuiGame;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
@@ -1210,93 +1211,97 @@ public final class CMatchUI
     }
 
     @Override
-    public void notifyStackAddition(GameEventSpellAbilityCast event) {       
-        if(FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_ADDITION_PROMPT)) {
-            int stackIndex = event.stackIndex;        
-            if(stackIndex == nextNotifiableStackIndex) {
-                
-                // We can go and show the modal
-                SpellAbility sa = event.sa;
-                SpellAbilityStackInstance si = event.si;
-                
-                MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
-                JPanel mainPanel = new JPanel(migLayout);
-                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-                Dimension maxSize = new Dimension(1400, parentSize.height - 100);
-                mainPanel.setMaximumSize(maxSize);
-                mainPanel.setOpaque(false);              
-               
-                // Big Image
-                addBigImageToStackModalPanel(mainPanel, si);
-                
-                // Text
-                addTextToStackModalPanel(mainPanel,sa,si);
-                
-                // Small images
-                int numSmallImages = 0;
-                
-                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
-                GameEntityView enchantedEntityView = null;
-                Card hostCard = sa.getHostCard();
-                if(hostCard.isEnchantment()) {
-                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
-                    if(enchantedEntity != null) {
-                        enchantedEntityView = enchantedEntity.getView();
-                        numSmallImages++;
-                    } else if ((sa.getRootAbility() != null)
-                            && (sa.getRootAbility().getPaidList("Sacrificed") != null)
-                            && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
-                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
-                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
-                        if(enchantedEntity != null) {            
-                            enchantedEntityView = enchantedEntity.getView();                            
-                            numSmallImages++;
-                        }
-                    }
-                 }
-                    
-                // If current effect is a triggered ability, I want to show the triggering card if present
-                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
-                CardView sourceCardView = null;
-                if(sourceSA != null) {
-                    sourceCardView = sourceSA.getHostCard().getView();
+    public void notifyStackAddition(GameEventSpellAbilityCast event) {
+        SpellAbility sa = event.sa;
+        String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
+        boolean isAi = sa.getActivatingPlayer().isAI();
+        boolean isTrigger = sa.isTrigger();
+        int stackIndex = event.stackIndex;        
+        if(stackIndex == nextNotifiableStackIndex) {            
+            if(ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
+            // We can go and show the modal
+            SpellAbilityStackInstance si = event.si;
+            
+            MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+            JPanel mainPanel = new JPanel(migLayout);
+            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+            Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+            mainPanel.setMaximumSize(maxSize);
+            mainPanel.setOpaque(false);              
+           
+            // Big Image
+            addBigImageToStackModalPanel(mainPanel, si);
+            
+            // Text
+            addTextToStackModalPanel(mainPanel,sa,si);
+            
+            // Small images
+            int numSmallImages = 0;
+            
+            // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+            GameEntityView enchantedEntityView = null;
+            Card hostCard = sa.getHostCard();
+            if(hostCard.isEnchantment()) {
+                GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
+                if(enchantedEntity != null) {
+                    enchantedEntityView = enchantedEntity.getView();
                     numSmallImages++;
-                } 
-              
-                // I also want to show each type of targets (both cards and players)
-                List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
-                numSmallImages = numSmallImages + targets.size();
-                
-                // Now I know how many small images - on to render them
-                if(enchantedEntityView != null) {
-                    addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);                                                                                 
-                }
-                if(sourceCardView != null) {
-                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);                                                             
-                }
-                for(GameEntityView gev : targets) {
-                    addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
-                }                                                                       
-                
-                FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of("OK"));                               
-                // here the user closed the modal - time to update the next notifiable stack index
-                nextNotifiableStackIndex++;
-                
-            } else {
-                
-                // Not yet time to show the modal - schedule the method again, and try again later
-                Runnable tryAgainThread = new Runnable() {
-                    @Override
-                    public void run() {
-                        notifyStackAddition(event);
+                } else if ((sa.getRootAbility() != null)
+                        && (sa.getRootAbility().getPaidList("Sacrificed") != null)
+                        && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
+                    // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
+                    enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
+                    if(enchantedEntity != null) {            
+                        enchantedEntityView = enchantedEntity.getView();                            
+                        numSmallImages++;
                     }
-                };
-                GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
+                }
+             }
                 
-            }            
-        }
+            // If current effect is a triggered ability, I want to show the triggering card if present
+            SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
+            CardView sourceCardView = null;
+            if(sourceSA != null) {
+                sourceCardView = sourceSA.getHostCard().getView();
+                numSmallImages++;
+            } 
+          
+            // I also want to show each type of targets (both cards and players)
+            List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
+            numSmallImages = numSmallImages + targets.size();
+            
+            // Now I know how many small images - on to render them
+            if(enchantedEntityView != null) {
+                addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);                                                                                 
+            }
+            if(sourceCardView != null) {
+                addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);                                                             
+            }
+            for(GameEntityView gev : targets) {
+                addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
+            }                                                                       
+            
+            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of("OK"));                               
+            // here the user closed the modal - time to update the next notifiable stack index
+            
+            }
+            // In any case, I have to increase the counter
+            nextNotifiableStackIndex++;
+            
+        } else {
+            
+            // Not yet time to show the modal - schedule the method again, and try again later
+            Runnable tryAgainThread = new Runnable() {
+                @Override
+                public void run() {
+                    notifyStackAddition(event);
+                }
+            };
+            GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
+            
+        }            
     }
-    
+
     private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
         if(si == null) {
             return result;
@@ -1401,9 +1406,8 @@ public final class CMatchUI
     
     @Override
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
-        if(FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_ADDITION_PROMPT)) {
-            nextNotifiableStackIndex--;
-        }
+        // I always decrease the counter
+        nextNotifiableStackIndex--;
     }
 
 }

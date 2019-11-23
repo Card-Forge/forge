@@ -119,7 +119,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
-        UI_STACK_ADDITION_PROMPT ("false"),
+        UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"), // Display tokens in their own battlefield row.
         UI_DISPLAY_CURRENT_COLORS(ForgeConstants.DISP_CURRENT_COLORS_NEVER),

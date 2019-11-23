@@ -70,7 +70,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
-    private final JCheckBox cbStackAdditionPrompt = new OptionsCheckBox(localizer.getMessage("cbStackAdditionPrompt"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
     private final JCheckBox cbLoadHistoricFormats = new OptionsCheckBox(localizer.getMessage("cbLoadHistoricFormats"));
@@ -117,6 +116,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpMulliganRule = new FComboBoxPanel<>(localizer.getMessage("cbpMulliganRule")+":");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>(localizer.getMessage("cbpAiProfiles")+":");
+    private final FComboBoxPanel<String> cbpStackAdditions = new FComboBoxPanel<>(localizer.getMessage("cbpStackAdditions")+":");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>(localizer.getMessage("cbpDisplayCurrentCardColors")+":");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoYieldMode")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
@@ -195,8 +195,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbManaLostPrompt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaLostPrompt")), descriptionConstraints);
 
-        pnlPrefs.add(cbStackAdditionPrompt, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackAdditionPrompt")), descriptionConstraints);
+        pnlPrefs.add(cbpStackAdditions, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpStackAdditions")), descriptionConstraints);
         
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
@@ -653,6 +653,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpAiProfiles;
     }
 
+    public FComboBoxPanel<String> getCbpStackAdditionsComboBoxPanel() {
+        return cbpStackAdditions;
+    }
+    
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
@@ -769,10 +773,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
-    }
-
-    public final JCheckBox getCbStackAdditionPrompt() {
-        return cbStackAdditionPrompt;
     }
     
     public final JCheckBox getCbDetailedPaymentDesc() {

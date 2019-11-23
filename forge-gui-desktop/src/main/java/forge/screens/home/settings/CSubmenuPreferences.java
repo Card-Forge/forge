@@ -132,7 +132,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
         lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
-        lstControls.add(Pair.of(view.getCbStackAdditionPrompt(), FPref.UI_STACK_ADDITION_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
         lstControls.add(Pair.of(view.getCbPreselectPrevAbOrder(), FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER));
@@ -228,6 +227,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeDefaultFontSizeComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeStackAdditionsComboBox();
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
         initializeCounterDisplayTypeComboBox();
@@ -409,6 +409,16 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
+    private void initializeStackAdditionsComboBox() {
+        final String[] elems = {ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER, ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS,
+                ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED};
+        final FPref userSetting = FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY;
+        final FComboBoxPanel<String> panel = this.view.getCbpStackAdditionsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+    
     private void initializeColorIdentityCombobox() {
         final String[] elems = {ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_CHANGED,
             ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
