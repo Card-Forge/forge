@@ -24,6 +24,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -83,6 +84,12 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
 
     private static void addDLObject(final String urlPath, final String filename, final Map<String, String> downloads) {
         final File destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+        String modifier = !filename.contains(".full") ? ".fullborder" : "";
+        final File fullborder = new File(ForgeConstants.CACHE_CARD_PICS_DIR, TextUtil.fastReplace(filename, ".full", ".fullborder") + modifier + ".jpg");
+
+        if (fullborder.exists())
+            return; //don't add on download if you have an existing fullborder image in this set...
+
         // System.out.println(filename);
         if (!destFile.exists()) {
             downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
