@@ -78,6 +78,10 @@ public class FOptionPane extends FDialog {
         return showOptionDialog(message, title, icon, options, 0);
     }
 
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, Component comp, final List<String> options) {
+        return showOptionDialog(message, title, icon, comp, options, 0);
+    }
+    
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
         optionPane.setVisible(true);
@@ -86,6 +90,14 @@ public class FOptionPane extends FDialog {
         return dialogResult;
     }
 
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, comp, options, defaultOption);
+        optionPane.setVisible(true);
+        final int dialogResult = optionPane.result;
+        optionPane.dispose();
+        return dialogResult;
+    }
+    
     public static String showInputDialog(final String message, final String title) {
         return showInputDialog(message, title, null, "", null);
     }

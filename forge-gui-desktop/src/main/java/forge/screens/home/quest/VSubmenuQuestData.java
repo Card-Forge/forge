@@ -17,10 +17,9 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
-import forge.util.storage.IStorage;
 import forge.util.Localizer;
+import forge.util.WordUtil;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.text.WordUtils;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
@@ -243,17 +242,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<>();
-        final IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
-        for (final PreconDeck preconDeck : preconDecks) {
+        for (final PreconDeck preconDeck : QuestController.getPrecons()) {
             if (QuestController.getPreconDeals(preconDeck).getMinWins() > 0) {
                 continue;
             }
             final String name = preconDeck.getName();
             cbxPreconDeck.addItem(name);
             String description = preconDeck.getDescription();
-            description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
-            preconDescriptions.put(name, description);
+            preconDescriptions.put(name, WordUtil.wordWrapAsHTML(description));
         }
 
         // The cbx needs strictly typed renderer

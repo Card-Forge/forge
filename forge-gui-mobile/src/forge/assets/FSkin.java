@@ -3,9 +3,9 @@ package forge.assets;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.util.WordUtil;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import org.apache.commons.lang3.text.WordUtils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -102,7 +102,7 @@ public class FSkin {
                     allSkins = new Array<>();
                     final Array<String> skinDirectoryNames = getSkinDirectoryNames();
                     for (final String skinDirectoryName : skinDirectoryNames) {
-                        allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
+                        allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
                     }
                     allSkins.sort();
                 }
