@@ -1,2 +1,5 @@
+- Prompting Stack Addition -
+There is now an option in desktop Forge that displays the visual popup window whenever a player casts a spell, activates or triggers an ability, etc. It is visually and functionally similar to the popup window present in Microprose's Shandalar game. There are three options for this toggle: never display the popup, always display the popup, or only display the popup for the opponent's actions and for any player's triggered abilities.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
