@@ -2,7 +2,10 @@ Name:Reveka, Wizard Savant
 ManaCost:2 U U
 Types:Legendary Creature Dwarf Wizard
 PT:0/1
-A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 2 damage to any target and doesn't untap during your next untap step.
-SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 2 damage to any target and doesn't untap during your next untap step.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Self | StaticAbilities$ DontUntap | Duration$ Permanent | ForgetOnMoved$ Battlefield | Triggers$ RemoveEffect | SVars$ ExileEffect
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | CantUntap$ True | Description$ EFFECTSOURCE don't untap during your next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveka_wizard_savant.jpg
 Oracle:{T}: Reveka, Wizard Savant deals 2 damage to any target and doesn't untap during your next untap step.
