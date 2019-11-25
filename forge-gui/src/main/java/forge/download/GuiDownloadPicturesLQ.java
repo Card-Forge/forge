@@ -65,7 +65,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
         final String setcode2 = StaticData.instance().getEditions().getCode2ByCode(c.getEdition());
         String modifier = !imageKey.contains(".full") ? ".fullborder" : "";
-        final String fullborderPath = ForgeConstants.CACHE_CARD_PICS_DIR + setcode2 + "\\" + TextUtil.fastReplace(imageKey,".full",".fullborder")  + modifier + ".jpg";
+        final String fullborderPath = ForgeConstants.CACHE_CARD_PICS_DIR + setcode2 + ForgeConstants.PATH_SEPARATOR + TextUtil.fastReplace(imageKey,".full",".fullborder")  + modifier + ".jpg";
         final File existingFB = new File (fullborderPath);
         final File existingFB2 = new File (TextUtil.fastReplace(fullborderPath, "1.fullborder", ".fullborder"));
 
