@@ -130,9 +130,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             // target needs to be a creature, controlled by the player which is attacked
             return !sa.getHostCard().isTapped() || (combat != null && combat.isAttacking(sa.getHostCard())
                     && card.getController().equals(combat.getDefenderPlayerByAttacker(sa.getHostCard())));
-        } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            return !ph.getPhase().isBefore(PhaseType.MAIN2) && !card.isUntapped() && ph.isPlayerTurn(ai)
-                    && Untap.canUntap(card);
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt by CARDNAME.")) {
             if (ph.isPlayerTurn(ai) && (!(CombatUtil.canBlock(card) || combat != null && combat.isBlocking(card))
@@ -511,8 +508,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         for (final String keyword : keywords) {
             // since most keywords are combat relevant check for those that are
             // not
-            if (keyword.endsWith("This card doesn't untap during your next untap step.")
-                    || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
+            if (keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
                 return true;
             }
         }
