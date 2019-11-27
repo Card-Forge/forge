@@ -1146,6 +1146,7 @@ public class AttachAi extends SpellAbilityAi {
         final List<String> keywords = new ArrayList<>();
         boolean grantingAbilities = false;
         boolean grantingExtraBlock = false;
+        boolean grantingCantUntap = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -1165,6 +1166,7 @@ public class AttachAi extends SpellAbilityAi {
 
                 grantingAbilities |= stabMap.containsKey("AddAbility");
                 grantingExtraBlock |= stabMap.containsKey("CanBlockAmount") || stabMap.containsKey("CanBlockAny");
+                grantingCantUntap |= stabMap.containsKey("CantUntap");
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
@@ -1197,6 +1199,7 @@ public class AttachAi extends SpellAbilityAi {
         if (totToughness + totPower < 4 && (!keywords.isEmpty() || grantingExtraBlock)) {
             final int pow = totPower;
             final boolean extraBlock = grantingExtraBlock;
+            final boolean cantUntap = grantingCantUntap;
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -1213,6 +1216,9 @@ public class AttachAi extends SpellAbilityAi {
                         return true;
                     }
                     if (extraBlock && CombatUtil.canBlock(c, true) && !c.canBlockAny()) {
+                        return true;
+                    }
+                    if (cantUntap && c.isTapped()) {
                         return true;
                     }
                     return false;
