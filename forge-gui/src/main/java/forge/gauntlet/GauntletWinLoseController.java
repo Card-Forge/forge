@@ -13,9 +13,11 @@ import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.Localizer;
 
 public abstract class GauntletWinLoseController {
-    private static final String SAVE_AND_QUIT = "Save and Quit";
+    private final Localizer localizer = Localizer.getInstance();
+    private static final String SAVE_AND_QUIT = Localizer.getInstance().getMessage("btnSaveQuit");
 
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
@@ -62,11 +64,11 @@ public abstract class GauntletWinLoseController {
                 // Gauntlet complete: Remove save file
                 if (gd.getCompleted() == lstDecks.size()) {
                     icon = FSkinProp.ICO_QUEST_COIN;
-                    message1 = "CONGRATULATIONS!";
-                    message2 = "You made it through the gauntlet!";
+                    message1 = localizer.getMessage("lblCongratulations");
+                    message2 = localizer.getMessage("lblGauntletTournament");
 
                     view.getBtnContinue().setVisible(false);
-                    view.getBtnQuit().setText("OK");
+                    view.getBtnQuit().setText(localizer.getMessage("lblOk"));
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
@@ -81,18 +83,18 @@ public abstract class GauntletWinLoseController {
                     gd.stamp();
                     GauntletIO.saveGauntlet(gd);
 
-                    view.getBtnContinue().setText("Next Round (" + (gd.getCompleted() + 1)
+                    view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (gd.getCompleted() + 1)
                             + "/" + len + ")");
                     view.getBtnContinue().setVisible(true);
                     view.getBtnContinue().setEnabled(true);
-                    view.getBtnQuit().setText("Save and Quit");
+                    view.getBtnQuit().setText(localizer.getMessage("btnSaveQuit"));
                 }
             }
             // Lose match case; stop gauntlet.
             else {
                 icon = FSkinProp.ICO_QUEST_HEART;
-                message1 = "DEFEATED!";
-                message2 = "You have failed to pass the gauntlet.";
+                message1 = localizer.getMessage("lblDefeated");
+                message2 = localizer.getMessage("lblFailedGauntlet");
 
                 view.getBtnContinue().setVisible(false);
 
