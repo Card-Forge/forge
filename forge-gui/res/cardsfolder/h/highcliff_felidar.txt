@@ -1,0 +1,12 @@
+Name:Highcliff Felidar
+ManaCost:5 W W
+Types:Creature Cat Beast
+PT:5/5
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBRepeat | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, choose a creature with the greatest power among creatures that player controls. Destroy those creatures.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBDestroy
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | RememberChosen$ True
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/highcliff_felidar.jpg
+Oracle:Vigilance\nWhen Highcliff Felidar enters the battlefield, for each opponent, choose a creature with the greatest power among creatures that player controls. Destroy those creatures.
