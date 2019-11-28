@@ -78,4 +78,3 @@ g_3_3_dinosaur_trample
 b_2_2_zombie
 r_5_5_dragon_flying
 g_2_2_wolf
-c_1_1_a_thopter_flying
