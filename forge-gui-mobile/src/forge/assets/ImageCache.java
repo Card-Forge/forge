@@ -233,6 +233,8 @@ public class ImageCache {
         CardView.CardStateView state = c.getCurrentState();
         if (state.getSetCode().contains("MPS_"))
             return true;
+        if (state.getSetCode().equalsIgnoreCase("UST"))
+            return true;
         return false;
     }
     public static boolean isExtendedArt(IPaperCard c) {
@@ -240,6 +242,8 @@ public class ImageCache {
             return false;
 
         if (c.getEdition().contains("MPS_"))
+            return true;
+        if (c.getEdition().equalsIgnoreCase("UST"))
             return true;
         return false;
     }
