@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/11/137.-ELD6.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Thanks to Charming Prince's Scry 2, you know that you have a Smitten Swordmaster on top of your library.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Blacklance Paragon;Marauder's Axe;Mask of Immolation;Mace of the Valiant
+humanlibrary=Smitten Swordmaster;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Syr Gwyn, Hero of Ashvale;Marauding Raptor;Charming Prince;Plains;Plains;Swamp;Swamp;Mountain;Mountain
+aibattlefield=Grumgully, the Generous;Tajic, Legion's Edge;Gruul Spellbreaker|Counters:P1P1=2
