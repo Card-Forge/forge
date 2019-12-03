@@ -3,9 +3,9 @@ ManaCost:U
 Types:Creature Spirit
 PT:2/2
 K:Defender
-T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, put a +1/+1 counter on CARDNAME
+T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_P1P1 | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has three or more +1/+1 counters on it, it can attack
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_P1P1 | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has three or more +1/+1 counters on it, it can attack as though it didn't have defender.
 DeckNeeds:Ability$Surveil
 DeckHas:Ability$Counters
 Oracle:Defender\nWhenever you surveil, put a +1/+1 counter on Thoughtbound Phantasm.\nAs long as Thoughtbound Phantasm has three or more +1/+1 counters on it, it can attack as though it didn't have defender.
