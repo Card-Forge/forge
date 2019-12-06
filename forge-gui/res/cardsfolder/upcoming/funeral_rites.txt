@@ -1,4 +1,4 @@
-Name: Funeral Rites
+Name:Funeral Rites
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | SpellDescription$ You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard. | SubAbility$ DB
