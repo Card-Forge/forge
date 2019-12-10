@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/12/139.-ELD8.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has many cards in their library, cards drawn by either player are irrelevant, both graveyards are empty, and you have 20 life. Your opponent has a Plummet in hand and can cast it. The solution must satisfy all possible opponent choices. You previously turned your Hypnotic Sprite into an Elk.
+[state]
+humanlife=20
+ailife=2
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Kraul Harpooner;Lovestruck Beast;Lucky Clover;Brazen Borrower;Rosethorn Acolyte
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Hypnotic Sprite|Id:1;Oko, Thief of Crowns|Counters:LOYALTY=5;Ob Nixilis, the Hate-Twisted|Counters:LOYALTY=1;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+aihand=Plummet
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Midnight Reaper;Teyo's Lightshield|Counters:P1P1=1;Teyo's Lightshield|Counters:P1P1=1;Teyo's Lightshield|Counters:P1P1=1;Teyo's Lightshield|Counters:P1P1=1;Savage Gorger|Counters:P1P1=4
+humanprecast=Oko, Thief of Crowns:2->1
+aipersistentmana=C G
