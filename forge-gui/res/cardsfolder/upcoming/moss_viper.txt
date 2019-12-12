@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Snake
 PT:1/1
 K:Deathtouch
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moss_viper.jpg
 Oracle:Deathtouch

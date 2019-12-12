@@ -10,5 +10,4 @@ SVar:DBEffect:DB$Effect | RememberObjects$ Remembered | StaticAbilities$ Play | 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup2
 SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card until you exile another card with CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_rise.jpg
 Oracle:At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library. You may play that card until you exile another card with Furious Rise.

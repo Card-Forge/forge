@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | References$ X, Y | SpellDescription$ Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one color instead.
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ilysian_caryatid.jpg
 Oracle:{T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one color instead.

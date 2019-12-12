@@ -6,5 +6,4 @@ SVar:DB:DB$LoseLife | LifeAmount$ 2 | SubAbility$ TrigMill
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_rites.jpg
 Oracle:You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard.

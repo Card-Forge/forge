@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDiscard:DB$Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 2 | Mode$ TgtChoose
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ Enchanted creature has lifelink.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aspect_of_lamprey.jpg
 Oracle:Enchant creature you control\nWhen Aspect of Lamprey enters the battlefield, target opponent discards two cards.\nEnchanted creature has lifelink.

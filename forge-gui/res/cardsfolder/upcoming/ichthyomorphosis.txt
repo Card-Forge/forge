@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | SetColor$ Blue | RemoveAllAbilities$ True | AddType$ Creature & Frog | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ichthyomorphosis.jpg
 Oracle:Enchant creature\nEnchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
