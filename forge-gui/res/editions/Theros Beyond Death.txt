@@ -1,0 +1,59 @@
+[metadata]
+Code=THB
+Date=2020-01-24
+Name=Theros: Beyond Death
+MciCode=thb
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+4 U Banishing Light
+7 U Commanding Presence
+9 U Daxos, Blessed by the Sun
+23 C Indomitable Will
+26 C Karametra’s Blessing
+28 C Leonin of the Lost Pride
+42 U Alirios, Enraptured
+43 R Ashiok's Erasure
+48 C Eidolon of Philosophy
+51 C Ichthyomorphosis
+102 U Inevitable End
+126 C Arena Trickster
+136 U Furious Rise
+138 U Heroes of the Revel
+140 C Incendiary Oracle
+141 C Infuriate
+142 C Iroas’s Blessing
+143 C Irreverent Revelers
+164 C Aspect of Lamprey
+174 C Ilysian Caryatid
+176 U Klothys's Design
+208 M Ashiok, Nightmare Muse
+219 U Hero of the Nyxborn
+243 R Labyrinth of Skophos
+250 L Plains
+251 L Island
+252 L Swamp
+253 L Mountain
+254 L Forest
+269 M Athreos, Shroud-Veiled
+270 M Elspeth, Undaunted Hero
+274 M Ashiok, Sculptor of Fears
+278 L Plains
+279 L Plains
+280 L Island
+281 L Island
+282 L Swamp
+283 L Swamp
+284 L Mountain
+285 L Mountain
+286 L Forest
+287 L Forest
+
+
+[tokens]
+r_2_2_satyr_noblock
+u_3_2_reflection
+ub_2_3_nightmare_mill
+w_1_1_human_soldier
