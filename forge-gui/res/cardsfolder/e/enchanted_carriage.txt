@@ -2,7 +2,7 @@ Name:Enchanted Carriage
 ManaCost:5
 Types:Artifact Vehicle
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Goblin creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Mouse creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_mouse | TokenOwner$ You | LegacyImage$ w 1 1 mouse eld
 K:Crew:2
 DeckHas:Ability$Token
