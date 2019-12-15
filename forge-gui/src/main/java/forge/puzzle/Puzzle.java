@@ -36,7 +36,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
     private void loadMetaData(List<String> metadataLines) {
         for(String line : metadataLines) {
-            String[] split = line.split(":");
+            String[] split = line.split(":", 2);
             if ("Name".equalsIgnoreCase(split[0])) {
                 this.name = split[1].trim();
             } else if ("Goal".equalsIgnoreCase(split[0])) {
