@@ -31,6 +31,7 @@ import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -76,14 +77,15 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         // could add "Reset Blockers" button
+        Localizer localizer = Localizer.getInstance();
         getController().getGui().updateButtons(getOwner(), true, false, true);
 
         if (currentAttacker == null) {
-            showMessage("Select another attacker to declare blockers for.");
+            showMessage(localizer.getMessage("lblSelectBlockTarget"));
         }
         else {
-            String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
-            String message = "Select creatures to block " + attackerName + " or select another attacker to declare blockers for.";
+            String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
+            String message = localizer.getMessage("lblSelectBlocker") + attackerName + localizer.getMessage("lblOrSelectBlockTarget");
             showMessage(message);
         }
 
