@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ChangeZone | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell | RememberChanged$ True
 SVar:TrigBounce:DB$ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashioks_erasure.jpg
 Oracle:Flash\nWhen Ashiok's Erasure enters the battlefield, exile target spell.\nYour opponents can't cast spells with the same name as the exiled card.\nWhen Ashiok's Erasure leaves the battlefield, return the exiled card to its owner's hand.

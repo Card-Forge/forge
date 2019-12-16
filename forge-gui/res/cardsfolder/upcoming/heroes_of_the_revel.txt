@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_satyr_noblock | TokenOwner$ You | LegacyImage$ r 2 2 satyr noblock thb
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+0 until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_of_the_revel.jpg
 Oracle:When Heroes of the Revel enters the battlefield, create a 2/2 red Satyr creature token with "This creature can't block."\nWhenever you cast a spell that targets Heroes of the Revel, creatures you control get +1/+0 until end of turn.
