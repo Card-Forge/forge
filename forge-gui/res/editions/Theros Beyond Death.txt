@@ -18,6 +18,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 43 R Ashiok's Erasure
 48 C Eidolon of Philosophy
 51 C Ichthyomorphosis
+56 U Medomai's Prophecy
 102 U Inevitable End
 126 C Arena Trickster
 136 U Furious Rise
