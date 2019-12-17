@@ -33,6 +33,7 @@ import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +85,14 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     private void updatePrompt() {
-        String alphaLabel = canCallBackAttackers() ? "Call Back" : "Alpha Strike";
-        getController().getGui().updateButtons(getOwner(), "OK", alphaLabel, true, true, true);
+        Localizer localizer = Localizer.getInstance();
+        String alphaLabel = canCallBackAttackers() ? localizer.getMessage("lblCallBack") : localizer.getMessage("lblAlphaStrike");
+        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), alphaLabel, true, true, true);
     }
 
     private void disablePrompt() {
-        getController().getGui().updateButtons(getOwner(), "Disabled", "Disabled", false, false, false);
+        Localizer localizer = Localizer.getInstance();
+        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblDisabled"), localizer.getMessage("lblDisabled"), false, false, false);
     }
 
     @Override
@@ -323,9 +326,10 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     private void updateMessage() {
-        String message = "Select creatures to attack " + currentDefender + " or select player/planeswalker you wish to attack.";
+        Localizer localizer = Localizer.getInstance();
+        String message = localizer.getMessage("lblSelectAttackCreatures") + currentDefender + localizer.getMessage("lblSelectAttackTarget");
         if (potentialBanding) {
-            message += " To attack as a band, select an attacking creature to activate its 'band' then select another to join it.";
+            message += localizer.getMessage("lblSelectBandingTarget");
         }
         showMessage(message);
 
