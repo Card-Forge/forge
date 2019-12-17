@@ -15,15 +15,19 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 25 C Indomitable Will
 26 C Karametra's Blessing
 28 C Leonin of the Lost Pride
+29 C Nyxborn Courser
 42 U Alirios, Enraptured
 43 R Ashiok's Erasure
 48 C Eidolon of Philosophy
 51 C Ichthyomorphosis
 54 C Memory Drain
-56 U Medomai's Prophecy
+53 U Medomai's Prophecy
+56 C Naiad of Hidden Coves
+57 C Nyxborn Seaguard
 102 U Inevitable End
 104 U Minion's Return
 106 C Mire's Grasp
+109 C Nyxborn Marauder
 126 C Arena Trickster
 136 U Furious Rise
 138 U Heroes of the Revel
@@ -31,9 +35,12 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 141 C Infuriate
 142 C Iroas's Blessing
 143 C Irreverent Revelers
+144 C Nyxborn Brute
 164 C Aspect of Lamprey
 174 C Ilysian Caryatid
 176 U Klothys's Design
+187 C Nylea's Huntmaster
+191 C Nyxborn Colossus
 208 M Ashiok, Nightmare Muse
 219 U Hero of the Nyxborn
 243 R Labyrinth of Skophos
