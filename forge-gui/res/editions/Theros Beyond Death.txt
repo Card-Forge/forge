@@ -24,10 +24,12 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 53 U Medomai's Prophecy
 56 C Naiad of Hidden Coves
 57 C Nyxborn Seaguard
+58 C Omen of the Sea
 102 U Inevitable End
 104 U Minion's Return
 106 C Mire's Grasp
 109 C Nyxborn Marauder
+110 C Omen of the Dead
 126 C Arena Trickster
 136 U Furious Rise
 138 U Heroes of the Revel
@@ -41,6 +43,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 176 U Klothys's Design
 187 C Nylea's Huntmaster
 191 C Nyxborn Colossus
+192 C Omen of the Hunt
 208 M Ashiok, Nightmare Muse
 219 U Hero of the Nyxborn
 243 R Labyrinth of Skophos
@@ -62,6 +65,16 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 285 L Mountain
 286 L Forest
 287 L Forest
+288 R Grasping Giant
+289 R Victory’s Envoy
+290 R Sphinx Mindbreaker
+291 R Serpent of Yawning Depths
+292 R Demon of Loathing
+293 R Underworld Sentinel
+294 R Deathbellow War Cry
+295 R Terror of Mount Velus
+296 R Ironscale Hydra
+297 R Treeshaker Chimera
 
 
 [tokens]
