@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/12/140.-ELD9-1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has a Hypnotic Sprite in their hand. Assume they have {2}{U}{U}{U} available. You have not yet played a land this turn. The solution must satisfy all possible opponent's choices. Your opponent's Kenrith, the Returned King is a 3/3 Elk. Both graveyards start empty. Thicket Crasher currently has -2/-0 from Mu Yanling's first loyalty ability.
+[state]
+humanlife=20
+ailife=13
+humanlandsplayed=0
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Storm the Citadel;Claim the Firstborn;Embercleave;Searing Barrage;Tuinvale Treefolk;Giant Opportunity;Gingerbread Cabin;Bond of Passion
+humanbattlefield=Sunder Shaman|Tapped;Thicket Crasher|Id:2;Lucky Clover;Cloudkin Seer;Oko, Thief of Crowns|Counters:LOYALTY=5;Fresh-Faced Recruit;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+aihand=Hypnotic Sprite
+aibattlefield=Mu Yanling, Sky Dancer|Counters:LOYALTY=4;Vivien, Champion of the Wilds|Counters:LOYALTY=4;Hypnotic Sprite;Kenrith, the Returned King|Id:1;Sphinx of the Guildpact;Pattern Matcher
+aipersistentmana=C C U U U
+humanprecast=Oko, Thief of Crowns:2->1
+aiprecast=Mu Yanling, Sky Dancer:1->2
