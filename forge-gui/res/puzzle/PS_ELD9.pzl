@@ -16,6 +16,6 @@ humanhand=Storm the Citadel;Claim the Firstborn;Embercleave;Searing Barrage;Tuin
 humanbattlefield=Sunder Shaman|Tapped;Thicket Crasher|Id:2;Lucky Clover;Cloudkin Seer;Oko, Thief of Crowns|Counters:LOYALTY=5;Fresh-Faced Recruit;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
 aihand=Hypnotic Sprite
 aibattlefield=Mu Yanling, Sky Dancer|Counters:LOYALTY=4;Vivien, Champion of the Wilds|Counters:LOYALTY=4;Hypnotic Sprite;Kenrith, the Returned King|Id:1;Sphinx of the Guildpact;Pattern Matcher
-aipersistentmana=C C U U U U
+aipersistentmana=C C U U U
 humanprecast=Oko, Thief of Crowns:2->1
 aiprecast=Mu Yanling, Sky Dancer:1->2
