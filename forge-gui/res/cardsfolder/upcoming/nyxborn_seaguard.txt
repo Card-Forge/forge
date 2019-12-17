@@ -1,0 +1,5 @@
+Name:Nyxborn Seaguard
+ManaCost:2 U U
+Types:Enchantment Creature Merfolk Soldier
+PT:2/5
+Oracle:
