@@ -1615,6 +1615,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isDash();
+        } else if (property.startsWith("escaped")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isEscape();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
