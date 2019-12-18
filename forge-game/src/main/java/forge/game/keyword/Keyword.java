@@ -55,6 +55,7 @@ public enum Keyword {
     ENTWINE(KeywordWithCost.class, true, "You may choose all modes of this spell instead of just one. If you do, you pay an additional %s."),
     EPIC(SimpleKeyword.class, true, "For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has any targets, you may choose new targets for the copy."),
     EQUIP(Equip.class, false, "%s: Attach to target %s you control. Equip only as a sorcery."),
+    ESCAPE(KeywordWithCost.class, false, "You may cast this card from your graveyard for its escape cost."),
     ESCALATE(KeywordWithCost.class, true, "Pay this cost for each mode chosen beyond the first."),
     ETERNALIZE(KeywordWithCost.class, false, "Create a token that's a copy of this card, except it's black, it's 4/4, it has no mana cost, and it's a Zombie in addition to its other types. Eternalize only as a sorcery."),
     EVOKE(KeywordWithCost.class, false, "You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield."),

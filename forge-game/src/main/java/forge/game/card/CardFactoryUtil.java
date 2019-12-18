@@ -3938,6 +3938,30 @@ public class CardFactoryUtil {
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Escape")) {
+            final String[] k = keyword.split(":");
+            final Cost escapeCost = new Cost(k[1], false);
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+
+            newSA.getMapParams().put("PrecostDesc", "Escape—");
+            newSA.getMapParams().put("CostDesc", ManaCostParser.parse(k[1]));
+
+            // makes new SpellDescription
+            final StringBuilder desc = new StringBuilder();
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(sa.getStackDescription()).append(" (Escaped)");
+            newSA.setStackDescription(sbStack.toString());
+            newSA.setBasicSpell(false);
+            newSA.setEscape(true);
+            newSA.setIntrinsic(intrinsic);
+            newSA.getRestrictions().setZone(ZoneType.Graveyard);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Eternalize")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];

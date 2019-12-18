@@ -106,6 +106,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean aftermath = false;
     private boolean cycling = false;
     private boolean dash = false;
+    private boolean escape = false;
     private boolean evoke = false;
     private boolean prowl = false;
     private boolean surge = false;
@@ -1169,6 +1170,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setDash(final boolean isDash) {
         dash = isDash;
+    }
+
+    public final boolean isEscape() {
+        return escape;
+    }
+
+    public final void setEscape(final boolean isEscape) {
+        escape = isEscape;
     }
 
     public final boolean isEvoke() {
