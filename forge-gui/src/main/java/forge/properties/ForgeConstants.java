@@ -214,6 +214,7 @@ public final class ForgeConstants {
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR       = USER_DIR + "games" + PATH_SEPARATOR;
     public static final String USER_FORMATS_DIR     = USER_DIR + "customformats" + PATH_SEPARATOR;
+    public static final String USER_PUZZLE_DIR      = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String ACHIEVEMENTS_DIR     = USER_DIR + "achievements" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
