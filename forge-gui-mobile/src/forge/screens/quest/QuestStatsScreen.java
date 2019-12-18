@@ -22,9 +22,11 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class QuestStatsScreen extends FScreen {
     private static final float PADDING = FOptionPane.PADDING;
+    private static final Localizer localizer = Localizer.getInstance();
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -50,8 +52,8 @@ public class QuestStatsScreen extends FScreen {
     private final FLabel lblWorld = scroller.add(new StatLabel(FSkinImage.QUEST_MAP));
     private final FComboBox<String> cbxPet = scroller.add(new FComboBox<>());
     private final FComboBox<String> cbxMatchLength  = scroller.add(new FComboBox<>());
-    private final FCheckBox cbPlant = scroller.add(new FCheckBox("Summon Plant"));
-    private final FLabel lblZep = scroller.add(new FLabel.Builder().text("Launch Zeppelin").icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
+    private final FCheckBox cbPlant = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("cbSummonPlant")));
+    private final FLabel lblZep = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("cbLaunchZeppelin")).icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
 
     public FLabel getLblWins() {
         return lblWins;
@@ -85,7 +87,7 @@ public class QuestStatsScreen extends FScreen {
     }
 
     public QuestStatsScreen() {
-        super("Quest Statistics", QuestMenu.getMenu());
+        super(localizer.getMessage("lblQuestStatistics"), QuestMenu.getMenu());
         lblZep.setHeight(Utils.scale(60));
 
         cbxPet.setDropDownChangeHandler(new FEventHandler() {
@@ -114,14 +116,14 @@ public class QuestStatsScreen extends FScreen {
         cbPlant.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? "Plant" : null);
+                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? localizer.getMessage("lblPlant") : null);
                 FModel.getQuest().save();
             }
         });
         lblZep.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (!QuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
+                if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblLaunchaZeppelin"))) {
                     return;
                 }
                 FModel.getQuest().getAchievements().setCurrentChallenges(null);
@@ -132,7 +134,7 @@ public class QuestStatsScreen extends FScreen {
     }
 
     void addTournamentResultsLabels(QuestTournamentsScreen tournamentsScreen) {
-        scroller.add(new FLabel.Builder().font(FSkinFont.get(16)).text("Tournament Results").build());
+        scroller.add(new FLabel.Builder().font(FSkinFont.get(16)).text(localizer.getMessage("lblTournamentResults")).build());
         scroller.add(tournamentsScreen.getLblFirst());
         scroller.add(tournamentsScreen.getLblSecond());
         scroller.add(tournamentsScreen.getLblThird());
@@ -146,7 +148,7 @@ public class QuestStatsScreen extends FScreen {
 
     public void update() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Statistics\n(" + FModel.getQuest().getRank() + ")");
+        setHeaderCaption(FModel.getQuest().getName() + " - " + localizer.getMessage("lblStatistics") + "\n(" + FModel.getQuest().getRank() + ")");
         scroller.revalidate(); //revalidate to account for changes in label visibility
     }
 
