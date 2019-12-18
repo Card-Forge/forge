@@ -156,7 +156,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 }
                 caption += " " + count + " " + itemType + "s";
             }
-            caption += " " + localizer.getMessage("lblForCR") + " " + total;
+            caption += " for {CR} " + total;
         }
         btnBuySellMultiple.setText(caption);
     }
