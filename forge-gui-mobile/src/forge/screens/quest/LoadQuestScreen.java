@@ -50,7 +50,7 @@ public class LoadQuestScreen extends LaunchScreen {
     private final Localizer localizer = Localizer.getInstance();
     private final FTextArea lblOldQuests = add(new FTextArea(false, Localizer.getInstance().getMessage("lblLoadingExistingQuests")));
     private final QuestFileLister lstQuests = add(new QuestFileLister());
-    private final FButton btnNewQuest = add(new FButton(Localizer.getInstance().getMessage("lblNew")));
+    private final FButton btnNewQuest = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
     private final FButton btnRenameQuest = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
     private final FButton btnDeleteQuest = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
 
