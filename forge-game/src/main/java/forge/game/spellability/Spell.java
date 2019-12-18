@@ -184,11 +184,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
-        return checkOtherRestrictions();
+        return checkOtherRestrictions(card);
     } // canPlay()
     
-    public boolean checkOtherRestrictions() {
-        final Card source = this.getHostCard();
+    public boolean checkOtherRestrictions(final Card source) {
         Player activator = getActivatingPlayer();
         final Game game = activator.getGame();
         // CantBeCast static abilities
