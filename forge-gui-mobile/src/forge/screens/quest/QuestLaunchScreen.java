@@ -6,6 +6,7 @@ import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 public abstract class QuestLaunchScreen extends LaunchScreen {
     protected static final float PADDING = FOptionPane.PADDING;
@@ -28,7 +29,7 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
-                            LoadingOverlay.show("Loading new game...", new Runnable() {
+                            LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewGame"), new Runnable() {
                                 @Override
                                 public void run() {
                                     QuestUtil.finishStartingGame();
