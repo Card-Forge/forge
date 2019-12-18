@@ -14,6 +14,7 @@ public class PuzzleIO {
 
     public static final String TXF_PROMPT = "[New Puzzle]";
     public static final String SUFFIX_DATA = ".pzl";
+    public static final String SUFFIX_COMPLETE = ".complete";
 
     public static ArrayList<Puzzle> loadPuzzles() {
         String[] pList;
@@ -33,13 +34,18 @@ public class PuzzleIO {
         for (final String element : pList) {
             if (element.endsWith(SUFFIX_DATA)) {
                 final List<String> pfData = FileUtil.readFile(ForgeConstants.PUZZLE_DIR + element);
-                puzzles.add(new Puzzle(parsePuzzleSections(pfData)));
+
+                String filename = element.replace(SUFFIX_DATA, "");
+                boolean completed = FileUtil.doesFileExist(ForgeConstants.USER_PUZZLE_DIR + element.replace(SUFFIX_DATA, SUFFIX_COMPLETE));
+
+                // Pass file name into Puzzle so it can save the completed name to match
+                puzzles.add(new Puzzle(parsePuzzleSections(pfData), filename, completed));
             }
         }
         return puzzles;
     }
 
-    public static final Map<String, List<String>> parsePuzzleSections(List<String> pfData) {
+    public static Map<String, List<String>> parsePuzzleSections(List<String> pfData) {
         return FileSection.parseSections(pfData);
     }
 
