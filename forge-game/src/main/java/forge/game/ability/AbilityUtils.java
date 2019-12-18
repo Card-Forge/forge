@@ -1708,7 +1708,7 @@ public class AbilityUtils {
             if (res.checkTimingRestrictions(tgtCard, newSA)
                     // still need to check the other restrictions like Aftermath
                     && res.checkOtherRestrictions(tgtCard, newSA, controller)
-                    && newSA.checkOtherRestrictions()) {
+                    && newSA.checkOtherRestrictions(tgtCard)) {
                 sas.add(newSA);
             }
         }
