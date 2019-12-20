@@ -29,6 +29,7 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -282,19 +283,19 @@ public class HumanPlay {
         String orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
         if (!orString.isEmpty()) {
             if (sourceAbility.hasParam("UnlessSwitched")) {
-                orString = TextUtil.concatWithSpace(" (if you do:", orString, ")");
+                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString, ")");
             } else {
-                orString = TextUtil.concatWithSpace(" (or:", orString, ")");
+                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
             }
         }
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
-            return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString, sourceAbility);
+            return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
             if (((CostPartMana) costPart).getManaToPay().isZero()) {
-                return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString, sourceAbility);
+                return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
             }
         }
 
@@ -311,7 +312,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, "Do you want to pay " + amount + " life?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPay") + " " + amount + " " + Localizer.getInstance().getMessage("lblLife") + "?" + orString, sourceAbility)) {
                     return false;
                 }
 
@@ -331,9 +332,9 @@ public class HumanPlay {
                     return false;
                 }
 
-                StringBuilder sb = new StringBuilder("Do you want to ");
-                sb.append(res.contains(p) ? "" : "let that player ");
-                sb.append("draw ").append(Lang.nounWithAmount(amount, " card")).append("?").append(orString);
+                StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblDoyouWantTo") + " ");
+                sb.append(res.contains(p) ? "" : Localizer.getInstance().getMessage("lblLetThatPlayer") + " ");
+                sb.append(Localizer.getInstance().getMessage("lblDraw") + " ").append(Lang.nounWithAmount(amount, " " + Localizer.getInstance().getMessage("lblCard"))).append("?").append(orString);
 
                 if (!p.getController().confirmPayment(part, sb.toString(), sourceAbility)) {
                     return false;
@@ -355,7 +356,7 @@ public class HumanPlay {
                 String desc = part.toString();
                 desc = desc.substring(0, 1).toLowerCase() + desc.substring(1);
 
-                if (!p.getController().confirmPayment(part, "Do you want to "+ desc + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoyouWantTo") + " " + desc + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 PaymentDecision pd = part.accept(hcd);
@@ -369,7 +370,7 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final CardCollectionView list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
-                if (!p.getController().confirmPayment(part, "Do you want to mill " + amount + " card" + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lbllblDoYouWantMill") + " " + amount + " " + Localizer.getInstance().getMessage("lblCard") + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
@@ -377,7 +378,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.getController().confirmPayment(part, "Do you want to flip " + amount + " coin" + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantFlip") + " " + amount + " " + Localizer.getInstance().getMessage("lblCoin") + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 final int n = FlipCoinEffect.getFilpMultiplier(p);
@@ -411,7 +412,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemove") + " " + Lang.nounWithAmount(amount, counterType.getName() + " " + Localizer.getInstance().getMessage("lblCounterOfPointer")) + " " + Localizer.getInstance().getMessage("lblFrom") + " " + source + "?",sourceAbility)) {
                         return false;
                     }
                 }
@@ -431,7 +432,7 @@ public class HumanPlay {
                 if (allCounters < amount) { return false; }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveCounters") + " " + part.getDescriptiveType() + " ?",sourceAbility)) {
                         return false;
                     }
                 }
@@ -447,7 +448,7 @@ public class HumanPlay {
                     });
                     if (list.isEmpty()) { return false; }
                     InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
-                    inp.setMessage("Select a card to remove a counter");
+                    inp.setMessage(Localizer.getInstance().getMessage("lblSelectRemoveCounterCard"));
                     inp.setCancelAllowed(true);
                     inp.showAndWait();
                     if (inp.hasCancelled()) {
@@ -462,7 +463,7 @@ public class HumanPlay {
                         }
                     }
                     if (typeChoices.size() > 1) {
-                        String cprompt = "Select type counters to remove";
+                        String cprompt = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
                         counterType = controller.getGui().one(cprompt, typeChoices);
                     }
                     else {
@@ -477,7 +478,7 @@ public class HumanPlay {
 
                 ZoneType from = ZoneType.Graveyard;
                 if ("All".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?", sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileAllCardYouGraveyard"), sourceAbility)) {
                         return false;
                     }
 
@@ -491,8 +492,8 @@ public class HumanPlay {
                         return false;
                     }
                     if (from == ZoneType.Library) {
-                        if (!p.getController().confirmPayment(part, "Do you want to exile " + nNeeded +
-                                " card" + (nNeeded == 1 ? "" : "s") + " from your library?", sourceAbility)) {
+                        if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExile") + " " + nNeeded +
+                                " " + Localizer.getInstance().getMessage("lblCard") + (nNeeded == 1 ? "" : "s") + " " + Localizer.getInstance().getMessage("lblFromYourLibrary"), sourceAbility)) {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
@@ -501,7 +502,7 @@ public class HumanPlay {
                         // replace this with input
                         CardCollection newList = new CardCollection();
                         for (int i = 0; i < nNeeded; i++) {
-                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
+                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFrom") + " " + from, CardView.getCollection(list)));
                             if (c == null) {
                                 return false;
                             }
@@ -537,7 +538,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(TextUtil.concatNoSpace("Put cards from whose ", from.toString(), "?"), PlayerView.getCollection(payableZone)));
+                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblPutCardFromWhose") + " ", from.toString(), "?"), PlayerView.getCollection(payableZone)));
                     if (chosen == null) {
                         return false;
                     }
@@ -549,7 +550,7 @@ public class HumanPlay {
                             return false;
                         }
 
-                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Put cards to Library", CardView.getCollection(typeList)));
+                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardToLibrary"), CardView.getCollection(typeList)));
 
                         if (c != null) {
                             typeList.remove(c);
@@ -561,7 +562,7 @@ public class HumanPlay {
                     }
                 }
                 else { // Tainted Specter, Gurzigost, etc.
-                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
+                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
                     if (!hasPaid) {
                         return false;
                     }
@@ -578,18 +579,18 @@ public class HumanPlay {
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
                 CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
                 if ("Hand".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, "Do you want to discard your hand?", sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), sourceAbility)) {
                         return false;
                     }
 
@@ -597,21 +598,21 @@ public class HumanPlay {
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
-                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
+                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
             }
             else if (part instanceof CostReveal) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
@@ -628,7 +629,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpend") + " " + Lang.nounWithAmount(amount, counterType.getName() + " " + Localizer.getInstance().getMessage("lblCounterOfPointer")) + "?",sourceAbility)) {
                         return false;
                     }
                 }
@@ -658,7 +659,7 @@ public class HumanPlay {
         }
 
         if (prompt == null) {
-            String promptCurrent = current == null ? "" : "Current Card: " + current;
+            String promptCurrent = current == null ? "" : Localizer.getInstance().getMessage("lblCurrentCard") + ": " + current;
             prompt = source + "\n" + promptCurrent;
         }
 
@@ -674,7 +675,7 @@ public class HumanPlay {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
-        inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectOfCardsTo") + " %d " + cpl.getDescriptiveType() + " " + Localizer.getInstance().getMessage("lblCardsTo") + " " + actionName);
         inp.setCancelAllowed(true);
 
         inp.showAndWait();
