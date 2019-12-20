@@ -17,9 +17,12 @@
  */
 package forge.util;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -56,32 +59,38 @@ public class FileSection {
     protected FileSection(Map<String, String> lines0) {
         lines = lines0;
     }
-    
-    /**
-     * Parses the.
-     *
-     * @param line the line
-     * @param kvSeparator the kv separator
-     * @param pairSeparator the pair separator
-     * @return the file section
-     */
-    public static FileSection parse(final String line, final String kvSeparator, final String pairSeparator) {
-        Map<String, String> map = parseToMap(line, kvSeparator, pairSeparator);
-        return new FileSection(map);
-    }
-    
-    public static Map<String, String> parseToMap(final String line, final String kvSeparator, final String pairSeparator) {
-        Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        if (!StringUtils.isEmpty(line)) {
-            final String[] pairs = line.split(Pattern.quote(pairSeparator));
-            final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
-    
-            for (final String dd : pairs) {
-                final String[] v = splitter.split(dd, 2);
-                result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
-            }
+
+    public static final Pattern DOLLAR_SIGN_KV_SEPARATOR = Pattern.compile(Pattern.quote("$"));
+    public static final Pattern ARROW_KV_SEPARATOR = Pattern.compile(Pattern.quote("->"));
+    public static final Pattern EQUALS_KV_SEPARATOR = Pattern.compile(Pattern.quote("="));
+    public static final Pattern COLON_KV_SEPARATOR = Pattern.compile(Pattern.quote(":"));
+
+    private static final String BAR_PAIR_SPLITTER = Pattern.quote("|");
+
+    private static Table<String, Pattern, Map<String, String>> parseToMapCache = HashBasedTable.create();
+
+    public static Map<String, String> parseToMap(final String line, final Pattern kvSeparator) {
+        Map<String, String> result = parseToMapCache.get(line, kvSeparator);
+        if (result != null) {
+            return result;
         }
+        result = parseToMapImpl(line, kvSeparator);
+        parseToMapCache.put(line, kvSeparator, result);
         return result;
+    }
+
+    private static Map<String, String> parseToMapImpl(final String line, final Pattern kvSeparator) {
+        if (StringUtils.isEmpty(line)) {
+            return Collections.emptyMap();
+        }
+
+        final Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        final String[] pairs = line.split(BAR_PAIR_SPLITTER);
+        for (final String dd : pairs) {
+            final String[] v = kvSeparator.split(dd, 2);
+            result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
+        }
+        return Collections.unmodifiableMap(result);
     }
 
     /**
@@ -91,11 +100,10 @@ public class FileSection {
      * @param kvSeparator the kv separator
      * @return the file section
      */
-    public static FileSection parse(final Iterable<String> lines, final String kvSeparator) {
+    public static FileSection parse(final Iterable<String> lines, final Pattern kvSeparator) {
         final FileSection result = new FileSection();
-        final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         for (final String dd : lines) {
-            final String[] v = splitter.split(dd, 2);
+            final String[] v = kvSeparator.split(dd, 2);
             result.lines.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
         }
 
