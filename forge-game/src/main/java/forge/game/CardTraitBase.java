@@ -73,7 +73,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     }
 
     public final String getParamOrDefault(String key, String defaultValue) {
-        return hasParam(key) ? getParam(key) : defaultValue;
+        String param = mapParams.get(key);
+        return param != null ? param : defaultValue;
     }
 
     public String getParam(String key) {
