@@ -303,7 +303,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 tokenNormalized
             );
 
-            FileSection section = FileSection.parse(contents.get("metadata"), "=");
+            FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
             res.code  = section.get("code");

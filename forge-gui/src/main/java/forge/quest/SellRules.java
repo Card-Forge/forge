@@ -43,7 +43,7 @@ public class SellRules {
             return;
         }
 
-        FileSection section = FileSection.parse(questShop, "=");
+        FileSection section = FileSection.parse(questShop, FileSection.EQUALS_KV_SEPARATOR);
         minWins = section.getInt("WinsToUnlock");
         cost = section.getInt("Credits", 250);
         maxDifficulty = section.getInt("MaxDifficulty", 5);

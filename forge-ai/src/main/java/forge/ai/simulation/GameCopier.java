@@ -58,7 +58,11 @@ public class GameCopier {
     public Game makeCopy() {
         return makeCopy(null);
     }
+
+    static int copies;
+    static double totalTime;
     public Game makeCopy(PhaseType advanceToPhase) {
+        long t = System.currentTimeMillis();
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();
         for (RegisteredPlayer p : origPlayers) {
@@ -146,7 +150,14 @@ public class GameCopier {
         if (advanceToPhase != null) {
             newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase);
         }
-        
+
+        totalTime += (System.currentTimeMillis()-t) * 1000;
+        if ((copies++ % 100) == 0) {
+            System.out.println("Time per copy: " + totalTime/copies);
+            if (copies >= 10000) {
+                System.exit(-1);
+            }
+        }
         return newGame;
     }
 
