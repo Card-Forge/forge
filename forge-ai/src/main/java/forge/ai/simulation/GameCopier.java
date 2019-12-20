@@ -58,7 +58,6 @@ public class GameCopier {
     public Game makeCopy() {
         return makeCopy(null);
     }
-
     public Game makeCopy(PhaseType advanceToPhase) {
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();
@@ -147,7 +146,7 @@ public class GameCopier {
         if (advanceToPhase != null) {
             newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase);
         }
-
+        
         return newGame;
     }
 
