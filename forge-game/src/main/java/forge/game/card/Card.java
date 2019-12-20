@@ -1983,8 +1983,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean isNonAura = !type.hasSubtype("Aura");
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
-            // only add abilities not Spell portions of cards
-            if (sa == null || sa.isSecondary() || !state.getType().isPermanent()) {
+            // This code block is not shared by instants or sorceries. We don't need to check for permanence.
+            if (sa == null || sa.isSecondary()) {
                 continue;
             }
 
@@ -4321,8 +4321,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * use it only for real keywords and not with hidden ones
      *
-     * @param Keyword k
-     * @param CardState state
      * @return Int
      */
     public final int getKeywordMagnitude(final Keyword k, CardState state) {
