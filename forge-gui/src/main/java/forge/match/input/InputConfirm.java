@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
+import forge.util.Localizer;
 
  /**
   * <p>
@@ -49,7 +50,7 @@ public class InputConfirm extends InputSyncronizedBase {
     private CardView card;
 
     // simple interface to hide ugliness deciding how to confirm
-    protected static ImmutableList<String> defaultOptions = ImmutableList.of("Yes", "No");
+    protected static ImmutableList<String> defaultOptions = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message) {
         return InputConfirm.confirm(controller, card, message, true, defaultOptions);
     }
@@ -86,7 +87,7 @@ public class InputConfirm extends InputSyncronizedBase {
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0) {
-        this(controller, message0, "Yes", "No", true);
+        this(controller, message0, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true);
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0) {
@@ -105,7 +106,7 @@ public class InputConfirm extends InputSyncronizedBase {
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa0) {
-        this(controller, message0, "Yes", "No", true, sa0);
+        this(controller, message0, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true, sa0);
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, SpellAbility sa0) {
@@ -124,7 +125,7 @@ public class InputConfirm extends InputSyncronizedBase {
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, CardView card0) {
-        this(controller, message0, "Yes", "No", true, card0);
+        this(controller, message0, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true, card0);
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, CardView card0) {
