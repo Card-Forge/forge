@@ -1409,11 +1409,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final boolean call) {
         final String[] labelsSrc = call ? new String[] { "heads", "tails" }
                 : new String[] { "win the flip", "lose the flip" };
-        final ImmutableList.Builder<String> strResults = ImmutableList.builder();
-        for (int i = 0; i < results.length; i++) {
-            strResults.add(labelsSrc[results[i] ? 0 : 1]);
+        final List<String> sortedResults = new ArrayList<String>();
+        for (boolean result : results) {
+            sortedResults.add(labelsSrc[result ? 0 : 1]);
         }
-        return getGui().one(sa.getHostCard().getName() + " - Choose a result", strResults.build()).equals(labelsSrc[0]);
+
+        Collections.sort(sortedResults);
+        if (!call) {
+            Collections.reverse(sortedResults);
+        }
+        return getGui().one(sa.getHostCard().getName() + " - Choose a result", sortedResults).equals(labelsSrc[0]);
     }
 
     @Override
