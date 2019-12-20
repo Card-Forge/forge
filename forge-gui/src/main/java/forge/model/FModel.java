@@ -57,7 +57,6 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The default Model implementation for Forge.
@@ -260,31 +259,31 @@ public final class FModel {
         if (!CardType.Constant.LOADED.isSet()) {
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            Set<String> addTo = null;
+            List<String> tList = null;
 
             for (final String s : typeListFile) {
                 if (s.equals("[BasicTypes]")) {
-                    addTo = CardType.Constant.BASIC_TYPES;
+                    tList = CardType.Constant.BASIC_TYPES;
                 } else if (s.equals("[LandTypes]")) {
-                    addTo = CardType.Constant.LAND_TYPES;
+                    tList = CardType.Constant.LAND_TYPES;
                 } else if (s.equals("[CreatureTypes]")) {
-                    addTo = CardType.Constant.CREATURE_TYPES;
+                    tList = CardType.Constant.CREATURE_TYPES;
                 } else if (s.equals("[SpellTypes]")) {
-                    addTo = CardType.Constant.SPELL_TYPES;
+                    tList = CardType.Constant.SPELL_TYPES;
                 } else if (s.equals("[EnchantmentTypes]")) {
-                    addTo = CardType.Constant.ENCHANTMENT_TYPES;
+                    tList = CardType.Constant.ENCHANTMENT_TYPES;
                 } else if (s.equals("[ArtifactTypes]")) {
-                    addTo = CardType.Constant.ARTIFACT_TYPES;
+                    tList = CardType.Constant.ARTIFACT_TYPES;
                 } else if (s.equals("[WalkerTypes]")) {
-                    addTo = CardType.Constant.WALKER_TYPES;
+                    tList = CardType.Constant.WALKER_TYPES;
                 } else if (s.length() > 1) {
-                    if (addTo != null) {
+                    if (tList != null) {
                         if (s.contains(":")) {
                             String[] k = s.split(":");
-                            addTo.add(k[0]);
+                            tList.add(k[0]);
                             CardType.Constant.pluralTypes.put(k[0], k[1]);
                         } else {
-                            addTo.add(s);
+                            tList.add(s);
                         }
                     }
                 }
