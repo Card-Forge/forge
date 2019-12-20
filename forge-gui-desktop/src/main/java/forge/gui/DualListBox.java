@@ -37,6 +37,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -150,13 +151,13 @@ public class DualListBox<T> extends FDialog {
         removeAllButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _removeAll(); } });
 
         // Dual List Complete Buttons
-        okButton = new FButton("OK");
+        okButton = new FButton(Localizer.getInstance().getMessage("lblOK"));
         okButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _finish(); } });
-        autoButton = new FButton("Auto");
+        autoButton = new FButton(Localizer.getInstance().getMessage("lblAuto"));
         autoButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); _finish(); } });
 
         final FPanel leftPanel = new FPanel(new BorderLayout());
-        selectOrder = new FLabel.Builder().text("Select Order:").build();
+        selectOrder = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectOrder") + ":").build();
         leftPanel.add(selectOrder, BorderLayout.NORTH);
         leftPanel.add(new FScrollPane(sourceList, true), BorderLayout.CENTER);
         leftPanel.add(okButton, BorderLayout.SOUTH);
@@ -265,8 +266,8 @@ public class DualListBox<T> extends FDialog {
             addAllButton.setVisible(false);
             removeAllButton.setVisible(false);
             autoButton.setEnabled(false);
-            selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
-            orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
+            selectOrder.setText(Localizer.getInstance().getMessage("lblSideboard") + String.format(" (%d):", sourceListModel.getSize()));
+            orderedLabel.setText(Localizer.getInstance().getMessage("ttMain") + String.format(" (%d):", destListModel.getSize()));
         }
     }
 
@@ -487,8 +488,8 @@ public class DualListBox<T> extends FDialog {
         if (sideboardingMode) {
             removeAllButton.setVisible(false);
             addAllButton.setVisible(false);
-            selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
-            orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
+            selectOrder.setText(Localizer.getInstance().getMessage("lblSideboard") + String.format(" (%d):", sourceListModel.getSize()));
+            orderedLabel.setText(Localizer.getInstance().getMessage("ttMain") + String.format(" (%d):", destListModel.getSize()));
         }
 
         boolean anySize = targetRemainingSourcesMax < 0;
