@@ -273,8 +273,8 @@ public class CardState extends GameObject {
         return newCol;
     }
 
-    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
-        return new FCollection<>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
+    public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
+        return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {

@@ -643,7 +643,7 @@ public class ComputerUtilCard {
         return getMostProminentType(list, CardType.getAllCreatureTypes());
     }
 
-    public static String getMostProminentType(final CardCollectionView list, final List<String> valid) {
+    public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
         if (list.size() == 0) {
             return "";
         }

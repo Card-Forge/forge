@@ -29,6 +29,13 @@ public class GameStateEvaluator {
         if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
         }
+        // If the current player has no creatures in play, there won't be any combat. This avoids
+        // an expensive game copy operation.
+        // Note: This is is safe to do because the simulation is based on the current game state,
+        // so there isn't a chance to play creatures in between.
+        if (evalGame.getPhaseHandler().getPlayerTurn().getCreaturesInPlay().isEmpty()) {
+            return null;
+        }
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy();
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE);

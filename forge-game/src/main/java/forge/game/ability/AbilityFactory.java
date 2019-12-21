@@ -449,7 +449,7 @@ public final class AbilityFactory {
     }
 
     public static final Map<String, String> getMapParams(final String abString) {
-        return FileSection.parseToMap(abString, "$", "|");
+        return FileSection.parseToMap(abString, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {

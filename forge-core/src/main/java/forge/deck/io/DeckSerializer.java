@@ -27,7 +27,7 @@ public class DeckSerializer {
         }
         final List<String> metadata = map.get("metadata");
         if (metadata != null) {
-            return new DeckFileHeader(FileSection.parse(metadata, "="));
+            return new DeckFileHeader(FileSection.parse(metadata, FileSection.EQUALS_KV_SEPARATOR));
         }
         final List<String> general = map.get("general");
         if (general != null) {

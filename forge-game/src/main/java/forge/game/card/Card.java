@@ -1893,11 +1893,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("\r\n");
             }
 
-            while (sb.toString().endsWith("\r\n")) {
-                sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+            String result = sb.toString();
+            while (result.endsWith("\r\n")) {
+                result = sb.substring(0, sb.length() - 2);
             }
-
-            return TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
+            return TextUtil.fastReplace(result, "CARDNAME", state.getName());
         }
 
         if (monstrous) {
@@ -1983,8 +1983,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean isNonAura = !type.hasSubtype("Aura");
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
-            // only add abilities not Spell portions of cards
-            if (sa == null || sa.isSecondary() || !state.getType().isPermanent()) {
+            // This code block is not shared by instants or sorceries. We don't need to check for permanence.
+            if (sa == null || sa.isSecondary()) {
                 continue;
             }
 
@@ -2071,14 +2071,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // replace triple line feeds with double line feeds
-        int start;
         final String s = "\r\n\r\n\r\n";
-        while (sb.toString().contains(s)) {
-            start = sb.lastIndexOf(s);
-            if ((start < 0) || (start >= sb.length())) {
-                break;
-            }
+        int start = sb.lastIndexOf(s);
+        while (start != -1) {
             sb.replace(start, start + 4, "\r\n");
+            start = sb.lastIndexOf(s);
         }
 
         String desc = TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
@@ -2503,7 +2500,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
+    public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
         return currentState.getIntrinsicSpellAbilities();
     }
 
@@ -4321,8 +4318,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * use it only for real keywords and not with hidden ones
      *
-     * @param Keyword k
-     * @param CardState state
      * @return Int
      */
     public final int getKeywordMagnitude(final Keyword k, CardState state) {

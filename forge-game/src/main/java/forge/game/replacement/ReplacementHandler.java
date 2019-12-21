@@ -389,7 +389,7 @@ public class ReplacementHandler {
     }
 
     public static Map<String, String> parseParams(final String repParse) {
-        return FileSection.parseToMap(repParse, "$", "|");
+        return FileSection.parseToMap(repParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     /**
