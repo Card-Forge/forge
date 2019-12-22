@@ -1,0 +1,9 @@
+Name:Thundering Chariot
+ManaCost:4
+Types:Artifact Vehicle
+PT:3/3
+K:First Strike
+K:Trample
+K:Haste
+K:Crew:1
+Oracle:First strike, trample, haste\nCrew 1
