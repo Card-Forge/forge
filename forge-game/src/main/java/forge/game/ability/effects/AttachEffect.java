@@ -16,6 +16,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
-            String message = "Do you want to attach " + attachment + " to " + attachTo + "?";
+            String message = Localizer.getInstance().getMessage("lblDoYouWantAttach") + " " + attachment + " " + Localizer.getInstance().getMessage("lblTo") + " " + attachTo + "?";
             if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
                 continue;
             handleAttachment(attachment, attachTo, sa);
@@ -173,7 +174,7 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, source + " - Select a player to attach to.");
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, source + " - " + Localizer.getInstance().getMessage("lblSelectAPlayerAttachTo"));
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -186,7 +187,7 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - Select a card to attach to.");
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - " + Localizer.getInstance().getMessage("lblSelectACardAttachTo"));
             if (o != null) {
                 handleAura(source, o);
                 //source.enchantEntity((Card) o);

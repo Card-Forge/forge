@@ -9,6 +9,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
         final FCollectionView<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
                 sa.getHostCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayersInTurnOrder();
 
-        final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
+        final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoosePlayer");
         final boolean random = sa.hasParam("Random");
 
         for (final Player p : tgtPlayers) {

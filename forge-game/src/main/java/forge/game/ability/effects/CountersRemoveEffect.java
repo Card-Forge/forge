@@ -13,6 +13,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -84,8 +85,8 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Optional")) {
-            String ctrs = cntToRemove > 1 ? "counters" : num.equals("All") ? "all counters" : "a counter";
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Remove " + ctrs + "?")) {
+            String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?")) {
                 return;
             }
         }
@@ -130,7 +131,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
             if (num.equals("Any")) {
                 StringBuilder sb = new StringBuilder();
-                sb.append("Choose cards to take ").append(counterType.getName()).append(" counters from");
+                sb.append(Localizer.getInstance().getMessage("lblChooseCardtoTakeTargetCounters").replace("%s", counterType.getName()));
 
                 srcCards = player.getController().chooseCardsForEffect(srcCards, sa, sb.toString(), 0, srcCards.size(), true);
             }
@@ -172,7 +173,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Target", gameCard);
                             params.put("CounterType", type);
-                            String title = "Select the number of " + type + " counters to remove";
+                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget").replace("%s", type);
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
 
@@ -213,10 +214,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Target", entity);
 
-            String prompt = "Select type of counters to remove";
+            String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
             CounterType chosenType = pc.chooseCounterType(
                     ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
-            prompt = "Select the number of " + chosenType.getName() + " counters to remove";
+            prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget").replace("%s", chosenType.getName());
             int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
             params = Maps.newHashMap();
             params.put("Target", entity);

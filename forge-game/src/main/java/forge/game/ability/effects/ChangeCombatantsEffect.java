@@ -13,6 +13,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,7 +45,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
                 final GameEntity originalDefender = combat.getDefenderByAttacker(c);
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
                 final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                        "Choose which defender to attack with " + c, false);
+                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c, false);
                 if (originalDefender != null && !originalDefender.equals(defender)) {
                     AttackingBand ab = combat.getBandOfAttacker(c);
                     if (ab != null) {
