@@ -3954,9 +3954,12 @@ public class CardFactoryUtil {
             desc.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(desc.toString());
 
-            final StringBuilder sbStack = new StringBuilder();
-            sbStack.append(sa.getStackDescription()).append(" (Escaped)");
-            newSA.setStackDescription(sbStack.toString());
+            // Stack Description only for Permanent or it might crash
+            if (card.isPermanent()) {
+                final StringBuilder sbStack = new StringBuilder();
+                sbStack.append(sa.getStackDescription()).append(" (Escaped)");
+                newSA.setStackDescription(sbStack.toString());
+            }
             newSA.setBasicSpell(false);
             newSA.setEscape(true);
             newSA.setIntrinsic(intrinsic);
