@@ -14,6 +14,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -167,7 +168,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     if (random) {
                         p = Aggregates.random(game.getPlayers());
                     } else {
-                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, "Choose a player");
+                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, Localizer.getInstance().getMessage("lblChoosePlayer"));
                     }
                     if (recordMap.containsKey(p)) {
                         recordMap.get(p).add(0, card);
@@ -188,7 +189,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                         valid = CardLists.filterControlledBy(valid,
                                 game.getNextPlayerAfter(p, source.getChosenDirection()));
                     }
-                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, "Choose a card");
+                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseaCard"));
                     if (recordMap.containsKey(p)) {
                         recordMap.get(p).add(0, card);
                     } else {

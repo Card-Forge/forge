@@ -17,6 +17,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class AmassEffect extends SpellAbilityEffect {
 
@@ -80,7 +81,7 @@ public class AmassEffect extends SpellAbilityEffect {
         }
 
         CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
-        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, "Choose an army to put counters on", 1, 1, false);
+        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for(final Card tgtCard : tgtCards) {

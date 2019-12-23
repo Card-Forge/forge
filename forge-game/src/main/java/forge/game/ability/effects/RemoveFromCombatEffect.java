@@ -36,7 +36,7 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
-        	final Combat combat = game.getPhaseHandler().getCombat();
+            final Combat combat = game.getPhaseHandler().getCombat();
             if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
                 // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
                 if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
@@ -58,7 +58,7 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
                     }
                 }
 
-            	combat.removeFromCombat(c);
+                combat.removeFromCombat(c);
 
                 if (rem) {
                     sa.getHostCard().addRemembered(c);

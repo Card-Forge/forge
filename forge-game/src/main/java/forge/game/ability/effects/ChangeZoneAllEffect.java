@@ -14,6 +14,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -102,11 +103,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             } else {
             	final StringBuilder sb = new StringBuilder();
 
-            	sb.append("Move ");
+            	sb.append(Localizer.getInstance().getMessage("lblMove") + " ");
             	sb.append(targets);
-            	sb.append(" from ");
+            	sb.append(" " + Localizer.getInstance().getMessage("lblFrom") + " ");
             	sb.append(Lang.joinHomogenous(origin));
-            	sb.append(" to ");
+            	sb.append(" " + Localizer.getInstance().getMessage("lblTo") + " ");
             	sb.append(destination);
             	sb.append("?");
 

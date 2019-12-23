@@ -32,6 +32,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -117,7 +118,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
                     tgtCards = new CardCollection(
                         activator.getController().chooseCardsForEffect(choice, sa,
-                            source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true
+                            source + " - " + Localizer.getInstance().getMessage("lblChooseUpTo") + " " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true
                         )
                     );
                 }
@@ -144,7 +145,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"));
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 return;
@@ -162,7 +163,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace("Do you want to play", TextUtil.addSuffix(tgtCard.toString(),"?")))) {
+            if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPlay"), TextUtil.addSuffix(tgtCard.toString(),"?")))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                 }

@@ -22,6 +22,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -99,10 +100,11 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         }
                     }
                     Collections.sort(faces);
-                    chosen = p.getController().chooseCardName(sa, faces, "Choose a card name");
+                    chosen = p.getController().chooseCardName(sa, faces, Localizer.getInstance().getMessage("lblChooseACardName"));
                 } else {
                     // use CardFace because you might name a alternate name
-                    final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
+                	//"name a card" in mtg card  oracle text is "choose a card name",change text
+                    final String message = validDesc.equals("card") ? Localizer.getInstance().getMessage("lblChooseACardName") : Localizer.getInstance().getMessage("lblChooseA") + validDesc + Localizer.getInstance().getMessage("lblCardName") + ".";
 
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
@@ -114,7 +116,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                 host.setNamedCard(chosen);
                 if(!randomChoice) {
-                    p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " picked " + chosen, p);
+                    p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " " + Localizer.getInstance().getMessage("lblPicked") + " " + chosen, p);
                     p.setNamedCard(chosen);
                 }
             }

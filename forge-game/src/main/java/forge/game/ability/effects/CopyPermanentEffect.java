@@ -27,6 +27,7 @@ import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,7 +65,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         if (sa.hasParam("Optional")) {
-            if (!activator.getController().confirmAction(sa, null, "Copy this permanent?")) {
+            if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
                 return;
             }
         }
@@ -145,7 +146,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
 
                 Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
 
@@ -206,12 +207,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         GameEntity defender;
                         if ("True".equals(attacked)) {
                             FCollectionView<GameEntity> defs = game.getCombat().getDefenders();
-                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
+                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c, false);
                         } else {
                             defender = AbilityUtils.getDefinedPlayers(host, sa.getParam("CopyAttacking"), sa).get(0);
                             if (sa.hasParam("ChoosePlayerOrPlaneswalker") && defender != null) {
                                 FCollectionView<GameEntity> defs = game.getCombat().getDefendersControlledBy((Player) defender);
-                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c + " {defender: "+ defender + "}", false);
+                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
                             }
                         }
                         game.getCombat().addAttacker(copyInPlay, defender);
@@ -243,7 +244,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copyInPlay.getController(), copyInPlay);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - Select a card to attach to.");
+                            Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - " + Localizer.getInstance().getMessage("lblSelectACardAttachTo"));
 
                             copyInPlay.attachToEntity(attachedTo);
                         } else {

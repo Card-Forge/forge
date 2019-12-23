@@ -22,6 +22,7 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 public class ControlGainEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -227,7 +228,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     final FCollectionView<GameEntity> e = combat.getDefenders();
 
                     final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                            "Declare a defender for " + tgtC);
+                            Localizer.getInstance().getMessage("lblDeclareDefenderFor") + " " + tgtC);
 
                     if (defender != null) {
                         combat.addAttacker(tgtC, defender);

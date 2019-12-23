@@ -12,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -134,7 +135,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             final CardCollection chosen = new CardCollection();
             if (tgt == null || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
-                    final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
+                    final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
                     Card o = null;
                     do {
                         o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle);

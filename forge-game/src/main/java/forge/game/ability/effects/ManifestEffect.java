@@ -13,6 +13,7 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class ManifestEffect extends SpellAbilityEffect {
     @Override
@@ -42,7 +43,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose cards to manifest ";
+                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
                     tgtCards = new CardCollection(activator.getController().chooseEntitiesForEffect(choices, amount, amount, null, sa, title, p));
                 } else if ("TopOfLibrary".equals(defined)) {
                     tgtCards = p.getTopXCardsFromLibrary(amount);

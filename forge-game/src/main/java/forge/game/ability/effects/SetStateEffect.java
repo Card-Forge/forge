@@ -15,6 +15,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.Iterator;
 import java.util.List;
@@ -76,7 +77,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
                 Card lki = CardUtil.getLKICopy(tgt);
                 lki.turnFaceUp(true, false);
-                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, "Face-down card can't turn face up");
+                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
                 continue;
             }

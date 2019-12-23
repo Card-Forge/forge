@@ -22,6 +22,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.*;
 
@@ -128,7 +129,7 @@ public class DigEffect extends SpellAbilityEffect {
                     game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
-                    String question = TextUtil.concatWithSpace("Reveal:", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
+                    String question = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblReveal") + ":", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
 
                     hasRevealed = p.getController().confirmAction(sa, null, question);
                     if (hasRevealed) {
@@ -151,7 +152,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getName() + " - Looking at cards in ");
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved
@@ -194,7 +195,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                     if (optional && mayBeSkipped && !valid.isEmpty()) {
-                        String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : "Would you like to proceed with the optional ability for " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
+                        String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
                         if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", sa.getHostCard().getName()))) {
                             return;
                         }
@@ -214,24 +215,24 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         for (final byte pair : MagicColor.COLORPAIR) {
                             Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
-                                    delayedReveal, sa, "Choose one", false, p);
+                                    delayedReveal, sa, Localizer.getInstance().getMessage("lblChooseOne"), false, p);
                             if (chosen != null) {
                                 movedCards.add(chosen);
                             }
                         }
                         chooser.getController().endTempShowCards();
                         if (!movedCards.isEmpty()) {
-                            game.getAction().reveal(movedCards, chooser, true, chooser + " picked ");
+                            game.getAction().reveal(movedCards, chooser, true, chooser + " " + Localizer.getInstance().getMessage("lblPicked") + " ");
                         }
                     }
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
-                            prompt = "Choose a card to leave on top of {player's} library";
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop").replace("%s", "{player's}");
                         }
                         else {
-                            prompt = "Choose a card to leave in {player's} " + destZone2.name();
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget").replace("%s", "{player's}") + " " + destZone2.name();
                         }
 
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);
@@ -245,19 +246,19 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("PrimaryPrompt")) {
                             prompt = sa.getParam("PrimaryPrompt");
                         } else {
-                            prompt = "Choose card(s) to put into " + destZone1.name();
+                            prompt = Localizer.getInstance().getMessage("lblChooseCardsPutInto") + " " + destZone1.name();
                             if (destZone1.equals(ZoneType.Library)) {
                                 if (libraryPosition == -1) {
-                                    prompt = "Choose card(s) to put on the bottom of {player's} library";
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom").replace("%s", "{player's}");
                                 } else if (libraryPosition == 0) {
-                                    prompt = "Choose card(s) to put on top of {player's} library";
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayTop").replace("%s", "{player's}");
                                 }
                             }
                         }
 
                         movedCards = new CardCollection();
                         if (valid.isEmpty()) {
-                            chooser.getController().notifyOfValue(sa, null, "No valid cards");
+                            chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                         } else {
                             if ( p == chooser ) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
@@ -276,7 +277,9 @@ public class DigEffect extends SpellAbilityEffect {
 
                         if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
                             game.getAction().reveal(movedCards, chooser, true,
-                                    chooser + " picked " + (movedCards.size() == 1 ? "this card" : "these cards") + " from ");
+                                    chooser + " " + Localizer.getInstance().getMessage("lblPicked") + " " +
+                                    (movedCards.size() == 1 ? Localizer.getInstance().getMessage("lblThisCard") : Localizer.getInstance().getMessage("lblTheseCards")) +
+                                    " " + Localizer.getInstance().getMessage("lblFrom") + " ");
                         }
                     }
                     if (sa.hasParam("ForgetOtherRemembered")) {
