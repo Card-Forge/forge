@@ -42,6 +42,7 @@ import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,8 +65,8 @@ public class VAssignDamage extends FDialog {
 
     private final GameEntityView defender;
 
-    private final FLabel lblTotalDamage = add(new FLabel.Builder().text("Available damage points: Unknown").align(Align.center).build());
-    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").align(Align.center).build());
+    private final FLabel lblTotalDamage = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblTotalDamageText")).align(Align.center).build());
+    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblAssignRemainingText")).align(Align.center).build());
 
     private final AttDefCardPanel pnlAttacker;
     private final DefendersPanel pnlDefenders;
@@ -93,7 +94,7 @@ public class VAssignDamage extends FDialog {
      * @param overrideOrder override combatant order
      */
     public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
-        super("Assign damage dealt by " + attacker, 3);
+        super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",attacker.toString()) , 3);
 
         callback = waitCallback;
         totalDamageToAssign = damage0;
@@ -106,7 +107,7 @@ public class VAssignDamage extends FDialog {
         pnlAttacker = add(new AttDefCardPanel(attacker));
         pnlDefenders = add(new DefendersPanel(blockers));
 
-        initButton(0, "Auto", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblAuto"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -114,13 +115,13 @@ public class VAssignDamage extends FDialog {
                 finish();
             }
         });
-        initButton(1, "OK", new FEventHandler() {
+        initButton(1, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 finish();
             }
         });
-        initButton(2, "Reset", new FEventHandler() {
+        initButton(2, Localizer.getInstance().getMessage("lblReset"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -411,7 +412,7 @@ public class VAssignDamage extends FDialog {
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
             if(overkill >= 0) { 
-                sb.append(" (Lethal");
+                sb.append(" (" + Localizer.getInstance().getMessage("lblLethal"));
                 if(overkill > 0) 
                     sb.append(" +").append(overkill);
                 sb.append(")");
@@ -420,7 +421,7 @@ public class VAssignDamage extends FDialog {
             dt.label.setText(sb.toString());
         }
 
-        lblTotalDamage.setText(TextUtil.concatNoSpace("Available damage points: ",
+        lblTotalDamage.setText(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblAvailableDamagePoints") + ": ",
                 String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         setButtonEnabled(1, damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
