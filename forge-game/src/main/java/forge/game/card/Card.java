@@ -1895,7 +1895,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             String result = sb.toString();
             while (result.endsWith("\r\n")) {
-                result = sb.substring(0, result.length() - 2);
+                result = result.substring(0, result.length() - 2);
             }
             return TextUtil.fastReplace(result, "CARDNAME", state.getName());
         }
