@@ -313,7 +313,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce,
             final boolean canChooseZero) {
         final int min = canChooseZero ? 0 : 1;
-        return getGui().getInteger(localizer.getMessage("Choose %s for ").replace("%s", announce) + ability.getHostCard().getName(), min,
+        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceFor").replace("%s", announce).replace("%name", ability.getHostCard().getName()) , min,
                 Integer.MAX_VALUE, min + 9);
     }
 
