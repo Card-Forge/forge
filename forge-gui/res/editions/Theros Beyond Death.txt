@@ -11,6 +11,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 4 U Banishing Light
 7 U Commanding Presence
 9 U Daxos, Blessed by the Sun
+14 M Elspeth, Sun's Nemesis
 23 C Hero of the Winds
 25 C Indomitable Will
 26 C Karametra's Blessing
@@ -28,12 +29,20 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 56 C Naiad of Hidden Coves
 57 C Nyxborn Seaguard
 58 C Omen of the Sea
+75 U Threnody Singer
+76 C Triton Waverider
+96 C Fruit of Tizerus
+99 U Gray Merchant of Asphodel
 102 U Inevitable End
 104 U Minion's Return
 106 C Mire's Grasp
 109 C Nyxborn Marauder
 110 C Omen of the Dead
 113 C Rage-Scarred Berserker
+117 R Treacherous Blessing
+121 U Underworld Dreams
+122 C Venomous Hierophant
+124 R The Akroan War
 126 C Arena Trickster
 136 U Furious Rise
 138 U Heroes of the Revel
@@ -43,15 +52,31 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 143 C Irreverent Revelers
 144 C Nyxborn Brute
 149 C Portent of Betrayal
+152 C Satyr's Cunning
+159 C Thrill of Possibility
+163 C Underworld Rage-Hound
+164 C Wrap in Flames
 164 C Aspect of Lamprey
+167 C Chainweb Aracnir
 174 C Ilysian Caryatid
 176 U Klothys's Design
 187 C Nylea's Huntmaster
 191 C Nyxborn Colossus
 192 C Omen of the Hunt
 198 R Setessan Champion
+200 C Setessan Skirmisher
+201 C Setessan Training
+202 C Skola Grovedancer
+203 C Voracious Typhon
+204 C Warbriar Blessing
+205 U Wolfwillow Haven
 208 M Ashiok, Nightmare Muse
 219 U Hero of the Nyxborn
+220 M Klothys, God of Destiny
+228 U Staggering Insight
+230 U Warden of the Chained
+238 C Thaumaturge's Familiar
+239 U Thundering Chariot
 243 R Labyrinth of Skophos
 250 L Plains
 251 L Island
@@ -86,6 +111,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 
 [tokens]
+g_2_2_wolf
 r_1_1_satyr_noblock
 u_3_2_reflection
 ub_2_3_nightmare_mill

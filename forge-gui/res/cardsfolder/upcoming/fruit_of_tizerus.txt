@@ -1,4 +1,4 @@
-Name:Fruit of Tizerius
+Name:Fruit of Tizerus
 ManaCost:B
 Types:Sorcery
 A:SP$ LoseLife | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
