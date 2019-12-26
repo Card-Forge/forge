@@ -260,7 +260,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRiggedRoll"), new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblWalkTo"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
