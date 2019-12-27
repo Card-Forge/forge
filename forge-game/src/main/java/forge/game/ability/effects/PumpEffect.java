@@ -328,7 +328,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(tgtCards);
             final String message = sa.hasParam("OptionQuestion")
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
-                    : TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblApplyPumpTo") + " ", targets, "?");
+                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
                 return;

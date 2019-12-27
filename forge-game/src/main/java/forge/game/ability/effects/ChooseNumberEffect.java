@@ -73,7 +73,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.setChosenNumber(chosen);
                 }
                 if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().nofityOfValue(sa, card, p.getName() + " " + Localizer.getInstance().getMessage("lblPicked") + " " + chosen, p);
+                    p.getGame().getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                 }
             }
         }
@@ -86,7 +86,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
                 int num = ev.getValue();
                 Player player = ev.getKey();
-                sb.append(player).append(" " + Localizer.getInstance().getMessage("lblChose") + " ").append(num);
+                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), String.valueOf(num)));
                 sb.append("\r\n");
                 if (num > highest) {
                     highestNum.clear();

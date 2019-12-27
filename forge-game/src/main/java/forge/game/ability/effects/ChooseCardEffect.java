@@ -83,7 +83,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 for (final String type : CardType.getBasicTypes()) {
                     final CardCollectionView cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
-                        final String prompt = "Choose " + Lang.nounWithAmount(1, type);
+                        final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.nounWithAmount(1, type);
                         Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false);
                         if (c != null) {
                             chosen.add(c);
@@ -99,8 +99,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
-                            Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo") + " " + (totP - chosenP - negativeNum)
-                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPower") + ": " + chosenP + ")", chosenP <= totP);
+                            Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualToNum", (totP - chosenP - negativeNum))
+                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;

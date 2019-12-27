@@ -67,7 +67,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell") + " " + card + "?")) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", card.toString()))) {
             return;
         }
 
@@ -85,7 +85,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
-                String prompt = Localizer.getInstance().getMessage("lblSelectMultiSpellCopyToStack").replace("%d", Lang.getOrdinal(multi + 1));
+                String prompt = Localizer.getInstance().getMessage("lblSelectMultiSpellCopyToStack", Lang.getOrdinal(multi + 1));
                 SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt,
                         ImmutableMap.of());
                 SpellAbility copiedSpell = CardFactory.copySpellAbilityAndPossiblyHost(card, chosen.getHostCard(), chosen, true);

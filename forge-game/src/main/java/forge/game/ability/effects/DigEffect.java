@@ -222,17 +222,17 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         chooser.getController().endTempShowCards();
                         if (!movedCards.isEmpty()) {
-                            game.getAction().reveal(movedCards, chooser, true, chooser + " " + Localizer.getInstance().getMessage("lblPicked") + " ");
+                            game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
                         }
                     }
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop").replace("%s", "{player's}");
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", "{player's}");
                         }
                         else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget").replace("%s", "{player's}") + " " + destZone2.name();
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTargetZone", "{player's}", destZone2.name());
                         }
 
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);
@@ -246,12 +246,12 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("PrimaryPrompt")) {
                             prompt = sa.getParam("PrimaryPrompt");
                         } else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseCardsPutInto") + " " + destZone1.name();
+                            prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.name());
                             if (destZone1.equals(ZoneType.Library)) {
                                 if (libraryPosition == -1) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom").replace("%s", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom", "{player's}");
                                 } else if (libraryPosition == 0) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayTop").replace("%s", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayTop", "{player's}");
                                 }
                             }
                         }
@@ -276,10 +276,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
-                            game.getAction().reveal(movedCards, chooser, true,
-                                    chooser + " " + Localizer.getInstance().getMessage("lblPicked") + " " +
-                                    (movedCards.size() == 1 ? Localizer.getInstance().getMessage("lblThisCard") : Localizer.getInstance().getMessage("lblTheseCards")) +
-                                    " " + Localizer.getInstance().getMessage("lblFrom") + " ");
+                            game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
                         }
                     }
                     if (sa.hasParam("ForgetOtherRemembered")) {

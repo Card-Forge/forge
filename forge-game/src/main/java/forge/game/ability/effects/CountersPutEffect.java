@@ -236,7 +236,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
 
-                        String message = Localizer.getInstance().getMessage("lblDoYouWantPutTargetP1P1CountersOn").replace("%d", String.valueOf(counterAmount)) + " " + gameCard + " ?";
+                        String message = Localizer.getInstance().getMessage("lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount), gameCard.toString());
                         Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseAnOpponent"));
 
                         if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {

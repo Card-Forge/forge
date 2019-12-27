@@ -21,7 +21,7 @@ public class ShuffleEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle").replace("%s", p + "")); 
+                boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle", p.getName())); 
                 if (mustShuffle) 
                     p.shuffle(sa);
             }
