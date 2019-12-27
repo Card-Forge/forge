@@ -57,6 +57,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 163 C Underworld Rage-Hound
 164 C Wrap in Flames
 164 C Aspect of Lamprey
+166 U The Binding of the Titans
 167 C Chainweb Aracnir
 174 C Ilysian Caryatid
 176 U Klothys's Design
