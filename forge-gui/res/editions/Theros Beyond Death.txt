@@ -115,6 +115,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 
 [tokens]
+b_2_2_zombie
 g_2_2_wolf
 r_1_1_satyr_noblock
 u_3_2_reflection
