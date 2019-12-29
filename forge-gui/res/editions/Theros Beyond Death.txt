@@ -71,6 +71,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 203 C Voracious Typhon
 204 C Warbriar Blessing
 205 U Wolfwillow Haven
+207 R Allure of the Unknown
 208 M Ashiok, Nightmare Muse
 219 U Hero of the Nyxborn
 220 M Klothys, God of Destiny
