@@ -40,6 +40,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 110 C Omen of the Dead
 113 C Rage-Scarred Berserker
 117 R Treacherous Blessing
+118 R Tymaret Calls the Dead
 121 U Underworld Dreams
 122 C Venomous Hierophant
 124 R The Akroan War
