@@ -733,9 +733,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
         if (StringUtils.isBlank(message)) {
-            message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.name().toLowerCase());
+            message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else {
-            message += localizer.getMessage("lblPlayerZone", "{player's}", zone.name().toLowerCase());
+            message += localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
@@ -743,7 +743,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGui().reveal(fm, cards);
             endTempShowCards();
         } else {
-            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.name().toLowerCase()),
+            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
                     player, owner), fm);
         }
     }
@@ -2366,7 +2366,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ZoneType targetZone = repeatLast ? lastAddedZone : zone;
             String message = null;
             if (targetZone != ZoneType.Battlefield) {
-                message = localizer.getMessage("lblPutCardInWhichPlayerZone", targetZone.name().toLowerCase());
+                message = localizer.getMessage("lblPutCardInWhichPlayerZone", targetZone.getTranslatedName().toLowerCase());
             }
             else {
                 if (noTriggers) {

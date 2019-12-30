@@ -246,7 +246,7 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("PrimaryPrompt")) {
                             prompt = sa.getParam("PrimaryPrompt");
                         } else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.name());
+                            prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.getTranslatedName());
                             if (destZone1.equals(ZoneType.Library)) {
                                 if (libraryPosition == -1) {
                                     prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom", "{player's}");

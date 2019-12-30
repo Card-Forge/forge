@@ -504,7 +504,7 @@ public class HumanPlay {
                         // replace this with input
                         CardCollection newList = new CardCollection();
                         for (int i = 0; i < nNeeded; i++) {
-                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.toString()), CardView.getCollection(list)));
+                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), CardView.getCollection(list)));
                             if (c == null) {
                                 return false;
                             }
@@ -540,7 +540,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.toString()), PlayerView.getCollection(payableZone)));
+                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName()), PlayerView.getCollection(payableZone)));
                     if (chosen == null) {
                         return false;
                     }
