@@ -25,7 +25,6 @@ import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
-import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
@@ -312,7 +311,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPay") + " " + amount + " " + Localizer.getInstance().getMessage("lblLife") + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPayNLife", String.valueOf(amount)) + orString, sourceAbility)) {
                     return false;
                 }
 
@@ -332,11 +331,15 @@ public class HumanPlay {
                     return false;
                 }
 
-                StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblDoyouWantTo") + " ");
-                sb.append(res.contains(p) ? "" : Localizer.getInstance().getMessage("lblLetThatPlayer") + " ");
-                sb.append(Localizer.getInstance().getMessage("lblDraw") + " ").append(Lang.nounWithAmount(amount, " " + Localizer.getInstance().getMessage("lblCard"))).append("?").append(orString);
+                String message = null;
+                if (res.contains(p)) {
+                    message = Localizer.getInstance().getMessage("lblDoYouWantLetThatPlayerDrawNCardOrDoAction", String.valueOf(amount), orString);
+                }
+                else {
+                    message = Localizer.getInstance().getMessage("lblDoYouWantDrawNCardOrDoAction", String.valueOf(amount), orString);
+                }
 
-                if (!p.getController().confirmPayment(part, sb.toString(), sourceAbility)) {
+                if (!p.getController().confirmPayment(part, message, sourceAbility)) {
                     return false;
                 }
 
@@ -370,7 +373,7 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final CardCollectionView list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lbllblDoYouWantMill") + " " + amount + " " + Localizer.getInstance().getMessage("lblCard") + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantMillNCardsOrDoAction", String.valueOf(amount), orString), sourceAbility)) {
                     return false;
                 }
                 CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
@@ -378,7 +381,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantFlip") + " " + amount + " " + Localizer.getInstance().getMessage("lblCoin") + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
+                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinOrDoAction", String.valueOf(amount), orString), sourceAbility)) {
                     return false;
                 }
                 final int n = FlipCoinEffect.getFilpMultiplier(p);
@@ -412,7 +415,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemove") + " " + Lang.nounWithAmount(amount, counterType.getName() + " " + Localizer.getInstance().getMessage("lblCounterOfPointer")) + " " + Localizer.getInstance().getMessage("lblFrom") + " " + source + "?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveNTargetTypeCounterFromCard", String.valueOf(amount), counterType.getName(), source), sourceAbility)) {
                         return false;
                     }
                 }
@@ -432,7 +435,7 @@ public class HumanPlay {
                 if (allCounters < amount) { return false; }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveCounters") + " " + part.getDescriptiveType() + " ?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveCountersFromCard", part.getDescriptiveType()), sourceAbility)) {
                         return false;
                     }
                 }
@@ -492,8 +495,7 @@ public class HumanPlay {
                         return false;
                     }
                     if (from == ZoneType.Library) {
-                        if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExile") + " " + nNeeded +
-                                " " + Localizer.getInstance().getMessage("lblCard") + (nNeeded == 1 ? "" : "s") + " " + Localizer.getInstance().getMessage("lblFromYourLibrary"), sourceAbility)) {
+                        if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileNCardsFromYourLibrary", String.valueOf(nNeeded)), sourceAbility)) {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
@@ -502,7 +504,7 @@ public class HumanPlay {
                         // replace this with input
                         CardCollection newList = new CardCollection();
                         for (int i = 0; i < nNeeded; i++) {
-                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFrom") + " " + from, CardView.getCollection(list)));
+                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), CardView.getCollection(list)));
                             if (c == null) {
                                 return false;
                             }
@@ -538,7 +540,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblPutCardFromWhose") + " ", from.toString(), "?"), PlayerView.getCollection(payableZone)));
+                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName()), PlayerView.getCollection(payableZone)));
                     if (chosen == null) {
                         return false;
                     }
@@ -629,7 +631,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpend") + " " + Lang.nounWithAmount(amount, counterType.getName() + " " + Localizer.getInstance().getMessage("lblCounterOfPointer")) + "?",sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
                         return false;
                     }
                 }
@@ -675,7 +677,7 @@ public class HumanPlay {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectOfCardsTo") + " %d " + cpl.getDescriptiveType() + " " + Localizer.getInstance().getMessage("lblCardsTo") + " " + actionName);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cpl.getDescriptiveType(), actionName));
         inp.setCancelAllowed(true);
 
         inp.showAndWait();

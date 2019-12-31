@@ -26,7 +26,7 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
             game.getPhaseHandler().incPlanarDiceRolledthisTurn();
         }
         PlanarDice result = PlanarDice.roll(activator, null);
-        String message = activator.getName() + " " + Localizer.getInstance().getMessage("lblRolled") + " " + result.toString();
+        String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", activator.getName(), result.toString());
         game.getAction().nofityOfValue(sa, activator, message, null);
 
     }

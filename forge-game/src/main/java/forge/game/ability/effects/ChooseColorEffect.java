@@ -50,27 +50,25 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                 List<String> chosenColors;
                 int cntMin = sa.hasParam("TwoColors") ? 2 : 1;
                 int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
-                String prompt;
+                String prompt = null;
                 if (cntMax == 1) {
                     prompt = Localizer.getInstance().getMessage("lblChooseAColor");
                 }
                 else {
-                    prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.getNumeral(cntMin);
                     if (cntMax > cntMin) {
-                    	if (cntMax >= MagicColor.NUMBER_OR_COLORS) {
-                    		prompt += " " + Localizer.getInstance().getMessage("lblOrMore");
-                    	} else {
-                    		prompt += " " + Localizer.getInstance().getMessage("lblTo") + " " + Lang.getNumeral(cntMax);
-                    	}
+                        if (cntMax >= MagicColor.NUMBER_OR_COLORS) {
+                            prompt = Localizer.getInstance().getMessage("lblAtLastChooseNumColors", Lang.getNumeral(cntMin));
+                        } else {
+                            prompt = Localizer.getInstance().getMessage("lblChooseSpecifiedRangeColors", Lang.getNumeral(cntMin), Lang.getNumeral(cntMax));
+                        }
                     }
-                    prompt += " " + Localizer.getInstance().getMessage("lblColors");
                 }
                 chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
                 if (chosenColors.isEmpty()) {
                     return;
                 }
                 card.setChosenColors(chosenColors);
-                p.getGame().getAction().nofityOfValue(sa, card, p.getName() + " " + Localizer.getInstance().getMessage("lblPicked") + " " + Lang.joinHomogenous(chosenColors), p);
+                p.getGame().getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
             }
         }
     }

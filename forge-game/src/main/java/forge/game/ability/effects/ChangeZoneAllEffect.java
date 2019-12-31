@@ -99,19 +99,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
             if (sa.hasParam("OptionQuestion")) {
-            	message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
+                message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
-            	final StringBuilder sb = new StringBuilder();
-
-            	sb.append(Localizer.getInstance().getMessage("lblMove") + " ");
-            	sb.append(targets);
-            	sb.append(" " + Localizer.getInstance().getMessage("lblFrom") + " ");
-            	sb.append(Lang.joinHomogenous(origin));
-            	sb.append(" " + Localizer.getInstance().getMessage("lblTo") + " ");
-            	sb.append(destination);
-            	sb.append("?");
-
-            	message = sb.toString();
+                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.toString());
             }
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {

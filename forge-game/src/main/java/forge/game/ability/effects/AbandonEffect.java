@@ -24,7 +24,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         Player controller = source.getController();
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYoulikeAbandon") + " " + source + "?")) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYoulikeAbandonConfirm", source.toString()))) {
             return;
         }
 

@@ -130,10 +130,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             srcCards = game.getCardsIn(ZoneType.Battlefield);
             srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
             if (num.equals("Any")) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(Localizer.getInstance().getMessage("lblChooseCardtoTakeTargetCounters").replace("%s", counterType.getName()));
-
-                srcCards = player.getController().chooseCardsForEffect(srcCards, sa, sb.toString(), 0, srcCards.size(), true);
+                srcCards = player.getController().chooseCardsForEffect(srcCards, sa, Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName()), 0, srcCards.size(), true);
             }
         } else {
             srcCards = getTargetCards(sa);
@@ -173,7 +170,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Target", gameCard);
                             params.put("CounterType", type);
-                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget").replace("%s", type);
+                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
 
@@ -217,7 +214,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
             CounterType chosenType = pc.chooseCounterType(
                     ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
-            prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget").replace("%s", chosenType.getName());
+            prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
             int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
             params = Maps.newHashMap();
             params.put("Target", entity);

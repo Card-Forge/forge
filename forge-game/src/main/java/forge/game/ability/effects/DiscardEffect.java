@@ -206,7 +206,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (!p.canDiscardBy(sa)) {
                         continue;
                     }
-                    String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard").replace("%d", String.valueOf(numCards));
+                    String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
                     boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
 
                     if (runDiscard) {
@@ -326,8 +326,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         if (mode.startsWith("Reveal") ) {
-                            p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
-                                    chooser + " " + Localizer.getInstance().getMessage("lblHasChosen") + " " + (toBeDiscarded.size() == 1 ? Localizer.getInstance().getMessage("lblThisCard") : Localizer.getInstance().getMessage("lblTheseCards"))  + " " + Localizer.getInstance().getMessage("lblFrom") + " ");
+                            p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
                         }
                         for (Card card : toBeDiscarded) {
                             if (card == null) { continue; }

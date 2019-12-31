@@ -50,7 +50,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
         Multimap<SpellAbility, GameObject> result = ArrayListMultimap.create();
 
         for (GameObject g : defined) {
-            final String title = Localizer.getInstance().getMessage("lblChooseAbilityFor") + " " + g.toString();
+            final String title = Localizer.getInstance().getMessage("lblChooseAbilityForObject", g.toString());
             Map<String, Object> params = Maps.newHashMap();
             params.put("Affected", g);
             

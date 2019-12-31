@@ -112,7 +112,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                game.action.nofityOfValue(sa, card, activator + " " + Localizer.getInstance().getMessage("lblPicked") + " " + choiceString, activator);
+                game.action.nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", activator.getName(), choiceString), activator);
                 abMana.setExpressChoice(choiceString.toString());
             }
         }
@@ -142,7 +142,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 }
                 choice = MagicColor.toShortString(val);
 
-                game.action.nofityOfValue(sa, card, act + " " + Localizer.getInstance().getMessage("lblPicked") + " " + choice, act);
+                game.action.nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", act.getName(), choice), act);
                 abMana.setExpressChoice(choice);
             }
         }
@@ -173,7 +173,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         if (cs.isMonoColor())
                             sb.append(MagicColor.toShortString(s.getColorMask()));
                         else /* (cs.isMulticolor()) */ {
-                            byte chosenColor = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFrom") + " " + s.toString(), sa, cs);
+                            byte chosenColor = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
                             sb.append(MagicColor.toShortString(chosenColor));
                         }
                     }

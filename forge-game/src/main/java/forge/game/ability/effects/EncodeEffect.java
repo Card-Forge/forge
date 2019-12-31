@@ -45,9 +45,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         // Handle choice of whether or not to encoded
         
         
-        final StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblDoYouWantExile") + " ").append(host).append(" " + Localizer.getInstance().getMessage("lblAndEncodeOntoAYouControlCreature"));
-        if (!player.getController().confirmAction(sa, null, sb.toString())) {
+        if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", host.toString()))) {
             return;
         }
 
@@ -58,11 +56,11 @@ public class EncodeEffect extends SpellAbilityEffect {
         Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", true);
 
         if (choice == null) {
-          return;
+            return;
         }
 
         StringBuilder codeLog = new StringBuilder();
-        codeLog.append(Localizer.getInstance().getMessage("lblEncoding") + " ").append(host.toString()).append(" " + Localizer.getInstance().getMessage("lblTo") + " ").append(choice.toString());
+        codeLog.append("Encoding ").append(host.toString()).append(" to ").append(choice.toString());
         game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
 
         // store hostcard in encoded array

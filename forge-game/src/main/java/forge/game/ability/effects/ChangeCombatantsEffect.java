@@ -45,7 +45,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
                 final GameEntity originalDefender = combat.getDefenderByAttacker(c);
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
                 final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c, false);
+                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()), false);
                 if (originalDefender != null && !originalDefender.equals(defender)) {
                     AttackingBand ab = combat.getBandOfAttacker(c);
                     if (ab != null) {

@@ -207,12 +207,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         GameEntity defender;
                         if ("True".equals(attacked)) {
                             FCollectionView<GameEntity> defs = game.getCombat().getDefenders();
-                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c, false);
+                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()), false);
                         } else {
                             defender = AbilityUtils.getDefinedPlayers(host, sa.getParam("CopyAttacking"), sa).get(0);
                             if (sa.hasParam("ChoosePlayerOrPlaneswalker") && defender != null) {
                                 FCollectionView<GameEntity> defs = game.getCombat().getDefendersControlledBy((Player) defender);
-                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
+                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()) + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
                             }
                         }
                         game.getCombat().addAttacker(copyInPlay, defender);
@@ -244,7 +244,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copyInPlay.getController(), copyInPlay);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - " + Localizer.getInstance().getMessage("lblSelectACardAttachTo"));
+                            Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", copyInPlay.toString()));
 
                             copyInPlay.attachToEntity(attachedTo);
                         } else {
