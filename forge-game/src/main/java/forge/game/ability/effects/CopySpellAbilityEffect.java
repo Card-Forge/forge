@@ -16,6 +16,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", card.toString()))) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(card.getName())))) {
             return;
         }
 

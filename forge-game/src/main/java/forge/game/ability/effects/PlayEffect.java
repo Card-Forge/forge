@@ -32,6 +32,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -162,7 +163,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", tgtCard.toString()))) {
+            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                 }

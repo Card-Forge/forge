@@ -43,6 +43,7 @@ import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,7 +95,7 @@ public class VAssignDamage extends FDialog {
      * @param overrideOrder override combatant order
      */
     public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
-        super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",attacker.toString()) , 3);
+        super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
 
         callback = waitCallback;
         totalDamageToAssign = damage0;

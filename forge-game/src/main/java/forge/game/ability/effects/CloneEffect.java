@@ -10,6 +10,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -94,7 +95,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         final boolean optional = sa.hasParam("Optional");
-        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopyCard", cardToCopy))) {
+        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopyCard", CardTranslation.getTranslatedName(cardToCopy.getName())))) {
             return;
         }
 

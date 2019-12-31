@@ -28,6 +28,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -207,12 +208,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         GameEntity defender;
                         if ("True".equals(attacked)) {
                             FCollectionView<GameEntity> defs = game.getCombat().getDefenders();
-                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()), false);
+                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false);
                         } else {
                             defender = AbilityUtils.getDefinedPlayers(host, sa.getParam("CopyAttacking"), sa).get(0);
                             if (sa.hasParam("ChoosePlayerOrPlaneswalker") && defender != null) {
                                 FCollectionView<GameEntity> defs = game.getCombat().getDefendersControlledBy((Player) defender);
-                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()) + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
+                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())) + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
                             }
                         }
                         game.getCombat().addAttacker(copyInPlay, defender);

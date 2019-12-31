@@ -59,6 +59,7 @@ import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -313,7 +314,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce,
             final boolean canChooseZero) {
         final int min = canChooseZero ? 0 : 1;
-        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce, ability.getHostCard().getName()) , min,
+        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce, CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min,
                 Integer.MAX_VALUE, min + 9);
     }
 
@@ -688,7 +689,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection orderBlockers(final Card attacker, final CardCollection blockers) {
         final CardView vAttacker = CardView.get(attacker);
         getGui().setPanelSelection(vAttacker);
-        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor", vAttacker.toString()), localizer.getMessage("lblDamagedFirst"),
+        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor", CardTranslation.getTranslatedName(vAttacker.getName())), localizer.getMessage("lblDamagedFirst"),
                 CardView.getCollection(blockers), vAttacker));
     }
 
@@ -713,7 +714,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vAttacker = CardView.get(attacker);
         getGui().setPanelSelection(vAttacker);
         return game.getCardList(getGui().insertInList(
-                localizer.getMessage("lblChooseBlockerAfterWhichToPlaceAttackert", vAttacker.toString()),
+                localizer.getMessage("lblChooseBlockerAfterWhichToPlaceAttackert", CardTranslation.getTranslatedName(vAttacker.getName())),
                 CardView.get(blocker), CardView.getCollection(oldBlockers)));
     }
 
@@ -721,7 +722,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection orderAttackers(final Card blocker, final CardCollection attackers) {
         final CardView vBlocker = CardView.get(blocker);
         getGui().setPanelSelection(vBlocker);
-        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor", vBlocker.toString()), localizer.getMessage("lblDamagedFirst"),
+        return game.getCardList(getGui().order(localizer.getMessage("lblChooseDamageOrderFor", CardTranslation.getTranslatedName(vBlocker.getName())), localizer.getMessage("lblDamagedFirst"),
                 CardView.getCollection(attackers), vBlocker));
     }
 
@@ -819,7 +820,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShowCard(c);
             getGui().setCard(view);
             boolean result = false;
-            result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", view.toString()),
+            result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
                     true, ImmutableList.of(localizer.getMessage("lblLibrary"), localizer.getMessage("lblGraveyard")));
             if (result) {
                 toTop = topN;
@@ -851,7 +852,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setCard(c.getView());
 
         boolean result = false;
-        result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", view.toString()),
+        result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
                 true, ImmutableList.of(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
 
         endTempShowCards();
@@ -1029,7 +1030,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
-            options.add(localizer.getMessage("lblNColorManaFromCard", String.valueOf(1 + i), MagicColor.toLongString(m.getColor()), m.getSourceCard().toString()));
+            options.add(localizer.getMessage("lblNColorManaFromCard", String.valueOf(1 + i), MagicColor.toLongString(m.getColor()), CardTranslation.getTranslatedName(m.getSourceCard().getName())));
         }
         final String chosen = getGui().one(localizer.getMessage("lblPayManaFromManaPool"), options);
         final String idx = TextUtil.split(chosen, '.')[0];
@@ -1495,7 +1496,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
         final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
-        final String modeTitle = localizer.getMessage("PlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), sa.getHostCard().toString());
+        final String modeTitle = localizer.getMessage("PlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
             SpellAbilityView a;
@@ -2409,7 +2410,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                             lastSummoningSickness = true;
                                         } else {
                                             lastSummoningSickness = getGui().confirm(forgeCard.getView(),
-                                                    localizer.getMessage("lblCardShouldBeSummoningSicknessConfirm", forgeCard.toString()));
+                                                    localizer.getMessage("lblCardShouldBeSummoningSicknessConfirm", CardTranslation.getTranslatedName(forgeCard.getName())));
                                         }
                                     }
                                 }
@@ -2458,7 +2459,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         }
                     } else if (targetZone == ZoneType.Library) {
                         if (!repeatLast) {
-                            lastTopOfTheLibrary = getGui().confirm(forgeCard.getView(), localizer.getMessage("lblCardShouldBeAddedToLibraryTopOrBottom", forgeCard.toString()),
+                            lastTopOfTheLibrary = getGui().confirm(forgeCard.getView(), localizer.getMessage("lblCardShouldBeAddedToLibraryTopOrBottom", CardTranslation.getTranslatedName(forgeCard.getName())),
                                                     true, Arrays.asList(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
                         }
                         if (lastTopOfTheLibrary) {

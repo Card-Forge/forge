@@ -29,6 +29,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -415,7 +416,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveNTargetTypeCounterFromCard", String.valueOf(amount), counterType.getName(), source), sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveNTargetTypeCounterFromCard", String.valueOf(amount), counterType.getName(), CardTranslation.getTranslatedName(source.getName())), sourceAbility)) {
                         return false;
                     }
                 }

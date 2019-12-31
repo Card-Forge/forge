@@ -17,6 +17,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class AssignGroupEffect extends SpellAbilityEffect {
 
@@ -50,7 +51,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
         Multimap<SpellAbility, GameObject> result = ArrayListMultimap.create();
 
         for (GameObject g : defined) {
-            final String title = Localizer.getInstance().getMessage("lblChooseAbilityForObject", g.toString());
+            final String title = Localizer.getInstance().getMessage("lblChooseAbilityForObject", CardTranslation.getTranslatedName(((Card)g).getName()));
             Map<String, Object> params = Maps.newHashMap();
             params.put("Affected", g);
             
