@@ -60,6 +60,7 @@ Crab:Crabs
 Crocodile:Crocodiles
 Cyclops:Cyclopes
 Dauthi:Dauthis
+Demigod:Demigods
 Demon:Demons
 Deserter:Deserters
 Devil:Devils
