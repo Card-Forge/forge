@@ -87,6 +87,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
             untilAmount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+            if (untilAmount == 0) return;
         }
 
         Integer maxRevealed = null;
