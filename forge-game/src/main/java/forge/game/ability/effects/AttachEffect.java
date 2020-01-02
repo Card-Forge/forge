@@ -61,7 +61,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
-            String message = Localizer.getInstance().getMessage("lblDoYouWantAttach") + " " + attachment + " " + Localizer.getInstance().getMessage("lblTo") + " " + attachTo + "?";
+            String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", attachment.toString(), attachTo.toString());
             if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
                 continue;
             handleAttachment(attachment, attachTo, sa);
@@ -174,7 +174,7 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, source + " - " + Localizer.getInstance().getMessage("lblSelectAPlayerAttachTo"));
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", source.toString()));
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -187,7 +187,7 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - " + Localizer.getInstance().getMessage("lblSelectACardAttachTo"));
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", source.toString()));
             if (o != null) {
                 handleAura(source, o);
                 //source.enchantEntity((Card) o);

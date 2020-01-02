@@ -480,7 +480,7 @@ public class TokenEffect extends SpellAbilityEffect {
             // into battlefield attacking only should work if you are the attacking player
             if (combat.getAttackingPlayer().equals(controller)) {
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
-                final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWith") + " " + c, false);
+                final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()), false);
                 combat.addAttacker(c, defender);
                 combatChanged = true;
             }

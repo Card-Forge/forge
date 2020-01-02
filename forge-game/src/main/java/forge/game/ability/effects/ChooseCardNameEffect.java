@@ -104,7 +104,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 } else {
                     // use CardFace because you might name a alternate name
                 	//"name a card" in mtg card  oracle text is "choose a card name",change text
-                    final String message = validDesc.equals("card") ? Localizer.getInstance().getMessage("lblChooseACardName") : Localizer.getInstance().getMessage("lblChooseA") + validDesc + Localizer.getInstance().getMessage("lblCardName") + ".";
+                    final String message = validDesc.equals("card") ? Localizer.getInstance().getMessage("lblChooseACardName") : Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
 
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
@@ -116,7 +116,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                 host.setNamedCard(chosen);
                 if(!randomChoice) {
-                    p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " " + Localizer.getInstance().getMessage("lblPicked") + " " + chosen, p);
+                    p.getGame().getAction().nofityOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                     p.setNamedCard(chosen);
                 }
             }

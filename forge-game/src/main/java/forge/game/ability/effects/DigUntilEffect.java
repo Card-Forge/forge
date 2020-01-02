@@ -160,7 +160,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         final ZoneType origin = c.getZone().getZoneType();
                         if (optionalFound && !p.getController().confirmAction(sa, null,
-                                Localizer.getInstance().getMessage("lblDoYouWantPutCardTo") + " " + foundDest.name() + "?")) {
+                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
                         } else {
                             Card m = null;

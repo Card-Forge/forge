@@ -157,21 +157,21 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
-                    	countSacrificed++;
-                    	if (remSacrificed) {
-                    		card.addRemembered(lKICopy);
-                    	}
+                        countSacrificed++;
+                        if (remSacrificed) {
+                            card.addRemembered(lKICopy);
+                        }
                     }
                 }
             }
 
             if (remSVar != null) {
-            	card.setSVar(remSVar, String.valueOf(countSacrificed));
-            	SpellAbility root = sa;
-            	do {
-            		root.setSVar(remSVar, String.valueOf(countSacrificed));
-            		root = root.getSubAbility();
-            	} while (root != null);
+                card.setSVar(remSVar, String.valueOf(countSacrificed));
+                SpellAbility root = sa;
+                do {
+                    root.setSVar(remSVar, String.valueOf(countSacrificed));
+                    root = root.getSubAbility();
+                } while (root != null);
             }
         }
 
@@ -194,10 +194,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append(Localizer.getInstance().getMessage("lblSacrifice") + " ").append(sa.getHostCard().toString());
+            sb.append("Sacrifices ").append(sa.getHostCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
-            sb.append(toSac.getController()).append(" " + Localizer.getInstance().getMessage("lblSacrifice") + " ").append(toSac).append(".");
+            sb.append(toSac.getController()).append(" Sacrifices ").append(toSac).append(".");
         } else {
             for (final Player p : tgts) {
                 sb.append(p.getName()).append(" ");
@@ -209,9 +209,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Destroy")) {
-                sb.append(Localizer.getInstance().getMessage("lblDestroys") + " ");
+                sb.append("Destroys ");
             } else {
-                sb.append(Localizer.getInstance().getMessage("lblSacrifice") + " ");
+                sb.append("Sacrifices ");
             }
             sb.append(amount).append(" ").append(msg).append(".");
         }

@@ -40,7 +40,7 @@ public class MillEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("Optional")) {
-                    final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo"), TextUtil.addSuffix(destination.toString(),"?"));
+                    final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo", destination.getTranslatedName()));
                     if (!p.getController().confirmAction(sa, null, prompt)) {
                         continue;
                     }

@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -163,7 +162,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPlay"), TextUtil.addSuffix(tgtCard.toString(),"?")))) {
+            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", tgtCard.toString()))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                 }

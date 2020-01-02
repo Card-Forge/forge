@@ -875,7 +875,7 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainTextOf")) {
+            if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());
                 state.setImageKey(originalState.getImageKey());

@@ -102,7 +102,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         CounterType chosenType = pc.chooseCounterType(list, sa, prompt, params);
 
         params.put("CounterType", chosenType);
-        prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter").replace("%s", chosenType.getName()) + " ";
+        prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName()) + " ";
         Boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
         if (putCounter) {

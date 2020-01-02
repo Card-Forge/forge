@@ -82,8 +82,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"));
 
             if (!chosen.isEmpty()) {
-                game.getAction().reveal(chosen, chooser, true,
-                    chooser + " " + Localizer.getInstance().getMessage("lblPicked") + " " + (chosen.size() == 1 ? Localizer.getInstance().getMessage("lblThisCard") : Localizer.getInstance().getMessage("lblTheseCards")) + " " + Localizer.getInstance().getMessage("lblFrom") + " ");
+                game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
             }
 
             for (Card c : chosen) {
