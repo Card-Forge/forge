@@ -99,7 +99,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
-                            Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualToNum", (totP - chosenP - negativeNum))
+                            Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
                             + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
