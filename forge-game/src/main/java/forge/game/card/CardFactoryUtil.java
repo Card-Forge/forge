@@ -3812,7 +3812,7 @@ public class CardFactoryUtil {
             final String counters = k[1];
             final Cost awakenCost = new Cost(k[2], false);
 
-            final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
+            final SpellAbility awakenSpell = card.getFirstSpellAbility().copyWithDefinedCost(awakenCost);
 
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
@@ -3827,8 +3827,7 @@ public class CardFactoryUtil {
             String desc = "Awaken " + counters + "—" + awakenCost.toSimpleString() +
                     " (" + inst.getReminderText() + ")";
             awakenSpell.setDescription(desc);
-            awakenSpell.setBasicSpell(false);
-            awakenSpell.setPayCosts(awakenCost);
+            awakenSpell.setAlternativeCost(AlternativeCost.Awaken);
             awakenSpell.setIntrinsic(intrinsic);
             inst.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
@@ -3845,16 +3844,16 @@ public class CardFactoryUtil {
             sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
                     " (" + inst.getReminderText() + ")");
             sa.setStackDescription("Bestow - " + card.getName());
-            sa.setBasicSpell(false);
+            sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | StackDescription$ CARDNAME (Dash)"
-                    + " | Dash$ True | NonBasicSpell$ True"
-                    + " | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
+                    + " | Dash$ True | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
 
             final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
+            newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Emerge")) {
@@ -3862,13 +3861,12 @@ public class CardFactoryUtil {
             String costStr = kw[1];
             final SpellAbility sa = card.getFirstSpellAbility();
 
-            final SpellAbility newSA = sa.copy();
+            final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
             newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
             newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setIsEmerge(true);
-            newSA.setPayCosts(new Cost(costStr, false));
+            newSA.setAlternativeCost(AlternativeCost.Emerge);
+
             newSA.setDescription(sa.getDescription() + " (Emerge)");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
@@ -3938,33 +3936,6 @@ public class CardFactoryUtil {
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Escape")) {
-            final String[] k = keyword.split(":");
-            final Cost escapeCost = new Cost(k[1], false);
-            final SpellAbility sa = card.getFirstSpellAbility();
-
-            final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
-
-            newSA.getMapParams().put("PrecostDesc", "Escape—");
-            newSA.getMapParams().put("CostDesc", ManaCostParser.parse(k[1]));
-
-            // makes new SpellDescription
-            final StringBuilder desc = new StringBuilder();
-            desc.append(newSA.getCostDescription());
-            desc.append("(").append(inst.getReminderText()).append(")");
-            newSA.setDescription(desc.toString());
-
-            // Stack Description only for Permanent or it might crash
-            if (card.isPermanent()) {
-                final StringBuilder sbStack = new StringBuilder();
-                sbStack.append(sa.getStackDescription()).append(" (Escaped)");
-                newSA.setStackDescription(sbStack.toString());
-            }
-            newSA.setBasicSpell(false);
-            newSA.setEscape(true);
-            newSA.setIntrinsic(intrinsic);
-            newSA.getRestrictions().setZone(ZoneType.Graveyard);
-            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Eternalize")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
@@ -4011,8 +3982,7 @@ public class CardFactoryUtil {
             final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" (Evoked)");
             newSA.setStackDescription(sb.toString());
-            newSA.setBasicSpell(false);
-            newSA.setEvoke(true);
+            newSA.setAlternativeCost(AlternativeCost.Evoke);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fortify")) {
@@ -4169,8 +4139,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ PutCounter | Cost$ ");
             abilityStr.append(manacost);
             abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
-            abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
-            abilityStr.append("| PrecostDesc$ Outlast");
+            abilityStr.append("| SorcerySpeed$ True | PrecostDesc$ Outlast");
             Cost cost = new Cost(manacost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 abilityStr.append("—");
@@ -4182,6 +4151,7 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
+            sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
 
         } else if (keyword.startsWith("Prowl")) {
@@ -4200,9 +4170,8 @@ public class CardFactoryUtil {
             sb.append(newSA.getCostDescription());
             sb.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(sb.toString());
-            
-            newSA.setBasicSpell(false);
-            newSA.setProwl(true);
+
+            newSA.setAlternativeCost(AlternativeCost.Prowl);
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
@@ -4247,8 +4216,7 @@ public class CardFactoryUtil {
             final Cost cost = new Cost(k[1], false);
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
 
-            newSA.setBasicSpell(false);
-            newSA.setSpectacle(true);
+            newSA.setAlternativeCost(AlternativeCost.Spectacle);
 
             String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
                     + ")";
@@ -4262,8 +4230,7 @@ public class CardFactoryUtil {
             final Cost surgeCost = new Cost(k[1], false);
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(surgeCost);
 
-            newSA.setBasicSpell(false);
-            newSA.setSurged(true);
+            newSA.setAlternativeCost(AlternativeCost.Surge);
 
             String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
                     + ")";
@@ -4374,8 +4341,7 @@ public class CardFactoryUtil {
             sar.setInstantSpeed(true);
 
             newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setIsOffering(true);
+            newSA.setAlternativeCost(AlternativeCost.Offering);
             newSA.setPayCosts(sa.getPayCosts());
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
@@ -4410,7 +4376,7 @@ public class CardFactoryUtil {
             sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setIsCycling(true);
+            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
             
@@ -4434,7 +4400,7 @@ public class CardFactoryUtil {
             sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setIsCycling(true);
+            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
             

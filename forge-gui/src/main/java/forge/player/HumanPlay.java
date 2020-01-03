@@ -88,7 +88,7 @@ public class HumanPlay {
 
         sa = AbilityUtils.addSpliceEffects(sa);
 
-        if (sa.hasParam("Bestow")) {
+        if (sa.isBestow()) {
             source.animateBestow();
         }
 

@@ -1649,7 +1649,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     } else {
                         sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                     }
-                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
+                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph") || keyword.startsWith("Escape")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -1794,7 +1794,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
                         || keyword.startsWith("Reinforce") || keyword.startsWith("Champion") || keyword.startsWith("Prowl")
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap") || keyword.startsWith("Escape")
+                        || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
@@ -2189,7 +2189,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbBefore.append(inst.getReminderText());
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
-                        || keyword.startsWith("Miracle") || keyword.startsWith("Recover")) {
+                        || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
+                        || keyword.startsWith("Escape")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
 
@@ -3785,6 +3786,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardKeywordsInternal(final KeywordsChange change, final long timestamp) {
         changedCardKeywords.put(timestamp, change);
         updateKeywordsCache(currentState);
+    }
+
+    public final boolean clearChangedCardKeywords(final boolean updateView) {
+        if (changedCardKeywords.isEmpty()) {
+            return false;
+        }
+        changedCardKeywords.clear();
+        if (updateView) {
+            updateKeywords();
+        }
+        return true;
     }
 
     // Hidden keywords will be left out

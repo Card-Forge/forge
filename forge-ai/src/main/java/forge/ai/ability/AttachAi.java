@@ -1031,7 +1031,7 @@ public class AttachAi extends SpellAbilityAi {
         Card c = null;
         List<Card> magnetList = null;
         String stCheck = null;
-        if (attachSource.isAura() || sa.hasParam("Bestow")) {
+        if (attachSource.isAura() || sa.isBestow()) {
             stCheck = "EnchantedBy";
             magnetList = CardLists.filter(list, new Predicate<Card>() {
                 @Override

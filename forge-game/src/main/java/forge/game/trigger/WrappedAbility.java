@@ -342,11 +342,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setFlashBackAbility(final boolean flashBackAbility) {
-        sa.setFlashBackAbility(flashBackAbility);
-    }
-
-    @Override
     public void setMultiKickerManaCost(final ManaCost cost) {
         sa.setMultiKickerManaCost(cost);
     }
@@ -545,5 +540,17 @@ public class WrappedAbility extends Ability {
             }
         }
         // TODO: CardCollection
+    }
+
+    public boolean isAlternativeCost(AlternativeCost ac) {
+        return sa.isAlternativeCost(ac);
+    }
+
+    public AlternativeCost getAlternativeCost() {
+        return sa.getAlternativeCost();
+    }
+
+    public void setAlternativeCost(AlternativeCost ac) {
+        sa.setAlternativeCost(ac);
     }
 }
