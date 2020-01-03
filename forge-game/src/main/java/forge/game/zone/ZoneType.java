@@ -12,19 +12,19 @@ import com.google.common.base.Function;
  * The Enum Zone.
  */
 public enum ZoneType {
-    Hand(true, Localizer.getInstance().getMessage("lblHandZone")),
-    Library(true, Localizer.getInstance().getMessage("lblLibraryZone")),
-    Graveyard(false, Localizer.getInstance().getMessage("lblGraveyardZone")),
-    Battlefield(false, Localizer.getInstance().getMessage("lblBattlefieldZone")),
-    Exile(false, Localizer.getInstance().getMessage("lblExileZone")),
-    Flashback(false, Localizer.getInstance().getMessage("lblFlashbackZone")),
-    Command(false, Localizer.getInstance().getMessage("lblCommandZone")),
-    Stack(false, Localizer.getInstance().getMessage("lblStackZone")),
-    Sideboard(true, Localizer.getInstance().getMessage("lblSideboardZone")),
-    Ante(false, Localizer.getInstance().getMessage("lblAnteZone")),
-    SchemeDeck(true, Localizer.getInstance().getMessage("lblSchemeDeckZone")),
-    PlanarDeck(true, Localizer.getInstance().getMessage("lblPlanarDeckZone")),
-    None(true, Localizer.getInstance().getMessage("lblNoneZone"));
+    Hand(true, "lblHandZone"),
+    Library(true, "lblLibraryZone"),
+    Graveyard(false, "lblGraveyardZone"),
+    Battlefield(false, "lblBattlefieldZone"),
+    Exile(false, "lblExileZone"),
+    Flashback(false, "lblFlashbackZone"),
+    Command(false, "lblCommandZone"),
+    Stack(false, "lblStackZone"),
+    Sideboard(true, "lblSideboardZone"),
+    Ante(false, "lblAnteZone"),
+    SchemeDeck(true, "lblSchemeDeckZone"),
+    PlanarDeck(true, "lblPlanarDeckZone"),
+    None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command/*, Hand*/);
 
@@ -32,7 +32,7 @@ public enum ZoneType {
     private final String zoneName;
     ZoneType(boolean holdsHidden, String name) {
         holdsHiddenInfo = holdsHidden;
-        zoneName = name;
+        zoneName = Localizer.getInstance().getMessage(name);
     }
 
     public static ZoneType smartValueOf(final String value) {

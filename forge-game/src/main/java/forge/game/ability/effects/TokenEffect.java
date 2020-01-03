@@ -49,6 +49,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 import forge.item.PaperToken;
 import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
@@ -480,7 +481,7 @@ public class TokenEffect extends SpellAbilityEffect {
             // into battlefield attacking only should work if you are the attacking player
             if (combat.getAttackingPlayer().equals(controller)) {
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
-                final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.toString()), false);
+                final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false);
                 combat.addAttacker(c, defender);
                 combatChanged = true;
             }

@@ -23,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class ControlGainEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -228,7 +229,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     final FCollectionView<GameEntity> e = combat.getDefenders();
 
                     final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                            Localizer.getInstance().getMessage("lblDeclareDefenderForCard", tgtC.toString()));
+                            Localizer.getInstance().getMessage("lblDeclareDefenderForCard", CardTranslation.getTranslatedName(tgtC.getName())));
 
                     if (defender != null) {
                         combat.addAttacker(tgtC, defender);

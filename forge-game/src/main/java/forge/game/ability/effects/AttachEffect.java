@@ -17,6 +17,7 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 
@@ -45,6 +46,14 @@ public class AttachEffect extends SpellAbilityEffect {
         } else {
             attachTo = targets.get(0);
         }
+        
+        String attachToName = null;
+        if (attachTo instanceof Card) {
+            attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());
+        }
+        else {
+            attachToName = attachTo.toString();
+        }
 
         final Player p = sa.getActivatingPlayer();
 
@@ -61,7 +70,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
-            String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", attachment.toString(), attachTo.toString());
+            String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", CardTranslation.getTranslatedName(attachment.getName()), attachToName);
             if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
                 continue;
             handleAttachment(attachment, attachTo, sa);
@@ -174,7 +183,7 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", source.toString()));
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())));
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -187,7 +196,7 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", source.toString()));
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())));
             if (o != null) {
                 handleAura(source, o);
                 //source.enchantEntity((Card) o);

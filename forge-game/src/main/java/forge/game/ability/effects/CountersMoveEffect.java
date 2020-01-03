@@ -13,6 +13,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 import java.util.Map;
@@ -132,7 +133,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     params.put("CounterType", cType);
                     params.put("Source", src);
                     params.put("Target", dest);
-                    cnum = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard", cType.getName(), src.toString()), 0, cmax, params);
+                    cnum = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard", cType.getName(), CardTranslation.getTranslatedName(src.getName())), 0, cmax, params);
                 } else {
                     cnum = AbilityUtils.calculateAmount(host, counterNum, sa);
                 }
@@ -167,7 +168,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
             if (counterNum.equals("Any")) {
                 tgtCards = player.getController().chooseCardsForEffect(tgtCards, sa, 
-                            Localizer.getInstance().getMessage("lblChooseCardToGetCountersFrom", cType.getName(), source.toString()), 0, tgtCards.size(), true);
+                            Localizer.getInstance().getMessage("lblChooseCardToGetCountersFrom", cType.getName(), CardTranslation.getTranslatedName(source.getName())), 0, tgtCards.size(), true);
             }
 
             boolean updateSource = false;
@@ -191,7 +192,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 params.put("CounterType", cType);
                 params.put("Source", source);
                 params.put("Target", cur);
-                int cnum = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblPutHowManyTargetCounterOnCard", cType.getName(), cur.toString()), 0, source.getCounters(cType), params);
+                int cnum = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblPutHowManyTargetCounterOnCard", cType.getName(), CardTranslation.getTranslatedName(cur.getName())), 0, source.getCounters(cType), params);
 
                 if (cnum > 0) {
                     source.subtractCounter(cType, cnum);
@@ -249,7 +250,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         params.put("CounterType", cType);
                         params.put("Source", source);
                         params.put("Target", cur);
-                        cntToMove = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard", cType.getName(), source.toString()), 0, cntToMove, params);
+                        cntToMove = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard", cType.getName(), CardTranslation.getTranslatedName(source.getName())), 0, cntToMove, params);
                     }
 
                     if (source.getCounters(cType) >= cntToMove) {

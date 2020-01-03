@@ -9,6 +9,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         Player controller = source.getController();
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYoulikeAbandonConfirm", source.toString()))) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYoulikeAbandonConfirm", CardTranslation.getTranslatedName(source.getName())))) {
             return;
         }
 
