@@ -8,10 +8,7 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -69,9 +66,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 }
             }
             return false;
-        }
-
-        if (logic.equals("MostProminentInComputerDeck")) {
+        } else if (logic.equals("MostProminentInComputerDeck")) {
             if ("Astral Cornucopia".equals(sourceName)) {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
                 // if there are some nonland permanents in hand
@@ -79,6 +74,11 @@ public class ChooseColorAi extends SpellAbilityAi {
                         CardPredicates.Presets.NONLAND_PERMANENTS);
 
                 return permanents.size() > 0 && ph.is(PhaseType.MAIN2, ai);
+            }
+        } else if (logic.equals("HighestDevotionToColor")) {
+            // currently only works more or less reliably in Main2 to cast own spells
+            if (!ph.is(PhaseType.MAIN2, ai)) {
+                return false;
             }
         }
 

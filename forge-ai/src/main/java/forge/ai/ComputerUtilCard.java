@@ -964,6 +964,22 @@ public class ComputerUtilCard {
                 }
                 chosen.add(chosenColor);
             }
+            else if (logic.equals("HighestDevotionToColor")) {
+                int curDevotion = 0;
+                String chosenColor = MagicColor.Constant.WHITE;
+                CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+                for(byte c : MagicColor.WUBRG) {
+                    String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
+
+                    int devotion = CardFactoryUtil.xCount(sa.getHostCard(), devotionCode);
+                    if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
+                        curDevotion = devotion;
+                        chosenColor = MagicColor.toLongString(c);
+                    }
+                }
+                chosen.add(chosenColor);
+            }
+
         }
         if (chosen.isEmpty()) {
             chosen.add(MagicColor.Constant.GREEN);
