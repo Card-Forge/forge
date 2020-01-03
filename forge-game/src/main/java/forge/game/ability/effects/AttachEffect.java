@@ -49,10 +49,10 @@ public class AttachEffect extends SpellAbilityEffect {
         
         String attachToName = null;
         if (attachTo instanceof Card) {
-        	attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());
+            attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());
         }
         else {
-        	attachToName = attachTo.toString();
+            attachToName = attachTo.toString();
         }
 
         final Player p = sa.getActivatingPlayer();
