@@ -109,7 +109,7 @@ public class ComputerUtil {
         if (chooseTargets != null) {
             chooseTargets.run();
         }
-        if (sa.hasParam("Bestow")) {
+        if (sa.isBestow()) {
             sa.getHostCard().animateBestow();
         }
 

@@ -159,7 +159,7 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, fromState, zonePosition, payment);
+                rollbackAbility(fromZone, zonePosition, payment);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
@@ -244,14 +244,13 @@ public class HumanPlaySpellAbility {
         }
     }
 
-    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition, CostPayment payment) {
+    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from
             game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
-            ability.getHostCard().setState(fromState, true);
         }
 
         clearTargets(ability);
