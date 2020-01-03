@@ -382,20 +382,9 @@ public final class AbilityFactory {
      * @param mapParams
      */
     private static final void initializeParams(final SpellAbility sa, Map<String, String> mapParams) {
-        if (mapParams.containsKey("Flashback")) {
-            sa.setFlashBackAbility(true);
-        }
 
         if (mapParams.containsKey("NonBasicSpell")) {
             sa.setBasicSpell(false);
-        }
-
-        if (mapParams.containsKey("Dash")) {
-            sa.setDash(true);
-        }
-
-        if (mapParams.containsKey("Outlast")) {
-            sa.setOutlast(true);
         }
     }
 

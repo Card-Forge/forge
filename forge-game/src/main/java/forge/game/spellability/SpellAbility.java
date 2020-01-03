@@ -101,20 +101,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
-    // TODO use enum for the flags
-    private boolean flashBackAbility = false;
+    private AlternativeCost altCost = null;
+
     private boolean aftermath = false;
-    private boolean cycling = false;
-    private boolean dash = false;
-    private boolean escape = false;
-    private boolean evoke = false;
-    private boolean prowl = false;
-    private boolean surge = false;
-    private boolean spectacle = false;
-    private boolean offering = false;
-    private boolean emerge = false;
+
     private boolean cumulativeupkeep = false;
-    private boolean outlast = false;
     private boolean blessing = false;
     private Integer chapter = null;
 
@@ -388,10 +379,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCycling() {
-        return cycling;
-    }
-    public final void setIsCycling(final boolean b) {
-        cycling = b;
+        return this.isAlternativeCost(AlternativeCost.Cycling);
     }
 
     public Card getOriginalHost() {
@@ -780,17 +768,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isBasicSpell() {
-        return basicSpell && !isFlashBackAbility() && !isBuyBackAbility();
+        return basicSpell && this.altCost == null && getRootAbility().optionalCosts.isEmpty();
     }
     public void setBasicSpell(final boolean basicSpell0) {
         basicSpell = basicSpell0;
     }
 
-    public void setFlashBackAbility(final boolean flashBackAbility0) {
-        flashBackAbility = flashBackAbility0;
-    }
     public boolean isFlashBackAbility() {
-        return flashBackAbility;
+        return this.isAlternativeCost(AlternativeCost.Flashback);
     }
 
     public void setBasicLandAbility(final boolean basicLandAbility0) {
@@ -815,10 +800,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOutlast() {
-        return outlast;
-    }
-    public void setOutlast(boolean outlast0) {
-        outlast = outlast0;
+        return isAlternativeCost(AlternativeCost.Outlast);
     }
 
     public boolean isBlessing() {
@@ -1165,57 +1147,32 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    public final boolean isDash() {
-        return dash;
+    public final boolean isBestow() {
+        return isAlternativeCost(AlternativeCost.Bestow);
     }
-    public final void setDash(final boolean isDash) {
-        dash = isDash;
+
+    public final boolean isDash() {
+        return isAlternativeCost(AlternativeCost.Dash);
     }
 
     public final boolean isEscape() {
-        return escape;
-    }
-
-    public final void setEscape(final boolean isEscape) {
-        escape = isEscape;
+        return isAlternativeCost(AlternativeCost.Escape);
     }
 
     public final boolean isEvoke() {
-        return evoke;
-    }
-
-    public final void setEvoke(final boolean isEvoke) {
-        evoke = isEvoke;
+        return isAlternativeCost(AlternativeCost.Evoke);
     }
 
     public final boolean isProwl() {
-        return prowl;
-    }
-
-    public final void setProwl(final boolean isProwl) {
-        prowl = isProwl;
+        return isAlternativeCost(AlternativeCost.Prowl);
     }
 
     public final boolean isSurged() {
-        if (surge)
-            return true;
-        SpellAbility parent = getParent();
-        if (parent != null) {
-            return parent.isSurged();
-        }
-        return false;
-    }
-
-    public final void setSurged(final boolean isSurge) {
-        surge = isSurge;
+        return isAlternativeCost(AlternativeCost.Surge);
     }
 
     public final boolean isSpectacle() {
-        return spectacle;
-    }
-
-    public final void setSpectacle(final boolean isSpectacle) {
-        spectacle = isSpectacle;
+        return isAlternativeCost(AlternativeCost.Spectacle);
     }
 
     public CardCollection getTappedForConvoke() {
@@ -1234,10 +1191,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isEmerge() {
-        return emerge;
-    }
-    public void setIsEmerge(final boolean bEmerge) {
-        emerge = bEmerge;
+        return isAlternativeCost(AlternativeCost.Emerge);
     }
 
     public Card getSacrificedAsEmerge() {
@@ -1251,10 +1205,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOffering() {
-        return offering;
-    }
-    public void setIsOffering(final boolean bOffering) {
-        offering = bOffering;
+        return isAlternativeCost(AlternativeCost.Offering);
     }
 
     public Card getSacrificedAsOffering() { //for Patron offering
@@ -1982,5 +1933,33 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setGrantorStatic(final StaticAbility st) {
         grantorStatic = st;
+    }
+
+    public boolean isAlternativeCost(AlternativeCost ac) {
+        if (ac.equals(altCost)) {
+            return true;
+        }
+
+        SpellAbility parent = getParent();
+        if (parent != null) {
+            return parent.isAlternativeCost(ac);
+        }
+        return false;
+    }
+
+    public AlternativeCost getAlternativeCost() {
+        if (altCost != null) {
+            return altCost;
+        }
+
+        SpellAbility parent = getParent();
+        if (parent != null) {
+            return parent.getAlternativeCost();
+        }
+        return null;
+    }
+
+    public void setAlternativeCost(AlternativeCost ac) {
+        altCost = ac;
     }
 }

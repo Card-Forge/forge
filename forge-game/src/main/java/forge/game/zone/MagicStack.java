@@ -460,7 +460,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (thisHasFizzled) { // Fizzle
-            if (sa.hasParam("Bestow")) {
+            if (sa.isBestow()) {
                 // 702.102d: if its target is illegal, 
                 // the effect making it an Aura spell ends. 
                 // It continues resolving as a creature spell.
