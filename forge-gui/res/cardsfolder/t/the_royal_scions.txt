@@ -5,9 +5,9 @@ Loyalty:5
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:All
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike & Trample | SpellDescription$ Target creature gets +2/+0 and gains first strike and trample until end of turn.
 A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 4 | SubAbility$ DBTrigger | SpellDescription$ Draw four cards. When you do, CARDNAME deals damage to any target equal to the number of cards in your hand.
 SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ DBDamage | TriggerDescription$ When you do, CARDNAME deals damage to any target equal to the number of cards in your hand.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X
 SVar:X:Count$InYourHand
-Oracle:[+1]: Draw a card, then discard a card.\n[+1]: Target creature gets +2/+0 and gains first strike until end of turn.\n[−8]: Draw four cards. When you do, The Royal Scions deals damage to any target equal to the number of cards in your hand.
+Oracle:[+1]: Draw a card, then discard a card.\n[+1]: Target creature gets +2/+0 and gains first strike and trample until end of turn.\n[−8]: Draw four cards. When you do, The Royal Scions deals damage to any target equal to the number of cards in your hand.
