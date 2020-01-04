@@ -562,7 +562,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     }
                                 }
                             } else {
-                                defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblDeclareDefenderForCard", CardTranslation.getTranslatedName(movedCard.getName())));
+                                defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName())));
                             }
                             if (defender != null) {
                                 combat.addAttacker(movedCard, defender);
@@ -1052,7 +1052,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 }
                             }
                         } else {
-                            defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblDeclareDefenderForCard", CardTranslation.getTranslatedName(c.getName())));
+                            defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())));
                         }
                         if (defender != null) {
                             combat.addAttacker(c, defender);
