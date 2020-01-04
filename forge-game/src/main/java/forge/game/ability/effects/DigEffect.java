@@ -232,7 +232,7 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", "{player's}");
                         }
                         else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTargetZone", "{player's}", destZone2.getTranslatedName());
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", "{player's}", destZone2.getTranslatedName());
                         }
 
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);

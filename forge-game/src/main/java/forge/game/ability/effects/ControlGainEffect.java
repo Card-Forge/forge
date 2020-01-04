@@ -229,7 +229,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     final FCollectionView<GameEntity> e = combat.getDefenders();
 
                     final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                            Localizer.getInstance().getMessage("lblDeclareDefenderForCard", CardTranslation.getTranslatedName(tgtC.getName())));
+                            Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(tgtC.getName())));
 
                     if (defender != null) {
                         combat.addAttacker(tgtC, defender);

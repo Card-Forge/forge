@@ -56,7 +56,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         // Default to tapping for AI
         boolean toTap = true;
 
-        StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblTapOrUntap") + " ");
+        StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblTapOrUntapTarget") + " ");
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
         } else {
