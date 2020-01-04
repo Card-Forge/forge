@@ -5449,6 +5449,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (source.getController().equals(chosenPlayer)) {
                     return true;
                 }
+            } else if (kw.equals("Protection from each converted mana cost other than the chosen number")) {
+                if (source.getCMC() != chosenNumber) {
+                    return true;
+                }
             } else if (kw.startsWith("Protection from opponent of ")) {
                 final String playerName = kw.substring("Protection from opponent of ".length());
                 if (source.getController().isOpponentOf(playerName)) {
