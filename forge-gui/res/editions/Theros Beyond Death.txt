@@ -12,29 +12,41 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 7 U Commanding Presence
 9 U Daxos, Blessed by the Sun
 14 M Elspeth, Sun's Nemesis
+18 M Heliod, Sun-Crowned
 23 C Hero of the Winds
+24 R Idyllic Tutor
 25 C Indomitable Will
 26 C Karametra's Blessing
 28 C Leonin of the Lost Pride
 29 C Nyxborn Courser
+30 C Omen of the Sun
 31 U Phalanx Tactics
 32 C Pious Wayfarer
+33 U Reverent Hoplite
 34 C Revoke Existence
 42 U Alirios, Enraptured
 43 R Ashiok's Erasure
+44 C Brine Giant
 48 C Eidolon of Philosophy
 51 C Ichthyomorphosis
 54 C Memory Drain
 53 U Medomai's Prophecy
+55 R Nadir Kraken
 56 C Naiad of Hidden Coves
 57 C Nyxborn Seaguard
 58 C Omen of the Sea
+71 M Thassa, Deep-Dwelling
+74 C Thirst for Meaning
 75 U Threnody Singer
 76 C Triton Waverider
+77 C Towering-Wave Mystic
+87 U Cling to Dust
+93 M Erebos, Bleak-Hearted
 96 C Fruit of Tizerus
 99 U Gray Merchant of Asphodel
 102 U Inevitable End
 104 U Minion's Return
+105 U Mire Triton
 106 C Mire's Grasp
 109 C Nyxborn Marauder
 110 C Omen of the Dead
@@ -43,6 +55,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 118 R Tymaret Calls the Dead
 121 U Underworld Dreams
 122 C Venomous Hierophant
+123 R Woe Strider
 124 R The Akroan War
 126 C Arena Trickster
 136 U Furious Rise
@@ -52,9 +65,13 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 142 C Iroas's Blessing
 143 C Irreverent Revelers
 144 C Nyxborn Brute
+145 C Omen of the Forge
+147 M Ox of Agonas
 149 C Portent of Betrayal
+150 M Purphoros, Bronze-Blooded
 152 C Satyr's Cunning
 159 C Thrill of Possibility
+161 R Underworld Breach
 163 C Underworld Rage-Hound
 164 C Wrap in Flames
 164 C Aspect of Lamprey
@@ -62,6 +79,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 167 C Chainweb Aracnir
 174 C Ilysian Caryatid
 176 U Klothys's Design
+185 M Nylea, Keen-Eyed
 187 C Nylea's Huntmaster
 191 C Nyxborn Colossus
 192 C Omen of the Hunt
@@ -74,20 +92,34 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 205 U Wolfwillow Haven
 207 R Allure of the Unknown
 208 M Ashiok, Nightmare Muse
+209 R Atris, Oracle of Half-Truths
+213 U Devourer of Memory
 217 R Gallia of the Endless Dance
 219 U Hero of the Nyxborn
 220 M Klothys, God of Destiny
 228 U Staggering Insight
 230 U Warden of the Chained
+235 R Nyx Lotus
 238 C Thaumaturge's Familiar
 239 U Thundering Chariot
+242 U Field of Ruin
 243 R Labyrinth of Skophos
+244 R Temple of Abandon
+245 R Temple of Deceit
+246 R Temple of Enlightenment
+247 R Temple of Malice
+248 R Temple of Plenty
 250 L Plains
 251 L Island
 252 L Swamp
 253 L Mountain
 254 L Forest
+255 M Elspeth, Sun's Nemesis
+256 M Ashiok, Nightmare Muse
 258 U Daxos, Blessed by the Sun
+261 M Thassa, Deep-Dwelling
+262 M Erebos, Bleak-Hearted
+266 M Nylea, Keen-Eyed
 269 M Athreos, Shroud-Veiled
 270 M Elspeth, Undaunted Hero
 274 M Ashiok, Sculptor of Fears
@@ -111,13 +143,27 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 295 R Terror of Mount Velus
 296 R Ironscale Hydra
 297 R Treeshaker Chimera
+301 R Idyllic Tutor
+305 R Nadir Kraken
+316 R Treacherous Blessing
+324 R Underworld Breach
 331 R Setessan Champion
+333 R Atris, Oracle of Half-Truths
+341 R Kunoros, Hound of Athreos
+347 R Temple of Abandon
+348 R Temple of Deceit
+349 R Temple of Enlightenment
+350 R Temple of Malice
+351 R Temple of Plenty
 
 
 [tokens]
 b_2_2_zombie
+c_0_4_wall_defender
 g_2_2_wolf
 r_1_1_satyr_noblock
+u_1_1_tentacle
 u_3_2_reflection
 ub_2_3_nightmare_mill
+w_0_1_goat
 w_1_1_human_soldier

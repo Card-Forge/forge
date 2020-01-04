@@ -231,6 +231,7 @@ Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
 Survivor:Survivors
+Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
 Thopter:Thopters

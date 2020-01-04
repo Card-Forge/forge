@@ -1,0 +1,11 @@
+Name:Haktos the Unscarred
+ManaCost:R R W W
+Types:Legendary Creature Human Warrior
+PT:6/1
+K:CARDNAME attacks each combat if able.
+K:ETBReplacement:Other:ChooseNum
+SVar:ChooseNum:DB$ GenericChoice | AtRandom$ True | Choices$ Num2,Num3,Num4
+SVar:Num2:DB$ Animate | Defined$ Self | Keywords$ Protection:Card.cmcNE2:Protection from converted mana cost other than 2 | Permanent$ True
+SVar:Num3:DB$ Animate | Defined$ Self | Keywords$ Protection:Card.cmcNE3:Protection from converted mana cost other than 3 | Permanent$ True
+SVar:Num4:DB$ Animate | Defined$ Self | Keywords$ Protection:Card.cmcNE4:Protection from converted mana cost other than 4 | Permanent$ True
+Oracle:Haktos the Unscarred attacks each combat if able.\nAs Haktos enters the battlefield, choose 2, 3, or 4 at random.\nHaktos has protection from each converted mana cost other than the chosen number.
