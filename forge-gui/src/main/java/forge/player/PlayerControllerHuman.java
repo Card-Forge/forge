@@ -1496,7 +1496,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
         final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
-        final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().toString()));
+        final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
             SpellAbilityView a;
