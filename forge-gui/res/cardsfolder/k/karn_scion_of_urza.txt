@@ -2,7 +2,7 @@ Name:Karn, Scion of Urza
 ManaCost:4
 Types:Legendary Planeswalker Karn
 Loyalty:5
-A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone$ Hand | DestinationZone2$ Exile | ExileWithCounter$ SILVER | Choser$ Opponent | SpellDescription$ Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone$ Hand | DestinationZone2$ Exile | ExileWithCounter$ SILVER | Choser$ Player.Opponent | SpellDescription$ Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Hidden$ True | Origin$ Exile | Destination$ Hand | ChangeType$ Card.YouOwn+counters_GE1_SILVER | StackDescription$ SpellDescription | SpellDescription$ Put a card you own with a silver counter on it from exile into your hand.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | LegacyImage$ c 0 0 a construct total artifacts dom | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
 SVar:BuffedBy:Artifact

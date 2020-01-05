@@ -22,6 +22,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
 
 import java.util.*;
@@ -100,13 +101,6 @@ public class DigEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        if (sa.hasParam("Choser")) {
-            final List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
-            if (!choosers.isEmpty()) {
-                chooser = choosers.get(0);
-            }
-        }
-
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         for (final Player p : tgtPlayers) {
@@ -165,7 +159,15 @@ public class DigEffect extends SpellAbilityEffect {
                         host.addRemembered(one);
                     }
                 }
-
+                if (sa.hasParam("Choser")) {
+                    final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
+                    if (!choosers.isEmpty()) {
+                        chooser = player.getController().chooseSingleEntityForEffect(choosers, sa, "Choser:");
+                    }
+                    if (sa.hasParam("SetChosenPlayer")) {
+                        host.setChosenPlayer(chooser);
+                    }
+                }
                 if (!noMove) {
                     CardCollection movedCards;
                     rest.addAll(top);
