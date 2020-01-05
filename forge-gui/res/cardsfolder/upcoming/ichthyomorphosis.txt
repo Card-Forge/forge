@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | SetColor$ Blue | RemoveAllAbilities$ True | AddType$ Creature & Frog | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | SetColor$ Blue | RemoveAllAbilities$ True | AddType$ Creature & Fish | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
 Oracle:Enchant creature\nEnchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
