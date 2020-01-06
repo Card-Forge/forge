@@ -3849,10 +3849,21 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
-            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | StackDescription$ CARDNAME (Dash)"
-                    + " | Dash$ True | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
+            final Cost dashCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(dashCost);
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Dash ").append(dashCost.toSimpleString()).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Dash)");
+            newSA.setStackDescription(sb.toString());
+
             newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
