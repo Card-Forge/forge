@@ -1,12 +1,5 @@
 package forge.screens.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.*;
-
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
@@ -28,8 +21,16 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
+import forge.screens.deckeditor.views.VProbabilities;
+import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -194,6 +195,9 @@ public enum CSubmenuDraft implements ICDoc {
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
+        VProbabilities.SINGLETON_INSTANCE.getLayoutControl().update();
+        VStatistics.SINGLETON_INSTANCE.getLayoutControl().update();
+
     }
 
     private void fillOpponentComboBox() {
