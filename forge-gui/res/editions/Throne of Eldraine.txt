@@ -7,6 +7,7 @@ MciCode=eld
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Secret Cards"), 1 RareMythic:!fromSheet("ELD Secret Cards"), 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 R Acclaimed Contender

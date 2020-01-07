@@ -553,6 +553,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Lists.newArrayList(Iterables.filter(this.roAllCards, predicate));
     }
 
+    // Do I want a foiled version of these cards?
+    @Override
+    public List<PaperCard> getAllCardsFromEdition(CardEdition edition) {
+        List<PaperCard> cards = Lists.newArrayList();
+
+        for(CardInSet cis : edition.getCards()) {
+            PaperCard card = this.getCard(cis.name, edition.getCode());
+            if (card == null) {
+                // Just in case the card is listed in the edition file but Forge doesn't support it
+                continue;
+            }
+
+            cards.add(card);
+        }
+        return cards;
+    }
+
     @Override
     public boolean contains(String name) {
         return allCardsByName.containsKey(getName(name));
