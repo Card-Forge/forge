@@ -1,0 +1,7 @@
+Name:One with the Stars
+ManaCost:3 U
+Types:Enchantment Aura
+K:Enchant creature or enchantment
+A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature,Enchantment | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Enchantment | RemoveCardTypes$ True | Description$ Enchanted permanent is an enchantment and loses all other card types. (It still has its abilities, but it's no still a creature.)
+Oracle:Enchant creature or enchantment\nEnchanted permanent is an enchantment and loses all other card types. (It still has its abilities, but it's no longer a creature.)

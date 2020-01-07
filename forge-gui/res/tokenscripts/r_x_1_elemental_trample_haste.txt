@@ -1,0 +1,8 @@
+Name:Elemental
+ManaCost:no cost
+Types:Creature Elemental
+Colors:red
+PT:*/1
+K:Trample
+K:Haste
+Oracle:Trample, Haste
