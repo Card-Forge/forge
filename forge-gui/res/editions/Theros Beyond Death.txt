@@ -161,7 +161,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 [tokens]
 b_2_2_zombie
 c_0_4_wall_defender
+g_1_2_spider_reach
 g_2_2_wolf
+r_x_1_elemental_trample_haste
 r_1_1_satyr_noblock
 u_1_1_tentacle
 u_3_2_reflection
