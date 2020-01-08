@@ -345,6 +345,14 @@ public class PumpEffect extends SpellAbilityEffect {
             pumpForget = sa.getParam("ForgetObjects");
         }
 
+        if (sa.hasParam("NoteCardsFor")) {
+            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("NoteCards"), sa)) {
+                for (Player p : tgtPlayers) {
+                    p.addNoteForName(sa.getParam("NoteCardsFor"), "Id:" + c.getId());
+                }
+            }
+        }
+
         if (pumpForget != null) {
             for (final Object o : AbilityUtils.getDefinedObjects(host, pumpForget, sa)) {
                 host.removeRemembered(o);
@@ -394,7 +402,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("AtEOT") && !tgtCards.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgtCards);
         }
-        
+
         for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
             if (!tgtC.isInZone(pumpZone)) {

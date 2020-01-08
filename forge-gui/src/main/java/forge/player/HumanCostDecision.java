@@ -811,7 +811,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         InputSelectCardsFromList inp = null;
         if (cost.getType().equals("SameColor")) {
             final Integer num = cost.convertAmount();
-            CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
             final CardCollectionView hand2 = hand;
             hand = CardLists.filter(hand, new Predicate<Card>() {
                 @Override
@@ -844,7 +844,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         else {
             Integer num = cost.convertAmount();
 
-            CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
             hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);
 
             if (num == null) {
@@ -860,6 +860,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
             if (num == 0) {
                 return PaymentDecision.number(0);
+            }
+            if (hand.size() == num) {
+                return PaymentDecision.card(hand);
             }
 
             inp = new InputSelectCardsFromList(controller, num, num, hand, ability);

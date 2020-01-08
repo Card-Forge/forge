@@ -58,6 +58,15 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             validDesc = sa.getParam("ValidDesc");
         }
 
+        String message;
+        if (sa.hasParam("SelectPrompt")) {
+            message = sa.getParam("SelectPrompt");
+        } else if (validDesc.equals("card")) {
+            message = Localizer.getInstance().getMessage("lblChooseACardName");
+        } else {
+            message = Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
+        }
+
         boolean randomChoice = sa.hasParam("AtRandom");
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
         for (final Player p : tgtPlayers) {
@@ -100,12 +109,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         }
                     }
                     Collections.sort(faces);
-                    chosen = p.getController().chooseCardName(sa, faces, Localizer.getInstance().getMessage("lblChooseACardName"));
+                    chosen = p.getController().chooseCardName(sa, faces, message);
                 } else {
-                    // use CardFace because you might name a alternate name
-                	//"name a card" in mtg card  oracle text is "choose a card name",change text
-                    final String message = validDesc.equals("card") ? Localizer.getInstance().getMessage("lblChooseACardName") : Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
-
+                    // use CardFace because you might name a alternate names
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
                         cpp = CardFacePredicates.valid(valid);
@@ -118,6 +124,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 if(!randomChoice) {
                     p.getGame().getAction().nofityOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                     p.setNamedCard(chosen);
+                }
+                if (sa.hasParam("NoteFor")) {
+                    p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
                 }
             }
         }

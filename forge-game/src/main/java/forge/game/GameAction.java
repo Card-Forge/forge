@@ -1558,8 +1558,7 @@ public class GameAction {
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(gameType, first, game.getPlayers()));
 
-            // Emissary's Plot
-            // runPreOpeningHandActions(first);
+             runPreOpeningHandActions(first);
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
