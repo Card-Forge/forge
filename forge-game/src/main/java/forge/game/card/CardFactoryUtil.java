@@ -1066,8 +1066,7 @@ public class CardFactoryUtil {
         }
 
         // Count$Chroma.<color name>
-        // Count$Devotion.<color name>
-        if (sq[0].contains("Chroma") || sq[0].equals("Devotion")) {
+        if (sq[0].contains("Chroma")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             String colorName = sq[1];
             if (colorName.contains("Chosen")) {
@@ -1092,16 +1091,20 @@ public class CardFactoryUtil {
             return doXMath(colorOcurrencices, m, c);
         }
         // Count$DevotionDual.<color name>.<color name>
-        if (sq[0].contains("DevotionDual")) {
+        // Count$Devotion.<color name>
+        if (sq[0].contains("Devotion")) {
             int colorOcurrencices = 0;
-            byte color1 = ManaAtom.fromName(sq[1]);
-            byte color2 = ManaAtom.fromName(sq[2]);
+            byte colorCode = ManaAtom.fromName(sq[1]);
+            if (sq[0].equals("DevotionDual")) {
+                colorCode |= ManaAtom.fromName(sq[2]);
+            }
             for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
                 for (ManaCostShard sh : c0.getManaCost()) {
-                    if ((sh.getColorMask() & (color1 | color2)) != 0) {
+                    if ((sh.getColorMask() & colorCode) != 0) {
                         colorOcurrencices++;
                     }
                 }
+                colorOcurrencices += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
             }
             return doXMath(colorOcurrencices, m, c);
         }
