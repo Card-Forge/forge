@@ -2206,6 +2206,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.equals("CARDNAME can't be countered.") ||
                         keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                     sbBefore.append(keyword);
+                    sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Haunt")) {
                     sbAfter.append("Haunt (");
                     sbAfter.append("When this spell card is put into a graveyard after resolving, ");
