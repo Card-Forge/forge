@@ -1180,6 +1180,9 @@ public class CardFactoryUtil {
         if (sq[0].startsWith("Kicked")) {
             return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
         }
+        if (sq[0].startsWith("Escaped")) {
+            return doXMath(Integer.parseInt(sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2]), m, c);
+        }
         if (sq[0].startsWith("AltCost")) {
             return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
         }
