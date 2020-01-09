@@ -1,0 +1,7 @@
+Name:Pegasus
+ManaCost:no cost
+Types:Creature Pegasus
+Colors:white
+PT:2/2
+K:Flying
+Oracle:Flying
