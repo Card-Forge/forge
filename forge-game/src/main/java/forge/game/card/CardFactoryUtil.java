@@ -1068,10 +1068,6 @@ public class CardFactoryUtil {
         // Count$Chroma.<color name>
         if (sq[0].contains("Chroma")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
-            String colorName = sq[1];
-            if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColor());
-            }
             final CardCollectionView cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = new CardCollection(c);
@@ -1081,7 +1077,7 @@ public class CardFactoryUtil {
             }
 
             int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(colorName);
+            byte colorCode = ManaAtom.fromName(sq[1]);
             for (Card c0 : cards) {
                 for (ManaCostShard sh : c0.getManaCost()){
                     if ((sh.getColorMask() & colorCode) != 0) 
@@ -1094,7 +1090,11 @@ public class CardFactoryUtil {
         // Count$Devotion.<color name>
         if (sq[0].contains("Devotion")) {
             int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(sq[1]);
+            String colorName = sq[1];
+            if (colorName.contains("Chosen")) {
+                colorName = MagicColor.toShortString(c.getChosenColor());
+            }
+            byte colorCode = ManaAtom.fromName(colorName);
             if (sq[0].equals("DevotionDual")) {
                 colorCode |= ManaAtom.fromName(sq[2]);
             }
