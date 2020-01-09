@@ -170,3 +170,4 @@ u_3_2_reflection
 ub_2_3_nightmare_mill
 w_0_1_goat
 w_1_1_human_soldier
+w_2_2_pegasus_flying
