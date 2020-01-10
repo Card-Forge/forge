@@ -492,6 +492,10 @@ public class CostAdjustment {
                 if (!sa.isSpell() || !sa.isCastFaceDown()) {
                     return false;
                 }
+            } else if (type.equals("Loyalty")) {
+                if (!sa.isPwAbility()) {
+                    return false;
+                }
             }
         }
         if (st.hasParam("AffectedZone")) {
