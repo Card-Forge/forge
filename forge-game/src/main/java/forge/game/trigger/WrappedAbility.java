@@ -72,6 +72,9 @@ public class WrappedAbility extends Ability {
     public boolean hasParam(String key) { return sa.hasParam(key); }
 
     @Override
+    public String getParamOrDefault(String key, String defaultValue) { return sa.getParamOrDefault(key, defaultValue); }
+
+    @Override
     public ApiType getApi() {
         return sa.getApi();
     }
