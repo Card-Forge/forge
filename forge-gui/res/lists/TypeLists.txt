@@ -279,6 +279,7 @@ Contraption
 Equipment
 Food
 Fortification
+Gold
 Treasure
 Vehicle
 [WalkerTypes]
