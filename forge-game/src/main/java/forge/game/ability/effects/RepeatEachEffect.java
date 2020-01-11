@@ -11,6 +11,7 @@ import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
@@ -47,6 +48,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         boolean loopOverCards = false;
         boolean recordChoice = sa.hasParam("RecordChoice");
         CardCollectionView repeatCards = null;
+        List<SpellAbility> repeatSas = null;
 
         if (sa.hasParam("RepeatCards")) {
             List<ZoneType> zone = Lists.newArrayList();
@@ -58,6 +60,16 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
                     sa.getParam("RepeatCards"), source.getController(), source);
             loopOverCards = !recordChoice;
+        }
+        else if (sa.hasParam(("RepeatSpellAbilities"))) {
+            repeatSas = Lists.newArrayList();
+            String[] restrictions = sa.getParam("RepeatSpellAbilities").split((","));
+            for (SpellAbilityStackInstance stackInstance : game.getStack()) {
+                if (stackInstance.getSpellAbility(false).isValid(restrictions, source.getController(), source, sa)) {
+                    repeatSas.add(stackInstance.getSpellAbility(false));
+                }
+            }
+
         }
         else if (sa.hasParam("DefinedCards")) {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
@@ -108,6 +120,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 } else {
                     source.removeRemembered(card);
                 }
+            }
+        }
+        if (repeatSas != null) {
+            for (SpellAbility card : repeatSas) {
+                source.addRemembered(card);
+                AbilityUtils.resolve(repeat);
+                source.removeRemembered(card);
             }
         }
 

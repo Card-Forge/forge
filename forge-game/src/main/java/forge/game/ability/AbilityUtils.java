@@ -1279,6 +1279,8 @@ public class AbilityUtils {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
                     sas.addAll(game.getCardState(rem).getSpellAbilities());
+                } else if (o instanceof SpellAbility) {
+                    sas.add((SpellAbility) o);
                 }
             }
         }
@@ -1835,6 +1837,11 @@ public class AbilityUtils {
                     players.add(c.getController());
                 } else if (def.endsWith("Owner")) {
                     players.add(c.getOwner());
+                }
+            } else if (o instanceof SpellAbility) {
+                final SpellAbility c = (SpellAbility) o;
+                if (def.endsWith("Controller")) {
+                    players.add(c.getHostCard().getController());
                 }
             }
         }
