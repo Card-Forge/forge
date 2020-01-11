@@ -183,7 +183,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if ("TriggeredCardController".equals(sa.getParam("Controller"))) {
             Card trigCard = (Card)sa.getTriggeringObject(AbilityKey.Card);
-            if (!mandatory && trigCard.getController().isOpponentOf(aiPlayer)) {
+            if (!mandatory && trigCard != null && trigCard.getController().isOpponentOf(aiPlayer)) {
                 return false;
             }
         }
