@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
@@ -178,6 +179,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         } else {
             // if no targeting, it should always be ok
+        }
+
+        if ("TriggeredCardController".equals(sa.getParam("Controller"))) {
+            Card trigCard = (Card)sa.getTriggeringObject(AbilityKey.Card);
+            if (!mandatory && trigCard.getController().isOpponentOf(aiPlayer)) {
+                return false;
+            }
         }
 
         return true;
