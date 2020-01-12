@@ -32,6 +32,8 @@ import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 import java.util.Map;
@@ -439,7 +441,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 hostCard.addRemembered(CardUtil.getLKICopy(tgtC));
             }
 
-            final String prompt = TextUtil.concatWithSpace("Do you want to move", tgtC.toString(), "from", origin.toString(), "to", TextUtil.addSuffix(destination.toString(),"?"));
+            final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(tgtC.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
             if (optional && !player.getController().confirmAction(sa, null, prompt) )
                 continue;
 
@@ -503,7 +505,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
+                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", tgtC.toString()));
                             tgtC.attachToEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -513,7 +515,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedToPlayer")) {
                         FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
-                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a player to attach to.");
+                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", tgtC.toString()));
                             tgtC.attachToEntity(attachedTo);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
@@ -560,7 +562,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     }
                                 }
                             } else {
-                                defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare a defender for " + movedCard );
+                                defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName())));
                             }
                             if (defender != null) {
                                 combat.addAttacker(movedCard, defender);
@@ -727,7 +729,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeMessage")).append(" ");
-            sb.append(altFetchList.size()).append(" cards match your searching type in Alternate Zones.");
+            sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
 
             if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString())) {
                 origin = alt;
@@ -749,7 +751,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         if (optional) {
-            String message = MessageUtil.formatMessage(defined ? "Put that card from {player's} " + Lang.joinHomogenous(origin).toLowerCase() + " to " + destination.name().toLowerCase() : "Search {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "?", decider, player);
+            String prompt;
+            if (defined) {
+                prompt = Localizer.getInstance().getMessage("lblPutThatCardFromPlayerOriginToDestination", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase(), destination.getTranslatedName().toLowerCase());
+            }
+            else {
+                prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
+            }
+            String message = MessageUtil.formatMessage(prompt , decider, player);
             if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                 return;
             }
@@ -801,10 +810,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), source.getName() + " - Looking at cards in ");
+                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), source.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
             }
             else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), source.getName() + " - Looking at cards in ");
+                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), source.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
             }
         }
 
@@ -821,7 +830,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         continue;
                     }
                     SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
-                    if (!decider.getController().confirmAction(tgtSA, null, "Do you want to play " + tgtCard + "?")) {
+                    if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                         continue;
                     }
                     // if played, that card cannot be found
@@ -853,7 +862,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean champion = sa.hasParam("Champion");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean imprint = sa.hasParam("Imprint");
-        String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+        String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
@@ -866,9 +875,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (! sa.hasParam("SelectPrompt")) {
                 // new default messaging for multi select
                 if (fetchList.size() > changeNum) {
-                    selectPrompt = MessageUtil.formatMessage("Select up to " + changeNum + " cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                    //Select up to %changeNum cards from %players %origin
+                    selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectUpToNumCardFromPlayerZone", String.valueOf(changeNum), "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
                 } else {
-                    selectPrompt = MessageUtil.formatMessage("Select cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                    selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardsFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
                 }
             }
             // ensure that selection is within maximum allowed changeNum
@@ -930,7 +940,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 if (c == null) {
                     final int num = Math.min(fetchList.size(), changeNum - i);
-                    String message = "Cancel Search? Up to " + num + " more card" + (num != 1 ? "s" : "") + " can be selected.";
+                    String message = Localizer.getInstance().getMessage("lblCancelSearchUpToSelectNumCards", String.valueOf(num));
 
                     if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                         break;
@@ -1001,7 +1011,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (!list.isEmpty()) {
                         Card attachedTo = null;
                         if (list.size() > 1) {
-                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a card to attach to.");
+                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName())));
                         }
                         else {
                             attachedTo = list.get(0);
@@ -1019,7 +1029,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("AttachedToPlayer")) {
                     FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
-                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
+                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName())));
                         c.attachToEntity(attachedTo);
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
@@ -1042,7 +1052,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 }
                             }
                         } else {
-                            defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare a defender for " + c );
+                            defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())));
                         }
                         if (defender != null) {
                             combat.addAttacker(c, defender);

@@ -60,6 +60,7 @@ Crab:Crabs
 Crocodile:Crocodiles
 Cyclops:Cyclopes
 Dauthi:Dauthis
+Demigod:Demigods
 Demon:Demons
 Deserter:Deserters
 Devil:Devils
@@ -231,6 +232,7 @@ Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
 Survivor:Survivors
+Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
 Thopter:Thopters
@@ -277,6 +279,7 @@ Contraption
 Equipment
 Food
 Fortification
+Gold
 Treasure
 Vehicle
 [WalkerTypes]
@@ -286,6 +289,7 @@ Angrath
 Arlinn
 Ashiok
 Bolas
+Calix
 Chandra
 Dack
 Daretti

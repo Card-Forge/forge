@@ -10,6 +10,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
+import forge.util.Localizer;
 
 public class ChooseDirectionEffect extends SpellAbilityEffect {
     @Override
@@ -18,11 +19,11 @@ public class ChooseDirectionEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         final FCollection<Player> left = new FCollection<>(game.getPlayers());
         // TODO: We'd better set up turn order UI here
-        final String info = "Left (clockwise): " + left + "\r\nRight (anticlockwise):" + Lists.reverse(left);
+        final String info = Localizer.getInstance().getMessage("lblLeftClockwise") + ": " + left + "\r\n" + Localizer.getInstance().getMessage("lblRightAntiClockwise") + ":" + Lists.reverse(left);
         sa.getActivatingPlayer().getController().notifyOfValue(sa, source, info);
 
         boolean chosen = sa.getActivatingPlayer().getController().chooseBinary(sa,
-                "Choose a direction", BinaryChoiceType.LeftOrRight);
+                Localizer.getInstance().getMessage("lblChooseDirection"), BinaryChoiceType.LeftOrRight);
         source.setChosenDirection(chosen ? Direction.Left : Direction.Right);
     }
 }

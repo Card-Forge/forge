@@ -27,6 +27,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class VoteEffect extends SpellAbilityEffect {
 
@@ -88,14 +89,14 @@ public class VoteEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             int voteAmount = p.getKeywords().getAmount("You get an additional vote.") + 1;
             int optionalVotes = p.getKeywords().getAmount("You may vote an additional time.");
-            voteAmount += p.getController().chooseNumber(sa, "How many additional votes do you want?", 0, optionalVotes);
+            voteAmount += p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyAdditionalVotesDoYouWant"), 0, optionalVotes);
             Player realVoter = voter == null ? p : voter;
 
             for (int i = 0; i < voteAmount; i++) {
-                Object result = realVoter.getController().vote(sa, host + "Vote:", voteType, votes);
+                Object result = realVoter.getController().vote(sa, host + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes);
 
                 votes.put(result, p);
-                host.getGame().getAction().nofityOfValue(sa, p, result + "\r\nCurrent Votes:" + votes, p);
+                host.getGame().getAction().nofityOfValue(sa, p, result + "\r\n" + Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
             }
         }
 

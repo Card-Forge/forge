@@ -514,6 +514,11 @@ public class GameAction {
             }
         }
 
+        // Cards not on the battlefield / stack should not have controller
+        if (!zoneTo.is(ZoneType.Battlefield) && !zoneTo.is(ZoneType.Stack)) {
+            c.clearControllers();
+        }
+
         return copied;
     }
 

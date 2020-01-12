@@ -1,32 +1,38 @@
 package forge.game.zone;
 
+import forge.util.Localizer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.base.Function;
 
 /**
  * The Enum Zone.
  */
 public enum ZoneType {
-    Hand(true),
-    Library(true),
-    Graveyard(false),
-    Battlefield(false),
-    Exile(false),
-    Flashback(false),
-    Command(false),
-    Stack(false),
-    Sideboard(true),
-    Ante(false),
-    SchemeDeck(true),
-    PlanarDeck(true),
-    None(true);
+    Hand(true, "lblHandZone"),
+    Library(true, "lblLibraryZone"),
+    Graveyard(false, "lblGraveyardZone"),
+    Battlefield(false, "lblBattlefieldZone"),
+    Exile(false, "lblExileZone"),
+    Flashback(false, "lblFlashbackZone"),
+    Command(false, "lblCommandZone"),
+    Stack(false, "lblStackZone"),
+    Sideboard(true, "lblSideboardZone"),
+    Ante(false, "lblAnteZone"),
+    SchemeDeck(true, "lblSchemeDeckZone"),
+    PlanarDeck(true, "lblPlanarDeckZone"),
+    None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command/*, Hand*/);
 
     private final boolean holdsHiddenInfo;
-    ZoneType(boolean holdsHidden) {
+    private final String zoneName;
+    ZoneType(boolean holdsHidden, String name) {
         holdsHiddenInfo = holdsHidden;
+        zoneName = Localizer.getInstance().getMessage(name);
     }
 
     public static ZoneType smartValueOf(final String value) {
@@ -64,6 +70,10 @@ public enum ZoneType {
         return !holdsHiddenInfo;
     }
 
+    public String getTranslatedName() {
+        return zoneName;
+    }
+
     public static boolean isHidden(final String origin) {
         List<ZoneType> zone = ZoneType.listValueOf(origin);
 
@@ -81,5 +91,14 @@ public enum ZoneType {
 
     public static boolean isKnown(final String origin) {
         return !isHidden(origin);
+    }
+
+    public static class Accessors {
+        public static Function<ZoneType, String> GET_TRANSLATED_NAME = new Function<ZoneType, String>() {
+            @Override
+            public String apply(final ZoneType arg0) {
+                return arg0.getTranslatedName();
+            }
+        };
     }
 }

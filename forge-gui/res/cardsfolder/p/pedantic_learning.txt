@@ -1,7 +1,7 @@
 Name:Pedantic Learning
 ManaCost:U U
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a land card is put into your graveyard from your library, you may pay {1}. If you do, draw a card.
+T:Mode$ ChangesZone | ValidCard$ Land.nonToken+YouCtrl | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a land card is put into your graveyard from your library, you may pay {1}. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pedantic_learning.jpg

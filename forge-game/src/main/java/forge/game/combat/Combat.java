@@ -841,6 +841,9 @@ public class Combat {
 
         counterTable.triggerCountersPutAll(game);
         counterTable.clear();
+
+        // copy last state again for dying replacement effects
+        game.copyLastState();
     }
 
     public final boolean isUnblocked(final Card att) {

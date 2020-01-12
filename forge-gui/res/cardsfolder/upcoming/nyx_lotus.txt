@@ -1,0 +1,9 @@
+Name:Nyx Lotus
+ManaCost:4
+Types:Legendary Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add an amount of mana of that color equal to your devotion to that color.
+SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:X:Count$Devotion.Chosen
+Oracle:Nyx Lotus enters the battlefield tapped.\n{T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)

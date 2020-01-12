@@ -123,7 +123,7 @@ public class DualListBox<T> extends FDialog {
             }
         });
 
-        selectOrder = add(new FLabel.Builder().align(Align.center).text("Select Order").build());
+        selectOrder = add(new FLabel.Builder().align(Align.center).text(Localizer.getInstance().getMessage("lblSelectOrder")).build());
         orderedLabel = add(new FLabel.Builder().align(Align.center).build());
 
         setButtonState();

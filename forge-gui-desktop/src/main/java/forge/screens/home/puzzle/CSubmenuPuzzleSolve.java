@@ -96,6 +96,13 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
             }
         });
 
+        hostedMatch.setEndGameHook((new Runnable() {
+            @Override
+            public void run() {
+                selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()));
+            }
+        }));
+
         final List<RegisteredPlayer> players = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         human.setStartingHand(0);

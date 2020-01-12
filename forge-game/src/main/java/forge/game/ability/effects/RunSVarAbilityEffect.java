@@ -18,14 +18,14 @@ public class RunSVarAbilityEffect extends SpellAbilityEffect {
         String sVars = sa.getParam("SVars");
         List<Card> cards = getTargetCards(sa);
         if (sVars == null || cards.isEmpty()) {
-        	return;
+            return;
         }
         List<SpellAbility> validSA = new ArrayList<>();
         final boolean isTrigger = sa.hasParam("IsTrigger");
         for (final Card tgtC : cards) {
             if (!tgtC.hasSVar(sVars)) {
-        	    continue;
-        	}
+                continue;
+            }
             final SpellAbility actualSA = AbilityFactory.getAbility(tgtC.getSVar(sVars), tgtC);
             actualSA.setTrigger(isTrigger);
             actualSA.setActivatingPlayer(sa.getActivatingPlayer());

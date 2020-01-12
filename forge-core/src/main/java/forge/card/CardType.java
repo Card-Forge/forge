@@ -606,13 +606,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static class Constant {
         public static final Settable LOADED = new Settable();
-        public static final List<String> BASIC_TYPES = Lists.newArrayList();
-        public static final List<String> LAND_TYPES = Lists.newArrayList();
-        public static final List<String> CREATURE_TYPES = Lists.newArrayList();
-        public static final List<String> SPELL_TYPES = Lists.newArrayList();
-        public static final List<String> ENCHANTMENT_TYPES = Lists.newArrayList();
-        public static final List<String> ARTIFACT_TYPES = Lists.newArrayList();
-        public static final List<String> WALKER_TYPES = Lists.newArrayList();
+        public static final Set<String> BASIC_TYPES = Sets.newHashSet();
+        public static final Set<String> LAND_TYPES = Sets.newHashSet();
+        public static final Set<String> CREATURE_TYPES = Sets.newHashSet();
+        public static final Set<String> SPELL_TYPES = Sets.newHashSet();
+        public static final Set<String> ENCHANTMENT_TYPES = Sets.newHashSet();
+        public static final Set<String> ARTIFACT_TYPES = Sets.newHashSet();
+        public static final Set<String> WALKER_TYPES = Sets.newHashSet();
         
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
@@ -699,12 +699,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return sortedSubTypes;
     }
 
-    public static List<String> getBasicTypes() {
-        return Collections.unmodifiableList(Constant.BASIC_TYPES);
+    public static Collection<String> getBasicTypes() {
+        return Collections.unmodifiableCollection(Constant.BASIC_TYPES);
     }
 
-    public static List<String> getAllCreatureTypes() {
-        return Collections.unmodifiableList(Constant.CREATURE_TYPES);
+    public static Collection<String> getAllCreatureTypes() {
+        return Collections.unmodifiableCollection(Constant.CREATURE_TYPES);
     }
     public static List<String> getAllLandTypes() {
         return ImmutableList.<String>builder()

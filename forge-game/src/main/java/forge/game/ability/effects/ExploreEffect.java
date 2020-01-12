@@ -14,6 +14,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             boolean revealedLand = false;
             CardCollection top = pl.getTopXCardsFromLibrary(1);
             if (!top.isEmpty()) {
-                game.getAction().reveal(top, pl, false, "Revealed for Explore - ");
+                game.getAction().reveal(top, pl, false, Localizer.getInstance().getMessage("lblRevealedForExplore") + " - ");
                 final Card r = top.getFirst();
                 if (r.isLand()) {
                     game.getAction().moveTo(ZoneType.Hand, r, sa);
@@ -63,7 +64,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                     // TODO find better way to choose optional send away
                     final Card choosen = pc.chooseSingleCardForZoneChange(
                             ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
-                            "Put this card in your graveyard?", true, pl);
+                            Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard"), true, pl);
                     if (choosen != null) {
                         game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
                     }

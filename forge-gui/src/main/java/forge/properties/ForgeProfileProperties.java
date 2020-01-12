@@ -133,7 +133,7 @@ public class ForgeProfileProperties {
 
     private static Map<String, String> getMap(final Properties props, final String propertyKey) {
         final String strMap = props.getProperty(propertyKey, "").trim();
-        return FileSection.parseToMap(strMap, "->", "|");
+        return FileSection.parseToMap(strMap, FileSection.ARROW_KV_SEPARATOR);
     }
 
     private static int getInt(final Properties props, final String propertyKey, final int defaultValue) {

@@ -5,6 +5,7 @@ import forge.game.PlanarDice;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -25,7 +26,7 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
             game.getPhaseHandler().incPlanarDiceRolledthisTurn();
         }
         PlanarDice result = PlanarDice.roll(activator, null);
-        String message = activator.getName() + " rolled " + result.toString();
+        String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", activator.getName(), result.toString());
         game.getAction().nofityOfValue(sa, activator, message, null);
 
     }

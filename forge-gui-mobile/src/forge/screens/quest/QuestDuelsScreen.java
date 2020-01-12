@@ -9,20 +9,21 @@ import forge.quest.QuestEventDuel;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.util.Localizer;
 
 import java.util.List;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
 
-    private final FLabel lblInfo = add(new FLabel.Builder().text("Select your next duel.")
+    private final FLabel lblInfo = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectNextDuel"))
             .align(Align.center).font(FSkinFont.get(16)).build());
 
     private final FLabel lblCurrentDeck = add(new FLabel.Builder()
-        .text("Current deck hasn't been set yet.").align(Align.center).insets(Vector2.Zero)
+        .text(Localizer.getInstance().getMessage("lblNoDuelDeck")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final FLabel lblNextChallengeInWins = add(new FLabel.Builder()
-        .text("Next challenge in wins hasn't been set yet.").align(Align.center).insets(Vector2.Zero)
+        .text(Localizer.getInstance().getMessage("lblNextChallengeNotYet")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlDuels = add(new QuestEventPanel.Container());

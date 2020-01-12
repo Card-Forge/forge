@@ -15,6 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -205,7 +206,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (!p.canDiscardBy(sa)) {
                         continue;
                     }
-                    String message = "Would you like to discard " + numCards + " random card(s)?";
+                    String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
                     boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
 
                     if (runDiscard) {
@@ -257,7 +258,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     final CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
 
                     for (final Player opp : p.getAllOtherPlayers()) {
-                        opp.getController().reveal(dPHand, ZoneType.Hand, p, "Reveal ");
+                        opp.getController().reveal(dPHand, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblReveal") + " ");
                     }
 
                     if (!p.canDiscardBy(sa)) {
@@ -325,8 +326,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         if (mode.startsWith("Reveal") ) {
-                            p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
-                                    chooser + " has chosen " + (toBeDiscarded.size() == 1 ? "this card" : "these cards")  + " from ");
+                            p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
                         }
                         for (Card card : toBeDiscarded) {
                             if (card == null) { continue; }

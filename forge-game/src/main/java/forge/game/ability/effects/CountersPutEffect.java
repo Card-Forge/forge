@@ -26,6 +26,8 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.Map;
 import java.util.Iterator;
@@ -129,7 +131,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
-            tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, "Choose a creature with the least toughness", 1, 1, false));
+            tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
             tgtObjects.addAll(tgtCards);
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
@@ -183,7 +185,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     Map<String, Object> params = Maps.newHashMap();
                     params.put("Target", obj);
                     StringBuilder sb = new StringBuilder();
-                    sb.append("Select counter type to add to ");
+                    sb.append(Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo") + " ");
                     sb.append(obj);
                     counterType = pc.chooseCounterType(choices, sa, sb.toString(), params);
                 }
@@ -199,7 +201,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
-                        counterAmount = pc.chooseNumber(sa, "How many counters?", 0, counterAmount, params);
+                        counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCounters"), 0, counterAmount, params);
                     }
 
                     // Adapt need extra logic
@@ -235,8 +237,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
 
-                        String message = "Do you want to put " + counterAmount + " +1/+1 counters on " + gameCard + " ?";
-                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
+                        String message = Localizer.getInstance().getMessage("lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount), CardTranslation.getTranslatedName(gameCard.getName()));
+                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseAnOpponent"));
 
                         if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
                             gameCard.setTributed(true);

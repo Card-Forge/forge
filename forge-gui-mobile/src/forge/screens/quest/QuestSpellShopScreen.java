@@ -35,11 +35,13 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;
     private final InventoryPage inventoryPage;
     private final FLabel btnBuySellMultiple = add(new FLabel.ButtonBuilder().font(FSkinFont.get(16)).parseSymbols().build());
+    private static final Localizer localizer = Localizer.getInstance();
 
     public QuestSpellShopScreen() {
         super("", QuestMenu.getMenu(), new SpellShopBasePage[] { new SpellShopPage(), new InventoryPage() }, true);
@@ -98,7 +100,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     public void update() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Spell Shop\n(" + FModel.getQuest().getRank() + ")");
+        setHeaderCaption(FModel.getQuest().getName() + " - " + localizer.getMessage("lblSpellShop") + "\n(" + FModel.getQuest().getRank() + ")");
 
         QuestSpellShop.updateDecksForEachCard();
         double multiplier = QuestSpellShop.updateMultiplier();
@@ -112,14 +114,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         final int maxSellPrice = FModel.getQuest().getCards().getSellPriceLimit();
 
         if (maxSellPrice < Integer.MAX_VALUE) {
-            maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
+            maxSellingPrice = String.format(localizer.getMessage("lblMaximumSellingCredits"), maxSellPrice);
         }
-        spellShopPage.lblSellPercentage.setText("Selling cards at " + formatter.format(multiPercent)
-                + "% of their value.\n" + maxSellingPrice);
+        spellShopPage.lblSellPercentage.setText(localizer.getMessage("lblSellCardsAt") + formatter.format(multiPercent)
+                + localizer.getMessage("lblTheirValue") + maxSellingPrice);
     }
 
     public void updateCreditsLabel() {
-        String credits = "Credits: " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits());
+        String credits = localizer.getMessage("lblCredits") + ": " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits());
         spellShopPage.lblCredits.setText(credits);
         inventoryPage.lblCredits.setText(credits);
     }
@@ -129,26 +131,26 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         ItemPool<InventoryItem> items;
         long total;
         if (getSelectedPage() == spellShopPage) {
-            caption = "Buy";
+            caption = localizer.getMessage("lblBuy");
             items = spellShopPage.itemManager.getSelectedItemPool();
             total = QuestSpellShop.getTotalBuyCost(items);
         }
         else {
-            caption = "Sell";
+            caption = localizer.getMessage("lblSell");
             items = inventoryPage.itemManager.getSelectedItemPool();
             total = QuestSpellShop.getTotalSellValue(items);
         }
 
         int count = items.countAll();
         if (count == 0) {
-            caption = "Cancel";
+            caption = localizer.getMessage("lblCancel");
         }
         else {
             if (count > 1) {
-                String itemType = "card";
+                String itemType = localizer.getMessage("lblCard");
                 for (Entry<InventoryItem, Integer> item : items) {
                     if (!(item.getKey() instanceof PaperCard)) {
-                        itemType = "item";
+                        itemType = localizer.getMessage("lblItem");
                         break;
                     }
                 }
@@ -252,7 +254,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 callback.run(max);
             }
             else {
-                GuiChoose.getInteger(item + " - " + getVerb() + " how many?", 1, max, 20, callback);
+                GuiChoose.getInteger(item + " - " + getVerb() + " " + localizer.getMessage("lblHowMany"), 1, max, 20, callback);
             }
         }
 
@@ -278,7 +280,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         private FTextArea lblSellPercentage = add(new FTextArea(false));
 
         private SpellShopPage() {
-            super("Cards for Sale", FSkinImage.QUEST_BOOK, true);
+            super(localizer.getMessage("lblCardsForSale"), FSkinImage.QUEST_BOOK, true);
             lblSellPercentage.setFont(FSkinFont.get(11));
         }
 
@@ -314,7 +316,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     private static class InventoryPage extends SpellShopBasePage {
-        protected FLabel lblSellExtras = add(new FLabel.Builder().text("Sell all extras")
+        protected FLabel lblSellExtras = add(new FLabel.Builder().text(localizer.getMessage("lblSellAllExtras"))
                 .icon(FSkinImage.MINUS).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
                 .command(new FEventHandler() {
             @Override
@@ -336,7 +338,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         }).build());
 
         private InventoryPage() {
-            super("Your Cards", FSkinImage.QUEST_BOX, false);
+            super(localizer.getMessage("lblYourCards"), FSkinImage.QUEST_BOX, false);
         }
 
         @Override

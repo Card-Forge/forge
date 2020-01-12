@@ -97,10 +97,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setZone(ZoneType.smartValueOf(params.get("ActivationZone")));
         }
 
-        if (params.containsKey("Flashback")) {
-            this.setZone(ZoneType.Graveyard);
-        }
-
         if (params.containsKey("SorcerySpeed")) {
             this.setSorcerySpeed(true);
         }
@@ -202,7 +198,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Card cp = c;
 
         // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.hasParam("Bestow")) {
+        if (sa.isSpell() && sa.isBestow()) {
             // already bestowed or in battlefield, no need to check for spell
             if (c.isInZone(ZoneType.Battlefield)) {
                 return false;

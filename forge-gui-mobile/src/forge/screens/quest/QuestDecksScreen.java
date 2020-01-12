@@ -22,19 +22,20 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
 import forge.util.ThreadUtil;
+import forge.util.Localizer;
 
 public class QuestDecksScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
     private final DeckManager lstDecks = add(new DeckManager(GameType.Quest));
-    private final FButton btnNewDeck = add(new FButton("New Deck"));
-    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
-    private final FButton btnViewDeck = add(new FButton("View Deck"));
-    private final FButton btnRandom = add(new FButton("Random Deck"));
+    private final FButton btnNewDeck = add(new FButton(Localizer.getInstance().getMessage("lblNewDeck")));
+    private final FButton btnEditDeck = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
+    private final FButton btnViewDeck = add(new FButton(Localizer.getInstance().getMessage("lblViewDeck")));
+    private final FButton btnRandom = add(new FButton(Localizer.getInstance().getMessage("lblRandomDeck")));
 
     private final FLabel lblInfo = add(new FLabel.Builder()
         .align(Align.center).font(FSkinFont.get(16))
-        .text("Build or select a deck").build());
+        .text(Localizer.getInstance().getMessage("lblBuildorselectadeck")).build());
 
     private final FEventHandler onDeckSelectionChanged = new FEventHandler() {
         @Override
@@ -69,7 +70,8 @@ public class QuestDecksScreen extends FScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
+                        final Localizer localizer = Localizer.getInstance();
+                        if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblCreateaDeck"))) {
                             return;
                         }
                         FThreads.invokeInEdtLater(new Runnable() {

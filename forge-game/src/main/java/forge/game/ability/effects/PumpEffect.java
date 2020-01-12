@@ -15,6 +15,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -214,7 +215,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(atk);
                 sb.append("/");
                 if (def >= 0) {
-                   sb.append("+");
+                    sb.append("+");
                 }
                 sb.append(def);
                 sb.append(" ");
@@ -327,7 +328,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(tgtCards);
             final String message = sa.hasParam("OptionQuestion")
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
-                    : TextUtil.concatNoSpace("Apply pump to ", targets, "?");
+                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
                 return;

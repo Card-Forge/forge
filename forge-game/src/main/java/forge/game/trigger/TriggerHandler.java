@@ -39,6 +39,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.FileSection;
 import forge.util.Visitor;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
@@ -49,7 +50,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
@@ -172,35 +172,11 @@ public class TriggerHandler {
     }
 
     private static Map<String, String> parseParams(final String trigParse) {
-        final Map<String, String> mapParams = Maps.newHashMap();
-
         if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");
         }
 
-        final String[] params = trigParse.split("\\|");
-
-        for (int i = 0; i < params.length; i++) {
-            params[i] = params[i].trim();
-        }
-
-        for (final String param : params) {
-            final String[] splitParam = param.split("\\$");
-            for (int i = 0; i < splitParam.length; i++) {
-                splitParam[i] = splitParam[i].trim();
-            }
-
-            if (splitParam.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("TriggerFactory Parsing Error in registerTrigger() : Split length of ");
-                sb.append(param).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
-            }
-
-            mapParams.put(splitParam[0], splitParam[1]);
-        }
-
-        return mapParams;
+        return FileSection.parseToMap(trigParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     private void collectTriggerForWaiting() {

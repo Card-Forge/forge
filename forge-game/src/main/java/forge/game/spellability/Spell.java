@@ -118,7 +118,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             lkicheck = true;
         }
 
-        if (hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
+        if (isBestow() && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
@@ -184,11 +184,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
-        return checkOtherRestrictions();
+        return checkOtherRestrictions(card);
     } // canPlay()
     
-    public boolean checkOtherRestrictions() {
-        final Card source = this.getHostCard();
+    public boolean checkOtherRestrictions(final Card source) {
         Player activator = getActivatingPlayer();
         final Game game = activator.getGame();
         // CantBeCast static abilities

@@ -296,6 +296,8 @@ public final class CardUtil {
         newCopy.setCastSA(in.getCastSA());
         newCopy.setCastFrom(in.getCastFrom());
 
+        newCopy.setExiledWith(in.getExiledWith());
+
         return newCopy;
     }
 

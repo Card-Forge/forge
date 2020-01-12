@@ -35,6 +35,7 @@ import forge.screens.match.controllers.CDev;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.util.Localizer;
 
 /** 
  * Assembles Swing components of players report.
@@ -45,7 +46,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Dev Mode");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblDevMode"));
 
     // Top-level containers
     private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0, ax center"));
@@ -54,31 +55,31 @@ public class VDev implements IVDoc<CDev>, IDevListener {
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Dev labels
-    private final DevLabel lblUnlimitedLands = new DevLabel("Play Unlimited Lands");
-    private final DevLabel lblViewAll = new DevLabel("View All Cards");
-    private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
-    private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
-    private final DevLabel lblDumpGame = new DevLabel("Dump Game State");
-    private final DevLabel lblTutor = new DevLabel("Tutor for Card");
-    private final DevLabel lblAddCounterPermanent = new DevLabel("Add Counters to Card");
-    private final DevLabel lblSubCounterPermanent = new DevLabel("Sub Counters from Card");
-    private final DevLabel lblTapPermanent = new DevLabel("Tap Permanents");
-    private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanents");
-    private final DevLabel lblSetLife = new DevLabel("Set Player Life");
-    private final DevLabel lblWinGame = new DevLabel("Win Game");
-    private final DevLabel lblCardToBattlefield = new DevLabel("Add Card to Battlefield");
-    private final DevLabel lblExileFromPlay = new DevLabel("Exile Card from Play");
-    private final DevLabel lblCardToHand = new DevLabel("Add Card to Hand");
-    private final DevLabel lblExileFromHand = new DevLabel("Exile Card from Hand");
-    private final DevLabel lblCardToLibrary = new DevLabel("Add Card to Library");
-    private final DevLabel lblCardToGraveyard = new DevLabel("Add Card to Graveyard");
-    private final DevLabel lblCardToExile = new DevLabel("Add Card to Exile");
-    private final DevLabel lblCastSpell = new DevLabel("Cast Spell/Play Land");
-    private final DevLabel lblRepeatAddCard = new DevLabel("Repeat Last Add Card");
-    private final DevLabel lblRemoveFromGame = new DevLabel("Remove Card from Game");
+    private final DevLabel lblUnlimitedLands = new DevLabel(Localizer.getInstance().getMessage("lblUnlimitedLands"));
+    private final DevLabel lblViewAll = new DevLabel(Localizer.getInstance().getMessage("lblViewAll"));
+    private final DevLabel lblGenerateMana = new DevLabel(Localizer.getInstance().getMessage("lblGenerateMana"));
+    private final DevLabel lblSetupGame = new DevLabel(Localizer.getInstance().getMessage("lblSetupGame"));
+    private final DevLabel lblDumpGame = new DevLabel(Localizer.getInstance().getMessage("lblDumpGame"));
+    private final DevLabel lblTutor = new DevLabel(Localizer.getInstance().getMessage("lblTutor"));
+    private final DevLabel lblAddCounterPermanent = new DevLabel(Localizer.getInstance().getMessage("lblAddCounterPermanent"));
+    private final DevLabel lblSubCounterPermanent = new DevLabel(Localizer.getInstance().getMessage("lblSubCounterPermanent"));
+    private final DevLabel lblTapPermanent = new DevLabel(Localizer.getInstance().getMessage("lblTapPermanent"));
+    private final DevLabel lblUntapPermanent = new DevLabel(Localizer.getInstance().getMessage("lblUntapPermanent"));
+    private final DevLabel lblSetLife = new DevLabel(Localizer.getInstance().getMessage("lblSetLife"));
+    private final DevLabel lblWinGame = new DevLabel(Localizer.getInstance().getMessage("lblWinGame"));
+    private final DevLabel lblCardToBattlefield = new DevLabel(Localizer.getInstance().getMessage("lblCardToBattlefield"));
+    private final DevLabel lblExileFromPlay = new DevLabel(Localizer.getInstance().getMessage("lblExileFromPlay"));
+    private final DevLabel lblCardToHand = new DevLabel(Localizer.getInstance().getMessage("lblCardToHand"));
+    private final DevLabel lblExileFromHand = new DevLabel(Localizer.getInstance().getMessage("lblExileFromHand"));
+    private final DevLabel lblCardToLibrary = new DevLabel(Localizer.getInstance().getMessage("lblCardToLibrary"));
+    private final DevLabel lblCardToGraveyard = new DevLabel(Localizer.getInstance().getMessage("lblCardToGraveyard"));
+    private final DevLabel lblCardToExile = new DevLabel(Localizer.getInstance().getMessage("lblCardToExile"));
+    private final DevLabel lblCastSpell = new DevLabel(Localizer.getInstance().getMessage("lblCastSpellOrPlayLand"));
+    private final DevLabel lblRepeatAddCard = new DevLabel(Localizer.getInstance().getMessage("lblRepeatAddCard"));
+    private final DevLabel lblRemoveFromGame = new DevLabel(Localizer.getInstance().getMessage("lblRemoveFromGame"));
 
-    private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
-    private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
+    private final DevLabel lblRiggedRoll = new DevLabel(Localizer.getInstance().getMessage("lblRiggedRoll"));
+    private final DevLabel lblWalkTo = new DevLabel(Localizer.getInstance().getMessage("lblWalkTo"));
 
     private final CDev controller;
 

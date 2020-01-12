@@ -242,7 +242,7 @@ public abstract class GameState {
                 if (card instanceof DetachedCardEffect) {
                     continue;
                 }
-                addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
+                addCard(zone, card.getController() == ai ? aiCardTexts : humanCardTexts, card);
             }
         }
     }
@@ -269,6 +269,10 @@ public abstract class GameState {
         }
 
         if (zoneType == ZoneType.Battlefield) {
+            if (c.getOwner() != c.getController()) {
+                // TODO: Handle more than 2-player games.
+                newText.append("|Owner:" + (c.getOwner().isAI() ?  "AI" : "Human"));
+            }
             if (c.isTapped()) {
                 newText.append("|Tapped");
             }

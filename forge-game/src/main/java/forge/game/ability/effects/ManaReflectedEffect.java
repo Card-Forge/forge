@@ -8,6 +8,7 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Collection;
 import java.util.List;
@@ -68,7 +69,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         }
 
         if (mask == 0 && !expressChoiceColors.isEmpty() && colors.contains("colorless")) {
-            baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromMask(mask)));
+            baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromMask(mask)));
         } else {
             // Nothing set previously so ask player if needed
             if (mask == 0) {
@@ -78,14 +79,14 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
                 } else {
                     if (colors.contains("colorless")) {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromNames(colors)));
+                        baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)));
                     } else {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
+                        baseMana = MagicColor.toShortString(player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)));
                     }
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
-                byte color = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                byte color = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
                 if (color == 0) {
                     System.err.println("Unexpected behavior in ManaReflectedEffect: " + sa.getActivatingPlayer() + " - color mana choice is empty for " + sa.getHostCard().getName());
                 }

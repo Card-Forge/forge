@@ -1771,7 +1771,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertTrue(transformOutLaw.isCloned());
         assertTrue(transformOutLaw.isDoubleFaced());
-        assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
         assertTrue(transformOutLaw.canTransform());
         assertTrue(transformOutLaw.isBackSide());
 
