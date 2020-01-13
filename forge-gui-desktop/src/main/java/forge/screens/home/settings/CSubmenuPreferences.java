@@ -3,6 +3,7 @@ package forge.screens.home.settings;
 import forge.*;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
+import forge.download.AutoUpdater;
 import forge.game.GameLogEntryType;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -225,6 +226,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeStackAdditionsComboBox();
@@ -375,6 +377,16 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeAutoUpdaterComboBox() {
+        // TODO: Ideally we would filter out update paths based on the type of Forge people have
+        final String[] updatePaths = AutoUpdater.updateChannels;
+        final FPref updatePreference = FPref.AUTO_UPDATE;
+        final FComboBoxPanel<String> panel = this.view.getCbpAutoUpdater();
+        final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
+        final String selectedItem = this.prefs.getPref(updatePreference);
         panel.setComboBox(comboBox, selectedItem);
     }
 
