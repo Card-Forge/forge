@@ -96,7 +96,7 @@ public class SealedCardPoolGenerator {
         if (sealedDecks.contains(sDeckName)) {
             if (!SOptionPane.showConfirmDialog(
                     Localizer.getInstance().getMessage("lblDeckExistsReplaceConfirm", sDeckName),
-                    "lblSealedDeckGameExists")) {
+                    Localizer.getInstance().getMessage("lblSealedDeckGameExists"))) {
                 return null;
             }
             sealedDecks.delete(sDeckName);
@@ -259,7 +259,7 @@ public class SealedCardPoolGenerator {
                         throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
                     }
 
-                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("lblChoosePackNumberToPlay", setCombos) : setCombos.get(0);
+                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChoosePackNumberToPlay"), setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {

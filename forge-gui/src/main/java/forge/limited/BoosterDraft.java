@@ -166,7 +166,7 @@ public class BoosterDraft implements IBoosterDraft {
                         }
                     });
 
-                    final CustomLimited customDraft = SGuiChoose.oneOrNone("lblChooseCustomDraft", myDrafts);
+                    final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {
                         return false;
                     }
