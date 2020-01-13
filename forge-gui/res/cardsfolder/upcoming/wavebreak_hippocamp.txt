@@ -1,0 +1,7 @@
+Name:Wavebreak Hippocamp
+ManaCost:2 U
+Types:Enchantment Creature Horse Fish
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ActivatorThisTurnCast$ EQ1 | OpponentTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Whenever you cast your first spell during each opponent's turn, draw a card.
