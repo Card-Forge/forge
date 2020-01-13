@@ -1,0 +1,7 @@
+Name:Hero of the Pride
+ManaCost:1 W
+Types:Creature Cat Soldier
+PT:2/2
+T:Mode$ SpellCast | TargetsValid$ Card.Self | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+Oracle:Whenever you cast a spell that targets Hero of the Pride, creatures you control get +1/+0 until end of turn.
