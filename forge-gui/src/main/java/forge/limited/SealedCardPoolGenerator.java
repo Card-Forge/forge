@@ -41,6 +41,7 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -69,7 +70,7 @@ public class SealedCardPoolGenerator {
     private String landSetCode = null;
 
     public static DeckGroup generateSealedDeck(final boolean addBasicLands) {
-        final String prompt = "Choose Sealed Deck Format";
+        final String prompt = Localizer.getInstance().getMessage("lblChooseSealedDeckFormat");
         final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if (poolType == null) { return null; }
 
@@ -83,8 +84,8 @@ public class SealedCardPoolGenerator {
         int rounds = 7;
 
         final String sDeckName = SOptionPane.showInputDialog(
-                "Save this card pool as:",
-                "Save Card Pool",
+                Localizer.getInstance().getMessage("lblSaveCardPoolAs") + ":",
+                Localizer.getInstance().getMessage("lblSaveCardPool"),
                 FSkinProp.ICO_QUESTION);
 
         if (StringUtils.isBlank(sDeckName)) {
@@ -94,8 +95,8 @@ public class SealedCardPoolGenerator {
         final IStorage<DeckGroup> sealedDecks = FModel.getDecks().getSealed();
         if (sealedDecks.contains(sDeckName)) {
             if (!SOptionPane.showConfirmDialog(
-                    "'" + sDeckName + "' already exists. Do you want to replace it?",
-                    "Sealed Deck Game Exists")) {
+                    Localizer.getInstance().getMessage("lblDeckExistsReplaceConfirm", sDeckName),
+                    "lblSealedDeckGameExists")) {
                 return null;
             }
             sealedDecks.delete(sDeckName);
@@ -174,7 +175,7 @@ public class SealedCardPoolGenerator {
                 Collections.sort(editions);
                 Collections.reverse(editions);
 
-                CardEdition chosenEdition = SGuiChoose.oneOrNone("Choose an edition", editions);
+                CardEdition chosenEdition = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAnEdition"), editions);
                 if (chosenEdition == null) {
                     return;
                 }
@@ -238,7 +239,7 @@ public class SealedCardPoolGenerator {
                     blocks.add(b);
                 }
 
-                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
+                final CardBlock block = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseBlock"), blocks);
                 if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
@@ -258,7 +259,7 @@ public class SealedCardPoolGenerator {
                         throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
                     }
 
-                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
+                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("lblChoosePackNumberToPlay", setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {
@@ -309,11 +310,11 @@ public class SealedCardPoolGenerator {
 
                 // present list to user
                 if (customs.isEmpty()) {
-                    SOptionPane.showMessageDialog("No custom sealed files found.");
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomSealedFiles"));
                     return;
                 }
 
-                final CustomLimited draft = SGuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
+                final CustomLimited draft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomSealedPool"), customs);
                 if (draft == null) { return; }
 
                 UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
@@ -328,7 +329,7 @@ public class SealedCardPoolGenerator {
     }
 
     private boolean chooseNumberOfBoosters(final IUnOpenedProduct product1) {
-        Integer boosterCount = SGuiChoose.getInteger("How many booster packs?", 3, 12);
+        Integer boosterCount = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblHowManyBoosterPacks"), 3, 12);
         if (boosterCount == null) { return false; }
 
         for (int i = 0; i < boosterCount; i++) {
