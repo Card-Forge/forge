@@ -1,0 +1,7 @@
+Name:Witness of Tomorrows
+ManaCost:4 U
+Types:Enchantment Creature Sphinx
+PT:3/4
+K:Flying
+A:AB$ Scry | Cost$ 3 U | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Flying\n{3}{U}: Scry 1.

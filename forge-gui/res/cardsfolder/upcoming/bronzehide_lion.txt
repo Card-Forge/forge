@@ -4,9 +4,8 @@ Types:Creature Cat
 PT:3/3
 A:AB$ Pump | Cost$ G W | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ DBAnimate | TriggerDescription$ When CARDNAME dies, return it to the battlefield. It's an Aura enchantment with enchant creature you control and CARDNAME has "{G}{W}: Enchanted creature gains indestructible until end of turn," and it loses all other abilities.
-SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveAllAbilities$ True | Keywords$ Enchant creature you control | Abilities$ SPAttach,ABPump | Permanent$ True | SubAbility$ TrigReturn
-SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAttach
-SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl
-SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveAllAbilities$ True | Keywords$ Enchant creature you control | Abilities$ SPAttach,ABPump | Permanent$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
+SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 SVar:ABPump:AB$ Pump | Cost$ G W | KW$ Indestructible | Defined$ Enchanted | SpellDescription$ Enchanted creature gains indestructible until end of turn.
 Oracle:{G}{W}: Bronzehide Lion gains indestructible until end of turn.\nWhen Bronzehide Lion dies, return it to the battlefield. It's an Aura enchantment with enchant creature you control and "{G}{W}: Enchanted creature gains indestructible until end of turn," and it loses all other abilities.
