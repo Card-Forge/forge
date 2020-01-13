@@ -1,0 +1,9 @@
+Name:Skophos Maze-Warden
+ManaCost:3 R
+Types:Creature Minotaur Warrior
+PT:3/4
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+T:Mode$ BecomesTarget | ValidSource$ Land.namedLabyrinth of Skophos+YouCtrl | SourceType$ Ability | ValidTarget$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ Whenever another creature becomes the target of an ability of a land you control named Labyrinth of Skophos, you may have CARDNAME fight that creature. (Each deals damage equal to its power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ Self | ExtraDefined$ TriggeredTarget
+DeckNeeds:Name$Labyrinth of Skophos
+Oracle:{1}: Skophos Maze-Warden gets +1/-1 until the end of turn.\nWhenever another creature becomes the target of an ability of a land you control named Labyrinth of Skophos, you may have Skophos Maze-Warden fight that creature. (Each deals damage equal to its power to the other.)

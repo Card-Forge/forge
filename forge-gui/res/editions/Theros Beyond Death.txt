@@ -92,7 +92,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 81 U Whirlwind Denial
 82 C Witness of Tomorrows
 83 U Agonizing Remorse
-84 R Aphemia, the Cacophany
+84 R Aphemia, the Cacophony
 85 C Aspect of Lamprey
 86 C Blight-Breath Catoblepas
 87 U Cling to Dust
@@ -102,7 +102,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 91 U Elspeth's Nightmare
 92 U Enemy of Enlightenment
 93 M Erebos, Bleak-Hearted
-94 R  Erebos's Intervention
+94 R Erebos's Intervention
 95 C Final Death
 96 C Fruit of Tizerus
 97 C Funeral Rites
@@ -277,7 +277,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 266 M Nylea, Keen-Eyed
 267 U Renata, Called to the Hunt
 268 M Klothys, God of Destiny
-269 M Atheros, Shroud-Veiled
+269 M Athreos, Shroud-Veiled
 270 M Elspeth, Undaunted Hero
 271 U Eidolon of Inspiration
 272 R Elspeth's Devotee
@@ -318,7 +318,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 308 R Thassa's Oracle
 309 R Thryx, the Sudden Storm
 310 R Wavebreak Hippocamp
-311 R Aphemia, the Cacophany
+311 R Aphemia, the Cacophony
 312 R Eat to Extinction
 313 R Erebos's Intervention
 314 R Gravebreaker Lamia
@@ -340,7 +340,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 330 M Nyxbloom Ancient
 331 R Setessan Champion
 332 R Allure of the Unknown
-333 R Atris, Oracle of Half Truths
+333 R Atris, Oracle of Half-Truths
 334 R Bronzehide Lion
 335 R Dalakos, Crafter of Wonders
 336 R Dream Trawler
