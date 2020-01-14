@@ -1,5 +1,6 @@
 package forge.game;
 
+import com.google.common.base.Enums;
 import com.google.common.base.Function;
 import forge.StaticData;
 import forge.deck.CardPool;
@@ -143,5 +144,9 @@ public enum GameType {
 
     public String getDescription() {
         return description;
+    }
+
+    public static GameType smartValueOf(String name) {
+        return Enums.getIfPresent(GameType.class, name).orNull();
     }
 }

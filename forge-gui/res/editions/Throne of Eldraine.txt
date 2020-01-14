@@ -330,4 +330,3 @@ c_a_food_sac
 c_a_food_sac
 c_a_food_sac
 c_a_food_sac
-emblem_garruk_cursed_hunstman

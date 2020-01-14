@@ -36,6 +36,7 @@ import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
+import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
@@ -108,6 +109,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisDrawStep = 0;
     private int numDiscardedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
+    private final Map<String, FCollection<String>> notes = Maps.newHashMap();
 
     private boolean revolt = false;
 
@@ -1601,6 +1603,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         numCardsInHandStartedThisTurnWith = num;
     }
 
+    public void addNoteForName(String notedFor, String noted) {
+        if (!notes.containsKey(notedFor)) {
+            notes.put(notedFor, new FCollection<>());
+        }
+        notes.get(notedFor).add(noted);
+    }
+    public FCollection<String> getNotesForName(String notedFor) {
+        if (!notes.containsKey(notedFor)) {
+            notes.put(notedFor, new FCollection<>());
+        }
+        return notes.get(notedFor);
+    }
+
     public final CardCollectionView mill(final int n, final ZoneType destination,
             final boolean bottom, SpellAbility sa, CardZoneTable table) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
@@ -2747,6 +2762,21 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
             com.add(conspire);
+        }
+
+        for (final Card c : getCardsIn(ZoneType.Library)) {
+            for (KeywordInterface inst : c.getKeywords()) {
+                String kw = inst.getOriginal();
+                if (kw.startsWith("MayEffectFromOpeningDeck")) {
+                    String[] split = kw.split(":");
+                    final String effName = split[1];
+
+                    final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                    effect.setActivatingPlayer(this);
+
+                    getController().playSpellAbilityNoStack(effect, true);
+                }
+            }
         }
     }
 

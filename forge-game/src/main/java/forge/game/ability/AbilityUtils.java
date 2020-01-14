@@ -260,6 +260,8 @@ public class AbilityUtils {
                 list = sa.getRootAbility().getPaidList("SacrificedCards");
             } else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
+            } else if (defined.startsWith("Revealed")) {
+                list = sa.getRootAbility().getPaidList("Revealed");
             } else if (defined.startsWith("DiscardedCards")) {
                 list = sa.getRootAbility().getPaidList("DiscardedCards");
             } else if (defined.startsWith("Discarded")) {
@@ -1279,6 +1281,8 @@ public class AbilityUtils {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
                     sas.addAll(game.getCardState(rem).getSpellAbilities());
+                } else if (o instanceof SpellAbility) {
+                    sas.add((SpellAbility) o);
                 }
             }
         }
@@ -1835,6 +1839,11 @@ public class AbilityUtils {
                     players.add(c.getController());
                 } else if (def.endsWith("Owner")) {
                     players.add(c.getOwner());
+                }
+            } else if (o instanceof SpellAbility) {
+                final SpellAbility c = (SpellAbility) o;
+                if (def.endsWith("Controller")) {
+                    players.add(c.getHostCard().getController());
                 }
             }
         }

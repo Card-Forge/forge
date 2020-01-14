@@ -1,0 +1,7 @@
+Name:Sunmane Pegasus
+ManaCost:3 W
+Types:Creature Pegasus
+PT:2/3
+K:Flying
+A:AB$ Pump | Cost$ 1 W | KW$ Lifelink & Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance and lifelink until end of turn.
+Oracle:Flying\n{1}{W}: Sunmane Pegasus gains vigilance and lifelink until end of turn.

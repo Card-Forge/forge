@@ -1817,7 +1817,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(getName()).append(" can block ")
                     .append(CardType.getPluralType(k[1]))
                     .append(" as though it had reach.\r\n");
-                } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
+                } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
                     String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");

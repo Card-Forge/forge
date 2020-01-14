@@ -1,0 +1,7 @@
+Name:Soulreaper of Mogis
+ManaCost:2 B
+Types:Enchantment Creature Minotaur Shaman
+PT:2/3
+A:AB$ Draw | Cost$ 2 B Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:{2}{B}, Sacrifice a creature: Draw a card.

@@ -579,7 +579,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostReveal cost) {
         final String type = cost.getType();
-        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
 
         if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {

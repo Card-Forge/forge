@@ -17,9 +17,11 @@
  */
 package forge.game.spellability;
 
+import com.google.common.collect.Lists;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -36,11 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -145,6 +143,15 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionPhases")) {
             this.setPhases(PhaseType.parseRange(params.get("ConditionPhases")));
+        }
+
+        if (params.containsKey("ConditionGameTypes")) {
+            String[] gameTypeNames = params.get("ConditionGameTypes").split(",");
+            List<GameType> gameTypes = Lists.newArrayList();
+            for (String name : gameTypeNames) {
+                gameTypes.add(GameType.smartValueOf(name));
+            }
+            this.setGameTypes(gameTypes);
         }
 
         if (params.containsKey("ConditionChosenColor")) {
@@ -318,6 +325,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             if (!isPhase) {
+                return false;
+            }
+        }
+
+        if (this.getGameTypes().size() > 0) {
+            GameType currGameType = sa.getHostCard().getGame().getRules().getGameType();
+            if (!getGameTypes().contains(currGameType)) {
                 return false;
             }
         }

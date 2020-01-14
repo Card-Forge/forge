@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
@@ -97,6 +98,9 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The phases. */
     private List<PhaseType> phases = Lists.newArrayList();
+
+    /** The GameTypes */
+    private List<GameType> gameTypes = Lists.newArrayList();
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
@@ -384,6 +388,18 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setPhases(final List<PhaseType> phases) {
         this.phases.addAll(phases);
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>gameTypes</code>.
+     * </p>
+     *
+     * @param gameTypes
+     */
+    public final void setGameTypes(final List<GameType> gameTypes) {
+        this.gameTypes.clear();
+        this.gameTypes.addAll(gameTypes);
     }
 
     /**
@@ -684,6 +700,15 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final List<PhaseType> getPhases() {
         return this.phases;
+    }
+
+    /**
+     * Gets the game types.
+     *
+     * @return the phases
+     */
+    public final List<GameType> getGameTypes() {
+        return this.gameTypes;
     }
 
 

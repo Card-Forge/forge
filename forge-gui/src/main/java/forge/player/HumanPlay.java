@@ -606,7 +606,8 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostReveal) {
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                CostReveal costReveal = (CostReveal) part;
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
