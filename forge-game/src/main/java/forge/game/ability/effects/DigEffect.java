@@ -24,6 +24,7 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.*;
 
@@ -146,7 +147,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), CardTranslation.getTranslatedName(host.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved
@@ -198,7 +199,7 @@ public class DigEffect extends SpellAbilityEffect {
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                     if (optional && mayBeSkipped && !valid.isEmpty()) {
                         String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
-                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", sa.getHostCard().getName()))) {
+                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(sa.getHostCard().getName())))) {
                             return;
                         }
                     }

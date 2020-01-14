@@ -24,6 +24,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class ConquestRewardDialog extends FScrollPane {
     private static final float PADDING = Utils.scale(5);
@@ -177,7 +178,7 @@ public class ConquestRewardDialog extends FScrollPane {
 
             add(ConquestRewardDialog.this);
 
-            initButton(0, "OK", new FEventHandler() {
+            initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     hide();
@@ -186,7 +187,7 @@ public class ConquestRewardDialog extends FScrollPane {
                     }
                 }
             });
-            initButton(1, "Skip", new FEventHandler() {
+            initButton(1, Localizer.getInstance().getMessage("lblSkip"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     animation.skip();

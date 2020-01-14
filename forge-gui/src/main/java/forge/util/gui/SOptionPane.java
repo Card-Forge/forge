@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 
 import forge.GuiBase;
 import forge.assets.FSkinProp;
+import forge.util.Localizer;
 
 public class SOptionPane {
     public static final FSkinProp QUESTION_ICON = FSkinProp.ICO_QUESTION;
@@ -30,7 +31,7 @@ public class SOptionPane {
     }
 
     public static void showMessageDialog(final String message, final String title, final FSkinProp icon) {
-        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0);
+        showOptionDialog(message, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0);
     }
 
     public static boolean showConfirmDialog(final String message) {
@@ -38,11 +39,11 @@ public class SOptionPane {
     }
 
     public static boolean showConfirmDialog(final String message, final String title) {
-        return showConfirmDialog(message, title, "Yes", "No", true);
+        return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true);
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final boolean defaultYes) {
-        return showConfirmDialog(message, title, "Yes", "No", defaultYes);
+        return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), defaultYes);
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {

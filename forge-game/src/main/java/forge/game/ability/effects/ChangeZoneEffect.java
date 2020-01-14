@@ -810,10 +810,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), source.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
             }
             else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), source.getName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
             }
         }
 
