@@ -38,8 +38,15 @@ public class CostReveal extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
 
+    private ZoneType revealFrom = ZoneType.Hand;
+
     public CostReveal(final String amount, final String type, final String description) {
         super(amount, type, description);
+    }
+
+    public CostReveal(final String amount, final String type, final String description, final ZoneType zoneType) {
+        super(amount, type, description);
+        this.revealFrom = zoneType;
     }
 
     @Override
@@ -48,16 +55,20 @@ public class CostReveal extends CostPartWithList {
     @Override
     public boolean isRenewable() { return true; }
 
+    public ZoneType getRevealFrom() {
+        return revealFrom;
+    }
+
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView handList = payer.getCardsIn(ZoneType.Hand);
+        CardCollectionView handList = payer.getCardsIn(revealFrom);
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
-            return source.isInZone(ZoneType.Hand);
+            return source.isInZone(revealFrom);
         } else if (this.getType().equals("Hand")) {
             return true;
         } else if (this.getType().equals("SameColor")) {
@@ -100,7 +111,7 @@ public class CostReveal extends CostPartWithList {
         if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
-            return ("Reveal you hand");
+            return ("Reveal your hand");
         } else if (this.getType().equals("SameColor")) {
             return ("Reveal " + i + " cards from your hand that share a color");
         } else {
@@ -115,7 +126,9 @@ public class CostReveal extends CostPartWithList {
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
         }
-        sb.append(" from your hand");
+
+        sb.append(" from your ");
+        sb.append(revealFrom.getTranslatedName());
 
         return sb.toString();
     }
@@ -153,5 +166,12 @@ public class CostReveal extends CostPartWithList {
     // Inputs
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public int paymentOrder() {
+        // Caller of the Untamed needs the reveal to happen before the mana cost
+        if (!revealFrom.equals(ZoneType.Hand)) { return -1; }
+        return 5;
     }
 }

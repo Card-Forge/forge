@@ -260,6 +260,8 @@ public class AbilityUtils {
                 list = sa.getRootAbility().getPaidList("SacrificedCards");
             } else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
+            } else if (defined.startsWith("Revealed")) {
+                list = sa.getRootAbility().getPaidList("Revealed");
             } else if (defined.startsWith("DiscardedCards")) {
                 list = sa.getRootAbility().getPaidList("DiscardedCards");
             } else if (defined.startsWith("Discarded")) {
