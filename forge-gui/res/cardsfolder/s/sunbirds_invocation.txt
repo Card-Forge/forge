@@ -2,8 +2,8 @@ Name:Sunbird's Invocation
 ManaCost:5 R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever you cast a spell from your hand, reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ PeekAndReveal | Defined$ You | PeekAmount$ X | RememberRevealed$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.nonLand+IsRemembered+cmcLEX | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ShowCards$ Card.IsRemembered | ForgetTargetRemembered$ True | SubAbility$ DBRestRandomOrder
+SVar:TrigDig:DB$ PeekAndReveal | Defined$ You | PeekAmount$ X | RememberRevealed$ True | References$ X | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.nonLand+IsRemembered+cmcLEX | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ShowCards$ Card.IsRemembered | ForgetTargetRemembered$ True | References$ X | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | Shuffle$ False | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$CastSACMC
