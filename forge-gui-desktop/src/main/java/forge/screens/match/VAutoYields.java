@@ -16,6 +16,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 @SuppressWarnings("serial")
 public class VAutoYields extends FDialog {
@@ -32,7 +33,7 @@ public class VAutoYields extends FDialog {
 
     public VAutoYields(final CMatchUI matchUI) {
         super();
-        setTitle("Auto-Yields");
+        setTitle(Localizer.getInstance().getMessage("lblAutoYields"));
 
         autoYields = new ArrayList<>();
         for (final String autoYield : matchUI.getAutoYields()) {
@@ -47,7 +48,7 @@ public class VAutoYields extends FDialog {
 
         listScroller = new FScrollPane(lstAutoYields, true);
 
-        chkDisableAll = new FCheckBox("Disable All Auto Yields", matchUI.getDisableAutoYields());
+        chkDisableAll = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), matchUI.getDisableAutoYields());
         chkDisableAll.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -55,14 +56,14 @@ public class VAutoYields extends FDialog {
             }
         });
 
-        btnOk = new FButton("OK");
+        btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
         btnOk.setCommand(new UiCommand() {
             @Override
             public void run() {
                 setVisible(false);
             }
         });
-        btnRemove = new FButton("Remove Yield");
+        btnRemove = new FButton(Localizer.getInstance().getMessage("lblRemoveYield"));
         btnRemove.setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -115,7 +116,7 @@ public class VAutoYields extends FDialog {
             setVisible(true);
             dispose();
         } else {
-            FOptionPane.showMessageDialog("There are no active auto-yields.", "No Auto-Yields", FOptionPane.INFORMATION_ICON);
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoActiveAutoYield"), Localizer.getInstance().getMessage("lblNoAutoYield"), FOptionPane.INFORMATION_ICON);
         }
     }
 }

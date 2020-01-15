@@ -27,14 +27,14 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
 
     public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
-                new PickerTab(choiceList, "Choices", FSkinImage.DECKLIST, 1),
+                new PickerTab(choiceList, Localizer.getInstance().getMessage("Choices"), FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of("OK", "Cancel") : ImmutableList.of("OK"), 0, new Callback<Integer>() {
+                isOptional ? ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")) : ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {

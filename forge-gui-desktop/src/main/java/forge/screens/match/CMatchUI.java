@@ -126,6 +126,7 @@ import forge.util.ITriggerEvent;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
@@ -460,53 +461,53 @@ public final class CMatchUI
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView player = update.getPlayer();
-            for (final ZoneType zone : update.getZones()) {
-		switch (zone) {
-		case Battlefield: // always shown
-		    break;
-		case Hand:  // controller hand always shown
-		    if (controller != player) {
-			FloatingZone.show(this,player,zone);
-		    }
-		    break;
-		case Library:
-		case Graveyard:
-		case Exile:
-		case Flashback:
-		case Command:
-		    FloatingZone.show(this,player,zone);
-		    break;
-		default:
-		    break;
-		}
-	    }
-	}
-	return zonesToUpdate; //pfps should return only the newly shown zones
+                for (final ZoneType zone : update.getZones()) {
+                    switch (zone) {
+                        case Battlefield: // always shown
+                            break;
+                        case Hand:  // controller hand always shown
+                            if (controller != player) {
+                                FloatingZone.show(this,player,zone);
+                            }
+                            break;
+                        case Library:
+                        case Graveyard:
+                        case Exile:
+                        case Flashback:
+                        case Command:
+                            FloatingZone.show(this,player,zone);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        return zonesToUpdate; //pfps should return only the newly shown zones
     }
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-	if ( zonesToUpdate != null ) {
-	    for (final PlayerZoneUpdate update : zonesToUpdate) {
-		final PlayerView player = update.getPlayer();
-		for (final ZoneType zone : update.getZones()) {
-		    switch (zone) {
-		    case Battlefield: // always shown
-			break;
-		    case Hand: // the controller's hand should never be temporarily shown, but ...
-		    case Library:
-		    case Graveyard:
-		    case Exile:
-		    case Flashback:
-		    case Command:
-			FloatingZone.hide(this,player,zone);
-			break;
-		    default:
-			break;
-		    }
-		}
-	    }
-	}
+        if ( zonesToUpdate != null ) {
+            for (final PlayerZoneUpdate update : zonesToUpdate) {
+                final PlayerView player = update.getPlayer();
+                for (final ZoneType zone : update.getZones()) {
+                    switch (zone) {
+                        case Battlefield: // always shown
+                            break;
+                        case Hand: // the controller's hand should never be temporarily shown, but ...
+                        case Library:
+                        case Graveyard:
+                        case Exile:
+                        case Flashback:
+                        case Command:
+                            FloatingZone.hide(this,player,zone);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     // Player's mana pool changes
@@ -550,7 +551,7 @@ public final class CMatchUI
                 }
                 break;
             default:
-		FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
+		        FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }
@@ -561,18 +562,18 @@ public final class CMatchUI
 	super.setSelectables(cards);
 	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
 	FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public final void run() {
-		    for (final PlayerView p : getGameView().getPlayers()) {
-			if ( p.getCards(ZoneType.Battlefield) != null ) {
-			    updateCards(p.getCards(ZoneType.Battlefield));
-			}
-			if ( p.getCards(ZoneType.Hand) != null ) {
-			    updateCards(p.getCards(ZoneType.Hand));
-			}
-		    }
-		    FloatingZone.refreshAll();
-		}
-	    });
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+                FloatingZone.refreshAll();
+            }
+        });
     }
 
     @Override
@@ -580,18 +581,18 @@ public final class CMatchUI
 	super.clearSelectables();
 	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
 	FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public final void run() {
-		    for (final PlayerView p : getGameView().getPlayers()) {
-			if ( p.getCards(ZoneType.Battlefield) != null ) {
-			    updateCards(p.getCards(ZoneType.Battlefield));
-			}
-			if ( p.getCards(ZoneType.Hand) != null ) {
-			    updateCards(p.getCards(ZoneType.Hand));
-			}
-		    }
-		    FloatingZone.refreshAll();
-		}
-	    });
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+                FloatingZone.refreshAll();
+            }
+        });
     }
 
 
@@ -857,7 +858,7 @@ public final class CMatchUI
             if (abilities.size() == 1) {
                 return abilities.get(0);
             }
-            return GuiChoose.oneOrNone("Choose ability to play", abilities);
+            return GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAbilityToPlay"), abilities);
         }
 
         if (abilities.isEmpty()) {
@@ -871,7 +872,7 @@ public final class CMatchUI
         }
 
         //show menu if mouse was trigger for ability
-        final JPopupMenu menu = new JPopupMenu("Abilities");
+        final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblAbilities"));
 
         boolean enabled;
         int firstEnabled = -1;
@@ -1071,7 +1072,7 @@ public final class CMatchUI
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        return (List<GameEntityView>) order(title,"Selected", optionList.size() - max, optionList.size() - min, optionList, null, null, false);
+        return (List<GameEntityView>) order(title,Localizer.getInstance().getMessage("lblSelected"), optionList.size() - max, optionList.size() - min, optionList, null, null, false);
     }
 
     @Override
@@ -1228,7 +1229,7 @@ public final class CMatchUI
             Dimension maxSize = new Dimension(1400, parentSize.height - 100);
             mainPanel.setMaximumSize(maxSize);
             mainPanel.setOpaque(false);              
-           
+
             // Big Image
             addBigImageToStackModalPanel(mainPanel, si);
             
@@ -1256,7 +1257,7 @@ public final class CMatchUI
                         numSmallImages++;
                     }
                 }
-             }
+            }
                 
             // If current effect is a triggered ability, I want to show the triggering card if present
             SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
@@ -1265,7 +1266,7 @@ public final class CMatchUI
                 sourceCardView = sourceSA.getHostCard().getView();
                 numSmallImages++;
             } 
-          
+
             // I also want to show each type of targets (both cards and players)
             List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
             numSmallImages = numSmallImages + targets.size();
@@ -1281,7 +1282,7 @@ public final class CMatchUI
                 addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
             }                                                                       
             
-            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of("OK"));                               
+            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));                               
             // here the user closed the modal - time to update the next notifiable stack index
             
             }
