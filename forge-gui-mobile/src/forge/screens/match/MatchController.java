@@ -530,7 +530,7 @@ public class MatchController extends AbstractGuiGame {
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
         final List<String> optionsToUse;
         if (options == null) {
-            optionsToUse = ImmutableList.of("Yes", "No");
+            optionsToUse = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
         } else {
             optionsToUse = options;
         }
@@ -568,7 +568,7 @@ public class MatchController extends AbstractGuiGame {
         }
 
         final Collection<CardView> revealList = delayedReveal.getCards();
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
+        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
         final InfoTab revealListTab = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone());
         final FImage revealListImage = revealListTab != null ? revealListTab.getIcon() : null;
 
