@@ -1621,7 +1621,19 @@ public class AbilityUtils {
                     }
                     return count;
                 }
-
+                // Count$AttachedTo <DefinedCards related to spellability> <restriction>
+                if (sq[0].startsWith("AttachedTo")) {
+                    final String[] k = l[0].split(" ");
+                    int sum = 0;
+                    for (Card card : AbilityUtils.getDefinedCards(sa.getHostCard(), k[1], sa)) {
+                        // Hateful Eidolon: the script uses LKI so that the attached cards have to be defined
+                        // This card needs the spellability ("Auras You control",  you refers to the activating player)
+                        // CardFactoryUtils.xCount doesn't have the sa parameter, SVar:X:TriggeredCard$Valid <restriction> cannot handle this
+                        CardCollection list = CardLists.getValidCards(card.getAttachedCards(), k[2].split(","), sa.getActivatingPlayer(), c, sa);
+                        sum += list.size();
+                    }
+                    return sum;
+                }
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
