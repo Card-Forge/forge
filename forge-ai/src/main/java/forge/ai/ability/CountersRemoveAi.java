@@ -23,6 +23,14 @@ import java.util.Map;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
+    @Override
+    protected boolean canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
+        if ("Always".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+        return super.canPlayWithoutRestrict(ai, sa);
+    }
+
     /*
      * (non-Javadoc)
      * 
