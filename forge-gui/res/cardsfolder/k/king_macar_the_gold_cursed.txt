@@ -2,10 +2,9 @@ Name:King Macar, the Gold-Cursed
 ManaCost:2 B B
 Types:Legendary Creature Human Noble
 PT:2/3
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may exile target creature. If you do, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color."
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may exile target creature. If you do, create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ gold | TokenOwner$ You | TokenAmount$ 1 | LegacyImage$ gold jou | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/king_macar_the_gold_cursed.jpg
-Oracle:Inspired — Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color."
+Oracle:Inspired — Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")
