@@ -269,6 +269,8 @@ public enum CounterType {
 
     STUDY("STUDY", 226, 192, 165),
 
+    TASK("TASK", 109, 95, 243),
+
     THEFT("THEFT", 255, 176, 125),
 
     TIDE("TIDE", 0, 212, 187),
