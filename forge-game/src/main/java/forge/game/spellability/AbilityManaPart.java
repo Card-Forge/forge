@@ -17,36 +17,30 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import forge.card.mana.ManaAtom;
-import forge.game.ability.AbilityKey;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementResult;
-import forge.game.replacement.ReplacementType;
+import forge.game.replacement.*;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -129,7 +123,7 @@ public class AbilityManaPart implements java.io.Serializable {
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
-        repParams.put(AbilityKey.Mana, afterReplace);
+        repParams.put(AbilityKey.Mana, produced);
         repParams.put(AbilityKey.Player, player);
         repParams.put(AbilityKey.AbilityMana, sa);
         if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
@@ -149,14 +143,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (attemptedMana == 0) {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
-				// Commander has removed rule #4 (mana generation restriction) due to Colorless mana mattering
-				/*
-                if (CID != null) {
-                    if (!CID.hasAnyColor(attemptedMana)) {
-                        attemptedMana = (byte)ManaAtom.COLORLESS;
-                    }
-                }
-				*/
 
                 this.lastManaProduced.add(new Mana(attemptedMana, source, this));
             }
