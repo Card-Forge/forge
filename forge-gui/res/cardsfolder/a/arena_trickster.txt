@@ -1,5 +1,5 @@
 Name:Arena Trickster
-ManaCost:4 R
+ManaCost:3 R
 Types:Creature Human Shaman
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, put a +1/+1 counter on CARDNAME.
