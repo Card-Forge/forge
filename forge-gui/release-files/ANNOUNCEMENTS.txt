@@ -1,7 +1,7 @@
 #Add one announcement per line
-Throne of Eldraine fixes
-Pioneer is here!
-Some fancy looking UI stuff was added. Card Sleeves and Keyword Icons
+Theros Beyond Death Prerelease!
+"Prerelease" limited mode for latest sets 
+Bunches of bug fixes,
 Continued work on Translations
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
 For some reason Oracle hates Forge and version 1.8.0_211 does bad things with Forge for unknown reasons. Downgrade to 202 for a beter time. 
