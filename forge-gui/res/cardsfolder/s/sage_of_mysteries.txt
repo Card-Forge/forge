@@ -4,4 +4,5 @@ Types:Creature Human Wizard
 PT:0/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Constellation Whenver Whenever an enchantment enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
+DeckNeeds:Type$Enchantment
 Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.

@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchan
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying
 DeckHas:Ability$Counters
+DeckNeeds:Type$Enchantment
 Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, put a +1/+1 counter on target creature. That creature gains flying until end of turn.
