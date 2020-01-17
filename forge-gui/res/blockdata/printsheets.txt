@@ -1587,3 +1587,14 @@ Syr Gwyn, Hero of Ashvale
 Arcane Signet
 Tome of Legends
 Command Tower
+
+[THB Secret Cards]
+Athreos, Shroud-Veiled
+Elspeth, Undaunted Hero
+Eidolon of Inspiration
+Elspeth's Devotee
+Sunlit Hoplite
+Ashiok, Sculptor of Fears
+Swimmer in Nightmares
+Mindwrack Harpy
+Ashiok's Forerunner
