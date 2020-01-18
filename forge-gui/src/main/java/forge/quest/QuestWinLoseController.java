@@ -23,9 +23,9 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import forge.util.Localizer;
 import forge.util.gui.SGuiChoose;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -474,7 +474,7 @@ public class QuestWinLoseController {
         }
 
         if (!cardsWon.isEmpty()) {
-            view.showCards(Localizer.getInstance().getMessage("lblAchievedNWinStreakWinMCards", (currentStreak == 0 ? "50" : String.valueOf(currentStreak)), String.valueOf(cardsWon.size()), typeWon), cardsWon);
+            view.showCards(Localizer.getInstance().getMessage("lblAchievedNWinStreakWinMTypeCards", (currentStreak == 0 ? "50" : String.valueOf(currentStreak)), String.valueOf(cardsWon.size()), typeWon), cardsWon);
         }
     }
 

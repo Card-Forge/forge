@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -7,8 +8,6 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 
 public class ScryEffect extends SpellAbilityEffect {
@@ -38,16 +37,15 @@ public class ScryEffect extends SpellAbilityEffect {
 
         boolean isOptional = sa.hasParam("Optional");
 
-	final List<Player> players = Lists.newArrayList(); // players really affected
+        final List<Player> players = Lists.newArrayList(); // players really affected
 
-	// Optional here for spells that have optional multi-player scrying
-        for (final Player p : getTargetPlayers(sa)) {
-            if ( (!sa.usesTargeting() || p.canBeTargetedBy(sa)) &&
-              (!isOptional || p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWanttoScry"))) ) {
-                players.add(p);
+        // Optional here for spells that have optional multi-player scrying
+            for (final Player p : getTargetPlayers(sa)) {
+                if ( (!sa.usesTargeting() || p.canBeTargetedBy(sa)) &&
+                  (!isOptional || p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWanttoScry"))) ) {
+                    players.add(p);
+            }
         }
-	}
-	sa.getActivatingPlayer().getGame().getAction().scry(players, num, sa);
+        sa.getActivatingPlayer().getGame().getAction().scry(players, num, sa);
     }
-
 }
