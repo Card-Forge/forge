@@ -4,11 +4,10 @@ Credits=3000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Name=Welcome to the Simic Combine. This box contains the materials you need to delve into the deepest mysteries of biology and bring new truths to light. Let nothing stop your discovery.
+Name=Simic Guild Kit
+Description=Welcome to the Simic Combine. This box contains the materials you need to delve into the deepest mysteries of biology and bring new truths to light. Let nothing stop your discovery.
 Set=GK2
 Image=simic_guild_kit.jpg
-[Avatar]
-
 [Main]
 1 Applied Biomancy|RNA
 2 Cloudfin Raptor|GK2

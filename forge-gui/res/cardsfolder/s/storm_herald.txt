@@ -10,4 +10,5 @@ SVar:DelayedExile:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidP
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ DelayTriggerRemembered
 SVar:GraveX:Count$ValidGraveyard Aura.YouOwn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Aura
 Oracle:Haste\nWhen Storm Herald enters the battlefield, return any number of Aura cards from your graveyard to the battlefield attached to creatures you control. Exile those Auras at the beginning of your next end step. If those Auras would leave the battlefield, exile them instead of putting them anywhere else.

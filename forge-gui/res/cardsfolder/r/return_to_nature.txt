@@ -5,4 +5,4 @@ A:SP$ Charm | Cost$ 1 G | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBExil
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | Tgtprompt$ Select target artifact | SpellDescription$ Destroy target artifact
 SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | Tgtprompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard. | SpellDescription$ Exile target card fom a graveyard.
-Oracle:Choose one: \n- Destroy target artifact.\n-Destroy target enchantment\n-Exile target card from a graveyard.
+Oracle:Choose one: \n- Destroy target artifact.\n- Destroy target enchantment\n- Exile target card from a graveyard.

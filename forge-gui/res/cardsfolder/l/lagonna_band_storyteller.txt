@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | Su
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 DeckNeeds:Type$Enchantment
+DeckHas:Ability$LifeGain
 Oracle:When Lagonna-Band Storyteller enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its converted mana cost.
