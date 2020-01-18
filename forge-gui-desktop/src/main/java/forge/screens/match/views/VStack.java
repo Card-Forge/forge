@@ -34,6 +34,7 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;    
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -54,7 +55,7 @@ public class VStack implements IVDoc<CStack> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Stack");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblStack"));
 
     // Top-level containers
     private final FScrollPanel scroller = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap"), true,
@@ -113,7 +114,7 @@ public class VStack implements IVDoc<CStack> {
         }
 
         final FCollectionView<StackItemView> items = model.getStack();
-        tab.setText("Stack : " + items.size());
+        tab.setText(Localizer.getInstance().getMessage("lblStack") + " : " + items.size());
 
         // No need to update the rest unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
@@ -191,41 +192,41 @@ public class VStack implements IVDoc<CStack> {
             if (hoveredItem == null)
             {
             	// set things up to draw an arc from it...
-            	hoveredItem = StackInstanceTextArea.this;
-            	controller.getMatchUI().setCard(item.getSourceCard());
+                hoveredItem = StackInstanceTextArea.this;
+                controller.getMatchUI().setCard(item.getSourceCard());
             }
 
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
-                		hoveredItem = StackInstanceTextArea.this;
-                	}
-                	controller.getMatchUI().setCard(item.getSourceCard());
+                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                        hoveredItem = StackInstanceTextArea.this;
+                    }
+                    controller.getMatchUI().setCard(item.getSourceCard());
 
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
-                		if (hoveredItem == StackInstanceTextArea.this) {
-                			hoveredItem = null;
-                		}
-                	}
+                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                        if (hoveredItem == StackInstanceTextArea.this) {
+                            hoveredItem = null;
+                        }
+                    }
                 }
                 
                 @Override
                 public void mouseClicked(final MouseEvent e) {
-                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
-                		if (hoveredItem == StackInstanceTextArea.this) {
-                			hoveredItem = null;
-                		}
-                		else
-                		{
-                			hoveredItem = StackInstanceTextArea.this;
-                			controller.getMatchUI().setCard(item.getSourceCard());
-                		}
-                	}
+                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
+                        if (hoveredItem == StackInstanceTextArea.this) {
+                            hoveredItem = null;
+                        }
+                        else
+                        {
+                            hoveredItem = StackInstanceTextArea.this;
+                            controller.getMatchUI().setCard(item.getSourceCard());
+                        }
+                    }
                 }
             });
 
@@ -287,7 +288,7 @@ public class VStack implements IVDoc<CStack> {
         private Integer triggerID = 0;
 
         public AbilityMenu(){
-            jmiAutoYield = new JCheckBoxMenuItem("Auto-Yield");
+            jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
             jmiAutoYield.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent arg0) {
@@ -302,7 +303,7 @@ public class VStack implements IVDoc<CStack> {
             });
             add(jmiAutoYield);
 
-            jmiAlwaysYes = new JCheckBoxMenuItem("Always Yes");
+            jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent arg0) {
@@ -316,7 +317,7 @@ public class VStack implements IVDoc<CStack> {
             });
             add(jmiAlwaysYes);
 
-            jmiAlwaysNo = new JCheckBoxMenuItem("Always No");
+            jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
             jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent arg0) {
