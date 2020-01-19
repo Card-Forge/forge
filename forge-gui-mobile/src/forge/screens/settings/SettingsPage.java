@@ -109,7 +109,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
         }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
-                "AI Personality",
+                localizer.getMessage("cbpAiProfiles"),
                 localizer.getMessage("nlpAiProfiles"),
                 AiProfileUtil.getProfilesArray()),
                 1);
