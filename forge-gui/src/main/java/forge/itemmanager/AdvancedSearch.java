@@ -38,7 +38,7 @@ import forge.util.CardTranslation;
 
 public class AdvancedSearch {
     public enum FilterOption {
-        NONE("(none)", null, null, null),
+        NONE("lblNone", null, null, null),
         CARD_NAME("lblName", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
