@@ -6,4 +6,5 @@ A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Card.Artifact,Ac
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddKeyword$ Flying & Haste | Description$ Equipped creatures you control have flying and haste.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact|Equipment
 Oracle:{T}: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.\nEquipped creatures you control have flying and haste.
