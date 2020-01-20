@@ -72,15 +72,29 @@ public class Localizer {
 		formatter.setLocale(locale);
 		
 		String formattedMessage = "CHAR ENCODING ERROR";
+		final String[] charsets = { "ISO-8859-1", "UTF-8" };
 		//Support non-English-standard characters
-		String detectedCharset = charset(new String(formatter.format(messageArguments)), new String[] { "ISO-8859-1", "UTF-8" });
+		String detectedCharset = charset(new String(formatter.toString()), charsets);
+
+		final int argLength = messageArguments.length;
+		Object[] u8MessageArguments = new Object[argLength];
+		//when messageArguments encoding not equal resourceBundle.getString(key),convert to equal
+		//avoid convert to a have two encoding content formattedMessage string.
+		for (int i = 0; i < argLength; i++) {
+			String objCharset = charset(messageArguments[i].toString(), charsets);
+			try {
+				u8MessageArguments[i] = convert(messageArguments[i].toString(), objCharset, detectedCharset);
+			} catch (UnsupportedEncodingException ignored) {
+				System.err.println("Cannot Convert '" + messageArguments[i].toString() + "' from '" + objCharset + "' To '" + detectedCharset + "'");
+				return "encoding '" + key + "' translate string failure";
+			}
+		}
 
 		try {
-			formattedMessage = new String(formatter.format(messageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
+			formattedMessage = new String(formatter.format(u8MessageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
 		} catch(UnsupportedEncodingException ignored) {}
 
 		return formattedMessage;
-		
 	}
 
 	public void setLanguage(final String languageRegionID, final String languagesDirectory) {
