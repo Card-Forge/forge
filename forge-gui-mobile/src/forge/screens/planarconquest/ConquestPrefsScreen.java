@@ -17,6 +17,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
@@ -49,35 +50,35 @@ public class ConquestPrefsScreen extends FScreen {
     });
 
     public ConquestPrefsScreen() {
-        super("Conquest Preferences", ConquestMenu.getMenu());
+        super(Localizer.getInstance().getMessage("lblConquestPreference"), ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader("Aether Shards", FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Base Duplicate Value", CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Base Exile Value", CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Base Retrieve Cost", CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Base Pull Cost", CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Uncommon Multiplier", CQPref.AETHER_UNCOMMON_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Rare Multiplier", CQPref.AETHER_RARE_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Mythic Multiplier", CQPref.AETHER_MYTHIC_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Starting Shards", CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Chaos Wheel Shard Value", CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
+        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblAetherShards"), FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseDuplicateValue"), CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseExileValue"), CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseRetrieveCost"), CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBasePullCost"), CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblUncommonMultiplier"), CQPref.AETHER_UNCOMMON_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblRareMultiplier"), CQPref.AETHER_RARE_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblMythicMultiplier"), CQPref.AETHER_MYTHIC_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblStartingShards"), CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblChaosWheelShardValue"), CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
 
-        scroller.add(new PrefsHeader("Booster Packs", FSkinImage.PACK, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Rares", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Boosters per Mythic", CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblBoosterPacks"), FSkinImage.PACK, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblCommons"), CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblUncommons"), CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblRares"), CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBoostersPerMythic"), CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
 
-        scroller.add(new PrefsHeader("Planeswalk Emblems", FSkinImage.PW_BADGE_COMMON, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption("Base Conquer Reward", CQPref.PLANESWALK_CONQUER_EMBLEMS, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption("Chaos Wheel Bonus", CQPref.PLANESWALK_WHEEL_EMBLEMS, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption("First Plane Unlock Cost", CQPref.PLANESWALK_FIRST_UNLOCK, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption("Cost Increase Per Unlock", CQPref.PLANESWALK_UNLOCK_INCREASE, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblPlaneswalkEmblems"), FSkinImage.PW_BADGE_COMMON, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseConquerReward"), CQPref.PLANESWALK_CONQUER_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblChaosWheelBonus"), CQPref.PLANESWALK_WHEEL_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblFirstPlaneUnlockCost"), CQPref.PLANESWALK_FIRST_UNLOCK, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblCostIncreasePerUnlock"), CQPref.PLANESWALK_UNLOCK_INCREASE, PrefsGroup.PLANESWALK));
 
-        scroller.add(new PrefsHeader("Chaos Battles", FSkinImage.CHAOS, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption("Wins For Medium AI", CQPref.CHAOS_BATTLE_WINS_MEDIUMAI, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption("Wins For Hard AI", CQPref.CHAOS_BATTLE_WINS_HARDAI, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption("Wins For Expert AI", CQPref.CHAOS_BATTLE_WINS_EXPERTAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblChaosBattles"), FSkinImage.CHAOS, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforMediumAI"), CQPref.CHAOS_BATTLE_WINS_MEDIUMAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforHardAI"), CQPref.CHAOS_BATTLE_WINS_HARDAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforExpertAI"), CQPref.CHAOS_BATTLE_WINS_EXPERTAI, PrefsGroup.CHAOS));
     }
 
     @Override
@@ -147,7 +148,7 @@ public class ConquestPrefsScreen extends FScreen {
                         default:
                             prefType = "";
                         }
-                        FOptionPane.showErrorDialog(validationError, "Save Failed - " + prefType);
+                        FOptionPane.showErrorDialog(validationError, Localizer.getInstance().getMessage("lblSaveFailed") + prefType);
                         return false;
                     }
 
