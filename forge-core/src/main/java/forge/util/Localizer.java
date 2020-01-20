@@ -56,7 +56,7 @@ public class Localizer {
 
 	public String getMessage(final String key, final Object... messageArguments) {
 		MessageFormat formatter = null;
-		
+
 		try {
 			//formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
 			formatter = new MessageFormat(resourceBundle.getString(key), locale);
@@ -74,7 +74,7 @@ public class Localizer {
 		String formattedMessage = "CHAR ENCODING ERROR";
 		final String[] charsets = { "ISO-8859-1", "UTF-8" };
 		//Support non-English-standard characters
-		String detectedCharset = charset(new String(formatter.toString()), charsets);
+		String detectedCharset = charset(resourceBundle.getString(key), charsets);
 
 		final int argLength = messageArguments.length;
 		Object[] syncEncodingMessageArguments = new Object[argLength];
