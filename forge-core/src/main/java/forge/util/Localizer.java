@@ -77,13 +77,13 @@ public class Localizer {
 		String detectedCharset = charset(new String(formatter.toString()), charsets);
 
 		final int argLength = messageArguments.length;
-		Object[] u8MessageArguments = new Object[argLength];
+		Object[] syncEncodingMessageArguments = new Object[argLength];
 		//when messageArguments encoding not equal resourceBundle.getString(key),convert to equal
 		//avoid convert to a have two encoding content formattedMessage string.
 		for (int i = 0; i < argLength; i++) {
 			String objCharset = charset(messageArguments[i].toString(), charsets);
 			try {
-				u8MessageArguments[i] = convert(messageArguments[i].toString(), objCharset, detectedCharset);
+				syncEncodingMessageArguments[i] = convert(messageArguments[i].toString(), objCharset, detectedCharset);
 			} catch (UnsupportedEncodingException ignored) {
 				System.err.println("Cannot Convert '" + messageArguments[i].toString() + "' from '" + objCharset + "' To '" + detectedCharset + "'");
 				return "encoding '" + key + "' translate string failure";
@@ -91,7 +91,7 @@ public class Localizer {
 		}
 
 		try {
-			formattedMessage = new String(formatter.format(u8MessageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
+			formattedMessage = new String(formatter.format(syncEncodingMessageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
 		} catch(UnsupportedEncodingException ignored) {}
 
 		return formattedMessage;
