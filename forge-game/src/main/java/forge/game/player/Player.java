@@ -650,9 +650,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         int restDamage = damage;
 
         // Prevent Damage static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
@@ -888,7 +887,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean canReceiveCounters(final CounterType type) {
         // CantPutCounter static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantPutCounter", this, type)) {
                     return false;
@@ -1187,7 +1186,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canBeTargetedBy(final SpellAbility sa) {
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
@@ -1723,9 +1722,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantPlayLand", land, this)) {
                     return false;
                 }

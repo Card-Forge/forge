@@ -20,7 +20,6 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
@@ -144,12 +143,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ActivationGameTypes")) {
-            String[] gameTypeNames = params.get("ActivationGameTypes").split(",");
-            List<GameType> gameTypes = Lists.newArrayList();
-            for (String name : gameTypeNames) {
-                gameTypes.add(GameType.smartValueOf(name));
-            }
-            this.setGameTypes(gameTypes);
+            this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
 
         if (params.containsKey("ActivationCardsInHand")) {
@@ -313,16 +307,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
-            }
-
-            if (!isPhase) {
+            if (!this.getPhases().contains(game.getPhaseHandler().getPhase())) {
                 return false;
             }
         }

@@ -2389,7 +2389,7 @@ public class ComputerUtilCombat {
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
 
         // Predict replacement effects
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
                 if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {

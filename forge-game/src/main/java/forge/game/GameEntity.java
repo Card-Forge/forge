@@ -385,7 +385,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantAttach", attach, this)) {
                     return false;

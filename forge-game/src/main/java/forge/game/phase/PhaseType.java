@@ -2,10 +2,11 @@ package forge.game.phase;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 
 public enum PhaseType {
@@ -82,32 +83,21 @@ public enum PhaseType {
         throw new IllegalArgumentException("No element named " + value + " in enum PhaseType");
     }
 
-    public static List<PhaseType> listValueOf(final String values) {
-        final List<PhaseType> result = new ArrayList<>();
-        for (final String s : values.split("[, ]+")) {
-            result.add(PhaseType.smartValueOf(s));
-        }
-        return result;
-    }
-
     /**
      * TODO: Write javadoc for this method.
      * @param string
      * @return
      */
-    public static List<PhaseType> parseRange(String values) {
-        final List<PhaseType> result = new ArrayList<>();
+    public static Set<PhaseType> parseRange(String values) {
+        final Set<PhaseType> result = EnumSet.noneOf(PhaseType.class);
         for (final String s : values.split(",")) {
             int idxArrow = s.indexOf("->");
             if (idxArrow >= 0) {
                 PhaseType from = PhaseType.smartValueOf(s.substring(0, idxArrow));
                 String sTo = s.substring(idxArrow + 2);
                 PhaseType to = StringUtils.isBlank(sTo) ? PhaseType.CLEANUP : PhaseType.smartValueOf(sTo);
-                int iFrom = ALL_PHASES.indexOf(from);
-                int iTo = ALL_PHASES.indexOf(to);
-                for (int i = iFrom; i <= iTo; i++) {
-                    result.add(ALL_PHASES.get(i));
-                }
+
+                result.addAll(EnumSet.range(from, to));
             }
             else {
                 result.add(PhaseType.smartValueOf(s));
