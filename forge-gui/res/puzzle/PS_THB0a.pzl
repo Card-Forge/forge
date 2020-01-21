@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #00a (Preseason Puzzle 1)
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/01/142.-THB001-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Purphoros, Bronze-Blooded;Daxos, Blessed by the Sun;Dreadhorde Butcher;Cavalcade of Calamity;Divine Visitation
+humanbattlefield=Bishop of Wings;Heliod, Sun-Crowned;Woe Strider|Id:5;Kaya's Ghostform|AttachedTo:5;Herald of the Dreadhorde;Plains;Plains;Swamp;Swamp;Mountain;Mountain
+aibattlefield=Syr Alin, the Lion's Claw;God-Eternal Oketra
+aiprecast=God-Eternal Oketra:TrigToken;God-Eternal Oketra:TrigToken
+removesummoningsickness=true
