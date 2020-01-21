@@ -110,7 +110,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
 
     private void updateShards() {
         int availableShards = FModel.getConquest().getModel().getAEtherShards();
-        lblShards.setText(Localizer.getInstance().getMessage("lblShardsAE", "{AE}") + availableShards);
+        lblShards.setText(Localizer.getInstance().getMessage("lblHaveNAEShards", String.valueOf(availableShards) ,"{AE}"));
     }
     
     private void updateInfo() {
@@ -236,7 +236,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         final ConquestData model = FModel.getConquest().getModel();
                         if (model.isInExile(card)) {
                             final int cost = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
-                            item = new FMenuItem(Localizer.getInstance().getMessage("lblRetrieveForAE", "{AE}") + cost, FSkinImage.PLUS, new FEventHandler() {
+                            item = new FMenuItem(Localizer.getInstance().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), FSkinImage.PLUS, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FThreads.invokeInBackgroundThread(new Runnable() {
@@ -260,7 +260,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         }
                         else {
                             final int value = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
-                            item = new FMenuItem(Localizer.getInstance().getMessage("lblExileForAE", "{AE}") + value, FSkinImage.EXILE, new FEventHandler() {
+                            item = new FMenuItem(Localizer.getInstance().getMessage("lblExileForNAE", String.valueOf(value), "{AE}"), FSkinImage.EXILE, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FThreads.invokeInBackgroundThread(new Runnable() {
