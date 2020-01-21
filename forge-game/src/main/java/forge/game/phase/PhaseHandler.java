@@ -48,7 +48,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.time.StopWatch;
@@ -761,10 +760,8 @@ public class PhaseHandler implements java.io.Serializable {
         Cost blockCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         boolean noCost = true;
-        List<ZoneType> checkZones = ZoneType.listValueOf("Battlefield,Command");
-        for (Card card : game.getCardsIn(checkZones)) {
-            final FCollectionView<StaticAbility> staticAbilities = card.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
                 Cost c1 = stAb.getBlockCost(blocker, attacker);
                 if (c1 != null) {
                     blockCost.add(c1);

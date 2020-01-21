@@ -17,9 +17,10 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Set;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
@@ -56,7 +57,8 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public void setVariables(SpellAbilityVariables sav) {
         this.zone = sav.getZone();
-        this.phases = Lists.newArrayList(sav.getPhases());
+        this.phases = Sets.newEnumSet(sav.getPhases(), PhaseType.class);
+        this.gameTypes = Sets.newEnumSet(sav.getGameTypes(), GameType.class);
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
         this.anyPlayer = sav.isAnyPlayer();
@@ -97,10 +99,10 @@ public class SpellAbilityVariables implements Cloneable {
     private ZoneType zone = ZoneType.Battlefield;
 
     /** The phases. */
-    private List<PhaseType> phases = Lists.newArrayList();
+    private Set<PhaseType> phases = EnumSet.noneOf(PhaseType.class);
 
     /** The GameTypes */
-    private List<GameType> gameTypes = Lists.newArrayList();
+    private Set<GameType> gameTypes = EnumSet.noneOf(GameType.class);
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
@@ -386,7 +388,7 @@ public class SpellAbilityVariables implements Cloneable {
      * @param phases
      *            a {@link java.lang.String} object.
      */
-    public final void setPhases(final List<PhaseType> phases) {
+    public final void setPhases(final Set<PhaseType> phases) {
         this.phases.addAll(phases);
     }
 
@@ -397,7 +399,7 @@ public class SpellAbilityVariables implements Cloneable {
      *
      * @param gameTypes
      */
-    public final void setGameTypes(final List<GameType> gameTypes) {
+    public final void setGameTypes(final Set<GameType> gameTypes) {
         this.gameTypes.clear();
         this.gameTypes.addAll(gameTypes);
     }
@@ -698,7 +700,7 @@ public class SpellAbilityVariables implements Cloneable {
      * 
      * @return the phases
      */
-    public final List<PhaseType> getPhases() {
+    public final Set<PhaseType> getPhases() {
         return this.phases;
     }
 
@@ -707,7 +709,7 @@ public class SpellAbilityVariables implements Cloneable {
      *
      * @return the phases
      */
-    public final List<GameType> getGameTypes() {
+    public final Set<GameType> getGameTypes() {
         return this.gameTypes;
     }
 

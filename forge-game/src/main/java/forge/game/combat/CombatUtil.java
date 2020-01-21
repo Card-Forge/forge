@@ -226,9 +226,8 @@ public class CombatUtil {
         }
 
         // CantAttack static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantAttack", attacker, defender)) {
                     return false;
                 }
@@ -276,9 +275,8 @@ public class CombatUtil {
         final Cost attackCost = new Cost(ManaCost.ZERO, true);
         boolean hasCost = false;
         // Sort abilities to apply them in proper order
-        for (final Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final FCollectionView<StaticAbility> staticAbilities = card.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Cost additionalCost = stAb.getAttackCost(attacker, defender);
                 if (null != additionalCost) {
                     attackCost.add(additionalCost);
@@ -1007,7 +1005,7 @@ public class CombatUtil {
         }
 
         // CantBlockBy static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantBlockBy", attacker, blocker)) {
                     return false;
