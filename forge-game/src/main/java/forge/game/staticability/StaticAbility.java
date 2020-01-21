@@ -623,8 +623,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("Phases")) {
-            List<PhaseType> phases = PhaseType.parseRange(getParam("Phases"));
-            if (!phases.contains(ph.getPhase())) {
+            if (!PhaseType.parseRange(getParam("Phases")).contains(ph.getPhase())) {
                 return false;
             }
         }

@@ -65,7 +65,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         if (trigger) {
             // ETBTapped static abilities
-            for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
                 for (final StaticAbility stAb : ca.getStaticAbilities()) {
                     if (stAb.applyAbility("ETBTapped", c)) {
                         // it enters the battlefield this way, and should

@@ -37,6 +37,7 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.util.TextUtil;
 
@@ -104,7 +105,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
 
-    private List<PhaseType> validPhases;
+    private Set<PhaseType> validPhases;
 
     /**
      * <p>
@@ -558,7 +559,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (validPhases != null) {
-            copy.setTriggerPhases(Lists.newArrayList(validPhases));
+            copy.setTriggerPhases(Sets.newEnumSet(validPhases, PhaseType.class));
         }
         copy.setActiveZone(validHostZones);
         return copy;
@@ -568,7 +569,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         return hasParam("Static"); // && params.get("Static").equals("True") [always true if present]
     }
 
-    public void setTriggerPhases(List<PhaseType> phases) {
+    public void setTriggerPhases(Set<PhaseType> phases) {
         validPhases = phases;
     }
 

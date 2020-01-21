@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Lists;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -146,12 +145,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ConditionGameTypes")) {
-            String[] gameTypeNames = params.get("ConditionGameTypes").split(",");
-            List<GameType> gameTypes = Lists.newArrayList();
-            for (String name : gameTypeNames) {
-                gameTypes.add(GameType.smartValueOf(name));
-            }
-            this.setGameTypes(gameTypes);
+            this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
         }
 
         if (params.containsKey("ConditionChosenColor")) {
@@ -315,23 +309,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = phase.getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
-            }
-
-            if (!isPhase) {
+            if (!this.getPhases().contains(phase.getPhase())) {
                 return false;
             }
         }
 
         if (this.getGameTypes().size() > 0) {
-            GameType currGameType = sa.getHostCard().getGame().getRules().getGameType();
-            if (!getGameTypes().contains(currGameType)) {
+            if (!getGameTypes().contains(game.getRules().getGameType())) {
                 return false;
             }
         }
