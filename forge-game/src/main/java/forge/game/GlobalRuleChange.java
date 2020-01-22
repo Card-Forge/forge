@@ -25,7 +25,6 @@ public enum GlobalRuleChange {
     alwaysWither ("All damage is dealt as though it's source had wither."),
     attackerChoosesBlockers ("The attacking player chooses how each creature blocks each turn."),
     manapoolsDontEmpty ("Mana pools don't empty as steps and phases end."),
-    noCycling ("Players can't cycle cards."),
     noCreatureETBTriggers ("Creatures entering the battlefield don't cause abilities to trigger."),
     noCreatureDyingTriggers ("Creatures dying don't cause abilities to trigger."),
     noLegendRule ("The legend rule doesn't apply."),
