@@ -16,6 +16,7 @@ import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
@@ -500,16 +501,15 @@ public class CostAdjustment {
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));
-            boolean found = false;
-            for(ZoneType zt : zones) {
-                if(card.isInZone(zt))
-                {
-                    found = true;
-                    break;
+            if (sa.isSpell()) {
+                if (!zones.contains(card.getCastFrom())) {
+                    return false;
                 }
-            }
-            if(!found) {
-                return false;
+            } else {
+                Zone z = card.getLastKnownZone();
+                if (z == null || !zones.contains(z.getZoneType())) {
+                    return false;
+                }
             }
         }
         if (st.hasParam("ValidTarget")) {
