@@ -10,6 +10,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 
 public abstract class ConquestBattle {
     private final ConquestLocation location;
@@ -48,7 +49,7 @@ public abstract class ConquestBattle {
     public void showGameOutcome(final ConquestData model, final GameView game, final LobbyPlayer humanPlayer, final IWinLoseView<? extends IButton> view) {
         if (game.isMatchWonBy(humanPlayer)) {
             view.getBtnRestart().setVisible(false);
-            view.getBtnQuit().setText("Great!");
+            view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblGreat"));
             model.addWin(this);
             if (location.getEvent().getTemporaryUnlock() != null) {
                 // secret area for this event, unlock it until the player moves
@@ -57,8 +58,8 @@ public abstract class ConquestBattle {
         }
         else {
             view.getBtnRestart().setVisible(true);
-            view.getBtnRestart().setText("Retry");
-            view.getBtnQuit().setText("Quit");
+            view.getBtnRestart().setText(Localizer.getInstance().getMessage("lblRetry"));
+            view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblQuit"));
             model.addLoss(this);
         }
         model.resetNewCards(); //reset new cards after finishing a game

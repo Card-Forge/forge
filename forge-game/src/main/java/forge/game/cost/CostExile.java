@@ -27,6 +27,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 /**
  * The Class CostExile.
@@ -64,45 +65,37 @@ public class CostExile extends CostPartWithList {
 
     @Override
     public final String toString() {
-        final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Exile ");
-
         String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
         if (this.payCostFromSource()) {
-            sb.append(this.getType());
             if (!this.from.equals(ZoneType.Battlefield)) {
-                sb.append(" from your ").append(this.from);
+                return Localizer.getInstance().getMessage("lblExileTargetsFromYourZone", this.getType(), this.from.getTranslatedName());
             }
-            return sb.toString();
+            return Localizer.getInstance().getMessage("lblExileTarget", this.getType());
         } else if (this.getType().equals("All")) {
-            sb.append(" all cards from your ").append(this.from);
-            return sb.toString();
+            return Localizer.getInstance().getMessage("lblExileAllCardsFromYourZone", this.from.getTranslatedName());
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
-            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             if (!this.payCostFromSource()) {
-                sb.append(" you control");
+                return Localizer.getInstance().getMessage("lblExileTargetsYourControl", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             }
-            return sb.toString();
+            return Localizer.getInstance().getMessage("lblExileTarget", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
         if (!desc.equals("Card") && !desc.endsWith("card")) {
-            desc += " card";
+            if (this.sameZone) {
+                return Localizer.getInstance().getMessage("lblExileNCardFromSameZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
+            }
+            return Localizer.getInstance().getMessage("lblExileNCardFromYourZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
         }
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
 
         if (this.sameZone) {
-            sb.append(" from the same ");
-        } else {
-            sb.append(" from your ");
+            return Localizer.getInstance().getMessage("lblExileNTargetFromSameZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
         }
 
-        sb.append(this.from);
-
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblExileTargetsFromYourZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
     }
 
     @Override
@@ -166,7 +159,7 @@ public class CostExile extends CostPartWithList {
     }
     @Override
     public String getHashForCardList() {
-    	return HashCardListKey;
+        return HashCardListKey;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {
