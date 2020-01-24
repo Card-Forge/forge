@@ -3,10 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AITgts$ Card.nonColorless | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1 for each of its colors.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToughness$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 1 | AddToughness$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddToughness$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_the_nephilim.jpg
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Enchanted creature gets +1/+1 for each of its colors.
+SVar:AffectedX:Count$CardNumColors
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each of its colors.
