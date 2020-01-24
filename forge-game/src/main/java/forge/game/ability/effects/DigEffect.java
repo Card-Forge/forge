@@ -163,7 +163,7 @@ public class DigEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Choser")) {
                     final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
                     if (!choosers.isEmpty()) {
-                        chooser = player.getController().chooseSingleEntityForEffect(choosers, sa, "Choser:");
+                        chooser = player.getController().chooseSingleEntityForEffect(choosers, sa, Localizer.getInstance().getMessage("lblChooser") + ":");
                     }
                     if (sa.hasParam("SetChosenPlayer")) {
                         host.setChosenPlayer(chooser);
@@ -232,10 +232,10 @@ public class DigEffect extends SpellAbilityEffect {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", "{player's}");
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
                         }
                         else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", "{player's}", destZone2.getTranslatedName());
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone2.getTranslatedName());
                         }
 
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);
@@ -252,9 +252,9 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.getTranslatedName());
                             if (destZone1.equals(ZoneType.Library)) {
                                 if (libraryPosition == -1) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryBottom", p.getName());
                                 } else if (libraryPosition == 0) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayTop", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryTop", p.getName());
                                 }
                             }
                         }
