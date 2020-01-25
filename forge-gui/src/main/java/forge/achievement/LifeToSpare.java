@@ -2,14 +2,17 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class LifeToSpare extends Achievement {
     public LifeToSpare(int bronze0, int silver0, int gold0, int mythic0) {
-        super("LifeToSpare", "Life to Spare", "Win a game with", 0,
-            String.format("%d life more than you started with", bronze0), bronze0,
-            String.format("%d life more than you started with", silver0), silver0,
-            String.format("%d life more than you started with", gold0), gold0,
-            String.format("%d life more than you started with", mythic0), mythic0);
+        super("LifeToSpare", Localizer.getInstance().getMessage("lblLifeToSpare"),
+            Localizer.getInstance().getMessage("lblWinGameWith"), 0,
+            Localizer.getInstance().getMessage("lblMoreThanStartedLifeN", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblMoreThanStartedLifeN", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblMoreThanStartedLifeN", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblMoreThanStartedLifeN", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -25,7 +28,7 @@ public class LifeToSpare extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Life";
+        return Localizer.getInstance().getMessage("lblLife");
     }
     @Override
     protected boolean pluralizeNoun() {

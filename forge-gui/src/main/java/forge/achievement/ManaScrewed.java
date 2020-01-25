@@ -2,14 +2,17 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class ManaScrewed extends Achievement {
     public ManaScrewed() {
-        super("ManaScrewed", "Mana Screwed", "Win a game despite playing only", Integer.MAX_VALUE,
-            "3 lands", 3,
-            "2 lands", 2,
-            "1 land", 1,
-            "0 lands", 0);
+        super("ManaScrewed", Localizer.getInstance().getMessage("lblManaScrewed"),
+            Localizer.getInstance().getMessage("lblWinGameOnlyPlaing"), Integer.MAX_VALUE,
+            Localizer.getInstance().getMessage("lblNLands", String.valueOf(3)), 3,
+            Localizer.getInstance().getMessage("lblNLands", String.valueOf(2)), 2,
+            Localizer.getInstance().getMessage("lblNLands", String.valueOf(1)), 1,
+            Localizer.getInstance().getMessage("lblNLands", String.valueOf(0)), 0
+        );
     }
 
     @Override
@@ -22,7 +25,7 @@ public class ManaScrewed extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Land";
+        return Localizer.getInstance().getMessage("lblLand");
     }
 
     @Override

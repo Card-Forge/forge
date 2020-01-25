@@ -3,14 +3,17 @@ package forge.achievement;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class Hellbent extends Achievement {
     public Hellbent() {
-        super("Hellbent", "Hellbent", "Win a game with no cards in your", 0,
-                "hand", 1,
-                "hand or library", 2,
-                "hand, library, or graveyard", 3,
-                "hand, library, graveyard, or battlefield", 4);
+        super("Hellbent", Localizer.getInstance().getMessage("lblHellbent"),
+            Localizer.getInstance().getMessage("lblWinGameWithNoCardsInYour"), 0,
+            Localizer.getInstance().getMessage("lblHandZone"), 1,
+            Localizer.getInstance().getMessage("lblhandOrlibrary"), 2,
+            Localizer.getInstance().getMessage("lblHandOrLibraryOrGraveyard"), 3,
+            Localizer.getInstance().getMessage("lblHandOrLibraryOrGraveyardOrBattlefield"), 4
+        );
     }
 
     @Override

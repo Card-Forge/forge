@@ -2,14 +2,16 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class NeedForSpeed extends Achievement {
     public NeedForSpeed(int bronze0, int silver0, int gold0, int mythic0) {
-        super("NeedForSpeed", "Need for Speed", null, Integer.MAX_VALUE,
-            String.format("Win a game by turn %d", bronze0), bronze0,
-            String.format("Win a game by turn %d", silver0), silver0,
-            String.format("Win a game by turn %d", gold0), gold0,
-            String.format("Win a game by turn %d", mythic0), mythic0);
+        super("NeedForSpeed", Localizer.getInstance().getMessage("lblNeedForSpeed"), null, Integer.MAX_VALUE,
+            Localizer.getInstance().getMessage("lblWinGameByNTurn", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblWinGameByNTurn", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblWinGameByNTurn", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblWinGameByNTurn", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -22,7 +24,7 @@ public class NeedForSpeed extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Turn";
+        return Localizer.getInstance().getMessage("lblTurn");
     }
 
     @Override

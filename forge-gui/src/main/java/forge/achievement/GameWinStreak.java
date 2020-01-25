@@ -2,14 +2,17 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class GameWinStreak extends StreakAchievement {
     public GameWinStreak(int bronze0, int silver0, int gold0, int mythic0) {
-        super("GameWinStreak", "Game Win Streak", null,
-            String.format("Win %d games in a row", bronze0), bronze0,
-            String.format("Win %d games in a row", silver0), silver0,
-            String.format("Win %d games in a row", gold0), gold0,
-            String.format("Win %d games in a row", mythic0), mythic0);
+        super("GameWinStreak", 
+            Localizer.getInstance().getMessage("lblGameWinStreak"), null,
+            Localizer.getInstance().getMessage("lblWinNGamesInARow", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblWinNGamesInARow", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblWinNGamesInARow", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblWinNGamesInARow", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
