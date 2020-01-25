@@ -557,7 +557,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    private final static ImmutableList<String> onCloseOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
+    private final static ImmutableList<String> onCloseOptions = ImmutableList.of(
+        Localizer.getInstance().getMessage("lblSave"),
+        Localizer.getInstance().getMessage("lblDontSave"),
+        Localizer.getInstance().getMessage("lblCancel")
+    );
 
     @Override
     public void onClose(final Callback<Boolean> canCloseCallback) {
