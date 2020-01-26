@@ -15,7 +15,7 @@ public class Domain extends ProgressiveAchievement {
     public Domain() {
         super("Domain", Localizer.getInstance().getMessage("lblDomain"),
             Localizer.getInstance().getMessage("lblWinGameWithOneOfEachBasicLandOnTheBattlefield"),
-            Localizer.getInstance().getMessage("lblAbleToCastAnytingNiceBeing.")
+            Localizer.getInstance().getMessage("lblAbleToCastAnytingNiceBeing")
         );
     }
 
