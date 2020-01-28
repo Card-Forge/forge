@@ -20,6 +20,7 @@ import forge.quest.QuestEventDuel;
 import forge.quest.QuestEventDuelManager;
 import forge.quest.QuestWorld;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 
 public class ConquestChaosBattle extends ConquestBattle {
     private final QuestWorld world;
@@ -122,20 +123,20 @@ public class ConquestChaosBattle extends ConquestBattle {
         if (game.isMatchOver()) {
             view.getBtnContinue().setVisible(false);
             if (game.isMatchWonBy(humanPlayer)) {
-                view.getBtnQuit().setText("Great!");
+                view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblGreat") + "!");
                 model.getChaosBattleRecord().addWin();
                 setConquered(true);
             }
             else {
-                view.getBtnQuit().setText("OK");
+                view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblOK"));
                 model.getChaosBattleRecord().addLoss();
             }
             model.saveData();
         }
         else {
             view.getBtnContinue().setVisible(true);
-            view.getBtnContinue().setText("Continue");
-            view.getBtnQuit().setText("Quit");
+            view.getBtnContinue().setText(Localizer.getInstance().getMessage("btnContinue"));
+            view.getBtnQuit().setText(Localizer.getInstance().getMessage("btnQuit"));
         }
     }
 

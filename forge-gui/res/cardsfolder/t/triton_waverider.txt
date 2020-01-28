@@ -1,0 +1,9 @@
+Name:Triton Waverider
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, CARDNAME gets flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+DeckNeeds:Type$Enchantment
+SVar:BuffedBy:Enchantment
+Oracle:Constellation - Whenever an enchantment enters the battlefield under your control, Triton Waverider gets flying until end of turn.

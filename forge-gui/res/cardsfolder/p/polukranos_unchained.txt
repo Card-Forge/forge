@@ -1,0 +1,14 @@
+Name:Polukranos, Unchained
+ManaCost:2 B G
+Types:Legendary Creature Zombie Hydra
+PT:0/0
+K:etbCounter:P1P1:X:nocondition:CARDNAME enters the battlefield with six +1/+1 counters on it. It escapes with twelve +1/+1 counters on it instead.
+SVar:X:Count$Escaped.12.6
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from CARDNAME.
+SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y | References$ Y
+SVar:Y:ReplaceCount$DamageAmount
+A:AB$ Fight | Cost$ 1 B G | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ CARDNAME fights another target creature.
+K:Escape:4 B G ExileFromGrave<6/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Counters
+Oracle:Polukranos enters the battlefield with six +1/+1 counters on it. It escapes with twelve +1/+1 counters on it instead.\nIf damage would be dealt to Polukranos while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it.\n{1}{B}{G}: Polukranos fights another target creature.\nEscape—{4}{B}{G}, Exile six other cards from your graveyard.

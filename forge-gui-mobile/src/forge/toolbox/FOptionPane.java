@@ -191,7 +191,7 @@ public class FOptionPane extends FDialog {
         container.add(inputField);
         container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(final Integer result) {

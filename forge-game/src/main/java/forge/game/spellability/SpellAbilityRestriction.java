@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -97,10 +98,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setZone(ZoneType.smartValueOf(params.get("ActivationZone")));
         }
 
-        if (params.containsKey("Flashback")) {
-            this.setZone(ZoneType.Graveyard);
-        }
-
         if (params.containsKey("SorcerySpeed")) {
             this.setSorcerySpeed(true);
         }
@@ -143,6 +140,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("ActivationPhases")) {
             this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
+        }
+
+        if (params.containsKey("ActivationGameTypes")) {
+            this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
 
         if (params.containsKey("ActivationCardsInHand")) {
@@ -202,7 +203,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Card cp = c;
 
         // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.hasParam("Bestow")) {
+        if (sa.isSpell() && sa.isBestow()) {
             // already bestowed or in battlefield, no need to check for spell
             if (c.isInZone(ZoneType.Battlefield)) {
                 return false;
@@ -306,16 +307,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
-            }
-
-            if (!isPhase) {
+            if (!this.getPhases().contains(game.getPhaseHandler().getPhase())) {
                 return false;
             }
         }

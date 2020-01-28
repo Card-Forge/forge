@@ -1,0 +1,13 @@
+Name:Pharika's Spawn
+ManaCost:3 B
+Types:Creature Gorgon
+PT:3/4
+K:Escape:5 B ExileFromGrave<3/Card.Other/other>
+R:Event$ Moved | ValidCard$ Card.Self+escaped | Destination$ Battlefield | ReplaceWith$ ETBCounters | Description$ CARDNAME escapes with two +1/+1 counters on it. When it enters the battlefield this way, each opponent sacrifices a non-Gorgon creature.
+SVar:ETBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ DBSac | TriggerDescription$ When it enters the battlefield this way, each opponent sacrifices a non-Gorgon creature.
+SVar:DBSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature.nonGorgon
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Counters
+Oracle:Escape—{5}{B}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nPharika's Spawn escapes with two +1/+1 counters on it. When it enters the battlefield this way, each opponent sacrifices a non-Gorgon creature.

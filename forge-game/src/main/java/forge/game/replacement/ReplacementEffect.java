@@ -149,17 +149,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
 
         if (params.containsKey("ActivePhases")) {
-            boolean isPhase = false;
-            List<PhaseType> aPhases = PhaseType.parseRange(params.get("ActivePhases"));
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
-            for (final PhaseType s : aPhases) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
+            if (!PhaseType.parseRange(params.get("ActivePhases")).contains(game.getPhaseHandler().getPhase())) {
+                return false;
             }
-
-            return isPhase;
         }
 
         return meetsCommonRequirements(params);

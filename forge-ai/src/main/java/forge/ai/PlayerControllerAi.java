@@ -502,12 +502,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+    public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
         String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), invalidTypes);
-        if (StringUtils.isBlank(chosen) && !validTypes.isEmpty())
-        {
-            chosen = validTypes.get(0);
-            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
+        if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
+            chosen = validTypes.iterator().next();
+            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
         game.getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;

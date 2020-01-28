@@ -1202,7 +1202,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean canReceiveCounters(final CounterType type) {
 
         // CantPutCounter static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantPutCounter", this, type)) {
                     return false;
@@ -1649,7 +1649,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     } else {
                         sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                     }
-                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
+                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph") || keyword.startsWith("Escape")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -1817,7 +1817,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(getName()).append(" can block ")
                     .append(CardType.getPluralType(k[1]))
                     .append(" as though it had reach.\r\n");
-                } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
+                } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
                     String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
@@ -1893,11 +1893,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("\r\n");
             }
 
-            while (sb.toString().endsWith("\r\n")) {
-                sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+            String result = sb.toString();
+            while (result.endsWith("\r\n")) {
+                result = result.substring(0, result.length() - 2);
             }
-
-            return TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
+            return TextUtil.fastReplace(result, "CARDNAME", state.getName());
         }
 
         if (monstrous) {
@@ -1983,8 +1983,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean isNonAura = !type.hasSubtype("Aura");
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
-            // only add abilities not Spell portions of cards
-            if (sa == null || sa.isSecondary() || !state.getType().isPermanent()) {
+            // This code block is not shared by instants or sorceries. We don't need to check for permanence.
+            if (sa == null || sa.isSecondary()) {
                 continue;
             }
 
@@ -2032,7 +2032,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // CantBlockBy static abilities
         if (game != null && isCreature() && isInZone(ZoneType.Battlefield)) {
-            for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
                 if (equals(ca)) {
                     continue;
                 }
@@ -2071,14 +2071,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // replace triple line feeds with double line feeds
-        int start;
         final String s = "\r\n\r\n\r\n";
-        while (sb.toString().contains(s)) {
-            start = sb.lastIndexOf(s);
-            if ((start < 0) || (start >= sb.length())) {
-                break;
-            }
+        int start = sb.lastIndexOf(s);
+        while (start != -1) {
             sb.replace(start, start + 4, "\r\n");
+            start = sb.lastIndexOf(s);
         }
 
         String desc = TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
@@ -2192,7 +2189,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbBefore.append(inst.getReminderText());
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
-                        || keyword.startsWith("Miracle") || keyword.startsWith("Recover")) {
+                        || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
+                        || keyword.startsWith("Escape")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
 
@@ -2208,6 +2206,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.equals("CARDNAME can't be countered.") ||
                         keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                     sbBefore.append(keyword);
+                    sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Haunt")) {
                     sbAfter.append("Haunt (");
                     sbAfter.append("When this spell card is put into a graveyard after resolving, ");
@@ -2503,7 +2502,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
+    public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
         return currentState.getIntrinsicSpellAbilities();
     }
 
@@ -2756,33 +2755,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final Player getController() {
-        if ((currentZone == null) || ((currentZone.getZoneType() != ZoneType.Battlefield) && (currentZone.getZoneType() != ZoneType.Stack))){
-            /*
-             * 108.4. A card doesn’t have a controller unless that card represents a permanent or spell; in those cases,
-             * its controller is determined by the rules for permanents or spells. See rules 110.2 and 112.2.
-             * 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent
-             * or spell), use its owner instead.
-             *
-             * Control, Controller: "Control" is the system that determines who gets to use an object in the game.
-             * An object's "controller" is the player who currently controls it. See rule 108.4.
-             *
-             * 400.6. If an object would move from one zone to another, determine what event is moving the object.
-             * If the object is moving to a public zone and its owner will be able to look at it in that zone,
-             * its owner looks at it to see if it has any abilities that would affect the move.
-             * If the object is moving to the battlefield, each other player who will be able to look at it in that
-             * zone does so. Then any appropriate replacement effects, whether they come from that object or from
-             * elsewhere, are applied to that event. If any effects or rules try to do two or more contradictory or
-             * mutually exclusive things to a particular object, that object’s CONTROLLER—or its OWNER
-             * IF IT HAS NO CONTROLLER—chooses which effect to apply, and what that effect does.
-             */
-            if (controller != null) {
-                return controller; // if there's a controller we return this
-            }
-            if (owner != null) {
-                return owner;
-            }
-        }
-
         Entry<Long, Player> lastEntry = tempControllers.lastEntry();
         if (lastEntry != null) {
             final long lastTimestamp = lastEntry.getKey();
@@ -3309,9 +3281,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final CardStateName getFaceupCardStateName() {
         if (isFlipped() && hasState(CardStateName.Flipped)) {
             return CardStateName.Flipped;
-        } else if (backside && isDoubleFaced()) {
+        } else if (backside && isDoubleFaced() && hasState(CardStateName.Transformed)) {
             return CardStateName.Transformed;
-        } else if (backside && isMeldable()) {
+        } else if (backside && isMeldable() && hasState(CardStateName.Meld)) {
             return CardStateName.Meld;
         } else {
             return CardStateName.Original;
@@ -3788,6 +3760,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardKeywordsInternal(final KeywordsChange change, final long timestamp) {
         changedCardKeywords.put(timestamp, change);
         updateKeywordsCache(currentState);
+    }
+
+    public final boolean clearChangedCardKeywords(final boolean updateView) {
+        if (changedCardKeywords.isEmpty()) {
+            return false;
+        }
+        changedCardKeywords.clear();
+        if (updateView) {
+            updateKeywords();
+        }
+        return true;
     }
 
     // Hidden keywords will be left out
@@ -4321,8 +4304,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * use it only for real keywords and not with hidden ones
      *
-     * @param Keyword k
-     * @param CardState state
      * @return Int
      */
     public final int getKeywordMagnitude(final Keyword k, CardState state) {
@@ -4776,7 +4757,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean canDamagePrevented(final boolean isCombat) {
-        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         list.add(this);
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -4848,7 +4829,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Prevent Damage static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
@@ -5442,6 +5423,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (source.getController().equals(chosenPlayer)) {
                     return true;
                 }
+            } else if (kw.equals("Protection from each converted mana cost other than the chosen number")) {
+                if (source.getCMC() != chosenNumber) {
+                    return true;
+                }
             } else if (kw.startsWith("Protection from opponent of ")) {
                 final String playerName = kw.substring("Protection from opponent of ".length());
                 if (source.getController().isOpponentOf(playerName)) {
@@ -5595,9 +5580,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
                 }

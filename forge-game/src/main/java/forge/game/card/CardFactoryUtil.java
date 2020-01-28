@@ -1066,13 +1066,8 @@ public class CardFactoryUtil {
         }
 
         // Count$Chroma.<color name>
-        // Count$Devotion.<color name>
-        if (sq[0].contains("Chroma") || sq[0].equals("Devotion")) {
+        if (sq[0].contains("Chroma")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
-            String colorName = sq[1];
-            if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColor());
-            }
             final CardCollectionView cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = new CardCollection(c);
@@ -1082,7 +1077,7 @@ public class CardFactoryUtil {
             }
 
             int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(colorName);
+            byte colorCode = ManaAtom.fromName(sq[1]);
             for (Card c0 : cards) {
                 for (ManaCostShard sh : c0.getManaCost()){
                     if ((sh.getColorMask() & colorCode) != 0) 
@@ -1092,16 +1087,24 @@ public class CardFactoryUtil {
             return doXMath(colorOcurrencices, m, c);
         }
         // Count$DevotionDual.<color name>.<color name>
-        if (sq[0].contains("DevotionDual")) {
+        // Count$Devotion.<color name>
+        if (sq[0].contains("Devotion")) {
             int colorOcurrencices = 0;
-            byte color1 = ManaAtom.fromName(sq[1]);
-            byte color2 = ManaAtom.fromName(sq[2]);
+            String colorName = sq[1];
+            if (colorName.contains("Chosen")) {
+                colorName = MagicColor.toShortString(c.getChosenColor());
+            }
+            byte colorCode = ManaAtom.fromName(colorName);
+            if (sq[0].equals("DevotionDual")) {
+                colorCode |= ManaAtom.fromName(sq[2]);
+            }
             for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
                 for (ManaCostShard sh : c0.getManaCost()) {
-                    if ((sh.getColorMask() & (color1 | color2)) != 0) {
+                    if ((sh.getColorMask() & colorCode) != 0) {
                         colorOcurrencices++;
                     }
                 }
+                colorOcurrencices += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
             }
             return doXMath(colorOcurrencices, m, c);
         }
@@ -1179,6 +1182,9 @@ public class CardFactoryUtil {
         }
         if (sq[0].startsWith("Kicked")) {
             return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
+        }
+        if (sq[0].startsWith("Escaped")) {
+            return doXMath(Integer.parseInt(sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2]), m, c);
         }
         if (sq[0].startsWith("AltCost")) {
             return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
@@ -3812,7 +3818,7 @@ public class CardFactoryUtil {
             final String counters = k[1];
             final Cost awakenCost = new Cost(k[2], false);
 
-            final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
+            final SpellAbility awakenSpell = card.getFirstSpellAbility().copyWithDefinedCost(awakenCost);
 
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
@@ -3827,8 +3833,7 @@ public class CardFactoryUtil {
             String desc = "Awaken " + counters + "—" + awakenCost.toSimpleString() +
                     " (" + inst.getReminderText() + ")";
             awakenSpell.setDescription(desc);
-            awakenSpell.setBasicSpell(false);
-            awakenSpell.setPayCosts(awakenCost);
+            awakenSpell.setAlternativeCost(AlternativeCost.Awaken);
             awakenSpell.setIntrinsic(intrinsic);
             inst.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
@@ -3845,16 +3850,27 @@ public class CardFactoryUtil {
             sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
                     " (" + inst.getReminderText() + ")");
             sa.setStackDescription("Bestow - " + card.getName());
-            sa.setBasicSpell(false);
+            sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
-            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | StackDescription$ CARDNAME (Dash)"
-                    + " | Dash$ True | NonBasicSpell$ True"
-                    + " | SpellDescription$ Dash " + ManaCostParser.parse(k[1]) + " (" + inst.getReminderText() + ")";
+            final Cost dashCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(dashCost);
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Dash ").append(dashCost.toSimpleString()).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Dash)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Emerge")) {
@@ -3862,13 +3878,12 @@ public class CardFactoryUtil {
             String costStr = kw[1];
             final SpellAbility sa = card.getFirstSpellAbility();
 
-            final SpellAbility newSA = sa.copy();
+            final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
             newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
             newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setIsEmerge(true);
-            newSA.setPayCosts(new Cost(costStr, false));
+            newSA.setAlternativeCost(AlternativeCost.Emerge);
+
             newSA.setDescription(sa.getDescription() + " (Emerge)");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
@@ -3984,8 +3999,7 @@ public class CardFactoryUtil {
             final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" (Evoked)");
             newSA.setStackDescription(sb.toString());
-            newSA.setBasicSpell(false);
-            newSA.setEvoke(true);
+            newSA.setAlternativeCost(AlternativeCost.Evoke);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fortify")) {
@@ -4142,8 +4156,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ PutCounter | Cost$ ");
             abilityStr.append(manacost);
             abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
-            abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
-            abilityStr.append("| PrecostDesc$ Outlast");
+            abilityStr.append("| SorcerySpeed$ True | PrecostDesc$ Outlast");
             Cost cost = new Cost(manacost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 abilityStr.append("—");
@@ -4155,6 +4168,7 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
+            sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
 
         } else if (keyword.startsWith("Prowl")) {
@@ -4173,9 +4187,8 @@ public class CardFactoryUtil {
             sb.append(newSA.getCostDescription());
             sb.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(sb.toString());
-            
-            newSA.setBasicSpell(false);
-            newSA.setProwl(true);
+
+            newSA.setAlternativeCost(AlternativeCost.Prowl);
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
@@ -4220,8 +4233,7 @@ public class CardFactoryUtil {
             final Cost cost = new Cost(k[1], false);
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
 
-            newSA.setBasicSpell(false);
-            newSA.setSpectacle(true);
+            newSA.setAlternativeCost(AlternativeCost.Spectacle);
 
             String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
                     + ")";
@@ -4235,8 +4247,7 @@ public class CardFactoryUtil {
             final Cost surgeCost = new Cost(k[1], false);
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(surgeCost);
 
-            newSA.setBasicSpell(false);
-            newSA.setSurged(true);
+            newSA.setAlternativeCost(AlternativeCost.Surge);
 
             String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
                     + ")";
@@ -4347,8 +4358,7 @@ public class CardFactoryUtil {
             sar.setInstantSpeed(true);
 
             newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setIsOffering(true);
+            newSA.setAlternativeCost(AlternativeCost.Offering);
             newSA.setPayCosts(sa.getPayCosts());
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
@@ -4383,7 +4393,7 @@ public class CardFactoryUtil {
             sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setIsCycling(true);
+            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
             
@@ -4407,7 +4417,7 @@ public class CardFactoryUtil {
             sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setIsCycling(true);
+            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
             

@@ -72,6 +72,9 @@ public class WrappedAbility extends Ability {
     public boolean hasParam(String key) { return sa.hasParam(key); }
 
     @Override
+    public String getParamOrDefault(String key, String defaultValue) { return sa.getParamOrDefault(key, defaultValue); }
+
+    @Override
     public ApiType getApi() {
         return sa.getApi();
     }
@@ -342,11 +345,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setFlashBackAbility(final boolean flashBackAbility) {
-        sa.setFlashBackAbility(flashBackAbility);
-    }
-
-    @Override
     public void setMultiKickerManaCost(final ManaCost cost) {
         sa.setMultiKickerManaCost(cost);
     }
@@ -545,5 +543,17 @@ public class WrappedAbility extends Ability {
             }
         }
         // TODO: CardCollection
+    }
+
+    public boolean isAlternativeCost(AlternativeCost ac) {
+        return sa.isAlternativeCost(ac);
+    }
+
+    public AlternativeCost getAlternativeCost() {
+        return sa.getAlternativeCost();
+    }
+
+    public void setAlternativeCost(AlternativeCost ac) {
+        sa.setAlternativeCost(ac);
     }
 }

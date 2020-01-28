@@ -1,0 +1,7 @@
+Name:Rumbling Sentry
+ManaCost:3 W W
+Types:Creature Giant
+PT:3/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:When Rumbling Sentry enters the battlefield, scry 1.

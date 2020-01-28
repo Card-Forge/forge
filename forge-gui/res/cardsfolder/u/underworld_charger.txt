@@ -1,0 +1,10 @@
+Name:Underworld Charger
+ManaCost:2 B
+Types:Creature Nightmare Horse
+PT:3/3
+K:CARDNAME can't block.
+K:Escape:4 B ExileFromGrave<3/Card.Other>
+K:etbCounter:P1P1:2:ValidCard$ Card.Self+escaped:CARDNAME escapes with two +1/+1 counters on it.
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Counters
+Oracle:Underworld Charger can't block.\nEscape—{4}{B}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nUnderworld Charger escapes with two +1/+1 counters on it.

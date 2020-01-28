@@ -9,6 +9,8 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +80,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
 
-            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
             cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
         } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
@@ -93,7 +95,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         final boolean optional = sa.hasParam("Optional");
-        if (optional && !host.getController().getController().confirmAction(sa, null, "Do you want to copy " + cardToCopy + "?")) {
+        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopy", CardTranslation.getTranslatedName(cardToCopy.getName())))) {
             return;
         }
 

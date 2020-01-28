@@ -30,6 +30,7 @@ import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 
 public abstract class InputPayMana extends InputSyncronizedBase {
     private static final long serialVersionUID = 718128600948280315L;
@@ -310,7 +311,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final SpellAbility chosen;
         if (chosenAbility == null) {
             ArrayList<SpellAbilityView> choices = new ArrayList<>(abilitiesMap.keySet());
-            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one("Choose mana ability",  choices)) : abilitiesMap.get(choices.get(0));
+            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one(Localizer.getInstance().getMessage("lblChooseManaAbility"),  choices)) : abilitiesMap.get(choices.get(0));
         } else {
             chosen = chosenAbility;
         }
@@ -438,9 +439,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", false, true, false);
+            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), false, true, false);
         } else {
-            getController().getGui().updateButtons(getOwner(), "", "Cancel", false, true, false);
+            getController().getGui().updateButtons(getOwner(), "", Localizer.getInstance().getMessage("lblCancel"), false, true, false);
         }
     }
 
@@ -462,7 +463,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", true, true, true);
+                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, true, true);
             }
         }
         showMessage(getMessage(), saPaidFor.getView());

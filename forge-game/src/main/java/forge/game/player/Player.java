@@ -36,6 +36,7 @@ import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
+import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
@@ -108,6 +109,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisDrawStep = 0;
     private int numDiscardedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
+    private final Map<String, FCollection<String>> notes = Maps.newHashMap();
 
     private boolean revolt = false;
 
@@ -648,9 +650,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         int restDamage = damage;
 
         // Prevent Damage static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
@@ -886,7 +887,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean canReceiveCounters(final CounterType type) {
         // CantPutCounter static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantPutCounter", this, type)) {
                     return false;
@@ -1185,7 +1186,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canBeTargetedBy(final SpellAbility sa) {
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
@@ -1601,6 +1602,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         numCardsInHandStartedThisTurnWith = num;
     }
 
+    public void addNoteForName(String notedFor, String noted) {
+        if (!notes.containsKey(notedFor)) {
+            notes.put(notedFor, new FCollection<>());
+        }
+        notes.get(notedFor).add(noted);
+    }
+    public FCollection<String> getNotesForName(String notedFor) {
+        if (!notes.containsKey(notedFor)) {
+            notes.put(notedFor, new FCollection<>());
+        }
+        return notes.get(notedFor);
+    }
+
     public final CardCollectionView mill(final int n, final ZoneType destination,
             final boolean bottom, SpellAbility sa, CardZoneTable table) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
@@ -1708,9 +1722,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (stAb.applyAbility("CantPlayLand", land, this)) {
                     return false;
                 }
@@ -2747,6 +2760,21 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
             com.add(conspire);
+        }
+
+        for (final Card c : getCardsIn(ZoneType.Library)) {
+            for (KeywordInterface inst : c.getKeywords()) {
+                String kw = inst.getOriginal();
+                if (kw.startsWith("MayEffectFromOpeningDeck")) {
+                    String[] split = kw.split(":");
+                    final String effName = split[1];
+
+                    final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                    effect.setActivatingPlayer(this);
+
+                    getController().playSpellAbilityNoStack(effect, true);
+                }
+            }
         }
     }
 

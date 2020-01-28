@@ -1,0 +1,12 @@
+Name:Daxos, Blessed by the Sun
+ManaCost:W W
+Types:Legendary Enchantment Creature Demigod
+PT:2/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to your devotion to white.
+SVar:X:Count$Devotion.White
+SVar:BuffedBy:Permanent.White
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters the battlefield or dies, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever another creature you control enters the battlefield or dies, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Daxos's toughness is equal to your devotion to white. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)\nWhenever another creature you control enters the battlefield or dies, you gain 1 life.

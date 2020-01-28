@@ -1,0 +1,12 @@
+Name:Purphoros's Intervention
+ManaCost:X R
+Types:Sorcery
+A:SP$ Charm | Cost$ X R | Choices$ DBToken,DBDealDamage | References$ X
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_x_1_elemental_trample_haste | TokenOwner$ You | TokenPower$ X | References$ X | LegacyImage$ r x 1 elemental trample haste thb | RememberTokens$ True | SubAbility$ DBPump | SpellDescription$ Create an X/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ XX | References$ X,XX | SpellDescription$ CARDNAME deals twice X damage to target creature or planeswalker.
+SVar:X:Count$xPaid
+SVar:XX:SVar$X/Twice
+DeckHas:Ability$Token
+Oracle:Choose one -\n• Create an X/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.\n• Purphoros's Intervention deals twice X damage to target creature or planeswalker.

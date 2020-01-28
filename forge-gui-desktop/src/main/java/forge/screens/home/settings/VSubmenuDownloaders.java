@@ -186,7 +186,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
-        final FButton btnClose = new FButton("OK");
+        final FButton btnClose = new FButton(localizer.getMessage("lblOK"));
         btnClose.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 

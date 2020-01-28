@@ -59,6 +59,8 @@ public enum CounterType {
 
     CHARGE("CHARG", 246, 192, 0),
 
+    COIN("COIN",255,215,0),
+
     CORPSE("CRPSE", 230, 186, 209),
 
     CREDIT("CRDIT", 188, 197, 234),
@@ -266,6 +268,8 @@ public enum CounterType {
     STRIFE("STRFE", 255, 89, 223),
 
     STUDY("STUDY", 226, 192, 165),
+
+    TASK("TASK", 191, 63, 49),
 
     THEFT("THEFT", 255, 176, 125),
 

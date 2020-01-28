@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant opponent
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Opponent | AILogic$ Curse
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
-T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever enchanted opponent draws a card, you may draw a card.
+T:Mode$ Drawn | ValidCard$ Card.OwnedBy Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever enchanted opponent draws a card, you may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_possession.jpg
 Oracle:Enchant opponent\nSkip your draw step.\nWhenever enchanted opponent draws a card, you may draw a card.

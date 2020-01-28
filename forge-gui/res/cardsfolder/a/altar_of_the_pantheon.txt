@@ -1,0 +1,8 @@
+Name:Altar of the Pantheon
+ManaCost:3
+Types:Artifact
+K:Your devotion to each color and each combination of colors is increased by one.
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBGainLife | SpellDescription$ Add one mana of any color. If you control a God, a Demigod, or a legendary enchantment, you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionPresent$ God.YouCtrl,Demigod.YouCtrl,Enchantment.YouCtrl+Legendary
+DeckHas:Ability$LifeGain
+Oracle:Your devotion to each color and each combination of colors is increased by one.\n{T}: Add one mana of any color. If you control a God, a Demigod, or a legendary enchantment, you gain 1 life.

@@ -110,6 +110,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private Type   type;
     private String name;
     private String alias = null;
+    private String prerelease = null;
     private boolean whiteBorder = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
     private double foilChanceInBooster = 0;
@@ -178,6 +179,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
+    public String getPrerelease() { return prerelease; }
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
@@ -303,7 +305,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 tokenNormalized
             );
 
-            FileSection section = FileSection.parse(contents.get("metadata"), "=");
+            FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
             res.code  = section.get("code");
@@ -333,6 +335,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
             res.type = enumType;
+            res.prerelease = section.get("Prerelease", null);
 
             switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
@@ -411,6 +414,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             Collections.sort(res);
             Collections.reverse(res);
             return res;
+        }
+
+        public Iterable<CardEdition> getPrereleaseEditions() {
+            List<CardEdition> res = Lists.newArrayList(this);
+            return Iterables.filter(res, new Predicate<CardEdition>() {
+                @Override
+                public boolean apply(final CardEdition edition) {
+                    return edition.getPrerelease() != null;
+                }
+            });
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {

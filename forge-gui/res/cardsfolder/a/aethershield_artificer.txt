@@ -1,7 +1,7 @@
 Name:Aethershield Artificer
 ManaCost:3 W
 Types:Creature Dwarf Artificer
+PT:3/3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target artifact creature you control gets +2/+2 and gains indestructible until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Artifact+YouCtrl | TgtPrompt$ Select target artifact creature you control | NumAtt$ 2 | NumDef$ 2 | KW$ Indestructible
 Oracle:At the beginning of combat on your turn, target artifact creature you control gets +2/+2 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
-PT:3/3

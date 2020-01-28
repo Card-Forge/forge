@@ -46,6 +46,8 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 
+import forge.util.Localizer;
+
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
  * influence the behavior of a list chooser: minSelection and maxSelection.
@@ -60,7 +62,7 @@ import forge.toolbox.FScrollPane;
  * disabled.</li>
  * <li>The dialog was "committed" if "OK" was clicked or a choice was double
  * clicked.</li>
- * <li>The dialog was "canceled" if "Cancel" or "X" was clicked.</li>
+ * <li>The dialog was "canceled" if Localizer.getInstance().getMessage("lblCancel") or "X" was clicked.</li>
  * <li>If the dialog was canceled, the selection will be empty.</li>
  * <li>
  * </ul>
@@ -91,9 +93,9 @@ public class ListChooser<T> {
 
         final ImmutableList<String> options;
         if (minChoices == 0) {
-            options = ImmutableList.of("OK","Cancel");
+            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"),Localizer.getInstance().getMessage("lblCancel"));
         } else {
-            options = ImmutableList.of("OK");
+            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
         }
 
         if (maxChoices == 1 || minChoices == -1) {

@@ -19,6 +19,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -291,12 +292,13 @@ public class Match {
             }
         }
 
+        final Localizer localizer = Localizer.getInstance();
         if (!rAICards.isEmpty() && !rules.getGameType().isCardPoolLimited()) {
-            game.getAction().revealAnte("AI can't play these cards well", rAICards);
+            game.getAction().revealAnte(localizer.getMessage("lblAICantPlayCards"), rAICards);
         }
 
         if (!removedAnteCards.isEmpty()) {
-            game.getAction().revealAnte("These ante cards were removed", removedAnteCards);
+            game.getAction().revealAnte(localizer.getMessage("lblAnteCardsRemoved"), removedAnteCards);
         }
     }
 

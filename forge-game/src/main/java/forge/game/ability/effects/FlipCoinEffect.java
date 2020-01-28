@@ -12,6 +12,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 
 import java.util.HashSet;
 import java.util.List;
@@ -163,7 +164,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             if (result) {
                 numSuccesses++;
             }
-            flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? "heads" : "tails", null);
+            flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? Localizer.getInstance().getMessage("lblHeads") : Localizer.getInstance().getMessage("lblTails"), null);
         } while (sa.hasParam("FlipUntilYouLose") && result != false);
         
         if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
@@ -193,7 +194,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
         do {
             Set<Boolean> flipResults = new HashSet<>();
-            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
+            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip"), PlayerController.BinaryChoiceType.HeadsOrTails);
             for (int i = 0; i < multiplier; i++) {
                 flipResults.add(MyRandom.getRandom().nextBoolean());
             }
@@ -206,7 +207,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 numSuccesses++;
             }
 
-            caller.getGame().getAction().nofityOfValue(sa, caller, wonFlip ? "win" : "lose", null);
+            caller.getGame().getAction().nofityOfValue(sa, caller, wonFlip ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose"), null);
 
             // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

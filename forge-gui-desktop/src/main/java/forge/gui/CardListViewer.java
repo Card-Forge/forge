@@ -24,6 +24,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Collections;
 import java.util.List;
+import forge.util.Localizer;
 
 import javax.swing.AbstractListModel;
 import javax.swing.Icon;
@@ -113,7 +114,7 @@ public class CardListViewer extends FDialog {
 
         this.addWindowFocusListener(new CardListFocuser());
 
-        final FButton btnOK = new FButton("OK");
+        final FButton btnOK = new FButton(Localizer.getInstance().getMessage("lblOK"));
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

@@ -14,6 +14,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -98,19 +99,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
             if (sa.hasParam("OptionQuestion")) {
-            	message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
+                message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
-            	final StringBuilder sb = new StringBuilder();
-
-            	sb.append("Move ");
-            	sb.append(targets);
-            	sb.append(" from ");
-            	sb.append(Lang.joinHomogenous(origin));
-            	sb.append(" to ");
-            	sb.append(destination);
-            	sb.append("?");
-
-            	message = sb.toString();
+                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName());
             }
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {

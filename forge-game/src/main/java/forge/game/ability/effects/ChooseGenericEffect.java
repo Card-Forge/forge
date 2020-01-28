@@ -9,6 +9,7 @@ import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 int idxChosen = MyRandom.getRandom().nextInt(abilities.size());
                 chosenSA = abilities.get(idxChosen);
             } else {
-                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one",
+                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, Localizer.getInstance().getMessage("lblChooseOne"),
                         ImmutableMap.of());
             }
             

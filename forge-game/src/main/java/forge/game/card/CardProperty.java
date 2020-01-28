@@ -1615,6 +1615,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isDash();
+        } else if (property.startsWith("escaped")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isEscape();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1754,6 +1759,17 @@ public class CardProperty {
             if (!card.isCommander()) {
                 return false;
             }
+        } else if (property.startsWith("NotedFor")) {
+            final String key = property.substring("NotedFor".length());
+            for (String note : sourceController.getNotesForName(key)) {
+                if (note.equals("Name:" + card.getName())) {
+                    return true;
+                }
+                if (note.equals("Id:" + card.getId())) {
+                    return true;
+                }
+            }
+            return false;
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {

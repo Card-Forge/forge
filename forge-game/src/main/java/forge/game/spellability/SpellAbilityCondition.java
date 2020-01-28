@@ -20,6 +20,7 @@ package forge.game.spellability;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -36,11 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -145,6 +142,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionPhases")) {
             this.setPhases(PhaseType.parseRange(params.get("ConditionPhases")));
+        }
+
+        if (params.containsKey("ConditionGameTypes")) {
+            this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
         }
 
         if (params.containsKey("ConditionChosenColor")) {
@@ -308,16 +309,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = phase.getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
+            if (!this.getPhases().contains(phase.getPhase())) {
+                return false;
             }
+        }
 
-            if (!isPhase) {
+        if (this.getGameTypes().size() > 0) {
+            if (!getGameTypes().contains(game.getRules().getGameType())) {
                 return false;
             }
         }

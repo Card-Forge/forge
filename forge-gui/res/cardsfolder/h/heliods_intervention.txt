@@ -1,0 +1,10 @@
+Name:Heliod's Intervention
+ManaCost:X W W
+Types:Instant
+A:SP$ Charm | Cost$ X W W | Choices$ DBDestroy,DBGainLife | References$ X
+SVar:DBDestroy:DB$ Destroy  | TargetMin$ 0 | TargetMax$ X | References$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select X target artifacts and/or enchantments | SpellDescription$ Destroy X target artifacts and/or enchantments.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ XX | References$ X,XX | SpellDescription$ Target player gains twice X life.
+SVar:X:Count$xPaid
+SVar:XX:SVar$X/Twice
+DeckHas:Ability$LifeGain
+Oracle:Choose one —\n• Destroy X target artifacts and/or enchantments.\n• Target player gains twice X life.

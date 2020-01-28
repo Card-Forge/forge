@@ -75,7 +75,7 @@ public final class GameActionUtil {
         Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        if (sa.isSpell()) {
+        if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
             boolean lkicheck = false;
 
             // need to be done before so it works with Vivien and Zoetic Cavern
@@ -88,7 +88,7 @@ public final class GameActionUtil {
                 lkicheck = true;
             }
 
-            if (sa.hasParam("Bestow") && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
+            if (sa.isBestow() && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
                 }
@@ -102,7 +102,7 @@ public final class GameActionUtil {
                 }
                 source.turnFaceDownNoUpdate();
                 lkicheck = true;
-            } else if (sa.isAdventure() && !source.isInZone(ZoneType.Battlefield)) {
+            } else if (sa.isAdventure()) {
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
                 }
@@ -146,6 +146,7 @@ public final class GameActionUtil {
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
+                source.clearChangedCardKeywords(false);
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
@@ -207,6 +208,57 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
             }
 
+            // need to be done there before static abilities does reset the card
+            if (sa.isBasicSpell()) {
+                for (final KeywordInterface inst : source.getKeywords()) {
+                    final String keyword = inst.getOriginal();
+
+                    if (keyword.startsWith("Escape")) {
+                        final String[] k = keyword.split(":");
+                        final Cost escapeCost = new Cost(k[1], true);
+
+                        final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+
+                        newSA.getMapParams().put("PrecostDesc", "Escape—");
+                        newSA.getMapParams().put("CostDesc", escapeCost.toString());
+
+                        // makes new SpellDescription
+                        final StringBuilder desc = new StringBuilder();
+                        desc.append(newSA.getCostDescription());
+                        desc.append("(").append(inst.getReminderText()).append(")");
+                        newSA.setDescription(desc.toString());
+
+                        // Stack Description only for Permanent or it might crash
+                        if (source.isPermanent()) {
+                            final StringBuilder sbStack = new StringBuilder();
+                            sbStack.append(sa.getStackDescription()).append(" (Escaped)");
+                            newSA.setStackDescription(sbStack.toString());
+                        }
+                        newSA.setAlternativeCost(AlternativeCost.Escape);
+                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
+
+                        alternatives.add(newSA);
+                    } else if (keyword.startsWith("Flashback")) {
+                        // if source has No Mana cost, and flashback doesn't have own one,
+                        // flashback can't work
+                        if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
+                            continue;
+                        }
+
+                        final SpellAbility flashback = sa.copy(activator);
+                        flashback.setAlternativeCost(AlternativeCost.Flashback);
+                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
+
+                        // there is a flashback cost (and not the cards cost)
+                        if (keyword.contains(":")) {
+                            final String[] k = keyword.split(":");
+                            flashback.setPayCosts(new Cost(k[1], false));
+                        }
+                        alternatives.add(flashback);
+                    }
+                }
+            }
+
             // reset static abilities
             if (lkicheck) {
                 game.getAction().checkStaticAbilities(false);
@@ -244,28 +296,6 @@ public final class GameActionUtil {
             alternatives.add(newSA);
         }
 
-        for (final KeywordInterface inst : source.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (sa.isSpell() && keyword.startsWith("Flashback")) {
-                // if source has No Mana cost, and flashback doesn't have own one,
-                // flashback can't work
-                if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
-                    continue;
-                }
-
-                final SpellAbility flashback = sa.copy(activator);
-                flashback.setFlashBackAbility(true);
-
-                flashback.getRestrictions().setZone(ZoneType.Graveyard);
-
-                // there is a flashback cost (and not the cards cost)
-                if (keyword.contains(":")) {
-                    final String[] k = keyword.split(":");
-                    flashback.setPayCosts(new Cost(k[1], false));
-                }
-                alternatives.add(flashback);
-            }
-        }
         return alternatives;
     }
 

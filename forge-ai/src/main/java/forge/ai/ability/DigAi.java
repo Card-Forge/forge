@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -155,6 +157,15 @@ public class DigAi extends SpellAbilityAi {
         } else {
             return ComputerUtilCard.getBestAI(valid);
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
+     */
+    @Override
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+        // an opponent choose a card from
+        return Iterables.getFirst(options, null);
     }
 
     /* (non-Javadoc)

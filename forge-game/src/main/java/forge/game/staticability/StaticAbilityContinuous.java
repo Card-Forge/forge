@@ -589,7 +589,9 @@ public final class StaticAbilityContinuous {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
-                                newSA.setOriginalHost(c);
+                                if (newSA.getOriginalHost() == null) {
+                                    newSA.setOriginalHost(c);
+                                }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
                                 newSA.setIntrinsic(false);

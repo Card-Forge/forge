@@ -18,7 +18,6 @@
 package forge.game.spellability;
 
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -88,7 +87,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         final Card c = this.getHostCard();
 
         // CantBeActivated static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeActivated", c, this)) {
@@ -98,11 +97,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
-            return false;
-        }
-
-        if (this.isCycling()
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCycling)) {
             return false;
         }
 

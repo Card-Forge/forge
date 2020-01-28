@@ -382,20 +382,9 @@ public final class AbilityFactory {
      * @param mapParams
      */
     private static final void initializeParams(final SpellAbility sa, Map<String, String> mapParams) {
-        if (mapParams.containsKey("Flashback")) {
-            sa.setFlashBackAbility(true);
-        }
 
         if (mapParams.containsKey("NonBasicSpell")) {
             sa.setBasicSpell(false);
-        }
-
-        if (mapParams.containsKey("Dash")) {
-            sa.setDash(true);
-        }
-
-        if (mapParams.containsKey("Outlast")) {
-            sa.setOutlast(true);
         }
     }
 
@@ -449,7 +438,7 @@ public final class AbilityFactory {
     }
 
     public static final Map<String, String> getMapParams(final String abString) {
-        return FileSection.parseToMap(abString, "$", "|");
+        return FileSection.parseToMap(abString, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {

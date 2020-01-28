@@ -13,6 +13,7 @@ import forge.game.zone.ZoneType;
 
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 public class MillEffect extends SpellAbilityEffect {
     @Override
@@ -39,7 +40,7 @@ public class MillEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("Optional")) {
-                    final String prompt = TextUtil.concatWithSpace("Do you want to put card(s) from library to", TextUtil.addSuffix(destination.toString(),"?"));
+                    final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo", destination.getTranslatedName()));
                     if (!p.getController().confirmAction(sa, null, prompt)) {
                         continue;
                     }

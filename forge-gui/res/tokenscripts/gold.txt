@@ -1,5 +1,5 @@
 Name:Gold
 ManaCost:no cost
-Types:Artifact
+Types:Artifact Gold
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 Oracle:Sacrifice this artifact: Add one mana of any color.

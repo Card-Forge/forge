@@ -168,6 +168,8 @@ public class ForgeScript {
             return found;
         } else if (property.equals("YouCtrl")) {
             return sa.getActivatingPlayer().equals(sourceController);
+        } else if (property.equals("OppCtrl")) {
+            return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

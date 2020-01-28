@@ -11,6 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 
 import java.util.*;
 
@@ -86,6 +87,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
             untilAmount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+            if (untilAmount == 0) return;
         }
 
         Integer maxRevealed = null;
@@ -113,7 +115,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 continue;
             }
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, "Do you want to dig your library?")) {
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"))) {
                     continue;
                 }
                 CardCollection found = new CardCollection();
@@ -159,7 +161,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         final ZoneType origin = c.getZone().getZoneType();
                         if (optionalFound && !p.getController().confirmAction(sa, null,
-                                "Do you want to put that card to " + foundDest.name() + "?")) {
+                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
                         } else {
                             Card m = null;

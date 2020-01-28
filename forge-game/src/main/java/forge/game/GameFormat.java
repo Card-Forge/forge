@@ -321,7 +321,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (formatStrings == null){
                 return null;
             }
-            FileSection section = FileSection.parse(formatStrings, ":");
+            FileSection section = FileSection.parse(formatStrings, FileSection.COLON_KV_SEPARATOR);
             String title = section.get("name");
             FormatType formatType;
             try {

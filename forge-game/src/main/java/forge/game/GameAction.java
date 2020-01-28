@@ -514,6 +514,11 @@ public class GameAction {
             }
         }
 
+        // Cards not on the battlefield / stack should not have controller
+        if (!zoneTo.is(ZoneType.Battlefield) && !zoneTo.is(ZoneType.Stack)) {
+            c.clearControllers();
+        }
+
         return copied;
     }
 
@@ -1553,8 +1558,7 @@ public class GameAction {
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(gameType, first, game.getPlayers()));
 
-            // Emissary's Plot
-            // runPreOpeningHandActions(first);
+             runPreOpeningHandActions(first);
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {

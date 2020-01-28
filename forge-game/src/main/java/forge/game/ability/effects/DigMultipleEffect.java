@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class DigMultipleEffect extends SpellAbilityEffect {
 
@@ -74,15 +75,14 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             }
 
             if (validMap.isEmpty()) {
-                chooser.getController().notifyOfValue(sa, null, "No valid cards");
+                chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                 continue;
             }
 
-            CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, "Choose cards");
+            CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"));
 
             if (!chosen.isEmpty()) {
-                game.getAction().reveal(chosen, chooser, true,
-                    chooser + " picked " + (chosen.size() == 1 ? "this card" : "these cards") + " from ");
+                game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
             }
 
             for (Card c : chosen) {

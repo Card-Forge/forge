@@ -1,0 +1,9 @@
+Name:Escape Velocity
+ManaCost:R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ Enchanted creature gets +1/+0 and has haste.
+K:Escape:1 R ExileFromGrave<2/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has haste.\nEscape—{1}{R}, Exile two other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

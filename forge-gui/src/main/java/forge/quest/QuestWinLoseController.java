@@ -23,6 +23,7 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
@@ -72,15 +73,15 @@ public class QuestWinLoseController {
 
         final boolean matchIsNotOver = !lastGame.isMatchOver();
         if (matchIsNotOver) {
-            view.getBtnQuit().setText("Quit (-15 Credits)");
+            view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblQuitByPayCredits"));
         }
         else {
             view.getBtnContinue().setVisible(false);
             if (wonMatch) {
-                view.getBtnQuit().setText("Great!");
+                view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblGreat") + "!");
             }
             else {
-                view.getBtnQuit().setText("OK");
+                view.getBtnQuit().setText(Localizer.getInstance().getMessage("lblOK"));
             }
         }
 
@@ -160,10 +161,10 @@ public class QuestWinLoseController {
     private void anteReport(final List<PaperCard> cardsWon, final List<PaperCard> cardsLost) {
         // Generate Swing components and attach.
         if (cardsWon != null && !cardsWon.isEmpty()) {
-            view.showCards("Spoils! Cards won from ante", cardsWon);
+            view.showCards(Localizer.getInstance().getMessage("lblSpoilsWonAnteCard"), cardsWon);
         }
         if (cardsLost != null && !cardsLost.isEmpty()) {
-            view.showCards("Looted! Cards lost to ante", cardsLost);
+            view.showCards(Localizer.getInstance().getMessage("lblLootedLostAnteCard"), cardsLost);
         }
     }
 
@@ -385,7 +386,7 @@ public class QuestWinLoseController {
         sb.append(TextUtil.concatWithSpace(String.valueOf(credTotal), "credits in total."));
         qData.getAssets().addCredits(credTotal);
 
-        view.showMessage(sb.toString(), "Gameplay Results", FSkinProp.ICO_QUEST_GOLD);
+        view.showMessage(sb.toString(), Localizer.getInstance().getMessage("lblGameplayResults"), FSkinProp.ICO_QUEST_GOLD);
     }
 
     /**
@@ -468,12 +469,12 @@ public class QuestWinLoseController {
         }
 
         if (addDraftToken) {
-            view.showMessage("For achieving a 25 win streak, you have been awarded a draft token!\nUse these tokens to generate new tournaments.", "Bonus Draft Token Reward", FSkinProp.ICO_QUEST_COIN);
+            view.showMessage(Localizer.getInstance().getMessage("lblAchieving25WinStreakAwarded"), Localizer.getInstance().getMessage("lblBonusDraftTokenReward"), FSkinProp.ICO_QUEST_COIN);
             qData.getAchievements().addDraftToken();
         }
 
         if (!cardsWon.isEmpty()) {
-            view.showCards("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!", cardsWon);
+            view.showCards(Localizer.getInstance().getMessage("lblAchievedNWinStreakWinMTypeCards", (currentStreak == 0 ? "50" : String.valueOf(currentStreak)), String.valueOf(cardsWon.size()), typeWon), cardsWon);
         }
     }
 
@@ -486,7 +487,7 @@ public class QuestWinLoseController {
      */
     private void awardJackpot() {
         final List<PaperCard> cardsWon = qData.getCards().addRandomRare(10);
-        view.showCards("You just won 10 random rares!", cardsWon);
+        view.showCards(Localizer.getInstance().getMessage("lblJustWonTenRandomRares"), cardsWon);
     }
 
     /**
@@ -515,13 +516,13 @@ public class QuestWinLoseController {
 
             Collections.sort(formats);
 
-            final GameFormat selected = SGuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, pref, null).get(0);
+            final GameFormat selected = SGuiChoose.getChoices(Localizer.getInstance().getMessage("lblChooseBonusBoosterFormat"), 1, 1, formats, pref, null).get(0);
             FModel.getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected.toString());
 
             cardsWon = qData.getCards().generateQuestBooster(selected.getFilterPrinted());
             qData.getCards().addAllCards(cardsWon);
 
-            title = "Bonus booster pack from the \"" + selected.getName() + "\" format!";
+            title = Localizer.getInstance().getMessage("lblBonusFormatBoosterPack", selected.getName());
 
         } else {
 
@@ -566,7 +567,7 @@ public class QuestWinLoseController {
                 maxChoices--;
             }
 
-            final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
+            final CardEdition chooseEd = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseBonusBoosterSet"), options);
 
             if (customBooster) {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(chooseEd.getCode()));
@@ -578,7 +579,7 @@ public class QuestWinLoseController {
             }
 
             qData.getCards().addAllCards(cardsWon);
-            title = "Bonus " + chooseEd.getName() + " Booster Pack!";
+            title = Localizer.getInstance().getMessage("lblBonusSetBoosterPack", chooseEd.getName());
 
         }
 
@@ -606,18 +607,14 @@ public class QuestWinLoseController {
     private void awardChallengeWin() {
         final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Challenge completed.\n\n");
-        sb.append("Challenge bounty: ").append(questRewardCredits).append(" credits.");
-
         String winMessage = ((QuestEventChallenge)qEvent).getWinMessage();
         if (!winMessage.isEmpty()) {
-            view.showMessage(winMessage.replace("\\n", "\n"), "Congratulations", FSkinProp.ICO_QUEST_NOTES);
+            view.showMessage(winMessage.replace("\\n", "\n"), Localizer.getInstance().getMessage("lblCongratulations"), FSkinProp.ICO_QUEST_NOTES);
         }
 
         qData.getAssets().addCredits(questRewardCredits);
 
-        view.showMessage(sb.toString(), "Challenge Rewards for \"" + qEvent.getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);
+        view.showMessage(Localizer.getInstance().getMessage("lblChallengeCompletedBountyIS", String.valueOf(questRewardCredits)), Localizer.getInstance().getMessage("lblChallengeRewardsForEvent", qEvent.getTitle()), FSkinProp.ICO_QUEST_BOX);
 
         awardSpecialReward(null);
     }
@@ -676,7 +673,7 @@ public class QuestWinLoseController {
 
     private void penalizeLoss() {
         final int x = FModel.getQuestPreferences().getPrefInt(QPref.PENALTY_LOSS);
-        view.showMessage("You lose! You have lost " + x + " credits.", "Gameplay Results", FSkinProp.ICO_QUEST_HEART);
+        view.showMessage(Localizer.getInstance().getMessage("lblYouHaveLostNCredits", String.valueOf(x)), Localizer.getInstance().getMessage("lblGameplayResults"), FSkinProp.ICO_QUEST_HEART);
     }
 
     /**

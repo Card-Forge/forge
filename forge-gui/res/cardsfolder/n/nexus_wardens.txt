@@ -1,0 +1,9 @@
+Name:Nexus Wardens
+ManaCost:2 G
+Types:Creature Satyr Archer
+PT:1/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under you control, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckNeeds:Type$Enchantment
+Oracle:Reach\nConstellation — Whenever an enchantment enters the battlefield under you control, you gain 2 life.

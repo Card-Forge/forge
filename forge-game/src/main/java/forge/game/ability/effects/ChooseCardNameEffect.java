@@ -22,6 +22,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,6 +56,15 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
             validDesc = sa.getParam("ValidDesc");
+        }
+
+        String message;
+        if (sa.hasParam("SelectPrompt")) {
+            message = sa.getParam("SelectPrompt");
+        } else if (validDesc.equals("card")) {
+            message = Localizer.getInstance().getMessage("lblChooseACardName");
+        } else {
+            message = Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
         }
 
         boolean randomChoice = sa.hasParam("AtRandom");
@@ -99,11 +109,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         }
                     }
                     Collections.sort(faces);
-                    chosen = p.getController().chooseCardName(sa, faces, "Choose a card name");
+                    chosen = p.getController().chooseCardName(sa, faces, message);
                 } else {
-                    // use CardFace because you might name a alternate name
-                    final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
-
+                    // use CardFace because you might name a alternate names
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
                         cpp = CardFacePredicates.valid(valid);
@@ -114,8 +122,11 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                 host.setNamedCard(chosen);
                 if(!randomChoice) {
-                    p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " picked " + chosen, p);
+                    p.getGame().getAction().nofityOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                     p.setNamedCard(chosen);
+                }
+                if (sa.hasParam("NoteFor")) {
+                    p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
                 }
             }
         }

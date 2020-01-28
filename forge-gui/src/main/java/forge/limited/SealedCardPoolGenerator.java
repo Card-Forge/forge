@@ -17,6 +17,8 @@
  */
 package forge.limited;
 
+import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.assets.FSkinProp;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
@@ -39,12 +41,14 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
-
+import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -66,7 +70,7 @@ public class SealedCardPoolGenerator {
     private String landSetCode = null;
 
     public static DeckGroup generateSealedDeck(final boolean addBasicLands) {
-        final String prompt = "Choose Sealed Deck Format";
+        final String prompt = Localizer.getInstance().getMessage("lblChooseSealedDeckFormat");
         final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if (poolType == null) { return null; }
 
@@ -80,8 +84,8 @@ public class SealedCardPoolGenerator {
         int rounds = 7;
 
         final String sDeckName = SOptionPane.showInputDialog(
-                "Save this card pool as:",
-                "Save Card Pool",
+                Localizer.getInstance().getMessage("lblSaveCardPoolAs") + ":",
+                Localizer.getInstance().getMessage("lblSaveCardPool"),
                 FSkinProp.ICO_QUESTION);
 
         if (StringUtils.isBlank(sDeckName)) {
@@ -91,8 +95,8 @@ public class SealedCardPoolGenerator {
         final IStorage<DeckGroup> sealedDecks = FModel.getDecks().getSealed();
         if (sealedDecks.contains(sDeckName)) {
             if (!SOptionPane.showConfirmDialog(
-                    "'" + sDeckName + "' already exists. Do you want to replace it?",
-                    "Sealed Deck Game Exists")) {
+                    Localizer.getInstance().getMessage("lblDeckExistsReplaceConfirm", sDeckName),
+                    Localizer.getInstance().getMessage("lblSealedDeckGameExists"))) {
                 return null;
             }
             sealedDecks.delete(sDeckName);
@@ -166,6 +170,67 @@ public class SealedCardPoolGenerator {
                 landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
                 break;
 
+            case Prerelease:
+                ArrayList<CardEdition> editions = Lists.newArrayList(StaticData.instance().getEditions().getPrereleaseEditions());
+                Collections.sort(editions);
+                Collections.reverse(editions);
+
+                CardEdition chosenEdition = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAnEdition"), editions);
+                if (chosenEdition == null) {
+                    return;
+                }
+
+                String bundle = chosenEdition.getPrerelease();
+
+                // Parse prerelease bundle.
+                // More recent sets are like 6 boosters of this edition + 1 Promo RareMythic from this edition
+
+                // Expecting to see things like
+                // # <Edition> Boosters, # Rarity+
+
+                String[] parts = bundle.split(", ");
+                for(String part : parts) {
+                    boolean promo = part.endsWith("+");
+                    if (promo) {
+                        part = part.substring(0, part.length() - 1);
+                    }
+
+                    String[] pieces = part.split(" ");
+                    int num = Integer.parseInt(pieces[0]);
+                    String thing = pieces[pieces.length - 1];
+
+                    // Booster, Rarity, Named, SpecialBooster?
+
+                    if (thing.equalsIgnoreCase("Booster") || thing.equalsIgnoreCase("Boosters")) {
+                        // Normal Boosters of this or block editions
+                        String code = chosenEdition.getCode();
+                        if (pieces.length > 2) {
+                            // 2 USG Boosters
+                            code = pieces[1];
+                        }
+
+                        // Generate boosters
+                        for(int i = 0; i < num; i++) {
+                            this.product.add(new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)));
+                        }
+                    } else {
+                        // Rarity
+                        List<Pair<String, Integer>> promoSlot = new ArrayList<>();
+                        promoSlot.add(Pair.of(pieces[1], num));
+
+                        SealedProduct.Template promoProduct = new SealedProduct.Template("Prerelease Promo", promoSlot);
+
+                        // Create a "booster" with just the promo card. Rarity + Edition into a Template
+                        this.product.add(new UnOpenedProduct(promoProduct, FModel.getMagicDb().getCommonCards().getAllCardsFromEdition(chosenEdition)));
+                        // TODO This product should be Foiled only. How do I do that?
+                    }
+                    // TODO Add support for special boosters like GuildPacks
+                }
+
+                //chosenEdition but really it should be defined by something in the edition file?
+                landSetCode = chosenEdition.getCode();
+
+                break;
             case Block:
             case FantasyBlock:
                 List<CardBlock> blocks = new ArrayList<>();
@@ -174,7 +239,7 @@ public class SealedCardPoolGenerator {
                     blocks.add(b);
                 }
 
-                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
+                final CardBlock block = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseBlock"), blocks);
                 if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
@@ -194,7 +259,7 @@ public class SealedCardPoolGenerator {
                         throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
                     }
 
-                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
+                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChoosePackNumberToPlay"), setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {
@@ -245,11 +310,11 @@ public class SealedCardPoolGenerator {
 
                 // present list to user
                 if (customs.isEmpty()) {
-                    SOptionPane.showMessageDialog("No custom sealed files found.");
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomSealedFiles"));
                     return;
                 }
 
-                final CustomLimited draft = SGuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
+                final CustomLimited draft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomSealedPool"), customs);
                 if (draft == null) { return; }
 
                 UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
@@ -264,7 +329,7 @@ public class SealedCardPoolGenerator {
     }
 
     private boolean chooseNumberOfBoosters(final IUnOpenedProduct product1) {
-        Integer boosterCount = SGuiChoose.getInteger("How many booster packs?", 3, 12);
+        Integer boosterCount = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblHowManyBoosterPacks"), 3, 12);
         if (boosterCount == null) { return false; }
 
         for (int i = 0; i < boosterCount; i++) {
@@ -439,7 +504,6 @@ public class SealedCardPoolGenerator {
      * 
      * @param isHuman
      *      boolean, get pool for human (possible choices)
-     * @return a {@link forge.CardList} object.
      */
     public CardPool getCardPool(final boolean isHuman) {
         final CardPool pool = new CardPool();

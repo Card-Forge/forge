@@ -260,6 +260,8 @@ public class AbilityUtils {
                 list = sa.getRootAbility().getPaidList("SacrificedCards");
             } else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
+            } else if (defined.startsWith("Revealed")) {
+                list = sa.getRootAbility().getPaidList("Revealed");
             } else if (defined.startsWith("DiscardedCards")) {
                 list = sa.getRootAbility().getPaidList("DiscardedCards");
             } else if (defined.startsWith("Discarded")) {
@@ -1279,6 +1281,8 @@ public class AbilityUtils {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
                     sas.addAll(game.getCardState(rem).getSpellAbilities());
+                } else if (o instanceof SpellAbility) {
+                    sas.add((SpellAbility) o);
                 }
             }
         }
@@ -1617,7 +1621,19 @@ public class AbilityUtils {
                     }
                     return count;
                 }
-
+                // Count$AttachedTo <DefinedCards related to spellability> <restriction>
+                if (sq[0].startsWith("AttachedTo")) {
+                    final String[] k = l[0].split(" ");
+                    int sum = 0;
+                    for (Card card : AbilityUtils.getDefinedCards(sa.getHostCard(), k[1], sa)) {
+                        // Hateful Eidolon: the script uses LKI so that the attached cards have to be defined
+                        // This card needs the spellability ("Auras You control",  you refers to the activating player)
+                        // CardFactoryUtils.xCount doesn't have the sa parameter, SVar:X:TriggeredCard$Valid <restriction> cannot handle this
+                        CardCollection list = CardLists.getValidCards(card.getAttachedCards(), k[2].split(","), sa.getActivatingPlayer(), c, sa);
+                        sum += list.size();
+                    }
+                    return sum;
+                }
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
@@ -1708,7 +1724,7 @@ public class AbilityUtils {
             if (res.checkTimingRestrictions(tgtCard, newSA)
                     // still need to check the other restrictions like Aftermath
                     && res.checkOtherRestrictions(tgtCard, newSA, controller)
-                    && newSA.checkOtherRestrictions()) {
+                    && newSA.checkOtherRestrictions(tgtCard)) {
                 sas.add(newSA);
             }
         }
@@ -1835,6 +1851,11 @@ public class AbilityUtils {
                     players.add(c.getController());
                 } else if (def.endsWith("Owner")) {
                     players.add(c.getOwner());
+                }
+            } else if (o instanceof SpellAbility) {
+                final SpellAbility c = (SpellAbility) o;
+                if (def.endsWith("Controller")) {
+                    players.add(c.getHostCard().getController());
                 }
             }
         }
