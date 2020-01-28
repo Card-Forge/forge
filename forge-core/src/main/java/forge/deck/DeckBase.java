@@ -143,7 +143,14 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @return the best file name
      */
     public final String getBestFileName() {
-        return name.replaceAll("[^-_$#@.,{[()]} a-zA-Z0-9]", "");
+        //string operator hard to guarantee filename legal,only replace some not allowed as file names characters
+        name.replaceAll("[\\/:*?\"<>|]","");
+        if ( name == "" )
+        {
+            //"getBestFileName" sha1 value
+            return "bc2b4ac6bf8dd84112c79e4c733b0b5bd8f057b3";
+        }
+        return name;
     }
 
     public abstract boolean isEmpty();
