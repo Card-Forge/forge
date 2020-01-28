@@ -9,8 +9,8 @@ database = 'scryfall-all-cards.json'
 scryfalldburl = 'https://archive.scryfall.com/json/' + database
 # 'scryfall lang code':'ISO 639 lang code'
 languages = {'es': 'es-ES', 'de': 'de-DE',
-             'zhs': 'zh-CN'}
-langfiles = {'es': None, 'de': None, 'zhs': None}
+             'it': 'it-IT', 'zhs': 'zh-CN'}
+langfiles = {'es': None, 'de': None, 'it': None, 'zhs': None}
 
 urllib.request.urlretrieve(scryfalldburl, database)
 
