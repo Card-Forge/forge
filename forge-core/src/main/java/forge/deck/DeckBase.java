@@ -145,8 +145,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public final String getBestFileName() {
         //string operator hard to guarantee filename legal,only replace some not allowed as file names characters
         name.replaceAll("[\\/:*?\"<>|]","");
-        if ( name == "" )
-        {
+        if (name == "") {
             //"getBestFileName" sha1 value
             return "bc2b4ac6bf8dd84112c79e4c733b0b5bd8f057b3";
         }
