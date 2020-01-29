@@ -43,7 +43,7 @@ import io.sentry.event.BreadcrumbBuilder;
 public class BugReporter {
     private static final int STACK_OVERFLOW_MAX_MESSAGE_LEN = 16 * 1024;
 
-    public static final String REPORT = Localizer.getInstance().getMessage("Report");
+    public static final String REPORT = Localizer.getInstance().getMessage("lblReport");
     public static final String SAVE = Localizer.getInstance().getMessage("lblSave");
     public static final String DISCARD = Localizer.getInstance().getMessage("lblDiscardError");
     public static final String EXIT = Localizer.getInstance().getMessage("lblExit");
