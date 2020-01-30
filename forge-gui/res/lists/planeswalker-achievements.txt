@@ -49,7 +49,7 @@ Garruk, the Veil-Cursed|Garruk's Graveyard|The dead shall help the living!
 Garruk Wildspeaker|Garruk's Overrun|I speak seven languages, including Wild!
 Garruk, Apex Predator|Garruk's Prey|Funny, it's usually a good thing to have an emblem...
 Garruk, Caller of Beasts|Garruk's Wild Pair|Can you beat two for the price of one?
-Garruk, Cursed Huntman|Garruk's Cursed Overrun|Run wild / run free / here's your / plus three
+Garruk, Cursed Huntsman|Garruk's Cursed Overrun|Run wild / run free / here's your / plus three
 Garruk, Primal Hunter|Garruk's Garden|They came out after a rain...
 Gideon Blackblade|Gideon's Righteous Strike|Blackblade cleaving black heart!
 Gideon Jura|Gideon's Brawl|Are you man enough to mess with me?
