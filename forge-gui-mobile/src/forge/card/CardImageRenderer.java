@@ -271,7 +271,9 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
+            boolean needTranslation = !card.isToken();
+            final String text = card.getText(state,
+                    needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
