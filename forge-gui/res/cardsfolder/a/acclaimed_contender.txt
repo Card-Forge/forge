@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Knight
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Knight.YouCtrl+Other | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Card.Knight,Aura,Equipment,Artifact.Legendary | RestRandomOrder$ True
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Knight,Aura,Equipment,Artifact.Legendary | RestRandomOrder$ True
 DeckHints:Type$Knight
 Oracle:When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
