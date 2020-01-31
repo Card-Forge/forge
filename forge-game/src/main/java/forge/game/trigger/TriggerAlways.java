@@ -45,7 +45,7 @@ public class TriggerAlways extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAlways(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAlways(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -57,7 +57,7 @@ public class TriggerAlways extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(final SpellAbility sa) {
+    public void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
     }
 
     @Override

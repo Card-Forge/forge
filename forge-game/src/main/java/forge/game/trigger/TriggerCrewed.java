@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class TriggerCrewed extends Trigger {
 
-    public TriggerCrewed(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCrewed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -39,8 +39,8 @@ public class TriggerCrewed extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Vehicle, AbilityKey.Crew);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Vehicle, AbilityKey.Crew);
     }
 
     @Override

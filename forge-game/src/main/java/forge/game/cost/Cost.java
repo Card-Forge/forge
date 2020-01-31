@@ -63,13 +63,7 @@ public class Cost implements Serializable {
     }
 
     private void cacheTapCost() {
-        tapCost = false;
-        for (CostPart p : getCostParts()) {
-            if (p instanceof CostTap || p instanceof CostUntap) {
-                tapCost = true;
-                return;
-            }
-        }
+        tapCost = hasSpecificCostType(CostTap.class);
     }
 
     public final boolean hasNoManaCost() {

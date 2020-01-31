@@ -31,8 +31,8 @@ public class TriggerRevealed extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override

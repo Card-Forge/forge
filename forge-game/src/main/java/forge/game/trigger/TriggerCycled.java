@@ -46,14 +46,14 @@ public class TriggerCycled extends Trigger {
      * @param intrinsic
      *            a boolean
      */
-    public TriggerCycled(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCycled(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override

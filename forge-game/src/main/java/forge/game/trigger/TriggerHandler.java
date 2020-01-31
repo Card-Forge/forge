@@ -499,9 +499,6 @@ public class TriggerHandler {
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
-        final Map<String, String> triggerParams = regtrig.getMapParams();
-
-        regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
@@ -513,7 +510,7 @@ public class TriggerHandler {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-        final Card trigCard = (Card) regtrig.getFromRunParams(AbilityKey.Card);
+        final Card trigCard = (Card) runParams.get(AbilityKey.Card);
 
         if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
@@ -530,7 +527,7 @@ public class TriggerHandler {
 
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
-            if (!triggerParams.containsKey("Execute")) {
+            if (!regtrig.hasParam("Execute")) {
                 sa = new Ability(host, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
@@ -538,12 +535,13 @@ public class TriggerHandler {
                 };
             }
             else {
-                if (!host.getCurrentState().hasSVar(triggerParams.get("Execute"))) {
-                    System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + triggerParams.get("Execute") + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
+                String name = regtrig.getParam("Execute");
+                if (!host.getCurrentState().hasSVar(name)) {
+                    System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + name + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
                     return;
                 }
 
-                sa = AbilityFactory.getAbility(host, triggerParams.get("Execute"));
+                sa = AbilityFactory.getAbility(host, name);
             }
         } else {
             // need to copy the SA because of TriggeringObjects
@@ -556,7 +554,7 @@ public class TriggerHandler {
 
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
-        regtrig.setTriggeringObjects(sa);
+        regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
@@ -570,12 +568,12 @@ public class TriggerHandler {
             sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
         }
 
-        if (triggerParams.containsKey("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
+        if (regtrig.hasParam("TriggerController")) {
+            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 
-        if (triggerParams.containsKey("RememberController")) {
+        if (regtrig.hasParam("RememberController")) {
             host.addRemembered(sa.getActivatingPlayer());
         }
 
@@ -594,9 +592,9 @@ public class TriggerHandler {
 
         Player decider = null;
         boolean mand = false;
-        if (triggerParams.containsKey("OptionalDecider")) {
+        if (regtrig.hasParam("OptionalDecider")) {
             sa.setOptionalTrigger(true);
-            decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
+            decider = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("OptionalDecider"), sa).get(0);
         }
         else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
             mand = true;
@@ -634,7 +632,7 @@ public class TriggerHandler {
 
         regtrig.triggerRun();
 
-        if (triggerParams.containsKey("OneOff")) {
+        if (regtrig.hasParam("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {
                 Player p = regtrig.getHostCard().getController();
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
