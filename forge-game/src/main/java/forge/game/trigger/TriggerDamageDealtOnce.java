@@ -49,7 +49,7 @@ public class TriggerDamageDealtOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamageDealtOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamageDealtOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -108,10 +108,10 @@ public class TriggerDamageDealtOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
-        sa.setTriggeringObject(AbilityKey.Source, getFromRunParams(AbilityKey.DamageSource));
-        sa.setTriggeringObject(AbilityKey.Targets, getFromRunParams(AbilityKey.DamageTargets));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
+        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
+        sa.setTriggeringObject(AbilityKey.Targets, runParams.get(AbilityKey.DamageTargets));
     }
 
     @Override

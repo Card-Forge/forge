@@ -48,7 +48,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerTapsForMana(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTapsForMana(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -108,8 +108,8 @@ public class TriggerTapsForMana extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
     }
 
     @Override

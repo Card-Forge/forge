@@ -23,8 +23,8 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        final CardZoneTable table = (CardZoneTable) getFromRunParams(AbilityKey.Cards);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
         CardCollection allCards = this.filterCards(table);
 

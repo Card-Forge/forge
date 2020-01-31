@@ -49,7 +49,7 @@ public class TriggerSacrificed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSacrificed(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSacrificed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -129,8 +129,8 @@ public class TriggerSacrificed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override
