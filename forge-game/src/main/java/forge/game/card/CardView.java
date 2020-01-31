@@ -20,6 +20,7 @@ import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.Lang;
 import forge.util.collect.FCollectionView;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.EnumSet;
@@ -785,7 +786,7 @@ public class CardView extends GameEntityView {
                 }
             }
         }
-        return (name + " (" + getId() + ")").trim();
+        return (CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
     public class CardStateView extends TrackableObject {
