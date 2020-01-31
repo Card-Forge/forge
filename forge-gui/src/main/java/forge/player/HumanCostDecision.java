@@ -404,7 +404,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         final CardCollection exiled = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", cost.getFrom().getTranslatedName()), CardView.getCollection(typeList)));
+            final Card c = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileProgressFromZone", String.valueOf(i + 1), String.valueOf(nNeeded), cost.getFrom().getTranslatedName()), CardView.getCollection(typeList)));
             if (c == null) { return null; }
 
             typeList.remove(c);
