@@ -12,8 +12,6 @@ public class PermanentNoncreatureEffect extends PermanentEffect {
     @Override
     public String getStackDescription(final SpellAbility sa) {
         final Card sourceCard = sa.getHostCard();
-        final StringBuilder sb = new StringBuilder();
-        sb.append(sourceCard.getName());
-        return sb.toString();
+        return sourceCard.toString();
     }
 }
