@@ -846,18 +846,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card, boolean isAddMenu, boolean isAddSource) {
+            final Localizer localizer = Localizer.getInstance();
             if (parentScreen.getCommanderPage() == null) {
                 return;
             }
             boolean isLegalCommander;
-            String captionSuffix = "Commander";
+            String captionSuffix = localizer.getMessage("lblCommander");
             switch (parentScreen.editorType) {
             case Brawl:
                 isLegalCommander = card.getRules().canBeBrawlCommander();
                 break;
             case Oathbreaker:
                 isLegalCommander = card.getRules().canBeOathbreaker();
-                captionSuffix = "Oathbreaker";
+                captionSuffix = localizer.getMessage("lblOathbreaker");
                 break;
             case PlanarConquest:
                 isLegalCommander = false; //don't set commander this way in Planar Conquest
@@ -1445,7 +1446,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Schemes:
-                addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
+                addItem(menu, localizer.getMessage("lblAdd"), null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1495,7 +1496,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
-            super(ItemManagerConfig.DRAFT_PACK, "Pack 1", FSkinImage.PACK);
+            super(ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
         }
 
         @Override
@@ -1505,7 +1506,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             CardPool pool = draft.nextChoice();
             int packNumber = draft.getCurrentBoosterIndex() + 1;
-            caption = "Pack " + packNumber;
+            caption = Localizer.getInstance().getMessage("lblPackN", String.valueOf(packNumber));
             cardManager.setPool(pool);
         }
 
@@ -1613,12 +1614,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 setSaved(true);
             }
             if (model != null) {
-            	editor.setDeck(model.getHumanDeck());
+                editor.setDeck(model.getHumanDeck());
             }
             else {
-            	editor.setDeck(null);
+                editor.setDeck(null);
             }
-            	
+
         }
 
         private boolean isModelInSyncWithFolder() {
