@@ -514,6 +514,10 @@ public class DrawAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
+            return false;
+        }
+
         return targetAI(ai, sa, mandatory);
     }
 

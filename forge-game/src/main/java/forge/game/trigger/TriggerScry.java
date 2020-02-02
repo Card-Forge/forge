@@ -46,7 +46,7 @@ public class TriggerScry extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerScry(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerScry(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -65,8 +65,8 @@ public class TriggerScry extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

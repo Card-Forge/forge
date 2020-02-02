@@ -92,8 +92,8 @@ public class TriggerSpellAbilityCopy extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        final SpellAbility copySA = (SpellAbility) getFromRunParams(AbilityKey.CopySA);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final SpellAbility copySA = (SpellAbility) runParams.get(AbilityKey.CopySA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(copySA);
         sa.setTriggeringObject(AbilityKey.Card, copySA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, copySA);

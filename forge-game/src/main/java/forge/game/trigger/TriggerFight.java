@@ -47,7 +47,7 @@ public class TriggerFight extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerFight(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFight(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -59,15 +59,15 @@ public class TriggerFight extends Trigger {
 
         if (hasParam("ValidCard")) {
             return fighter.isValid(getParam("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null);
+                    getHostCard().getController(), getHostCard(), null);
         }
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Fighter);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Fighter);
     }
 
     @Override

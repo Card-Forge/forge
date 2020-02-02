@@ -45,7 +45,7 @@ public class TriggerPayEcho extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerPayEcho(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerPayEcho(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -72,8 +72,8 @@ public class TriggerPayEcho extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override

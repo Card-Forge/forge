@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class TriggerImmediate extends Trigger {
 
-    public TriggerImmediate(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerImmediate(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -39,7 +39,7 @@ public class TriggerImmediate extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(final SpellAbility sa) {
+    public void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
     }
 
     @Override

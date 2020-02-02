@@ -1299,12 +1299,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (int i = 0; i < addAmount; i++) {
                 runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
                 getGame().getTriggerHandler().runTrigger(
-                        TriggerType.CounterAdded, Maps.newHashMap(runParams), false);
+                        TriggerType.CounterAdded, AbilityKey.newMap(runParams), false);
             }
             if (addAmount > 0) {
                 runParams.put(AbilityKey.CounterAmount, addAmount);
                 getGame().getTriggerHandler().runTrigger(
-                        TriggerType.CounterAddedOnce, Maps.newHashMap(runParams), false);
+                        TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
             }
         } else {
             setCounters(counterType, newValue);
@@ -1378,10 +1378,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put(AbilityKey.CounterType, counterName);
         for (int i = 0; i < delta && curCounters != 0; i++) {
             runParams.put(AbilityKey.NewCounterAmount, --curCounters);
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, AbilityKey.newMap(runParams), false);
         }
         runParams.put(AbilityKey.CounterAmount, delta);
-        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
+        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
     }
 
     @Override

@@ -49,7 +49,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBecomesTargetOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomesTargetOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -81,9 +81,9 @@ public class TriggerBecomesTargetOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Targets);
-        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.SourceSA, AbilityKey.Targets);
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard());
     }
 
     @Override

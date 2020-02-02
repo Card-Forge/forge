@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
@@ -472,6 +473,22 @@ public class DamageDealAi extends DamageAiBase {
         return bestTgt;
     }
 
+    private Card getWorstPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        int bestScore = Integer.MAX_VALUE;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+
+            if (curLoyalty < bestScore) {
+                bestScore = curLoyalty;
+                bestTgt = pw;
+            }
+        }
+
+        return bestTgt;
+    }
+
 
     private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, Game game) {
         List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
@@ -785,7 +802,7 @@ public class DamageDealAi extends DamageAiBase {
                     return false;
                 } else {
                     // If the trigger is mandatory, gotta choose my own stuff now
-                    return this.damageChooseRequiredTargets(ai, sa, tgt, dmg, mandatory);
+                    return this.damageChooseRequiredTargets(ai, sa, tgt, dmg);
                 }
             } else {
                 // TODO is this good enough? for up to amounts?
@@ -862,12 +879,9 @@ public class DamageDealAi extends DamageAiBase {
      *            a {@link forge.game.spellability.TargetRestrictions} object.
      * @param dmg
      *            a int.
-     * @param mandatory
-     *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChooseRequiredTargets(final Player ai, final SpellAbility sa, final TargetRestrictions tgt, final int dmg,
-            final boolean mandatory) {
+    private boolean damageChooseRequiredTargets(final Player ai, final SpellAbility sa, final TargetRestrictions tgt, final int dmg) {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
@@ -875,7 +889,7 @@ public class DamageDealAi extends DamageAiBase {
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             if (tgt.canTgtPlaneswalker()) {
-                final Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, mandatory);
+                final Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, true);
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
@@ -888,7 +902,7 @@ public class DamageDealAi extends DamageAiBase {
 
             // TODO: This currently also catches planeswalkers that can be killed (still necessary? Or can be removed?)
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, mandatory);
+                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, true);
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
@@ -903,6 +917,32 @@ public class DamageDealAi extends DamageAiBase {
                 if (sa.getTargets().add(opp)) {
                     if (divided) {
                         tgt.addDividedAllocation(opp, dmg);
+                        break;
+                    }
+                    continue;
+                }
+            }
+
+            // See if there's an indestructible target that can be used
+            CardCollection indestructible = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.Presets.PLANESWALKERS, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE), CardPredicates.isTargetableBy(sa)));
+
+            if (!indestructible.isEmpty()) {
+                Card c = ComputerUtilCard.getWorstPermanentAI(indestructible, false, false, false, false);
+                sa.getTargets().add(c);
+                if (divided) {
+                    tgt.addDividedAllocation(c, dmg);
+                    break;
+                }
+                continue;
+            }
+            else if (tgt.canTgtPlaneswalker()) {
+                // Second pass for planeswalkers: choose AI's worst planeswalker
+                final Card c = getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.PLANESWALKERS), CardPredicates.isTargetableBy(sa)));
+                if (c != null) {
+                    sa.getTargets().add(c);
+                    if (divided) {
+                        tgt.addDividedAllocation(c, dmg);
                         break;
                     }
                     continue;
