@@ -237,6 +237,31 @@ public class PlayerView extends GameEntityView {
         return hasUnlimitedHandSize() ? "unlimited" : String.valueOf(getMaxHandSize());
     }
 
+    public int getMaxLandPlay() {
+        return get(TrackableProperty.MaxLandPlay);
+    }
+    void updateMaxLandPlay(Player p) {
+        set(TrackableProperty.MaxLandPlay, p.getMaxLandPlays());
+    }
+
+    public boolean hasUnlimitedLandPlay() {
+        return get(TrackableProperty.HasUnlimitedLandPlay);
+    }
+    void updateUnlimitedLandPlay(Player p) {
+        set(TrackableProperty.HasUnlimitedLandPlay, p.getMaxLandPlaysInfinite());
+    }
+
+    public String getMaxLandString() {
+        return hasUnlimitedLandPlay() ? "unlimited" : String.valueOf(getMaxLandPlay());
+    }
+
+    public int getNumLandThisTurn() {
+        return get(TrackableProperty.NumLandThisTurn);
+    }
+    void updateNumLandThisTurn(Player p) {
+        set(TrackableProperty.NumLandThisTurn, p.getLandsPlayedThisTurn());
+    }
+
     public int getNumDrawnThisTurn() {
         return get(TrackableProperty.NumDrawnThisTurn);
     }
@@ -450,6 +475,7 @@ public class PlayerView extends GameEntityView {
         }
 
         details.add(TextUtil.concatNoSpace("Cards in hand: ", TextUtil.addSuffix(String.valueOf(getHandSize()),"/"), getMaxHandString()));
+        details.add(TextUtil.concatNoSpace("Lands played: ", TextUtil.addSuffix(String.valueOf(getNumLandThisTurn()),"/"), this.getMaxLandString()));
         details.add(TextUtil.concatWithSpace("Cards drawn this turn:", String.valueOf(getNumDrawnThisTurn())));
         details.add(TextUtil.concatWithSpace("Damage prevention:", String.valueOf(getPreventNextDamage())));
 

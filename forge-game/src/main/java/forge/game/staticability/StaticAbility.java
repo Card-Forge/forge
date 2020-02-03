@@ -192,6 +192,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.RULES);
         }
 
+        if (hasParam("AdjustLandPlays")) {
+            layers.add(StaticAbilityLayer.RULES);
+        }
+
         if (layers.isEmpty()) {
             layers.add(StaticAbilityLayer.RULES);
         }

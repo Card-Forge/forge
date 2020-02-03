@@ -242,6 +242,9 @@ public class StaticEffect {
             p.setUnlimitedHandSize(false);
             p.setMaxHandSize(p.getStartingHandSize());
             p.removeChangedKeywords(getTimestamp());
+
+            p.removeMaxLandPlays(getTimestamp());
+            p.removeMaxLandPlaysInfinite(getTimestamp());
         }
 
         // modify the affected card

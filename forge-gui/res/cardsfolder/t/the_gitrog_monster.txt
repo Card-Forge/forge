@@ -4,7 +4,7 @@ Types:Legendary Creature Frog Horror
 PT:6/6
 K:Deathtouch
 K:UpkeepCost:Sac<1/Land>
-S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns. 
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns. 
 T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Graveyard

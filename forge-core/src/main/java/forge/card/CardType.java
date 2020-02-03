@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,10 +36,8 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-import forge.util.EnumUtil;
 import forge.util.Settable;
 
 /**
@@ -47,7 +46,6 @@ import forge.util.Settable;
  * </p>
  *
  * @author Forge
- * @version $Id: java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
@@ -71,7 +69,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Vanguard(false);
 
         public final boolean isPermanent;
-        private static final ImmutableList<String> allCoreTypeNames = EnumUtil.getNames(CoreType.class);
+        private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
+        private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
 
         CoreType(final boolean permanent) {
             isPermanent = permanent;
@@ -86,19 +85,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Ongoing,
         World;
 
-        private static final ImmutableList<String> allSuperTypeNames = EnumUtil.getNames(Supertype.class);
-    }
-
-    // This will be useful for faster parses
-    private static Map<String, CoreType> stringToCoreType = Maps.newHashMap();
-    private static Map<String, Supertype> stringToSupertype = Maps.newHashMap();
-    static {
-        for (final Supertype st : Supertype.values()) {
-            stringToSupertype.put(st.name(), st);
-        }
-        for (final CoreType ct : CoreType.values()) {
-            stringToCoreType.put(ct.name(), ct);
-        }
+        private static Map<String, Supertype> stringToSupertype = EnumUtils.getEnumMap(Supertype.class);
+        private static final Set<String> allSuperTypeNames = stringToSupertype.keySet();
     }
 
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
@@ -120,12 +108,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public boolean add(final String t) {
         boolean changed;
-        final CoreType ct = stringToCoreType.get(t);
+        final CoreType ct = EnumUtils.getEnum(CoreType.class, t);
         if (ct != null) {
             changed = coreTypes.add(ct);
         }
         else {
-            final Supertype st = stringToSupertype.get(t);
+            final Supertype st = EnumUtils.getEnum(Supertype.class, t);
             if (st != null) {
                 changed = supertypes.add(st);
             }
@@ -183,20 +171,28 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         subtypes.clear();
         calculatedType = null;
     }
-    
+
     public boolean remove(final Supertype st) {
         return supertypes.remove(st);
     }
 
     public boolean remove(final String str) {
         boolean changed = false;
-        if (CardType.isASupertype(str) && supertypes.remove(stringToSupertype.get(str))) {
+
+        // try to remove sub type first if able
+        if (subtypes.remove(str)) {
             changed = true;
-        } else if (CardType.isACardType(str) && coreTypes.remove(stringToCoreType.get(str))) {
-            changed = true;
-        } else if (subtypes.remove(str)) {
-            changed = true;
+        } else {
+            Supertype st = EnumUtils.getEnum(Supertype.class, str);
+            if (st != null && supertypes.remove(st)) {
+                changed = true;
+            }
+            CoreType ct = EnumUtils.getEnum(CoreType.class, str);
+            if (ct != null && coreTypes.remove(ct)) {
+                changed = true;
+            }
         }
+
         if (changed) {
             calculatedType = null;
         }
@@ -267,15 +263,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (hasSubtype(t)) {
             return true;
         }
-        final char firstChar = t.charAt(0);
-        if (Character.isLowerCase(firstChar)) {
-            t = Character.toUpperCase(firstChar) + t.substring(1); //ensure string is proper case for enum types
-        }
-        final CoreType type = stringToCoreType.get(t);
+
+        t = StringUtils.capitalize(t);
+        final CoreType type = EnumUtils.getEnum(CoreType.class, t);
         if (type != null) {
             return hasType(type);
         }
-        final Supertype supertype = stringToSupertype.get(t);
+        final Supertype supertype = EnumUtils.getEnum(Supertype.class, t);
         if (supertype != null) {
             return hasSupertype(supertype);
         }
@@ -307,18 +301,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return subtypes.contains(creatureType) || subtypes.contains("AllCreatureTypes");
     }
     private static String toMixedCase(final String s) {
-        if (s.equals("")) {
+        if (s.isEmpty()) {
             return s;
         }
         final StringBuilder sb = new StringBuilder();
         // to handle hyphenated Types
+        // TODO checkout WordUtils for this
         final String[] types = s.split("-");
         for (int i = 0; i < types.length; i++) {
             if (i != 0) {
                 sb.append("-");
             }
-            sb.append(types[i].substring(0, 1).toUpperCase());
-            sb.append(types[i].substring(1).toLowerCase());
+            sb.append(StringUtils.capitalize(types[i]));
         }
         return sb.toString();
     }
@@ -613,7 +607,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> ENCHANTMENT_TYPES = Sets.newHashSet();
         public static final Set<String> ARTIFACT_TYPES = Sets.newHashSet();
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
-        
+
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
         // plural -> singular
@@ -662,14 +656,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
         };
     }
-    
+
 
     ///////// Utility methods
     public static boolean isACardType(final String cardType) {
-        return getAllCardTypes().contains(cardType);
+        return EnumUtils.isValidEnum(CoreType.class, cardType);
     }
 
-    public static ImmutableList<String> getAllCardTypes() {
+    public static Set<String> getAllCardTypes() {
         return CoreType.allCoreTypeNames;
     }
 
@@ -714,7 +708,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isASupertype(final String cardType) {
-        return (Supertype.allSuperTypeNames.contains(cardType));
+        return EnumUtils.isValidEnum(Supertype.class, cardType);
     }
 
     public static boolean isASubType(final String cardType) {
@@ -740,7 +734,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public static boolean isABasicLandType(final String cardType) {
         return (Constant.BASIC_TYPES.contains(cardType));
     }
-    
+
     public static boolean isAnEnchantmentType(final String cardType) {
         return (Constant.ENCHANTMENT_TYPES.contains(cardType));
     }

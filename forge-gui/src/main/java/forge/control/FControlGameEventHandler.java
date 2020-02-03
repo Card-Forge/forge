@@ -377,11 +377,18 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventPlayerStatsChanged event) {
         final CardCollection cards = new CardCollection();
         for (final Player p : event.players) {
-            cards.addAll(p.getAllCards());
+            if (event.updateCards) {
+                cards.addAll(p.getAllCards());
+            }
             processPlayer(p, livesUpdate);
         }
 
         return processCards(cards, cardsRefreshDetails);
+    }
+
+    public Void visit(final GameEventLandPlayed event) {
+        processPlayer(event.player, livesUpdate);
+        return processCard(event.land, cardsRefreshDetails);
     }
 
     @Override

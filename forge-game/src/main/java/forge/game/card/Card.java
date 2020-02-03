@@ -1477,6 +1477,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateChosenType(this);
     }
 
+    public final boolean hasChosenType() {
+        return chosenType != null && !chosenType.isEmpty();
+    }
+
     public final String getChosenColor() {
         if (hasChosenColor()) {
             return chosenColors.get(0);
@@ -3084,7 +3088,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final void addChangedCardTypes(final String[] types, final String[] removeTypes,
+    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
@@ -3094,7 +3098,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 timestamp, true);
     }
 
-    public final void addChangedCardTypes(final String[] types, final String[] removeTypes,
+    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
@@ -3102,11 +3106,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         CardType addType = null;
         CardType removeType = null;
         if (types != null) {
-            addType = new CardType(Arrays.asList(types));
+            addType = new CardType(types);
         }
 
         if (removeTypes != null) {
-            removeType = new CardType(Arrays.asList(removeTypes));
+            removeType = new CardType(removeTypes);
         }
 
         addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
