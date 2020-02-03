@@ -59,6 +59,6 @@ public abstract class AbstractMulligan {
     }
 
     public void afterMulligan() {
-        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size()));
+        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size())));
     }
 }
