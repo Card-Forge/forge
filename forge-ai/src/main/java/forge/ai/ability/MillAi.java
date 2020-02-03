@@ -39,7 +39,7 @@ public class MillAi extends SpellAbilityAi {
             // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
             return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() >= 1;
         } else if (aiLogic.equals("Rebirth")) {
-            return ai.getLife() <= 19;
+            return ai.getLife() <= 8;
         }
         return true;
     }
