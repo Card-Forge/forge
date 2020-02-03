@@ -474,7 +474,7 @@ public class PlayerView extends GameEntityView {
         }
 
         details.add(Localizer.getInstance().getMessage("lblCardInHandHas", String.valueOf(getHandSize()), getMaxHandString()));
-        details.add(TextUtil.concatNoSpace("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
+        details.add(Localizer.getInstance().getMessage("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
         details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
         details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
 
