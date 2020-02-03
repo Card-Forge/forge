@@ -137,6 +137,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private PlayerCollection attackedOpponentsThisTurn = new PlayerCollection();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
+    private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
+    private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
 
     private CardCollection currentPlanes = new CardCollection();
     private Set<String> prowl = Sets.newHashSet();
@@ -175,6 +177,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         view = new PlayerView(id0, game.getTracker());
         view.updateMaxHandSize(this);
         view.updateKeywords(this);
+        view.updateMaxLandPlay(this);
         setName(chooseName(name0));
         if (id0 >= 0) {
             game.addPlayer(id, this);
@@ -1030,25 +1033,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         // if the key already exists - merge entries
         KeywordsChange cks = null;
         if (changedKeywords.containsKey(timestamp)) {
-            getKeywordCard().removeChangedCardTraits(timestamp);
+            if (keywordEffect != null) {
+                getKeywordCard().removeChangedCardTraits(timestamp);
+            }
 
             cks = changedKeywords.get(timestamp).merge(addKeywords, removeKeywords, false, false);
         } else {
             cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
         }
         cks.addKeywordsToPlayer(this);
-        getKeywordCard().addChangedCardTraits(cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp);
+        if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
+            getKeywordCard().addChangedCardTraits(cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp);
+        }
         changedKeywords.put(timestamp, cks);
         updateKeywords();
-        game.fireEvent(new GameEventPlayerStatsChanged(this));
+        game.fireEvent(new GameEventPlayerStatsChanged(this, true));
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp) {
         KeywordsChange change = changedKeywords.remove(timestamp);
         if (change != null) {
-            getKeywordCard().removeChangedCardTraits(timestamp);
+            if (keywordEffect != null) {
+                getKeywordCard().removeChangedCardTraits(timestamp);
+            }
             updateKeywords();
-            game.fireEvent(new GameEventPlayerStatsChanged(this));
+            game.fireEvent(new GameEventPlayerStatsChanged(this, true));
         }
         return change;
     }
@@ -1111,7 +1120,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (keywordRemoved) {
             updateKeywords();
-            game.fireEvent(new GameEventPlayerStatsChanged(this));
+            game.fireEvent(new GameEventPlayerStatsChanged(this, true));
         }
     }
 
@@ -1744,19 +1753,55 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // **** Check for land play limit per turn ****
         // Dev Mode
-        if (getController().canPlayUnlimitedLands() || hasKeyword("You may play any number of additional lands on each of your turns.")) {
+        if (getMaxLandPlaysInfinite()) {
             return true;
         }
 
         // check for adjusted max lands play per turn
+        return getLandsPlayedThisTurn() < getMaxLandPlays();
+    }
+
+    public final int getMaxLandPlays() {
         int adjMax = 1;
-        for (String keyword : keywords) {
-            if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                adjMax += Integer.valueOf(k[1]);
-            }
+        for (Integer i : adjustLandPlays.values()) {
+            adjMax += i;
         }
-        return landsPlayedThisTurn < adjMax;
+        return adjMax;
+    }
+
+    public final void addMaxLandPlays(long timestamp, int value) {
+        adjustLandPlays.put(timestamp, value);
+        getView().updateMaxLandPlay(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+    public final boolean removeMaxLandPlays(long timestamp) {
+        boolean changed = adjustLandPlays.remove(timestamp) != null;
+        if (changed) {
+            getView().updateMaxLandPlay(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+        return changed;
+    }
+
+    public final void addMaxLandPlaysInfinite(long timestamp) {
+        adjustLandPlaysInfinite.add(timestamp);
+        getView().updateUnlimitedLandPlay(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+    public final boolean removeMaxLandPlaysInfinite(long timestamp) {
+        boolean changed = adjustLandPlaysInfinite.remove(timestamp);
+        if (changed) {
+            getView().updateUnlimitedLandPlay(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+        return changed;
+    }
+
+    public final boolean getMaxLandPlaysInfinite() {
+        if (getController().canPlayUnlimitedLands()) {
+            return true;
+        }
+        return !adjustLandPlaysInfinite.isEmpty();
     }
 
     public final ManaPool getManaPool() {
@@ -2119,13 +2164,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
         achievementTracker.landsPlayed++;
+        view.updateNumLandThisTurn(this);
     }
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
+        view.updateNumLandThisTurn(this);
     }
     public final void setLandsPlayedThisTurn(int num) {
         // This method should only be used directly when setting up the game state.
         landsPlayedThisTurn = num;
+
+        view.updateNumLandThisTurn(this);
     }
     public final void setLandsPlayedLastTurn(int num) {
         landsPlayedLastTurn = num;

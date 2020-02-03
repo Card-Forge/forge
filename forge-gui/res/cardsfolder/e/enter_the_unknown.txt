@@ -3,7 +3,7 @@ ManaCost:G
 Types:Sorcery
 A:SP$ Explore | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ TrigEffect | SpellDescription$ Target creature you control explores.
 SVar:TrigEffect:DB$ Effect | Name$ Explore Effect | StaticAbilities$ Exploration | AILogic$ Always | SpellDescription$ You may play an additional land this turn.
-SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 SVar:NeedsToPlayVar:ZZ GE1
 SVar:ZZ:Count$ValidHand Land.YouOwn
 DeckHas:Ability$Counters
