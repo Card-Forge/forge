@@ -27,6 +27,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -68,7 +70,7 @@ public class CardListChooser extends FDialog {
         
         this.addWindowFocusListener(new CardListFocuser());
 
-        FButton btnOK = new FButton("Select Card");
+        FButton btnOK = new FButton(Localizer.getInstance().getMessage("lblSelectCard"));
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -88,7 +90,11 @@ public class CardListChooser extends FDialog {
 
             @Override
             public void windowClosing(final WindowEvent e) {
-                if (FOptionPane.showConfirmDialog("Are you sure you want to pick '" + jList.getSelectedValue().getName() + "'?", "Select this card?", false)) {
+                //CardTranslation.getTranslatedName
+                if (FOptionPane.showConfirmDialog(
+                        Localizer.getInstance().getMessage("lblAreYouSureWantPickCard", CardTranslation.getTranslatedName(jList.getSelectedValue().getName())),
+                        Localizer.getInstance().getMessage("lblSelectThisCardConfirm"), false)
+                    ) {
                     dispose();
                 }
             }

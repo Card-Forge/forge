@@ -973,7 +973,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     @Override
     public String getActivateAction(int index) {
         if (contextMenuBuilder != null) {
-            return "select card";
+            return Localizer.getInstance().getMessage("lblSelectCard");
         }
         return null;
     }

@@ -36,6 +36,8 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.TextUtil;
 import forge.util.Visitor;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -235,7 +237,7 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose a replacement effect to apply first.", possibleReplacers);
+        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
 
         possibleReplacers.remove(chosenRE);
 
@@ -257,9 +259,9 @@ public class ReplacementHandler {
         chosenRE.setOtherChoices(null);
         String message = chosenRE.toString();
         if ( !StringUtils.isEmpty(message))
-        	if (chosenRE.getHostCard() != null) {
-        		message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
-        	}
+            if (chosenRE.getHostCard() != null) {
+                message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
+            }
             game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
         return res;
     }
@@ -331,10 +333,10 @@ public class ReplacementHandler {
             }
 
             Card cardForUi = host.getCardForUi();
-            String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", cardForUi.getName());
+            String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", CardTranslation.getTranslatedName(cardForUi.getName()));
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get(AbilityKey.Card).toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
-                : TextUtil.concatWithSpace("Apply replacement effect of", TextUtil.addSuffix(cardForUi.toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc));
+                ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), runParams.get(AbilityKey.Card).toString(), effectDesc)
+                : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), effectDesc);
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;

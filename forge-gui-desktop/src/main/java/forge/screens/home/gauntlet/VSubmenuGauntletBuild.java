@@ -61,7 +61,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .text(localizer.getMessage("lblDecklist"))
         .fontSize(12).build();
 
-    private final JLabel lblSave = new FLabel.Builder().text(localizer.getMessage("lblSave"))
+    private final JLabel lblSave = new FLabel.Builder().text(localizer.getMessage("lblChangesNotSave"))
             .build();
 
     private final FLabel btnUp = new FLabel.Builder()

@@ -29,6 +29,7 @@ import forge.GuiBase;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
@@ -42,11 +43,11 @@ import io.sentry.event.BreadcrumbBuilder;
 public class BugReporter {
     private static final int STACK_OVERFLOW_MAX_MESSAGE_LEN = 16 * 1024;
 
-    public static final String REPORT = "Report";
-    public static final String SAVE = "Save";
-    public static final String DISCARD = "Discard";
-    public static final String EXIT = "Exit";
-    public static final String SENTRY = "Submit bug reports automatically";
+    public static final String REPORT = Localizer.getInstance().getMessage("lblReport");
+    public static final String SAVE = Localizer.getInstance().getMessage("lblSave");
+    public static final String DISCARD = Localizer.getInstance().getMessage("lblDiscardError");
+    public static final String EXIT = Localizer.getInstance().getMessage("lblExit");
+    public static final String SENTRY = Localizer.getInstance().getMessage("lblAutoSubmitBugReports");
 
     private static Throwable exception;
     private static String message;
@@ -93,7 +94,7 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog("Report a crash", sb.toString(), true);
+            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("lblReportCrash"), sb.toString(), true);
         }
     }
 
@@ -128,7 +129,7 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog("Report a bug", message, false);
+            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("btnReportBug"), message, false);
         }
     }
 
@@ -148,8 +149,8 @@ public class BugReporter {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
             bw.write(text);
         } catch (final IOException ex) {
-            SOptionPane.showMessageDialog("There was an error during saving. Sorry!\n" + ex,
-                    "Error saving file", SOptionPane.ERROR_ICON);
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblThereErrorWasDuringSaving", ex),
+            Localizer.getInstance().getMessage("lblErrorSavingFile"), SOptionPane.ERROR_ICON);
         }
     }
 

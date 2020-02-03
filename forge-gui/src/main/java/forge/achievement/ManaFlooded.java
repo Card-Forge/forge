@@ -5,14 +5,17 @@ import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class ManaFlooded extends Achievement {
     public ManaFlooded(int bronze0, int silver0, int gold0, int mythic0) {
-        super("ManaFlooded", "Mana Flooded", "Win a game with at least", 0,
-            String.format("%d lands on the battlefield", bronze0), bronze0,
-            String.format("%d lands on the battlefield", silver0), silver0,
-            String.format("%d lands on the battlefield", gold0), gold0,
-            String.format("%d lands on the battlefield", mythic0), mythic0);
+        super("ManaFlooded", Localizer.getInstance().getMessage("lblManaFlooded"),
+            Localizer.getInstance().getMessage("lblWinGameWithLeast"), 0,
+            Localizer.getInstance().getMessage("lblNLandOnTheBattlefield", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblNLandOnTheBattlefield", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblNLandOnTheBattlefield", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblNLandOnTheBattlefield", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -34,6 +37,6 @@ public class ManaFlooded extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Land";
+        return Localizer.getInstance().getMessage("lblLand");
     }
 }

@@ -272,7 +272,7 @@ public class VStack extends FDropDown {
                         protected void buildMenu() {
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gui.shouldAutoYield(key);
-                            addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
+                            addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"), autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
@@ -285,7 +285,7 @@ public class VStack extends FDropDown {
                             }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem("Always Yes",
+                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"),
                                         gui.shouldAlwaysAcceptTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -302,7 +302,7 @@ public class VStack extends FDropDown {
                                         }
                                     }
                                 }));
-                                addItem(new FCheckBoxMenuItem("Always No",
+                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"),
                                         gui.shouldAlwaysDeclineTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -320,7 +320,7 @@ public class VStack extends FDropDown {
                                     }
                                 }));
                             }
-                            addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
+                            addItem(new FMenuItem(Localizer.getInstance().getMessage("lblZoomOrDetails"), new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     CardZoom.show(stackInstance.getSourceCard());

@@ -62,6 +62,9 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                             prompt = Localizer.getInstance().getMessage("lblChooseSpecifiedRangeColors", Lang.getNumeral(cntMin), Lang.getNumeral(cntMax));
                         }
                     }
+                    else {
+                        prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
+                    }
                 }
                 chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
                 if (chosenColors.isEmpty()) {

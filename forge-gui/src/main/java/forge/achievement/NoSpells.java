@@ -6,10 +6,14 @@ import forge.achievement.ChallengeAchievements.DeckChallengeAchievement;
 import forge.card.CardType;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 
 public class NoSpells extends DeckChallengeAchievement {
     public NoSpells() {
-        super("NoSpells", "No Spells", "with only creatures and lands", "I let my army do the talking.");
+        super("NoSpells", Localizer.getInstance().getMessage("lblNoSpells"),
+            Localizer.getInstance().getMessage("lblWithOnlyCreaturesAndLands"),
+            Localizer.getInstance().getMessage("lblILetMyArmyTalking")
+        );
     }
 
     @Override

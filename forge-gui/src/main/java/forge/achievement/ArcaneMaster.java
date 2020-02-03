@@ -3,14 +3,17 @@ package forge.achievement;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class ArcaneMaster extends Achievement {
     public ArcaneMaster() {
-        super("ArcaneMaster", "Arcane Master", "Win a game without casting", Integer.MAX_VALUE,
-            "more than 3 spells", 3,
-            "more than 2 spells", 2,
-            "more than 1 spell", 1,
-            "any spells", 0);
+        super("ArcaneMaster", Localizer.getInstance().getMessage("lblArcaneMaster"),
+            Localizer.getInstance().getMessage("lblWinGameWithOutCasting"), Integer.MAX_VALUE,
+            Localizer.getInstance().getMessage("lblMore3Spells"), 3,
+            Localizer.getInstance().getMessage("lblMore2Spells"), 2,
+            Localizer.getInstance().getMessage("lblMore1Spell"), 1,
+            Localizer.getInstance().getMessage("lblAnySpells"), 0
+        );
     }
 
     @Override
@@ -26,6 +29,6 @@ public class ArcaneMaster extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Spell";
+        return  Localizer.getInstance().getMessage("lblSpell");
     }
 }

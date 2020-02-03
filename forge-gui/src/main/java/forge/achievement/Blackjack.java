@@ -4,16 +4,19 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class Blackjack extends Achievement {
     private static final int THRESHOLD = 21;
 
     public Blackjack(int silver0, int gold0, int mythic0) {
-        super("Blackjack", "Blackjack", "Win a game from your commander dealing", 0,
-            String.format("%d combat damage", THRESHOLD), THRESHOLD,
-            String.format("%d combat damage", silver0), silver0,
-            String.format("%d combat damage", gold0), gold0,
-            String.format("%d combat damage", mythic0), mythic0);
+        super("Blackjack", Localizer.getInstance().getMessage("lblBlackjack"),
+            Localizer.getInstance().getMessage("lblWinGameFromYourCommanderDealing"), 0,
+            Localizer.getInstance().getMessage("lblNCombatDamage", String.valueOf(THRESHOLD)), THRESHOLD,
+            Localizer.getInstance().getMessage("lblNCombatDamage", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblNCombatDamage", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblNCombatDamage", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -40,7 +43,7 @@ public class Blackjack extends Achievement {
 
     @Override
     public String getNoun() {
-        return "Damage";
+        return Localizer.getInstance().getMessage("lblDamage");
     }
 
     @Override
