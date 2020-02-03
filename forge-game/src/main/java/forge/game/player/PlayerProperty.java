@@ -38,6 +38,10 @@ public class PlayerProperty {
                     return false;
                 }
             }
+        } else if (property.startsWith("PlayerUID_")) {
+            if (player.getId() != Integer.parseInt(property.split("PlayerUID_")[1])) {
+                return false;
+            }
         } else if (property.equals("YourTeam")) {
             if (!player.sameTeam(sourceController)) {
                 return false;

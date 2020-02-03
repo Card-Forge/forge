@@ -287,4 +287,15 @@ public enum Keyword {
 
         return UNDEFINED;
     }
+
+    public static Set<Keyword> setValueOf(String value) {
+        Set<Keyword> result = EnumSet.noneOf(Keyword.class);
+        for (String s : value.split(" & ")) {
+            Keyword k = smartValueOf(s);
+            if (!UNDEFINED.equals(k)) {
+                result.add(k);
+            }
+        }
+        return result;
+    }
 }

@@ -12,7 +12,7 @@ import forge.game.card.Card;
 
 public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
-    
+
     private boolean hidden = false;
 
     private transient KeywordCollectionView view;
@@ -64,7 +64,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
             return true;
         }
         return false;
-        
+
     }
 
     public void addAll(Iterable<String> keywords) {
@@ -82,10 +82,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
         return result;
     }
-    
+
     public boolean remove(String keyword) {
         Iterator<KeywordInterface> it = map.values().iterator();
-        
+
         boolean result = false;
         while (it.hasNext()) {
             KeywordInterface k = it.next();
@@ -94,12 +94,16 @@ public class KeywordCollection implements Iterable<String>, Serializable {
                 result = true;
             }
         }
-        
+
         return result;
     }
 
     public boolean remove(KeywordInterface keyword) {
         return map.remove(keyword.getKeyword(), keyword);
+    }
+
+    public boolean removeAll(Keyword kenum) {
+        return !map.removeAll(kenum).isEmpty();
     }
 
     public boolean removeAll(Iterable<String> keywords) {
@@ -144,7 +148,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
         return amount;
     }
-    
+
     public Collection<KeywordInterface> getValues() {
         return map.values();
     }
@@ -163,7 +167,6 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     public Iterator<String> iterator() {
         return new Iterator<String>() {
             private final Iterator<KeywordInterface> iterator = map.values().iterator();
-            
 
             @Override
             public boolean hasNext() {

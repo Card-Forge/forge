@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Enchantment Creature Human Wizard
 PT:3/2
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
-S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Flying | AddHiddenKeyword$ CARDNAME can't have or gain Flying | Description$ Creatures your opponents control lose flying and can't have or gain flying.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Flying | CantHaveKeyword$ Flying | Description$ Creatures your opponents control lose flying and can't have or gain flying.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archetype_of_imagination.jpg
 Oracle:Creatures you control have flying.\nCreatures your opponents control lose flying and can't have or gain flying.

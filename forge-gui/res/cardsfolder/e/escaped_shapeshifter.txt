@@ -2,21 +2,5 @@ Name:Escaped Shapeshifter
 ManaCost:3 U U
 Types:Creature Shapeshifter
 PT:3/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ FLYING | SVarCompare$ GE1 | Description$ As long as an opponent controls a creature with flying not named CARDNAME, CARDNAME has flying. The same is true for first strike, trample, and protection from any color.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | CheckSVar$ FIRSTSTRIKE | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ TRAMPLE | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from white | CheckSVar$ WHITE | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from blue | CheckSVar$ BLUE | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from black | CheckSVar$ BLACK | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from red | CheckSVar$ RED | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from green | CheckSVar$ GREEN | SVarCompare$ GE1
-SVar:FLYING:Count$Valid Creature.withFlying+notnamed Escaped Shapeshifter+OppCtrl
-SVar:FIRSTSTRIKE:Count$Valid Creature.withFirst Strike+notnamed Escaped Shapeshifter+OppCtrl
-SVar:TRAMPLE:Count$Valid Creature.withTrample+notnamed Escaped Shapeshifter+OppCtrl
-SVar:WHITE:Count$Valid Creature.withProtection from white+notnamed Escaped Shapeshifter+OppCtrl
-SVar:BLUE:Count$Valid Creature.withProtection from blue+notnamed Escaped Shapeshifter+OppCtrl
-SVar:BLACK:Count$Valid Creature.withProtection from black+notnamed Escaped Shapeshifter+OppCtrl
-SVar:RED:Count$Valid Creature.withProtection from red+notnamed Escaped Shapeshifter+OppCtrl
-SVar:GREEN:Count$Valid Creature.withProtection from green+notnamed Escaped Shapeshifter+OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/escaped_shapeshifter.jpg
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike & Trample & ProtectionColor | SharedKeywordsZone$ Battlefield | SharedRestrictions$ Creature.notnamed Escaped Shapeshifter+OppCtrl | Description$ As long as an opponent controls a creature with flying not named Escaped Shapeshifter, CARDNAME has flying. The same is true for first strike, trample, and protection from any color.
 Oracle:As long as an opponent controls a creature with flying not named Escaped Shapeshifter, Escaped Shapeshifter has flying. The same is true for first strike, trample, and protection from any color.

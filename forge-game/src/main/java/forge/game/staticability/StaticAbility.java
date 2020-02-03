@@ -165,7 +165,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("AddKeyword") || hasParam("AddAbility")
                 || hasParam("AddTrigger") || hasParam("RemoveTriggers")
                 || hasParam("RemoveKeyword") || hasParam("AddReplacementEffects")
-                || hasParam("AddStaticAbility") || hasParam("AddSVar")) {
+                || hasParam("AddStaticAbility") || hasParam("AddSVar")
+                || hasParam("CantHaveKeyword")) {
             layers.add(StaticAbilityLayer.ABILITIES);
         }
 
@@ -181,10 +182,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("AddHiddenKeyword")) {
-            // special rule for can't have or gain
-            if (getParam("AddHiddenKeyword").contains("can't have or gain")) {
-                layers.add(StaticAbilityLayer.ABILITIES);
-            }
             layers.add(StaticAbilityLayer.RULES);
         }
 
