@@ -910,7 +910,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         // fireEvent to update the Details
-        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
+        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate, false));
 
         return result;
     }

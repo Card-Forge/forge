@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #01 (as Player B)
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/01/144.-THB1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that all blocking scenarios must be accounted for. Stonecoil Serpent is owned by your opponent and entered the battlefield for you using Unholy Indenture. 'Blue' was chosen for Diamond Knight. Assume that cards starting in each player's library are not known, and therefore will not be relevant to the puzzle if drawn.
+[state]
+humanlife=11
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Rise to Glory;Inspiring Unicorn;All That Glitters;Severed Strands
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humangraveyard=Meteor Golem;Gauntlets of Light;Gray Merchant of Asphodel;Unholy Indenture
+humanbattlefield=Elspeth, Sun's Nemesis|Counters:LOYALTY=2;Stonecoil Serpent|Owner:AI|Counters:P1P1=1;Crashing Drawbridge;Ob Nixilis, the Hate-Twisted|Counters:LOYALTY=4;Nyx Lotus|NoETBTrigs;Plains;Plains;Plains;Swamp;Swamp;Swamp
+aihand=Mystic Sanctuary;Connive // Concoct
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aigraveyard=Sweet Oblivion;Drown in the Loch;Rankle, Master of Pranks;Pharika's Spawn
+aibattlefield=Ashiok, Sculptor of Fears|Counters:LOYALTY=5;Devourer of Memory;Vantress Gargoyle;Diamond Knight|ChosenColor:blue|NoETBTrigs;Swamp;Swamp;Swamp;Island;Island;Island;Island

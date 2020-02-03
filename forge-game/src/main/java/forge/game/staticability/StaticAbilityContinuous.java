@@ -17,10 +17,12 @@
  */
 package forge.game.staticability;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -117,8 +119,8 @@ public final class StaticAbilityContinuous {
         String[] addAbilities = null;
         String[] addReplacements = null;
         String[] addSVars = null;
-        String[] addTypes = null;
-        String[] removeTypes = null;
+        List<String> addTypes = null;
+        List<String> removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
@@ -266,24 +268,44 @@ public final class StaticAbilityContinuous {
         }
 
         if (layer == StaticAbilityLayer.TYPE && params.containsKey("AddType")) {
-            addTypes = params.get("AddType").split(" & ");
-            if (addTypes[0].equals("ChosenType")) {
-                final String chosenType = hostCard.getChosenType();
-                addTypes[0] = chosenType;
-            } else if (addTypes[0].equals("ImprintedCreatureType")) {
-                if (hostCard.hasImprintedCard()) {
-                    final Set<String> imprinted = hostCard.getImprintedCards().getFirst().getType().getCreatureTypes();
-                    addTypes = imprinted.toArray(new String[imprinted.size()]);
+
+            addTypes = Lists.newArrayList(Arrays.asList(params.get("AddType").split(" & ")));
+            List<String> newTypes = Lists.newArrayList();
+
+            Iterables.removeIf(addTypes, new Predicate<String>() {
+                @Override
+                public boolean apply(String input) {
+                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                        return true;
+                    }
+                    if (input.equals("ImprintedCreatureType")) {
+                        if (hostCard.hasImprintedCard()) {
+                            newTypes.addAll(hostCard.getImprintedCards().getLast().getType().getCreatureTypes());
+                        }
+                        return true;
+                    }
+                    if (input.equals("AllBasicLandType")) {
+                        newTypes.addAll(CardType.getBasicTypes());
+                        return true;
+                    }
+                    return false;
                 }
-            }
+            });
+            addTypes.addAll(newTypes);
         }
 
         if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {
-            removeTypes = params.get("RemoveType").split(" & ");
-            if (removeTypes[0].equals("ChosenType")) {
-                final String chosenType = hostCard.getChosenType();
-                removeTypes[0] = chosenType;
-            }
+            removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
+
+            Iterables.removeIf(removeTypes, new Predicate<String>() {
+                @Override
+                public boolean apply(String input) {
+                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         if (layer == StaticAbilityLayer.TYPE) {
@@ -416,6 +438,16 @@ public final class StaticAbilityContinuous {
                     } else {
                         int max = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                         p.setMaxHandSize(max);
+                    }
+                }
+
+                if (params.containsKey("AdjustLandPlays")) {
+                    String mhs = params.get("AdjustLandPlays");
+                    if (mhs.equals("Unlimited")) {
+                        p.addMaxLandPlaysInfinite(se.getTimestamp());
+                    } else {
+                        int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                        p.addMaxLandPlays(se.getTimestamp(), add);
                     }
                 }
 

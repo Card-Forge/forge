@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Legendary Enchantment Creature God
 PT:6/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to red is less than 5, CARDNAME isn't a creature. (Each {R} in the mana costs of permanents you control counts towards your devotion to red.)
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to red is less than 5, CARDNAME isn't a creature. (Each {R} in the mana costs of permanents you control counts towards your devotion to red.)
 SVar:X:Count$Devotion.Red
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2

@@ -236,6 +236,31 @@ public class PlayerView extends GameEntityView {
         return hasUnlimitedHandSize() ? Localizer.getInstance().getMessage("lblUnlimited") : String.valueOf(getMaxHandSize());
     }
 
+    public int getMaxLandPlay() {
+        return get(TrackableProperty.MaxLandPlay);
+    }
+    void updateMaxLandPlay(Player p) {
+        set(TrackableProperty.MaxLandPlay, p.getMaxLandPlays());
+    }
+
+    public boolean hasUnlimitedLandPlay() {
+        return get(TrackableProperty.HasUnlimitedLandPlay);
+    }
+    void updateUnlimitedLandPlay(Player p) {
+        set(TrackableProperty.HasUnlimitedLandPlay, p.getMaxLandPlaysInfinite());
+    }
+
+    public String getMaxLandString() {
+        return hasUnlimitedLandPlay() ? "unlimited" : String.valueOf(getMaxLandPlay());
+    }
+
+    public int getNumLandThisTurn() {
+        return get(TrackableProperty.NumLandThisTurn);
+    }
+    void updateNumLandThisTurn(Player p) {
+        set(TrackableProperty.NumLandThisTurn, p.getLandsPlayedThisTurn());
+    }
+
     public int getNumDrawnThisTurn() {
         return get(TrackableProperty.NumDrawnThisTurn);
     }
@@ -449,6 +474,7 @@ public class PlayerView extends GameEntityView {
         }
 
         details.add(Localizer.getInstance().getMessage("lblCardInHandHas", String.valueOf(getHandSize()), getMaxHandString()));
+        details.add(TextUtil.concatNoSpace("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
         details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
         details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
 
