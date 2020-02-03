@@ -20,7 +20,7 @@ package forge.game.ability.effects;
 import forge.card.CardType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import java.util.List;
 
@@ -101,6 +101,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         c.addChangedCardKeywords(keywords, removeKeywords,
                 sa.hasParam("RemoveAllAbilities"), sa.hasParam("RemoveIntrinsicAbilities"), timestamp);
 
+        if (sa.hasParam("CantHaveKeyword")) {
+            c.addCantHaveKeyword(timestamp, Keyword.setValueOf(sa.getParam("CantHaveKeyword")));
+        }
+
         for (final String k : hiddenKeywords) {
             c.addHiddenExtrinsicKeyword(k);
         }
@@ -137,6 +141,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         c.removeColor(timestamp);
 
         c.removeChangedCardTraits(timestamp);
+
+        c.removeCantHaveKeyword(timestamp);
 
         for (final String k : hiddenKeywords) {
             c.removeHiddenExtrinsicKeyword(k);

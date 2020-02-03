@@ -127,6 +127,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
+    private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().enumSetValues(Keyword.class).build();
+
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
 
@@ -232,8 +234,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String originalText = "", text = "";
     private String chosenType = "";
     private List<String> chosenColors;
-    private String namedCard = "";
-    private int chosenNumber;
+    private String chosenName = "";
+    private Integer chosenNumber;
     private Player chosenPlayer;
     private Direction chosenDirection = null;
     private String chosenMode = "";
@@ -1445,6 +1447,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         return currentState.getManaCost();
     }
 
+    public final boolean hasChosenPlayer() {
+        return chosenPlayer != null;
+    }
     public final Player getChosenPlayer() {
         return chosenPlayer;
     }
@@ -1454,7 +1459,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateChosenPlayer(this);
     }
 
-    public final int getChosenNumber() {
+    public final boolean hasChosenNumber() {
+        return chosenNumber != null;
+    }
+
+    public final Integer getChosenNumber() {
         return chosenNumber;
     }
     public final void setChosenNumber(final int i) {
@@ -1472,6 +1481,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final String getChosenType() {
         return chosenType;
     }
+
     public final void setChosenType(final String s) {
         chosenType = s;
         view.updateChosenType(this);
@@ -1537,13 +1547,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateChosenMode(this);
     }
 
+    public boolean hasChosenName() {
+        return chosenName != null;
+    }
+
+    public String getChosenName() {
+        return chosenName;
+    }
+    public final void setChosenName(final String s) {
+        chosenName = s;
+        view.updateNamedCard(this);
+    }
+
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
-        return namedCard;
+        return getChosenName();
     }
     public final void setNamedCard(final String s) {
-        namedCard = s;
-        view.updateNamedCard(this);
+        setChosenName(s);
     }
 
     public final boolean getDrawnThisTurn() {
@@ -3677,7 +3698,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp, final boolean updateView) {
-        keywords.removeAll(getCantHaveOrGainKeyword());
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
@@ -3706,7 +3726,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             final long timestamp, final boolean updateView) {
         KeywordCollection list = new KeywordCollection();
         list.insertAll(keywords);
-        list.removeAll(getCantHaveOrGainKeyword());
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
@@ -3725,22 +3744,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (updateView) {
             updateKeywords();
         }
-    }
-
-    public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
-            final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp) {
-        List<String> keywordsList = Lists.newArrayList();
-        List<String> removeKeywordsList = Lists.newArrayList();
-        if (keywords != null) {
-            keywordsList = Lists.newArrayList(Arrays.asList(keywords));
-        }
-
-        if (removeKeywords != null) {
-            removeKeywordsList = Lists.newArrayList(Arrays.asList(removeKeywords));
-        }
-
-        addChangedCardKeywords(keywordsList, removeKeywordsList,
-                removeAllKeywords, removeIntrinsicKeywords, timestamp);
     }
 
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
@@ -3817,21 +3820,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        // remove Can't have keywords
+        for (Keyword k : getCantHaveKeyword()) {
+            keywords.removeAll(k);
+        }
+
         state.setCachedKeywords(keywords);
     }
     private void visitUnhiddenKeywords(CardState state, Visitor<KeywordInterface> visitor) {
-        if (changedCardKeywords.isEmpty()) {
-            // Fast path that doesn't involve temp allocations.
-            for (KeywordInterface kw : state.getIntrinsicKeywords()) {
-                if (!visitor.visit(kw)) {
-                    return;
-                }
-            }
-        } else {
-            for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-                if (!visitor.visit(kw)) {
-                    return;
-                }
+        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
+            if (!visitor.visit(kw)) {
+                return;
             }
         }
     }
@@ -4035,14 +4034,32 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final List<String> getCantHaveOrGainKeyword() {
-        final List<String> cantGain = Lists.newArrayList();
-        for (String s : hiddenExtrinsicKeyword) {
-            if (s.contains("can't have or gain")) {
-                cantGain.add(s.split("can't have or gain ")[1]);
-            }
+    public void addCantHaveKeyword(Keyword keyword, Long timestamp) {
+        cantHaveKeywords.put(timestamp, keyword);
+        getView().updateCantHaveKeyword(this);
+    }
+
+    public void addCantHaveKeyword(Long timestamp, Iterable<Keyword> keywords) {
+        cantHaveKeywords.putAll(timestamp, keywords);
+        getView().updateCantHaveKeyword(this);
+    }
+
+    public boolean removeCantHaveKeyword(Long timestamp) {
+        return removeCantHaveKeyword(timestamp, true);
+    }
+    public boolean removeCantHaveKeyword(Long timestamp, boolean updateView) {
+        boolean change = !cantHaveKeywords.removeAll(timestamp).isEmpty();
+        if (change && updateView) {
+            getView().updateCantHaveKeyword(this);
+            updateKeywords();
+            if (isToken())
+                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
-        return cantGain;
+        return change;
+    }
+
+    public Collection<Keyword> getCantHaveKeyword() {
+        return cantHaveKeywords.values();
     }
 
     public final void setStaticAbilities(final List<StaticAbility> a) {
@@ -5403,32 +5420,31 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] kws = kw.split(":");
                 String characteristic = kws[1];
 
-                // if colorlessDamage then it does only check damage color..
-                if (colorlessDamage) {
-                    if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
-                        || characteristic.endsWith("Black") || characteristic.endsWith("Red")
-                        || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                        || characteristic.endsWith("ChosenColor")) {
-                        characteristic += "Source";
+                if (characteristic.startsWith("Player")) {
+                    // TODO need to handle that better in CardProperty
+                    if (source.getController().isValid(characteristic.split(","), getController(), this, null)) {
+                        return true;
                     }
-                }
+                } else {
+                    // if colorlessDamage then it does only check damage color..
+                    if (colorlessDamage) {
+                        if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
+                            || characteristic.endsWith("Black") || characteristic.endsWith("Red")
+                            || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
+                            || characteristic.endsWith("ChosenColor")) {
+                            characteristic += "Source";
+                        }
+                    }
 
-                final String[] characteristics = characteristic.split(",");
-                final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
-                if (source.isValid(characteristics, getController(), this, null)
-                        && (!checkSBA || exception == null || !source.isValid(exception, getController(), this, null))) {
-                    return true;
+                    final String[] characteristics = characteristic.split(",");
+                    final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
+                    if (source.isValid(characteristics, getController(), this, null)
+                            && (!checkSBA || exception == null || !source.isValid(exception, getController(), this, null))) {
+                        return true;
+                    }
                 }
             } else if (kw.equals("Protection from colored spells")) {
                 if (source.isSpell() && !source.isColorless()) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from the chosen player")) {
-                if (source.getController().equals(chosenPlayer)) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from each converted mana cost other than the chosen number")) {
-                if (source.getCMC() != chosenNumber) {
                     return true;
                 }
             } else if (kw.startsWith("Protection from opponent of ")) {

@@ -1,12 +1,7 @@
 Name:Earnest Fellowship
 ManaCost:1 W
 Types:Enchantment
-Text:Each creature has protection from its colors.
-S:Mode$ Continuous | Affected$ Creature.White | AddKeyword$ Protection from white
-S:Mode$ Continuous | Affected$ Creature.Blue | AddKeyword$ Protection from blue
-S:Mode$ Continuous | Affected$ Creature.Black | AddKeyword$ Protection from black
-S:Mode$ Continuous | Affected$ Creature.Red | AddKeyword$ Protection from red
-S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Protection from green
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from CardColors | Description$ Each creature has protection from its colors.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random

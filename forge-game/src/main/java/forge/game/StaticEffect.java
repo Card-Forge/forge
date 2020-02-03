@@ -276,6 +276,10 @@ public class StaticEffect {
                 affectedCard.removeChangedCardKeywords(getTimestamp());
             }
 
+            if (hasParam("CantHaveKeyword")) {
+                affectedCard.removeCantHaveKeyword(getTimestamp());
+            }
+
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
                     affectedCard.removeHiddenExtrinsicKeyword(k);

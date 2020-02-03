@@ -319,6 +319,14 @@ public final class CardUtil {
         return res;
     }
 
+    public static ColorSet getColorsYouCtrl(final Player p) {
+        byte b = 0;
+        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+            b |= c.determineColor().getColor();
+        }
+        return ColorSet.fromMask(b);
+    }
+
     public static CardState getFaceDownCharacteristic(Card c) {
         final CardType type = new CardType();
         type.add("Creature");
