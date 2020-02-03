@@ -280,7 +280,11 @@ public class CardDetailUtil {
             area.append("\n");
         }
 
-        boolean needTranslation = !card.isToken();
+        boolean needTranslation = true;
+        if (card.isToken()) {
+            if (card.getCloneOrigin() == null)
+                needTranslation = false;
+        }
         String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
 
         // LEVEL [0-9]+-[0-9]+

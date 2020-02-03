@@ -271,7 +271,11 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            boolean needTranslation = !card.isToken();
+            boolean needTranslation = true;
+            if (card.isToken()) {
+                if (card.getCloneOrigin() == null)
+                    needTranslation = false;
+            }
             final String text = card.getText(state,
                     needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
             if (StringUtils.isEmpty(text)) { return; }
