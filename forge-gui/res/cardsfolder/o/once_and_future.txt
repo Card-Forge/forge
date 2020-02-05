@@ -6,7 +6,7 @@ SVar:DBPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TgtPro
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Hidden$ True | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBReturn2
 SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Defined$ Remembered | ConditionCheckSVar$ X | References$ X | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearRemebered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Adamant.Green.1.0
 AI:RemoveDeck:Random
 Oracle:Return target card from your graveyard to your hand. Put up to one other target card from your graveyard on top of your library. Exile Once and Future.\nAdamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile Once and Future.
