@@ -573,6 +573,13 @@ public class DamageDealAi extends DamageAiBase {
                 sa.getTargets().add(enemy);
             }
             return true;
+        } else if ("DamageAfterPutCounter".equals(logic)
+                && sa.getParent() != null
+                && "P1P1".equals(sa.getParent().getParam("CounterType"))) {
+            // assuming the SA parent is of PutCounter type. Perhaps it's possible to predict counter multipliers here somehow?
+            final String amountStr = sa.getParent().getParamOrDefault("CounterNum", "1");
+            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            dmg += amount;
         }
 
         // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
@@ -583,7 +590,10 @@ public class DamageDealAi extends DamageAiBase {
         
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
-        sa.resetTargets();
+        if (!(sa.getParent() != null && sa.getParent().isTargetNumberValid())) {
+            sa.resetTargets();
+        }
+
         // target loop
         TargetChoices tcs = sa.getTargets();
 
