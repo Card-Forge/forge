@@ -6,8 +6,7 @@ K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land.YouCtrl | OptionalDecider$ You | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select lands you control | CounterType$ AWAKENING | CounterNum$ 1 | SubAbility$ DBEffect | References$ X
 SVar:X:Count$Valid Land.YouCtrl
-SVar:DBEffect:DB$ Effect | Name$ Awakening Effect | StaticAbilities$ KWAnimateAll | Duration$ Permanent | RememberObjects$ Targeted
-SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+counters_GE1_AWAKENING | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ TangleStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ AWAKENING | Duration$ Permanent
+SVar:TangleStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | RemoveCreatureTypes$ True | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
 SVar:MustBeBlocked:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_tangle.jpg
 Oracle:Trample\nWhenever Liege of the Tangle deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
