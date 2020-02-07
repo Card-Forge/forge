@@ -24,6 +24,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class AchievementsScreen extends FScreen {
     private static final float TROPHY_PADDING = 45;
@@ -49,7 +50,7 @@ public class AchievementsScreen extends FScreen {
     private final TrophyCase trophyCase = add(new TrophyCase());
 
     private AchievementsScreen() {
-        super("Achievements");
+        super(Localizer.getInstance().getMessage("lblAchievements"));
 
         AchievementCollection.buildComboBox(cbCollections);
 
