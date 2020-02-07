@@ -188,7 +188,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     //      Perhaps lets move the refresh logic to a separate function called only when necessary
     public final SpellAbility getSpellAbility(boolean refresh) {
         if (refresh) {
-            ability.resetTargets();
             ability.setTargets(tc);
             ability.setActivatingPlayer(activatingPlayer);
 

@@ -192,6 +192,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
 
             if (obj instanceof Card) {
+                boolean counterAdded = false;
                 counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(gameCard) : counterAmount;
                 if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                     if (max != -1) {
@@ -246,15 +247,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    if (rememberCards) {
-                        card.addRemembered(gameCard);
-                    }
                     final Zone zone = gameCard.getGame().getZoneOf(gameCard);
                     if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            gameCard.addCounter(counterType, counterAmount, placer, true, table);
+                            if (gameCard.addCounter(counterType, counterAmount, placer, true, table) > 0) {
+                                counterAdded = true;
+                            }
                         }
                         if (remember) {
                             final int value = gameCard.getTotalCountersToAdd();
@@ -285,8 +285,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            gameCard.addCounter(counterType, counterAmount, placer, false, table);
+                            if (gameCard.addCounter(counterType, counterAmount, placer, false, table) > 0) {
+                                counterAdded = true;
+                            }
                         }
+                    }
+                    if (rememberCards && counterAdded) {
+                        card.addRemembered(gameCard);
                     }
                     game.updateLastStateForCard(gameCard);
                 }

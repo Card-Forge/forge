@@ -337,6 +337,23 @@ public abstract class SpellAbilityEffect {
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
     }
+    
+    protected static void addForgetCounterTrigger(final Card card, final String counterType) {
+        String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.IsRemembered | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
+
+        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+        
+        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
+        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
+        saForget.setSubAbility(saExile);
+        
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(saForget);
+        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
+        addedTrigger.setIntrinsic(true);        
+    }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
         final Card host = sa.getHostCard();

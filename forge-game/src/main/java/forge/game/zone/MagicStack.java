@@ -584,10 +584,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                         invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
                     } else {
-                        invalidTarget = !o.canBeTargetedBy(sa);
-
                         if (o instanceof SpellAbility) {
-                            invalidTarget |= this.getInstanceFromSpellAbility((SpellAbility)o) == null;
+                            SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
+                            invalidTarget = si == null ? true : !si.getSpellAbility(true).canBeTargetedBy(sa);
+                        } else {
+                            invalidTarget = !o.canBeTargetedBy(sa);
                         }
                     }
                     // Remove targets
