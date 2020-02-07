@@ -117,7 +117,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             } else {
                 if (victory) {
                     if (sa.getParam("RememberWinner") != null) {
-                        host.addRemembered(host);
+                        host.addRemembered(flipper);
                     }
 
                     if (sa.hasAdditionalAbility("WinSubAbility")) {
@@ -126,7 +126,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     // runParams.put("Won","True");
                 } else {
                     if (sa.getParam("RememberLoser") != null) {
-                        host.addRemembered(host);
+                        host.addRemembered(flipper);
                     }
 
                     if (sa.hasAdditionalAbility("LoseSubAbility")) {

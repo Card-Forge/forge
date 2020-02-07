@@ -2121,6 +2121,43 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertEquals(1, simWC.getPowerBonusFromCounters());
         assertEquals(3, simGame.getPlayers().get(0).getCreaturesInPlay().size());
+    }
 
+    public void testEverAfterWithWaywardServant() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        String everAfter = "Ever After";
+        String waywardServant = "Wayward Servant";
+        String goblin = "Raging Goblin";
+
+        for (int i = 0; i < 8; i++)
+            addCard("Swamp", p);
+
+        Card cardEverAfter = addCardToZone(everAfter, p, ZoneType.Hand);
+        Card cardWaywardServant = addCardToZone(waywardServant, p, ZoneType.Graveyard);
+        Card cardRagingGoblin = addCardToZone(goblin, p, ZoneType.Graveyard);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playSa = cardEverAfter.getSpellAbilities().get(0);
+        playSa.setActivatingPlayer(p);
+        playSa.getTargets().add(cardWaywardServant);
+        playSa.getTargets().add(cardRagingGoblin);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        int score = sim.simulateSpellAbility(playSa).value;
+        assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simGoblin = findCardWithName(simGame, goblin);
+
+        simGame.getAction().checkStateEffects(true);
+        simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.MAIN2);
+
+        assertEquals(21, simGame.getPlayers().get(0).getLife());
+        assertEquals(true, simGoblin.getType().hasSubtype("Zombie"));
     }
 }
