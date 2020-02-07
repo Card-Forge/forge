@@ -9,6 +9,7 @@ import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
@@ -813,6 +814,12 @@ public abstract class GameState {
                 default:
                     sa.getTargets().add(idToCard.get(tgtID));
                     break;
+            }
+        }
+
+        if (sa.hasParam("RememberTargets")) {
+            for (final GameObject o : sa.getTargets().getTargets()) {
+                sa.getHostCard().addRemembered(o);
             }
         }
     }
