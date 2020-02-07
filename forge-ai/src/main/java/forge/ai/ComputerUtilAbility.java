@@ -82,6 +82,10 @@ public class ComputerUtilAbility {
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
+                // Spells of permanents can't be activated on the battlefield
+                if (c.isPermanent() && sa.isSpell() && c.isInZone(ZoneType.Battlefield)) {
+                    continue;
+                }
                 spellAbilities.add(sa);
             }
             if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && !c.mayPlay(player).isEmpty()) {
