@@ -208,11 +208,7 @@ public class GameAction {
             }
 
             if (!c.isToken()) {
-                boolean updateState = false;
-                updateState |= c.removeCloneStates();
-                updateState |= c.removeTextChangeStates();
-
-                if (updateState) {
+                if (c.removeChangedState()) {
                     c.updateStateForView();
                 }
 
@@ -284,7 +280,7 @@ public class GameAction {
                 }
 
                 // was replaced with another Zone Change
-                if (toBattlefield && c.isInZone(ZoneType.Battlefield)) {
+                if (toBattlefield && !c.isInZone(ZoneType.Battlefield)) {
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
