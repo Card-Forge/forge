@@ -1039,15 +1039,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateTriggers(List<Trigger> list, CardState state) {
-
-        boolean removeIntrinsic = false;
-        for (final CardTraitChanges ck : changedCardTraits.values()) {
-            if (ck.isRemoveIntrinsic()) {
-                removeIntrinsic = true;
-                break;
-            }
-        }
-        if (removeIntrinsic) {
+        if (hasRemoveIntrinsic()) {
             list.clear();
         }
 
@@ -2438,16 +2430,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         return currentState.hasSpellAbility(id);
     }
 
-    public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
-
-        boolean removeIntrinsic = false;
+    public boolean hasRemoveIntrinsic() {
         for (final CardTraitChanges ck : changedCardTraits.values()) {
             if (ck.isRemoveIntrinsic()) {
-                removeIntrinsic = true;
-                break;
+                return true;
             }
         }
-        if (removeIntrinsic) {
+        return false;
+    }
+
+    public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
+        if (hasRemoveIntrinsic()) {
             list.clear();
         }
 
@@ -4128,14 +4121,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateStaticAbilities(List<StaticAbility> list, CardState state) {
-        boolean removeIntrinsic = false;
-        for (final CardTraitChanges ck : changedCardTraits.values()) {
-            if (ck.isRemoveIntrinsic()) {
-                removeIntrinsic = true;
-                break;
-            }
-        }
-        if (removeIntrinsic) {
+        if (hasRemoveIntrinsic()) {
             list.clear();
         }
 
@@ -5748,15 +5734,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
-
-        boolean removeIntrinsic = false;
-        for (final CardTraitChanges ck : changedCardTraits.values()) {
-            if (ck.isRemoveIntrinsic()) {
-                removeIntrinsic = true;
-                break;
-            }
-        }
-        if (removeIntrinsic) {
+        if (hasRemoveIntrinsic()) {
             list.clear();
         }
 
