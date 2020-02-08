@@ -343,6 +343,17 @@ public final class StaticAbilityContinuous {
                 }
             });
             addTypes.addAll(newTypes);
+
+            addTypes = Lists.transform(addTypes, new Function<String, String>() {
+                @Override
+                public String apply(String input) {
+                    if (hostCard.hasChosenType()) {
+                        input = input.replaceAll("ChosenType", hostCard.getChosenType());
+                    }
+                    return input;
+                }
+
+            });
         }
 
         if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {

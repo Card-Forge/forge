@@ -2158,6 +2158,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.MAIN2);
 
         assertEquals(21, simGame.getPlayers().get(0).getLife());
+        assertEquals(true, simGoblin.isRed() && simGoblin.isBlack());
         assertEquals(true, simGoblin.getType().hasSubtype("Zombie"));
     }
 }
