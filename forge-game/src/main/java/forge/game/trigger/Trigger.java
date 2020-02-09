@@ -37,6 +37,7 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.util.TextUtil;
@@ -522,8 +523,8 @@ public abstract class Trigger extends TriggerReplacementBase {
     public final Trigger copy(Card newHost, boolean lki) {
         final Trigger copy = (Trigger) clone();
 
-        copy.originalMapParams.putAll(originalMapParams);
-        copy.mapParams.putAll(originalMapParams);
+        copy.originalMapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(originalMapParams);
         copy.setHostCard(newHost);
 
         if (getOverridingAbility() != null) {
