@@ -84,6 +84,9 @@ public class ReplacementHandler {
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
             affectedLKI = CardUtil.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
+
+            // need to apply Counters to check its future state on the battlefield
+            affectedLKI.putEtbCounters(null);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
