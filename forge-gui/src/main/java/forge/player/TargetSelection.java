@@ -100,7 +100,7 @@ public class TargetSelection {
             return true;
         }
         
-        final List<ZoneType> zone = tgt.getZone();
+        final List<ZoneType> zones = tgt.getZone();
         final boolean mandatory = tgt.getMandatory() && hasCandidates;
         
         final boolean choiceResult;
@@ -110,7 +110,7 @@ public class TargetSelection {
             final GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
         }
-        else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
+        else if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
             return this.chooseCardFromStack(mandatory);
@@ -152,12 +152,15 @@ public class TargetSelection {
             for (Card card : validTargets) {
                 playersWithValidTargets.put(PlayerView.get(card.getController()), null);
             }
-            if (controller.getGui().openZones(zone, playersWithValidTargets)) {
+
+            PlayerView playerView = controller.getLocalPlayerView();
+            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
+            if (!zones.contains(ZoneType.Stack)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
-                controller.getGui().restoreOldZones(playersWithValidTargets);
+                controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
             }
             else {
                 // for every other case an all-purpose GuiChoose

@@ -17,39 +17,11 @@
  */
 package forge.screens.match;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicReference;
-
-import javax.swing.JMenu;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-
-import forge.FThreads;
-import forge.GuiBase;
-import forge.ImageCache;
-import forge.LobbyPlayer;
-import forge.Singletons;
-import forge.StaticData;
+import com.google.common.collect.Lists;
+import forge.*;
 import forge.assets.FSkinProp;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
@@ -71,51 +43,26 @@ import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellAbilityView;
-import forge.game.spellability.StackItemView;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
-import forge.gui.FNetOverlay;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
-import forge.gui.GuiUtils;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.framework.SLayoutIO;
-import forge.gui.framework.VEmptyDoc;
+import forge.gui.*;
+import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.controllers.CAntes;
-import forge.screens.match.controllers.CCombat;
-import forge.screens.match.controllers.CDetailPicture;
-import forge.screens.match.controllers.CDev;
-import forge.screens.match.controllers.CDock;
-import forge.screens.match.controllers.CLog;
-import forge.screens.match.controllers.CPrompt;
-import forge.screens.match.controllers.CStack;
+import forge.screens.match.controllers.*;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
-import forge.toolbox.FButton;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextArea;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
@@ -123,14 +70,25 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -459,6 +417,8 @@ public final class CMatchUI
 
     @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        List<PlayerZoneUpdate> updatedPlayerZones = Lists.newArrayList();
+
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
@@ -467,7 +427,9 @@ public final class CMatchUI
                             break;
                         case Hand:  // controller hand always shown
                             if (controller != player) {
-                                FloatingZone.show(this,player,zone);
+                                if (FloatingZone.show(this,player,zone)) {
+                                    updatedPlayerZones.add(update);
+                                }
                             }
                             break;
                         case Library:
@@ -475,14 +437,16 @@ public final class CMatchUI
                         case Exile:
                         case Flashback:
                         case Command:
-                            FloatingZone.show(this,player,zone);
+                            if (FloatingZone.show(this,player,zone)) {
+                                updatedPlayerZones.add(update);
+                            }
                             break;
                         default:
                             break;
                     }
                 }
             }
-        return zonesToUpdate; //pfps should return only the newly shown zones
+        return updatedPlayerZones;
     }
 
     @Override
@@ -1086,21 +1050,30 @@ public final class CMatchUI
     }
 
     @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
-        if (zones.size() == 1) {
-            switch (zones.iterator().next()) {
-            case Battlefield:
-            case Hand:
-                return true; //don't actually need to open anything, but indicate that zone can be opened
-            default:
-                return false;
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+        for (final PlayerView view : playersWithTargetables.keySet()) {
+            for(final ZoneType zone : zones) {
+                if (zone.equals(ZoneType.Battlefield) || zone.equals(ZoneType.Hand)) {
+                    continue;
+                }
+
+                if (zone.equals(ZoneType.Stack)) {
+                    // TODO: Remove this if we have ever have a Stack zone that's displayable for Counters
+                    continue;
+                }
+
+                zonesToUpdate.add(new PlayerZoneUpdate(view, zone));
             }
         }
-        return false;
+
+        tempShowZones(controller, zonesToUpdate);
+        return zonesToUpdate;
     }
 
     @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
+        hideZones(playerView, playerZoneUpdates);
     }
 
     @Override

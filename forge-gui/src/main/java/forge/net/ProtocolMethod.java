@@ -1,14 +1,6 @@
 package forge.net;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Function;
-
 import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
@@ -22,10 +14,18 @@ import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.match.NextGameDecision;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 import org.apache.commons.lang3.SerializationUtils;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The methods that can be sent through this protocol.
@@ -75,8 +75,8 @@ public enum ProtocolMethod {
     clearSelectables    (Mode.SERVER),
     refreshField        (Mode.SERVER),
     // TODO case "setPlayerAvatar":
-    openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
-    restoreOldZones     (Mode.SERVER, Void.TYPE, Map/*PlayerView,Object*/.class),
+    openZones           (Mode.SERVER, PlayerZoneUpdates.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
+    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),

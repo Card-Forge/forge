@@ -17,18 +17,6 @@
  */
 package forge.view.arcane;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Timer;
-
 import forge.Singletons;
 import forge.game.card.CardView;
 import forge.gui.framework.SDisplayUtil;
@@ -39,9 +27,18 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
-//import forge.util.collect.FCollectionView;
 import forge.view.FDialog;
 import forge.view.FFrame;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+//import forge.util.collect.FCollectionView;
 
 // show some cards in a new window
 public abstract class FloatingCardArea extends CardArea {
@@ -67,18 +64,20 @@ public abstract class FloatingCardArea extends CardArea {
         getWindow().setFocusableWindowState(false); // should probably do this earlier
         getWindow().setVisible(true);
     }
+
     protected void hideWindow() {
         onShow();
         getWindow().setFocusableWindowState(false); // should probably do this earlier
         getWindow().setVisible(false);
-	getWindow().dispose(); //pfps so that old content does not show up
+        getWindow().dispose(); //pfps so that old content does not show up
     }
+
     protected void showOrHideWindow() {
-	if (getWindow().isVisible()) {
-	    hideWindow();
-	} else {
-	    showWindow();
-	}
+        if (getWindow().isVisible()) {
+            hideWindow();
+        } else {
+            showWindow();
+        }
     }
     protected void onShow() {
         if (!hasBeenShown) {
@@ -98,23 +97,30 @@ public abstract class FloatingCardArea extends CardArea {
             if (hasBeenShown || locLoaded) { return; }
             super.setLocationRelativeTo(c);
         }
+
         @Override
         public void setVisible(boolean b0) {
-            if (isVisible() == b0) { return; }
+            if (isVisible() == b0) {
+                return;
+            }
             if (!b0 && hasBeenShown && locPref != null) {
                 //update preference before hiding window, as otherwise its location will be 0,0
                 prefs.setPref(locPref,
                         getX() + COORD_DELIM + getY() + COORD_DELIM +
-                        getWidth() + COORD_DELIM + getHeight());
+                                getWidth() + COORD_DELIM + getHeight());
                 //don't call prefs.save(), instead allowing them to be saved when match ends
             }
             if (b0) {
-		doRefresh();  // force a refresh before showing to pick up any changes when hidden
+                doRefresh();  // force a refresh before showing to pick up any changes when hidden
                 hasBeenShown = true;
-	    }
+            }
             super.setVisible(b0);
         }
     };
+
+    public boolean isVisible() {
+        return window.isVisible();
+    }
 
     protected FDialog getWindow() {
 	return window;
