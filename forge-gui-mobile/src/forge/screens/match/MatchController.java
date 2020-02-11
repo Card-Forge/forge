@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import forge.FThreads;
 import forge.assets.FSkinImage;
@@ -44,6 +43,7 @@ import forge.match.AbstractGuiGame;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VAssignDamage;
@@ -307,40 +307,47 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+        PlayerZoneUpdates updates = new PlayerZoneUpdates();
         if (zones.size() == 1) {
             final ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
                 case Battlefield:
                 case Command:
-                    players.clear(); //clear since no zones need to be restored
-                    return true; //Battlefield is always open
+                    playersWithTargetables.clear(); //clear since no zones need to be restored
                 default:
                     //open zone tab for given zone if needed
                     boolean result = true;
-                    for (final PlayerView player : players.keySet()) {
+                    for (final PlayerView player : playersWithTargetables.keySet()) {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-                        players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
+                        playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                        if (zoneTab == null) {
-                            result = false;
-                        } else {
+                        if (zoneTab != null) {
+                            updates.add(new PlayerZoneUpdate(player, zoneType));
                             playerPanel.setSelectedTab(zoneTab);
                         }
                     }
-                    return result;
             }
         }
-        return false;
+        return updates;
     }
 
     @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
-        for (final Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
-            final VPlayerPanel playerPanel = view.getPlayerPanel(player.getKey());
-            if (player.getValue() == null || player.getValue() instanceof InfoTab) {
-                playerPanel.setSelectedTab((InfoTab) player.getValue());
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
+        for(PlayerZoneUpdate update : playerZoneUpdates) {
+            PlayerView player = update.getPlayer();
+
+            ZoneType zone = null;
+            for(ZoneType type : update.getZones()) {
+                zone = type;
+                break;
             }
+
+            if (zone == null) { return; }
+
+            final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+            final InfoTab zoneTab = playerPanel.getZoneTab(zone);
+            playerPanel.setSelectedTab(zoneTab);
         }
     }
 
@@ -381,7 +388,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-	view.hideZones(controller, zonesToUpdate);
+	    view.hideZones(controller, zonesToUpdate);
     }
 
     @Override
