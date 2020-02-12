@@ -1675,8 +1675,9 @@ Stonecoil Serpent|ELD|2
 Castle Ardenvale|ELD|2
 Castle Embereth|ELD|2
 Castle Garenbrig|ELD|2
-Castle Lochthwain|ELD|2
+Castle Locthwain|ELD|2
 Castle Vantress|ELD|2
+Fabled Passage|ELD|2
 Piper of the Swarm|ELD|3
 Glass Casket|ELD|2
 Slaying Fire|ELD|2
@@ -1723,6 +1724,7 @@ Eidolon of Obstruction|THB|2
 Heliod's Intervention|THB|2
 Idyllic Tutor|THB|2
 Shatter the Sky|THB|2
+Taranika, Akroan Veteran|THB|2
 Ashiok's Erasure|THB|2
 Nadir Kraken|THB|2
 Protean Thaumaturge|THB|2

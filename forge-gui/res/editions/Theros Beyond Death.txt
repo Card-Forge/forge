@@ -312,21 +312,12 @@ Prerelease=6 Boosters, 1 RareMythic+
 296 R Ironscale Hydra
 297 R Treeshaker Chimera
 #Borderless art rares and mythics
-288 R Grasping Giant
-289 R Victory's Envoy
-290 R Sphinx Mindbreaker
-291 R Serpent of Yawning Depths
-292 R Demon of Loathing
-293 R Underworld Sentinel
-294 R Deathbellow War Cry
-295 R Terror of Mount Velus
-296 R Ironscale Hydra
-297 R Treeshaker Chimera
 298 R Archon of Sun's Grace
 299 R Eidolon of Obstruction
 300 R Heliod's Intervention
 301 R Idyllic Tutor
 302 R Shatter the Sky
+303 R Taranika, Akroan Veteran
 304 R Ashiok's Erasure
 305 R Nadir Kraken
 306 R Protean Thaumaturge
