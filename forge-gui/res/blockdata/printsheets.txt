@@ -1556,6 +1556,39 @@ Evolving Wilds
 13 Swamp|M20
 
 [ELD Secret Cards]
+Garruk, Cursed Huntsman|ELD|2
+Oko, Thief of Crowns|ELD|2
+The Royal Scions|ELD|2
+Ardenvale Tactician|ELD|2
+Faerie Guidemother|ELD|2
+Giant Killer|ELD|2
+Lonesome Unicorn|ELD|2
+Realm-Cloaked Giant|ELD|2
+Shepherd of the Flock|ELD|2
+Silverflame Squire|ELD|2
+Animating Faerie|ELD|2
+Brazen Borrower|ELD|2
+Fae of Wishes|ELD|2
+Hypnotic Sprite|ELD|2
+Merfolk Secretkeeper|ELD|2
+Queen of Ice|ELD|2
+Foulmire Knight|ELD|2
+Murderous Rider|ELD|2
+Order of Midnight|ELD|2
+Reaper of Night|ELD|2
+Smitten Swordmaster|ELD|2
+Bonecrusher Giant|ELD|2
+Embereth Shieldbreaker|ELD|2
+Merchant of the Vale|ELD|2
+Rimrock Knight|ELD|2
+Beanstalk Giant|ELD|2
+Curious Pair|ELD|2
+Flaxen Intruder|ELD|2
+Garenbrig Carver|ELD|2
+Lovestruck Beast|ELD|2
+Rosethorn Acolyte|ELD|2
+Tuinvale Treefolk|ELD|2
+Oakhame Ranger|ELD|2
 Kenrith, the Returned King
 Rowan, Fearless Sparkmage
 Garrison Griffin
@@ -1587,6 +1620,69 @@ Syr Gwyn, Hero of Ashvale
 Arcane Signet
 Tome of Legends
 Command Tower
+Acclaimed Contender|ELD|2
+Charming Prince|ELD|2
+The Circle of Loyalty|ELD|2
+Happily Ever After|ELD|2
+Harmonious Archon|ELD|2
+Hushbringer|ELD|2
+Linden, the Steadfast Queen|ELD|2
+Worthy Knight|ELD|2
+Emry, Lurker of the Loch|ELD|2
+Folio of Fancies|ELD|2
+Gadwick, the Wizened|ELD|2
+The Magic Mirror|ELD|2
+Midnight Clock|ELD|2
+Mirrormade|ELD|2
+Stolen by the Fae|ELD|2
+Vantress Gargoyle|ELD|2
+Ayara, First of Lochthwain|ELD|2
+Blacklance Paragon|ELD|2
+The Cauldron of Eternity|ELD|2
+Clackbridge Troll|ELD|2
+Oathsworn Knight|ELD|2
+Piper of the Swarm|ELD|2
+Rankle, Master of Pranks|ELD|2
+Wishclaw Talisman|ELD|2
+Witch's Vengeance|ELD|2
+Embercleave|ELD|2
+Fervent Champion|ELD|2
+Fires of Invention|ELD|2
+Irencrag Feat|ELD|2
+Irencrag Pyromancer|ELD|2
+Opportunistic Dragon|ELD|2
+Robber of the Rich|ELD|2
+Sundering Stroke|ELD|2
+Torbran, Thane of Red Fell|ELD|2
+Feasting Troll King|ELD|2
+Gilded Goose|ELD|2
+The Great Henge|ELD|2
+Once Upon A Time|ELD|2
+Questing Beast|ELD|2
+Return of the Wildspeaker|ELD|2
+Wicked Wolf|ELD|2
+Wildborn Preserver|ELD|2
+Yorvo, Lord of Garenbrig|ELD|2
+Dance of the Manse|ELD|2
+Doom Foretold|ELD|2
+Escape to the Wilds|ELD|2
+Faeburrow Elder|ELD|2
+Lochmere Serpent|ELD|2
+Outlaws' Merriment|ELD|2
+Stormfist Crusader|ELD|2
+Sorcerous Spyglass|ELD|2
+Stonecoil Serpent|ELD|2
+Castle Ardenvale|ELD|2
+Castle Embereth|ELD|2
+Castle Garenbrig|ELD|2
+Castle Lochthwain|ELD|2
+Castle Vantress|ELD|2
+Piper of the Swarm|ELD|3
+Glass Casket|ELD|2
+Slaying Fire|ELD|2
+Kenrith's Transformation|ELD|2
+Improbable Alliance|ELD|2
+Inspiring Veteran|ELD|2
 
 [THB Secret Cards]
 Athreos, Shroud-Veiled
@@ -1675,3 +1771,9 @@ Temple of Deceit|THB|2
 Temple of Enlightenment|THB|2
 Temple of Malice|THB|2
 Temple of Plenty|THB|2
+Arasta of the Endless Web|THB|3
+Alseid of Life's Bounty|THB|2
+Thirst For Meaning|THB|2
+Gray Merchant of Asphodel|THB|2
+Thrill of Possibility|THB|2
+Wolfwillow Haven|THB|2
