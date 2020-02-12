@@ -3,5 +3,5 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:GRN, RNA, WAR, M20, ELD
-Banned:Oko, Thief of Crowns
+Sets:GRN, RNA, WAR, M20, ELD, THB
+Banned:Sorcerous Spyglass;Oko, Thief of Crowns
