@@ -870,13 +870,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.view = new SpellAbilityView(clone);
 
             // dont use setHostCard to not trigger the not copied parts yet
-            clone.hostCard = host;
+
+            copyHelper(clone, host);
             if (!lki && host != null && host.getGame() != null) {
                 host.getGame().addSpellAbility(clone);
             }
-            // need to clone the maps too so they can be changed
-            clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
-            clone.mapParams = Maps.newHashMap(this.mapParams);
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
@@ -902,7 +900,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
-            clone.sVars = Maps.newHashMap();
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone, host, activ, lki);
         } catch (final CloneNotSupportedException e) {

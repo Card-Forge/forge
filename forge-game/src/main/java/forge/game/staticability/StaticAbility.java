@@ -819,13 +819,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             clone = (StaticAbility) clone();
             clone.id = lki ? id : nextId();
 
-            // dont use setHostCard to not trigger the not copied parts yet
-            clone.hostCard = host;
-            // need to clone the maps too so they can be changed
-            clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
-            clone.mapParams = Maps.newHashMap(this.mapParams);
-
-            clone.sVars = Maps.newHashMap(this.sVars);
+            copyHelper(clone, host);
 
             clone.layers = this.generateLayer();
 

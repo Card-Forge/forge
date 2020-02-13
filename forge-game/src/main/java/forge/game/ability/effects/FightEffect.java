@@ -154,7 +154,7 @@ public class FightEffect extends DamageBaseEffect {
 
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, sa);
+            damageMap.triggerDamageDoneOnce(false, fighterA.getGame(), sa);
 
             preventMap.clear();
             damageMap.clear();
