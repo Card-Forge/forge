@@ -1636,7 +1636,7 @@ Midnight Clock|ELD|2
 Mirrormade|ELD|2
 Stolen by the Fae|ELD|2
 Vantress Gargoyle|ELD|2
-Ayara, First of Lochthwain|ELD|2
+Ayara, First of Locthwain|ELD|2
 Blacklance Paragon|ELD|2
 The Cauldron of Eternity|ELD|2
 Clackbridge Troll|ELD|2
