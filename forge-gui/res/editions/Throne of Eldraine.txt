@@ -364,7 +364,7 @@ R Midnight Clock
 R Mirrormade
 R Stolen by the Fae
 R Vantress Gargoyle
-R Ayara, First of Lochthwain
+R Ayara, First of Locthwain
 R Blacklance Paragon
 M The Cauldron of Eternity
 R Clackbridge Troll
