@@ -1,0 +1,48 @@
+[metadata]
+Code=PUMA
+Date=2018-12-07
+Name=Ultimate Box Topper - Ultimate Masters
+MciCode=uma
+Type=Other
+
+[cards]
+1 M Emrakul, the Aeons Torn
+2 M Karn Liberated
+3 M Kozilek, Butcher of Truth
+4 M Ulamog, the Infinite Gyre
+5 M Snapcaster Mage
+6 M Temporal Manipulation
+7 M Bitterblossom
+8 M Demonic Tutor
+9 M Goryo's Vengeance
+10 M Liliana of the Veil
+11 M Mikaeus, the Unhallowed
+12 M Reanimate
+13 M Tasigur, the Golden Fang
+14 M Balefire Dragon
+15 M Through the Breach
+16 M Eternal Witness
+17 M Life from the Loam
+18 M Noble Hierarch
+19 M Tarmogoyf
+20 M Vengevine
+21 M Gaddock Teeg
+22 M Leovold, Emissary of Trest
+23 M Lord of Extinction
+24 M Maelstrom Pulse
+25 M Sigarda, Host of Herons
+26 M Fulminator Mage
+27 M Kitchen Finks
+28 M Engineered Explosives
+29 M Mana Vault
+30 M Platinum Emperion
+31 M Ancient Tomb
+32 M Cavern of Souls
+33 M Celestial Colonnade
+34 M Creeping Tar Pit
+35 M Dark Depths
+36 M Karakas
+37 M Lavaclaw Reaches
+38 M Raging Ravine
+39 M Stirring Wildwood
+40 M Urborg, Tomb of Yawgmoth
