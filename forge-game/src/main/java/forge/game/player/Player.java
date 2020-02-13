@@ -1708,7 +1708,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (land.isFaceDown()) {
             land.turnFaceUp();
         }
-        game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+        game.updateLastStateForCard(c);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(this, land));
