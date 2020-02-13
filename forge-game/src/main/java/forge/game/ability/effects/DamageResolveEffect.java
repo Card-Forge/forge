@@ -25,7 +25,7 @@ public class DamageResolveEffect extends SpellAbilityEffect {
         }
         // non combat damage cause lifegain there
         if (damageMap != null) {
-            damageMap.triggerDamageDoneOnce(false, sa);
+            damageMap.triggerDamageDoneOnce(false, sa.getHostCard().getGame(), sa);
             damageMap.clear();
         }
     }

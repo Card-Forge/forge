@@ -561,4 +561,12 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         // this does overwrite the original MapParams
         this.originalMapParams = Maps.newHashMap(this.mapParams);
     }
+
+    protected void copyHelper(CardTraitBase copy, Card host) {
+        copy.originalMapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(originalMapParams);
+        copy.sVars = Maps.newHashMap(sVars);
+        // dont use setHostCard to not trigger the not copied parts yet
+        copy.hostCard = host;
+    }
 }
