@@ -137,6 +137,9 @@ public class InputPassPriority extends InputSyncronizedBase {
 
         final SpellAbility ability = getController().getAbilityToPlay(card, abilities, triggerEvent);
         if (ability != null) {
+            if(ability.usesTargeting()) {
+                ability.getTargetRestrictions().getDividedMap().clear();
+            }
             chosenSa = new ArrayList<>();
             chosenSa.add(ability);
             if (otherCardsToSelect != null && ability.isManaAbility()) {
