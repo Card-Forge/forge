@@ -31,7 +31,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-        List<GameObject> tgts = getTargets(sa);
+        List<GameObject> tgts = this.getTargets(sa);
         if (tgts.isEmpty())
             return "";
 
@@ -46,11 +46,24 @@ public class DamageDealEffect extends DamageBaseEffect {
         sb.append(" ").append(dmg).append(" damage ");
 
         if (sa.hasParam("DivideEvenly")) {
-            sb.append("divided evenly (rounded down) ");
+            sb.append("divided evenly (rounded down) to\n");
         } else if (sa.hasParam("DividedAsYouChoose")) {
-            sb.append("divided as you choose ");
+            sb.append("divided to\n");
         }
-        sb.append("to ").append(Lang.joinHomogenous(tgts));
+        //sb.append("to ").append(Lang.joinHomogenous(tgts));
+
+        // show target index and damage
+        int counter = 0;
+        int count = sa.getTargetRestrictions().getDividedMap().size();
+        for(Map.Entry<Object, Integer> entry : sa.getTargetRestrictions().getDividedMap().entrySet()) {
+            counter++;
+            sb.append(entry.getKey())
+                    .append(" ").append(entry.getValue()).append(" damage");
+
+            if(counter < count) {
+                sb.append(" and ");
+            }
+        }
 
         if (sa.hasParam("Radiance")) {
             sb.append(" and each other ").append(sa.getParam("ValidTgts"))
@@ -153,7 +166,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 // Do we have a way of doing this in a better fashion?
                 for (GameObject obj : tgts) {
                     if (obj instanceof Card) {
-                        assigneeCards.add((Card)obj);
+                        assigneeCards.add((Card) obj);
                     }
                 }
 
@@ -195,8 +208,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.setDamage(0);
                             c.setHasBeenDealtDeathtouchDamage(false);
                             c.clearAssignedDamage();
-                        }
-                        else {
+                        } else {
                             c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
                         }
                     }
