@@ -322,8 +322,9 @@ public class MatchController extends AbstractGuiGame {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
                         playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
+                        ZoneType previousZone = playerPanel.getZoneByInfoTab(playerPanel.getSelectedTab());
+                        updates.add(new PlayerZoneUpdate(player, previousZone));
                         if (zoneTab != null) {
-                            updates.add(new PlayerZoneUpdate(player, zoneType));
                             playerPanel.setSelectedTab(zoneTab);
                         }
                     }
@@ -343,9 +344,12 @@ public class MatchController extends AbstractGuiGame {
                 break;
             }
 
-            if (zone == null) { return; }
-
             final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+            if (zone == null) {
+                playerPanel.hideSelectedTab();
+                continue;
+            }
+
             final InfoTab zoneTab = playerPanel.getZoneTab(zone);
             playerPanel.setSelectedTab(zoneTab);
         }
