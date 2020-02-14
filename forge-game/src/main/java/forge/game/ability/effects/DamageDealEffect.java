@@ -48,29 +48,44 @@ public class DamageDealEffect extends DamageBaseEffect {
         stringBuilder.append(" ").append(dmg).append(" damage ");
 
         // if use targeting we show all targets and corresponding damage
-        if(spellAbility.usesTargeting()) {
-            int count = spellAbility.getTargetRestrictions().getDividedMap().size();
-
+        if (spellAbility.usesTargeting()) {
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) to\n");
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {
                 stringBuilder.append("divided to\n");
             }
 
-            int counter = 0;
-            for(Map.Entry<Object, Integer> entry : spellAbility.getTargetRestrictions().getDividedMap().entrySet()) {
-                counter++;
-                stringBuilder.append(entry.getKey()).append(" (").append(entry.getValue()).append(" damage)");
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            final List<Player> players = SpellAbilityEffect.getTargetPlayers(spellAbility);
 
-                if(counter + 1 < count) {
+            int targetCount = targetCards.size() + players.size();
+
+            // target cards
+            for (int i = 0; i < targetCards.size(); i++) {
+                Card targetCard = targetCards.get(i);
+                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
+
+                if (i == targetCount - 2) {
+                    stringBuilder.append(" and ");
+                } else if (i + 1 < targetCount) {
                     stringBuilder.append(", ");
                 }
-                if(counter + 1 == count) {
+            }
+
+            // target players
+            for (int i = 0; i < players.size(); i++) {
+
+                Player targetPlayer = players.get(i);
+                stringBuilder.append(targetPlayer).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
+
+                if (i == players.size() - 2) {
                     stringBuilder.append(" and ");
+                } else if (i + 1 < players.size()) {
+                    stringBuilder.append(", ");
                 }
             }
-        }
-        else {
+
+        } else {
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) ");
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {

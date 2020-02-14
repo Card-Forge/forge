@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Lists;
+import
+        com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -75,17 +76,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         // if use targeting we show all targets and corresponding counters
         if(spellAbility.usesTargeting()) {
-            int counter = 0;
-            int count = spellAbility.getTargetRestrictions().getDividedMap().size();
-            for(Map.Entry<Object, Integer> entry : spellAbility.getTargetRestrictions().getDividedMap().entrySet()) {
-                counter++;
-                stringBuilder.append(entry.getKey()).append(" (").append(entry.getValue()).append(" counter)");
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            for(int i = 0; i < targetCards.size(); i++) {
+                Card targetCard = targetCards.get(i);
+                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
 
-                if(counter + 1 < count) {
-                    stringBuilder.append(", ");
-                }
-                if(counter + 1 == count) {
+                if(i == targetCards.size() - 2) {
                     stringBuilder.append(" and ");
+                }
+                else if(i + 1 < targetCards.size()) {
+                    stringBuilder.append(", ");
                 }
             }
         } else {
