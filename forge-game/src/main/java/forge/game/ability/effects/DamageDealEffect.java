@@ -6,12 +6,14 @@ import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 import java.util.List;
@@ -24,58 +26,67 @@ public class DamageDealEffect extends DamageBaseEffect {
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(SpellAbility spellAbility) {
         // when damageStackDescription is called, just build exactly what is happening
-        final StringBuilder sb = new StringBuilder();
-        final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        final StringBuilder stringBuilder = new StringBuilder();
+        final String damage = spellAbility.getParam("NumDmg");
+        final int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
 
-        List<GameObject> tgts = this.getTargets(sa);
-        if (tgts.isEmpty())
+        List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
+        if (targets.isEmpty()) {
             return "";
+        }
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);
 
-        if (!definedSources.isEmpty() && definedSources.get(0) != sa.getHostCard()) {
-            sb.append(definedSources.get(0).toString()).append(" deals");
+        if (!definedSources.isEmpty() && definedSources.get(0) != spellAbility.getHostCard()) {
+            stringBuilder.append(definedSources.get(0).toString()).append(" deals");
         } else {
-            sb.append("Deals");
+            stringBuilder.append("Deals");
         }
 
-        sb.append(" ").append(dmg).append(" damage ");
+        stringBuilder.append(" ").append(dmg).append(" damage ");
 
-        if (sa.hasParam("DivideEvenly")) {
-            sb.append("divided evenly (rounded down) to\n");
-        } else if (sa.hasParam("DividedAsYouChoose")) {
-            sb.append("divided to\n");
-        }
-        //sb.append("to ").append(Lang.joinHomogenous(tgts));
+        // if use targeting we shoow all targets and corresponding damge
+        if(spellAbility.usesTargeting()) {
+            if (spellAbility.hasParam("DivideEvenly")) {
+                stringBuilder.append("divided evenly (rounded down) to\n");
+            } else if (spellAbility.hasParam("DividedAsYouChoose")) {
+                stringBuilder.append("divided to\n");
+            }
 
-        // show target index and damage
-        int counter = 0;
-        int count = sa.getTargetRestrictions().getDividedMap().size();
-        for(Map.Entry<Object, Integer> entry : sa.getTargetRestrictions().getDividedMap().entrySet()) {
-            counter++;
-            sb.append(entry.getKey())
-                    .append(" ").append(entry.getValue()).append(" damage");
+            int counter = 0;
+            int count = spellAbility.getTargetRestrictions().getDividedMap().size();
+            for(Map.Entry<Object, Integer> entry : spellAbility.getTargetRestrictions().getDividedMap().entrySet()) {
+                counter++;
+                stringBuilder.append(entry.getKey()).append(" ").append(entry.getValue()).append(" damage");
 
-            if(counter < count) {
-                sb.append(" and ");
+                if(counter < count) {
+                    stringBuilder.append(" and ");
+                }
             }
         }
+        else {
+            if (spellAbility.hasParam("DivideEvenly")) {
+                stringBuilder.append("divided evenly (rounded down) ");
+            } else if (spellAbility.hasParam("DividedAsYouChoose")) {
+                stringBuilder.append("divided as you choose ");
+            }
+            stringBuilder.append("to ").append(Lang.joinHomogenous(targets));
+        }
 
-        if (sa.hasParam("Radiance")) {
-            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
+        if (spellAbility.hasParam("Radiance")) {
+            stringBuilder.append(" and each other ").append(spellAbility.getParam("ValidTgts"))
                     .append(" that shares a color with ");
-            if (tgts.size() > 1) {
-                sb.append("them");
+            if (targets.size() > 1) {
+                stringBuilder.append("them");
             } else {
-                sb.append("it");
+                stringBuilder.append("it");
             }
         }
 
-        sb.append(". ");
-        return sb.toString();
+        stringBuilder.append(". ");
+        return stringBuilder.toString();
     }
 
     /* (non-Javadoc)
