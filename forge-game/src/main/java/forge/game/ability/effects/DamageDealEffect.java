@@ -47,8 +47,10 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         stringBuilder.append(" ").append(dmg).append(" damage ");
 
-        // if use targeting we shoow all targets and corresponding damge
+        // if use targeting we show all targets and corresponding damage
         if(spellAbility.usesTargeting()) {
+            int count = spellAbility.getTargetRestrictions().getDividedMap().size();
+
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) to\n");
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {
@@ -56,12 +58,14 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             int counter = 0;
-            int count = spellAbility.getTargetRestrictions().getDividedMap().size();
             for(Map.Entry<Object, Integer> entry : spellAbility.getTargetRestrictions().getDividedMap().entrySet()) {
                 counter++;
-                stringBuilder.append(entry.getKey()).append(" ").append(entry.getValue()).append(" damage");
+                stringBuilder.append(entry.getKey()).append(" (").append(entry.getValue()).append(" damage)");
 
-                if(counter < count) {
+                if(counter + 1 < count) {
+                    stringBuilder.append(", ");
+                }
+                if(counter + 1 == count) {
                     stringBuilder.append(" and ");
                 }
             }
@@ -85,7 +89,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
         }
 
-        stringBuilder.append(". ");
+        stringBuilder.append(".");
         return stringBuilder.toString();
     }
 
