@@ -1,11 +1,6 @@
 package forge.net.server;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Function;
-
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
@@ -23,8 +18,13 @@ import forge.match.AbstractGuiGame;
 import forge.net.GameProtocolSender;
 import forge.net.ProtocolMethod;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class NetGuiGame extends AbstractGuiGame {
 
@@ -283,14 +283,14 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
         updateGameView();
-        return sendAndWait(ProtocolMethod.openZones, zones, players);
+        return sendAndWait(ProtocolMethod.openZones, controller, zones, players);
     }
 
     @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
-        send(ProtocolMethod.restoreOldZones, playersToRestoreZonesFor);
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
+        send(ProtocolMethod.restoreOldZones, playerView, playerZoneUpdates);
     }
 
     @Override
