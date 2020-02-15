@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/02/146.-THB3-1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume any cards drawn are not relevant to solving the puzzle. Assume your opponent has no cards in hand.
+[state]
+humanlife=20
+ailife=17
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Gingerbrute;Purphoros, Bronze-Blooded;Nyxborn Brute;Mire's Grasp;Omen of the Dead
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humangraveyard=Rotting Regisaur;Erebos, Bleak-Hearted;Kroxa, Titan of Death's Hunger
+humanbattlefield=Lazav, the Multifarious;Protean Thaumaturge;Bloodmist Infiltrator;The Royal Scions|Counters:LOYALTY=3;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs
+aibattlefield=Cerulean Drake;Cerulean Drake;Archon of Sun's Grace
+aiprecast=Archon of Sun's Grace:TrigToken;Archon of Sun's Grace:TrigToken
+removesummoningsickness=true
