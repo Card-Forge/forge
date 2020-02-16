@@ -164,9 +164,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final ReplacementEffect copy(final Card host, final boolean lki) {
         final ReplacementEffect res = (ReplacementEffect) clone();
-        for (String key : getSVars()) {
-            res.setSVar(key, getSVar(key));
-        }
+
+        copyHelper(res, host);
 
         final SpellAbility sa = this.getOverridingAbility();
         if (sa != null) {
@@ -181,8 +180,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             res.setHasRun(false);
             res.setOtherChoices(null);
         }
-
-        res.setHostCard(host);
 
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());

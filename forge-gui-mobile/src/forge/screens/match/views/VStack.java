@@ -31,6 +31,7 @@ import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
+import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
@@ -55,6 +56,7 @@ public class VStack extends FDropDown {
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
+    private PlayerZoneUpdates restorablePlayerZones = null;
 
     private int stackSize;
 
@@ -70,6 +72,8 @@ public class VStack extends FDropDown {
     private void revealTargetZones() {
         if (activeStackInstance == null) { return; }
 
+        PlayerView player = MatchController.instance.getCurrentPlayer();
+
         final Set<ZoneType> zones = new HashSet<>();
         playersWithValidTargets = new HashMap<>();
         for (final CardView c : activeStackInstance.getTargetCards()) {
@@ -79,14 +83,15 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        MatchController.instance.openZones(zones, playersWithValidTargets);
+        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets);
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
-        if (playersWithValidTargets == null) { return; }
-        MatchController.instance.restoreOldZones(playersWithValidTargets);
-        playersWithValidTargets = null;
+        if (restorablePlayerZones == null) { return; }
+        PlayerView player = MatchController.instance.getCurrentPlayer();
+        MatchController.instance.restoreOldZones(player, restorablePlayerZones);
+        restorablePlayerZones = null;
     }
 
     @Override

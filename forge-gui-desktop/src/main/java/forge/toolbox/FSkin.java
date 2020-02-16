@@ -61,6 +61,9 @@ import forge.util.Localizer;
  */
 public class FSkin {
 
+    public static final int SYMBOL_WIDTH = 13;
+    public static final int SYMBOL_HEIGHT = 13;
+
     /**
      * Retrieves a color from this skin's color map.
      *
@@ -77,7 +80,7 @@ public class FSkin {
      *
      * @param clr0 {@link java.awt.Color}
      * @param step int
-     * @return {@link java.awt.Color}
+     * @return {@link java.awt.CFaceolor}
      */
     public static Color stepColor(final Color clr0, final int step) {
         int r = clr0.getRed();
@@ -1006,7 +1009,7 @@ public class FSkin {
 
     private static void addEncodingSymbol(final String key, final FSkinProp skinProp) {
         final String path = ForgeConstants.CACHE_SYMBOLS_DIR + "/" + key.replace("/", "") + ".png";
-        getImage(skinProp).save(path, 13, 13);
+        getImage(skinProp).save(path, SYMBOL_WIDTH, SYMBOL_HEIGHT);
     }
 
     public static String encodeSymbols(String str, final boolean formatReminderText) {
@@ -1023,7 +1026,7 @@ public class FSkin {
         //format mana symbols to display as icons
         pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
-            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\">";
+            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
         } catch (final MalformedURLException e) {
             e.printStackTrace();
