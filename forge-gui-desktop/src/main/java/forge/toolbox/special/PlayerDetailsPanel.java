@@ -10,6 +10,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.trackable.TrackableProperty;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -26,23 +27,23 @@ public class PlayerDetailsPanel extends JPanel {
     private final PlayerView player;
 
     // Info labels
-    private final DetailLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "Hand (%s/%s)");
-    private final DetailLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "Graveyard (%s) Types[%s]");
-    private final DetailLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "Library (%s)");
-    private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "Exile (%s)");
-    private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "Flashback cards (%s)");
-    private final DetailLabel lblCommand = new DetailLabel(FSkinProp.IMG_PLANESWALKER, "Command zone (%s)");
+    private final DetailLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, Localizer.getInstance().getMessage("lblHandNOfMax", "%s", "%s"));
+    private final DetailLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, Localizer.getInstance().getMessage("lblGraveyardNCardsNTypes", "%s", "%s"));
+    private final DetailLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, Localizer.getInstance().getMessage("lblLibraryNCards", "%s"));
+    private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, Localizer.getInstance().getMessage("lblExileNCards", "%s"));
+    private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, Localizer.getInstance().getMessage("lblFlashbackNCards", "%s"));
+    private final DetailLabel lblCommand = new DetailLabel(FSkinProp.IMG_PLANESWALKER, Localizer.getInstance().getMessage("lblCommandZoneNCards", "%s"));
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
         player = player0;
 
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W,         "White mana (%s)"),     (byte)ManaAtom.WHITE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U,         "Blue mana (%s)"),      (byte)ManaAtom.BLUE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B,         "Black mana (%s)"),     (byte)ManaAtom.BLACK));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R,         "Red mana (%s)"),       (byte)ManaAtom.RED));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G,         "Green mana (%s)"),     (byte)ManaAtom.GREEN));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "Colorless mana (%s)"), (byte)ManaAtom.COLORLESS));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W,         Localizer.getInstance().getMessage("lblWhiteManaOfN", "%s")),     (byte)ManaAtom.WHITE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U,         Localizer.getInstance().getMessage("lblBlueManaOfN", "%s")),      (byte)ManaAtom.BLUE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B,         Localizer.getInstance().getMessage("lblBlackManaOfN", "%s")),     (byte)ManaAtom.BLACK));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R,         Localizer.getInstance().getMessage("lblRedManaOfN", "%s")),       (byte)ManaAtom.RED));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G,         Localizer.getInstance().getMessage("lblGreenManaOfN", "%s")),     (byte)ManaAtom.GREEN));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, Localizer.getInstance().getMessage("lblColorlessManaOfN", "%s")), (byte)ManaAtom.COLORLESS));
 
         setOpaque(false);
         setLayout(new MigLayout("insets 0, gap 0, wrap"));

@@ -46,6 +46,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.view.arcane.PlayArea;
+import forge.util.Localizer;
 
 /** 
  * Assembles Swing components of a player field instance.
@@ -60,7 +61,7 @@ public class VField implements IVDoc<CField> {
     private final CField control;
     private DragCell parentCell;
     private final EDocID docID;
-    private final DragTab tab = new DragTab("Field");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblField"));
 
     // Other fields
     private final PlayerView player;
@@ -96,8 +97,8 @@ public class VField implements IVDoc<CField> {
         this.docID = id0;
 
         this.player = p;
-        if (p != null) { tab.setText(p.getName() + " Field"); }
-        else { tab.setText("NO PLAYER FOR " + docID.toString()); }
+        if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
+        else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
 
         detailsPanel = new PlayerDetailsPanel(player);
 
