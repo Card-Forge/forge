@@ -27,7 +27,7 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
 import javax.swing.*;
@@ -217,8 +217,8 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void setTitle() {
-        title = Lang.getPossessedObject(player.getName(), zone.name()) + " (%d)" +
-                (sortedByName ? " - sorted by name (right click in title to not sort)" : " (right click in title to sort)");
+        final String sort_detail = sortedByName ? Localizer.getInstance().getMessage("lblRightClickToUnSort") : Localizer.getInstance().getMessage("lblRightClickToSort");
+        title = Localizer.getInstance().getMessage("lblPlayerZoneNCardSortStatus", player.getName(), zone.getTranslatedName(), "%d" , sort_detail);
     }
 
     private void setPlayer(PlayerView player0) {
