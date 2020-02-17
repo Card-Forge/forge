@@ -2,6 +2,8 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
+
 import forge.ImageKeys;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -27,6 +29,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
@@ -423,6 +426,8 @@ public class CardView extends GameEntityView {
         case SchemeDeck:
             // true for now, to actually see the Scheme cards (can't see deck anyway)
             return true;
+        default:
+            break;
         }
 
         // special viewing permissions for viewer
@@ -650,6 +655,17 @@ public class CardView extends GameEntityView {
 
         }
 
+        Set<String> cantHaveKeyword = this.getCantHaveKeyword();
+        if (cantHaveKeyword != null && !cantHaveKeyword.isEmpty()) {
+            sb.append("\r\n\r\n");
+            for(String k : cantHaveKeyword) {
+                sb.append("CARDNAME can't have or gain ".replaceAll("CARDNAME", getName()));
+                sb.append(k);
+                sb.append(".");
+                sb.append("\r\n");
+            }
+        }
+
         String cloner = get(TrackableProperty.Cloner);
         if (!cloner.isEmpty()) {
             sb.append("\r\nCloned by: ").append(cloner);
@@ -767,6 +783,18 @@ public class CardView extends GameEntityView {
     void updateBlockAdditional(Card c) {
         set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
         set(TrackableProperty.BlockAny, c.canBlockAny());
+    }
+
+    Set<String> getCantHaveKeyword() {
+        return get(TrackableProperty.CantHaveKeyword);
+    }
+
+    void updateCantHaveKeyword(Card c) {
+        Set<String> keywords = Sets.newTreeSet();
+        for (Keyword k : c.getCantHaveKeyword()) {
+            keywords.add(k.toString());
+        }
+        set(TrackableProperty.CantHaveKeyword, keywords);
     }
 
     @Override

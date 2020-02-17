@@ -4,6 +4,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -523,6 +525,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+
+                    if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                        // need LKI before Animate does apply
+                        moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(tgtC));
+
+                        hostCard.addRemembered(tgtC);
+                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        hostCard.removeRemembered(tgtC);
+                    }
+
                     // Auras without Candidates stay in their current
                     // location
                     if (tgtC.isAura()) {
@@ -530,13 +543,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (saAura != null) {
                             saAura.setActivatingPlayer(sa.getActivatingPlayer());
                             if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                                    tgtC.removeChangedState();
+                                }
                                 continue;
                             }
                         }
                     }
 
                     movedCard = game.getAction().moveTo(
-                            tgtC.getController().getZone(destination), tgtC, sa);
+                            tgtC.getController().getZone(destination), tgtC, sa, moveParams);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, false,
@@ -983,6 +999,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }
+
+                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+
+                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                    // need LKI before Animate does apply
+                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+
+                    source.addRemembered(c);
+                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    source.removeRemembered(c);
+                }
+
                 if (sa.hasParam("GainControl")) {
                     Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
@@ -1109,7 +1137,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addFaceupCommand(unanimate);
                     }
                 }
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa, moveParams);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }

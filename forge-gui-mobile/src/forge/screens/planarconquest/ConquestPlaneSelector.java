@@ -26,6 +26,7 @@ import forge.toolbox.FTimer;
 import forge.toolbox.GuiDialog;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
+import forge.util.Localizer;
 
 public class ConquestPlaneSelector extends FDisplayObject {
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(30);
@@ -134,7 +135,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
             if (!desc.isEmpty()) {
                 GuiDialog.message(plane.getDescription().replace("\\n", "\n"), plane.getName().replace("_", " "));
             } else {
-                GuiDialog.message("This plane has no description.", plane.getName());
+                GuiDialog.message(Localizer.getInstance().getMessage("lblThisPlaneHasNoDesc"), plane.getName());
             }
             return true;
         }

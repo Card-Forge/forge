@@ -133,8 +133,8 @@ public class HumanPlaySpellAbility {
         }
         
         if (ability.isAbility() && ability instanceof AbilityActivated) {
-        	final Map<String, String> params = Maps.newHashMap();
-        	params.put("ManaColorConversion", "Additive");
+            final Map<String, String> params = Maps.newHashMap();
+            params.put("ManaColorConversion", "Additive");
 
             for (KeywordInterface inst : c.getKeywords()) {
                 String keyword = inst.getOriginal();
@@ -249,6 +249,8 @@ public class HumanPlaySpellAbility {
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
+            ability.getHostCard().setCastSA(null);
+            ability.getHostCard().setCastFrom(null);
             // add back to where it came from
             game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
         }

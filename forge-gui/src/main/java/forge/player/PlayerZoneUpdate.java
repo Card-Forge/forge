@@ -14,11 +14,15 @@ public class PlayerZoneUpdate implements Serializable {
     private final Set<ZoneType> zones;
 
     public PlayerZoneUpdate(final PlayerView player, final ZoneType zone) {
-        if (player == null || zone == null) {
+        if (player == null ) {
             throw new NullPointerException();
         }
         this.player = player;
-        this.zones = EnumSet.of(zone);
+        if (zone != null) {
+            this.zones = EnumSet.of(zone);
+        } else {
+            this.zones = EnumSet.noneOf(ZoneType.class);
+        }
     }
 
     public PlayerView getPlayer() {
@@ -30,13 +34,13 @@ public class PlayerZoneUpdate implements Serializable {
 
     void addZone(final ZoneType zone) {
         if (zone == null) {
-            throw new NullPointerException();
+            return;
         }
         zones.add(zone);
     }
     void add(final PlayerZoneUpdate other) {
         if (other == null) {
-            throw new NullPointerException();
+            return;
         }
         zones.addAll(other.getZones());
     }

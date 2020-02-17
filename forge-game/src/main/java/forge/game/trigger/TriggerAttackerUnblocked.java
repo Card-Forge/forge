@@ -46,7 +46,7 @@ public class TriggerAttackerUnblocked extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerUnblocked(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerUnblocked(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -71,8 +71,8 @@ public class TriggerAttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Attacker, AbilityKey.Defender, AbilityKey.DefendingPlayer);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attacker, AbilityKey.Defender, AbilityKey.DefendingPlayer);
     }
 
     @Override

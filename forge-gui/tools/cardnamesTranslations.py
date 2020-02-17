@@ -88,6 +88,9 @@ with open(database, mode='r', encoding='utf8') as json_file:
 
                 try:
                     toracle = card['printed_text']
+                    #make zh-CN reminder text work
+                    toracle = toracle.replace('（','(')
+                    toracle = toracle.replace('）',')')
                 except:
                     pass
 
@@ -138,11 +141,17 @@ with open(database, mode='r', encoding='utf8') as json_file:
 
                 try:
                     toracle0 = cardfaces[0]['printed_text']
+                    #make zh-CN reminder text work
+                    toracle0 = toracle0.replace('（','(')
+                    toracle0 = toracle0.replace('）',')')
                 except:
                     pass
 
                 try:
                     toracle1 = cardfaces[1]['printed_text']
+                    #make zh-CN reminder text work
+                    toracle1 = toracle1.replace('（','(')
+                    toracle1 = toracle1.replace('）',')')
                 except:
                     pass
 

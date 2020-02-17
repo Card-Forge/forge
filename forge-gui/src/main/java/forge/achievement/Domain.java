@@ -9,10 +9,14 @@ import forge.game.zone.ZoneType;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import forge.util.Localizer;
 
 public class Domain extends ProgressiveAchievement {
     public Domain() {
-        super("Domain", "Domain", "Win a game with one of each basic land on the battlefield", "It's nice being able to cast anything you want.");
+        super("Domain", Localizer.getInstance().getMessage("lblDomain"),
+            Localizer.getInstance().getMessage("lblWinGameWithOneOfEachBasicLandOnTheBattlefield"),
+            Localizer.getInstance().getMessage("lblAbleToCastAnytingNiceBeing")
+        );
     }
 
     private HashMap<String, String> basicLandMap = new HashMap<String, String>() {
@@ -51,6 +55,6 @@ public class Domain extends ProgressiveAchievement {
 
     @Override
     protected String getNoun() {
-        return "Win";
+        return Localizer.getInstance().getMessage("lblWin");
     }
 }

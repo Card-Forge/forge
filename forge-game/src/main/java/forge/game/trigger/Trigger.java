@@ -65,10 +65,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     /** The ID. */
     private int id;
 
-
-    /** The run params. */
-    private Map<AbilityKey, Object> runParams;
-
     private TriggerType mode;
 
     private Map<AbilityKey, Object> storedTriggeredObjects = null;
@@ -123,7 +119,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = nextId();
         this.intrinsic = intrinsic;
 
-        this.setRunParams(AbilityKey.newMap()); // TODO: Consider whether this can be null instead, for performance reasons.
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
@@ -454,26 +449,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public abstract void setTriggeringObjects(SpellAbility sa);
-
-    /**
-     * Gets the run params.
-     * 
-     * @return the runParams
-     */
-    public Object getFromRunParams(AbilityKey key) {
-        return this.runParams.get(key);
-    }
-
-    /**
-     * Sets the run params.
-     * 
-     * @param runParams0
-     *            the runParams to set
-     */
-    public void setRunParams(final Map<AbilityKey, Object> runParams0) {
-        this.runParams = runParams0;
-    }
+    public abstract void setTriggeringObjects(SpellAbility sa, final Map<AbilityKey, Object> runParams);
 
     /**
      * Gets the id.
@@ -546,9 +522,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public final Trigger copy(Card newHost, boolean lki) {
         final Trigger copy = (Trigger) clone();
 
-        copy.originalMapParams.putAll(originalMapParams);
-        copy.mapParams.putAll(originalMapParams);
-        copy.setHostCard(newHost);
+        copyHelper(copy, newHost);
 
         if (getOverridingAbility() != null) {
             copy.setOverridingAbility(getOverridingAbility().copy(newHost, lki));

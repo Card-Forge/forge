@@ -48,7 +48,7 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerUnblockedOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerUnblockedOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -86,8 +86,8 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.AttackingPlayer, AbilityKey.Defenders);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.AttackingPlayer, AbilityKey.Defenders);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Map;
 
 // Turn Begin isn't a "real" trigger, but is useful for Advanced Scripting Techniques
 public class TriggerTurnBegin extends Trigger {
-    public TriggerTurnBegin(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTurnBegin(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -23,8 +23,8 @@ public class TriggerTurnBegin extends Trigger {
     }
 
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

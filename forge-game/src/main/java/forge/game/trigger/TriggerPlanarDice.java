@@ -26,7 +26,7 @@ public class TriggerPlanarDice extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerPlanarDice(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerPlanarDice(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -52,12 +52,9 @@ public class TriggerPlanarDice extends Trigger {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

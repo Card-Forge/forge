@@ -5,10 +5,13 @@ import java.util.Map.Entry;
 import forge.achievement.ChallengeAchievements.DeckChallengeAchievement;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 
 public class NoCreatures extends DeckChallengeAchievement {
     public NoCreatures() {
-        super("NoCreatures", "No Creatures", "with no creatures", "I'm not really an animal person.");
+        super("NoCreatures", Localizer.getInstance().getMessage("lblNoCreatures"),
+            Localizer.getInstance().getMessage("lblWithNoCreatures"), Localizer.getInstance().getMessage("lblIMNotReallyAnimalPerson")
+        );
     }
 
     @Override

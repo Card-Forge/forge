@@ -35,3 +35,4 @@ Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmet
 Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
 Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermetagame.zip
 Current Pioneer Decks | https://downloads.cardforge.org/decks/currentpioneerdecks.zip
+Current MTGA Decks | https://downloads.cardforge.org/decks/currentmtgadecks.zip

@@ -102,8 +102,24 @@ public class VPlayerPanel extends FContainer {
         return zoneTabs.get(zoneType);
     }
 
+    public ZoneType getZoneByInfoTab(InfoTab tab) {
+        for(ZoneType zone : zoneTabs.keySet()) {
+            if (zoneTabs.get(zone).equals(tab)) {
+                return zone;
+            }
+        }
+
+        return null;
+    }
+
     public void setSelectedZone(ZoneType zoneType) {
         setSelectedTab(zoneTabs.get(zoneType));
+    }
+
+    public void hideSelectedTab() {
+        if (selectedTab != null) {
+            selectedTab.displayArea.setVisible(false);
+        }
     }
 
     public void setSelectedTab(InfoTab selectedTab0) {
@@ -111,9 +127,7 @@ public class VPlayerPanel extends FContainer {
             return;
         }
 
-        if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(false);
-        }
+        hideSelectedTab();
 
         selectedTab = selectedTab0;
 

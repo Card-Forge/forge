@@ -836,7 +836,7 @@ public class Combat {
 
         // Run the trigger to deal combat damage once
         // LifeLink for Combat Damage at this place
-        dealtDamageTo.triggerDamageDoneOnce(true, null);
+        dealtDamageTo.triggerDamageDoneOnce(true, game, null);
         dealtDamageTo.clear();
 
         counterTable.triggerCountersPutAll(game);

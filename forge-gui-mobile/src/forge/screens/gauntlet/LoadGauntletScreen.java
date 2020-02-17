@@ -36,6 +36,7 @@ import forge.util.Callback;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public class LoadGauntletScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;
@@ -43,9 +44,9 @@ public class LoadGauntletScreen extends LaunchScreen {
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
     private final GauntletFileLister lstGauntlets = add(new GauntletFileLister());
-    private final FButton btnNewGauntlet = add(new FButton("New"));
-    private final FButton btnRenameGauntlet = add(new FButton("Rename"));
-    private final FButton btnDeleteGauntlet = add(new FButton("Delete"));
+    private final FButton btnNewGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
+    private final FButton btnRenameGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
+    private final FButton btnDeleteGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
 
     public LoadGauntletScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -115,14 +116,14 @@ public class LoadGauntletScreen extends LaunchScreen {
     protected void startMatch() {
         final GauntletData gauntlet = lstGauntlets.getSelectedGauntlet();
         if (gauntlet == null) {
-            FOptionPane.showMessageDialog("You must create and select a gauntlet.");
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblYouMustCreateAndSelectGauntlet"));
             return;
         }
         FModel.setGauntletData(gauntlet);
         Deck userDeck = gauntlet.getUserDeck();
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
-            FDeckChooser.promptForDeck("Select Deck for Gauntlet", GameType.Gauntlet, false, new Callback<Deck>() {
+            FDeckChooser.promptForDeck(Localizer.getInstance().getMessage("lblSelectGauntletDeck"), GameType.Gauntlet, false, new Callback<Deck>() {
                 @Override
                 public void run(Deck result) {
                     if (result != null) {
@@ -134,7 +135,7 @@ public class LoadGauntletScreen extends LaunchScreen {
             return;
         }
 
-        LoadingOverlay.show("Loading new game...", new Runnable() {
+        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewGame"), new Runnable() {
             @Override
             public void run() {
                 final GauntletData gauntlet = FModel.getGauntletData();
@@ -156,14 +157,14 @@ public class LoadGauntletScreen extends LaunchScreen {
                 String gauntletName;
                 String oldGauntletName = gauntlet.getName();
                 while (true) {
-                    gauntletName = SOptionPane.showInputDialog("Enter new name for gauntlet:", "Rename Gauntlet", null, oldGauntletName);
+                    gauntletName = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblEnterNewGauntletGameName"), Localizer.getInstance().getMessage("lblRenameGauntlet"), null, oldGauntletName);
                     if (gauntletName == null) { return; }
 
                     gauntletName = QuestUtil.cleanString(gauntletName);
                     if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
                     if (gauntletName.isEmpty()) {
-                        SOptionPane.showMessageDialog("Please specify a gauntlet name.");
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyGauntletName"));
                         continue;
                     }
 
@@ -175,7 +176,7 @@ public class LoadGauntletScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A gauntlet already exists with that name. Please pick another gauntlet name.");
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblGauntletNameExistsPleasePickAnotherName"));
                         continue;
                     }
                     break;
@@ -200,8 +201,8 @@ public class LoadGauntletScreen extends LaunchScreen {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        "Are you sure you want to delete '" + gauntlet.getName() + "'?",
-                        "Delete Gauntlet", "Delete", "Cancel")) {
+                        Localizer.getInstance().getMessage("lblAreYouSuerDeleteGauntlet", gauntlet.getName()),
+                        Localizer.getInstance().getMessage("lblDeleteGauntlet"), Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"))) {
                     return;
                 }
 

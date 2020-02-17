@@ -47,7 +47,7 @@ public class TriggerCounterRemovedOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCounterRemovedOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCounterRemovedOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -77,9 +77,9 @@ public class TriggerCounterRemovedOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
-        sa.setTriggeringObject(AbilityKey.Amount, getFromRunParams(AbilityKey.CounterAmount));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+        sa.setTriggeringObject(AbilityKey.Amount, runParams.get(AbilityKey.CounterAmount));
     }
 
     @Override

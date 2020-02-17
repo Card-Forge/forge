@@ -47,7 +47,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-
+import forge.util.Localizer;
 /**
  * The class CardDetailPanel. Shows the details of a card.
  *
@@ -77,10 +77,10 @@ public class CardDetailPanel extends SkinnedPanel {
         setLayout(null);
         setOpaque(false);
 
-        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Name and Cost").build();
-        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Type").build();
-        idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip("Card ID").build();
-        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card P/T or Loyalty").build();
+        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardNameAndCost")).build();
+        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardType")).build();
+        idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip(Localizer.getInstance().getMessage("lblCardID")).build();
+        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardPTOrLoyalty")).build();
         setInfoLabel = new JLabel();
         setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

@@ -46,7 +46,7 @@ public class TriggerShuffled extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerShuffled(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerShuffled(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -77,8 +77,8 @@ public class TriggerShuffled extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

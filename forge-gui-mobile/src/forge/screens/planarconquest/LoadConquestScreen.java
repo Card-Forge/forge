@@ -39,6 +39,7 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public class LoadConquestScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;
@@ -46,11 +47,11 @@ public class LoadConquestScreen extends LaunchScreen {
     private static final FSkinColor OLD_CONQUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
-    private final FTextArea lblOldConquests = add(new FTextArea(false, "Loading Existing Conquests..."));
+    private final FTextArea lblOldConquests = add(new FTextArea(false, Localizer.getInstance().getMessage("lblLoadingExistingConquests")));
     private final ConquestFileLister lstConquests = add(new ConquestFileLister());
-    private final FButton btnNewConquest = add(new FButton("New"));
-    private final FButton btnRenameConquest = add(new FButton("Rename"));
-    private final FButton btnDeleteConquest = add(new FButton("Delete"));
+    private final FButton btnNewConquest = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
+    private final FButton btnRenameConquest = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
+    private final FButton btnDeleteConquest = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
 
     public LoadConquestScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -83,7 +84,7 @@ public class LoadConquestScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lblOldConquests.setText("Loading Existing Conquests...");
+        lblOldConquests.setText(Localizer.getInstance().getMessage("lblLoadingExistingConquests"));
         lstConquests.clear();
         updateEnabledButtons();
         revalidate();
@@ -129,8 +130,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        lblOldConquests.setText("Old conquest data? Put into \""
-                                + ForgeConstants.CONQUEST_SAVE_DIR + "\" and restart Forge.");
+                        lblOldConquests.setText(Localizer.getInstance().getMessage("lblOldConquestDataPutIntoDirAndRestartForge", ForgeConstants.CONQUEST_SAVE_DIR));
                         updateEnabledButtons();
                         revalidate();
                         lstConquests.scrollIntoView(lstConquests.selectedIndex);
@@ -199,14 +199,14 @@ public class LoadConquestScreen extends LaunchScreen {
                 String questName;
                 String oldConquestName = conquest.getName();
                 while (true) {
-                    questName = SOptionPane.showInputDialog("Enter new name for conquest:", "Rename Conquest", null, oldConquestName);
+                    questName = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblEnterNewConquestName"), Localizer.getInstance().getMessage("lblRenameConquest"), null, oldConquestName);
                     if (questName == null) { return; }
 
                     questName = QuestUtil.cleanString(questName);
                     if (questName.equals(oldConquestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog("Please specify a conquest name.");
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyConquestName"));
                         continue;
                     }
 
@@ -218,7 +218,7 @@ public class LoadConquestScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another conquest name.");
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblConquestNameExistsPleasePickAnotherName"));
                         continue;
                     }
                     break;
@@ -243,8 +243,8 @@ public class LoadConquestScreen extends LaunchScreen {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        "Are you sure you want to delete '" + conquest.getName() + "'?",
-                        "Delete Conquest", "Delete", "Cancel")) {
+                        Localizer.getInstance().getMessage("lblAreYouSuerDeleteConquest", conquest.getName()),
+                        Localizer.getInstance().getMessage("lblDeleteConquest"), Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"))) {
                     return;
                 }
 

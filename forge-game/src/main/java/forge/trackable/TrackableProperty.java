@@ -117,6 +117,8 @@ public enum TrackableProperty {
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
 
+    CantHaveKeyword(TrackableTypes.StringListType),
+
     //Player
     IsAI(TrackableTypes.BooleanType),
     LobbyPlayerName(TrackableTypes.StringType),
@@ -128,6 +130,9 @@ public enum TrackableProperty {
     PoisonCounters(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
+    MaxLandPlay(TrackableTypes.IntegerType),
+    HasUnlimitedLandPlay(TrackableTypes.BooleanType),
+    NumLandThisTurn(TrackableTypes.IntegerType),
     NumDrawnThisTurn(TrackableTypes.IntegerType),
     Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),

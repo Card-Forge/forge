@@ -5,6 +5,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 
 public abstract class AbstractMulligan {
@@ -58,6 +59,6 @@ public abstract class AbstractMulligan {
     }
 
     public void afterMulligan() {
-        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, player.getName() + " has kept a hand of " + player.getZone(ZoneType.Hand).size() + " cards");
+        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size())));
     }
 }

@@ -25,8 +25,8 @@ public class TriggerCounterAddedAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        final GameEntityCounterTable table = (GameEntityCounterTable) getFromRunParams(AbilityKey.Objects);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final GameEntityCounterTable table = (GameEntityCounterTable) runParams.get(AbilityKey.Objects);
 
         Map<GameEntity, Integer> all = this.filterTable(table);
 

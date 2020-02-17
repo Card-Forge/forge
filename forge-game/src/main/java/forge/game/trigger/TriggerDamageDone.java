@@ -49,7 +49,7 @@ public class TriggerDamageDone extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamageDone(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamageDone(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -122,11 +122,11 @@ public class TriggerDamageDone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)getFromRunParams(AbilityKey.DamageSource)));
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(
-            this,
+            runParams,
             AbilityKey.DamageAmount,
             // This parameter is here because LKI information related to combat doesn't work properly
             AbilityKey.DefendingPlayer

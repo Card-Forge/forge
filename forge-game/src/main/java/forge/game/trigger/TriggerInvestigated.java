@@ -60,8 +60,8 @@ public class TriggerInvestigated extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     /** {@inheritDoc}
@@ -70,7 +70,7 @@ public class TriggerInvestigated extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Player p = (Player) runParams.get(AbilityKey.Player);
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(p, getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }

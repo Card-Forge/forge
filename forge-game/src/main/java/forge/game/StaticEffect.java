@@ -242,6 +242,9 @@ public class StaticEffect {
             p.setUnlimitedHandSize(false);
             p.setMaxHandSize(p.getStartingHandSize());
             p.removeChangedKeywords(getTimestamp());
+
+            p.removeMaxLandPlays(getTimestamp());
+            p.removeMaxLandPlaysInfinite(getTimestamp());
         }
 
         // modify the affected card
@@ -271,6 +274,10 @@ public class StaticEffect {
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword")
                     || hasParam("RemoveAllAbilities")) {
                 affectedCard.removeChangedCardKeywords(getTimestamp());
+            }
+
+            if (hasParam("CantHaveKeyword")) {
+                affectedCard.removeCantHaveKeyword(getTimestamp());
             }
 
             if (addHiddenKeywords != null) {

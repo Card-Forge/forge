@@ -165,7 +165,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("AddKeyword") || hasParam("AddAbility")
                 || hasParam("AddTrigger") || hasParam("RemoveTriggers")
                 || hasParam("RemoveKeyword") || hasParam("AddReplacementEffects")
-                || hasParam("AddStaticAbility") || hasParam("AddSVar")) {
+                || hasParam("AddStaticAbility") || hasParam("AddSVar")
+                || hasParam("CantHaveKeyword")) {
             layers.add(StaticAbilityLayer.ABILITIES);
         }
 
@@ -181,14 +182,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("AddHiddenKeyword")) {
-            // special rule for can't have or gain
-            if (getParam("AddHiddenKeyword").contains("can't have or gain")) {
-                layers.add(StaticAbilityLayer.ABILITIES);
-            }
             layers.add(StaticAbilityLayer.RULES);
         }
 
         if (hasParam("IgnoreEffectCost") || hasParam("Goad") || hasParam("CanBlockAny") || hasParam("CanBlockAmount")) {
+            layers.add(StaticAbilityLayer.RULES);
+        }
+
+        if (hasParam("AdjustLandPlays")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 
@@ -259,14 +260,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public final CardCollectionView applyContinuousAbilityBefore(final StaticAbilityLayer layer, final CardCollectionView preList) {
-        if (!shouldApplyContinuousAbility(layer)) {
+        if (!shouldApplyContinuousAbility(layer, false)) {
             return null;
         }
         return StaticAbilityContinuous.applyContinuousAbility(this, layer, preList);
     }
 
     public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer, final CardCollectionView affected) {
-        if (!shouldApplyContinuousAbility(layer)) {
+        if (!shouldApplyContinuousAbility(layer, true)) {
             return null;
         }
         return StaticAbilityContinuous.applyContinuousAbility(this, affected, layer);
@@ -286,8 +287,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         affects the specified layer, it's not suppressed, and its
      *         conditions are fulfilled.
      */
-    private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer) {
-        return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && this.checkConditions();
+    private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean previousRun) {
+        return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && checkConditions() && (previousRun || getHostCard().getStaticAbilities().contains(this));
     }
 
     // apply the ability if it has the right mode
@@ -818,13 +819,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             clone = (StaticAbility) clone();
             clone.id = lki ? id : nextId();
 
-            // dont use setHostCard to not trigger the not copied parts yet
-            clone.hostCard = host;
-            // need to clone the maps too so they can be changed
-            clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
-            clone.mapParams = Maps.newHashMap(this.mapParams);
-
-            clone.sVars = Maps.newHashMap(this.sVars);
+            copyHelper(clone, host);
 
             clone.layers = this.generateLayer();
 

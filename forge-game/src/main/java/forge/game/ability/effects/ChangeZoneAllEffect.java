@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -92,7 +94,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());
             }
         }
-        
+
         cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("Optional")) {
@@ -150,7 +152,19 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
 
+            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+
             if (destination == ZoneType.Battlefield) {
+
+                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                    // need LKI before Animate does apply
+                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+
+                    source.addRemembered(c);
+                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    source.removeRemembered(c);
+                }
+
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = c.getFirstAttachSpell();
@@ -165,9 +179,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Card movedCard = null;
             if (sa.hasParam("GainControl")) {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa);
+                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
-                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa);
+                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile && !c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
@@ -205,7 +219,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (destination == ZoneType.Battlefield) {
                 movedCard.setTimestamp(ts);
             }
-            
+
             if (!movedCard.getZone().equals(originZone)) {
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }

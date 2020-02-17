@@ -58,10 +58,10 @@ public class TriggerDamageDoneOnce extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
-        sa.setTriggeringObject(AbilityKey.Sources, getFromRunParams(AbilityKey.DamageSources));
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        sa.setTriggeringObject(AbilityKey.Sources, runParams.get(AbilityKey.DamageSources));
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
 
     @Override

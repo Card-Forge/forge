@@ -18,6 +18,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class ConquestStatsScreen extends FScreen implements IVConquestStats {
     private static final float PADDING = Utils.scale(5f);
@@ -51,7 +52,7 @@ public class ConquestStatsScreen extends FScreen implements IVConquestStats {
     public ConquestStatsScreen() {
         super(null, ConquestMenu.getMenu());
 
-        cbPlanes.addItem("All Planes");
+        cbPlanes.addItem(Localizer.getInstance().getMessage("lblAllPlanes"));
         for (ConquestPlane plane : FModel.getPlanes()) {
             if (!plane.isUnreachable() || FModel.getConquest().getModel().getCurrentPlane().equals(plane)) {
                 cbPlanes.addItem(plane);

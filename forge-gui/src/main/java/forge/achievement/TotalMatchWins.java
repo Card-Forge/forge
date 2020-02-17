@@ -2,14 +2,16 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class TotalMatchWins extends ProgressiveAchievement {
     public TotalMatchWins(int bronze0, int silver0, int gold0, int mythic0) {
-        super("TotalMatchWins", "Total Match Wins", null,
-            String.format("Win %d matches", bronze0), bronze0,
-            String.format("Win %d matches", silver0), silver0,
-            String.format("Win %d matches", gold0), gold0,
-            String.format("Win %d matches", mythic0), mythic0);
+        super("TotalMatchWins", Localizer.getInstance().getMessage("lblTotalMatchWins"), null,
+            Localizer.getInstance().getMessage("lblWinNMatches", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblWinNMatches", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblWinNMatches", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblWinNMatches", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -19,6 +21,6 @@ public class TotalMatchWins extends ProgressiveAchievement {
 
     @Override
     protected String getNoun() {
-        return "Match";
+        return Localizer.getInstance().getMessage("lblMatch");
     }
 }
