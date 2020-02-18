@@ -2706,6 +2706,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void incCommanderCast(Card commander) {
         commanderCast.put(commander, getCommanderCast(commander) + 1);
+        getView().updateCommanderCast(this, commander);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
 
     public int getTotalCommanderCast() {

@@ -136,6 +136,7 @@ public enum TrackableProperty {
     NumDrawnThisTurn(TrackableTypes.IntegerType),
     Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    CommanderCast(TrackableTypes.IntegerMapType),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
     Ante(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
