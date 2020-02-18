@@ -9,9 +9,11 @@ import forge.util.WaitCallback;
 import forge.util.gui.SOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.util.List;
 
@@ -129,10 +131,10 @@ public class AutoUpdater {
 
         final List<String> options = ImmutableList.of("Update Now", "Update Later");
         if (SOptionPane.showOptionDialog(message, "New Version Available", null, options, 0) == 0) {
-            downloadFromForge();
+            return downloadFromForge();
         }
 
-        return true;
+        return false;
     }
 
     private boolean downloadFromBrowser() throws URISyntaxException, IOException {
@@ -157,15 +159,15 @@ public class AutoUpdater {
                         super.copyInputStream(in, outPath);
                         packagePath = outPath;
 
+                        extractUpdate();
                     }
                 }, this);
             }
         };
-        if (!callback.invokeAndWait()) {
-            return false;
-        } else {
-            return true;
-        }
+
+        SwingUtilities.invokeLater(callback);
+
+        return false;
     }
 
     private void extractUpdate() {
