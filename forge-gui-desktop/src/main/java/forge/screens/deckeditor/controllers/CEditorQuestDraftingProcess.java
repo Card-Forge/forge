@@ -34,6 +34,7 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import java.util.Map.Entry;
 
@@ -55,7 +56,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     private IBoosterDraft boosterDraft;
 
-    private String ccAddLabel = "Add card";
+    private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
@@ -78,7 +79,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
 
-        deckManager.setCaption("Draft Picks");
+        deckManager.setCaption(Localizer.getInstance().getMessage("lblDraftPicks"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -137,7 +138,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Draft", null);
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblDraft"), null);
     }
 
     @Override
@@ -156,7 +157,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
+        this.getCatalogManager().setCaption(Localizer.getInstance().getMessage("lblPackNCards", String.valueOf(packNumber)));
         getCatalogManager().setPool(list);
     } // showChoices()
 
