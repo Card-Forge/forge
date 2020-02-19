@@ -6,6 +6,7 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedMenuBar;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -80,23 +81,23 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
         if (fullScreen) {
             layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnClose);
-            btnFullScreen.setToolTipText("Exit Full Screen (F11)");
+            btnFullScreen.setToolTipText(Localizer.getInstance().getMessage("lblExitFullScreen") + " (F11)");
             if (owner.getLockTitleBar()) {
-                btnLockTitleBar.setToolTipText("Unlock Title Bar");
+                btnLockTitleBar.setToolTipText(Localizer.getInstance().getMessage("lblUnlockTitleBar"));
             }
             else {
-                btnLockTitleBar.setToolTipText("Lock Title Bar");
+                btnLockTitleBar.setToolTipText(Localizer.getInstance().getMessage("lblLockTitleBar"));
             }
             btnLockTitleBar.repaintSelf();
         }
         else {
             layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
-            btnFullScreen.setToolTipText("Full Screen (F11)");
+            btnFullScreen.setToolTipText(Localizer.getInstance().getMessage("lblFullScreen") + " (F11)");
             if (owner.isMaximized()) {
-                btnMaximize.setToolTipText("Restore Down");
+                btnMaximize.setToolTipText(Localizer.getInstance().getMessage("lblRestoreDown"));
             }
             else {
-                btnMaximize.setToolTipText("Maximize");
+                btnMaximize.setToolTipText(Localizer.getInstance().getMessage("lblMaximize"));
             }
             btnMaximize.repaintSelf();
         }
@@ -238,7 +239,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
     
     public class MinimizeButton extends TitleBarButton {
         private MinimizeButton() {
-            setToolTipText("Minimize");
+            setToolTipText(Localizer.getInstance().getMessage("lblMinimize"));
         }
         @Override
         protected void onClick() {
@@ -368,7 +369,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
     public class CloseButton extends TitleBarButton {
         private CloseButton() {
-            setToolTipText("Close");
+            setToolTipText(Localizer.getInstance().getMessage("lblClose"));
         }
         @Override
         protected void onClick() {
