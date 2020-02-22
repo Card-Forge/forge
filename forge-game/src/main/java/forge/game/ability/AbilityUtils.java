@@ -1318,9 +1318,16 @@ public class AbilityUtils {
             return;
         }
 
+        Player pl = sa.getActivatingPlayer();
+        final Game game = pl.getGame();
+
+        if (sa.isTrigger() && sa.getParent() == null && sa.getPayCosts() != null) {
+            // when trigger cost are paid before the effect does resolve, need to clean the trigger
+            game.getTriggerHandler().resetActiveTriggers();
+        }
+
         // do blessing there before condition checks
         if (sa.isSpell() && sa.isBlessing() && !sa.getHostCard().isPermanent()) {
-            Player pl = sa.getActivatingPlayer();
             if (pl != null && pl.getZone(ZoneType.Battlefield).size() >= 10) {
                 pl.setBlessing(true);
             }
@@ -1335,7 +1342,7 @@ public class AbilityUtils {
             return;
         }
 
-        AbilityUtils.resolveApiAbility(sa, sa.getActivatingPlayer().getGame());
+        AbilityUtils.resolveApiAbility(sa, game);
     }
 
     private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
