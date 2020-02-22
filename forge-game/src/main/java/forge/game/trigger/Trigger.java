@@ -520,10 +520,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public final Trigger copy(Card newHost, boolean lki) {
-        // ensure ability so the ability is copied too, but only without lki
-        if (!lki) {
-            ensureAbility();
-        }
         final Trigger copy = (Trigger) clone();
 
         copyHelper(copy, newHost);

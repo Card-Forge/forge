@@ -542,6 +542,8 @@ public class TriggerHandler {
                 }
 
                 sa = AbilityFactory.getAbility(host, name);
+                // need to set as Overriding Abiltiy so it can be copied better
+                regtrig.setOverridingAbility(sa);
             }
         } else {
             // need to copy the SA because of TriggeringObjects
