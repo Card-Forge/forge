@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/02/147.-THB4-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You've drawn one card. Assume cards drawn are not relevant to the puzzle. Mu Yanling's +2 targeted Dream Trawler last turn (you didn't give it hexproof). Trapped in the Tower is controlled by your opponent. Colossus Hammer is controlled by you.
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Flicker of Fate;Brought Back;One with the Stars;One with the Stars
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Alseid of Life's Bounty;Dream Trawler|Id:1;Colossus Hammer|AttachedTo:1;Shoal Kraken;Trusted Pegasus;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs
+aibattlefield=Mu Yanling, Sky Dancer|Counters:LOYALTY=6;Arboretum Elemental|Id:2;Wings of Hubris|AttachedTo:2;Fae of Wishes;Fae of Wishes;Signpost Scarecrow
+humanprecast=Dream Trawler:TrigPump->1
+aiprecast=Trapped in the Tower->1;Mu Yanling, Sky Dancer:1->1
