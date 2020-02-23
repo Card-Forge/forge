@@ -95,6 +95,7 @@ public final class ForgeConstants {
     public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_ABILITY_FILE    = "sprite_ability.png";
     public static final String SPRITE_BORDER_FILE     = "sprite_border.png";
+    public static final String SPRITE_BUTTONS_FILE     = "sprite_buttons.png";
     public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
     public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";

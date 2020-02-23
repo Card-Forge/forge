@@ -190,6 +190,7 @@ public class FSkin {
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
+        final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -207,7 +208,13 @@ public class FSkin {
                 t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
             }
-
+            //hdbuttons
+            if (f11.exists()) {
+                Texture tf11 = new Texture(f11, true);
+                tf11.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f11.path(), tf11);
+                Forge.hdbuttons = true;
+            } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
                 c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
