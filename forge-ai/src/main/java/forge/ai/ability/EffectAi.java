@@ -11,6 +11,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -307,6 +308,16 @@ public class EffectAi extends SpellAbilityAi {
                 if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                     return false;
                 }
+            } else if (logic.equals("Bribe")) {
+                Card host = sa.getHostCard();
+                Combat combat = game.getCombat();
+                if (combat != null && combat.isAttacking(host, ai) && !combat.isBlocked(host)
+                        && game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && !AiCardMemory.isRememberedCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+                    AiCardMemory.rememberCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN); // ideally needs once per combat or something
+                    return true;
+                }
+                return false;
             }
         } else { //no AILogic
             return false;
