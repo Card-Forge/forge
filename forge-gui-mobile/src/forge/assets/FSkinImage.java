@@ -229,6 +229,9 @@ public enum FSkinImage implements FImage {
     BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER, SourceFile.ICONS),
     BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT, SourceFile.ICONS),
     //Hdbuttons
+    HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP, SourceFile.BTNSTART),
+    HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER, SourceFile.BTNSTART),
+    HDBTN_START_DOWN      (FSkinProp.IMG_HDBTN_START_DOWN, SourceFile.BTNSTART),
     HDBTN_UP_LEFT         (FSkinProp.IMG_HDBTN_UP_LEFT, SourceFile.BUTTONS),
     HDBTN_UP_CENTER       (FSkinProp.IMG_HDBTN_UP_CENTER, SourceFile.BUTTONS),
     HDBTN_UP_RIGHT        (FSkinProp.IMG_HDBTN_UP_RIGHT, SourceFile.BUTTONS),
@@ -332,6 +335,7 @@ public enum FSkinImage implements FImage {
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
         BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
+        BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
