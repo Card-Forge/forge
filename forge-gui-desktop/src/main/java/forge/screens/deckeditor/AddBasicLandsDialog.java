@@ -385,7 +385,7 @@ public class AddBasicLandsDialog {
             int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
             cbLandArt.addItem(Localizer.getInstance().getMessage("lblAssortedArt"));
             for (int i = 1; i <= artChoiceCount; i++) {
-                cbLandArt.addItem(Localizer.getInstance().getMessage("lblCardArt") + " " + i);
+                cbLandArt.addItem(Localizer.getInstance().getMessage("lblCardArtN", String.valueOf(i)));
             }
         }
 
