@@ -285,6 +285,9 @@ public enum FSkinProp {
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
     IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
     //hd buttons
+    IMG_HDBTN_START_UP        (new int[] {2, 2, 588, 312}, PropType.BTNSTART),
+    IMG_HDBTN_START_OVER      (new int[] {1183, 2, 588, 312}, PropType.BTNSTART),
+    IMG_HDBTN_START_DOWN      (new int[] {593, 2, 588, 312}, PropType.BTNSTART),
     IMG_HDBTN_UP_LEFT         (new int[] {2, 2, 160, 165}, PropType.BUTTONS),
     IMG_HDBTN_UP_CENTER       (new int[] {162, 2, 1, 165}, PropType.BUTTONS),
     IMG_HDBTN_UP_RIGHT        (new int[] {322, 2, 160, 165}, PropType.BUTTONS),
@@ -398,6 +401,7 @@ public enum FSkinProp {
         ABILITY,
         BORDERS,
         BUTTONS,
+        BTNSTART,
         MANAICONS,
         PLANAR_CONQUEST,
         FAVICON
