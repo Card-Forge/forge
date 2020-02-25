@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
