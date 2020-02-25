@@ -84,7 +84,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
-        lobby.getLblTitle().setText("Online Multiplayer: Lobby");
+        lobby.getLblTitle().setText(Localizer.getInstance().getMessage("lblOnlineLobbyTitle"));
         pnlTitle.removeAll();
         pnlTitle.setOpaque(false);
         pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span 2");

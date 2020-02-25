@@ -11,19 +11,20 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("Lobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
-        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
- 
+        Lobby("lblLobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
+
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
         OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, icon0, new FEventHandler() {
+            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back(); //remove current screen from chain
@@ -37,7 +38,7 @@ public class OnlineMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("Play Online - " + item.getText());
+                    screen.setHeaderCaption(Localizer.getInstance().getMessage("lblPlayOnline") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
