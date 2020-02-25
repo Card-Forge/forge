@@ -48,10 +48,22 @@ public enum FSkinProp {
 
     //zone images
     IMG_ZONE_HAND        (new int[] {280, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_HAND      (new int[] {2, 132, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_LIBRARY     (new int[] {280, 0, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_LIBRARY   (new int[] {132, 132, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_EXILE       (new int[] {320, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_EXILE     (new int[] {262, 132, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_FLASHBACK   (new int[] {280, 80, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_FLASHBACK (new int[] {262, 2, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_GRAVEYARD   (new int[] {320, 0, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_GRAVEYARD (new int[] {132, 2, 128, 128}, PropType.BUTTONS),
+
+    IMG_HDZONE_MANAPOOL  (new int[] {2, 2, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
 
     //mana images
@@ -216,7 +228,10 @@ public enum FSkinProp {
     ICO_SEARCH          (new int[] {660, 680, 20, 20}, PropType.ICON),
     ICO_UNKNOWN         (new int[] {0, 720, 80, 80}, PropType.ICON),
     ICO_LOGO            (new int[] {480, 0, 200, 200}, PropType.ICON),
+
     ICO_FLIPCARD        (new int[] {400, 0, 80, 120}, PropType.ICON),
+    ICO_HDFLIPCARD      (new int[] {2, 1264, 387, 500}, PropType.BUTTONS),
+
     ICO_FAVICON         (new int[] {0, 640, 80, 80}, PropType.ICON),
     ICO_LOCK            (new int[] {620, 800, 48, 48}, PropType.ICON),
 
@@ -288,24 +303,24 @@ public enum FSkinProp {
     IMG_HDBTN_START_UP        (new int[] {2, 2, 588, 312}, PropType.BTNSTART),
     IMG_HDBTN_START_OVER      (new int[] {1183, 2, 588, 312}, PropType.BTNSTART),
     IMG_HDBTN_START_DOWN      (new int[] {593, 2, 588, 312}, PropType.BTNSTART),
-    IMG_HDBTN_UP_LEFT         (new int[] {2, 2, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_UP_CENTER       (new int[] {162, 2, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_UP_RIGHT        (new int[] {322, 2, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_OVER_LEFT       (new int[] {2, 169, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_OVER_CENTER     (new int[] {162, 169, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_OVER_RIGHT      (new int[] {322, 169, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DOWN_LEFT       (new int[] {2, 336, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DOWN_CENTER     (new int[] {162, 336, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DOWN_RIGHT      (new int[] {322, 336, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_FOCUS_LEFT      (new int[] {2, 503, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_FOCUS_CENTER    (new int[] {162, 503, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_FOCUS_RIGHT     (new int[] {322, 503, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_TOGGLE_LEFT     (new int[] {2, 670, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_TOGGLE_CENTER   (new int[] {162, 670, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_TOGGLE_RIGHT    (new int[] {322, 670, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DISABLED_LEFT   (new int[] {2, 837, 160, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DISABLED_CENTER (new int[] {162, 837, 1, 165}, PropType.BUTTONS),
-    IMG_HDBTN_DISABLED_RIGHT  (new int[] {322, 837, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_UP_LEFT         (new int[] {2, 262, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_UP_CENTER       (new int[] {162, 262, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_UP_RIGHT        (new int[] {322, 262, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_LEFT       (new int[] {2, 429, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_CENTER     (new int[] {162, 429, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_RIGHT      (new int[] {322, 429, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_LEFT       (new int[] {2, 596, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_CENTER     (new int[] {162, 596, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_RIGHT      (new int[] {322, 596, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_LEFT      (new int[] {2, 763, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_CENTER    (new int[] {162, 763, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_RIGHT     (new int[] {322, 763, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_LEFT     (new int[] {2, 930, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_CENTER   (new int[] {162, 930, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_RIGHT    (new int[] {322, 930, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_LEFT   (new int[] {2, 1097, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_CENTER (new int[] {162, 1097, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_RIGHT  (new int[] {322, 1097, 160, 165}, PropType.BUTTONS),
 
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),

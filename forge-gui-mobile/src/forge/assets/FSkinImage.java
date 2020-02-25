@@ -19,10 +19,22 @@ import forge.util.ImageUtil;
 public enum FSkinImage implements FImage {
     //Zones
     HAND        (FSkinProp.IMG_ZONE_HAND, SourceFile.ICONS),
+    HDHAND      (FSkinProp.IMG_HDZONE_HAND, SourceFile.BUTTONS),
+
     LIBRARY     (FSkinProp.IMG_ZONE_LIBRARY, SourceFile.ICONS),
+    HDLIBRARY   (FSkinProp.IMG_HDZONE_LIBRARY, SourceFile.BUTTONS),
+
     EXILE       (FSkinProp.IMG_ZONE_EXILE, SourceFile.ICONS),
+    HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
+
     FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
+    HDFLASHBACK   (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
+    HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
+
+    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
+
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
 
     //Mana symbols
@@ -180,7 +192,10 @@ public enum FSkinImage implements FImage {
     SEARCH          (FSkinProp.ICO_SEARCH, SourceFile.ICONS),
     UNKNOWN         (FSkinProp.ICO_UNKNOWN, SourceFile.ICONS),
     LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
+
     FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),
+    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD, SourceFile.BUTTONS),
+
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
     LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
 
