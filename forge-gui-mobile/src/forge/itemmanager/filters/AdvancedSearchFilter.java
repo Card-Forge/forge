@@ -118,7 +118,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                     protected void buildMenu() {
                         //add a menu item for each filter to allow easily editing just that filter
                         for (final IFilterControl<T> control : model.getControls()) {
-                            FMenuItem item = new FMenuItem(control.getFilter().toString(), FSkinImage.EDIT, new FEventHandler() {
+                            FMenuItem item = new FMenuItem(control.getFilter().toString(), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     model.editFilterControl(control, onFilterChange);
@@ -127,13 +127,13 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                             item.setTextRenderer(new TextRenderer()); //ensure symbols are displayed
                             addItem(item);
                         }
-                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblEditExpression"), FSkinImage.EDIT, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblEditExpression"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 edit();
                             }
                         }));
-                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRemoveFilter"), FSkinImage.DELETE, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRemoveFilter"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 reset();

@@ -367,14 +367,14 @@ public class FFileChooser extends FDialog {
                         @Override
                         protected void buildMenu() {
                             String suffix = value.isDirectory() ? " Folder" : " File";
-                            addItem(new FMenuItem("Rename" + suffix, FSkinImage.EDIT,
+                            addItem(new FMenuItem("Rename" + suffix, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     renameFile(value);
                                 }
                             }));
-                            addItem(new FMenuItem("Delete" + suffix, FSkinImage.DELETE,
+                            addItem(new FMenuItem("Delete" + suffix, Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
@@ -392,7 +392,7 @@ public class FFileChooser extends FDialog {
                 public void drawValue(Graphics g, Integer index, File value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                     if (value.isDirectory()) {
                         float iconSize = h;
-                        g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
+                        g.drawImage(Forge.hdbuttons ? FSkinImage.HDFOLDER : FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
                         x += iconSize + FList.PADDING;
                     }
                     g.drawText(value.getName(), font, foreColor, x, y, w, h, false, Align.left, true);

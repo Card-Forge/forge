@@ -7,6 +7,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -236,7 +237,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         final ConquestData model = FModel.getConquest().getModel();
                         if (model.isInExile(card)) {
                             final int cost = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
-                            item = new FMenuItem(Localizer.getInstance().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), FSkinImage.PLUS, new FEventHandler() {
+                            item = new FMenuItem(Localizer.getInstance().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FThreads.invokeInBackgroundThread(new Runnable() {
