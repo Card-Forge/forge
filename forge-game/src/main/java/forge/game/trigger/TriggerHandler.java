@@ -274,7 +274,7 @@ public class TriggerHandler {
     }
 
     private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
-        for (final Trigger t: activeTriggers) {
+        for (final Trigger t: Lists.newArrayList(activeTriggers)) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
                 runSingleTrigger(t, runParams);
             }
@@ -545,12 +545,17 @@ public class TriggerHandler {
                 // need to set as Overriding Abiltiy so it can be copied better
                 regtrig.setOverridingAbility(sa);
             }
+            sa.setActivatingPlayer(host.getController());
+
+            if (regtrig.isIntrinsic()) {
+                sa.setIntrinsic(true);
+                sa.changeText();
+            }
         } else {
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy();
+            sa = sa.copy(host, host.getController(), false);
         }
 
-        sa.setHostCard(host);
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
         sa.setLastStateGraveyard(game.getLastStateGraveyard());
 
@@ -562,9 +567,7 @@ public class TriggerHandler {
             sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
 
-        if (sa.getActivatingPlayer() == null) { // overriding delayed trigger should have set activator
-            sa.setActivatingPlayer(host.getController());
-        } else if (sa.getDeltrigActivatingPlayer() != null) {
+        if (sa.getDeltrigActivatingPlayer() != null) {
             // make sure that the original delayed trigger activator is restored
             // (may have been overwritten by the AI simulation routines, e.g. Rainbow Vale)
             sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
@@ -577,11 +580,6 @@ public class TriggerHandler {
 
         if (regtrig.hasParam("RememberController")) {
             host.addRemembered(sa.getActivatingPlayer());
-        }
-
-        if (regtrig.isIntrinsic() && regtrig.getOverridingAbility() == null) {
-            sa.setIntrinsic(true);
-            sa.changeText();
         }
 
         sa.setStackDescription(sa.toString());
