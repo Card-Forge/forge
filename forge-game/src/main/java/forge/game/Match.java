@@ -241,9 +241,8 @@ public class Match {
                     person = sideboardProxy;
                 }
 
-                String forPlayer = " for " + player.getName();
                 Deck toChange = psc.getDeck();
-                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), forPlayer);
+                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
