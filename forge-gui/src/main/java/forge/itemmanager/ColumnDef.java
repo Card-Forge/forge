@@ -58,13 +58,17 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toSortableName(CardTranslation.getTranslatedName(from.getKey().getName()));
+                    if (from.getKey() instanceof PaperCard)
+                        return toSortableName(from.getKey().toString());
+                    return toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return CardTranslation.getTranslatedName(from.getKey().getName());
+                    if (from.getKey() instanceof PaperCard)
+                        return from.getKey().toString();
+                    return from.getKey().getName();
                 }
             }),
             
