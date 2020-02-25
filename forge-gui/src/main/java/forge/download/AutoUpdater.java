@@ -2,6 +2,7 @@ package forge.download;
 
 import com.google.common.collect.ImmutableList;
 import forge.GuiBase;
+import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
@@ -27,7 +28,7 @@ public class AutoUpdater {
     private final String RELEASE_MAVEN_METADATA = "https://releases.cardforge.org/forge/forge-gui-desktop/maven-metadata.xml";
     private static final boolean VERSION_FROM_METADATA = true;
 
-    public static String[] updateChannels = new String[]{ "None", "Snapshot", "Release"};
+    public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
 
     private boolean isLoading;
     private String updateChannel;
@@ -40,8 +41,8 @@ public class AutoUpdater {
     public AutoUpdater(boolean loading) {
         // What do I need? Preferences? Splashscreen? UI? Skins?
         isLoading = loading;
-        final ForgePreferences.FPref updatePreference = ForgePreferences.FPref.AUTO_UPDATE;
-        updateChannel = "release"; //this.prefs.getPref(updatePreference);
+        updateChannel = FModel.getPreferences().getPref(ForgePreferences.FPref.AUTO_UPDATE);
+        buildVersion = BuildInfo.getVersionString();
     }
 
     public boolean attemptToUpdate() {
@@ -65,16 +66,24 @@ public class AutoUpdater {
         if (isLoading) {
             // TODO This doesn't work yet, because FSkin isn't loaded at the time.
             return false;
+        } else if (updateChannel.equals("none")) {
+            // User clicked on check for updates withoout a valid update channel prompt
+            // updateChannel = newchoice or return false
         }
 
-        if (updateChannel.equalsIgnoreCase("none")) {
+        if (buildVersion.contains("GIT")) {
             return false;
-        } else if (updateChannel.equalsIgnoreCase("release")) {
-            versionUrlString = RELEASE_VERSION_URL;
-            packageUrl = RELEASE_PACKAGE;
-        } else {
+        } else if (buildVersion.contains("SNAPSHOT")) {
+            if (!updateChannel.equals("snapshot")) {
+                System.out.println("Snapshot build versions must use snapshot update channel to work");
+                return false;
+            }
+
             versionUrlString = SNAPSHOT_VERSION_URL;
             packageUrl = SNAPSHOT_PACKAGE;
+        } else {
+            versionUrlString = RELEASE_VERSION_URL;
+            packageUrl = RELEASE_PACKAGE;
         }
 
         // Check the internet connection
@@ -100,14 +109,7 @@ public class AutoUpdater {
         try {
             retrieveVersion();
 
-            buildVersion = BuildInfo.getVersionString();
-
-            if (buildVersion.contains("SNAPSHOT") && !updateChannel.equals("snapshot")) {
-                System.out.println("Snapshot build versions must use snapshot update channel to work");
-                return false;
-            }
-
-            if (buildVersion.equalsIgnoreCase("GIT") || StringUtils.isEmpty(version) ) {
+            if (StringUtils.isEmpty(version) ) {
                 return false;
             }
 
@@ -119,6 +121,7 @@ public class AutoUpdater {
             e.printStackTrace();
             return false;
         }
+        // If version doesn't match, it's assummably newer.
         return true;
     }
 
@@ -159,11 +162,10 @@ public class AutoUpdater {
     }
 
     private boolean downloadUpdate() throws URISyntaxException, IOException {
-        // We need to preload enough of a Skins to show a dialog and a button if we're in loading
-        // splashScreen.prepareForDialogs();
-
-        // Change the "auto" to more auto.
+        // Change the "auto" to be more auto.
         if (isLoading) {
+            // We need to preload enough of a Skins to show a dialog and a button if we're in loading
+            // splashScreen.prepareForDialogs();
             return downloadFromBrowser();
         }
 
