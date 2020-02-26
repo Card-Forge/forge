@@ -19,10 +19,22 @@ import forge.util.ImageUtil;
 public enum FSkinImage implements FImage {
     //Zones
     HAND        (FSkinProp.IMG_ZONE_HAND, SourceFile.ICONS),
+    HDHAND      (FSkinProp.IMG_HDZONE_HAND, SourceFile.BUTTONS),
+
     LIBRARY     (FSkinProp.IMG_ZONE_LIBRARY, SourceFile.ICONS),
+    HDLIBRARY   (FSkinProp.IMG_HDZONE_LIBRARY, SourceFile.BUTTONS),
+
     EXILE       (FSkinProp.IMG_ZONE_EXILE, SourceFile.ICONS),
+    HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
+
     FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
+    HDFLASHBACK   (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
+    HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
+
+    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
+
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
 
     //Mana symbols
@@ -162,25 +174,51 @@ public enum FSkinImage implements FImage {
     INFORMATION     (FSkinProp.ICO_INFORMATION, SourceFile.ICONS),
     WARNING         (FSkinProp.ICO_WARNING, SourceFile.ICONS),
     ERROR           (FSkinProp.ICO_ERROR, SourceFile.ICONS),
+
     DELETE          (FSkinProp.ICO_DELETE, SourceFile.ICONS),
+    HDDELETE        (FSkinProp.ICO_HDDELETE, SourceFile.BUTTONS),
+
     DELETE_OVER     (FSkinProp.ICO_DELETE_OVER, SourceFile.ICONS),
+
     EDIT            (FSkinProp.ICO_EDIT, SourceFile.ICONS),
+    HDEDIT            (FSkinProp.ICO_HDEDIT, SourceFile.BUTTONS),
+
     EDIT_OVER       (FSkinProp.ICO_EDIT_OVER, SourceFile.ICONS),
+
     OPEN            (FSkinProp.ICO_OPEN, SourceFile.ICONS),
+    HDOPEN          (FSkinProp.ICO_HDOPEN, SourceFile.BUTTONS),
+
     MINUS           (FSkinProp.ICO_MINUS, SourceFile.ICONS),
+    HDMINUS         (FSkinProp.ICO_HDMINUS, SourceFile.BUTTONS),
+
     NEW             (FSkinProp.ICO_NEW, SourceFile.ICONS),
+
     PLUS            (FSkinProp.ICO_PLUS, SourceFile.ICONS),
+    HDPLUS          (FSkinProp.ICO_HDPLUS, SourceFile.BUTTONS),
+
     PRINT           (FSkinProp.ICO_PRINT, SourceFile.ICONS),
+
     SAVE            (FSkinProp.ICO_SAVE, SourceFile.ICONS),
+    HDSAVE          (FSkinProp.ICO_HDSAVE, SourceFile.BUTTONS),
     SAVEAS          (FSkinProp.ICO_SAVEAS, SourceFile.ICONS),
+    HDSAVEAS        (FSkinProp.ICO_HDSAVEAS, SourceFile.BUTTONS),
+
     CLOSE           (FSkinProp.ICO_CLOSE, SourceFile.ICONS),
     LIST            (FSkinProp.ICO_LIST, SourceFile.ICONS),
     CARD_IMAGE      (FSkinProp.ICO_CARD_IMAGE, SourceFile.ICONS),
+
     FOLDER          (FSkinProp.ICO_FOLDER, SourceFile.ICONS),
+    HDFOLDER        (FSkinProp.ICO_HDFOLDER, SourceFile.BUTTONS),
+
     SEARCH          (FSkinProp.ICO_SEARCH, SourceFile.ICONS),
+    HDSEARCH        (FSkinProp.ICO_HDSEARCH, SourceFile.BUTTONS),
+
     UNKNOWN         (FSkinProp.ICO_UNKNOWN, SourceFile.ICONS),
     LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
+
     FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),
+    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD, SourceFile.BUTTONS),
+
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
     LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
 
@@ -193,8 +231,11 @@ public enum FSkinImage implements FImage {
     CUR_TAB (FSkinProp.IMG_CUR_TAB, SourceFile.ICONS),
 
     //Editor images
-    STAR_OUTINE     (FSkinProp.IMG_STAR_OUTINE, SourceFile.ICONS),
+    STAR_OUTLINE    (FSkinProp.IMG_STAR_OUTLINE, SourceFile.ICONS),
+    HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE, SourceFile.BUTTONS),
     STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
+    HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED, SourceFile.BUTTONS),
+
     ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
     CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),
     ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.MANAICONS),

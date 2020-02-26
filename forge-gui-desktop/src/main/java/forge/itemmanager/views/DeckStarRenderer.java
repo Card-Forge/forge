@@ -82,7 +82,7 @@ public class DeckStarRenderer extends ItemCellRenderer {
         }
         else if (DeckPreferences.getPrefs(deck).getStarCount() == 0) {
             this.setToolTipText("Click to add " + deck.getName() + " to your favorites");
-            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTINE);
+            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
             this.setToolTipText("Click to remove " + deck.getName() + " from your favorites");

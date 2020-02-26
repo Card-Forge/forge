@@ -17,6 +17,7 @@
  */
 package forge.screens.match.views;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -224,7 +225,7 @@ public class VAssignDamage extends FDialog {
                     assignDamageTo(card, false);
                 }
             }).build());
-            btnAdd = add(new FLabel.ButtonBuilder().icon(FSkinImage.PLUS).command(new FEventHandler() {
+            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     assignDamageTo(card, true);

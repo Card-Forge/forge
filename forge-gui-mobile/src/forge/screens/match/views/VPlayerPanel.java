@@ -61,16 +61,16 @@ public class VPlayerPanel extends FContainer {
         field = add(new VField(player));
         avatar = add(new VAvatar(player, avatarHeight));
         lblLife = add(new LifeLabel());
-        addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
-        addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
-        addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
-        addZoneDisplay(ZoneType.Flashback, FSkinImage.FLASHBACK);
+        addZoneDisplay(ZoneType.Hand, Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND);
+        addZoneDisplay(ZoneType.Graveyard, Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD);
+        addZoneDisplay(ZoneType.Library, Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY);
+        addZoneDisplay(ZoneType.Flashback, Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK);
 
         VManaPool manaPool = add(new VManaPool(player));
-        tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
+        tabManaPool = add(new InfoTab(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : FSkinImage.MANA_X, manaPool));
         tabs.add(tabManaPool);
 
-        addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
+        addZoneDisplay(ZoneType.Exile, Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE);
 
         commandZone = add(new CommandZoneDisplay(player));
 
