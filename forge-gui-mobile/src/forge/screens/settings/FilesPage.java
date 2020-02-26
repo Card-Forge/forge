@@ -1,5 +1,6 @@
 package forge.screens.settings;
 
+import forge.Forge;
 import forge.download.GuiDownloadAchievementImages;
 import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloadPrices;
@@ -31,7 +32,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
     private final Localizer localizer = Localizer.getInstance();
 
     protected FilesPage() {
-        super(Localizer.getInstance().getMessage("lblFiles"), FSkinImage.OPEN);
+        super(Localizer.getInstance().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 

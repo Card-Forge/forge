@@ -324,7 +324,7 @@ public class AddBasicLandsDialog extends FDialog {
                 }
             });
             lblCount = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
-            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
+            btnSubtract = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     if (count > 0) {
@@ -334,7 +334,7 @@ public class AddBasicLandsDialog extends FDialog {
                     }
                 }
             }).build());
-            btnAdd = add(new FLabel.ButtonBuilder().icon(FSkinImage.PLUS).command(new FEventHandler() {
+            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     if (maxCount == 0 || count < maxCount) {

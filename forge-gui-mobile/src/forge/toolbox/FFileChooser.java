@@ -265,8 +265,8 @@ public class FFileChooser extends FDialog {
     }
 
     private void deleteFile(final Integer index, final File file) {
-        final String deleteObj = file.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
-        FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblAreYouSureProceedDelete"), deleteObj,
+        final String deleteBehavior = file.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
+        FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblAreYouSureProceedDelete"), deleteBehavior,
                 Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"), new Callback<Boolean>() {
             @Override
             public void run(Boolean result) {
@@ -367,16 +367,16 @@ public class FFileChooser extends FDialog {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final String renameObj = value.isDirectory() ? Localizer.getInstance().getMessage("lblRenameFolder") : Localizer.getInstance().getMessage("lblRenameFile");
-                            final String deleteObj = value.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
-                            addItem(new FMenuItem(renameObj, FSkinImage.EDIT,
+                            final String renameBehavior = value.isDirectory() ? Localizer.getInstance().getMessage("lblRenameFolder") : Localizer.getInstance().getMessage("lblRenameFile");
+                            final String deleteBehavior = value.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
+                            addItem(new FMenuItem(renameBehavior, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     renameFile(value);
                                 }
                             }));
-                            addItem(new FMenuItem(deleteObj, FSkinImage.DELETE,
+                            addItem(new FMenuItem(deleteBehavior, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
@@ -394,7 +394,7 @@ public class FFileChooser extends FDialog {
                 public void drawValue(Graphics g, Integer index, File value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                     if (value.isDirectory()) {
                         float iconSize = h;
-                        g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
+                        g.drawImage(Forge.hdbuttons ? FSkinImage.HDFOLDER : FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
                         x += iconSize + FList.PADDING;
                     }
                     g.drawText(value.getName(), font, foreColor, x, y, w, h, false, Align.left, true);

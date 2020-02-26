@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityUtils;
@@ -78,68 +77,9 @@ public final class GameActionUtil {
         if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
             boolean lkicheck = false;
 
-            // need to be done before so it works with Vivien and Zoetic Cavern
-            if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.turnFaceUp(false, false);
-                lkicheck = true;
-            }
-
-            if (sa.isBestow() && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.animateBestow(false);
-                lkicheck = true;
-            } else if (sa.isCastFaceDown()) {
-                // need a copy of the card to turn facedown without trigger anything
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                source.turnFaceDownNoUpdate();
-                lkicheck = true;
-            } else if (sa.isAdventure()) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.setState(CardStateName.Adventure, false);
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
-                lkicheck = true;
-            } else if (source.isSplitCard() && (sa.isLeftSplit() || sa.isRightSplit())) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                if (sa.isLeftSplit()) {
-                    if (!source.hasState(CardStateName.LeftSplit)) {
-                        source.addAlternateState(CardStateName.LeftSplit, false);
-                        source.getState(CardStateName.LeftSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.LeftSplit), true);
-                    }
-
-                    source.setState(CardStateName.LeftSplit, false);
-                }
-
-                if (sa.isRightSplit()) {
-                    if (!source.hasState(CardStateName.RightSplit)) {
-                        source.addAlternateState(CardStateName.RightSplit, false);
-                        source.getState(CardStateName.RightSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.RightSplit), true);
-                    }
-
-                    source.setState(CardStateName.RightSplit, false);
-                }
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
+            Card newHost = ((Spell)sa).getAlternateHost(source);
+            if (newHost != null) {
+                source = newHost;
                 lkicheck = true;
             }
 
@@ -218,6 +158,7 @@ public final class GameActionUtil {
                         final Cost escapeCost = new Cost(k[1], true);
 
                         final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+                        newSA.setActivatingPlayer(activator);
 
                         newSA.getMapParams().put("PrecostDesc", "Escape—");
                         newSA.getMapParams().put("CostDesc", escapeCost.toString());
@@ -276,6 +217,7 @@ public final class GameActionUtil {
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
             // set the cost to this directly to buypass non mana cost
             final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+            newSA.setActivatingPlayer(activator);
             newSA.setBasicSpell(false);
             newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
             // makes new SpellDescription

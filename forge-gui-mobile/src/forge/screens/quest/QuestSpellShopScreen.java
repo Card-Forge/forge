@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.utils.Align;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -306,7 +307,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected FSkinImage getVerbIcon() {
-            return FSkinImage.PLUS;
+            return Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS;
         }
 
         @Override
@@ -317,7 +318,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class InventoryPage extends SpellShopBasePage {
         protected FLabel lblSellExtras = add(new FLabel.Builder().text(localizer.getMessage("lblSellAllExtras"))
-                .icon(FSkinImage.MINUS).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
+                .icon(Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
                 .command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -366,7 +367,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected FSkinImage getVerbIcon() {
-            return FSkinImage.MINUS;
+            return Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS;
         }
 
         @Override

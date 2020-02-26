@@ -642,7 +642,7 @@ public class PlayerPanel extends FContainer {
 
     private FLabel createNameRandomizer() {
         final FLabel newNameBtn = new FLabel.Builder().iconInBackground(false)
-                .icon(FSkinImage.EDIT).opaque(false).build();
+                .icon(Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT).opaque(false).build();
         newNameBtn.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

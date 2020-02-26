@@ -86,7 +86,7 @@ public class StarRenderer extends ItemCellRenderer {
         }
         else if (CardPreferences.getPrefs(card).getStarCount() == 0) {
             this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
-            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTINE);
+            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
             this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
