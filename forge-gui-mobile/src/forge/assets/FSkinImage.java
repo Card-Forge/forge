@@ -28,7 +28,7 @@ public enum FSkinImage implements FImage {
     HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
 
     FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
-    HDFLASHBACK   (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+    HDFLASHBACK (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
 
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
     HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
@@ -125,6 +125,14 @@ public enum FSkinImage implements FImage {
     ARCSOFF      (FSkinProp.ICO_ARCSOFF, SourceFile.ICONS),
     ARCSON       (FSkinProp.ICO_ARCSON, SourceFile.ICONS),
     ARCSHOVER    (FSkinProp.ICO_ARCSHOVER, SourceFile.ICONS),
+
+    //choice-search-misc
+    HDCHOICE     (FSkinProp.ICO_HDCHOICE, SourceFile.BUTTONS),
+    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD, SourceFile.BUTTONS),
+    HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE, SourceFile.BUTTONS),
+    HDIMPORT     (FSkinProp.ICO_HDIMPORT, SourceFile.BUTTONS),
+    HDEXPORT     (FSkinProp.ICO_HDEXPORT, SourceFile.BUTTONS),
+    BLANK        (FSkinProp.ICO_BLANK, SourceFile.ICONS),
 
     //Achievement Trophies
     COMMON_TROPHY    (FSkinProp.IMG_COMMON_TROPHY, SourceFile.TROPHIES),
@@ -242,6 +250,7 @@ public enum FSkinImage implements FImage {
     INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.MANAICONS),
     LAND            (FSkinProp.IMG_LAND, SourceFile.MANAICONS),
     MULTI           (FSkinProp.IMG_MULTI, SourceFile.ICONS),
+    HDMULTI         (FSkinProp.IMG_HDMULTI, SourceFile.MANAICONS),
     PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
     SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),

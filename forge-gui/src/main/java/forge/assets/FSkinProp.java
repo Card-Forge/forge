@@ -182,6 +182,14 @@ public enum FSkinProp {
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
 
+    //choice-search-misc
+    ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDSIDEBOARD  (new int[] {132, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDPREFERENCE (new int[] {262, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDIMPORT     (new int[] {2, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_HDEXPORT     (new int[] {132, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_BLANK        (new int[] {1, 1, 1, 1}, PropType.ICON),
+
     //quest icons
     ICO_QUEST_ZEP         (new int[] {0, 480, 80, 80}, PropType.ICON),
     ICO_QUEST_GEAR        (new int[] {80, 480, 80, 80}, PropType.ICON),
@@ -278,6 +286,7 @@ public enum FSkinProp {
     IMG_INSTANT         (new int[] {166, 740, 80, 80}, PropType.MANAICONS),
     IMG_LAND            (new int[] {248, 740, 80, 80}, PropType.MANAICONS),
     IMG_MULTI           (new int[] {80, 720, 40, 40}, PropType.IMAGE),
+    IMG_HDMULTI         (new int[] {2, 822, 80, 80}, PropType.MANAICONS),
     IMG_PLANESWALKER    (new int[] {330, 740, 80, 80}, PropType.MANAICONS),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
