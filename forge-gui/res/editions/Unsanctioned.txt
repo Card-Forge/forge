@@ -1,0 +1,24 @@
+[metadata]
+Code=UND
+Code2=UND
+Date=2020-02-29
+Name=Unsanctioned
+MciCode=und
+Type=Other
+
+[cards]
+87 L Plains
+88 L Plains
+89 L Island
+90 L Island
+91 L Swamp
+92 L Swamp
+93 L Mountain
+94 L Mountain
+95 L Forest
+96 L Forest
+
+[tokens]
+u_1_1_beeble
+r_1_1_goblin
+g_1_1_squirrel
