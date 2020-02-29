@@ -2,7 +2,7 @@ Name:Kenrith, the Returned King
 ManaCost:4 W
 Types:Legendary Creature Human Noble
 PT:5/5
-A:AB$ PumpAll | Cost$ R | ValidCards$ Creature | KW$ Trample & Haste | SpellDescription$ All creatures gain trample and haste until end of turn.
+A:AB$ PumpAll | Cost$ R | ValidCards$ Creature | KW$ Trample & Haste | AILogic$ PumpForTrample | SpellDescription$ All creatures gain trample and haste until end of turn.
 A:AB$ PutCounter | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 A:AB$ GainLife | Cost$ 2 W | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 5 life.
 A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
