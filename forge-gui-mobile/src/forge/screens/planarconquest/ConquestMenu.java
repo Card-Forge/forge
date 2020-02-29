@@ -126,8 +126,8 @@ public class ConquestMenu extends FPopupMenu {
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
         addItem(planeswalkersItem); planeswalkersItem.setSelected(currentScreen == planeswalkersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
-        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(planeswalkItem); planeswalkItem.setSelected(currentScreen == planeswalkScreen);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }
