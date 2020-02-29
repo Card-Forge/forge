@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #05
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/02/148.-THB5-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You have eight cards remaining in your library. Assume these cards are not relevant to the solution.
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Devious Cover-Up;Dawn of Hope;Frogify;Phoenix of Ash;Sentinel's Eyes
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Fblthp, the Lost;Elspeth, Sun's Nemesis|Counters:LOYALTY=4;Glint-Horn Buccaneer|Id:1;Benthic Biomancer;Heliod, Sun-Crowned;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+aibattlefield=Hushbringer|Tapped;Bishop of Wings;Gilded Goose;Setessan Champion;Arboreal Grazer;Demotion|AttachedTo:1
