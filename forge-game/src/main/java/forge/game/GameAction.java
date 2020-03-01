@@ -375,7 +375,7 @@ public class GameAction {
         // the LKI needs to be the Card itself,
         // or it might not updated correctly
         // TODO be reworked when ZoneTrigger Update is done
-        if (toBattlefield) {
+        if (toBattlefield || zoneTo.is(ZoneType.Stack)) {
             lastKnownInfo = c;
         }
 
