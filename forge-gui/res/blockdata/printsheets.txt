@@ -1775,7 +1775,7 @@ Temple of Malice|THB|2
 Temple of Plenty|THB|2
 Arasta of the Endless Web|THB|3
 Alseid of Life's Bounty|THB|2
-Thirst For Meaning|THB|2
+Thirst for Meaning|THB|2
 Gray Merchant of Asphodel|THB|2
 Thrill of Possibility|THB|2
 Wolfwillow Haven|THB|2
