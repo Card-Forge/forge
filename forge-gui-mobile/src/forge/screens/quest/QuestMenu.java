@@ -43,7 +43,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
 
-    private static final FMenuItem duelsItem = new FMenuItem(Localizer.getInstance().getMessage("lblDuels"), FSkinImage.QUEST_GEAR, new FEventHandler() {
+    private static final FMenuItem duelsItem = new FMenuItem(Localizer.getInstance().getMessage("lblDuels"), FSkinImage.QUEST_BIG_SWORD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(duelsScreen);
@@ -55,13 +55,13 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             setCurrentScreen(challengesScreen);
         }
     });
-    private static final FMenuItem tournamentsItem = new FMenuItem(Localizer.getInstance().getMessage("lblTournaments"), FSkinImage.PACK, new FEventHandler() {
+    private static final FMenuItem tournamentsItem = new FMenuItem(Localizer.getInstance().getMessage("lblTournaments"), FSkinImage.QUEST_BIG_SHIELD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(tournamentsScreen);
         }
     });
-    private static final FMenuItem decksItem = new FMenuItem(Localizer.getInstance().getMessage("lblQuestDecks"), FSkinImage.DECKLIST, new FEventHandler() {
+    private static final FMenuItem decksItem = new FMenuItem(Localizer.getInstance().getMessage("lblQuestDecks"), FSkinImage.QUEST_BIG_BAG, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(decksScreen);

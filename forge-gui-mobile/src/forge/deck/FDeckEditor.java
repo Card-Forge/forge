@@ -332,7 +332,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     protected void buildMenu() {
                         final Localizer localizer = Localizer.getInstance();
 
-                        addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LAND, new FEventHandler() {
+                        addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 CardEdition defaultLandSet;
