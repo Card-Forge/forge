@@ -1,6 +1,7 @@
 package forge.itemmanager;
 
 import com.google.common.base.Predicate;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
 import forge.card.CardRules;
@@ -35,7 +36,8 @@ public final class SItemManagerUtil {
         RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.Presets.IS_RED, "lblRedcards"),
         GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.Presets.IS_GREEN, "lblGreencards"),
         COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "lblColorlesscards"),
-        MULTICOLOR (FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "lblMulticolorcards"),
+        MULTICOLOR (GuiBase.getInterface().isLibgdxPort() ? FSkinProp.IMG_HDMULTI :
+                    FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "lblMulticolorcards"),
 
         PACK_OR_DECK (FSkinProp.IMG_PACK,         null, "lblPackordeck"),
         LAND         (FSkinProp.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "lblLands"),
@@ -60,7 +62,8 @@ public final class SItemManagerUtil {
         DECK_RED        (FSkinProp.IMG_MANA_R,         null, "lblReddecks"),
         DECK_GREEN      (FSkinProp.IMG_MANA_G,         null, "lblGreendecks"),
         DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "lblColorlessdecks"),
-        DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "lblMulticolordecks"),
+        DECK_MULTICOLOR (GuiBase.getInterface().isLibgdxPort() ? FSkinProp.IMG_HDMULTI :
+                         FSkinProp.IMG_MULTI,          null, "lblMulticolordecks"),
     	
         FOIL_OLD  (FSkinProp.FOIL_11,   null, "lblOldstyleFoilcards"),
         FOIL_NEW  (FSkinProp.FOIL_01,   null, "lblNewstyleFoilcards"),

@@ -28,7 +28,7 @@ public enum FSkinImage implements FImage {
     HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
 
     FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
-    HDFLASHBACK   (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+    HDFLASHBACK (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
 
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
     HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
@@ -126,6 +126,14 @@ public enum FSkinImage implements FImage {
     ARCSON       (FSkinProp.ICO_ARCSON, SourceFile.ICONS),
     ARCSHOVER    (FSkinProp.ICO_ARCSHOVER, SourceFile.ICONS),
 
+    //choice-search-misc
+    HDCHOICE     (FSkinProp.ICO_HDCHOICE, SourceFile.BUTTONS),
+    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD, SourceFile.BUTTONS),
+    HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE, SourceFile.BUTTONS),
+    HDIMPORT     (FSkinProp.ICO_HDIMPORT, SourceFile.BUTTONS),
+    HDEXPORT     (FSkinProp.ICO_HDEXPORT, SourceFile.BUTTONS),
+    BLANK        (FSkinProp.ICO_BLANK, SourceFile.ICONS),
+
     //Achievement Trophies
     COMMON_TROPHY    (FSkinProp.IMG_COMMON_TROPHY, SourceFile.TROPHIES),
     UNCOMMON_TROPHY  (FSkinProp.IMG_UNCOMMON_TROPHY, SourceFile.TROPHIES),
@@ -168,6 +176,22 @@ public enum FSkinImage implements FImage {
     QUEST_MINUS       (FSkinProp.ICO_QUEST_MINUS, SourceFile.ICONS),
     QUEST_PLUS        (FSkinProp.ICO_QUEST_PLUS, SourceFile.ICONS),
     QUEST_PLUSPLUS    (FSkinProp.ICO_QUEST_PLUSPLUS, SourceFile.ICONS),
+    QUEST_BIG_ELIXIR  (FSkinProp.ICO_QUEST_BIG_ELIXIR, SourceFile.ICONS),
+    QUEST_BIG_BREW    (FSkinProp.ICO_QUEST_BIG_BREW, SourceFile.ICONS),
+    QUEST_BIG_BM      (FSkinProp.ICO_QUEST_BIG_BM, SourceFile.ICONS),
+    QUEST_BIG_STAKES  (FSkinProp.ICO_QUEST_BIG_STAKES, SourceFile.ICONS),
+    QUEST_BIG_HOUSE   (FSkinProp.ICO_QUEST_BIG_HOUSE, SourceFile.ICONS),
+    QUEST_BIG_COIN    (FSkinProp.ICO_QUEST_BIG_COIN, SourceFile.ICONS),
+    QUEST_BIG_BOOK    (FSkinProp.ICO_QUEST_BIG_BOOK, SourceFile.ICONS),
+    QUEST_BIG_MAP     (FSkinProp.ICO_QUEST_BIG_MAP, SourceFile.ICONS),
+    QUEST_BIG_ZEP     (FSkinProp.ICO_QUEST_BIG_ZEP, SourceFile.ICONS),
+    QUEST_BIG_CHARM   (FSkinProp.ICO_QUEST_BIG_CHARM, SourceFile.ICONS),
+    QUEST_BIG_BOOTS   (FSkinProp.ICO_QUEST_BIG_BOOTS, SourceFile.ICONS),
+    QUEST_BIG_SHIELD  (FSkinProp.ICO_QUEST_BIG_SHIELD, SourceFile.ICONS),
+    QUEST_BIG_ARMOR   (FSkinProp.ICO_QUEST_BIG_ARMOR, SourceFile.ICONS),
+    QUEST_BIG_AXE     (FSkinProp.ICO_QUEST_BIG_AXE, SourceFile.ICONS),
+    QUEST_BIG_SWORD   (FSkinProp.ICO_QUEST_BIG_SWORD, SourceFile.ICONS),
+    QUEST_BIG_BAG     (FSkinProp.ICO_QUEST_BIG_BAG, SourceFile.ICONS),
 
     //Interface icons
     QUESTION        (FSkinProp.ICO_QUESTION, SourceFile.ICONS),
@@ -241,7 +265,9 @@ public enum FSkinImage implements FImage {
     ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.MANAICONS),
     INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.MANAICONS),
     LAND            (FSkinProp.IMG_LAND, SourceFile.MANAICONS),
+    LANDLOGO        (FSkinProp.IMG_LANDLOGO, SourceFile.MANAICONS),
     MULTI           (FSkinProp.IMG_MULTI, SourceFile.ICONS),
+    HDMULTI         (FSkinProp.IMG_HDMULTI, SourceFile.MANAICONS),
     PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
     SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),

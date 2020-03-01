@@ -182,6 +182,15 @@ public enum FSkinProp {
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
 
+    //choice-search-misc
+    ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDSIDEBOARD  (new int[] {132, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDPREFERENCE (new int[] {262, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDIMPORT     (new int[] {2, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_HDEXPORT     (new int[] {132, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_BLANK        (new int[] {2, 2, 2, 2}, PropType.ICON), //safe coords, lower than 2 will cause crash on desktop
+    IMG_LANDLOGO     (new int[] {84, 822, 80, 80}, PropType.MANAICONS),
+
     //quest icons
     ICO_QUEST_ZEP         (new int[] {0, 480, 80, 80}, PropType.ICON),
     ICO_QUEST_GEAR        (new int[] {80, 480, 80, 80}, PropType.ICON),
@@ -204,6 +213,22 @@ public enum FSkinProp {
     ICO_QUEST_MINUS       (new int[] {560, 640, 80, 80}, PropType.ICON),
     ICO_QUEST_PLUS        (new int[] {480, 640, 80, 80}, PropType.ICON),
     ICO_QUEST_PLUSPLUS    (new int[] {480, 720, 80, 80}, PropType.ICON),
+    ICO_QUEST_BIG_ELIXIR  (new int[] {0, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BREW    (new int[] {160, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BM      (new int[] {320, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_STAKES  (new int[] {480, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_HOUSE   (new int[] {0, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_COIN    (new int[] {160, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BOOK    (new int[] {320, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_MAP     (new int[] {480, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_ZEP     (new int[] {0, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_CHARM   (new int[] {160, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BOOTS   (new int[] {320, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_SHIELD  (new int[] {480, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_ARMOR   (new int[] {0, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_AXE     (new int[] {160, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_SWORD   (new int[] {320, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
 
     //interface icons
     ICO_QUESTION        (new int[] {560, 800, 32, 32}, PropType.ICON),
@@ -278,6 +303,7 @@ public enum FSkinProp {
     IMG_INSTANT         (new int[] {166, 740, 80, 80}, PropType.MANAICONS),
     IMG_LAND            (new int[] {248, 740, 80, 80}, PropType.MANAICONS),
     IMG_MULTI           (new int[] {80, 720, 40, 40}, PropType.IMAGE),
+    IMG_HDMULTI         (new int[] {2, 822, 80, 80}, PropType.MANAICONS),
     IMG_PLANESWALKER    (new int[] {330, 740, 80, 80}, PropType.MANAICONS),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
