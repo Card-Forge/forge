@@ -67,15 +67,17 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
             return;
         }
+        final Game game = host.getGame();
         if (c.isInPlay()) {
             c.removeTempController(tStamp);
+
+            game.getAction().controllerChangeZoneCorrection(c);
 
             if (tapOnLose) {
                 c.tap();
             }
         } // if
         host.removeGainControlTargets(c);
-        
     }
 
     @Override

@@ -565,14 +565,29 @@ public class GameAction {
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final Zone oldBattlefield = game.getZoneOf(c);
-        if (oldBattlefield == null || oldBattlefield.getZoneType() == ZoneType.Stack) {
+
+        if (oldBattlefield == null || oldBattlefield.is(ZoneType.Stack)) {
             return;
         }
+
         final Player original = oldBattlefield.getPlayer();
-        final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
+        final Player controller = c.getController();
+        if (original == null || controller == null || original.equals(controller)) {
+            return;
+        }
+        final PlayerZone newBattlefield = controller.getZone(oldBattlefield.getZoneType());
 
         if (newBattlefield == null || oldBattlefield.equals(newBattlefield)) {
             return;
+        }
+
+        // 702.94e A paired creature becomes unpaired if any of the following occur:
+        // another player gains control of it or the creature it’s paired with
+        if (c.isPaired()) {
+            Card partner = c.getPairedWith();
+            c.setPairedWith(null);
+            partner.setPairedWith(null);
+            partner.updateStateForView();
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
