@@ -244,10 +244,7 @@ public class ConquestRewardDialog extends FScrollPane {
                 //ensure current card in view
                 if (getScrollHeight() > getHeight() && index < cardCount) {
                     CardRevealer currentCard = cardRevealers.get(index);
-                    if (!Forge.extrawide.equals("default"))
-                        scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
-                    else
-                        scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
+                    scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
                 }
             }
 
