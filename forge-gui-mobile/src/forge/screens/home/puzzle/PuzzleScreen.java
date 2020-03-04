@@ -69,6 +69,13 @@ public class PuzzleScreen extends LaunchScreen {
                             }
                         });
 
+                        hostedMatch.setEndGameHook((new Runnable() {
+                            @Override
+                            public void run() {
+                                chosen.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()));
+                            }
+                        }));
+
                         final List<RegisteredPlayer> players = new ArrayList<>();
                         final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
                         human.setStartingHand(0);
