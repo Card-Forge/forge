@@ -312,14 +312,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return tryGetCard(request);
     }
 
-    public String getCardCollectorNumber(String cardName, String reqEdition) {
+    public String getCardCollectorNumber(String cardName, String reqEdition, int artIndex) {
         cardName = getName(cardName);
         CardEdition edition = editions.get(reqEdition);
         if (edition == null)
             return null;
+        int numMatches = 0;
         for (CardInSet card : edition.getCards()) {
             if (card.name.equalsIgnoreCase(cardName)) {
-                return card.collectorNumber;
+                numMatches += 1;
+                if (numMatches == artIndex) {
+                    return card.collectorNumber;
+                }
             }
         }
         return null;

@@ -50,8 +50,9 @@ public abstract class ImageFetcher {
             setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
             downloadUrls.add(setDownload.toString());
 
+            int artIndex = Integer.parseInt(imageKey.split("\\|")[2]);
             final StaticData data = StaticData.instance();
-            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition());
+            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition(), artIndex);
             if (cardNum != null)  {
                 String suffix = "";
                 if (paperCard.getRules().getOtherPart() != null) {
