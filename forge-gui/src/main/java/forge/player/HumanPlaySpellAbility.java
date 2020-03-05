@@ -105,10 +105,7 @@ public class HumanPlaySpellAbility {
             if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
                 c.turnFaceUp();
             }
-            c.setCastSA(ability);
-            ability.setLastStateBattlefield(game.getLastStateBattlefield());
-            ability.setLastStateGraveyard(game.getLastStateGraveyard());
-            ability.setHostCard(game.getAction().moveToStack(c, null));
+            ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
 
         if (!ability.isCopied()) {
