@@ -178,5 +178,5 @@ R Winding Canyons
 R Xanthic Statue
 C Zombie Scavengers
 
-[token]
+[tokens]
 g_1_1_squirrel

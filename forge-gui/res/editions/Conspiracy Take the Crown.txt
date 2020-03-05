@@ -230,6 +230,7 @@ Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Dr
 219 R Exotic Orchard
 220 U Rogue's Passage
 221 U Shimmering Grotto
+222 M Kaya, Ghost Assassin
 
 [tokens]
 w_1_1_soldier
