@@ -385,7 +385,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 368 R Feasting Troll King
 369 R Gilded Goose
 370 M The Great Henge
-371 R Once Upon A Time
+371 R Once Upon a Time
 372 M Questing Beast
 373 R Return of the Wildspeaker
 374 R Wicked Wolf

@@ -1657,7 +1657,7 @@ Torbran, Thane of Red Fell|ELD|2
 Feasting Troll King|ELD|2
 Gilded Goose|ELD|2
 The Great Henge|ELD|2
-Once Upon A Time|ELD|2
+Once Upon a Time|ELD|2
 Questing Beast|ELD|2
 Return of the Wildspeaker|ELD|2
 Wicked Wolf|ELD|2
