@@ -6353,6 +6353,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         removeSVar("PayX"); // Temporary AI X announcement variable
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
+        setXManaCostPaid(0);
+        setXManaCostPaidByColor(null);
     }
 
     public final int getFinalChapterNr() {
