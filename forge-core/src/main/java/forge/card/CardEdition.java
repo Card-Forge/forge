@@ -274,14 +274,24 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                         it should also match the Un-set and older alternate art cards
                         like Merseine from FEM (should the editions files ever be updated)
                          */
-                        "(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
+                        //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
+                        /*  Ideally we'd use the named group above, but Android 6 and
+                            earlier don't appear to support named groups.
+                            So, untill support for those devices is officially dropped,
+                            we'll have to suffice with numbered groups.
+                            We are looking for:
+                                * cnum - grouping #2
+                                * rarity - grouping #4
+                                * name - grouping #5
+                         */
+                        "(^([0-9]+.?) )?(([SCURML]) )?(.*)$"
                 );
                 for(String line : contents.get("cards")) {
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.matches()) {
-                        String collectorNumber = matcher.group("cnum");
-                        CardRarity r = CardRarity.smartValueOf(matcher.group("rarity"));
-                        String cardName = matcher.group("name");
+                        String collectorNumber = matcher.group(2);
+                        CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                        String cardName = matcher.group(5);
                         CardInSet cis = new CardInSet(cardName, collectorNumber, r);
                         processedCards.add(cis);
                     }
