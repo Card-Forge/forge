@@ -20,11 +20,11 @@ import forge.util.Localizer;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {
-        BoosterDraft("lblBoosterDraft", FSkinImage.HAND, LoadDraftScreen.class),
-        SealedDeck("lblSealedDeck", FSkinImage.PACK, LoadSealedScreen.class),
+        BoosterDraft("lblBoosterDraft", FSkinImage.MENU_DRAFT, LoadDraftScreen.class),
+        SealedDeck("lblSealedDeck", FSkinImage.MENU_SEALED, LoadSealedScreen.class),
         QuestMode("lblQuestMode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
-        PlanarConquest("lblPlanarConquest", FSkinImage.MULTIVERSE, LoadConquestScreen.class),
-        Gauntlet("lblGauntlet", FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
+        PlanarConquest("lblPlanarConquest", FSkinImage.MENU_GALAXY, LoadConquestScreen.class),
+        Gauntlet("lblGauntlet", FSkinImage.MENU_GAUNTLET, LoadGauntletScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
