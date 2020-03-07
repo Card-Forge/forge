@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <bazaar>
   <options>
-   <iconSize>80</iconSize>
+   <iconSize>160</iconSize>
   </options>
   <stalls>
     <stall name="Alchemist" displayName="Orim, Samite Healer" icon="ICO_QUEST_BOTTLES">
@@ -26,7 +26,7 @@
         <string>Sleight</string>
       </items> 	
     </stall>
-    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_QUEST_GEAR">
+    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_QUEST_BIG_ARMOR">
       <description>This adventurer&apos;s market has a tool for every need ... or so the plaque on the wall claims.</description>
       <items>
         <string>Map</string>
@@ -53,22 +53,22 @@
     </stall>
   </stalls>
   <questItems>
-    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_QUEST_BOOK">
+    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_QUEST_BIG_BOOK">
       <description>These volumes explain how to perform the most difficult of sleights.
 
 Effect: Your first mulligan is free.</description>
     </item>
-    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_QUEST_MAP">
+    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_QUEST_BIG_MAP">
       <description>These ancient charts should facilitate navigation during your travels significantly.
 
 Effect: Quest challenges become available more frequently.</description>
     </item>
-    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_QUEST_COIN">
+    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_QUEST_BIG_COIN">
       <description>This coin is believed to give good luck to its owner.
 
 Effect: Improves the chance of getting a random rare after each match by 15%.</description>
     </item>
-    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_QUEST_GOLD">
+    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_QUEST_BIG_HOUSE">
       <description>Land owners have a strong voice in community matters.
 
 Effect: Gives a bonus of %d%% to match winnings.
@@ -81,37 +81,37 @@ Effect: Quest challenges become available more frequently.
 Effect: +3 life
 Effect: Activate once for a new set of challenges (re-fuels after a challenge is attempted).</description>
     </item>
-    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_QUEST_BREW">
+    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_QUEST_BIG_BREW">
       <description>The Alchemist welcomes contributions to his famous Elixir.
 But beware, you may build an immunity to its effects...
 
 Effect: Alchemist gives you %d credits.
 Effect: Reduces maximum life by 1.</description>
     </item>
-    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_QUEST_ELIXIR">
+    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_QUEST_BIG_ELIXIR">
       <description>A salty sweet smell rises from the vials bubbling behind the counter.
 
 Effect: Gives +1 to maximum life.
 Fine Print: Loses effectiveness after 15 uses.</description>
     </item>
     <item name="Charm of Vim" maxLevel="1" basePrice="1000"
-    	itemType="CHARM_VIM" icon="ICO_QUEST_CHARM">
+    	itemType="CHARM_VIM" icon="ICO_QUEST_BIG_BOOTS">
     	<description>A charm fills you with energy, speeding your movements.
     	
 Effect: You may have each match be best of 1 instead of 3.</description>
     </item>
     <item name="Charm of Vigor" maxLevel="1" basePrice="1000"
-    	itemType="CHARM" icon="ICO_QUEST_CHARM">
+    	itemType="CHARM" icon="ICO_QUEST_BIG_CHARM">
     	<description>A charm to ward off the fatigue of battle.
     	
 Effect: You may have each match be best of 5 instead of 3.</description>
     </item>
-    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_QUEST_STAKES">
+    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_QUEST_BIG_STAKES">
       <description>A written agreement with the Spell Shop to acquire cards you lose in an ante match from quest opponents.
 
 Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
     </item>
-    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_QUEST_GOLD">
+    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_QUEST_BIG_BM">
       <description>A token certifying you as a member of the bank, giving you a greater selection of booster packs when you win. 
 
 Effect: Adds one more booster pack to the pack selection after you win.</description>

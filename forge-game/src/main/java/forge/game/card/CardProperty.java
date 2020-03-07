@@ -1518,27 +1518,38 @@ public class CardProperty {
         } else if (property.startsWith("blockedByThisTurn")) {
             return !card.getBlockedByThisTurn().isEmpty();
         } else if (property.startsWith("blockedValidThisTurn ")) {
-            if (card.getBlockedThisTurn() == null) {
+            CardCollectionView blocked = card.getBlockedThisTurn();
+            if (blocked == null) {
                 return false;
             }
-
             String valid = property.split(" ")[1];
-            for(Card c : card.getBlockedThisTurn()) {
+            for(Card c : blocked) {
                 if (c.isValid(valid, card.getController(), source, spellAbility)) {
                     return true;
                 }
             }
+            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+                if (blocked.contains(c)) {
+                    return true;
+                }
+            };
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
-            if (card.getBlockedByThisTurn() == null) {
+            CardCollectionView blocked = card.getBlockedByThisTurn();
+            if (blocked == null) {
                 return false;
             }
             String valid = property.split(" ")[1];
-            for(Card c : card.getBlockedByThisTurn()) {
+            for(Card c : blocked) {
                 if (c.isValid(valid, card.getController(), source, spellAbility)) {
                     return true;
                 }
             }
+            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+                if (blocked.contains(c)) {
+                    return true;
+                }
+            };
             return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.getBlockedByThisTurn().contains(card);
