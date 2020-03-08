@@ -882,6 +882,10 @@ public class Combat {
             return true; // is blocking something at the moment
         }
 
+        if (!blocker.isLKI()) {
+            return false;
+        }
+
         CombatLki lki = lkiCache.get(blocker);
         return null != lki && !lki.isAttacker; // was blocking something anyway
     }
@@ -892,7 +896,11 @@ public class Combat {
         if (blockers != null && blockers.contains(blocker)) {
             return true; // is blocking the attacker's band at the moment
         }
-        
+
+        if (!blocker.isLKI()) {
+            return false;
+        }
+
         CombatLki lki = lkiCache.get(blocker);
         return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }
