@@ -1909,7 +1909,6 @@ Knight of Sorrows
 Knight of the Skyward Eye
 Knight of the Tusk
 Kor Bladewhirl
-Kor Chant
 Kor Firewalker
 Kor Hookmaster
 Kor Sky Climber
@@ -2028,6 +2027,7 @@ Zealous Strike
 [MB1 Blue CommonUncommon]
 Academy Journeymage
 Aethersnipe
+Aether Spellbomb
 Aether Tradewinds
 Amass the Components
 Amphin Pathmage
@@ -2739,7 +2739,6 @@ Tibalt's Rager
 Torch Courier
 Uncaged Fury
 Undying Rage
-Urza's Rage
 Valakut Invoker
 Valakut Predator
 Valley Dasher
