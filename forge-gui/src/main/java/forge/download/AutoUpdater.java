@@ -12,8 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.*;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,6 +27,7 @@ public class AutoUpdater {
     private final String RELEASE_PACKAGE = "https://releases.cardforge.org/latest/";
     private final String RELEASE_MAVEN_METADATA = "https://releases.cardforge.org/forge/forge-gui-desktop/maven-metadata.xml";
     private static final boolean VERSION_FROM_METADATA = true;
+    private static final String TMP_DIR = "tmp/";
 
     public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
 
@@ -51,29 +52,39 @@ public class AutoUpdater {
         }
         try {
             if (downloadUpdate()) {
-                extractUpdate();
-                restartForge();
+                extractAndRestart();
             }
-        } catch(IOException e) {
-            return false;
-        } catch(URISyntaxException e) {
+        } catch(IOException | URISyntaxException e) {
             return false;
         }
         return true;
     }
 
+    private void extractAndRestart() {
+        extractUpdate();
+        restartForge();
+    }
+
     private boolean verifyUpdateable() {
+        if (buildVersion.contains("GIT")) {
+            //return false;
+        }
+
         if (isLoading) {
             // TODO This doesn't work yet, because FSkin isn't loaded at the time.
             return false;
         } else if (updateChannel.equals("none")) {
-            // User clicked on check for updates withoout a valid update channel prompt
-            // updateChannel = newchoice or return false
+            String message = "You haven't set an update channel. Do you want to check a channel now?";
+            List<String> options = ImmutableList.of("Cancel", "release", "snapshot");
+            int option = SOptionPane.showOptionDialog(message, "Manual Check", null, options, 0);
+            if (option == 0) {
+                return false;
+            } else {
+                updateChannel = options.get(option);
+            }
         }
 
-        if (buildVersion.contains("GIT")) {
-            return false;
-        } else if (buildVersion.contains("SNAPSHOT")) {
+        if (buildVersion.contains("SNAPSHOT")) {
             if (!updateChannel.equals("snapshot")) {
                 System.out.println("Snapshot build versions must use snapshot update channel to work");
                 return false;
@@ -127,7 +138,7 @@ public class AutoUpdater {
 
     private void retrieveVersion() throws MalformedURLException {
         if (VERSION_FROM_METADATA) {
-            if (!updateChannel.equals("release")) {
+            if (updateChannel.equals("release")) {
                 extractVersionFromMavenRelease();
             } else {
                 extractVersionFromSnapshotIndex();
@@ -162,7 +173,7 @@ public class AutoUpdater {
     }
 
     private boolean downloadUpdate() throws URISyntaxException, IOException {
-        // Change the "auto" to be more auto.
+        // TODO Change the "auto" to be more auto.
         if (isLoading) {
             // We need to preload enough of a Skins to show a dialog and a button if we're in loading
             // splashScreen.prepareForDialogs();
@@ -199,29 +210,37 @@ public class AutoUpdater {
             public void run() {
                 GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", "Download the new version..", packageUrl, "tmp/", null, null) {
                     @Override
-                    protected void copyInputStream(InputStream in, String outPath) throws IOException {
-                        super.copyInputStream(in, outPath);
-                        packagePath = outPath;
-
-                        extractUpdate();
+                    public void downloadAndUnzip() {
+                        packagePath = download(version + "-upgrade.tar.bz2");
+                        if (packagePath != null) {
+                            extractAndRestart();
+                        }
                     }
                 }, this);
             }
         };
 
         SwingUtilities.invokeLater(callback);
-
+        //
         return false;
     }
 
     private void extractUpdate() {
-        System.out.println(packagePath);
-        // Take packagepath and tar xzvf it
+        // TODOD Something like https://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java
+        final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null) {
+            try {
+                desktop.open(new File(packagePath).getParentFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println(packagePath);
+        }
     }
 
     private void restartForge() {
-        // Do we have a way to retrigger an immediate restart?
-        if (isLoading || SOptionPane.showConfirmDialog("Forge has been extracted. You should restart Forge for the new version", "Exit now?")) {
+        if (isLoading || SOptionPane.showConfirmDialog("Forge has been downloaded. You should extract the package and restart Forge for the new version.", "Exit now?")) {
             System.exit(0);
         }
     }
