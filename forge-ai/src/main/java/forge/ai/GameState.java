@@ -981,14 +981,23 @@ public abstract class GameState {
             spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
 
-        PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+        Card c = null;
 
-        if (pc == null) {
-            System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
-            return;
+        if (StringUtils.isNumeric(spellDef)) {
+            // Precast from a specific host
+            c = idToCard.get(Integer.parseInt(spellDef));
+        } else {
+            // Precast from a card by name
+            PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+
+            if (pc == null) {
+                System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
+                return;
+            }
+
+            c = Card.fromPaperCard(pc, activator);
         }
 
-        Card c = Card.fromPaperCard(pc, activator);
         SpellAbility sa = null;
 
         if (!scriptID.isEmpty()) {
