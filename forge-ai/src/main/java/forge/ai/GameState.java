@@ -986,6 +986,10 @@ public abstract class GameState {
         if (StringUtils.isNumeric(spellDef)) {
             // Precast from a specific host
             c = idToCard.get(Integer.parseInt(spellDef));
+            if (c == null) {
+                System.err.println("ERROR: Could not find a card with ID " + spellDef + " to precast!");
+                return;
+            }
         } else {
             // Precast from a card by name
             PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
