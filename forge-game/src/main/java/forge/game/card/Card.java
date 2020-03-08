@@ -6355,6 +6355,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         setSunburstValue(0); // Sunburst
         setXManaCostPaid(0);
         setXManaCostPaidByColor(null);
+        setKickerMagnitude(0);
+        setPseudoMultiKickerMagnitude(0);
     }
 
     public final int getFinalChapterNr() {
