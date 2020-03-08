@@ -100,17 +100,21 @@ public class TrackableTypes {
             if (newCollection != null) {
                 //swap in objects in old collection for objects in new collection
                 for (int i = 0; i < newCollection.size(); i++) {
-                    T newObj = newCollection.get(i);
-                    if (newObj != null) {
-                        T existingObj = from.getTracker().getObj(itemType, newObj.getId());
-                        if (existingObj != null) { //if object exists already, update its changed properties
-                            existingObj.copyChangedProps(newObj);
-                            newCollection.remove(i);
-                            newCollection.add(i, existingObj);
+                    try {
+                        T newObj = newCollection.get(i);
+                        if (newObj != null) {
+                            T existingObj = from.getTracker().getObj(itemType, newObj.getId());
+                            if (existingObj != null) { //if object exists already, update its changed properties
+                                existingObj.copyChangedProps(newObj);
+                                newCollection.remove(i);
+                                newCollection.add(i, existingObj);
+                            }
+                            else { //if object is new, cache in object lookup
+                                from.getTracker().putObj(itemType, newObj.getId(), newObj);
+                            }
                         }
-                        else { //if object is new, cache in object lookup
-                            from.getTracker().putObj(itemType, newObj.getId(), newObj);
-                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("got an IndexOutOfBoundsException, trying to continue ...");
                     }
                 }
             }

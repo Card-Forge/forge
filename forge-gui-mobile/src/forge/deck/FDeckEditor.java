@@ -44,8 +44,8 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
-    public static FSkinImage MAIN_DECK_ICON = FSkinImage.DECKLIST;
-    public static FSkinImage SIDEBOARD_ICON = FSkinImage.FLASHBACK;
+    public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
+    public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
     private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     public enum EditorType {
@@ -332,7 +332,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     protected void buildMenu() {
                         final Localizer localizer = Localizer.getInstance();
 
-                        addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LAND, new FEventHandler() {
+                        addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 CardEdition defaultLandSet;
@@ -365,7 +365,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }
                         }));
                         if (!isLimitedEditor()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN, new FEventHandler() {
+                            addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), new Callback<Deck>() {
@@ -430,7 +430,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }
                             }));
                         }
-                        addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), new FEventHandler() {
+                        addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 FDeckViewer.copyDeckToClipboard(deck);
@@ -1187,7 +1187,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCards(card.getName());
                 if (artOptions != null && artOptions.size() > 1) {
-                    menu.addItem(new FMenuItem(localizer.getMessage("lblChangePreferredArt"), FSkinImage.SETTINGS, new FEventHandler() {
+                    menu.addItem(new FMenuItem(localizer.getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             //sort options so current option is on top and selected by default

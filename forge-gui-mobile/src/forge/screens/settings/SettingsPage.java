@@ -37,7 +37,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
 
     public SettingsPage() {
-        super(Localizer.getInstance().getMessage("lblSettings"), FSkinImage.SETTINGS);
+        super(Localizer.getInstance().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS);
 
         final Localizer localizer = Localizer.getInstance();
 

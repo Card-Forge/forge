@@ -1,0 +1,29 @@
+[metadata]
+Code=PGPX
+Code2=PGPX
+Date=2007-02-24
+Name=Grand Prix Promos
+MciCode=pgpx
+Type=Other
+
+[cards]
+R Spiritmonger
+R Call of the Herd
+R Chrome Mox
+R Umezawa's Jitte
+R Maelstrom Pulse
+R Goblin Guide
+R Lotus Cobra
+M Primeval Titan
+R All Is Dust
+M Batterskull
+M Griselbrand
+R Stoneforge Mystic
+R Sword of Feast and Famine
+M Progenitus
+R Mutavault
+L Plains
+L Island
+L Swamp
+L Mountain
+L Forest

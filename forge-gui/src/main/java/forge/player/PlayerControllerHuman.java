@@ -746,7 +746,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             endTempShowCards();
         } else {
             getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
-                    player, owner), fm);
+                    getLocalPlayerView(), owner), fm);
         }
     }
 

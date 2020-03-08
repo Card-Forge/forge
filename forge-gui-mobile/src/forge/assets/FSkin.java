@@ -90,6 +90,10 @@ public class FSkin {
     public static void loadLight(String skinName, final SplashScreen splashScreen) {
         preferredName = skinName.toLowerCase().replace(' ', '_');
 
+        //reset hd buttons/icons
+        Forge.hdbuttons = false;
+        Forge.hdstart = false;
+
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
@@ -205,21 +209,21 @@ public class FSkin {
                 textures.put(f6.path(), textures.get(f3.path()));
             }
             if (f7.exists()){
-                Texture t = new Texture(f7, true);
-                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                Texture t = new Texture(f7, false);
+                //t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
             }
             //hdbuttons
             if (f11.exists()) {
-                Texture tf11 = new Texture(f11, true);
-                tf11.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                textures.put(f11.path(), tf11);
+                Texture t = new Texture(f11, true);
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f11.path(), t);
                 Forge.hdbuttons = true;
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             if (f12.exists()) {
-                Texture tf12 = new Texture(f12, true);
-                tf12.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                textures.put(f12.path(), tf12);
+                Texture t = new Texture(f12, true);
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f12.path(), t);
                 Forge.hdstart = true;
             } else { Forge.hdstart = false; }
             //update colors

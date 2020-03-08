@@ -1447,7 +1447,8 @@ public class ComputerUtilCard {
                 }
                 if (pumpedDmg > dmg) {
                     if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())) {
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())
+                            || ("PumpForTrample".equals(sa.getParam("AILogic")))) {
                         return true;
                     }
                 }

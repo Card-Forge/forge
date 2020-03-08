@@ -92,7 +92,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         .iconScaleFactor(0.9f).build(); //icon set later
     private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
         .selectable(true).align(Align.center)
-        .icon(FSkinImage.SETTINGS).iconScaleFactor(0.9f)
+        .icon(Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS).iconScaleFactor(0.9f)
         .build();
 
     private final FComboBox<ItemColumn> cbxSortOptions;

@@ -38,6 +38,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -75,10 +77,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public static class CardInSet {
         public final CardRarity rarity;
-        public final int collectorNumber;
+        public final String collectorNumber;
         public final String name;
 
-        public CardInSet(final String name, final int collectorNumber, final CardRarity rarity) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
@@ -86,7 +88,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
  
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            if (collectorNumber != -1) {
+            if (collectorNumber != null) {
                 sb.append(collectorNumber);
                 sb.append(' ');
             }
@@ -266,24 +268,23 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             Map<String, Integer> tokenNormalized = new HashMap<>();
             List<CardEdition.CardInSet> processedCards = new ArrayList<>();
             if (contents.containsKey("cards")) {
+                final Pattern pattern = Pattern.compile(
+                        /*
+                        The following pattern will match the WAR Japanese art entries,
+                        it should also match the Un-set and older alternate art cards
+                        like Merseine from FEM (should the editions files ever be updated)
+                         */
+                        "(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
+                );
                 for(String line : contents.get("cards")) {
-                    if (StringUtils.isBlank(line))
-                        continue;
-
-                    // Optional collector number at the start.
-                    String[] split = line.split(" ", 2);
-                    int collectorNumber = -1;
-                    if (split.length >= 2 && StringUtils.isNumeric(split[0])) {
-                        collectorNumber = Integer.parseInt(split[0]);
-                        line = split[1];
+                    Matcher matcher = pattern.matcher(line);
+                    if (matcher.matches()) {
+                        String collectorNumber = matcher.group("cnum");
+                        CardRarity r = CardRarity.smartValueOf(matcher.group("rarity"));
+                        String cardName = matcher.group("name");
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r);
+                        processedCards.add(cis);
                     }
-
-                    // You may omit rarity for early development
-                    CardRarity r = CardRarity.smartValueOf(line.substring(0, 1));
-                    boolean hadRarity = r != CardRarity.Unknown && line.charAt(1) == ' ';
-                    String cardName = hadRarity ? line.substring(2) : line;
-                    CardInSet cis = new CardInSet(cardName, collectorNumber, r);
-                    processedCards.add(cis);
                 }
             }
 
