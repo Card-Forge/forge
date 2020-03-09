@@ -17,6 +17,7 @@
  */
 package forge.game.spellability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.ColorSet;
@@ -248,7 +249,7 @@ public class AbilityManaPart implements java.io.Serializable {
             re.setLayer(ReplacementLayer.Other);
             re.setOverridingAbility(sa);
 
-            c.addReplacementEffect(re);
+            c.addChangedCardTraits(null, null, null, ImmutableList.of(re), null, false, false, false, sa.getHostCard().getGame().getNextTimestamp());
         }
     }
 
