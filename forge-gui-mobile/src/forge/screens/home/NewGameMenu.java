@@ -24,13 +24,13 @@ public class NewGameMenu extends FPopupMenu {
     final static Localizer localizer = Localizer.getInstance();
 
     public enum NewGameScreen {
-        Constructed(localizer.getMessage("lblConstructed"), FSkinImage.DECKLIST, ConstructedScreen.class),
-        BoosterDraft(localizer.getMessage("lblBoosterDraft"), FSkinImage.HAND, NewDraftScreen.class),
-        SealedDeck(localizer.getMessage("lblSealedDeck"), FSkinImage.PACK, NewSealedScreen.class),
+        Constructed(localizer.getMessage("lblConstructed"), FSkinImage.MENU_CONSTRUCTED, ConstructedScreen.class),
+        BoosterDraft(localizer.getMessage("lblBoosterDraft"), FSkinImage.MENU_DRAFT, NewDraftScreen.class),
+        SealedDeck(localizer.getMessage("lblSealedDeck"), FSkinImage.MENU_SEALED, NewSealedScreen.class),
         QuestMode(localizer.getMessage("lblQuestMode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
-        PuzzleMode(localizer.getMessage("lblPuzzleMode"), FSkinImage.QUEST_BOOK, PuzzleScreen.class),
-        PlanarConquest(localizer.getMessage("lblPlanarConquest"), FSkinImage.MULTIVERSE, NewConquestScreen.class),
-        Gauntlet(localizer.getMessage("lblGauntlet"), FSkinImage.ALPHASTRIKE, NewGauntletScreen.class);
+        PuzzleMode(localizer.getMessage("lblPuzzleMode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
+        PlanarConquest(localizer.getMessage("lblPlanarConquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
+        Gauntlet(localizer.getMessage("lblGauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
