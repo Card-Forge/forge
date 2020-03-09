@@ -12,6 +12,5 @@ turn=1
 activeplayer=ai
 activephase=MAIN1
 humanhand=Lazotep Plating;Slaying Fire;So Tiny;Shock;Gideon's Triumph;Aspect of Manticore
-humanbattlefield=The Akroan War|Counters:LORE=2|Id:2;Blood Aspirant;Flux Channeler;Naiad of Hidden Coves;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+humanbattlefield=The Akroan War|Counters:LORE=2|ExecuteScript:DBGainControl->1;Blood Aspirant;Flux Channeler;Naiad of Hidden Coves;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
 aibattlefield=Underworld Dreams;Underworld Dreams;Underworld Dreams;Ferocity of the Wilds;Goblin Assault Team;Temple Thief;Mire Triton;Dreadhorde Butcher|Id:1
-humanprecast=2:DBGainControl->1
