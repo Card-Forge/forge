@@ -3614,3 +3614,21 @@ Minamo, School at Water's Edge+|FMB1
 Mirrodin's Core+|FMB1
 Shizo, Death's Storehouse+|FMB1
 Stalking Stones+|FMB1
+
+[CN2 Not In Normal Slots]
+Adriana's Valor
+#Assemble the Rank and Vile
+Echoing Boon
+#Emissary's Ploy
+Hired Heist
+#Hold the Permiter
+Hymn of the Wilds
+Incendiary Dissent
+Natural Unity
+#Sovereign's Realm
+#Summoner's Bond
+Weight Advantage
+Kaya, Ghost Assassin|CN2|2
+
+[CN2 Foil Kaya]
+Kaya, Ghost Assassin|CN2|2
