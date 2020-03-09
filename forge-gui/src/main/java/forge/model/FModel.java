@@ -28,6 +28,7 @@ import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
+import forge.download.AutoUpdater;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -117,7 +118,6 @@ public final class FModel {
 
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
-        //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
             @Override
@@ -143,6 +143,11 @@ public final class FModel {
             }
         };
 
+        if (new AutoUpdater(true).attemptToUpdate()) {
+            //
+        }
+
+        //load card database
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
@@ -220,8 +225,6 @@ public final class FModel {
         achievements.put(GameType.Quest, new QuestAchievements());
         achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
-        
-        
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
