@@ -105,6 +105,7 @@ public class CardRenderer {
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
+    public static final float CROP_MULTIPLIER = 0.96f;
 
     private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
@@ -140,6 +141,49 @@ public class CardRenderer {
         default: //case BasicLand: + case Common:
             return fromDetailColor(DetailColors.COMMON);
         }
+    }
+
+    public static boolean isModernFrame(IPaperCard c) {
+        if (c == null)
+            return false;
+
+        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
+        if (ed != null) {
+            switch (ed.getCode()) {
+                case "MED":
+                case "ME2":
+                case "ME3":
+                case "ME4":
+                case "TSB":
+                    return false;
+                default:
+                    return ed.isModern();
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isModernFrame(CardView c) {
+        if (c == null)
+            return false;
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null) {
+            switch (ed.getCode()) {
+                case "MED":
+                case "ME2":
+                case "ME3":
+                case "ME4":
+                case "TSB":
+                    return false;
+                default:
+                    return ed.isModern();
+            }
+        }
+
+        return false;
     }
 
     public static float getCardListItemHeight(boolean compactMode) {
@@ -402,7 +446,12 @@ public class CardRenderer {
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = new RendererCachedCardImage(pc, false).getImage();
         float radius = (h - w)/8;
-
+        float croppedArea = isModernFrame(pc) ? CROP_MULTIPLIER : 0.97f;
+        float minusxy = isModernFrame(pc) ? 0.0f : 0.13f*radius;
+        if (pc.getEdition().equals("LEA")||pc.getEdition().equals("LEB")) {
+            croppedArea = 0.975f;
+            minusxy = 0.135f*radius;
+        }
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
@@ -413,7 +462,7 @@ public class CardRenderer {
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(pc), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else
                     g.drawImage(image, x, y, w, h);
@@ -437,7 +486,12 @@ public class CardRenderer {
         Texture image = new RendererCachedCardImage(card, false).getImage();
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
-
+        float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
+        float minusxy = isModernFrame(card) ? 0.0f : 0.13f*radius;
+        if (card.getCurrentState().getSetCode().equals("LEA")||card.getCurrentState().getSetCode().equals("LEB")) {
+            croppedArea = 0.975f;
+            minusxy = 0.135f*radius;
+        }
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
@@ -450,7 +504,7 @@ public class CardRenderer {
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
-                            g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.3f, y+radius/2, w*0.96f, h*0.96f, (x+radius/2.3f) + (w*0.96f) / 2, (y+radius/2) + (h*0.96f) / 2, -90);
+                            g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.3f-minusxy, y+radius/2-minusxy, w*croppedArea, h*croppedArea, (x+radius/2.3f-minusxy) + (w*croppedArea) / 2, (y+radius/2-minusxy) + (h*croppedArea) / 2, -90);
                         }
                     } else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -461,7 +515,7 @@ public class CardRenderer {
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(card, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                            g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                         }
                     } else {
                         if (canshow)
@@ -1119,8 +1173,14 @@ public class CardRenderer {
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
         float new_x = x; float new_y = y; float new_w = w; float new_h = h; float radius = (h - w)/8;
+        float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
+        float minusxy = isModernFrame(card) ? 0.0f : 0.13f*radius;
+        if (card.getCurrentState().getSetCode().equals("LEA")||card.getCurrentState().getSetCode().equals("LEB")) {
+            croppedArea = 0.975f;
+            minusxy = 0.135f*radius;
+        }
         if (Forge.enableUIMask) {
-            new_x += radius/2.4f; new_y += radius/2; new_w = w * 0.96f; new_h = h * 0.96f;
+            new_x += radius/2.4f-minusxy; new_y += radius/2-minusxy; new_w = w * croppedArea; new_h = h * croppedArea;
         }
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
             boolean rotateSplit = isPreferenceEnabled(FPref.UI_ROTATE_SPLIT_CARDS) && card.isSplitCard() && inZoomer;

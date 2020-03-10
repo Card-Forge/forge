@@ -35,6 +35,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static forge.card.CardRenderer.CROP_MULTIPLIER;
+import static forge.card.CardRenderer.isModernFrame;
+
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
     private static final float BASE_IMAGE_HEIGHT = 504;
@@ -357,13 +360,19 @@ public class CardImageRenderer {
             float new_yRotate = (dispH - new_w) /2;
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
+            float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
+            float minusxy = isModernFrame(card) ? 0.0f : 0.13f*radius;
+            if (card.getCurrentState().getSetCode().equals("LEA")||card.getCurrentState().getSetCode().equals("LEB")) {
+                croppedArea = 0.975f;
+                minusxy = 0.135f*radius;
+            }
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 if (Forge.enableUIMask){
                     if (ImageCache.isExtendedArt(card))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x+radius/2, new_y+radius/2, new_w*0.96f, new_h*0.96f, (new_x+radius/2) + (new_w*0.96f) / 2, (new_y+radius/2) + (new_h*0.96f) / 2, -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x+radius/2-minusxy, new_y+radius/2-minusxy, new_w*croppedArea, new_h*croppedArea, (new_x+radius/2-minusxy) + (new_w*croppedArea) / 2, (new_y+radius/2-minusxy) + (new_h*croppedArea) / 2, -90);
                     }
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
@@ -374,7 +383,7 @@ public class CardImageRenderer {
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x + radius / 2, new_y + radius / 2, new_w * 0.96f, new_h * 0.96f, (new_x + radius / 2) + (new_w * 0.96f) / 2, (new_y + radius / 2) + (new_h * 0.96f) / 2, isAftermath ? 90 : -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x + radius / 2-minusxy, new_y + radius / 2-minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2-minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2-minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
                     }
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
@@ -384,7 +393,7 @@ public class CardImageRenderer {
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(card, canshow), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f, y + radius / 2, w * 0.96f, h * 0.96f);
+                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else {
                     if (canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey()))
