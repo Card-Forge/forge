@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.FThreads;
 import forge.ImageKeys;
@@ -50,7 +52,14 @@ public abstract class ImageFetcher {
             setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
             downloadUrls.add(setDownload.toString());
 
-            int artIndex = Integer.parseInt(imageKey.split("\\|")[2]);
+            int artIndex = 1;
+            final Pattern pattern = Pattern.compile(
+                    "^.:([^|]*\\|){2}(\\d+).*$"
+            );
+            Matcher matcher = pattern.matcher(imageKey);
+            if (matcher.matches()) {
+                artIndex = Integer.parseInt(matcher.group(2));
+            }
             final StaticData data = StaticData.instance();
             final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition(), artIndex);
             if (cardNum != null)  {
