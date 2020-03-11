@@ -192,6 +192,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public boolean getSmallSetOverride() { return smallSetOverride; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public CardInSet[] getCards() { return cards; }
+    public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
 

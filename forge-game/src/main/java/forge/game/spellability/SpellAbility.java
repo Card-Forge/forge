@@ -1299,6 +1299,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         String announce = getParam("Announce");
         if (StringUtils.isBlank(announce)) {
             mapParams.put("Announce", variable);
+            originalMapParams.put("Announce", variable);
             return;
         }
         String[] announcedOnes = TextUtil.split(announce, ',');
@@ -1308,6 +1309,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         mapParams.put("Announce", announce + ";" + variable);
+        originalMapParams.put("Announce", announce + ";" + variable);
     }
 
     public boolean isXCost() {
