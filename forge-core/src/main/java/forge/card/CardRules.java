@@ -222,7 +222,12 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeBrawlCommander() {
         CardType type = mainPart.getType();
-        return (type.isLegendary() && type.isCreature()) || type.isPlaneswalker();
+        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+    }
+
+    public boolean canBeTinyLeadersCommander() {
+        CardType type = mainPart.getType();
+        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
     }
 
     public String getMeldWith() {
