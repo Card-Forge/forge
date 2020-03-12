@@ -594,8 +594,10 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
         public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
-        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Predicates.or(Presets.IS_PLANESWALKER,
-                Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
+        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Predicates.and(Presets.IS_LEGENDARY,
+                Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
+        public static final Predicate<CardRules> CAN_BE_TINY_LEADERS_COMMANDER = Predicates.and(Presets.IS_LEGENDARY,
+                Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
 
         /** The Constant IS_NON_CREATURE_SPELL. **/
         public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = com.google.common.base.Predicates
