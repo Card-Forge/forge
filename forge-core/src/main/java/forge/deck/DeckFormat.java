@@ -463,6 +463,9 @@ public enum DeckFormat {
         if (this.equals(DeckFormat.Brawl)) {
             return rules.canBeBrawlCommander();
         }
+        if (this.equals(DeckFormat.TinyLeaders)) {
+            return rules.canBeTinyLeadersCommander();
+        }
         return rules.canBeCommander();
     }
 
