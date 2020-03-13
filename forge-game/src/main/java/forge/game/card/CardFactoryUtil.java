@@ -20,7 +20,6 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -3010,24 +3009,43 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Saga")) {
-            // Saga there doesn't need Max value anymore?
             final String[] k = keyword.split(":");
-            final String[] abs = k[2].split(",");
+            final List<String> abs = Arrays.asList(k[2].split(","));
+            if (abs.size() != Integer.valueOf(k[1])) {
+                throw new RuntimeException("Saga max differ from Ability amount");
+            }
 
-            int i = 1;
-            for (String ab : abs) {
-                SpellAbility sa = AbilityFactory.getAbility(card, ab);
-                sa.setChapter(i);
+            int idx = 0;
+            int skipId = 0;
+            for(String ab : abs) {
+                idx += 1;
+                if (idx <= skipId) {
+                    continue;
+                }
 
-                // TODO better logic for Roman numbers
-                // In the Description try to merge Chapter trigger with the Same Effect
-                String trigStr = "Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield"
-                    + "| CounterType$ LORE | CounterAmount$ EQ" + i
-                    + "| TriggerDescription$ " + Strings.repeat("I", i) + " - "  + sa.getDescription();
-                final Trigger  t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
-                t.setOverridingAbility(sa);
-                inst.addTrigger(t);
-                ++i;
+                skipId = idx + abs.subList(idx - 1, abs.size()).lastIndexOf(ab);
+                StringBuilder desc = new StringBuilder();
+                for (int i = idx; i <= skipId; i++) {
+                    if (i != idx) {
+                        desc.append(", ");
+                    }
+                    desc.append(TextUtil.toRoman(i));
+                }
+
+                for (int i = idx; i <= skipId; i++) {
+                    SpellAbility sa = AbilityFactory.getAbility(card, ab);
+                    sa.setChapter(i);
+
+                    StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
+                    trigStr.append("| CounterType$ LORE | CounterAmount$ EQ").append(i);
+                    if (i != idx) {
+                        trigStr.append("Secondary$ True");
+                    }
+                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
+                    final Trigger  t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+                    t.setOverridingAbility(sa);
+                    inst.addTrigger(t);
+                }
             }
         } else if (keyword.equals("Soulbond")) {
             // Setup ETB trigger for card with Soulbond keyword
