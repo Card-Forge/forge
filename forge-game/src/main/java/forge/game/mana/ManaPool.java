@@ -254,7 +254,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 }
             }
             if (mana.addsCounters(sa)) {
-                mana.getManaAbility().createETBCounters(host);
+                mana.getManaAbility().createETBCounters(host, this.owner);
             }
             if (mana.triggersWhenSpent()) {
                 mana.getManaAbility().addTriggersWhenSpent(sa, host);

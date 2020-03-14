@@ -91,9 +91,6 @@ public class ComputerUtil {
                 }
             }
 
-            source.setCastSA(sa);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
@@ -219,9 +216,6 @@ public class ComputerUtil {
             
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            source.setCastSA(sa);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
@@ -246,9 +240,6 @@ public class ComputerUtil {
 
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            source.setCastSA(sa);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
@@ -267,9 +258,6 @@ public class ComputerUtil {
 
         final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
-            source.setCastSA(newSA);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             newSA.setHostCard(game.getAction().moveToStack(source, sa));
 
             if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
@@ -290,9 +278,6 @@ public class ComputerUtil {
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getHostCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                source.setCastSA(sa);
-                sa.setLastStateBattlefield(game.getLastStateBattlefield());
-                sa.setLastStateGraveyard(game.getLastStateGraveyard());
                 sa.setHostCard(game.getAction().moveToStack(source, sa));
             }
 
