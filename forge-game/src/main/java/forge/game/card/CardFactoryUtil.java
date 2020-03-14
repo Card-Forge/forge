@@ -3039,7 +3039,7 @@ public class CardFactoryUtil {
                     StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
                     trigStr.append("| CounterType$ LORE | CounterAmount$ EQ").append(i);
                     if (i != idx) {
-                        trigStr.append("Secondary$ True");
+                        trigStr.append(" | Secondary$ True");
                     }
                     trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
                     final Trigger  t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
