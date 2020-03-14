@@ -213,7 +213,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -236,6 +236,9 @@
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
                                         <maxHeapSize>1024</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
@@ -367,7 +370,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -390,6 +393,9 @@
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
                                         <maxHeapSize>1024</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
