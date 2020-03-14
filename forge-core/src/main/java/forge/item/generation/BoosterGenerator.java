@@ -566,12 +566,8 @@ public class BoosterGenerator {
                 toAdd = IPaperCard.Predicates.printedInSets(sets);
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
-                Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                List<String> cardNames = Lists.newArrayList();
-                for (PaperCard card : src) {
-                    cardNames.add(card.getName());
-                }
-                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+                Iterable<PaperCard> cards = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
+                toAdd = IPaperCard.Predicates.cards(Lists.newArrayList(cards));
             }
 
             if (toAdd == null) {
