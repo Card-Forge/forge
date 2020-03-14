@@ -6,6 +6,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType.CoreType;
 import forge.card.MagicColor;
+import forge.util.PredicateCard;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,6 +60,8 @@ public interface IPaperCard extends InventoryItem {
         public static Predicate<PaperCard> names(final List<String> what) {
             return new PredicateNames(what);
         }
+
+        public static PredicateCards cards(final List<PaperCard> what) { return new PredicateCards(what); }
 
         private static final class PredicateColor implements Predicate<PaperCard> {
 
@@ -156,6 +159,25 @@ public interface IPaperCard extends InventoryItem {
             }
 
             private PredicateNames(final List<String> operand) {
+                super(StringOp.EQUALS);
+                this.operand = operand;
+            }
+        }
+
+        private static final class PredicateCards extends PredicateCard<PaperCard> {
+            private final List<PaperCard> operand;
+
+            @Override
+            public boolean apply(final PaperCard card) {
+                for (final PaperCard element : this.operand) {
+                    if (this.op(card, element)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            private PredicateCards(final List<PaperCard> operand) {
                 super(StringOp.EQUALS);
                 this.operand = operand;
             }

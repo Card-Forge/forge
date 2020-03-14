@@ -213,7 +213,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -235,7 +235,10 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
-                                        <maxHeapSize>1024</maxHeapSize>
+                                        <maxHeapSize>4096</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
@@ -367,7 +370,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -389,7 +392,10 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
-                                        <maxHeapSize>1024</maxHeapSize>
+                                        <maxHeapSize>4096</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
@@ -564,7 +570,7 @@
                                             <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
                                             <option value="-Dcom.apple.smallTabs=true" />
-                                            <option value="-Xmx1024M" />
+                                            <option value="-Xmx4096M" />
                                             <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
@@ -675,7 +681,7 @@
                                             <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
                                             <option value="-Dcom.apple.smallTabs=true" />
-                                            <option value="-Xmx1024M" />
+                                            <option value="-Xmx4096M" />
                                             <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
