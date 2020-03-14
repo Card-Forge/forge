@@ -54,36 +54,45 @@ public class PuzzleScreen extends LaunchScreen {
         final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
         Collections.sort(puzzles);
 
-        GuiChoose.one(Localizer.getInstance().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {
+        GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {
             @Override
             public void run(final Puzzle chosen) {
-                LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingThePuzzle"), new Runnable() {
-                    @Override
-                    public void run() {
-                        // Load selected puzzle
-                        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                        hostedMatch.setStartGameHook(new Runnable() {
-                            @Override
-                            public final void run() {
-                                chosen.applyToGame(hostedMatch.getGame());
-                            }
-                        });
+                if (chosen != null) {
+                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingThePuzzle"), new Runnable() {
+                        @Override
+                        public void run() {
+                            // Load selected puzzle
+                            final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                            hostedMatch.setStartGameHook(new Runnable() {
+                                @Override
+                                public final void run() {
+                                    chosen.applyToGame(hostedMatch.getGame());
+                                }
+                            });
 
-                        final List<RegisteredPlayer> players = new ArrayList<>();
-                        final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-                        human.setStartingHand(0);
-                        players.add(human);
+                            hostedMatch.setEndGameHook((new Runnable() {
+                                @Override
+                                public void run() {
+                                    chosen.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()));
+                                }
+                            }));
 
-                        final RegisteredPlayer ai = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.createAiPlayer());
-                        ai.setStartingHand(0);
-                        players.add(ai);
+                            final List<RegisteredPlayer> players = new ArrayList<>();
+                            final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+                            human.setStartingHand(0);
+                            players.add(human);
 
-                        GameRules rules = new GameRules(GameType.Puzzle);
-                        rules.setGamesPerMatch(1);
-                        hostedMatch.startMatch(rules, null, players, human, GuiBase.getInterface().getNewGuiGame());
-                        FOptionPane.showMessageDialog(chosen.getGoalDescription(), chosen.getName());
-                    }
-                });
+                            final RegisteredPlayer ai = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.createAiPlayer());
+                            ai.setStartingHand(0);
+                            players.add(ai);
+
+                            GameRules rules = new GameRules(GameType.Puzzle);
+                            rules.setGamesPerMatch(1);
+                            hostedMatch.startMatch(rules, null, players, human, GuiBase.getInterface().getNewGuiGame());
+                            FOptionPane.showMessageDialog(chosen.getGoalDescription(), chosen.getName());
+                        }
+                    });
+                }
             }
         });
 

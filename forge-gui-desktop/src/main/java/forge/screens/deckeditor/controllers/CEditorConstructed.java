@@ -103,7 +103,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case TinyLeaders:
                 allSections.add(DeckSection.Commander);
 
-                commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+                commanderFilter = CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER;
                 commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
                 normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 

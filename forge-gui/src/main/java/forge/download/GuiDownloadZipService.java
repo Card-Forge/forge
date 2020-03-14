@@ -73,72 +73,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
         String zipFilename = download("temp.zip");
         if (zipFilename == null) { return; }
 
-        //if assets.zip downloaded successfully, unzip into destination folder
-        try {
-            GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while unzipping
-
-            if (deleteFolder != null) {
-                final File deleteDir = new File(deleteFolder);
-                if (deleteDir.exists()) {
-                    //attempt to delete previous res directory if to be rebuilt
-                    progressBar.reset();
-                    progressBar.setDescription("Deleting old " + desc + "...");
-                    if (deleteFolder.equals(destFolder)) { //move zip file to prevent deleting it
-                        final String oldZipFilename = zipFilename;
-                        zipFilename = deleteDir.getParentFile().getAbsolutePath() + File.separator + "temp.zip";
-                        Files.move(new File(oldZipFilename), new File(zipFilename));
-                    }
-                    FileUtil.deleteDirectory(deleteDir);
-                }
-            }
-
-            final ZipFile zipFile = new ZipFile(zipFilename);
-            final Enumeration<? extends ZipEntry> entries = zipFile.entries();
-
-            progressBar.reset();
-            progressBar.setPercentMode(true);
-            progressBar.setDescription("Extracting " + desc);
-            progressBar.setMaximum(zipFile.size());
-
-            FileUtil.ensureDirectoryExists(destFolder);
-
-            int count = 0;
-            int failedCount = 0;
-            while (entries.hasMoreElements()) {
-                if (cancel) { break; }
-
-                try {
-                    final ZipEntry entry = entries.nextElement();
-
-                    final String path = destFolder + File.separator + entry.getName();
-                    if (entry.isDirectory()) {
-                        new File(path).mkdir();
-                        progressBar.setValue(++count);
-                        continue;
-                    }
-                    copyInputStream(zipFile.getInputStream(entry), path);
-                    progressBar.setValue(++count);
-                    filesExtracted++;
-                }
-                catch (final Exception e) { //don't quit out completely if an entry is not UTF-8
-                    progressBar.setValue(++count);
-                    failedCount++;
-                }
-            }
-
-            if (failedCount > 0) {
-                Log.error("Downloading " + desc, failedCount + " " + desc + " could not be extracted");
-            }
-
-            zipFile.close();
-            new File(zipFilename).delete();
-        }
-        catch (final Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            GuiBase.getInterface().preventSystemSleep(false);
-        }
+        extract(zipFilename);
     }
 
     public String download(final String filename) {
@@ -205,6 +140,75 @@ public class GuiDownloadZipService extends GuiDownloadService {
         catch (final Exception ex) {
             Log.error("Downloading " + desc, "Error downloading " + desc, ex);
             return null;
+        }
+        finally {
+            GuiBase.getInterface().preventSystemSleep(false);
+        }
+    }
+
+    public void extract(String zipFilename) {
+        //if assets.zip downloaded successfully, unzip into destination folder
+        try {
+            GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while unzipping
+
+            if (deleteFolder != null) {
+                final File deleteDir = new File(deleteFolder);
+                if (deleteDir.exists()) {
+                    //attempt to delete previous res directory if to be rebuilt
+                    progressBar.reset();
+                    progressBar.setDescription("Deleting old " + desc + "...");
+                    if (deleteFolder.equals(destFolder)) { //move zip file to prevent deleting it
+                        final String oldZipFilename = zipFilename;
+                        zipFilename = deleteDir.getParentFile().getAbsolutePath() + File.separator + "temp.zip";
+                        Files.move(new File(oldZipFilename), new File(zipFilename));
+                    }
+                    FileUtil.deleteDirectory(deleteDir);
+                }
+            }
+
+            final ZipFile zipFile = new ZipFile(zipFilename);
+            final Enumeration<? extends ZipEntry> entries = zipFile.entries();
+
+            progressBar.reset();
+            progressBar.setPercentMode(true);
+            progressBar.setDescription("Extracting " + desc);
+            progressBar.setMaximum(zipFile.size());
+
+            FileUtil.ensureDirectoryExists(destFolder);
+
+            int count = 0;
+            int failedCount = 0;
+            while (entries.hasMoreElements()) {
+                if (cancel) { break; }
+
+                try {
+                    final ZipEntry entry = entries.nextElement();
+
+                    final String path = destFolder + File.separator + entry.getName();
+                    if (entry.isDirectory()) {
+                        new File(path).mkdir();
+                        progressBar.setValue(++count);
+                        continue;
+                    }
+                    copyInputStream(zipFile.getInputStream(entry), path);
+                    progressBar.setValue(++count);
+                    filesExtracted++;
+                }
+                catch (final Exception e) { //don't quit out completely if an entry is not UTF-8
+                    progressBar.setValue(++count);
+                    failedCount++;
+                }
+            }
+
+            if (failedCount > 0) {
+                Log.error("Downloading " + desc, failedCount + " " + desc + " could not be extracted");
+            }
+
+            zipFile.close();
+            new File(zipFilename).delete();
+        }
+        catch (final Exception e) {
+            e.printStackTrace();
         }
         finally {
             GuiBase.getInterface().preventSystemSleep(false);
