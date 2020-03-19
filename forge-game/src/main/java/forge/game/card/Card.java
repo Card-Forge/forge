@@ -3938,7 +3938,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywordsGrantedByTextChanges.add(newKw);
             }
         }
-        addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        if (!addKeywords.isEmpty() || !removeKeywords.isEmpty()) {
+            addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        }
     }
 
     private void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {

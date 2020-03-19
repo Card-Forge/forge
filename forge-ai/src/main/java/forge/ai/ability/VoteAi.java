@@ -46,6 +46,12 @@ public class VoteAi extends SpellAbilityAi {
 
     @Override
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        if (params.containsKey("Voter")) {
+            Player p = (Player)params.get("Voter");
+            if (p.isOpponentOf(player)) {
+                return min;
+            }
+        }
         if (sa.getActivatingPlayer().isOpponentOf(player)) {
             return min;
         }
