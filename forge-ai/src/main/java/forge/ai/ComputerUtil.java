@@ -2323,7 +2323,7 @@ public class ComputerUtil {
         return chosen;
     }
 
-    public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes) {
+    public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes, Player forPlayer) {
         final Card source = sa.getHostCard();
         final Player controller = source.getController();
         final Game game = controller.getGame();
