@@ -513,6 +513,20 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
+                if (params.containsKey("ControlVote")) {
+                    p.addControlVote(se.getTimestamp());
+                }
+                if (params.containsKey("AdditionalVote")) {
+                    String mhs = params.get("AdditionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalVote(se.getTimestamp(), add);
+                }
+                if (params.containsKey("AdditionalOptionalVote")) {
+                    String mhs = params.get("AdditionalOptionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalOptionalVote(se.getTimestamp(), add);
+                }
+
                 if (params.containsKey("RaiseMaxHandSize")) {
                     String rmhs = params.get("RaiseMaxHandSize");
                     int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, stAb);

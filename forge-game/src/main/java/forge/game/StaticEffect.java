@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,7 @@ import com.google.common.collect.Maps;
  * <p>
  * StaticEffect class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -72,7 +72,7 @@ public class StaticEffect {
 
     /**
      * setTimestamp TODO Write javadoc for this method.
-     * 
+     *
      * @param t
      *            a long
      */
@@ -82,7 +82,7 @@ public class StaticEffect {
 
     /**
      * getTimestamp. TODO Write javadoc for this method.
-     * 
+     *
      * @return a long
      */
     public final long getTimestamp() {
@@ -93,7 +93,7 @@ public class StaticEffect {
      * <p>
      * Getter for the field <code>source</code>.
      * </p>
-     * 
+     *
      * @return a {@link forge.game.card.Card} object.
      */
     public final Card getSource() {
@@ -104,7 +104,7 @@ public class StaticEffect {
      * <p>
      * Getter for the field <code>affectedCards</code>.
      * </p>
-     * 
+     *
      * @return a {@link forge.CardList} object.
      */
     public final CardCollectionView getAffectedCards() {
@@ -115,7 +115,7 @@ public class StaticEffect {
      * <p>
      * Setter for the field <code>affectedCards</code>.
      * </p>
-     * 
+     *
      * @param list
      *            a {@link forge.CardList} object.
      */
@@ -125,7 +125,7 @@ public class StaticEffect {
 
     /**
      * Gets the affected players.
-     * 
+     *
      * @return the affected players
      */
     public final List<Player> getAffectedPlayers() {
@@ -134,7 +134,7 @@ public class StaticEffect {
 
     /**
      * Sets the affected players.
-     * 
+     *
      * @param list
      *            the new affected players
      */
@@ -144,7 +144,7 @@ public class StaticEffect {
 
     /**
      * setParams. TODO Write javadoc for this method.
-     * 
+     *
      * @param params
      *            a HashMap
      */
@@ -154,7 +154,7 @@ public class StaticEffect {
 
     /**
      * Gets the params.
-     * 
+     *
      * @return the params
      */
     public final Map<String, String> getParams() {
@@ -171,13 +171,12 @@ public class StaticEffect {
 
     /**
      * Undo everything that was changed by this effect.
-     * 
+     *
      * @return a {@link CardCollectionView} of all affected cards.
      */
     final CardCollectionView remove() {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
-        //final Map<String, String> params = getParams();
 
         String changeColorWordsTo = null;
 
@@ -245,6 +244,10 @@ public class StaticEffect {
 
             p.removeMaxLandPlays(getTimestamp());
             p.removeMaxLandPlaysInfinite(getTimestamp());
+
+            p.removeControlVote(getTimestamp());
+            p.removeAdditionalVote(getTimestamp());
+            p.removeAdditionalOptionalVote(getTimestamp());
         }
 
         // modify the affected card
