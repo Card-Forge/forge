@@ -219,7 +219,7 @@ public class CardZoom extends FOverlay {
         float w = getWidth();
         float h = getHeight();
         float messageHeight = FDialog.MSG_HEIGHT;
-        float AspectRatioMultiplier = 2;
+        float AspectRatioMultiplier;
         switch (Forge.extrawide) {
             case "default":
                 AspectRatioMultiplier = 3; //good for tablets with 16:10 or similar

@@ -156,6 +156,9 @@ public class DeckgenUtil {
             //}
         }
 
+        //remove any cards not valid in format
+        selectedCards = Lists.newArrayList(Iterables.filter(selectedCards, format.getFilterPrinted()));
+
         List<PaperCard> toRemove = new ArrayList<>();
 
         //randomly remove cards
@@ -251,6 +254,9 @@ public class DeckgenUtil {
             }
             //}
         }
+
+        //remove any cards not valid in format
+        selectedCards = Lists.newArrayList(Iterables.filter(selectedCards, format.getFilterPrinted()));
 
         List<PaperCard> toRemove = new ArrayList<>();
 

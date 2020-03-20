@@ -1295,6 +1295,26 @@ public class SpecialCardAi {
         }
     }
 
+    // Timmerian Fiends
+    public static class TimmerianFiends {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card targeted = sa.getParentTargetingCard().getTargetCard();
+            if (targeted == null) {
+                return false;
+            }
+
+            if (targeted.isCreature()) {
+                if (ComputerUtil.aiLifeInDanger(ai, true, 0)) {
+                    return true; // do it, hoping to save a valuable potential blocker etc.
+                }
+                return ComputerUtilCard.evaluateCreature(targeted) >= 200; // might need tweaking
+            } else {
+                // TODO: this currently compares purely by CMC. To be somehow improved, especially for stuff like the Power Nine etc.
+                return ComputerUtilCard.evaluatePermanentList(new CardCollection(targeted)) >= 3;
+            }
+        }
+    }
+
     // Volrath's Shapeshifter
     public static class VolrathsShapeshifter {
         public static boolean consider(final Player ai, final SpellAbility sa) {

@@ -513,8 +513,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes) {
-        return ComputerUtil.vote(player, options, sa, votes);
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
+        return ComputerUtil.vote(player, options, sa, votes, forPlayer);
     }
 
     @Override

@@ -271,6 +271,27 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
+    public int getAdditionalVote() {
+        return get(TrackableProperty.AdditionalVote);
+    }
+    public void updateAdditionalVote(Player p) {
+        set(TrackableProperty.AdditionalVote, p.getAdditionalVotesAmount());
+    }
+
+    public int getOptionalAdditionalVote() {
+        return get(TrackableProperty.OptionalAdditionalVote);
+    }
+    public void updateOptionalAdditionalVote(Player p) {
+        set(TrackableProperty.OptionalAdditionalVote, p.getAdditionalOptionalVotesAmount());
+    }
+
+    public boolean getControlVote() {
+        return get(TrackableProperty.ControlVotes);
+    }
+    public void updateControlVote(boolean val) {
+        set(TrackableProperty.ControlVotes, val);
+    }
+
     public ImmutableMultiset<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }
@@ -496,6 +517,19 @@ public class PlayerView extends GameEntityView {
         details.add(Localizer.getInstance().getMessage("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
         details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
         details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
+
+        int v = getAdditionalVote();
+        if (v > 0) {
+            details.add(Localizer.getInstance().getMessage("lblAdditionalVotes", String.valueOf(v)));
+        }
+        v = getOptionalAdditionalVote();
+        if (v > 0) {
+            details.add(Localizer.getInstance().getMessage("lblOptionalAdditionalVotes", String.valueOf(v)));
+        }
+
+        if (getControlVote()) {
+            details.add(Localizer.getInstance().getMessage("lblControlsVote"));
+        }
 
         if (getIsExtraTurn()) {
             details.add(Localizer.getInstance().getMessage("lblIsExtraTurn"));

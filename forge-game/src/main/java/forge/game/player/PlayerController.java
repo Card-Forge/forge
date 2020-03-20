@@ -166,7 +166,7 @@ public abstract class PlayerController {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
 
-    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
+    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
 
     public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
