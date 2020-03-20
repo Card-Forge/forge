@@ -215,7 +215,7 @@ public class StaticData {
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
     
     public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
-    
+
     public Predicate<PaperCard> getModernPredicate() { return modernPredicate; }
 
     public Predicate<PaperCard> getCommanderPredicate() { return commanderPredicate; }
