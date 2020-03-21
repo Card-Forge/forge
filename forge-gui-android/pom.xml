@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.33-SNAPSHOT</version>
+        <version>1.6.34-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -142,7 +142,7 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>25</platform>
+                                <platform>26</platform>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -183,7 +183,7 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>25</platform>
+                                <platform>26</platform>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>

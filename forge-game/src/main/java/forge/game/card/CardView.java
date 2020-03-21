@@ -203,27 +203,22 @@ public class CardView extends GameEntityView {
     void updateCommander(Card c) {
         boolean isCommander = c.isCommander();
         set(TrackableProperty.IsCommander, isCommander);
-        if (c.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)) {
-            //store alternate type for oathbreaker or signature spell for display in card text
-            if (isCommander) {
+        if (isCommander) {
+            if (c.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)) {
+                //store alternate type for oathbreaker or signature spell for display in card text
                 if (c.getPaperCard().getRules().canBeSignatureSpell()) {
                     set(TrackableProperty.CommanderAltType, "Signature Spell");
                 }
                 else {
                     set(TrackableProperty.CommanderAltType, "Oathbreaker");
                 }
-            }
-            else {
-                set(TrackableProperty.CommanderAltType, null);
+            } else {
+                set(TrackableProperty.CommanderAltType, "Commander");
             }
         }
     }
     public String getCommanderType() {
-        String type = get(TrackableProperty.CommanderAltType);
-        if (type == null) {
-            type = "Commander";
-        }
-        return type;
+        return get(TrackableProperty.CommanderAltType);
     }
 
     public Map<CounterType, Integer> getCounters() {

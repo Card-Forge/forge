@@ -35,61 +35,77 @@ import java.util.List;
 
 public class CountersPutEffect extends SpellAbilityEffect {
     @Override
-    protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final Card card = sa.getHostCard();
-        final boolean dividedAsYouChoose = sa.hasParam("DividedAsYouChoose");
+    protected String getStackDescription(SpellAbility spellAbility) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        final Card card = spellAbility.getHostCard();
+        final boolean dividedAsYouChoose = spellAbility.hasParam("DividedAsYouChoose");
 
-
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("CounterNum", "1"), sa);
-        if (sa.hasParam("Bolster")) {
-            sb.append("Bolster ").append(amount);
-            return sb.toString();
+        final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
+        if (spellAbility.hasParam("Bolster")) {
+            stringBuilder.append("Bolster ").append(amount);
+            return stringBuilder.toString();
         }
         if (dividedAsYouChoose) {
-            sb.append("Distribute ");
+            stringBuilder.append("Distribute ");
         } else {
-            sb.append("Put ");
+            stringBuilder.append("Put ");
         }
-        if (sa.hasParam("UpTo")) {
-            sb.append("up to ");
+        if (spellAbility.hasParam("UpTo")) {
+            stringBuilder.append("up to ");
         }
 
-        sb.append(amount).append(" ");
+        stringBuilder.append(amount).append(" ");
 
-        String type = sa.getParam("CounterType");
+        String type = spellAbility.getParam("CounterType");
         if (type.equals("ExistingCounter")) {
-            sb.append("of an existing counter");
+            stringBuilder.append("of an existing counter");
         } else {
-
-            sb.append( CounterType.valueOf(type).getName()).append(" counter");
+            stringBuilder.append(CounterType.valueOf(type).getName()).append(" counter");
         }
+
         if (amount != 1) {
-            sb.append("s");
+            stringBuilder.append("s");
         }
+
         if (dividedAsYouChoose) {
-            sb.append(" among ");
+            stringBuilder.append(" among ");
         } else {
-            sb.append(" on ");
+            stringBuilder.append(" on ");
         }
-        final List<Card> tgtCards = getTargetCards(sa);
 
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            final Card tgtC = it.next();
-            if (tgtC.isFaceDown()) {
-                sb.append("Morph");
-            } else {
-                sb.append(tgtC);
+        // if use targeting we show all targets and corresponding counters
+        if(spellAbility.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            for(int i = 0; i < targetCards.size(); i++) {
+                Card targetCard = targetCards.get(i);
+                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
+
+                if(i == targetCards.size() - 2) {
+                    stringBuilder.append(" and ");
+                }
+                else if(i + 1 < targetCards.size()) {
+                    stringBuilder.append(", ");
+                }
             }
+        } else {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            final Iterator<Card> it = targetCards.iterator();
+            while (it.hasNext()) {
+                final Card targetCard = it.next();
+                if (targetCard.isFaceDown()) {
+                    stringBuilder.append("Morph");
+                } else {
+                    stringBuilder.append(targetCard);
+                }
 
-            if (it.hasNext()) {
-                sb.append(", ");
+                if (it.hasNext()) {
+                    stringBuilder.append(", ");
+                }
             }
         }
-        sb.append(".");
+        stringBuilder.append(".");
 
-        return sb.toString();
+        return stringBuilder.toString();
     }
 
     @Override
@@ -156,7 +172,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (existingCounter) {
                 final List<CounterType> choices = Lists.newArrayList();
                 if (obj instanceof GameEntity) {
-                    GameEntity entity = (GameEntity)obj;
+                    GameEntity entity = (GameEntity) obj;
                     // get types of counters
                     for (CounterType ct : entity.getCounters().keySet()) {
                         if (entity.canReceiveCounters(ct)) {
@@ -166,7 +182,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
 
                 if (eachExistingCounter) {
-                    for(CounterType ct : choices) {
+                    for (CounterType ct : choices) {
                         if (obj instanceof Player) {
                             ((Player) obj).addCounter(ct, counterAmount, placer, true, table);
                         }

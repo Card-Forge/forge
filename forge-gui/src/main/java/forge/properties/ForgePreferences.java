@@ -153,6 +153,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         //TODO This should be removed after the update that requires Java 8.
         DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
 
+        AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game

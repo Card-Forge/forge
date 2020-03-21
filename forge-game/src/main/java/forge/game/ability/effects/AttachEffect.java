@@ -62,7 +62,9 @@ public class AttachEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChooseAnObject")) {
                 Card c = p.getController().chooseSingleEntityForEffect(attachments, sa, sa.getParam("ChooseAnObject"));
                 attachments.clear();
-                attachments.add(c);
+                if (c != null) {
+                    attachments.add(c);
+                }
             }
         } else {
             attachments = new CardCollection(source);

@@ -219,7 +219,22 @@ public class CardZoom extends FOverlay {
         float w = getWidth();
         float h = getHeight();
         float messageHeight = FDialog.MSG_HEIGHT;
-        float maxCardHeight = h - 2 * messageHeight;
+        float AspectRatioMultiplier;
+        switch (Forge.extrawide) {
+            case "default":
+                AspectRatioMultiplier = 3; //good for tablets with 16:10 or similar
+                break;
+            case "wide":
+                AspectRatioMultiplier = 2.5f;
+                break;
+            case "extrawide":
+                AspectRatioMultiplier = 2; //good for tall phones with 21:9 or similar
+                break;
+            default:
+                AspectRatioMultiplier = 3;
+                break;
+        }
+        float maxCardHeight = h - AspectRatioMultiplier * messageHeight; //maxheight of currently zoomed card
 
         float cardWidth, cardHeight, y;
         
@@ -275,9 +290,15 @@ public class CardZoom extends FOverlay {
 
         if (flipIconBounds != null) {
             float imageWidth = cardWidth / 2;
-            float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
-            flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
-            g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+            if (Forge.hdbuttons){
+                float imageHeight = imageWidth * FSkinImage.HDFLIPCARD.getHeight() / FSkinImage.HDFLIPCARD.getWidth();
+                flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+                g.drawImage(FSkinImage.HDFLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+            } else {
+                float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
+                flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+                g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+            }
         }
 
         if (currentActivateAction != null) {

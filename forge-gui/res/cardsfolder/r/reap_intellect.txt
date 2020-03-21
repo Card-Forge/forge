@@ -1,9 +1,14 @@
 Name:Reap Intellect
 ManaCost:X 2 U B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | References$ X | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBExile | SpellDescription$ Target opponent reveals their hand. You choose X non-land cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles their library.
-SVar:DBExile:DB$ ChangeZoneAll | Origin$ Hand,Library,Graveyard | Destination$ Exile | Defined$ Targeted | Search$ True | ChangeType$ Card.sharesNameWith Remembered | Shuffle$ True | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | References$ X | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Target opponent reveals their hand. You choose X non-land cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles their library.
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Exile | RepeatSubAbility$ ExileYard | SubAbility$ DBCleanup
+SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ NumInYard | References$ NumInYard | Chooser$ You | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ NumInHand | References$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ NumInLib | References$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumInHand:TargetedPlayer$CardsInHand
+SVar:NumInLib:TargetedPlayer$CardsInLibrary
+SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_intellect.jpg
 Oracle:Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library.

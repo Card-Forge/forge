@@ -83,7 +83,7 @@ public class StarRenderer extends ItemCellRenderer {
         }
         else if (CardPreferences.getPrefs(card).getStarCount() == 0) {
             this.setToolTipText("Click to add " + card.getName() + " to your favorites");
-            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTINE);
+            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
             this.setToolTipText("Click to remove " + card.getName() + " from your favorites");

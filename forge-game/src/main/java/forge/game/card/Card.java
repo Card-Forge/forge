@@ -3938,7 +3938,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywordsGrantedByTextChanges.add(newKw);
             }
         }
-        addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        if (!addKeywords.isEmpty() || !removeKeywords.isEmpty()) {
+            addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        }
     }
 
     private void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {
@@ -6353,6 +6355,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         removeSVar("PayX"); // Temporary AI X announcement variable
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
+        setXManaCostPaid(0);
+        setXManaCostPaidByColor(null);
+        setKickerMagnitude(0);
+        setPseudoMultiKickerMagnitude(0);
     }
 
     public final int getFinalChapterNr() {

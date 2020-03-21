@@ -90,6 +90,10 @@ public class FSkin {
     public static void loadLight(String skinName, final SplashScreen splashScreen) {
         preferredName = skinName.toLowerCase().replace(' ', '_');
 
+        //reset hd buttons/icons
+        Forge.hdbuttons = false;
+        Forge.hdstart = false;
+
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
@@ -190,6 +194,8 @@ public class FSkin {
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
+        final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
+        final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -204,10 +210,22 @@ public class FSkin {
             }
             if (f7.exists()){
                 Texture t = new Texture(f7, true);
-                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                //t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
             }
-
+            //hdbuttons
+            if (f11.exists()) {
+                Texture t = new Texture(f11, true);
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f11.path(), t);
+                Forge.hdbuttons = true;
+            } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
+            if (f12.exists()) {
+                Texture t = new Texture(f12, true);
+                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                textures.put(f12.path(), t);
+                Forge.hdstart = true;
+            } else { Forge.hdstart = false; }
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
                 c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));

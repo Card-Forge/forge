@@ -82,7 +82,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 71 M Thassa, Deep-Dwelling
 72 R Thassa's Intervention
 73 R Thassa's Oracle
-74 C Thirst For Meaning
+74 C Thirst for Meaning
 75 U Threnody Singer
 76 R Thryx, the Sudden Storm
 77 C Towering-Wave Mystic
@@ -233,7 +233,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 222 R Kunoros, Hound of Athreos
 223 U Mischievous Chimera
 224 M Polukranos, Unchained
-225 U Rise To Glory
+225 U Rise to Glory
 226 U Siona, Captain of the Pyleas
 227 U Slaughter-Priest of Mogis
 228 U Staggering Insight
@@ -367,17 +367,17 @@ Prerelease=6 Boosters, 1 RareMythic+
 350 R Temple of Malice
 351 R Temple of Plenty
 #Bundle promo
-R Arasta of the Endless Web
+352 R Arasta of the Endless Web
 #Promo Pack
-U Alseid of Life's Bounty
-C Thirst For Meaning
-U Gray Merchant of Asphodel
-C Thrill of Possibility
-U Wolfwillow Haven
+353 U Alseid of Life's Bounty
+354 C Thirst for Meaning
+355 U Gray Merchant of Asphodel
+356 C Thrill of Possibility
+357 U Wolfwillow Haven
 
 [tokens]
 b_2_2_zombie
-c_0_4_wall_defender
+c_0_4_a_wall_defender
 g_1_2_spider_reach
 g_2_2_wolf
 r_x_1_elemental_trample_haste

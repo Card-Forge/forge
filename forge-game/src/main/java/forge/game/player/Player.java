@@ -162,6 +162,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card blessingEffect = null;
     private Card keywordEffect = null;
 
+    private Map<Long, Integer> additionalVotes = Maps.newHashMap();
+    private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
+    private SortedSet<Long> controlVotes = Sets.newTreeSet();
+
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
@@ -2706,6 +2710,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void incCommanderCast(Card commander) {
         commanderCast.put(commander, getCommanderCast(commander) + 1);
+        getView().updateCommanderCast(this, commander);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
 
     public int getTotalCommanderCast() {
@@ -3064,5 +3070,87 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         this.updateZoneForView(com);
         return keywordEffect;
+    }
+
+    public void addAdditionalVote(long timestamp, int value) {
+        additionalVotes.put(timestamp, value);
+        getView().updateAdditionalVote(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+
+    public void removeAdditionalVote(long timestamp) {
+        if (additionalVotes.remove(timestamp) != null) {
+            getView().updateAdditionalVote(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
+
+    public int getAdditionalVotesAmount() {
+        int value = 0;
+        for (Integer i : additionalVotes.values()) {
+            value += i;
+        }
+        return value;
+    }
+
+    public void addAdditionalOptionalVote(long timestamp, int value) {
+        additionalOptionalVotes.put(timestamp, value);
+        getView().updateOptionalAdditionalVote(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+    public void removeAdditionalOptionalVote(long timestamp) {
+        if (additionalOptionalVotes.remove(timestamp) != null) {
+            getView().updateOptionalAdditionalVote(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
+
+    public int getAdditionalOptionalVotesAmount() {
+        int value = 0;
+        for (Integer i : additionalOptionalVotes.values()) {
+            value += i;
+        }
+        return value;
+    }
+
+    public boolean addControlVote(long timestamp) {
+        if (controlVotes.add(timestamp)) {
+            updateControlVote();
+            return true;
+        }
+        return false;
+    }
+    public boolean removeControlVote(long timestamp) {
+        if (controlVotes.remove(timestamp)) {
+            updateControlVote();
+            return true;
+        }
+        return false;
+    }
+
+    void updateControlVote() {
+        // need to update all players because it can't know
+        Player control = getGame().getControlVote();
+        for (Player pl : getGame().getPlayers()) {
+            pl.getView().updateControlVote(pl.equals(control));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(pl, false));
+        }
+    }
+
+    public Set<Long> getControlVote() {
+        return controlVotes;
+    }
+
+    public void setControlVote(Set<Long> value) {
+        controlVotes.clear();
+        controlVotes.addAll(value);
+        updateControlVote();
+    }
+
+    public Long getHighestControlVote() {
+        if (controlVotes.isEmpty()) {
+            return null;
+        }
+        return controlVotes.last();
     }
 }

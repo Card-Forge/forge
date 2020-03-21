@@ -66,6 +66,8 @@ public class Forge implements ApplicationListener {
     public static boolean enableUIMask = false;
     public static boolean enablePreloadExtendedArt = false;
     public static String locale = "en-US";
+    public static boolean hdbuttons = false;
+    public static boolean hdstart = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
         if (GuiBase.getInterface() == null) {

@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -54,10 +55,21 @@ public class FButton extends FDisplayObject implements IButton {
         resetImg();
     }
 
+    private boolean hdbuttonskin(){
+        return Forge.hdbuttons;
+    }
+
     private void resetImg() {
-        imgL = FSkinImage.BTN_UP_LEFT;
-        imgM = FSkinImage.BTN_UP_CENTER;
-        imgR = FSkinImage.BTN_UP_RIGHT;
+        if (hdbuttonskin())
+        {
+            imgL = FSkinImage.HDBTN_UP_LEFT;
+            imgM = FSkinImage.HDBTN_UP_CENTER;
+            imgR = FSkinImage.HDBTN_UP_RIGHT;
+        } else {
+            imgL = FSkinImage.BTN_UP_LEFT;
+            imgM = FSkinImage.BTN_UP_CENTER;
+            imgR = FSkinImage.BTN_UP_RIGHT;
+        }
     }
 
     public String getText() {
@@ -83,9 +95,16 @@ public class FButton extends FDisplayObject implements IButton {
             resetImg();
         }
         else {
-            imgL = FSkinImage.BTN_DISABLED_LEFT;
-            imgM = FSkinImage.BTN_DISABLED_CENTER;
-            imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
+                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
+                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_DISABLED_LEFT;
+                imgM = FSkinImage.BTN_DISABLED_CENTER;
+                imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            }
         }
     }
 
@@ -102,17 +121,31 @@ public class FButton extends FDisplayObject implements IButton {
         toggled = b0;
 
         if (toggled) {
-            imgL = FSkinImage.BTN_TOGGLE_LEFT;
-            imgM = FSkinImage.BTN_TOGGLE_CENTER;
-            imgR = FSkinImage.BTN_TOGGLE_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_TOGGLE_LEFT;
+                imgM = FSkinImage.HDBTN_TOGGLE_CENTER;
+                imgR = FSkinImage.HDBTN_TOGGLE_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_TOGGLE_LEFT;
+                imgM = FSkinImage.BTN_TOGGLE_CENTER;
+                imgR = FSkinImage.BTN_TOGGLE_RIGHT;
+            }
         }
         else if (isEnabled()) {
             resetImg();
         }
         else {
-            imgL = FSkinImage.BTN_DISABLED_LEFT;
-            imgM = FSkinImage.BTN_DISABLED_CENTER;
-            imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
+                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
+                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_DISABLED_LEFT;
+                imgM = FSkinImage.BTN_DISABLED_CENTER;
+                imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            }
         }
     }
 
@@ -137,9 +170,18 @@ public class FButton extends FDisplayObject implements IButton {
     @Override
     public final boolean press(float x, float y) {
         if (isToggled()) { return true; }
-        imgL = FSkinImage.BTN_DOWN_LEFT;
-        imgM = FSkinImage.BTN_DOWN_CENTER;
-        imgR = FSkinImage.BTN_DOWN_RIGHT;
+
+        if (hdbuttonskin())
+        {
+            imgL = FSkinImage.HDBTN_DOWN_LEFT;
+            imgM = FSkinImage.HDBTN_DOWN_CENTER;
+            imgR = FSkinImage.HDBTN_DOWN_RIGHT;
+        } else {
+            imgL = FSkinImage.BTN_DOWN_LEFT;
+            imgM = FSkinImage.BTN_DOWN_CENTER;
+            imgR = FSkinImage.BTN_DOWN_RIGHT;
+        }
+
         return true;
     }
 

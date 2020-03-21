@@ -455,7 +455,11 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                     FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
                     FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
                      */
-                    labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+                    if (Forge.hdbuttons)
+                        labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+                    else
+                        labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+
                     labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
                     if (currentMatch) {
                         labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));

@@ -22,9 +22,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -33,9 +34,15 @@ import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -78,68 +85,9 @@ public final class GameActionUtil {
         if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
             boolean lkicheck = false;
 
-            // need to be done before so it works with Vivien and Zoetic Cavern
-            if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.turnFaceUp(false, false);
-                lkicheck = true;
-            }
-
-            if (sa.isBestow() && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.animateBestow(false);
-                lkicheck = true;
-            } else if (sa.isCastFaceDown()) {
-                // need a copy of the card to turn facedown without trigger anything
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                source.turnFaceDownNoUpdate();
-                lkicheck = true;
-            } else if (sa.isAdventure()) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.setState(CardStateName.Adventure, false);
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
-                lkicheck = true;
-            } else if (source.isSplitCard() && (sa.isLeftSplit() || sa.isRightSplit())) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                if (sa.isLeftSplit()) {
-                    if (!source.hasState(CardStateName.LeftSplit)) {
-                        source.addAlternateState(CardStateName.LeftSplit, false);
-                        source.getState(CardStateName.LeftSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.LeftSplit), true);
-                    }
-
-                    source.setState(CardStateName.LeftSplit, false);
-                }
-
-                if (sa.isRightSplit()) {
-                    if (!source.hasState(CardStateName.RightSplit)) {
-                        source.addAlternateState(CardStateName.RightSplit, false);
-                        source.getState(CardStateName.RightSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.RightSplit), true);
-                    }
-
-                    source.setState(CardStateName.RightSplit, false);
-                }
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
+            Card newHost = ((Spell)sa).getAlternateHost(source);
+            if (newHost != null) {
+                source = newHost;
                 lkicheck = true;
             }
 
@@ -218,6 +166,7 @@ public final class GameActionUtil {
                         final Cost escapeCost = new Cost(k[1], true);
 
                         final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+                        newSA.setActivatingPlayer(activator);
 
                         newSA.getMapParams().put("PrecostDesc", "Escape—");
                         newSA.getMapParams().put("CostDesc", escapeCost.toString());
@@ -276,6 +225,7 @@ public final class GameActionUtil {
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
             // set the cost to this directly to buypass non mana cost
             final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+            newSA.setActivatingPlayer(activator);
             newSA.setBasicSpell(false);
             newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
             // makes new SpellDescription
@@ -421,10 +371,11 @@ public final class GameActionUtil {
         }
         SpellAbility result = null;
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
 
-        host.getGame().getAction().checkStaticAbilities(false);
+        game.getAction().checkStaticAbilities(false);
 
         boolean reset = false;
 
@@ -487,7 +438,60 @@ public final class GameActionUtil {
                         int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
                         if (v > 0) {
-                            host.addReplacementEffect(CardFactoryUtil.makeEtbCounter("etbCounter:P1P1:" + v, host, false));
+
+                            final Card eff = new Card(game.nextCardId(), game);
+                            eff.setTimestamp(game.getNextTimestamp());
+                            eff.setName(c.getName() + "'s Effect");
+                            eff.addType("Effect");
+                            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
+                            eff.setOwner(activator);
+
+                            eff.setImageKey(c.getImageKey());
+                            eff.setColor(MagicColor.COLORLESS);
+                            eff.setImmutable(true);
+                            // try to get the SpellAbility from the mana ability
+                            //eff.setEffectSource((SpellAbility)null);
+
+                            eff.addRemembered(host);
+
+                            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ " + v;
+
+                            SpellAbility saAb = AbilityFactory.getAbility(abStr, c);
+
+                            CardFactoryUtil.setupETBReplacementAbility(saAb);
+
+                            String desc = "It enters the battlefield with ";
+                            desc += Lang.nounWithNumeral(v, CounterType.P1P1.getName() + " counter");
+                            desc += " on it.";
+
+                            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+
+                            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+                            re.setLayer(ReplacementLayer.Other);
+                            re.setOverridingAbility(saAb);
+
+                            eff.addReplacementEffect(re);
+
+                            // Forgot Trigger
+                            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+                            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+                            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+
+                            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
+                            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
+                            saForget.setSubAbility(saExile);
+
+                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+                            parsedTrigger.setOverridingAbility(saForget);
+                            eff.addTrigger(parsedTrigger);
+                            eff.updateStateForView();
+
+                            // TODO: Add targeting to the effect so it knows who it's dealing with
+                            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                            game.getAction().moveTo(ZoneType.Command, eff, null);
+                            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
                             if (result == null) {
                                 result = sa.copy();
                             }

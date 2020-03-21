@@ -164,7 +164,7 @@ public class ImageCache {
         }
         return image;
     }
-    public static void preloadCache(Iterable keys) {
+    public static void preloadCache(Iterable<String> keys) {
         cache.getAll(keys);
     }
     public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
@@ -173,10 +173,9 @@ public class ImageCache {
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
         int rh = Math.round(image.getHeight()*rscale);
-        int rx = Math.round((image.getWidth() - rw)/2);
-        int ry = Math.round((image.getHeight() - rh)/2)-2;
-        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
-        return rimage;
+        int rx = Math.round((image.getWidth() - rw)/2f);
+        int ry = Math.round((image.getHeight() - rh)/2f)-2;
+        return new TextureRegion(image, rx, ry, rw, rh);
     }
     public static boolean isWhiteBordered(IPaperCard c) {
         if (c == null)

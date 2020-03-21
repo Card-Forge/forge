@@ -746,7 +746,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             endTempShowCards();
         } else {
             getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
-                    player, owner), fm);
+                    getLocalPlayerView(), owner), fm);
         }
     }
 
@@ -1181,7 +1181,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
-            final ListMultimap<Object, Player> votes) {
+            final ListMultimap<Object, Player> votes, Player forPlayer) {
         return getGui().one(prompt, options);
     }
 

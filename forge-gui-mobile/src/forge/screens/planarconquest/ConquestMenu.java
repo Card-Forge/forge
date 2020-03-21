@@ -56,7 +56,7 @@ public class ConquestMenu extends FPopupMenu {
             setCurrentScreen(collectionScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MULTI, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);
@@ -68,7 +68,7 @@ public class ConquestMenu extends FPopupMenu {
             setCurrentScreen(planeswalkScreen);
         }
     });
-    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), FSkinImage.SETTINGS, new FEventHandler() {
+    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(prefsScreen);
@@ -126,8 +126,8 @@ public class ConquestMenu extends FPopupMenu {
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
         addItem(planeswalkersItem); planeswalkersItem.setSelected(currentScreen == planeswalkersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
-        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(planeswalkItem); planeswalkItem.setSelected(currentScreen == planeswalkScreen);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }
