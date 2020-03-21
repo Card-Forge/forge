@@ -39,6 +39,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -379,7 +380,7 @@ public class VStack extends FDropDown {
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
 
-            String name = stackInstance.getSourceCard().getName();
+            String name = CardTranslation.getTranslatedName(stackInstance.getSourceCard().getName());
             int index = text.indexOf(name);
             String newtext = "";
             String cId =  "(" + stackInstance.getSourceCard().getId() + ")";
