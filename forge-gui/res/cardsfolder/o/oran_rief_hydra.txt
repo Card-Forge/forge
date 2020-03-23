@@ -6,5 +6,5 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on CARDNAME. If that land is a Forest, put two +1/+1 counters on CARDNAME instead.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:TriggeredCard$Valid Forest/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_hydra.jpg
+SVar:BuffedBy:Land
 Oracle:Trample\nLandfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Oran-Rief Hydra. If that land is a Forest, put two +1/+1 counters on Oran-Rief Hydra instead.
