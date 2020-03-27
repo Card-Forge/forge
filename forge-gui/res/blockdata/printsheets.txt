@@ -3414,7 +3414,7 @@ Eldrazi Monument
 Eldritch Evolution
 Elesh Norn, Grand Cenobite
 Evra, Halcyon Witness
-#Expropriate
+Expropriate
 Fblthp, the Lost
 Felidar Sovereign
 Gideon Jura
