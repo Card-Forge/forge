@@ -1020,11 +1020,11 @@ Wasteland|EXP
 
 [CN2 Draft Matters]
 Adriana's Valor
-#Assemble the Rank and Vile
+Assemble the Rank and Vile
 Echoing Boon
 #Emissary's Ploy
 Hired Heist
-#Hold the Permiter
+Hold the Perimeter
 Hymn of the Wilds
 Incendiary Dissent
 Natural Unity
@@ -3617,11 +3617,11 @@ Stalking Stones+|FMB1
 
 [CN2 Not In Normal Slots]
 Adriana's Valor
-#Assemble the Rank and Vile
+Assemble the Rank and Vile
 Echoing Boon
 #Emissary's Ploy
 Hired Heist
-#Hold the Permiter
+Hold the Perimeter
 Hymn of the Wilds
 Incendiary Dissent
 Natural Unity
