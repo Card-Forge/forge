@@ -1,7 +1,7 @@
 Name:Reality Shaping
 ManaCost:no cost
 Types:Phenomenon
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigPutFromHand | TriggerDescription$ When you encounter CARDNAME, starting with you, each player may put a permanent card from their hand onto the battlefield. (Then planeswalk away from this phenomenon.)
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigPutFromHand | TriggerDescription$ When you encounter CARDNAME, starting with you, each player may put a permanent card from their hand onto the battlefield. (Then planeswalk away from this phenomenon.)
 SVar:TrigPutFromHand:DB$ RepeatEach | StartingWithActivator$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone | SubAbility$ PWAway
 SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Choser$ Player.IsRemembered | ChangeType$ Permanent | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:PWAway:DB$ Planeswalk | Cost$ 0
