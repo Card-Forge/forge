@@ -127,7 +127,7 @@ public enum Keyword {
     SHROUD("Shroud", SimpleKeyword.class, true, "This can't be the target of spells or abilities."),
     SKULK("Skulk", SimpleKeyword.class, true, "This creature can't be blocked by creatures with greater power."),
     SCAVENGE("Scavenge", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery."),
-    SOULBOND("Souldbond", SimpleKeyword.class, true, "You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them"),
+    SOULBOND("Soulbond", SimpleKeyword.class, true, "You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them."),
     SOULSHIFT("Soulshift", KeywordWithAmount.class, false, "When this creature dies, you may return target Spirit card with converted mana cost %d or less from your graveyard to your hand."),
     SPECTACLE("Spectacle", KeywordWithCost.class, false, "You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn."),
     SPLICE("Splice", KeywordWithCostAndType.class, false, "As you cast an %2$s spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell."),
