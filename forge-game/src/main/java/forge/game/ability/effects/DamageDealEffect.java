@@ -59,7 +59,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {
                 stringBuilder.append("divided to\n");
             } else
-                stringBuilder.append(" to ");
+                stringBuilder.append("to ");
 
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             final List<Player> players = SpellAbilityEffect.getTargetPlayers(spellAbility);
