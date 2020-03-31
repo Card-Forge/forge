@@ -30,7 +30,12 @@ public class DamageDealEffect extends DamageBaseEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder stringBuilder = new StringBuilder();
         final String damage = spellAbility.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
+        int dmg;
+        try { // try-catch to fix Volcano Hellion Crash
+            dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
+        } catch (NullPointerException e) {
+            dmg = 0;
+        }
 
         List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
         if (targets.isEmpty()) {
@@ -53,7 +58,8 @@ public class DamageDealEffect extends DamageBaseEffect {
                 stringBuilder.append("divided evenly (rounded down) to\n");
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {
                 stringBuilder.append("divided to\n");
-            }
+            } else
+                stringBuilder.append("to ");
 
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             final List<Player> players = SpellAbilityEffect.getTargetPlayers(spellAbility);
@@ -63,7 +69,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             // target cards
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
-                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
+                stringBuilder.append(targetCard);
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
 
                 if (i == targetCount - 2) {
                     stringBuilder.append(" and ");
@@ -74,9 +82,10 @@ public class DamageDealEffect extends DamageBaseEffect {
 
             // target players
             for (int i = 0; i < players.size(); i++) {
-
                 Player targetPlayer = players.get(i);
-                stringBuilder.append(targetPlayer).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
+                stringBuilder.append(targetPlayer);
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer) != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
 
                 if (i == players.size() - 2) {
                     stringBuilder.append(" and ");
