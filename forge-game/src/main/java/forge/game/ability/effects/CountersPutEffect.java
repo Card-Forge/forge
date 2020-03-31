@@ -78,13 +78,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             for(int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
-                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) { // fix null counter stack description
+                    stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
 
-                if(i == targetCards.size() - 2) {
-                    stringBuilder.append(" and ");
-                }
-                else if(i + 1 < targetCards.size()) {
-                    stringBuilder.append(", ");
+                    if(i == targetCards.size() - 2) {
+                        stringBuilder.append(" and ");
+                    }
+                    else if(i + 1 < targetCards.size()) {
+                        stringBuilder.append(", ");
+                    }
                 }
             }
         } else {
@@ -103,9 +105,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
         }
-        stringBuilder.append(".");
-
-        return stringBuilder.toString();
+        //stringBuilder.append(".");
+        return stringBuilder.toString().trim() + ".";
     }
 
     @Override
