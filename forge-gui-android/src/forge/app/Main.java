@@ -1,16 +1,19 @@
 package forge.app;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,16 +21,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.support.v4.app.ActivityCompat;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
@@ -44,6 +49,7 @@ import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,31 +59,49 @@ public class Main extends AndroidApplication {
 
         //permission
         if(!checkPermission()){
-            //why does it crash when requesting permission???
-            //requestPermission();
-
-            //reminder text instead for now...
-            displayMessage(Gadapter, this);
+            requestPermission(Gadapter);
+            displayMessage(Gadapter);
         }
     }
 
-    private void displayMessage(AndroidAdapter adapter, Context context){
-        TableLayout TL = new TableLayout(context);
-        TableRow row = new TableRow(context);
-        TextView text = new TextView(context);
+    private void displayMessage(AndroidAdapter adapter){
+        TableLayout TL = new TableLayout(this);
+        TableRow row = new TableRow(this);
+        TableRow row2 = new TableRow(this);
+        TextView text = new TextView(this);
         text.setGravity(Gravity.LEFT);
-        text.setText("Forge needs Storage Permission to run properly...\n" +
-                        "To allow this app follow this simple steps below.\n" +
-                        " 1) On your Android device, open the Settings app.\n" +
-                        " 2) Tap Apps & notifications.\n" +
-                        " 3) Tap the app you want to update (Forge).\n" +
-                        " 4) Tap Permissions.\n" +
-                        " 5) Turn on the Storage Permission.\n" +
-                        "Tap anywhere to exit...");
+        text.setTypeface(Typeface.SERIF);
 
+        String title="Forge needs Storage Permission to run properly...\n" +
+                "If you didn't set the storage permission earlier, follow this steps:\n";
+        String steps = " 1) On your Android device, open the Settings app.\n" +
+                " 2) Tap Apps & notifications.\n"+
+                " 3) Tap the app you want to update (Forge).\n"+
+                " 4) Tap Permissions.\n"+
+                " 5) Turn on the Storage Permission.\n"+
+                "(Tap anywhere to exit...)\n\n";
+
+        SpannableString ss1=  new SpannableString(title);
+        ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+        text.append(ss1);
+        text.append("\n");
+        text.append(steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
+
+        Button button = new Button(this);
+        button.setText("Restart");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.restart();
+            }
+        });
+        row2.addView(button);
+        row2.setGravity(Gravity.CENTER);
+
         TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.setGravity(Gravity.CENTER);
         TL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +126,38 @@ public class Main extends AndroidApplication {
             return false;
         }
     }
-    private void requestPermission() {
+    private void requestPermission(AndroidAdapter adapter) {
+            //Show Information about why you need the permission
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setIcon(R.drawable.ic_launcher);
+            builder.setTitle("Storage Permission Denied...");
+            builder.setMessage("This app needs storage permission to run properly.\n\n\n\n");
+            builder.setPositiveButton("Open App Details", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                    //ActivityCompat crashes... maybe it needs the appcompat v7???
+                    //ActivityCompat.requestPermissions(Main.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                }
+            });
+            /*builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(this, "Please allow storage permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
+                }
+            });*/
+            builder.show();
     }
 
     private void initForge(AndroidAdapter adapter){
