@@ -107,6 +107,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
+    private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox("Enable Unknown Cards");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -286,6 +287,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbLoadHistoricFormats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadHistoricFormats")), descriptionConstraints);
+
+        pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -578,6 +582,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnableUnknownCards() {
+        return cbEnableUnknownCards;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
