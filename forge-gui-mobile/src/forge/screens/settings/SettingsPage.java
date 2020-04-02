@@ -332,8 +332,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
-                "Enable Unknown Cards",
-                "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
+                localizer.getMessage("lblEnableUnknownCards"),
+                localizer.getMessage("nlEnableUnknownCards")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                 localizer.getMessage("cbpCounterDisplayType"),
