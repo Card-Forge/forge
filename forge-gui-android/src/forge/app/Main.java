@@ -18,8 +18,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
@@ -35,13 +43,75 @@ import java.io.OutputStream;
 import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
-
+    AndroidAdapter Gadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AndroidAdapter adapter = new AndroidAdapter(this.getContext());
+        Gadapter = new AndroidAdapter(this.getContext());
+        initForge(Gadapter);
 
+        //permission
+        if(!checkPermission()){
+            //why does it crash when requesting permission???
+            //requestPermission();
+
+            //reminder text instead for now...
+            displayMessage(Gadapter, this);
+        }
+    }
+
+    private void displayMessage(AndroidAdapter adapter, Context context){
+        TableLayout TL = new TableLayout(context);
+        TableRow row = new TableRow(context);
+        TextView text = new TextView(context);
+        text.setGravity(Gravity.LEFT);
+        text.setText("Forge needs Storage Permission to run properly...\n" +
+                        "To allow this app follow this simple steps below.\n" +
+                        " 1) On your Android device, open the Settings app.\n" +
+                        " 2) Tap Apps & notifications.\n" +
+                        " 3) Tap the app you want to update (Forge).\n" +
+                        " 4) Tap Permissions.\n" +
+                        " 5) Turn on the Storage Permission.\n" +
+                        "Tap anywhere to exit...");
+
+        row.addView(text);
+        row.setGravity(Gravity.CENTER);
+        TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.setGravity(Gravity.CENTER);
+        TL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.exit();
+            }
+        });
+        setContentView(TL);
+    }
+    @Override
+    public void onBackPressed() {
+        if (Gadapter!=null)
+            Gadapter.exit();
+
+        super.onBackPressed();
+    }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(this, "Please allow storage permission in App Settings.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+    }
+
+    private void initForge(AndroidAdapter adapter){
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             Gdx.app.error("Forge", "Can't access external storage");
@@ -66,14 +136,15 @@ public class Main extends AndroidApplication {
         adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
         if (landscapeMode) {
-            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
+                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
+                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
         else {
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        boolean value = Build.VERSION.SDK_INT >= 26;
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, value));
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, Build.VERSION.SDK_INT >= 26));
     }
 
     /*@Override
