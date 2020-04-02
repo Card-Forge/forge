@@ -2525,6 +2525,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean isSkippingCombat() {
+        if (hasLost()) {
+            return true;
+        }
+
         if (hasKeyword("Skip your next combat phase.")) {
             return true;
         }

@@ -1,7 +1,7 @@
 Name:Interplanar Tunnel
 ManaCost:no cost
 Types:Phenomenon
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ When you encounter CARDNAME, reveal cards from the top of your planar deck until you reveal five plane cards. Put a plane card from among them on top of your planar deck, then put the rest of the revealed cards on the bottom in a random order. (Then planeswalk away from this phenomenon.)
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When you encounter CARDNAME, reveal cards from the top of your planar deck until you reveal five plane cards. Put a plane card from among them on top of your planar deck, then put the rest of the revealed cards on the bottom in a random order. (Then planeswalk away from this phenomenon.)
 SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | SourceZone$ PlanarDeck | DestinationZone$ PlanarDeck | DestinationZone2$ PlanarDeck | LibraryPosition$ 0 | ChangeValid$ Plane | RestRandomOrder$ True | SubAbility$ Replaneswalk
 SVar:Replaneswalk:DB$ Planeswalk | Cost$ 0
 Oracle:When you encounter Interplanar Tunnel, reveal cards from the top of your planar deck until you reveal five plane cards. Put a plane card from among them on top of your planar deck, then put the rest of the revealed cards on the bottom in a random order. (Then planeswalk away from this phenomenon.)

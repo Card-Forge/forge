@@ -386,6 +386,7 @@ public class VStack extends FDropDown {
 
             if (index == -1) {
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(text.trim(),"--","-"),"- -","-");
+                newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
                 textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + "\n" + (newtext.length() > 1 ? newtext : ""),
                         FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
@@ -399,6 +400,7 @@ public class VStack extends FDropDown {
                 else {
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
                     newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
+                    newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
                     textRenderer.drawText(g, name+" "+cId+newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }

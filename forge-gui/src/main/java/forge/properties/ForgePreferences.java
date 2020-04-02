@@ -139,6 +139,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_PRELOAD_EXTENDED_ART("false"),
         UI_ENABLE_BORDER_MASKING("false"),
         UI_SHOW_FPS("false"),
+        UI_LOAD_UNKNOWN_CARDS("true"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),

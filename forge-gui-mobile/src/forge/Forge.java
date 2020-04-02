@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.32.001";
+    public static final String CURRENT_VERSION = "1.6.33.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;

@@ -28,9 +28,9 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (Card c : getDefinedCardsOrTargeted(sa)) {
             if (mode.equals(MODE_STORE)) {
-                noteCounters(c, source);
+                noteCounters(c, c);
             } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source, p, table);
+                loadCounters(c, c, p, table);
             }
         }
         table.triggerCountersPutAll(game);
