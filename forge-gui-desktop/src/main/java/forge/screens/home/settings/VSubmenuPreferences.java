@@ -292,8 +292,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
 
-        pnlPrefs.add(cbUseElsa, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"), descriptionConstraints);
+       /*pnlPrefs.add(cbUseElsa, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"), descriptionConstraints);*/
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");

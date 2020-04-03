@@ -6,8 +6,6 @@ import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
-import forge.net.CustomObjectDecoder;
-import forge.net.CustomObjectEncoder;
 import forge.net.event.LobbyUpdateEvent;
 import forge.net.event.LoginEvent;
 import forge.net.event.LogoutEvent;
@@ -26,6 +24,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -99,8 +99,8 @@ public final class FServerManager {
                         public final void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new CustomObjectEncoder(),
-                                    new CustomObjectDecoder(CustomObjectDecoder.maxObjectsize, ClassResolvers.cacheDisabled(null)),
+                                    new ObjectEncoder(),
+                                    new ObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
