@@ -217,8 +217,9 @@ public class Main extends AndroidApplication {
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
         }
 
-
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, false));
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA);
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig));
     }
 
     /*@Override

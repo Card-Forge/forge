@@ -236,6 +236,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         "Enable Unknown Cards",
                         "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
+                        "Enable Unknown Cards",
+                        "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_ELSA,
+                        "Use ELSA Serializer",
+                        "Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"),
+                3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
