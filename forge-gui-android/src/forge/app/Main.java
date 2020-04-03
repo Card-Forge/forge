@@ -28,6 +28,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -89,23 +90,45 @@ public class Main extends AndroidApplication {
         row.setGravity(Gravity.CENTER);
 
         int[] colors = {Color.TRANSPARENT,Color.TRANSPARENT};
+        int[] pressed = {Color.GREEN,Color.GREEN};
         GradientDrawable gd = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM, colors);
         gd.setStroke(3, Color.DKGRAY);
         gd.setCornerRadius(100);
 
+        GradientDrawable gd2 = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, pressed);
+        gd2.setStroke(3, Color.DKGRAY);
+        gd2.setCornerRadius(100);
 
         Button button = new Button(this);
         button.setBackground(gd);
         button.setText("Open App Details");
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                switch(arg1.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        // Button is pressed. Change the button to pressed state here
+                        button.setBackground(gd2);
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        // Button is being touched and swiped
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Button is released. Change the button to unpressed state here.
+                        button.setBackground(gd);
+                        return true;
+
+                }
+                return false;
             }
         });
         row2.addView(button);
