@@ -218,7 +218,7 @@ public class Main extends AndroidApplication {
         }
 
 
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, Build.VERSION.SDK_INT >= 26));
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, false));
     }
 
     /*@Override

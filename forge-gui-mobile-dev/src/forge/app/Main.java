@@ -93,7 +93,7 @@ public class Main {
         config.useHDPI = desktopMode; // enable HiDPI on Mac OS
 
         new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
-                desktopMode ? desktopModeAssetsDir : assetsDir, true), config);
+                desktopMode ? desktopModeAssetsDir : assetsDir, false), config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {
