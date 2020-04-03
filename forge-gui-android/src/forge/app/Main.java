@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -28,7 +29,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -57,11 +57,12 @@ public class Main extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
-        initForge(Gadapter);
+        initForge(Gadapter, permissiongranted);
 
         //permission
-        if(!checkPermission()){
+        if(!permissiongranted){
             //requestPermission();
             displayMessage(Gadapter);
         }
@@ -102,35 +103,26 @@ public class Main extends AndroidApplication {
         gd2.setCornerRadius(100);
 
         Button button = new Button(this);
-        button.setBackground(gd);
         button.setText("Open App Details");
-        button.setOnTouchListener(new View.OnTouchListener() {
+
+        StateListDrawable states = new StateListDrawable();
+
+        states.addState(new int[] {android.R.attr.state_pressed}, gd2);
+        states.addState(new int[] { }, gd);
+
+        button.setBackground(states);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                switch(arg1.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        // Button is pressed. Change the button to pressed state here
-                        button.setBackground(gd2);
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
-                        return true;
-
-                    case MotionEvent.ACTION_MOVE:
-                        // Button is being touched and swiped
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        // Button is released. Change the button to unpressed state here.
-                        button.setBackground(gd);
-                        return true;
-
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
             }
         });
+
         row2.addView(button);
         row2.setGravity(Gravity.CENTER);
 
@@ -188,7 +180,7 @@ public class Main extends AndroidApplication {
             builder.show();
     }
 
-    private void initForge(AndroidAdapter adapter){
+    private void initForge(AndroidAdapter adapter, boolean permissiongranted){
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             Gdx.app.error("Forge", "Can't access external storage");
@@ -212,14 +204,19 @@ public class Main extends AndroidApplication {
         //enforce orientation based on whether device is a tablet and user preference
         adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
-        if (landscapeMode) {
-            Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
-                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
-                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        if (permissiongranted){
+            if (landscapeMode) {
+                Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
+                        ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            } else {
+                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        } else {
+            //set current orientation
+            Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
         }
-        else {
-            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+
 
         initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, Build.VERSION.SDK_INT >= 26));
     }
