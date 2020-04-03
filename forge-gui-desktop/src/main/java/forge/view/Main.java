@@ -51,9 +51,6 @@ public final class Main {
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
 
-        //set ElsaSerializer from preference
-        GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA));
-
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
