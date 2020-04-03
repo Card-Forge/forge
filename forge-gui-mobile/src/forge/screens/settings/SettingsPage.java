@@ -232,6 +232,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbLoadHistoricFormats"),
                 localizer.getMessage("nlLoadHistoricFormats")),
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
+                        "Enable Unknown Cards",
+                        "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
+                3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
@@ -331,10 +335,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.showFPS = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
                     }
                 },4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
-                "Enable Unknown Cards",
-                "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
-                4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                 localizer.getMessage("cbpCounterDisplayType"),
                 localizer.getMessage("nlCounterDisplayType"),
