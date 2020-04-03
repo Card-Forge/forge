@@ -22,6 +22,8 @@ import forge.GuiDesktop;
 import forge.Singletons;
 import forge.card.CardReaderExperiments;
 import forge.error.ExceptionHandler;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
 import io.sentry.Sentry;
 import io.sentry.SentryClient;
@@ -49,8 +51,8 @@ public final class Main {
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
 
-        //set PropertyConfig log4j to true
-        GuiBase.enablePropertyConfig(false);
+        //set ElsaSerializer from preference
+        GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA));
 
         //install our error handler
         ExceptionHandler.registerErrorHandling();
