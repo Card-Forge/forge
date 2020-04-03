@@ -22,8 +22,6 @@ import forge.GuiDesktop;
 import forge.Singletons;
 import forge.card.CardReaderExperiments;
 import forge.error.ExceptionHandler;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
 import io.sentry.Sentry;
 import io.sentry.SentryClient;
