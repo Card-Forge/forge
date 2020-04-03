@@ -13,7 +13,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -59,7 +61,7 @@ public class Main extends AndroidApplication {
 
         //permission
         if(!checkPermission()){
-            requestPermission(Gadapter);
+            //requestPermission();
             displayMessage(Gadapter);
         }
     }
@@ -73,28 +75,37 @@ public class Main extends AndroidApplication {
         text.setTypeface(Typeface.SERIF);
 
         String title="Forge needs Storage Permission to run properly...\n" +
-                "If you didn't set the storage permission earlier, follow this steps:\n";
-        String steps = " 1) On your Android device, open the Settings app.\n" +
-                " 2) Tap Apps & notifications.\n"+
-                " 3) Tap the app you want to update (Forge).\n"+
-                " 4) Tap Permissions.\n"+
-                " 5) Turn on the Storage Permission.\n"+
-                "(Tap anywhere to exit...)\n\n";
+                "Follow this simple steps below:\n\n";
+        String steps = " 1) Tap \"Open App Details\" Button.\n" +
+                " 2) Tap Permissions\n"+
+                " 3) Turn on the Storage Permission.\n\n"+
+                "(You can tap anywhere to exit and restart the app)\n\n";
 
         SpannableString ss1=  new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
         text.append(ss1);
-        text.append("\n");
         text.append(steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
 
+        int[] colors = {Color.TRANSPARENT,Color.TRANSPARENT};
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, colors);
+        gd.setStroke(3, Color.DKGRAY);
+        gd.setCornerRadius(100);
+
+
         Button button = new Button(this);
-        button.setText("Restart");
+        button.setBackground(gd);
+        button.setText("Open App Details");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.restart();
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
             }
         });
         row2.addView(button);
@@ -126,21 +137,15 @@ public class Main extends AndroidApplication {
             return false;
         }
     }
-    private void requestPermission(AndroidAdapter adapter) {
+    private void requestPermission() {
             //Show Information about why you need the permission
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setIcon(R.drawable.ic_launcher);
             builder.setTitle("Storage Permission Denied...");
             builder.setMessage("This app needs storage permission to run properly.\n\n\n\n");
             builder.setPositiveButton("Open App Details", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
-                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                    intent.setData(uri);
-                    startActivity(intent);
                     //ActivityCompat crashes... maybe it needs the appcompat v7???
                     //ActivityCompat.requestPermissions(Main.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 }
