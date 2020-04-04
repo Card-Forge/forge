@@ -984,7 +984,7 @@ public class GameAction {
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
-                    if (c.getNetToughness() <= 0) {
+                    if (c.getLethal() <= 0) {
                         if (noRegCreats == null) {
                             noRegCreats = new CardCollection();
                         }
@@ -992,7 +992,7 @@ public class GameAction {
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
-                            if (c.getNetToughness() <= dmg.intValue()) {
+                            if (c.getLethal() <= dmg.intValue()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
                                 }
@@ -1004,7 +1004,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
+                    else if (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }
