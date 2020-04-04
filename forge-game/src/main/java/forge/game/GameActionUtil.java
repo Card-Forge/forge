@@ -31,6 +31,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -218,23 +219,34 @@ public final class GameActionUtil {
             }
         }
 
-        if (!sa.isBasicSpell()) {
-            return alternatives;
-        }
-
+        // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            // set the cost to this directly to buypass non mana cost
-            final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
-            newSA.setActivatingPlayer(activator);
-            newSA.setBasicSpell(false);
-            newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
-            // makes new SpellDescription
-            final StringBuilder sb = new StringBuilder();
-            sb.append(newSA.getCostDescription());
-            sb.append(newSA.getParam("SpellDescription"));
-            newSA.setDescription(sb.toString());
             
-            alternatives.add(newSA);
+            for (final KeywordInterface inst : source.getKeywords()) {
+                // need to find the correct Keyword from which this Ability is from
+                if (!inst.getAbilities().contains(sa)) {
+                    continue;
+                }
+
+                // set the cost to this directly to buypass non mana cost
+                final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+                newSA.setActivatingPlayer(activator);
+                newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+
+                // need to build a new Keyword to get better Reminder Text
+                String data[] = inst.getOriginal().split(":");
+                data[1] = "0";
+                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+
+                // makes new SpellDescription
+                final StringBuilder sb = new StringBuilder();
+                sb.append(newSA.getCostDescription());
+                sb.append("(").append(newKi.getReminderText()).append(")");
+                newSA.setDescription(sb.toString());
+
+                alternatives.add(newSA);
+                break;
+            }
         }
 
         if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
