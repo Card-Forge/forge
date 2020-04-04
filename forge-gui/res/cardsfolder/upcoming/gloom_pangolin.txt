@@ -1,0 +1,5 @@
+Name:Gloom Pangolin
+ManaCost:2 B
+Types:Creature Nightmare Pangolin
+PT:1/5
+Oracle:

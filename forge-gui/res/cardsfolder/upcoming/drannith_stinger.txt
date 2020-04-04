@@ -1,0 +1,8 @@
+Name:Drannith Stinger
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ Cycled | ValidCard$ Card.Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cycle another card, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+K:Cycling:1
+Oracle:Whenever you cycle another card, Drannith Stinger deals 1 damage to each opponent.\nCycling {1} ({1}, Discard this card: Draw a card.)

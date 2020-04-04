@@ -108,6 +108,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
+    private final JCheckBox cbUseElsa = new OptionsCheckBox("Use ELSA Serializer");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -290,6 +291,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableUnknownCards")), descriptionConstraints);
+
+       /*pnlPrefs.add(cbUseElsa, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"), descriptionConstraints);*/
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -587,6 +591,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableUnknownCards() {
         return cbEnableUnknownCards;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbUseElsa() {
+        return cbUseElsa;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
