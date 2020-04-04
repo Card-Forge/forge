@@ -225,7 +225,7 @@ public class Main extends AndroidApplication {
         }
 
         ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA);
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
         initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig));
     }
 

@@ -220,8 +220,8 @@ public enum FControl implements KeyEventDispatcher {
 
         final ForgePreferences prefs = FModel.getPreferences();
 
-        //set ElsaSerializer from preference
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA);
+        //set ExperimentalNetworkOption from preference
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
         GuiBase.enablePropertyConfig(propertyConfig);
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
