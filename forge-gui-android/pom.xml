@@ -105,22 +105,11 @@
             <version>1.9.10</version>
         </dependency>
         <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-base-bom</artifactId>
-            <version>1.2.4.Final</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-core</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-api</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
+            <groupId>com.android.support</groupId>
+            <artifactId>support-v4</artifactId>
+            <version>23.1.1</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/libs/android-support-v4.jar</systemPath>
         </dependency>
     </dependencies>
 

@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.LoadingCache;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.game.card.CardView;
@@ -32,11 +34,11 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.cache2k.Cache;
-import org.cache2k.Cache2kBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -56,13 +58,10 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> missingIconKeys = new HashSet<>();
-    private static final Cache<String, Texture> cache  = new Cache2kBuilder<String, Texture>() {}
-            .name("cache")
-            .eternal(true)
-            .permitNullValues(true)
-            .disableStatistics(true)
-            .loader(new ImageLoader())
-            .build();
+    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
+            .maximumSize(400)
+            .expireAfterAccess(15, TimeUnit.MINUTES)
+            .build(new ImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
@@ -85,7 +84,7 @@ public class ImageCache {
     }
 
     public static void clear() {
-        cache.clear();
+        cache.invalidateAll();
         missingIconKeys.clear();
     }
 
@@ -134,7 +133,7 @@ public class ImageCache {
         Texture image;
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = cache.get(imageKey);
+            image = cache.getIfPresent(imageKey);
 
             if (image != null) { return image; }
 
@@ -165,7 +164,11 @@ public class ImageCache {
         return image;
     }
     public static void preloadCache(Iterable<String> keys) {
-        cache.getAll(keys);
+        try {
+            cache.getAll(keys);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
     public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
         if (!fullborder)

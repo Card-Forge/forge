@@ -75,23 +75,5 @@
             <artifactId>gdx-backend-robovm</artifactId>
             <version>1.9.10</version>
         </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-base-bom</artifactId>
-            <version>1.2.4.Final</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-core</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-api</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 </project>
