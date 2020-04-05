@@ -76,7 +76,7 @@ public class Main extends AndroidApplication {
         text.setTypeface(Typeface.SERIF);
 
         String title="Forge needs Storage Permission to run properly...\n" +
-                "Follow this simple steps below:\n\n";
+                "Follow these simple steps:\n\n";
         String steps = " 1) Tap \"Open App Details\" Button.\n" +
                 " 2) Tap Permissions\n"+
                 " 3) Turn on the Storage Permission.\n\n"+
