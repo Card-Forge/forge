@@ -86,7 +86,8 @@ public class FGameClient implements IToServer {
     }
 
     public void close() {
-        channel.close();
+        if (channel != null)
+            channel.close();
     }
 
     @Override

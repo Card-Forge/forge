@@ -6,6 +6,7 @@ public class GuiBase {
     private static IGuiBase guiInterface;
     private static boolean propertyConfig = true;
     private static boolean networkplay = false;
+    private static boolean isAndroidport = false;
 
     public static IGuiBase getInterface() {
         return guiInterface;
@@ -13,9 +14,9 @@ public class GuiBase {
     public static void setInterface(IGuiBase i0) {
         guiInterface = i0;
     }
-    public static void enablePropertyConfig(boolean value) {
-        propertyConfig = value;
-    }
+    public static void enablePropertyConfig(boolean value) { propertyConfig = value; }
+    public static void setIsAndroid(boolean value) { isAndroidport = value; }
+    public static boolean isAndroid() { return isAndroidport; }
     public static boolean isNetworkplay() {
         return networkplay;
     }

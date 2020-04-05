@@ -180,6 +180,15 @@ public final class FServerManager {
         this.localLobby = lobby;
     }
 
+    public void unsetReady() {
+        if (this.localLobby != null) {
+            if (this.localLobby.getSlot(0) != null) {
+                this.localLobby.getSlot(0).setIsReady(false);
+                updateLobbyState();
+            }
+        }
+    }
+
     public boolean isMatchActive() {
         return this.localLobby != null && this.localLobby.isMatchActive();
     }

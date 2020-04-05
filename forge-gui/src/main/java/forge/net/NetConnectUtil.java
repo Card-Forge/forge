@@ -178,7 +178,8 @@ public class NetConnectUtil {
             client.connect(hostname, port);
         }
         catch (Exception ex) {
-            return null;
+            //return a message to close the connection so we will not crash...
+            return new ChatMessage(null, "<<_EM_ESOLC_<<");
         }
 
         return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));
