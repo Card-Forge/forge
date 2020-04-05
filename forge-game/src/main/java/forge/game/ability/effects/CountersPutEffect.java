@@ -150,6 +150,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
             tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
             tgtObjects.addAll(tgtCards);
+        } else if (sa.hasParam("Choices")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            }
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            int n = sa.hasParam("ChoiceAmount") ? Integer.parseInt(sa.getParam("ChoiceAmount")) : 1;
+
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card);
+
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+            tgtObjects.addAll(new CardCollection(pc.chooseCardsForEffect(choices, sa, title, n, n, !sa.hasParam("ChoiceOptional"))));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
