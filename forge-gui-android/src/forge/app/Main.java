@@ -148,8 +148,6 @@ public class Main extends AndroidApplication {
         int uid = android.os.Process.myUid();
         try {
             int result = this.getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid);
-            //we only need the result above atm, we can free the dependency from android-support-v4 :)
-            //int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (result == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
