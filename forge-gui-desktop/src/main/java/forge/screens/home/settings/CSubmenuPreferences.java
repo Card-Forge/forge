@@ -95,6 +95,19 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        // This updates Experimental Network Option
+        view.getCbUseExperimentalNetworkStream().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                if (updating) { return; }
+
+                final boolean toggle = view.getCbUseExperimentalNetworkStream().isSelected();
+                GuiBase.enablePropertyConfig(toggle);
+                prefs.setPref(FPref.UI_NETPLAY_COMPAT, String.valueOf(toggle));
+                prefs.save();
+            }
+        });
+
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
@@ -255,6 +268,7 @@ public enum CSubmenuPreferences implements ICDoc {
         setPlayerNameButtonText();
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
         view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
+        view.getCbUseExperimentalNetworkStream().setSelected(prefs.getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
 
         for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
