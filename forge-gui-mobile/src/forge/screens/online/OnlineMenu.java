@@ -19,7 +19,7 @@ public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
         Lobby("Lobby", FSkinImage.QUEST_GEAR, OnlineLobbyScreen.class),
         Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
-        Close("Disconnect", FSkinImage.EXILE, null);;
+        Disconnect("Disconnect", FSkinImage.EXILE, null);;
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -33,7 +33,7 @@ public class OnlineMenu extends FPopupMenu {
                     if(screenClass == null) {
                         FOptionPane.showConfirmDialog(
                                 "Leave lobby? Doing so will shut down all connections and stop hosting.",
-                                "Stop Network", new Callback<Boolean>() {
+                                "Disconnect", new Callback<Boolean>() {
                                     @Override
                                     public void run(Boolean result) {
                                         if (result) {
