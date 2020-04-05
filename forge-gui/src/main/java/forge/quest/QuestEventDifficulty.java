@@ -10,7 +10,8 @@ public enum QuestEventDifficulty {
     EASY  ("easy",      1. ),
     MEDIUM("medium",    1.5),
     HARD  ("hard",      2. ),
-    EXPERT("very hard", 3. );
+    EXPERT("very hard", 3. ),
+    WILD("wild", 2. );
 
     private final String inFile;
     private final double multiplier;
