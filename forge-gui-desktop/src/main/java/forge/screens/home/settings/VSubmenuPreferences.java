@@ -292,7 +292,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
 
-       pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
+        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
         pnlPrefs.add(new NoteLabel("Forge switches to compatible network stream. (If unsure, turn OFF this option)"), descriptionConstraints);
 
         // Graphic Options
