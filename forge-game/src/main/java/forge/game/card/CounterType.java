@@ -20,8 +20,6 @@ package forge.game.card;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.game.keyword.Keyword;
-
 /**
  * The class Counters.
  *
@@ -311,23 +309,7 @@ public enum CounterType {
 
     EXPERIENCE("EXP"),
 
-    POISON("POISN"),
-
-    // Keyword Counters
-
-    FLYING("Flying"),
-    FIRST_STRIKE("First Strike"),
-    DOUBLE_STRIKE("Double Strike"),
-    DEATHTOUCH("Deathtouch"),
-    HEXPROOF("Hexproof"),
-    INDESTRUCTIBLE("Indestructible"),
-    LIFELINK("Lifelink"),
-    MENACE("Menace"),
-    REACH("Reach"),
-    TRAMPLE("Trample"),
-    VIGILANCE("Vigilance")
-
-    ;
+    POISON("POISN");
 
     private String name, counterOnCardDisplayName;
     private int red, green, blue;
@@ -381,39 +363,6 @@ public enum CounterType {
     public static CounterType getType(final String name) {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
         return Enum.valueOf(CounterType.class, replacedName);
-    }
-
-    public boolean isKeywordCounter() {
-        return this.getKeyword() != null;
-    }
-
-    public Keyword getKeyword() {
-        switch (this) {
-        case FLYING:
-            return Keyword.FLYING;
-        case FIRST_STRIKE:
-            return Keyword.FIRST_STRIKE;
-        case DOUBLE_STRIKE:
-            return Keyword.DOUBLE_STRIKE;
-        case DEATHTOUCH:
-            return Keyword.DEATHTOUCH;
-        case HEXPROOF:
-            return Keyword.HEXPROOF;
-        case INDESTRUCTIBLE:
-            return Keyword.INDESTRUCTIBLE;
-        case LIFELINK:
-            return Keyword.LIFELINK;
-        case MENACE:
-            return Keyword.MENACE;
-        case REACH:
-            return Keyword.REACH;
-        case TRAMPLE:
-            return Keyword.TRAMPLE;
-        case VIGILANCE:
-            return Keyword.VIGILANCE;
-        default:
-            return null;
-        }
     }
 
     public static final ImmutableList<CounterType> values = ImmutableList.copyOf(values());
