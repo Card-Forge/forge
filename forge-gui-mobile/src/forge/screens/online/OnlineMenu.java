@@ -19,7 +19,7 @@ import forge.util.Localizer;
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
         Lobby("lblLobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
-        Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
+        Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
         Disconnect("lblDisconnect", FSkinImage.EXILE, null);
 
         private final FMenuItem item;
