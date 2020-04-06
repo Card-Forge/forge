@@ -1,7 +1,6 @@
 package forge.net;
 
 import com.google.common.base.Function;
-import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -18,12 +17,9 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
-import org.apache.commons.lang3.SerializationUtils;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 
@@ -159,24 +155,15 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
-        if (GuiBase.hasPropertyConfig())
-            return; //uses custom serializer for Android 8+..
         for (int iArg = 0; iArg < args.length; iArg++) {
-            Object arg = null;
-            Class<?> type = null;
-            try {
-                arg = args[iArg];
-                if (this.args.length > iArg)
-                    type = this.args[iArg];
+            final Object arg = args[iArg];
+            final Class<?> type = this.args[iArg];
+            if (!ReflectionUtil.isInstance(arg, type)) {
+                //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+                System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java Line 163)", name(), iArg, arg.getClass().getName(), type.getName()));
             }
-            catch (ArrayIndexOutOfBoundsException ex){ ex.printStackTrace(); }
-            catch(ConcurrentModificationException ex) { ex.printStackTrace(); }
-            if (arg != null)
-                if (type != null)
-                    if (!ReflectionUtil.isInstance(arg, type)) {
-                        throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-            }
-            if (arg != null) {
+            //this should be handled via decoder or it will process them twice
+            /*if (arg != null) {
                 // attempt to Serialize each argument, this will throw an exception if it can't.
                 try {
                     byte[] serialized = SerializationUtils.serialize((Serializable) arg);
@@ -189,7 +176,7 @@ public enum ProtocolMethod {
                     // can't seem to avoid this from periodically happening
                     ex.printStackTrace();
                 }
-            }
+            }*/
         }
     }
 
@@ -199,7 +186,8 @@ public enum ProtocolMethod {
             return;
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
-            throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
+            //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
+            System.err.println(String.format("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java Line 190)", name(), value.getClass().getName(), getReturnType().getName()));
         }
     }
 }

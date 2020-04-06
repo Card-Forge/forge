@@ -431,6 +431,7 @@ Regen - regeneration.wav - triggered when a creature is regenerated.
 RemoveCounter - remove_counter.wav - triggered when a counter is removed from a permanent.
 Sacrifice - sacrifice.wav - triggered when a permanent is sacrificed.
 Sorcery [*] - sorcery.wav - triggered when a sorcery is played.
+StartOfDuel - start_duel.wav - triggered when a duel starts 
 Shuffle [*] - shuffle.wav - triggered when a player shuffles his deck.
 Tap [*] - tap.wav - triggered when a permanent is tapped.
 Token [*] - token.wav - triggered when a token is created.
