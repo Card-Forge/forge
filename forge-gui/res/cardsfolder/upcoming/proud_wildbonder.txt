@@ -1,0 +1,7 @@
+Name:Proud Wildbonder
+ManaCost:2 R/G R/G
+Types:Creature Human Warrior
+PT:4/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withTrample | AddKeyword$ You may have CARDNAME assign its combat damage as though it weren't blocked. | Description$ Creatures you control with trample have "You may have this creature assign its combat damage as though it weren't blocked."
+Oracle:Trample\nCreatures you control with trample have "You may have this creature assign its combat damage as though it weren't blocked."

@@ -1,0 +1,111 @@
+[metadata]
+Code=IKO
+Date=2020-04-16
+Name=Ikoria: Lair of Behemoths
+Type=Expansion
+
+[cards]
+3 C Mysterious Egg
+11 R Drannith Magistrate
+13 U Flourishing Fox
+16 U Huntmaster Liger
+24 R Mythos of Snapdax
+25 C Pacifism
+29 C Savai Sabertooth
+34 U Stormwild Capridor
+36 U Valiant Rescuer
+38 U "Knock Blocked"
+41 U Archipelagore
+43 U Boon of the Wish-Giver
+47 C Dreamtail Heron
+49 C Essence Scatter
+59 U Neutralize
+61 U "What's Kraken"
+62 C Phase Dolphin
+63 U Pollywog Symbiote
+64 U Pouncing Shoreshark
+65 U Reconnaissance Mission
+67 R Shark Typhoon
+69 C Thieving Otter
+70 R Voracious Greatshark
+71 C Wingfold Pteron
+73 U Bastion of Remembrance
+75 C Blood Curdle
+78 U Call of the Death-Dweller
+79 C Cavern Whisperer
+80 U Chittering Harvester
+84 R Dirge Bat
+88 R "Odd the Evens"
+89 C Gloom Pangolin
+90 U Grimdancer
+93 U Insatiable Hemophage
+97 R Mythos of Nethroi
+101 U "Learning Social Distancing"
+104 U Void Beckoner
+106 U Zagoth Mamba
+111 U "Round 2: Fight!"
+112 C Cloudpiercer
+113 C Drannith Stinger
+114 R Everquill Phoenix
+118 U Footfall Crater
+125 M Lukka, Coppercoat Outcast
+127 R Mythos of Vadrok
+133 U "Recycling Monitor"
+136 C Shredded Sails
+141 R Yidaro, Wandering Monster
+144 U Auspicious Starrix
+145 U "Breach the Barrier"
+146 C Bristling Boar
+147 U "Trump Shard"
+148 R Colossification
+152 C Fertilid
+154 C Fully Grown
+155 R Gemrazer
+156 U Glowstone Recluse
+162 R Kogla, the Titan Ape
+164 U Migration Path
+165 C "Spring Cleaner"
+166 U Monstruous Step
+167 C Mosscoat Goriak
+168 R "Mythos of Brokkos"
+174 U Titanoth Rex
+175 M Vivien, Monsters' Advocate
+176 C "Harmless Houseplant"
+177 U Back for More
+178 U "BLARGbeast"
+179 M Brokkos, Apex of Forever
+180 U Channeled Force
+181 M Chevill, Bane of Monsters
+182 R Death's Oasis
+183 U Dire Tactics
+187 M General Kudro of Drannith
+188 U General's Enforcer
+190 M Illuna, Apex of Wishes
+193 R Labyrinth Raptor
+197 M Nethroi, Apex of Death
+200 U Primal Empathy
+201 R "Big Boy Forest Crusher"
+203 M Rielle, the Everwise
+206 U Skull Prophet
+209 M Snapdax, Apex of the Hunt
+211 U Sprite Dragon
+213 U Trumpeting Gnarr
+214 M Vadrok, Apex of Thunder
+220 M Fiend Artisan
+221 R Gyruda, Doom of Depths
+227 R Lutri, the Spellchaser
+228 R "Obosh, With The Leggies"
+229 U Proud Wildbonder
+231 R Umori, the Collector
+234 R Crystalline Giant
+235 U Indatha Crystal
+236 U Ketria Crystal
+238 U Raugrin Crystal
+239 U Savai Crystal
+242 U Zagoth Crystal
+275 M Zilortha, Strength Incarnate
+316 M Luminous Broodmoth
+354 R Keruga, the Macrosage
+
+[tokens]
+w_1_1_human_soldier
