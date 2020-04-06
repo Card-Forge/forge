@@ -255,8 +255,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             },
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-                        "Experimental Network Compatibility",
-                        "Forge switches to compatible network stream. (If unsure, turn OFF this option)") {
+                        localizer.getMessage("lblExperimentalNetworkCompatibility"),
+                        localizer.getMessage("nlExperimentalNetworkCompatibility")) {
                                 @Override
                                 public void select() {
                                     super.select();
