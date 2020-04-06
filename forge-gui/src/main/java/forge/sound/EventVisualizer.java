@@ -22,6 +22,7 @@ import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -45,6 +46,11 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     final LobbyPlayer player;
     public EventVisualizer(final LobbyPlayer lobbyPlayer) {
         this.player = lobbyPlayer;
+    }
+
+    @Override
+    public SoundEffectType visit(GameEventGameStarted event) {
+        return SoundEffectType.StartDuel;
     }
 
     @Override
