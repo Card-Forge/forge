@@ -11,6 +11,7 @@ import forge.net.IOnlineLobby;
 import forge.net.NetConnectUtil;
 import forge.net.OfflineLobby;
 import forge.net.client.FGameClient;
+import forge.properties.ForgeConstants;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
@@ -96,7 +97,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                                     final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
                                     if (joinServer) {
                                         result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                                        if (result.getMessage() == "<<_EM_ESOLC_<<") { //this message is returned via netconnectutil on exception
+                                        if (result.getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
                                             closeConn("Invalid host address (" + url + ") was detected.");
                                             return;
                                         }
