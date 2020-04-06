@@ -1,6 +1,7 @@
 package forge.net;
 
 import forge.match.LobbySlotType;
+import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -178,7 +179,8 @@ public class NetConnectUtil {
             client.connect(hostname, port);
         }
         catch (Exception ex) {
-            return null;
+            //return a message to close the connection so we will not crash...
+            return new ChatMessage(null, ForgeConstants.CLOSE_CONN_COMMAND);
         }
 
         return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));

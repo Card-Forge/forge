@@ -6,16 +6,20 @@ import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.net.server.FServerManager;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("Lobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
-        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
+        Lobby("Lobby", FSkinImage.QUEST_GEAR, OnlineLobbyScreen.class),
+        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
+        Disconnect("Disconnect", FSkinImage.EXILE, null);;
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -26,6 +30,30 @@ public class OnlineMenu extends FPopupMenu {
             item = new FMenuItem(caption0, icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    if(screenClass == null) {
+                        FOptionPane.showConfirmDialog(
+                                "Leave lobby? Doing so will shut down all connections and stop hosting.",
+                                "Disconnect", new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) {
+                                            if (FServerManager.getInstance() != null)
+                                                if(FServerManager.getInstance().isHosting()) {
+                                                    FServerManager.getInstance().unsetReady();
+                                                    FServerManager.getInstance().stopServer();
+                                                }
+
+                                            if (OnlineLobbyScreen.getfGameClient() != null)
+                                                OnlineLobbyScreen.closeClient();
+
+                                            Forge.back();
+                                            screen = null;
+                                            OnlineLobbyScreen.clearGameLobby();
+                                        }
+                                    }
+                                });
+                        return;
+                    }
                     Forge.back(); //remove current screen from chain
                     open();
                     setPreferredScreen(OnlineScreen.this);

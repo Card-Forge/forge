@@ -237,6 +237,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE  = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
+    public static final String CLOSE_CONN_COMMAND   = "<<_EM_ESOLC_<<";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;

@@ -1,5 +1,6 @@
 package forge;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -87,6 +88,7 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
+        GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();

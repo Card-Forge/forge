@@ -104,13 +104,6 @@
             <artifactId>gdx-backend-android</artifactId>
             <version>1.9.10</version>
         </dependency>
-        <dependency>
-            <groupId>com.android.support</groupId>
-            <artifactId>support-v4</artifactId>
-            <version>23.1.1</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/android-support-v4.jar</systemPath>
-        </dependency>
     </dependencies>
 
     <profiles>

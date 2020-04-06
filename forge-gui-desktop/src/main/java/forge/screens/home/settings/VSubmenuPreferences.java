@@ -108,7 +108,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox("Enable Unknown Cards");
-    private final JCheckBox cbUseElsa = new OptionsCheckBox("Use ELSA Serializer");
+    private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox("Experimental Network Compatibility");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -292,8 +292,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
 
-       /*pnlPrefs.add(cbUseElsa, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"), descriptionConstraints);*/
+        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Forge switches to compatible network stream. (If unsure, turn OFF this option)"), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -594,8 +594,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUseElsa() {
-        return cbUseElsa;
+    public JCheckBox getCbUseExperimentalNetworkStream() {
+        return cbUseExperimentalNetworkStream;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

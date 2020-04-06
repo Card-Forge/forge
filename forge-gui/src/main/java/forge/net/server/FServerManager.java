@@ -6,6 +6,8 @@ import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
+import forge.net.CompatibleObjectDecoder;
+import forge.net.CompatibleObjectEncoder;
 import forge.net.event.LobbyUpdateEvent;
 import forge.net.event.LoginEvent;
 import forge.net.event.LogoutEvent;
@@ -24,8 +26,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -99,8 +99,8 @@ public final class FServerManager {
                         public final void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new ObjectEncoder(),
-                                    new ObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
+                                    new CompatibleObjectEncoder(),
+                                    new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -178,6 +178,15 @@ public final class FServerManager {
 
     public void setLobby(final ServerGameLobby lobby) {
         this.localLobby = lobby;
+    }
+
+    public void unsetReady() {
+        if (this.localLobby != null) {
+            if (this.localLobby.getSlot(0) != null) {
+                this.localLobby.getSlot(0).setIsReady(false);
+                updateLobbyState();
+            }
+        }
     }
 
     public boolean isMatchActive() {

@@ -77,11 +77,6 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.22</version>
         </dependency>
-        <dependency>
-            <groupId>org.mapdb</groupId>
-            <artifactId>elsa</artifactId>
-            <version>3.0.0-M7</version>
-        </dependency>
     </dependencies>
 
 </project>
