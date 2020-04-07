@@ -15,11 +15,13 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
+import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
+
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
         Lobby("Lobby", FSkinImage.QUEST_GEAR, OnlineLobbyScreen.class),
         Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
-        Disconnect("Disconnect", FSkinImage.EXILE, null);;
+        Disconnect("Disconnect", FSkinImage.DELETE, null);
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -72,6 +74,7 @@ public class OnlineMenu extends FPopupMenu {
                     return;
                 }
             }
+            update();
         }
 
         public void open() {
@@ -87,6 +90,17 @@ public class OnlineMenu extends FPopupMenu {
         public FScreen getScreen() {
             initializeScreen();
             return screen;
+        }
+
+        public void update(){
+            for (OnlineScreen ngs : OnlineScreen.values()) {
+                if (ngs.ordinal() == 2){ //disconect
+                    if (getGameLobby() == null)
+                        ngs.item.setEnabled(false);
+                    else
+                        ngs.item.setEnabled(true);
+                }
+            }
         }
     }
 
