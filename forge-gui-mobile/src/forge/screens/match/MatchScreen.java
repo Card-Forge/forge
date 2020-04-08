@@ -83,9 +83,13 @@ public class MatchScreen extends FScreen {
 
         scroller = add(new FieldScroller());
 
+        int humanCount = 0;
+
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
             playerPanel.setFlipped(true);
+            if(!playerPanel.getPlayer().isAI())
+                humanCount++;
         }
         bottomPlayerPanel = playerPanels0.get(0);
         bottomPlayerPanel.setFlipped(false);
@@ -110,31 +114,26 @@ public class MatchScreen extends FScreen {
                     }
                 }));
 
-        if (MatchController.instance.getLocalPlayerCount() <= 1 || MatchController.instance.hotSeatMode()) {
+        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay())
             topPlayerPrompt = null;
-        }
         else {
-            if (GuiBase.isNetworkplay()) {
-                topPlayerPrompt = null;
-            } else {
-                //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
-                topPlayerPrompt = add(new VPrompt("", "",
-                        new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                getGameController().selectButtonOk();
-                            }
-                        },
-                        new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                getGameController().selectButtonCancel();
-                            }
-                        }));
-                topPlayerPrompt.setRotate180(true);
-                topPlayerPanel.setRotate180(true);
-                getHeader().setRotate90(true);
-            }
+            //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
+            topPlayerPrompt = add(new VPrompt("", "",
+                    new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            getGameController().selectButtonOk();
+                        }
+                    },
+                    new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            getGameController().selectButtonCancel();
+                        }
+                    }));
+            topPlayerPrompt.setRotate180(true);
+            topPlayerPanel.setRotate180(true);
+            getHeader().setRotate90(true);
         }
 
         gameMenu = new VGameMenu();

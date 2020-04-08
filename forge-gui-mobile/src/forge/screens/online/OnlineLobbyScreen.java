@@ -24,7 +24,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
 
     private static GameLobby gameLobby;
 
-    public GameLobby getGameLobby() {
+    public static GameLobby getGameLobby() {
         return gameLobby;
     }
 
@@ -114,6 +114,8 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                                             }
                                         });
                                     }
+                                    //update menu buttons
+                                    OnlineScreen.Lobby.update();
                                 }
                             });
                         }
