@@ -111,6 +111,8 @@ public enum CounterType {
 
     FLOOD("FLOOD", 0, 203, 255),
 
+    FORESHADOW("FRSHD",144,99, 207),
+
     FUNGUS("FNGUS", 121, 219, 151),
 
     FURY("FURY", 255, 120, 89),
