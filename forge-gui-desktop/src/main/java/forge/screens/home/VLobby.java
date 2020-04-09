@@ -917,7 +917,7 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = localizer.getMessage("lblconfirmName").replace("%n","\"" +newName + "\"");
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
         } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
 
         return newName;
