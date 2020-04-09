@@ -209,6 +209,7 @@ Servo:Servos
 Shade:Shades
 Shaman:Shamans
 Shapeshifter:Shapeshifters
+Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons

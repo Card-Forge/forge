@@ -1,0 +1,7 @@
+Name:Dinosaur
+ManaCost:no cost
+Types:Creature Dinosaur
+Colors:red
+PT:1/1
+K:Haste
+Oracle:Haste
