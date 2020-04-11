@@ -1,6 +1,6 @@
 Name:Sharktocrab
 ManaCost:2 G U
-Types:Creature Fish Octopus Crab
+Types:Creature Shark Octopus Crab
 PT:4/4
 K:Adapt:1:2 G U
 DeckHas:Ability$Counters
