@@ -168,6 +168,7 @@ Ooze:Oozes
 Orb:Orbs
 Orc:Orcs
 Orgg:Orggs
+Otter:Otters
 Ouphe:Ouphes
 Ox:Oxen
 Oyster:Oysters
@@ -310,6 +311,7 @@ Kaya
 Kiora
 Koth
 Liliana
+Lukka
 Nahiri
 Narset
 Nissa
