@@ -1,6 +1,6 @@
 Name:Shambleshark
 ManaCost:G U
-Types:Creature Fish Crab
+Types:Creature Shark Crab
 PT:2/1
 K:Flash
 K:Evolve
