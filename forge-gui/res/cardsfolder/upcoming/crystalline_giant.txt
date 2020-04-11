@@ -2,18 +2,18 @@ Name:Crystalline Giant
 ManaCost:3
 Types:Artifact Creature Giant
 PT:3/3
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1 at random. Put a counter of that kind on CARDNAME.
-SVar:TrigCharm:DB$ Charm | Random$ True | Choices$ Flying,FirstStrike,Deathtouch,Hexproof,Lifelink,Menace,Reach,Trample,Vigilance,P1P1
-SVar:Flying:DB$ PutCounter | CounterType$ FLYING | CounterNum$ 1 | SpellDescription$ Flying
-SVar:FirstStrike:DB$ PutCounter | CounterType$ FIRST_STRIKE | CounterNum$ 1 | SpellDescription$ First Strike
-SVar:Deathtouch:DB$ PutCounter | CounterType$ DEATHTOUCH | CounterNum$ 1 | SpellDescription$ Deathtouch
-SVar:Hexproof:DB$ PutCounter | CounterType$ HEXPROOF | CounterNum$ 1 | SpellDescription$ Hexproof
-SVar:Lifelink:DB$ PutCounter | CounterType$ LIFELINK | CounterNum$ 1 | SpellDescription$ Lifelink
-SVar:Menace:DB$ PutCounter | CounterType$ MENACE | CounterNum$ 1 | SpellDescription$ Menace
-SVar:Reach:DB$ PutCounter | CounterType$ REACH | CounterNum$ 1 | SpellDescription$ Reach
-SVar:Trample:DB$ PutCounter | CounterType$ TRAMPLE | CounterNum$ 1 | SpellDescription$ Trample
-SVar:Vigilance:DB$ PutCounter | CounterType$ VIGILANCE | CounterNum$ 1 | SpellDescription$ Vigilance
-SVar:P1P1:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ +1/+1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigGenericChoice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose a kind of counter at random that CARDNAME doesn’t have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on CARDNAME.
+SVar:TrigGenericChoice:DB$ GenericChoice | AtRandom$ True | Choices$ Flying,FirstStrike,Deathtouch,Hexproof,Lifelink,Menace,Reach,Trample,Vigilance,P1P1
+SVar:Flying:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_FLYING | RememberCards$ True | CounterType$ FLYING | CounterNum$ 1 | SpellDescription$ FLY
+SVar:FirstStrike:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_FIRSTSTRIKE | RememberCards$ True | CounterType$ FIRSTSTRIKE | CounterNum$ 1 | SpellDescription$ FIR
+SVar:Deathtouch:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_DEATHTOUCH | RememberCards$ True | CounterType$ DEATHTOUCH | CounterNum$ 1 | SpellDescription$ DEA
+SVar:Hexproof:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_HEXPROOF | RememberCards$ True | CounterType$ HEXPROOF | CounterNum$ 1 | SpellDescription$ HEX
+SVar:Lifelink:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_LIFELINK | RememberCards$ True | CounterType$ LIFELINK | CounterNum$ 1 | SpellDescription$ LIF
+SVar:Menace:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_MENACE | RememberCards$ True | CounterType$ MENACE | CounterNum$ 1 | SpellDescription$ MEN
+SVar:Reach:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_REACH | RememberCards$ True | CounterType$ REACH | CounterNum$ 1 | SpellDescription$ REA
+SVar:Trample:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_TRAMPLE | RememberCards$ True | CounterType$ TRAMPLE | CounterNum$ 1 | SpellDescription$ TRA
+SVar:Vigilance:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_VIGILANCE | RememberCards$ True | CounterType$ VIGILANCE | CounterNum$ 1 | SpellDescription$ VIG
+SVar:P1P1:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_P1P1 | RememberCards$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ P1P1
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-Oracle:At the beginning of combat on your turn, choose flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1 at random. Put a counter of that kind on Crystalline Giant.
+Oracle:At the beginning of combat on your turn, choose a kind of counter at random that Crystalline Giant doesn’t have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on Crystalline Giant.

@@ -5,5 +5,5 @@ PT:6/4
 K:First Strike
 K:Cycling:2 R
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle CARDNAME, put a first strike counter on target creature you control.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ FIRST_STRIKE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ FIRSTSTRIKE | CounterNum$ 1
 Oracle:First strike\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)\nWhen you cycle Sanctuary Smasher, put a first strike counter on target creature you control.
