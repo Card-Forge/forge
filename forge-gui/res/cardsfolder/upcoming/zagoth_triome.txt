@@ -1,0 +1,6 @@
+Name:Zagoth Triome
+ManaCost:no cost
+Types:Land Swamp Forest Island
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {B}, {G}, or {U}.)\nZagoth Triome enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)
