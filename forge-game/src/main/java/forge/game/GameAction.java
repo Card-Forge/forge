@@ -157,11 +157,6 @@ public class GameAction {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 
-        // Clean up temporary variables such as Sunburst value or announced PayX value
-        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
-            c.clearTemporaryVars();
-        }
-
         if (fromBattlefield && !toBattlefield) {
             c.getController().setRevolt(true);
         }
@@ -173,7 +168,7 @@ public class GameAction {
 
             // if to Battlefield and it is caused by an replacement effect,
             // try to get previous LKI if able
-            if (zoneTo.is(ZoneType.Battlefield)) {
+            if (toBattlefield) {
                 if (cause != null && cause.isReplacementAbility()) {
                     ReplacementEffect re = cause.getReplacementEffect();
                     if (ReplacementType.Moved.equals(re.getMode())) {
@@ -243,6 +238,12 @@ public class GameAction {
                 copied = c;
             }
         }
+
+        // Clean up temporary variables such as Sunburst value or announced PayX value
+        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
+            copied.clearTemporaryVars();
+        }
+
 
         if (!suppress) {
             if (zoneFrom == null) {

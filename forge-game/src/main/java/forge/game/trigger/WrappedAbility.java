@@ -556,4 +556,11 @@ public class WrappedAbility extends Ability {
     public void setAlternativeCost(AlternativeCost ac) {
         sa.setAlternativeCost(ac);
     }
+
+    public Integer getXManaCostPaid() {
+        return sa.getXManaCostPaid();
+    }
+    public void setXManaCostPaid(final Integer n) {
+        sa.setXManaCostPaid(n);
+    }
 }
