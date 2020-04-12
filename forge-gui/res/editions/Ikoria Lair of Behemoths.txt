@@ -4,7 +4,7 @@ Date=2020-04-24
 Name=Ikoria: Lair of Behemoths
 Code2=IKO
 MciCode=iko
-Type=Other
+Type=Expansion
 
 [cards]
 1 C Adaptive Shimmerer
