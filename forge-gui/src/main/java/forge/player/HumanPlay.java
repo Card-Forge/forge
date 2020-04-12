@@ -748,10 +748,10 @@ public class HumanPlay {
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
             int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
             toPay.setXManaCostPaid(xPaid, ability.getParam("XColor"));
-            source.setXManaCostPaid(xPaid);
+            ability.setXManaCostPaid(xPaid);
         }
-        else if (source.getXManaCostPaid() > 0) { //ensure pre-announced X value retained
-            toPay.setXManaCostPaid(source.getXManaCostPaid(), ability.getParam("XColor"));
+        else if (ability.getXManaCostPaid() != null) { //ensure pre-announced X value retained
+            toPay.setXManaCostPaid(ability.getXManaCostPaid(), ability.getParam("XColor"));
         }
 
         int timesMultikicked = source.getKickerMagnitude();

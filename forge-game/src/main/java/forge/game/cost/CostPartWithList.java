@@ -122,8 +122,10 @@ public abstract class CostPartWithList extends CostPart {
 
     // always returns true, made this to inline with return
     public boolean executePayment(SpellAbility ability, CardCollectionView targetCards) {
-        if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
-            lkiList.addAll(targetCards);
+        if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
+            for (Card c: targetCards) {
+                lkiList.add(CardUtil.getLKICopy(c));
+            }
             cardList.addAll(doListPayment(ability, targetCards));
             handleChangeZoneTrigger(ability);
             return true;

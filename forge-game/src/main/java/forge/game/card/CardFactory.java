@@ -185,18 +185,12 @@ public class CardFactory {
         c.setCopiedSpell(true);
 
         if (bCopyDetails) {
-            c.setXManaCostPaid(original.getXManaCostPaid());
             c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
 
             // Rule 706.10 : Madness is copied
             if (original.isInZone(ZoneType.Stack)) {
                 c.setMadness(original.isMadness());
-
-                final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
-                if (si != null) {
-                    c.setXManaCostPaid(si.getXManaPaid());
-                }
             }
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
@@ -871,6 +865,13 @@ public class CardFactory {
             // set the host card for copied spellabilities, if they are not set yet
             for (final SpellAbility newSa : state.getSpellAbilities()) {
                 if (newSa.getOriginalHost() == null) {
+                    newSa.setOriginalHost(in);
+                }
+            }
+
+            for (final Trigger trigger : state.getTriggers()) {
+                final SpellAbility newSa = trigger.getOverridingAbility();
+                if (newSa != null && newSa.getOriginalHost() == null) {
                     newSa.setOriginalHost(in);
                 }
             }

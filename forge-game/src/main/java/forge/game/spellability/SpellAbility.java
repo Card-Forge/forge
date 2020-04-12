@@ -130,6 +130,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private final List<Mana> payingMana = Lists.newArrayList();
     private final List<SpellAbility> paidAbilities = Lists.newArrayList();
+    private Integer xManaCostPaid = null;
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
@@ -445,6 +446,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPayCosts(final Cost abCost) {
         payCosts = abCost;
+    }
+
+    public boolean costHasX() {
+        if (getPayCosts() == null) {
+            return false;
+        }
+        return getPayCosts().hasXInAnyCostPart();
+    }
+
+    public boolean costHasManaX() {
+        if (getPayCosts() == null) {
+            return false;
+        }
+        if (getPayCosts().hasNoManaCost()) {
+            return false;
+        }
+        return getPayCosts().getCostMana().getAmountOfX() > 0;
     }
 
     public SpellAbilityRestriction getRestrictions() {
@@ -1962,5 +1980,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setAlternativeCost(AlternativeCost ac) {
         altCost = ac;
+    }
+
+    public Integer getXManaCostPaid() {
+        return xManaCostPaid;
+    }
+    public void setXManaCostPaid(final Integer n) {
+        xManaCostPaid = n;
     }
 }

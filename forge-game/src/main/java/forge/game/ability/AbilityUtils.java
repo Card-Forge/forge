@@ -25,6 +25,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -1573,11 +1575,47 @@ public class AbilityUtils {
 
                 // special logic for xPaid in SpellAbility
                 if (sq[0].contains("xPaid")) {
-                    // ETB effects of cloned cards have xPaid = 0
-                    if (sa.hasParam("ETB") && sa.getOriginalHost() != null) {
+                    SpellAbility root = sa.getRootAbility();
+
+                    // 107.3i If an object gains an ability, the value of X within that ability is the value defined by that ability,
+                    // or 0 if that ability doesn’t define a value of X. This is an exception to rule 107.3h. This may occur with ability-adding effects, text-changing effects, or copy effects.
+                    if (root.getXManaCostPaid() != null) {
+                        return CardFactoryUtil.doXMath(root.getXManaCostPaid(), expr, c);
+                    }
+
+                    // If the chosen creature has X in its mana cost, that X is considered to be 0.
+                    // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
+                    if (sa.getOriginalHost() != null || !sa.getHostCard().equals(c)) {
                         return 0;
                     }
-                    return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+
+                    if (root.isTrigger()) {
+                        Trigger t = root.getTrigger();
+                        // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
+                        // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
+                        // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.
+                        if (TriggerType.ChangesZone.equals(t.getMode())
+                                && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
+                           return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                        } else if (TriggerType.SpellCast.equals(t.getMode())) {
+                            // Cast Trigger like  Hydroid Krasis
+                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                        } else if (TriggerType.Cycled.equals(t.getMode())) {
+                            SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
+                            if (cycleSA == null) {
+                                return 0;
+                            }
+                            return CardFactoryUtil.doXMath(cycleSA.getXManaCostPaid(), expr, c);
+                        }
+                    }
+
+                    if (root.isReplacementAbility()) {
+                        if (sa.hasParam("ETB")) {
+                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                        }
+                    }
+
+                    return 0;
                 }
 
                 // Count$Kicked.<numHB>.<numNotHB>
