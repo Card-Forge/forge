@@ -11,7 +11,7 @@ SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Arti
 SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True | Mandatory$ True
 SVar:ChooseEnch:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Enchantment.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose an enchantment to keep | SubAbility$ ChooseWalk | RememberChosen$ True | Mandatory$ True
 SVar:ChooseWalk:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Planeswalker.RememberedPlayerCtrl | ChoiceTitle$ Choose a planeswalker to keep | RememberChosen$ True | Mandatory$ True
-SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 AI:RemoveDeck:All
 Oracle:Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.
