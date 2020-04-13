@@ -120,7 +120,7 @@ public final class ImageKeys {
             file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
             if (file != null) { return file; }
             // if there's a 1st art variant try without it for .full images
-            file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.full", ".full"));
+            file = findFile(dir, TextUtil.fastReplace(filename, "1.full", ".full"));
             if (file != null) { return file; }
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
