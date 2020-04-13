@@ -2,7 +2,7 @@ Name:Bladeback Sliver
 ManaCost:1 R
 Types:Creature Sliver
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddAbility$ DBDamage | Condition$ Hellbent | Description$ Hellbent As long as you have no cards in hand, Sliver creatures you control have "{T}: This creature deals 1 damage to target player or planeswalker.
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddAbility$ DBDamage | Condition$ Hellbent | Description$ Hellbent - As long as you have no cards in hand, Sliver creatures you control have "{T}: This creature deals 1 damage to target player or planeswalker.
 SVar:DBDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to target player or planeswalker.
 SVar:PlayMain1:TRUE
 Oracle:Hellbent — As long as you have no cards in hand, Sliver creatures you control have "{T}: This creature deals 1 damage to target player or planeswalker."
