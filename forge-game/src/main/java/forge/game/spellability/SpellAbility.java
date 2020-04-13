@@ -32,6 +32,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactory;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -46,6 +47,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -1099,8 +1101,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (hasParam("MaxTotalTargetCMC") && entity instanceof Card) {
-                final Card c = (Card) entity;
-                if (c.getCMC() > tr.getMaxTotalCMC(c, this)) {
+                int soFar = Aggregates.sum(getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                // only add if it isn't already targeting
+                if (!isTargeting(entity)) {
+                    final Card c = (Card) entity;
+                    soFar += c.getCMC();
+                }
+
+                if (soFar > tr.getMaxTotalCMC(getHostCard(), this)) {
                     return false;
                 }
             }
