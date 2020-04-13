@@ -448,7 +448,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             for (String s : getManaNotSpent().split(" ")) {
                 toPay |= MagicColor.fromName(s);
             }
-            if (0 != (toPay & sa.getHostCard().getColorsPaid())) {
+            if (toPay == (toPay & sa.getHostCard().getColorsPaid())) {
                 return false;
             }
         }
