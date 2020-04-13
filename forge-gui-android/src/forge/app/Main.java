@@ -186,6 +186,7 @@ public class Main extends AndroidApplication {
     }
 
     private void initForge(AndroidAdapter adapter, boolean permissiongranted){
+        boolean isPortrait;
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             Gdx.app.error("Forge", "Can't access external storage");
@@ -211,20 +212,23 @@ public class Main extends AndroidApplication {
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
         if (permissiongranted){
             if (landscapeMode) {
+                isPortrait = false;
                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
                         ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             } else {
+                isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
         } else {
+            isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
         }
 
         ForgePreferences prefs = FModel.getPreferences();
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig));
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait));
     }
 
     /*@Override

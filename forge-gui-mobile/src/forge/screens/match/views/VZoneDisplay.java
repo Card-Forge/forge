@@ -66,7 +66,11 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     private void setRevealedPanel(int idx) {
-        revealedPanel = cardPanels.get(idx);
+        try {
+            revealedPanel = cardPanels.get(idx); //??? on network match, triggered by card ability
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return;
+        }
         clearChildren();
         if (Forge.isLandscapeMode()) {
             //for landscape mode, just show revealed card on top

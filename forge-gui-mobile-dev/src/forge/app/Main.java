@@ -97,7 +97,7 @@ public class Main {
         ForgePreferences prefs = FModel.getPreferences();
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
         new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
-                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig), config);
+                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false), config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {

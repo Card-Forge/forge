@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
+import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
         try {
             bout.write(LENGTH_PLACEHOLDER);
-            oout = GuiBase.hasPropertyConfig() ? new ObjectOutputStream(bout) : new CObjectOutputStream(bout);
+            oout = GuiBase.hasPropertyConfig() ? new ObjectOutputStream(new LZ4BlockOutputStream(bout)) : new CObjectOutputStream(new LZ4BlockOutputStream(bout));
             oout.writeObject(msg);
             oout.flush();
         } finally {

@@ -565,6 +565,7 @@ public class MatchScreen extends FScreen {
             float x = 0;
             float y;
             float w = getWidth();
+            Color color = Color.CYAN;
 
             //field separator lines
             if (!Forge.isLandscapeMode()) {
@@ -591,17 +592,43 @@ public class MatchScreen extends FScreen {
 
             //Draw Priority Human Multiplayer 2 player
             float oldAlphaComposite = g.getfloatAlphaComposite();
+
+
             if ((getPlayerPanels().keySet().size() == 2) && (countHuman() == 2)){
                 for (VPlayerPanel playerPanel: playerPanelsList){
                     midField = playerPanel.getTop();
                     y = midField - 0.5f;
                     float adjustY = Forge.isLandscapeMode() ? y + 1f : midField;
                     float adjustH = Forge.isLandscapeMode() ? playerPanel.getField().getBottom() - 1f : playerPanel.getBottom() - 1f;
-                    if(playerPanel.getPlayer().getHasPriority() && !playerPanel.getPlayer().isAI())
+
+                    if(playerPanel.getPlayer().getHasPriority())
                         g.setAlphaComposite(0.8f);
                     else
                         g.setAlphaComposite(0f);
-                    g.drawRect(4f, Color.CYAN, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
+
+                    if(MatchController.instance.getGameView()!= null) {
+                        if(MatchController.instance.getGameView().getPhase()!=null)
+                        {
+                            if(MatchController.instance.getGameView().getPhase().isCombatPhase()){
+                                if(playerPanel.getPlayer() == MatchController.instance.getCurrentPlayer())
+                                    g.setAlphaComposite(0.8f);
+                                else
+                                    g.setAlphaComposite(0f);
+                            }
+                        }
+
+
+                        if(MatchController.instance.getGameView().getCombat() != null) {
+                            if(playerPanel.getPlayer() == MatchController.instance.getGameView().getPlayerTurn())
+                                color = Color.RED;
+                            else
+                                color = Color.LIME;
+                        }
+                        else
+                            color = Color.CYAN;
+                    }
+
+                    g.drawRect(4f, color, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
                     g.setAlphaComposite(oldAlphaComposite);
                 }
             }
