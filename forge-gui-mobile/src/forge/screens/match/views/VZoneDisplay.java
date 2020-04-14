@@ -69,6 +69,7 @@ public class VZoneDisplay extends VCardDisplayArea {
         try {
             revealedPanel = cardPanels.get(idx); //??? on network match, triggered by card ability
         } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
             return;
         }
         clearChildren();

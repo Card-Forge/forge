@@ -81,10 +81,8 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        if(GuiBase.isAndroid() && Forge.isLandscapeMode()) {
-            doLandscapeLayout(width, height);
-        } else if (width > height) { //handle landscape layout special
-            doLandscapeLayout(width, height);
+        if ((GuiBase.isAndroid() && Forge.isLandscapeMode())||(width > height)) {
+            doLandscapeLayout(width, height); //handle landscape layout special
         } else if (header != null) {
             header.setBounds(0, 0, width, header.getPreferredHeight());
             doLayout(header.getHeight(), width, height);
