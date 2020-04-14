@@ -148,21 +148,30 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
-            tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
+            tgtCards.addAll(activator.getController().chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
             tgtObjects.addAll(tgtCards);
         } else if (sa.hasParam("Choices")) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
+            Player chooser = activator;
+            if (sa.hasParam("Chooser")) {
+                List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                if (choosers.isEmpty()) {
+                    return;
+                }
+                chooser = choosers.get(0);
+            }
+
             CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
 
             int n = sa.hasParam("ChoiceAmount") ? Integer.parseInt(sa.getParam("ChoiceAmount")) : 1;
 
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-            tgtObjects.addAll(new CardCollection(pc.chooseCardsForEffect(choices, sa, title, n, n, !sa.hasParam("ChoiceOptional"))));
+            tgtObjects.addAll(new CardCollection(chooser.getController().chooseCardsForEffect(choices, sa, title, n, n, sa.hasParam("ChoiceOptional"))));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
