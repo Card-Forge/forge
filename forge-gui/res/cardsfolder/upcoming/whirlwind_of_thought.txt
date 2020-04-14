@@ -1,0 +1,7 @@
+Name:Whirlwind of Thought
+ManaCost:1 U R W
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Card.nonCreature
+Oracle:Whenever you cast a noncreature spell, draw a card.
