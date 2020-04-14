@@ -1,0 +1,6 @@
+Name:Springjaw Trap
+ManaCost:1
+Types:Artifact
+K:Flash
+A:AB$ DealDamage | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:Flash\n{4}, {T}, Sacrifice Springjaw Trap: It deals 3 damage to any target.

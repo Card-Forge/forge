@@ -228,6 +228,7 @@ Type=Expansion
 222 R Jegantha, the Wellspring
 223 U Jubilant Skybonder
 224 R Kaheera, the Orphanguard
+225 R Keruga, the Macrosage
 226 R Lurrus of the Dream-Den
 227 R Lutri, the Spellchaser
 228 R Obosh, the Preypiercer
@@ -247,7 +248,7 @@ Type=Expansion
 242 U Zagoth Crystal
 243 C Bloodfell Caves
 244 C Blossoming Sands
-245 R Bonder's Enclave
+245 R Bonders' Enclave
 246 C Dismal Backwater
 247 C Evolving Wilds
 248 R Indatha Triome
@@ -277,10 +278,13 @@ Type=Expansion
 272 L Forest
 273 L Forest
 274 L Forest
+#Buy-A-Box Promo
 275 M Zilortha, Strength Incarnate
+#Borderless Planeswalkers
 276 M Lukka, Coppercoat Outcast
 277 M Vivien, Monsters' Advocate
 278 M Narset of the Ancient Way
+#Showcase Cards
 279 R Cubwarden
 280 U Huntmaster Liger
 281 U Majestic Auricorn
@@ -316,11 +320,62 @@ Type=Expansion
 311 R Raugrin Triome
 312 R Savai Triome
 313 R Zagoth Triome
+314 R Drannith Magistrate
+315 R Lavabrink Venturer
 316 M Luminous Broodmoth
+317 R Mythos of Snapdax
+318 R Mythos of Illuna
+319 R Shark Typhoon
 320 R Voracious Greatshark
+321 R Extinction Event
+322 R Hunted Nightmare
+323 R Mythos of Nethroi
+324 R Mythos of Vadrok
+325 R Unpredictable Cyclone
 326 R Yidaro, Wandering Monster
+327 R Colossification
+328 R Kogla, the Titan Ape
+329 R Mythos of Brokkos
+330 M Chevill, Bane of Monsters
+331 R Death's Oasis
+332 R Eerie Ultimatum
+333 R Emergent Ultimatum
+334 R Frondland Felidar
+335 M General Kudro of Drannith
+336 R Genesis Ultimatum
+337 R Inspired Ultimatum
+338 M Kinnan, Bonder Prodigy
+339 R Labyrinth Raptor
+340 R Offspring's Revenge
+341 R Quartzwood Crasher
+342 M Rielle, the Everwise
+343 R Ruinous Ultimatum
+344 R Skycat Sovereign
+345 R Slitherwisp
+346 R Song of Creation
+347 R Titans' Nest
+348 R Whirlwind of Thought
+349 M Winota, Joiner of Forces
+350 M Fiend Artisan
+351 R Gyruda, Doom of Depths
+352 R Jegantha, the Wellspring
+353 R Kaheera, the Orphanguard
 354 R Keruga, the Macrosage
+355 R Lurrus of the Dream-Den
+356 R Lutri, the Spellchaser
+357 R Obosh, the Preypiercer
+358 R Umori, the Collector
+359 R Yorion, Sky Nomad
+360 R Zirda, the Dawnwaker
+361 R Crystalline Giant
+362 R The Ozolith
+363 R Bonders' Enclave
 364 R Colossification
+365 U Flourishing Fox
+366 U Heartless Act
+367 C Forbidden Friendship
+368 U Migration Path
+369 U Sprite Dragon
 370 U Huntmaster Liger
 371 M Luminous Broodmoth
 372 U Pollywog Symbiote
