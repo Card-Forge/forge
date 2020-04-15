@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | AddAbilities$ MercurialBounce | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature you control, except it has "{2}{U}{U}: Return this creature to its owner's hand."
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | AddAbilities$ MercurialBounce | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature you control, except it has "{2}{U}{U}: Return this creature to its owner's hand."
 SVar:MercurialBounce:AB$ ChangeZone | Cost$ 2 U U | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercurial_pretender.jpg
-Oracle:You may have Mercurial Pretender enter the battlefield as a copy of any creature you control, except it has "{2}{U}{U}: Return this creature to its owner's hand."
+Oracle:You may have Mercurial Pretender enter the battlefield as a copy of a creature you control, except it has "{2}{U}{U}: Return this creature to its owner's hand."

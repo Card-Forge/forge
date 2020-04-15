@@ -197,6 +197,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setManaSpent(params.get("ConditionManaSpent"));
         }
 
+        if (params.containsKey("ConditionManaNotSpent")) {
+            this.setManaNotSpent(params.get("ConditionManaNotSpent"));
+        }
+
         if (params.containsKey("ConditionCheckSVar")) {
             this.setSvarToCheck(params.get("ConditionCheckSVar"));
         }
@@ -432,10 +436,21 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (StringUtils.isNotEmpty(this.getManaSpent())) {
-            byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
-            if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+        if (StringUtils.isNotEmpty(getManaSpent())) {
+            for (String s : getManaSpent().split(" ")) {
+                byte manaSpent = MagicColor.fromName(s);
+                if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+                    return false;
+            }
+        }
+        if (StringUtils.isNotEmpty(getManaNotSpent())) {
+            byte toPay = 0;
+            for (String s : getManaNotSpent().split(" ")) {
+                toPay |= MagicColor.fromName(s);
+            }
+            if (toPay == (toPay & sa.getHostCard().getColorsPaid())) {
                 return false;
+            }
         }
 
         if (this.getsVarToCheck() != null) {

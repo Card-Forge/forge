@@ -67,8 +67,9 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
             SpellAbility chosenSA = null;
             if (sa.hasParam("AtRandom")) {
-                int idxChosen = MyRandom.getRandom().nextInt(abilities.size());
-                chosenSA = abilities.get(idxChosen);
+                if (!abilities.isEmpty()) {
+                    chosenSA = abilities.get(MyRandom.getRandom().nextInt(abilities.size()));
+                }
             } else {
                 chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, Localizer.getInstance().getMessage("lblChooseOne"),
                         ImmutableMap.of());
@@ -90,7 +91,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 if (fallback != null) {
                     p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(), sa.hasParam("ShowChoice")));
                     AbilityUtils.resolve(fallback);                
-                } else {
+                } else if (!sa.hasParam("AtRandom")) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }
             }

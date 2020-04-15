@@ -314,10 +314,10 @@ public class HumanPlaySpellAbility {
                     if (value == null) {
                         return false;
                     }
-                    card.setXManaCostPaid(value);
+                    ability.setXManaCostPaid(value);
                 }
             } else if (manaCost.getMana().isZero() && ability.isSpell()) {
-                card.setXManaCostPaid(0);
+                ability.setXManaCostPaid(0);
             }
         }
         return true;

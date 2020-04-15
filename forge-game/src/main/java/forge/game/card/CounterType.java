@@ -111,6 +111,8 @@ public enum CounterType {
 
     FLOOD("FLOOD", 0, 203, 255),
 
+    FORESHADOW("FRSHD",144,99, 207),
+
     FUNGUS("FNGUS", 121, 219, 151),
 
     FURY("FURY", 255, 120, 89),
@@ -316,8 +318,8 @@ public enum CounterType {
     // Keyword Counters
 
     FLYING("Flying"),
-    FIRST_STRIKE("First Strike"),
-    DOUBLE_STRIKE("Double Strike"),
+    FIRSTSTRIKE("First Strike"),
+    DOUBLESTRIKE("Double Strike"),
     DEATHTOUCH("Deathtouch"),
     HEXPROOF("Hexproof"),
     INDESTRUCTIBLE("Indestructible"),
@@ -391,9 +393,9 @@ public enum CounterType {
         switch (this) {
         case FLYING:
             return Keyword.FLYING;
-        case FIRST_STRIKE:
+        case FIRSTSTRIKE:
             return Keyword.FIRST_STRIKE;
-        case DOUBLE_STRIKE:
+        case DOUBLESTRIKE:
             return Keyword.DOUBLE_STRIKE;
         case DEATHTOUCH:
             return Keyword.DEATHTOUCH;

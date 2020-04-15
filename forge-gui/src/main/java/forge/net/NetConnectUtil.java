@@ -5,7 +5,6 @@ import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.ILobbyView;
@@ -147,8 +146,8 @@ public class NetConnectUtil {
             }
             @Override
             public final void close() {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url), Localizer.getInstance().getMessage("lblError"), FSkinProp.ICO_WARNING);
-                onlineLobby.setClient(null);
+                GuiBase.setInterrupted(true);
+                onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
             public ClientGameLobby getLobby() {

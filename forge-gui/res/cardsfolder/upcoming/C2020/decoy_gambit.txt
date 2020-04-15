@@ -1,0 +1,11 @@
+Name:Decoy Gambit
+ManaCost:2 U
+Types:Instant
+A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one target creature each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | RememberObjects$ Targeted | SubAbility$ DBRepeat | SpellDescription$ For each opponent, choose up to one target creature that player controls, then return that creature to its owner's hand unless its controller has you draw a card.
+SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered | UseImprinted$ True | RepeatSubAbility$ DBReturn | SubAbility$ DBCleanup
+SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield | Destination$ Hand | UnlessCost$ Draw<1/Player.IsRemembered> | UnlessPayer$ ImprintedController
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRemember | Static$ True
+SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredActivator
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:For each opponent, choose up to one target creature that player controls, then return that creature to its owner's hand unless its controller has you draw a card.

@@ -222,7 +222,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private int turnInZone;
 
-    private int xManaCostPaid = 0;
     private Map<String, Integer> xManaCostPaidByColor;
 
     private int sunburstValue = 0;
@@ -1089,10 +1088,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final int getXManaCostPaid() {
-        return xManaCostPaid;
-    }
-    public final void setXManaCostPaid(final int n) {
-        xManaCostPaid = n;
+        if (getCastSA() != null) {
+            Integer paid = getCastSA().getXManaCostPaid();
+            return paid == null ? 0 : paid;
+        }
+        return 0;
     }
 
     public final Map<String, Integer> getXManaCostPaidByColor() {
@@ -6350,10 +6350,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addGoad(Long timestamp, final Player p) {
         goad.put(timestamp, p);
+        updateAbilityTextForView();
     }
 
     public final void removeGoad(Long timestamp) {
-        goad.remove(timestamp);
+        if (goad.remove(timestamp) != null) {
+            updateAbilityTextForView();
+        }
     }
 
     public final boolean isGoaded() {
@@ -6430,7 +6433,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         removeSVar("PayX"); // Temporary AI X announcement variable
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
-        setXManaCostPaid(0);
         setXManaCostPaidByColor(null);
         setKickerMagnitude(0);
         setPseudoMultiKickerMagnitude(0);

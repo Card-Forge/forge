@@ -1,0 +1,6 @@
+Name:Durable Coilbug
+ManaCost:1 B
+Types:Creature Insect
+PT:2/2
+A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+Oracle:{4}{B}: Return Durable Coilbug from your graveyard to your hand.

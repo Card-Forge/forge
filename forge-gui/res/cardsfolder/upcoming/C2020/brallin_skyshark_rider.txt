@@ -1,0 +1,11 @@
+Name:Brallin, Skyshark Rider
+ManaCost:3 R
+Types:Legendary Creature Human Shaman
+PT:3/3
+K:Partner:Shabraz, the Skyshark:Shabraz
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard a card, put a +1/+1 counter on CARDNAME and it deals 1 damage to each opponent.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+A:AB$ Pump | Cost$ R | ValidTgts$ Shark | TgtPrompt$ Select target Shark | KW$ Trample | SpellDescription$ Target Shark gains trample until end of turn.
+DeckHas:Ability$Counters
+Oracle:Partner with Shabraz, the Skyshark (When this creature enters the battlefield, target player may put Shabraz into their hand from their library, then shuffle.)\nWhenever you discard a card, put a +1/+1 counter on Brallin, Skyshark Rider and it deals 1 damage to each opponent.\n{R}: Target Shark gains trample until end of turn.

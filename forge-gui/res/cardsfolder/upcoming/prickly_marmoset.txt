@@ -1,0 +1,8 @@
+Name:Prickly Marmoset
+ManaCost:2 R
+Types:Creature Monkey
+PT:2/3
+K:First Strike
+T:Mode$ Cycled | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle a card, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+Oracle:First strike\nWhenever you cycle a card, Prickly Marmoset gets +2/+0 until end of turn.

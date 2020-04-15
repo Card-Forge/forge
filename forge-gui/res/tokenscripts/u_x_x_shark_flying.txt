@@ -1,0 +1,7 @@
+Name:Shark
+ManaCost:no cost
+Types:Creature Shark
+Colors:blue
+PT:*/*
+K:Flying
+Oracle:Flying

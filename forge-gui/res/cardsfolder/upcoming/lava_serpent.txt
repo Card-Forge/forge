@@ -1,0 +1,7 @@
+Name:Lava Serpent
+ManaCost:5 R
+Types:Creature Elemental Serpent
+PT:5/5
+K:Haste
+K:Cycling:2
+Oracle:Haste\nCycling {2} ({2}, Discard this card: Draw a card.)

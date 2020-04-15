@@ -1,0 +1,6 @@
+Name:Indatha Triome
+ManaCost:no cost
+Types:Land Plains Swamp Forest
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {W}, {B}, or {G}.)\nIndatha Triome enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

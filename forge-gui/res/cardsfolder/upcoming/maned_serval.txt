@@ -1,0 +1,6 @@
+Name:Maned Serval
+ManaCost:1 W
+Types:Creature Cat
+PT:1/4
+K:Vigilance
+Oracle:Vigilance
