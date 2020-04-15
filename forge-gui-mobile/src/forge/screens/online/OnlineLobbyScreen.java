@@ -1,7 +1,9 @@
 package forge.screens.online;
 
+import com.google.common.collect.ImmutableList;
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.interfaces.ILobbyView;
 import forge.match.GameLobby;
@@ -11,6 +13,7 @@ import forge.net.IOnlineLobby;
 import forge.net.NetConnectUtil;
 import forge.net.OfflineLobby;
 import forge.net.client.FGameClient;
+import forge.net.server.FServerManager;
 import forge.properties.ForgeConstants;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
@@ -47,6 +50,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         fGameClient = null;
     }
 
+    @Override
     public void closeConn(String msg) {
         clearGameLobby();
         Forge.back();
@@ -54,7 +58,15 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             FThreads.invokeInBackgroundThread(new Runnable() {
                 @Override
                 public void run() {
-                    SOptionPane.showMessageDialog(msg, "Error", FSkinProp.ICO_WARNING);
+                    final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, "Error", FSkinProp.ICO_WARNING, ImmutableList.of("Ok"), 1) == 0;
+                    if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
+                        GuiBase.setInterrupted(false);
+
+                        if(FServerManager.getInstance() != null)
+                            FServerManager.getInstance().stopServer();
+                        if(getfGameClient() != null)
+                            closeClient();
+                    }
                 }
             });
         }
@@ -73,6 +85,10 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
 
     @Override
     public void onActivate() {
+        if (GuiBase.isInterrupted()) {
+            GuiBase.setInterrupted(false);
+            return;
+        }
         if (getGameLobby() == null) {
             setGameLobby(getLobby());
             //prompt to connect to server when offline lobby activated

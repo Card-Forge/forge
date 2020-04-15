@@ -69,13 +69,15 @@ public class Forge implements ApplicationListener {
     public static String locale = "en-US";
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
+    public static boolean isPortraitMode = false;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
             GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
         }
         return app;
     }
@@ -373,6 +375,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isLandscapeMode() {
+        if(GuiBase.isAndroid())
+            return !isPortraitMode;
         return screenWidth > screenHeight;
     }
 

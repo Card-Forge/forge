@@ -1,6 +1,7 @@
 package forge.net;
 
 import com.google.common.base.Function;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -155,28 +156,16 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
+        if(!GuiBase.hasPropertyConfig())
+            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
+
         for (int iArg = 0; iArg < args.length; iArg++) {
             final Object arg = args[iArg];
             final Class<?> type = this.args[iArg];
             if (!ReflectionUtil.isInstance(arg, type)) {
                 //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java Line 163)", name(), iArg, arg.getClass().getName(), type.getName()));
+                System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)", name(), iArg, arg.getClass().getName(), type.getName()));
             }
-            //this should be handled via decoder or it will process them twice
-            /*if (arg != null) {
-                // attempt to Serialize each argument, this will throw an exception if it can't.
-                try {
-                    byte[] serialized = SerializationUtils.serialize((Serializable) arg);
-                    SerializationUtils.deserialize(serialized);
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    // not sure why this one would be thrown, but it is
-                    // it also doesn't prevent things from working, so, log for now, pending full network rewrite
-                    ex.printStackTrace();
-                } catch(ConcurrentModificationException ex) {
-                    // can't seem to avoid this from periodically happening
-                    ex.printStackTrace();
-                }
-            }*/
         }
     }
 
@@ -187,7 +176,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            System.err.println(String.format("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java Line 190)", name(), value.getClass().getName(), getReturnType().getName()));
+            System.err.println(String.format("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)", name(), value.getClass().getName(), getReturnType().getName()));
         }
     }
 }

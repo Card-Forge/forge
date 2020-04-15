@@ -200,4 +200,8 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         }
         return false;
     }
+
+    @Override
+    public void closeConn(String msg) {
+    }
 }

@@ -7,4 +7,5 @@ import forge.net.client.FGameClient;
 public interface IOnlineLobby {
     ILobbyView setLobby(GameLobby lobby);
     void setClient(FGameClient client);
+    void closeConn(String msg);
 }
