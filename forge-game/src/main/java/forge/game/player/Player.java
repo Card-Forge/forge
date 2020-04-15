@@ -2958,7 +2958,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
     public void updateKeywordCardAbilityText() {
-        if(keywordEffect == null)
+        if(getKeywordCard() == null)
             return;
         final PlayerZone com = getZone(ZoneType.Command);
         keywordEffect.setText("");
