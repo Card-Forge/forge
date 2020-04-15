@@ -1591,6 +1591,10 @@ public class AbilityUtils {
 
                     if (root.isTrigger()) {
                         Trigger t = root.getTrigger();
+                        if (t == null) {
+                            return 0;
+                        }
+
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
                         // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
                         // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.
