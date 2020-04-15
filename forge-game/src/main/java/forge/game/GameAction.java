@@ -970,6 +970,9 @@ public class GameAction {
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {
+                    if (zt == ZoneType.Command)
+                        p.checkKeywordCard();
+
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }

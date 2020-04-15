@@ -1155,6 +1155,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         view.updateKeywords(this);
+        updateKeywordCardAbilityText();
     }
 
     public final KeywordCollectionView getKeywords() {
@@ -2956,7 +2957,49 @@ public class Player extends GameEntity implements Comparable<Player> {
             this.updateZoneForView(com);
         }
     }
-
+    public void updateKeywordCardAbilityText() {
+        if(keywordEffect == null)
+            return;
+        final PlayerZone com = getZone(ZoneType.Command);
+        keywordEffect.setText("");
+        keywordEffect.updateAbilityTextForView();
+        boolean headerAdded = false;
+        StringBuilder kw = new StringBuilder();
+        for(String k : keywords) {
+            if(!headerAdded) {
+                headerAdded = true;
+                kw.append(this.getName()).append(" has: \n");
+            }
+            kw.append(k).append("\n");
+        }
+        if(!kw.toString().isEmpty()) {
+            keywordEffect.setText(trimKeywords(kw.toString()));
+            keywordEffect.updateAbilityTextForView();
+        }
+        this.updateZoneForView(com);
+    }
+    public String trimKeywords(String keywordTexts) {
+        keywordTexts = TextUtil.fastReplace(keywordTexts,":Card.named", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Black:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Blue:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Red:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Green:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.White:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.MonoColor:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.MultiColor:", " from ");
+        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Colorless:", " from ");
+        return keywordTexts;
+    }
+    public void checkKeywordCard() {
+        if (keywordEffect == null)
+            return;
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (keywordEffect.getAbilityText().isEmpty()) {
+            com.remove(keywordEffect);
+            this.updateZoneForView(com);
+            keywordEffect = null;
+        }
+    }
     public boolean hasBlessing() {
         return blessingEffect != null;
     }
