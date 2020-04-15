@@ -125,15 +125,12 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay()) //TODO alternate method for update Netplay...
-            return;
-        if(getGameView() == null)
+        if(!GuiBase.isNetworkplay())
             return;
         if(getGameView().getPhase() == null)
             return;
         if (getGameView().getPhase().phaseforUpdateField())
-            for (final VPlayerPanel pnl : view.getPlayerPanels().values())
-                pnl.getField().update(false);
+            refreshCardDetails(null);
     }
 
     public boolean hotSeatMode() {

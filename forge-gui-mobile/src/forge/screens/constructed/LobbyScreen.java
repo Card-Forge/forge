@@ -11,6 +11,7 @@ import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 
+import forge.net.server.FServerManager;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -530,6 +531,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         GuiBase.setNetworkplay(allowNetworking);
 
+        setStartButtonAvailability();
+
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
@@ -730,5 +733,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     public FScrollPane getPlayersScroll() {
         return playersScroll;
+    }
+
+    public void setStartButtonAvailability() {
+        if (lobby.isAllowNetworking() && FServerManager.getInstance() != null)
+            btnStart.setVisible(FServerManager.getInstance().isHosting());
+        else
+            btnStart.setVisible(true);
     }
 }

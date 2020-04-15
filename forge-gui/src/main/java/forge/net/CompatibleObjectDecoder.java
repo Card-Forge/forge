@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.serialization.ClassResolver;
+import net.jpountz.lz4.LZ4BlockInputStream;
 
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
@@ -22,20 +23,21 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
         this.classResolver = classResolver;
     }
 
+    @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
         ByteBuf frame = (ByteBuf)super.decode(ctx, in);
         if (frame == null) {
             return null;
         } else {
             ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
-                    new ObjectInputStream(new ByteBufInputStream(frame, true)):
-                    new CObjectInputStream(new ByteBufInputStream(frame, true),this.classResolver);
+                    new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
+                    new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),this.classResolver);
 
             Object var5 = null;
             try {
                 var5 = ois.readObject();
             } catch (StreamCorruptedException e) {
-                e.printStackTrace();
+                System.err.println(String.format("Version Mismatch: %s", e.getMessage()));
             } finally {
                 ois.close();
             }
