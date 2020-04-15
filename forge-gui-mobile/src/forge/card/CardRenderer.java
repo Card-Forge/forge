@@ -882,6 +882,16 @@ public class CardRenderer {
                     abiCount += 1;
                 }
             }
+        } else if (canShow && !onbattlefield && showAbilityIcons(card)) {
+            //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
+            String keywordKey = card.getCurrentState().getKeywordKey();
+            String abilityText = card.getCurrentState().getAbilityText();
+            if ((keywordKey.indexOf("Flash") != -1)
+                    || ((abilityText.indexOf("May be played by") != -1)
+                    && (abilityText.indexOf("and as though it has flash") != -1))){
+                if (keywordKey.indexOf("Flashback") == -1)
+                    CardFaceSymbols.drawSymbol("flash", g, cx + ((cw*2)/2.3f), cy, cw / 5.5f, cw / 5.5f);
+            }
         }
         //draw name and mana cost overlays if card is small or default card image being used
         if (h <= NAME_COST_THRESHOLD && canShow) {
