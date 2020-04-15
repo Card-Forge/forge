@@ -635,8 +635,10 @@ public class Graphics {
 
     public void endTransform() {
         batch.end();
-        batch.getTransformMatrix().set(transforms.pop());
-        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+        if (!transforms.empty()) { //??? EmptyStackException encountered on mobile
+            batch.getTransformMatrix().set(transforms.pop());
+            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+        }
         batch.begin();
     }
 
