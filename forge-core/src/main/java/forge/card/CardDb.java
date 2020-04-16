@@ -165,7 +165,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards) {
         Set<String> allMissingCards = new LinkedHashSet<>();
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
@@ -218,7 +218,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else {
+                } else if(enableUnknownCards) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }
@@ -312,17 +312,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return tryGetCard(request);
     }
 
-    public int getCardCollectorNumber(String cardName, String reqEdition) {
+    public String getCardCollectorNumber(String cardName, String reqEdition, int artIndex) {
         cardName = getName(cardName);
         CardEdition edition = editions.get(reqEdition);
         if (edition == null)
-            return -1;
+            return null;
+        int numMatches = 0;
         for (CardInSet card : edition.getCards()) {
             if (card.name.equalsIgnoreCase(cardName)) {
-                return card.collectorNumber;
+                numMatches += 1;
+                if (numMatches == artIndex) {
+                    return card.collectorNumber;
+                }
             }
         }
-        return -1;
+        return null;
     }
 
     private PaperCard tryGetCard(CardRequest request) {

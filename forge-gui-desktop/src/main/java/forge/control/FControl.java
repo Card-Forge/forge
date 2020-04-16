@@ -40,6 +40,7 @@ import javax.swing.WindowConstants;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import forge.GuiBase;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
@@ -218,6 +219,10 @@ public enum FControl implements KeyEventDispatcher {
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         final ForgePreferences prefs = FModel.getPreferences();
+
+        //set ExperimentalNetworkOption from preference
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+        GuiBase.enablePropertyConfig(propertyConfig);
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 

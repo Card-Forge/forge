@@ -1,0 +1,5 @@
+Name:Feather
+ManaCost:no cost
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | TgtPrompt$ Choose target Phoenix card in your graveyard | ValidTgts$ Phoenix.YouOwn | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return target Phoenix card from your graveyard to the battlefield tapped.
+Oracle:{1}, {T}, Sacrifice this artifact: Return target Phoenix card from your graveyard to the battlefield tapped.

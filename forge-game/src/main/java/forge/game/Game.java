@@ -914,4 +914,17 @@ public class Game {
         }
         return false;
     }
+
+    public Player getControlVote() {
+        Player result = null;
+        long maxValue = 0;
+        for (Player p : getPlayers()) {
+            Long v = p.getHighestControlVote();
+            if (v != null && v > maxValue) {
+                maxValue = v;
+                result = p;
+            }
+        }
+        return result;
+    }
 }

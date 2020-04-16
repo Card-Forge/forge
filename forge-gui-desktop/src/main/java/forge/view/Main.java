@@ -49,9 +49,6 @@ public final class Main {
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
 
-        //set PropertyConfig log4j to true
-        GuiBase.enablePropertyConfig(true);
-
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
@@ -81,7 +78,7 @@ public final class Main {
                 break;
             
             default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim' ");
+                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
                 break;
         }
         

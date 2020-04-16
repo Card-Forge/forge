@@ -32,6 +32,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactory;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -46,6 +47,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -130,6 +132,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private final List<Mana> payingMana = Lists.newArrayList();
     private final List<SpellAbility> paidAbilities = Lists.newArrayList();
+    private Integer xManaCostPaid = null;
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
@@ -445,6 +448,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPayCosts(final Cost abCost) {
         payCosts = abCost;
+    }
+
+    public boolean costHasX() {
+        if (getPayCosts() == null) {
+            return false;
+        }
+        return getPayCosts().hasXInAnyCostPart();
+    }
+
+    public boolean costHasManaX() {
+        if (getPayCosts() == null) {
+            return false;
+        }
+        if (getPayCosts().hasNoManaCost()) {
+            return false;
+        }
+        return getPayCosts().getCostMana().getAmountOfX() > 0;
     }
 
     public SpellAbilityRestriction getRestrictions() {
@@ -1081,8 +1101,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (hasParam("MaxTotalTargetCMC") && entity instanceof Card) {
-                final Card c = (Card) entity;
-                if (c.getCMC() > tr.getMaxTotalCMC(c, this)) {
+                int soFar = Aggregates.sum(getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                // only add if it isn't already targeting
+                if (!isTargeting(entity)) {
+                    final Card c = (Card) entity;
+                    soFar += c.getCMC();
+                }
+
+                if (soFar > tr.getMaxTotalCMC(getHostCard(), this)) {
                     return false;
                 }
             }
@@ -1299,6 +1325,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         String announce = getParam("Announce");
         if (StringUtils.isBlank(announce)) {
             mapParams.put("Announce", variable);
+            originalMapParams.put("Announce", variable);
             return;
         }
         String[] announcedOnes = TextUtil.split(announce, ',');
@@ -1308,6 +1335,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         mapParams.put("Announce", announce + ";" + variable);
+        originalMapParams.put("Announce", announce + ";" + variable);
     }
 
     public boolean isXCost() {
@@ -1960,5 +1988,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setAlternativeCost(AlternativeCost ac) {
         altCost = ac;
+    }
+
+    public Integer getXManaCostPaid() {
+        return xManaCostPaid;
+    }
+    public void setXManaCostPaid(final Integer n) {
+        xManaCostPaid = n;
     }
 }

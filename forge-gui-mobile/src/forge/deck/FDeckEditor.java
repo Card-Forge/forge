@@ -856,6 +856,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Brawl:
                 isLegalCommander = card.getRules().canBeBrawlCommander();
                 break;
+            case TinyLeaders:
+                isLegalCommander = card.getRules().canBeTinyLeadersCommander();
+                break;
             case Oathbreaker:
                 isLegalCommander = card.getRules().canBeOathbreaker();
                 captionSuffix = localizer.getMessage("lblOathbreaker");

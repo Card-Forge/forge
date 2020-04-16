@@ -3,6 +3,7 @@ package forge.screens.home.settings;
 import forge.*;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
+import forge.download.AutoUpdater;
 import forge.game.GameLogEntryType;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -94,6 +95,19 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        // This updates Experimental Network Option
+        view.getCbUseExperimentalNetworkStream().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                if (updating) { return; }
+
+                final boolean toggle = view.getCbUseExperimentalNetworkStream().isSelected();
+                GuiBase.enablePropertyConfig(toggle);
+                prefs.setPref(FPref.UI_NETPLAY_COMPAT, String.valueOf(toggle));
+                prefs.save();
+            }
+        });
+
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
@@ -113,6 +127,8 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
         lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECKGEN_SINGLETONS));
         lstControls.add(Pair.of(view.getCbEnableAICheats(), FPref.UI_ENABLE_AI_CHEATS));
+        lstControls.add(Pair.of(view.getCbEnableUnknownCards(), FPref.UI_LOAD_UNKNOWN_CARDS));
+        lstControls.add(Pair.of(view.getCbUseExperimentalNetworkStream(), FPref.UI_NETPLAY_COMPAT));
         lstControls.add(Pair.of(view.getCbImageFetcher(), FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER));
         lstControls.add(Pair.of(view.getCbDisplayFoil(), FPref.UI_OVERLAY_FOIL_EFFECT));
         lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
@@ -225,6 +241,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeStackAdditionsComboBox();
@@ -251,6 +268,7 @@ public enum CSubmenuPreferences implements ICDoc {
         setPlayerNameButtonText();
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
         view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
+        view.getCbUseExperimentalNetworkStream().setSelected(prefs.getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
 
         for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
@@ -375,6 +393,16 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeAutoUpdaterComboBox() {
+        // TODO: Ideally we would filter out update paths based on the type of Forge people have
+        final String[] updatePaths = AutoUpdater.updateChannels;
+        final FPref updatePreference = FPref.AUTO_UPDATE;
+        final FComboBoxPanel<String> panel = this.view.getCbpAutoUpdater();
+        final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
+        final String selectedItem = this.prefs.getPref(updatePreference);
         panel.setComboBox(comboBox, selectedItem);
     }
 

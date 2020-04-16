@@ -78,7 +78,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             for(int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
-                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
+                stringBuilder.append(targetCard);
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) // fix null counter stack description
+                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
 
                 if(i == targetCards.size() - 2) {
                     stringBuilder.append(" and ");
@@ -104,7 +106,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
         stringBuilder.append(".");
-
         return stringBuilder.toString();
     }
 
@@ -147,8 +148,30 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
-            tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
+            tgtCards.addAll(activator.getController().chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
             tgtObjects.addAll(tgtCards);
+        } else if (sa.hasParam("Choices")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            }
+            Player chooser = activator;
+            if (sa.hasParam("Chooser")) {
+                List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                if (choosers.isEmpty()) {
+                    return;
+                }
+                chooser = choosers.get(0);
+            }
+
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            int n = sa.hasParam("ChoiceAmount") ? Integer.parseInt(sa.getParam("ChoiceAmount")) : 1;
+
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
+
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+            tgtObjects.addAll(new CardCollection(chooser.getController().chooseCardsForEffect(choices, sa, title, n, n, sa.hasParam("ChoiceOptional"))));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }

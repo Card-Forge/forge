@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
@@ -184,7 +185,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        return MatchController.instance.getGameController().getActivateDescription(orderedCards.get(index));
+        if(!GuiBase.isNetworkplay()) //causes lag on netplay client side
+            return MatchController.instance.getGameController().getActivateDescription(orderedCards.get(index));
+
+        return "Activate | Cast | Play (if allowed)"; //simple text on card zoom swipe up
     }
 
     @Override

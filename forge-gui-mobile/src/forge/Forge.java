@@ -1,5 +1,6 @@
 package forge;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -42,7 +43,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.32.001";
+    public static final String CURRENT_VERSION = "1.6.33.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -68,13 +69,15 @@ public class Forge implements ApplicationListener {
     public static String locale = "en-US";
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
+    public static boolean isPortraitMode = false;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
             GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
         }
         return app;
     }
@@ -87,6 +90,7 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
+        GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -371,6 +375,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isLandscapeMode() {
+        if(GuiBase.isAndroid())
+            return !isPortraitMode;
         return screenWidth > screenHeight;
     }
 

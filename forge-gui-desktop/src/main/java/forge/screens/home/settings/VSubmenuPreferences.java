@@ -25,8 +25,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 
 /**
@@ -107,6 +107,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
+    private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox("Enable Unknown Cards");
+    private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox("Experimental Network Compatibility");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -123,6 +125,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
     private final FComboBoxPanel<String> cbpDefaultLanguage = new FComboBoxPanel<>(localizer.getMessage("cbpSelectLanguage")+":");
+    private final FComboBoxPanel<String> cbpAutoUpdater = new FComboBoxPanel<>(localizer.getMessage("cbpAutoUpdater")+":");
 
     /**
      * Constructor.
@@ -157,6 +160,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
 
         // language
+
+        pnlPrefs.add(cbpAutoUpdater, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoUpdater")), descriptionConstraints);
+
         pnlPrefs.add(cbpDefaultLanguage, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSelectLanguage")), descriptionConstraints);
 
@@ -281,6 +288,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbLoadHistoricFormats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadHistoricFormats")), descriptionConstraints);
+
+        pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
+
+        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Forge switches to compatible network stream. (If unsure, turn OFF this option)"), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -531,6 +544,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         }
     }
 
+    public final FComboBoxPanel<String> getCbpAutoUpdater() {
+        return cbpAutoUpdater;
+    }
+
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbCompactMainMenu() {
         return cbCompactMainMenu;
@@ -569,6 +586,16 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnableUnknownCards() {
+        return cbEnableUnknownCards;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbUseExperimentalNetworkStream() {
+        return cbUseExperimentalNetworkStream;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

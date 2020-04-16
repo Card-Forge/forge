@@ -6,7 +6,8 @@ Code2=CN2
 MciCode=cn2
 Type=Other
 BoosterCovers=3
-Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"), 1 fromSheet("CN2 Draft Matters")
+Booster=10 Common:!fromSheet("CN2 Not In Normal Slots"), 3 Uncommon:!fromSheet("CN2 Not In Normal Slots"), 1 RareMythic:!fromSheet("CN2 Not In Normal Slots"), 1 fromSheet("CN2 Draft Matters")
+AdditionalSheetForFoils=fromSheet("CN2 Foil Kaya")
 
 [cards]
 1 C Adriana's Valor
@@ -230,6 +231,7 @@ Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Dr
 219 R Exotic Orchard
 220 U Rogue's Passage
 221 U Shimmering Grotto
+222 M Kaya, Ghost Assassin
 
 [tokens]
 w_1_1_soldier

@@ -1,0 +1,6 @@
+Name:Ketria Triome
+ManaCost:no cost
+Types:Land Forest Island Mountain
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {G}, {U}, or {R}.)\nKetria Triome enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

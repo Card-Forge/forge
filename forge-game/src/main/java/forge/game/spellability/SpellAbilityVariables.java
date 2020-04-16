@@ -89,6 +89,7 @@ public class SpellAbilityVariables implements Cloneable {
         this.lifeTotal = sav.getLifeTotal();
         this.lifeAmount = sav.getLifeAmount();
         this.manaSpent = sav.getManaSpent();
+        this.manaNotSpent = sav.getManaNotSpent();
         this.targetValidTargeting = sav.getTargetValidTargeting();
         this.targetsSingleTarget = sav.targetsSingleTarget();
         this.presenceCondition = sav.getPresenceCondition();
@@ -193,6 +194,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The mana spent. */
     private String manaSpent = "";
+    private String manaNotSpent = "";
 
     /** The chosen colors string. */
     private String chosenColors = null;
@@ -227,6 +229,13 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final String getManaSpent() {
         return this.manaSpent;
+    }
+
+    public final void setManaNotSpent(final String s) {
+        this.manaNotSpent = s;
+    }
+    public final String getManaNotSpent() {
+        return this.manaNotSpent;
     }
 
     /**

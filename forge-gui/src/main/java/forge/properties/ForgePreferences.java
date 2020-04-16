@@ -139,6 +139,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_PRELOAD_EXTENDED_ART("false"),
         UI_ENABLE_BORDER_MASKING("false"),
         UI_SHOW_FPS("false"),
+        UI_NETPLAY_COMPAT("false"),
+        UI_LOAD_UNKNOWN_CARDS("true"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
@@ -153,6 +155,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         //TODO This should be removed after the update that requires Java 8.
         DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
 
+        AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game

@@ -473,12 +473,12 @@ public class WrappedAbility extends Ability {
 
         TriggerHandler th = game.getTriggerHandler();
 
+        // set Trigger
+        sa.setTrigger(regtrig);
+
         if (decider != null && !decider.getController().confirmTrigger(this, triggerParams, this.isMandatory())) {
             return;
         }
-
-        // set Trigger
-        sa.setTrigger(regtrig);
 
         if (!triggerParams.containsKey("NoTimestampCheck")) {
             timestampCheck();
@@ -555,5 +555,12 @@ public class WrappedAbility extends Ability {
 
     public void setAlternativeCost(AlternativeCost ac) {
         sa.setAlternativeCost(ac);
+    }
+
+    public Integer getXManaCostPaid() {
+        return sa.getXManaCostPaid();
+    }
+    public void setXManaCostPaid(final Integer n) {
+        sa.setXManaCostPaid(n);
     }
 }

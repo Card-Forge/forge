@@ -6,6 +6,8 @@ import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -113,7 +115,17 @@ public final class ImageKeys {
         }
         //try fullborder...
         if (filename.contains(".full")) {
-            file = findFile(dir, TextUtil.fastReplace(filename, ".full", ".fullborder"));
+            String fullborderFile = TextUtil.fastReplace(filename, ".full", ".fullborder");
+            file = findFile(dir, fullborderFile);
+            if (file != null) { return file; }
+            // if there's a 1st art variant try without it for .fullborder images
+            file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
+            if (file != null) { return file; }
+            // if there's an art variant try without it for .full images
+            file = findFile(dir, filename.replaceAll("[0-9].full]",".full"));
+            if (file != null) { return file; }
+            // if there's a 1st art variant try with it for .full images
+            file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
             if (file != null) { return file; }
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder

@@ -157,11 +157,6 @@ public class GameAction {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 
-        // Clean up temporary variables such as Sunburst value or announced PayX value
-        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
-            c.clearTemporaryVars();
-        }
-
         if (fromBattlefield && !toBattlefield) {
             c.getController().setRevolt(true);
         }
@@ -173,7 +168,7 @@ public class GameAction {
 
             // if to Battlefield and it is caused by an replacement effect,
             // try to get previous LKI if able
-            if (zoneTo.is(ZoneType.Battlefield)) {
+            if (toBattlefield) {
                 if (cause != null && cause.isReplacementAbility()) {
                     ReplacementEffect re = cause.getReplacementEffect();
                     if (ReplacementType.Moved.equals(re.getMode())) {
@@ -243,6 +238,12 @@ public class GameAction {
                 copied = c;
             }
         }
+
+        // Clean up temporary variables such as Sunburst value or announced PayX value
+        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
+            copied.clearTemporaryVars();
+        }
+
 
         if (!suppress) {
             if (zoneFrom == null) {
@@ -547,6 +548,13 @@ public class GameAction {
             c.setCastSA(null);
         } else if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
+            if (cause != null && cause.isSpell()  && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
+                cause.setLastStateBattlefield(game.getLastStateBattlefield());
+                cause.setLastStateGraveyard(game.getLastStateGraveyard());
+                c.setCastSA(cause);
+            } else {
+                c.setCastSA(null);
+            }
         } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
             c.setCastFrom(null);
             c.setCastSA(null);
@@ -977,7 +985,7 @@ public class GameAction {
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
-                    if (c.getNetToughness() <= 0) {
+                    if (c.getLethal() <= 0) {
                         if (noRegCreats == null) {
                             noRegCreats = new CardCollection();
                         }
@@ -985,7 +993,7 @@ public class GameAction {
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
-                            if (c.getNetToughness() <= dmg.intValue()) {
+                            if (c.getLethal() <= dmg.intValue()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
                                 }
@@ -997,7 +1005,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
+                    else if (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }

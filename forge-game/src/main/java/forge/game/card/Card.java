@@ -129,6 +129,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().enumSetValues(Keyword.class).build();
 
+    private final Map<CounterType, Long> counterTypeTimestamps = Maps.newEnumMap(CounterType.class);
+
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
 
@@ -220,7 +222,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private int turnInZone;
 
-    private int xManaCostPaid = 0;
     private Map<String, Integer> xManaCostPaidByColor;
 
     private int sunburstValue = 0;
@@ -1087,10 +1088,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final int getXManaCostPaid() {
-        return xManaCostPaid;
-    }
-    public final void setXManaCostPaid(final int n) {
-        xManaCostPaid = n;
+        if (getCastSA() != null) {
+            Integer paid = getCastSA().getXManaCostPaid();
+            return paid == null ? 0 : paid;
+        }
+        return 0;
     }
 
     public final Map<String, Integer> getXManaCostPaidByColor() {
@@ -1305,10 +1307,42 @@ public class Card extends GameEntity implements Comparable<Card> {
             getController().addCounterToPermThisTurn(counterType, addAmount);
             view.updateCounters(this);
         }
+        if (newValue <= 0) {
+            removeCounterTimestamp(counterType);
+        } else {
+            addCounterTimestamp(counterType);
+        }
         if (table != null) {
             table.put(this, counterType, addAmount);
         }
         return addAmount;
+    }
+
+    public boolean addCounterTimestamp(CounterType counterType) {
+        return addCounterTimestamp(counterType, true);
+    }
+    public boolean addCounterTimestamp(CounterType counterType, boolean updateView) {
+        if (!counterType.isKeywordCounter()) {
+            return false;
+        }
+        removeCounterTimestamp(counterType);
+
+        long timestamp = game.getNextTimestamp();
+        counterTypeTimestamps.put(counterType, timestamp);
+        addChangedCardKeywords(ImmutableList.of(counterType.getKeyword().toString()), null, false, false, timestamp, updateView);
+        return true;
+    }
+
+    public boolean removeCounterTimestamp(CounterType counterType) {
+        return removeCounterTimestamp(counterType, true);
+    }
+
+    public boolean removeCounterTimestamp(CounterType counterType, boolean updateView) {
+        Long old = counterTypeTimestamps.remove(counterType);
+        if (old != null) {
+            removeChangedCardKeywords(old, updateView);
+        }
+        return old != null;
     }
 
     /**
@@ -1358,6 +1392,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         setCounters(counterName, newValue);
         view.updateCounters(this);
 
+        if (newValue <= 0) {
+            this.removeCounterTimestamp(counterName);
+        }
+
         //fire card stats changed event if p/t bonuses or loyalty changed from subtracted counters
         if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
             getGame().fireEvent(new GameEventCardStatsChanged(this));
@@ -1380,8 +1418,23 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final void setCounters(final Map<CounterType, Integer> allCounters) {
+        boolean changed = false;
+        for (CounterType ct : counters.keySet()) {
+            if (removeCounterTimestamp(ct, false)) {
+                changed = true;
+            }
+        }
         counters = allCounters;
         view.updateCounters(this);
+
+        for (CounterType ct : counters.keySet()) {
+            if (addCounterTimestamp(ct, false)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            updateKeywords();
+        }
     }
 
     @Override
@@ -1389,6 +1442,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (counters.isEmpty()) { return; }
         counters.clear();
         view.updateCounters(this);
+
+        boolean changed = false;
+        for (CounterType ct : counterTypeTimestamps.keySet()) {
+            if (removeCounterTimestamp(ct, false)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            updateKeywords();
+        }
     }
 
     public final String getSVar(final String var) {
@@ -3938,7 +4001,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywordsGrantedByTextChanges.add(newKw);
             }
         }
-        addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        if (!addKeywords.isEmpty() || !removeKeywords.isEmpty()) {
+            addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, true);
+        }
     }
 
     private void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {
@@ -4729,9 +4794,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
+    // this is the amount of damage a creature needs to receive before it dies
+    public final int getLethal() {
+        if (getAmountOfKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.") % 2 !=0) {
+            return getNetPower(); }
+        else {
+            return getNetToughness(); }
+    }
+
     // this is the minimal damage a trampling creature has to assign to a blocker
     public final int getLethalDamage() {
-        return getNetToughness() - getDamage() - getTotalAssignedDamage();
+        if (getAmountOfKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.") % 2 !=0) {
+            return getNetPower() - getDamage() - getTotalAssignedDamage();
+        }
+        else {
+            return getNetToughness() - getDamage() - getTotalAssignedDamage();}
     }
 
     public final int getDamage() {
@@ -6273,10 +6350,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addGoad(Long timestamp, final Player p) {
         goad.put(timestamp, p);
+        updateAbilityTextForView();
     }
 
     public final void removeGoad(Long timestamp) {
-        goad.remove(timestamp);
+        if (goad.remove(timestamp) != null) {
+            updateAbilityTextForView();
+        }
     }
 
     public final boolean isGoaded() {
@@ -6353,6 +6433,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         removeSVar("PayX"); // Temporary AI X announcement variable
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
+        setXManaCostPaidByColor(null);
+        setKickerMagnitude(0);
+        setPseudoMultiKickerMagnitude(0);
     }
 
     public final int getFinalChapterNr() {

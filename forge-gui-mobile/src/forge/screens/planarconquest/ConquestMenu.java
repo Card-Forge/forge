@@ -56,7 +56,7 @@ public class ConquestMenu extends FPopupMenu {
             setCurrentScreen(collectionScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.HDMULTI, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);

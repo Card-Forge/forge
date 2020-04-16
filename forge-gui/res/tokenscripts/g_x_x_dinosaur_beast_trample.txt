@@ -1,0 +1,7 @@
+Name:Dinosaur Beast
+Colors:green
+ManaCost:no cost
+PT:*/*
+Types:Creature Dinosaur Beast
+K:Trample
+Oracle:Trample

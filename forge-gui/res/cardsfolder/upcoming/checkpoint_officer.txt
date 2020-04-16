@@ -1,0 +1,7 @@
+Name:Checkpoint Officer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:NonCombatPriority:5
+Oracle:{1}{W}, {T}: Tap target creature.

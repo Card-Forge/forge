@@ -1,0 +1,8 @@
+[format]
+Name:Historic
+Type:Digital
+Subtype:Arena
+Effective:2019-11-21
+Order:142
+Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2
+Banned:Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

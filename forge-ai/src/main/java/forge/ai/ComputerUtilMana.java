@@ -1169,7 +1169,7 @@ public class ComputerUtilMana {
             cost.increaseShard(shardToGrow, manaToAdd);
 
             if (!test) {
-                card.setXManaCostPaid(manaToAdd / cost.getXcounter());
+                sa.setXManaCostPaid(manaToAdd / cost.getXcounter());
             }
         }
         
