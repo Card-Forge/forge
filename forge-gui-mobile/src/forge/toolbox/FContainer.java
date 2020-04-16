@@ -61,7 +61,7 @@ public abstract class FContainer extends FDisplayObject {
                         g.setAlphaComposite(DISABLED_COMPOSITE);
                     }
     
-                    g.draw(child);
+                    g.draw(child, false);
     
                     if (disabled) {
                         g.resetAlphaComposite();
