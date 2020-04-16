@@ -436,13 +436,13 @@ public class Forge implements ApplicationListener {
 
             graphics.begin(screenWidth, screenHeight);
             screen.screenPos.setSize(screenWidth, screenHeight);
-            if (screen.getRotate180()) {
+            /*if (screen.getRotate180()) {
                 graphics.startRotateTransform(screenWidth / 2, screenHeight / 2, 180);
-            }
+            }*/
             screen.draw(graphics);
-            if (screen.getRotate180()) {
+            /*if (screen.getRotate180()) {
                 graphics.endTransform();
-            }
+            }*/
             for (FOverlay overlay : FOverlay.getOverlays()) {
                 if (overlay.isVisibleOnScreen(currentScreen)) {
                     overlay.screenPos.setSize(screenWidth, screenHeight);
