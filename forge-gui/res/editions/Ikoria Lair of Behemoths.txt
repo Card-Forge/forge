@@ -150,7 +150,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 138 C Tentative Connection
 139 R Unpredictable Cyclone
 140 U Weaponize the Monsters
-141 M Yidaro, Wandering Monster
+141 R Yidaro, Wandering Monster
 142 C Adventurous Impulse
 143 C Almighty Brushwagg
 144 U Auspicious Starrix
