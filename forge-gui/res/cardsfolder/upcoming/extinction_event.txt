@@ -1,0 +1,9 @@
+Name:Extinction Event
+ManaCost:3 B
+Types:Sorcery
+A:SP$ GenericChoice | Cost$ 3 B | Choices$ Odd,Even | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose odd or even. Exile each creature with converted mana cost of the chosen value. (Zero is even.)
+SVar:Odd:DB$ StoreSVar | SVar$ X | References$ X | Type$ Number | Expression$ 1 | SubAbility$ DBExile | SpellDescription$ Odd
+SVar:Even:DB$ StoreSVar | SVar$ X | References$ X | Type$ Number | Expression$ 0 | SubAbility$ DBExile | SpellDescription$ Even
+SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Creature.cmcM2X | References$ X | Origin$ Battlefield | Destination$ Exile
+SVar:X:Count$0
+Oracle:Choose odd or even. Exile each creature with converted mana cost of the chosen value. (Zero is even.)
