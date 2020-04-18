@@ -115,9 +115,6 @@ public class Graphics {
     }
 
     public void draw(FDisplayObject displayObj) {
-        draw(displayObj, true);
-    }
-    public void draw(FDisplayObject displayObj, boolean noRotation) {
         if (displayObj.getWidth() <= 0 || displayObj.getHeight() <= 0) {
             return;
         }
@@ -136,11 +133,11 @@ public class Graphics {
             final Rectangle backup = visibleBounds;
             visibleBounds = intersection;
 
-            if (displayObj.getRotate90() && !noRotation) { //use top-right corner of bounds as pivot point
+            if (displayObj.getRotate90()) { //use top-right corner of bounds as pivot point
                 startRotateTransform(displayObj.getWidth(), 0, -90);
                 updateScreenPosForRotation(displayObj);
             }
-            else if (displayObj.getRotate180() && !noRotation) { //use center of bounds as pivot point
+            else if (displayObj.getRotate180()) { //use center of bounds as pivot point
                 startRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
                 //screen position won't change for this object from a 180 degree rotation
             }
@@ -148,7 +145,6 @@ public class Graphics {
             displayObj.draw(this);
 
             if (displayObj.getRotate90() || displayObj.getRotate180()) {
-                if(!noRotation)
                     endTransform();
             }
 
