@@ -624,17 +624,17 @@ public class Graphics {
 
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
-        transforms.add(0, new Matrix4(batch.getTransformMatrix().idt())); //backup current transform matrix at index 0
+        transforms.add(0, new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
         batch.getTransformMatrix().idt().translate(adjustX(originX), adjustY(originY, 0), 0).rotate(Vector3.Z, rotation).translate(-adjustX(originX), -adjustY(originY, 0), 0);
         batch.begin();
     }
 
     public void endTransform() {
         batch.end();
-        batch.getTransformMatrix().idt(); //reset
-        batch.getTransformMatrix().set(transforms.get(0)); //get the backup at index 0
         shapeRenderer.setTransformMatrix(transforms.get(0));
         transforms.pop();
+        batch.getTransformMatrix().idt(); //reset
+        shapeRenderer.getTransformMatrix().idt(); //reset
         batch.begin();
     }
 
