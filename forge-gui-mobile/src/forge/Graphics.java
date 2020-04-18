@@ -640,8 +640,8 @@ public class Graphics {
     public void endTransform() {
         batch.end();
         batch.getTransformMatrix().set(transforms.get(0)); //get the backup at index 0
+        shapeRenderer.setTransformMatrix(transforms.get(0));
         transforms.pop();
-        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         batch.begin();
     }
 
