@@ -630,7 +630,7 @@ public class Graphics {
         batch.end();
         float dx = adjustX(originX);
         float dy = adjustY(originY, 0);
-        transforms.add(new Matrix4(batch.getTransformMatrix())); //backup current transform matrix
+        transforms.add(0, new Matrix4(batch.getTransformMatrix())); //backup current transform matrix at index 0
         batch.getTransformMatrix().translate(dx, dy, 0);
         batch.getTransformMatrix().rotate(Vector3.Z, rotation);
         batch.getTransformMatrix().translate(-dx, -dy, 0);
@@ -639,10 +639,9 @@ public class Graphics {
 
     public void endTransform() {
         batch.end();
-        if (!transforms.empty()) { //??? EmptyStackException encountered on mobile
-            batch.getTransformMatrix().set(transforms.pop());
-            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
-        }
+        batch.getTransformMatrix().set(transforms.get(0)); //get the backup at index 0
+        transforms.pop();
+        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         batch.begin();
     }
 
