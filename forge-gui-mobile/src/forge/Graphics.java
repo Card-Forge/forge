@@ -624,6 +624,7 @@ public class Graphics {
 
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
+        batch.getTransformMatrix().idt(); //reset
         float dx = adjustX(originX);
         float dy = adjustY(originY, 0);
         transforms.add(0, new Matrix4(batch.getTransformMatrix())); //backup current transform matrix at index 0
@@ -635,6 +636,7 @@ public class Graphics {
 
     public void endTransform() {
         batch.end();
+        batch.getTransformMatrix().idt(); //reset
         batch.getTransformMatrix().set(transforms.get(0)); //get the backup at index 0
         shapeRenderer.setTransformMatrix(transforms.get(0));
         transforms.pop();
