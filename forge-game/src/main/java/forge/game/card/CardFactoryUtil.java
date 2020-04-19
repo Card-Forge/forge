@@ -909,6 +909,9 @@ public class CardFactoryUtil {
             return doXMath(c.getXManaCostPaidCount(colors.toString()), m, c);
         }
 
+        if (sq[0].equals("YouCycledThisTurn")) {
+            return doXMath(cc.getCycledThisTurn(), m, c);
+        }
 
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(cc.getNumDrawnThisTurn(), m, c);

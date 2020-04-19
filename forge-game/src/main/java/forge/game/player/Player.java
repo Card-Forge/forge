@@ -93,6 +93,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedLastTurn = 0;
     private int investigatedThisTurn = 0;
     private int surveilThisTurn = 0;
+    private int cycledThisTurn = 0;
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
@@ -1269,7 +1270,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView drawCard() {
-        return drawCards(1);
+        return drawCards(1, null);
     }
 
     public void surveil(int num, SpellAbility cause) {
@@ -1339,8 +1340,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView drawCards(final int n) {
+        return drawCards(n, null);
+    }
+    public final CardCollectionView drawCards(final int n, SpellAbility cause) {
         final CardCollection drawn = new CardCollection();
-        final CardCollection toReveal = new CardCollection();
+        final Map<Player, CardCollection> toReveal = Maps.newHashMap();
 
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
@@ -1357,11 +1361,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (gameStarted && !canDraw()) {
                 return drawn;
             }
-            drawn.addAll(doDraw(toReveal));
+            drawn.addAll(doDraw(toReveal, cause));
         }
-        if (toReveal.size() > 1) {
-            // reveal multiple drawn cards when playing with the top of the library revealed
-            game.getAction().reveal(toReveal, this, true, "Revealing cards drawn from ");
+
+        // reveal multiple drawn cards when playing with the top of the library revealed
+        for (Map.Entry<Player, CardCollection> e : toReveal.entrySet()) {
+            if (e.getValue().size() > 1) {
+                game.getAction().revealTo(e.getValue(), e.getKey(), "Revealing cards drawn from ");
+            }
         }
         return drawn;
     }
@@ -1369,31 +1376,36 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * @return a CardCollectionView of cards actually drawn
      */
-    private CardCollectionView doDraw(CardCollection revealed) {
+    private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility cause) {
         final CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
         // Replacement effects
-        if (game.getReplacementHandler().run(ReplacementType.Draw, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Cause, cause);
+        if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
         if (!library.isEmpty()) {
             Card c = library.get(0);
-            boolean topCardRevealed = false;
 
-            for (Player p : this.getAllOtherPlayers()) {
+            List<Player> pList = Lists.newArrayList();
+
+            for (Player p : getAllOtherPlayers()) {
                 if (c.mayPlayerLook(p)) {
-                    topCardRevealed = true;
-                    break;
+                    pList.add(p);
                 }
             }
 
-            c = game.getAction().moveToHand(c, null);
+            c = game.getAction().moveToHand(c, cause);
             drawn.add(c);
 
-            if (topCardRevealed) {
-                revealed.add(c);
+            for(Player p : pList) {
+                if (!revealed.containsKey(p)) {
+                    revealed.put(p, new CardCollection());
+                }
+                revealed.get(p).add(c);
             }
 
             setLastDrawnCard(c);
@@ -2454,6 +2466,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetLandsPlayedThisTurn();
         resetInvestigatedThisTurn();
         resetSurveilThisTurn();
+        resetCycledThisTurn();
         resetSacrificedThisTurn();
         resetCounterToPermThisTurn();
         clearAssignedDamage();
@@ -3156,5 +3169,23 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
         return controlVotes.last();
+    }
+
+    public void addCycled(SpellAbility sp) {
+        cycledThisTurn++;
+
+        Map<AbilityKey, Object> cycleParams = AbilityKey.mapFromCard(sp.getHostCard());
+        cycleParams.put(AbilityKey.Cause, sp);
+        cycleParams.put(AbilityKey.Player, this);
+        cycleParams.put(AbilityKey.NumThisTurn, cycledThisTurn);
+        game.getTriggerHandler().runTrigger(TriggerType.Cycled, cycleParams, false);
+    }
+
+    public int getCycledThisTurn() {
+        return cycledThisTurn;
+    }
+
+    public void resetCycledThisTurn() {
+        cycledThisTurn = 0;
     }
 }
