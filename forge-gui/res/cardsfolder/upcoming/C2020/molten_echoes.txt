@@ -1,0 +1,8 @@
+Name:Molten Echoes
+ManaCost:2 R R
+Types:Enchantment
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+ChosenType+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopyPermanent | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature of the chosen type enters the battlefield under your control, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 1 | PumpKeywords$ Haste | AtEOT$ Exile
+Oracle:As Molten Echoes enters the battlefield, choose a creature type.\nWhenever a nontoken creature of the chosen type enters the battlefield under your control, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
