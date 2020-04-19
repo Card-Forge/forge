@@ -877,6 +877,16 @@ public class CardProperty {
                             }
                         }
                         return false;
+                    default:
+                        final CardCollection cards1 = AbilityUtils.getDefinedCards(card, restriction, spellAbility);
+                        if (cards1.isEmpty()) {
+                            return false;
+                        }
+                        for (Card c : cards1) {
+                            if (!card.sharesCardTypeWith(c)) {
+                                return false;
+                            }
+                        }
                 }
             }
         } else if (property.equals("sharesPermanentTypeWith")) {

@@ -1461,12 +1461,18 @@ public class GameAction {
         revealTo(card, Collections.singleton(to));
     }
     public void revealTo(final CardCollectionView cards, final Player to) {
-        revealTo(cards, Collections.singleton(to));
+        revealTo(cards, to, null);
+    }
+    public void revealTo(final CardCollectionView cards, final Player to, String messagePrefix) {
+        revealTo(cards, Collections.singleton(to), messagePrefix);
     }
     public void revealTo(final Card card, final Iterable<Player> to) {
         revealTo(new CardCollection(card), to);
     }
     public void revealTo(final CardCollectionView cards, final Iterable<Player> to) {
+        revealTo(cards, to, null);
+    }
+    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix) {
         if (cards.isEmpty()) {
             return;
         }
@@ -1474,7 +1480,7 @@ public class GameAction {
         final ZoneType zone = cards.getFirst().getZone().getZoneType();
         final Player owner = cards.getFirst().getOwner();
         for (final Player p : to) {
-            p.getController().reveal(cards, zone, owner);
+            p.getController().reveal(cards, zone, owner, messagePrefix);
         }
     }
 

@@ -345,7 +345,7 @@ public class HumanPlay {
                 }
 
                 for (Player player : res) {
-                    player.drawCards(amount);
+                    player.drawCards(amount, sourceAbility);
                 }
             }
             else if (part instanceof CostGainLife) {
