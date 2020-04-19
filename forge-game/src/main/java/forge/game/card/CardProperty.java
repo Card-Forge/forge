@@ -1464,9 +1464,15 @@ public class CardProperty {
             if (property.equals("attacking"))    return combat.isAttacking(card);
             if (property.equals("attackingLKI")) return combat.isLKIAttacking(card);
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
-            if (property.equals("attackingYouOrYourPW"))  {
+            if (property.equals("attackingYouOrYourPW")) {
                 Player defender = combat.getDefenderPlayerByAttacker(card);
                 if (!sourceController.equals(defender)) {
+                    return false;
+                }
+            }
+            if (property.equals("attackingOpponent")) {
+                Player defender = combat.getDefenderPlayerByAttacker(card);
+                if (!sourceController.isOpponentOf(defender)) {
                     return false;
                 }
             }
