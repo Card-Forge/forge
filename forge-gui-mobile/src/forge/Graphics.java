@@ -631,7 +631,7 @@ public class Graphics {
 
     public void endTransform() {
         batch.end();
-        shapeRenderer.setTransformMatrix(transforms.get(0));
+        shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
         transforms.pop();
         batch.getTransformMatrix().idt(); //reset
         shapeRenderer.getTransformMatrix().idt(); //reset
