@@ -30,7 +30,6 @@ import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
-import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -70,8 +69,6 @@ public class MatchController extends AbstractGuiGame {
 
     private static final Map<String, FImage> avatarImages = new HashMap<>();
 
-    private static final Map<String, FImage> sleeveImages = new HashMap<>();
-
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
 
@@ -107,12 +104,7 @@ public class MatchController extends AbstractGuiGame {
     public static FImage getPlayerSleeve(final PlayerView p) {
         if (p == null)
             return FSkinImage.UNKNOWN;
-        final String lp = p.getLobbyPlayerName();
-        FImage sleeve = sleeveImages.get(lp);
-        if (sleeve == null) {
-            sleeve = new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
-        }
-        return sleeve;
+        return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }
 
     @Override
@@ -208,13 +200,16 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void updatePhase() {
-        final GameView gameView = getGameView();
-        final PlayerView p = gameView.getPlayerTurn();
-        final PhaseType ph = gameView.getPhase();
+        final PlayerView p = getGameView().getPlayerTurn();
+        final PhaseType ph = getGameView().getPhase();
 
         PhaseLabel lbl = null;
-        if(p != null && ph != null)
-            lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+
+        if(ph!=null) {
+            lbl = p == null ? null : view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        } else {
+            System.err.println("getGameView().getPhase() returned 'null'");
+        }
 
         view.resetAllPhaseButtons();
         if (lbl != null) {

@@ -145,7 +145,7 @@ public class Graphics {
             displayObj.draw(this);
 
             if (displayObj.getRotate90() || displayObj.getRotate180()) {
-                endTransform();
+                    endTransform();
             }
 
             visibleBounds = backup;
@@ -624,19 +624,17 @@ public class Graphics {
 
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
-        float dx = adjustX(originX);
-        float dy = adjustY(originY, 0);
-        transforms.add(new Matrix4(batch.getTransformMatrix())); //backup current transform matrix
-        batch.getTransformMatrix().translate(dx, dy, 0);
-        batch.getTransformMatrix().rotate(Vector3.Z, rotation);
-        batch.getTransformMatrix().translate(-dx, -dy, 0);
+        transforms.add(0, new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
+        batch.getTransformMatrix().idt().translate(adjustX(originX), adjustY(originY, 0), 0).rotate(Vector3.Z, rotation).translate(-adjustX(originX), -adjustY(originY, 0), 0);
         batch.begin();
     }
 
     public void endTransform() {
         batch.end();
-        batch.getTransformMatrix().set(transforms.pop());
-        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+        shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
+        transforms.pop();
+        batch.getTransformMatrix().idt(); //reset
+        shapeRenderer.getTransformMatrix().idt(); //reset
         batch.begin();
     }
 

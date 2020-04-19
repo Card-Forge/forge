@@ -397,6 +397,7 @@ public enum FSkinProp {
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLYING         (new int[] {330, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HASTE          (new int[] {412, 494, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HEXPROOF       (new int[] {412, 2, 80, 80}, PropType.ABILITY),
