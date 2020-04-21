@@ -146,6 +146,7 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
+        view.resetFields();
 
         if (noHumans) {
             //add special object that pauses game if screen touched
@@ -215,6 +216,13 @@ public class MatchController extends AbstractGuiGame {
         if (lbl != null) {
             lbl.setActive(true);
         }
+        if(GuiBase.isNetworkplay())
+            checkStack();
+    }
+
+
+    public void checkStack() {
+        view.getStack().checkEmptyStack();
     }
 
     @Override
