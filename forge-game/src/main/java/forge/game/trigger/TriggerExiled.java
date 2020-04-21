@@ -57,6 +57,7 @@ public class TriggerExiled extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
         if (hasParam("Origin")) {
             if (!getParam("Origin").equals("Any")) {
                 if (getParam("Origin") == null) {
@@ -92,6 +93,16 @@ public class TriggerExiled extends Trigger {
                 return false;
             }
         }
+
+        if (hasParam("CauseParam")) {
+            // For now only for Heart-Piecer Manticore, extend it if it appears on different effects too
+            if (sourceSA == null || !sourceSA.hasParam("ExileParam")
+                    || !sourceSA.getParam("ExileParam").equals(getParam("CauseParam"))
+                    || !sourceSA.getHostCard().equals(this.getHostCard())) {
+                return false;
+            }
+        }
+
 
         return true;
     }
