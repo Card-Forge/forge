@@ -19,7 +19,9 @@ import forge.assets.FSkinFont;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 import forge.util.TextBounds;
-import java.util.Stack;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -27,7 +29,7 @@ public class Graphics {
 
     private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
-    private final Stack<Matrix4> transforms = new Stack<>();
+    private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
     private float regionHeight;
     private Rectangle bounds;
@@ -70,7 +72,7 @@ public class Graphics {
         batch.flush(); //must flush batch to prevent other things not rendering
 
         Rectangle clip = new Rectangle(adjustX(x), adjustY(y, h), w, h);
-        if (!transforms.isEmpty()) { //transform position if needed
+        if (!Dtransforms.isEmpty()) { //transform position if needed
             tmp.set(clip.x, clip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             float minX = tmp.x;
@@ -121,7 +123,7 @@ public class Graphics {
 
         final Rectangle parentBounds = bounds;
         bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
-        if (!transforms.isEmpty()) { //transform screen position if needed by applying transform matrix to rectangle
+        if (!Dtransforms.isEmpty()) { //transform screen position if needed by applying transform matrix to rectangle
             updateScreenPosForRotation(displayObj);
         }
         else {
@@ -542,7 +544,7 @@ public class Graphics {
     }
 
     private void startShape(ShapeType shapeType) {
-        if (!transforms.isEmpty()) {
+        if (!Dtransforms.isEmpty()) {
             //must copy matrix before starting shape if transformed
             shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         }
@@ -624,7 +626,7 @@ public class Graphics {
 
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
-        transforms.add(0, new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
+        Dtransforms.addFirst(new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
         batch.getTransformMatrix().idt().translate(adjustX(originX), adjustY(originY, 0), 0).rotate(Vector3.Z, rotation).translate(-adjustX(originX), -adjustY(originY, 0), 0);
         batch.begin();
     }
@@ -632,7 +634,7 @@ public class Graphics {
     public void endTransform() {
         batch.end();
         shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
-        transforms.pop();
+        Dtransforms.removeFirst();
         batch.getTransformMatrix().idt(); //reset
         shapeRenderer.getTransformMatrix().idt(); //reset
         batch.begin();
