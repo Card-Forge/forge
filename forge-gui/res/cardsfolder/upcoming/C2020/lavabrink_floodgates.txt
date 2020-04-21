@@ -1,0 +1,14 @@
+Name:Lavabrink Floodgates
+ManaCost:3 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R R | SpellDescription$ Add {R}{R}.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDecide | TriggerDescription$ At the beginning of each player's upkeep, that player may put a doom counter on CARDNAME or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice it. When you do, it deals 6 damage to each creature.
+SVar:TrigDecide:DB$ GenericChoice | Defined$ TriggeredPlayer | Choices$ PutCounter,RemoveCounter,DoNothing
+SVar:PutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1 | Placer$ TriggeredPlayer | SubAbility$ DBSac | SpellDescription$ Put a doom counter on CARDNAME
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE3_DOOM | SacrificeParam$ LavabrinkFloodgates | SubAbility$ DBDamage
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | CauseParam$ LavabrinkFloodgates | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ CARDNAME deals 6 damage to each creature.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 6
+SVar:RemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1 | SpellDescription$ Remove a doom counter from CARDNAME
+SVar:DoNothing:DB$ Pump | Defined$ Self | SpellDescription$ Do not change the number of doom counters on CARDNAME
+AI:RemoveDeck:All
+Oracle:{T}: Add {R}{R}.\nAt the beginning of each player's upkeep, that player may put a doom counter on Lavabrink Floodgates or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice it. When you do, it deals 6 damage to each creature.
