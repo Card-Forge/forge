@@ -36,6 +36,7 @@ public class Graphics {
     private Rectangle visibleBounds;
     private int failedClipCount;
     private float alphaComposite = 1;
+    private int transformCount = 0;
 
     public Graphics() {
     }
@@ -627,6 +628,7 @@ public class Graphics {
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
         Dtransforms.addFirst(new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
+        transformCount++;
         batch.getTransformMatrix().idt().translate(adjustX(originX), adjustY(originY, 0), 0).rotate(Vector3.Z, rotation).translate(-adjustX(originX), -adjustY(originY, 0), 0);
         batch.begin();
     }
@@ -635,6 +637,12 @@ public class Graphics {
         batch.end();
         shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
         Dtransforms.removeFirst();
+        transformCount--;
+        if(transformCount != Dtransforms.size()) {
+            System.err.println(String.format("Stack count: %d, transformCount: %d", Dtransforms.size(), transformCount));
+            transformCount = 0;
+            Dtransforms.clear();
+        }
         batch.getTransformMatrix().idt(); //reset
         shapeRenderer.getTransformMatrix().idt(); //reset
         batch.begin();

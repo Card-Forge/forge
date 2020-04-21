@@ -71,7 +71,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int turn = 0;
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<>();
-    private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = Maps.newEnumMap(PhaseType.class);
+    private final transient Map<PhaseType, Deque<PhaseType>> DextraPhases = Maps.newEnumMap(PhaseType.class);
 
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
@@ -151,12 +151,12 @@ public class PhaseHandler implements java.io.Serializable {
         else {
             // If the phase that's ending has a stack of additional phases
             // Take the LIFO one and move to that instead of the normal one
-            if (extraPhases.containsKey(phase)) {
-                PhaseType nextPhase = extraPhases.get(phase).pop();
+            if (DextraPhases.containsKey(phase)) {
+                PhaseType nextPhase = DextraPhases.get(phase).removeFirst();
                 // If no more additional phases are available, remove it from the map
                 // and let the next add, reput the key
-                if (extraPhases.get(phase).isEmpty()) {
-                    extraPhases.remove(phase);
+                if (DextraPhases.get(phase).isEmpty()) {
+                    DextraPhases.remove(phase);
                 }
                 setPhase(nextPhase);
             }
@@ -918,10 +918,10 @@ public class PhaseHandler implements java.io.Serializable {
     public final void addExtraPhase(final PhaseType afterPhase, final PhaseType extraPhase) {
         // 500.8. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase.
         // If multiple extra phases are created after the same phase, the most recently created phase will occur first.
-        if (!extraPhases.containsKey(afterPhase)) {
-            extraPhases.put(afterPhase, new Stack<>());
+        if (!DextraPhases.containsKey(afterPhase)) {
+            DextraPhases.put(afterPhase, new ArrayDeque<>());
         }
-        extraPhases.get(afterPhase).push(extraPhase);
+        DextraPhases.get(afterPhase).addFirst(extraPhase);
     }
 
     public final boolean isFirstCombat() {
@@ -1159,7 +1159,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final void endTurnByEffect() {
         endCombat();
-        extraPhases.clear();
+        DextraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
     }
