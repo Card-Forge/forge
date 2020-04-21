@@ -331,11 +331,11 @@ Type=Other
 [tokens]
 b_2_2_zombie
 c_a_treasure_sac
+g_0_0_hydra
 g_1_1_insect_flying_deathtouch
 g_1_1_saproling
 g_1_1_snake
 g_4_4_beast
-g_x_x_hydra
 r_3_1_elemental
 rg_1_1_goblin_warrior
 rw_2_2_dinosaur_cat
