@@ -112,9 +112,12 @@ public class PlayerPanel extends FContainer {
         deckChooser = new FDeckChooser(GameType.Constructed, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnDeck.setEnabled(true);
+                btnDeck.setEnabled(mayEdit);
                 btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ": " +
                         Lang.joinHomogenous(((DeckManager)e.getSource()).getSelectedItems(), DeckProxy.FN_GET_NAME));
+                if (allowNetworking && btnDeck.isEnabled() && humanAiSwitch.isToggled()) { //if its ready but changed the deck, update it
+                    screen.updateMyDeck(index);
+                }
             }
         });
         lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi, new FEventHandler() {
@@ -123,6 +126,9 @@ public class PlayerPanel extends FContainer {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstCommanderDecks.saveState();
+                    if (allowNetworking && btnCommanderDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck"));
                 }
@@ -134,6 +140,9 @@ public class PlayerPanel extends FContainer {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstOathbreakerDecks.saveState();
+                    if (allowNetworking && btnOathbreakDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck"));
                 }
@@ -145,6 +154,9 @@ public class PlayerPanel extends FContainer {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstTinyLeadersDecks.saveState();
+                    if (allowNetworking && btnTinyLeadersDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck"));
                 }
@@ -156,6 +168,9 @@ public class PlayerPanel extends FContainer {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstBrawlDecks.saveState();
+                    if (allowNetworking && btnBrawlDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck"));
                 }
@@ -166,6 +181,9 @@ public class PlayerPanel extends FContainer {
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
                     btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    if (allowNetworking && btnSchemeDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck"));
                 }
@@ -176,6 +194,9 @@ public class PlayerPanel extends FContainer {
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
                     btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    if (allowNetworking && btnPlanarDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
                 }else{
                     btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck"));
                 }
@@ -185,6 +206,9 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 btnVanguardAvatar.setText(localizer.getMessage("lblVanguard") + ": " + ((CardManager)e.getSource()).getSelectedItem().getName());
+                if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
+                    screen.updateMyDeck(index);
+                }
             }
         });
 
@@ -512,7 +536,32 @@ public class PlayerPanel extends FContainer {
     };
 
     public void setDeckSelectorButtonText(String text) {
-        btnDeck.setText(text);
+        if (btnDeck.isVisible())
+            btnDeck.setText(text);
+
+        if (btnCommanderDeck.isVisible())
+            btnCommanderDeck.setText(text);
+
+        if (btnOathbreakDeck.isVisible())
+            btnOathbreakDeck.setText(text);
+
+        if (btnTinyLeadersDeck.isVisible())
+            btnTinyLeadersDeck.setText(text);
+
+        if (btnBrawlDeck.isVisible())
+            btnBrawlDeck.setText(text);
+    }
+
+    public void setVanguarAvatarName(String text) {
+        btnVanguardAvatar.setText(text);
+    }
+
+    public void setSchemeDeckName(String text) {
+        btnSchemeDeck.setText(text);
+    }
+
+    public void setPlanarDeckName(String text) {
+        btnPlanarDeck.setText(text);
     }
 
     public void updateVariantControlsVisibility() {
@@ -525,6 +574,7 @@ public class PlayerPanel extends FContainer {
         boolean isArchenemyApplied = false;
         boolean archenemyVisiblity = false;
         boolean isDeckBuildingAllowed = mayEdit;
+        boolean replacedbasicdeck = false;
 
         for (GameType variant : screen.getLobby().getAppliedVariants()) {
             switch (variant) {
@@ -540,18 +590,22 @@ public class PlayerPanel extends FContainer {
             case Commander:
                 isCommanderApplied = true;
                 isDeckBuildingAllowed = false; //Commander deck replaces basic deck, so hide that
+                replacedbasicdeck = true;
                 break;
             case Oathbreaker:
                 isOathbreakerApplied = true;
                 isDeckBuildingAllowed = false; //Oathbreaker deck replaces basic deck, so hide that
+                replacedbasicdeck = true;
                 break;
             case TinyLeaders:
                 isTinyLeadersApplied = true;
                 isDeckBuildingAllowed = false; //Tiny Leaders deck replaces basic deck, so hide that
+                replacedbasicdeck = true;
                 break;
             case Brawl:
                 isBrawlApplied = true;
                 isDeckBuildingAllowed = false; //Tiny Leaders deck replaces basic deck, so hide that
+                replacedbasicdeck = true;
                 break;
             case Planechase:
                 isPlanechaseApplied = true;
@@ -562,24 +616,85 @@ public class PlayerPanel extends FContainer {
             default:
                 if (variant.isAutoGenerated()) {
                     isDeckBuildingAllowed = false;
+                    replacedbasicdeck = true;
                 }
                 break;
             }
         }
 
-        btnDeck.setVisible(isDeckBuildingAllowed);
-        btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
-        btnOathbreakDeck.setVisible(isOathbreakerApplied && mayEdit);
-        btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
-        btnBrawlDeck.setVisible(isBrawlApplied && mayEdit);
+        if(allowNetworking) {
+            if (replacedbasicdeck) {
+                btnDeck.setVisible(false);
+            } else {
+                btnDeck.setVisible(true);
+                btnDeck.setEnabled(mayEdit);
+            }
+            if (isCommanderApplied) {
+                btnCommanderDeck.setVisible(true);
+                btnCommanderDeck.setEnabled(mayEdit);
+            } else {
+                btnCommanderDeck.setVisible(false);
+            }
+            if (isOathbreakerApplied) {
+                btnOathbreakDeck.setVisible(true);
+                btnOathbreakDeck.setEnabled(mayEdit);
+            } else {
+                btnOathbreakDeck.setVisible(false);
+            }
+            if (isTinyLeadersApplied) {
+                btnTinyLeadersDeck.setVisible(true);
+                btnTinyLeadersDeck.setEnabled(mayEdit);
+            } else {
+                btnTinyLeadersDeck.setVisible(false);
+            }
+            if (isBrawlApplied) {
+                btnBrawlDeck.setVisible(true);
+                btnBrawlDeck.setEnabled(mayEdit);
+            } else {
+                btnBrawlDeck.setVisible(false);
+            }
+            if (archenemyVisiblity) {
+                btnSchemeDeck.setVisible(true);
+                btnSchemeDeck.setEnabled(mayEdit);
+            } else {
+                btnSchemeDeck.setVisible(false);
+            }
+            if (!isArchenemyApplied) {
+                cbTeam.setVisible(true);
+                cbTeam.setEnabled(mayEdit);
+                cbArchenemyTeam.setVisible(false);
+            } else {
+                cbTeam.setVisible(false);
+                cbArchenemyTeam.setVisible(true);
+                cbArchenemyTeam.setEnabled(mayEdit);
+            }
+            if (isPlanechaseApplied) {
+                btnPlanarDeck.setVisible(true);
+                btnPlanarDeck.setEnabled(mayEdit);
+            } else {
+                btnPlanarDeck.setVisible(false);
+            }
+            if (isVanguardApplied) {
+                btnVanguardAvatar.setVisible(true);
+                btnVanguardAvatar.setEnabled(mayEdit);
+            } else {
+                btnVanguardAvatar.setVisible(false);
+            }
+        } else {
+            btnDeck.setVisible(isDeckBuildingAllowed);
+            btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
+            btnOathbreakDeck.setVisible(isOathbreakerApplied && mayEdit);
+            btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
+            btnBrawlDeck.setVisible(isBrawlApplied && mayEdit);
 
-        btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
+            btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
 
-        cbTeam.setVisible(!isArchenemyApplied);
-        cbArchenemyTeam.setVisible(isArchenemyApplied);
+            cbTeam.setVisible(!isArchenemyApplied);
+            cbArchenemyTeam.setVisible(isArchenemyApplied);
 
-        btnPlanarDeck.setVisible(isPlanechaseApplied && mayEdit);
-        btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
+            btnPlanarDeck.setVisible(isPlanechaseApplied && mayEdit);
+            btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
+        }
     }
 
     public boolean isNetworkHost() {
@@ -626,6 +741,8 @@ public class PlayerPanel extends FContainer {
                         pp.toggleIsPlayerArchenemy();
                     }
                 }
+            } else {
+                screen.updatemyTeam(index, getTeam());
             }
         }
     };
@@ -822,6 +939,16 @@ public class PlayerPanel extends FContainer {
         cbTeam.setEnabled(mayEdit);
         if (devModeSwitch != null) {
             devModeSwitch.setEnabled(mayEdit);
+        }
+        if(allowNetworking) {
+            btnDeck.setEnabled(mayEdit);
+            btnCommanderDeck.setEnabled(mayEdit);
+            btnOathbreakDeck.setEnabled(mayEdit);
+            btnTinyLeadersDeck.setEnabled(mayEdit);
+            btnBrawlDeck.setEnabled(mayEdit);
+            btnSchemeDeck.setEnabled(mayEdit);
+            btnPlanarDeck.setEnabled(mayEdit);
+            cbArchenemyTeam.setEnabled(mayEdit);
         }
         updateVariantControlsVisibility();
 
