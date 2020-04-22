@@ -220,6 +220,8 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if ("Never".equals(logic)) {
             return false;
+        } else if ("AlwaysWithNoTgt".equals(logic)) {
+            return true;
         } else if ("AristocratCounters".equals(logic)) {
             return PumpAi.doAristocratWithCountersLogic(sa, ai);
         } else if ("PayEnergy".equals(logic)) {
