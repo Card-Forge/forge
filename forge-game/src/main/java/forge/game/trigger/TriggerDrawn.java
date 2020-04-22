@@ -21,6 +21,8 @@ import forge.game.Game;
 import forge.game.GameStage;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -68,6 +70,13 @@ public class TriggerDrawn extends Trigger {
 
         if (hasParam("Number")) {
             if (number != Integer.parseInt(getParam("Number"))) {
+                return false;
+            }
+        }
+
+        if (hasParam("NotFirstCardInDrawStep")) {
+            final Player p = ((Player)runParams.get(AbilityKey.Player));
+            if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
                 return false;
             }
         }
