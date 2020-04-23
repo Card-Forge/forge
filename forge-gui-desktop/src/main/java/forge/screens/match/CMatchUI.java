@@ -966,6 +966,7 @@ public final class CMatchUI
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
         initMatch(players, myPlayers);
+        clearSelectables(); //fix uncleared selection
 
         actuateMatchPreferences();
 
