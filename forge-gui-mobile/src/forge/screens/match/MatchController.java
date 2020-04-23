@@ -147,6 +147,7 @@ public class MatchController extends AbstractGuiGame {
         }
         view = new MatchScreen(playerPanels);
         view.resetFields();
+        clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
             //add special object that pauses game if screen touched
