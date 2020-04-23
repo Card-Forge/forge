@@ -130,6 +130,8 @@ public class ForgeScript {
             return sa.isManaAbility();
         } else if (property.equals("nonManaAbility")) {
             return !sa.isManaAbility();
+        } else if (property.equals("withoutXCost")) {
+            return !sa.isXCost();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
         } else if (property.equals("Cycling")) {
