@@ -27,6 +27,7 @@ public enum AbilityKey {
     Blockers("Blockers"),
     CastSA("CastSA"),
     CastSACMC("CastSACMC"),
+    CastSAX("CastSAX"),
     Card("Card"),
     Cards("Cards"),
     CardLKI("CardLKI"),
