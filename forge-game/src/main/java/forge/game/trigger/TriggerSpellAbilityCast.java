@@ -278,8 +278,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             AbilityKey.Activator,
             AbilityKey.CurrentStormCount,
             AbilityKey.CurrentCastSpells,
-            AbilityKey.CastSACMC,
-            AbilityKey.CastSAX
+            AbilityKey.CastSACMC
         );
     }
 
