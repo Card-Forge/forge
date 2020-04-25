@@ -628,7 +628,6 @@ public class TriggerHandler {
         else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
-        regtrig.setTriggeredSA(wrapperAbility);
 
         regtrig.triggerRun();
 

@@ -563,4 +563,10 @@ public class WrappedAbility extends Ability {
     public void setXManaCostPaid(final Integer n) {
         sa.setXManaCostPaid(n);
     }
+
+    @Override
+    public void removeFromGame() {
+        super.removeFromGame();
+        getHostCard().getGame().removeSpellAbility(this.getWrappedAbility());
+    }
 }

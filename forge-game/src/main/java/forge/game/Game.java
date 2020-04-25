@@ -894,6 +894,9 @@ public class Game {
     public void clearCaches() {
         spabCache.clear();
         cardCache.clear();
+
+        lastStateBattlefield.clear();
+        lastStateGraveyard.clear();
         //playerCache.clear();
     }
 
