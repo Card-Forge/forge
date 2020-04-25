@@ -1352,7 +1352,7 @@ public class ComputerUtil {
                 if (valid.contains("Creature.YouCtrl")
                         || valid.contains("Other+YouCtrl") ) {
 
-                    final SpellAbility sa = t.getTriggeredSA();
+                    final SpellAbility sa = t.getOverridingAbility();
                     if (sa != null && sa.getApi() == ApiType.Pump && sa.hasParam("KW")
                             && sa.getParam("KW").contains("Haste")) {
                         return true;

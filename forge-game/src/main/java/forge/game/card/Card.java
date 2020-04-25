@@ -1056,23 +1056,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final Object getTriggeringObject(final AbilityKey typeIn) {
-        Object triggered = null;
-        if (!currentState.getTriggers().isEmpty()) {
-            for (final Trigger t : currentState.getTriggers()) {
-                final SpellAbility sa = t.getTriggeredSA();
-                if (sa == null) {
-                    continue;
-                }
-                triggered = sa.hasTriggeringObject(typeIn) ? sa.getTriggeringObject(typeIn) : null;
-                if (triggered != null) {
-                    break;
-                }
-            }
-        }
-        return triggered;
-    }
-
     public final int getSunburstValue() {
         return sunburstValue;
     }

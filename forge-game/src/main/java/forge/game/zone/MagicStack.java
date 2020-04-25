@@ -638,7 +638,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(true);
+        sa.setLastStateBattlefield(CardCollection.EMPTY);
+        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
+
+        if (sa.isTrigger()) {
+            sa.removeFromGame();
+        }
     }
 
     public final void remove(final Card c) {

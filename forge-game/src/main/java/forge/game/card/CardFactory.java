@@ -680,7 +680,6 @@ public class CardFactory {
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(sa.isMandatory());
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
-        t.setTriggeredSA(wrapperAbility);
         return wrapperAbility;
     }
 

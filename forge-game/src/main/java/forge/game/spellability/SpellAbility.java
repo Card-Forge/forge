@@ -1996,4 +1996,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setXManaCostPaid(final Integer n) {
         xManaCostPaid = n;
     }
+
+    public void removeFromGame() {
+        if (getHostCard() == null) {
+            return;
+        }
+
+        getHostCard().getGame().removeSpellAbility(this);
+
+        if (subAbility != null) {
+            subAbility.removeFromGame();
+        }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.removeFromGame();
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.removeFromGame();
+            }
+        }
+    }
 }
