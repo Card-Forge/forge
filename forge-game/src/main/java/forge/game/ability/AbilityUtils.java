@@ -1586,13 +1586,13 @@ public class AbilityUtils {
                     // If the chosen creature has X in its mana cost, that X is considered to be 0.
                     // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
                     if (sa.getOriginalHost() != null || !sa.getHostCard().equals(c)) {
-                        return 0;
+                        return CardFactoryUtil.doXMath(0, expr, c);
                     }
 
                     if (root.isTrigger()) {
                         Trigger t = root.getTrigger();
                         if (t == null) {
-                            return 0;
+                            return CardFactoryUtil.doXMath(0, expr, c);
                         }
 
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
@@ -1603,11 +1603,15 @@ public class AbilityUtils {
                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
                         } else if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like  Hydroid Krasis
-                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                            SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
+                            if (castSA == null || castSA.getXManaCostPaid() == null) {
+                                return CardFactoryUtil.doXMath(0, expr, c);
+                            }
+                            return CardFactoryUtil.doXMath(castSA.getXManaCostPaid(), expr, c);
                         } else if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
-                            if (cycleSA == null) {
-                                return 0;
+                            if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
+                                return CardFactoryUtil.doXMath(0, expr, c);
                             }
                             return CardFactoryUtil.doXMath(cycleSA.getXManaCostPaid(), expr, c);
                         }
@@ -1619,7 +1623,7 @@ public class AbilityUtils {
                         }
                     }
 
-                    return 0;
+                    return CardFactoryUtil.doXMath(0, expr, c);
                 }
 
                 // Count$Kicked.<numHB>.<numNotHB>
