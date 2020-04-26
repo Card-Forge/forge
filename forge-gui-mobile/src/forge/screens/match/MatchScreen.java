@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 
+import forge.screens.match.winlose.ViewWinLose;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -77,6 +78,8 @@ public class MatchScreen extends FScreen {
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
+
+    private ViewWinLose viewWinLose = null;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -292,6 +295,14 @@ public class MatchScreen extends FScreen {
         return topPlayerPanel;
     }
 
+    public void setViewWinLose( ViewWinLose viewWinLose ){
+        this.viewWinLose = viewWinLose;
+    }
+
+    public ViewWinLose getViewWinLose() {
+        return viewWinLose;
+    }
+
     public VPlayerPanel getBottomPlayerPanel() {
         return bottomPlayerPanel;
     }
@@ -482,9 +493,9 @@ public class MatchScreen extends FScreen {
     }
 
     public void resetFields() {
+        CardAreaPanel.resetForNewGame();
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             for (CardAreaPanel p : playerPanel.getField().getCardPanels()){
-                p.resetForNewGame();
                 p.reset();
             }
             playerPanel.getZoneTab(ZoneType.Hand).getDisplayArea().clear();
