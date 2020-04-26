@@ -493,9 +493,9 @@ public class MatchScreen extends FScreen {
     }
 
     public void resetFields() {
+        CardAreaPanel.resetForNewGame();
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             for (CardAreaPanel p : playerPanel.getField().getCardPanels()){
-                p.resetForNewGame();
                 p.reset();
             }
             playerPanel.getZoneTab(ZoneType.Hand).getDisplayArea().clear();
