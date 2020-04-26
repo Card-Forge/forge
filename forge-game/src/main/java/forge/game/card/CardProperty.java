@@ -1484,13 +1484,12 @@ public class CardProperty {
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;
-            }
-            if (what.startsWith("Remembered")) {
-                for (final Object o : source.getRemembered()) {
-                    if (o instanceof Card && combat.isBlocking(card, (Card) o)) {
+            } else {
+                for(Card c : AbilityUtils.getDefinedCards(source, what, spellAbility)) {
+                    if (combat.isBlocking(card, c)) {
                         return true;
                     }
-                }
+                };
                 return false;
             }
         } else if (property.startsWith("sharesBlockingAssignmentWith")) {
