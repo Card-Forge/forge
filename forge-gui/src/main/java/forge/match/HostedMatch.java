@@ -295,6 +295,7 @@ public class HostedMatch {
 
     public void endCurrentGame() {
         if (game == null) { return; }
+        boolean isMatchOver = game.getView().isMatchOver();
 
         game = null;
 
@@ -304,7 +305,8 @@ public class HostedMatch {
                 humanController.getGui().clearAutoYields();
             }
 
-            humanController.getGui().afterGameEnd();
+            if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
+                humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
     }
