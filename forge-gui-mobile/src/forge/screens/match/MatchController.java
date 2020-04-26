@@ -226,6 +226,11 @@ public class MatchController extends AbstractGuiGame {
         view.getStack().checkEmptyStack();
     }
 
+    public void showWinlose() {
+        if (view.getViewWinLose() != null)
+            view.getViewWinLose().setVisible(true);
+    }
+
     @Override
     public void updateTurn(final PlayerView player) {
     }
@@ -254,7 +259,8 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
-            new ViewWinLose(getGameView()).setVisible(true);
+            view.setViewWinLose(new ViewWinLose(getGameView()));
+            view.getViewWinLose().setVisible(true);
         }
     }
 

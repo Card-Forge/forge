@@ -67,8 +67,8 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     private void setRevealedPanel(int idx) {
         try {
-            revealedPanel = cardPanels.get(idx); //??? on network match, triggered by card ability
-        } catch (ArrayIndexOutOfBoundsException e) {
+            revealedPanel = cardPanels.get(idx); //on network match, when zoomed and cast a card would randomly trigger the bug
+        } catch (Exception e) {                  //before it was arrayindexoutofbounds, then indexoutofbounds, so just use a general exception
             e.printStackTrace();
             return;
         }

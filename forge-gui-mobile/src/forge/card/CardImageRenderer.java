@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
-import forge.ImageKeys;
 import forge.assets.FBufferedImage;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -334,7 +333,7 @@ public class CardImageRenderer {
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean canshow = MatchController.instance.mayView(card);
-        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
+        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(), true);
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -388,7 +387,7 @@ public class CardImageRenderer {
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             } else {
-                if (Forge.enableUIMask && canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey())) {
+                if (Forge.enableUIMask && canshow) {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
                     else {
@@ -396,7 +395,7 @@ public class CardImageRenderer {
                         g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else {
-                    if (canshow && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getState(altState).getImageKey()))
+                    if (canshow)
                         g.drawImage(image, x, y, w, h);
                     else // sleeve
                         g.drawImage(sleeves, x, y, w, h);

@@ -6331,6 +6331,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
+    public void forceTurnFaceUp() {
+        getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
+        turnFaceUp(false, false);
+        getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
+    }
+
     public final void addGoad(Long timestamp, final Player p) {
         goad.put(timestamp, p);
         updateAbilityTextForView();

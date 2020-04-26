@@ -19,7 +19,6 @@ import forge.CachedCardImage;
 import forge.Forge;
 import forge.FThreads;
 import forge.Graphics;
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
@@ -482,8 +481,8 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        boolean canshow = MatchController.instance.mayView(card) && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getCurrentState().getImageKey());
-        Texture image = new RendererCachedCardImage(card, false).getImage();
+        boolean canshow = MatchController.instance.mayView(card);
+        Texture image = new RendererCachedCardImage(card, false).getImage(card.getCurrentState().getImageKey());
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;

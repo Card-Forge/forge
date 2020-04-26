@@ -672,21 +672,25 @@ public class Game {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
+        boolean isMultiplayer = this.getPlayers().size() > 2;
 
         for(Card c : cards) {
             if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
                 planarControllerLost = true;
             }
 
-            if (c.getOwner().equals(p)) {
-                c.ceaseToExist();
-            } else {
-                c.removeTempController(p);
-                if (c.getController().equals(p)) {
-                    this.getAction().exile(c, null);
+            if(isMultiplayer) {
+                if (c.getOwner().equals(p)) {
+                    c.ceaseToExist();
+                } else {
+                    c.removeTempController(p);
+                    if (c.getController().equals(p)) {
+                        this.getAction().exile(c, null);
+                    }
                 }
+            } else {
+                c.forceTurnFaceUp();
             }
-
         }
 
         // 901.6: If the current planar controller would leave the game, instead the next player
