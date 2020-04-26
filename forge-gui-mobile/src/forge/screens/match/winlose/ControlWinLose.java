@@ -54,6 +54,8 @@ public class ControlWinLose {
                 view.getBtnQuit().setEnabled(false);
             }
         });
+        if(humancount == 0)
+            view.getBtnRestart().setEnabled(false);
     }
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */

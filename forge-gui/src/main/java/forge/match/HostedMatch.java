@@ -305,7 +305,9 @@ public class HostedMatch {
                 humanController.getGui().clearAutoYields();
             }
 
-            if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
+            if (humanCount > 0) //conceded
+                humanController.getGui().afterGameEnd();
+            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
                 humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
