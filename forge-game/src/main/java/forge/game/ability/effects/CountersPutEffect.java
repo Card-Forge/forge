@@ -30,6 +30,7 @@ import forge.util.Localizer;
 import forge.util.CardTranslation;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Iterator;
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
         String type = spellAbility.getParam("CounterType");
         if (type.equals("ExistingCounter")) {
             stringBuilder.append("of an existing counter");
+        } else if (type.equals("EachFromSource")) {
+            stringBuilder.append("each counter");
         } else {
             stringBuilder.append(CounterType.valueOf(type).getName()).append(" counter");
         }
@@ -120,9 +123,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
         CounterType counterType = null;
         boolean existingCounter = strTyp.equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
+        boolean eachFromSource = strTyp.equals("EachFromSource");
         String amount = sa.getParamOrDefault("CounterNum", "1");
 
-        if (!existingCounter) {
+        if (!existingCounter && !eachFromSource) {
             try {
                 counterType = AbilityUtils.getCounterType(strTyp, sa);
             } catch (Exception e) {
@@ -228,6 +232,18 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     sb.append(obj);
                     counterType = pc.chooseCounterType(choices, sa, sb.toString(), params);
                 }
+            }
+
+            if (eachFromSource) {
+                final CardCollection definedCard = AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa);
+                for (Card c : definedCard) {
+                    for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
+                        if (gameCard != null && gameCard.canReceiveCounters(cti.getKey())) {
+                            gameCard.addCounter(cti.getKey(), cti.getValue(), placer, true, table);
+                        }
+                    }
+                }
+                continue;
             }
 
             if (obj instanceof Card) {
