@@ -56,7 +56,6 @@ import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
-import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -95,6 +94,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     protected final InputProxy inputProxy;
 
     private final Localizer localizer = Localizer.getInstance();
+
+    protected Map<SpellAbilityView, SpellAbility> spellViewCache = null;
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp) {
         super(game0, p, lp);
@@ -200,9 +201,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
             final ITriggerEvent triggerEvent) {
+        spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
-                SpellAbilityView.getCollection(abilities), triggerEvent);
-        return getGame().getSpellAbility(resultView);
+                Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
+        return resultView == null ? null : spellViewCache.get(resultView);
     }
 
     @Override
@@ -547,12 +549,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setCard(CardView.get(sa.getHostCard()));
 
         // create a mapping between a spell's view and the spell itself
-        HashMap<SpellAbilityView, SpellAbility> spellViewCache = new HashMap<>();
-        for (SpellAbility spellAbility : spells) {
-            spellViewCache.put(spellAbility.getView(), spellAbility);
-        }
-        List<TrackableObject> choices = new ArrayList<>(spellViewCache.keySet());
-        Object choice = getGui().one(title, choices);
+        Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
+        Object choice = getGui().one(title, Lists.newArrayList(spellViewCache.keySet()));
 
         // Human is supposed to read the message and understand from it what to
         // choose
@@ -1489,14 +1487,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getTracker().unfreeze();
         }
         final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
-        LinkedHashMap<SpellAbilityView, AbilitySub> spellViewCache = new LinkedHashMap<>();
-        for (AbilitySub spellAbility : possible) {
-            spellViewCache.put(spellAbility.getView(), spellAbility);
-        }
+        Map<SpellAbilityView, AbilitySub> spellViewCache = SpellAbilityView.getMap(possible);
         if (trackerFrozen) {
             game.getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
-        final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
+        final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
         final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
@@ -1666,10 +1661,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
 
                 // create a mapping between a spell's view and the spell itself
-                HashMap<SpellAbilityView, SpellAbility> spellViewCache = new HashMap<>();
-                for (SpellAbility spellAbility : orderedSAs) {
-                    spellViewCache.put(spellAbility.getView(), spellAbility);
-                }
+                Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(orderedSAs);
 
                 if (savedOrder != null) {
                     orderedSAVs = Lists.newArrayList();
@@ -1937,7 +1929,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
-        inputProxy.selectAbility(getGame().getSpellAbility(sa));
+        if (spellViewCache == null || spellViewCache.isEmpty()) {
+            return;
+        }
+        inputProxy.selectAbility(spellViewCache.get(sa));
     }
 
     @Override
