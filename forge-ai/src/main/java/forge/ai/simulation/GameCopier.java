@@ -125,8 +125,6 @@ public class GameCopier {
                 }
             }
         }
-        origGame.validateSpabCache();
-        newGame.validateSpabCache();
 
         // Undo effects first before calculating them below, to avoid them applying twice.
         for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {

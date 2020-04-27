@@ -1,8 +1,11 @@
 package forge.game.spellability;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 
@@ -13,15 +16,12 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
         return spab == null ? null : spab.getView();
     }
 
-    public static TrackableCollection<SpellAbilityView> getCollection(Iterable<SpellAbility> spabs) {
-        if (spabs == null) {
-            return null;
+    public static <T extends SpellAbility>  Map<SpellAbilityView, T> getMap(Iterable<T> spabs) {
+        Map<SpellAbilityView, T> spellViewCache = Maps.newLinkedHashMap();
+        for (T spellAbility : spabs) {
+            spellViewCache.put(spellAbility.getView(), spellAbility);
         }
-        TrackableCollection<SpellAbilityView> collection = new TrackableCollection<>();
-        for (SpellAbility spab : spabs) {
-            collection.add(spab.getView());
-        }
-        return collection;
+        return spellViewCache;
     }
 
     SpellAbilityView(final SpellAbility sa) {
