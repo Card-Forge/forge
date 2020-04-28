@@ -114,7 +114,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             }
         }).build());
 
-        btnMinimize = add(new FLabel.ButtonBuilder().text("Minimize").font(FSkinFont.get(12)).command(new FEventHandler() {
+        btnMinimize = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblMinimize")).font(FSkinFont.get(12)).command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
