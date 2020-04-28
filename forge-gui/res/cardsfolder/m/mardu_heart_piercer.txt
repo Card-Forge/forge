@@ -2,8 +2,7 @@ Name:Mardu Heart-Piercer
 ManaCost:3 R
 Types:Creature Human Archer
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDealDamage | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, CARDNAME deals 2 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDealDamage | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, CARDNAME deals 2 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_heart_piercer.jpg
-Oracle:Raid — When Mardu Heart-Piercer enters the battlefield, if you attacked with a creature this turn, Mardu Heart-Piercer deals 2 damage to any target.
+Oracle:Raid — When Mardu Heart-Piercer enters the battlefield, if you attacked this turn, Mardu Heart-Piercer deals 2 damage to any target.

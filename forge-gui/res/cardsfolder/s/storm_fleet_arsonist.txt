@@ -2,8 +2,7 @@ Name:Storm Fleet Arsonist
 ManaCost:4 R
 Types:Creature Orc Pirate
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigSacPerm | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigSacPerm | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.
 SVar:RaidTest:Count$AttackersDeclared
 SVar:TrigSacPerm:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Permanent | SacMessage$ Permanent | SpellDescription$ Target opponent sacrifices a permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_fleet_arsonist.jpg
-Oracle:Raid — When Storm Fleet Arsonist enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.
+Oracle:Raid — When Storm Fleet Arsonist enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.
