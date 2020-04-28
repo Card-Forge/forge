@@ -551,7 +551,9 @@ public class GameAction {
             if (cause != null && cause.isSpell()  && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
                 cause.setLastStateBattlefield(game.getLastStateBattlefield());
                 cause.setLastStateGraveyard(game.getLastStateGraveyard());
-                c.setCastSA(cause);
+
+                // need to copy the cast SA so the last state isn't cleared
+                c.setCastSA(cause.copy(c, cause.getActivatingPlayer(), true));
             } else {
                 c.setCastSA(null);
             }

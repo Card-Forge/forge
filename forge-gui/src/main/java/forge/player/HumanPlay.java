@@ -53,10 +53,13 @@ public class HumanPlay {
     public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
+        Card source = sa.getHostCard();
+
         if (sa instanceof LandAbility) {
             sa.setActivatingPlayer(p);
             if (sa.canPlay()) {
                 sa.resolve();
+                p.getGame().updateLastStateForCard(source);
             }
             return false;
         }
@@ -64,7 +67,6 @@ public class HumanPlay {
         boolean castFaceDown = sa.isCastFaceDown();
 
         sa.setActivatingPlayer(p);
-        Card source = sa.getHostCard();
         boolean flippedToCast = sa instanceof Spell && source.isFaceDown();
 
         source.setSplitStateToPlayAbility(sa);
