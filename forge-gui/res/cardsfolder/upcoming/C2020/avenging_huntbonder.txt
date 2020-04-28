@@ -4,6 +4,6 @@ Types:Creature Human Warrior
 PT:3/3
 K:Double Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a double strike counter on another target attacking creature.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | CounterType$ DOUBLE_STRIKE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | CounterType$ DOUBLESTRIKE | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
 Oracle:Double strike\nWhenever Avenging Huntbonder attacks, put a double strike counter on another target attacking creature.

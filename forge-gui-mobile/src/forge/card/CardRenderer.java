@@ -19,7 +19,6 @@ import forge.CachedCardImage;
 import forge.Forge;
 import forge.FThreads;
 import forge.Graphics;
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
@@ -482,8 +481,8 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        boolean canshow = MatchController.instance.mayView(card) && !ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE).equals(card.getCurrentState().getImageKey());
-        Texture image = new RendererCachedCardImage(card, false).getImage();
+        boolean canshow = MatchController.instance.mayView(card);
+        Texture image = new RendererCachedCardImage(card, false).getImage(card.getCurrentState().getImageKey());
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
@@ -881,6 +880,16 @@ public class CardRenderer {
                     abiY += abiSpace;
                     abiCount += 1;
                 }
+            }
+        } else if (canShow && !onbattlefield && showAbilityIcons(card)) {
+            //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
+            String keywordKey = card.getCurrentState().getKeywordKey();
+            String abilityText = card.getCurrentState().getAbilityText();
+            if ((keywordKey.indexOf("Flash") != -1)
+                    || ((abilityText.indexOf("May be played by") != -1)
+                    && (abilityText.indexOf("and as though it has flash") != -1))){
+                if (keywordKey.indexOf("Flashback") == -1)
+                    CardFaceSymbols.drawSymbol("flash", g, cx + ((cw*2)/2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }
         //draw name and mana cost overlays if card is small or default card image being used

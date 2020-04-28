@@ -7,4 +7,5 @@ SVar:MoveToPlay:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Batt
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield untapped, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
+DeckNeeds:Color$White
 Oracle:({T}: Add {W}.)\nIdyllic Grange enters the battlefield tapped unless you control three or more other Plains.\nWhen Idyllic Grange enters the battlefield untapped, put a +1/+1 counter on target creature you control.

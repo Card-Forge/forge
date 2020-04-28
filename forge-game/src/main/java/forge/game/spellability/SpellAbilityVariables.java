@@ -64,6 +64,7 @@ public class SpellAbilityVariables implements Cloneable {
         this.anyPlayer = sav.isAnyPlayer();
         this.opponentOnly = sav.isOpponentOnly();
         this.enchantedControllerOnly = sav.isEnchantedControllerOnly();
+        this.attackedPlayerOnly = sav.isAttackedPlayerOnly();
         this.ownerOnly = sav.isOwnerOnly();
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
@@ -119,6 +120,9 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The b opponent only. */
     private boolean enchantedControllerOnly = false;
+
+    /** The b opponent only. */
+    private boolean attackedPlayerOnly = false;
 
     /** The b owner only. */
     private boolean ownerOnly = false;
@@ -881,6 +885,15 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public void setOpponentOnly(boolean opponentOnly) {
         this.opponentOnly = opponentOnly;
+    }
+
+    /**
+     * @return the opponentOnly
+     */
+    public boolean isAttackedPlayerOnly() { return attackedPlayerOnly; }
+
+    public void setAttackedPlayerOnly(boolean attackedPlayerOnly) {
+        this.attackedPlayerOnly = attackedPlayerOnly;
     }
 
     /**

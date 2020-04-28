@@ -259,7 +259,9 @@ public enum CounterType {
 
     SLEIGHT("SLGHT", 185, 174, 255),
 
-    SLIME("SLIME", 101, 220, 163 ),
+    SLIME("SLIME", 101, 220, 163),
+
+    SOUL("SOUL", 243, 190, 247),
 
     SOOT("SOOT", 211, 194, 198),
 

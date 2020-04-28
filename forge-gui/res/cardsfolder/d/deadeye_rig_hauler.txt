@@ -2,8 +2,7 @@ Name:Deadeye Rig-Hauler
 ManaCost:3 U
 Types:Creature Human Pirate
 PT:3/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | OptionalDecider$ You | Execute$ TrigChangeZone | References$ RaidTest | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | OptionalDecider$ You | Execute$ TrigChangeZone | References$ RaidTest | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, you may return target creature to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadeye_rig_hauler.jpg 
-Oracle:Raid — When Deadeye Rig-Hauler enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.
+Oracle:Raid — When Deadeye Rig-Hauler enters the battlefield, if you attacked this turn, you may return target creature to its owner's hand.

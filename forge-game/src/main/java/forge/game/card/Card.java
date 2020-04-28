@@ -1056,23 +1056,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final Object getTriggeringObject(final AbilityKey typeIn) {
-        Object triggered = null;
-        if (!currentState.getTriggers().isEmpty()) {
-            for (final Trigger t : currentState.getTriggers()) {
-                final SpellAbility sa = t.getTriggeredSA();
-                if (sa == null) {
-                    continue;
-                }
-                triggered = sa.hasTriggeringObject(typeIn) ? sa.getTriggeringObject(typeIn) : null;
-                if (triggered != null) {
-                    break;
-                }
-            }
-        }
-        return triggered;
-    }
-
     public final int getSunburstValue() {
         return sunburstValue;
     }
@@ -6346,6 +6329,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         getZone().remove(this);
         getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+
+    public void forceTurnFaceUp() {
+        getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
+        turnFaceUp(false, false);
+        getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 
     public final void addGoad(Long timestamp, final Player p) {

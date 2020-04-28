@@ -1,9 +1,8 @@
 Name:Botanical Sanctum
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar2 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.

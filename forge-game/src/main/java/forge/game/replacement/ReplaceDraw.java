@@ -6,17 +6,18 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.replacement;
 
+import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -25,7 +26,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.Map;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -46,16 +47,29 @@ public class ReplaceDraw extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        final Game game = this.getHostCard().getGame();
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
+
+        if (hasParam("ValidCause")) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
+                return false;
+            }
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+            if (cause == null) {
+                return false;
+            }
+            if (!matchesValid(cause, getParam("ValidCause").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("NotFirstCardInDrawStep")) {
             final Player p = (Player)runParams.get(AbilityKey.Affected);
-            if (p.numDrawnThisDrawStep() == 0
-                    && this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)
-                    && this.getHostCard().getGame().getPhaseHandler().isPlayerTurn(p)) {
+            if (p.numDrawnThisDrawStep() == 0 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
                 return false;
             }
         }
@@ -71,5 +85,12 @@ public class ReplaceDraw extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
+        if (runParams.containsKey(AbilityKey.Cause)) {
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+            if (cause != null) {
+                sa.setReplacingObject(AbilityKey.Cause, cause);
+                sa.setReplacingObject(AbilityKey.Source, cause.getHostCard());
+            }
+        }
     }
 }

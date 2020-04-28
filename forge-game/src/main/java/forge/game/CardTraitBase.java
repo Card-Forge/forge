@@ -243,7 +243,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             final String type = params.get("Presence");
 
             int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", hostCard.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
 
             if (revealed + ctrl == 0) {
                 return false;

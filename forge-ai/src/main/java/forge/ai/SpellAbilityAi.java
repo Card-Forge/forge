@@ -2,6 +2,7 @@ package forge.ai;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -167,7 +168,8 @@ public abstract class SpellAbilityAi {
 
         // a mandatory SpellAbility with targeting but without candidates,
         // does not need to go any deeper
-        if (sa.usesTargeting() && mandatory && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+        if (sa.usesTargeting() && mandatory && !sa.isTargetNumberValid()
+                && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
             return false;
         }
 
@@ -247,6 +249,7 @@ public abstract class SpellAbilityAi {
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
             || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
+            || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Adventure).getType().isSorcery())
             || (sa.isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 

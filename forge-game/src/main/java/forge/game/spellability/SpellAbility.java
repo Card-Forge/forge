@@ -192,9 +192,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             view0 = new SpellAbilityView(this);
         }
         view = view0;
-        if (hostCard != null && hostCard.getGame() != null) {
-            hostCard.getGame().addSpellAbility(this);
-        }
     }
 
     @Override
@@ -213,13 +210,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public void setHostCard(final Card c) {
         if (hostCard == c) { return; }
-        Game oldGame = hostCard != null ? hostCard.getGame() : null;
-        Game newGame = c != null ? c.getGame() : null;
         super.setHostCard(c);
-        if (oldGame != newGame) {
-            if (oldGame != null) { oldGame.removeSpellAbility(this); }
-            if (newGame != null) { newGame.addSpellAbility(this); }
-        }
 
         if (manaPart != null) {
             manaPart.setSourceCard(c);
@@ -623,6 +614,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         resetTriggeringObjects();
         resetTriggerRemembered();
 
+        // reset last state when finished resolving
+        setLastStateBattlefield(CardCollection.EMPTY);
+        setLastStateGraveyard(CardCollection.EMPTY);
+
         // Clear SVars
         for (final String store : Card.getStorableSVars()) {
             final String value = hostCard.getSVar(store);
@@ -892,9 +887,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // dont use setHostCard to not trigger the not copied parts yet
 
             copyHelper(clone, host);
-            if (!lki && host != null && host.getGame() != null) {
-                host.getGame().addSpellAbility(clone);
-            }
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 

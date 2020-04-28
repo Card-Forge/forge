@@ -6,4 +6,5 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Island.Y
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Battlefield
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield untapped, you may put target instant or sorcery card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | Origin$ Graveyard | Destination$ Library
+DeckNeeds:Color$Blue
 Oracle:({T}: Add {U}.)\nMystic Sanctuary enters the battlefield tapped unless you control three or more other Islands.\nWhen Mystic Sanctuary enters the battlefield untapped, you may put target instant or sorcery card from your graveyard on top of your library.

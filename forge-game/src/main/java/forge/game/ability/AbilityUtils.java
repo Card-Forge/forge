@@ -45,12 +45,12 @@ import java.util.regex.Pattern;
 
 
 public class AbilityUtils {
-	private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
+    private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
         if ("ReplacedCounterType".equals(name)) {
-        	name = (String) sa.getReplacingObject(AbilityKey.CounterType);
+            name = (String) sa.getReplacingObject(AbilityKey.CounterType);
         }
         try {
             counterType = CounterType.getType(name);
@@ -880,8 +880,8 @@ public class AbilityUtils {
             }
         }
         if (sa.hasParam("AbilityCount")) { // replace specific string other than "EQ" cases
-        	String var = sa.getParam("AbilityCount");
-        	valid = TextUtil.fastReplace(valid, var, Integer.toString(calculateAmount(source, var, sa)));
+            String var = sa.getParam("AbilityCount");
+            valid = TextUtil.fastReplace(valid, var, Integer.toString(calculateAmount(source, var, sa)));
         }
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source, sa);
     }
@@ -1189,7 +1189,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("ActivePlayer")) {
-        	players.add(game.getPhaseHandler().getPlayerTurn());
+            players.add(game.getPhaseHandler().getPlayerTurn());
         }
         else if (defined.equals("You")) {
             players.add(player);
@@ -1418,11 +1418,11 @@ public class AbilityUtils {
             }
         }
         else if (unlessCost.equals("ChosenManaCost")) {
-        	if (!source.hasChosenCard()) {
+            if (!source.hasChosenCard()) {
                 cost = new Cost(ManaCost.ZERO, true);
             }
-        	else {
-            	cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
+            else {
+                cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
             }
         }
         else if (unlessCost.equals("ChosenNumber")) {
@@ -1586,11 +1586,15 @@ public class AbilityUtils {
                     // If the chosen creature has X in its mana cost, that X is considered to be 0.
                     // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
                     if (sa.getOriginalHost() != null || !sa.getHostCard().equals(c)) {
-                        return 0;
+                        return CardFactoryUtil.doXMath(0, expr, c);
                     }
 
                     if (root.isTrigger()) {
                         Trigger t = root.getTrigger();
+                        if (t == null) {
+                            return CardFactoryUtil.doXMath(0, expr, c);
+                        }
+
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
                         // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
                         // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.
@@ -1599,11 +1603,15 @@ public class AbilityUtils {
                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
                         } else if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like  Hydroid Krasis
-                            return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                            SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
+                            if (castSA == null || castSA.getXManaCostPaid() == null) {
+                                return CardFactoryUtil.doXMath(0, expr, c);
+                            }
+                            return CardFactoryUtil.doXMath(castSA.getXManaCostPaid(), expr, c);
                         } else if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
-                            if (cycleSA == null) {
-                                return 0;
+                            if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
+                                return CardFactoryUtil.doXMath(0, expr, c);
                             }
                             return CardFactoryUtil.doXMath(cycleSA.getXManaCostPaid(), expr, c);
                         }
@@ -1615,7 +1623,7 @@ public class AbilityUtils {
                         }
                     }
 
-                    return 0;
+                    return CardFactoryUtil.doXMath(0, expr, c);
                 }
 
                 // Count$Kicked.<numHB>.<numNotHB>
@@ -1690,10 +1698,10 @@ public class AbilityUtils {
                 if (l[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
                     CardCollectionView list = null;
-                    if (sa.getLastStateBattlefield() != null && !sa.getLastStateBattlefield().isEmpty()) {
-                    	list = new CardCollection(sa.getLastStateBattlefield());
+                    if (sa.getLastStateBattlefield() != null) {
+                        list = sa.getLastStateBattlefield();
                     } else { // LastState is Empty
-                    	list = sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield);
+                        return CardFactoryUtil.doXMath(0, expr, c);
                     }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     return CardFactoryUtil.doXMath(list.size(), expr, c);
@@ -1702,10 +1710,10 @@ public class AbilityUtils {
                 if (l[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
                     CardCollectionView list = null;
-                    if (sa.getLastStateGraveyard() != null && !sa.getLastStateGraveyard().isEmpty()) {
-                        list = new CardCollection(sa.getLastStateGraveyard());
+                    if (sa.getLastStateGraveyard() != null) {
+                        list = sa.getLastStateGraveyard();
                     } else { // LastState is Empty
-                        list = sa.getHostCard().getGame().getCardsIn(ZoneType.Graveyard);
+                        return CardFactoryUtil.doXMath(0, expr, c);
                     }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     return CardFactoryUtil.doXMath(list.size(), expr, c);
@@ -1831,7 +1839,7 @@ public class AbilityUtils {
                     // Color should not replace itself.
                     if (e.getValue().equalsIgnoreCase(colorLowerCase)) {
                         continue;
-                	}
+                    }
                     value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
                     replaced = replaced.replaceAll("(?<!>)" + colorLowerCase, value.toLowerCase());
                     value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);

@@ -886,12 +886,6 @@ public class CardView extends GameEntityView {
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
             if (canBeShownToAny(viewers)) {
-                // Morph cards can only be present on the battlefield and on stack, otherwise show a standard card back
-                if (getZone() != ZoneType.Battlefield && getZone() != ZoneType.Stack) {
-                    if (isFaceDown() && get(TrackableProperty.ImageKey).equals(ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE))) {
-                        return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
-                    }
-                }
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);

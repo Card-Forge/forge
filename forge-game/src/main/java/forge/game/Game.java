@@ -40,7 +40,6 @@ import forge.game.player.*;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.CostPaymentStack;
@@ -207,27 +206,6 @@ public class Game {
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
-    }
-
-    private final GameEntityCache<SpellAbility, SpellAbilityView> spabCache = new GameEntityCache<>();
-    public SpellAbility getSpellAbility(final SpellAbilityView view) {
-        return spabCache.get(view);
-    }
-    public void addSpellAbility(SpellAbility spellAbility) {
-        spabCache.put(spellAbility.getId(), spellAbility);
-    }
-    public void removeSpellAbility(SpellAbility spellAbility) {
-        spabCache.remove(spellAbility.getId());
-    }
-    public void validateSpabCache() {
-        for (SpellAbility sa : spabCache.getValues()) {
-            if (sa.getHostCard() != null && sa.getHostCard().getGame() != this) {
-                throw new RuntimeException();
-            }
-            if (sa.getActivatingPlayer() != null && sa.getActivatingPlayer().getGame() != this) {
-                throw new RuntimeException();
-            }
-        }
     }
 
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
@@ -672,21 +650,25 @@ public class Game {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
+        boolean isMultiplayer = this.getPlayers().size() > 2;
 
         for(Card c : cards) {
             if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
                 planarControllerLost = true;
             }
 
-            if (c.getOwner().equals(p)) {
-                c.ceaseToExist();
-            } else {
-                c.removeTempController(p);
-                if (c.getController().equals(p)) {
-                    this.getAction().exile(c, null);
+            if(isMultiplayer) {
+                if (c.getOwner().equals(p)) {
+                    c.ceaseToExist();
+                } else {
+                    c.removeTempController(p);
+                    if (c.getController().equals(p)) {
+                        this.getAction().exile(c, null);
+                    }
                 }
+            } else {
+                c.forceTurnFaceUp();
             }
-
         }
 
         // 901.6: If the current planar controller would leave the game, instead the next player
@@ -892,8 +874,10 @@ public class Game {
     }
 
     public void clearCaches() {
-        spabCache.clear();
         cardCache.clear();
+
+        lastStateBattlefield.clear();
+        lastStateGraveyard.clear();
         //playerCache.clear();
     }
 

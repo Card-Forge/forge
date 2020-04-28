@@ -34,7 +34,6 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPredicates.Presets;
@@ -909,6 +908,9 @@ public class CardFactoryUtil {
             return doXMath(c.getXManaCostPaidCount(colors.toString()), m, c);
         }
 
+        if (sq[0].equals("YouCycledThisTurn")) {
+            return doXMath(cc.getCycledThisTurn(), m, c);
+        }
 
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(cc.getNumDrawnThisTurn(), m, c);
@@ -949,11 +951,6 @@ public class CardFactoryUtil {
         }
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), m, c);
-        }
-
-        // TriggeringObjects
-        if (sq[0].startsWith("Triggered")) {
-            return doXMath(xCount((Card) c.getTriggeringObject(AbilityKey.Card), sq[0].substring(9)), m, c);
         }
 
         if (sq[0].contains("YourStartingLife")) {
@@ -1247,7 +1244,8 @@ public class CardFactoryUtil {
             return doXMath(CardUtil.getColors(c).countColors(), m, c);
         }
         if (sq[0].contains("ChosenNumber")) {
-            return doXMath(c.getChosenNumber(), m, c);
+            Integer i = c.getChosenNumber();
+            return doXMath(i == null ? 0 : i, m, c);
         }
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters

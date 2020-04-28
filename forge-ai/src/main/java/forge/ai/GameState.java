@@ -592,6 +592,7 @@ public abstract class GameState {
         cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
+        cardToImprintedId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenCards.clear();

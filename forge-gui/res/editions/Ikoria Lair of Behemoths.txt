@@ -5,6 +5,9 @@ Name=Ikoria: Lair of Behemoths
 Code2=IKO
 MciCode=iko
 Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("IKO Secret Cards"), 3 Uncommon:!fromSheet("IKO Secret Cards"), 1 RareMythic:!fromSheet("IKO Secret Cards"), 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 C Adaptive Shimmerer
@@ -27,6 +30,7 @@ Type=Expansion
 18 U Keensight Mentor
 19 R Lavabrink Venturer
 20 C Light of Hope
+21 M Luminous Broodmoth
 22 U Majestic Auricorn
 23 C Maned Serval
 24 R Mythos of Snapdax
@@ -75,6 +79,7 @@ Type=Expansion
 67 R Shark Typhoon
 68 C Startling Development
 69 C Thieving Otter
+70 R Voracious Greatshark
 71 C Wingfold Pteron
 72 U Wingspan Mentor
 73 U Bastion of Remembrance
@@ -145,6 +150,7 @@ Type=Expansion
 138 C Tentative Connection
 139 R Unpredictable Cyclone
 140 U Weaponize the Monsters
+141 R Yidaro, Wandering Monster
 142 C Adventurous Impulse
 143 C Almighty Brushwagg
 144 U Auspicious Starrix
@@ -320,6 +326,7 @@ Type=Expansion
 311 R Raugrin Triome
 312 R Savai Triome
 313 R Zagoth Triome
+#Extended Art Cards
 314 R Drannith Magistrate
 315 R Lavabrink Venturer
 316 M Luminous Broodmoth
@@ -370,12 +377,14 @@ Type=Expansion
 361 R Crystalline Giant
 362 R The Ozolith
 363 R Bonders' Enclave
+#Promos
 364 R Colossification
 365 U Flourishing Fox
 366 U Heartless Act
 367 C Forbidden Friendship
 368 U Migration Path
 369 U Sprite Dragon
+#Godzilla Series Monsters
 370 U Huntmaster Liger
 371 M Luminous Broodmoth
 372 U Pollywog Symbiote

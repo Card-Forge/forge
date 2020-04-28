@@ -29,7 +29,6 @@ import forge.game.card.CardState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -470,27 +469,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final void setId(final int id) {
         this.id = id;
-    }
-
-    private Ability triggeredSA;
-
-    /**
-     * Gets the triggered sa.
-     * 
-     * @return the triggered sa
-     */
-    public final Ability getTriggeredSA() {
-        return this.triggeredSA;
-    }
-
-    /**
-     * Sets the triggered sa.
-     * 
-     * @param sa
-     *            the triggered sa to set
-     */
-    public void setTriggeredSA(final Ability sa) {
-        this.triggeredSA = sa;
     }
 
     public void addRemembered(Object o) {

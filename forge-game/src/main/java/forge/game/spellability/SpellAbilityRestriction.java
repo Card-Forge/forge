@@ -27,6 +27,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.combat.Combat;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardUtil;
 import forge.game.cost.IndividualCostPaymentInstance;
@@ -124,6 +125,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("EnchantedControllerActivator")) {
             this.setEnchantedControllerOnly(true);
+        }
+
+        if (params.containsKey("AttackedPlayerActivator")) {
+            this.setAttackedPlayerOnly(true);
         }
 
         if (params.containsKey("OwnerOnly")) {
@@ -326,12 +331,22 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
+        final Combat combat = game.getPhaseHandler().getCombat();
+
         if (this.isAnyPlayer()) {
             return true;
         }
 
         if (this.isOwnerOnly()) {
             return activator.equals(c.getOwner());
+        }
+
+        if (this.isAttackedPlayerOnly()) {
+            Player attacked = combat.getDefendingPlayerRelatedTo(c);
+            if (game.getPhaseHandler().getPhase().isCombatPhase()) {
+            if (activator.equals(attacked))
+            return true; }
         }
 
         if (activator.equals(c.getController()) && !this.isOpponentOnly() && !isEnchantedControllerOnly()) {
