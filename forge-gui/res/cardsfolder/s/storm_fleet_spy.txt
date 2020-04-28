@@ -2,8 +2,7 @@ Name:Storm Fleet Spy
 ManaCost:2 U
 Types:Creature Human Pirate
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDraw | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDraw | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_fleet_spy.jpg
-Oracle:Raid — When Storm Fleet Spy enters the battlefield, if you attacked with creature this turn, draw a card.
+Oracle:Raid — When Storm Fleet Spy enters the battlefield, if you attacked this turn, draw a card.
