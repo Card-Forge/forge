@@ -1244,7 +1244,8 @@ public class CardFactoryUtil {
             return doXMath(CardUtil.getColors(c).countColors(), m, c);
         }
         if (sq[0].contains("ChosenNumber")) {
-            return doXMath(c.getChosenNumber(), m, c);
+            Integer i = c.getChosenNumber();
+            return doXMath(i == null ? 0 : i, m, c);
         }
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters

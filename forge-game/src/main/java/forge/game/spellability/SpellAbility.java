@@ -614,6 +614,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         resetTriggeringObjects();
         resetTriggerRemembered();
 
+        // reset last state when finished resolving
+        setLastStateBattlefield(CardCollection.EMPTY);
+        setLastStateGraveyard(CardCollection.EMPTY);
+
         // Clear SVars
         for (final String store : Card.getStorableSVars()) {
             final String value = hostCard.getSVar(store);
