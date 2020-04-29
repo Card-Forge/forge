@@ -119,10 +119,7 @@ public class MatchController extends AbstractGuiGame {
     public void refreshField() {
         if(!GuiBase.isNetworkplay())
             return;
-        if(getGameView().getPhase() == null)
-            return;
-        if (getGameView().getPhase().phaseforUpdateField())
-            refreshCardDetails(null);
+        refreshCardDetails(null);
     }
 
     public boolean hotSeatMode() {
