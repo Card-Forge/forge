@@ -77,7 +77,7 @@ public class TriggerDamageDoneOnce extends Trigger {
     public int getDamageAmount(Map<Card, Integer> damageMap) {
         int result = 0;
         for (Map.Entry<Card, Integer> e : damageMap.entrySet()) {
-            if (matchesValid(e.getKey(), getParam("ValidSource").split(","), getHostCard())) {
+            if (!hasParam("ValidSource") || matchesValid(e.getKey(), getParam("ValidSource").split(","), getHostCard())) {
                 result += e.getValue();
             }
         }
@@ -85,6 +85,9 @@ public class TriggerDamageDoneOnce extends Trigger {
     }
 
     public Set<Card> getDamageSources(Map<Card, Integer> damageMap) {
+        if (!hasParam("ValidSource")) {
+            return Sets.newHashSet(damageMap.keySet());
+        }
         Set<Card> result = Sets.newHashSet();
         for (Card c : damageMap.keySet()) {
             if (matchesValid(c, getParam("ValidSource").split(","), getHostCard())) {

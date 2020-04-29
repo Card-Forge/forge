@@ -113,7 +113,7 @@ public class TriggerDamageDealtOnce extends Trigger {
     public int getDamageAmount(Map<GameEntity, Integer> damageMap) {
         int result = 0;
         for (Map.Entry<GameEntity, Integer> e : damageMap.entrySet()) {
-            if (matchesValid(e.getKey(), getParam("ValidTarget").split(","), getHostCard())) {
+            if (!hasParam("ValidTarget") || matchesValid(e.getKey(), getParam("ValidTarget").split(","), getHostCard())) {
                 result += e.getValue();
             }
         }
@@ -121,6 +121,9 @@ public class TriggerDamageDealtOnce extends Trigger {
     }
 
     public Set<GameEntity> getDamageTargets(Map<GameEntity, Integer> damageMap) {
+        if (!hasParam("ValidTarget")) {
+            return Sets.newHashSet(damageMap.keySet());
+        }
         Set<GameEntity> result = Sets.newHashSet();
         for (GameEntity e : damageMap.keySet()) {
             if (matchesValid(e, getParam("ValidTarget").split(","), getHostCard())) {
