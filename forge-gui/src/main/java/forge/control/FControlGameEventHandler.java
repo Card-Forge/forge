@@ -362,6 +362,21 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventCombatUpdate event) {
+        if (!GuiBase.isNetworkplay())
+            return null; //not needed if single player only...
+
+        final CardCollection cards = new CardCollection();
+        cards.addAll(event.attackers);
+        cards.addAll(event.blockers);
+
+        refreshFieldUpdate = true;
+
+        processCards(cards, cardsRefreshDetails);
+        return processCards(cards, cardsUpdate);
+    }
+
+    @Override
     public Void visit(final GameEventCardChangeZone event) {
         if(GuiBase.getInterface().isLibgdxPort()) {
             updateZone(event.from);
@@ -373,6 +388,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardStatsChanged event) {
+        refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }
@@ -397,6 +413,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventTokenStateUpdate event) {
+        refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }

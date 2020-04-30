@@ -274,8 +274,8 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    Dscreens.removeFirst();
-                    setCurrentScreen(Dscreens.getFirst());
+                    Dscreens.pollFirst();
+                    setCurrentScreen(Dscreens.peekFirst());
                 }
             }
         });
