@@ -6,17 +6,20 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -24,6 +27,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -35,6 +39,8 @@ public class CostDiscard extends CostPartWithList {
 
     // Inputs
 
+    protected boolean firstTime = false;
+
     /**
      * Serializables need a version ID.
      */
@@ -42,7 +48,7 @@ public class CostDiscard extends CostPartWithList {
 
     /**
      * Instantiates a new cost discard.
-     * 
+     *
      * @param amount
      *            the amount
      * @param type
@@ -58,7 +64,7 @@ public class CostDiscard extends CostPartWithList {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
@@ -98,7 +104,7 @@ public class CostDiscard extends CostPartWithList {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
@@ -180,5 +186,24 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    protected void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
+        firstTime = ai.getNumDiscardedThisTurn() == 0;
+    }
+
+    @Override
+    protected void handleChangeZoneTrigger(Player payer, SpellAbility ability, CardCollectionView targetCards) {
+        super.handleChangeZoneTrigger(payer, ability, targetCards);
+
+        if (!targetCards.isEmpty())
+        {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Player, payer);
+            runParams.put(AbilityKey.Cards, new CardCollection(targetCards));
+            runParams.put(AbilityKey.Cause, ability);
+            runParams.put(AbilityKey.FirstTime, firstTime);
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+        }
     }
 }

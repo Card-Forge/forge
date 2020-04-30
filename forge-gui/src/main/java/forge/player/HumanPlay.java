@@ -380,7 +380,7 @@ public class HumanPlay {
                     return false;
                 }
                 CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
-                ((CostMill) part).executePayment(sourceAbility, listmill);
+                ((CostMill) part).payAsDecided(p, PaymentDecision.card(listmill), sourceAbility);
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
@@ -488,7 +488,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    costExile.executePayment(sourceAbility, p.getCardsIn(ZoneType.Graveyard));
+                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility);
                 }
                 else {
                     from = costExile.getFrom();
@@ -502,7 +502,7 @@ public class HumanPlay {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
-                        costExile.executePayment(sourceAbility, list);
+                        costExile.payAsDecided(p, PaymentDecision.card(list), sourceAbility);
                     } else {
                         // replace this with input
                         CardCollection newList = new CardCollection();
@@ -515,7 +515,7 @@ public class HumanPlay {
                             list.remove(c);
                             newList.add(c);
                         }
-                        costExile.executePayment(sourceAbility, newList);
+                        costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility);
                     }
                 }
             }
@@ -567,7 +567,7 @@ public class HumanPlay {
                     }
                 }
                 else { // Tainted Specter, Gurzigost, etc.
-                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
+                    boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
                     if (!hasPaid) {
                         return false;
                     }
@@ -584,13 +584,13 @@ public class HumanPlay {
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
                 CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
@@ -599,11 +599,11 @@ public class HumanPlay {
                         return false;
                     }
 
-                    ((CostDiscard)part).executePayment(sourceAbility, p.getCardsIn(ZoneType.Hand));
+                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
-                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
+                    boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
             }
@@ -611,14 +611,14 @@ public class HumanPlay {
                 CostReveal costReveal = (CostReveal) part;
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
@@ -677,7 +677,7 @@ public class HumanPlay {
         return paid;
     }
 
-    private static boolean payCostPart(final PlayerControllerHuman controller, SpellAbility sourceAbility, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
+    private static boolean payCostPart(final PlayerControllerHuman controller, Player p, SpellAbility sourceAbility, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
@@ -689,11 +689,8 @@ public class HumanPlay {
             return false;
         }
 
-        cpl.executePayment(sourceAbility, new CardCollection(inp.getSelected()));
+        cpl.payAsDecided(p, PaymentDecision.card(inp.getSelected()), sourceAbility);
 
-        if (sourceAbility != null) {
-            cpl.reportPaidCardsTo(sourceAbility);
-        }
         return true;
     }
 
