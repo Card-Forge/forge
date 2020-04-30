@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,7 +59,7 @@ import java.util.*;
  * <p>
  * Phase class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: PhaseHandler.java 13001 2012-01-08 12:25:25Z Sloth $
  */
@@ -369,10 +369,23 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (numDiscard > 0) {
                         final CardZoneTable table = new CardZoneTable();
+                        final CardCollection discarded = new CardCollection();
+                        boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)){
-                            playerTurn.discard(c, null, table);
+                            if (playerTurn.discard(c, null, table) != null) {
+                                discarded.add(c);
+                            }
                         }
                         table.triggerChangesZoneAll(game);
+
+                        if (!discarded.isEmpty()) {
+                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                            runParams.put(AbilityKey.Player, playerTurn);
+                            runParams.put(AbilityKey.Cards, discarded);
+                            runParams.put(AbilityKey.Cause, null);
+                            runParams.put(AbilityKey.FirstTime, firstDiscarded);
+                            game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+                        }
                     }
 
                     // Rule 514.2
@@ -387,7 +400,6 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
 
                     for (Player player : game.getPlayers()) {
-                        player.onCleanupPhase();
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
                     }
                     for (Player player : game.getLostPlayers()) {
@@ -439,7 +451,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
-            
+
             boolean manaBurns = game.getRules().hasManaBurn();
             if (manaBurns) {
                 p.loseLife(burn,true);
@@ -488,6 +500,10 @@ public class PhaseHandler implements java.io.Serializable {
             case CLEANUP:
                 bPreventCombatDamageThisTurn = false;
                 if (!bRepeatCleanup) {
+                    // only call onCleanupPhase when Cleanup is not repeated
+                    for (Player player : game.getPlayers()) {
+                        player.onCleanupPhase();
+                    }
                     setPlayerTurn(handleNextTurn());
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -736,7 +752,7 @@ public class PhaseHandler implements java.io.Serializable {
                 runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(a));
                 game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
             }
-            
+
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
 
@@ -836,7 +852,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (nextPlayer.hasKeyword("Skip your next turn.")) {
             nextPlayer.removeKeyword("Skip your next turn.", false);
-            if (extraTurn == null) { 
+            if (extraTurn == null) {
                 setPlayerTurn(nextPlayer);
             }
             return getNextActivePlayer();
@@ -861,7 +877,7 @@ public class PhaseHandler implements java.io.Serializable {
                 return getNextActivePlayer();
             }
         }
-        
+
         if (extraTurn != null) {
             if (extraTurn.isSkipUntap()) {
                 nextPlayer.addKeyword("Skip the untap step of this turn.");
@@ -1015,7 +1031,7 @@ public class PhaseHandler implements java.io.Serializable {
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game);
                         }
-                        
+
                     }
                     loopCount++;
                 } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
