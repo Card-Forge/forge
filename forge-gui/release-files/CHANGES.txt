@@ -1,2 +1,5 @@
+- IKO Release -
+This is the release for IKO. Mutate and Companion are not added yet, but we're working to try to get them in soon. Please don't pester us on timelines.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
