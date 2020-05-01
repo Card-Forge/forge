@@ -734,6 +734,21 @@ public class CountersPutAi extends SpellAbilityAi {
                 // put a counter?
                 // things like Powder Keg, which are way too complex for the AI
             }
+        } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
+            // can only target opponent
+            List<Player> playerList = Lists.newArrayList(Iterables.filter(
+                    sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
+
+            if (playerList.isEmpty() && mandatory) {
+                return false;
+            }
+
+            // try to choose player with less creatures
+            Player choice = Collections.min(playerList, PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.CREATURES));
+
+            if (choice != null) {
+                sa.getTargets().add(choice);
+            }
         } else {
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
