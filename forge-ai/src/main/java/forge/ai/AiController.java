@@ -1986,6 +1986,35 @@ public class AiController {
         return MyRandom.getRandom().nextBoolean();
     }
 
+    public boolean chooseEvenOdd(SpellAbility sa) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("AlwaysEven")) {
+            return false; // false is Even
+        } else if (aiLogic.equals("AlwaysOdd")) {
+            return true; // true is Odd
+        } else if (aiLogic.equals("Random")) {
+            return MyRandom.getRandom().nextBoolean();
+        } else if (aiLogic.equals("CMCInHand")) {
+            CardCollectionView hand = sa.getActivatingPlayer().getCardsIn(ZoneType.Hand);
+            int numEven = CardLists.filter(hand, CardPredicates.evenCMC()).size();
+            int numOdd = CardLists.filter(hand, CardPredicates.oddCMC()).size();
+            return numOdd > numEven;
+        } else if (aiLogic.equals("CMCOppControls")) {
+            CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
+            int numEven = CardLists.filter(hand, CardPredicates.evenCMC()).size();
+            int numOdd = CardLists.filter(hand, CardPredicates.oddCMC()).size();
+            return numOdd > numEven;
+        } else if (aiLogic.equals("CMCOppControlsByPower")) {
+            // TODO: improve this to check for how dangerous those creatures actually are relative to host card
+            CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
+            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Accessors.fnGetNetPower);
+            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Accessors.fnGetNetPower);
+            return powerOdd > powerEven;
+        }
+        return MyRandom.getRandom().nextBoolean(); // outside of any specific logic, choose randomly
+    }
+
     public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
             CardCollection fetchList, Player player2, Player decider) {
         if (useSimulation) {

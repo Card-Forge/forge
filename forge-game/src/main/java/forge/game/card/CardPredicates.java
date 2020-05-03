@@ -299,6 +299,24 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> evenCMC() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCMC() % 2 == 0;
+            }
+        };
+    }
+
+    public static final Predicate<Card> oddCMC() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCMC() % 2 == 1;
+            }
+        };
+    }
+
     public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {
             @Override
