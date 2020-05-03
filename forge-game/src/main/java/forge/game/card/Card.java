@@ -238,6 +238,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String chosenName = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
     private String chosenMode = "";
 
@@ -1595,6 +1596,19 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setChosenName(final String s) {
         chosenName = s;
         view.updateNamedCard(this);
+    }
+
+    public boolean hasChosenEvenOdd() {
+        return chosenEvenOdd != null;
+    }
+
+    public EvenOdd getChosenEvenOdd() {
+        return chosenEvenOdd;
+    }
+    public void setChosenEvenOdd(EvenOdd chosenEvenOdd0) {
+        if (chosenEvenOdd == chosenEvenOdd0) { return; }
+        chosenEvenOdd = chosenEvenOdd0;
+        view.updateChosenEvenOdd(this);
     }
 
     // used for cards like Meddling Mage...

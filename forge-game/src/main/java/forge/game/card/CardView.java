@@ -8,6 +8,7 @@ import forge.ImageKeys;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
+import forge.game.EvenOdd;
 import forge.game.GameEntityView;
 import forge.game.GameType;
 import forge.game.combat.Combat;
@@ -303,6 +304,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenDirection(Card c) {
         set(TrackableProperty.ChosenDirection, c.getChosenDirection());
+    }
+    public EvenOdd getChosenEvenOdd() {
+        return get(TrackableProperty.ChosenEvenOdd);
+    }
+    void updateChosenEvenOdd(Card c) {
+        set(TrackableProperty.ChosenEvenOdd, c.getChosenEvenOdd());
     }
 
     public String getChosenMode() {
@@ -624,6 +631,13 @@ public class CardView extends GameEntityView {
         if (chosenDirection != null) {
             sb.append("\r\n[Chosen direction: ");
             sb.append(chosenDirection);
+            sb.append("]\r\n");
+        }
+
+        EvenOdd chosenEvenOdd = getChosenEvenOdd();
+        if (chosenEvenOdd != null) {
+            sb.append("\r\n[Chosen value: ");
+            sb.append(chosenEvenOdd);
             sb.append("]\r\n");
         }
 

@@ -204,6 +204,17 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
+        } else if (defined.equals("DelayTriggerRememberedLKI")) {
+            SpellAbility trigSa = sa.getTriggeringAbility();
+            if (trigSa != null) {
+                for (Object o : trigSa.getTriggerRemembered()) {
+                    if (o instanceof Card) {
+                        cards.add((Card)o);
+                    }
+                }
+            } else {
+                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
+            }
         } else if (defined.equals("DelayTriggerRemembered")) {
             SpellAbility trigSa = sa.getTriggeringAbility();
             if (trigSa != null) {
