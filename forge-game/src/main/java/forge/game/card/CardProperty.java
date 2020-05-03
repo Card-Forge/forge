@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Direction;
+import forge.game.EvenOdd;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -1371,6 +1372,27 @@ public class CardProperty {
         } else if (property.equals("powerLTtoughness")) {
             if (card.getNetPower() >= card.getNetToughness()) {
                 return false;
+            }
+        } else if (property.equals("cmcEven")) {
+            if (card.getCMC() % 2 != 0) {
+                return false;
+            }
+        } else if (property.equals("cmcOdd")) {
+            if (card.getCMC() % 2 != 1) {
+                return false;
+            }
+        } else if (property.equals("cmcChosenEvenOdd")) {
+            if (!source.hasChosenEvenOdd()) {
+                return false;
+            }
+            if ((card.getCMC() % 2 == 0) != (source.getChosenEvenOdd() == EvenOdd.Even)) {
+                return false;
+            }
+        } else if (property.equals("cmcNotChosenEvenOdd")) {
+            if (source.hasChosenEvenOdd()) {
+                if ((card.getCMC() % 2 == 0) == (source.getChosenEvenOdd() == EvenOdd.Even)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
