@@ -8,6 +8,7 @@ import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
+import forge.util.TextUtil;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.utils.Align;
@@ -113,7 +114,7 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 btnDeck.setEnabled(mayEdit);
-                btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ": " +
+                btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ":" + (Forge.isLandscapeMode() ? " " : "\n") +
                         Lang.joinHomogenous(((DeckManager)e.getSource()).getSelectedItems(), DeckProxy.FN_GET_NAME));
                 if (allowNetworking && btnDeck.isEnabled() && humanAiSwitch.isToggled()) { //if its ready but changed the deck, update it
                     screen.updateMyDeck(index);
@@ -124,7 +125,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnCommanderDeck.setText(localizer.getMessage("lblCommanderDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstCommanderDecks.saveState();
                     if (allowNetworking && btnCommanderDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
@@ -138,7 +140,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnOathbreakDeck.setText(localizer.getMessage("lblOathbreakerDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstOathbreakerDecks.saveState();
                     if (allowNetworking && btnOathbreakDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
@@ -152,7 +155,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnTinyLeadersDeck.setText(localizer.getMessage("lblTinyLeadersDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstTinyLeadersDecks.saveState();
                     if (allowNetworking && btnTinyLeadersDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
@@ -166,7 +170,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck") + ": " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    btnBrawlDeck.setText(localizer.getMessage("lblBrawlDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
                     lstBrawlDecks.saveState();
                     if (allowNetworking && btnBrawlDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
@@ -180,7 +185,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    btnSchemeDeck.setText(localizer.getMessage("lblSchemeDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
                     if (allowNetworking && btnSchemeDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
                     }
@@ -193,7 +199,8 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck") + ": " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                    btnPlanarDeck.setText(localizer.getMessage("lblPlanarDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
                     if (allowNetworking && btnPlanarDeck.isEnabled() && humanAiSwitch.isToggled()) {
                         screen.updateMyDeck(index);
                     }
@@ -205,7 +212,8 @@ public class PlayerPanel extends FContainer {
         lstVanguardAvatars = new FVanguardChooser(isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnVanguardAvatar.setText(localizer.getMessage("lblVanguard") + ": " + ((CardManager)e.getSource()).getSelectedItem().getName());
+                btnVanguardAvatar.setText(localizer.getMessage("lblVanguard")
+                        + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getName());
                 if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
                     screen.updateMyDeck(index);
                 }
@@ -341,28 +349,59 @@ public class PlayerPanel extends FContainer {
         x += w + PADDING;
         nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
 
-        y += dy;
-        humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
-        x = width - humanAiSwitch.getWidth() - PADDING;
-        humanAiSwitch.setPosition(x, y);
-        w = x - (avatarSize+sleeveSizeW+PADDING) - 3 * PADDING;
-        x = (avatarSize+sleeveSizeW+PADDING) + 2 * PADDING;
-        if (cbArchenemyTeam.isVisible()) {
-            cbArchenemyTeam.setBounds(x, y, w, fieldHeight);
-        }
-        else {
-            cbTeam.setBounds(x, y, w, fieldHeight);
+        if (Forge.isLandscapeMode()){
+            y += dy;
+            humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
+            x = width - humanAiSwitch.getWidth() - PADDING;
+            humanAiSwitch.setPosition(x, y);
+            w = x - (avatarSize+sleeveSizeW+PADDING) - 3 * PADDING;
+            x = (avatarSize+sleeveSizeW+PADDING) + 2 * PADDING;
+            if (cbArchenemyTeam.isVisible()) {
+                cbArchenemyTeam.setBounds(x, y, w, fieldHeight);
+            }
+            else {
+                cbTeam.setBounds(x, y, w, fieldHeight);
+            }
+        } else {
+            y += dy;
+            w = x - (avatarSize+sleeveSizeW+PADDING) - 3 * PADDING;
+            x = (avatarSize+sleeveSizeW+PADDING) + 2 * PADDING;
+            if (cbArchenemyTeam.isVisible()) {
+                cbArchenemyTeam.setBounds(x, y, w, fieldHeight);
+            }
+            else {
+                cbTeam.setBounds(x, y, w, fieldHeight);
+            }
+            y += dy;
+
+            humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
+            x = width - humanAiSwitch.getWidth() - PADDING;
+            humanAiSwitch.setPosition(x, y);
         }
 
+
         if (devModeSwitch.isVisible()) {
-            y += dy;
+            if(Forge.isLandscapeMode())
+                y += dy;
             devModeSwitch.setSize(devModeSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
             devModeSwitch.setPosition(0, y);
         }
 
-        y += dy;
-        x = PADDING;
-        w = width - 2 * PADDING;
+        if (Forge.isLandscapeMode()) {
+            y += dy;
+            x = PADDING;
+            w = width - 2 * PADDING;
+        } else {
+            if (devModeSwitch.isVisible()) {
+                y += dy;
+                x = PADDING;
+                w = width - 2 * PADDING;
+            } else {
+                x = PADDING;
+                w = (width - 2 * PADDING) - humanAiSwitch.getWidth();
+            }
+        }
+
         if (btnCommanderDeck.isVisible()) {
             btnCommanderDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
@@ -399,10 +438,12 @@ public class PlayerPanel extends FContainer {
     public float getPreferredHeight() {
         int rows = 3;
         if (!btnDeck.isVisible()) {
-            rows--;
+            if(Forge.isLandscapeMode())
+                rows--;
         }
         if (btnCommanderDeck.isVisible() || btnOathbreakDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
-            rows++;
+            if(Forge.isLandscapeMode())
+                rows++;
         }
         if (btnSchemeDeck.isVisible()) {
             rows++;
@@ -536,6 +577,8 @@ public class PlayerPanel extends FContainer {
     };
 
     public void setDeckSelectorButtonText(String text) {
+        if (!Forge.isLandscapeMode())
+            text = TextUtil.fastReplace(text, ": ", ":\n");
         if (btnDeck.isVisible())
             btnDeck.setText(text);
 
@@ -553,14 +596,20 @@ public class PlayerPanel extends FContainer {
     }
 
     public void setVanguarAvatarName(String text) {
+        if (!Forge.isLandscapeMode())
+            text = TextUtil.fastReplace(text, ": ", ":\n");
         btnVanguardAvatar.setText(text);
     }
 
     public void setSchemeDeckName(String text) {
+        if (!Forge.isLandscapeMode())
+            text = TextUtil.fastReplace(text, ": ", ":\n");
         btnSchemeDeck.setText(text);
     }
 
     public void setPlanarDeckName(String text) {
+        if (!Forge.isLandscapeMode())
+            text = TextUtil.fastReplace(text, ": ", ":\n");
         btnPlanarDeck.setText(text);
     }
 
