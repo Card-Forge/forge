@@ -42,6 +42,7 @@ public enum TrackableProperty {
     CommanderAltType(TrackableTypes.StringType),
     Damage(TrackableTypes.IntegerType),
     AssignedDamage(TrackableTypes.IntegerType),
+    LethalDamage(TrackableTypes.IntegerType),
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.StringListType),

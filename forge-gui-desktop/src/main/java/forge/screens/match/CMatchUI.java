@@ -932,7 +932,7 @@ public final class CMatchUI
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker,
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker,
             final List<CardView> blockers, final int damage,
             final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
@@ -949,7 +949,7 @@ public final class CMatchUI
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
+                final VAssignCombatDamage v = new VAssignCombatDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
                 result.set(v.getDamageMap());
             }});
         return result.get();
