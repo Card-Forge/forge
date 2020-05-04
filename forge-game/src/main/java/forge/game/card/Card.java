@@ -4793,7 +4793,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // this is the amount of damage a creature needs to receive before it dies
     public final int getLethal() {
-        if (getAmountOfKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.") % 2 !=0) {
+        if (hasKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.")) {
             return getNetPower(); }
         else {
             return getNetToughness(); }
@@ -4801,11 +4801,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // this is the minimal damage a trampling creature has to assign to a blocker
     public final int getLethalDamage() {
-        if (getAmountOfKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.") % 2 !=0) {
-            return getNetPower() - getDamage() - getTotalAssignedDamage();
-        }
-        else {
-            return getNetToughness() - getDamage() - getTotalAssignedDamage();}
+        return getLethal() - getDamage() - getTotalAssignedDamage();
     }
 
     public final int getDamage() {

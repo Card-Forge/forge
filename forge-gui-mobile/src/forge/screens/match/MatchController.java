@@ -45,7 +45,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.views.VAssignDamage;
+import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
@@ -172,7 +172,7 @@ public class MatchController extends AbstractGuiGame {
     public void showPromptMessage(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
-    
+
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
         view.getPrompt(player).setMessage(message, card);
@@ -360,11 +360,11 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, this);
                 v.show();
             }
         }.invokeAndWait();
