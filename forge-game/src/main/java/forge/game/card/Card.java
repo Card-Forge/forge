@@ -2523,7 +2523,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 list.clear();
             }
             list.removeAll(ck.getRemovedAbilities());
-            list.addAll(ck.getAbilities());
+            for (SpellAbility sa : ck.getAbilities()) {
+                if (mana == null || mana == sa.isManaAbility()) {
+                    list.add(sa);
+                }
+            }
         }
 
         // add Facedown abilities from Original state but only if this state is face down
