@@ -479,7 +479,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     currentState.getView().updateColors(this);
                 }
                 if (!changedCardKeywords.isEmpty()) {
-                    currentState.getView().updateKeywords(this, currentState);
+                    updateKeywords();
                 }
 
                 if (state == CardStateName.FaceDown) {
@@ -545,7 +545,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // The following methods are used to selectively update certain view components (text,
     // P/T, card types) in order to avoid card flickering due to aggressive full update
     public void updateAbilityTextForView() {
-        view.getCurrentState().updateKeywords(this, getCurrentState());
+        updateKeywords();
         view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
 
@@ -3482,6 +3482,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else {
             newPT.put(timestamp, Pair.of(power, toughness));
         }
+        getView().updateLethalDamage(this);
         currentState.getView().updatePower(this);
         currentState.getView().updateToughness(this);
     }
@@ -3493,6 +3494,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         removed |= newPTCharacterDefining.remove(timestamp) != null;
 
         if (removed) {
+            getView().updateLethalDamage(this);
             currentState.getView().updatePower(this);
             currentState.getView().updateToughness(this);
         }
@@ -3783,7 +3785,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void updateKeywords() {
-        currentState.getView().updateKeywords(this, currentState);
+        getCurrentState().getView().updateKeywords(this, getCurrentState());
+        getView().updateLethalDamage(this);
     }
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
@@ -4065,7 +4068,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final KeywordInterface addIntrinsicKeyword(final String s) {
         KeywordInterface inst = currentState.addIntrinsicKeyword(s, true);
         if (inst != null) {
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
         return inst;
     }
@@ -4075,19 +4078,19 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
         if (currentState.addIntrinsicKeywords(s, initTraits)) {
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 
     public final void removeIntrinsicKeyword(final String s) {
         if (currentState.removeIntrinsicKeyword(s)) {
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 
     public final void removeIntrinsicKeyword(final KeywordInterface s) {
         if (currentState.removeIntrinsicKeyword(s)) {
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 
@@ -4111,14 +4114,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         if (hiddenExtrinsicKeyword.add(s) != null) {
             view.updateNonAbilityText(this);
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 
     public final void addHiddenExtrinsicKeyword(KeywordInterface k) {
         if (hiddenExtrinsicKeyword.insert(k)) {
             view.updateNonAbilityText(this);
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 
@@ -4128,7 +4131,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         if (hiddenExtrinsicKeyword.remove(s)) {
             view.updateNonAbilityText(this);
-            currentState.getView().updateKeywords(this, currentState);
+            updateKeywords();
         }
     }
 

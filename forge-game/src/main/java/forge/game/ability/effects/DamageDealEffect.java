@@ -257,7 +257,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                             if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                                     sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
                                 // excess damage explicit says toughness, not lethal damage in the rules
-                                int lethal = c.getNetToughness() - c.getDamage();
+                                int lethal = c.getLethalDamage();
                                 if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
                                     lethal = Math.min(lethal, 1);
                                 }
