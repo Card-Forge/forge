@@ -2857,7 +2857,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         boolean uniqueNames = true;
         Set<String> cardNames = new HashSet<>();
         Set<CardType.CoreType> cardTypes = new HashSet<>();
-        for (final Card c : getCardsIn(ZoneType.Library)) {
+        final CardCollection nonLandInDeck = CardLists.getNotType(getCardsIn(ZoneType.Library), "Land");
+        for (final Card c : nonLandInDeck) {
             if (uniqueNames) {
                 if (cardNames.contains(c.getName())) {
                     uniqueNames = false;
@@ -2866,10 +2867,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            if (!c.isLand()) {
-                for(CardType.CoreType type : c.getPaperCard().getRules().getType().getCoreTypes()) {
-                    cardTypes.add(type);
-                }
+            for(CardType.CoreType type : c.getPaperCard().getRules().getType().getCoreTypes()) {
+                cardTypes.add(type);
             }
         }
 
@@ -2923,7 +2922,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final String[] res = restriction.split(";");
         CardCollection type = CardLists.getValidCards(getCardsIn(ZoneType.Library), res[0], this, source);
         for (final Card c : type) {
-            if (!c.isValid(res[1], this, source, null)) {
+            if (!c.isValid(res[1].split(","), this, source, null)) {
                 return false;
             }
         }
