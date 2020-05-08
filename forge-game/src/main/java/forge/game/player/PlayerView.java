@@ -464,6 +464,7 @@ public class PlayerView extends GameEntityView {
 
         //update flashback zone when graveyard, library, or exile zones updated
         switch (zone.getZoneType()) {
+        case Command:
         case Graveyard:
         case Library:
         case Exile:
