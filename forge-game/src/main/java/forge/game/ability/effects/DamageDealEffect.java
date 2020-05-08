@@ -237,9 +237,11 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final Object o : tgts) {
-                dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
-                if (dmg <= 0) {
-                    continue;
+                if (!removeDamage) {
+                    dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                    if (dmg <= 0) {
+                        continue;
+                    }
                 }
                 if (o instanceof Card) {
                     final Card c = (Card) o;
