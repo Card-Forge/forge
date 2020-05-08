@@ -2901,7 +2901,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         }
                     }
 
-                } else{
+                } else {
                     String restriction = kwInstance.getDeckRestriction();
                     if (deckMatchesDeckRestriction(c, restriction)) {
                         legalCompanions.add(c);
@@ -2920,8 +2920,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
-        for (final Card c : getCardsIn(ZoneType.Library)) {
-            if (!c.isValid(restriction, this, source, null)) {
+        final String[] res = restriction.split(";");
+        CardCollection type = CardLists.getValidCards(getCardsIn(ZoneType.Library), res[0], this, source);
+        for (final Card c : type) {
+            if (!c.isValid(res[1], this, source, null)) {
                 return false;
             }
         }
