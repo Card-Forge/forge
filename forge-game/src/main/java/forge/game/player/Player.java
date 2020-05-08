@@ -2856,7 +2856,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean uniqueNames = true;
         Set<String> cardNames = new HashSet<>();
-        Set<CardType.CoreType> cardTypes = new HashSet<>();
+        Set<CardType.CoreType> cardTypes = EnumSet.allOf(CardType.CoreType.class);
         final CardCollection nonLandInDeck = CardLists.getNotType(getCardsIn(ZoneType.Library), "Land");
         for (final Card c : nonLandInDeck) {
             if (uniqueNames) {
@@ -2867,9 +2867,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            for(CardType.CoreType type : c.getPaperCard().getRules().getType().getCoreTypes()) {
-                cardTypes.add(type);
-            }
+            cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
         }
 
         int deckSize = getCardsIn(ZoneType.Library).size();
@@ -2895,7 +2893,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         }
                     } else if (specialRules.equals("SharesCardType")) {
                         // Shares card type
-                        if (cardTypes.size() == 1) {
+                        if (!cardTypes.isEmpty()) {
                             legalCompanions.add(c);
                         }
                     }
