@@ -40,10 +40,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordCollection;
-import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
+import forge.game.keyword.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
@@ -1907,6 +1904,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     String desc = "(As this Saga enters and after your draw step, "
                         + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
                     sbLong.append(desc);
+                } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
+                    sbLong.append("Companion - ");
+                    sbLong.append(((Companion)inst).getDescription());
                 }
                 else {
                     if ((i != 0) && (sb.length() != 0)) {
