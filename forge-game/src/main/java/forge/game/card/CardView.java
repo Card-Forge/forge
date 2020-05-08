@@ -243,6 +243,7 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
+        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -254,7 +255,7 @@ public class CardView extends GameEntityView {
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
-        set(TrackableProperty.LethalDamage, c.getLethalDamage());
+        updateLethalDamage(c);
     }
 
     public int getAssignedDamage() {
@@ -262,11 +263,14 @@ public class CardView extends GameEntityView {
     }
     void updateAssignedDamage(Card c) {
         set(TrackableProperty.AssignedDamage, c.getTotalAssignedDamage());
-        set(TrackableProperty.LethalDamage, c.getLethalDamage());
+        updateLethalDamage(c);
     }
 
     public int getLethalDamage() {
         return get(TrackableProperty.LethalDamage);
+    }
+    void updateLethalDamage(Card c) {
+        set(TrackableProperty.LethalDamage, c.getLethalDamage());
     }
 
     public int getShieldCount() {
