@@ -1,7 +1,6 @@
 Name:Chimeric Mass
 ManaCost:X
 Types:Artifact
-#CARDNAME enters the battlefield with X charge counters on it.
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid
 A:AB$ Animate | Cost$ 1 | Defined$ Self | Types$ Artifact,Creature,Construct | staticAbilities$ Static | SpellDescription$ Until end of turn, CARDNAME becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."

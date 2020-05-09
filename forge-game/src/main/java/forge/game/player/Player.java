@@ -2856,8 +2856,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean uniqueNames = true;
         Set<String> cardNames = new HashSet<>();
-        Set<CardType.CoreType> cardTypes = new HashSet<>();
-        for (final Card c : getCardsIn(ZoneType.Library)) {
+        Set<CardType.CoreType> cardTypes = EnumSet.allOf(CardType.CoreType.class);
+        final CardCollection nonLandInDeck = CardLists.getNotType(getCardsIn(ZoneType.Library), "Land");
+        for (final Card c : nonLandInDeck) {
             if (uniqueNames) {
                 if (cardNames.contains(c.getName())) {
                     uniqueNames = false;
@@ -2866,11 +2867,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            if (!c.isLand()) {
-                for(CardType.CoreType type : c.getPaperCard().getRules().getType().getCoreTypes()) {
-                    cardTypes.add(type);
-                }
-            }
+            cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
         }
 
         int deckSize = getCardsIn(ZoneType.Library).size();
@@ -2896,12 +2893,12 @@ public class Player extends GameEntity implements Comparable<Player> {
                         }
                     } else if (specialRules.equals("SharesCardType")) {
                         // Shares card type
-                        if (cardTypes.size() == 1) {
+                        if (!cardTypes.isEmpty()) {
                             legalCompanions.add(c);
                         }
                     }
 
-                } else{
+                } else {
                     String restriction = kwInstance.getDeckRestriction();
                     if (deckMatchesDeckRestriction(c, restriction)) {
                         legalCompanions.add(c);
@@ -2921,7 +2918,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
         for (final Card c : getCardsIn(ZoneType.Library)) {
-            if (!c.isValid(restriction, this, source, null)) {
+            if (!c.isValid(restriction.split(","), this, source, null)) {
                 return false;
             }
         }
