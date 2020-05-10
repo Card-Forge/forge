@@ -195,8 +195,8 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
-        return sendAndWait(ProtocolMethod.assignDamage, attacker, blockers, damage, defender, overrideOrder);
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+        return sendAndWait(ProtocolMethod.assignCombatDamage, attacker, blockers, damage, defender, overrideOrder);
     }
 
     @Override

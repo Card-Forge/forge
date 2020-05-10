@@ -548,12 +548,11 @@ public class GameAction {
             c.setCastSA(null);
         } else if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
-            if (cause != null && cause.isSpell()  && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
+            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
                 cause.setLastStateBattlefield(game.getLastStateBattlefield());
                 cause.setLastStateGraveyard(game.getLastStateGraveyard());
 
-                // need to copy the cast SA so the last state isn't cleared
-                c.setCastSA(cause.copy(c, cause.getActivatingPlayer(), true));
+                c.setCastSA(cause);
             } else {
                 c.setCastSA(null);
             }
@@ -990,7 +989,7 @@ public class GameAction {
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
-                    if (c.getLethal() <= 0) {
+                    if (c.getNetToughness() <= 0) {
                         if (noRegCreats == null) {
                             noRegCreats = new CardCollection();
                         }
@@ -1010,7 +1009,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
+                    else if (c.getDamage() > 0 && (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage())) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }

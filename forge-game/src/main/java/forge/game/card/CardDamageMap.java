@@ -9,6 +9,7 @@ import java.util.Set;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
@@ -59,8 +60,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             if (sum > 0) {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.DamageSource, sourceLKI);
-                runParams.put(AbilityKey.DamageTargets, Sets.newHashSet(e.getValue().keySet()));
-                runParams.put(AbilityKey.DamageAmount, sum);
+                runParams.put(AbilityKey.DamageMap, Maps.newHashMap(e.getValue()));
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
@@ -80,8 +80,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 final GameEntity ge = e.getKey();
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.DamageTarget, ge);
-                runParams.put(AbilityKey.DamageSources, Sets.newHashSet(e.getValue().keySet()));
-                runParams.put(AbilityKey.DamageAmount, sum);
+                runParams.put(AbilityKey.DamageMap, Maps.newHashMap(e.getValue()));
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);

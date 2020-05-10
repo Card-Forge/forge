@@ -40,6 +40,7 @@ public enum ApiType {
     ChooseCard (ChooseCardEffect.class),
     ChooseColor (ChooseColorEffect.class),
     ChooseDirection (ChooseDirectionEffect.class),
+    ChooseEvenOdd (ChooseEvenOddEffect.class),
     ChooseNumber (ChooseNumberEffect.class),
     ChoosePlayer (ChoosePlayerEffect.class),
     ChooseSource (ChooseSourceEffect.class),

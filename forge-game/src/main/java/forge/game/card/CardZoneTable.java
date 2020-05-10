@@ -42,7 +42,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             old.add(value);
         } else {
             old = new CardCollection(value);
-            dataMap.put(rowKey, columnKey, old);
+            delegate().put(rowKey, columnKey, old);
         }
         return old;
     }

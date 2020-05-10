@@ -187,30 +187,34 @@ public class Main extends AndroidApplication {
 
     private void initForge(AndroidAdapter adapter, boolean permissiongranted){
         boolean isPortrait;
-        //establish assets directory
-        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            Gdx.app.error("Forge", "Can't access external storage");
-            adapter.exit();
-            return;
-        }
-        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
-        if (!FileUtil.ensureDirectoryExists(assetsDir)) {
-            Gdx.app.error("Forge", "Can't access external storage");
-            adapter.exit();
-            return;
-        }
-
-        //ensure .nomedia file exists in Forge directory so its images
-        //and other media files don't appear in Gallery or other apps
-        String noMediaFile = assetsDir + ".nomedia";
-        if (!FileUtil.doesFileExist(noMediaFile)) {
-            FileUtil.writeFile(noMediaFile, "");
-        }
-
-        //enforce orientation based on whether device is a tablet and user preference
-        adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
-        boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
         if (permissiongranted){
+            //establish assets directory
+            if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();
+                return;
+            }
+            String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+            if (!FileUtil.ensureDirectoryExists(assetsDir)) {
+                Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();
+                return;
+            }
+
+            //ensure .nomedia file exists in Forge directory so its images
+            //and other media files don't appear in Gallery or other apps
+            String noMediaFile = assetsDir + ".nomedia";
+            if (!FileUtil.doesFileExist(noMediaFile)) {
+                FileUtil.writeFile(noMediaFile, "");
+            }
+
+            //enforce orientation based on whether device is a tablet and user preference
+            adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
+            boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
+
+            ForgePreferences prefs = FModel.getPreferences();
+            boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+
             if (landscapeMode) {
                 isPortrait = false;
                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
@@ -220,15 +224,15 @@ public class Main extends AndroidApplication {
                 isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
+
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait));
         } else {
             isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait));
         }
 
-        ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait));
     }
 
     /*@Override

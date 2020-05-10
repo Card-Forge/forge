@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,14 +54,14 @@ import forge.util.Localizer;
 
 /**
  * Assembles Swing components of assign damage dialog.
- * 
+ *
  * This needs a JDialog to maintain a modal state.
  * Without the modal state, the PhaseHandler automatically
  * moves forward to phase Main2 without assigning damage.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VAssignDamage {
+public class VAssignCombatDamage {
     final Localizer localizer = Localizer.getInstance();
     private final CMatchUI matchUI;
 
@@ -119,7 +119,7 @@ public class VAssignDamage {
             CardView source = ((CardPanel) evt.getSource()).getCard();
             if (!damage.containsKey(source)) source = null; // to get player instead of fake card
 
-            final FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
+            final FSkin.Colors brdrColor = VAssignCombatDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
             ((CardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
         }
 
@@ -135,13 +135,13 @@ public class VAssignDamage {
             boolean meta = evt.isControlDown();
             boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
             boolean isRMB = SwingUtilities.isRightMouseButton(evt);
-            
+
             if ( isLMB || isRMB)
                 assignDamageTo(source, meta, isLMB);
         }
     };
 
-    public VAssignDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
+    public VAssignCombatDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
         this.matchUI = matchUI;
         String s  = localizer.getMessage("lbLAssignDamageDealtBy");
         dlg.setTitle(s.replace("%s",attacker.toString()));
@@ -194,12 +194,12 @@ public class VAssignDamage {
             CardView fakeCard = null;
             if (defender instanceof CardView) {
                 fakeCard = (CardView)defender;
-            } else if (defender instanceof PlayerView) { 
+            } else if (defender instanceof PlayerView) {
                 final PlayerView p = (PlayerView)defender;
                 fakeCard = new CardView(-1, null, defender.toString(), p, matchUI.getAvatarImage(p.getLobbyPlayerName()));
             }
             addPanelForDefender(pnlDefenders, fakeCard);
-        }        
+        }
 
         // Add "opponent placeholder" card if trample allowed
         // If trample allowed, make card placeholder
@@ -231,7 +231,7 @@ public class VAssignDamage {
 
         pnlMain.add(pnlButtons, "ax center, w 350px!, gap 10px 10px 10px 10px, span 2");
         overlay.add(pnlMain);
-        
+
         pnlMain.getRootPane().setDefaultButton(btnOK);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -271,13 +271,13 @@ public class VAssignDamage {
      * @param isLMB
      */
     private void assignDamageTo(CardView source, final boolean meta, final boolean isAdding) {
-        if ( !damage.containsKey(source) ) 
+        if ( !damage.containsKey(source) )
             source = null;
 
         // If trying to assign to the defender, follow the normal assignment rules
         // No need to check for "active" creature assignee when overiding combatant order
-        if ((source == null || source == defender || !overrideCombatantOrder) && isAdding && 
-                !VAssignDamage.this.canAssignTo(source)) {
+        if ((source == null || source == defender || !overrideCombatantOrder) && isAdding &&
+                !VAssignCombatDamage.this.canAssignTo(source)) {
             return;
         }
 
@@ -285,9 +285,9 @@ public class VAssignDamage {
         int lethalDamage = getDamageToKill(source);
         int damageItHad = damage.get(source).damage;
         int leftToKill = Math.max(0, lethalDamage - damageItHad);
-    
+
         int damageToAdd = isAdding ? 1 : -1;
-    
+
         int leftToAssign = getRemainingDamage();
         // Left click adds damage, right click substracts damage.
         // Hold Ctrl to assign lethal damage, Ctrl-click again on a creature with lethal damage to assign all available damage to it
@@ -298,18 +298,18 @@ public class VAssignDamage {
                 damageToAdd = damageItHad > lethalDamage ? lethalDamage - damageItHad : -damageItHad;
             }
         }
-        
+
         if ( damageToAdd > leftToAssign )
             damageToAdd = leftToAssign;
-        
+
         // cannot assign first blocker less than lethal damage except when overriding order
         boolean isFirstBlocker = defenders.get(0).card == source;
         if (!overrideCombatantOrder && isFirstBlocker && damageToAdd + damageItHad < lethalDamage )
             return;
 
-        if ( 0 == damageToAdd || damageToAdd + damageItHad < 0) 
+        if ( 0 == damageToAdd || damageToAdd + damageItHad < 0)
             return;
-        
+
         addDamage(source, damageToAdd);
         checkDamageQueue();
         updateLabels();
@@ -350,7 +350,7 @@ public class VAssignDamage {
         }
         if ( dmgLeft < 0 )
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
-        if (toAllBlockers && dmgLeft > 0) { 
+        if (toAllBlockers && dmgLeft > 0) {
             // flush the remaining damage into last defender if assigning all damage
             addDamage(dtLast.card, dmgLeft );
         }
@@ -362,7 +362,7 @@ public class VAssignDamage {
         for(DamageTarget dt : defenders)
             dt.damage = 0;
     }
-    
+
     private void addDamage(final CardView card, int addedDamage) {
         // If we don't have enough left or we're trying to unassign too much return
         final int canAssign = getRemainingDamage();
@@ -371,7 +371,7 @@ public class VAssignDamage {
         }
 
         final DamageTarget dt = damage.get(card);
-        dt.damage = Math.max(0, addedDamage + dt.damage); 
+        dt.damage = Math.max(0, addedDamage + dt.damage);
     }
 
 
@@ -393,7 +393,7 @@ public class VAssignDamage {
 
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
-        
+
         for ( DamageTarget dt : defenders )
         {
             int dmg = dt.damage;
@@ -402,9 +402,9 @@ public class VAssignDamage {
             int overkill = dmg - lethal;
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
-            if( overkill >= 0 ) { 
+            if( overkill >= 0 ) {
                 sb.append(" (").append(localizer.getMessage("lblLethal"));
-                if( overkill > 0 ) 
+                if( overkill > 0 )
                     sb.append(" +").append(overkill);
                 sb.append(")");
             }
@@ -421,9 +421,9 @@ public class VAssignDamage {
     // assigned dynamically, the cards die off and further damage to them can't
     // be modified.
     private void finish() {
-        if ( getRemainingDamage() > 0 ) 
+        if ( getRemainingDamage() > 0 )
             return;
-        
+
         dlg.dispose();
         SOverlayUtils.hideOverlay();
     }
@@ -441,7 +441,10 @@ public class VAssignDamage {
             }
         }
         else {
-            lethalDamage = VAssignDamage.this.attackerHasDeathtouch ? 1 : Math.max(0, card.getLethalDamage());
+            lethalDamage = Math.max(0, card.getLethalDamage());
+            if (attackerHasDeathtouch) {
+                lethalDamage = Math.min(lethalDamage, 1);
+            }
         }
         return lethalDamage;
     }

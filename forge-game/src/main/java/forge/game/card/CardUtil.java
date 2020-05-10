@@ -293,7 +293,12 @@ public final class CardUtil {
             newCopy.addOptionalCostPaid(ocost);
         }
 
-        newCopy.setCastSA(in.getCastSA());
+        if (in.getCastSA() != null) {
+            SpellAbility castSA = in.getCastSA().copy(newCopy, true);
+            castSA.setLastStateBattlefield(CardCollection.EMPTY);
+            castSA.setLastStateGraveyard(CardCollection.EMPTY);
+            newCopy.setCastSA(castSA);
+        }
         newCopy.setCastFrom(in.getCastFrom());
 
         newCopy.setExiledWith(in.getExiledWith());

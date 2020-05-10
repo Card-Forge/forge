@@ -164,7 +164,7 @@ public class CostPutCounter extends CostPartWithList {
         if (this.payCostFromSource()) {
             executePayment(ability, ability.getHostCard());
         } else {
-            executePayment(ability, decision.cards);
+            executePayment(ai, ability, decision.cards);
         }
         triggerCounterPutAll(ability);
         return true;

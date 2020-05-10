@@ -62,7 +62,7 @@ public interface IGuiGame {
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
-    Map<CardView, Integer> assignDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
+    Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
 
     void message(String message);
     void message(String message, String title);

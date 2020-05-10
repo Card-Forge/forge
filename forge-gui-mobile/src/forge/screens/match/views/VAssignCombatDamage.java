@@ -53,7 +53,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.utils.Align;
 
-public class VAssignDamage extends FDialog {
+public class VAssignCombatDamage extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
@@ -95,7 +95,7 @@ public class VAssignDamage extends FDialog {
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order
      */
-    public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
+    public VAssignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
         super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
 
         callback = waitCallback;
@@ -453,7 +453,10 @@ public class VAssignDamage extends FDialog {
             }
         }
         else {
-            lethalDamage = attackerHasDeathtouch ? 1 : Math.max(0, source.getLethalDamage());
+            lethalDamage = Math.max(0, source.getLethalDamage());
+            if (attackerHasDeathtouch) {
+                    lethalDamage = Math.min(lethalDamage, 1);
+            }
         }
         return lethalDamage;
     }

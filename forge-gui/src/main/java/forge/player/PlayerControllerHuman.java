@@ -291,7 +291,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)) {
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);
-                final Map<CardView, Integer> result = getGui().assignDamage(vAttacker, vBlockers, damageDealt,
+                final Map<CardView, Integer> result = getGui().assignCombatDamage(vAttacker, vBlockers, damageDealt,
                         vDefender, overrideOrder);
                 for (final Entry<CardView, Integer> e : result.entrySet()) {
                     map.put(game.getCard(e.getKey()), e.getValue());
