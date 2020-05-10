@@ -884,7 +884,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.id = lki ? id : nextId();
             clone.view = new SpellAbilityView(clone);
 
-            // dont use setHostCard to not trigger the not copied parts yet
+            // don't use setHostCard to not trigger the not copied parts yet
 
             copyHelper(clone, host);
 
@@ -908,6 +908,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable = new CardZoneTable();
                 clone.changeZoneTable.putAll(changeZoneTable);
             }
+
+            clone.setPaidHash(Maps.newHashMap(getPaidHash()));
 
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
