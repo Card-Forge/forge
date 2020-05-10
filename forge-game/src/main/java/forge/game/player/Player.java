@@ -55,6 +55,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -2913,7 +2914,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        return controller.chooseSingleEntityForEffect(view, null, "Choose a companion", true);
+        return controller.chooseSingleEntityForEffect(view, null, Localizer.getInstance().getMessage("lblChooseACompanion"), true);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
