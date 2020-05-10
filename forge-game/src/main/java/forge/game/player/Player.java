@@ -23,6 +23,7 @@ import com.google.common.collect.*;
 
 import forge.ImageKeys;
 import forge.LobbyPlayer;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -33,11 +34,8 @@ import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
-import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.*;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
-import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1510,6 +1508,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         cl.addAll(getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
         if (includeCommandZone) {
             cl.addAll(getZone(ZoneType.Command).getCardsPlayerCanActivate(this));
+            cl.addAll(getZone(ZoneType.Sideboard).getCardsPlayerCanActivate(this));
         }
 
         //External activatables from all opponents
@@ -2850,6 +2849,90 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
+    }
+
+    public Card assignCompanion(Game game, PlayerController player) {
+        List<Card> legalCompanions = Lists.newArrayList();
+
+        boolean uniqueNames = true;
+        Set<String> cardNames = new HashSet<>();
+        Set<CardType.CoreType> cardTypes = EnumSet.allOf(CardType.CoreType.class);
+        final CardCollection nonLandInDeck = CardLists.getNotType(getCardsIn(ZoneType.Library), "Land");
+        for (final Card c : nonLandInDeck) {
+            if (uniqueNames) {
+                if (cardNames.contains(c.getName())) {
+                    uniqueNames = false;
+                } else {
+                    cardNames.add(c.getName());
+                }
+            }
+
+            cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
+        }
+
+        int deckSize = getCardsIn(ZoneType.Library).size();
+        int minSize = game.getMatch().getRules().getGameType().getDeckFormat().getMainRange().getMinimum();
+
+        for (final Card c : getCardsIn(ZoneType.Sideboard)) {
+            for (KeywordInterface inst : c.getKeywords()) {
+                if (!(inst instanceof Companion)) {
+                    continue;
+                }
+
+                Companion kwInstance = (Companion) inst;
+                if (kwInstance.hasSpecialRestriction()) {
+                    String specialRules = kwInstance.getSpecialRules();
+                    if (specialRules.equals("UniqueNames")) {
+                        if (uniqueNames) {
+                            legalCompanions.add(c);
+                        }
+                    } else if (specialRules.equals("DeckSizePlus20")) {
+                        // +20 deck size to min deck size
+                        if (deckSize >= minSize + 20) {
+                            legalCompanions.add(c);
+                        }
+                    } else if (specialRules.equals("SharesCardType")) {
+                        // Shares card type
+                        if (!cardTypes.isEmpty()) {
+                            legalCompanions.add(c);
+                        }
+                    }
+
+                } else {
+                    String restriction = kwInstance.getDeckRestriction();
+                    if (deckMatchesDeckRestriction(c, restriction)) {
+                        legalCompanions.add(c);
+                    }
+                }
+            }
+        }
+
+        if (legalCompanions.isEmpty()) {
+            return null;
+        }
+
+        CardCollectionView view = CardCollection.getView(legalCompanions);
+
+        return controller.chooseSingleEntityForEffect(view, null, "Choose a companion", true);
+    }
+
+    public boolean deckMatchesDeckRestriction(Card source, String restriction) {
+        for (final Card c : getCardsIn(ZoneType.Library)) {
+            if (!c.isValid(restriction.split(","), this, source, null)) {
+                return false;
+            }
+        }
+        return true;
+     }
+
+    public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
+        final String name = Lang.getPossesive(companion.getName()) + " Companion Effect";
+        DetachedCardEffect eff = new DetachedCardEffect(companion, name);
+
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
+        eff.addStaticAbility(mayBePlayedAbility);
+        // Probably remove this effect when the spell is cast via a static trigger
+        return eff;
     }
 
     public static DetachedCardEffect createCommanderEffect(Game game, Card commander) {

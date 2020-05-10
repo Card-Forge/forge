@@ -136,8 +136,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability));
+            if (!source.isCopiedSpell()) {
+                if (!source.isInZone(ZoneType.Stack)) {
+                    ability.setHostCard(game.getAction().moveToStack(source, ability));
+                }
+                if (ability.equals(source.getCastSA())) {
+                    source.setCastSA(ability.copy(source, true));
+                }
             }
         }
 

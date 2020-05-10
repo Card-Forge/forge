@@ -237,9 +237,11 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final Object o : tgts) {
-                dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
-                if (dmg <= 0) {
-                    continue;
+                if (!removeDamage) {
+                    dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                    if (dmg <= 0) {
+                        continue;
+                    }
                 }
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -257,7 +259,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                             if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                                     sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
                                 // excess damage explicit says toughness, not lethal damage in the rules
-                                int lethal = c.getNetToughness() - c.getDamage();
+                                int lethal = c.getLethalDamage();
                                 if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
                                     lethal = Math.min(lethal, 1);
                                 }
