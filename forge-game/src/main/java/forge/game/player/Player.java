@@ -24,6 +24,7 @@ import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -2883,6 +2884,18 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
         }
+        
+        boolean uniqueManaSymbols = true;
+        for (final Card c : getCardsIn(ZoneType.Library)) {
+        	Set<ManaCostShard> manaSymbols = new HashSet<>();
+        	for (final ManaCostShard manaSymbol : c.getManaCost()) {
+        		if (manaSymbols.contains(manaSymbol)) {
+        			uniqueManaSymbols = false;
+        		} else {
+        			manaSymbols.add(manaSymbol);
+        		}
+        	}
+        }
 
         int deckSize = getCardsIn(ZoneType.Library).size();
         int minSize = game.getMatch().getRules().getGameType().getDeckFormat().getMainRange().getMinimum();
@@ -2900,6 +2913,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                         if (uniqueNames) {
                             legalCompanions.add(c);
                         }
+                    } else if (specialRules.equals("UniqueManaSymbols")) {
+                    	if (uniqueManaSymbols) {
+                    		legalCompanions.add(c);
+                    	}
                     } else if (specialRules.equals("DeckSizePlus20")) {
                         // +20 deck size to min deck size
                         if (deckSize >= minSize + 20) {
