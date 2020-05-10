@@ -1124,7 +1124,8 @@ public class PlayerControllerAi extends PlayerController {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("BestCreatureInComputerDeck")) {
-                return ComputerUtilCard.getBestCreatureAI(aiLibrary).getName();
+                Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiLibrary);
+                return bestCreature != null ? bestCreature.getName() : "Plains";
             } else if (logic.equals("RandomInComputerDeck")) {
                 return Aggregates.random(aiLibrary).getName();
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
