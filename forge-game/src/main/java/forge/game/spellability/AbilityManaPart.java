@@ -365,6 +365,10 @@ public class AbilityManaPart implements java.io.Serializable {
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                 return true;
             }
+            
+            if (restriction.equals("CantPayGenericCosts")) {
+            	return true;
+            }
 
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
@@ -380,10 +384,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                     return true;
                 }
-            }
-            
-            if (restriction.equals("CantPayGenericCosts")) {
-            	return true;
             }
 
         }
