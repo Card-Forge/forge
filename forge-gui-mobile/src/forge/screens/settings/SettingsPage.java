@@ -234,8 +234,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlLoadHistoricFormats")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
-                        "Enable Unknown Cards",
-                        "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)") {
+                        localizer.getMessage("lblEnableUnknownCards"),
+                        localizer.getMessage("nlEnableUnknownCards")) {
                                 @Override
                                 public void select() {
                                     super.select();
@@ -255,8 +255,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             },
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-                        "Experimental Network Compatibility",
-                        "Forge switches to compatible network stream. (If unsure, turn OFF this option)") {
+                        localizer.getMessage("lblExperimentalNetworkCompatibility"),
+                        localizer.getMessage("nlExperimentalNetworkCompatibility")) {
                                 @Override
                                 public void select() {
                                     super.select();

@@ -14,6 +14,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Avatars");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblAvatars"));
 
     private final JPanel pnlAvatars = new JPanel();
 
@@ -64,7 +65,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
 
     @Override
     public String getMenuTitle() {
-        return "Avatars";
+        return Localizer.getInstance().getMessage("lblAvatars");
     }
 
     @Override

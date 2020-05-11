@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -37,6 +36,7 @@ import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Localizer;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
 
@@ -353,27 +353,27 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         if (activeSlots.size() < 2) {
-            SOptionPane.showMessageDialog("At least two players are required to start a game.");
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRequiredLeastTwoPlayerStartGame"));
             return null;
         }
 
         if (!isEnoughTeams()) {
-            SOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotEnoughTeams"));
             return null;
         }
 
         for (final LobbySlot slot : activeSlots) {
             if (!slot.isReady() && slot.getType() != LobbySlotType.OPEN) {
-                SOptionPane.showMessageDialog(TextUtil.concatNoSpace("Player ", slot.getName(), " is not ready"));
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPlayerIsNotReady", slot.getName()));
                 return null;
             }
             if (slot.getDeck() == null) {
-                SOptionPane.showMessageDialog(TextUtil.concatNoSpace("Please specify a deck for ", slot.getName()));
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyPlayerDeck", slot.getName()));
                 return null;
             }
             if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
                 if (!slot.getDeck().has(DeckSection.Commander)) {
-                    SOptionPane.showMessageDialog(TextUtil.concatNoSpace(slot.getName(), " doesn't have a commander"));
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPlayerDoesntHaveCommander", slot.getName()));
                     return null;
                 }
             }
@@ -410,7 +410,7 @@ public abstract class GameLobby implements IHasGameType {
                 final String name = slot.getName();
                 final String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
-                    SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidDeck"));
                     return null;
                 }
             }
@@ -460,7 +460,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
-                            SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid " + commanderGameType + " Deck");
+                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidCommanderGameTypeDeck", commanderGameType));
                             return null;
                         }
                     }
@@ -491,7 +491,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
+                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidSchemeDeck"));
                             return null;
                         }
                     }
@@ -504,7 +504,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
+                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidPlanarDeck"));
                             return null;
                         }
                     }
@@ -514,8 +514,7 @@ public abstract class GameLobby implements IHasGameType {
                 //Vanguard
                 if (variantTypes.contains(GameType.Vanguard)) {
                     if (avatarPool == null || avatarPool.countAll() == 0) { //ERROR! null if avatar deselected on list
-                        SOptionPane.showMessageDialog("No Vanguard avatar selected for " + name
-                                + ". Please choose one or disable the Vanguard variant");
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoSelectedVanguardAvatarForPlayer", name));
                         return null;
                     }
                 }

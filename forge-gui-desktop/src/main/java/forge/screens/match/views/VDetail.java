@@ -27,6 +27,7 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CDetail;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class VDetail implements IVDoc<CDetail> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Detail");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCardDetail"));
 
     // Top-level containers
     private final CardDetailPanel pnlDetail = new CardDetailPanel();

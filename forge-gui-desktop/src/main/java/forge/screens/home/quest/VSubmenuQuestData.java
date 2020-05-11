@@ -74,7 +74,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FLabel lblPreconDeck = new FLabel.Builder().text(localizer.getMessage("lblStarterEventdeck") +":").build();
     private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<>();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat") + "").build();
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedFormat") + ":").build();
     private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<>();
 
     private final FLabel lblCustomDeck = new FLabel.Builder().text(localizer.getMessage("lblCustomdeck")).build();
@@ -97,7 +97,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FLabel lblPrizedCards = new FLabel.Builder().text(localizer.getMessage("lblPrizedCards")).build();
     private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<>();
 
-    private final FLabel lblPrizeFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedformat")).build();
+    private final FLabel lblPrizeFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedFormat") + ":").build();
     private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<>();
 
     private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailableWin")).build();

@@ -22,6 +22,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     private static final float PADDING = Utils.scale(5);
@@ -34,7 +35,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     public OnlineChatScreen() {
         super(null, OnlineMenu.getMenu());
 
-        txtSendMessage.setGhostText("Enter message to send");
+        txtSendMessage.setGhostText(Localizer.getInstance().getMessage("lblEnterMessageToSend"));
         txtSendMessage.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

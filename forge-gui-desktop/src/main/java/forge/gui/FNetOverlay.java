@@ -32,6 +32,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
 import forge.view.FDialog;
 import forge.view.FFrame;
+import forge.util.Localizer;
 
 
 public enum FNetOverlay implements IOnlineChatInterface {
@@ -73,7 +74,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     
     private final FTextArea txtLog = new FTextArea();
     private final FTextField txtInput = new FTextField.Builder().maxLength(255).build();
-    private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
+    private final FLabel cmdSend = new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblSend")).build(); 
 
     //private boolean minimized = false;
     private int height = 140;
@@ -106,7 +107,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     FNetOverlay() {
-        window.setTitle("Chat");
+        window.setTitle(Localizer.getInstance().getMessage("lblChat"));
         window.setVisible(false);
         window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         window.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));

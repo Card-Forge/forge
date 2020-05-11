@@ -412,7 +412,7 @@ public class VAssignCombatDamage {
             dt.label.setText(sb.toString());
         }
 
-        lblTotalDamage.setText(TextUtil.concatNoSpace("Available damage points: ", String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
+        lblTotalDamage.setText(TextUtil.concatNoSpace(localizer.getMessage("lblAvailableDamagePoints"), ": " , String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         btnOK.setEnabled(damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }

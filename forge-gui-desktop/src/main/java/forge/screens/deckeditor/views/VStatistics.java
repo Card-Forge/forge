@@ -15,6 +15,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of deck editor analysis tab.
@@ -27,23 +28,23 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Statistics");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblStatistics"));
 
     // Global stats
     private FLabel lblTotal = new FLabel.Builder()
-            .text("TOTAL CARDS: 0").tooltip("Total cards")
+            .text("TOTAL CARDS: 0").tooltip(Localizer.getInstance().getMessage("lblTotalCards"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblTMC = new FLabel.Builder()
-            .text("TOTAL MANA COST: 0").tooltip("Total mana cost")
+            .text("TOTAL MANA COST: 0").tooltip(Localizer.getInstance().getMessage("lblTotalManaCost"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblAMC = new FLabel.Builder()
-            .text("AVERAGE MANA COST: 0.00").tooltip("Average mana cost")
+            .text("AVERAGE MANA COST: 0.00").tooltip(Localizer.getInstance().getMessage("lblAverageManaCost"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblCardCountHeader = new FLabel.Builder()
-            .text("CARDS BY COLOR, TYPE AND CMC:").tooltip("Breakdown of cards by color, type and CMC")
+            .text(Localizer.getInstance().getMessage("lblCardByColorTypeCMC")).tooltip(Localizer.getInstance().getMessage("lblBreakdownOfColorTypeCMC"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblShardCountHeader = new FLabel.Builder()
-            .text("COLORED MANA SYMBOLS IN MANA COST:").tooltip("Amount of mana symbols in mana cost of cards")
+            .text(Localizer.getInstance().getMessage("lblColoredManaSymbolsINManaCost")).tooltip(Localizer.getInstance().getMessage("lblAmountOfManaSymbolsInManaCostOfCards"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
@@ -90,38 +91,38 @@ public enum VStatistics implements IVDoc<CStatistics> {
         scroller.getViewport().setBorder(null);
 
         // Color stats
-        lblMulti.setToolTipText("Multicolor Card Count");
-        lblBlack.setToolTipText("Black Card Count");
-        lblBlue.setToolTipText("Blue Card Count");
-        lblGreen.setToolTipText("Green Card Count");
-        lblRed.setToolTipText("Red Card Count");
-        lblWhite.setToolTipText("White Card Count");
-        lblColorless.setToolTipText("Colorless Card Count");
+        lblMulti.setToolTipText(Localizer.getInstance().getMessage("lblMulticolorCardCount"));
+        lblBlack.setToolTipText(Localizer.getInstance().getMessage("lblBlackCardCount"));
+        lblBlue.setToolTipText(Localizer.getInstance().getMessage("lblBlueCardCount"));
+        lblGreen.setToolTipText(Localizer.getInstance().getMessage("lblGreenCardCount"));
+        lblRed.setToolTipText(Localizer.getInstance().getMessage("lblRedCardCount"));
+        lblWhite.setToolTipText(Localizer.getInstance().getMessage("lblWhiteCardCount"));
+        lblColorless.setToolTipText(Localizer.getInstance().getMessage("lblColorlessCardCount"));
 
         // Colored mana symbol count stats
-        lblBlackShard.setToolTipText("Black Mana Symbol Count");
-        lblBlueShard.setToolTipText("Blue Mana Symbol Count");
-        lblGreenShard.setToolTipText("Green Mana Symbol Count");
-        lblRedShard.setToolTipText("Red Mana Symbol Count");
-        lblWhiteShard.setToolTipText("White Mana Symbol Count");
+        lblBlackShard.setToolTipText(Localizer.getInstance().getMessage("lblBlackManaSymbolCount"));
+        lblBlueShard.setToolTipText(Localizer.getInstance().getMessage("lblBlueManaSymbolCount"));
+        lblGreenShard.setToolTipText(Localizer.getInstance().getMessage("lblGreenManaSymbolCount"));
+        lblRedShard.setToolTipText(Localizer.getInstance().getMessage("lblRedManaSymbolCount"));
+        lblWhiteShard.setToolTipText(Localizer.getInstance().getMessage("lblWhiteManaSymbolCount"));
 
         // Type stats
-        lblArtifact.setToolTipText("Artifact Card Count");
-        lblCreature.setToolTipText("Creature Card Count");
-        lblEnchantment.setToolTipText("Enchantment Card Count");
-        lblInstant.setToolTipText("Instant Card Count");
-        lblLand.setToolTipText("Land Card Count");
-        lblPlaneswalker.setToolTipText("Planeswalker Card Count");
-        lblSorcery.setToolTipText("Sorcery Card Count");
+        lblArtifact.setToolTipText(Localizer.getInstance().getMessage("lblArtifactCardCount"));
+        lblCreature.setToolTipText(Localizer.getInstance().getMessage("lblCreatureCardCount"));
+        lblEnchantment.setToolTipText(Localizer.getInstance().getMessage("lblEnchantmentCardCount"));
+        lblInstant.setToolTipText(Localizer.getInstance().getMessage("lblInstantCardCount"));
+        lblLand.setToolTipText(Localizer.getInstance().getMessage("lblLandCardCount"));
+        lblPlaneswalker.setToolTipText(Localizer.getInstance().getMessage("lblPlaneswalkerCardCount"));
+        lblSorcery.setToolTipText(Localizer.getInstance().getMessage("lblSorceryCardCount"));
 
         // CMC stats
-        lblCMC0.setToolTipText("CMC 0 Card Count");
-        lblCMC1.setToolTipText("CMC 1 Card Count");
-        lblCMC2.setToolTipText("CMC 2 Card Count");
-        lblCMC3.setToolTipText("CMC 3 Card Count");
-        lblCMC4.setToolTipText("CMC 4 Card Count");
-        lblCMC5.setToolTipText("CMC 5 Card Count");
-        lblCMC6.setToolTipText("CMC 6+ Card Count");
+        lblCMC0.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(0)));
+        lblCMC1.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(1)));
+        lblCMC2.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(2)));
+        lblCMC3.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(3)));
+        lblCMC4.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(4)));
+        lblCMC5.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", String.valueOf(5)));
+        lblCMC6.setToolTipText(Localizer.getInstance().getMessage("lblCMCNCardCount", "6+"));
 
         // Stats container
         pnlStats.setOpaque(false);

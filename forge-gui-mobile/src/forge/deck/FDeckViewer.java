@@ -102,7 +102,7 @@ public class FDeckViewer extends FScreen {
         }
 
         Forge.getClipboard().setContents(deckList.toString());
-        FOptionPane.showMessageDialog(String.format(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard"), deck.getName()));
+        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
     private final Deck deck;

@@ -14,28 +14,29 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("Lobby", FSkinImage.QUEST_GEAR, OnlineLobbyScreen.class),
-        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
-        Disconnect("Disconnect", FSkinImage.DELETE, null);
- 
+        Lobby("lblLobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
+        Disconnect("lblDisconnect", FSkinImage.DELETE, null);
+
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
         OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, icon0, new FEventHandler() {
+            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     if(screenClass == null) {
                         FOptionPane.showConfirmDialog(
-                                "Leave lobby? Doing so will shut down all connections and stop hosting.",
-                                "Disconnect", new Callback<Boolean>() {
+                                Localizer.getInstance().getMessage("lblLeaveLobbyDescription"),
+                                Localizer.getInstance().getMessage("lblDisconnect"), new Callback<Boolean>() {
                                     @Override
                                     public void run(Boolean result) {
                                         if (result) {
@@ -67,7 +68,7 @@ public class OnlineMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("Play Online - " + item.getText());
+                    screen.setHeaderCaption(Localizer.getInstance().getMessage("lblPlayOnline") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

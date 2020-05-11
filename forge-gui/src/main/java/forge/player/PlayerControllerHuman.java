@@ -950,7 +950,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
         for (int i = 0; i < chosenAmount; i++) {
-            final CardView nowChosen = getGui().oneOrNone(localizer.getMessage("lblExileWhichCard"), CardView.getCollection(grave));
+            final CardView nowChosen = getGui().oneOrNone(localizer.getMessage("lblExileWhichCard", String.valueOf(i + 1), String.valueOf(chosenAmount)), CardView.getCollection(grave));
 
             if (nowChosen == null) {
                 // User canceled,abort delving.

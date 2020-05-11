@@ -11,6 +11,7 @@ import forge.model.FModel;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 
         final TokenManager catalogManager = new TokenManager(cDetailPicture0, false);
         final TokenManager deckManager = new TokenManager(cDetailPicture0, false);
-        catalogManager.setCaption("All Tokens");
+        catalogManager.setCaption(Localizer.getInstance().getMessage("lblAllTokens"));
         catalogManager.setAlwaysNonUnique(true);
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
@@ -103,7 +104,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
         resetUI();
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("All tokens");
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(Localizer.getInstance().getMessage("lblAllTokens"));
 
         this.getBtnAdd().setVisible(false);
         this.getBtnAdd4().setVisible(false);

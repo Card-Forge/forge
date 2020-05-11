@@ -17,6 +17,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
 
@@ -42,9 +43,9 @@ public class FDeckViewer extends FDialog {
 
     private final CardDetailPanel cardDetail = new CardDetailPanel();
     private final CardPicturePanel cardPicture = new CardPicturePanel();
-    private final FButton btnCopyToClipboard = new FButton("Copy to Clipboard");
-    private final FButton btnChangeSection = new FButton("Change Section");
-    private final FButton btnClose = new FButton("Close");
+    private final FButton btnCopyToClipboard = new FButton(Localizer.getInstance().getMessage("btnCopyToClipboard"));
+    private final FButton btnChangeSection = new FButton(Localizer.getInstance().getMessage("lblChangeSection"));
+    private final FButton btnClose = new FButton(Localizer.getInstance().getMessage("lblClose"));
 
     public static void show(final Deck deck) {
         if (deck == null) { return; }
@@ -202,6 +203,6 @@ public class FDeckViewer extends FDialog {
 
         final StringSelection ss = new StringSelection(deckList.toString());
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-        FOptionPane.showMessageDialog("Deck list for '" + deck.getName() + "' copied to clipboard.");
+        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 }

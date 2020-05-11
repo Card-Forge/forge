@@ -6,6 +6,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.WaitCallback;
 import forge.util.gui.SOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ public class AutoUpdater {
     private final String RELEASE_MAVEN_METADATA = "https://releases.cardforge.org/forge/forge-gui-desktop/maven-metadata.xml";
     private static final boolean VERSION_FROM_METADATA = true;
     private static final String TMP_DIR = "tmp/";
+    private static final Localizer localizer = Localizer.getInstance();
 
     public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
 
@@ -74,9 +76,9 @@ public class AutoUpdater {
             // TODO This doesn't work yet, because FSkin isn't loaded at the time.
             return false;
         } else if (updateChannel.equals("none")) {
-            String message = "You haven't set an update channel. Do you want to check a channel now?";
+            String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
             List<String> options = ImmutableList.of("Cancel", "release", "snapshot");
-            int option = SOptionPane.showOptionDialog(message, "Manual Check", null, options, 0);
+            int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option == 0) {
                 return false;
             } else {
@@ -180,12 +182,9 @@ public class AutoUpdater {
             return downloadFromBrowser();
         }
 
-        String message = "A new version of Forge is available (" + version + ").\n" +
-                "You are currently on version (" + buildVersion + ").\n\n" +
-                "Would you like to update to the new version now?";
-
-        final List<String> options = ImmutableList.of("Update Now", "Update Later");
-        if (SOptionPane.showOptionDialog(message, "New Version Available", null, options, 0) == 0) {
+        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", version, buildVersion);
+        final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
+        if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
         }
 
@@ -208,7 +207,7 @@ public class AutoUpdater {
         WaitCallback<Boolean> callback = new WaitCallback<Boolean>() {
             @Override
             public void run() {
-                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", "Download the new version..", packageUrl, "tmp/", null, null) {
+                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, "tmp/", null, null) {
                     @Override
                     public void downloadAndUnzip() {
                         packagePath = download(version + "-upgrade.tar.bz2");
@@ -240,7 +239,7 @@ public class AutoUpdater {
     }
 
     private void restartForge() {
-        if (isLoading || SOptionPane.showConfirmDialog("Forge has been downloaded. You should extract the package and restart Forge for the new version.", "Exit now?")) {
+        if (isLoading || SOptionPane.showConfirmDialog(localizer.getMessage("lblForgeHasBeenUpdateRestartForgeToUseNewVersion"), localizer.getMessage("lblExitNowConfirm"))) {
             System.exit(0);
         }
     }

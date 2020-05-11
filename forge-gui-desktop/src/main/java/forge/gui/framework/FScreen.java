@@ -18,6 +18,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
+import forge.util.Localizer;
 
 import java.io.File;
 
@@ -28,155 +29,155 @@ public class FScreen {
     public static final FScreen HOME_SCREEN = new FScreen(
             VHomeUI.SINGLETON_INSTANCE,
             CHomeUI.SINGLETON_INSTANCE,
-            "Home  ",
+            "lblHomeWithSpaces",
             FSkin.getIcon(FSkinProp.ICO_FAVICON),
             false,
-            "Exit Forge",
+            "lblExitForge",
             null,
             false);
     public static final FScreen WORKSHOP_SCREEN = new FScreen(
             VWorkshopUI.SINGLETON_INSTANCE,
             CWorkshopUI.SINGLETON_INSTANCE,
-            "Workshop",
+            "lblWorkshop",
             FSkin.getIcon(FSkinProp.ICO_SETTINGS), //TODO: Create icon for workshop screen
             false,
-            "Back to Home",
+            "lblBacktoHome",
             ForgeConstants.WORKSHOP_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_CONSTRUCTED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Deck Editor   ",
+            "lblDeckEditorWithSpaces",
             FSkin.getImage(FSkinProp.IMG_PACK),
             false,
-            "Back to Home",
+            "lblBacktoHome",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_ARCHENEMY = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Scheme Deck Editor",
+            "lblSchemeDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_COMMANDER = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Commander Deck Editor",
+            "lblCommanderDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_TINY_LEADERS = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Tiny Leaders Deck Editor",
+            "lblTinyLeadersDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_BRAWL = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Brawl Deck Editor",
+            "lblBrawlDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_OATHBREAKER = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Oathbreaker Deck Editor",
+            "lblOathbreakerDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_PLANECHASE = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Planar Deck Editor",
+            "lblPlanarDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_DRAFT = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Draft Deck Editor",
+            "lblDraftDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_SEALED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Sealed Deck Editor",
+            "lblSealedDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen TOKEN_VIEWER = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Token Viewer",
+            "lblTokenViewer",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Viewer",
+            "lblCloseViewer",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
 
     public static final FScreen DECK_EDITOR_QUEST = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Quest Deck Editor",
+            "lblQuestDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_QUEST_TOURNAMENT = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Quest Tournament Deck Editor",
+            "lblQuestTournamentDeckEditor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
-            "Close Editor",
+            "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen QUEST_CARD_SHOP = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Spell Shop",
+            "lblSpellShop",
             FSkin.getIcon(FSkinProp.ICO_QUEST_BOOK),
             true,
-            "Leave Shop",
+            "lblLeaveShop",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen DRAFTING_PROCESS = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
-            "Draft",
+            "lblDraft",
             FSkin.getImage(FSkinProp.IMG_ZONE_HAND),
             true,
-            "Leave Draft",
+            "lblLeaveDraft",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
     public static final FScreen QUEST_BAZAAR = new FScreen(
             VBazaarUI.SINGLETON_INSTANCE,
             CBazaarUI.SINGLETON_INSTANCE,
-            "Bazaar",
+            "lblBazaar",
             FSkin.getIcon(FSkinProp.ICO_QUEST_BOTTLES),
             true,
-            "Leave Bazaar",
+            "lblLeaveBazaar",
             null,
             false);
 
@@ -194,10 +195,10 @@ public class FScreen {
             final FileLocation layoutFile0, final boolean isMatch) {
         this.view = view0;
         this.controller = controller0;
-        this.tabCaption = tabCaption0;
+        this.tabCaption = Localizer.getInstance().getMessage(tabCaption0);
         this.tabIcon = tabIcon0;
         this.allowTabClose = allowTabClose0;
-        this.closeButtonTooltip = closeButtonTooltip0;
+        this.closeButtonTooltip = Localizer.getInstance().getMessage(closeButtonTooltip0);
         this.layoutFile = layoutFile0;
         this.isMatch = isMatch;
     }
@@ -206,10 +207,10 @@ public class FScreen {
         return new FScreen(
                 view,
                 controller,
-                "Game",
+                "lblGame",
                 FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
                 true,
-                "Concede Game",
+                "lblConcedeGame",
                 ForgeConstants.MATCH_LAYOUT_FILE,
                 true);
     }
@@ -271,7 +272,7 @@ public class FScreen {
             return true;
         } catch (final Exception e) {
             e.printStackTrace();
-            FOptionPane.showErrorDialog("Failed to delete layout file.");
+            FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("txerrFailedtodeletelayoutfile"));
         }
         return false;
 

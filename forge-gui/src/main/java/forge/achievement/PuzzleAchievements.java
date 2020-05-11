@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class PuzzleAchievements extends AchievementCollection {
     public PuzzleAchievements() {
-        super("Puzzle Mode", ForgeConstants.ACHIEVEMENTS_DIR + "puzzle.xml", false);
+        super("lblPuzzleMode", ForgeConstants.ACHIEVEMENTS_DIR + "puzzle.xml", false);
     }
 
     @Override
