@@ -45,7 +45,12 @@ public class ConquestRegion {
         return name;
     }
 
+    public void clearArt() {
+        art = null;
+    }
+
     public ISkinImage getArt() {
+        clearArt(); //force clear this so it will be redrawn since loadingcache invalidates the cache every screen change
         if (art == null) {
             PaperCard pc = cardPool.getCard(artCardName);
 

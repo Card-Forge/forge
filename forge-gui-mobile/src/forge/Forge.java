@@ -405,6 +405,7 @@ public class Forge implements ApplicationListener {
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
+            ImageCache.disposeTexture();
 
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);

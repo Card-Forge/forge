@@ -1,6 +1,7 @@
 package forge.screens.match.winlose;
 
 import forge.Forge;
+import forge.assets.ImageCache;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
@@ -82,8 +83,10 @@ public class ControlWinLose {
         try { MatchController.getHostedMatch().endCurrentGame();
         } catch (NullPointerException e) {}
         view.hide();
-        if(humancount == 0)
+        if(humancount == 0) {
             Forge.back();
+            ImageCache.disposeTexture();
+        }
     }
 
     /**
