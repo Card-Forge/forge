@@ -196,6 +196,10 @@ public class CardRenderer {
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
 
+    public static void clearcardArtCache(){
+        cardArtCache.clear();
+    }
+
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
         return getCardArt(pc, false);
