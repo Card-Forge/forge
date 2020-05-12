@@ -411,7 +411,6 @@ public abstract class SpellAbilityEffect {
                 }
             }
         }
-        eff.setToken(true); // Set token to true, so when leaving play it gets nuked
         eff.setOwner(controller);
 
         eff.setImageKey(image);

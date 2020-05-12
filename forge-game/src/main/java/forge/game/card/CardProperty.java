@@ -73,7 +73,7 @@ public class CardProperty {
                 }
             }
         } else if (property.equals("Permanent")) {
-            if (card.isInstant() || card.isSorcery()) {
+            if (!card.isPermanent()) {
                 return false;
             }
         } else if (property.equals("Historic")) {

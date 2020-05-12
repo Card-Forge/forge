@@ -237,6 +237,8 @@ public final class CardUtil {
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
+        newCopy.setCopiedSpell(in.isCopiedSpell());
+        newCopy.setImmutable(in.isImmutable());
 
         // lock in the current P/T without bonus from counters
         newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());

@@ -4207,7 +4207,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean isPermanent() {
-        return !isImmutable && getType().isPermanent();
+        return !isImmutable && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
     }
 
     public final boolean isSpell() {
@@ -4463,7 +4463,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (incR[0].equals("Spell") && !isSpell()) {
             return testFailed;
         }
-        if (incR[0].equals("Permanent") && (isInstant() || isSorcery())) {
+        if (incR[0].equals("Permanent") && !isPermanent()) {
             return testFailed;
         }
         if (!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell")
