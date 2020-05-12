@@ -240,7 +240,6 @@ public class AbilityManaPart implements java.io.Serializable {
             eff.setTimestamp(game.getNextTimestamp());
             eff.setName(sourceCard.getName() + "'s Effect");
             eff.addType("Effect");
-            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
             eff.setOwner(controller);
 
             eff.setImageKey(sourceCard.getImageKey());

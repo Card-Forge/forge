@@ -455,7 +455,6 @@ public final class GameActionUtil {
                             eff.setTimestamp(game.getNextTimestamp());
                             eff.setName(c.getName() + "'s Effect");
                             eff.addType("Effect");
-                            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
                             eff.setOwner(activator);
 
                             eff.setImageKey(c.getImageKey());

@@ -104,7 +104,7 @@ public class GameAction {
         boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
-        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
+        if (c.isToken() && zoneFrom != null && !fromBattlefield) {
             return c;
         }
 
@@ -1183,7 +1183,7 @@ public class GameAction {
         boolean checkAgain = false;
         if (c.isToken()) {
             final Zone zoneFrom = game.getZoneOf(c);
-            if (!zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.is(ZoneType.Command)) {
+            if (!zoneFrom.is(ZoneType.Battlefield)) {
                 zoneFrom.remove(c);
                 checkAgain = true;
             }
