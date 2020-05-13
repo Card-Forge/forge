@@ -20,7 +20,6 @@ package forge.game.player;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
-
 import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardType;
@@ -53,11 +52,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -2914,7 +2909,16 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        return controller.chooseSingleEntityForEffect(view, null, Localizer.getInstance().getMessage("lblChooseACompanion"), true);
+        Card firstCompanion = legalCompanions.get(0);
+        SpellAbility fakeSa = AbilityFactory.getAbility(
+                AbilityFactory.AbilityRecordType.Spell,
+                ApiType.CompanionChoose,
+                new HashMap<>(),
+                firstCompanion.getFirstSpellAbility().getPayCosts(),
+                firstCompanion,
+                null
+        );
+        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
