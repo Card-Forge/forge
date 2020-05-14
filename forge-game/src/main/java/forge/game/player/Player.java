@@ -23,8 +23,10 @@ import com.google.common.collect.*;
 
 import forge.ImageKeys;
 import forge.LobbyPlayer;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -2851,6 +2853,30 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
     }
+    
+    public boolean allCardsUniqueManaSymbols() {
+        for (final Card c : getCardsIn(ZoneType.Library)) {
+            Set<CardStateName> cardStateNames = c.isSplitCard() ?  EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit) : EnumSet.of(CardStateName.Original);
+        	Set<ManaCostShard> coloredManaSymbols = new HashSet<>();
+        	Set<Integer> genericManaSymbols = new HashSet<>();
+        	
+        	for (final CardStateName cardStateName : cardStateNames) {
+        		final ManaCost manaCost = c.getState(cardStateName).getManaCost();
+	        	for (final ManaCostShard manaSymbol : manaCost) {
+	        		if (!coloredManaSymbols.add(manaSymbol)) {
+	        			return false;
+	        		}
+	        	}
+	        	int generic = manaCost.getGenericCost();
+	        	if (generic > 0 || manaCost.getCMC() == 0) {
+	        		if (!genericManaSymbols.add(Integer.valueOf(generic))) {
+	        			return false;
+	        		}
+	        	}
+        	}
+        }
+        return true;
+    }
 
     public Card assignCompanion(Game game, PlayerController player) {
         List<Card> legalCompanions = Lists.newArrayList();
@@ -2870,18 +2896,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
         }
-        
-        boolean uniqueManaSymbols = true;
-        for (final Card c : getCardsIn(ZoneType.Library)) {
-        	Set<ManaCostShard> manaSymbols = new HashSet<>();
-        	for (final ManaCostShard manaSymbol : c.getManaCost()) {
-        		if (manaSymbols.contains(manaSymbol)) {
-        			uniqueManaSymbols = false;
-        		} else {
-        			manaSymbols.add(manaSymbol);
-        		}
-        	}
-        }
 
         int deckSize = getCardsIn(ZoneType.Library).size();
         int minSize = game.getMatch().getRules().getGameType().getDeckFormat().getMainRange().getMinimum();
@@ -2900,7 +2914,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                             legalCompanions.add(c);
                         }
                     } else if (specialRules.equals("UniqueManaSymbols")) {
-                    	if (uniqueManaSymbols) {
+                    	if (this.allCardsUniqueManaSymbols()) {
                     		legalCompanions.add(c);
                     	}
                     } else if (specialRules.equals("DeckSizePlus20")) {
