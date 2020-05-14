@@ -2201,9 +2201,12 @@ public class ComputerUtil {
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 
-    public static String chooseSomeType(Player ai, String kindOfType, String logic, List<String> invalidTypes) {
+    public static String chooseSomeType(Player ai, String kindOfType, String logic, Collection<String> validTypes, List<String> invalidTypes) {
         if (invalidTypes == null) {
             invalidTypes = ImmutableList.of();
+        }
+        if (validTypes == null) {
+            validTypes = ImmutableList.of();
         }
 
         final Game game = ai.getGame();
@@ -2228,7 +2231,7 @@ public class ComputerUtil {
                 }
             }
             if (StringUtils.isEmpty(chosen)) {
-                chosen = "Creature";
+                chosen = validTypes.isEmpty() ? "Creature" : Aggregates.random(validTypes);
             }
         } else if (kindOfType.equals("Creature")) {
             if (logic != null) {
