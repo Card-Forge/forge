@@ -390,7 +390,8 @@ public class GameAction {
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(lastKnownInfo);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(copied);
+        runParams.put(AbilityKey.CardLKI, lastKnownInfo);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
