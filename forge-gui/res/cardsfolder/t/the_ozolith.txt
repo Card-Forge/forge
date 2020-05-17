@@ -8,4 +8,5 @@ SVar:TrigMoveCounter:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:DBMove:DB$ RepeatEach | RepeatCounters$ True | RepeatSubAbility$ MoveCounters | SubAbility$ DBCleanup
 SVar:MoveCounters:DB$ MoveCounter | Source$ Self | Defined$ Remembered | CounterType$ RepeatSVarCounter | CounterNum$ RepeatCounterAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
 Oracle:Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on The Ozolith.\nAt the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.

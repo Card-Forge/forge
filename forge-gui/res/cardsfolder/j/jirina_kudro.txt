@@ -8,4 +8,5 @@ SVar:X:Count$TotalCommanderCastFromCommandZone
 S:Mode$ Continuous | Affected$ Human.Other+YouCtrl | AddPower$ 2 | Description$ Other Humans you control get +2/+0.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Human
+DeckHas:Ability$Token
 Oracle:When Jirina Kudro enters the battlefield, create a 1/1 white Human Soldier creature token for each time you've cast a commander from the command zone this game.\nOther Humans you control get +2/+0.

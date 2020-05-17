@@ -36,4 +36,5 @@ SVar:DE:SVar$CD/Plus.E
 SVar:EF:SVar$DE/Plus.F
 SVar:FG:SVar$EF/Plus.G
 SVar:GH:SVar$FG/Plus.H
+DeckHas:Ability$Counters
 Oracle:When Kathril, Aspect Warper enters the battlefield, put a flying counter on any creature you control if a creature card in your graveyard has flying. Repeat this process for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance. Then put a +1/+1 counter on Kathril for each counter put on a creature this way.
