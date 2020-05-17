@@ -7,4 +7,5 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeTyp
 SVar:Y:TriggeredCard$CardManaCost
 A:AB$ GainLife | Cost$ 1 Sac<1/CARDNAME> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the greatest converted mana cost among creatures you control.
 SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
+DeckHas:Ability$LifeGain
 Oracle:Whenever a nontoken creature you control dies, put the top two cards of your library into your graveyard. Then return a creature card with lesser converted mana cost than the creature that died from the graveyard to your hand.\n{1}, Sacrifice Death's Oasis: You gain life equal to the greatest converted mana cost among creatures you control.
