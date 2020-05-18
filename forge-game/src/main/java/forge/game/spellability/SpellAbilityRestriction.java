@@ -17,25 +17,20 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardUtil;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -342,11 +337,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return activator.equals(c.getOwner());
         }
 
-        if (this.isAttackedPlayerOnly()) {
+        if (this.isAttackedPlayerOnly() && combat != null) {
             Player attacked = combat.getDefendingPlayerRelatedTo(c);
-            if (game.getPhaseHandler().getPhase().isCombatPhase()) {
-            if (activator.equals(attacked))
-            return true; }
+            return activator.equals(attacked);
         }
 
         if (activator.equals(c.getController()) && !this.isOpponentOnly() && !isEnchantedControllerOnly()) {
