@@ -5,7 +5,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -172,29 +171,29 @@ public class ComputerUtilCard {
     
         // if no non-basic lands, target the least represented basic land type
         String sminBL = "";
-        int iminBL = 20000; // hopefully no one will ever have more than 20000
-                            // lands of one type....
+        int iminBL = Integer.MAX_VALUE;
         int n = 0;
         for (String name : MagicColor.Constant.BASIC_LANDS) {
             n = CardLists.getType(land, name).size();
-            if ((n < iminBL) && (n > 0)) {
-                // if two or more are tied, only the
-                // first
-                // one checked will be used
+            if (n < iminBL && n > 0) {
                 iminBL = n;
                 sminBL = name;
             }
         }
-        if (iminBL == 20000) {
-            return null; // no basic land was a minimum
+        if (iminBL == Integer.MAX_VALUE) {
+            // All basic lands have no basic land type. Just return something
+            Iterator<Card> untapped = Iterables.filter(land, CardPredicates.Presets.UNTAPPED).iterator();
+            if (untapped.hasNext()) {
+                return untapped.next();
+            }
+            return land.get(0);
         }
     
         final List<Card> bLand = CardLists.getType(land, sminBL);
-    
+
         for (Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED)) {
             return ut;
         }
-    
     
         return Aggregates.random(bLand); // random tapped land of least represented type
     }
