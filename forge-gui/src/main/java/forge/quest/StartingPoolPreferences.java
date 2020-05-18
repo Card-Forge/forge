@@ -23,7 +23,7 @@ import java.util.List;
  * This class is used to store the Quest starting pool preferences.
  * (It could be expanded to store other Quest starting preferences as well,
  * in order to reduce the number of parameters that need to be passed to
- * QuestController.newGame from CSubmenuQuestData)
+ * QuestController.newGame from CSubmenuQuestStart)
  *
  */
 public final class StartingPoolPreferences {
