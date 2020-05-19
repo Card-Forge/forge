@@ -91,6 +91,7 @@ public enum TriggerType {
     Surveil(TriggerSurveil.class),
     Taps(TriggerTaps.class),
     TapsForMana(TriggerTapsForMana.class),
+    TokenCreated(TriggerTokenCreated.class),
     Transformed(TriggerTransformed.class),
     TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),

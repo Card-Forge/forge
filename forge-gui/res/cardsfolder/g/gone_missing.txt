@@ -1,8 +1,7 @@
 Name:Gone Missing
 ManaCost:4 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBToken | SpellDescription$ Put target permanent on top of its owner's library. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
+A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBInvestigate | SpellDescription$ Put target permanent on top of its owner's library. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gone_missing.jpg
 Oracle:Put target permanent on top of its owner's library.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

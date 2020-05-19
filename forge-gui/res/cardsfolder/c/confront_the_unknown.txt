@@ -1,10 +1,9 @@
 Name:Confront the Unknown
 ManaCost:G
 Types:Instant
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") | StackDescription$ Investigate.
+A:SP$ Investigate | Cost$ G | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") | StackDescription$ Investigate.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Clue.YouCtrl
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_call.jpg
 Oracle:Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
