@@ -103,6 +103,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisTurn = 0;
     private int numDrawnThisDrawStep = 0;
     private int numDiscardedThisTurn = 0;
+    private int numTokenCreatedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
 
@@ -470,7 +471,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int loseLife(final int toLose) {
-    	return loseLife(toLose,false);
+        return loseLife(toLose, false);
     }
 
     public final int loseLife(final int toLose, final boolean manaBurn) {
@@ -1093,7 +1094,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param keyword the keyword to remove.
      */
     public final void removeKeyword(final String keyword) {
-    	removeKeyword(keyword, true);
+        removeKeyword(keyword, true);
     }
 
 
@@ -1104,7 +1105,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (ck.removeKeywordfromAdd(keyword)) {
                 keywordRemoved = true;
                 if (!allInstances) {
-                	break;
+                    break;
                 }
             }
         }
@@ -1609,6 +1610,22 @@ public class Player extends GameEntity implements Comparable<Player> {
         return newCard;
     }
 
+    public final int getNumTokensCreatedThisTurn() {
+        return numTokenCreatedThisTurn;
+    }
+
+    public final void addTokensCreatedThisTurn() {
+        numTokenCreatedThisTurn++;
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, this);
+        runParams.put(AbilityKey.Num, numTokenCreatedThisTurn);
+        game.getTriggerHandler().runTrigger(TriggerType.TokenCreated, runParams, false);
+    }
+
+    public final void resetNumTokenCreatedThisTurn() {
+        numTokenCreatedThisTurn = 0;
+    }
+
     public final int getNumDiscardedThisTurn() {
         return numDiscardedThisTurn;
     }
@@ -1856,14 +1873,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean hasTappedLandForManaThisTurn() {
-		return tappedLandForManaThisTurn;
-	}
+        return tappedLandForManaThisTurn;
+    }
 
-	public void setTappedLandForManaThisTurn(boolean tappedLandForManaThisTurn) {
-		this.tappedLandForManaThisTurn = tappedLandForManaThisTurn;
-	}
+    public void setTappedLandForManaThisTurn(boolean tappedLandForManaThisTurn) {
+        this.tappedLandForManaThisTurn = tappedLandForManaThisTurn;
+    }
 
-	public final boolean getActivateLoyaltyAbilityThisTurn() {
+    public final boolean getActivateLoyaltyAbilityThisTurn() {
         return activateLoyaltyAbilityThisTurn;
     }
     public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
@@ -2201,7 +2218,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Player, this);
         runParams.put(AbilityKey.Num, investigatedThisTurn);
-        game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams,false);
+        game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams, false);
     }
     public final void resetInvestigatedThisTurn() {
         investigatedThisTurn = 0;
@@ -2454,6 +2471,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetPreventNextDamageWithEffect();
         resetNumDrawnThisTurn();
         resetNumDiscardedThisTurn();
+        resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
         clearCreaturesAttackedThisTurn();
         setActivateLoyaltyAbilityThisTurn(false);
@@ -2599,7 +2617,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         //Run PlaneswalkedTo triggers here.
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Cards, currentPlanes);
-        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
+        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams, false);
         view.updateCurrentPlaneName(currentPlanes.toString().replaceAll(" \\(.*","").replace("[",""));
     }
 
@@ -2610,7 +2628,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Cards, new CardCollection(currentPlanes));
-        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
+        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
 
         for (final Card plane : currentPlanes) {
             //game.getZoneOf(plane).remove(plane);
@@ -2703,7 +2721,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commanders;
     }
     public void setCommanders(List<Card> commanders0) {
-    	if (commanders0 == commanders) { return; }
+        if (commanders0 == commanders) { return; }
         commanders = commanders0;
         view.updateCommander(this);
     }
@@ -3194,7 +3212,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.hasKeyword("CantSearchLibrary")) {
             return false;
         } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
+                || !hasKeyword("Spells and abilities you control can't cause privayou to search your library.");
 
     }
 

@@ -13,6 +13,7 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
@@ -764,9 +765,18 @@ public class AbilityUtils {
         final FCollection<GameObject> objects = new FCollection<>();
         final String defined = (def == null) ? "Self" : def;
 
-        objects.addAll(AbilityUtils.getDefinedPlayers(card, defined, sa));
+        objects.addAll(getDefinedPlayers(card, defined, sa));
         objects.addAll(getDefinedCards(card, defined, sa));
-        objects.addAll(AbilityUtils.getDefinedSpellAbilities(card, defined, sa));
+        objects.addAll(getDefinedSpellAbilities(card, defined, sa));
+        return objects;
+    }
+
+    public static FCollection<GameEntity> getDefinedEntities(final Card card, final String def, final SpellAbility sa) {
+        final FCollection<GameEntity> objects = new FCollection<>();
+        final String defined = (def == null) ? "Self" : def;
+
+        objects.addAll(getDefinedPlayers(card, defined, sa));
+        objects.addAll(getDefinedCards(card, defined, sa));
         return objects;
     }
 

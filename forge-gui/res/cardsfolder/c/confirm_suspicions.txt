@@ -1,10 +1,7 @@
 Name:Confirm Suspicions
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBToken1 | SpellDescription$ Counter target spell. Investigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:DBToken1:DB$Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi | SubAbility$ DBToken2
-SVar:DBToken2:DB$Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi | SubAbility$ DBToken3
-SVar:DBToken3:DB$Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
+A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBInvestigate | SpellDescription$ Counter target spell. Investigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate | Num$ 3
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/confirm_suspicions.jpg
 Oracle:Counter target spell.\nInvestigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

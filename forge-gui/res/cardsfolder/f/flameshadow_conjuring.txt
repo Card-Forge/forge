@@ -2,7 +2,7 @@ Name:Flameshadow Conjuring
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature.That token gains haste. Exile it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ R | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Exile | RememberCopied$ True
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ R | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Exile | RememberTokens$ True
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameshadow_conjuring.jpg
 Oracle:Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.

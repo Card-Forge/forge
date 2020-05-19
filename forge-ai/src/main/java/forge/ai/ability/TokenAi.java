@@ -5,7 +5,6 @@ import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -25,16 +24,9 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.item.PaperToken;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import forge.util.MyRandom;
 
 /**
  * <p>
@@ -45,35 +37,10 @@ import java.util.List;
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 public class TokenAi extends SpellAbilityAi {
-    private String tokenAmount;
-    private String tokenPower;
-    private String tokenToughness;
 
-    private Card actualToken;
-    /**
-     * <p>
-     * Constructor for AbilityFactory_Token.
-     * </p>
-     *
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     */
-    private void readParameters(final SpellAbility mapParams) {
-        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
-
-        this.actualToken = TokenInfo.getProtoType(mapParams.getParam("TokenScript"), mapParams);
-
-        if (actualToken == null) {
-            this.tokenPower = mapParams.getParam("TokenPower");
-            this.tokenToughness = mapParams.getParam("TokenToughness");
-        } else {
-            this.tokenPower = actualToken.getBasePowerString();
-            this.tokenToughness = actualToken.getBaseToughnessString();
-        }
-    }
-    
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        readParameters(sa); // remember to call this somewhere!
+
         final Card source = sa.getHostCard();
         // Planeswalker-related flags
         boolean pwMinus = false;
@@ -96,10 +63,9 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
 
-        if (actualToken == null) {
-            actualToken = spawnToken(ai, sa);
-        }
+        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
 
         if (actualToken == null) {
             final AbilitySub sub = sa.getSubAbility();
@@ -108,9 +74,12 @@ public class TokenAi extends SpellAbilityAi {
             return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai)); // planeswalker plus ability or sub-ability is
         }
 
+        String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
+        String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
+
         // X-cost spells
-        if (this.tokenAmount.equals("X") || (this.tokenToughness != null && this.tokenToughness.equals("X"))) {
-            int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+        if ("X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness)) {
+            int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
@@ -124,14 +93,14 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        if (canInterruptSacrifice(ai, sa, actualToken)) {
+        if (canInterruptSacrifice(ai, sa, actualToken, tokenAmount)) {
             return true;
         }
         
-        boolean haste = this.actualToken.hasKeyword(Keyword.HASTE);
+        boolean haste = actualToken.hasKeyword(Keyword.HASTE);
         boolean oneShot = sa.getSubAbility() != null
                 && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
-        boolean isCreature = this.actualToken.getType().isCreature();
+        boolean isCreature = actualToken.getType().isCreature();
 
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2) && ph.isPlayerTurn(ai) && !haste && !sa.hasParam("ActivationPhases")
@@ -166,9 +135,11 @@ public class TokenAi extends SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevent infinite tokens?
         }
+        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+
 
         // Don't kill AIs Legendary tokens
-        if (this.actualToken.getType().isLegendary() && ai.isCardInPlay(this.actualToken.getName())) {
+        if (actualToken.getType().isLegendary() && ai.isCardInPlay(actualToken.getName())) {
             // TODO Check if Token is useless due to an aura or counters?
             return false;
         }
@@ -240,7 +211,7 @@ public class TokenAi extends SpellAbilityAi {
     /**
      * Checks if the token(s) can save a creature from a sacrifice effect
      */
-    private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token) {
+    private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
         final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
             return false;   // nothing to interrupt
@@ -249,7 +220,7 @@ public class TokenAi extends SpellAbilityAi {
         if (topStack.getApi() != ApiType.Sacrifice) {
             return false;   // not sacrifice effect
         }
-        final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+        final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
         final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
         String num = sa.getParam("Amount");
         num = (num == null) ? "1" : num;
@@ -271,7 +242,8 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        readParameters(sa);
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
+
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -282,8 +254,12 @@ public class TokenAi extends SpellAbilityAi {
                 sa.getTargets().add(ai);
             }
         }
-        if ("X".equals(this.tokenAmount) || "X".equals(this.tokenPower) || "X".equals(this.tokenToughness)) {
-            int x = AbilityUtils.calculateAmount(source, this.tokenAmount, sa);
+        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+        String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
+        String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
+
+        if ("X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness)) {
+            int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 x = ComputerUtilMana.determineLeftoverMana(sa, ai);
@@ -322,12 +298,10 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
-        // TODO: AILogic
-        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
-            Card attacker = spawnToken(ai, sa);
+            Card attacker = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
             for (Player p : options) {
                 if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
                     return p;
@@ -342,8 +316,6 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
-        // TODO: AILogic
-        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
@@ -355,7 +327,7 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
-            Card attacker = spawnToken(ai, sa);
+            Card attacker = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
             for (GameEntity p : options) {
                 if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
                     return p;
@@ -389,139 +361,10 @@ public class TokenAi extends SpellAbilityAi {
     // TODO Is this just completely copied from TokenEffect? Let's just call that thing
     @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa, boolean notNull) {
-        final Card host = sa.getHostCard();
 
         Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
 
-        if (result != null) {
-            result.setController(ai, 0);
-            return result;
-        }
-
-        String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
-        String tokenPower = sa.getParam("TokenPower");
-        String tokenToughness = sa.getParam("TokenToughness");
-        String tokenName = sa.getParam("TokenName");
-        String[] tokenTypes = sa.getParam("TokenTypes").split(",");
-        StringBuilder cost = new StringBuilder();
-        String[] tokenColors = sa.getParam("TokenColors").split(",");
-        String tokenImage = sa.hasParam("TokenImage") ? PaperToken.makeTokenFileName(sa.getParam("TokenImage")) : "";
-        String[] tokenAbilities = sa.hasParam("TokenAbilities") ? sa.getParam("TokenAbilities").split(",") : null;
-        String[] tokenTriggers = sa.hasParam("TokenTriggers") ? sa.getParam("TokenTriggers").split(",") : null;
-        String[] tokenSVars = sa.hasParam("TokenSVars") ? sa.getParam("TokenSVars").split(",") : null;
-        String[] tokenStaticAbilities = sa.hasParam("TokenStaticAbilities") ? sa.getParam("TokenStaticAbilities").split(",") : null;
-        String[] tokenHiddenKeywords = sa.hasParam("TokenHiddenKeywords") ? sa.getParam("TokenHiddenKeywords").split("&") : null;
-        final String[] substitutedColors = Arrays.copyOf(tokenColors, tokenColors.length);
-        for (int i = 0; i < substitutedColors.length; i++) {
-            if (substitutedColors[i].equals("ChosenColor")) {
-                // this currently only supports 1 chosen color
-                substitutedColors[i] = host.getChosenColor();
-            }
-        }
-        StringBuilder colorDesc = new StringBuilder();
-        for (final String col : substitutedColors) {
-            if (col.equalsIgnoreCase("White")) {
-                colorDesc.append("W ");
-            } else if (col.equalsIgnoreCase("Blue")) {
-                colorDesc.append("U ");
-            } else if (col.equalsIgnoreCase("Black")) {
-                colorDesc.append("B ");
-            } else if (col.equalsIgnoreCase("Red")) {
-                colorDesc.append("R ");
-            } else if (col.equalsIgnoreCase("Green")) {
-                colorDesc.append("G ");
-            } else if (col.equalsIgnoreCase("Colorless")) {
-                colorDesc = new StringBuilder("C");
-            }
-        }
-        
-        final List<String> imageNames = new ArrayList<>(1);
-        if (tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(colorDesc.toString(), " ", ""), tokenPower, tokenToughness, tokenName));
-        } else {
-            imageNames.add(0, tokenImage);
-        }
-
-        for (final char c : colorDesc.toString().toCharArray()) {
-            cost.append(c + ' ');
-        }
-
-        cost = new StringBuilder(colorDesc.toString().replace('C', '1').trim());
-
-        final int finalPower = AbilityUtils.calculateAmount(host, tokenPower, sa);
-        final int finalToughness = AbilityUtils.calculateAmount(host, tokenToughness, sa);
-
-        final String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
-        for (int i = 0; i < substitutedTypes.length; i++) {
-            if (substitutedTypes[i].equals("ChosenType")) {
-                substitutedTypes[i] = host.getChosenType();
-            }
-        }
-        final String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
-        final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
-        final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
-                cost.toString(), substitutedTypes, tokenKeywords, finalPower, finalToughness);
-        Card token = tokenInfo.makeOneToken(ai);
-
-        if (token == null) {
-            return null;
-        }
-        
-        // Grant rule changes
-        if (tokenHiddenKeywords != null) {
-            for (final String s : tokenHiddenKeywords) {
-                token.addHiddenExtrinsicKeyword(s);
-            }
-        }
-
-        // Grant abilities
-        if (tokenAbilities != null) {
-            for (final String s : tokenAbilities) {
-                final String actualAbility = host.getSVar(s);
-                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, token);
-                token.addSpellAbility(grantedAbility);
-            }
-        }
-
-        // Grant triggers
-        if (tokenTriggers != null) {
-            for (final String s : tokenTriggers) {
-                final String actualTrigger = host.getSVar(s);
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, token, true);
-                final String ability = host.getSVar(parsedTrigger.getParam("Execute"));
-                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, token));
-                token.addTrigger(parsedTrigger);
-            }
-        }
-
-        // Grant SVars
-        if (tokenSVars != null) {
-            for (final String s : tokenSVars) {
-                String actualSVar = host.getSVar(s);
-                String name = s;
-                if (actualSVar.startsWith("SVar")) {
-                    actualSVar = actualSVar.split("SVar:")[1];
-                    name = actualSVar.split(":")[0];
-                    actualSVar = actualSVar.split(":")[1];
-                }
-                token.setSVar(name, actualSVar);
-            }
-        }
-
-        // Grant static abilities
-        if (tokenStaticAbilities != null) {
-            for (final String s : tokenStaticAbilities) {
-                token.addStaticAbility(host.getSVar(s));
-            }
-        }
-        
-        // Apply static abilities and prune dead tokens
-        final Game game = ai.getGame();
-        ComputerUtilCard.applyStaticContPT(game, token, null);
-        if (!notNull && token.isCreature() && token.getNetToughness() < 1) {
-            return null;
-        } else {
-            return token;
-        }
+        result.setController(ai, 0);
+        return result;
     }
 }
