@@ -17,13 +17,14 @@
  */
 package forge.game.spellability;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import com.google.common.collect.Sets;
+
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * <p>
@@ -60,7 +61,11 @@ public class SpellAbilityVariables implements Cloneable {
         this.gameTypes = Sets.newEnumSet(sav.getGameTypes(), GameType.class);
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
-        this.activator = sav.getActivator();
+        this.anyPlayer = sav.isAnyPlayer();
+        this.opponentOnly = sav.isOpponentOnly();
+        this.enchantedControllerOnly = sav.isEnchantedControllerOnly();
+        this.attackedPlayerOnly = sav.isAttackedPlayerOnly();
+        this.ownerOnly = sav.isOwnerOnly();
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
         this.activationLimit = sav.getActivationLimit();
@@ -108,7 +113,7 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean instantSpeed = false;
 
     /** The b any player. */
-    private String activator = "Player.Controller";
+    private boolean anyPlayer = false;
 
     /** The b opponent only. */
     private boolean opponentOnly = false;
@@ -260,28 +265,62 @@ public class SpellAbilityVariables implements Cloneable {
         return this.zone;
     }
 
+    /**
+     * <p>
+     * setSorcerySpeed.
+     * </p>
+     * 
+     * @param bSpeed
+     *            a boolean.
+     */
     public final void setSorcerySpeed(final boolean bSpeed) {
         this.sorcerySpeed = bSpeed;
     }
 
+    /**
+     * <p>
+     * getSorcerySpeed.
+     * </p>
+     * 
+     * @return a boolean.
+     */
     public final boolean isSorcerySpeed() {
         return this.sorcerySpeed;
     }
 
+    /**
+     * <p>
+     * setInstantSpeed.
+     * </p>
+     * 
+     * @param bSpeed
+     *            a boolean.
+     */
     public final void setInstantSpeed(final boolean bSpeed) {
         this.instantSpeed = bSpeed;
     }
 
+    /**
+     * <p>
+     * getInstantSpeed.
+     * </p>
+     * 
+     * @return a boolean.
+     */
     public final boolean isInstantSpeed() {
         return this.instantSpeed;
     }
 
-    public final void setActivator(final String player) {
-        this.activator = player;
-    }
-
-    public String getActivator() {
-        return this.activator;
+    /**
+     * <p>
+     * setAnyPlayer.
+     * </p>
+     * 
+     * @param anyPlayer
+     *            a boolean.
+     */
+    public final void setAnyPlayer(final boolean anyPlayer) {
+        this.anyPlayer = anyPlayer;
     }
 
     /**
@@ -825,6 +864,69 @@ public class SpellAbilityVariables implements Cloneable {
         return this.isPresent;
     }
 
+    /**
+     * Checks if is any player.
+     * 
+     * @return the anyPlayer
+     */
+    public final boolean isAnyPlayer() {
+        return this.anyPlayer;
+    }
+
+    /**
+     * @return the opponentOnly
+     */
+    public boolean isOpponentOnly() {
+        return opponentOnly;
+    }
+
+    /**
+     * @param opponentOnly the opponentOnly to set
+     */
+    public void setOpponentOnly(boolean opponentOnly) {
+        this.opponentOnly = opponentOnly;
+    }
+
+    /**
+     * @return the opponentOnly
+     */
+    public boolean isAttackedPlayerOnly() { return attackedPlayerOnly; }
+
+    public void setAttackedPlayerOnly(boolean attackedPlayerOnly) {
+        this.attackedPlayerOnly = attackedPlayerOnly;
+    }
+
+    /**
+     * @return the opponentOnly
+     */
+    public boolean isEnchantedControllerOnly() {
+        return enchantedControllerOnly;
+    }
+
+    public void setEnchantedControllerOnly(boolean enchantedControllerOnly) {
+        this.enchantedControllerOnly = enchantedControllerOnly;
+    }
+    /**
+     * @return the ownerOnly
+     */
+    public boolean isOwnerOnly() {
+        return ownerOnly;
+    }
+
+    /**
+     * @param ownerOnly the ownerOnly to set
+     */
+    public void setOwnerOnly(boolean ownerOnly) {
+        this.ownerOnly = ownerOnly;
+    }
+    /**
+     * <p>
+     * Setter for the field <code>ColorToCheck</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
+     */
     public final void setColorToCheck(final String s) {
         this.chosenColors = s;
     }

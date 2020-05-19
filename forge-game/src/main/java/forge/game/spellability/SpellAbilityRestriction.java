@@ -110,8 +110,24 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setOpponentTurn(true);
         }
 
-        if (params.containsKey("Activator")) {
-            this.setActivator(params.get("Activator"));
+        if (params.containsKey("AnyPlayer")) {
+            this.setAnyPlayer(true);
+        }
+
+        if (params.containsKey("AnyOpponent")) {
+            this.setOpponentOnly(true);
+        }
+
+        if (params.containsKey("EnchantedControllerActivator")) {
+            this.setEnchantedControllerOnly(true);
+        }
+
+        if (params.containsKey("AttackedPlayerActivator")) {
+            this.setAttackedPlayerOnly(true);
+        }
+
+        if (params.containsKey("OwnerOnly")) {
+            this.setOwnerOnly(true);
         }
 
         if (params.containsKey("ActivationLimit")) {
@@ -313,16 +329,39 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         final Game game = activator.getGame();
         final Combat combat = game.getPhaseHandler().getCombat();
 
+        if (this.isAnyPlayer()) {
+            return true;
+        }
+
+        if (this.isOwnerOnly()) {
+            return activator.equals(c.getOwner());
+        }
+
+        if (this.isAttackedPlayerOnly() && combat != null) {
+            Player attacked = combat.getDefendingPlayerRelatedTo(c);
+            return activator.equals(attacked);
+        }
+
+        if (activator.equals(c.getController()) && !this.isOpponentOnly() && !isEnchantedControllerOnly()) {
+            return true;
+        }
+
+        if (activator.isOpponentOf(c.getController()) && this.isOpponentOnly()) {
+            return true;
+        }
+        
+        if (c.getEnchantingCard() != null && activator.equals(c.getEnchantingCard().getController()) && this.isEnchantedControllerOnly()) {
+        	return true;
+        }
+
         if (sa.isSpell()) {
-            // Spells should always default to "controller" but use mayPlay check.
             final CardPlayOption o = c.mayPlay(sa.getMayPlay());
             if (o != null && o.getPlayer() == activator) {
                 return true;
             }
         }
-
-        String validPlayer = this.getActivator();
-        return activator.isValid(validPlayer, activator, c, sa);
+        
+        return false;
     }
     
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
