@@ -4,4 +4,4 @@ Order:101
 Type:Casual
 Subtype:Commander
 Sets:GRN, RNA, WAR, M20, ELD, THB, IKO
-Banned:Golos, Tireless Pilgrim; Lutri, the Spellchaser; Oko, Thief of Crowns; Sorcerous Spyglass;
+Banned:Drannith Magistrate; Golos, Tireless Pilgrim; Lutri, the Spellchaser; Oko, Thief of Crowns; Sorcerous Spyglass; Winota, Joiner of Forces;
