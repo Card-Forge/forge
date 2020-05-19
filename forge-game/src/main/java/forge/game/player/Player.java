@@ -3212,7 +3212,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.hasKeyword("CantSearchLibrary")) {
             return false;
         } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !hasKeyword("Spells and abilities you control can't cause privayou to search your library.");
+                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
 
     }
 
