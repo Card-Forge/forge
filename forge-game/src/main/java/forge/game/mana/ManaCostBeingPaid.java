@@ -543,6 +543,9 @@ public class ManaCostBeingPaid {
         if (shard.isSnow() && !mana.isSnow()) {
             return false;
         }
+        if (mana.isRestricted() && !mana.getManaAbility().meetsManaShardRestrictions(shard, mana.getColor())) {
+        	return false;
+        }
 
         byte color = mana.getColor();
         return pool.canPayForShardWithColor(shard, color);

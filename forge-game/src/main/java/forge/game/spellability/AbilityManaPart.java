@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -364,6 +365,10 @@ public class AbilityManaPart implements java.io.Serializable {
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                 return true;
             }
+            
+            if (restriction.equals("CantPayGenericCosts")) {
+            	return true;
+            }
 
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
@@ -384,6 +389,54 @@ public class AbilityManaPart implements java.io.Serializable {
         }
 
         return false;
+    }
+    
+    /**
+     * <p>
+     * meetsManaShardRestrictions.
+     * </p>
+     *
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     * 			  the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsManaShardRestrictions(final ManaCostShard shard, final byte color) {
+    	if (this.manaRestrictions.isEmpty()) {
+            return true;
+        }
+        for (String restriction : this.manaRestrictions.split(",")) {
+			if (restriction.equals("CantPayGenericCosts")) {
+				if (shard.isGeneric()) {
+					if (shard.isOr2Generic() && shard.isColor(color)) {
+						continue;
+					} else {
+						return false;
+					}
+				} else {
+					continue;
+				}
+			}
+        }
+        return true;
+    }
+    
+    /**
+     * <p>
+     * meetsSpellAndShardRestrictions.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     * 			  the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsSpellAndShardRestrictions(final SpellAbility sa, final ManaCostShard shard, final byte color) {
+    	return this.meetsManaRestrictions(sa) && this.meetsManaShardRestrictions(shard, color);
     }
 
     /**
