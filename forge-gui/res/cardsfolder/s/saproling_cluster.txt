@@ -1,7 +1,7 @@
 Name:Saproling Cluster
 ManaCost:1 G
 Types:Enchantment
-A:AB$ Token | Cost$ 1 Discard<1/Card> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling nms | AnyPlayer$ True | SpellDescription$ Create a 1/1 green Saproling creature token. Any player may activate this ability.
+A:AB$ Token | Cost$ 1 Discard<1/Card> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling nms | Activator$ Player | SpellDescription$ Create a 1/1 green Saproling creature token. Any player may activate this ability.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 DeckHas:Ability$Discard & Ability$Token
