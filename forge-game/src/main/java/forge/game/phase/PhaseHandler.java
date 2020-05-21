@@ -798,11 +798,6 @@ public class PhaseHandler implements java.io.Serializable {
         // reset mustAttackEntity
         playerTurn.setMustAttackEntity(null);
 
-        for (final Player p1 : game.getPlayers()) {
-            for (final ZoneType z : Player.ALL_ZONES) {
-                p1.getZone(z).resetCardsAddedThisTurn();
-            }
-        }
         for (Player p : game.getPlayers()) {
             p.clearNextTurn();
         }
