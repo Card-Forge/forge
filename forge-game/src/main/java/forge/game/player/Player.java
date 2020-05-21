@@ -3196,6 +3196,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final void clearNextTurn() {
+        for (final PlayerZone pz : zones.values()) {
+            pz.resetCardsAddedThisTurn();
+        }
         resetProwl();
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
