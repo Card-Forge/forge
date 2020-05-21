@@ -1,7 +1,7 @@
 Name:Well of Knowledge
 ManaCost:3
 Types:Artifact
-A:AB$ Draw | Cost$ 2 | NumCards$ 1 | AnyPlayer$ True | PlayerTurn$ True | ActivationPhases$ Draw | SpellDescription$ Draw a card. Any player may activate this ability but only during their draw step.
+A:AB$ Draw | Cost$ 2 | NumCards$ 1 | Activator$ Player | PlayerTurn$ True | ActivationPhases$ Draw | SpellDescription$ Draw a card. Any player may activate this ability but only during their draw step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_knowledge.jpg
 SVar:NonStackingEffect:True
 Oracle:{2}: Draw a card. Any player may activate this ability but only during their draw step.
