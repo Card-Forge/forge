@@ -277,6 +277,7 @@ public class DestroyAi extends SpellAbilityAi {
                             SpellAbility sp = aura.getFirstSpellAbility();
                             if (sp != null && "GainControl".equals(sp.getParam("AILogic"))
                                 && aura.getController() != ai && sa.canTarget(aura)) {
+                                list.remove(choice);
                                 choice = aura;
                             }
                         }
