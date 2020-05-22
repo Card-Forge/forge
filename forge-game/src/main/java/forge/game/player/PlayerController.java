@@ -274,5 +274,5 @@ public abstract class PlayerController {
     public abstract boolean confirmMulliganScry(final Player p);
 
     public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
-            SpellAbility sa, String title);
+            SpellAbility sa, String title, boolean isOptional);
 }

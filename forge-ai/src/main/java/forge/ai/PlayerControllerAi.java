@@ -1271,13 +1271,16 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title, boolean isOptional) {
         CardCollection choices = new CardCollection();
 
         for (String mapKey: validMap.keySet()) {
             CardCollection cc = validMap.get(mapKey);
             cc.removeAll(choices);
-            choices.add(ComputerUtilCard.getBestAI(cc)); // TODO: should the AI limit itself here with the max number of cards in hand?
+            Card chosen = ComputerUtilCard.getBestAI(cc);
+            if (chosen != null) {
+                choices.add(chosen);
+            }
         }
 
         return choices;
