@@ -231,7 +231,7 @@ public class DestroyAi extends SpellAbilityAi {
                     }
                     if ("Pongify".equals(logic)) {
                         final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
-                        if (token == null) {
+                        if (token == null || !token.isCreature() || token.getNetToughness() < 1) {
                             return true;    // becomes Terminate
                         } else {
                             if (source.getGame().getPhaseHandler().getPhase()

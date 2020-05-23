@@ -2428,7 +2428,7 @@ public class ComputerUtil {
             }
 
             // token would not survive
-            if (token == null) {
+            if (token == null || !token.isCreature()  || token.getNetToughness() < 1) {
                 return opponent ? "Numbers" : "Strength";
             }
 

@@ -281,10 +281,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // TODO check for trigger to turn token ETB into +1/+1 counter for host
             // TODO check for trigger to turn token ETB into damage or life loss for opponent
             // in this cases Token might be prefered even if they would not survive
-            final Card tokenCard = TokenAi.spawnToken(player, tokenSA, true);
+            final Card tokenCard = TokenAi.spawnToken(player, tokenSA);
 
             // Token would not survive 
-            if (tokenCard.getNetToughness() < 1) {
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
                 return counterSA;
             }
 
