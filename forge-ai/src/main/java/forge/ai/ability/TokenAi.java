@@ -65,9 +65,9 @@ public class TokenAi extends SpellAbilityAi {
         }
         String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
 
-        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+        Card actualToken = spawnToken(ai, sa);
 
-        if (actualToken == null) {
+        if (actualToken == null || actualToken.getNetToughness() < 1) {
             final AbilitySub sub = sa.getSubAbility();
             // useful
             // no token created
@@ -135,8 +135,7 @@ public class TokenAi extends SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevent infinite tokens?
         }
-        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
-
+        Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens
         if (actualToken.getType().isLegendary() && ai.isCardInPlay(actualToken.getName())) {
@@ -254,7 +253,7 @@ public class TokenAi extends SpellAbilityAi {
                 sa.getTargets().add(ai);
             }
         }
-        Card actualToken = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+        Card actualToken = spawnToken(ai, sa);
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
 
@@ -301,7 +300,7 @@ public class TokenAi extends SpellAbilityAi {
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
-            Card attacker = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+            Card attacker = spawnToken(ai, sa);
             for (Player p : options) {
                 if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
                     return p;
@@ -327,7 +326,7 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
-            Card attacker = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+            Card attacker = spawnToken(ai, sa);
             for (GameEntity p : options) {
                 if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
                     return p;
@@ -346,25 +345,22 @@ public class TokenAi extends SpellAbilityAi {
      * @param sa Token SpellAbility
      * @return token creature created by ability
      */
-    @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa) {
-        return spawnToken(ai, sa, false);
-    }
-
-    /**
-     * Create the token as a Card object.
-     * @param ai owner of the new token
-     * @param sa Token SpellAbility
-     * @param notNull if the token would not survive, still return it
-     * @return token creature created by ability
-     */
-    // TODO Is this just completely copied from TokenEffect? Let's just call that thing
-    @Deprecated
-    public static Card spawnToken(Player ai, SpellAbility sa, boolean notNull) {
-
+        if (!sa.hasParam("TokenScript")) {
+            throw new RuntimeException("Spell Ability has no TokenScript: " + sa);
+        }
         Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
 
-        result.setController(ai, 0);
+        if (result == null) {
+            throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
+        }
+
+        result.setOwner(ai);
+
+        // Apply static abilities
+        final Game game = ai.getGame();
+        ComputerUtilCard.applyStaticContPT(game, result, null);
         return result;
     }
+
 }
