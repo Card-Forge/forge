@@ -984,30 +984,16 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("TargetedController")) {
-            final CardCollection list = getDefinedCards(card, "Targeted", sa);
-            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getController();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "Targeted", sa)) {
+                players.add(c.getController());
             }
-            for (final SpellAbility s : sas) {
-                final Player p = s.getActivatingPlayer();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getActivatingPlayer());
             }
         }
         else if (defined.equals("TargetedOwner")) {
-            final CardCollection list = getDefinedCards(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getOwner();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "Targeted", sa)) {
+                players.add(c.getOwner());
             }
         }
         else if (defined.equals("TargetedAndYou")) {
@@ -1018,20 +1004,11 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("ParentTargetedController")) {
-            final CardCollection list = getDefinedCards(card, "ParentTarget", sa);
-            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getController();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "ParentTarget", sa)) {
+                players.add(c.getController());
             }
-            for (final SpellAbility s : sas) {
-                final Player p = s.getActivatingPlayer();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getActivatingPlayer());
             }
         }
         else if (defined.startsWith("Remembered")) {
@@ -1137,10 +1114,7 @@ public class AbilityUtils {
             }
             if (o != null) {
                 if (o instanceof Player) {
-                    final Player p = (Player) o;
-                    if (!players.contains(p)) {
-                        players.add(p);
-                    }
+                    players.add((Player) o);
                 }
             }
         }
@@ -1152,33 +1126,25 @@ public class AbilityUtils {
             if (card.getEnchantingCard() == null) {
                 return players;
             }
-            final Player p = card.getEnchantingCard().getController();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(card.getEnchantingCard().getController());
         }
         else if (defined.equals("EnchantedOwner")) {
             if (card.getEnchantingCard() == null) {
                 return players;
             }
-            final Player p = card.getEnchantingCard().getOwner();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(card.getEnchantingCard().getOwner());
         }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
-                if (!players.contains(o)) {
-                    players.add((Player) o);
-                }
+                players.add((Player) o);
             }
         }
         else if (defined.equals("AttackingPlayer")) {
-            final Player p = game.getCombat().getAttackingPlayer();
-            if (!players.contains(p)) {
-                players.add(p);
+            if (!game.getPhaseHandler().inCombat()) {
+                return players;
             }
+            players.add(game.getCombat().getAttackingPlayer());
         }
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
@@ -1189,14 +1155,14 @@ public class AbilityUtils {
         }
         else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
-            if (p != null && !players.contains(p)) {
+            if (p != null) {
                 players.add(p);
             }
         }
         else if (defined.equals("ChosenAndYou")) {
             players.add(player);
             final Player p = card.getChosenPlayer();
-            if (p != null && !players.contains(p)) {
+            if (p != null) {
                 players.add(p);
             }
         }
@@ -1206,10 +1172,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("SourceController")) {
-            final Player p = sa.getHostCard().getController();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(sa.getHostCard().getController());
         }
         else if (defined.equals("CardController")) {
             players.add(card.getController());

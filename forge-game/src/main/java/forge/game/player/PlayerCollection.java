@@ -51,6 +51,7 @@ public class PlayerCollection extends FCollection<Player> {
         return Collections.min(this, comp);
     }
     public Player max(Comparator<Player> comp) {
+        if (this.isEmpty()) return null;
         return Collections.max(this, comp);
     }
     
