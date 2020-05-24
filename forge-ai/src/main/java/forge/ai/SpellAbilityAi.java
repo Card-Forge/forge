@@ -267,7 +267,7 @@ public abstract class SpellAbilityAi {
 
         // TODO probably also consider if winter orb or similar are out
 
-        if (sa.getPayCosts() == null || sa instanceof AbilitySub) {
+        if (sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
         }
         

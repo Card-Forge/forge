@@ -507,16 +507,10 @@ public class ComputerUtilMana {
                 }
             }
             else {
-                if (saPayment.getPayCosts() != null) {
-                    final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                    if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
-                        saList.remove(saPayment);
-                        continue;
-                    }
-                }
-                else {
-                    System.err.println("Ability " + saPayment + " from " + saPayment.getHostCard() + "  had NULL as payCost");
-                    saPayment.getHostCard().tap();
+                final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
+                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
+                    saList.remove(saPayment);
+                    continue;
                 }
 
                 ai.getGame().getStack().addAndUnfreeze(saPayment);
@@ -837,10 +831,9 @@ public class ComputerUtilMana {
         if (checkCosts) {
             // Check if AI can still play this mana ability
             ma.setActivatingPlayer(ai);
-            if (ma.getPayCosts() != null) { // if the AI can't pay the additional costs skip the mana ability
-                if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
-                    return false;
-                }
+            // if the AI can't pay the additional costs skip the mana ability
+            if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
+                return false;
             }
             else if (sourceCard.isTapped()) {
                 return false;
@@ -1144,7 +1137,7 @@ public class ComputerUtilMana {
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
 
         // Tack xMana Payments into mana here if X is a set value
-        if (sa.getPayCosts() != null && (cost.getXcounter() > 0 || extraMana > 0)) {
+        if (cost.getXcounter() > 0 || extraMana > 0) {
             int manaToAdd = 0;
             if (test && extraMana > 0) {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
@@ -1218,7 +1211,7 @@ public class ComputerUtilMana {
             for (SpellAbility ma : src.getManaAbilities()) {
                 ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
-                    int costsToActivate = ma.getPayCosts() != null && ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
+                    int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
                     int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
                     int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
 
@@ -1594,7 +1587,7 @@ public class ComputerUtilMana {
     }
 
     public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
-        if (sa.getPayCosts() == null || sa.getPayCosts().getCostMana() == null) {
+        if (sa.getPayCosts().getCostMana() == null) {
             return -1;
         }
 

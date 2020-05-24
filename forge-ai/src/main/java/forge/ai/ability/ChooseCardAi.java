@@ -233,7 +233,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                         return false;
                     }
                     for (SpellAbility sa : c.getAllSpellAbilities()) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        if (sa.getPayCosts().hasTapCost()) {
                             return false;
                         }
                     }

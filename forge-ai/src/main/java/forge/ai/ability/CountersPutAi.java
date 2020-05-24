@@ -454,7 +454,6 @@ public class CountersPutAi extends SpellAbilityAi {
             // but try to do it in Main 2 then so that the AI has a chance to play creatures first.
             if (list.isEmpty()
                     && sa.hasParam("Planeswalker")
-                    && sa.getPayCosts() != null
                     && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
                     && sa.isTargetNumberValid()
                     && sa.getTargets().getNumTargeted() == 0
@@ -706,7 +705,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 SpellAbility testSa = sa;
                 int countX = 0;
                 int nonXGlyphs = 0;
-                while (testSa != null && testSa.getPayCosts() != null && countX == 0) {
+                while (testSa != null && countX == 0) {
                     countX = testSa.getPayCosts().getTotalMana().countX();
                     nonXGlyphs = testSa.getPayCosts().getTotalMana().getGlyphCount() - countX;
                     testSa = testSa.getSubAbility();

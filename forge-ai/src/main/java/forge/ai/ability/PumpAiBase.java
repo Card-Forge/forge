@@ -94,7 +94,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 List<Card> attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
+                        if (c.equals(sa.getHostCard()) && sa.getPayCosts().hasTapCost() 
                                 && (combat == null || !combat.isAttacking(c))) {
                             return false;
                         }
@@ -112,7 +112,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             List<Card> attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
+                    if (c.equals(sa.getHostCard()) && sa.getPayCosts().hasTapCost() 
                             && (combat == null || !combat.isAttacking(c))) {
                         return false;
                     }

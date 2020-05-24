@@ -6,6 +6,8 @@ import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityView;
+import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -23,7 +25,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
-import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -46,7 +47,7 @@ public class HumanPlay {
      * <p>
      * playSpellAbility.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -94,34 +95,9 @@ public class HumanPlay {
             source.animateBestow();
         }
 
-        // Need to check PayCosts, and Ability + All SubAbilities for Target
-        boolean newAbility = sa.getPayCosts() != null;
-        SpellAbility ability = sa;
-        while ((ability != null) && !newAbility) {
-            final TargetRestrictions tgt = ability.getTargetRestrictions();
-
-            newAbility |= tgt != null;
-            ability = ability.getSubAbility();
-        }
-
         // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getHostCard() +  " new = " + newAbility);
-        if (newAbility) {
-
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-            if (!req.playAbility(true, false, false)) {
-                if (flippedToCast && !castFaceDown) {
-                    source.turnFaceDown(true);
-                }
-                return false;
-            }
-        } else if (payManaCostIfNeeded(controller, p, sa)) {
-            if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setHostCard(p.getGame().getAction().moveToStack(source, sa));
-            }
-
-            p.getGame().getStack().add(sa);
-        } else {
-            // Failed to pay costs, revert to original state
+        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
+        if (!req.playAbility(true, false, false)) {
             if (flippedToCast && !castFaceDown) {
                 source.turnFaceDown(true);
             }
@@ -133,7 +109,7 @@ public class HumanPlay {
     /**
      * choose optional additional costs. For HUMAN only
      * @param p
-     * 
+     *
      * @param original
      *            the original sa
      * @return an ArrayList<SpellAbility>.
@@ -159,31 +135,11 @@ public class HumanPlay {
         //final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
     }
 
-    private static boolean payManaCostIfNeeded(final PlayerControllerHuman controller, final Player p, final SpellAbility sa) {
-        final ManaCostBeingPaid manaCost;
-        if (sa.getHostCard().isCopiedSpell() && sa.isSpell()) {
-            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
-        }
-        else {
-            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            CostAdjustment.adjust(manaCost, sa, null, false);
-        }
-
-        boolean isPaid = manaCost.isPaid();
-
-        if (!isPaid) {
-            InputPayManaSimple inputPay = new InputPayManaSimple(controller, p.getGame(), sa, manaCost);
-            inputPay.showAndWait();
-            isPaid = inputPay.isPaid();
-        }
-        return isPaid;
-    }
-
     /**
      * <p>
      * playSpellAbilityForFree.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -193,33 +149,22 @@ public class HumanPlay {
 
         source.setSplitStateToPlayAbility(sa);
 
-        if (sa.getPayCosts() != null) {
-            if (!sa.isCopied()) {
-                if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-                    CharmEffect.makeChoices(sa);
-                }
-                sa = AbilityUtils.addSpliceEffects(sa);
+        if (!sa.isCopied()) {
+            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+                CharmEffect.makeChoices(sa);
             }
+            sa = AbilityUtils.addSpliceEffects(sa);
+        }
 
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-            req.playAbility(mayChooseNewTargets, true, false);
-        }
-        else {
-            if (sa.isSpell()) {
-                final Card c = sa.getHostCard();
-                if (!c.isCopiedSpell()) {
-                    sa.setHostCard(game.getAction().moveToStack(c, sa));
-                }
-            }
-            game.getStack().add(sa);
-        }
+        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
+        req.playAbility(mayChooseNewTargets, true, false);
     }
 
     /**
      * <p>
      * playSpellAbility_NoStack.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -230,14 +175,8 @@ public class HumanPlay {
     public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
-        if (sa.getPayCosts() != null) {
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-
-            req.playAbility(!useOldTargets, false, true);
-        }
-        else if (payManaCostIfNeeded(controller, player, sa)) {
-            AbilityUtils.resolve(sa);
-        }
+        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
+        req.playAbility(!useOldTargets, false, true);
     }
 
     // ------------------------------------------------------------------------
@@ -506,14 +445,13 @@ public class HumanPlay {
                     } else {
                         // replace this with input
                         CardCollection newList = new CardCollection();
+                        GameEntityViewMap<Card, CardView> gameCacheList = GameEntityView.getMap(list);
                         for (int i = 0; i < nNeeded; i++) {
-                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), CardView.getCollection(list)));
-                            if (c == null) {
+                            final CardView cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            if (cv == null || !gameCacheList.containsKey(cv)) {
                                 return false;
                             }
-
-                            list.remove(c);
-                            newList.add(c);
+                            newList.add(gameCacheList.remove(cv));
                         }
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility);
                     }
@@ -543,27 +481,28 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName()), PlayerView.getCollection(payableZone)));
-                    if (chosen == null) {
+                    GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(payableZone);
+                    PlayerView pv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName()), gameCachePlayer.getTrackableKeys());
+                    if (pv == null || !gameCachePlayer.containsKey(pv)) {
                         return false;
                     }
+                    Player chosen = gameCachePlayer.get(pv);
 
                     List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
 
+                    GameEntityViewMap<Card, CardView> gameCacheTypeList = GameEntityView.getMap(typeList);
                     for (int i = 0; i < amount; i++) {
-                        if (typeList.isEmpty()) {
+                        if (gameCacheTypeList.isEmpty()) {
                             return false;
                         }
-
-                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardToLibrary"), CardView.getCollection(typeList)));
-
-                        if (c != null) {
-                            typeList.remove(c);
-                            p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()), null);
-                        }
-                        else {
+                        final CardView cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardToLibrary"), gameCacheTypeList.getTrackableKeys());
+                        if (cv == null || !gameCacheTypeList.containsKey(cv)) {
                             return false;
                         }
+                        final Card c = gameCacheTypeList.get(cv);
+
+                        gameCacheTypeList.remove(c);
+                        p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()), null);
                     }
                 }
                 else { // Tainted Specter, Gurzigost, etc.

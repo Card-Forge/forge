@@ -81,7 +81,7 @@ public class ForgeScript {
             return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
+                if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
                     return true;
                 }
             }

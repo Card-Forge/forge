@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -79,7 +79,7 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
-    
+
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
@@ -97,7 +97,7 @@ public class Game {
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
 
-    private final GameView view; 
+    private final GameView view;
     private final Tracker tracker = new Tracker();
 
     public Player getMonarch() {
@@ -175,19 +175,6 @@ public class Game {
     }
     public void addPlayer(int id, Player player) {
         playerCache.put(Integer.valueOf(id), player);
-    }
-
-    private final GameEntityCache<Card, CardView> cardCache = new GameEntityCache<>();
-    public Card getCard(CardView cardView) {
-        return cardCache.get(cardView);
-    }
-    public void addCard(int id, Card card) {
-        cardCache.put(Integer.valueOf(id), card);
-    }
-    public CardCollection getCardList(Iterable<CardView> cardViews) {
-        CardCollection list = new CardCollection();
-        cardCache.addToList(cardViews, list);
-        return list;
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -385,7 +372,7 @@ public class Game {
             }
         });
     }
-    
+
     /**
      * The Direction in which the turn order of this Game currently proceeds.
      */
@@ -535,6 +522,33 @@ public class Game {
         CardStateVisitor visit = new CardStateVisitor(card);
         this.forEachCardInGame(visit);
         return visit.getFound(notFound);
+    }
+
+    private static class CardIdVisitor extends Visitor<Card> {
+        Card found = null;
+        int id;
+
+        private CardIdVisitor(final int id) {
+            this.id = id;
+        }
+
+        @Override
+        public boolean visit(Card object) {
+            if (this.id == object.getId()) {
+                found = object;
+            }
+            return found == null;
+        }
+
+        public Card getFound() {
+            return found;
+        }
+    }
+
+    public Card findById(int id) {
+        CardIdVisitor visit = new CardIdVisitor(id);
+        this.forEachCardInGame(visit);
+        return visit.getFound();
     }
 
     // Allows visiting cards in game without allocating a temporary list.
@@ -771,11 +785,11 @@ public class Game {
 
     public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
-        
+
         if (matchRarity) {
-        
+
             boolean onePlayerHasTimeShifted = false;
-            
+
             List<CardRarity> validRarities = new ArrayList<>(Arrays.asList(CardRarity.values()));
             for (final Player player : getPlayers()) {
                 final Set<CardRarity> playerRarity = getValidRarities(player.getCardsIn(ZoneType.Library));
@@ -791,24 +805,24 @@ public class Game {
                 }
                 return anteed;
             }
-            
+
             //If possible, don't ante basic lands
             if (validRarities.size() > 1) {
                 validRarities.remove(CardRarity.BasicLand);
             }
-            
+
             if (validRarities.contains(CardRarity.Special)) {
                 onePlayerHasTimeShifted = false;
             }
-            
+
             CardRarity anteRarity = validRarities.get(MyRandom.getRandom().nextInt(validRarities.size()));
-            
+
             System.out.println("Rarity chosen for ante: " + anteRarity.name());
-            
+
             for (final Player player : getPlayers()) {
                 CardCollection library = new CardCollection(player.getCardsIn(ZoneType.Library));
                 CardCollection toRemove = new CardCollection();
-                
+
                 //Remove all cards that aren't of the chosen rarity
                 for (Card card : library) {
                     if (onePlayerHasTimeShifted && card.getRarity() == CardRarity.Special) {
@@ -827,16 +841,16 @@ public class Game {
                         }
                     }
                 }
-                
+
                 library.removeAll(toRemove);
-                
+
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
                     chooseRandomCardsForAnte(player, anteed);
                 }
-                
+
             }
         }
         else {
@@ -874,7 +888,6 @@ public class Game {
     }
 
     public void clearCaches() {
-        cardCache.clear();
 
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();

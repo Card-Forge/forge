@@ -1474,7 +1474,7 @@ public class ComputerUtilCard {
                     if (totalPowerUnblocked >= opp.getLife()) {
                         return true;
                     } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost()) {
+                        if (sa.getPayCosts().hasNoManaCost()) {
                             return true; // always activate abilities which cost no mana and which can increase unblocked damage
                         }
                     }
@@ -1785,10 +1785,6 @@ public class ComputerUtilCard {
 
         for (Card c : otb) {
             for (SpellAbility sa : c.getSpellAbilities()) {
-                if (sa.getPayCosts() == null) {
-                    continue;
-                }
-
                 CostPayEnergy energyCost = sa.getPayCosts().getCostEnergy();
                 if (energyCost != null) {
                     int amount = energyCost.convertAmount();

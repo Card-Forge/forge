@@ -398,7 +398,7 @@ public class AttachAi extends SpellAbilityAi {
                     if (!c.isCreature() && !c.getType().hasSubtype("Vehicle") && !c.isTapped()) {
                         // try to identify if this thing can actually tap
                         for (SpellAbility ab : c.getAllSpellAbilities()) {
-                            if (ab.getPayCosts() != null && ab.getPayCosts().hasTapCost()) {
+                            if (ab.getPayCosts().hasTapCost()) {
                                 return true;
                             }
                         }
@@ -560,7 +560,7 @@ public class AttachAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     for (final SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
                             return false;
                         }
                     }

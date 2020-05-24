@@ -529,7 +529,7 @@ public class ComputerUtilCost {
                         public boolean apply(Card card) {
                             boolean hasManaSa = false;
                             for (final SpellAbility sa : card.getSpellAbilities()) {
-                                if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                                if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
                                     hasManaSa = true;
                                     break;
                                 }

@@ -494,7 +494,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 @Override
                 public boolean apply(Card card) {
                     for (final SpellAbility sa : card.getSpellAbilities()) {
-                        if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
                             return true;
                         }
                     }
