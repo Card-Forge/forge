@@ -47,12 +47,10 @@ public class SurveilAi extends SpellAbilityAi {
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
         // even if there's no mana cost.
-        if (sa.getPayCosts() != null) {
-            if (sa.getPayCosts().hasTapCost()
-                    && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                    && !SpellAbilityAi.isSorcerySpeed(sa)) {
-                return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-            }
+        if (sa.getPayCosts().hasTapCost()
+                && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
+                && !SpellAbilityAi.isSorcerySpeed(sa)) {
+            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         }
 
         // in the player's turn Surveil should only be done in Main1 or in Upkeep if able

@@ -53,7 +53,6 @@ public class  DamageAllAi extends SpellAbilityAi {
             x = source.getCounters(CounterType.LOYALTY);
         }
         if (x == -1) {
-            Player bestOpp = determineOppToKill(ai, sa, source, dmg);
             if (determineOppToKill(ai, sa, source, dmg) != null) {
                 // we already know we can kill a player, so go for it
                 return true;
@@ -138,7 +137,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         int minGain = 200; // The minimum gain in destroyed creatures
-        if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
+        if (sa.getPayCosts().isReusuableResource()) {
             if (computerList.isEmpty()) {
                 minGain = 10; // nothing to lose
                 // no creatures to lose and player can be damaged

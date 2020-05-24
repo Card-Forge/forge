@@ -1028,7 +1028,7 @@ public class ComputerUtilCombat {
             return power;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated)) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1203,7 +1203,7 @@ public class ComputerUtilCombat {
             return toughness;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated)) {
                 continue;
             }
 
@@ -1426,7 +1426,7 @@ public class ComputerUtilCombat {
             return power;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated)) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1662,7 +1662,7 @@ public class ComputerUtilCombat {
             return toughness;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated)) {
                 continue;
             }
 
@@ -2517,7 +2517,7 @@ public class ComputerUtilCombat {
     	final Player controller = combatant.getController();
     	for (Card c : controller.getCardsIn(ZoneType.Battlefield)) {
 	    	for (SpellAbility ability : c.getAllSpellAbilities()) {
-	            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+	            if (!(ability instanceof AbilityActivated)) {
 	                continue;
 	            }
 	            if (ability.getApi() != ApiType.Pump) {

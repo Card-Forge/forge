@@ -295,7 +295,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param id0 the unique id of the new card.
      */
     public Card(final int id0, final Game game0) {
-        this(id0, null, true, game0);
+        this(id0, null, game0);
     }
 
     /**
@@ -307,15 +307,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @see IPaperCard
      */
     public Card(final int id0, final IPaperCard paperCard0, final Game game0) {
-        this(id0, paperCard0, true, game0);
-    }
-    public Card(final int id0, final IPaperCard paperCard0, final boolean allowCache, final Game game0) {
         super(id0);
 
         game = game0;
-        if (id0 >= 0 && allowCache && game != null) {
-            game.addCard(id0, this);
-        }
         paperCard = paperCard0;
         view = new CardView(id0, game == null ? null : game.getTracker());
         currentState = new CardState(view.getCurrentState(), this);
@@ -2083,9 +2077,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
                 StringBuilder sbSA = new StringBuilder();
                 sbSA.append("Adventure — ").append(getState(CardStateName.Adventure).getName());
-                if (sa.getPayCosts() != null) {
-                    sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
-                }
+                sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
                 sbSA.append(": ");
                 sbSA.append(sAbility);
                 sAbility = sbSA.toString();

@@ -1344,7 +1344,7 @@ public class AbilityUtils {
         Player pl = sa.getActivatingPlayer();
         final Game game = pl.getGame();
 
-        if (sa.isTrigger() && sa.getParent() == null && sa.getPayCosts() != null) {
+        if (sa.isTrigger() && sa.getParent() == null) {
             // when trigger cost are paid before the effect does resolve, need to clean the trigger
             game.getTriggerHandler().resetActiveTriggers();
         }

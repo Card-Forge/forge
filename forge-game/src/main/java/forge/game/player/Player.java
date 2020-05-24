@@ -3067,7 +3067,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void createMonarchEffect() {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {
-            monarchEffect = new Card(game.nextCardId(), null, false, game);
+            monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
             monarchEffect.setImageKey("t:monarch");
             monarchEffect.setName("The Monarch");
@@ -3163,7 +3163,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
 
         if(bless) {
-            blessingEffect = new Card(game.nextCardId(), null, false, game);
+            blessingEffect = new Card(game.nextCardId(), null, game);
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
             blessingEffect.setName("City's Blessing");
@@ -3257,7 +3257,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final PlayerZone com = getZone(ZoneType.Command);
 
-        keywordEffect = new Card(game.nextCardId(), null, false, game);
+        keywordEffect = new Card(game.nextCardId(), null, game);
         keywordEffect.setImmutable(true);
         keywordEffect.setOwner(this);
         keywordEffect.setName("Keyword Effects");

@@ -114,7 +114,7 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player

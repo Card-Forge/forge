@@ -14,6 +14,8 @@ import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -35,6 +37,7 @@ import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import forge.util.gui.SGuiChoose;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.CardTranslation;
@@ -310,11 +313,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
         }
-        final Game game = controller.getGame();
-        final Player p = game.getPlayer(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromWhoseZone", cost.getFrom().getTranslatedName()), PlayerView.getCollection(payableZone)));
-        if (p == null) {
+        GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(payableZone);
+        final PlayerView pv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromWhoseZone", cost.getFrom().getTranslatedName()), gameCachePlayer.getTrackableKeys());
+        if (pv == null || !gameCachePlayer.containsKey(pv)) {
             return null;
         }
+        final Player p = gameCachePlayer.get(pv);
 
         final CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
         final int count = typeList.size();
@@ -322,8 +326,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        final CardCollection toExile = game.getCardList(controller.getGui().many(Localizer.getInstance().getMessage("lblExileFromZone", cost.getFrom().getTranslatedName()), Localizer.getInstance().getMessage("lblToBeExiled"), nNeeded, CardView.getCollection(typeList), null));
-        return PaymentDecision.card(toExile);
+        GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(typeList);
+        List<CardView> views = controller.getGui().many(
+                Localizer.getInstance().getMessage("lblExileFromZone", cost.getFrom().getTranslatedName()),
+                Localizer.getInstance().getMessage("lblToBeExiled"), nNeeded, gameCacheExile.getTrackableKeys(), null);
+        List<Card> result = Lists.newArrayList();
+        gameCacheExile.addToList(views, result);
+        return PaymentDecision.card(result);
     }
 
     @Override
@@ -395,20 +404,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(list);
     }
 
-    private Card getCard(final CardView cardView) {
-        return controller.getGame().getCard(cardView);
-    }
-
     private PaymentDecision exileFromMiscZone(final CostExile cost, final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
+        GameEntityViewMap<Card, CardView> gameCacheCard = GameEntityView.getMap(typeList);
+
         final CardCollection exiled = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileProgressFromZone", String.valueOf(i + 1), String.valueOf(nNeeded), cost.getFrom().getTranslatedName()), CardView.getCollection(typeList)));
-            if (c == null) { return null; }
+            final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileProgressFromZone", String.valueOf(i + 1), String.valueOf(nNeeded), cost.getFrom().getTranslatedName()), gameCacheCard.getTrackableKeys());
+            if (cv == null || !gameCacheCard.containsKey(cv)) { return null; }
 
-            typeList.remove(c);
-            exiled.add(c);
+            exiled.add(gameCacheCard.remove(cv));
         }
         return PaymentDecision.card(exiled);
     }
@@ -438,12 +444,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (ability.isOptionalTrigger()) {
             min = 0;
         }
-        final CardCollection choice = controller.getGame().getCardList(controller.getGui().many(Localizer.getInstance().getMessage("lblChooseAnExiledCardPutIntoGraveyard"), Localizer.getInstance().getMessage("lblToGraveyard"), min, c, CardView.getCollection(list), CardView.get(source)));
-        
-        if (choice == null || choice.size() < c) {
+        GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(list);
+        List<CardView> views = controller.getGui().many(
+                Localizer.getInstance().getMessage("lblChooseAnExiledCardPutIntoGraveyard"),
+                Localizer.getInstance().getMessage("lblToGraveyard"), min, c, CardView.getCollection(list), CardView.get(source));
+
+        if (views == null || views.size() < c) {
             return null;
         }
-        return PaymentDecision.card(choice);
+        List<Card> result = Lists.newArrayList();
+        gameCacheExile.addToList(views, result);
+        return PaymentDecision.card(result);
     }
 
     @Override
@@ -555,11 +566,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.players(oppsThatCanGainLife);
         }
 
-        final Player chosenToGain = controller.getGame().getPlayer(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblCardChooseAnOpponentToGainNLife", CardTranslation.getTranslatedName(source.getName()), String.valueOf(c)), PlayerView.getCollection(oppsThatCanGainLife)));
-        if (chosenToGain == null) {
+        GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(oppsThatCanGainLife);
+        final PlayerView pv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblCardChooseAnOpponentToGainNLife", CardTranslation.getTranslatedName(source.getName()), String.valueOf(c)), gameCachePlayer.getTrackableKeys());
+        if (pv == null || !gameCachePlayer.containsKey(pv)) {
             return null;
         }
-        return PaymentDecision.players(Lists.newArrayList(chosenToGain));
+        return PaymentDecision.players(Lists.newArrayList(gameCachePlayer.get(pv)));
     }
 
     @Override
@@ -694,13 +706,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final CardCollection chosen = new CardCollection();
+        GameEntityViewMap<Card, CardView> gameCacheCard = GameEntityView.getMap(typeList);
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblFromZonePutToLibrary", fromZone.getTranslatedName()), CardView.getCollection(typeList)));
-            if (c == null) {
+            final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblFromZonePutToLibrary", fromZone.getTranslatedName()), gameCacheCard.getTrackableKeys());
+            if (cv == null || !gameCacheCard.containsKey(cv)) {
                 return null;
             }
-            typeList.remove(c);
-            chosen.add(c);
+            chosen.add(gameCacheCard.remove(cv));
         }
         return PaymentDecision.card(chosen);
     }
@@ -710,10 +722,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
 
-        final Player p = controller.getGame().getPlayer(controller.getGui().oneOrNone(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblPutCardsFromWhoseZone"), fromZone.getTranslatedName()), PlayerView.getCollection(payableZone)));
-        if (p == null) {
+        GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(payableZone);
+        PlayerView pv = SGuiChoose.oneOrNone(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblPutCardsFromWhoseZone"), fromZone.getTranslatedName()), gameCachePlayer.getTrackableKeys());
+        if (pv == null || !gameCachePlayer.containsKey(pv)) {
             return null;
         }
+        Player p = gameCachePlayer.get(pv);
 
         final CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
         if (typeList.size() < nNeeded) {
@@ -721,13 +735,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final CardCollection chosen = new CardCollection();
+        GameEntityViewMap<Card, CardView> gameCacheCard = GameEntityView.getMap(typeList);
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblPutZoneCardsToLibrary", fromZone.getTranslatedName()), CardView.getCollection(typeList)));
-            if (c == null) {
+            final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblPutZoneCardsToLibrary", fromZone.getTranslatedName()), gameCacheCard.getTrackableKeys());
+            if (cv == null || !gameCacheCard.containsKey(cv)) {
                 return null;
             }
-            typeList.remove(c);
-            chosen.add(c);
+            chosen.add(gameCacheCard.remove(cv));
         }
         return PaymentDecision.card(chosen);
     }
@@ -1068,15 +1082,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
-        final List<CardView> suspended = Lists.newArrayList();
-        for (final Card crd : validCards) {
-            if (crd.getCounters(cost.counter) > 0) {
-                suspended.add(CardView.get(crd));
-            }
+        GameEntityViewMap<Card, CardView> gameCacheSuspended = GameEntityView.getMap(CardLists.filter(validCards, CardPredicates.hasCounter(cost.counter)));
+
+        final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", cost.zone.getTranslatedName()), gameCacheSuspended.getTrackableKeys());
+        if (cv == null || !gameCacheSuspended.containsKey(cv)) {
+            return null;
         }
 
-        final Card card = getCard(controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", cost.zone.getTranslatedName()), suspended));
-        return null == card ? null : PaymentDecision.card(card, c);
+        return PaymentDecision.card(gameCacheSuspended.get(cv), c);
     }
 
     @Override

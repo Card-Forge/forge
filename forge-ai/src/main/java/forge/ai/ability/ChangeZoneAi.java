@@ -1065,8 +1065,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (destination.equals(ZoneType.Exile) || origin.contains(ZoneType.Battlefield)) {
 
             // don't rush bouncing stuff when not going to attack
-            if (!immediately && sa.getPayCosts() != null
-                    && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+            if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && game.getPhaseHandler().isPlayerTurn(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
@@ -1103,8 +1102,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         	}
         }
 
-        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.getTargetRestrictions() != null
-                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0 && sa.getPayCosts() != null
+        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.usesTargeting()
+                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
 
         if (list.isEmpty() && !doWithoutTarget) {
@@ -1790,6 +1789,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     public boolean doReturnCommanderLogic(SpellAbility sa, Player aiPlayer) {
+        @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>)sa.getReplacingObject(AbilityKey.OriginalParams);
         SpellAbility causeSa = (SpellAbility)originalParams.get(AbilityKey.Cause);
         SpellAbility causeSub = null;

@@ -153,12 +153,11 @@ public class UntapAi extends SpellAbilityAi {
 
         // Try to avoid potential infinite recursion,
         // e.g. Kiora's Follower untapping another Kiora's Follower and repeating infinitely
-        if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostTap.class)) {
+        if (sa.getPayCosts().hasOnlySpecificCostType(CostTap.class)) {
             CardCollection toRemove = new CardCollection();
             for (Card c : untapList) {
                 for (SpellAbility ab : c.getAllSpellAbilities()) {
                     if (ab.getApi() == ApiType.Untap
-                            && ab.getPayCosts() != null
                             && ab.getPayCosts().hasOnlySpecificCostType(CostTap.class)
                             && ab.canTarget(source)) {
                         toRemove.add(c);

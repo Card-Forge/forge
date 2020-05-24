@@ -242,7 +242,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     && "+X".equals(sa.getParam("NumDef"))
                     && !sa.usesTargeting()
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
-                if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                if (sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     // Electrostatic Pummeler, can be expanded for similar cards
                     int initPower = getEffectivePower(sa.getHostCard());
                     int pumpedPower = initPower;

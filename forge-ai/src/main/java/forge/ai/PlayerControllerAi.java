@@ -1216,7 +1216,7 @@ public class PlayerControllerAi extends PlayerController {
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
-        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = chosen.getPayCosts().copy();
 
         for (OptionalCostValue opt : optionalCostValues) {
             // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
@@ -1255,7 +1255,7 @@ public class PlayerControllerAi extends PlayerController {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         int chosenAmount = 0;
 
-        Cost costSoFar = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = sa.getPayCosts().copy();
 
         for (int i = 0; i < max; i++) {
             costSoFar.add(cost);

@@ -84,8 +84,8 @@ public class PlayAi extends SpellAbilityAi {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
-            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null) {
-                minCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
+            if (sa.getPayCosts().getCostMana() != null) {
+                minCMC = sa.getPayCosts().getTotalMana().getCMC();
             }
             validOpts = CardLists.filter(validOpts, CardPredicates.greaterCMC(minCMC));
             return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null) != null;
@@ -156,9 +156,7 @@ public class PlayAi extends SpellAbilityAi {
                     if (sa.hasParam("WithoutManaCost")) {
                         // Try to avoid casting instants and sorceries with X in their cost, since X will be assumed to be 0.
                         if (!(spell instanceof SpellPermanent)) {
-                            if (spell.getPayCosts() != null
-                                    && spell.getPayCosts().getCostMana() != null
-                                    && spell.getPayCosts().getCostMana().getMana().countX() > 0) {
+                            if (spell.getPayCosts().getTotalMana().countX() > 0) {
                                 continue;
                             }
                         }

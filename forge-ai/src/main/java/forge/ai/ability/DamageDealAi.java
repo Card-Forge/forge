@@ -285,7 +285,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if ("XCountersDamage".equals(logic) && sa.getPayCosts() != null) {
+        if ("XCountersDamage".equals(logic)) {
             // Check to ensure that we have enough counters to remove per the defined PayX
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
@@ -449,7 +449,7 @@ public class DamageDealAi extends DamageAiBase {
             int pwScore = curLoyalty * 10;
 
             for (SpellAbility sa : pw.getSpellAbilities()) {
-                if (sa.hasParam("Ultimate") && sa.getPayCosts() != null) {
+                if (sa.hasParam("Ultimate")) {
                     Integer loyaltyCost = 0;
                     CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
                     if (remLoyalty != null) {
@@ -794,8 +794,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
-                        || sa.getPayCosts() == null || immediately
-                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
+                        || immediately || shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
                 	tcs.add(enemy);
                     if (divided) {
@@ -1126,8 +1125,7 @@ public class DamageDealAi extends DamageAiBase {
                         continue;
                     }
                     // currently works only with cards that don't have additional costs (only mana is supported)
-                    if (ab.getPayCosts() != null
-                            && (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class))) {
+                    if (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class)) {
                         String dmgDef = "0";
                         if (ab.getApi() == ApiType.DealDamage) {
                             dmgDef = ab.getParamOrDefault("NumDmg", "0");
@@ -1151,7 +1149,7 @@ public class DamageDealAi extends DamageAiBase {
                                 }
 
                                 // FIXME: should it also check restrictions for targeting players?
-                                ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costSa = sa.getPayCosts().getTotalMana();
                                 ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));

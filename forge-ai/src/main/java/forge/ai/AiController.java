@@ -769,7 +769,7 @@ public class AiController {
                 return AiPlayDecision.CantPlayAi;
             }
         }
-        else if (sa.getPayCosts() != null){
+        else {
             Cost payCosts = sa.getPayCosts();
             ManaCost mana = payCosts.getTotalMana();
             if (mana != null) {
@@ -858,7 +858,7 @@ public class AiController {
         int neededMana = 0;
         boolean dangerousRecurringCost = false;
 
-        Cost costWithBuyback = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        Cost costWithBuyback = sa.getPayCosts().copy();
         for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
             if (opt.getType() == OptionalCost.Buyback) {
                 costWithBuyback.add(opt.getCost());
@@ -907,8 +907,8 @@ public class AiController {
         public int compare(final SpellAbility a, final SpellAbility b) {
             // sort from highest cost to lowest
             // we want the highest costs first
-            int a1 = a.getPayCosts() == null ? 0 : a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
+            int a1 = a.getPayCosts().getTotalMana().getCMC();
+            int b1 = b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
             if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
@@ -927,12 +927,12 @@ public class AiController {
             // deprioritize pump spells with pure energy cost (can be activated last,
             // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
             int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts() != null && a.getPayCosts().getCostEnergy() != null) {
+            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
                 if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     a2 = a.getPayCosts().getCostEnergy().convertAmount();
                 }
             }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts() != null && b.getPayCosts().getCostEnergy() != null) {
+            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
                 if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     b2 = b.getPayCosts().getCostEnergy().convertAmount();
                 }
@@ -956,8 +956,7 @@ public class AiController {
                 return 1;
             }
 
-            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()
-                    && a.getPayCosts() != null && b.getPayCosts() != null) {
+            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()) {
                 // Cheaper Spectacle costs should be preferred
                 // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
@@ -1479,7 +1478,7 @@ public class AiController {
                 }
 
                 for (SpellAbility sa : card.getSpellAbilities()) {
-                    if (sa.getPayCosts() != null && sa.isAbility()
+                    if (sa.isAbility()
                             && sa.getPayCosts().getCostMana() != null
                             && sa.getPayCosts().getCostMana().getMana().getCMC() > 0
                             && (!sa.getPayCosts().hasTapCost() || !isTapLand)
