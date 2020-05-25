@@ -1988,7 +1988,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         StringBuilder replacementEffects = new StringBuilder();
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
-                String text = replacementEffect.toString();
+                String text = replacementEffect.getDescription();
                 if (text.contains("enters the battlefield")) {
                     sb.append(text).append("\r\n");
                 } else {
@@ -2349,7 +2349,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Replacement effects
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
-                sb.append(replacementEffect.toString()).append("\r\n");
+                sb.append(replacementEffect.getDescription()).append("\r\n");
             }
         }
 
