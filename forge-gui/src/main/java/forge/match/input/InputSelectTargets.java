@@ -190,6 +190,21 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         // If all cards must have different controllers
+        if (tgt.isSameController()) {
+            final List<Player> targetedControllers = new ArrayList<>();
+            for (final GameObject o : targetDepth.keySet()) {
+                if (o instanceof Card) {
+                    final Player p = ((Card) o).getController();
+                    targetedControllers.add(p);
+                }
+            }
+            if (!targetedControllers.isEmpty() && !targetedControllers.contains(card.getController())) {
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have same controller)");
+                return false;
+            }
+        }
+
+        // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {
             final List<Player> targetedControllers = new ArrayList<>();
             for (final GameObject o : targetDepth.keySet()) {
@@ -333,7 +348,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }
 
-    
     @Override
     protected void onStop() {
 	getController().getGui().clearSelectables();

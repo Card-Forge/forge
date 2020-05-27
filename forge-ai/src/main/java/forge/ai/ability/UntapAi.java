@@ -24,6 +24,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
+import java.util.Map;
 
 public class UntapAi extends SpellAbilityAi {
     @Override
@@ -311,7 +312,7 @@ public class UntapAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         PlayerCollection pl = new PlayerCollection();
         pl.add(ai);
         pl.addAll(ai.getAllies());

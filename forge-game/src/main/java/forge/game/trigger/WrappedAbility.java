@@ -563,4 +563,11 @@ public class WrappedAbility extends Ability {
     public void setXManaCostPaid(final Integer n) {
         sa.setXManaCostPaid(n);
     }
+
+    public Card getOriginalHost() {
+        return sa.getOriginalHost();
+    }
+    public void setOriginalHost(final Card c) {
+        sa.setOriginalHost(c);
+    }
 }

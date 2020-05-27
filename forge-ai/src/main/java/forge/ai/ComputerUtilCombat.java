@@ -328,7 +328,7 @@ public class ComputerUtilCombat {
     public static int resultingPoison(final Player ai, final Combat combat) {
 
         // ai can't get poision counters, so the value can't change
-        if (!ai.canReceiveCounters(CounterType.POISON)) {
+        if (!ai.canReceiveCounters(CounterEnumType.POISON)) {
             return ai.getPoisonCounters();
         }
 
@@ -931,7 +931,7 @@ public class ComputerUtilCombat {
         if (dealsFirstStrikeDamage(attacker, withoutAbilities, null)
                 && (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT))
                 && !dealsFirstStrikeDamage(blocker, withoutAbilities, null)
-                && !blocker.canReceiveCounters(CounterType.M1M1)) {
+                && !blocker.canReceiveCounters(CounterEnumType.M1M1)) {
             power -= attacker.getNetCombatDamage();
         }
 
@@ -1058,7 +1058,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1234,7 +1234,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1296,7 +1296,7 @@ public class ComputerUtilCombat {
             if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && (blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT))
                     && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
-                    && !attacker.canReceiveCounters(CounterType.M1M1)) {
+                    && !attacker.canReceiveCounters(CounterEnumType.M1M1)) {
                 power -= blocker.getNetCombatDamage();
             }
             theTriggers.addAll(blocker.getTriggers());
@@ -1456,7 +1456,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && attacker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && attacker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1693,7 +1693,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && attacker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && attacker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1848,10 +1848,10 @@ public class ComputerUtilCombat {
 
         if (((attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, attacker) && !withoutAbilities))
                 && !(blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT)))
-                || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterType.M1M1) && (attacker
-                        .getCounters(CounterType.M1M1) == 0))
-                || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterType.P1P1) && (attacker
-                        .getCounters(CounterType.P1P1) == 0))) {
+                || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterEnumType.M1M1) && (attacker
+                        .getCounters(CounterEnumType.M1M1) == 0))
+                || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterEnumType.P1P1) && (attacker
+                        .getCounters(CounterEnumType.P1P1) == 0))) {
             return false;
         }
 
@@ -2080,10 +2080,10 @@ public class ComputerUtilCombat {
 
         if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, blocker) && !withoutAbilities)) && !(attacker
                 .hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)))
-                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterType.M1M1) && (blocker
-                        .getCounters(CounterType.M1M1) == 0))
-                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterType.P1P1) && (blocker
-                        .getCounters(CounterType.P1P1) == 0))) {
+                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && (blocker
+                        .getCounters(CounterEnumType.M1M1) == 0))
+                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterEnumType.P1P1) && (blocker
+                        .getCounters(CounterEnumType.P1P1) == 0))) {
             return false;
         }
 

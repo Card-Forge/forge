@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -68,7 +69,7 @@ public class TapAi extends TapAiBase {
         } else {
             if ("TapForXCounters".equals(sa.getParam("AILogic"))) {
                 // e.g. Waxmane Baku
-                CounterType ctrType = CounterType.KI;
+                CounterType ctrType = CounterType.get(CounterEnumType.KI);
                 for (CostPart part : sa.getPayCosts().getCostParts()) {
                     if (part instanceof CostRemoveCounter) {
                         ctrType = ((CostRemoveCounter)part).counter;

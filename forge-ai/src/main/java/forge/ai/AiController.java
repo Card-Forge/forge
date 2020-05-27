@@ -177,7 +177,7 @@ public class AiController {
                             && CardFactoryUtil.isCounterable(host)) {
                         return true;
                     } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
-                            && host.getCMC() == c.getCounters(CounterType.CHARGE)) {
+                            && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
                         return true;
                     }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
                         String hostName = host.getName();
@@ -1801,7 +1801,7 @@ public class AiController {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
 
-    public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional) {
+    public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional, Map<String, Object> params) {
         if (sa == null || sa.getApi() == null) {
             throw new UnsupportedOperationException();
         }
@@ -1834,7 +1834,7 @@ public class AiController {
             default:
                 CardCollection editablePool = new CardCollection(pool);
                 for (int i = 0; i < max; i++) {
-                    Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional);
+                    Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional, params);
                     if (c != null) {
                         result.add(c);
                         editablePool.remove(c);

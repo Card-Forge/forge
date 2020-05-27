@@ -18,6 +18,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -302,7 +303,7 @@ public class ControlGainAi extends SpellAbilityAi {
     } // pumpDrawbackAI()
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         final List<Card> cards = Lists.newArrayList();
         for (Player p : options) {
             cards.addAll(p.getCreaturesInPlay());

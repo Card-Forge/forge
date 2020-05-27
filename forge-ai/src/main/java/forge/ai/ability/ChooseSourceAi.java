@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -126,7 +127,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
     
     
     @Override
-    public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
             final Player ai = sa.getActivatingPlayer();
             final Game game = ai.getGame();

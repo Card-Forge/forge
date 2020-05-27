@@ -45,7 +45,7 @@ public class ComputerUtilCost {
                 final CostPutCounter addCounter = (CostPutCounter) part;
                 final CounterType type = addCounter.getCounter();
 
-                if (type.equals(CounterType.M1M1)) {
+                if (type.equals(CounterEnumType.M1M1)) {
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class ComputerUtilCost {
 
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
-                    if (CounterType.P1P1.equals(type)) {
+                    if (CounterEnumType.P1P1.equals(type)) {
                         return false;
                     }
                     continue;
@@ -97,7 +97,7 @@ public class ComputerUtilCost {
 
                 // check the sa what the PaymentDecision is.
                 // ignore Loyality abilities with Zero as Cost
-                if (sa != null && !CounterType.LOYALTY.equals(type)) {
+                if (sa != null && !CounterEnumType.LOYALTY.equals(type)) {
                     final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
                     PaymentDecision pay = decision.visit(remCounter);
                     if (pay == null || pay.c <= 0) {
@@ -106,7 +106,7 @@ public class ComputerUtilCost {
                 }
 
                 //don't kill the creature
-                if (CounterType.P1P1.equals(type) && source.getLethalDamage() <= 1
+                if (CounterEnumType.P1P1.equals(type) && source.getLethalDamage() <= 1
                         && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }

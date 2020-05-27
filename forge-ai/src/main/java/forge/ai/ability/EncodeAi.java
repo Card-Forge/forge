@@ -18,6 +18,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 
@@ -84,7 +85,7 @@ public final class EncodeAi extends SpellAbilityAi {
      * forge.game.player.Player)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return chooseCard(ai, options, isOptional);
     }
 

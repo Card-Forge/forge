@@ -150,7 +150,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             final String counterType = moveSA.getParam("CounterType");
-            final CounterType cType = "Any".equals(counterType) ? null : CounterType.valueOf(counterType);
+            final CounterType cType = "Any".equals(counterType) ? null : CounterType.getType(counterType);
 
             final PhaseHandler ph = game.getPhaseHandler();
             if (ph.inCombat() && ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -185,7 +185,7 @@ public class PumpAi extends PumpAiBase {
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                            if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                            if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
                                 return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                         || card.isToken();
                             }
@@ -235,7 +235,7 @@ public class PumpAi extends PumpAiBase {
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                                if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                                if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
                                     return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                             || card.isToken();
                                 }
@@ -402,7 +402,7 @@ public class PumpAi extends PumpAiBase {
 
         if ("DebuffForXCounters".equals(sa.getParam("AILogic")) && sa.getTargetCard() != null) {
             // e.g. Skullmane Baku
-            CounterType ctrType = CounterType.KI;
+            CounterType ctrType = CounterType.get(CounterEnumType.KI);
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     ctrType = ((CostRemoveCounter)part).counter;
@@ -730,7 +730,7 @@ public class PumpAi extends PumpAiBase {
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
         if (numDefense.equals("-X") && sa.getSVar("X").equals("Count$ChosenNumber")) {
-            int energy = ai.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterEnumType.ENERGY);
             for (SpellAbility s : source.getSpellAbilities()) {
                 if ("PayEnergy".equals(s.getParam("AILogic"))) {
                     energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
@@ -860,7 +860,7 @@ public class PumpAi extends PumpAiBase {
                 final boolean isInfect = source.hasKeyword(Keyword.INFECT); // Flesh-Eater Imp
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
@@ -976,7 +976,7 @@ public class PumpAi extends PumpAiBase {
                 final boolean isInfect = source.hasKeyword(Keyword.INFECT);
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 

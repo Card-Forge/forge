@@ -3,7 +3,7 @@ package forge.ai.simulation;
 import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -154,7 +154,7 @@ public class GameStateEvaluator {
             // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
             int value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {
-                value += 2 * c.getCounters(CounterType.LOYALTY);
+                value += 2 * c.getCounters(CounterEnumType.LOYALTY);
             }
             return value;
         }

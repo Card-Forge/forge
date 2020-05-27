@@ -53,8 +53,9 @@ public class AbilityUtils {
         if ("ReplacedCounterType".equals(name)) {
             name = (String) sa.getReplacingObject(AbilityKey.CounterType);
         }
-        try {
+        //try {
             counterType = CounterType.getType(name);
+        /*
         } catch (Exception e) {
             String type = sa.getSVar(name);
             if (type.equals("")) {
@@ -66,6 +67,7 @@ public class AbilityUtils {
             }
             counterType = CounterType.getType(type);
         }
+        //*/
 
         return counterType;
     }

@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ChooseCompanionAi extends SpellAbilityAi {
 
@@ -15,7 +16,7 @@ public class ChooseCompanionAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         List<Card> cards = Lists.newArrayList(options);
         if (cards.isEmpty()) {
             return null;

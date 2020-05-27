@@ -464,7 +464,7 @@ public class AiAttackController {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
-                final int counters = beastion.getCounters(CounterType.QUEST);
+                final int counters = beastion.getCounters(CounterEnumType.QUEST);
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
             if (this.attackers.size() >= minCreatures) {
@@ -1065,7 +1065,7 @@ public class AiAttackController {
                         }
                     }
                     // if enough damage: switch to next planeswalker or player
-                    if (damage >= pw.getCounters(CounterType.LOYALTY)) {
+                    if (damage >= pw.getCounters(CounterEnumType.LOYALTY)) {
                         List<Card> pwDefending = combat.getDefendingPlaneswalkers();
                         boolean found = false;
                         // look for next planeswalker
@@ -1192,7 +1192,7 @@ public class AiAttackController {
             if (isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
-                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterType.P1P1) == 0)) {
+                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterEnumType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value

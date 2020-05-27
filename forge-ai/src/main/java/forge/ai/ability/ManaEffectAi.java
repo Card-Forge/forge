@@ -120,7 +120,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         int manaSurplus = 0;
         if ("XChoice".equals(host.getSVar("X"))
                 && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = CounterType.KI; // Petalmane Baku
+            CounterType ctrType = CounterType.get(CounterEnumType.KI); // Petalmane Baku
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     ctrType = ((CostRemoveCounter)part).counter;

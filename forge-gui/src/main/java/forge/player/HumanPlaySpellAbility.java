@@ -214,7 +214,7 @@ public class HumanPlaySpellAbility {
                     final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player");
+                            candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }

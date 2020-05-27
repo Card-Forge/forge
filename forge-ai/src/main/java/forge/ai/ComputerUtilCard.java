@@ -1422,8 +1422,8 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                int poisonOrig = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
-                int poisonPumped = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
+                int poisonOrig = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
+                int poisonPumped = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
 
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
@@ -1446,7 +1446,7 @@ public class ComputerUtilCard {
                 }
                 if (pumpedDmg > dmg) {
                     if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterEnumType.POISON) && pumpedDmg >= opp.getPoisonCounters())
                             || ("PumpForTrample".equals(sa.getParam("AILogic")))) {
                         return true;
                     }
@@ -1765,10 +1765,10 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
-        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
+        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterEnumType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterEnumType.M1M1) == 0) {
             return true;
         }
         return false;

@@ -29,7 +29,7 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -285,9 +285,9 @@ public class VField implements IVDoc<CField> {
         }
 
         // Update poison and/or energy counters, poison counters take precedence
-        final int poison = player.getCounters(CounterType.POISON);
-        final int energy = player.getCounters(CounterType.ENERGY);
-        final int experience = player.getCounters(CounterType.EXPERIENCE);
+        final int poison = player.getCounters(CounterEnumType.POISON);
+        final int energy = player.getCounters(CounterEnumType.ENERGY);
+        final int experience = player.getCounters(CounterEnumType.EXPERIENCE);
 
         if (poison > 0) {
             removeLblEnergy();

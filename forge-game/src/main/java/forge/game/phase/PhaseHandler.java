@@ -28,9 +28,9 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -268,7 +268,7 @@ public class PhaseHandler implements java.io.Serializable {
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                             if (c.getType().hasSubtype("Saga")) {
-                                c.addCounter(CounterType.LORE, 1, null, false, table);
+                                c.addCounter(CounterEnumType.LORE, 1, null, false, table);
                             }
                         }
                         table.triggerCountersPutAll(game);
@@ -861,7 +861,7 @@ public class PhaseHandler implements java.io.Serializable {
             boolean untapTimeVault = nextPlayer.getController().chooseBinary(fakeSA, "Skip a turn to untap a Time Vault?", BinaryChoiceType.UntapTimeVault, false);
             if (untapTimeVault) {
                 if (vaults.size() > 1) {
-                    Card c = nextPlayer.getController().chooseSingleEntityForEffect(vaults, fakeSA, "Which Time Vault do you want to Untap?");
+                    Card c = nextPlayer.getController().chooseSingleEntityForEffect(vaults, fakeSA, "Which Time Vault do you want to Untap?", null);
                     if (c != null)
                         crd = c;
                 }

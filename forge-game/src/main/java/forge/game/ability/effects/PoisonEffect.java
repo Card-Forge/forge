@@ -5,7 +5,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -59,7 +59,7 @@ import java.util.List;
                 sb.append("s");
             }
 
-            String type = CounterType.POISON.getName() + " counter";
+            String type = CounterEnumType.POISON.getName() + " counter";
 
             sb.append(" ").append(Lang.nounWithAmount(amount, type)).append(".");
 
