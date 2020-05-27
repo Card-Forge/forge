@@ -24,6 +24,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
@@ -38,6 +39,7 @@ import forge.util.collect.FCollection;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -48,7 +50,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private int preventNextDamage = 0;
     protected CardCollection attachedCards;
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
-    protected Map<CounterType, Integer> counters = Maps.newEnumMap(CounterType.class);
+    protected Map<CounterType, Integer> counters = Maps.newTreeMap();
 
     protected GameEntity(int id0) {
         id = id0;
@@ -315,7 +317,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
 
         // enchanted means attached by Aura
-        return CardLists.count(attachedCards, CardPredicates.Presets.AURA) > 0;
+        return Iterables.any(attachedCards, CardPredicates.Presets.AURA);
     }
 
     public final boolean hasCardAttachment(Card c) {
@@ -453,12 +455,20 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return value == null ? 0 : value;
     }
 
+    public final int getCounters(final CounterEnumType counterType) {
+        return getCounters(CounterType.get(counterType));
+    }
+
     public void setCounters(final CounterType counterType, final Integer num) {
         if (num <= 0) {
             counters.remove(counterType);
         } else {
             counters.put(counterType, num);
         }
+    }
+
+    public void setCounters(final CounterEnumType counterType, final Integer num) {
+        setCounters(CounterType.get(counterType), num);
     }
 
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
@@ -468,6 +478,16 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void subtractCounter(final CounterType counterName, final int n);
     abstract public void clearCounters();
 
+    public boolean canReceiveCounters(final CounterEnumType type) {
+        return canReceiveCounters(CounterType.get(type));
+    }
+
+    public int addCounter(final CounterEnumType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
+        return addCounter(CounterType.get(counterType), n, source, applyMultiplier, fireEvents, table);
+    }
+    public void subtractCounter(final CounterEnumType counterName, final int n) {
+        subtractCounter(CounterType.get(counterName), n);
+    }
 
     @Override
     public final boolean equals(Object o) {

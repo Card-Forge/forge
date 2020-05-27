@@ -16,6 +16,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -118,7 +119,7 @@ public class RepeatEachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

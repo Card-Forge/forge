@@ -566,7 +566,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostPayEnergy) {
-                CounterType counterType = CounterType.ENERGY;
+                CounterType counterType = CounterType.get(CounterEnumType.ENERGY);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
 
                 if (!part.canPay(sourceAbility, p)) {

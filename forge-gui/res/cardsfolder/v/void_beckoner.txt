@@ -5,6 +5,6 @@ PT:8/8
 K:Deathtouch
 K:Cycling:2 B
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle CARDNAME, put a deathtouch counter on target creature you control.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ DEATHTOUCH | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ Deathtouch | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Deathtouch\nCycling {2}{B} ({2}{B}, Discard this card: Draw a card.)\nWhen you cycle Void Beckoner, put a deathtouch counter on target creature you control.

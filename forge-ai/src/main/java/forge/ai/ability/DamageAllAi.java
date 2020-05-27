@@ -6,7 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -39,7 +39,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (!ai.getGame().getStack().isEmpty()) {
             return false;
         }
-        
+
         int x = -1;
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
@@ -50,7 +50,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             x = ComputerUtilMana.determineLeftoverMana(sa, ai);
         }
         if (damage.equals("ChosenX")) {
-            x = source.getCounters(CounterType.LOYALTY);
+            x = source.getCounters(CounterEnumType.LOYALTY);
         }
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {

@@ -24,6 +24,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
@@ -625,7 +626,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostPayEnergy cost) {
         final String amount = cost.getAmount();
-        final int energy = player.getCounters(CounterType.ENERGY);
+        final int energy = player.getCounters(CounterEnumType.ENERGY);
 
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -641,7 +642,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (player.canPayEnergy(c) &&
-            player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterType.ENERGY)), "{E}"), ability)) {
+            player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"), ability)) {
             return PaymentDecision.number(c);
         }
         return null;

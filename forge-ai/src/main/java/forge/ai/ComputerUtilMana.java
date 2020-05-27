@@ -371,7 +371,7 @@ public class ComputerUtilMana {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
-        int testEnergyPool = ai.getCounters(CounterType.ENERGY);
+        int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
 
         List<SpellAbility> paymentList = Lists.newArrayList();
 

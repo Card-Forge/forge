@@ -2,39 +2,10 @@ Name:Kathril, Aspect Warper
 ManaCost:2 W B G
 Types:Legendary Creature Nightmare Insect
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Flying | TriggerDescription$ When CARDNAME enters the battlefield, put a flying counter on any creature you control if a creature card in your graveyard has flying. Repeat this process for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance. Then put a +1/+1 counter on CARDNAME for each counter put on a creature this way.
-SVar:Flying:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a flying counter on | CounterType$ FLYING | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ FirstStrike
-SVar:FirstStrike:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a first strike counter on | CounterType$ FIRSTSTRIKE | CounterNum$ 1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y | SubAbility$ DoubleStrike
-SVar:DoubleStrike:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a double strike counter on | CounterType$ DOUBLESTRIKE | CounterNum$ 1 | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | References$ Z | SubAbility$ Deathtouch
-SVar:Deathtouch:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a deathtouch counter on | CounterType$ DEATHTOUCH | CounterNum$ 1 | ConditionCheckSVar$ A | ConditionSVarCompare$ GE1 | References$ A | SubAbility$ Hexproof
-SVar:Hexproof:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a hexproof counter on | CounterType$ HEXPROOF | CounterNum$ 1 | ConditionCheckSVar$ B | ConditionSVarCompare$ GE1 | References$ B | SubAbility$ Indestructible
-SVar:Indestructible:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put an indestructible counter on | CounterType$ INDESTRUCTIBLE | CounterNum$ 1 | ConditionCheckSVar$ C | ConditionSVarCompare$ GE1 | References$ C | SubAbility$ Lifelink
-SVar:Lifelink:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a lifelink counter on | CounterType$ LIFELINK | CounterNum$ 1 | ConditionCheckSVar$ D | ConditionSVarCompare$ GE1 | References$ D | SubAbility$ Menace
-SVar:Menace:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a menace counter on | CounterType$ MENACE | CounterNum$ 1 | ConditionCheckSVar$ E | ConditionSVarCompare$ GE1 | References$ E | SubAbility$ Reach
-SVar:Reach:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a reach counter on | CounterType$ REACH | CounterNum$ 1 | ConditionCheckSVar$ F | ConditionSVarCompare$ GE1 | References$ F | SubAbility$ Trample
-SVar:Trample:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a trample counter on | CounterType$ TRAMPLE | CounterNum$ 1 | ConditionCheckSVar$ G | ConditionSVarCompare$ GE1 | References$ G | SubAbility$ Vigilance
-SVar:Vigilance:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature to put a vigilance counter on | CounterType$ VIGILANCE | CounterNum$ 1 | ConditionCheckSVar$ H | ConditionSVarCompare$ GE1 | References$ H | SubAbility$ PutCounters
-SVar:PutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ GH | References$ GH,FG,EF,DE,CD,BC,AB,ZA,YZ,XY,X
-SVar:X:Count$ValidGraveyard Creature.YouOwn+withFlying/LimitMax.1
-SVar:Y:Count$ValidGraveyard Creature.YouOwn+withFirst Strike/LimitMax.1
-SVar:Z:Count$ValidGraveyard Creature.YouOwn+withDouble Strike/LimitMax.1
-SVar:A:Count$ValidGraveyard Creature.YouOwn+withDeathtouch/LimitMax.1
-SVar:B:Count$ValidGraveyard Creature.YouOwn+withHexproof/LimitMax.1
-SVar:C:Count$ValidGraveyard Creature.YouOwn+withIndestructible/LimitMax.1
-SVar:D:Count$ValidGraveyard Creature.YouOwn+withLifelink/LimitMax.1
-SVar:E:Count$ValidGraveyard Creature.YouOwn+withMenace/LimitMax.1
-SVar:F:Count$ValidGraveyard Creature.YouOwn+withReach/LimitMax.1
-SVar:G:Count$ValidGraveyard Creature.YouOwn+withTrample/LimitMax.1
-SVar:H:Count$ValidGraveyard Creature.YouOwn+withVigilance/LimitMax.1
-SVar:XY:SVar$X/Plus.Y
-SVar:YZ:SVar$XY/Plus.Z
-SVar:ZA:SVar$YZ/Plus.A
-SVar:AB:SVar$ZA/Plus.B
-SVar:BC:SVar$AB/Plus.C
-SVar:CD:SVar$BC/Plus.D
-SVar:DE:SVar$CD/Plus.E
-SVar:EF:SVar$DE/Plus.F
-SVar:FG:SVar$EF/Plus.G
-SVar:GH:SVar$FG/Plus.H
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PutKeywordCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a flying counter on any creature you control if a creature card in your graveyard has flying. Repeat this process for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance. Then put a +1/+1 counter on CARDNAME for each counter put on a creature this way.
+SVar:PutKeywordCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SharedKeywords$ Flying & First Strike & Double Strike & Deathtouch & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Graveyard | CounterNum$ 1 | RememberAmount$ True | SubAbility$ PutCounters
+SVar:PutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
 DeckHas:Ability$Counters
 Oracle:When Kathril, Aspect Warper enters the battlefield, put a flying counter on any creature you control if a creature card in your graveyard has flying. Repeat this process for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance. Then put a +1/+1 counter on Kathril for each counter put on a creature this way.

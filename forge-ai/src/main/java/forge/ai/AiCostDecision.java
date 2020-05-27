@@ -16,6 +16,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
@@ -627,41 +628,41 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // the first things are benefit from removing counters
 
         // try to remove +1/+1 counter from undying creature
-        List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.P1P1, c),
+        List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.P1P1, c),
                 CardPredicates.hasKeyword("Undying"));
 
         if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.P1P1));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.P1P1));
             PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.P1P1;
+            result.ct = CounterType.get(CounterEnumType.P1P1);
             return result;
         }
 
         // try to remove -1/-1 counter from persist creature
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.M1M1, c),
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.M1M1, c),
                 CardPredicates.hasKeyword("Persist"));
 
         if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.M1M1));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.M1M1));
             PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.M1M1;
+            result.ct = CounterType.get(CounterEnumType.M1M1);
             return result;
         }
 
         // try to remove Time counter from Chronozoa, it will generate more
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.TIME, c),
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.TIME, c),
                 CardPredicates.nameEquals("Chronozoa"));
 
         if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.TIME));
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.TIME));
             PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.TIME;
+            result.ct = CounterType.get(CounterEnumType.TIME);
             return result;
         }
 
         // try to remove Quest counter on something with enough counters for the
         // effect to continue
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.QUEST, c));
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.QUEST, c));
 
         if (!prefs.isEmpty()) {
             prefs = CardLists.filter(prefs, new Predicate<Card>() {
@@ -673,12 +674,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     if (crd.hasSVar("MaxQuestEffect")) {
                         e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
                     }
-                    return crd.getCounters(CounterType.QUEST) >= e + c;
+                    return crd.getCounters(CounterEnumType.QUEST) >= e + c;
                 }
             });
-            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.QUEST)));
+            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
             PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.QUEST;
+            result.ct =  CounterType.get(CounterEnumType.QUEST);
             return result;
         }
 
@@ -775,7 +776,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     @Override
                     public boolean apply(final Card crd) {
                         for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                            if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey() == CounterType.valueOf(ctr))) {
+                            if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey().equals(CounterType.getType(ctr)))) {
                                 return true;
                             }
                         }
@@ -787,7 +788,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     PaymentDecision result = PaymentDecision.card(card);
 
                     for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
-                        if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey() == CounterType.valueOf(ctr))) {
+                        if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey().equals(CounterType.getType(ctr)))) {
                             result.ct = e.getKey();
                             break;
                         }

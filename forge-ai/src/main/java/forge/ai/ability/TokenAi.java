@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
@@ -296,7 +298,7 @@ public class TokenAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.player.Player> options)
      */
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
@@ -314,7 +316,7 @@ public class TokenAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayerOrPlaneswalker(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.GameEntity> options)
      */
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {

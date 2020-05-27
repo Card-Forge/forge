@@ -143,7 +143,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
 
-                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
 
                 if (choosen != null) {
                     tgtCards.add(choosen);

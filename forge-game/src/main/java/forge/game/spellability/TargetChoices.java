@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import com.google.common.collect.Iterables;
 
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -114,6 +115,14 @@ public class TargetChoices implements Cloneable {
 
     public final Iterable<SpellAbility> getTargetSpells() {
         return targetSpells;
+    }
+
+    public final List<GameEntity> getTargetEntities() {
+        final List<GameEntity> tgts = new ArrayList<>();
+        tgts.addAll(targetPlayers);
+        tgts.addAll(targetCards);
+
+        return tgts;
     }
 
     public final List<GameObject> getTargets() {

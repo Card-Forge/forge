@@ -20,6 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayAi extends SpellAbilityAi {
 
@@ -88,7 +89,7 @@ public class PlayAi extends SpellAbilityAi {
                 minCMC = sa.getPayCosts().getTotalMana().getCMC();
             }
             validOpts = CardLists.filter(validOpts, CardPredicates.greaterCMC(minCMC));
-            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null) != null;
+            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null, null) != null;
         }
 
         if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
@@ -142,8 +143,7 @@ public class PlayAi extends SpellAbilityAi {
      */
     @Override
     public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options,
-            final boolean isOptional,
-            Player targetedPlayer) {
+            final boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

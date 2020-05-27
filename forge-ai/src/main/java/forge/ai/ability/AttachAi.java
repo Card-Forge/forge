@@ -1704,12 +1704,12 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return attachToCardAIPreferences(ai, sa, true);
     }
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         return attachToPlayerAIPreferences(ai, sa, true);
     }
 }

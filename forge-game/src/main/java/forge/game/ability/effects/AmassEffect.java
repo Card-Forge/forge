@@ -1,6 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.mutable.MutableBoolean;
+
+import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
@@ -10,6 +14,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
@@ -79,13 +84,16 @@ public class AmassEffect extends TokenEffectBase {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
+        params.put("Amount", 1);
 
         CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
-        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false);
+        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false, params);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for(final Card tgtCard : tgtCards) {
-            tgtCard.addCounter(CounterType.P1P1, amount, activator, true, table);
+            tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, true, table);
             game.updateLastStateForCard(tgtCard);
 
             if (remember) {

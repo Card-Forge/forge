@@ -261,7 +261,7 @@ public class AbilityManaPart implements java.io.Serializable {
             CardFactoryUtil.setupETBReplacementAbility(sa);
 
             String desc = "It enters the battlefield with ";
-            desc += Lang.nounWithNumeral(parse[2], CounterType.valueOf(parse[1]).getName() + " counter");
+            desc += Lang.nounWithNumeral(parse[2], CounterType.getType(parse[1]).getName() + " counter");
             desc += " on it.";
 
             String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;

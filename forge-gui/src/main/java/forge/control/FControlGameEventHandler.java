@@ -17,7 +17,6 @@ import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiGame;
@@ -294,7 +293,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardAttachment event) {
         final Game game = event.equipment.getGame();
-        final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
+        final Zone zEq = (Zone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));
         }

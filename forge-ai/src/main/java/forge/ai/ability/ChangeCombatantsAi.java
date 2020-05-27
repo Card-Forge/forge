@@ -8,6 +8,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class ChangeCombatantsAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -45,7 +46,7 @@ public class ChangeCombatantsAi extends SpellAbilityAi {
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         PlayerCollection targetableOpps = new PlayerCollection();
         for (GameEntity p : options) {
             if (p instanceof Player && !p.equals(sa.getHostCard().getController())) {

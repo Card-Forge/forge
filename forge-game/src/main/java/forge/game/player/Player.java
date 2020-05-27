@@ -114,7 +114,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private CardCollection sacrificedThisTurn = new CardCollection();
 
-    private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newEnumMap(CounterType.class);
+    private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newHashMap();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -544,17 +544,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canPayEnergy(final int energyPayment) {
-        int cnt = getCounters(CounterType.ENERGY);
+        int cnt = getCounters(CounterEnumType.ENERGY);
         return cnt >= energyPayment;
     }
 
     public final int loseEnergy(int lostEnergy) {
-        int cnt = getCounters(CounterType.ENERGY);
+        int cnt = getCounters(CounterEnumType.ENERGY);
         if (lostEnergy > cnt) {
             return -1;
         }
         cnt -= lostEnergy;
-        this.setCounters(CounterType.ENERGY, cnt, true);
+        this.setCounters(CounterEnumType.ENERGY, cnt, true);
         return cnt;
     }
 
@@ -909,12 +909,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
-        if (!canReceiveCounters(counterType)) {
-            return 0;
-        }
-
         int addAmount = n;
-        if (addAmount <= 0) {
+        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // Can't add negative or 0 counters, bail out now
             return 0;
         }
@@ -934,6 +930,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             default:
                 return 0;
+        }
+        if (addAmount <= 0) {
+            // Can't add negative or 0 counters, bail out now
+            return 0;
         }
 
         final int oldValue = getCounters(counterType);
@@ -985,6 +985,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
+    public void setCounters(final CounterEnumType counterType, final Integer num, boolean fireEvents) {
+        this.setCounters(CounterType.get(counterType), num, fireEvents);
+    }
+
     public void setCounters(final CounterType counterType, final Integer num, boolean fireEvents) {
         Integer old = getCounters(counterType);
         setCounters(counterType, num);
@@ -1003,26 +1007,26 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // TODO Merge These calls into the primary counter calls
     public final int getPoisonCounters() {
-        return getCounters(CounterType.POISON);
+        return getCounters(CounterEnumType.POISON);
     }
     public final void setPoisonCounters(final int num, Card source) {
-        int oldPoison = getCounters(CounterType.POISON);
-        setCounters(CounterType.POISON, num, true);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        setCounters(CounterEnumType.POISON, num, true);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
     public final void addPoisonCounters(final int num, final Card source, GameEntityCounterTable table) {
-        int oldPoison = getCounters(CounterType.POISON);
-        addCounter(CounterType.POISON, num, source.getController(), false, true, table);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        addCounter(CounterEnumType.POISON, num, source.getController(), false, true, table);
 
-        if (oldPoison != getCounters(CounterType.POISON)) {
+        if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
     public final void removePoisonCounters(final int num, final Card source) {
-        int oldPoison = getCounters(CounterType.POISON);
-        subtractCounter(CounterType.POISON, num);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        subtractCounter(CounterEnumType.POISON, num);
 
-        if (oldPoison != getCounters(CounterType.POISON)) {
+        if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
@@ -1989,7 +1993,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        if (getCounters(CounterType.POISON) >= 10) {
+        if (getCounters(CounterEnumType.POISON) >= 10) {
             return loseConditionMet(GameLossReason.Poisoned, null);
         }
 
@@ -2867,7 +2871,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
     }
-    
+
     public boolean allCardsUniqueManaSymbols() {
         for (final Card c : getCardsIn(ZoneType.Library)) {
             Set<CardStateName> cardStateNames = c.isSplitCard() ?  EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit) : EnumSet.of(CardStateName.Original);
@@ -2958,16 +2962,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        Card firstCompanion = legalCompanions.get(0);
-        SpellAbility fakeSa = AbilityFactory.getAbility(
-                AbilityFactory.AbilityRecordType.Spell,
-                ApiType.CompanionChoose,
-                new HashMap<>(),
-                firstCompanion.getFirstSpellAbility().getPayCosts(),
-                firstCompanion,
-                null
-        );
-        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true);
+        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose, null, this);
+        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {

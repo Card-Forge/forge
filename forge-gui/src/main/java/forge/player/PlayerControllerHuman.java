@@ -392,13 +392,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView chooseCardsForEffect(final CardCollectionView sourceList, final SpellAbility sa,
-            final String title, final int min, final int max, final boolean isOptional) {
+            final String title, final int min, final int max, final boolean isOptional, Map<String, Object> params) {
         // If only one card to choose, use a dialog box.
         // Otherwise, use the order dialog to be able to grab multiple cards in
         // one shot
 
         if (max == 1) {
-            final Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional);
+            final Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional, params);
             return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }
 
@@ -427,7 +427,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(final FCollectionView<T> optionList,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final boolean isOptional,
-            final Player targetedPlayer) {
+            final Player targetedPlayer, Map<String, Object> params) {
         // Human is supposed to read the message and understand from it what to
         // choose
         if (optionList.isEmpty()) {
@@ -465,6 +465,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final GameEntityView result = getGui().chooseSingleEntityForEffect(title,
                 gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional);
         endTempShowCards();
+
         if (result != null || !gameCacheChoose.containsKey(result)) {
             return null;
         }
@@ -472,9 +473,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int min,
-            final int max, final DelayedReveal delayedReveal, final SpellAbility sa, final String title,
-            final Player targetedPlayer) {
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
+            final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer, Map<String, Object> params) {
+
 
         // useful details for debugging problems with the mass select logic
         Sentry.getContext().addExtra("Card", sa.getCardView().toString());
@@ -552,6 +553,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Human is supposed to read the message and understand from it what to
         // choose
         return spellViewCache.get(choice);
+    }
+
+    @Override
+    public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title, int num, Map<String, Object> params) {
+        List<SpellAbility> result = Lists.newArrayList();
+        // create a mapping between a spell's view and the spell itself
+        Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
+
+        List<SpellAbilityView> chosen = getGui().many(title, "", num, Lists.newArrayList(spellViewCache.keySet()), sa.getHostCard().getView());
+
+        for(SpellAbilityView view : chosen) {
+            if (spellViewCache.containsKey(view)) {
+                result.add(spellViewCache.get(view));
+            }
+        }
+        return result;
     }
 
     /*
@@ -1848,13 +1865,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Card chooseSingleCardForZoneChange(final ZoneType destination, final List<ZoneType> origin,
             final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
             final String selectPrompt, final boolean isOptional, final Player decider) {
-        return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider);
+        return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider, null);
     }
 
     public List<Card> chooseCardsForZoneChange(final ZoneType destination, final List<ZoneType> origin,
             final SpellAbility sa, final CardCollection fetchList, final int min, final int max, final DelayedReveal delayedReveal,
             final String selectPrompt, final Player decider) {
-        return chooseEntitiesForEffect(fetchList, min, max, delayedReveal, sa, selectPrompt, decider);
+        return chooseEntitiesForEffect(fetchList, min, max, delayedReveal, sa, selectPrompt, decider, null);
     }
 
     @Override
@@ -2200,7 +2217,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                : CounterType.values;
+                : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, new Function<CounterEnumType, CounterType>() {
+                    @Override
+                    public CounterType apply(CounterEnumType input) {
+                        return CounterType.get(input);
+                    }
+                }));
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {
@@ -2987,7 +3009,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title, boolean isOptional) {
         CardCollection result = new CardCollection();
         for (Map.Entry<String, CardCollection> e : validMap.entrySet()) {
-            result.addAll(chooseCardsForEffect(e.getValue(), sa, title + " " + e.getKey(), 0, 1, isOptional));
+            result.addAll(chooseCardsForEffect(e.getValue(), sa, title + " " + e.getKey(), 0, 1, isOptional, null));
         }
         return result;
     }

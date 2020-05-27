@@ -7,7 +7,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
@@ -78,7 +78,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
-                    c.addCounter(CounterType.P1P1, 1, pl, true, table);
+                    c.addCounter(CounterEnumType.P1P1, 1, pl, true, table);
                 }
             }
 

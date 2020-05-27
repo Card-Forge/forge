@@ -20,6 +20,8 @@ import forge.util.collect.FCollectionView;
 
 import java.util.*;
 
+import com.google.common.collect.Maps;
+
 public class DigUntilEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
@@ -153,7 +155,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 if (revealed.size() > 0) {
                     game.getAction().reveal(revealed, p, false);
                 }
-                
+
 
                 if (foundDest != null) {
                     // Allow ordering of found cards
@@ -178,11 +180,14 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 }
                                 if (sa.hasParam("Attacking")) {
                                     final Combat combat = game.getCombat();
-                                    if ( null != combat ) {
+                                    if (null != combat) {
                                         final FCollectionView<GameEntity> e = combat.getDefenders();
 
+                                        Map<String, Object> params = Maps.newHashMap();
+                                        params.put("Attacker", c);
+
                                         final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())));
+                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), params);
 
                                         if (defender != null) {
                                             combat.addAttacker(c, defender);

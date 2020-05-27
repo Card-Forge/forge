@@ -164,20 +164,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
         }
-
-        if (sa.hasParam("RepeatCounters")) {
-            Card target = sa.getTargetCard();
-            if (target == null) {
-                target = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
-            }
-            for (CounterType type : target.getCounters().keySet()) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Number$").append(target.getCounters(type));
-                source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
-                source.setSVar("RepeatCounterAmount", sb.toString());
-                AbilityUtils.resolve(repeat);
-            }
-        }
         if (recordChoice) {
             boolean random = sa.hasParam("Random");
             Map<Player, List<Card>> recordMap = Maps.newHashMap();
@@ -187,7 +173,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     if (random) {
                         p = Aggregates.random(game.getPlayers());
                     } else {
-                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, Localizer.getInstance().getMessage("lblChoosePlayer"));
+                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
                     }
                     if (recordMap.containsKey(p)) {
                         recordMap.get(p).add(0, card);
@@ -208,7 +194,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                         valid = CardLists.filterControlledBy(valid,
                                 game.getNextPlayerAfter(p, source.getChosenDirection()));
                     }
-                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseaCard"));
+                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseaCard"), null);
                     if (recordMap.containsKey(p)) {
                         recordMap.get(p).add(0, card);
                     } else {

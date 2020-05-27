@@ -76,7 +76,7 @@ public class GameCopier {
                 newPlayer.addSpellCastThisTurn();
             for (int j = 0; j < origPlayer.getLandsPlayedThisTurn(); j++)
                 newPlayer.addLandPlayedThisTurn();
-            newPlayer.setCounters(Maps.newEnumMap(origPlayer.getCounters()));
+            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setPreventNextDamage(origPlayer.getPreventNextDamage());
@@ -328,7 +328,7 @@ public class GameCopier {
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newEnumMap(counters));
+                newCard.setCounters(Maps.newHashMap(counters));
             }
             if (c.getChosenPlayer() != null) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));

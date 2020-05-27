@@ -99,7 +99,7 @@ public class ScryAi extends SpellAbilityAi {
         } else if ("BrainJar".equals(aiLogic)) {
             final Card source = sa.getHostCard();
             
-            int counterNum = source.getCounters(CounterType.CHARGE);
+            int counterNum = source.getCounters(CounterEnumType.CHARGE);
             // no need for logic
             if (counterNum == 0) {
                 return false;

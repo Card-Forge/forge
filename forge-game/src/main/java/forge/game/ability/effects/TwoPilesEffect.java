@@ -95,7 +95,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 card.clearRemembered();
 
                 // first, separate the cards into piles
-                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false);
+                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
                 final CardCollection pile2 = new CardCollection(pool);
                 pile2.removeAll(pile1);
 

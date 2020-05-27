@@ -836,24 +836,9 @@ public class CardFactoryUtil {
         // Count$CountersAddedToPermYouCtrl <CounterType>
         if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
             final String[] components = l[0].split(" ", 2);
-            final CounterType counterType = CounterType.valueOf(components[1]);
+            final CounterType counterType = CounterType.getType(components[1]);
             int n = cc.getCounterToPermThisTurn(counterType);
             return doXMath(n, m, c);
-        }
-
-        // Count$CountersAdded <CounterType> <ValidSource>
-        if (l[0].startsWith("CountersAdded")) {
-            final String[] components = l[0].split(" ", 3);
-            final CounterType counterType = CounterType.valueOf(components[1]);
-            String restrictions = components[2];
-            final String[] rest = restrictions.split(",");
-            CardCollection candidates = CardLists.getValidCards(game.getCardsInGame(), rest, cc, c, null);
-
-            int added = 0;
-            for (final Card counterSource : candidates) {
-                added += c.getCountersAddedBy(counterSource, counterType);
-            }
-            return doXMath(added, m, c);
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
@@ -2150,7 +2135,7 @@ public class CardFactoryUtil {
         String[] splitkw = parse.split(":");
 
         String desc = "CARDNAME enters the battlefield with ";
-        desc += Lang.nounWithNumeral(splitkw[2], CounterType.valueOf(splitkw[1]).getName() + " counter");
+        desc += Lang.nounWithNumeral(splitkw[2], CounterType.getType(splitkw[1]).getName() + " counter");
         desc += " on it.";
 
         String extraparams = "";
@@ -3591,7 +3576,7 @@ public class CardFactoryUtil {
         }  else if (keyword.equals("Sunburst")) {
             // Rule 702.43a If this object is entering the battlefield as a creature,
             // ignoring any type-changing effects that would affect it
-            CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE;
+            CounterType t = CounterType.get(card.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE);
 
             StringBuilder sb = new StringBuilder("etbCounter:");
             sb.append(t).append(":Sunburst:no Condition:");
@@ -4302,7 +4287,7 @@ public class CardFactoryUtil {
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true, table);
+                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), true, table);
                     table.triggerCountersPutAll(game);
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");

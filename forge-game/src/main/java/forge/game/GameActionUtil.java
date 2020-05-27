@@ -472,7 +472,7 @@ public final class GameActionUtil {
                             CardFactoryUtil.setupETBReplacementAbility(saAb);
 
                             String desc = "It enters the battlefield with ";
-                            desc += Lang.nounWithNumeral(v, CounterType.P1P1.getName() + " counter");
+                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
                             desc += " on it.";
 
                             String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
