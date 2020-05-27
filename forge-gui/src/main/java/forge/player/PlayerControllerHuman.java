@@ -96,7 +96,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private final Localizer localizer = Localizer.getInstance();
 
     protected Map<SpellAbilityView, SpellAbility> spellViewCache = null;
-    protected GameEntityViewMap<Card, CardView> gameCache = new GameEntityViewMap<>();
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp) {
         super(game0, p, lp);
@@ -3015,13 +3014,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public Card getCard(final CardView cardView) {
-        if (gameCache.containsKey(cardView)) {
-            return gameCache.get(cardView);
-        }
-
-        final Card c = getGame().findById(cardView.getId());
-        gameCache.put(cardView, c);
-        return c;
+        return getGame().findById(cardView.getId());
     }
 
     public CardCollection getCardList(Iterable<CardView> cardViews) {
