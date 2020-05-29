@@ -545,6 +545,16 @@ public class Game {
         }
     }
 
+    public Card findByView(CardView view) {
+        CardIdVisitor visit = new CardIdVisitor(view.getId());
+        if (ZoneType.Stack.equals(view.getZone())) {
+            visit.visitAll(getStackZone());
+        } else {
+            visit.visitAll(getPlayer(view.getController()).getZone(view.getZone()));
+        }
+        return visit.getFound();
+    }
+
     public Card findById(int id) {
         CardIdVisitor visit = new CardIdVisitor(id);
         this.forEachCardInGame(visit);

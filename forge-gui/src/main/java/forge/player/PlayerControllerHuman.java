@@ -465,7 +465,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional);
         endTempShowCards();
 
-        if (result != null || !gameCacheChoose.containsKey(result)) {
+        if (result == null || !gameCacheChoose.containsKey(result)) {
             return null;
         }
         return gameCacheChoose.get(result);
@@ -3014,7 +3014,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public Card getCard(final CardView cardView) {
-        return getGame().findById(cardView.getId());
+        return getGame().findByView(cardView);
     }
 
     public CardCollection getCardList(Iterable<CardView> cardViews) {
