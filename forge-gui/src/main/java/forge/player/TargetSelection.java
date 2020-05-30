@@ -65,6 +65,10 @@ public class TargetSelection {
 
     private boolean bTargetingDone = false;
 
+    private boolean isMandatory() {
+        return ability.isMandatory() || getTgt().getMandatory();
+    }
+
     public final boolean chooseTargets(Integer numTargets) {
         final TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
@@ -97,13 +101,13 @@ public class TargetSelection {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
-        if (tgt.getMandatory() && !hasCandidates && hasEnoughTargets) {
+        if (isMandatory() && !hasCandidates && hasEnoughTargets) {
             // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
             return true;
         }
 
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = tgt.getMandatory() && hasCandidates;
+        final boolean mandatory = isMandatory() && hasCandidates;
 
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();

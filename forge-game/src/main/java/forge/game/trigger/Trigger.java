@@ -66,39 +66,11 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private TriggerType mode;
 
-    private Map<AbilityKey, Object> storedTriggeredObjects = null;
-    
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     // number of times this trigger was activated this this turn
     // used to handle once-per-turn triggers like Crawling Sensation
     private int numberTurnActivations = 0;
-
-    /**
-     * <p>
-     * Setter for the field <code>storedTriggeredObjects</code>.
-     * </p>
-     * 
-     * @param storedTriggeredObjects
-     *            a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
-    public final void setStoredTriggeredObjects(final Map<AbilityKey, Object> storedTriggeredObjects) {
-        this.storedTriggeredObjects = AbilityKey.newMap(storedTriggeredObjects);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>storedTriggeredObjects</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
-    public final Map<AbilityKey, Object> getStoredTriggeredObjects() {
-        return this.storedTriggeredObjects;
-    }
-
 
     private Set<PhaseType> validPhases;
 

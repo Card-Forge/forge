@@ -224,15 +224,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
         }
-        if (triggerParams.containsKey("DelayedTrigger") || isMandatory) {
-            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker,
-            //      needs to be expanded when a more difficult cards comes up
+        if (wrapper.isMandatory()) {
             return true;
         }
         // Store/replace target choices more properly to get this SA cleared.

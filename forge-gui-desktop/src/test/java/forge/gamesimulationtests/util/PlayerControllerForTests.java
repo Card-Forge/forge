@@ -197,7 +197,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper) {
         return true;
     }
 
