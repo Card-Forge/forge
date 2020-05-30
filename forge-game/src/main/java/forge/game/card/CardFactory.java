@@ -27,7 +27,6 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -194,8 +193,8 @@ public class CardFactory {
         }
 
         final SpellAbility copySA;
-        if (sa.isTrigger()) {
-            copySA = getCopiedTriggeredAbility(sa);
+        if (sa.isTrigger() && sa.isWrapper()) {
+            copySA = getCopiedTriggeredAbility((WrappedAbility)sa, c);
         } else {
             copySA = sa.copy(c, false);
         }
@@ -213,10 +212,6 @@ public class CardFactory {
         //remove all costs
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", sa.isAbility()));
-        }
-        if (sa.getTargetRestrictions() != null) {
-            TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
-            copySA.setTargetRestrictions(target);
         }
         copySA.setActivatingPlayer(controller);
 
@@ -587,49 +582,12 @@ public class CardFactory {
      *
      * return a wrapped ability
      */
-    public static SpellAbility getCopiedTriggeredAbility(final SpellAbility sa) {
+    public static SpellAbility getCopiedTriggeredAbility(final WrappedAbility sa, final Card newHost) {
         if (!sa.isTrigger()) {
             return null;
         }
-        // Find trigger
-        Trigger t = null;
-        if (sa.isWrapper()) {
-            // copy trigger?
-            t = sa.getTrigger();
-        } else { // some keyword ability, e.g. Exalted, Annihilator
-            return sa.copy();
-        }
-        // set up copied wrapped ability
-        SpellAbility trig = t.getOverridingAbility();
-        if (trig == null) {
-            trig = AbilityFactory.getAbility(sa.getHostCard().getSVar(t.getParam("Execute")), sa.getHostCard());
-        }
-        trig.setHostCard(sa.getHostCard());
-        trig.setTrigger(true);
-        trig.setSourceTrigger(t.getId());
-        sa.setTriggeringObjects(sa.getTriggeringObjects());
-        trig.setTriggerRemembered(t.getTriggerRemembered());
-        if (t.getStoredTriggeredObjects() != null) {
-            trig.setTriggeringObjects(t.getStoredTriggeredObjects());
-        }
 
-        trig.setActivatingPlayer(sa.getActivatingPlayer());
-        if (t.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getParam("TriggerController"), trig).get(0);
-            trig.setActivatingPlayer(p);
-        }
-
-        if (t.hasParam("RememberController")) {
-            sa.getHostCard().addRemembered(sa.getActivatingPlayer());
-        }
-
-        trig.setStackDescription(trig.toString());
-
-        WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
-        wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(sa.isMandatory());
-        wrapperAbility.setDescription(wrapperAbility.getStackDescription());
-        return wrapperAbility;
+        return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, false), sa.getDecider());
     }
 
     public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {

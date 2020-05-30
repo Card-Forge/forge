@@ -998,7 +998,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isMandatory() {
-        return false;
+        return isTrigger() && !isOptionalTrigger();
     }
 
     public final boolean canTarget(final GameObject entity) {

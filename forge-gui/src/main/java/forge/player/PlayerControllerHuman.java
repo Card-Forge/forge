@@ -622,8 +622,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean confirmTrigger(final WrappedAbility wrapper, final Map<String, String> triggerParams,
-            final boolean isMandatory) {
+    public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
         if (getGui().shouldAlwaysAcceptTrigger(regtrig.getId())) {
@@ -645,8 +644,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // append trigger description unless prompt is compact or detailed
             // descriptions are on
             buildQuestion.append("\n(");
-            buildQuestion.append(TextUtil.fastReplace(triggerParams.get("TriggerDescription"),
-                    "CARDNAME", regtrig.getHostCard().getName()));
+            buildQuestion.append(regtrig.toString());
             buildQuestion.append(")");
         }
         final Map<AbilityKey, Object> tos = sa.getTriggeringObjects();
