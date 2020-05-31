@@ -1413,11 +1413,7 @@ public class CardProperty {
                 rhs = property.substring(10);
                 y = card.getNetPower() + card.getNetToughness();
             }
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
+            x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             if (!Expressions.compare(y, property, x)) {
                 return false;
@@ -1443,16 +1439,11 @@ public class CardProperty {
 
             // TODO get a working regex out of this pattern so the amount of
             // digits doesn't matter
-            int number;
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
             final String comparator = splitProperty[1].substring(0, 2);
             String counterType;
-            try {
-                number = Integer.parseInt(strNum);
-            } catch (final NumberFormatException e) {
-                number = CardFactoryUtil.xCount(source, source.getSVar(strNum));
-            }
+            int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
             counterType = splitProperty[2];
 
             final int actualnumber = card.getCounters(CounterType.getType(counterType));

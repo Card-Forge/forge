@@ -5,7 +5,6 @@ import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
@@ -271,13 +270,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 lifeCompare = params.get("LifeAmount");
             }
 
-            int right = 1;
             final String rightString = lifeCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
 
             if (!Expressions.compare(life, lifeCompare, right)) {
                 return false;
@@ -314,13 +308,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
-            int right = 1;
+
             final String rightString = presentCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
     
             if (!Expressions.compare(left, presentCompare, right)) {
@@ -355,13 +345,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
-            int right = 1;
             final String rightString = presentCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
     
             if (!Expressions.compare(left, presentCompare, right)) {
