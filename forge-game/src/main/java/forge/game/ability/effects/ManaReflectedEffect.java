@@ -13,6 +13,8 @@ import forge.util.Localizer;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ManaReflectedEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
@@ -98,12 +100,12 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         if (amount == 0) {
             sb.append("0");
         } else {
-            try {
+            if (StringUtils.isNumeric(baseMana)) {
                 // if baseMana is an integer(colorless), just multiply amount
                 // and baseMana
                 final int base = Integer.parseInt(baseMana);
                 sb.append(base * amount);
-            } catch (final NumberFormatException e) {
+            } else {
                 for (int i = 0; i < amount; i++) {
                     if (i != 0) {
                         sb.append(" ");

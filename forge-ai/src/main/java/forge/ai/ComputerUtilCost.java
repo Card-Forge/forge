@@ -467,9 +467,9 @@ public class ComputerUtilCost {
                     if(!meetsRestriction)
                         continue;
 
-                    try {
+                    if (StringUtils.isNumeric(parts[0])) {
                         extraManaNeeded += Integer.parseInt(parts[0]);
-                    } catch (final NumberFormatException e) {
+                    } else {
                         System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
                     }
                 }
@@ -480,9 +480,9 @@ public class ComputerUtilCost {
             	}
                 final String snem = c.getSVar("SpellsNeedExtraManaEffect");
                 if (!StringUtils.isBlank(snem)) {
-                    try {
+                    if (StringUtils.isNumeric(snem)) {
                         extraManaNeeded += Integer.parseInt(snem);
-                    } catch (final NumberFormatException e) {
+                    } else {
                         System.out.println("wrong SpellsNeedExtraManaEffect SVar format on " + c);
                     }
                 }

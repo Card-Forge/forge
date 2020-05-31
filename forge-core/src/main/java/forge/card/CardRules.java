@@ -531,12 +531,10 @@ public final class CardRules implements ICardCharacteristics {
             public final ManaCostShard next() {
                 final String unparsed = st.nextToken();
                 // System.out.println(unparsed);
-                try {
-                    int iVal = Integer.parseInt(unparsed);
-                    this.genericCost += iVal;
+                if (StringUtils.isNumeric(unparsed)) {
+                    this.genericCost += Integer.parseInt(unparsed);
                     return null;
                 }
-                catch (NumberFormatException nex) { }
 
                 return ManaCostShard.parseNonGeneric(unparsed);
             }

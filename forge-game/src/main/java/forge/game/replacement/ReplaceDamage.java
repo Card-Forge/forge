@@ -20,7 +20,6 @@ package forge.game.replacement;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -97,12 +96,7 @@ public class ReplaceDamage extends ReplacementEffect {
             String full = getParam("DamageAmount");
             String operator = full.substring(0, 2);
             String operand = full.substring(2);
-            int intoperand = 0;
-            try {
-                intoperand = Integer.parseInt(operand);
-            } catch (NumberFormatException e) {
-                intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
-            }
+            int intoperand = AbilityUtils.calculateAmount(getHostCard(), operand, this);
 
             if (!Expressions.compare((Integer) runParams.get(AbilityKey.DamageAmount), operator, intoperand)) {
                 return false;

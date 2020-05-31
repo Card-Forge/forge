@@ -347,15 +347,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            int right;
             final String rightString = this.getPresentCompare().substring(2);
-            try { // If this is an Integer, just parse it
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException e) { // Otherwise, grab it from
-                                                      // the
-                // SVar
-                right = CardFactoryUtil.xCount(host, host.getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(host, rightString, sa);
 
             final int left = list.size();
 

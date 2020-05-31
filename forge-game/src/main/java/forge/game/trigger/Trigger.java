@@ -536,10 +536,10 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         super.changeText();
 
-        ensureAbility();
+        SpellAbility sa = ensureAbility();
 
-        if (getOverridingAbility() != null) {
-            getOverridingAbility().changeText();
+        if (sa != null) {
+            sa.changeText();
         }
     }
 
@@ -553,14 +553,14 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         super.changeTextIntrinsic(colorMap, typeMap);
 
-        ensureAbility();
+        SpellAbility sa = ensureAbility();
 
-        if (getOverridingAbility() != null) {
-            getOverridingAbility().changeTextIntrinsic(colorMap, typeMap);
+        if (sa != null) {
+            sa.changeTextIntrinsic(colorMap, typeMap);
         }
     }
 
-    private SpellAbility ensureAbility() {
+    public SpellAbility ensureAbility() {
         SpellAbility sa = getOverridingAbility();
         if (sa == null && hasParam("Execute")) {
             sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"));

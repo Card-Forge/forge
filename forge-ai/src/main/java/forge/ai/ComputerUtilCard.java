@@ -1908,21 +1908,12 @@ public class ComputerUtilCard {
         }
         if (card.getSVar(needsToPlayVarName).length() > 0) {
             final String needsToPlay = card.getSVar(needsToPlayVarName);
-            int x = 0;
-            int y = 0;
             String sVar = needsToPlay.split(" ")[0];
             String comparator = needsToPlay.split(" ")[1];
             String compareTo = comparator.substring(2);
-            try {
-                x = Integer.parseInt(sVar);
-            } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
-            }
-            try {
-                y = Integer.parseInt(compareTo);
-            } catch (final NumberFormatException e) {
-                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
-            }
+            int x = AbilityUtils.calculateAmount(card, sVar, sa);
+            int y = AbilityUtils.calculateAmount(card, compareTo, sa);
+
             if (!Expressions.compare(x, comparator, y)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }

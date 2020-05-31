@@ -108,14 +108,9 @@ public class ForgeScript {
             }
             return false;
         } else if (property.startsWith("cmc")) {
-            int x;
             String rhs = property.substring(5);
             int y = cardState.getManaCost().getCMC();
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
+            int x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             return Expressions.compare(y, property, x);
         } else return cardState.getTypeWithChanges().hasStringType(property);

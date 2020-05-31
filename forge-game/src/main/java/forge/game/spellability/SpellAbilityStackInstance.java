@@ -194,7 +194,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             // Saved sub-SA needs to be reset on the way out
             if (subInstance != null) {
                 ability.setSubAbility((AbilitySub) subInstance.getSpellAbility(true));
-                ability.getSubAbility().setParent(ability);
             }
 
             // Set Cost specific things here
