@@ -19,11 +19,17 @@ public class CardTraitChanges implements Cloneable {
 
     private List<SpellAbility> removedAbilities = Lists.newArrayList();
     
-    private boolean removeAll;
-    private boolean removeNonMana;
-    private boolean removeIntrinsic;
+    private boolean removeAll = false;
+    private boolean removeNonMana = false;
+    private boolean removeIntrinsic = false;
 
     public CardTraitChanges(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+            Collection<Trigger> trigger, Collection<ReplacementEffect> res, Collection<StaticAbility> st,
+            boolean removeAll, boolean removeNonMana, boolean removeIntrinsic) {
+        merge(spells, removedAbilities, trigger, res, st, removeAll, removeNonMana, removeIntrinsic);
+    }
+
+    public void merge(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> res, Collection<StaticAbility> st,
             boolean removeAll, boolean removeNonMana, boolean removeIntrinsic) {
         if (spells != null) {
@@ -41,10 +47,10 @@ public class CardTraitChanges implements Cloneable {
         if (st != null) {
             this.staticAbilities.addAll(st);
         }
-        
-        this.removeAll = removeAll;
-        this.removeNonMana = removeNonMana;
-        this.removeIntrinsic = removeIntrinsic;
+
+        this.removeAll |= removeAll;
+        this.removeNonMana |= removeNonMana;
+        this.removeIntrinsic |= removeIntrinsic;
     }
 
     /**

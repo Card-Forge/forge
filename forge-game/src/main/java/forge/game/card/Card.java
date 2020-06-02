@@ -3657,9 +3657,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, boolean removeIntrinsic, long timestamp) {
-        changedCardTraits.put(timestamp, new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, removeIntrinsic
-        ));
+        // in case two static abilities has the same timestamp
+        if (changedCardTraits.containsKey(timestamp)) {
+            changedCardTraits.get(timestamp).merge(
+                spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, removeIntrinsic
+            );
+        } else {
+            changedCardTraits.put(timestamp, new CardTraitChanges(
+                spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, removeIntrinsic
+            ));
+        }
         // update view
         updateAbilityTextForView();
     }
