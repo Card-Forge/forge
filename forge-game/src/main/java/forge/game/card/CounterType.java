@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
@@ -10,7 +11,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 
-public class CounterType implements Comparable<CounterType> {
+public class CounterType implements Comparable<CounterType>, Serializable {
+    private static final long serialVersionUID = -7575835723159144478L;
+
     private CounterEnumType eVal = null;
     private String sVal = null;
 
