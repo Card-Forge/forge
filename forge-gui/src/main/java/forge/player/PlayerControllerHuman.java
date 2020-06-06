@@ -296,6 +296,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (final Entry<CardView, Integer> e : result.entrySet()) {
                     if (gameCacheBlockers.containsKey(e.getKey())) {
                         map.put(gameCacheBlockers.get(e.getKey()), e.getValue());
+                    } else if (e.getKey() == null || e.getKey().getId() == -1) {
+                        // null key or key with -1 means defender
+                        map.put(null, e.getValue());
                     }
                 }
             } else {
