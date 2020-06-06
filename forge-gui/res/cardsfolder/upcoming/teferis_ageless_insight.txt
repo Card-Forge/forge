@@ -1,0 +1,6 @@
+Name:Teferi's Ageless Insight
+ManaCost:2 U U
+Types:Legendary Enchantment
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | NotFirstCardInDrawStep$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
