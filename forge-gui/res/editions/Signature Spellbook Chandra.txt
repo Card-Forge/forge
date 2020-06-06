@@ -6,4 +6,10 @@ Type=Reprint
 
 [cards]
 1 M Chandra, Torch of Defiance
+2 R Cathartic Reunion
+3 R Fiery Confluence
 4 M Past in Flames
+5 M Pyroblast
+6 R Pyromancer Ascension
+7 R Rite of Flame
+8 R Young Pyromancer
