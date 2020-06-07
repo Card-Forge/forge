@@ -56,6 +56,7 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -304,11 +305,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @see IPaperCard
      */
     public Card(final int id0, final IPaperCard paperCard0, final Game game0) {
+        this(id0, paperCard0, game0, game0 == null ? null : game0.getTracker());
+    }
+    public Card(final int id0, final IPaperCard paperCard0, final Game game0, final Tracker tracker0) {
         super(id0);
 
         game = game0;
         paperCard = paperCard0;
-        view = new CardView(id0, game == null ? null : game.getTracker());
+        view = new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         view.updateChangedColorWords(this);
