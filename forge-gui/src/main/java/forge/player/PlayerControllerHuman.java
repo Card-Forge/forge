@@ -747,12 +747,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, final String message) {
-        reveal(CardView.getCollection(cards), zone, PlayerView.get(owner), message);
+    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, String message) {
+        reveal(cards, zone, PlayerView.get(owner), message);
     }
 
     @Override
     public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
+        reveal(getCardList(cards), zone, owner, message);
+    }
+
+    protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message) {
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else {
@@ -760,8 +764,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
-            tempShowCards(getCardList(cards));
-            getGui().reveal(fm, cards);
+            tempShowCards(cards);
+            getGui().reveal(fm, CardView.getCollection(cards));
             endTempShowCards();
         } else {
             getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),

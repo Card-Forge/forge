@@ -546,11 +546,16 @@ public class Game {
     }
 
     public Card findByView(CardView view) {
+        if (view == null) {
+            return null;
+        }
         CardIdVisitor visit = new CardIdVisitor(view.getId());
         if (ZoneType.Stack.equals(view.getZone())) {
             visit.visitAll(getStackZone());
-        } else {
+        } else if (view.getController() != null && view.getZone() != null) {
             visit.visitAll(getPlayer(view.getController()).getZone(view.getZone()));
+        } else { // fallback if view doesn't has controller or zone set for some reason
+            forEachCardInGame(visit);
         }
         return visit.getFound();
     }

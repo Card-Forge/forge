@@ -206,7 +206,7 @@ public final class CardUtil {
                 .build()
         );
 
-        final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame());
+        final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
