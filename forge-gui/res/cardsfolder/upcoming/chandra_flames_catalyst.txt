@@ -1,0 +1,11 @@
+Name:Chandra, Flame's Catalyst
+ManaCost:4 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:5
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumDmg$ 3 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+A:AB$ Play | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Optional$ True | ValidTgts$ Instant.Red+YouOwn,Sorcery.Red+YouOwn | TgtZone$ Graveyard | ReplaceGraveyard$ Exile | TgtPrompt$ Select target red instant or sorcery card | AILogic$ ReplaySpell | SpellDescription$ You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
+A:AB$ Discard | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Mode$ Hand | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Discard your hand, then draw seven cards. Until end of turn, you may cast spells from your hand without paying their mana costs.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | Stackable$ False | Description$ Until end of turn, you may cast spells from your hand without paying their mana costs.
+SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand
+Oracle:[+1]: Chandra, Flame's Catalyst deals 3 damage to each opponent.\n[−2]: You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.\n[−8]: Discard your hand, then draw seven cards. Until end of turn, you may cast spells from your hand without paying their mana costs.
