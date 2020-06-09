@@ -66,6 +66,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
@@ -290,6 +291,7 @@ Aminatou
 Angrath
 Arlinn
 Ashiok
+Basri
 Bolas
 Calix
 Chandra
