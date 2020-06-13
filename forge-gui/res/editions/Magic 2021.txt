@@ -1,0 +1,153 @@
+[metadata]
+Code=M21
+Date=2020-06-04
+Name=Core Set 2021
+Type=Core
+BoosterCovers=3
+Booster=10 Common:!fromSheet("M21 Secret Cards"), 3 Uncommon:!fromSheet("M21 Secret Cards"), 1 RareMythic:!fromSheet("M21 Secret Cards"), 1 fromSheet("M21 Lands")
+
+[cards]
+1 M Ugin, the Spirit Dragon
+2 C Alpine Watchdog
+3 U Angelic Ascension
+6 M Baneslayer Angel
+7 M Basri Ket
+8 C Basri's Acolyte
+9 R Basri's Lieutenant
+10 U Basri's Solidarity
+11 C "Celestial Enforcer"
+17 U Faith's Fetters
+23 R Idol of Endurance
+25 U Light of Promise
+27 M Mangara, the Diplomat
+29 R Pack Leader
+31 C Revitalize
+32 R Runed Halo
+34 U Seasoned Hallowblade
+36 U Selfless Savior
+37 U Siege Striker
+42 C Valorous Steed
+43 U Vryn Wingmare
+50 C Frantic Inventory
+53 U Jeskai Elder
+56 C "Mana Beak"
+60 R Pursued Whale
+61 U Rain of Revelation
+63 U Rewind
+64 U Riddleform
+69 R See the Truth
+71 U Shipwreck Dowser
+72 C Spined Megalodon
+73 R "Stormwing's Presence"
+75 M Teferi, Master of Time
+76 R Teferi's Ageless Insight
+77 C Teferi's Protege
+78 U Teferi's Tutelage
+79 U Tide Skimmer
+84 U Waker of Waves
+88 U Archfiend's Vessel
+89 U Bad Deal
+92 U Carrion Grub
+97 U Eliminate
+102 C Grasp of Darkness
+103 M Grim Tutor
+108 M Liliana, Waker of the Dead
+112 U Malefic Scythe
+114 M Massacre Wurm
+116 R Necromentia
+117 R Peer into the Abyss
+118 U Pestilent Haze
+125 R Thieves' Guild Enforcer
+126 C Village Rites
+127 R Vito, Thorn of the Dusk Rose
+131 U Bolt Hound
+135 M Chandra, Heart of Fire
+136 R Chandra's Incinerator
+137 C Chandra's Magmutt
+138 U Chandra's Pyreling
+139 R Conspicuous Snoop
+142 R Double Vision
+143 M Fiery Emancipation
+144 U Furious Rise
+146 R Gadrak, the Crown-Scourge
+147 C Goblin Arsonist
+149 U Havoc Jester
+150 U Heartfire Immolator
+151 U Hellkite Punisher
+153 C Igneous Cur
+154 U Kinetic Augur
+160 U Soul Sear
+162 R "Subira, Tulzidi Caravaneer"
+166 U "Gather the Healing Quartz"
+167 R Transmogrify
+172 R Volcanic Salvo
+173 R Azusa, Lost but Seeking
+174 U "Kick Your Aspen"
+177 U Cultivate
+178 C "Snoozy Boi Deserves A Nap"
+179 M Elder Gargaroth
+181 U Fierce Empath
+182 U Fungal Rebirth
+183 M "Garruk, He Comin'"
+184 C "Garruk's Little Friend"
+185 R "Ach! Hans, run! It's Garruk!"
+186 U "Garruk's Mega-Beef Backside"
+188 R Heroic Intervention
+190 U "Surprise Growth Spurt"
+191 R Jolrael, Mwonvuli Recluse
+193 C Llanowar Visionary
+196 C Pridemalkin
+197 R Primal Might
+198 U Quirion Dryad
+202 C "Hangry Sabertooth"
+208 R "Garden Spider"
+213 U Warden of the Woods
+215 U Alpine Houndmaster
+217 U "Dire Fleet Smashy Boy"
+219 U Indulging Patrician
+220 U "The Red-Green Scream"
+221 U Lorescale Coatl
+223 U Obsessive Stitcher
+228 M Chromatic Orrery
+232 R Mazemind Tome
+233 U Meteorite
+239 R Solemn Simulacrum
+240 R Sparkhunter Masticore
+241 U Tormod's Crypt
+246 R Fabled Passage
+248 C Radiant Fountain
+252 R Temple of Epiphany
+253 R Temple of Malady
+254 R Temple of Mystery
+255 R Temple of Silence
+256 R Temple of Triumph
+278 M Rin and Seri, Inseparable
+309 L Plains
+310 L Island
+312 L Mountain
+314 R Containment Priest
+320 M Basri, Devoted Paladin
+321 C Adherent of Hope
+322 R Basri's Aegis
+323 U Sigiled Contender
+324 M Teferi, Timeless Voyager
+325 U Historian of Zhalfir
+326 C Mystic Skyfish
+327 R Teferi's Wavecaster
+328 M Liliana, Death Mage
+329 R Liliana's Scorn
+330 U Liliana's Scrounger
+331 C Spirit of Malevolence
+332 M Chandra, Flame's Catalyst
+333 R Chandra's Firemaw
+334 U Keral Keep Disciples
+335 C Storm Caller
+336 M Garruk, Savage Herald
+337 R Garruk's Warsteed
+338 U Predatory Wurm
+339 C Wildwood Patrol
+
+[tokens]
+g_1_1_cat
+g_3_3_beast
+w_1_1_dog
