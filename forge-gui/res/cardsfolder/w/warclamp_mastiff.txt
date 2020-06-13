@@ -1,6 +1,6 @@
 Name:Warclamp Mastiff
 ManaCost:W
-Types:Creature Hound
+Types:Creature Dog
 PT:1/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warclamp_mastiff.jpg

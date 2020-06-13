@@ -1,6 +1,6 @@
-Name:Hound
+Name:Dog
 ManaCost:no cost
 PT:1/1
 Colors:green
-Types:Creature Hound
+Types:Creature Dog
 Oracle:

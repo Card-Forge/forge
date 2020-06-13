@@ -1,6 +1,6 @@
 Name:Kunoros, Hound of Athreos
 ManaCost:1 W B
-Types:Legendary Creature Hound
+Types:Legendary Creature Dog
 PT:3/3
 K:Vigilance
 K:Menace

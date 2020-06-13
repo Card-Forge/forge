@@ -111,7 +111,6 @@ Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
 Horse:Horses
-Hound:Hounds
 Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
