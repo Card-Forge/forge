@@ -1,6 +1,6 @@
 Name:Underworld Cerberus
 ManaCost:3 B R
-Types:Creature Hound
+Types:Creature Dog
 PT:6/6
 K:CantBeBlockedByAmount LT3
 S:Mode$ CantTarget | AffectedZone$ Graveyard | Description$ Cards in graveyards can't be the targets of spells or abilities.

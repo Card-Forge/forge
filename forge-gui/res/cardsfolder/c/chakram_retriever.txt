@@ -1,6 +1,6 @@
 Name:Chakram Retriever
 ManaCost:4 U
-Types:Creature Elemental Hound
+Types:Creature Elemental Dog
 PT:2/4
 K:Partner:Chakram Slinger
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a spell during your turn, untap target creature.

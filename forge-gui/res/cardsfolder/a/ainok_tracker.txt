@@ -1,6 +1,6 @@
 Name:Ainok Tracker
 ManaCost:5 R
-Types:Creature Hound Scout
+Types:Creature Dog Scout
 PT:3/3
 K:First Strike
 K:Morph:4 R

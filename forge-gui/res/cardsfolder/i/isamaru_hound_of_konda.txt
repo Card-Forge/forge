@@ -1,6 +1,6 @@
 Name:Isamaru, Hound of Konda
 ManaCost:W
-Types:Legendary Creature Hound
+Types:Legendary Creature Dog
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79217.jpg
 Oracle:

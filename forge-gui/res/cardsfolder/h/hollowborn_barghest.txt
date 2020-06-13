@@ -1,6 +1,6 @@
 Name:Hollowborn Barghest
 ManaCost:5 B B
-Types:Creature Demon Hound
+Types:Creature Demon Dog
 PT:7/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.YouCtrl | PresentCompare$ EQ0 | PresentZone$ Hand | Execute$ TrigLoseLifeEachOpp | TriggerDescription$ At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
 SVar:TrigLoseLifeEachOpp:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2

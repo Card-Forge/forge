@@ -1,6 +1,6 @@
 Name:Greater Mossdog
 ManaCost:3 G
-Types:Creature Plant Hound
+Types:Creature Plant Dog
 PT:3/3
 K:Dredge:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_mossdog.jpg
