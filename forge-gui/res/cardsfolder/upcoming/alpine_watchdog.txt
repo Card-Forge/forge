@@ -1,0 +1,6 @@
+Name:Alpine Watchdog
+ManaCost:1 W
+Types:Creature Dog
+PT:2/2
+K:Vigilance
+Oracle:Vigilance
