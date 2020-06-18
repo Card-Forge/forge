@@ -1,0 +1,11 @@
+Name:Sunbond
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ SunbondTrig | AddSVar$ SunbondPutCounter & SunbondTriggerAmount | Description$ Enchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."
+SVar:SunbondTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ SunbondPutCounter | TriggerDescription$ Whenever you gain life, put that many +1/+1 counters on CARDNAME.
+SVar:SunbondPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ SunbondTriggerAmount | References$ SunbondTriggerAmount
+SVar:SunbondTriggerAmount:TriggerCount$LifeAmount
+DeckHas:Ability$LifeGain & Ability$Counters
+Oracle:Enchant creature\nEnchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."
