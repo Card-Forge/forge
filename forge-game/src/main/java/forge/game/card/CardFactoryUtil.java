@@ -719,10 +719,13 @@ public class CardFactoryUtil {
             return c.getImprintedCards().get(0).getCMC();
         }
 
-        if (l[0].startsWith("GreatestPower_")) {
-            final String restriction = l[0].substring(14);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
+        if (l[0].startsWith("GreatestPower")) {
+            final String[] lparts = l[0].split("_", 2);
+            final String[] rest = lparts[1].split(",");
+            final CardCollectionView cardsInZones = lparts[0].length() > 13
+                    ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(13)))
+                    : game.getCardsIn(ZoneType.Battlefield);
+            CardCollection list = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetPower() > highest) {
