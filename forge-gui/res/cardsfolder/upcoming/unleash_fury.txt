@@ -1,0 +1,6 @@
+Name:Unleash Fury
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | Cost$ 1R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Double the power of target creature until end of turn.
+SVar:X:Targeted$CardPower
+Oracle:Double the power of target creature until end of turn.
