@@ -3747,3 +3747,125 @@ Gyruda, Doom of Depths|IKO|3
 Mysterious Egg|IKO|2
 Dirge Bat|IKO|3
 Crystalline Giant|IKO|3
+
+[M21 Secret Cards]
+Rin and Seri, Inseparable
+Ugin, the Spirit Dragon|M21|2
+Basri Ket|M21|2
+Teferi, Master of Time|M21|5
+Liliana, Waker of the Dead|M21|2
+Chandra, Heart of Fire|M21|2
+Garruk, Unleashed|M21|2
+Ugin, the Spirit Dragon|M21|3
+Basri Ket|M21|3
+Basri's Acolyte|M21|2
+Basri's Lieutenant|M21|2
+Basri's Solidarity|M21|2
+Teferi, Master of Time|M21|6
+Teferi, Master of Time|M21|7
+Teferi, Master of Time|M21|8
+Teferi, Master of Time|M21|9
+Teferi's Ageless Insight|M21|2
+Teferi's Protege|M21|2
+Teferi's Tutelage|M21|2
+Liliana, Waker of the Dead|M21|3
+Liliana's Devotee|M21|2
+Liliana's Standard Bearer|M21|2
+Liliana's Steward|M21|2
+Chandra, Heart of Fire|M21|3
+Chandra's Incinerator|M21|2
+Chandra's Magmutt|M21|2
+Chandra's Pyreling|M21|2
+Garruk, Unleashed|M21|3
+Garruk's Gorehorn|M21|2
+Garruk's Harbinger|M21|2
+Garruk's Uprising|M21|2
+Plains|M21|4
+Island|M21|4
+Swamp|M21|4
+Mountain|M21|4
+Forest|M21|4
+Containment Priest|M21|2
+Grim Tutor|M21|2
+Massacre Wurm|M21|2
+Cultivate|M21|2
+Scavenging Ooze|M21|2
+Solemn Simulacrum|M21|2
+Basri, Devoted Paladin
+Adherent of Hope
+Basri's Aegis
+Sigiled Contender
+Teferi, Timeless Voyager
+Historian of Zhalfir
+Mystic Skyfish
+Teferi's Wavecaster
+Liliana, Death Mage
+Liliana's Scorn
+Liliana's Scrounger
+Spirit of Malevolence
+Chandra, Flame's Catalyst
+Chandra's Firemaw
+Keral Keep Disciples
+Storm Caller
+Garruk, Savage Herald
+Garruk's Warsteed
+Predatory Wurm
+Wildwood Patrol
+Baneslayer Angel|M21|2
+Glorious Anthem|M21|2
+Idol of Endurance|M21|2
+Mangara, the Diplomat|M21|2
+Nine Lives|M21|2
+Pack Leader|M21|2
+Runed Halo|M21|2
+Speaker of the Heavens|M21|2
+Barrin, Tolarian Archmage|M21|2
+Discontinuity|M21|2
+Ghostly Pilferer|M21|2
+Pursued Whale|M21|2
+See the Truth|M21|2
+Shacklegeist|M21|2
+Stormwing Entity|M21|2
+Sublime Epiphany|M21|2
+Demonic Embrace|M21|2
+Hooded Blightfang|M21|2
+Kaervek, the Spiteful|M21|2
+Necromentia|M21|2
+Peer into the Abyss|M21|2
+Thieves' Guild Enforcer|M21|2
+Vito, Thorn of the Dusk Rose|M21|2
+Brash Taunter|M21|2
+Conspicuous Snoop|M21|2
+Double Vision|M21|2
+Fiery Emancipation|M21|2
+Gadrak, the Crown-Scourge|M21|2
+Subira, Tulzidi Caravanner|M21|2
+Terror of the Peaks|M21|2
+Transmogrify|M21|2
+Volcanic Salvo|M21|2
+Azusa, Lost but Seeking|M21|2
+Elder Gargaroth|M21|2
+Feline Sovereign|M21|2
+Heroic Intervention|M21|2
+Jolrael, Mwonvuli Recluse|M21|2
+Primal Might|M21|2
+Sporeweb Weaver|M21|2
+Niambi, Esteemed Speaker|M21|2
+Radha, Heart of Keld|M21|2
+Sanctum of All|M21|2
+Chromatic Orrery|M21|2
+Mazemind Tome|M21|2
+Sparkhunter Masticore|M21|2
+Animal Sanctuary|M21|2
+Fabled Passage|M21|2
+Temple of Epiphany|M21|2
+Temple of Malady|M21|2
+Temple of Mystery|M21|2
+Temple of Silence|M21|2
+Temple of Triumph|M21|2
+Pack Leader|M21|3
+Selfless Savior|M21|2
+Frantic Inventory|M21|2
+Eliminate|M21|2
+Heartfire Immolator|M21|2
+Llanowar Visionary|M21|2
