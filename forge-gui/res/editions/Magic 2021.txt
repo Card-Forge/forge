@@ -416,6 +416,7 @@ g_1_1_saproling
 g_2_2_cat
 g_3_3_beast
 r_1_1_goblin_wizard_prowess
+r_1_1_pirate_noblock_all_attack
 ur_x_x_weird
 w_1_1_bird_flying
 w_1_1_dog
