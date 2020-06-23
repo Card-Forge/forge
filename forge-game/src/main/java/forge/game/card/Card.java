@@ -4267,6 +4267,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     private boolean switchPhaseState() {
+
+        if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
+            return false;
+        }
+
         if (!phasedOut && hasKeyword("CARDNAME can't phase out.")) {
             return false;
         }
