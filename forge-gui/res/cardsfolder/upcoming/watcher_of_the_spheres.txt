@@ -1,0 +1,11 @@
+Name:Watcher of the Spheres
+ManaCost:W U
+Types:Creature Bird Wizard
+PT:2/2
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Creature.withFlying | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells with flying you cast cost {1} less to cast.
+DeckHints:Keyword$Flying
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl+withFlying | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature with flying enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Creature.withFlying
+Oracle:Flying\nCreature spells with flying you cast cost {1} less to cast.\nWhenever another creature with flying enters the battlefield under your control, Watcher of the Spheres gets +1/+1 until end of turn.
