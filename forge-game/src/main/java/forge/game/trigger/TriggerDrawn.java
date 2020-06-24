@@ -68,6 +68,13 @@ public class TriggerDrawn extends Trigger {
             }
         }
 
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("Number")) {
             if (number != Integer.parseInt(getParam("Number"))) {
                 return false;
