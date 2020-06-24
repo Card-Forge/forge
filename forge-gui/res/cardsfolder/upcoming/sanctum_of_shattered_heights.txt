@@ -1,0 +1,7 @@
+Name:Sanctum of Shattered Heights
+ManaCost:2 R
+Types:Legendary Enchantment Shrine
+A:AB$ DealDamage | Cost$ 1 Discard<1/Land;Shrine/land card or Shrine card> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker, where X is the number of Shrines you control.
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHints:Type$Shrine
+Oracle:{1}, Discard a land card or Shrine card: Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control.

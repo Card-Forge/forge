@@ -1,0 +1,7 @@
+Name:Sanctum of Tranquil Light
+ManaCost:W
+Types:Legendary Enchantment Shrine
+A:AB$ Tap | Cost$ 5 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReduceCost$ X | References$ X | SpellDescription$ Tap target creature. This ability costs {1} less to activate for each Shrine you control.
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHints:Type$Shrine
+Oracle:{5}{W}: Tap target creature. This ability costs {1} less to activate for each Shrine you control.

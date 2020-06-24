@@ -141,6 +141,8 @@ public enum CounterEnumType {
 
     ICE("ICE", 0, 239, 255),
 
+    INCARNATION("INCARNATION", 247, 206, 64),
+
     INFECTION("INFCT", 0, 230, 66),
 
     INTERVENTION("INTRV", 205, 203, 105),
