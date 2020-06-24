@@ -638,6 +638,10 @@ public class CardFactoryUtil {
             return doXMath(oppDmg, m, source);
         }
 
+        if (value.contains("NonCombatDamageDealtThisTurn")) {
+            return doXMath(player.getAssignedDamage() - player.getAssignedCombatDamage(), m, source);
+        }
+
         if (value.equals("OpponentsAttackedThisTurn")) {
             return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source);
         }
