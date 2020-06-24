@@ -473,7 +473,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 }
             }
 
-            y += lblStandings.getHeight() + PADDING;
+            y += lblStandings.getHeight() - PADDING * 3;
 
             btnEditDeckInTourn.setBounds(PADDING, y, buttonWidth, FTextField.getDefaultHeight());
             btnLeaveTournamentInTourn.setBounds(btnEditDeckInTourn.getRight() + PADDING, y, buttonWidth, btnEditDeckInTourn.getHeight());
