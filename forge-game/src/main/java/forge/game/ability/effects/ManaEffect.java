@@ -195,6 +195,26 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     if (colors == 0) return;
                     abMana.setExpressChoice(ColorSet.fromMask(colors));
+                } else if (type.startsWith("EachColoredManaSymbol")) {
+                    final String res = type.split("_")[1];
+                    final CardCollection list = AbilityUtils.getDefinedCards(card, res, sa);
+                    StringBuilder sb = new StringBuilder();
+                    for (Card c : list) {
+                        String mana = c.getManaCost().toString();
+                        for (int i = 0; i < mana.length(); i++) {
+                            char symbol = mana.charAt(i);
+                            switch (symbol) {
+                                case 'W':
+                                case 'U':
+                                case 'B':
+                                case 'R':
+                                case 'G':
+                                    sb.append(symbol).append(' ');
+                                    break;
+                            }
+                        }
+                    }
+                    abMana.setExpressChoice(sb.toString().trim());
                 }
 
                 if (abMana.getExpressChoice().isEmpty()) {
