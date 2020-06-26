@@ -330,7 +330,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
 
         CardCollectionView topLib = player.getCardsIn(ZoneType.Library, c);
-        return topLib.size() < c ? null : PaymentDecision.card(topLib);
+        return topLib.size() < c ? null : PaymentDecision.number(c);
     }
 
     @Override
