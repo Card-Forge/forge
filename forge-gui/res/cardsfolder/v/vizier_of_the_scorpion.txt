@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie Wizard
 PT:1/1
 S:Mode$ Continuous | Affected$ Zombie.token+YouCtrl | AddKeyword$ Deathtouch | Description$ Zombie tokens you control have deathtouch.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAmass | TriggerDescription$ When CARDNAME enters the battlefield, amass 1. (Put a +1/+1 counter on an Army you control. If you don’t control one, create a 0/0 black Zombie Army creature token first.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAmass | TriggerDescription$ When CARDNAME enters the battlefield, amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Num$ 1
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token

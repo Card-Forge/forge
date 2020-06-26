@@ -13,4 +13,4 @@ ManaCost:1 G U
 Types:Sorcery
 A:SP$ CopyPermanent | Cost$ 1 G U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
 DeckHas:Ability$Token
-Oracle:Create a token that’s a copy of target creature you control.
+Oracle:Create a token that's a copy of target creature you control.

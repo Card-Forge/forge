@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ BR | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature or planeswalker and 1 damage to that permanent's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 1
-Oracle:Carnival deals 1 damage to target creature or planeswalker and 1 damage to that permanent’s controller.
+Oracle:Carnival deals 1 damage to target creature or planeswalker and 1 damage to that permanent's controller.
 
 ALTERNATE
 
