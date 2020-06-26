@@ -2,8 +2,7 @@ Name:Cephalid Aristocrat
 ManaCost:4 U
 Types:Creature Cephalid Noble
 PT:3/3
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 2 | Defined$ You
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_aristocrat.jpg
-Oracle:Whenever Cephalid Aristocrat becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
+Oracle:Whenever Cephalid Aristocrat becomes the target of a spell or ability, mill two cards.

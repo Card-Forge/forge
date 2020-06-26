@@ -2,7 +2,6 @@ Name:Drowner Initiate
 ManaCost:U
 Types:Creature Merfolk Wizard
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigMill | OptionalDecider$ You | TriggerDescription$ Whenever a player casts a blue spell, you may pay {1}. If you do, target player puts the top two cards of their library into their graveyard.
-SVar:TrigMill:AB$Mill | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drowner_initiate.jpg
-Oracle:Whenever a player casts a blue spell, you may pay {1}. If you do, target player puts the top two cards of their library into their graveyard.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigMill | OptionalDecider$ You | TriggerDescription$ Whenever a player casts a blue spell, you may pay {1}. If you do, target player mills two cards.
+SVar:TrigMill:AB$ Mill | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
+Oracle:Whenever a player casts a blue spell, you may pay {1}. If you do, target player mills two cards.

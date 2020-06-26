@@ -3,8 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the number of cards put into that graveyard from anywhere this turn.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.
 SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_Card.EnchantedPlayerOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fraying_sanity.jpg
-Oracle:Enchant player\nAt the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the number of cards put into that graveyard from anywhere this turn.
+Oracle:Enchant player\nAt the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.

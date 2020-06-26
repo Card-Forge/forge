@@ -3,8 +3,7 @@ ManaCost:1 U B
 Types:Creature Zombie Siren
 PT:2/1
 K:Flying
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, each opponent discards a card, then puts the top card of their library into their graveyard.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, each opponent discards a card, then each opponent mills a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siren_of_the_silent_song .jpg
-Oracle:Flying\nInspired — Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of their library into their graveyard.
+Oracle:Flying\nInspired — Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then each opponent mills a card.

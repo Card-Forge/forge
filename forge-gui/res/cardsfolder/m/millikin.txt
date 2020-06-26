@@ -3,5 +3,5 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:0/1
 A:AB$ Mana | Cost$ T Mill<1> | Produced$ C | SpellDescription$ Add {C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/millikin.jpg
-Oracle:{T}, Put the top card of your library into your graveyard: Add {C}.
+DeckHints:Ability$Graveyard
+Oracle:{T}, Mill a card: Add {C}.

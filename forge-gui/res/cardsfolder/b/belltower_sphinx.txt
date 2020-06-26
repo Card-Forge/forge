@@ -3,9 +3,8 @@ ManaCost:4 U
 Types:Creature Sphinx
 PT:2/5
 K:Flying
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller puts that many cards from the top of their library into their graveyard.
-SVar:TrigMill:DB$Mill | Defined$ TriggeredSourceController | NumCards$ X | References$ X
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller mills that many cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredSourceController | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belltower_sphinx.jpg
-Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of their library into their graveyard.
+Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller mills that many cards.

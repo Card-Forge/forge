@@ -2,8 +2,9 @@ Name:Sequestered Stash
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mill | Cost$ 4 T Sac<1/CARDNAME> | Defined$ You | NumCards$ 5 | SubAbility$ DBChooseCard | SpellDescription$ Put the top five cards of your library into your graveyard. Then you may put an artifact card from your graveyard on top of your library.
+A:AB$ Mill | Cost$ 4 T Sac<1/CARDNAME> | Defined$ You | NumCards$ 5 | SubAbility$ DBChooseCard | SpellDescription$ Mill five cards. Then you may put an artifact card from your graveyard on top of your library.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Artifact.YouOwn | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Defined$ ChosenCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sequestered_stash.jpg
-Oracle:{T}: Add {C}.\n{4}, {T}, Sacrifice Sequestered Stash: Put the top five cards of your library into your graveyard. Then you may put an artifact card from your graveyard on top of your library.
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:{T}: Add {C}.\n{4}, {T}, Sacrifice Sequestered Stash: Mill five cards. Then you may put an artifact card from your graveyard on top of your library.

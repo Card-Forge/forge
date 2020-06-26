@@ -4,10 +4,10 @@ Types:Legendary Planeswalker Estrid
 Loyalty:3
 A:AB$ UntapAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Permanent.enchanted+YouCtrl | SpellDescription$ Untap each enchanted permanent you control.
 SVar:BuffedBy:Permanent.enchanted
-A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ mask | LegacyImage$ mask c18 | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent to attach Mask Token | SpellDescription$ Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.
-A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 7 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Put the top seven cards of your library into your graveyard. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ mask | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent to attach Mask Token | SpellDescription$ Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.
+DeckHas:Ability$Token
+A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 7 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Enchantment.nonAura+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZoneAll | ChangeType$ Enchantment.Aura+YouCtrl | Origin$ Graveyard | Destination$ Battlefield
 K:CARDNAME can be your commander.
-Oracle:[+2]: Untap each enchanted permanent you control.\n[-1]: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.\n[-7]: Put the top seven cards of your library into your graveyard. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.\nEstrid, the Masked can be your commander.
-
+Oracle:[+2]: Untap each enchanted permanent you control.\n[-1]: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.\n[-7]: Mill seven cards. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.\nEstrid, the Masked can be your commander.

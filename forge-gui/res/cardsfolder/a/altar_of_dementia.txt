@@ -5,5 +5,4 @@ A:AB$ Mill | Cost$ Sac<1/Creature> | NumCards$ X | ValidTgts$ Player | TgtPrompt
 SVar:X:Sacrificed$CardPower
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_dementia.jpg
-Oracle:Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
+Oracle:Sacrifice a creature: Target player mills cards equal to the sacrificed creature's power.

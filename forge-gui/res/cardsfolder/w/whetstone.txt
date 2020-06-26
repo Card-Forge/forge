@@ -1,7 +1,6 @@
 Name:Whetstone
 ManaCost:3
 Types:Artifact
-A:AB$ Mill | Cost$ 3 | NumCards$ 2 | Defined$ Player | SpellDescription$ Each player puts the top two cards of their library into their graveyard.
+A:AB$ Mill | Cost$ 3 | NumCards$ 2 | Defined$ Player | SpellDescription$ Each player mills two cards.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whetstone.jpg
-Oracle:{3}: Each player puts the top two cards of their library into their graveyard.
+Oracle:{3}: Each player mills two cards.

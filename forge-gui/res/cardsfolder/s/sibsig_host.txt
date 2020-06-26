@@ -2,8 +2,7 @@ Name:Sibsig Host
 ManaCost:4 B
 Types:Creature Zombie
 PT:2/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player puts the top three cards of their library into their graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ Player
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sibsig_host.jpg
-Oracle:When Sibsig Host enters the battlefield, each player puts the top three cards of their library into their graveyard.
+Oracle:When Sibsig Host enters the battlefield, each player mills three cards.

@@ -1,11 +1,11 @@
 Name:Enter the God-Eternals
 ManaCost:2 U U B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 U U B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player puts the top four cards of their library into their graveyard. Amass 4. | StackDescription$ CARDNAME deals 4 damage to target creature.
+A:SP$ DealDamage | Cost$ 2 U U B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player mills four cards. Amass 4. | StackDescription$ CARDNAME deals 4 damage to target creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBMill | StackDescription$ You gain life equal to the damage dealt this way.
 SVar:X:Count$TotalDamageDoneByThisTurn
-SVar:DBMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose target player | SubAbility$ DBAmass | StackDescription$ Target player puts the top four cards of their library into their graveyard.
+SVar:DBMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose target player | SubAbility$ DBAmass | StackDescription$ Target player mills four cards.
 SVar:DBAmass:DB$ Amass | Num$ 4
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token & Ability$LifeGain & Ability$Graveyard
-Oracle:Enter the God-Eternals deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player puts the top four cards of their library into their graveyard. Amass 4.
+Oracle:Enter the God-Eternals deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player mills four cards. Amass 4.

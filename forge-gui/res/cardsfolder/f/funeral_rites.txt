@@ -1,9 +1,9 @@
 Name:Funeral Rites
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | SpellDescription$ You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard. | SubAbility$ DB
-SVar:DB:DB$LoseLife | LifeAmount$ 2 | SubAbility$ TrigMill
+A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | SpellDescription$ You draw two cards, lose 2 life, then mill two cards. | SubAbility$ DB
+SVar:DB:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ TrigMill
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-Oracle:You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard.
+Oracle:You draw two cards, lose 2 life, then mill two cards.

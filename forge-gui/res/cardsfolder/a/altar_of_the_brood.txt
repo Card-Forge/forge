@@ -1,7 +1,6 @@
 Name:Altar of the Brood
 ManaCost:1
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another permanent enters the battlefield under your control, each opponent puts the top card of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another permanent enters the battlefield under your control, each opponent mills a card.
 SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_the_brood.jpg
-Oracle:Whenever another permanent enters the battlefield under your control, each opponent puts the top card of their library into their graveyard.
+Oracle:Whenever another permanent enters the battlefield under your control, each opponent mills a card.

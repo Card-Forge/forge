@@ -96,7 +96,7 @@ public class CostMill extends CostPartWithList {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Put the top ");
+        sb.append("Mill ");
 
         if (i != null) {
             sb.append(i);
@@ -108,7 +108,6 @@ public class CostMill extends CostPartWithList {
         if ((i == null) || (i > 1)) {
             sb.append("s");
         }
-        sb.append(" from the top of your library into your graveyard");
 
         return sb.toString();
     }

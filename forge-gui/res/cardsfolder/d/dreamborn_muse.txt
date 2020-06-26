@@ -2,9 +2,8 @@ Name:Dreamborn Muse
 ManaCost:2 U U
 Types:Creature Spirit
 PT:2/2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMillYou | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMillYou | TriggerDescription$ At the beginning of each player's upkeep, that player mills X cards, where X is the number of cards in their hand.
 SVar:TrigMillYou:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ X | References$ X
 SVar:X:TriggeredPlayer$CardsInHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamborn_muse.jpg
-Oracle:At the beginning of each player's upkeep, that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.
+Oracle:At the beginning of each player's upkeep, that player mills X cards, where X is the number of cards in their hand.
