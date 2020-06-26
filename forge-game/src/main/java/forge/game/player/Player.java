@@ -1670,21 +1670,22 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
         repRunParams.put(AbilityKey.Number, n);
-        repRunParams.put(AbilityKey.Destination, destination);
-
-        switch (getGame().getReplacementHandler().run(ReplacementType.Mill, repRunParams)) {
-        case NotReplaced:
-            break;
-        case Updated:
-            // check if this is still the affected player
-            if (this.equals(repRunParams.get(AbilityKey.Affected))) {
-                n = (int) repRunParams.get(AbilityKey.Number);
-            } else {
-                return milled;
+        
+        if (destination == ZoneType.Graveyard && !bottom) {
+            switch (getGame().getReplacementHandler().run(ReplacementType.Mill, repRunParams)) {
+                case NotReplaced:
+                    break;
+                case Updated:
+                    // check if this is still the affected player
+                    if (this.equals(repRunParams.get(AbilityKey.Affected))) {
+                        n = (int) repRunParams.get(AbilityKey.Number);
+                    } else {
+                        return milled;
+                    }
+                    break;
+                default:
+                    return milled;
             }
-            break;
-        default:
-            return milled;
         }
 
         final int max = Math.min(n, lib.size());
