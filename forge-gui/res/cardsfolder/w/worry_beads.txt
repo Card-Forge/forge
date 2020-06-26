@@ -1,8 +1,7 @@
 Name:Worry Beads
 ManaCost:3
 Types:Artifact
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
-SVar:TrigMill:DB$Mill | Defined$ TriggeredPlayer | NumCards$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/worry_beads.jpg
-Oracle:At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
+Oracle:At the beginning of each player's upkeep, that player mills a card.

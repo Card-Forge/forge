@@ -1,9 +1,8 @@
 Name:Perpetual Timepiece
 ManaCost:2
 Types:Artifact
-A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SpellDescription$ Put the top two cards of your library into your graveyard.
-A:AB$ ChangeZone | Cost$ 2 Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | References$ X | Shuffle$ True | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Shuffle any number of target cards from your graveyard into your library.
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SpellDescription$ Mill two cards.
+A:AB$ ChangeZone | Cost$ 2 Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | References$ X | Shuffle$ True | TgtPrompt$ Choose any number of target cards in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Shuffle any number of target cards from your graveyard into your library.
 SVar:X:Count$InYourYard
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perpetual_timepiece.jpg
-Oracle:{T}: Put the top two cards of your library into your graveyard.\n{2}, Exile Perpetual Timepiece: Shuffle any number of target cards from your graveyard into your library.
+Oracle:{T}: Mill two cards.\n{2}, Exile Perpetual Timepiece: Shuffle any number of target cards from your graveyard into your library.

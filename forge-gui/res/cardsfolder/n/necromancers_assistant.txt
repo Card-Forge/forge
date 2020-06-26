@@ -2,7 +2,7 @@ Name:Necromancer's Assistant
 ManaCost:2 B
 Types:Creature Zombie
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top three cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_assistant.jpg
-Oracle:When Necromancer's Assistant enters the battlefield, put the top three cards of your library into your graveyard.
+DeckHints:Ability$Graveyard
+Oracle:When Necromancer's Assistant enters the battlefield, mill three cards.

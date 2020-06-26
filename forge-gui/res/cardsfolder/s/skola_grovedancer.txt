@@ -4,6 +4,6 @@ Types:Enchantment Creature Satyr Druid
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.nonToken+YouOwn | TriggerZones$ Battlefield | Execute$ DBGainLife | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-A:AB$ Mill | Cost$ 2 G | Defined$ You | NumCards$ 1 | SpellDescription$ Put the top card of your library into your graveyard.
-DeckHas:Ability$LifeGain
-Oracle:Whenever a land card is put into your graveyard from anywhere, you gain 1 life.\n{2}{G}: Put the top card of your library into your graveyard.
+A:AB$ Mill | Cost$ 2 G | Defined$ You | NumCards$ 1 | SpellDescription$ Mill a card.
+DeckHas:Ability$LifeGain & Ability$Graveyard
+Oracle:Whenever a land card is put into your graveyard from anywhere, you gain 1 life.\n{2}{G}: Mill a card.

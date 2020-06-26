@@ -2,7 +2,7 @@ Name:Overwhelmed Apprentice
 ManaCost:U
 Types:Creature Human Wizard
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each opponent puts the top two cards of their library into their graveyard. Then you scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each opponent mills two cards. Then you scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
-Oracle:When Overwhelmed Apprentice enters the battlefield, each opponent puts the top two cards of their library into their graveyard. Then you scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+Oracle:When Overwhelmed Apprentice enters the battlefield, each opponent mills two cards. Then you scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
