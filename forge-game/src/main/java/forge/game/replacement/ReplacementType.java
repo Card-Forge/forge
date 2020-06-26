@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public enum ReplacementType {
     AddCounter(ReplaceAddCounter.class),
+    Attached(ReplaceAttached.class),
     Counter(ReplaceCounter.class),
     CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
