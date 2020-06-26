@@ -3019,6 +3019,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, entity));
 
+        // Run replacement effects
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.AttachTarget, entity);
+        getGame().getReplacementHandler().run(ReplacementType.Attached, repParams);
+
         // run trigger
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.AttachSource, this);
