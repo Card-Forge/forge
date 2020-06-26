@@ -1231,9 +1231,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
-                    final String[] characteristics = characteristic.split(",");
-                    if (source.isValid(characteristics, this, null, null)) {
-                        return true;
+                    if (characteristic.startsWith("Player")) {
+                        // Protection:PlayerUID
+                        if (source.getController().isValid(characteristic, this, null, null)) {
+                            return true;
+                        }
+                    } else {
+                        final String[] characteristics = characteristic.split(",");
+                        if (source.isValid(characteristics, this, null, null)) {
+                            return true;
+                        }
                     }
                 } else if (kw.equals("Protection from everything")) {
                     return true;

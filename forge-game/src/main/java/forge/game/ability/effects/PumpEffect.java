@@ -11,6 +11,7 @@ import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -290,6 +291,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
+            } else if (defined.endsWith("Player")) {
+                PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
+                if (players.isEmpty()) return;
+                replaced = "PlayerUID_" + players.get(0).getId();
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
