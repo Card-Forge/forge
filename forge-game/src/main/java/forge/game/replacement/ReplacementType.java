@@ -21,6 +21,7 @@ public enum ReplacementType {
     DrawCards(ReplaceDrawCards.class),
     GainLife(ReplaceGainLife.class),
     GameLoss(ReplaceGameLoss.class),
+    Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
     SetInMotion(ReplaceSetInMotion.class),
