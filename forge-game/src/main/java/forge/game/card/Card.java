@@ -1629,7 +1629,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
                 if (keyword.startsWith("CantBeCounteredBy") || keyword.startsWith("Panharmonicon")
-                        || keyword.startsWith("Dieharmonicon")) {
+                        || keyword.startsWith("Dieharmonicon") || keyword.startsWith("Shrineharmonicon")) {
                     final String[] p = keyword.split(":");
                     sbLong.append(p[2]).append("\r\n");
                 } else if (keyword.startsWith("etbCounter")) {
@@ -4192,6 +4192,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isFortification()  { return getType().hasSubtype("Fortification"); }
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
     public final boolean isAura()           { return getType().hasSubtype("Aura"); }
+    public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
 
     public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     public final boolean isHistoric()   {return getType().isLegendary() || isArtifact() || getType().hasSubtype("Saga");}
