@@ -145,12 +145,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
-        return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional);
+    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
+        return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional, params);
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -158,13 +158,13 @@ public class PlayerControllerAi extends PlayerController {
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer);
+        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(
             FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
-            Player targetedPlayer) {
+            Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -172,7 +172,7 @@ public class PlayerControllerAi extends PlayerController {
 	List<T> selecteds = new ArrayList<>();
 	T selected;
 	do {
-	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
+	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
 	    if ( selected != null ) {
 		remaining.remove(selected);
 		selecteds.add(selected);
@@ -182,7 +182,23 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title,
+    public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            int num, Map<String, Object> params) {
+        List<SpellAbility> remaining = Lists.newArrayList(spells);
+        List<SpellAbility> selecteds = Lists.newArrayList();
+        SpellAbility selected;
+        do {
+            selected = chooseSingleSpellForEffect(remaining, sa, title, params);
+            if ( selected != null ) {
+                remaining.remove(selected);
+                selecteds.add(selected);
+            }
+        } while ( (selected != null ) && (selecteds.size() < num) );
+        return selecteds;
+    }
+
+    @Override
+    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
             Map<String, Object> params) {
         ApiType api = sa.getApi();
         if (null == api) {
@@ -208,15 +224,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
         }
-        if (triggerParams.containsKey("DelayedTrigger") || isMandatory) {
-            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker,
-            //      needs to be expanded when a more difficult cards comes up
+        if (wrapper.isMandatory()) {
             return true;
         }
         // Store/replace target choices more properly to get this SA cleared.
@@ -1216,7 +1230,7 @@ public class PlayerControllerAi extends PlayerController {
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
-        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = chosen.getPayCosts().copy();
 
         for (OptionalCostValue opt : optionalCostValues) {
             // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
@@ -1255,7 +1269,7 @@ public class PlayerControllerAi extends PlayerController {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         int chosenAmount = 0;
 
-        Cost costSoFar = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = sa.getPayCosts().copy();
 
         for (int i = 0; i < max; i++) {
             costSoFar.add(cost);

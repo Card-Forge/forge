@@ -1,0 +1,6 @@
+Name:Dog
+ManaCost:no cost
+PT:1/1
+Colors:green
+Types:Creature Dog
+Oracle:

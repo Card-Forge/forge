@@ -25,6 +25,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
@@ -262,22 +263,20 @@ public class DrawAi extends SpellAbilityAi {
                 // Draw up to max hand size but leave at least 3 in library
                 numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
 
-                if (sa.getPayCosts() != null) {
-                    if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
-                        // [Necrologia, Pay X Life : Draw X Cards]
-                        // Don't draw more than what's "safe" and don't risk a near death experience
-                        // Maybe would be better to check for "serious danger" and take more risk?
-                        while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
-                            numCards--;
-                        }
-                    } else if (sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
-                        // [e.g. Krav, the Unredeemed and other cases which say "Sacrifice X creatures: draw X cards]
-                        // TODO: Add special logic to limit/otherwise modify the ChosenX value here
+                if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
+                    // [Necrologia, Pay X Life : Draw X Cards]
+                    // Don't draw more than what's "safe" and don't risk a near death experience
+                    // Maybe would be better to check for "serious danger" and take more risk?
+                    while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                        numCards--;
+                    }
+                } else if (sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                    // [e.g. Krav, the Unredeemed and other cases which say "Sacrifice X creatures: draw X cards]
+                    // TODO: Add special logic to limit/otherwise modify the ChosenX value here
 
-                        // Skip this ability if nothing is to be chosen for sacrifice
-                        if (numCards <= 0) {
-                            return false;
-                        }
+                    // Skip this ability if nothing is to be chosen for sacrifice
+                    if (numCards <= 0) {
+                        return false;
                     }
                 }
 
@@ -350,7 +349,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
                 // try to make opponent lose to poison
                 // currently only Caress of Phyrexia
-                if (getPoison != null && oppA.canReceiveCounters(CounterType.POISON)) {
+                if (getPoison != null && oppA.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     if (oppA.getPoisonCounters() + numCards > 9) {
                         sa.getTargets().add(oppA);
                         return true;
@@ -394,7 +393,7 @@ public class DrawAi extends SpellAbilityAi {
                     }
                 }
 
-                if (getPoison != null && ai.canReceiveCounters(CounterType.POISON)) {
+                if (getPoison != null && ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     if (numCards + ai.getPoisonCounters() >= 8) {
                         aiTarget = false;
                     }
@@ -453,7 +452,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterType.POISON)) {
+                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     if (ally.getPoisonCounters() + numCards > 9) {
                         continue;
                     }

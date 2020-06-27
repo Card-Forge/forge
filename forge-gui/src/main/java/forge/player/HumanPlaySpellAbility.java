@@ -114,7 +114,7 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player
@@ -214,7 +214,7 @@ public class HumanPlaySpellAbility {
                     final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player");
+                            candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }

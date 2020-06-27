@@ -260,7 +260,7 @@ public class ReplacementHandler {
         chosenRE.setHasRun(false);
         hasRun.remove(chosenRE);
         chosenRE.setOtherChoices(null);
-        String message = chosenRE.toString();
+        String message = chosenRE.getDescription();
         if ( !StringUtils.isEmpty(message))
             if (chosenRE.getHostCard() != null) {
                 message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
@@ -336,7 +336,7 @@ public class ReplacementHandler {
             }
 
             Card cardForUi = host.getCardForUi();
-            String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", CardTranslation.getTranslatedName(cardForUi.getName()));
+            String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", CardTranslation.getTranslatedName(cardForUi.getName()));
             final String question = replacementEffect instanceof ReplaceDiscard
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), runParams.get(AbilityKey.Card).toString(), effectDesc)
                 : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), effectDesc);

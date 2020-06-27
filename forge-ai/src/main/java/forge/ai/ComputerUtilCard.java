@@ -1422,8 +1422,8 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                int poisonOrig = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
-                int poisonPumped = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
+                int poisonOrig = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
+                int poisonPumped = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
 
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
@@ -1446,7 +1446,7 @@ public class ComputerUtilCard {
                 }
                 if (pumpedDmg > dmg) {
                     if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterEnumType.POISON) && pumpedDmg >= opp.getPoisonCounters())
                             || ("PumpForTrample".equals(sa.getParam("AILogic")))) {
                         return true;
                     }
@@ -1474,7 +1474,7 @@ public class ComputerUtilCard {
                     if (totalPowerUnblocked >= opp.getLife()) {
                         return true;
                     } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost()) {
+                        if (sa.getPayCosts().hasNoManaCost()) {
                             return true; // always activate abilities which cost no mana and which can increase unblocked damage
                         }
                     }
@@ -1765,10 +1765,10 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
-        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
+        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterEnumType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterEnumType.M1M1) == 0) {
             return true;
         }
         return false;
@@ -1785,10 +1785,6 @@ public class ComputerUtilCard {
 
         for (Card c : otb) {
             for (SpellAbility sa : c.getSpellAbilities()) {
-                if (sa.getPayCosts() == null) {
-                    continue;
-                }
-
                 CostPayEnergy energyCost = sa.getPayCosts().getCostEnergy();
                 if (energyCost != null) {
                     int amount = energyCost.convertAmount();
@@ -1912,21 +1908,12 @@ public class ComputerUtilCard {
         }
         if (card.getSVar(needsToPlayVarName).length() > 0) {
             final String needsToPlay = card.getSVar(needsToPlayVarName);
-            int x = 0;
-            int y = 0;
             String sVar = needsToPlay.split(" ")[0];
             String comparator = needsToPlay.split(" ")[1];
             String compareTo = comparator.substring(2);
-            try {
-                x = Integer.parseInt(sVar);
-            } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
-            }
-            try {
-                y = Integer.parseInt(compareTo);
-            } catch (final NumberFormatException e) {
-                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
-            }
+            int x = AbilityUtils.calculateAmount(card, sVar, sa);
+            int y = AbilityUtils.calculateAmount(card, compareTo, sa);
+
             if (!Expressions.compare(x, comparator, y)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }

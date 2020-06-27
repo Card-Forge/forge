@@ -53,8 +53,9 @@ public class AbilityUtils {
         if ("ReplacedCounterType".equals(name)) {
             name = (String) sa.getReplacingObject(AbilityKey.CounterType);
         }
-        try {
+        //try {
             counterType = CounterType.getType(name);
+        /*
         } catch (Exception e) {
             String type = sa.getSVar(name);
             if (type.equals("")) {
@@ -66,6 +67,7 @@ public class AbilityUtils {
             }
             counterType = CounterType.getType(type);
         }
+        //*/
 
         return counterType;
     }
@@ -284,6 +286,8 @@ public class AbilityUtils {
                 list = sa.getRootAbility().getPaidList("ExiledCards");
             } else if (defined.startsWith("Exiled")) {
                 list = sa.getRootAbility().getPaidList("Exiled");
+            } else if (defined.startsWith("Milled")) {
+                list = sa.getRootAbility().getPaidList("Milled");
             } else if (defined.startsWith("TappedCards")) {
                 list = sa.getRootAbility().getPaidList("TappedCards");
             } else if (defined.startsWith("Tapped")) {
@@ -1344,7 +1348,7 @@ public class AbilityUtils {
         Player pl = sa.getActivatingPlayer();
         final Game game = pl.getGame();
 
-        if (sa.isTrigger() && sa.getParent() == null && sa.getPayCosts() != null) {
+        if (sa.isTrigger() && sa.getParent() == null) {
             // when trigger cost are paid before the effect does resolve, need to clean the trigger
             game.getTriggerHandler().resetActiveTriggers();
         }

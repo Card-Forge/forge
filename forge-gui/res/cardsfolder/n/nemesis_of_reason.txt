@@ -2,8 +2,7 @@ Name:Nemesis of Reason
 ManaCost:3 U B
 Types:Creature Leviathan Horror
 PT:3/7
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, defending player puts the top ten cards of their library into their graveyard.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, defending player mills ten cards.
 SVar:TrigMill:DB$ Mill | Defined$ DefendingPlayer | NumCards$ 10
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_of_reason.jpg
-Oracle:Whenever Nemesis of Reason attacks, defending player puts the top ten cards of their library into their graveyard.
+Oracle:Whenever Nemesis of Reason attacks, defending player mills ten cards.

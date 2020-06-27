@@ -36,7 +36,7 @@ public class MeldEffect extends SpellAbilityEffect {
             return;
         }
 
-        Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"));
+        Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
         secondary = game.getAction().exile(secondary, sa);
 

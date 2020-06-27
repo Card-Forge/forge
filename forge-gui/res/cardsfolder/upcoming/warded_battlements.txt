@@ -1,0 +1,7 @@
+Name:Warded Battlements
+ManaCost:2 W
+Types:Creature Wall
+PT:0/3
+K:Defender
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
+Oracle:Defender (This creature can't attack.)\nAttacking creatures you control get +1/+0.

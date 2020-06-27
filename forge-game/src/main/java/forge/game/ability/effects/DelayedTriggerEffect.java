@@ -46,10 +46,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
 
-        if (sa.hasParam("CopyTriggeringObjects")) {
-            delTrig.setStoredTriggeredObjects(sa.getTriggeringObjects());
-        }
-
         if (triggerRemembered != null) {
             for (final String rem : triggerRemembered.split(",")) {
                 for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), rem, sa)) {
@@ -78,6 +74,11 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             if (ApiType.SetState == overridingSA.getApi()) {
                 overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));
             }
+
+            if (sa.hasParam("CopyTriggeringObjects")) {
+                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
+            }
+
             delTrig.setOverridingAbility(overridingSA);
         }
         final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();

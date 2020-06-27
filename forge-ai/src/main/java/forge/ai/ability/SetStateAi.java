@@ -248,7 +248,7 @@ public class SetStateAi extends SpellAbilityAi {
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
 
                 // for legendary KI counter creatures
-                if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
+                if (othercard.getCounters(CounterEnumType.KI) >= source.getCounters(CounterEnumType.KI)) {
                     // if the other legendary is useless try to replace it
                     return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }

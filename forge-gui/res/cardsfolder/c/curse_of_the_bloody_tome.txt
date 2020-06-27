@@ -2,8 +2,7 @@ Name:Curse of the Bloody Tome
 ManaCost:2 U
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 U| ValidTgts$ Player | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of enchanted player's upkeep, that player mills two cards.
 SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_bloody_tome.jpg
-Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.
+Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player mills two cards.

@@ -1,7 +1,6 @@
 Name:Countermand
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller puts the top four cards of their library into their graveyard.
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller mills four cards.
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ TargetedController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/countermand.jpg
-Oracle:Counter target spell. Its controller puts the top four cards of their library into their graveyard.
+Oracle:Counter target spell. Its controller mills four cards.

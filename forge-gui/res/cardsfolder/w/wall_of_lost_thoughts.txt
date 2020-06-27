@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Wall
 PT:0/4
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top four cards of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
-Oracle:Defender\nWhen Wall of Lost Thoughts enters the battlefield, target player puts the top four cards of their library into their graveyard.
+Oracle:Defender\nWhen Wall of Lost Thoughts enters the battlefield, target player mills four cards.

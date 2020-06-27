@@ -442,16 +442,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean costHasX() {
-        if (getPayCosts() == null) {
-            return false;
-        }
         return getPayCosts().hasXInAnyCostPart();
     }
 
     public boolean costHasManaX() {
-        if (getPayCosts() == null) {
-            return false;
-        }
         if (getPayCosts().hasNoManaCost()) {
             return false;
         }
@@ -882,7 +876,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         try {
             clone = (SpellAbility) clone();
             clone.id = lki ? id : nextId();
-            clone.view = new SpellAbilityView(clone);
+            clone.view = new SpellAbilityView(clone, lki || host.getGame() == null ? null : host.getGame().getTracker());
 
             // don't use setHostCard to not trigger the not copied parts yet
 
@@ -890,9 +884,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
-            if (getPayCosts() != null) {
-                clone.setPayCosts(getPayCosts().copy());
-            }
+            clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(host, mapParams);
             }
@@ -1006,7 +998,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isMandatory() {
-        return false;
+        return isTrigger() && !isOptionalTrigger();
     }
 
     public final boolean canTarget(final GameObject entity) {
@@ -1104,6 +1096,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
                 if (soFar > tr.getMaxTotalCMC(getHostCard(), this)) {
                     return false;
+                }
+            }
+
+            if (tr.isSameController()) {
+                Player newController;
+                if (entity instanceof Card) {
+                    newController = ((Card) entity).getController();
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.getController().equals(newController))
+                            return false;
+                    }
                 }
             }
 
@@ -1422,16 +1425,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         int maxTargets = getTargetRestrictions().getMaxTargets(hostCard, this);
         int numTargets = getTargets().getNumTargeted();
 
-        if (maxTargets == 0 && this.getPayCosts() != null
-                && this.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
-                && this.hasSVar(this.getParam("TargetMax"))
-                && this.getSVar(this.getParam("TargetMax")).startsWith("Count$CardCounters")
-                && this.getHostCard() != null && this.getHostCard().hasSVar("CostCountersRemoved")) {
+        if (maxTargets == 0 && getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
+                && hasSVar(getParam("TargetMax"))
+                && getSVar(getParam("TargetMax")).startsWith("Count$CardCounters")
+                && getHostCard() != null && getHostCard().hasSVar("CostCountersRemoved")) {
             // TODO: Current AI implementation removes the counters during payment before the
             // ability is added to stack, resulting in maxTargets=0 at this point. We are
             // assuming here that the AI logic specified a legal number, and that number ended
             // up being in CostCountersRemoved that is created on the card during payment.
-            maxTargets = Integer.parseInt(this.getHostCard().getSVar("CostCountersRemoved"));
+            maxTargets = Integer.parseInt(getHostCard().getSVar("CostCountersRemoved"));
         }
 
         return minTargets <= numTargets && maxTargets >= numTargets;
@@ -1775,9 +1777,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             targetRestrictions.applyTargetTextChanges(this);
         }
 
-        if (getPayCosts() != null) {
-            getPayCosts().applyTextChangeEffects(this);
-        }
+        getPayCosts().applyTextChangeEffects(this);
 
         stackDescription = AbilityUtils.applyDescriptionTextChangeEffects(originalStackDescription, this);
         description = AbilityUtils.applyDescriptionTextChangeEffects(originalDescription, this);

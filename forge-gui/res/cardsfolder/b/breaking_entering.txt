@@ -1,11 +1,10 @@
 Name:Breaking
 ManaCost:U B
-AlternateMode: Split
+AlternateMode:Split
 Types:Sorcery
 K:Fuse
-A:SP$ Mill | Cost$ U B | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top eight cards of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/breaking_entering.jpg
-Oracle:Target player puts the top eight cards of their library into their graveyard.\nFuse (You may cast one or both halves of this card from your hand.)
+A:SP$ Mill | Cost$ U B | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills eight cards.
+Oracle:Target player mills eight cards.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE
 

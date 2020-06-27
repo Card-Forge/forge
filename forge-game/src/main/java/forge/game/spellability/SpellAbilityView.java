@@ -8,6 +8,7 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 
 public class SpellAbilityView extends TrackableObject implements IHasCardView {
     private static final long serialVersionUID = 2514234930798754769L;
@@ -25,7 +26,10 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
     }
 
     SpellAbilityView(final SpellAbility sa) {
-        super(sa.getId(), sa.getHostCard() == null || sa.getHostCard().getGame() == null ? null : sa.getHostCard().getGame().getTracker());
+        this(sa, sa.getHostCard() == null || sa.getHostCard().getGame() == null ? null : sa.getHostCard().getGame().getTracker());
+    }
+    SpellAbilityView(final SpellAbility sa, Tracker tracker) {
+        super(sa.getId(), tracker);
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);

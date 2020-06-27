@@ -4,4 +4,4 @@ Order:101
 Subtype:Standard
 Type:Sanctioned
 Sets:GRN, RNA, WAR, M20, ELD, THB, IKO
-Banned:Field of the Dead; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
+Banned:Agent of Treachery; Field of the Dead; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

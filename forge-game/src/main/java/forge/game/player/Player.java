@@ -114,7 +114,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private CardCollection sacrificedThisTurn = new CardCollection();
 
-    private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newEnumMap(CounterType.class);
+    private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newHashMap();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -254,6 +254,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         // gameAction moveTo ?
         game.getAction().moveTo(ZoneType.Command, activeScheme, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
+        game.getTriggerHandler().registerActiveTrigger(activeScheme, false);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -544,17 +546,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canPayEnergy(final int energyPayment) {
-        int cnt = getCounters(CounterType.ENERGY);
+        int cnt = getCounters(CounterEnumType.ENERGY);
         return cnt >= energyPayment;
     }
 
     public final int loseEnergy(int lostEnergy) {
-        int cnt = getCounters(CounterType.ENERGY);
+        int cnt = getCounters(CounterEnumType.ENERGY);
         if (lostEnergy > cnt) {
             return -1;
         }
         cnt -= lostEnergy;
-        this.setCounters(CounterType.ENERGY, cnt, true);
+        this.setCounters(CounterEnumType.ENERGY, cnt, true);
         return cnt;
     }
 
@@ -909,12 +911,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
-        if (!canReceiveCounters(counterType)) {
-            return 0;
-        }
-
         int addAmount = n;
-        if (addAmount <= 0) {
+        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // Can't add negative or 0 counters, bail out now
             return 0;
         }
@@ -934,6 +932,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             default:
                 return 0;
+        }
+        if (addAmount <= 0) {
+            // Can't add negative or 0 counters, bail out now
+            return 0;
         }
 
         final int oldValue = getCounters(counterType);
@@ -985,6 +987,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
+    public void setCounters(final CounterEnumType counterType, final Integer num, boolean fireEvents) {
+        this.setCounters(CounterType.get(counterType), num, fireEvents);
+    }
+
     public void setCounters(final CounterType counterType, final Integer num, boolean fireEvents) {
         Integer old = getCounters(counterType);
         setCounters(counterType, num);
@@ -1003,26 +1009,26 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // TODO Merge These calls into the primary counter calls
     public final int getPoisonCounters() {
-        return getCounters(CounterType.POISON);
+        return getCounters(CounterEnumType.POISON);
     }
     public final void setPoisonCounters(final int num, Card source) {
-        int oldPoison = getCounters(CounterType.POISON);
-        setCounters(CounterType.POISON, num, true);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        setCounters(CounterEnumType.POISON, num, true);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
     public final void addPoisonCounters(final int num, final Card source, GameEntityCounterTable table) {
-        int oldPoison = getCounters(CounterType.POISON);
-        addCounter(CounterType.POISON, num, source.getController(), false, true, table);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        addCounter(CounterEnumType.POISON, num, source.getController(), false, true, table);
 
-        if (oldPoison != getCounters(CounterType.POISON)) {
+        if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
     public final void removePoisonCounters(final int num, final Card source) {
-        int oldPoison = getCounters(CounterType.POISON);
-        subtractCounter(CounterType.POISON, num);
+        int oldPoison = getCounters(CounterEnumType.POISON);
+        subtractCounter(CounterEnumType.POISON, num);
 
-        if (oldPoison != getCounters(CounterType.POISON)) {
+        if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
@@ -1225,9 +1231,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
-                    final String[] characteristics = characteristic.split(",");
-                    if (source.isValid(characteristics, this, null, null)) {
-                        return true;
+                    if (characteristic.startsWith("Player")) {
+                        // Protection:PlayerUID
+                        if (source.getController().isValid(characteristic, this, null, null)) {
+                            return true;
+                        }
+                    } else {
+                        final String[] characteristics = characteristic.split(",");
+                        if (source.isValid(characteristics, this, null, null)) {
+                            return true;
+                        }
                     }
                 } else if (kw.equals("Protection from everything")) {
                     return true;
@@ -1656,10 +1669,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         return notes.get(notedFor);
     }
 
-    public final CardCollectionView mill(final int n, final ZoneType destination,
+    public final CardCollectionView mill(int n, final ZoneType destination,
             final boolean bottom, SpellAbility sa, CardZoneTable table) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
         final CardCollection milled = new CardCollection();
+
+        // Replacement effects
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+        repRunParams.put(AbilityKey.Number, n);
+        
+        if (destination == ZoneType.Graveyard && !bottom) {
+            switch (getGame().getReplacementHandler().run(ReplacementType.Mill, repRunParams)) {
+                case NotReplaced:
+                    break;
+                case Updated:
+                    // check if this is still the affected player
+                    if (this.equals(repRunParams.get(AbilityKey.Affected))) {
+                        n = (int) repRunParams.get(AbilityKey.Number);
+                    } else {
+                        return milled;
+                    }
+                    break;
+                default:
+                    return milled;
+            }
+        }
 
         final int max = Math.min(n, lib.size());
 
@@ -1989,7 +2023,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        if (getCounters(CounterType.POISON) >= 10) {
+        if (getCounters(CounterEnumType.POISON) >= 10) {
             return loseConditionMet(GameLossReason.Poisoned, null);
         }
 
@@ -2867,7 +2901,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
     }
-    
+
     public boolean allCardsUniqueManaSymbols() {
         for (final Card c : getCardsIn(ZoneType.Library)) {
             Set<CardStateName> cardStateNames = c.isSplitCard() ?  EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit) : EnumSet.of(CardStateName.Original);
@@ -2958,16 +2992,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        Card firstCompanion = legalCompanions.get(0);
-        SpellAbility fakeSa = AbilityFactory.getAbility(
-                AbilityFactory.AbilityRecordType.Spell,
-                ApiType.CompanionChoose,
-                new HashMap<>(),
-                firstCompanion.getFirstSpellAbility().getPayCosts(),
-                firstCompanion,
-                null
-        );
-        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true);
+        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose, null, this);
+        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
@@ -3067,7 +3093,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void createMonarchEffect() {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {
-            monarchEffect = new Card(game.nextCardId(), null, false, game);
+            monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
             monarchEffect.setImageKey("t:monarch");
             monarchEffect.setName("The Monarch");
@@ -3163,7 +3189,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
 
         if(bless) {
-            blessingEffect = new Card(game.nextCardId(), null, false, game);
+            blessingEffect = new Card(game.nextCardId(), null, game);
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
             blessingEffect.setName("City's Blessing");
@@ -3257,7 +3283,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final PlayerZone com = getZone(ZoneType.Command);
 
-        keywordEffect = new Card(game.nextCardId(), null, false, game);
+        keywordEffect = new Card(game.nextCardId(), null, game);
         keywordEffect.setImmutable(true);
         keywordEffect.setOwner(this);
         keywordEffect.setName("Keyword Effects");

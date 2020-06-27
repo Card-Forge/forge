@@ -2,11 +2,13 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
@@ -127,7 +129,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 // into battlefield attacking only should work if you are the attacking player
                 if (combat.getAttackingPlayer().equals(controller)) {
                     final FCollectionView<GameEntity> defs = combat.getDefenders();
-                    defender = controller.getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false);
+                    Map<String, Object> params = Maps.newHashMap();
+                    params.put("Attacker", c);
+                    defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
+                            Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
                 }
             } else {
                 defender = Iterables.getFirst(AbilityUtils.getDefinedEntities(host, attacking, sa), null);

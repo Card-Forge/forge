@@ -1,0 +1,7 @@
+Name:Masked Blackguard
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/1
+K:Flash
+A:AB$ Pump | Cost$ 2 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\n{2}{B}: Masked Blackguard gets +1/+1 until end of turn.

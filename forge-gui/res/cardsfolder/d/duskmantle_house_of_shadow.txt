@@ -2,6 +2,5 @@ Name:Duskmantle, House of Shadow
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mill | Cost$ U B T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ EndOfOppTurn | SpellDescription$ Target player puts the top card of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Duskmantle_House_of_Shadow.jpg
-Oracle:{T}: Add {C}.\n{U}{B}, {T}: Target player puts the top card of their library into their graveyard.
+A:AB$ Mill | Cost$ U B T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills a card.
+Oracle:{T}: Add {C}.\n{U}{B}, {T}: Target player mills a card.

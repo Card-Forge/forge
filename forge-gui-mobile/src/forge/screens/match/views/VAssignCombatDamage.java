@@ -27,7 +27,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.card.CardZoom;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
@@ -445,7 +445,7 @@ public class VAssignCombatDamage extends FDialog {
         if (source == null) {
             if (defender instanceof PlayerView) {
                 PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? MatchController.instance.getGameView().getPoisonCountersToLose() - p.getCounters(CounterType.POISON) : p.getLife();
+                lethalDamage = attackerHasInfect ? MatchController.instance.getGameView().getPoisonCountersToLose() - p.getCounters(CounterEnumType.POISON) : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;

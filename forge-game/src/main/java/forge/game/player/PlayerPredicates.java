@@ -7,6 +7,7 @@ import com.google.common.base.Predicates;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -101,6 +102,14 @@ public final class PlayerPredicates {
                 return p.getCounters(type) >= n;
             }
         };
+    }
+
+    public static final Predicate<Player> hasCounter(final CounterEnumType type) {
+        return hasCounter(CounterType.get(type), 1);
+    }
+
+    public static final Predicate<Player> hasCounter(final CounterEnumType type, final int n) {
+        return hasCounter(CounterType.get(type), n);
     }
     
     public static final Predicate<Player> hasKeyword(final String keyword) {

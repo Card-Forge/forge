@@ -47,10 +47,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), sa.isIntrinsic());
 
-        if (sa.hasParam("CopyTriggeringObjects")) {
-            immediateTrig.setStoredTriggeredObjects(sa.getTriggeringObjects());
-        }
-
         // Need to copy paid costs
 
         if (triggerRemembered != null) {
@@ -73,6 +69,11 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
             SpellAbility overridingSA = sa.getAdditionalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
+
+            if (sa.hasParam("CopyTriggeringObjects")) {
+                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
+            }
+
             immediateTrig.setOverridingAbility(overridingSA);
         }
         final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();

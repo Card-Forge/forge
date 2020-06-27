@@ -1,0 +1,8 @@
+Name:Spined Megalodon
+ManaCost:5 U U
+Types:Creature Shark
+PT:5/7
+K:Hexproof
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever Spined Megalodon attacks, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

@@ -1,0 +1,6 @@
+Name:Forgotten Sentinel
+ManaCost:4
+Types:Artifact Creature Golem
+PT:4/3
+K:CARDNAME enters the battlefield tapped.
+Oracle:Forgotten Sentinel enters the battlefield tapped.

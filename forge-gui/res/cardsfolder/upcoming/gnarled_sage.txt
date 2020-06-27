@@ -1,0 +1,8 @@
+Name:Gnarled Sage
+ManaCost:3 G G
+Types:Creature Treefolk Druid
+PT:4/4
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 2 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME gets +0/+2 and has vigilance as long as you've drawn two or more cards this turn.
+SVar:X:Count$YouDrewThisTurn
+Oracle:Reach (This creature can block creatures with flying.)\nAs long as you've drawn two or more cards this turn, Gnarled Sage gets +0/+2 and has vigilance. (Attacking doesn't cause it to tap.)

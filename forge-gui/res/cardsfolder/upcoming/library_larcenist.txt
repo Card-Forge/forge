@@ -1,0 +1,7 @@
+Name:Library Larcenist
+ManaCost:2 U
+Types:Creature Merfolk Rogue
+PT:1/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Whenever Library Larcenist attacks, draw a card.

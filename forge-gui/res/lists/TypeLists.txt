@@ -66,6 +66,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
@@ -110,7 +111,6 @@ Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
 Horse:Horses
-Hound:Hounds
 Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
@@ -290,6 +290,7 @@ Aminatou
 Angrath
 Arlinn
 Ashiok
+Basri
 Bolas
 Calix
 Chandra

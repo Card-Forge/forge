@@ -21,7 +21,7 @@ import com.google.common.base.Strings;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -89,7 +89,7 @@ public class CostPayEnergy extends CostPart {
             }
         }
 
-        return payer.getCounters(CounterType.ENERGY) >= amount;
+        return payer.getCounters(CounterEnumType.ENERGY) >= amount;
     }
 
     @Override

@@ -1,7 +1,7 @@
 Name:Ongoing Investigation
 ManaCost:1 U
 Types:Enchantment
-T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBInvestigate | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 A:AB$ Investigate | Cost$ 1 G ExileFromGrave<1/Creature> | SubAbility$ DBGainLife | SpellDescription$ Investigate. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2

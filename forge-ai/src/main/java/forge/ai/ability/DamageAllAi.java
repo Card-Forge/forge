@@ -6,7 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -39,7 +39,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (!ai.getGame().getStack().isEmpty()) {
             return false;
         }
-        
+
         int x = -1;
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
@@ -50,10 +50,9 @@ public class  DamageAllAi extends SpellAbilityAi {
             x = ComputerUtilMana.determineLeftoverMana(sa, ai);
         }
         if (damage.equals("ChosenX")) {
-            x = source.getCounters(CounterType.LOYALTY);
+            x = source.getCounters(CounterEnumType.LOYALTY);
         }
         if (x == -1) {
-            Player bestOpp = determineOppToKill(ai, sa, source, dmg);
             if (determineOppToKill(ai, sa, source, dmg) != null) {
                 // we already know we can kill a player, so go for it
                 return true;
@@ -138,7 +137,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         int minGain = 200; // The minimum gain in destroyed creatures
-        if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
+        if (sa.getPayCosts().isReusuableResource()) {
             if (computerList.isEmpty()) {
                 minGain = 10; // nothing to lose
                 // no creatures to lose and player can be damaged

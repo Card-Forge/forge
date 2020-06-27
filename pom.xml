@@ -368,7 +368,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.codehaus.mojo</groupId>
                                         <artifactId>build-helper-maven-plugin</artifactId>
-                                        <versionRange>[1.8,)</versionRange>
+                                        <versionRange>[3.1,)</versionRange>
                                         <goals>
                                             <goal>released-version</goal>
                                             <goal>parse-version</goal>

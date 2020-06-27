@@ -584,9 +584,9 @@ public class TrackableTypes {
         public Map<CounterType, Integer> deserialize(TrackableDeserializer td, Map<CounterType, Integer> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<CounterType, Integer> map = Maps.newEnumMap(CounterType.class);
+                Map<CounterType, Integer> map = Maps.newHashMap();
                 for (int i = 0; i < size; i++) {
-                    map.put(CounterType.valueOf(td.readString()), td.readInt());
+                    map.put(CounterType.getType(td.readString()), td.readInt());
                 }
                 return map;
             }
@@ -597,7 +597,7 @@ public class TrackableTypes {
         public void serialize(TrackableSerializer ts, Map<CounterType, Integer> value) {
             ts.write(value.size());
             for (Entry<CounterType, Integer> entry : value.entrySet()) {
-                ts.write(entry.getKey().name());
+                ts.write(entry.getKey().toString());
                 ts.write(entry.getValue());
             }
         }

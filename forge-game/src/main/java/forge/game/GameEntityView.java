@@ -24,6 +24,12 @@ public abstract class GameEntityView extends TrackableObject {
         return collection;
     }
 
+    public static <T extends GameEntity, V extends GameEntityView> GameEntityViewMap<T, V> getMap(Iterable<T> spabs) {
+        GameEntityViewMap<T, V> gameViewCache = new GameEntityViewMap<T, V>();
+        gameViewCache.putAll(spabs);
+        return gameViewCache;
+    }
+
     protected GameEntityView(final int id0, final Tracker tracker) {
         super(id0, tracker);
     }

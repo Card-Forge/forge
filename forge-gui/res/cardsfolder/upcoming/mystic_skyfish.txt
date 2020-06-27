@@ -1,0 +1,7 @@
+Name:Mystic Skyfish
+ManaCost:2 U
+Types:Creature Fish
+PT:3/1
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you draw your second card each turn, CARDNAME gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+Oracle:Whenever you draw your second card each turn, Mystic Skyfish gains flying until end of turn.

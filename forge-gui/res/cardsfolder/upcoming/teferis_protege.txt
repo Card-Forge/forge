@@ -1,0 +1,8 @@
+Name:Teferi's Protege
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/3
+A:AB$ Draw | Cost$ 1 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:{1}{U}, {T}: Draw a card, then discard a card.

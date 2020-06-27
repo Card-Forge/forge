@@ -36,7 +36,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
@@ -180,6 +179,10 @@ public class GameAction {
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
+
+            if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
+                copied.clearCounters();
+            }
         } else {
             // if from Battlefield to Graveyard and Card does exist in LastStateBattlefield
             // use that instead
@@ -228,16 +231,13 @@ public class GameAction {
                 for (final StaticAbility sa : copied.getStaticAbilities()) {
                     sa.setHostCard(copied);
                 }
-                if (c.getName().equals("Skullbriar, the Walking Grave")) {
-                    copied.setCounters(c.getCounters());
-                }
-
-                // ensure that any leftover keyword/type changes are cleared in the state view
-                copied.updateStateForView();
             } else { //Token
                 copied = c;
             }
         }
+
+        // ensure that any leftover keyword/type changes are cleared in the state view
+        copied.updateStateForView();
 
         // Clean up temporary variables such as Sunburst value or announced PayX value
         if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
@@ -419,13 +419,6 @@ public class GameAction {
 
         if (zoneFrom == null) {
             return copied;
-        }
-
-        // remove all counters from the card if destination is not the battlefield
-        // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) ||
-                (!toBattlefield && !c.getName().equals("Skullbriar, the Walking Grave")))) {
-            copied.clearCounters();
         }
 
         if (!c.isToken() && !toBattlefield) {
@@ -1030,8 +1023,10 @@ public class GameAction {
 
                 checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
-                if (c.getCounters(CounterType.DREAM) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(CounterType.DREAM,  c.getCounters(CounterType.DREAM) - 7);
+                final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
+
+                if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
                     checkAgain = true;
                 }
             }
@@ -1123,7 +1118,7 @@ public class GameAction {
         if (!c.canBeSacrificed()) {
             return false;
         }
-        if (c.getCounters(CounterType.LORE) < c.getFinalChapterNr()) {
+        if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
         if (!game.getStack().hasSimultaneousStackEntries() &&
@@ -1164,16 +1159,18 @@ public class GameAction {
 
     private boolean stateBasedAction704_5r(Card c) {
         boolean checkAgain = false;
-        int plusOneCounters = c.getCounters(CounterType.P1P1);
-        int minusOneCounters = c.getCounters(CounterType.M1M1);
+        final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
+        final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
+        int plusOneCounters = c.getCounters(p1p1);
+        int minusOneCounters = c.getCounters(m1m1);
         if (plusOneCounters > 0 && minusOneCounters > 0) {
             int remove = Math.min(plusOneCounters, minusOneCounters);
             // If a permanent has both a +1/+1 counter and a -1/-1 counter on it,
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
             // smaller of the number of +1/+1 and -1/-1 counters on it.
             // This should fire remove counters trigger
-            c.subtractCounter(CounterType.P1P1, remove);
-            c.subtractCounter(CounterType.M1M1, remove);
+            c.subtractCounter(p1p1, remove);
+            c.subtractCounter(m1m1, remove);
             checkAgain = true;
         }
         return checkAgain;
@@ -1294,7 +1291,7 @@ public class GameAction {
         //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create(); // Not used as of Ixalan
 
         for (Card c : list) {
-            if (c.getCounters(CounterType.LOYALTY) <= 0) {
+            if (c.getCounters(CounterEnumType.LOYALTY) <= 0) {
                 sacrificeDestroy(c, null, table);
                 // Play the Destroy sound
                 game.fireEvent(new GameEventCardDestroyed());
@@ -1354,7 +1351,8 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
+            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, null, p),
+                    "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             for (Card c: cc) {
                 if (c != toKeep) {
                     sacrificeDestroy(c, null, table);

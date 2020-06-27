@@ -3,8 +3,7 @@ ManaCost:3 U U
 Types:Legendary Creature Kirin Spirit
 PT:4/4
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may have target player put the top X cards of their library into their graveyard, where X is that spell's converted mana cost.
-SVar:TrigMill:DB$Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | References$ X
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's converted mana cost.
+SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | References$ X
 SVar:X:TriggerCount$CastSACMC
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudhoof_kirin.jpg
-Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may have target player put the top X cards of their library into their graveyard, where X is that spell's converted mana cost.
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's converted mana cost.

@@ -88,7 +88,6 @@ public class LifeGainAi extends SpellAbilityAi {
         if (lifeCritical
                 && sa.isAbility()
                 && sa.getHostCard() != null && sa.getHostCard().isCreature()
-                && sa.getPayCosts() != null
                 && (sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class) || sa.getPayCosts().hasSpecificCostType(CostSacrifice.class))) {
             if (!game.getStack().isEmpty()) {
                 SpellAbility saTop = game.getStack().peekAbility();

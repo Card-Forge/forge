@@ -1,0 +1,7 @@
+Name:Animal Sanctuary
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Bird,Cat,Dog,Goat,Ox,Snake | TgtPrompt$ Select target Bird, Cat, Dog, Goat, Ox, or Snake | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target Bird, Cat, Dog, Goat, Ox, or Snake.
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}.\n{2}, {T}: Put a +1/+1 counter on target Bird, Cat, Dog, Goat, Ox, or Snake.

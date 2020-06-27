@@ -148,17 +148,11 @@ public class TriggerChangesZone extends Trigger {
                 return false;
             }
 
-            final Card card;
-            final int rightSide;
-            try {
-                card = (Card) runParams.get(AbilityKey.Card);
-                rightSide = Integer.parseInt(cond.substring(2));
-            } catch (NumberFormatException | ClassCastException e) {
-                return false;
-            }
+            final Card card = (Card) runParams.get(AbilityKey.Card);
             if (card == null) {
                 return false;
             }
+            final int rightSide = AbilityUtils.calculateAmount(getHostCard(), cond.substring(2), this);
 
             // need to check the ChangeZone LKI copy for damage, otherwise it'll return 0 for a new object in the new zone
             Card lkiCard = card.getGame().getChangeZoneLKIInfo(card);

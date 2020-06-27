@@ -8,7 +8,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -125,7 +125,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, p, true, table);
+                    tgt.addCounter(CounterEnumType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);

@@ -1,0 +1,6 @@
+Name:Kaervek, the Spiteful
+ManaCost:2 B B
+Types:Legendary Creature Human Warlock
+PT:3/2
+S:Mode$ Continuous | Affected$ Creature.Other | AddPower$ -1 | AddToughness$ -1 | Description$ Other creatures get -1/-1.
+Oracle:Other creatures get -1/-1.

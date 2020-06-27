@@ -2,8 +2,8 @@ Name:Glowspore Shaman
 ManaCost:B G
 Types:Creature Elf Shaman
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top three cards of your library into your graveyard. You may put a land card from your graveyard on top of your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a land card from your graveyard on top of your library.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | OptionalDecider$ You | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Hidden$ True | Optional$ True
 DeckHas:Ability$Graveyard
-Oracle:When Glowspore Shaman enters the battlefield, put the top three cards of your library into your graveyard. You may put a land card from your graveyard on top of your library.
+Oracle:When Glowspore Shaman enters the battlefield, mill three cards. You may put a land card from your graveyard on top of your library.
