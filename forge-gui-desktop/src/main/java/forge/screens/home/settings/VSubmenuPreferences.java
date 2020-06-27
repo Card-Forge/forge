@@ -77,6 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
     private final JCheckBox cbSideboardForAI = new OptionsCheckBox(localizer.getMessage("cbSideboardForAI"));
     private final JCheckBox cbPerformanceMode = new OptionsCheckBox(localizer.getMessage("cbPerformanceMode"));
+    private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
@@ -369,8 +370,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAltSoundSystem, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAltSoundSystem")), descriptionConstraints);
-
-
+        pnlPrefs.add(cbSROptimize, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSrOptimize")), descriptionConstraints);
         // Keyboard shortcuts
         pnlPrefs.add(new SectionLabel(localizer.getMessage("KeyboardShortcuts")), sectionConstraints);
 
@@ -765,6 +766,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbAltSoundSystem;
     }
 
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSROptimize() {
+        return cbSROptimize;
+    }
+    
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTimedTargOverlay() {
         return cbTimedTargOverlay;
