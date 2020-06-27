@@ -26,6 +26,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
@@ -618,10 +619,29 @@ public class TriggerHandler {
 
     private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams, final Player p) {
         Card host = t.getHostCard();
+        int n = 0;
+
+        // Sanctum of All
+        if (host.isShrine() && host.isInZone(ZoneType.Battlefield) && p.equals(host.getController())) {
+            int shrineCount = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Shrine"));
+            if (shrineCount >= 6) {
+                for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                    for (final KeywordInterface ki : ck.getKeywords()) {
+                        final String kw = ki.getOriginal();
+                        if (kw.startsWith("Shrineharmonicon")) {
+                            final String valid = kw.split(":")[1];
+                            if (host.isValid(valid.split(","), p, ck, null)) {
+                                n++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         // not a changesZone trigger or changesZoneAll
         if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
-            return 0;
+            return n;
         }
 
         // leave battlefield trigger, might be dying
@@ -636,7 +656,6 @@ public class TriggerHandler {
             return 0;
         }
 
-        int n = 0;
         if (t.getMode() == TriggerType.ChangesZone) {
             // iterate over all cards
             final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
