@@ -6,6 +6,6 @@ SVar:DBCounterSpell:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDes
 SVar:DBCounterAbility:DB$ Counter | TargetType$ Activated,Triggered | ValidTgts$ Card | TgtPrompt$ Select target Activated or Triggered Ability | SpellDescription$ Counter target activated or triggered ability.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ Good | SpellDescription$ Return target nonland permanent to its owner's hand.
 SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
 DeckHas:Ability$Token
 Oracle:Choose one or more —\n• Counter target spell\n• Counter target activated or triggered ability.\n• Return target nonland permanent to its owner's hand.\n• Create a token that's a copy of target creature you control.\n• Target player draws a card.
