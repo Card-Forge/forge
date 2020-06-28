@@ -1,8 +1,8 @@
 Name:Vance's Blasting Cannons
 ManaCost:3 R
 Types:Legendary Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. If it's a nonland card, you may cast that card this turn.
-SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. If it's a nonland card, you may cast that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ConditionDefined$ RememberedCard | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast the remembered nonland card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,7 +10,6 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | AILogic$ Always
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vances_blasting_cannons.jpg
 Oracle:At the beginning of your upkeep, exile the top card of your library. If it's a nonland card, you may cast that card this turn.\nWhenever you cast your third spell in a turn, you may transform Vance's Blasting Cannons.
 
 ALTERNATE
@@ -20,5 +19,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SpellDescription$ Add {R}.
 A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spitfire_bastion.jpg
 Oracle:(Transforms from Vance's Blasting Cannons.)\n{T}: Add {R}.\n{2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.
