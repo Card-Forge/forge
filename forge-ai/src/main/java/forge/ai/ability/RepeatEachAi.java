@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -45,21 +44,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             List<Player> opponents = aiPlayer.getOpponents();
             for(Player opp : opponents) {
                 if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
-                    return false;
-                }
-            }
-        } else if ("GainControlOwns".equals(logic)) {
-            List<Card> list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.isCreature() && !crd.getController().equals(crd.getOwner());
-                }
-            });
-            if (list.isEmpty()) {
-                return false;
-            }
-            for (final Card c : list) {
-                if (aiPlayer.equals(c.getController())) {
                     return false;
                 }
             }

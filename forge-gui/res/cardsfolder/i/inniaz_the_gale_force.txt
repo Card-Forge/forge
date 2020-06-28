@@ -1,0 +1,12 @@
+Name:Inniaz, the Gale Force
+ManaCost:3 U U
+Types:Legendary Creature Djinn
+PT:4/4
+K:Flying
+A:AB$ PumpAll | Cost$ 2 WU | ValidCards$ Creature.attacking+withFlying | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Attacking creatures with flying get +1/+1 until end of turn.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ CheckAttackers | SVarCompare$ GE3 | NoResolvingCheck$ True | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ Whenever three or more creatures you control with flying attack, each player gains control of a nonland permanent of your choice controlled by the player to their right.
+SVar:CheckAttackers:Count$Valid Creature.withFlying+YouCtrl+attacking
+SVar:TrigGainControl:DB$ GainControlVariant | AllValid$ Permanent.nonLand | ChangeController$ ChooseFromPlayerToTheirRight
+SVar:PlayMain1:TRUE
+DeckHints:Keyword$Flying
+Oracle:Flying\n{2}{W/U}: Attacking creatures with flying get +1/+1 until end of turn. ({W/U} can be paid with either {W} or {U}.)\nWhenever three or more creatures you control with flying attack, each player gains control of a nonland permanent of your choice controlled by the player to their right.
