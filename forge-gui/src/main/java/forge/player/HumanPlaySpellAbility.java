@@ -223,10 +223,10 @@ public class HumanPlaySpellAbility {
                     return false;
                 }
             }
-            final SpellAbility subAbility = currentAbility.getSubAbility();
+            final AbilitySub subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {
                 // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                ((AbilitySub) subAbility).setParent(currentAbility);
+                subAbility.setParent(currentAbility);
             }
             currentAbility = subAbility;
         } while (currentAbility != null);

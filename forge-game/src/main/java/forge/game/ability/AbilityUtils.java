@@ -715,6 +715,16 @@ public class AbilityUtils {
                 list = null;
             }
         }
+        else if (calcX[0].startsWith("TriggerRemembered")) {
+            final SpellAbility root = sa.getRootAbility();
+            CardCollection result = new CardCollection();
+            for (Object o : root.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    result.add((Card) o);
+                }
+            }
+            list = result;
+        }
         else if (calcX[0].startsWith("TriggerObjects")) {
             final SpellAbility root = sa.getRootAbility();
             list = (CardCollection) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14)));
