@@ -114,6 +114,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 Card chosen;
                 if (!discardMe.isEmpty()) {
                     chosen = Aggregates.random(discardMe);
+                    discardMe = CardLists.filter(discardMe, Predicates.not(CardPredicates.sharesNameWith(chosen)));
                 } else {
                     final Card worst = ComputerUtilCard.getWorstAI(hand);
                     chosen = worst != null ? worst : Aggregates.random(hand);
