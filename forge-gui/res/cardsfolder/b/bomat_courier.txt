@@ -4,13 +4,12 @@ Types:Artifact Creature Construct
 PT:1/1
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library face down. (You can't look at it.)
-SVar:TrigExile:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | NoReveal$ True 
-A:AB$ ChangeZoneAll | Cost$ R Discard<0/Hand> Sac<1/CARDNAME> | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Hand | AILogic$ DiscardAllAndRetExiled.minAdv2 | SpellDescription$ Put all cards exiled with Bomat Courier into their owners' hands.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | NoReveal$ True
+A:AB$ ChangeZoneAll | Cost$ R Discard<0/Hand> Sac<1/CARDNAME> | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Hand | AILogic$ DiscardAllAndRetExiled.minAdv2 | SpellDescription$ Put all cards exiled with CARDNAME into their owners' hands.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Color$Red
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bomat_courier.jpg
 Oracle:Haste\nWhenever Bomat Courier attacks, exile the top card of your library face down. (You can't look at it.)\n{R}, Discard your hand, Sacrifice Bomat Courier: Put all cards exiled with Bomat Courier into their owners' hands.

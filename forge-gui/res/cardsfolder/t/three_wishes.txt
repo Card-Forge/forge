@@ -1,7 +1,7 @@
 Name:Three Wishes
 ManaCost:1 U U
 Types:Instant
-A:SP$ Mill | Cost$ 1 U U | NumCards$ 3 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.
+A:SP$ Dig | Cost$ 1 U U | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.
 SVar:DBEffect:DB$ Effect | Name$ Three Wishes Effect | RememberObjects$ Remembered | StaticAbilities$ STCanLookAtMayPlay | Duration$ UntilYourNextTurn | SubAbility$ DBDelTrig
 SVar:STCanLookAtMayPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ MoveToYard | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard. | SubAbility$ DBCleanup
@@ -9,5 +9,4 @@ SVar:MoveToYard:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Define
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/three_wishes.jpg
 Oracle:Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.
