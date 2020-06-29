@@ -8,6 +8,7 @@ import forge.ImageKeys;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
+import forge.game.EvenOdd;
 import forge.game.GameEntityView;
 import forge.game.GameType;
 import forge.game.combat.Combat;
@@ -242,6 +243,7 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
+        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -253,6 +255,7 @@ public class CardView extends GameEntityView {
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
+        updateLethalDamage(c);
     }
 
     public int getAssignedDamage() {
@@ -260,10 +263,14 @@ public class CardView extends GameEntityView {
     }
     void updateAssignedDamage(Card c) {
         set(TrackableProperty.AssignedDamage, c.getTotalAssignedDamage());
+        updateLethalDamage(c);
     }
 
     public int getLethalDamage() {
-        return getCurrentState().getToughness() - getDamage() - getAssignedDamage();
+        return get(TrackableProperty.LethalDamage);
+    }
+    void updateLethalDamage(Card c) {
+        set(TrackableProperty.LethalDamage, c.getLethalDamage());
     }
 
     public int getShieldCount() {
@@ -303,6 +310,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenDirection(Card c) {
         set(TrackableProperty.ChosenDirection, c.getChosenDirection());
+    }
+    public EvenOdd getChosenEvenOdd() {
+        return get(TrackableProperty.ChosenEvenOdd);
+    }
+    void updateChosenEvenOdd(Card c) {
+        set(TrackableProperty.ChosenEvenOdd, c.getChosenEvenOdd());
     }
 
     public String getChosenMode() {
@@ -627,6 +640,13 @@ public class CardView extends GameEntityView {
             sb.append("]\r\n");
         }
 
+        EvenOdd chosenEvenOdd = getChosenEvenOdd();
+        if (chosenEvenOdd != null) {
+            sb.append("\r\n[Chosen value: ");
+            sb.append(chosenEvenOdd);
+            sb.append("]\r\n");
+        }
+
         CardView pairedWith = getPairedWith();
         if (pairedWith != null) {
             sb.append("\r\n \r\nPaired With: ").append(pairedWith);
@@ -687,6 +707,7 @@ public class CardView extends GameEntityView {
     }
     void updateState(Card c) {
         updateName(c);
+        updateDamage(c);
 
         boolean isSplitCard = c.isSplitCard();
         set(TrackableProperty.Cloned, c.isCloned());
@@ -886,12 +907,6 @@ public class CardView extends GameEntityView {
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
             if (canBeShownToAny(viewers)) {
-                // Morph cards can only be present on the battlefield and on stack, otherwise show a standard card back
-                if (getZone() != ZoneType.Battlefield && getZone() != ZoneType.Stack) {
-                    if (isFaceDown() && get(TrackableProperty.ImageKey).equals(ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE))) {
-                        return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
-                    }
-                }
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);

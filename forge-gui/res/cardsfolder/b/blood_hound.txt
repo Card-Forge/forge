@@ -1,6 +1,6 @@
 Name:Blood Hound
 ManaCost:2 R
-Types:Creature Hound
+Types:Creature Dog
 PT:1/1
 T:Mode$ DamageDone | CombatDamage$ True | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may put that many +1/+1 counters on CARDNAME.
 T:Mode$ DamageDoneOnce | CombatDamage$ True | Secondary$ True | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may put that many +1/+1 counters on CARDNAME.

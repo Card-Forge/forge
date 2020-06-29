@@ -29,7 +29,7 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -46,6 +46,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.view.arcane.PlayArea;
+import forge.util.Localizer;
 
 /** 
  * Assembles Swing components of a player field instance.
@@ -60,7 +61,7 @@ public class VField implements IVDoc<CField> {
     private final CField control;
     private DragCell parentCell;
     private final EDocID docID;
-    private final DragTab tab = new DragTab("Field");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblField"));
 
     // Other fields
     private final PlayerView player;
@@ -96,8 +97,8 @@ public class VField implements IVDoc<CField> {
         this.docID = id0;
 
         this.player = p;
-        if (p != null) { tab.setText(p.getName() + " Field"); }
-        else { tab.setText("NO PLAYER FOR " + docID.toString()); }
+        if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
+        else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
 
         detailsPanel = new PlayerDetailsPanel(player);
 
@@ -284,9 +285,9 @@ public class VField implements IVDoc<CField> {
         }
 
         // Update poison and/or energy counters, poison counters take precedence
-        final int poison = player.getCounters(CounterType.POISON);
-        final int energy = player.getCounters(CounterType.ENERGY);
-        final int experience = player.getCounters(CounterType.EXPERIENCE);
+        final int poison = player.getCounters(CounterEnumType.POISON);
+        final int energy = player.getCounters(CounterEnumType.ENERGY);
+        final int experience = player.getCounters(CounterEnumType.EXPERIENCE);
 
         if (poison > 0) {
             removeLblEnergy();

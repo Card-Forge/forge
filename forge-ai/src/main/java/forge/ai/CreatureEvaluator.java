@@ -5,7 +5,7 @@ import com.google.common.base.Function;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -242,11 +242,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     && "+X".equals(sa.getParam("NumDef"))
                     && !sa.usesTargeting()
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
-                if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                if (sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     // Electrostatic Pummeler, can be expanded for similar cards
                     int initPower = getEffectivePower(sa.getHostCard());
                     int pumpedPower = initPower;
-                    int energy = sa.getHostCard().getController().getCounters(CounterType.ENERGY);
+                    int energy = sa.getHostCard().getController().getCounters(CounterEnumType.ENERGY);
                     if (energy > 0) {
                         int numActivations = energy / 3;
                         for (int i = 0; i < numActivations; i++) {

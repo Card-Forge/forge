@@ -45,7 +45,7 @@ public class ComputerUtilCost {
                 final CostPutCounter addCounter = (CostPutCounter) part;
                 final CounterType type = addCounter.getCounter();
 
-                if (type.equals(CounterType.M1M1)) {
+                if (type.equals(CounterEnumType.M1M1)) {
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class ComputerUtilCost {
 
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
-                    if (CounterType.P1P1.equals(type)) {
+                    if (CounterEnumType.P1P1.equals(type)) {
                         return false;
                     }
                     continue;
@@ -97,7 +97,7 @@ public class ComputerUtilCost {
 
                 // check the sa what the PaymentDecision is.
                 // ignore Loyality abilities with Zero as Cost
-                if (sa != null && !CounterType.LOYALTY.equals(type)) {
+                if (sa != null && !CounterEnumType.LOYALTY.equals(type)) {
                     final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
                     PaymentDecision pay = decision.visit(remCounter);
                     if (pay == null || pay.c <= 0) {
@@ -106,7 +106,7 @@ public class ComputerUtilCost {
                 }
 
                 //don't kill the creature
-                if (CounterType.P1P1.equals(type) && source.getLethalDamage() <= 1
+                if (CounterEnumType.P1P1.equals(type) && source.getLethalDamage() <= 1
                         && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
@@ -467,9 +467,9 @@ public class ComputerUtilCost {
                     if(!meetsRestriction)
                         continue;
 
-                    try {
+                    if (StringUtils.isNumeric(parts[0])) {
                         extraManaNeeded += Integer.parseInt(parts[0]);
-                    } catch (final NumberFormatException e) {
+                    } else {
                         System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
                     }
                 }
@@ -480,9 +480,9 @@ public class ComputerUtilCost {
             	}
                 final String snem = c.getSVar("SpellsNeedExtraManaEffect");
                 if (!StringUtils.isBlank(snem)) {
-                    try {
+                    if (StringUtils.isNumeric(snem)) {
                         extraManaNeeded += Integer.parseInt(snem);
-                    } catch (final NumberFormatException e) {
+                    } else {
                         System.out.println("wrong SpellsNeedExtraManaEffect SVar format on " + c);
                     }
                 }
@@ -529,7 +529,7 @@ public class ComputerUtilCost {
                         public boolean apply(Card card) {
                             boolean hasManaSa = false;
                             for (final SpellAbility sa : card.getSpellAbilities()) {
-                                if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                                if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
                                     hasManaSa = true;
                                     break;
                                 }

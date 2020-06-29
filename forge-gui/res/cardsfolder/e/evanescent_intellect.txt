@@ -3,8 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Mill | Description$ Enchanted creature has "{1}{U}, {T}: Target player puts the top three cards of their library into their graveyard."
-SVar:Mill:AB$ Mill | Cost$ 1 U T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of their library into their graveyard.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Mill | Description$ Enchanted creature has "{1}{U}, {T}: Target player mills three cards."
+SVar:Mill:AB$ Mill | Cost$ 1 U T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/evanescent_intellect.jpg
-Oracle:Enchant creature\nEnchanted creature has "{1}{U}, {T}: Target player puts the top three cards of their library into their graveyard."
+Oracle:Enchant creature\nEnchanted creature has "{1}{U}, {T}: Target player mills three cards."

@@ -1,0 +1,9 @@
+Name:Hornbash Mentor
+ManaCost:2 G
+Types:Creature Human Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a trample counter on target non-Human creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature you control | CounterType$ Trample | CounterNum$ 1
+A:AB$ PutCounterAll | Cost$ 2 G T | ValidCards$ Creature.YouCtrl+withTrample | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on each creature you control with trample.
+DeckHas:Ability$Counters
+Oracle:When Hornbash Mentor enters the battlefield, put a trample counter on target non-Human creature you control.\n{2}{G}, {T}: Put a +1/+1 counter on each creature you control with trample.

@@ -1,7 +1,7 @@
 Name:Deadbridge Chant
 ManaCost:4 B G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield,put the top ten cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill ten cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 10 | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Graveyard | AtRandom$ True | Choices$ Card.YouOwn | SubAbility$ DBChange
@@ -9,5 +9,5 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | De
 SVar:DBChange2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ EQ0
 SVar:Y:Count$InYourLibrary
 SVar:NeedsToPlayVar:Y GE15
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadbridge_chant.jpg
-Oracle:When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.\nAt the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
+DeckHas:Ability$Graveyard
+Oracle:When Deadbridge Chant enters the battlefield, mill ten cards.\nAt the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.

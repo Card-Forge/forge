@@ -6,6 +6,6 @@ K:Flying
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ HasCardsInGraveyard_Card_GE7 | Description$ CARDNAME can't attack unless defending player has seven or more cards in their graveyard.
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LT4 | Description$ CARDNAME can't block unless you have four or more cards in hand.
 SVar:X:Count$InYourHand
-A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player puts the top card of their library into their graveyard.
+A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player mills a card.
 AI:RemoveDeck:Random
-Oracle:Flying\nVantress Gargoyle can't attack unless defending player has seven or more cards in their graveyard.\nVantress Gargoyle can't block unless you have four or more cards in hand.\n{T}: Each player puts the top card of their library into their graveyard.
+Oracle:Flying\nVantress Gargoyle can't attack unless defending player has seven or more cards in their graveyard.\nVantress Gargoyle can't block unless you have four or more cards in hand.\n{T}: Each player mills a card.

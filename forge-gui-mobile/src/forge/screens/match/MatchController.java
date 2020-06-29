@@ -30,7 +30,6 @@ import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
-import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -46,7 +45,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.views.VAssignDamage;
+import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
@@ -69,8 +68,6 @@ public class MatchController extends AbstractGuiGame {
     public static final MatchController instance = new MatchController();
 
     private static final Map<String, FImage> avatarImages = new HashMap<>();
-
-    private static final Map<String, FImage> sleeveImages = new HashMap<>();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
@@ -107,12 +104,7 @@ public class MatchController extends AbstractGuiGame {
     public static FImage getPlayerSleeve(final PlayerView p) {
         if (p == null)
             return FSkinImage.UNKNOWN;
-        final String lp = p.getLobbyPlayerName();
-        FImage sleeve = sleeveImages.get(lp);
-        if (sleeve == null) {
-            sleeve = new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
-        }
-        return sleeve;
+        return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }
 
     @Override
@@ -125,15 +117,9 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay()) //TODO alternate method for update Netplay...
+        if(!GuiBase.isNetworkplay())
             return;
-        if(getGameView() == null)
-            return;
-        if(getGameView().getPhase() == null)
-            return;
-        if (getGameView().getPhase().phaseforUpdateField())
-            for (final VPlayerPanel pnl : view.getPlayerPanels().values())
-                pnl.getField().update(false);
+        refreshCardDetails(null);
     }
 
     public boolean hotSeatMode() {
@@ -157,6 +143,8 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
+        view.resetFields();
+        clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
             //add special object that pauses game if screen touched
@@ -184,7 +172,7 @@ public class MatchController extends AbstractGuiGame {
     public void showPromptMessage(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
-    
+
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
         view.getPrompt(player).setMessage(message, card);
@@ -211,18 +199,33 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void updatePhase() {
-        final GameView gameView = getGameView();
-        final PlayerView p = gameView.getPlayerTurn();
-        final PhaseType ph = gameView.getPhase();
+        final PlayerView p = getGameView().getPlayerTurn();
+        final PhaseType ph = getGameView().getPhase();
 
         PhaseLabel lbl = null;
-        if(p != null && ph != null)
-            lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+
+        if(ph!=null) {
+            lbl = p == null ? null : view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        } else {
+            System.err.println("getGameView().getPhase() returned 'null'");
+        }
 
         view.resetAllPhaseButtons();
         if (lbl != null) {
             lbl.setActive(true);
         }
+        if(GuiBase.isNetworkplay())
+            checkStack();
+    }
+
+
+    public void checkStack() {
+        view.getStack().checkEmptyStack();
+    }
+
+    public void showWinlose() {
+        if (view.getViewWinLose() != null)
+            view.getViewWinLose().setVisible(true);
     }
 
     @Override
@@ -253,7 +256,8 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
-            new ViewWinLose(getGameView()).setVisible(true);
+            view.setViewWinLose(new ViewWinLose(getGameView()));
+            view.getViewWinLose().setVisible(true);
         }
     }
 
@@ -356,11 +360,11 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, this);
                 v.show();
             }
         }.invokeAndWait();
@@ -441,6 +445,7 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void afterGameEnd() {
         Forge.back();
+        ImageCache.disposeTexture();
         //view = null;
     }
 

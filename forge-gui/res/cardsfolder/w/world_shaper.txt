@@ -2,10 +2,9 @@ Name:World Shaper
 ManaCost:3 G
 Types:Creature Merfolk Shaman
 PT:3/3
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, you may put the top three cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ You
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReclam | TriggerController$ TriggeredCardController | TriggerDescription$ When World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
-SVar:TrigReclam:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, you may mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerController$ TriggeredCardController | TriggerDescription$ When World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 DeckHints:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/world_shaper.jpg
-Oracle:Whenever World Shaper attacks, you may put the top three cards of your library into your graveyard.\nWhen World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
+Oracle:Whenever World Shaper attacks, you may mill three cards.\nWhen World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.

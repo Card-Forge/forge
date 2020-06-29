@@ -29,6 +29,7 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CHand;
 import forge.toolbox.FScrollPane;
 import forge.view.arcane.HandArea;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of hand area.
@@ -40,7 +41,7 @@ public class VHand implements IVDoc<CHand> {
     private final CHand control;
     private DragCell parentCell;
     private final EDocID docID;
-    private final DragTab tab = new DragTab("Your Hand");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblYourHand"));
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -59,9 +60,9 @@ public class VHand implements IVDoc<CHand> {
         id0.setDoc(this);
 
         if (p == null) {
-            tab.setText("NO PLAYER Hand");
+            tab.setText("lblNoPlayerHand");
         } else {
-            tab.setText(p.getName() + " Hand");
+            tab.setText(Localizer.getInstance().getMessage("lblPlayerHand", p.getName()));
         }
 
         scroller.setViewportView(VHand.this.hand);

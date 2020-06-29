@@ -1,0 +1,10 @@
+Name:Sparkhunter Masticore
+ManaCost:3
+Types:Artifact Creature Masticore
+PT:3/4
+A:SP$ PermanentCreature | Cost$ 3 Discard<1/Card>
+DeckHas:Ability$Discard
+K:Protection:Planeswalker:Protection from planeswalkers
+A:AB$ DealDamage | Cost$ 1 | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target planeswalker.
+A:AB$ Pump | Cost$ 3 | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
+Oracle:As an additional cost to cast this spell, discard a card.\nProtection from planeswalkers\n{1}: Sparkhunter Masticore deals 1 damage to target planeswalker.\n{3}: Sparkhunter Masticore gains indestructible until end of turn.

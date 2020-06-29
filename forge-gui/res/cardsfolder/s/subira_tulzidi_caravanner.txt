@@ -1,0 +1,13 @@
+Name:Subira, Tulzidi Caravanner
+ManaCost:2 R
+Types:Legendary Creature Human Shaman
+PT:2/3
+K:Haste
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.Other+powerLE2 | TgtPrompt$ Select another target creature with power 2 or less | KW$ HIDDEN Unblockable | SpellDescription$ Another target creature with power 2 or less can't be blocked this turn.
+AI:RemoveDeck:All
+A:AB$ Effect | Cost$ 1 R T Discard<1/Hand> | Triggers$ Damage | SVars$ TrigDraw | SpellDescription$ Until end of turn, whenever a creature you control with power 2 or less deals combat damage to a player, draw a card.
+SVar:Damage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+powerLE2 | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever a creature you control with power 2 or less deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Creature.powerLE2
+DeckHas:Ability$Discard
+Oracle:Haste\n{1}: Another target creature with power 2 or less can't be blocked this turn.\n{1}{R}, {T}, Discard your hand: Until end of turn, whenever a creature you control with power 2 or less deals combat damage to a player, draw a card.

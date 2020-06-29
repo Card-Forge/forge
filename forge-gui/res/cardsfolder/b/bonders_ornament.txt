@@ -1,0 +1,8 @@
+Name:Bonder's Ornament
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ RepeatEach | Cost$ 4 T | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player who controls a permanent named Bonder's Ornament draws a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ Player.IsRemembered | ConditionCheckSVar$ OrnCheck | ConditionSVarCompare$ GE1 | References$ OrnCheck
+SVar:OrnCheck:PlayerCountRemembered$Valid Permanent.namedBonder's Ornament+RememberedPlayerCtrl
+Oracle:{T}: Add one mana of any color.\n{4}, {T}: Each player who controls a permanent named Bonder's Ornament draws a card.

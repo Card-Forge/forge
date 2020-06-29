@@ -1,6 +1,6 @@
 Name:Zodiac Dog
 ManaCost:2 R
-Types:Creature Hound
+Types:Creature Dog
 PT:2/2
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10534.jpg

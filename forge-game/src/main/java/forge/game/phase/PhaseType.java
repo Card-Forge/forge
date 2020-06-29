@@ -55,6 +55,11 @@ public enum PhaseType {
         return result;
     }
 
+    public final boolean isCombatPhase() {
+        return ((ALL_PHASES.indexOf(this) >=  ALL_PHASES.indexOf(COMBAT_BEGIN))
+        && (ALL_PHASES.indexOf(this) <=  ALL_PHASES.indexOf(COMBAT_END)));
+    }
+
     public final boolean isAfter(final PhaseType phase) {
         return ALL_PHASES.indexOf(this) > ALL_PHASES.indexOf(phase);
     }

@@ -24,6 +24,7 @@ import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.*;
@@ -464,7 +465,7 @@ public class AiAttackController {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
-                final int counters = beastion.getCounters(CounterType.QUEST);
+                final int counters = beastion.getCounters(CounterEnumType.QUEST);
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
             if (this.attackers.size() >= minCreatures) {
@@ -1065,7 +1066,7 @@ public class AiAttackController {
                         }
                     }
                     // if enough damage: switch to next planeswalker or player
-                    if (damage >= pw.getCounters(CounterType.LOYALTY)) {
+                    if (damage >= pw.getCounters(CounterEnumType.LOYALTY)) {
                         List<Card> pwDefending = combat.getDefendingPlaneswalkers();
                         boolean found = false;
                         // look for next planeswalker
@@ -1135,7 +1136,6 @@ public class AiAttackController {
             // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
             if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
-                boolean wantability = false;
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
                     // Do not attack if we can afford using the ability.
                     if (sa.isAbility()) {
@@ -1192,7 +1192,7 @@ public class AiAttackController {
             if (isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
-                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterType.P1P1) == 0)) {
+                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterEnumType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
@@ -1365,21 +1365,12 @@ public class AiAttackController {
             if (c.hasSVar("AIExertCondition")) {
                 if (!c.getSVar("AIExertCondition").isEmpty()) {
                     final String needsToExert = c.getSVar("AIExertCondition");
-                    int x = 0;
-                    int y = 0;
                     String sVar = needsToExert.split(" ")[0];
                     String comparator = needsToExert.split(" ")[1];
                     String compareTo = comparator.substring(2);
-                    try {
-                        x = Integer.parseInt(sVar);
-                    } catch (final NumberFormatException e) {
-                        x = CardFactoryUtil.xCount(c, c.getSVar(sVar));
-                    }
-                    try {
-                        y = Integer.parseInt(compareTo);
-                    } catch (final NumberFormatException e) {
-                        y = CardFactoryUtil.xCount(c, c.getSVar(compareTo));
-                    }
+
+                    int x = AbilityUtils.calculateAmount(c, sVar, null);
+                    int y = AbilityUtils.calculateAmount(c, compareTo, null);
                     if (Expressions.compare(x, comparator, y)) {
                         shouldExert = true;
                     }

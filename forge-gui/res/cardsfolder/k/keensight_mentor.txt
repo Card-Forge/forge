@@ -1,0 +1,10 @@
+Name:Keensight Mentor
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a vigilance counter on target non-Human creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature you control | CounterType$ Vigilance | CounterNum$ 1
+SVar:PlayMain1:TRUE
+A:AB$ PutCounterAll | Cost$ 1 W T | ValidCards$ Creature.YouCtrl+withVigilance | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on each creature you control with vigilance.
+DeckHas:Ability$Counters
+Oracle:When Keensight Mentor enters the battlefield, put a vigilance counter on target non-Human creature you control.\n{1}{W}, {T}: Put a +1/+1 counter on each creature you control with vigilance.

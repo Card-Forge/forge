@@ -1,8 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -13,13 +11,9 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.collect.FCollection;
-import forge.util.Localizer;
-
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
 
@@ -46,7 +40,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         boolean useImprinted = sa.hasParam("UseImprinted");
         boolean loopOverCards = false;
-        boolean recordChoice = sa.hasParam("RecordChoice");
         CardCollectionView repeatCards = null;
         List<SpellAbility> repeatSas = null;
 
@@ -59,7 +52,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
                     sa.getParam("RepeatCards"), source.getController(), source);
-            loopOverCards = !recordChoice;
         }
         else if (sa.hasParam(("RepeatSpellAbilities"))) {
             repeatSas = Lists.newArrayList();
@@ -138,10 +130,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
             boolean nextTurn = sa.hasParam("NextTurnForEachPlayer");
             if (sa.hasParam("StartingWithActivator")) {
-                int size = repeatPlayers.size();
-                Player activator = sa.getActivatingPlayer();
-                while (!activator.equals(repeatPlayers.getFirst())) {
-                    repeatPlayers.add(size - 1, repeatPlayers.remove(0));
+                int aidx = repeatPlayers.indexOf(player);
+                if (aidx != -1) {
+                    Collections.rotate(repeatPlayers, -aidx);
                 }
             }
             for (final Player p : repeatPlayers) {
@@ -162,73 +153,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     AbilityUtils.resolve(repeat);
                     source.removeRemembered(p);
                 }
-            }
-        }
-
-        if (sa.hasParam("RepeatCounters")) {
-            Card target = sa.getTargetCard();
-            if (target == null) {
-                target = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
-            }
-            for (CounterType type : target.getCounters().keySet()) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Number$").append(target.getCounters(type));
-                source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
-                source.setSVar("RepeatCounterAmount", sb.toString());
-                AbilityUtils.resolve(repeat);
-            }
-        }
-        if (recordChoice) {
-            boolean random = sa.hasParam("Random");
-            Map<Player, List<Card>> recordMap = Maps.newHashMap();
-            if (sa.hasParam("ChoosePlayer")) {
-                for (Card card : repeatCards) {
-                    Player p;
-                    if (random) {
-                        p = Aggregates.random(game.getPlayers());
-                    } else {
-                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, Localizer.getInstance().getMessage("lblChoosePlayer"));
-                    }
-                    if (recordMap.containsKey(p)) {
-                        recordMap.get(p).add(0, card);
-                    } else {
-                        recordMap.put(p, Lists.newArrayList(card));
-                    }
-                }
-            }
-            else if (sa.hasParam("ChooseCard")) {
-                List<Card> list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
-                        sa.getParam("ChooseCard"), source.getController(), source);
-                String filterController = sa.getParam("FilterControlledBy");
-                // default: Starting with you and proceeding in the chosen direction
-                Player p = sa.getActivatingPlayer();
-                do {
-                    CardCollection valid = new CardCollection(list);
-                    if ("NextPlayerInChosenDirection".equals(filterController)) {
-                        valid = CardLists.filterControlledBy(valid,
-                                game.getNextPlayerAfter(p, source.getChosenDirection()));
-                    }
-                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseaCard"));
-                    if (recordMap.containsKey(p)) {
-                        recordMap.get(p).add(0, card);
-                    } else {
-                        recordMap.put(p, Lists.newArrayList(card));
-                    }
-                    if (source.getChosenDirection() != null) {
-                        p = game.getNextPlayerAfter(p, source.getChosenDirection());
-                    } else {
-                        p = game.getNextPlayerAfter(p);
-                    }
-                } while (!p.equals(sa.getActivatingPlayer()));
-            }
-
-            for (Entry<Player, List<Card>> entry : recordMap.entrySet()) {
-                // Remember the player and imprint the cards
-                source.addRemembered(entry.getKey());
-                source.addImprintedCards(entry.getValue());
-                AbilityUtils.resolve(repeat);
-                source.removeRemembered(entry.getKey());
-                source.removeImprintedCards(entry.getValue());
             }
         }
         

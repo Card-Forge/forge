@@ -1,10 +1,10 @@
 package forge.net;
 
 import forge.match.LobbySlotType;
+import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.ILobbyView;
@@ -24,12 +24,13 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgeProfileProperties;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
     public static String getServerUrl() {
-        final String url = SOptionPane.showInputDialog("This feature is under active development.\nYou are likely to find bugs.\n\n - = * H E R E   B E   E L D R A Z I * = -\n\nEnter the URL of the server to join.\nLeave blank to host your own server.", "Connect to Server");
+        final String url = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblOnlineMultiplayerDest"), Localizer.getInstance().getMessage("lblConnectToServer"));
         if (url == null) { return null; }
 
         //prompt user for player one name if needed
@@ -101,7 +102,7 @@ public class NetConnectUtil {
 
         view.update(true);
 
-        return new ChatMessage(null, String.format("Hosting on port %d.", port));
+        return new ChatMessage(null, Localizer.getInstance().getMessage("lblHostingPortOnN", String.valueOf(port)));
     }
 
     public static void copyHostedServerUrl() {
@@ -116,13 +117,13 @@ public class NetConnectUtil {
             GuiBase.getInterface().copyToClipboard(internalAddress);
         }
 
-        String message = "Share the following URL with anyone who wishes to join your server. It has been copied to your clipboard for convenience.\n\n";
+        String message = "";
         if (externalUrl != null) {
-            message += externalUrl + "\n\nFor internal games, use the following URL: " + internalUrl;
+            message = Localizer.getInstance().getMessage("lblShareURLToMakePlayerJoinServer", externalUrl, internalUrl);
         } else {
-            message = "Forge was unable to determine your external IP!\n\n" + message + internalUrl;
+            message = Localizer.getInstance().getMessage("lblForgeUnableDetermineYourExternalIP", message + internalUrl);
         }
-        SOptionPane.showMessageDialog(message, "Server URL", SOptionPane.INFORMATION_ICON);
+        SOptionPane.showMessageDialog(message, Localizer.getInstance().getMessage("lblServerURL"), SOptionPane.INFORMATION_ICON);
     }
 
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
@@ -145,8 +146,8 @@ public class NetConnectUtil {
             }
             @Override
             public final void close() {
-                SOptionPane.showMessageDialog("Your connection to the host (" + url + ") was interrupted.", "Error", FSkinProp.ICO_WARNING);
-                onlineLobby.setClient(null);
+                GuiBase.setInterrupted(true);
+                onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
             public ClientGameLobby getLobby() {
@@ -178,9 +179,10 @@ public class NetConnectUtil {
             client.connect(hostname, port);
         }
         catch (Exception ex) {
-            return null;
+            //return a message to close the connection so we will not crash...
+            return new ChatMessage(null, ForgeConstants.CLOSE_CONN_COMMAND);
         }
 
-        return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));
+        return new ChatMessage(null, Localizer.getInstance().getMessage("lblConnectedIPPort", hostname, String.valueOf(port)));
     }
 }

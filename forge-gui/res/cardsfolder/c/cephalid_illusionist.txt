@@ -2,9 +2,8 @@ Name:Cephalid Illusionist
 ManaCost:1 U
 Types:Creature Cephalid Wizard
 PT:1/1
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, put the top three cards of your library into your graveyard.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, mill three cards.
 A:AB$ Pump | Cost$ 2 U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ You
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_illusionist.jpg
-Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
+Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, mill three cards.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.

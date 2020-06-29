@@ -1,0 +1,9 @@
+Name:Flourishing Fox
+ManaCost:W
+Types:Creature Fox
+PT:1/1
+T:Mode$ Cycled | ValidCard$ Card.Other | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cycle another card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Cycling:1
+DeckHas:Ability$Counters
+Oracle:Whenever you cycle another card, put a +1/+1 counter on Flourishing Fox.\nCycling {1} ({1}, Discard this card: Draw a card.)

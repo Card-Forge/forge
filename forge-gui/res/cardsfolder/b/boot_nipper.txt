@@ -1,0 +1,10 @@
+Name:Boot Nipper
+ManaCost:1 B
+Types:Creature Beast
+PT:2/1
+K:ETBReplacement:Other:CounterChoice
+SVar:CounterChoice:DB$ GenericChoice | Defined$ You | Choices$ Deathtouch,Lifelink | SpellDescription$ CARDNAME enters the battlefield with your choice of a deathtouch counter or a lifelink counter on it.
+SVar:Deathtouch:DB$ PutCounter | CounterType$ Deathtouch | CounterNum$ 1 | ETB$ True | SpellDescription$ Deathtouch
+SVar:Lifelink:DB$ PutCounter | CounterType$ Lifelink | CounterNum$ 1 | ETB$ True | SpellDescription$ Lifelink
+DeckHints:Ability$Counters
+Oracle:Boot Nipper enters the battlefield with your choice of a deathtouch counter or a lifelink counter on it.

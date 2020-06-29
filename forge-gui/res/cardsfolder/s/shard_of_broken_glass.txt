@@ -2,8 +2,7 @@ Name:Shard of Broken Glass
 ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
-T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigMill | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may put the top two cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 2 | Defined$ You 
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigMill | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 K:Equip:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_of_broken_glass.jpg
-Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature attacks, you may put the top two cards of your library into your graveyard.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature attacks, you may mill two cards.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

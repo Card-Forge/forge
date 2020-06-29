@@ -193,6 +193,15 @@ public enum FSkinImage implements FImage {
     QUEST_BIG_SWORD   (FSkinProp.ICO_QUEST_BIG_SWORD, SourceFile.ICONS),
     QUEST_BIG_BAG     (FSkinProp.ICO_QUEST_BIG_BAG, SourceFile.ICONS),
 
+    //menu icon
+    MENU_GALAXY       (FSkinProp.ICO_MENU_GALAXY, SourceFile.ICONS),
+    MENU_STATS        (FSkinProp.ICO_MENU_STATS, SourceFile.ICONS),
+    MENU_PUZZLE       (FSkinProp.ICO_MENU_PUZZLE, SourceFile.ICONS),
+    MENU_GAUNTLET     (FSkinProp.ICO_MENU_GAUNTLET, SourceFile.ICONS),
+    MENU_SEALED       (FSkinProp.ICO_MENU_SEALED, SourceFile.ICONS),
+    MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT, SourceFile.ICONS),
+    MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED, SourceFile.ICONS),
+
     //Interface icons
     QUESTION        (FSkinProp.ICO_QUESTION, SourceFile.ICONS),
     INFORMATION     (FSkinProp.ICO_INFORMATION, SourceFile.ICONS),
@@ -348,6 +357,7 @@ public enum FSkinImage implements FImage {
     IMG_ABILITY_DOUBLE_STRIKE  (FSkinProp.IMG_ABILITY_DOUBLE_STRIKE, SourceFile.ABILITIES),
     IMG_ABILITY_FIRST_STRIKE   (FSkinProp.IMG_ABILITY_FIRST_STRIKE, SourceFile.ABILITIES),
     IMG_ABILITY_FEAR           (FSkinProp.IMG_ABILITY_FEAR, SourceFile.ABILITIES),
+    IMG_ABILITY_FLASH          (FSkinProp.IMG_ABILITY_FLASH, SourceFile.ABILITIES),
     IMG_ABILITY_FLYING         (FSkinProp.IMG_ABILITY_FLYING, SourceFile.ABILITIES),
     IMG_ABILITY_HASTE          (FSkinProp.IMG_ABILITY_HASTE, SourceFile.ABILITIES),
     IMG_ABILITY_HEXPROOF       (FSkinProp.IMG_ABILITY_HEXPROOF, SourceFile.ABILITIES),

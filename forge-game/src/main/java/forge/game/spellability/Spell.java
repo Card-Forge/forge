@@ -145,10 +145,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (this.getPayCosts() != null) {
-            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
-                return false;
-            }
+        if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
+            return false;
         }
 
         return checkOtherRestrictions(card);

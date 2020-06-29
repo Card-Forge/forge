@@ -9,6 +9,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
+import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
     @Override
@@ -27,7 +28,7 @@ public class ChoosePlayerAi extends SpellAbilityAi {
     }
 
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> choices) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> choices, Map<String, Object> params) {
         Player chosen = null;
         if ("Curse".equals(sa.getParam("AILogic"))) {
             for (Player pc : choices) {

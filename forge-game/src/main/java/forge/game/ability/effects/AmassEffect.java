@@ -1,16 +1,23 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import org.apache.commons.lang3.mutable.MutableBoolean;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -19,7 +26,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-public class AmassEffect extends SpellAbilityEffect {
+public class AmassEffect extends TokenEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -57,21 +64,14 @@ public class AmassEffect extends SpellAbilityEffect {
             useZoneTable = true;
         }
 
+        MutableBoolean combatChanged = new MutableBoolean(false);
         // create army token if needed
         if (CardLists.count(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army")) == 0) {
             final String tokenScript = "b_0_0_zombie_army";
 
-            final Card prototype = TokenInfo.getProtoType(tokenScript, sa);
+            final Card prototype = TokenInfo.getProtoType(tokenScript, sa, false);
 
-            for (final Card tok : TokenInfo.makeTokensFromPrototype(prototype, activator, 1, true)) {
-
-                // Should this be catching the Card that's returned?
-                Card c = game.getAction().moveToPlay(tok, sa);
-                if (c.getZone() != null) {
-                    triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
-                }
-                c.updateStateForView();
-            }
+            makeTokens(prototype, activator, sa, 1, true, false, triggerList, combatChanged);
 
             if (!useZoneTable) {
                 triggerList.triggerChangesZoneAll(game);
@@ -80,12 +80,20 @@ public class AmassEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventTokenCreated());
         }
 
+        if (combatChanged.isTrue()) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
+        params.put("Amount", 1);
+
         CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
-        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false);
+        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false, params);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for(final Card tgtCard : tgtCards) {
-            tgtCard.addCounter(CounterType.P1P1, amount, activator, true, table);
+            tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, true, table);
             game.updateLastStateForCard(tgtCard);
 
             if (remember) {

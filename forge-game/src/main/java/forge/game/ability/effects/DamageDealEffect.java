@@ -1,8 +1,10 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -11,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardUtil;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -30,7 +33,12 @@ public class DamageDealEffect extends DamageBaseEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder stringBuilder = new StringBuilder();
         final String damage = spellAbility.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
+        int dmg;
+        try { // try-catch to fix Volcano Hellion Crash
+            dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
+        } catch (NullPointerException e) {
+            dmg = 0;
+        }
 
         List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
         if (targets.isEmpty()) {
@@ -53,7 +61,8 @@ public class DamageDealEffect extends DamageBaseEffect {
                 stringBuilder.append("divided evenly (rounded down) to\n");
             } else if (spellAbility.hasParam("DividedAsYouChoose")) {
                 stringBuilder.append("divided to\n");
-            }
+            } else
+                stringBuilder.append("to ");
 
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             final List<Player> players = SpellAbilityEffect.getTargetPlayers(spellAbility);
@@ -63,7 +72,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             // target cards
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
-                stringBuilder.append(targetCard).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
+                stringBuilder.append(targetCard);
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
 
                 if (i == targetCount - 2) {
                     stringBuilder.append(" and ");
@@ -74,9 +85,10 @@ public class DamageDealEffect extends DamageBaseEffect {
 
             // target players
             for (int i = 0; i < players.size(); i++) {
-
                 Player targetPlayer = players.get(i);
-                stringBuilder.append(targetPlayer).append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
+                stringBuilder.append(targetPlayer);
+                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer) != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
 
                 if (i == players.size() - 2) {
                     stringBuilder.append(" and ");
@@ -114,6 +126,7 @@ public class DamageDealEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
+        final Player activationPlayer = sa.getActivatingPlayer();
         final Game game = hostCard.getGame();
 
         final String damage = sa.getParam("NumDmg");
@@ -224,7 +237,12 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final Object o : tgts) {
-                dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                if (!removeDamage) {
+                    dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                    if (dmg <= 0) {
+                        continue;
+                    }
+                }
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final Card gc = game.getCardState(c, null);
@@ -238,7 +256,27 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.setHasBeenDealtDeathtouchDamage(false);
                             c.clearAssignedDamage();
                         } else {
-                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                            if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+                                    sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
+                                // excess damage explicit says toughness, not lethal damage in the rules
+                                int lethal = c.getLethalDamage();
+                                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
+                                    lethal = Math.min(lethal, 1);
+                                }
+                                int dmgToTarget = Math.min(lethal, dmg);
+
+                                c.addDamage(dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+
+                                List<GameEntity> list = Lists.newArrayList();
+                                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
+                                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
+
+                                if (!list.isEmpty()) {
+                                    list.get(0).addDamage(dmg - dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                                }
+                            } else {
+                                c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                            }
                         }
                     }
                 } else if (o instanceof Player) {

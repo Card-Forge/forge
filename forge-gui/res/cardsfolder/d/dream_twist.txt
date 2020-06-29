@@ -2,6 +2,5 @@ Name:Dream Twist
 ManaCost:U
 Types:Instant
 K:Flashback:1 U
-A:SP$ Mill | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_twist.jpg
-Oracle:Target player puts the top three cards of their library into their graveyard.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+A:SP$ Mill | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+Oracle:Target player mills three cards.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

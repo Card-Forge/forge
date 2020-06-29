@@ -4,6 +4,5 @@ Types:Creature Vedalken Advisor
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
-A:AB$ Mill | Cost$ T PayEnergy<1> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of their library into their graveyard. 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minister_of_inquiries.jpg
-Oracle:When Minister of Inquiries enters the battlefield, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Target player puts the top three cards of their library into their graveyard.
+A:AB$ Mill | Cost$ T PayEnergy<1> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+Oracle:When Minister of Inquiries enters the battlefield, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Target player mills three cards.

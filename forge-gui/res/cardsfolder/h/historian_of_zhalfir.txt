@@ -1,0 +1,8 @@
+Name:Historian of Zhalfir
+ManaCost:2 U U
+Types:Creature Human Wizard
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | IsPresent$ Planeswalker.Teferi+YouCtrl | TriggerDescription$ Whenever CARDNAME attacks, if you control a Teferi planeswalker, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckNeeds:Type$Teferi
+Oracle:Whenever Historian of Zhalfir attacks, if you control a Teferi planeswalker, draw a card.

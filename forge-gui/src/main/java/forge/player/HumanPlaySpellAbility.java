@@ -105,10 +105,7 @@ public class HumanPlaySpellAbility {
             if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
                 c.turnFaceUp();
             }
-            c.setCastSA(ability);
-            ability.setLastStateBattlefield(game.getLastStateBattlefield());
-            ability.setLastStateGraveyard(game.getLastStateGraveyard());
-            ability.setHostCard(game.getAction().moveToStack(c, null));
+            ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
 
         if (!ability.isCopied()) {
@@ -117,7 +114,7 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player
@@ -217,7 +214,7 @@ public class HumanPlaySpellAbility {
                     final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player");
+                            candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }
@@ -226,10 +223,10 @@ public class HumanPlaySpellAbility {
                     return false;
                 }
             }
-            final SpellAbility subAbility = currentAbility.getSubAbility();
+            final AbilitySub subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {
                 // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                ((AbilitySub) subAbility).setParent(currentAbility);
+                subAbility.setParent(currentAbility);
             }
             currentAbility = subAbility;
         } while (currentAbility != null);
@@ -317,10 +314,10 @@ public class HumanPlaySpellAbility {
                     if (value == null) {
                         return false;
                     }
-                    card.setXManaCostPaid(value);
+                    ability.setXManaCostPaid(value);
                 }
             } else if (manaCost.getMana().isZero() && ability.isSpell()) {
-                card.setXManaCostPaid(0);
+                ability.setXManaCostPaid(0);
             }
         }
         return true;

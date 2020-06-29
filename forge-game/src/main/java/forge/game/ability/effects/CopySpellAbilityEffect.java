@@ -146,7 +146,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 valid.remove(originalTarget);
                 mayChooseNewTargets = false;
                 if (sa.hasParam("ChooseOnlyOne")) {
-                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseOne"));
+                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, choice, targetedSA);
                     copies.add(copy);

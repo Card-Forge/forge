@@ -1,6 +1,6 @@
 Name:Elven Warhounds
 ManaCost:3 G
-Types:Creature Hound
+Types:Creature Dog
 PT:2/2
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, put that creature on top of its owner's library.
 SVar:TrigChangeZone:DB$ChangeZone | Defined$ TriggeredBlocker | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0

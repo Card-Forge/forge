@@ -197,6 +197,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setManaSpent(params.get("ConditionManaSpent"));
         }
 
+        if (params.containsKey("ConditionManaNotSpent")) {
+            this.setManaNotSpent(params.get("ConditionManaNotSpent"));
+        }
+
         if (params.containsKey("ConditionCheckSVar")) {
             this.setSvarToCheck(params.get("ConditionCheckSVar"));
         }
@@ -343,15 +347,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            int right;
             final String rightString = this.getPresentCompare().substring(2);
-            try { // If this is an Integer, just parse it
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException e) { // Otherwise, grab it from
-                                                      // the
-                // SVar
-                right = CardFactoryUtil.xCount(host, host.getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(host, rightString, sa);
 
             final int left = list.size();
 
@@ -432,10 +429,21 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (StringUtils.isNotEmpty(this.getManaSpent())) {
-            byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
-            if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+        if (StringUtils.isNotEmpty(getManaSpent())) {
+            for (String s : getManaSpent().split(" ")) {
+                byte manaSpent = MagicColor.fromName(s);
+                if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+                    return false;
+            }
+        }
+        if (StringUtils.isNotEmpty(getManaNotSpent())) {
+            byte toPay = 0;
+            for (String s : getManaNotSpent().split(" ")) {
+                toPay |= MagicColor.fromName(s);
+            }
+            if (toPay == (toPay & sa.getHostCard().getColorsPaid())) {
                 return false;
+            }
         }
 
         if (this.getsVarToCheck() != null) {

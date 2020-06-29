@@ -81,7 +81,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true; // handled elsewhere, does not meet the standard requirements
         }
 
-        return sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
+        return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
                 && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa);
         // return super.checkApiLogic(ai, sa);
     }
@@ -119,8 +119,8 @@ public class ManaEffectAi extends SpellAbilityAi {
         int numCounters = 0;
         int manaSurplus = 0;
         if ("XChoice".equals(host.getSVar("X"))
-                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = CounterType.KI; // Petalmane Baku
+                && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
+            CounterType ctrType = CounterType.get(CounterEnumType.KI); // Petalmane Baku
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     ctrType = ((CostRemoveCounter)part).counter;

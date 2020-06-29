@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.google.common.cache.CacheLoader;
 import forge.FThreads;
-import org.cache2k.integration.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;

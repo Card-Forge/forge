@@ -1,0 +1,9 @@
+Name:Skull Prophet
+ManaCost:B G
+Types:Creature Human Druid
+PT:3/1
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SpellDescription$ Mill two cards.
+DeckHas:Ability$Graveyard
+Oracle:{T}: Add {B} or {G}.\n{T}: Mill two cards.

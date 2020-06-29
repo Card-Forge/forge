@@ -1,0 +1,9 @@
+Name:Splendor Mare
+ManaCost:2 W
+Types:Creature Elk Unicorn
+PT:3/3
+K:Lifelink
+K:Cycling:1 W
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle CARDNAME, put a lifelink counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ Lifelink | CounterNum$ 1
+Oracle:Lifelink\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)\nWhen you cycle Splendor Mare, put a lifelink counter on target creature you control.

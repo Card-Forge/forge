@@ -183,7 +183,7 @@ public class Match {
         return myRemovedAnteCards;
     }
 
-    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
+    private static void preparePlayerZone(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<>();
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
@@ -234,16 +234,15 @@ public class Match {
         for (int i = 0; i < playersConditions.size(); i++) {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
+            PlayerController person = player.getController();
 
             if (canSideBoard) {
-                PlayerController person = player.getController();
                 if (sideboardProxy != null && person.isAI()) {
                     person = sideboardProxy;
                 }
 
-                String forPlayer = " for " + player.getName();
                 Deck toChange = psc.getDeck();
-                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), forPlayer);
+                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
@@ -270,20 +269,36 @@ public class Match {
                 }
             }
 
-            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil());
+            preparePlayerZone(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil());
             if (myDeck.has(DeckSection.Sideboard)) {
-                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil());
+                preparePlayerZone(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil());
+
+                // Assign Companion
+                Card companion = player.assignCompanion(game, person);
+                // Create an effect that lets you cast your companion from your sideboard
+                if (companion != null) {
+                    PlayerZone commandZone = player.getZone(ZoneType.Command);
+                    companion = game.getAction().moveTo(ZoneType.Command, companion, null);
+                    commandZone.add(Player.createCompanionEffect(game, companion));
+
+                    player.updateZoneForView(commandZone);
+                }
             }
 
             player.initVariantsZones(psc);
 
             player.shuffle(null);
 
-
             if (isFirstGame) {
                 Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
                 if (null != cardsComplained) {
                     rAICards.putAll(player, cardsComplained);
+                }
+            } else {
+                //reset cards to fix weird issues on netplay nextgame client
+                for (Card c : player.getCardsIn(ZoneType.Library)) {
+                    c.setTapped(false);
+                    c.resetActivationsPerTurn();
                 }
             }
 

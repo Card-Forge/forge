@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Gorgon Cleric
 PT:3/3
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top three cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 DeckHas:Ability$Graveyard
-Oracle:Deathtouch\nWhen Venomous Hierophant enters the battlefield, put the top three cards of your library into your graveyard.
+Oracle:Deathtouch\nWhen Venomous Hierophant enters the battlefield, mill three cards.

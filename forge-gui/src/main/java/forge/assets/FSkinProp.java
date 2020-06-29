@@ -230,6 +230,15 @@ public enum FSkinProp {
     ICO_QUEST_BIG_SWORD   (new int[] {320, 1360, 160, 160}, PropType.ICON),
     ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
 
+    //menu icon
+    ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_STATS        (new int[] {80, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_PUZZLE       (new int[] {160, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_GAUNTLET     (new int[] {240, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_SEALED       (new int[] {320, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_DRAFT        (new int[] {400, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_CONSTRUCTED  (new int[] {480, 1520, 80, 80}, PropType.ICON),
+
     //interface icons
     ICO_QUESTION        (new int[] {560, 800, 32, 32}, PropType.ICON),
     ICO_INFORMATION     (new int[] {592, 800, 32, 32}, PropType.ICON),
@@ -388,6 +397,7 @@ public enum FSkinProp {
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLYING         (new int[] {330, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HASTE          (new int[] {412, 494, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HEXPROOF       (new int[] {412, 2, 80, 80}, PropType.ABILITY),

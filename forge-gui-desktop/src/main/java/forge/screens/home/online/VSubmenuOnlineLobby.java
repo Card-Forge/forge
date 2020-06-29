@@ -24,12 +24,13 @@ import forge.net.server.FServerManager;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnlineLobby, IVTopLevelUI {
     SINGLETON_INSTANCE;
 
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Lobby");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblLobby"));
     private VLobby lobby;
     private FGameClient client;
 
@@ -63,7 +64,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         container.removeAll();
 
         if (lobby == null) {
-            final FButton btnConnect = new FButton("Connect to Server");
+            final FButton btnConnect = new FButton(Localizer.getInstance().getMessage("lblConnectToServer"));
             btnConnect.setFont(FSkin.getRelativeFont(20));
             btnConnect.addActionListener(new ActionListener() {
                 @Override
@@ -83,7 +84,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
-        lobby.getLblTitle().setText("Online Multiplayer: Lobby");
+        lobby.getLblTitle().setText(Localizer.getInstance().getMessage("lblOnlineLobbyTitle"));
         pnlTitle.removeAll();
         pnlTitle.setOpaque(false);
         pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span 2");
@@ -137,7 +138,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
     @Override
     public String getMenuTitle() {
-        return "Lobby";
+        return Localizer.getInstance().getMessage("lblLobby");
     }
 
     @Override
@@ -183,13 +184,13 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     public boolean onClosing(final FScreen screen) {
         final FServerManager server = FServerManager.getInstance();
         if (server.isHosting()) {
-            if (SOptionPane.showConfirmDialog("Leave lobby? Doing so will shut down all connections and stop hosting.", "Leave")) {
+            if (SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyDescription"), Localizer.getInstance().getMessage("lblLeave"))) {
                 server.stopServer();
                 FNetOverlay.SINGLETON_INSTANCE.reset();
                 return true;
             }
         } else {
-            if (client == null || SOptionPane.showConfirmDialog("Leave lobby?", "Leave")) {
+            if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
                 if (client != null) {
                     client.close();
                     client = null;
@@ -199,5 +200,9 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             }
         }
         return false;
+    }
+
+    @Override
+    public void closeConn(String msg) {
     }
 }

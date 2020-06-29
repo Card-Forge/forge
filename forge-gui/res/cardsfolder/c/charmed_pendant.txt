@@ -1,15 +1,5 @@
 Name:Charmed Pendant
 ManaCost:4
 Types:Artifact
-A:AB$ Mana | Cost$ T Mill<1> | Produced$ W | Amount$ ManaW | References$ ManaW | InstantSpeed$ True | SubAbility$ DBManaU | SpellDescription$ For each colored mana symbol in that card's mana cost, add one mana of that color. Activate this ability only any time you could cast an instant.
-SVar:DBManaU:DB$ Mana | Produced$ U | Amount$ ManaU | References$ ManaU | SubAbility$ DBManaB
-SVar:DBManaB:DB$ Mana | Produced$ B | Amount$ ManaB | References$ ManaB | SubAbility$ DBManaR
-SVar:DBManaR:DB$ Mana | Produced$ R | Amount$ ManaR | References$ ManaR | SubAbility$ DBManaG
-SVar:DBManaG:DB$ Mana | Produced$ G | Amount$ ManaG | References$ ManaG
-SVar:ManaW:Milled$ChromaSource.W
-SVar:ManaU:Milled$ChromaSource.U
-SVar:ManaB:Milled$ChromaSource.B
-SVar:ManaR:Milled$ChromaSource.R
-SVar:ManaG:Milled$ChromaSource.G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/charmed_pendant.jpg
-Oracle:{T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color. Activate this ability only any time you could cast an instant.
+A:AB$ Mana | Cost$ T Mill<1> | Produced$ Special EachColoredManaSymbol_Milled | InstantSpeed$ True | SpellDescription$ For each colored mana symbol in the milled card's mana cost, add one mana of that color. Activate this ability only any time you could cast an instant.
+Oracle:{T}, Mill a card: For each colored mana symbol in the milled card's mana cost, add one mana of that color. Activate this ability only any time you could cast an instant.

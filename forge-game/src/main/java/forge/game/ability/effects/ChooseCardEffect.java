@@ -84,7 +84,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     final CardCollectionView cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.nounWithAmount(1, type);
-                        Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false);
+                        Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false, null);
                         if (c != null) {
                             chosen.add(c);
                         }
@@ -100,7 +100,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 while (!creature.isEmpty()) {
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
                             Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
-                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP);
+                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;
@@ -120,7 +120,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     Aggregates.random(choices, validAmount, chosen);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory")));
+                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
                 }
             }
         }

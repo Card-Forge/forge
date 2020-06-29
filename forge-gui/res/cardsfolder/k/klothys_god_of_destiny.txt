@@ -12,4 +12,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ 
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$LifeGain
-Oracle:Indestructible\nAs long as your devotion to red and green is less than seven, Klothys isn’t a creature.\nAt the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and Klothys deals 2 damage to each opponent.
+Oracle:Indestructible\nAs long as your devotion to red and green is less than seven, Klothys isn't a creature.\nAt the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and Klothys deals 2 damage to each opponent.

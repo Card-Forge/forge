@@ -2,8 +2,10 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.game.Game;
@@ -211,9 +213,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 final Combat combat = game.getCombat();
                 if ( null != combat ) {
                     final FCollectionView<GameEntity> e = combat.getDefenders();
-
-                    final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                            Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(tgtC.getName())));
+                    String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(tgtC.getName()));
+                    Map<String, Object> params = Maps.newHashMap();
+                    params.put("Attacker", tgtC);
+                    final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa, title, params);
 
                     if (defender != null) {
                         combat.addAttacker(tgtC, defender);

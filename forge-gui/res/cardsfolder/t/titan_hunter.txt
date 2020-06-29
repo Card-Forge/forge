@@ -1,0 +1,11 @@
+Name:Titan Hunter
+ManaCost:4 B
+Types:Creature Human Warrior
+PT:4/5
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigDamage | References$ X | TriggerDescription$ At the beginning of each player's end step, if no creatures died this turn, CARDNAME deals 4 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 4
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+A:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+DeckHas:Ability$LifeGain
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+Oracle:At the beginning of each player's end step, if no creatures died this turn, Titan Hunter deals 4 damage to that player.\n{1}{B}, Sacrifice a creature: You gain 4 life.

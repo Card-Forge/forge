@@ -17,6 +17,7 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
+import forge.game.combat.CombatView;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
@@ -100,17 +101,27 @@ public class TrackableTypes {
             if (newCollection != null) {
                 //swap in objects in old collection for objects in new collection
                 for (int i = 0; i < newCollection.size(); i++) {
-                    T newObj = newCollection.get(i);
-                    if (newObj != null) {
-                        T existingObj = from.getTracker().getObj(itemType, newObj.getId());
-                        if (existingObj != null) { //if object exists already, update its changed properties
-                            existingObj.copyChangedProps(newObj);
-                            newCollection.remove(i);
-                            newCollection.add(i, existingObj);
+                    try {
+                        T newObj = newCollection.get(i);
+                        if (newObj != null) {
+                            T existingObj = from.getTracker().getObj(itemType, newObj.getId());
+                            if (existingObj != null) {  //fix cards with alternate state/ manifest/ morph/ adventure etc...
+                                if (prop.getType() == TrackableTypes.CardViewCollectionType ||
+                                        prop.getType() == TrackableTypes.StackItemViewListType) {
+                                    newCollection.remove(i);
+                                    newCollection.add(i, newObj);
+                                } else { //if object exists already, update its changed properties
+                                    existingObj.copyChangedProps(newObj);
+                                    newCollection.remove(i);
+                                    newCollection.add(i, existingObj);
+                                }
+                            }
+                            else { //if object is new, cache in object lookup
+                                from.getTracker().putObj(itemType, newObj.getId(), newObj);
+                            }
                         }
-                        else { //if object is new, cache in object lookup
-                            from.getTracker().putObj(itemType, newObj.getId(), newObj);
-                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("got an IndexOutOfBoundsException, trying to continue ...");
                     }
                 }
             }
@@ -573,9 +584,9 @@ public class TrackableTypes {
         public Map<CounterType, Integer> deserialize(TrackableDeserializer td, Map<CounterType, Integer> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<CounterType, Integer> map = Maps.newEnumMap(CounterType.class);
+                Map<CounterType, Integer> map = Maps.newHashMap();
                 for (int i = 0; i < size; i++) {
-                    map.put(CounterType.valueOf(td.readString()), td.readInt());
+                    map.put(CounterType.getType(td.readString()), td.readInt());
                 }
                 return map;
             }
@@ -586,7 +597,7 @@ public class TrackableTypes {
         public void serialize(TrackableSerializer ts, Map<CounterType, Integer> value) {
             ts.write(value.size());
             for (Entry<CounterType, Integer> entry : value.entrySet()) {
-                ts.write(entry.getKey().name());
+                ts.write(entry.getKey().toString());
                 ts.write(entry.getValue());
             }
         }
@@ -620,6 +631,28 @@ public class TrackableTypes {
 
         @Override
         public void serialize(TrackableSerializer ts, Map<Object, Object> value) {
+        }
+    };
+    public static final TrackableObjectType<CombatView> CombatViewType = new TrackableObjectType<CombatView>() {
+        @Override
+        protected CombatView getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        protected CombatView deserialize(TrackableDeserializer td, CombatView oldValue) {
+            oldValue.deserialize(td); //TODO handle old value being null or changing to null
+            return oldValue;
+        }
+
+        @Override
+        protected void serialize(TrackableSerializer ts, CombatView value) {
+            if (value == null) {
+                ts.write(-1);
+            }
+            else {
+                value.serialize(ts);
+            }
         }
     };
 }

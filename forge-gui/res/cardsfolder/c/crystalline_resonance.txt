@@ -1,0 +1,6 @@
+Name:Crystalline Resonance
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Cycled | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigClone | OptionalDecider$ You | TriggerDescription$ Whenever you cycle a card, you may have CARDNAME become a copy of another target permanent until your next turn, except it has this ability.
+SVar:TrigClone:DB$ Clone | ValidTgts$ Permanent.Other | TgtPrompt$ Choose another target permanent to copy until your next turn | Duration$ UntilYourNextTurn | GainThisAbility$ True | AILogic$ CloneBestCreature
+Oracle:Whenever you cycle a card, you may have Crystalline Resonance become a copy of another target permanent until your next turn, except it has this ability.

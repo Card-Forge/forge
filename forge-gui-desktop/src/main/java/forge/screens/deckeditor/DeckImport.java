@@ -39,6 +39,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 /**
  *
@@ -77,13 +78,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
-    private final FLabel summaryMain = new FLabel.Builder().text("Imported deck summary will appear here").build();
-    private final FLabel summarySide = new FLabel.Builder().text("Line for sideboard summary").build();
-    private final FButton cmdAccept = new FButton("Import Deck");
-    private final FButton cmdCancel = new FButton("Cancel");
-    private final FCheckBox newEditionCheck = new FCheckBox("Import latest version of card", true);
-    private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
-    private final FCheckBox onlyCoreExpCheck = new FCheckBox("Use only core and expansion sets", true);
+    private final FLabel summaryMain = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblImportedDeckSummay")).build();
+    private final FLabel summarySide = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSideboardSummayLine")).build();
+    private final FButton cmdAccept = new FButton(Localizer.getInstance().getMessage("lblImportDeck"));
+    private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
+    private final FCheckBox newEditionCheck = new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), true);
+    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
+    private final FCheckBox onlyCoreExpCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), true);
 
     private final FComboBox<String> monthDropdown = new FComboBox<>(); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = new FComboBox<>();
@@ -102,14 +103,14 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
-        this.setTitle("Deck Importer");
+        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporter"));
 
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist", foreColor));
-        this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Expect the recognized lines to appear", foreColor));
+        this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblPasteTypeDecklist"), foreColor));
+        this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblExpectRecognizedLines"), foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
@@ -234,8 +235,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 idx = 1;
             }
         }
-        summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
-        summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1], cardsUnknown[1]));
+        summaryMain.setText(Localizer.getInstance().getMessage("lblDeckImporterSummaryOfMain", String.valueOf(cardsOk[0]), String.valueOf(cardsUnknown[0])));
+        summarySide.setText(Localizer.getInstance().getMessage("lblDeckImporterSummaryOfSideboard", String.valueOf(cardsOk[1]), String.valueOf(cardsUnknown[1])));
         cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 

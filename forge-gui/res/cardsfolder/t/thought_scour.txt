@@ -1,7 +1,6 @@
 Name:Thought Scour
 ManaCost:U
 Types:Instant
-A:SP$ Mill | Cost$ U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of their library into their graveyard. Draw a card. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_scour.jpg
-Oracle:Target player puts the top two cards of their library into their graveyard.\nDraw a card.
+A:SP$ Mill | Cost$ U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards. Draw a card. | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+Oracle:Target player mills two cards.\nDraw a card.

@@ -22,6 +22,7 @@ import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
@@ -49,7 +50,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                     } catch (Exception ex) {
                         // IntelliJ swears that BindException isn't thrown in this try block, but it is!
                         if (ex.getClass() == BindException.class) {
-                            SOptionPane.showErrorDialog("Unable to start server, port already in use!");
+                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblUnableStartServerPortAlreadyUse"));
                             SOverlayUtils.hideOverlay();
                         } else {
                             BugReporter.reportException(ex);
@@ -64,7 +65,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay("Starting server...");
+                SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblStartingServer"));
                 SOverlayUtils.showOverlay();
             }
         });
@@ -88,7 +89,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay("Connecting to server...");
+                SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblConnectingToServer"));
                 SOverlayUtils.showOverlay();
             }
         });

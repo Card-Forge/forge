@@ -19,6 +19,8 @@ package forge.game.cost;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
@@ -29,7 +31,7 @@ import forge.game.zone.ZoneType;
  * your graveyard as a cost. This Cost doesn't appear on very many cards, but
  * might appear in more in the future. This will show up in the form of Mill<1>
  */
-public class CostMill extends CostPartWithList {
+public class CostMill extends CostPart {
 
     /**
      * Serializables need a version ID.
@@ -48,18 +50,6 @@ public class CostMill extends CostPartWithList {
 
     @Override
     public int paymentOrder() { return 10; }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
-    @Override
-    public String getHashForLKIList() {
-        return "Milled";
-    }
-    @Override
-    public String getHashForCardList() {
-    	return "MilledCards";
-    }
 
     /*
      * (non-Javadoc)
@@ -96,7 +86,7 @@ public class CostMill extends CostPartWithList {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Put the top ");
+        sb.append("Mill ");
 
         if (i != null) {
             sb.append(i);
@@ -108,17 +98,16 @@ public class CostMill extends CostPartWithList {
         if ((i == null) || (i > 1)) {
             sb.append("s");
         }
-        sb.append(" from the top of your library into your graveyard");
 
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
-        return targetCard.getGame().getAction().moveToGraveyard(targetCard, null);
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
+        CardZoneTable table = new CardZoneTable();
+        ability.getPaidHash().put("Milled", (CardCollection) ai.mill(decision.c, ZoneType.Graveyard, false, ability, table));
+        table.triggerChangesZoneAll(ai.getGame());
+        return true;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

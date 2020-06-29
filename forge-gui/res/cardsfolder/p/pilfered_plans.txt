@@ -1,7 +1,6 @@
 Name:Pilfered Plans
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ Mill | Cost$ 1 U B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player puts the top two cards of their library into their graveyard. Draw two cards.
+A:SP$ Mill | Cost$ 1 U B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player mills two cards. Draw two cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pilfered_plans.jpg
-Oracle:Target player puts the top two cards of their library into their graveyard. Draw two cards.
+Oracle:Target player mills two cards. Draw two cards.

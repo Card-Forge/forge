@@ -6,26 +6,57 @@ import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.net.server.FServerManager;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FOptionPane;
+import forge.util.Callback;
+import forge.util.Localizer;
+
+import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("Lobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
-        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
- 
+        Lobby("lblLobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
+        Disconnect("lblDisconnect", FSkinImage.DELETE, null);
+
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
         OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, icon0, new FEventHandler() {
+            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    if(screenClass == null) {
+                        FOptionPane.showConfirmDialog(
+                                Localizer.getInstance().getMessage("lblLeaveLobbyDescription"),
+                                Localizer.getInstance().getMessage("lblDisconnect"), new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) {
+                                            if (FServerManager.getInstance() != null)
+                                                if(FServerManager.getInstance().isHosting()) {
+                                                    FServerManager.getInstance().unsetReady();
+                                                    FServerManager.getInstance().stopServer();
+                                                }
+
+                                            if (OnlineLobbyScreen.getfGameClient() != null)
+                                                OnlineLobbyScreen.closeClient();
+
+                                            Forge.back();
+                                            screen = null;
+                                            OnlineLobbyScreen.clearGameLobby();
+                                        }
+                                    }
+                                });
+                        return;
+                    }
                     Forge.back(); //remove current screen from chain
                     open();
                     setPreferredScreen(OnlineScreen.this);
@@ -37,13 +68,14 @@ public class OnlineMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("Play Online - " + item.getText());
+                    screen.setHeaderCaption(Localizer.getInstance().getMessage("lblPlayOnline") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                     return;
                 }
             }
+            update();
         }
 
         public void open() {
@@ -59,6 +91,17 @@ public class OnlineMenu extends FPopupMenu {
         public FScreen getScreen() {
             initializeScreen();
             return screen;
+        }
+
+        public void update(){
+            for (OnlineScreen ngs : OnlineScreen.values()) {
+                if (ngs.ordinal() == 2){ //disconect
+                    if (getGameLobby() == null)
+                        ngs.item.setEnabled(false);
+                    else
+                        ngs.item.setEnabled(true);
+                }
+            }
         }
     }
 

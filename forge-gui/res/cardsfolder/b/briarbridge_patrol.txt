@@ -2,15 +2,11 @@ Name:Briarbridge Patrol
 ManaCost:3 G
 Types:Creature Human Warrior
 PT:3/3
-# Two pronged handling of investigation portion
-T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ False | ValidTarget$ Creature | TriggerZones$ Battlefield | OncePerEffect$ True | Execute$ TrigToken | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
-# Trigger on Accumulated Clues
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ ClueResearch | SVarCompare$ GE3 | Execute$ TrigCheatCreature | TriggerDescription$ At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
 SVar:TrigCheatCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 SVar:ClueResearch:Count$SacrificedThisTurn Clue
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/briarbridge_patrol.jpg
 Oracle:Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nAt the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.

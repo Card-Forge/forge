@@ -1,9 +1,8 @@
 Name:Sanity Grinding
 ManaCost:U U U
 Types:Sorcery
-A:SP$ Dig | Cost$ U U U | DigNum$ 10 | Reveal$ True | ChangeNum$ 0 | RememberRevealed$ True | SubAbility$ MillTargeted | SpellDescription$ Chroma — Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+A:SP$ Dig | Cost$ U U U | DigNum$ 10 | Reveal$ True | ChangeNum$ 0 | RememberRevealed$ True | SubAbility$ MillTargeted | SpellDescription$ Chroma — Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. Then put the cards you revealed this way on the bottom of your library in any order.
 SVar:MillTargeted:DB$ Mill | NumCards$ X | References$ X | ValidTgts$ Opponent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$ChromaSource.Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_grinding.jpg
-Oracle:Chroma — Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+Oracle:Chroma — Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. Then put the cards you revealed this way on the bottom of your library in any order.

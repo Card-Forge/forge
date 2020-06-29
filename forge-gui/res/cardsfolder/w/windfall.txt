@@ -6,6 +6,7 @@ SVar:WindfallDraw:DB$ Draw | Defined$ Player | NumCards$ X | References$ X | Sub
 SVar:WindfallCleanup:DB$ Cleanup | ClearRemembered$ True
 #some cards may allow you to discard to other zones
 SVar:X:PlayerCountPlayers$HighestValidGraveyard,Library,Exile Card.IsRemembered+YouOwn
+DeckHas:Ability$Discard
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windfall.jpg
 Oracle:Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.

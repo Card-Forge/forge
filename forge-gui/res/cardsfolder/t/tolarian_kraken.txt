@@ -1,0 +1,7 @@
+Name:Tolarian Kraken
+ManaCost:4 U U
+Types:Creature Kraken
+PT:4/6
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigTapOrUntap | OptionalDecider$ You | TriggerDescription$ Whenever you draw a card, you may pay {1}. When you do, you may tap or untap target creature.
+SVar:TrigTapOrUntap:AB$ TapOrUntap | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Whenever you draw a card, you may pay {1}. When you do, you may tap or untap target creature.

@@ -1,0 +1,8 @@
+Name:Twinblade Assassins
+ManaCost:3 B G
+Types:Creature Elf Assassin
+PT:5/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if a creature died this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:At the beginning of your end step, if a creature died this turn, draw a card.

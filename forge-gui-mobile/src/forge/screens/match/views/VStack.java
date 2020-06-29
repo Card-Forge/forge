@@ -40,6 +40,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
@@ -92,6 +93,15 @@ public class VStack extends FDropDown {
         PlayerView player = MatchController.instance.getCurrentPlayer();
         MatchController.instance.restoreOldZones(player, restorablePlayerZones);
         restorablePlayerZones = null;
+    }
+
+    public void checkEmptyStack() { //sort the bug in client when desynch happens
+        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+        if(stack!=null)
+            if(isVisible() && stack.isEmpty()) { //visible stack but empty already
+                hide();
+                getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+            }
     }
 
     @Override
@@ -372,12 +382,37 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top);
+            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
-            textRenderer.drawText(g, text, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+
+            String name = stackInstance.getSourceCard().getName();
+            int index = text.indexOf(name);
+            String newtext = "";
+            String cId =  "(" + stackInstance.getSourceCard().getId() + ")";
+
+            if (index == -1) {
+                newtext = TextUtil.fastReplace(TextUtil.fastReplace(text.trim(),"--","-"),"- -","-");
+                newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
+                textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + "\n" + (newtext.length() > 1 ? newtext : ""),
+                        FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+
+            } else {
+                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + text.substring(index + name.length()), "- -", "-");
+                String trimSecond = TextUtil.fastReplace(trimFirst, name+" "+cId, name);
+                newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
+
+                if(newtext.equals("\n"+name))
+                    textRenderer.drawText(g, name + " " + cId, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                else {
+                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
+                    newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
+                    newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
+                    textRenderer.drawText(g, name+" "+cId+newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                }
+            }
 
             g.endClip();
 

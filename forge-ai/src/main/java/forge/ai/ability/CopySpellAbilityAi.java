@@ -29,8 +29,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
         final SpellAbility top = game.getStack().peekAbility();
         if (top != null
-                && top.getPayCosts() != null && top.getPayCosts().getCostMana() != null
-                && sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null
+                && top.getPayCosts().getCostMana() != null
+                && sa.getPayCosts().getCostMana() != null
                 && top.getPayCosts().getCostMana().getMana().getCMC() >= sa.getPayCosts().getCostMana().getMana().getCMC() + diff) {
             // The copied spell has a significantly higher CMC than the copy spell, consider copying
             chance = 100;

@@ -16,6 +16,7 @@ import forge.player.GamePlayerUtil;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -75,7 +76,7 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     private boolean startPuzzleSolve() {
         final Puzzle selected = (Puzzle)view.getList().getSelectedValue();
         if (selected == null) {
-            SOptionPane.showMessageDialog("Please select a puzzle from the list first!", "No puzzle selected", FSkinProp.ICO_ERROR);
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseFirstSelectAPuzzleFromList"), Localizer.getInstance().getMessage("lblNoSelectedPuzzle"), FSkinProp.ICO_ERROR);
             return false;
         }
 

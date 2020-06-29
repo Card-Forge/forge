@@ -91,8 +91,10 @@ Liliana, the Last Hope|Liliana's Army|The dead will always outnumber the living.
 Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's environmentally friendly!
 Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
+Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
+Narset of the Ancient Way|Narset's Burning Knowledge|Prowess both magical and martial.
 Narset Transcendent|Narset's One Rule|No spells for you!
 Nicol Bolas, Dragon-God|Bolas's Flawless Victory|Who's left to oppose me?
 Nicol Bolas, God-Pharaoh|Bolas's Cleansing|Let's just tear this down and start again. Or... maybe tearing it down will suffice.
@@ -151,6 +153,7 @@ Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
 Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
 Vivien, Arkbow Ranger|Vivien's Wish|Welcome, old friend. I was afraid I lost you forever.
+Vivien, Monsters' Advocate|Vivien's Nature Documentary|Awww, look! He has a little buddy!
 Vivien, Nature's Avenger|Vivien's Magnification|Magnificent!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
 Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. There's no step two.

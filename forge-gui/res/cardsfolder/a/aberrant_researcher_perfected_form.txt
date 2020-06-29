@@ -3,15 +3,13 @@ ManaCost:3 U
 Types:Creature Human Insect
 PT:3/2
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, put the top card of your library into your graveyard. If it's an instant or sorcery card, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card. If an instant or sorcery card was milled this way, transform CARDNAME.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Instant,Card.Sorcery | ConditionCompare$ EQ1 | SubAbility$ Cleanup | Mode$ Transform
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:DoubleFaced
-DeckHints:Ability$Delirium
-DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aberrant_researcher.jpg
-Oracle:Flying\nAt the beginning of your upkeep, put the top card of your library into your graveyard. If it's an instant or sorcery card, transform Aberrant Researcher.
+DeckHints:Ability$Delirium & Type$Instant|Sorcery
+Oracle:Flying\nAt the beginning of your upkeep, mill a card. If an instant or sorcery card was milled this way, transform Aberrant Researcher.
 
 ALTERNATE
 
@@ -21,6 +19,5 @@ Colors:blue
 Types:Creature Insect Horror
 PT:5/4
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perfected_form.jpg
-Oracle:Flying 
+Oracle:Flying
 

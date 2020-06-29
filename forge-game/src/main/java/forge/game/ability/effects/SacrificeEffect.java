@@ -45,13 +45,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
             GameEntityCounterTable table = new GameEntityCounterTable();
-            card.addCounter(CounterType.AGE, 1, activator, true, table);
+            card.addCounter(CounterEnumType.AGE, 1, activator, true, table);
 
             table.triggerCountersPutAll(game);
 
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
-            int n = card.getCounters(CounterType.AGE);
+            int n = card.getCounters(CounterEnumType.AGE);
             
             // multiply cost
             for (int i = 0; i < n; ++i) {

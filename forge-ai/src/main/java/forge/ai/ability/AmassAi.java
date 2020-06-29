@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -23,12 +25,12 @@ public class AmassAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            return CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterType.P1P1)) > 0;
+            return CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1)) > 0;
         } else {
             final String tokenScript = "b_0_0_zombie_army";
             final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-            Card token = TokenInfo.getProtoType(tokenScript, sa);
+            Card token = TokenInfo.getProtoType(tokenScript, sa, false);
 
             if (token == null) {
                 return false;
@@ -44,8 +46,8 @@ public class AmassAi extends SpellAbilityAi {
             CardCollection preList = new CardCollection(token);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(token), preList);
 
-            if (token.canReceiveCounters(CounterType.P1P1)) {
-                token.setCounters(CounterType.P1P1, amount);
+            if (token.canReceiveCounters(CounterEnumType.P1P1)) {
+                token.setCounters(CounterEnumType.P1P1, amount);
             }
 
             if (token.isCreature() && token.getNetToughness() < 1) {
@@ -86,8 +88,8 @@ public class AmassAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
-        Iterable<Card> better = CardLists.filter(options, CardPredicates.canReceiveCounters(CounterType.P1P1));
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        Iterable<Card> better = CardLists.filter(options, CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         if (Iterables.isEmpty(better)) {
             better = options;
         }

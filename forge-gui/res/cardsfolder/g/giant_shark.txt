@@ -1,6 +1,6 @@
 Name:Giant Shark
 ManaCost:5 U
-Types:Creature Fish
+Types:Creature Shark
 PT:4/4
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.wasDealtDamageThisTurn | ValidBlocker$ Card.Self | Execute$ TrigPumpShark | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature that has been dealt damage this turn, CARDNAME gets +2/+0 and gains trample until end of turn.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.wasDealtDamageThisTurn | Execute$ TrigPumpShark | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature that has been dealt damage this turn, CARDNAME gets +2/+0 and gains trample until end of turn.

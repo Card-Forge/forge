@@ -1,6 +1,6 @@
 Name:Aerie Bowmasters
 ManaCost:2 G G
-Types:Creature Hound Archer
+Types:Creature Dog Archer
 PT:3/4
 K:Reach
 K:Megamorph:5 G

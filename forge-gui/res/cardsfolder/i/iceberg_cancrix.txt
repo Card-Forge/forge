@@ -2,7 +2,7 @@ Name:Iceberg Cancrix
 ManaCost:1 U
 Types:Snow Creature Crab
 PT:0/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Other+YouCtrl+Snow | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Other+YouCtrl+Snow | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever another snow permanent enters the battlefield under your control, you may have target player mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
 DeckHints:Type$Snow
-Oracle:Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
+Oracle:Whenever another snow permanent enters the battlefield under your control, you may have target player mill two cards.

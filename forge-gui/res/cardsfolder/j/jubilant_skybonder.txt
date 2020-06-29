@@ -1,0 +1,8 @@
+Name:Jubilant Skybonder
+ManaCost:1 W/U W/U
+Types:Creature Human Wizard
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withFlying | AddStaticAbility$ RaiseCost | Description$ Creatures you control with flying have "Spells your opponents cast that target this creature cost {2} more to cast."
+SVar:RaiseCost:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
+Oracle:Flying\nCreatures you control with flying have "Spells your opponents cast that target this creature cost {2} more to cast."

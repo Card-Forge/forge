@@ -5,7 +5,7 @@ PT:6/5
 Text:CARDNAME has echo X, where X is your life total.
 K:Echo:X
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
-SVar:TrigDmg:DB$ ChooseNumber | ListTitle$ Choose an amount of damage to you and target creature | ChooseAnyNumber$ True | SubAbility$ DBDmg | AILogic$ Min
+SVar:TrigDmg:DB$ ChooseNumber | ListTitle$ an amount of damage to you and target creature | ChooseAnyNumber$ True | SubAbility$ DBDmg | AILogic$ Min
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | References$ Y | NoPrevention$ True | SubAbility$ DmgYou
 SVar:DmgYou:DB$ DealDamage | Defined$ You | NumDmg$ Y | References$ Y | NoPrevention$ True
 SVar:X:Count$YourLifeTotal

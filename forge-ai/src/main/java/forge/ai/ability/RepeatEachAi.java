@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -16,6 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -44,21 +44,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             List<Player> opponents = aiPlayer.getOpponents();
             for(Player opp : opponents) {
                 if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
-                    return false;
-                }
-            }
-        } else if ("GainControlOwns".equals(logic)) {
-            List<Card> list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.isCreature() && !crd.getController().equals(crd.getOwner());
-                }
-            });
-            if (list.isEmpty()) {
-                return false;
-            }
-            for (final Card c : list) {
-                if (aiPlayer.equals(c.getController())) {
                     return false;
                 }
             }
@@ -118,7 +103,7 @@ public class RepeatEachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

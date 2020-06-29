@@ -2,8 +2,7 @@ Name:Sultai Skullkeeper
 ManaCost:1 U
 Types:Creature Naga Shaman
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top two cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 2 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_skullkeeper.jpg
-Oracle:When Sultai Skullkeeper enters the battlefield, put the top two cards of your library into your graveyard.
+Oracle:When Sultai Skullkeeper enters the battlefield, mill two cards.

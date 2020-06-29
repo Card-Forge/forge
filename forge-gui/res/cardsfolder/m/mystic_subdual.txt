@@ -1,0 +1,8 @@
+Name:Mystic Subdual
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | RemoveAllAbilities$ True | Description$ Enchanted creature gets -2/-0 and loses all abilities. (Mutating onto the creature won't give it new abilities. It can gain abilities in other ways.)
+Oracle:Flash\nEnchant creature\nEnchanted creature gets -2/-0 and loses all abilities. (Mutating onto the creature won't give it new abilities. It can gain abilities in other ways.)

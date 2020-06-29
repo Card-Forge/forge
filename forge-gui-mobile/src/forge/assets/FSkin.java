@@ -209,7 +209,7 @@ public class FSkin {
                 textures.put(f6.path(), textures.get(f3.path()));
             }
             if (f7.exists()){
-                Texture t = new Texture(f7, false);
+                Texture t = new Texture(f7, true);
                 //t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
             }

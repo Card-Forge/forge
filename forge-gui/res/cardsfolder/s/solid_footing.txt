@@ -1,0 +1,9 @@
+Name:Solid Footing
+ManaCost:W
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+withVigilance | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ As long as enchanted creature has vigilance, it assigns combat damage equal to its toughness rather than its power.
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+1.\nAs long as enchanted creature has vigilance, it assigns combat damage equal to its toughness rather than its power.

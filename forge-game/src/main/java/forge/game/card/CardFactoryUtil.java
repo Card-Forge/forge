@@ -20,7 +20,6 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -35,7 +34,6 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPredicates.Presets;
@@ -640,6 +638,10 @@ public class CardFactoryUtil {
             return doXMath(oppDmg, m, source);
         }
 
+        if (value.contains("NonCombatDamageDealtThisTurn")) {
+            return doXMath(player.getAssignedDamage() - player.getAssignedCombatDamage(), m, source);
+        }
+
         if (value.equals("OpponentsAttackedThisTurn")) {
             return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source);
         }
@@ -721,10 +723,13 @@ public class CardFactoryUtil {
             return c.getImprintedCards().get(0).getCMC();
         }
 
-        if (l[0].startsWith("GreatestPower_")) {
-            final String restriction = l[0].substring(14);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
+        if (l[0].startsWith("GreatestPower")) {
+            final String[] lparts = l[0].split("_", 2);
+            final String[] rest = lparts[1].split(",");
+            final CardCollectionView cardsInZones = lparts[0].length() > 13
+                    ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(13)))
+                    : game.getCardsIn(ZoneType.Battlefield);
+            CardCollection list = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetPower() > highest) {
@@ -838,24 +843,9 @@ public class CardFactoryUtil {
         // Count$CountersAddedToPermYouCtrl <CounterType>
         if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
             final String[] components = l[0].split(" ", 2);
-            final CounterType counterType = CounterType.valueOf(components[1]);
+            final CounterType counterType = CounterType.getType(components[1]);
             int n = cc.getCounterToPermThisTurn(counterType);
             return doXMath(n, m, c);
-        }
-
-        // Count$CountersAdded <CounterType> <ValidSource>
-        if (l[0].startsWith("CountersAdded")) {
-            final String[] components = l[0].split(" ", 3);
-            final CounterType counterType = CounterType.valueOf(components[1]);
-            String restrictions = components[2];
-            final String[] rest = restrictions.split(",");
-            CardCollection candidates = CardLists.getValidCards(game.getCardsInGame(), rest, cc, c, null);
-
-            int added = 0;
-            for (final Card counterSource : candidates) {
-                added += c.getCountersAddedBy(counterSource, counterType);
-            }
-            return doXMath(added, m, c);
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
@@ -910,6 +900,9 @@ public class CardFactoryUtil {
             return doXMath(c.getXManaCostPaidCount(colors.toString()), m, c);
         }
 
+        if (sq[0].equals("YouCycledThisTurn")) {
+            return doXMath(cc.getCycledThisTurn(), m, c);
+        }
 
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(cc.getNumDrawnThisTurn(), m, c);
@@ -950,11 +943,6 @@ public class CardFactoryUtil {
         }
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), m, c);
-        }
-
-        // TriggeringObjects
-        if (sq[0].startsWith("Triggered")) {
-            return doXMath(xCount((Card) c.getTriggeringObject(AbilityKey.Card), sq[0].substring(9)), m, c);
         }
 
         if (sq[0].contains("YourStartingLife")) {
@@ -1248,7 +1236,8 @@ public class CardFactoryUtil {
             return doXMath(CardUtil.getColors(c).countColors(), m, c);
         }
         if (sq[0].contains("ChosenNumber")) {
-            return doXMath(c.getChosenNumber(), m, c);
+            Integer i = c.getChosenNumber();
+            return doXMath(i == null ? 0 : i, m, c);
         }
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
@@ -2153,7 +2142,7 @@ public class CardFactoryUtil {
         String[] splitkw = parse.split(":");
 
         String desc = "CARDNAME enters the battlefield with ";
-        desc += Lang.nounWithNumeral(splitkw[2], CounterType.valueOf(splitkw[1]).getName() + " counter");
+        desc += Lang.nounWithNumeral(splitkw[2], CounterType.getType(splitkw[1]).getName() + " counter");
         desc += " on it.";
 
         String extraparams = "";
@@ -2688,7 +2677,7 @@ public class CardFactoryUtil {
                     + "| Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ingest ("
                     + inst.getReminderText() + ")";
 
-            final String abStr = "DB$ Mill | NumCards$ 1 | Destination$ Exile | Defined$ TriggeredTarget";
+            final String abStr = "DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ TriggeredTarget";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
@@ -3010,24 +2999,43 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Saga")) {
-            // Saga there doesn't need Max value anymore?
             final String[] k = keyword.split(":");
-            final String[] abs = k[2].split(",");
+            final List<String> abs = Arrays.asList(k[2].split(","));
+            if (abs.size() != Integer.valueOf(k[1])) {
+                throw new RuntimeException("Saga max differ from Ability amount");
+            }
 
-            int i = 1;
-            for (String ab : abs) {
-                SpellAbility sa = AbilityFactory.getAbility(card, ab);
-                sa.setChapter(i);
+            int idx = 0;
+            int skipId = 0;
+            for(String ab : abs) {
+                idx += 1;
+                if (idx <= skipId) {
+                    continue;
+                }
 
-                // TODO better logic for Roman numbers
-                // In the Description try to merge Chapter trigger with the Same Effect
-                String trigStr = "Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield"
-                    + "| CounterType$ LORE | CounterAmount$ EQ" + i
-                    + "| TriggerDescription$ " + Strings.repeat("I", i) + " - "  + sa.getDescription();
-                final Trigger  t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
-                t.setOverridingAbility(sa);
-                inst.addTrigger(t);
-                ++i;
+                skipId = idx + abs.subList(idx - 1, abs.size()).lastIndexOf(ab);
+                StringBuilder desc = new StringBuilder();
+                for (int i = idx; i <= skipId; i++) {
+                    if (i != idx) {
+                        desc.append(", ");
+                    }
+                    desc.append(TextUtil.toRoman(i));
+                }
+
+                for (int i = idx; i <= skipId; i++) {
+                    SpellAbility sa = AbilityFactory.getAbility(card, ab);
+                    sa.setChapter(i);
+
+                    StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
+                    trigStr.append("| CounterType$ LORE | CounterAmount$ EQ").append(i);
+                    if (i != idx) {
+                        trigStr.append(" | Secondary$ True");
+                    }
+                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
+                    final Trigger  t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+                    t.setOverridingAbility(sa);
+                    inst.addTrigger(t);
+                }
             }
         } else if (keyword.equals("Soulbond")) {
             // Setup ETB trigger for card with Soulbond keyword
@@ -3575,7 +3583,7 @@ public class CardFactoryUtil {
         }  else if (keyword.equals("Sunburst")) {
             // Rule 702.43a If this object is entering the battlefield as a creature,
             // ignoring any type-changing effects that would affect it
-            CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE;
+            CounterType t = CounterType.get(card.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE);
 
             StringBuilder sb = new StringBuilder("etbCounter:");
             sb.append(t).append(":Sunburst:no Condition:");
@@ -4286,7 +4294,7 @@ public class CardFactoryUtil {
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true, table);
+                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), true, table);
                     table.triggerCountersPutAll(game);
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");

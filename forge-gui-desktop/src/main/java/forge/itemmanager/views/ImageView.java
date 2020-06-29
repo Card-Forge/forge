@@ -850,7 +850,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected String getCaption() {
-        return "Image View";
+        return Localizer.getInstance().getMessage("lblImageView");
     }
 
     @Override

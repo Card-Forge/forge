@@ -1,0 +1,10 @@
+Name:Labyrinth Raptor
+ManaCost:B R
+Types:Creature Nightmare Dinosaur
+PT:2/2
+K:Menace
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl+withMenace | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control with menace becomes blocked, defending player sacrifices a creature blocking it.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayer | SacValid$ Creature.blockingTriggeredAttacker | Amount$ 1
+A:AB$ PumpAll | Cost$ B R | ValidCards$ Creature.YouCtrl+withMenace | NumAtt$ 1 | SpellDescription$ Creatures you control with menace get +1/+0 until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Menace\nWhenever a creature you control with menace becomes blocked, defending player sacrifices a creature blocking it.\n{B}{R}: Creatures you control with menace get +1/+0 until end of turn.

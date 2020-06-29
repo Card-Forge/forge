@@ -2,7 +2,7 @@ Name:Homarid Explorer
 ManaCost:3 U
 Types:Creature Homarid Scout
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top four cards of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
-DeckHas:Ability$ Graveyard
-Oracle:When Homarid Explorer enters the battlefield, target player puts the top four cards of their library into their graveyard. 
+DeckHas:Ability$Graveyard
+Oracle:When Homarid Explorer enters the battlefield, target player mills four cards.

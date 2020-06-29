@@ -220,6 +220,9 @@ public final class StaticAbilityContinuous {
                     if (!hostCard.hasChosenName() && input.contains("ChosenName")) {
                         return true;
                     }
+                    if (!hostCard.hasChosenEvenOdd() && (input.contains("ChosenEvenOdd") || input.contains("chosenEvenOdd"))) {
+                        return true;
+                    }
 
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
@@ -260,6 +263,10 @@ public final class StaticAbilityContinuous {
                     if (hostCard.hasChosenName()) {
                         final String chosenName = hostCard.getChosenName().replace(",", ";");
                         input = input.replaceAll("ChosenName", "Card.named" + chosenName);
+                    }
+                    if (hostCard.hasChosenEvenOdd()) {
+                        input = input.replaceAll("ChosenEvenOdd", hostCard.getChosenEvenOdd().toString());
+                        input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
                     }
                     input = input.replace("HostCardUID", hostCardUID);
                     return input;
@@ -511,6 +518,20 @@ public final class StaticAbilityContinuous {
                         int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                         p.addMaxLandPlays(se.getTimestamp(), add);
                     }
+                }
+
+                if (params.containsKey("ControlVote")) {
+                    p.addControlVote(se.getTimestamp());
+                }
+                if (params.containsKey("AdditionalVote")) {
+                    String mhs = params.get("AdditionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalVote(se.getTimestamp(), add);
+                }
+                if (params.containsKey("AdditionalOptionalVote")) {
+                    String mhs = params.get("AdditionalOptionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
 
                 if (params.containsKey("RaiseMaxHandSize")) {

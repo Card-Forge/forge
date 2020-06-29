@@ -54,7 +54,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         Card movedCard = game.getAction().moveTo(ZoneType.Exile, host, sa);
 
         // choose a creature
-        Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", true);
+        Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", true, null);
 
         if (choice == null) {
             return;

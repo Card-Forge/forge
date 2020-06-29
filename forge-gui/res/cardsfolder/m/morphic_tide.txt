@@ -1,7 +1,7 @@
 Name:Morphic Tide
 ManaCost:no cost
 Types:Phenomenon
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigPut | TriggerDescription$ When you encounter CARDNAME, starting with you, each player may put a permanent card from their hand onto the battlefield. (Then planeswalk away from this phenomenon.)
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When you encounter CARDNAME, starting with you, each player may put a permanent card from their hand onto the battlefield. (Then planeswalk away from this phenomenon.)
 SVar:TrigPut:DB$ RepeatEach | StartingWithActivator$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ ChangePermanent 
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Permanent.RememberedPlayerOwn | Imprint$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | Defined$ Remembered | NoMove$ True | DigNum$ WarpX | References$ WarpX | RememberRevealed$ True | Reveal$ True | SubAbility$ DBCleanImprint

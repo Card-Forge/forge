@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Creature Bird
 PT:1/2
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Metalcraft$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Metalcraft — Whenever CARDNAME deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Metalcraft$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Metalcraft — Whenever CARDNAME deals combat damage to a player, if you control three or more artifacts, that player mills four cards.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_silcaw.jpg
-Oracle:Flying\nMetalcraft — Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
+Oracle:Flying\nMetalcraft — Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player mills four cards.

@@ -23,6 +23,7 @@ import forge.deck.io.DeckPreferences;
 import forge.item.InventoryItem;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -76,16 +77,17 @@ public class DeckStarRenderer extends ItemCellRenderer {
     }
     
     private void update() {
+        final Localizer localizer = Localizer.getInstance();
         if (deck == null) {
             this.setToolTipText(null);
             skinImage = null;
         }
         else if (DeckPreferences.getPrefs(deck).getStarCount() == 0) {
-            this.setToolTipText("Click to add " + deck.getName() + " to your favorites");
+            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", deck.getName()));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText("Click to remove " + deck.getName() + " from your favorites");
+            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", deck.getName()));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
     }

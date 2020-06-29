@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Enchantment Creature Harpy
 PT:3/2
 K:Flying
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of combat on your turn, each player puts the top three cards of their library into their graveyard.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of combat on your turn, each player mills three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player
 DeckHas:Ability$Graveyard
-Oracle:Flying\nAt the beginning of combat on your turn, each player puts the top three cards of their library into their graveyard.
+Oracle:Flying\nAt the beginning of combat on your turn, each player mills three cards.

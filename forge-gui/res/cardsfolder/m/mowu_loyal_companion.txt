@@ -1,6 +1,6 @@
 Name:Mowu, Loyal Companion
 ManaCost:3 G
-Types:Legendary Creature Hound
+Types:Legendary Creature Dog
 PT:3/3
 K:Trample
 K:Vigilance

@@ -1,7 +1,7 @@
 Name:Ghastly Demise
 ManaCost:B
 Types:Instant
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.nonBlack+toughnessLEX | TgtPrompt$ Select target nonblack creature with toughness less than or equal to the number of cards in your graveyard. | References$ X | SpellDescription$ Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
+A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | References$ X,Y | StackDescription$ SpellDescription | SpellDescription$ Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
+SVar:Y:Targeted$CardToughness
 SVar:X:Count$InYourYard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_demise.jpg
 Oracle:Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.

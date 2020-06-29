@@ -1,0 +1,6 @@
+Name:Weird
+ManaCost:no cost
+Types:Creature Weird
+Colors:blue,red
+PT:*/*
+Oracle:

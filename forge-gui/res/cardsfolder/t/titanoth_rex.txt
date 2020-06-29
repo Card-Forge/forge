@@ -1,0 +1,10 @@
+Name:Titanoth Rex
+ManaCost:7 G G
+Types:Creature Dinosaur Beast
+PT:11/11
+K:Trample
+K:Cycling:1 G
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle CARDNAME, put a trample counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ Trample | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Trample\nCycling {1}{G} ({1}{G}, Discard this card: Draw a card.)\nWhen you cycle Titanoth Rex, put a trample counter on target creature you control.

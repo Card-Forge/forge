@@ -181,15 +181,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.MODIFYPT);
         }
 
-        if (hasParam("AddHiddenKeyword")) {
-            layers.add(StaticAbilityLayer.RULES);
-        }
-
-        if (hasParam("IgnoreEffectCost") || hasParam("Goad") || hasParam("CanBlockAny") || hasParam("CanBlockAmount")) {
-            layers.add(StaticAbilityLayer.RULES);
-        }
-
-        if (hasParam("AdjustLandPlays")) {
+        if (hasParam("AddHiddenKeyword")
+                || hasParam("IgnoreEffectCost") || hasParam("Goad") || hasParam("CanBlockAny") || hasParam("CanBlockAmount")
+                || hasParam("AdjustLandPlays") || hasParam("ControlVote") || hasParam("AdditionalVote") || hasParam("AdditionalOptionalVote")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 
@@ -680,7 +674,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             final String type = getParam("Presence");
 
             int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", hostCard.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
 
             if (revealed + ctrl == 0) {
                 return false;
