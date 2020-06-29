@@ -85,8 +85,8 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -1079,8 +1079,15 @@ public final class CMatchUI
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        PlayerView controlledPlayer = playerTurn.getMindSlaveMaster();
+        boolean skippedPhase = true;
+        if (controlledPlayer != null) {
+            final PhaseLabel controlledLabel = getFieldViewFor(controlledPlayer).getPhaseIndicator().getLabelFor(phase);
+            skippedPhase = controlledLabel != null && !controlledLabel.getEnabled();
+        }
+
         final PhaseLabel label = getFieldViewFor(playerTurn).getPhaseIndicator().getLabelFor(phase);
-        return label != null && !label.getEnabled();
+        return skippedPhase && label != null && !label.getEnabled();
     }
 
     /**
