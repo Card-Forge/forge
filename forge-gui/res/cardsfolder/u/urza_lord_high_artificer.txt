@@ -5,10 +5,11 @@ PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUrzaConstruct | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
 SVar:TrigUrzaConstruct:DB$ Token | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | LegacyImage$ c 0 0 a construct total artifacts mh1
 A:AB$ Mana | Cost$ tapXType<1/Artifact> | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Shuffle | Cost$ 5 | Defined$ You | AILogic$ OwnMain2 | SubAbility$ DBMill | SpellDescription$ Shuffle your library, then exile the top card. Until end of turn, you may play that card without paying its mana cost.
-SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
+A:AB$ Shuffle | Cost$ 5 | Defined$ You | AILogic$ OwnMain2 | SubAbility$ DBExile | SpellDescription$ Shuffle your library, then exile the top card. Until end of turn, you may play that card without paying its mana cost.
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ DBPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:DBPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
+DeckHints:Type$Artifact
 Oracle:When Urza, Lord High Artificer enters the battlefield, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."\nTap an untapped artifact you control: Add {U}.\n{5}: Shuffle your library, then exile the top card. Until end of turn, you may play that card without paying its mana cost.

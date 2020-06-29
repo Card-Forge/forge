@@ -29,6 +29,7 @@ import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -713,6 +714,16 @@ public class AbilityUtils {
             else {
                 list = null;
             }
+        }
+        else if (calcX[0].startsWith("TriggerRemembered")) {
+            final SpellAbility root = sa.getRootAbility();
+            CardCollection result = new CardCollection();
+            for (Object o : root.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    result.add((Card) o);
+                }
+            }
+            list = result;
         }
         else if (calcX[0].startsWith("TriggerObjects")) {
             final SpellAbility root = sa.getRootAbility();
@@ -1729,7 +1740,11 @@ public class AbilityUtils {
                         return CardFactoryUtil.doXMath(0, expr, c);
                     }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
-                    return CardFactoryUtil.doXMath(list.size(), expr, c);
+                    if (k[0].contains("TotalToughness")) {
+                        return CardFactoryUtil.doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c);
+                    } else {
+                        return CardFactoryUtil.doXMath(list.size(), expr, c);
+                    }
                 }
 
                 if (l[0].startsWith("LastStateGraveyard")) {

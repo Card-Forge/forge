@@ -78,15 +78,6 @@ public class TriggerSacrificed extends Trigger {
                 return false;
             }
         }
-        
-        if (hasParam("CauseParam")) {
-            // For now only for Heart-Piecer Manticore, extend it if it appears on different effects too
-            if (sourceSA == null || !sourceSA.hasParam("SacrificeParam")
-                    || !sourceSA.getParam("SacrificeParam").equals(getParam("CauseParam"))
-                    || !sourceSA.getHostCard().equals(this.getHostCard())) {
-                return false;
-            }
-        }
 
         if (hasParam("WhileKeyword")) {
             final String keyword = getParam("WhileKeyword");

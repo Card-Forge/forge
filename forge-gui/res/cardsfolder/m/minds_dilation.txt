@@ -1,9 +1,8 @@
 Name:Mind's Dilation
 ManaCost:5 U U
 Types:Enchantment
-T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying it's mana cost.
-SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ CastCard
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ CastCard
 SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | Controller$ You | ShowCardToActivator$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_dilation.jpg
-Oracle:Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying it's mana cost.
+Oracle:Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.

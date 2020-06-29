@@ -1,14 +1,13 @@
 Name:Oracle's Vault
 ManaCost:4
 Types:Artifact
-A:AB$ Mill | Cost$ 2 T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect1 | AILogic$ ExileAndPlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card. Put a brick counter on CARDNAME.
-SVar:DBEffect1:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play1 | SubAbility$ DBPutCounter | ExileOnMoved$ Exile
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1 | SubAbility$ DBCleanup
+A:AB$ Dig | Cost$ 2 T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect1 | AILogic$ ExileAndPlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card. Put a brick counter on CARDNAME.
+SVar:DBEffect1:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play1 | SubAbility$ DBPutCounter | ExileOnMoved$ Exile
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:Play1:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
-A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect2 | CheckSVar$ X | SVarCompare$ GE3 | References$ X | AILogic$ ExileAndPlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. Activate this ability only if there are three or more brick counters on CARDNAME.
-SVar:DBEffect2:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play2 | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+A:AB$ Dig | Cost$ T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect2 | CheckSVar$ X | SVarCompare$ GE3 | References$ X | AILogic$ ExileAndPlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. Activate this ability only if there are three or more brick counters on CARDNAME.
+SVar:DBEffect2:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play2 | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play2:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play remembered card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.BRICK
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oracles_vault.jpg
 Oracle:{2}, {T}: Exile the top card of your library. Until end of turn, you may play that card. Put a brick counter on Oracle's Vault.\n{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. Activate this ability only if there are three or more brick counters on Oracle's Vault.

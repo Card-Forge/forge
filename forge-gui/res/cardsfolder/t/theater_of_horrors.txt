@@ -1,8 +1,8 @@
 Name:Theater of Horrors
 ManaCost:1 B R
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library.
-SVar:TrigMill:DB$ Mill | Defined$ You | Destination$ Exile | NumCards$ 1 | RememberMilled$ True 
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library.
+SVar:TrigExile:DB$ Dig | Defined$ You | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Condition$ PlayerTurn | CheckSVar$ X | References$ X | Description$ During your turn, if an opponent lost life this turn, you may play cards exiled with CARDNAME.
 SVar:X:Count$LifeOppsLostThisTurn
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
