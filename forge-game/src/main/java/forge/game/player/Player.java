@@ -3009,9 +3009,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         final String name = Lang.getPossesive(companion.getName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
-        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
-        eff.addStaticAbility(mayBePlayedAbility);
-        // Probably remove this effect when the spell is cast via a static trigger
+        String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
+        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
+        eff.setSVar("MoveToHand", moveToHand);
+        eff.addStaticAbility(addToHandAbility);
+
+        // TODO Probably remove this effect when the moved to hand
         return eff;
     }
 

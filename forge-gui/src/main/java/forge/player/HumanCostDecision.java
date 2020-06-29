@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
@@ -126,6 +127,23 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
             }
             return PaymentDecision.card(randomSubset);
+        }
+        if (discardType.equals("DifferentNames")) {
+            final CardCollection discarded = new CardCollection();
+            while (c > 0) {
+                final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, hand, ability);
+                inp.setMessage(Localizer.getInstance().getMessage("lblSelectOneDifferentNameCardToDiscardAlreadyChosen") + discarded);
+                inp.setCancelAllowed(true);
+                inp.showAndWait();
+                if (inp.hasCancelled()) {
+                    return null;
+                }
+                final Card first = inp.getFirstSelected();
+                discarded.add(first);
+                hand = CardLists.filter(hand, Predicates.not(CardPredicates.sharesNameWith(first)));
+                c--;
+            }
+            return PaymentDecision.card(discarded);
         }
         if (discardType.contains("+WithSameName")) {
             final String type = TextUtil.fastReplace(discardType, "+WithSameName", "");
