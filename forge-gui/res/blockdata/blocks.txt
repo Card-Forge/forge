@@ -86,3 +86,4 @@ Throne of Eldraine, 3/6/ELD, ELD
 Theros: Beyond Death, 3/6/THB, THB
 Mystery Booster, 3/6/THB, MB1
 Ikoria: Lair of Behemoths, 3/6/IKO, IKO
+Core Set 2021, 3/6/M21, M21
