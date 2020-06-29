@@ -209,6 +209,7 @@ Ashnod's Transmogrant|Transmutador de Ashnod|Artefacto|{T}, sacrificar el Transm
 Asmira, Holy Avenger|Asmira, Vengadora Sagrada|Criatura Legendaria - Clérigo Humano|Vuela\nAl final del turno, pon un contador +1/+1 en la Asmira, Vengadora Sagrada por cada criatura que va al cementerio desde el juego este turno.
 Aspect of Wolf|Aspecto de lobo|Encantamiento - Aura|La criatura encantada obtiene +X/+Y, donde X es igual a la mitad del número de bosques que controles, redondeando hacia abajo, y Y es igual a la mitad del número de bosques que controles, redondeando hacia arriba.
 Assassin's Blade|Acero del asesino|Instantáneo|Lanza el Acero del asesino sólo durante el paso de declarar atacantes y sólo si estás siendo atacado este paso.
+Assault|Asalto|Conjuro|El Asalto hace 2 puntos de daño a la criatura o jugador objetivo.
 Assembly Hall|Salón de sesiones|Artefacto|{4}, {T}: Muestra una carta de criatura de tu mano. Busca en tu biblioteca una carta con el mismo nombre que esa carta, muestra la carta, y ponla en tu mano. Luego baraja la biblioteca.
 Astrolabe|Astrolabio|Artefacto|
 Atalya, Samite Master|Atalya, Sanadora Maestra|Criatura Legendaria - Clérigo Humano|{X}, {T}: elige uno - Prevén los siguientes X puntos de daño que fuera a recibir la criatura objetivo este turno; o gana X vidas. sólo gasta maná blanco de esta manera.
@@ -2481,6 +2482,7 @@ Overtaker|Dominador|Criatura - Cambiahechizos Tritón|{3}{U}, {T}, descarta una 
 Owl Familiar|Búho familiar|Criatura - Ave|Vuela.
 Pack Hunt|Cacería en manada|Conjuro|Busca en tu biblioteca hasta tres cartas con el mismo nombre que la criatura objetivo, muéstralas, y ponlas en tu mano. Luego baraja tu biblioteca.
 Painful Memories|Recuerdos dolorosos|Conjuro|Mira la mano del oponente objetivo y elige una carta. Pon esa carta en la parte superior de la biblioteca de ese jugador.
+Pain|Dolor|Conjuro|El jugador objetivo descarta una carta.
 Pale Bears|Osos pálidos|Criatura - Oso|Cruza islas (Esta criatura es imbloqueable mientras que el jugador defensor controle una isla.)
 Pale Moon|Luna pálida|Instantáneo|Hasta el final del turno, si un jugador gira una tierra que no sea básica para producir maná, produce maná incoloro en vez de su tipo normal.
 Palinchron|Pálincron|Criatura - Ilusión|Vuela.\nCuando el Pálincron entra en juego, si lo juegas desde tu mano, endereza hasta siete tierras.\n{2}{U}{U}: devuelve el Pálincron a la mano de su propietario.
