@@ -2677,7 +2677,7 @@ public class CardFactoryUtil {
                     + "| Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ingest ("
                     + inst.getReminderText() + ")";
 
-            final String abStr = "DB$ Mill | NumCards$ 1 | Destination$ Exile | Defined$ TriggeredTarget";
+            final String abStr = "DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ TriggeredTarget";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 

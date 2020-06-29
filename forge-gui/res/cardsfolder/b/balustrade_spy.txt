@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Creature Vampire Rogue
 PT:2/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
-SVar:TrigMill:DB$ DigUntil | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balustrade_spy.jpg
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRevealUntil | TriggerDescription$ When CARDNAME enters the battlefield, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
+SVar:TrigRevealUntil:DB$ DigUntil | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 Oracle:Flying\nWhen Balustrade Spy enters the battlefield, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.

@@ -2,7 +2,7 @@ Name:Search the City
 ManaCost:4 U
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SetupSearch | TriggerDescription$ When CARDNAME enters the battlefield, exile the top five cards of your library.
-SVar:SetupSearch:DB$ Mill | Defined$ You | NumCards$ 5 | Destination$ Exile | RememberMilled$ True | ForgetOtherRemembered$ True
+SVar:SetupSearch:DB$ Dig | Defined$ You | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Remembered | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigFind | TriggerDescription$ Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with CARDNAME, sacrifice it. If you do, take an extra turn after this one.
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl+sharesNameWith Remembered | TriggerZones$ Battlefield | Execute$ TrigFind | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with CARDNAME, sacrifice it. If you do, take an extra turn after this one.
 SVar:TrigFind:DB$ ChangeZone | ChangeType$ TriggeredCard.sharesNameWith | Hidden$ True | TgtPrompt$ Select a card that shares a name with the played card | Origin$ Exile | Destination$ Hand | ChangeNum$ 1 | ForgetChanged$ True | SubAbility$ SacSelf
@@ -11,5 +11,4 @@ SVar:AllFoundCelebration:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | Con
 SVar:StillLooking:Remembered$Amount
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/search_the_city.jpg
 Oracle:When Search the City enters the battlefield, exile the top five cards of your library.\nWhenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with Search the City, sacrifice it. If you do, take an extra turn after this one.

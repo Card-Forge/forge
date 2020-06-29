@@ -1,9 +1,8 @@
 Name:Order of Succession
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChooseDirection | Cost$ 3 U | SubAbility$ DBRepeat | AILogic$ GainControl | SpellDescription$ Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose.
-SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBGainControl | RecordChoice$ True | ChooseCard$ Creature | FilterControlledBy$ NextPlayerInChosenDirection
-SVar:DBGainControl:DB$ GainControl | NewController$ Remembered | AllValid$ Card.IsImprinted
+A:SP$ ChooseDirection | Cost$ 3 U | SubAbility$ DBGainControl | AILogic$ GainControl | SpellDescription$ Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose.
+SVar:DBGainControl:DB$ GainControlVariant | AllValid$ Creature | ChangeController$ ChooseNextPlayerInChosenDirection
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_succession.jpg
 Oracle:Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose.
