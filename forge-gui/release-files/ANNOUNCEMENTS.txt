@@ -1,5 +1,6 @@
 #Add one announcement per line
-IKO Release. Sorry Companions and Mutate will take some more time. They are still very much on the radar.
-We believe the issue with 1.8.0_211 or greater have been resolved. Let us know if you are still on the latest version and things are better now.
+M21 Pre-release.
+Mutate is NOT finished yet. Please be patient.
+Companion is in, but unfortunately Wizards changed the rules on us. We'll get the new rules in when we can.
 [b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
 We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
