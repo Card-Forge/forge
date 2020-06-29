@@ -18,6 +18,9 @@
 package forge.game.cost;
 
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -83,6 +86,9 @@ public class CostDiscard extends CostPartWithList {
         else if (this.getType().equals("LastDrawn")) {
             sb.append("the last card you drew this turn");
         }
+        else if (this.getType().equals("DifferentNames")) {
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "Card")).append(" with different names");
+        }
         else {
             final StringBuilder desc = new StringBuilder();
 
@@ -128,6 +134,13 @@ public class CostDiscard extends CostPartWithList {
             else if (type.equals("LastDrawn")) {
                 final Card c = payer.getLastDrawnCard();
                 return handList.contains(c);
+            }
+            else if (type.equals("DifferentNames")) {
+               Set<String> cardNames = Sets.newHashSet();
+               for (Card c : handList) {
+                   cardNames.add(c.getName());
+               }
+               return amount != null && cardNames.size() >= amount;
             }
             else {
                 boolean sameName = false;

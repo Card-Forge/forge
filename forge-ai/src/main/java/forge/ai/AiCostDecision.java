@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
@@ -23,6 +24,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
@@ -104,6 +106,24 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
             }
             return PaymentDecision.card(randomSubset);
+        }
+        else if (type.equals("DifferentNames")) {
+            CardCollection differentNames = new CardCollection();
+            CardCollection discardMe = CardLists.filter(hand, CardPredicates.hasSVar("DiscardMe"));
+            while (c > 0) {
+                Card chosen;
+                if (!discardMe.isEmpty()) {
+                    chosen = Aggregates.random(discardMe);
+                    discardMe = CardLists.filter(discardMe, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                } else {
+                    final Card worst = ComputerUtilCard.getWorstAI(hand);
+                    chosen = worst != null ? worst : Aggregates.random(hand);
+                }
+                differentNames.add(chosen);
+                hand = CardLists.filter(hand, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                c--;
+            }
+            return PaymentDecision.card(differentNames);
         }
         else {
             final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
