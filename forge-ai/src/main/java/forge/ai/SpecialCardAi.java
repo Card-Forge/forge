@@ -756,6 +756,37 @@ public class SpecialCardAi {
         }
     }
 
+    // Maze's End
+    public static class MazesEnd {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !availableGates.isEmpty();
+        }
+
+        public static Card considerCardToGet(final Player ai, final SpellAbility sa)
+        {
+            CardCollection currentGates = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Gate"));
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            if (availableGates.isEmpty())
+                return null; // shouldn't get here
+
+            for (Card gate : availableGates)
+            {
+                if (CardLists.filter(currentGates, CardPredicates.nameEquals(gate.getName())).isEmpty())
+                {
+                    // Diversify our mana base
+                    return gate;
+                }
+            }
+
+            // Fetch a random gate if we already have all types
+            return Aggregates.random(availableGates);
+        }
+    }
+
     // Mairsil, the Pretender
     public static class MairsilThePretender {
         // Scan the fetch list for a card with at least one activated ability.
