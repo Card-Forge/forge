@@ -224,8 +224,10 @@ public enum CDeckEditorUI implements ICDoc {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                        if (e.isControlDown() || e.isMetaDown()) {
                         deckView.focus();
                         e.consume(); //prevent losing selection
+}
                     }
                 }
             });
@@ -236,8 +238,10 @@ public enum CDeckEditorUI implements ICDoc {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                        catView.focus();
-                        e.consume(); //prevent losing selection
+                        if (e.isControlDown() || e.isMetaDown()) {
+                                catView.focus();
+                                e.consume(); //prevent losing selection
+                            }
                     }
                     else if (KeyEvent.VK_F == e.getKeyCode()) {
                         // let ctrl/cmd-F set focus to the text filter box
