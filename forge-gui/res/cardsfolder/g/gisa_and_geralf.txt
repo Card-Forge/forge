@@ -1,10 +1,10 @@
 Name:Gisa and Geralf
-ManaCost: 2 U B
+ManaCost:2 U B
 Types:Legendary Creature Human Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
-SVar:TrigMill:DB$Mill | NumCards$ 4 | Defined$ You
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 S:Mode$ Continuous | Affected$ Zombie.YouCtrl | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast a Zombie creature card from your graveyard.
 DeckHints:Type$Zombie
-DeckHas:Ability$Graveyard
+DeckHas:Ability$Graveyard & Ability$Mill
 Oracle:When Gisa and Geralf enters the battlefield, mill four cards.\nDuring each of your turns, you may cast a Zombie creature card from your graveyard.
