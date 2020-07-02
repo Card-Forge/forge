@@ -346,5 +346,5 @@ w_1_1_bird_flying
 w_1_1_human
 w_1_1_soldier
 w_1_1_spirit_flying
-w_3_3_elemental_flying
+w_4_4_elemental_flying
 w_4_4_angel_flying
