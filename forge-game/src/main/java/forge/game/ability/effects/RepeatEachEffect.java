@@ -12,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
     @SuppressWarnings("serial")
     @Override
     public void resolve(SpellAbility sa) {
+        // Things to loop over: Cards, Players, or SAs
         final Card source = sa.getHostCard();
 
         final AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
@@ -39,7 +41,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
 
         boolean useImprinted = sa.hasParam("UseImprinted");
-        boolean loopOverCards = false;
+
         CardCollectionView repeatCards = null;
         List<SpellAbility> repeatSas = null;
 
@@ -69,17 +71,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 repeatCards = CardLists.getValidCards(repeatCards,
                         sa.getParam("AdditionalRestriction"), source.getController(), source);
             }
-            if (!repeatCards.isEmpty()) {
-                loopOverCards = true;
-            }
         }
-        // Removing this throw since it doesn't account for Repeating by players or counters e.g. Tempting Wurm
-        // Feel free to re-add it if you account for every card that's scripted with RepeatEach
-        /*
-        else {
-            throw new IllegalAbilityException(sa, this);
-        }*/
-
+        boolean loopOverCards = repeatCards != null && !repeatCards.isEmpty();
 
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
@@ -94,7 +87,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
 
         if (loopOverCards) {
-            // TODO (ArsenalNut 22 Dec 2012) Add logic to order cards for AI
             if (sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
                 repeatCards = player.getController().orderMoveToZoneList(repeatCards, ZoneType.Stack);
             }

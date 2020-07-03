@@ -87,6 +87,5 @@ Type=Duel_Decks
 c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
-c_1_1_spirit
 r_4_4_hellion
 g_0_1_plant

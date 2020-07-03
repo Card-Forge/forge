@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
+public enum CSubmenuTutorial implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
-    private VSubmenuPuzzleSolve view = VSubmenuPuzzleSolve.SINGLETON_INSTANCE;
+    private VSubmenuTutorial view = VSubmenuTutorial.SINGLETON_INSTANCE;
 
     @Override
     public void register() {
@@ -46,18 +46,18 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     }
 
     private final UiCommand cmdStart = new UiCommand() {
-		private static final long serialVersionUID = -367368436333443417L;
+        private static final long serialVersionUID = -367368436333443417L;
 
-		@Override public void run() {
+        @Override public void run() {
             startPuzzleSolve();
         }
     };
 
     private void updateData() {
-        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles(ForgeConstants.PUZZLE_DIR);
-        Collections.sort(puzzles);
+        final ArrayList<Puzzle> tutorials = PuzzleIO.loadPuzzles(ForgeConstants.TUTORIAL_DIR);
+        Collections.sort(tutorials);
 
-        for(Puzzle p : puzzles) {
+        for(Puzzle p : tutorials) {
             view.getModel().addElement(p);
         }
     }
