@@ -11,9 +11,7 @@ import com.google.common.collect.Iterables;
 
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
-import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
-import forge.deckchooser.IDecksComboBoxListener;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -80,35 +78,15 @@ public class CLobby {
             final FDeckChooser fdccom = view.getCommanderDeckChooser(iSlot);
             fdccom.initialize(FPref.COMMANDER_DECK_STATES[iSlot], defaultDeckTypeForCommanderSlot(iSlot));
             fdccom.populate();
-            fdccom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    view.focusOnAvatar();
-                }
-            });
             final FDeckChooser fdobcom = view.getOathbreakerDeckChooser(iSlot);
             fdobcom.initialize(FPref.OATHBREAKER_DECK_STATES[iSlot], defaultDeckTypeForOathbreakerSlot(iSlot));
             fdobcom.populate();
-            fdobcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    view.focusOnAvatar();
-                }
-            });
             final FDeckChooser fdtlcom = view.getTinyLeaderDeckChooser(iSlot);
             fdtlcom.initialize(FPref.TINY_LEADER_DECK_STATES[iSlot], defaultDeckTypeForTinyLeaderSlot(iSlot));
             fdtlcom.populate();
-            fdtlcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    view.focusOnAvatar();
-                }
-            });
             final FDeckChooser fdbcom = view.getBrawlDeckChooser(iSlot);
             fdbcom.initialize(FPref.BRAWL_DECK_STATES[iSlot], defaultDeckTypeForBrawlSlot(iSlot));
             fdbcom.populate();
-            fdbcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    view.focusOnAvatar();
-                }
-            });
         }
 
         final ForgePreferences prefs = FModel.getPreferences();
