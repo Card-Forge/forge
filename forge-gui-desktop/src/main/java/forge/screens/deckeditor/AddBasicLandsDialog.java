@@ -346,7 +346,8 @@ public class AddBasicLandsDialog {
                     }
                 }
             }).build();
-
+            btnSubtract.getAccessibleContext().setAccessibleName("Remove " + cardName);
+            btnAdd.getAccessibleContext().setAccessibleName("Add " + cardName);
             add(cardPanel);
             add(cbLandArt);
             add(lblCount);
