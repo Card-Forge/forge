@@ -388,7 +388,7 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         return true;
-                    } else if (grantsUsefulExtraBlockOpts(ai, card)) {
+                    } else if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
                         return true;
                     }
                 }
