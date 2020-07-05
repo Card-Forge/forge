@@ -40,9 +40,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     public boolean grantsUsefulExtraBlockOpts(final Player ai, final SpellAbility sa, final Card card, List<String> keywords) {
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-
         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
-        ai.getGame().getAction().checkStaticAbilities(false);
 
         if (ph.isPlayerTurn(ai) || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
