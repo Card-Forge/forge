@@ -284,10 +284,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.setColor(Color.green);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
-        }
-
-        //card with flash..
-        if (hasFlash) {
+        } else if (hasFlash && (getCard() != null && matchUI.mayView(getCard()))) {
             g2d.setColor(Color.cyan);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
@@ -697,7 +694,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     || ((abilityText.indexOf("May be played by") != -1)
                     && (abilityText.indexOf("and as though it has flash") != -1))){
                 if (keywordKey.indexOf("Flashback") == -1) {
-                    hasFlash = true;
+                    hasFlash = !card.isFaceDown();
                     CardFaceSymbols.drawAbilitySymbol("flash", g, cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
                 }
             }
