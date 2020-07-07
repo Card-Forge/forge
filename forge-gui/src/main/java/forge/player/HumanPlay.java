@@ -82,7 +82,7 @@ public class HumanPlay {
         }
 
         if (flippedToCast && !castFaceDown) {
-            source.turnFaceUp(false, false);
+            source.forceTurnFaceUp();
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {

@@ -549,7 +549,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.getView().updateType(currentState);
     }
 
-    public boolean changeCardState(final String mode, final String customState) {
+    public boolean changeCardState(final String mode, final String customState, final SpellAbility cause) {
         if (mode == null)
             return changeToState(CardStateName.smartValueOf(customState));
 
@@ -597,7 +597,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
                 return turnFaceDown();
             } else if (isFaceDown()) {
-                return turnFaceUp();
+                return turnFaceUp(cause);
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
@@ -656,11 +656,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         return setState(CardStateName.FaceDown, false);
     }
 
-    public boolean turnFaceUp() {
-        return turnFaceUp(false, true);
+    public boolean turnFaceUp(SpellAbility cause) {
+        return turnFaceUp(false, true, cause);
     }
 
-    public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers) {
+    public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers, SpellAbility cause) {
         if (isFaceDown()) {
             if (manifestPaid && isManifested() && !getRules().getType().isCreature()) {
                 // If we've manifested a non-creature and we're demanifesting disallow it
@@ -688,8 +688,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+                runParams.put(AbilityKey.Cause, cause);
+
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
-                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, AbilityKey.mapFromCard(this), false);
+                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
             }
             return result;
         }
@@ -6102,7 +6105,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isFaceDown()) {
                 lkicheck = true;
                 source = CardUtil.getLKICopy(source);
-                source.turnFaceUp(false, false);
+                source.forceTurnFaceUp();
             }
 
             if (lkicheck) {
@@ -6315,7 +6318,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void forceTurnFaceUp() {
         getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
-        turnFaceUp(false, false);
+        turnFaceUp(false, false, null);
         getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 

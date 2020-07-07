@@ -174,7 +174,7 @@ public class SetStateAi extends SpellAbilityAi {
         if (!card.isFaceDown()) {
             transformed.turnFaceDown(true);
         } else {
-            transformed.turnFaceUp(false, false);
+            transformed.forceTurnFaceUp();
         }
         transformed.updateStateForView();
         return compareCards(card, transformed, ai, ph);

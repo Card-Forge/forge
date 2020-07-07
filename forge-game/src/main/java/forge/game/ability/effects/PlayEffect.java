@@ -153,7 +153,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             final boolean wasFaceDown;
             if (tgtCard.isFaceDown()) {
-                tgtCard.turnFaceUp(false, false);
+                tgtCard.forceTurnFaceUp();
                 wasFaceDown = true;
             } else {
                 wasFaceDown = false;
