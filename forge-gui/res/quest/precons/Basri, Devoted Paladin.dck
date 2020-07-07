@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Basri, Devoted Paladin
+Description=Basri is a new planeswalker from the Egyptian themed plane Amonkhet. His deck plays a bunch of small creatures and buffs them with +1/+1 counters.
+Deck Type=constructed
+Set=M21
+Image=basri_devoted_paladin.jpg
+[Main]
+4 Adherent of Hope|M21
+3 Anointed Chorister|M21
+2 Aven Gagglemaster|M21
+2 Banishing Light|THB
+3 Basri's Acolyte|M21
+2 Basri's Aegis|M21
+1 Basri's Lieutenant|M21
+1 Basri, Devoted Paladin+|M21
+3 Fight as One|IKO
+4 Makeshift Battalion|WAR
+1 Perimeter Sergeant|IKO
+25 Plains|M21
+3 Sigiled Contender|M21
+1 Speaker of the Heavens|M21
+2 Swift Response|M21
+3 Tempered Veteran|M21
+[Sideboard]

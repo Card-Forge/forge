@@ -242,7 +242,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (spell.isCastFaceDown()) {
                 source.turnFaceDown();
             } else if (source.isFaceDown()) {
-                source.turnFaceUp();
+                source.turnFaceUp(null);
             }
         }
 

@@ -209,7 +209,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 source = CardUtil.getLKICopy(source);
             }
 
-            source.turnFaceUp(false, false);
+            source.forceTurnFaceUp();
             lkicheck = true;
         }
 

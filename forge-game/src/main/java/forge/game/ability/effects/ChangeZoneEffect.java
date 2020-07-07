@@ -483,7 +483,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Transformed")) {
                         if (tgtC.isDoubleFaced()) {
-                            tgtC.changeCardState("Transform", null);
+                            tgtC.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
                             continue;
@@ -1031,7 +1031,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("Transformed")) {
                     if (c.isDoubleFaced()) {
-                        c.changeCardState("Transform", null);
+                        c.changeCardState("Transform", null, sa);
                     } else {
                         // If it can't Transform, don't change zones.
                         continue;
