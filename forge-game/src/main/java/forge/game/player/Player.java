@@ -1775,6 +1775,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             land.turnFaceUp(null);
         }
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+        game.copyLastState();
         game.updateLastStateForCard(c);
 
         // play a sound
