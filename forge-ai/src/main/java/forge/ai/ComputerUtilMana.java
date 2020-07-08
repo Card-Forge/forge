@@ -118,10 +118,19 @@ public class ComputerUtilMana {
 
         return score;
     }
-    
+
     private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap) {
+        sortManaAbilities(manaAbilityMap, null);
+    }
+
+    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
+
+        String manaPref = sa.getParamOrDefault("AIManaPref", "");
+        if (manaPref.isEmpty() && sa.getHostCard() != null && sa.getHostCard().hasSVar("AIManaPref")) {
+            manaPref = sa.getHostCard().getSVar("AIManaPref");
+        }
         
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
             for (SpellAbility ability : manaAbilityMap.get(shard)) {
@@ -147,6 +156,8 @@ public class ComputerUtilMana {
             System.out.println();
         }
 
+        final String preferredShard = manaPref;
+
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
             final Collection<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
@@ -159,6 +170,13 @@ public class ComputerUtilMana {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
+
+                    if (!preferredShard.isEmpty()) {
+                        if (ability1.getManaPart().mana().contains(preferredShard))
+                            return -1;
+                        else if (ability2.getManaPart().mana().contains(preferredShard))
+                            return 1;
+                    }
 
                     if (preOrder == 0) {
                         // Mana abilities on the same card
@@ -310,7 +328,7 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-        sortManaAbilities(sourcesForShards);
+        sortManaAbilities(sourcesForShards, sa);
 
         ManaCostShard toPay;
         // Loop over mana needed
@@ -621,7 +639,7 @@ public class ComputerUtilMana {
         		}
         	}
         }
-        sortManaAbilities(sourcesForShards);
+        sortManaAbilities(sourcesForShards, sa);
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
