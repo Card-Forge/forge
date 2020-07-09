@@ -554,7 +554,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public static CardRules getUnsupportedCardNamed(String name) {
-        CardAiHints cah = new CardAiHints(true, true, true,null, null, null);
+        CardAiHints cah = new CardAiHints(true, true, true, null, null, null);
         CardFace[] faces = { new CardFace(name), null};
         faces[0].setColor(ColorSet.fromMask(0));
         faces[0].setType(CardType.parse(""));
