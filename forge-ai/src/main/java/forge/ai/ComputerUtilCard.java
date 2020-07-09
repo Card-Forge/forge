@@ -1930,4 +1930,7 @@ public class ComputerUtilCard {
     public static boolean isCardRemRandomDeck(final Card card) {
         return card.getRules() != null && card.getRules().getAiHints().getRemRandomDecks();
     }
+    public static boolean isCardRemNonCommanderDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemNonCommanderDecks();
+    }
 }

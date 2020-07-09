@@ -291,6 +291,7 @@ public final class CardRules implements ICardCharacteristics {
         // fields to build CardAiHints
         private boolean removedFromAIDecks = false;
         private boolean removedFromRandomDecks = false;
+        private boolean removedFromNonCommanderDecks = false;
         private DeckHints hints = null;
         private DeckHints needs = null;
         private DeckHints has = null;
@@ -310,6 +311,7 @@ public final class CardRules implements ICardCharacteristics {
 
             this.removedFromAIDecks = false;
             this.removedFromRandomDecks = false;
+            this.removedFromNonCommanderDecks = false;
             this.needs = null;
             this.hints = null;
             this.has = null;
@@ -324,7 +326,7 @@ public final class CardRules implements ICardCharacteristics {
          * @return the card
          */
         public final CardRules getCard() {
-            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs, has);
+            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, removedFromNonCommanderDecks, hints, needs, has);
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
@@ -377,6 +379,7 @@ public final class CardRules implements ICardCharacteristics {
                         if ( "RemoveDeck".equals(variable) ) {
                             this.removedFromAIDecks = "All".equalsIgnoreCase(value);
                             this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
+                            this.removedFromNonCommanderDecks = "NonCommander".equalsIgnoreCase(value);
                         }
                     } else if ("AlternateMode".equals(key)) {
                         //System.out.println(faces[curFace].getName());
@@ -551,7 +554,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public static CardRules getUnsupportedCardNamed(String name) {
-        CardAiHints cah = new CardAiHints(true, true, null, null, null);
+        CardAiHints cah = new CardAiHints(true, true, true,null, null, null);
         CardFace[] faces = { new CardFace(name), null};
         faces[0].setColor(ColorSet.fromMask(0));
         faces[0].setType(CardType.parse(""));
