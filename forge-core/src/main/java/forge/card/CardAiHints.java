@@ -9,15 +9,17 @@ public class CardAiHints {
     
     private final boolean isRemovedFromAIDecks;
     private final boolean isRemovedFromRandomDecks;
+    private final boolean isRemovedFromNonCommanderDecks;
 
     private final DeckHints deckHints;
     private final DeckHints deckNeeds;
     private final DeckHints deckHas;
 
 
-    public CardAiHints(boolean remAi, boolean remRandom, DeckHints dh, DeckHints dn, DeckHints has) {
+    public CardAiHints(boolean remAi, boolean remRandom, boolean remUnlessCommander, DeckHints dh, DeckHints dn, DeckHints has) {
         isRemovedFromAIDecks = remAi;
         isRemovedFromRandomDecks = remRandom;
+        isRemovedFromNonCommanderDecks = remUnlessCommander;
         deckHints = dh;
         deckNeeds = dn;
         deckHas = has;
@@ -42,8 +44,17 @@ public class CardAiHints {
     }
 
     /**
-     * @return the deckHints
+     * Gets the rem random decks.
+     *
+     * @return the rem random decks
      */
+    public boolean getRemNonCommanderDecks() {
+        return this.isRemovedFromNonCommanderDecks;
+    }
+
+        /**
+         * @return the deckHints
+         */
     public DeckHints getDeckHints() {
         return deckHints;
     }
