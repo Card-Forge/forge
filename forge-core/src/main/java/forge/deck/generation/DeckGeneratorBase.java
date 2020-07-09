@@ -293,6 +293,7 @@ public abstract class DeckGeneratorBase {
         Predicate<CardRules> canUseInFormat = new Predicate<CardRules>() {
             @Override
             public boolean apply(CardRules c) {
+                // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
                 return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
             }
         };
