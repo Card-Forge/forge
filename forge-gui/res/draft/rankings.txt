@@ -1,4 +1,534 @@
 //Rank|Name|Rarity|Set
+#1|Baneslayer Angel|M|M21
+#2|Chandra, Heart of Fire|M|M21
+#3|Massacre Wurm|M|M21
+#4|Garruk, Unleashed|M|M21
+#5|Ugin, the Spirit Dragon|M|M21
+#6|Elder Gargaroth|M|M21
+#7|Basri Ket|M|M21
+#8|Terror of the Peaks|M|M21
+#9|Mangara, the Diplomat|M|M21
+#10|Liliana, Waker of the Dead|M|M21
+#11|Teferi, Master of Time|M|M21
+#12|Fiery Emancipation|M|M21
+#13|Chromatic Orrery|M|M21
+#14|Discontinuity|M|M21
+#15|Grim Tutor|M|M21
+#16|Radha, Heart of Keld|R|M21
+#17|Scavenging Ooze|R|M21
+#18|Solemn Simulacrum|R|M21
+#19|Gadrak, the Crown-Scourge|R|M21
+#20|Basri's Lieutenant|R|M21
+#21|Garruk's Harbinger|R|M21
+#22|Jolrael, Mwonvuli Recluse|R|M21
+#23|Liliana's Standard Bearer|R|M21
+#24|Sublime Epiphany|R|M21
+#25|Stormwing Entity|R|M21
+#26|Glorious Anthem|R|M21
+#27|Pursued Whale|R|M21
+#28|Azusa, Lost but Seeking|R|M21
+#29|Shacklegeist|R|M21
+#30|Volcanic Salvo|R|M21
+#31|Chandra's Incinerator|R|M21
+#32|Vito, Thorn of the Dusk Rose|R|M21
+#33|Hooded Blightfang|R|M21
+#34|Subira, Tulzidi Caravanner|R|M21
+#35|Demonic Embrace|R|M21
+#36|Sparkhunter Masticore|R|M21
+#37|Ghostly Pilferer|R|M21
+#38|Primal Might|R|M21
+#39|Brash Taunter|R|M21
+#40|Faith's Fetters|U|M21
+#41|Barrin, Tolarian Archmage|R|M21
+#42|Soul Sear|U|M21
+#43|Sporeweb Weaver|R|M21
+#44|Feline Sovereign|R|M21
+#45|Heartfire Immolator|U|M21
+#46|Kaervek, the Spiteful|R|M21
+#47|Pack Leader|R|M21
+#48|Shipwreck Dowser|U|M21
+#49|Enthralling Hold|U|M21
+#50|Volcanic Geyser|U|M21
+#51|Lorescale Coatl|U|M21
+#52|Wildwood Scourge|U|M21
+#53|Aven Gagglemaster|U|M21
+#54|Double Vision|R|M21
+#55|Falconer Adept|U|M21
+#56|Scorching Dragonfire|C|M21
+#57|Heroic Intervention|R|M21
+#58|Eliminate|U|M21
+#59|Thieves' Guild Enforcer|R|M21
+#60|Rain of Revelation|U|M21
+#61|Speaker of the Heavens|R|M21
+#62|Angelic Ascension|U|M21
+#63|Watcher of the Spheres|U|M21
+#64|Thrashing Brontodon|U|M21
+#65|Leafkin Avenger|U|M21
+#66|Goremand|U|M21
+#67|Basri's Solidarity|U|M21
+#68|Warden of the Woods|U|M21
+#69|Liliana's Devotee|U|M21
+#70|Garruk's Uprising|U|M21
+#71|Cultivate|U|M21
+#72|Tide Skimmer|U|M21
+#73|Niambi, Esteemed Speaker|R|M21
+#74|Idol of Endurance|R|M21
+#75|Waker of Waves|U|M21
+#76|Bolt Hound|U|M21
+#77|Fungal Rebirth|U|M21
+#78|Sanctum of Stone Fangs|U|M21
+#79|Twinblade Assassins|U|M21
+#80|Teferi's Tutelage|U|M21
+#81|Quirion Dryad|U|M21
+#82|Jeskai Elder|U|M21
+#83|Conclave Mentor|U|M21
+#84|Teferi's Ageless Insight|R|M21
+#85|Grasp of Darkness|C|M21
+#86|Fierce Empath|U|M21
+#87|Containment Priest|R|M21
+#88|Seasoned Hallowblade|U|M21
+#89|Silversmote Ghoul|U|M21
+#90|Fabled Passage|R|M21
+#91|Obsessive Stitcher|U|M21
+#92|Havoc Jester|U|M21
+#93|Shock|C|M21
+#94|Hellkite Punisher|U|M21
+#95|Llanowar Visionary|C|M21
+#96|Tolarian Kraken|U|M21
+#97|Mazemind Tome|R|M21
+#98|Pestilent Haze|U|M21
+#99|See the Truth|R|M21
+#100|Temple of Epiphany|R|M21
+#101|Burlfist Oak|U|M21
+#102|Basri's Acolyte|C|M21
+#103|Indulging Patrician|U|M21
+#104|Conspicuous Snoop|R|M21
+#105|Experimental Overload|U|M21
+#106|Roaming Ghostlight|C|M21
+#107|Selfless Savior|U|M21
+#108|Tempered Veteran|U|M21
+#109|Siege Striker|U|M21
+#110|Kitesail Freebooter|U|M21
+#111|Finishing Blow|C|M21
+#112|Kinetic Augur|U|M21
+#113|Sanctum of Calm Waters|U|M21
+#114|Unsubstantiate|U|M21
+#115|Sanctum of Fruitful Harvest|U|M21
+#116|Hunter's Edge|C|M21
+#117|Riddleform|U|M21
+#118|Swift Response|C|M21
+#119|Mistral Singer|C|M21
+#120|Palladium Myr|U|M21
+#121|Invigorating Surge|U|M21
+#122|Battle-Rattle Shaman|U|M21
+#123|Malefic Scythe|U|M21
+#124|Vryn Wingmare|U|M21
+#125|Canopy Stalker|U|M21
+#126|Traitorous Greed|U|M21
+#127|Temple of Mystery|R|M21
+#128|Alpine Houndmaster|U|M21
+#129|Animal Sanctuary|R|M21
+#130|Carrion Grub|U|M21
+#131|Chrome Replicator|U|M21
+#132|Transmogrify|R|M21
+#133|Dire Fleet Warmonger|U|M21
+#134|Trufflesnout|C|M21
+#135|Spellgorger Weird|C|M21
+#136|Unleash Fury|U|M21
+#137|Chandra's Pyreling|U|M21
+#138|Gale Swooper|C|M21
+#139|Rousing Read|C|M21
+#140|Capture Sphere|C|M21
+#141|Pridemalkin|C|M21
+#142|Temple of Triumph|R|M21
+#143|Feat of Resistance|C|M21
+#144|Chandra's Magmutt|C|M21
+#145|Goblin Wizardry|C|M21
+#146|Griffin Aerie|U|M21
+#147|Secure the Scene|C|M21
+#148|Opt|C|M21
+#149|Archfiend's Vessel|U|M21
+#150|Turn to Slag|C|M21
+#151|Frantic Inventory|C|M21
+#152|Rise Again|C|M21
+#153|Deathbloom Thallid|C|M21
+#154|Drowsing Tyrannodon|C|M21
+#155|Witch's Cauldron|U|M21
+#156|Colossal Dreadmaw|C|M21
+#157|Sabertooth Mauler|C|M21
+#158|Pitchburn Devils|C|M21
+#159|Fetid Imp|C|M21
+#160|Daybreak Charger|C|M21
+#161|Alpine Watchdog|C|M21
+#162|Makeshift Battalion|C|M21
+#163|Runed Halo|R|M21
+#164|Furious Rise|U|M21
+#165|Spined Megalodon|C|M21
+#166|Temple of Malady|R|M21
+#167|Hobblefiend|C|M21
+#168|Turret Ogre|C|M21
+#169|Igneous Cur|C|M21
+#170|Library Larcenist|C|M21
+#171|Meteorite|U|M21
+#172|Legion's Judgment|C|M21
+#173|Concordia Pegasus|C|M21
+#174|Thrill of Possibility|C|M21
+#175|Blood Glutton|C|M21
+#176|Gnarled Sage|C|M21
+#177|Goblin Arsonist|C|M21
+#178|Vodalian Arcanist|C|M21
+#179|Sanctum of All|R|M21
+#180|Anointed Chorister|C|M21
+#181|Skeleton Archer|C|M21
+#182|Rewind|U|M21
+#183|Sanctum of Shattered Heights|U|M21
+#184|Teferi's Protege|C|M21
+#185|Crypt Lurker|C|M21
+#186|Onakke Ogre|C|M21
+#187|Keen Glidemaster|C|M21
+#188|Titanic Growth|C|M21
+#189|Sure Strike|C|M21
+#190|Celestial Enforcer|C|M21
+#191|Valorous Steed|C|M21
+#192|Crash Through|C|M21
+#193|Snarespinner|C|M21
+#194|Ornery Dilophosaur|C|M21
+#195|Frost Breath|C|M21
+#196|Bone Pit Brute|C|M21
+#197|Read the Tides|C|M21
+#198|Ranger's Guile|C|M21
+#199|Skyway Sniper|U|M21
+#200|Tome Anima|C|M21
+#201|Setessan Training|C|M21
+#202|Masked Blackguard|C|M21
+#203|Track Down|C|M21
+#204|Cancel|C|M21
+#205|Defiant Strike|C|M21
+#206|Rambunctious Mutt|C|M21
+#207|Gloom Sower|C|M21
+#208|Skyscanner|C|M21
+#209|Caged Zombie|C|M21
+#210|Alchemist's Gift|C|M21
+#211|Garruk's Gorehorn|C|M21
+#212|Revitalize|C|M21
+#213|Lofty Denial|C|M21
+#214|Tavern Swindler|U|M21
+#215|Furor of the Bitten|C|M21
+#216|Village Rites|C|M21
+#217|Warded Battlements|C|M21
+#218|Dub|C|M21
+#219|Peer into the Abyss|R|M21
+#220|Sanguine Indulgence|C|M21
+#221|Mind Rot|C|M21
+#222|Portcullis Vine|C|M21
+#223|Wishcoin Crab|C|M21
+#224|Miscast|U|M21
+#225|Wall of Runes|C|M21
+#226|Infernal Scarring|C|M21
+#227|Light of Promise|U|M21
+#228|Walking Corpse|C|M21
+#229|Bloodfell Caves|C|M21
+#230|Burn Bright|C|M21
+#231|Duress|C|M21
+#232|Liliana's Steward|C|M21
+#233|Staunch Shieldmate|C|M21
+#234|Bad Deal|U|M21
+#235|Swiftwater Cliffs|C|M21
+#236|Wind-Scarred Crag|C|M21
+#237|Sanctum of Tranquil Light|U|M21
+#238|Blossoming Sands|C|M21
+#239|Thornwood Falls|C|M21
+#240|Rookie Mistake|C|M21
+#241|Rugged Highlands|C|M21
+#242|Destructive Tampering|C|M21
+#243|Return to Nature|C|M21
+#244|Dismal Backwater|C|M21
+#245|Jungle Hollow|C|M21
+#246|Temple of Silence|R|M21
+#247|Tranquil Cove|C|M21
+#248|Short Sword|C|M21
+#249|Run Afoul|C|M21
+#250|Scoured Barrens|C|M21
+#251|Silent Dart|C|M21
+#252|Forgotten Sentinel|C|M21
+#253|Life Goes On|C|M21
+#254|Prismite|C|M21
+#255|Epitaph Golem|U|M21
+#256|Radiant Fountain|C|M21
+#257|Nine Lives|R|M21
+#258|Necromentia|R|M21
+#259|Tormod's Crypt|U|M21
+#260|Island|L|M21
+#261|Mountain|L|M21
+#262|Plains|L|M21
+#263|Swamp|L|M21
+#264|Forest|L|M21
+//Rank|Name|Rarity|Set
+#1|Narset of the Ancient Way|M|IKO
+#2|Vivien, Monsters' Advocate|M|IKO
+#3|Snapdax, Apex of the Hunt|M|IKO
+#4|Nethroi, Apex of Death|M|IKO
+#5|Luminous Broodmoth|M|IKO
+#6|Fiend Artisan|M|IKO
+#7|Brokkos, Apex of Forever|M|IKO
+#8|Winota, Joiner of Forces|M|IKO
+#9|Vadrok, Apex of Thunder|M|IKO
+#10|Lukka, Coppercoat Outcast|M|IKO
+#11|General Kudro of Drannith|M|IKO
+#12|Illuna, Apex of Wishes|M|IKO
+#13|Kinnan, Bonder Prodigy|M|IKO
+#14|Rielle, the Everwise|M|IKO
+#15|Chevill, Bane of Monsters|M|IKO
+#16|Gyruda, Doom of Depths|R|IKO
+#17|Kaheera, the Orphanguard|R|IKO
+#18|Kogla, the Titan Ape|R|IKO
+#19|Obosh, the Preypiercer|R|IKO
+#20|Keruga, the Macrosage|R|IKO
+#21|Crystalline Giant|R|IKO
+#22|Yorion, Sky Nomad|R|IKO
+#23|Lurrus of the Dream Den|R|IKO
+#24|Cubwarden|R|IKO
+#25|Everquill Phoenix|R|IKO
+#26|Voracious Greatshark|R|IKO
+#27|Dirge Bat|R|IKO
+#28|Quartzwood Crasher|R|IKO
+#29|Gemrazer|R|IKO
+#30|Shark Typhoon|R|IKO
+#31|Extinction Event|R|IKO
+#32|Yidaro, Wandering Monster|R|IKO
+#33|Hunted Nightmare|R|IKO
+#34|Mythos of Vadrok|R|IKO
+#35|Skycat Sovereign|R|IKO
+#36|Mythos of Nethroi|R|IKO
+#37|Umori, the Collector|R|IKO
+#38|Jegantha, the Wellspring|R|IKO
+#39|Lavabrink Venturer|R|IKO
+#40|Sea-Dasher Octopus|R|IKO
+#41|Zirda, the Dawnwaker|R|IKO
+#42|Frondland Felidar|R|IKO
+#43|Labyrinth Raptor|R|IKO
+#44|Inspired Ultimatum|R|IKO
+#45|Auspicious Starrix|U|IKO
+#46|Ruinous Ultimatum|R|IKO
+#47|Pouncing Shoreshark|U|IKO
+#48|Flame Spill|U|IKO
+#49|Mythos of Illuna|R|IKO
+#50|Heartless Act|U|IKO
+#51|Zenith Flare|U|IKO
+#52|Lutri, the Spellchaser|R|IKO
+#53|Back for More|U|IKO
+#54|Trumpeting Gnarr|U|IKO
+#55|Boneyard Lurker|U|IKO
+#56|Slitherwisp|R|IKO
+#57|Chittering Harvester|U|IKO
+#58|Blood Curdle|C|IKO
+#59|Flourishing Fox|U|IKO
+#60|Parcelbeast|U|IKO
+#61|Necropanther|U|IKO
+#62|Grimdancer|U|IKO
+#63|Fire Prophecy|C|IKO
+#64|Valiant Rescuer|U|IKO
+#65|Titanoth Rex|U|IKO
+#66|Archipelagore|U|IKO
+#67|Porcuparrot|U|IKO
+#68|Savai Thundermane|U|IKO
+#69|Eerie Ultimatum|R|IKO
+#70|Lore Drakkis|U|IKO
+#71|Dire Tactics|U|IKO
+#72|Glowstone Recluse|U|IKO
+#73|Splendor Mare|U|IKO
+#74|Boon of the Wish-Giver|U|IKO
+#75|Sanctuary Smasher|U|IKO
+#76|Void Beckoner|U|IKO
+#77|Avian Oddity|U|IKO
+#78|Sprite Dragon|U|IKO
+#79|Insatiable Hemophage|U|IKO
+#80|Unbreakable Bond|U|IKO
+#81|Clash of Titans|U|IKO
+#82|Pacifism|C|IKO
+#83|Easy Prey|U|IKO
+#84|Colossification|R|IKO
+#85|Swallow Whole|U|IKO
+#86|Hornbash Mentor|U|IKO
+#87|Bonders' Enclave|R|IKO
+#88|Savai Triome|R|IKO
+#89|Raugrin Triome|R|IKO
+#90|Jubilant Skybonder|U|IKO
+#91|Wingspan Mentor|U|IKO
+#92|Rooting Moloch|U|IKO
+#93|Dreamtail Heron|C|IKO
+#94|Reconnaissance Mission|U|IKO
+#95|Frillscare Mentor|U|IKO
+#96|Sonorous Howlbonder|U|IKO
+#97|Migratory Greathorn|C|IKO
+#98|Momentum Rumbler|U|IKO
+#99|Ominous Seas|U|IKO
+#100|Pollywog Symbiote|U|IKO
+#101|Alert Heedbonder|U|IKO
+#102|Mythos of Snapdax|R|IKO
+#103|Duskfang Mentor|U|IKO
+#104|Majestic Auricorn|U|IKO
+#105|Mythos of Brokkos|R|IKO
+#106|Bastion of Remembrance|U|IKO
+#107|Indatha Triome|R|IKO
+#108|Huntmaster Liger|U|IKO
+#109|Keensight Mentor|U|IKO
+#110|Zagoth Mamba|U|IKO
+#111|General's Enforcer|U|IKO
+#112|The Ozolith|R|IKO
+#113|Weaponize the Monsters|U|IKO
+#114|Migration Path|U|IKO
+#115|Primal Empathy|U|IKO
+#116|Whirlwind of Thought|R|IKO
+#117|Ivy Elemental|U|IKO
+#118|Charge of the Forever-Beast|U|IKO
+#119|Regal Leosaur|U|IKO
+#120|Ram Through|C|IKO
+#121|Proud Wildbonder|U|IKO
+#122|Rumbling Rockslide|C|IKO
+#123|Zagoth Triome|R|IKO
+#124|Genesis Ultimatum|R|IKO
+#125|Humble Naturalist|C|IKO
+#126|Ketria Triome|R|IKO
+#127|Sanctuary Lockdown|U|IKO
+#128|Skull Prophet|U|IKO
+#129|Reptilian Reflection|U|IKO
+#130|Call of the Death-Dweller|U|IKO
+#131|Drannith Stinger|C|IKO
+#132|Essence Symbiote|C|IKO
+#133|Dead Weight|C|IKO
+#134|Capture Sphere|C|IKO
+#135|Exuberant Wolfbear|U|IKO
+#136|Offspring's Revenge|R|IKO
+#137|Boot Nipper|C|IKO
+#138|Drannith Healer|C|IKO
+#139|Stormwild Capridor|U|IKO
+#140|Lava Serpent|C|IKO
+#141|Vulpikeet|C|IKO
+#142|Blitz of the Thunder-Raptor|U|IKO
+#143|Cavern Whisperer|C|IKO
+#144|Go for Blood|C|IKO
+#145|Fertilid|C|IKO
+#146|Greater Sandwurm|C|IKO
+#147|Neutralize|U|IKO
+#148|Essence Scatter|C|IKO
+#149|Evolving Wilds|C|IKO
+#150|Mystic Subdual|U|IKO
+#151|Checkpoint Officer|C|IKO
+#152|Divine Arrow|C|IKO
+#153|Will of the All-Hunter|U|IKO
+#154|Frost Lynx|C|IKO
+#155|Glimmerbell|C|IKO
+#156|Unpredictable Cyclone|R|IKO
+#157|Ferocious Tigorilla|C|IKO
+#158|Prickly Marmoset|C|IKO
+#159|Emergent Ultimatum|R|IKO
+#160|Cloudpiercer|C|IKO
+#161|Fight as One|U|IKO
+#162|Thieving Otter|C|IKO
+#163|Mutual Destruction|C|IKO
+#164|Cunning Nightbonder|U|IKO
+#165|Imposing Vantasaur|C|IKO
+#166|Spelleater Wolverine|C|IKO
+#167|Snare Tactician|C|IKO
+#168|Bushmeat Poacher|C|IKO
+#169|Nightsquad Commando|C|IKO
+#170|Lurking Deadeye|C|IKO
+#171|Helica Glider|C|IKO
+#172|Durable Coilbug|C|IKO
+#173|Forbidden Friendship|C|IKO
+#174|Frostveil Ambush|C|IKO
+#175|Farfinder|C|IKO
+#176|Gust of Wind|C|IKO
+#177|Daysquad Marshal|C|IKO
+#178|Mosscoat Goriak|C|IKO
+#179|Blitz Leech|C|IKO
+#180|Of One Mind|C|IKO
+#181|Memory Leak|C|IKO
+#182|Serrated Scorpion|C|IKO
+#183|Bristling Boar|C|IKO
+#184|Blade Banish|C|IKO
+#185|Raking Claws|C|IKO
+#186|Honey Mammoth|C|IKO
+#187|Footfall Crater|U|IKO
+#188|Pyroceratops|C|IKO
+#189|Startling Development|C|IKO
+#190|Excavation Mole|C|IKO
+#191|Tentative Connection|C|IKO
+#192|Almighty Brushwagg|C|IKO
+#193|Wingfold Pteron|C|IKO
+#194|Facet Reader|C|IKO
+#195|Perimeter Sergeant|C|IKO
+#196|Coordinated Charge|C|IKO
+#197|Phase Dolphin|C|IKO
+#198|Patagia Tiger|C|IKO
+#199|Maned Serval|C|IKO
+#200|Whisper Squad|C|IKO
+#201|Garrison Cat|C|IKO
+#202|Savai Sabertooth|C|IKO
+#203|Frenzied Raptor|C|IKO
+#204|Shredded Sails|C|IKO
+#205|Suffocating Fumes|C|IKO
+#206|Song of Creation|R|IKO
+#207|Jungle Hollow|C|IKO
+#208|Anticipate|C|IKO
+#209|Wind-Scarred Crag|C|IKO
+#210|Wilt|C|IKO
+#211|Flycatcher Giraffid|C|IKO
+#212|Unlikely Aid|C|IKO
+#213|Fully Grown|C|IKO
+#214|Hampering Snare|C|IKO
+#215|Cathartic Reunion|C|IKO
+#216|Keep Safe|C|IKO
+#217|Survivors' Bond|C|IKO
+#218|Dark Bargain|C|IKO
+#219|Spontaneous Flight|C|IKO
+#220|Swiftwater Cliffs|C|IKO
+#221|Drannith Magistrate|R|IKO
+#222|Solid Footing|C|IKO
+#223|Adventurous Impulse|C|IKO
+#224|Blisterspit Gremlin|C|IKO
+#225|Scoured Barrens|C|IKO
+#226|Convolute|C|IKO
+#227|Thornwood Falls|C|IKO
+#228|Bloodfell Caves|C|IKO
+#229|Sudden Spinnerets|C|IKO
+#230|Corpse Churn|C|IKO
+#231|Gloom Pangolin|C|IKO
+#232|Monstrous Step|U|IKO
+#233|Unexpected Fangs|C|IKO
+#234|Lead the Stampede|U|IKO
+#235|Channeled Force|U|IKO
+#236|Heightened Reflexes|C|IKO
+#237|Dismal Backwater|C|IKO
+#238|Raugrin Crystal|U|IKO
+#239|Tranquil Cove|C|IKO
+#240|Aegis Turtle|C|IKO
+#241|Zagoth Crystal|U|IKO
+#242|Rugged Highlands|C|IKO
+#243|Light of Hope|C|IKO
+#244|Plummet|C|IKO
+#245|Indatha Crystal|U|IKO
+#246|Savai Crystal|U|IKO
+#247|Mysterious Egg|C|IKO
+#248|Crystacean|C|IKO
+#249|Blazing Volley|C|IKO
+#250|Blossoming Sands|C|IKO
+#251|Thwart the Enemy|C|IKO
+#252|Springjaw Trap|C|IKO
+#253|Ketria Crystal|U|IKO
+#254|Titans' Nest|R|IKO
+#255|Barrier Breach|U|IKO
+#256|Sleeper Dart|C|IKO
+#257|Adaptive Shimmerer|C|IKO
+#258|Escape Protocol|U|IKO
+#259|Death's Oasis|R|IKO
+#260|Swamp|L|IKO
+#261|Plains|L|IKO
+#262|Forest|L|IKO
+#263|Island|L|IKO
+#264|Mountain|L|IKO
+//Rank|Name|Rarity|Set
 #1|Kiora Bests the Sea God|M|THB
 #2|Polukranos, Unchained|M|THB
 #3|Ashiok, Nightmare Muse|M|THB
