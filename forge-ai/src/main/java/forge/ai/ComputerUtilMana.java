@@ -229,7 +229,7 @@ public class ComputerUtilMana {
                     });
 
                     final List<SpellAbility> finalAbilities = new ArrayList<>();
-                    for (int i = 0; i < preferredShardAmount; i++) {
+                    for (int i = 0; i < preferredShardAmount && i < prefSortedAbilities.size(); i++) {
                         finalAbilities.add(prefSortedAbilities.get(i));
                     }
                     for (int i = 0; i < otherSortedAbilities.size(); i++) {
