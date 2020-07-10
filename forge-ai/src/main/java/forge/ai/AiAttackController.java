@@ -1257,6 +1257,10 @@ public class AiAttackController {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
             return true;
+        } else if (!canBeKilled && !dangerousBlockersPresent && canTrampleOverDefenders) {
+            if (LOG_AI_ATTACKS)
+                System.out.println(attacker.getName() + " = expecting to survive and get some Trample damage through");
+            return true;
         }
 
         if (numberOfPossibleBlockers > 2 
@@ -1298,9 +1302,7 @@ public class AiAttackController {
             }
             break;
         case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
-            if (!canBeBlocked
-                    || (!canBeKilled && !dangerousBlockersPresent && canTrampleOverDefenders)
-                    || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
+            if (!canBeBlocked || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
                     ((dangerousBlockersPresent && canKillAllDangerous) || !canBeKilled))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
