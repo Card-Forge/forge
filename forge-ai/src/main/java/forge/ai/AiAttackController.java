@@ -38,6 +38,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -1164,6 +1165,9 @@ public class AiAttackController {
                 return CombatUtil.canBlock(attacker, defender);
             }
         });
+
+        boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetPower() > Aggregates.sum(validBlockers, CardPredicates.Accessors.fnGetNetToughness);
+
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
         boolean dangerousBlockersPresent = !CardLists.filter(validBlockers, Predicates.or(
                 CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
@@ -1294,7 +1298,9 @@ public class AiAttackController {
             }
             break;
         case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
-            if (!canBeBlocked || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
+            if (!canBeBlocked
+                    || (!canBeKilled && !dangerousBlockersPresent && canTrampleOverDefenders)
+                    || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
                     ((dangerousBlockersPresent && canKillAllDangerous) || !canBeKilled))) {
                 if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
