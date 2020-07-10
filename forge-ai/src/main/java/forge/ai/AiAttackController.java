@@ -38,6 +38,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -1164,6 +1165,9 @@ public class AiAttackController {
                 return CombatUtil.canBlock(attacker, defender);
             }
         });
+
+        boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetPower() > Aggregates.sum(validBlockers, CardPredicates.Accessors.fnGetNetToughness);
+
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
         boolean dangerousBlockersPresent = !CardLists.filter(validBlockers, Predicates.or(
                 CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
@@ -1252,6 +1256,10 @@ public class AiAttackController {
         if (canKillAll && isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
+            return true;
+        } else if (!canBeKilled && !dangerousBlockersPresent && canTrampleOverDefenders) {
+            if (LOG_AI_ATTACKS)
+                System.out.println(attacker.getName() + " = expecting to survive and get some Trample damage through");
             return true;
         }
 
