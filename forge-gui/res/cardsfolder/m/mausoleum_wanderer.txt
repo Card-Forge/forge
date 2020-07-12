@@ -4,9 +4,9 @@ Types:Creature Spirit
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Spirit+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another Spirit enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell | UnlessCost$ X | References$ X | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {X}, where X is CARDNAME's power.
-SVar:X:Count$CardPower
+SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:Random
 SVar:BuffedBy:Spirit
 DeckHints:Type$Spirit
