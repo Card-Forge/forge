@@ -96,6 +96,7 @@ public class CardDetailPanel extends SkinnedPanel {
         cdArea.setFont(new Font("Dialog", 0, fontSizeR12));
         cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         cdArea.setOpaque(false);
+        cdArea.setFocusable(true);
         scrArea = new FScrollPane(cdArea, false);
 
         add(nameCostLabel);
