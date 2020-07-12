@@ -29,7 +29,7 @@ import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
-import forge.screens.home.puzzle.VSubmenuTutorial;
+//import forge.screens.home.puzzle.VSubmenuTutorial;
 import forge.screens.home.quest.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
@@ -115,7 +115,7 @@ public enum VHomeUI implements IVTopLevelUI {
 
         allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuTutorial.SINGLETON_INSTANCE);
+        //allSubmenus.add(VSubmenuTutorial.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);
