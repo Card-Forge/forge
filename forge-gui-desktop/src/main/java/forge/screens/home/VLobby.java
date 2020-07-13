@@ -183,7 +183,7 @@ public class VLobby implements ILobbyView {
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
             pnlStart.add(btnStart, "align center");
-
+            btnStart.getAccessibleContext().setAccessibleName("Start game");
             // Start button event handling
             btnStart.addActionListener(new ActionListener() {
                 @Override

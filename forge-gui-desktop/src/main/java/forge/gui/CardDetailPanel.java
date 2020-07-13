@@ -97,6 +97,7 @@ public class CardDetailPanel extends SkinnedPanel {
         cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         cdArea.setOpaque(false);
         cdArea.setFocusable(true);
+        cdArea.getAccessibleContext().setAccessibleName("Card textbox");
         scrArea = new FScrollPane(cdArea, false);
 
         add(nameCostLabel);
