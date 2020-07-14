@@ -451,6 +451,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @Override
     public void setCaption(final String caption) {
         this.lblCaption.setText(caption);
+this.lblCaption.setLabelFor(this.listView.getTable());
     }
 
     /**
