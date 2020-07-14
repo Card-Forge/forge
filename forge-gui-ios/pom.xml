@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>1.6.35.001</alpha-version>
+        <alpha-version>1.6.36.001</alpha-version>
     </properties>
 
     <parent>
