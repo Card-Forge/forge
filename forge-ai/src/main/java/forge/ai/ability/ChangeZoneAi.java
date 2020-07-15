@@ -98,7 +98,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return true;
         } else if (aiLogic.equals("Pongify")) {
             PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
-            Card choice = ComputerUtilCard.getBestCreatureAI(ai.getOpponents().getCreaturesInPlay());
+            Card choice = ComputerUtilCard.getBestCreatureAI(ai.getOpponents().getCreaturesInPlay()); // TODO: improve this for cases where the AI would prefer a planeswalker
             final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
             if (token == null || !token.isCreature() || token.getNetToughness() < 1) {
                 return true;    // becomes Terminate
