@@ -96,6 +96,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             return true;
+        } else if (aiLogic.equals("Pongify")) {
+            PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
+            Card choice = ComputerUtilCard.getBestCreatureAI(ai.getOpponents().getCreaturesInPlay());
+            final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
+            if (token == null || !token.isCreature() || token.getNetToughness() < 1) {
+                return true;    // becomes Terminate
+            } else {
+                if ((ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getPlayerTurn() == ai) || // prevent surprise combatant
+                        ComputerUtilCard.evaluateCreature(choice) < 1.5
+                                * ComputerUtilCard.evaluateCreature(token)) {
+                    return false;
+                }
+            }
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
