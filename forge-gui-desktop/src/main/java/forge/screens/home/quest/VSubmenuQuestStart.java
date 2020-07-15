@@ -57,22 +57,17 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text(localizer.getMessage("lblStartingWorld") + ":").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
-
     /* Second column */
     private final FLabel lblStartingPool = new FLabel.Builder().text(localizer.getMessage("lblStartingPool") + ":").build();
     private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<>();
-
     private final FLabel lblUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailable")).build();
 
     private final FLabel lblPreconDeck = new FLabel.Builder().text(localizer.getMessage("lblStarterEventdeck") +":").build();
     private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<>();
-
     private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedFormat") + ":").build();
     private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<>();
-
     private final FLabel lblCustomDeck = new FLabel.Builder().text(localizer.getMessage("lblCustomdeck")).build();
     private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<>();
-
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblDefineCustomFormat")).build();
     private final FLabel btnSelectFormat = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblSelectFormat")).build();
 
@@ -89,10 +84,8 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
 
     private final FLabel lblPrizedCards = new FLabel.Builder().text(localizer.getMessage("lblPrizedCards")).build();
     private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<>();
-
     private final FLabel lblPrizeFormat = new FLabel.Builder().text(localizer.getMessage("lblSanctionedFormat") + ":").build();
     private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<>();
-
     private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text(localizer.getMessage("lblAllCardsAvailableWin")).build();
     private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text(localizer.getMessage("lblOnlySetsInStarting")).build();
 
@@ -195,6 +188,13 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
 
         boxCompleteSet.setToolTipText(localizer.getMessage("lblboxCompleteSet"));
         boxAllowDuplicates.setToolTipText(localizer.getMessage("lblboxAllowDuplicates"));
+        lblStartingWorld.setLabelFor(cbxStartingWorld.getComponent());
+        lblStartingPool.setLabelFor(cbxStartingPool.getComponent());
+        lblPreconDeck.setLabelFor(cbxPreconDeck.getComponent());
+        lblFormat.setLabelFor(cbxFormat.getComponent());
+        lblCustomDeck.setLabelFor(cbxCustomDeck.getComponent());
+        lblPrizedCards.setLabelFor(cbxPrizedCards.getComponent());
+        lblPrizeFormat.setLabelFor(cbxPrizeFormat.getComponent());
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Sanctioned);
