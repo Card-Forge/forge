@@ -188,13 +188,13 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
 
         boxCompleteSet.setToolTipText(localizer.getMessage("lblboxCompleteSet"));
         boxAllowDuplicates.setToolTipText(localizer.getMessage("lblboxAllowDuplicates"));
-    lblStartingWorld.setLabelFor(cbxStartingWorld.getComponent());
-    lblStartingPool.setLabelFor(cbxStartingPool.getComponent());
-    lblPreconDeck.setLabelFor(cbxPreconDeck.getComponent());
-    lblFormat.setLabelFor(cbxFormat.getComponent());
-    lblCustomDeck.setLabelFor(cbxCustomDeck.getComponent());
-    lblPrizedCards.setLabelFor(cbxPrizedCards.getComponent());
-    lblPrizeFormat.setLabelFor(cbxPrizeFormat.getComponent());
+        lblStartingWorld.setLabelFor(cbxStartingWorld.getComponent());
+        lblStartingPool.setLabelFor(cbxStartingPool.getComponent());
+        lblPreconDeck.setLabelFor(cbxPreconDeck.getComponent());
+        lblFormat.setLabelFor(cbxFormat.getComponent());
+        lblCustomDeck.setLabelFor(cbxCustomDeck.getComponent());
+        lblPrizedCards.setLabelFor(cbxPrizedCards.getComponent());
+        lblPrizeFormat.setLabelFor(cbxPrizeFormat.getComponent());
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Sanctioned);
