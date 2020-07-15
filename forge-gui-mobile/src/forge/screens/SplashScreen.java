@@ -92,7 +92,7 @@ public class SplashScreen extends FContainer {
         }
         float disclaimerHeight = 30f / 450f * h;
         String disclaimer = "Forge is not affiliated in any way with Wizards of the Coast.\n"
-                + "Forge is open source software, released under the GNU Public License.";
+                + "Forge is open source software, released under the GNU General Public License.";
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
                 x, y, w, disclaimerHeight, true, Align.center, true);
 
