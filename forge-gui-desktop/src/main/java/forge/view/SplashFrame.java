@@ -101,7 +101,7 @@ public class SplashFrame extends JFrame {
         final JLabel lblDisclaimer = new JLabel("<html><center>"
                 + "Forge is not affiliated in any way with Wizards of the Coast."
                 + "<br>Forge is open source software, released under "
-                + "the GNU Public License.</center></html>");
+                + "the GNU General Public License.</center></html>");
 
         lblDisclaimer.setBounds(0, 300, 450, 20);
         lblDisclaimer.setFont(new Font("Tahoma", Font.PLAIN, 9));
