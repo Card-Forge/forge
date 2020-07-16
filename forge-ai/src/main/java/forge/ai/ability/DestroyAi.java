@@ -222,24 +222,15 @@ public class DestroyAi extends SpellAbilityAi {
                 Card choice = null;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
+                    if ("Pongify".equals(logic)) {
+                        return SpecialAiLogic.doPongifyLogic(ai, sa);
+                    }
+
                     choice = ComputerUtilCard.getBestCreatureAI(list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
                             return false;
-                        }
-                    }
-                    if ("Pongify".equals(logic)) {
-                        final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
-                        if (token == null || !token.isCreature() || token.getNetToughness() < 1) {
-                            return true;    // becomes Terminate
-                        } else {
-                            if (source.getGame().getPhaseHandler().getPhase()
-                                .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) || // prevent surprise combatant
-                                ComputerUtilCard.evaluateCreature(choice) < 1.5
-                                * ComputerUtilCard.evaluateCreature(token)) {
-                                return false;
-                            }
                         }
                     }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
