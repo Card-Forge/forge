@@ -96,6 +96,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             return true;
+        } else if (aiLogic.equals("Pongify")) {
+            return SpecialAiLogic.doPongifyLogic(ai, sa);
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -130,6 +132,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 multipleCardsToChoose = SpecialCardAi.Intuition.considerMultiple(aiPlayer, sa);
             } else if (aiLogic.equals("MazesEnd")) {
                 return SpecialCardAi.MazesEnd.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("Pongify")) {
+                return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
             }
         }
         if (isHidden(sa)) {
