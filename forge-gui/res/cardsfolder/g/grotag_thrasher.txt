@@ -3,6 +3,5 @@ ManaCost:4 R
 Types:Creature Lizard
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature can't block this turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_thrasher.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 Oracle:Whenever Grotag Thrasher attacks, target creature can't block this turn.

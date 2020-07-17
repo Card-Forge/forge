@@ -4,6 +4,5 @@ Types:Creature Elemental
 PT:1/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card,Emblem | CombatDamage$ False | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an opponent is dealt noncombat damage, CARDNAME gets +3/+0 until end of turn.
-SVar:TrigPump:DB$Pump | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_spitfire.jpg
+SVar:TrigPump:DB$ Pump | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
 Oracle:Flying\nWhenever an opponent is dealt noncombat damage, Chandra's Spitfire gets +3/+0 until end of turn.

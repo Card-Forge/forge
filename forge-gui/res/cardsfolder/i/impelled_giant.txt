@@ -3,8 +3,7 @@ ManaCost:4 R R
 Types:Creature Giant Warrior
 PT:3/3
 K:Trample
-A:AB$ Pump | Cost$ tapXType<1/Creature.Red+Other/other red creature> | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
+A:AB$ Pump | Cost$ tapXType<1/Creature.Red+Other/other red creature> | Defined$ Self | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
 SVar:X:Tapped$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/impelled_giant.jpg
 Oracle:Trample\nTap an untapped red creature you control other than Impelled Giant: Impelled Giant gets +X/+0 until end of turn, where X is the power of the creature tapped this way.

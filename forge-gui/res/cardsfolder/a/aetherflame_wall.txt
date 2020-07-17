@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Wall
 PT:0/4
 K:Defender
-A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 K:CARDNAME can block creatures with shadow as though they didn't have shadow.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
 Oracle:Defender\nAetherflame Wall can block creatures with shadow as though they didn't have shadow.\n{R}: Aetherflame Wall gets +1/+0 until end of turn.

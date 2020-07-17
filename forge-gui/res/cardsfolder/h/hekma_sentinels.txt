@@ -3,6 +3,5 @@ ManaCost:2 U
 Types:Creature Human Cleric
 PT:2/3
 T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hekma_sentinels.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 Oracle:Whenever you cycle or discard a card, Hekma Sentinels gets +1/+1 until end of turn.

@@ -4,9 +4,9 @@ Types:Creature Human Berserker Ally
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Ally.YouCtrl | KW$ First Strike
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Ally.YouCtrl | KW$ First Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/highland_berserker.jpg
+DeckHints:Type$Ally
 Oracle:Whenever Highland Berserker or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.

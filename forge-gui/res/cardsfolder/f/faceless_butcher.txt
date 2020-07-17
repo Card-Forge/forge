@@ -10,5 +10,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 Oracle:When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.\nWhen Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.

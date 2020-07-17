@@ -2,6 +2,5 @@ Name:Foxfire Oak
 ManaCost:5 G
 Types:Creature Treefolk Shaman
 PT:3/6
-A:AB$ Pump | Cost$ RG RG RG | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire_oak.jpg
+A:AB$ Pump | Cost$ RG RG RG | Defined$ Self | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
 Oracle:{R/G}{R/G}{R/G}: Foxfire Oak gets +3/+0 until end of turn.

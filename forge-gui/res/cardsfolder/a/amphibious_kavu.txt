@@ -4,6 +4,5 @@ Types:Creature Kavu
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.Blue,Creature.Black | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by one or more blue and/or black creatures, CARDNAME gets +3/+3 until end of turn.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Blue,Creature.Black | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by one or more blue and/or black creatures, CARDNAME gets +3/+3 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 3 | NumDef$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/amphibious_kavu.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3 | NumDef$ 3
 Oracle:Whenever Amphibious Kavu blocks or becomes blocked by one or more blue and/or black creatures, Amphibious Kavu gets +3/+3 until end of turn.

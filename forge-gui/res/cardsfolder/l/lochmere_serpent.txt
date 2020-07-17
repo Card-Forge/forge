@@ -3,7 +3,7 @@ ManaCost:4 U B
 Types:Creature Serpent
 PT:7/7
 K:Flash
-A:AB$ Pump | Cost$ U Sac<1/Island> | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Pump | Cost$ U Sac<1/Island> | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 A:AB$ GainLife | Cost$ B Sac<1/Swamp> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random

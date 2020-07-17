@@ -4,8 +4,7 @@ Types:Creature Drake
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains flying until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 A:AB$ PumpAll | Cost$ 4 U U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescription$ Creatures you control gain flying until end of turn.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_moondrakes.jpg
 Oracle:Flying\nWhen Nephalia Moondrakes enters the battlefield, target creature gains flying until end of turn.\n{4}{U}{U}, Exile Nephalia Moondrakes from your graveyard: Creatures you control gain flying until end of turn.

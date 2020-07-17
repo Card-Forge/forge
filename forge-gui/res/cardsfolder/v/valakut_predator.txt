@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Elemental
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_predator.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, Valakut Predator gets +2/+2 until end of turn.

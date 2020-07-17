@@ -2,10 +2,9 @@ Name:Inferno Titan
 ManaCost:4 R R
 Types:Creature Giant
 PT:6/6
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DmgDistro | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three targets.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DmgDistro | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three targets.
 SVar:DmgDistro:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_titan.jpg
 Oracle:{R}: Inferno Titan gets +1/+0 until end of turn.\nWhenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three targets.

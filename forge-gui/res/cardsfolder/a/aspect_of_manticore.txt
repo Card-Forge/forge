@@ -5,7 +5,7 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature gains first strike until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Enchanted | KW$ First Strike
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ First Strike
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
 SVar:PlayMain1:TRUE
 Oracle:Flash\nEnchant creature\nWhen Aspect of Manticore enters the battlefield, enchanted creature gains first strike until end of turn.\nEnchanted creature gets +2/+0.

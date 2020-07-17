@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +0/+1 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +1
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +1
 SVar:PlayMain1:TRUE
 Oracle:When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.

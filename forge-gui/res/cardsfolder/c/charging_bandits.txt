@@ -3,6 +3,5 @@ ManaCost:4 B
 Types:Creature Human Rogue
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/charging_bandits.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Whenever Charging Bandits attacks, it gets +2/+0 until end of turn.

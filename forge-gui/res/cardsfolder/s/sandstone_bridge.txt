@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +1/+1 and gains vigilance until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Vigilance
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Vigilance
 SVar:PlayMain1:TRUE
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_bridge.jpg
 Oracle:Sandstone Bridge enters the battlefield tapped.\nWhen Sandstone Bridge enters the battlefield, target creature gets +1/+1 and gains vigilance until end of turn.\n{T}: Add {W}.

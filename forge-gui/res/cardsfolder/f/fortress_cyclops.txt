@@ -3,8 +3,7 @@ ManaCost:3 R W
 Types:Creature Cyclops Soldier
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn.
-SVar:TrigPumpAttack:DB$Pump | Defined$ Self | NumAtt$ 3
+SVar:TrigPumpAttack:DB$ Pump | Defined$ Self | NumAtt$ 3
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpBlock | TriggerDescription$ Whenever CARDNAME blocks, it gets +0/+3 until end of turn.
-SVar:TrigPumpBlock:DB$Pump | Defined$ Self | NumDef$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fortress_cyclops.jpg
+SVar:TrigPumpBlock:DB$ Pump | Defined$ Self | NumDef$ 3
 Oracle:Whenever Fortress Cyclops attacks, it gets +3/+0 until end of turn.\nWhenever Fortress Cyclops blocks, it gets +0/+3 until end of turn.

@@ -3,8 +3,7 @@ ManaCost:6 R R
 Types:Creature Avatar
 PT:6/6
 K:Flying
-A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE7 | Description$ If an opponent controls seven or more lands, CARDNAME costs {6} less to cast.
 SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_fury.jpg
 Oracle:If an opponent controls seven or more lands, this spell costs {6} less to cast.\nFlying\n{R}: Avatar of Fury gets +1/+0 until end of turn.

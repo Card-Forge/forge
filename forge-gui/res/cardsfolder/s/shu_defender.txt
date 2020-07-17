@@ -3,6 +3,5 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +0/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_defender.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ 2
 Oracle:Whenever Shu Defender blocks, it gets +0/+2 until end of turn.

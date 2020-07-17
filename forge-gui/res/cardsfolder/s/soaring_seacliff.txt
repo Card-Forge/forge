@@ -4,6 +4,5 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains flying until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_seacliff.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 Oracle:Soaring Seacliff enters the battlefield tapped.\nWhen Soaring Seacliff enters the battlefield, target creature gains flying until end of turn.\n{T}: Add {U}.

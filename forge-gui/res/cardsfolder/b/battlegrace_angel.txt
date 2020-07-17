@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 K:Exalted
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains lifelink until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ TriggeredAttacker | KW$ Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battlegrace_angel.jpg
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Lifelink
+DeckHas:Ability$LifeGain
 Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, it gains lifelink until end of turn.

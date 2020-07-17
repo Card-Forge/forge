@@ -3,6 +3,5 @@ ManaCost:2 G
 Types:Creature Plant
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gains vigilance until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | KW$ Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Snapping_Creeper.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Vigilance
 Oracle:Landfall — Whenever a land enters the battlefield under your control, Snapping Creeper gains vigilance until end of turn.
