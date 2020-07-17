@@ -3,7 +3,7 @@ ManaCost:U B
 Types:Creature Nightmare
 PT:2/1
 T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever one or more cards are put into your graveyard from your library, CARDNAME gets +1/+1 until end of turn and can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | KW$ HIDDEN Unblockable
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ HIDDEN Unblockable
 A:AB$ Mill | Cost$ 1 U B | Defined$ You | NumCards$ 1 | SpellDescription$ Mill a card.
 DeckHas:Ability$Graveyard
 Oracle:Whenever one or more cards are put into your graveyard from your library, Devourer of Memory gets +1/+1 until end of turn and can't be blocked this turn.\n{1}{U}{B}: Mill a card.

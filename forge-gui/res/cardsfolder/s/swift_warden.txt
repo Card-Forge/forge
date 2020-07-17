@@ -4,7 +4,6 @@ Types:Creature Merfolk Warrior
 PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target Merfolk you control gains hexproof until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk | KW$ Hexproof
+SVar:TrigPump:DB$ Pump | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk | KW$ Hexproof
 DeckHints:Type$Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/swift warden.jpg
 Oracle:Flash\nWhen Swift Warden enters the battlefield, target Merfolk you control gains hexproof until end of turn.

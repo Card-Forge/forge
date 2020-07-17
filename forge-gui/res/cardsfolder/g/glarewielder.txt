@@ -5,8 +5,7 @@ PT:3/1
 K:Haste
 K:Evoke:1 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures can't block this turn.
-SVar:TrigPump:DB$Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:TrigPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glarewielder.jpg
 Oracle:Haste\nWhen Glarewielder enters the battlefield, up to two target creatures can't block this turn.\nEvoke {1}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

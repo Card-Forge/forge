@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Creature Human Scout
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}{W}. If you do, it gains flying until end of turn.
-SVar:TrigPump:AB$Pump | Cost$ 1 W | Defined$ Self | KW$ Flying
+SVar:TrigPump:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ Flying
 Oracle:Whenever Skyline Scout attacks, you may pay {1}{W}. If you do, it gains flying until end of turn.

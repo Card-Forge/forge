@@ -3,6 +3,5 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://magiccards.info/scans/en/st/25.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 Oracle:Whenever Royal Trooper blocks, it gets +2/+2 until end of turn.

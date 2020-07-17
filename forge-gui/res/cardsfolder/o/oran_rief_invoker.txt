@@ -2,6 +2,5 @@ Name:Oran-Rief Invoker
 ManaCost:1 G
 Types:Creature Human Shaman
 PT:2/2
-A:AB$ Pump | Cost$ 8 | NumAtt$ +5 | NumDef$ +5 | KW$ Trample | SpellDescription$ CARDNAME gets +5/+5 and gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_invoker.jpg
+A:AB$ Pump | Cost$ 8 | Defined$ Self | NumAtt$ +5 | NumDef$ +5 | KW$ Trample | SpellDescription$ CARDNAME gets +5/+5 and gains trample until end of turn.
 Oracle:{8}: Oran-Rief Invoker gets +5/+5 and gains trample until end of turn.

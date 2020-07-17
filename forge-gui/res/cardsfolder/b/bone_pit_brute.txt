@@ -4,5 +4,5 @@ Types:Creature Cyclops
 PT:4/5
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +4/+0 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Bone Pit Brute enters the battlefield, target creature gets +4/+0 until end of turn.

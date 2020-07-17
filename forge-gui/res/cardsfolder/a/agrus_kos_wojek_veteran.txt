@@ -3,7 +3,6 @@ ManaCost:3 R W
 Types:Legendary Creature Human Soldier
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Creature.attacking+Red | NumAtt$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$PumpAll | ValidCards$ Creature.attacking+White | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/agrus_kos_wojek_veteran.jpg
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+Red | NumAtt$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking+White | NumDef$ 2
 Oracle:Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.

@@ -2,7 +2,6 @@ Name:Breathstealer
 ManaCost:2 B
 Types:Creature Nightstalker
 PT:2/2
-A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
-SVar:Picture:http://www.wizards.com/global/images/magic/general/breathstealer.jpg
 Oracle:{B}: Breathstealer gets +1/-1 until end of turn.

@@ -2,6 +2,5 @@ Name:Hope and Glory
 ManaCost:1 W
 Types:Instant
 A:SP$ Untap | Cost$ 1 W | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures | SubAbility$ DBPump | SpellDescription$ Untap two target creatures. Each of them gets +1/+1 until end of turn.
-SVar:DBPump:DB$Pump | Defined$ Targeted | NumAtt$ +1 | NumDef$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_and_glory.jpg
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +1 | NumDef$ +1
 Oracle:Untap two target creatures. Each of them gets +1/+1 until end of turn.

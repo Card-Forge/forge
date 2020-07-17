@@ -2,6 +2,5 @@ Name:Incinerate
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DB | SpellDescription$ CARDNAME deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
-SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/incinerate.jpg
+SVar:DB:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
 Oracle:Incinerate deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.

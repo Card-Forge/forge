@@ -3,5 +3,5 @@ ManaCost:G
 Types:Creature Brushwagg
 PT:1/1
 K:Trample
-A:AB$ Pump | Cost$ 3 G | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+A:AB$ Pump | Cost$ 3 G | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
 Oracle:Trample\n{3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.

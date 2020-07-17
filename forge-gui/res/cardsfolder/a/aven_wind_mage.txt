@@ -1,9 +1,9 @@
 Name:Aven Wind Mage
 ManaCost:2 U
 Types:Creature Bird Wizard
+PT:2/2
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidCard$ Card.Self | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPump:DB$ Pump | Defined$ Self | ValidCard$ Card.Self | NumAtt$ 1 | NumDef$ 1
 DeckHints:Type$Instant|Sorcery
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, Aven Wind Mage gets +1/+1 until end of turn.
-PT:2/2

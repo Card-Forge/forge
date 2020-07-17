@@ -4,7 +4,7 @@ Types:Creature Cyclops Shaman
 PT:0/8
 K:Trample
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's converted mana cost.
-SVar:TrigPump:DB$ Pump | NumAtt$ +X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | References$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery

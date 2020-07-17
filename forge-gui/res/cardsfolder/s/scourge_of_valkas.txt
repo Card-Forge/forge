@@ -7,8 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ NumDragons | References$ NumDragons | TgtPrompt$ Select any target | DamageSource$ TriggeredCard
 SVar:NumDragons:Count$Valid Dragon.YouCtrl
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_valkas.jpg
 Oracle:Flying\nWhenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.\n{R}: Scourge of Valkas gets +1/+0 until end of turn.

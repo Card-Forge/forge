@@ -1,6 +1,6 @@
 Name:Frilled Sea Serpent
 ManaCost:4 U U
 Types:Creature Serpent
-A:AB$ Pump | Cost$ 5 U U | ValidCard$ Card.Self | KW$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
-Oracle:{5}{U}{U}: Frilled Sea Serpent can't be blocked this turn.
 PT:4/6
+A:AB$ Pump | Cost$ 5 U U | Defined$ Self | KW$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+Oracle:{5}{U}{U}: Frilled Sea Serpent can't be blocked this turn.

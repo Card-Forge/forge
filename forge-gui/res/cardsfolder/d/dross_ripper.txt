@@ -2,6 +2,5 @@ Name:Dross Ripper
 ManaCost:4
 Types:Artifact Creature Dog
 PT:3/3
-A:AB$ Pump | Cost$ 2 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_ripper.jpg
+A:AB$ Pump | Cost$ 2 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 Oracle:{2}{B}: Dross Ripper gets +1/+1 until end of turn.

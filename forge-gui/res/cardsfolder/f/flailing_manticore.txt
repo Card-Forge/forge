@@ -4,8 +4,7 @@ Types:Creature Manticore
 PT:3/3
 K:Flying
 K:First Strike
-A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | Activator$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
-A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | Activator$ Player | IsCurse$ True | SpellDescription$ CARDNAME gets -1/-1 until end of turn. Any player may activate this ability.
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self | Activator$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | Defined$ Self | Activator$ Player | IsCurse$ True | SpellDescription$ CARDNAME gets -1/-1 until end of turn. Any player may activate this ability.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_manticore.jpg
 Oracle:Flying, first strike\n{1}: Flailing Manticore gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Manticore gets -1/-1 until end of turn. Any player may activate this ability.
