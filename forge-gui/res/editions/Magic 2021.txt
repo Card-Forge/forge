@@ -408,7 +408,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 
 [tokens]
 b_2_2_zombie
-b_5_5_demon
+b_5_5_demon_flying
 c_a_treasure_sac
 c_4_4_a_construct
 g_1_1_cat
