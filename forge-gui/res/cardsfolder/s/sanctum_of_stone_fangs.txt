@@ -6,4 +6,5 @@ SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | Referen
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine
+DeckHas:Ability$LifeGain
 Oracle:At the beginning of your precombat main phase, each opponent loses X life and you gain X life, where X is the number of Shrines you control.

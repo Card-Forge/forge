@@ -6,5 +6,7 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigDraw1:AB$ Draw | Cost$ 2 | Defined$ You | NumCards$ 1
 T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromHand | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
 SVar:TrigDraw2:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:AIPreference:DiscardCost$Card.cmcLE2
+DeckHas:Ability$Discard
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 Oracle:Whenever Ghostly Pilferer becomes untapped, you may pay {2}. If you do, draw a card.\nWhenever an opponent casts a spell from anywhere other than their hand, draw a card.\nDiscard a card: Ghostly Pilferer can't be blocked this turn.
