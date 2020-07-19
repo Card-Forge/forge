@@ -1009,7 +1009,7 @@ public class ComputerUtil {
             return true;
         }
 
-        if (card.hasKeyword(Keyword.EXALTED)) {
+        if (card.hasKeyword(Keyword.EXALTED) || card.hasKeyword(Keyword.EXTORT)) {
             return true;
         }
 
