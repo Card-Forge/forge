@@ -4,5 +4,6 @@ Types:Creature Snake
 PT:2/2
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorescale_coatl.jpg
 Oracle:Whenever you draw a card, you may put a +1/+1 counter on Lorescale Coatl.
