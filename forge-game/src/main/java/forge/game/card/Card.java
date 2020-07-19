@@ -210,8 +210,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     // x=Static Avility id or 0, y=timestamp
     private Table<Integer, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create();
 
-    private String basePowerString = null;
-    private String baseToughnessString = null;
     private String oracleText = "";
 
     private int damage;
@@ -3283,20 +3281,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // values that are printed on card
     public final String getBasePowerString() {
-        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+        return currentState.getBasePowerString();
     }
 
     public final String getBaseToughnessString() {
-        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+        return currentState.getBaseToughnessString();
     }
 
     // values that are printed on card
     public final void setBasePowerString(final String s) {
-        basePowerString = s;
+        currentState.setBasePowerString(s);;
     }
 
     public final void setBaseToughnessString(final String s) {
-        baseToughnessString = s;
+        currentState.setBaseToughnessString(s);
     }
 
     public final int getSetPower() {

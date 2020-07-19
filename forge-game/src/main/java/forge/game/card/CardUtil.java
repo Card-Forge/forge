@@ -240,9 +240,12 @@ public final class CardUtil {
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());
 
-        // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
+        // lock in the current P/T
+        newCopy.setBasePower(in.getCurrentPower());
+        newCopy.setBaseToughness(in.getCurrentToughness());
+
+        // extra copy PT boost
+        newCopy.setPTBoost(in.getPTBoostTable());
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
