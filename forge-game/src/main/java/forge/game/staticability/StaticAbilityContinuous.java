@@ -824,9 +824,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (mayLookAt != null) {
-                for (Player p : mayLookAt) {
-                    affectedCard.setMayLookAt(p, true);
-                }
+                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
             if (withFlash != null) {
                 affectedCard.addWithFlash(se.getTimestamp(), withFlash);

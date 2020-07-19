@@ -20,6 +20,7 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -204,7 +205,7 @@ public class CardFactoryUtil {
 
         card.setNamedCard(name);
         card.turnFaceDown();
-        card.setMayLookAt(player, true);
+        card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
         card.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }

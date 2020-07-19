@@ -124,6 +124,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
+    private final Map<Long, PlayerCollection> mayLook = Maps.newHashMap();
+    private final PlayerCollection mayLookFaceDownExile = new PlayerCollection();
+    private final PlayerCollection mayLookTemp = new PlayerCollection();
+
     private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().enumSetValues(Keyword.class).build();
 
     private final Map<CounterType, Long> counterTypeTimestamps = Maps.newHashMap();
@@ -2842,11 +2846,44 @@ public class Card extends GameEntity implements Comparable<Card> {
         return view.mayPlayerLook(player.getView());
     }
 
-    public final void setMayLookAt(final Player player, final boolean mayLookAt) {
-        setMayLookAt(player, mayLookAt, false);
+    public final void addMayLookAt(final long timestamp, final Iterable<Player> list) {
+        PlayerCollection plist = new PlayerCollection(list);
+        mayLook.put(timestamp, plist);
+        if (isFaceDown() && isInZone(ZoneType.Exile)) {
+            mayLookFaceDownExile.addAll(plist);
+        }
+        updateMayLook();
     }
-    public final void setMayLookAt(final Player player, final boolean mayLookAt, final boolean temp) {
-        view.setPlayerMayLook(player, mayLookAt, temp);
+
+    public final void removeMayLookAt(final long timestamp) {
+        if (mayLook.remove(timestamp) != null) {
+            updateMayLook();
+        }
+    }
+
+    public final void addMayLookTemp(final Player player) {
+        if (mayLookTemp.add(player)) {
+            if (isFaceDown() && isInZone(ZoneType.Exile)) {
+                mayLookFaceDownExile.add(player);
+            }
+            updateMayLook();
+        }
+    }
+
+    public final void removeMayLookTemp(final Player player) {
+        if (mayLookTemp.remove(player)) {
+            updateMayLook();
+        }
+    }
+
+    public final void updateMayLook() {
+        PlayerCollection result = new PlayerCollection();
+        for (PlayerCollection v : mayLook.values()) {
+            result.addAll(v);
+        }
+        result.addAll(mayLookFaceDownExile);
+        result.addAll(mayLookTemp);
+        getView().setPlayerMayLook(result);
     }
 
     public final CardPlayOption mayPlay(final StaticAbility sta) {
