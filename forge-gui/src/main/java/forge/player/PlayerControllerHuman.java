@@ -161,7 +161,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return;
         }
         tempShownCards.add(c);
-        c.setMayLookAt(player, true, true);
+        c.addMayLookTemp(player);
     }
 
     @Override
@@ -178,7 +178,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         for (final Card c : tempShownCards) {
-            c.setMayLookAt(player, false, true);
+            c.removeMayLookTemp(player);
         }
         tempShownCards.clear();
     }
