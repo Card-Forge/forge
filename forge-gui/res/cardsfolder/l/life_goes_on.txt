@@ -3,5 +3,6 @@ ManaCost:G
 Types:Instant
 A:SP$ GainLife | Cost$ G | LifeAmount$ X | References$ X | SpellDescription$ You gain 4 life. If a creature died this turn, you gain 8 life instead.
 SVar:X:Count$Morbid.8.4
+DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_goes_on.jpg
 Oracle:You gain 4 life. If a creature died this turn, you gain 8 life instead.

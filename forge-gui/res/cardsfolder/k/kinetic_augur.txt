@@ -11,4 +11,5 @@ SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Optional$ True | Mod
 SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
+DeckHas:Ability$Discard
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nKinetic Augur's power is equal to the number of instant and sorcery cards in your graveyard.\nWhen Kinetic Augur enters the battlefield, discard up to two cards, then draw that many cards.
