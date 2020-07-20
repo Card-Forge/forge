@@ -3869,3 +3869,45 @@ Frantic Inventory|M21|2
 Eliminate|M21|2
 Heartfire Immolator|M21|2
 Llanowar Visionary|M21|2
+Bloodfell Caves|M21
+Blossoming Sands|M21
+Dismal Backwater|M21
+Jungle Hollow|M21
+Rugged Highlands|M21
+Scoured Barrens|M21
+Swiftwater Cliffs|M21
+Thornwood Falls|M21
+Tranquil Cove|M21
+Wind-Scarred Crag|M21
+
+[M21 Lands]
+6 Bloodfell Caves|M21
+6 Blossoming Sands|M21
+6 Dismal Backwater|M21
+6 Jungle Hollow|M21
+6 Rugged Highlands|M21
+6 Scoured Barrens|M21
+6 Swiftwater Cliffs|M21
+6 Thornwood Falls|M21
+6 Tranquil Cove|M21
+6 Wind-Scarred Crag|M21
+3 Plains|M21|1
+3 Plains|M21|2
+3 Plains|M21|4
+3 Plains|M21|3
+3 Island|M21|1
+3 Island|M21|2
+3 Island|M21|4
+3 Island|M21|3
+3 Swamp|M21|1
+3 Swamp|M21|2
+3 Swamp|M21|4
+3 Swamp|M21|3
+3 Mountain|M21|1
+3 Mountain|M21|2
+3 Mountain|M21|4
+3 Mountain|M21|3
+3 Forest|M21|1
+3 Forest|M21|2
+3 Forest|M21|4
+3 Forest|M21|3
