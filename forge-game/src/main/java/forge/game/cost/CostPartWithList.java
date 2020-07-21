@@ -132,8 +132,12 @@ public abstract class CostPartWithList extends CostPart {
             }
             cardList.addAll(doListPayment(ability, targetCards));
         } else {
-            for (Card c: targetCards) {
-                executePayment(ability, c);
+            if (targetCards.isEmpty()) {
+                doPayment(ability, null); // e.g. CostFlipCoin
+            } else {
+                for (Card c : targetCards) {
+                    executePayment(ability, c);
+                }
             }
         }
         handleChangeZoneTrigger(payer, ability, targetCards);
