@@ -354,7 +354,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         byte line = getPossibleColorUses(color);
 
         for(byte outColor : ManaAtom.MANATYPES) {
-            if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
+            if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(color)) {
                 return true;
             }
         }
