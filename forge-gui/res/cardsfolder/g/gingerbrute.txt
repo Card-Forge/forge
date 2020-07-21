@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact Creature Food Golem
 PT:1/1
 K:Haste
-A:AB$ Effect | Cost$ 1 | Name$ CARDNAME Effect | StaticAbilities$ KWPump | SpellDescription$ CARDNAME can't be blocked this turn except by creatures with haste.
+A:AB$ Effect | Cost$ 1 | StaticAbilities$ KWPump | SpellDescription$ CARDNAME can't be blocked this turn except by creatures with haste.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutHaste | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked this turn except by creatures with haste.
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHas:Ability$LifeGain & Ability$Food
