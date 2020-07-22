@@ -1053,6 +1053,12 @@ public class ComputerUtil {
                     }
                 }
             }
+
+            if (ApiType.PermanentNoncreature.equals(sa.getApi()) && buffedcard.hasKeyword(Keyword.PROWESS)) {
+                // non creature Permanent spell
+                return true;
+            }
+
             if (card.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
@@ -1218,6 +1224,9 @@ public class ComputerUtil {
                 if (source.isValid(bffdby, buffedCard.getController(), buffedCard, sa)) {
                     return true;
                 }
+            }
+            if (ApiType.PermanentNoncreature.equals(sa.getApi()) && buffedCard.hasKeyword(Keyword.PROWESS)) {
+                return true;
             }
             //Fill the graveyard for Threshold
             if (checkThreshold) {

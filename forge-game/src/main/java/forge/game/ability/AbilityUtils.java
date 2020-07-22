@@ -1915,10 +1915,7 @@ public class AbilityUtils {
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
-        String val = null;
-        if (ability instanceof SpellAbility) {
-            val = ability.getSVar(sVarName);
-        }
+        String val = ability.getSVar(sVarName);
         if (StringUtils.isEmpty(val)) {
             Card host = null;
             if (ability instanceof SpellAbility) {

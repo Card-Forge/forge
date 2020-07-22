@@ -36,7 +36,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
@@ -152,11 +151,6 @@ public class CardFactory {
         if (bCopyDetails) {
             c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
-
-            // Rule 706.10 : Madness is copied
-            if (original.isInZone(ZoneType.Stack)) {
-                c.setMadness(original.isMadness());
-            }
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);
