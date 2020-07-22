@@ -182,7 +182,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
-    private boolean madness = false;
     private boolean madnessWithoutCast = false;
 
     private boolean flipped = false;
@@ -5268,10 +5267,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isMadness() {
-        return madness;
-    }
-    public void setMadness(boolean madness0) {
-        madness = madness0;
+        if (this.getCastSA() == null) {
+            return false;
+        }
+        return getCastSA().isMadness();
     }
     public boolean getMadnessWithoutCast() { return madnessWithoutCast; }
     public void setMadnessWithoutCast(boolean state) { madnessWithoutCast = state; }

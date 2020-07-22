@@ -24,6 +24,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.spellability.AlternativeCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -247,7 +248,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Madness")) {
-                tgtSA.getHostCard().setMadness(true);
+                tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 
             if (tgtSA.usesTargeting() && !optional) {

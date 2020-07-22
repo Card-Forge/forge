@@ -125,18 +125,25 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         if (sa.hasParam("TokenAttacking") && combat.getAttackingPlayer().equals(controller)) {
             String attacking = sa.getParam("TokenAttacking");
             GameEntity defender = null;
+            FCollectionView<GameEntity> defs = null;
             if ("True".equalsIgnoreCase(attacking)) {
-                // into battlefield attacking only should work if you are the attacking player
-                if (combat.getAttackingPlayer().equals(controller)) {
-                    final FCollectionView<GameEntity> defs = combat.getDefenders();
-                    Map<String, Object> params = Maps.newHashMap();
-                    params.put("Attacker", c);
-                    defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
-                            Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+                defs = combat.getDefenders();
+            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, attacking, sa), null);
+                if (defendingPlayer != null) {
+                    defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
                 }
             } else {
-                defender = Iterables.getFirst(AbilityUtils.getDefinedEntities(host, attacking, sa), null);
+                defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
             }
+
+            if (defs != null) {
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("Attacker", c);
+                defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
+                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+            }
+
             if (defender != null) {
                 combat.addAttacker(c, defender);
                 combatChanged = true;

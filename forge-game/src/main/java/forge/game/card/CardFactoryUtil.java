@@ -1371,10 +1371,9 @@ public class CardFactoryUtil {
 
         // Count$Madness.<True>.<False>
         if (sq[0].startsWith("Madness")) {
-            if (c.isMadness()) {
-                return doXMath(StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1])), m, c);
-            }
-            return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
+            String v = c.isMadness() ? sq[1] : sq[2];
+            // TODO move this to AbilityUtils
+            return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, c.getSVar(v)), m, c);
         }
 
         // Count$Presence_<Type>.<True>.<False>
@@ -2173,7 +2172,6 @@ public class CardFactoryUtil {
                 + "| Secondary$ True | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-        re.setLayer(ReplacementLayer.Other);
 
         re.setOverridingAbility(sa);
 
@@ -2469,15 +2467,21 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
-                    + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
+                    + "TriggerZones$ Battlefield | Secondary$ True"
                     + " | TriggerDescription$ Extort ("+ inst.getReminderText() +")";
-            final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
-                    + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
-            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
+
+            final String loseLifeStr = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | LifeAmount$ 1";
+            final String gainLifeStr = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost";
+
+            SpellAbility loseLifeSA = AbilityFactory.getAbility(loseLifeStr, card);
+
+            AbilitySub gainLifeSA = (AbilitySub) AbilityFactory.getAbility(gainLifeStr, card);
+            gainLifeSA.setSVar("AFLifeLost", "Number$0");
+            loseLifeSA.setSubAbility(gainLifeSA);
+            loseLifeSA.setIntrinsic(intrinsic);
+
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, intrinsic);
-            card.setSVar("ExtortOpps", abString);
-            card.setSVar("ExtortGainLife", dbString);
-            card.setSVar("AFLifeLost", "Number$0");
+            parsedTrigger.setOverridingAbility(loseLifeSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Fabricate")) {
             final String[] k = keyword.split(":");
@@ -2511,17 +2515,24 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Fading")) {
-            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
-                    " | Execute$ TrigUpkeepFading | Secondary$ True | TriggerDescription$ At the beginning of " +
-                    "your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Secondary$ True " +
+                    " | TriggerDescription$ At the beginning of your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
 
-            card.setSVar("TrigUpkeepFading", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FADE" +
-                    " | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
-            card.setSVar("DBUpkeepFadingSac","DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar" +
-                    " | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
-            card.setSVar("FadingCleanup","DB$ Cleanup | ClearRemembered$ True");
-            card.setSVar("FadingCheckSVar","Count$RememberedSize");
+            final String removeCounterStr = "DB$ RemoveCounter | Defined$ Self | CounterType$ FADE | CounterNum$ 1 | RememberRemoved$ True";
+            final String sacrificeStr = "DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar | ConditionSVarCompare$ EQ0";
+            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
+
+            SpellAbility removeCounterSA = AbilityFactory.getAbility(removeCounterStr, card);
+            AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
+            sacrificeSA.setSVar("FadingCheckSVar","Count$RememberedSize");
+            removeCounterSA.setSubAbility(sacrificeSA);
+
+            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+            sacrificeSA.setSubAbility(cleanupSA);
+
             final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            removeCounterSA.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(removeCounterSA);
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Flanking")) {
@@ -2650,25 +2661,42 @@ public class CardFactoryUtil {
                 inst.addTrigger(trigger);
             }
         } else if (keyword.equals("Hideaway")) {
+            // The exiled card gains ‘Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.’
+            // this is currently not possible because the StaticAbility currently has no information about the OriginalHost
+
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
-            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHideawayDig");
-            sb.append("| Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, ");
+            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Secondary$ True ");
+            sb.append("| TriggerDescription$ When CARDNAME enters the battlefield, ");
             sb.append("look at the top four cards of your library, exile one face down");
             sb.append(", then put the rest on the bottom of your library.");
             final Trigger hideawayTrigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
+
+            String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True";
+            String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
+
+            String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.";
+
+            SpellAbility digSA = AbilityFactory.getAbility(hideawayDig, card);
+
+            AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(hideawayEffect, card);
+            effectSA.setSVar("STHideawayEffectLookAtCard", lookAtCard);
+
+            digSA.setSubAbility((AbilitySub)effectSA.copy());
+
+            hideawayTrigger.setOverridingAbility(digSA);
+
             triggers.add(hideawayTrigger);
-            card.setSVar("TrigHideawayDig", "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBHideawayEffect");
-            final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Execute$ DBHideawayEffect | Static$ True", card, intrinsic);
+
+            final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Static$ True", card, intrinsic);
+            gainControlTrigger.setOverridingAbility((AbilitySub)effectSA.copy());
             triggers.add(gainControlTrigger);
-            card.setSVar("DBHideawayEffect", "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | Triggers$ THideawayEffectCleanup | SVars$ DBHideawayEffectExileSelf | ImprintOnHost$ True | Duration$ Permanent | SubAbility$ DBHideawayRemember");
-            card.setSVar("STHideawayEffectLookAtCard", "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.");
-            card.setSVar("THideawayEffectCleanup", "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayEffectExileSelf | Static$ True");
-            card.setSVar("DBHideawayEffectExileSelf", "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile");
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayCleanup | Static$ True", card, intrinsic);
+
+            // when the card with hideaway leaves the battlefield, forget all exiled cards
+            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZone$ Battlefield | Static$ True", card, intrinsic);
+            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
+            changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
             triggers.add(changeZoneTrigger);
-            card.setSVar("DBHideawayRemember", "DB$ Animate | Defined$ Imprinted | RememberObjects$ Remembered | Permanent$ True");
-            card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
 
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
@@ -2714,25 +2742,31 @@ public class CardFactoryUtil {
             // Set Madness Triggers
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String trigPlay = "TrigPlayMadness" + StringUtils.join(manacost.split(" "));
 
-            final String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | " +
-                    "Execute$ " + trigPlay + " | Secondary$ True | TriggerDescription$ " +
-                    "Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
+            final String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | Secondary$ True"
+                    + " | TriggerDescription$ Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
 
-            final String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayCost$ " + manacost +
+            final String playMadnessStr = "DB$ Play | Defined$ Self | PlayCost$ " + manacost +
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" +
-                    " | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True | Madness$ True";
-            final String moveToYard = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile | " +
-                    "Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$" +
-                    " Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
-            final String cleanUp = "DB$ Cleanup | ClearRemembered$ True";
+                    " | Optional$ True | RememberPlayed$ True | Madness$ True";
+
+            final String moveToYardStr = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile" +
+                    " | Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$ Card" +
+                    " Card | ConditionCompare$ EQ0";
+
+            final String cleanUpStr = "DB$ Cleanup | ClearRemembered$ True";
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            card.setSVar(trigPlay, playMadness);
-            card.setSVar("DBWasNotPlayMadness", moveToYard);
-            card.setSVar("DBMadnessCleanup", cleanUp);
+            SpellAbility playSA = AbilityFactory.getAbility(playMadnessStr, card);
+            AbilitySub moveSA = (AbilitySub)AbilityFactory.getAbility(moveToYardStr, card);
+            AbilitySub cleanupSA = (AbilitySub)AbilityFactory.getAbility(cleanUpStr, card);
+            moveSA.setSubAbility(cleanupSA);
+            playSA.setSubAbility(moveSA);
+            playSA.setIntrinsic(intrinsic);
+
+            parsedTrigger.setOverridingAbility(playSA);
+
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Melee")) {
             final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True " +
@@ -2806,28 +2840,41 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Myriad")) {
-            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ "
-                    + "MyriadAbility | Secondary$ True | TriggerDescription$ Myriad ("
-                    + inst.getReminderText() + ")";
-            final String abString = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer"
-                    + " | RepeatSubAbility$ MyriadCopy | SubAbility$ MyriadDelTrig";
-            final String dbString1 = "DB$ CopyPermanent | Defined$ Self | Tapped$ True | "
-                    + "Optional$ True | CopyAttacking$ Remembered | ChoosePlayerOrPlaneswalker$"
-                    + " True | ImprintCopied$ True";
-            final String dbString2 = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | "
-                    + "Execute$ MyriadExile | RememberObjects$ Imprinted | TriggerDescription$"
-                    + " Exile the tokens at end of combat. | SubAbility$ MyriadCleanup";
-            final String dbString3 = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$"
-                    + " Battlefield | Destination$ Exile";
-            final String dbString4 = "DB$ Cleanup | ClearImprinted$ True";
+            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
+                    + " | TriggerDescription$ Myriad (" + inst.getReminderText() + ")";
+
+            final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
+
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Tapped$ True | Optional$ True | TokenAttacking$ Remembered"
+                    + " | ChoosePlayerOrPlaneswalker$  True | ImprintTokens$ True";
+
+            final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
+            + " | TriggerDescription$ Exile the tokens at end of combat.";
+
+            final String exileStr = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+
+            final String cleanupStr = "DB$ Cleanup | ClearImprinted$ True";
+
+            SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
+
+            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
+            repeatSA.setAdditionalAbility("RepeatSubAbility", copySA);
+
+            AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
+
+            AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exileStr, card);
+            delTrigSA.setAdditionalAbility("Execute", exileSA);
+
+            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+            delTrigSA.setSubAbility(cleanupSA);
+
+            repeatSA.setSubAbility(delTrigSA);
+
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
 
-            card.setSVar("MyriadAbility", abString);
-            card.setSVar("MyriadCopy", dbString1);
-            card.setSVar("MyriadDelTrig", dbString2);
-            card.setSVar("MyriadExile", dbString3);
-            card.setSVar("MyriadCleanup", dbString4);
+            repeatSA.setIntrinsic(intrinsic);
 
+            parsedTrigger.setOverridingAbility(repeatSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
@@ -2871,17 +2918,18 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             card.addIntrinsicKeyword("Kicker:Reveal<1/" + k[1] + ">:Generic");
         } else if (keyword.equals("Provoke")) {
-            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
-                    + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
-                    + inst.getReminderText();
-            final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
-                    + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
-            final String dbString = "DB$ Untap | Defined$ Targeted";
+            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True"
+                    + " | TriggerDescription$ Provoke (" + inst.getReminderText() + ")";
+            final String blockStr = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls";
+            final String untapStr = "DB$ Untap | Defined$ Targeted";
 
-            card.setSVar("ProvokeAbility", abString);
-            card.setSVar("ProvokeUntap", dbString);
+            SpellAbility blockSA = AbilityFactory.getAbility(blockStr, card);
+            AbilitySub untapSA = (AbilitySub)AbilityFactory.getAbility(untapStr, card);
+            blockSA.setSubAbility(untapSA);
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+            blockSA.setIntrinsic(intrinsic);
+            parsedTrigger.setOverridingAbility(blockSA);
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Prowess")) {
@@ -2895,10 +2943,6 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(parsedTrigger);
-
-            if (!card.hasSVar("BuffedBy")) {
-                card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
-            }
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
@@ -2935,24 +2979,30 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Recover")) {
             final String recoverCost = keyword.split(":")[1];
-            final String abStr = "DB$ ChangeZone | Defined$ Self"
+            final String changeStr = "DB$ ChangeZone | Defined$ Self"
                         + " | Origin$ Graveyard | Destination$ Hand | UnlessCost$ "
                     + recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True"
-                    + " | UnlessResolveSubs$ WhenNotPaid | SubAbility$ RecoverExile";
-            card.setSVar("RecoverTrig", abStr);
-            card.setSVar("RecoverExile", "DB$ ChangeZone | Defined$ Self"
-                        + " | Origin$ Graveyard | Destination$ Exile");
+                    + " | UnlessResolveSubs$ WhenNotPaid";
+            final String exileStr = "DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Exile";
+
+            SpellAbility changeSA = AbilityFactory.getAbility(changeStr, card);
+            AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exileStr, card);
+            changeSA.setSubAbility(exileSA);
+
             String trigObject = card.isCreature() ? "Creature.Other+YouOwn" : "Creature.YouOwn";
             String trigArticle = card.isCreature() ? "another" : "a";
             String trigStr = "Mode$ ChangesZone | ValidCard$ " + trigObject
-                        + " | Origin$ Battlefield | Destination$ Graveyard | "
-                        + "TriggerZones$ Graveyard | Execute$ RecoverTrig | "
-                        + "TriggerDescription$ When " + trigArticle + " creature is "
-                        + "put into your graveyard from the battlefield, you "
-                        + "may pay " + recoverCost + ". If you do, return "
-                        + "CARDNAME from your graveyard to your hand. Otherwise,"
-                        + " exile CARDNAME. | Secondary$ True";
+                    + " | Origin$ Battlefield | Destination$ Graveyard | "
+                    + "TriggerZones$ Graveyard | Secondary$ True | "
+                    + "TriggerDescription$ Recover " + recoverCost + " (When " + trigArticle + " creature is "
+                    + "put into your graveyard from the battlefield, you "
+                    + "may pay " + recoverCost + ". If you do, return "
+                    + "CARDNAME from your graveyard to your hand. Otherwise,"
+                    + " exile CARDNAME.)";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            changeSA.setIntrinsic(intrinsic);
+            myTrigger.setOverridingAbility(changeSA);
+
             inst.addTrigger(myTrigger);
         } else if (keyword.startsWith("Replicate")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ ReplicateAmount | Secondary$ True | TriggerDescription$ Copy CARDNAME for each time you paid its replicate cost";
@@ -3255,7 +3305,6 @@ public class CardFactoryUtil {
             saExile.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saExile);
 
@@ -3303,8 +3352,6 @@ public class CardFactoryUtil {
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, card, intrinsic);
 
-            re.setLayer(ReplacementLayer.Other);
-
             re.setOverridingAbility(saReveal);
 
             inst.addReplacement(re);
@@ -3315,7 +3362,6 @@ public class CardFactoryUtil {
             if (numCounters.equals("X")) {
                 desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, "
                         + "where X is the damage dealt to your opponents this turn.)";
-                card.setSVar("X", "Count$BloodthirstAmount");
             } else {
                 desc = "Bloodthirst " + numCounters + " (" + inst.getReminderText() + ")";
             }
@@ -3323,6 +3369,9 @@ public class CardFactoryUtil {
             final String etbCounter = "etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc;
 
             final ReplacementEffect re = makeEtbCounter(etbCounter, card, intrinsic);
+            if (numCounters.equals("X")) {
+                re.getOverridingAbility().setSVar("X", "Count$BloodthirstAmount");
+            }
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Buyback")) {
@@ -3354,7 +3403,6 @@ public class CardFactoryUtil {
             saReturn.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saReturn);
 
@@ -3384,32 +3432,33 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Devour")) {
-
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
 
-            String abStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                    + " | Defined$ ReplacedCard";
-            String dbStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
-                    + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ another creature (Devour "+ magnitude + ") | "
-                    + "RememberSacrificed$ True | Optional$ True | "
-                    + "Devour$ True | SubAbility$ Devour"+magnitude+"Counters";
-            String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Devour"+magnitude+"X"
-                    + " | ETB$ True | References$ Devour"+magnitude+"X,DevourSize | SubAbility$ DevourCleanup";
+            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
+                    + "SacValid$ Creature.Other | SacMessage$ another creature (Devour "+ magnitude + ") | "
+                    + "RememberSacrificed$ True | Optional$ True | Devour$ True";
 
-            card.setSVar("DevourETB", abStr);
-            card.setSVar("Devour"+magnitude+"Sac", dbStr);
-            card.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
-            card.setSVar("Devour"+magnitude+"Counters", counterStr);
-            card.setSVar("Devour"+magnitude+"X", "SVar$DevourSize/Times." + magnitude);
-            card.setSVar("DevourSize", "Count$RememberedSize");
-            card.setSVar("DevourCleanup", "DB$ Cleanup | ClearRemembered$ True | SubAbility$ DevourETB");
+            String counterStr = "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX";
+            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ Devour"+magnitude+"Sac "
-                    + "| Secondary$ True | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
+            AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
+            sacrificeSA.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
+
+            AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
+            counterSA.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
+            counterSA.setSVar("DevourSize", "Count$RememberedSize");
+            sacrificeSA.setSubAbility(counterSA);
+
+            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+            counterSA.setSubAbility(cleanupSA);
+
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
+
+            setupETBReplacementAbility(cleanupSA);
+            re.setOverridingAbility(sacrificeSA);
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Fading")) {
@@ -3457,7 +3506,6 @@ public class CardFactoryUtil {
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saExile);
 
@@ -3493,20 +3541,18 @@ public class CardFactoryUtil {
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saExile);
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Replacement effects
-            String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
-                    "ReplaceWith$ DiscardMadness | Secondary$ True | Description$ " +
-                    "Madness: If you discard this card, discard it into exile.";
+            String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | Secondary$ True "
+                    + " | Description$ Madness: If you discard this card, discard it into exile.";
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer" +
-                    " | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
-            card.setSVar("DiscardMadness", sVarMadness);
+            String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
+
+            re.setOverridingAbility(AbilityFactory.getAbility(sVarMadness, card));
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Modular")) {
@@ -3554,7 +3600,6 @@ public class CardFactoryUtil {
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saExile);
 
@@ -3722,7 +3767,6 @@ public class CardFactoryUtil {
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(sb.toString(), card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(sa);
 
@@ -4485,8 +4529,8 @@ public class CardFactoryUtil {
 
             String ab = "DB$ Play | Defined$ OriginalHost | WithoutManaCost$ True | CopyCard$ True";
 
-            card.setSVar("CipherTrigger", trig);
-            card.setSVar("PlayEncoded", ab);
+            svars.put("CipherTrigger", trig);
+            svars.put("PlayEncoded", ab);
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Devoid")) {
@@ -4738,7 +4782,6 @@ public class CardFactoryUtil {
         saExile.setSubAbility(saEffect);
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
-        re.setLayer(ReplacementLayer.Other);
 
         re.setOverridingAbility(saExile);
         card.addReplacementEffect(re);
