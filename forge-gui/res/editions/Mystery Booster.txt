@@ -418,7 +418,7 @@ Foil=NotSupported
 408 C Jace's Phantasm
 409 C Jeering Homunculus
 410 C Jeskai Sage
-411 R Jushi Apprentice // Tomoya the Revealer
+411 R Jushi Apprentice
 412 C Jwar Isle Avenger
 413 C Kiora's Dambreaker
 414 C Laboratory Brute
