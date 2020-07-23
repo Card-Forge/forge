@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
+import java.util.List;
 import java.util.Map;
 
 public class TriggerFightOnce extends Trigger {
@@ -46,29 +47,33 @@ public class TriggerFightOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card fighter1 = (Card) runParams.get(AbilityKey.Fighter1);
-        final Card fighter2 = (Card) runParams.get(AbilityKey.Fighter2);
+        final List<Card> fighters = (List<Card>) runParams.get(AbilityKey.Fighters);
 
         if (hasParam("ValidCard")) {
-            return fighter1.isValid(getParam("ValidCard").split(","),
-                    getHostCard().getController(), getHostCard(), null)
-                    || fighter2.isValid(getParam("ValidCard").split(","),
-                    getHostCard().getController(), getHostCard(), null);
+            for (Card fighter : fighters) {
+                if (fighter.isValid(getParam("ValidCard").split(","),
+                        getHostCard().getController(), getHostCard(), null)) {
+                    return true;
+                }
+            }
+            return false;
         }
+
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Fighter1, AbilityKey.Fighter2);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Fighters);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 1: ").append(sa.getTriggeringObject(AbilityKey.Fighter1)).append(", ");
-        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 2: ").append(sa.getTriggeringObject(AbilityKey.Fighter2));
+        List<Card> fighters = (List<Card>)sa.getTriggeringObject(AbilityKey.Fighters);
+        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 1: ").append(fighters.get(0)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 2: ").append(fighters.get(1));
         return sb.toString();
     }
 }

@@ -62,8 +62,7 @@ public enum AbilityKey {
     Explorer("Explorer"),
     Event("Event"),
     Fighter("Fighter"),
-    Fighter1("Fighter1"),
-    Fighter2("Fighter2"),
+    Fighters("Fighters"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
