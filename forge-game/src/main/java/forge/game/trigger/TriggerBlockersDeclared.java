@@ -52,7 +52,6 @@ public class TriggerBlockersDeclared extends Trigger {
         if (hasParam("ValidBlockedAttacker")) {
             List<Card> attackers = (List<Card>)runParams.get(AbilityKey.Attackers);
             for (Card attacker : attackers) {
-                if (attacker.getGame().getCombat() == null) { break; }
                 if (attacker.isValid(getParam("ValidBlockedAttacker").split(","),
                         getHostCard().getController(), getHostCard(), null)
                         && !attacker.getGame().getCombat().getBlockers(attacker).isEmpty()) {
