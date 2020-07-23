@@ -741,6 +741,11 @@ public class AiAttackController {
         if (lightmineField) {
             doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers, playAggro);
         }
+        // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
+        if (!doRevengeOfRavensAttackLogic(ai, defender, attackersLeft, numForcedAttackers, attackMax)) {
+            return;
+        }
+
 
         if (bAssault) {
             if (LOG_AI_ATTACKS)
@@ -1490,6 +1495,41 @@ public class AiAttackController {
         }
         
         attackersLeft.removeAll(attUnsafe);
+    }
+
+    private boolean doRevengeOfRavensAttackLogic(Player ai, GameEntity defender, List<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+        // TODO: detect Revenge of Ravens by the trigger instead of by name
+        boolean revengeOfRavens = false;
+        if (defender instanceof Player) {
+            revengeOfRavens = !CardLists.filter(((Player)defender).getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        } else if (defender instanceof Card) {
+            revengeOfRavens = !CardLists.filter(((Card)defender).getController().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        }
+
+        if (!revengeOfRavens) {
+            return true;
+        }
+
+        int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
+        maxAttack = maxAttack < 0 ? Integer.MAX_VALUE - 1 : maxAttack;
+        if (Math.min(maxAttack, numForcedAttackers) >= life) {
+            return false;
+        }
+
+        // Remove all 1-power attackers since they usually only hurt the attacker
+        // TODO: improve to account for possible combat effects coming from attackers like that
+        CardCollection attUnsafe = new CardCollection();
+        for (Card attacker : attackersLeft) {
+            if (attacker.getNetCombatDamage() <= 1) {
+                attUnsafe.add(attacker);
+            }
+        }
+        attackersLeft.removeAll(attUnsafe);
+        if (Math.min(maxAttack, attackersLeft.size()) >= life) {
+            return false;
+        }
+
+        return true;
     }
 
 } // end class ComputerUtil_Attack2
