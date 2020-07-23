@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,23 +25,21 @@ import forge.util.Localizer;
 import java.util.List;
 import java.util.Map;
 
-/**
- * TODO Write javadoc for this type.
- * 
- */
-public class TriggerBlockersDeclared extends Trigger {
+public class TriggerFightOnce extends Trigger {
 
     /**
-     * Instantiates a new trigger_ blockers declared.
-     * 
+     * <p>
+     * Constructor for Trigger_Fight.
+     * </p>
+     *
      * @param params
-     *            the params
+     *            a {@link java.util.HashMap} object.
      * @param host
-     *            the host
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBlockersDeclared(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFightOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -49,12 +47,12 @@ public class TriggerBlockersDeclared extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidBlockedAttacker")) {
-            List<Card> attackers = (List<Card>)runParams.get(AbilityKey.Attackers);
-            for (Card attacker : attackers) {
-                if (attacker.isValid(getParam("ValidBlockedAttacker").split(","),
-                        getHostCard().getController(), getHostCard(), null)
-                        && !attacker.getGame().getCombat().getBlockers(attacker).isEmpty()) {
+        final List<Card> fighters = (List<Card>) runParams.get(AbilityKey.Fighters);
+
+        if (hasParam("ValidCard")) {
+            for (Card fighter : fighters) {
+                if (fighter.isValid(getParam("ValidCard").split(","),
+                        getHostCard().getController(), getHostCard(), null)) {
                     return true;
                 }
             }
@@ -67,13 +65,16 @@ public class TriggerBlockersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Blockers, AbilityKey.Attackers);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Fighters);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblBlockers")).append(": ").append(sa.getTriggeringObject(AbilityKey.Blockers));
+        List<Card> fighters = (List<Card>)sa.getTriggeringObject(AbilityKey.Fighters);
+        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 1: ").append(fighters.get(0)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(" 2: ").append(fighters.get(1));
         return sb.toString();
     }
 }
+
