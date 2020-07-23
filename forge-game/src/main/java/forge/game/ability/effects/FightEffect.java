@@ -63,6 +63,11 @@ public class FightEffect extends DamageBaseEffect {
             runParams.put(AbilityKey.Fighter, c);
             game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Fighter1, fighters.get(0));
+        runParams.put(AbilityKey.Fighter2, fighters.get(1));
+        game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
     }
 
     private static List<Card> getFighters(SpellAbility sa) {
