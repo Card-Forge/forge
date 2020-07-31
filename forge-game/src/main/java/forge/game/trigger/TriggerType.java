@@ -18,6 +18,7 @@ public enum TriggerType {
     Always(TriggerAlways.class),
     Attached(TriggerAttached.class),
     AttackerBlocked(TriggerAttackerBlocked.class),
+    AttackerBlockedOnce(TriggerAttackerBlockedOnce.class),
     AttackerBlockedByCreature(TriggerAttackerBlockedByCreature.class),
     AttackersDeclared(TriggerAttackersDeclared.class),
     AttackerUnblocked(TriggerAttackerUnblocked.class),

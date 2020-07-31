@@ -732,6 +732,8 @@ public class PhaseHandler implements java.io.Serializable {
             c1.getDamageHistory().clearNotBlockedSinceLastUpkeepOf();
         }
 
+        List<Card> blocked = Lists.newArrayList();
+
         for (final Card a : combat.getAttackers()) {
             if (combat.isBlocked(a)) {
                 a.getDamageHistory().clearNotBeenBlockedSinceLastUpkeepOf();
@@ -741,6 +743,8 @@ public class PhaseHandler implements java.io.Serializable {
             if (blockers.isEmpty()) {
                 continue;
             }
+
+            blocked.add(a);
 
             // Run triggers
             {
@@ -766,6 +770,12 @@ public class PhaseHandler implements java.io.Serializable {
             }
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
+        }
+
+        if (!blocked.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Attackers, blocked);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedOnce, runParams, false);
         }
 
         game.updateCombatForView();

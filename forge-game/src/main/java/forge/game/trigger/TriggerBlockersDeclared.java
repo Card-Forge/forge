@@ -22,7 +22,6 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,18 +48,6 @@ public class TriggerBlockersDeclared extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidBlockedAttacker")) {
-            List<Card> attackers = (List<Card>)runParams.get(AbilityKey.Attackers);
-            for (Card attacker : attackers) {
-                if (attacker.isValid(getParam("ValidBlockedAttacker").split(","),
-                        getHostCard().getController(), getHostCard(), null)
-                        && !attacker.getGame().getCombat().getBlockers(attacker).isEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         return true;
     }
 
