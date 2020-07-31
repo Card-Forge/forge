@@ -8,6 +8,6 @@ SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Ch
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True | NewController$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.CardOwner,Planeswalker.ControlledBy Player.CardOwner | Description$ CARDNAME can't attack its owner or planeswalkers its owner controls.
-A:AB$ Draw | Cost$ 3 | NumCards$ 1 | AnyPlayer$ True | SubAbility$ DBLoseLife | SpellDescription$ Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.
+A:AB$ Draw | Cost$ 3 | NumCards$ 1 | Activator$ Player | SubAbility$ DBLoseLife | SpellDescription$ Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ CardController
 Oracle:Xantcha, Sleeper Agent enters the battlefield under the control of an opponent of your choice.\nXantcha attacks each combat if able and can't attack its owner or planeswalkers its owner controls.\n{3}: Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.

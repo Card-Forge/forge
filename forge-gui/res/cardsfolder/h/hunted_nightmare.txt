@@ -1,0 +1,8 @@
+Name:Hunted Nightmare
+ManaCost:1 B B
+Types:Creature Nightmare
+PT:4/5
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, target opponent puts a deathtouch counter on a creature they control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Choices$ Creature.ControlledBy TargetedPlayer  | ChoiceTitle$ Choose a creature you control | Chooser$ TargetedPlayer | Placer$ TargetedPlayer | CounterType$ Deathtouch | CounterNum$ 1
+Oracle:Menace\nWhen Hunted Nightmare enters the battlefield, target opponent puts a deathtouch counter on a creature they control.

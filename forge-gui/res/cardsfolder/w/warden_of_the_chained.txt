@@ -1,0 +1,8 @@
+Name:Warden of the Chained
+ManaCost:1 R G
+Types:Creature Minotaur Warrior
+PT:4/4
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you control another creature with power 4 or greater.
+SVar:X:Count$Valid Creature.powerGE4+YouCtrl+Other
+Oracle:Trample\nWarden of the Chained can't attack unless you control another creature with power 4 or greater.

@@ -1,0 +1,7 @@
+Name:Nyx Herald
+ManaCost:2 G
+Types:Enchantment Creature Centaur Shaman
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target enchanted creature or enchantment creature you control gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.enchanted+YouCtrl,Creature.Enchantment+YouCtrl | TgtPrompt$ Select target enchanted creature or enchantment creature you control | NumAtt$ 1 | NumDef$ 1 | KW$ Trample
+Oracle:At the beginning of combat on your turn, target enchanted creature or enchantment creature you control gets +1/+1 and gains trample until end of turn.

@@ -1,17 +1,18 @@
 Name:Cyclopean Tomb
 ManaCost:4
 Types:Artifact
-A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Land.nonSwamp | TgtPrompt$ Select target non-Swamp land | RememberTargets$ True | CounterType$ MIRE | CounterNum$ 1 | ActivationPhases$ Upkeep | SubAbility$ DBAnimate | SpellDescription$ Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.
-SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | staticAbilities$ AnimateSwamp | Permanent$ True
-SVar:AnimateSwamp:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_MIRE | AddType$ Swamp | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Land.nonSwamp | TgtPrompt$ Select target non-Swamp land | RememberCards$ True | CounterType$ MIRE | CounterNum$ 1 | ActivationPhases$ Upkeep | SubAbility$ DBEffect | SpellDescription$ Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ TombStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ MIRE | Duration$ Permanent
+SVar:TombStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Swamp | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ That land is a Swamp for as long as it has a mire counter on it
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with CARDNAME but that a mire counter has not been removed from with CARDNAME.
-SVar:TrigEffect:DB$ Effect | ImprintCards$ Remembered | Triggers$ UpkeepRemove,TrigForget | SVars$ PumpForget,TrigRemove,DBRemoveCounter,DBForget | Duration$ Permanent
+SVar:TrigEffect:DB$ Effect | RememberObjects$ RememberedCard | Triggers$ UpkeepRemove | ForgetOnMoved$ Battlefield | SVars$ TrigRemove,DBRemoveCounter,DBForget,DBClearChosen,DBExileSelf | Duration$ Permanent | SubAbility$ DBClearRemembered
 SVar:UpkeepRemove:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRemove | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
-SVar:TrigRemove:DB$ ChooseCard | Choices$ Card.IsImprinted | Mandatory$ True | SubAbility$ DBRemoveCounter
+SVar:TrigRemove:DB$ ChooseCard | Choices$ Card.IsRemembered | Mandatory$ True | SubAbility$ DBRemoveCounter
 SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ MIRE | CounterNum$ All | Defined$ ChosenCard | SubAbility$ DBForget
-SVar:DBForget:DB$ Pump | ForgetImprinted$ ChosenCard
-SVar:TrigForget:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | TriggerZones$ Command | ValidCard$ Card.IsImprinted | Static$ True | Execute$ PumpForget
-SVar:PumpForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ ChosenCard | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_tomb.jpg

@@ -15,9 +15,11 @@ import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
+    private final Localizer localizer = Localizer.getInstance();
     private final BoosterDraft draft;
     private final QuestTournamentController questDraftController;
 
@@ -48,7 +50,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showInputDialog("Save this draft as?", new Callback<String>() {
+        FOptionPane.showInputDialog(localizer.getMessage("lblSaveDraftAs") + "?", new Callback<String>() {
             @Override
             public void run(final String name) {
                 if (StringUtils.isEmpty(name)) {
@@ -60,8 +62,8 @@ public class DraftingProcessScreen extends FDeckEditor {
                 for (DeckGroup d : FModel.getDecks().getDraft()) {
                     if (name.equalsIgnoreCase(d.getName())) {
                         FOptionPane.showConfirmDialog(
-                            "There is already a deck named '" + name + "'. Overwrite?",
-                            "Overwrite Deck?", false, new Callback<Boolean>() {
+                            localizer.getMessage("lblAlreadyDeckName") + name + localizer.getMessage("lblOverwriteConfirm"),
+                            localizer.getMessage("lblOverwriteDeck"), false, new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
                                     if (result) {
@@ -142,8 +144,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showConfirmDialog("This will end the current draft and you will not be able to resume.\n\n" +
-                "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false, canCloseCallback);
+        FOptionPane.showConfirmDialog(localizer.getMessage("lblEndDraftConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, canCloseCallback);
     }
 
     @Override

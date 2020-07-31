@@ -53,6 +53,8 @@ public class CardState extends GameObject {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
+    private String basePowerString = null;
+    private String baseToughnessString = null;
     private String baseLoyalty = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
@@ -176,6 +178,24 @@ public class CardState extends GameObject {
         view.updateToughness(this);
     }
 
+    // values that are printed on card
+    public final String getBasePowerString() {
+        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+    }
+
+    public final String getBaseToughnessString() {
+        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+    }
+
+    // values that are printed on card
+    public final void setBasePowerString(final String s) {
+        basePowerString = s;
+    }
+
+    public final void setBaseToughnessString(final String s) {
+        baseToughnessString = s;
+    }
+
     public String getBaseLoyalty() {
         return baseLoyalty;
     }
@@ -273,8 +293,8 @@ public class CardState extends GameObject {
         return newCol;
     }
 
-    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
-        return new FCollection<>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
+    public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
+        return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {

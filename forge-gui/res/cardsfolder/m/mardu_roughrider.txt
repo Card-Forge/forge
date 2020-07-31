@@ -3,6 +3,5 @@ ManaCost:2 R W B
 Types:Creature Orc Warrior
 PT:5/4
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature can't block this turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_roughrider.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 Oracle:Whenever Mardu Roughrider attacks, target creature can't block this turn.

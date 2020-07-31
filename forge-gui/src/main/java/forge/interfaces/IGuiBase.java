@@ -46,6 +46,7 @@ public interface IGuiBase {
     boolean showBoxedProduct(String title, String message, List<PaperCard> list);
     PaperCard chooseCard(String title, String message, List<PaperCard> list);
     int getAvatarCount();
+    int getSleevesCount();
     void copyToClipboard(String text);
     void browseToUrl(String url) throws IOException, URISyntaxException;
     IAudioClip createAudioClip(String filename);

@@ -1,0 +1,14 @@
+Name:Archon of Sun's Grace
+ManaCost:2 W W
+Types:Creature Archon
+PT:3/4
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Pegasus | AddKeyword$ Lifelink | Description$ Pegasus creatures you control have lifelink.
+SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, create a 2/2 white Pegasus creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_pegasus_flying | TokenOwner$ You | LegacyImage$ w 2 2 pegasus flying thb
+DeckHas:Ability$Token
+DeckNeeds:Type$Enchantment
+DeckHints:Type$Pegasus
+Oracle:Flying, lifelink\nPegasus creatures you control have lifelink.\nConstellation — Whenever an enchantment enters the battlefield under your control, create a 2/2 white Pegasus creature token with flying.

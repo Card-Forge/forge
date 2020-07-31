@@ -96,7 +96,7 @@ public class CustomLimited extends DeckBase {
      * @return the custom limited
      */
     public static CustomLimited parse(final List<String> dfData, final IStorage<Deck> cubes) {
-        final FileSection data = FileSection.parse(dfData, ":");
+        final FileSection data = FileSection.parse(dfData, FileSection.COLON_KV_SEPARATOR);
 
         List<Pair<String, Integer>> slots = new ArrayList<>();
         String boosterData = data.get("Booster");

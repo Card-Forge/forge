@@ -1,0 +1,8 @@
+Name:Labyrinth of Skophos
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ RemoveFromCombat | Cost$ 4 T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Remove target attacking or blocking creature from combat.
+AI:RemoveDeck:All
+SVar:AmbushAI:True
+Oracle:{T}: Add {C}.\n{4}, {T}: Remove target attacking or blocking creature from combat.

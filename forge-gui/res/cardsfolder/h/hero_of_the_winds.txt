@@ -1,0 +1,9 @@
+Name:Hero of the Winds
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:1/4
+K:Flying
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:BuffedBy:Card
+Oracle:Flying\nWhenever you cast a spell that targets Hero of the Winds, creatures you control get +1/+0 until end of turn.

@@ -1,0 +1,8 @@
+Name:Shimmerwing Chimera
+ManaCost:3 U
+Types:Enchantment Creature Chimera
+PT:3/2
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return up to one other target enchantment you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other enchantment you control
+Oracle:Flying\nAt the beginning of your upkeep, return up to one other target enchantment you control to its owner's hand.

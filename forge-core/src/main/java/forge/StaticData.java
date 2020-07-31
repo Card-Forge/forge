@@ -35,6 +35,7 @@ public class StaticData {
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
+    private Predicate<PaperCard> pioneerPredicate;
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
     private Predicate<PaperCard> oathbreakerPredicate;
@@ -53,11 +54,11 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder) {
-        this(cardReader, null, editionFolder, blockDataFolder);
+    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards) {
+        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -83,8 +84,8 @@ public class StaticData {
             variantCards = new CardDb(variantsCards, editions);
 
             //must initialize after establish field values for the sake of card image logic
-            commonCards.initialize(false, false);
-            variantCards.initialize(false, false);
+            commonCards.initialize(false, false, enableUnknownCards);
+            variantCards.initialize(false, false, enableUnknownCards);
         }
 
         {
@@ -197,13 +198,13 @@ public class StaticData {
 
     public TokenDb getAllTokens() { return allTokens; }
 
-    public Predicate<PaperCard> getStandardPredicate() {
-        return standardPredicate;
-    }
+    
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
-    public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = standardPredicate; }
+    public void setPioneerPredicate(Predicate<PaperCard> pioneerPredicate) { this.pioneerPredicate = pioneerPredicate; }
+
+    public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = modernPredicate; }
 
     public void setCommanderPredicate(Predicate<PaperCard> commanderPredicate) { this.commanderPredicate = commanderPredicate; }
 
@@ -211,9 +212,11 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
-    public Predicate<PaperCard> getModernPredicate() {
-        return modernPredicate;
-    }
+    public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
+    
+    public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
+
+    public Predicate<PaperCard> getModernPredicate() { return modernPredicate; }
 
     public Predicate<PaperCard> getCommanderPredicate() { return commanderPredicate; }
 

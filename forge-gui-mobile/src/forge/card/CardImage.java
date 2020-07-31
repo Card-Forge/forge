@@ -49,12 +49,13 @@ public class CardImage implements FImage {
         }
         else {
             if (Forge.enableUIMask) {
+                boolean fullborder = image.toString().contains(".fullborder.");
                 if (ImageCache.isExtendedArt(card))
                     g.drawImage(image, x, y, w, h);
                 else {
                     float radius = (h - w)/8;
                     g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
-                    g.drawImage(ImageCache.croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                    g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
                 }
             }
             else

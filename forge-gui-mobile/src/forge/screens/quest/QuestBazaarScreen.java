@@ -29,8 +29,11 @@ import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
+    private static final Localizer localizer = Localizer.getInstance();
+
     public QuestBazaarScreen() {
         super(getPages());
     }
@@ -58,7 +61,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         private final QuestStallDefinition stallDef;
         private final FLabel lblStallName = add(new FLabel.Builder().text("").align(Align.center).build());
         private final FLabel lblEmpty = add(new FLabel.Builder().font(FSkinFont.get(12))
-                .text("The merchant does not have anything useful for sale.")
+                .text(localizer.getMessage("lblMerchantDoesHaveCommodity"))
                 .align(Align.center).build());
         private final FLabel lblCredits = add(new FLabel.Builder().font(FSkinFont.get(15)).icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
         private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_LIFE).iconScaleFactor(1f).align(Align.right).build());
@@ -105,8 +108,8 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             }
 
             final QuestAssets qS = qData.getAssets();
-            lblCredits.setText("Credits: " + QuestUtil.formatCredits(qS.getCredits()));
-            lblLife.setText("Life: " + qS.getLife(qData.getMode()));
+            lblCredits.setText(localizer.getMessage("lblCredits") + ": " + QuestUtil.formatCredits(qS.getCredits()));
+            lblLife.setText(localizer.getMessage("lblLife") + ": " + qS.getLife(qData.getMode()));
 
             final List<IQuestBazaarItem> items = qData.getBazaar().getItems(qData, stallDef.getName());
 
@@ -151,7 +154,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         private final FTextArea lblDesc = add(new FTextArea(false));
         private final FLabel lblIcon = add(new FLabel.Builder().iconInBackground().iconScaleFactor(1f).insets(Vector2.Zero).build());
         private final FLabel lblCost = add(new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
-        private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());
+        private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblBuy")).font(FSkinFont.get(20)).build());
 
         private final IQuestBazaarItem item;
 

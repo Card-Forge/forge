@@ -1,0 +1,9 @@
+Name:Taranika, Akroan Veteran
+ManaCost:1 W W
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap another target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains indestructible.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control. | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 4 | Toughness$ 4 | Keywords$ Indestructible
+Oracle:Vigilance\nWhenever Taranika, Akroan Veteran attacks, untap another target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains indestructible.

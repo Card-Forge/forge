@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/10/135.-ELD4-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have not played a land yet this turn. You own an Animating Faerie "on an adventure" in exile. Note that Bring to Life turned Enchanted Carriage into a 0/0 with four +1/+1 counters.
+[state]
+humanlife=20
+ailife=10
+humanlandsplayed=0
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Witch's Oven;Island;Taste of Death;Undercity Uprising
+humanbattlefield=Wicked Wolf;Oko, Thief of Crowns|Counters:LOYALTY=1;Nullhide Ferox;Enchanted Carriage|Id:1;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs
+humanexile=Animating Faerie|OnAdventure
+aibattlefield=Loyal Pegasus;Gate Colossus;Dawning Angel
+humanprecast=Enchanted Carriage:TrigToken;Bring To Life:1->1
+removesummoningsickness=true

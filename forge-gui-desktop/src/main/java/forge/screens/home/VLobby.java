@@ -3,6 +3,7 @@ package forge.screens.home;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.ai.AIOption;
 import forge.deck.*;
@@ -182,7 +183,6 @@ public class VLobby implements ILobbyView {
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
             pnlStart.add(btnStart, "align center");
-
             // Start button event handling
             btnStart.addActionListener(new ActionListener() {
                 @Override
@@ -222,6 +222,7 @@ public class VLobby implements ILobbyView {
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
             case LEGACY_CARDGEN_DECK:
             case VINTAGE_CARDGEN_DECK:
@@ -258,6 +259,9 @@ public class VLobby implements ILobbyView {
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        GuiBase.setNetworkplay(allowNetworking);
+
         ImmutableList<VariantCheckBox> vntBoxes = null;
         if (allowNetworking) {
             vntBoxes = vntBoxesNetwork;
@@ -397,7 +401,7 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), -1/*TODO panel.getSleeveIndex()*/, panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -858,6 +862,15 @@ public class VLobby implements ILobbyView {
         prefs.save();
     }
 
+    /** Saves sleeve prefs for players one and two. */
+    void updateSleevePrefs() {
+        final int pOneIndex = playerPanels.get(0).getSleeveIndex();
+        final int pTwoIndex = playerPanels.get(1).getSleeveIndex();
+
+        prefs.setPref(FPref.UI_SLEEVES, pOneIndex + "," + pTwoIndex);
+        prefs.save();
+    }
+
     /** Adds a pre-styled FLabel component with the specified title. */
     FLabel newLabel(final String title) {
         return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
@@ -869,6 +882,14 @@ public class VLobby implements ILobbyView {
             usedAvatars.add(pp.getAvatarIndex());
         }
         return usedAvatars;
+    }
+
+    List<Integer> getUsedSleeves() {
+        final List<Integer> usedSleeves = Lists.newArrayListWithCapacity(MAX_PLAYERS);
+        for (final PlayerPanel pp : playerPanels) {
+            usedSleeves.add(pp.getSleeveIndex());
+        }
+        return usedSleeves;
     }
 
 
@@ -895,7 +916,7 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = localizer.getMessage("lblconfirmName").replace("%n","\"" +newName + "\"");
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
         } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
 
         return newName;

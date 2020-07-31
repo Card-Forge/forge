@@ -1,0 +1,11 @@
+Name:Blood Aspirant
+ManaCost:1 R
+Types:Creature Satyr Berserker
+PT:1/1
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a permanent, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ DealDamage | Cost$ 1 R T Sac<1/Creature;Enchantment/creature or enchantment> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature can't block this turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
+SVar:AIPreference:SacCost$Creature.cmcLE1,Enchantment.cmcLE1
+DeckHas:Ability$Sacrifice
+Oracle:Whenever you sacrifice a permanent, put a +1/+1 counter on Blood Aspirant.\n{1}{R}, {T}, Sacrifice a creature or enchantment: Blood Aspirant deals 1 damage to target creature. That creature can't block this turn.

@@ -1,12 +1,9 @@
 Name:Grave Betrayal
 ManaCost:5 B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.
-SVar:TrigEffect:DB$ Effect | Name$ Grave Betrayal Effect | Triggers$ TrigEOT | SVars$ GBReturn,GBCounter,GBZombify,GBCleanup | References$ GBReturn,GBCounter,GBZombify,GBCleanup | RememberObjects$ TriggeredCard | Duration$ Permanent
-SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | Execute$ GBReturn | TriggerDescription$ Return creature to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. It is a black Zombie in addition to its other colors and types.
-SVar:GBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ GBCounter
-SVar:GBCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ GBZombify
-SVar:GBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True | SubAbility$ GBCleanup
-SVar:GBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_betrayal.jpg
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ DelTrig | TriggerDescription$ Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ GBReturn | RememberObjects$ TriggeredCard | SubAbility$ DBCleanup | TriggerDescription$ Return creature to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. It is a black Zombie in addition to its other colors and types.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:GBReturn:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | WithCounters$ P1P1_1 | AnimateSubAbility$ GBZombify
+SVar:GBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True
 Oracle:Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.

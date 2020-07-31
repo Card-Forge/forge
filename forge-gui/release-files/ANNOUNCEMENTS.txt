@@ -1,7 +1,2 @@
 #Add one announcement per line
-Throne of Eldraine pre-release!
-Updated Libgdx from 1.5.5 to 1.9.10 ([url=https://github.com/libgdx/libgdx/blob/master/CHANGES]detailed changes are here[/url]).
-[b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
-For some reason Oracle hates Forge and version 1.8.0_211 does bad things with Forge for unknown reasons. Downgrade to 202 for a beter time. 
-https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
-We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
+Keyboard shortcut change: to help improve accessibility, the arrow key shortcuts to move between deck editor tables now require control or Command, depending on which platform you're on.

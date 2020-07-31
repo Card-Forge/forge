@@ -156,12 +156,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
+    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return chooseItems(sourceList, max);
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -175,7 +175,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer, Map<String, Object> params) {
         // this isn't used
         return null;
     }
@@ -197,7 +197,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper) {
         return true;
     }
 
@@ -481,12 +481,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+    public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
         return chooseItem(validTypes);
     }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes) {
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return chooseItem(options);
     }
 
@@ -497,7 +497,7 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params) {
-        return Iterables.getFirst(options, CounterType.P1P1);
+        return Iterables.getFirst(options, CounterType.get(CounterEnumType.P1P1));
     }
 
     @Override
@@ -698,8 +698,15 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title, boolean isOptional) {
         // TODO Auto-generated method stub
         return new CardCollection();
     }
+
+	@Override
+	public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+			int num, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

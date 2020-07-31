@@ -2,7 +2,7 @@ Name:Wishmonger
 ManaCost:3 W
 Types:Creature Unicorn Monger
 PT:3/3
-A:AB$ Protection | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choser$ Controller | AnyPlayer$ True | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of its controller's choice until end of turn. Any player may activate this ability.
+A:AB$ Protection | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choser$ Controller | Activator$ Player | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of its controller's choice until end of turn. Any player may activate this ability.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wishmonger.jpg
 Oracle:{2}: Target creature gains protection from the color of its controller's choice until end of turn. Any player may activate this ability.

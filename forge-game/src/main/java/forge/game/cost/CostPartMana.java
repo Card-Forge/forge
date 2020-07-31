@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -68,7 +68,7 @@ public class CostPartMana extends CostPart {
 
     /**
      * Gets the mana.
-     * 
+     *
      * @return the mana
      */
     public final ManaCost getMana() {
@@ -89,30 +89,30 @@ public class CostPartMana extends CostPart {
 
     /**
      * Gets the mana to pay.
-     * 
+     *
      * @return the mana to pay
      */
     public final ManaCost getManaToPay() {
         return cost;
     }
-    
+
     /**
      * @return the isExiledCreatureCost
      */
     public boolean isExiledCreatureCost() {
         return isExiledCreatureCost;
     }
-    
+
     public boolean isEnchantedCreatureCost() {
         return isEnchantedCreatureCost;
     }
-    
+
     @Override
     public boolean isReusable() { return true; }
 
     @Override
     public boolean isUndoable() { return true; }
-    
+
 
     @Override
     public final String toString() {
@@ -145,7 +145,17 @@ public class CostPartMana extends CostPart {
         	return getManaToPay();
         }
     }
-    
+
+    @Override
+    public CostPart copy() {
+        CostPart copied = super.copy();
+        // when copied, clear cardMatrix
+        if (copied instanceof CostPartMana) {
+            ((CostPartMana)copied).cardMatrix = null;
+        }
+        return copied;
+    }
+
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub

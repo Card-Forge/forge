@@ -1,6 +1,9 @@
 package forge.screens.match.winlose;
 
+import forge.Forge;
+import forge.assets.ImageCache;
 import forge.game.GameView;
+import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -14,12 +17,18 @@ import forge.toolbox.FEvent.FEventHandler;
 public class ControlWinLose {
     private final ViewWinLose view;
     protected final GameView lastGame;
+    private int humancount;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
     public ControlWinLose(final ViewWinLose v, GameView game) {
         view = v;
         lastGame = game;
+        humancount = 0;
+        for(PlayerView p: game.getPlayers()){
+            if (!p.isAI())
+                humancount++;
+        }
         addListeners();
     }
 
@@ -46,6 +55,8 @@ public class ControlWinLose {
                 view.getBtnQuit().setEnabled(false);
             }
         });
+        if(humancount == 0)
+            view.getBtnRestart().setEnabled(false);
     }
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */
@@ -53,22 +64,29 @@ public class ControlWinLose {
         view.hide();
         saveOptions();
 
-        MatchController.getHostedMatch().continueMatch();
+        try { MatchController.getHostedMatch().continueMatch();
+        } catch (NullPointerException e) {}
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         view.hide();
         saveOptions();
-        MatchController.getHostedMatch().restartMatch();
+        try { MatchController.getHostedMatch().restartMatch();
+        } catch (NullPointerException e) {}
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        MatchController.getHostedMatch().endCurrentGame();
+        try { MatchController.getHostedMatch().endCurrentGame();
+        } catch (NullPointerException e) {}
         view.hide();
+        if(humancount == 0) {
+            Forge.back();
+            ImageCache.disposeTexture();
+        }
     }
 
     /**

@@ -17,6 +17,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +40,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to add mana?")) {
+        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"))) {
             return;
         }
 
@@ -91,7 +92,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         // just use the first possible color.
                         choice = colorsProduced[differentChoice ? nMana : 0];
                     } else {
-                        byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa,
+                        byte chosenColor = activator.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
                                 differentChoice ? fullOptions : colorOptions);
                         if (chosenColor == 0)
                             throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
@@ -111,7 +112,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                game.action.nofityOfValue(sa, card, activator + " picked " + choiceString, activator);
+                game.action.nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", activator.getName(), choiceString), activator);
                 abMana.setExpressChoice(choiceString.toString());
             }
         }
@@ -135,13 +136,13 @@ public class ManaEffect extends SpellAbilityEffect {
                     mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
                 }
                 colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
-                byte val = p.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                byte val = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
                 if (0 == val) {
                     throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + act + " color mana choice is empty for " + card.getName());
                 }
                 choice = MagicColor.toShortString(val);
 
-                game.action.nofityOfValue(sa, card, act + " picked " + choice, act);
+                game.action.nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", act.getName(), choice), act);
                 abMana.setExpressChoice(choice);
             }
         }
@@ -172,7 +173,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         if (cs.isMonoColor())
                             sb.append(MagicColor.toShortString(s.getColorMask()));
                         else /* (cs.isMulticolor()) */ {
-                            byte chosenColor = sa.getActivatingPlayer().getController().chooseColor("Choose a single color from " + s.toString(), sa, cs);
+                            byte chosenColor = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
                             sb.append(MagicColor.toShortString(chosenColor));
                         }
                     }
@@ -194,6 +195,26 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     if (colors == 0) return;
                     abMana.setExpressChoice(ColorSet.fromMask(colors));
+                } else if (type.startsWith("EachColoredManaSymbol")) {
+                    final String res = type.split("_")[1];
+                    final CardCollection list = AbilityUtils.getDefinedCards(card, res, sa);
+                    StringBuilder sb = new StringBuilder();
+                    for (Card c : list) {
+                        String mana = c.getManaCost().toString();
+                        for (int i = 0; i < mana.length(); i++) {
+                            char symbol = mana.charAt(i);
+                            switch (symbol) {
+                                case 'W':
+                                case 'U':
+                                case 'B':
+                                case 'R':
+                                case 'G':
+                                    sb.append(symbol).append(' ');
+                                    break;
+                            }
+                        }
+                    }
+                    abMana.setExpressChoice(sb.toString().trim());
                 }
 
                 if (abMana.getExpressChoice().isEmpty()) {

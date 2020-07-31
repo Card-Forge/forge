@@ -8,6 +8,8 @@ import com.badlogic.gdx.backends.iosrobovm.IOSFiles;
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
@@ -29,7 +31,9 @@ public class Main extends IOSApplication.Delegate {
         final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir);
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false);
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }

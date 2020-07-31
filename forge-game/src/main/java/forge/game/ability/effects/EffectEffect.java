@@ -3,11 +3,15 @@ package forge.game.ability.effects;
 import forge.GameCommand;
 import forge.ImageKeys;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -20,8 +24,10 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
 
 public class EffectEffect extends SpellAbilityEffect {
 
@@ -44,7 +50,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String[] effectKeywords = null;
         String[] effectStaticAbilities = null;
         String[] effectReplacementEffects = null;
-        String effectRemembered = null;
+        FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
@@ -74,7 +80,20 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            effectRemembered = sa.getParam("RememberObjects");
+            rememberList = new FCollection<>();
+            for (final String rem : sa.getParam("RememberObjects").split(",")) {
+                rememberList.addAll(AbilityUtils.getDefinedObjects(hostCard, rem, sa));
+            }
+
+            if (sa.hasParam("ForgetCounter")) {
+                CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
+                rememberList = new FCollection<GameObject>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
+            }
+
+            // don't create Effect if there is no remembered Objects
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter"))) {
+                return;
+            }
         }
 
         if (sa.hasParam("ImprintCards")) {
@@ -183,16 +202,17 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Remembered
-            if (effectRemembered != null) {
-                for (final String rem : effectRemembered.split(",")) {
-                    for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, sa)) {
-                        eff.addRemembered(o);
-                    }
+            if (rememberList != null) {
+                for (final Object o : rememberList) {
+                    eff.addRemembered(o);
                 }
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
+                }
+                if (sa.hasParam("ForgetCounter")) {
+                    addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
             }
 

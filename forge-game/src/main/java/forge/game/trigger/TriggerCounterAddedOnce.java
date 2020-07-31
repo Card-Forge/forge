@@ -24,6 +24,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -106,21 +107,21 @@ public class TriggerCounterAddedOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
-        sa.setTriggeringObject(AbilityKey.Amount, getFromRunParams(AbilityKey.CounterAmount));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player);
+        sa.setTriggeringObject(AbilityKey.Amount, runParams.get(AbilityKey.CounterAmount));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Added once: ");
+        sb.append(Localizer.getInstance().getMessage("lblAddedOnce")).append(": ");
         if (sa.hasTriggeringObject(AbilityKey.Card))
             sb.append(sa.getTriggeringObject(AbilityKey.Card));
         if (sa.hasTriggeringObject(AbilityKey.Player))
             sb.append(sa.getTriggeringObject(AbilityKey.Player));
 
-        sb.append(" Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
+        sb.append(" ").append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 }

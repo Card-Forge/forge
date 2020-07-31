@@ -1,11 +1,5 @@
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -16,6 +10,11 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerProperty {
 
@@ -37,6 +36,10 @@ public class PlayerProperty {
                 if (player.equals(p) || !player.isOpponentOf(p)) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("PlayerUID_")) {
+            if (player.getId() != Integer.parseInt(property.split("PlayerUID_")[1])) {
+                return false;
             }
         } else if (property.equals("YourTeam")) {
             if (!player.sameTeam(sourceController)) {
@@ -201,6 +204,11 @@ public class PlayerProperty {
             }
         } else if (property.equals("EnchantedBy")) {
             if (!player.isEnchantedBy(source)) {
+                return false;
+            }
+        } else if (property.equals("EnchantedController")) {
+            Card enchanting = source.getEnchantingCard();
+            if (enchanting != null && !player.equals(enchanting.getController())) {
                 return false;
             }
         } else if (property.equals("Chosen")) {

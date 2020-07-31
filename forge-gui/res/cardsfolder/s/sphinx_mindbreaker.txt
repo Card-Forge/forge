@@ -1,0 +1,8 @@
+Name:Sphinx Mindbreaker
+ManaCost:5 U U
+Types:Creature Sphinx
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBMill | TriggerDescription$ When CARDNAME enters the battlefield, each opponent mills ten cards.
+SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 10
+Oracle:When Sphinx Mindbreaker enters the battlefield, each opponent mills ten cards.

@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class TriggerExplores extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerExplores(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerExplores(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -61,15 +62,15 @@ public class TriggerExplores extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Explorer, getFromRunParams(AbilityKey.Card));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Explorer, runParams.get(AbilityKey.Card));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Explorer: ").append(sa.getTriggeringObject(AbilityKey.Explorer));
+        sb.append(Localizer.getInstance().getMessage("lblExplorer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Explorer));
         return sb.toString();
     }
 }

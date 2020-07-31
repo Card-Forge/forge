@@ -8,6 +8,8 @@ import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class EncodeEffect extends SpellAbilityEffect {
     @Override
@@ -44,9 +46,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         // Handle choice of whether or not to encoded
         
         
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Do you want to exile ").append(host).append(" and encode it onto a creature you control?");
-        if (!player.getController().confirmAction(sa, null, sb.toString())) {
+        if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())))) {
             return;
         }
 
@@ -54,10 +54,10 @@ public class EncodeEffect extends SpellAbilityEffect {
         Card movedCard = game.getAction().moveTo(ZoneType.Exile, host, sa);
 
         // choose a creature
-        Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, "Choose a creature you control to encode ", true);
+        Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", true, null);
 
         if (choice == null) {
-          return;
+            return;
         }
 
         StringBuilder codeLog = new StringBuilder();

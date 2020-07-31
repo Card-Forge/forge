@@ -1,0 +1,80 @@
+[metadata]
+Code=GN2
+Date=2019-11-15
+Name=Game Night 2019
+Code2=GN2
+MciCode=gn2
+Type=Other
+
+[cards]
+1 M Highcliff Felidar
+2 M Sphinx of Enlightenment
+3 M Calculating Lich
+4 M Fiendish Duo
+5 M Earthshaker Giant
+6 U Consul's Lieutenant
+7 C Fiend Binder
+8 R Kytheon's Irregulars
+9 C Mighty Leap
+10 U Patron of the Valiant
+11 U Relief Captain
+12 U Steppe Glider
+13 C Take Vengeance
+14 C Topan Freeblade
+15 R Zetalpa, Primal Dawn
+16 C Aven Wind Mage
+17 C Claustrophobia
+18 U Cryptic Serpent
+19 C Decision Paralysis
+20 C Dramatic Reversal
+21 R Engulf the Shore
+22 U Galestrike
+23 U Rise from the Tides
+24 R River's Rebuke
+25 C Salvager of Secrets
+26 U Accursed Horde
+27 C Carrion Screecher
+28 C Crow of Dark Tidings
+29 C Gavony Unhallowed
+30 U Grasp of Darkness
+31 R Liliana's Mastery
+32 U Lord of the Accursed
+33 U Rise from the Grave
+34 C Tattered Mummy
+35 R Torgaar, Famine Incarnate
+36 R Akoum Hellkite
+37 C Brute Strength
+38 C Destructive Tampering
+39 U Dragon Egg
+40 C Kargan Dragonrider
+41 R Lathliss, Dragon Queen
+42 C Lightning Strike
+43 C Sparktongue Dragon
+44 C Voldaren Duelist
+45 C Zealot of the God-Pharaoh
+46 U Crested Herdcaller
+47 R Ghalta, Primal Hunger
+48 C Grazing Whiptail
+49 U Ranging Raptors
+50 R Ripjaw Raptor
+51 C Spidery Grasp
+52 U Thunderherd Migration
+53 U Thundering Spineback
+54 U Howling Golem
+55 L Plains
+56 L Plains
+57 L Island
+58 L Island
+59 L Swamp
+60 L Swamp
+61 L Mountain
+62 L Mountain
+63 L Forest
+64 L Forest
+
+[tokens]
+w_1_1_soldier
+g_3_3_dinosaur_trample
+b_2_2_zombie
+r_5_5_dragon_flying
+g_2_2_wolf

@@ -30,6 +30,7 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.view.arcane.ListCardArea;
+import forge.util.Localizer;
 
 public class GuiChoose {
 
@@ -83,6 +84,7 @@ public class GuiChoose {
         return GuiChoose.oneOrNone(message, choices);
     }
     public static Integer getInteger(final String message, final int min, final int max, final int cutoff) {
+        final Localizer localizer = Localizer.getInstance();
         if (max <= min || cutoff < min) { return min; } //just return min if max <= min or cutoff < min
 
         if (cutoff >= max) { //fallback to regular integer prompt if cutoff at or after max
@@ -93,7 +95,7 @@ public class GuiChoose {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("Other...");
+        choices.add(Localizer.getInstance().getMessage("lblOtherInteger"));
 
         final Object choice = GuiChoose.oneOrNone(message, choices);
         if (choice instanceof Integer || choice == null) {
@@ -101,19 +103,18 @@ public class GuiChoose {
         }
 
         //if Other option picked, prompt for number input
-        String prompt = "Enter a number";
+        String prompt = "";
         if (min != Integer.MIN_VALUE) {
             if (max != Integer.MAX_VALUE) {
-                prompt += " between " + min + " and " + max;
+                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax", String.valueOf(min), String.valueOf(max));
             }
             else {
-                prompt += " greater than or equal to " + min;
+                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin", String.valueOf(min));
             }
         }
         else if (max != Integer.MAX_VALUE) {
-            prompt += " less than or equal to " + max;
+            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax", String.valueOf(max));
         }
-        prompt += ":";
 
         while (true) {
             final String str = FOptionPane.showInputDialog(prompt, message);
@@ -237,7 +238,7 @@ public class GuiChoose {
     public static <T extends Comparable<? super T>> List<T> sideboard(final CMatchUI matchUI, final List<T> sideboard, final List<T> deck, final String message) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard" + message, "Main Deck", -1, -1, sideboard, deck, null, true, matchUI);
+        return order(Localizer.getInstance().getMessage("lblSideboardForPlayer", message), Localizer.getInstance().getMessage("ttMain"), -1, -1, sideboard, deck, null, true, matchUI);
     }
 
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
@@ -288,22 +289,23 @@ public class GuiChoose {
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	gui.setSelectables(manipulable);
-	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
-		@Override 
-		public List<CardView> call() {
-		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
-		    //		tempArea.pack();
-		    tempArea.show();
-		    final List<CardView> cardList = tempArea.getCards();
-		    return cardList;
-		}
-	    };
+	@SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
+    final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
+        @Override
+        public List<CardView> call()  {
+            ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
+
+            //		tempArea.pack();
+            tempArea.setVisible(true);
+            return tempArea.getCards();
+        }
+    };
 	final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
 	gui.clearSelectables();
         try {
-	    List<CardView> result = ft.get();
-	    return result;
+            List<CardView> result = ft.get();
+            return result;
         } catch (final Exception e) { // we have waited enough
             e.printStackTrace();
         }

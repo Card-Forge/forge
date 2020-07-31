@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -20,20 +21,21 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
 
     public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
-                new PickerTab(choiceList, "Choices", FSkinImage.DECKLIST, 1),
+                new PickerTab(choiceList, Localizer.getInstance().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of("OK", "Cancel") : ImmutableList.of("OK"), 0, new Callback<Integer>() {
+                isOptional ? ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")) : ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {
@@ -73,7 +75,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
             super(caption0 + " (" + items.size() + ")", icon0);
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
-            txtSearch.setGhostText("Search");
+            txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch"));
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

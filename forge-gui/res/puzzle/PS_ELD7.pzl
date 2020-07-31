@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/11/138.-ELD7-4.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that your opponent has at least seven cards in their graveyard.
+[state]
+humanlife=20
+# AI life will become 8 after the precast, per the number specified in the puzzle.
+ailife=3
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Giant Growth;Frogify;Fell the Pheasant;Queen of Ice;Rampage of the Clans
+humanbattlefield=Vantress Gargoyle;Arcanist's Owl;Thunder Drake;Steelbane Hydra|Counters:P1P1=5;Island;Island;Island;Forest;Forest;Forest
+aigraveyard=Island;Island;Island;Plains;Plains;Plains;Plains
+aibattlefield=Dovin, Grand Arbiter|Counters:LOYALTY=6
+aiprecast=Dovin, Grand Arbiter:2;Dovin, Grand Arbiter:2;Dovin, Grand Arbiter:2;Dovin, Grand Arbiter:2;Dovin, Grand Arbiter:2
+removesummoningsickness=true

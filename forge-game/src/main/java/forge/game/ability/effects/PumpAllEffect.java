@@ -96,6 +96,12 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 } else if (sa.hasParam("UntilLoseControl")) {
                     tgtC.addLeavesPlayCommand(untilEOT);
                     tgtC.addChangeControllerCommand(untilEOT);
+                } else if (sa.hasParam("UntilTheEndOfYourNextTurn")) {
+                    if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                        game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), untilEOT);
+                    } else {
+                        game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), untilEOT);
+                    }
                 } else {
                     game.getEndOfTurn().addUntil(untilEOT);
                 }

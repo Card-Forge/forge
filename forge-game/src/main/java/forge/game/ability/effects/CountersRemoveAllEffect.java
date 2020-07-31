@@ -18,7 +18,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.getType(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
         String amountString = Integer.toString(amount);
@@ -69,11 +69,11 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
                 continue;
             }
             if (sa.hasParam("AllCounters")) {
-                counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
+                counterAmount = tgtCard.getCounters(CounterType.getType(type));
             }
 
             if (counterAmount > 0) {
-                tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+                tgtCard.subtractCounter(CounterType.getType(type), counterAmount);
                 game.updateLastStateForCard(tgtCard);
             }
         }

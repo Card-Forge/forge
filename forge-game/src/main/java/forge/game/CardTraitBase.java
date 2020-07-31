@@ -5,7 +5,6 @@ import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
@@ -72,8 +71,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         return this.mapParams;
     }
 
-    public final String getParamOrDefault(String key, String defaultValue) {
-        return hasParam(key) ? getParam(key) : defaultValue;
+    public String getParamOrDefault(String key, String defaultValue) {
+        String param = mapParams.get(key);
+        return param != null ? param : defaultValue;
     }
 
     public String getParam(String key) {
@@ -242,7 +242,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             final String type = params.get("Presence");
 
             int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", hostCard.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
 
             if (revealed + ctrl == 0) {
                 return false;
@@ -270,13 +270,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 lifeCompare = params.get("LifeAmount");
             }
 
-            int right = 1;
             final String rightString = lifeCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
 
             if (!Expressions.compare(life, lifeCompare, right)) {
                 return false;
@@ -313,13 +308,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
-            int right = 1;
+
             final String rightString = presentCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
     
             if (!Expressions.compare(left, presentCompare, right)) {
@@ -354,13 +345,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
-            int right = 1;
             final String rightString = presentCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
     
             if (!Expressions.compare(left, presentCompare, right)) {
@@ -559,5 +545,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
         // this does overwrite the original MapParams
         this.originalMapParams = Maps.newHashMap(this.mapParams);
+    }
+
+    protected void copyHelper(CardTraitBase copy, Card host) {
+        copy.originalMapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(originalMapParams);
+        copy.sVars = Maps.newHashMap(sVars);
+        // dont use setHostCard to not trigger the not copied parts yet
+        copy.hostCard = host;
     }
 }

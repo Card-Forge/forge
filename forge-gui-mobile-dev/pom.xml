@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.30-SNAPSHOT</version>
+        <version>1.6.37-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -79,24 +79,6 @@
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
             <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-base-bom</artifactId>
-            <version>1.2.4.Final</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-core</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-api</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

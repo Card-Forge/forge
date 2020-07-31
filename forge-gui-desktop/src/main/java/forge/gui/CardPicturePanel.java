@@ -17,16 +17,8 @@
  */
 package forge.gui;
 
-import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
-
-import javax.swing.JPanel;
-
 import forge.GuiBase;
 import forge.ImageCache;
-import forge.util.ImageFetcher;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
@@ -37,6 +29,13 @@ import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import forge.util.ImageFetcher;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 
 /**
  * Displays image associated with a card or inventory item.
@@ -111,7 +110,11 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
-            return ImageCache.getOriginalImage(item.getImageKey(false), true);
+            BufferedImage image = ImageCache.getOriginalImage(item.getImageKey(false), true);
+            if (ImageCache.isDefaultImage(image) && item instanceof PaperCard) {
+                GuiBase.getInterface().getImageFetcher().fetchImage(item.getImageKey(false), this);
+            }
+            return image;
         } else if (displayed instanceof CardStateView) {
             CardStateView card = (CardStateView) displayed;
             BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false);

@@ -14,6 +14,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
 
+import forge.screens.home.sanctioned.SleeveSelector;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +67,8 @@ public class PlayerPanel extends FPanel {
 
     private final FLabel nameRandomiser;
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
-    private int avatarIndex;
+    private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
+    private int avatarIndex, sleeveIndex;
 
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
@@ -126,6 +128,10 @@ public class PlayerPanel extends FPanel {
 
         createAvatar();
         this.add(avatarLabel, "spany 2, width 80px, height 80px");
+
+        /*TODO Layout and Override for PC*/
+        //createSleeve();
+        //this.add(sleeveLabel, "spany 2, width 60px, height 80px");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
@@ -203,6 +209,10 @@ public class PlayerPanel extends FPanel {
         avatarLabel.setEnabled(mayEdit);
         avatarLabel.setIcon(FSkin.getAvatars().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : avatarIndex)));
         avatarLabel.repaintSelf();
+
+        sleeveLabel.setEnabled(mayEdit);
+        sleeveLabel.setIcon(FSkin.getSleeves().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : sleeveIndex)));
+        sleeveLabel.repaintSelf();
 
         txtPlayerName.setEnabled(mayEdit);
         txtPlayerName.setText(type == LobbySlotType.OPEN ? StringUtils.EMPTY : playerName);
@@ -328,6 +338,62 @@ public class PlayerPanel extends FPanel {
 
             if (index < 2) {
                 lobby.updateAvatarPrefs();
+            }
+        }
+    };
+
+    /** Listens to sleeve buttons and gives the appropriate player focus. */
+    private final FocusAdapter sleeveFocusListener = new FocusAdapter() {
+        @Override
+        public void focusGained(final FocusEvent e) {
+            lobby.changePlayerFocus(index);
+        }
+    };
+
+    private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
+        @Override public final void onLeftClick(final MouseEvent e) {
+            if (!sleeveLabel.isEnabled()) {
+                return;
+            }
+
+            final FLabel sleeve = (FLabel)e.getSource();
+
+            lobby.changePlayerFocus(index);
+            sleeve.requestFocusInWindow();
+
+            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
+            for (final FLabel lbl : sSel.getSelectables()) {
+                lbl.setCommand(new UiCommand() {
+                    @Override
+                    public void run() {
+                        setSleeveIndex(Integer.valueOf(lbl.getName().substring(11)));
+                        sSel.setVisible(false);
+                    }
+                });
+            }
+
+            sSel.setVisible(true);
+            sSel.dispose();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        }
+
+        @Override public final void onRightClick(final MouseEvent e) {
+            if (!sleeveLabel.isEnabled()) {
+                return;
+            }
+
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            setRandomSleeve();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
             }
         }
     };
@@ -703,6 +769,20 @@ public class PlayerPanel extends FPanel {
         avatarLabel.addMouseListener(avatarMouseListener);
     }
 
+    private void createSleeve() {
+        final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
+        if (index < currentPrefs.length) {
+            sleeveIndex = Integer.parseInt(currentPrefs[index]);
+            sleeveLabel.setIcon(FSkin.getSleeves().get(sleeveIndex));
+        } else {
+            setRandomSleeve(false);
+        }
+
+        sleeveLabel.setToolTipText("L-click: Select sleeve. R-click: Randomize sleeve.");
+        sleeveLabel.addFocusListener(sleeveFocusListener);
+        sleeveLabel.addMouseListener(sleeveMouseListener);
+    }
+
     /** Applies a random avatar, avoiding avatars already used. */
     private void setRandomAvatar() {
         setRandomAvatar(true);
@@ -715,6 +795,24 @@ public class PlayerPanel extends FPanel {
             random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
         } while (usedAvatars.contains(random));
         setAvatarIndex(random);
+
+        if (fireListeners) {
+            lobby.firePlayerChangeListener(index);
+        }
+    }
+
+    /** Applies a random sleeve, avoiding sleeve already used. */
+    private void setRandomSleeve() {
+        setRandomSleeve(true);
+    }
+    private void setRandomSleeve(final boolean fireListeners) {
+        int random = 0;
+
+        final List<Integer> usedSleeves = lobby.getUsedSleeves();
+        do {
+            random = MyRandom.getRandom().nextInt(FSkin.getSleeves().size());
+        } while (usedSleeves.contains(random));
+        setSleeveIndex(random);
 
         if (fireListeners) {
             lobby.firePlayerChangeListener(index);
@@ -744,6 +842,16 @@ public class PlayerPanel extends FPanel {
         final SkinImage icon = FSkin.getAvatars().get(avatarIndex);
         avatarLabel.setIcon(icon);
         avatarLabel.repaintSelf();
+    }
+
+    public int getSleeveIndex() {
+        return sleeveIndex;
+    }
+    public void setSleeveIndex(final int sleeveIndex0) {
+        sleeveIndex = sleeveIndex0;
+        final SkinImage icon = FSkin.getSleeves().get(sleeveIndex);
+        sleeveLabel.setIcon(icon);
+        sleeveLabel.repaintSelf();
     }
 
     public int getTeam() {

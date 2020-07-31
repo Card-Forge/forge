@@ -11,6 +11,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -112,7 +113,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("SpellCopy")) {
             	// fetch Instant or Sorcery and AI has reason to play this turn
             	// does not try to get itself
-                final ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                final ManaCost costSa = sa.getPayCosts().getTotalMana();
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -134,7 +135,7 @@ public class EffectAi extends SpellAbilityAi {
                             AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
                             // see if we can pay both for this spell and for the Effect spell we're considering
                             if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
-                                ManaCost costAb = ab.getPayCosts() != null ? ab.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costAb = ab.getPayCosts().getTotalMana();
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                                 // can we pay both costs?
@@ -307,6 +308,16 @@ public class EffectAi extends SpellAbilityAi {
                 if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                     return false;
                 }
+            } else if (logic.equals("Bribe")) {
+                Card host = sa.getHostCard();
+                Combat combat = game.getCombat();
+                if (combat != null && combat.isAttacking(host, ai) && !combat.isBlocked(host)
+                        && game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && !AiCardMemory.isRememberedCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+                    AiCardMemory.rememberCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN); // ideally needs once per combat or something
+                    return true;
+                }
+                return false;
             }
         } else { //no AILogic
             return false;

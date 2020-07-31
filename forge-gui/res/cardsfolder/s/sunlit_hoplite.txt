@@ -1,0 +1,9 @@
+Name:Sunlit Hoplite
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Planeswalker.Elspeth+YouCtrl | Description$ CARDNAME gets +1/+0 as long as you control an Elspeth planeswalker.
+SVar:BuffedBy:Elspeth
+DeckHints:Type$Elspeth
+Oracle:As long as it's your turn, Sunlit Hoplite has first strike.\nSunlit Hoplite gets +1/+0 as long as you control an Elspeth planeswalker.

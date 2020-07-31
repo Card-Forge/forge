@@ -2,8 +2,8 @@ Name:Tidal Control
 ManaCost:1 U U
 Types:Enchantment
 K:Cumulative upkeep:2
-A:AB$ Counter | Cost$ 2 | TargetType$ Spell | TgtPrompt$ Select target red or green spell | ValidTgts$ Card.Green,Card.Red | AnyPlayer$ True | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
-A:AB$ Counter | Cost$ PayLife<2> | TargetType$ Spell | TgtPrompt$ Select target red of green spell | ValidTgts$ Card.Green,Card.Red | AnyPlayer$ True | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
+A:AB$ Counter | Cost$ 2 | TargetType$ Spell | TgtPrompt$ Select target red or green spell | ValidTgts$ Card.Green,Card.Red | Activator$ Player | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
+A:AB$ Counter | Cost$ PayLife<2> | TargetType$ Spell | TgtPrompt$ Select target red of green spell | ValidTgts$ Card.Green,Card.Red | Activator$ Player | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_control.jpg

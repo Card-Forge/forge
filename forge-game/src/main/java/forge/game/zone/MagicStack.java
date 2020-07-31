@@ -136,8 +136,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability));
+            if (!source.isCopiedSpell()) {
+                if (!source.isInZone(ZoneType.Stack)) {
+                    ability.setHostCard(game.getAction().moveToStack(source, ability));
+                }
+                if (ability.equals(source.getCastSA())) {
+                    source.setCastSA(ability.copy(source, true));
+                }
             }
         }
 
@@ -237,7 +242,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (spell.isCastFaceDown()) {
                 source.turnFaceDown();
             } else if (source.isFaceDown()) {
-                source.turnFaceUp();
+                source.turnFaceUp(null);
             }
         }
 
@@ -314,9 +319,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             // Run Cycled triggers
             if (sp.isCycling()) {
-                runParams.clear();
-                runParams.put(AbilityKey.Card, sp.getHostCard());
-                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
+                activator.addCycled(sp);
             }
             
             if (sp.hasParam("Crew")) {
@@ -414,6 +417,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
 
         stack.addFirst(si);
+        int stackIndex = stack.size() - 1;
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
@@ -430,7 +434,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, false));
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex, false));
         return si;
     }
 
@@ -459,7 +463,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (thisHasFizzled) { // Fizzle
-            if (sa.hasParam("Bestow")) {
+            if (sa.isBestow()) {
                 // 702.102d: if its target is illegal, 
                 // the effect making it an Aura spell ends. 
                 // It continues resolving as a creature spell.
@@ -583,10 +587,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                         invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
                     } else {
-                        invalidTarget = !o.canBeTargetedBy(sa);
-
                         if (o instanceof SpellAbility) {
-                            invalidTarget |= this.getInstanceFromSpellAbility((SpellAbility)o) == null;
+                            SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
+                            invalidTarget = si == null ? true : !si.getSpellAbility(true).canBeTargetedBy(sa);
+                        } else {
+                            invalidTarget = !o.canBeTargetedBy(sa);
                         }
                     }
                     // Remove targets
@@ -637,6 +642,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(true);
+        sa.setLastStateBattlefield(CardCollection.EMPTY);
+        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 
@@ -778,6 +785,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void onNextTurn() {
+        game.getStackZone().resetCardsAddedThisTurn();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
             return;

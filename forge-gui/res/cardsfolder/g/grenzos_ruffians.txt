@@ -6,5 +6,4 @@ K:Melee
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to each other opponent.
 SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grenzos_ruffians.jpg
-Oracle:Melee (Whenever this creature attacks, it gets +1/+1 for each opponent you attacked with a creature this combat.)\nWhenever Grenzo's Ruffians deals combat damage to an opponent, it deals that much damage to each other opponent.
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 for each opponent you attacked this combat.)\nWhenever Grenzo's Ruffians deals combat damage to an opponent, it deals that much damage to each other opponent.

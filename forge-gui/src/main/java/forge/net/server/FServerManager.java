@@ -6,13 +6,14 @@ import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
+import forge.net.CompatibleObjectDecoder;
+import forge.net.CompatibleObjectEncoder;
 import forge.net.event.LobbyUpdateEvent;
 import forge.net.event.LoginEvent;
 import forge.net.event.LogoutEvent;
 import forge.net.event.MessageEvent;
 import forge.net.event.NetEvent;
 import forge.net.event.UpdateLobbyPlayerEvent;
-import forge.properties.ForgeConstants;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -25,8 +26,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -39,7 +38,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.support.igd.PortMappingListener;
@@ -85,7 +83,6 @@ public final class FServerManager {
      */
     public static FServerManager getInstance() {
         if (instance == null) {
-            PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
             instance = new FServerManager();
         }
         return instance;
@@ -98,11 +95,12 @@ public final class FServerManager {
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override public final void initChannel(final SocketChannel ch) {
+                        @Override
+                        public final void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new ObjectEncoder(),
-                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new CompatibleObjectEncoder(),
+                                    new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -180,6 +178,15 @@ public final class FServerManager {
 
     public void setLobby(final ServerGameLobby lobby) {
         this.localLobby = lobby;
+    }
+
+    public void unsetReady() {
+        if (this.localLobby != null) {
+            if (this.localLobby.getSlot(0) != null) {
+                this.localLobby.getSlot(0).setIsReady(false);
+                updateLobbyState();
+            }
+        }
     }
 
     public boolean isMatchActive() {
@@ -329,7 +336,7 @@ public final class FServerManager {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
-                final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex());
+                final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
                 if (index == -1) {
                     ctx.close();
                 } else {

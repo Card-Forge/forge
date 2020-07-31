@@ -27,10 +27,10 @@ Foil=NotSupported
 17 C Curfew
 18 C Dark Ritual
 19 R Dirtcowl Wurm
-20 U Disenchant
+20 C Disenchant
 21 C Disruptive Student
 22 C Drifting Meadow
-23 C Elvish Lyrist
+23 U Elvish Lyrist
 24 C Exhume
 25 U Fecundity
 26 C Fertile Ground
@@ -40,16 +40,16 @@ Foil=NotSupported
 30 C Gorilla Warrior
 31 C Healing Salve
 32 C Heat Ray
-33 R Hurricane
+33 U Hurricane
 34 C Infantry Veteran
-35 R Land Tax
+35 U Land Tax
 36 R Lhurgoyf
 37 C Lightning Elemental
 38 R Living Death
 39 C Llanowar Elves
 40 C Man-o'-War
 41 C Mana Leak
-42 U Maniacal Rage
+42 C Maniacal Rage
 43 C Manta Riders
 44 C Master Decoy
 45 U Mogg Hollows
@@ -59,7 +59,7 @@ Foil=NotSupported
 49 U Pestilence
 50 C Phyrexian Ghoul
 51 C Pincher Beetles
-52 U Plated Rootwalla
+52 C Plated Rootwalla
 53 C Polluted Mire
 54 C Prodigal Sorcerer
 55 C Raging Goblin
@@ -72,7 +72,7 @@ Foil=NotSupported
 62 C Sanctum Custodian
 63 U Sanctum Guardian
 64 C Sandstorm
-65 U Scaled Wurm
+65 C Scaled Wurm
 66 C Scryb Sprites
 67 U Seasoned Marshal
 68 C Seeker of Skybreak
@@ -83,7 +83,7 @@ Foil=NotSupported
 73 C Slippery Karst
 74 C Soltari Foot Soldier
 75 U Songstitcher
-76 U Soul Warden
+76 C Soul Warden
 77 C Spike Colony
 78 U Spike Feeder
 79 R Spike Weaver

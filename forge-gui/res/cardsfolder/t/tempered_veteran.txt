@@ -1,0 +1,8 @@
+Name:Tempered Veteran
+ManaCost:1 W
+Types:Creature Human Knight
+PT:1/2
+A:AB$ PutCounter | Cost$ W T | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Put a +1/+1 counter on target creature with a +1/+1 counter on it.
+A:AB$ PutCounter | Cost$ 4 W W T | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put a +1/+1 counter on target creature.
+DeckHas:Ability$Counters
+Oracle:{W}, {T}: Put a +1/+1 counter on target creature with a +1/+1 counter on it.\n{4}{W}{W}, {T}: Put a +1/+1 counter on target creature.

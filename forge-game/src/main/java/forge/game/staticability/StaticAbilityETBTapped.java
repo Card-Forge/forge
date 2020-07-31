@@ -17,9 +17,9 @@
  */
 package forge.game.staticability;
 
+import forge.game.CardTraitBase;
 import forge.game.card.Card;
 
-import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -36,11 +36,15 @@ public class StaticAbilityETBTapped {
      * @return true, if successful
      */
     public static boolean applyETBTappedAbility(final StaticAbility stAb, final Card card) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        return !params.containsKey("ValidCard")
-                || card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null);
+        if (stAb.hasParam("ValidCard")) {
+            if (!CardTraitBase.matchesValid(card, stAb.getParam("ValidCard").split(","), hostCard)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

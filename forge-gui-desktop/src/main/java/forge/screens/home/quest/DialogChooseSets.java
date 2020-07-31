@@ -7,6 +7,7 @@ import forge.gui.SOverlayUtils;
 import forge.model.FModel;
 import forge.toolbox.*;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class DialogChooseSets {
 	private Runnable okCallback;
 
 	private final List<FCheckBox> choices = new ArrayList<>();
-	private final FCheckBox cbWantReprints = new FCheckBox("Display compatible reprints from more recent sets");
+	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetRepints"));
 
 	// lists are of set codes (e.g. "2ED")
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
@@ -76,21 +77,21 @@ public class DialogChooseSets {
 		optionsPanel.setVisible(false);
 		optionsPanel.setOpaque(false);
 		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, growx");
-		optionsPanel.add(new FLabel.Builder().text("Select Random Sets").fontSize(17).fontStyle(Font.BOLD).build(), "h 40!, span 2");
+		optionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectRandomSets")).fontSize(17).fontStyle(Font.BOLD).build(), "h 40!, span 2");
 
 		JPanel leftOptionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 2"));
 		leftOptionsPanel.setOpaque(false);
-		leftOptionsPanel.add(new FLabel.Builder().text("Number to Select:").fontSize(14).fontStyle(Font.BOLD).build(), " span 2");
-		leftOptionsPanel.add(new FLabel.Builder().text("Core:").build());
+		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectNumber") + ":").fontSize(14).fontStyle(Font.BOLD).build(), " span 2");
+		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblCore") + ":").build());
 		leftOptionsPanel.add(coreField, "w 40!");
-		leftOptionsPanel.add(new FLabel.Builder().text("Expansion:").build());
+		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblExpansion") + ":").build());
 		leftOptionsPanel.add(expansionField, "w 40!");
 		leftOptionsPanel.add(new FLabel.Builder().text("Other:").build());
 		leftOptionsPanel.add(otherField, "w 40!");
 
 		JPanel rightOptionsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, center, wrap 2"));
 		rightOptionsPanel.setOpaque(false);
-		rightOptionsPanel.add(new FLabel.Builder().text("Format Restrictions:").fontSize(14).fontStyle(Font.BOLD).build(), "span 2");
+		rightOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormatRestrictions") +":").fontSize(14).fontStyle(Font.BOLD).build(), "span 2");
 
 		ButtonGroup formatButtonGroup = new ButtonGroup();
 		List<GameFormat> gameFormats = new ArrayList<>();
@@ -98,7 +99,7 @@ public class DialogChooseSets {
 
 		gameFormats.forEach(item -> {
 			if (item.getName().equals("Legacy")) {
-				FRadioButton button = new FRadioButton("Legacy/Vintage");
+				FRadioButton button = new FRadioButton(Localizer.getInstance().getMessage("lblLegacyOrVintage"));
 				button.setActionCommand(item.getName());
 				formatButtonGroup.add(button);
 				rightOptionsPanel.add(button);
@@ -110,12 +111,12 @@ public class DialogChooseSets {
 			}
 		});
 
-		FRadioButton button = new FRadioButton("Modern Card Frame");
+		FRadioButton button = new FRadioButton(Localizer.getInstance().getMessage("lblModernCardFrame"));
 		button.setActionCommand("Modern Card Frame");
 		formatButtonGroup.add(button);
 		rightOptionsPanel.add(button);
 
-		FRadioButton noFormatSelectionButton = new FRadioButton("No Format Restriction");
+		FRadioButton noFormatSelectionButton = new FRadioButton(Localizer.getInstance().getMessage("lblNoFormatRestriction"));
 		noFormatSelectionButton.setActionCommand("No Format Restriction");
 		formatButtonGroup.add(noFormatSelectionButton);
 		rightOptionsPanel.add(noFormatSelectionButton);
@@ -124,7 +125,7 @@ public class DialogChooseSets {
 		optionsPanel.add(leftOptionsPanel, "w 33%:40%:78%");
 		optionsPanel.add(rightOptionsPanel, "w 33%:60%:78%");
 
-		FButton randomSelectionButton = new FButton("Randomize Sets");
+		FButton randomSelectionButton = new FButton(Localizer.getInstance().getMessage("lblRandomizeSets"));
 		randomSelectionButton.addActionListener(actionEvent -> {
 
 			int numberOfCoreSets = Integer.parseInt(coreField.getText());
@@ -214,7 +215,7 @@ public class DialogChooseSets {
 
 		});
 
-		FButton clearSelectionButton = new FButton("Clear Selection");
+		FButton clearSelectionButton = new FButton(Localizer.getInstance().getMessage("lblClearSelection"));
 		clearSelectionButton.addActionListener(actionEvent -> {
 			for (FCheckBox coreSet : coreSets) {
 				coreSet.setSelected(false);
@@ -228,13 +229,13 @@ public class DialogChooseSets {
 			panel.repaintSelf();
 		});
 
-		FButton showOptionsButton = new FButton("Show Options");
+		FButton showOptionsButton = new FButton(Localizer.getInstance().getMessage("lblShowOptions"));
 		showOptionsButton.addActionListener(actionEvent -> {
 			optionsPanel.setVisible(true);
 			showOptionsButton.setVisible(false);
 		});
 
-		FButton hideOptionsButton = new FButton("Hide Options");
+		FButton hideOptionsButton = new FButton(Localizer.getInstance().getMessage("lblHideOptions"));
 		hideOptionsButton.addActionListener(actionEvent -> {
 			optionsPanel.setVisible(false);
 			showOptionsButton.setVisible(true);
@@ -254,12 +255,12 @@ public class DialogChooseSets {
 
 		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, growx");
 
-		panel.add(new FLabel.Builder().text("Choose sets").fontSize(20).build(), "center, span, wrap, gaptop 10");
+		panel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets")).fontSize(20).build(), "center, span, wrap, gaptop 10");
 
 		String constraints = "aligny top";
-		panel.add(makeCheckBoxList(coreSets, "Core sets", true), constraints);
-		panel.add(makeCheckBoxList(expansionSets, "Expansions", false), constraints);
-		panel.add(makeCheckBoxList(otherSets, "Other sets", false), constraints);
+		panel.add(makeCheckBoxList(coreSets, Localizer.getInstance().getMessage("lblCoreSets"), true), constraints);
+		panel.add(makeCheckBoxList(expansionSets, Localizer.getInstance().getMessage("lblExpansions"), false), constraints);
+		panel.add(makeCheckBoxList(otherSets, Localizer.getInstance().getMessage("lblOtherSets"), false), constraints);
 		panel.add(showOptionsButton, "center, w 230!, h 30!, gap 10 0 20 0, span 3, hidemode 3");
 		panel.add(optionsPanel, "center, w 100, span 3, growx, hidemode 3");
 
@@ -273,7 +274,7 @@ public class DialogChooseSets {
 			}
 		};
 
-		FButton btnOk = new FButton("OK");
+		FButton btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
 		btnOk.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -282,7 +283,7 @@ public class DialogChooseSets {
 			}
 		});
 
-		FButton btnCancel = new FButton("Cancel");
+		FButton btnCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

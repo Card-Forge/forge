@@ -295,4 +295,8 @@ public class ImageCache {
 
         return output;
     }
+
+    public static boolean isDefaultImage(BufferedImage image) {
+        return _defaultImage.equals(image);
+    }
 }

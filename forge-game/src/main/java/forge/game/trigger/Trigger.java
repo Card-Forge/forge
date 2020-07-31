@@ -29,7 +29,6 @@ import forge.game.card.CardState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -37,6 +36,7 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.util.TextUtil;
 
@@ -64,47 +64,15 @@ public abstract class Trigger extends TriggerReplacementBase {
     /** The ID. */
     private int id;
 
-
-    /** The run params. */
-    private Map<AbilityKey, Object> runParams;
-
     private TriggerType mode;
 
-    private Map<AbilityKey, Object> storedTriggeredObjects = null;
-    
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     // number of times this trigger was activated this this turn
     // used to handle once-per-turn triggers like Crawling Sensation
     private int numberTurnActivations = 0;
 
-    /**
-     * <p>
-     * Setter for the field <code>storedTriggeredObjects</code>.
-     * </p>
-     * 
-     * @param storedTriggeredObjects
-     *            a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
-    public final void setStoredTriggeredObjects(final Map<AbilityKey, Object> storedTriggeredObjects) {
-        this.storedTriggeredObjects = AbilityKey.newMap(storedTriggeredObjects);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>storedTriggeredObjects</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
-    public final Map<AbilityKey, Object> getStoredTriggeredObjects() {
-        return this.storedTriggeredObjects;
-    }
-
-
-    private List<PhaseType> validPhases;
+    private Set<PhaseType> validPhases;
 
     /**
      * <p>
@@ -122,7 +90,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = nextId();
         this.intrinsic = intrinsic;
 
-        this.setRunParams(AbilityKey.newMap()); // TODO: Consider whether this can be null instead, for performance reasons.
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
@@ -453,26 +420,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public abstract void setTriggeringObjects(SpellAbility sa);
-
-    /**
-     * Gets the run params.
-     * 
-     * @return the runParams
-     */
-    public Object getFromRunParams(AbilityKey key) {
-        return this.runParams.get(key);
-    }
-
-    /**
-     * Sets the run params.
-     * 
-     * @param runParams0
-     *            the runParams to set
-     */
-    public void setRunParams(final Map<AbilityKey, Object> runParams0) {
-        this.runParams = runParams0;
-    }
+    public abstract void setTriggeringObjects(SpellAbility sa, final Map<AbilityKey, Object> runParams);
 
     /**
      * Gets the id.
@@ -493,27 +441,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final void setId(final int id) {
         this.id = id;
-    }
-
-    private Ability triggeredSA;
-
-    /**
-     * Gets the triggered sa.
-     * 
-     * @return the triggered sa
-     */
-    public final Ability getTriggeredSA() {
-        return this.triggeredSA;
-    }
-
-    /**
-     * Sets the triggered sa.
-     * 
-     * @param sa
-     *            the triggered sa to set
-     */
-    public void setTriggeredSA(final Ability sa) {
-        this.triggeredSA = sa;
     }
 
     public void addRemembered(Object o) {
@@ -545,9 +472,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public final Trigger copy(Card newHost, boolean lki) {
         final Trigger copy = (Trigger) clone();
 
-        copy.originalMapParams.putAll(originalMapParams);
-        copy.mapParams.putAll(originalMapParams);
-        copy.setHostCard(newHost);
+        copyHelper(copy, newHost);
 
         if (getOverridingAbility() != null) {
             copy.setOverridingAbility(getOverridingAbility().copy(newHost, lki));
@@ -558,7 +483,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (validPhases != null) {
-            copy.setTriggerPhases(Lists.newArrayList(validPhases));
+            copy.setTriggerPhases(Sets.newEnumSet(validPhases, PhaseType.class));
         }
         copy.setActiveZone(validHostZones);
         return copy;
@@ -568,7 +493,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         return hasParam("Static"); // && params.get("Static").equals("True") [always true if present]
     }
 
-    public void setTriggerPhases(List<PhaseType> phases) {
+    public void setTriggerPhases(Set<PhaseType> phases) {
         validPhases = phases;
     }
 
@@ -611,10 +536,10 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         super.changeText();
 
-        ensureAbility();
+        SpellAbility sa = ensureAbility();
 
-        if (getOverridingAbility() != null) {
-            getOverridingAbility().changeText();
+        if (sa != null) {
+            sa.changeText();
         }
     }
 
@@ -628,14 +553,14 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         super.changeTextIntrinsic(colorMap, typeMap);
 
-        ensureAbility();
+        SpellAbility sa = ensureAbility();
 
-        if (getOverridingAbility() != null) {
-            getOverridingAbility().changeTextIntrinsic(colorMap, typeMap);
+        if (sa != null) {
+            sa.changeTextIntrinsic(colorMap, typeMap);
         }
     }
 
-    private SpellAbility ensureAbility() {
+    public SpellAbility ensureAbility() {
         SpellAbility sa = getOverridingAbility();
         if (sa == null && hasParam("Execute")) {
             sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"));

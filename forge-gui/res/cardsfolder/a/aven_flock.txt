@@ -3,6 +3,5 @@ ManaCost:4 W
 Types:Creature Bird Soldier
 PT:2/3
 K:Flying
-A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_flock.jpg
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{W}: Aven Flock gets +0/+1 until end of turn.

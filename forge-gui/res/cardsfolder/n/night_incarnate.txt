@@ -5,7 +5,7 @@ PT:3/4
 K:Deathtouch
 K:Evoke:3 B
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, all creatures get -3/-3 until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:NeedsToPlayEvokedVar:Z GE2
 SVar:Z:Count$Valid Creature.OppCtrl+toughnessLE3
 Oracle:Deathtouch\nWhen Night Incarnate leaves the battlefield, all creatures get -3/-3 until end of turn.\nEvoke {3}{B} (You may cast this spell for its evoke cost. If you do, it's sacrifices when it enters the battlefield.)

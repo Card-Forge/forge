@@ -1,0 +1,14 @@
+Name:Tectonic Giant
+ManaCost:2 R R
+Types:Creature Elemental Giant
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | ValidSource$ Card.OppCtrl | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or becomes the target of a spell an opponent controls, ABILITY
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or becomes the target of a spell an opponent controls, ABILITY
+SVar:TrigChoose:DB$ Charm | Choices$ DBDamage,DBExilePlay
+SVar:DBDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+SVar:DBExilePlay:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Defined$ You | RememberChosen$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | ForgetOnMoved$ Exile | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play this card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+Oracle:Whenever Tectonic Giant attacks or becomes the target of a spell an opponent controls, choose one —\n• Tectonic Giant deals 3 damage to each opponent.\n• Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.

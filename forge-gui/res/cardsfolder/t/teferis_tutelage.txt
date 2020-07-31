@@ -1,0 +1,9 @@
+Name:Teferi's Tutelage
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, target opponent mills two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+Oracle:When Teferi's Tutelage enters the battlefield, draw a card, then discard a card.\nWhenever you draw a card, target opponent mills two cards. (They put the top two cards of their library into their graveyard.)

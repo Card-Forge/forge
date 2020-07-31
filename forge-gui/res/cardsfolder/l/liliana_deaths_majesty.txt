@@ -2,10 +2,11 @@ Name:Liliana, Death's Majesty
 ManaCost:3 B B
 Types:Legendary Planeswalker Liliana
 Loyalty:5
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie akh | Planeswalker$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 black Zombie creature token. Put the top two cards of your library into your graveyard.
-SVar:DBMill:DB$Mill | Defined$ You | NumCards$ 2
-A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | SubAbility$ Animate | TgtPrompt$ Select target creature card from your graveyard | Planeswalker$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
-SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black | Permanent$ True
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | Planeswalker$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 black Zombie creature token. Mill two cards.
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 2
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | AnimateSubAbility$ Animate | TgtPrompt$ Select target creature card from your graveyard | Planeswalker$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True
 A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | Ultimate$ True | ValidCards$ Creature.nonZombie | Planeswalker$ True | SpellDescription$ Destroy all non-Zombie creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_deaths_majesty.jpg
-Oracle:[+1]: Create a 2/2 black Zombie creature token. Put the top two cards of your library into your graveyard.\n[-3]: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.\n[-7]: Destroy all non-Zombie creatures.
+DeckHas:Ability$Token & Ability$Graveyard
+DeckHints:Type$Zombie
+Oracle:[+1]: Create a 2/2 black Zombie creature token. Mill two cards.\n[-3]: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.\n[-7]: Destroy all non-Zombie creatures.

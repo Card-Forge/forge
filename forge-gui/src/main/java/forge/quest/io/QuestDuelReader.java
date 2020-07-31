@@ -27,7 +27,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         final QuestEventDuel qc = new QuestEventDuel();
 
         // Common properties
-        FileSection sectionMeta = FileSection.parse(contents.get("metadata"), "=");
+        FileSection sectionMeta = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
         qc.setTitle(sectionMeta.get("Title"));
         qc.setName(sectionMeta.get("Name")); // Challenges have unique titles
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));

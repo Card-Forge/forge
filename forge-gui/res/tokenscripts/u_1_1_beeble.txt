@@ -1,0 +1,6 @@
+Name:Beeble
+ManaCost:no cost
+Types:Creature Beeble
+Colors:blue
+PT:1/1
+Oracle:

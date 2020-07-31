@@ -5,10 +5,14 @@ import java.util.Map.Entry;
 import forge.achievement.ChallengeAchievements.DeckChallengeAchievement;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 
 public class NoLands extends DeckChallengeAchievement {
     public NoLands() {
-        super("NoLands", "No Lands", "with no lands", "I prefer mana from more artificial sources.");
+        super("NoLands", Localizer.getInstance().getMessage("lblNoLands"),
+            Localizer.getInstance().getMessage("lblWithNoLands"),
+            Localizer.getInstance().getMessage("lblIMorePreferManaFromArtificial")
+        );
     }
 
     @Override

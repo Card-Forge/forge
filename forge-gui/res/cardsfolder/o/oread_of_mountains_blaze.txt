@@ -1,0 +1,7 @@
+Name:Oread of Mountain's Blaze
+ManaCost:1 R
+Types:Enchantment Creature Nymph
+PT:1/3
+A:AB$ Draw | Cost$ 2 R Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:{2}{R}, Discard a card: Draw a card.

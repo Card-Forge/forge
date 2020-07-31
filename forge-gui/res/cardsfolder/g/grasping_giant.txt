@@ -1,0 +1,11 @@
+Name:Grasping Giant
+ManaCost:5 W
+Types:Creature Giant
+PT:5/7
+K:Vigilance
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, exile that creature until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredBlocker | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, exile that creature until CARDNAME leaves the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Vigilance\nWhenever Grasping Giant becomes blocked by a creature, exile that creature until Grasping Giant leaves the battlefield.

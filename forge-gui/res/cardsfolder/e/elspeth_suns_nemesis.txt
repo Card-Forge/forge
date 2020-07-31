@@ -1,0 +1,11 @@
+Name:Elspeth, Sun's Nemesis
+ManaCost:2 W W
+Types:Legendary Planeswalker Elspeth
+Loyalty:5
+A:AB$ Pump | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Up to two target creatures you control each get +2/+1 until end of turn.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier thb | SpellDescription$ Create two 1/1 white Human Soldier creature tokens.
+A:AB$ GainLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Ultimate$ True | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
+K:Escape:4 W W ExileFromGrave<4/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Token & Ability$LifeLink
+Oracle:[−1]: Up to two target creatures you control each get +2/+1 until end of turn.\n[−2]: Create two 1/1 white Human Soldier creature tokens.\n[−3]: You gain 5 life.\nEscape—{4}{W}{W}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

@@ -184,14 +184,14 @@ Booster=10 Common:!land, 3 Uncommon, 1 RareMythic, 1 fromSheet("FRF Lands"), 0 f
 174 C Tranquil Cove
 175 C Wind-Scarred Crag
 176 L Plains
-176 L Plains
+177 L Plains
+178 L Island
 179 L Island
-179 L Island
+180 L Swamp
 181 L Swamp
-181 L Swamp
+182 L Mountain
 183 L Mountain
-183 L Mountain
-185 L Forest
+184 L Forest
 185 L Forest
 
 [tokens]

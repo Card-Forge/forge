@@ -63,6 +63,10 @@ public class FightEffect extends DamageBaseEffect {
             runParams.put(AbilityKey.Fighter, c);
             game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Fighters, fighters);
+        game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
     }
 
     private static List<Card> getFighters(SpellAbility sa) {
@@ -154,7 +158,7 @@ public class FightEffect extends DamageBaseEffect {
 
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, sa);
+            damageMap.triggerDamageDoneOnce(false, fighterA.getGame(), sa);
 
             preventMap.clear();
             damageMap.clear();

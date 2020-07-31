@@ -8,6 +8,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -49,15 +50,15 @@ public class DrawEffect extends SpellAbilityEffect {
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) 
-                if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + Lang.nounWithAmount(numCards, " card") + "?"))
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card"))))
                     continue;
 
                 int actualNum = numCards; 
                 if (upto) {
-                    actualNum = p.getController().chooseNumber(sa, "How may cards do you want to draw?", 0, numCards);
+                    actualNum = p.getController().chooseNumber(sa, "lblHowMayCardDoYouWantDraw", 0, numCards);
                 }
 
-                final CardCollectionView drawn = p.drawCards(actualNum);
+                final CardCollectionView drawn = p.drawCards(actualNum, sa);
                 if (sa.hasParam("Reveal")) {
                     p.getGame().getAction().reveal(drawn, p);
                 }

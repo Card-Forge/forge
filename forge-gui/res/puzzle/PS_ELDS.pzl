@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Superfriends' Winter Vacation Puzzle
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2019/12/141.-ELD003-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has {4} available (and can use it to activate their Food tokens).
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Rowan, Fearless Sparkmage;Spark Double;Sarkhan the Masterless;Samut, Tyrant Smasher
+humanbattlefield=Domri, Anarch of Bolas|Counters:LOYALTY=2;Oko, Thief of Crowns|Counters:LOYALTY=4;Tibalt, Rakish Instigator|Counters:LOYALTY=2;Rubblebelt Rioters;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+aibattlefield=Brazen Borrower;Brazen Borrower;Brazen Borrower;Blightbeetle
+aipersistentmana=C C C C
+aiprecast=Trail of Crumbs:TrigToken;Trail of Crumbs:TrigToken

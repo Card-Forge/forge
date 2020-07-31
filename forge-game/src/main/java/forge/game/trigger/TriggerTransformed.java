@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -53,19 +54,15 @@ public class TriggerTransformed extends Trigger {
         return true;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Transformer);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Transformer);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Transformed: ").append(sa.getTriggeringObject(AbilityKey.Transformer));
+        sb.append(Localizer.getInstance().getMessage("lblTransformed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Transformer));
         return sb.toString();
     }
 

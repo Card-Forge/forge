@@ -14,6 +14,7 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 public class ChangeTextEffect extends SpellAbilityEffect {
 
@@ -33,7 +34,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             final String[] changedColorWordsArray = sa.getParam("ChangeColorWord").split(" ");
             if (changedColorWordsArray[0].equals("Choose")) {
                 originalColor = sa.getActivatingPlayer().getController().chooseColor(
-                        "Choose a color word to replace", sa, ColorSet.ALL_COLORS);
+                        Localizer.getInstance().getMessage("lblChooseColorReplace"), sa, ColorSet.ALL_COLORS);
                 changedColorWordOriginal = TextUtil.capitalize(MagicColor.toLongString(originalColor));
             } else {
                 changedColorWordOriginal = changedColorWordsArray[0];
@@ -48,7 +49,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     possibleNewColors = ColorSet.fromMask(originalColor).inverse();
                 }
                 final byte newColor = sa.getActivatingPlayer().getController().chooseColor(
-                        "Choose a new color word", sa, possibleNewColors);
+                        Localizer.getInstance().getMessage("lblChooseNewColor"), sa, possibleNewColors);
                 changedColorWordNew = TextUtil.capitalize(MagicColor.toLongString(newColor));
             } else {
                 changedColorWordNew = changedColorWordsArray[1];

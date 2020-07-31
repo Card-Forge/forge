@@ -1,6 +1,6 @@
 Name:Mogis's Warhound
 ManaCost:1 R
-Types:Enchantment Creature Hound
+Types:Enchantment Creature Dog
 PT:2/2
 K:Bestow:2 R
 K:CARDNAME attacks each combat if able.

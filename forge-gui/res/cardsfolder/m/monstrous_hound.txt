@@ -1,9 +1,9 @@
 Name:Monstrous Hound
 ManaCost:3 R
-Types:Creature Hound
+Types:Creature Dog
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | References$ X,Y | Description$ CARDNAME can't attack unless you control more lands than defending player. CARDNAME can't block unless you control more lands than attacking player.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ hasFewerLandsInPlayThanYou | Description$ CARDNAME can't attack unless you control more lands than defending player.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ Y | SVarCompare$ GEX | Description$ CARDNAME can't block unless you control more lands than attacking player.
 SVar:X:Count$Valid Land.YouCtrl
-SVar:Y:Count$Valid Land.YouDontCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_hound.jpg
+SVar:Y:Count$Valid Land.ActivePlayerCtrl
 Oracle:Monstrous Hound can't attack unless you control more lands than defending player.\nMonstrous Hound can't block unless you control more lands than attacking player.

@@ -21,6 +21,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class TriggerCounterRemoved extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCounterRemoved(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCounterRemoved(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -85,14 +86,14 @@ public class TriggerCounterRemoved extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Removed from: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblRemovedFrom")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 }

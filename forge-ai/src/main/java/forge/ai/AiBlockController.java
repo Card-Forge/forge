@@ -228,9 +228,9 @@ public class AiBlockController {
                 // 3.Blockers that can destroy the attacker and have an upside when dying
                 killingBlockers = getKillingBlockers(combat, attacker, blockers);
                 for (Card b : killingBlockers) {
-                    if ((b.hasKeyword(Keyword.UNDYING) && b.getCounters(CounterType.P1P1) == 0) || b.hasSVar("SacMe")
-                            || (b.hasKeyword(Keyword.VANISHING) && b.getCounters(CounterType.TIME) == 1)
-                            || (b.hasKeyword(Keyword.FADING) && b.getCounters(CounterType.FADE) == 0)
+                    if ((b.hasKeyword(Keyword.UNDYING) && b.getCounters(CounterEnumType.P1P1) == 0) || b.hasSVar("SacMe")
+                            || (b.hasKeyword(Keyword.VANISHING) && b.getCounters(CounterEnumType.TIME) == 1)
+                            || (b.hasKeyword(Keyword.FADING) && b.getCounters(CounterEnumType.FADE) == 0)
                             || b.hasSVar("EndOfTurnLeavePlay")) {
                         blocker = b;
                         break;
@@ -299,8 +299,8 @@ public class AiBlockController {
             final List<Card> blockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
 
             for (Card b : blockers) {
-                if ((b.hasKeyword(Keyword.VANISHING) && b.getCounters(CounterType.TIME) == 1)
-                        || (b.hasKeyword(Keyword.FADING) && b.getCounters(CounterType.FADE) == 0)
+                if ((b.hasKeyword(Keyword.VANISHING) && b.getCounters(CounterEnumType.TIME) == 1)
+                        || (b.hasKeyword(Keyword.FADING) && b.getCounters(CounterEnumType.FADE) == 0)
                         || b.hasSVar("EndOfTurnLeavePlay")) {
                     blocker = b;
                     if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
@@ -851,7 +851,7 @@ public class AiBlockController {
                                 damageToPW += ComputerUtilCombat.predictDamageTo((Card) def, pwatkr.getNetCombatDamage(), pwatkr, true);
                             }
                         }
-                        if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= def.getCounters(CounterType.LOYALTY)) {
+                        if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= def.getCounters(CounterEnumType.LOYALTY)) {
                             threatenedPWs.add((Card) def);
                         }
                     }
@@ -909,7 +909,7 @@ public class AiBlockController {
                                 damageToPW += ComputerUtilCombat.predictDamageTo(pw, pwAtk.getNetCombatDamage(), pwAtk, true);
                             }
                         }
-                        if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterType.LOYALTY)) {
+                        if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterEnumType.LOYALTY)) {
                             for (Card chump : pwDefenders) {
                                 if (chosenChumpBlockers.contains(chump)) {
                                     combat.removeFromCombat(chump);
@@ -1281,7 +1281,8 @@ public class AiBlockController {
             oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
         }
 
-        if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
+        if (attacker != null && attacker.getOwner() != null)
+            if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
             // Temporarily controlled object - don't trade with it
             // TODO: find a more reliable way to figure out that control will be reestablished next turn
             return false;

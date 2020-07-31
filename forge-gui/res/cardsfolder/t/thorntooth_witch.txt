@@ -3,6 +3,5 @@ ManaCost:5 B
 Types:Creature Treefolk Shaman
 PT:3/4
 T:Mode$ SpellCast | ValidCard$ Treefolk | ValidActivatingPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ -3 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thorntooth_witch.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ -3 | IsCurse$ True
 Oracle:Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.

@@ -50,7 +50,7 @@ import java.util.Map.Entry;
  */
 public class Combat {
     private final Player playerWhoAttacks;
-    private final AttackConstraints attackConstraints;
+    private AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
@@ -70,11 +70,7 @@ public class Combat {
 
     public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
-
-        // Create keys for all possible attack targets
-        attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
-
-        attackConstraints = new AttackConstraints(this);
+        initConstraints();
     }
 
     public Combat(Combat combat, GameObjectMap map) {
@@ -116,6 +112,13 @@ public class Combat {
             dealtDamageTo.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
         }
 
+        attackConstraints = new AttackConstraints(this);
+    }
+
+    public void initConstraints() {
+        attackableEntries.clear();
+        // Create keys for all possible attack targets
+        attackableEntries.addAll(CombatUtil.getAllPossibleDefenders(playerWhoAttacks));
         attackConstraints = new AttackConstraints(this);
     }
 
@@ -833,11 +836,14 @@ public class Combat {
 
         // Run the trigger to deal combat damage once
         // LifeLink for Combat Damage at this place
-        dealtDamageTo.triggerDamageDoneOnce(true, null);
+        dealtDamageTo.triggerDamageDoneOnce(true, game, null);
         dealtDamageTo.clear();
 
         counterTable.triggerCountersPutAll(game);
         counterTable.clear();
+
+        // copy last state again for dying replacement effects
+        game.copyLastState();
     }
 
     public final boolean isUnblocked(final Card att) {
@@ -876,6 +882,10 @@ public class Combat {
             return true; // is blocking something at the moment
         }
 
+        if (!blocker.isLKI()) {
+            return false;
+        }
+
         CombatLki lki = lkiCache.get(blocker);
         return null != lki && !lki.isAttacker; // was blocking something anyway
     }
@@ -886,7 +896,11 @@ public class Combat {
         if (blockers != null && blockers.contains(blocker)) {
             return true; // is blocking the attacker's band at the moment
         }
-        
+
+        if (!blocker.isLKI()) {
+            return false;
+        }
+
         CombatLki lki = lkiCache.get(blocker);
         return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }

@@ -2,10 +2,11 @@ Name:Lich Lord of Unx
 ManaCost:1 U B
 Types:Creature Zombie Wizard
 PT:2/2
-A:AB$ Token | Cost$ U B T | TokenAmount$ 1 | TokenScript$ ub_1_1_zombie_wizard | TokenOwner$ You | LegacyImage$ ub 1 1 zombie wizard arb | SpellDescription$ Create a 1/1 blue and black Zombie Wizard creature token.
-A:AB$ Mill | Cost$ U U B B | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ X | SubAbility$ DBLoseLife | References$ X | SpellDescription$ Target player loses X life and puts the top X cards of their library into their graveyard, where X is the number of Zombies you control.
-SVar:DBLoseLife:DB$LoseLife | LifeAmount$ X | Defined$ Targeted | References$ X
+A:AB$ Token | Cost$ U B T | TokenAmount$ 1 | TokenScript$ ub_1_1_zombie_wizard | TokenOwner$ You | SpellDescription$ Create a 1/1 blue and black Zombie Wizard creature token.
+A:AB$ Mill | Cost$ U U B B | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ X | SubAbility$ DBLoseLife | References$ X | SpellDescription$ Target player loses X life and mills X cards, where X is the number of Zombies you control.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Targeted | References$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lich_lord_of_unx.jpg
-Oracle:{U}{B}, {T}: Create a 1/1 blue and black Zombie Wizard creature token.\n{U}{U}{B}{B}: Target player loses X life and puts the top X cards of their library into their graveyard, where X is the number of Zombies you control.
+DeckHints:Type$Zombie
+DeckHas:Ability$Token
+Oracle:{U}{B}, {T}: Create a 1/1 blue and black Zombie Wizard creature token.\n{U}{U}{B}{B}: Target player loses X life and mills X cards, where X is the number of Zombies you control.

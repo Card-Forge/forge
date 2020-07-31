@@ -1,0 +1,8 @@
+Name:Omen of the Dead
+ManaCost:B
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
+A:AB$ Scry | Cost$ 2 B Sac<1/CARDNAME> | ScryNum$ 2 | AILogic$ BestOpportunity | SpellDescription$ Scry 2.
+Oracle:Flash\nWhen Omen of the Dead enters the battlefield, return target creature card from your graveyard to your hand.\n{2}{B}, Sacrifice Omen of the Dead: Scry 2.

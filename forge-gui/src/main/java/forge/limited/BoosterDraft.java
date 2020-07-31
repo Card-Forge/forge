@@ -40,6 +40,7 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -100,7 +101,7 @@ public class BoosterDraft implements IBoosterDraft {
                     }
                 }
 
-                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
+                final CardBlock block = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseBlock"), blocks);
                 if (block == null) {
                     return false;
                 }
@@ -118,7 +119,7 @@ public class BoosterDraft implements IBoosterDraft {
                 }
 
                 if (sets.isEmpty()) {
-                    SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblBlockNotContainSetCombinations", block.toString()));
                     return false;
                 }
 
@@ -127,7 +128,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (sets.size() > 1) {
                     Object p;
                     if (nPacks == 3 && sets.size() < 4) {
-                        p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                        p = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseSetCombination"), getSetCombos(sets));
                     } else {
                         p = choosePackByPack(sets, nPacks);
                     }
@@ -156,7 +157,7 @@ public class BoosterDraft implements IBoosterDraft {
                 final List<CustomLimited> myDrafts = loadCustomDrafts();
 
                 if (myDrafts.isEmpty()) {
-                    SOptionPane.showMessageDialog("No custom draft files found.");
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomDraftFiles"));
                 } else {
                     Collections.sort(myDrafts, new Comparator<CustomLimited>() {
                         @Override
@@ -165,7 +166,7 @@ public class BoosterDraft implements IBoosterDraft {
                         }
                     });
 
-                    final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
+                    final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {
                         return false;
                     }
@@ -416,7 +417,7 @@ public class BoosterDraft implements IBoosterDraft {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i <= packs; i++) {
-            String choice = SGuiChoose.oneOrNone(TextUtil.concatNoSpace("Choose set for Pack ", String.valueOf(i), " of ", String.valueOf(packs)), setz);
+            String choice = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseSetForNPack", String.valueOf(i), String.valueOf(packs)), setz);
             if (choice == null) {
                 return null;
             }

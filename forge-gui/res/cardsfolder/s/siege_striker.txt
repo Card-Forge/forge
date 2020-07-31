@@ -1,0 +1,13 @@
+Name:Siege Striker
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/1
+K:Double Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap any number of untapped creatures you control. CARDNAME gets +1/+1 until end of turn for each creature tapped this way.
+SVar:TrigChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap
+SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ Y | NumDef$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$Valid Creature.untapped+YouCtrl
+SVar:Y:Count$RememberedSize
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)\nWhenever Siege Striker attacks, you may tap any number of untapped creatures you control. Siege Striker gets +1/+1 until end of turn for each creature tapped this way.

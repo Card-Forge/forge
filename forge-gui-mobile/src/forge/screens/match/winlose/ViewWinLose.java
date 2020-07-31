@@ -36,7 +36,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float GAP_Y_FACTOR = 0.02f;
 
     private final FButton btnContinue, btnRestart, btnQuit;
-    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog;
+    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog, btnMinimize;
     private final FTextArea txtLog;
     private final OutcomesPanel pnlOutcomes;
     private final GameView game;
@@ -114,6 +114,12 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             }
         }).build());
 
+        btnMinimize = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblMinimize")).font(FSkinFont.get(12)).command(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                hide();
+            }
+        }).build());
         lblTitle.setText(composeTitle(game0));
 
         showGameOutcomeSummary();
@@ -200,6 +206,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         float y2 = height - dy - h;
         btnCopyLog.setBounds(width / 4, y2, width / 2, h);
         txtLog.setBounds(x, y, w, y2 - y - dy);
+        btnMinimize.setBounds(0, 0, width, h);
     }
 
     private static class OutcomesPanel extends FContainer {

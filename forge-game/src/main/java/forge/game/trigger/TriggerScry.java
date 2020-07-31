@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerScry extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerScry(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerScry(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -64,14 +65,14 @@ public class TriggerScry extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Scryer: ").append(sa.getTriggeringObject(AbilityKey.Player));
+        sb.append(Localizer.getInstance().getMessage("lblScryer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

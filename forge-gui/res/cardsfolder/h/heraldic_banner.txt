@@ -2,7 +2,7 @@ Name:Heraldic Banner
 ManaCost:3
 Types:Artifact
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentHumanCreatures
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentComputerControls
 S:Mode$ Continuous | Affected$ Creature.ChosenColor+YouCtrl | AddPower$ 1 | Description$ Creatures you control of the chosen color get +1/+0.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
 SVar:PlayMain1:TRUE

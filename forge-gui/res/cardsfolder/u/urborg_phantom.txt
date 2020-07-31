@@ -3,6 +3,5 @@ ManaCost:2 B
 Types:Creature Spirit Minion
 PT:3/1
 K:CARDNAME can't block.
-A:AB$ Pump | Cost$ U | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_phantom.jpg
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
 Oracle:Urborg Phantom can't block.\n{U}: Prevent all combat damage that would be dealt to and dealt by Urborg Phantom this turn.

@@ -7,11 +7,12 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
+import forge.util.Localizer;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
     protected void buildMenu() {
-        addItem(new FMenuItem("Generate Mana", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblGenerateMana"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
@@ -22,7 +23,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Tutor for Card", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblTutor"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -33,7 +34,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Cast Spell/Play Land", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCastSpellOrPlayLand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -44,7 +45,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Hand", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToHand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -55,7 +56,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Battlefield", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToBattlefield"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -66,7 +67,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Library", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToLibrary"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -77,7 +78,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Graveyard", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToGraveyard"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -88,7 +89,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Exile", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToExile"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -99,7 +100,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Repeat Last Add Card", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRepeatAddCard"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -110,7 +111,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Exile Card from Hand", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblExileFromHand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -121,7 +122,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Exile Card from Play", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblExileFromPlay"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -132,7 +133,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Remove Card from Game", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRemoveFromGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -143,7 +144,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Set Player Life", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSetLife"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -154,7 +155,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Win Game", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblWinGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -165,7 +166,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Setup Game State", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSetupGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -176,7 +177,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Dump Game State", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblDumpGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -189,7 +190,7 @@ public class VDevMenu extends FDropDownMenu {
         }));
 
         final boolean unlimitedLands = MatchController.instance.getGameController().canPlayUnlimitedLands();
-        addItem(new FCheckBoxMenuItem("Play Unlimited Lands", unlimitedLands,
+        addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblUnlimitedLands"), unlimitedLands,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -197,14 +198,14 @@ public class VDevMenu extends FDropDownMenu {
             }
         }));
         final boolean viewAll = MatchController.instance.getGameController().mayLookAtAllCards();
-        addItem(new FCheckBoxMenuItem("View All Cards", viewAll,
+        addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblViewAll"), viewAll,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 MatchController.instance.getGameController().cheat().setViewAllCards(!viewAll);
             }
         }));
-        addItem(new FMenuItem("Add Counters to Card", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAddCounterPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -215,7 +216,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Sub Counters from Card", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSubCounterPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -226,7 +227,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Tap Permanents", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblTapPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -237,7 +238,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Untap Permanents", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblUntapPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -248,7 +249,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Rigged Planar Roll", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRiggedRoll"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -259,7 +260,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Planeswalk to", new FEventHandler() {
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblWalkTo"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {

@@ -2,14 +2,17 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class RagsToRiches extends Achievement {
     public RagsToRiches() {
-        super("RagsToRiches", "Rags to Riches", "Win a game after mulliganing to", 7,
-            "4 cards", 4,
-            "3 cards", 3,
-            "2 cards", 2,
-            "1 card", 1);
+        super("RagsToRiches", Localizer.getInstance().getMessage("lblRagsToRiches"),
+            Localizer.getInstance().getMessage("lblWinGameAfterMulliganingTo"), 7,
+            Localizer.getInstance().getMessage("lblNCards", String.valueOf(4)), 4,
+            Localizer.getInstance().getMessage("lblNCards", String.valueOf(3)), 3,
+            Localizer.getInstance().getMessage("lblNCards", String.valueOf(2)), 2,
+            Localizer.getInstance().getMessage("lblNCards", String.valueOf(1)), 1
+        );
     }
 
     @Override
@@ -22,6 +25,6 @@ public class RagsToRiches extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Card";
+        return Localizer.getInstance().getMessage("lblCard");
     }
 }

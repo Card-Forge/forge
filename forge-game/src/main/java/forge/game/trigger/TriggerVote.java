@@ -26,6 +26,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
 /**
@@ -63,11 +64,11 @@ public class TriggerVote extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
         FCollection<Player> voters = getVoters(
             this.getHostCard().getController(),
-            (ListMultimap<Object, Player>) getFromRunParams(AbilityKey.AllVotes),
+            (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
             true,
             true
         );
@@ -77,7 +78,7 @@ public class TriggerVote extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Voters: ").append(sa.getTriggeringObject(AbilityKey.OtherVoters));
+        sb.append(Localizer.getInstance().getMessage("lblVoters")).append(": ").append(sa.getTriggeringObject(AbilityKey.OtherVoters));
         return sb.toString();
     }
 

@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -14,6 +16,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -91,26 +94,16 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());
             }
         }
-        
+
         cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
             if (sa.hasParam("OptionQuestion")) {
-            	message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
+                message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
-            	final StringBuilder sb = new StringBuilder();
-
-            	sb.append("Move ");
-            	sb.append(targets);
-            	sb.append(" from ");
-            	sb.append(Lang.joinHomogenous(origin));
-            	sb.append(" to ");
-            	sb.append(destination);
-            	sb.append("?");
-
-            	message = sb.toString();
+                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName());
             }
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
@@ -159,7 +152,19 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
 
+            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+
             if (destination == ZoneType.Battlefield) {
+
+                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                    // need LKI before Animate does apply
+                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+
+                    source.addRemembered(c);
+                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    source.removeRemembered(c);
+                }
+
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = c.getFirstAttachSpell();
@@ -174,9 +179,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Card movedCard = null;
             if (sa.hasParam("GainControl")) {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa);
+                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
-                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa);
+                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile && !c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
@@ -214,7 +219,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (destination == ZoneType.Battlefield) {
                 movedCard.setTimestamp(ts);
             }
-            
+
             if (!movedCard.getZone().equals(originZone)) {
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }

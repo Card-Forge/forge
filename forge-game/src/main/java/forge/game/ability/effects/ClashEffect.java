@@ -12,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -74,7 +75,7 @@ public class ClashEffect extends SpellAbilityEffect {
          */
         final Card source = sa.getHostCard();
         final Player player = source.getController();
-        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, "Choose a opponent") ;
+        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseOpponent"), null);
         final ZoneType lib = ZoneType.Library;
 
         if (sa.hasParam("RememberClasher")) {
@@ -110,11 +111,11 @@ public class ClashEffect extends SpellAbilityEffect {
             
             // TODO: Split cards will return two CMC values, so both players may become winners of clash
             
-            reveal.append(player).append(" reveals: ").append(pCard.getName()).append(".  CMC = ").append(pCMC);
+            reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
             reveal.append("\r\n");
-            reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);
+            reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
             reveal.append("\r\n\r\n");
-            reveal.append(player).append(pCMC > oCMC ? " wins clash." : " loses clash.");
+            reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
             
             player.getGame().getAction().nofityOfValue(sa, source, reveal.toString(), null);
             clashMoveToTopOrBottom(player, pCard, sa);

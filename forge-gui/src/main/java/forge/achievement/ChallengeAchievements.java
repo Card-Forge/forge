@@ -5,12 +5,13 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.properties.ForgeConstants;
+import forge.util.Localizer;
 
 public class ChallengeAchievements extends AchievementCollection {
     public static final ChallengeAchievements instance = new ChallengeAchievements();
 
     private ChallengeAchievements() {
-        super("Challenges", ForgeConstants.ACHIEVEMENTS_DIR + "challenges.xml", false);
+        super("lblChallenges", ForgeConstants.ACHIEVEMENTS_DIR + "challenges.xml", false);
     }
 
     @Override
@@ -24,8 +25,14 @@ public class ChallengeAchievements extends AchievementCollection {
         add(new NoSpells());
         add(new NoLands());
         add(new Domain());
-        add("Chromatic", "Chromatic", "Win a game after casting a 5 color spell", "With great color requirements comes great power.");
-        add("Epic", "Epic", "Win a game after resolving a spell with the Epic keyword", "When it's the last spell you ever cast, you better make it count!");
+        add("Chromatic", Localizer.getInstance().getMessage("lblChromatic"), 
+            Localizer.getInstance().getMessage("lblWinGameAfterCasting5CSpell"),
+            Localizer.getInstance().getMessage("lblGreatColorComesPower")
+        );
+        add("Epic", Localizer.getInstance().getMessage("lblEpic"),
+            Localizer.getInstance().getMessage("lblWinGameAfterResolvingWithEpicSpell"),
+            Localizer.getInstance().getMessage("lblWhenItsYouLastSpellBetterMakeCount")
+        );
     }
 
     private void add(String key0, String displayName0, String description0, String flavorText0) {
@@ -39,7 +46,7 @@ public class ChallengeAchievements extends AchievementCollection {
 
         @Override
         protected final String getNoun() {
-            return "Win";
+            return Localizer.getInstance().getMessage("lblWin");
         }
 
         @Override
@@ -54,7 +61,7 @@ public class ChallengeAchievements extends AchievementCollection {
 
     public static abstract class DeckChallengeAchievement extends ChallengeAchievement {
         protected DeckChallengeAchievement(String key0, String displayName0, String condition0, String flavorText0) {
-            super(key0, displayName0, "Win a game using a deck " + condition0, flavorText0);
+            super(key0, displayName0, Localizer.getInstance().getMessage("lblWinGameUsingTargetDeck", condition0), flavorText0);
         }
 
         @Override

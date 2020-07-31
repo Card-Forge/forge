@@ -1,10 +1,9 @@
 Name:Mindcrank
 ManaCost:2
 Types:Artifact
-T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard. (Damage causes loss of life.)
+T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent loses life, that player mills that many cards. (Damage causes loss of life.)
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mindcrank.jpg
-Oracle:Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard. (Damage causes loss of life.)
+Oracle:Whenever an opponent loses life, that player mills that many cards. (Damage causes loss of life.)

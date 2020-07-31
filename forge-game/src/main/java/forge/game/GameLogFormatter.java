@@ -33,11 +33,11 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private final GameLog log;
-
     public GameLogFormatter(GameLog gameLog) {
         log = gameLog;
     }
@@ -52,16 +52,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventScry ev) {
+        final Localizer localizer = Localizer.getInstance();
         String scryOutcome = "";
-        String toTop = Lang.nounWithAmount(ev.toTop, "card") + " to the top of the library";
-        String toBottom = Lang.nounWithAmount(ev.toBottom, "card") + " to the bottom of the library";
 
         if (ev.toTop > 0 && ev.toBottom > 0) {
-            scryOutcome = ev.player.toString() + " scried " + toTop + " and " + toBottom;
+            scryOutcome = localizer.getMessage("lblLogScryTopBottomLibrary").replace("%s", ev.player.toString()).replace("%top", String.valueOf(ev.toTop)).replace("%bottom", String.valueOf(ev.toBottom));
         } else if (ev.toBottom == 0) {
-            scryOutcome = ev.player.toString() + " scried " + toTop;
+            scryOutcome = localizer.getMessage("lblLogScryTopLibrary").replace("%s", ev.player.toString()).replace("%top", String.valueOf(ev.toTop));
         } else {
-            scryOutcome = ev.player.toString() + " scried " + toBottom;
+            scryOutcome = localizer.getMessage("lblLogScryBottomLibrary").replace("%s", ev.player.toString()).replace("%bottom", String.valueOf(ev.toBottom));
         }
 
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
@@ -69,16 +68,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSurveil ev) {
+        final Localizer localizer = Localizer.getInstance();
         String surveilOutcome = "";
-        String toLibrary = Lang.nounWithAmount(ev.toLibrary, "card") + " to the top of the library";
-        String toGraveyard = Lang.nounWithAmount(ev.toGraveyard, "card") + " to the graveyard";
 
         if (ev.toLibrary > 0 && ev.toGraveyard > 0) {
-            surveilOutcome = ev.player.toString() + " surveiled " + toLibrary + " and " + toGraveyard;
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibraryGraveyard", ev.player.toString(), String.valueOf(ev.toLibrary), String.valueOf(ev.toGraveyard));
         } else if (ev.toGraveyard == 0) {
-            surveilOutcome = ev.player.toString() + " surveiled " + toLibrary;
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibrary", ev.player.toString(), String.valueOf(ev.toLibrary));
         } else {
-            surveilOutcome = ev.player.toString() + " surveiled " + toGraveyard;
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToGraveyard", ev.player.toString(), String.valueOf(ev.toGraveyard));
         }
 
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, surveilOutcome);
@@ -86,21 +84,25 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
-        String messageForLog = ev.hasFizzled ? ev.spell.getHostCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
+        String messageForLog = ev.hasFizzled ? Localizer.getInstance().getMessage("lblLogCardAbilityFizzles", ev.spell.getHostCard().toString()) : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
     }
 
     @Override
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
-        String who = event.sa.getActivatingPlayer().getName();
-        String action = event.sa.isSpell() ? " cast " : event.sa.isTrigger() ? " triggered " : " activated ";
-        String what = event.sa.getStackDescription().startsWith("Morph ") ? "Morph" : event.sa.getHostCard().toString();
+        final Localizer localizer = Localizer.getInstance();
+        String player = event.sa.getActivatingPlayer().getName();
+        String action = event.sa.isSpell() ? localizer.getMessage("lblCast")
+                : event.sa.isTrigger() ? localizer.getMessage("lblTriggered")
+                        : localizer.getMessage("lblActivated");
+        String object = event.si.getStackDescription().startsWith("Morph ")
+                ? localizer.getMessage("lblMorph")
+                : event.sa.getHostCard().toString();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(who).append(action).append(what);
+        String messageForLog = "";
 
         if (event.sa.getTargetRestrictions() != null) {
-            sb.append(" targeting ");
+            StringBuilder sb = new StringBuilder();
 
             List<TargetChoices> targets = event.sa.getAllTargetChoices();
             // Include the TargetChoices from the stack instance, since the real target choices
@@ -111,10 +113,12 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                     sb.append(ch.getTargetedString());
                 }
             }
+            messageForLog = localizer.getMessage("lblLogPlayerActionObjectWitchTarget", player, action, object, sb.toString());
+        } else {
+            messageForLog = localizer.getMessage("lblLogPlayerActionObject", player, action, object);
         }
-        sb.append(".");
 
-        return new GameLogEntry(GameLogEntryType.STACK_ADD, sb.toString());
+        return new GameLogEntry(GameLogEntryType.STACK_ADD, messageForLog);
     }
 
     @Override
@@ -123,7 +127,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             return null;
         }
 
-        String modeChoiceOutcome = ev.player.toString() + " has chosen " + ev.mode + " for " + ev.cardName + ".";
+        String modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogPlayerChosenModeForCard", ev.player.toString(), ev.mode, ev.cardName);
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
     }
 
@@ -157,9 +161,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         final String message;
         if (newLobbyPlayer == null) {
-            message = p.getName() + " has restored control over themself";
+            message = Localizer.getInstance().getMessage("lblLogPlayerHasRestoredControlThemself", p.getName());
         } else {
-            message = p.getName() + "is controlled by" + newLobbyPlayer.getName();
+            message = Localizer.getInstance().getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);
     }
@@ -172,17 +176,18 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardDamaged event) {
+        final Localizer localizer = Localizer.getInstance();
         String additionalLog = "";
         if (event.type == DamageType.Deathtouch) {
-            additionalLog = " (Deathtouch)";
+            additionalLog = localizer.getMessage("lblDeathtouch");
         }
         if (event.type == DamageType.M1M1Counters) {
-            additionalLog = " (As -1/-1 Counters)";
+            additionalLog = localizer.getMessage("lblAsM1M1Counters");
         }
         if (event.type == DamageType.LoyaltyLoss) {
-            additionalLog = " (Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
+            additionalLog = localizer.getMessage("lblRemovingNLoyaltyCounter", String.valueOf(event.amount));
         }
-        String message = event.source.toString() + " deals " + event.amount + " damage" + additionalLog + " to " + event.card.toString() + ".";
+        String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source.toString(), String.valueOf(event.amount), additionalLog, event.card.toString());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -191,33 +196,36 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
      */
     @Override
     public GameLogEntry visit(GameEventLandPlayed ev) {
-        String message = ev.player.toString() + " played " + ev.land.toString();
+        String message = Localizer.getInstance().getMessage("lblLogPlayerPlayedLand", ev.player.toString(), ev.land.toString());
         return new GameLogEntry(GameLogEntryType.LAND, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = "Turn " + event.turnNumber + " (" + event.turnOwner.toString() + ")";
+        String message = Localizer.getInstance().getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber), event.turnOwner.toString());;
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
-        String extra = ev.infect ? " (as poison counters)" : "";
-        String damageType = ev.combat ? "combat" : "non-combat";
-        String message = ev.source.toString() + " deals " + ev.amount + " " + damageType + " damage to " + ev.target.toString() + extra + ".";
+        String extra = ev.infect ? Localizer.getInstance().getMessage("lblLogAsPoisonCounters") : "";
+        String damageType = ev.combat ? Localizer.getInstance().getMessage("lblCombat") : Localizer.getInstance().getMessage("lblNonCombat");
+        String message = Localizer.getInstance().getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source.toString(),
+                            String.valueOf(ev.amount), damageType, ev.target.toString(), extra);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerPoisoned ev) {
-        String message = ev.receiver.toString() + " receives " + Lang.nounWithAmount(ev.amount, "posion counter") + " from " + ev.source.toString();
+        String message = Localizer.getInstance().getMessage("lblLogPlayerReceivesNPosionCounterFrom",
+                            ev.receiver.toString(), String.valueOf(ev.amount), ev.source.toString());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
     @Override
     public GameLogEntry visit(final GameEventAttackersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
+        final Localizer localizer = Localizer.getInstance();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -229,11 +237,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 continue;
             }
             if (sb.length() > 0) sb.append("\n");
-            sb.append(ev.player).append(" assigned ").append(Lang.joinHomogenous(attackers));
-            sb.append(" to attack ").append(k).append(".");
+            sb.append(localizer.getMessage("lblLogPlayerAssignedAttackerToAttackTarget", ev.player, Lang.joinHomogenous(attackers), k));
         }
         if (sb.length() == 0) {
-            sb.append(ev.player).append(" didn't attack this turn.");
+            sb.append(localizer.getMessage("lblPlayerDidntAttackThisTurn").replace("%s", ev.player.toString()));
         }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -265,13 +272,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
                 blockers = att.getValue();
                 if (blockers.isEmpty()) {
-                    sb.append(controllerName).append(" didn't block ");
+                    sb.append(Localizer.getInstance().getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
                 }
                 else {
-                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
+                    sb.append(Localizer.getInstance().getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));
                 }
-
-                sb.append(att.getKey()).append(".");
                 firstAttacker = false;
             }
         }
@@ -281,7 +286,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = ev.player.toString() + " has mulliganed down to " + ev.player.getZone(ZoneType.Hand).size() + " cards.";
+        String message = Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

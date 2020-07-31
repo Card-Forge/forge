@@ -2,7 +2,6 @@ Name:Morgue Thrull
 ManaCost:2 B
 Types:Creature Thrull
 PT:2/2
-A:AB$ Mill | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3 | SpellDescription$ Put the top three cards of your library into your graveyard.
+A:AB$ Mill | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3 | SpellDescription$ Mill three cards.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_thrull.jpg
-Oracle:Sacrifice Morgue Thrull: Put the top three cards of your library into your graveyard.
+Oracle:Sacrifice Morgue Thrull: Mill three cards.

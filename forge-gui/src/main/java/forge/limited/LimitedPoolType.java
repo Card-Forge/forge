@@ -3,6 +3,7 @@ package forge.limited;
 public enum LimitedPoolType { 
     Full("Full Cardpool"),
     Block("Block / Set"),
+    Prerelease("Prerelease"),
     FantasyBlock("Fantasy Block"),
     Custom("Custom Cube"),
     Chaos("Chaos Draft");

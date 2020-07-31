@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerDiscarded extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDiscarded(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDiscarded(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -88,15 +89,15 @@ public class TriggerDiscarded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Cause);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Cause);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Discarded: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
-        sb.append("Cause: ").append(sa.getTriggeringObject(AbilityKey.Cause));
+        sb.append(Localizer.getInstance().getMessage("lblDiscarded")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblCause")).append(": ").append(sa.getTriggeringObject(AbilityKey.Cause));
         return sb.toString();
     }
 }

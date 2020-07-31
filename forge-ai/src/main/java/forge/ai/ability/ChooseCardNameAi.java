@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -23,7 +24,6 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        Card source = sa.getHostCard();
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {
@@ -60,7 +60,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
 
         return ComputerUtilCard.getBestAI(options);
     }
@@ -86,7 +86,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
             if (rules.getSplitType() == CardSplitType.Split) {
                 Card copy = CardUtil.getLKICopy(card);
-                // for calcing i need only one split side    
+                // for calcing i need only one split side
                 if (isOther) {
                     copy.getCurrentState().copyFrom(card.getState(CardStateName.RightSplit), true);
                 } else {

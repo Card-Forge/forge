@@ -23,6 +23,7 @@ import forge.quest.QuestUtil;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -99,17 +100,17 @@ public class ConquestUtil {
     public static String promptForName() {
         String name;
         while (true) {
-            name = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
+            name = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblHistoriiansWillRecallYourConquestAs"), Localizer.getInstance().getMessage("lblConquestName"));
             if (name == null) { return null; }
     
             name = QuestUtil.cleanString(name);
     
             if (name.isEmpty()) {
-                SOptionPane.showMessageDialog("Please specify a conquest name.");
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyConquestName"));
                 continue;
             }
             if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + name + ".dat")) {
-                SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblConquestNameExistsPleasePickAnotherName"));
                 continue;
             }
             break;

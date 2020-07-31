@@ -245,6 +245,14 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public int getSleevesCount() {
+        if (FSkin.isLoaded()) {
+            return FSkin.getSleeves().size();
+        }
+        return 0;
+    }
+
+    @Override
     public String showFileDialog(final String title, final String defaultDir) {
         return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
     }

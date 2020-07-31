@@ -30,6 +30,7 @@ import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 /**
@@ -55,11 +56,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
+        Localizer localizer = Localizer.getInstance();
         if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
-            getController().getGui().updateButtons(getOwner(), "OK", "Undo", true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblUndo"), true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
-            getController().getGui().updateButtons(getOwner(), "OK", "End Turn", true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true, true, true);
         }
 
         getController().getGui().alertUser();
@@ -106,11 +108,12 @@ public class InputPassPriority extends InputSyncronizedBase {
                     ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
                         @Override
                         public void run() {
-                            String message = "You have mana floating in your mana pool that could be lost if you pass priority now.";
+                            Localizer localizer = Localizer.getInstance();
+                            String message = localizer.getMessage("lblYouHaveManaFloatingInYourManaPoolCouldBeLostIfPassPriority");
                             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                                message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
+                                message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                             }
-                            if (getController().getGui().showConfirmDialog(message, "Mana Floating", "Ok", "Cancel")) {
+                            if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOk"), localizer.getMessage("lblCancel"))) {
                                 runnable.run();
                             }
                         }
@@ -161,12 +164,12 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
         final SpellAbility sa = abilities.get(0);
         if (sa.isSpell()) {
-            return "cast spell";
+            return Localizer.getInstance().getMessage("lblCastSpell");
         }
         if (sa instanceof LandAbility) {
-            return "play land";
+            return Localizer.getInstance().getMessage("lblPlayLand");
         }
-        return "activate ability";
+        return Localizer.getInstance().getMessage("lblActivateAbility");
     }
 
     @Override

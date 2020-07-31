@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
@@ -27,18 +26,18 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.FileSection;
 import forge.util.Visitor;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
@@ -49,7 +48,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
@@ -172,35 +170,11 @@ public class TriggerHandler {
     }
 
     private static Map<String, String> parseParams(final String trigParse) {
-        final Map<String, String> mapParams = Maps.newHashMap();
-
         if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");
         }
 
-        final String[] params = trigParse.split("\\|");
-
-        for (int i = 0; i < params.length; i++) {
-            params[i] = params[i].trim();
-        }
-
-        for (final String param : params) {
-            final String[] splitParam = param.split("\\$");
-            for (int i = 0; i < splitParam.length; i++) {
-                splitParam[i] = splitParam[i].trim();
-            }
-
-            if (splitParam.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("TriggerFactory Parsing Error in registerTrigger() : Split length of ");
-                sb.append(param).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
-            }
-
-            mapParams.put(splitParam[0], splitParam[1]);
-        }
-
-        return mapParams;
+        return FileSection.parseToMap(trigParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     private void collectTriggerForWaiting() {
@@ -298,7 +272,7 @@ public class TriggerHandler {
     }
 
     private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
-        for (final Trigger t: activeTriggers) {
+        for (final Trigger t: Lists.newArrayList(activeTriggers)) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
                 runSingleTrigger(t, runParams);
             }
@@ -523,9 +497,6 @@ public class TriggerHandler {
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
-        final Map<String, String> triggerParams = regtrig.getMapParams();
-
-        regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
@@ -537,7 +508,7 @@ public class TriggerHandler {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-        final Card trigCard = (Card) regtrig.getFromRunParams(AbilityKey.Card);
+        final Card trigCard = (Card) runParams.get(AbilityKey.Card);
 
         if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
@@ -554,58 +525,52 @@ public class TriggerHandler {
 
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
-            if (!triggerParams.containsKey("Execute")) {
-                sa = new Ability(host, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                    }
-                };
+            if (!regtrig.hasParam("Execute")) {
+                sa = new SpellAbility.EmptySa(host);
             }
             else {
-                if (!host.getCurrentState().hasSVar(triggerParams.get("Execute"))) {
-                    System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + triggerParams.get("Execute") + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
+                String name = regtrig.getParam("Execute");
+                if (!host.getCurrentState().hasSVar(name)) {
+                    System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + name + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
                     return;
                 }
 
-                sa = AbilityFactory.getAbility(host, triggerParams.get("Execute"));
+                sa = AbilityFactory.getAbility(host, name);
+                // need to set as Overriding Abiltiy so it can be copied better
+                regtrig.setOverridingAbility(sa);
+            }
+            sa.setActivatingPlayer(host.getController());
+
+            if (regtrig.isIntrinsic()) {
+                sa.setIntrinsic(true);
+                sa.changeText();
             }
         } else {
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy();
+            sa = sa.copy(host, host.getController(), false);
         }
 
-        sa.setHostCard(host);
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
         sa.setLastStateGraveyard(game.getLastStateGraveyard());
 
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
-        regtrig.setTriggeringObjects(sa);
+        regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
-        if (regtrig.getStoredTriggeredObjects() != null) {
-            sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
-        }
 
-        if (sa.getActivatingPlayer() == null) { // overriding delayed trigger should have set activator
-            sa.setActivatingPlayer(host.getController());
-        } else if (sa.getDeltrigActivatingPlayer() != null) {
+        if (sa.getDeltrigActivatingPlayer() != null) {
             // make sure that the original delayed trigger activator is restored
             // (may have been overwritten by the AI simulation routines, e.g. Rainbow Vale)
             sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
         }
 
-        if (triggerParams.containsKey("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
+        if (regtrig.hasParam("TriggerController")) {
+            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 
-        if (triggerParams.containsKey("RememberController")) {
+        if (regtrig.hasParam("RememberController")) {
             host.addRemembered(sa.getActivatingPlayer());
-        }
-
-        if (regtrig.isIntrinsic() && regtrig.getOverridingAbility() == null) {
-            sa.setIntrinsic(true);
-            sa.changeText();
         }
 
         sa.setStackDescription(sa.toString());
@@ -617,33 +582,20 @@ public class TriggerHandler {
         }
 
         Player decider = null;
-        boolean mand = false;
-        if (triggerParams.containsKey("OptionalDecider")) {
+        boolean isMandatory = false;
+        if (regtrig.hasParam("OptionalDecider")) {
             sa.setOptionalTrigger(true);
-            decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
+            decider = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("OptionalDecider"), sa).get(0);
         }
         else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
-            mand = true;
+            isMandatory = true;
         }
         else { // triggers with a cost can't be mandatory
             sa.setOptionalTrigger(true);
             decider = sa.getActivatingPlayer();
         }
 
-        SpellAbility ability = sa;
-        while (ability != null) {
-            final TargetRestrictions tgt = ability.getTargetRestrictions();
-
-            if (tgt != null) {
-                tgt.setMandatory(true);
-            }
-            ability = ability.getSubAbility();
-        }
-        final boolean isMandatory = mand;
-
         final WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
-        wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(isMandatory);
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
@@ -654,11 +606,10 @@ public class TriggerHandler {
         else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
-        regtrig.setTriggeredSA(wrapperAbility);
 
         regtrig.triggerRun();
 
-        if (triggerParams.containsKey("OneOff")) {
+        if (regtrig.hasParam("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {
                 Player p = regtrig.getHostCard().getController();
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
@@ -668,10 +619,29 @@ public class TriggerHandler {
 
     private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams, final Player p) {
         Card host = t.getHostCard();
+        int n = 0;
+
+        // Sanctum of All
+        if (host.isShrine() && host.isInZone(ZoneType.Battlefield) && p.equals(host.getController())) {
+            int shrineCount = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Shrine"));
+            if (shrineCount >= 6) {
+                for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                    for (final KeywordInterface ki : ck.getKeywords()) {
+                        final String kw = ki.getOriginal();
+                        if (kw.startsWith("Shrineharmonicon")) {
+                            final String valid = kw.split(":")[1];
+                            if (host.isValid(valid.split(","), p, ck, null)) {
+                                n++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         // not a changesZone trigger or changesZoneAll
         if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
-            return 0;
+            return n;
         }
 
         // leave battlefield trigger, might be dying
@@ -686,7 +656,6 @@ public class TriggerHandler {
             return 0;
         }
 
-        int n = 0;
         if (t.getMode() == TriggerType.ChangesZone) {
             // iterate over all cards
             final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);

@@ -7,13 +7,14 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             boolean revealedLand = false;
             CardCollection top = pl.getTopXCardsFromLibrary(1);
             if (!top.isEmpty()) {
-                game.getAction().reveal(top, pl, false, "Revealed for Explore - ");
+                game.getAction().reveal(top, pl, false, Localizer.getInstance().getMessage("lblRevealedForExplore") + " - ");
                 final Card r = top.getFirst();
                 if (r.isLand()) {
                     game.getAction().moveTo(ZoneType.Hand, r, sa);
@@ -63,7 +64,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                     // TODO find better way to choose optional send away
                     final Card choosen = pc.chooseSingleCardForZoneChange(
                             ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
-                            "Put this card in your graveyard?", true, pl);
+                            Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard"), true, pl);
                     if (choosen != null) {
                         game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
                     }
@@ -77,7 +78,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
-                    c.addCounter(CounterType.P1P1, 1, pl, true, table);
+                    c.addCounter(CounterEnumType.P1P1, 1, pl, true, table);
                 }
             }
 

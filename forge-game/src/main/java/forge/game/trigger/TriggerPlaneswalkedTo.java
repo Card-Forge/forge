@@ -3,6 +3,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -48,18 +49,15 @@ public class TriggerPlaneswalkedTo extends Trigger {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Cards);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Cards);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Planeswalked To: ").append(sa.getTriggeringObject(AbilityKey.Cards));
+        sb.append(Localizer.getInstance().getMessage("lblPlaneswalkedTo")).append(": ").append(sa.getTriggeringObject(AbilityKey.Cards));
         return sb.toString();
     }
 }

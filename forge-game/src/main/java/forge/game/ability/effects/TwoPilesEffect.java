@@ -11,6 +11,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -88,13 +89,13 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                String title = "One".equals(sa.getParamOrDefault("FaceDown", "False")) ? "Select cards for a face down pile" :
-                        "Divide cards into two piles";
+                String title = "One".equals(sa.getParamOrDefault("FaceDown", "False")) ? Localizer.getInstance().getMessage("lblSelectCardForFaceDownPile") :
+                        Localizer.getInstance().getMessage("lblDivideCardIntoTwoPiles");
 
                 card.clearRemembered();
 
                 // first, separate the cards into piles
-                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false);
+                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
                 final CardCollection pile2 = new CardCollection(pool);
                 pile2.removeAll(pile1);
 
@@ -106,13 +107,13 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 CardCollectionView chosenPile = pile1WasChosen ? pile1 : pile2;
                 CardCollectionView unchosenPile = !pile1WasChosen ? pile1 : pile2;
                 
-                StringBuilder notification = new StringBuilder(chooser + " chooses Pile " + (pile1WasChosen ? "1" : "2") + ":\n");
+                StringBuilder notification = new StringBuilder(chooser + " " + Localizer.getInstance().getMessage("lblChoosesPile") + " " + (pile1WasChosen ? "1" : "2") + ":\n");
                 if (!chosenPile.isEmpty()) {
                     for (Card c : chosenPile) {
                         notification.append(c.getName()).append("\n");
                     }
                 } else {
-                    notification.append("(Empty pile)");
+                    notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")");
                 }
 
                 p.getGame().getAction().nofityOfValue(sa, chooser, notification.toString(), chooser);

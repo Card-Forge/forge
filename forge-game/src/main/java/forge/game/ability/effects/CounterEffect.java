@@ -12,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
+import forge.util.Localizer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -174,7 +175,7 @@ public class CounterEffect extends SpellAbilityEffect {
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
-            destination = srcSA.getActivatingPlayer().getController().chooseSomeType("a destination to remove", tgtSA, pos, null);
+            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos, null);
         }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,

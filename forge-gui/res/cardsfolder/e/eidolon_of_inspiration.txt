@@ -1,0 +1,8 @@
+Name:Eidolon of Inspiration
+ManaCost:1 W W
+Types:Enchantment Creature Spirit
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.

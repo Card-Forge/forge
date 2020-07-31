@@ -3,6 +3,7 @@ apantel
 Austinio7116
 Churrufli
 DrDev
+Elwin
 excessum
 Flair
 Gos
@@ -19,6 +20,7 @@ mcrawford620
 Meerkov
 Myrd
 nefigah
+Northmoc
 OgreBattlecruiser
 pfps
 Ryan1729
@@ -32,6 +34,7 @@ tjtillman
 tojammot
 torridus
 Xyx
+Zimtente
 Zuchinni
 
 (If you think your name should be on this list, add it with your next contribution)

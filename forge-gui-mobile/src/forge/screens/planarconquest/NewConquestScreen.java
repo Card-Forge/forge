@@ -20,6 +20,7 @@ import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FOptionPane;
 import forge.util.ThreadUtil;
+import forge.util.Localizer;
 
 public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenModel> {
     private static final float PADDING = FOptionPane.PADDING;
@@ -54,7 +55,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show("Starting new conquest...", new Runnable() {
+                LoadingOverlay.show(Localizer.getInstance().getMessage("lblStartingNewConquest"), new Runnable() {
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
@@ -77,7 +78,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
 
         protected SelectStartingPlaneStep() {
-            super("Select Starting Plane\n(Tap art for more info)");
+            super(Localizer.getInstance().getMessage("lblSelectStartingPlane"));
         }
 
         @Override
@@ -122,7 +123,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final CardListPreview cardDisplay = add(new CardListPreview(lstCommanders));
 
         protected SelectStartingCommanderStep() {
-            super("Select Starting Commander");
+            super(Localizer.getInstance().getMessage("lblSelectStartingCommander"));
         }
 
         @Override
@@ -181,7 +182,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
 
         protected SelectStartingPlaneswalkerStep() {
-            super("Select Starting Planeswalker");
+            super(Localizer.getInstance().getMessage("lblSelectStartingPlaneswalker"));
         }
 
         @Override

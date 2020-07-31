@@ -1,0 +1,8 @@
+Name:Nessian Wanderer
+ManaCost:1 G
+Types:Creature Satyr Scout
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Land | ForceRevealToController$ True | DestinationZone$ Hand | RestRandomOrder$ True
+DeckNeeds:Type$Enchantment
+Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.

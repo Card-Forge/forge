@@ -1,0 +1,9 @@
+Name:Setessan Skirmisher
+ManaCost:1 G
+Types:Creature Human Warrior
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+DeckNeeds:Type$Enchantment
+SVar:BuffedBy:Enchantment
+Oracle:Constellation - Whenever an enchantment enters the battlefield under your control, Setessan Skirmisher gets +1/+1 until end of turn.

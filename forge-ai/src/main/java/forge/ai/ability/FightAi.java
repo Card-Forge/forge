@@ -45,6 +45,8 @@ public class FightAi extends SpellAbilityAi {
         aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+        if (humCreatures.isEmpty())
+            return false; //prevent IndexOutOfBoundsException on MOJHOSTO variant
 
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {

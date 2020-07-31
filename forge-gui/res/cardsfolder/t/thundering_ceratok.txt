@@ -4,6 +4,6 @@ Types:Creature Rhino
 PT:4/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control gain trample until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | KW$ Trample
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | KW$ Trample
 SVar:PlayMain1:TRUE
 Oracle:Trample\nWhen Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.

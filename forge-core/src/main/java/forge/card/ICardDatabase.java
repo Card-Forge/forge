@@ -28,6 +28,8 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     List<PaperCard> getAllCards(String cardName);
     List<PaperCard> getAllCards(Predicate<PaperCard> predicate);
 
+    List<PaperCard> getAllCardsFromEdition(CardEdition edition);
+
     Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
     
 }

@@ -22,6 +22,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerTapsForMana(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTapsForMana(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -59,7 +60,7 @@ public class TriggerTapsForMana extends Trigger {
         //Check for tapping
         if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+            if (manaAbility == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
         }
@@ -107,15 +108,15 @@ public class TriggerTapsForMana extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tapped for Mana: ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append("Produced: ").append(sa.getTriggeringObject(AbilityKey.Produced));
+        sb.append(Localizer.getInstance().getMessage("lblTappedForMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(sa.getTriggeringObject(AbilityKey.Produced));
         return sb.toString();
     }
 

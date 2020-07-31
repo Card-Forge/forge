@@ -19,6 +19,7 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -40,13 +41,14 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
 
+        final Localizer localizer = Localizer.getInstance();
         cbxFormats.setFont(FSkinFont.get(12));
-        cbxFormats.addItem("All Sets/Formats");
+        cbxFormats.addItem(localizer.getMessage("lblAllSetsFormats"));
         for (GameFormat format : FModel.getFormats().getFilterList()) {
             cbxFormats.addItem(format);
         }
-        cbxFormats.addItem("Other Formats...");
-        cbxFormats.addItem("Choose Sets...");
+        cbxFormats.addItem(localizer.getMessage("lblOtherFormats"));
+        cbxFormats.addItem(localizer.getMessage("lblChooseSets"));
         selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(new FEventHandler() {

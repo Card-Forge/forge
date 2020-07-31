@@ -8,6 +8,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
                         extra.setCantSetSchemesInMotion(true);
                     }
                     if (sa.hasParam("ShowMessage")) {
-                        p.getGame().getAction().nofityOfValue(sa, p, p + " takes an extra turn.", null);
+                        p.getGame().getAction().nofityOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerTakesExtraTurn", p.toString()), null);
                     }
                 }
             }

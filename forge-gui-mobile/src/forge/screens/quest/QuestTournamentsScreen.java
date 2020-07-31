@@ -33,22 +33,24 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
+import forge.util.Localizer;
 import java.util.Arrays;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
     //Select Tournament panel
     private final SelectTournamentPanel pnlSelectTournament = add(new SelectTournamentPanel());
+    private final Localizer localizer = Localizer.getInstance();
 
     private final FLabel lblCredits = pnlSelectTournament.add(new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK)
             .iconScaleFactor(0.75f).font(FSkinFont.get(16)).build());
 
-    private final FLabel btnSpendToken = pnlSelectTournament.add(new FLabel.ButtonBuilder().text("Spend Token (0)").build());
+    private final FLabel btnSpendToken = pnlSelectTournament.add(new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("btnSpendToken") + " (0)").build());
 
-    private final FLabel lblInfo = pnlSelectTournament.add(new FLabel.Builder().text("Select a tournament to join:")
+    private final FLabel lblInfo = pnlSelectTournament.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectaTournament") + ":")
             .align(Align.center).font(FSkinFont.get(16)).build());
 
     private final FLabel lblNoTournaments = pnlSelectTournament.add(new FLabel.Builder()
-            .align(Align.center).text("There are no tournaments available at this time.").insets(Vector2.Zero)
+            .align(Align.center).text(Localizer.getInstance().getMessage("lblNoTournaments")).insets(Vector2.Zero)
             .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlTournaments = pnlSelectTournament.add(new QuestEventPanel.Container());
@@ -56,14 +58,14 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     //Prepare Deck panel
     private final PrepareDeckPanel pnlPrepareDeck = add(new PrepareDeckPanel());
 
-    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
-    private final FButton btnLeaveTournament = add(new FButton("Leave Tournament"));
+    private final FButton btnEditDeck = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
+    private final FButton btnLeaveTournament = add(new FButton(Localizer.getInstance().getMessage("btnLeaveTournament")));
     private final CardManager deckViewer = pnlPrepareDeck.add(new CardManager(false));
 
     //Tournament Active panel
     private final TournamentActivePanel pnlTournamentActive = add(new TournamentActivePanel());
-    private final FButton btnEditDeckInTourn = add(new FButton("Edit Deck"));
-    private final FButton btnLeaveTournamentInTourn = add(new FButton("Leave Tournament"));
+    private final FButton btnEditDeckInTourn = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
+    private final FButton btnLeaveTournamentInTourn = add(new FButton(Localizer.getInstance().getMessage("btnLeaveTournament")));
 
     //Results labels
     private static final FSkinFont RESULTS_FONT = FSkinFont.get(15);
@@ -133,7 +135,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         pnlTournamentActive.add(btnEditDeckInTourn);
         pnlTournamentActive.add(btnLeaveTournamentInTourn);
 
-        deckViewer.setCaption("Main Deck");
+        deckViewer.setCaption(localizer.getMessage("ttMain"));
         deckViewer.setup(ItemManagerConfig.QUEST_DRAFT_DECK_VIEWER);
         setMode(Mode.SELECT_TOURNAMENT);
     }
@@ -168,7 +170,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     @Override
     protected void updateHeaderCaption() {
         if (mode == Mode.PREPARE_DECK) {
-            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\nDraft - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n" + localizer.getMessage("lblDraft") + " - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
         }
         else {
             super.updateHeaderCaption();
@@ -372,7 +374,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             int[] iconIDs = new int[16];
 
             String draftTitle = qd.getFullTitle();
-            FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(Align.center).font(FSkinFont.get(20)).build());
+            FLabel lblStandings = add(new FLabel.Builder().text(localizer.getMessage("lblDraft") + ": " + draftTitle).align(Align.center).font(FSkinFont.get(20)).build());
             lblStandings.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
             y += lblStandings.getHeight() + PADDING;
 
@@ -385,12 +387,12 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 String sid = qd.getStandings()[qd.getStandings().length - 1];
                 String winnersName = sid.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : 
                         sid.equals(QuestEventDraft.UNDETERMINED) ? "---" : qd.getAINames()[Integer.parseInt(sid) - 1];
-                FLabel lblWinner = add(new FLabel.Builder().text("Winner: " + winnersName).align(Align.center).font(FSkinFont.get(20)).build());
+                FLabel lblWinner = add(new FLabel.Builder().text(localizer.getMessage("lblWinner") + ": " + winnersName).align(Align.center).font(FSkinFont.get(20)).build());
                 lblWinner.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
                 y += lblWinner.getHeight() + PADDING;
-                getBtnLeaveTournamentInTourn().setText("Collect Prizes");
+                getBtnLeaveTournamentInTourn().setText(localizer.getMessage("lblCollectPrizes"));
             } else {
-                getBtnLeaveTournamentInTourn().setText("Leave Tournament");
+                getBtnLeaveTournamentInTourn().setText(localizer.getMessage("btnLeaveTournament"));
 
                 String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
                 int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
@@ -427,17 +429,17 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 for (int j = 0; j < 13; j += 2) {
                     switch (j) {
                         case 0:
-                            FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(Align.center).font(FSkinFont.get(16)).build());
+                            FLabel qfinals = add(new FLabel.Builder().text(localizer.getMessage("lblQuarterfinals")).align(Align.center).font(FSkinFont.get(16)).build());
                             qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
                             y += qfinals.getHeight() + PADDING;
                             break;
                         case 8:
-                            FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(Align.center).font(FSkinFont.get(16)).build());
+                            FLabel sfinals = add(new FLabel.Builder().text(localizer.getMessage("lblSemifinals")).align(Align.center).font(FSkinFont.get(16)).build());
                             sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
                             y += sfinals.getHeight() + PADDING;
                             break;
                         case 12:
-                            FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(Align.center).font(FSkinFont.get(16)).build());
+                            FLabel finals = add(new FLabel.Builder().text(localizer.getMessage("lblFinalMatch")).align(Align.center).font(FSkinFont.get(16)).build());
                             finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
                             y += finals.getHeight() + PADDING;
                             break;
@@ -453,7 +455,11 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                     FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
                     FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
                      */
-                    labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+                    if (Forge.hdbuttons)
+                        labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+                    else
+                        labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
+
                     labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
                     if (currentMatch) {
                         labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));
@@ -467,7 +473,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 }
             }
 
-            y += lblStandings.getHeight() + PADDING;
+            y += lblStandings.getHeight() - PADDING * 3;
 
             btnEditDeckInTourn.setBounds(PADDING, y, buttonWidth, FTextField.getDefaultHeight());
             btnLeaveTournamentInTourn.setBounds(btnEditDeckInTourn.getRight() + PADDING, y, buttonWidth, btnEditDeckInTourn.getHeight());

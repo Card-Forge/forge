@@ -19,7 +19,9 @@ package forge.game.trigger;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,20 +47,20 @@ public class TriggerCycled extends Trigger {
      * @param intrinsic
      *            a boolean
      */
-    public TriggerCycled(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCycled(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Cause);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cycled: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblCycled")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 
@@ -67,8 +69,22 @@ public class TriggerCycled extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            return matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
-                    this.getHostCard());
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("ValidPlayer")) {
+            Player p = (Player) runParams.get(AbilityKey.Player);
+            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("OnlyFirst")) {
+            if ((int) runParams.get(AbilityKey.NumThisTurn) != 1) {
+                return false;
+            }
         }
         return true;
     }

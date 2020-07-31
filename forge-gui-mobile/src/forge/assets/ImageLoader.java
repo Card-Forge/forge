@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.google.common.cache.CacheLoader;
 import forge.FThreads;
-import org.cache2k.integration.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;
@@ -21,9 +21,10 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         boolean extendedArt = false;
         boolean textureFilter = Forge.isTextureFilteringEnabled();
         if (key.length() > 4){
-            if ((key.substring(0,4).contains("MPS_"))) //TODO add sets to get all extended art???
+            if ((key.substring(0,4).contains("MPS_"))) //MPS_ sets
                 extendedArt = true;
-            //use generated extended art... it will preload the cache at startup so... yeah! :)
+            else if ((key.substring(0,3).contains("UST"))) //Unstable Set
+                extendedArt = true;
         }
         File file = ImageKeys.getImageFile(key);
         if (file != null) {

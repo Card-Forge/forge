@@ -108,7 +108,7 @@ public class PreconDeck implements InventoryItemFromSet {
 
         // To be able to read "shops" section in overloads
         protected PreconDeck getPreconDeckFromSections(final Map<String, List<String>> sections) {
-            FileSection kv = FileSection.parse(sections.get("metadata"), "=");
+            FileSection kv = FileSection.parse(sections.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             String imageFilename = kv.get("Image");
             String description = kv.get("Description");
             String deckEdition = kv.get("set");

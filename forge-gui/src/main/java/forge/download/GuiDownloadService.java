@@ -264,12 +264,8 @@ public abstract class GuiDownloadService implements Runnable {
             count++;
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
-            /*
-            * decode URL Key, Reverted to old version,
-            * on Android 6.0 it throws an error
-            *  when you download the card price
-            */
-            String decodedKey = URLDecoder.decode(kv.getKey());
+
+            String decodedKey = decodeURL(kv.getKey());
             final File fileDest = new File(decodedKey);
             final String filePath = fileDest.getPath();
             final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";
@@ -365,6 +361,16 @@ public abstract class GuiDownloadService implements Runnable {
         GuiBase.getInterface().preventSystemSleep(false);
     }
 
+    @SuppressWarnings("deprecation")
+    private static String decodeURL(String key) {
+        /*
+         * decode URL Key, Reverted to old version,
+         * on Android 6.0 it throws an error
+         *  when you download the card price
+         */
+        return URLDecoder.decode(key);
+    }
+
     protected Proxy getProxy() {
         if (type == 0) {
             return Proxy.NO_PROXY;
@@ -385,7 +391,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            File f = new File(dir, URLDecoder.decode(nameUrlPair.getLeft()));
+            File f = new File(dir, decodeURL(nameUrlPair.getLeft()));
             //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());

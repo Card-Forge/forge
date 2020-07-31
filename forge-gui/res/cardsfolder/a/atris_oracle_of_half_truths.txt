@@ -1,0 +1,13 @@
+Name:Atris, Oracle of Half-Truths
+ManaCost:2 U B
+Types:Legendary Creature Human Advisor
+PT:3/2
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChoosePlayer | TriggerDescription$ When CARDNAME enters the battlefield, target opponent looks at the top three cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.
+SVar:DBChoosePlayer:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBPeekAndReveal
+SVar:DBPeekAndReveal:DB$ PeekAndReveal | Defined$ You | PeekAmount$ 3 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ Separate
+SVar:Separate:DB$ TwoPiles | Defined$ You | Separator$ Targeted | Chooser$ You | DefinedCards$ Remembered | ChosenPile$ DBHand | UnchosenPile$ DBGrave | Zone$ Library | FaceDown$ One | StackDescription$ None
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace\nWhen Atris, Oracle of Half-Truths enters the battlefield, target opponent looks at the top three cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.

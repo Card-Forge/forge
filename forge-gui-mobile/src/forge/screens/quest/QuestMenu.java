@@ -29,6 +29,7 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
+import forge.util.Localizer;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
@@ -42,49 +43,49 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
 
-    private static final FMenuItem duelsItem = new FMenuItem("Duels", FSkinImage.QUEST_GEAR, new FEventHandler() {
+    private static final FMenuItem duelsItem = new FMenuItem(Localizer.getInstance().getMessage("lblDuels"), FSkinImage.QUEST_BIG_SWORD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(duelsScreen);
         }
     });
-    private static final FMenuItem challengesItem = new FMenuItem("Challenges", FSkinImage.QUEST_HEART, new FEventHandler() {
+    private static final FMenuItem challengesItem = new FMenuItem(Localizer.getInstance().getMessage("lblChallenges"), FSkinImage.QUEST_HEART, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(challengesScreen);
         }
     });
-    private static final FMenuItem tournamentsItem = new FMenuItem("Tournaments", FSkinImage.PACK, new FEventHandler() {
+    private static final FMenuItem tournamentsItem = new FMenuItem(Localizer.getInstance().getMessage("lblTournaments"), FSkinImage.QUEST_BIG_SHIELD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(tournamentsScreen);
         }
     });
-    private static final FMenuItem decksItem = new FMenuItem("Quest Decks", FSkinImage.DECKLIST, new FEventHandler() {
+    private static final FMenuItem decksItem = new FMenuItem(Localizer.getInstance().getMessage("lblQuestDecks"), FSkinImage.QUEST_BIG_BAG, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(decksScreen);
         }
     });
-    private static final FMenuItem spellShopItem = new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
+    private static final FMenuItem spellShopItem = new FMenuItem(Localizer.getInstance().getMessage("lblSpellShop"), FSkinImage.QUEST_BOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(spellShopScreen);
         }
     });
-    private static final FMenuItem bazaarItem = new FMenuItem("Bazaar", FSkinImage.QUEST_BOTTLES, new FEventHandler() {
+    private static final FMenuItem bazaarItem = new FMenuItem(Localizer.getInstance().getMessage("lblBazaar"), FSkinImage.QUEST_BOTTLES, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(bazaarScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);
         }
     });
-    private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem unlockSetsItem = new FMenuItem(Localizer.getInstance().getMessage("btnUnlockSets"), FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
@@ -101,7 +102,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             });
         }
     });
-    private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem travelItem = new FMenuItem(Localizer.getInstance().getMessage("btnTravel"), FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
@@ -118,7 +119,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             });
         }
     });
-    private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
+    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(prefsScreen);
@@ -159,7 +160,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     static {
         //the first time quest mode is launched, add button for it if in Landscape mode
         if (Forge.isLandscapeMode()) {
-            HomeScreen.instance.addButtonForMode("Quest Mode", new FEventHandler() {
+            HomeScreen.instance.addButtonForMode(Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     launchQuestMode(LaunchReason.StartQuestMode);
@@ -187,7 +188,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {
-            LoadingOverlay.show("Loading current quest...", new Runnable() {
+            LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentQuest"), new Runnable() {
                 @Override
                 @SuppressWarnings("unchecked")
                 public void run() {
@@ -242,9 +243,9 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
-        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
         addItem(travelItem);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 

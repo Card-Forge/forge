@@ -6,6 +6,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class BondEffect extends SpellAbilityEffect {
         Card partner = cards.getFirst();
         // skip choice if only one card on list
         if (cards.size() > 1) {
-            partner = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(cards, sa, "Select a card to pair with");
+            partner = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), null);
         }
 
         // pair choices together

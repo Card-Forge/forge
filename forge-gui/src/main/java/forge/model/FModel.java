@@ -24,11 +24,11 @@ import forge.CardStorageReader.ProgressObserver;
 import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
-import forge.card.CardTranslation;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
+import forge.download.AutoUpdater;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -49,6 +49,7 @@ import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.tournament.TournamentData;
+import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
@@ -57,6 +58,7 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The default Model implementation for Forge.
@@ -116,7 +118,6 @@ public final class FModel {
 
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
-        //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
             @Override
@@ -142,12 +143,17 @@ public final class FModel {
             }
         };
 
+        if (new AutoUpdater(true).attemptToUpdate()) {
+            //
+        }
+
+        //load card database
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
-        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE));
+        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS));
+        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {
@@ -168,6 +174,7 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setPioneerPredicate(formats.getPioneer().getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
         magicDb.setCommanderPredicate(formats.get("Commander").getFilterRules());
         magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());
@@ -218,8 +225,6 @@ public final class FModel {
         achievements.put(GameType.Quest, new QuestAchievements());
         achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
-        
-        
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
@@ -258,31 +263,31 @@ public final class FModel {
         if (!CardType.Constant.LOADED.isSet()) {
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            List<String> tList = null;
+            Set<String> addTo = null;
 
             for (final String s : typeListFile) {
                 if (s.equals("[BasicTypes]")) {
-                    tList = CardType.Constant.BASIC_TYPES;
+                    addTo = CardType.Constant.BASIC_TYPES;
                 } else if (s.equals("[LandTypes]")) {
-                    tList = CardType.Constant.LAND_TYPES;
+                    addTo = CardType.Constant.LAND_TYPES;
                 } else if (s.equals("[CreatureTypes]")) {
-                    tList = CardType.Constant.CREATURE_TYPES;
+                    addTo = CardType.Constant.CREATURE_TYPES;
                 } else if (s.equals("[SpellTypes]")) {
-                    tList = CardType.Constant.SPELL_TYPES;
+                    addTo = CardType.Constant.SPELL_TYPES;
                 } else if (s.equals("[EnchantmentTypes]")) {
-                    tList = CardType.Constant.ENCHANTMENT_TYPES;
+                    addTo = CardType.Constant.ENCHANTMENT_TYPES;
                 } else if (s.equals("[ArtifactTypes]")) {
-                    tList = CardType.Constant.ARTIFACT_TYPES;
+                    addTo = CardType.Constant.ARTIFACT_TYPES;
                 } else if (s.equals("[WalkerTypes]")) {
-                    tList = CardType.Constant.WALKER_TYPES;
+                    addTo = CardType.Constant.WALKER_TYPES;
                 } else if (s.length() > 1) {
-                    if (tList != null) {
+                    if (addTo != null) {
                         if (s.contains(":")) {
                             String[] k = s.split(":");
-                            tList.add(k[0]);
+                            addTo.add(k[0]);
                             CardType.Constant.pluralTypes.put(k[0], k[1]);
                         } else {
-                            tList.add(s);
+                            addTo.add(s);
                         }
                     }
                 }

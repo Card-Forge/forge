@@ -5,8 +5,9 @@ Name=Throne of Eldraine
 Code2=ELD
 MciCode=eld
 Type=Expansion
-BoosterCovers=5
+BoosterCovers=3
 Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Secret Cards"), 1 RareMythic:!fromSheet("ELD Secret Cards"), 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 R Acclaimed Contender
@@ -278,7 +279,44 @@ Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Sec
 267 L Forest
 268 L Forest
 269 L Forest
+#Borderless Planeswalkers
+270 M Garruk, Cursed Huntsman
+271 M Oko, Thief of Crowns
+272 M The Royal Scions
+#Storybook Frames
+273 C Ardenvale Tactician
+274 C Faerie Guidemother
+275 R Giant Killer
+276 C Lonesome Unicorn
+277 M Realm-Cloaked Giant
+278 U Shepherd of the Flock
+279 C Silverflame Squire
+280 U Animating Faerie
+281 M Brazen Borrower
+282 R Fae of Wishes
+283 U Hypnotic Sprite
+284 C Merfolk Secretkeeper
+285 C Queen of Ice
+286 U Foulmire Knight
+287 R Murderous Rider
+288 U Order of Midnight
+289 C Reaper of Night
+290 C Smitten Swordmaster
+291 R Bonecrusher Giant
+292 U Embereth Shieldbreaker
+293 C Merchant of the Vale
+294 C Rimrock Knight
+295 U Beanstalk Giant
+296 C Curious Pair
+297 U Flaxen Intruder
+298 C Garenbrig Carver
+299 R Lovestruck Beast
+300 C Rosethorn Acolyte
+301 C Tuinvale Treefolk
+302 U Oakhame Ranger
+#Buy-A-Box Promo
 303 M Kenrith, the Returned King
+#Planeswalker Deck Cards
 304 M Rowan, Fearless Sparkmage
 305 C Garrison Griffin
 306 U Rowan's Battleguard
@@ -309,6 +347,73 @@ Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Sec
 331 C Arcane Signet
 332 R Tome of Legends
 333 C Command Tower
+#Borderless art rares and mythics
+334 R Acclaimed Contender
+335 R Charming Prince
+336 M The Circle of Loyalty
+337 R Happily Ever After
+338 M Harmonious Archon
+339 R Hushbringer
+340 R Linden, the Steadfast Queen
+341 R Worthy Knight
+342 R Emry, Lurker of the Loch
+343 R Folio of Fancies
+344 R Gadwick, the Wizened
+345 M The Magic Mirror
+346 R Midnight Clock
+347 R Mirrormade
+348 R Stolen by the Fae
+349 R Vantress Gargoyle
+350 R Ayara, First of Locthwain
+351 R Blacklance Paragon
+352 M The Cauldron of Eternity
+353 R Clackbridge Troll
+354 R Oathsworn Knight
+355 R Piper of the Swarm
+356 M Rankle, Master of Pranks
+357 R Wishclaw Talisman
+358 R Witch's Vengeance
+359 M Embercleave
+360 R Fervent Champion
+361 R Fires of Invention
+362 R Irencrag Feat
+363 R Irencrag Pyromancer
+364 R Opportunistic Dragon
+365 M Robber of the Rich
+366 R Sundering Stroke
+367 R Torbran, Thane of Red Fell
+368 R Feasting Troll King
+369 R Gilded Goose
+370 M The Great Henge
+371 R Once Upon a Time
+372 M Questing Beast
+373 R Return of the Wildspeaker
+374 R Wicked Wolf
+375 R Wildborn Preserver
+376 R Yorvo, Lord of Garenbrig
+377 R Dance of the Manse
+378 R Doom Foretold
+379 R Escape to the Wilds
+380 R Faeburrow Elder
+381 R Lochmere Serpent
+382 M Outlaws' Merriment
+383 R Stormfist Crusader
+384 R Sorcerous Spyglass
+385 R Stonecoil Serpent
+386 R Castle Ardenvale
+387 R Castle Embereth
+388 R Castle Garenbrig
+389 R Castle Locthwain
+390 R Castle Vantress
+391 R Fabled Passage
+#Bundle promo
+392 R Piper of the Swarm
+#Promo Pack
+393 U Glass Casket
+394 U Slaying Fire
+395 U Kenrith's Transformation
+396 U Improbable Alliance
+397 U Inspiring Veteran
 
 [tokens]
 w_0_1_goat
@@ -329,4 +434,3 @@ c_a_food_sac
 c_a_food_sac
 c_a_food_sac
 c_a_food_sac
-emblem_garruk_cursed_hunstman

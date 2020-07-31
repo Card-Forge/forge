@@ -1,0 +1,9 @@
+Name:Iroas's Blessing
+ManaCost:3 R
+Types:Enchantment Aura
+K:Enchant creature you control
+A:SP$ Attach | Cost$ 3 R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target creature or planeswalker an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select a creature or planeswalker an opponent controls | NumDmg$ 4
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Enchant creature you control\nWhen Iroas's Blessing enters the battlefield, it deals 4 damage to target creature or planeswalker an opponent controls.\nEnchanted creature gets +1/+1.

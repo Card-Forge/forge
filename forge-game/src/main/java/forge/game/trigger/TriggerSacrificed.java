@@ -23,6 +23,7 @@ import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class TriggerSacrificed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSacrificed(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSacrificed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -74,15 +75,6 @@ public class TriggerSacrificed extends Trigger {
         if (hasParam("ValidSourceController")) {
             if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(getParam("ValidSourceController"),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
-        }
-        
-        if (hasParam("CauseParam")) {
-            // For now only for Heart-Piecer Manticore, extend it if it appears on different effects too
-            if (sourceSA == null || !sourceSA.hasParam("SacrificeParam")
-                    || !sourceSA.getParam("SacrificeParam").equals(getParam("CauseParam"))
-                    || !sourceSA.getHostCard().equals(this.getHostCard())) {
                 return false;
             }
         }
@@ -128,14 +120,14 @@ public class TriggerSacrificed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Sacrificed: ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblSacrificed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

@@ -27,9 +27,11 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 
 public class QuestTournamentController {
     private final IQuestTournamentView view;
+    private final Localizer localizer = Localizer.getInstance();
     private boolean drafting = false;
     private IGuiGame gui = null;
 
@@ -68,18 +70,14 @@ public class QuestTournamentController {
         final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
 
         if (!draft.isStarted()) {
-            final boolean shouldQuit = SOptionPane.showOptionDialog("If you leave now, this tournament will be forever gone."
-                    + "\nYou will keep the cards you drafted, but will receive no other prizes."
-                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", SOptionPane.WARNING_ICON, ImmutableList.of("Yes", "No"), 1) == 0;
+            final boolean shouldQuit = SOptionPane.showOptionDialog(localizer.getMessage("lblLeaveTournamentDraftWarning1"), localizer.getMessage("lblReallyQuit"), SOptionPane.WARNING_ICON, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 1) == 0;
             if (!shouldQuit) {
                 return;
             }
         }
         else {
             if (draft.playerHasMatchesLeft()) {
-                final boolean shouldQuit = SOptionPane.showOptionDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
-                        + "\nYou will still receive winnings as if you conceded your next match and you will keep the cards you drafted."
-                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", SOptionPane.WARNING_ICON, ImmutableList.of("Yes", "No"), 1) == 0;
+                final boolean shouldQuit = SOptionPane.showOptionDialog(localizer.getMessage("lblLeaveTournamentDraftWarning2"), localizer.getMessage("lblReallyQuit"), SOptionPane.WARNING_ICON, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 1) == 0;
                 if (!shouldQuit) {
                     return;
                 }
@@ -90,17 +88,17 @@ public class QuestTournamentController {
             final QuestEventDraft.QuestDraftPrizes prizes = draft.collectPrizes();
 
             if (prizes.hasCredits()) {
-                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + QuestUtil.formatCredits(prizes.credits) + " credits!", "Credits Awarded", FSkinProp.ICO_QUEST_GOLD);
+                SOptionPane.showMessageDialog(localizer.getMessage("lblForPlacing") + placement + localizer.getMessage("lblHaveBeAward") + QuestUtil.formatCredits(prizes.credits) + " " + localizer.getMessage("lblCredits") + "!", localizer.getMessage("lblCreditsAwarded"), FSkinProp.ICO_QUEST_GOLD);
             }
 
             if (prizes.hasIndividualCards()) {
-                GuiBase.getInterface().showCardList("Tournament Reward", "For participating in the tournament, you have been awarded the following promotional card:", prizes.individualCards);
+                GuiBase.getInterface().showCardList(localizer.getMessage("lblTournamentReward"), localizer.getMessage("lblParticipateingTournamentReward"), prizes.individualCards);
             }
 
             if (prizes.hasBoosterPacks()) {
                 final String packPlural = (prizes.boosterPacks.size() == 1) ? "" : "s";
 
-                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + prizes.boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkinProp.ICO_QUEST_BOX);
+                SOptionPane.showMessageDialog(localizer.getMessage("lblForPlacing") + placement + localizer.getMessage("lblHaveBeAward") + prizes.boosterPacks.size() + " " + localizer.getMessage("lblBoosterPack") + packPlural + "!", localizer.getMessage("lblBoosterPack") + packPlural + " " + localizer.getMessage("lblAwarded"), FSkinProp.ICO_QUEST_BOX);
 
                 if (FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV) && prizes.boosterPacks.size() > 1) {
                     boolean skipTheRest = false;
@@ -118,11 +116,11 @@ public class QuestTournamentController {
                             continue;
                         }
 
-                        skipTheRest = GuiBase.getInterface().showBoxedProduct(pack.getName(), "You have found the following cards inside (Booster Pack " + currentPack + " of " + totalPacks + "):", pack.getCards());
+                        skipTheRest = GuiBase.getInterface().showBoxedProduct(pack.getName(), localizer.getMessage("lblFoundCards") + " (" + localizer.getMessage("lblBoosterPack") + " " + currentPack + " / " + totalPacks + "):", pack.getCards());
                     }
 
                     if (skipTheRest && !remainingCards.isEmpty()) {
-                        GuiBase.getInterface().showCardList("Tournament Reward", "You have found the following cards inside:", remainingCards);
+                        GuiBase.getInterface().showCardList(localizer.getMessage("lblTournamentReward"), localizer.getMessage("lblFoundCards") + ":", remainingCards);
                     }
                 }
                 else {
@@ -133,27 +131,27 @@ public class QuestTournamentController {
                         cards.addAll(pack.getCards());
                     }
 
-                    GuiBase.getInterface().showCardList("Tournament Reward", "You have found the following cards inside:", cards);
+                    GuiBase.getInterface().showCardList(localizer.getMessage("lblTournamentReward"), localizer.getMessage("lblFoundCards") + ":", cards);
                 }
             }
 
             if (prizes.selectRareFromSets()) {
-                SOptionPane.showMessageDialog("For placing " + placement  + ", you may select a rare or mythic rare card from the drafted block.", "Rare Awarded", FSkinProp.ICO_QUEST_STAKES);
+                SOptionPane.showMessageDialog(localizer.getMessage("lblForPlacing") + placement + localizer.getMessage("lblSelectRareAwarded"), localizer.getMessage("lblRareAwarded"), FSkinProp.ICO_QUEST_STAKES);
 
-                final PaperCard card = GuiBase.getInterface().chooseCard("Select a Card", "Select a card to keep:", prizes.selectRareCards);
+                final PaperCard card = GuiBase.getInterface().chooseCard(localizer.getMessage("lblSelectACard"), localizer.getMessage("lblSelectKeepCard"), prizes.selectRareCards);
                 prizes.addSelectedCard(card);
 
-                SOptionPane.showMessageDialog("'" + card.getName() + "' has been added to your collection!", "Card Added", FSkinProp.ICO_QUEST_STAKES);
+                SOptionPane.showMessageDialog("'" + card.getName() + "' " + localizer.getMessage("lblAddToCollection"), localizer.getMessage("lblCardAdded"), FSkinProp.ICO_QUEST_STAKES);
             }
 
             if (draft.getPlayerPlacement() == 1) {
-                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded a token!\nUse tokens to create new drafts to play.", "Bonus Token", FSkinProp.ICO_QUEST_NOTES);
+                SOptionPane.showMessageDialog(localizer.getMessage("lblForPlacing") + placement + localizer.getMessage("lblHaveBeAwardToken"), localizer.getMessage("lblBonusToken"), FSkinProp.ICO_QUEST_NOTES);
                 FModel.getQuest().getAchievements().addDraftToken();
             }
 
         }
 
-        final boolean saveDraft = SOptionPane.showOptionDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?", SOptionPane.QUESTION_ICON, ImmutableList.of("Yes", "No"), 0) == 0;
+        final boolean saveDraft = SOptionPane.showOptionDialog(localizer.getMessage("lblWouldLikeSaveDraft"), localizer.getMessage("lblSaveDraft") + "?", SOptionPane.QUESTION_ICON, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 0) == 0;
         if (saveDraft) {
             draft.saveToRegularDraft();
         }
@@ -170,26 +168,23 @@ public class QuestTournamentController {
             List<QuestDraftFormat> formats = QuestEventDraft.getAvailableFormats(FModel.getQuest());
 
             if (formats.isEmpty()) {
-                SOptionPane.showErrorDialog(
-                        "You do not have any draft-able sets unlocked!\n" +
-                        "Come back later when you've unlocked more sets.",
-                        "No Available Drafts");
+                SOptionPane.showErrorDialog(localizer.getMessage("lblNoAvailableDraftsMessage"),localizer.getMessage("lblNoAvailableDrafts"));
                 return;
             }
 
-            final QuestDraftFormat format = SGuiChoose.oneOrNone("Choose Draft Format", formats);
+            final QuestDraftFormat format = SGuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), formats);
             if (format != null) {
                 QuestEventDraft evt = QuestEventDraft.getDraftOrNull(FModel.getQuest(), format);
                 if (evt != null) {
-                    String fee = TextUtil.concatNoSpace("The entry fee for this booster draft tournament is ", String.valueOf(evt.getEntryFee()), " credits.\nWould you like to spend a token and create this tournament?");
-                    if (SOptionPane.showConfirmDialog(fee, "Creating a Booster Draft Tournament")) {
+                    String fee = TextUtil.concatNoSpace(localizer.getMessage("lblEntryFeeOfDraftTournament"), String.valueOf(evt.getEntryFee()), localizer.getMessage("lblWouldLikeCreateTournament"));
+                    if (SOptionPane.showConfirmDialog(fee, localizer.getMessage("lblCreatingDraftTournament"))) {
                         achievements.spendDraftToken(format);
     
                         update();
                         view.populate();
                     }
                 } else {
-                    SOptionPane.showErrorDialog("Unexpected error when creating a draft tournament " + format.getName() + ". Please report this as a bug.");
+                    SOptionPane.showErrorDialog(localizer.getMessage("lblUnexpectedCreatingDraftTournament") + format.getName() + localizer.getMessage("lblPleaseReportBug"));
                     System.err.println("Error creating booster draft tournament (QuestEventDraft object was null): " + format.getName());
                 }
             }
@@ -241,7 +236,7 @@ public class QuestTournamentController {
     }
 
     private void updateSelectTournament() {
-        view.getLblCredits().setText("Credits: " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits()));
+        view.getLblCredits().setText(localizer.getMessage("lblCredits") + ": " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits()));
 
         final QuestAchievements achievements = FModel.getQuest().getAchievements();
         achievements.generateDrafts();
@@ -258,12 +253,12 @@ public class QuestTournamentController {
             view.updateEventList(null);
         }
 
-        view.getLblFirst().setText("1st Place: " + achievements.getWinsForPlace(1) + " time" + (achievements.getWinsForPlace(1) == 1 ? "" : "s"));
-        view.getLblSecond().setText("2nd Place: " + achievements.getWinsForPlace(2) + " time" + (achievements.getWinsForPlace(2) == 1 ? "" : "s"));
-        view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));
-        view.getLblFourth().setText("4th Place: " + achievements.getWinsForPlace(4) + " time" + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
+        view.getLblFirst().setText(localizer.getMessage("lbl1stPlace") + achievements.getWinsForPlace(1) + localizer.getMessage("lblTime") + (achievements.getWinsForPlace(1) == 1 ? "" : "s"));
+        view.getLblSecond().setText(localizer.getMessage("lbl2ndPlace") + achievements.getWinsForPlace(2) + localizer.getMessage("lblTime") + (achievements.getWinsForPlace(2) == 1 ? "" : "s"));
+        view.getLblThird().setText(localizer.getMessage("lbl3rdPlace") + achievements.getWinsForPlace(3) + localizer.getMessage("lblTime") + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));
+        view.getLblFourth().setText(localizer.getMessage("lbl4thPlace") + achievements.getWinsForPlace(4) + localizer.getMessage("lblTime") + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
 
-        view.getBtnSpendToken().setText("Spend Token (" + achievements.getDraftTokens() + ")");
+        view.getBtnSpendToken().setText(localizer.getMessage("btnSpendToken") + " (" + achievements.getDraftTokens() + ")");
         view.getBtnSpendToken().setEnabled(achievements.getDraftTokens() > 0);
     }
 
@@ -308,10 +303,10 @@ public class QuestTournamentController {
         }
 
         if (FModel.getQuest().getAchievements().getCurrentDraft().playerHasMatchesLeft()) {
-            view.getBtnLeaveTournament().setText("Leave Tournament");
+            view.getBtnLeaveTournament().setText(localizer.getMessage("btnLeaveTournament"));
         }
         else {
-            view.getBtnLeaveTournament().setText("Collect Prizes");
+            view.getBtnLeaveTournament().setText(localizer.getMessage("lblCollectPrizes"));
         }
     }
 
@@ -367,10 +362,10 @@ public class QuestTournamentController {
         }
 
         if (draft.playerHasMatchesLeft()) {
-            view.getBtnLeaveTournament().setText("Leave Tournament");
+            view.getBtnLeaveTournament().setText(localizer.getMessage("btnLeaveTournament"));
         }
         else {
-            view.getBtnLeaveTournament().setText("Collect Prizes");
+            view.getBtnLeaveTournament().setText(localizer.getMessage("lblCollectPrizes"));
         }
     }
 
@@ -387,8 +382,7 @@ public class QuestTournamentController {
 
     public void startDraft() {
         if (drafting) {
-            SOptionPane.showErrorDialog("You are currently in a draft.\n" +
-                    "You should leave or finish that draft before starting another.");
+            SOptionPane.showErrorDialog(localizer.getMessage("lblCurrentlyInDraft"));
             return;
         }
 
@@ -396,11 +390,11 @@ public class QuestTournamentController {
 
         final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (draftEvent.canEnter()) {
-            SOptionPane.showMessageDialog("You need " + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
+            SOptionPane.showMessageDialog(localizer.getMessage("lblYouNeed") + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " " + localizer.getMessage("lblMoreCredits"), localizer.getMessage("lblNotEnoughCredits"), SOptionPane.WARNING_ICON);
             return;
         }
 
-        final boolean okayToEnter = SOptionPane.showOptionDialog("This tournament costs " + QuestUtil.formatCredits(draftEvent.getEntryFee()) + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkinProp.ICO_QUEST_GOLD, ImmutableList.of("Yes", "No"), 1) == 0;
+        final boolean okayToEnter = SOptionPane.showOptionDialog(localizer.getMessage("lblTournamentCosts") + QuestUtil.formatCredits(draftEvent.getEntryFee()) + localizer.getMessage("lblSureEnterTournament"), localizer.getMessage("lblEnterDraftTournament"), FSkinProp.ICO_QUEST_GOLD, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 1) == 0;
 
         if (!okayToEnter) {
             return;
@@ -413,8 +407,7 @@ public class QuestTournamentController {
     }
 
     public boolean cancelDraft() {
-        if (SOptionPane.showConfirmDialog("This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
-                "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false)) {
+        if (SOptionPane.showConfirmDialog(localizer.getMessage("lblLeaveDraftConfirm"), localizer.getMessage("lblLeaveDraft") + "?", localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false)) {
             drafting = false;
 
             QuestController quest = FModel.getQuest();
@@ -433,7 +426,7 @@ public class QuestTournamentController {
 
         final String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
         if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            SOptionPane.showMessageDialog("Deck " + message, "Deck Invalid");
+            SOptionPane.showMessageDialog(localizer.getMessage("lblDeck") + " " + message, localizer.getMessage("lblDeckInvalid"));
             return;
         }
 
@@ -449,13 +442,12 @@ public class QuestTournamentController {
         final String message = QuestDraftUtils.getDeckLegality();
 
         if (message != null) {
-            SOptionPane.showMessageDialog(message, "Deck Invalid");
+            SOptionPane.showMessageDialog(message, localizer.getMessage("lblDeckInvalid"));
             return;
         }
 
         if (QuestDraftUtils.matchInProgress) {
-            SOptionPane.showErrorDialog("There is already a match in progress.\n" +
-                    "Please wait for the current round to end before attempting to continue.");
+            SOptionPane.showErrorDialog(localizer.getMessage("lblAlreadyMatchPleaseWait"));
             return;
         }
 

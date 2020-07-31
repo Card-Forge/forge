@@ -1,0 +1,10 @@
+Name:Omen of the Sun
+ManaCost:2 W
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Human Soldier creature tokens and you gain 2 life.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier thb | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+A:AB$ Scry | Cost$ 2 W Sac<1/CARDNAME> | ScryNum$ 2 | AILogic$ BestOpportunity | SpellDescription$ Scry 2.
+DeckHas:Ability$Token
+Oracle:Flash\nWhen Omen of the Sun enters the battlefield, create two 1/1 white Human Soldier creature tokens and you gain 2 life.\n{2}{W}, Sacrifice Omen of the Sun: Scry 2.

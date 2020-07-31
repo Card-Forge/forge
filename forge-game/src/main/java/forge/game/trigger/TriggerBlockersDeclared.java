@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class TriggerBlockersDeclared extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBlockersDeclared(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBlockersDeclared(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -52,14 +53,14 @@ public class TriggerBlockersDeclared extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Blockers, AbilityKey.Attackers);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Blockers, AbilityKey.Attackers);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Blockers: ").append(sa.getTriggeringObject(AbilityKey.Blockers));
+        sb.append(Localizer.getInstance().getMessage("lblBlockers")).append(": ").append(sa.getTriggeringObject(AbilityKey.Blockers));
         return sb.toString();
     }
 }

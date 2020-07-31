@@ -1,30 +1,31 @@
 package forge.match.input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.ImmutableList;
-
+import forge.FThreads;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.util.ITriggerEvent;
-import forge.util.TextUtil;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.FThreads;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
+import forge.util.Aggregates;
+import forge.util.ITriggerEvent;
+import forge.util.TextUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -47,16 +48,17 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
         this.mandatory = mandatory;
-	controller.getGui().setSelectables(CardView.getCollection(choices));
-	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-	for (final Card c : choices) {
-	    zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(),c.getZone().getZoneType()));
-	}
-	FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public void run() {
-		controller.getGui().updateZones(zonesToUpdate);  
+        controller.getGui().setSelectables(CardView.getCollection(choices));
+        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+        for (final Card c : choices) {
+            zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
+        }
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                controller.getGui().updateZones(zonesToUpdate);
             }
-	    });
+        });
     }
 
     @Override
@@ -148,6 +150,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
+        // TODO should use sa.canTarget(card) instead?
+        // it doesn't have messages
+
         //If the card is not a valid target
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
@@ -170,6 +175,35 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
+        if (sa.hasParam("MaxTotalTargetCMC")) {
+            int maxTotalCMC = tgt.getMaxTotalCMC(sa.getHostCard(), sa);
+            if (maxTotalCMC > 0) {
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                if (!sa.isTargeting(card)) {
+                    soFar += card.getCMC();
+                }
+                if (soFar > maxTotalCMC) {
+                    showMessage(sa.getHostCard() + " - Cannot target this card (CMC limit exceeded)");
+                    return false;
+                }
+            }
+        }
+
+        // If all cards must have different controllers
+        if (tgt.isSameController()) {
+            final List<Player> targetedControllers = new ArrayList<>();
+            for (final GameObject o : targetDepth.keySet()) {
+                if (o instanceof Card) {
+                    final Player p = ((Card) o).getController();
+                    targetedControllers.add(p);
+                }
+            }
+            if (!targetedControllers.isEmpty() && !targetedControllers.contains(card.getController())) {
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have same controller)");
+                return false;
+            }
+        }
+
         // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {
             final List<Player> targetedControllers = new ArrayList<>();
@@ -186,12 +220,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!choices.contains(card)) {
-            if (card.isPlaneswalker() && sa.getApi() == ApiType.DealDamage) {
-                showMessage(sa.getHostCard() + " - To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
-            }
-            else {
-                showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
-            }
+            showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
             return false;
         }
 
@@ -319,7 +348,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }
 
-    
     @Override
     protected void onStop() {
 	getController().getGui().clearSelectables();

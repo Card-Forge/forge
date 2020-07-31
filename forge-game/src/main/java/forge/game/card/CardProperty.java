@@ -4,8 +4,10 @@ import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Direction;
+import forge.game.EvenOdd;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -15,7 +17,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -72,7 +73,7 @@ public class CardProperty {
                 }
             }
         } else if (property.equals("Permanent")) {
-            if (card.isInstant() || card.isSorcery()) {
+            if (!card.isPermanent()) {
                 return false;
             }
         } else if (property.equals("Historic")) {
@@ -392,30 +393,20 @@ public class CardProperty {
             }
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
-            if (restriction.equals("Targeted")) {
-                if (!source.getCurrentState().getTriggers().isEmpty()) {
-                    for (final Trigger t : source.getCurrentState().getTriggers()) {
-                        final SpellAbility sa = t.getTriggeredSA();
-                        final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
-                        for (final Card c : cards) {
-                            if (card.getEquipping() != c && !c.equals(card.getEntityAttachedTo())) {
-                                return false;
-                            }
-                        }
+
+            if (card.getEntityAttachedTo() == null) {
+                return false;
+            }
+
+            if (!card.getEntityAttachedTo().isValid(restriction, sourceController, source, spellAbility)) {
+                boolean found = false;
+                for (final GameObject o : AbilityUtils.getDefinedObjects(source, restriction, spellAbility)) {
+                    if (o.equals(card.getEntityAttachedTo())) {
+                        found = true;
+                        break;
                     }
-                } else {
-                    for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                        final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
-                        for (final Card c : cards) {
-                            if (card.getEquipping() == c || c.equals(card.getEntityAttachedTo())) { // handle multiple targets
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
                 }
-            } else {
-                if ((card.getEntityAttachedTo() == null || !card.getEntityAttachedTo().isValid(restriction, sourceController, source, spellAbility))) {
+                if (!found) {
                     return false;
                 }
             }
@@ -856,15 +847,6 @@ public class CardProperty {
                             }
                         }
                         return false;
-                    case "TriggeredCard":
-                        final Object triggeringObject = source.getTriggeringObject(AbilityKey.fromString(restriction.substring("Triggered".length())));
-                        if (!(triggeringObject instanceof Card)) {
-                            return false;
-                        }
-                        if (card.sharesCardTypeWith((Card) triggeringObject)) {
-                            return true;
-                        }
-                        return false;
                     case "EachTopLibrary":
                         final CardCollection cards = new CardCollection();
                         for (Player p : game.getPlayers()) {
@@ -877,6 +859,16 @@ public class CardProperty {
                             }
                         }
                         return false;
+                    default:
+                        final CardCollection cards1 = AbilityUtils.getDefinedCards(card, restriction, spellAbility);
+                        if (cards1.isEmpty()) {
+                            return false;
+                        }
+                        for (Card c : cards1) {
+                            if (!card.sharesCardTypeWith(c)) {
+                                return false;
+                            }
+                        }
                 }
             }
         } else if (property.equals("sharesPermanentTypeWith")) {
@@ -1381,6 +1373,27 @@ public class CardProperty {
             if (card.getNetPower() >= card.getNetToughness()) {
                 return false;
             }
+        } else if (property.equals("cmcEven")) {
+            if (card.getCMC() % 2 != 0) {
+                return false;
+            }
+        } else if (property.equals("cmcOdd")) {
+            if (card.getCMC() % 2 != 1) {
+                return false;
+            }
+        } else if (property.equals("cmcChosenEvenOdd")) {
+            if (!source.hasChosenEvenOdd()) {
+                return false;
+            }
+            if ((card.getCMC() % 2 == 0) != (source.getChosenEvenOdd() == EvenOdd.Even)) {
+                return false;
+            }
+        } else if (property.equals("cmcNotChosenEvenOdd")) {
+            if (source.hasChosenEvenOdd()) {
+                if ((card.getCMC() % 2 == 0) == (source.getChosenEvenOdd() == EvenOdd.Even)) {
+                    return false;
+                }
+            }
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x;
@@ -1400,11 +1413,7 @@ public class CardProperty {
                 rhs = property.substring(10);
                 y = card.getNetPower() + card.getNetToughness();
             }
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
+            x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             if (!Expressions.compare(y, property, x)) {
                 return false;
@@ -1430,16 +1439,11 @@ public class CardProperty {
 
             // TODO get a working regex out of this pattern so the amount of
             // digits doesn't matter
-            int number;
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
             final String comparator = splitProperty[1].substring(0, 2);
             String counterType;
-            try {
-                number = Integer.parseInt(strNum);
-            } catch (final NumberFormatException e) {
-                number = CardFactoryUtil.xCount(source, source.getSVar(strNum));
-            }
+            int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
             counterType = splitProperty[2];
 
             final int actualnumber = card.getCounters(CounterType.getType(counterType));
@@ -1454,9 +1458,15 @@ public class CardProperty {
             if (property.equals("attacking"))    return combat.isAttacking(card);
             if (property.equals("attackingLKI")) return combat.isLKIAttacking(card);
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
-            if (property.equals("attackingYouOrYourPW"))  {
+            if (property.equals("attackingYouOrYourPW")) {
                 Player defender = combat.getDefenderPlayerByAttacker(card);
                 if (!sourceController.equals(defender)) {
+                    return false;
+                }
+            }
+            if (property.equals("attackingOpponent")) {
+                Player defender = combat.getDefenderPlayerByAttacker(card);
+                if (!sourceController.isOpponentOf(defender)) {
                     return false;
                 }
             }
@@ -1487,13 +1497,12 @@ public class CardProperty {
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;
-            }
-            if (what.startsWith("Remembered")) {
-                for (final Object o : source.getRemembered()) {
-                    if (o instanceof Card && combat.isBlocking(card, (Card) o)) {
+            } else {
+                for(Card c : AbilityUtils.getDefinedCards(source, what, spellAbility)) {
+                    if (combat.isBlocking(card, c)) {
                         return true;
                     }
-                }
+                };
                 return false;
             }
         } else if (property.startsWith("sharesBlockingAssignmentWith")) {
@@ -1518,27 +1527,38 @@ public class CardProperty {
         } else if (property.startsWith("blockedByThisTurn")) {
             return !card.getBlockedByThisTurn().isEmpty();
         } else if (property.startsWith("blockedValidThisTurn ")) {
-            if (card.getBlockedThisTurn() == null) {
+            CardCollectionView blocked = card.getBlockedThisTurn();
+            if (blocked == null) {
                 return false;
             }
-
             String valid = property.split(" ")[1];
-            for(Card c : card.getBlockedThisTurn()) {
+            for(Card c : blocked) {
                 if (c.isValid(valid, card.getController(), source, spellAbility)) {
                     return true;
                 }
             }
+            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+                if (blocked.contains(c)) {
+                    return true;
+                }
+            };
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
-            if (card.getBlockedByThisTurn() == null) {
+            CardCollectionView blocked = card.getBlockedByThisTurn();
+            if (blocked == null) {
                 return false;
             }
             String valid = property.split(" ")[1];
-            for(Card c : card.getBlockedByThisTurn()) {
+            for(Card c : blocked) {
                 if (c.isValid(valid, card.getController(), source, spellAbility)) {
                     return true;
                 }
             }
+            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+                if (blocked.contains(c)) {
+                    return true;
+                }
+            };
             return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.getBlockedByThisTurn().contains(card);
@@ -1615,6 +1635,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isDash();
+        } else if (property.startsWith("escaped")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isEscape();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1754,6 +1779,17 @@ public class CardProperty {
             if (!card.isCommander()) {
                 return false;
             }
+        } else if (property.startsWith("NotedFor")) {
+            final String key = property.substring("NotedFor".length());
+            for (String note : sourceController.getNotesForName(key)) {
+                if (note.equals("Name:" + card.getName())) {
+                    return true;
+                }
+                if (note.equals("Id:" + card.getId())) {
+                    return true;
+                }
+            }
+            return false;
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {

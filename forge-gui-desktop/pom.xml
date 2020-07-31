@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.30-SNAPSHOT</version>
+		<version>1.6.37-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.8</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>released-version</id>
@@ -142,12 +142,12 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>24.1-android</version>
+            <version>28.1-android</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.10</version>
+            <version>1.4.11.1</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -168,9 +168,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.2</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode</groupId>
@@ -180,7 +185,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -208,7 +213,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -230,7 +235,10 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
-                                        <maxHeapSize>1024</maxHeapSize>
+                                        <maxHeapSize>4096</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
@@ -319,7 +327,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.8</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>released-version</id>
@@ -362,7 +370,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.5.2</version>
+                        <version>1.7.25</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -384,7 +392,10 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>1.8.0</minVersion>
-                                        <maxHeapSize>1024</maxHeapSize>
+                                        <maxHeapSize>4096</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                        </opts>
                                     </jre>
                                     <versionInfo>
                                         <fileVersion>
@@ -476,7 +487,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.8</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>released-version</id>
@@ -559,7 +570,7 @@
                                             <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
                                             <option value="-Dcom.apple.smallTabs=true" />
-                                            <option value="-Xmx1024M" />
+                                            <option value="-Xmx4096M" />
                                             <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
@@ -587,7 +598,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.8</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>released-version</id>
@@ -670,7 +681,7 @@
                                             <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
                                             <option value="-Dcom.apple.smallTabs=true" />
-                                            <option value="-Xmx1024M" />
+                                            <option value="-Xmx4096M" />
                                             <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
@@ -698,7 +709,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.8</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>released-version</id>

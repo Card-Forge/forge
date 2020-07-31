@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.FThreads;
 import forge.ImageKeys;
@@ -45,21 +47,28 @@ public abstract class ImageFetcher {
             final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + filename + ".jpg");
 
-            // First try to download the LQ Set URL, then fetch from scryfall/magiccards.info
+            // First try to download the LQ Set URL, then fetch from scryfall
             StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
             setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
             downloadUrls.add(setDownload.toString());
 
+            int artIndex = 1;
+            final Pattern pattern = Pattern.compile(
+                    "^.:([^|]*\\|){2}(\\d+).*$"
+            );
+            Matcher matcher = pattern.matcher(imageKey);
+            if (matcher.matches()) {
+                artIndex = Integer.parseInt(matcher.group(2));
+            }
             final StaticData data = StaticData.instance();
-            final int cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition());
-            if (cardNum != -1)  {
+            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition(), artIndex);
+            if (cardNum != null)  {
                 String suffix = "";
                 if (paperCard.getRules().getOtherPart() != null) {
                     suffix = (backFace ? "b" : "a");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
-                downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
-                downloadUrls.add(String.format("https://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
+                downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%s%s.jpg", editionMciCode, cardNum, suffix));
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {

@@ -30,7 +30,7 @@ public class MessageUtil {
     // These are not much related to PlayerController
     public static  String formatNotificationMessage(SpellAbility sa, Player player, GameObject target, String value) {
         if (sa == null || sa.getApi() == null || sa.getHostCard() == null) {
-            return ("Result: " + value);
+            return Localizer.getInstance().getMessage("lblResultIs", value);
         }
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {
@@ -41,26 +41,26 @@ public class MessageUtil {
                     return value;
                 }
                 return sa.hasParam("Random")
-                        ? TextUtil.concatWithSpace("Randomly chosen number for", mayBeYou(player, target),"is", value)
-                        : TextUtil.concatWithSpace( mayBeYou(player, target),"chooses number:", value);
+                        ? Localizer.getInstance().getMessage("lblPlayerRandomChosenNumberIs", mayBeYou(player, target), value)
+                        : Localizer.getInstance().getMessage("lblPlayerChoosesNumberIs", mayBeYou(player, target), value);
             case ChooseType:
-                return TextUtil.concatWithSpace(choser, Lang.joinVerb(choser, "choose"), value, "for effect of", sa.getHostCard().getName());
+                return Localizer.getInstance().getMessage("lblPlayerChooseValueOfEffectOfCard", choser, value, CardTranslation.getTranslatedName(sa.getHostCard().getName()));
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
-                        ? TextUtil.concatWithSpace(Lang.getPossesive(flipper),"flip comes up", value)
-                        : TextUtil.concatWithSpace(flipper, Lang.joinVerb(flipper, value), "the flip");
+                        ? Localizer.getInstance().getMessage("lblPlayerFlipComesUpValue", Lang.getPossesive(flipper), value)
+                        : Localizer.getInstance().getMessage("lblPlayerActionFlip", flipper, Lang.joinVerb(flipper, value));
             case Protection:
-                return TextUtil.concatWithSpace(choser, Lang.joinVerb(choser, "choose"), value);
+                return Localizer.getInstance().getMessage("lblPlayerChooseValue", choser, value);
             case Vote:
                 String chooser = StringUtils.capitalize(mayBeYou(player, target));
-                return TextUtil.concatWithSpace(chooser, Lang.joinVerb(chooser,"vote"), value);
+                return Localizer.getInstance().getMessage("lblPlayerVoteValue", chooser, value);
             default:
                 String tgt = mayBeYou(player, target);
                 if (tgt.equals("(null)")) {
-                    return TextUtil.concatWithSpace(sa.getHostCard().getName(),"effect's value is", value);
+                    return Localizer.getInstance().getMessage("lblCardEffectValueIs", CardTranslation.getTranslatedName(sa.getHostCard().getName()), value);
                 } else {
-                    return TextUtil.concatWithSpace(sa.getHostCard().getName(),"effect's value for", tgt,"is", value);
+                    return Localizer.getInstance().getMessage("lblCardEffectToTargetValueIs", CardTranslation.getTranslatedName(sa.getHostCard().getName()), tgt, value);
                 }
         }
     }

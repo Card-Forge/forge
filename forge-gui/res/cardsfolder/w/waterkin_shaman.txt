@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Elemental Shaman
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+withFlying | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature with flying enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 SVar:BuffedBy:Creature.withFlying
 Oracle:Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn.

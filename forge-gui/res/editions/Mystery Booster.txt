@@ -1,0 +1,1704 @@
+[metadata]
+Code=MB1
+Date=2019-11-07
+Name=Mystery Booster
+Type=Reprint
+BoosterCovers=1
+Booster=2 fromSheet("MB1 White CommonUncommon"), 2 fromSheet("MB1 Blue CommonUncommon"), 2 fromSheet("MB1 Black CommonUncommon"), 2 fromSheet("MB1 Green CommonUncommon"), 2 fromSheet("MB1 Red CommonUncommon"), 1 fromSheet("MB1 Multi CommonUncommon"), 1 fromSheet("MB1 Artifact Land CommonUncommon"), 1 fromSheet("MB1 Pre M15"), 1 fromSheet("MB1 Post M15 RareMythic"), 1 fromSheet("FMB1 Foils")
+Foil=NotSupported
+
+[cards]
+1 R All Is Dust
+2 U Artisan of Kozilek
+3 U Breaker of Armies
+4 R Desolation Twin
+5 C Eldrazi Devastator
+6 U Pathrazer of Ulamog
+7 U Abzan Falconer
+8 C Abzan Runemark
+9 C Acrobatic Maneuver
+10 U Adanto Vanguard
+11 R Adorned Pouncer
+12 C Affa Protector
+13 C Ainok Bond-Kin
+14 U Ajani's Pridemate
+15 C Alley Evasion
+16 M Angelic Destiny
+17 C Angelic Gift
+18 C Angelic Purge
+19 C Angel of Mercy
+20 U Angel of Renewal
+21 R Angel of the Dire Hour
+22 C Angelsong
+23 C Apostle's Blessing
+24 R Approach of the Second Sun
+25 U Archangel
+26 C Arrest
+27 C Arrester's Zeal
+28 C Artful Maneuver
+29 U Aura of Silence
+30 C Aven Battle Priest
+31 C Aven Sentry
+32 C Ballynock Cohort
+33 C Bartered Cow
+34 U Battle Mastery
+35 R Beacon of Immortality
+36 C Benevolent Ancestor
+37 C Blade Instructor
+38 U Blessed Spirits
+39 C Bonds of Faith
+40 C Borrowed Grace
+41 C Built to Last
+42 C Bulwark Giant
+43 C Candlelight Vigil
+44 C Caravan Escort
+45 C Cartouche of Solidarity
+46 U Cast Out
+47 C Cathar's Companion
+48 C Caught in the Brights
+49 U Celestial Crusader
+50 C Celestial Flare
+51 C Center Soul
+52 C Champion of Arashin
+53 R Champion of the Parish
+54 R Chancellor of the Annex
+55 C Charge
+56 C Cliffside Lookout
+57 C Cloudshift
+58 C Coalition Honor Guard
+59 C Collar the Culprit
+60 U Congregate
+61 C Conviction
+62 C Countless Gears Renegade
+63 C Court Homunculus
+64 C Court Street Denizen
+65 U Crib Swap
+66 U Danitha Capashen, Paragon
+67 C Daring Skyjek
+68 U Darksteel Mutation
+69 C Dauntless Cathar
+70 C Dawnglare Invoker
+71 C Decommission
+72 R Decree of Justice
+73 C Defiant Strike
+74 C Desperate Sentry
+75 C Devilthorn Fox
+76 R Dictate of Heliod
+77 C Disenchant
+78 U Dismantling Blow
+79 C Disposal Mummy
+80 C Divine Favor
+81 C Djeru's Renunciation
+82 C Djeru's Resolve
+83 C Doomed Traveler
+84 C Dragon Bell Monk
+85 C Dragon's Eye Sentry
+86 C Dragon's Presence
+87 C Eddytrail Hawk
+88 M Elesh Norn, Grand Cenobite
+89 C Emerge Unscathed
+90 C Empyrial Armor
+91 C Encampment Keeper
+92 U Encircling Fissure
+93 C Enduring Victory
+94 C Enlightened Ascetic
+95 C Ephemeral Shields
+96 C Ephemerate
+97 R Evra, Halcyon Witness
+98 C Excavation Elephant
+99 C Excoriate
+100 C Expedition Raptor
+101 C Expose Evil
+102 C Exultant Skymarcher
+103 C Eyes in the Skies
+104 C Faithbearer Paladin
+105 C Faith's Fetters
+106 C Feat of Resistance
+107 U Felidar Guardian
+108 R Felidar Sovereign
+109 U Felidar Umbra
+110 C Fencing Ace
+111 U Fiend Hunter
+112 C Firehoof Cavalry
+113 C Forsake the Worldly
+114 C Fortify
+115 C Fragmentize
+116 C Geist of the Moors
+117 U Ghostblade Eidolon
+118 M Gideon Jura
+119 C Gideon's Lawkeeper
+120 U Gift of Estates
+121 C Glaring Aegis
+122 C Gleam of Resistance
+123 C Glint-Sleeve Artisan
+124 C God-Pharaoh's Faithful
+125 C Gods Willing
+126 R Grasp of Fate
+127 C Grasp of the Hieromancer
+128 C Great-Horn Krushok
+129 C Guided Strike
+130 U Gustcloak Skirmisher
+131 C Gust Walker
+132 C Healer's Hawk
+133 C Healing Grace
+134 C Healing Hands
+135 C Heavy Infantry
+136 C Humble
+137 C Hyena Umbra
+138 C Infantry Veteran
+139 C Inquisitor's Ox
+140 C Inspired Charge
+141 C Intrusive Packbeast
+142 C Iona's Judgment
+143 C Isolation Zone
+144 U Jubilant Mascot
+145 C Knight of Cliffhaven
+146 U Knight of Dawn
+147 C Knight of Old Benalia
+148 C Knight of Sorrows
+149 C Knight of the Skyward Eye
+150 C Knight of the Tusk
+151 U Kor Bladewhirl
+152 C Kor Chant
+153 U Kor Firewalker
+154 C Kor Hookmaster
+155 C Kor Sky Climber
+156 C Kor Skyfisher
+157 U Lashknife Barrier
+158 U Leonin Relic-Warder
+159 C Lieutenants of the Guard
+160 U Lightform
+161 C Lightwalker
+162 U Lingering Souls
+163 C Lone Missionary
+164 C Lonesome Unicorn
+165 C Looming Altisaur
+166 C Lotus-Eye Mystics
+167 C Loxodon Partisan
+168 C Loyal Sentry
+169 C Lunarch Mantle
+170 R Magus of the Moat
+171 C Mana Tithe
+172 C Mardu Hordechief
+173 C Marked by Honor
+174 R Martyr's Bond
+175 U Martyr's Cause
+176 C Meditation Puzzle
+177 C Midnight Guard
+178 R Mirran Crusader
+179 R Mirror Entity
+180 C Momentary Blink
+181 C Moonlit Strider
+182 C Mortal's Ardor
+183 U Mother of Runes
+184 C Ninth Bridge Patrol
+185 U Nyx-Fleece Ram
+186 R Odric, Lunarch Marshal
+187 C Ondu Greathorn
+188 C Ondu War Cleric
+189 C Oreskos Swiftclaw
+190 U Oust
+191 C Pacifism
+192 U Palace Jailer
+193 C Palace Sentinels
+194 C Paladin of the Bloodstained
+195 C Path of Peace
+196 U Path to Exile
+197 U Peace of Mind
+198 C Pegasus Courser
+199 C Pentarch Ward
+200 C Pitfall Trap
+201 C Pressure Point
+202 U Promise of Bunrei
+203 C Prowling Caracal
+204 C Rally the Peasants
+205 C Raptor Companion
+206 R Recruiter of the Guard
+207 U Refurbish
+208 C Renewed Faith
+209 C Resurrection
+210 U Retreat to Emeria
+211 C Reviving Dose
+212 C Rhet-Crop Spearmaster
+213 U Righteous Cause
+214 C Rootborn Defenses
+215 C Sacred Cat
+216 C Sanctum Gargoyle
+217 C Sandstorm Charger
+218 C Savannah Lions
+219 C Seal of Cleansing
+220 C Searing Light
+221 U Seeker of the Way
+222 C Sensor Splicer
+223 U Seraph of the Suns
+224 C Serra Disciple
+225 U Serra's Embrace
+226 C Sheer Drop
+227 C Shining Aerosaur
+228 C Shining Armor
+229 C Shoulder to Shoulder
+230 C Siegecraft
+231 C Silverchase Fox
+232 C Skyhunter Skirmisher
+233 U Skymarcher Aspirant
+234 C Skyspear Cavalry
+235 C Slash of Talons
+236 C Snubhorn Sentry
+237 C Soulmender
+238 C Soul Parry
+239 C Soul-Strike Technique
+240 C Soul Summons
+241 C Soul Warden
+242 C Sparring Mummy
+243 C Spectral Gateguards
+244 C Stalwart Aven
+245 C Star-Crowned Stag
+246 C Stave Off
+247 C Steadfast Sentinel
+248 C Stone Haven Medic
+249 C Sunlance
+250 C Sunrise Seeker
+251 C Suppression Bonds
+252 C Survive the Night
+253 U Swords to Plowshares
+254 C Take Vengeance
+255 C Tandem Tactics
+256 R Teferi's Protection
+257 C Terashi's Grasp
+258 C Territorial Hammerskull
+259 R Thalia's Lancers
+260 C Thraben Inspector
+261 C Thraben Standard Bearer
+262 U Timely Reinforcements
+263 C Topan Freeblade
+264 C Unwavering Initiate
+265 C Veteran Swordsmith
+266 C Village Bell-Ringer
+267 C Voice of the Provinces
+268 U Volunteer Reserves
+269 C Wake the Reflections
+270 U Wall of Omens
+271 C Wall of One Thousand Cuts
+272 C Wandering Champion
+273 C War Behemoth
+274 R Weathered Wayfarer
+275 C Wild Griffin
+276 U Windborne Charge
+277 C Winged Shepherd
+278 U Wing Shards
+279 C Youthful Knight
+280 C Zealous Strike
+281 C Academy Journeymage
+282 C Aethersnipe
+283 C Aether Tradewinds
+284 C Amass the Components
+285 R Aminatou's Augury
+286 C Amphin Pathmage
+287 C Anticipate
+288 C Arcane Denial
+289 C Archaeomancer
+290 U Archetype of Imagination
+291 C Artificer's Assistant
+292 C Augur of Bolas
+293 C Augury Owl
+294 C Bastion Inventor
+295 C Befuddle
+296 C Benthic Giant
+297 C Benthic Infiltrator
+298 C Bewilder
+299 U Blue Elemental Blast
+300 C Borrowing 100,000 Arrows
+301 C Brainstorm
+302 C Brilliant Spectrum
+303 U Brine Elemental
+304 C Calculated Dismissal
+305 C Caller of Gales
+306 C Call to Heel
+307 C Cancel
+308 C Capture Sphere
+309 C Cartouche of Knowledge
+310 C Castaway's Despair
+311 C Catalog
+312 U Chart a Course
+313 R Chasm Skulker
+314 C Chillbringer
+315 C Choking Tethers
+316 C Chronostutter
+317 U Circular Logic
+318 U Citywatch Sphinx
+319 C Claustrophobia
+320 C Clear the Mind
+321 C Cloak of Mists
+322 C Cloud Elemental
+323 C Cloudkin Seer
+324 C Cloudreader Sphinx
+325 C Clutch of Currents
+326 C Compelling Argument
+327 U Concentrate
+328 U Condescend
+329 C Containment Membrane
+330 C Contingency Plan
+331 C Contradict
+332 C Convolute
+333 C Coralhelm Guide
+334 C Coral Trickster
+335 U Corrupted Conscience
+336 C Counterspell
+337 C Court Hussar
+338 C Crashing Tide
+339 C Crush Dissent
+340 U Curiosity
+341 C Curio Vendor
+342 C Daze
+343 C Dazzling Lights
+344 C Decision Paralysis
+345 C Deep Analysis
+346 C Deep Freeze
+347 R Deepglow Skate
+348 C Diminish
+349 C Dirgur Nemesis
+350 C Dispel
+351 C Displace
+352 U Distortion Strike
+353 C Divination
+354 R Djinn of Wishes
+355 C Doorkeeper
+356 U Dragon's Eye Savants
+357 C Drag Under
+358 C Dreadwaters
+359 C Dream Cache
+360 C Dream Twist
+361 C Eel Umbra
+362 C Embodiment of Spring
+363 R Energy Field
+364 C Enlightened Maniac
+365 U Ensoul Artifact
+366 C Errant Ephemeron
+367 C Essence Scatter
+368 U Everdream
+369 U Exclude
+370 M Expropriate
+371 U Fact or Fiction
+372 C Faerie Invaders
+373 C Faerie Mechanist
+374 C Failed Inspection
+375 U Fascination
+376 C Fathom Seer
+377 R Fblthp, the Lost
+378 U Flashfreeze
+379 U Fledgling Mawcor
+380 C Fleeting Distraction
+381 U Floodgate
+382 U Fog Bank
+383 C Fogwalker
+384 C Foil
+385 C Forbidden Alchemy
+386 C Frantic Search
+387 C Frilled Sea Serpent
+388 C Frost Lynx
+389 C Gaseous Form
+390 C Ghost Ship
+391 C Glacial Crasher
+392 C Glint
+393 C Gone Missing
+394 C Grasp of Phantoms
+395 U Guard Gomazoa
+396 C Gurmag Drowner
+397 C Gush
+398 U Hedron Crab
+399 C Hieroglyphic Illumination
+400 C Hightide Hermit
+401 C Hinterland Drake
+402 C Horseshoe Crab
+403 C Humongulus
+404 C Impulse
+405 C Inkfathom Divers
+406 C Invisibility
+407 C Ior Ruin Expedition
+408 C Jace's Phantasm
+409 C Jeering Homunculus
+410 C Jeskai Sage
+411 R Jushi Apprentice
+412 C Jwar Isle Avenger
+413 C Kiora's Dambreaker
+414 C Laboratory Brute
+415 U Laboratory Maniac
+416 U Labyrinth Guardian
+417 U Lay Claim
+418 C Leapfrog
+419 U Mahamoti Djinn
+420 C Mana Leak
+421 C Man-o'-War
+422 R Master Transmuter
+423 C Maximize Altitude
+424 R Memory Erosion
+425 C Memory Lapse
+426 U Merfolk Looter
+427 C Messenger Jays
+428 C Metallic Rebuke
+429 C Mind Sculpt
+430 R Mind Spring
+431 R The Mirari Conjecture
+432 R Misdirection
+433 U Mistform Shrieker
+434 C Mist Raven
+435 C Mnemonic Wall
+436 C Monastery Loremaster
+437 C Mulldrifter
+438 U Murder of Crows
+439 C Mystical Teachings
+440 R Mystic Confluence
+441 C Mystic of the Hidden Way
+442 C Nagging Thoughts
+443 C Negate
+444 C Niblis of Dusk
+445 C Nine-Tail White Fox
+446 C Ninja of the Deep Hours
+447 C Ojutai Interceptor
+448 C Ojutai's Breath
+449 C Omenspeaker
+450 U Opportunity
+451 C Opt
+452 C Peel from Reality
+453 C Phantasmal Bear
+454 U Phantasmal Dragon
+455 U Phyrexian Ingester
+456 R Phyrexian Metamorph
+457 C Pondering Mage
+458 C Portent
+459 U Predict
+460 C Preordain
+461 U Prodigal Sorcerer
+462 U Propaganda
+463 C Prosperous Pirates
+464 C Purple-Crystal Crab
+465 C Refocus
+466 C Repulse
+467 C Retraction Helix
+468 C Rhystic Study
+469 U Riftwing Cloudskate
+470 C Ringwarden Owl
+471 U Rishadan Footpad
+472 C River Darter
+473 C River Serpent
+474 C Riverwheel Aerialists
+475 U Sage of Lat-Nam
+476 C Sailor of Means
+477 R Sakashima the Impostor
+478 C Sapphire Charm
+479 C Scroll Thief
+480 C Sea Gate Oracle
+481 U Sealock Monster
+482 C Secrets of the Golden City
+483 C Send to Sleep
+484 R Serendib Efreet
+485 C Shaper Parasite
+486 C Shimmerscale Drake
+487 C Shipwreck Looter
+488 U Sigiled Starfish
+489 C Silent Observer
+490 U Silvergill Adept
+491 C Singing Bell Strike
+492 U Skaab Goliath
+493 C Skitter Eel
+494 C Skittering Crustacean
+495 U Sleep
+496 C Slipstream Eel
+497 C Slither Blade
+498 C Snap
+499 C Snapping Drake
+500 C Somber Hoverguard
+501 U Soothsaying
+502 U Sphinx's Tutelage
+503 C Spire Monitor
+504 C Steady Progress
+505 C Stitched Drake
+506 C Storm Sculptor
+507 C Strategic Planning
+508 C Stream of Thought
+509 R Stunt Double
+510 C Surrakar Banisher
+511 C Syncopate
+512 U Syr Elenora, the Discerning
+513 R Talrand, Sky Summoner
+514 C Tandem Lookout
+515 M Teferi, Temporal Archmage
+516 C Temporal Fissure
+517 M Temporal Mastery
+518 U Thieving Magpie
+519 C Thornwind Faeries
+520 C Thoughtcast
+521 C Thought Collapse
+522 C Thought Scour
+523 U Thrummingbird
+524 C Thunder Drake
+525 C Tidal Warrior
+526 C Tidal Wave
+527 U Tinker
+528 C Totally Lost
+529 U Trail of Evidence
+530 C Treasure Cruise
+531 C Treasure Hunt
+532 U Treasure Mage
+533 C Trinket Mage
+534 U Triton Tactics
+535 C Turn Aside
+536 C Uncomfortable Chill
+537 C Vapor Snag
+538 C Vigean Graftmage
+539 U Wall of Frost
+540 C Warden of Evos Isle
+541 C Watercourser
+542 C Wave-Wing Elemental
+543 C Weldfast Wingsmith
+544 C Welkin Tern
+545 R Whelming Wave
+546 C Whiplash Trap
+547 R Whir of Invention
+548 C Windcaller Aven
+549 C Wind Drake
+550 U Wind-Kin Raiders
+551 C Windrider Eel
+552 C Wind Strider
+553 C Wishcoin Crab
+554 C Wishful Merfolk
+555 C Wretched Gryff
+556 C Write into Being
+557 U Youthful Scholar
+558 C Absorb Vis
+559 C Accursed Spirit
+560 C Aid the Fallen
+561 C Alesha's Vanguard
+562 C Alley Strangler
+563 C Altar's Reap
+564 C Ambitious Aetherborn
+565 C Ancestral Vengeance
+566 U Animate Dead
+567 U Annihilate
+568 C Bala Ged Scorpion
+569 U Baleful Ammit
+570 C Balustrade Spy
+571 C Bartizan Bats
+572 C Bitter Revelation
+573 C Black Cat
+574 U Black Knight
+575 R Black Market
+576 C Bladebrand
+577 C Blessing of Belzenlok
+578 C Blighted Bat
+579 C Blightsoil Druid
+580 C Blistergrub
+581 U Blood Artist
+582 C Bloodrite Invoker
+583 C Bone Splinters
+584 C Boon of Emrakul
+585 U Breeding Pit
+586 C Butcher's Glee
+587 U Cabal Therapy
+588 C Cackling Imp
+589 C Cadaver Imp
+590 R Cairn Wanderer
+591 C Caligo Skin-Witch
+592 U Carrion Feeder
+593 C Carrion Imp
+594 C Catacomb Crocodile
+595 C Catacomb Slug
+596 U Caustic Tar
+597 C Certain Death
+598 C Child of Night
+599 C Coat with Venom
+600 R Collective Brutality
+601 U Corpsehatch
+602 C Costly Plunder
+603 C Covenant of Blood
+604 C Cower in Fear
+605 C Crippling Blight
+606 C Crow of Dark Tidings
+607 C Cursed Minotaur
+608 C Daring Demolition
+609 U Darkblast
+610 C Dark Dabbling
+611 C Dark Ritual
+612 C Dark Withering
+613 U Dauthi Mindripper
+614 C Deadbridge Shaman
+615 C Deadeye Tormentor
+616 R Deadly Tempest
+617 C Dead Reveler
+618 C Death Denied
+619 C Defeat
+620 U Demonic Tutor
+621 C Demonic Vigor
+622 C Demon's Grasp
+623 C Desperate Castaways
+624 C Diabolic Edict
+625 R Dictate of Erebos
+626 C Die Young
+627 C Dinosaur Hunter
+628 C Dirge of Dread
+629 U Dismember
+630 C Disowned Ancestor
+631 C Doomed Dissenter
+632 C Douse in Gloom
+633 R Drana, Kalastria Bloodchief
+634 C Dreadbringer Lampads
+635 C Dread Drone
+636 U Dread Return
+637 C Dregscape Zombie
+638 C Driver of the Dead
+639 C Drudge Sentinel
+640 C Dukhara Scavenger
+641 C Dune Beetle
+642 C Duress
+643 C Dusk Charger
+644 C Dusk Legion Zealot
+645 U The Eldest Reborn
+646 C Epicure of Blood
+647 C Erg Raiders
+648 C Eternal Thirst
+649 C Evincar's Justice
+650 C Executioner's Capsule
+651 U Exsanguinate
+652 C Eyeblight's Ending
+653 U Fallen Angel
+654 C Farbog Revenant
+655 U Fatal Push
+656 C Fen Hauler
+657 C Feral Abomination
+658 C Festercreep
+659 C Festering Newt
+660 C Fetid Imp
+661 C Fill with Fright
+662 C First-Sphere Gargantua
+663 C Flesh to Dust
+664 U Fretwork Colony
+665 C Fungal Infection
+666 U Genju of the Fens
+667 C Ghostly Changeling
+668 C Ghoulcaller's Accomplice
+669 U Gifted Aetherborn
+670 U Go for the Throat
+671 R Gonti, Lord of Luxury
+672 C Grasping Scoundrel
+673 R Gravecrawler
+674 C Gravedigger
+675 C Gravepurge
+676 M Grave Titan
+677 C Gray Merchant of Asphodel
+678 C Grim Affliction
+679 C Grim Discovery
+680 C Grixis Slavedriver
+681 C Grotesque Mutation
+682 C Gruesome Fate
+683 C Gurmag Angler
+684 R Haakon, Stromgald Scourge
+685 C Hideous End
+686 C Hired Blade
+687 C Hound of the Farbogs
+688 U Hunter of Eyeblights
+689 R Hypnotic Specter
+690 C Induce Despair
+691 C Infernal Scarring
+692 U Infest
+693 C Innocent Blood
+694 U Inquisition of Kozilek
+695 C Instill Infection
+696 C Kalastria Nightwatch
+697 C Krumar Bond-Kin
+698 C Lawless Broker
+699 C Lazotep Behemoth
+700 C Lethal Sting
+701 M Liliana, Death's Majesty
+702 R Living Death
+703 U Lord of the Accursed
+704 C Macabre Waltz
+705 C Marauding Boneslasher
+706 C March of the Drowned
+707 C Mark of the Vampire
+708 C Marsh Hulk
+709 C Mephitic Vapors
+710 C Merciless Resolve
+711 C Miasmic Mummy
+712 C Mind Rake
+713 C Mind Rot
+714 R Mind Shatter
+715 C Mire's Malice
+716 C Moment of Craving
+717 C Murder
+718 C Murderous Compulsion
+719 C Nameless Inversion
+720 C Nantuko Husk
+721 C Never Happened
+722 R Nighthowler
+723 C Night's Whisper
+724 C Nirkana Assassin
+725 U Noxious Dragon
+726 C Okiba-Gang Shinobi
+727 C Painful Lesson
+728 U Perish
+729 C Pestilence
+730 R Phyrexian Arena
+731 R Phyrexian Plaguelord
+732 C Phyrexian Rager
+733 U Phyrexian Reclamation
+734 C Pit Keeper
+735 U Plaguecrafter
+736 C Plagued Rusalka
+737 C Plague Wight
+738 C Prakhata Club Security
+739 C Prowling Pangolin
+740 C Queen's Agent
+741 U Quest for the Gravelord
+742 C Rabid Bloodsucker
+743 C Rakdos Drake
+744 C Rakshasa's Secret
+745 U Ravenous Chupacabra
+746 C Read the Bones
+747 C Reaper of Night // Harvest Fear
+748 U Reassembling Skeleton
+749 C Reckless Imp
+750 U Reckless Spite
+751 C Recover
+752 C Renegade Demon
+753 C Renegade's Getaway
+754 C Returned Centaur
+755 R Revel in Riches
+756 U Revenant
+757 C Rite of the Serpent
+758 C Rotfeaster Maggot
+759 C Ruin Rat
+760 R Rune-Scarred Demon
+761 U Sadistic Hypnotist
+762 C Scarab Feast
+763 C Scrounger of Souls
+764 C Scuttling Death
+765 C Seal of Doom
+766 U Sengir Vampire
+767 R Sewer Nemesis
+768 C Shadowcloak Vampire
+769 C Shambling Attendants
+770 C Shambling Goblin
+771 U Shriekmaw
+772 U Shrouded Lore
+773 C Silumgar Butcher
+774 U Skeletal Scrying
+775 C Skeleton Archer
+776 C Skulking Ghost
+777 U Smiting Helix
+778 M Sorin Markov
+779 C Spreading Rot
+780 U Stab Wound
+781 C Stallion of Ashmouth
+782 C Stinkweed Imp
+783 U Street Wraith
+784 C Stromkirk Patrol
+785 C Subtle Strike
+786 C Sultai Runemark
+787 C Tar Snare
+788 U Tavern Swindler
+789 C Tendrils of Corruption
+790 C Thallid Omnivore
+791 C Thornbow Archer
+792 C Thorn of the Black Rose
+793 C Thraben Foulbloods
+794 C Tidy Conclusion
+795 R Torment of Hailfire
+796 C Torment of Venom
+797 C Touch of Moonglove
+798 R Toxin Sliver
+799 C Tragic Slip
+800 C Trespasser's Curse
+801 U Trial of Ambition
+802 C Twins of Maurer Estate
+803 C Typhoid Rats
+804 C Unburden
+805 C Undercity's Embrace
+806 C Untamed Hunger
+807 C Unyielding Krumar
+808 C Urborg Uprising
+809 C Vampire Champion
+810 C Vampire Envoy
+811 U Vampire Hexmage
+812 C Vampire Lacerator
+813 U Vampire Nighthawk
+814 C Vessel of Malignity
+815 C Virulent Swipe
+816 C Voracious Null
+817 C Vraska's Finisher
+818 C Wake of Vultures
+819 C Walking Corpse
+820 U Walk the Plank
+821 C Wander in Death
+822 C Warteye Witch
+823 C Weight of the Underworld
+824 C Weirded Vampire
+825 U Wight of Precinct Six
+826 U Will-o'-the-Wisp
+827 C Windgrace Acolyte
+828 C Wrench Mind
+829 U Yargle, Glutton of Urborg
+830 C Zulaport Chainmage
+831 C Act of Treason
+832 U Act on Impulse
+833 U Ahn-Crop Crasher
+834 C Ainok Tracker
+835 C Akroan Sergeant
+836 C Alchemist's Greeting
+837 R Alesha, Who Smiles at Death
+838 U Ancient Grudge
+839 U Anger
+840 R Anger of the Gods
+841 U Arc Trail
+842 C Arrow Storm
+843 C Atarka Efreet
+844 U Avalanche Riders
+845 C Avarax
+846 C Azra Bladeseeker
+847 C Balduvian Horde
+848 C Barging Sergeant
+849 C Barrage of Boulders
+850 C Battle Rampart
+851 C Battle-Rattle Shaman
+852 U Beetleback Chief
+853 C Bellows Lizard
+854 C Blades of Velis Vel
+855 C Blastfire Bolt
+856 C Blazing Volley
+857 C Blindblast
+858 C Bloodfire Expert
+859 C Bloodlust Inciter
+860 C Bloodmad Vampire
+861 C Blood Ogre
+862 C Bloodstone Goblin
+863 C Blow Your House Down
+864 C Blur of Blades
+865 C Boggart Brute
+866 C Boiling Earth
+867 C Bombard
+868 C Bomber Corps
+869 C Borrowed Hostility
+870 C Boulder Salvo
+871 C Brazen Buccaneers
+872 C Brazen Wolves
+873 R Brimstone Dragon
+874 U Brimstone Mage
+875 C Bring Low
+876 U Browbeat
+877 C Brute Strength
+878 C Built to Smash
+879 C Burst Lightning
+880 C Canyon Lurkers
+881 C Cartouche of Zeal
+882 C Cathartic Reunion
+883 C Chandra's Pyrohelix
+884 C Chandra's Revolution
+885 R Chaos Warp
+886 U Charging Monstrosaur
+887 C Chartooth Cougar
+888 C Cinder Hellion
+889 C Cleansing Screech
+890 C Cobblebrute
+891 C Cosmotronic Wave
+892 R Cragganwick Cremator
+893 C Crash Through
+894 C Crowd's Favor
+895 C Crown-Hunter Hireling
+896 U Curse of Opulence
+897 U Curse of the Nightly Hunt
+898 M Daretti, Scrap Savant
+899 U Death by Dragons
+900 C Defiant Ogre
+901 C Demolish
+902 C Desert Cerodon
+903 U Desperate Ravings
+904 C Destructive Tampering
+905 C Direct Current
+906 C Distemper of the Blood
+907 U Dragon Breath
+908 C Dragon Egg
+909 C Dragon Fodder
+910 C Dragonsoul Knight
+911 U Dragon Whelp
+912 C Dual Shot
+913 C Dynacharge
+914 C Earth Elemental
+915 C Emrakul's Hatcher
+916 U Enthralling Victor
+917 C Erratic Explosion
+918 C Expedite
+919 C Faithless Looting
+920 C Falkenrath Reaver
+921 C Fall of the Hammer
+922 C Fervent Strike
+923 C Fierce Invocation
+924 C Fiery Hellhound
+925 C Fiery Temper
+926 U Fireball
+927 C Firebolt
+928 C Firebrand Archer
+929 C Fire Elemental
+930 U Flame Jab
+931 U Flameshot
+932 U Flametongue Kavu
+933 U Flamewave Invoker
+934 C Fling
+935 C Forge Devil
+936 C Foundry Street Denizen
+937 C Frenzied Raptor
+938 C Frilled Deathspitter
+939 C Frontline Devastator
+940 C Frontline Rebel
+941 C Furnace Whelp
+942 C Fury Charm
+943 C Galvanic Blast
+944 C Generator Servant
+945 U Genju of the Spires
+946 C Geomancer's Gambit
+947 C Ghitu Lavarunner
+948 U Ghitu War Cry
+949 C Giant Spectacle
+950 U Goblin Assault
+951 C Goblin Balloon Brigade
+952 U Goblin Bombardment
+953 C Goblin Fireslinger
+954 R Goblin Game
+955 C Goblin Locksmith
+956 U Goblin Matron
+957 C Goblin Motivator
+958 U Goblin Oriflamme
+959 R Goblin Piledriver
+960 C Goblin Roughrider
+961 U Goblin Warchief
+962 C Goblin War Paint
+963 C Gorehorn Minotaurs
+964 C Gore Swine
+965 C Granitic Titan
+966 C Grapeshot
+967 C Gravitic Punch
+968 R Greater Gargadon
+969 C Gut Shot
+970 U Guttersnipe
+971 C Hammerhand
+972 C Hanweir Lancer
+973 C Hardened Berserker
+974 C Hijack
+975 C Hulking Devil
+976 C Hyena Pack
+977 C Ill-Tempered Cyclops
+978 C Impact Tremors
+979 R Impending Disaster
+980 U Incorrigible Youths
+981 C Inferno Fist
+982 U Inferno Jet
+983 C Ingot Chewer
+984 C Insolent Neonate
+985 C Jackal Pup
+986 C Kaervek's Torch
+987 M Kargan Dragonlord
+988 C Keldon Halberdier
+989 C Keldon Overseer
+990 C Khenra Scrapper
+991 M Kiki-Jiki, Mirror Breaker
+992 C Kiln Fiend
+993 C Kird Ape
+994 R Knollspine Dragon
+995 C Kolaghan Stormsinger
+996 R Krenko, Mob Boss
+997 C Krenko's Command
+998 C Krenko's Enforcer
+999 C Leaping Master
+1000 C Leopard-Spotted Jiao
+1001 U Lightning Bolt
+1002 C Lightning Javelin
+1003 C Lightning Shrieker
+1004 C Lightning Talons
+1005 C Madcap Skills
+1006 C Magma Spray
+1007 C Makindi Sliderunner
+1008 C Mardu Warshrieker
+1009 U Mark of Mutiny
+1010 C Maximize Velocity
+1011 C Miner's Bane
+1012 R Mizzix's Mastery
+1013 U Mogg Fanatic
+1014 C Mogg Flunkies
+1015 C Mogg War Marshal
+1016 U Molten Rain
+1017 U Monastery Swiftspear
+1018 C Mutiny
+1019 C Nimble-Blade Khenra
+1020 C Ondu Champion
+1021 C Orcish Cannonade
+1022 C Orcish Oriflamme
+1023 C Outnumber
+1024 C Pillage
+1025 R Preyseizer Dragon
+1026 U Price of Progress
+1027 C Prickleboar
+1028 C Prophetic Ravings
+1029 M Purphoros, God of the Forge
+1030 U Pyrotechnics
+1031 C Quakefoot Cyclops
+1032 R Rage Reflection
+1033 C Rampaging Cyclops
+1034 R Reality Scramble
+1035 C Reckless Fireweaver
+1036 C Reckless Wurm
+1037 U Recoup
+1038 U Release the Ants
+1039 R Release the Gremlins
+1040 C Renegade Tactics
+1041 U Rivals' Duel
+1042 U Roast
+1043 U Rolling Thunder
+1044 C Rubblebelt Maaka
+1045 C Ruinous Gremlin
+1046 C Rummaging Goblin
+1047 C Run Amok
+1048 C Rush of Adrenaline
+1049 C Salivating Gremlins
+1050 C Samut's Sprint
+1051 C Sarkhan's Rage
+1052 C Screamreach Brawler
+1053 C Seismic Shift
+1054 C Seismic Stomp
+1055 C Shatter
+1056 U Shattering Spree
+1057 C Shenanigans
+1058 C Shock
+1059 C Skirk Commando
+1060 C Skirk Prospector
+1061 C Smash to Smithereens
+1062 C Smelt
+1063 C Sparkmage Apprentice
+1064 C Sparkspitter
+1065 C Sparktongue Dragon
+1066 U Spikeshot Goblin
+1067 U Staggershock
+1068 M Star of Extinction
+1069 R Steamflogger Boss
+1070 U Stormblood Berserker
+1071 R Sudden Demise
+1072 U Sulfurous Blast
+1073 C Summit Prowler
+1074 C Sun-Crowned Hunters
+1075 C Swashbuckling
+1076 C Sweatworks Brawler
+1077 C Swift Kick
+1078 C Tarfire
+1079 R Taurean Mauler
+1080 U Tectonic Rift
+1081 C Temur Battle Rage
+1082 C Thresher Lizard
+1083 C Thrill of Possibility
+1084 U Tibalt's Rager
+1085 C Torch Courier
+1086 R Two-Headed Giant
+1087 C Uncaged Fury
+1088 C Undying Rage
+1089 R Urza's Rage
+1090 C Valakut Invoker
+1091 C Valakut Predator
+1092 C Valley Dasher
+1093 C Vandalize
+1094 C Vent Sentinel
+1095 C Vessel of Volatility
+1096 U Viashino Sandstalker
+1097 U Volcanic Dragon
+1098 C Volcanic Rush
+1099 C Voldaren Duelist
+1100 C Wall of Fire
+1101 C Wayward Giant
+1102 R Wheel of Fate
+1103 C Wildfire Emissary
+1104 C Wojek Bodyguard
+1105 U Young Pyromancer
+1106 C Zada's Commando
+1107 C Zealot of the God-Pharaoh
+1108 C Abundant Growth
+1109 U Acidic Slime
+1110 C Adventurous Impulse
+1111 C Aerie Bowmasters
+1112 U Affectionate Indrik
+1113 C Aggressive Instinct
+1114 C Aggressive Urge
+1115 U Ainok Survivalist
+1116 C Alpine Grizzly
+1117 C Ambassador Oak
+1118 U Ana Sanctuary
+1119 U Ancestral Mask
+1120 C Ancient Brontodon
+1121 U Ancient Stirrings
+1122 C Arachnus Web
+1123 C Arbor Armament
+1124 C Arbor Elf
+1125 R Asceticism
+1126 C Aura Gnarlid
+1127 C Avacyn's Pilgrim
+1128 C Backwoods Survivalists
+1129 C Baloth Gorger
+1130 C Basking Rootwalla
+1131 C Bear Cub
+1132 U Beastbreaker of Bala Ged
+1133 R Beastmaster Ascension
+1134 U Beast Within
+1135 U Become Immense
+1136 C Beneath the Sands
+1137 U Bestial Menace
+1138 R Birds of Paradise
+1139 C Bitterblade Warrior
+1140 C Bitterbow Sharpshooters
+1141 U Blanchwood Armor
+1142 C Blastoderm
+1143 R Bloom Tender
+1144 C Blossom Dryad
+1145 C Borderland Explorer
+1146 C Borderland Ranger
+1147 R Bow of Nylea
+1148 U Briarhorn
+1149 C Bristling Boar
+1150 C Broken Bond
+1151 C Broodhunter Wurm
+1152 C Byway Courier
+1153 C Call the Scions
+1154 C Canopy Spider
+1155 C Carnivorous Moss-Beast
+1156 U Carpet of Flowers
+1157 C Caustic Caterpillar
+1158 C Centaur Courser
+1159 U Centaur Glade
+1160 C Charging Rhino
+1161 C Chatter of the Squirrel
+1162 C Citanul Woodreaders
+1163 C Clip Wings
+1164 C Colossal Dreadmaw
+1165 C Combo Attack
+1166 C Commune with Nature
+1167 C Commune with the Gods
+1168 C Conifer Strider
+1169 R Courser of Kruphix
+1170 U Creeping Mold
+1171 C Crop Rotation
+1172 C Crossroads Consecrator
+1173 U The Crowd Goes Wild
+1174 C Crowned Ceratok
+1175 C Crushing Canopy
+1176 C Cultivate
+1177 C Daggerback Basilisk
+1178 C Dawn's Reflection
+1179 C Death-Hood Cobra
+1180 R Defense of the Heart
+1181 U Desert Twister
+1182 U Destructor Dragon
+1183 C Dissenter's Deliverance
+1184 U Domesticated Hydra
+1185 C Dragonscale Boon
+1186 C Dragon-Scarred Bear
+1187 R Dungrove Elder
+1188 C Durkwood Baloth
+1189 C Earthen Arms
+1190 R Eldritch Evolution
+1191 C Elemental Uprising
+1192 C Elephant Guide
+1193 C Elves of Deep Shadow
+1194 C Elvish Fury
+1195 C Elvish Visionary
+1196 C Elvish Warrior
+1197 C Ember Weaver
+1198 C Epic Confrontation
+1199 C Essence Warden
+1200 U Eternal Witness
+1201 U Experiment One
+1202 C Explore
+1203 U Explosive Vegetation
+1204 C Ezuri's Archers
+1205 C Fade into Antiquity
+1206 C Farseek
+1207 C Feed the Clan
+1208 C Feral Krushok
+1209 C Feral Prowler
+1210 C Ferocious Zheng
+1211 C Fertile Ground
+1212 C Fierce Empath
+1213 C Fog
+1214 C Formless Nurturing
+1215 C Frontier Mastodon
+1216 U Gaea's Blessing
+1217 C Gaea's Protector
+1218 C Giant Growth
+1219 C Giant Spider
+1220 C Gift of Growth
+1221 C Gift of Paradise
+1222 C Glade Watcher
+1223 C Gnarlid Pack
+1224 C Grapple with the Past
+1225 C Grazing Gladehart
+1226 C Greater Basilisk
+1227 C Greater Sandwurm
+1228 R Greenbelt Rampager
+1229 C Greenwood Sentinel
+1230 C Groundswell
+1231 C Guardian Shield-Bearer
+1232 U Hamlet Captain
+1233 C Hardy Veteran
+1234 U Harmonize
+1235 C Harrow
+1236 C Hooded Brawler
+1237 C Hooting Mandrills
+1238 R Hornet Nest
+1239 C Hunter's Ambush
+1240 C Hunt the Weak
+1241 R Hurricane
+1242 U Imperious Perfect
+1243 U Invigorate
+1244 C Ivy Lane Denizen
+1245 C Jungle Delver
+1246 C Jungle Wayfinder
+1247 C Kavu Climber
+1248 C Kavu Primarch
+1249 C Khalni Heart Expedition
+1250 C Kin-Tree Warden
+1251 C Kozilek's Predator
+1252 C Kraul Foragers
+1253 C Kraul Warrior
+1254 C Krosan Druid
+1255 C Krosan Tusker
+1256 C Larger Than Life
+1257 C Lay of the Land
+1258 C Lead by Example
+1259 C Lead the Stampede
+1260 C Lifespring Druid
+1261 C Lignify
+1262 C Llanowar Elves
+1263 C Llanowar Empath
+1264 C Longshot Squad
+1265 U Lure
+1266 U Manglehorn
+1267 C Mantle of Webs
+1268 C Map the Wastes
+1269 R Meandering Towershell
+1270 C Might of the Masses
+1271 C Mulch
+1272 R Mycoloth
+1273 C Natural Connection
+1274 C Naturalize
+1275 C Nature's Claim
+1276 C Nature's Lore
+1277 C Nest Invader
+1278 C Nettle Sentinel
+1279 C New Horizons
+1280 C Nimble Mongoose
+1281 M Nissa, Voice of Zendikar
+1282 C Oakgnarl Warrior
+1283 C Ondu Giant
+1284 C Oran-Rief Invoker
+1285 C Overgrown Armasaur
+1286 U Overgrown Battlement
+1287 U Overrun
+1288 C Pack's Favor
+1289 C Peema Outrider
+1290 U Pelakka Wurm
+1291 C Penumbra Spider
+1292 U Phantom Centaur
+1293 C Pierce the Sky
+1294 C Pinion Feast
+1295 C Plummet
+1296 C Pouncing Cheetah
+1297 C Prey's Vengeance
+1298 C Prey Upon
+1299 C Priest of Titania
+1300 C Pulse of Murasa
+1301 C Quiet Disrepair
+1302 U Rain of Thorns
+1303 C Rampant Growth
+1304 U Rancor
+1305 C Ranger's Guile
+1306 C Ravenous Leucrocota
+1307 C Reclaim
+1308 C Reclaiming Vines
+1309 U Regrowth
+1310 C Relic Crush
+1311 C Return to the Earth
+1312 C Revive
+1313 C Rhox Maulers
+1314 C Riparian Tiger
+1315 U River Boa
+1316 U Roar of the Wurm
+1317 C Root Out
+1318 C Roots
+1319 C Rosethorn Halberd
+1320 C Runeclaw Bear
+1321 C Sagu Archer
+1322 C Sakura-Tribe Elder
+1323 C Saproling Migration
+1324 C Savage Punch
+1325 C Scatter the Seeds
+1326 C Seal of Strength
+1327 C Search for Tomorrow
+1328 U Seek the Horizon
+1329 C Seek the Wilds
+1330 M Selvala, Heart of the Wilds
+1331 R Shamanic Revelation
+1332 C Shape the Sands
+1333 C Siege Wurm
+1334 C Silhana Ledgewalker
+1335 C Silkweaver Elite
+1336 C Snake Umbra
+1337 U Snapping Sailback
+1338 R Spawning Grounds
+1339 U Spider Spawning
+1340 R Squirrel Wrangler
+1341 C Stalking Tiger
+1342 C Stoic Builder
+1343 C Strength in Numbers
+1344 C Sylvan Bounty
+1345 U Sylvan Scrying
+1346 C Tajuru Pathwarden
+1347 U Tajuru Warcaller
+1348 C Take Down
+1349 C Talons of Wildwood
+1350 R Tempt with Discovery
+1351 C Terrain Elemental
+1352 C Territorial Baloth
+1353 C Thornhide Wolves
+1354 U Thornscape Battlemage
+1355 C Thornweald Archer
+1356 U Thrashing Brontodon
+1357 C Thrive
+1358 M Thrun, the Last Troll
+1359 U Timberwatch Elf
+1360 C Time to Feed
+1361 R Tireless Tracker
+1362 C Titanic Growth
+1363 U Triumph of the Hordes
+1364 C Tukatongue Thallid
+1365 U Turntimber Basilisk
+1366 C Vastwood Gorger
+1367 U Venom Sliver
+1368 R Vigor
+1369 C Watcher in the Web
+1370 C Wellwisher
+1371 C Wild Growth
+1372 C Wild Mongrel
+1373 C Wild Nacatl
+1374 C Wildsize
+1375 C Wolfkin Bond
+1376 U Woodborn Behemoth
+1377 C Woolly Loxodon
+1378 U Wren's Run Vanquisher
+1379 C Yavimaya Elder
+1380 C Yavimaya Sapherd
+1381 C Yeva's Forcemage
+1382 U Zendikar's Roil
+1383 U Abzan Charm
+1384 C Abzan Guide
+1385 C Agony Warp
+1386 U Akroan Hoplite
+1387 M Animar, Soul of Elements
+1388 U Armadillo Cloak
+1389 U Armament Corps
+1390 R Assemble the Legion
+1391 M Athreos, God of Passage
+1392 U Aura Shards
+1393 U Azorius Charm
+1394 U Azra Oddsmaker
+1395 U Baleful Strix
+1396 U Baloth Null
+1397 U Bear's Companion
+1398 U Belligerent Brontodon
+1399 U Bituminous Blast
+1400 U Bladewing the Risen
+1401 U Blightning
+1402 U Bloodbraid Elf
+1403 U Boros Challenger
+1404 U Bounding Krasis
+1405 U Call of the Nightwing
+1406 U Campaign of Vengeance
+1407 U Cauldron Dance
+1408 U Citadel Castellan
+1409 C Coiling Oracle
+1410 U Contraband Kingpin
+1411 U Corpsejack Menace
+1412 U Crosis's Charm
+1413 U Cunning Breezedancer
+1414 U Deathreap Ritual
+1415 C Deny Reality
+1416 U Draconic Disciple
+1417 M Dragon Broodmother
+1418 M Dragonlord Ojutai
+1419 U Drana's Emissary
+1420 U Engineered Might
+1421 U Esper Charm
+1422 U Ethercaste Knight
+1423 C Ethereal Ambush
+1424 U Extract from Darkness
+1425 U Fires of Yavimaya
+1426 U Flame-Kin Zealot
+1427 U Fusion Elemental
+1428 U Gelectrode
+1429 U Ghor-Clan Rampager
+1430 M The Gitrog Monster
+1431 C Goblin Deathraiders
+1432 C Grim Contest
+1433 R Guided Passage
+1434 C Hammer Dropper
+1435 U Hidden Stockpile
+1436 U Highspire Mantis
+1437 C Hypothesizzle
+1438 U Iroas's Champion
+1439 U Join Shields
+1440 U Jungle Barrier
+1441 U Kathari Remnant
+1442 U Kin-Tree Invocation
+1443 U Kiora's Follower
+1444 U Kiss of the Amesha
+1445 R Kolaghan's Command
+1446 M Kruphix, God of Horizons
+1447 C Lawmage's Binding
+1448 U Lightning Helix
+1449 M Maelstrom Archangel
+1450 U Mardu Roughrider
+1451 C Martial Glory
+1452 U Maverick Thopterist
+1453 R Meddling Mage
+1454 U Mercurial Geists
+1455 M Meren of Clan Nel Toth
+1456 U Migratory Route
+1457 U Mortify
+1458 U Naya Charm
+1459 R Nemesis of Reason
+1460 R Nin, the Pain Artist
+1461 U Obelisk Spider
+1462 U Ochran Assassin
+1463 U Pillory of the Sleepless
+1464 U Plaxcaster Frogling
+1465 U Pollenbright Wings
+1466 U Putrefy
+1467 C Qasali Pridemage
+1468 M Queen Marchesa
+1469 R Questing Phelddagrif
+1470 U Raff Capashen, Ship's Mage
+1471 U Raging Swordtooth
+1472 U Reclusive Artificer
+1473 U Reflector Mage
+1474 U Rhox War Monk
+1475 C Riptide Crab
+1476 R Rith, the Awakener
+1477 U River Hoopoe
+1478 C Rosemane Centaur
+1479 U Satyr Enchanter
+1480 R Savage Knuckleblade
+1481 U Savage Twister
+1482 U Sedraxis Specter
+1483 U Shambling Remains
+1484 U Shardless Agent
+1485 U Shipwreck Singer
+1486 U Skyward Eye Prophets
+1487 M Sliver Hivelord
+1488 U Soul Manipulation
+1489 U Sprouting Thrinax
+1490 U Stormchaser Chimera
+1491 U Sultai Charm
+1492 U Sultai Soothsayer
+1493 R Supreme Verdict
+1494 U Tatyova, Benthic Druid
+1495 C Terminate
+1496 U Thought Erasure
+1497 R Time Sieve
+1498 C Tithe Drinker
+1499 U Tower Gargoyle
+1500 U Treacherous Terrain
+1501 U Underworld Coinsmith
+1502 U Unflinching Courage
+1503 U Unlicensed Disintegration
+1504 U Urban Evolution
+1505 U Vengeful Rebirth
+1506 R Violent Ultimatum
+1507 U Warden of the Eye
+1508 R Wargate
+1509 U Wayfaring Temple
+1510 U Weapons Trainer
+1511 U Wee Dragonauts
+1512 U Winding Constrictor
+1513 U Woolly Thoctar
+1514 R Yavimaya's Embrace
+1515 R Yuriko, the Tiger's Shadow
+1516 U Zealous Persecution
+1517 C Zhur-Taa Druid
+1518 R Boros Reckoner
+1519 R Debtors' Knell
+1520 R Dominus of Fealty
+1521 R Doomgape
+1522 R Enchanted Evening
+1523 C Giantbaiting
+1524 C Gift of Orzhova
+1525 U Gwyllion Hedge-Mage
+1526 C Manamorphose
+1527 U Mistmeadow Witch
+1528 U Nucklavee
+1529 R Oracle of Nectars
+1530 R Rhys the Redeemed
+1531 U Rosheen Meanderer
+1532 U Selesnya Guildmage
+1533 U Shrewd Hatchling
+1534 U Slave of Bolas
+1535 U Thopter Foundry
+1536 U Claim // Fame
+1537 R Commit // Memory
+1538 C Fire // Ice
+1539 R Aetherflux Reservoir
+1540 C Aether Spellbomb
+1541 R Akroan Horse
+1542 C Alchemist's Vial
+1543 M Alhammarret's Archive
+1544 C Alloy Myr
+1545 C Armillary Sphere
+1546 U Ashnod's Altar
+1547 R Basilisk Collar
+1548 R Belbe's Portal
+1549 C Blinding Souleater
+1550 U Bomat Bazaar Barge
+1551 C Bone Saw
+1552 C Bonesplitter
+1553 R Boompile
+1554 U Bottle Gnomes
+1555 U Burnished Hart
+1556 R Caged Sun
+1557 U Cathodion
+1558 R Cauldron of Souls
+1559 R Chromatic Lantern
+1560 C Chromatic Star
+1561 R Coat of Arms
+1562 U Coldsteel Heart
+1563 U Consulate Dreadnought
+1564 U Contagion Clasp
+1565 C Copper Carapace
+1566 R Coveted Jewel
+1567 U Crenellated Wall
+1568 U Crystal Ball
+1569 U Crystal Chimes
+1570 U Crystal Shard
+1571 R Darksteel Garrison
+1572 U Diamond Mare
+1573 R Dolmen Gate
+1574 R Draco
+1575 U Dragon Mask
+1576 R Eater of Days
+1577 M Eldrazi Monument
+1578 U Elixir of Immortality
+1579 U Emmessi Tome
+1580 U Etched Oracle
+1581 U Farmstead Gleaner
+1582 U Filigree Familiar
+1583 C Flayer Husk
+1584 R Font of Mythos
+1585 U Foundry Inspector
+1586 U Fountain of Renewal
+1587 C Frogmite
+1588 R Goblin Charbelcher
+1589 C Gruul Signet
+1590 C Guardians of Meletis
+1591 U Heavy Arbalest
+1592 U Helm of Awakening
+1593 U Herald's Horn
+1594 C Hexplate Golem
+1595 U Hot Soup
+1596 U Icy Manipulator
+1597 C Implement of Malice
+1598 C Irontread Crusher
+1599 U Juggernaut
+1600 U Lightning Greaves
+1601 C Lotus Petal
+1602 U Loxodon Warhammer
+1603 M Mana Crypt
+1604 U Mask of Memory
+1605 U Meteorite
+1606 U Millikin
+1607 U Millstone
+1608 R Mimic Vat
+1609 C Mind Stone
+1610 U Mishra's Bauble
+1611 C Moonglove Extract
+1612 U Mortarpod
+1613 U Myr Retriever
+1614 C Myr Sire
+1615 C Ornithopter
+1616 U Palladium Myr
+1617 C Peace Strider
+1618 U Perilous Myr
+1619 R Phyrexian Soulgorger
+1620 U Pilgrim's Eye
+1621 R Precursor Golem
+1622 C Prophetic Prism
+1623 C Renegade Map
+1624 U Rhonas's Monument
+1625 U Sandstone Oracle
+1626 C Serrated Arrows
+1627 C Short Sword
+1628 U Sigil of Valor
+1629 C Simic Locket
+1630 U Skullclamp
+1631 C Skyscanner
+1632 R Solemn Simulacrum
+1633 U Sol Ring
+1634 U Sorcerer's Broom
+1635 U Spy Kit
+1636 U Sunset Pyramid
+1637 U Suspicious Bookcase
+1638 R Sword of the Animist
+1639 C Thought Vessel
+1640 U Thran Dynamo
+1641 U Thran Golem
+1642 U Tormod's Crypt
+1643 R Tower of Eons
+1644 R Trading Post
+1645 U Trepanation Blade
+1646 U Umbral Mantle
+1647 C Universal Automaton
+1648 C Universal Solvent
+1649 U Whispersilk Cloak
+1650 U Aether Hub
+1651 U Akoum Refuge
+1652 C Ancient Den
+1653 U Ancient Ziggurat
+1654 U Arcane Sanctum
+1655 R Arch of Orazca
+1656 C Ash Barrens
+1657 U Blasted Landscape
+1658 U Blighted Fen
+1659 C Blossoming Sands
+1660 C Bojuka Bog
+1661 U Crumbling Necropolis
+1662 C Darksteel Citadel
+1663 C Dismal Backwater
+1664 U Dreadship Reef
+1665 C Evolving Wilds
+1666 U Faerie Conclave
+1667 U Field of Ruin
+1668 C Forgotten Cave
+1669 U Frontier Bivouac
+1670 C Gateway Plaza
+1671 U Ghost Quarter
+1672 R Gilt-Leaf Palace
+1673 U Goblin Burrows
+1674 U Graypelt Refuge
+1675 C Great Furnace
+1676 C Jungle Hollow
+1677 U Jungle Shrine
+1678 U Kazandu Refuge
+1679 U Krosan Verge
+1680 U Mishra's Factory
+1681 U New Benalia
+1682 C Orzhov Basilica
+1683 U Reliquary Tower
+1684 U Rogue's Passage
+1685 U Sandsteppe Citadel
+1686 C Scoured Barrens
+1687 U Sejiri Refuge
+1688 U Skarrg, the Rage Pits
+1689 C Swiftwater Cliffs
+1690 U Tectonic Edge
+1691 U Temple of the False God
+1692 C Thornwood Falls
+1693 U Unclaimed Territory
+1694 U Wirewood Lodge

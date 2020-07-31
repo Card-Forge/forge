@@ -174,7 +174,7 @@ public class SetStateAi extends SpellAbilityAi {
         if (!card.isFaceDown()) {
             transformed.turnFaceDown(true);
         } else {
-            transformed.turnFaceUp(false, false);
+            transformed.forceTurnFaceUp();
         }
         transformed.updateStateForView();
         return compareCards(card, transformed, ai, ph);
@@ -248,7 +248,7 @@ public class SetStateAi extends SpellAbilityAi {
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
 
                 // for legendary KI counter creatures
-                if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
+                if (othercard.getCounters(CounterEnumType.KI) >= source.getCounters(CounterEnumType.KI)) {
                     // if the other legendary is useless try to replace it
                     return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }

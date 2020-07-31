@@ -1,0 +1,9 @@
+Name:Favored of Iroas
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, CARDNAME gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+SVar:BuffedBy:Enchantment
+DeckNeeds:Type$Enchantment
+Oracle:Constellation - Whenever an enchantment enters the battlefield under your control, Favored of Iroas gains double strike until end of turn.

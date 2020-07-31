@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerCountered extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCountered(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCountered(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -95,9 +96,9 @@ public class TriggerCountered extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(
-            this,
+            runParams,
             AbilityKey.Card,
             AbilityKey.Cause,
             AbilityKey.Player,
@@ -108,8 +109,8 @@ public class TriggerCountered extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Countered: ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
-        sb.append("Cause: ").append(sa.getTriggeringObject(AbilityKey.Cause));
+        sb.append(Localizer.getInstance().getMessage("lblCountered")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblCause")).append(": ").append(sa.getTriggeringObject(AbilityKey.Cause));
         return sb.toString();
     }
 }

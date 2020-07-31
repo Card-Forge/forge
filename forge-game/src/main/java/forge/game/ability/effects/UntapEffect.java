@@ -10,6 +10,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -80,7 +81,7 @@ public class UntapEffect extends SpellAbilityEffect {
                     valid, sa.getActivatingPlayer(), sa.getHostCard());
             list = CardLists.filter(list, Presets.TAPPED);
 
-            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", mandatory ? num : 0, num, !mandatory);
+            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
                 for (final Card c : selected) { 
                     c.untap();

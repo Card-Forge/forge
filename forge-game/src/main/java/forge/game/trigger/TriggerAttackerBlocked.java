@@ -23,6 +23,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -46,7 +47,7 @@ public class TriggerAttackerBlocked extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerBlocked(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerBlocked(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -85,9 +86,9 @@ public class TriggerAttackerBlocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(
-            this,
+            runParams,
             AbilityKey.Attacker,
             AbilityKey.Blockers,
             AbilityKey.Defender,
@@ -99,8 +100,8 @@ public class TriggerAttackerBlocked extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
-        sb.append("Number Blockers: ").append(sa.getTriggeringObject(AbilityKey.NumBlockers));
+        sb.append(Localizer.getInstance().getMessage("lblAttacker")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblNumberBlockers")).append(": ").append(sa.getTriggeringObject(AbilityKey.NumBlockers));
         return sb.toString();
     }
 }

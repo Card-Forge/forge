@@ -55,6 +55,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
+    private final FLabel btnCheckForUpdates           = _makeButton(localizer.getMessage("btnCheckForUpdates"));
     private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
     private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
     private final FLabel btnDownloadPicsHQ            = _makeButton(localizer.getMessage("btnDownloadPicsHQ"));
@@ -79,6 +80,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.setOpaque(false);
 
         if (javaRecentEnough()) {
+
+            pnlContent.add(btnCheckForUpdates, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
@@ -162,6 +166,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return EMenuGroup.SETTINGS;
     }
 
+    public void setCheckForUpdatesCommand(UiCommand command)           { btnCheckForUpdates.setCommand(command);     }
     public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
     public void setDownloadPicsHQCommand(UiCommand command)            { btnDownloadPicsHQ.setCommand(command);      }
     public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
@@ -186,7 +191,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
-        final FButton btnClose = new FButton("OK");
+        final FButton btnClose = new FButton(localizer.getMessage("lblOK"));
         btnClose.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 

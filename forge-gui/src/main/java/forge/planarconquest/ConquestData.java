@@ -33,6 +33,8 @@ import forge.util.FileUtil;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.io.File;
 import java.util.*;
@@ -265,15 +267,15 @@ public final class ConquestData {
         int count = cards.size();
         if (count == 0) { return false; }
 
-        String title = count == 1 ? "Exile Card" : "Exile " + count + " Cards";
-        String cardStr = (count == 1 ? "card" : "cards");
+        String title = count == 1 ? Localizer.getInstance().getMessage("lblExileCard") : Localizer.getInstance().getMessage("lblExileNCard", String.valueOf(count));
+        String cardStr = (count == 1 ? Localizer.getInstance().getMessage("lblCard") : Localizer.getInstance().getMessage("lblCards"));
 
         List<ConquestCommander> commandersBeingExiled = null;
 
-        StringBuilder message = new StringBuilder("Exile the following " + cardStr + " to receive {AE}" + value + "?\n");
+        StringBuilder message = new StringBuilder(Localizer.getInstance().getMessage("lblExileFollowCardsToReceiveNAE", cardStr, "{AE}", String.valueOf(value)));
         for (PaperCard card : cards) {
             if (planeswalker == card) {
-                SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", title, SOptionPane.INFORMATION_ICON);
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCurrentPlaneswalkerCannotBeExiled"), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
@@ -281,7 +283,7 @@ public final class ConquestData {
             for (ConquestCommander commander : commanders) {
                 if (commander.getCard() == card) {
                     if (!commander.getDeck().getMain().isEmpty()) {
-                        SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", title, SOptionPane.INFORMATION_ICON);
+                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCannotCommanderWithDefinedDeck"), title, SOptionPane.INFORMATION_ICON);
                         return false;
                     }
                     if (commandersBeingExiled == null) {
@@ -290,19 +292,19 @@ public final class ConquestData {
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
                 if (commander.getDeck().getMain().contains(card)) {
-                    commandersUsingCard.append("\n").append(commander.getName());
+                    commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getName()));
                 }
             }
 
             if (commandersUsingCard.length() > 0) {
-                SOptionPane.showMessageDialog(card.getName() + " is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, title, SOptionPane.INFORMATION_ICON);
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            message.append("\n").append(card.getName());
+            message.append("\n").append(CardTranslation.getTranslatedName(card.getName()));
         }
 
-        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"))) {
             if (exiledCards.addAll(cards)) {
                 if (commandersBeingExiled != null) {
                     commanders.removeAll(commandersBeingExiled);
@@ -319,18 +321,18 @@ public final class ConquestData {
         int count = cards.size();
         if (count == 0) { return false; }
 
-        String title = count == 1 ? "Retrieve Card" : "Retrieve " + count + " Cards";
-        String cardStr = (count == 1 ? "card" : "cards");
+        String title = count == 1 ? Localizer.getInstance().getMessage("lblRetrieveCard") : Localizer.getInstance().getMessage("lblRetrieveNCard", String.valueOf(count));
+        String cardStr = (count == 1 ? Localizer.getInstance().getMessage("lblCard") : Localizer.getInstance().getMessage("lblCards"));
         if (aetherShards < cost) {
-            SOptionPane.showMessageDialog("Not enough shards to retrieve " + cardStr + ".", title, SOptionPane.INFORMATION_ICON);
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotEnoughShardsToRetrieveCards", cardStr), title, SOptionPane.INFORMATION_ICON);
             return false;
         }
 
-        StringBuilder message = new StringBuilder("Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n");
+        StringBuilder message = new StringBuilder(Localizer.getInstance().getMessage("lblSpendAECostToRetrieveCardsFromExile", "{AE}", String.valueOf(cost), cardStr));
         for (PaperCard card : cards) {
             message.append("\n").append(card.getName());
         }
-        if (SOptionPane.showConfirmDialog(message.toString(), title, "OK", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(message.toString(), title, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"))) {
             if (exiledCards.removeAll(cards)) {
                 for (PaperCard card : cards) {
                     if (card.getRules().canBeCommander()) { //add back commander for card if needed
@@ -492,14 +494,14 @@ public final class ConquestData {
             commanderCount = commanders.size();
         }
 
-        view.getLblAEtherShards().setText("Aether Shards: " + aetherShards);
-        view.getLblPlaneswalkEmblems().setText("Planeswalk Emblems: " + planeswalkEmblems);
-        view.getLblTotalWins().setText("Total Wins: " + wins);
-        view.getLblTotalLosses().setText("Total Losses: " + losses);
-        view.getLblConqueredEvents().setText("Conquered Events: " + formatRatio(conqueredCount, totalEventCount));
-        view.getLblUnlockedCards().setText("Unlocked Cards: " + formatRatio(unlockedCardCount, totalCardCount));
-        view.getLblCommanders().setText("Commanders: " + formatRatio(commanderCount, totalCommanderCount));
-        view.getLblPlaneswalkers().setText("Planeswalkers: " + formatRatio(planeswalkerCount, totalPlaneswalkerCount));
+        view.getLblAEtherShards().setText(Localizer.getInstance().getMessage("lblAetherShards") + ": " + aetherShards);
+        view.getLblPlaneswalkEmblems().setText(Localizer.getInstance().getMessage("lblPlaneswalkEmblems") + ": " + planeswalkEmblems);
+        view.getLblTotalWins().setText(Localizer.getInstance().getMessage("lblTotalWins") + ": " + wins);
+        view.getLblTotalLosses().setText(Localizer.getInstance().getMessage("lblTotalLosses") + ": " + losses);
+        view.getLblConqueredEvents().setText(Localizer.getInstance().getMessage("lblConqueredEvents") + ": " + formatRatio(conqueredCount, totalEventCount));
+        view.getLblUnlockedCards().setText(Localizer.getInstance().getMessage("lblUnlockedCards") + ": " + formatRatio(unlockedCardCount, totalCardCount));
+        view.getLblCommanders().setText(Localizer.getInstance().getMessage("lblCommanders") + ": " + formatRatio(commanderCount, totalCommanderCount));
+        view.getLblPlaneswalkers().setText(Localizer.getInstance().getMessage("lblPlaneswalkers") + ": " + formatRatio(planeswalkerCount, totalPlaneswalkerCount));
     }
 
     private String formatRatio(int numerator, int denominator) {

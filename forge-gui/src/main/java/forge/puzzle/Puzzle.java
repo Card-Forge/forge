@@ -14,12 +14,16 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzle> {
     String name;
+    String filename;
     String goal;
     String url;
     String difficulty;
@@ -27,16 +31,23 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     String targets;
     int targetCount = 1;
     int turns;
+    boolean completed;
 
     public Puzzle(Map<String, List<String>> puzzleLines) {
+        this(puzzleLines, "", false);
+    }
+
+    public Puzzle(Map<String, List<String>> puzzleLines, String filename, boolean completed) {
         loadMetaData(puzzleLines.get("metadata"));
         loadGameState(puzzleLines.get("state"));
         // Generate goal enforcement
+        this.filename = filename;
+        this.completed = completed;
     }
 
     private void loadMetaData(List<String> metadataLines) {
         for(String line : metadataLines) {
-            String[] split = line.split(":");
+            String[] split = line.split(":", 2);
             if ("Name".equalsIgnoreCase(split[0])) {
                 this.name = split[1].trim();
             } else if ("Goal".equalsIgnoreCase(split[0])) {
@@ -215,13 +226,50 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         return name;
     }
 
-    public String toString() { return name; }
+    public boolean getCompleted() { return completed; }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (this.completed) {
+            sb.append("[COMPLETED] ");
+        }
+        sb.append(name);
+        return sb.toString();
+    }
 
     public int compareTo(Puzzle pzl) throws ClassCastException {
         if (!(pzl instanceof Puzzle)) {
             throw new ClassCastException("Tried to compare a Puzzle object to a non-Puzzle object.");
         }
-        
-        return getName().compareTo(pzl.getName());
+
+        if (this.completed == pzl.getCompleted()) {
+            return getName().compareTo(pzl.getName());
+        } else if (this.completed) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    public boolean savePuzzleSolve(final boolean completed) {
+        if (!completed) {
+            return false;
+        }
+
+        File directory = new File(ForgeConstants.USER_PUZZLE_DIR);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File store = new File(ForgeConstants.USER_PUZZLE_DIR, filename + PuzzleIO.SUFFIX_COMPLETE);
+        if (!store.exists()) {
+            try {
+                store.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.completed = true;
+        }
+        return true;
     }
 }

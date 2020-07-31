@@ -5,6 +5,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class SurveilEffect extends SpellAbilityEffect {
     @Override
@@ -33,7 +34,7 @@ public class SurveilEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (isOptional && !p.getController().confirmAction(sa, null, "Do you want to surveil?")) {
+                if (isOptional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"))) {
                     continue;
                 }
 

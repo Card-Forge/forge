@@ -13,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class MeldEffect extends SpellAbilityEffect {
     @Override
@@ -35,7 +36,7 @@ public class MeldEffect extends SpellAbilityEffect {
             return;
         }
 
-        Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, "Choose card to meld with");
+        Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
         secondary = game.getAction().exile(secondary, sa);
 

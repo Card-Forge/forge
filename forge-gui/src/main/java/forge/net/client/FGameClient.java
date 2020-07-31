@@ -1,5 +1,7 @@
 package forge.net.client;
 
+import forge.net.CompatibleObjectDecoder;
+import forge.net.CompatibleObjectEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -12,8 +14,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -58,8 +58,8 @@ public class FGameClient implements IToServer {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new ObjectEncoder(),
-                            new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                            new CompatibleObjectEncoder(),
+                            new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new MessageHandler(),
                             new LobbyUpdateHandler(),
                             new GameClientHandler(FGameClient.this));
@@ -86,7 +86,8 @@ public class FGameClient implements IToServer {
     }
 
     public void close() {
-        channel.close();
+        if (channel != null)
+            channel.close();
     }
 
     @Override

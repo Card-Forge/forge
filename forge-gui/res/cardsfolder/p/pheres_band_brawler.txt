@@ -1,0 +1,8 @@
+Name:Pheres-Band Brawler
+ManaCost:4 G G
+Types:Creature Centaur Warrior
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
+SVar:PlayMain1:TRUE
+Oracle:When Pheres-Band Brawler enters the battlefield, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)

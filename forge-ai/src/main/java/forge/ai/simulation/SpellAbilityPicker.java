@@ -23,6 +23,7 @@ import forge.util.TextUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class SpellAbilityPicker {
     private Game game;
@@ -307,7 +308,7 @@ public class SpellAbilityPicker {
             if (conditions == null) {
                 return true;
             }
-            List<PhaseType> phases = conditions.getPhases();
+            Set<PhaseType> phases = conditions.getPhases();
             return phases.isEmpty() || phases.contains(PhaseType.MAIN1);
         }
 

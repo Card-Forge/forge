@@ -1,0 +1,8 @@
+Name:Setessan Petitioner
+ManaCost:1 G G
+Types:Creature Human Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain life equal to your devotion to green.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | References$ X
+SVar:X:Count$Devotion.Green
+Oracle:When Setessan Petitioner enters the battlefield, you gain life equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

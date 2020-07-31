@@ -3,7 +3,7 @@ package forge.ai.simulation;
 import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -27,6 +27,13 @@ public class GameStateEvaluator {
     private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
         if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
+            return null;
+        }
+        // If the current player has no creatures in play, there won't be any combat. This avoids
+        // an expensive game copy operation.
+        // Note: This is is safe to do because the simulation is based on the current game state,
+        // so there isn't a chance to play creatures in between.
+        if (evalGame.getPhaseHandler().getPlayerTurn().getCreaturesInPlay().isEmpty()) {
             return null;
         }
         GameCopier copier = new GameCopier(evalGame);
@@ -147,7 +154,7 @@ public class GameStateEvaluator {
             // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
             int value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {
-                value += 2 * c.getCounters(CounterType.LOYALTY);
+                value += 2 * c.getCounters(CounterEnumType.LOYALTY);
             }
             return value;
         }

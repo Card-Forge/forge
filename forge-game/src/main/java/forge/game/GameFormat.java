@@ -47,7 +47,7 @@ import java.util.Map.Entry;
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     public enum FormatType {Sanctioned, Casual, Historic, Digital, Custom}
-    public enum FormatSubType {Block, Standard, Extended, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Custom}
+    public enum FormatSubType {Block, Standard, Extended, Pioneer, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Arena, Custom}
 
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;
@@ -290,6 +290,7 @@ public class GameFormat implements Comparable<GameFormat> {
         private List<String> coreFormats = new ArrayList<>();
         {
             coreFormats.add("Standard.txt");
+            coreFormats.add("Pioneer.txt");
             coreFormats.add("Modern.txt");
             coreFormats.add("Legacy.txt");
             coreFormats.add("Vintage.txt");
@@ -320,7 +321,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (formatStrings == null){
                 return null;
             }
-            FileSection section = FileSection.parse(formatStrings, ":");
+            FileSection section = FileSection.parse(formatStrings, FileSection.COLON_KV_SEPARATOR);
             String title = section.get("name");
             FormatType formatType;
             try {
@@ -466,6 +467,10 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public GameFormat getExtended() {
             return this.map.get("Extended");
+        }
+
+        public GameFormat getPioneer() {
+            return this.map.get("Pioneer");
         }
 
         public GameFormat getModern() {

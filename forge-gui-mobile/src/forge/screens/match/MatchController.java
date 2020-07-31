@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import forge.FThreads;
+import forge.assets.FSkinImage;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,7 +30,6 @@ import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
-import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -42,9 +42,10 @@ import forge.match.AbstractGuiGame;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.views.VAssignDamage;
+import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
@@ -100,12 +101,25 @@ public class MatchController extends AbstractGuiGame {
         return avatar;
     }
 
+    public static FImage getPlayerSleeve(final PlayerView p) {
+        if (p == null)
+            return FSkinImage.UNKNOWN;
+        return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
+    }
+
     @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
-            pnl.getField().update();
+            pnl.getField().update(true);
         }
+    }
+
+    @Override
+    public void refreshField() {
+        if(!GuiBase.isNetworkplay())
+            return;
+        refreshCardDetails(null);
     }
 
     public boolean hotSeatMode() {
@@ -129,6 +143,8 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
+        view.resetFields();
+        clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
             //add special object that pauses game if screen touched
@@ -156,7 +172,7 @@ public class MatchController extends AbstractGuiGame {
     public void showPromptMessage(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
-    
+
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
         view.getPrompt(player).setMessage(message, card);
@@ -183,18 +199,33 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void updatePhase() {
-        final GameView gameView = getGameView();
-        final PlayerView p = gameView.getPlayerTurn();
-        final PhaseType ph = gameView.getPhase();
+        final PlayerView p = getGameView().getPlayerTurn();
+        final PhaseType ph = getGameView().getPhase();
 
         PhaseLabel lbl = null;
-        if(p != null && ph != null)
-            lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+
+        if(ph!=null) {
+            lbl = p == null ? null : view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        } else {
+            System.err.println("getGameView().getPhase() returned 'null'");
+        }
 
         view.resetAllPhaseButtons();
         if (lbl != null) {
             lbl.setActive(true);
         }
+        if(GuiBase.isNetworkplay())
+            checkStack();
+    }
+
+
+    public void checkStack() {
+        view.getStack().checkEmptyStack();
+    }
+
+    public void showWinlose() {
+        if (view.getViewWinLose() != null)
+            view.getViewWinLose().setVisible(true);
     }
 
     @Override
@@ -225,7 +256,8 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
-            new ViewWinLose(getGameView()).setVisible(true);
+            view.setViewWinLose(new ViewWinLose(getGameView()));
+            view.getViewWinLose().setVisible(true);
         }
     }
 
@@ -279,49 +311,60 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+        PlayerZoneUpdates updates = new PlayerZoneUpdates();
         if (zones.size() == 1) {
             final ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
                 case Battlefield:
                 case Command:
-                    players.clear(); //clear since no zones need to be restored
-                    return true; //Battlefield is always open
+                    playersWithTargetables.clear(); //clear since no zones need to be restored
                 default:
                     //open zone tab for given zone if needed
                     boolean result = true;
-                    for (final PlayerView player : players.keySet()) {
+                    for (final PlayerView player : playersWithTargetables.keySet()) {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-                        players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
+                        playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                        if (zoneTab == null) {
-                            result = false;
-                        } else {
+                        ZoneType previousZone = playerPanel.getZoneByInfoTab(playerPanel.getSelectedTab());
+                        updates.add(new PlayerZoneUpdate(player, previousZone));
+                        if (zoneTab != null) {
                             playerPanel.setSelectedTab(zoneTab);
                         }
                     }
-                    return result;
             }
         }
-        return false;
+        return updates;
     }
 
     @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
-        for (final Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
-            final VPlayerPanel playerPanel = view.getPlayerPanel(player.getKey());
-            if (player.getValue() == null || player.getValue() instanceof InfoTab) {
-                playerPanel.setSelectedTab((InfoTab) player.getValue());
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
+        for(PlayerZoneUpdate update : playerZoneUpdates) {
+            PlayerView player = update.getPlayer();
+
+            ZoneType zone = null;
+            for(ZoneType type : update.getZones()) {
+                zone = type;
+                break;
             }
+
+            final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+            if (zone == null) {
+                playerPanel.hideSelectedTab();
+                continue;
+            }
+
+            final InfoTab zoneTab = playerPanel.getZoneTab(zone);
+            playerPanel.setSelectedTab(zoneTab);
         }
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, this);
                 v.show();
             }
         }.invokeAndWait();
@@ -353,7 +396,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-	view.hideZones(controller, zonesToUpdate);
+	    view.hideZones(controller, zonesToUpdate);
     }
 
     @Override
@@ -364,8 +407,45 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
+    public void setSelectables(final Iterable<CardView> cards) {
+        super.setSelectables(cards);
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void clearSelectables() {
+        super.clearSelectables();
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                    if ( p.getCards(ZoneType.Hand) != null ) {
+                        updateCards(p.getCards(ZoneType.Hand));
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
     public void afterGameEnd() {
         Forge.back();
+        ImageCache.disposeTexture();
         //view = null;
     }
 
@@ -466,7 +546,7 @@ public class MatchController extends AbstractGuiGame {
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
         final List<String> optionsToUse;
         if (options == null) {
-            optionsToUse = ImmutableList.of("Yes", "No");
+            optionsToUse = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
         } else {
             optionsToUse = options;
         }
@@ -504,7 +584,7 @@ public class MatchController extends AbstractGuiGame {
         }
 
         final Collection<CardView> revealList = delayedReveal.getCards();
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
+        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
         final InfoTab revealListTab = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone());
         final FImage revealListImage = revealListTab != null ? revealListTab.getIcon() : null;
 

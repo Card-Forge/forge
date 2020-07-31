@@ -3,6 +3,7 @@ package forge.screens.settings;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
@@ -37,7 +38,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
 
     public SettingsPage() {
-        super(Localizer.getInstance().getMessage("lblSettings"), FSkinImage.SETTINGS);
+        super(Localizer.getInstance().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS);
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -78,7 +79,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
                         Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
                         if (Forge.isLandscapeMode() != landscapeMode) {
-                            FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), "Restart", localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                            FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), localizer.getMessage("lblRestart"), localizer.getMessage("lblLater"), new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
                                     if (result) {
@@ -109,7 +110,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
         }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
-                "AI Personality",
+                localizer.getMessage("cbpAiProfiles"),
                 localizer.getMessage("nlpAiProfiles"),
                 AiProfileUtil.getProfilesArray()),
                 1);
@@ -231,6 +232,37 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
                 localizer.getMessage("cbLoadHistoricFormats"),
                 localizer.getMessage("nlLoadHistoricFormats")),
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
+                        localizer.getMessage("lblEnableUnknownCards"),
+                        localizer.getMessage("nlEnableUnknownCards")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            localizer.getMessage("lblRestartForgeDescription"),
+                                            localizer.getMessage("lblRestartForge"),
+                                            localizer.getMessage("lblRestart"),
+                                            localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                Forge.restart(true);
+                                            }
+                                        }
+                                    });
+                                }
+                            },
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
+                        localizer.getMessage("lblExperimentalNetworkCompatibility"),
+                        localizer.getMessage("nlExperimentalNetworkCompatibility")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
+                                }
+                            },
                 3);
 
         //Graphic Options

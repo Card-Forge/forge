@@ -1,0 +1,8 @@
+Name:Pious Wayfarer
+ManaCost:W
+Types:Creature Human Scout
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, target creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1
+DeckHints:Type$Enchantment
+Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, target creature gets +1/+1 until end of turn.

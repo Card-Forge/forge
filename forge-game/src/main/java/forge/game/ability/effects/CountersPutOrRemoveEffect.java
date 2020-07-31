@@ -13,6 +13,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -31,7 +32,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         sb.append(sa.getActivatingPlayer().getName());
 
         if (sa.hasParam("CounterType")) {
-            CounterType ctype = CounterType.valueOf(sa.getParam("CounterType"));
+            CounterType ctype = CounterType.getType(sa.getParam("CounterType"));
             sb.append(" removes a ").append(ctype.getName());
             sb.append(" counter from or put another ").append(ctype.getName()).append(" counter on ");
         } else {
@@ -55,7 +56,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
         CounterType ctype = null;
         if (sa.hasParam("CounterType")) {
-            ctype = CounterType.valueOf(sa.getParam("CounterType"));
+            ctype = CounterType.getType(sa.getParam("CounterType"));
         }
         
         GameEntityCounterTable table = new GameEntityCounterTable();
@@ -97,11 +98,11 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             list = Lists.newArrayList(ctype);
         }
 
-        String prompt = "Select type of counters to add or remove";
+        String prompt = Localizer.getInstance().getMessage("lblSelectCounterTypeToAddOrRemove");
         CounterType chosenType = pc.chooseCounterType(list, sa, prompt, params);
 
         params.put("CounterType", chosenType);
-        prompt = "What to do with that '" + chosenType.getName() + "' counter ";
+        prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName()) + " ";
         Boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
         if (putCounter) {

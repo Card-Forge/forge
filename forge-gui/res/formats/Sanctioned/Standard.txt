@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:GRN, RNA, WAR, M20, ELD
-Banned:Field of the Dead
+Sets:GRN, RNA, WAR, M20, ELD, THB, IKO, M21
+Banned:Agent of Treachery; Field of the Dead; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

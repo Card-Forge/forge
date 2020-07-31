@@ -1,5 +1,9 @@
 package forge.game;
 
+import java.util.EnumSet;
+import java.util.Set;
+
+import com.google.common.base.Enums;
 import com.google.common.base.Function;
 import forge.StaticData;
 import forge.deck.CardPool;
@@ -143,5 +147,20 @@ public enum GameType {
 
     public String getDescription() {
         return description;
+    }
+
+    public static GameType smartValueOf(String name) {
+        return Enums.getIfPresent(GameType.class, name).orNull();
+    }
+
+    public static Set<GameType> listValueOf(final String values) {
+        final Set<GameType> result = EnumSet.noneOf(GameType.class);
+        for (final String s : values.split(",")) {
+            GameType g = GameType.smartValueOf(s);
+            if (g != null) {
+                result.add(g);
+            }
+        }
+        return result;
     }
 }

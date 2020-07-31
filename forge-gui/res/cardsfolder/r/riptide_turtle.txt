@@ -1,0 +1,7 @@
+Name:Riptide Turtle
+ManaCost:1 U
+Types:Creature Turtle
+PT:0/5
+K:Flash
+K:Defender
+Oracle:Flash\nDefender

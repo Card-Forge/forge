@@ -1,0 +1,6 @@
+Name:Dinosaur Cat
+Types:Creature Dinosaur Cat
+Colors:red,white
+ManaCost:no cost
+PT:2/2
+Oracle:

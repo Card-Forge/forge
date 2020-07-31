@@ -56,6 +56,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.arcane.CardPanel;
+import forge.util.Localizer;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
@@ -67,7 +68,7 @@ public class AddBasicLandsDialog {
     private static final int ADD_BTN_SIZE = 30;
     private static final int LAND_PANEL_PADDING = 3;
 
-    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>("Land Set:", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
+    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblLandSet") + ":", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");
@@ -123,7 +124,7 @@ public class AddBasicLandsDialog {
                 updateDeckInfoLabel();
             }
         });
-        lblDeckInfo.setToolTipText("Deck statistics. Double click to auto-suggest basic lands.");
+        lblDeckInfo.setToolTipText(Localizer.getInstance().getMessage("lblDeckStatisticsAutoSuggest"));
 
         cbLandSet.addActionListener(new ActionListener() {
             @Override
@@ -215,7 +216,7 @@ public class AddBasicLandsDialog {
     }
 
     public CardPool show() {
-        optionPane = new FOptionPane(null, "Add Basic Lands", null, panel, ImmutableList.of("OK", "Cancel"), 0);
+        optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblAddBasicLands"), null, panel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0);
         panel.revalidate();
         panel.repaint();
         optionPane.setVisible(true);
@@ -345,7 +346,8 @@ public class AddBasicLandsDialog {
                     }
                 }
             }).build();
-
+            btnSubtract.getAccessibleContext().setAccessibleName("Remove " + cardName);
+            btnAdd.getAccessibleContext().setAccessibleName("Add " + cardName);
             add(cardPanel);
             add(cbLandArt);
             add(lblCount);
@@ -382,9 +384,9 @@ public class AddBasicLandsDialog {
             if (landSet == null) { return; }
 
             int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
-            cbLandArt.addItem("Assorted Art");
+            cbLandArt.addItem(Localizer.getInstance().getMessage("lblAssortedArt"));
             for (int i = 1; i <= artChoiceCount; i++) {
-                cbLandArt.addItem("Card Art " + i);
+                cbLandArt.addItem(Localizer.getInstance().getMessage("lblCardArtN", String.valueOf(i)));
             }
         }
 

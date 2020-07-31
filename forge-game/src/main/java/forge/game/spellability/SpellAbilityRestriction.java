@@ -17,23 +17,20 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -97,10 +94,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setZone(ZoneType.smartValueOf(params.get("ActivationZone")));
         }
 
-        if (params.containsKey("Flashback")) {
-            this.setZone(ZoneType.Graveyard);
-        }
-
         if (params.containsKey("SorcerySpeed")) {
             this.setSorcerySpeed(true);
         }
@@ -117,20 +110,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setOpponentTurn(true);
         }
 
-        if (params.containsKey("AnyPlayer")) {
-            this.setAnyPlayer(true);
-        }
-
-        if (params.containsKey("AnyOpponent")) {
-            this.setOpponentOnly(true);
-        }
-
-        if (params.containsKey("EnchantedControllerActivator")) {
-            this.setEnchantedControllerOnly(true);
-        }
-
-        if (params.containsKey("OwnerOnly")) {
-            this.setOwnerOnly(true);
+        if (params.containsKey("Activator")) {
+            this.setActivator(params.get("Activator"));
         }
 
         if (params.containsKey("ActivationLimit")) {
@@ -143,6 +124,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("ActivationPhases")) {
             this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
+        }
+
+        if (params.containsKey("ActivationGameTypes")) {
+            this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
 
         if (params.containsKey("ActivationCardsInHand")) {
@@ -202,7 +187,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Card cp = c;
 
         // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.hasParam("Bestow")) {
+        if (sa.isSpell() && sa.isBestow()) {
             // already bestowed or in battlefield, no need to check for spell
             if (c.isInZone(ZoneType.Battlefield)) {
                 return false;
@@ -306,16 +291,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
-            }
-
-            if (!isPhase) {
+            if (!this.getPhases().contains(game.getPhaseHandler().getPhase())) {
                 return false;
             }
         }
@@ -334,34 +310,19 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        if (this.isAnyPlayer()) {
-            return true;
-        }
-
-        if (this.isOwnerOnly()) {
-            return activator.equals(c.getOwner());
-        }
-
-        if (activator.equals(c.getController()) && !this.isOpponentOnly() && !isEnchantedControllerOnly()) {
-            return true;
-        }
-
-        if (activator.isOpponentOf(c.getController()) && this.isOpponentOnly()) {
-            return true;
-        }
-        
-        if (c.getEnchantingCard() != null && activator.equals(c.getEnchantingCard().getController()) && this.isEnchantedControllerOnly()) {
-        	return true;
-        }
+        final Game game = activator.getGame();
+        final Combat combat = game.getPhaseHandler().getCombat();
 
         if (sa.isSpell()) {
+            // Spells should always default to "controller" but use mayPlay check.
             final CardPlayOption o = c.mayPlay(sa.getMayPlay());
             if (o != null && o.getPlayer() == activator) {
                 return true;
             }
         }
-        
-        return false;
+
+        String validPlayer = this.getActivator();
+        return activator.isValid(validPlayer, c.getController(), c, sa);
     }
     
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {

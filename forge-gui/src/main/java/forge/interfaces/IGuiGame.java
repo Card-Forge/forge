@@ -1,17 +1,14 @@
 package forge.interfaces;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Function;
-
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.event.GameEventSpellAbilityCast;
+import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -20,8 +17,13 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
@@ -47,17 +49,20 @@ public interface IGuiGame {
     void showManaPool(PlayerView player);
     void hideManaPool(PlayerView player);
     void updateStack();
+    void notifyStackAddition(final GameEventSpellAbilityCast event);
+    void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);
     void refreshCardDetails(Iterable<CardView> cards);
+    void refreshField();
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
-    Map<CardView, Integer> assignDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
+    Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
 
     void message(String message);
     void message(String message, String title);
@@ -102,7 +107,6 @@ public interface IGuiGame {
      * @return null if choices is missing, empty, or if the users' choices are
      *         empty; otherwise, returns the first item in the List returned by
      *         getChoices.
-     * @see #getChoices(String, int, int, Object...)
      */
     <T> T oneOrNone(String message, List<T> choices);
 
@@ -153,13 +157,15 @@ public interface IGuiGame {
 
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
-    boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
-    void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
+    PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players);
+    void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
     void setHighlighted(PlayerView pv, boolean b);
     void setUsedToPay(CardView card, boolean value);
     void setSelectables(final Iterable<CardView> cards);
     void clearSelectables();
     boolean isSelecting();
+    boolean isGamePaused();
+    public void setgamePause(boolean pause);
 
     void awaitNextInput();
     void cancelAwaitNextInput();

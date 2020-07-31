@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.29.001</alpha-version>
+        <alpha-version>1.6.36.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.30-SNAPSHOT</version>
+        <version>1.6.37-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -81,17 +81,17 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>24.1-android</version>
+            <version>28.1-android</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.7</version>
+            <version>1.4.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.8.1</version>
         </dependency>
         <dependency>
             <groupId>xmlpull</groupId>
@@ -103,24 +103,6 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
             <version>1.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-base-bom</artifactId>
-            <version>1.2.4.Final</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-core</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-api</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -142,7 +124,7 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>25</platform>
+                                <platform>26</platform>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -183,7 +165,7 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>25</platform>
+                                <platform>26</platform>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>

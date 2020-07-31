@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerPayCumulativeUpkeep(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerPayCumulativeUpkeep(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -72,14 +73,14 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.PayingMana);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.PayingMana);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Mana: ").append(sa.getTriggeringObject(AbilityKey.PayingMana));
+        sb.append(Localizer.getInstance().getMessage("lblMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.PayingMana));
         return sb.toString();
     }
 }

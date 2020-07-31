@@ -1,0 +1,12 @@
+Name:Woe Strider
+ManaCost:2 B
+Types:Creature Horror
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/1 white Goat creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_0_1_goat | TokenOwner$ You | LegacyImage$ w 0 1 goat thb
+A:AB$ Scry | Cost$ Sac<1/Creature.Other> | ScryNum$ 1 | SpellDescription$ Scry 1.
+K:Escape:3 B B ExileFromGrave<4/Card.Other/other>
+K:etbCounter:P1P1:2:ValidCard$ Card.Self+escaped:CARDNAME escapes with two +1/+1 counters on it.
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Token & Ability$Counters
+Oracle:When Woe Strider enters the battlefield, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nWoe Strider escapes with two +1/+1 counters on it.

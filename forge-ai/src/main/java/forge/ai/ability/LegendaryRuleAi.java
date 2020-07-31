@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -23,7 +25,7 @@ public class LegendaryRuleAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Choose a single legendary/planeswalker card to keep
         Card firstOption = Iterables.getFirst(options, null);
         boolean choosingFromPlanewalkers = firstOption.isPlaneswalker();
@@ -38,16 +40,16 @@ public class LegendaryRuleAi extends SpellAbilityAi {
         if (firstOption.getName().equals("Dark Depths")) {
             Card best = firstOption;
             for (Card c : options) {
-                if (c.getCounters(CounterType.ICE) < best.getCounters(CounterType.ICE)) {
+                if (c.getCounters(CounterEnumType.ICE) < best.getCounters(CounterEnumType.ICE)) {
                     best = c;
                 }
             }
             return best;
-        } else if (firstOption.getCounters(CounterType.KI) > 0) {
+        } else if (firstOption.getCounters(CounterEnumType.KI) > 0) {
         	// Extra Rule for KI counter
         	Card best = firstOption;
             for (Card c : options) {
-                if (c.getCounters(CounterType.KI) > best.getCounters(CounterType.KI)) {
+                if (c.getCounters(CounterEnumType.KI) > best.getCounters(CounterEnumType.KI)) {
                     best = c;
                 }
             }

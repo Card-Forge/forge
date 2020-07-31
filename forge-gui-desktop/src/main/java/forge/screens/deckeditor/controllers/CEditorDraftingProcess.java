@@ -36,6 +36,7 @@ import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -51,7 +52,7 @@ import java.util.Map.Entry;
 public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
-    private String ccAddLabel = "Add card";
+    private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
@@ -59,6 +60,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
+    private final Localizer localizer = Localizer.getInstance();
 
     //========== Constructor
 
@@ -74,7 +76,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
 
-        deckManager.setCaption("Draft Picks");
+        deckManager.setCaption(localizer.getMessage("lblDraftPicks"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -131,7 +133,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Draft", null);
+        cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
     }
 
     @Override
@@ -150,7 +152,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
+        this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
         this.getCatalogManager().setPool(list);
     } // showChoices()
 
@@ -186,19 +188,19 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         do{
             // Cancel button will be null; OK will return string.
             // Must check for null value first, then string length.
-            s = FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON);
+            s = FOptionPane.showInputDialog(localizer.getMessage("lblSaveDraftAs") + ":", localizer.getMessage("lblSaveDraft"), FOptionPane.QUESTION_ICON);
 
             if (s == null && FOptionPane.showConfirmDialog(
-                        "Quit without saving?",
-                        "Quit Draft?", false)) {
+            		localizer.getMessage("lblQuitWithoutSaving") + "?",
+            				localizer.getMessage("lblQuitDraft") + "?", false)) {
                 FScreen.DRAFTING_PROCESS.close();
                 return;
             }
 
             // Overwrite same name?
             else if (names.contains(s) && !FOptionPane.showConfirmDialog(
-                    "There is already a deck named '" + s + "'. Overwrite?",
-                    "Overwrite Deck?", false)) {
+            		localizer.getMessage("lblAlreadyDeckName") + s + localizer.getMessage("lblOverwriteConfirm"),
+            		localizer.getMessage("lblOverwriteDeck"), false)) {
                 s = "";
             }
 
@@ -299,10 +301,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public boolean canSwitchAway(boolean isClosing) {
         if (isClosing && !saved) {
-            String userPrompt =
-                    "This will end the current draft and you will not be able to resume.\n\n" +
-                            "Leave anyway?";
-            return FOptionPane.showConfirmDialog(userPrompt, "Leave Draft?", "Leave", "Cancel", false);
+            String userPrompt = localizer.getMessage("lblEndDraftConfirm");
+            return FOptionPane.showConfirmDialog(userPrompt, localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false);
         }
         return true;
     }

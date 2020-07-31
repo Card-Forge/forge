@@ -234,7 +234,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             final Card host = sa.getHostCard();
             if (mana.addsKeywords(sa) && mana.addsKeywordsType()
                     && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
-                final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
+                final long timestamp = host.getGame().getNextTimestamp();
                 final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
                 host.addChangedCardKeywords(kws, null, false, false, timestamp);
                 if (mana.addsKeywordsUntil()) {
@@ -243,14 +243,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
                         @Override
                         public void run() {
-                            if (!kws.isEmpty()) {
-                                for (String kw : kws) {
-                                    if (kw.startsWith("HIDDEN")) {
-                                        sa.getHostCard().removeHiddenExtrinsicKeyword(kw);
-                                    }
-                                }
-                                host.removeChangedCardKeywords(timestamp);
-                            }
+                            host.removeChangedCardKeywords(timestamp);
                             host.getGame().fireEvent(new GameEventCardStatsChanged(host));
                         }
                     };
@@ -261,10 +254,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 }
             }
             if (mana.addsCounters(sa)) {
-                mana.getManaAbility().createETBCounters(sa.getHostCard());
+                mana.getManaAbility().createETBCounters(host, this.owner);
             }
             if (mana.triggersWhenSpent()) {
-                mana.getManaAbility().addTriggersWhenSpent(sa, sa.getHostCard());
+                mana.getManaAbility().addTriggersWhenSpent(sa, host);
             }
         }
         return true;
@@ -357,6 +350,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        if (shard.isOfKind(ManaAtom.COLORLESS) && color == ManaAtom.GENERIC) {
+            return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
+        }
+
         // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 

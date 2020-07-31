@@ -16,6 +16,8 @@ import forge.util.Lang;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
+
 public class BlockEffect extends SpellAbilityEffect {
 
     @Override
@@ -41,6 +43,8 @@ public class BlockEffect extends SpellAbilityEffect {
         }
 
         if (attackers.size() == 0 || blockers.size() == 0) return;
+
+        List<Card> blocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
             final boolean wasBlocked = combat.isBlocked(attacker);
@@ -70,6 +74,7 @@ public class BlockEffect extends SpellAbilityEffect {
 
             attacker.getDamageHistory().setCreatureGotBlockedThisCombat(true);
             if (!wasBlocked) {
+                blocked.add(attacker);
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, attacker);
                 runParams.put(AbilityKey.Blockers, blockers);
@@ -82,6 +87,12 @@ public class BlockEffect extends SpellAbilityEffect {
             }
         }
 
+        if (!blocked.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Attackers, blocked);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedOnce, runParams, false);
+        }
+
         game.updateCombatForView();
         game.fireEvent(new GameEventCombatChanged());
 
@@ -89,7 +100,6 @@ public class BlockEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
         // end standard pre-

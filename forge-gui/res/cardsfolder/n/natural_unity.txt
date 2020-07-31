@@ -2,7 +2,7 @@ Name:Natural Unity
 ManaCost:no cost
 Types:Conspiracy
 K:Hidden agenda
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.NamedCard+YouCtrl | EffectZone$ Battlefield | AddTrigger$ NUCombat | AddSVar$ NUCounter | Description$ Creatures you control with the chosen name have "At the beginning of combat on your turn, you may pay {G}. If you do, put a +1/+1 counter on this creature."
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.NamedCard+YouCtrl | AffectedZone$ Battlefield | AddTrigger$ NUCombat | AddSVar$ NUCounter | Description$ Creatures you control with the chosen name have "At the beginning of combat on your turn, you may pay {G}. If you do, put a +1/+1 counter on this creature."
 SVar:NUCombat:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ NUCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may pay {G}. If you do, put a +1/+1 counter on this creature.
 SVar:NUCounter:AB$ PutCounter | Cost$ G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:AgendaLogic:BestCreatureInComputerDeck

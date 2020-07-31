@@ -290,10 +290,18 @@ public abstract class DeckGeneratorBase {
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : HUMAN_CAN_PLAY;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
+        Predicate<CardRules> canUseInFormat = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(CardRules c) {
+                // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
+                return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
+            }
+        };
+
         if (useArtifacts) {
             hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(),Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
+        return Iterables.filter(pool.getAllCards(),Predicates.compose(Predicates.and(canPlay, hasColor, canUseInFormat), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {

@@ -1,6 +1,6 @@
 Name:Scrapyard Mongrel
 ManaCost:3 R
-Types:Creature Hound
+Types:Creature Dog
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control an artifact, CARDNAME gets +2/+0 and has trample.
 SVar:X:Count$Valid Artifact.YouCtrl

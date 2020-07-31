@@ -75,12 +75,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlay() {
         Card card = this.getHostCard();
+        if (card.isInZone(ZoneType.Battlefield)) {
+            return false;
+        }
 
         // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
         ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
-        boolean wasFaceDownInstant = card.isFaceDown()
-                && !card.getLastKnownZone().is(ZoneType.Battlefield)
-                && card.getState(CardStateName.Original).getType().isInstant();
 
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
@@ -95,61 +95,29 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        boolean isInstant = card.isInstant();
-        // special case for split cards
-        if (card.isSplitCard()) {
-            CardStateName name = isLeftSplit() ? CardStateName.LeftSplit : CardStateName.RightSplit;
-            isInstant = card.getState(name).getType().isInstant();
-        } else if (isAdventure()) {
-            if (card.hasState(CardStateName.Adventure)) {
-                isInstant = card.getState(CardStateName.Adventure).getType().isInstant();
-            }
-        }
-
         boolean lkicheck = false;
-        boolean flash = false;
 
         // do performanceMode only for cases where the activator is different than controller
-        if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)
-                && !card.isInZone(ZoneType.Battlefield)) {
+        if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
             card = CardUtil.getLKICopy(card);
             card.setController(activator, 0);
             lkicheck = true;
         }
 
-        if (hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
-            // Rule 601.3: cast Bestow with Flash
-            // for the check the card does need to be animated
-            // otherwise the StaticAbility will not found them
-            if (!card.isLKI()) {
-                card = CardUtil.getLKICopy(card);
-            }
-            card.animateBestow(false);
-            lkicheck = true;
-        } else if (isCastFaceDown()) {
-            // need a copy of the card to turn facedown without trigger anything
-            if (!card.isLKI()) {
-                card = CardUtil.getLKICopy(card);
-            }
-            card.turnFaceDownNoUpdate();
-            lkicheck = true;
-        } else if (isAdventure()) {
-            if (!card.isLKI()) {
-                card = CardUtil.getLKICopy(card);
-            }
-
-            card.setState(CardStateName.Adventure, false);
+        Card lkiHost = getAlternateHost(card);
+        if (lkiHost != null) {
+            card = lkiHost;
             lkicheck = true;
         }
-
 
         if (lkicheck) {
             game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
         }
 
-        flash = card.withFlash(activator);
+        boolean isInstant = card.isInstant();
+        boolean flash = card.withFlash(activator);
 
         // reset static abilities
         if (lkicheck) {
@@ -160,8 +128,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
-               || hasSVar("IsCastFromPlayEffect")
-               || wasFaceDownInstant)) {
+               || hasSVar("IsCastFromPlayEffect"))) {
             return false;
         }
 
@@ -178,21 +145,18 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (this.getPayCosts() != null) {
-            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
-                return false;
-            }
+        if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
+            return false;
         }
 
-        return checkOtherRestrictions();
+        return checkOtherRestrictions(card);
     } // canPlay()
     
-    public boolean checkOtherRestrictions() {
-        final Card source = this.getHostCard();
+    public boolean checkOtherRestrictions(final Card source) {
         Player activator = getActivatingPlayer();
         final Game game = activator.getGame();
         // CantBeCast static abilities
-        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         allp.add(source);
         for (final Card ca : allp) {
             final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
@@ -236,4 +200,74 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         this.castFaceDown = faceDown;
     }
 
+    public Card getAlternateHost(Card source) {
+        boolean lkicheck = false;
+
+        // need to be done before so it works with Vivien and Zoetic Cavern
+        if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+
+            source.forceTurnFaceUp();
+            lkicheck = true;
+        }
+
+        if (isBestow() && !source.isBestowed()) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+
+            source.animateBestow(false);
+            lkicheck = true;
+        } else if (isCastFaceDown()) {
+            // need a copy of the card to turn facedown without trigger anything
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+            source.turnFaceDownNoUpdate();
+            lkicheck = true;
+        } else if (isAdventure()) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+
+            source.setState(CardStateName.Adventure, false);
+
+            // need to reset CMC
+            source.setLKICMC(-1);
+            source.setLKICMC(source.getCMC());
+            lkicheck = true;
+        } else if (source.isSplitCard() && (isLeftSplit() || isRightSplit())) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+            if (isLeftSplit()) {
+                if (!source.hasState(CardStateName.LeftSplit)) {
+                    source.addAlternateState(CardStateName.LeftSplit, false);
+                    source.getState(CardStateName.LeftSplit).copyFrom(
+                            getHostCard().getState(CardStateName.LeftSplit), true);
+                }
+
+                source.setState(CardStateName.LeftSplit, false);
+            }
+
+            if (isRightSplit()) {
+                if (!source.hasState(CardStateName.RightSplit)) {
+                    source.addAlternateState(CardStateName.RightSplit, false);
+                    source.getState(CardStateName.RightSplit).copyFrom(
+                            getHostCard().getState(CardStateName.RightSplit), true);
+                }
+
+                source.setState(CardStateName.RightSplit, false);
+            }
+
+            // need to reset CMC
+            source.setLKICMC(-1);
+            source.setLKICMC(source.getCMC());
+            lkicheck = true;
+        }
+
+        return lkicheck ? source : null;
+    }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ALL">
+    <Appenders>
+        <Console name="A1">
+            <PatternLayout pattern="%-4r [%t] %-5p %c %x - %m%n" />
+        </Console>
+
+        <!--Sentry name="Sentry" /-->
+    </Appenders>
+
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="A1" />
+            <!-- Note that the Sentry logging threshold is overridden to the WARN level -->
+            <!--AppenderRef ref="Sentry" level="WARN" /-->
+        </Root>
+    </Loggers>
+</Configuration>

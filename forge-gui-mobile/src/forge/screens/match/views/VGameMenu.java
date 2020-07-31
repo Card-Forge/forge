@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
@@ -85,10 +86,16 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblSettings"), FSkinImage.SETTINGS, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 SettingsScreen.show(false);
+            }
+        }));
+        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), null, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                MatchController.instance.showWinlose();
             }
         }));
     }

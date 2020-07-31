@@ -2,5 +2,8 @@ Name:Vivien's Grizzly
 ManaCost:2 G
 Types:Creature Bear Spirit
 PT:2/3
-A:AB$ Dig | Cost$ 3 G | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Creature,Planeswalker | Optional$ True | PromptToSkipOptionalAbility$ True | DestinationZone$ Hand | AILogic$ Never | SpellDescription$ Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.
+A:AB$ PeekAndReveal | Cost$ 3 G | AILogic$ EndofOppTurn | PeekAmount$ 1 | RevealValid$ Creature,Planeswalker | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Creature,Planeswalker | ConditionCompare$ EQ1 | SubAbility$ DBBottom
+SVar:DBBottom:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Library | Shuffle$ False | ConditionDefined$ Remembered | ConditionPresent$ Creature,Planeswalker | ConditionCompare$ EQ0 | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{3}{G}: Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.

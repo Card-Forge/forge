@@ -11,6 +11,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
+import forge.util.Localizer;
 
 public class BidLifeEffect extends SpellAbilityEffect {
     @Override
@@ -27,7 +28,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
         if (sa.hasParam("StartBidding")) {
             String start = sa.getParam("StartBidding");
             if ("Any".equals(start)) {
-                startBidding = activator.getController().announceRequirements(sa, "Choose a starting bid", true);
+                startBidding = activator.getController().announceRequirements(sa, Localizer.getInstance().getMessage("lblChooseStartingBid"), true);
             } else {
                 startBidding = AbilityUtils.calculateAmount(host, start, sa);
             }
@@ -54,12 +55,12 @@ public class BidLifeEffect extends SpellAbilityEffect {
             willBid = false;
             for (final Player p : bidPlayers) {
                 final boolean result = p.getController().confirmBidAction(sa, PlayerActionConfirmMode.BidLife,
-                        "Do you want to top bid? Current Bid =" + bid, bid, winner);
+                        Localizer.getInstance().getMessage("lblDoYouWantTopBid") + bid, bid, winner);
                 willBid |= result;
                 if (result) { // a different choose number
-                    bid += p.getController().chooseNumber(sa, "Bid life:", 1, 9);
+                    bid += p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblBidLife") + ":", 1, 9);
                     winner = p;
-                    host.getGame().getAction().nofityOfValue(sa, p, "topped bid with " + bid + " life", p);
+                    host.getGame().getAction().nofityOfValue(sa, p,  Localizer.getInstance().getMessage("lblTopBidWithValueLife", String.valueOf(bid)), p);
                 }
             }
         }

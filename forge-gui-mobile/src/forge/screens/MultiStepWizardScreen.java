@@ -6,12 +6,13 @@ import forge.screens.match.views.VPrompt;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public abstract class MultiStepWizardScreen<T> extends FScreen {
     protected final WizardStep<T>[] steps;
     protected final T model;
     private WizardStep<T> currentStep;
-    private final VPrompt prompt = add(new VPrompt("Back", "Next", new FEventHandler() {
+    private final VPrompt prompt = add(new VPrompt(Localizer.getInstance().getMessage("lblBack"), Localizer.getInstance().getMessage("lblNext"), new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             advanceStep(-1);
@@ -79,7 +80,7 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
 
             currentStep.setVisible(false);
             if (currentStep.index == steps.length - 1) {
-                prompt.getBtnCancel().setText("Next");
+                prompt.getBtnCancel().setText(Localizer.getInstance().getMessage("lblNext"));
             }
         }
 
@@ -88,7 +89,7 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
         currentStep.setVisible(true);
         prompt.getBtnOk().setEnabled(index > 0);
         if (index == steps.length - 1) {
-            prompt.getBtnCancel().setText("Finish");
+            prompt.getBtnCancel().setText(Localizer.getInstance().getMessage("lblFinish"));
         }
         prompt.setMessage(currentStep.getMessage());
 

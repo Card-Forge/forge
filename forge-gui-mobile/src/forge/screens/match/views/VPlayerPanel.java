@@ -15,7 +15,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
@@ -61,16 +61,16 @@ public class VPlayerPanel extends FContainer {
         field = add(new VField(player));
         avatar = add(new VAvatar(player, avatarHeight));
         lblLife = add(new LifeLabel());
-        addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
-        addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
-        addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
-        addZoneDisplay(ZoneType.Flashback, FSkinImage.FLASHBACK);
+        addZoneDisplay(ZoneType.Hand, Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND);
+        addZoneDisplay(ZoneType.Graveyard, Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD);
+        addZoneDisplay(ZoneType.Library, Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY);
+        addZoneDisplay(ZoneType.Flashback, Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK);
 
         VManaPool manaPool = add(new VManaPool(player));
-        tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
+        tabManaPool = add(new InfoTab(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : FSkinImage.MANA_X, manaPool));
         tabs.add(tabManaPool);
 
-        addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
+        addZoneDisplay(ZoneType.Exile, Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE);
 
         commandZone = add(new CommandZoneDisplay(player));
 
@@ -102,8 +102,24 @@ public class VPlayerPanel extends FContainer {
         return zoneTabs.get(zoneType);
     }
 
+    public ZoneType getZoneByInfoTab(InfoTab tab) {
+        for(ZoneType zone : zoneTabs.keySet()) {
+            if (zoneTabs.get(zone).equals(tab)) {
+                return zone;
+            }
+        }
+
+        return null;
+    }
+
     public void setSelectedZone(ZoneType zoneType) {
         setSelectedTab(zoneTabs.get(zoneType));
+    }
+
+    public void hideSelectedTab() {
+        if (selectedTab != null) {
+            selectedTab.displayArea.setVisible(false);
+        }
     }
 
     public void setSelectedTab(InfoTab selectedTab0) {
@@ -111,9 +127,7 @@ public class VPlayerPanel extends FContainer {
             return;
         }
 
-        if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(false);
-        }
+        hideSelectedTab();
 
         selectedTab = selectedTab0;
 
@@ -176,7 +190,7 @@ public class VPlayerPanel extends FContainer {
 
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield ) {
-            field.update();
+            field.update(true);
         }
         else if (zoneType == ZoneType.Command) {
             commandZone.update();
@@ -345,8 +359,8 @@ public class VPlayerPanel extends FContainer {
 
     private class LifeLabel extends FDisplayObject {
         private int life = player.getLife();
-        private int poisonCounters = player.getCounters(CounterType.POISON);
-        private int energyCounters = player.getCounters(CounterType.ENERGY);
+        private int poisonCounters = player.getCounters(CounterEnumType.POISON);
+        private int energyCounters = player.getCounters(CounterEnumType.ENERGY);
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
@@ -364,16 +378,16 @@ public class VPlayerPanel extends FContainer {
                 lifeStr = String.valueOf(life);
             }
 
-            delta = player.getCounters(CounterType.POISON) - poisonCounters;
+            delta = player.getCounters(CounterEnumType.POISON) - poisonCounters;
             if (delta != 0) {
                 if (delta > 0) {
                     //TODO: Show animation on avatar for gaining poison counters
                     vibrateDuration += delta * 200;
                 }
-                poisonCounters = player.getCounters(CounterType.POISON);
+                poisonCounters = player.getCounters(CounterEnumType.POISON);
             }
 
-            energyCounters = player.getCounters(CounterType.ENERGY);
+            energyCounters = player.getCounters(CounterEnumType.ENERGY);
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&

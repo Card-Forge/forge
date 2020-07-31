@@ -54,7 +54,8 @@ public final class AbilityFactory {
             "Execute", // DelayedTrigger
             "FallbackAbility", // Complex Unless costs which can be unpayable
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
-            "CantChooseSubAbility" // Can't choose a player via ChoosePlayer
+            "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
+            "AnimateSubAbility" // For ChangeZone Effects to Animate before ETB
         );
 
     public enum AbilityRecordType {
@@ -246,20 +247,7 @@ public final class AbilityFactory {
 
         if (mapParams.containsKey("SubAbility")) {
             final String name = mapParams.get("SubAbility");
-            SpellAbility p = parent;
-            AbilitySub sub = null;
-            while (p != null) {
-                sub = p.getAdditionalAbility(name);
-                if (sub != null) {
-                    break;
-                }
-                p = p.getParent();
-            }
-            if (sub == null) {
-                sub = getSubAbility(state, name, spellAbility);
-            }
-            spellAbility.setSubAbility(sub);
-            spellAbility.setAdditionalAbility(name, sub);            
+            spellAbility.setSubAbility(getSubAbility(state, name, spellAbility));
         }
 
         for (final String key : additionalAbilityKeys) {
@@ -382,20 +370,9 @@ public final class AbilityFactory {
      * @param mapParams
      */
     private static final void initializeParams(final SpellAbility sa, Map<String, String> mapParams) {
-        if (mapParams.containsKey("Flashback")) {
-            sa.setFlashBackAbility(true);
-        }
 
         if (mapParams.containsKey("NonBasicSpell")) {
             sa.setBasicSpell(false);
-        }
-
-        if (mapParams.containsKey("Dash")) {
-            sa.setDash(true);
-        }
-
-        if (mapParams.containsKey("Outlast")) {
-            sa.setOutlast(true);
         }
     }
 
@@ -449,7 +426,7 @@ public final class AbilityFactory {
     }
 
     public static final Map<String, String> getMapParams(final String abString) {
-        return FileSection.parseToMap(abString, "$", "|");
+        return FileSection.parseToMap(abString, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {

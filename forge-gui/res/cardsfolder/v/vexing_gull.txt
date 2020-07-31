@@ -1,0 +1,7 @@
+Name:Vexing Gull
+ManaCost:2 U
+Types:Creature Bird
+PT:2/2
+K:Flash
+K:Flying
+Oracle:Flash\nFlying

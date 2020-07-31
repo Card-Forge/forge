@@ -5,8 +5,10 @@ import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.Localizer;
 
 public abstract class LimitedWinLoseController {
+    private final Localizer localizer = Localizer.getInstance();
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
     private final boolean wonMatch;
@@ -36,32 +38,32 @@ public abstract class LimitedWinLoseController {
             gauntlet.addLoss();
         }
 
-        view.getBtnRestart().setText("Restart Round");
+        view.getBtnRestart().setText(localizer.getMessage("btnRestartRound"));
 
         showOutcome(new Runnable() {
             @Override
             public void run() {
                 if (!lastGame.isMatchOver()) {
-                    showTournamentInfo("Tournament Info");
+                    showTournamentInfo(localizer.getMessage("btnTournamentInfo"));
                     return;
                 }
 
                 if (wonMatch) {
                     if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                        view.getBtnContinue().setText("Next Round (" + (gauntlet.getCurrentRound() + 1)
+                        view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (gauntlet.getCurrentRound() + 1)
                                 + "/" + gauntlet.getRounds() + ")");
                         nextRound = true;
                         view.getBtnContinue().setEnabled(true);
-                        showTournamentInfo("YOU HAVE WON ROUND " + gauntlet.getCurrentRound() + "/"
+                        showTournamentInfo(localizer.getMessage("btnWonRound") + gauntlet.getCurrentRound() + "/"
                                 + gauntlet.getRounds());
                     }
                     else {
-                        showTournamentInfo("***CONGRATULATIONS! YOU HAVE WON THE TOURNAMENT!***");
+                        showTournamentInfo(localizer.getMessage("btnWonTournament"));
                     }
                 }
                 else {
                     view.getBtnContinue().setVisible(false);
-                    showTournamentInfo("YOU HAVE LOST ON ROUND " + gauntlet.getCurrentRound() + "/"
+                    showTournamentInfo(localizer.getMessage("btnLoseRound") + gauntlet.getCurrentRound() + "/"
                             + gauntlet.getRounds());
                 }
             }
@@ -109,9 +111,9 @@ public abstract class LimitedWinLoseController {
      * 
      */
     private void resetView() {
-        view.getBtnQuit().setText("Quit");
-        view.getBtnContinue().setText("Continue");
-        view.getBtnRestart().setText("Restart");
+        view.getBtnQuit().setText(localizer.getMessage("btnQuit"));
+        view.getBtnContinue().setText(localizer.getMessage("btnContinue"));
+        view.getBtnRestart().setText(localizer.getMessage("btnRestart"));
     }
 
     protected abstract void showOutcome(Runnable runnable);

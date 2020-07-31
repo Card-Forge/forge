@@ -21,6 +21,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -53,14 +54,14 @@ public class TriggerInvestigated extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(sa.getTriggeringObject(AbilityKey.Player));
+        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     /** {@inheritDoc}
@@ -69,7 +70,7 @@ public class TriggerInvestigated extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         Player p = (Player) runParams.get(AbilityKey.Player);
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(p, getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }

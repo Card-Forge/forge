@@ -82,6 +82,10 @@ public class ComputerUtilAbility {
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
+                // Spells of permanents can't be activated on the battlefield
+                if (c.isPermanent() && sa.isSpell() && c.isInZone(ZoneType.Battlefield)) {
+                    continue;
+                }
                 spellAbilities.add(sa);
             }
             if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && !c.mayPlay(player).isEmpty()) {
@@ -109,9 +113,7 @@ public class ComputerUtilAbility {
             List<SpellAbility> priorityAltSa = Lists.newArrayList();
             List<SpellAbility> otherAltSa = Lists.newArrayList();
             for (SpellAbility altSa : saAltCosts) {
-                if (altSa.getPayCosts() == null || sa.getPayCosts() == null) {
-                    otherAltSa.add(altSa);
-                } else if (sa.getPayCosts().isOnlyManaCost()
+                if (sa.getPayCosts().isOnlyManaCost()
                         && altSa.getPayCosts().isOnlyManaCost() && sa.getPayCosts().getTotalMana().compareTo(altSa.getPayCosts().getTotalMana()) == 1) {
                     // the alternative cost is strictly cheaper, so why not? (e.g. Omniscience etc.)
                     priorityAltSa.add(altSa);

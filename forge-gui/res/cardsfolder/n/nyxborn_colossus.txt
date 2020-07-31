@@ -1,0 +1,5 @@
+Name:Nyxborn Colossus
+ManaCost:3 G G G
+Types:Enchantment Creature Giant
+PT:6/7
+Oracle:

@@ -21,7 +21,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -37,8 +36,11 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -71,7 +73,7 @@ public enum DeckFormat {
         private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
-                "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
+                "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Najeela, the Blade Blossom", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
                 "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
 
         @Override
@@ -324,23 +326,32 @@ public enum DeckFormat {
         }
 
         final int maxCopies = getMaxCardCopies();
-        if (maxCopies < Integer.MAX_VALUE) {
-            //Must contain no more than 4 of the same card
-            //shared among the main deck and sideboard, except
-            //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
+        //Must contain no more than 4 of the same card
+        //shared among the main deck and sideboard, except
+        //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
+        // Seven Dwarves can have 7 in the deck. More than 7 in deck + sb is ok in Limited
 
-            final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
+        final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
 
-            // should group all cards by name, so that different editions of same card are really counted as the same card
-            for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
-                final IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
-                if (simpleCard == null) {
-                    return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
-                }
+        // should group all cards by name, so that different editions of same card are really counted as the same card
+        for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
+            final IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
+            // Might cause issues since it ignores "Special" Cards
+            if (simpleCard == null) {
+                return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
+            }
 
-                if (!canHaveAnyNumberOf(simpleCard) && cp.getValue() > maxCopies) {
-                    return TextUtil.concatWithSpace("must not contain more than", String.valueOf(maxCopies), "copies of the card", cp.getKey());
-                }
+            if (canHaveAnyNumberOf(simpleCard)) {
+                continue;
+            }
+
+            Integer cardCopies = canHaveSpecificNumberInDeck(simpleCard);
+            if (cardCopies != null && deck.getMain().countByName(cp.getKey(), true) > cardCopies) {
+                return TextUtil.concatWithSpace("must not contain more than", String.valueOf(cardCopies), "copies of the card", cp.getKey());
+            }
+
+            if (cardCopies == null && cp.getValue() > maxCopies) {
+                return TextUtil.concatWithSpace("must not contain more than", String.valueOf(maxCopies), "copies of the card", cp.getKey());
             }
         }
 
@@ -360,6 +371,16 @@ public enum DeckFormat {
         return icard.getRules().getType().isBasicLand()
             || Iterables.contains(icard.getRules().getMainPart().getKeywords(),
                 "A deck can have any number of cards named CARDNAME.");
+    }
+
+    public static Integer canHaveSpecificNumberInDeck(final IPaperCard card) {
+        // Ideally, this would be parsed during card parsing and set this value
+        if (Iterables.contains(card.getRules().getMainPart().getKeywords(),
+                "A deck can have up to seven cards named CARDNAME.")) {
+            return 7;
+        }
+
+        return null;
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {
@@ -441,6 +462,9 @@ public enum DeckFormat {
         }
         if (this.equals(DeckFormat.Brawl)) {
             return rules.canBeBrawlCommander();
+        }
+        if (this.equals(DeckFormat.TinyLeaders)) {
+            return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
     }

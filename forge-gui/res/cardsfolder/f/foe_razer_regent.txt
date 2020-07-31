@@ -6,8 +6,8 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it fight target creature you don't control.
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 T:Mode$ Fight | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ DelTrigPutCounter | TriggerDescription$ Whenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step.
-SVar:DelTrigPutCounter:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigPutCounter | RememberObjects$ TriggeredFighter | TriggerDescription$ Put two +1/+1 counters on it at the beginning of the next end step.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ DelayTriggerRemembered | CounterType$ P1P1 | CounterNum$ 2
+SVar:DelTrigPutCounter:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigPutCounter | RememberObjects$ TriggeredFighterLKICopy | TriggerDescription$ Put two +1/+1 counters on it at the beginning of the next end step.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ DelayTriggerRememberedLKI | CounterType$ P1P1 | CounterNum$ 2
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foe_razer_regent.jpg
 Oracle:Flying\nWhen Foe-Razer Regent enters the battlefield, you may have it fight target creature you don't control.\nWhenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step.

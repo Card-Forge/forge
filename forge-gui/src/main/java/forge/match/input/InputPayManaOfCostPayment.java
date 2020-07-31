@@ -1,9 +1,5 @@
 package forge.match.input;
 
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
@@ -15,7 +11,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
-import forge.util.Lang;
+import forge.util.Localizer;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
     public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix) {
@@ -64,6 +60,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     protected String getMessage() { 
         final String displayMana = manaCost.toString(false, player.getManaPool());
         final StringBuilder msg = new StringBuilder();
+        final Localizer localizer = Localizer.getInstance();
 
         applyMatrix();
 
@@ -78,26 +75,22 @@ public class InputPayManaOfCostPayment extends InputPayMana {
                 msg.append(saPaidFor.getHostCard()).append(" - ").append(saPaidFor.toString()).append("\n\n");
             }
         }
-        msg.append("Pay Mana Cost: ").append(displayMana);
+        msg.append(localizer.getMessage("lblPayManaCost")).append(" ").append(displayMana);
         if (this.phyLifeToLose > 0) {
-            msg.append(" (");
-            msg.append(this.phyLifeToLose);
-            msg.append(" life paid for phyrexian mana)");
+            msg.append(" ").append(String.format(localizer.getMessage("lblLifePaidForPhyrexianMana"), this.phyLifeToLose));
         }
 
         boolean isLifeInsteadBlack = player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK);
 
         if (manaCost.containsPhyrexianMana() || isLifeInsteadBlack) {
             StringBuilder sb = new StringBuilder();
-            sb.append("Click on your life total to pay life for ");
-            List<String> list = Lists.newArrayList();
-            if (manaCost.containsPhyrexianMana()) {
-                list.add("phyrexian mana");
+            if (manaCost.containsPhyrexianMana() && !isLifeInsteadBlack) {
+                sb.append(localizer.getMessage("lblClickOnYourLifeTotalToPayLifeForPhyrexianMana"));
+            } else if (!manaCost.containsPhyrexianMana() && isLifeInsteadBlack) {
+                sb.append(localizer.getMessage("lblClickOnYourLifeTotalToPayLifeForBlackMana"));
+            } else if (manaCost.containsPhyrexianMana() && isLifeInsteadBlack) {
+                sb.append(localizer.getMessage("lblClickOnYourLifeTotalToPayLifeForPhyrexianOrBlackMana"));
             }
-            if (isLifeInsteadBlack) {
-                list.add("black mana");
-            }
-            sb.append(Lang.joinHomogenous(list, null, "or")).append(".");
             msg.append("\n(").append(sb).append(")");
         }
 

@@ -1,0 +1,8 @@
+Name:Sweet Oblivion
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Mill | Cost$ 1 U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
+K:Escape:3 U ExileFromGrave<4/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Graveyard
+Oracle:Target player mills four cards.\nEscape—{3}{U}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

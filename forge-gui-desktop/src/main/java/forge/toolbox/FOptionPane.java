@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import forge.assets.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 /**
  * Class to replace JOptionPane using skinned dialogs
@@ -49,7 +50,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showMessageDialog(final String message, final String title, final SkinImage icon) {
-        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0);
+        showOptionDialog(message, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0);
     }
 
     public static boolean showConfirmDialog(final String message) {
@@ -57,11 +58,11 @@ public class FOptionPane extends FDialog {
     }
 
     public static boolean showConfirmDialog(final String message, final String title) {
-        return showConfirmDialog(message, title, "Yes", "No", true);
+        return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true);
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final boolean defaultYes) {
-        return showConfirmDialog(message, title, "Yes", "No", defaultYes);
+        return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), defaultYes);
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {
@@ -78,6 +79,10 @@ public class FOptionPane extends FDialog {
         return showOptionDialog(message, title, icon, options, 0);
     }
 
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, Component comp, final List<String> options) {
+        return showOptionDialog(message, title, icon, comp, options, 0);
+    }
+    
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
         optionPane.setVisible(true);
@@ -86,6 +91,14 @@ public class FOptionPane extends FDialog {
         return dialogResult;
     }
 
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, comp, options, defaultOption);
+        optionPane.setVisible(true);
+        final int dialogResult = optionPane.result;
+        optionPane.dispose();
+        return dialogResult;
+    }
+    
     public static String showInputDialog(final String message, final String title) {
         return showInputDialog(message, title, null, "", null);
     }
@@ -112,7 +125,7 @@ public class FOptionPane extends FDialog {
             inputField = cbInput;
         }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of("OK", "Cancel"), -1);
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), -1);
         optionPane.setDefaultFocus(inputField);
         inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
             @Override

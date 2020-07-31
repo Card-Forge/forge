@@ -5,8 +5,7 @@ PT:1/1
 K:Devoid
 K:Ingest
 K:Deathtouch
-A:AB$ Draw | Cost$ 3 U B | NumCards$ 1 | Defined$ You | SubAbility$ DBMill | SpellDescription$ Draw a card. Each opponent exiles the top card of their library.
-SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | Destination$ Exile | NumCards$ 1 
+A:AB$ Draw | Cost$ 3 U B | NumCards$ 1 | Defined$ You | SubAbility$ DBExile | SpellDescription$ Draw a card. Each opponent exiles the top card of their library.
+SVar:DBExile:DB$ Dig | Defined$ Player.Opponent | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All
 DeckHints:Type$Processor
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_feeder.jpg
 Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)\nDeathtouch\n{3}{U}{B}: Draw a card. Each opponent exiles the top card of their library.

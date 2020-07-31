@@ -1,0 +1,8 @@
+Name:Incendiary Oracle
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+R:Event$ Moved | ValidLKI$ Creature.DamagedBy | Destination$ Graveyard | ReplaceWith$ DBExile | ActiveZones$ Battlefield | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+Oracle:{1}{R}: Incendiary Oracle gets +1/+0 until end of turn.\nIf a creature dealt damage by Incendiary Oracle this turn would die, exile it instead.

@@ -24,6 +24,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
+import java.util.Map;
 
 public class UntapAi extends SpellAbilityAi {
     @Override
@@ -153,12 +154,11 @@ public class UntapAi extends SpellAbilityAi {
 
         // Try to avoid potential infinite recursion,
         // e.g. Kiora's Follower untapping another Kiora's Follower and repeating infinitely
-        if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostTap.class)) {
+        if (sa.getPayCosts().hasOnlySpecificCostType(CostTap.class)) {
             CardCollection toRemove = new CardCollection();
             for (Card c : untapList) {
                 for (SpellAbility ab : c.getAllSpellAbilities()) {
                     if (ab.getApi() == ApiType.Untap
-                            && ab.getPayCosts() != null
                             && ab.getPayCosts().hasOnlySpecificCostType(CostTap.class)
                             && ab.canTarget(source)) {
                         toRemove.add(c);
@@ -312,7 +312,7 @@ public class UntapAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         PlayerCollection pl = new PlayerCollection();
         pl.add(ai);
         pl.addAll(ai.getAllies());

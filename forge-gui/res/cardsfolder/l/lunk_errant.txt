@@ -3,6 +3,5 @@ ManaCost:5 R
 Types:Creature Giant Warrior
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +1/+1 and gains trample until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lunk_errant.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 Oracle:Whenever Lunk Errant attacks alone, it gets +1/+1 and gains trample until end of turn.

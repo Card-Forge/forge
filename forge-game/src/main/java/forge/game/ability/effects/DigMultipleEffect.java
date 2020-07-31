@@ -10,18 +10,19 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class DigMultipleEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        // TODO Auto-generated method stub
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
@@ -36,6 +37,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
 
         String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
+        boolean chooseOptional = sa.hasParam("Optional");
 
         CardZoneTable table = new CardZoneTable();
         for (final Player p : getTargetPlayers(sa)) {
@@ -74,15 +76,35 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             }
 
             if (validMap.isEmpty()) {
-                chooser.getController().notifyOfValue(sa, null, "No valid cards");
+                chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                 continue;
             }
 
-            CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, "Choose cards");
+            CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
 
             if (!chosen.isEmpty()) {
-                game.getAction().reveal(chosen, chooser, true,
-                    chooser + " picked " + (chosen.size() == 1 ? "this card" : "these cards") + " from ");
+                game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
+            }
+
+            if (sa.hasParam("ChooseAmount") || sa.hasParam("ChosenZone")) {
+                int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChooseAmount", "1"), sa);
+                final ZoneType chosenZone = sa.hasParam("ChosenZone") ? ZoneType.smartValueOf(sa.getParam("ChosenZone")) : ZoneType.Battlefield;
+
+                CardCollectionView extraChosen = chooser.getController().chooseCardsForEffect(chosen, sa, Localizer.getInstance().getMessage("lblChooseCards"), amount, amount, false, null);
+                if (!extraChosen.isEmpty()) {
+                    game.getAction().reveal(extraChosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
+                }
+
+                for (Card c : extraChosen) {
+                    final ZoneType origin = c.getZone().getZoneType();
+                    final PlayerZone zone = c.getOwner().getZone(chosenZone);
+                    chosen.remove(c);
+                    rest.remove(c);
+                    c = game.getAction().moveTo(zone, c, sa);
+                    if (!origin.equals(c.getZone().getZoneType())) {
+                        table.put(origin, c.getZone().getZoneType(), c);
+                    }
+                }
             }
 
             for (Card c : chosen) {

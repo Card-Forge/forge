@@ -24,6 +24,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -47,7 +48,7 @@ public class TriggerSearchedLibrary extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSearchedLibrary(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSearchedLibrary(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -75,14 +76,14 @@ public class TriggerSearchedLibrary extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Searcher: ").append(sa.getTriggeringObject(AbilityKey.Player));
+        sb.append(Localizer.getInstance().getMessage("lblSearcher")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
         return sb.toString();
     }
 }

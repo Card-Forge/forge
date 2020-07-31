@@ -4,14 +4,18 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.GuiBase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 
+import forge.net.server.FServerManager;
 import forge.util.Localizer;
 
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -279,7 +283,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     protected void startMatch() {
         for (int i = 0; i < getNumPlayers(); i++) {
-            updateDeck(i);//TODO: Investigate why AI names cannot be overriden?
+            if(!lobby.isAllowNetworking()) //on networkplay, update deck will be handled differently
+                updateDeck(i);
+
+            //TODO: Investigate why AI names cannot be overriden?
             updateName(i, getPlayerName(i));
         }
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
@@ -301,11 +308,18 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     /** Saves avatar prefs for players one and two. */
-    void updateAvatarPrefs() {
+    void  updateAvatarPrefs() {
         int pOneIndex = playerPanels.get(0).getAvatarIndex();
         int pTwoIndex = playerPanels.get(1).getAvatarIndex();
 
         prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
+        prefs.save();
+    }
+    void  updateSleevePrefs() {
+        int pOneIndex = playerPanels.get(0).getSleeveIndex();
+        int pTwoIndex = playerPanels.get(1).getSleeveIndex();
+
+        prefs.setPref(FPref.UI_SLEEVES, pOneIndex + "," + pTwoIndex);
         prefs.save();
     }
 
@@ -317,7 +331,32 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
         for (int i = 0; i < avatarPrefs.length; i++) {
             int avatarIndex = Integer.parseInt(avatarPrefs[i]);
+            if (avatarIndex < 0) {
+                int random = 0;
+                List<Integer> usedAvatars = getUsedAvatars();
+                do {
+                    random = MyRandom.getRandom().nextInt(GuiBase.getInterface().getAvatarCount());
+                } while (usedAvatars.contains(random));
+
+                avatarIndex = random;
+            }
             playerPanels.get(i).setAvatarIndex(avatarIndex);
+        }
+
+        // Sleeves
+        String[] sleevePrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
+        for (int i = 0; i < sleevePrefs.length; i++) {
+            int sleeveIndex = Integer.parseInt(sleevePrefs[i]);
+            if (sleeveIndex < 0) {
+                int random = 0;
+                List<Integer> usedSleeves = getUsedSleeves();
+                do {
+                    random = MyRandom.getRandom().nextInt(GuiBase.getInterface().getSleevesCount());
+                } while (usedSleeves.contains(random));
+
+                sleeveIndex = random;
+            }
+            playerPanels.get(i).setSleeveIndex(sleeveIndex);
         }
 
         // Name
@@ -334,6 +373,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return usedAvatars;
     }
 
+    List<Integer> getUsedSleeves() {
+        List<Integer> usedSleeves = Arrays.asList(-1,-1,-1,-1,-1,-1,-1,-1);
+        int i = 0;
+        for (PlayerPanel pp : playerPanels) {
+            usedSleeves.set(i++, pp.getSleeveIndex());
+        }
+        return usedSleeves;
+    }
+
     List<String> getPlayerNames() {
         List<String> names = new ArrayList<>();
         for (PlayerPanel pp : playerPanels) {
@@ -348,6 +396,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     public int getPlayerAvatar(int i) {
         return playerPanels.get(i).getAvatarIndex();
+    }
+
+    public int getPlayerSleeve(int i) {
+        return playerPanels.get(i).getSleeveIndex();
     }
 
     /////////////////////////////////////////////
@@ -448,6 +500,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
             case LEGACY_CARDGEN_DECK:
             case VINTAGE_CARDGEN_DECK:
@@ -498,6 +551,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updateVariantSelection();
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        GuiBase.setNetworkplay(allowNetworking);
+
+        setStartButtonAvailability();
+
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
@@ -522,13 +580,23 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
 
                 if (i == 0) {
-                    slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+                    slot.setIsDevMode(slot.isDevMode());
                 }
 
                 final LobbySlotType type = slot.getType();
                 panel.setType(type);
-                panel.setPlayerName(slot.getName());
-                panel.setAvatarIndex(slot.getAvatarIndex());
+                if (type != LobbySlotType.AI) {
+                    panel.setPlayerName(slot.getName());
+                    panel.setAvatarIndex(slot.getAvatarIndex());
+                    panel.setSleeveIndex(slot.getSleeveIndex());
+                } else {
+                    //AI: this one overrides the setplayername if blank
+                    if (panel.getPlayerName().isEmpty())
+                        panel.setPlayerName(slot.getName());
+                    //AI: override settings if somehow player changes it for AI
+                    slot.setAvatarIndex(panel.getAvatarIndex());
+                    slot.setSleeveIndex(panel.getSleeveIndex());
+                }
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
@@ -537,8 +605,21 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
+                if(allowNetworking) {
+                    if(slot.getDeckName() != null)
+                        panel.setDeckSelectorButtonText(slot.getDeckName());
 
-                if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
+                    if(slot.getPlanarDeckName()!= null)
+                        panel.setPlanarDeckName(slot.getPlanarDeckName());
+
+                    if(slot.getSchemeDeckName()!= null)
+                        panel.setSchemeDeckName(slot.getSchemeDeckName());
+
+                    if(slot.getAvatarVanguard()!= null)
+                        panel.setVanguarAvatarName(slot.getAvatarVanguard());
+                }
+
+                if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI) && !allowNetworking) {
                     updateDeck(i);
                 }
                 if (isNewPanel) {
@@ -561,35 +642,46 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         if (playerIndex >= getNumPlayers()) { return; }
 
         PlayerPanel playerPanel = playerPanels.get(playerIndex);
+        String deckName = "";
 
         Deck deck;
         if (hasVariant(GameType.Commander)) {
             deck = playerPanel.getCommanderDeck();
             if (deck != null) {
                 playerPanel.getCommanderDeckChooser().saveState();
+                deckName =  localizer.getMessage("lblCommanderDeck") + ": "
+                        + playerPanel.getCommanderDeckChooser().getDeck().getName();
             }
         }
         else if (hasVariant(GameType.Oathbreaker)) {
             deck = playerPanel.getOathbreakerDeck();
             if (deck != null) {
                 playerPanel.getOathbreakerDeckChooser().saveState();
+                deckName =  localizer.getMessage("lblOathbreakerDeck") + ": "
+                        + playerPanel.getOathbreakerDeckChooser().getDeck().getName();
             }
         }
         else if (hasVariant(GameType.TinyLeaders)) {
             deck = playerPanel.getTinyLeadersDeck();
             if (deck != null) {
                 playerPanel.getTinyLeadersDeckChooser().saveState();
+                deckName =  localizer.getMessage("lblTinyLeadersDeck") + ": "
+                        + playerPanel.getTinyLeadersDeckChooser().getDeck().getName();
             }
         }
         else if (hasVariant(GameType.Brawl)) {
             deck = playerPanel.getBrawlDeck();
             if (deck != null) {
                 playerPanel.getBrawlDeckChooser().saveState();
+                deckName =  localizer.getMessage("lblBrawlDeck") + ": "
+                        + playerPanel.getBrawlDeckChooser().getDeck().getName();
             }
         }else {
             deck = playerPanel.getDeck();
             if (deck != null) {
                 playerPanel.getDeckChooser().saveState();
+                deckName =  playerPanel.getDeckChooser().getSelectedDeckType().toString() + ": "
+                        + playerPanel.getDeckChooser().getDeck().getName();
             }
         }
 
@@ -597,18 +689,31 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             return;
         }
 
+        //playerPanel.setDeckSelectorButtonText(deckName);
+
         Deck playerDeck = deck;
+        String VanguardAvatar = null;
+        String SchemeDeckName= null;
+        String PlanarDeckname= null;
         if (hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble)) {
             if (playerDeck == deck) {
                 playerDeck = new Deck(deck); //create copy that can be modified
             }
             playerDeck.putSection(DeckSection.Schemes, playerPanel.getSchemeDeck().get(DeckSection.Schemes));
+            if (!playerPanel.getSchemeDeck().getName().isEmpty()) {
+                SchemeDeckName = localizer.getMessage("lblSchemeDeck") + ": " + playerPanel.getSchemeDeck().getName();
+                playerPanel.setSchemeDeckName(SchemeDeckName);
+            }
         }
         if (hasVariant(GameType.Planechase)) {
             if (playerDeck == deck) {
                 playerDeck = new Deck(deck); //create copy that can be modified
             }
             playerDeck.putSection(DeckSection.Planes, playerPanel.getPlanarDeck().get(DeckSection.Planes));
+            if(!playerPanel.getPlanarDeck().getName().isEmpty()) {
+                PlanarDeckname = localizer.getMessage("lblPlanarDeck") + ": " + playerPanel.getPlanarDeck().getName();
+                playerPanel.setPlanarDeckName(PlanarDeckname);
+            }
         }
         if (hasVariant(GameType.Vanguard)) {
             if (playerDeck == deck) {
@@ -617,11 +722,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             CardPool avatarPool = new CardPool();
             avatarPool.add(playerPanel.getVanguardAvatar());
             playerDeck.putSection(DeckSection.Avatar, avatarPool);
+            VanguardAvatar = localizer.getMessage("lblVanguard") + ": " + playerPanel.getVanguardAvatar().getName();
+            playerPanel.setVanguarAvatarName(VanguardAvatar);
         }
 
         decks[playerIndex] = playerDeck;
         if (playerChangeListener != null) {
             playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.deckUpdate(playerDeck));
+            playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.setDeckSchemePlaneVanguard(TextUtil.fastReplace(deckName," Generated Deck", ""), SchemeDeckName, PlanarDeckname, VanguardAvatar));
         }
     }
 
@@ -631,7 +739,24 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    void updateAvatar(final int index, final int avatarIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.avatarUpdate(avatarIndex));
+        }
+    }
+
+    void updateSleeve(final int index, final int sleeveIndex) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveUpdate(sleeveIndex));
+        }
+    }
+
     void setReady(final int index, final boolean ready) {
+        if (lobby.isAllowNetworking()){
+            updateDeck(index);
+            fireReady(index, ready);
+            return;
+        }
         if (ready) {
             updateDeck(index);
             if (decks[index] == null) {
@@ -640,7 +765,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 return;
             }
         }
-
         firePlayerChangeListener(index);
     }
     void setDevMode(final int index) {
@@ -657,7 +781,27 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             playerChangeListener.update(index, getSlot(index));
         }
     }
+    void fireReady(final int index, boolean ready){
+        playerPanels.get(index).setIsReady(ready);
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.isReadyUpdate(ready));
+        }
+    }
+    void updatemyTeam(int index, int team) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.teamUpdate(team));
+        }
+    }
+    void updateMyDeck(int index) {
+        /* updateMyDeck is called via button handler when the user set their deck on network play*/
 
+        //safety check
+        if(playerPanels.size() < 2)
+            return;
+
+        updateDeck(index);
+        //fireReady(index, playerPanels.get(index).isReady());
+    }
     public void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
@@ -667,7 +811,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getSleeveIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     public List<PlayerPanel> getPlayerPanels() {
@@ -676,5 +820,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     public FScrollPane getPlayersScroll() {
         return playersScroll;
+    }
+
+    public void setStartButtonAvailability() {
+        if (lobby.isAllowNetworking() && FServerManager.getInstance() != null)
+            btnStart.setVisible(FServerManager.getInstance().isHosting());
+        else
+            btnStart.setVisible(true);
     }
 }

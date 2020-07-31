@@ -6,13 +6,13 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>1.6.29.001</alpha-version>
+        <alpha-version>1.6.36.001</alpha-version>
     </properties>
 
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.30-SNAPSHOT</version>
+        <version>1.6.37-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-ios</artifactId>
@@ -74,24 +74,6 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-robovm</artifactId>
             <version>1.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-base-bom</artifactId>
-            <version>1.2.4.Final</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-core</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.cache2k</groupId>
-            <artifactId>cache2k-api</artifactId>
-            <version>1.2.4.Final</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

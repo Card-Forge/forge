@@ -10,6 +10,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     chosen = MyRandom.getRandom().nextInt(max - min) + min;
                     p.getGame().getAction().nofityOfValue(sa, p, Integer.toString(chosen), null);
                 } else {
-                    String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : "Choose a number";
+                    String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                     if (anyNumber) {
                         Integer value = p.getController().announceRequirements(sa, title, true);
                         chosen = (value == null ? 0 : value);
@@ -72,7 +73,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.setChosenNumber(chosen);
                 }
                 if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().nofityOfValue(sa, card, p.getName() + " picked " + chosen, p);
+                    p.getGame().getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                 }
             }
         }
@@ -85,7 +86,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
                 int num = ev.getValue();
                 Player player = ev.getKey();
-                sb.append(player).append(" chose ").append(num);
+                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), String.valueOf(num)));
                 sb.append("\r\n");
                 if (num > highest) {
                     highestNum.clear();

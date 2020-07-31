@@ -9,6 +9,5 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Mill | Cost$ 4 T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SpellDescription$ Exile the top card of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rona_disciple_of_gix.jpg
+A:AB$ Dig | Cost$ 4 T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SpellDescription$ Exile the top card of your library.
 Oracle:When Rona, Disciple of Gix enters the battlefield, you may exile target historic card from your graveyard. (Artifacts, legendaries, and Sagas are historic.)\nYou may cast nonland cards exiled with Rona.\n{4}, {T}: Exile the top card of your library.

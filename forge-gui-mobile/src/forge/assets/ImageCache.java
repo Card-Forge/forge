@@ -22,8 +22,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalCause;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import forge.ImageKeys;
 import forge.card.CardEdition;
+import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.IPaperCard;
@@ -32,11 +38,11 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.cache2k.Cache;
-import org.cache2k.Cache2kBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -56,13 +62,18 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> missingIconKeys = new HashSet<>();
-    private static final Cache<String, Texture> cache  = new Cache2kBuilder<String, Texture>() {}
-            .name("cache")
-            .eternal(true)
-            .permitNullValues(true)
-            .disableStatistics(true)
-            .loader(new ImageLoader())
-            .build();
+    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
+            .maximumSize(400)
+            .expireAfterAccess(15, TimeUnit.MINUTES)
+            .removalListener(new RemovalListener<String, Texture>() {
+                @Override
+                public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
+                    if(removalNotification.wasEvicted()||removalNotification.getCause() == RemovalCause.EXPIRED) {
+                        removalNotification.getValue().dispose();
+                    }
+                }
+            })
+            .build(new ImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
@@ -85,8 +96,17 @@ public class ImageCache {
     }
 
     public static void clear() {
-        cache.clear();
+        cache.invalidateAll();
+        cache.cleanUp();
         missingIconKeys.clear();
+    }
+
+    public static void disposeTexture(){
+        for (Texture t: cache.asMap().values()) {
+            t.dispose();
+        }
+        CardRenderer.clearcardArtCache();
+        clear();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -134,7 +154,7 @@ public class ImageCache {
         Texture image;
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = cache.get(imageKey);
+            image = cache.getIfPresent(imageKey);
 
             if (image != null) { return image; }
 
@@ -164,17 +184,22 @@ public class ImageCache {
         }
         return image;
     }
-    public static void preloadCache(Iterable keys) {
-        cache.getAll(keys);
+    public static void preloadCache(Iterable<String> keys) {
+        try {
+            cache.getAll(keys);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
-    public static TextureRegion croppedBorderImage(Texture image) {
+    public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
+        if (!fullborder)
+            return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
         int rh = Math.round(image.getHeight()*rscale);
-        int rx = Math.round((image.getWidth() - rw)/2);
-        int ry = Math.round((image.getHeight() - rh)/2)-2;
-        TextureRegion rimage = new TextureRegion(image, rx, ry, rw, rh);
-        return rimage;
+        int rx = Math.round((image.getWidth() - rw)/2f);
+        int ry = Math.round((image.getHeight() - rh)/2f)-2;
+        return new TextureRegion(image, rx, ry, rw, rh);
     }
     public static boolean isWhiteBordered(IPaperCard c) {
         if (c == null)
@@ -214,12 +239,24 @@ public class ImageCache {
             return Color.valueOf("#fffffd");
         return Color.valueOf("#171717");
     }
+    public static int getFSkinBorders(CardView c) {
+        if (c == null)
+            return 0;
+
+        CardView.CardStateView state = c.getCurrentState();
+        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+            return 1;
+        return 0;
+    }
     public static boolean isExtendedArt(CardView c) {
         if (c == null)
             return false;
 
         CardView.CardStateView state = c.getCurrentState();
         if (state.getSetCode().contains("MPS_"))
+            return true;
+        if (state.getSetCode().equalsIgnoreCase("UST"))
             return true;
         return false;
     }
@@ -228,6 +265,8 @@ public class ImageCache {
             return false;
 
         if (c.getEdition().contains("MPS_"))
+            return true;
+        if (c.getEdition().equalsIgnoreCase("UST"))
             return true;
         return false;
     }

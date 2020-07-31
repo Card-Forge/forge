@@ -1,18 +1,26 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
+import forge.game.combat.Combat;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.MyRandom;
+import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 import java.util.*;
+
+import com.google.common.collect.Maps;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
@@ -86,6 +94,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
             untilAmount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+            if (untilAmount == 0) return;
         }
 
         Integer maxRevealed = null;
@@ -113,7 +122,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 continue;
             }
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, "Do you want to dig your library?")) {
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"))) {
                     continue;
                 }
                 CardCollection found = new CardCollection();
@@ -146,7 +155,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 if (revealed.size() > 0) {
                     game.getAction().reveal(revealed, p, false);
                 }
-                
+
 
                 if (foundDest != null) {
                     // Allow ordering of found cards
@@ -159,13 +168,34 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         final ZoneType origin = c.getZone().getZoneType();
                         if (optionalFound && !p.getController().confirmAction(sa, null,
-                                "Do you want to put that card to " + foundDest.name() + "?")) {
+                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
                         } else {
                             Card m = null;
                             if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                                 m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
+                                if (sa.hasParam("Tapped")) {
+                                    c.setTapped(true);
+                                }
+                                if (sa.hasParam("Attacking")) {
+                                    final Combat combat = game.getCombat();
+                                    if (null != combat) {
+                                        final FCollectionView<GameEntity> e = combat.getDefenders();
+
+                                        Map<String, Object> params = Maps.newHashMap();
+                                        params.put("Attacker", c);
+
+                                        final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
+                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), params);
+
+                                        if (defender != null) {
+                                            combat.addAttacker(c, defender);
+                                            combat.getBandOfAttacker(c).setBlocked(false);
+                                            game.fireEvent(new GameEventCombatChanged());
+                                        }
+                                    }
+                                }
                             } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                                 //Don't do anything
                             } else {

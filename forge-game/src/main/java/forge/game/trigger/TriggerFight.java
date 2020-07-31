@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class TriggerFight extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerFight(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFight(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -58,21 +59,21 @@ public class TriggerFight extends Trigger {
 
         if (hasParam("ValidCard")) {
             return fighter.isValid(getParam("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null);
+                    getHostCard().getController(), getHostCard(), null);
         }
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Fighter);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Fighter);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Fighter: ").append(sa.getTriggeringObject(AbilityKey.Fighter));
+        sb.append(Localizer.getInstance().getMessage("lblFighter")).append(": ").append(sa.getTriggeringObject(AbilityKey.Fighter));
         return sb.toString();
     }
 }

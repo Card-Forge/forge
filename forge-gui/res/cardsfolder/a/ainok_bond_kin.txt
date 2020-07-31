@@ -1,6 +1,6 @@
 Name:Ainok Bond-Kin
 ManaCost:1 W
-Types:Creature Hound Soldier
+Types:Creature Dog Soldier
 PT:2/1
 K:Outlast:1 W
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ First Strike | Description$ Each creature you control with a +1/+1 counter on it has first strike.

@@ -9,12 +9,11 @@ SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Valid
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
-SVar:TrigPump:DB$Pump | ValidTgts$ Permanent.Vampire | TgtPrompt$ Select target Vampire | NumAtt$ X | NumDef$ X | References$ X 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Vampire | TgtPrompt$ Select target Vampire | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Remembered$CardPower
 // Release notes indicate that this effect should work with Vehicle cards.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bishop_of_binding.jpg
 Oracle:When Bishop of Binding enters the battlefield, exile target creature an opponent controls until Bishop of Binding leaves the battlefield.\nWhenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.

@@ -16,6 +16,8 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 
@@ -33,7 +35,8 @@ public class AttachEffect extends SpellAbilityEffect {
             sa.setHostCard(c);
         }
 
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
 
         CardCollection attachments;
         final List<GameObject> targets = getDefinedOrTargeted(sa, "Defined");
@@ -44,23 +47,40 @@ public class AttachEffect extends SpellAbilityEffect {
         } else {
             attachTo = targets.get(0);
         }
+        
+        String attachToName = null;
+        if (attachTo instanceof Card) {
+            attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());
+        }
+        else {
+            attachToName = attachTo.toString();
+        }
 
         final Player p = sa.getActivatingPlayer();
 
-        if (sa.hasParam("Object")) {
-            attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
-            if (sa.hasParam("ChooseAnObject")) {
-                Card c = p.getController().chooseSingleEntityForEffect(attachments, sa, sa.getParam("ChooseAnObject"));
-                attachments.clear();
-                attachments.add(c);
+        if (sa.hasParam("Choices")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoose") + " ";
+
+            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), p, source, sa);
+
+            Card c = p.getController().chooseSingleEntityForEffect(choices, sa, title, null);
+            if (c == null) {
+                return;
+            }
+            attachments = new CardCollection(c);
+        } else  if (sa.hasParam("Object")) {
+            attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
         } else {
             attachments = new CardCollection(source);
         }
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
-            String message = "Do you want to attach " + attachment + " to " + attachTo + "?";
+            String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", CardTranslation.getTranslatedName(attachment.getName()), attachToName);
             if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
                 continue;
             handleAttachment(attachment, attachTo, sa);
@@ -173,7 +193,8 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, source + " - Select a player to attach to.");
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
+                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -186,7 +207,8 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - Select a card to attach to.");
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
+                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (o != null) {
                 handleAura(source, o);
                 //source.enchantEntity((Card) o);

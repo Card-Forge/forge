@@ -46,12 +46,10 @@ public class ScryAi extends SpellAbilityAi {
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
         // even if there's no mana cost.
-        if (sa.getPayCosts() != null) {
-            if (sa.getPayCosts().hasTapCost()
-                    && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                    && !SpellAbilityAi.isSorcerySpeed(sa)) {
-                return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-            }
+        if (sa.getPayCosts().hasTapCost()
+                && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
+                && !SpellAbilityAi.isSorcerySpeed(sa)) {
+            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         }
 
         // AI logic to scry in Main 1 if there is no better option, otherwise scry at opponent's EOT
@@ -76,8 +74,7 @@ public class ScryAi extends SpellAbilityAi {
         boolean hasSomethingElse = false;
         for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
             for (SpellAbility ab : c.getAllSpellAbilities()) {
-                if (ab.getPayCosts() != null
-                        && ab.getPayCosts().hasManaCost()
+                if (ab.getPayCosts().hasManaCost()
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                     // TODO: currently looks for non-Scry cards, can most certainly be made smarter.
                     if (ab.getApi() != ApiType.Scry) {
@@ -102,7 +99,7 @@ public class ScryAi extends SpellAbilityAi {
         } else if ("BrainJar".equals(aiLogic)) {
             final Card source = sa.getHostCard();
             
-            int counterNum = source.getCounters(CounterType.CHARGE);
+            int counterNum = source.getCounters(CounterEnumType.CHARGE);
             // no need for logic
             if (counterNum == 0) {
                 return false;

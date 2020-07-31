@@ -15,6 +15,8 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -66,7 +68,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, "Do you want to copy the spell " + card + "?")) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(card.getName())))) {
             return;
         }
 
@@ -84,7 +86,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
-                String prompt = "Select " + Lang.getOrdinal(multi + 1) + " spell to copy to stack";
+                String prompt = Localizer.getInstance().getMessage("lblSelectMultiSpellCopyToStack", Lang.getOrdinal(multi + 1));
                 SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt,
                         ImmutableMap.of());
                 SpellAbility copiedSpell = CardFactory.copySpellAbilityAndPossiblyHost(card, chosen.getHostCard(), chosen, true);
@@ -96,7 +98,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
         else if (sa.hasParam("CopyForEachCanTarget")) {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
-                    "Select a spell to copy", ImmutableMap.of());
+                    Localizer.getInstance().getMessage("lblSelectASpellCopy"), ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             // Find subability or rootability that has targets
             SpellAbility targetedSA = chosenSA;
@@ -144,7 +146,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 valid.remove(originalTarget);
                 mayChooseNewTargets = false;
                 if (sa.hasParam("ChooseOnlyOne")) {
-                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, "Choose one");
+                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, choice, targetedSA);
                     copies.add(copy);
@@ -164,7 +166,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
         else {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
-                    "Select a spell to copy", ImmutableMap.of());
+                    Localizer.getInstance().getMessage("lblSelectASpellCopy"), ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
                 SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(

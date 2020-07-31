@@ -11,6 +11,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 
@@ -52,11 +54,11 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard());
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
-                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, source + " - Revealing cards from ");
+                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblRevealingCardFrom") + " ");
             }
             
             if( doReveal && sa.hasParam("RevealOptional") )
-                doReveal = peekingPlayer.getController().confirmAction(sa, null, "Reveal cards to other players?");
+                doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"));
             
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);

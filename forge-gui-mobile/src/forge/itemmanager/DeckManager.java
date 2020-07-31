@@ -1,5 +1,6 @@
 package forge.itemmanager;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -124,7 +125,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 }
 
                 //draw favorite, name, path and color on first line
-                g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
+                if (Forge.hdbuttons)
+                    g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
+                else
+                    g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
+
                 x += IMAGE_SIZE + FList.PADDING;
                 ColorSet deckColor = deck.getColor();
                 float availableNameWidth = w - CardFaceSymbols.getWidth(deckColor, IMAGE_SIZE) - IMAGE_SIZE - 2 * FList.PADDING;

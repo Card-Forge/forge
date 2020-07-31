@@ -212,6 +212,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
             else {
                 max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
+
+                Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
+                if (cardCopies != null) {
+                    max = cardCopies;
+                }
+
                 Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName, new Predicate<Entry<String, Integer>>() {
                     @Override
                     public boolean apply(Entry<String, Integer> t) {
@@ -452,7 +458,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
 
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptoprevioustable"),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
                     new Runnable() {
                 @Override
                 public void run() {
@@ -460,7 +466,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 }
             });
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptopnexttable"),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
                     new Runnable() {
                 @Override
                 public void run() {

@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import forge.menus.MenuUtil;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.views.IDevListener;
+import forge.util.Localizer;
 
 /**
  * Gets a menu that replicates all the DevMode options.
@@ -29,28 +30,28 @@ public class DevModeMenu implements ActionListener, IDevListener {
     // Using an enum to avoid having to create multiple
     // ActionListeners each calling a single method.
     private enum DevMenuItem {
-        GENERATE_MANA("Generate Mana"),
-        TUTOR_FOR_CARD("Tutor for Card"),
-        ADD_CARD_TO_HAND("Add Card to Hand"),
-        ADD_CARD_TO_PLAY("Add Card to Play"),
-        EXILE_FROM_HAND("Exile from Hand"),
-        EXILE_FROM_PLAY("Exile from Play"),
-        SET_PLAYER_LIFE("Set Player Life"),
-        WIN_GAME("Win Game"),
-        SETUP_GAME_STATE("Setup Game State"),
-        DUMP_GAME_STATE("Dump Game State"),
-        PLAY_UNLIMITED_LANDS("Play Unlimited Lands"),
-        VIEW_ALL("View All Cards"),
-        ADD_COUNTER("Add Counters to Permanent"),
-        TAP_PERMANENT("Tap Permanents"),
-        UNTAP_PERMANENT("Untap Permanents"),
-        RIGGED_PLANAR_ROLL("Rigged Planar Roll"),
-        PLANESWALK_TO("Planeswalk to"),
-        DEV_CORNER("Developer's Corner");
+        GENERATE_MANA("lblGenerateMana"),
+        TUTOR_FOR_CARD("lblTutor"),
+        ADD_CARD_TO_HAND("lblCardToHand"),
+        ADD_CARD_TO_PLAY("lblCastSpellOrPlayLand"),
+        EXILE_FROM_HAND("lblExileFromHand"),
+        EXILE_FROM_PLAY("lblExileFromPlay"),
+        SET_PLAYER_LIFE("lblSetLife"),
+        WIN_GAME("lblWinGame"),
+        SETUP_GAME_STATE("lblSetupGame"),
+        DUMP_GAME_STATE("lblDumpGame"),
+        PLAY_UNLIMITED_LANDS("lblUnlimitedLands"),
+        VIEW_ALL("lblViewAll"),
+        ADD_COUNTER("lblAddCounterPermanent"),
+        TAP_PERMANENT("lblTapPermanent"),
+        UNTAP_PERMANENT("lblUntapPermanent"),
+        RIGGED_PLANAR_ROLL("lblRiggedRoll"),
+        PLANESWALK_TO("lblWalkTo"),
+        DEV_CORNER("lblDeveloperCorner");
 
         protected String caption;
         DevMenuItem(final String value) {
-            this.caption = value;
+            this.caption = Localizer.getInstance().getMessage(value);
         }
         protected static DevMenuItem getValue(final String s) {
             for (final DevMenuItem t : DevMenuItem.values()) {
@@ -71,7 +72,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
     }
 
     public JMenu getMenu() {
-        final JMenu menu = new JMenu("Dev");
+        final JMenu menu = new JMenu(Localizer.getInstance().getMessage("lblDev"));
         menu.setMnemonic(KeyEvent.VK_D);
         menu.add(getMenuItem(DevMenuItem.GENERATE_MANA));
         menu.add(getMenuItem(DevMenuItem.TUTOR_FOR_CARD));

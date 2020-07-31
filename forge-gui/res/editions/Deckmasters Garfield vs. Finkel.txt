@@ -4,6 +4,7 @@ Date=2001-12
 Name=Deckmasters: Garfield vs. Finkel
 MciCode=dm
 Type=Other
+Border=White
 
 [cards]
 1 U Abyssal Specter

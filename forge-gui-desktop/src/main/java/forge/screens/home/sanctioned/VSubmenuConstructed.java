@@ -3,9 +3,7 @@ package forge.screens.home.sanctioned;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
-import forge.deckchooser.IDecksComboBoxListener;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -131,11 +129,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         for (final FDeckChooser fdc : vLobby.getDeckChoosers()) {
             fdc.populate();
-            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    vLobby.focusOnAvatar();
-                }
-            });
         }
 
         container.add(vLobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");

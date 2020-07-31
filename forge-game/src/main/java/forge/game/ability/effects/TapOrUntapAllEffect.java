@@ -11,6 +11,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -55,11 +56,11 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         // Default to tapping for AI
         boolean toTap = true;
 
-        StringBuilder sb = new StringBuilder("Tap or Untap ");
+        StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblTapOrUntapTarget") + " ");
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
         } else {
-            sb.append("Permanents");
+            sb.append(Localizer.getInstance().getMessage("lblPermanents"));
         }
         sb.append("?");
 

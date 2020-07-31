@@ -2,10 +2,9 @@ Name:Golgari Grave-Troll
 ManaCost:4 G
 Types:Creature Troll Skeleton
 PT:0/0
-K:etbCounter:P1P1:X:no Condition:Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
 A:AB$ Regenerate | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Regenerate CARDNAME.
 K:Dredge:6
 SVar:X:Count$LastStateGraveyard Creature.YouCtrl
 SVar:NeedsToPlayVar:X GE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_grave_troll.jpg
-Oracle:Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.\n{1}, Remove a +1/+1 counter from Golgari Grave-Troll: Regenerate Golgari Grave-Troll.\nDredge 6 (If you would draw a card, instead you may put exactly six cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+Oracle:Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.\n{1}, Remove a +1/+1 counter from Golgari Grave-Troll: Regenerate Golgari Grave-Troll.\nDredge 6 (If you would draw a card, you may mill six cards instead. If you do, return this card from your graveyard to your hand.)

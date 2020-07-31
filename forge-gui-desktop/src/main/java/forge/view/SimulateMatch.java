@@ -12,8 +12,8 @@ import forge.game.*;
 import forge.properties.ForgeConstants;
 import forge.tournament.system.*;
 import forge.util.TextUtil;
+import forge.util.WordUtil;
 import forge.util.storage.IStorage;
-import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.deck.Deck;
@@ -75,7 +75,7 @@ public class SimulateMatch {
 
         GameType type = GameType.Constructed;
         if (params.containsKey("f")) {
-            type = GameType.valueOf(WordUtils.capitalize(params.get("f").get(0)));
+            type = GameType.valueOf(WordUtil.capitalize(params.get("f").get(0)));
         }
 
         GameRules rules = new GameRules(type);

@@ -87,12 +87,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final TextSearchFilter<? extends T> searchFilter;
 
     private final FLabel btnSearch = new FLabel.ButtonBuilder()
-        .icon(FSkinImage.SEARCH).iconScaleFactor(0.9f).build();
+        .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).build();
     private final FLabel btnView = new FLabel.ButtonBuilder()
         .iconScaleFactor(0.9f).build(); //icon set later
     private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
         .selectable(true).align(Align.center)
-        .icon(FSkinImage.SETTINGS).iconScaleFactor(0.9f)
+        .icon(Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS).iconScaleFactor(0.9f)
         .build();
 
     private final FComboBox<ItemColumn> cbxSortOptions;
@@ -148,7 +148,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
-                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), FSkinImage.SEARCH, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 if (advancedSearchFilter == null) {
@@ -158,7 +158,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                                 advancedSearchFilter.edit();
                             }
                         }));
-                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), FSkinImage.DELETE, new FEventHandler() {
+                        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 resetFilters();
@@ -973,7 +973,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     @Override
     public String getActivateAction(int index) {
         if (contextMenuBuilder != null) {
-            return "select card";
+            return Localizer.getInstance().getMessage("lblSelectCard");
         }
         return null;
     }

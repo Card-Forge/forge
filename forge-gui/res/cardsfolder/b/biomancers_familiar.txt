@@ -2,7 +2,7 @@ Name:Biomancer's Familiar
 ManaCost:G U
 Types:Creature Mutant
 PT:2/2
-S:Mode$ ReduceCost | ValidCard$ Creature.YouCtrl | Type$ Ability | Amount$ 2 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+S:Mode$ ReduceCost | ValidCard$ Creature.YouCtrl | Type$ Ability | Amount$ 2 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME adapts as though it had no +1/+1 counters | TgtPrompt$ Select target creature. | StackDescription$ SpellDescription | SpellDescription$ The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters.
 DeckHints:Keyword$Adapt
-Oracle:Activated abilities of creatures you control cost 2 less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.\n{T}: The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters.
+Oracle:Activated abilities of creatures you control cost 2 less to activate. This effect can't reduce the mana in that cost to less than one mana.\n{T}: The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters.

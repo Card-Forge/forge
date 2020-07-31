@@ -1,11 +1,10 @@
 Name:Startled Awake
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Mill | Cost$ 2 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent puts the top thirteen cards of their library into their graveyard.
+A:SP$ Mill | Cost$ 2 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
 A:AB$ ChangeZone | Cost$ 3 U U | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/startled_awake.jpg
 AlternateMode:DoubleFaced
-Oracle:Target opponent puts the top thirteen cards of their library into their graveyard.\n{3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
+Oracle:Target opponent mills thirteen cards.\n{3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
 
 ALTERNATE
 
@@ -17,5 +16,4 @@ PT:1/1
 K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBounce | TriggerDescription$ When CARDNAME deals combat damage to a player, return it to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/persistent_nightmare.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Persistent Nightmare deals combat damage to a player, return it to its owner's hand.

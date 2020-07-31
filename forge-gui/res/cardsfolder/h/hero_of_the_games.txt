@@ -1,0 +1,8 @@
+Name:Hero of the Games
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ SpellCast | TargetsValid$ Card.Self | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:BuffedBy:Card
+Oracle:Whenever you cast a spell that targets Hero of the Games, creatures you control get +1/+0 until end of turn.

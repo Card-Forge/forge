@@ -15,6 +15,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -30,11 +31,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
-                    && activator.getController().confirmAction(sa, null, "Do you want to pay Echo {0}?")) {
+                    && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?")) {
                 isPaid = true;
             } else {
                 isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
-                    sa, "Pay Echo", ManaPaymentPurpose.Echo);
+                    sa, Localizer.getInstance().getMessage("lblPayEcho"), ManaPaymentPurpose.Echo);
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
             runParams.put(AbilityKey.EchoPaid, isPaid);
@@ -44,13 +45,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
             GameEntityCounterTable table = new GameEntityCounterTable();
-            card.addCounter(CounterType.AGE, 1, activator, true, table);
+            card.addCounter(CounterEnumType.AGE, 1, activator, true, table);
 
             table.triggerCountersPutAll(game);
 
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
-            int n = card.getCounters(CounterType.AGE);
+            int n = card.getCounters(CounterEnumType.AGE);
             
             // multiply cost
             for (int i = 0; i < n; ++i) {
@@ -117,7 +118,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("Random")) {
                     choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, "Do you want to sacrifice?")) {
+                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
                     choosenToSacrifice = CardCollection.EMPTY;
                 } else {
                     boolean isOptional = sa.hasParam("Optional");
@@ -156,21 +157,21 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
-                    	countSacrificed++;
-                    	if (remSacrificed) {
-                    		card.addRemembered(lKICopy);
-                    	}
+                        countSacrificed++;
+                        if (remSacrificed) {
+                            card.addRemembered(lKICopy);
+                        }
                     }
                 }
             }
 
             if (remSVar != null) {
-            	card.setSVar(remSVar, String.valueOf(countSacrificed));
-            	SpellAbility root = sa;
-            	do {
-            		root.setSVar(remSVar, String.valueOf(countSacrificed));
-            		root = root.getSubAbility();
-            	} while (root != null);
+                card.setSVar(remSVar, String.valueOf(countSacrificed));
+                SpellAbility root = sa;
+                do {
+                    root.setSVar(remSVar, String.valueOf(countSacrificed));
+                    root = root.getSubAbility();
+                } while (root != null);
             }
         }
 
@@ -193,10 +194,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append("Sacrifice ").append(sa.getHostCard().toString());
+            sb.append("Sacrifices ").append(sa.getHostCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
-            sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
+            sb.append(toSac.getController()).append(" Sacrifices ").append(toSac).append(".");
         } else {
             for (final Player p : tgts) {
                 sb.append(p.getName()).append(" ");

@@ -4,6 +4,6 @@ Types:Creature Bird
 PT:2/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a card named Mu Yanling, Celestial Wind, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-SVar:TrigSearch:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedMu Yanling; Celestial Wind | ChangeNum$ 1 | Optional$ True
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedMu Yanling; Celestial Wind | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Mu Yanling, Celestial Wind
 Oracle:Flying\nWhen Yanling's Harbinger enters the battlefield, you may search your library and/or graveyard for a card named Mu Yanling, Celestial Wind, reveal it, and put it into your hand. If you search your library this way, shuffle it.

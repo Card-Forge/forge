@@ -1,0 +1,426 @@
+[metadata]
+Code=M21
+Date=2020-06-04
+Name=Core Set 2021
+Type=Core
+BoosterCovers=3
+Booster=10 Common:!fromSheet("M21 Secret Cards"), 3 Uncommon:!fromSheet("M21 Secret Cards"), 1 RareMythic:!fromSheet("M21 Secret Cards"), 1 fromSheet("M21 Lands")
+Prerelease=6 Boosters, 1 RareMythic+
+
+[cards]
+1 M Ugin, the Spirit Dragon
+2 C Alpine Watchdog
+3 U Angelic Ascension
+4 C Anointed Chorister
+5 U Aven Gagglemaster
+6 M Baneslayer Angel
+7 M Basri Ket
+8 C Basri's Acolyte
+9 R Basri's Lieutenant
+10 U Basri's Solidarity
+11 C Celestial Enforcer
+12 C Concordia Pegasus
+13 R Containment Priest
+14 C Daybreak Charger
+15 C Defiant Strike
+16 C Dub
+17 U Faith's Fetters
+18 U Falconer Adept
+19 C Feat of Resistance
+20 C Gale Swooper
+21 R Glorious Anthem
+22 U Griffin Aerie
+23 R Idol of Endurance
+24 C Legion's Judgment
+25 U Light of Promise
+26 C Makeshift Battalion
+27 M Mangara, the Diplomat
+28 R Nine Lives
+29 R Pack Leader
+30 C Rambunctious Mutt
+31 C Revitalize
+32 R Runed Halo
+33 U Sanctum of Tranquil Light
+34 U Seasoned Hallowblade
+35 C Secure the Scene
+36 U Selfless Savior
+37 U Siege Striker
+38 R Speaker of the Heavens
+39 C Staunch Shieldmate
+40 C Swift Response
+41 U Tempered Veteran
+42 C Valorous Steed
+43 U Vryn Wingmare
+44 C Warded Battlements
+45 R Barrin, Tolarian Archmage
+46 C Cancel
+47 C Capture Sphere
+48 M Discontinuity
+49 U Enthralling Hold
+50 C Frantic Inventory
+51 C Frost Breath
+52 R Ghostly Pilferer
+53 U Jeskai Elder
+54 C Keen Glidemaster
+55 C Library Larcenist
+56 C Lofty Denial
+57 U Miscast
+58 C Mistral Singer
+59 C Opt
+60 R Pursued Whale
+61 U Rain of Revelation
+62 C Read the Tides
+63 U Rewind
+64 U Riddleform
+65 C Roaming Ghostlight
+66 C Rookie Mistake
+67 C Rousing Read
+68 U Sanctum of Calm Waters
+69 R See the Truth
+70 R Shacklegeist
+71 U Shipwreck Dowser
+72 C Spined Megalodon
+73 R Stormwing Entity
+74 R Sublime Epiphany
+75 M Teferi, Master of Time
+76 R Teferi's Ageless Insight
+77 C Teferi's Protege
+78 U Teferi's Tutelage
+79 U Tide Skimmer
+80 U Tolarian Kraken
+81 C Tome Anima
+82 U Unsubstantiate
+83 C Vodalian Arcanist
+84 U Waker of Waves
+85 C Wall of Runes
+86 C Wishcoin Crab
+87 C Alchemist's Gift
+88 U Archfiend's Vessel
+89 U Bad Deal
+90 C Blood Glutton
+91 C Caged Zombie
+92 U Carrion Grub
+93 C Crypt Lurker
+94 C Deathbloom Thallid
+95 R Demonic Embrace
+96 C Duress
+97 U Eliminate
+98 C Fetid Imp
+99 C Finishing Blow
+100 C Gloom Sower
+101 U Goremand
+102 C Grasp of Darkness
+103 M Grim Tutor
+104 R Hooded Blightfang
+105 C Infernal Scarring
+106 R Kaervek, the Spiteful
+107 U Kitesail Freebooter
+108 M Liliana, Waker of the Dead
+109 U Liliana's Devotee
+110 R Liliana's Standard Bearer
+111 C Liliana's Steward
+112 U Malefic Scythe
+113 C Masked Blackguard
+114 M Massacre Wurm
+115 C Mind Rot
+116 R Necromentia
+117 R Peer into the Abyss
+118 U Pestilent Haze
+119 C Rise Again
+120 U Sanctum of Stone Fangs
+121 C Sanguine Indulgence
+122 U Silversmote Ghoul
+123 C Skeleton Archer
+124 U Tavern Swindler
+125 R Thieves' Guild Enforcer
+126 C Village Rites
+127 R Vito, Thorn of the Dusk Rose
+128 C Walking Corpse
+129 U Witch's Cauldron
+130 U Battle-Rattle Shaman
+131 U Bolt Hound
+132 C Bone Pit Brute
+133 R Brash Taunter
+134 C Burn Bright
+135 M Chandra, Heart of Fire
+136 R Chandra's Incinerator
+137 C Chandra's Magmutt
+138 U Chandra's Pyreling
+139 R Conspicuous Snoop
+140 C Crash Through
+141 C Destructive Tampering
+142 R Double Vision
+143 M Fiery Emancipation
+144 U Furious Rise
+145 C Furor of the Bitten
+146 R Gadrak, the Crown-Scourge
+147 C Goblin Arsonist
+148 C Goblin Wizardry
+149 U Havoc Jester
+150 U Heartfire Immolator
+151 U Hellkite Punisher
+152 C Hobblefiend
+153 C Igneous Cur
+154 U Kinetic Augur
+155 C Onakke Ogre
+156 C Pitchburn Devils
+157 U Sanctum of Shattered Heights
+158 C Scorching Dragonfire
+159 C Shock
+160 U Soul Sear
+161 C Spellgorger Weird
+162 R Subira, Tulzidi Caravanner
+163 C Sure Strike
+164 M Terror of the Peaks
+165 C Thrill of Possibility
+166 U Traitorous Greed
+167 R Transmogrify
+168 C Turn to Slag
+169 C Turret Ogre
+170 U Unleash Fury
+171 U Volcanic Geyser
+172 R Volcanic Salvo
+173 R Azusa, Lost but Seeking
+174 U Burlfist Oak
+175 U Canopy Stalker
+176 C Colossal Dreadmaw
+177 U Cultivate
+178 C Drowsing Tyrannodon
+179 M Elder Gargaroth
+180 R Feline Sovereign
+181 U Fierce Empath
+182 U Fungal Rebirth
+183 M Garruk, Unleashed
+184 C Garruk's Gorehorn
+185 R Garruk's Harbinger
+186 U Garruk's Uprising
+187 C Gnarled Sage
+188 R Heroic Intervention
+189 C Hunter's Edge
+190 U Invigorating Surge
+191 R Jolrael, Mwonvuli Recluse
+192 C Life Goes On
+193 C Llanowar Visionary
+194 C Ornery Dilophosaur
+195 C Portcullis Vine
+196 C Pridemalkin
+197 R Primal Might
+198 U Quirion Dryad
+199 C Ranger's Guile
+200 C Return to Nature
+201 C Run Afoul
+202 C Sabertooth Mauler
+203 U Sanctum of Fruitful Harvest
+204 R Scavenging Ooze
+205 C Setessan Training
+206 U Skyway Sniper
+207 C Snarespinner
+208 R Sporeweb Weaver
+209 U Thrashing Brontodon
+210 C Titanic Growth
+211 C Track Down
+212 C Trufflesnout
+213 U Warden of the Woods
+214 U Wildwood Scourge
+215 U Alpine Houndmaster
+216 U Conclave Mentor
+217 U Dire Fleet Warmonger
+218 U Experimental Overload
+219 U Indulging Patrician
+220 U Leafkin Avenger
+221 U Lorescale Coatl
+222 R Niambi, Esteemed Speaker
+223 U Obsessive Stitcher
+224 R Radha, Heart of Keld
+225 R Sanctum of All
+226 U Twinblade Assassins
+227 U Watcher of the Spheres
+228 M Chromatic Orrery
+229 U Chrome Replicator
+230 U Epitaph Golem
+231 C Forgotten Sentinel
+232 R Mazemind Tome
+233 U Meteorite
+234 U Palladium Myr
+235 C Prismite
+236 C Short Sword
+237 C Silent Dart
+238 C Skyscanner
+239 R Solemn Simulacrum
+240 R Sparkhunter Masticore
+241 U Tormod's Crypt
+242 R Animal Sanctuary
+243 C Bloodfell Caves
+244 C Blossoming Sands
+245 C Dismal Backwater
+246 R Fabled Passage
+247 C Jungle Hollow
+248 C Radiant Fountain
+249 C Rugged Highlands
+250 C Scoured Barrens
+251 C Swiftwater Cliffs
+252 R Temple of Epiphany
+253 R Temple of Malady
+254 R Temple of Mystery
+255 R Temple of Silence
+256 R Temple of Triumph
+257 C Thornwood Falls
+258 C Tranquil Cove
+259 C Wind-Scarred Crag
+260 L Plains
+261 L Plains
+262 L Plains
+263 L Island
+264 L Island
+265 L Island
+266 L Swamp
+267 L Swamp
+268 L Swamp
+269 L Mountain
+270 L Mountain
+271 L Mountain
+272 L Forest
+273 L Forest
+274 L Forest
+275 M Teferi, Master of Time
+276 M Teferi, Master of Time
+277 M Teferi, Master of Time
+278 M Rin and Seri, Inseparable
+279 M Ugin, the Spirit Dragon
+280 M Basri Ket
+281 M Teferi, Master of Time
+282 M Liliana, Waker of the Dead
+283 M Chandra, Heart of Fire
+284 M Garruk, Unleashed
+285 M Ugin, the Spirit Dragon
+286 M Basri Ket
+287 C Basri's Acolyte
+288 R Basri's Lieutenant
+289 U Basri's Solidarity
+290 M Teferi, Master of Time
+291 M Teferi, Master of Time
+292 M Teferi, Master of Time
+293 M Teferi, Master of Time
+294 R Teferi's Ageless Insight
+295 C Teferi's Protege
+296 U Teferi's Tutelage
+297 M Liliana, Waker of the Dead
+298 U Liliana's Devotee
+299 R Liliana's Standard Bearer
+300 C Liliana's Steward
+301 M Chandra, Heart of Fire
+302 R Chandra's Incinerator
+303 C Chandra's Magmutt
+304 U Chandra's Pyreling
+305 M Garruk, Unleashed
+306 C Garruk's Gorehorn
+307 R Garruk's Harbinger
+308 U Garruk's Uprising
+309 L Plains
+310 L Island
+311 L Swamp
+312 L Mountain
+313 L Forest
+314 R Containment Priest
+315 M Grim Tutor
+316 M Massacre Wurm
+317 R Cultivate
+318 R Scavenging Ooze
+319 R Solemn Simulacrum
+320 M Basri, Devoted Paladin
+321 C Adherent of Hope
+322 R Basri's Aegis
+323 U Sigiled Contender
+324 M Teferi, Timeless Voyager
+325 U Historian of Zhalfir
+326 C Mystic Skyfish
+327 R Teferi's Wavecaster
+328 M Liliana, Death Mage
+329 R Liliana's Scorn
+330 U Liliana's Scrounger
+331 C Spirit of Malevolence
+332 M Chandra, Flame's Catalyst
+333 R Chandra's Firemaw
+334 U Keral Keep Disciples
+335 C Storm Caller
+336 M Garruk, Savage Herald
+337 R Garruk's Warsteed
+338 U Predatory Wurm
+339 C Wildwood Patrol
+340 M Baneslayer Angel
+341 R Glorious Anthem
+342 R Idol of Endurance
+343 M Mangara, the Diplomat
+344 R Nine Lives
+345 R Pack Leader
+346 R Runed Halo
+347 R Speaker of the Heavens
+348 R Barrin, Tolarian Archmage
+349 M Discontinuity
+350 R Ghostly Pilferer
+351 R Pursued Whale
+352 R See the Truth
+353 R Shacklegeist
+354 R Stormwing Entity
+355 R Sublime Epiphany
+356 R Demonic Embrace
+357 R Hooded Blightfang
+358 R Kaervek, the Spiteful
+359 R Necromentia
+360 R Peer into the Abyss
+361 R Thieves' Guild Enforcer
+362 R Vito, Thorn of the Dusk Rose
+363 R Brash Taunter
+364 R Conspicuous Snoop
+365 R Double Vision
+366 M Fiery Emancipation
+367 R Gadrak, the Crown-Scourge
+368 R Subira, Tulzidi Caravanner
+369 M Terror of the Peaks
+370 R Transmogrify
+371 R Volcanic Salvo
+372 R Azusa, Lost but Seeking
+373 M Elder Gargaroth
+374 R Feline Sovereign
+375 R Heroic Intervention
+376 R Jolrael, Mwonvuli Recluse
+377 R Primal Might
+378 R Sporeweb Weaver
+379 R Niambi, Esteemed Speaker
+380 R Radha, Heart of Keld
+381 R Sanctum of All
+382 M Chromatic Orrery
+383 R Mazemind Tome
+384 R Sparkhunter Masticore
+385 R Animal Sanctuary
+386 R Fabled Passage
+387 R Temple of Epiphany
+388 R Temple of Malady
+389 R Temple of Mystery
+390 R Temple of Silence
+391 R Temple of Triumph
+392 R Pack Leader
+393 U Selfless Savior
+394 C Frantic Inventory
+395 U Eliminate
+396 U Heartfire Immolator
+397 C Llanowar Visionary
+
+[tokens]
+b_2_2_zombie
+b_5_5_demon_flying
+c_a_treasure_sac
+c_4_4_a_construct
+g_1_1_cat
+g_1_1_saproling
+g_2_2_cat
+g_3_3_beast
+r_1_1_goblin_wizard_prowess
+r_1_1_pirate_noblock_all_attack
+ur_x_x_weird
+w_1_1_bird_flying
+w_1_1_dog
+w_1_1_soldier
+w_2_2_griffin_flying
+w_2_2_knight_vigilance
+w_4_4_angel_flying

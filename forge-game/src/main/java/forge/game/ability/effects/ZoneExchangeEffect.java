@@ -9,6 +9,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 
 public class ZoneExchangeEffect extends SpellAbilityEffect {
@@ -69,7 +70,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             return;
         }
 
-        Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, "Choose a card", !sa.hasParam("Mandatory"));
+        Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblChooseaCard"), !sa.hasParam("Mandatory"), null);
         if (object2 == null || !object2.isInZone(zone2) || (type != null && !object2.getType().hasStringType(type))) {
             return;
         }

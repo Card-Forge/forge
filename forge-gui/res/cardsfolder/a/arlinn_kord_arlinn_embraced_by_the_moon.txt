@@ -8,7 +8,7 @@ SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arlinn_kord.jpg
-Oracle:+1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
+Oracle:[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
 
 ALTERNATE
 

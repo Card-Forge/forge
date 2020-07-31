@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
@@ -45,10 +45,15 @@ public class VAvatar extends FDisplayObject {
     }
 
     public Vector2 getTargetingArrowOrigin() {
+        return getTargetingArrowOrigin(2);
+    }
+    public Vector2 getTargetingArrowOrigin(int numplayers) {
         Vector2 origin = new Vector2(screenPos.x, screenPos.y);
 
-        origin.x += WIDTH * 0.75f;
-        if (origin.y < MatchController.getView().getHeight() / 2) {
+        float modx = numplayers > 2 ? 0.25f : 0.75f;
+
+        origin.x += WIDTH * modx;
+        if (origin.y < MatchController.getView().getHeight() / numplayers) {
             origin.y += HEIGHT * 0.75f; //target bottom right corner if on top half of screen
         }
         else {
@@ -65,7 +70,7 @@ public class VAvatar extends FDisplayObject {
         g.drawImage(image, 0, 0, w, h);
 
         //display XP in lower right corner of avatar
-        int xp = player.getCounters(CounterType.EXPERIENCE);
+        int xp = player.getCounters(CounterEnumType.EXPERIENCE);
         if (xp > 0) {
             //use font and padding from phase indicator so text lines up
             FSkinFont font = VPhaseIndicator.BASE_FONT;

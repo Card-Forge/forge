@@ -2,8 +2,9 @@ Name:Oxidda Daredevil
 ManaCost:1 R
 Types:Creature Goblin Artificer
 PT:2/1
-A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Haste | SpellDescription$ Oxidda Daredevil gains haste until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | KW$ Haste | SpellDescription$ Oxidda Daredevil gains haste until end of turn.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_daredevil.jpg
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Artifact
 Oracle:Sacrifice an artifact: Oxidda Daredevil gains haste until end of turn.

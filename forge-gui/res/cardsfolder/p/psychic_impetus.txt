@@ -1,0 +1,9 @@
+Name:Psychic Impetus
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, you scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you scry 2.

@@ -81,7 +81,7 @@ public class ForgeScript {
             return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
+                if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
                     return true;
                 }
             }
@@ -108,14 +108,9 @@ public class ForgeScript {
             }
             return false;
         } else if (property.startsWith("cmc")) {
-            int x;
             String rhs = property.substring(5);
             int y = cardState.getManaCost().getCMC();
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
+            int x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             return Expressions.compare(y, property, x);
         } else return cardState.getTypeWithChanges().hasStringType(property);
@@ -130,6 +125,8 @@ public class ForgeScript {
             return sa.isManaAbility();
         } else if (property.equals("nonManaAbility")) {
             return !sa.isManaAbility();
+        } else if (property.equals("withoutXCost")) {
+            return !sa.isXCost();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
         } else if (property.equals("Cycling")) {
@@ -168,6 +165,8 @@ public class ForgeScript {
             return found;
         } else if (property.equals("YouCtrl")) {
             return sa.getActivatingPlayer().equals(sourceController);
+        } else if (property.equals("OppCtrl")) {
+            return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

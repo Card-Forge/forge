@@ -5,11 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -206,7 +202,7 @@ public class ProtectAi extends SpellAbilityAi {
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
+            if (sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getHostCard());
@@ -220,6 +216,11 @@ public class ProtectAi extends SpellAbilityAi {
 
         // Don't target cards that will die.
         list = ComputerUtil.getSafeTargets(ai, sa, list);
+
+        // Don't target self if the cost includes sacrificing itself
+        if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+            list.remove(source);
+        }
 
         if (list.isEmpty()) {
             return mandatory && protectMandatoryTarget(ai, sa, mandatory);

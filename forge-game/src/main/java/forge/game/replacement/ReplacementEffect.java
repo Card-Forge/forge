@@ -149,17 +149,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
 
         if (params.containsKey("ActivePhases")) {
-            boolean isPhase = false;
-            List<PhaseType> aPhases = PhaseType.parseRange(params.get("ActivePhases"));
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
-            for (final PhaseType s : aPhases) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
+            if (!PhaseType.parseRange(params.get("ActivePhases")).contains(game.getPhaseHandler().getPhase())) {
+                return false;
             }
-
-            return isPhase;
         }
 
         return meetsCommonRequirements(params);
@@ -172,9 +164,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final ReplacementEffect copy(final Card host, final boolean lki) {
         final ReplacementEffect res = (ReplacementEffect) clone();
-        for (String key : getSVars()) {
-            res.setSVar(key, getSVar(key));
-        }
+
+        copyHelper(res, host);
 
         final SpellAbility sa = this.getOverridingAbility();
         if (sa != null) {
@@ -189,8 +180,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             res.setHasRun(false);
             res.setOtherChoices(null);
         }
-
-        res.setHostCard(host);
 
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
@@ -221,13 +210,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.layer = layer0;
     }
 
-    /**
-     * To string.
-     *
-     * @return a String
-     */
-    @Override
-    public String toString() {
+    public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
             if (desc.contains("CARDNAME")) {
@@ -237,6 +220,16 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         } else {
             return "";
         }
+    }
+
+    /**
+     * To string.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        return getHostCard().toString() + " - " + getDescription();
     }
 
     /** {@inheritDoc} */

@@ -40,8 +40,11 @@ public class VField extends FContainer {
         return cardPanels;
     }
 
-    public void update() {
-        FThreads.invokeInEdtNowOrLater(updateRoutine);
+    public void update(boolean invokeInEdtNowOrLater) {
+        if (invokeInEdtNowOrLater)
+            FThreads.invokeInEdtNowOrLater(updateRoutine);
+        else
+            FThreads.invokeInEdtLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {

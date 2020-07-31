@@ -9,6 +9,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 public class TriggerCounterAddedAll extends Trigger {
 
@@ -24,8 +25,8 @@ public class TriggerCounterAddedAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        final GameEntityCounterTable table = (GameEntityCounterTable) getFromRunParams(AbilityKey.Objects);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final GameEntityCounterTable table = (GameEntityCounterTable) runParams.get(AbilityKey.Objects);
 
         Map<GameEntity, Integer> all = this.filterTable(table);
 
@@ -41,7 +42,7 @@ public class TriggerCounterAddedAll extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 

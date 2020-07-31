@@ -28,7 +28,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         final QuestEventChallenge qc = new QuestEventChallenge();
 
         // Unique properties
-        FileSection sectionQuest = FileSection.parse(contents.get("quest"), "=");
+        FileSection sectionQuest = FileSection.parse(contents.get("quest"), FileSection.EQUALS_KV_SEPARATOR);
         qc.setId(sectionQuest.get("ID", "-1"));
         qc.setOpponentName(sectionQuest.get("OpponentName"));
         qc.setRepeatable(sectionQuest.getBoolean("Repeat", false));
@@ -60,7 +60,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         }
 
         // Common properties
-        FileSection sectionMeta = FileSection.parse(contents.get("metadata"), "=");
+        FileSection sectionMeta = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
         qc.setTitle(sectionMeta.get("Title"));
         qc.setName(qc.getTitle()); // Challenges have unique titles
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));

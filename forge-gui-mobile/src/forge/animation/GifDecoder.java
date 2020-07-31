@@ -687,7 +687,7 @@ public class GifDecoder {
         } while ((blockSize > 0) && !err());
     }
 
-    public Animation getAnimation(PlayMode playType) {
+    private Animation<TextureRegion> getAnimation(PlayMode playType) {
         int nrFrames = getFrameCount();
         Pixmap frame = getFrame(0);
         int width = frame.getWidth();
@@ -725,12 +725,11 @@ public class GifDecoder {
         }
         float frameDuration = (float)getDelay(0);
         frameDuration /= 1000; // convert milliseconds into seconds
-        Animation result = new Animation(frameDuration, texReg, playType);
 
-        return result;
+        return new Animation<>(frameDuration, texReg, playType);
     }
 
-    public static Animation loadGIFAnimation(PlayMode playType, InputStream is) {
+    public static Animation<TextureRegion> loadGIFAnimation(PlayMode playType, InputStream is) {
         GifDecoder gdec = new GifDecoder();
         gdec.read(is);
         return gdec.getAnimation(playType);

@@ -3,6 +3,5 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:1/1
 K:First Strike
-A:AB$ Pump | Cost$ 1 W | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_knight.jpg
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\n{1}{W}: Capashen Knight gets +1/+0 until end of turn.

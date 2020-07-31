@@ -12,4 +12,4 @@ SVar:X:XChoice
 DeckHas:Ability$Token
 SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_flamecaller.jpg
-Oracle:+1: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.\n0: Discard all the cards in your hand, then draw that many cards plus one.\n−X: Chandra, Flamecaller deals X damage to each creature.
+Oracle:[+1]: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.\n[0]: Discard all the cards in your hand, then draw that many cards plus one.\n[−X]: Chandra, Flamecaller deals X damage to each creature.

@@ -7,6 +7,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class TriggerChangesZoneAll extends Trigger {
 
@@ -22,8 +23,8 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        final CardZoneTable table = (CardZoneTable) getFromRunParams(AbilityKey.Cards);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
         CardCollection allCards = this.filterCards(table);
 
@@ -34,7 +35,7 @@ public class TriggerChangesZoneAll extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.Amount));
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
 

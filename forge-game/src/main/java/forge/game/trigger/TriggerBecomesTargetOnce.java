@@ -21,6 +21,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBecomesTargetOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomesTargetOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -80,16 +81,16 @@ public class TriggerBecomesTargetOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Targets);
-        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.SourceSA, AbilityKey.Targets);
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard());
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Source: ").append(((SpellAbility) sa.getTriggeringObject(AbilityKey.SourceSA)).getHostCard()).append(", ");
-        sb.append("Targets: ").append(sa.getTriggeringObject(AbilityKey.Targets));
+        sb.append(Localizer.getInstance().getMessage("lblSource")).append(": ").append(((SpellAbility) sa.getTriggeringObject(AbilityKey.SourceSA)).getHostCard()).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblTargets")).append(": ").append(sa.getTriggeringObject(AbilityKey.Targets));
         return sb.toString();
     }
 }

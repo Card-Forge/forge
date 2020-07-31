@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Zombie Soldier
 PT:3/3
 K:Defender
-A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/returned_phalanx.jpg
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+DeckNeeds:Color$Blue
 Oracle:Defender\n{1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.

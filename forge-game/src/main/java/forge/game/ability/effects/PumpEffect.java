@@ -11,10 +11,12 @@ import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -214,7 +216,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(atk);
                 sb.append("/");
                 if (def >= 0) {
-                   sb.append("+");
+                    sb.append("+");
                 }
                 sb.append(def);
                 sb.append(" ");
@@ -289,6 +291,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
+            } else if (defined.endsWith("Player")) {
+                PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
+                if (players.isEmpty()) return;
+                replaced = "PlayerUID_" + players.get(0).getId();
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
@@ -327,7 +333,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(tgtCards);
             final String message = sa.hasParam("OptionQuestion")
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
-                    : TextUtil.concatNoSpace("Apply pump to ", targets, "?");
+                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
                 return;
@@ -342,6 +348,14 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ForgetObjects")) {
             pumpForget = sa.getParam("ForgetObjects");
+        }
+
+        if (sa.hasParam("NoteCardsFor")) {
+            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("NoteCards"), sa)) {
+                for (Player p : tgtPlayers) {
+                    p.addNoteForName(sa.getParam("NoteCardsFor"), "Id:" + c.getId());
+                }
+            }
         }
 
         if (pumpForget != null) {
@@ -393,7 +407,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("AtEOT") && !tgtCards.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgtCards);
         }
-        
+
         for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
             if (!tgtC.isInZone(pumpZone)) {

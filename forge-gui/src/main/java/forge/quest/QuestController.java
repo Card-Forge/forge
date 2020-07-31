@@ -448,7 +448,10 @@ public class QuestController {
             if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
                 this.duelManager = new QuestEventLDADuelManager(FModel.getFormats().getStandard());
                 return;
-            } else if (world.getName().equals(QuestWorld.MODERNWORLDNAME)) {
+            } else if (world.getName().equals(QuestWorld.PIONEERWORLDNAME)) {
+                this.duelManager = new QuestEventLDADuelManager(FModel.getFormats().getPioneer());
+                return;
+            }else if (world.getName().equals(QuestWorld.MODERNWORLDNAME)) {
                 this.duelManager = new QuestEventLDADuelManager(FModel.getFormats().getModern());
                 return;
             }else if (world.isCustom()) {

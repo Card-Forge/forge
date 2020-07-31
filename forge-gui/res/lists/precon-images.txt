@@ -1,6 +1,8 @@
 https://downloads.cardforge.org/images/products/precons/abzan_siege.jpg
+https://downloads.cardforge.org/images/products/precons/adaptive_enchantment.jpg
 https://downloads.cardforge.org/images/products/precons/air_razers.jpg
 https://downloads.cardforge.org/images/products/precons/ajani_valiant_protector.jpg
+https://downloads.cardforge.org/images/products/precons/allied_fires.jpg
 https://downloads.cardforge.org/images/products/precons/angelic_fury.jpg
 https://downloads.cardforge.org/images/products/precons/angelic_might.jpg
 https://downloads.cardforge.org/images/products/precons/angrath_minotaur_pirate.jpg
@@ -10,6 +12,7 @@ https://downloads.cardforge.org/images/products/precons/arcaniss_guile.jpg
 https://downloads.cardforge.org/images/products/precons/armada.jpg
 https://downloads.cardforge.org/images/products/precons/army_of_entropy.jpg
 https://downloads.cardforge.org/images/products/precons/army_of_justice.jpg
+https://downloads.cardforge.org/images/products/precons/ashiok_sculptor_of_fears.jpg
 https://downloads.cardforge.org/images/products/precons/assassin.jpg
 https://downloads.cardforge.org/images/products/precons/assemble_victory.jpg
 https://downloads.cardforge.org/images/products/precons/aura_mastery.jpg
@@ -37,6 +40,7 @@ https://downloads.cardforge.org/images/products/precons/breath_of_fire.jpg
 https://downloads.cardforge.org/images/products/precons/brute_force.jpg
 https://downloads.cardforge.org/images/products/precons/call_of_blood.jpg
 https://downloads.cardforge.org/images/products/precons/carnival_of_blood.jpg
+https://downloads.cardforge.org/images/products/precons/cavalcade_charge.jpg
 https://downloads.cardforge.org/images/products/precons/chandra_pyrogenius.jpg
 https://downloads.cardforge.org/images/products/precons/chandra_bold_pyromancer.jpg
 https://downloads.cardforge.org/images/products/precons/cho-mannos_resolve.jpg
@@ -78,6 +82,7 @@ https://downloads.cardforge.org/images/products/precons/eldrazi_arisen.jpg
 https://downloads.cardforge.org/images/products/precons/eldrazi_assault.jpg
 https://downloads.cardforge.org/images/products/precons/eldritch_onslaught.jpg
 https://downloads.cardforge.org/images/products/precons/elementals_path.jpg
+https://downloads.cardforge.org/images/products/precons/elspeth_undaunted_hero.jpg
 https://downloads.cardforge.org/images/products/precons/elvish_predation.jpg
 https://downloads.cardforge.org/images/products/precons/elvish_rage.jpg
 https://downloads.cardforge.org/images/products/precons/enlightened_mastery.jpg
@@ -87,6 +92,7 @@ https://downloads.cardforge.org/images/products/precons/esper_artifice.jpg
 https://downloads.cardforge.org/images/products/precons/eternal_siege.jpg
 https://downloads.cardforge.org/images/products/precons/evincars_tyranny.jpg
 https://downloads.cardforge.org/images/products/precons/expulsion.jpg
+https://downloads.cardforge.org/images/products/precons/exquisite_invention.jpg
 https://downloads.cardforge.org/images/products/precons/fangs_of_the_bloodchief.jpg
 https://downloads.cardforge.org/images/products/precons/fate_blaster.jpg
 https://downloads.cardforge.org/images/products/precons/fates_foreseen.jpg
@@ -94,9 +100,11 @@ https://downloads.cardforge.org/images/products/precons/favors_from_nyx.jpg
 https://downloads.cardforge.org/images/products/precons/feast_of_flesh.jpg
 https://downloads.cardforge.org/images/products/precons/fiendish_nature.jpg
 https://downloads.cardforge.org/images/products/precons/fiery_dawn.jpg
+https://downloads.cardforge.org/images/products/precons/final_adventure.jpg
 https://downloads.cardforge.org/images/products/precons/fire_surge.jpg
 https://downloads.cardforge.org/images/products/precons/firebomber.jpg
 https://downloads.cardforge.org/images/products/precons/flames_of_the_dragon.jpg
+https://downloads.cardforge.org/images/products/precons/flash_of_ferocity.jpg
 https://downloads.cardforge.org/images/products/precons/flyover.jpg
 https://downloads.cardforge.org/images/products/precons/forged_in_battle.jpg
 https://downloads.cardforge.org/images/products/precons/furious_forces.jpg
@@ -169,6 +177,7 @@ https://downloads.cardforge.org/images/products/precons/mortals_of_myth.jpg
 https://downloads.cardforge.org/images/products/precons/myr_of_mirrodin.jpg
 https://downloads.cardforge.org/images/products/precons/mysterious_realms.jpg
 https://downloads.cardforge.org/images/products/precons/mystical_might.jpg
+https://downloads.cardforge.org/images/products/precons/natures_vengeance.jpg
 https://downloads.cardforge.org/images/products/precons/naya_behemoths.jpg
 https://downloads.cardforge.org/images/products/precons/naya_domain.jpg
 https://downloads.cardforge.org/images/products/precons/nicol_bolas_the_deceiver.jpg
@@ -234,6 +243,7 @@ https://downloads.cardforge.org/images/products/precons/spiritcraft.jpg
 https://downloads.cardforge.org/images/products/precons/stampede.jpg
 https://downloads.cardforge.org/images/products/precons/stampede_of_beasts.jpg
 https://downloads.cardforge.org/images/products/precons/stampeding_hordes.jpg
+https://downloads.cardforge.org/images/products/precons/subjective_reality.jpg
 https://downloads.cardforge.org/images/products/precons/sultai_schemers.jpg
 https://downloads.cardforge.org/images/products/precons/sunburst.jpg
 https://downloads.cardforge.org/images/products/precons/superabundance.jpg

@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Creature Wurm
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gains first strike until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | KW$ First Strike | Defined$ Self
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike | Defined$ Self
 SVar:BuffedBy:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belligerent_whiptail.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, Belligerent Whiptail gains first strike until end of turn.

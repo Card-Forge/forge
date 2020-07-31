@@ -25,7 +25,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -44,44 +43,43 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeCastAbility(final StaticAbility stAb, final Card card, final Player activator) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("ValidCard")
+                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
-        if (params.containsKey("Caster") && (activator != null)
-                && !activator.isValid(params.get("Caster"), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("Caster") && (activator != null)
+                && !activator.isValid(stAb.getParam("Caster"), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
-        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && activator.canCastSorcery()) {
+        if (stAb.hasParam("OnlySorcerySpeed") && (activator != null) && activator.canCastSorcery()) {
             return false;
         }
 
-        if (params.containsKey("Origin")) {
-            List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
+        if (stAb.hasParam("Origin")) {
+            List<ZoneType> src = ZoneType.listValueOf(stAb.getParam("Origin"));
             if (!src.contains(activator.getGame().getZoneOf(card).getZoneType())) {
                 return false;
             }
         }
 
-        if (params.containsKey("NonCasterTurn") && (activator != null)
+        if (stAb.hasParam("NonCasterTurn") && (activator != null)
                 && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (params.containsKey("cmcGT") && (activator != null)
+        if (stAb.hasParam("cmcGT") && (activator != null)
                 && (card.getCMC() <= CardLists.getType(activator.getCardsIn(ZoneType.Battlefield),
-                        params.get("cmcGT")).size())) {
+                        stAb.getParam("cmcGT")).size())) {
             return false;
         }
 
-        if (params.containsKey("NumLimitEachTurn") && activator != null) {
-            int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
-            String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
+        if (stAb.hasParam("NumLimitEachTurn") && activator != null) {
+            int limit = Integer.parseInt(stAb.getParam("NumLimitEachTurn"));
+            String valid = stAb.hasParam("ValidCard") ? stAb.getParam("ValidCard") : "Card";
             List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, card);
             if (CardLists.filterControlledBy(thisTurnCast, activator).size() < limit) {
                 return false;
@@ -94,7 +92,7 @@ public class StaticAbilityCantBeCast {
     /**
      * Applies Cant Be Activated ability.
      * 
-     * @param staticAbility
+     * @param stAb
      *            a StaticAbility
      * @param card
      *            the card
@@ -102,43 +100,49 @@ public class StaticAbilityCantBeCast {
      *            a SpellAbility
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility staticAbility, final Card card,
+    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card,
             final SpellAbility spellAbility) {
-        final Map<String, String> params = staticAbility.getMapParams();
-        final Card hostCard = staticAbility.getHostCard();
+        final Card hostCard = stAb.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("ValidCard")
+                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
-        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
+        if (stAb.hasParam("ValidSA")
+                && !spellAbility.isValid(stAb.getParam("ValidSA").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
-        if (params.containsKey("Activator") && (activator != null)
-                && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, spellAbility)) {
+
+        if (stAb.hasParam("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(stAb.getParam("AffectedZone")))) {
             return false;
         }
 
-        if (params.containsKey("NonMana") && (spellAbility.isManaAbility())) {
+        if (stAb.hasParam("Activator") && (activator != null)
+                && !activator.isValid(stAb.getParam("Activator"), hostCard.getController(), hostCard, spellAbility)) {
             return false;
         }
 
-        if (params.containsKey("NonLoyalty") && spellAbility.isPwAbility()) {
+        // TODO refactor this ones using ValidSA above
+        if (stAb.hasParam("NonMana") && (spellAbility.isManaAbility())) {
             return false;
         }
 
-        if (params.containsKey("Loyalty") && !spellAbility.isPwAbility()) {
+        if (stAb.hasParam("NonLoyalty") && spellAbility.isPwAbility()) {
             return false;
         }
 
-        if (params.containsKey("TapAbility") && !(spellAbility.getPayCosts().hasTapCost())) {
+        if (stAb.hasParam("Loyalty") && !spellAbility.isPwAbility()) {
             return false;
         }
 
-        if (params.containsKey("NonActivatorTurn") && (activator != null)
+        if (stAb.hasParam("TapAbility") && !(spellAbility.getPayCosts().hasTapCost())) {
+            return false;
+        }
+
+        if (stAb.hasParam("NonActivatorTurn") && (activator != null)
                 && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
@@ -158,24 +162,23 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantPlayLandAbility(final StaticAbility stAb, final Card card, final Player player) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && (card == null || !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null))) {
+        if (stAb.hasParam("ValidCard")
+                && (card == null || !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null))) {
             return false;
         }
 
-        if (params.containsKey("Origin")) {
-            List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
+        if (stAb.hasParam("Origin")) {
+            List<ZoneType> src = ZoneType.listValueOf(stAb.getParam("Origin"));
 
             if (!src.contains(card.getZone().getZoneType())) {
                 return false;
             }
         }
 
-        if (params.containsKey("Player") && (player != null)
-                && !player.isValid(params.get("Player"), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("Player") && (player != null)
+                && !player.isValid(stAb.getParam("Player"), hostCard.getController(), hostCard, null)) {
             return false;
         }
 

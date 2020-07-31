@@ -34,6 +34,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
 
 import com.badlogic.gdx.math.Rectangle;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +82,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public String getCaption() {
-        return "List View";
+        return Localizer.getInstance().getMessage("lblListView");
     }
 
     @Override

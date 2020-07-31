@@ -14,6 +14,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         list.addAll(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounters()));
 
         List<GameEntity> result = pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa,
-                "Choose any number of permanents and/or players for proliferate",  p);
+                Localizer.getInstance().getMessage("lblChooseProliferateTarget"), p, null);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final GameEntity ge : result) {

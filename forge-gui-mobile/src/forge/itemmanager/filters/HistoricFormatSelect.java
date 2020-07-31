@@ -12,6 +12,7 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class HistoricFormatSelect extends FScreen {
     private Runnable onCloseCallBack;
 
     public HistoricFormatSelect() {
-        super("Choose Format");
+        super(Localizer.getInstance().getMessage("lblChooseFormat"));
         for (GameFormat.FormatType group:GameFormat.FormatType.values()){
             if (group == GameFormat.FormatType.Historic){
                 for (GameFormat.FormatSubType subgroup:GameFormat.FormatSubType.values()){

@@ -38,6 +38,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -75,10 +77,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public static class CardInSet {
         public final CardRarity rarity;
-        public final int collectorNumber;
+        public final String collectorNumber;
         public final String name;
 
-        public CardInSet(final String name, final int collectorNumber, final CardRarity rarity) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
@@ -86,7 +88,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
  
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            if (collectorNumber != -1) {
+            if (collectorNumber != null) {
                 sb.append(collectorNumber);
                 sb.append(' ');
             }
@@ -110,6 +112,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private Type   type;
     private String name;
     private String alias = null;
+    private String prerelease = null;
     private boolean whiteBorder = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
     private double foilChanceInBooster = 0;
@@ -178,6 +181,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
+    public String getPrerelease() { return prerelease; }
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
@@ -188,6 +192,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public boolean getSmallSetOverride() { return smallSetOverride; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public CardInSet[] getCards() { return cards; }
+    public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
 
@@ -264,24 +269,33 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             Map<String, Integer> tokenNormalized = new HashMap<>();
             List<CardEdition.CardInSet> processedCards = new ArrayList<>();
             if (contents.containsKey("cards")) {
+                final Pattern pattern = Pattern.compile(
+                        /*
+                        The following pattern will match the WAR Japanese art entries,
+                        it should also match the Un-set and older alternate art cards
+                        like Merseine from FEM (should the editions files ever be updated)
+                         */
+                        //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
+                        /*  Ideally we'd use the named group above, but Android 6 and
+                            earlier don't appear to support named groups.
+                            So, untill support for those devices is officially dropped,
+                            we'll have to suffice with numbered groups.
+                            We are looking for:
+                                * cnum - grouping #2
+                                * rarity - grouping #4
+                                * name - grouping #5
+                         */
+                        "(^([0-9]+.?) )?(([SCURML]) )?(.*)$"
+                );
                 for(String line : contents.get("cards")) {
-                    if (StringUtils.isBlank(line))
-                        continue;
-
-                    // Optional collector number at the start.
-                    String[] split = line.split(" ", 2);
-                    int collectorNumber = -1;
-                    if (split.length >= 2 && StringUtils.isNumeric(split[0])) {
-                        collectorNumber = Integer.parseInt(split[0]);
-                        line = split[1];
+                    Matcher matcher = pattern.matcher(line);
+                    if (matcher.matches()) {
+                        String collectorNumber = matcher.group(2);
+                        CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                        String cardName = matcher.group(5);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r);
+                        processedCards.add(cis);
                     }
-
-                    // You may omit rarity for early development
-                    CardRarity r = CardRarity.smartValueOf(line.substring(0, 1));
-                    boolean hadRarity = r != CardRarity.Unknown && line.charAt(1) == ' ';
-                    String cardName = hadRarity ? line.substring(2) : line;
-                    CardInSet cis = new CardInSet(cardName, collectorNumber, r);
-                    processedCards.add(cis);
                 }
             }
 
@@ -303,7 +317,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 tokenNormalized
             );
 
-            FileSection section = FileSection.parse(contents.get("metadata"), "=");
+            FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
             res.code  = section.get("code");
@@ -333,6 +347,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
             res.type = enumType;
+            res.prerelease = section.get("Prerelease", null);
 
             switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
@@ -411,6 +426,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             Collections.sort(res);
             Collections.reverse(res);
             return res;
+        }
+
+        public Iterable<CardEdition> getPrereleaseEditions() {
+            List<CardEdition> res = Lists.newArrayList(this);
+            return Iterables.filter(res, new Predicate<CardEdition>() {
+                @Override
+                public boolean apply(final CardEdition edition) {
+                    return edition.getPrerelease() != null;
+                }
+            });
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {

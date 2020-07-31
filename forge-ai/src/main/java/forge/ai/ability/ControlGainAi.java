@@ -18,6 +18,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -34,12 +35,12 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.collect.FCollectionView;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
@@ -54,8 +55,6 @@ import forge.util.collect.FCollectionView;
 //            (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
 //  Untap - set to True if target card should untap when control is taken
-//  DestroyTgt - actions upon which the tgt should be destroyed.  same list as LoseControl
-//  NoRegen - set if destroyed creature can't be regenerated.  used only with DestroyTgt
 
 /**
  * <p>
@@ -77,7 +76,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
-        final FCollectionView<Player> opponents = ai.getOpponents();
+        final PlayerCollection opponents = ai.getOpponents();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
@@ -94,18 +93,19 @@ public class ControlGainAi extends SpellAbilityAi {
                 sa.setTargetingPlayer(targetingPlayer);
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
-            if (tgt.isRandomTarget()) {
-                sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
-            }
+
             if (tgt.canOnlyTgtOpponent()) {
-                List<Player> oppList = Lists
-                        .newArrayList(Iterables.filter(opponents, PlayerPredicates.isTargetableBy(sa)));
+                List<Player> oppList = opponents.filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
                     return false;
                 }
 
-                sa.getTargets().add(oppList.get(0));
+                if (tgt.isRandomTarget()) {
+                    sa.getTargets().add(Aggregates.random(oppList));
+                } else {
+                    sa.getTargets().add(oppList.get(0));
+                }
             }
         }
 
@@ -303,7 +303,7 @@ public class ControlGainAi extends SpellAbilityAi {
     } // pumpDrawbackAI()
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         final List<Card> cards = Lists.newArrayList();
         for (Player p : options) {
             cards.addAll(p.getCreaturesInPlay());

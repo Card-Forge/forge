@@ -4,6 +4,5 @@ Types:Legendary Creature Human Soldier Warrior
 PT:3/3
 K:Horsemanship
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, it's can't be blocked this combat.
-SVar:TrigPump:DB$Pump | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ma_chao_western_warrior.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Ma Chao, Western Warrior attacks alone, it can't be blocked this combat.

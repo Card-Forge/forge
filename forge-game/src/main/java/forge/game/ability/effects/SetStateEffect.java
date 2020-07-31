@@ -8,13 +8,14 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.Iterator;
 import java.util.List;
@@ -75,8 +76,8 @@ public class SetStateEffect extends SpellAbilityEffect {
             if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
                 Card lki = CardUtil.getLKICopy(tgt);
-                lki.turnFaceUp(true, false);
-                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, "Face-down card can't turn face up");
+                lki.forceTurnFaceUp();
+                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
                 continue;
             }
@@ -105,11 +106,11 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             boolean hasTransformed = false;
             if (morphUp) {
-                hasTransformed = tgt.turnFaceUp();
+                hasTransformed = tgt.turnFaceUp(sa);
             } else if (manifestUp) {
-                hasTransformed = tgt.turnFaceUp(true, true);
+                hasTransformed = tgt.turnFaceUp(true, true, sa);
             } else {
-                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
+                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"), sa);
             }
             if ( hasTransformed ) {
                 if (morphUp) {
@@ -124,7 +125,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, p, true, table);
+                    tgt.addCounter(CounterEnumType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);

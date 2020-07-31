@@ -9,6 +9,8 @@ import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.FThreads;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
@@ -30,6 +32,7 @@ import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 
 public abstract class InputPayMana extends InputSyncronizedBase {
     private static final long serialVersionUID = 718128600948280315L;
@@ -91,15 +94,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (card.getManaAbilities().size() == 1) {
                 activateManaAbility(card, card.getManaAbilities().get(0));
             } else {
-                SpellAbilityView spellAbilityView;
-                HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
-                for (SpellAbility sa : card.getManaAbilities()) {
-                    spellAbilityViewMap.put(sa.getView(), sa);
-                }
-                List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
-                spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
-                if (spellAbilityView != null) {
-                    activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
+                SpellAbility spellAbility = getController().getAbilityToPlay(card, Lists.newArrayList(card.getManaAbilities()), triggerEvent);
+                if (spellAbility != null) {
+                    activateManaAbility(card, spellAbility);
                 }
             }
             return true;
@@ -310,7 +307,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final SpellAbility chosen;
         if (chosenAbility == null) {
             ArrayList<SpellAbilityView> choices = new ArrayList<>(abilitiesMap.keySet());
-            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one("Choose mana ability",  choices)) : abilitiesMap.get(choices.get(0));
+            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one(Localizer.getInstance().getMessage("lblChooseManaAbility"),  choices)) : abilitiesMap.get(choices.get(0));
         } else {
             chosen = chosenAbility;
         }
@@ -389,7 +386,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
         else {
-            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
+            // treat special mana if it always can be paid
+            if (m.isSpecialMana()) {
+                return true;
+            }
+            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.mana();
             for (final String color : colorsProduced.split(" ")) {
                 if (0 != (neededColor & ManaAtom.fromName(color))) {
                     return true;
@@ -438,9 +439,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", false, true, false);
+            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), false, true, false);
         } else {
-            getController().getGui().updateButtons(getOwner(), "", "Cancel", false, true, false);
+            getController().getGui().updateButtons(getOwner(), "", Localizer.getInstance().getMessage("lblCancel"), false, true, false);
         }
     }
 
@@ -462,7 +463,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", true, true, true);
+                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, true, true);
             }
         }
         showMessage(getMessage(), saPaidFor.getView());

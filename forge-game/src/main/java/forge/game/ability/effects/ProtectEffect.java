@@ -12,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,9 +107,9 @@ public class ProtectEffect extends SpellAbilityEffect {
         if (isChoice && !choices.isEmpty())  {
             Player choser = sa.getActivatingPlayer();
             if (sa.hasParam("Choser") && sa.getParam("Choser").equals("Controller") && !tgtCards.isEmpty()) {
-            	choser = tgtCards.get(0).getController();
+                choser = tgtCards.get(0).getController();
             }
-            final String choice = choser.getController().chooseProtectionType("Choose a protection", sa, choices);
+            final String choice = choser.getController().chooseProtectionType(Localizer.getInstance().getMessage("lblChooseAProtection"), sa, choices);
             if( null == choice)
                 return;
             gains.add(choice);

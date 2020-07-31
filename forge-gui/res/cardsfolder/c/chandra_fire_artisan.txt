@@ -5,9 +5,9 @@ Loyalty:4
 T:Mode$ CounterRemovedOnce | ValidCard$ Card.Self | CounterType$ LOYALTY | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever one or more loyalty counters are removed from CARDNAME, CARDNAME deals that much damage to target opponent or planeswalker.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | References$ X
 SVar:X:TriggerCount$Amount
-A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play the card(s) this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | NumCards$ 7 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top seven cards of your library. You may play them this turn.
+A:AB$ Dig | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | DigNum$ 7 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top seven cards of your library. You may play them this turn.
 Oracle:Whenever one or more loyalty counters are removed from Chandra, Fire Artisan, she deals that much damage to target opponent or planeswalker.\n[+1]: Exile the top card of your library. You may play it this turn.\n[-7]: Exile the top seven cards of your library. You may play them this turn.

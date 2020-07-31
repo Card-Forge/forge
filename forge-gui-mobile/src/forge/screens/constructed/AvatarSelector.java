@@ -37,7 +37,7 @@ public class AvatarSelector extends FScreen {
     }
 
     private static final float PADDING = Utils.scale(5);
-    private static final int COLUMNS = 4;
+    private static final int COLUMNS = 5;
 
     private final int currentIndex;
     private final List<Integer> usedAvatars;

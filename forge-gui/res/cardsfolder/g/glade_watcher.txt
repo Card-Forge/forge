@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Elemental
 PT:3/3
 K:Defender
-A:AB$ Pump | Cost$ G | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable — | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.
+A:AB$ Pump | Cost$ G | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable — | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glade_watcher.jpg
 Oracle:Defender\nFormidable — {G}: Glade Watcher can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.

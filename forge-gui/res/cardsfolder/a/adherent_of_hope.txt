@@ -1,0 +1,9 @@
+Name:Adherent of Hope
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Planeswalker.Basri+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you control a Basri planeswalker, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckNeeds:Type$Basri
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, if you control a Basri planeswalker, put a +1/+1 counter on Adherent of Hope.

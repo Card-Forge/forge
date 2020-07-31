@@ -11,6 +11,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -50,8 +51,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             // Redirect rules read 'you MAY choose new targets' ... okay!
             // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
             boolean isOptional = sa.hasParam("Optional");
-            if (isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getHostCard() + "?")) {
-                 continue;
+            if (isOptional && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()))) {
+                continue;
             }
             if (changesOneTarget) {
                 // 1. choose a target of target spell

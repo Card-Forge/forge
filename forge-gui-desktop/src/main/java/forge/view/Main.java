@@ -78,7 +78,7 @@ public final class Main {
                 break;
             
             default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim' ");
+                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
                 break;
         }
         

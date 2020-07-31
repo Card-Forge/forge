@@ -5,6 +5,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                 if (!redistribute) {
                     p.setLife(lifeAmount, sa.getHostCard());
                 } else {
-                    int life = sa.getActivatingPlayer().getController().chooseNumber(sa, "Life Total: " + p, lifetotals, p);
+                    int life = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblLifeTotal") + ": " + p, lifetotals, p);
                     p.setLife(life, sa.getHostCard());
                     lifetotals.remove((Integer) life);
                 }

@@ -11,13 +11,14 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.TextBounds;
+import forge.util.Localizer;
 
 public class VAutoYields extends FDialog {
     private final FChoiceList<String> lstAutoYields;
     private final FCheckBox chkDisableAll;
 
     public VAutoYields() {
-        super("Auto-Yields", 2);
+        super(Localizer.getInstance().getMessage("lblAutoYields"), 2);
         List<String> autoYields = new ArrayList<>();
         for (String autoYield : MatchController.instance.getAutoYields()) {
             autoYields.add(autoYield);
@@ -33,20 +34,20 @@ public class VAutoYields extends FDialog {
                 return true;
             }
         });
-        chkDisableAll = add(new FCheckBox("Disable All Auto Yields", MatchController.instance.getDisableAutoYields()));
+        chkDisableAll = add(new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), MatchController.instance.getDisableAutoYields()));
         chkDisableAll.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
-        initButton(0, "OK", new FEventHandler() {
+        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
             }
         });
-        initButton(1, "Remove Yield", new FEventHandler() {
+        initButton(1, Localizer.getInstance().getMessage("lblRemoveYield"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 String selected = lstAutoYields.getSelectedItem();
@@ -68,7 +69,7 @@ public class VAutoYields extends FDialog {
             super.show();
         }
         else {
-            FOptionPane.showMessageDialog("There are no active auto-yields.", "No Auto-Yields", FOptionPane.INFORMATION_ICON);
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoActiveAutoYield"), Localizer.getInstance().getMessage("lblNoAutoYield"), FOptionPane.INFORMATION_ICON);
         }
     }
 

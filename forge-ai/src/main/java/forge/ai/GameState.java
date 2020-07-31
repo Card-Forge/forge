@@ -9,12 +9,10 @@ import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -24,6 +22,7 @@ import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
@@ -244,7 +243,7 @@ public abstract class GameState {
                 if (card instanceof DetachedCardEffect) {
                     continue;
                 }
-                addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
+                addCard(zone, card.getController() == ai ? aiCardTexts : humanCardTexts, card);
             }
         }
     }
@@ -271,6 +270,10 @@ public abstract class GameState {
         }
 
         if (zoneType == ZoneType.Battlefield) {
+            if (c.getOwner() != c.getController()) {
+                // TODO: Handle more than 2-player games.
+                newText.append("|Owner:" + (c.getOwner().isAI() ?  "AI" : "Human"));
+            }
             if (c.isTapped()) {
                 newText.append("|Tapped");
             }
@@ -362,6 +365,12 @@ public abstract class GameState {
             if (c.isFaceDown()) {
                 newText.append("|FaceDown"); // Exiled face down
             }
+            if (c.isAdventureCard() && c.getZone().is(ZoneType.Exile)) {
+                // TODO: this will basically default all exiled cards with Adventure to being "On Adventure".
+                // Need to figure out a better way to detect if it's actually on adventure.
+                newText.append("|OnAdventure");
+            }
+
         }
 
         if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Exile) {
@@ -583,6 +592,7 @@ public abstract class GameState {
         cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
+        cardToImprintedId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenCards.clear();
@@ -807,6 +817,12 @@ public abstract class GameState {
                     break;
             }
         }
+
+        if (sa.hasParam("RememberTargets")) {
+            for (final GameObject o : sa.getTargets().getTargets()) {
+                sa.getHostCard().addRemembered(o);
+            }
+        }
     }
 
     private void handleScriptExecution(final Game game) {
@@ -966,14 +982,27 @@ public abstract class GameState {
             spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
 
-        PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+        Card c = null;
 
-        if (pc == null) {
-            System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
-            return;
+        if (StringUtils.isNumeric(spellDef)) {
+            // Precast from a specific host
+            c = idToCard.get(Integer.parseInt(spellDef));
+            if (c == null) {
+                System.err.println("ERROR: Could not find a card with ID " + spellDef + " to precast!");
+                return;
+            }
+        } else {
+            // Precast from a card by name
+            PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+
+            if (pc == null) {
+                System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
+                return;
+            }
+
+            c = Card.fromPaperCard(pc, activator);
         }
 
-        Card c = Card.fromPaperCard(pc, activator);
         SpellAbility sa = null;
 
         if (!scriptID.isEmpty()) {
@@ -1062,11 +1091,11 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.newEnumMap(CounterType.class));
+        entity.setCounters(Maps.newHashMap());
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
+            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
         }
     }
 
@@ -1108,7 +1137,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(Maps.newEnumMap(CounterType.class));
+                    c.setCounters(Maps.newHashMap());
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
@@ -1202,6 +1231,16 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
+                } else if (info.startsWith("OnAdventure")) {
+                    String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
+                    AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
+                    StringBuilder sbPlay = new StringBuilder();
+                    sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+                    sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+                    saAdventure.setSVar("Play", sbPlay.toString());
+                    saAdventure.setActivatingPlayer(c.getOwner());
+                    saAdventure.resolve();
+                    c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                 } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);

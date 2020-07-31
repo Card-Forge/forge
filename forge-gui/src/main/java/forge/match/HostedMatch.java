@@ -60,6 +60,7 @@ public class HostedMatch {
     private String title;
     public HashMap<LobbySlot, IGameController> gameControllers = null;
     private Runnable startGameHook = null;
+    private Runnable endGameHook = null;
     private final List<PlayerControllerHuman> humanControllers = Lists.newArrayList();
     private Map<RegisteredPlayer, IGuiGame> guis;
     private int humanCount;
@@ -73,6 +74,7 @@ public class HostedMatch {
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
+    public void setEndGameHook(Runnable hook) { endGameHook = hook; }
 
     private static GameRules getDefaultRules(final GameType gameType) {
         final GameRules gameRules = new GameRules(gameType);
@@ -158,6 +160,7 @@ public class HostedMatch {
 
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final String[] sleeveIndices = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
         final GameView gameView = getGameView();
 
         humanCount = 0;
@@ -175,6 +178,16 @@ public class HostedMatch {
                 }
             }
             p.updateAvatar();
+            //sleeve
+            p.getLobbyPlayer().setSleeveIndex(rp.getPlayer().getSleeveIndex());
+            if (p.getLobbyPlayer().getSleeveIndex() == -1) {
+                if (iPlayer < sleeveIndices.length) {
+                    p.getLobbyPlayer().setSleeveIndex(Integer.parseInt(sleeveIndices[iPlayer]));
+                } else {
+                    p.getLobbyPlayer().setSleeveIndex(0);
+                }
+            }
+            p.updateSleeve();
 
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
@@ -205,13 +218,7 @@ public class HostedMatch {
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
             gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
-
-            final PlayerControllerHuman humanController = new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui);
-            game.subscribeToEvents(new FControlGameEventHandler(humanController));
-            humanControllers.add(humanController);
-            gui.setSpectator(humanController);
-
-            gui.openView(null);
+            registerSpectator(gui, new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui));
         }
 
         //prompt user for player one name if needed
@@ -236,6 +243,10 @@ public class HostedMatch {
                 }
                 // Actually start the game!
                 match.startGame(game, startGameHook);
+                // this function waits?
+                if (endGameHook != null){
+                    endGameHook.run();
+                }
 
                 // After game is over...
                 isMatchOver = match.isMatchOver();
@@ -265,9 +276,12 @@ public class HostedMatch {
 
     public void registerSpectator(final IGuiGame gui) {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
+        registerSpectator(gui, humanController);
+    }
+
+    public void registerSpectator(final IGuiGame gui, final PlayerControllerHuman humanController) {
         gui.setSpectator(humanController);
         gui.openView(null);
-
         game.subscribeToEvents(new FControlGameEventHandler(humanController));
         humanControllers.add(humanController);
     }
@@ -281,6 +295,7 @@ public class HostedMatch {
 
     public void endCurrentGame() {
         if (game == null) { return; }
+        boolean isMatchOver = game.getView().isMatchOver();
 
         game = null;
 
@@ -290,7 +305,10 @@ public class HostedMatch {
                 humanController.getGui().clearAutoYields();
             }
 
-            humanController.getGui().afterGameEnd();
+            if (humanCount > 0) //conceded
+                humanController.getGui().afterGameEnd();
+            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
+                humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
     }

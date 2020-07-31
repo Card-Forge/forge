@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerAttackerUnblocked extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerUnblocked(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerUnblocked(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -70,14 +71,14 @@ public class TriggerAttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Attacker, AbilityKey.Defender, AbilityKey.DefendingPlayer);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attacker, AbilityKey.Defender, AbilityKey.DefendingPlayer);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(sa.getTriggeringObject(AbilityKey.Attacker));
+        sb.append(Localizer.getInstance().getMessage("lblAttacker")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attacker));
         return sb.toString();
     }
 }

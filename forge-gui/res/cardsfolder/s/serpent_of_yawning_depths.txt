@@ -1,0 +1,6 @@
+Name:Serpent of Yawning Depths
+ManaCost:4 U U
+Types:Enchantment Creature Serpent
+PT:6/6
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Kraken+YouCtrl,Creature.Leviathan+YouCtrl,Creature.Octopus+YouCtrl,Creature.Serpent+YouCtrl | ValidBlocker$ Creature.nonKraken+nonLeviathan+nonOctopus+nonSerpent | Description$ Krakens, Leviathans, Octopuses, and Serpents you control can't be blocked except by Krakens, Leviathans, Octopuses, and Serpents.
+Oracle:Krakens, Leviathans, Octopuses, and Serpents you control can't be blocked except by Krakens, Leviathans, Octopuses, and Serpents.

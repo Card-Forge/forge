@@ -103,12 +103,9 @@ public class HumanPlaySpellAbility {
             // This is should happen earlier, before the Modal spell is chosen
             // Turn face-down card face up (except case of morph spell)
             if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
-                c.turnFaceUp();
+                c.turnFaceUp(null);
             }
-            c.setCastSA(ability);
-            ability.setLastStateBattlefield(game.getLastStateBattlefield());
-            ability.setLastStateGraveyard(game.getLastStateGraveyard());
-            ability.setHostCard(game.getAction().moveToStack(c, null));
+            ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
 
         if (!ability.isCopied()) {
@@ -117,7 +114,7 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player
@@ -133,8 +130,8 @@ public class HumanPlaySpellAbility {
         }
         
         if (ability.isAbility() && ability instanceof AbilityActivated) {
-        	final Map<String, String> params = Maps.newHashMap();
-        	params.put("ManaColorConversion", "Additive");
+            final Map<String, String> params = Maps.newHashMap();
+            params.put("ManaColorConversion", "Additive");
 
             for (KeywordInterface inst : c.getKeywords()) {
                 String keyword = inst.getOriginal();
@@ -159,12 +156,11 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, fromState, zonePosition, payment);
+                rollbackAbility(fromZone, zonePosition, payment);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
-                    newCard.setMadness(false);
                 } else if (ability.getHostCard().isBestowed()) {
                     ability.getHostCard().unanimateBestow();
                 }
@@ -217,7 +213,7 @@ public class HumanPlaySpellAbility {
                     final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player");
+                            candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }
@@ -226,10 +222,10 @@ public class HumanPlaySpellAbility {
                     return false;
                 }
             }
-            final SpellAbility subAbility = currentAbility.getSubAbility();
+            final AbilitySub subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {
                 // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                ((AbilitySub) subAbility).setParent(currentAbility);
+                subAbility.setParent(currentAbility);
             }
             currentAbility = subAbility;
         } while (currentAbility != null);
@@ -244,14 +240,15 @@ public class HumanPlaySpellAbility {
         }
     }
 
-    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition, CostPayment payment) {
+    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
+            ability.getHostCard().setCastSA(null);
+            ability.getHostCard().setCastFrom(null);
             // add back to where it came from
             game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
-            ability.getHostCard().setState(fromState, true);
         }
 
         clearTargets(ability);
@@ -316,10 +313,10 @@ public class HumanPlaySpellAbility {
                     if (value == null) {
                         return false;
                     }
-                    card.setXManaCostPaid(value);
+                    ability.setXManaCostPaid(value);
                 }
             } else if (manaCost.getMana().isZero() && ability.isSpell()) {
-                card.setXManaCostPaid(0);
+                ability.setXManaCostPaid(0);
             }
         }
         return true;

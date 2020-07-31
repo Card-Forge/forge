@@ -96,7 +96,7 @@ public class CostDraw extends CostPart {
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
         for (final Player p : getPotentialPlayers(ai, ability.getHostCard())) {
-            p.drawCards(decision.c);
+            p.drawCards(decision.c, ability);
         }
         return true;
     }

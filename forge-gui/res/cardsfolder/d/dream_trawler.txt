@@ -1,0 +1,13 @@
+Name:Dream Trawler
+ManaCost:2 W W U U
+Types:Creature Sphinx
+PT:3/5
+K:Flying
+K:Lifelink
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you draw a card, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Hexproof | SubAbility$ DBTap | SpellDescription$ CARDNAME gains hexproof until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+Oracle:Flying, lifelink\nWhenever you draw a card, Dream Trawler gets +1/+0 until end of turn.\nWhenever Dream Trawler attacks, draw a card.\nDiscard a card: Dream Trawler gains hexproof until end of turn. Tap it.

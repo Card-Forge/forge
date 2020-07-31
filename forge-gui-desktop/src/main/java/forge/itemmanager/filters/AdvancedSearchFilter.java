@@ -21,6 +21,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -89,7 +90,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                     GuiUtils.addSeparator(menu);
                 }
 
-                GuiUtils.addMenuItem(menu, "Edit Expression", null, new Runnable() {
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblEditExpression"), null, new Runnable() {
                     @Override
                     public void run() {
                         edit();
@@ -97,7 +98,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 });
 
                 if (hasFilters) {
-                    GuiUtils.addMenuItem(menu, "Clear Filter", null, new Runnable() {
+                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblClearFilter"), null, new Runnable() {
                         @Override
                         public void run() {
                             reset();
@@ -173,7 +174,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         }
 
         private boolean show() {
-            optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
+            optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblAdvancedSearch"), null, scroller, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0);
             optionPane.addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentShown(ComponentEvent e) {

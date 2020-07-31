@@ -1,0 +1,15 @@
+Name:Uro, Titan of Nature's Wrath
+ManaCost:1 G U
+Types:Legendary Creature Elder Giant
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless it escaped.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | ConditionNotPresent$ Card.Self+escaped
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | SubAbility$ DBLand
+SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | OptionalDecider$ You |
+K:Escape:G G U U ExileFromGrave<5/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$LifeGain
+Oracle:When Uro enters the battlefield, sacrifice it unless it escaped.\nWhen Uro enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.\nEscape—{G}{G}{U}{U}, exile five other cards from your graveyard.

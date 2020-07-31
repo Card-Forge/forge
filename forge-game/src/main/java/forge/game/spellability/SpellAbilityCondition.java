@@ -20,6 +20,7 @@ package forge.game.spellability;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -36,11 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -147,6 +144,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setPhases(PhaseType.parseRange(params.get("ConditionPhases")));
         }
 
+        if (params.containsKey("ConditionGameTypes")) {
+            this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
+        }
+
         if (params.containsKey("ConditionChosenColor")) {
             this.setColorToCheck(params.get("ConditionChosenColor"));
         }
@@ -194,6 +195,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionManaSpent")) {
             this.setManaSpent(params.get("ConditionManaSpent"));
+        }
+
+        if (params.containsKey("ConditionManaNotSpent")) {
+            this.setManaNotSpent(params.get("ConditionManaNotSpent"));
         }
 
         if (params.containsKey("ConditionCheckSVar")) {
@@ -308,16 +313,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final PhaseType currPhase = phase.getPhase();
-            for (final PhaseType s : this.getPhases()) {
-                if (s == currPhase) {
-                    isPhase = true;
-                    break;
-                }
+            if (!this.getPhases().contains(phase.getPhase())) {
+                return false;
             }
+        }
 
-            if (!isPhase) {
+        if (this.getGameTypes().size() > 0) {
+            if (!getGameTypes().contains(game.getRules().getGameType())) {
                 return false;
             }
         }
@@ -345,15 +347,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            int right;
             final String rightString = this.getPresentCompare().substring(2);
-            try { // If this is an Integer, just parse it
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException e) { // Otherwise, grab it from
-                                                      // the
-                // SVar
-                right = CardFactoryUtil.xCount(host, host.getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(host, rightString, sa);
 
             final int left = list.size();
 
@@ -434,10 +429,21 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (StringUtils.isNotEmpty(this.getManaSpent())) {
-            byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
-            if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+        if (StringUtils.isNotEmpty(getManaSpent())) {
+            for (String s : getManaSpent().split(" ")) {
+                byte manaSpent = MagicColor.fromName(s);
+                if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+                    return false;
+            }
+        }
+        if (StringUtils.isNotEmpty(getManaNotSpent())) {
+            byte toPay = 0;
+            for (String s : getManaNotSpent().split(" ")) {
+                toPay |= MagicColor.fromName(s);
+            }
+            if (toPay == (toPay & sa.getHostCard().getColorsPaid())) {
                 return false;
+            }
         }
 
         if (this.getsVarToCheck() != null) {

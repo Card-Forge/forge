@@ -69,6 +69,7 @@ public final class ForgeConstants {
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
     public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
 
 
@@ -95,8 +96,12 @@ public final class ForgeConstants {
     public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_ABILITY_FILE    = "sprite_ability.png";
     public static final String SPRITE_BORDER_FILE     = "sprite_border.png";
+    public static final String SPRITE_BUTTONS_FILE    = "sprite_buttons.png";
+    public static final String SPRITE_START_FILE      = "sprite_start.png";
     public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
+    public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";
+    public static final String SPRITE_SLEEVES2_FILE   = "sprite_sleeves2.png";
     public static final String SPRITE_FAVICONS_FILE   = "sprite_favicons.png";
     public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
     public static final String FONT_FILE              = "font1.ttf";
@@ -212,6 +217,7 @@ public final class ForgeConstants {
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR       = USER_DIR + "games" + PATH_SEPARATOR;
     public static final String USER_FORMATS_DIR     = USER_DIR + "customformats" + PATH_SEPARATOR;
+    public static final String USER_PUZZLE_DIR      = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String ACHIEVEMENTS_DIR     = USER_DIR + "achievements" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
@@ -232,6 +238,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE  = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
+    public static final String CLOSE_CONN_COMMAND   = "<<_EM_ESOLC_<<";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;
@@ -308,6 +315,11 @@ public final class ForgeConstants {
     public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";
     public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
 
+    // Constants for Stack effect addition notification policy
+    public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
+    public static final String STACK_EFFECT_NOTIFICATION_ALWAYS = "Always";
+    public static final String STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED = "AI cast/activated, or triggered by any player";
+    
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");
 

@@ -1,6 +1,5 @@
 Name:Glimpse the Unthinkable
 ManaCost:U B
 Types:Sorcery
-A:SP$ Mill | Cost$ U B | NumCards$ 10 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top ten cards of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glimpse_the_unthinkable.jpg
-Oracle:Target player puts the top ten cards of their library into their graveyard.
+A:SP$ Mill | Cost$ U B | NumCards$ 10 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills ten cards.
+Oracle:Target player mills ten cards.

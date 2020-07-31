@@ -6,53 +6,52 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.spellability;
-
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import forge.card.mana.ManaAtom;
-import forge.game.ability.AbilityKey;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
+import forge.card.mana.ManaCostShard;
+import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementResult;
-import forge.game.replacement.ReplacementType;
+import forge.game.replacement.*;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+import forge.util.Lang;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
  * Abstract AbilityMana class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -84,7 +83,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * Constructor for AbilityMana.
      * </p>
-     * 
+     *
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      */
@@ -117,7 +116,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * produceMana.
      * </p>
-     * 
+     *
      * @param produced
      *            a {@link java.lang.String} object.
      * @param player
@@ -129,7 +128,7 @@ public class AbilityManaPart implements java.io.Serializable {
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
-        repParams.put(AbilityKey.Mana, afterReplace);
+        repParams.put(AbilityKey.Mana, produced);
         repParams.put(AbilityKey.Player, player);
         repParams.put(AbilityKey.AbilityMana, sa);
         if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
@@ -149,14 +148,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (attemptedMana == 0) {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
-				// Commander has removed rule #4 (mana generation restriction) due to Colorless mana mattering
-				/*
-                if (CID != null) {
-                    if (!CID.hasAnyColor(attemptedMana)) {
-                        attemptedMana = (byte)ManaAtom.COLORLESS;
-                    }
-                }
-				*/
 
                 this.lastManaProduced.add(new Mana(attemptedMana, source, this));
             }
@@ -183,7 +174,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * cannotCounterPaidWith.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean cannotCounterPaidWith(SpellAbility saBeingPaid) {
@@ -200,7 +191,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * addKeywords.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean addKeywords(SpellAbility saBeingPaid) {
@@ -219,7 +210,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getKeywords.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getKeywords() {
@@ -231,7 +222,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * addsCounters.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean addsCounters(SpellAbility saBeingPaid) {
@@ -241,10 +232,25 @@ public class AbilityManaPart implements java.io.Serializable {
     /**
      * createETBCounters
      */
-    public void createETBCounters(Card c) {
+    public void createETBCounters(Card c, Player controller) {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c, null)) {
+            final Game game = this.sourceCard.getGame();
+            final Card eff = new Card(game.nextCardId(), game);
+            eff.setTimestamp(game.getNextTimestamp());
+            eff.setName(sourceCard.getName() + "'s Effect");
+            eff.addType("Effect");
+            eff.setOwner(controller);
+
+            eff.setImageKey(sourceCard.getImageKey());
+            eff.setColor(MagicColor.COLORLESS);
+            eff.setImmutable(true);
+            // try to get the SpellAbility from the mana ability
+            //eff.setEffectSource((SpellAbility)null);
+
+            eff.addRemembered(c);
+
             String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + parse[1]
                     + " | ETB$ True | CounterNum$ " + parse[2];
 
@@ -254,15 +260,37 @@ public class AbilityManaPart implements java.io.Serializable {
             }
             CardFactoryUtil.setupETBReplacementAbility(sa);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                    + " | Secondary$ True | Description$ CARDNAME"
-                    + " enters the battlefield with " + CounterType.valueOf(parse[1]).getName() + " counters.";
+            String desc = "It enters the battlefield with ";
+            desc += Lang.nounWithNumeral(parse[2], CounterType.getType(parse[1]).getName() + " counter");
+            desc += " on it.";
 
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, c, false);
+            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
             re.setLayer(ReplacementLayer.Other);
             re.setOverridingAbility(sa);
 
-            c.addReplacementEffect(re);
+            eff.addReplacementEffect(re);
+
+            // Forgot Trigger
+            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+
+            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
+            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
+            saForget.setSubAbility(saExile);
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+            parsedTrigger.setOverridingAbility(saForget);
+            eff.addTrigger(parsedTrigger);
+            eff.updateStateForView();
+
+            // TODO: Add targeting to the effect so it knows who it's dealing with
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getAction().moveTo(ZoneType.Command, eff, null);
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
     }
 
@@ -283,7 +311,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getManaRestrictions.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getManaRestrictions() {
@@ -294,7 +322,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * meetsManaRestrictions.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -310,7 +338,7 @@ public class AbilityManaPart implements java.io.Serializable {
             if (restriction.equals("nonSpell")) {
                 return !sa.isSpell();
             }
-            
+
             if (restriction.equals("CumulativeUpkeep")) {
                 if (sa.isCumulativeupkeep()) {
                     return true;
@@ -337,6 +365,10 @@ public class AbilityManaPart implements java.io.Serializable {
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                 return true;
             }
+            
+            if (restriction.equals("CantPayGenericCosts")) {
+            	return true;
+            }
 
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
@@ -358,12 +390,60 @@ public class AbilityManaPart implements java.io.Serializable {
 
         return false;
     }
+    
+    /**
+     * <p>
+     * meetsManaShardRestrictions.
+     * </p>
+     *
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     * 			  the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsManaShardRestrictions(final ManaCostShard shard, final byte color) {
+    	if (this.manaRestrictions.isEmpty()) {
+            return true;
+        }
+        for (String restriction : this.manaRestrictions.split(",")) {
+			if (restriction.equals("CantPayGenericCosts")) {
+				if (shard.isGeneric()) {
+					if (shard.isOr2Generic() && shard.isColor(color)) {
+						continue;
+					} else {
+						return false;
+					}
+				} else {
+					continue;
+				}
+			}
+        }
+        return true;
+    }
+    
+    /**
+     * <p>
+     * meetsSpellAndShardRestrictions.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     * 			  the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsSpellAndShardRestrictions(final SpellAbility sa, final ManaCostShard shard, final byte color) {
+    	return this.meetsManaRestrictions(sa) && this.meetsManaShardRestrictions(shard, color);
+    }
 
     /**
      * <p>
      * mana.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
@@ -452,7 +532,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * canProduce.
      * </p>
-     * 
+     *
      * @param s
      *            a {@link java.lang.String} object.
      * @return a boolean.
@@ -482,7 +562,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * isBasic.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isBasic() {
@@ -555,7 +635,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public Card getSourceCard() {
         return sourceCard;
     }
-    
+
     public void setSourceCard(final Card host) {
         sourceCard = host;
     }

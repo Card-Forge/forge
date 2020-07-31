@@ -7,6 +7,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class RevealHandEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, "Do you want to reveal your hand?")) {
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRevealYourHand"))) {
                     continue;
                 }
                 final CardCollectionView hand = p.getCardsIn(ZoneType.Hand);

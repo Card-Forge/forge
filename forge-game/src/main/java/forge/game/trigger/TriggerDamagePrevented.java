@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class TriggerDamagePrevented extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamagePrevented(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamagePrevented(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -105,18 +106,18 @@ public class TriggerDamagePrevented extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)getFromRunParams(AbilityKey.DamageSource)));
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
-        sb.append("Damage Target: ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
+        sb.append(Localizer.getInstance().getMessage("lblDamageSource")).append(": ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblDamageTarget")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
     }
 }

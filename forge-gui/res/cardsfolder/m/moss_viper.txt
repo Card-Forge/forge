@@ -1,0 +1,6 @@
+Name:Moss Viper
+ManaCost:G
+Types:Creature Snake
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch

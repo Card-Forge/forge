@@ -77,7 +77,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
     private final FLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)
-        .text("How To Play").fontAlign(SwingConstants.CENTER).build();
+        .text(localizer.getMessage("lblHowtoPlay")).fontAlign(SwingConstants.CENTER).build();
 
     /**
      * Constructor.
@@ -181,15 +181,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
-        final String instructions = "SEALED DECK MODE INSTRUCTIONS"
-                + "\r\n\r\n"
-                + "In Sealed Deck tournaments, each player receives six booster packs"
-                + "from which to build their deck."
-                + "\r\n\r\n"
-                + "Depending on which sets are to be used in a sealed deck event, "
-                + "the distribution of packs can vary greatly."
-                + "\r\n\r\n"
-                + "Credit: Wikipedia";
+        final String instructions = localizer.getMessage("lblSealedModeInstruction");
 
         // Init directions text pane
         final SkinnedTextPane tpnDirections = new SkinnedTextPane();
@@ -207,7 +199,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        final JButton btnCloseBig = new FButton("OK");
+        final JButton btnCloseBig = new FButton(localizer.getMessage("lblOK"));
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });

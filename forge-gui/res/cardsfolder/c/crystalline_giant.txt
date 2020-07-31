@@ -1,0 +1,19 @@
+Name:Crystalline Giant
+ManaCost:3
+Types:Artifact Creature Giant
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigGenericChoice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose a kind of counter at random that CARDNAME doesn't have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on CARDNAME.
+SVar:TrigGenericChoice:DB$ GenericChoice | AtRandom$ True | Choices$ Flying,FirstStrike,Deathtouch,Hexproof,Lifelink,Menace,Reach,Trample,Vigilance,P1P1
+SVar:Flying:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Flying | CounterType$ Flying | CounterNum$ 1 | SpellDescription$ FLY
+SVar:FirstStrike:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_First Strike | CounterType$ First Strike | CounterNum$ 1 | SpellDescription$ FIR
+SVar:Deathtouch:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Deathtouch | CounterType$ Deathtouch | CounterNum$ 1 | SpellDescription$ DEA
+SVar:Hexproof:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Hexproof | CounterType$ Hexproof | CounterNum$ 1 | SpellDescription$ HEX
+SVar:Lifelink:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Lifelink | CounterType$ Lifelink | CounterNum$ 1 | SpellDescription$ LIF
+SVar:Menace:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Menace | CounterType$ Menace | CounterNum$ 1 | SpellDescription$ MEN
+SVar:Reach:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Reach | CounterType$ Reach | CounterNum$ 1 | SpellDescription$ REA
+SVar:Trample:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Trample | CounterType$ Trample | CounterNum$ 1 | SpellDescription$ TRA
+SVar:Vigilance:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_Vigilance | CounterType$ Vigilance | CounterNum$ 1 | SpellDescription$ VIG
+SVar:P1P1:DB$ PutCounter | IsPresent$ Card.Self+counters_EQ0_P1P1 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ P1P1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, choose a kind of counter at random that Crystalline Giant doesn't have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on Crystalline Giant.

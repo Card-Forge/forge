@@ -45,6 +45,7 @@ import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 public class ConquestAEtherScreen extends FScreen {
     public static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
@@ -59,10 +60,10 @@ public class ConquestAEtherScreen extends FScreen {
     private final Set<PaperCard> filteredPool = new HashSet<>();
     private final Set<PaperCard> strictPool = new HashSet<>();
 
-    private final FilterButton btnColorFilter = add(new FilterButton("Color", ConquestUtil.COLOR_FILTERS));
-    private final FilterButton btnTypeFilter = add(new FilterButton("Type", ConquestUtil.TYPE_FILTERS));
-    private final FilterButton btnRarityFilter = add(new FilterButton("Rarity", ConquestUtil.RARITY_FILTERS));
-    private final FilterButton btnCMCFilter = add(new FilterButton("CMC", ConquestUtil.CMC_FILTERS));
+    private final FilterButton btnColorFilter = add(new FilterButton(Localizer.getInstance().getMessage("lblColor"), ConquestUtil.COLOR_FILTERS));
+    private final FilterButton btnTypeFilter = add(new FilterButton(Localizer.getInstance().getMessage("lblType"), ConquestUtil.TYPE_FILTERS));
+    private final FilterButton btnRarityFilter = add(new FilterButton(Localizer.getInstance().getMessage("lblRarity"), ConquestUtil.RARITY_FILTERS));
+    private final FilterButton btnCMCFilter = add(new FilterButton(Localizer.getInstance().getMessage("lblCMC"), ConquestUtil.CMC_FILTERS));
 
     private final FLabel lblShards = add(new FLabel.Builder().font(LABEL_FONT).align(Align.center).parseSymbols().build());
 
@@ -127,7 +128,7 @@ public class ConquestAEtherScreen extends FScreen {
 
     private void updateAvailableShards() {
         int availableShards = FModel.getConquest().getModel().getAEtherShards();
-        lblShards.setText("Shards: {AE}" + availableShards);
+        lblShards.setText(Localizer.getInstance().getMessage("lblShardsAE", "{AE}") + availableShards);
     }
 
     private void updateShardCost() {
@@ -218,7 +219,7 @@ public class ConquestAEtherScreen extends FScreen {
         private String message;
 
         private void updateMessage() {
-            message = "Tap to pull from the Aether\n{AE}";
+            message = Localizer.getInstance().getMessage("lblTapToPullFromAE", "{AE}");
 
             if (shardCost == 0) {
                 message += "--";
@@ -368,7 +369,7 @@ public class ConquestAEtherScreen extends FScreen {
             setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    GuiChoose.getChoices("Select " + caption + " Filter", 0, 1, options, selectedOption, null, new Callback<List<AEtherFilter>>() {
+                    GuiChoose.getChoices(Localizer.getInstance().getMessage("lblSelectCaptionFilter", caption), 0, 1, options, selectedOption, null, new Callback<List<AEtherFilter>>() {
                         @Override
                         public void run(List<AEtherFilter> result) {
                             if (!result.isEmpty()) {

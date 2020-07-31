@@ -22,10 +22,9 @@ package forge.game;
  */
 public enum GlobalRuleChange {
 
-    alwaysWither ("All damage is dealt as though it's source had wither."),
+    alwaysWither ("All damage is dealt as though its source had wither."),
     attackerChoosesBlockers ("The attacking player chooses how each creature blocks each turn."),
     manapoolsDontEmpty ("Mana pools don't empty as steps and phases end."),
-    noCycling ("Players can't cycle cards."),
     noCreatureETBTriggers ("Creatures entering the battlefield don't cause abilities to trigger."),
     noCreatureDyingTriggers ("Creatures dying don't cause abilities to trigger."),
     noLegendRule ("The legend rule doesn't apply."),
@@ -35,8 +34,7 @@ public enum GlobalRuleChange {
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),
     onlyTwoBlockers ("No more than two creatures can block each combat."),
     toughnessAssignsDamage ("Each creature assigns combat damage equal to its toughness rather than its power."),
-    blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll."),
-    noLandBattlefield("Lands can't enter the battlefield.");
+    blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll.");
     
     private final String ruleText;
 

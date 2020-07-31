@@ -195,15 +195,15 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 182 C Watchful Automaton
 183 C Welder Automaton
 184 R Spire of Industry
-185 M Ajani, Valiant Protector 
-186 R Ajani's Aid
+185 M Ajani, Valiant Protector
+186 C Inspiring Roar
 187 U Ajani's Comrade
-188 C Inspiring Roar
+188 R Ajani's Aid
 189 C Tranquil Expanse
 190 M Tezzeret, Master of Metal
 191 R Tezzeret's Betrayal
-192 U Tezzeret's Simulacrum
-193 C Pendulum of Patterns
+192 C Pendulum of Patterns
+193 U Tezzeret's Simulacrum
 194 C Submerged Boneyard
 
 [tokens]

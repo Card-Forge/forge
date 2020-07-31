@@ -9,6 +9,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -51,7 +52,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
                         continue;
                     }
                     SpellAbility manaAb = p.getController().chooseSingleSpellForEffect(
-                            possibleAb, sa, "Choose a mana ability:", ImmutableMap.of());
+                            possibleAb, sa, Localizer.getInstance().getMessage("lblChooseManaAbility"), ImmutableMap.of());
                     p.getController().playChosenSpellAbility(manaAb);
                 }
             }

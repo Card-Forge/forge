@@ -22,20 +22,28 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -75,77 +83,19 @@ public final class GameActionUtil {
         Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        if (sa.isSpell()) {
+        if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
             boolean lkicheck = false;
 
-            // need to be done before so it works with Vivien and Zoetic Cavern
-            if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.turnFaceUp(false, false);
-                lkicheck = true;
-            }
-
-            if (sa.hasParam("Bestow") && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.animateBestow(false);
-                lkicheck = true;
-            } else if (sa.isCastFaceDown()) {
-                // need a copy of the card to turn facedown without trigger anything
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                source.turnFaceDownNoUpdate();
-                lkicheck = true;
-            } else if (sa.isAdventure() && !source.isInZone(ZoneType.Battlefield)) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-
-                source.setState(CardStateName.Adventure, false);
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
-                lkicheck = true;
-            } else if (source.isSplitCard() && (sa.isLeftSplit() || sa.isRightSplit())) {
-                if (!source.isLKI()) {
-                    source = CardUtil.getLKICopy(source);
-                }
-                if (sa.isLeftSplit()) {
-                    if (!source.hasState(CardStateName.LeftSplit)) {
-                        source.addAlternateState(CardStateName.LeftSplit, false);
-                        source.getState(CardStateName.LeftSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.LeftSplit), true);
-                    }
-
-                    source.setState(CardStateName.LeftSplit, false);
-                }
-
-                if (sa.isRightSplit()) {
-                    if (!source.hasState(CardStateName.RightSplit)) {
-                        source.addAlternateState(CardStateName.RightSplit, false);
-                        source.getState(CardStateName.RightSplit).copyFrom(
-                                sa.getHostCard().getState(CardStateName.RightSplit), true);
-                    }
-
-                    source.setState(CardStateName.RightSplit, false);
-                }
-
-                // need to reset CMC
-                source.setLKICMC(-1);
-                source.setLKICMC(source.getCMC());
+            Card newHost = ((Spell)sa).getAlternateHost(source);
+            if (newHost != null) {
+                source = newHost;
                 lkicheck = true;
             }
 
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
+                source.clearChangedCardKeywords(false);
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
@@ -207,6 +157,58 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
             }
 
+            // need to be done there before static abilities does reset the card
+            if (sa.isBasicSpell()) {
+                for (final KeywordInterface inst : source.getKeywords()) {
+                    final String keyword = inst.getOriginal();
+
+                    if (keyword.startsWith("Escape")) {
+                        final String[] k = keyword.split(":");
+                        final Cost escapeCost = new Cost(k[1], true);
+
+                        final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+                        newSA.setActivatingPlayer(activator);
+
+                        newSA.getMapParams().put("PrecostDesc", "Escape—");
+                        newSA.getMapParams().put("CostDesc", escapeCost.toString());
+
+                        // makes new SpellDescription
+                        final StringBuilder desc = new StringBuilder();
+                        desc.append(newSA.getCostDescription());
+                        desc.append("(").append(inst.getReminderText()).append(")");
+                        newSA.setDescription(desc.toString());
+
+                        // Stack Description only for Permanent or it might crash
+                        if (source.isPermanent()) {
+                            final StringBuilder sbStack = new StringBuilder();
+                            sbStack.append(sa.getStackDescription()).append(" (Escaped)");
+                            newSA.setStackDescription(sbStack.toString());
+                        }
+                        newSA.setAlternativeCost(AlternativeCost.Escape);
+                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
+
+                        alternatives.add(newSA);
+                    } else if (keyword.startsWith("Flashback")) {
+                        // if source has No Mana cost, and flashback doesn't have own one,
+                        // flashback can't work
+                        if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
+                            continue;
+                        }
+
+                        final SpellAbility flashback = sa.copy(activator);
+                        flashback.setAlternativeCost(AlternativeCost.Flashback);
+                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
+
+                        // there is a flashback cost (and not the cards cost)
+                        if (keyword.contains(":")) {
+                            final String[] k = keyword.split(":");
+                            flashback.setPayCosts(new Cost(k[1], false));
+                        }
+                        alternatives.add(flashback);
+                    }
+                }
+            }
+
             // reset static abilities
             if (lkicheck) {
                 game.getAction().checkStaticAbilities(false);
@@ -217,22 +219,34 @@ public final class GameActionUtil {
             }
         }
 
-        if (!sa.isBasicSpell()) {
-            return alternatives;
-        }
-
+        // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            // set the cost to this directly to buypass non mana cost
-            final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
-            newSA.setBasicSpell(false);
-            newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
-            // makes new SpellDescription
-            final StringBuilder sb = new StringBuilder();
-            sb.append(newSA.getCostDescription());
-            sb.append(newSA.getParam("SpellDescription"));
-            newSA.setDescription(sb.toString());
             
-            alternatives.add(newSA);
+            for (final KeywordInterface inst : source.getKeywords()) {
+                // need to find the correct Keyword from which this Ability is from
+                if (!inst.getAbilities().contains(sa)) {
+                    continue;
+                }
+
+                // set the cost to this directly to buypass non mana cost
+                final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+                newSA.setActivatingPlayer(activator);
+                newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+
+                // need to build a new Keyword to get better Reminder Text
+                String data[] = inst.getOriginal().split(":");
+                data[1] = "0";
+                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+
+                // makes new SpellDescription
+                final StringBuilder sb = new StringBuilder();
+                sb.append(newSA.getCostDescription());
+                sb.append("(").append(newKi.getReminderText()).append(")");
+                newSA.setDescription(sb.toString());
+
+                alternatives.add(newSA);
+                break;
+            }
         }
 
         if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
@@ -244,28 +258,6 @@ public final class GameActionUtil {
             alternatives.add(newSA);
         }
 
-        for (final KeywordInterface inst : source.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (sa.isSpell() && keyword.startsWith("Flashback")) {
-                // if source has No Mana cost, and flashback doesn't have own one,
-                // flashback can't work
-                if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
-                    continue;
-                }
-
-                final SpellAbility flashback = sa.copy(activator);
-                flashback.setFlashBackAbility(true);
-
-                flashback.getRestrictions().setZone(ZoneType.Graveyard);
-
-                // there is a flashback cost (and not the cards cost)
-                if (keyword.contains(":")) {
-                    final String[] k = keyword.split(":");
-                    flashback.setPayCosts(new Cost(k[1], false));
-                }
-                alternatives.add(flashback);
-            }
-        }
         return alternatives;
     }
 
@@ -391,10 +383,11 @@ public final class GameActionUtil {
         }
         SpellAbility result = null;
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
 
-        host.getGame().getAction().checkStaticAbilities(false);
+        game.getAction().checkStaticAbilities(false);
 
         boolean reset = false;
 
@@ -457,7 +450,59 @@ public final class GameActionUtil {
                         int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
                         if (v > 0) {
-                            host.addReplacementEffect(CardFactoryUtil.makeEtbCounter("etbCounter:P1P1:" + v, host, false));
+
+                            final Card eff = new Card(game.nextCardId(), game);
+                            eff.setTimestamp(game.getNextTimestamp());
+                            eff.setName(c.getName() + "'s Effect");
+                            eff.addType("Effect");
+                            eff.setOwner(activator);
+
+                            eff.setImageKey(c.getImageKey());
+                            eff.setColor(MagicColor.COLORLESS);
+                            eff.setImmutable(true);
+                            // try to get the SpellAbility from the mana ability
+                            //eff.setEffectSource((SpellAbility)null);
+
+                            eff.addRemembered(host);
+
+                            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ " + v;
+
+                            SpellAbility saAb = AbilityFactory.getAbility(abStr, c);
+
+                            CardFactoryUtil.setupETBReplacementAbility(saAb);
+
+                            String desc = "It enters the battlefield with ";
+                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
+                            desc += " on it.";
+
+                            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+
+                            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+                            re.setLayer(ReplacementLayer.Other);
+                            re.setOverridingAbility(saAb);
+
+                            eff.addReplacementEffect(re);
+
+                            // Forgot Trigger
+                            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+                            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+                            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+
+                            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
+                            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
+                            saForget.setSubAbility(saExile);
+
+                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+                            parsedTrigger.setOverridingAbility(saForget);
+                            eff.addTrigger(parsedTrigger);
+                            eff.updateStateForView();
+
+                            // TODO: Add targeting to the effect so it knows who it's dealing with
+                            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                            game.getAction().moveTo(ZoneType.Command, eff, null);
+                            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
                             if (result == null) {
                                 result = sa.copy();
                             }
@@ -541,14 +586,8 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else {
-            try {
-                if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
-                    sa.setUndoable(false);
-                }
-            } catch (final NumberFormatException n) {
-                sa.setUndoable(false);
-            }
+        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+            sa.setUndoable(false);
         }
 
         final StringBuilder sb = new StringBuilder();

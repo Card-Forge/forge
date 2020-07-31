@@ -25,6 +25,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -105,19 +106,19 @@ public class ListChooser<T> extends FContainer {
             advancedSearchFilter = lstChoices.getListItemRenderer().getAdvancedSearchFilter(this);
             if (advancedSearchFilter != null) {
                 btnSearch = add(new FLabel.ButtonBuilder()
-                    .icon(FSkinImage.SEARCH).iconScaleFactor(0.9f).command(new FEventHandler() {
+                    .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).command(new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             FPopupMenu menu = new FPopupMenu() {
                                 @Override
                                 protected void buildMenu() {
-                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), FSkinImage.SEARCH, new FEventHandler() {
+                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             advancedSearchFilter.edit();
                                         }
                                     }));
-                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), FSkinImage.DELETE, new FEventHandler() {
+                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             resetFilters();

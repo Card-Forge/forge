@@ -1,0 +1,6 @@
+Name:Back for More
+ManaCost:4 B G
+Types:Instant
+A:SP$ ChangeZone | Cost$ 4 B G | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBFight | StackDescription$ SpellDescription | SpellDescription$ Return target creature card from your graveyard to the battlefield. When you do, it fights up to one target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | StackDescription$ None
+Oracle:Return target creature card from your graveyard to the battlefield. When you do, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)

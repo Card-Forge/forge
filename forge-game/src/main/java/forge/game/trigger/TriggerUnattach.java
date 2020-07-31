@@ -21,6 +21,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TriggerUnattach extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerUnattach(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerUnattach(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -75,15 +76,15 @@ public class TriggerUnattach extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Object, AbilityKey.Attach);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Object, AbilityKey.Attach);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Object: ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
-        sb.append("Attachment: ").append(sa.getTriggeringObject(AbilityKey.Attach));
+        sb.append(Localizer.getInstance().getMessage("lblObject")).append(": ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblAttachment")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attach));
         return sb.toString();
     }
 

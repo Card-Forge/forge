@@ -83,7 +83,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     // private ArrayList<Mana> payingMana = new ArrayList<Mana>();
     // private ArrayList<AbilityMana> paidAbilities = new
     // ArrayList<AbilityMana>();
-    private int xManaPaid = 0;
+    private Integer xManaPaid = null;
 
     // Other Paid things
     private final HashMap<String, CardCollection> paidHash;
@@ -116,7 +116,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         splicedCards = sa.getSplicedCards();
 
         // TODO getXManaCostPaid should be on the SA, not the Card
-        xManaPaid = sa.getHostCard().getXManaCostPaid();
+        xManaPaid = sa.getXManaCostPaid();
 
         // Triggering info
         triggeringObjects = sa.getTriggeringObjects();
@@ -188,20 +188,18 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     //      Perhaps lets move the refresh logic to a separate function called only when necessary
     public final SpellAbility getSpellAbility(boolean refresh) {
         if (refresh) {
-            ability.resetTargets();
             ability.setTargets(tc);
             ability.setActivatingPlayer(activatingPlayer);
 
             // Saved sub-SA needs to be reset on the way out
             if (subInstance != null) {
                 ability.setSubAbility((AbilitySub) subInstance.getSpellAbility(true));
-                ability.getSubAbility().setParent(ability);
             }
 
             // Set Cost specific things here
             ability.setPaidHash(paidHash);
             ability.setSplicedCards(splicedCards);
-            ability.getHostCard().setXManaCostPaid(xManaPaid);
+            ability.setXManaCostPaid(xManaPaid);
 
             // Triggered
             ability.setTriggeringObjects(triggeringObjects);

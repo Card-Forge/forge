@@ -26,7 +26,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
 
-        if (source.isPermanent() && sa.getRestrictions().isInstantSpeed() && sa.getPayCosts() != null
+        if (source.isPermanent() && sa.getRestrictions().isInstantSpeed()
                 && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
             // If it has an associated cost, try to only do this before own turn
             if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {

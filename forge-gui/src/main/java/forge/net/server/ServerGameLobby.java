@@ -13,25 +13,26 @@ public final class ServerGameLobby extends GameLobby {
 
     public ServerGameLobby() {
         super(true);
-        addSlot(new LobbySlot(LobbySlotType.LOCAL, localName(), localAvatarIndices()[0], 0, true, false, Collections.emptySet()));
-        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, 1, false, false, Collections.emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.LOCAL, localName(), localAvatarIndices()[0], localSleeveIndices()[0],0, true, false, Collections.emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, -1, 1, false, false, Collections.emptySet()));
     }
 
-    public int connectPlayer(final String name, final int avatarIndex) {
+    public int connectPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
         final int nSlots = getNumberOfSlots();
         for (int index = 0; index < nSlots; index++) {
             final LobbySlot slot = getSlot(index);
             if (slot.getType() == LobbySlotType.OPEN) {
-                connectPlayer(name, avatarIndex, slot);
+                connectPlayer(name, avatarIndex, sleeveIndex, slot);
                 return index;
             }
         }
         return -1;
     }
-    private void connectPlayer(final String name, final int avatarIndex, final LobbySlot slot) {
+    private void connectPlayer(final String name, final int avatarIndex, final int sleeveIndex, final LobbySlot slot) {
         slot.setType(LobbySlotType.REMOTE);
         slot.setName(name);
         slot.setAvatarIndex(avatarIndex);
+        slot.setSleeveIndex(sleeveIndex);
         updateView(false);
     }
     public void disconnectPlayer(final int index) {

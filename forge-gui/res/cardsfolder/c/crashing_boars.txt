@@ -2,8 +2,6 @@ Name:Crashing Boars
 ManaCost:3 G G
 Types:Creature Boar
 PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME attacks, defending player chooses an untapped creature they control. That creature blocks CARDNAME this turn if able.
-SVar:TrigChoose:DB$ ChooseCard | Defined$ DefendingPlayer | Amount$ 1 | Choices$ Creature.untapped+DefenderCtrl | Mandatory$ True | SubAbility$ DBMustBlock
-SVar:DBMustBlock:DB$ MustBlock | Defined$ ChosenCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_boars.jpg
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBMustBlock | TriggerDescription$ Whenever CARDNAME attacks, defending player chooses an untapped creature they control. That creature blocks CARDNAME this turn if able.
+SVar:DBMustBlock:DB$ MustBlock | Choices$ Creature.untapped+DefenderCtrl | Chooser$ DefendingPlayer
 Oracle:Whenever Crashing Boars attacks, defending player chooses an untapped creature they control. That creature blocks Crashing Boars this turn if able.

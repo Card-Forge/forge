@@ -5,8 +5,7 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.
 A:AB$ Token | Cost$ Discard<1/Card.namedBaru, Fist of Krosa> | TokenAmount$ 1 | TokenScript$ g_x_x_wurm | TokenOwner$ You | LegacyImage$ g x x wurm fut | TokenPower$ X | TokenToughness$ X | CostDesc$ Grandeur — Discard another card named CARDNAME: | References$ X | SpellDescription$ Create an X/X green Wurm creature token, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
-SVar:TrigPump:DB$PumpAll | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 SVar:BuffedBy:Forest
 DeckHints:Name$Baru, Fist of Krosa
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136155.jpg
 Oracle:Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.\nGrandeur — Discard another card named Baru, Fist of Krosa: Create an X/X green Wurm creature token, where X is the number of lands you control.
