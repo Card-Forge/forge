@@ -525,14 +525,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
 
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(cost.getLKIList().size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
+        
+        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinAction", String.valueOf(c)), ability)) {
+            return null;
+        }
+
         return PaymentDecision.number(c);
     }
 
