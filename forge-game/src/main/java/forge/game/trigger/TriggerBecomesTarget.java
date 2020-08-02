@@ -68,13 +68,19 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
+            SpellAbility source = (SpellAbility) runParams.get(AbilityKey.SourceSA);
+            if (source == null) {
                 return false;
+            }
+            String valid[] = getParam("ValidSource").split(",");
+            if (!matchesValid(source, valid, getHostCard())) {
+                if (!matchesValid(source.getHostCard(), valid, getHostCard())) {
+                    return false;
+                }
             }
         }
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","),
-                    this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","), getHostCard())) {
                 return false;
             }
         }
