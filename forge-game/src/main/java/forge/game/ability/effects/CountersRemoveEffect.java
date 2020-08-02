@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
@@ -109,7 +110,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             // Removing energy
             if (!sa.usesTargeting() || tgtPlayer.canBeTargetedBy(sa)) {
                 if (type.equals("All")) {
-                    for (Map.Entry<CounterType, Integer> e : tgtPlayer.getCounters().entrySet()) {
+                    for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
                         tgtPlayer.subtractCounter(e.getKey(), e.getValue());
                     }
                 } else {
@@ -152,7 +153,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                 final Zone zone = game.getZoneOf(gameCard);
                 if (type.equals("All")) {
-                    for (Map.Entry<CounterType, Integer> e : gameCard.getCounters().entrySet()) {
+                    for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
                         gameCard.subtractCounter(e.getKey(), e.getValue());
                     }
                     game.updateLastStateForCard(gameCard);
