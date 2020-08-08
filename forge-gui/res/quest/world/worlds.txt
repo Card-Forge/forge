@@ -32,6 +32,6 @@ Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E,
 Name:Ixalan|Sets:XLN, RIX
 Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
 Name:Kaladesh|Sets:AER, KLD, MPS
-Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA
+Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM
 Name:Tarkir|Sets:KTK, FRF, DTK
 Name:Alara|Sets:ALA, CON, ARB
