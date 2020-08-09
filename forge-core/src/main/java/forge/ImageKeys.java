@@ -122,7 +122,7 @@ public final class ImageKeys {
             file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
             if (file != null) { return file; }
             // if there's an art variant try without it for .full images
-            file = findFile(dir, filename.replaceAll("[0-9].full]",".full"));
+            file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
             if (file != null) { return file; }
             // if there's a 1st art variant try with it for .full images
             file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
