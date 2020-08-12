@@ -229,6 +229,13 @@ public class BoosterGenerator {
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
                     : slotType.trim();
 
+            if (sheetKey.startsWith("wholeSheet")) {
+                PrintSheet ps = getPrintSheet(sheetKey);
+                result.addAll(ps.all());
+                sheetsUsed.add(ps);
+                continue;
+            }
+
             slotType = slotType.split("[ :!]")[0]; // add expansion symbol here?
 
             boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
@@ -438,9 +445,10 @@ public class BoosterGenerator {
 
             String mainCode = itMod.next();
 
-            if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9)) { // custom print sheet
-
-                String sheetName = StringUtils.strip(mainCode.substring(9), "()\" ");
+            if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9) ||
+                    mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
+            ) { // custom print sheet
+                String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
