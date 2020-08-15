@@ -1,13 +1,16 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -93,8 +96,21 @@ public class RepeatEachAi extends SpellAbilityAi {
                     }
                 }
             }
-            // would not hit oppoent, don't do that
+            // would not hit opponent, don't do that
             return hitOpp;
+        } else if ("EquipAll".equals(logic)) {
+            if (aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1, aiPlayer)) {
+                final CardCollection unequipped = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        return card.isEquipment() && card.getAttachedTo() != sa.getHostCard();
+                    }
+                });
+
+                return !unequipped.isEmpty();
+            }
+
+            return false;
         }
 
         // TODO Add some normal AI variability here
