@@ -4175,7 +4175,7 @@ Wind-Scarred Crag|M21
 1 Havoc Jester|M21
 1 Hobblefiend|M21
 1 Pitchburn Devils|M21
-1 Act of Treason|M21
+1 Act of Treason|JMP
 1 Traitorous Greed|M21
 1 Dance with Devils|JMP
 1 Collateral Damage|JMP
@@ -4399,9 +4399,9 @@ Wind-Scarred Crag|M21
 1 Bathe in Dragonfire|JMP
 1 Dragon Fodder|JMP
 1 Draconic Roar|JMP
-1 Thrill of Possibility|JMP
+1 Thrill of Possibility|M21
 1 Thriving Bluff|JMP
-8 Mountains|JMP|1
+8 Mountain|JMP|1
 
 [JMP Dragons 2]
 1 Lathliss, Dragon Queen|JMP
@@ -4416,7 +4416,7 @@ Wind-Scarred Crag|M21
 1 Draconic Roar|JMP
 1 Sarkhan's Rage|JMP
 1 Thriving Bluff|JMP
-8 Mountains|JMP|1
+8 Mountain|JMP|1
 
 [JMP Elves 1]
 1 Craterhoof Behemoth|JMP
@@ -5180,7 +5180,7 @@ Wind-Scarred Crag|M21
 1 Goremand|M21
 1 Crypt Lurker|M21
 1 Exhume|JMP
-1 Funeral Rites|M21
+1 Funeral Rites|JMP
 1 Rise Again|M21
 1 Eliminate|M21
 1 Zombie Infestation|JMP
@@ -5751,7 +5751,7 @@ Wind-Scarred Crag|M21
 1 Malakir Familiar|JMP
 1 Tempting Witch|JMP
 1 Bloodhunter Bat|JMP
-1 Cauldron Familiar
+1 Cauldron Familiar|JMP
 2 Festering Newt|JMP
 1 Bake into a Pie|JMP
 1 Finishing Blow|M21
@@ -5810,14 +5810,14 @@ Wind-Scarred Crag|M21
 
 [JMP Wizards 3]
 1 Talrand, Sky Summoner|JMP
-1 Sage's Row Savant|M21
+1 Sage's Row Savant|JMP
 1 Shipwreck Dowser|M21
 1 Vodalian Arcanist|M21
 1 Teferi's Protege|M21|1
-1 Talrand's Invocation|M21
-1 Winged Words|M21
+1 Talrand's Invocation|JMP
+1 Winged Words|JMP
 1 Read the Tides|M21
-1 Wizard's Retort|M21
+1 Wizard's Retort|JMP
 1 Unsubstantiate|M21
 1 Opt|M21
 1 Capture Sphere|M21
