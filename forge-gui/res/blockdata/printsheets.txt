@@ -6173,3 +6173,6 @@ Urza's Mine+|2XM
 Urza's Power Plant+|2XM
 Urza's Tower+|2XM
 Wooded Bastion+|2XM
+
+[AKR Box Topper]
+Regal Caracal
