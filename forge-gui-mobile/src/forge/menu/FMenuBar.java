@@ -16,7 +16,7 @@ public class FMenuBar extends Header {
     }
 
     public float getPreferredHeight() {
-        return Math.round(FMenuTab.FONT.getLineHeight() * 1.5f + 2 * FMenuTab.PADDING);
+        return Math.round(FMenuTab.FONT.getLineHeight() * 2f/*fixes touch for tall devices - old value 1.5f*/ + 2 * FMenuTab.PADDING);
     }
 
     public int getTabCount() {
