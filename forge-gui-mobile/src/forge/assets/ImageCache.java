@@ -103,7 +103,8 @@ public class ImageCache {
 
     public static void disposeTexture(){
         for (Texture t: cache.asMap().values()) {
-            t.dispose();
+            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
+                t.dispose();
         }
         CardRenderer.clearcardArtCache();
         clear();
