@@ -997,6 +997,10 @@ public class AiController {
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
                 }
+                // don't equip stuff in main 2 if there's more stuff to cast at the moment
+                if (sa.getApi() == ApiType.Attach && !sa.isCurse() && source.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    p -= 1;
+                }
                 // 1. increase chance of using Surge effects
                 // 2. non-surged versions are usually inefficient
                 if (source.getOracleText().contains("surge cost") && !sa.isSurged()) {
