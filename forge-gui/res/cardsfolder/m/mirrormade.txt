@@ -3,4 +3,8 @@ ManaCost:1 U U
 Types:Enchantment
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Artifact.Other,Enchantment.Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or enchantment on the battlefield.
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:SVar$Z1/Plus.Z2
+SVar:Z1:Count$Valid Artifact.Other+YouCtrl
+SVar:Z2:Count$Valid Enchantment.Other+YouCtrl
 Oracle:You may have Mirrormade enter the battlefield as a copy of any artifact or enchantment on the battlefield.
