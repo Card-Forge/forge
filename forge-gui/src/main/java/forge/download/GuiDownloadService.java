@@ -313,7 +313,7 @@ public abstract class GuiDownloadService implements Runnable {
                             System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         }
                         url = url.substring(0,url.length() - 4) + ".png";
-                        imageUrl = new URL(url);
+                        imageUrl = new URL(TextUtil.fastReplace(url, ".fullborder.", ".full."));
                         conn = (HttpURLConnection) imageUrl.openConnection(p);
                         conn.setInstanceFollowRedirects(false);
                         conn.connect();
