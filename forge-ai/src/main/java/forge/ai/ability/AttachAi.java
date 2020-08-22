@@ -69,11 +69,6 @@ public class AttachAi extends SpellAbilityAi {
             return false;
         }
 
-        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !"Curse".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
         // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
         	return false;
