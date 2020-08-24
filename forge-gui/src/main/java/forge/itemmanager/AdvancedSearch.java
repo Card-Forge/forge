@@ -399,7 +399,7 @@ public class AdvancedSearch {
             @Override
             protected Integer getItemValue(InventoryItem input) {
                 if (!(input instanceof PaperCard)) {
-                    return 0;
+                    return null;
                 }
                 CardRules rules = ((PaperCard)input).getRules();
                 if (rules.getType().isCreature()) {
@@ -412,7 +412,7 @@ public class AdvancedSearch {
             @Override
             protected Integer getItemValue(InventoryItem input) {
                 if (!(input instanceof PaperCard)) {
-                    return 0;
+                    return null;
                 }
                 CardRules rules = ((PaperCard)input).getRules();
                 if (rules.getType().isCreature()) {
