@@ -31,6 +31,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestRegion;
+import forge.quest.QuestSpellShop;
 import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
@@ -447,6 +448,24 @@ public class AdvancedSearch {
                     return CardRarity.Special;
                 }
                 return ((PaperCard)input).getRarity();
+            }
+        }),
+        INVITEM_BUY_PRICE("lblBuyPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_SELL_PRICE("lblSellPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceSellGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_USED_IN_QUEST_DECKS("lblUsedInQuestDecks", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 100) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) Integer.parseInt((String) QuestSpellShop.fnDeckGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1)));
             }
         }),
         DECK_NAME("lblName", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
