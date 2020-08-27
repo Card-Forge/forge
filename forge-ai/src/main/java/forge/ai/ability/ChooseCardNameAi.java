@@ -54,7 +54,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO - there is no AILogic implemented yet
-        return false;
+        return mandatory;
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
