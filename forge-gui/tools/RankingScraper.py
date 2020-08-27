@@ -45,8 +45,8 @@ def smdsRankings(edition='EldritchMoon', name='Eldritch Moon'):
 
 	return True
 	
-def draftsimRankings(edition='SOI', name='Shadows over Innistrad'):
-	r = requests.get("http://draftsim.com/%s.js" % edition)
+def draftsimRankings(edition='2XM', name='Double Masters'):
+	r = requests.get("http://draftsim.com/generated/%s.js" % edition)
 	tx = r.text
 	start = tx.find('[')
 	end = tx.rfind(']')
