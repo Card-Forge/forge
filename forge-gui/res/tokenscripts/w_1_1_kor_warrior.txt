@@ -1,0 +1,6 @@
+Name:Kor Warrior
+ManaCost:no cost
+Types:Creature Kor Warrior
+Colors:white
+PT:1/1
+Oracle:

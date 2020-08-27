@@ -3,7 +3,7 @@ Name:Random Standard
 Name:Random Pioneer
 Name:Random Modern
 Name:Random Commander
-Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU
+Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
 Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E|Banned:Chaos Orb; Falling Star
@@ -11,7 +11,7 @@ Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH|Banned:Chaos Orb; F
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM, GRN, GK1, RNA, GK2, WAR|Banned:Chaos Orb; Falling Star
 Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
 Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE, BFZ|Banned:Chaos Orb; Falling Star
-Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEB|Banned:Chaos Orb
+Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition|Sets:LEA, LEB|Banned:Chaos Orb
 Name:Rabiah|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
 Name:Terisiare: The Brothers' War|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
 Name:Dominaria|Dir:1994-06 Legends|Sets:LEG, DOM|Banned:Arena of the Ancients; Falling Star; Karakas
