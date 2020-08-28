@@ -4,7 +4,7 @@ Date=2020-01-24
 Name=Theros: Beyond Death
 MciCode=thb
 Type=Expansion
-BoosterCovers=5
+BoosterCovers=3
 Booster=10 Common:!fromSheet("THB Secret Cards"), 3 Uncommon:!fromSheet("THB Secret Cards"), 1 RareMythic:!fromSheet("THB Secret Cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 
