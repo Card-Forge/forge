@@ -679,6 +679,9 @@ public class CardFactory {
             if (sa.hasParam("SetToughness")) {
                 state.setBaseToughness(Integer.parseInt(sa.getParam("SetToughness")));
             }
+            if (sa.hasParam("SetLoyalty")) {
+                state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
+            }
 
 
             // triggers to add to clone
