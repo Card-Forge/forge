@@ -5,7 +5,7 @@ Name=Ikoria: Lair of Behemoths
 Code2=IKO
 MciCode=iko
 Type=Expansion
-BoosterCovers=5
+BoosterCovers=3
 Booster=10 Common:!fromSheet("IKO Secret Cards"), 3 Uncommon:!fromSheet("IKO Secret Cards"), 1 RareMythic:!fromSheet("IKO Secret Cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 
