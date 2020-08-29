@@ -348,7 +348,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             }
         }).build());
 
-        protected FLabel lblSelectAll = add(new FLabel.Builder().text("Select All"/*localizer.getMessage("lblSellAllExtras")*/)
+        protected FLabel lblSelectAll = add(new FLabel.Builder().text(localizer.getMessage("lblSelectAllCards"))
                 .icon(Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
                 .command(new FEventHandler() {
                     @Override
