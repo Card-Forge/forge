@@ -24,6 +24,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestSpellShop;
 import forge.quest.QuestUtil;
 import forge.screens.TabPageScreen;

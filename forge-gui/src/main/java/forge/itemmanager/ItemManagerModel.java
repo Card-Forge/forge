@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
@@ -132,7 +133,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
-        private final List<ItemColumn> colsToSort = new ArrayList<>(3);
+        private final List<ItemColumn> colsToSort = Collections.synchronizedList(new ArrayList<>(3));
         private Sorter sorter = null;
 
         // Adds a column to sort cascade list.
@@ -188,12 +189,15 @@ public final class ItemManagerModel<T extends InventoryItem> {
         private Sorter createSorter() {
             final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
 
-            for (final ItemColumn col : colsToSort) {
-                oneColSorters.add(new ItemPoolSorter<>(
-                        col.getFnSort(),
-                        col.getConfig().getSortState().equals(SortState.ASC)));
+            synchronized (colsToSort) {
+                final Iterator<ItemColumn> it = colsToSort.iterator();
+                while (it.hasNext()) {
+                    final ItemColumn col = it.next();
+                    oneColSorters.add(new ItemPoolSorter<>(
+                            col.getFnSort(),
+                            col.getConfig().getSortState().equals(SortState.ASC)));
+                }
             }
-
             return new Sorter(oneColSorters);
         }
 
