@@ -1,13 +1,6 @@
 package forge.screens.quest;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FImage;
@@ -17,27 +10,28 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
+import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
-import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestSpellShop;
 import forge.quest.QuestUtil;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
-import forge.toolbox.FTextArea;
-import forge.toolbox.GuiChoose;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;
