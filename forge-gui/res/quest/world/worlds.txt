@@ -34,4 +34,4 @@ Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
 Name:Kaladesh|Sets:AER, KLD, MPS
 Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM
 Name:Tarkir|Sets:KTK, FRF, DTK
-Name:Alara|Sets:ALA, CON, ARB
+Name:Alara|Sets:ALA, CFX, ARB
