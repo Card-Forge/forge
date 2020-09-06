@@ -1192,6 +1192,66 @@ public class CardFactoryUtil {
             return doXMath(cl.size(), m, c);
         }
 
+        if (sq[0].contains("Party")) {
+            CardCollection adventurers = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield),
+                    "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", cc, c, null);
+
+            CardCollection changelings = CardLists.getKeyword(cc.getGame().getCardsIn(ZoneType.Battlefield), Keyword.CHANGELING);
+
+            Set<String> partyTypes = new HashSet<>(Arrays.asList(new String[]{"Cleric", "Rogue", "Warrior", "Wizard"}));
+            int partySize = 0;
+
+            HashMap<String, Card> chosenParty = new HashMap<>();
+            List<Card> wildcard = Lists.newArrayList(changelings);
+            HashMap<Card, Set<String>> multityped = new HashMap<>();
+
+            // Figure out how to count each class separately.
+            for (Card card : adventurers) {
+                Set<String> creatureTypes = card.getType().getCreatureTypes();
+                creatureTypes.retainAll(partyTypes);
+
+                if (creatureTypes.size() == 4) {
+                    wildcard.add(card);
+
+                    if (wildcard.size() >= 4) {
+                        break;
+                    }
+                    continue;
+                } else if (creatureTypes.size() == 1) {
+                    String type = (String)(creatureTypes.toArray()[0]);
+
+                    if (!chosenParty.containsKey(type)) {
+                        chosenParty.put(type, card);
+                    }
+                } else {
+                    multityped.put(card, creatureTypes);
+                }
+            }
+
+            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
+
+            if (partySize < 4) {
+                partyTypes.removeAll(chosenParty.keySet());
+
+                // Here I'm left with just the party types that I haven't selected.
+                for(Card multi : multityped.keySet()) {
+                    Set<String> types = multityped.get(multi);
+                    types.retainAll(partyTypes);
+
+                    for(String type : types) {
+                        chosenParty.put(type, multi);
+                        partySize++;
+                        partyTypes.remove(type);
+                        break;
+                    }
+                }
+            }
+
+            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
+
+            return doXMath(partySize, m, c);
+        }
+
         if (sq[0].contains("CardPower")) {
             return doXMath(c.getNetPower(), m, c);
         }
