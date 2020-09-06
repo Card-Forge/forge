@@ -1193,16 +1193,14 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("Party")) {
-            CardCollection adventurers = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield),
+            CardCollection adventurers = CardLists.getValidCards(cc.getCardsIn(ZoneType.Battlefield),
                     "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", cc, c, null);
-
-            CardCollection changelings = CardLists.getKeyword(cc.getGame().getCardsIn(ZoneType.Battlefield), Keyword.CHANGELING);
 
             Set<String> partyTypes = new HashSet<>(Arrays.asList(new String[]{"Cleric", "Rogue", "Warrior", "Wizard"}));
             int partySize = 0;
 
             HashMap<String, Card> chosenParty = new HashMap<>();
-            List<Card> wildcard = Lists.newArrayList(changelings);
+            List<Card> wildcard = Lists.newArrayList();
             HashMap<Card, Set<String>> multityped = new HashMap<>();
 
             // Figure out how to count each class separately.
@@ -1210,7 +1208,7 @@ public class CardFactoryUtil {
                 Set<String> creatureTypes = card.getType().getCreatureTypes();
                 creatureTypes.retainAll(partyTypes);
 
-                if (creatureTypes.size() == 4) {
+                if (creatureTypes.size() == 4 || card.hasKeyword("Changeling")) {
                     wildcard.add(card);
 
                     if (wildcard.size() >= 4) {
@@ -1240,7 +1238,6 @@ public class CardFactoryUtil {
 
                     for(String type : types) {
                         chosenParty.put(type, multi);
-                        partySize++;
                         partyTypes.remove(type);
                         break;
                     }
