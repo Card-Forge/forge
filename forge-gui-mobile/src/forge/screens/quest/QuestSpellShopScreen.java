@@ -1,13 +1,6 @@
 package forge.screens.quest;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FImage;
@@ -17,9 +10,9 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
+import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
-import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
@@ -27,16 +20,18 @@ import forge.model.FModel;
 import forge.quest.QuestSpellShop;
 import forge.quest.QuestUtil;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
-import forge.toolbox.FTextArea;
-import forge.toolbox.GuiChoose;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;
@@ -223,6 +218,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         protected abstract String getVerb();
         protected abstract FSkinImage getVerbIcon();
         protected abstract FDisplayObject getSecondLabel();
+        protected abstract FDisplayObject getSelectAllLabel();
 
         private void activateSelectedItem() {
             final InventoryItem item = itemManager.getSelectedItem();
@@ -272,6 +268,9 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             float y = Utils.scale(2); //move credits label down a couple pixels so it looks better
             float halfWidth = width / 2;
             lblCredits.setBounds(0, y, halfWidth, lblCredits.getAutoSizeBounds().height);
+            if (getSelectAllLabel() != null && Forge.isLandscapeMode()) {
+                getSelectAllLabel().setBounds(lblCredits.getAutoSizeBounds().width + 2, y, halfWidth, lblCredits.getHeight());
+            }
             getSecondLabel().setBounds(halfWidth, y, halfWidth, lblCredits.getHeight());
             itemManager.setBounds(0, lblCredits.getHeight(), width, height - lblCredits.getHeight());
         }
@@ -314,6 +313,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         protected FDisplayObject getSecondLabel() {
             return lblSellPercentage;
         }
+
+        @Override
+        protected FDisplayObject getSelectAllLabel() {
+            return null;
+        }
     }
 
     private static class InventoryPage extends SpellShopBasePage {
@@ -337,6 +341,30 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 });
             }
         }).build());
+
+        protected FLabel lblSelectAll = add(new FLabel.Builder().text(localizer.getMessage("lblSelectAllCards"))
+                .icon(Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
+                .command(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        //invoke in background thread so other dialogs can be shown properly
+                        FThreads.invokeInBackgroundThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!itemManager.getMultiSelectMode()) {
+                                    itemManager.toggleMultiSelectMode(0);
+                                }
+                                itemManager.selectAll();
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        parentScreen.updateCreditsLabel();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }).build());
 
         private InventoryPage() {
             super(localizer.getMessage("lblYourCards"), FSkinImage.QUEST_BOX, false);
@@ -373,6 +401,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         @Override
         protected FDisplayObject getSecondLabel() {
             return lblSellExtras;
+        }
+
+        @Override
+        protected FDisplayObject getSelectAllLabel() {
+            return lblSelectAll;
         }
     }
 }
