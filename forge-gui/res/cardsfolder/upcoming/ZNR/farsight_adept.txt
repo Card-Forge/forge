@@ -1,0 +1,8 @@
+Name:Farsight Adept
+ManaCost:2 W
+Types:Creature Kor Wizard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you and target opponent each draw a card.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | NumCards$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:When Farsight Adept enters the battlefield, you and target opponent each draw a card.
