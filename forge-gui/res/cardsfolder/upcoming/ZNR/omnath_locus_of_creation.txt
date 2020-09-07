@@ -1,0 +1,18 @@
+Name:Omnath, Locus of Creation
+ManaCost:R G W U
+Types:Legendary Creature Elemental
+PT:4/4
+T:Mode$ TurnBegin | ValidPlayer$ Player | Static$ True | TriggerZones$ Battlefield | Execute$ LandfallReset
+SVar:LandfallReset:DB$ StoreSVar | SVar$ LandfallAmount | Type$ Number | Expression$ 0 | References$ LandfallAmount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | CheckSVar$ LandfallAmount | SVarCompare$ EQ0 | References$ LandfallAmount | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | SubAbility$ LandfallCount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAddMana | CheckSVar$ LandfallAmount | SVarCompare$ EQ1 | References$ LandfallAmount | TriggerDescription$ If it's the second time, add {R}{G}{W}{U}.
+SVar:TrigAddMana:DB$ Mana | Produced$ R G W U | SubAbility$ LandfallCount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamageAll | CheckSVar$ LandfallAmount | SVarCompare$ EQ2 | References$ LandfallAmount | TriggerDescription$ If it's the third time, CARDNAME deals 4 damage to each opponent and each planeswalker you don't control.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | ValidCards$ Planeswalker.YouDontCtrl | NumDmg$ 4 | SubAbility$ LandfallCount
+SVar:LandfallCount:DB$ StoreSVar | SVar$ LandfallAmount | Type$ CountSVar | Expression$ LandfallAmount/Plus.1
+SVar:LandfallAmount:Number$0
+DeckHas:Ability$LifeGain
+Oracle:When Omnath, Locus of Creation enters the battlefield, draw a card.\nLandfall - Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.
