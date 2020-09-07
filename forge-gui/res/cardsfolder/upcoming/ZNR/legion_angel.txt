@@ -1,0 +1,8 @@
+Name:Legion Angel
+ManaCost:2 W W
+Types:Creature Angel Warrior
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may reveal a card you own named Legion Angel from outside the game and put it into your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | Reveal$ True | ChangeType$ Card.YouOwn+namedLegion Angel | ChangeNum$ 1
+Oracle:Flying\nWhen Legion Angel enters the battlefield, you may reveal a card you own named Legion Angel from outside the game and put it into your hand.
