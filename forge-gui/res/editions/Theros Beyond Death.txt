@@ -266,8 +266,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 #Statue borderless planeswalkers
 255 M Elspeth, Sun's Nemesis
 256 M Ashiok, Nightmare Muse
-#Constellation Gods and Demigods
 257 M Calix, Destiny's Hand
+#Constellation Gods and Demigods
 258 U Daxos, Blessed by the Sun
 259 M Heliod, Sun-Crowned
 260 U Callaphe, Beloved of the Sea
@@ -311,7 +311,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 295 R Terror of Mount Velus
 296 R Ironscale Hydra
 297 R Treeshaker Chimera
-#Borderless art rares and mythics
+#Extended art rares and mythics
 298 R Archon of Sun's Grace
 299 R Eidolon of Obstruction
 300 R Heliod's Intervention

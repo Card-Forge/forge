@@ -1556,39 +1556,6 @@ Evolving Wilds
 13 Swamp|M20
 
 [ELD Secret Cards]
-Garruk, Cursed Huntsman|ELD|2
-Oko, Thief of Crowns|ELD|2
-The Royal Scions|ELD|2
-Ardenvale Tactician|ELD|2
-Faerie Guidemother|ELD|2
-Giant Killer|ELD|2
-Lonesome Unicorn|ELD|2
-Realm-Cloaked Giant|ELD|2
-Shepherd of the Flock|ELD|2
-Silverflame Squire|ELD|2
-Animating Faerie|ELD|2
-Brazen Borrower|ELD|2
-Fae of Wishes|ELD|2
-Hypnotic Sprite|ELD|2
-Merfolk Secretkeeper|ELD|2
-Queen of Ice|ELD|2
-Foulmire Knight|ELD|2
-Murderous Rider|ELD|2
-Order of Midnight|ELD|2
-Reaper of Night|ELD|2
-Smitten Swordmaster|ELD|2
-Bonecrusher Giant|ELD|2
-Embereth Shieldbreaker|ELD|2
-Merchant of the Vale|ELD|2
-Rimrock Knight|ELD|2
-Beanstalk Giant|ELD|2
-Curious Pair|ELD|2
-Flaxen Intruder|ELD|2
-Garenbrig Carver|ELD|2
-Lovestruck Beast|ELD|2
-Rosethorn Acolyte|ELD|2
-Tuinvale Treefolk|ELD|2
-Oakhame Ranger|ELD|2
 Kenrith, the Returned King
 Rowan, Fearless Sparkmage
 Garrison Griffin
@@ -1705,20 +1672,6 @@ Deathbellow War Cry
 Terror of Mount Velus
 Ironscale Hydra
 Treeshaker Chimera
-Elspeth, Sun's Nemesis|THB|2
-Ashiok, Nightmare Muse|THB|2
-Calix, Destiny's Hand|THB|2
-Daxos, Blessed by the Sun|THB|2
-Heliod, Sun-Crowned|THB|2
-Callaphe, Beloved of the Sea|THB|2
-Thassa, Deep-Dwelling|THB|2
-Erebos, Bleak-Hearted|THB|2
-Tymaret, Chosen from Death|THB|2
-Anax, Hardened in the Forge|THB|2
-Purphoros, Bronze-Blooded|THB|2
-Nylea, Keen-Eyed|THB|2
-Renata, Called to the Hunt|THB|2
-Klothys, God of Destiny|THB|2
 Archon of Sun's Grace|THB|2
 Eidolon of Obstruction|THB|2
 Heliod's Intervention|THB|2
@@ -3635,44 +3588,6 @@ Kaya, Ghost Assassin|CN2|2
 
 [IKO Secret Cards]
 Zilortha, Strength Incarnate
-Lukka, Coppercoat Outcast|IKO|2
-Vivien, Monsters' Advocate|IKO|2
-Narset of the Ancient Way|IKO|2
-Cubwarden|IKO|2
-Huntmaster Liger|IKO|2
-Majestic Auricorn|IKO|2
-Vulpikeet|IKO|2
-Archipelagore|IKO|2
-Dreamtail Heron|IKO|2
-Pouncing Shoreshark|IKO|2
-Sea-Dasher Octopus|IKO|2
-Cavern Whisperer|IKO|2
-Chittering Harvester|IKO|2
-Dirge Bat|IKO|2
-Insatiable Hemophage|IKO|2
-Cloudpiercer|IKO|2
-Everquill Phoenix|IKO|2
-Porcuparrot|IKO|2
-Auspicious Starrix|IKO|2
-Gemrazer|IKO|2
-Glowstone Recluse|IKO|2
-Migratory Greathorn|IKO|2
-Boneyard Lurker|IKO|2
-Brokkos, Apex of Forever|IKO|2
-Illuna, Apex of Wishes|IKO|2
-Lore Drakkis|IKO|2
-Necropanther|IKO|2
-Nethroi, Apex of Death|IKO|2
-Parcelbeast|IKO|2
-Regal Leosaur|IKO|2
-Snapdax, Apex of the Hunt|IKO|2
-Trumpeting Gnarr|IKO|2
-Vadrok, Apex of Thunder|IKO|2
-Indatha Triome|IKO|2
-Ketria Triome|IKO|2
-Raugrin Triome|IKO|2
-Savai Triome|IKO|2
-Zagoth Triome|IKO|2
 Drannith Magistrate|IKO|2
 Lavabrink Venturer|IKO|2
 Luminous Broodmoth|IKO|2
@@ -3750,47 +3665,6 @@ Crystalline Giant|IKO|3
 
 [M21 Secret Cards]
 Rin and Seri, Inseparable
-Ugin, the Spirit Dragon|M21|2
-Basri Ket|M21|2
-Teferi, Master of Time|M21|5
-Liliana, Waker of the Dead|M21|2
-Chandra, Heart of Fire|M21|2
-Garruk, Unleashed|M21|2
-Ugin, the Spirit Dragon|M21|3
-Basri Ket|M21|3
-Basri's Acolyte|M21|2
-Basri's Lieutenant|M21|2
-Basri's Solidarity|M21|2
-Teferi, Master of Time|M21|6
-Teferi, Master of Time|M21|7
-Teferi, Master of Time|M21|8
-Teferi, Master of Time|M21|9
-Teferi's Ageless Insight|M21|2
-Teferi's Protege|M21|2
-Teferi's Tutelage|M21|2
-Liliana, Waker of the Dead|M21|3
-Liliana's Devotee|M21|2
-Liliana's Standard Bearer|M21|2
-Liliana's Steward|M21|2
-Chandra, Heart of Fire|M21|3
-Chandra's Incinerator|M21|2
-Chandra's Magmutt|M21|2
-Chandra's Pyreling|M21|2
-Garruk, Unleashed|M21|3
-Garruk's Gorehorn|M21|2
-Garruk's Harbinger|M21|2
-Garruk's Uprising|M21|2
-Plains|M21|4
-Island|M21|4
-Swamp|M21|4
-Mountain|M21|4
-Forest|M21|4
-Containment Priest|M21|2
-Grim Tutor|M21|2
-Massacre Wurm|M21|2
-Cultivate|M21|2
-Scavenging Ooze|M21|2
-Solemn Simulacrum|M21|2
 Basri, Devoted Paladin
 Adherent of Hope
 Basri's Aegis
