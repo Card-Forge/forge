@@ -1206,9 +1206,10 @@ public class CardFactoryUtil {
             // Figure out how to count each class separately.
             for (Card card : adventurers) {
                 Set<String> creatureTypes = card.getType().getCreatureTypes();
+                boolean anyType = creatureTypes.contains("AllCreatureTypes");
                 creatureTypes.retainAll(partyTypes);
 
-                if (creatureTypes.size() == 4 || card.hasKeyword("Changeling")) {
+                if (anyType || creatureTypes.size() == 4) {
                     wildcard.add(card);
 
                     if (wildcard.size() >= 4) {
