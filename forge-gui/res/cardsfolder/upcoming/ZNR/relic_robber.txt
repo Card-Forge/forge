@@ -1,0 +1,8 @@
+Name:Relic Robber
+ManaCost:2 R
+Types:Creature Goblin Rogue
+PT:2/2
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player creates a 0/1 colorless Goblin Construct artifact creature token with "This creature can't block" and "At the beginning of your upkeep, this creature deals 1 damage to you."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_a_goblin_construct_noblock_ping | TokenOwner$ TriggeredTarget
+Oracle:Haste\nWhenever Relic Robber deals combat damage to a player, that player creates a 0/1 colorless Goblin Construct artifact creature token with "This creature can't block" and "At the beginning of your upkeep, this creature deals 1 damage to you."

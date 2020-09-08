@@ -1,0 +1,8 @@
+Name:Goblin Construct
+ManaCost:no cost
+PT:0/1
+Types:Artifact Creature Goblin Construct
+K:CARDNAME can't block.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+Oracle:This creature can't block.\nAt the beginning of your upkeep, this creature deals 1 damage to you.

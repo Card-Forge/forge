@@ -1,0 +1,8 @@
+Name:Expedition Skulker
+ManaCost:1 B
+Types:Creature Vampire Rogue
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has deathtouch as long as you control another Rogue.
+SVar:X:Count$Valid Rogue.Other+YouCtrl
+DeckHints:Type$Rogue
+Oracle:Expedition Skulker has deathtouch as long as you control another Rogue.
