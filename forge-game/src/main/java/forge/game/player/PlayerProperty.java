@@ -6,7 +6,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -269,10 +268,11 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("hasFewer")) {
+            final String cardType = property.split("sIn")[0].substring(8);
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
-            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), Presets.CREATURES);
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), Presets.CREATURES);
+            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), CardPredicates.isType(cardType));
+            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), CardPredicates.isType(cardType));
             if (oppList.size() >= yourList.size()) {
                 return false;
             }
