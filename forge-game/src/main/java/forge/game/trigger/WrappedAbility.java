@@ -40,6 +40,7 @@ public class WrappedAbility extends Ability {
             ApiType.GainLife,
             ApiType.LoseLife,
             ApiType.ChangeZone,
+            ApiType.Destroy,
             ApiType.Token
             );
 

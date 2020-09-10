@@ -126,7 +126,6 @@ public class DamageDealEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Player activationPlayer = sa.getActivatingPlayer();
         final Game game = hostCard.getGame();
 
         final String damage = sa.getParam("NumDmg");
@@ -152,22 +151,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
         }
 
-        final boolean targeted = (sa.usesTargeting());
-
-        if (sa.hasParam("Radiance") && targeted) {
-            Card origin = null;
-            for (int i = 0; i < tgts.size(); i++) {
-                if (tgts.get(i) instanceof Card) {
-                    origin = (Card) tgts.get(i);
-                    break;
-                }
-            }
-            // Can't radiate from a player
-            if (origin != null) {
-                tgts.addAll(CardUtil.getRadiance(hostCard, origin,
-                        sa.getParam("ValidTgts").split(",")));
-            }
-        }
+        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         final boolean remember = sa.hasParam("RememberDamaged");
 
@@ -236,7 +220,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 tgts = AbilityUtils.getDefinedObjects(source, sa.getParam("Defined"), sa);
             }
 
-            for (final Object o : tgts) {
+            for (final GameObject o : tgts) {
                 if (!removeDamage) {
                     dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
                     if (dmg <= 0) {
@@ -250,40 +234,19 @@ public class DamageDealEffect extends DamageBaseEffect {
                         // timestamp different or not in play
                         continue;
                     }
-                    if (!targeted || c.canBeTargetedBy(sa)) {
-                        if (removeDamage) {
-                            c.setDamage(0);
-                            c.setHasBeenDealtDeathtouchDamage(false);
-                            c.clearAssignedDamage();
-                        } else {
-                            if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
-                                    sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
-                                // excess damage explicit says toughness, not lethal damage in the rules
-                                int lethal = c.getLethalDamage();
-                                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
-                                    lethal = Math.min(lethal, 1);
-                                }
-                                int dmgToTarget = Math.min(lethal, dmg);
-
-                                c.addDamage(dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
-
-                                List<GameEntity> list = Lists.newArrayList();
-                                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
-                                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
-
-                                if (!list.isEmpty()) {
-                                    list.get(0).addDamage(dmg - dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
-                                }
-                            } else {
-                                c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
-                            }
-                        }
+                    if (!sa.usesTargeting() || gc.canBeTargetedBy(sa)) {
+                        internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap, preventMap, counterTable);
                     }
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
-                    if (!targeted || p.canBeTargetedBy(sa)) {
+                    if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                         p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
                     }
+                }
+            }
+            for (final Card unTgtC : untargetedCards) {
+                if (unTgtC.isInPlay()) {
+                    internalDamageDeal(sa, sourceLKI, unTgtC, dmg, damageMap, preventMap, counterTable);
                 }
             }
 
@@ -301,5 +264,38 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
         counterTable.triggerCountersPutAll(game);
         replaceDying(sa);
+    }
+
+    protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageMap damageMap, CardDamageMap preventMap, GameEntityCounterTable counterTable) {
+        final Card hostCard = sa.getHostCard();
+        final Player activationPlayer = sa.getActivatingPlayer();
+        final boolean noPrevention = sa.hasParam("NoPrevention");
+
+        if (sa.hasParam("Remove")) {
+            c.setDamage(0);
+            c.setHasBeenDealtDeathtouchDamage(false);
+            c.clearAssignedDamage();
+        } else {
+            if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+                    sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
+                int lethal = c.getLethalDamage();
+                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
+                    lethal = Math.min(lethal, 1);
+                }
+                int dmgToTarget = Math.min(lethal, dmg);
+
+                c.addDamage(dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+
+                List<GameEntity> list = Lists.newArrayList();
+                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
+                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
+
+                if (!list.isEmpty()) {
+                    list.get(0).addDamage(dmg - dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                }
+            } else {
+                c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+            }
+        }
     }
 }
