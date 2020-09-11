@@ -1,0 +1,10 @@
+Name:Ardent Electromancer
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add {R} for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X | References$ X
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior
+Oracle:When Ardent Electromancer enters the battlefield, add {R} for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
