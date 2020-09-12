@@ -10,7 +10,7 @@ Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E|Banned:Chaos Orb; Falling St
 Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH|Banned:Chaos Orb; Falling Star
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM, GRN, GK1, RNA, GK2, WAR|Banned:Chaos Orb; Falling Star
 Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
-Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE, BFZ|Banned:Chaos Orb; Falling Star
+Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE, BFZ, ZNR|Banned:Chaos Orb; Falling Star
 Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEA, LEB|Banned:Chaos Orb
 Name:Rabiah|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
 Name:Terisiare: The Brothers' War|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
@@ -32,6 +32,6 @@ Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E,
 Name:Ixalan|Sets:XLN, RIX
 Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
 Name:Kaladesh|Sets:AER, KLD, MPS
-Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM
+Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR
 Name:Tarkir|Sets:KTK, FRF, DTK
 Name:Alara|Sets:ALA, CFX, ARB
