@@ -1,0 +1,8 @@
+Name:Marauding Blight-Priest
+ManaCost:2 B
+Types:Creature Vampire Cleric
+PT:3/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, each opponent loses 1 life.

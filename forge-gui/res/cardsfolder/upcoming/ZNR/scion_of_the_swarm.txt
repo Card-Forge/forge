@@ -1,0 +1,10 @@
+Name:Scion of the Swarm
+ManaCost:3 B B
+Types:Creature Vampire Cleric
+PT:3/3
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you gain life, put a +1/+1 counter on Scion of the Swarm.
