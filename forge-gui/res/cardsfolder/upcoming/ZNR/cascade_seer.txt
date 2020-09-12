@@ -1,0 +1,10 @@
+Name:Cascade Seer
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry X, where X is the number of creatures in your party.
+SVar:TrigScry:DB$Scry | ScryNum$ X | References$ X
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:When Cascade Seer enters the battlefield, scry X, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
