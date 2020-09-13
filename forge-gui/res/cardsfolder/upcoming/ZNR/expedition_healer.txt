@@ -1,0 +1,8 @@
+Name:Expedition Healer
+ManaCost:1 W
+Types:Creature Kor Cleric
+PT:2/2
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has lifelink as long as you control another Cleric.
+SVar:X:Count$Valid Permanent.YouCtrl+Cleric+Other
+Oracle:Vigilance\nExpedition Healer has lifelink as long as you control another Cleric.
