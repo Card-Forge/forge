@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigScry:DB$ Scry | ScryNum$ X | References$ X
 SVar:X:Count$Party
 DeckHas:Ability$Party
-DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+DeckHints:Type$Cleric|Rogue|Warrior
 Oracle:When Cascade Seer enters the battlefield, scry X, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
