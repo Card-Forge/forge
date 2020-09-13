@@ -6,5 +6,5 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X
 A:AB$ Pump | Cost$ 2 W | ValidTgts$ Cleric.Other | TgtPrompt$ Select another target Cleric | KW$ Lifelink | SpellDescription$ Another target Cleric gains lifelink until end of turn.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat | TokenOwner$ You | SpellDescription$ Whenever you gain life for the first time each turn, create a 1/1 white Cat creature token.
 SVar:X:Count$LifeYouGainedTimesThisTurn
-DeckHints:Ability$LifeGain
+DeckHints:Ability$LifeGain & Type$Cleric
 Oracle:Whenever you gain life for the first time each turn, create a 1/1 white Cat creature token.\n{2}{W}: Another target Cleric gains lifelink until end of turn.
