@@ -1,0 +1,11 @@
+Name:Shepherd of Heroes
+ManaCost:4 W
+Types:Creature Angel Cleric
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | References$ X
+SVar:X:Count$Party/Twice
+DeckHas:Ability$Party
+DeckHints:Type$Rogue|Warrior|Wizard
+Oracle:Flying\nWhen Shepherd of Heroes enters the battlefield, you gain 2 life for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
