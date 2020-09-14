@@ -1,0 +1,19 @@
+Name:Emeria's Call
+ManaCost:4 W W W
+Types:Sorcery
+A:SP$ Token | Cost$ 4 W W W | TokenAmount$ 2 | TokenScript$ w_4_4_angel_warrior_flying | SubAbility$ DBPumpAll | SpellDescription$ Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.nonAngel+YouCtrl | KW$ Indestructible | UntilYourNextTurn$ True
+AlternateMode:Modal
+DeckHas:Ability$Token
+Oracle:Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
+
+ALTERNATE
+
+Name:Emeria, Shattered Skyclave
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:As Emeria, Shattered Skyclave enters the battlefield, you may pay 3 life. If you don’t, it enters the battlefield tapped.\nAdd {W}.
+

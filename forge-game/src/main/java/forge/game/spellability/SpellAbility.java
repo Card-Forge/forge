@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -113,9 +115,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean basicLandAbility = false;
 
-    private boolean adventure = false;
-    private SplitSide splitSide = null;
-    enum SplitSide { LEFT, RIGHT }
+    private CardStateName stateName = null;
 
     private int totalManaSpent = 0;
 
@@ -840,26 +840,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         mayPlay = sta;
     }
 
-    public boolean isLeftSplit() {
-        return splitSide == SplitSide.LEFT;
+    public CardStateName getCardState() {
+        return stateName;
     }
-    public boolean isRightSplit() {
-        return splitSide == SplitSide.RIGHT;
+    public void setCardState(CardStateName stateName0) {
+        this.stateName = stateName0;
     }
-    public void setNoSplit() {
-        splitSide = null;
-    }
-    public void setLeftSplit() {
-        splitSide = SplitSide.LEFT;
-    }
-    public void setRightSplit() {
-        splitSide = SplitSide.RIGHT;
-    }
+
     public boolean isAdventure() {
-        return this.adventure;
-    }
-    public void setAdventure(boolean adventure) {
-        this.adventure = adventure;
+        return this.stateName == CardStateName.Adventure;
     }
 
     public SpellAbility copy() {

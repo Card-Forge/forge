@@ -220,6 +220,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Flipped:
             case Transformed:
             case Meld:
+            case Modal:
                 return true;
             default:
                 return false;

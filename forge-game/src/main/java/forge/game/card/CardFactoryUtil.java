@@ -4817,7 +4817,7 @@ public class CardFactoryUtil {
         if (sa == null) {
             return;
         }
-        sa.setAdventure(true);
+        sa.setCardState(CardStateName.Adventure);
 
         StringBuilder sb = new StringBuilder();
         sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");

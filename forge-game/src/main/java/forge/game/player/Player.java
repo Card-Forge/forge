@@ -1769,7 +1769,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public final void playLandNoCheck(final Card land) {
+    public final Card playLandNoCheck(final Card land) {
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
@@ -1785,6 +1785,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(land), false);
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+        return c;
     }
 
     public final boolean canPlayLand(final Card land) {

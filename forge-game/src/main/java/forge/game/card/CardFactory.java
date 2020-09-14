@@ -240,8 +240,8 @@ public class CardFactory {
                 c.setState(CardStateName.Flipped, false);
                 c.setImageKey(cp.getImageKey(true));
             }
-            else if (c.isDoubleFaced() && cp instanceof PaperCard) {
-                c.setState(CardStateName.Transformed, false);
+            else if (c.hasBackSide() && cp instanceof PaperCard && cardRules != null) {
+                c.setState(cardRules.getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
@@ -251,14 +251,9 @@ public class CardFactory {
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.RightSplit, false);
                 c.setImageKey(originalPicture);
-            } else if (c.isMeldable() && cp instanceof PaperCard) {
-                c.setState(CardStateName.Meld, false);
-                c.setImageKey(cp.getImageKey(true));
             } else if (c.isAdventureCard()) {
                 c.setState(CardStateName.Adventure, false);
                 c.setImageKey(originalPicture);
-                c.setSetCode(cp.getEdition());
-                c.setRarity(cp.getRarity());
             }
 
             c.setSetCode(cp.getEdition());
@@ -272,7 +267,7 @@ public class CardFactory {
     private static void buildAbilities(final Card card) {
 
         for (final CardStateName state : card.getStates()) {
-            if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
+            if (card.hasBackSide() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state, false);
@@ -281,11 +276,7 @@ public class CardFactory {
             // ************** Link to different CardFactories *******************
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 for (final SpellAbility sa : card.getSpellAbilities()) {
-                    if (state == CardStateName.LeftSplit) {
-                        sa.setLeftSplit();
-                    } else {
-                        sa.setRightSplit();
-                    }
+                    sa.setCardState(state);
                 }
                 CardFactoryUtil.setupKeywordedAbilities(card);
                 final CardState original = card.getState(CardStateName.Original);
