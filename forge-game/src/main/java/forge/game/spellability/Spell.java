@@ -227,39 +227,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
             source.turnFaceDownNoUpdate();
             lkicheck = true;
-        } else if (isAdventure()) {
+        } else if (getCardState() != null) {
             if (!source.isLKI()) {
                 source = CardUtil.getLKICopy(source);
             }
-
-            source.setState(CardStateName.Adventure, false);
-
-            // need to reset CMC
-            source.setLKICMC(-1);
-            source.setLKICMC(source.getCMC());
-            lkicheck = true;
-        } else if (source.isSplitCard() && (isLeftSplit() || isRightSplit())) {
-            if (!source.isLKI()) {
-                source = CardUtil.getLKICopy(source);
-            }
-            if (isLeftSplit()) {
-                if (!source.hasState(CardStateName.LeftSplit)) {
-                    source.addAlternateState(CardStateName.LeftSplit, false);
-                    source.getState(CardStateName.LeftSplit).copyFrom(
-                            getHostCard().getState(CardStateName.LeftSplit), true);
-                }
-
-                source.setState(CardStateName.LeftSplit, false);
+            CardStateName stateName = getCardState();
+            if (!source.hasState(stateName)) {
+                source.addAlternateState(stateName, false);
+                source.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
             }
 
-            if (isRightSplit()) {
-                if (!source.hasState(CardStateName.RightSplit)) {
-                    source.addAlternateState(CardStateName.RightSplit, false);
-                    source.getState(CardStateName.RightSplit).copyFrom(
-                            getHostCard().getState(CardStateName.RightSplit), true);
-                }
-
-                source.setState(CardStateName.RightSplit, false);
+            source.setState(stateName, false);
+            if (getHostCard().hasBackSide()) {
+                source.setBackSide(getHostCard().getRules().getSplitType().getChangedStateName().equals(stateName));
             }
 
             // need to reset CMC

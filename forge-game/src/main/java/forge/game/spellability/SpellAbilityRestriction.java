@@ -21,7 +21,6 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -255,7 +254,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.isRightSplit()) {
+                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
                         return false;
                     }
 
@@ -310,8 +309,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
-        final Combat combat = game.getPhaseHandler().getCombat();
 
         if (sa.isSpell()) {
             // Spells should always default to "controller" but use mayPlay check.

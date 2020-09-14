@@ -10,6 +10,7 @@ public enum CardStateName {
     LeftSplit,
     RightSplit,
     Adventure,
+    Modal
 
     ;
 
