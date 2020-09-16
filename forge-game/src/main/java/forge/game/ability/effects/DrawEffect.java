@@ -55,7 +55,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
                 int actualNum = numCards; 
                 if (upto) {
-                    actualNum = p.getController().chooseNumber(sa, "lblHowMayCardDoYouWantDraw", 0, numCards);
+                    actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"),0, numCards);
                 }
 
                 final CardCollectionView drawn = p.drawCards(actualNum, sa);
