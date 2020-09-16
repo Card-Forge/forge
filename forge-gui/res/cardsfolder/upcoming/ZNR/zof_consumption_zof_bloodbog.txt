@@ -1,0 +1,16 @@
+Name:Zof Consumption
+ManaCost:4 B B
+Types:Instant
+A:SP$ LoseLife | Cost$ 4 B B | Defined$ Player.Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 4 life and you gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+AlternateMode:Modal
+Oracle:Each opponent loses 4 life and you gain 4 life.
+
+ALTERNATE
+
+Name:Zof Bloodbog
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:Zof Bloodbog enters the battlefield tapped.\n{T}: Add {B}.
