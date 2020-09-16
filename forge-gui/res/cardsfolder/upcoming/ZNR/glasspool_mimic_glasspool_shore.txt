@@ -1,0 +1,17 @@
+Name:Glasspool Mimic
+ManaCost:2 U
+Types:Creature Shapeshifter Rogue
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl | AddTypes$ Shapeshifter & Rogue | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature you control, except it’s a Shapeshifter Rogue in addition to its other types.
+AlternateMode:Modal
+Oracle:You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it’s a Shapeshifter Rogue in addition to its other types.
+
+ALTERNATE
+
+Name:Glasspool Shore
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Glasspool Shore enters the battlefield tapped.\n{T}: Add {U}.
