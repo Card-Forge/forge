@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -16,14 +17,17 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageKeys;
+import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
+import forge.model.FModel;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventDifficulty;
 import forge.quest.QuestEventDuel;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+import forge.util.storage.IStorage;
 import forge.util.storage.StorageReaderFolder;
 
 public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
@@ -75,7 +79,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
 //            }            
 //        }
         
-        
+        // First I add wild decks in quest directory
         try {
             Files.walkFileTree(directory.toPath(), new SimpleFileVisitor<Path>() {
                 @Override
@@ -107,6 +111,21 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
             e.printStackTrace();
         }
 
+        // then I add wild decks in constructed directory
+        // TODO scan and add constructed decks here
+        IStorage<Deck> constructedDecks = FModel.getDecks().getConstructed();
+        Iterator it = constructedDecks.iterator();
+        while(it.hasNext()) {
+            Deck currDeck = (Deck) it.next();
+            final QuestEventDuel newDeck = read(currDeck);
+            String newKey = keySelector.apply(newDeck);
+            if (result.containsKey(newKey)) {
+                System.err.println("StorageReaderFolder: an object with key " + newKey + " is already present - skipping new entry");
+            } else {
+                result.put(newKey, newDeck);                       
+            }            
+        }
+        
         return result;
     }
 
@@ -141,6 +160,18 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         return qc;
     }
 
+    protected QuestEventDuel read(Deck deck) {
+        final QuestEventDuel qc = new QuestEventDuel();
+        qc.setName(deck.getName());
+        qc.setTitle(deck.getName());
+        qc.setDifficulty(QuestEventDifficulty.WILD);
+        qc.setDescription("Wild opponent");
+        qc.setIconImageKey(ImageKeys.ICON_PREFIX + WILD_DEFAULT_ICON_NAME);        
+        qc.setEventDeck(deck);
+        
+        return qc;
+    }
+    
     @Override
     protected FilenameFilter getFileFilter() { 
         return DeckStorage.DCK_FILE_FILTER;
