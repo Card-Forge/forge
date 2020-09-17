@@ -5,7 +5,7 @@ K:Enchant creature
 K:etbCounter:TASK:4
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | RemoveAllAbilities$ True | AddAbility$ ABRemoveCounter | AddSVar$ DBHeliodsPunishment | Description$ Enchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from CARDNAME. Then if it has no task counters on it, destroy CARDNAME."
-SVar:ABRemoveCounter:AB$ RemoveCounter | Cost$ T | CounterType$ TASK | CounterNum$ 1 | AILogic$ Always | Defined$ OriginalHost | StackDescription$ SpellDescription | SpellDescription$ Remove a task counter from ORIGINALHOST. Then if it has no task counters on it, destroy ORIGINALHOST. | SubAbility$ DBHeliodsPunishment
-SVar:DBHeliodsPunishment:DB$ Destroy | Defined$ OriginalHost | ConditionDefined$ OriginalHost | ConditionPresent$ Card.counters_EQ0_TASK
+SVar:ABRemoveCounter:AB$ RemoveCounter | Cost$ T | CounterType$ TASK | CounterNum$ 1 | AILogic$ Always | Defined$ OriginalHost | StackDescription$ Remove a task counter from {c:OriginalHost}. Then if it has no task counters on it, destroy {c:OriginalHost}. | SpellDescription$ Remove a task counter from ORIGINALHOST. Then if it has no task counters on it, destroy ORIGINALHOST. | SubAbility$ DBHeliodsPunishment
+SVar:DBHeliodsPunishment:DB$ Destroy | Defined$ OriginalHost | ConditionDefined$ OriginalHost | ConditionPresent$ Card.counters_EQ0_TASK | StackDescription$ None
 DeckHas:Ability$Counters
 Oracle:Enchant creature\nHeliod's Punishment enters the battlefield with four task counters on it.\nEnchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from Heliod's Punishment. Then if it has no task counters on it, destroy Heliod's Punishment."

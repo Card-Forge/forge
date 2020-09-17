@@ -1,0 +1,8 @@
+Name:Kaheera, the Orphanguard
+ManaCost:1 G/W G/W
+Types:Legendary Creature Cat Beast
+PT:3/2
+K:Companion:Creature.Cat,Creature.Elemental,Creature.Nightmare,Creature.Dinosaur,Creature.Beast,Card.nonCreature:Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Cat+Other+YouCtrl,Creature.Elemental+YouCtrl,Creature.Nightmare+Other+YouCtrl,Creature.Dinosaur+Other+YouCtrl,Creature.Beast+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1 and has vigilance.
+Oracle:Companion — Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card. (If this card is your chosen companion, you may cast it once from outside the game.)\nVigilance\nEach other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1 and has vigilance.

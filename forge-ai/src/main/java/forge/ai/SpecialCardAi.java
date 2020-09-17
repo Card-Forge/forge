@@ -327,7 +327,7 @@ public class SpecialCardAi {
             boolean canTrample = source.hasKeyword(Keyword.TRAMPLE);
 
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
-                int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterType.LOYALTY);
+                int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterEnumType.LOYALTY);
                 int totalDamageToPW = 0;
                 for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
                     if (combat.isUnblocked(atk)) {
@@ -407,7 +407,7 @@ public class SpecialCardAi {
         }
 
         public static Pair<Integer, Integer> getPumpedPT(Player ai, int power, int toughness) {
-            int energy = ai.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterEnumType.ENERGY);
             if (energy > 0) {
                 int numActivations = energy / 3;
                 for (int i = 0; i < numActivations; i++) {
@@ -708,7 +708,7 @@ public class SpecialCardAi {
             // if there's another reanimator card currently suspended, don't cast a new one until the previous
             // one resolves, otherwise the reanimation attempt will be ruined (e.g. Living End)
             for (Card ex : ai.getCardsIn(ZoneType.Exile)) {
-                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterType.TIME) > 0) {
+                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterEnumType.TIME) > 0) {
                     return false;
                 }
             }
@@ -756,6 +756,37 @@ public class SpecialCardAi {
         }
     }
 
+    // Maze's End
+    public static class MazesEnd {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !availableGates.isEmpty();
+        }
+
+        public static Card considerCardToGet(final Player ai, final SpellAbility sa)
+        {
+            CardCollection currentGates = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Gate"));
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            if (availableGates.isEmpty())
+                return null; // shouldn't get here
+
+            for (Card gate : availableGates)
+            {
+                if (CardLists.filter(currentGates, CardPredicates.nameEquals(gate.getName())).isEmpty())
+                {
+                    // Diversify our mana base
+                    return gate;
+                }
+            }
+
+            // Fetch a random gate if we already have all types
+            return Aggregates.random(availableGates);
+        }
+    }
+
     // Mairsil, the Pretender
     public static class MairsilThePretender {
         // Scan the fetch list for a card with at least one activated ability.
@@ -767,7 +798,7 @@ public class SpecialCardAi {
                         Player controller = c.getController();
                         boolean wasCaged = false;
                         for (Card caged : CardLists.filter(controller.getCardsIn(ZoneType.Exile),
-                                CardPredicates.hasCounter(CounterType.CAGE))) {
+                                CardPredicates.hasCounter(CounterEnumType.CAGE))) {
                             if (c.getName().equals(caged.getName())) {
                                 wasCaged = true;
                                 break;
@@ -1073,7 +1104,7 @@ public class SpecialCardAi {
     // Sarkhan the Mad
     public static class SarkhanTheMad {
         public static boolean considerDig(final Player ai, final SpellAbility sa) {
-            return sa.getHostCard().getCounters(CounterType.LOYALTY) == 1;
+            return sa.getHostCard().getCounters(CounterEnumType.LOYALTY) == 1;
         }
 
         public static boolean considerMakeDragon(final Player ai, final SpellAbility sa) {
@@ -1109,7 +1140,7 @@ public class SpecialCardAi {
     // Sorin, Vengeful Bloodlord
     public static class SorinVengefulBloodlord {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            int loyalty = sa.getHostCard().getCounters(CounterType.LOYALTY);
+            int loyalty = sa.getHostCard().getCounters(CounterEnumType.LOYALTY);
             CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
                     Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
                         @Override
@@ -1365,7 +1396,7 @@ public class SpecialCardAi {
             Card source = sa.getHostCard();
             Game game = source.getGame();
             
-            final int loyalty = source.getCounters(CounterType.LOYALTY);
+            final int loyalty = source.getCounters(CounterEnumType.LOYALTY);
             int x = -1, best = 0;
             Card single = null;
             for (int i = 0; i < loyalty; i++) {

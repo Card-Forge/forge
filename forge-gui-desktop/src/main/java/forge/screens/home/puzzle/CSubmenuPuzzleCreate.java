@@ -15,6 +15,7 @@ import forge.player.GamePlayerUtil;
 import forge.puzzle.Puzzle;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -78,7 +79,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
     }
 
     private void startPuzzleCreate() {
-        String firstPlayer = SGuiChoose.one("Who should be the first to take a turn?",
+        String firstPlayer = SGuiChoose.one(Localizer.getInstance().getMessage("lblWhoShouldBeFirstTakeTurn"),
                 Arrays.asList("Human", "AI"));
 
         final Puzzle emptyPuzzle = new Puzzle(generateEmptyPuzzle(firstPlayer));
@@ -95,11 +96,8 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
         hostedMatch.setStartGameHook(new Runnable() {
             @Override
             public final void run() {
-                SOptionPane.showMessageDialog("Welcome to the Create a Puzzle mode.\n\n"
-                        + "Please make sure that Developer Mode is enabled in Forge preferences.\n"
-                        + "Remember that rule enforcement is active, so players will lose the game\n"
-                        + "for drawing from empty library!",
-                        "Create a New Puzzle", SOptionPane.WARNING_ICON);
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblWelcomePuzzleModeMessage"),
+                        Localizer.getInstance().getMessage("lblCreateNewPuzzle"), SOptionPane.WARNING_ICON);
                 emptyPuzzle.applyToGame(hostedMatch.getGame());
             }
         });

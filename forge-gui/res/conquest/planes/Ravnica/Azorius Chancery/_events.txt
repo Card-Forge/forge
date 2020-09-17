@@ -1,5 +1,5 @@
-Name:Azorious Detain|Deck:Azorious Detain.dck|Variant:None|Avatar:Archon of the Triumvirate|Desc:
-Name:Azorious Forecast|Deck:Azorious Forecast.dck|Variant:None|Avatar:Pride of the Clouds|Desc:
+Name:Azorius Detain|Deck:Azorius Detain.dck|Variant:None|Avatar:Archon of the Triumvirate|Desc:
+Name:Azorius Forecast|Deck:Azorius Forecast.dck|Variant:None|Avatar:Pride of the Clouds|Desc:
 Name:Azor's Elocutors|Deck:Azor's Elocutors.dck|Variant:None|Avatar:Azor's Elocutors|Desc:
 Name:Grand Arbiter Augustin IV|Deck:Grand Arbiter Augustin IV.dck|Variant:Commander|Avatar:Grand Arbiter Augustin IV|Desc:
 Name:Isperia the Inscrutable|Deck:Isperia the Inscrutable.dck|Variant:Commander|Avatar:Isperia the Inscrutable|Desc:

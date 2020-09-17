@@ -1,6 +1,6 @@
 Name:Ainok Guide
 ManaCost:1 G
-Types:Creature Hound Scout
+Types:Creature Dog Scout
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBSearch

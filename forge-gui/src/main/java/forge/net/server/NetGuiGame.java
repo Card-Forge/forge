@@ -41,7 +41,7 @@ public class NetGuiGame extends AbstractGuiGame {
         return sender.sendAndWait(method, args);
     }
 
-    private void updateGameView() {
+    public void updateGameView() {
         send(ProtocolMethod.setGameView, getGameView());
     }
 
@@ -191,12 +191,12 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
-        return sendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, triggerEvent);
+        return sendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, null/*triggerEvent*/); //someplatform don't have mousetriggerevent class or it will not allow them to click/tap
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
-        return sendAndWait(ProtocolMethod.assignDamage, attacker, blockers, damage, defender, overrideOrder);
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+        return sendAndWait(ProtocolMethod.assignCombatDamage, attacker, blockers, damage, defender, overrideOrder);
     }
 
     @Override

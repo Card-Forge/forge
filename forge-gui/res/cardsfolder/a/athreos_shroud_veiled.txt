@@ -4,12 +4,12 @@ Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to white and black is less than seven, CARDNAME isn't a creature.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, put a coin counter on another target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | CounterType$ COIN | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.counters_GE1_COIN | Execute$ TrigReturn | TriggerDescription$ Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | TriggerZones$ Battlefield | Secondary$ True | ValidCard$ Creature.counters_GE1_COIN | Execute$ TrigReturn | TriggerDescription$ Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True
 SVar:X:Count$DevotionDual.White.Black
 SVar:BuffedBy:Permanent.Black,Permanent.White
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, put a coin counter on another target creature.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | CounterType$ COIN | CounterNum$ 1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.counters_GE1_COIN | Execute$ TrigReturn | TriggerDescription$ Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Exile | TriggerZones$ Battlefield | Secondary$ True | ValidCard$ Creature.counters_GE1_COIN | Execute$ TrigReturn | TriggerDescription$ Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True
 DeckHas:Ability$Counters
-Oracle:Indestructible\nAs long as your devotion to white and black is less than seven, Athreos isn’t a creature.\nAt the beginning of your end step, put a coin counter on another target creature.\nWhenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
+Oracle:Indestructible\nAs long as your devotion to white and black is less than seven, Athreos isn't a creature.\nAt the beginning of your end step, put a coin counter on another target creature.\nWhenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.

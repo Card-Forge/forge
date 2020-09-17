@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Creature Zombie Merfolk
 PT:2/1
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top two cards of your library into your graveyard and you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards and you gain 2 life.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBLifeGain
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$Graveyard & Ability$LifeGain
-Oracle:Deathtouch\nWhen Mire Triton enters the battlefield, put the top two cards of your library into your graveyard and you gain 2 life.
+Oracle:Deathtouch\nWhen Mire Triton enters the battlefield, mill two cards and you gain 2 life.

@@ -85,8 +85,8 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -932,7 +932,7 @@ public final class CMatchUI
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker,
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker,
             final List<CardView> blockers, final int damage,
             final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
@@ -949,7 +949,7 @@ public final class CMatchUI
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
+                final VAssignCombatDamage v = new VAssignCombatDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
                 result.set(v.getDamageMap());
             }});
         return result.get();
@@ -966,6 +966,7 @@ public final class CMatchUI
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
         initMatch(players, myPlayers);
+        clearSelectables(); //fix uncleared selection
 
         actuateMatchPreferences();
 
@@ -1078,8 +1079,15 @@ public final class CMatchUI
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        PlayerView controlledPlayer = playerTurn.getMindSlaveMaster();
+        boolean skippedPhase = true;
+        if (controlledPlayer != null) {
+            final PhaseLabel controlledLabel = getFieldViewFor(controlledPlayer).getPhaseIndicator().getLabelFor(phase);
+            skippedPhase = controlledLabel != null && !controlledLabel.getEnabled();
+        }
+
         final PhaseLabel label = getFieldViewFor(playerTurn).getPhaseIndicator().getLabelFor(phase);
-        return label != null && !label.getEnabled();
+        return skippedPhase && label != null && !label.getEnabled();
     }
 
     /**

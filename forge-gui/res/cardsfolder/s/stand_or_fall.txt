@@ -1,11 +1,11 @@
 Name:Stand or Fall
 ManaCost:3 R
 Types:Enchantment
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ ChoosePlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, separate all creatures defending player controls into two piles. Only creatures in the pile of that player's choice can block this turn.
-SVar:ChoosePlayer:DB$ ChoosePlayer | Choices$ Opponent | Defined$ You | AILogic$ LeastCreatures | SubAbility$ DBTwoPiles
-SVar:DBTwoPiles:DB$ TwoPiles | Defined$ ChosenPlayer | Chooser$ ChosenPlayer | Zone$ Battlefield | ValidCards$ Creature.ChosenCtrl | Separator$ You | ChosenPile$ DBOnlyBlock | AILogic$ Best
-SVar:DBOnlyBlock:DB$ PumpAll | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidCards$ Card.Creature+IsNotRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ RepeatPlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, for each defending player, separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn.
+SVar:RepeatPlayer:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBTwoPiles | SubAbility$ DBOnlyBlock
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ Player.IsRemembered | Chooser$ Player.IsRemembered | Zone$ Battlefield | ValidCards$ Creature.RememberedPlayerCtrl | Separator$ You | ChosenPile$ DBRemember | AILogic$ Best
+SVar:DBRemember:DB$ Pump | ImprintCards$ Remembered
+SVar:DBOnlyBlock:DB$ PumpAll | KW$ HIDDEN CARDNAME can't block. | ValidCards$ Creature.OppCtrl+IsNotImprinted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_or_fall.jpg
-Oracle:At the beginning of combat on your turn, separate all creatures defending player controls into two piles. Only creatures in the pile of that player's choice can block this turn.
+Oracle:At the beginning of combat on your turn, for each defending player, separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn.

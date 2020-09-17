@@ -35,7 +35,8 @@ public class AttachEffect extends SpellAbilityEffect {
             sa.setHostCard(c);
         }
 
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
 
         CardCollection attachments;
         final List<GameObject> targets = getDefinedOrTargeted(sa, "Defined");
@@ -57,15 +58,22 @@ public class AttachEffect extends SpellAbilityEffect {
 
         final Player p = sa.getActivatingPlayer();
 
-        if (sa.hasParam("Object")) {
-            attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
-            if (sa.hasParam("ChooseAnObject")) {
-                Card c = p.getController().chooseSingleEntityForEffect(attachments, sa, sa.getParam("ChooseAnObject"));
-                attachments.clear();
-                if (c != null) {
-                    attachments.add(c);
-                }
+        if (sa.hasParam("Choices")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoose") + " ";
+
+            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), p, source, sa);
+
+            Card c = p.getController().chooseSingleEntityForEffect(choices, sa, title, null);
+            if (c == null) {
+                return;
+            }
+            attachments = new CardCollection(c);
+        } else  if (sa.hasParam("Object")) {
+            attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
         } else {
             attachments = new CardCollection(source);
         }
@@ -185,7 +193,8 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())));
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
+                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -198,7 +207,8 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())));
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
+                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (o != null) {
                 handleAura(source, o);
                 //source.enchantEntity((Card) o);

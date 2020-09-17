@@ -1,9 +1,8 @@
 Name:Luxury Suite
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you have two or more opponents.
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | References$ ETBCheckSVar2 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | References$ ETBCheckSVar2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you have two or more opponents.
 SVar:ETBCheckSVar2:PlayerCountOpponents$Amount
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.

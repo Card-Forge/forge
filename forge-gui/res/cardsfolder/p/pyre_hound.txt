@@ -1,6 +1,6 @@
 Name:Pyre Hound
 ManaCost:3 R
-Types:Creature Elemental Hound
+Types:Creature Elemental Dog
 PT:2/3
 K:Trample
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ DBPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a +1/+1 counter on CARDNAME.

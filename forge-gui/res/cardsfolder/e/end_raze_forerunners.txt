@@ -6,6 +6,6 @@ K:Vigilance
 K:Trample
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Trample
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Trample
 SVar:PlayMain1:TRUE
 Oracle:Vigilance, trample, haste\nWhen End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.

@@ -40,12 +40,12 @@ public class NetGameController implements IGameController {
 
     @Override
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
-        send(ProtocolMethod.selectPlayer, playerView, triggerEvent);
+        send(ProtocolMethod.selectPlayer, playerView, null/*triggerEvent*/); //some platform don't have mousetriggerevent class or it will not allow them to click/tap
     }
 
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        send(ProtocolMethod.selectCard, cardView, otherCardViewsToSelect, triggerEvent);
+        send(ProtocolMethod.selectCard, cardView, otherCardViewsToSelect, null/*triggerEvent*/); //some platform don't have mousetriggerevent class or it will not allow them to click/tap
         // Difference from local games! Always consider a card as successfully selected,
         // to avoid blocks where server and client wait for each other to respond.
         // Some cost in functionality but a huge gain in stability & speed.

@@ -2,10 +2,11 @@ Name:Scrib Nibblers
 ManaCost:2 B
 Types:Creature Rat
 PT:1/1
-A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | Destination$ Exile | RememberMilled$ True | SubAbility$ DBGainLife | AILogic$ EndOfOppTurn | SpellDescription$ Exile the top card of target player's library. If it's a land card, you gain 1 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | TgtPrompt$ Choose a player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBGainLife | AILogic$ EndOfOppTurn | SpellDescription$ Exile the top card of target player's library. If it's a land card, you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scrib_nibblers.jpg
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+DeckHas:Ability$LifeGain
+SVar:BuffedBy:Land
 Oracle:{T}: Exile the top card of target player's library. If it's a land card, you gain 1 life.\nLandfall — Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.

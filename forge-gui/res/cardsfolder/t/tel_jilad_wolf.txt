@@ -3,6 +3,5 @@ ManaCost:2 G
 Types:Creature Wolf
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Artifact | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked by an artifact creature, CARDNAME gets +3/+3 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 3 | NumDef$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_wolf.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3 | NumDef$ 3
 Oracle:Whenever Tel-Jilad Wolf becomes blocked by an artifact creature, Tel-Jilad Wolf gets +3/+3 until end of turn.

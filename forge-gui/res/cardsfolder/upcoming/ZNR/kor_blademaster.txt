@@ -1,0 +1,8 @@
+Name:Kor Blademaster
+ManaCost:1 W
+Types:Creature Kor Warrior
+PT:1/1
+K:Double Strike
+S:Mode$ Continuous | Affected$ Warrior.YouCtrl+equipped | AddKeyword$ Double Strike | Description$ Equipped Warriors you control have double strike.
+DeckHints:Type$Warrior|Equipment
+Oracle:Double strike\nEquipped Warriors you control have double strike.

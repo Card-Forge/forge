@@ -24,7 +24,6 @@ import java.util.List;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
-    private CombatView combatView;
     private final transient Game game; //TODO: Remove this when possible before network support added
 
     public GameView(final Game game0) {
@@ -140,15 +139,18 @@ public class GameView extends TrackableObject {
     }
 
     public CombatView getCombat() {
-        return combatView;
+        return get(TrackableProperty.CombatView);
+    }
+    public void updateCombatView(CombatView combatView) {
+        set(TrackableProperty.CombatView, combatView);
     }
     void updateCombat(Combat combat) {
         if (combat == null) {
-            combatView = null;
+            set(TrackableProperty.CombatView, null);
             return;
         }
 
-        combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
+        final CombatView combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
@@ -160,6 +162,7 @@ public class GameView extends TrackableObject {
                     isBlocked ? CardView.getCollection(blockers) : null,
                     CardView.getCollection(blockers));
         }
+        updateCombatView(combatView);
     }
 
     public void serialize() {

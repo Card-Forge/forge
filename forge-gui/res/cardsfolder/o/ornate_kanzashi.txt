@@ -1,12 +1,11 @@
 Name:Ornate Kanzashi
 ManaCost:5
 Types:Artifact
-A:AB$ Mill | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top card of their library. You may play that card this turn.
+A:AB$ Dig | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top card of their library. You may play that card this turn.
 SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | Triggers$ TrigCleanup | SVars$ DBExileSelf | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play a card this turn.
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ornate_kanzashi.jpg
 Oracle:{2}, {T}: Target opponent exiles the top card of their library. You may play that card this turn.

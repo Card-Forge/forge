@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -34,7 +35,7 @@ import forge.util.collect.FCollection;
  * <p>
  * AbilityFactory_AlterLife class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
@@ -93,7 +94,7 @@ public abstract class SpellAbilityEffect {
             final String baseDesc = this.getStackDescription(sa);
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
-            } 
+            }
             sb.append(baseDesc);
         }
 
@@ -112,9 +113,8 @@ public abstract class SpellAbilityEffect {
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
         } else{
-            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null &&
-                    sa.getPayCosts().getCostMana().getAmountOfX() > 0) {
-                int amount = sa.getHostCard().getXManaCostPaid();
+            if (sa.costHasManaX()) {
+                int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
                 sb.append(" ");
                 sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace("X","=",String.valueOf(amount))));
             }
@@ -126,7 +126,7 @@ public abstract class SpellAbilityEffect {
     /**
      * Append the description of a {@link SpellAbility} to a
      * {@link StringBuilder}.
-     * 
+     *
      * @param sa
      *            a {@link SpellAbility}.
      * @param sb
@@ -174,7 +174,7 @@ public abstract class SpellAbilityEffect {
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new CardCollection(sa.getTargets().getTargetCards()) 
+        return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -197,8 +197,20 @@ public abstract class SpellAbilityEffect {
 
     private static List<SpellAbility> getSpells(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells()) 
+        return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells())
                 : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+
+
+    // Targets of card or player type
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                return getEntities(false, "Defined",    sa); }
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa, final String definedParam) {     return getEntities(false, definedParam, sa); }
+    protected final static List<GameEntity> getDefinedEntitiesOrTargeted(SpellAbility sa, final String definedParam) { return getEntities(true,  definedParam, sa); }
+
+    private static List<GameEntity> getEntities(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        return useTargets ? Lists.newArrayList(sa.getTargets().getTargetEntities())
+                : AbilityUtils.getDefinedEntities(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
     // Targets of unspecified type
@@ -208,10 +220,10 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameObject> getTargetables(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
+        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets())
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
-    
+
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
         boolean intrinsic = sa.isIntrinsic();
@@ -219,14 +231,14 @@ public abstract class SpellAbilityEffect {
         boolean combat = location.endsWith("Combat");
 
         String desc = sa.hasParam("AtEOTDesc") ? sa.getParam("AtEOTDesc") : "";
-        
+
         if (your) {
             location = location.substring("Your".length());
         }
         if (combat) {
             location = location.substring(0, location.length() - "Combat".length());
         }
-        
+
         if (desc.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             if (location.equals("Hand")) {
@@ -254,12 +266,12 @@ public abstract class SpellAbilityEffect {
         StringBuilder delTrig = new StringBuilder();
         delTrig.append("Mode$ Phase | Phase$ ");
         delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
- 
+
         if (your) {
             delTrig.append("| ValidPlayer$ You ");
         }
         delTrig.append("| TriggerDescription$ ").append(desc);
-        
+
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
@@ -290,7 +302,7 @@ public abstract class SpellAbilityEffect {
         trig.setOverridingAbility(newSa);
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
-    
+
     protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
     	
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
@@ -312,17 +324,17 @@ public abstract class SpellAbilityEffect {
             card.setSVar("EndOfTurnLeavePlay", "AtEOT");
         }
     }
-    
+
     protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
                 + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-        
+
         SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
         AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
         saForget.setSubAbility(saExile);
-        
+
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(saForget);
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
@@ -337,22 +349,22 @@ public abstract class SpellAbilityEffect {
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
     }
-    
+
     protected static void addForgetCounterTrigger(final Card card, final String counterType) {
         String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.IsRemembered | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
 
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
                 + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-        
+
         SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
         AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
         saForget.setSubAbility(saExile);
-        
+
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(saForget);
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);        
+        addedTrigger.setIntrinsic(true);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
@@ -379,10 +391,10 @@ public abstract class SpellAbilityEffect {
         game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
-    
+
     protected static void addLeaveBattlefieldReplacement(final Card eff, final String zone) {
         final String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered "
-                + "| Origin$ Battlefield | ExcludeDestination$ " + zone 
+                + "| Origin$ Battlefield | ExcludeDestination$ " + zone
                 + "| Description$ If Creature would leave the battlefield, "
                 + " exile it instead of putting it anywhere else.";
         String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
@@ -393,7 +405,7 @@ public abstract class SpellAbilityEffect {
         re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
         eff.addReplacementEffect(re);
     }
-    
+
     // create a basic template for Effect to be used somewhere else
     protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
             final String image) {
@@ -412,7 +424,6 @@ public abstract class SpellAbilityEffect {
                 }
             }
         }
-        eff.setToken(true); // Set token to true, so when leaving play it gets nuked
         eff.setOwner(controller);
 
         eff.setImageKey(image);

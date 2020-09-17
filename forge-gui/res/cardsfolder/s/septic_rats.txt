@@ -4,6 +4,5 @@ Types:Creature Rat
 PT:2/2
 K:Infect
 T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | DefendingPlayerPoisoned$ True | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, if defending player is poisoned, it gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/septic_rats.jpg
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever Septic Rats attacks, if defending player is poisoned, it gets +1/+1 until end of turn.

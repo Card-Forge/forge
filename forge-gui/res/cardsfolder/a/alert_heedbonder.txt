@@ -1,0 +1,10 @@
+Name:Alert Heedbonder
+ManaCost:1 G/W G/W
+Types:Creature Human Scout
+PT:2/4
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your end step, you gain 1 life for each creature you control with vigilance.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$Valid Creature.YouCtrl+withVigilance
+DeckHas:Ability$LifeGain
+Oracle:Vigilance\nAt the beginning of your end step, you gain 1 life for each creature you control with vigilance.

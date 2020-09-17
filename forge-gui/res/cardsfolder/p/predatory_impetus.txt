@@ -1,0 +1,7 @@
+Name:Predatory Impetus
+ManaCost:4 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Goad$ True | KW$ HIDDEN CARDNAME must be blocked if able. | Description$ Enchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+Oracle:Enchant creature\nEnchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each combat if able and attacks a player other than you if able.)

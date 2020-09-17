@@ -2,10 +2,9 @@ Name:Cephalid Vandal
 ManaCost:1 U
 Types:Creature Cephalid Rogue
 PT:1/1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a shred counter on CARDNAME. Then put the top card of your library into your graveyard for each shred counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ SHRED | CounterNum$ 1 | SubAbility$ DBMill
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a shred counter on CARDNAME. Then mill a card for each shred counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SHRED | CounterNum$ 1 | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardCounters.SHRED
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_vandal.jpg
-Oracle:At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then put the top card of your library into your graveyard for each shred counter on Cephalid Vandal.
+Oracle:At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then mill a card for each shred counter on Cephalid Vandal.

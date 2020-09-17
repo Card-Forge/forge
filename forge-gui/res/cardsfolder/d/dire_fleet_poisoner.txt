@@ -5,6 +5,5 @@ PT:2/2
 K:Flash
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target attacking Pirate you control gets +1/+1 and gains deathtouch until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Pirate.attacking+YouCtrl | TgtPrompt$ Select target attacking Pirate you control | NumAtt$ 1 | NumDef$ 1 | KW$ Deathtouch
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_fleet_poisoner.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Pirate.attacking+YouCtrl | TgtPrompt$ Select target attacking Pirate you control | NumAtt$ 1 | NumDef$ 1 | KW$ Deathtouch
 Oracle:Flash\nDeathtouch\nWhen Dire Fleet Poisoner enters the battlefield, target attacking Pirate you control gets +1/+1 and gains deathtouch until end of turn.

@@ -1,0 +1,8 @@
+Name:Spelleater Wolverine
+ManaCost:2 R
+Types:Creature Wolverine
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE3 | Description$ CARDNAME has double strike as long as there are three or more instant and/or sorcery cards in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Type$Instant|Sorcery
+Oracle:Spelleater Wolverine has double strike as long as there are three or more instant and/or sorcery cards in your graveyard.

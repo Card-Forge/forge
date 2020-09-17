@@ -5,7 +5,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -130,7 +130,7 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         if (sourceName.equals("Eternity Vessel")
-                && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterType.CHARGE) == 0))) {
+                && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
             return false;
         }
 

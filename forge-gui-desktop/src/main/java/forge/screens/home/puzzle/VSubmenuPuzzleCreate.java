@@ -26,26 +26,26 @@ public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
 
     private final FLabel lblInfo = new FLabel.Builder()
             .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
-            .text("Create a New Puzzle").build();
+            .text(localizer.getMessage("lblCreateNewPuzzle")).build();
 
     private final FLabel lblDir1 = new FLabel.Builder()
-            .text("In this mode, you will start with a clean battlefield and empty zones.")
+            .text(localizer.getMessage("lblCreatePuzzleDest1"))
             .fontSize(12).build();
 
     private final FLabel lblDir2 = new FLabel.Builder()
-            .text("You will need to use the Developer Mode tools to create a game state for your puzzle.")
+            .text(localizer.getMessage("lblCreatePuzzleDest2"))
             .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-            .text("Then, use the Dump Game State command to export your game state with metadata template.")
+            .text(localizer.getMessage("lblCreatePuzzleDest3"))
             .fontSize(12).build();
 
     private final FLabel lblDir4 = new FLabel.Builder()
-            .text("You can edit the exported file in a text editor to change the puzzle name, description, and objectives.")
+            .text(localizer.getMessage("lblCreatePuzzleDest4"))
             .fontSize(12).build();
 
     private final FLabel lblDir5 = new FLabel.Builder()
-            .text("The puzzle file needs to have the .pzl extension and must be placed in res/puzzles.")
+            .text(localizer.getMessage("lblCreatePuzzleDest5"))
             .fontSize(12).build();
 
     private final StartButton btnStart  = new StartButton();

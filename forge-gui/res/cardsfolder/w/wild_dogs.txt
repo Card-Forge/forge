@@ -1,6 +1,6 @@
 Name:Wild Dogs
 ManaCost:G
-Types:Creature Hound
+Types:Creature Dog
 PT:2/1
 K:Cycling:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | APlayerHasMoreLifeThanEachOther$ True | Execute$ TrigOppControl | TriggerDescription$ At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of CARDNAME.

@@ -1022,7 +1022,10 @@ public class FSkin {
                     "" : " <i>\\($1\\)</i>";
             str = str.replaceAll(pattern, replacement);
         }
-
+        // Just return the string unencoded if we're optimizing for screen readers.
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
+            return str;
+        }
         //format mana symbols to display as icons
         pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {

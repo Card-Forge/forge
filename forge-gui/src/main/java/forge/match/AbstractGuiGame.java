@@ -182,6 +182,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
+            if(gameView.isGameOver()) {
+                return true;
+            }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
                 gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
                 return true;
@@ -217,6 +220,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Flipped:
             case Transformed:
             case Meld:
+            case Modal:
                 return true;
             default:
                 return false;
@@ -569,7 +573,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("...");
+        choices.add(Localizer.getInstance().getMessage("lblOtherInteger"));
 
         final Object choice = oneOrNone(message, choices.build());
         if (choice instanceof Integer || choice == null) {
@@ -581,12 +585,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         String prompt = "";
         if (min != Integer.MIN_VALUE) {
             if (max != Integer.MAX_VALUE) {
-                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax").replace("%min", String.valueOf(min)).replace("%max", String.valueOf(max));
+                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax", String.valueOf(min), String.valueOf(max));
             } else {
-                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin").replace("%min", String.valueOf(min));
+                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin", String.valueOf(min));
             }
         } else if (max != Integer.MAX_VALUE) {
-            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax").replace("%max", String.valueOf(max));
+            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax", String.valueOf(max));
         }
 
         while (true) {

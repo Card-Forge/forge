@@ -1,6 +1,6 @@
 Name:Lava Hounds
 ManaCost:2 R R
-Types:Creature Hound
+Types:Creature Dog
 PT:4/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to you.

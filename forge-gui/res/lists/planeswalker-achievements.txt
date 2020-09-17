@@ -16,14 +16,18 @@ Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Muse|Ashiok's Subconscious|It's wonderful what you find when you look to places that don't exist!
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
 Ashiok, Sculptor of Fears|Ashiok's Collection|They followed me home. Can I keep them?
+Basri Ket|Basri's Army of Solidarity|Each new convert strengthens us all.
+Basri, Devoted Paladin|Basri's Mighty Leap|Soar on the wings of faith.
 Calix, Destiny's Hand|Calix's Replenish|We're all cut of the same Klothys, after all.
 Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
 Chandra, Awakened Inferno|Chandra's Utter Disintegration|Is it hot here or is it just me?
 Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
 Chandra, Fire Artisan|Chandra's Fiery Rush|Combo time!
+Chandra, Flame's Catalyst|Chandra's Sudden Epiphany|Forget everything you know and believe that everything is possible.
 Chandra, Flame's Fury|Chandra's Lake of Flame|Come in! The fire's great!
 Chandra, Flamecaller|Chandra's Sea of Flames|You didn't activate this for 0 just to get the achievement, did you?
+Chandra, Heart of Fire|Chandra's Fistfuls of Fire|Don't worry. I brought enough for everyone.
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
 Chandra, Roaring Flame|Chandra's Roar|The opponent continues to burn...
@@ -51,6 +55,8 @@ Garruk, Apex Predator|Garruk's Prey|Funny, it's usually a good thing to have an 
 Garruk, Caller of Beasts|Garruk's Wild Pair|Can you beat two for the price of one?
 Garruk, Cursed Huntsman|Garruk's Cursed Overrun|Run wild / run free / here's your / plus three
 Garruk, Primal Hunter|Garruk's Garden|They came out after a rain...
+Garruk, Savage Herald|Garruk's Single Goal|Never mind those! Get HIM!
+Garruk, Unleashed|Garruk's Forces of Nature|Slow and steady smashes face.
 Gideon Blackblade|Gideon's Righteous Strike|Blackblade cleaving black heart!
 Gideon Jura|Gideon's Brawl|Are you man enough to mess with me?
 Gideon of the Trials|Gideon's Eternity|Justice will never die!
@@ -84,15 +90,19 @@ Liliana Vess|Liliana's Bidding|Stop being lazy and go to work!
 Liliana of the Dark Realms|Liliana's Ritual|What do you mean, "out of character"?
 Liliana of the Veil|Liliana's Choice|Which one of your children do you love best?
 Liliana, Death's Majesty|Liliana's Wrath|Everybody died... except for those who were already dead.
+Liliana, Death Mage|Liliana's Grave Betrayal|No, YOU explain to them why they're dead!
 Liliana, Death Wielder|Liliana's Mass Raise|Death is no excuse to stop working.
 Liliana, Defiant Necromancer|Liliana's Necromastery|Come join the Dark Side...
 Liliana, Dreadhorde General|Liliana's Utter Obliteration|The choice is yours.
 Liliana, the Last Hope|Liliana's Army|The dead will always outnumber the living...
 Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's environmentally friendly!
 Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
+Liliana, Waker of the Dead|Liliana's Rotten Reserves|They awaken, feeling well-rested.
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
+Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
+Narset of the Ancient Way|Narset's Burning Knowledge|Prowess both magical and martial.
 Narset Transcendent|Narset's One Rule|No spells for you!
 Nicol Bolas, Dragon-God|Bolas's Flawless Victory|Who's left to oppose me?
 Nicol Bolas, God-Pharaoh|Bolas's Cleansing|Let's just tear this down and start again. Or... maybe tearing it down will suffice.
@@ -135,8 +145,10 @@ Sorin, Vampire Lord|Sorin's Siring Party|Go forth and multiply.
 Tamiyo, Field Researcher|Tamiyo's Omniscience|I know exactly how your story ends...
 Tamiyo, the Moon Sage|Tamiyo's Recycling|Wash, rinse, repeat!
 Teferi, Hero of Dominaria|Teferi's Oblivion|Don't worry. It's just a phase.
+Teferi, Master of Time|Teferi's Prolonged Afternoon|Defeating me will be quite a stretch.
 Teferi, Temporal Archmage|Teferi's Time Slip|Let's speed this up a bit!
 Teferi, Timebender|Teferi's Time Warp|Let's do that again!
+Teferi, Timeless Voyager|Teferi's Zhalfir Trick|I'll need a few volunteers from the audience.
 Tezzeret the Schemer|Tezzeret's Assembly Line|Smashing, isn't it?
 Tezzeret the Seeker|Tezzeret's Robots|You can't stop the progress!
 Tezzeret, Agent of Bolas|Tezzeret's Drain|Technological superiority for the win!
@@ -151,6 +163,7 @@ Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
 Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
 Vivien, Arkbow Ranger|Vivien's Wish|Welcome, old friend. I was afraid I lost you forever.
+Vivien, Monsters' Advocate|Vivien's Nature Documentary|Awww, look! He has a little buddy!
 Vivien, Nature's Avenger|Vivien's Magnification|Magnificent!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
 Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. There's no step two.

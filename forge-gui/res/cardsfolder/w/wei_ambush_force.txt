@@ -3,6 +3,5 @@ ManaCost:1 B
 Types:Creature Human Soldier
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/wei_ambush_force.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Whenever Wei Ambush Force attacks, it gets +2/+0 until end of turn.

@@ -1,0 +1,15 @@
+Name:Master of Winds
+ManaCost:2 U U
+Types:Creature Sphinx Wizard
+PT:1/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChoose | TriggerDescription$ Whenever you cast an instant, sorcery, or Wizard spell, you may have CARDNAME's base power and toughness become 4/1 or 1/4 until end of turn.
+SVar:TrigChoose:DB$ GenericChoice | Defined$ You | Choices$ Animate41,Animate14
+SVar:Animate41:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 1 | SpellDescription$ CARDNAME's base power and toughness become 4/1 until end of turn.
+SVar:Animate14:DB$ Animate | Defined$ Self | Power$ 1 | Toughness$ 4 | SpellDescription$ CARDNAME's base power and toughness become 1/4 until end of turn.
+SVar:BuffedBy:Instant,Sorcery,Wizard
+DeckNeeds:Type$Instant|Sorcery|Wizard
+Oracle:Flying\nWhen Master of Winds enters the battlefield, draw two cards, then discard a card.\nWhenever you cast an instant, sorcery, or Wizard spell, you may have Master of Winds's base power and toughness become 4/1 or 1/4 until end of turn.

@@ -1,7 +1,6 @@
 Name:Brain Freeze
 ManaCost:1 U
 Types:Instant
-A:SP$ Mill | Cost$ 1 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of their library into their graveyard.
+A:SP$ Mill | Cost$ 1 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
 K:Storm
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
-Oracle:Target player puts the top three cards of their library into their graveyard.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Oracle:Target player mills three cards.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

@@ -2,7 +2,7 @@ Name:Colfenor's Plans
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top seven cards of your library face down. You may look at and play cards exiled with CARDNAME.
-SVar:TrigExile:DB$ Mill | Defined$ You | NumCards$ 7 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | NoReveal$ True
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 7 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | NoReveal$ True
 S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayPlay$ True | MayLookAt$ You | Description$ You may look at and play cards exiled with CARDNAME.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | NumLimitEachTurn$ 1 | Description$ You can't cast more than one spell each turn.

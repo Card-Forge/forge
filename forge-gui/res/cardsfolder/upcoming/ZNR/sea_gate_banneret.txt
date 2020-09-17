@@ -1,0 +1,6 @@
+Name:Sea Gate Banneret
+ManaCost:W
+Types:Creature Kor Warrior
+PT:1/2
+A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{4}{W}: Creatures you control get +1/+1 until end of turn.

@@ -15,7 +15,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
@@ -359,8 +359,8 @@ public class VPlayerPanel extends FContainer {
 
     private class LifeLabel extends FDisplayObject {
         private int life = player.getLife();
-        private int poisonCounters = player.getCounters(CounterType.POISON);
-        private int energyCounters = player.getCounters(CounterType.ENERGY);
+        private int poisonCounters = player.getCounters(CounterEnumType.POISON);
+        private int energyCounters = player.getCounters(CounterEnumType.ENERGY);
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
@@ -378,16 +378,16 @@ public class VPlayerPanel extends FContainer {
                 lifeStr = String.valueOf(life);
             }
 
-            delta = player.getCounters(CounterType.POISON) - poisonCounters;
+            delta = player.getCounters(CounterEnumType.POISON) - poisonCounters;
             if (delta != 0) {
                 if (delta > 0) {
                     //TODO: Show animation on avatar for gaining poison counters
                     vibrateDuration += delta * 200;
                 }
-                poisonCounters = player.getCounters(CounterType.POISON);
+                poisonCounters = player.getCounters(CounterEnumType.POISON);
             }
 
-            energyCounters = player.getCounters(CounterType.ENERGY);
+            energyCounters = player.getCounters(CounterEnumType.ENERGY);
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&

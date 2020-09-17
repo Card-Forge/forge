@@ -1,0 +1,8 @@
+Name:Expedition Champion
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Warrior.YouCtrl+Other | Description$ CARDNAME gets +2/+0 as long as you control another Warrior.
+SVar:BuffedBy:Warrior
+DeckHints:Type$Warrior
+Oracle:Expedition Champion gets +2/+0 as long as you control another Warrior.

@@ -23,6 +23,7 @@ import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of deck editor analysis tab.
@@ -35,16 +36,16 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Draw Order");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblDrawOrder"));
 
     // Title labels
     private final FLabel lblReshuffle = new FLabel.Builder()
-            .hoverable(true).text("CLICK HERE TO RE-SHUFFLE").tooltip("See a new sample shuffle")
+            .hoverable(true).text(Localizer.getInstance().getMessage("lblClickHereToReshuffle")).tooltip(Localizer.getInstance().getMessage("lblSeeANewSampleShuffle"))
             .fontSize(16).build();
     private final FLabel lblSampleHand = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(12).text("SAMPLE HAND").opaque(true).build();
+            .fontSize(12).text(Localizer.getInstance().getMessage("lblSampleHand")).opaque(true).build();
     private final FLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(12).text("REMAINING DRAWS").opaque(true).build();
+            .fontSize(12).text(Localizer.getInstance().getMessage("lblRemainingDraws")).opaque(true).build();
     // private final JLabel lblExplanation = new FLabel.Builder()
     //       .fontSize(11).text("XX % = frequency that card will appear at that position").build();
 

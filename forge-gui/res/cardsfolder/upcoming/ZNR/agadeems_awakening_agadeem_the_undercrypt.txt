@@ -1,0 +1,19 @@
+Name:Agadeem's Awakening
+ManaCost:X B B B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ X B B B | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select any number of target creature cards in your graveyard with different converted mana costs X or less | TargetsWithDifferentCMC$ True | References$ X,Y | StackDescription$ {p:You} returns {c:Targeted} from the graveyard to the battlefield. | SpellDescription$ Return from your graveyard to the battlefield any number of target creature cards that each have a different converted mana cost X or less.
+SVar:X:Count$xPaid
+SVar:Y:Count$ValidGraveyard Creature.YouOwn
+AlternateMode:Modal
+DeckHas:Ability$Graveyard
+Oracle:Return from your graveyard to the battlefield any number of target creature cards that each have a different converted mana cost X or less.
+
+ALTERNATE
+
+Name:Agadeem, the Undercrypt
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don’t, it enters the battlefield tapped.\n{T}: Add {B}.

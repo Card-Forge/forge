@@ -1,0 +1,11 @@
+Name:Skycat Sovereign
+ManaCost:W U
+Types:Creature Elemental Cat
+PT:1/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature you control with flying.
+SVar:X:Count$Valid Creature.Other+YouCtrl+withFlying
+SVar:BuffedBy:Creature.withFlying
+A:AB$ Token | Cost$ 2 W U | TokenAmount$ 1 | TokenScript$ w_1_1_cat_bird_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Cat Bird creature token with flying.
+DeckHas:Ability$Token
+Oracle:Flying\nSkycat Sovereign gets +1/+1 for each other creature you control with flying.\n{2}{W}{U}: Create a 1/1 white Cat Bird creature token with flying.

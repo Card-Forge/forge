@@ -60,7 +60,7 @@ public class TriggerTapsForMana extends Trigger {
         //Check for tapping
         if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+            if (manaAbility == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
         }

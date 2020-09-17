@@ -4,5 +4,6 @@ Type:Digital
 Subtype:Arena
 Effective:2019-11-21
 Order:142
-Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2
-Banned:Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
+Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AKR
+Banned:Agent of Treachery; Burning-Tree Emissary; Field of the Dead; Fires of Invention; Oko, Thief of Crowns; Nexus of Fate; Once Upon a Time; Teferi, Time Raveler; Veil of Summer; Wilderness Reclamation; Winota, Joiner of Forces
+#Suspended:Burning-Tree Emissary; Teferi, Time Raveler; Wilderness Reclamation

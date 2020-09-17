@@ -1,8 +1,7 @@
 Name:Archive Trap
 ManaCost:3 U U
 Types:Instant Trap
-A:SP$ Mill | Cost$ 3 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent puts the top thirteen cards of their library into his or her graveyard.
+A:SP$ Mill | Cost$ 3 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
 A:SP$ Mill | Cost$ 0 | CheckSVar$ TrapTrigger | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | CostDesc$ If an opponent searched their library this turn, you may pay {0} rather than pay CARDNAME's mana cost. | References$ TrapTrigger | SpellDescription$
 SVar:TrapTrigger:Count$SearchedLibrary.Opponent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archive_trap.jpg
-Oracle:If an opponent searched their library this turn, you may pay {0} rather than pay this spell's mana cost.\nTarget opponent puts the top thirteen cards of their library into their graveyard.
+Oracle:If an opponent searched their library this turn, you may pay {0} rather than pay this spell's mana cost.\nTarget opponent mills thirteen cards.

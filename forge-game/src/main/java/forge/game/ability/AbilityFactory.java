@@ -247,20 +247,7 @@ public final class AbilityFactory {
 
         if (mapParams.containsKey("SubAbility")) {
             final String name = mapParams.get("SubAbility");
-            SpellAbility p = parent;
-            AbilitySub sub = null;
-            while (p != null) {
-                sub = p.getAdditionalAbility(name);
-                if (sub != null) {
-                    break;
-                }
-                p = p.getParent();
-            }
-            if (sub == null) {
-                sub = getSubAbility(state, name, spellAbility);
-            }
-            spellAbility.setSubAbility(sub);
-            spellAbility.setAdditionalAbility(name, sub);            
+            spellAbility.setSubAbility(getSubAbility(state, name, spellAbility));
         }
 
         for (final String key : additionalAbilityKeys) {
@@ -359,6 +346,9 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentControllers")) {
             abTgt.setDifferentControllers(true);
+        }
+        if (mapParams.containsKey("TargetsWithDifferentCMC")) {
+            abTgt.setDifferentCMC(true);
         }
         if (mapParams.containsKey("DividedAsYouChoose")) {
             abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), null, null);

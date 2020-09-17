@@ -8,6 +8,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.match.HostedMatch;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgeConstants;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
 import forge.screens.LaunchScreen;
@@ -20,6 +21,7 @@ import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +53,7 @@ public class PuzzleScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
+        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles(ForgeConstants.PUZZLE_DIR);
         Collections.sort(puzzles);
 
         GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {

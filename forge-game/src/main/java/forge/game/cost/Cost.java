@@ -311,7 +311,7 @@ public class Cost implements Serializable {
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
 
-            return new CostRemoveCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description, zone);
+            return new CostRemoveCounter(splitStr[0], CounterType.getType(splitStr[1]), type, description, zone);
         }
 
         if (parse.startsWith("AddCounter<")) {
@@ -319,7 +319,7 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 4);
             final String target = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
-            return new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), target, description);
+            return new CostPutCounter(splitStr[0], CounterType.getType(splitStr[1]), target, description);
         }
 
         // While no card has "PayLife<2> PayLife<3> there might be a card that

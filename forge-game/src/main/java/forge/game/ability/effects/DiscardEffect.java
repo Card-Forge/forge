@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -10,6 +11,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import forge.util.Lang;
@@ -17,13 +19,11 @@ import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.Localizer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DiscardEffect extends SpellAbilityEffect {
 
@@ -109,7 +109,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         //final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final List<Card> discarded = new ArrayList<>();
+        final List<Card> discarded = Lists.newArrayList();
         final List<Player> targets = getTargetPlayers(sa),
                 discarders;
         Player firstTarget = null;
@@ -127,6 +127,8 @@ public class DiscardEffect extends SpellAbilityEffect {
 
         final CardZoneTable table = new CardZoneTable();
         for (final Player p : discarders) {
+            boolean firstDiscard = p.getNumDiscardedThisTurn() == 0;
+            final CardCollection discardedByPlayer = new CardCollection();
             if ((mode.equals("RevealTgtChoose") && firstTarget != null) || !sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("RememberDiscarder") && p.canDiscardBy(sa)) {
                     source.addRemembered(p);
@@ -149,35 +151,28 @@ public class DiscardEffect extends SpellAbilityEffect {
                         for (final Card c : toDiscard) {
                             if (p.discard(c, sa, table) != null) {
                                 discarded.add(c);
-                            }
-                        }
-
-                        if (sa.hasParam("RememberDiscarded")) {
-                            for (final Card c : discarded) {
-                                source.addRemembered(c);
+                                discardedByPlayer.add(c);
                             }
                         }
                     }
-                    continue;
                 }
 
                 if (mode.equals("Hand")) {
                     if (!p.canDiscardBy(sa)) {
                         continue;
                     }
-                    boolean shouldRemember = sa.hasParam("RememberDiscarded");
-                    CardCollectionView toDiscard = new CardCollection(Lists.newArrayList(p.getCardsIn(ZoneType.Hand)));
+                    CardCollectionView toDiscard = p.getCardsIn(ZoneType.Hand);
 
                     if (toDiscard.size() > 1) {
                         toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard);
                     }
 
-                    for(Card c : toDiscard) { // without copying will get concurrent modification exception
-                        boolean hasDiscarded = p.discard(c, sa, table) != null;
-                        if( hasDiscarded && shouldRemember )
-                            source.addRemembered(c);
+                    for(Card c : Lists.newArrayList(toDiscard)) { // without copying will get concurrent modification exception
+                        if (p.discard(c, sa, table) != null) {
+                            discarded.add(c);
+                            discardedByPlayer.add(c);
+                        }
                     }
-                    continue;
                 }
 
                 if (mode.equals("NotRemembered")) {
@@ -192,6 +187,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     for (final Card c : dPHand) {
                         if (p.discard(c, sa, table) != null) {
                             discarded.add(c);
+                            discardedByPlayer.add(c);
                         }
                     }
                 }
@@ -231,6 +227,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         for (Card c : toDiscardView) {
                             if (p.discard(c, sa, table) != null) {
                                 discarded.add(c);
+                                discardedByPlayer.add(c);
                             }
                         }
                     }
@@ -249,7 +246,10 @@ public class DiscardEffect extends SpellAbilityEffect {
                         }
 
                         for (Card c : toDiscard) {
-                            c.getController().discard(c, sa, table);
+                            if (c.getController().discard(c, sa, table) != null) {
+                                discarded.add(c);
+                                discardedByPlayer.add(c);
+                            }
                         }
                     }
                 }
@@ -282,6 +282,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     for (final Card c : dPChHand) {
                         if (p.discard(c, sa, table) != null) {
                             discarded.add(c);
+                            discardedByPlayer.add(c);
                         }
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
@@ -291,8 +292,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         continue; // for loop over players
 
                     if (sa.hasParam("RevealNumber")) {
-                        String amountString = sa.getParam("RevealNumber");
-                        int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                        int amount = AbilityUtils.calculateAmount(source, sa.getParam("RevealNumber"), sa);
                         dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
                     }
 
@@ -332,10 +332,20 @@ public class DiscardEffect extends SpellAbilityEffect {
                             if (card == null) { continue; }
                             if (p.discard(card, sa, table) != null) {
                                 discarded.add(card);
+                                discardedByPlayer.add(card);
                             }
                         }
                     }
                 }
+            }
+
+            if (!discardedByPlayer.isEmpty()) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, p);
+                runParams.put(AbilityKey.Cards, discardedByPlayer);
+                runParams.put(AbilityKey.Cause, sa);
+                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
             }
         }
 

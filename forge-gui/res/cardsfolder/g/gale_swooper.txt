@@ -1,0 +1,8 @@
+Name:Gale Swooper
+ManaCost:3 W
+Types:Creature Griffin
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+Oracle:Flying\nWhen Gale Swooper enters the battlefield, target creature gains flying until end of turn.

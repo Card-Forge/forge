@@ -1,0 +1,8 @@
+Name:Witch's Cauldron
+ManaCost:B
+Types:Artifact
+A:AB$ GainLife | Cost$ 1 B T Sac<1/Creature> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+DeckHas:Ability$LifeGain
+Oracle:{1}{B}, {T}, Sacrifice a creature: You gain 1 life and draw a card.

@@ -1,7 +1,6 @@
 Name:Tormod's Crypt
 ManaCost:0
 Types:Artifact
-A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Shuffle$ True | SpellDescription$ Exile all cards from target player's graveyard.
+A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile all cards from target player's graveyard.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tormods_crypt.jpg
 Oracle:{T}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.

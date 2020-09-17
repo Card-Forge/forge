@@ -20,7 +20,6 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -28,7 +27,6 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -38,7 +36,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
@@ -121,39 +118,6 @@ public class CardFactory {
 
     /**
      * <p>
-     * copyCardWithChangedStats
-     * </p>
-     *
-     * This method copies the card together with certain temporarily changed stats of the card
-     * (namely, changed color, changed types, changed keywords).
-     *
-     * copyCardWithChangedStats must NOT be used for ordinary card copy operations because
-     * according to MTG rules the changed text (including keywords, types) is not copied over
-     * to cards cloned by another card. However, this method is useful, for example, for certain
-     * triggers that demand the latest information about the changes to the card which is lost
-     * when the card changes its zone after GameAction::changeZone is called.
-     *
-     * @param in
-     *            a {@link forge.game.card.Card} object.
-     * @param assignNewId
-     *            a boolean
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static final Card copyCardWithChangedStats(final Card in, boolean assignNewId) {
-        Card out = copyCard(in, assignNewId);
-
-        // Copy changed color, type, keyword arrays (useful for some triggers that require
-        // information about the latest state of the card as it left the battlefield)
-        out.setChangedCardColors(in.getChangedCardColors());
-        out.setChangedCardKeywords(in.getChangedCardKeywords());
-        out.setChangedCardTypes(in.getChangedCardTypesMap());
-        out.setChangedCardNames(in.getChangedCardNames());
-
-        return out;
-    }
-
-    /**
-     * <p>
      * copySpellHost.
      * Helper function for copySpellAbilityAndPossiblyHost.
      * creates a copy of the card hosting the ability we want to copy.
@@ -185,19 +149,8 @@ public class CardFactory {
         c.setCopiedSpell(true);
 
         if (bCopyDetails) {
-            c.setXManaCostPaid(original.getXManaCostPaid());
             c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
-
-            // Rule 706.10 : Madness is copied
-            if (original.isInZone(ZoneType.Stack)) {
-                c.setMadness(original.isMadness());
-
-                final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
-                if (si != null) {
-                    c.setXManaCostPaid(si.getXManaPaid());
-                }
-            }
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);
@@ -234,8 +187,8 @@ public class CardFactory {
         }
 
         final SpellAbility copySA;
-        if (sa.isTrigger()) {
-            copySA = getCopiedTriggeredAbility(sa);
+        if (sa.isTrigger() && sa.isWrapper()) {
+            copySA = getCopiedTriggeredAbility((WrappedAbility)sa, c);
         } else {
             copySA = sa.copy(c, false);
         }
@@ -253,10 +206,6 @@ public class CardFactory {
         //remove all costs
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", sa.isAbility()));
-        }
-        if (sa.getTargetRestrictions() != null) {
-            TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
-            copySA.setTargetRestrictions(target);
         }
         copySA.setActivatingPlayer(controller);
 
@@ -291,8 +240,8 @@ public class CardFactory {
                 c.setState(CardStateName.Flipped, false);
                 c.setImageKey(cp.getImageKey(true));
             }
-            else if (c.isDoubleFaced() && cp instanceof PaperCard) {
-                c.setState(CardStateName.Transformed, false);
+            else if (c.hasBackSide() && cp instanceof PaperCard && cardRules != null) {
+                c.setState(cardRules.getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
@@ -302,14 +251,9 @@ public class CardFactory {
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.RightSplit, false);
                 c.setImageKey(originalPicture);
-            } else if (c.isMeldable() && cp instanceof PaperCard) {
-                c.setState(CardStateName.Meld, false);
-                c.setImageKey(cp.getImageKey(true));
             } else if (c.isAdventureCard()) {
                 c.setState(CardStateName.Adventure, false);
                 c.setImageKey(originalPicture);
-                c.setSetCode(cp.getEdition());
-                c.setRarity(cp.getRarity());
             }
 
             c.setSetCode(cp.getEdition());
@@ -323,7 +267,7 @@ public class CardFactory {
     private static void buildAbilities(final Card card) {
 
         for (final CardStateName state : card.getStates()) {
-            if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
+            if (card.hasBackSide() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state, false);
@@ -332,11 +276,7 @@ public class CardFactory {
             // ************** Link to different CardFactories *******************
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 for (final SpellAbility sa : card.getSpellAbilities()) {
-                    if (state == CardStateName.LeftSplit) {
-                        sa.setLeftSplit();
-                    } else {
-                        sa.setRightSplit();
-                    }
+                    sa.setCardState(state);
                 }
                 CardFactoryUtil.setupKeywordedAbilities(card);
                 final CardState original = card.getState(CardStateName.Original);
@@ -374,7 +314,7 @@ public class CardFactory {
         triggerSB.append("that planar deck and turn it face up");
 
         StringBuilder saSB = new StringBuilder();
-        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
+        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
         saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
 
         card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
@@ -476,23 +416,6 @@ public class CardFactory {
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
-    }
-
-    /**
-     * Create a copy of a card, including its copiable characteristics (but not
-     * abilities).
-     * @param from
-     * @param newOwner
-     * @return
-     */
-    public static Card copyCopiableCharacteristics(final Card from, final Player newOwner) {
-        int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        final Card c = new Card(id, from.getPaperCard(), from.getGame());
-        c.setOwner(newOwner);
-        c.setSetCode(from.getSetCode());
-
-        copyCopiableCharacteristics(from, c);
-        return c;
     }
 
     /**
@@ -644,50 +567,12 @@ public class CardFactory {
      *
      * return a wrapped ability
      */
-    public static SpellAbility getCopiedTriggeredAbility(final SpellAbility sa) {
+    public static SpellAbility getCopiedTriggeredAbility(final WrappedAbility sa, final Card newHost) {
         if (!sa.isTrigger()) {
             return null;
         }
-        // Find trigger
-        Trigger t = null;
-        if (sa.isWrapper()) {
-            // copy trigger?
-            t = sa.getTrigger();
-        } else { // some keyword ability, e.g. Exalted, Annihilator
-            return sa.copy();
-        }
-        // set up copied wrapped ability
-        SpellAbility trig = t.getOverridingAbility();
-        if (trig == null) {
-            trig = AbilityFactory.getAbility(sa.getHostCard().getSVar(t.getParam("Execute")), sa.getHostCard());
-        }
-        trig.setHostCard(sa.getHostCard());
-        trig.setTrigger(true);
-        trig.setSourceTrigger(t.getId());
-        sa.setTriggeringObjects(sa.getTriggeringObjects());
-        trig.setTriggerRemembered(t.getTriggerRemembered());
-        if (t.getStoredTriggeredObjects() != null) {
-            trig.setTriggeringObjects(t.getStoredTriggeredObjects());
-        }
 
-        trig.setActivatingPlayer(sa.getActivatingPlayer());
-        if (t.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getParam("TriggerController"), trig).get(0);
-            trig.setActivatingPlayer(p);
-        }
-
-        if (t.hasParam("RememberController")) {
-            sa.getHostCard().addRemembered(sa.getActivatingPlayer());
-        }
-
-        trig.setStackDescription(trig.toString());
-
-        WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
-        wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(sa.isMandatory());
-        wrapperAbility.setDescription(wrapperAbility.getStackDescription());
-        t.setTriggeredSA(wrapperAbility);
-        return wrapperAbility;
+        return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, false), sa.getDecider());
     }
 
     public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
@@ -785,6 +670,9 @@ public class CardFactory {
             if (sa.hasParam("SetToughness")) {
                 state.setBaseToughness(Integer.parseInt(sa.getParam("SetToughness")));
             }
+            if (sa.hasParam("SetLoyalty")) {
+                state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
+            }
 
 
             // triggers to add to clone
@@ -871,6 +759,13 @@ public class CardFactory {
             // set the host card for copied spellabilities, if they are not set yet
             for (final SpellAbility newSa : state.getSpellAbilities()) {
                 if (newSa.getOriginalHost() == null) {
+                    newSa.setOriginalHost(in);
+                }
+            }
+
+            for (final Trigger trigger : state.getTriggers()) {
+                final SpellAbility newSa = trigger.getOverridingAbility();
+                if (newSa != null && newSa.getOriginalHost() == null) {
                     newSa.setOriginalHost(in);
                 }
             }

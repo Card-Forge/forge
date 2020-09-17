@@ -1,5 +1,6 @@
 package forge;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -37,12 +38,13 @@ import forge.util.Utils;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.33.001";
+    public static final String CURRENT_VERSION = "1.6.36.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -56,7 +58,7 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
-    private static final Stack<FScreen> screens = new Stack<>();
+    private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     public static String extrawide = "default";
@@ -68,13 +70,15 @@ public class Forge implements ApplicationListener {
     public static String locale = "en-US";
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
+    public static boolean isPortraitMode = false;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
             GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
         }
         return app;
     }
@@ -87,6 +91,7 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
+        GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -255,13 +260,13 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean onHomeScreen() {
-        return screens.size() == 1;
+        return Dscreens.size() == 1;
     }
 
     public static void back() {
         if(destroyThis && isLandscapeMode())
             return;
-        if (screens.size() < 2) {
+        if (Dscreens.size() < 2) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
@@ -269,8 +274,8 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    screens.pop();
-                    setCurrentScreen(screens.lastElement());
+                    Dscreens.pollFirst();
+                    setCurrentScreen(Dscreens.peekFirst());
                 }
             }
         });
@@ -278,12 +283,12 @@ public class Forge implements ApplicationListener {
 
     //set screen that will be gone to on pressing Back before going to current Back screen
     public static void setBackScreen(final FScreen screen0, boolean replace) {
-        screens.remove(screen0); //remove screen from previous position in navigation history
-        int index = screens.size() - 1;
+        Dscreens.remove(screen0); //remove screen from previous position in navigation history
+        int index = Dscreens.size() - 1;
         if (index > 0) {
-            screens.add(index, screen0);
+            Dscreens.addLast(screen0);
             if (replace) { //remove previous back screen if replacing back screen
-                screens.remove(index - 1);
+                Dscreens.removeFirst();
             }
         }
     }
@@ -345,7 +350,7 @@ public class Forge implements ApplicationListener {
         if (currentScreen == screen0) { return; }
 
         if (currentScreen == null) {
-            screens.push(screen0);
+            Dscreens.addFirst(screen0);
             setCurrentScreen(screen0);
             return;
         }
@@ -354,11 +359,11 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    if (replaceBackScreen && !screens.isEmpty()) {
-                        screens.pop();
+                    if (replaceBackScreen && !Dscreens.isEmpty()) {
+                        Dscreens.removeFirst();
                     }
-                    if (screens.peek() != screen0) { //prevent screen being its own back screen
-                        screens.push(screen0);
+                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                        Dscreens.addFirst(screen0);
                     }
                     setCurrentScreen(screen0);
                 }
@@ -371,6 +376,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isLandscapeMode() {
+        if(GuiBase.isAndroid())
+            return !isPortraitMode;
         return screenWidth > screenHeight;
     }
 
@@ -398,6 +405,14 @@ public class Forge implements ApplicationListener {
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
+            try {
+                ImageCache.disposeTexture();
+            }
+            catch (Exception ex)
+            {
+                // FIXME: This isn't supposed to be necessary, but disposeTexture crashes e.g. in Quest Tournaments on mobile, needs proper fixing.
+                System.err.println("Warning: caught an exception while trying to call ImageCache.disposeTexture() in setCurrentScreen.");
+            }
 
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
@@ -499,7 +514,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        screens.clear();
+        Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {

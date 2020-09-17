@@ -13,4 +13,4 @@ SVar:Damage:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ Counters | Descr
 SVar:Counters:DB$ RemoveCounter | Defined$ EffectSource | CounterType$ ECHO | CounterNum$ Y | References$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters
-Oracle:Soul Echo enters the battlefield with X echo counters on it.\nYou don’t lose the game for having 0 or less life.\nAt the beginning of your upkeep, sacrifice Soul Echo if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.
+Oracle:Soul Echo enters the battlefield with X echo counters on it.\nYou don't lose the game for having 0 or less life.\nAt the beginning of your upkeep, sacrifice Soul Echo if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.

@@ -18,12 +18,9 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
-import org.apache.commons.lang3.SerializationUtils;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +54,7 @@ public enum ProtocolMethod {
     updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
-    assignDamage        (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE),
+    assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE),
     message             (Mode.SERVER, Void.TYPE, String.class, String.class),
     showErrorDialog     (Mode.SERVER, Void.TYPE, String.class, String.class),
     showConfirmDialog   (Mode.SERVER, Boolean.TYPE, String.class, String.class, String.class, String.class, Boolean.TYPE),
@@ -68,7 +65,7 @@ public enum ProtocolMethod {
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class, String.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
-    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
+    chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
@@ -159,36 +156,15 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
-        if (GuiBase.hasPropertyConfig())
-            return; //uses custom serializer for Android 8+..
+        if(!GuiBase.hasPropertyConfig())
+            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
+
         for (int iArg = 0; iArg < args.length; iArg++) {
-            Object arg = null;
-            Class<?> type = null;
-            try {
-                arg = args[iArg];
-                if (this.args.length > iArg)
-                    type = this.args[iArg];
-            }
-            catch (ArrayIndexOutOfBoundsException ex){ ex.printStackTrace(); }
-            catch(ConcurrentModificationException ex) { ex.printStackTrace(); }
-            if (arg != null)
-                if (type != null)
-                    if (!ReflectionUtil.isInstance(arg, type)) {
-                        throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-            }
-            if (arg != null) {
-                // attempt to Serialize each argument, this will throw an exception if it can't.
-                try {
-                    byte[] serialized = SerializationUtils.serialize((Serializable) arg);
-                    SerializationUtils.deserialize(serialized);
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    // not sure why this one would be thrown, but it is
-                    // it also doesn't prevent things from working, so, log for now, pending full network rewrite
-                    ex.printStackTrace();
-                } catch(ConcurrentModificationException ex) {
-                    // can't seem to avoid this from periodically happening
-                    ex.printStackTrace();
-                }
+            final Object arg = args[iArg];
+            final Class<?> type = this.args[iArg];
+            if (!ReflectionUtil.isInstance(arg, type)) {
+                //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+                System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)", name(), iArg, arg.getClass().getName(), type.getName()));
             }
         }
     }
@@ -199,7 +175,8 @@ public enum ProtocolMethod {
             return;
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
-            throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
+            //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
+            System.err.println(String.format("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)", name(), value.getClass().getName(), getReturnType().getName()));
         }
     }
 }

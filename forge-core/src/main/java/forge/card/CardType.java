@@ -72,6 +72,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
         private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
 
+        public static CoreType getEnum(String name) {
+            return stringToCoreType.get(name);
+        }
+
+        public static boolean isValidEnum(String name) {
+            return stringToCoreType.containsKey(name);
+        }
+
         CoreType(final boolean permanent) {
             isPermanent = permanent;
         }
@@ -87,6 +95,15 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
         private static Map<String, Supertype> stringToSupertype = EnumUtils.getEnumMap(Supertype.class);
         private static final Set<String> allSuperTypeNames = stringToSupertype.keySet();
+
+        public static Supertype getEnum(String name) {
+            return stringToSupertype.get(name);
+        }
+
+        public static boolean isValidEnum(String name) {
+            return stringToSupertype.containsKey(name);
+        }
+
     }
 
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
@@ -108,12 +125,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public boolean add(final String t) {
         boolean changed;
-        final CoreType ct = EnumUtils.getEnum(CoreType.class, t);
+        final CoreType ct = CoreType.getEnum(t);
         if (ct != null) {
             changed = coreTypes.add(ct);
         }
         else {
-            final Supertype st = EnumUtils.getEnum(Supertype.class, t);
+            final Supertype st = Supertype.getEnum(t);
             if (st != null) {
                 changed = supertypes.add(st);
             }
@@ -183,11 +200,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.remove(str)) {
             changed = true;
         } else {
-            Supertype st = EnumUtils.getEnum(Supertype.class, str);
+            Supertype st = Supertype.getEnum(str);
             if (st != null && supertypes.remove(st)) {
                 changed = true;
             }
-            CoreType ct = EnumUtils.getEnum(CoreType.class, str);
+            CoreType ct = CoreType.getEnum(str);
             if (ct != null && coreTypes.remove(ct)) {
                 changed = true;
             }
@@ -265,11 +282,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
 
         t = StringUtils.capitalize(t);
-        final CoreType type = EnumUtils.getEnum(CoreType.class, t);
+        final CoreType type = CoreType.getEnum(t);
         if (type != null) {
             return hasType(type);
         }
-        final Supertype supertype = EnumUtils.getEnum(Supertype.class, t);
+        final Supertype supertype = Supertype.getEnum(t);
         if (supertype != null) {
             return hasSupertype(supertype);
         }
@@ -660,7 +677,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     ///////// Utility methods
     public static boolean isACardType(final String cardType) {
-        return EnumUtils.isValidEnum(CoreType.class, cardType);
+        return CoreType.isValidEnum(cardType);
     }
 
     public static Set<String> getAllCardTypes() {
@@ -708,7 +725,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isASupertype(final String cardType) {
-        return EnumUtils.isValidEnum(Supertype.class, cardType);
+        return Supertype.isValidEnum(cardType);
     }
 
     public static boolean isASubType(final String cardType) {

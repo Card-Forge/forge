@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -77,7 +78,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final CounterType counterType = getCounterType(sa);
 
-        if (!CounterType.P1P1.equals(counterType) && counterType != null) {
+        if (!CounterEnumType.P1P1.equals(counterType) && counterType != null) {
             if (!sa.hasParam("ActivationPhases")) {
                 // Don't use non P1P1/M1M1 counters before main 2 if possible
                 if (ph.getPhase().isBefore(PhaseType.MAIN2) && !ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -147,15 +148,15 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         if (!aiList.isEmpty()) {
             // counter type list to check
             // first loyalty, then P1P!, then Charge Counter
-            List<CounterType> typeList = Lists.newArrayList(CounterType.LOYALTY, CounterType.P1P1, CounterType.CHARGE);
-            for (CounterType type : typeList) {
+            List<CounterEnumType> typeList = Lists.newArrayList(CounterEnumType.LOYALTY, CounterEnumType.P1P1, CounterEnumType.CHARGE);
+            for (CounterEnumType type : typeList) {
                 // enough targets
                 if (!sa.canAddMoreTarget()) {
                     break;
                 }
 
-                if (counterType == null || counterType == type) {
-                    addTargetsByCounterType(ai, sa, aiList, type);
+                if (counterType == null || counterType.is(type)) {
+                    addTargetsByCounterType(ai, sa, aiList, CounterType.get(type));
                 }
             }
         }
@@ -164,7 +165,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         if (!oppList.isEmpty()) {
             // not enough targets
             if (sa.canAddMoreTarget()) {
-                final CounterType type = CounterType.M1M1;
+                final CounterType type = CounterType.get(CounterEnumType.M1M1);
                 if (counterType == null || counterType == type) {
                     addTargetsByCounterType(ai, sa, oppList, type);
                 }

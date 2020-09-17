@@ -5,8 +5,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ ChooseCreature 
 SVar:ChooseCreature:AB$ ChooseCard | Cost$ Discard<1/Card> | Choices$ Creature | ChoiceTitle$ Choose a creature | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Azra Oddsmaker Effect | Triggers$ TrigDamage | SVars$ TrigDraw 
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.ChosenCard | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever that creature deals combat damage to a player this turn, you draw two cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBCleanup
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 PT:3/3
-SVar:Picture:https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446043&type=card
-Oracle:At the beginning of combat on your turn, you may discard a card. If you do, choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards. cards.
+Oracle:At the beginning of combat on your turn, you may discard a card. If you do, choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards.

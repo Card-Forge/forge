@@ -2,9 +2,8 @@ Name:Laboratory Brute
 ManaCost:3 U
 Types:Creature Zombie Horror
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 4 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/laboratory_brute.jpg
-Oracle:When Laboratory Brute enters the battlefield, put the top four cards of your library into your graveyard.
+Oracle:When Laboratory Brute enters the battlefield, mill four cards.

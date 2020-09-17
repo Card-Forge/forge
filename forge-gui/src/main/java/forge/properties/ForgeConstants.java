@@ -47,6 +47,8 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
+    public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
+
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
@@ -69,6 +71,7 @@ public final class ForgeConstants {
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
     public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
 
 
@@ -237,6 +240,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE  = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
+    public static final String CLOSE_CONN_COMMAND   = "<<_EM_ESOLC_<<";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;

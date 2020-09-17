@@ -23,7 +23,8 @@ public class StartButton extends SkinnedButton {
         setRolloverIcon(FSkin.getIcon(FSkinProp.IMG_BTN_START_OVER));
         setIcon(FSkin.getIcon(FSkinProp.IMG_BTN_START_UP));
         setPressedIcon(FSkin.getIcon(FSkinProp.IMG_BTN_START_DOWN));
-        
+        // Accessible name.
+        this.getAccessibleContext().setAccessibleName("Start game");
         addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent arg0) {

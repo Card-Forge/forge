@@ -3,7 +3,6 @@ ManaCost:3 G G
 Types:Creature Wurm
 PT:5/5
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ -X | NumDef$ -X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -X | NumDef$ -X | References$ X
 SVar:X:TriggerCount$NumBlockers/Minus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_wurm.jpg
 Oracle:Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.

@@ -1,7 +1,6 @@
 Name:Thassa's Bounty
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 5 U | NumCards$ 3 | SubAbility$ DB | SpellDescription$ Draw three cards. Target player puts the top three cards of their library into their graveyard.
+A:SP$ Draw | Cost$ 5 U | NumCards$ 3 | SubAbility$ DB | SpellDescription$ Draw three cards. Target player mills three cards.
 SVar:DB:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose target player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thassas_bounty.jpg
-Oracle:Draw three cards. Target player puts the top three cards of their library into their graveyard.
+Oracle:Draw three cards. Target player mills three cards.

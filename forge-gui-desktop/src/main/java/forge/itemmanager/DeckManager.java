@@ -392,9 +392,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public boolean deleteDeck(final DeckProxy deck) {
         if (deck == null) { return false; }
 
-        if (!FOptionPane.showConfirmDialog(
-                "Are you sure you want to delete '" + deck.getName() + "'?",
-                "Delete Deck", "Delete", "Cancel", false)) {
+        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + "'" + deck.getName() + "'?",
+                Localizer.getInstance().getMessage("lblDeleteDeck"), Localizer.getInstance().getMessage("lblDelete"),
+                Localizer.getInstance().getMessage("lblCancel"), false)) {
             return false;
         }
 

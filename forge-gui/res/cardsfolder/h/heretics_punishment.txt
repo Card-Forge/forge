@@ -1,11 +1,9 @@
 Name:Heretic's Punishment
 ManaCost:4 R
 Types:Enchantment
-A:AB$ Mill | Cost$ 3 R | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBHereticDamage | SpellDescription$ Choose any target, then put the top three cards of your library into your graveyard. CARDNAME deals damage to that permanent or player equal to the highest converted mana cost among those cards.
+A:AB$ Mill | Cost$ 3 R | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBHereticDamage | SpellDescription$ Choose any target, then mill three cards. CARDNAME deals damage to that permanent or player equal to the highest converted mana cost among those cards.
 SVar:DBHereticDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ HereticX | SubAbility$ DBHereticCleanup | References$ HereticX
 SVar:DBHereticCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HereticX:Count$HighestCMC_Card.IsRemembered
 AI:RemoveDeck:All
-AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heretics_punishment.jpg
-Oracle:{3}{R}: Choose any target, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that permanent or player equal to the highest converted mana cost among those cards.
+Oracle:{3}{R}: Choose any target, then mill three cards. Heretic's Punishment deals damage to that permanent or player equal to the highest converted mana cost among those cards.

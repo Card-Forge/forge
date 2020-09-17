@@ -1,0 +1,11 @@
+Name:Agitator Ant
+ManaCost:2 R
+Types:Creature Insect
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBPutCounter | SubAbility$ DBGoad
+SVar:DBPutCounter:DB$ PutCounter | Chooser$ Remembered | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ You may choose a creature you control | ChoiceOptional$ True | CounterType$ P1P1 | CounterNum$ 2 | RememberCards$ True
+SVar:DBGoad:DB$ Goad | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)

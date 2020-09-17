@@ -1,0 +1,11 @@
+Name:Pack Leader
+ManaCost:1 W
+Types:Creature Dog
+PT:2/2
+S:Mode$ Continuous | Affected$ Dog.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Dogs you control get +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, prevent all combat damage that would be dealt this turn to Dogs you control.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ PreventDogDamage | Description$ Prevent all combat damage that would be dealt this turn to Dogs you control.
+SVar:PreventDogDamage:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Dog.YouCtrl | Description$ Prevent all combat damage that would be dealt this turn to Dogs you control.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Dog
+Oracle:Other Dogs you control get +1/+1.\nWhenever Pack Leader attacks, prevent all combat damage that would be dealt this turn to Dogs you control.

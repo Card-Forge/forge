@@ -2,10 +2,9 @@ Name:Jace, Memory Adept
 ManaCost:3 U U
 Types:Legendary Planeswalker Jace
 Loyalty:4
-A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMill | Planeswalker$ True | SpellDescription$ Draw a card. Target player puts the top card of their library into their graveyard.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMill | Planeswalker$ True | SpellDescription$ Draw a card. Target player mills a card.
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1
-A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 10 | Planeswalker$ True | SpellDescription$ Target player puts the top 10 cards of their library in their graveyard.
+A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 10 | Planeswalker$ True | SpellDescription$ Target player mills 10 cards.
 A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | NumCards$ 20 | Planeswalker$ True | Ultimate$ True | SpellDescription$ Any number of target players each draw 20 cards.
 SVar:MaxTgt:PlayerCountPlayers$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_memory_adept.jpg
-Oracle:[+1]: Draw a card. Target player puts the top card of their library into their graveyard.\n[0]: Target player puts the top ten cards of their library into their graveyard.\n[-7]: Any number of target players each draw twenty cards.
+Oracle:[+1]: Draw a card. Target player mills a card.\n[0]: Target player mills ten cards.\n[-7]: Any number of target players each draw twenty cards.

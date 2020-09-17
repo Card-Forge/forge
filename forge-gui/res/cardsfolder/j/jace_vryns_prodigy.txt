@@ -8,8 +8,8 @@ SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Remembe
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Card.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_vryns_prodigy.jpg
 AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
 Oracle:{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn''s Prodigy, then return him to the battefield transformed under his owner's control.
 
 ALTERNATE
@@ -20,15 +20,12 @@ Colors:blue
 Types:Legendary Planeswalker Jace
 Loyalty:5
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | UntilYourNextTurn$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to one target creature gets -2/-0 until your next turn.
-
 A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | AILogic$ CastFromGraveThisTurn | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SubAbility$ DBEffect | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard | SVars$ MoveExile
 SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile | Description$ If that card would be put into your graveyard this turn, exile it instead.
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
-
-A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jace, Telepath Unbound | Image$ emblem_jace_telepath_unbound | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
-SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard.
-SVar:EffSpellCast:DB$ Mill | NumCards$ 5 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to mill
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_telepath_unbound.jpg
-Oracle:[+1]: Up to one target creature gets -2/-0 until your next turn.\n[-3]: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.\n[-9]: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
+A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jace, Telepath Unbound | Image$ emblem_jace_telepath_unbound | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, target opponent mills five cards".
+SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, target opponent mills five cards.
+SVar:EffSpellCast:DB$ Mill | NumCards$ 5 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+Oracle:[+1]: Up to one target creature gets -2/-0 until your next turn.\n[-3]: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.\n[-9]: You get an emblem with "Whenever you cast a spell, target opponent mills five cards".

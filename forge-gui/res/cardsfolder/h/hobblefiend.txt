@@ -1,0 +1,9 @@
+Name:Hobblefiend
+ManaCost:1 R
+Types:Creature Devil
+PT:2/1
+K:Trample
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters & Ability$Sacrifice
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\n{1}, Sacrifice another creature: Put a +1/+1 counter on Hobblefiend.

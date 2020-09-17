@@ -1,0 +1,8 @@
+Name:Kargan Warleader
+ManaCost:1 R W
+Types:Creature Human Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Warrior.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Warriors you control get +1/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Warrior
+Oracle:Other Warriors you control get +1/+1.

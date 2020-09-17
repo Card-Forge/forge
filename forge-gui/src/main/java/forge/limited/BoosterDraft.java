@@ -57,6 +57,7 @@ public class BoosterDraft implements IBoosterDraft {
     private final List<LimitedPlayer> players = new ArrayList<>();
     private LimitedPlayer localPlayer;
 
+    private boolean doublePickToStartRound = false;
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
@@ -142,7 +143,11 @@ public class BoosterDraft implements IBoosterDraft {
                         this.product.add(block.getBooster(pp[i]));
                     }
                 } else {
-                    final IUnOpenedProduct product1 = block.getBooster(sets.get(0));
+                    // Only one set is chosen. If that set lets you draft 2 cards to start adjust draft settings now
+                    String setCode = sets.get(0);
+                    doublePickToStartRound = FModel.getMagicDb().getEditions().get(setCode).getDoublePickToStartRound();
+
+                    final IUnOpenedProduct product1 = block.getBooster(setCode);
 
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(product1);
@@ -357,6 +362,10 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
+        if (this.doublePickToStartRound && currentBoosterPick == 1) {
+            adjust = 0;
+        }
+
         for (int i = 0; i < N_PLAYERS; i++) {
             List<PaperCard> passingPack = this.players.get(i).passPack();
 
@@ -494,26 +503,28 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     private void recordDraftPick(final List<PaperCard> thisBooster, PaperCard c) {
-        if (ForgePreferences.UPLOAD_DRAFT) {
-            for (int i = 0; i < thisBooster.size(); i++) {
-                final PaperCard cc = thisBooster.get(i);
-                final String cnBk = cc.getName() + "|" + cc.getEdition();
+        if (!ForgePreferences.UPLOAD_DRAFT) {
+            return;
+        }
 
-                float pickValue;
-                if (cc.equals(c)) {
-                    pickValue = thisBooster.size()
-                            * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
-                } else {
-                    pickValue = 0;
-                }
+        for (int i = 0; i < thisBooster.size(); i++) {
+            final PaperCard cc = thisBooster.get(i);
+            final String cnBk = cc.getName() + "|" + cc.getEdition();
 
-                if (!this.draftPicks.containsKey(cnBk)) {
-                    this.draftPicks.put(cnBk, pickValue);
-                } else {
-                    final float curValue = this.draftPicks.get(cnBk);
-                    final float newValue = (curValue + pickValue) / 2;
-                    this.draftPicks.put(cnBk, newValue);
-                }
+            float pickValue;
+            if (cc.equals(c)) {
+                pickValue = thisBooster.size()
+                        * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
+            } else {
+                pickValue = 0;
+            }
+
+            if (!this.draftPicks.containsKey(cnBk)) {
+                this.draftPicks.put(cnBk, pickValue);
+            } else {
+                final float curValue = this.draftPicks.get(cnBk);
+                final float newValue = (curValue + pickValue) / 2;
+                this.draftPicks.put(cnBk, newValue);
             }
         }
     }

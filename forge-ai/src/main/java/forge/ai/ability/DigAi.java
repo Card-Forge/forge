@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -29,6 +31,10 @@ public class DigAi extends SpellAbilityAi {
         Player opp = ai.getWeakestOpponent();
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
+
+        if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
+            return false;
+        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -132,7 +138,7 @@ public class DigAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer, Map<String, Object> params) {
         if ("DigForCreature".equals(sa.getParam("AILogic"))) {
             Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
             if (bestChoice == null) {
@@ -163,7 +169,7 @@ public class DigAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
      */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // an opponent choose a card from
         return Iterables.getFirst(options, null);
     }

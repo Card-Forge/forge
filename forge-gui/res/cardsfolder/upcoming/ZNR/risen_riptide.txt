@@ -1,0 +1,7 @@
+Name:Risen Riptide
+ManaCost:2 U
+Types:Creature Elemental
+PT:0/5
+T:Mode$ SpellCast | ValidCard$ Card.kicked | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a kicked spell, CARDNAME has base power and toughness 5/5 until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 5
+Oracle:Whenever you cast a kicked spell, Risen Riptide has base power and toughness 5/5 until end of turn.

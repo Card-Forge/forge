@@ -32,8 +32,8 @@ public class Main extends IOSApplication.Delegate {
         config.useAccelerometer = false;
         config.useCompass = false;
         ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA);
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig);
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false);
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }

@@ -1,0 +1,6 @@
+Name:Cat Beast
+ManaCost:no cost
+Types:Creature Cat Beast
+Colors:white
+PT:2/2
+Oracle:

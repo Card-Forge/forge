@@ -1,0 +1,8 @@
+Name:Spiteful Prankster
+ManaCost:2 R
+Types:Creature Devil
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature dies, CARDNAME deals 1 damage to target player or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+Oracle:As long as it's your turn, Spiteful Prankster has first strike.\nWhenever another creature dies, Spiteful Prankster deals 1 damage to target player or planeswalker.

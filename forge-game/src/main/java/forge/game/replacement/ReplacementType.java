@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public enum ReplacementType {
     AddCounter(ReplaceAddCounter.class),
+    Attached(ReplaceAttached.class),
     Counter(ReplaceCounter.class),
     CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
@@ -21,6 +22,7 @@ public enum ReplacementType {
     DrawCards(ReplaceDrawCards.class),
     GainLife(ReplaceGainLife.class),
     GameLoss(ReplaceGameLoss.class),
+    Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
     SetInMotion(ReplaceSetInMotion.class),

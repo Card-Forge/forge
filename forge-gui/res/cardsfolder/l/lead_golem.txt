@@ -3,6 +3,5 @@ ManaCost:5
 Types:Artifact Creature Golem
 PT:3/5
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | TriggerDescription$ Whenever CARDNAME attacks, it doesn't untap during its controller's next untap step.
-SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_golem.jpg
+SVar:StayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 Oracle:Whenever Lead Golem attacks, it doesn't untap during its controller's next untap step.

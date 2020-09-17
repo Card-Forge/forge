@@ -1,0 +1,9 @@
+Name:Pursued Whale
+ManaCost:5 U U
+Types:Creature Whale
+PT:8/8
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, each opponent creates a 1/1 red Pirate creature token with "This creature can't block" and "Creatures you control attack each combat if able."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_pirate_noblock_all_attack | TokenOwner$ Opponent
+SVar:PlayMain1:TRUE
+S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 3 | Description$ Spells your opponents cast that target CARDNAME cost {3} more to cast.
+Oracle:When Pursued Whale enters the battlefield, each opponent creates a 1/1 red Pirate creature token with "This creature can't block" and "Creatures you control attack each combat if able."\nSpells your opponents cast that target Pursued Whale cost {3} more to cast.

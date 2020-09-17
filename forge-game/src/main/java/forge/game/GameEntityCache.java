@@ -13,6 +13,11 @@ public class GameEntityCache<Entity extends IIdentifiable, View extends Trackabl
     public void put(Integer id, Entity entity) {
         entityCache.put(id, entity);
     }
+    public void putAll(Iterable<Entity> entities) {
+        for (Entity e : entities) {
+            put(e.getId(), e);
+        }
+    }
 
     public void remove(Integer id) {
         entityCache.remove(id);

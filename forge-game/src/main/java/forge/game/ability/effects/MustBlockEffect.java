@@ -12,8 +12,10 @@ import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class MustBlockEffect extends SpellAbilityEffect {
 
@@ -22,6 +24,13 @@ public class MustBlockEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
+
+        List<Card> cards;
+        if (sa.hasParam("DefinedAttacker")) {
+            cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
+        } else {
+            cards = Lists.newArrayList(host);
+        }
 
         List<Card> tgtCards = Lists.newArrayList();
         if (sa.hasParam("Choices")) {
@@ -35,8 +44,9 @@ public class MustBlockEffect extends SpellAbilityEffect {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
-
-                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("Attackers", cards);
+                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, params);
 
                 if (choosen != null) {
                     tgtCards.add(choosen);
@@ -47,13 +57,6 @@ public class MustBlockEffect extends SpellAbilityEffect {
         }
 
         final boolean mustBlockAll = sa.hasParam("BlockAllDefined");
-
-        List<Card> cards;
-        if (sa.hasParam("DefinedAttacker")) {
-            cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
-        } else {
-            cards = Lists.newArrayList(host);
-        }
 
         for (final Card c : tgtCards) {
             if ((!sa.usesTargeting()) || c.canBeTargetedBy(sa)) {

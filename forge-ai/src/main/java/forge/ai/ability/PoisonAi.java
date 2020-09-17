@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -59,7 +60,7 @@ public class PoisonAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             return tgtPlayer(ai, sa, mandatory);
-        } else if (mandatory || !ai.canReceiveCounters(CounterType.POISON)) {
+        } else if (mandatory || !ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
             // mandatory or ai is uneffected
             return true;
         } else {
@@ -92,7 +93,7 @@ public class PoisonAi extends SpellAbilityAi {
                 public boolean apply(Player input) {
                     if (input.cantLose()) {
                         return false;
-                    } else if (!input.canReceiveCounters(CounterType.POISON)) {
+                    } else if (!input.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                         return false;
                     }
                     return true;
@@ -113,7 +114,7 @@ public class PoisonAi extends SpellAbilityAi {
         if (tgts.isEmpty()) {
             if (mandatory) {
                 // AI is uneffected
-                if (ai.canBeTargetedBy(sa) && ai.canReceiveCounters(CounterType.POISON)) {
+                if (ai.canBeTargetedBy(sa) && ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     sa.getTargets().add(ai);
                     return true;
                 }
@@ -127,7 +128,7 @@ public class PoisonAi extends SpellAbilityAi {
                             if (input.cantLose()) {
                                 return true;
                             }
-                            return !input.canReceiveCounters(CounterType.POISON);
+                            return !input.canReceiveCounters(CounterType.get(CounterEnumType.POISON));
                         }
 
                     });

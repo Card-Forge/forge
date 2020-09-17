@@ -33,8 +33,9 @@ public class WrappedAbility extends Ability {
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
-        super(regtrig0.getHostCard(), ManaCost.ZERO, sa0.getView());
+        super(sa0.getHostCard(), ManaCost.ZERO, sa0.getView());
         setTrigger(regtrig0);
+        setTrigger(true);
         sa = sa0;
         decider = decider0;
         sa.setDescription(this.getStackDescription());
@@ -51,18 +52,6 @@ public class WrappedAbility extends Ability {
 
     public Player getDecider() {
         return decider;
-    }
-
-    public final void setMandatory(final boolean mand) {
-        this.mandatory = mand;
-    }
-
-    /**
-     * @return the mandatory
-     */
-    @Override
-    public boolean isMandatory() {
-        return mandatory;
     }
 
     @Override
@@ -214,7 +203,7 @@ public class WrappedAbility extends Ability {
     @Override
     public String toUnsuppressedString() {
         String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
-        String card = getTrigger().getHostCard().toString();
+        String card = getHostCard().toString();
         if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
         } else return desc;
@@ -446,9 +435,8 @@ public class WrappedAbility extends Ability {
     public void resolve() {
         final Game game = sa.getActivatingPlayer().getGame();
         final Trigger regtrig = getTrigger();
-        Map<String, String> triggerParams = regtrig.getMapParams();
 
-        if (!(regtrig instanceof TriggerAlways) && !triggerParams.containsKey("NoResolvingCheck")) {
+        if (!(regtrig instanceof TriggerAlways) && !regtrig.hasParam("NoResolvingCheck")) {
             // Most State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck(game)) {
                 return;
@@ -460,10 +448,10 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        if (triggerParams.containsKey("ResolvingCheck")) {
+        if (regtrig.hasParam("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
             Map<String, String> recheck = new HashMap<>();
-            String key = triggerParams.get("ResolvingCheck");
+            String key = regtrig.getParam("ResolvingCheck");
             String value = regtrig.getParam(key);
             recheck.put(key, value);
             if (!meetsCommonRequirements(recheck)) {
@@ -471,29 +459,18 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        TriggerHandler th = game.getTriggerHandler();
-
-        if (decider != null && !decider.getController().confirmTrigger(this, triggerParams, this.isMandatory())) {
-            return;
-        }
-
         // set Trigger
         sa.setTrigger(regtrig);
 
-        if (!triggerParams.containsKey("NoTimestampCheck")) {
+        if (decider != null && !decider.getController().confirmTrigger(this)) {
+            return;
+        }
+
+        if (!regtrig.hasParam("NoTimestampCheck")) {
             timestampCheck();
         }
 
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
-
-        // Add eventual delayed trigger.
-        if (triggerParams.containsKey("DelayedTrigger")) {
-            final String sVarName = triggerParams.get("DelayedTrigger");
-            final Trigger deltrig = TriggerHandler.parseTrigger(regtrig.getHostCard().getSVar(sVarName),
-                    regtrig.getHostCard(), true);
-            deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
-            th.registerDelayedTrigger(deltrig);
-        }
     }
 
     /**
@@ -555,5 +532,19 @@ public class WrappedAbility extends Ability {
 
     public void setAlternativeCost(AlternativeCost ac) {
         sa.setAlternativeCost(ac);
+    }
+
+    public Integer getXManaCostPaid() {
+        return sa.getXManaCostPaid();
+    }
+    public void setXManaCostPaid(final Integer n) {
+        sa.setXManaCostPaid(n);
+    }
+
+    public Card getOriginalHost() {
+        return sa.getOriginalHost();
+    }
+    public void setOriginalHost(final Card c) {
+        sa.setOriginalHost(c);
     }
 }

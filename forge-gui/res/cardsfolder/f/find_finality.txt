@@ -10,9 +10,7 @@ ALTERNATE
 Name:Finality
 ManaCost:4 B G
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 4 B G | Defined$ You | Amount$ 1 | MinAmount$ 0 | Choices$ Creature.YouCtrl | SubAbility$ DBPutCounter | SpellDescription$ You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.
-SVar:DBPutCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+A:SP$ PutCounter | Cost$ 4 B G | Choices$ Creature.YouCtrl | ChoiceOptional$ True | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll | StackDescription$ SpellDescription | SpellDescription$ You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True
 DeckHas:Ability$Counters
 Oracle:You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.

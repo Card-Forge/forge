@@ -15,6 +15,7 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -32,7 +33,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
 
         for (final Player p : allies) {
         	// player has experience or energy counter
-            if (p.getCounters(CounterType.EXPERIENCE) + p.getCounters(CounterType.ENERGY) >= 1) {
+            if (p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) {
                 allyExpOrEnergy = true;
             }
             cperms.addAll(CardLists.filter(p.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
@@ -115,17 +116,19 @@ public class CountersProliferateAi extends SpellAbilityAi {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Proliferate is always optional for all, no need to select best
+
+        final CounterType poison = CounterType.get(CounterEnumType.POISON);
 
         // because countertype can't be chosen anymore, only look for posion counters
         for (final Player p : Iterables.filter(options, Player.class)) {
             if (p.isOpponentOf(ai)) {
-                if (p.getCounters(CounterType.POISON) > 0 && p.canReceiveCounters(CounterType.POISON)) {
+                if (p.getCounters(poison) > 0 && p.canReceiveCounters(poison)) {
                     return (T)p;
                 }
             } else {
-                if (p.getCounters(CounterType.POISON) <= 5 || p.canReceiveCounters(CounterType.POISON)) {
+                if (p.getCounters(poison) <= 5 || p.canReceiveCounters(poison)) {
                     return (T)p;
                 }
             }

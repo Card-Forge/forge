@@ -185,7 +185,7 @@ public class Untap extends Phase {
                 }
             }
             Card chosen = player.getController().chooseSingleEntityForEffect(cardList, new SpellAbility.EmptySa(ApiType.Untap, null, player), 
-                    "Select a card to untap\r\n(Selected:" + restrictUntapped + ")\r\n" + "Remaining cards that can untap: " + remaining);
+                    "Select a card to untap\r\n(Selected:" + restrictUntapped + ")\r\n" + "Remaining cards that can untap: " + remaining, null);
             if (chosen != null) {
                 for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
                     if (chosen.isValid(rest.getKey(), player, null, null)) {

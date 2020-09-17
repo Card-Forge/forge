@@ -3,5 +3,6 @@ ManaCost:3 W
 Types:Creature Human Knight
 PT:2/5
 K:etbCounter:P1P1:1:Adamant$ White:Adamant — If at least three white mana was spent to cast this spell, CARDNAME enters the battlefield with a +1/+1 counter on it.
+SVar:AIManaPref:W
 DeckHas:Ability$Counters
 Oracle:Adamant — If at least three white mana was spent to cast this spell, Ardenvale Paladin enters the battlefield with a +1/+1 counter on it.

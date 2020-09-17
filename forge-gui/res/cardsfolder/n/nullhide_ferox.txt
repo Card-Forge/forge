@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:6/6
 K:Hexproof
 S:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ You | Description$ You can't cast noncreature spells.
-A:AB$ Animate | Cost$ 2 | Defined$ Self | RemoveAllAbilities$ True | AnyPlayer$ True | AILogic$ Curse | SpellDescription$ CARDNAME loses all abilities until end of turn. Any player may activate this ability.
+A:AB$ Animate | Cost$ 2 | Defined$ Self | RemoveAllAbilities$ True | Activator$ Player | AILogic$ Curse | SpellDescription$ CARDNAME loses all abilities until end of turn. Any player may activate this ability.
 R:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ValidSource$ Card.OppCtrl | ReplaceWith$ SurpriseETB | DiscardFromEffect$ True | Description$ If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
 SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
 SVar:DiscardMeByOpp:2
