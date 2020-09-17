@@ -189,7 +189,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
 
-        // If all cards must have different controllers
+        // If all cards must have same controllers
         if (tgt.isSameController()) {
             final List<Player> targetedControllers = new ArrayList<>();
             for (final GameObject o : targetDepth.keySet()) {
@@ -215,6 +215,21 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
             if (targetedControllers.contains(card.getController())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have different controllers)");
+                return false;
+            }
+        }
+
+        // If all cards must have different CMC
+        if (tgt.isDifferentCMC()) {
+            final List<Integer> targetedCMCs = new ArrayList<>();
+            for (final GameObject o : targetDepth.keySet()) {
+                if (o instanceof Card) {
+                    final Integer cmc = ((Card) o).getCMC();
+                    targetedCMCs.add(cmc);
+                }
+            }
+            if (targetedCMCs.contains(card.getCMC())) {
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have different CMC)");
                 return false;
             }
         }
